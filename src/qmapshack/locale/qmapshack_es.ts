@@ -830,7 +830,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="30"/>
         <source>City</source>
-        <translation type="unfinished">Ciudad</translation>
+        <translation>Ciudad</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="38"/>
@@ -878,12 +878,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="44"/>
         <source>Difficult Path</source>
-        <translation>Sendero dificil</translation>
+        <translation>Sendero difícil</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="47"/>
         <source>Off Path or Rocky Terrain</source>
-        <translation>Sin Senda o Rocas</translation>
+        <translation>Sin Senda o Roca</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="50"/>
@@ -988,12 +988,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="457"/>
         <source>This is a typ file with unknown polygon encoding. Please report!</source>
-        <translation>Este es un archivo TYP con una codificación de polígonos desconocida. ¡Repórtalo, por favor!</translation>
+        <translation>Este es un archivo TYP con una codificación de polígonos desconocida. ¡Reportar, por favor!</translation>
     </message>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="838"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
-        <translation>Este es un archivo TYP con una codificación de polilíneas desconocida. ¡Repórtalo, por favor!</translation>
+        <translation>Este es un archivo TYP con una codificación de polilíneas desconocida. ¡Reportar, por favor!</translation>
     </message>
 </context>
 <context>
@@ -1031,12 +1031,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="120"/>
         <source>Accumulative Results</source>
-        <translation>Resultados Acumulados</translation>
+        <translation>Acumular resultados</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="125"/>
         <source>Reset Results</source>
-        <translation>Reiniciar</translation>
+        <translation>Borrar resultados</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="132"/>
@@ -1107,7 +1107,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="103"/>
         <source>enter name and URL</source>
-        <translation>introducir nombre  URL</translation>
+        <translation>introducir nombre y URL</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="113"/>
@@ -1127,7 +1127,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="124"/>
         <source>Remove all services and restore default list?</source>
-        <translation>¿Eliminar todos los servicios y restaurar predeterminados?</translation>
+        <translation>¿Eliminar todos los servicios y restaurar los predeterminados?</translation>
     </message>
 </context>
 <context>
@@ -1155,7 +1155,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="78"/>
         <source>_Clone</source>
-        <translation>Duplicar</translation>
+        <translation>_Copia</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="402"/>
@@ -1213,7 +1213,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="67"/>
         <source>_Clone</source>
-        <translation>_Duplicar</translation>
+        <translation>_Copia</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="285"/>
@@ -1328,7 +1328,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="79"/>
         <source>_Clone</source>
-        <translation>_Duplicar</translation>
+        <translation>_Copia</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="260"/>
@@ -1735,7 +1735,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="106"/>
         <source>_Clone</source>
-        <translation>Duplicar</translation>
+        <translation>_Copia</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="290"/>
@@ -2252,7 +2252,8 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="107"/>
         <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
-        <translation>Error al restaurar las carpetas en el resumen de las zonas de destino. Es muy posible que haya eliminado la carpeta o la base de datos. Revise la configuración de las zonas de destino. </translation>
+        <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
+        <translation type="unfinished">No se han podido restablecer todas las carpetas incluidas en las Listas de Distribución. Es muy posible que haya eliminado alguna de las carpetas o la base de datos. Revise la configuración de las Listas de Distribución.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="111"/>
@@ -2265,7 +2266,8 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/summary/CGisSummaryDropZone.cpp" line="38"/>
         <source>Drag-n-drop items from the workspace into this drop zone.</source>
-        <translation>Arrastrar y soltar elementos del espacio de trabajo en esta zona.</translation>
+        <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
+        <translation type="unfinished">Arrastra elementos desde el espacio de trabajo a esta Lista de Distribución para copiarlos en las carpetas indicadas.</translation>
     </message>
 </context>
 <context>
@@ -2273,7 +2275,8 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="41"/>
         <source>&lt;b&gt;What is this about?&lt;/b&gt;&lt;br/&gt;When using the database GIS items can be referenced by several projects. A common use-case is to store tour data in it&apos;s own project folder. Additionally the items are copied (referenced) into folders summarizing items of a certain time span, e.g. monthly, yearly, total. You can do this manually by loading the summary projects into the workspace, coping the items and saving the changes. Or you use this dialog to define project folders in the database as summary folders and copy the items by dragging them into the drag-n-drop area.</source>
-        <translation>&lt;b&gt;¿Que es esto?&lt;/b&gt;&lt;br/&gt;Al usar la base de datos, los elementos GIS pueden ser usados por varios proyectos. Un caso común es almacenar datos de un recorrido en su propia carpeta de proyecto. Además, los elementos se copian (se referencian) en carpetas agrupándolos por meses, años, total. Puede hacerlo manualmente cargando los resúmenes de los proyectos en el espacio de trabajo, copiando los elementos y guardando los cambios, o puede usar este cuadro de diálogo para definir como carpetas de resumen las carpetas de proyectos de la base de datos y copiar los elementos arrastrándolos y soltándolos.</translation>
+        <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
+        <translation type="unfinished">&lt;b&gt;¿Que es esto?&lt;/b&gt;&lt;br/&gt;En una Base de Datos los elementos GIS pueden ser usados por varios proyectos. Lo más común es almacenar los tracks en su propia carpeta de proyecto, pero además, también es posible copiar (o referenciar) esos mismos tracks en otras carpetas organizadas por año, tipo de actividad, o región.&lt;br/&gt; Copiar de uno en uno cada elemento a cada carpeta es una tarea pesada, por el contrario, es muy fácil y cómodo hacer esa tarea usando una Lista de Distribución: Basta arrastrar un elemento desde el espacio de trabajo a una Lista de Distribución para que este se copie en todas  las carpetas de la lista de una sola vez. &lt;br/&gt; &lt;br/&gt;En este diálogo se configuran las Listas de Distribución indicando su nombre y a que carpetas distribuirán los elementos.&lt;br/&gt; (Las carpetas también pueden ser de diferentes Bases de Datos).</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="111"/>
@@ -5754,7 +5757,7 @@ línea %2, columna %3.
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="41"/>
         <source>Cycling Tour Summary (built-in)</source>
-        <translation type="unfinished"></translation>
+        <translation>Recorrido ciclista (interno)</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="42"/>
@@ -5769,7 +5772,7 @@ línea %2, columna %3.
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="44"/>
         <source>Running Summary (built-in)</source>
-        <translation type="unfinished"></translation>
+        <translation>Recorrido de running (interno)</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="162"/>
@@ -5957,23 +5960,23 @@ línea %2, columna %3.
     <message>
         <location filename="../templates/Running_Summary.ui" line="214"/>
         <source>trail running</source>
-        <translation type="unfinished"></translation>
+        <translation>trail running</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="224"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="186"/>
         <source>city/road</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ciudad/crta.</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="231"/>
         <source> track</source>
-        <translation type="unfinished"></translation>
+        <translation>pista</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="238"/>
         <source>ultra long dist</source>
-        <translation type="unfinished"></translation>
+        <translation>ultra distancia</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="252"/>
@@ -5984,38 +5987,38 @@ línea %2, columna %3.
     <message>
         <location filename="../templates/Running_Summary.ui" line="270"/>
         <source>shoes:</source>
-        <translation type="unfinished"></translation>
+        <translation>zapatillas:</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="282"/>
         <source>backpack</source>
-        <translation type="unfinished"></translation>
+        <translation>mochila</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="289"/>
         <source>gloves</source>
-        <translation type="unfinished"></translation>
+        <translation>guantes</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="296"/>
         <source>hip pack</source>
-        <translation type="unfinished"></translation>
+        <translation>riñorera</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="303"/>
         <source>poles</source>
-        <translation type="unfinished"></translation>
+        <translation>bastones</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="324"/>
         <source>calf guard comp.</source>
-        <translation type="unfinished"></translation>
+        <translation>compresión.</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="346"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="264"/>
         <source>MIDE: Severity Environment</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDE: Severidad del medio</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="352"/>
@@ -6027,60 +6030,60 @@ línea %2, columna %3.
         <location filename="../templates/Running_Summary.ui" line="376"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="294"/>
         <source>4. Considerable risk factors</source>
-        <translation type="unfinished"></translation>
+        <translation>4. Hay bastantes factores de riesgo</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="392"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="310"/>
         <source>MIDE: Orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDE: Orientación</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="435"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="353"/>
         <source>MIDE: Terrain underfoot</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDE: Desplazamiento</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="481"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="399"/>
         <source>MIDE: Effort required </source>
-        <translation type="unfinished"></translation>
+        <translation>MIDE: Esfuerzo</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="538"/>
         <source>IBP Index (RNG)</source>
-        <translation type="unfinished"></translation>
+        <translation>IBP Index (RNG)</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="565"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="396"/>
         <source>Max. heart rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Max. Ritmo Card</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="577"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="408"/>
         <source>Avg. heart rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo card. med.</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="589"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="420"/>
         <source>Min. heart rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Min ritmo card.</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="601"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="432"/>
         <source>Cal. consumption</source>
-        <translation type="unfinished"></translation>
+        <translation>Calorias Cons.</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="615"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="512"/>
         <source>SAC scale</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">escala SAC</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="627"/>
@@ -6212,35 +6215,35 @@ línea %2, columna %3.
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="172"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="227"/>
         <source>Rating 5 stars</source>
-        <translation>Calificación 5 estrellas</translation>
+        <translation>***** Excelente</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="170"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="177"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="232"/>
         <source>Rating 4 stars</source>
-        <translation>Calificación 4 estrellas</translation>
+        <translation>**** Muy Bueno</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="175"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="182"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="237"/>
         <source>Rating 3 stars</source>
-        <translation>Calificación 3 estrellas</translation>
+        <translation>*** Bueno</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="180"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="187"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="242"/>
         <source>Rating 2 stars</source>
-        <translation>Calificación 2 estrellas</translation>
+        <translation>** Regular</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="185"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="192"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="247"/>
         <source>Rating 1 star</source>
-        <translation>Calificación 1 estrella</translation>
+        <translation>* Malo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="159"/>
@@ -6289,7 +6292,7 @@ línea %2, columna %3.
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="560"/>
         <source>IBP Index (HKG)</source>
-        <translation type="unfinished"></translation>
+        <translation>IBP Index (HKG)</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="66"/>
@@ -6465,12 +6468,12 @@ línea %2, columna %3.
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="200"/>
         <source>downhill</source>
-        <translation type="unfinished"></translation>
+        <translation>descenso</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="267"/>
         <source>protections</source>
-        <translation type="unfinished"></translation>
+        <translation>protecciones</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="281"/>
@@ -6480,22 +6483,22 @@ línea %2, columna %3.
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="288"/>
         <source>saddlebags</source>
-        <translation type="unfinished"></translation>
+        <translation>alforjas</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="320"/>
         <source>Bike</source>
-        <translation type="unfinished"></translation>
+        <translation>Bici</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="352"/>
         <source>IBP Index (BYC)</source>
-        <translation type="unfinished"></translation>
+        <translation>IBP Index (BYC)</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="377"/>
         <source>% Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>% Ciclable</translation>
     </message>
 </context>
 <context>
@@ -8180,7 +8183,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="59"/>
         <source> Type</source>
-        <translation type="unfinished">Tipo</translation>
+        <translation type="unfinished"> Tipo</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="122"/>
@@ -8462,12 +8465,13 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="112"/>
         <source>To add a database do a right click on the database list above.</source>
-        <translation type="unfinished">Para añadir una base de datos haga click con el botón derecho en la lista de bases de datos.  </translation>
+        <translation type="unfinished">Para añadir una base de datos haga click con el botón derecho en la lista de bases de datos.</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="135"/>
         <source>Show Summary Drop Zones</source>
-        <translation>Mostrar resumen de zonas de las zonas de destino.</translation>
+        <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
+        <translation type="unfinished">Mostrar Listas de Distribución</translation>
     </message>
 </context>
 <context>
@@ -8730,7 +8734,8 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="35"/>
         <source>Setup summary drop zones.</source>
-        <translation>Configurar el resumen de las zonas de destino.</translation>
+        <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
+        <translation type="unfinished">Configurar Listas de Distribución.</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="38"/>
@@ -8748,7 +8753,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
         <source>Setup summary projects...</source>
-        <translation>Configurar el resumen de los proyectos...</translation>
+        <translation type="unfinished">Configurar Listas de Distribución...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>
@@ -8758,7 +8763,8 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="37"/>
         <source>Drop Zone 1</source>
-        <translation>Zona de Destino 1</translation>
+        <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
+        <translation type="unfinished">Lista de Distribución 1</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="52"/>
@@ -8783,17 +8789,17 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="107"/>
         <source>Drop Zone 2</source>
-        <translation>Zona de Destino 2</translation>
+        <translation type="unfinished">Lista de Distribución 2</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="177"/>
         <source>Drop Zone 3</source>
-        <translation>Zona de Destino 3</translation>
+        <translation type="unfinished">Lista de Distribución 3</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="247"/>
         <source>Drop Zone 4</source>
-        <translation>Zona de Destino 4</translation>
+        <translation type="unfinished">Lista de Distribución 4</translation>
     </message>
 </context>
 <context>
@@ -9323,7 +9329,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="859"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
-        <translation>En la vista del mapa mostrar superpuestos los valores máximos y mínimos de los datos del track</translation>
+        <translation>En la vista del mapa mostrar superpuestos los valores máximos y mínimos de los datos del track.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="862"/>
@@ -11410,7 +11416,7 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="143"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation type="unfinished">Reemplazar Altitud por la de los valores del DEM.</translation>
+        <translation>Reemplazar Altitud por la de los valores del DEM.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="164"/>
@@ -11443,7 +11449,7 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished">ficha</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="49"/>
@@ -11455,7 +11461,7 @@ corregir los puntos erróneos de un track grabado.</translation>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="66"/>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="80"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="77"/>
@@ -11470,7 +11476,7 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="127"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11516,7 +11522,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/trk/ISelectActivityColor.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">ficha</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11537,7 +11543,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
         <location filename="../helpers/ISelectCopyAction.ui" line="79"/>
         <location filename="../helpers/ISelectCopyAction.ui" line="89"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="72"/>
@@ -11562,7 +11568,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="136"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
-        <translation>Se añadirá &apos;_Clone&apos; al nombre del duplicado</translation>
+        <translation>Se añadirá &apos;_Copia&apos; al nombre del duplicado</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="153"/>
@@ -11588,7 +11594,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">ficha</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="22"/>
@@ -11687,7 +11693,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="100"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
-        <translation>Se añadirá &apos;_Clone&apos; al nombre del duplicado</translation>
+        <translation>Se añadirá &apos;_Copia&apos; al nombre del duplicado</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="171"/>
@@ -12487,23 +12493,23 @@ o
     </message>
     <message>
         <source>Rating 5 stars</source>
-        <translation type="obsolete">Calificación 5 estrellas</translation>
+        <translation type="obsolete">***** Excelente</translation>
     </message>
     <message>
         <source>Rating 4 stars</source>
-        <translation type="obsolete">Calificación 4 estrellas</translation>
+        <translation type="obsolete">**** Muy bueno </translation>
     </message>
     <message>
         <source>Rating 3 stars</source>
-        <translation type="obsolete">Calificación 3 estrellas</translation>
+        <translation type="obsolete">*** Bueno</translation>
     </message>
     <message>
         <source>Rating 2 stars</source>
-        <translation type="obsolete">Calificación 2 estrellas</translation>
+        <translation type="obsolete">** Regular</translation>
     </message>
     <message>
         <source>Rating 1 star</source>
-        <translation type="obsolete">Calificación 1 estrella</translation>
+        <translation type="obsolete">* Malo</translation>
     </message>
     <message>
         <source>Weather</source>
@@ -12647,27 +12653,27 @@ o
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="183"/>
         <source>Rating 5 stars</source>
-        <translation type="unfinished">Calificación 5 estrellas</translation>
+        <translation type="unfinished">***** Excelente</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="188"/>
         <source>Rating 4 stars</source>
-        <translation type="unfinished">Calificación 4 estrellas</translation>
+        <translation type="unfinished">**** Muy bueno</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="193"/>
         <source>Rating 3 stars</source>
-        <translation type="unfinished">Calificación 3 estrellas</translation>
+        <translation type="unfinished">*** Bueno</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="198"/>
         <source>Rating 2 stars</source>
-        <translation type="unfinished">Calificación 2 estrellas</translation>
+        <translation type="unfinished">** Regular</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="203"/>
         <source>Rating 1 star</source>
-        <translation type="unfinished">Calificación 1 estrella</translation>
+        <translation type="unfinished">* Malo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="211"/>
@@ -12757,7 +12763,7 @@ o
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="338"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Detalles</translation>
     </message>
 </context>
 <context>
@@ -12908,23 +12914,23 @@ o
     </message>
     <message>
         <source>Rating 5 stars</source>
-        <translation type="obsolete">Calificación 5 estrellas</translation>
+        <translation type="obsolete">***** Excelente</translation>
     </message>
     <message>
         <source>Rating 4 stars</source>
-        <translation type="obsolete">Calificación 4 estrellas</translation>
+        <translation type="obsolete">**** Muy bueno</translation>
     </message>
     <message>
         <source>Rating 3 stars</source>
-        <translation type="obsolete">Calificación 3 estrellas</translation>
+        <translation type="obsolete">*** Bueno</translation>
     </message>
     <message>
         <source>Rating 2 stars</source>
-        <translation type="obsolete">Calificación 2 estrellas</translation>
+        <translation type="obsolete">** Regular</translation>
     </message>
     <message>
         <source>Rating 1 star</source>
-        <translation type="obsolete">Calificación 1 estrella</translation>
+        <translation type="obsolete">* Malo</translation>
     </message>
     <message>
         <source>Equipment</source>
@@ -13087,23 +13093,23 @@ o
     </message>
     <message>
         <source>Rating 5 stars</source>
-        <translation type="obsolete">Calificación 5 estrellas</translation>
+        <translation type="obsolete">***** Excelente </translation>
     </message>
     <message>
         <source>Rating 4 stars</source>
-        <translation type="obsolete">Calificación 4 estrellas</translation>
+        <translation type="obsolete">**** Muy bueno</translation>
     </message>
     <message>
         <source>Rating 3 stars</source>
-        <translation type="obsolete">Calificación 3 estrellas</translation>
+        <translation type="obsolete">*** Bueno</translation>
     </message>
     <message>
         <source>Rating 2 stars</source>
-        <translation type="obsolete">Calificación 2 estrellas</translation>
+        <translation type="obsolete">** Regular</translation>
     </message>
     <message>
         <source>Rating 1 star</source>
-        <translation type="obsolete">Calificación 1 estrella</translation>
+        <translation type="obsolete">* Malo</translation>
     </message>
     <message>
         <source>Rating</source>

@@ -5895,259 +5895,259 @@ line %2, column %3:
     <message>
         <location filename="../templates/Running_Summary.ui" line="270"/>
         <source>shoes:</source>
-        <translation type="unfinished">ботинки:</translation>
+        <translation>ботинки:</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="282"/>
         <source>backpack</source>
-        <translation type="unfinished">рюкзак</translation>
+        <translation>рюкзак</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="289"/>
         <source>gloves</source>
-        <translation type="unfinished">перчатки</translation>
+        <translation>перчатки</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="296"/>
         <source>hip pack</source>
-        <translation type="unfinished">хип-пакет</translation>
+        <translation>хип-пакет</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="303"/>
         <source>poles</source>
-        <translation type="unfinished">трости</translation>
+        <translation>трости</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="310"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="481"/>
         <source>crampon</source>
-        <translation type="unfinished">кошки</translation>
+        <translation>кошки</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="324"/>
         <source>calf guard comp.</source>
-        <translation type="unfinished">защитное снаряжение для голени</translation>
+        <translation>защитное снаряжение для голени</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="346"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="264"/>
         <source>MIDE: Severity Environment</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDE: Сложность местности</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="352"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="270"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="361"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="279"/>
         <source>1. The environment is not risk free</source>
-        <translation type="unfinished">1.Местность не свободна от рисков</translation>
+        <translation>1.Местность не свободна от рисков</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="366"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="284"/>
         <source>2. More than 1 risk factor</source>
-        <translation type="unfinished">2. Более 1 фактора риска</translation>
+        <translation>2. Более 1 фактора риска</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="371"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="289"/>
         <source>3. Various risk factors</source>
-        <translation type="unfinished">3. Различные факторы риска</translation>
+        <translation>3. Различные факторы риска</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="376"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="294"/>
         <source>4. Considerable risk factors</source>
-        <translation type="unfinished"></translation>
+        <translation>4. Существенные факторы риска</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="381"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="299"/>
         <source>5. Many risk factors</source>
-        <translation type="unfinished">5. Много факторов риска</translation>
+        <translation>5. Много факторов риска</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="392"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="310"/>
         <source>MIDE: Orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDE: Ориентация</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="404"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="322"/>
         <source>1. Paths and junctions well signed</source>
-        <translation type="unfinished">1. Пути и перекрестки хорошо обозначены</translation>
+        <translation>1. Пути и перекрестки хорошо обозначены</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="409"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="327"/>
         <source>2. Footpaths or way marks which follow the route</source>
-        <translation type="unfinished">2. Пешеходные дорожки или дорожные знаки, следующие по маршруту</translation>
+        <translation>2. Пешеходные дорожки или дорожные знаки, следующие по маршруту</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="414"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="332"/>
         <source>3. Demands orientation by identification of geographic features and compass points</source>
-        <translation type="unfinished">3. Требует ориентации по географическим объектам и точам компаса</translation>
+        <translation>3. Требует ориентации по географическим объектам и точам компаса</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="419"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="337"/>
         <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
-        <translation type="unfinished">4. Требует передовых методов навигации помимо интерпретации объектов на карте и на земле</translation>
+        <translation>4. Требует передовых методов навигации помимо интерпретации объектов на карте и на земле</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="424"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="342"/>
         <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
-        <translation type="unfinished">5. Сложная навигация прерывается препятствиями, которых необходимо избегать</translation>
+        <translation>5. Сложная навигация прерывается препятствиями, которых необходимо избегать</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="435"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="353"/>
         <source>MIDE: Terrain underfoot</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDE: Местность</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="450"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="368"/>
         <source>1. Easy walking</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Легкий поход</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="455"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="373"/>
         <source>2. Bridleways and well made footpaths</source>
-        <translation type="unfinished">2. Конные и пешеходные дорожки</translation>
+        <translation>2. Конные и пешеходные дорожки</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="460"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="378"/>
         <source>3. Rocky stairways, rough ground and screes</source>
-        <translation type="unfinished">3. Скалистые ступени, грубое основание и плиты</translation>
+        <translation>3. Скалистые ступени, грубое основание и плиты</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="465"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="383"/>
         <source>4. Contains sections where the use of hands is necessary for balance</source>
-        <translation type="unfinished">4. Содержит разделы, где использование рук необходимо для баланса</translation>
+        <translation>4. Содержит разделы, где использование рук необходимо для баланса</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="470"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="388"/>
         <source>5. Scrambling, pulling on hands and arms for progress</source>
-        <translation type="unfinished">5. Карабкаясь, подтягиваясь на руках и рукавах за прогресс</translation>
+        <translation>5. Карабкаясь, подтягиваясь на руках и рукавах за прогресс</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="481"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="399"/>
         <source>MIDE: Effort required </source>
-        <translation type="unfinished"></translation>
+        <translation>MIDE: Необходимые усилия</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="493"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="411"/>
         <source>1. Less than one hour of continuous walking</source>
-        <translation type="unfinished">1. Менее часа непрерывной ходьбы</translation>
+        <translation>1. Менее часа непрерывной ходьбы</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="498"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="416"/>
         <source>2. From 1 to 3 hours of continuous walking</source>
-        <translation type="unfinished">2. От 1 до 3 часов непрерывной ходьбы</translation>
+        <translation>2. От 1 до 3 часов непрерывной ходьбы</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="503"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="421"/>
         <source>3. From 3 to 6 hours of continuous walking</source>
-        <translation type="unfinished">3. От 3 до 6 часов непрерывной ходьбы</translation>
+        <translation>3. От 3 до 6 часов непрерывной ходьбы</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="508"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="426"/>
         <source>4. From 6 to 10 hours of continuous walking</source>
-        <translation type="unfinished">4. От 6 до 10 часов непрерывной ходьбы</translation>
+        <translation>4. От 6 до 10 часов непрерывной ходьбы</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="513"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="431"/>
         <source>5. More than 10 hours of continuous walking</source>
-        <translation type="unfinished">5. Более 10 часов непрерывной ходьбы</translation>
+        <translation>5. Более 10 часов непрерывной ходьбы</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="538"/>
         <source>IBP Index (RNG)</source>
-        <translation type="unfinished"></translation>
+        <translation>IBP Индекс (RNG)</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="565"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="396"/>
         <source>Max. heart rate</source>
-        <translation type="unfinished">Макс. пульс</translation>
+        <translation>Макс. пульс</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="577"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="408"/>
         <source>Avg. heart rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Средний пульс</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="589"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="420"/>
         <source>Min. heart rate</source>
-        <translation type="unfinished">Мин. пульс</translation>
+        <translation>Мин. пульс</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="601"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="432"/>
         <source>Cal. consumption</source>
-        <translation type="unfinished"></translation>
+        <translation>Потребление калорий</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="615"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="512"/>
         <source>SAC scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб SAC</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="627"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="524"/>
         <source>T-1</source>
-        <translation type="unfinished"></translation>
+        <translation>T-1</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="632"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="529"/>
         <source>T-2</source>
-        <translation type="unfinished"></translation>
+        <translation>T-2</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="637"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="534"/>
         <source>T-3</source>
-        <translation type="unfinished"></translation>
+        <translation>T-3</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="642"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="539"/>
         <source>T-4</source>
-        <translation type="unfinished"></translation>
+        <translation>T-4</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="647"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="544"/>
         <source>T-5</source>
-        <translation type="unfinished"></translation>
+        <translation>T-5</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="652"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="549"/>
         <source>T-6</source>
-        <translation type="unfinished"></translation>
+        <translation>T-6</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="663"/>
@@ -6240,28 +6240,28 @@ line %2, column %3:
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="210"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="207"/>
         <source>night</source>
-        <translation type="unfinished">ночь</translation>
+        <translation>ночь</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="214"/>
         <source>trail running</source>
-        <translation type="unfinished">бег по тропам</translation>
+        <translation>бег по тропам</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="224"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="186"/>
         <source>city/road</source>
-        <translation type="unfinished">городская дорога</translation>
+        <translation>городская дорога</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="231"/>
         <source> track</source>
-        <translation type="unfinished">трек</translation>
+        <translation>трек</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="238"/>
         <source>ultra long dist</source>
-        <translation type="unfinished">весьма большое расстояние</translation>
+        <translation>весьма большое расстояние</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="252"/>
@@ -6324,28 +6324,28 @@ line %2, column %3:
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="73"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="79"/>
         <source>war&amp;m</source>
-        <translation type="unfinished">тепло</translation>
+        <translation>тепло</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="66"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="130"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="136"/>
         <source>free&amp;zing</source>
-        <translation type="unfinished">заморозка</translation>
+        <translation>заморозка</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="96"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="103"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="109"/>
         <source>&amp;cold</source>
-        <translation type="unfinished">холодно</translation>
+        <translation>холодно</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="123"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="43"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="49"/>
         <source>ho&amp;t</source>
-        <translation type="unfinished">жарко</translation>
+        <translation>жарко</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="170"/>
@@ -6417,7 +6417,7 @@ line %2, column %3:
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="502"/>
         <source>ice pick</source>
-        <translation type="unfinished">ледоруб</translation>
+        <translation>ледоруб</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="495"/>
@@ -6427,7 +6427,7 @@ line %2, column %3:
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="560"/>
         <source>IBP Index (HKG)</source>
-        <translation type="unfinished"></translation>
+        <translation>IBP Индекс (HKG)</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="526"/>
@@ -6439,52 +6439,52 @@ line %2, column %3:
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="158"/>
         <source>enduro</source>
-        <translation type="unfinished"></translation>
+        <translation>эндуро</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="165"/>
         <source>freeride</source>
-        <translation type="unfinished">фрирайд</translation>
+        <translation>фрирайд</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="172"/>
         <source>XC</source>
-        <translation type="unfinished">кросс-кантри</translation>
+        <translation>кросс-кантри</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="200"/>
         <source>downhill</source>
-        <translation type="unfinished">спуск</translation>
+        <translation>спуск</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="267"/>
         <source>protections</source>
-        <translation type="unfinished">защитное снаряжение</translation>
+        <translation>защитное снаряжение</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="281"/>
         <source>E-Bike</source>
-        <translation type="unfinished"></translation>
+        <translation>электрический велосипед</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="288"/>
         <source>saddlebags</source>
-        <translation type="unfinished">седельные сумки</translation>
+        <translation>седельные сумки</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="320"/>
         <source>Bike</source>
-        <translation type="unfinished"></translation>
+        <translation>велосипед</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="352"/>
         <source>IBP Index (BYC)</source>
-        <translation type="unfinished"></translation>
+        <translation>IBP Индекс (BYC)</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="377"/>
         <source>% Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>% велосипед</translation>
     </message>
 </context>
 <context>

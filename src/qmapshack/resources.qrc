@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>../animation/loader.gif</file>
         <file>../animation/loader2.gif</file>
-        
         <file>../cursors/cursorArrow.png</file>
         <file>../cursors/cursorDelete.png</file>
         <file>../cursors/cursorMove.png</file>
@@ -21,7 +20,6 @@
         <file>../cursors/cursorSelectRange.png</file>
         <file>../cursors/wptHighlightBlue.png</file>
         <file>../cursors/wptHighlightRed.png</file>
-        
         <file>../icons/16x16/ActAero.png</file>
         <file>../icons/16x16/ActBike.png</file>
         <file>../icons/16x16/ActCable.png</file>
@@ -35,8 +33,6 @@
         <file>../icons/16x16/ActTrain.png</file>
         <file>../icons/16x16/Aircraft.png</file>
         <file>../icons/16x16/EditDetails.png</file>
-
-        
         <file>../icons/32x32/2NavProject.png</file>
         <file>../icons/32x32/A.png</file>
         <file>../icons/32x32/ActAero.png</file>
@@ -61,7 +57,7 @@
         <file>../icons/32x32/AddTrk.png</file>
         <file>../icons/32x32/AddWpt.png</file>
         <file>../icons/32x32/Aircraft.png</file>
-        <file>../icons/32x32/Apply.png</file>        
+        <file>../icons/32x32/Apply.png</file>
         <file>../icons/32x32/Area.png</file>
         <file>../icons/32x32/AreaMove.png</file>
         <file>../icons/32x32/AreaOn.png</file>
@@ -210,13 +206,13 @@
         <file>../icons/32x32/SearchGeonames.png</file>
         <file>../icons/32x32/SearchGoogle.png</file>
         <file>../icons/32x32/SearchNominatim.png</file>
-        <file>../icons/32x32/SearchWeb.png</file>        
+        <file>../icons/32x32/SearchWeb.png</file>
         <file>../icons/32x32/SearchWebCam.png</file>
         <file>../icons/32x32/SearchWebDefault.png</file>
         <file>../icons/32x32/SearchWebOutings.png</file>
         <file>../icons/32x32/SearchWebPeakfinder.png</file>
         <file>../icons/32x32/SearchWebTracks.png</file>
-        <file>../icons/32x32/SearchWebWaymarked.png</file>            
+        <file>../icons/32x32/SearchWebWaymarked.png</file>
         <file>../icons/32x32/SearchWebMeteo.png</file>
         <file>../icons/32x32/SelectArea.png</file>
         <file>../icons/32x32/SelectColor.png</file>
@@ -282,7 +278,6 @@
         <file>../icons/32x32/WptProj.png</file>
         <file>../icons/32x32/WptProx.png</file>
         <file>../icons/32x32/Zoom.png</file>
-        
         <file>../icons/48x48/2NavProject.png</file>
         <file>../icons/48x48/A.png</file>
         <file>../icons/48x48/ActAero.png</file>
@@ -529,7 +524,6 @@
         <file>../icons/48x48/WptProx.png</file>
         <file>../icons/48x48/WptDelProx.png</file>
         <file>../icons/48x48/Zoom.png</file>
-        
         <file>../icons/8x8/bullet_black.png</file>
         <file>../icons/8x8/bullet_blue.png</file>
         <file>../icons/8x8/bullet_brown.png</file>
@@ -548,7 +542,6 @@
         <file>../icons/8x8/bullet_red.png</file>
         <file>../icons/8x8/bullet_white.png</file>
         <file>../icons/8x8/bullet_yellow.png</file>
-        
         <file>../icons/cache/32x32/DistIcon.png</file>
         <file>../icons/cache/32x32/OCMLogo.png</file>
         <file>../icons/cache/32x32/OCMLogoSmall.png</file>
@@ -587,7 +580,6 @@
         <file>../icons/cache/32x32/webcam.png</file>
         <file>../icons/cache/32x32/wherigo.png</file>
         <file>../icons/cache/32x32/write_note.png</file>
-        
         <file>../icons/waypoints/32x32/1stCategory.png</file>
         <file>../icons/waypoints/32x32/2ndCategory.png</file>
         <file>../icons/waypoints/32x32/3rdCategory.png</file>
@@ -633,7 +625,6 @@
         <file>../icons/waypoints/32x32/Valley.png</file>
         <file>../icons/waypoints/32x32/Water.png</file>
         <file>../icons/waypoints/32x32/Waypoint.png</file>
-        
         <file>map/OSM_Topo.tms</file>
         <file>map/OpenCycleMap.tms</file>
         <file>map/OpenStreetMap.tms</file>
@@ -642,15 +633,15 @@
         <file>map/World.gemf</file>
         <file>dem/World_Online_SRTM900.wcs</file>
         <file>dem/Europe_Online_DEM25.vrt</file>
-        
         <file>pics/about.png</file>
         <file>pics/compass.png</file>
         <file>pics/noMap256x256.png</file>
         <file>pics/splash.png</file>
         <file>pics/timezones.png</file>
         <file>pics/DockWidgets.png</file>
-        
         <file>templates/Hiking_Tour_Summary.ui</file>
         <file>templates/Hiking_Tour_Summary_(Advanced).ui</file>
+        <file>../icons/32x32/FilterLoopsCut.png</file>
+        <file>../icons/48x48/FilterLoopsCut.png</file>
     </qresource>
 </RCC>

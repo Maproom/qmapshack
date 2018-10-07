@@ -384,21 +384,25 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
     qreal frontalArea = 0.42;
     qreal airDensity = 1.2;
     qreal rollingCoeff = 0.005;
-    qreal windSpeed = -3 / 3.6;
+//    qreal windSpeed = -3 / 3.6;
+    qreal windSpeed = 0;
     qreal muscleCoeff = 0.23;
-    qreal joule2Cal = 4.1868;
+    qreal joule2Calor = 4.1868;
     qreal crankLength = 170;
     qreal pedalCadence = 75;
     qreal pedalRangeEff = 70;
 
-    qreal powerMax = 0;
-    qreal energyJouleTotal = 0;
-    qreal energyCalTotal = 0;
+    qreal totalEnergyJoule = 0;
+    qreal totalPowerTime = 0;
+    qreal maxPower = 0;
+    qreal totalPower = 0;
+    qreal maxPedalForceEff = 0;
+    qreal totalPedalForceEff = 0;
+
+    qint32 cntPositivePower = 0;
 
     qreal pedalSpeed = crankLength * pedalCadence * 2 * M_PI / 60 / 1000;
     qreal rollingResistanceForce = totalWeight * gravityAccel * rollingCoeff;
-
-
 
     for(CTrackData::trkpt_t& pt : trk)
     {
@@ -442,37 +446,51 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
         qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
         qreal totalForce = windResistanceForce + rollingResistanceForce + gravitySlopeForce;
         qreal power = (windResistanceForce * (speed + windSpeed)) + ((rollingResistanceForce + gravitySlopeForce) * speed);
-        powerMax = qMax(powerMax, power);
-        qreal pedalForceCont = power / pedalSpeed;
-        qreal pedalForceEff = pedalForceCont * 180 / pedalRangeEff;
-
-        qreal energyKJoule = 0;
-        qreal deltaTime = 0;
-        if ((speed > 0) && (power > 0))
-        {
-            deltaTime = pt.deltaDistance / speed;
-            energyKJoule = power * deltaTime / muscleCoeff / 1000;
-        }
-        qreal energyCal = energyKJoule / joule2Cal;
-
-        energyJouleTotal += energyKJoule;
-        energyCalTotal += energyCal;
-
-        qDebug() << "speed=" << speed << "windResistanceForce=" << windResistanceForce
+        qDebug() << "speed=" << speed
+                 << "windResistanceForce=" << windResistanceForce
                  << "rollingResistanceForce=" << rollingResistanceForce
                  << "gravitySlopeForce=" << gravitySlopeForce
                  << "totalForce=" << totalForce
-                 << "power=" << power
-                 << "pedalForceCont=" << pedalForceCont
-                 << "pedalForceEff=" << pedalForceEff
-                 << "deltaTime=" << deltaTime
-                 << "energyJoule=" << energyKJoule
-                 << "energyCal=" << energyCal;
+                 << "power=" << power;
+
+        if ((speed > 0) && (power > 0))
+        {
+            qreal deltaTime = pt.deltaDistance / speed;
+
+            totalPowerTime += deltaTime;
+            maxPower = qMax(maxPower, power);
+            totalPower += power;
+
+            qreal energyKJoule = power * deltaTime / muscleCoeff / 1000;
+            totalEnergyJoule += energyKJoule;
+
+            qreal pedalForceCont = power / pedalSpeed;
+            qreal pedalForceEff = pedalForceCont * 180 / pedalRangeEff;
+            maxPedalForceEff = qMax(maxPedalForceEff, pedalForceEff);
+            totalPedalForceEff += pedalForceEff;
+
+            cntPositivePower++;
+
+            qDebug()
+                    << "deltaTime=" << deltaTime
+                    << "energyJoule=" << energyKJoule
+                    << "pedalForceEff=" << pedalForceEff;
+        }
     }
 
-    qDebug() << "powerMax=" << powerMax
-             << "energyJouleTotal=" << energyJouleTotal
-             << "energyCalTotal=" << energyCalTotal;
+    qreal avgPower = totalPower / cntPositivePower;
+    qreal avgPedalForceEff = totalPedalForceEff / cntPositivePower;
+    qreal totalEnergyCalor = totalEnergyJoule / joule2Calor;
+
+    qDebug()
+            << "maxPower=" << maxPower
+            << "avgPower=" << avgPower
+            << "maxPedalForceEff=" << maxPedalForceEff
+            << "avgPedalForceEff=" << avgPedalForceEff
+            << "totalPowerTime=" << totalPowerTime / 60
+            << "powerTimeMovingRatio=" << totalPowerTime / totalElapsedSecondsMoving
+            << "totalEnergyJoule=" << totalEnergyJoule
+            << "totalEnergyCalor=" << totalEnergyCalor;
 
     deriveSecondaryData();
     QString val, unit;

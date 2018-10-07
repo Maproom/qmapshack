@@ -355,33 +355,12 @@ void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
     changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
-void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType)
+void CGisItemTrk::filterSpeedEnergy()
 {
-    qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedfactor;
-    qreal minSpeed = cyclingType.minSpeed / IUnit::self().speedfactor;
-    qreal slopeAtMinSpeed = cyclingType.slopeAtMinSpeed;
-    qreal maxSpeed = cyclingType.maxSpeed / IUnit::self().speedfactor;
-    qreal slopeAtMaxSpeed = cyclingType.slopeAtMaxSpeed;
-
-    QDateTime timestamp = timeStart;
-    if(!timestamp.isValid())
-    {
-        timestamp = QDateTime::currentDateTime().toUTC();
-    }
-
-    qreal speed = 0;
-
-    QEasingCurve::Type upHillType = (minSpeed < plainSpeed) ? QEasingCurve::OutQuad : QEasingCurve::InQuad;
-    QEasingCurve::Type downHillType = (maxSpeed < plainSpeed) ? QEasingCurve::OutQuad : QEasingCurve::InQuad;
-    QEasingCurve upHillCurve(upHillType);
-    QEasingCurve downHillCurve(downHillType);
-
-
-
     qreal totalWeight = 100;
     qreal gravityAccel = 9.81;
-    qreal windDragCoeff = 0.85;
-    qreal frontalArea = 0.42;
+    qreal windDragCoeff = 0.85; // 1.2 0.85
+    qreal frontalArea = 0.42;   // 0.6 0.42
     qreal airDensity = 1.2;
     qreal rollingCoeff = 0.005;
 //    qreal windSpeed = -3 / 3.6;
@@ -413,35 +392,10 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
 
         // calculation based on slope2 (Percent)
         qreal slope = pt.slope2;
+        qreal speed = pt.speed;
 
-//        qDebug() << "slope=" << slope;
-
-        if(slope < slopeAtMaxSpeed)
-        {
-            speed = maxSpeed;
-        }
-        else if(slope < 0 && slope >= slopeAtMaxSpeed)
-        {
-            speed = plainSpeed + (maxSpeed - plainSpeed) * downHillCurve.valueForProgress(slope / slopeAtMaxSpeed);
-        }
-        else if(slope == 0)
-        {
-            speed = plainSpeed;
-        }
-        else if(slope > 0 && slope <= slopeAtMinSpeed)
-        {
-            speed = plainSpeed + (minSpeed - plainSpeed) * upHillCurve.valueForProgress(slope / slopeAtMinSpeed);
-        }
-        else if(slope > slopeAtMinSpeed)
-        {
-            speed = minSpeed;
-        }
-
-        timestamp = speed == 0 ? timestamp : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
-        pt.time   = timestamp;
-
-// Energy Calc
-//        slope = 0;
+        // Energy Calc
+        //        slope = 0;
         qreal windResistanceForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
         qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
         qreal totalForce = windResistanceForce + rollingResistanceForce + gravitySlopeForce;
@@ -491,6 +445,149 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
             << "powerTimeMovingRatio=" << totalPowerTime / totalElapsedSecondsMoving
             << "totalEnergyJoule=" << totalEnergyJoule
             << "totalEnergyCalor=" << totalEnergyCalor;
+}
+
+void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType)
+{
+
+    filterSpeedEnergy();
+
+//    return;
+
+    qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedfactor;
+    qreal minSpeed = cyclingType.minSpeed / IUnit::self().speedfactor;
+    qreal slopeAtMinSpeed = cyclingType.slopeAtMinSpeed;
+    qreal maxSpeed = cyclingType.maxSpeed / IUnit::self().speedfactor;
+    qreal slopeAtMaxSpeed = cyclingType.slopeAtMaxSpeed;
+
+    QDateTime timestamp = timeStart;
+    if(!timestamp.isValid())
+    {
+        timestamp = QDateTime::currentDateTime().toUTC();
+    }
+
+    qreal speed = 0;
+
+    QEasingCurve::Type upHillType = (minSpeed < plainSpeed) ? QEasingCurve::OutQuad : QEasingCurve::InQuad;
+    QEasingCurve::Type downHillType = (maxSpeed < plainSpeed) ? QEasingCurve::OutQuad : QEasingCurve::InQuad;
+    QEasingCurve upHillCurve(upHillType);
+    QEasingCurve downHillCurve(downHillType);
+
+
+
+//    qreal totalWeight = 100;
+//    qreal gravityAccel = 9.81;
+//    qreal windDragCoeff = 0.85;
+//    qreal frontalArea = 0.42;
+//    qreal airDensity = 1.2;
+//    qreal rollingCoeff = 0.005;
+//    qreal windSpeed = -3 / 3.6;
+//    qreal windSpeed = 0;
+//    qreal muscleCoeff = 0.23;
+//    qreal joule2Calor = 4.1868;
+//    qreal crankLength = 170;
+//    qreal pedalCadence = 75;
+//    qreal pedalRangeEff = 70;
+
+//    qreal totalEnergyJoule = 0;
+//    qreal totalPowerTime = 0;
+//    qreal maxPower = 0;
+//    qreal totalPower = 0;
+//    qreal maxPedalForceEff = 0;
+//    qreal totalPedalForceEff = 0;
+
+//    qint32 cntPositivePower = 0;
+
+//    qreal pedalSpeed = crankLength * pedalCadence * 2 * M_PI / 60 / 1000;
+//    qreal rollingResistanceForce = totalWeight * gravityAccel * rollingCoeff;
+
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        if(pt.isHidden())
+        {
+            continue;
+        }
+
+        // calculation based on slope2 (Percent)
+        qreal slope = pt.slope2;
+
+//        qDebug() << "slope=" << slope;
+
+        if(slope < slopeAtMaxSpeed)
+        {
+            speed = maxSpeed;
+        }
+        else if(slope < 0 && slope >= slopeAtMaxSpeed)
+        {
+            speed = plainSpeed + (maxSpeed - plainSpeed) * downHillCurve.valueForProgress(slope / slopeAtMaxSpeed);
+        }
+        else if(slope == 0)
+        {
+            speed = plainSpeed;
+        }
+        else if(slope > 0 && slope <= slopeAtMinSpeed)
+        {
+            speed = plainSpeed + (minSpeed - plainSpeed) * upHillCurve.valueForProgress(slope / slopeAtMinSpeed);
+        }
+        else if(slope > slopeAtMinSpeed)
+        {
+            speed = minSpeed;
+        }
+
+        timestamp = speed == 0 ? timestamp : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
+        pt.time   = timestamp;
+
+// Energy Calc
+//        slope = 0;
+//        qreal windResistanceForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
+//        qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
+//        qreal totalForce = windResistanceForce + rollingResistanceForce + gravitySlopeForce;
+//        qreal power = (windResistanceForce * (speed + windSpeed)) + ((rollingResistanceForce + gravitySlopeForce) * speed);
+//        qDebug() << "speed=" << speed
+//                 << "windResistanceForce=" << windResistanceForce
+//                 << "rollingResistanceForce=" << rollingResistanceForce
+//                 << "gravitySlopeForce=" << gravitySlopeForce
+//                 << "totalForce=" << totalForce
+//                 << "power=" << power;
+
+//        if ((speed > 0) && (power > 0))
+//        {
+//            qreal deltaTime = pt.deltaDistance / speed;
+
+//            totalPowerTime += deltaTime;
+//            maxPower = qMax(maxPower, power);
+//            totalPower += power;
+
+//            qreal energyKJoule = power * deltaTime / muscleCoeff / 1000;
+//            totalEnergyJoule += energyKJoule;
+
+//            qreal pedalForceCont = power / pedalSpeed;
+//            qreal pedalForceEff = pedalForceCont * 180 / pedalRangeEff;
+//            maxPedalForceEff = qMax(maxPedalForceEff, pedalForceEff);
+//            totalPedalForceEff += pedalForceEff;
+
+//            cntPositivePower++;
+
+//            qDebug()
+//                    << "deltaTime=" << deltaTime
+//                    << "energyJoule=" << energyKJoule
+//                    << "pedalForceEff=" << pedalForceEff;
+//        }
+    }
+
+//    qreal avgPower = totalPower / cntPositivePower;
+//    qreal avgPedalForceEff = totalPedalForceEff / cntPositivePower;
+//    qreal totalEnergyCalor = totalEnergyJoule / joule2Calor;
+
+//    qDebug()
+//            << "maxPower=" << maxPower
+//            << "avgPower=" << avgPower
+//            << "maxPedalForceEff=" << maxPedalForceEff
+//            << "avgPedalForceEff=" << avgPedalForceEff
+//            << "totalPowerTime=" << totalPowerTime / 60
+//            << "powerTimeMovingRatio=" << totalPowerTime / totalElapsedSecondsMoving
+//            << "totalEnergyJoule=" << totalEnergyJoule
+//            << "totalEnergyCalor=" << totalEnergyCalor;
 
     deriveSecondaryData();
     QString val, unit;

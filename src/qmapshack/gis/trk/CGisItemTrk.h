@@ -539,6 +539,7 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
+    void filterSpeedEnergy();
     void filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType);
     void filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType);
 

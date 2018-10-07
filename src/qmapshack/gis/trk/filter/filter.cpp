@@ -383,6 +383,8 @@ void CGisItemTrk::filterSpeedEnergy()
     qreal pedalSpeed = crankLength * pedalCadence * 2 * M_PI / 60 / 1000;
     qreal rollingResistanceForce = totalWeight * gravityAccel * rollingCoeff;
 
+//    qreal prevElapsedSeconds = 0;
+
     for(CTrackData::trkpt_t& pt : trk)
     {
         if(pt.isHidden())
@@ -390,16 +392,23 @@ void CGisItemTrk::filterSpeedEnergy()
             continue;
         }
 
-        // calculation based on slope2 (Percent)
-        qreal slope = pt.slope2;
-        qreal speed = pt.speed;
+//        qreal deltaTime = pt.elapsedSeconds - prevElapsedSeconds;
+//        prevElapsedSeconds = pt.elapsedSeconds;
 
-        // Energy Calc
+        qreal speed = pt.speed;
+//        qreal speed = deltaTime > 0 ? pt.deltaDistance / deltaTime : 0;
+        if (speed <= 0.2) // 0.2 ==> to be synchron with deriveSecondaryData()
+        {
+            continue;
+        }
         //        slope = 0;
+        qreal slope = pt.slope2;
+
         qreal windResistanceForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
         qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
         qreal totalForce = windResistanceForce + rollingResistanceForce + gravitySlopeForce;
         qreal power = (windResistanceForce * (speed + windSpeed)) + ((rollingResistanceForce + gravitySlopeForce) * speed);
+
         qDebug() << "speed=" << speed
                  << "windResistanceForce=" << windResistanceForce
                  << "rollingResistanceForce=" << rollingResistanceForce
@@ -407,7 +416,7 @@ void CGisItemTrk::filterSpeedEnergy()
                  << "totalForce=" << totalForce
                  << "power=" << power;
 
-        if ((speed > 0) && (power > 0))
+        if (power > 0)
         {
             qreal deltaTime = pt.deltaDistance / speed;
 
@@ -451,7 +460,6 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
 {
 
     filterSpeedEnergy();
-
 //    return;
 
     qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedfactor;
@@ -473,15 +481,13 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
     QEasingCurve upHillCurve(upHillType);
     QEasingCurve downHillCurve(downHillType);
 
-
-
 //    qreal totalWeight = 100;
 //    qreal gravityAccel = 9.81;
 //    qreal windDragCoeff = 0.85;
 //    qreal frontalArea = 0.42;
 //    qreal airDensity = 1.2;
 //    qreal rollingCoeff = 0.005;
-//    qreal windSpeed = -3 / 3.6;
+////    qreal windSpeed = -3 / 3.6;
 //    qreal windSpeed = 0;
 //    qreal muscleCoeff = 0.23;
 //    qreal joule2Calor = 4.1868;
@@ -511,7 +517,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
         // calculation based on slope2 (Percent)
         qreal slope = pt.slope2;
 
-//        qDebug() << "slope=" << slope;
+////        qDebug() << "slope=" << slope;
 
         if(slope < slopeAtMaxSpeed)
         {
@@ -537,8 +543,8 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
         timestamp = speed == 0 ? timestamp : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
         pt.time   = timestamp;
 
-// Energy Calc
-//        slope = 0;
+//// Energy Calc
+////        slope = 0;
 //        qreal windResistanceForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
 //        qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
 //        qreal totalForce = windResistanceForce + rollingResistanceForce + gravitySlopeForce;

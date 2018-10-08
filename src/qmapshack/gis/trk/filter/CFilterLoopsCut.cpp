@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Michel Durand zero@cms123.fr
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk &trk, QWidget * parent)
+CFilterLoopsCut::CFilterLoopsCut(CGisItemTrk &trk, QWidget * parent)
     : QWidget(parent)
     , trk(trk)
 {
@@ -33,20 +33,20 @@ CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk &trk, QWidget * parent)
     spinBox->setSuffix(IUnit::self().baseunit);
 
     SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/DouglasPeuker/distance",5).toInt());
+    spinBox->setValue(cfg.value("TrackDetails/Filter/LoopsCut/distance",5).toInt());
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterDouglasPeuker::slotApply);
+    connect(toolApply, &QToolButton::clicked, this, &CFilterLoopsCut::slotApply);
 }
 
-CFilterDouglasPeuker::~CFilterDouglasPeuker()
+CFilterLoopsCut::~CFilterLoopsCut()
 {
     SETTINGS;
     cfg.setValue("TrackDetails/Filter/DouglasPeuker/distance", spinBox->value());
 }
 
-void CFilterDouglasPeuker::slotApply()
+void CFilterLoopsCut::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterDouglasPeuker");
-    trk.filterReducePoints(spinBox->value()/IUnit::self().basefactor);
-    CCanvas::restoreOverrideCursor("CFilterDouglasPeuker");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterLoopsCut");
+    trk.filterLoopsCut(spinBox->value()/IUnit::self().basefactor);
+    CCanvas::restoreOverrideCursor("CFilterLoopsCut");
 }

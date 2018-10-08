@@ -583,3 +583,11 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
 
     changed(tr("Start Point moved to: ") + wptName.toLatin1(), "://icons/48x48/FilterChangeStartPoint.png");
 }
+
+void CGisItemTrk::filterLoopsCut(qreal dist)
+{
+    QString val, unit;
+    IUnit::self().meter2distance(dist, val, unit);
+    changed(tr("Cut track loops with a distance criteria of (%1%2)").arg(val).arg(unit), "://icons/48x48/FilterLoopsCut.png");
+}
+

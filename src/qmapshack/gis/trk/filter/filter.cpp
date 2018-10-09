@@ -355,21 +355,34 @@ void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
     changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
-void CGisItemTrk::filterSpeedEnergy()
+void CGisItemTrk::filterSpeedCycleEnergy(CFilterSpeedCycle::cycling_energy_t &energy) const
 {
-    qreal totalWeight = 100;
-    qreal gravityAccel = 9.81;
-    qreal windDragCoeff = 0.85; // 1.2 0.85
-    qreal frontalArea = 0.42;   // 0.6 0.42
-    qreal airDensity = 1.2;
-    qreal rollingCoeff = 0.005;
-//    qreal windSpeed = -3 / 3.6;
-    qreal windSpeed = 0;
-    qreal muscleCoeff = 0.23;
     qreal joule2Calor = 4.1868;
-    qreal crankLength = 170;
-    qreal pedalCadence = 75;
-    qreal pedalRangeEff = 70;
+    qreal gravityAccel = 9.81;
+
+//    qreal totalWeight = 100;
+//    qreal windDragCoeff = 0.85; // 1.2 0.85
+//    qreal frontalArea = 0.42;   // 0.6 0.42
+//    qreal airDensity = 1.2;
+//    qreal rollingCoeff = 0.005;
+////    qreal windSpeed = -3 / 3.6;
+//    qreal windSpeed = 0;
+//    qreal muscleCoeff = 0.23;
+//    qreal crankLength = 170;
+//    qreal pedalCadence = 75;
+//    qreal pedalRangeEff = 70;
+
+    qreal totalWeight = energy.totalWeight;
+    qreal windDragCoeff = energy.windDragCoeff;
+    qreal frontalArea = energy.frontalArea;
+    qreal airDensity = energy.airDensity;
+    qreal rollingCoeff = energy.rollingCoeff;
+    qreal windSpeed = energy.windSpeed;
+    qreal muscleCoeff = energy.muscleCoeff;
+    qreal crankLength = energy.crankLength;
+    qreal pedalCadence = energy.pedalCadence;
+    qreal pedalRangeEff = energy.pedalRangeEff;
+
 
     qreal totalEnergyJoule = 0;
     qreal totalPowerTime = 0;
@@ -385,7 +398,7 @@ void CGisItemTrk::filterSpeedEnergy()
 
 //    qreal prevElapsedSeconds = 0;
 
-    for(CTrackData::trkpt_t& pt : trk)
+    for(const CTrackData::trkpt_t& pt : trk)
     {
         if(pt.isHidden())
         {
@@ -444,6 +457,7 @@ void CGisItemTrk::filterSpeedEnergy()
     qreal avgPower = totalPower / cntPositivePower;
     qreal avgPedalForceEff = totalPedalForceEff / cntPositivePower;
     qreal totalEnergyCalor = totalEnergyJoule / joule2Calor;
+    energy.totalEnergyKcal = totalEnergyJoule / joule2Calor;
 
     qDebug()
             << "maxPower=" << maxPower
@@ -459,7 +473,7 @@ void CGisItemTrk::filterSpeedEnergy()
 void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType)
 {
 
-    filterSpeedEnergy();
+//    filterSpeedCycleEnergy();
 //    return;
 
     qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedfactor;

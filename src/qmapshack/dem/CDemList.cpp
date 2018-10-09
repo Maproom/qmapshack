@@ -63,6 +63,7 @@ CDemList::CDemList(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
+    lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
 
     connect(treeWidget,     &CDemTreeWidget::customContextMenuRequested, this, &CDemList::slotContextMenu);
     connect(actionMoveUp,   &QAction::triggered,                         this, &CDemList::slotMoveUp);
@@ -71,6 +72,7 @@ CDemList::CDemList(QWidget *parent)
     connect(actionReloadDem, &QAction::triggered,                        this, &CDemList::slotReloadDem);
     connect(treeWidget,     &CDemTreeWidget::sigChanged,                 this, &CDemList::sigChanged);
     connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(), static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
+    connect(lineFilter, &QLineEdit::textChanged, this, &CDemList::slotFilter);
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
@@ -265,4 +267,38 @@ void CDemList::slotDemHonk()
     saveResource("Europe_Online_DEM25.vrt", dir);
 
     CDemDraw::setupDemPath(demPath);
+}
+
+void CDemList::slotFilter(const QString& str)
+{
+    actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
+
+    const int N = treeWidget->topLevelItemCount();
+
+    if(str.isEmpty())
+    {
+        for(int n = 0; n < N; n++)
+        {
+            CDemItem * dem = dynamic_cast<CDemItem*>(treeWidget->topLevelItem(n));
+            if(dem == nullptr)
+            {
+                continue;
+            }
+            dem->setHidden(false);
+        }
+    }
+    else
+    {
+        const QString& tmp = str.toUpper();
+        for(int n = 0; n < N; n++)
+        {
+            CDemItem * dem = dynamic_cast<CDemItem*>(treeWidget->topLevelItem(n));
+            if(dem == nullptr)
+            {
+                continue;
+            }
+
+            dem->setHidden(!dem->getName().toUpper().contains(tmp));
+        }
+    }
 }

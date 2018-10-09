@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "gis/search/CGeoSearchConfig.h"
-#include "helpers/CWptIconManager.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconManager.h"
 #include <QIcon>
 
 CGeoSearchConfig * CGeoSearchConfig::pSelf = nullptr;

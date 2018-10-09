@@ -18,11 +18,11 @@
 
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CWptIconManager.h"
 #include "helpers/CElevationDialog.h"
 #include "helpers/CInputDialog.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CPositionDialog.h"
+#include "helpers/CWptIconManager.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 

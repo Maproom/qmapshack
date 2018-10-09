@@ -31,8 +31,8 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CWptIconManager.h"
 #include "helpers/CProgressDialog.h"
+#include "helpers/CWptIconManager.h"
 
 #include "CMainWindow.h"
 

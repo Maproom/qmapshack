@@ -620,7 +620,7 @@ QPointF GPS_Math_Wpt_Projection(const QPointF& p1, qreal distance, qreal bearing
         sinSigma = qSin(Sigma);
         cosSigma = qCos(Sigma);
         deltaSigma = B*sinSigma*(cos2SigmaM+B/4*(cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)-
-                                 B/6*cos2SigmaM*(-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)));
+                                                 B/6*cos2SigmaM*(-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)));
         Sigma_ = Sigma;
         Sigma = s / (b*A) + deltaSigma;
     }

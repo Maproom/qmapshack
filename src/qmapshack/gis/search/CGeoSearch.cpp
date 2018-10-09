@@ -23,8 +23,8 @@
 #include "gis/search/CGeoSearch.h"
 #include "gis/search/CGeoSearchConfigDialog.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CWptIconManager.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconManager.h"
 #include "misc.h"
 #include "version.h"
 

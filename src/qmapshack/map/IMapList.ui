@@ -30,6 +30,13 @@
     <number>0</number>
    </property>
    <item>
+    <widget class="QLineEdit" name="lineFilter">
+     <property name="toolTip">
+      <string>Filter: Start to type and the list will be reduced to matching items.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="CMapTreeWidget" name="treeWidget">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
@@ -174,6 +181,15 @@
     <string>Reload Maps</string>
    </property>
   </action>
+  <action name="actionClearFilter">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/32x32/Filter.png</normaloff>:/icons/32x32/Filter.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clear Filter</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -185,5 +201,22 @@
  <resources>
   <include location="../resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionClearFilter</sender>
+   <signal>triggered()</signal>
+   <receiver>lineFilter</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>12</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

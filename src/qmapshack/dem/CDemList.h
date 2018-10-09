@@ -74,6 +74,7 @@ private slots:
     void slotMoveDown();
     void slotReloadDem();
     void slotContextMenu(const QPoint &point);
+    void slotFilter(const QString& str);
 
 private:
     QMenu * menu;

@@ -67,6 +67,7 @@ CMapList::CMapList(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
+    lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
 
     connect(treeWidget,     &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);
     connect(treeWidget,     &CMapTreeWidget::sigChanged,                 this, &CMapList::sigChanged);
@@ -75,6 +76,7 @@ CMapList::CMapList(QWidget *parent)
     connect(actionMoveDown, &QAction::triggered,                         this, &CMapList::slotMoveDown);
     connect(actionReloadMaps, &QAction::triggered,                       this, &CMapList::slotReloadMaps);
     connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(), static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
+    connect(lineFilter, &QLineEdit::textChanged, this, &CMapList::slotFilter);
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
@@ -280,3 +282,37 @@ void CMapList::slotReloadMaps()
     CMapDraw::setupMapPath(CMapDraw::getMapPaths());
 }
 
+
+void CMapList::slotFilter(const QString& str)
+{
+    actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
+
+    const int N = treeWidget->topLevelItemCount();
+
+    if(str.isEmpty())
+    {
+        for(int n = 0; n < N; n++)
+        {
+            CMapItem * map = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(n));
+            if(map == nullptr)
+            {
+                continue;
+            }
+            map->setHidden(false);
+        }
+    }
+    else
+    {
+        const QString& tmp = str.toUpper();
+        for(int n = 0; n < N; n++)
+        {
+            CMapItem * map = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(n));
+            if(map == nullptr)
+            {
+                continue;
+            }
+
+            map->setHidden(!map->getName().toUpper().contains(tmp));
+        }
+    }
+}

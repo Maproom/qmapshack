@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "gis/wpt/CSetupNewWpt.h"
-#include "helpers/CWptIconManager.h"
 #include "helpers/CPositionDialog.h"
+#include "helpers/CWptIconManager.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>

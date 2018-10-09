@@ -28,10 +28,10 @@
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CScrOptWptRadius.h"
 #include "gis/wpt/CSetupNewWpt.h"
-#include "helpers/CWptIconManager.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconManager.h"
 #include "mouse/IMouse.h"
 #include "units/IUnit.h"
 

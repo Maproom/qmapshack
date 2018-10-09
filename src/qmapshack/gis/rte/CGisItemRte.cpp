@@ -27,10 +27,10 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "helpers/CWptIconManager.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CDraw.h"
+#include "helpers/CWptIconManager.h"
 #include "units/IUnit.h"
 
 #include <proj_api.h>

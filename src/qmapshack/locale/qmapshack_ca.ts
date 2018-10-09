@@ -429,17 +429,17 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
 <context>
     <name>CDemList</name>
     <message>
-        <location filename="../dem/CDemList.cpp" line="219"/>
+        <location filename="../dem/CDemList.cpp" line="221"/>
         <source>Deactivate</source>
         <translation>Desactivar</translation>
     </message>
     <message>
-        <location filename="../dem/CDemList.cpp" line="219"/>
+        <location filename="../dem/CDemList.cpp" line="221"/>
         <source>Activate</source>
         <translation>Activar</translation>
     </message>
     <message>
-        <location filename="../dem/CDemList.cpp" line="256"/>
+        <location filename="../dem/CDemList.cpp" line="258"/>
         <source>Where do you want to store DEMs?</source>
         <translation>On vols desar els DEMs?</translation>
     </message>
@@ -470,7 +470,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="44"/>
         <source>Failed to load file: %1</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
@@ -505,7 +505,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="265"/>
         <source>No images found</source>
-        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
+        <translation>  No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -759,7 +759,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="153"/>
         <source>Save project as %1</source>
-        <translation>&#xa0; Desa el projecte com a %1</translation>
+        <translation>  Desa el projecte com a %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="157"/>
@@ -960,12 +960,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
         <source>Failed to open FIT file %1.</source>
-        <translation>&#xa0; No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
+        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
     </message>
 </context>
 <context>
@@ -3469,17 +3469,17 @@ Retorn als típus interns..</translation>
 <context>
     <name>CMapList</name>
     <message>
-        <location filename="../map/CMapList.cpp" line="224"/>
+        <location filename="../map/CMapList.cpp" line="226"/>
         <source>Deactivate</source>
         <translation>Desactivar</translation>
     </message>
     <message>
-        <location filename="../map/CMapList.cpp" line="224"/>
+        <location filename="../map/CMapList.cpp" line="226"/>
         <source>Activate</source>
         <translation>Activar</translation>
     </message>
     <message>
-        <location filename="../map/CMapList.cpp" line="255"/>
+        <location filename="../map/CMapList.cpp" line="257"/>
         <source>Where do you want to store maps?</source>
         <translation>On vols desar els mapes?</translation>
     </message>
@@ -6963,44 +6963,54 @@ No vull llegir tota la documentació!</translation>
         <translation>Formulari</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="112"/>
+        <location filename="../dem/IDemList.ui" line="35"/>
+        <source>Filter: Start to type and the list will be reduced to matching items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="119"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
         <translation>Per afegir fitxers amb dades d&apos;elevació feu &lt;a href=&apos;DemFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a DEM&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="125"/>
+        <location filename="../dem/IDemList.ui" line="132"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
         <translation>Utilitza el menú contextual (clic al botó dret del ratolí o entrada) per activar un fitxer. Utilitzar arrossega I deixa anar per a moure el fitxer activat en el procés de selecció. </translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="150"/>
+        <location filename="../dem/IDemList.ui" line="157"/>
         <source>Activate</source>
         <translation>Activar</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="159"/>
+        <location filename="../dem/IDemList.ui" line="166"/>
         <source>Move Up</source>
         <translation>Mou amunt</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="162"/>
+        <location filename="../dem/IDemList.ui" line="169"/>
         <source>Hide DEM behind previous one</source>
         <translation>Amagar DEM darrere de l&apos;anterior</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="171"/>
+        <location filename="../dem/IDemList.ui" line="178"/>
         <source>Move down</source>
         <translation>Mou avall</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="174"/>
+        <location filename="../dem/IDemList.ui" line="181"/>
         <source>Show DEM on top of next one</source>
         <translation>Mostra el DEM a sobre del següent</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="183"/>
+        <location filename="../dem/IDemList.ui" line="190"/>
         <source>Reload DEM</source>
         <translation>Tornar a carregar DEM</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="199"/>
+        <source>Clear Filter</source>
+        <translation type="unfinished">Neteja el Filtre</translation>
     </message>
 </context>
 <context>
@@ -7358,7 +7368,7 @@ No vull llegir tota la documentació!</translation>
     </message>
     <message>
         <source>User defined limits for this track</source>
-        <translation type="vanished">Límits d&apos;aquest track definits per l&apos;usuari&#xa0;</translation>
+        <translation type="vanished">Límits d&apos;aquest track definits per l&apos;usuari </translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="74"/>
@@ -8754,32 +8764,36 @@ Nom del fitxer: %1</translation>
         <translation>Canvia l&apos;opacitat de tots els elements GIS del kapa.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="66"/>
         <source>Filter</source>
-        <translation>Filtre</translation>
+        <translation type="vanished">Filtre</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="115"/>
+        <location filename="../gis/IGisWorkspace.ui" line="66"/>
+        <source>Filter: Start to type and the list will be reduced to matching items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="111"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="127"/>
+        <location filename="../gis/IGisWorkspace.ui" line="123"/>
         <source>Clear Filter</source>
         <translation>Neteja el Filtre</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="136"/>
+        <location filename="../gis/IGisWorkspace.ui" line="132"/>
         <source>Setup Filter</source>
         <translation>Configura el Filtre</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="144"/>
+        <location filename="../gis/IGisWorkspace.ui" line="140"/>
         <source>name only</source>
         <translation type="unfinished">només el nom</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="152"/>
+        <location filename="../gis/IGisWorkspace.ui" line="148"/>
         <source>complete text</source>
         <translation type="unfinished">text complet</translation>
     </message>
@@ -9369,44 +9383,54 @@ Nom del fitxer: %1</translation>
         <translation>Formulari</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="116"/>
+        <location filename="../map/IMapList.ui" line="123"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
         <translation>Utilitza el menú contextual (clic al botó dret del ratolí o entrada) per activar un mapa. Utilitzar arrossega I deixa anar per a moure el mapa activat en el procés de dibuix. </translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="103"/>
+        <location filename="../map/IMapList.ui" line="110"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
         <translation>Per afegir mapes fes &lt;a href=&apos;MapFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a Mapes&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="141"/>
+        <location filename="../map/IMapList.ui" line="35"/>
+        <source>Filter: Start to type and the list will be reduced to matching items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="148"/>
         <source>Activate</source>
         <translation>Activar</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="150"/>
+        <location filename="../map/IMapList.ui" line="157"/>
         <source>Move Up</source>
         <translation>Mou amunt</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="153"/>
+        <location filename="../map/IMapList.ui" line="160"/>
         <source>Hide map behind previous map</source>
         <translation>Amagar mapa darrere del mapa anterior</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="162"/>
+        <location filename="../map/IMapList.ui" line="169"/>
         <source>Move down</source>
         <translation>Mou avall</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="165"/>
+        <location filename="../map/IMapList.ui" line="172"/>
         <source>Show map on top of next map</source>
         <translation>Mostra el mapa a sobre del següent mapa</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="174"/>
+        <location filename="../map/IMapList.ui" line="181"/>
         <source>Reload Maps</source>
         <translation>Tornar a carregar Mapes</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="190"/>
+        <source>Clear Filter</source>
+        <translation type="unfinished">Neteja el Filtre</translation>
     </message>
 </context>
 <context>
@@ -12242,7 +12266,7 @@ o
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>

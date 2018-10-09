@@ -17,9 +17,9 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "helpers/CWptIconManager.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
+#include "helpers/CWptIconManager.h"
 #include "setup/IAppSetup.h"
 
 #include <QtWidgets>

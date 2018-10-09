@@ -20,8 +20,8 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
-#include "helpers/CWptIconManager.h"
 #include "GeoMath.h"
+#include "helpers/CWptIconManager.h"
 #include "units/IUnit.h"
 
 #include <proj_api.h>

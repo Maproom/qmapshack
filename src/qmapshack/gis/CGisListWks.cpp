@@ -55,11 +55,11 @@
 #include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CWptIconManager.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconManager.h"
 #include "setup/IAppSetup.h"
 
 #include <QApplication>

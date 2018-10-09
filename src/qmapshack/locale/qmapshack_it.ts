@@ -431,17 +431,17 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
 <context>
     <name>CDemList</name>
     <message>
-        <location filename="../dem/CDemList.cpp" line="219"/>
+        <location filename="../dem/CDemList.cpp" line="221"/>
         <source>Deactivate</source>
         <translation>Disattivato</translation>
     </message>
     <message>
-        <location filename="../dem/CDemList.cpp" line="219"/>
+        <location filename="../dem/CDemList.cpp" line="221"/>
         <source>Activate</source>
         <translation>Attivato</translation>
     </message>
     <message>
-        <location filename="../dem/CDemList.cpp" line="256"/>
+        <location filename="../dem/CDemList.cpp" line="258"/>
         <source>Where do you want to store DEMs?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3489,17 +3489,17 @@ Impossibile riconoscere il tipo di file.</translation>
 <context>
     <name>CMapList</name>
     <message>
-        <location filename="../map/CMapList.cpp" line="224"/>
+        <location filename="../map/CMapList.cpp" line="226"/>
         <source>Deactivate</source>
         <translation>Disattivare</translation>
     </message>
     <message>
-        <location filename="../map/CMapList.cpp" line="224"/>
+        <location filename="../map/CMapList.cpp" line="226"/>
         <source>Activate</source>
         <translation>Attivare</translation>
     </message>
     <message>
-        <location filename="../map/CMapList.cpp" line="255"/>
+        <location filename="../map/CMapList.cpp" line="257"/>
         <source>Where do you want to store maps?</source>
         <translation>Dove vuoi salvare le mappe?</translation>
     </message>
@@ -7000,44 +7000,54 @@ I don&apos;t want to read the documentation!</source>
         <translation type="vanished">Per aggiungere file con dati di elevazione usa &lt;b&gt;File-&gt;Modifica percorso DEM&lt;/b&gt;.  O clicca &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;qui&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="112"/>
+        <location filename="../dem/IDemList.ui" line="35"/>
+        <source>Filter: Start to type and the list will be reduced to matching items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="119"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="125"/>
+        <location filename="../dem/IDemList.ui" line="132"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
         <translation>Utilizzare il menù di scelta rapida (fare clic con il pulsante destro del mouse sulla voce) per attivare un file. Utilizzare il drag-n-drop per spostare il file attivato nell&apos;ordine processo.</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="150"/>
+        <location filename="../dem/IDemList.ui" line="157"/>
         <source>Activate</source>
         <translation>Attiva</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="159"/>
+        <location filename="../dem/IDemList.ui" line="166"/>
         <source>Move Up</source>
         <translation>Muovi su</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="162"/>
+        <location filename="../dem/IDemList.ui" line="169"/>
         <source>Hide DEM behind previous one</source>
         <translation>Nascondi DEM dietro quello precedente</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="171"/>
+        <location filename="../dem/IDemList.ui" line="178"/>
         <source>Move down</source>
         <translation>Muovi giù</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="174"/>
+        <location filename="../dem/IDemList.ui" line="181"/>
         <source>Show DEM on top of next one</source>
         <translation>Mostra DEM sopra al successivo</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="183"/>
+        <location filename="../dem/IDemList.ui" line="190"/>
         <source>Reload DEM</source>
         <translation>Ricarica DEM</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="199"/>
+        <source>Clear Filter</source>
+        <translation type="unfinished">Cancella filtro</translation>
     </message>
 </context>
 <context>
@@ -8792,32 +8802,36 @@ Nome file: %1</translation>
         <translation>Cambia l&apos;opacità degli oggetti GIS sulla mappa.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="66"/>
         <source>Filter</source>
-        <translation>Filtro</translation>
+        <translation type="vanished">Filtro</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="115"/>
+        <location filename="../gis/IGisWorkspace.ui" line="66"/>
+        <source>Filter: Start to type and the list will be reduced to matching items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="111"/>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="127"/>
+        <location filename="../gis/IGisWorkspace.ui" line="123"/>
         <source>Clear Filter</source>
         <translation>Cancella filtro</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="136"/>
+        <location filename="../gis/IGisWorkspace.ui" line="132"/>
         <source>Setup Filter</source>
         <translation>Modifica filtro</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="144"/>
+        <location filename="../gis/IGisWorkspace.ui" line="140"/>
         <source>name only</source>
         <translation type="unfinished">Solo nome</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="152"/>
+        <location filename="../gis/IGisWorkspace.ui" line="148"/>
         <source>complete text</source>
         <translation type="unfinished">Testo completo</translation>
     </message>
@@ -9415,7 +9429,7 @@ Nome file: %1</translation>
         <translation type="vanished">Per aggiungere una mappa usa &lt;b&gt;File-&gt;Modifica percorso mappe&lt;/b&gt;.  O clicca &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;qui&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="116"/>
+        <location filename="../map/IMapList.ui" line="123"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
         <translation>Utilizzare il menù contestuale (tasto destro del mouse sulla voce di) per attivare una mappa. Usa il drag-n-drop per spostare la mappa attivata sull&apos;ordine di disegno. </translation>
     </message>
@@ -9426,39 +9440,49 @@ I don&apos;t want to read the documentation!</source>
 Non ho voglia di leggere la documentazione!</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="103"/>
+        <location filename="../map/IMapList.ui" line="35"/>
+        <source>Filter: Start to type and the list will be reduced to matching items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="110"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="141"/>
+        <location filename="../map/IMapList.ui" line="148"/>
         <source>Activate</source>
         <translation>Attivato</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="150"/>
+        <location filename="../map/IMapList.ui" line="157"/>
         <source>Move Up</source>
         <translation>Muovi su</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="153"/>
+        <location filename="../map/IMapList.ui" line="160"/>
         <source>Hide map behind previous map</source>
         <translation>Nascondi la mappa sotto la precedente</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="162"/>
+        <location filename="../map/IMapList.ui" line="169"/>
         <source>Move down</source>
         <translation>Muovi giù</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="165"/>
+        <location filename="../map/IMapList.ui" line="172"/>
         <source>Show map on top of next map</source>
         <translation>Visualizza la mappa sopra la successiva</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="174"/>
+        <location filename="../map/IMapList.ui" line="181"/>
         <source>Reload Maps</source>
         <translation>Ricarica la lista mappe</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="190"/>
+        <source>Clear Filter</source>
+        <translation type="unfinished">Cancella filtro</translation>
     </message>
 </context>
 <context>

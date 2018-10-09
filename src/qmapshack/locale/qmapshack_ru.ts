@@ -429,18 +429,18 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDemList</name>
     <message>
-        <location filename="../dem/CDemList.cpp" line="219"/>
+        <location filename="../dem/CDemList.cpp" line="221"/>
         <source>Deactivate</source>
         <translatorcomment>Где вы хотите хранить высотные данные?</translatorcomment>
         <translation>Деактивировать</translation>
     </message>
     <message>
-        <location filename="../dem/CDemList.cpp" line="219"/>
+        <location filename="../dem/CDemList.cpp" line="221"/>
         <source>Activate</source>
         <translation>Активировать</translation>
     </message>
     <message>
-        <location filename="../dem/CDemList.cpp" line="256"/>
+        <location filename="../dem/CDemList.cpp" line="258"/>
         <source>Where do you want to store DEMs?</source>
         <translation>Где вы хотите хранить высотные данные?</translation>
     </message>
@@ -3493,17 +3493,17 @@ Fall back to internal types.</source>
 <context>
     <name>CMapList</name>
     <message>
-        <location filename="../map/CMapList.cpp" line="224"/>
+        <location filename="../map/CMapList.cpp" line="226"/>
         <source>Deactivate</source>
         <translation>Деактивировать</translation>
     </message>
     <message>
-        <location filename="../map/CMapList.cpp" line="224"/>
+        <location filename="../map/CMapList.cpp" line="226"/>
         <source>Activate</source>
         <translation>Активировать</translation>
     </message>
     <message>
-        <location filename="../map/CMapList.cpp" line="255"/>
+        <location filename="../map/CMapList.cpp" line="257"/>
         <source>Where do you want to store maps?</source>
         <translation>Где вы хотите хранить карты?</translation>
     </message>
@@ -7016,44 +7016,54 @@ I don&apos;t want to read the documentation!</source>
         <translation type="vanished">Чтобы добавить файлы с высотными данными, использовать &lt;b&gt;Файл-&gt;Настройка пути к ЦМР&lt;/b&gt;. Или нажать &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;здесь&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="112"/>
+        <location filename="../dem/IDemList.ui" line="35"/>
+        <source>Filter: Start to type and the list will be reduced to matching items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="119"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
         <translation>Для добавления файлов с высотными данными используйте &lt;a href=&apos;DemFolders&apos;&gt;Файл-&gt;Настройка пути к ЦМР&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="125"/>
+        <location filename="../dem/IDemList.ui" line="132"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
         <translation>Использовать контекстное меню (нажать правой кнопкой мышки на элемент), чтобы активировать файл. Использовать перетаскивание мышкой, чтобы переместить активированный файл в порядке обработки.</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="150"/>
+        <location filename="../dem/IDemList.ui" line="157"/>
         <source>Activate</source>
         <translation>Активировать</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="159"/>
+        <location filename="../dem/IDemList.ui" line="166"/>
         <source>Move Up</source>
         <translation>Переместить вверх</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="162"/>
+        <location filename="../dem/IDemList.ui" line="169"/>
         <source>Hide DEM behind previous one</source>
         <translation>Скрыть ЦМР за предыдущей</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="171"/>
+        <location filename="../dem/IDemList.ui" line="178"/>
         <source>Move down</source>
         <translation>Переместить вниз</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="174"/>
+        <location filename="../dem/IDemList.ui" line="181"/>
         <source>Show DEM on top of next one</source>
         <translation>Показать ЦМР над следующей</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="183"/>
+        <location filename="../dem/IDemList.ui" line="190"/>
         <source>Reload DEM</source>
         <translation>Перезагрузить ЦМР</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="199"/>
+        <source>Clear Filter</source>
+        <translation type="unfinished">Очистить фильтр</translation>
     </message>
 </context>
 <context>
@@ -8814,32 +8824,36 @@ Filename: %1</source>
         <translation>Изменить прозрачность всех элементов ГИС на карте.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="66"/>
         <source>Filter</source>
-        <translation>Фильтр</translation>
+        <translation type="vanished">Фильтр</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="115"/>
+        <location filename="../gis/IGisWorkspace.ui" line="66"/>
+        <source>Filter: Start to type and the list will be reduced to matching items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="111"/>
         <source>Name</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="127"/>
+        <location filename="../gis/IGisWorkspace.ui" line="123"/>
         <source>Clear Filter</source>
         <translation>Очистить фильтр</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="136"/>
+        <location filename="../gis/IGisWorkspace.ui" line="132"/>
         <source>Setup Filter</source>
         <translation>Настройка фильтра</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="144"/>
+        <location filename="../gis/IGisWorkspace.ui" line="140"/>
         <source>name only</source>
         <translation>только имя</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="152"/>
+        <location filename="../gis/IGisWorkspace.ui" line="148"/>
         <source>complete text</source>
         <translation>полный текст</translation>
     </message>
@@ -9438,7 +9452,7 @@ Filename: %1</source>
         <translation type="vanished">Чтобы добавить карты, использовать &lt;b&gt;Файл-&gt;Настройка пути к картам&lt;/b&gt;. Или нажать &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;здесь&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="116"/>
+        <location filename="../map/IMapList.ui" line="123"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
         <translation>Использовать контекстное меню (нажать правой кнопкой мышки на элемент), чтобы активировать карту. Использовать перетаскивание мышкой, для перемещения активированной карты в порядке рисования.</translation>
     </message>
@@ -9449,39 +9463,49 @@ I don&apos;t want to read the documentation!</source>
 Мне не хочется читать документацию!</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="103"/>
+        <location filename="../map/IMapList.ui" line="35"/>
+        <source>Filter: Start to type and the list will be reduced to matching items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="110"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
         <translation>Для добавления карт используйте &lt;a href=&apos;MapFolders&apos;&gt;Файл-&gt;Настройка пути к картам&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="141"/>
+        <location filename="../map/IMapList.ui" line="148"/>
         <source>Activate</source>
         <translation>Активировать</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="150"/>
+        <location filename="../map/IMapList.ui" line="157"/>
         <source>Move Up</source>
         <translation>Переместить вверх</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="153"/>
+        <location filename="../map/IMapList.ui" line="160"/>
         <source>Hide map behind previous map</source>
         <translation>Скрыть карту за предыдущей картой</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="162"/>
+        <location filename="../map/IMapList.ui" line="169"/>
         <source>Move down</source>
         <translation>Переместить вниз</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="165"/>
+        <location filename="../map/IMapList.ui" line="172"/>
         <source>Show map on top of next map</source>
         <translation>Показать карту над следующей картой</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="174"/>
+        <location filename="../map/IMapList.ui" line="181"/>
         <source>Reload Maps</source>
         <translation>Перезагрузить карты</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="190"/>
+        <source>Clear Filter</source>
+        <translation type="unfinished">Очистить фильтр</translation>
     </message>
 </context>
 <context>

@@ -180,6 +180,7 @@ set( SRCS
     gis/trk/filter/CFilterSpeed.cpp
     gis/trk/filter/CFilterSpeedConst.cpp
     gis/trk/filter/CFilterSpeedCycle.cpp
+    gis/trk/filter/CFilterSpeedCycleEnergy.cpp
     gis/trk/filter/CFilterSpeedHike.cpp
     gis/trk/filter/CFilterSplitSegment.cpp
     gis/trk/filter/CFilterSubPt2Pt.cpp
@@ -503,6 +504,7 @@ set( HDRS
     gis/trk/filter/CFilterSpeed.h
     gis/trk/filter/CFilterSpeedConst.h
     gis/trk/filter/CFilterSpeedCycle.h
+    gis/trk/filter/CFilterSpeedCycleEnergy.h
     gis/trk/filter/CFilterSpeedHike.h
     gis/trk/filter/CFilterSplitSegment.h
     gis/trk/filter/CFilterSubPt2Pt.h
@@ -734,6 +736,7 @@ set( UIS
     gis/trk/filter/IFilterSpeed.ui
     gis/trk/filter/IFilterSpeedConst.ui
     gis/trk/filter/IFilterSpeedCycle.ui
+    gis/trk/filter/IFilterSpeedCycleEnergy.ui
     gis/trk/filter/IFilterSpeedHike.ui
     gis/trk/filter/IFilterSplitSegment.ui
     gis/trk/filter/IFilterSubPt2Pt.ui

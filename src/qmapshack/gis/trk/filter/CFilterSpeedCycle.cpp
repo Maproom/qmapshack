@@ -18,8 +18,7 @@
 
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSpeedCycle.h"
-
-#include <QtWidgets>
+#include "gis/trk/filter/CFilterSpeedCycleEnergy.h"
 
 CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     : QWidget(parent), trk(trk), noOfFixTypes(4), noOfCustomTypes(3)
@@ -87,6 +86,19 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     connect(spinMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMaxSpeed(double)));
     connect(spinSlopeAtMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetSlopeAtMaxSpeed(double)));
     connect(pushSetMinMaxSlope, SIGNAL(clicked(bool)), this, SLOT(slotSetMinMaxSlopes(bool)));
+    connect(pushEnergy, SIGNAL(clicked(bool)), this, SLOT(slotCalculateEnergy(bool)));
+
+    energy.totalWeight = 100;
+    energy.windDragCoeff = 0.85;
+    energy.frontalArea = 0.42;
+    energy.airDensity = 1.2;
+    energy.rollingCoeff = 0.005;
+    energy.windSpeed = 0;
+    energy.muscleCoeff = 0.23;
+    energy.crankLength = 170;
+    energy.pedalCadence = 75;
+    energy.pedalRangeEff = 70;
+    energy.totalEnergyKcal = 0;
 }
 
 void CFilterSpeedCycle::loadSettings(QSettings& cfg)
@@ -134,6 +146,11 @@ void CFilterSpeedCycle::saveSettings(QSettings& cfg)
 void CFilterSpeedCycle::apply(CGisItemTrk& trk)
 {
     trk.filterSpeed(cyclingTypes[comboCyclingType->currentIndex()]);
+
+    trk.filterSpeedCycleEnergy(energy);
+    qDebug() << "filterSpeedCycleEnergy=" << energy.totalEnergyKcal;
+    QString energyStr =QString(tr("Energy=%1 kcal")).arg(energy.totalEnergyKcal);
+    labelEnergy->setText(energyStr);
 }
 
 void CFilterSpeedCycle::slotSetCyclingType(int type)
@@ -224,5 +241,19 @@ void CFilterSpeedCycle::slotSetMinMaxSlopes(bool)
     {
         spinSlopeAtMinSpeed->setValue(maxSlope);
         spinSlopeAtMaxSpeed->setValue(minSlope);
+    }
+}
+void CFilterSpeedCycle::slotCalculateEnergy(bool)
+{
+    CFilterSpeedCycleEnergy energyDlg(this, trk, energy);
+
+
+    if((energyDlg.exec() == QDialog::Accepted))
+    {
+        qDebug() << "ok Pushed";
+        qDebug() << "filterSpeedCycleEnergy=" << energy.totalEnergyKcal;
+        QString energyStr =QString(tr("Energy=%1 kcal")).arg(energy.totalEnergyKcal);
+        labelEnergy->setText(energyStr);
+
     }
 }

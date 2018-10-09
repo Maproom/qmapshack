@@ -20,6 +20,7 @@
 #define CFILTERSPEEDCYCLE_H
 
 #include "ui_IFilterSpeedCycle.h"
+//#include "gis/trk/filter/CFilterSpeedCycleEnergy.h"
 
 class CGisItemTrk;
 class QSettings;
@@ -39,6 +40,21 @@ public:
         qreal slopeAtMaxSpeed;
     };
 
+    struct cycling_energy_t
+    {
+        qreal totalWeight;
+        qreal windDragCoeff;
+        qreal frontalArea;
+        qreal airDensity;
+        qreal rollingCoeff;
+        qreal windSpeed;
+        qreal muscleCoeff;
+        qreal crankLength;
+        qreal pedalCadence;
+        qreal pedalRangeEff;
+        qreal totalEnergyKcal;
+    };
+
     CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk);
     virtual ~CFilterSpeedCycle() = default;
 
@@ -54,6 +70,7 @@ private slots:
     void slotSetMaxSpeed(double speed);
     void slotSetSlopeAtMaxSpeed(double slope);
     void slotSetMinMaxSlopes(bool);
+    void slotCalculateEnergy(bool);
 
 private:
     const CGisItemTrk &trk; // Needed for filterGetSlopeLimits
@@ -61,6 +78,8 @@ private:
     const qint32 noOfCustomTypes;
     const QList<cycling_type_t> cyclingTypeDefaults;
     QList <cycling_type_t> cyclingTypes;
+
+    cycling_energy_t energy;
 };
 
 #endif //CFILTERSPEEDCYCLE_H

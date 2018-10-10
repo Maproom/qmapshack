@@ -86,7 +86,8 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     connect(spinMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMaxSpeed(double)));
     connect(spinSlopeAtMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetSlopeAtMaxSpeed(double)));
     connect(pushSetMinMaxSlope, SIGNAL(clicked(bool)), this, SLOT(slotSetMinMaxSlopes(bool)));
-    connect(pushEnergy, SIGNAL(clicked(bool)), this, SLOT(slotCalculateEnergy(bool)));
+
+    connect(toolApplyEnergy, &QToolButton::clicked, this, &CFilterSpeedCycle::slotEnergy);
 
     energy.totalWeight = 100;
     energy.windDragCoeff = 0.85;
@@ -148,9 +149,7 @@ void CFilterSpeedCycle::apply(CGisItemTrk& trk)
     trk.filterSpeed(cyclingTypes[comboCyclingType->currentIndex()]);
 
     trk.filterSpeedCycleEnergy(energy);
-    qDebug() << "filterSpeedCycleEnergy=" << energy.totalEnergyKcal;
-    QString energyStr =QString(tr("Energy=%1 kcal")).arg(energy.totalEnergyKcal);
-    labelEnergy->setText(energyStr);
+    insertEnergy();
 }
 
 void CFilterSpeedCycle::slotSetCyclingType(int type)
@@ -243,17 +242,34 @@ void CFilterSpeedCycle::slotSetMinMaxSlopes(bool)
         spinSlopeAtMaxSpeed->setValue(minSlope);
     }
 }
-void CFilterSpeedCycle::slotCalculateEnergy(bool)
+
+void CFilterSpeedCycle::slotEnergy()
 {
-    CFilterSpeedCycleEnergy energyDlg(this, trk, energy);
-
-
-    if((energyDlg.exec() == QDialog::Accepted))
+    if (comboCyclingType->currentIndex() < noOfFixTypes)
     {
-        qDebug() << "ok Pushed";
-        qDebug() << "filterSpeedCycleEnergy=" << energy.totalEnergyKcal;
-        QString energyStr =QString(tr("Energy=%1 kcal")).arg(energy.totalEnergyKcal);
-        labelEnergy->setText(energyStr);
+        trk.filterSpeedCycleEnergy(energy);
+        insertEnergy();
+    }
+    else
+    {
+        CFilterSpeedCycleEnergy energyDlg(this, trk, energy);
+        if((energyDlg.exec() == QDialog::Accepted))
+        {
+            insertEnergy();
+        }
+    }
+}
 
+void CFilterSpeedCycle::insertEnergy()
+{
+    QString energyStr = QString(tr("Energy=%1kcal")).arg(energy.totalEnergyKcal, 0, 'f', 0);
+    labelEnergy->setText(energyStr);
+    if (comboCyclingType->currentIndex() < noOfFixTypes)
+    {
+        toolApplyEnergy->setDisabled(true);
+    }
+    else
+    {
+        toolApplyEnergy->setDisabled(false);
     }
 }

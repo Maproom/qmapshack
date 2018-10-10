@@ -584,8 +584,73 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
     changed(tr("Start Point moved to: ") + wptName.toLatin1(), "://icons/48x48/FilterChangeStartPoint.png");
 }
 
+// @brief Used to create a new track from a part of an existing track
+//CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const CTrackData &srctrk, IGisProject *project);
+
+
 void CGisItemTrk::filterLoopsCut(qreal dist)
 {
+    IGisProject * project = CGisWorkspace::self().selectProject();
+    if(nullptr == project)
+    {
+        return;
+    }
+
+    CTrackData::trkpt_t tailPt;
+
+    int part = 0;
+    bool tailFound = false;
+
+    for(const CTrackData::trkpt_t& headPt : trk)
+    {
+        if(headPt.isHidden())
+        {
+            continue;
+        }
+
+        if (!tailFound)
+        {
+            tailPt = headPt;
+            tailFound = true;
+        }
+
+        bool startPhase = true;
+
+        for( int i = headPt.idxTotal ; i >= tailPt.idxTotal ; i--)
+        {
+            const CTrackData::trkpt_t *scannedPt = trk.getTrkPtByTotalIndex(i);
+
+            if (startPhase)
+            {
+                qreal d = GPS_Math_DistanceQuick(scannedPt->lon * DEG_TO_RAD, scannedPt->lat* DEG_TO_RAD, headPt.lon* DEG_TO_RAD, headPt.lat* DEG_TO_RAD);
+                if (d > dist)
+                {
+                    startPhase = false;
+                }
+            }
+            else
+            {
+
+                if (scannedPt->isHidden())
+                {
+                    continue;
+                }
+                qreal d = GPS_Math_DistanceQuick(scannedPt->lon * DEG_TO_RAD, scannedPt->lat* DEG_TO_RAD, headPt.lon* DEG_TO_RAD, headPt.lat* DEG_TO_RAD);
+                if (d < dist)
+                {
+                    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), tailPt.idxTotal, headPt.idxTotal, trk, project);
+                    part++;
+                    tailPt = headPt;
+                    startPhase = true;
+
+                }
+            }
+        }
+    }
+
+    // last part : no loop detected but this last part should be copied, too
+    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), tailPt.idxTotal, trk.segs.last().pts.last().idxTotal, trk, project);
+
     QString val, unit;
     IUnit::self().meter2distance(dist, val, unit);
     changed(tr("Cut track loops with a distance criteria of (%1%2)").arg(val).arg(unit), "://icons/48x48/FilterLoopsCut.png");

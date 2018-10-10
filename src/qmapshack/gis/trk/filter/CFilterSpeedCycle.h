@@ -70,9 +70,11 @@ private slots:
     void slotSetMaxSpeed(double speed);
     void slotSetSlopeAtMaxSpeed(double slope);
     void slotSetMinMaxSlopes(bool);
-    void slotCalculateEnergy(bool);
+    void slotEnergy();
 
 private:
+    void insertEnergy();
+
     const CGisItemTrk &trk; // Needed for filterGetSlopeLimits
     const qint32 noOfFixTypes;
     const qint32 noOfCustomTypes;

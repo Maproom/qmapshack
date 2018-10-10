@@ -100,6 +100,8 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     energy.pedalCadence = 75;
     energy.pedalRangeEff = 70;
     energy.totalEnergyKcal = 0;
+    trk.filterSpeedCycleEnergy(energy);
+    insertEnergy();
 }
 
 void CFilterSpeedCycle::loadSettings(QSettings& cfg)

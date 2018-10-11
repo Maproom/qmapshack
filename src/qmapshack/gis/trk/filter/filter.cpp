@@ -372,7 +372,7 @@ void CGisItemTrk::filterSpeedCycleEnergy(CFilterSpeedCycle::cycling_energy_t &en
 //    qreal pedalCadence = 75;
 //    qreal pedalRangeEff = 70;
 
-    qreal totalWeight = energy.totalWeight;
+    qreal totalWeight = energy.personalWeight + energy.bikeWeight;
     qreal windDragCoeff = energy.windDragCoeff;
     qreal frontalArea = energy.frontalArea;
     qreal airDensity = energy.airDensity;

@@ -89,7 +89,8 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
 
     connect(toolApplyEnergy, &QToolButton::clicked, this, &CFilterSpeedCycle::slotEnergy);
 
-    energy.totalWeight = 100;
+    energy.personalWeight = 75;
+    energy.bikeWeight = 15;
     energy.windDragCoeff = 0.85;
     energy.frontalArea = 0.42;
     energy.airDensity = 1.2;

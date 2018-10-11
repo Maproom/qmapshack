@@ -7018,7 +7018,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../dem/IDemList.ui" line="35"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр: начните вводить, и список будет уменьшен до совпадающих элементов.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="119"/>
@@ -7063,7 +7063,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../dem/IDemList.ui" line="199"/>
         <source>Clear Filter</source>
-        <translation type="unfinished">Очистить фильтр</translation>
+        <translation>Очистить фильтр</translation>
     </message>
 </context>
 <context>
@@ -8830,7 +8830,7 @@ Filename: %1</source>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="66"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр: начните вводить, и список будет уменьшен до совпадающих элементов.</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="111"/>
@@ -9465,7 +9465,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapList.ui" line="35"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр: начните вводить, и список будет уменьшен до совпадающих элементов.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="110"/>
@@ -9505,7 +9505,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapList.ui" line="190"/>
         <source>Clear Filter</source>
-        <translation type="unfinished">Очистить фильтр</translation>
+        <translation>Очистить фильтр</translation>
     </message>
 </context>
 <context>

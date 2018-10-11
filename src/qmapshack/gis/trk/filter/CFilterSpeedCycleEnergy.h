@@ -19,8 +19,18 @@ public:
 
 private slots:
     void slotApply(bool);
+    void slotSetWeight(double);
+
 
 private:
+
+    struct wind_speed_t
+    {
+        QString bft;
+        qreal kmh;
+    };
+    const QList <wind_speed_t> windSpeeds;
+
     const CGisItemTrk &trk;
     CFilterSpeedCycle::cycling_energy_t &energy;
 };

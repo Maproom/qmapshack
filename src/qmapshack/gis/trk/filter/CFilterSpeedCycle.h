@@ -42,7 +42,8 @@ public:
 
     struct cycling_energy_t
     {
-        qreal totalWeight;
+        qreal personalWeight;
+        qreal bikeWeight;
         qreal windDragCoeff;
         qreal frontalArea;
         qreal airDensity;

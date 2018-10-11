@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>953</width>
-    <height>140</height>
+    <width>891</width>
+    <height>143</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,9 +54,6 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_2"/>
-       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
@@ -67,30 +64,8 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
-       </item>
-       <item row="0" column="3">
-        <widget class="QLineEdit" name="lineEdit_5"/>
-       </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="comboBox">
-         <item>
-          <property name="text">
-           <string>-4 Tailwind</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>0 No Wind</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>+4 Headwind</string>
-          </property>
-         </item>
-        </widget>
+        <widget class="QComboBox" name="comboWindSpeed"/>
        </item>
        <item row="1" column="2">
         <widget class="QLabel" name="label_9">
@@ -102,8 +77,60 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="spinPersonalWeight">
+         <property name="suffix">
+          <string>kg</string>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="minimum">
+          <double>20.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>250.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>75.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QDoubleSpinBox" name="spinBikeWeight">
+         <property name="suffix">
+          <string>kg</string>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="minimum">
+          <double>5.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>35.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>15.000000000000000</double>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="3">
-        <widget class="QLineEdit" name="lineEdit_6"/>
+        <widget class="QDoubleSpinBox" name="spinWindSpeed">
+         <property name="suffix">
+          <string>km/h</string>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QDoubleSpinBox" name="spinAirDensity">
+         <property name="suffix">
+          <string>kg/m3</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -147,7 +174,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="labelTotalWeightRes">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -157,7 +184,7 @@
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="labelTotalWeight">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Personal and Bike weight.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>

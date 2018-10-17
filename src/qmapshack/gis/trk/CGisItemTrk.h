@@ -539,11 +539,11 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
-    void filterSpeedCycleEnergy(CFilterSpeedCycle::cycling_energy_t &en) const;
+    void filterSpeedCycleEnergy(CFilterSpeedCycle::energy_set_t &en) const;
     void filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType);
     void filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType);
 
-    void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const;
+    void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope);
 
     void filterTerrainSlope();
     void filterReplaceElevation(CCanvas *canvas);

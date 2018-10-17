@@ -16,43 +16,37 @@
 
 **********************************************************************************************/
 
+#ifndef CRTGPS_H
+#define CRTGPS_H
+
 #include "realtime/IRtSource.h"
-#include "realtime/opensky/CRtOpenSky.h"
-#include "realtime/gps/CRtGps.h"
 
-#include <QtWidgets>
+#include <QPointer>
 
-QMutex IRtSource::mutex(QMutex::Recursive);
+class CRtGpsInfo;
 
-IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget *parent)
-    : QObject(parent)
-    , QTreeWidgetItem(parent)
-    , type(type)
-    , singleInstanceOnly(singleInstanceOnly)
+class CRtGps : public IRtSource
 {
-}
+    Q_OBJECT
+public:
+    CRtGps(QTreeWidget * parent);
+    virtual ~CRtGps() = default;
 
-void IRtSource::loadSettings(QSettings& cfg)
-{
-    setCheckState(eColumnCheckBox, Qt::CheckState(cfg.value("checkState", Qt::Checked).toInt()));
-}
+    void registerWithTreeWidget() override;
 
-void IRtSource::saveSettings(QSettings& cfg) const
-{
-    cfg.setValue("checkState", checkState(eColumnCheckBox));
-}
+    QString getDescription() const override;
+    void loadSettings(QSettings& cfg) override;
+    void saveSettings(QSettings& cfg) const override;
 
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
 
-IRtSource* IRtSource::create(int type, QTreeWidget * parent)
-{
-    switch(type)
-    {
-    case eTypeOpenSky:
-        return new CRtOpenSky(parent);
+    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) override;
 
-    case eTypeGps:
-        return new CRtGps(parent);
-    }
+    static const QString strIcon;
 
-    return nullptr;
-}
+private:
+    QPointer<CRtGpsInfo> info;
+};
+
+#endif //CRTGPS_H
+

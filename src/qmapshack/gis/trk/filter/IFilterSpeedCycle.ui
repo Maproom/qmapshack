@@ -98,15 +98,18 @@
          </item>
          <item>
           <widget class="QLabel" name="labelEnergy">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Der Energieverbrauch in Kilokalorien für die Durchführung des Tracks abhängig von der Geschwindigkeit, Steigung und den Energieparametern.&lt;/p&gt;&lt;p&gt;The energy use (consumption) in kilocalories for the performance of the track depending on the speed, slope and energy parameters.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
-            <string>Energy=?</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Energy Use ?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QToolButton" name="toolApplyEnergy">
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Compute Energy consuption for the given track, speed and slopes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Änderung der Parameter für die Berechnung des Energieverbrauchs bei den benutzerspezifischen Profiltypen.&lt;/p&gt;&lt;p&gt;Changing the parameters for calculating the energy use (consumption) for the custom profile types.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
             <string>...</string>

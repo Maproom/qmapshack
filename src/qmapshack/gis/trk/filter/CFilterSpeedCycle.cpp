@@ -93,7 +93,7 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     for (int i = 0; i < noOfFixTypes; ++i)
     {
         const energy_set_t &energySetDefault = energySetDefaults[i];
-        energySet.personalWeight = energySetDefault.personalWeight;
+        energySet.driverWeight = energySetDefault.driverWeight;
         energySet.bikeWeight = energySetDefault.bikeWeight;
         energySet.airDensity = energySetDefault.airDensity;
         energySet.windSpeedIndex = energySetDefault.windSpeedIndex;
@@ -149,7 +149,7 @@ void CFilterSpeedCycle::loadSettings(QSettings& cfg)
         const energy_set_t &energyDefault = energySetDefaults[noOfFixTypes + i];
         cfg.setArrayIndex(i);
 
-        energySet.personalWeight = cfg.value("personalWeight", energyDefault.personalWeight).toDouble();
+        energySet.driverWeight = cfg.value("personalWeight", energyDefault.driverWeight).toDouble();
         energySet.bikeWeight = cfg.value("bikeWeight", energyDefault.bikeWeight).toDouble();
         energySet.airDensity = cfg.value("airDensity", energyDefault.airDensity).toDouble();
         energySet.windSpeedIndex = cfg.value("windSpeedIndex", energyDefault.windSpeedIndex).toInt();
@@ -194,7 +194,7 @@ void CFilterSpeedCycle::saveSettings(QSettings& cfg)
     {
         const energy_set_t &energySet = energySets[noOfFixTypes + i];
         cfg.setArrayIndex(i);
-        cfg.setValue("personalWeight", energySet.personalWeight);
+        cfg.setValue("personalWeight", energySet.driverWeight);
         cfg.setValue("bikeWeight", energySet.bikeWeight);
         cfg.setValue("airDensity", energySet.airDensity);
         cfg.setValue("windSpeedIndex", energySet.windSpeedIndex);
@@ -215,7 +215,7 @@ void CFilterSpeedCycle::saveSettings(QSettings& cfg)
 void CFilterSpeedCycle::apply(CGisItemTrk& trk)
 {
     trk.filterSpeed(cyclingTypes[comboCyclingType->currentIndex()]);
-    computeEnergy();
+    updateUi();
 }
 
 void CFilterSpeedCycle::slotSetCyclingType(int type)
@@ -248,7 +248,7 @@ void CFilterSpeedCycle::slotSetCyclingType(int type)
         frameCycling->setEnabled(true);
     }
 
-    computeEnergy();
+    updateUi();
 }
 
 void CFilterSpeedCycle::slotSetPlainSpeed(double speed)
@@ -324,7 +324,7 @@ void CFilterSpeedCycle::slotApplyEnergy()
     }
 }
 
-void CFilterSpeedCycle::computeEnergy()
+void CFilterSpeedCycle::updateUi()
 {
     qint32 type = comboCyclingType->currentIndex();
     if (trk.isTrkTimeValid())

@@ -28,8 +28,8 @@ class QSettings;
 class CFilterSpeedCycle : public QWidget, private Ui::IFilterSpeedCycle
 {
     Q_OBJECT
-public:
 
+public:
     struct cycling_type_t
     {
         QString name;
@@ -42,7 +42,7 @@ public:
 
     struct energy_set_t
     {
-        qreal personalWeight;
+        qreal driverWeight;
         qreal bikeWeight;
         qreal airDensity;
         qint32 windSpeedIndex;
@@ -59,7 +59,7 @@ public:
         qreal windResistanceForce;
         qreal gravitySlopeForce;
         qreal rollingResistanceForce;
-        qreal totalForce;
+        qreal sumForce;
         qreal totalPowerTime;
         qreal totalPower;
         qreal totalPositivePower;
@@ -75,6 +75,7 @@ public:
     void loadSettings(QSettings &cfg);
     void saveSettings(QSettings &cfg);
     void apply(CGisItemTrk& trk);
+    void updateUi();
 
 private slots:
     void slotSetCyclingType(int type);
@@ -87,7 +88,6 @@ private slots:
     void slotApplyEnergy();
 
 private:
-    void computeEnergy();
     void insertEnergy(bool valid);
 
     /*const*/ CGisItemTrk &trk; // Needed for filterGetSlopeLimits

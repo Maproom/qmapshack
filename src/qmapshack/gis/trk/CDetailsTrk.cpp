@@ -492,6 +492,12 @@ void CDetailsTrk::updateData()
         filterSpeed->updateUi();
     }
 
+    CFilterSpeedCycle *filterSpeedCycle = tabWidget->findChild<CFilterSpeedCycle *>("IFilterSpeedCycle");
+    if(nullptr != filterSpeed)
+    {
+        filterSpeedCycle->updateUi();
+    }
+
     CFilterChangeStartPoint *filterChangeStartPoint = tabWidget->findChild<CFilterChangeStartPoint *>("IFilterChangeStartPoint");
     if(nullptr != filterChangeStartPoint)
     {

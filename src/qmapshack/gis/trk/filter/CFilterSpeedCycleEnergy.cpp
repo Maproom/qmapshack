@@ -47,9 +47,9 @@ CFilterSpeedCycleEnergy::CFilterSpeedCycleEnergy(QWidget *parent, /*const*/ CGis
 
     tmpEnergySet = energySet; // Changes will be made first in tmpEnergySet before saving back on OK button
 
-    spinPersonalWeight->setValue(tmpEnergySet.personalWeight);
+    spinDriverWeight->setValue(tmpEnergySet.driverWeight);
     spinBikeWeight->setValue(tmpEnergySet.bikeWeight);
-    labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.personalWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
+    labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.driverWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
 
     for (QList<wind_speed_t>::const_iterator it = windSpeeds.constBegin(); it != windSpeeds.constEnd(); ++it)
     {
@@ -104,7 +104,7 @@ CFilterSpeedCycleEnergy::CFilterSpeedCycleEnergy(QWidget *parent, /*const*/ CGis
 
     connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(slotOk(bool)));
     connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(slotApply(bool)));
-    connect(spinPersonalWeight, SIGNAL(valueChanged(double)), this, SLOT(slotSetWeight(double)));
+    connect(spinDriverWeight, SIGNAL(valueChanged(double)), this, SLOT(slotSetWeight(double)));
     connect(spinBikeWeight, SIGNAL(valueChanged(double)), this, SLOT(slotSetWeight(double)));
     connect(comboWindSpeed, SIGNAL(activated(int)), this, SLOT(slotSetComboWindSpeed(int)));
     connect(spinWindSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetWindSpeed(double)));
@@ -137,12 +137,12 @@ void CFilterSpeedCycleEnergy::slotApply(bool)
 {
     trk.filterSpeedCycleEnergy(tmpEnergySet);
 
-    labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.personalWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
+    labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.driverWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
 
     labelWindResistForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.windResistanceForce, 0, 'f', 1));
     labelRollingResistForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.rollingResistanceForce, 0, 'f', 1));
     labelGravitySlopeForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.gravitySlopeForce, 0, 'f', 1));
-    labelTotalForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.totalForce, 0, 'f', 1));
+    labelSumForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.sumForce, 0, 'f', 1));
 
     QString val, unit;
     IUnit::self().seconds2time(tmpEnergySet.totalPowerTime, val, unit);
@@ -160,9 +160,9 @@ void CFilterSpeedCycleEnergy::slotApply(bool)
 
 void CFilterSpeedCycleEnergy::slotSetWeight(double)
 {
-    tmpEnergySet.personalWeight = spinPersonalWeight->value();
+    tmpEnergySet.driverWeight = spinDriverWeight->value();
     tmpEnergySet.bikeWeight = spinBikeWeight->value();
-    labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.personalWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
+    labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.driverWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
 }
 
 void CFilterSpeedCycleEnergy::slotSetComboWindSpeed(qint32 index)

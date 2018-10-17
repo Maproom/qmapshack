@@ -292,6 +292,9 @@ set( SRCS
     realtime/CRtWorkspace.cpp
     realtime/IRtRecord.cpp
     realtime/IRtSource.cpp
+    realtime/gps/CRtGps.cpp
+    realtime/gps/CRtGpsInfo.cpp
+    realtime/gps/CRtRfcomm.cpp
     realtime/opensky/CRtOpenSky.cpp
     realtime/opensky/CRtOpenSkyInfo.cpp
     realtime/opensky/CRtOpenSkyRecord.cpp
@@ -618,6 +621,9 @@ set( HDRS
     realtime/CRtWorkspace.h
     realtime/IRtRecord.h
     realtime/IRtSource.h
+    realtime/gps/CRtGps.h
+    realtime/gps/CRtGpsInfo.h
+    realtime/gps/CRtRfcomm.h
     realtime/opensky/CRtOpenSky.h
     realtime/opensky/CRtOpenSkyInfo.h
     realtime/opensky/CRtOpenSkyRecord.h
@@ -767,6 +773,7 @@ set( UIS
     print/IPrintDialog.ui
     realtime/IRtSelectSource.ui
     realtime/IRtWorkspace.ui
+    realtime/gps/IRtGpsInfo.ui
     realtime/opensky/IRtOpenSkyInfo.ui
     templates/Cycling_Tour_Summary.ui
     templates/Hiking_Tour_Summary.ui

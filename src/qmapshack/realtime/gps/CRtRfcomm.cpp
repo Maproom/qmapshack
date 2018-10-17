@@ -16,43 +16,13 @@
 
 **********************************************************************************************/
 
-#include "realtime/IRtSource.h"
-#include "realtime/opensky/CRtOpenSky.h"
-#include "realtime/gps/CRtGps.h"
+#include "realtime/gps/CRtRfcomm.h"
 
-#include <QtWidgets>
+#include <QtPositioning>
 
-QMutex IRtSource::mutex(QMutex::Recursive);
-
-IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget *parent)
-    : QObject(parent)
-    , QTreeWidgetItem(parent)
-    , type(type)
-    , singleInstanceOnly(singleInstanceOnly)
+CRtRfcomm::CRtRfcomm(QObject *parent)
+    : QGeoPositionInfoSource(parent)
 {
 }
 
-void IRtSource::loadSettings(QSettings& cfg)
-{
-    setCheckState(eColumnCheckBox, Qt::CheckState(cfg.value("checkState", Qt::Checked).toInt()));
-}
 
-void IRtSource::saveSettings(QSettings& cfg) const
-{
-    cfg.setValue("checkState", checkState(eColumnCheckBox));
-}
-
-
-IRtSource* IRtSource::create(int type, QTreeWidget * parent)
-{
-    switch(type)
-    {
-    case eTypeOpenSky:
-        return new CRtOpenSky(parent);
-
-    case eTypeGps:
-        return new CRtGps(parent);
-    }
-
-    return nullptr;
-}

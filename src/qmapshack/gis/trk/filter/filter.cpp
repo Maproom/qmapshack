@@ -423,7 +423,7 @@ void CGisItemTrk::filterSpeedCycleEnergy(CFilterSpeedCycle::energy_set_t &energy
     const qreal joule2Calor = 4.1868;
     const qreal gravityAccel = 9.81;
 
-    qreal totalWeight = energy.personalWeight + energy.bikeWeight;
+    qreal totalWeight = energy.driverWeight + energy.bikeWeight;
     qreal windDragCoeff = energy.windDragCoeff;
     qreal frontalArea = energy.frontalArea;
     qreal airDensity = energy.airDensity;
@@ -438,7 +438,7 @@ void CGisItemTrk::filterSpeedCycleEnergy(CFilterSpeedCycle::energy_set_t &energy
     energy.windResistanceForce = 0;
     energy.gravitySlopeForce = 0;
     energy.rollingResistanceForce = totalWeight * gravityAccel * rollingCoeff;
-    energy.totalForce = 0;
+    energy.sumForce = 0;
     energy.totalPowerTime = 0;
     energy.totalPower = 0;
     energy.totalPositivePower = 0;
@@ -489,7 +489,7 @@ void CGisItemTrk::filterSpeedCycleEnergy(CFilterSpeedCycle::energy_set_t &energy
         qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
         energy.windResistanceForce += windResistanceForce;
         energy.gravitySlopeForce += gravitySlopeForce;
-        energy.totalForce += windResistanceForce + gravitySlopeForce + energy.rollingResistanceForce;
+        energy.sumForce += windResistanceForce + gravitySlopeForce + energy.rollingResistanceForce;
 
         qreal power = (windResistanceForce * (speed + windSpeed)) + ((energy.rollingResistanceForce + gravitySlopeForce) * speed);
         energy.totalPower += power;
@@ -506,7 +506,7 @@ void CGisItemTrk::filterSpeedCycleEnergy(CFilterSpeedCycle::energy_set_t &energy
     }
     energy.windResistanceForce /= cntVisiblePoints;
     energy.gravitySlopeForce /= cntVisiblePoints;
-    energy.totalForce /= cntVisiblePoints;
+    energy.sumForce /= cntVisiblePoints;
 
     energy.powerTimeMovingRatio = energy.totalPowerTime / totalElapsedSecondsMoving;
 

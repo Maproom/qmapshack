@@ -41,7 +41,11 @@
         </widget>
        </item>
        <item row="8" column="1">
-        <widget class="QComboBox" name="comboGround"/>
+        <widget class="QComboBox" name="comboGround">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Untergrund&lt;/p&gt;&lt;p&gt;Werte für die Art des Untergrunds und der Bereifung für die Bestimmung des Rollwiderstandsbeiwerts.&lt;/p&gt;&lt;p&gt;Values for the type of ground surface and the tyres used to determine the rolling resistance coefficient.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </item>
        <item row="12" column="0">
         <widget class="QLabel" name="label_19">
@@ -62,6 +66,9 @@
        </item>
        <item row="8" column="3">
         <widget class="QDoubleSpinBox" name="spinRollingCoeff">
+         <property name="toolTip">
+          <string/>
+         </property>
          <property name="suffix">
           <string/>
          </property>
@@ -112,12 +119,16 @@
         </widget>
        </item>
        <item row="5" column="1">
-        <widget class="QComboBox" name="comboWindPosition"/>
+        <widget class="QComboBox" name="comboWindPosition">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Position im Wind&lt;/p&gt;&lt;p&gt;Werte für die Art der Sitzposition als Vorgabewerte für die Windangriffsfläche in m2 und der Luftwiderstandszahl (cw-Wert).&lt;/p&gt;&lt;p&gt;Values for the type of seat position as default values for the wind frontal area in m2 and the drag coefficient (cw value).&lt;/p&gt;&lt;p</string>
+         </property>
+        </widget>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_6">
          <property name="text">
-          <string>Air Density:</string>
+          <string>Air Density</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -162,7 +173,7 @@
        <item row="2" column="1">
         <widget class="QDoubleSpinBox" name="spinAirDensity">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Luftdichte in kg/m3. Die Luftdichte ist abhängig von barometrischen Luftdruck, Höhe Normalnull und Temperatur.&lt;br/&gt;Einige Beispiele:&lt;br/&gt;Meereshöhe: 1,226kg/m3&lt;br/&gt;1500 Meter: 1,056kg/m3&lt;br/&gt;3000 Meter: 0,905kg/m3&lt;/p&gt;&lt;p&gt;Air density in kg/m3. The air density depends on barometric air pressure, altitude and temperature.&lt;br/&gt;Some examples:&lt;br/&gt;Sea level: 1.226kg/m3&lt;br/&gt;1500 meters: 1.056kg/m3&lt;br/&gt;3000 meters: 0.905kg/m3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Luftdichte&lt;/p&gt;&lt;p&gt;Luftdichte in kg/m3. Die Luftdichte ist abhängig von barometrischen Luftdruck, Höhe Normalnull und Temperatur.&lt;br/&gt;Einige Beispiele:&lt;br/&gt;Meereshöhe: 1,226kg/m3&lt;br/&gt;1500 Meter: 1,056kg/m3&lt;br/&gt;3000 Meter: 0,905kg/m3&lt;/p&gt;&lt;p&gt;Air density in kg/m3. The air density depends on barometric air pressure, altitude and temperature.&lt;br/&gt;Some examples:&lt;br/&gt;Sea level: 1.226kg/m3&lt;br/&gt;1500 meters: 1.056kg/m3&lt;br/&gt;3000 meters: 0.905kg/m3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="suffix">
           <string>kg/m3</string>
@@ -190,7 +201,7 @@
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
-          <string>Bike Weight:</string>
+          <string>Bike Weight</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -203,7 +214,7 @@
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
-          <string>Personal Weight:</string>
+          <string>Driver Weight</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -213,7 +224,7 @@
        <item row="3" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Wind Speed Bft:</string>
+          <string>Wind Speed Bft</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -223,14 +234,14 @@
        <item row="3" column="1">
         <widget class="QComboBox" name="comboWindSpeed">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Werte für die Windgeschwindigkeit in Beaufortskala für die Vorgabe der Windgeschwindigkeit in km/h. Positive Werte für Gegenwind und negative Werte für Rückenwind.&lt;/p&gt;&lt;p&gt;Values for the wind speed in Beaufort scale for specifying the wind speed in km/h. Positive values for headwind and negative values for tailwind.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Windgeschw. Bft&lt;/p&gt;&lt;p&gt;Werte für die Windgeschwindigkeit in Beaufortskala für die Vorgabe der Windgeschwindigkeit in km/h. Positive Werte für Gegenwind und negative Werte für Rückenwind.&lt;/p&gt;&lt;p&gt;Values for the wind speed in Beaufort scale for specifying the wind speed in km/h. Positive values for headwind and negative values for tailwind.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
        <item row="3" column="2">
         <widget class="QLabel" name="label_9">
          <property name="text">
-          <string>Wind Speed km/h:</string>
+          <string>Wind Speed km/h</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -238,9 +249,12 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QDoubleSpinBox" name="spinPersonalWeight">
+        <widget class="QDoubleSpinBox" name="spinDriverWeight">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Das Fahrergewicht in kg einschließlich Kleidung.&lt;/p&gt;&lt;p&gt;The driver's weight in kg including clothing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fahrergewicht&lt;/p&gt;&lt;p&gt;Das Fahrergewicht in kg einschließlich Kleidung.&lt;/p&gt;&lt;p&gt;The driver's weight in kg including clothing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="whatsThis">
+          <string/>
          </property>
          <property name="suffix">
           <string>kg</string>
@@ -265,7 +279,7 @@
        <item row="0" column="3">
         <widget class="QDoubleSpinBox" name="spinBikeWeight">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Das Fahrradgewicht in kg einschließlich Gepäck.&lt;/p&gt;&lt;p&gt;The weight of the bicycle in kg including luggage.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fahrradgewicht&lt;/p&gt;&lt;p&gt;Das Fahrradgewicht in kg einschließlich Gepäck.&lt;/p&gt;&lt;p&gt;The weight of the bicycle in kg including luggage.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="suffix">
           <string>kg</string>
@@ -290,7 +304,7 @@
        <item row="3" column="3">
         <widget class="QDoubleSpinBox" name="spinWindSpeed">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Windgeschwindigkeit in km/h für die Berechnung der benötigten Kraft für die Überwindung des Luftwiderstands. Positive Werte für Gegenwind und negative Werte für Rückenwind. Werte können unabhängig von den Werte der Beaufortskala verändert werden.&lt;/p&gt;&lt;p&gt;Wind speed in km/h for the calculation of the force required to overcome drag. Positive values for headwind and negative values for tailwind. Values can be changed independently of the Beaufort scale values.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Windgeschw. Bft&lt;/p&gt;&lt;p&gt;Windgeschwindigkeit in km/h für die Berechnung der benötigten Kraft für die Überwindung des Luftwiderstands. Positive Werte für Gegenwind und negative Werte für Rückenwind. Werte können unabhängig von den Werte der Beaufortskala verändert werden.&lt;/p&gt;&lt;p&gt;Wind speed in km/h for the calculation of the force required to overcome drag. Positive values for headwind and negative values for tailwind. Values can be changed independently of the Beaufort scale values.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="suffix">
           <string>km/h</string>
@@ -365,6 +379,9 @@
        </item>
        <item row="6" column="3">
         <widget class="QDoubleSpinBox" name="spinWindDragCoeff">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;cw-Wert (Luftwiderstandsbeiwert)&lt;/p&gt;&lt;p&gt;Der cw-Wert (Luftwiderstandsbeiwert) gibt die Windschlüpfigkeit von Fahrer und Fahrrad gegenüber der Luft (Wind) an. Je größer dieser Wert ist, um so mehr Kraft wird für die Überwindung der Windkraft benötigt. Typische Werte für Fahrräder liegen zwischen 0,2 und 1.2.&lt;/p&gt;&lt;p&gt;The cw value (drag coefficient) indicates the wind slip of the rider and bicycle in relation to the air (wind). The greater this value, the more force is required to overcome the wind force. Typical values for bicycles are between 0.2 and 1.2.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="suffix">
           <string/>
          </property>
@@ -387,6 +404,9 @@
        </item>
        <item row="6" column="1">
         <widget class="QDoubleSpinBox" name="spinFrontalArea">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Frontalfläche&lt;/p&gt;&lt;p&gt;Die Fläche in m2 (Fahrer, Fahrrad, Gepäcktaschen, etc.), die dem Wind ausgesetzt ist.&lt;/p&gt;&lt;p&gt;The frontal area in m2 (rider, bicycle, bags, etc.) exposed to the wind.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="suffix">
           <string>m2</string>
          </property>
@@ -462,10 +482,10 @@
        <item row="0" column="5">
         <widget class="QLabel" name="label_1">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string/>
          </property>
          <property name="text">
-          <string>Total Weight:</string>
+          <string>Total Weight</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -488,7 +508,7 @@
        <item row="2" column="5">
         <widget class="QLabel" name="label_23">
          <property name="text">
-          <string>Wind Resist. Force:</string>
+          <string>Wind Resist. Force</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -498,7 +518,7 @@
        <item row="2" column="6">
         <widget class="QLabel" name="labelWindResistForce">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Benötigte Kraft in Newton für die Überwindung des Luftwiderstands. Bei starkem Rückenwind kann dieser Wert auch negativ sein.&lt;/p&gt;&lt;p&gt;Required force in Newton to overcome wind resistance. This value can also be negative for a strong tailwind.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Luftwider.Kraft&lt;/p&gt;&lt;p&gt;Durchnittliche benötigte Kraft in Newton für die Überwindung des Luftwiderstands. Bei starkem Rückenwind kann dieser Wert auch negativ sein.&lt;/p&gt;&lt;p&gt;Required force in Newton to overcome wind resistance. This value can also be negative for a strong tailwind.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -508,7 +528,7 @@
        <item row="0" column="6">
         <widget class="QLabel" name="labelTotalWeight">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Das Gesamttewicht von Fahrer und Fahrrad inklusive Kleidung und Gepäck.&lt;/p&gt;&lt;p&gt;The total weight of rider and bike including clothes and luggage.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gesamtgewicht&lt;/p&gt;&lt;p&gt;Das Gesamtgewicht von Fahrer und Fahrrad in kg inklusive Kleidung und Gepäck.&lt;/p&gt;&lt;p&gt;The total weight in kg of rider and bike including clothes and luggage.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0kg&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -518,7 +538,7 @@
        <item row="10" column="5">
         <widget class="QLabel" name="label_11">
          <property name="text">
-          <string>Energy Use:</string>
+          <string>Energy Use</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -548,7 +568,7 @@
        <item row="2" column="7">
         <widget class="QLabel" name="label_24">
          <property name="text">
-          <string>Rolling Resist. Force:</string>
+          <string>Rolling Resist. Force</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -568,7 +588,7 @@
        <item row="2" column="8">
         <widget class="QLabel" name="labelRollingResistForce">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Durchschnittliche benötigte Kraft für den Track in Newton für die Überwindung des Rollwiderstands.&lt;/p&gt;&lt;p&gt;Average force required for the track in Newton to overcome rolling resistance.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rollwider.Kraft&lt;/p&gt;&lt;p&gt;Durchschnittliche benötigte Kraft für den Track in Newton für die Überwindung des Rollwiderstands.&lt;/p&gt;&lt;p&gt;Average force required for the track in Newton to overcome rolling resistance.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -578,7 +598,7 @@
        <item row="3" column="5">
         <widget class="QLabel" name="label_26">
          <property name="text">
-          <string>Gravity Slope Force:</string>
+          <string>Gravity Slope Force</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -588,7 +608,7 @@
        <item row="3" column="6">
         <widget class="QLabel" name="labelGravitySlopeForce">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Durchschnittliche Kraft für den Track in Newton für die Überwindung der Neigung bei Bergauffahrt. Bei überwiegender Bergabfahrt kann der Wert negativ sein.&lt;/p&gt;&lt;p&gt;Average force for the track in Newton for overcoming the uphill slope. The value may be negative when cycling most downhill.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Neigungskraft&lt;/p&gt;&lt;p&gt;Durchschnittliche benötigte Kraft für den Track in Newton für die Überwindung der Neigung bei Bergauffahrt. Bei überwiegender Bergabfahrt kann der Wert negativ sein.&lt;/p&gt;&lt;p&gt;Average force required for the track in Newton to overcome the uphill gradient. The value may be negative for most descents.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -598,7 +618,7 @@
        <item row="3" column="7">
         <widget class="QLabel" name="label_28">
          <property name="text">
-          <string>Total Force:</string>
+          <string>Sum Force</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -606,9 +626,9 @@
         </widget>
        </item>
        <item row="3" column="8">
-        <widget class="QLabel" name="labelTotalForce">
+        <widget class="QLabel" name="labelSumForce">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Summe der durchschnittlich benötigten Kraft für den Track für die Überwindung des Luftwiderstands, Rollwiderstand und Neigung. Dieser Wert kann negativ bei starkem Rückwind und/oder Bergabfahrt sein.&lt;/p&gt;&lt;p&gt;Sum of the average force required for the track to overcome wind resistance, rolling resistance and slope. This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Summe Kraft&lt;/p&gt;&lt;p&gt;Summe der durchschnittlich benötigten Kraft für den Track für die Überwindung des Luftwiderstands, Rollwiderstand und Neigung. Dieser Wert kann negativ bei starkem Rückwind und/oder Bergabfahrt sein.&lt;/p&gt;&lt;p&gt;Sum of the average force required for the track to overcome wind resistance, rolling resistance and slope. This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -618,7 +638,7 @@
        <item row="8" column="7">
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Positive Power:</string>
+          <string>Positive Power</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -635,7 +655,7 @@
        <item row="8" column="5">
         <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>Total Power:</string>
+          <string>Total Power</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -669,7 +689,7 @@
        <item row="6" column="7">
         <widget class="QLabel" name="label_33">
          <property name="text">
-          <string>Ratio to Moving Time:</string>
+          <string>Ratio to Moving Time</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -686,7 +706,7 @@
        <item row="10" column="7">
         <widget class="QLabel" name="label_35">
          <property name="text">
-          <string>Energy Use:</string>
+          <string>Energy Use</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -738,7 +758,7 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>spinPersonalWeight</tabstop>
+  <tabstop>spinDriverWeight</tabstop>
   <tabstop>spinBikeWeight</tabstop>
   <tabstop>spinAirDensity</tabstop>
   <tabstop>comboWindSpeed</tabstop>

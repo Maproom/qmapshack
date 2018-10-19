@@ -518,7 +518,7 @@
        <item row="2" column="6">
         <widget class="QLabel" name="labelWindResistForce">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Luftwider.Kraft&lt;/p&gt;&lt;p&gt;Durchnittliche benötigte Kraft in Newton für die Überwindung des Luftwiderstands. Bei starkem Rückenwind kann dieser Wert auch negativ sein.&lt;/p&gt;&lt;p&gt;Required force in Newton to overcome wind resistance. This value can also be negative for a strong tailwind.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Luftwider.Kraft&lt;/p&gt;&lt;p&gt;Die Luftwiderstandskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung des Luftwiderstands benötigt wird. Bei starkem Rückenwind kann dieser Wert auch negativ sein.&lt;/p&gt;&lt;p&gt;The wind drag force is the force in Newton that is needed on average over all track points to overcome the drag. With a strong tailwind, this value can also be negative.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -588,7 +588,7 @@
        <item row="2" column="8">
         <widget class="QLabel" name="labelRollingResistForce">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rollwider.Kraft&lt;/p&gt;&lt;p&gt;Durchschnittliche benötigte Kraft für den Track in Newton für die Überwindung des Rollwiderstands.&lt;/p&gt;&lt;p&gt;Average force required for the track in Newton to overcome rolling resistance.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rollwider.Kraft&lt;/p&gt;&lt;p&gt;Die Rollwiderstandskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung des Rollwiderstands benötigt wird.&lt;/p&gt;&lt;p&gt;The rolling resistance force is the force in Newton required on average over all track points to overcome the rolling resistance.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -608,7 +608,7 @@
        <item row="3" column="6">
         <widget class="QLabel" name="labelGravitySlopeForce">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Neigungskraft&lt;/p&gt;&lt;p&gt;Durchschnittliche benötigte Kraft für den Track in Newton für die Überwindung der Neigung bei Bergauffahrt. Bei überwiegender Bergabfahrt kann der Wert negativ sein.&lt;/p&gt;&lt;p&gt;Average force required for the track in Newton to overcome the uphill gradient. The value may be negative for most descents.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Neigungskraft&lt;/p&gt;&lt;p&gt;Die Neigungskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung der Neigung bei der Bergauffahrt benötigt. Bei überwiegender Bergabfahrt kann die Neigungskraft negativ sein.&lt;/p&gt;&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on the uphill. In the case of mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -628,7 +628,7 @@
        <item row="3" column="8">
         <widget class="QLabel" name="labelSumForce">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Summe Kraft&lt;/p&gt;&lt;p&gt;Summe der durchschnittlich benötigten Kraft für den Track für die Überwindung des Luftwiderstands, Rollwiderstand und Neigung. Dieser Wert kann negativ bei starkem Rückwind und/oder Bergabfahrt sein.&lt;/p&gt;&lt;p&gt;Sum of the average force required for the track to overcome wind resistance, rolling resistance and slope. This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Summe Kraft&lt;/p&gt;&lt;p&gt;Summe der durchschnittlich benötigten Kraft für den Track für die Überwindung des Luftwiderstands, Rollwiderstands und Neigung. Dieser Wert kann negativ bei starkem Rückwind und/oder Bergabfahrt sein.&lt;/p&gt;&lt;p&gt;Sum of the average force required for the track to overcome wind resistance, rolling resistance and slope. This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

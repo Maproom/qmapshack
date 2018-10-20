@@ -20,22 +20,17 @@ public:
 private slots:
     void slotOk(bool);
     void slotApply(bool);
-    void slotSetWeight(double);
-    void slotSetComboWindSpeed(qint32 index);
-    void slotSetWindSpeed(double windSpeed);
-    void slotSetAirDensity(double airDensity);
-    void slotSetComboWindPosition(qint32 index);
-    void slotSetWindPositionSpins(double);
-    void slotSetComboGround(qint32 index);
-    void slotSetRollingCoeff(double rollingCoeff);
-    void slotSetMuscleEff(double muscleEff);
-    void slotSetPedalCadence(double pedalCadence);
-    void slotSetPedalRange(double pedalRange);
-    void slotSetCrankLength(double crankLength);
+    void slotSetWeight(qreal);
+    void slotSetComboWindSpeed(qint32 windSpeedIndex);
+    void slotSetWindSpeed(qreal windSpeed);
+    void slotSetAirDensity(qreal airDensity);
+    void slotSetComboWindPosition(qint32 windPositionIndex);
+    void slotSetWindPositionSpins(qreal);
+    void slotSetComboGround(qint32 groundIndex);
+    void slotSetRollingCoeff(qreal rollingCoeff);
+    void slotSetPedalCadence(qreal pedalCadence);
 
 private:
-//    void compute();
-
     struct wind_speed_t
     {
         QString name;

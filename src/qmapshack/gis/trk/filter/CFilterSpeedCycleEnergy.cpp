@@ -62,7 +62,7 @@ CFilterSpeedCycleEnergy::CFilterSpeedCycleEnergy(QWidget *parent, /*const*/ CGis
     }
     else
     {
-        spinWindSpeed->setValue(tmpEnergySet.windSpeed);
+        spinWindSpeed->setValue(tmpEnergySet.windSpeed * 3.6);
     }
 
     spinAirDensity->setValue(tmpEnergySet.airDensity);
@@ -97,10 +97,7 @@ CFilterSpeedCycleEnergy::CFilterSpeedCycleEnergy(QWidget *parent, /*const*/ CGis
         spinRollingCoeff->setValue(tmpEnergySet.rollingCoeff);
     }
 
-    spinMuscleEff->setValue(tmpEnergySet.muscleEff);
     spinPedalCadence->setValue(tmpEnergySet.pedalCadence);
-    spinPedalRange->setValue(tmpEnergySet.pedalRange);
-    spinCrankLength->setValue(tmpEnergySet.crankLength);
 
     connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(slotOk(bool)));
     connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(slotApply(bool)));
@@ -114,10 +111,7 @@ CFilterSpeedCycleEnergy::CFilterSpeedCycleEnergy(QWidget *parent, /*const*/ CGis
     connect(spinWindDragCoeff, SIGNAL(valueChanged(double)), this, SLOT(slotSetWindPositionSpins(double)));
     connect(comboGround, SIGNAL(activated(int)), this, SLOT(slotSetComboGround(int)));
     connect(spinRollingCoeff, SIGNAL(valueChanged(double)), this, SLOT(slotSetRollingCoeff(double)));
-    connect(spinMuscleEff, SIGNAL(valueChanged(double)), this, SLOT(slotSetMuscleEff(double)));
     connect(spinPedalCadence, SIGNAL(valueChanged(double)), this, SLOT(slotSetPedalCadence(double)));
-    connect(spinPedalRange, SIGNAL(valueChanged(double)), this, SLOT(slotSetPedalRange(double)));
-    connect(spinCrankLength, SIGNAL(valueChanged(double)), this, SLOT(slotSetCrankLength(double)));
 
     slotApply(true);
  }
@@ -139,51 +133,59 @@ void CFilterSpeedCycleEnergy::slotApply(bool)
 
     labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.driverWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
 
-    labelWindResistForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.windResistanceForce, 0, 'f', 1));
-    labelRollingResistForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.rollingResistanceForce, 0, 'f', 1));
+    labelAirResistForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.airResistForce, 0, 'f', 1));
+    labelRollResistForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.rollResistForce, 0, 'f', 1));
     labelGravitySlopeForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.gravitySlopeForce, 0, 'f', 1));
     labelSumForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.sumForce, 0, 'f', 1));
 
     QString val, unit;
-    IUnit::self().seconds2time(tmpEnergySet.totalPowerTime, val, unit);
-    labelTotalPowerTime->setText(QString("<b>%1%2</b>").arg(val).arg(unit));
-    labelPowerTimeMovingRatio->setText(QString("<b>%1%</b>").arg(tmpEnergySet.powerTimeMovingRatio * 100, 0, 'f', 1));
+    IUnit::self().seconds2time(tmpEnergySet.powerMovingTime, val, unit);
+    labelPowerMovingTime->setText(QString("<b>%1%2</b>").arg(val).arg(unit));
+    labelPowerMovingTimeRatio->setText(QString("<b>%1%</b>").arg(tmpEnergySet.powerMovingTimeRatio * 100, 0, 'f', 1));
 
-    labelTotalPower->setText(QString("<b>%1W</b>").arg(tmpEnergySet.totalPower, 0, 'f', 1));
-    labelTotalPositivePower->setText(QString("<b>%1W</b>").arg(tmpEnergySet.totalPositivePower, 0, 'f', 1));
+    labelPower->setText(QString("<b>%1W</b>").arg(tmpEnergySet.power, 0, 'f', 1));
+    labelPositivePower->setText(QString("<b>%1W</b>").arg(tmpEnergySet.positivePower, 0, 'f', 1));
 
-    labelEnergyKJoule->setText(QString("<b>%1kJ</b>").arg(tmpEnergySet.totalEnergyKJoule, 0, 'f', 0));
-    labelEnergyKcal->setText(QString("<b><u>%1kcal</u></b>").arg(tmpEnergySet.totalEnergyKcal, 0, 'f', 0));
+    labelEnergyKJoule->setText(QString("<b>%1kJ</b>").arg(tmpEnergySet.energyKJoule, 0, 'f', 0));
+    labelEnergyKcal->setText(QString("<b><u>%1kcal</u></b>").arg(tmpEnergySet.energyKcal, 0, 'f', 0));
 
-    labelPositivePedalForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.totalPositivePedalForce, 0, 'f', 1));
+    labelPositivePedalForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.positivePedalForce, 0, 'f', 1));
 }
 
-void CFilterSpeedCycleEnergy::slotSetWeight(double)
+void CFilterSpeedCycleEnergy::slotSetWeight(qreal)
 {
     tmpEnergySet.driverWeight = spinDriverWeight->value();
     tmpEnergySet.bikeWeight = spinBikeWeight->value();
     labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.driverWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
 }
 
-void CFilterSpeedCycleEnergy::slotSetComboWindSpeed(qint32 index)
+void CFilterSpeedCycleEnergy::slotSetComboWindSpeed(qint32 windSpeedIndex)
 {
-    tmpEnergySet.windSpeedIndex = index;
-    if (index > 0)
+    tmpEnergySet.windSpeedIndex = windSpeedIndex;
+    if (windSpeedIndex > 0)
     {
-        spinWindSpeed->setValue(windSpeeds[index].windSpeed * 3.6); // m/s ==> km/h
-        tmpEnergySet.windSpeed = windSpeeds[index].windSpeed;
+        spinWindSpeed->setValue(windSpeeds[windSpeedIndex].windSpeed * 3.6); // m/s ==> km/h
+        tmpEnergySet.windSpeed = windSpeeds[windSpeedIndex].windSpeed;
     }
 }
 
-void CFilterSpeedCycleEnergy::slotSetWindSpeed(double windSpeed)
+void CFilterSpeedCycleEnergy::slotSetWindSpeed(qreal windSpeed)
 {
-    tmpEnergySet.windSpeed = windSpeed / 3.6;
+    if (qFuzzyIsNull(windSpeed)) // to avoid numerical noise
+    {
+        tmpEnergySet.windSpeed = 0;
+        spinWindSpeed->setValue(0);
+    }
+    else
+    {
+        tmpEnergySet.windSpeed = windSpeed / 3.6;
+    }
 
     tmpEnergySet.windSpeedIndex = 0;
     comboWindSpeed->setCurrentIndex(0);
     for (qint32 i = 1; i < windSpeeds.size(); ++i)
     {
-        if (tmpEnergySet.windSpeed == windSpeeds[i].windSpeed)
+        if (qFuzzyCompare(1 + tmpEnergySet.windSpeed, 1 + windSpeeds[i].windSpeed))
         {
             tmpEnergySet.windSpeedIndex = i;
             comboWindSpeed->setCurrentIndex(i);
@@ -192,24 +194,24 @@ void CFilterSpeedCycleEnergy::slotSetWindSpeed(double windSpeed)
     }
 }
 
-void CFilterSpeedCycleEnergy::slotSetAirDensity(double airDensity)
+void CFilterSpeedCycleEnergy::slotSetAirDensity(qreal airDensity)
 {
     tmpEnergySet.airDensity = airDensity;
 }
 
-void CFilterSpeedCycleEnergy::slotSetComboWindPosition(qint32 index)
+void CFilterSpeedCycleEnergy::slotSetComboWindPosition(qint32 windPositionIndex)
 {
-    tmpEnergySet.windPositionIndex = index;
-    if (index > 0)
+    tmpEnergySet.windPositionIndex = windPositionIndex;
+    if (windPositionIndex > 0)
     {
-        spinFrontalArea->setValue(windPositions[index].frontalArea);
-        spinWindDragCoeff->setValue(windPositions[index].windDragCoeff);
-        tmpEnergySet.frontalArea = windPositions[index].frontalArea;
-        tmpEnergySet.windDragCoeff = windPositions[index].windDragCoeff;
+        spinFrontalArea->setValue(windPositions[windPositionIndex].frontalArea);
+        spinWindDragCoeff->setValue(windPositions[windPositionIndex].windDragCoeff);
+        tmpEnergySet.frontalArea = windPositions[windPositionIndex].frontalArea;
+        tmpEnergySet.windDragCoeff = windPositions[windPositionIndex].windDragCoeff;
     }
 }
 
-void CFilterSpeedCycleEnergy::slotSetWindPositionSpins(double)
+void CFilterSpeedCycleEnergy::slotSetWindPositionSpins(qreal)
 {
     tmpEnergySet.frontalArea = spinFrontalArea->value();
     tmpEnergySet.windDragCoeff = spinWindDragCoeff->value();
@@ -218,8 +220,8 @@ void CFilterSpeedCycleEnergy::slotSetWindPositionSpins(double)
     comboWindPosition->setCurrentIndex(0);
     for (qint32 i = 1; i < windPositions.size(); ++i)
     {
-        if (tmpEnergySet.frontalArea == windPositions[i].frontalArea &&
-                tmpEnergySet.windDragCoeff == windPositions[i].windDragCoeff)
+        if (qFuzzyCompare(1 + tmpEnergySet.frontalArea, 1 + windPositions[i].frontalArea)
+                && qFuzzyCompare(1 + tmpEnergySet.windDragCoeff, 1 + windPositions[i].windDragCoeff))
         {
             tmpEnergySet.windPositionIndex = i;
             comboWindPosition->setCurrentIndex(i);
@@ -228,17 +230,17 @@ void CFilterSpeedCycleEnergy::slotSetWindPositionSpins(double)
     }
 }
 
-void CFilterSpeedCycleEnergy::slotSetComboGround(qint32 index)
+void CFilterSpeedCycleEnergy::slotSetComboGround(qint32 groundIndex)
 {
-    tmpEnergySet.groundIndex = index;
-    if (index > 0)
+    tmpEnergySet.groundIndex = groundIndex;
+    if (groundIndex > 0)
     {
-        spinRollingCoeff->setValue(grounds[index].rollingCoeff);
-        tmpEnergySet.rollingCoeff = grounds[index].rollingCoeff;
+        spinRollingCoeff->setValue(grounds[groundIndex].rollingCoeff);
+        tmpEnergySet.rollingCoeff = grounds[groundIndex].rollingCoeff;
     }
 }
 
-void CFilterSpeedCycleEnergy::slotSetRollingCoeff(double rollingCoeff)
+void CFilterSpeedCycleEnergy::slotSetRollingCoeff(qreal rollingCoeff)
 {
     tmpEnergySet.rollingCoeff = rollingCoeff;
 
@@ -246,7 +248,7 @@ void CFilterSpeedCycleEnergy::slotSetRollingCoeff(double rollingCoeff)
     comboGround->setCurrentIndex(0);
     for (qint32 i = 1; i < grounds.size(); ++i)
     {
-        if (rollingCoeff == grounds[i].rollingCoeff)
+        if (qFuzzyCompare(1 + rollingCoeff, 1 + grounds[i].rollingCoeff))
         {
             tmpEnergySet.groundIndex = i;
             comboGround->setCurrentIndex(i);
@@ -255,22 +257,7 @@ void CFilterSpeedCycleEnergy::slotSetRollingCoeff(double rollingCoeff)
     }
 }
 
-void CFilterSpeedCycleEnergy::slotSetMuscleEff(double muscleEff)
-{
-    tmpEnergySet.muscleEff = muscleEff;
-}
-
-void CFilterSpeedCycleEnergy::slotSetPedalCadence(double pedalCadence)
+void CFilterSpeedCycleEnergy::slotSetPedalCadence(qreal pedalCadence)
 {
     tmpEnergySet.pedalCadence = pedalCadence;
-}
-
-void CFilterSpeedCycleEnergy::slotSetPedalRange(double pedalRange)
-{
-    tmpEnergySet.pedalRange = pedalRange;
-}
-
-void CFilterSpeedCycleEnergy::slotSetCrankLength(double crankLength)
-{
-    tmpEnergySet.crankLength = crankLength;
 }

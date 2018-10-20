@@ -18,13 +18,12 @@
 
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSpeedCycle.h"
-
-#include <QtWidgets>
+#include "gis/trk/filter/CFilterSpeedCycleEnergy.h"
 
 CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     : QWidget(parent), trk(trk), noOfFixTypes(4), noOfCustomTypes(3)
     // 4 fix and 3 custom cycling types has be defined as default
-    ,cyclingTypeDefaults
+    , cyclingTypeDefaults
     {
     {
         tr("City")                // Fix: name
@@ -53,6 +52,16 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
         tr("Custom 2"), 20, 5, 8, 40, -5       // Custom 2
     }
     }
+    , energySetDefaults
+    {
+    {75, 17, 1.2, 5, 0, 1, 0.70, 1.10, 3, 0.0050, 75}, // City
+    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 75}, // Trekking
+    {75,  9, 1.2, 5, 0, 4, 0.48, 0.50, 2, 0.0040, 75}, // Sportive
+    {75, 10, 1.2, 5, 0, 6, 0.60, 0.90, 5, 0.0150, 75}, // Mountain
+    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 75}, // Custom 0
+    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 75}, // Custom 1
+    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 75}  // Custom 2
+    }
 {
     setupUi(this);
 
@@ -80,6 +89,24 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
         cyclingTypes << cyclingType;
     }
 
+    energy_set_t energySet;
+    for (int i = 0; i < noOfFixTypes; ++i)
+    {
+        const energy_set_t &energySetDefault = energySetDefaults[i];
+        energySet.driverWeight = energySetDefault.driverWeight;
+        energySet.bikeWeight = energySetDefault.bikeWeight;
+        energySet.airDensity = energySetDefault.airDensity;
+        energySet.windSpeedIndex = energySetDefault.windSpeedIndex;
+        energySet.windSpeed = energySetDefault.windSpeed;
+        energySet.windPositionIndex = energySetDefault.windPositionIndex;
+        energySet.frontalArea = energySetDefault.frontalArea;
+        energySet.windDragCoeff = energySetDefault.windDragCoeff;
+        energySet.groundIndex = energySetDefault.groundIndex;
+        energySet.rollingCoeff = energySetDefault.rollingCoeff;
+        energySet.pedalCadence = energySetDefault.pedalCadence;
+        energySets << energySet;
+    }
+
     connect(comboCyclingType, SIGNAL(activated(int)), this, SLOT(slotSetCyclingType(int)));
     connect(spinPlainSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetPlainSpeed(double)));
     connect(spinMinSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMinSpeed(double)));
@@ -87,6 +114,8 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     connect(spinMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMaxSpeed(double)));
     connect(spinSlopeAtMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetSlopeAtMaxSpeed(double)));
     connect(pushSetMinMaxSlope, SIGNAL(clicked(bool)), this, SLOT(slotSetMinMaxSlopes(bool)));
+
+    connect(toolApplyEnergy, &QToolButton::clicked, this, &CFilterSpeedCycle::slotApplyEnergy);
 }
 
 void CFilterSpeedCycle::loadSettings(QSettings& cfg)
@@ -109,6 +138,30 @@ void CFilterSpeedCycle::loadSettings(QSettings& cfg)
     }
     cfg.endArray();
     comboCyclingType->setCurrentIndex(cfg.value("cyclingType", 0).toInt());
+
+    energy_set_t energySet;
+    cfg.beginReadArray("CustomEnergySets");
+    for (int i = 0; i < noOfCustomTypes; ++i)
+    {
+        const energy_set_t &energyDefault = energySetDefaults[noOfFixTypes + i];
+        cfg.setArrayIndex(i);
+
+        energySet.driverWeight = cfg.value("personalWeight", energyDefault.driverWeight).toDouble();
+        energySet.bikeWeight = cfg.value("bikeWeight", energyDefault.bikeWeight).toDouble();
+        energySet.airDensity = cfg.value("airDensity", energyDefault.airDensity).toDouble();
+        energySet.windSpeedIndex = cfg.value("windSpeedIndex", energyDefault.windSpeedIndex).toInt();
+        energySet.windSpeed = cfg.value("windSpeed", energyDefault.windSpeed).toDouble();
+        energySet.windPositionIndex = cfg.value("windPositionIndex", energyDefault.windPositionIndex).toInt();
+        energySet.frontalArea = cfg.value("frontalArea", energyDefault.frontalArea).toDouble();
+        energySet.windDragCoeff = cfg.value("windDragCoeff", energyDefault.windDragCoeff).toDouble();
+        energySet.groundIndex = cfg.value("groundIndex", energyDefault.groundIndex).toInt();
+        energySet.rollingCoeff = cfg.value("rollingCoeff", energyDefault.rollingCoeff).toDouble();
+        energySet.pedalCadence = cfg.value("pedalCadence", energyDefault.pedalCadence).toDouble();
+
+        energySets << energySet;
+    }
+    cfg.endArray();
+
     slotSetCyclingType(comboCyclingType->currentIndex());
 }
 
@@ -129,11 +182,31 @@ void CFilterSpeedCycle::saveSettings(QSettings& cfg)
         cfg.setValue("slopeAtMaxSpeed", cyclingType.slopeAtMaxSpeed);
     }
     cfg.endArray();
+
+    cfg.beginWriteArray("CustomEnergySets");
+    for (int i = 0; i < noOfCustomTypes; ++i)
+    {
+        const energy_set_t &energySet = energySets[noOfFixTypes + i];
+        cfg.setArrayIndex(i);
+        cfg.setValue("personalWeight", energySet.driverWeight);
+        cfg.setValue("bikeWeight", energySet.bikeWeight);
+        cfg.setValue("airDensity", energySet.airDensity);
+        cfg.setValue("windSpeedIndex", energySet.windSpeedIndex);
+        cfg.setValue("windSpeed", energySet.windSpeed);
+        cfg.setValue("windPositionIndex", energySet.windPositionIndex);
+        cfg.setValue("frontalArea", energySet.frontalArea);
+        cfg.setValue("windDragCoeff", energySet.windDragCoeff);
+        cfg.setValue("groundIndex", energySet.groundIndex);
+        cfg.setValue("rollingCoeff", energySet.rollingCoeff);
+        cfg.setValue("pedalCadence", energySet.pedalCadence);
+    }
+    cfg.endArray();
 }
 
 void CFilterSpeedCycle::apply(CGisItemTrk& trk)
 {
     trk.filterSpeed(cyclingTypes[comboCyclingType->currentIndex()]);
+    updateUi();
 }
 
 void CFilterSpeedCycle::slotSetCyclingType(int type)
@@ -165,6 +238,8 @@ void CFilterSpeedCycle::slotSetCyclingType(int type)
     {
         frameCycling->setEnabled(true);
     }
+
+    updateUi();
 }
 
 void CFilterSpeedCycle::slotSetPlainSpeed(double speed)
@@ -225,4 +300,55 @@ void CFilterSpeedCycle::slotSetMinMaxSlopes(bool)
         spinSlopeAtMinSpeed->setValue(maxSlope);
         spinSlopeAtMaxSpeed->setValue(minSlope);
     }
+}
+
+void CFilterSpeedCycle::slotApplyEnergy()
+{
+    qint32 type = comboCyclingType->currentIndex();
+    CFilterSpeedCycleEnergy energyDlg(this, trk, energySets[type]);
+    energyDlg.setWindowTitle(tr("Energy Parameter Set for Cycling Type ")
+                             + cyclingTypes[comboCyclingType->currentIndex()].name);
+
+    if((energyDlg.exec() == QDialog::Accepted))
+    {
+        insertEnergy(true);
+    }
+}
+
+void CFilterSpeedCycle::updateUi()
+{
+    qint32 type = comboCyclingType->currentIndex();
+    if (trk.isTrkTimeValid())
+    {
+        trk.filterSpeedCycleEnergy(energySets[type]);
+        insertEnergy(true);
+    }
+    else
+    {
+        insertEnergy(false);
+    }
+
+    if (trk.isTrkTimeValid() && type >= noOfFixTypes)
+    {
+        toolApplyEnergy->setEnabled(true);
+    }
+    else
+    {
+        toolApplyEnergy->setEnabled(false);
+    }
+}
+
+void CFilterSpeedCycle::insertEnergy(bool valid)
+{
+    QString energyStr = QString(tr("Energy Use"));
+    if(valid)
+    {
+        qint32 type = comboCyclingType->currentIndex();
+        energyStr += QString(" %1kcal").arg(energySets[type].energyKcal, 0, 'f', 0);
+    }
+    else
+    {
+        energyStr += " ?";
+    }
+    labelEnergy->setText(energyStr);
 }

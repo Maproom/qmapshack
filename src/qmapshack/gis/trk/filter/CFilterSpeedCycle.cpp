@@ -54,13 +54,13 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     }
     , energySetDefaults
     {
-    {75, 17, 1.2, 5, 0, 1, 0.70, 1.10, 3, 0.0050, 23, 75, 70, 175}, // City
-    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 23, 75, 70, 175}, // Trekking
-    {75,  9, 1.2, 5, 0, 4, 0.48, 0.50, 2, 0.0040, 23, 75, 70, 175}, // Sportive
-    {75, 10, 1.2, 5, 0, 6, 0.60, 0.90, 5, 0.0150, 23, 75, 70, 175}, // Mountain
-    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 23, 75, 70, 175}, // Custom 0
-    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 23, 75, 70, 175}, // Custom 1
-    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 23, 75, 70, 175}  // Custom 2
+    {75, 17, 1.2, 5, 0, 1, 0.70, 1.10, 3, 0.0050, 75}, // City
+    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 75}, // Trekking
+    {75,  9, 1.2, 5, 0, 4, 0.48, 0.50, 2, 0.0040, 75}, // Sportive
+    {75, 10, 1.2, 5, 0, 6, 0.60, 0.90, 5, 0.0150, 75}, // Mountain
+    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 75}, // Custom 0
+    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 75}, // Custom 1
+    {75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 75}  // Custom 2
     }
 {
     setupUi(this);
@@ -103,10 +103,7 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
         energySet.windDragCoeff = energySetDefault.windDragCoeff;
         energySet.groundIndex = energySetDefault.groundIndex;
         energySet.rollingCoeff = energySetDefault.rollingCoeff;
-        energySet.muscleEff = energySetDefault.muscleEff;
         energySet.pedalCadence = energySetDefault.pedalCadence;
-        energySet.pedalRange = energySetDefault.pedalRange;
-        energySet.crankLength = energySetDefault.crankLength;
         energySets << energySet;
     }
 
@@ -159,10 +156,7 @@ void CFilterSpeedCycle::loadSettings(QSettings& cfg)
         energySet.windDragCoeff = cfg.value("windDragCoeff", energyDefault.windDragCoeff).toDouble();
         energySet.groundIndex = cfg.value("groundIndex", energyDefault.groundIndex).toInt();
         energySet.rollingCoeff = cfg.value("rollingCoeff", energyDefault.rollingCoeff).toDouble();
-        energySet.muscleEff = cfg.value("muscleEff", energyDefault.muscleEff).toDouble();
         energySet.pedalCadence = cfg.value("pedalCadence", energyDefault.pedalCadence).toDouble();
-        energySet.pedalRange = cfg.value("pedalRange", energyDefault.pedalRange).toDouble();
-        energySet.crankLength = cfg.value("crankLength", energyDefault.crankLength).toDouble();
 
         energySets << energySet;
     }
@@ -204,10 +198,7 @@ void CFilterSpeedCycle::saveSettings(QSettings& cfg)
         cfg.setValue("windDragCoeff", energySet.windDragCoeff);
         cfg.setValue("groundIndex", energySet.groundIndex);
         cfg.setValue("rollingCoeff", energySet.rollingCoeff);
-        cfg.setValue("muscleEff", energySet.muscleEff);
         cfg.setValue("pedalCadence", energySet.pedalCadence);
-        cfg.setValue("pedalRange", energySet.pedalRange);
-        cfg.setValue("crankLength", energySet.crankLength);
     }
     cfg.endArray();
 }
@@ -353,7 +344,7 @@ void CFilterSpeedCycle::insertEnergy(bool valid)
     if(valid)
     {
         qint32 type = comboCyclingType->currentIndex();
-        energyStr += QString(" %1kcal").arg(energySets[type].totalEnergyKcal, 0, 'f', 0);
+        energyStr += QString(" %1kcal").arg(energySets[type].energyKcal, 0, 'f', 0);
     }
     else
     {

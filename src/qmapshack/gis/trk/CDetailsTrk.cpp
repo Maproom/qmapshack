@@ -492,7 +492,7 @@ void CDetailsTrk::updateData()
         filterSpeed->updateUi();
     }
 
-    CFilterSpeedCycle *filterSpeedCycle = tabWidget->findChild<CFilterSpeedCycle *>("IFilterSpeedCycle");
+    CFilterSpeedCycle *filterSpeedCycle = treeFilter->findChild<CFilterSpeedCycle *>("IFilterSpeedCycle");
     if(nullptr != filterSpeedCycle)
     {
         filterSpeedCycle->updateUi();

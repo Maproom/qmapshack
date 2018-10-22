@@ -488,13 +488,13 @@ void CGisItemTrk::filterSpeedCycleEnergy(CFilterSpeedCycle::energy_set_t &energy
         qreal slope = pt.slope2;
 //        slope = 0;
 
-        qreal windResistanceForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
+        qreal airResistForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
         qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
-        energy.airResistForce += windResistanceForce;
+        energy.airResistForce += airResistForce;
         energy.gravitySlopeForce += gravitySlopeForce;
-        energy.sumForce += windResistanceForce + gravitySlopeForce + energy.rollResistForce;
+        energy.sumForce += airResistForce + gravitySlopeForce + energy.rollResistForce;
 
-        qreal power = (windResistanceForce * (speed + windSpeed)) + ((energy.rollResistForce + gravitySlopeForce) * speed);
+        qreal power = (airResistForce * (speed + windSpeed)) + ((energy.rollResistForce + gravitySlopeForce) * speed);
         energy.power += power;
 
         if (power > 0)

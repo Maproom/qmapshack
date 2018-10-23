@@ -607,11 +607,6 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
             continue;
         }
         qreal speed = 1 / formulaTerms[0] / 60 * 1000; // Transform from min/km to m/s
-//        qDebug() << "KKA: Pnt=" << i++
-//                 << "Slope tangens=" << A9
-//                 << "Max min/km=" << formulaTerms[0]
-//                 << "Speed m/s=" << speed
-//                 << "Speed km/h=" << speed * 3.6;
 
         timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
         pt.time   = timestamp;
@@ -623,7 +618,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
     changed(tr("Changed average moving hiking speed with profile '%3' to %1%2.").arg(val).arg(unit).arg(hikingType.name), "://icons/48x48/Time.png");
 }
 
-void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) /*const*/
+void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const
 {
     const limits_t& limit = extrema["::ql:slope"];
     minSlope = limit.min;

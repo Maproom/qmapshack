@@ -87,7 +87,7 @@ private slots:
 private:
     void insertEnergy(bool valid);
 
-    /*const*/ CGisItemTrk &trk; // Needed for filterGetSlopeLimits
+    const CGisItemTrk &trk;
     const qint32 noOfFixTypes;
     const qint32 noOfCustomTypes;
     const QList<cycling_type_t> cyclingTypeDefaults;

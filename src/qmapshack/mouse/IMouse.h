@@ -45,6 +45,7 @@ public:
     virtual void dragFinished(const QPoint& pos) {}
     virtual void scaleChanged() {}
     virtual void abortStep() {}
+    virtual void unfocus(){}
 
     virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) = 0;
 

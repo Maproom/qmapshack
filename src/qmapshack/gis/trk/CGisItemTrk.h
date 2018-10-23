@@ -185,8 +185,8 @@ public:
     }
 
     /// returns "true" when trk has no time-related invalid points
-    bool isTrkTimeValid() { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }
-    bool isTrkElevationInvalid() { return allValidFlags & CTrackData::trkpt_t::eInvalidEle; }
+    bool isTrkTimeValid() const { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }
+    bool isTrkElevationInvalid() const { return allValidFlags & CTrackData::trkpt_t::eInvalidEle; }
 
     QDateTime getTimestamp() const override {return getTimeStart(); }
 
@@ -543,7 +543,7 @@ public:
     void filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType);
     void filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType);
 
-    void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope);
+    void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const;
 
     void filterTerrainSlope();
     void filterReplaceElevation(CCanvas *canvas);

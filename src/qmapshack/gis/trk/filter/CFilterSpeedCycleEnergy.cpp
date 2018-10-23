@@ -3,7 +3,7 @@
 #include "gis/trk/filter/CFilterSpeedCycle.h"
 
 
-CFilterSpeedCycleEnergy::CFilterSpeedCycleEnergy(QWidget *parent, /*const*/ CGisItemTrk &trk, CFilterSpeedCycle::energy_set_t &energySet) :
+CFilterSpeedCycleEnergy::CFilterSpeedCycleEnergy(QWidget *parent, const CGisItemTrk &trk, CFilterSpeedCycle::energy_set_t &energySet) :
     QDialog(parent)
   , windSpeeds
     {

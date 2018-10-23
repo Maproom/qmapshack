@@ -14,7 +14,7 @@ class CFilterSpeedCycleEnergy : public QDialog, private Ui::CFilterSpeedCycleEne
     Q_OBJECT
 
 public:
-    explicit CFilterSpeedCycleEnergy(QWidget *parent, CGisItemTrk &trk, CFilterSpeedCycle::energy_set_t &tmpEnergySet);
+    explicit CFilterSpeedCycleEnergy(QWidget *parent, const CGisItemTrk &trk, CFilterSpeedCycle::energy_set_t &tmpEnergySet);
     ~CFilterSpeedCycleEnergy();
 
 private slots:
@@ -53,7 +53,7 @@ private:
     };
     const QList <ground_condition_t> grounds;
 
-    /*const*/ CGisItemTrk &trk;
+    const CGisItemTrk &trk;
     CFilterSpeedCycle::energy_set_t &energySet;
     CFilterSpeedCycle::energy_set_t tmpEnergySet;
 };

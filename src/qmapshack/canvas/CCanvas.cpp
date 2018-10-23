@@ -406,6 +406,11 @@ void CCanvas::setMap(const QString& filename)
     map->buildMapList(filename);
 }
 
+void CCanvas::abortMouse()
+{
+    mouse->unfocus();
+}
+
 void CCanvas::resetMouse()
 {
     mouse->setDelegate(new CMouseNormal(gis, this, mouse));

@@ -57,6 +57,11 @@ void CMouseNormal::stopTracking() const
     }
 }
 
+void CMouseNormal::unfocus()
+{
+    resetState();
+}
+
 void CMouseNormal::rightButtonDown(const QPoint& point)
 {
     // right button cancels unclutter and item-options

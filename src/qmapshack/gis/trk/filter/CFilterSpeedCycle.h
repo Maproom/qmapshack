@@ -20,7 +20,6 @@
 #define CFILTERSPEEDCYCLE_H
 
 #include "ui_IFilterSpeedCycle.h"
-//#include "gis/trk/filter/CFilterSpeedCycleEnergy.h"
 
 class CGisItemTrk;
 class QSettings;

@@ -2,9 +2,7 @@
 #define CFILTERSPEEDCYCLEENERGY_H
 
 #include "ui_IFilterSpeedCycleEnergy.h"
-
 #include "gis/trk/filter/CFilterSpeedCycle.h"
-
 #include <QDialog>
 
 class CGisItemTrk;

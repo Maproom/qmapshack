@@ -51,12 +51,12 @@ CFilterSpeedCycleEnergy::CFilterSpeedCycleEnergy(QWidget *parent, const CGisItem
     spinBikeWeight->setValue(tmpEnergySet.bikeWeight);
     labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.driverWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
 
-    for (QList<wind_speed_t>::const_iterator it = windSpeeds.constBegin(); it != windSpeeds.constEnd(); ++it)
+    for(const wind_speed_t &windSpeed : windSpeeds)
     {
-        comboWindSpeed->addItem(it->name);
+        comboWindSpeed->addItem(windSpeed.name);
     }
     comboWindSpeed->setCurrentIndex(tmpEnergySet.windSpeedIndex);
-    if (tmpEnergySet.windSpeedIndex > 0)
+    if(tmpEnergySet.windSpeedIndex > 0)
     {
         spinWindSpeed->setValue(windSpeeds[tmpEnergySet.windSpeedIndex].windSpeed * 3.6); // m/s ==> km/h
     }
@@ -67,12 +67,12 @@ CFilterSpeedCycleEnergy::CFilterSpeedCycleEnergy(QWidget *parent, const CGisItem
 
     spinAirDensity->setValue(tmpEnergySet.airDensity);
 
-    for (QList<wind_position_t>::const_iterator it = windPositions.constBegin(); it != windPositions.constEnd(); ++it)
+    for(const wind_position_t &windPosition : windPositions)
     {
-        comboWindPosition->addItem(it->name);
+        comboWindPosition->addItem(windPosition.name);
     }
     comboWindPosition->setCurrentIndex(tmpEnergySet.windPositionIndex);
-    if (tmpEnergySet.windPositionIndex > 0)
+    if(tmpEnergySet.windPositionIndex > 0)
     {
         spinFrontalArea->setValue(windPositions[tmpEnergySet.windPositionIndex].frontalArea);
         spinWindDragCoeff->setValue(windPositions[tmpEnergySet.windPositionIndex].windDragCoeff);
@@ -83,12 +83,12 @@ CFilterSpeedCycleEnergy::CFilterSpeedCycleEnergy(QWidget *parent, const CGisItem
         spinWindDragCoeff->setValue(tmpEnergySet.windDragCoeff);
     }
 
-    for (QList<ground_condition_t>::const_iterator it = grounds.constBegin(); it != grounds.constEnd(); ++it)
+    for(const ground_condition_t &ground : grounds)
     {
-        comboGround->addItem(it->name);
+        comboGround->addItem(ground.name);
     }
     comboGround->setCurrentIndex(tmpEnergySet.groundIndex);
-    if (tmpEnergySet.groundIndex > 0)
+    if(tmpEnergySet.groundIndex > 0)
     {
         spinRollingCoeff->setValue(grounds[tmpEnergySet.groundIndex].rollingCoeff);
     }
@@ -162,7 +162,7 @@ void CFilterSpeedCycleEnergy::slotSetWeight(qreal)
 void CFilterSpeedCycleEnergy::slotSetComboWindSpeed(qint32 windSpeedIndex)
 {
     tmpEnergySet.windSpeedIndex = windSpeedIndex;
-    if (windSpeedIndex > 0)
+    if(windSpeedIndex > 0)
     {
         spinWindSpeed->setValue(windSpeeds[windSpeedIndex].windSpeed * 3.6); // m/s ==> km/h
         tmpEnergySet.windSpeed = windSpeeds[windSpeedIndex].windSpeed;
@@ -171,7 +171,7 @@ void CFilterSpeedCycleEnergy::slotSetComboWindSpeed(qint32 windSpeedIndex)
 
 void CFilterSpeedCycleEnergy::slotSetWindSpeed(qreal windSpeed)
 {
-    if (qFuzzyIsNull(windSpeed)) // to avoid numerical noise
+    if(qFuzzyIsNull(windSpeed)) // to avoid numerical noise
     {
         tmpEnergySet.windSpeed = 0;
         spinWindSpeed->setValue(0);
@@ -183,9 +183,9 @@ void CFilterSpeedCycleEnergy::slotSetWindSpeed(qreal windSpeed)
 
     tmpEnergySet.windSpeedIndex = 0;
     comboWindSpeed->setCurrentIndex(0);
-    for (qint32 i = 1; i < windSpeeds.size(); ++i)
+    for(qint32 i = 1; i < windSpeeds.size(); ++i)
     {
-        if (qFuzzyCompare(1 + tmpEnergySet.windSpeed, 1 + windSpeeds[i].windSpeed))
+        if(qFuzzyCompare(1 + tmpEnergySet.windSpeed, 1 + windSpeeds[i].windSpeed))
         {
             tmpEnergySet.windSpeedIndex = i;
             comboWindSpeed->setCurrentIndex(i);
@@ -202,7 +202,7 @@ void CFilterSpeedCycleEnergy::slotSetAirDensity(qreal airDensity)
 void CFilterSpeedCycleEnergy::slotSetComboWindPosition(qint32 windPositionIndex)
 {
     tmpEnergySet.windPositionIndex = windPositionIndex;
-    if (windPositionIndex > 0)
+    if(windPositionIndex > 0)
     {
         spinFrontalArea->setValue(windPositions[windPositionIndex].frontalArea);
         spinWindDragCoeff->setValue(windPositions[windPositionIndex].windDragCoeff);
@@ -218,9 +218,9 @@ void CFilterSpeedCycleEnergy::slotSetWindPositionSpins(qreal)
 
     tmpEnergySet.windPositionIndex = 0;
     comboWindPosition->setCurrentIndex(0);
-    for (qint32 i = 1; i < windPositions.size(); ++i)
+    for(qint32 i = 1; i < windPositions.size(); ++i)
     {
-        if (qFuzzyCompare(1 + tmpEnergySet.frontalArea, 1 + windPositions[i].frontalArea)
+        if(qFuzzyCompare(1 + tmpEnergySet.frontalArea, 1 + windPositions[i].frontalArea)
                 && qFuzzyCompare(1 + tmpEnergySet.windDragCoeff, 1 + windPositions[i].windDragCoeff))
         {
             tmpEnergySet.windPositionIndex = i;
@@ -233,7 +233,7 @@ void CFilterSpeedCycleEnergy::slotSetWindPositionSpins(qreal)
 void CFilterSpeedCycleEnergy::slotSetComboGround(qint32 groundIndex)
 {
     tmpEnergySet.groundIndex = groundIndex;
-    if (groundIndex > 0)
+    if(groundIndex > 0)
     {
         spinRollingCoeff->setValue(grounds[groundIndex].rollingCoeff);
         tmpEnergySet.rollingCoeff = grounds[groundIndex].rollingCoeff;
@@ -246,9 +246,9 @@ void CFilterSpeedCycleEnergy::slotSetRollingCoeff(qreal rollingCoeff)
 
     tmpEnergySet.groundIndex = 0;
     comboGround->setCurrentIndex(0);
-    for (qint32 i = 1; i < grounds.size(); ++i)
+    for(qint32 i = 1; i < grounds.size(); ++i)
     {
-        if (qFuzzyCompare(1 + rollingCoeff, 1 + grounds[i].rollingCoeff))
+        if(qFuzzyCompare(1 + rollingCoeff, 1 + grounds[i].rollingCoeff))
         {
             tmpEnergySet.groundIndex = i;
             comboGround->setCurrentIndex(i);

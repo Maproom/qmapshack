@@ -841,8 +841,8 @@ void CGisItemTrk::updateExtremaAndExtensions()
         }
 
         updateExtrema(extremaSpeed,    pt.speed, pos);
-        updateExtrema(extremaEle,      pt.ele, pos);
-        updateExtrema(extremaSlope,    (IUnit::getSlopeMode() == IUnit::eSlopePercent) ? pt.slope2 : pt.slope1, pos);
+        updateExtrema(extremaEle,      pt.ele, pos);        
+        updateExtrema(extremaSlope,    pt.slope1, pos);
         updateExtrema(extremaProgress, pt.distance, pos);
     }
 
@@ -2153,6 +2153,8 @@ void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF&, QList<QRectF>& blocke
 
             QString labelMin = ext.toString(limit.min, true, key);
             QString labelMax = ext.toString(limit.max, true, key);
+
+            qDebug() << labelMin << labelMax;
 
             if(!labelMin.isEmpty())
             {

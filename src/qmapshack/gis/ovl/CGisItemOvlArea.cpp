@@ -31,26 +31,6 @@
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
 
-const CGisItemOvlArea::width_t CGisItemOvlArea::lineWidths[OVL_N_WIDTHS] =
-{
-    {3,  tr("thin")}
-    ,{5,  tr("normal")}
-    ,{9,  tr("wide")}
-    ,{13, tr("strong")}
-};
-
-const Qt::BrushStyle CGisItemOvlArea::brushStyles[OVL_N_STYLES] =
-{
-    Qt::NoBrush
-    , Qt::HorPattern
-    , Qt::VerPattern
-    , Qt::CrossPattern
-    , Qt::BDiagPattern
-    , Qt::FDiagPattern
-    , Qt::DiagCrossPattern
-    , Qt::SolidPattern
-};
-
 
 IGisItem::key_t CGisItemOvlArea::keyUserFocus;
 

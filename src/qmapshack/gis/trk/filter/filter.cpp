@@ -417,144 +417,6 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
     changed(tr("Changed average moving cycling speed with profile '%3' to %1%2.").arg(val).arg(unit).arg(cyclingType.name), "://icons/48x48/Time.png");
 }
 
-void CGisItemTrk::filterSpeedCycleEnergy(CFilterSpeedCycle::energy_set_t &energy) const
-{
-    // Input values
-    const qreal joule2Calor = 4.1868;
-    const qreal gravityAccel = 9.81;    // kg * m / s2
-    const qreal muscleCoeff = 23;       // %
-    const qreal pedalRange = 70;        // Degree °
-    const qreal crankLength = 175;      // mm
-
-    qreal totalWeight = energy.driverWeight + energy.bikeWeight;
-    qreal airDensity = energy.airDensity;
-    qreal windSpeed = energy.windSpeed;
-    qreal pedalCadence = energy.pedalCadence;
-    qreal frontalArea = energy.frontalArea;
-    qreal windDragCoeff = energy.windDragCoeff;
-    qreal rollingCoeff = energy.rollingCoeff;
-
-    // Output values
-    energy.airResistForce = 0;
-    energy.rollResistForce = totalWeight * gravityAccel * rollingCoeff;
-    energy.gravitySlopeForce = 0;
-    energy.sumForce = 0;
-    energy.positivePedalForce = 0;
-    energy.power = 0;
-    energy.positivePower = 0;
-    energy.powerMovingTime = 0;
-    energy.powerMovingTimeRatio = 0;
-    energy.energyKJoule = 0;
-
-    qint32 cntPositivePowerPoints = 0;
-
-    qreal pedalSpeed = crankLength * pedalCadence * 2 * M_PI / 60 / 1000;
-
-//    CTrackData::trkpt_t const * lastTrkpt  = nullptr;
-
-    for(const CTrackData::trkpt_t &pt : trk)
-    {
-        if(pt.isHidden())
-        {
-            continue;
-        }
-
-// --- Alternative approach to calculate exact speed, instead using smoothed trkPts speed
-// --- using smoothed trkPts speed will not provide exact power moving time in case of uphill only
-// --- ratio will be then > 100%
-//        qreal speed = 0;
-//        if(lastTrkpt != nullptr)
-//        {
-//            qreal deltaTime = (pt.time.toMSecsSinceEpoch() - lastTrkpt->time.toMSecsSinceEpoch()) / 1000.0;
-//            speed = pt.deltaDistance / deltaTime;
-//            lastTrkpt = &pt;
-//        }
-//        else
-//        {
-//            lastTrkpt = &pt;
-//            continue;
-//        }
-//        if (speed != pt.speed)
-//        {
-//            qDebug() << "pt.speed=" << pt.speed * 3.6 << "speed=" << speed * 3.6 << "speed delta=" << (speed - pt.speed) * 3.6;
-//        }
-
-        qreal speed = pt.speed;
-        if (speed <= 0.2) // 0.2 ==> to be synchron with deriveSecondaryData()
-        {
-            continue;
-        }
-
-        qreal slope = pt.slope2;
-//        slope = 0;
-
-        qreal airResistForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
-        qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
-        energy.airResistForce += airResistForce;
-        energy.gravitySlopeForce += gravitySlopeForce;
-        energy.sumForce += airResistForce + gravitySlopeForce + energy.rollResistForce;
-
-        qreal power = (airResistForce * (speed + windSpeed)) + ((energy.rollResistForce + gravitySlopeForce) * speed);
-        energy.power += power;
-
-        if (power > 0)
-        {
-            qreal deltaPowerTime = pt.deltaDistance / speed;
-            energy.powerMovingTime += deltaPowerTime;
-            energy.positivePower += power;
-            energy.energyKJoule += power * deltaPowerTime / muscleCoeff / 1000 * 100;
-            energy.positivePedalForce += power / pedalSpeed * 180 / pedalRange;
-            cntPositivePowerPoints++;
-        }
-    }
-
-    if (cntVisiblePoints)
-    {
-        energy.airResistForce /= cntVisiblePoints;
-        energy.gravitySlopeForce /= cntVisiblePoints;
-        energy.sumForce /= cntVisiblePoints;
-        energy.power /= cntVisiblePoints;
-    }
-
-    if(totalElapsedSecondsMoving)
-    {
-        energy.powerMovingTimeRatio = energy.powerMovingTime / totalElapsedSecondsMoving;
-
-
-    }
-    if(cntPositivePowerPoints)
-    {
-        energy.positivePedalForce /= cntPositivePowerPoints;
-        energy.positivePower /= cntPositivePowerPoints;
-    }
-    energy.energyKcal = energy.energyKJoule / joule2Calor;
-
-//    qDebug() <<
-//                QString("name;totalWeight;airDensity;windSpeed;pedalCadence;frontalArea;windDragCoeff;rollingCoeff;") +
-//                QString("airResistForce;rollResistForce;gravitySlopeForce;sumForce;positivePedalForce;power;positivePower;") +
-//                QString("powerMovingTime;powerMovingTimeRatio;energyKJoule;energyKcal");
-//    qDebug()
-//            << getName() << ";"
-//            << totalWeight << ";"
-//            << energy.airDensity << ";"
-//            << energy.windSpeed << ";"
-//            << energy.pedalCadence << ";"
-//            << energy.frontalArea << ";"
-//            << energy.windDragCoeff << ";"
-//            << energy.rollingCoeff << ";"
-//            << energy.airResistForce << ";"
-//            << energy.rollResistForce << ";"
-//            << energy.gravitySlopeForce << ";"
-//            << energy.sumForce << ";"
-//            << energy.positivePedalForce << ";"
-//            << energy.power << ";"
-//            << energy.positivePower << ";"
-//            << energy.powerMovingTime << ";"
-//            << energy.powerMovingTimeRatio << ";"
-//            << energy.energyKJoule << ";"
-//            << energy.energyKcal;
-}
-
 void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
 {
     if (!hikingType.isValid())
@@ -715,4 +577,150 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
     deriveSecondaryData();
 
     changed(tr("Start Point moved to: ") + wptName.toLatin1(), "://icons/48x48/FilterChangeStartPoint.png");
+}
+
+void CGisItemTrk::filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet, bool updateStatistic)
+{
+    // Input values
+    const qreal joule2Calor = 4.1868;
+    const qreal gravityAccel = 9.81;    // kg * m / s2
+    const qreal muscleCoeff = 23;       // %
+    const qreal pedalRange = 70;        // Degree °
+    const qreal crankLength = 175;      // mm
+
+    qreal totalWeight = energySet.driverWeight + energySet.bikeWeight;
+    qreal airDensity = energySet.airDensity;
+    qreal windSpeed = energySet.windSpeed;
+    qreal pedalCadence = energySet.pedalCadence;
+    qreal frontalArea = energySet.frontalArea;
+    qreal windDragCoeff = energySet.windDragCoeff;
+    qreal rollingCoeff = energySet.rollingCoeff;
+
+    // Output values
+    energySet.airResistForce = 0;
+    energySet.rollResistForce = totalWeight * gravityAccel * rollingCoeff;
+    energySet.gravitySlopeForce = 0;
+    energySet.sumForce = 0;
+    energySet.positivePedalForce = 0;
+    energySet.power = 0;
+    energySet.positivePower = 0;
+    energySet.powerMovingTime = 0;
+    energySet.powerMovingTimeRatio = 0;
+    energySet.energyKJoule = 0;
+
+    qint32 cntPositivePowerPoints = 0;
+
+    qreal pedalSpeed = crankLength * pedalCadence * 2 * M_PI / 60 / 1000;
+
+//    CTrackData::trkpt_t const * lastTrkpt  = nullptr;
+
+    for(const CTrackData::trkpt_t &pt : trk)
+    {
+        if(pt.isHidden())
+        {
+            continue;
+        }
+
+// --- Alternative approach to calculate exact speed, instead using smoothed trkPts speed
+// --- using smoothed trkPts speed will not provide exact power moving time in case of uphill only
+// --- ratio will be then > 100%
+//        qreal speed = 0;
+//        if(lastTrkpt != nullptr)
+//        {
+//            qreal deltaTime = (pt.time.toMSecsSinceEpoch() - lastTrkpt->time.toMSecsSinceEpoch()) / 1000.0;
+//            speed = pt.deltaDistance / deltaTime;
+//            lastTrkpt = &pt;
+//        }
+//        else
+//        {
+//            lastTrkpt = &pt;
+//            continue;
+//        }
+//        if (speed != pt.speed)
+//        {
+//            qDebug() << "pt.speed=" << pt.speed * 3.6 << "speed=" << speed * 3.6 << "speed delta=" << (speed - pt.speed) * 3.6;
+//        }
+
+        qreal speed = pt.speed;
+        if (speed <= 0.2) // 0.2 ==> to be synchron with deriveSecondaryData()
+        {
+            continue;
+        }
+
+        qreal slope = pt.slope2;
+//        slope = 0;
+
+        qreal airResistForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
+        qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
+        energySet.airResistForce += airResistForce;
+        energySet.gravitySlopeForce += gravitySlopeForce;
+        energySet.sumForce += airResistForce + gravitySlopeForce + energySet.rollResistForce;
+
+        qreal power = (airResistForce * (speed + windSpeed)) + ((energySet.rollResistForce + gravitySlopeForce) * speed);
+        energySet.power += power;
+
+        if (power > 0)
+        {
+            qreal deltaPowerTime = pt.deltaDistance / speed;
+            energySet.powerMovingTime += deltaPowerTime;
+            energySet.positivePower += power;
+            energySet.energyKJoule += power * deltaPowerTime / muscleCoeff / 1000 * 100;
+            energySet.positivePedalForce += power / pedalSpeed * 180 / pedalRange;
+            cntPositivePowerPoints++;
+        }
+    }
+
+    if (cntVisiblePoints)
+    {
+        energySet.airResistForce /= cntVisiblePoints;
+        energySet.gravitySlopeForce /= cntVisiblePoints;
+        energySet.sumForce /= cntVisiblePoints;
+        energySet.power /= cntVisiblePoints;
+    }
+
+    if(totalElapsedSecondsMoving)
+    {
+        energySet.powerMovingTimeRatio = energySet.powerMovingTime / totalElapsedSecondsMoving;
+
+
+    }
+    if(cntPositivePowerPoints)
+    {
+        energySet.positivePedalForce /= cntPositivePowerPoints;
+        energySet.positivePower /= cntPositivePowerPoints;
+    }
+    energySet.energyKcal = energySet.energyKJoule / joule2Calor;
+
+
+    if(updateStatistic)
+    {
+        energyUse = energySet.energyKcal; // Save as track propoerty
+        changed(QString(tr("Set Energy Use for Cycling with profile '%1' to %2kcal")).arg(energySet.nameOfSet).arg(energyUse, 0, 'f', 0),
+                "://icons/48x48/FilterEnergyCycle.png");
+    }
+
+//    qDebug() <<
+//                QString("name;totalWeight;airDensity;windSpeed;pedalCadence;frontalArea;windDragCoeff;rollingCoeff;") +
+//                QString("airResistForce;rollResistForce;gravitySlopeForce;sumForce;positivePedalForce;power;positivePower;") +
+//                QString("powerMovingTime;powerMovingTimeRatio;energyKJoule;energyKcal");
+//    qDebug()
+//            << getName() << ";"
+//            << totalWeight << ";"
+//            << energy.airDensity << ";"
+//            << energy.windSpeed << ";"
+//            << energy.pedalCadence << ";"
+//            << energy.frontalArea << ";"
+//            << energy.windDragCoeff << ";"
+//            << energy.rollingCoeff << ";"
+//            << energy.airResistForce << ";"
+//            << energy.rollResistForce << ";"
+//            << energy.gravitySlopeForce << ";"
+//            << energy.sumForce << ";"
+//            << energy.positivePedalForce << ";"
+//            << energy.power << ";"
+//            << energy.positivePower << ";"
+//            << energy.powerMovingTime << ";"
+//            << energy.powerMovingTimeRatio << ";"
+//            << energy.energyKJoule << ";"
+//            << energy.energyKcal;
 }

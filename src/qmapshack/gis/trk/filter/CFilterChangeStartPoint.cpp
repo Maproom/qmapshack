@@ -16,7 +16,7 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "CFilterChangeStartPoint.h"
+#include "gis/trk/filter/CFilterChangeStartPoint.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 

@@ -52,6 +52,9 @@
      </item>
      <item>
       <widget class="QComboBox" name="comboBox">
+       <property name="toolTip">
+        <string>Select a user specific set of parameters to compute energy use (consumption) for a cycling track.</string>
+       </property>
        <property name="currentText">
         <string/>
        </property>
@@ -81,6 +84,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="toolApply">
+       <property name="toolTip">
+        <string>Open dialog to modify parameter set and compute energy use (consumption) for a cycling track.</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>

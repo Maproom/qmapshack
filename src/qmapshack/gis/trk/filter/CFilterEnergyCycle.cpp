@@ -31,8 +31,6 @@ CFilterEnergyCycle::CFilterEnergyCycle(CGisItemTrk &trk, QWidget *parent) :
 
     loadSettings();
 
-//    updateUi();
-
     connect(toolApply, &QToolButton::clicked, this, &CFilterEnergyCycle::slotApply);
     connect(comboBox, SIGNAL(activated(int)), this, SLOT(slotSetSetting(int)));
 }
@@ -75,7 +73,7 @@ void CFilterEnergyCycle::saveSettings()
     SETTINGS;
     cfg.beginGroup("TrackDetails/Filter/EnergyCycle/");
 
-    cfg.setValue("currentSet", comboBox->currentIndex());
+    cfg.setValue("currentSet", currentSet);
 
     cfg.beginWriteArray("Set");
     for (int i = 0; i < noOfSets; ++i)
@@ -101,16 +99,14 @@ void CFilterEnergyCycle::saveSettings()
 
 void CFilterEnergyCycle::slotApply()
 {
-    const qint32 set = comboBox->currentIndex();
-    energy_set_t &energySet = energySets[set];
+    energy_set_t &energySet = energySets[currentSet];
 
     CFilterEnergyCycleDlg energyDlg(this, trk, energySet);
-
-    if((energyDlg.exec() == QDialog::Accepted))
+    // Update only on a "real" value change
+    if((energyDlg.exec() == QDialog::Accepted) && (!qFuzzyCompare(trk.getEnergyUse() + 1, energySet.energyKcal + 1)))
     {
-        trk.filterEnergyCycle(energySet, true);
-        trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
-        comboBox->setItemText(set, energySet.nameOfSet);
+        trk.filterEnergyCycle(energySet, CFilterEnergyCycle::eUpdateHistory);
+        comboBox->setItemText(currentSet, energySet.nameOfSet);
         saveSettings();
     }
 }
@@ -118,15 +114,12 @@ void CFilterEnergyCycle::slotApply()
 void CFilterEnergyCycle::updateUi()
 {
     energy_set_t &energySet = energySets[currentSet];
-
-    trk.filterEnergyCycle(energySet, true);
-    trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
+    trk.filterEnergyCycle(energySet, CFilterEnergyCycle::eUpdateStatistics);
 }
 
 void CFilterEnergyCycle::slotSetSetting(int set)
 {
     currentSet = set;
-//    updateUi();
     SETTINGS;
     cfg.beginGroup("TrackDetails/Filter/EnergyCycle/");
     cfg.setValue("currentSet", currentSet);

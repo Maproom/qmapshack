@@ -447,7 +447,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 
     str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints) + "<br />";
 
-    if(energyUse)
+    if(energyUse != NOFLOAT)
     {
         str += tr("Energy Use Cycling: %1").arg(energyUse, 0, 'f', 0) + "kcal<br/>";
     }

@@ -27,7 +27,6 @@
 #include "gis/trk/filter/CFilterSpeedCycle.h"
 #include "gis/trk/filter/CFilterSpeedHike.h"
 #include "gis/trk/filter/CFilterEnergyCycle.h"
-
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
@@ -184,6 +183,11 @@ public:
     const QString& getName() const override
     {
         return trk.name.isEmpty() ? noName : trk.name;
+    }
+
+    qreal getEnergyUse() const
+    {
+        return energyUse;
     }
 
     /// returns "true" when trk has no time-related invalid points
@@ -555,7 +559,7 @@ public:
     void filterDeleteExtension(const QString &ext);
     void filterSubPt2Pt();
     void filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName);
-    void filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet, bool updateStatistic);
+    void filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet, CFilterEnergyCycle::update_visual_e updateVis);
     /** @} */
 
     /**
@@ -782,7 +786,7 @@ private:
     qreal totalElapsedSeconds = 0;
     qreal totalElapsedSecondsMoving = 0;
     quint32 numberOfAttachedWpt = 0;
-    qreal energyUse = 0;
+    qreal energyUse = NOFLOAT;
 
     void checkForInvalidPoints();
     /**@}*/

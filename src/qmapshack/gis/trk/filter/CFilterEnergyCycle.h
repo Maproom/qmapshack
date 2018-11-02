@@ -29,6 +29,13 @@ class CFilterEnergyCycle : public QWidget, private Ui::IFilterEnergyCycle
 
 public:
 
+    enum update_visual_e
+    {
+        eUpdateNone        = 0
+        , eUpdateStatistics = 0x01
+        , eUpdateHistory   = 0x02
+    };
+
     struct energy_set_t
     {
         QString nameOfSet;

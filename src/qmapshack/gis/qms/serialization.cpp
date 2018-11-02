@@ -585,7 +585,7 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     }
     else
     {
-        energyUse = 0;
+        energyUse = NOFLOAT;
     }
 
     if(version > 1 && version <= 4)

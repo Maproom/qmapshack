@@ -147,7 +147,7 @@ void CFilterEnergyCycleDlg::slotOk(bool)
 
 void CFilterEnergyCycleDlg::slotApply(bool)
 {
-    trk.filterEnergyCycle(tmpEnergySet, false);
+    trk.filterEnergyCycle(tmpEnergySet, CFilterEnergyCycle::eUpdateNone); // Calculation for dialog only; no stat; no history
 
     labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.driverWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
 

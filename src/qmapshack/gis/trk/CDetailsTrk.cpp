@@ -506,11 +506,11 @@ void CDetailsTrk::updateData()
         filterChangeStartPoint->updateUi();
     }
 
-//    CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
-//    if(nullptr != filterEnergyCycle)
-//    {
-//        filterEnergyCycle->updateUi();
-//    }
+    CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
+    if(nullptr != filterEnergyCycle && treeFilter->hasFocus()) // Update for filters only
+    {
+        filterEnergyCycle->updateUi();
+    }
 
     enableTabFilter();
 

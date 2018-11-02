@@ -27,8 +27,8 @@ class QSettings;
 class CFilterSpeedCycle : public QWidget, private Ui::IFilterSpeedCycle
 {
     Q_OBJECT
-
 public:
+
     struct cycling_type_t
     {
         QString name;
@@ -39,39 +39,12 @@ public:
         qreal slopeAtMaxSpeed;
     };
 
-    struct energy_set_t
-    {
-        qreal driverWeight;
-        qreal bikeWeight;
-        qreal airDensity;
-        qint32 windSpeedIndex;
-        qreal windSpeed;
-        qint32 windPositionIndex;
-        qreal frontalArea;
-        qreal windDragCoeff;
-        qint32 groundIndex;
-        qreal rollingCoeff;
-        qreal pedalCadence;
-        qreal airResistForce;
-        qreal gravitySlopeForce;
-        qreal rollResistForce;
-        qreal sumForce;
-        qreal powerMovingTime;
-        qreal power;
-        qreal positivePower;
-        qreal powerMovingTimeRatio;
-        qreal energyKJoule;
-        qreal energyKcal;
-        qreal positivePedalForce;
-    };
-
     CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk);
     virtual ~CFilterSpeedCycle() = default;
 
     void loadSettings(QSettings &cfg);
     void saveSettings(QSettings &cfg);
     void apply(CGisItemTrk& trk);
-    void updateUi();
 
 private slots:
     void slotSetCyclingType(int type);
@@ -81,19 +54,13 @@ private slots:
     void slotSetMaxSpeed(double speed);
     void slotSetSlopeAtMaxSpeed(double slope);
     void slotSetMinMaxSlopes(bool);
-    void slotApplyEnergy();
 
 private:
-    void insertEnergy(bool valid);
-
-    const CGisItemTrk &trk;
+    const CGisItemTrk &trk; // Needed for filterGetSlopeLimits
     const qint32 noOfFixTypes;
     const qint32 noOfCustomTypes;
     const QList<cycling_type_t> cyclingTypeDefaults;
-    const QList <energy_set_t> energySetDefaults;
-
     QList <cycling_type_t> cyclingTypes;
-    QList <energy_set_t> energySets;
 };
 
 #endif //CFILTERSPEEDCYCLE_H

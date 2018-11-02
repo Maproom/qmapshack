@@ -169,6 +169,8 @@ set( SRCS
     gis/trk/filter/CFilterDelete.cpp
     gis/trk/filter/CFilterDeleteExtension.cpp
     gis/trk/filter/CFilterDouglasPeuker.cpp
+    gis/trk/filter/CFilterEnergyCycle.cpp
+    gis/trk/filter/CFilterEnergyCycleDlg.cpp
     gis/trk/filter/CFilterInterpolateElevation.cpp
     gis/trk/filter/CFilterInvalid.cpp
     gis/trk/filter/CFilterMedian.cpp
@@ -180,7 +182,6 @@ set( SRCS
     gis/trk/filter/CFilterSpeed.cpp
     gis/trk/filter/CFilterSpeedConst.cpp
     gis/trk/filter/CFilterSpeedCycle.cpp
-    gis/trk/filter/CFilterSpeedCycleEnergy.cpp
     gis/trk/filter/CFilterSpeedHike.cpp
     gis/trk/filter/CFilterSplitSegment.cpp
     gis/trk/filter/CFilterSubPt2Pt.cpp
@@ -493,6 +494,8 @@ set( HDRS
     gis/trk/filter/CFilterDelete.h
     gis/trk/filter/CFilterDeleteExtension.h
     gis/trk/filter/CFilterDouglasPeuker.h
+    gis/trk/filter/CFilterEnergyCycle.h
+    gis/trk/filter/CFilterEnergyCycleDlg.h
     gis/trk/filter/CFilterInterpolateElevation.h
     gis/trk/filter/CFilterInvalid.h
     gis/trk/filter/CFilterMedian.h
@@ -504,7 +507,6 @@ set( HDRS
     gis/trk/filter/CFilterSpeed.h
     gis/trk/filter/CFilterSpeedConst.h
     gis/trk/filter/CFilterSpeedCycle.h
-    gis/trk/filter/CFilterSpeedCycleEnergy.h
     gis/trk/filter/CFilterSpeedHike.h
     gis/trk/filter/CFilterSplitSegment.h
     gis/trk/filter/CFilterSubPt2Pt.h
@@ -725,6 +727,8 @@ set( UIS
     gis/trk/filter/IFilterDelete.ui
     gis/trk/filter/IFilterDeleteExtension.ui
     gis/trk/filter/IFilterDouglasPeuker.ui
+    gis/trk/filter/IFilterEnergyCycle.ui
+    gis/trk/filter/IFilterEnergyCycleDlg.ui
     gis/trk/filter/IFilterInterpolateElevation.ui
     gis/trk/filter/IFilterInvalid.ui
     gis/trk/filter/IFilterMedian.ui
@@ -736,7 +740,6 @@ set( UIS
     gis/trk/filter/IFilterSpeed.ui
     gis/trk/filter/IFilterSpeedConst.ui
     gis/trk/filter/IFilterSpeedCycle.ui
-    gis/trk/filter/IFilterSpeedCycleEnergy.ui
     gis/trk/filter/IFilterSpeedHike.ui
     gis/trk/filter/IFilterSplitSegment.ui
     gis/trk/filter/IFilterSubPt2Pt.ui

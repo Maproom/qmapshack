@@ -31,6 +31,7 @@
 #include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 #include "gis/trk/filter/CFilterReset.h"
+#include "gis/trk/filter/CFilterEnergyCycle.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
 #include "gis/trk/filter/CFilterSubPt2Pt.h"
@@ -181,13 +182,20 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
         (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png", minWidth);
 
-    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint>
+    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint, CFilterEnergyCycle>
         (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png", minWidth);
 
     // limit tree widget horizontal size to the filter widget with the largest minimum size
     treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
 
     slotShowPlots();
+
+//    CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
+//    if(nullptr != filterEnergyCycle)
+//    {
+//        filterEnergyCycle->updateUi();
+//        labelInfo->setText(trk.getInfo(IGisItem::eFeatureNone));
+//    }
 }
 
 CDetailsTrk::~CDetailsTrk()
@@ -492,17 +500,17 @@ void CDetailsTrk::updateData()
         filterSpeed->updateUi();
     }
 
-    CFilterSpeedCycle *filterSpeedCycle = treeFilter->findChild<CFilterSpeedCycle *>("IFilterSpeedCycle");
-    if(nullptr != filterSpeedCycle)
-    {
-        filterSpeedCycle->updateUi();
-    }
-
     CFilterChangeStartPoint *filterChangeStartPoint = tabWidget->findChild<CFilterChangeStartPoint *>("IFilterChangeStartPoint");
     if(nullptr != filterChangeStartPoint)
     {
         filterChangeStartPoint->updateUi();
     }
+
+//    CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
+//    if(nullptr != filterEnergyCycle)
+//    {
+//        filterEnergyCycle->updateUi();
+//    }
 
     enableTabFilter();
 

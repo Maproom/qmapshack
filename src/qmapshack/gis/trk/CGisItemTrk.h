@@ -26,6 +26,8 @@
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSpeedCycle.h"
 #include "gis/trk/filter/CFilterSpeedHike.h"
+#include "gis/trk/filter/CFilterEnergyCycle.h"
+
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
@@ -539,7 +541,6 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
-    void filterSpeedCycleEnergy(CFilterSpeedCycle::energy_set_t &en) const;
     void filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType);
     void filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType);
 
@@ -554,6 +555,7 @@ public:
     void filterDeleteExtension(const QString &ext);
     void filterSubPt2Pt();
     void filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName);
+    void filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet, bool updateStatistic);
     /** @} */
 
     /**
@@ -780,6 +782,7 @@ private:
     qreal totalElapsedSeconds = 0;
     qreal totalElapsedSecondsMoving = 0;
     quint32 numberOfAttachedWpt = 0;
+    qreal energyUse = 0;
 
     void checkForInvalidPoints();
     /**@}*/

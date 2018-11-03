@@ -123,8 +123,26 @@ public:
         QString string;
     };
 
-    static const width_t lineWidths[OVL_N_WIDTHS];
-    static const Qt::BrushStyle brushStyles[OVL_N_STYLES];
+    const width_t lineWidths[OVL_N_WIDTHS] =
+    {
+        {3,  tr("thin")}
+        ,{5,  tr("normal")}
+        ,{9,  tr("wide")}
+        ,{13, tr("strong")}
+    };
+
+    const Qt::BrushStyle brushStyles[OVL_N_STYLES] =
+    {
+        Qt::NoBrush
+        , Qt::HorPattern
+        , Qt::VerPattern
+        , Qt::CrossPattern
+        , Qt::BDiagPattern
+        , Qt::FDiagPattern
+        , Qt::DiagCrossPattern
+        , Qt::SolidPattern
+    };
+
 protected:
     void setSymbol() override;
 

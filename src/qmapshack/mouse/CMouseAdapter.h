@@ -42,6 +42,8 @@ public:
 
     void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect);
 
+    void unfocus();
+
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);

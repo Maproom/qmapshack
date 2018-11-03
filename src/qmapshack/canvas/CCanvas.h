@@ -112,6 +112,7 @@ public:
 
     static void triggerCompleteUpdate(CCanvas::redraw_e flags);
 
+    void abortMouse();
     void resetMouse();
     void mouseTrackingLost();
     void setMouseMoveWpt(CGisItemWpt& wpt);

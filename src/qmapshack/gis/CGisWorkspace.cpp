@@ -227,7 +227,7 @@ void CGisWorkspace::slotWksItemSelectionChanged()
 
 void CGisWorkspace::slotWksItemPressed(QTreeWidgetItem * i)
 {
-    IGisItem * item     = dynamic_cast<IGisItem*>(i);
+    IGisItem * item = dynamic_cast<IGisItem*>(i);
     if(item != nullptr)
     {
         IGisProject * project = item->getParentProject();
@@ -237,6 +237,7 @@ void CGisWorkspace::slotWksItemPressed(QTreeWidgetItem * i)
             for(CCanvas * canvas : CMainWindow::self().getCanvas())
             {
                 canvas->reportStatus("WksSelection", tr("<b>Item Selection: </b>Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior."));
+                canvas->abortMouse();
             }
         }
     }
@@ -252,6 +253,7 @@ void CGisWorkspace::slotWksItemSelectionReset()
     for(CCanvas * canvas : CMainWindow::self().getCanvas())
     {
         canvas->reportStatus("WksSelection", "");
+        canvas->abortMouse();
     }
 }
 

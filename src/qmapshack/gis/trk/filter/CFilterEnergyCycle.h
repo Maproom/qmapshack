@@ -71,6 +71,8 @@ public:
 private slots:
     void slotApply();
     void slotSetSetting(int set);
+    void slotRemove(bool);
+
 
 private:
     void loadSettings();

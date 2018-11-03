@@ -64,3 +64,4 @@ private:
 };
 
 #endif //CFILTERSPEEDCYCLE_H
+

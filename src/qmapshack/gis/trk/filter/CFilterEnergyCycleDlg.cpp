@@ -64,7 +64,6 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
 
     tmpEnergySet = energySet; // Changes will be made first in tmpEnergySet before saving back on OK button
 
-
     for(const wind_speed_t &windSpeed : windSpeeds)
     {
         comboWindSpeed->addItem(windSpeed.name);

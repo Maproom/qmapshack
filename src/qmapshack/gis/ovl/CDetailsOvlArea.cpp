@@ -31,28 +31,26 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     setupUi(this);
 
     QPixmap icon(64,24);
-    const QVector<IGisItem::color_t>& colorMap = IGisItem::getColorMap();
-    for(int i = 0; i < colorMap.size(); ++i)
+    for(const IGisItem::color_t& color : IGisItem::getColorMap())
     {
-        icon.fill(colorMap[i].color);
-        comboColor->addItem(icon,"", colorMap[i].color);
+        icon.fill(color.color);
+        comboColor->addItem(icon,"", color.color);
     }
 
-    for(int i = 0; i < OVL_N_STYLES; ++i)
+    for(const Qt::BrushStyle& style : area.brushStyles)
     {
         icon.fill(Qt::white);
         QPainter p(&icon);
         p.setPen(Qt::black);
-        p.setBrush(CGisItemOvlArea::brushStyles[i]);
+        p.setBrush(style);
         p.drawRect(icon.rect());
 
-        comboStyle->addItem(icon,"",(int)CGisItemOvlArea::brushStyles[i]);
+        comboStyle->addItem(icon,"",int(style));
     }
 
-
-    for(int i = 0; i < OVL_N_WIDTHS; ++i)
+    for(const CGisItemOvlArea::width_t& width : area.lineWidths)
     {
-        comboBorderWidth->addItem(CGisItemOvlArea::lineWidths[i].string, CGisItemOvlArea::lineWidths[i].width);
+        comboBorderWidth->addItem(width.string, width.width);
     }
 
     setupGui();
@@ -97,7 +95,7 @@ void CDetailsOvlArea::slotSetWidth(int idx)
     {
         return;
     }
-    area.setWidth(CGisItemOvlArea::lineWidths[idx].width);
+    area.setWidth(area.lineWidths[idx].width);
     setupGui();
 }
 
@@ -108,7 +106,7 @@ void CDetailsOvlArea::slotSetStyle(int idx)
         return;
     }
 
-    area.setStyle(CGisItemOvlArea::brushStyles[idx]);
+    area.setStyle(area.brushStyles[idx]);
     setupGui();
 }
 

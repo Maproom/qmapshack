@@ -226,4 +226,3 @@ void CFilterSpeedCycle::slotSetMinMaxSlopes(bool)
         spinSlopeAtMaxSpeed->setValue(minSlope);
     }
 }
-

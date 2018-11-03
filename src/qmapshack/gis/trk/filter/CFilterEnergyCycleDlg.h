@@ -29,12 +29,14 @@ class CFilterEnergyCycleDlg : public QDialog, private Ui::IFilterEnergyCycleDlg
     Q_OBJECT
 
 public:
-    explicit CFilterEnergyCycleDlg(QWidget *parent, /*const*/ CGisItemTrk &trk, CFilterEnergyCycle::energy_set_t &tmpEnergySet);
+    explicit CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
+                                   CFilterEnergyCycle::energy_set_t &tmpEnergySet, const CFilterEnergyCycle::energy_set_t &defaultSet);
     ~CFilterEnergyCycleDlg();
 
 private slots:
     void slotOk(bool);
     void slotApply(bool);
+    void slotRestoreDefaults(bool);
     void slotSetNameOfSet();
     void slotSetWeight(qreal);
     void slotSetComboWindSpeed(qint32 windSpeedIndex);
@@ -71,7 +73,10 @@ private:
 
     CGisItemTrk &trk;
     CFilterEnergyCycle::energy_set_t &energySet;
+    const CFilterEnergyCycle::energy_set_t &defaultSet;
     CFilterEnergyCycle::energy_set_t tmpEnergySet;
+
+    void updateUi();
 };
 
 #endif // CFILTERENERGYCYCLEDLG_H

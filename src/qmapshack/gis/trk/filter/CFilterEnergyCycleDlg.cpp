@@ -18,7 +18,8 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterEnergyCycleDlg.h"
 
-CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk, CFilterEnergyCycle::energy_set_t &energySet) :
+CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
+                                             CFilterEnergyCycle::energy_set_t &energySet, const CFilterEnergyCycle::energy_set_t &defaultSet) :
     QDialog(parent)
   , windSpeeds
     {
@@ -57,68 +58,31 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk, 
     }
   , trk(trk)
   , energySet(energySet)
+  , defaultSet(defaultSet)
 {
     setupUi(this);
 
     tmpEnergySet = energySet; // Changes will be made first in tmpEnergySet before saving back on OK button
 
-    lineEditNameOfSet->setText(tmpEnergySet.nameOfSet);
-    slotSetNameOfSet(); // To fill windowTitle
-
-    spinDriverWeight->setValue(tmpEnergySet.driverWeight);
-    spinBikeWeight->setValue(tmpEnergySet.bikeWeight);
-    labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.driverWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
 
     for(const wind_speed_t &windSpeed : windSpeeds)
     {
         comboWindSpeed->addItem(windSpeed.name);
     }
-    comboWindSpeed->setCurrentIndex(tmpEnergySet.windSpeedIndex);
-    if(tmpEnergySet.windSpeedIndex > 0)
-    {
-        spinWindSpeed->setValue(windSpeeds[tmpEnergySet.windSpeedIndex].windSpeed * 3.6); // m/s ==> km/h
-    }
-    else
-    {
-        spinWindSpeed->setValue(tmpEnergySet.windSpeed * 3.6);
-    }
-
-    spinAirDensity->setValue(tmpEnergySet.airDensity);
-
     for(const wind_position_t &windPosition : windPositions)
     {
         comboWindPosition->addItem(windPosition.name);
     }
-    comboWindPosition->setCurrentIndex(tmpEnergySet.windPositionIndex);
-    if(tmpEnergySet.windPositionIndex > 0)
-    {
-        spinFrontalArea->setValue(windPositions[tmpEnergySet.windPositionIndex].frontalArea);
-        spinWindDragCoeff->setValue(windPositions[tmpEnergySet.windPositionIndex].windDragCoeff);
-    }
-    else
-    {
-        spinFrontalArea->setValue(tmpEnergySet.frontalArea);
-        spinWindDragCoeff->setValue(tmpEnergySet.windDragCoeff);
-    }
-
     for(const ground_condition_t &ground : grounds)
     {
         comboGround->addItem(ground.name);
     }
-    comboGround->setCurrentIndex(tmpEnergySet.groundIndex);
-    if(tmpEnergySet.groundIndex > 0)
-    {
-        spinRollingCoeff->setValue(grounds[tmpEnergySet.groundIndex].rollingCoeff);
-    }
-    else
-    {
-        spinRollingCoeff->setValue(tmpEnergySet.rollingCoeff);
-    }
 
-    spinPedalCadence->setValue(tmpEnergySet.pedalCadence);
+    updateUi();
 
     connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(slotOk(bool)));
     connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(slotApply(bool)));
+    connect(buttonBox->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked(bool)), this, SLOT(slotRestoreDefaults(bool)));
     connect(lineEditNameOfSet, SIGNAL(editingFinished()), this, SLOT(slotSetNameOfSet()));
     connect(spinDriverWeight, SIGNAL(valueChanged(double)), this, SLOT(slotSetWeight(double)));
     connect(spinBikeWeight, SIGNAL(valueChanged(double)), this, SLOT(slotSetWeight(double)));
@@ -137,6 +101,52 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk, 
 
 CFilterEnergyCycleDlg::~CFilterEnergyCycleDlg()
 {
+}
+
+void CFilterEnergyCycleDlg::updateUi()
+{
+    lineEditNameOfSet->setText(tmpEnergySet.nameOfSet);
+    slotSetNameOfSet(); // To fill windowTitle
+
+    spinDriverWeight->setValue(tmpEnergySet.driverWeight);
+    spinBikeWeight->setValue(tmpEnergySet.bikeWeight);
+    labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.driverWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));
+
+    comboWindSpeed->setCurrentIndex(tmpEnergySet.windSpeedIndex);
+    if(tmpEnergySet.windSpeedIndex > 0)
+    {
+        spinWindSpeed->setValue(windSpeeds[tmpEnergySet.windSpeedIndex].windSpeed * 3.6); // m/s ==> km/h
+    }
+    else
+    {
+        spinWindSpeed->setValue(tmpEnergySet.windSpeed * 3.6);
+    }
+
+    spinAirDensity->setValue(tmpEnergySet.airDensity);
+
+    comboWindPosition->setCurrentIndex(tmpEnergySet.windPositionIndex);
+    if(tmpEnergySet.windPositionIndex > 0)
+    {
+        spinFrontalArea->setValue(windPositions[tmpEnergySet.windPositionIndex].frontalArea);
+        spinWindDragCoeff->setValue(windPositions[tmpEnergySet.windPositionIndex].windDragCoeff);
+    }
+    else
+    {
+        spinFrontalArea->setValue(tmpEnergySet.frontalArea);
+        spinWindDragCoeff->setValue(tmpEnergySet.windDragCoeff);
+    }
+
+    comboGround->setCurrentIndex(tmpEnergySet.groundIndex);
+    if(tmpEnergySet.groundIndex > 0)
+    {
+        spinRollingCoeff->setValue(grounds[tmpEnergySet.groundIndex].rollingCoeff);
+    }
+    else
+    {
+        spinRollingCoeff->setValue(tmpEnergySet.rollingCoeff);
+    }
+
+    spinPedalCadence->setValue(tmpEnergySet.pedalCadence);
 }
 
 void CFilterEnergyCycleDlg::slotOk(bool)
@@ -168,6 +178,15 @@ void CFilterEnergyCycleDlg::slotApply(bool)
     labelEnergyKcal->setText(QString("<b><u>%1kcal</u></b>").arg(tmpEnergySet.energyKcal, 0, 'f', 0));
 
     labelPositivePedalForce->setText(QString("<b>%1N</b>").arg(tmpEnergySet.positivePedalForce, 0, 'f', 1));
+}
+
+void CFilterEnergyCycleDlg::slotRestoreDefaults(bool)
+{
+    QString sikName = tmpEnergySet.nameOfSet;
+    tmpEnergySet = defaultSet;
+    tmpEnergySet.nameOfSet = sikName;
+    updateUi();
+    slotApply(true);
 }
 
 void CFilterEnergyCycleDlg::slotSetNameOfSet()

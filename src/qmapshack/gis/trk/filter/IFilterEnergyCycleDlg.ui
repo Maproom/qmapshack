@@ -32,7 +32,7 @@
      <item>
       <widget class="QLineEdit" name="lineEditNameOfSet">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hier können Sie einen individuellen Namen (max. 32 Zeichen) für das Parameterset vergeben.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;You can enter an individual name (max. 32 characters) for the set of parameter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Individueller Name (max. 32 Zeichen) für das Parameterset.&lt;/p&gt;&lt;p&gt;Individual name (max. 32 characters) for the set of parameter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="maxLength">
         <number>32</number>

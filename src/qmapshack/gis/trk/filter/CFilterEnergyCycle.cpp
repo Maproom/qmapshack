@@ -101,7 +101,7 @@ void CFilterEnergyCycle::slotApply()
 {
     energy_set_t &energySet = energySets[currentSet];
 
-    CFilterEnergyCycleDlg energyDlg(this, trk, energySet);
+    CFilterEnergyCycleDlg energyDlg(this, trk, energySet, energyDefaultSet);
     // Update only on a "real" value change
     if((energyDlg.exec() == QDialog::Accepted) && (!qFuzzyCompare(trk.getEnergyUse() + 1, energySet.energyKcal + 1)))
     {

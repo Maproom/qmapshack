@@ -189,13 +189,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
 
     slotShowPlots();
-
-//    CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
-//    if(nullptr != filterEnergyCycle)
-//    {
-//        filterEnergyCycle->updateUi();
-//        labelInfo->setText(trk.getInfo(IGisItem::eFeatureNone));
-//    }
 }
 
 CDetailsTrk::~CDetailsTrk()

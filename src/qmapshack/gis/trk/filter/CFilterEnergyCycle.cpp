@@ -31,8 +31,9 @@ CFilterEnergyCycle::CFilterEnergyCycle(CGisItemTrk &trk, QWidget *parent) :
 
     loadSettings();
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterEnergyCycle::slotApply);
     connect(comboBox, SIGNAL(activated(int)), this, SLOT(slotSetSetting(int)));
+    connect(pushButton, SIGNAL(clicked(bool)), this, SLOT(slotRemove(bool)));
+    connect(toolApply, &QToolButton::clicked, this, &CFilterEnergyCycle::slotApply);
 }
 
 void CFilterEnergyCycle::loadSettings()
@@ -110,13 +111,6 @@ void CFilterEnergyCycle::slotApply()
         saveSettings();
     }
 }
-
-void CFilterEnergyCycle::updateUi()
-{
-    energy_set_t &energySet = energySets[currentSet];
-    trk.filterEnergyCycle(energySet, CFilterEnergyCycle::eUpdateStatistics);
-}
-
 void CFilterEnergyCycle::slotSetSetting(int set)
 {
     currentSet = set;
@@ -125,3 +119,16 @@ void CFilterEnergyCycle::slotSetSetting(int set)
     cfg.setValue("currentSet", currentSet);
     cfg.endGroup();
 }
+
+void CFilterEnergyCycle::slotRemove(bool)
+{
+    trk.setEnergyUse(NOFLOAT);
+    trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
+}
+
+void CFilterEnergyCycle::updateUi()
+{
+    energy_set_t &energySet = energySets[currentSet];
+    trk.filterEnergyCycle(energySet, CFilterEnergyCycle::eUpdateStatistics);
+}
+

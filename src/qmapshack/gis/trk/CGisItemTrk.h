@@ -185,10 +185,8 @@ public:
         return trk.name.isEmpty() ? noName : trk.name;
     }
 
-    qreal getEnergyUse() const
-    {
-        return energyUse;
-    }
+    qreal getEnergyUse() const { return energyUse; }
+    void setEnergyUse(qreal value) {  energyUse = value; }
 
     /// returns "true" when trk has no time-related invalid points
     bool isTrkTimeValid() const { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }

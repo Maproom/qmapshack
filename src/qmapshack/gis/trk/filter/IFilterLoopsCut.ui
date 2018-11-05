@@ -54,7 +54,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Cut when distance to track is less than</string>
+        <string>Cut track when loop length is greater than</string>
        </property>
       </widget>
      </item>
@@ -71,6 +71,12 @@
        </property>
        <property name="minimum">
         <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>999</number>
+       </property>
+       <property name="value">
+        <number>10</number>
        </property>
       </widget>
      </item>

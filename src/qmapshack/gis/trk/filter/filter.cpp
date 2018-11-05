@@ -24,6 +24,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "GeoMath.h"
+#include "gis/trk/filter/CFilterLoopsCut.h"
 
 
 #include <proj_api.h>
@@ -584,11 +585,7 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
     changed(tr("Start Point moved to: ") + wptName.toLatin1(), "://icons/48x48/FilterChangeStartPoint.png");
 }
 
-// @brief Used to create a new track from a part of an existing track
-//CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const CTrackData &srctrk, IGisProject *project);
-
-
-void CGisItemTrk::filterLoopsCut(qreal dist)
+void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
 {
     IGisProject * project = CGisWorkspace::self().selectProject();
     if(nullptr == project)
@@ -596,63 +593,87 @@ void CGisItemTrk::filterLoopsCut(qreal dist)
         return;
     }
 
-    CTrackData::trkpt_t tailPt;
-
     int part = 0;
-    bool tailFound = false;
+    QVector<CTrackData::trkpt_t> pts;
 
-    for(const CTrackData::trkpt_t& headPt : trk)
+    for (const CTrackData::trkpt_t& headPt : trk)
     {
         if(headPt.isHidden())
         {
             continue;
         }
 
-        if (!tailFound)
+        pts << headPt;
+
+        if (pts.size() >= 4)
         {
-            tailPt = headPt;
-            tailFound = true;
-        }
+            qreal xa1 = headPt.lon;
+            qreal ya1 = headPt.lat;
+            qreal xa2 = pts[pts.size()-2].lon;
+            qreal ya2 = pts[pts.size()-2].lat;
 
-        bool startPhase = true;
-
-        for( int i = headPt.idxTotal ; i >= tailPt.idxTotal ; i--)
-        {
-            const CTrackData::trkpt_t *scannedPt = trk.getTrkPtByTotalIndex(i);
-
-            if (startPhase)
+            bool firstCycle = true;
+            CTrackData::trkpt_t prevScannedPt;
+            for (const CTrackData::trkpt_t& scannedPt : pts)
             {
-                qreal d = GPS_Math_DistanceQuick(scannedPt->lon * DEG_TO_RAD, scannedPt->lat* DEG_TO_RAD, headPt.lon* DEG_TO_RAD, headPt.lat* DEG_TO_RAD);
-                if (d > dist)
+                if (scannedPt.idxTotal == pts[pts.size()-2].idxTotal)
                 {
-                    startPhase = false;
+                    break;
                 }
-            }
-            else
-            {
 
-                if (scannedPt->isHidden())
+                if (firstCycle)
                 {
+                    prevScannedPt = scannedPt;
+                    firstCycle = false;
                     continue;
                 }
-                qreal d = GPS_Math_DistanceQuick(scannedPt->lon * DEG_TO_RAD, scannedPt->lat* DEG_TO_RAD, headPt.lon* DEG_TO_RAD, headPt.lat* DEG_TO_RAD);
-                if (d < dist)
-                {
-                    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), tailPt.idxTotal, headPt.idxTotal, trk, project);
-                    part++;
-                    tailPt = headPt;
-                    startPhase = true;
 
+                qreal xb1 = scannedPt.lon;
+                qreal yb1 = scannedPt.lat;
+                qreal xb2 = prevScannedPt.lon;
+                qreal yb2 = prevScannedPt.lat;
+
+                // calculation of intersection point longitude
+                qreal a = (ya2-ya1)/(xa2-xa1);
+                qreal b = ya1 - a * xa1;
+                qreal c = (yb2 - yb1) / (xb2 - xb1);
+                qreal d = yb1 - c * xb1;
+
+                qreal xintersec = (d-b)/(a-c);
+
+                if (
+                        (
+                            (pts[pts.size()-2].distance - scannedPt.distance) > minLoopLength // loop is long enough to cut the track
+                        )
+                        &&
+                        (
+                            (
+                                ((abs(xintersec) <= abs (xa1)) && (abs(xintersec) >= abs (xa2)))
+                                ||
+                                ((abs(xintersec) >= abs (xa1)) && (abs(xintersec) <= abs (xa2)))
+                            )
+                            &&
+                            (
+                                ((abs(xintersec) <= abs (xb1)) && (abs(xintersec) >= abs (xb2)))
+                                ||
+                                ((abs(xintersec) >= abs (xb1)) && (abs(xintersec) <= abs (xb2)))
+                            )   // segments do intersect
+                        )
+                    )
+                {
+                    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts[pts.size()-2].idxTotal, trk, project); // index à revoir !!
+                    part++;
+                    pts.remove(0, pts.size()-2);
+
+                    break;
                 }
+
+                prevScannedPt = scannedPt;
             }
         }
     }
 
+
     // last part : no loop detected but this last part should be copied, too
-    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), tailPt.idxTotal, trk.segs.last().pts.last().idxTotal, trk, project);
-
-    QString val, unit;
-    IUnit::self().meter2distance(dist, val, unit);
-    changed(tr("Cut track loops with a distance criteria of (%1%2)").arg(val).arg(unit), "://icons/48x48/FilterLoopsCut.png");
+    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts.last().idxTotal, trk, project);
 }
-

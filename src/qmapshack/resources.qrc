@@ -110,6 +110,7 @@
         <file>../icons/32x32/Down.png</file>
         <file>../icons/32x32/EditDetails.png</file>
         <file>../icons/32x32/EditText.png</file>
+        <file>../icons/32x32/EditView.png</file>
         <file>../icons/32x32/Empty.png</file>
         <file>../icons/32x32/Error.png</file>
         <file>../icons/32x32/Filter.png</file>
@@ -356,6 +357,7 @@
         <file>../icons/48x48/Down.png</file>
         <file>../icons/48x48/EditDetails.png</file>
         <file>../icons/48x48/EditText.png</file>
+        <file>../icons/48x48/EditView.png</file>
         <file>../icons/48x48/Empty.png</file>
         <file>../icons/48x48/Error.png</file>
         <file>../icons/48x48/Filter.png</file>

@@ -2748,54 +2748,64 @@ ligne %2, colonne %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="946"/>
+        <location filename="../CMainWindow.cpp" line="936"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1075"/>
+        <location filename="../CMainWindow.cpp" line="1065"/>
         <source>Ele.: %1%2</source>
         <translation>Altitude: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1087"/>
+        <location filename="../CMainWindow.cpp" line="1077"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pente du terrain : %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1103"/>
+        <location filename="../CMainWindow.cpp" line="1093"/>
         <source>[Grid: %1]</source>
         <translation>[Grille: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1244"/>
+        <location filename="../CMainWindow.cpp" line="1234"/>
         <source>Load GIS Data...</source>
         <translation>Charger des données SIG...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1278"/>
+        <location filename="../CMainWindow.cpp" line="1268"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1278"/>
-        <location filename="../CMainWindow.cpp" line="1304"/>
+        <location filename="../CMainWindow.cpp" line="1268"/>
+        <location filename="../CMainWindow.cpp" line="1294"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vue QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1304"/>
+        <location filename="../CMainWindow.cpp" line="1294"/>
         <source>Select file to load</source>
         <translation>Sélectionner le fichier à charger</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1721"/>
+        <location filename="../CMainWindow.cpp" line="1576"/>
+        <source>Rename View...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="1576"/>
+        <source>Enter new name for view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="1726"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1722"/>
+        <location filename="../CMainWindow.cpp" line="1727"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack a détecter une bibliothèque Proj4 mal installée. Les tables de translation pour les projections ESPG lstockées en généra dans /usr/share/proj sont manquantes. Contactez votre gestionnaire de distribution pour réparer cela.</translation>
     </message>
@@ -6101,20 +6111,32 @@ ligne %2, colonne %3:
         <translation>venteux</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="123"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="43"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="49"/>
         <source>hot</source>
-        <translation type="vanished">chaud</translation>
+        <translation>chaud</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="46"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="73"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="79"/>
         <source>warm</source>
-        <translation type="vanished">tiède</translation>
+        <translation>tiède</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="96"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="103"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="109"/>
         <source>cold</source>
-        <translation type="vanished">froid</translation>
+        <translation>froid</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="66"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="130"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="136"/>
         <source>freezing</source>
-        <translation type="vanished">gel</translation>
+        <translation>gel</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="143"/>
@@ -6220,34 +6242,6 @@ ligne %2, colonne %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="227"/>
         <source>Rating 5 stars</source>
         <translation>Notation 5 étoiles</translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="46"/>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="73"/>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="79"/>
-        <source>war&amp;m</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="66"/>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="130"/>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="136"/>
-        <source>free&amp;zing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="96"/>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="103"/>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="109"/>
-        <source>&amp;cold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="123"/>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="43"/>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="49"/>
-        <source>ho&amp;t</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="170"/>
@@ -8856,186 +8850,186 @@ Nom de fichier: %1</translation>
         <translation>Vue</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="104"/>
+        <location filename="../IMainWindow.ui" line="105"/>
         <source>Window</source>
         <translation>Fenêtre</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="114"/>
+        <location filename="../IMainWindow.ui" line="115"/>
         <source>?</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="133"/>
+        <location filename="../IMainWindow.ui" line="134"/>
         <source>Tool</source>
         <translation>Outils</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="153"/>
+        <location filename="../IMainWindow.ui" line="154"/>
         <source>Maps</source>
         <translation>Cartes</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="190"/>
+        <location filename="../IMainWindow.ui" line="191"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Modèle numérique de terrain (DEM)</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="122"/>
-        <location filename="../IMainWindow.ui" line="223"/>
+        <location filename="../IMainWindow.ui" line="123"/>
+        <location filename="../IMainWindow.ui" line="224"/>
         <source>Workspace</source>
         <translation>Espace de travail</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="232"/>
+        <location filename="../IMainWindow.ui" line="233"/>
         <source>Toolbar</source>
         <translation>Barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="258"/>
+        <location filename="../IMainWindow.ui" line="259"/>
         <source>Routing</source>
         <translation>Routage</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="276"/>
+        <location filename="../IMainWindow.ui" line="277"/>
         <source>Realtime</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="289"/>
-        <location filename="../IMainWindow.ui" line="292"/>
+        <location filename="../IMainWindow.ui" line="290"/>
+        <location filename="../IMainWindow.ui" line="293"/>
         <source>Add Map View</source>
         <translation>Ajouter une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="295"/>
+        <location filename="../IMainWindow.ui" line="296"/>
         <source>Ctrl+T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="310"/>
+        <location filename="../IMainWindow.ui" line="311"/>
         <source>Show Scale</source>
         <translation>Afficher l&apos;échelle</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="322"/>
+        <location filename="../IMainWindow.ui" line="323"/>
         <source>Setup Map Font</source>
         <translation>Configurer la police de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="337"/>
+        <location filename="../IMainWindow.ui" line="338"/>
         <source>Show Grid</source>
         <translation>Afficher la grille</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="340"/>
+        <location filename="../IMainWindow.ui" line="341"/>
         <source>Ctrl+G</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="352"/>
+        <location filename="../IMainWindow.ui" line="353"/>
         <source>Setup Grid</source>
         <translation>Configurer la grille</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="355"/>
+        <location filename="../IMainWindow.ui" line="356"/>
         <source>Ctrl+Alt+G</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="370"/>
+        <location filename="../IMainWindow.ui" line="371"/>
         <source>Flip Mouse Wheel</source>
         <translation>Inverser le sens de la molette de souris</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="382"/>
-        <location filename="../IMainWindow.ui" line="385"/>
+        <location filename="../IMainWindow.ui" line="383"/>
+        <location filename="../IMainWindow.ui" line="386"/>
         <source>Setup Map Paths</source>
         <translation>Configurer les répertoires des cartes</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="400"/>
+        <location filename="../IMainWindow.ui" line="401"/>
         <source>POI Text</source>
         <translation>Libellés des points d&apos;interêt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="415"/>
+        <location filename="../IMainWindow.ui" line="416"/>
         <source>Night / Day</source>
         <translation>Jour / Nuit</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="430"/>
+        <location filename="../IMainWindow.ui" line="431"/>
         <source>Map Tool Tip</source>
         <translation>Infobulles sur la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="433"/>
+        <location filename="../IMainWindow.ui" line="434"/>
         <source>Ctrl+I</source>
         <translation>CTRL + I</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="445"/>
+        <location filename="../IMainWindow.ui" line="446"/>
         <source>Setup DEM Paths</source>
         <translation>Configurer les répertoires DEM</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="457"/>
+        <location filename="../IMainWindow.ui" line="458"/>
         <source>About</source>
         <translation>À propos</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="469"/>
+        <location filename="../IMainWindow.ui" line="470"/>
         <source>Help</source>
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="472"/>
+        <location filename="../IMainWindow.ui" line="473"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="484"/>
-        <location filename="../IMainWindow.ui" line="487"/>
+        <location filename="../IMainWindow.ui" line="485"/>
+        <location filename="../IMainWindow.ui" line="488"/>
         <source>Setup Map View</source>
         <translation>Configurer la vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="499"/>
+        <location filename="../IMainWindow.ui" line="500"/>
         <source>Load GIS Data</source>
         <translation>Charger des données SIG...</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="502"/>
+        <location filename="../IMainWindow.ui" line="503"/>
         <source>Load projects from file</source>
         <translation>Charger un fichier projet</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="505"/>
+        <location filename="../IMainWindow.ui" line="506"/>
         <source>Ctrl+L</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="517"/>
+        <location filename="../IMainWindow.ui" line="518"/>
         <source>Save All GIS Data</source>
         <translation>Enregistrer toutes les données SIG</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="520"/>
+        <location filename="../IMainWindow.ui" line="521"/>
         <source>Save all projects in the workspace</source>
         <translation>Enregistrer tous les projets de l&apos;espace de travail</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="523"/>
+        <location filename="../IMainWindow.ui" line="524"/>
         <source>Ctrl+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="535"/>
+        <location filename="../IMainWindow.ui" line="536"/>
         <source>Setup Time Zone</source>
         <translation>Configurer le fuseau horaire</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="547"/>
+        <location filename="../IMainWindow.ui" line="548"/>
         <source>Add empty project</source>
         <translation>Ajouter un projet vide</translation>
     </message>
@@ -9044,217 +9038,222 @@ Nom de fichier: %1</translation>
         <translation type="vanished">Recherche Google</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="562"/>
+        <location filename="../IMainWindow.ui" line="563"/>
         <source>Geosearch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="574"/>
+        <location filename="../IMainWindow.ui" line="575"/>
         <source>Close all projects</source>
         <translation>Fermer tous les projets</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="577"/>
+        <location filename="../IMainWindow.ui" line="578"/>
         <source>F8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="589"/>
+        <location filename="../IMainWindow.ui" line="590"/>
         <source>Setup Units</source>
         <translation>Configurer les unités</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="601"/>
+        <location filename="../IMainWindow.ui" line="602"/>
         <source>Setup Workspace</source>
         <translation>Configurer l&apos;espace de travail</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="604"/>
+        <location filename="../IMainWindow.ui" line="605"/>
         <source>Setup save on exit.</source>
         <translation>Sauvegarde de la configuration en quittant</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="616"/>
+        <location filename="../IMainWindow.ui" line="617"/>
         <source>Import Database from QLandkarte</source>
         <translation>Importer une base de données QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="619"/>
+        <location filename="../IMainWindow.ui" line="620"/>
         <source>Import QLandkarte GT database</source>
         <translation>Importer une base de données QLandkarte GT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="631"/>
+        <location filename="../IMainWindow.ui" line="632"/>
         <source>VRT Builder</source>
         <translation>Générateur de VRT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="634"/>
+        <location filename="../IMainWindow.ui" line="635"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>Interface utilisateur pour gdalbuildvrt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="646"/>
+        <location filename="../IMainWindow.ui" line="647"/>
         <source>Store Map View</source>
         <translation>Enregistrer une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="649"/>
+        <location filename="../IMainWindow.ui" line="650"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Sauvegarder les cartes et calques DEM actives et leurs paramètres dans un fichier</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="661"/>
+        <location filename="../IMainWindow.ui" line="662"/>
         <source>Load Map View</source>
         <translation>Charger une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="664"/>
+        <location filename="../IMainWindow.ui" line="665"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Rétablir une vue avec les cartes et calques DEM et leurs paramètres à partir d&apos;un fichier</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="679"/>
+        <location filename="../IMainWindow.ui" line="680"/>
         <source>Ext. Profile</source>
         <translation>Profile externe</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="682"/>
+        <location filename="../IMainWindow.ui" line="683"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="694"/>
+        <location filename="../IMainWindow.ui" line="695"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="697"/>
+        <location filename="../IMainWindow.ui" line="698"/>
         <source>Ctrl+Q</source>
         <translation>CTRL + Q</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="709"/>
+        <location filename="../IMainWindow.ui" line="710"/>
         <source>Clone Map View</source>
         <translation>Dupliquer une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="712"/>
+        <location filename="../IMainWindow.ui" line="713"/>
         <source>Ctrl+Shift+T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="724"/>
+        <location filename="../IMainWindow.ui" line="725"/>
         <source>Create Routino Database</source>
         <translation>Créer une base de données Routino</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="736"/>
+        <location filename="../IMainWindow.ui" line="737"/>
         <source>Save(Print) Map Screenshot</source>
         <translation>Sauvegarder (Imprimer) une capture d&apos;écran de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="739"/>
+        <location filename="../IMainWindow.ui" line="740"/>
         <source>Print a selected area of the map</source>
         <translation>Imprimer une zone sélectionnée de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="742"/>
+        <location filename="../IMainWindow.ui" line="743"/>
         <source>Ctrl+P</source>
         <translation>CTRL + P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="754"/>
+        <location filename="../IMainWindow.ui" line="755"/>
         <source>Setup Coord. Format</source>
         <translation>Choisir le format de coordonnées</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="757"/>
+        <location filename="../IMainWindow.ui" line="758"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Modifier le format des coordonnées affichées</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="769"/>
+        <location filename="../IMainWindow.ui" line="770"/>
         <source>Setup Map Background</source>
         <translation>Modifier l&apos;arrière-plan de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="781"/>
+        <location filename="../IMainWindow.ui" line="782"/>
         <source>Setup Waypoint Icons</source>
         <translation>Modifer les icônes des waypoints</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="784"/>
+        <location filename="../IMainWindow.ui" line="785"/>
         <source>Setup path to custom icons</source>
         <translation>Modifier le chemin des icônes personnalisés</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="793"/>
+        <location filename="../IMainWindow.ui" line="794"/>
         <source>Close Tab</source>
         <translation>Fermer l&apos;onglet</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="796"/>
+        <location filename="../IMainWindow.ui" line="797"/>
         <source>Ctrl+W</source>
         <translation>CTRL + W</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="805"/>
+        <location filename="../IMainWindow.ui" line="806"/>
         <source>Quickstart Help</source>
         <translation>Aide Rapide</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="814"/>
+        <location filename="../IMainWindow.ui" line="815"/>
         <source>Setup Toolbar</source>
         <translation>Réglages barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="826"/>
+        <location filename="../IMainWindow.ui" line="827"/>
         <source>Toggle Docks</source>
         <translation>Activer les docks</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="829"/>
+        <location filename="../IMainWindow.ui" line="830"/>
         <source>Toggle visibility of dockable windows</source>
         <translation>Activer la visibilité des fenêtres dockables</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="832"/>
+        <location filename="../IMainWindow.ui" line="833"/>
         <source>Ctrl+D</source>
         <translation>CTRL + D</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="841"/>
+        <location filename="../IMainWindow.ui" line="842"/>
         <source>Full Screen</source>
         <translation>Plein écran</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="844"/>
+        <location filename="../IMainWindow.ui" line="845"/>
         <source>F11</source>
         <translation>F11</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="856"/>
+        <location filename="../IMainWindow.ui" line="857"/>
         <source>Min./Max. Track Values</source>
         <translation>Valeurs Min./Max. des traces</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="859"/>
+        <location filename="../IMainWindow.ui" line="860"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
         <translation>Afficher les valeurs min/max le long de la trace dans la vue carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="862"/>
+        <location filename="../IMainWindow.ui" line="863"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="871"/>
+        <location filename="../IMainWindow.ui" line="872"/>
         <source>Start QMapTool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="246"/>
+        <location filename="../IMainWindow.ui" line="881"/>
+        <source>Change Map View Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="247"/>
         <source>Database</source>
         <translation>Base de données</translation>
     </message>
@@ -9477,8 +9476,9 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
         <translation></translation>
     </message>
     <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="61"/>
         <source>Advanced Options</source>
-        <translation type="vanished">Options avancées</translation>
+        <translation>Options avancées</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="73"/>
@@ -9526,11 +9526,6 @@ Tip:
         <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
         <source>Select source files:</source>
         <translation>Sélectionnez les fichiers source:</translation>
-    </message>
-    <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="61"/>
-        <source>Ad&amp;vanced Options</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="130"/>
@@ -12393,23 +12388,23 @@ or
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="81"/>
-        <source>ho&amp;t</source>
-        <translation type="unfinished"></translation>
+        <source>hot</source>
+        <translation type="unfinished">chaud</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="91"/>
-        <source>war&amp;m</source>
-        <translation type="unfinished"></translation>
+        <source>warm</source>
+        <translation type="unfinished">tiède</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="101"/>
-        <source>&amp;cold</source>
-        <translation type="unfinished"></translation>
+        <source>cold</source>
+        <translation type="unfinished">froid</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="111"/>
-        <source>free&amp;zing</source>
-        <translation type="unfinished"></translation>
+        <source>freezing</source>
+        <translation type="unfinished">gel</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="121"/>

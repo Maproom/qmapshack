@@ -43,7 +43,7 @@
       <item row="1" column="2">
        <widget class="QRadioButton" name="radioButton_2">
         <property name="text">
-         <string>war&amp;m</string>
+         <string>warm</string>
         </property>
         <property name="shortcut">
          <string notr="true"/>
@@ -63,7 +63,7 @@
       <item row="3" column="2">
        <widget class="QRadioButton" name="radioButton_4">
         <property name="text">
-         <string>free&amp;zing</string>
+         <string>freezing</string>
         </property>
         <property name="shortcut">
          <string notr="true"/>
@@ -93,7 +93,7 @@
       <item row="2" column="2">
        <widget class="QRadioButton" name="radioButton_3">
         <property name="text">
-         <string>&amp;cold</string>
+         <string>cold</string>
         </property>
         <property name="shortcut">
          <string notr="true"/>
@@ -120,7 +120,7 @@
       <item row="0" column="2">
        <widget class="QRadioButton" name="radioButton">
         <property name="text">
-         <string>ho&amp;t</string>
+         <string>hot</string>
         </property>
         <property name="shortcut">
          <string notr="true"/>

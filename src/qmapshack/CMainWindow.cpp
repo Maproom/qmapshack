@@ -95,7 +95,6 @@ CMainWindow::CMainWindow()
     dockRealtime->toggleViewAction()->setChecked(false);
 
     IGisItem::init();
-    //initWptIcons();
     wptIconManager = new CWptIconManager(this);
 
     IUnit::setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
@@ -204,6 +203,7 @@ CMainWindow::CMainWindow()
     connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
     connect(actionFullScreen,            &QAction::triggered,            this,      &CMainWindow::slotFullScreen);
     connect(actionStartQMapTool,         &QAction::triggered,            this,      &CMainWindow::slotStartQMapTool);
+    connect(actionRenameView,            &QAction::triggered,            this,      &CMainWindow::slotRenameView);
     connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
     connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
     connect(tabMaps,                     &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabMaps);
@@ -879,16 +879,6 @@ void CMainWindow::slotQuickstart()
 
 void CMainWindow::slotAddCanvas()
 {
-    int i, cnt = 0;
-    for(i = 0; i < tabWidget->count(); i++)
-    {
-        CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
-        if(nullptr != canvas)
-        {
-            cnt++;
-        }
-    }
-
     CCanvas * view = addView(QString());
     tabWidget->setCurrentWidget(view);
 
@@ -1577,6 +1567,21 @@ void CMainWindow::slotStartQMapTool()
 void CMainWindow::slotGeoSearchConfigChanged()
 {
     actionGeoSearch->setIcon(geoSearchConfig->getCurrentIcon());
+}
+
+void CMainWindow::slotRenameView()
+{
+    int idx = tabWidget->currentIndex();
+    QString name = tabWidget->tabText(idx);
+    name = QInputDialog::getText(this, tr("Rename View..."), tr("Enter new name for view"), QLineEdit::Normal, name);
+    if(name.isEmpty())
+    {
+        return;
+    }
+    tabWidget->widget(idx)->setObjectName(name);
+    tabWidget->setTabText(idx, name);
+    tabMaps->setTabText(idx, name);
+    tabDem->setTabText(idx, name);
 }
 
 void CMainWindow::displayRegular()

@@ -186,7 +186,7 @@ public:
     }
 
     qreal getEnergyUse() const { return energyUse; }
-    void setEnergyUse(qreal value) {  energyUse = value; }
+    void setEnergyUse(qreal value); /*{  energyUse = value; updateHistory(eVisualColorLegend|eVisualDetails); }*/
 
     /// returns "true" when trk has no time-related invalid points
     bool isTrkTimeValid() const { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }
@@ -557,7 +557,8 @@ public:
     void filterDeleteExtension(const QString &ext);
     void filterSubPt2Pt();
     void filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName);
-    void filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet, CFilterEnergyCycle::update_visual_e updateVis);
+//    void filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet, CFilterEnergyCycle::update_visual_e updateVis);
+    void filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet);
     /** @} */
 
     /**

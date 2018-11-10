@@ -58,7 +58,7 @@
    <item row="2" column="0">
     <widget class="QGroupBox" name="groupAdvancedOptions">
      <property name="title">
-      <string>Ad&amp;vanced Options</string>
+      <string>Advanced Options</string>
      </property>
      <property name="checkable">
       <bool>true</bool>

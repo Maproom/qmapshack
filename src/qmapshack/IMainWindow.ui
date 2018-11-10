@@ -77,7 +77,7 @@
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
-     <string>&amp;View</string>
+     <string>View</string>
     </property>
     <addaction name="actionAddMapView"/>
     <addaction name="actionCloneMapView"/>
@@ -102,7 +102,7 @@
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
-     <string>Wi&amp;ndow</string>
+     <string>Window</string>
     </property>
     <addaction name="actionCloseTab"/>
     <addaction name="actionFullScreen"/>
@@ -131,7 +131,7 @@
    </widget>
    <widget class="QMenu" name="menuExtra">
     <property name="title">
-     <string>&amp;Tool</string>
+     <string>Tool</string>
     </property>
     <addaction name="actionImportDatabase"/>
     <addaction name="actionVrtBuilder"/>
@@ -151,7 +151,7 @@
     <set>QDockWidget::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
-    <string>&amp;Maps</string>
+    <string>Maps</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -221,7 +221,7 @@
     <set>QDockWidget::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
-    <string>Workspa&amp;ce</string>
+    <string>Workspace</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -256,7 +256,7 @@
     <set>QDockWidget::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
-    <string>&amp;Routing</string>
+    <string>Routing</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -274,7 +274,7 @@
     <set>QDockWidget::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
-    <string>Rea&amp;ltime</string>
+    <string>Realtime</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -287,7 +287,7 @@
      <normaloff>:/icons/32x32/AddMapWorkspace.png</normaloff>:/icons/32x32/AddMapWorkspace.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Add Map View</string>
+    <string>Add Map View</string>
    </property>
    <property name="toolTip">
     <string>Add Map View</string>
@@ -308,7 +308,7 @@
      <normaloff>:/icons/32x32/Scale.png</normaloff>:/icons/32x32/Scale.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Show Scale</string>
+    <string>Show Scale</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -335,7 +335,7 @@
      <normaloff>:/icons/32x32/Grid.png</normaloff>:/icons/32x32/Grid.png</iconset>
    </property>
    <property name="text">
-    <string>S&amp;how Grid</string>
+    <string>Show Grid</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+G</string>
@@ -350,7 +350,7 @@
      <normaloff>:/icons/32x32/GridSetup.png</normaloff>:/icons/32x32/GridSetup.png</iconset>
    </property>
    <property name="text">
-    <string>Setup G&amp;rid</string>
+    <string>Setup Grid</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Alt+G</string>
@@ -368,7 +368,7 @@
      <normaloff>:/icons/32x32/MouseWheel.png</normaloff>:/icons/32x32/MouseWheel.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Flip Mouse Wheel</string>
+    <string>Flip Mouse Wheel</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -380,7 +380,7 @@
      <normaloff>:/icons/32x32/FolderMap.png</normaloff>:/icons/32x32/FolderMap.png</iconset>
    </property>
    <property name="text">
-    <string>S&amp;etup Map Paths</string>
+    <string>Setup Map Paths</string>
    </property>
    <property name="toolTip">
     <string>Setup Map Paths</string>
@@ -398,7 +398,7 @@
      <normaloff>:/icons/32x32/POIText.png</normaloff>:/icons/32x32/POIText.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;POI Text</string>
+    <string>POI Text</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -413,7 +413,7 @@
      <normaloff>:/icons/32x32/NightDay.png</normaloff>:/icons/32x32/NightDay.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Night / Day</string>
+    <string>Night / Day</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -428,7 +428,7 @@
      <normaloff>:/icons/32x32/ToolTip.png</normaloff>:/icons/32x32/ToolTip.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Map Tool Tip</string>
+    <string>Map Tool Tip</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
@@ -443,7 +443,7 @@
      <normaloff>:/icons/32x32/FolderDEM.png</normaloff>:/icons/32x32/FolderDEM.png</iconset>
    </property>
    <property name="text">
-    <string>Setup &amp;DEM Paths</string>
+    <string>Setup DEM Paths</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -455,7 +455,7 @@
      <normaloff>:/icons/32x32/Info.png</normaloff>:/icons/32x32/Info.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;About</string>
+    <string>About</string>
    </property>
    <property name="menuRole">
     <enum>QAction::AboutRole</enum>
@@ -467,7 +467,7 @@
      <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Help</string>
+    <string>Help</string>
    </property>
    <property name="shortcut">
     <string>F1</string>
@@ -482,7 +482,7 @@
      <normaloff>:/icons/32x32/SetupMapWorkspace.png</normaloff>:/icons/32x32/SetupMapWorkspace.png</iconset>
    </property>
    <property name="text">
-    <string>Setup Map &amp;View</string>
+    <string>Setup Map View</string>
    </property>
    <property name="toolTip">
     <string>Setup Map View</string>
@@ -497,7 +497,7 @@
      <normaloff>:/icons/32x32/LoadGIS.png</normaloff>:/icons/32x32/LoadGIS.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Load GIS Data</string>
+    <string>Load GIS Data</string>
    </property>
    <property name="toolTip">
     <string>Load projects from file</string>
@@ -515,7 +515,7 @@
      <normaloff>:/icons/32x32/SaveAllGIS.png</normaloff>:/icons/32x32/SaveAllGIS.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Save All GIS Data</string>
+    <string>Save All GIS Data</string>
    </property>
    <property name="toolTip">
     <string>Save all projects in the workspace</string>
@@ -533,7 +533,7 @@
      <normaloff>:/icons/32x32/TimeZoneSetup.png</normaloff>:/icons/32x32/TimeZoneSetup.png</iconset>
    </property>
    <property name="text">
-    <string>Setup Time &amp;Zone</string>
+    <string>Setup Time Zone</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -545,7 +545,7 @@
      <normaloff>:/icons/32x32/AddProject.png</normaloff>:/icons/32x32/AddProject.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Add empty project</string>
+    <string>Add empty project</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -560,7 +560,7 @@
      <normaloff>:/icons/32x32/SearchGoogle.png</normaloff>:/icons/32x32/SearchGoogle.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Geosearch</string>
+    <string>Geosearch</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -572,7 +572,7 @@
      <normaloff>:/icons/32x32/Close.png</normaloff>:/icons/32x32/Close.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Close all projects</string>
+    <string>Close all projects</string>
    </property>
    <property name="shortcut">
     <string>F8</string>
@@ -587,7 +587,7 @@
      <normaloff>:/icons/32x32/UnitSetup.png</normaloff>:/icons/32x32/UnitSetup.png</iconset>
    </property>
    <property name="text">
-    <string>Setup &amp;Units</string>
+    <string>Setup Units</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -599,7 +599,7 @@
      <normaloff>:/icons/32x32/DatabaseSetup.png</normaloff>:/icons/32x32/DatabaseSetup.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Setup Workspace</string>
+    <string>Setup Workspace</string>
    </property>
    <property name="toolTip">
     <string>Setup save on exit.</string>
@@ -614,7 +614,7 @@
      <normaloff>:/icons/32x32/DatabaseConvert.png</normaloff>:/icons/32x32/DatabaseConvert.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Import Database from QLandkarte</string>
+    <string>Import Database from QLandkarte</string>
    </property>
    <property name="toolTip">
     <string>Import QLandkarte GT database</string>
@@ -629,7 +629,7 @@
      <normaloff>:/icons/32x32/VrtBuilder.png</normaloff>:/icons/32x32/VrtBuilder.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;VRT Builder</string>
+    <string>VRT Builder</string>
    </property>
    <property name="toolTip">
     <string>GUI front end to gdalbuildvrt</string>
@@ -644,7 +644,7 @@
      <normaloff>:/icons/32x32/SaveView.png</normaloff>:/icons/32x32/SaveView.png</iconset>
    </property>
    <property name="text">
-    <string>Store Map &amp;View</string>
+    <string>Store Map View</string>
    </property>
    <property name="toolTip">
     <string>Write current active map and DEM list including the properties to a file</string>
@@ -659,7 +659,7 @@
      <normaloff>:/icons/32x32/LoadView.png</normaloff>:/icons/32x32/LoadView.png</iconset>
    </property>
    <property name="text">
-    <string>Load &amp;Map View</string>
+    <string>Load Map View</string>
    </property>
    <property name="toolTip">
     <string>Restore view with active map and DEM list including the properties from a file</string>
@@ -677,7 +677,7 @@
      <normaloff>:/icons/32x32/ProfileToWindow.png</normaloff>:/icons/32x32/ProfileToWindow.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Ext. Profile</string>
+    <string>Ext. Profile</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+E</string>
@@ -692,7 +692,7 @@
      <normaloff>:/icons/32x32/Off.png</normaloff>:/icons/32x32/Off.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Close</string>
+    <string>Close</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -707,7 +707,7 @@
      <normaloff>:/icons/32x32/CloneMapWorkspace.png</normaloff>:/icons/32x32/CloneMapWorkspace.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Clone Map View</string>
+    <string>Clone Map View</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+T</string>
@@ -722,7 +722,7 @@
      <normaloff>:/icons/32x32/RouteSetup.png</normaloff>:/icons/32x32/RouteSetup.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Create Routino Database</string>
+    <string>Create Routino Database</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -734,7 +734,7 @@
      <normaloff>:/icons/32x32/PrintSave.png</normaloff>:/icons/32x32/PrintSave.png</iconset>
    </property>
    <property name="text">
-    <string>Save(&amp;Print) Map Screenshot</string>
+    <string>Save(Print) Map Screenshot</string>
    </property>
    <property name="toolTip">
     <string>Print a selected area of the map</string>
@@ -752,7 +752,7 @@
      <normaloff>:/icons/32x32/SetupCoordFormat.png</normaloff>:/icons/32x32/SetupCoordFormat.png</iconset>
    </property>
    <property name="text">
-    <string>Setup C&amp;oord. Format</string>
+    <string>Setup Coord. Format</string>
    </property>
    <property name="toolTip">
     <string>Change the format coordinates are displayed</string>
@@ -767,7 +767,7 @@
      <normaloff>:/icons/32x32/SelectColor.png</normaloff>:/icons/32x32/SelectColor.png</iconset>
    </property>
    <property name="text">
-    <string>Setup Map &amp;Background</string>
+    <string>Setup Map Background</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -779,7 +779,7 @@
      <normaloff>:/icons/32x32/SetupWptSym.png</normaloff>:/icons/32x32/SetupWptSym.png</iconset>
    </property>
    <property name="text">
-    <string>Setup &amp;Waypoint Icons</string>
+    <string>Setup Waypoint Icons</string>
    </property>
    <property name="toolTip">
     <string>Setup path to custom icons</string>
@@ -791,7 +791,7 @@
      <normaloff>:/icons/32x32/Close.png</normaloff>:/icons/32x32/Close.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Close Tab</string>
+    <string>Close Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+W</string>
@@ -803,7 +803,7 @@
      <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Quickstart Help</string>
+    <string>Quickstart Help</string>
    </property>
   </action>
   <action name="actionSetupToolbar">
@@ -812,7 +812,7 @@
      <normaloff>:/icons/32x32/ToolBarSetup.png</normaloff>:/icons/32x32/ToolBarSetup.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Setup Toolbar</string>
+    <string>Setup Toolbar</string>
    </property>
   </action>
   <action name="actionToggleDocks">
@@ -824,7 +824,7 @@
      <normaloff>:/icons/32x32/ToggleDocks.png</normaloff>:/icons/32x32/ToggleDocks.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Toggle Docks</string>
+    <string>Toggle Docks</string>
    </property>
    <property name="toolTip">
     <string>Toggle visibility of dockable windows</string>
@@ -839,7 +839,7 @@
      <normaloff>:/icons/32x32/FullScreen.png</normaloff>:/icons/32x32/FullScreen.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Full Screen</string>
+    <string>Full Screen</string>
    </property>
    <property name="shortcut">
     <string>F11</string>
@@ -854,7 +854,7 @@
      <normaloff>:/icons/32x32/TrackMinMax.png</normaloff>:/icons/32x32/TrackMinMax.png</iconset>
    </property>
    <property name="text">
-    <string>M&amp;in./Max. Track Values</string>
+    <string>Min./Max. Track Values</string>
    </property>
    <property name="toolTip">
     <string>Show the minimum and maximum values of the track properties along the track in the map view.</string>
@@ -869,7 +869,7 @@
      <normaloff>:/icons/32x32/QMapTool.png</normaloff>:/icons/32x32/QMapTool.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Start QMapTool</string>
+    <string>Start QMapTool</string>
    </property>
   </action>
   <action name="actionRenameView">
@@ -878,7 +878,7 @@
      <normaloff>:/icons/32x32/EditView.png</normaloff>:/icons/32x32/EditView.png</iconset>
    </property>
    <property name="text">
-    <string>Change Map Vie&amp;w Name</string>
+    <string>Change Map View Name</string>
    </property>
   </action>
  </widget>

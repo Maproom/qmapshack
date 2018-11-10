@@ -32,7 +32,8 @@ CFilterEnergyCycle::CFilterEnergyCycle(CGisItemTrk &trk, QWidget *parent) :
     loadSettings();
 
     connect(comboBox, SIGNAL(activated(int)), this, SLOT(slotSetSetting(int)));
-    connect(pushButton, SIGNAL(clicked(bool)), this, SLOT(slotRemove(bool)));
+    connect(pushButtonRemove, SIGNAL(clicked(bool)), this, SLOT(slotRemove(bool)));
+    connect(pushButtonEdit, SIGNAL(clicked(bool)), this, SLOT(slotEditParameter(bool)));
     connect(toolApply, &QToolButton::clicked, this, &CFilterEnergyCycle::slotApply);
 }
 
@@ -101,16 +102,12 @@ void CFilterEnergyCycle::saveSettings()
 void CFilterEnergyCycle::slotApply()
 {
     energy_set_t &energySet = energySets[currentSet];
-
-    CFilterEnergyCycleDlg energyDlg(this, trk, energySet, energyDefaultSet);
-    // Update only on a "real" value change
-    if((energyDlg.exec() == QDialog::Accepted) && (!qFuzzyCompare(trk.getEnergyUse() + 1, energySet.energyKcal + 1)))
-    {
-        trk.filterEnergyCycle(energySet, CFilterEnergyCycle::eUpdateHistory);
-        comboBox->setItemText(currentSet, energySet.nameOfSet);
-        saveSettings();
-    }
+    trk.filterEnergyCycle(energySet);
+    trk.setEnergyUse(energySet.energyKcal); // Save to track property
+    trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
+    toolApply->setEnabled(false);
 }
+
 void CFilterEnergyCycle::slotSetSetting(int set)
 {
     currentSet = set;
@@ -118,17 +115,38 @@ void CFilterEnergyCycle::slotSetSetting(int set)
     cfg.beginGroup("TrackDetails/Filter/EnergyCycle/");
     cfg.setValue("currentSet", currentSet);
     cfg.endGroup();
+    toolApply->setEnabled(true);
 }
 
 void CFilterEnergyCycle::slotRemove(bool)
 {
     trk.setEnergyUse(NOFLOAT);
     trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
+    toolApply->setEnabled(true);
+}
+
+void CFilterEnergyCycle::slotEditParameter(bool)
+{
+    energy_set_t &energySet = energySets[currentSet];
+
+    CFilterEnergyCycleDlg energyDlg(this, trk, energySet, energyDefaultSet);
+    if(energyDlg.exec() == QDialog::Accepted)
+    {
+        if(!qFuzzyCompare(trk.getEnergyUse() + 1, energySet.energyKcal + 1))
+        {
+            trk.setEnergyUse(energySet.energyKcal);
+            trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
+            toolApply->setEnabled(false);
+        }
+        if(comboBox->currentText() != energySet.nameOfSet)
+        {
+            comboBox->setItemText(currentSet, energySet.nameOfSet);
+            saveSettings();
+        }
+    }
 }
 
 void CFilterEnergyCycle::updateUi()
 {
-    energy_set_t &energySet = energySets[currentSet];
-    trk.filterEnergyCycle(energySet, CFilterEnergyCycle::eUpdateStatistics);
+// What to do here to update energy value when track is modified by another filter (speed, elevation, ...)?
 }
-

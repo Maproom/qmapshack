@@ -579,7 +579,7 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
     changed(tr("Start Point moved to: ") + wptName.toLatin1(), "://icons/48x48/FilterChangeStartPoint.png");
 }
 
-void CGisItemTrk::filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet, CFilterEnergyCycle::update_visual_e updateVis)
+void CGisItemTrk::filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet)
 {
     // Input values
     const qreal joule2Calor = 4.1868;
@@ -690,19 +690,6 @@ void CGisItemTrk::filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet,
         energySet.positivePower /= cntPositivePowerPoints;
     }
     energySet.energyKcal = energySet.energyKJoule / joule2Calor;
-
-    if((updateVis == CFilterEnergyCycle::update_visual_e::eUpdateStatistics) &&
-            (energyUse != NOFLOAT)) // update of labelInfo statistic only, no history
-    {
-        energyUse = energySet.energyKcal; // Save to track property
-        updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
-    }
-    if(updateVis == CFilterEnergyCycle::update_visual_e::eUpdateHistory) // update history and labelInfo statistics
-    {
-        energyUse = energySet.energyKcal; // Save as track propoerty
-        changed(QString(tr("Set Energy Use for Cycling with profile '%1' to %2kcal")).arg(energySet.nameOfSet).arg(energyUse, 0, 'f', 0),
-                "://icons/48x48/FilterEnergyCycle.png");
-    }
 
 //    qDebug() <<
 //                QString("name;totalWeight;airDensity;windSpeed;pedalCadence;frontalArea;windDragCoeff;rollingCoeff;") +

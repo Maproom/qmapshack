@@ -447,9 +447,9 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 
     str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints) + "<br />";
 
-    if(energyUse != NOFLOAT)
+    if(getEnergyUse() != NOFLOAT)
     {
-        str += tr("Energy Use Cycling: %1").arg(energyUse, 0, 'f', 0) + "kcal<br/>";
+        str += tr("Energy Use Cycling: %1").arg(getEnergyUse(), 0, 'f', 0) + "kcal<br/>";
     }
 
     if((allValidFlags & (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle)) == (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle))
@@ -515,6 +515,11 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     }
 
     return str + "</div>";
+}
+void CGisItemTrk::setEnergyUse(qreal value)
+{
+    energyUse = value;
+    updateHistory(eVisualDetails);
 }
 
 QString CGisItemTrk::getInfoRange() const

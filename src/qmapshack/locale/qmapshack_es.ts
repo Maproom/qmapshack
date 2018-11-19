@@ -2827,12 +2827,12 @@ línea %2, columna %3.
     <message>
         <location filename="../CMainWindow.cpp" line="1576"/>
         <source>Rename View...</source>
-        <translation type="unfinished"></translation>
+        <translation>Renombrar Vista...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1576"/>
         <source>Enter new name for view</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo nombre para esta Vista</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1726"/>
@@ -2851,9 +2851,9 @@ línea %2, columna %3.
         <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
 
 If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
-        <translation type="vanished">No hay mapas en este momento. QMapShack no es divertido sin mapas. Puede instalar mapas al presionar la tecla Ayuda! ¡Quiero mapas! En el botón &apos; mapas &apos;,o puede presionar la tecla F1 para abrir la documentación en línea que le indica cómo usar QMapShack.
+        <translation type="vanished">No hay mapas en este momento. QMapShack no es divertido sin mapas. Puedes instalar mapas al presionar la tecla Ayuda! ¡Quiero mapas! En el botón &apos; mapas &apos;,o puedes presionar la tecla F1 para abrir la documentación en línea que te indica cómo usar QMapShack.
 
-Si no es divertido, ¿por qué no proporciona mapas? Bueno para alojar mapas listos para descargar e instalar requiere un buen servidor. Y esto no es un servicio gratuito. El proyecto carece de dinero. Además, los datos de mapa y DEM tienen un copyright. Por lo tanto, el titular de los derechos de autor tiene que ser preguntado antes de empaquetar los datos. Esto no es tan fácil como podría sonar y para algunos datos que tiene que pagar royalties. El proyecto simplemente carece de recursos para hacer esto. Y pensamos que instalar las cosas por ti mismo no es mucho pedir de ti. Después de todo el software se distribuye sin una cuota.</translation>
+Si no es divertido, ¿por qué QMapShack viene sin mapas? Para alojar mapas listos para descargar e instalar se requiere un buen servidor y esto no es gratuito. El proyecto carece de dinero. Además, los mapas y DEMs tienen un copyright, por lo tanto, el titular de los derechos de autor tiene que ser consultado antes de empaquetar los datos. Esto no es tan fácil como podría sonar y para algunos datos se tienen que pagar royalties. El proyecto simplemente carece de recursos para hacer esto. Y pensamos que instalar las cosas por ti mismo no es mucho pedir. Después de todo el software se distribuye sin una cuota.</translation>
     </message>
 </context>
 <context>
@@ -9368,12 +9368,12 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="881"/>
         <source>Change Map View Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar el nombre de la Vista</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="247"/>
         <source>Database</source>
-        <translation type="unfinished">Base de datos</translation>
+        <translation>Bases de datos</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="123"/>
@@ -9470,7 +9470,7 @@ Nombre de archivo %1</translation>
     </message>
     <message>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation type="vanished">Para añadir mapas haga&lt;b&gt;Archivo-&gt;Configurar rutas a los mapas&lt;/b&gt;.  O haga clic &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;aqui&lt;/b&gt;&lt;/a&gt;</translation>
+        <translation type="vanished">Para añadir mapas: &lt;b&gt;Archivo-&gt;Configurar rutas a los mapas&lt;/b&gt;.  O hacer clic &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;aqui&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="123"/>
@@ -9491,7 +9491,7 @@ No quiero leer la documentación!</translation>
     <message>
         <location filename="../map/IMapList.ui" line="110"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
-        <translation>Para agregar mapas haga clic &lt;a href=&apos;MapFolders&apos;&gt;Archivo-&gt;Configurar rutas a los mapas&lt;/a&gt;.</translation>
+        <translation>Para añadir mapas: &lt;a href=&apos;MapFolders&apos;&gt;Archivo-&gt;Configurar rutas a los mapas&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="148"/>
@@ -9526,7 +9526,7 @@ No quiero leer la documentación!</translation>
     <message>
         <location filename="../map/IMapList.ui" line="190"/>
         <source>Clear Filter</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation>Borrar</translation>
     </message>
 </context>
 <context>
@@ -9557,7 +9557,7 @@ No quiero leer la documentación!</translation>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="20"/>
         <source>Root path of tile cache for online maps:</source>
-        <translation>Carpeta para la caché de mapas online</translation>
+        <translation>Carpeta para la caché de los mapas online</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="36"/>
@@ -9595,7 +9595,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clic para usar la escala actual como la escala mínima para ver el mapa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clic para usar esta escala como la mínima a la que se verá el mapa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="53"/>
@@ -9613,7 +9613,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="87"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clic para usar la escala actual como la escala máxima a la que ver el mapa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clic para usar esta escala como la máxima a la que se verá el mapa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="139"/>
@@ -9633,7 +9633,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="170"/>
         <source>Details</source>
-        <translation>Detalles</translation>
+        <translation>Detalle</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="264"/>
@@ -9653,12 +9653,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="370"/>
         <source>Forget external type file and use internal types.</source>
-        <translation>Olvidar TYP externo y utilizar el interno.</translation>
+        <translation>Usar el archivo TYP por defecto.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="384"/>
         <source>Load an external type file.</source>
-        <translation>Cargar un archivo TYP externo.</translation>
+        <translation>Cargar un archivo TYP adicional.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="227"/>
@@ -9757,7 +9757,7 @@ Consejos:
         <location filename="../tool/IMapVrtBuilder.ui" line="193"/>
         <source>Overviews will allow you to show the map for a larger range of zooms.</source>
         <translatorcomment>ampliada la descripción de ayuda</translatorcomment>
-        <translation>Las vistas generales le permitirán mostrar una generalización del mapa en los niveles de zoom más lejanos. El valor indicado es un divisor (en cada dimension) del fichero de origen. Se crearán ficheros adicionales para los valores seleccionados.</translation>
+        <translation>Las vistas generales le permitirán mostrar una generalización del mapa en los niveles de zoom más lejanos. El valor indicado es un divisor (en cada dimensión) del fichero de origen. Se crearán ficheros adicionales para los valores seleccionados.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="196"/>
@@ -9815,32 +9815,32 @@ Consejos:
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="265"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Nuevo trazado&lt;/b&gt;&lt;br/&gt;Mueva el ratón y pulse el botón izquierdo para crear puntos. Para terminar pulse botón derecho del ratón.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Nuevo trazado&lt;/b&gt;&lt;br/&gt;Mover el ratón y pulsar el botón izquierdo para crear puntos. Para terminar pulsar botón derecho del ratón.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="300"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Borrar punto&lt;/b&gt;&lt;br/&gt;Mueva el ratón hasta un punto y pulse el botón izquierdo para eliminarlo.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Borrar punto&lt;/b&gt;&lt;br/&gt;Mover el ratón hasta un punto y pulsar el botón izquierdo para eliminarlo.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="308"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Seleccionar Intervalo de Puntos&lt;/b&gt;&lt;br/&gt;Seleccione el punto inicial con el botón izquierdo del raton. Finalice la selección con una segunda pulsación y elija entre las opciones. El intervalo seleccionado se marca en verde. Utilice el botón derecho del ratón para cancelar.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Seleccionar Intervalo de Puntos&lt;/b&gt;&lt;br/&gt;Seleccionar el punto inicial con el botón izquierdo del ratón. Finalizar la selección con una segunda pulsación y elegir entre las opciones. El intervalo seleccionado se marca en verde. Botón derecho del ratón para cancelar.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="316"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Mover punto&lt;/b&gt;&lt;br/&gt;Seleccione el punto con el botón izquierdo del raton y muévalo hasta la nueva posición. Suelte el punto con una segunda pulsacion. Clic con el botón derecho del para cancelar.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Mover punto&lt;/b&gt;&lt;br/&gt;Seleccionar el punto con el botón izquierdo del ratón, moverlo hasta la nueva posición y soltarlo con una segunda pulsación. Botón derecho para cancelar.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="324"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Añadir punto&lt;/b&gt;&lt;br/&gt;Mueva el ratón cerca de una línea y pulse el botón izquierdo para agregar un punto. El punto se pegará al cursor y se puede mover.Suelte el punto en la posición deseada con una segunda pulsacion. Utilice el botón derecho del ratón para cancelar..&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Añadir punto&lt;/b&gt;&lt;br/&gt;Llevar el ratón cerca de una línea y pulsar el botón izquierdo para agregar un punto. El punto se pegará al cursor y se puede mover. Soltar el punto en la posición deseada con un segundo clic. Botón derecho del ratón para cancelar..&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="332"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Sin enrutamiento&lt;/b&gt;&lt;br/&gt;Todos los puntos se conectarán con una línea recta.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Sin enrutamiento&lt;/b&gt;&lt;br/&gt;Los puntos se conectan con una línea recta.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="338"/>
@@ -9850,12 +9850,12 @@ Consejos:
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="343"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Enrutamiento vectorial&lt;/b&gt;&lt;br/&gt; El trazado se dibuja ajustandose automáticamente a las lineas de un mapa vectorial.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Enrutamiento vectorial&lt;/b&gt;&lt;br/&gt; El trazado se dibuja ajustándose automáticamente a las lineas de un mapa vectorial.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="349"/>
         <source>&lt;b&gt;Track Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded track if possible.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Enrutamiento sobre Track&lt;/b&gt;&lt;br/&gt;Conectar puntos con una linea sobre un track cargado si es posible.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Enrutamiento sobre Track&lt;/b&gt;&lt;br/&gt;El trazado se dibuja sobre un track cargado si es posible.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="520"/>
@@ -9880,7 +9880,7 @@ Consejos:
     <message>
         <location filename="../mouse/line/IMouseEditLine.h" line="140"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
-        <translation>&lt;br/&gt;&lt;b&gt;Mover el mapa&lt;/b&gt;&lt;br/&gt;Mantega pulsado el botón izquierdo y podrá mover el mapa.&lt;br/&gt;&lt;br/&gt;</translation>
+        <translation>&lt;br/&gt;&lt;b&gt;Mover el mapa&lt;/b&gt;&lt;br/&gt;Mantener pulsado el botón izquierdo y se podrá mover el mapa.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -9902,7 +9902,7 @@ Consejos:
     <message>
         <location filename="../plot/IPlot.cpp" line="94"/>
         <source>Reset Zoom</source>
-        <translation>Restablecer zoom</translation>
+        <translation>Restablecer Zoom</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="95"/>
@@ -9928,8 +9928,8 @@ Consejos:
         <location filename="../plot/IPlot.cpp" line="542"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
-        <translation>Pulse tecla CTRL para zoom vertical únicamente.
-Pulse tecla ALT para zoom horizontal únicamente</translation>
+        <translation>Pulsar tecla CTRL para hacer zoom sólo verticalmente.
+Pulse tecla ALT para hacer zoom sólo verticalmente</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="699"/>
@@ -9939,7 +9939,7 @@ Pulse tecla ALT para zoom horizontal únicamente</translation>
     <message>
         <location filename="../plot/IPlot.cpp" line="1306"/>
         <source>Select output file</source>
-        <translation>Seleccione archivo de salida</translation>
+        <translation>Nombre del archivo de salida</translation>
     </message>
 </context>
 <context>
@@ -9952,7 +9952,7 @@ Pulse tecla ALT para zoom horizontal únicamente</translation>
     <message>
         <location filename="../helpers/IPositionDialog.ui" line="20"/>
         <source>Enter new position</source>
-        <translation>Introduzca la nueva posición</translation>
+        <translation>Introducir la nueva posición</translation>
     </message>
     <message>
         <location filename="../helpers/IPositionDialog.ui" line="30"/>
@@ -9976,7 +9976,7 @@ o
     <message>
         <location filename="../print/IPrintDialog.ui" line="79"/>
         <source>When printing online maps make sure that the map has been loaded into the cache for the extent to be printed.</source>
-        <translation>Al imprimir mapas en línea asegúrese de que se haya cargado en la memoria caché el área que desea imprimir.</translation>
+        <translation>Al imprimir mapas en línea asegúrate de que se haya cargado en la memoria caché el área que quieres imprimir.</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="60"/>
@@ -9986,14 +9986,14 @@ o
     <message>
         <location filename="../print/IPrintDialog.ui" line="37"/>
         <source>When saving online maps make sure that the map has been loaded into the cache for the extent to be saved.</source>
-        <translation>Al guardar mapas online asegúrese de que se haya cargado en la memoria caché el área que desea guardar.</translation>
+        <translation>Al guardar mapas online asegúrate de que se haya cargado en la memoria caché el área que quieres guardar.</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="89"/>
         <location filename="../print/IPrintDialog.ui" line="102"/>
         <location filename="../print/IPrintDialog.ui" line="151"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="118"/>
@@ -10006,13 +10006,13 @@ o
     <message>
         <location filename="../helpers/IProgressDialog.ui" line="14"/>
         <source>Please wait...</source>
-        <translation>Por favor,espere...</translation>
+        <translation>Espera, por favor</translation>
     </message>
     <message>
         <location filename="../helpers/IProgressDialog.ui" line="20"/>
         <location filename="../helpers/IProgressDialog.ui" line="27"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -10103,7 +10103,7 @@ o
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
-        <translation>º</translation>
+        <translation>°</translation>
     </message>
 </context>
 <context>
@@ -10201,7 +10201,7 @@ o
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterInfo.ui" line="20"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -10259,7 +10259,7 @@ o
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="128"/>
         <source>create or update installation</source>
-        <translation>Crear o actualizar instalacion</translation>
+        <translation>Crear o actualizar instalación</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="152"/>
@@ -10485,11 +10485,11 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="148"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
-        <translation>Para usar el enrutado offline hay que configurar las rutas a las carpetas que contienen los datos de ruteo, haga clic en el botón de configuración para hacerlo. Se pueden crear en &lt;a href=&apos;CreateRoutino&apos;&gt;Herramientas-&gt;Crear base de datos de Routino&lt;/a&gt;.</translation>
+        <translation>Para usar el enrutamiento offline hay que configurar las rutas a las carpetas que contienen los datos de ruteo, clic en el botón de configuración para hacerlo. Se pueden crear en &lt;a href=&apos;CreateRoutino&apos;&gt;Herramientas-&gt;Crear base de datos de Routino&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
-        <translation type="vanished">Para utilizar el enrutamiento offline es necesario definir rutas de acceso a los datos de enrutamiento locales. Utilice el botón de la herramienta de configuración para indicar una carpeta. Puede crear sus propios datos de enrutamiento con la  &lt;b&gt;herramienta-&gt;Crear base de datos de Routino&lt;/b&gt;.</translation>
+        <translation type="vanished">Para utilizar el enrutamiento offline es necesario definir rutas de acceso a los datos de enrutamiento locales. Clic en el botón de la herramienta de configuración para indicar una carpeta. Se pueden crear datos propios de enrutamiento con la  &lt;b&gt;herramienta-&gt;Crear base de datos de Routino&lt;/b&gt;.</translation>
     </message>
 </context>
 <context>
@@ -10688,7 +10688,7 @@ o
     <message>
         <location filename="../realtime/IRtSelectSource.ui" line="14"/>
         <source>Select a source...</source>
-        <translation>Seleccione una fuente...</translation>
+        <translation>Seleccionar una fuente...</translation>
     </message>
 </context>
 <context>
@@ -10701,12 +10701,12 @@ o
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="47"/>
         <source>Source</source>
-        <translation type="unfinished">Fuente</translation>
+        <translation>Fuente</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="95"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>
@@ -10784,7 +10784,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
         <source>Use auto-routing to between points. (Ctrl+A)</source>
-        <translation>Dibujar usando el enrutamiento automático entre puntos. (Ctrl+A)</translation>
+        <translation>Dibujar usando el enrutamiento automático. (Ctrl+A)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
@@ -10840,7 +10840,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
         <source>Connect points with a line from a loaded track if possible.</source>
-        <translation>Conectar puntos con sobre la línea de un track cargado, si es posible</translation>
+        <translation>Dibujar sobre un track cargado, si es posible</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="317"/>
@@ -10892,12 +10892,12 @@ o
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="103"/>
         <source>Toggle Nogo-Area</source>
-        <translation type="unfinished">Herramienta área prohibida</translation>
+        <translation>Herramienta área prohibida</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="138"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -10910,7 +10910,7 @@ o
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="35"/>
         <source>Save selected area as image.</source>
-        <translation>Guardar el área seleccionada como imagen.</translation>
+        <translation>Guardar el área seleccionada como una imagen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="38"/>
@@ -10976,7 +10976,7 @@ o
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="68"/>
         <source>Set an activity for the selected range.</source>
-        <translation>Asigna una Actividad para el intervalo seleccionado.</translation>
+        <translation>Asignar una Actividad al intervalo seleccionado.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="82"/>
@@ -10986,7 +10986,7 @@ o
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="117"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -11043,7 +11043,7 @@ o
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
         <source>Reverse Route</source>
-        <translation>Ruta Inversa</translation>
+        <translation>Invertir Ruta</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="159"/>
@@ -11058,7 +11058,7 @@ o
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="205"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -11136,12 +11136,12 @@ o
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="239"/>
         <source>Undo</source>
-        <translation type="unfinished">Deshacer</translation>
+        <translation>Deshacer</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="256"/>
         <source>Redo</source>
-        <translation type="unfinished">Rehacer</translation>
+        <translation>Rehacer</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="37"/>
@@ -11155,7 +11155,7 @@ o
         <location filename="../mouse/IScrOptRuler.ui" line="242"/>
         <location filename="../mouse/IScrOptRuler.ui" line="259"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -11201,17 +11201,17 @@ o
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="101"/>
         <source>Replace the elevation in all selected waypoints and tracks by values from the view&apos;s DEM data.</source>
-        <translation type="unfinished">Reemplazar altitud en los Waypoints y Tracks seleccionados con los valores del DEM.</translation>
+        <translation>Reemplazar altitud a los Waypoints y Tracks seleccionados con los valores del DEM de la vista.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="115"/>
         <source>Combine all selected tracks to a new one.</source>
-        <translation>Combinar todos los tracks seleccionadas en uno nuevo.</translation>
+        <translation>Combinar los tracks seleccionados en uno nuevo.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="129"/>
         <source>Set an activity for all selected tracks.</source>
-        <translation>Asigna una Actividad para todos los tracks seleccionados.</translation>
+        <translation>Asignar una Actividad a los tracks seleccionados.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="143"/>
@@ -11226,12 +11226,12 @@ o
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="205"/>
         <source>Select all items that intersect the selected area.</source>
-        <translation>Seleccione los elementos que intersectan el área seleccionada.</translation>
+        <translation>Seleccionar los elementos que intersectan el área seleccionada.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="228"/>
         <source>Select all items that are completely inside the selected area.</source>
-        <translation>Seleccione los elementos que estan dentro del area seleccionada. </translation>
+        <translation>Seleccione los elementos que están dentro del área seleccionada. </translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="282"/>
@@ -11373,7 +11373,7 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="194"/>
         <source>Set an activity for the complete track.</source>
-        <translation>Asigna una Actividad al track completo.</translation>
+        <translation>Asignar una Actividad al track completo.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="208"/>
@@ -11383,7 +11383,7 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation type="unfinished">Reemplazar Altitud por la de los valores del DEM.</translation>
+        <translation>Reemplazar Altitud por la de los valores del DEM de la vista.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="236"/>
@@ -11398,7 +11398,7 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="282"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -11450,17 +11450,17 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
         <source>Clone waypoint and move clone a given distance and angle.</source>
-        <translation>Duplicar el waypoint y mover la copia a una distancia y un ángulo dados.</translation>
+        <translation>Duplicar el waypoint y ubicar la copia a una distancia y un ángulo determinados.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="143"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation>Reemplazar Altitud por la de los valores del DEM.</translation>
+        <translation>Reemplazar Altitud por la de los valores del DEM de la vista.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="164"/>
         <source>edit radius of circular area</source>
-        <translation>editar el radio de un área circular</translation>
+        <translation>editar el radio del área circular</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="195"/>
@@ -11480,7 +11480,7 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="266"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -11493,7 +11493,7 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="49"/>
         <source>edit radius of circular area</source>
-        <translation>editar el radio de un área circular</translation>
+        <translation>editar el radio del área circular</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="52"/>
@@ -11510,12 +11510,12 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="63"/>
         <source>Delete circle defined by waypoint</source>
-        <translation>Borrar circulo definido por waypoint</translation>
+        <translation>Borrar circulo definido por el waypoint</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="127"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11529,8 +11529,8 @@ corregir los puntos erróneos de un track grabado.</translation>
         <location filename="../gis/db/ISearchDatabase.ui" line="34"/>
         <source>Type the word you want to search for and press the search button. 
 If you enter &apos;word&apos; a search with an exact match is done. If you enter &apos;word*&apos;, &apos;word&apos; has to be at the beginning of a string.</source>
-        <translation>Escriba la palabra que desea buscar y pulse botón de busqueda.
-Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia exacta . Si introduce &apos;palabra*&apos;, la &apos;palabra&apos; se busca al principio de una cadena.</translation>
+        <translation>Escribir la palabra que se desea buscar y pulsar botón de búsqueda.
+Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidencia exacta . Si introduce &apos;palabra*&apos;, la &apos;palabra&apos; se busca al principio de una cadena.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="51"/>
@@ -11612,7 +11612,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="153"/>
         <source>And for all other items, too.</source>
-        <translation>y para todos los elementos.</translation>
+        <translation>hacer lo mismo con todos los elementos.</translation>
     </message>
 </context>
 <context>
@@ -11620,7 +11620,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="14"/>
         <source>Select Parent Folder...</source>
-        <translation>Seleccione la carpeta principal...</translation>
+        <translation>Seleccionar la carpeta principal...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="26"/>
@@ -11684,7 +11684,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
         <source>Select project from list or enter new project name.</source>
-        <translation>Seleccione un proyecto de la lista o introduzca un nombre de proyecto nuevo.</translation>
+        <translation>Seleccionar un proyecto de la lista o introducir un nombre de proyecto nuevo.</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="33"/>
@@ -11760,7 +11760,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="116"/>
         <source>And for all other items, too.</source>
-        <translation>Hacer igual para todos los elementos.</translation>
+        <translation>Hacer lo mismo con todos los elementos.</translation>
     </message>
 </context>
 <context>
@@ -11783,7 +11783,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="252"/>
         <source>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;</source>
-        <translation>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Precaución&lt;/span&gt; Se recomienda dejar la contraseña en blanco, ya que QMapShack lo almacena sin cifrar. Si no introduce una contraseña, se le pedirá en cada inicio.&lt;/p&gt;</translation>
+        <translation>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Precaución&lt;/span&gt; Se recomienda dejar la contraseña en blanco, ya que QMapShack lo almacena sin cifrar. Si no introduces una contraseña, se pedirá en cada inicio.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="239"/>
@@ -11828,7 +11828,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="275"/>
         <source>&lt;b&gt;Port:&lt;/b&gt; Leave the port field empty to use the default port.</source>
-        <translation>&lt;b&gt;Puerto:&lt;/b&gt; Dejar vacio para usar el puerto predeterminado.</translation>
+        <translation>&lt;b&gt;Puerto:&lt;/b&gt; Dejar vacío para usar el puerto predeterminado.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="61"/>
@@ -12345,7 +12345,7 @@ o
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="123"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
-        <translation>&lt;b&gt;Nota:&lt;/b&gt; El cambio de las unidades de algunos elementos de la interfaz no se hará efectivo hasta que no reinicie QMapShack.</translation>
+        <translation>&lt;b&gt;Nota:&lt;/b&gt; El cambio de las unidades de algunos elementos no se producirá hasta el reinicio de QMapShack.</translation>
     </message>
 </context>
 <context>
@@ -12460,7 +12460,7 @@ o
     <message>
         <location filename="../units/IUnitsSetup.ui" line="95"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
-        <translation>&lt;b&gt;Nota:&lt;/b&gt; El cambio de las unidades de algunos elementos de la interfaz no se hará efectivo hasta que no reinicie QMapShack.</translation>
+        <translation>&lt;b&gt;Nota:&lt;/b&gt; El cambio de las unidades de algunos elementos no se producirá hasta el reinicio de QMapShack.</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="37"/>

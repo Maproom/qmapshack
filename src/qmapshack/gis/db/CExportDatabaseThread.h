@@ -42,7 +42,7 @@ signals:
 protected:
     void run() override;
     bool getKeepGoing() const;
-    void dumpFolder(quint64 id, const QString &parentName, const QString& path);
+    void dumpFolder(quint64 id, const QString &parentName, const QString& path, QSqlDatabase& db);
 
 private:
     QString simplifyString(const QString &str) const;
@@ -51,7 +51,8 @@ private:
     bool keepGoing = false;
 
     quint64 parentFolderId;
-    QSqlDatabase& db;
+    /// database connection from the main thread
+    QSqlDatabase& dbParent;
     QString exportPath;
     bool asGpx11 = false;
 };

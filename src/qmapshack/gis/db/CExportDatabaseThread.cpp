@@ -29,7 +29,7 @@
 CExportDatabaseThread::CExportDatabaseThread(quint64 id, QSqlDatabase &db, QObject *parent)
     : QThread(parent)
     , parentFolderId(id)
-    , db(db)
+    , dbParent(db)
 {
 }
 
@@ -73,6 +73,16 @@ void CExportDatabaseThread::run()
 
     try
     {
+        /*
+            As database connections can't be shared between threads the database connection
+            has to be cloned
+        */
+        QSqlDatabase db = QSqlDatabase::cloneDatabase(dbParent, "tmp_export");
+        if(!db.open())
+        {
+            throw tr("Failed to open database for export. \"%1\"").arg(db.lastError().text());
+        }
+
         QDir dir(exportPath);
         if(!dir.exists())
         {
@@ -83,17 +93,20 @@ void CExportDatabaseThread::run()
             }
         }
 
-        dumpFolder(parentFolderId, "", exportPath);
+        dumpFolder(parentFolderId, "", exportPath, db);
 
-        emit sigOut(tr("Done!"));
+        emit sigOut(tr("Done!"));                
+        db.close();
     }
     catch(const QString& msg)
     {
         emit sigErr(msg);
     }
+
+    QSqlDatabase::removeDatabase("tmp_export");
 }
 
-void CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, const QString& path)
+void CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, const QString& path, QSqlDatabase &db)
 {
     if(!getKeepGoing())
     {
@@ -166,6 +179,6 @@ void CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, co
     while(query.next())
     {
         quint64 childId = query.value(0).toULongLong();
-        dumpFolder(childId, simplifiedName, dir.absolutePath());
+        dumpFolder(childId, simplifiedName, dir.absolutePath(), db);
     }
 }

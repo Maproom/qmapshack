@@ -182,6 +182,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint, CFilterLoopsCut>
         (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png");
 
+    // limit tree widget horizontal size to the filter widget with the largest minimum size
+    treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
+    
     slotShowPlots();
 }
 

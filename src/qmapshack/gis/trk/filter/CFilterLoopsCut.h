@@ -20,6 +20,7 @@
 #define CFILTERLOOPSCUT_H
 
 #include "ui_IFilterLoopsCut.h"
+#include "CMainWindow.h"
 #include <QWidget>
 
 class CGisItemTrk;
@@ -33,6 +34,7 @@ public:
 
 private slots:
     void slotApply();
+    void showHelp();
 
 private:
     CGisItemTrk& trk;

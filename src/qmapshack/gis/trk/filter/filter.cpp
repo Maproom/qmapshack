@@ -593,7 +593,7 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
         return;
     }
 
-    int part = 0;
+    int part = 1;
     QVector<CTrackData::trkpt_t> pts;
 
     for (const CTrackData::trkpt_t& headPt : trk)
@@ -661,7 +661,7 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
                         )
                     )
                 {
-                    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts[pts.size()-2].idxTotal, trk, project); // index à revoir !!
+                    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts[pts.size()-2].idxTotal, trk, project);
                     part++;
                     pts.remove(0, pts.size()-2);
 

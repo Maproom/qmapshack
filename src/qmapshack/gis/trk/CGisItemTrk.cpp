@@ -520,7 +520,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 void CGisItemTrk::setEnergyUse(qreal value)
 {
     energyUse = value;
-    updateHistory(eVisualDetails);
+//    updateHistory(eVisualDetails);
 }
 
 QString CGisItemTrk::getInfoRange() const

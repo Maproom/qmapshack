@@ -61,12 +61,15 @@ public:
         qreal energyKJoule;
         qreal energyKcal;
         qreal positivePedalForce;
+
+        void compute(CGisItemTrk &trk);
     };
 
     CFilterEnergyCycle(CGisItemTrk &trk, QWidget *parent = 0);
     virtual ~CFilterEnergyCycle() = default;
 
     void updateUi();
+    void updateUi1();
 
 private slots:
     void slotApply();

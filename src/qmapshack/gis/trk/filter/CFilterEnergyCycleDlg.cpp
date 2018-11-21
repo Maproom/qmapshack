@@ -150,13 +150,14 @@ void CFilterEnergyCycleDlg::updateUi()
 
 void CFilterEnergyCycleDlg::slotOk(bool)
 {
-    slotApply(true);
+//    slotApply(true);
     energySet = tmpEnergySet; // Saving back
     accept();
 }
 
 void CFilterEnergyCycleDlg::slotApply(bool)
 {
+//    tmpEnergySet.compute(trk);
     trk.filterEnergyCycle(tmpEnergySet); // Calculation for dialog only; no stat; no history
 
     labelTotalWeight->setText(QString("<b>%1kg</b>").arg(tmpEnergySet.driverWeight + tmpEnergySet.bikeWeight, 0, 'f', 1));

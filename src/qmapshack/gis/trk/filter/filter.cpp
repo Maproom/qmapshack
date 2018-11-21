@@ -670,6 +670,7 @@ void CGisItemTrk::filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet)
         }
     }
 
+    qDebug() << "filter cntVisiblePoints=" << cntVisiblePoints;
     if (cntVisiblePoints)
     {
         energySet.airResistForce /= cntVisiblePoints;
@@ -677,6 +678,10 @@ void CGisItemTrk::filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet)
         energySet.sumForce /= cntVisiblePoints;
         energySet.power /= cntVisiblePoints;
     }
+
+
+    qDebug() << "filter totalElapsedSecondsMoving=" << totalElapsedSecondsMoving;
+
 
     if(totalElapsedSecondsMoving)
     {

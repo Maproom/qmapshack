@@ -643,5 +643,6 @@
         <file>templates/Hiking_Tour_Summary_(Advanced).ui</file>
         <file>../icons/32x32/FilterLoopsCut.png</file>
         <file>../icons/48x48/FilterLoopsCut.png</file>
+        <file>../macOS/closeButtonGrey.png</file>
     </qresource>
 </RCC>

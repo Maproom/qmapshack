@@ -517,12 +517,6 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     return str + "</div>";
 }
 
-void CGisItemTrk::setEnergyUse(qreal value)
-{
-    energyUse = value;
-//    updateHistory(eVisualDetails);
-}
-
 QString CGisItemTrk::getInfoRange() const
 {
     qreal tmp, slope1;

@@ -500,9 +500,16 @@ void CDetailsTrk::updateData()
     }
 
     CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
-    if(nullptr != filterEnergyCycle && treeFilter->hasFocus()) // Update for filters only
+    if(nullptr != filterEnergyCycle)
     {
-        filterEnergyCycle->updateUi();
+        if(treeFilter->hasFocus())
+        {
+            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromFilter);
+        }
+        else if(listHistory->hasFocus())
+        {
+            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromHistory);
+        }
     }
 
     enableTabFilter();

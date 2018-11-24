@@ -29,12 +29,13 @@ class CFilterEnergyCycle : public QWidget, private Ui::IFilterEnergyCycle
 
 public:
 
-//    enum update_visual_e
-//    {
-//        eUpdateNone        = 0
-//        , eUpdateByFilterCycle = 0x01
-//        , eUpdateByFilterOthers   = 0x02
-//    };
+    enum update_source_e
+    {
+        eUpdateNone             = 0
+        , eUpdateFromFilter     = 0x01
+        , eUpdateFromHistory    = 0x02
+        , eUpdateFromApply      = 0x04
+    };
 
     struct energy_set_t
     {
@@ -68,18 +69,19 @@ public:
     CFilterEnergyCycle(CGisItemTrk &trk, QWidget *parent = 0);
     virtual ~CFilterEnergyCycle() = default;
 
-    void updateUi();
-    void updateUi1();
+    void updateUi(update_source_e updateSource);
 
 private slots:
     void slotApply();
     void slotSetSetting(int set);
     void slotRemove(bool);
-    void slotEditParameter(bool);
+    void slotEditSetting(bool);
 
 private:
     void loadSettings();
     void saveSettings();
+    bool isValid();
+    void compute();
 
     const qint32 noOfSets = 5;
     qint32 currentSet = 0;

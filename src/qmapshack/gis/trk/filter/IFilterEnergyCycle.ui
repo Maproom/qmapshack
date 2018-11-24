@@ -72,7 +72,7 @@
      <item>
       <widget class="QPushButton" name="pushButtonEdit">
        <property name="text">
-        <string>Edit Parameter</string>
+        <string>Edit Setting</string>
        </property>
       </widget>
      </item>

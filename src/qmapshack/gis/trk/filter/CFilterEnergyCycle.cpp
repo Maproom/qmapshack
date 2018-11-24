@@ -25,7 +25,7 @@
 CFilterEnergyCycle::CFilterEnergyCycle(CGisItemTrk &trk, QWidget *parent) :
     QWidget(parent)
     , trk(trk)
-    , energyDefaultSet{"", 75, 15, 1.2, 5, 0, 2, 0.65, 1.00, 4, 0.0070, 75}
+    , energyDefaultSet{"", 75, 15, 1.2, 5, 0, 2, 0.65, 1.0, 3, 0.005, 75}
 {
     setupUi(this);
 
@@ -33,9 +33,10 @@ CFilterEnergyCycle::CFilterEnergyCycle(CGisItemTrk &trk, QWidget *parent) :
 
     connect(comboBox, SIGNAL(activated(int)), this, SLOT(slotSetSetting(int)));
     connect(pushButtonRemove, SIGNAL(clicked(bool)), this, SLOT(slotRemove(bool)));
-    connect(pushButtonEdit, SIGNAL(clicked(bool)), this, SLOT(slotEditParameter(bool)));
+    connect(pushButtonEdit, SIGNAL(clicked(bool)), this, SLOT(slotEditSetting(bool)));
     connect(toolApply, &QToolButton::clicked, this, &CFilterEnergyCycle::slotApply);
 
+    isValid();
 }
 
 void CFilterEnergyCycle::loadSettings()
@@ -103,13 +104,7 @@ void CFilterEnergyCycle::saveSettings()
 
 void CFilterEnergyCycle::slotApply()
 {
-    updateUi();
-
-//    energy_set_t &energySet = energySets[currentSet];
-//    trk.filterEnergyCycle(energySet);
-//    trk.setEnergyUse(energySet.energyKcal); // Save to track property
-//    trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
-//    toolApply->setEnabled(false);
+    updateUi(eUpdateFromApply);
 }
 
 void CFilterEnergyCycle::slotSetSetting(int set)
@@ -125,24 +120,20 @@ void CFilterEnergyCycle::slotSetSetting(int set)
 void CFilterEnergyCycle::slotRemove(bool)
 {
     trk.setEnergyUse(NOFLOAT);
-    trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
     toolApply->setEnabled(true);
+    pushButtonRemove->setEnabled(false);
+    trk.updateHistory(CGisItemTrk::eVisualDetails);
 }
 
-void CFilterEnergyCycle::slotEditParameter(bool)
+void CFilterEnergyCycle::slotEditSetting(bool)
 {
     energy_set_t &energySet = energySets[currentSet];
 
     CFilterEnergyCycleDlg energyDlg(this, trk, energySet, energyDefaultSet);
     if(energyDlg.exec() == QDialog::Accepted)
     {
-        updateUi();
-//        if(!qFuzzyCompare(trk.getEnergyUse() + 1, energySet.energyKcal + 1))
-//        {
-//            trk.setEnergyUse(energySet.energyKcal);
-//            trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
-//            toolApply->setEnabled(false);
-//        }
+        updateUi(eUpdateFromApply);
+
         if(comboBox->currentText() != energySet.nameOfSet)
         {
             comboBox->setItemText(currentSet, energySet.nameOfSet);
@@ -151,167 +142,72 @@ void CFilterEnergyCycle::slotEditParameter(bool)
     }
 }
 
-void CFilterEnergyCycle::updateUi()
+void CFilterEnergyCycle::updateUi(update_source_e updateSource)
+{
+    if(!isValid())
+    {
+        return;
+    }
+
+    switch(updateSource)
+    {
+    case eUpdateFromHistory:
+    {
+        if(trk.getEnergyUse() != NOFLOAT)
+        {
+            trk.updateVisuals(CGisItemTrk::eVisualDetails, "CFilterEnergyCycle::updateUi()");
+        }
+        break;
+    }
+    case eUpdateFromFilter:
+    {
+        if(trk.getEnergyUse() != NOFLOAT)
+        {
+            compute();
+        }
+        break;
+    }
+    case eUpdateFromApply:
+    {
+        compute();
+        break;
+    }
+    }
+}
+
+bool CFilterEnergyCycle::isValid()
+{
+    pushButtonRemove->setEnabled(trk.getEnergyUse() != NOFLOAT ? true : false);
+
+    if(!trk.isTrkTimeValid() || trk.isTrkElevationInvalid())
+    {
+        if(trk.getEnergyUse() != NOFLOAT)
+        {
+            trk.setEnergyUse(NOFLOAT);
+            pushButtonRemove->setEnabled(false);
+        }
+
+        comboBox->setEnabled(false);
+        pushButtonEdit->setEnabled(false);
+        toolApply->setEnabled(false);
+        return false;
+    }
+
+    comboBox->setEnabled(true);
+    pushButtonEdit->setEnabled(true);
+    toolApply->setEnabled(trk.getEnergyUse() == NOFLOAT ? true : false);
+
+    return true;
+}
+
+void CFilterEnergyCycle::compute()
 {
     energy_set_t &energySet = energySets[currentSet];
     trk.filterEnergyCycle(energySet);
     if(!qFuzzyCompare(trk.getEnergyUse() + 1, energySet.energyKcal + 1))
     {
-//        trk.filterEnergyCycle(energySet);
         trk.setEnergyUse(energySet.energyKcal);
         toolApply->setEnabled(false);
-        trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
+        trk.updateHistory(CGisItemTrk::eVisualDetails);
     }
-}
-
-void CFilterEnergyCycle::updateUi1()
-{
-    energy_set_t &energySet = energySets[currentSet];
-    trk.filterEnergyCycle(energySet);
-    if(!qFuzzyCompare(trk.getEnergyUse() + 1, energySet.energyKcal + 1))
-    {
-        trk.setEnergyUse(energySet.energyKcal);
-        toolApply->setEnabled(false);
-        trk.updateVisuals(CGisItemTrk::eVisualDetails, "filterEnergyCycle");
-    }
-}
-
-void CFilterEnergyCycle::energy_set_t::compute(CGisItemTrk &trk)
-{
-    // Input values
-    const qreal joule2Calor = 4.1868;
-    const qreal gravityAccel = 9.81;    // kg * m / s2
-    const qreal muscleCoeff = 23;       // %
-    const qreal pedalRange = 70;        // Degree °
-    const qreal crankLength = 175;      // mm
-    const qreal totalWeight = driverWeight + bikeWeight;
-
-    //    qreal airDensity = energySet.airDensity;
-//    qreal windSpeed = energySet.windSpeed;
-//    qreal pedalCadence = energySet.pedalCadence;
-//    qreal frontalArea = energySet.frontalArea;
-//    qreal windDragCoeff = energySet.windDragCoeff;
-//    qreal rollingCoeff = energySet.rollingCoeff;
-
-    // Output values
-    airResistForce = 0;
-    rollResistForce = totalWeight * gravityAccel * rollingCoeff;
-    gravitySlopeForce = 0;
-    sumForce = 0;
-    positivePedalForce = 0;
-    power = 0;
-    positivePower = 0;
-    powerMovingTime = 0;
-    powerMovingTimeRatio = 0;
-    energyKJoule = 0;
-
-    qint32 cntPositivePowerPoints = 0;
-
-    qreal pedalSpeed = crankLength * pedalCadence * 2 * M_PI / 60 / 1000;
-
-//    CTrackData::trkpt_t const * lastTrkpt  = nullptr;
-
-    for(const CTrackData::trkpt_t &pt : trk.getTrackData())
-    {
-        if(pt.isHidden())
-        {
-            continue;
-        }
-
-// --- Alternative approach to calculate exact speed, instead using smoothed trkPts speed
-// --- using smoothed trkPts speed will not provide exact power moving time in case of uphill only
-// --- ratio will be then > 100%
-//        qreal speed = 0;
-//        if(lastTrkpt != nullptr)
-//        {
-//            qreal deltaTime = (pt.time.toMSecsSinceEpoch() - lastTrkpt->time.toMSecsSinceEpoch()) / 1000.0;
-//            speed = pt.deltaDistance / deltaTime;
-//            lastTrkpt = &pt;
-//        }
-//        else
-//        {
-//            lastTrkpt = &pt;
-//            continue;
-//        }
-//        if (speed != pt.speed)
-//        {
-//            qDebug() << "pt.speed=" << pt.speed * 3.6 << "speed=" << speed * 3.6 << "speed delta=" << (speed - pt.speed) * 3.6;
-//        }
-
-        qreal speed = pt.speed;
-        if (speed <= 0.2) // 0.2 ==> to be synchron with deriveSecondaryData()
-        {
-            continue;
-        }
-
-        qreal slope = pt.slope2;
-//        slope = 0;
-
-        qreal airResistForcePt = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
-        qreal gravitySlopeForcePt = totalWeight * gravityAccel * slope / 100;
-        airResistForce += airResistForcePt;
-        gravitySlopeForce += gravitySlopeForcePt;
-        sumForce += airResistForcePt + gravitySlopeForcePt + rollResistForce;
-
-        qreal powerPt = (airResistForcePt * (speed + windSpeed)) + ((rollResistForce + gravitySlopeForcePt) * speed);
-        power += powerPt;
-
-        if (powerPt > 0)
-        {
-            qreal deltaPowerTime = pt.deltaDistance / speed;
-            powerMovingTime += deltaPowerTime;
-            positivePower += powerPt;
-            energyKJoule += powerPt * deltaPowerTime / muscleCoeff / 1000 * 100;
-            positivePedalForce += powerPt / pedalSpeed * 180 / pedalRange;
-            cntPositivePowerPoints++;
-        }
-    }
-
-    qint32 cntVisiblePoints = trk.getNumberOfVisiblePoints();
-    qDebug() << "struct cntVisiblePoints=" << cntVisiblePoints;
-    if (cntVisiblePoints)
-    {
-        airResistForce /= cntVisiblePoints;
-        gravitySlopeForce /= cntVisiblePoints;
-        sumForce /= cntVisiblePoints;
-        power /= cntVisiblePoints;
-    }
-
-    quint32 totalElapsedSecondsMoving = trk.getTotalElapsedSecondsMoving();
-    qDebug() << "struct totalElapsedSecondsMoving=" << totalElapsedSecondsMoving;
-    if(totalElapsedSecondsMoving)
-    {
-        powerMovingTimeRatio = powerMovingTime / totalElapsedSecondsMoving;
-    }
-    if(cntPositivePowerPoints)
-    {
-        positivePedalForce /= cntPositivePowerPoints;
-        positivePower /= cntPositivePowerPoints;
-    }
-    energyKcal = energyKJoule / joule2Calor;
-
-//    qDebug() <<
-//                QString("name;totalWeight;airDensity;windSpeed;pedalCadence;frontalArea;windDragCoeff;rollingCoeff;") +
-//                QString("airResistForce;rollResistForce;gravitySlopeForce;sumForce;positivePedalForce;power;positivePower;") +
-//                QString("powerMovingTime;powerMovingTimeRatio;energyKJoule;energyKcal");
-//    qDebug()
-//            << getName() << ";"
-//            << totalWeight << ";"
-//            << energy.airDensity << ";"
-//            << energy.windSpeed << ";"
-//            << energy.pedalCadence << ";"
-//            << energy.frontalArea << ";"
-//            << energy.windDragCoeff << ";"
-//            << energy.rollingCoeff << ";"
-//            << energy.airResistForce << ";"
-//            << energy.rollResistForce << ";"
-//            << energy.gravitySlopeForce << ";"
-//            << energy.sumForce << ";"
-//            << energy.positivePedalForce << ";"
-//            << energy.power << ";"
-//            << energy.positivePower << ";"
-//            << energy.powerMovingTime << ";"
-//            << energy.powerMovingTimeRatio << ";"
-//            << energy.energyKJoule << ";"
-//            << energy.energyKcal;
 }

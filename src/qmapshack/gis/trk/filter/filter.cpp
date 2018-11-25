@@ -24,11 +24,10 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "GeoMath.h"
-#include "gis/trk/filter/CFilterLoopsCut.h"
-
 
 #include <proj_api.h>
 #include <QtMath>
+#include <QLineF>
 
 void CGisItemTrk::filterReducePoints(qreal dist)
 {
@@ -607,10 +606,7 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
 
         if (pts.size() >= 4)
         {
-            qreal xa1 = headPt.lon;
-            qreal ya1 = headPt.lat;
-            qreal xa2 = pts[pts.size()-2].lon;
-            qreal ya2 = pts[pts.size()-2].lat;
+            const QLineF headLine = QLineF(headPt.lon, headPt.lat, pts[pts.size()-2].lon, pts[pts.size()-2].lat);
 
             bool firstCycle = true;
             CTrackData::trkpt_t prevScannedPt;
@@ -628,38 +624,12 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
                     continue;
                 }
 
-                qreal xb1 = scannedPt.lon;
-                qreal yb1 = scannedPt.lat;
-                qreal xb2 = prevScannedPt.lon;
-                qreal yb2 = prevScannedPt.lat;
+                const QLineF scannedLine = QLineF(scannedPt.lon, scannedPt.lat, prevScannedPt.lon, prevScannedPt.lat);
+                QPointF intersectionPoint;
 
-                // calculation of intersection point longitude
-                qreal a = (ya2-ya1)/(xa2-xa1);
-                qreal b = ya1 - a * xa1;
-                qreal c = (yb2 - yb1) / (xb2 - xb1);
-                qreal d = yb1 - c * xb1;
-
-                qreal xintersec = (d-b)/(a-c);
-
-                if (
-                        (
-                            (pts[pts.size()-2].distance - scannedPt.distance) > minLoopLength // loop is long enough to cut the track
-                        )
-                        &&
-                        (
-                            (
-                                ((abs(xintersec) <= abs (xa1)) && (abs(xintersec) >= abs (xa2)))
-                                ||
-                                ((abs(xintersec) >= abs (xa1)) && (abs(xintersec) <= abs (xa2)))
-                            )
-                            &&
-                            (
-                                ((abs(xintersec) <= abs (xb1)) && (abs(xintersec) >= abs (xb2)))
-                                ||
-                                ((abs(xintersec) >= abs (xb1)) && (abs(xintersec) <= abs (xb2)))
-                            )   // segments do intersect
-                        )
-                    )
+                if ( ( headLine.intersect(scannedLine, &intersectionPoint) == QLineF::BoundedIntersection)
+                    &&
+                    (pts[pts.size()-2].distance - scannedPt.distance) > minLoopLength) // loop is long enough to cut the track)
                 {
                     new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts[pts.size()-2].idxTotal, trk, project);
                     part++;

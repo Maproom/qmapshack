@@ -188,9 +188,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     // limit tree widget horizontal size to the filter widget with the largest minimum size
     treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
 
-    // limit tree widget horizontal size to the filter widget with the largest minimum size
-    treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
-    
     slotShowPlots();
 }
 

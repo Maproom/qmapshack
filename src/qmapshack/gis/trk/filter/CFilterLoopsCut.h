@@ -19,8 +19,8 @@
 #ifndef CFILTERLOOPSCUT_H
 #define CFILTERLOOPSCUT_H
 
-#include "ui_IFilterLoopsCut.h"
 #include "CMainWindow.h"
+#include "ui_IFilterLoopsCut.h"
 #include <QWidget>
 
 class CGisItemTrk;

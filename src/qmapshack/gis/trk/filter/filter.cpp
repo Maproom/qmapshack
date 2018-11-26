@@ -26,8 +26,8 @@
 #include "GeoMath.h"
 
 #include <proj_api.h>
-#include <QtMath>
 #include <QLineF>
+#include <QtMath>
 
 void CGisItemTrk::filterReducePoints(qreal dist)
 {
@@ -628,8 +628,8 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
                 QPointF intersectionPoint;
 
                 if ( ( headLine.intersect(scannedLine, &intersectionPoint) == QLineF::BoundedIntersection)
-                    &&
-                    (pts[pts.size()-2].distance - scannedPt.distance) > minLoopLength) // loop is long enough to cut the track)
+                     &&
+                     (pts[pts.size()-2].distance - scannedPt.distance) > minLoopLength) // loop is long enough to cut the track)
                 {
                     new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts[pts.size()-2].idxTotal, trk, project);
                     part++;

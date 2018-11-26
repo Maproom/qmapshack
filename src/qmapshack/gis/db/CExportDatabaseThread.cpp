@@ -76,7 +76,7 @@ void CExportDatabaseThread::run()
         /*
             As database connections can't be shared between threads the database connection
             has to be cloned
-        */
+         */
         QSqlDatabase db = QSqlDatabase::cloneDatabase(dbParent, "tmp_export");
         if(!db.open())
         {
@@ -95,7 +95,7 @@ void CExportDatabaseThread::run()
 
         dumpFolder(parentFolderId, "", exportPath, db);
 
-        emit sigOut(tr("Done!"));                
+        emit sigOut(tr("Done!"));
         db.close();
     }
     catch(const QString& msg)

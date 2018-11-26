@@ -25,9 +25,9 @@
 #include "gis/trk/CPropertyTrk.h"
 #include "GeoMath.h"
 
-
 #include <proj_api.h>
 #include <QtMath>
+#include <QLineF>
 
 void CGisItemTrk::filterReducePoints(qreal dist)
 {
@@ -582,4 +582,68 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
     deriveSecondaryData();
 
     changed(tr("Start Point moved to: ") + wptName.toLatin1(), "://icons/48x48/FilterChangeStartPoint.png");
+}
+
+void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
+{
+    IGisProject * project = CGisWorkspace::self().selectProject();
+    if(nullptr == project)
+    {
+        return;
+    }
+
+    int part = 1;
+    QVector<CTrackData::trkpt_t> pts;
+
+    for (const CTrackData::trkpt_t& headPt : trk)
+    {
+        if(headPt.isHidden())
+        {
+            continue;
+        }
+
+        pts << headPt;
+
+        if (pts.size() >= 4)
+        {
+            const QLineF headLine = QLineF(headPt.lon, headPt.lat, pts[pts.size()-2].lon, pts[pts.size()-2].lat);
+
+            bool firstCycle = true;
+            CTrackData::trkpt_t prevScannedPt;
+            for (const CTrackData::trkpt_t& scannedPt : pts)
+            {
+                if (scannedPt.idxTotal == pts[pts.size()-2].idxTotal)
+                {
+                    break;
+                }
+
+                if (firstCycle)
+                {
+                    prevScannedPt = scannedPt;
+                    firstCycle = false;
+                    continue;
+                }
+
+                const QLineF scannedLine = QLineF(scannedPt.lon, scannedPt.lat, prevScannedPt.lon, prevScannedPt.lat);
+                QPointF intersectionPoint;
+
+                if ( ( headLine.intersect(scannedLine, &intersectionPoint) == QLineF::BoundedIntersection)
+                    &&
+                    (pts[pts.size()-2].distance - scannedPt.distance) > minLoopLength) // loop is long enough to cut the track)
+                {
+                    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts[pts.size()-2].idxTotal, trk, project);
+                    part++;
+                    pts.remove(0, pts.size()-2);
+
+                    break;
+                }
+
+                prevScannedPt = scannedPt;
+            }
+        }
+    }
+
+
+    // last part : no loop detected but this last part should be copied, too
+    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts.last().idxTotal, trk, project);
 }

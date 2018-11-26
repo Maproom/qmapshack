@@ -171,6 +171,7 @@ set( SRCS
     gis/trk/filter/CFilterDouglasPeuker.cpp
     gis/trk/filter/CFilterInterpolateElevation.cpp
     gis/trk/filter/CFilterInvalid.cpp
+    gis/trk/filter/CFilterLoopsCut.cpp
     gis/trk/filter/CFilterMedian.cpp
     gis/trk/filter/CFilterNewDate.cpp
     gis/trk/filter/CFilterObscureDate.cpp
@@ -494,6 +495,7 @@ set( HDRS
     gis/trk/filter/CFilterDouglasPeuker.h
     gis/trk/filter/CFilterInterpolateElevation.h
     gis/trk/filter/CFilterInvalid.h
+    gis/trk/filter/CFilterLoopsCut.h
     gis/trk/filter/CFilterMedian.h
     gis/trk/filter/CFilterNewDate.h
     gis/trk/filter/CFilterObscureDate.h
@@ -725,6 +727,7 @@ set( UIS
     gis/trk/filter/IFilterDouglasPeuker.ui
     gis/trk/filter/IFilterInterpolateElevation.ui
     gis/trk/filter/IFilterInvalid.ui
+    gis/trk/filter/IFilterLoopsCut.ui
     gis/trk/filter/IFilterMedian.ui
     gis/trk/filter/IFilterNewDate.ui
     gis/trk/filter/IFilterObscureDate.ui

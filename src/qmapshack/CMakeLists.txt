@@ -185,6 +185,7 @@ set( SRCS
     gis/trk/filter/CFilterSplitSegment.cpp
     gis/trk/filter/CFilterSubPt2Pt.cpp
     gis/trk/filter/CFilterTerrainSlope.cpp
+    gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp
     gis/trk/filter/filter.cpp
     gis/wpt/CDetailsGeoCache.cpp
     gis/wpt/CDetailsWpt.cpp
@@ -509,6 +510,7 @@ set( HDRS
     gis/trk/filter/CFilterSplitSegment.h
     gis/trk/filter/CFilterSubPt2Pt.h
     gis/trk/filter/CFilterTerrainSlope.h
+    gis/trk/filter/CFilterZeroSpeedDriftCleaner.h
     gis/wpt/CDetailsGeoCache.h
     gis/wpt/CDetailsWpt.h
     gis/wpt/CGisItemWpt.h
@@ -741,6 +743,7 @@ set( UIS
     gis/trk/filter/IFilterSplitSegment.ui
     gis/trk/filter/IFilterSubPt2Pt.ui
     gis/trk/filter/IFilterTerrainSlope.ui
+    gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui
     gis/wpt/IDetailsGeoCache.ui
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IProjWpt.ui

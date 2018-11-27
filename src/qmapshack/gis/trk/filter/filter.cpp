@@ -647,3 +647,151 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
     // last part : no loop detected but this last part should be copied, too
     new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts.last().idxTotal, trk, project);
 }
+
+void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
+{
+    IGisProject * project = CGisWorkspace::self().selectProject();
+    if(nullptr == project)
+    {
+        return;
+    }
+
+    qint32 knotPtsCount = 0;
+    bool knotStarted = false;
+    qreal knotLength = 0.0;
+    qreal firstKnotEndSegmentFoundLength = 0.0;
+    pointDP knotStartPreviousPt, knotEndPt;
+    bool firstKnotEndSegmentFound = false;
+
+    QVector<bool> trackPoints;
+
+
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        if(pt.isHidden() )
+        {
+            bool pointToBeHidden = false; // it is already invisible, then it is not necessary to hide it again
+            trackPoints << pointToBeHidden;
+
+            continue;
+        }
+
+        if (pt.idxVisible == 0) // first visible point
+        {
+            bool pointToBeHidden = false; // first visible point will never be hidden
+            trackPoints << pointToBeHidden;
+        }
+        else
+        {
+            qint32 previousVisiblePtVisibleIndex = pt.idxVisible-1;
+            qreal d = pt.distance - trk.getTrkPtByVisibleIndex(previousVisiblePtVisibleIndex)->distance; // "distance" field of trackpoints includes visible points only
+
+            if (d < distance)
+            {
+                firstKnotEndSegmentFound = false;
+
+                if (!knotStarted)
+                {
+                    knotStartPreviousPt.x = trk.getTrkPtByVisibleIndex(previousVisiblePtVisibleIndex)->lon * DEG_TO_RAD;
+                    knotStartPreviousPt.y = trk.getTrkPtByVisibleIndex(previousVisiblePtVisibleIndex)->lat * DEG_TO_RAD;
+
+                    knotPtsCount = 0;
+                    knotStarted = true;
+                }
+
+                knotPtsCount++;
+                knotLength += d;
+
+            }
+            else
+            {
+                if (!knotStarted)
+                {
+                    bool pointToBeHidden = false; // not part of a web : point will not be hidden
+                    trackPoints << pointToBeHidden;
+                }
+
+                if (knotStarted && !firstKnotEndSegmentFound)
+                {
+                    firstKnotEndSegmentFound = true;
+
+                    knotEndPt.x = trk.getTrkPtByVisibleIndex(previousVisiblePtVisibleIndex)->lon * DEG_TO_RAD;
+                    knotEndPt.y = trk.getTrkPtByVisibleIndex(previousVisiblePtVisibleIndex)->lat * DEG_TO_RAD;
+
+                    knotPtsCount++;
+                    knotLength += d;
+                    firstKnotEndSegmentFoundLength = d;
+
+                    continue;
+                }
+
+                if (knotStarted && firstKnotEndSegmentFound)
+                {
+                    knotPtsCount--; // to remove point corresponding to 1st long segment found
+                    knotLength -= firstKnotEndSegmentFoundLength; // to remove length corresponding to 1st long segment found
+                    qreal straightDistance = GPS_Math_DistanceQuick(knotStartPreviousPt.x, knotStartPreviousPt.y, knotEndPt.x, knotEndPt.y);
+
+                    if (knotLength > ratio * straightDistance)
+                    {      //true knot
+                        for(qint32 i = 0 ; i < knotPtsCount ; i ++)
+                        {
+                            bool pointToBeHidden = true;
+                            trackPoints << pointToBeHidden;
+                        }
+                    }
+                    else
+                    {      // low speed part, not a knot
+                        for(qint32 i = 0 ; i < knotPtsCount ; i ++)
+                        {
+                            bool pointToBeHidden = false;
+                            trackPoints << pointToBeHidden;
+                        }
+                    }
+                    knotLength = 0;
+                    knotStarted = false;
+
+                    bool pointToBeHidden = false;
+                    trackPoints << pointToBeHidden; // second point of the first long segment found
+                    trackPoints << pointToBeHidden; // second point of the second long segment found
+
+                }
+            }
+        }
+    }
+
+    if (knotPtsCount > 0) // if web is at the end of the track, these points must be hidden, too
+    {
+        for(qint32 i = 0 ; i < knotPtsCount - 1 ; i ++)
+        {
+            bool pointToBeHidden = true;
+            trackPoints << pointToBeHidden;
+        }
+        bool pointToBeHidden = false; // keep last point visible
+        trackPoints << pointToBeHidden;
+    }
+
+
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        if (trackPoints.size()== 0)
+        {
+            break;
+        }
+
+        bool toBeHidden = trackPoints.takeFirst();
+
+        if (toBeHidden)
+        {
+            pt.setFlag(CTrackData::trkpt_t::eFlagHidden);
+
+        }
+     }
+
+    new CGisItemTrk(tr("%1 (autopaused)").arg(trk.name), 0, trk.segs.last().pts.last().idxTotal, trk, project);
+
+
+    deriveSecondaryData();
+    QString val, unit;
+    IUnit::self().meter2distance(distance, val, unit);
+    changed(tr("Removed zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)").arg(val).arg(unit).arg(ratio), "://icons/48x48/FilterZeroSpeedDriftCleaner.png");
+}

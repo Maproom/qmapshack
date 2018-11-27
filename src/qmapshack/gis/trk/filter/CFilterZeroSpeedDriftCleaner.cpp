@@ -57,20 +57,24 @@ void CFilterZeroSpeedDriftCleaner::slotApply()
 void CFilterZeroSpeedDriftCleaner::showHelp()
 {
     QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help")
-                             , tr("Sometimes tracks have loops.\n\n"
-                                  "It is often the case for mountain bikes tours where the same fire road is used several "
-                                  "times to go back uphill to a high point. "
-                                  "Several downhill paths start from this high point and the same fire road is used again "
-                                  "and again to go back up. The recorded track is made of several loops. However following "
-                                  "a track made of loops on a Garmin device is difficult, as it is impossible to know in what "
-                                  "order loops have to be ridden.\n\n"
-                                  "The purpose of this filter is to split the input track into several separate tracks. "
-                                  "The obtained tracks have no loops and are easy to follow on a Garmin device: start with part 1, "
-                                  "at the end of part 1 switch to part 2, etc..\n\n"
-                                  "This filter detects loops by looking for intersections. A new track is created as soon as an "
-                                  "intersection is detected.\n\n"
-                                  "The only input parameter is minimum loop length: this is to prevent cutting tracks in "
-                                  "tight switchbacks, where recorded tracks can be made of tiny loops. These loops will be ignored "
-                                  "if their lengths are smaller that the given value.")  );
+                             , tr("This filter is designed to remove unwanted points when stopped and when recording in device "
+                                  "is set to 1pt/s without autopause or auto record method.\n\n"
+
+                                  "Sometimes setting recording method to auto with highest precision is not enough to capture all of "
+                                  "the track details. In this case recording method has to be set to 1pt/s.\n"
+                                  "Unfortunately, when stopped, receivers are much more subject to multipath signals, and the result "
+                                  "is a track looking like a big knot: position is slowly drifting in random directions at low speed.\n\n"
+
+                                  "There at least 3 drawbacks:\n"
+                                  "-total track length is greater than reality\n"
+                                  "-stopped time is smaller\n"
+                                  "-number of points is unnecessary high\n\n"
+
+                                  "This filter has 2 parameters:\n"
+                                  "-distance defines the threshold at which knots are detected\n"
+                                  "-ratio is used when track has straight parts at low speed: these are not a knots and must not be removed. "
+                                  "Knots are twisty, slow speed parts are not.\n"
+                                  "Default value of 2 means that filter will detect a knot if distance on a straight line between the "
+                                  "beginning of the knot and its end is greater than 2 times the length of the knot itself.")  );
 }
 

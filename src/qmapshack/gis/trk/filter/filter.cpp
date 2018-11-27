@@ -650,21 +650,13 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
 
 void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
 {
-    IGisProject * project = CGisWorkspace::self().selectProject();
-    if(nullptr == project)
-    {
-        return;
-    }
-
     qint32 knotPtsCount = 0;
     bool knotStarted = false;
     qreal knotLength = 0.0;
     qreal firstKnotEndSegmentFoundLength = 0.0;
     pointDP knotStartPreviousPt, knotEndPt;
     bool firstKnotEndSegmentFound = false;
-
     QVector<bool> trackPoints;
-
 
     for(CTrackData::trkpt_t& pt : trk)
     {
@@ -701,17 +693,17 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
 
                 knotPtsCount++;
                 knotLength += d;
-
             }
             else
             {
                 if (!knotStarted)
                 {
-                    bool pointToBeHidden = false; // not part of a web : point will not be hidden
+                    bool pointToBeHidden = false; // not part of a knot : point will not be hidden
                     trackPoints << pointToBeHidden;
                 }
 
-                if (knotStarted && !firstKnotEndSegmentFound)
+                if (knotStarted && !firstKnotEndSegmentFound) // when computed position solution change (when a satellite (dis-)appears), a position jump occurs
+                                                              // and a single "long segment" is recorded: this is not the end of the knot
                 {
                     firstKnotEndSegmentFound = true;
 
@@ -725,7 +717,8 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
                     continue;
                 }
 
-                if (knotStarted && firstKnotEndSegmentFound)
+                if (knotStarted && firstKnotEndSegmentFound) // now we have a second long segment in a row: this is not a solution change
+                                                             // and this may be the end of the knot
                 {
                     knotPtsCount--; // to remove point corresponding to 1st long segment found
                     knotLength -= firstKnotEndSegmentFoundLength; // to remove length corresponding to 1st long segment found
@@ -759,7 +752,7 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
         }
     }
 
-    if (knotPtsCount > 0) // if web is at the end of the track, these points must be hidden, too
+    if (knotPtsCount > 0) // if knot is at the end of the track, these points must be hidden, too
     {
         for(qint32 i = 0 ; i < knotPtsCount - 1 ; i ++)
         {
@@ -787,11 +780,8 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
         }
      }
 
-    new CGisItemTrk(tr("%1 (autopaused)").arg(trk.name), 0, trk.segs.last().pts.last().idxTotal, trk, project);
-
-
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2distance(distance, val, unit);
-    changed(tr("Removed zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)").arg(val).arg(unit).arg(ratio), "://icons/48x48/FilterZeroSpeedDriftCleaner.png");
+    changed(tr("Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)").arg(val).arg(unit).arg(ratio), "://icons/48x48/FilterZeroSpeedDriftCleaner.png");
 }

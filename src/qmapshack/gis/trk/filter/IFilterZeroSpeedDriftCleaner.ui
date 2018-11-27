@@ -149,7 +149,7 @@
         <bool>true</bool>
        </property>
        <property name="text">
-        <string>Clean zero speed drift knots</string>
+        <string>Hide zero speed drift knots</string>
        </property>
       </widget>
      </item>

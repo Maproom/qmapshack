@@ -730,7 +730,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="83"/>
         <source>Failed to open database for export. &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al abrir la base de datos para su exportación. &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="89"/>
@@ -803,7 +803,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/trk/filter/CFilterLoopsCut.cpp" line="57"/>
         <source>Help</source>
-        <translation type="unfinished">Ayuda</translation>
+        <translation>Ayuda</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterLoopsCut.cpp" line="58"/>
@@ -816,7 +816,15 @@ The purpose of this filter is to split the input track into several separate tra
 This filter detects loops by looking for intersections. A new track is created as soon as an intersection is detected.
 
 The only input parameter is minimum loop length: this is to prevent cutting tracks in tight switchbacks, where recorded tracks can be made of tiny loops. These loops will be ignored if their lengths are smaller that the given value.</source>
-        <translation type="unfinished"></translation>
+        <translation>A menudo los tracks tiene bucles.
+
+Por ejemplo, una salida en BTT en la que se utiliza una misma pista forestal para ascender a un sitio desde el que comienzan varios senderos por los que se desciende para después volver a coger la misma pista una y otra vez. Un track de este tipo consta de varios bucles y resulta muy difícil de seguir en un dispositivo Garmin, ya que es imposible saber en que orden se deben hacer cada uno de ellos.
+
+La utilidad de este filtro es la de dividir un track con esta particularidad en varios, cada uno de ellos con un bucle para poder seguirlo con facilidad en un Garmin: Empezar por parte 1, seguir con parte 2, etc.
+
+El filtro detecta los bucles buscando las intersecciones, cuando halla una crea un nuevo track.
+
+El único valor a introducir es la longitud mínima del bucle: Esto sirve para evitar la creación de nuevos tracks ante pequeños bucles, que seran ignorados si su longitud es menor que la del parámetro dado   </translation>
     </message>
 </context>
 <context>
@@ -1090,7 +1098,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
         <location filename="../gis/search/CGeoSearch.cpp" line="510"/>
         <location filename="../gis/search/CGeoSearch.cpp" line="660"/>
         <source>Unknown response</source>
-        <translation type="unfinished">Respuesta desconocida</translation>
+        <translation>Respuesta desconocida</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="386"/>
@@ -1161,7 +1169,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.h" line="128"/>
         <source>thin</source>
-        <translation>fino</translation>
+        <translation>delgado</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.h" line="129"/>
@@ -1323,7 +1331,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/fit/serialization.cpp" line="285"/>
         <source>FIT file %1 contains no GPS data.</source>
-        <translation>Archivo FIT %1 no contiene datos GPS.</translation>
+        <translation>El archivo FIT %1 no contiene datos GPS.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="211"/>
@@ -1399,7 +1407,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="452"/>
         <source>Invalid elevations!</source>
-        <translation>¡Datos de altitud invalidos!</translation>
+        <translation>¡Datos de altitud no válidos!</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="457"/>
@@ -1409,7 +1417,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="462"/>
         <source>Invalid positions!</source>
-        <translation>¡Posiciones inválidas!</translation>
+        <translation>¡Posiciones no válidas!</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="476"/>
@@ -1639,7 +1647,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="98"/>
         <source>Hide points by Douglas Peuker algorithm (%1%2)</source>
-        <translation>Ocultar puntos con algoritmo Douglas Peuker (%1%2)</translation>
+        <translation>Ocultar puntos con el algoritmo Douglas Peuker (%1%2)</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="124"/>
@@ -1649,7 +1657,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="134"/>
         <source>Reset all hidden track points to visible</source>
-        <translation>Restaurados todos los puntos a visible</translation>
+        <translation>Restaurados todos los puntos a visibles</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="164"/>
@@ -1659,7 +1667,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="201"/>
         <source>Smoothed profile with a Median filter of size %1</source>
-        <translation>Pefil suavizado con Mediana de %1 puntos</translation>
+        <translation>Perfil suavizado con Mediana de %1 puntos</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="223"/>
@@ -1705,7 +1713,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
         <location filename="../gis/trk/filter/filter.cpp" line="634"/>
         <location filename="../gis/trk/filter/filter.cpp" line="648"/>
         <source>%1 (Part %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (Parte %2)</translation>
     </message>
     <message>
         <source>Changed average moving speed depending on slope to %1%2.</source>
@@ -1802,7 +1810,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="444"/>
         <source>Removed proximity</source>
-        <translation type="unfinished">Eliminada proximidad</translation>
+        <translation>Eliminada proximidad</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="449"/>
@@ -5658,22 +5666,22 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="113"/>
         <source>Slope</source>
-        <translation type="unfinished">Pendiente</translation>
+        <translation>Pendiente</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="114"/>
         <source>Ascent</source>
-        <translation type="unfinished">Ascenso</translation>
+        <translation>Ascenso</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
         <source>Descent</source>
-        <translation type="unfinished">Descenso</translation>
+        <translation>Descenso</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="116"/>
         <source>Position</source>
-        <translation type="unfinished">Posición</translation>
+        <translation>Posición</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="164"/>
@@ -7946,17 +7954,17 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="35"/>
         <source>Cut track when loop length is greater than</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar el track si la longitud del bucle es mayor de</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="70"/>
         <source>m</source>
-        <translation type="unfinished">m</translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="99"/>
         <source>Apply filter now.</source>
-        <translation type="unfinished">Aplicar filtro.</translation>
+        <translation>Aplicar filtro.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="102"/>
@@ -7966,7 +7974,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="132"/>
         <source>Cut loops into separate tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar los bucles en tracks independendientes.</translation>
     </message>
 </context>
 <context>
@@ -10771,7 +10779,7 @@ o
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="95"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>
@@ -11580,7 +11588,7 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="127"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12678,32 +12686,32 @@ o
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="20"/>
         <source>Participants</source>
-        <translation type="unfinished">Participantes</translation>
+        <translation>Participantes</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="32"/>
         <source>Weather</source>
-        <translation type="unfinished">Meteo</translation>
+        <translation>Meteo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="38"/>
         <source>rain</source>
-        <translation type="unfinished">lluvia</translation>
+        <translation>lluvia</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="48"/>
         <source>sunny</source>
-        <translation type="unfinished">soleado</translation>
+        <translation>soleado</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="58"/>
         <source>snow</source>
-        <translation type="unfinished">nieve</translation>
+        <translation>nieve</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="68"/>
         <source>clouds</source>
-        <translation type="unfinished">nubes</translation>
+        <translation>nubes</translation>
     </message>
     <message>
         <source>ho&amp;t</source>
@@ -12724,12 +12732,12 @@ o
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="81"/>
         <source>hot</source>
-        <translation type="unfinished">caluroso</translation>
+        <translation>caluroso</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="91"/>
         <source>warm</source>
-        <translation type="unfinished">templado</translation>
+        <translation>templado</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="101"/>

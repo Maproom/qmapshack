@@ -33,7 +33,7 @@ CFilterZeroSpeedDriftCleaner::CFilterZeroSpeedDriftCleaner(CGisItemTrk &trk, QWi
     distance->setSuffix(IUnit::self().baseunit);
 
     SETTINGS;
-    distance->setValue(cfg.value("TrackDetails/Filter/ZeroSpeedDriftCleaner/distance",0.75).toDouble());
+    distance->setValue(cfg.value("TrackDetails/Filter/ZeroSpeedDriftCleaner/distance",0.75 * IUnit::self().basefactor).toDouble() * IUnit::self().basefactor);
     ratio->setValue(cfg.value("TrackDetails/Filter/ZeroSpeedDriftCleaner/ratio",2).toDouble());
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterZeroSpeedDriftCleaner::slotApply);
@@ -43,7 +43,7 @@ CFilterZeroSpeedDriftCleaner::CFilterZeroSpeedDriftCleaner(CGisItemTrk &trk, QWi
 CFilterZeroSpeedDriftCleaner::~CFilterZeroSpeedDriftCleaner()
 {
     SETTINGS;
-    cfg.setValue("TrackDetails/Filter/ZeroSpeedDriftCleaner/distance", distance->value());
+    cfg.setValue("TrackDetails/Filter/ZeroSpeedDriftCleaner/distance", distance->value() / IUnit::self().basefactor);
     cfg.setValue("TrackDetails/Filter/ZeroSpeedDriftCleaner/ratio", ratio->value());
 }
 

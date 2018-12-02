@@ -662,21 +662,18 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
     {
         if(pt.isHidden() )
         {
-            bool pointToBeHidden = false; // it is already invisible, then it is not necessary to hide it again
-            trackPoints << pointToBeHidden;
-
+            trackPoints << false;  // it is already invisible, then it is not necessary to hide it again
             continue;
         }
 
         if (pt.idxVisible == 0) // first visible point
         {
-            bool pointToBeHidden = false; // first visible point will never be hidden
-            trackPoints << pointToBeHidden;
+            trackPoints << false; // first visible point will never be hidden
         }
         else
         {
-            qint32 previousVisiblePtVisibleIndex = pt.idxVisible-1;
-            qreal d = pt.distance - trk.getTrkPtByVisibleIndex(previousVisiblePtVisibleIndex)->distance; // "distance" field of trackpoints includes visible points only
+            const CTrackData::trkpt_t *prevVisiblePt = trk.getTrkPtByVisibleIndex(pt.idxVisible-1);
+            qreal d = pt.distance - prevVisiblePt->distance; // "distance" field of trackpoints includes visible points only
 
             if (d < distance)
             {
@@ -684,8 +681,8 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
 
                 if (!knotStarted)
                 {
-                    knotStartPreviousPt.x = trk.getTrkPtByVisibleIndex(previousVisiblePtVisibleIndex)->lon * DEG_TO_RAD;
-                    knotStartPreviousPt.y = trk.getTrkPtByVisibleIndex(previousVisiblePtVisibleIndex)->lat * DEG_TO_RAD;
+                    knotStartPreviousPt.x = prevVisiblePt->lon * DEG_TO_RAD;
+                    knotStartPreviousPt.y = prevVisiblePt->lat * DEG_TO_RAD;
 
                     knotPtsCount = 0;
                     knotStarted = true;
@@ -698,8 +695,7 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
             {
                 if (!knotStarted)
                 {
-                    bool pointToBeHidden = false; // not part of a knot : point will not be hidden
-                    trackPoints << pointToBeHidden;
+                    trackPoints << false; // not part of a knot : point will not be hidden
                 }
 
                 if (knotStarted && !firstKnotEndSegmentFound) // when computed position solution change (when a satellite (dis-)appears), a position jump occurs
@@ -707,8 +703,8 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
                 {
                     firstKnotEndSegmentFound = true;
 
-                    knotEndPt.x = trk.getTrkPtByVisibleIndex(previousVisiblePtVisibleIndex)->lon * DEG_TO_RAD;
-                    knotEndPt.y = trk.getTrkPtByVisibleIndex(previousVisiblePtVisibleIndex)->lat * DEG_TO_RAD;
+                    knotEndPt.x = prevVisiblePt->lon * DEG_TO_RAD;
+                    knotEndPt.y = prevVisiblePt->lat * DEG_TO_RAD;
 
                     knotPtsCount++;
                     knotLength += d;
@@ -728,25 +724,21 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
                     {      //true knot
                         for(qint32 i = 0 ; i < knotPtsCount ; i ++)
                         {
-                            bool pointToBeHidden = true;
-                            trackPoints << pointToBeHidden;
+                            trackPoints << true;
                         }
                     }
                     else
                     {      // low speed part, not a knot
                         for(qint32 i = 0 ; i < knotPtsCount ; i ++)
                         {
-                            bool pointToBeHidden = false;
-                            trackPoints << pointToBeHidden;
+                            trackPoints << false;
                         }
                     }
                     knotLength = 0;
                     knotStarted = false;
 
-                    bool pointToBeHidden = false;
-                    trackPoints << pointToBeHidden; // second point of the first long segment found
-                    trackPoints << pointToBeHidden; // second point of the second long segment found
-
+                    trackPoints << false; // second point of the first long segment found
+                    trackPoints << false; // second point of the second long segment found
                 }
             }
         }
@@ -756,11 +748,9 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
     {
         for(qint32 i = 0 ; i < knotPtsCount - 1 ; i ++)
         {
-            bool pointToBeHidden = true;
-            trackPoints << pointToBeHidden;
+            trackPoints << true;
         }
-        bool pointToBeHidden = false; // keep last point visible
-        trackPoints << pointToBeHidden;
+        trackPoints << false; // keep last point visible
     }
 
 

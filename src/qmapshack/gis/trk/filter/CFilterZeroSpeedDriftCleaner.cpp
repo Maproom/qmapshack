@@ -71,10 +71,11 @@ void CFilterZeroSpeedDriftCleaner::showHelp()
                                   "-number of points is unnecessary high\n\n"
 
                                   "This filter has 2 parameters:\n"
-                                  "-distance defines the threshold at which knots are detected\n"
-                                  "-ratio is used when track has straight parts at low speed: these are not a knots and must not be removed. "
+                                  "-Distance defines the threshold at which knots are detected: knot starts when distance between 2 consecutive points "
+                                  "is shorter than this\n"
+                                  "-Ratio is used when track has straight parts at low speed: these are not knots and must not be removed. "
                                   "Knots are twisty, slow speed parts are not.\n"
-                                  "Default value of 2 means that filter will detect a knot if distance on a straight line between the "
-                                  "beginning of the knot and its end is greater than 2 times the length of the knot itself.")  );
+                                  "Default value of 2 means that filter will detect a knot if the length of the knot is greater than 2 "
+                                  "times the distance on a straight line between the beginning of the knot and its end")  );
 }
 

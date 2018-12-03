@@ -675,7 +675,8 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
             const CTrackData::trkpt_t *prevVisiblePt = trk.getTrkPtByVisibleIndex(pt.idxVisible-1);
             qreal d = pt.distance - prevVisiblePt->distance; // "distance" field of trackpoints includes visible points only
 
-            if (d < distance)
+            if (d < distance) // "distance" defines the threshold at which knots are detected: knot starts when
+                              // distance between 2 consecutive points is shorter than this
             {
                 firstKnotEndSegmentFound = false;
 
@@ -720,8 +721,13 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
                     knotLength -= firstKnotEndSegmentFoundLength; // to remove length corresponding to 1st long segment found
                     qreal straightDistance = GPS_Math_DistanceQuick(knotStartPreviousPt.x, knotStartPreviousPt.y, knotEndPt.x, knotEndPt.y);
 
-                    if (knotLength > ratio * straightDistance)
-                    {      //true knot
+                    if (knotLength > ratio * straightDistance) // Ratio is used when track has straight parts at low speed:
+                                                               // these are not knots and must not be removed.
+                                                               // Knots are twisty, slow speed parts are not.
+                                                               // Default value of 2 means that filter will detect a knot if the length
+                                                               // of the knot is greater than 2 times the distance on a straight
+                                                               // line between the beginning of the knot and its end
+                    {      // true knot
                         for(qint32 i = 0 ; i < knotPtsCount ; i ++)
                         {
                             trackPoints << true;

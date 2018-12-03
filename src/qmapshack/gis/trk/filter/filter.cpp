@@ -724,9 +724,11 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
                     if (knotLength > ratio * straightDistance) // Ratio is used when track has straight parts at low speed:
                                                                // these are not knots and must not be removed.
                                                                // Knots are twisty, slow speed parts are not.
-                                                               // Default value of 2 means that filter will detect a knot if the length
-                                                               // of the knot is greater than 2 times the distance on a straight
-                                                               // line between the beginning of the knot and its end
+                                                               // The filter will detect a knot if the length of the knot is greater
+                                                               // than the ratio multiplied by the distance on a straight
+                                                               // line between the beginning of the knot and its end.
+                                                               // The default value of the ratio parameter is 2.
+
                     {      // true knot
                         for(qint32 i = 0 ; i < knotPtsCount ; i ++)
                         {

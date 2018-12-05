@@ -56,26 +56,17 @@ void CFilterZeroSpeedDriftCleaner::slotApply()
 
 void CFilterZeroSpeedDriftCleaner::showHelp()
 {
-    QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help")
-                             , tr("This filter is designed to remove unwanted points when stopped and when recording in device "
-                                  "is set to 1pt/s without autopause or auto record method.\n\n"
-
-                                  "Sometimes setting recording method to auto with highest precision is not enough to capture all of "
-                                  "the track details. In this case recording method has to be set to 1pt/s.\n"
-                                  "Unfortunately, when stopped, receivers are much more subject to multipath signals, and the result "
-                                  "is a track looking like a big knot: position is slowly drifting in random directions at low speed.\n\n"
-
-                                  "There at least 3 drawbacks:\n"
-                                  "-total track length is greater than reality\n"
-                                  "-stopped time is smaller\n"
-                                  "-number of points is unnecessary high\n\n"
-
-                                  "This filter has 2 parameters:\n"
-                                  "-Distance defines the threshold at which knots are detected: knot starts when distance between 2 consecutive points "
-                                  "is shorter than this\n"
-                                  "-Ratio is used when track has straight parts at low speed: these are not knots and must not be removed. "
-                                  "Knots are twisty, slow speed parts are not.\n"
-                                  "The filter will detect a knot if the length of the knot is greater than the ratio multiplied by the distance on a straight "
-                                  "line between the beginning of the knot and its end. The default value of the ratio parameter is 2.")  );
+    QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"),
+                             tr("Remove knots of trackpoints recorded on a break.\n\n"
+                                "While having a break (no movement) most devices keep on recording. The result is a knot (cloud) "
+                                "of points due to statistic and system based errors in the GPS position. As these points "
+                                "influence the track statistics you might want to remove them.\n\n"
+                                "This filter has 2 parameters:\n"
+                                "-Distance defines the threshold at which knots are detected: knot starts when distance between 2 consecutive points "
+                                "is shorter than this\n"
+                                "-Ratio is used when track has straight parts at low speed: these are not knots and must not be removed. "
+                                "Knots are twisty, slow speed parts are not.\n"
+                                "The filter will detect a knot if the length of the knot is greater than the ratio multiplied by the distance on a straight "
+                                "line between the beginning of the knot and its end. The default value of the ratio parameter is 2.")  );
 }
 

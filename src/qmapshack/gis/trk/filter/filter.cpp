@@ -764,10 +764,7 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
 
     for(CTrackData::trkpt_t& pt : trk)
     {
-        if (trackPoints.size()== 0)
-        {
-            break;
-        }
+        Q_ASSERT(trackPoints.size() != 0);
 
         bool toBeHidden = trackPoints.takeFirst();
 

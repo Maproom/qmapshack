@@ -684,8 +684,6 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
                 {
                     knotStartPreviousPt.x = prevVisiblePt->lon * DEG_TO_RAD;
                     knotStartPreviousPt.y = prevVisiblePt->lat * DEG_TO_RAD;
-
-                    knotPtsCount = 0;
                     knotStarted = true;
                 }
 
@@ -743,6 +741,7 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
                         }
                     }
                     knotLength = 0;
+                    knotPtsCount = 0;
                     knotStarted = false;
 
                     trackPoints << false; // second point of the first long segment found
@@ -754,26 +753,21 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
 
     if (knotPtsCount > 0) // if knot is at the end of the track, these points must be hidden, too
     {
-        for(qint32 i = 0 ; i < knotPtsCount - 1 ; i ++)
+       // for(qint32 i = 0 ; i < knotPtsCount - 1 ; i ++)
+         for(qint32 i = 0 ; i < knotPtsCount ; i ++)
         {
             trackPoints << true;
         }
-        trackPoints << false; // keep last point visible
     }
-
 
     for(CTrackData::trkpt_t& pt : trk)
     {
-        Q_ASSERT(trackPoints.size() != 0);
-
         bool toBeHidden = trackPoints.takeFirst();
-
         if (toBeHidden)
         {
             pt.setFlag(CTrackData::trkpt_t::eFlagHidden);
-
         }
-     }
+    }
 
     deriveSecondaryData();
     QString val, unit;

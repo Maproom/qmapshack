@@ -731,7 +731,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="83"/>
         <source>Failed to open database for export. &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть базу данных для экспорта. &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="89"/>
@@ -804,7 +804,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/CFilterLoopsCut.cpp" line="57"/>
         <source>Help</source>
-        <translation type="unfinished">Справки</translation>
+        <translation>Справки</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterLoopsCut.cpp" line="58"/>
@@ -817,7 +817,16 @@ The purpose of this filter is to split the input track into several separate tra
 This filter detects loops by looking for intersections. A new track is created as soon as an intersection is detected.
 
 The only input parameter is minimum loop length: this is to prevent cutting tracks in tight switchbacks, where recorded tracks can be made of tiny loops. These loops will be ignored if their lengths are smaller that the given value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Иногда треки имеют петли.
+
+Часто бывает так, что горные велосипедные туры используют несколько раз одну и ту же дорогу, чтобы подниматься до высшей точки. С этой высшей точки начинается несколько скоростных спусков, и одна и та же дорога используется снова и снова, чтобы вернуться вверх. Поэтому записанный трек состоит из нескольких петель. Однако следовать на устройстве Garmin за треком, содержащим петли, сложно, так как невозможно знать, в каком порядке должны быть пройдены петли.
+
+Целью этого фильтра является разрезание исходного трека на несколько отдельных треков. Полученные треки не имеют петель и им легко следовать на устройстве Garmin: начните с части 1, в конце части 1 переключитесь на часть 2 и т.д.
+
+Этот фильтр обнаруживает петли путем поиска пересечений в треке. Новый трек создается сразу после обнаружения пересечения.
+
+Единственным входным параметром является минимальная длина петли: это предотвратит разрезать треки на мелкие кусочки там, где записанные треки состоят из крошечных петель. Эти петли игнорируются, если их длины меньше заданного параметра.
+</translation>
     </message>
 </context>
 <context>
@@ -1714,7 +1723,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
         <location filename="../gis/trk/filter/filter.cpp" line="634"/>
         <location filename="../gis/trk/filter/filter.cpp" line="648"/>
         <source>%1 (Part %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (Часть %2)</translation>
     </message>
     <message>
         <source>Changed average moving speed depending on slope to %1%2.</source>
@@ -2865,12 +2874,12 @@ line %2, column %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1576"/>
         <source>Rename View...</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименовать вид...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1576"/>
         <source>Enter new name for view</source>
-        <translation type="unfinished"></translation>
+        <translation>Ввести новое имя вида</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1726"/>
@@ -7932,32 +7941,32 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="35"/>
         <source>Cut track when loop length is greater than</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрезать трек, если длина петли превышает</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="70"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>м</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="99"/>
         <source>Apply filter now.</source>
-        <translation type="unfinished">Применить фильтр.</translation>
+        <translation>Применить фильтр.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="102"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="132"/>
         <source>Cut loops into separate tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрезать петли на отдельные треки</translation>
     </message>
 </context>
 <context>
@@ -9512,7 +9521,7 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="881"/>
         <source>Change Map View Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить имя вида на карту</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="247"/>
@@ -12794,22 +12803,22 @@ or
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="81"/>
         <source>hot</source>
-        <translation type="unfinished">жарко</translation>
+        <translation>жарко</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="91"/>
         <source>warm</source>
-        <translation type="unfinished">тепло</translation>
+        <translation>тепло</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="101"/>
         <source>cold</source>
-        <translation type="unfinished">холодно</translation>
+        <translation>холодно</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="111"/>
         <source>freezing</source>
-        <translation type="unfinished">заморозка</translation>
+        <translation>заморозка</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="121"/>

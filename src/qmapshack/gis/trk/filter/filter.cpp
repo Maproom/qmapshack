@@ -753,8 +753,7 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
 
     if (knotPtsCount > 0) // if knot is at the end of the track, these points must be hidden, too
     {
-       // for(qint32 i = 0 ; i < knotPtsCount - 1 ; i ++)
-         for(qint32 i = 0 ; i < knotPtsCount ; i ++)
+        for(qint32 i = 0 ; i < knotPtsCount ; i ++)
         {
             trackPoints << true;
         }

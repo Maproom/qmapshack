@@ -759,6 +759,7 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
         }
     }
 
+    Q_ASSERT_X(trackPoints.size() == trk.segs.last().pts.last().idxTotal + 1, "just before visibility change", "trackPoints size is different from trk number of points");
     for(CTrackData::trkpt_t& pt : trk)
     {
         bool toBeHidden = trackPoints.takeFirst();

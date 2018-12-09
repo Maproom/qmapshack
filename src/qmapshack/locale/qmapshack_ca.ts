@@ -470,7 +470,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="44"/>
         <source>Failed to load file: %1</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
@@ -505,7 +505,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="265"/>
         <source>No images found</source>
-        <translation>  No s&apos;ha trobat cap imatge</translation>
+        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -645,32 +645,32 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="177"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="178"/>
         <source>Reduce visible track points</source>
         <translation>Redueix els punts visibles del track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="180"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="181"/>
         <source>Change elevation of track points</source>
         <translation>Canvia l&apos;elevació dels punts del track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="183"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="184"/>
         <source>Change timestamp of track points</source>
         <translation>Canvia la data i hora dels punts del track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="186"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="187"/>
         <source>Miscellaneous</source>
         <translation>Miscel·lània</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="422"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="423"/>
         <source>Color</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="423"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="424"/>
         <source>Activity</source>
         <translation>Activitat</translation>
     </message>
@@ -764,7 +764,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="166"/>
         <source>Save project as %1</source>
-        <translation>  Desa el projecte com a %1</translation>
+        <translation>&#xa0; Desa el projecte com a %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="170"/>
@@ -932,6 +932,26 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     </message>
 </context>
 <context>
+    <name>CFilterZeroSpeedDriftCleaner</name>
+    <message>
+        <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="59"/>
+        <source>Help</source>
+        <translation type="unfinished">Ajuda</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="60"/>
+        <source>Remove knots of trackpoints recorded on a break.
+
+While having a break (no movement) most devices keep on recording. The result is a knot (cloud) of points due to statistic and system based errors in the GPS position. As these points influence the track statistics you might want to remove them.
+
+This filter has 2 parameters:
+-Distance defines the threshold at which knots are detected: knot starts when distance between 2 consecutive points is shorter than this
+-Ratio is used when track has straight parts at low speed: these are not knots and must not be removed. Knots are twisty, slow speed parts are not.
+The filter will detect a knot if the length of the knot is greater than the ratio multiplied by the distance on a straight line between the beginning of the knot and its end. The default value of the ratio parameter is 2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CFitCrcState</name>
     <message>
         <location filename="../gis/fit/decoder/CFitCrcState.cpp" line="32"/>
@@ -986,12 +1006,12 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
         <source>Failed to open FIT file %1.</source>
-        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
+        <translation>&#xa0; No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
     </message>
 </context>
 <context>
@@ -1709,6 +1729,11 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
         <location filename="../gis/trk/filter/filter.cpp" line="634"/>
         <location filename="../gis/trk/filter/filter.cpp" line="648"/>
         <source>%1 (Part %2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="775"/>
+        <source>Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7394,7 +7419,7 @@ No vull llegir tota la documentació!</translation>
     </message>
     <message>
         <source>User defined limits for this track</source>
-        <translation type="vanished">Límits d&apos;aquest track definits per l&apos;usuari </translation>
+        <translation type="vanished">Límits d&apos;aquest track definits per l&apos;usuari&#xa0;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="74"/>
@@ -8334,6 +8359,44 @@ No vull llegir tota la documentació!</translation>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="70"/>
         <source>...</source>
         <translation>...</translation>
+    </message>
+</context>
+<context>
+    <name>IFilterZeroSpeedDriftCleaner</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulari</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="35"/>
+        <source>Distance</source>
+        <translation type="unfinished">Distància</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="70"/>
+        <source>m</source>
+        <translation type="unfinished">m</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="86"/>
+        <source>Ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="119"/>
+        <source>Apply filter now.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="122"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="152"/>
+        <source>Hide zero speed drift knots</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12326,7 +12389,7 @@ o
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>

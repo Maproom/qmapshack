@@ -257,6 +257,7 @@ set( SRCS
     mouse/CScrOptRangeTrk.cpp
     mouse/CScrOptRuler.cpp
     mouse/CScrOptSelect.cpp
+    mouse/CScrOptSemaphoreLocker.cpp
     mouse/CScrOptUnclutter.cpp
     mouse/IMouse.cpp
     mouse/IMouseSelect.cpp
@@ -266,7 +267,7 @@ set( SRCS
     mouse/line/CLineOpMovePoint.cpp
     mouse/line/CLineOpSelectRange.cpp
     mouse/line/CScrOptEditLine.cpp
-    mouse/line/CScrOptRangeLine.cpp
+    mouse/line/CScrOptRangeLine.cpp    
     mouse/line/ILineOp.cpp
     mouse/line/IMouseEditLine.cpp
     plot/CPlot.cpp
@@ -586,6 +587,7 @@ set( HDRS
     mouse/CScrOptRangeTrk.h
     mouse/CScrOptRuler.h
     mouse/CScrOptSelect.h
+    mouse/CScrOptSemaphoreLocker.h
     mouse/CScrOptUnclutter.h
     mouse/IMouse.h
     mouse/IMouseSelect.h

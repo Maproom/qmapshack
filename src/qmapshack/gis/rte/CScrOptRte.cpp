@@ -22,6 +22,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
 #include "helpers/CDraw.h"
+#include "mouse/CScrOptSemaphoreLocker.h"
 #include "mouse/IMouse.h"
 
 CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
@@ -49,15 +50,6 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     toolNogo->setChecked(rte->isNogo());
     show();
 
-    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptRte::hide);
-    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptRte::hide);
-    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptRte::hide);
-    connect(toolCalc,        &QToolButton::clicked, this, &CScrOptRte::hide);
-    connect(toolReset,       &QToolButton::clicked, this, &CScrOptRte::hide);
-    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptRte::hide);
-    connect(toolInstruction, &QToolButton::toggled, this, &CScrOptRte::hide);
-    connect(toolToTrack,     &QToolButton::clicked, this, &CScrOptRte::hide);
-
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptRte::slotEditDetails);
     connect(toolDelete,      &QToolButton::clicked, this, &CScrOptRte::slotDelete);
     connect(toolCopy,        &QToolButton::clicked, this, &CScrOptRte::slotCopy);
@@ -78,60 +70,70 @@ CScrOptRte::~CScrOptRte()
 
 void CScrOptRte::slotEditDetails()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().editItemByKey(key);
     close();
 }
 
 void CScrOptRte::slotDelete()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().delItemByKey(key);
     close();
 }
 
 void CScrOptRte::slotCopy()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().copyItemByKey(key);
     close();
 }
 
 void CScrOptRte::slotCalc()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().calcRteByKey(key);
     close();
 }
 
 void CScrOptRte::slotReset()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().resetRteByKey(key);
     close();
 }
 
 void CScrOptRte::slotEdit()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().editRteByKey(key);
     close();
 }
 
 void CScrOptRte::slotReverse()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().reverseRteByKey(key);
     close();
 }
 
 void CScrOptRte::slotInstruction(bool on)
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().focusRteByKey(on, key);
     close();
 }
 
 void CScrOptRte::slotToTrack()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().convertRouteToTrack(key);
     close();
 }
 
 void CScrOptRte::slotNogo()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().toggleNogoItem(key);
     close();
 }

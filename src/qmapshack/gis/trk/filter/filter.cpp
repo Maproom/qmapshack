@@ -728,14 +728,14 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
                                                                // The default value of the ratio parameter is 2.
 
                     {      // true knot
-                        for(qint32 i = 0 ; i < knotPtsCount ; i ++)
+                        for(qint32 i = 0; i < knotPtsCount; i++)
                         {
                             trackPoints << true;
                         }
                     }
                     else
                     {      // low speed part, not a knot
-                        for(qint32 i = 0 ; i < knotPtsCount ; i ++)
+                        for(qint32 i = 0; i < knotPtsCount; i++)
                         {
                             trackPoints << false;
                         }
@@ -753,7 +753,7 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
 
     if (knotPtsCount > 0) // if knot is at the end of the track, these points must be hidden, too
     {
-        for(qint32 i = 0 ; i < knotPtsCount ; i ++)
+        for(qint32 i = 0; i < knotPtsCount; i++)
         {
             trackPoints << true;
         }

@@ -1748,7 +1748,7 @@ The filter will detect a knot if the length of the knot is greater than the rati
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="775"/>
         <source>Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)</source>
-        <translation type="unfinished">Pausenknödel versteckt mit Abstandskriterium %1%2 and Verhältnis %3</translation>
+        <translation>Pausenknödel ausgeblendet mit Abstandskriterium %1%2 and Verhältnis %3</translation>
     </message>
     <message>
         <source>Changed average moving speed depending on slope to %1%2.</source>
@@ -8527,7 +8527,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="152"/>
         <source>Hide zero speed drift knots</source>
-        <translation>Verstecke Pausenknödel</translation>
+        <translation>Pausenknödel ausblenden</translation>
     </message>
 </context>
 <context>

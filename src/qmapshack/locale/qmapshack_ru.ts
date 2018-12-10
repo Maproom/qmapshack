@@ -946,7 +946,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="59"/>
         <source>Help</source>
-        <translation type="unfinished">Справки</translation>
+        <translation>Справки</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="60"/>
@@ -958,7 +958,15 @@ This filter has 2 parameters:
 -Distance defines the threshold at which knots are detected: knot starts when distance between 2 consecutive points is shorter than this
 -Ratio is used when track has straight parts at low speed: these are not knots and must not be removed. Knots are twisty, slow speed parts are not.
 The filter will detect a knot if the length of the knot is greater than the ratio multiplied by the distance on a straight line between the beginning of the knot and its end. The default value of the ratio parameter is 2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть узлы точек трека, записанных во время паузы.
+
+Во время паузы (перерыва без движения) большинство навигационных приборов продолжают запись. Результатом является узел (облако) точек трека из-за статистических и системных ошибок в позиции GPS. Поскольку эти точки влияют на статистику трека, вы можете их скрыть (удалить).
+
+Этот фильтр имеет 2 параметра:
+- &apos;Расстояние&apos; определяет порог обнаружения узлов: узел начинается, когда расстояние между 2 последовательными точками трека меньше, чем этот параметр.
+- &apos;Относительный показатель&apos; используется, когда трек имеет прямые части на низкой скорости: эти части не являются узлами и не должны быть скрыты. Узлы извилистые (запутанные), медленные части - нет.
+
+Фильтр обнаружит узел, если его длина больше, чем расстояние по прямой между началом узла и его концом, умноженное на &apos;относительный показатель&apos;. Значение по умолчанию &apos;относительного показателя&apos; равно 2.</translation>
     </message>
 </context>
 <context>
@@ -1748,7 +1756,7 @@ The filter will detect a knot if the length of the knot is greater than the rati
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="775"/>
         <source>Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть узлы дрейфа с нулевой скоростью. Параметры: расстояние: %1%2, относительный показатель: %3</translation>
     </message>
     <message>
         <source>Changed average moving speed depending on slope to %1%2.</source>
@@ -8449,37 +8457,37 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="35"/>
         <source>Distance</source>
-        <translation type="unfinished">Расстояние</translation>
+        <translation>Расстояние</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="70"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation> м</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="86"/>
         <source>Ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Относительный показатель</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="119"/>
         <source>Apply filter now.</source>
-        <translation type="unfinished">Применить фильтр.</translation>
+        <translation>Применить фильтр.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="122"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="152"/>
         <source>Hide zero speed drift knots</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть узлы дрейфа с нулевой скоростью</translation>
     </message>
 </context>
 <context>

@@ -117,6 +117,7 @@ private slots:
     void slotSyncWksDev();
     void slotSyncDevWks();
     void slotRteFromWpt();
+    void slotEditPrxWpt();
     void slotSyncDB();
     void slotSetSortMode(IGisProject::sorting_folder_e mode, bool checked);
     void slotCopyProject();
@@ -187,6 +188,7 @@ private:
     QAction * actionEditArea;
     QAction * actionNogoArea;
     QAction * actionRteFromWpt;
+    QAction * actionEditPrxWpt;
 
     QAction * actionEleWptTrk;
 

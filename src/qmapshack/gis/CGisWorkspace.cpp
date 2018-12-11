@@ -40,6 +40,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
+#include "helpers/CInputDialog.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
@@ -1231,6 +1232,34 @@ void CGisWorkspace::makeRteFromWpt(const QList<IGisItem::key_t>& keys)
 
     CCreateRouteFromWpt dlg(keys, this);
     dlg.exec();
+}
+
+void CGisWorkspace::editPrxWpt(const QList<IGisItem::key_t>& keys)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    QVariant var;
+    CInputDialog dlg(this, tr("Enter new proximity range."), var, QVariant(NOFLOAT));
+    dlg.setOption(tr("Is no-go area"), false);
+    if(dlg.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    qreal proximity = var.toDouble();
+    bool isNoGo = dlg.optionIsChecked();
+    for(const IGisItem::key_t& key : keys)
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+        if(wpt != nullptr)
+        {
+            wpt->setProximity(proximity);
+            if(wpt->isNogo() != isNoGo)
+            {
+                wpt->setNogo(isNoGo);
+            }
+        }
+    }
 }
 
 

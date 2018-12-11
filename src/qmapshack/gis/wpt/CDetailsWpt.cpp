@@ -164,9 +164,11 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     {
         QVariant var(wpt.getProximity());
         CInputDialog dlg(this, tr("Enter new proximity range."), var, QVariant(NOFLOAT));
+        dlg.setOption(tr("Is no-go area"), wpt.isNogo());
         if(dlg.exec() == QDialog::Accepted)
         {
             wpt.setProximity(var.toDouble());
+            wpt.setNogo(dlg.optionIsChecked());
         }
     }
     else if(link == "position")

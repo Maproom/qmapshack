@@ -682,6 +682,11 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <source>Enter new proximity range.</source>
         <translation>Entrez le rayon de l&apos;alarme de proximité.</translation>
     </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="167"/>
+        <source>Is no-go area</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CDeviceGarmin</name>
@@ -2139,17 +2144,27 @@ The filter will detect a knot if the length of the knot is greater than the rati
         <translation>Activer zone interdite</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1078"/>
+        <location filename="../gis/CGisListWks.cpp" line="173"/>
+        <source>Create Route...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="174"/>
+        <source>Change Proximity...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="1079"/>
         <source>Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1082"/>
+        <location filename="../gis/CGisListWks.cpp" line="1084"/>
         <source>Wayp. &amp; Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1084"/>
+        <location filename="../gis/CGisListWks.cpp" line="1086"/>
         <source>Tracks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2194,9 +2209,8 @@ The filter will detect a knot if the length of the knot is greater than the rati
         <translation>Éditer les points de la surface</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="173"/>
         <source>Create Route</source>
-        <translation>Créer une route</translation>
+        <translation type="vanished">Créer une route</translation>
     </message>
     <message>
         <source>Change Icon (sel. waypt. only)</source>
@@ -2207,28 +2221,28 @@ The filter will detect a knot if the length of the knot is greater than the rati
         <translation type="vanished">Choisir l&apos;activité de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1004"/>
-        <location filename="../gis/CGisListWks.cpp" line="1088"/>
+        <location filename="../gis/CGisListWks.cpp" line="1005"/>
+        <location filename="../gis/CGisListWks.cpp" line="1090"/>
         <source>Set Track Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="609"/>
+        <location filename="../gis/CGisListWks.cpp" line="610"/>
         <source>Drop items...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1080"/>
+        <location filename="../gis/CGisListWks.cpp" line="1082"/>
         <source>Change Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="760"/>
+        <location filename="../gis/CGisListWks.cpp" line="761"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Sauvegarde de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="807"/>
+        <location filename="../gis/CGisListWks.cpp" line="808"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Chargement de l&apos;espace de travail. Patientez.</translation>
     </message>
@@ -2245,29 +2259,29 @@ The filter will detect a knot if the length of the knot is greater than the rati
         <translation type="obsolete">Surface</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1364"/>
+        <location filename="../gis/CGisListWks.cpp" line="1367"/>
         <source>Close all projects...</source>
         <translation>Fermer tous les projets...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1364"/>
+        <location filename="../gis/CGisListWks.cpp" line="1367"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Ceci enlevera tous les projets de l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1390"/>
+        <location filename="../gis/CGisListWks.cpp" line="1393"/>
         <source>Delete project...</source>
         <translation>Supprimer le projet...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1390"/>
+        <location filename="../gis/CGisListWks.cpp" line="1393"/>
         <source>Do you really want to delete %1?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="634"/>
-        <location filename="../gis/CGisListWks.cpp" line="1943"/>
-        <location filename="../gis/CGisListWks.cpp" line="1981"/>
+        <location filename="../gis/CGisListWks.cpp" line="635"/>
+        <location filename="../gis/CGisListWks.cpp" line="1946"/>
+        <location filename="../gis/CGisListWks.cpp" line="1984"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Mise à jour des appareils&lt;/b&gt;&lt;p&gt;Mise à jour de %1&lt;br/&gt;Patientez...&lt;/p&gt;</translation>
     </message>
@@ -2309,44 +2323,54 @@ The filter will detect a knot if the length of the knot is greater than the rati
 <context>
     <name>CGisWorkspace</name>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="119"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="120"/>
         <source>Load project...</source>
         <translation>Charger le projet...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="119"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="120"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Le projet &quot;%1&quot; est déjà présent dans l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="175"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="176"/>
         <source>Apply filter to</source>
         <translation type="unfinished">Appliquer le filtre à</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="239"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="240"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation>&lt;b&gt;Sélection d&apos;objets : &lt;/b&gt;Objet sélectionné depuis l&apos;espace de travail. Cliquez sur la carte pour revenir au mode normal de sélection à la souris.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="716"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="717"/>
         <source>Copy items...</source>
         <translation>Copier les éléments...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="746"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="747"/>
         <source>Change waypoint symbols.</source>
         <translation>Changer les symboles de waypoint.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="985"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="986"/>
         <source>Cut Track...</source>
         <translation>Couper la trace...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="985"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="986"/>
         <source>Do you want to delete the original track?</source>
         <translation>Voulez-vous supprimer la trace originale?</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWorkspace.cpp" line="1242"/>
+        <source>Enter new proximity range.</source>
+        <translation type="unfinished">Entrez le rayon de l&apos;alarme de proximité.</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWorkspace.cpp" line="1243"/>
+        <source>Is no-go area</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3924,27 +3948,27 @@ Structure inconnue.</translation>
         <translation>&lt;b&gt;Sélectionner des objets sur la carte&lt;/b&gt;&lt;br/&gt;Sélectionnez une surface rectangulaire sur la carte. Utilisez le bouton gauche de la souris et déplacez la souris. Clic droit pour annuler. Ajustez la sélection en déplaçant les coins.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="102"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="103"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Sélectionné::&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="110"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="111"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation>%1 points&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="105"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="106"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation>%1 traces&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="115"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="116"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation>%1 routes&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="120"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="121"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation>%1 surfaces&lt;br/&gt;</translation>
     </message>
@@ -11070,18 +11094,19 @@ or
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="62"/>
         <location filename="../mouse/IScrOptSelect.ui" line="76"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="90"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="104"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="118"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="132"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="146"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="160"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="208"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="231"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="285"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="306"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="327"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="348"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="87"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="101"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="115"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="129"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="143"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="157"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="171"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="219"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="242"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="317"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="338"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="359"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -11091,62 +11116,62 @@ or
         <translation>Créer une route à partir des waypoints sélectionnés</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="87"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="98"/>
         <source>Change the icon of all selected waypoints.</source>
         <translation>Changer les icônes de tous les waypoints sélectionnés</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="101"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="112"/>
         <source>Replace the elevation in all selected waypoints and tracks by values from the view&apos;s DEM data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="115"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="126"/>
         <source>Combine all selected tracks to a new one.</source>
         <translation>Combiner toutes les trcaes sélectionnées dans une seule nouvelle</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="129"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="140"/>
         <source>Set an activity for all selected tracks.</source>
         <translation>Choisir un activité pour toutes les traces sélectionnées.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="143"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="154"/>
         <source>Change the color of all selected tracks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="157"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="168"/>
         <source>Delete all selected items.</source>
         <translation>Supprimer tous les objets sélectionnés</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="205"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="216"/>
         <source>Select all items that intersect the selected area.</source>
         <translation>Sélectionner tous les objets dont au moins une partie est présente dans la zone sélectionnée</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="228"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="239"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation>Sélectionner tous les objets qui sont totalement inclues dans la zone sélectionnée.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="282"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="293"/>
         <source>Add tracks to selection.</source>
         <translation>Ajouter des traces à la sélection</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="303"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="314"/>
         <source>Add waypoints to selection.</source>
         <translation>Ajouter des waypoints à la sélection</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="324"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="335"/>
         <source>Add routes to selection.</source>
         <translation>Ajouter des routes à la sélection</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="345"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="356"/>
         <source>Add areas to selection.</source>
         <translation>Ajouter des surfaces à la sélection</translation>
     </message>

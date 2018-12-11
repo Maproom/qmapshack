@@ -34,10 +34,21 @@ CInputDialog::CInputDialog(QWidget *parent, const QString& text, QVariant& val, 
     {
         lineEdit->setText(val.toString());
     }
+
+    checkBox->hide();
 }
 
 CInputDialog::~CInputDialog()
 {
+}
+
+void CInputDialog::setOption(const QString& text, bool checked)
+{
+    checkBox->setChecked(checked);
+    checkBox->setText(text);
+    checkBox->show();
+
+    adjustSize();
 }
 
 void CInputDialog::accept()

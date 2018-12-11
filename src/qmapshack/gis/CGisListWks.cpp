@@ -170,7 +170,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionNogoArea->setCheckable(true);
 
     // several GIS items related actions
-    actionRteFromWpt    = addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
+    actionRteFromWpt    = addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route..."), this, SLOT(slotRteFromWpt()));
+    actionEditPrxWpt=  addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Proximity..."), this, SLOT(slotEditPrxWpt()));
 
     connect(qApp, &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
     connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
@@ -1077,6 +1078,7 @@ void CGisListWks::showMenuItem(const QPoint &p, const QList<IGisItem::key_t>& ke
     menu.addAction(actionCopyItem);
     menu.addSection(tr("Waypoints"));
     menu.addAction(actionRteFromWpt);
+    menu.addAction(actionEditPrxWpt);
     action = menu.addMenu(CWptIconManager::self().getWptIconMenu(tr("Change Icon"), this, SLOT(slotSymWpt()), &menu));
     action->setEnabled(!keysWpts.isEmpty());
     menu.addSection(tr("Wayp. & Tracks"));
@@ -1178,6 +1180,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             bool hasTrks  = !keysTrk.isEmpty();
 
             actionRteFromWpt->setEnabled(keysWpt.count() > 1);
+            actionEditPrxWpt->setEnabled(hasWpts);
             actionCombineTrk->setEnabled(keysTrk.count() > 1);
             actionEleWptTrk->setEnabled(hasWpts|hasTrks);
             showMenuItem(p, keysTrk, keysWpt);
@@ -2184,6 +2187,26 @@ void CGisListWks::slotRteFromWpt()
     if(!keys.isEmpty())
     {
         CGisWorkspace::self().makeRteFromWpt(keys);
+    }
+}
+
+void CGisListWks::slotEditPrxWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    QList<IGisItem::key_t> keys;
+    for(QTreeWidgetItem * item : selectedItems())
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        if(nullptr != wpt)
+        {
+            keys << wpt->getKey();
+        }
+    }
+
+    if(!keys.isEmpty())
+    {
+        CGisWorkspace::self().editPrxWpt(keys);
     }
 }
 

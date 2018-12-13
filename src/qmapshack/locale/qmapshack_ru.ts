@@ -686,7 +686,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="167"/>
         <source>Is no-go area</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать как запретную зону</translation>
     </message>
 </context>
 <context>
@@ -2117,12 +2117,12 @@ The filter will detect a knot if the length of the knot is greater than the rati
     <message>
         <location filename="../gis/CGisListWks.cpp" line="173"/>
         <source>Create Route...</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать маршрут...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="174"/>
         <source>Change Proximity...</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить радиус близости...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1079"/>
@@ -2423,12 +2423,12 @@ The filter will detect a knot if the length of the knot is greater than the rati
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="1242"/>
         <source>Enter new proximity range.</source>
-        <translation type="unfinished">Ввести новый радиус близости.</translation>
+        <translation>Ввести новый радиус близости.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="1243"/>
         <source>Is no-go area</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать как запретную зону</translation>
     </message>
 </context>
 <context>

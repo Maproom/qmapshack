@@ -917,14 +917,19 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="60"/>
-        <source>Remove knots of trackpoints recorded on a break.
+        <source>Hide knots in the track:
 
-While having a break (no movement) most devices keep on recording. The result is a knot (cloud) of points due to statistic and system based errors in the GPS position. As these points influence the track statistics you might want to remove them.
+During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kond of a knot in the track. This leads to accumulated errors in the statistics. That&apos;s why you might want to remove them.
 
-This filter has 2 parameters:
--Distance defines the threshold at which knots are detected: knot starts when distance between 2 consecutive points is shorter than this
--Ratio is used when track has straight parts at low speed: these are not knots and must not be removed. Knots are twisty, slow speed parts are not.
-The filter will detect a knot if the length of the knot is greater than the ratio multiplied by the distance on a straight line between the beginning of the knot and its end. The default value of the ratio parameter is 2.</source>
+Typically a knots fulfills two conditions:
+- A series of points very close to each other.
+- The linear distance between the first point and the last is very small.
+
+This filter is designed to detect and hide them considering these two conditions based on two customizable variables:
+- Distance: When a series of points are found separated by a distance less than the indicated one, it is considered that it may be a knot and a second verification is done based on the ratio value.
+- Ratio: The minimum distance in a straight line between the first and the last point of the series is checked. When the distance drawn by the track is greater than that minimum distance multiplied by the value entered as ratio, it is considered to be a knot and the trackpoints are hidden
+
+.You can modify both parameters to customize the behavior from the filter. For the distance it is advisable to indicate a value lower than the GPS accuracy. Keep in mind that if a high distance and a low ratio are indicated, it is possible for the filter to detect a knot by mistake (for example, areas with sharp curves (serpentines) or sections of very slow speed).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11094,19 +11099,19 @@ or
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="62"/>
         <location filename="../mouse/IScrOptSelect.ui" line="76"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="87"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="101"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="115"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="129"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="143"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="157"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="171"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="219"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="242"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="317"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="338"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="359"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="90"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="104"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="118"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="132"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="146"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="160"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="174"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="222"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="245"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="299"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="320"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="341"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="362"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -11116,62 +11121,67 @@ or
         <translation>Créer une route à partir des waypoints sélectionnés</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="98"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="87"/>
+        <source>Set proximity and no-go area option.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptSelect.ui" line="101"/>
         <source>Change the icon of all selected waypoints.</source>
         <translation>Changer les icônes de tous les waypoints sélectionnés</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="112"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="115"/>
         <source>Replace the elevation in all selected waypoints and tracks by values from the view&apos;s DEM data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="126"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="129"/>
         <source>Combine all selected tracks to a new one.</source>
         <translation>Combiner toutes les trcaes sélectionnées dans une seule nouvelle</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="140"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="143"/>
         <source>Set an activity for all selected tracks.</source>
         <translation>Choisir un activité pour toutes les traces sélectionnées.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="154"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="157"/>
         <source>Change the color of all selected tracks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="168"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="171"/>
         <source>Delete all selected items.</source>
         <translation>Supprimer tous les objets sélectionnés</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="216"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="219"/>
         <source>Select all items that intersect the selected area.</source>
         <translation>Sélectionner tous les objets dont au moins une partie est présente dans la zone sélectionnée</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="239"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="242"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation>Sélectionner tous les objets qui sont totalement inclues dans la zone sélectionnée.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="293"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
         <source>Add tracks to selection.</source>
         <translation>Ajouter des traces à la sélection</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="314"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="317"/>
         <source>Add waypoints to selection.</source>
         <translation>Ajouter des waypoints à la sélection</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="335"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="338"/>
         <source>Add routes to selection.</source>
         <translation>Ajouter des routes à la sélection</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="356"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="359"/>
         <source>Add areas to selection.</source>
         <translation>Ajouter des surfaces à la sélection</translation>
     </message>

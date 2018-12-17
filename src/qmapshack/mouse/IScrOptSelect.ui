@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>31</width>
-    <height>342</height>
+    <height>363</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -83,6 +83,9 @@
       </item>
       <item>
        <widget class="QToolButton" name="toolEditPrxWpt">
+        <property name="toolTip">
+         <string>Set proximity and no-go area option.</string>
+        </property>
         <property name="text">
          <string>...</string>
         </property>

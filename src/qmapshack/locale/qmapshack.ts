@@ -904,17 +904,17 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="60"/>
         <source>Hide knots in the track:
 
-During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kond of a knot in the track. This leads to accumulated errors in the statistics. That&apos;s why you might want to remove them.
+During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That&apos;s why you might want to remove them.
 
-Typically a knots fulfills two conditions:
+Typically a knot fulfills two conditions:
 - A series of points very close to each other.
-- The linear distance between the first point and the last is very small.
+- The linear distance between the first point and the last one is very small.
 
-This filter is designed to detect and hide them considering these two conditions based on two customizable variables:
-- Distance: When a series of points are found separated by a distance less than the indicated one, it is considered that it may be a knot and a second verification is done based on the ratio value.
-- Ratio: The minimum distance in a straight line between the first and the last point of the series is checked. When the distance drawn by the track is greater than that minimum distance multiplied by the value entered as ratio, it is considered to be a knot and the trackpoints are hidden
+This filter is designed to detect and hide knots satisfying these two conditions using two customizable variables:
+- Distance: When a series of points is found separated by a distance less than the indicated one, it is considered that it may be a knot and a second verification is done based on a ratio value.
+- Ratio: The distance on a straight line between the first and the last point of the series is checked. When the distance on the track is greater than that distance multiplied by this ratio value, it is considered to be a knot and the trackpoints are hidden.
 
-.You can modify both parameters to customize the behavior from the filter. For the distance it is advisable to indicate a value lower than the GPS accuracy. Keep in mind that if a high distance and a low ratio are indicated, it is possible for the filter to detect a knot by mistake (for example, areas with sharp curves (serpentines) or sections of very slow speed).</source>
+You can modify both parameters to customize the behavior of the filter. For the distance it is advisable to indicate a value lower than the GPS accuracy. Keep in mind that if a high distance and a low ratio are indicated, it is possible for the filter to detect a knot by mistake (for example, ranges with sharp curves (serpentines) or sections of very slow speed). </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

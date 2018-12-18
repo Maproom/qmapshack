@@ -968,26 +968,21 @@ This filter is designed to detect and hide knots satisfying these two conditions
 - Ratio: The distance on a straight line between the first and the last point of the series is checked. When the distance on the track is greater than that distance multiplied by this ratio value, it is considered to be a knot and the trackpoints are hidden.
 
 You can modify both parameters to customize the behavior of the filter. For the distance it is advisable to indicate a value lower than the GPS accuracy. Keep in mind that if a high distance and a low ratio are indicated, it is possible for the filter to detect a knot by mistake (for example, ranges with sharp curves (serpentines) or sections of very slow speed). </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove knots of trackpoints recorded on a break.
+        <translation type="unfinished">Скрыть узлы трека:
 
-While having a break (no movement) most devices keep on recording. The result is a knot (cloud) of points due to statistic and system based errors in the GPS position. As these points influence the track statistics you might want to remove them.
+Во время паузы (перерыва без движения) большинство навигационных приборов продолжают запись. Поскольку точность GPS имеет некоторую вариацию, результатом является облако точек, образующее узел на треке. Это приводит к накопленным ошибкам в статистике. Вот почему вы можете их скрыть (удалить).
 
-This filter has 2 parameters:
--Distance defines the threshold at which knots are detected: knot starts when distance between 2 consecutive points is shorter than this
--Ratio is used when track has straight parts at low speed: these are not knots and must not be removed. Knots are twisty, slow speed parts are not.
-The filter will detect a knot if the length of the knot is greater than the ratio multiplied by the distance on a straight line between the beginning of the knot and its end. The default value of the ratio parameter is 2.</source>
-        <translation type="vanished">Скрыть узлы точек трека, записанных во время паузы.
+Обычно такие узлы выполняют 2 условия:
+- Точки очень близки друг к другу.
+- Расстояние между первой и последней точкой узла очень мало.
 
-Во время паузы (перерыва без движения) большинство навигационных приборов продолжают запись. Результатом является узел (облако) точек трека из-за статистических и системных ошибок в позиции GPS. Поскольку эти точки влияют на статистику трека, вы можете их скрыть (удалить).
+Этот фильтр предназначен для обнаружения и скрытия узлов, удовлетворяющих эти 2 условия.
 
-Этот фильтр имеет 2 параметра:
-- &apos;Расстояние&apos; определяет порог обнаружения узлов: узел начинается, когда расстояние между 2 последовательными точками трека меньше, чем этот параметр.
-- &apos;Относительный показатель&apos; используется, когда трек имеет прямые части на низкой скорости: эти части не являются узлами и не должны быть скрыты. Узлы извилистые (запутанные), медленные части - нет.
+Этот фильтр использует для этого 2 параметра:
+- &apos;Расстояние&apos; определяет порог обнаружения узлов: серия точек трека может быть узлом, если расстояние между двумя соседними точками меньше, чем этот параметр.
+- &apos;Относительный показатель&apos; используется для идентификации частей трека на низкой скорости: эти части не являются узлами и не должны быть скрыты. Фильтр обнаружит узел, если длина серия точек больше, чем расстояние по прямой между началом серии и ее концом, умноженное на &apos;относительный показатель&apos;.
 
-Фильтр обнаружит узел, если его длина больше, чем расстояние по прямой между началом узла и его концом, умноженное на &apos;относительный показатель&apos;. Значение по умолчанию &apos;относительного показателя&apos; равно 2.</translation>
+Можно изменить оба параметра, чтобы настроить поведение фильтра. Для &apos;расстояния&apos; рекомендуется использовать значение меньше, чем точность GPS. Имейте в виду, что если указано большое &apos;расстояние&apos; и маленький &apos;относительный показатель&apos;, то фильтр может по ошибке обнаружить и скрыть узел (например, участки с горными серпантин или с очень низкой скоростью).</translation>
     </message>
 </context>
 <context>
@@ -11375,7 +11370,7 @@ or
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="87"/>
         <source>Set proximity and no-go area option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить круг близости и запретную зону.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="101"/>

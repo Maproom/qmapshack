@@ -685,7 +685,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="167"/>
         <source>Is no-go area</source>
-        <translation type="unfinished"></translation>
+        <translation>Área prohibida</translation>
     </message>
 </context>
 <context>
@@ -945,7 +945,7 @@ El único valor a introducir es la longitud mínima del bucle: Esto sirve para e
     <message>
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="59"/>
         <source>Help</source>
-        <translation type="unfinished">Ayuda</translation>
+        <translation>Ayuda</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="60"/>
@@ -962,7 +962,19 @@ This filter is designed to detect and hide knots satisfying these two conditions
 - Ratio: The distance on a straight line between the first and the last point of the series is checked. When the distance on the track is greater than that distance multiplied by this ratio value, it is considered to be a knot and the trackpoints are hidden.
 
 You can modify both parameters to customize the behavior of the filter. For the distance it is advisable to indicate a value lower than the GPS accuracy. Keep in mind that if a high distance and a low ratio are indicated, it is possible for the filter to detect a knot by mistake (for example, ranges with sharp curves (serpentines) or sections of very slow speed). </source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar ovillos en el track:
+
+Cuando hacemos una parada muchos aparatos GPS siguen grabando. Como la precisión del GPS es de varios metros el resultado es una nube de puntos que unidos dibujan un ovillo enredado en el track. Este falso recorrido acumula distancia y desnivel en la estadística, por lo que puede ser deseable eliminarlos.  
+
+Típicamente un ovillo cumple dos condiciones: 
+- Una serie de puntos muy próximos entre si.
+- La distancia lineal entre el primer punto de la serie y el último es muy pequeña.
+
+Por ello este filtro esta pensado para detectarlos y ocultarlos considerando en conjunto esas dos condiciones en base a dos valores personalizables:
+- Distancia: Cuando se encuentra una serie de puntos consecutivos separados entre si por una distancia menor a la indicada se considera que puede tratarse de un ovillo y hace una segunda comprobación basada en el valor ratio.
+- Ratio: Se comprueba la distancia mínima en linea recta  entre el primer punto y el ultimo de la serie. Cuando la distancia dibujada por el track es superior a esa distancia mínima multiplicada por el valor introducido como ratio  se considera que es un ovillo y oculta la serie de puntos.  
+
+Se pueden modificar ambos parámetros para personalizar el comportamiento. Para la distancia es recomendable indicar un valor inferior a la precisión del GPS. Hay que tener en cuenta que si se indica una distancia alta y un ratio bajo es posible que el filtro considere como ovillos tramos que no lo son( por ejemplo zonas de curvas cerradas( zetas) o de avance muy lento).</translation>
     </message>
 </context>
 <context>
@@ -1748,7 +1760,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="775"/>
         <source>Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar ovillos en paradas con criterio de distancia (%1%2) y ratio de (%3)</translation>
     </message>
     <message>
         <source>Changed average moving speed depending on slope to %1%2.</source>
@@ -2293,12 +2305,12 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="173"/>
         <source>Create Route...</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear Ruta...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="174"/>
         <source>Change Proximity...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar proximidad...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="808"/>
@@ -2308,7 +2320,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1079"/>
         <source>Waypoints</source>
-        <translation type="unfinished"></translation>
+        <translation>Waypoints</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1084"/>
@@ -2413,12 +2425,12 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="1242"/>
         <source>Enter new proximity range.</source>
-        <translation type="unfinished">Introduzca el nuevo valor de proximidad.</translation>
+        <translation type="unfinished">Introducir el valor de proximidad.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="1243"/>
         <source>Is no-go area</source>
-        <translation type="unfinished"></translation>
+        <translation>Área prohibida</translation>
     </message>
 </context>
 <context>
@@ -8500,22 +8512,22 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="86"/>
         <source>Ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ratio</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="119"/>
         <source>Apply filter now.</source>
-        <translation type="unfinished">Aplicar filtro.</translation>
+        <translation>Aplicar filtro.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="122"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="152"/>
         <source>Hide zero speed drift knots</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar ovillos de las paradas.</translation>
     </message>
 </context>
 <context>
@@ -11362,7 +11374,7 @@ o
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="87"/>
         <source>Set proximity and no-go area option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar proximidad y opción de área prohibida</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="101"/>

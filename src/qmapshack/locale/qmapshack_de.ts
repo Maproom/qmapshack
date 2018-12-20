@@ -823,7 +823,15 @@ The purpose of this filter is to split the input track into several separate tra
 This filter detects loops by looking for intersections. A new track is created as soon as an intersection is detected.
 
 The only input parameter is minimum loop length: this is to prevent cutting tracks in tight switchbacks, where recorded tracks can be made of tiny loops. These loops will be ignored if their lengths are smaller that the given value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Manchmal bestehen Tracks aus Runden.
+
+Das passiert zum Beispiel bei Mountain Bike Touren, bei denen immer die selbe Forststraße verwendet wird, um auf einen höhergelegenen Ausgangspunkt zu kommen. Von diesem Punkt aus starten verschiedene Downhill Touren und die besagte Forststraße wird wieder und wieder verwendet, um nach oben zu fahren. Im aufgezeichneten Track entstehen so mehrere Runden. Einem solchen Track mit Runden auf einem Garmin Gerät zu folgen, ist sehr unübersichtlich, weil man nicht erkennen kann, in welcher Reihenfolge die einzelnen Runden gefahren werden sollen.
+
+Der Zweck dieses Filters ist es den Track zu zerteilen. Die neuen Tracks beinhalten jeweils eine Runde und man behält auf dem Gerät somit die Übersicht: Man fängt mit dem ersten an und schaltet dann zum zweiten, etc...
+
+Der Filter erkennt Runden, indem er auf Überlappungen achtet. Ein neuer Track fängt an, wenn eine Überlappung detektiert wird. 
+
+Der einzige Parameter ist die minimale Länge einer Runde. Damit kann man verhindern, dass bei kleinen Schleifen oder Überlappungen in der Aufzeichnung der Track zerteilt wird. Runden deren Länge kleiner als der Wert ist, werden ignoriert.</translation>
     </message>
 </context>
 <context>
@@ -960,7 +968,20 @@ This filter is designed to detect and hide knots satisfying these two conditions
 - Ratio: The distance on a straight line between the first and the last point of the series is checked. When the distance on the track is greater than that distance multiplied by this ratio value, it is considered to be a knot and the trackpoints are hidden.
 
 You can modify both parameters to customize the behavior of the filter. For the distance it is advisable to indicate a value lower than the GPS accuracy. Keep in mind that if a high distance and a low ratio are indicated, it is possible for the filter to detect a knot by mistake (for example, ranges with sharp curves (serpentines) or sections of very slow speed). </source>
-        <translation type="unfinished"></translation>
+        <translation>Knoten im Track entfernen:
+
+Bei Pausen zeichnen viele GPS Geräte weiter auf. Da die Genauigkeit des GPS einer gewissen Varianz unterliegt, entstehen so Punktewolken, die so etwas wie einen Knoten im Track bilden. Das führt zu Fehlern, die sich in der Statistik aufsummieren. Deswegen möchte man sie entfernen.
+
+Ein typischer Knoten erfüllt zwei Kriterien:
+- Eine Reihe von Punkten ist sehr nahe beieinander.
+- Die direkte Verbindung zwischen dem ersten und dem letzten Punkt ist gering.
+
+Der Filter findet Knoten anhand dieser beiden Kriterien mit einstellbaren Variablen:
+- Abstand: Wenn eine Reihe von Punkten einen kleineren Abstand, wie den angegebenen, zueinander hat, dann könnte es ein Knoten sein und eine weitere Überprüfung anhand des Verhältnisses wird durchgeführt.
+- Verhältnis: Die direkte Strecke zwischen dem ersten und letzten Punkt der Reihe wird überprüft. Wenn die Strecke entlang der Punkte im Verhältnis länger ist als die direkte Verbindung, wird ein Knoten angenommen und alle Punkte werden unterdrückt.
+
+Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand sollte man einen Wert kleiner als die Genauigkeit des GPS Gerätes verwenden. Wenn man einen zu hohen Abstand und ein zu kleines Verhältnis verwendet, kann es zu Fehlentscheidungen kommen z.B. bei Strecken mit scharfen Kurven (Serpentinen) oder auf Abschnitten mit geringer Geschwindigkeit.
+</translation>
     </message>
 </context>
 <context>
@@ -11398,7 +11419,7 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="87"/>
         <source>Set proximity and no-go area option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Abstandsalarm und Gebietsvermeidung festlegen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="101"/>

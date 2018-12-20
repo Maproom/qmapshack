@@ -20,7 +20,7 @@
 
 #include <QtWidgets>
 
-CInputDialog::CInputDialog(QWidget *parent, const QString& text, QVariant& val, const QVariant& reset)
+CInputDialog::CInputDialog(QWidget *parent, const QString& text, QVariant& val, const QVariant& reset, const QString &suffix)
     : QDialog(parent)
     , val(val)
     , reset(reset)
@@ -29,6 +29,7 @@ CInputDialog::CInputDialog(QWidget *parent, const QString& text, QVariant& val, 
     QPushButton * pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
     connect(pushReset, &QPushButton::clicked, this, &CInputDialog::slotReset);
 
+    labelSuffix->setText(suffix);
     label->setText(text);
     if(val != reset)
     {

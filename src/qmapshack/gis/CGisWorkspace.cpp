@@ -1239,14 +1239,14 @@ void CGisWorkspace::editPrxWpt(const QList<IGisItem::key_t>& keys)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     QVariant var;
-    CInputDialog dlg(this, tr("Enter new proximity range."), var, QVariant(NOFLOAT));
+    CInputDialog dlg(this, tr("Enter new proximity range."), var, QVariant(NOFLOAT), IUnit::self().baseunit);
     dlg.setOption(tr("Is no-go area"), false);
     if(dlg.exec() != QDialog::Accepted)
     {
         return;
     }
 
-    qreal proximity = var.toDouble();
+    qreal proximity = var.toDouble()/IUnit::self().basefactor;
     bool isNoGo = dlg.optionIsChecked();
     for(const IGisItem::key_t& key : keys)
     {

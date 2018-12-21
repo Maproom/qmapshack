@@ -25,7 +25,7 @@ project(QMapShack VERSION 1.12.1)
 
 # FOR A RELEASE:
 # remove "development" for a release
-set(VERSION_SUFFIX "development")
+set(VERSION_SUFFIX "")
 # !!! Do not forget to update versions in the sub-repos, too!!!
 
 

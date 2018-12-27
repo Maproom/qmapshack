@@ -59,6 +59,8 @@ const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
 const QString IGisProject::filedialogSaveFilters = filedialogFilterGPX + ";; " + filedialogFilterQLB + ";; " + filedialogFilterQMS + ";; " + filedialogFilterTCX;
 const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterSML + ";; " + filedialogFilterLOG + ";; " + filedialogFilterQLB + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";; " + filedialogFilterFIT;
 
+QString IGisProject::keyUserFocus;
+
 IGisProject::filter_mode_e IGisProject::filterMode = IGisProject::eFilterModeName;
 
 IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
@@ -106,6 +108,10 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
 IGisProject::~IGisProject()
 {
     delete dlgDetails;
+    if(key == keyUserFocus)
+    {
+        keyUserFocus.clear();
+    }
 }
 
 IGisProject * IGisProject::create(const QString filename, CGisListWks * parent)
@@ -1214,4 +1220,18 @@ bool IGisProject::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qi
         }
     }
     return !polyline.isEmpty();
+}
+
+void IGisProject::gainUserFocus(bool yes)
+{
+    if(yes)
+    {
+        setIcon(CGisListWks::eColumnName, QIcon("://icons/32x32/Focus.png"));
+        keyUserFocus = key;
+    }
+    else
+    {
+        setIcon(CGisListWks::eColumnName, QIcon());
+        keyUserFocus.clear();
+    }
 }

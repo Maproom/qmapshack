@@ -322,13 +322,17 @@ void CGisWorkspace::slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trk
 
 IGisProject * CGisWorkspace::selectProject()
 {
-    QString key, name;
+    QString key = IGisProject::getUserFocus();
+    QString name;
     IGisProject::type_e type = IGisProject::eTypeQms;
 
-    CSelectProjectDialog dlg(key, name, type, treeWks);
-    if(dlg.exec() == QDialog::Rejected)
+    if(key.isEmpty())
     {
-        return nullptr;
+        CSelectProjectDialog dlg(key, name, type, treeWks);
+        if(dlg.exec() == QDialog::Rejected)
+        {
+            return nullptr;
+        }
     }
 
     IGisProject *project = nullptr;

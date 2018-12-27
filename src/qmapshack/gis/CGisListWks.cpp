@@ -115,6 +115,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSortByName    = addSortAction(this, actionGroupSort, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
     actionAutoSave      = addAction(QIcon("://icons/32x32/AutoSave.png"), tr("Autom. Save"), this, SLOT(slotAutoSaveProject(bool)));
     actionAutoSave->setCheckable(true);
+    actionUserFocusPrj  = addAction(QIcon("://icons/32x32/Focus.png"), tr("User Focus"), this, SLOT(slotUserFocusPrj(bool)));
+    actionUserFocusPrj->setCheckable(true);
     actionSave          = addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Save"), this, SLOT(slotSaveProject()));
     actionSaveAs        = addAction(QIcon("://icons/32x32/SaveGISAs.png"), tr("Save as..."), this, SLOT(slotSaveAsProject()));
     actionSaveAsStrict  = addAction(QIcon("://icons/32x32/SaveGISAsGpx11.png"), tr("Save as GPX 1.1 w/o ext..."), this, SLOT(slotSaveAsStrictGpx11Project()));
@@ -164,7 +166,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionNogoRte       = addAction(QIcon("://icons/32x32/NoGo.png"), tr("Toggle Nogo-Line"), this, SLOT(slotNogoItem()));
     actionNogoRte->setCheckable(true);
 
-    // are related actions
+    // area related actions
     actionEditArea      = addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
     actionNogoArea      = addAction(QIcon("://icons/32x32/NoGo.png"),tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
     actionNogoArea->setCheckable(true);
@@ -953,6 +955,7 @@ void CGisListWks::showMenuProjectWks(const QPoint& p)
     menu.addAction(actionSortByName);
     menu.addSeparator();
     menu.addAction(actionAutoSave);
+    menu.addAction(actionUserFocusPrj);
     menu.addSeparator();
     menu.addAction(actionSave);
     menu.addAction(actionSaveAs);
@@ -1150,6 +1153,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionSyncWksDev->setEnabled(IDevice::count());
                 actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
                 actionAutoSave->setVisible(false);
+                actionUserFocusPrj->setVisible(false);
                 showMenuProjectWks(p);
             }
             return;
@@ -1224,9 +1228,15 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
                     blockSorting = false;
 
+                    bool hasUserFocus = project->hasUserFocus();
+
                     actionAutoSave->setVisible(true);
                     actionAutoSave->setEnabled(project->canSave());
                     actionAutoSave->setChecked(project->isAutoSave());
+                    actionUserFocusPrj->setVisible(true);
+                    actionUserFocusPrj->setChecked(hasUserFocus);
+                    const QIcon& icon = hasUserFocus ? QIcon("://icons/32x32/Focus.png") : QIcon("://icons/32x32/UnFocus.png");
+                    actionUserFocusPrj->setIcon(icon);
                     showMenuProjectWks(p);
                 }
             }
@@ -1467,6 +1477,27 @@ void CGisListWks::slotAutoSaveProject(bool on)
     if(project != nullptr)
     {
         project->setAutoSave(on);
+    }
+}
+
+void CGisListWks::slotUserFocusPrj(bool yes)
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    const int N = topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(topLevelItem(n));
+        if(project != nullptr)
+        {
+            project->gainUserFocus(false);
+        }
+    }
+
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+    if(project != nullptr)
+    {
+        project->gainUserFocus(yes);
     }
 }
 

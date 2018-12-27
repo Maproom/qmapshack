@@ -124,6 +124,7 @@ private slots:
     void slotSymWpt();
     void slotEleWptTrk();
     void slotAutoSaveProject(bool on);
+    void slotUserFocusPrj(bool yes);
 
 private:
     void configDB();
@@ -151,6 +152,7 @@ private:
     QAction * actionSaveAs;
     QAction * actionSaveAsStrict;
     QAction * actionAutoSave;
+    QAction * actionUserFocusPrj;
     QAction * actionCopyPrj;
     QAction * actionEditPrj;
     QAction * actionCloseProj;

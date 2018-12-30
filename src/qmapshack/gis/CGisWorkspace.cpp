@@ -918,14 +918,9 @@ void CGisWorkspace::editWptRadius(const IGisItem::key_t &key)
     }
 }
 
-void CGisWorkspace::addWptByPos(QPointF pt, const QString& label, const QString& desc) const
+void CGisWorkspace::addWptByPos(QPointF pt, const QString& name, const QString& desc) const
 {
-    QString name = label;
-    QString icon;
-    if(!CGisItemWpt::getNewWptData(pt, icon, name))
-    {
-        return;
-    }
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     IGisProject * project = CGisWorkspace::self().selectProject();
     if(nullptr == project)
@@ -933,13 +928,7 @@ void CGisWorkspace::addWptByPos(QPointF pt, const QString& label, const QString&
         return;
     }
 
-    QMutexLocker lock(&IGisItem::mutexItems);
-    CGisItemWpt * wpt = new CGisItemWpt(pt, name, icon, project);
-    if(!desc.isEmpty())
-    {
-        wpt->setDescription(desc);
-    }
-    wpt->edit();
+    CGisItemWpt::newWpt(pt, name, desc, project);
 }
 
 void CGisWorkspace::focusTrkByKey(bool yes, const IGisItem::key_t& key)

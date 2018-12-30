@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,35 +16,32 @@
 
 **********************************************************************************************/
 
-#ifndef CSETUPNEWWPT_H
-#define CSETUPNEWWPT_H
+#ifndef CSETUPICONANDNAME_H
+#define CSETUPICONANDNAME_H
 
+#include "ui_ISetupIconAndName.h"
 
-#include "ui_ISetupNewWpt.h"
-#include <QDialog>
-
-class CSetupNewWpt : public QDialog, private Ui::ISetupNewWpt
+class CSetupIconAndName : public QDialog, private Ui::ISetupIconAndName
 {
     Q_OBJECT
 public:
-    CSetupNewWpt(QPointF& pt, QString& icon, QString& name, QWidget * parent);
-    virtual ~CSetupNewWpt();
+    CSetupIconAndName(QString& icon, QString& name, QWidget * parent);
+    virtual ~CSetupIconAndName() = default;
 
 public slots:
     void accept() override;
     void reject() override;
 
 private slots:
-    void slotEditPosition(const QString& str);
     void slotEditName(const QString& str);
     void slotChangeIcon();
 
 private:
     void checkInput();
-    QPointF &pt;
     QString &icon;
     QString &name;
+
 };
 
-#endif //CSETUPNEWWPT_H
+#endif //CSETUPICONANDNAME_H
 

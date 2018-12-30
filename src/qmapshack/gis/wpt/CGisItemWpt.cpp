@@ -27,6 +27,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CScrOptWptRadius.h"
+#include "gis/wpt/CSetupIconAndName.h"
 #include "gis/wpt/CSetupNewWpt.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
@@ -236,7 +237,7 @@ QString CGisItemWpt::getLastName(const QString& name)
     return lastName;
 }
 
-bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
+bool CGisItemWpt::getIconAndName(QString& icon, QString& name)
 {
     SETTINGS;
     QString lastIcon = cfg.value("Waypoint/lastIcon", "Waypoint").toString();
@@ -247,7 +248,7 @@ bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
     }
     icon = lastIcon;
 
-    CSetupNewWpt dlg(pt, icon, name, CMainWindow::getBestWidgetForParent());
+    CSetupIconAndName dlg(icon, name, CMainWindow::getBestWidgetForParent());
     if(dlg.exec() != QDialog::Accepted)
     {
         return false;
@@ -257,6 +258,29 @@ bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
     cfg.setValue("Waypoint/lastIcon", icon);
 
     return true;
+}
+
+void CGisItemWpt::newWpt(QPointF& pt, const QString &name, const QString &desc, IGisProject * project)
+{
+    SETTINGS;
+    QString icon = cfg.value("Waypoint/lastIcon", "Waypoint").toString();
+
+    QString _name = name;
+
+    if(_name.isEmpty())
+    {
+        _name = getLastName("");
+    }
+
+    CGisItemWpt * wpt = new CGisItemWpt(pt, _name, icon, project);
+    if(!desc.isEmpty())
+    {
+        wpt->setDescription(desc);
+    }
+    wpt->edit();
+
+    cfg.setValue("Waypoint/lastName", wpt->getName());
+    cfg.setValue("Waypoint/lastIcon", wpt->getIconName());
 }
 
 QString CGisItemWpt::getInfo(quint32 feature) const

@@ -115,7 +115,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSortByName    = addSortAction(this, actionGroupSort, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
     actionAutoSave      = addAction(QIcon("://icons/32x32/AutoSave.png"), tr("Autom. Save"), this, SLOT(slotAutoSaveProject(bool)));
     actionAutoSave->setCheckable(true);
-    actionUserFocusPrj  = addAction(QIcon("://icons/32x32/Focus.png"), tr("User Focus"), this, SLOT(slotUserFocusPrj(bool)));
+    actionUserFocusPrj  = addAction(QIcon("://icons/32x32/Focus.png"), tr("Active Project"), this, SLOT(slotUserFocusPrj(bool)));
     actionUserFocusPrj->setCheckable(true);
     actionSave          = addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Save"), this, SLOT(slotSaveProject()));
     actionSaveAs        = addAction(QIcon("://icons/32x32/SaveGISAs.png"), tr("Save as..."), this, SLOT(slotSaveAsProject()));

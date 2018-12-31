@@ -69,7 +69,7 @@
 using std::bind;
 
 #undef  DB_VERSION
-#define DB_VERSION 3
+#define DB_VERSION 4
 
 class CGisListWksEditLock
 {
@@ -267,6 +267,13 @@ void CGisListWks::initDB()
               "visible        BOOLEAN DEFAULT TRUE,"
               "data           BLOB NOT NULL"
               ")", NO_CMD)
+
+    if(query.exec( "CREATE TABLE userfocus ( focus TEXT )"))
+    {
+        query.prepare( "INSERT INTO userfocus (focus) VALUES(:focus)");
+        query.bindValue(":focus", "");
+        QUERY_EXEC();
+    }
 }
 
 void CGisListWks::migrateDB(int version)
@@ -281,6 +288,10 @@ void CGisListWks::migrateDB(int version)
     if(version < 3)
     {
         migrateDB2to3();
+    }
+    if(version < 4)
+    {
+        migrateDB3to4();
     }
 
     // save the new version to the database
@@ -318,6 +329,18 @@ void CGisListWks::migrateDB2to3()
     QUERY_RUN("INSERT INTO workspace(id,type,name,keyqms,changed,visible,data) SELECT * FROM tmp_workspace;", return )
     QUERY_RUN("COMMIT;",                                                                                      return )
     QUERY_RUN("DROP TABLE tmp_workspace;",                                                                    return )
+}
+
+void CGisListWks::migrateDB3to4()
+{
+    QSqlQuery query(db);
+
+    if(query.exec( "CREATE TABLE userfocus ( focus TEXT )"))
+    {
+        query.prepare( "INSERT INTO userfocus (focus) VALUES(:focus)");
+        query.bindValue(":focus", "");
+        QUERY_EXEC();
+    }
 }
 
 void CGisListWks::setExternalMenu(QMenu * project)
@@ -791,6 +814,10 @@ void CGisListWks::slotSaveWorkspace()
         QUERY_EXEC(continue);
     }
 
+    query.prepare( "UPDATE userfocus set focus=:focus");
+    query.bindValue(":focus", IGisProject::getUserFocus());
+    QUERY_EXEC();
+
     if(saveEvery)
     {
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
@@ -938,6 +965,17 @@ void CGisListWks::slotLoadWorkspace()
     for(const QString &filename : qlOpts->arguments)
     {
         CGisWorkspace::self().loadGisProject(filename);
+    }
+
+    QUERY_RUN("SELECT focus FROM userfocus",);
+    if(query.next())
+    {
+        QString key = query.value(0).toString();
+        IGisProject * project = getProjectByKey(key);
+        if(project != nullptr)
+        {
+            project->gainUserFocus(true);
+        }
     }
 
     emit sigChanged();

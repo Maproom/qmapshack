@@ -308,6 +308,7 @@ public:
     void gainUserFocus(bool yes) override;
 
     void edit() override;
+    void editInitial();
 
     /**
        @brief Remove all links from the waypoint's link list with a given type

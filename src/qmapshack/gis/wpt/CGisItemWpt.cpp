@@ -276,7 +276,7 @@ void CGisItemWpt::newWpt(QPointF& pt, const QString &name, const QString &desc, 
     {
         wpt->setDescription(desc);
     }
-    wpt->edit();
+    wpt->editInitial();
 
     cfg.setValue("Waypoint/lastName", wpt->getName());
     cfg.setValue("Waypoint/lastIcon", wpt->getIconName());
@@ -568,6 +568,14 @@ void CGisItemWpt::edit()
         CDetailsWpt dlg(*this, CMainWindow::getBestWidgetForParent());
         dlg.exec();
     }
+}
+
+void CGisItemWpt::editInitial()
+{
+    CDetailsWpt dlg(*this, CMainWindow::getBestWidgetForParent());
+    dlg.disableHistory();
+    dlg.exec();
+    squashHistory();
 }
 
 void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)

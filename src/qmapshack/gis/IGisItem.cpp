@@ -533,6 +533,30 @@ void IGisItem::cutHistoryBefore()
     }
 }
 
+void IGisItem::squashHistory()
+{
+    if(history.events.size() < 2)
+    {
+        return;
+    }
+
+    history_event_t& first = history.events.first();
+    history_event_t& last = history.events.last();
+
+    last.time    = first.time;
+    last.who     = first.who;
+    last.icon    = first.icon;
+    last.comment = first.comment;
+
+    history.histIdxCurrent = 0;
+    history.histIdxInitial = 0;
+
+    while(history.events.size() > 1)
+    {
+        history.events.pop_front();
+    }
+}
+
 bool IGisItem::isReadOnly() const
 {
     return !(flags & eFlagWriteAllowed) || isOnDevice();

@@ -807,11 +807,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     if(!isReadOnly || !isEmpty)
     {
         str += toLink(isReadOnly, "description", tr("<h4>Description:</h4>"), key);
-        if(removeHtml(desc).simplified().isEmpty())
-        {
-            str += tr("<p>--- no description ---</p>");
-        }
-        else
+        if(!removeHtml(desc).simplified().isEmpty())
         {
             str += desc;
         }
@@ -821,11 +817,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     if(!isReadOnly || !isEmpty)
     {
         str += toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>"), key);
-        if(isEmpty)
-        {
-            str += tr("<p>--- no comment ---</p>");
-        }
-        else
+        if(!isEmpty)
         {
             str += cmt;
         }
@@ -835,11 +827,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     if(!isReadOnly || !isEmpty)
     {
         str += toLink(isReadOnly, "links", tr("<h4>Links:</h4>"), key);
-        if(isEmpty)
-        {
-            str += tr("<p>--- no links ---</p>");
-        }
-        else
+        if(!isEmpty)
         {
             for(const link_t &link : links)
             {

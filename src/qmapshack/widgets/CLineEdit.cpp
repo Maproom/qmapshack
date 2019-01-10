@@ -21,8 +21,13 @@
 #include <QtWidgets>
 
 void CLineEdit::initialize()
-{
+{    
     initialized  = true;
+
+    QFont f = font();
+    f.setBold(true);
+    f.setPointSize(f.pointSize() + 1);
+    setFont(f);
 
     paletteEdit = QPalette(palette());
     paletteRO   = QPalette(palette());

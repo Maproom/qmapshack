@@ -193,7 +193,7 @@ set( SRCS
     gis/wpt/CProjWpt.cpp
     gis/wpt/CScrOptWpt.cpp
     gis/wpt/CScrOptWptRadius.cpp
-    gis/wpt/CSetupNewWpt.cpp
+    gis/wpt/CSetupIconAndName.cpp
     grid/CGrid.cpp
     grid/CGridSetup.cpp
     grid/CProjWizard.cpp
@@ -518,7 +518,7 @@ set( HDRS
     gis/wpt/CProjWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CScrOptWptRadius.h
-    gis/wpt/CSetupNewWpt.h
+    gis/wpt/CSetupIconAndName.h
     grid/CGrid.h
     grid/CGridSetup.h
     grid/CProjWizard.h
@@ -751,7 +751,7 @@ set( UIS
     gis/wpt/IProjWpt.ui
     gis/wpt/IScrOptWpt.ui
     gis/wpt/IScrOptWptRadius.ui
-    gis/wpt/ISetupNewWpt.ui
+    gis/wpt/ISetupIconAndName.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
     helpers/IElevationDialog.ui

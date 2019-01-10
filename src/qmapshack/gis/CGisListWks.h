@@ -124,6 +124,7 @@ private slots:
     void slotSymWpt();
     void slotEleWptTrk();
     void slotAutoSaveProject(bool on);
+    void slotUserFocusPrj(bool yes);
 
 private:
     void configDB();
@@ -131,6 +132,7 @@ private:
     void migrateDB(int version);
     void migrateDB1to2();
     void migrateDB2to3();
+    void migrateDB3to4();
     void setVisibilityOnMap(bool visible);
     QAction * addSortAction(QObject *parent, QActionGroup *actionGroup, const QString& icon, const QString& text, IGisProject::sorting_folder_e mode);
     QAction * addAction(const QIcon& icon, const QString& name, QObject * parent, const char * slot);
@@ -151,6 +153,7 @@ private:
     QAction * actionSaveAs;
     QAction * actionSaveAsStrict;
     QAction * actionAutoSave;
+    QAction * actionUserFocusPrj;
     QAction * actionCopyPrj;
     QAction * actionEditPrj;
     QAction * actionCloseProj;

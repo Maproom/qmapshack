@@ -479,6 +479,13 @@ public:
     void cutHistoryBefore();
 
     /**
+       @brief Take data of the most recent entry and apply meta information of first one
+
+       All other entries are lost
+     */
+    void squashHistory();
+
+    /**
        @brief Create a clone of itself and pass back the pointer
 
        Add the cloned item to the project with the same index as the original

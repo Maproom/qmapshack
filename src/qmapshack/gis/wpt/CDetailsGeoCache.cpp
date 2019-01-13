@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,6 +43,10 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     labelName->setText(geocache.name);
     labelPositon->setText(strPos);
+    ownerLabel->setText(geocache.owner);
+    sizeLabel->setText(geocache.container);
+    dateHiddenLabel->setText("?");//TODO hiddenDateLabel->setText(geocache.hiddenDate)
+    //Last found is set below to only loop logs once
 
     qreal d = geocache.difficulty;
     labelD1->setPixmap(QPixmap(d < 0.5 ? "://icons/cache/32x32/star_empty.png" : d < 1.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
@@ -85,6 +90,15 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     CWebPage * webDescPage = new CWebPage(0);
     webDesc->setPage(webDescPage);
     webDesc->setHtml(desc);
+
+    QDateTime lastFound;
+    for(CGisItemWpt::geocachelog_t log:geocache.logs){
+        logList->addItem(log.date.toString("d MMM yyyy") + ": " + log.type + " by " + log.finder + "\n" + log.text);
+        if(lastFound.isValid()==false || (log.type=="Found It"&&log.date>lastFound)){
+            lastFound=log.date;
+        }
+    }
+    lastFoundLabel->setText(lastFound.toString("d MMM yyyy"));
 
     timerDownload = new QTimer(this);
     timerDownload->setSingleShot(true);

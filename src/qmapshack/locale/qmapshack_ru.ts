@@ -968,7 +968,7 @@ This filter is designed to detect and hide knots satisfying these two conditions
 - Ratio: The distance on a straight line between the first and the last point of the series is checked. When the distance on the track is greater than that distance multiplied by this ratio value, it is considered to be a knot and the trackpoints are hidden.
 
 You can modify both parameters to customize the behavior of the filter. For the distance it is advisable to indicate a value lower than the GPS accuracy. Keep in mind that if a high distance and a low ratio are indicated, it is possible for the filter to detect a knot by mistake (for example, ranges with sharp curves (serpentines) or sections of very slow speed). </source>
-        <translation type="unfinished">Скрыть узлы трека:
+        <translation>Скрыть узлы трека:
 
 Во время паузы (перерыва без движения) большинство навигационных приборов продолжают запись. Поскольку точность GPS имеет некоторую вариацию, результатом является облако точек, образующее узел на треке. Это приводит к накопленным ошибкам в статистике. Вот почему вы можете их скрыть (удалить).
 
@@ -2087,7 +2087,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="118"/>
         <source>Active Project</source>
-        <translation type="unfinished"></translation>
+        <translation>Активный проект</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="120"/>
@@ -2527,7 +2527,7 @@ line %2, column %3:
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="65"/>
         <source> by %1</source>
-        <translation>от %1</translation>
+        <translation> от %1</translation>
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="37"/>
@@ -7720,7 +7720,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="106"/>
         <source>Elevation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="132"/>
@@ -12089,22 +12089,22 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="14"/>
         <source>Icon &amp; Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ппиктограмма &amp; имя</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="22"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="32"/>
         <source>Symbol</source>
-        <translation type="unfinished">Символ</translation>
+        <translation>Символ</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="39"/>
         <source>Name</source>
-        <translation type="unfinished">Имя</translation>
+        <translation>Имя</translation>
     </message>
 </context>
 <context>

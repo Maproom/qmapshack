@@ -52,6 +52,9 @@ public:
         QString text;
     };
 
+    /*
+     * The Date the geocache was hidden is stored in the enclosing wpt's time
+     */
     struct geocache_t
     {
         geocacheservice_e service = eOC;

@@ -59,7 +59,7 @@ CFilterSpeedHike::CFilterSpeedHike(QWidget *parent)
 {
     setupUi(this);
 
-    spinPlainSpeed->setSuffix(IUnit::self().speedunit);
+    spinPlainSpeed->setSuffix("km/h");
     spinAscending->setSuffix("m/h");
     spinDescending->setSuffix("m/h");
 

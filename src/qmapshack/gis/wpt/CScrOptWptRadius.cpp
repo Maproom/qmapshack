@@ -25,6 +25,7 @@
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CScrOptWptRadius.h"
 #include "helpers/CDraw.h"
+#include "mouse/CScrOptSemaphoreLocker.h"
 #include "mouse/IMouse.h"
 
 #include <QtWidgets>
@@ -68,18 +69,21 @@ CScrOptWptRadius::~CScrOptWptRadius()
 
 void CScrOptWptRadius::slotDelete()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().deleteWptRadius(key);
     close();
 }
 
 void CScrOptWptRadius::slotNogoArea()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().toggleNogoItem(key);
     close();
 }
 
 void CScrOptWptRadius::slotEdit()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().editWptRadius(key);
     close();
 }

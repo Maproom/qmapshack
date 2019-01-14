@@ -29,12 +29,12 @@ CFilterSpeedConst::CFilterSpeedConst(QWidget *parent)
 
 void CFilterSpeedConst::loadSettings(QSettings& cfg)
 {
-    spinConstantSpeed->setValue(cfg.value("speed", 18.0).toDouble());
+    spinConstantSpeed->setValue(cfg.value("speed", 18.0 * IUnit::self().speedfactor).toDouble() * IUnit::self().speedfactor);
 }
 
 void CFilterSpeedConst::saveSettings(QSettings& cfg)
 {
-    cfg.setValue("speed", spinConstantSpeed->value());
+    cfg.setValue("speed", spinConstantSpeed->value() / IUnit::self().speedfactor);
 }
 
 void CFilterSpeedConst::apply(CGisItemTrk& trk)

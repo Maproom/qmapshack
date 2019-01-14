@@ -26,8 +26,15 @@ class CInputDialog : public QDialog, private Ui::IInputDialog
 {
     Q_OBJECT
 public:
-    CInputDialog(QWidget * parent, const QString &text, QVariant &val, const QVariant &reset);
+    CInputDialog(QWidget * parent, const QString &text, QVariant &val, const QVariant &reset, const QString& suffix = QString());
     virtual ~CInputDialog();
+
+    void setOption(const QString& text, bool checked);
+
+    bool optionIsChecked() const
+    {
+        return checkBox->isChecked();
+    }
 
 public slots:
     void accept() override;

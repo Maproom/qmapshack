@@ -336,7 +336,7 @@ public:
        @brief Add a new waypoint by Position
        @param pt    the position in [?]
      */
-    void addWptByPos(QPointF pt, const QString& label = QString::Null(), const QString& desc = QString::Null()) const;
+    void addWptByPos(QPointF pt, const QString& name = QString::Null(), const QString& desc = QString::Null()) const;
 
     void toggleWptBubble(const IGisItem::key_t &key);
 
@@ -398,6 +398,8 @@ public:
     void editAreaByKey(const IGisItem::key_t &key);
 
     void makeRteFromWpt(const QList<IGisItem::key_t>& keys);
+
+    void editPrxWpt(const QList<IGisItem::key_t>& keys);
 
     void changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym);
 

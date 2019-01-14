@@ -25,7 +25,7 @@
 
 
 IScrOpt::IScrOpt(IMouse *mouse)
-    : QWidget(mouse->getCanvas())
+    : QWidget(mouse == nullptr ? nullptr : mouse->getCanvas())
     , mouse(mouse)
 {
     setAttribute(Qt::WA_DeleteOnClose);

@@ -1,3 +1,19 @@
+V 1.12.1
+[Issue #390] Ruler: Add steps for distance and angle
+[Issue #393] Some Linux dsitributions do not have planetsplitter but routino-planetsplitter
+[Issue #395] Filter "Change Speed" Lacks Start Button
+[Issue #399] Add filter line edit to map and DEM list
+[Issue #400] Selecting item in workspace does not close screen options.
+[Issue #403] Cursor is not changing after selecting activity in a graph
+[Issue #404] Wrong value for min/max slope labels when % is selected
+[Issue #407] Change name of views
+[Issue #408] Export of a database is broken
+[Issue #413] Crash when closing waypoint dialog
+[Issue #412] Bulk edit waypoint proximities
+Editor: Add new templates
+TrackFilter: Multi loop cutter
+TrackFilter: Remove zero speed drift
+
 V 1.12.0
 [Issue #334] Database: Moving a folder fails sometimes
 [Issue #339] Crash when cutting track in external profile window

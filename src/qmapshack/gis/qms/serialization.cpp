@@ -612,9 +612,18 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     trk.segs.clear();
     in >> trk.segs;
 
-    deriveSecondaryData();
+    /* [Issue #408] Export of a database is broken
+
+        Exporting the database is done in a thread other than the main GUI thread.
+        As deriveSecondaryData() might call some GUI elements it has to be bypassed
+        when restoring a track within an thread.
+     */
+    if(QThread::currentThread() == qApp->thread())
+    {
+        deriveSecondaryData();
+    }
     setColor(str2color(trk.color));
-    setText(   CGisListWks::eColumnName, getName());
+    setText(CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
 
     checkForInvalidPoints();

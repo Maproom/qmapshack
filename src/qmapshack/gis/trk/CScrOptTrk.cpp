@@ -22,6 +22,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "helpers/CDraw.h"
+#include "mouse/CScrOptSemaphoreLocker.h"
 #include "mouse/IMouse.h"
 
 CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
@@ -88,54 +89,63 @@ CScrOptTrk::~CScrOptTrk()
 
 void CScrOptTrk::slotDelete()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().delItemByKey(key);
     close();
 }
 
 void CScrOptTrk::slotCopy()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().copyItemByKey(key);
     close();
 }
 
 void CScrOptTrk::slotEditDetails()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().editItemByKey(key);
     close();
 }
 
 void CScrOptTrk::slotProfile(bool on)
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().focusTrkByKey(on, key);
     close();
 }
 
 void CScrOptTrk::slotCut()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().cutTrkByKey(key);
     close();
 }
 
 void CScrOptTrk::slotEdit()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().editTrkByKey(key);
     close();
 }
 
 void CScrOptTrk::slotReverse()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().reverseTrkByKey(key);
     close();
 }
 
 void CScrOptTrk::slotCombine()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().combineTrkByKey(key);
     close();
 }
 
 void CScrOptTrk::slotRange()
 {
+    CScrOptSemaphoreLocker lock(*this);
     mouse = nullptr;
     CGisWorkspace::self().rangeTrkByKey(key);
     close();
@@ -143,12 +153,14 @@ void CScrOptTrk::slotRange()
 
 void CScrOptTrk::slotActivity()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CActivityTrk::getMenu(key, this, true);
     close();
 }
 
 void CScrOptTrk::slotColor()
 {
+    CScrOptSemaphoreLocker lock(*this);
     QList<IGisItem::key_t> keys;
     keys << key;
     CGisWorkspace::self().colorTrkByKey(keys);
@@ -157,12 +169,14 @@ void CScrOptTrk::slotColor()
 
 void CScrOptTrk::slotCopyWithWpt()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().copyTrkWithWptByKey(key);
     close();
 }
 
 void CScrOptTrk::slotNogo()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().toggleNogoItem(key);
     close();
 }
@@ -170,6 +184,7 @@ void CScrOptTrk::slotNogo()
 
 void CScrOptTrk::slotAddElevation()
 {
+    CScrOptSemaphoreLocker lock(*this);
     QList<IGisItem::key_t> keys;
     keys << key;
     CGisWorkspace::self().addEleToWptTrkByKey(keys);

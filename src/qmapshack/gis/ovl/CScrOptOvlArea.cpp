@@ -21,6 +21,7 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
 #include "helpers/CDraw.h"
+#include "mouse/CScrOptSemaphoreLocker.h"
 #include "mouse/IMouse.h"
 
 CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMouse *parent)
@@ -42,11 +43,6 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     toolNogo->setChecked(area->isNogo());
     show();
 
-    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptOvlArea::hide);
-    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptOvlArea::hide);
-    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptOvlArea::hide);
-    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptOvlArea::hide);
-
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptOvlArea::slotEditDetails);
     connect(toolDelete,      &QToolButton::clicked, this, &CScrOptOvlArea::slotDelete);
     connect(toolCopy,        &QToolButton::clicked, this, &CScrOptOvlArea::slotCopy);
@@ -62,30 +58,35 @@ CScrOptOvlArea::~CScrOptOvlArea()
 
 void CScrOptOvlArea::slotEditDetails()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().editItemByKey(key);
     close();
 }
 
 void CScrOptOvlArea::slotCopy()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().copyItemByKey(key);
     close();
 }
 
 void CScrOptOvlArea::slotDelete()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().delItemByKey(key);
     close();
 }
 
 void CScrOptOvlArea::slotEdit()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().editAreaByKey(key);
     close();
 }
 
 void CScrOptOvlArea::slotNogo()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().toggleNogoItem(key);
     close();
 }

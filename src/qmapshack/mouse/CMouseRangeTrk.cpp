@@ -76,6 +76,11 @@ void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
     }
 }
 
+void CMouseRangeTrk::unfocus()
+{
+    resetState();
+}
+
 void CMouseRangeTrk::leftButtonDown(const QPoint& pos)
 {
     canvas->reportStatus(key.item, "");

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>294</width>
-    <height>100</height>
+    <width>283</width>
+    <height>121</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,8 +28,26 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="inputMask">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="inputMask">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelSuffix">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="checkBox">
+     <property name="text">
       <string/>
      </property>
     </widget>

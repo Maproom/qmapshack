@@ -49,6 +49,11 @@ void CMouseAdapter::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect
     delegate->draw(p, needsRedraw, rect);
 }
 
+void CMouseAdapter::unfocus()
+{
+    delegate->unfocus();
+}
+
 void CMouseAdapter::mousePressEvent(QMouseEvent *e)
 {
     // set firstPos and mouseDidMove to suppress small movements when clicking

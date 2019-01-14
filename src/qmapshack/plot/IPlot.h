@@ -190,8 +190,6 @@ protected:
 
     QPointer<CScrOptRangeTrk> scrOptRange;
 
-    CMouseDummy dummyMouse;
-
 private:
     void setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm);
     QPolygonF getVisiblePolygon(const QPolygonF &polyline, QPolygonF &line) const;

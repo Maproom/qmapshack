@@ -79,7 +79,6 @@ void CDetailsWpt::setupGui()
 
     bool isReadOnly = wpt.isReadOnly();
 
-    toolIcon->setEnabled(!isReadOnly);
     toolIcon->setIcon(wpt.getIcon());
     toolIcon->setObjectName(wpt.getIconName());
     lineName->setReadOnly(isReadOnly);
@@ -88,7 +87,7 @@ void CDetailsWpt::setupGui()
 
     labelTainted->setVisible(wpt.isTainted());
 
-    QString elevationStr = "--";
+    QString elevationStr = "----";
     if(wpt.getElevation() != NOINT)
     {
         IUnit::self().meter2elevation(wpt.getElevation(), val, unit);
@@ -97,7 +96,7 @@ void CDetailsWpt::setupGui()
     labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", elevationStr, ""));
 
 
-    QString proxStr = "--";
+    QString proxStr = "----";
     if(wpt.getProximity() != NOFLOAT)
     {
         IUnit::self().meter2elevation(wpt.getProximity(), val, unit);
@@ -162,11 +161,13 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     }
     else if(link == "proximity")
     {
-        QVariant var(wpt.getProximity());
-        CInputDialog dlg(this, tr("Enter new proximity range."), var, QVariant(NOFLOAT));
+        QVariant var(wpt.getProximity()*IUnit::self().basefactor);
+        CInputDialog dlg(this, tr("Enter new proximity range."), var, QVariant(NOFLOAT), IUnit::self().baseunit);
+        dlg.setOption(tr("Is no-go area"), wpt.isNogo());
         if(dlg.exec() == QDialog::Accepted)
         {
-            wpt.setProximity(var.toDouble());
+            wpt.setProximity(var.toDouble()/IUnit::self().basefactor);
+            wpt.setNogo(dlg.optionIsChecked());
         }
     }
     else if(link == "position")

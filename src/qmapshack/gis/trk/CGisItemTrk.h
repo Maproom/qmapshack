@@ -553,6 +553,8 @@ public:
     void filterDeleteExtension(const QString &ext);
     void filterSubPt2Pt();
     void filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName);
+    void filterLoopsCut(qreal dist);
+    void filterZeroSpeedDriftCleaner(qreal distance, qreal ratio);
     /** @} */
 
     /**

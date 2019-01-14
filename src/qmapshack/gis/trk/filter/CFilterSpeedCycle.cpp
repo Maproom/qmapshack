@@ -56,9 +56,9 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
 {
     setupUi(this);
 
-    spinPlainSpeed->setSuffix(IUnit::self().speedunit);
-    spinMinSpeed->setSuffix(IUnit::self().speedunit);
-    spinMaxSpeed->setSuffix(IUnit::self().speedunit);
+    spinPlainSpeed->setSuffix("km/h");
+    spinMinSpeed->setSuffix("km/h");
+    spinMaxSpeed->setSuffix("km/h");
 
     QString val, slopeUnit;
     IUnit::self().slope2string(0, val, slopeUnit);

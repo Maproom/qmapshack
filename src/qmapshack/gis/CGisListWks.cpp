@@ -69,7 +69,7 @@
 using std::bind;
 
 #undef  DB_VERSION
-#define DB_VERSION 3
+#define DB_VERSION 4
 
 class CGisListWksEditLock
 {
@@ -115,6 +115,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSortByName    = addSortAction(this, actionGroupSort, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
     actionAutoSave      = addAction(QIcon("://icons/32x32/AutoSave.png"), tr("Autom. Save"), this, SLOT(slotAutoSaveProject(bool)));
     actionAutoSave->setCheckable(true);
+    actionUserFocusPrj  = addAction(QIcon("://icons/32x32/Focus.png"), tr("Active Project"), this, SLOT(slotUserFocusPrj(bool)));
+    actionUserFocusPrj->setCheckable(true);
     actionSave          = addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Save"), this, SLOT(slotSaveProject()));
     actionSaveAs        = addAction(QIcon("://icons/32x32/SaveGISAs.png"), tr("Save as..."), this, SLOT(slotSaveAsProject()));
     actionSaveAsStrict  = addAction(QIcon("://icons/32x32/SaveGISAsGpx11.png"), tr("Save as GPX 1.1 w/o ext..."), this, SLOT(slotSaveAsStrictGpx11Project()));
@@ -164,13 +166,14 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionNogoRte       = addAction(QIcon("://icons/32x32/NoGo.png"), tr("Toggle Nogo-Line"), this, SLOT(slotNogoItem()));
     actionNogoRte->setCheckable(true);
 
-    // are related actions
+    // area related actions
     actionEditArea      = addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
     actionNogoArea      = addAction(QIcon("://icons/32x32/NoGo.png"),tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
     actionNogoArea->setCheckable(true);
 
     // several GIS items related actions
-    actionRteFromWpt    = addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
+    actionRteFromWpt    = addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route..."), this, SLOT(slotRteFromWpt()));
+    actionEditPrxWpt=  addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Proximity..."), this, SLOT(slotEditPrxWpt()));
 
     connect(qApp, &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
     connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
@@ -264,6 +267,13 @@ void CGisListWks::initDB()
               "visible        BOOLEAN DEFAULT TRUE,"
               "data           BLOB NOT NULL"
               ")", NO_CMD)
+
+    if(query.exec( "CREATE TABLE userfocus ( focus TEXT )"))
+    {
+        query.prepare( "INSERT INTO userfocus (focus) VALUES(:focus)");
+        query.bindValue(":focus", "");
+        QUERY_EXEC();
+    }
 }
 
 void CGisListWks::migrateDB(int version)
@@ -278,6 +288,10 @@ void CGisListWks::migrateDB(int version)
     if(version < 3)
     {
         migrateDB2to3();
+    }
+    if(version < 4)
+    {
+        migrateDB3to4();
     }
 
     // save the new version to the database
@@ -315,6 +329,18 @@ void CGisListWks::migrateDB2to3()
     QUERY_RUN("INSERT INTO workspace(id,type,name,keyqms,changed,visible,data) SELECT * FROM tmp_workspace;", return )
     QUERY_RUN("COMMIT;",                                                                                      return )
     QUERY_RUN("DROP TABLE tmp_workspace;",                                                                    return )
+}
+
+void CGisListWks::migrateDB3to4()
+{
+    QSqlQuery query(db);
+
+    if(query.exec( "CREATE TABLE userfocus ( focus TEXT )"))
+    {
+        query.prepare( "INSERT INTO userfocus (focus) VALUES(:focus)");
+        query.bindValue(":focus", "");
+        QUERY_EXEC();
+    }
 }
 
 void CGisListWks::setExternalMenu(QMenu * project)
@@ -788,6 +814,10 @@ void CGisListWks::slotSaveWorkspace()
         QUERY_EXEC(continue);
     }
 
+    query.prepare( "UPDATE userfocus set focus=:focus");
+    query.bindValue(":focus", IGisProject::getUserFocus());
+    QUERY_EXEC();
+
     if(saveEvery)
     {
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
@@ -937,6 +967,17 @@ void CGisListWks::slotLoadWorkspace()
         CGisWorkspace::self().loadGisProject(filename);
     }
 
+    QUERY_RUN("SELECT focus FROM userfocus",);
+    if(query.next())
+    {
+        QString key = query.value(0).toString();
+        IGisProject * project = getProjectByKey(key);
+        if(project != nullptr)
+        {
+            project->gainUserFocus(true);
+        }
+    }
+
     emit sigChanged();
 }
 
@@ -952,6 +993,7 @@ void CGisListWks::showMenuProjectWks(const QPoint& p)
     menu.addAction(actionSortByName);
     menu.addSeparator();
     menu.addAction(actionAutoSave);
+    menu.addAction(actionUserFocusPrj);
     menu.addSeparator();
     menu.addAction(actionSave);
     menu.addAction(actionSaveAs);
@@ -1077,6 +1119,7 @@ void CGisListWks::showMenuItem(const QPoint &p, const QList<IGisItem::key_t>& ke
     menu.addAction(actionCopyItem);
     menu.addSection(tr("Waypoints"));
     menu.addAction(actionRteFromWpt);
+    menu.addAction(actionEditPrxWpt);
     action = menu.addMenu(CWptIconManager::self().getWptIconMenu(tr("Change Icon"), this, SLOT(slotSymWpt()), &menu));
     action->setEnabled(!keysWpts.isEmpty());
     menu.addSection(tr("Wayp. & Tracks"));
@@ -1148,6 +1191,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionSyncWksDev->setEnabled(IDevice::count());
                 actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
                 actionAutoSave->setVisible(false);
+                actionUserFocusPrj->setVisible(false);
                 showMenuProjectWks(p);
             }
             return;
@@ -1178,6 +1222,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             bool hasTrks  = !keysTrk.isEmpty();
 
             actionRteFromWpt->setEnabled(keysWpt.count() > 1);
+            actionEditPrxWpt->setEnabled(hasWpts);
             actionCombineTrk->setEnabled(keysTrk.count() > 1);
             actionEleWptTrk->setEnabled(hasWpts|hasTrks);
             showMenuItem(p, keysTrk, keysWpt);
@@ -1221,9 +1266,15 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
                     blockSorting = false;
 
+                    bool hasUserFocus = project->hasUserFocus();
+
                     actionAutoSave->setVisible(true);
                     actionAutoSave->setEnabled(project->canSave());
                     actionAutoSave->setChecked(project->isAutoSave());
+                    actionUserFocusPrj->setVisible(true);
+                    actionUserFocusPrj->setChecked(hasUserFocus);
+                    const QIcon& icon = hasUserFocus ? QIcon("://icons/32x32/Focus.png") : QIcon("://icons/32x32/UnFocus.png");
+                    actionUserFocusPrj->setIcon(icon);
                     showMenuProjectWks(p);
                 }
             }
@@ -1464,6 +1515,27 @@ void CGisListWks::slotAutoSaveProject(bool on)
     if(project != nullptr)
     {
         project->setAutoSave(on);
+    }
+}
+
+void CGisListWks::slotUserFocusPrj(bool yes)
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    const int N = topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(topLevelItem(n));
+        if(project != nullptr)
+        {
+            project->gainUserFocus(false);
+        }
+    }
+
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+    if(project != nullptr)
+    {
+        project->gainUserFocus(yes);
     }
 }
 
@@ -2184,6 +2256,26 @@ void CGisListWks::slotRteFromWpt()
     if(!keys.isEmpty())
     {
         CGisWorkspace::self().makeRteFromWpt(keys);
+    }
+}
+
+void CGisListWks::slotEditPrxWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    QList<IGisItem::key_t> keys;
+    for(QTreeWidgetItem * item : selectedItems())
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        if(nullptr != wpt)
+        {
+            keys << wpt->getKey();
+        }
+    }
+
+    if(!keys.isEmpty())
+    {
+        CGisWorkspace::self().editPrxWpt(keys);
     }
 }
 

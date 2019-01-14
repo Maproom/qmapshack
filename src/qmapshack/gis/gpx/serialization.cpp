@@ -620,8 +620,17 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     const QDomNamedNodeMap& attr = xmlCache.attributes();
     geocache.id = attr.namedItem("id").nodeValue().toInt();
 
+    QDomNode geocacheAttributes = xmlCache.namedItem("groundspeak:attributes");
+
     geocache.archived   = attr.namedItem("archived").nodeValue().toLocal8Bit() == "True";
     geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
+
+    for(QDomNode thisAttribute = geocacheAttributes.firstChild(); !thisAttribute.isNull();thisAttribute=thisAttribute.nextSibling())
+    {
+        if(thisAttribute.attributes().namedItem("id").nodeValue() =="42") //42 is the code for 'Needs maintenance'
+            geocache.needsMainenance = true;
+    }
+
     if(geocache.archived)
     {
         geocache.status = tr("Archived");
@@ -629,6 +638,8 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     else if(geocache.available)
     {
         geocache.status = tr("Available");
+        if(geocache.needsMainenance)
+            geocache.status += ", " + tr("Needs Maintenance");
     }
     else
     {

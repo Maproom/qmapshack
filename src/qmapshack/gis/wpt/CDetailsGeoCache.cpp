@@ -41,7 +41,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     const CGisItemWpt::geocache_t& geocache = wpt.getGeoCache();
 
-    labelName->setText(geocache.name);
+    labelName->setText(geocache.name + " - " + geocache.status);
     labelPositon->setText(strPos);
     labelOwner->setText(geocache.owner);
     labelSize->setText(geocache.container);

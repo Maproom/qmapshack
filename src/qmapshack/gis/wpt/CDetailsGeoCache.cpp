@@ -43,9 +43,9 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     labelName->setText(geocache.name);
     labelPositon->setText(strPos);
-    ownerLabel->setText(geocache.owner);
-    sizeLabel->setText(geocache.container);
-    dateHiddenLabel->setText("?");//TODO hiddenDateLabel->setText(geocache.hiddenDate)
+    labelOwner->setText(geocache.owner);
+    labelSize->setText(geocache.container);
+    labelHiddenDate->setText(wpt.getTime().toString("d. MMM yyyy"));
     //Last found is set below to only loop logs once
 
     qreal d = geocache.difficulty;
@@ -93,17 +93,17 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     QDateTime lastFound;
     for(CGisItemWpt::geocachelog_t log:geocache.logs){
-        logList->addItem(log.date.toString("d MMM yyyy") + ": " + log.type + " by " + log.finder + "\n" + log.text);
+        logList->addItem(log.date.toString("d. MMM yyyy") + ": " + log.type + " by " + log.finder + "\n" + log.text);
         if(lastFound.isValid()==false || (log.type=="Found It"&&log.date>lastFound)){
             lastFound=log.date;
         }
     }
-    lastFoundLabel->setText(lastFound.toString("d MMM yyyy"));
+    labelLastFound->setText(lastFound.toString("d. MMM yyyy"));
 
     timerDownload = new QTimer(this);
     timerDownload->setSingleShot(true);
     connect(timerDownload,     &QTimer::timeout,       this, &CDetailsGeoCache::slotDownloadDone);
-
+    connect(buttonVisitWebsite,&QPushButton::clicked,  this, &CDetailsGeoCache::slotVisitWebsite);
     connect(checkHint,         &QCheckBox::toggled,    this, &CDetailsGeoCache::slotHintChanged);
     connect(webDescPage,       &CWebPage::linkClicked, this, &CDetailsGeoCache::slotLinkClicked);
     connect(toolUpdateSpoiler, &QToolButton::clicked,  this, &CDetailsGeoCache::slotCollectSpoiler);
@@ -133,6 +133,10 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
 CDetailsGeoCache::~CDetailsGeoCache()
 {
+}
+
+void CDetailsGeoCache::slotVisitWebsite(){
+    QDesktopServices::openUrl("https://www.coord.info/" + wpt.getName());
 }
 
 void CDetailsGeoCache::slotHintChanged(bool on)

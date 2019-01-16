@@ -62,7 +62,7 @@ public:
         quint32 id = 0;
         bool available = true;
         bool archived = false;
-        bool needsMainenance = false;
+        bool needsMaintenance = false;
         qreal difficulty = 0;
         qreal terrain = 0;
         QString status;

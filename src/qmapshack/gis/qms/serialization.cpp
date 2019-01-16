@@ -38,7 +38,7 @@
 #define VER_RTEPT       quint8(2)
 #define VER_RTESUBPT    quint8(2)
 #define VER_WPT_T       quint8(1)
-#define VER_GC_T        quint8(1)
+#define VER_GC_T        quint8(2)
 #define VER_GCLOG_T     quint8(1)
 #define VER_IMAGE       quint8(1)
 #define VER_PROJECT     quint8(5)
@@ -242,6 +242,7 @@ QDataStream& operator<<(QDataStream& stream, const CGisItemWpt::geocache_t& geoc
         stream << geocache.id;
         stream << quint8(geocache.available);
         stream << quint8(geocache.archived);
+        stream << quint8(geocache.needsMaintenance);
         stream << geocache.difficulty;
         stream << geocache.terrain;
         stream << geocache.status;
@@ -277,6 +278,11 @@ QDataStream& operator>>(QDataStream& stream, CGisItemWpt::geocache_t& geocache)
         geocache.available = tmp8;
         stream >> tmp8;
         geocache.archived = tmp8;
+        if(version>1)
+        {
+            stream >> tmp8;
+            geocache.needsMaintenance = tmp8;
+        }
         stream >> geocache.difficulty;
         stream >> geocache.terrain;
         stream >> geocache.status;

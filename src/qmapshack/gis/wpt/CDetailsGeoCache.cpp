@@ -45,7 +45,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     labelPositon->setText(strPos);
     labelOwner->setText(geocache.owner);
     labelSize->setText(geocache.container);
-    labelHiddenDate->setText(wpt.getTime().toString("d. MMM yyyy"));
+    labelHiddenDate->setText(wpt.getTime().date().toString(Qt::SystemLocaleShortDate));
     //Last found is set below to only loop logs once
 
     qreal d = geocache.difficulty;
@@ -92,13 +92,21 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     webDesc->setHtml(desc);
 
     QDateTime lastFound;
-    for(CGisItemWpt::geocachelog_t log:geocache.logs){
-        logList->addItem(log.date.toString("d. MMM yyyy") + ": " + log.type + " by " + log.finder + "\n" + log.text);
-        if(lastFound.isValid()==false || (log.type=="Found It"&&log.date>lastFound)){
+    QString logs;
+    for(const CGisItemWpt::geocachelog_t& log:geocache.logs)
+    {
+        QString thislog = log.text;
+        logs+="<p><b>"+log.date.date().toString(Qt::SystemLocaleShortDate) + ": " + log.type + " by " + log.finder + "</b></p><p>" + thislog.replace("\n","<br/>") + "</p><hr>";
+        if(lastFound.isValid()==false || (log.type=="Found It"&&log.date>lastFound))
+        {
             lastFound=log.date;
         }
     }
-    labelLastFound->setText(lastFound.toString("d. MMM yyyy"));
+    labelLastFound->setText(lastFound.date().toString(Qt::SystemLocaleShortDate));
+
+    CWebPage * webLogPage = new CWebPage(0);
+    webLogs->setPage(webLogPage);
+    webLogs->setHtml(logs);
 
     timerDownload = new QTimer(this);
     timerDownload->setSingleShot(true);
@@ -135,7 +143,8 @@ CDetailsGeoCache::~CDetailsGeoCache()
 {
 }
 
-void CDetailsGeoCache::slotVisitWebsite(){
+void CDetailsGeoCache::slotVisitWebsite()
+{
     QDesktopServices::openUrl("https://www.coord.info/" + wpt.getName());
 }
 

@@ -275,7 +275,7 @@
      <item row="5" column="1">
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="listingTab">
         <property name="sizePolicy">
@@ -348,12 +348,11 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_7">
          <item>
-          <widget class="QListWidget" name="logList">
-           <property name="editTriggers">
-            <set>QAbstractItemView::NoEditTriggers</set>
-           </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
+          <widget class="QWebEngineView" name="webLogs">
+           <property name="url">
+            <url>
+             <string>about:blank</string>
+            </url>
            </property>
           </widget>
          </item>

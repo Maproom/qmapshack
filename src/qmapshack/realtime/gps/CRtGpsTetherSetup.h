@@ -16,33 +16,26 @@
 
 **********************************************************************************************/
 
-#ifndef CRTGPSINFO_H
-#define CRTGPSINFO_H
+#ifndef CRTGPSTETHERSETUP_H
+#define CRTGPSTETHERSETUP_H
 
-#include "ui_IRtGpsInfo.h"
+#include "ui_IRtGpsTetherSetup.h"
 
-class CRtGps;
-class QSettings;
+class CRtGpsTether;
 
-class CRtGpsInfo : public QWidget, private Ui::IRtGpsInfo
+class CRtGpsTetherSetup : public QDialog, private Ui::IRtGPSTetherSetup
 {
     Q_OBJECT
 public:
-    CRtGpsInfo(CRtGps& source, QWidget * parent);
-    virtual ~CRtGpsInfo() = default;
+    CRtGpsTetherSetup(CRtGpsTether& dev, QWidget * parent);
+    virtual ~CRtGpsTetherSetup() = default;
 
-    void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg) const;
-private slots:
-    void slotSetSource(int idx);
-    void slotUpdate();
-    void slotShowHelp();
-    void slotConfigure();
+public slots:
+    void accept() override;
 
 private:
-    CRtGps& source;
-
+    CRtGpsTether& dev;
 };
 
-#endif //CRTGPSINFO_H
+#endif //CRTGPSTETHERSETUP_H
 

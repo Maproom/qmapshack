@@ -286,6 +286,25 @@ QDataStream& operator>>(QDataStream& stream, CGisItemWpt::geocache_t& geocache)
         stream >> geocache.difficulty;
         stream >> geocache.terrain;
         stream >> geocache.status;
+        /* Needed, since in version 1 the status was saved in the localised language,
+         * which is sub-optimal, if users exchange files, since then the status won't be translated to their language.
+         * The NeedsMaintenance isn't checked, since it didn't exist in version 1
+         */
+        if(version==1)
+        {
+            if(geocache.archived)
+            {
+                geocache.status = "Archived";
+            }
+            else if(geocache.available)
+            {
+                geocache.status = "Available";
+            }
+            else
+            {
+                geocache.status = "Not Available";
+            }
+        }
         stream >> geocache.name;
         stream >> geocache.owner;
         stream >> geocache.ownerId;

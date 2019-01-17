@@ -87,7 +87,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
         desc += "<p>" + str.replace("\n","<br/>") + "</p>";
     }
 
-    CWebPage * webDescPage = new CWebPage(0);
+    CWebPage * webDescPage = new CWebPage(webDesc);
     webDesc->setPage(webDescPage);
     webDesc->setHtml(desc);
 
@@ -104,7 +104,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     }
     labelLastFound->setText(lastFound.date().toString(Qt::SystemLocaleShortDate));
 
-    CWebPage * webLogPage = new CWebPage(0);
+    CWebPage * webLogPage = new CWebPage(webLogs);
     webLogs->setPage(webLogPage);
     webLogs->setHtml(logs);
 

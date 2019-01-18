@@ -41,7 +41,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     const CGisItemWpt::geocache_t& geocache = wpt.getGeoCache();
 
-    labelName->setText(geocache.name + " - " + tr(geocache.status));
+    labelName->setText(geocache.name + " - " + geocache.status);
     labelPositon->setText(strPos);
     labelOwner->setText(geocache.owner);
     labelSize->setText(geocache.container);
@@ -96,7 +96,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     for(const CGisItemWpt::geocachelog_t& log:geocache.logs)
     {
         QString thislog = log.text;
-        logs+="<p><b>"+log.date.date().toString(Qt::SystemLocaleShortDate) + ": " + tr(log.type) + tr(" by ") + log.finder + "</b></p><p>" + thislog.replace("\n","<br/>") + "</p><hr>";
+        logs+="<p><b>"+log.date.date().toString(Qt::SystemLocaleShortDate) + ": " + log.type + " by " + log.finder + "</b></p><p>" + thislog.replace("\n","<br/>") + "</p><hr>";
         if(lastFound.isValid()==false || (log.type=="Found It"&&log.date>lastFound))
         {
             lastFound=log.date;

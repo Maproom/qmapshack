@@ -636,20 +636,19 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
 
     if(geocache.archived)
     {
-        geocache.status = "Archived";
+        geocache.status = tr("Archived");
     }
     else if(geocache.available)
     {
-        geocache.status = "Available";
+        geocache.status = tr("Available");
+        if(geocache.needsMaintenance)
+        {
+            geocache.status += ", " + tr("Needs Maintenance");
+        }
     }
     else
     {
-        geocache.status = "Not Available";
-    }
-
-    if(geocache.needsMaintenance)
-    {
-        geocache.status += ", " + "Needs Maintenance";
+        geocache.status = tr("Not Available");
     }
 
     readXml(xmlCache, "groundspeak:name",              geocache.name);

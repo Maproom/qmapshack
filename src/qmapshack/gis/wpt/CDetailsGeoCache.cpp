@@ -41,7 +41,26 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     const CGisItemWpt::geocache_t& geocache = wpt.getGeoCache();
 
-    labelName->setText(geocache.name + " - " + geocache.status);
+    QString status;
+    if(geocache.archived)
+    {
+        status = tr("Archived");
+    }
+    else if(geocache.available)
+    {
+        status = tr("Available");
+    }
+    else
+    {
+        status = tr("Not Available");
+    }
+
+    if(geocache.needsMaintenance)
+    {
+        status += ", " + tr("Needs Maintenance");
+    }
+
+    labelName->setText(geocache.name + " - " + status);
     labelPositon->setText(strPos);
     labelOwner->setText(geocache.owner);
     labelSize->setText(geocache.container);

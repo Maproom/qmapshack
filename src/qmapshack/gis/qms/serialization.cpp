@@ -245,7 +245,6 @@ QDataStream& operator<<(QDataStream& stream, const CGisItemWpt::geocache_t& geoc
         stream << quint8(geocache.needsMaintenance);
         stream << geocache.difficulty;
         stream << geocache.terrain;
-        stream << geocache.status;
         stream << geocache.name;
         stream << geocache.owner;
         stream << geocache.ownerId;
@@ -285,7 +284,11 @@ QDataStream& operator>>(QDataStream& stream, CGisItemWpt::geocache_t& geocache)
         }
         stream >> geocache.difficulty;
         stream >> geocache.terrain;
-        stream >> geocache.status;
+        if(version == 1)
+        {
+            QString trash;
+            stream >> trash; //status string
+        }
         stream >> geocache.name;
         stream >> geocache.owner;
         stream >> geocache.ownerId;

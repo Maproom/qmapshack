@@ -65,7 +65,6 @@ public:
         bool needsMaintenance = false;
         qreal difficulty = 0;
         qreal terrain = 0;
-        QString status;
         QString name;
         QString owner;
         QString ownerId;

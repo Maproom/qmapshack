@@ -86,7 +86,7 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1, IGisProject * project)
         geocache.archived   = wpt1.geocache.archived;
         geocache.difficulty = wpt1.geocache.difficulty;
         geocache.terrain    = wpt1.geocache.terrain;
-        geocache.status     = wpt1.geocache.status;
+        //geocache.status     = wpt1.geocache.status; removed with geocache_t version 2
         geocache.name       = wpt1.geocache.name;
         geocache.owner      = wpt1.geocache.owner;
         geocache.ownerId    = wpt1.geocache.ownerId;

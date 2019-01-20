@@ -2234,7 +2234,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="118"/>
         <source>Active Project</source>
-        <translation type="unfinished"></translation>
+        <translation>Proyecto Activo</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="122"/>
@@ -2354,7 +2354,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
         <location filename="../gis/summary/CGisSummary.cpp" line="107"/>
         <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
         <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
-        <translation type="unfinished">No se han podido restablecer todas las carpetas incluidas en las Listas de Distribución. Es muy posible que haya eliminado alguna de las carpetas o la base de datos. Revise la configuración de las Listas de Distribución.</translation>
+        <translation>No se han podido restablecer todas las carpetas incluidas en las Listas de Distribución. Es muy posible que haya eliminado alguna de las carpetas o la base de datos. Revise la configuración de las Listas de Distribución.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="111"/>
@@ -2368,7 +2368,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
         <location filename="../gis/summary/CGisSummaryDropZone.cpp" line="38"/>
         <source>Drag-n-drop items from the workspace into this drop zone.</source>
         <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
-        <translation type="unfinished">Arrastra elementos desde el espacio de trabajo a esta Lista de Distribución para copiarlos en las carpetas indicadas.</translation>
+        <translation>Arrastra elementos desde el espacio de trabajo hasta aquí y se copiarán de una sola vez en todas las carpetas de esta lista.</translation>
     </message>
 </context>
 <context>
@@ -2377,7 +2377,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="41"/>
         <source>&lt;b&gt;What is this about?&lt;/b&gt;&lt;br/&gt;When using the database GIS items can be referenced by several projects. A common use-case is to store tour data in it&apos;s own project folder. Additionally the items are copied (referenced) into folders summarizing items of a certain time span, e.g. monthly, yearly, total. You can do this manually by loading the summary projects into the workspace, coping the items and saving the changes. Or you use this dialog to define project folders in the database as summary folders and copy the items by dragging them into the drag-n-drop area.</source>
         <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
-        <translation type="unfinished">&lt;b&gt;¿Que es esto?&lt;/b&gt;&lt;br/&gt;En una Base de Datos los elementos GIS pueden ser usados por varios proyectos. Lo más común es almacenar los tracks en su propia carpeta de proyecto, pero además, también es posible copiar (o referenciar) esos mismos tracks en otras carpetas organizadas por año, tipo de actividad, o región.&lt;br/&gt; Copiar de uno en uno cada elemento a cada carpeta es una tarea pesada, por el contrario, es muy fácil y cómodo hacer esa tarea usando una Lista de Distribución: Basta arrastrar un elemento desde el espacio de trabajo a una Lista de Distribución para que este se copie en todas  las carpetas de la lista de una sola vez. &lt;br/&gt; &lt;br/&gt;En este diálogo se configuran las Listas de Distribución indicando su nombre y a que carpetas distribuirán los elementos.&lt;br/&gt; (Las carpetas también pueden ser de diferentes Bases de Datos).</translation>
+        <translation>&lt;b&gt;¿Que es esto?&lt;/b&gt;&lt;br/&gt;En una Base de Datos los elementos GIS pueden ser usados por varios proyectos. Lo más común es almacenar los tracks en su propia carpeta de proyecto, pero además, también es posible copiar (o referenciar) esos mismos tracks en otras carpetas organizadas por año, tipo de actividad, o región.&lt;br/&gt; Copiar de uno en uno cada elemento a cada carpeta es una tarea pesada, por el contrario, es muy fácil y cómodo hacer esa tarea usando una Lista de Distribución: Basta arrastrar un elemento desde el espacio de trabajo a una Lista de Distribución para que este se copie en todas  las carpetas de la lista de una sola vez. &lt;br/&gt; &lt;br/&gt;En este diálogo se configuran las Listas de Distribución indicando su nombre y a que carpetas distribuirán los elementos.&lt;br/&gt; Las carpetas también pueden ser de diferentes Bases de Datos.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="111"/>
@@ -2390,12 +2390,12 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="120"/>
         <source>Load project...</source>
-        <translation type="unfinished">Cargar proyecto</translation>
+        <translation>Cargar proyecto...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="120"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
-        <translation type="unfinished">El proyecto &quot;%1&quot; ya está en el area de trabajo.</translation>
+        <translation>El proyecto &quot;%1&quot; ya está en el area de trabajo.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="176"/>
@@ -2415,7 +2415,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="751"/>
         <source>Change waypoint symbols.</source>
-        <translation type="unfinished">Cambiar símbolos de waypoint</translation>
+        <translation>Cambiar símbolos de waypoint.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="979"/>
@@ -7704,7 +7704,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="106"/>
         <source>Elevation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitud:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="277"/>
@@ -8044,7 +8044,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="102"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="132"/>
@@ -8677,7 +8677,7 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/IGisDatabase.ui" line="135"/>
         <source>Show Summary Drop Zones</source>
         <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
-        <translation type="unfinished">Mostrar Listas de Distribución</translation>
+        <translation>Mostrar Listas de Distribución</translation>
     </message>
 </context>
 <context>
@@ -8938,7 +8938,7 @@ Nombre de archivo %1</translation>
         <location filename="../gis/summary/IGisSummary.ui" line="35"/>
         <source>Setup summary drop zones.</source>
         <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
-        <translation type="unfinished">Configurar Listas de Distribución.</translation>
+        <translation>Configurar Listas de Distribución.</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="38"/>
@@ -8956,18 +8956,18 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
         <source>Setup summary projects...</source>
-        <translation type="unfinished">Configurar Listas de Distribución...</translation>
+        <translation>Configurar Listas de Distribución...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="37"/>
         <source>Drop Zone 1</source>
         <translatorcomment>El termino drop zone se ha traducido como &quot;Lista de Distribución&quot; atendiendo a la función que realiza</translatorcomment>
-        <translation type="unfinished">Lista de Distribución 1</translation>
+        <translation>Lista de Distribución 1</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="52"/>
@@ -8992,17 +8992,17 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="107"/>
         <source>Drop Zone 2</source>
-        <translation type="unfinished">Lista de Distribución 2</translation>
+        <translation>Lista de Distribución 2</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="177"/>
         <source>Drop Zone 3</source>
-        <translation type="unfinished">Lista de Distribución 3</translation>
+        <translation>Lista de Distribución 3</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="247"/>
         <source>Drop Zone 4</source>
-        <translation type="unfinished">Lista de Distribución 4</translation>
+        <translation>Lista de Distribución 4</translation>
     </message>
 </context>
 <context>
@@ -9020,7 +9020,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="50"/>
         <source>Change the opacity of all GIS Items on the map.</source>
-        <translation type="unfinished">Cambiar opacidad para todos los elementos GIS del mapa</translation>
+        <translation>Cambiar opacidad para todos los elementos GIS del mapa.</translation>
     </message>
     <message>
         <source>Filter</source>

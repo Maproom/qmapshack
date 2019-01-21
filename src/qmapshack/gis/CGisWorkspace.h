@@ -415,7 +415,7 @@ public:
 
        @return 0 if no project was selected.
      */
-    IGisProject * selectProject();
+    IGisProject * selectProject(bool forceSelect);
 
     void postEventForWks(QEvent * event);
 

@@ -1005,7 +1005,7 @@ bool IGisItem::getNameAndProject(QString &name, IGisProject *&project, const QSt
         return false;
     }
 
-    project = CGisWorkspace::self().selectProject();
+    project = CGisWorkspace::self().selectProject(false);
     return nullptr != project;
 }
 

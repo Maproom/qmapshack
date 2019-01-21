@@ -494,7 +494,7 @@ void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const
 
 void CGisItemTrk::filterSplitSegment()
 {
-    IGisProject * project = CGisWorkspace::self().selectProject();
+    IGisProject * project = CGisWorkspace::self().selectProject(false);
     if(nullptr == project)
     {
         return;
@@ -586,7 +586,7 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
 
 void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
 {
-    IGisProject * project = CGisWorkspace::self().selectProject();
+    IGisProject * project = CGisWorkspace::self().selectProject(false);
     if(nullptr == project)
     {
         return;

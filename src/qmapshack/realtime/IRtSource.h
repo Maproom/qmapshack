@@ -36,6 +36,7 @@ public:
     {
         eTypeNone
         ,eTypeOpenSky
+        ,eTypeGps
     };
 
     IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget * parent);

@@ -92,10 +92,6 @@
         <translation>Ski/Winter</translation>
     </message>
     <message>
-        <source>Aeronautics</source>
-        <translation type="vanished">Vliegtuig</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="98"/>
         <source>Set Track Activity</source>
         <translation type="unfinished"></translation>
@@ -480,23 +476,48 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CDetailsGeoCache</name>
     <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="47"/>
+        <source>Archived</source>
+        <translation type="unfinished">Gearchiveerd</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="51"/>
+        <source>Available</source>
+        <translation type="unfinished">Beschikbaar</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="55"/>
+        <source>Not Available</source>
+        <translation type="unfinished">Niet beschikbaar</translation>
+    </message>
+    <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
+        <source>Needs Maintenance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
         <source>none</source>
         <translation>geen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="132"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="178"/>
         <source>???</source>
         <translation>???</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="159"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="118"/>
+        <source> by </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="205"/>
         <source>Searching for images...</source>
         <translation>Zoeken naar afbeeldingen...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="265"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="311"/>
         <source>No images found</source>
         <translation>Geen afbeeldingen gevonden</translation>
     </message>
@@ -689,7 +710,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Afbeelding%1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1092"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1103"/>
         <source>Unknown</source>
         <translation>Onbekend</translation>
     </message>
@@ -1742,21 +1763,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="627"/>
-        <source>Archived</source>
-        <translation>Gearchiveerd</translation>
-    </message>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="631"/>
-        <source>Available</source>
-        <translation>Beschikbaar</translation>
-    </message>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="635"/>
-        <source>Not Available</source>
-        <translation>Niet beschikbaar</translation>
-    </message>
-    <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="106"/>
         <source>_Clone</source>
         <translation>_Kloon</translation>
@@ -2204,10 +2210,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Bewerk gebied punten</translation>
     </message>
     <message>
-        <source>Create Route</source>
-        <translation type="vanished">Maak route</translation>
-    </message>
-    <message>
         <location filename="../gis/CGisListWks.cpp" line="1046"/>
         <location filename="../gis/CGisListWks.cpp" line="1131"/>
         <source>Set Track Color</source>
@@ -2239,18 +2241,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <location filename="../gis/CGisListWks.cpp" line="837"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Laden werkruimte. Moment geduld.</translation>
-    </message>
-    <message>
-        <source>Track</source>
-        <translation type="obsolete">Track</translation>
-    </message>
-    <message>
-        <source>Route</source>
-        <translation type="obsolete">Route</translation>
-    </message>
-    <message>
-        <source>Area</source>
-        <translation type="obsolete">Gebied</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1415"/>
@@ -4385,10 +4375,6 @@ is geen geldig coordinaat definitie:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Warning...</source>
-        <translation type="obsolete">Waarschuwing...</translation>
-    </message>
-    <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
         <source>online</source>
         <translation type="unfinished"></translation>
@@ -5399,17 +5385,6 @@ is geen geldig coordinaat definitie:
         <location filename="../gis/db/CSearchDatabase.cpp" line="38"/>
         <source>Search database &apos;%1&apos;:</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CSearchGoogle</name>
-    <message>
-        <source>Unknown response</source>
-        <translation type="vanished">Onbekende reactie</translation>
-    </message>
-    <message>
-        <source>Error: </source>
-        <translation type="vanished">Fout: </translation>
     </message>
 </context>
 <context>
@@ -7031,59 +7006,104 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="40"/>
-        <source>Position:</source>
-        <translation>Positie:</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="47"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="73"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="86"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="99"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="112"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="125"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="151"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="79"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="92"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="105"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="118"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="131"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="144"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="157"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="164"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="177"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="190"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="252"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="229"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="262"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="269"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="472"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="488"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="60"/>
-        <source>Difficulty</source>
-        <translation>Moeilijkheid</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="138"/>
-        <source>Terrain</source>
-        <translation>Terrein</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="214"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="371"/>
         <source>Update spoilers</source>
         <translation>Spoilers bijwerken</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="217"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="266"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="374"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="456"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="354"/>
         <source>about:blank</source>
-        <translation type="vanished">Over:leeg</translation>
+        <translation>Over:leeg</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="284"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="53"/>
+        <source>Owner:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="66"/>
+        <source>Terrain:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
+        <source>Difficulty:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="216"/>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="242"/>
+        <source>Date Hidden:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="255"/>
+        <source>Last Found:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="288"/>
+        <source>Listing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="310"/>
         <source>Hint:</source>
         <translation>Hint:</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="315"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="337"/>
+        <source>Visit Website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="347"/>
+        <source>Logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="363"/>
+        <source>Pictures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="408"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="434"/>
+        <source>QMS</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7264,10 +7284,6 @@ I don&apos;t want to read the documentation!</source>
         <translation>Profiel</translation>
     </message>
     <message>
-        <source>Speed</source>
-        <translation type="vanished">Snelheid</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="331"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Schrijfbeveiliging ingeschakeld. Klik op het slot om te kunnen bewerken.</translation>
@@ -7424,10 +7440,6 @@ I don&apos;t want to read the documentation!</source>
         <translation>Kleur</translation>
     </message>
     <message>
-        <source>points</source>
-        <translation type="obsolete">punten</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1373"/>
         <source>Activity</source>
         <translation>Activiteit</translation>
@@ -7446,30 +7458,6 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1466"/>
         <source>Points</source>
         <translation>Punten</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation type="vanished">Tijd</translation>
-    </message>
-    <message>
-        <source>Ele.</source>
-        <translation type="vanished">Hoogte</translation>
-    </message>
-    <message>
-        <source>Delta</source>
-        <translation type="vanished">Delta</translation>
-    </message>
-    <message>
-        <source>Dist.</source>
-        <translation type="vanished">Afstand.</translation>
-    </message>
-    <message>
-        <source>Slope</source>
-        <translation type="vanished">Helling</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Positie</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1512"/>
@@ -7506,10 +7494,6 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="374"/>
         <source>-</source>
         <translation>-</translation>
-    </message>
-    <message>
-        <source>Ele.</source>
-        <translation type="vanished">Hoogte.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="106"/>
@@ -7980,10 +7964,6 @@ I don&apos;t want to read the documentation!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation type="vanished">Vervang hoogte van trackpunten met gegevens van geladen DEM bestand.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="86"/>
         <source>...</source>
         <translation>...</translation>
@@ -8035,10 +8015,6 @@ I don&apos;t want to read the documentation!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Speed</source>
-        <translation type="obsolete">Snelheid</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="181"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
@@ -8047,10 +8023,6 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="186"/>
         <source>Cycling</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> km/h</source>
-        <translation type="vanished"> km/u</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="114"/>
@@ -8569,10 +8541,6 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation>&lt;h4&gt;Notitie:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;--- geen notitie ---&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/IGisItem.cpp" line="829"/>
         <location filename="../gis/IGisItem.cpp" line="864"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
@@ -8757,10 +8725,6 @@ Bestandsnaam: %1</translation>
         <location filename="../gis/IGisWorkspace.ui" line="50"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation type="obsolete">Filter</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="66"/>
@@ -9145,10 +9109,6 @@ Bestandsnaam: %1</translation>
         <translation>Nieuw leeg project</translation>
     </message>
     <message>
-        <source>Search Google</source>
-        <translation type="vanished">Zoeken Google</translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="259"/>
         <source>Routing</source>
         <translation type="unfinished"></translation>
@@ -9395,12 +9355,6 @@ Bestandsnaam: %1</translation>
         <location filename="../map/IMapList.ui" line="123"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
         <translation>Gebruik het menu (rechter muisklik op item) om kaart te activeren. Gebruik selecteer en slepen om geactiveerde kaarten in volgorde te plaatsen.</translation>
-    </message>
-    <message>
-        <source>Help! I want maps!
-I don&apos;t want to read the documentation!</source>
-        <translation type="vanished">Help! Ik wil kaarten!
-Ik wil de documentatie niet lezen!</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="110"/>
@@ -11189,14 +11143,6 @@ of
         <translation>Toon op scherm het profiel en gedetaileerde informatie van de punten.</translation>
     </message>
     <message>
-        <source>Select a range of points.</source>
-        <translation type="vanished">Selecteer een reeks punten.</translation>
-    </message>
-    <message>
-        <source>Edit position of track points.</source>
-        <translation type="vanished">Bewerk positie van trackpunten.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
         <source>Select a range of points. You can use that tool to:
 
@@ -11728,13 +11674,6 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     </message>
 </context>
 <context>
-    <name>ISetupFilter</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulier</translation>
-    </message>
-</context>
-<context>
     <name>ISetupFolder</name>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="14"/>
@@ -11783,39 +11722,6 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="39"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ISetupNewWpt</name>
-    <message>
-        <source>New Waypoint...</source>
-        <translation type="vanished">Nieuw waypoint...</translation>
-    </message>
-    <message>
-        <source>Symbol</source>
-        <translation type="vanished">Symbool</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Positie</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="vanished">Naam</translation>
-    </message>
-    <message>
-        <source>Bad position format. Must be: 
-&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
-or
-&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation type="vanished">Verkeerde invoer. Moet zijn: 
-&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
-of
-&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
     </message>
 </context>
 <context>
@@ -12387,13 +12293,6 @@ of
     </message>
 </context>
 <context>
-    <name>TCyclingTourSummary</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulier</translation>
-    </message>
-</context>
-<context>
     <name>THikingTourSummary</name>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="14"/>
@@ -12589,20 +12488,6 @@ of
         <location filename="../templates/Hiking_Tour_Summary.ui" line="338"/>
         <source>Details</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>THikingTourSummaryAdvanced</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulier</translation>
-    </message>
-</context>
-<context>
-    <name>TRunningSummary</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulier</translation>
     </message>
 </context>
 </TS>

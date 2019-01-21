@@ -87,10 +87,6 @@
         <translation>Abstieg:</translation>
     </message>
     <message>
-        <source>Aeronautics</source>
-        <translation type="vanished">Aeronautik</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="61"/>
         <source>Public Transport</source>
         <translation>Öffentl. Verkehrsmittel</translation>
@@ -209,13 +205,6 @@
         <location filename="../canvas/CCanvas.cpp" line="981"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
-    </message>
-</context>
-<context>
-    <name>CColorChooser</name>
-    <message>
-        <source>Esc.</source>
-        <translation type="vanished">Esc</translation>
     </message>
 </context>
 <context>
@@ -489,23 +478,48 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CDetailsGeoCache</name>
     <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="47"/>
+        <source>Archived</source>
+        <translation>Archiviert</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="51"/>
+        <source>Available</source>
+        <translation>Verfügbar</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="55"/>
+        <source>Not Available</source>
+        <translation>Nicht verfügbar</translation>
+    </message>
+    <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
+        <source>Needs Maintenance</source>
+        <translation>Benötigt Pflege</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
         <source>none</source>
         <translation>keiner</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="132"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="178"/>
         <source>???</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="159"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="118"/>
+        <source> by </source>
+        <translation> von </translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="205"/>
         <source>Searching for images...</source>
         <translation>Suche nach Bildern...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="265"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="311"/>
         <source>No images found</source>
         <translation>Keine Bilder gefunden</translation>
     </message>
@@ -698,7 +712,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Bild %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1092"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1103"/>
         <source>Unknown</source>
         <translation>Unbekannt</translation>
     </message>
@@ -836,34 +850,6 @@ Der einzige Parameter ist die minimale Länge einer Runde. Damit kann man verhin
 </context>
 <context>
     <name>CFilterSpeed</name>
-    <message>
-        <source>City</source>
-        <translation type="vanished">Stadtrad</translation>
-    </message>
-    <message>
-        <source>Trekking</source>
-        <translation type="vanished">Trekkingrad</translation>
-    </message>
-    <message>
-        <source>Sportive</source>
-        <translation type="vanished">Sportrad</translation>
-    </message>
-    <message>
-        <source>Mountain</source>
-        <translation type="vanished">Mountain Bike</translation>
-    </message>
-    <message>
-        <source>Custom 0</source>
-        <translation type="vanished">Benutzer 0</translation>
-    </message>
-    <message>
-        <source>Custom 1</source>
-        <translation type="vanished">Benutzer 1</translation>
-    </message>
-    <message>
-        <source>Custom 2</source>
-        <translation type="vanished">Benutzer 2</translation>
-    </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="127"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
@@ -1173,10 +1159,6 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
 <context>
     <name>CGeoSearchWebConfigDialog</name>
     <message>
-        <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.</source>
-        <translation type="obsolete">&lt;b&gt;Fügen Sie ihren eigenen Dienst hinzu&lt;/b&gt;&lt;p&gt;Um ihren eigenen Dienst hinzuzufügen benötigen Sie einen Namen und einen URL mit Platzhaltern. Platzhalter sind:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Platzhalter&lt;/th&gt;&lt;th&gt;ersetzen durch...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;Längengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;Breitengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;Um einen Dienst zu ändern, wählen Sie entweder den Namen oder den URL aus und klicken darauf doppelt (Alternative: F2 drücken). Sie können auch die Dienste der Standardeinstellung ändern. Wenn Sie alle Dienste entfernen, dann werden beim nächsten Start von QMapShack die Dienste aus der Standardeinstellung wiederhergestellt.</translation>
-    </message>
-    <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="35"/>
         <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
         <translation>&lt;b&gt;Fügen Sie ihren eigenen Dienst hinzu&lt;/b&gt;&lt;p&gt;Um ihren eigenen Dienst hinzuzufügen benötigen Sie einen Namen und einen URL mit Platzhaltern. Platzhalter sind:&lt;/p&gt;</translation>
@@ -1207,17 +1189,9 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Alle Dienste entfernen und die der Grundeinstellung wiederherstellen?</translation>
     </message>
     <message>
-        <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
-        <translation type="vanished">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Platzhalter&lt;/th&gt;&lt;th&gt;ersetzen durch...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;Längengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;Breitengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="46"/>
         <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Um einen Dienst zu ändern, wählen Sie entweder den Namen oder den URL aus und klicken darauf doppelt (Alternative: F2 drücken). Sie können auch die Dienste der Standardeinstellung ändern. Wenn Sie alle Dienste entfernen, dann werden beim nächsten Start von QMapShack die Dienste aus der Standardeinstellung wiederhergestellt.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.</source>
-        <translation type="vanished">Um einen Dienst zu ändern, wählen Sie entweder den Namen oder den URL aus und klicken darauf doppelt (Alternative: F2 drücken). Sie können auch die Dienste der Standardeinstellung ändern. Wenn Sie alle Dienste entfernen, dann werden beim nächsten Start von QMapShack die Dienste aus der Standardeinstellung wiederhergestellt.</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="103"/>
@@ -1556,14 +1530,6 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation></translation>
     </message>
     <message>
-        <source>Invalid points....</source>
-        <translation type="vanished">Ungültige Punkte...</translation>
-    </message>
-    <message>
-        <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation type="vanished">Der Track &apos;%1&apos; hat %2 ungültige Punkte von insgesamt %3 sichtbaren Punkten. Wollen Sie die ungültigen Punkte herausnehmen?</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="320"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1792"/>
         <source>min.</source>
@@ -1782,10 +1748,6 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Pausenknödel ausgeblendet mit Abstandskriterium %1%2 and Verhältnis %3</translation>
     </message>
     <message>
-        <source>Changed average moving speed depending on slope to %1%2.</source>
-        <translation type="vanished">Die Durchschnittsgeschwindigkeit abhängig von der Steigung auf %1%2 gesetzt.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/filter.cpp" line="355"/>
         <source>Changed speed to %1%2.</source>
         <translation>Geschwindigkeit auf %1%2 geändert.</translation>
@@ -1823,21 +1785,6 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
 </context>
 <context>
     <name>CGisItemWpt</name>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="627"/>
-        <source>Archived</source>
-        <translation>Archiviert</translation>
-    </message>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="631"/>
-        <source>Available</source>
-        <translation>Verfügbar</translation>
-    </message>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="635"/>
-        <source>Not Available</source>
-        <translation>Nicht verfügbar</translation>
-    </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="106"/>
         <source>_Clone</source>
@@ -2165,10 +2112,6 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Streckenvermeidung</translation>
     </message>
     <message>
-        <source>Search Web for Position</source>
-        <translation type="vanished">Position im Web suchen</translation>
-    </message>
-    <message>
         <location filename="../gis/CGisListWks.cpp" line="159"/>
         <source>Route Instructions</source>
         <translation>Navigationsanweisungen</translation>
@@ -2197,18 +2140,6 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <location filename="../gis/CGisListWks.cpp" line="165"/>
         <source>Convert to Track</source>
         <translation>In einen Track umwandeln</translation>
-    </message>
-    <message>
-        <source>Create Route</source>
-        <translation type="vanished">Route erstellen</translation>
-    </message>
-    <message>
-        <source>Change Icon (sel. waypt. only)</source>
-        <translation type="vanished">Symbol änd. (nur ausgew. Wegp.)</translation>
-    </message>
-    <message>
-        <source>Set Track Activity</source>
-        <translation type="vanished">Trackaktivität festlegen</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="635"/>
@@ -2343,38 +2274,6 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <location filename="../gis/CGisListWks.cpp" line="837"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
-    </message>
-    <message>
-        <source>Project (Workspace)</source>
-        <translation type="vanished">Projekt (Arbeitsplatz)</translation>
-    </message>
-    <message>
-        <source>Project (Device)</source>
-        <translation type="vanished">Projekt (Gerät)</translation>
-    </message>
-    <message>
-        <source>Trash</source>
-        <translation type="vanished">Mülleimer</translation>
-    </message>
-    <message>
-        <source>Track</source>
-        <translation type="vanished">Track</translation>
-    </message>
-    <message>
-        <source>Waypoint</source>
-        <translation type="vanished">Wegpunkt</translation>
-    </message>
-    <message>
-        <source>Route</source>
-        <translation type="vanished">Route</translation>
-    </message>
-    <message>
-        <source>Area</source>
-        <translation type="vanished">Gebiet</translation>
-    </message>
-    <message>
-        <source>GIS Items</source>
-        <translation type="vanished">GIS Elemente</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1415"/>
@@ -2921,10 +2820,6 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
-        <translation type="vanished">Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;newview&apos;&gt;hier&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <location filename="../CMainWindow.cpp" line="556"/>
         <source>Select folder...</source>
         <translation>Ordner auswählen...</translation>
@@ -2990,17 +2885,6 @@ Zeile %2, Spalte %3:
         <location filename="../CMainWindow.cpp" line="1727"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack hat eine unvollständig installierte Proj4 Bibliothek gefunden. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution, um das zu beheben.</translation>
-    </message>
-</context>
-<context>
-    <name>CMapDraw</name>
-    <message>
-        <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
-
-If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
-        <translation type="vanished">Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten überhaupt keinen Spaß. Sie können Online-Karten installieren, indem Sie den &apos;Hilfe! Ich will Karten!&apos; Knopf im Fenster &apos;Karten&apos; drücken. Oder drücken Sie F1 um zur Online-Hilfe zu gelangen. Sie erfahren dort mehr über die Bedienung von QMapShack.
-
-Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgeliefert? Nun, um Karten fertig zur Installation zum Download anbieten zu können, benötigt man einen guten Server. Und der kostet. Dem Projekt fehlt hierzu das Geld. Zusätzlich unterliegen Karten- und DEM Daten dem Urheberrecht. Deswegen muss man den Urheber vorher fragen, ob man die Daten in ein Paket umwandeln und anbieten darf. Klingt einfacher als es oft ist. Und manchmal müsste man sogar Gebühren zahlen. Dem Projekt fehlen dafür schlicht die Ressourcen. Außerdem glauben wir, ist es nicht zu viel verlangt, wenn Sie die Daten selber installieren. Immerhin steht ihnen die Software kostenlos zur Verfügung.</translation>
     </message>
 </context>
 <context>
@@ -3974,10 +3858,6 @@ Unbekannte Struktur.</translation>
         <translation>Elemente auf der Karte auswählen</translation>
     </message>
     <message>
-        <source>Search Web for Position</source>
-        <translation type="vanished">Position im Web suchen</translation>
-    </message>
-    <message>
         <location filename="../mouse/CMouseNormal.cpp" line="461"/>
         <source>Copy position</source>
         <translation>Position kopieren</translation>
@@ -4011,10 +3891,6 @@ Unbekannte Struktur.</translation>
         <location filename="../mouse/CMouseRuler.cpp" line="312"/>
         <source>Distance Ruler</source>
         <translation>Distanzmesser</translation>
-    </message>
-    <message>
-        <source>Use the left mouse button to add points. A right click will pause updating the ruler. Another left click will continue to add points. Another right click will close the ruler tool.</source>
-        <translation type="vanished">Fügen Sie mit der linken Maustaste neue Punkte hinzu. Ein Klick mit der rechten Maustaste pausiert die Aktualisierung des Lineals. Ein Klick mit der linken Maustaste nimmt das Hinzufügen von Punkten wieder auf. Ein weiterer Klick mit der rechten Maustaste beendet das Linealwerkzeug.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="54"/>
@@ -4480,18 +4356,6 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>Profil: %1, Variante: %2</translation>
     </message>
     <message>
-        <source>BRouter: not found</source>
-        <translation type="vanished">BRouter: nicht gefunden</translation>
-    </message>
-    <message>
-        <source>Error:</source>
-        <translation type="vanished">Fehler:</translation>
-    </message>
-    <message>
-        <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation type="vanished">QMapShack kommuniziert mit BRouter über eine Netzwerkverbindung. Normalerweise wird das über eine spezielle Addresse gemacht, die von außen nicht zugänglich ist. Allerdings horcht BRouter auf allen verfügbaren Netzwerkschnittstellen. Wenn Sie in ihrem eigenen privaten Netzwerk mit einer aktiven Firewall sind, ist das kein großes Problem. Wenn Sie in einem öffentlichen Netzwerk sind, stellt jeder offene Zugang ein Risiko dar, weil er von jemanden missbraucht werden kann, ihr System anzugreifen. Wir empfehlen in diesem Fall auf den lokal laufenden BRouter zu verzichten. Wenn Sie diese Warnung sehen und BRouter Version &gt;= 1.4.10 benutzen, können Sie die Benutzung der lokalen Adresse erzwingen, indem Sie den Hostnamen auf &quot;localhost&quot; setzen und in den Einstellungen im Experten Modus &quot;Nur mit dem Hostnamen verbinden&quot; auswählen.</translation>
-    </message>
-    <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="393"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="526"/>
         <source>response is empty</source>
@@ -4530,33 +4394,9 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>&lt;br/&gt;Berechnungszeit: %1 s</translation>
     </message>
     <message>
-        <source>running</source>
-        <translation type="vanished">wird ausgeführt</translation>
-    </message>
-    <message>
-        <source>starting</source>
-        <translation type="vanished">started</translation>
-    </message>
-    <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="645"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (Version %1.%2.%3)</translation>
-    </message>
-    <message>
-        <source>Warning...</source>
-        <translation type="vanished">Warnung...</translation>
-    </message>
-    <message>
-        <source>I understand the risk. Don&apos;t tell me again.</source>
-        <translation type="vanished">Ich verstehe das Risiko. Bitte nicht mehr zeigen.</translation>
-    </message>
-    <message>
-        <source>stopped</source>
-        <translation type="vanished">angehalten</translation>
-    </message>
-    <message>
-        <source>not installed</source>
-        <translation type="vanished">nicht installiert</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
@@ -5570,17 +5410,6 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
 </context>
 <context>
-    <name>CSearchGoogle</name>
-    <message>
-        <source>Unknown response</source>
-        <translation type="vanished">Unbekannte Antwort</translation>
-    </message>
-    <message>
-        <source>Error: </source>
-        <translation type="vanished">Fehler:</translation>
-    </message>
-</context>
-<context>
     <name>CSetupDatabase</name>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="47"/>
@@ -5789,14 +5618,6 @@ Zeile %2, Spalte %3:
         <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
         <source>Descent</source>
         <translation>Abstieg</translation>
-    </message>
-    <message>
-        <source>Ascend</source>
-        <translation type="vanished">Anstieg</translation>
-    </message>
-    <message>
-        <source>Descend</source>
-        <translation type="vanished">Abstieg</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="116"/>
@@ -6333,18 +6154,6 @@ Zeile %2, Spalte %3:
         <translation>Klettersteig</translation>
     </message>
     <message>
-        <source>war&amp;m</source>
-        <translation type="vanished">warm</translation>
-    </message>
-    <message>
-        <source>&amp;cold</source>
-        <translation type="vanished">kalt</translation>
-    </message>
-    <message>
-        <source>ho&amp;t</source>
-        <translation type="vanished">heiß</translation>
-    </message>
-    <message>
         <location filename="../templates/Running_Summary.ui" line="116"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="123"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="129"/>
@@ -6468,18 +6277,6 @@ Zeile %2, Spalte %3:
         <translation></translation>
     </message>
     <message>
-        <source>free&amp;zing</source>
-        <translation type="vanished">eiskalt</translation>
-    </message>
-    <message>
-        <source>Graduation MIDE</source>
-        <translation type="vanished">Klassifizierung MIDE</translation>
-    </message>
-    <message>
-        <source>Severity Environment</source>
-        <translation type="vanished">Schwierigkeit Gelände</translation>
-    </message>
-    <message>
         <location filename="../templates/Running_Summary.ui" line="361"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="279"/>
         <source>1. The environment is not risk free</source>
@@ -6498,18 +6295,10 @@ Zeile %2, Spalte %3:
         <translation>3. Verschiedene Risikofaktoren</translation>
     </message>
     <message>
-        <source>4. Considerable riskfactors</source>
-        <translation type="vanished">4. Erhebliche Risikofaktoren</translation>
-    </message>
-    <message>
         <location filename="../templates/Running_Summary.ui" line="381"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="299"/>
         <source>5. Many risk factors</source>
         <translation>5. Zahlreiche Risikofaktoren</translation>
-    </message>
-    <message>
-        <source>Orientation</source>
-        <translation type="vanished">Orientierung</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="404"/>
@@ -6542,10 +6331,6 @@ Zeile %2, Spalte %3:
         <translation>5. Schwierige Navigation erschwert zusätzlich durch zu vermeidende Gefahren</translation>
     </message>
     <message>
-        <source>Terrain underfoot</source>
-        <translation type="vanished">Gelände (Weg)</translation>
-    </message>
-    <message>
         <location filename="../templates/Running_Summary.ui" line="450"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="368"/>
         <source>1. Easy walking</source>
@@ -6576,10 +6361,6 @@ Zeile %2, Spalte %3:
         <translation>5. Kletter, massiver Einsatz der Arme</translation>
     </message>
     <message>
-        <source>Effort required </source>
-        <translation type="vanished">Benötigter Einsatz</translation>
-    </message>
-    <message>
         <location filename="../templates/Running_Summary.ui" line="493"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="411"/>
         <source>1. Less than one hour of continuous walking</source>
@@ -6608,18 +6389,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="431"/>
         <source>5. More than 10 hours of continuous walking</source>
         <translation>5. Mehr als 10 Stunden gehen</translation>
-    </message>
-    <message>
-        <source>IBP Index</source>
-        <translation type="vanished">IBP Index</translation>
-    </message>
-    <message>
-        <source>HKG  (Hiking)</source>
-        <translation type="vanished">HKG (Wandern)</translation>
-    </message>
-    <message>
-        <source>RNG (Running)</source>
-        <translation type="vanished">RNG (Laufen)</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="526"/>
@@ -7201,10 +6970,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation></translation>
     </message>
     <message>
-        <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation type="vanished">Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../dem/IDemList.ui" line="35"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation>Filter: Fangen Sie zu tippen an und die Liste wird auf passende Einträge reduziert.</translation>
@@ -7263,56 +7028,105 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="47"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="73"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="86"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="99"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="112"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="125"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="151"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="40"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="79"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="92"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="105"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="118"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="131"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="144"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="157"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="164"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="177"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="190"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="252"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="229"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="262"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="269"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="472"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="488"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="40"/>
-        <source>Position:</source>
-        <translation>Position:</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="60"/>
-        <source>Difficulty</source>
-        <translation>Schwierigkeit</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="138"/>
-        <source>Terrain</source>
-        <translation>Gelände</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="214"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="371"/>
         <source>Update spoilers</source>
         <translation>Spoiler erneut laden</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="217"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="266"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="374"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="456"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="284"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="310"/>
         <source>Hint:</source>
         <translation>Hinweis:</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="315"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="53"/>
+        <source>Owner:</source>
+        <translation>Besitzer:</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="66"/>
+        <source>Terrain:</source>
+        <translation>Gelände:</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
+        <source>Difficulty:</source>
+        <translation>Schwierigkeit:</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="216"/>
+        <source>Size:</source>
+        <translation>Größe:</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="242"/>
+        <source>Date Hidden:</source>
+        <translation>Versteckt am:</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="255"/>
+        <source>Last Found:</source>
+        <translation>Zuletzt gefunden am:</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="288"/>
+        <source>Listing</source>
+        <translation>Beschreibung</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="337"/>
+        <source>Visit Website</source>
+        <translation>Webseite öffnen</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="347"/>
+        <source>Logs</source>
+        <translation>Logs</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="354"/>
+        <source>about:blank</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="363"/>
+        <source>Pictures</source>
+        <translation type="unfinished">Bilder</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="408"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="434"/>
+        <source>QMS</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -7497,10 +7311,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Profil</translation>
     </message>
     <message>
-        <source>Speed</source>
-        <translation type="vanished">Geschw.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="331"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
@@ -7602,10 +7412,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>mit Richtungspfeilen</translation>
     </message>
     <message>
-        <source>pixel</source>
-        <translation type="vanished">Pixel</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="712"/>
         <source>Change the line width for this particular track.</source>
         <translation>Die Linienbreite für diesen speziellen Track verändern.</translation>
@@ -7614,10 +7420,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="741"/>
         <source>Change the line width globally for all tracks that use the global settings.</source>
         <translation>Für alle Tracks, die die globalen Einstellungen verwenden, die Linienbreite einstellen.</translation>
-    </message>
-    <message>
-        <source>points</source>
-        <translation type="vanished">Punkte</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="881"/>
@@ -7645,30 +7447,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Punkte</translation>
     </message>
     <message>
-        <source>Time</source>
-        <translation type="vanished">Zeit</translation>
-    </message>
-    <message>
-        <source>Ele.</source>
-        <translation type="vanished">Höhe</translation>
-    </message>
-    <message>
-        <source>Delta</source>
-        <translation type="vanished">Delta</translation>
-    </message>
-    <message>
-        <source>Dist.</source>
-        <translation type="vanished">Entf.</translation>
-    </message>
-    <message>
-        <source>Slope</source>
-        <translation type="vanished">Neigung</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Position</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="397"/>
         <source>Info</source>
         <translation>Info</translation>
@@ -7677,22 +7455,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="360"/>
         <source>-</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Use/edit user defined visibility of arrows for this track</source>
-        <translation type="vanished">Die benutzerdefinierte Sichtbarkeit der Richtungspfeile für diesen Track verwenden</translation>
-    </message>
-    <message>
-        <source>Use/edit system&apos;s visibility of arrows for all tracks</source>
-        <translation type="vanished">Die vorgegebene Sichtbarkeit der Richtungspfeile für alle Tracks benutzen</translation>
-    </message>
-    <message>
-        <source>Use/edit user defined scale factor for this track</source>
-        <translation type="vanished">Den benutzerdefinierten Skalierungsfaktor für diesen Track verwenden</translation>
-    </message>
-    <message>
-        <source>Use/edit system&apos;s default factor for all tracks</source>
-        <translation type="vanished">Den vorgegebenen Skalierungsfaktor für alle Tracks benutzen</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="894"/>
@@ -7709,10 +7471,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation></translation>
     </message>
     <message>
-        <source>User defined limits for this track</source>
-        <translation type="vanished">Benutzerdefinierte Grenzwerte für diesen Track</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="613"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1115"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1212"/>
@@ -7721,21 +7479,9 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Automatische Limits.</translation>
     </message>
     <message>
-        <source>User defined limits for all tracks</source>
-        <translation type="vanished">Benutzerdefinierte Grenzwerte für alle Tracks</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="817"/>
         <source>Color</source>
         <translation>Farbe</translation>
-    </message>
-    <message>
-        <source>Ascent</source>
-        <translation type="vanished">Anstieg</translation>
-    </message>
-    <message>
-        <source>Descent</source>
-        <translation type="vanished">Abstieg</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1512"/>
@@ -7785,10 +7531,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="374"/>
         <source>-</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Ele.</source>
-        <translation type="vanished">Höhe</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="132"/>
@@ -8246,10 +7988,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Ersetzt die Höhendaten durch Daten aus den geladenen DEM Dateien der Ansicht</translation>
     </message>
     <message>
-        <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation type="vanished">Ersetzt die Höhendaten durch Daten aus den geladenen DEM Dateien.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="86"/>
         <source>...</source>
         <translation></translation>
@@ -8301,54 +8039,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Wandern</translation>
     </message>
     <message>
-        <source>Speed</source>
-        <translation type="vanished">Geschwindigkeit</translation>
-    </message>
-    <message>
-        <source> Type</source>
-        <translation type="vanished">Typ</translation>
-    </message>
-    <message>
-        <source>Max Speed</source>
-        <translation type="vanished">Max. Geschw.</translation>
-    </message>
-    <message>
-        <source>Plain Level:</source>
-        <translation type="vanished">Ebene:</translation>
-    </message>
-    <message>
-        <source>at positive Slope</source>
-        <translation type="vanished">bei positiver Steigung</translation>
-    </message>
-    <message>
-        <source>Min Speed</source>
-        <translation type="vanished">Min. Geschw.</translation>
-    </message>
-    <message>
-        <source>Uphill:</source>
-        <translation type="vanished">Bergauf:</translation>
-    </message>
-    <message>
-        <source>Downhill:</source>
-        <translation type="vanished">Bergab:</translation>
-    </message>
-    <message>
-        <source>Speed at zero Slope</source>
-        <translation type="vanished">Geschw. ohne Steigung</translation>
-    </message>
-    <message>
-        <source>at negative Slope</source>
-        <translation type="vanished">bei negativer Steigung</translation>
-    </message>
-    <message>
-        <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation type="vanished">Benutzerdefinierte positive und negative Steigungen werden durch die minimale und maximale Steigung im Track ersetzt.</translation>
-    </message>
-    <message>
-        <source>Set min/max slopes from Track</source>
-        <translation type="vanished">Min./Max. Steigung aus dem Track</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="181"/>
         <source>Constant</source>
         <translation>Konstant</translation>
@@ -8357,10 +8047,6 @@ Keine Lust die Anleitung zu lesen!</translation>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="186"/>
         <source>Cycling</source>
         <translation>Fahrrad</translation>
-    </message>
-    <message>
-        <source> km/h</source>
-        <translation type="vanished"> km/h</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="114"/>
@@ -8881,10 +8567,6 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation>&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/IGisItem.cpp" line="829"/>
         <location filename="../gis/IGisItem.cpp" line="864"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
@@ -9069,10 +8751,6 @@ Dateiname: %1</translation>
         <location filename="../gis/IGisWorkspace.ui" line="50"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation>Ändert die Transparenz von allen GIS Elementen auf der Karte.</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation type="vanished">Filter</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="66"/>
@@ -9652,10 +9330,6 @@ Dateiname: %1</translation>
         <translation>Leeres Projekt hinzufügen</translation>
     </message>
     <message>
-        <source>Search Google</source>
-        <translation type="vanished">Mit Google suchen</translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="575"/>
         <source>Close all projects</source>
         <translation>Alle Projekte schließen</translation>
@@ -9699,19 +9373,9 @@ Dateiname: %1</translation>
         <translation></translation>
     </message>
     <message>
-        <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation type="vanished">Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../map/IMapList.ui" line="123"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
         <translation>Mit dem Kontextmenü (Klick mit rechter Maustaste auf einen Eintrag) können Sie eine Karte aktivieren. Um die Karten in einer anderen Reihenfolge anzuzeigen, können Sie jeden Eintrag mit drag-n-drop verschieben.</translation>
-    </message>
-    <message>
-        <source>Help! I want maps!
-I don&apos;t want to read the documentation!</source>
-        <translation type="vanished">Hilfe! Ich will Karten!
-Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="35"/>
@@ -9970,10 +9634,6 @@ Tipp:
         <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
         <source>Select source files:</source>
         <translation>Quelldateien auswählen:</translation>
-    </message>
-    <message>
-        <source>Ad&amp;vanced Options</source>
-        <translation type="vanished">Erweiterte Optionen</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="130"/>
@@ -10713,10 +10373,6 @@ sein</translation>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="148"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
         <translation>Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Sie können mit &lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt; eine solche Routendatenbank selber erzeugen.</translation>
-    </message>
-    <message>
-        <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
-        <translation type="vanished">Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Sie können mit &lt;b&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/b&gt; eine solche Routendatenbank selber erzeugen.</translation>
     </message>
 </context>
 <context>
@@ -11506,10 +11162,6 @@ sein</translation>
         <translation>Zeigt das Profil und detaillierte Informationen der Punkte.</translation>
     </message>
     <message>
-        <source>Edit position of track points.</source>
-        <translation type="vanished">Position von Trackpunkten bearbeiten.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
         <source>View details and edit properties of track.</source>
         <translation>Details anzeigen und Trackeigenschaften bearbeiten.</translation>
@@ -11518,10 +11170,6 @@ sein</translation>
         <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
         <source>Delete track from project.</source>
         <translation>Track aus einem Projekt entfernen.</translation>
-    </message>
-    <message>
-        <source>Select a range of points.</source>
-        <translation type="vanished">Wähle einen Punktebereich.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="147"/>
@@ -12089,21 +11737,6 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     </message>
 </context>
 <context>
-    <name>ISetupFilter</name>
-    <message>
-        <source>Apply filter to</source>
-        <translation type="vanished">Filter anwenden auf</translation>
-    </message>
-    <message>
-        <source>name only</source>
-        <translation type="vanished">den Namen</translation>
-    </message>
-    <message>
-        <source>complete text</source>
-        <translation type="vanished">den vollständigen Text</translation>
-    </message>
-</context>
-<context>
     <name>ISetupFolder</name>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="14"/>
@@ -12152,36 +11785,6 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="39"/>
         <source>Name</source>
         <translation>Name</translation>
-    </message>
-</context>
-<context>
-    <name>ISetupNewWpt</name>
-    <message>
-        <source>New Waypoint...</source>
-        <translation type="vanished">Neuer Wegpunkt...</translation>
-    </message>
-    <message>
-        <source>Symbol</source>
-        <translation type="vanished">Symbol</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Position</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="vanished">Name</translation>
-    </message>
-    <message>
-        <source>Bad position format. Must be: 
-&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
-or
-&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation type="vanished">Falsches Positionsformat. Muss entweder 
-&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
-oder
-&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;
-sein</translation>
     </message>
 </context>
 <context>
@@ -12745,181 +12348,6 @@ sein</translation>
     </message>
 </context>
 <context>
-    <name>TCyclingTourSummary</name>
-    <message>
-        <source>Details</source>
-        <translation type="vanished">Details</translation>
-    </message>
-    <message>
-        <source>Dificulty</source>
-        <translation type="vanished">Schwierigkeit</translation>
-    </message>
-    <message>
-        <source> IBPIndex BYC (Bicycle)</source>
-        <translation type="vanished">IBPIndex BYC (Fahrrad)</translation>
-    </message>
-    <message>
-        <source>% cycling</source>
-        <translation type="vanished">% auf dem Rad</translation>
-    </message>
-    <message>
-        <source>Cardio</source>
-        <translation type="vanished">Kardio</translation>
-    </message>
-    <message>
-        <source>Max. heart rate</source>
-        <translation type="vanished">Max. Puls</translation>
-    </message>
-    <message>
-        <source>Min. heart rate</source>
-        <translation type="vanished">Min. Puls</translation>
-    </message>
-    <message>
-        <source>cal. consumption</source>
-        <translation type="vanished">Kalorienverbrauch</translation>
-    </message>
-    <message>
-        <source>Equipment</source>
-        <translation type="vanished">Ausrüstung</translation>
-    </message>
-    <message>
-        <source>protections</source>
-        <translation type="vanished">Protektoren</translation>
-    </message>
-    <message>
-        <source>night gear</source>
-        <translation type="vanished">Nachtausrüstung</translation>
-    </message>
-    <message>
-        <source>e-bike</source>
-        <translation type="vanished">E-Bike</translation>
-    </message>
-    <message>
-        <source>saddlebags</source>
-        <translation type="vanished">Satteltaschen</translation>
-    </message>
-    <message>
-        <source>bike</source>
-        <translation type="vanished">Rad</translation>
-    </message>
-    <message>
-        <source>Character</source>
-        <translation type="vanished">Charakter</translation>
-    </message>
-    <message>
-        <source>e&amp;nduro</source>
-        <translation type="vanished">Ausdauer</translation>
-    </message>
-    <message>
-        <source>freeride</source>
-        <translation type="vanished">Freeride</translation>
-    </message>
-    <message>
-        <source>XC</source>
-        <translation type="vanished">XC</translation>
-    </message>
-    <message>
-        <source>large ascend</source>
-        <translation type="vanished">langer Anstieg</translation>
-    </message>
-    <message>
-        <source>city/road</source>
-        <translation type="vanished">Stadt/Straße</translation>
-    </message>
-    <message>
-        <source>long distance</source>
-        <translation type="vanished">lange Distanz</translation>
-    </message>
-    <message>
-        <source>downhill</source>
-        <translation type="vanished">Downhill</translation>
-    </message>
-    <message>
-        <source>night</source>
-        <translation type="vanished">Nacht</translation>
-    </message>
-    <message>
-        <source>Rating</source>
-        <translation type="vanished">Beurteilung</translation>
-    </message>
-    <message>
-        <source>Rating 5 stars</source>
-        <translation type="vanished">Beurteilung 5 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 4 stars</source>
-        <translation type="vanished">Beurteilung 4 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 3 stars</source>
-        <translation type="vanished">Beurteilung 3 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 2 stars</source>
-        <translation type="vanished">Beurteilung 2 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 1 star</source>
-        <translation type="vanished">Beurteilung 1 Sterne</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="vanished">Wetter</translation>
-    </message>
-    <message>
-        <source>sunny</source>
-        <translation type="vanished">Sonne</translation>
-    </message>
-    <message>
-        <source>foggy</source>
-        <translation type="vanished">neblig</translation>
-    </message>
-    <message>
-        <source>ho&amp;t</source>
-        <translation type="vanished">heiß</translation>
-    </message>
-    <message>
-        <source>clouds</source>
-        <translation type="vanished">Wolken</translation>
-    </message>
-    <message>
-        <source>windy</source>
-        <translation type="vanished">Wind</translation>
-    </message>
-    <message>
-        <source>war&amp;m</source>
-        <translation type="vanished">warm</translation>
-    </message>
-    <message>
-        <source>rain</source>
-        <translation type="vanished">Regen</translation>
-    </message>
-    <message>
-        <source>humid</source>
-        <translation type="vanished">schwül</translation>
-    </message>
-    <message>
-        <source>&amp;cold</source>
-        <translation type="vanished">kalt</translation>
-    </message>
-    <message>
-        <source>snow</source>
-        <translation type="vanished">Schnee</translation>
-    </message>
-    <message>
-        <source>hail/soft hail</source>
-        <translation type="vanished">Hagel/Graupel</translation>
-    </message>
-    <message>
-        <source>free&amp;zing</source>
-        <translation type="vanished">eiskalt</translation>
-    </message>
-    <message>
-        <source>Participants</source>
-        <translation type="vanished">Teilnehmer</translation>
-    </message>
-</context>
-<context>
     <name>THikingTourSummary</name>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="14"/>
@@ -12955,22 +12383,6 @@ sein</translation>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="68"/>
         <source>clouds</source>
         <translation>Wolken</translation>
-    </message>
-    <message>
-        <source>ho&amp;t</source>
-        <translation type="vanished">heiß</translation>
-    </message>
-    <message>
-        <source>war&amp;m</source>
-        <translation type="vanished">warm</translation>
-    </message>
-    <message>
-        <source>&amp;cold</source>
-        <translation type="vanished">kalt</translation>
-    </message>
-    <message>
-        <source>free&amp;zing</source>
-        <translation type="vanished">eiskalt</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="81"/>
@@ -13131,556 +12543,6 @@ sein</translation>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="338"/>
         <source>Details</source>
         <translation>Details</translation>
-    </message>
-</context>
-<context>
-    <name>THikingTourSummaryAdvanced</name>
-    <message>
-        <source>Graduation MIDE</source>
-        <translation type="vanished">Klassifizierung MIDE</translation>
-    </message>
-    <message>
-        <source>Severity Environment</source>
-        <translation type="vanished">Schwierigkeit Gelände</translation>
-    </message>
-    <message>
-        <source>1. The environment is not risk free</source>
-        <translation type="vanished">1. Das Gelände ist nicht frei von Risiko</translation>
-    </message>
-    <message>
-        <source>2. More than 1 risk factor</source>
-        <translation type="vanished">2. Mehr als ein Risikofaktor</translation>
-    </message>
-    <message>
-        <source>3. Various risk factors</source>
-        <translation type="vanished">3. Verschiedene Risikofaktoren</translation>
-    </message>
-    <message>
-        <source>4. Considerable riskfactors</source>
-        <translation type="vanished">4. Erhebliche Risikofaktoren</translation>
-    </message>
-    <message>
-        <source>5. Many risk factors</source>
-        <translation type="vanished">5. Zahlreiche Risikofaktoren</translation>
-    </message>
-    <message>
-        <source>Orientation</source>
-        <translation type="vanished">Orientierung</translation>
-    </message>
-    <message>
-        <source>1. Paths and junctions well signed</source>
-        <translation type="vanished">1. Wege und Kreuzungen sind gut beschildert</translation>
-    </message>
-    <message>
-        <source>2. Footpaths or way marks which follow the route</source>
-        <translation type="vanished">2. Fußwege oder Markierungen die der Route folgen</translation>
-    </message>
-    <message>
-        <source>3. Demands orientation by identification of geographic features and compass points</source>
-        <translation type="vanished">3. Verlangt eine Orientierung über Landmarken und Kompasspunkte</translation>
-    </message>
-    <message>
-        <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
-        <translation type="vanished">4. Verlangt navigatorische Fähigkeiten, die über das Interpretieren von Karten und Umgebung herausgehen</translation>
-    </message>
-    <message>
-        <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
-        <translation type="vanished">5. Schwierige Navigation erschwert zusätzlich durch zu vermeidende Gefahren</translation>
-    </message>
-    <message>
-        <source>Terrain underfoot</source>
-        <translation type="vanished">Gelände (Weg)</translation>
-    </message>
-    <message>
-        <source>1. Easy walking</source>
-        <translation type="vanished">1 Einfaches Gehgelände</translation>
-    </message>
-    <message>
-        <source>2. Bridleways and well made footpaths</source>
-        <translation type="vanished">2. Reitwege und gute Fußwege</translation>
-    </message>
-    <message>
-        <source>3. Rocky stairways, rough ground and screes</source>
-        <translation type="vanished">3. Felsige Stufen, rauer Untergrund und Platten</translation>
-    </message>
-    <message>
-        <source>4. Contains sections where the use of hands is necessary for balance</source>
-        <translation type="vanished">4. Hat Abschnitte bei denen man die Hände zur Ballance benötigt</translation>
-    </message>
-    <message>
-        <source>5. Scrambling, pulling on hands and arms for progress</source>
-        <translation type="vanished">5. Kletter, massiver Einsatz der Arme</translation>
-    </message>
-    <message>
-        <source>Effort required </source>
-        <translation type="vanished">Benötigter Einsatz</translation>
-    </message>
-    <message>
-        <source>1. Less than one hour of continuous walking</source>
-        <translation type="vanished">1. Kürzer als eine Stunde gehen</translation>
-    </message>
-    <message>
-        <source>2. From 1 to 3 hours of continuous walking</source>
-        <translation type="vanished">2. Ein bis drei Stunden gehen</translation>
-    </message>
-    <message>
-        <source>3. From 3 to 6 hours of continuous walking</source>
-        <translation type="vanished">3. Drei bis 6 Stunden gehen</translation>
-    </message>
-    <message>
-        <source>4. From 6 to 10 hours of continuous walking</source>
-        <translation type="vanished">4. Sechs bis 10 Stunden gehen</translation>
-    </message>
-    <message>
-        <source>5. More than 10 hours of continuous walking</source>
-        <translation type="vanished">5. Mehr als 10 Stunden gehen</translation>
-    </message>
-    <message>
-        <source>Character</source>
-        <translation type="vanished">Charakter</translation>
-    </message>
-    <message>
-        <source>easy hiking</source>
-        <translation type="vanished">einfache Wanderung</translation>
-    </message>
-    <message>
-        <source>large ascend</source>
-        <translation type="vanished">langer Anstieg</translation>
-    </message>
-    <message>
-        <source>alpine</source>
-        <translation type="vanished">alpine Tour</translation>
-    </message>
-    <message>
-        <source>long distance</source>
-        <translation type="vanished">lange Distanz</translation>
-    </message>
-    <message>
-        <source>climbing</source>
-        <translation type="vanished">Klettern</translation>
-    </message>
-    <message>
-        <source>night</source>
-        <translation type="vanished">Nacht</translation>
-    </message>
-    <message>
-        <source>via ferrata</source>
-        <translation type="vanished">Klettersteig</translation>
-    </message>
-    <message>
-        <source>aborted</source>
-        <translation type="vanished">abgebrochen</translation>
-    </message>
-    <message>
-        <source>Rating</source>
-        <translation type="vanished">Beurteilung</translation>
-    </message>
-    <message>
-        <source>Rating 5 stars</source>
-        <translation type="vanished">Beurteilung 5 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 4 stars</source>
-        <translation type="vanished">Beurteilung 4 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 3 stars</source>
-        <translation type="vanished">Beurteilung 3 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 2 stars</source>
-        <translation type="vanished">Beurteilung 2 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 1 star</source>
-        <translation type="vanished">Beurteilung 1 Sterne</translation>
-    </message>
-    <message>
-        <source>Equipment</source>
-        <translation type="vanished">Ausrüstung</translation>
-    </message>
-    <message>
-        <source>climbing gear</source>
-        <translation type="vanished">Kletterausrüstung</translation>
-    </message>
-    <message>
-        <source>ski</source>
-        <translation type="vanished">Ski</translation>
-    </message>
-    <message>
-        <source>ferrata gear</source>
-        <translation type="vanished">Klettersteigset</translation>
-    </message>
-    <message>
-        <source>ice pick</source>
-        <translation type="vanished">Pickel</translation>
-    </message>
-    <message>
-        <source>camping gear</source>
-        <translation type="vanished">Campingausrüstung</translation>
-    </message>
-    <message>
-        <source>crampon</source>
-        <translation type="vanished">Steigeisen</translation>
-    </message>
-    <message>
-        <source>night gear</source>
-        <translation type="vanished">Nachtausrüstung</translation>
-    </message>
-    <message>
-        <source>snow shoes</source>
-        <translation type="vanished">Schneeschuhe</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="vanished">Wetter</translation>
-    </message>
-    <message>
-        <source>war&amp;m</source>
-        <translation type="vanished">warm</translation>
-    </message>
-    <message>
-        <source>windy</source>
-        <translation type="vanished">Wind</translation>
-    </message>
-    <message>
-        <source>foggy</source>
-        <translation type="vanished">neblig</translation>
-    </message>
-    <message>
-        <source>humid</source>
-        <translation type="vanished">schwül</translation>
-    </message>
-    <message>
-        <source>clouds</source>
-        <translation type="vanished">Wolken</translation>
-    </message>
-    <message>
-        <source>&amp;cold</source>
-        <translation type="vanished">kalt</translation>
-    </message>
-    <message>
-        <source>ho&amp;t</source>
-        <translation type="vanished">heiß</translation>
-    </message>
-    <message>
-        <source>rain</source>
-        <translation type="vanished">Regen</translation>
-    </message>
-    <message>
-        <source>snow</source>
-        <translation type="vanished">Schnee</translation>
-    </message>
-    <message>
-        <source>hail/soft hail</source>
-        <translation type="vanished">Hagel/Graupel</translation>
-    </message>
-    <message>
-        <source>free&amp;zing</source>
-        <translation type="vanished">eiskalt</translation>
-    </message>
-    <message>
-        <source>sunny</source>
-        <translation type="vanished">Sonne</translation>
-    </message>
-    <message>
-        <source>Participants</source>
-        <translation type="vanished">Teilnehmer</translation>
-    </message>
-    <message>
-        <source>IBP Index</source>
-        <translation type="vanished">IBP Index</translation>
-    </message>
-    <message>
-        <source>HKG  (Hiking)</source>
-        <translation type="vanished">HKG (Wandern)</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation type="vanished">Details</translation>
-    </message>
-</context>
-<context>
-    <name>TRunningSummary</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Diese Strecke vermeiden</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="vanished">Wetter</translation>
-    </message>
-    <message>
-        <source>sunny</source>
-        <translation type="vanished">Sonne</translation>
-    </message>
-    <message>
-        <source>foggy</source>
-        <translation type="vanished">neblig</translation>
-    </message>
-    <message>
-        <source>ho&amp;t</source>
-        <translation type="vanished">heiß</translation>
-    </message>
-    <message>
-        <source>clouds</source>
-        <translation type="vanished">Wolken</translation>
-    </message>
-    <message>
-        <source>windy</source>
-        <translation type="vanished">Wind</translation>
-    </message>
-    <message>
-        <source>war&amp;m</source>
-        <translation type="vanished">warm</translation>
-    </message>
-    <message>
-        <source>rain</source>
-        <translation type="vanished">Regen</translation>
-    </message>
-    <message>
-        <source>humid</source>
-        <translation type="vanished">schwül</translation>
-    </message>
-    <message>
-        <source>&amp;cold</source>
-        <translation type="vanished">kalt</translation>
-    </message>
-    <message>
-        <source>snow</source>
-        <translation type="vanished">Schnee</translation>
-    </message>
-    <message>
-        <source>hail/soft hail</source>
-        <translation type="vanished">Hagel/Graupel</translation>
-    </message>
-    <message>
-        <source>free&amp;zing</source>
-        <translation type="vanished">eiskalt</translation>
-    </message>
-    <message>
-        <source>Character</source>
-        <translation type="vanished">Charakter</translation>
-    </message>
-    <message>
-        <source>Rating 5 stars</source>
-        <translation type="vanished">Beurteilung 5 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 4 stars</source>
-        <translation type="vanished">Beurteilung 4 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 3 stars</source>
-        <translation type="vanished">Beurteilung 3 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 2 stars</source>
-        <translation type="vanished">Beurteilung 2 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating 1 star</source>
-        <translation type="vanished">Beurteilung 1 Sterne</translation>
-    </message>
-    <message>
-        <source>Rating</source>
-        <translation type="vanished">Beurteilung</translation>
-    </message>
-    <message>
-        <source>long distance</source>
-        <translation type="vanished">lange Distanz</translation>
-    </message>
-    <message>
-        <source>night</source>
-        <translation type="vanished">Nacht</translation>
-    </message>
-    <message>
-        <source>trail running</source>
-        <translation type="vanished">Geländelauf</translation>
-    </message>
-    <message>
-        <source>city/road</source>
-        <translation type="vanished">Stadt/Straße</translation>
-    </message>
-    <message>
-        <source> track</source>
-        <translation type="vanished">Pfad</translation>
-    </message>
-    <message>
-        <source>ultra long dist</source>
-        <translation type="vanished">sehr lang. Dist.</translation>
-    </message>
-    <message>
-        <source>large ascend</source>
-        <translation type="vanished">langer Anstieg</translation>
-    </message>
-    <message>
-        <source>easy hiking</source>
-        <translation type="vanished">einfache Wanderung</translation>
-    </message>
-    <message>
-        <source>Equipment</source>
-        <translation type="vanished">Ausrüstung</translation>
-    </message>
-    <message>
-        <source>shoes:</source>
-        <translation type="vanished">Schuhe:</translation>
-    </message>
-    <message>
-        <source>backpack</source>
-        <translation type="vanished">Rucksack</translation>
-    </message>
-    <message>
-        <source>gloves</source>
-        <translation type="vanished">Handschuhe</translation>
-    </message>
-    <message>
-        <source>hip pack</source>
-        <translation type="vanished">Hüftgurt</translation>
-    </message>
-    <message>
-        <source>poles</source>
-        <translation type="vanished">Stöcke</translation>
-    </message>
-    <message>
-        <source>crampon</source>
-        <translation type="vanished">Steigeisen</translation>
-    </message>
-    <message>
-        <source>night gear</source>
-        <translation type="vanished">Nachtausrüstung</translation>
-    </message>
-    <message>
-        <source>Participants</source>
-        <translation type="vanished">Teilnehmer</translation>
-    </message>
-    <message>
-        <source>Graduation MIDE</source>
-        <translation type="vanished">Klassifizierung MIDE</translation>
-    </message>
-    <message>
-        <source>Severity Environment</source>
-        <translation type="vanished">Schwierigkeit Gelände</translation>
-    </message>
-    <message>
-        <source>1. The environment is not risk free</source>
-        <translation type="vanished">1. Das Gelände ist nicht frei von Risiko</translation>
-    </message>
-    <message>
-        <source>2. More than 1 risk factor</source>
-        <translation type="vanished">2. Mehr als ein Risikofaktor</translation>
-    </message>
-    <message>
-        <source>3. Various risk factors</source>
-        <translation type="vanished">3. Verschiedene Risikofaktoren</translation>
-    </message>
-    <message>
-        <source>4. Considerable riskfactors</source>
-        <translation type="vanished">4. Erhebliche Risikofaktoren</translation>
-    </message>
-    <message>
-        <source>5. Many risk factors</source>
-        <translation type="vanished">5. Zahlreiche Risikofaktoren</translation>
-    </message>
-    <message>
-        <source>Orientation</source>
-        <translation type="vanished">Orientierung</translation>
-    </message>
-    <message>
-        <source>1. Paths and junctions well signed</source>
-        <translation type="vanished">1. Wege und Kreuzungen sind gut beschildert</translation>
-    </message>
-    <message>
-        <source>2. Footpaths or way marks which follow the route</source>
-        <translation type="vanished">2. Fußwege oder Markierungen die der Route folgen</translation>
-    </message>
-    <message>
-        <source>3. Demands orientation by identification of geographic features and compass points</source>
-        <translation type="vanished">3. Verlangt eine Orientierung über Landmarken und Kompasspunkte</translation>
-    </message>
-    <message>
-        <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
-        <translation type="vanished">4. Verlangt navigatorische Fähigkeiten, die über das Interpretieren von Karten und Umgebung herausgehen</translation>
-    </message>
-    <message>
-        <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
-        <translation type="vanished">5. Schwierige Navigation erschwert zusätzlich durch zu vermeidende Gefahren</translation>
-    </message>
-    <message>
-        <source>Terrain underfoot</source>
-        <translation type="vanished">Gelände (Weg)</translation>
-    </message>
-    <message>
-        <source>1. Easy walking</source>
-        <translation type="vanished">1 Einfaches Gehgelände</translation>
-    </message>
-    <message>
-        <source>2. Bridleways and well made footpaths</source>
-        <translation type="vanished">2. Reitwege und gute Fußwege</translation>
-    </message>
-    <message>
-        <source>3. Rocky stairways, rough ground and screes</source>
-        <translation type="vanished">3. Felsige Stufen, rauer Untergrund und Platten</translation>
-    </message>
-    <message>
-        <source>4. Contains sections where the use of hands is necessary for balance</source>
-        <translation type="vanished">4. Hat Abschnitte bei denen man die Hände zur Ballance benötigt</translation>
-    </message>
-    <message>
-        <source>5. Scrambling, pulling on hands and arms for progress</source>
-        <translation type="vanished">5. Kletter, massiver Einsatz der Arme</translation>
-    </message>
-    <message>
-        <source>Effort required </source>
-        <translation type="vanished">Benötigter Einsatz</translation>
-    </message>
-    <message>
-        <source>1. Less than one hour of continuous walking</source>
-        <translation type="vanished">1. Kürzer als eine Stunde gehen</translation>
-    </message>
-    <message>
-        <source>2. From 1 to 3 hours of continuous walking</source>
-        <translation type="vanished">2. Ein bis drei Stunden gehen</translation>
-    </message>
-    <message>
-        <source>3. From 3 to 6 hours of continuous walking</source>
-        <translation type="vanished">3. Drei bis 6 Stunden gehen</translation>
-    </message>
-    <message>
-        <source>4. From 6 to 10 hours of continuous walking</source>
-        <translation type="vanished">4. Sechs bis 10 Stunden gehen</translation>
-    </message>
-    <message>
-        <source>5. More than 10 hours of continuous walking</source>
-        <translation type="vanished">5. Mehr als 10 Stunden gehen</translation>
-    </message>
-    <message>
-        <source>IBP Index</source>
-        <translation type="vanished">IBP Index</translation>
-    </message>
-    <message>
-        <source>RNG (Running)</source>
-        <translation type="vanished">RNG (Laufen)</translation>
-    </message>
-    <message>
-        <source>Cardio</source>
-        <translation type="vanished">Kardio</translation>
-    </message>
-    <message>
-        <source>Max. heart rate</source>
-        <translation type="vanished">Max. Puls</translation>
-    </message>
-    <message>
-        <source>Min. heart rate</source>
-        <translation type="vanished">Min. Puls</translation>
-    </message>
-    <message>
-        <source>cal. consumption</source>
-        <translation type="vanished">Kalorienverbrauch</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation type="vanished">Details</translation>
     </message>
 </context>
 </TS>

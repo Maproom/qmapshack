@@ -40,7 +40,6 @@ private:
     void checkInput();
     QString &icon;
     QString &name;
-
 };
 
 #endif //CSETUPICONANDNAME_H

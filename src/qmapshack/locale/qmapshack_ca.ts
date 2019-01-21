@@ -87,10 +87,6 @@
         <translation>Descens:</translation>
     </message>
     <message>
-        <source>Aeronautics</source>
-        <translation type="vanished">Aeronàutica</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="61"/>
         <source>Public Transport</source>
         <translation>Transport Públic</translation>
@@ -207,13 +203,6 @@
         <location filename="../canvas/CCanvas.cpp" line="981"/>
         <source>Setup Map Background</source>
         <translation>Configura el Fons del Mapa</translation>
-    </message>
-</context>
-<context>
-    <name>CColorChooser</name>
-    <message>
-        <source>Esc.</source>
-        <translation type="vanished">Esc.</translation>
     </message>
 </context>
 <context>
@@ -470,7 +459,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="44"/>
         <source>Failed to load file: %1</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
@@ -487,25 +476,50 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
 <context>
     <name>CDetailsGeoCache</name>
     <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="47"/>
+        <source>Archived</source>
+        <translation type="unfinished">Arxivat</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="51"/>
+        <source>Available</source>
+        <translation type="unfinished">Disponible</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="55"/>
+        <source>Not Available</source>
+        <translation type="unfinished">No disponible</translation>
+    </message>
+    <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
+        <source>Needs Maintenance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
         <source>none</source>
         <translation>cap</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="132"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="178"/>
         <source>???</source>
         <translation>???</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="159"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="118"/>
+        <source> by </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="205"/>
         <source>Searching for images...</source>
         <translation>Cercant imatges...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="265"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="311"/>
         <source>No images found</source>
-        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
+        <translation>  No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -696,7 +710,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>Imatge%1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1092"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1103"/>
         <source>Unknown</source>
         <translation>Desconegut</translation>
     </message>
@@ -769,7 +783,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="166"/>
         <source>Save project as %1</source>
-        <translation>&#xa0; Desa el projecte com a %1</translation>
+        <translation>  Desa el projecte com a %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="170"/>
@@ -826,34 +840,6 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
 </context>
 <context>
     <name>CFilterSpeed</name>
-    <message>
-        <source>City</source>
-        <translation type="vanished">Ciutat</translation>
-    </message>
-    <message>
-        <source>Trekking</source>
-        <translation type="vanished">Tresc</translation>
-    </message>
-    <message>
-        <source>Sportive</source>
-        <translation type="vanished">Esportista</translation>
-    </message>
-    <message>
-        <source>Mountain</source>
-        <translation type="vanished">Muntanya</translation>
-    </message>
-    <message>
-        <source>Custom 0</source>
-        <translation type="vanished">Personalitzat 0</translation>
-    </message>
-    <message>
-        <source>Custom 1</source>
-        <translation type="vanished">Personalitzat 1</translation>
-    </message>
-    <message>
-        <source>Custom 2</source>
-        <translation type="vanished">Personalitzat 2</translation>
-    </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="127"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
@@ -1016,12 +1002,12 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
         <source>Failed to open FIT file %1.</source>
-        <translation>&#xa0; No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
+        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
     </message>
 </context>
 <context>
@@ -1521,14 +1507,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>, %1%2</translation>
     </message>
     <message>
-        <source>Invalid points....</source>
-        <translation type="vanished">punts invàlids....</translation>
-    </message>
-    <message>
-        <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation type="vanished">El track &apos;%1&apos; té %2 punts invàlids dels %3 punts que es mostren. Vols amagar els punts invàlids?</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="320"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1792"/>
         <source>min.</source>
@@ -1747,10 +1725,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Changed average moving speed depending on slope to %1%2.</source>
-        <translation type="vanished">S&apos;ha canviat la velocitat en moviment segons el pendent de %1%2.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/filter.cpp" line="355"/>
         <source>Changed speed to %1%2.</source>
         <translation>Velocitat canviada a %1%2.</translation>
@@ -1788,21 +1762,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
 </context>
 <context>
     <name>CGisItemWpt</name>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="627"/>
-        <source>Archived</source>
-        <translation>Arxivat</translation>
-    </message>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="631"/>
-        <source>Available</source>
-        <translation>Disponible</translation>
-    </message>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="635"/>
-        <source>Not Available</source>
-        <translation>No disponible</translation>
-    </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="106"/>
         <source>_Clone</source>
@@ -2251,18 +2210,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Edita els Punts de l&apos;Àrea</translation>
     </message>
     <message>
-        <source>Create Route</source>
-        <translation type="vanished">Crear Ruta</translation>
-    </message>
-    <message>
-        <source>Change Icon (sel. waypt. only)</source>
-        <translation type="vanished">Canviar Icona (sols sel. fita)</translation>
-    </message>
-    <message>
-        <source>Set Track Activity</source>
-        <translation type="vanished">Assigna una Activitat al Track</translation>
-    </message>
-    <message>
         <location filename="../gis/CGisListWks.cpp" line="1046"/>
         <location filename="../gis/CGisListWks.cpp" line="1131"/>
         <source>Set Track Color</source>
@@ -2294,18 +2241,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <location filename="../gis/CGisListWks.cpp" line="837"/>
         <source>Loading workspace. Please wait.</source>
         <translation>S&apos;està carregant l&apos;espai de treball. Espera.</translation>
-    </message>
-    <message>
-        <source>Track</source>
-        <translation type="obsolete">Track</translation>
-    </message>
-    <message>
-        <source>Route</source>
-        <translation type="obsolete">Itinerari</translation>
-    </message>
-    <message>
-        <source>Area</source>
-        <translation type="obsolete">Àrea</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1415"/>
@@ -4398,14 +4333,6 @@ no és una coordenada vàlida en la configuración activa:
         <translation>perfil: %1, alternativa: %2</translation>
     </message>
     <message>
-        <source>Error:</source>
-        <translation type="vanished">Error:</translation>
-    </message>
-    <message>
-        <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation type="vanished">QMapShack es comunica amb BRouter mitjançant una connexió de xarxa. De normal utilitza una adreça especial a la que no es pot accedir si no és a traves del dispositiu. De totes maneres BRouter rep els intents de connexió de totes les interfícies disponibles. Si us hi connecteu des de la vostra xarxa privada, amb un tallafocs actiu, no hi ha d&apos;haver cap problema. Si us hi connecteu mitjançant una xarxa pública aleshores cada port és un risc ja que el pot utilitzar qualsevol persona per posar en risc el vostre sistema. En aquest cas, no us recomanem utilitzar el servei BRouter en local. Si veieu aquest avís i utilitzeu una versió de BRouter &gt;= 1.4.10 s&apos;hauria de reforçar la vinculació de l&apos;adreça local configurant el nom de l&apos;amfitrió com a &quot;localhost&quot; i en la configuració del mode expert activant la opció &quot;Bind to hostname only&quot;.</translation>
-    </message>
-    <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="393"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="526"/>
         <source>response is empty</source>
@@ -4444,33 +4371,9 @@ no és una coordenada vàlida en la configuración activa:
         <translation>&lt;br/&gt;Calculant el temps: %1s</translation>
     </message>
     <message>
-        <source>running</source>
-        <translation type="vanished">correr</translation>
-    </message>
-    <message>
-        <source>starting</source>
-        <translation type="vanished">iniciant</translation>
-    </message>
-    <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="645"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (Versió %1.%2.%3)</translation>
-    </message>
-    <message>
-        <source>Warning...</source>
-        <translation type="vanished">Avís...</translation>
-    </message>
-    <message>
-        <source>I understand the risk. Don&apos;t tell me again.</source>
-        <translation type="vanished">Entenc el risc. No m&apos;ho diguis un altre cop.</translation>
-    </message>
-    <message>
-        <source>stopped</source>
-        <translation type="vanished">Aturat</translation>
-    </message>
-    <message>
-        <source>not installed</source>
-        <translation type="vanished">No instal·lat</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
@@ -7107,59 +7010,104 @@ No vull llegir tota la documentació!</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="40"/>
-        <source>Position:</source>
-        <translation>Posició:</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="47"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="73"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="86"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="99"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="112"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="125"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="151"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="79"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="92"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="105"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="118"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="131"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="144"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="157"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="164"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="177"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="190"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="252"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="229"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="262"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="269"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="472"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="488"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="60"/>
-        <source>Difficulty</source>
-        <translation>Dificultat</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="138"/>
-        <source>Terrain</source>
-        <translation>Terreny</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="214"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="371"/>
         <source>Update spoilers</source>
         <translation>Actualitzar spoilers</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="217"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="266"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="374"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="456"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="354"/>
         <source>about:blank</source>
-        <translation type="vanished">about:blank</translation>
+        <translation>about:blank</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="284"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="53"/>
+        <source>Owner:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="66"/>
+        <source>Terrain:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
+        <source>Difficulty:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="216"/>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="242"/>
+        <source>Date Hidden:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="255"/>
+        <source>Last Found:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="288"/>
+        <source>Listing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="310"/>
         <source>Hint:</source>
         <translation>Consell:</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="315"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="337"/>
+        <source>Visit Website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="347"/>
+        <source>Logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="363"/>
+        <source>Pictures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="408"/>
         <source>TextLabel</source>
         <translation>EtiquetaDeText</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="434"/>
+        <source>QMS</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7402,14 +7350,6 @@ No vull llegir tota la documentació!</translation>
         <translation>Màxim</translation>
     </message>
     <message>
-        <source>Use/edit user defined visibility of arrows for this track</source>
-        <translation type="vanished">Utilitza/edita mostrar fletxes de direcció en el track</translation>
-    </message>
-    <message>
-        <source>Use/edit system&apos;s visibility of arrows for all tracks</source>
-        <translation type="vanished">Utilitza/edita mostrar fletxes de direcció en tots els tracks</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="797"/>
         <source>Minimum</source>
         <translation>Mínim</translation>
@@ -7435,25 +7375,9 @@ No vull llegir tota la documentació!</translation>
         <translation>Amplada</translation>
     </message>
     <message>
-        <source>Use/edit user defined scale factor for this track</source>
-        <translation type="vanished">Utilitza/edita l&apos;escala del track definida per l&apos;usuari</translation>
-    </message>
-    <message>
-        <source>Use/edit system&apos;s default factor for all tracks</source>
-        <translation type="vanished">Utilitza/edita el valor per defecte de l&apos;escala a tots els tracks</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="683"/>
         <source>with arrows</source>
         <translation>amb fletxes</translation>
-    </message>
-    <message>
-        <source>x </source>
-        <translation type="vanished">x</translation>
-    </message>
-    <message>
-        <source>User defined limits for this track</source>
-        <translation type="vanished">Límits d&apos;aquest track definits per l&apos;usuari&#xa0;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="74"/>
@@ -7493,10 +7417,6 @@ No vull llegir tota la documentació!</translation>
         <translation>Límits automàtics</translation>
     </message>
     <message>
-        <source>User defined limits for all tracks</source>
-        <translation type="vanished">Límits per a tots els tracks definits per l&apos;usuari </translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="712"/>
         <source>Change the line width for this particular track.</source>
         <translation type="unfinished"></translation>
@@ -7510,10 +7430,6 @@ No vull llegir tota la documentació!</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="817"/>
         <source>Color</source>
         <translation>Color</translation>
-    </message>
-    <message>
-        <source>points</source>
-        <translation type="obsolete">punts</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="894"/>
@@ -7550,42 +7466,6 @@ No vull llegir tota la documentació!</translation>
         <translation>Punts</translation>
     </message>
     <message>
-        <source>Time</source>
-        <translation type="vanished">Temps</translation>
-    </message>
-    <message>
-        <source>Ele.</source>
-        <translation type="vanished">Alt.</translation>
-    </message>
-    <message>
-        <source>Delta</source>
-        <translation type="vanished">Delta</translation>
-    </message>
-    <message>
-        <source>Dist.</source>
-        <translation type="vanished">Dist.</translation>
-    </message>
-    <message>
-        <source>Speed</source>
-        <translation type="vanished">Velocitat</translation>
-    </message>
-    <message>
-        <source>Slope</source>
-        <translation type="vanished">Pendent</translation>
-    </message>
-    <message>
-        <source>Ascent</source>
-        <translation type="vanished">Ascens</translation>
-    </message>
-    <message>
-        <source>Descent</source>
-        <translation type="vanished">Descens</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Possició</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1512"/>
         <source>Filter</source>
         <translation>Filtre</translation>
@@ -7620,10 +7500,6 @@ No vull llegir tota la documentació!</translation>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="374"/>
         <source>-</source>
         <translation>-</translation>
-    </message>
-    <message>
-        <source>Ele.</source>
-        <translation type="vanished">Alt.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="106"/>
@@ -8145,58 +8021,6 @@ No vull llegir tota la documentació!</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Speed</source>
-        <translation type="vanished">Velocitat</translation>
-    </message>
-    <message>
-        <source> Type</source>
-        <translation type="vanished">Típus</translation>
-    </message>
-    <message>
-        <source>Max Speed</source>
-        <translation type="vanished">Velocitat màxima</translation>
-    </message>
-    <message>
-        <source>Plain Level:</source>
-        <translation type="vanished">Nivell Pla:</translation>
-    </message>
-    <message>
-        <source>at positive Slope</source>
-        <translation type="vanished">en Pendent positiu</translation>
-    </message>
-    <message>
-        <source>Min Speed</source>
-        <translation type="vanished">Velocitat mínima</translation>
-    </message>
-    <message>
-        <source>Uphill:</source>
-        <translation type="vanished">Pujada:</translation>
-    </message>
-    <message>
-        <source>Downhill:</source>
-        <translation type="vanished">Baixada:</translation>
-    </message>
-    <message>
-        <source>Speed at zero Slope</source>
-        <translation type="vanished">Velocitat en un Pendent zero</translation>
-    </message>
-    <message>
-        <source>at negative Slope</source>
-        <translation type="vanished">en Pendent negatiu</translation>
-    </message>
-    <message>
-        <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation type="vanished">Els valors positius i negatius dels pendents definits per l&apos;usuari es canviaran pels valors màxim i mínim dels pendents del track.</translation>
-    </message>
-    <message>
-        <source>Set min/max slopes from Track</source>
-        <translation type="vanished">Estableix el pendent min/max d&apos;un Track</translation>
-    </message>
-    <message>
-        <source>not yet implemented</source>
-        <translation type="vanished">pendent d&apos;implementar</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="181"/>
         <source>Constant</source>
         <translation>Constant</translation>
@@ -8205,10 +8029,6 @@ No vull llegir tota la documentació!</translation>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="186"/>
         <source>Cycling</source>
         <translation>Ciclisme</translation>
-    </message>
-    <message>
-        <source> km/h</source>
-        <translation type="vanished"> km/h</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="114"/>
@@ -8731,10 +8551,6 @@ Es tracta d&apos;un element nou o bé algú l&apos;ha esborrat de la base de dad
         <translation>&lt;h4&gt;Comentari:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;--- sense comentari ---&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/IGisItem.cpp" line="829"/>
         <location filename="../gis/IGisItem.cpp" line="864"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
@@ -8919,10 +8735,6 @@ Nom del fitxer: %1</translation>
         <location filename="../gis/IGisWorkspace.ui" line="50"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation>Canvia l&apos;opacitat de tots els elements GIS del kapa.</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation type="vanished">Filtre</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="66"/>
@@ -11360,14 +11172,6 @@ o
         <translation>Mostra a la pantalla el perfil i informació detallada sobre els punts.</translation>
     </message>
     <message>
-        <source>Select a range of points.</source>
-        <translation type="vanished">Selecciona un interval de punts.</translation>
-    </message>
-    <message>
-        <source>Edit position of track points.</source>
-        <translation type="vanished">Editar la posició dels punts del track.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
         <source>Select a range of points. You can use that tool to:
 
@@ -11900,25 +11704,6 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
     </message>
 </context>
 <context>
-    <name>ISetupFilter</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Formulari</translation>
-    </message>
-    <message>
-        <source>Apply filter to</source>
-        <translation type="vanished">Aplica el filtre a</translation>
-    </message>
-    <message>
-        <source>name only</source>
-        <translation type="vanished">només el nom</translation>
-    </message>
-    <message>
-        <source>complete text</source>
-        <translation type="vanished">text complet</translation>
-    </message>
-</context>
-<context>
     <name>ISetupFolder</name>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="14"/>
@@ -11967,39 +11752,6 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="39"/>
         <source>Name</source>
         <translation type="unfinished">Nom</translation>
-    </message>
-</context>
-<context>
-    <name>ISetupNewWpt</name>
-    <message>
-        <source>New Waypoint...</source>
-        <translation type="vanished">Nova Fita...</translation>
-    </message>
-    <message>
-        <source>Symbol</source>
-        <translation type="vanished">Símbol</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Posició</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="vanished">Nom</translation>
-    </message>
-    <message>
-        <source>Bad position format. Must be: 
-&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
-or
-&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation type="vanished">Format amb possicions incorrectes. Ha de ser: 
-&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
-o
-&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
     </message>
 </context>
 <context>
@@ -12447,7 +12199,7 @@ o
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>
@@ -12565,101 +12317,6 @@ o
         <location filename="../helpers/IWptIconDialog.ui" line="95"/>
         <source>All custom icons have to be *.bmp or *.png format.</source>
         <translation>Les icones personalitzades han d&apos;estar en format *.bmp o bé *.png.</translation>
-    </message>
-</context>
-<context>
-    <name>TCyclingTourSummary</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulari</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation type="obsolete">Detalls</translation>
-    </message>
-    <message>
-        <source>Equipment</source>
-        <translation type="obsolete">Equipament</translation>
-    </message>
-    <message>
-        <source>night gear</source>
-        <translation type="obsolete">equipació nocturna</translation>
-    </message>
-    <message>
-        <source>Character</source>
-        <translation type="obsolete">Caràcter</translation>
-    </message>
-    <message>
-        <source>large ascend</source>
-        <translation type="obsolete">pujada llarga</translation>
-    </message>
-    <message>
-        <source>long distance</source>
-        <translation type="obsolete">llarga distància</translation>
-    </message>
-    <message>
-        <source>Rating</source>
-        <translation type="obsolete"> Valoració</translation>
-    </message>
-    <message>
-        <source>Rating 5 stars</source>
-        <translation type="obsolete">Valoració 5 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 4 stars</source>
-        <translation type="obsolete">Valoració 4 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 3 stars</source>
-        <translation type="obsolete">Valoració 3 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 2 stars</source>
-        <translation type="obsolete">Valoració 2 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 1 star</source>
-        <translation type="obsolete">Valoració 1 estrella</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="obsolete">Meteorologia</translation>
-    </message>
-    <message>
-        <source>sunny</source>
-        <translation type="obsolete">assolellat</translation>
-    </message>
-    <message>
-        <source>foggy</source>
-        <translation type="obsolete">boira</translation>
-    </message>
-    <message>
-        <source>clouds</source>
-        <translation type="obsolete">nuvols</translation>
-    </message>
-    <message>
-        <source>windy</source>
-        <translation type="obsolete"> ventades</translation>
-    </message>
-    <message>
-        <source>rain</source>
-        <translation type="obsolete">pluja</translation>
-    </message>
-    <message>
-        <source>humid</source>
-        <translation type="obsolete">humitat</translation>
-    </message>
-    <message>
-        <source>snow</source>
-        <translation type="obsolete">neu</translation>
-    </message>
-    <message>
-        <source>hail/soft hail</source>
-        <translation type="obsolete">calamarsa/calamarsa suau</translation>
-    </message>
-    <message>
-        <source>Participants</source>
-        <translation type="obsolete">Participants</translation>
     </message>
 </context>
 <context>
@@ -12858,240 +12515,6 @@ o
         <location filename="../templates/Hiking_Tour_Summary.ui" line="338"/>
         <source>Details</source>
         <translation type="unfinished">Detalls</translation>
-    </message>
-</context>
-<context>
-    <name>THikingTourSummaryAdvanced</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulari</translation>
-    </message>
-    <message>
-        <source>Character</source>
-        <translation type="obsolete">Caràcter</translation>
-    </message>
-    <message>
-        <source>easy hiking</source>
-        <translation type="obsolete">caminada fàcil</translation>
-    </message>
-    <message>
-        <source>large ascend</source>
-        <translation type="obsolete">pujada llarga</translation>
-    </message>
-    <message>
-        <source>alpine</source>
-        <translation type="obsolete">alpí</translation>
-    </message>
-    <message>
-        <source>long distance</source>
-        <translation type="obsolete">llarga distància</translation>
-    </message>
-    <message>
-        <source>climbing</source>
-        <translation type="obsolete">escalada</translation>
-    </message>
-    <message>
-        <source>via ferrata</source>
-        <translation type="obsolete">via ferrada</translation>
-    </message>
-    <message>
-        <source>aborted</source>
-        <translation type="obsolete">Interromput</translation>
-    </message>
-    <message>
-        <source>Rating</source>
-        <translation type="obsolete"> Valoració</translation>
-    </message>
-    <message>
-        <source>Rating 5 stars</source>
-        <translation type="obsolete">Valoració 5 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 4 stars</source>
-        <translation type="obsolete">Valoració 4 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 3 stars</source>
-        <translation type="obsolete">Valoració 3 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 2 stars</source>
-        <translation type="obsolete">Valoració 2 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 1 star</source>
-        <translation type="obsolete">Valoració 1 estrella</translation>
-    </message>
-    <message>
-        <source>Equipment</source>
-        <translation type="obsolete">Equipament</translation>
-    </message>
-    <message>
-        <source>climbing gear</source>
-        <translation type="obsolete">equip d&apos;escalada</translation>
-    </message>
-    <message>
-        <source>ski</source>
-        <translation type="obsolete">esquí</translation>
-    </message>
-    <message>
-        <source>ferrata gear</source>
-        <translation type="obsolete">equip per a vies ferrades</translation>
-    </message>
-    <message>
-        <source>camping gear</source>
-        <translation type="obsolete">equip de càmping</translation>
-    </message>
-    <message>
-        <source>night gear</source>
-        <translation type="obsolete">equipació nocturna</translation>
-    </message>
-    <message>
-        <source>snow shoes</source>
-        <translation type="obsolete">sabates de neu</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="obsolete">Meteorologia</translation>
-    </message>
-    <message>
-        <source>windy</source>
-        <translation type="obsolete"> ventades</translation>
-    </message>
-    <message>
-        <source>foggy</source>
-        <translation type="obsolete">boira</translation>
-    </message>
-    <message>
-        <source>humid</source>
-        <translation type="obsolete">humitat</translation>
-    </message>
-    <message>
-        <source>clouds</source>
-        <translation type="obsolete">nuvols</translation>
-    </message>
-    <message>
-        <source>rain</source>
-        <translation type="obsolete">pluja</translation>
-    </message>
-    <message>
-        <source>snow</source>
-        <translation type="obsolete">neu</translation>
-    </message>
-    <message>
-        <source>hail/soft hail</source>
-        <translation type="obsolete">calamarsa/calamarsa suau</translation>
-    </message>
-    <message>
-        <source>sunny</source>
-        <translation type="obsolete">assolellat</translation>
-    </message>
-    <message>
-        <source>Participants</source>
-        <translation type="obsolete">Participants</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation type="obsolete">Detalls</translation>
-    </message>
-</context>
-<context>
-    <name>TRunningSummary</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulari</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="obsolete">Meteorologia</translation>
-    </message>
-    <message>
-        <source>sunny</source>
-        <translation type="obsolete">assolellat</translation>
-    </message>
-    <message>
-        <source>foggy</source>
-        <translation type="obsolete">boira</translation>
-    </message>
-    <message>
-        <source>clouds</source>
-        <translation type="obsolete">nuvols</translation>
-    </message>
-    <message>
-        <source>windy</source>
-        <translation type="obsolete"> ventades</translation>
-    </message>
-    <message>
-        <source>rain</source>
-        <translation type="obsolete">pluja</translation>
-    </message>
-    <message>
-        <source>humid</source>
-        <translation type="obsolete">humitat</translation>
-    </message>
-    <message>
-        <source>snow</source>
-        <translation type="obsolete">neu</translation>
-    </message>
-    <message>
-        <source>hail/soft hail</source>
-        <translation type="obsolete">calamarsa/calamarsa suau</translation>
-    </message>
-    <message>
-        <source>Character</source>
-        <translation type="obsolete">Caràcter</translation>
-    </message>
-    <message>
-        <source>Rating 5 stars</source>
-        <translation type="obsolete">Valoració 5 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 4 stars</source>
-        <translation type="obsolete">Valoració 4 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 3 stars</source>
-        <translation type="obsolete">Valoració 3 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 2 stars</source>
-        <translation type="obsolete">Valoració 2 estrelles</translation>
-    </message>
-    <message>
-        <source>Rating 1 star</source>
-        <translation type="obsolete">Valoració 1 estrella</translation>
-    </message>
-    <message>
-        <source>Rating</source>
-        <translation type="obsolete"> Valoració</translation>
-    </message>
-    <message>
-        <source>long distance</source>
-        <translation type="obsolete">llarga distància</translation>
-    </message>
-    <message>
-        <source>large ascend</source>
-        <translation type="obsolete">pujada llarga</translation>
-    </message>
-    <message>
-        <source>easy hiking</source>
-        <translation type="obsolete">caminada fàcil</translation>
-    </message>
-    <message>
-        <source>Equipment</source>
-        <translation type="obsolete">Equipament</translation>
-    </message>
-    <message>
-        <source>night gear</source>
-        <translation type="obsolete">equipació nocturna</translation>
-    </message>
-    <message>
-        <source>Participants</source>
-        <translation type="obsolete">Participants</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation type="obsolete">Detalls</translation>
     </message>
 </context>
 </TS>

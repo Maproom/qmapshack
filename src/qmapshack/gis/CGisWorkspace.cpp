@@ -320,13 +320,13 @@ void CGisWorkspace::slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trk
     }
 }
 
-IGisProject * CGisWorkspace::selectProject()
+IGisProject * CGisWorkspace::selectProject(bool forceSelect)
 {
     QString key = IGisProject::getUserFocus();
     QString name;
     IGisProject::type_e type = IGisProject::eTypeQms;
 
-    if(key.isEmpty())
+    if(key.isEmpty() || forceSelect)
     {
         CSelectProjectDialog dlg(key, name, type, treeWks);
         if(dlg.exec() == QDialog::Rejected)
@@ -691,7 +691,7 @@ void CGisWorkspace::copyItemByKey(const IGisItem::key_t &key)
         return;
     }
 
-    IGisProject *project = selectProject();
+    IGisProject *project = selectProject(true);
     if(nullptr == project)
     {
         return;
@@ -708,7 +708,7 @@ void CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t> &keys)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    IGisProject * project = selectProject();
+    IGisProject * project = selectProject(true);
     if(nullptr == project)
     {
         return;
@@ -922,7 +922,7 @@ void CGisWorkspace::addWptByPos(QPointF pt, const QString& name, const QString& 
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    IGisProject * project = CGisWorkspace::self().selectProject();
+    IGisProject * project = CGisWorkspace::self().selectProject(false);
     if(nullptr == project)
     {
         return;

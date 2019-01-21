@@ -161,7 +161,7 @@ void CMouseRuler::slotToWpt()
         return;
     }
 
-    IGisProject * project = CGisWorkspace::self().selectProject();
+    IGisProject * project = CGisWorkspace::self().selectProject(false);
     if(nullptr == project)
     {
         return;

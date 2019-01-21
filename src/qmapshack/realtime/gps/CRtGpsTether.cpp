@@ -52,7 +52,7 @@ QString CRtGpsTether::getHelp() const
 
 void CRtGpsTether::loadSettings(QSettings& cfg)
 {
-    cfg.beginGroup("device");
+    cfg.beginGroup("device/GpsTether");
     host = cfg.value("host", "").toString();
     port = cfg.value("port", 0).toUInt();
     cfg.endGroup();
@@ -62,7 +62,7 @@ void CRtGpsTether::loadSettings(QSettings& cfg)
 
 void CRtGpsTether::saveSettings(QSettings& cfg) const
 {
-    cfg.beginGroup("device");
+    cfg.beginGroup("device/GpsTether");
     cfg.setValue("host", host);
     cfg.setValue("port", port);
     cfg.endGroup();

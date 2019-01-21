@@ -16,43 +16,26 @@
 
 **********************************************************************************************/
 
-#include "realtime/IRtSource.h"
-#include "realtime/opensky/CRtOpenSky.h"
-#include "realtime/gps/CRtGps.h"
+#ifndef CRTGPSTETHERSETUP_H
+#define CRTGPSTETHERSETUP_H
 
-#include <QtWidgets>
+#include "ui_IRtGpsTetherSetup.h"
 
-QMutex IRtSource::mutex(QMutex::Recursive);
+class CRtGpsTether;
 
-IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget *parent)
-    : QObject(parent)
-    , QTreeWidgetItem(parent)
-    , type(type)
-    , singleInstanceOnly(singleInstanceOnly)
+class CRtGpsTetherSetup : public QDialog, private Ui::IRtGPSTetherSetup
 {
-}
+    Q_OBJECT
+public:
+    CRtGpsTetherSetup(CRtGpsTether& dev, QWidget * parent);
+    virtual ~CRtGpsTetherSetup() = default;
 
-void IRtSource::loadSettings(QSettings& cfg)
-{
-    setCheckState(eColumnCheckBox, Qt::CheckState(cfg.value("checkState", Qt::Checked).toInt()));
-}
+public slots:
+    void accept() override;
 
-void IRtSource::saveSettings(QSettings& cfg) const
-{
-    cfg.setValue("checkState", checkState(eColumnCheckBox));
-}
+private:
+    CRtGpsTether& dev;
+};
 
+#endif //CRTGPSTETHERSETUP_H
 
-IRtSource* IRtSource::create(int type, QTreeWidget * parent)
-{
-    switch(type)
-    {
-    case eTypeOpenSky:
-        return new CRtOpenSky(parent);
-
-    case eTypeGps:
-        return new CRtGps(parent);
-    }
-
-    return nullptr;
-}

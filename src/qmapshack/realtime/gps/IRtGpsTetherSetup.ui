@@ -1,38 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IRtSelectSource</class>
- <widget class="QDialog" name="IRtSelectSource">
+ <class>IRtGPSTetherSetup</class>
+ <widget class="QDialog" name="IRtGPSTetherSetup">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>385</height>
+    <width>226</width>
+    <height>116</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Select a source...</string>
+   <string>Setup host...</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="labelHelp">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Host</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Port</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineHost"/>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="linePort">
+       <property name="inputMask">
+        <string>00000</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
-    <widget class="QListWidget" name="listWidget">
-     <property name="iconSize">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
       <size>
-       <width>64</width>
-       <height>64</height>
+       <width>20</width>
+       <height>40</height>
       </size>
      </property>
-    </widget>
+    </spacer>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -51,7 +72,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>IRtSelectSource</receiver>
+   <receiver>IRtGPSTetherSetup</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -67,7 +88,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>IRtSelectSource</receiver>
+   <receiver>IRtGPSTetherSetup</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

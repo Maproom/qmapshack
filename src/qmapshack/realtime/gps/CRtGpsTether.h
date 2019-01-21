@@ -16,43 +16,45 @@
 
 **********************************************************************************************/
 
-#include "realtime/IRtSource.h"
-#include "realtime/opensky/CRtOpenSky.h"
-#include "realtime/gps/CRtGps.h"
+#ifndef CRTGPSTETHER_H
+#define CRTGPSTETHER_H
 
-#include <QtWidgets>
+#include "realtime/gps/IRtGpsDevice.h"
 
-QMutex IRtSource::mutex(QMutex::Recursive);
+#include <QNmeaPositionInfoSource>
+#include <QTcpSocket>
 
-IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget *parent)
-    : QObject(parent)
-    , QTreeWidgetItem(parent)
-    , type(type)
-    , singleInstanceOnly(singleInstanceOnly)
+class CRtGpsTether : public QNmeaPositionInfoSource, public IRtGpsDevice
 {
-}
+    Q_OBJECT
+public:
+    CRtGpsTether(QObject * parent);
+    virtual ~CRtGpsTether() = default;
 
-void IRtSource::loadSettings(QSettings& cfg)
-{
-    setCheckState(eColumnCheckBox, Qt::CheckState(cfg.value("checkState", Qt::Checked).toInt()));
-}
-
-void IRtSource::saveSettings(QSettings& cfg) const
-{
-    cfg.setValue("checkState", checkState(eColumnCheckBox));
-}
-
-
-IRtSource* IRtSource::create(int type, QTreeWidget * parent)
-{
-    switch(type)
+    bool hasConfig() const override
     {
-    case eTypeOpenSky:
-        return new CRtOpenSky(parent);
-
-    case eTypeGps:
-        return new CRtGps(parent);
+        return true;
     }
+    QString getConfig() const override;
+    QString getHelp() const override;
+    void loadSettings(QSettings& cfg) override;
+    void saveSettings(QSettings& cfg) const override;
+    void configure() override;
 
-    return nullptr;
-}
+private slots:
+    void slotConnected();
+    void slotError(QAbstractSocket::SocketError error);
+    void slotState(QAbstractSocket::SocketState state);
+
+private:
+    void connectToHost();
+
+private:
+    friend class CRtGpsTetherSetup;
+    QString host;
+    quint16 port = 0;
+    QTcpSocket * socket;
+};
+
+#endif //CRTGPSTETHER_H
+

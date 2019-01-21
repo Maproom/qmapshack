@@ -102,6 +102,15 @@ QStringList CRtGps::getDevices() const
 
 bool CRtGps::setDevice(const QString& name)
 {
+    IRtGpsDevice * dev = dynamic_cast<IRtGpsDevice*>(device.data());
+    if(dev != nullptr)
+    {
+        SETTINGS;
+        cfg.beginGroup(cfgGroup);
+        dev->saveSettings(cfg);
+        cfg.endGroup();
+    }
+
     delete device;
 
     qDebug() << "Set GPS device:" << name;

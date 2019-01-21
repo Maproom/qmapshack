@@ -109,6 +109,7 @@ void CRtGpsInfo::slotConfigure()
     if(intDevice != nullptr)
     {
         intDevice->configure();
+        slotUpdate();
     }
 }
 

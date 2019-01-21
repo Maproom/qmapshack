@@ -479,22 +479,22 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="47"/>
         <source>Archived</source>
-        <translation type="unfinished">Архивировано</translation>
+        <translation>Архивировано</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="51"/>
         <source>Available</source>
-        <translation type="unfinished">Доступно</translation>
+        <translation>Доступно</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="55"/>
         <source>Not Available</source>
-        <translation type="unfinished">Не доступно</translation>
+        <translation>Не доступно</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
         <source>Needs Maintenance</source>
-        <translation type="unfinished"></translation>
+        <translation>Нуждается в обслуживании</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
@@ -510,7 +510,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="118"/>
         <source> by </source>
-        <translation type="unfinished"></translation>
+        <translation>, регистратор: </translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="205"/>
@@ -7069,37 +7069,37 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="53"/>
         <source>Owner:</source>
-        <translation type="unfinished"></translation>
+        <translation>Автор:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="66"/>
         <source>Terrain:</source>
-        <translation type="unfinished"></translation>
+        <translation>Местность:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
         <source>Difficulty:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сложность:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="216"/>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Величина:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="242"/>
         <source>Date Hidden:</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата сокрытия:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="255"/>
         <source>Last Found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата последнего обнаружения:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="288"/>
         <source>Listing</source>
-        <translation type="unfinished"></translation>
+        <translation>Перечень:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="310"/>
@@ -7109,17 +7109,17 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="337"/>
         <source>Visit Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Посетить веб-сайт</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="347"/>
         <source>Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Журнал</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="363"/>
         <source>Pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Снимки</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="408"/>
@@ -7129,7 +7129,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="434"/>
         <source>QMS</source>
-        <translation type="unfinished"></translation>
+        <translation>QMS</translation>
     </message>
 </context>
 <context>

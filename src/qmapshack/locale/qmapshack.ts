@@ -472,23 +472,48 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDetailsGeoCache</name>
     <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="47"/>
+        <source>Archived</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="51"/>
+        <source>Available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="55"/>
+        <source>Not Available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
+        <source>Needs Maintenance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
         <source>none</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="132"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="178"/>
         <source>???</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="159"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="118"/>
+        <source> by </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="205"/>
         <source>Searching for images...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="265"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="311"/>
         <source>No images found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -681,7 +706,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1092"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1103"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1733,21 +1758,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
 </context>
 <context>
     <name>CGisItemWpt</name>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="627"/>
-        <source>Archived</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="631"/>
-        <source>Available</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="635"/>
-        <source>Not Available</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="106"/>
         <source>_Clone</source>
@@ -6962,54 +6972,103 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="40"/>
-        <source>Position:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="47"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="73"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="86"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="99"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="112"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="125"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="151"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="79"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="92"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="105"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="118"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="131"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="144"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="157"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="164"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="177"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="190"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="252"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="229"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="262"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="269"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="472"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="488"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="60"/>
-        <source>Difficulty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="138"/>
-        <source>Terrain</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="214"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="371"/>
         <source>Update spoilers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="217"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="266"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="374"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="456"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="284"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="310"/>
         <source>Hint:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="315"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="53"/>
+        <source>Owner:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="66"/>
+        <source>Terrain:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
+        <source>Difficulty:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="216"/>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="242"/>
+        <source>Date Hidden:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="255"/>
+        <source>Last Found:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="288"/>
+        <source>Listing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="337"/>
+        <source>Visit Website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="347"/>
+        <source>Logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="354"/>
+        <source>about:blank</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="363"/>
+        <source>Pictures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="408"/>
         <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="434"/>
+        <source>QMS</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

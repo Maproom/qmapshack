@@ -87,10 +87,6 @@
         <translation>Спуск:</translation>
     </message>
     <message>
-        <source>Aeronautics</source>
-        <translation type="vanished">Аэронавтика</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="61"/>
         <source>Public Transport</source>
         <translation>Общественный транспорт</translation>
@@ -207,13 +203,6 @@
         <location filename="../canvas/CCanvas.cpp" line="981"/>
         <source>Setup Map Background</source>
         <translation>Настройка фона карт</translation>
-    </message>
-</context>
-<context>
-    <name>CColorChooser</name>
-    <message>
-        <source>Esc.</source>
-        <translation type="vanished">Esc.</translation>
     </message>
 </context>
 <context>
@@ -488,23 +477,48 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDetailsGeoCache</name>
     <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="47"/>
+        <source>Archived</source>
+        <translation type="unfinished">Архивировано</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="51"/>
+        <source>Available</source>
+        <translation type="unfinished">Доступно</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="55"/>
+        <source>Not Available</source>
+        <translation type="unfinished">Не доступно</translation>
+    </message>
+    <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
+        <source>Needs Maintenance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
         <source>none</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="132"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="178"/>
         <source>???</source>
         <translation>???</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="159"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="118"/>
+        <source> by </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="205"/>
         <source>Searching for images...</source>
         <translation>Поиск изображений...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="265"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="311"/>
         <source>No images found</source>
         <translation>Изображения не найдены</translation>
     </message>
@@ -697,7 +711,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Изображение %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1092"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1103"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
@@ -836,34 +850,6 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
 </context>
 <context>
     <name>CFilterSpeed</name>
-    <message>
-        <source>City</source>
-        <translation type="vanished">городской</translation>
-    </message>
-    <message>
-        <source>Trekking</source>
-        <translation type="vanished">треккинг</translation>
-    </message>
-    <message>
-        <source>Sportive</source>
-        <translation type="vanished">спортивный</translation>
-    </message>
-    <message>
-        <source>Mountain</source>
-        <translation type="vanished">горный</translation>
-    </message>
-    <message>
-        <source>Custom 0</source>
-        <translation type="vanished">пользовательский 0</translation>
-    </message>
-    <message>
-        <source>Custom 1</source>
-        <translation type="vanished">пользовательский 1</translation>
-    </message>
-    <message>
-        <source>Custom 2</source>
-        <translation type="vanished">пользовательский 2</translation>
-    </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="127"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
@@ -1177,10 +1163,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="35"/>
         <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
         <translation>&lt;b&gt;Добавить собственный сервис&lt;/b&gt;&lt;p&gt;Чтобы добавить сервис, вам нужно имя и URL с прототипами для координат. Прототипы:&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
-        <translation type="vanished">&lt;table&gt;&lt;tr&gt;&lt;th&gt;прототип&lt;/th&gt;&lt;th&gt;заменен на...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;долгота [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;широта [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="39"/>
@@ -1549,14 +1531,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>, %1%2</translation>
     </message>
     <message>
-        <source>Invalid points....</source>
-        <translation type="vanished">Неверные точки...</translation>
-    </message>
-    <message>
-        <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation type="vanished">Трек &apos;%1&apos; имеет %2 неверных точек из %3 видимых точек. Вы хотите скрыть неверные очки?</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="320"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1792"/>
         <source>min.</source>
@@ -1775,10 +1749,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Скрыть узлы дрейфа с нулевой скоростью. Параметры: расстояние: %1%2, относительный показатель: %3</translation>
     </message>
     <message>
-        <source>Changed average moving speed depending on slope to %1%2.</source>
-        <translation type="vanished">Изменена средняя скорость движения в зависимости от склона до %1 %2.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/filter.cpp" line="355"/>
         <source>Changed speed to %1%2.</source>
         <translation>Изменена скорость на %1 %2.</translation>
@@ -1816,21 +1786,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
 </context>
 <context>
     <name>CGisItemWpt</name>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="627"/>
-        <source>Archived</source>
-        <translation>Архивировано</translation>
-    </message>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="631"/>
-        <source>Available</source>
-        <translation>Доступно</translation>
-    </message>
-    <message>
-        <location filename="../gis/gpx/serialization.cpp" line="635"/>
-        <source>Not Available</source>
-        <translation>Не доступно</translation>
-    </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="106"/>
         <source>_Clone</source>
@@ -2197,10 +2152,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Соединить треки</translation>
     </message>
     <message>
-        <source>Set Track Activity</source>
-        <translation type="vanished">Добавить активность</translation>
-    </message>
-    <message>
         <location filename="../gis/CGisListWks.cpp" line="143"/>
         <source>Replace Elevation by DEM</source>
         <translation>Заменить высоты данными файлов ЦМР</translation>
@@ -2248,10 +2199,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Переключить запретную линию</translation>
     </message>
     <message>
-        <source>Search Web for Position</source>
-        <translation type="obsolete">Поиск позиции в Интернете</translation>
-    </message>
-    <message>
         <location filename="../gis/CGisListWks.cpp" line="159"/>
         <source>Route Instructions</source>
         <translation>Маршрутные инструкции</translation>
@@ -2287,14 +2234,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Изменить точки области</translation>
     </message>
     <message>
-        <source>Create Route</source>
-        <translation type="vanished">Создать маршрут</translation>
-    </message>
-    <message>
-        <source>Change Icon (sel. waypt. only)</source>
-        <translation type="vanished">Изменить пиктограмму (выбрать только маршрутные точки)</translation>
-    </message>
-    <message>
         <location filename="../gis/CGisListWks.cpp" line="1046"/>
         <location filename="../gis/CGisListWks.cpp" line="1131"/>
         <source>Set Track Color</source>
@@ -2326,18 +2265,6 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <location filename="../gis/CGisListWks.cpp" line="837"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Загрузка рабочей области. Подождите.</translation>
-    </message>
-    <message>
-        <source>Track</source>
-        <translation type="obsolete">Трек</translation>
-    </message>
-    <message>
-        <source>Route</source>
-        <translation type="obsolete">Маршрут</translation>
-    </message>
-    <message>
-        <source>Area</source>
-        <translation type="obsolete">Область</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1415"/>
@@ -2894,10 +2821,6 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
-        <translation type="vanished">Использовать &lt;b&gt;Меню-&gt;Вид-&gt;Добавить окно карты&lt;/b&gt; для добавления нового вида. Или &lt;b&gt;Меню-&gt;Файл-&gt;Загрузить вид карты&lt;/b&gt; для восстановления сохраненного вида. Или нажмите &lt;a href=&apos;newview&apos;&gt;здесь&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <location filename="../CMainWindow.cpp" line="556"/>
         <source>Select folder...</source>
         <translation>Выбрать папку...</translation>
@@ -2963,17 +2886,6 @@ line %2, column %3:
         <location filename="../CMainWindow.cpp" line="1727"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack обнаружил плохо установленную библиотеку Proj4. Таблицы перевода для проекций EPSG обычно находятся в /usr/share/pro отсутствуют. Пожалуйста, сообщите об этом администратору пакета, чтобы поправить это.</translation>
-    </message>
-</context>
-<context>
-    <name>CMapDraw</name>
-    <message>
-        <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
-
-If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
-        <translation type="vanished">В данный момент карт ещё нет. Использование QMapShack без карт совсем непривлекательно. Вы можете установить карты, нажав кнопку &apos;Помогите! Я хочу карты!&apos; в окне &apos;Карты&apos;. Или Вы можете нажать клавишу F1, чтобы открыть документацию в Интернете, которая объяснит как использовать QMapShack.
-
-Так не очень удобно, почему не поставлять сразу с картами? Поддержка готовых для загрузки и установки карт требует хорошего сервера. И это не бесплатно. У проекта нет денег. Вдобавок карты и данные ЦМР зачастую распространяются под ограничительными лицензиями. Поэтому требуется разрешение правообладателя перед упаковкой его данных. Это не так просто как звучит, к тому же за некоторые данные требуется платить комиссионные. У проекта просто нет ресурсов для этого. И мы надеемся, что установка карт Вами лично не будет уж такой затруднительной. Кстати сама эта программа свободна и распространяется бесплатно.</translation>
     </message>
 </context>
 <context>
@@ -3946,10 +3858,6 @@ Unknown structure.</source>
         <translation>Выбрать элементы на карте</translation>
     </message>
     <message>
-        <source>Search Web for Position</source>
-        <translation type="obsolete">Поиск позиции в Интернете</translation>
-    </message>
-    <message>
         <location filename="../mouse/CMouseNormal.cpp" line="461"/>
         <source>Copy position</source>
         <translation>Скопировать позицию</translation>
@@ -4448,18 +4356,6 @@ is not a valid coordinate system definition:
         <translation>Профиль: %1, альтернатива: %2</translation>
     </message>
     <message>
-        <source>BRouter: not found</source>
-        <translation type="vanished">BRouter: Не найден</translation>
-    </message>
-    <message>
-        <source>Error:</source>
-        <translation type="vanished">Ошибка:</translation>
-    </message>
-    <message>
-        <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation type="vanished">QMapShack связывается с маршрутизатором через сетевое соединение. Обычно это делается по специальному адресу, который не может быть достигнут вне вашего устройства. Однако BRouter прослушивает соединения на всех доступных интерфейсах. Если вы находитесь в своей собственной частной сети с активным брандмауэром, это не проблема. Если вы находитесь в общедоступной сети, каждый открытый порт представляет собой риск, поскольку он может быть использован кем-то другим для компрометации вашей системы. В этом случае мы pекомендуем не использовать локальный сервис BRouter. Если вы видите это предупреждение и используете версию BRouter &gt; = 1.4.10, вы можете принудительно привязать локальный адрес, установив имя хоста на &quot;localhost&quot; и установить флажок &quot;Привязать только к localhost&quot; в настройке с использованием экспертного режима.</translation>
-    </message>
-    <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="393"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="526"/>
         <source>response is empty</source>
@@ -4498,33 +4394,9 @@ is not a valid coordinate system definition:
         <translation>&lt;br/&gt;Время расчёта: %1 сек.</translation>
     </message>
     <message>
-        <source>running</source>
-        <translation type="vanished">Запущено</translation>
-    </message>
-    <message>
-        <source>starting</source>
-        <translation type="vanished">Идет запуск</translation>
-    </message>
-    <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="645"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (Версия %1.%2.%3)</translation>
-    </message>
-    <message>
-        <source>Warning...</source>
-        <translation type="vanished">Предупреждение...</translation>
-    </message>
-    <message>
-        <source>I understand the risk. Don&apos;t tell me again.</source>
-        <translation type="vanished">Я понимаю риск. Больше не говорите.</translation>
-    </message>
-    <message>
-        <source>stopped</source>
-        <translation type="vanished">Остановлено</translation>
-    </message>
-    <message>
-        <source>not installed</source>
-        <translation type="vanished">Не установлено</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
@@ -5537,17 +5409,6 @@ is not a valid coordinate system definition:
     </message>
 </context>
 <context>
-    <name>CSearchGoogle</name>
-    <message>
-        <source>Unknown response</source>
-        <translation type="vanished">Неизвестный ответ</translation>
-    </message>
-    <message>
-        <source>Error: </source>
-        <translation type="vanished">Ошибка: </translation>
-    </message>
-</context>
-<context>
     <name>CSetupDatabase</name>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="47"/>
@@ -5757,14 +5618,6 @@ line %2, column %3:
         <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
         <source>Descent</source>
         <translation>Спуск</translation>
-    </message>
-    <message>
-        <source>Ascend</source>
-        <translation type="vanished">Подъём</translation>
-    </message>
-    <message>
-        <source>Descend</source>
-        <translation type="vanished">Спуск</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="116"/>
@@ -6456,22 +6309,6 @@ line %2, column %3:
         <translation>Рейтинг 5 звёзд</translation>
     </message>
     <message>
-        <source>war&amp;m</source>
-        <translation type="vanished">тепло</translation>
-    </message>
-    <message>
-        <source>free&amp;zing</source>
-        <translation type="vanished">заморозка</translation>
-    </message>
-    <message>
-        <source>&amp;cold</source>
-        <translation type="vanished">холодно</translation>
-    </message>
-    <message>
-        <source>ho&amp;t</source>
-        <translation type="vanished">жарко</translation>
-    </message>
-    <message>
         <location filename="../templates/Running_Summary.ui" line="170"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="177"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="232"/>
@@ -7136,10 +6973,6 @@ I don&apos;t want to read the documentation!</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation type="vanished">Чтобы добавить файлы с высотными данными, использовать &lt;b&gt;Файл-&gt;Настройка пути к ЦМР&lt;/b&gt;. Или нажать &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;здесь&lt;/b&gt;&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../dem/IDemList.ui" line="35"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation>Фильтр: начните вводить, и список будет уменьшен до совпадающих элементов.</translation>
@@ -7199,59 +7032,104 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="40"/>
-        <source>Position:</source>
-        <translation>Позиция:</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="47"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="73"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="86"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="99"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="112"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="125"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="151"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="79"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="92"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="105"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="118"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="131"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="144"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="157"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="164"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="177"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="190"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="252"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="229"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="262"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="269"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="472"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="488"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="60"/>
-        <source>Difficulty</source>
-        <translation>Сложность</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="138"/>
-        <source>Terrain</source>
-        <translation>Местность</translation>
-    </message>
-    <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="214"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="371"/>
         <source>Update spoilers</source>
         <translation>Обновить спойлеры</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="217"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="266"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="374"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="456"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="354"/>
         <source>about:blank</source>
-        <translation type="vanished">about:blank</translation>
+        <translation>about:blank</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="284"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="53"/>
+        <source>Owner:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="66"/>
+        <source>Terrain:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
+        <source>Difficulty:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="216"/>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="242"/>
+        <source>Date Hidden:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="255"/>
+        <source>Last Found:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="288"/>
+        <source>Listing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="310"/>
         <source>Hint:</source>
         <translation>Подсказка:</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="315"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="337"/>
+        <source>Visit Website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="347"/>
+        <source>Logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="363"/>
+        <source>Pictures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="408"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="434"/>
+        <source>QMS</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7494,14 +7372,6 @@ I don&apos;t want to read the documentation!</source>
         <translation>Максимум</translation>
     </message>
     <message>
-        <source>Use/edit user defined visibility of arrows for this track</source>
-        <translation type="vanished">Использовать/изменить определённую пользователем видимость стрелок направления для этого трека</translation>
-    </message>
-    <message>
-        <source>Use/edit system&apos;s visibility of arrows for all tracks</source>
-        <translation type="vanished">Использовать/изменить системную видимость стрелок направления для всех треков</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="797"/>
         <source>Minimum</source>
         <translation>Минимум</translation>
@@ -7527,25 +7397,9 @@ I don&apos;t want to read the documentation!</source>
         <translation>Ширина</translation>
     </message>
     <message>
-        <source>Use/edit user defined scale factor for this track</source>
-        <translation type="vanished">Использовать/изменить пользовательский коэффициент масштабирования для этого трека</translation>
-    </message>
-    <message>
-        <source>Use/edit system&apos;s default factor for all tracks</source>
-        <translation type="vanished">Использовать/изменить фактор по умолчанию система для всех треков</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="683"/>
         <source>with arrows</source>
         <translation>со стрелками</translation>
-    </message>
-    <message>
-        <source>x </source>
-        <translation type="vanished">х </translation>
-    </message>
-    <message>
-        <source>User defined limits for this track</source>
-        <translation type="vanished">Определённые пользователем пределы для этого трека</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="74"/>
@@ -7585,10 +7439,6 @@ I don&apos;t want to read the documentation!</source>
         <translation>Автоматическая установка пределов</translation>
     </message>
     <message>
-        <source>User defined limits for all tracks</source>
-        <translation type="vanished">Определённые пользователем пределы для всех треков</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="712"/>
         <source>Change the line width for this particular track.</source>
         <translation>Изменить ширину линии для данного трека.</translation>
@@ -7602,10 +7452,6 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="817"/>
         <source>Color</source>
         <translation>Цвет</translation>
-    </message>
-    <message>
-        <source>points</source>
-        <translation type="obsolete"> точек</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="894"/>
@@ -7642,42 +7488,6 @@ I don&apos;t want to read the documentation!</source>
         <translation>Точки</translation>
     </message>
     <message>
-        <source>Time</source>
-        <translation type="vanished">Время</translation>
-    </message>
-    <message>
-        <source>Ele.</source>
-        <translation type="vanished">Высота</translation>
-    </message>
-    <message>
-        <source>Delta</source>
-        <translation type="vanished">Разница</translation>
-    </message>
-    <message>
-        <source>Dist.</source>
-        <translation type="vanished">Расстояние</translation>
-    </message>
-    <message>
-        <source>Speed</source>
-        <translation type="vanished">Скорость</translation>
-    </message>
-    <message>
-        <source>Slope</source>
-        <translation type="vanished">Наклон</translation>
-    </message>
-    <message>
-        <source>Ascent</source>
-        <translation type="vanished">Подъём</translation>
-    </message>
-    <message>
-        <source>Descent</source>
-        <translation type="vanished">Спуск</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Позиция</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1512"/>
         <source>Filter</source>
         <translation>Фильтр</translation>
@@ -7712,10 +7522,6 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="374"/>
         <source>-</source>
         <translation>-</translation>
-    </message>
-    <message>
-        <source>Ele.</source>
-        <translation type="vanished">Высота</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="106"/>
@@ -8186,10 +7992,6 @@ I don&apos;t want to read the documentation!</source>
         <translation>Заменить высотные данные данными файлов ЦМР вида</translation>
     </message>
     <message>
-        <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation type="vanished">Заменить высотные данные данными файлов ЦМР.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="86"/>
         <source>...</source>
         <translation>...</translation>
@@ -8241,58 +8043,6 @@ I don&apos;t want to read the documentation!</source>
         <translation>пешего похода</translation>
     </message>
     <message>
-        <source>Speed</source>
-        <translation type="vanished">Скорость</translation>
-    </message>
-    <message>
-        <source> Type</source>
-        <translation type="vanished"> Тип</translation>
-    </message>
-    <message>
-        <source>Max Speed</source>
-        <translation type="vanished">Макс. скорость</translation>
-    </message>
-    <message>
-        <source>Plain Level:</source>
-        <translation type="vanished">Плоский:</translation>
-    </message>
-    <message>
-        <source>at positive Slope</source>
-        <translation type="vanished">на положительном склоне</translation>
-    </message>
-    <message>
-        <source>Min Speed</source>
-        <translation type="vanished">Мин. скорость</translation>
-    </message>
-    <message>
-        <source>Uphill:</source>
-        <translation type="vanished">Подъем:</translation>
-    </message>
-    <message>
-        <source>Downhill:</source>
-        <translation type="vanished">Спуск:</translation>
-    </message>
-    <message>
-        <source>Speed at zero Slope</source>
-        <translation type="vanished">Скорость при нулевом склоне</translation>
-    </message>
-    <message>
-        <source>at negative Slope</source>
-        <translation type="vanished">на отрицательном склоне</translation>
-    </message>
-    <message>
-        <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation type="vanished">Заданные пользователем положительные и отрицательные значения склона будут заменены минимальными и максимальными значениями склона с трека.</translation>
-    </message>
-    <message>
-        <source>Set min/max slopes from Track</source>
-        <translation type="vanished">Установить мин./макс. склоны с трека</translation>
-    </message>
-    <message>
-        <source>not yet implemented</source>
-        <translation type="vanished">еще не реализовано</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="181"/>
         <source>Constant</source>
         <translation>постоянная</translation>
@@ -8301,10 +8051,6 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="186"/>
         <source>Cycling</source>
         <translation>велосипедная</translation>
-    </message>
-    <message>
-        <source> km/h</source>
-        <translation type="vanished"> км/ч</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="114"/>
@@ -8828,10 +8574,6 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation>&lt;h4&gt;Комментарий:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;---нет комментария---&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/IGisItem.cpp" line="829"/>
         <location filename="../gis/IGisItem.cpp" line="864"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
@@ -9018,10 +8760,6 @@ Filename: %1</source>
         <location filename="../gis/IGisWorkspace.ui" line="50"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation>Изменить прозрачность всех элементов ГИС на карте.</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation type="vanished">Фильтр</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="66"/>
@@ -9416,10 +9154,6 @@ Filename: %1</source>
         <translation>Добавить пустой проект</translation>
     </message>
     <message>
-        <source>Search Google</source>
-        <translation type="vanished">Поиск в Google</translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="563"/>
         <source>Geosearch</source>
         <translation>Геопоиск</translation>
@@ -9649,19 +9383,9 @@ Filename: %1</source>
         <translation>форма</translation>
     </message>
     <message>
-        <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation type="vanished">Чтобы добавить карты, использовать &lt;b&gt;Файл-&gt;Настройка пути к картам&lt;/b&gt;. Или нажать &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;здесь&lt;/b&gt;&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../map/IMapList.ui" line="123"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
         <translation>Использовать контекстное меню (нажать правой кнопкой мышки на элемент), чтобы активировать карту. Использовать перетаскивание мышкой, для перемещения активированной карты в порядке рисования.</translation>
-    </message>
-    <message>
-        <source>Help! I want maps!
-I don&apos;t want to read the documentation!</source>
-        <translation type="vanished">Помогите! Я хочу карты!
-Мне не хочется читать документацию!</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="35"/>
@@ -9921,10 +9645,6 @@ Tip:
         <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
         <source>Select source files:</source>
         <translation>Выбрать исходные файлы:</translation>
-    </message>
-    <message>
-        <source>Ad&amp;vanced Options</source>
-        <translation type="vanished">Дополнительные параметры</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="130"/>
@@ -10664,10 +10384,6 @@ or
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="148"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
         <translation>Для использования маршрутизации без доступа к сети вам необходимо определить пути к локальным данным маршрутизации. Использовать кнопку настройки, чтобы зарегистрировать пути. Вы можете создать свои собственные данные для маршрутизации с помощью &lt;a href=&apos;CreateRoutino&apos;&gt;Инструмент-&gt;Создать базу данных Routino&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
-        <translation type="vanished">Для использования маршрутизации без доступа к сети вам необходимо определить пути к локальным данным маршрутизации. Использовать кнопку настройки, чтобы зарегистрировать пути. Вы можете создать свои собственные данные для маршрутизации с помощью &lt;b&gt;Инструмент-&gt;Создать базу данных Routino&lt;/b&gt;.</translation>
     </message>
 </context>
 <context>
@@ -11485,14 +11201,6 @@ or
         <translation>Показать на экране профиль и подробные сведения о точках.</translation>
     </message>
     <message>
-        <source>Select a range of points.</source>
-        <translation type="vanished">Выбрать интервал трека.</translation>
-    </message>
-    <message>
-        <source>Edit position of track points.</source>
-        <translation type="vanished">Изменить позиции точек трека.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
         <source>Select a range of points. You can use that tool to:
 
@@ -12038,25 +11746,6 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     </message>
 </context>
 <context>
-    <name>ISetupFilter</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
-    <message>
-        <source>Apply filter to</source>
-        <translation type="vanished">Применить фильтр</translation>
-    </message>
-    <message>
-        <source>name only</source>
-        <translation type="vanished">только к имени</translation>
-    </message>
-    <message>
-        <source>complete text</source>
-        <translation type="vanished">к полному тексту</translation>
-    </message>
-</context>
-<context>
     <name>ISetupFolder</name>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="14"/>
@@ -12105,39 +11794,6 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="39"/>
         <source>Name</source>
         <translation>Имя</translation>
-    </message>
-</context>
-<context>
-    <name>ISetupNewWpt</name>
-    <message>
-        <source>New Waypoint...</source>
-        <translation type="vanished">Новая маршрутная точка...</translation>
-    </message>
-    <message>
-        <source>Symbol</source>
-        <translation type="vanished">Символ</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Позиция</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="vanished">Имя</translation>
-    </message>
-    <message>
-        <source>Bad position format. Must be: 
-&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
-or
-&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation type="vanished">Неверный формат позиции. Должен быть:
-&quot;[С|Ю] ddd mm.sss [З|В] ddd mm.sss&quot;
- или 
-&quot;[С|Ю] ddd.ddd [З|В] ddd.ddd&quot;</translation>
     </message>
 </context>
 <context>
@@ -12704,185 +12360,6 @@ or
     </message>
 </context>
 <context>
-    <name>TCyclingTourSummary</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation type="vanished">Детали</translation>
-    </message>
-    <message>
-        <source>Dificulty</source>
-        <translation type="vanished">Сложность</translation>
-    </message>
-    <message>
-        <source> IBPIndex BYC (Bicycle)</source>
-        <translation type="vanished">Индекс IBP (велосипед)</translation>
-    </message>
-    <message>
-        <source>% cycling</source>
-        <translation type="vanished">% велосипед</translation>
-    </message>
-    <message>
-        <source>Cardio</source>
-        <translation type="vanished">Кардио</translation>
-    </message>
-    <message>
-        <source>Max. heart rate</source>
-        <translation type="vanished">Макс. пульс</translation>
-    </message>
-    <message>
-        <source>Min. heart rate</source>
-        <translation type="vanished">Мин. пульс</translation>
-    </message>
-    <message>
-        <source>cal. consumption</source>
-        <translation type="vanished">Потребление калорий</translation>
-    </message>
-    <message>
-        <source>Equipment</source>
-        <translation type="vanished">Экипировка</translation>
-    </message>
-    <message>
-        <source>protections</source>
-        <translation type="vanished">защитное снаряжение</translation>
-    </message>
-    <message>
-        <source>night gear</source>
-        <translation type="vanished">ночные принадлежности</translation>
-    </message>
-    <message>
-        <source>e-bike</source>
-        <translation type="vanished">электрический велосипед</translation>
-    </message>
-    <message>
-        <source>saddlebags</source>
-        <translation type="vanished">седельные сумки</translation>
-    </message>
-    <message>
-        <source>bike</source>
-        <translation type="vanished">велосипед</translation>
-    </message>
-    <message>
-        <source>Character</source>
-        <translation type="vanished">Характер</translation>
-    </message>
-    <message>
-        <source>e&amp;nduro</source>
-        <translation type="vanished">эндуро</translation>
-    </message>
-    <message>
-        <source>freeride</source>
-        <translation type="vanished">фрирайд</translation>
-    </message>
-    <message>
-        <source>XC</source>
-        <translation type="vanished">кросс-кантри</translation>
-    </message>
-    <message>
-        <source>large ascend</source>
-        <translation type="vanished">значительный подъём</translation>
-    </message>
-    <message>
-        <source>city/road</source>
-        <translation type="vanished">городская дорога</translation>
-    </message>
-    <message>
-        <source>long distance</source>
-        <translation type="vanished">длинная дистанция</translation>
-    </message>
-    <message>
-        <source>downhill</source>
-        <translation type="vanished">спуск</translation>
-    </message>
-    <message>
-        <source>night</source>
-        <translation type="vanished">ночь</translation>
-    </message>
-    <message>
-        <source>Rating</source>
-        <translation type="vanished">Рейтинг</translation>
-    </message>
-    <message>
-        <source>Rating 5 stars</source>
-        <translation type="vanished">Рейтинг 5 звёзд</translation>
-    </message>
-    <message>
-        <source>Rating 4 stars</source>
-        <translation type="vanished">Рейтинг 4 звезды</translation>
-    </message>
-    <message>
-        <source>Rating 3 stars</source>
-        <translation type="vanished">Рейтинг 3 звезды</translation>
-    </message>
-    <message>
-        <source>Rating 2 stars</source>
-        <translation type="vanished">Рейтинг 2 звезды</translation>
-    </message>
-    <message>
-        <source>Rating 1 star</source>
-        <translation type="vanished">Рейтинг 1 звезда</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="vanished">Погода</translation>
-    </message>
-    <message>
-        <source>sunny</source>
-        <translation type="vanished">солнце</translation>
-    </message>
-    <message>
-        <source>foggy</source>
-        <translation type="vanished">туман</translation>
-    </message>
-    <message>
-        <source>ho&amp;t</source>
-        <translation type="vanished">жарко</translation>
-    </message>
-    <message>
-        <source>clouds</source>
-        <translation type="vanished">облака</translation>
-    </message>
-    <message>
-        <source>windy</source>
-        <translation type="vanished">ветер</translation>
-    </message>
-    <message>
-        <source>war&amp;m</source>
-        <translation type="vanished">тепло</translation>
-    </message>
-    <message>
-        <source>rain</source>
-        <translation type="vanished">дождь</translation>
-    </message>
-    <message>
-        <source>humid</source>
-        <translation type="vanished">влажно</translation>
-    </message>
-    <message>
-        <source>&amp;cold</source>
-        <translation type="vanished">холодно</translation>
-    </message>
-    <message>
-        <source>snow</source>
-        <translation type="vanished">снег</translation>
-    </message>
-    <message>
-        <source>hail/soft hail</source>
-        <translation type="vanished">град</translation>
-    </message>
-    <message>
-        <source>free&amp;zing</source>
-        <translation type="vanished">заморозка</translation>
-    </message>
-    <message>
-        <source>Participants</source>
-        <translation type="vanished">Участники</translation>
-    </message>
-</context>
-<context>
     <name>THikingTourSummary</name>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="14"/>
@@ -12918,22 +12395,6 @@ or
         <location filename="../templates/Hiking_Tour_Summary.ui" line="68"/>
         <source>clouds</source>
         <translation>облака</translation>
-    </message>
-    <message>
-        <source>ho&amp;t</source>
-        <translation type="vanished">жарко</translation>
-    </message>
-    <message>
-        <source>war&amp;m</source>
-        <translation type="vanished">тепло</translation>
-    </message>
-    <message>
-        <source>&amp;cold</source>
-        <translation type="vanished">холодно</translation>
-    </message>
-    <message>
-        <source>free&amp;zing</source>
-        <translation type="vanished">заморозка</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="81"/>
@@ -13094,568 +12555,6 @@ or
         <location filename="../templates/Hiking_Tour_Summary.ui" line="338"/>
         <source>Details</source>
         <translation>Детали</translation>
-    </message>
-</context>
-<context>
-    <name>THikingTourSummaryAdvanced</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
-    <message>
-        <source>Graduation MIDE</source>
-        <translation type="vanished">Классификация MIDE</translation>
-    </message>
-    <message>
-        <source>Severity Environment</source>
-        <translation type="vanished">Сложность местности</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>1. The environment is not risk free</source>
-        <translation type="vanished">1.Местность не свободна от рисков</translation>
-    </message>
-    <message>
-        <source>2. More than 1 risk factor</source>
-        <translation type="vanished">2. Более 1 фактора риска</translation>
-    </message>
-    <message>
-        <source>3. Various risk factors</source>
-        <translation type="vanished">3. Различные факторы риска</translation>
-    </message>
-    <message>
-        <source>4. Considerable riskfactors</source>
-        <translation type="vanished">4. Существенные факторы риска</translation>
-    </message>
-    <message>
-        <source>5. Many risk factors</source>
-        <translation type="vanished">5. Много факторов риска</translation>
-    </message>
-    <message>
-        <source>Orientation</source>
-        <translation type="vanished">Ориентация</translation>
-    </message>
-    <message>
-        <source>1. Paths and junctions well signed</source>
-        <translation type="vanished">1. Пути и перекрестки хорошо обозначены</translation>
-    </message>
-    <message>
-        <source>2. Footpaths or way marks which follow the route</source>
-        <translation type="vanished">2. Пешеходные дорожки или дорожные знаки, следующие по маршруту</translation>
-    </message>
-    <message>
-        <source>3. Demands orientation by identification of geographic features and compass points</source>
-        <translation type="vanished">3. Требует ориентации по географическим объектам и точам компаса</translation>
-    </message>
-    <message>
-        <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
-        <translation type="vanished">4. Требует передовых методов навигации помимо интерпретации объектов на карте и на земле</translation>
-    </message>
-    <message>
-        <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
-        <translation type="vanished">5. Сложная навигация прерывается препятствиями, которых необходимо избегать</translation>
-    </message>
-    <message>
-        <source>Terrain underfoot</source>
-        <translation type="vanished">Местность</translation>
-    </message>
-    <message>
-        <source>1. Easy walking</source>
-        <translation type="vanished">1. Легкий поход</translation>
-    </message>
-    <message>
-        <source>2. Bridleways and well made footpaths</source>
-        <translation type="vanished">2. Конные и пешеходные дорожки</translation>
-    </message>
-    <message>
-        <source>3. Rocky stairways, rough ground and screes</source>
-        <translation type="vanished">3. Скалистые ступени, грубое основание и плиты</translation>
-    </message>
-    <message>
-        <source>4. Contains sections where the use of hands is necessary for balance</source>
-        <translation type="vanished">4. Содержит разделы, где использование рук необходимо для баланса</translation>
-    </message>
-    <message>
-        <source>5. Scrambling, pulling on hands and arms for progress</source>
-        <translation type="vanished">5. Карабкаясь, подтягиваясь на руках и рукавах за прогресс</translation>
-    </message>
-    <message>
-        <source>Effort required </source>
-        <translation type="vanished">Необходимые усилия</translation>
-    </message>
-    <message>
-        <source>1. Less than one hour of continuous walking</source>
-        <translation type="vanished">1. Менее часа непрерывной ходьбы</translation>
-    </message>
-    <message>
-        <source>2. From 1 to 3 hours of continuous walking</source>
-        <translation type="vanished">2. От 1 до 3 часов непрерывной ходьбы</translation>
-    </message>
-    <message>
-        <source>3. From 3 to 6 hours of continuous walking</source>
-        <translation type="vanished">3. От 3 до 6 часов непрерывной ходьбы</translation>
-    </message>
-    <message>
-        <source>4. From 6 to 10 hours of continuous walking</source>
-        <translation type="vanished">4. От 6 до 10 часов непрерывной ходьбы</translation>
-    </message>
-    <message>
-        <source>5. More than 10 hours of continuous walking</source>
-        <translation type="vanished">5. Более 10 часов непрерывной ходьбы</translation>
-    </message>
-    <message>
-        <source>Character</source>
-        <translation type="vanished">Характер</translation>
-    </message>
-    <message>
-        <source>easy hiking</source>
-        <translation type="vanished">легкий поход</translation>
-    </message>
-    <message>
-        <source>large ascend</source>
-        <translation type="vanished">значительный подъём</translation>
-    </message>
-    <message>
-        <source>alpine</source>
-        <translation type="vanished">высокогорно</translation>
-    </message>
-    <message>
-        <source>long distance</source>
-        <translation type="vanished">длинная дистанция</translation>
-    </message>
-    <message>
-        <source>climbing</source>
-        <translation type="vanished">альпинизм</translation>
-    </message>
-    <message>
-        <source>night</source>
-        <translation type="vanished">ночь</translation>
-    </message>
-    <message>
-        <source>via ferrata</source>
-        <translation type="vanished">феррата</translation>
-    </message>
-    <message>
-        <source>aborted</source>
-        <translation type="vanished">прервано</translation>
-    </message>
-    <message>
-        <source>Rating</source>
-        <translation type="vanished">Рейтинг</translation>
-    </message>
-    <message>
-        <source>Rating 5 stars</source>
-        <translation type="vanished">Рейтинг 5 звёзд</translation>
-    </message>
-    <message>
-        <source>Rating 4 stars</source>
-        <translation type="vanished">Рейтинг 4 звезды</translation>
-    </message>
-    <message>
-        <source>Rating 3 stars</source>
-        <translation type="vanished">Рейтинг 3 звезды</translation>
-    </message>
-    <message>
-        <source>Rating 2 stars</source>
-        <translation type="vanished">Рейтинг 2 звезды</translation>
-    </message>
-    <message>
-        <source>Rating 1 star</source>
-        <translation type="vanished">Рейтинг 1 звезда</translation>
-    </message>
-    <message>
-        <source>Equipment</source>
-        <translation type="vanished">Экипировка</translation>
-    </message>
-    <message>
-        <source>climbing gear</source>
-        <translation type="vanished">альпинистские принадлежности</translation>
-    </message>
-    <message>
-        <source>ski</source>
-        <translation type="vanished">лыжи</translation>
-    </message>
-    <message>
-        <source>ferrata gear</source>
-        <translation type="vanished">принадлежности для ферраты</translation>
-    </message>
-    <message>
-        <source>ice pick</source>
-        <translation type="vanished">ледоруб</translation>
-    </message>
-    <message>
-        <source>camping gear</source>
-        <translation type="vanished">кемпинговые принадлежности</translation>
-    </message>
-    <message>
-        <source>crampon</source>
-        <translation type="vanished">кошки</translation>
-    </message>
-    <message>
-        <source>night gear</source>
-        <translation type="vanished">ночные принадлежности</translation>
-    </message>
-    <message>
-        <source>snow shoes</source>
-        <translation type="vanished">снежная обувь</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="vanished">Погода</translation>
-    </message>
-    <message>
-        <source>war&amp;m</source>
-        <translation type="vanished">тепло</translation>
-    </message>
-    <message>
-        <source>windy</source>
-        <translation type="vanished">ветер</translation>
-    </message>
-    <message>
-        <source>foggy</source>
-        <translation type="vanished">туман</translation>
-    </message>
-    <message>
-        <source>humid</source>
-        <translation type="vanished">влажно</translation>
-    </message>
-    <message>
-        <source>clouds</source>
-        <translation type="vanished">облака</translation>
-    </message>
-    <message>
-        <source>&amp;cold</source>
-        <translation type="vanished">холодно</translation>
-    </message>
-    <message>
-        <source>ho&amp;t</source>
-        <translation type="vanished">жарко</translation>
-    </message>
-    <message>
-        <source>rain</source>
-        <translation type="vanished">дождь</translation>
-    </message>
-    <message>
-        <source>snow</source>
-        <translation type="vanished">снег</translation>
-    </message>
-    <message>
-        <source>hail/soft hail</source>
-        <translation type="vanished">град</translation>
-    </message>
-    <message>
-        <source>free&amp;zing</source>
-        <translation type="vanished">заморозка</translation>
-    </message>
-    <message>
-        <source>sunny</source>
-        <translation type="vanished">солнце</translation>
-    </message>
-    <message>
-        <source>Participants</source>
-        <translation type="vanished">Участники</translation>
-    </message>
-    <message>
-        <source>IBP Index</source>
-        <translation type="vanished">Индекс IBP</translation>
-    </message>
-    <message>
-        <source>HKG  (Hiking)</source>
-        <translation type="vanished">HKG  (пеший поход)</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation type="vanished">Детали</translation>
-    </message>
-</context>
-<context>
-    <name>TRunningSummary</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="vanished">Погода</translation>
-    </message>
-    <message>
-        <source>sunny</source>
-        <translation type="vanished">солнце</translation>
-    </message>
-    <message>
-        <source>foggy</source>
-        <translation type="vanished">туман</translation>
-    </message>
-    <message>
-        <source>ho&amp;t</source>
-        <translation type="vanished">жарко</translation>
-    </message>
-    <message>
-        <source>clouds</source>
-        <translation type="vanished">облака</translation>
-    </message>
-    <message>
-        <source>windy</source>
-        <translation type="vanished">ветер</translation>
-    </message>
-    <message>
-        <source>war&amp;m</source>
-        <translation type="vanished">тепло</translation>
-    </message>
-    <message>
-        <source>rain</source>
-        <translation type="vanished">дождь</translation>
-    </message>
-    <message>
-        <source>humid</source>
-        <translation type="vanished">влажно</translation>
-    </message>
-    <message>
-        <source>&amp;cold</source>
-        <translation type="vanished">холодно</translation>
-    </message>
-    <message>
-        <source>snow</source>
-        <translation type="vanished">снег</translation>
-    </message>
-    <message>
-        <source>hail/soft hail</source>
-        <translation type="vanished">град</translation>
-    </message>
-    <message>
-        <source>free&amp;zing</source>
-        <translation type="vanished">заморозка</translation>
-    </message>
-    <message>
-        <source>Character</source>
-        <translation type="vanished">Характер</translation>
-    </message>
-    <message>
-        <source>Rating 5 stars</source>
-        <translation type="vanished">Рейтинг 5 звёзд</translation>
-    </message>
-    <message>
-        <source>Rating 4 stars</source>
-        <translation type="vanished">Рейтинг 4 звезды</translation>
-    </message>
-    <message>
-        <source>Rating 3 stars</source>
-        <translation type="vanished">Рейтинг 3 звезды</translation>
-    </message>
-    <message>
-        <source>Rating 2 stars</source>
-        <translation type="vanished">Рейтинг 2 звезды</translation>
-    </message>
-    <message>
-        <source>Rating 1 star</source>
-        <translation type="vanished">Рейтинг 1 звезда</translation>
-    </message>
-    <message>
-        <source>Rating</source>
-        <translation type="vanished">Рейтинг</translation>
-    </message>
-    <message>
-        <source>long distance</source>
-        <translation type="vanished">длинная дистанция</translation>
-    </message>
-    <message>
-        <source>night</source>
-        <translation type="vanished">ночь</translation>
-    </message>
-    <message>
-        <source>trail running</source>
-        <translation type="vanished">бег по тропам</translation>
-    </message>
-    <message>
-        <source>city/road</source>
-        <translation type="vanished">городская дорога</translation>
-    </message>
-    <message>
-        <source> track</source>
-        <translation type="vanished">трек</translation>
-    </message>
-    <message>
-        <source>ultra long dist</source>
-        <translation type="vanished">весьма большое расстояние</translation>
-    </message>
-    <message>
-        <source>large ascend</source>
-        <translation type="vanished">большой подъём</translation>
-    </message>
-    <message>
-        <source>easy hiking</source>
-        <translation type="vanished">легкий поход</translation>
-    </message>
-    <message>
-        <source>Equipment</source>
-        <translation type="vanished">Экипировка</translation>
-    </message>
-    <message>
-        <source>shoes:</source>
-        <translation type="vanished">ботинки:</translation>
-    </message>
-    <message>
-        <source>backpack</source>
-        <translation type="vanished">рюкзак</translation>
-    </message>
-    <message>
-        <source>gloves</source>
-        <translation type="vanished">перчатки</translation>
-    </message>
-    <message>
-        <source>hip pack</source>
-        <translation type="vanished">хип-пакет</translation>
-    </message>
-    <message>
-        <source>poles</source>
-        <translation type="vanished">трости</translation>
-    </message>
-    <message>
-        <source>crampon</source>
-        <translation type="vanished">кошки</translation>
-    </message>
-    <message>
-        <source>night gear</source>
-        <translation type="vanished">ночные принадлежности</translation>
-    </message>
-    <message>
-        <source>calf guard comp.</source>
-        <translation type="vanished">защитное снаряжение для голени</translation>
-    </message>
-    <message>
-        <source>Participants</source>
-        <translation type="vanished">Участники</translation>
-    </message>
-    <message>
-        <source>Graduation MIDE</source>
-        <translation type="vanished">Классификация MIDE</translation>
-    </message>
-    <message>
-        <source>Severity Environment</source>
-        <translation type="vanished">Сложность местности</translation>
-    </message>
-    <message>
-        <source>1. The environment is not risk free</source>
-        <translation type="vanished">1.Местность не свободна от рисков</translation>
-    </message>
-    <message>
-        <source>2. More than 1 risk factor</source>
-        <translation type="vanished">2. Более 1 фактора риска</translation>
-    </message>
-    <message>
-        <source>3. Various risk factors</source>
-        <translation type="vanished">3. Различные факторы риска</translation>
-    </message>
-    <message>
-        <source>4. Considerable riskfactors</source>
-        <translation type="vanished">4. Существенные факторы риска</translation>
-    </message>
-    <message>
-        <source>5. Many risk factors</source>
-        <translation type="vanished">5. Много факторов риска</translation>
-    </message>
-    <message>
-        <source>Orientation</source>
-        <translation type="vanished">Ориентация</translation>
-    </message>
-    <message>
-        <source>1. Paths and junctions well signed</source>
-        <translation type="vanished">1. Пути и перекрестки хорошо обозначены</translation>
-    </message>
-    <message>
-        <source>2. Footpaths or way marks which follow the route</source>
-        <translation type="vanished">2. Пешеходные дорожки или дорожные знаки, следующие по маршруту</translation>
-    </message>
-    <message>
-        <source>3. Demands orientation by identification of geographic features and compass points</source>
-        <translation type="vanished">3. Требует ориентации по географическим объектам и точам компаса</translation>
-    </message>
-    <message>
-        <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
-        <translation type="vanished">4. Требует передовых методов навигации помимо интерпретации объектов на карте и на земле</translation>
-    </message>
-    <message>
-        <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
-        <translation type="vanished">5. Сложная навигация прерывается препятствиями, которых необходимо избегать</translation>
-    </message>
-    <message>
-        <source>Terrain underfoot</source>
-        <translation type="vanished">Местность</translation>
-    </message>
-    <message>
-        <source>1. Easy walking</source>
-        <translation type="vanished">легкий поход</translation>
-    </message>
-    <message>
-        <source>2. Bridleways and well made footpaths</source>
-        <translation type="vanished">2. Конные и пешеходные дорожки</translation>
-    </message>
-    <message>
-        <source>3. Rocky stairways, rough ground and screes</source>
-        <translation type="vanished">3. Скалистые ступени, грубое основание и плиты</translation>
-    </message>
-    <message>
-        <source>4. Contains sections where the use of hands is necessary for balance</source>
-        <translation type="vanished">4. Содержит разделы, где использование рук необходимо для баланса</translation>
-    </message>
-    <message>
-        <source>5. Scrambling, pulling on hands and arms for progress</source>
-        <translation type="vanished">5. Карабкаясь, подтягиваясь на руках и рукавах за прогресс</translation>
-    </message>
-    <message>
-        <source>Effort required </source>
-        <translation type="vanished">Необходимые усилия</translation>
-    </message>
-    <message>
-        <source>1. Less than one hour of continuous walking</source>
-        <translation type="vanished">1. Менее часа непрерывной ходьбы</translation>
-    </message>
-    <message>
-        <source>2. From 1 to 3 hours of continuous walking</source>
-        <translation type="vanished">2. От 1 до 3 часов непрерывной ходьбы</translation>
-    </message>
-    <message>
-        <source>3. From 3 to 6 hours of continuous walking</source>
-        <translation type="vanished">3. От 3 до 6 часов непрерывной ходьбы</translation>
-    </message>
-    <message>
-        <source>4. From 6 to 10 hours of continuous walking</source>
-        <translation type="vanished">4. От 6 до 10 часов непрерывной ходьбы</translation>
-    </message>
-    <message>
-        <source>5. More than 10 hours of continuous walking</source>
-        <translation type="vanished">5. Более 10 часов непрерывной ходьбы</translation>
-    </message>
-    <message>
-        <source>IBP Index</source>
-        <translation type="vanished">Индекс IBP</translation>
-    </message>
-    <message>
-        <source>RNG (Running)</source>
-        <translation type="vanished">RNG (бег)</translation>
-    </message>
-    <message>
-        <source>Cardio</source>
-        <translation type="vanished">Кардио</translation>
-    </message>
-    <message>
-        <source>Max. heart rate</source>
-        <translation type="vanished">Макс. пульс</translation>
-    </message>
-    <message>
-        <source>Min. heart rate</source>
-        <translation type="vanished">Мин. пульс</translation>
-    </message>
-    <message>
-        <source>cal. consumption</source>
-        <translation type="vanished">Потребление калорий</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation type="vanished">Детали</translation>
     </message>
 </context>
 </TS>

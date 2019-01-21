@@ -21,7 +21,7 @@
 #include <QtWidgets>
 
 void CLineEdit::initialize()
-{    
+{
     initialized  = true;
 
     QFont f = font();

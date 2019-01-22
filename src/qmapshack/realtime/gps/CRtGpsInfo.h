@@ -33,11 +33,10 @@ public:
 
     void loadSettings(QSettings& cfg);
     void saveSettings(QSettings& cfg) const;
+
 private slots:
     void slotSetSource(int idx);
-    void slotUpdate();
     void slotShowHelp();
-    void slotConfigure();
 
 private:
     CRtGps& source;

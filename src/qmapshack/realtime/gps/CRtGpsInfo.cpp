@@ -19,7 +19,7 @@
 #include "CMainWindow.h"
 #include "realtime/gps/CRtGps.h"
 #include "realtime/gps/CRtGpsInfo.h"
-#include "realtime/gps/IRtGpsDevice.h"
+#include "realtime/gps/CRtGpsTether.h"
 
 #include <QtPositioning>
 #include <QtWidgets>
@@ -30,16 +30,11 @@ CRtGpsInfo::CRtGpsInfo(CRtGps& source, QWidget * parent)
 
 {
     setupUi(this);
-    connect(&source, &CRtGps::sigChanged, this, &CRtGpsInfo::slotUpdate);
     connect(comboSource, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CRtGpsInfo::slotSetSource);
-    connect(toolHelp, &QToolButton::clicked, this, &CRtGpsInfo::slotShowHelp);
-    connect(toolConfig, &QToolButton::clicked, this, &CRtGpsInfo::slotConfigure);
-
     comboSource->addItem(tr("choose one..."));
-    for(const QString& source : source.getDevices())
-    {
-        comboSource->addItem(source);
-    }
+    comboSource->addItem(tr("GPS Tether"));
+
+    stackedWidget->addWidget(new CRtGpsTether(stackedWidget));
 }
 
 void CRtGpsInfo::loadSettings(QSettings& cfg)
@@ -53,63 +48,58 @@ void CRtGpsInfo::loadSettings(QSettings& cfg)
     {
         comboSource->setCurrentIndex(0);
     }
+
+    cfg.beginGroup("devices");
+    const int N = stackedWidget->count();
+    for(int n = 1; n < N; n++)
+    {
+        auto device = dynamic_cast<IRtGpsDevice*>(stackedWidget->widget(n));
+        if(device != nullptr)
+        {
+            device->loadSettings(cfg);
+        }
+    }
+    cfg.endGroup();
 }
 
 void CRtGpsInfo::saveSettings(QSettings& cfg) const
 {
     cfg.setValue("device", comboSource->currentText());
+
+    cfg.beginGroup("devices");
+    const int N = stackedWidget->count();
+    for(int n = 1; n < N; n++)
+    {
+        auto device = dynamic_cast<IRtGpsDevice*>(stackedWidget->widget(n));
+        if(device != nullptr)
+        {
+            device->saveSettings(cfg);
+        }
+    }
+    cfg.endGroup();
 }
 
 void CRtGpsInfo::slotSetSource(int idx)
 {
-    frame->setEnabled(source.setDevice(comboSource->currentText()));
+    stackedWidget->setCurrentIndex(idx);
 }
 
-void CRtGpsInfo::slotUpdate()
-{
-    const QGeoPositionInfoSource * device = source.getDevice();
-    // try to get point to internally defined device that implements IRtGpsDevice API
-    const IRtGpsDevice * intDevice = dynamic_cast<const IRtGpsDevice*>(device);
-    if(intDevice != nullptr)
-    {
-        toolConfig->setEnabled(intDevice->hasConfig());
-        toolHelp->setEnabled(true);
-        labelConfig->setText(intDevice->getConfig());
-    }
-    else
-    {
-        toolConfig->setEnabled(false);
-        toolHelp->setEnabled(device != nullptr);
-        labelConfig->setText("-");
-    }
-
-}
 
 void CRtGpsInfo::slotShowHelp()
 {
-    IRtGpsDevice * intDevice = dynamic_cast<IRtGpsDevice*>(source.getDevice());
-    if(intDevice != nullptr)
-    {
-        QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"), intDevice->getHelp());
-    }
-    else
-    {
-        QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"),
-                                 tr("Qt Positioning\n"
-                                    "This is a Qt internal plugin using the positioning "
-                                    "service of your host system. It's dependent on your "
-                                    "operating system and your Qt installation. Please "
-                                    "refer to the Qt documentation for more details."));
-    }
-}
-
-void CRtGpsInfo::slotConfigure()
-{
-    IRtGpsDevice * intDevice = dynamic_cast<IRtGpsDevice*>(source.getDevice());
-    if(intDevice != nullptr)
-    {
-        intDevice->configure();
-        slotUpdate();
-    }
+//    IRtGpsDevice * intDevice = dynamic_cast<IRtGpsDevice*>(source.getDevice());
+//    if(intDevice != nullptr)
+//    {
+//        QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"), intDevice->getHelp());
+//    }
+//    else
+//    {
+//        QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"),
+//                                 tr("Qt Positioning\n"
+//                                    "This is a Qt internal plugin using the positioning "
+//                                    "service of your host system. It's dependent on your "
+//                                    "operating system and your Qt installation. Please "
+//                                    "refer to the Qt documentation for more details."));
+//    }
 }
 

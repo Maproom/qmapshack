@@ -46,19 +46,8 @@ public:
 
     static const QString strIcon;
 
-    QStringList getDevices() const;
-
-    bool setDevice(const QString& name);
-    QGeoPositionInfoSource * getDevice() const;
-
-private slots:
-    void slotPositionUpdate(const QGeoPositionInfo &update);
-
 private:   
     QPointer<CRtGpsInfo> info;
-    QPointer<QGeoPositionInfoSource> device;
-
-    QString cfgGroup;
 };
 
 #endif //CRTGPS_H

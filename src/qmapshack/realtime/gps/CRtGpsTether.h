@@ -20,39 +20,32 @@
 #define CRTGPSTETHER_H
 
 #include "realtime/gps/IRtGpsDevice.h"
+#include "ui_IRtGpsTether.h"
 
-#include <QNmeaPositionInfoSource>
+#include <QWidget>
 #include <QTcpSocket>
 
-class CRtGpsTether : public QNmeaPositionInfoSource, public IRtGpsDevice
+class CRtGpsTether : public QWidget, public IRtGpsDevice, private Ui::IRtGpsTether
 {
     Q_OBJECT
 public:
-    CRtGpsTether(QObject * parent);
+    CRtGpsTether(QWidget *parent);
     virtual ~CRtGpsTether() = default;
 
-    bool hasConfig() const override
-    {
-        return true;
-    }
-    QString getConfig() const override;
-    QString getHelp() const override;
     void loadSettings(QSettings& cfg) override;
     void saveSettings(QSettings& cfg) const override;
-    void configure() override;
 
 private slots:
+    void slotHelp() const;
+    void slotConnect(bool yes);
     void slotConnected();
-    void slotError(QAbstractSocket::SocketError error);
-    void slotState(QAbstractSocket::SocketState state);
+    void slotDisconnected();
+
+    void slotError(QAbstractSocket::SocketError socketError);
+
+
 
 private:
-    void connectToHost();
-
-private:
-    friend class CRtGpsTetherSetup;
-    QString host;
-    quint16 port = 0;
     QTcpSocket * socket;
 };
 

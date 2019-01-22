@@ -18,93 +18,96 @@
 
 #include "CMainWindow.h"
 #include "realtime/gps/CRtGpsTether.h"
-#include "realtime/gps/CRtGpsTetherSetup.h"
 
 #include <QtCore>
 #include <QtNetwork>
+#include <QtWidgets>
 
-CRtGpsTether::CRtGpsTether(QObject *parent)
-    : QNmeaPositionInfoSource(QNmeaPositionInfoSource::RealTimeMode, parent)
+CRtGpsTether::CRtGpsTether(QWidget *parent)
+    : QWidget(parent)
 {
+    setupUi(this);
+    connect(toolHelp, &QToolButton::clicked, this, &CRtGpsTether::slotHelp);
+    connect(toolConnect, &QToolButton::toggled, this, &CRtGpsTether::slotConnect);
+
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::connected, this, &CRtGpsTether::slotConnected);
-    connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this, &CRtGpsTether::slotError);
-    connect(socket, &QTcpSocket::stateChanged, this, &CRtGpsTether::slotState);
+    connect(socket, &QTcpSocket::disconnected, this, &CRtGpsTether::slotDisconnected);
+    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(slotError(QAbstractSocket::SocketError)));
+
+    labelStatus->setText("-");
 }
 
-QString CRtGpsTether::getConfig() const
-{
-    return tr("Host: %1, Port: %2").arg(host).arg(port);
-}
 
-QString CRtGpsTether::getHelp() const
+void CRtGpsTether::slotHelp() const
 {
-    return tr("GPS Tether\n"
-              "The basic idea of this GPS source is to receive a NMEA stream "
-              "via Ethernet connection. You can use the Android app \"GPS Tether\" "
-              "to provide a host streaming NMEA data. You Android device must be "
-              "in the same network or provide a network as a hot spot.\n"
-              "For configuration you need to know your Android device's IP address "
-              "or it's host name provided by a DNS. Additionally you need the port number "
-              "as configured in the app."
-              );
+    QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"),
+                             tr("GPS Tether\n"
+                                "The basic idea of this GPS source is to receive a NMEA stream "
+                                "via Ethernet connection. You can use the Android app \"GPS Tether\" "
+                                "to provide a host streaming NMEA data. You Android device must be "
+                                "in the same network or provide a network as a hot spot.\n"
+                                "For configuration you need to know your Android device's IP address "
+                                "or it's host name provided by a DNS. Additionally you need the port number "
+                                "as configured in the app."
+                                )
+                             );
 }
 
 void CRtGpsTether::loadSettings(QSettings& cfg)
 {
-    cfg.beginGroup("device/GpsTether");
-    host = cfg.value("host", "").toString();
-    port = cfg.value("port", 0).toUInt();
+    cfg.beginGroup("GpsTether");
+    lineHost->setText(cfg.value("host", "").toString());
+    spinPort->setValue(cfg.value("port", 10110).toUInt());
     cfg.endGroup();
-
-    connectToHost();
 }
 
 void CRtGpsTether::saveSettings(QSettings& cfg) const
 {
-    cfg.beginGroup("device/GpsTether");
-    cfg.setValue("host", host);
-    cfg.setValue("port", port);
+    cfg.beginGroup("GpsTether");
+    cfg.setValue("host", lineHost->text());
+    cfg.setValue("port", spinPort->value());
     cfg.endGroup();
 }
 
-void CRtGpsTether::configure()
+void CRtGpsTether::slotConnect(bool yes)
 {
-    CRtGpsTetherSetup dlg(*this, CMainWindow::self().getBestWidgetForParent());
-    if(dlg.exec() == QDialog::Accepted)
+    if(yes)
     {
-        connectToHost();
+        labelStatus->setText("-");
+        lineHost->setEnabled(false);
+        spinPort->setEnabled(false);
+        socket->connectToHost(lineHost->text(), spinPort->value());
     }
-}
-
-void CRtGpsTether::connectToHost()
-{
-    if(socket->state() != QTcpSocket::UnconnectedState)
+    else
     {
-        socket->disconnectFromHost();
-        socket->waitForDisconnected();
+        if(socket->state() == QAbstractSocket::ConnectedState)
+        {
+            socket->disconnectFromHost();
+        }
+        else
+        {
+            socket->abort();
+            lineHost->setEnabled(true);
+            spinPort->setEnabled(true);
+        }
     }
-
-    qDebug() << "connect to" << host << port;
-    socket->connectToHost(host, port, QIODevice::ReadOnly);
 }
 
 void CRtGpsTether::slotConnected()
 {
-    if(device() == nullptr)
-    {
-        setDevice(socket);
-        setUpdateInterval(1000);
-        startUpdates();
-    }
+    toolConnect->setChecked(true);
 }
 
-void CRtGpsTether::slotError(QAbstractSocket::SocketError error)
+void CRtGpsTether::slotDisconnected()
 {
-    qDebug() << "socket error" << error << socket->errorString();
+    lineHost->setEnabled(true);
+    spinPort->setEnabled(true);
+    toolConnect->setChecked(false);
 }
 
-void CRtGpsTether::slotState(QAbstractSocket::SocketState state)
+void CRtGpsTether::slotError(QAbstractSocket::SocketError socketError)
 {
-    qDebug() << "socket state" << state;
+    slotDisconnected();
+    labelStatus->setText("<b style='color: red;'>" + socket->errorString() + "</b>");
 }

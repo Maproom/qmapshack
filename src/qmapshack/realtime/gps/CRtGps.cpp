@@ -58,8 +58,6 @@ void CRtGps::loadSettings(QSettings& cfg)
 
     IRtSource::loadSettings(cfg);
 
-    cfgGroup = cfg.group();
-
     if(info != nullptr)
     {
         info->loadSettings(cfg);
@@ -78,11 +76,7 @@ void CRtGps::saveSettings(QSettings& cfg) const
     {
         info->saveSettings(cfg);
     }
-    IRtGpsDevice * dev = dynamic_cast<IRtGpsDevice*>(device.data());
-    if(dev != nullptr)
-    {
-        dev->saveSettings(cfg);
-    }
+
 }
 
 
@@ -91,60 +85,6 @@ QString CRtGps::getDescription() const
     return tr("<b>GPS</b><br/>"
               "Get position from a GPS device."
               );
-}
-
-QStringList CRtGps::getDevices() const
-{
-    QStringList devices = QGeoPositionInfoSource::availableSources();
-    devices += GPS_TETHER;
-    return devices;
-}
-
-bool CRtGps::setDevice(const QString& name)
-{
-    IRtGpsDevice * dev = dynamic_cast<IRtGpsDevice*>(device.data());
-    if(dev != nullptr)
-    {
-        SETTINGS;
-        cfg.beginGroup(cfgGroup);
-        dev->saveSettings(cfg);
-        cfg.endGroup();
-    }
-
-    delete device;
-
-    qDebug() << "Set GPS device:" << name;
-    device = QGeoPositionInfoSource::createSource(name, this);
-    if(device.isNull())
-    {
-        if(name == GPS_TETHER)
-        {
-            CRtGpsTether * dev = new CRtGpsTether(this);
-            SETTINGS;
-            cfg.beginGroup(cfgGroup);
-            dev->loadSettings(cfg);
-            cfg.endGroup();
-            device = dev;
-        }
-    }
-    if(!device.isNull())
-    {
-        connect(device, &QGeoPositionInfoSource::positionUpdated, this, &CRtGps::slotPositionUpdate);
-    }
-
-    emit sigChanged();
-
-    return !device.isNull();
-}
-
-QGeoPositionInfoSource *CRtGps::getDevice() const
-{
-    return device;
-}
-
-void CRtGps::slotPositionUpdate(const QGeoPositionInfo &update)
-{
-    qDebug() << update;
 }
 
 void CRtGps::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)

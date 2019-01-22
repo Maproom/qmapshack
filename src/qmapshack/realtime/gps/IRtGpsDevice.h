@@ -28,12 +28,9 @@ public:
     IRtGpsDevice() = default;
     virtual ~IRtGpsDevice() = default;
 
-    virtual bool hasConfig() const {return false;}
-    virtual QString getConfig() const = 0;
-    virtual QString getHelp() const = 0;
     virtual void loadSettings(QSettings& cfg) = 0;
     virtual void saveSettings(QSettings& cfg) const = 0;
-    virtual void configure(){}
+
 };
 
 #endif //IRTGPSDEVICE_H

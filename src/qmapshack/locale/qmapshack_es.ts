@@ -478,22 +478,22 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="47"/>
         <source>Archived</source>
-        <translation type="unfinished">Archivado</translation>
+        <translation>Archivado</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="51"/>
         <source>Available</source>
-        <translation type="unfinished">Disponible</translation>
+        <translation>Disponible</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="55"/>
         <source>Not Available</source>
-        <translation type="unfinished">No Disponible</translation>
+        <translation>No Disponible</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
         <source>Needs Maintenance</source>
-        <translation type="unfinished"></translation>
+        <translation>Necesita Reparación</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
@@ -509,7 +509,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="118"/>
         <source> by </source>
-        <translation type="unfinished"></translation>
+        <translation> por</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="205"/>
@@ -7016,7 +7016,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../dem/IDemList.ui" line="199"/>
         <source>Clear Filter</source>
-        <translation type="unfinished">Limpiar filtro</translation>
+        <translation>Limpiar filtro</translation>
     </message>
 </context>
 <context>
@@ -7049,42 +7049,42 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="53"/>
         <source>Owner:</source>
-        <translation type="unfinished"></translation>
+        <translation>Propietario:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="66"/>
         <source>Terrain:</source>
-        <translation type="unfinished"></translation>
+        <translation>Terreno:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
         <source>Difficulty:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dificultad:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="216"/>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="242"/>
         <source>Date Hidden:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha en que se ocultó:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="255"/>
         <source>Last Found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hallado por última vez:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="288"/>
         <source>Listing</source>
-        <translation type="unfinished"></translation>
+        <translation>Listado</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="337"/>
         <source>Visit Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Visitar Web</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="347"/>
@@ -7120,12 +7120,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="363"/>
         <source>Pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Imágenes</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="408"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -7133,7 +7133,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Diálogo</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="132"/>
@@ -11770,7 +11770,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="14"/>
         <source>Icon &amp; Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Icono y Nombre</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="22"/>

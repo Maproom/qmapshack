@@ -60,6 +60,8 @@ CRtWorkspace::CRtWorkspace(QWidget *parent)
         cfg.endGroup();
     }
 
+    treeWidget->expandAll();
+
     cfg.endGroup();
 
     labelHelp->setText(tr("To add a real time source do a right click on the list above. "));

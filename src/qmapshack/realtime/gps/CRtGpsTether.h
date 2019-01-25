@@ -22,15 +22,18 @@
 #include "realtime/gps/IRtGpsDevice.h"
 #include "ui_IRtGpsTether.h"
 
-#include <QWidget>
+#include <functional>
 #include <QTcpSocket>
+#include <QWidget>
+
+using fNemaLine = std::function<void(const QStringList&)>;
 
 class CRtGpsTether : public QWidget, public IRtGpsDevice, private Ui::IRtGpsTether
 {
     Q_OBJECT
 public:
     CRtGpsTether(QWidget *parent);
-    virtual ~CRtGpsTether() = default;
+    virtual ~CRtGpsTether();
 
     void loadSettings(QSettings& cfg) override;
     void saveSettings(QSettings& cfg) const override;
@@ -40,13 +43,34 @@ private slots:
     void slotConnect(bool yes);
     void slotConnected();
     void slotDisconnected();
-
     void slotError(QAbstractSocket::SocketError socketError);
+    void slotReadyRead();
 
+private:
+    bool verifyLine(const QString& line);
 
+    fNemaLine nmeaDefault = [&](const QStringList& t){qDebug() << t[0] << "unknown";};
+
+    void nmeaGPGSV(const QStringList& tokens);
+    void nmeaGLGSV(const QStringList& tokens);
+    void nmeaGPRMC(const QStringList& tokens);
+    void nmeaGPGGA(const QStringList& tokens);
 
 private:
     QTcpSocket * socket;
+    QHash<QString,fNemaLine> dict;
+
+    struct rmc_t
+    {
+        QDateTime time;
+        bool valid {false};
+        qreal lat {0.0};
+        qreal lon {0.0};
+        qreal groundSpeed {0.0};
+        qreal magneticVariation {0.0};
+    };
+
+    QHash<QString, rmc_t> rmc;
 };
 
 #endif //CRTGPSTETHER_H

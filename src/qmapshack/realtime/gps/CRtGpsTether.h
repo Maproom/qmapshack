@@ -52,9 +52,9 @@ private:
     fNemaLine nmeaDefault = [&](const QStringList& t){qDebug() << t[0] << "unknown";};
 
     void nmeaGPGSV(const QStringList& tokens);
-    void nmeaGLGSV(const QStringList& tokens);
     void nmeaGPRMC(const QStringList& tokens);
     void nmeaGPGGA(const QStringList& tokens);
+    void nmeaGPVTG(const QStringList& tokens);
 
 private:
     QTcpSocket * socket;
@@ -62,15 +62,32 @@ private:
 
     struct rmc_t
     {
-        QDateTime time;
+        QDateTime datetime;
         bool valid {false};
         qreal lat {0.0};
         qreal lon {0.0};
         qreal groundSpeed {0.0};
+        qreal trackMadeGood {0.0};
         qreal magneticVariation {0.0};
     };
 
     QHash<QString, rmc_t> rmc;
+
+    struct gga_t
+    {
+        QDateTime datetime;
+        qreal lat  {0.0};
+        qreal lon  {0.0};
+        qint32 quality {-1};
+        qint32 numSatelites {0};
+        qreal horizDilution {0.0};
+        qreal altAboveSeaLevel {0.0};
+        qreal geodialSeparation {0.0};
+        qreal age {0};
+        qint32 diffRefStation {0};
+    };
+
+    QHash<QString, gga_t> gga;
 };
 
 #endif //CRTGPSTETHER_H

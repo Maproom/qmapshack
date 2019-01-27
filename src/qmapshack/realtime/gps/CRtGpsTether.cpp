@@ -39,13 +39,17 @@ CRtGpsTether::CRtGpsTether(QWidget *parent)
     labelStatus->setText("-");
 
     dict["GPGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
-    dict["GLGSV"] = [&](const QStringList& t){nmeaGLGSV(t);};
+    dict["GLGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
+    dict["GNGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
     dict["GPRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
     dict["GLRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
     dict["GNRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
     dict["GPGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
     dict["GLGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
     dict["GNGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
+    dict["GPVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
+    dict["GLVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
+    dict["GNVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
 }
 
 CRtGpsTether::~CRtGpsTether()
@@ -172,16 +176,17 @@ void CRtGpsTether::nmeaGPGSV(const QStringList& tokens)
 {
 }
 
-void CRtGpsTether::nmeaGLGSV(const QStringList& tokens)
-{
-}
 
 void CRtGpsTether::nmeaGPRMC(const QStringList& tokens)
 {
-    const QString& id= tokens[0];
+    const QString& id= tokens[0];    
+    if(tokens.count() < 12)
+    {
+        qDebug() << id << "too short";
+        return;
+    }
 
-    qDebug() << id << "known";
-
+    qDebug() << id << "ok";
     if(!rmc.contains(id))
     {
         rmc[id] = rmc_t();
@@ -189,15 +194,52 @@ void CRtGpsTether::nmeaGPRMC(const QStringList& tokens)
 
     rmc_t& rmc_ = rmc[id];
     rmc_.valid = tokens[2] != "V";
-    rmc_.time = QDateTime::fromString(tokens[1]+tokens[9], "hhmmss.00ddMMyy").addYears(100);
-    rmc_.time.setTimeSpec(Qt::UTC);
+    rmc_.datetime = QDateTime::fromString(tokens[1]+tokens[9], "hhmmss.00ddMMyy").addYears(100);
+    rmc_.datetime.setTimeSpec(Qt::UTC);
     rmc_.lat = (tokens[4] == "N" ? tokens[3].toDouble() : -tokens[3].toDouble())/100;
     rmc_.lon = (tokens[6] == "E" ? tokens[5].toDouble() : -tokens[5].toDouble())/100;
     rmc_.groundSpeed = tokens[7].toDouble() * 1.852 / 3.6;
     rmc_.magneticVariation = tokens[11] == "E" ? tokens[10].toDouble() : -tokens[10].toDouble();
+    rmc_.trackMadeGood = tokens[8].toDouble();
 }
 
 void CRtGpsTether::nmeaGPGGA(const QStringList& tokens)
+{
+    const QString& id= tokens[0];
+    if(tokens.count() < 15)
+    {
+        qDebug() << id << "too short";
+        return;
+    }
+
+    qDebug() << id << "ok";
+    if(!gga.contains(id))
+    {
+        gga[id] = gga_t();
+    }
+
+    gga_t& gga_ = gga[id];
+
+    gga_.datetime.setTime(QTime::fromString(tokens[1],"hhmmss.00"));
+    gga_.datetime.setDate(QDate::currentDate());
+    gga_.datetime.setTimeSpec(Qt::UTC);
+    gga_.lat = (tokens[3] == "N" ? tokens[2].toDouble() : -tokens[2].toDouble())/100;
+    gga_.lon = (tokens[5] == "E" ? tokens[4].toDouble() : -tokens[4].toDouble())/100;
+    gga_.quality = tokens[6].toInt();
+    gga_.numSatelites = tokens[7].toInt();
+    gga_.horizDilution = tokens[8].toDouble();
+    gga_.altAboveSeaLevel = tokens[9].toDouble();
+    gga_.geodialSeparation = tokens[11].toDouble();
+    gga_.age = tokens[13].toInt();
+    gga_.diffRefStation = tokens[14].toInt();
+
+
+//    qDebug() << gga_.datetime << gga_.lat << gga_.lon << gga_.quality << gga_.numSatelites
+//             << gga_.altAboveSeaLevel << gga_.geodialSeparation << gga_.horizDilution;
+
+}
+
+void CRtGpsTether::nmeaGPVTG(const QStringList& tokens)
 {
     qDebug() << tokens;
 }

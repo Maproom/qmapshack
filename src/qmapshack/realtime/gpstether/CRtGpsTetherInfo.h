@@ -16,11 +16,10 @@
 
 **********************************************************************************************/
 
-#ifndef CRTGPSTETHER_H
-#define CRTGPSTETHER_H
+#ifndef CRTGPSINFO_H
+#define CRTGPSINFO_H
 
-#include "realtime/gps/IRtGpsDevice.h"
-#include "ui_IRtGpsTether.h"
+#include "ui_IRtGpsInfo.h"
 
 #include <functional>
 #include <QTcpSocket>
@@ -28,15 +27,18 @@
 
 using fNemaLine = std::function<void(const QStringList&)>;
 
-class CRtGpsTether : public QWidget, public IRtGpsDevice, private Ui::IRtGpsTether
+class CRtGpsTether;
+class QSettings;
+
+class CRtGpsTetherInfo : public QWidget, private Ui::IRtGpsTetherInfo
 {
     Q_OBJECT
 public:
-    CRtGpsTether(QWidget *parent);
-    virtual ~CRtGpsTether();
+    CRtGpsTetherInfo(CRtGpsTether& source, QWidget *parent);
+    virtual ~CRtGpsTetherInfo();
 
-    void loadSettings(QSettings& cfg) override;
-    void saveSettings(QSettings& cfg) const override;
+    void loadSettings(QSettings& cfg);
+    void saveSettings(QSettings& cfg) const;
 
 private slots:
     void slotHelp() const;
@@ -57,6 +59,8 @@ private:
     void nmeaGPVTG(const QStringList& tokens);
 
 private:
+    CRtGpsTether& source;
+
     QTcpSocket * socket;
     QHash<QString,fNemaLine> dict;
 
@@ -90,5 +94,4 @@ private:
     QHash<QString, gga_t> gga;
 };
 
-#endif //CRTGPSTETHER_H
-
+#endif //CRTGPSINFO_H

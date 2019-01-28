@@ -18,7 +18,7 @@
 
 #include "realtime/IRtSource.h"
 #include "realtime/opensky/CRtOpenSky.h"
-#include "realtime/gps/CRtGps.h"
+#include "realtime/gpstether/CRtGpsTether.h"
 
 #include <QtWidgets>
 
@@ -51,7 +51,7 @@ IRtSource* IRtSource::create(int type, QTreeWidget * parent)
         return new CRtOpenSky(parent);
 
     case eTypeGps:
-        return new CRtGps(parent);
+        return new CRtGpsTether(parent);
     }
 
     return nullptr;

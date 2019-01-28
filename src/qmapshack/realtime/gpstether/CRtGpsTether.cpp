@@ -17,18 +17,18 @@
 **********************************************************************************************/
 
 #include "helpers/CSettings.h"
-#include "realtime/gps/CRtGps.h"
-#include "realtime/gps/CRtGpsInfo.h"
-#include "realtime/gps/CRtGpsTether.h"
+#include "realtime/gpstether/CRtGpsTether.h"
+#include "realtime/gpstether/CRtGpsTetherInfo.h"
+#include "realtime/gpstether/CRtGpsTetherInfo.h"
 
 #include <QtPositioning>
 #include <QtWidgets>
 
 #define GPS_TETHER "GPS Tether"
 
-const QString CRtGps::strIcon("://icons/48x48/Gps.png");
+const QString CRtGpsTether::strIcon("://icons/48x48/Gps.png");
 
-CRtGps::CRtGps(QTreeWidget *parent)
+CRtGpsTether::CRtGpsTether(QTreeWidget *parent)
     : IRtSource(eTypeGps, false, parent)
 {
     setIcon(eColumnIcon, QIcon(strIcon));
@@ -39,20 +39,20 @@ CRtGps::CRtGps(QTreeWidget *parent)
 }
 
 
-void CRtGps::registerWithTreeWidget()
+void CRtGpsTether::registerWithTreeWidget()
 {
     QTreeWidget * tree = treeWidget();
     if(tree != nullptr)
     {
         QTreeWidgetItem * itemInfo = new QTreeWidgetItem(this);
         itemInfo->setFlags(Qt::ItemIsEnabled|Qt::ItemNeverHasChildren);
-        info = new CRtGpsInfo(*this, tree);
+        info = new CRtGpsTetherInfo(*this, tree);
         tree->setItemWidget(itemInfo, eColumnWidget, info);
         emit sigChanged();
     }
 }
 
-void CRtGps::loadSettings(QSettings& cfg)
+void CRtGpsTether::loadSettings(QSettings& cfg)
 {
     QMutexLocker lock(&IRtSource::mutex);
 
@@ -66,7 +66,7 @@ void CRtGps::loadSettings(QSettings& cfg)
     emit sigChanged();
 }
 
-void CRtGps::saveSettings(QSettings& cfg) const
+void CRtGpsTether::saveSettings(QSettings& cfg) const
 {
     QMutexLocker lock(&IRtSource::mutex);
 
@@ -80,17 +80,17 @@ void CRtGps::saveSettings(QSettings& cfg) const
 }
 
 
-QString CRtGps::getDescription() const
+QString CRtGpsTether::getDescription() const
 {
-    return tr("<b>GPS</b><br/>"
-              "Get position from a GPS device."
+    return tr("<b>GPS Tether</b><br/>"
+              "Get position via NMEA over TCP/IP."
               );
 }
 
-void CRtGps::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
 {
 }
 
-void CRtGps::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
+void CRtGpsTether::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
 {
 }

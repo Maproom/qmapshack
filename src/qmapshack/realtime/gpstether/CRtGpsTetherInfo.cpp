@@ -17,24 +17,28 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "realtime/gps/CRtGpsTether.h"
+#include "realtime/gpstether/CRtGpsTetherInfo.h"
+#include "realtime/gpstether/CRtGpsTether.h"
 
 #include <QtCore>
 #include <QtNetwork>
 #include <QtWidgets>
 
-CRtGpsTether::CRtGpsTether(QWidget *parent)
+class CRtGpsTether;
+
+CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
     : QWidget(parent)
+    , source(source)
 {
     setupUi(this);
-    connect(toolHelp, &QToolButton::clicked, this, &CRtGpsTether::slotHelp);
-    connect(toolConnect, &QToolButton::toggled, this, &CRtGpsTether::slotConnect);
+    connect(toolHelp, &QToolButton::clicked, this, &CRtGpsTetherInfo::slotHelp);
+    connect(toolConnect, &QToolButton::toggled, this, &CRtGpsTetherInfo::slotConnect);
 
     socket = new QTcpSocket(this);
-    connect(socket, &QTcpSocket::connected, this, &CRtGpsTether::slotConnected);
-    connect(socket, &QTcpSocket::disconnected, this, &CRtGpsTether::slotDisconnected);
+    connect(socket, &QTcpSocket::connected, this, &CRtGpsTetherInfo::slotConnected);
+    connect(socket, &QTcpSocket::disconnected, this, &CRtGpsTetherInfo::slotDisconnected);
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(slotError(QAbstractSocket::SocketError)));
-    connect(socket, &QTcpSocket::readyRead, this, &CRtGpsTether::slotReadyRead);
+    connect(socket, &QTcpSocket::readyRead, this, &CRtGpsTetherInfo::slotReadyRead);
 
     labelStatus->setText("-");
 
@@ -52,7 +56,7 @@ CRtGpsTether::CRtGpsTether(QWidget *parent)
     dict["GNVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
 }
 
-CRtGpsTether::~CRtGpsTether()
+CRtGpsTetherInfo::~CRtGpsTetherInfo()
 {
     if(socket->state() == QAbstractSocket::ConnectedState)
     {
@@ -68,7 +72,7 @@ CRtGpsTether::~CRtGpsTether()
     }
 }
 
-void CRtGpsTether::slotHelp() const
+void CRtGpsTetherInfo::slotHelp() const
 {
     QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"),
                              tr("GPS Tether\n"
@@ -83,23 +87,19 @@ void CRtGpsTether::slotHelp() const
                              );
 }
 
-void CRtGpsTether::loadSettings(QSettings& cfg)
+void CRtGpsTetherInfo::loadSettings(QSettings& cfg)
 {
-    cfg.beginGroup("GpsTether");
     lineHost->setText(cfg.value("host", "").toString());
     spinPort->setValue(cfg.value("port", 10110).toUInt());
-    cfg.endGroup();
 }
 
-void CRtGpsTether::saveSettings(QSettings& cfg) const
+void CRtGpsTetherInfo::saveSettings(QSettings& cfg) const
 {
-    cfg.beginGroup("GpsTether");
     cfg.setValue("host", lineHost->text());
     cfg.setValue("port", spinPort->value());
-    cfg.endGroup();
 }
 
-void CRtGpsTether::slotConnect(bool yes)
+void CRtGpsTetherInfo::slotConnect(bool yes)
 {
     if(yes)
     {
@@ -123,25 +123,25 @@ void CRtGpsTether::slotConnect(bool yes)
     }
 }
 
-void CRtGpsTether::slotConnected()
+void CRtGpsTetherInfo::slotConnected()
 {
     toolConnect->setChecked(true);
 }
 
-void CRtGpsTether::slotDisconnected()
+void CRtGpsTetherInfo::slotDisconnected()
 {
     lineHost->setEnabled(true);
     spinPort->setEnabled(true);
     toolConnect->setChecked(false);
 }
 
-void CRtGpsTether::slotError(QAbstractSocket::SocketError socketError)
+void CRtGpsTetherInfo::slotError(QAbstractSocket::SocketError socketError)
 {
     slotDisconnected();
     labelStatus->setText("<b style='color: red;'>" + socket->errorString() + "</b>");
 }
 
-void CRtGpsTether::slotReadyRead()
+void CRtGpsTetherInfo::slotReadyRead()
 {
     while(socket->canReadLine())
     {
@@ -158,7 +158,7 @@ void CRtGpsTether::slotReadyRead()
     }
 }
 
-bool CRtGpsTether::verifyLine(const QString& line)
+bool CRtGpsTetherInfo::verifyLine(const QString& line)
 {
     quint8 cs = 0;
     const QByteArray& data = line.toLatin1();
@@ -172,12 +172,12 @@ bool CRtGpsTether::verifyLine(const QString& line)
     return line.right(2).toInt(0,16) == cs;
 }
 
-void CRtGpsTether::nmeaGPGSV(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaGPGSV(const QStringList& tokens)
 {
 }
 
 
-void CRtGpsTether::nmeaGPRMC(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaGPRMC(const QStringList& tokens)
 {
     const QString& id= tokens[0];    
     if(tokens.count() < 12)
@@ -203,7 +203,7 @@ void CRtGpsTether::nmeaGPRMC(const QStringList& tokens)
     rmc_.trackMadeGood = tokens[8].toDouble();
 }
 
-void CRtGpsTether::nmeaGPGGA(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaGPGGA(const QStringList& tokens)
 {
     const QString& id= tokens[0];
     if(tokens.count() < 15)
@@ -239,7 +239,7 @@ void CRtGpsTether::nmeaGPGGA(const QStringList& tokens)
 
 }
 
-void CRtGpsTether::nmeaGPVTG(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaGPVTG(const QStringList& tokens)
 {
     qDebug() << tokens;
 }

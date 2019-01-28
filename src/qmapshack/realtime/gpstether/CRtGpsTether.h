@@ -16,23 +16,23 @@
 
 **********************************************************************************************/
 
-#ifndef CRTGPS_H
-#define CRTGPS_H
+#ifndef CRTGPSTETHER_H
+#define CRTGPSTETHER_H
 
 #include "realtime/IRtSource.h"
 
 #include <QPointer>
 
-class CRtGpsInfo;
+class CRtGpsTetherInfo;
 class QGeoPositionInfoSource;
 class QGeoPositionInfo;
 
-class CRtGps : public IRtSource
+class CRtGpsTether : public IRtSource
 {
     Q_OBJECT
 public:
-    CRtGps(QTreeWidget * parent);
-    virtual ~CRtGps() = default;
+    CRtGpsTether(QTreeWidget * parent);
+    virtual ~CRtGpsTether() = default;
 
     void registerWithTreeWidget() override;
 
@@ -47,8 +47,8 @@ public:
     static const QString strIcon;
 
 private:   
-    QPointer<CRtGpsInfo> info;
+    QPointer<CRtGpsTetherInfo> info;
 };
 
-#endif //CRTGPS_H
+#endif //CRTGPSTETHER_H
 

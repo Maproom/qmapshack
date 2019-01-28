@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IRtGpsTether</class>
- <widget class="QWidget" name="IRtGpsTether">
+ <class>IRtGpsInfo</class>
+ <widget class="QWidget" name="IRtGpsInfo">
   <property name="geometry">
    <rect>
     <x>0</x>

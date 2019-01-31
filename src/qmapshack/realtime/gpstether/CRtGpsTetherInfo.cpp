@@ -17,8 +17,9 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "realtime/gpstether/CRtGpsTetherInfo.h"
 #include "realtime/gpstether/CRtGpsTether.h"
+#include "realtime/gpstether/CRtGpsTetherInfo.h"
+#include "units/IUnit.h"
 
 #include <QtCore>
 #include <QtNetwork>
@@ -40,23 +41,50 @@ CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(slotError(QAbstractSocket::SocketError)));
     connect(socket, &QTcpSocket::readyRead, this, &CRtGpsTetherInfo::slotReadyRead);
 
+    timer = new QTimer(this);
+    timer->setSingleShot(false);
+    timer->setInterval(1000);
+    connect(timer, &QTimer::timeout, this, &CRtGpsTetherInfo::slotUpdate);
+
     labelStatus->setText("-");
 
     dict["GPGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
     dict["GLGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
     dict["GNGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
+    dict["GAGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
+    dict["PQGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
+
+    dict["GPGSA"] = [&](const QStringList& t){nmeaGPGSA(t);};
+    dict["GLGSA"] = [&](const QStringList& t){nmeaGPGSA(t);};
+    dict["GNGSA"] = [&](const QStringList& t){nmeaGPGSA(t);};
+    dict["GAGSA"] = [&](const QStringList& t){nmeaGPGSA(t);};
+    dict["PQGSA"] = [&](const QStringList& t){nmeaGPGSA(t);};
+
     dict["GPRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
     dict["GLRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
     dict["GNRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
+    dict["GARMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
+    dict["PQRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
+
     dict["GPGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
     dict["GLGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
     dict["GNGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
+    dict["GAGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
+    dict["PQGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
+
     dict["GPVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
     dict["GLVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
     dict["GNVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
+    dict["GAVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
+    dict["PQVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
 }
 
 CRtGpsTetherInfo::~CRtGpsTetherInfo()
+{
+    disconnectFromHost();
+}
+
+void CRtGpsTetherInfo::disconnectFromHost()
 {
     if(socket->state() == QAbstractSocket::ConnectedState)
     {
@@ -78,11 +106,11 @@ void CRtGpsTetherInfo::slotHelp() const
                              tr("GPS Tether\n"
                                 "The basic idea of this GPS source is to receive a NMEA stream "
                                 "via Ethernet connection. You can use the Android app \"GPS Tether\" "
-                                "to provide a host streaming NMEA data. You Android device must be "
+                                "to provide a host streaming NMEA data. Your Android device must be "
                                 "in the same network or provide a network as a hot spot.\n"
                                 "For configuration you need to know your Android device's IP address "
-                                "or it's host name provided by a DNS. Additionally you need the port number "
-                                "as configured in the app."
+                                "or it's host name provided by a DNS. The app will tell you the address. "
+                                "Additionally you need the port number as configured in the app."
                                 )
                              );
 }
@@ -99,32 +127,44 @@ void CRtGpsTetherInfo::saveSettings(QSettings& cfg) const
     cfg.setValue("port", spinPort->value());
 }
 
+QPointF CRtGpsTetherInfo::getPosition() const
+{
+    if(gga.isValid)
+    {
+        return QPointF(gga.lon, gga.lat);
+    }
+    if(rmc.isValid)
+    {
+        return QPointF(rmc.lon, rmc.lat);
+    }
+
+    return NOPOINTF;
+}
+
 void CRtGpsTetherInfo::slotConnect(bool yes)
 {
+    rmc.isValid = false;
+    gga.isValid = false;
+    labelStatus->setText("-");
+
     if(yes)
-    {
-        labelStatus->setText("-");
+    {        
         lineHost->setEnabled(false);
         spinPort->setEnabled(false);
         socket->connectToHost(lineHost->text(), spinPort->value());
     }
     else
     {
-        if(socket->state() == QAbstractSocket::ConnectedState)
-        {
-            socket->disconnectFromHost();
-        }
-        else
-        {
-            socket->abort();
-            lineHost->setEnabled(true);
-            spinPort->setEnabled(true);
-        }
+        timer->stop();
+        disconnectFromHost();
+        lineHost->setEnabled(true);
+        spinPort->setEnabled(true);
     }
 }
 
 void CRtGpsTetherInfo::slotConnected()
 {
+    timer->start();
     toolConnect->setChecked(true);
 }
 
@@ -158,6 +198,48 @@ void CRtGpsTetherInfo::slotReadyRead()
     }
 }
 
+void CRtGpsTetherInfo::slotUpdate()
+{
+    QDateTime timestamp;
+
+    labelPosition->setText("-");
+    labelSpeed->setText("-");
+    labelElevation->setText("-");
+    labelTime->setText("-");
+
+    if(rmc.isValid)
+    {
+        timestamp = rmc.datetime;
+        QString val, unit;
+        IUnit::degToStr(rmc.lon, rmc.lat, val);
+        labelPosition->setText(val);
+
+        IUnit::self().meter2speed(rmc.groundSpeed, val, unit);
+        labelSpeed->setText(QString("%1%2").arg(val).arg(unit));
+        labelTime->setText(IUnit::datetime2string(rmc.datetime,true));
+    }
+
+    if(gga.isValid)
+    {
+        timestamp = gga.datetime;
+        QString val, unit;
+        IUnit::degToStr(gga.lon, gga.lat, val);
+        labelPosition->setText(val);
+        IUnit::self().meter2elevation(gga.altAboveSeaLevel, val, unit);
+        labelElevation->setText(QString("%1%2").arg(val).arg(unit));
+        labelTime->setText(IUnit::datetime2string(gga.datetime,true));
+        labelTime->setText(IUnit::datetime2string(gga.datetime,true));
+    }
+
+
+    if(lastTimestamp != timestamp)
+    {
+        emit sigChanged();
+    }
+
+    lastTimestamp = timestamp;
+}
+
 bool CRtGpsTetherInfo::verifyLine(const QString& line)
 {
     quint8 cs = 0;
@@ -176,31 +258,46 @@ void CRtGpsTetherInfo::nmeaGPGSV(const QStringList& tokens)
 {
 }
 
+void CRtGpsTetherInfo::nmeaGPGSA(const QStringList& tokens)
+{
+}
 
 void CRtGpsTetherInfo::nmeaGPRMC(const QStringList& tokens)
 {
-    const QString& id= tokens[0];    
+    const QString& id= tokens[0];
     if(tokens.count() < 12)
     {
         qDebug() << id << "too short";
         return;
     }
 
-    qDebug() << id << "ok";
-    if(!rmc.contains(id))
+//    qDebug() << id << "ok";
+    if(tokens[2] == "V")
     {
-        rmc[id] = rmc_t();
+        rmc.isValid = false;
+        return;
+    }
+    rmc.isValid = true;
+    rmc.datetime = QDateTime::fromString(tokens[1]+tokens[9], "hhmmss.00ddMMyy").addYears(100);
+    rmc.datetime.setTimeSpec(Qt::UTC);
+
+    {
+        qreal tmp = tokens[3].toDouble();
+        qreal val = int(tmp/100);
+        val += (tmp - val*100)/60;
+        rmc.lat = tokens[4] == "N" ? val : -val;
     }
 
-    rmc_t& rmc_ = rmc[id];
-    rmc_.valid = tokens[2] != "V";
-    rmc_.datetime = QDateTime::fromString(tokens[1]+tokens[9], "hhmmss.00ddMMyy").addYears(100);
-    rmc_.datetime.setTimeSpec(Qt::UTC);
-    rmc_.lat = (tokens[4] == "N" ? tokens[3].toDouble() : -tokens[3].toDouble())/100;
-    rmc_.lon = (tokens[6] == "E" ? tokens[5].toDouble() : -tokens[5].toDouble())/100;
-    rmc_.groundSpeed = tokens[7].toDouble() * 1.852 / 3.6;
-    rmc_.magneticVariation = tokens[11] == "E" ? tokens[10].toDouble() : -tokens[10].toDouble();
-    rmc_.trackMadeGood = tokens[8].toDouble();
+    {
+        qreal tmp = tokens[5].toDouble();
+        qreal val = int(tmp/100);
+        val += (tmp - val*100)/60;
+        rmc.lon = tokens[6] == "E" ? val : -val;
+    }
+
+    rmc.groundSpeed = tokens[7].toDouble() * 1.852 / 3.6;
+    rmc.magneticVariation = tokens[11] == "E" ? tokens[10].toDouble() : -tokens[10].toDouble();
+    rmc.trackMadeGood = tokens[8].toDouble();
 }
 
 void CRtGpsTetherInfo::nmeaGPGGA(const QStringList& tokens)
@@ -212,34 +309,45 @@ void CRtGpsTetherInfo::nmeaGPGGA(const QStringList& tokens)
         return;
     }
 
-    qDebug() << id << "ok";
-    if(!gga.contains(id))
+    qDebug() << id << "ok" << tokens;
+    if(tokens[6].toInt() == 0)
     {
-        gga[id] = gga_t();
+        gga.isValid = false;
+        return;
     }
 
-    gga_t& gga_ = gga[id];
+    gga.isValid = true;
+    gga.datetime.setTime(QTime::fromString(tokens[1],"hhmmss.00"));
+    gga.datetime.setDate(QDate::currentDate());
+    gga.datetime.setTimeSpec(Qt::UTC);
 
-    gga_.datetime.setTime(QTime::fromString(tokens[1],"hhmmss.00"));
-    gga_.datetime.setDate(QDate::currentDate());
-    gga_.datetime.setTimeSpec(Qt::UTC);
-    gga_.lat = (tokens[3] == "N" ? tokens[2].toDouble() : -tokens[2].toDouble())/100;
-    gga_.lon = (tokens[5] == "E" ? tokens[4].toDouble() : -tokens[4].toDouble())/100;
-    gga_.quality = tokens[6].toInt();
-    gga_.numSatelites = tokens[7].toInt();
-    gga_.horizDilution = tokens[8].toDouble();
-    gga_.altAboveSeaLevel = tokens[9].toDouble();
-    gga_.geodialSeparation = tokens[11].toDouble();
-    gga_.age = tokens[13].toInt();
-    gga_.diffRefStation = tokens[14].toInt();
+    {
+        qreal tmp = tokens[2].toDouble();
+        qreal val = int(tmp/100);
+        val += (tmp - val*100)/60;
+        gga.lat = tokens[3] == "N" ? val : -val;
+    }
+
+    {
+        qreal tmp = tokens[4].toDouble();
+        qreal val = int(tmp/100);
+        val += (tmp - val*100)/60;
+        gga.lon = tokens[5] == "E" ? val : -val;
+    }
+    gga.quality = tokens[6].toInt();
+    gga.numSatelites = tokens[7].toInt();
+    gga.horizDilution = tokens[8].toDouble();
+    gga.altAboveSeaLevel = tokens[9].toDouble();
+    gga.geodialSeparation = tokens[11].toDouble();
+    gga.age = tokens[13].toInt();
+    gga.diffRefStation = tokens[14].toInt();
 
 
-//    qDebug() << gga_.datetime << gga_.lat << gga_.lon << gga_.quality << gga_.numSatelites
-//             << gga_.altAboveSeaLevel << gga_.geodialSeparation << gga_.horizDilution;
-
+//    qDebug() << gga.datetime << gga.lat << gga.lon << gga.quality << gga.numSatelites
+//             << gga.altAboveSeaLevel << gga.geodialSeparation << gga.horizDilution;
 }
 
 void CRtGpsTetherInfo::nmeaGPVTG(const QStringList& tokens)
 {
-    qDebug() << tokens;
+//    qDebug() << tokens;
 }

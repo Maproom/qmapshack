@@ -16,10 +16,12 @@
 
 **********************************************************************************************/
 
+#include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "realtime/CRtDraw.h"
 #include "realtime/gpstether/CRtGpsTether.h"
 #include "realtime/gpstether/CRtGpsTetherInfo.h"
-#include "realtime/gpstether/CRtGpsTetherInfo.h"
+#include "units/IUnit.h"
 
 #include <QtPositioning>
 #include <QtWidgets>
@@ -47,6 +49,8 @@ void CRtGpsTether::registerWithTreeWidget()
         QTreeWidgetItem * itemInfo = new QTreeWidgetItem(this);
         itemInfo->setFlags(Qt::ItemIsEnabled|Qt::ItemNeverHasChildren);
         info = new CRtGpsTetherInfo(*this, tree);
+        connect(info, &CRtGpsTetherInfo::sigChanged, this, &CRtGpsTether::sigChanged);
+
         tree->setItemWidget(itemInfo, eColumnWidget, info);
         emit sigChanged();
     }
@@ -76,7 +80,6 @@ void CRtGpsTether::saveSettings(QSettings& cfg) const
     {
         info->saveSettings(cfg);
     }
-
 }
 
 
@@ -89,6 +92,30 @@ QString CRtGpsTether::getDescription() const
 
 void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
 {
+    if(info.isNull())
+    {
+        return;
+    }
+
+    if(checkState(eColumnCheckBox) != Qt::Checked)
+    {
+        return;
+    }
+
+    QPointF pos = info->getPosition();
+    if(pos == NOPOINTF)
+    {
+        return;
+    }
+
+    pos *= DEG_TO_RAD;
+    rt->convertRad2Px(pos);
+
+    p.setBrush(CDraw::brushBackSemiBlue);
+    p.setPen(CDraw::penBorderBlue);
+    p.drawEllipse(pos, 10, 10);
+
+    p.drawEllipse(pos, 2, 2);
 }
 
 void CRtGpsTether::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)

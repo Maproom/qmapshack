@@ -19,7 +19,7 @@
 #ifndef CRTGPSINFO_H
 #define CRTGPSINFO_H
 
-#include "ui_IRtGpsInfo.h"
+#include "ui_IRtGpsTetherInfo.h"
 
 #include <functional>
 #include <QTcpSocket>
@@ -38,7 +38,11 @@ public:
     virtual ~CRtGpsTetherInfo();
 
     void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg) const;
+    void saveSettings(QSettings& cfg) const;    
+
+    QPointF getPosition() const;
+signals:
+    void sigChanged();
 
 private slots:
     void slotHelp() const;
@@ -47,9 +51,11 @@ private slots:
     void slotDisconnected();
     void slotError(QAbstractSocket::SocketError socketError);
     void slotReadyRead();
+    void slotUpdate();
 
 private:
     bool verifyLine(const QString& line);
+    void disconnectFromHost();
 
     fNemaLine nmeaDefault = [&](const QStringList& t){qDebug() << t[0] << "unknown";};
 
@@ -57,17 +63,22 @@ private:
     void nmeaGPRMC(const QStringList& tokens);
     void nmeaGPGGA(const QStringList& tokens);
     void nmeaGPVTG(const QStringList& tokens);
+    void nmeaGPGSA(const QStringList& tokens);
 
 private:
     CRtGpsTether& source;
 
     QTcpSocket * socket;
+    QTimer * timer;
+
     QHash<QString,fNemaLine> dict;
+
+    QDateTime lastTimestamp;
 
     struct rmc_t
     {
+        bool isValid {false};
         QDateTime datetime;
-        bool valid {false};
         qreal lat {0.0};
         qreal lon {0.0};
         qreal groundSpeed {0.0};
@@ -75,10 +86,11 @@ private:
         qreal magneticVariation {0.0};
     };
 
-    QHash<QString, rmc_t> rmc;
+    rmc_t rmc;
 
     struct gga_t
     {
+        bool isValid {false};
         QDateTime datetime;
         qreal lat  {0.0};
         qreal lon  {0.0};
@@ -91,7 +103,7 @@ private:
         qint32 diffRefStation {0};
     };
 
-    QHash<QString, gga_t> gga;
+    gga_t gga;
 };
 
 #endif //CRTGPSINFO_H

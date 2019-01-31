@@ -44,6 +44,7 @@ public:
     static QPen penBorderRed;
     static QBrush brushBackWhite;
     static QBrush brushBackYellow;
+    static QBrush brushBackSemiBlue;
 
     /**
        @brief Draw arrows along a line

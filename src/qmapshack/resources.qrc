@@ -57,7 +57,7 @@
         <file>../icons/32x32/AddTrk.png</file>
         <file>../icons/32x32/AddWpt.png</file>
         <file>../icons/32x32/Aircraft.png</file>
-        <file>../icons/32x32/Apply.png</file>        
+        <file>../icons/32x32/Apply.png</file>
         <file>../icons/32x32/Area.png</file>
         <file>../icons/32x32/AreaMove.png</file>
         <file>../icons/32x32/AreaOn.png</file>
@@ -209,13 +209,13 @@
         <file>../icons/32x32/SearchGeonames.png</file>
         <file>../icons/32x32/SearchGoogle.png</file>
         <file>../icons/32x32/SearchNominatim.png</file>
-        <file>../icons/32x32/SearchWeb.png</file>        
+        <file>../icons/32x32/SearchWeb.png</file>
         <file>../icons/32x32/SearchWebCam.png</file>
         <file>../icons/32x32/SearchWebDefault.png</file>
         <file>../icons/32x32/SearchWebOutings.png</file>
         <file>../icons/32x32/SearchWebPeakfinder.png</file>
         <file>../icons/32x32/SearchWebTracks.png</file>
-        <file>../icons/32x32/SearchWebWaymarked.png</file>            
+        <file>../icons/32x32/SearchWebWaymarked.png</file>
         <file>../icons/32x32/SearchWebMeteo.png</file>
         <file>../icons/32x32/SelectArea.png</file>
         <file>../icons/32x32/SelectColor.png</file>
@@ -533,6 +533,7 @@
         <file>../icons/48x48/WptProj.png</file>
         <file>../icons/48x48/WptProx.png</file>
         <file>../icons/48x48/WptDelProx.png</file>
+        <file>../icons/48x48/FilterZeroSpeedDriftCleaner.png</file>
         <file>../icons/48x48/Zoom.png</file>
         <file>../icons/8x8/bullet_black.png</file>
         <file>../icons/8x8/bullet_blue.png</file>
@@ -653,6 +654,7 @@
         <file>templates/Hiking_Tour_Summary_(Advanced).ui</file>
         <file>templates/Cycling_Tour_Summary.ui</file>
         <file>templates/Running_Summary.ui</file>
+
         <file>../macOS/closeButtonGrey.png</file>
     </qresource>
 </RCC>

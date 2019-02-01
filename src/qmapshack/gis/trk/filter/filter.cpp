@@ -25,8 +25,8 @@
 #include "gis/trk/CPropertyTrk.h"
 #include "GeoMath.h"
 
-
 #include <proj_api.h>
+#include <QLineF>
 #include <QtMath>
 
 void CGisItemTrk::filterReducePoints(qreal dist)
@@ -577,6 +577,197 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
     deriveSecondaryData();
 
     changed(tr("Start Point moved to: ") + wptName.toLatin1(), "://icons/48x48/FilterChangeStartPoint.png");
+}
+
+void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
+{
+    IGisProject * project = CGisWorkspace::self().selectProject(false);
+    if(nullptr == project)
+    {
+        return;
+    }
+
+    int part = 1;
+    QVector<CTrackData::trkpt_t> pts;
+
+    for (const CTrackData::trkpt_t& headPt : trk)
+    {
+        if(headPt.isHidden())
+        {
+            continue;
+        }
+
+        pts << headPt;
+
+        if (pts.size() >= 4)
+        {
+            const QLineF headLine = QLineF(headPt.lon, headPt.lat, pts[pts.size()-2].lon, pts[pts.size()-2].lat);
+
+            bool firstCycle = true;
+            CTrackData::trkpt_t prevScannedPt;
+            for (const CTrackData::trkpt_t& scannedPt : pts)
+            {
+                if (scannedPt.idxTotal == pts[pts.size()-2].idxTotal)
+                {
+                    break;
+                }
+
+                if (firstCycle)
+                {
+                    prevScannedPt = scannedPt;
+                    firstCycle = false;
+                    continue;
+                }
+
+                const QLineF scannedLine = QLineF(scannedPt.lon, scannedPt.lat, prevScannedPt.lon, prevScannedPt.lat);
+                QPointF intersectionPoint;
+
+                if ( ( headLine.intersect(scannedLine, &intersectionPoint) == QLineF::BoundedIntersection)
+                     &&
+                     (pts[pts.size()-2].distance - scannedPt.distance) > minLoopLength) // loop is long enough to cut the track)
+                {
+                    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts[pts.size()-2].idxTotal, trk, project);
+                    part++;
+                    pts.remove(0, pts.size()-2);
+
+                    break;
+                }
+
+                prevScannedPt = scannedPt;
+            }
+        }
+    }
+
+
+    // last part : no loop detected but this last part should be copied, too
+    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts.last().idxTotal, trk, project);
+}
+
+void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
+{
+    qint32 knotPtsCount = 0;
+    bool knotStarted = false;
+    qreal knotLength = 0.0;
+    qreal firstKnotEndSegmentFoundLength = 0.0;
+    pointDP knotStartPreviousPt, knotEndPt;
+    bool firstKnotEndSegmentFound = false;
+    QVector<bool> trackPoints;
+
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        if(pt.isHidden() )
+        {
+            trackPoints << false;  // it is already invisible, then it is not necessary to hide it again
+            continue;
+        }
+
+        if (pt.idxVisible == 0) // first visible point
+        {
+            trackPoints << false; // first visible point will never be hidden
+        }
+        else
+        {
+            const CTrackData::trkpt_t *prevVisiblePt = trk.getTrkPtByVisibleIndex(pt.idxVisible-1);
+            qreal d = pt.distance - prevVisiblePt->distance; // "distance" field of trackpoints includes visible points only
+
+            if (d < distance) // "distance" defines the threshold at which knots are detected: knot starts when
+                              // distance between 2 consecutive points is shorter than this
+            {
+                firstKnotEndSegmentFound = false;
+
+                if (!knotStarted)
+                {
+                    knotStartPreviousPt.x = prevVisiblePt->lon * DEG_TO_RAD;
+                    knotStartPreviousPt.y = prevVisiblePt->lat * DEG_TO_RAD;
+                    knotStarted = true;
+                }
+
+                knotPtsCount++;
+                knotLength += d;
+            }
+            else
+            {
+                if (!knotStarted)
+                {
+                    trackPoints << false; // not part of a knot : point will not be hidden
+                }
+
+                if (knotStarted && !firstKnotEndSegmentFound) // when computed position solution change (when a satellite (dis-)appears), a position jump occurs
+                                                              // and a single "long segment" is recorded: this is not the end of the knot
+                {
+                    firstKnotEndSegmentFound = true;
+
+                    knotEndPt.x = prevVisiblePt->lon * DEG_TO_RAD;
+                    knotEndPt.y = prevVisiblePt->lat * DEG_TO_RAD;
+
+                    knotPtsCount++;
+                    knotLength += d;
+                    firstKnotEndSegmentFoundLength = d;
+
+                    continue;
+                }
+
+                if (knotStarted && firstKnotEndSegmentFound) // now we have a second long segment in a row: this is not a solution change
+                                                             // and this may be the end of the knot
+                {
+                    knotPtsCount--; // to remove point corresponding to 1st long segment found
+                    knotLength -= firstKnotEndSegmentFoundLength; // to remove length corresponding to 1st long segment found
+                    qreal straightDistance = GPS_Math_DistanceQuick(knotStartPreviousPt.x, knotStartPreviousPt.y, knotEndPt.x, knotEndPt.y);
+
+                    if (knotLength > ratio * straightDistance) // Ratio is used when track has straight parts at low speed:
+                                                               // these are not knots and must not be removed.
+                                                               // Knots are twisty, slow speed parts are not.
+                                                               // The filter will detect a knot if the length of the knot is greater
+                                                               // than the ratio multiplied by the distance on a straight
+                                                               // line between the beginning of the knot and its end.
+                                                               // The default value of the ratio parameter is 2.
+
+                    {      // true knot
+                        for(qint32 i = 0; i < knotPtsCount; i++)
+                        {
+                            trackPoints << true;
+                        }
+                    }
+                    else
+                    {      // low speed part, not a knot
+                        for(qint32 i = 0; i < knotPtsCount; i++)
+                        {
+                            trackPoints << false;
+                        }
+                    }
+                    knotLength = 0;
+                    knotPtsCount = 0;
+                    knotStarted = false;
+
+                    trackPoints << false; // second point of the first long segment found
+                    trackPoints << false; // second point of the second long segment found
+                }
+            }
+        }
+    }
+
+    if (knotPtsCount > 0) // if knot is at the end of the track, these points must be hidden, too
+    {
+        for(qint32 i = 0; i < knotPtsCount; i++)
+        {
+            trackPoints << true;
+        }
+    }
+
+    Q_ASSERT_X(trackPoints.size() == trk.segs.last().pts.last().idxTotal + 1, "just before visibility change", "trackPoints size is different from trk number of points");
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        bool toBeHidden = trackPoints.takeFirst();
+        if (toBeHidden)
+        {
+            pt.setFlag(CTrackData::trkpt_t::eFlagHidden);
+        }
+    }
+
+    deriveSecondaryData();
+    QString val, unit;
+    IUnit::self().meter2distance(distance, val, unit);
+    changed(tr("Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)").arg(val).arg(unit).arg(ratio), "://icons/48x48/FilterZeroSpeedDriftCleaner.png");
 }
 
 void CGisItemTrk::filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet)

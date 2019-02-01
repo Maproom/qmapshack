@@ -25,6 +25,7 @@
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
 #include "gis/trk/filter/CFilterInterpolateElevation.h"
 #include "gis/trk/filter/CFilterInvalid.h"
+#include "gis/trk/filter/CFilterLoopsCut.h"
 #include "gis/trk/filter/CFilterMedian.h"
 #include "gis/trk/filter/CFilterNewDate.h"
 #include "gis/trk/filter/CFilterObscureDate.h"
@@ -36,6 +37,7 @@
 #include "gis/trk/filter/CFilterSplitSegment.h"
 #include "gis/trk/filter/CFilterSubPt2Pt.h"
 #include "gis/trk/filter/CFilterTerrainSlope.h"
+#include "gis/trk/filter/CFilterZeroSpeedDriftCleaner.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/Signals.h"
@@ -173,7 +175,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
 
     // this will the largest minimum width of all filter widgets
     qint32 minWidth = 0;
-    addFilterGroup<CFilterDouglasPeuker, CFilterInvalid, CFilterReset, CFilterDelete>
+    addFilterGroup<CFilterDouglasPeuker, CFilterZeroSpeedDriftCleaner, CFilterInvalid, CFilterReset, CFilterDelete>
         (treeFilter, trk, tr("Reduce visible track points"), "://icons/48x48/PointHide.png", minWidth);
 
     addFilterGroup<CFilterMedian, CFilterInterpolateElevation, CFilterReplaceElevation, CFilterOffsetElevation>
@@ -182,7 +184,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
         (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png", minWidth);
 
-    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint, CFilterEnergyCycle>
+    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint, CFilterLoopsCut, CFilterEnergyCycle>
         (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png", minWidth);
 
     // limit tree widget horizontal size to the filter widget with the largest minimum size

@@ -531,6 +531,18 @@ public:
 
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline);
 
+    void gainUserFocus(bool yes);
+
+    bool hasUserFocus() const
+    {
+        return keyUserFocus == key;
+    }
+
+    static const QString& getUserFocus()
+    {
+        return keyUserFocus;
+    }
+
 protected:
     void genKey() const;
     virtual void setupName(const QString& defaultName);
@@ -564,6 +576,8 @@ protected:
     static const QString gpx_ns;
     static const QString xsi_ns;
     static const QString gpxdata_ns;
+
+    static QString keyUserFocus;
 
     QPointer<CDetailsPrj> dlgDetails;
 

@@ -26,6 +26,7 @@
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
 #include "helpers/CDraw.h"
+#include "mouse/CScrOptSemaphoreLocker.h"
 #include "mouse/IMouse.h"
 
 #include <QtWidgets>
@@ -76,60 +77,70 @@ CScrOptWpt::~CScrOptWpt()
 
 void CScrOptWpt::slotDelete()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().delItemByKey(key);
     close();
 }
 
 void CScrOptWpt::slotEdit()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().editItemByKey(key);
     close();
 }
 
 void CScrOptWpt::slotCopy()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().copyItemByKey(key);
     close();
 }
 
 void CScrOptWpt::slotMove()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().moveWptByKey(key);
     close();
 }
 
 void CScrOptWpt::slotProj()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().projWptByKey(key);
     close();
 }
 
 void CScrOptWpt::slotBubble()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().toggleWptBubble(key);
     close();
 }
 
 void CScrOptWpt::slotDeleteRadius()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().deleteWptRadius(key);
     close();
 }
 
 void CScrOptWpt::slotNogoArea()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().toggleNogoItem(key);
     close();
 }
 
 void CScrOptWpt::slotEditRadius()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().editWptRadius(key);
     close();
 }
 
 void CScrOptWpt::slotAddElevation()
 {
+    CScrOptSemaphoreLocker lock(*this);
     QList<IGisItem::key_t> keys;
     keys << key;
     CGisWorkspace::self().addEleToWptTrkByKey(keys);
@@ -138,6 +149,7 @@ void CScrOptWpt::slotAddElevation()
 
 void CScrOptWpt::slotSearchWeb()
 {
+    CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().searchWebByKey(key);
     close();
 }

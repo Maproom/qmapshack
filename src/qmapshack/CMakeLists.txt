@@ -173,6 +173,7 @@ set( SRCS
     gis/trk/filter/CFilterEnergyCycleDlg.cpp
     gis/trk/filter/CFilterInterpolateElevation.cpp
     gis/trk/filter/CFilterInvalid.cpp
+    gis/trk/filter/CFilterLoopsCut.cpp
     gis/trk/filter/CFilterMedian.cpp
     gis/trk/filter/CFilterNewDate.cpp
     gis/trk/filter/CFilterObscureDate.cpp
@@ -186,6 +187,7 @@ set( SRCS
     gis/trk/filter/CFilterSplitSegment.cpp
     gis/trk/filter/CFilterSubPt2Pt.cpp
     gis/trk/filter/CFilterTerrainSlope.cpp
+    gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp
     gis/trk/filter/filter.cpp
     gis/wpt/CDetailsGeoCache.cpp
     gis/wpt/CDetailsWpt.cpp
@@ -193,7 +195,7 @@ set( SRCS
     gis/wpt/CProjWpt.cpp
     gis/wpt/CScrOptWpt.cpp
     gis/wpt/CScrOptWptRadius.cpp
-    gis/wpt/CSetupNewWpt.cpp
+    gis/wpt/CSetupIconAndName.cpp
     grid/CGrid.cpp
     grid/CGridSetup.cpp
     grid/CProjWizard.cpp
@@ -257,6 +259,7 @@ set( SRCS
     mouse/CScrOptRangeTrk.cpp
     mouse/CScrOptRuler.cpp
     mouse/CScrOptSelect.cpp
+    mouse/CScrOptSemaphoreLocker.cpp
     mouse/CScrOptUnclutter.cpp
     mouse/IMouse.cpp
     mouse/IMouseSelect.cpp
@@ -266,7 +269,7 @@ set( SRCS
     mouse/line/CLineOpMovePoint.cpp
     mouse/line/CLineOpSelectRange.cpp
     mouse/line/CScrOptEditLine.cpp
-    mouse/line/CScrOptRangeLine.cpp
+    mouse/line/CScrOptRangeLine.cpp    
     mouse/line/ILineOp.cpp
     mouse/line/IMouseEditLine.cpp
     plot/CPlot.cpp
@@ -498,6 +501,7 @@ set( HDRS
     gis/trk/filter/CFilterEnergyCycleDlg.h
     gis/trk/filter/CFilterInterpolateElevation.h
     gis/trk/filter/CFilterInvalid.h
+    gis/trk/filter/CFilterLoopsCut.h
     gis/trk/filter/CFilterMedian.h
     gis/trk/filter/CFilterNewDate.h
     gis/trk/filter/CFilterObscureDate.h
@@ -511,13 +515,14 @@ set( HDRS
     gis/trk/filter/CFilterSplitSegment.h
     gis/trk/filter/CFilterSubPt2Pt.h
     gis/trk/filter/CFilterTerrainSlope.h
+    gis/trk/filter/CFilterZeroSpeedDriftCleaner.h
     gis/wpt/CDetailsGeoCache.h
     gis/wpt/CDetailsWpt.h
     gis/wpt/CGisItemWpt.h
     gis/wpt/CProjWpt.h
     gis/wpt/CScrOptWpt.h
     gis/wpt/CScrOptWptRadius.h
-    gis/wpt/CSetupNewWpt.h
+    gis/wpt/CSetupIconAndName.h
     grid/CGrid.h
     grid/CGridSetup.h
     grid/CProjWizard.h
@@ -586,6 +591,7 @@ set( HDRS
     mouse/CScrOptRangeTrk.h
     mouse/CScrOptRuler.h
     mouse/CScrOptSelect.h
+    mouse/CScrOptSemaphoreLocker.h
     mouse/CScrOptUnclutter.h
     mouse/IMouse.h
     mouse/IMouseSelect.h
@@ -731,6 +737,7 @@ set( UIS
     gis/trk/filter/IFilterEnergyCycleDlg.ui
     gis/trk/filter/IFilterInterpolateElevation.ui
     gis/trk/filter/IFilterInvalid.ui
+    gis/trk/filter/IFilterLoopsCut.ui
     gis/trk/filter/IFilterMedian.ui
     gis/trk/filter/IFilterNewDate.ui
     gis/trk/filter/IFilterObscureDate.ui
@@ -744,12 +751,13 @@ set( UIS
     gis/trk/filter/IFilterSplitSegment.ui
     gis/trk/filter/IFilterSubPt2Pt.ui
     gis/trk/filter/IFilterTerrainSlope.ui
+    gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui
     gis/wpt/IDetailsGeoCache.ui
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IProjWpt.ui
     gis/wpt/IScrOptWpt.ui
     gis/wpt/IScrOptWptRadius.ui
-    gis/wpt/ISetupNewWpt.ui
+    gis/wpt/ISetupIconAndName.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
     helpers/IElevationDialog.ui

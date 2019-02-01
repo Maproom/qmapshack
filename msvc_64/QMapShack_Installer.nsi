@@ -115,7 +115,8 @@ Section "QMapShack" QMapShack
     File Files\*.ico
     ;File Files\*.png
   SetOutPath "$INSTDIR\translations"
-    File Files\translations\qmapshack_*.qm  
+    File Files\translations\qmapshack_*.qm
+    File Files\translations\qmaptool_*.qm
   ;END QMapShack Files    
    
   ;BEGIN Qt Files

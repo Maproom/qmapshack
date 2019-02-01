@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -620,19 +621,17 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     const QDomNamedNodeMap& attr = xmlCache.attributes();
     geocache.id = attr.namedItem("id").nodeValue().toInt();
 
+    QDomNode geocacheAttributes = xmlCache.namedItem("groundspeak:attributes");
+
     geocache.archived   = attr.namedItem("archived").nodeValue().toLocal8Bit() == "True";
     geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
-    if(geocache.archived)
+
+    for(QDomNode thisAttribute = geocacheAttributes.firstChild(); !thisAttribute.isNull(); thisAttribute=thisAttribute.nextSibling())
     {
-        geocache.status = tr("Archived");
-    }
-    else if(geocache.available)
-    {
-        geocache.status = tr("Available");
-    }
-    else
-    {
-        geocache.status = tr("Not Available");
+        if(thisAttribute.attributes().namedItem("id").nodeValue() =="42") //42 is the code for 'Needs maintenance'
+        {
+            geocache.needsMaintenance = true;
+        }
     }
 
     readXml(xmlCache, "groundspeak:name",              geocache.name);
@@ -687,6 +686,18 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
     writeXml(xmlCache, "groundspeak:placed_by", geocache.owner);
     writeXml(xmlCache, "groundspeak:type", geocache.type);
     writeXml(xmlCache, "groundspeak:container", geocache.container);
+
+    if(geocache.needsMaintenance)
+    {
+        QDomElement attributes = xmlCache.ownerDocument().createElement("groundspeak:attributes");
+        QDomElement attributeNM = xmlCache.ownerDocument().createElement("groundspeak:attribute");
+        attributeNM.setAttribute("id", 42);
+        attributeNM.setAttribute("inc", 1);
+        QDomText text = xmlCache.ownerDocument().createTextNode("Needs maintenance");
+        attributeNM.appendChild(text);
+        attributes.appendChild(attributeNM);
+        xmlCache.appendChild(attributes);
+    }
 
     if(geocache.difficulty == int(geocache.difficulty))
     {

@@ -235,7 +235,7 @@ void CMouseNormal::scaleChanged()
 void CMouseNormal::resetState()
 {
     screenUnclutter->clear();
-    if(!screenItemOption.isNull())
+    if(!screenItemOption.isNull() && screenItemOption->isNotLocked())
     {
         screenItemOption->close();
     }

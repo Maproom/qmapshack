@@ -22,6 +22,7 @@
 #include <QPixmap>
 #include <QPointer>
 #include <QRect>
+#include <QSemaphore>
 #include <QWidget>
 
 class QMouseEvent;
@@ -48,6 +49,11 @@ public:
     virtual void draw(QPainter& p) = 0;
     virtual void mouseMove(const QPoint& pos);
 
+    bool isNotLocked() const
+    {
+        return semaphore.available();
+    }
+
 protected slots:
     void slotLinkActivated(const QString& link);
 
@@ -59,6 +65,9 @@ protected:
     QPoint mousePos;
 
     QPointer<IMouse> mouse;
+
+    friend class CScrOptSemaphoreLocker;
+    QSemaphore semaphore {1};
 };
 
 #endif //ISCROPT_H

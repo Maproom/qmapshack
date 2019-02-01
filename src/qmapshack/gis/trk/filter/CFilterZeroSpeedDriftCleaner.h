@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 OMichel Durand zero@cms123.fr
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,35 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef CSETUPNEWWPT_H
-#define CSETUPNEWWPT_H
+#ifndef CFILTERZEROSPEEDDRIFTCLEANER_H
+#define CFILTERZEROSPEEDDRIFTCLEANER_H
 
+#include "CMainWindow.h"
+#include "ui_IFilterZeroSpeedDriftCleaner.h"
+#include <QWidget>
 
-#include "ui_ISetupNewWpt.h"
-#include <QDialog>
+class CGisItemTrk;
 
-class CSetupNewWpt : public QDialog, private Ui::ISetupNewWpt
+class CFilterZeroSpeedDriftCleaner : public QWidget, private Ui::IFilterZeroSpeedDriftCleaner
 {
     Q_OBJECT
 public:
-    CSetupNewWpt(QPointF& pt, QString& icon, QString& name, QWidget * parent);
-    virtual ~CSetupNewWpt();
-
-public slots:
-    void accept() override;
-    void reject() override;
+    CFilterZeroSpeedDriftCleaner(CGisItemTrk& trk, QWidget *parent);
+    virtual ~CFilterZeroSpeedDriftCleaner();
 
 private slots:
-    void slotEditPosition(const QString& str);
-    void slotEditName(const QString& str);
-    void slotChangeIcon();
+    void slotApply();
+    void showHelp();
 
 private:
-    void checkInput();
-    QPointF &pt;
-    QString &icon;
-    QString &name;
+    CGisItemTrk& trk;
 };
 
-#endif //CSETUPNEWWPT_H
+#endif //CFILTERZEROSPEEDDRIFTCLEANER_H
 

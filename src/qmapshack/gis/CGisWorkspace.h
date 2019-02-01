@@ -336,7 +336,7 @@ public:
        @brief Add a new waypoint by Position
        @param pt    the position in [?]
      */
-    void addWptByPos(QPointF pt, const QString& label = QString::Null(), const QString& desc = QString::Null()) const;
+    void addWptByPos(QPointF pt, const QString& name = QString::Null(), const QString& desc = QString::Null()) const;
 
     void toggleWptBubble(const IGisItem::key_t &key);
 
@@ -399,6 +399,8 @@ public:
 
     void makeRteFromWpt(const QList<IGisItem::key_t>& keys);
 
+    void editPrxWpt(const QList<IGisItem::key_t>& keys);
+
     void changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym);
 
     void addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys);
@@ -413,7 +415,7 @@ public:
 
        @return 0 if no project was selected.
      */
-    IGisProject * selectProject();
+    IGisProject * selectProject(bool forceSelect);
 
     void postEventForWks(QEvent * event);
 

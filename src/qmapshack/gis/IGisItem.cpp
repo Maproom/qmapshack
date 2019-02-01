@@ -533,6 +533,30 @@ void IGisItem::cutHistoryBefore()
     }
 }
 
+void IGisItem::squashHistory()
+{
+    if(history.events.size() < 2)
+    {
+        return;
+    }
+
+    history_event_t& first = history.events.first();
+    history_event_t& last = history.events.last();
+
+    last.time    = first.time;
+    last.who     = first.who;
+    last.icon    = first.icon;
+    last.comment = first.comment;
+
+    history.histIdxCurrent = 0;
+    history.histIdxInitial = 0;
+
+    while(history.events.size() > 1)
+    {
+        history.events.pop_front();
+    }
+}
+
 bool IGisItem::isReadOnly() const
 {
     return !(flags & eFlagWriteAllowed) || isOnDevice();
@@ -783,11 +807,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     if(!isReadOnly || !isEmpty)
     {
         str += toLink(isReadOnly, "description", tr("<h4>Description:</h4>"), key);
-        if(removeHtml(desc).simplified().isEmpty())
-        {
-            str += tr("<p>--- no description ---</p>");
-        }
-        else
+        if(!removeHtml(desc).simplified().isEmpty())
         {
             str += desc;
         }
@@ -797,11 +817,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     if(!isReadOnly || !isEmpty)
     {
         str += toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>"), key);
-        if(isEmpty)
-        {
-            str += tr("<p>--- no comment ---</p>");
-        }
-        else
+        if(!isEmpty)
         {
             str += cmt;
         }
@@ -811,11 +827,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     if(!isReadOnly || !isEmpty)
     {
         str += toLink(isReadOnly, "links", tr("<h4>Links:</h4>"), key);
-        if(isEmpty)
-        {
-            str += tr("<p>--- no links ---</p>");
-        }
-        else
+        if(!isEmpty)
         {
             for(const link_t &link : links)
             {
@@ -993,7 +1005,7 @@ bool IGisItem::getNameAndProject(QString &name, IGisProject *&project, const QSt
         return false;
     }
 
-    project = CGisWorkspace::self().selectProject();
+    project = CGisWorkspace::self().selectProject(false);
     return nullptr != project;
 }
 

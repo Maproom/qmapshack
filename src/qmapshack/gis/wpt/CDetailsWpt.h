@@ -31,6 +31,11 @@ public:
     CDetailsWpt(CGisItemWpt& wpt, QWidget * parent);
     virtual ~CDetailsWpt();
 
+    void disableHistory()
+    {
+        tabWidget->setTabEnabled(1, false);
+    }
+
 private slots:
     void slotNameChanged(const QString &name);
     void slotNameChangeFinished();

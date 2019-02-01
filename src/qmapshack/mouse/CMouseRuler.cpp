@@ -25,7 +25,6 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/wpt/CSetupNewWpt.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "mouse/CMouseRuler.h"
@@ -156,14 +155,13 @@ void CMouseRuler::slotToWpt()
 {
     QString icon;
     QString name;
-    QPointF point = NOPOINTF;
 
-    if(!CGisItemWpt::getNewWptData(point, icon, name))
+    if(!CGisItemWpt::getIconAndName(icon, name))
     {
         return;
     }
 
-    IGisProject * project = CGisWorkspace::self().selectProject();
+    IGisProject * project = CGisWorkspace::self().selectProject(false);
     if(nullptr == project)
     {
         return;

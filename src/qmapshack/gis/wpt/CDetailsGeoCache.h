@@ -34,6 +34,7 @@ public:
     virtual ~CDetailsGeoCache();
 
 private slots:
+    void slotVisitWebsite();
     void slotHintChanged(bool on);
     void slotLinkClicked(const QUrl& url);
     void slotCollectSpoiler();

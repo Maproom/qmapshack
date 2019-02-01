@@ -846,7 +846,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
         }
 
         updateExtrema(extremaSpeed,    pt.speed, pos);
-        updateExtrema(extremaEle,      pt.ele, pos);        
+        updateExtrema(extremaEle,      pt.ele, pos);
         updateExtrema(extremaSlope,    pt.slope1, pos);
         updateExtrema(extremaProgress, pt.distance, pos);
     }

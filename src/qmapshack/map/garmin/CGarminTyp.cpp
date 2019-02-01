@@ -136,6 +136,11 @@ bool CGarminTyp::parseHeader(QDataStream& in)
 
 bool CGarminTyp::parseDrawOrder(QDataStream& in, QList<quint32>& drawOrder)
 {
+    if(sectOrder.dataLength == 0)
+    {
+        return true;
+    }
+
     if(sectOrder.arrayModulo != 5)
     {
         return false;
@@ -216,6 +221,11 @@ bool CGarminTyp::parseDrawOrder(QDataStream& in, QList<quint32>& drawOrder)
 bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& polygons)
 {
     bool tainted = false;
+
+    if(sectPolygons.dataLength == 0)
+    {
+        return true;
+    }
 
     if(!sectPolygons.arrayModulo || ((sectPolygons.arraySize % sectPolygons.arrayModulo) != 0))
     {
@@ -530,6 +540,11 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
 bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>& polylines)
 {
     bool tainted = false;
+
+    if(sectPolylines.dataLength == 0)
+    {
+        return true;
+    }
 
     if(!sectPolylines.arrayModulo || ((sectPolylines.arraySize % sectPolylines.arrayModulo) != 0))
     {

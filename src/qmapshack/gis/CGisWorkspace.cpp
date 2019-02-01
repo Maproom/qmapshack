@@ -40,6 +40,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
+#include "helpers/CInputDialog.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
@@ -319,15 +320,19 @@ void CGisWorkspace::slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trk
     }
 }
 
-IGisProject * CGisWorkspace::selectProject()
+IGisProject * CGisWorkspace::selectProject(bool forceSelect)
 {
-    QString key, name;
+    QString key = IGisProject::getUserFocus();
+    QString name;
     IGisProject::type_e type = IGisProject::eTypeQms;
 
-    CSelectProjectDialog dlg(key, name, type, treeWks);
-    if(dlg.exec() == QDialog::Rejected)
+    if(key.isEmpty() || forceSelect)
     {
-        return nullptr;
+        CSelectProjectDialog dlg(key, name, type, treeWks);
+        if(dlg.exec() == QDialog::Rejected)
+        {
+            return nullptr;
+        }
     }
 
     IGisProject *project = nullptr;
@@ -686,7 +691,7 @@ void CGisWorkspace::copyItemByKey(const IGisItem::key_t &key)
         return;
     }
 
-    IGisProject *project = selectProject();
+    IGisProject *project = selectProject(true);
     if(nullptr == project)
     {
         return;
@@ -703,7 +708,7 @@ void CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t> &keys)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    IGisProject * project = selectProject();
+    IGisProject * project = selectProject(true);
     if(nullptr == project)
     {
         return;
@@ -913,28 +918,17 @@ void CGisWorkspace::editWptRadius(const IGisItem::key_t &key)
     }
 }
 
-void CGisWorkspace::addWptByPos(QPointF pt, const QString& label, const QString& desc) const
+void CGisWorkspace::addWptByPos(QPointF pt, const QString& name, const QString& desc) const
 {
-    QString name = label;
-    QString icon;
-    if(!CGisItemWpt::getNewWptData(pt, icon, name))
-    {
-        return;
-    }
+    QMutexLocker lock(&IGisItem::mutexItems);
 
-    IGisProject * project = CGisWorkspace::self().selectProject();
+    IGisProject * project = CGisWorkspace::self().selectProject(false);
     if(nullptr == project)
     {
         return;
     }
 
-    QMutexLocker lock(&IGisItem::mutexItems);
-    CGisItemWpt * wpt = new CGisItemWpt(pt, name, icon, project);
-    if(!desc.isEmpty())
-    {
-        wpt->setDescription(desc);
-    }
-    wpt->edit();
+    CGisItemWpt::newWpt(pt, name, desc, project);
 }
 
 void CGisWorkspace::focusTrkByKey(bool yes, const IGisItem::key_t& key)
@@ -1231,6 +1225,34 @@ void CGisWorkspace::makeRteFromWpt(const QList<IGisItem::key_t>& keys)
 
     CCreateRouteFromWpt dlg(keys, this);
     dlg.exec();
+}
+
+void CGisWorkspace::editPrxWpt(const QList<IGisItem::key_t>& keys)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    QVariant var;
+    CInputDialog dlg(this, tr("Enter new proximity range."), var, QVariant(NOFLOAT), IUnit::self().baseunit);
+    dlg.setOption(tr("Is no-go area"), false);
+    if(dlg.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    qreal proximity = var.toDouble()/IUnit::self().basefactor;
+    bool isNoGo = dlg.optionIsChecked();
+    for(const IGisItem::key_t& key : keys)
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+        if(wpt != nullptr)
+        {
+            wpt->setProximity(proximity);
+            if(wpt->isNogo() != isNoGo)
+            {
+                wpt->setNogo(isNoGo);
+            }
+        }
+    }
 }
 
 

@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -40,8 +41,31 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     const CGisItemWpt::geocache_t& geocache = wpt.getGeoCache();
 
-    labelName->setText(geocache.name);
+    QString status;
+    if(geocache.archived)
+    {
+        status = tr("Archived");
+    }
+    else if(geocache.available)
+    {
+        status = tr("Available");
+    }
+    else
+    {
+        status = tr("Not Available");
+    }
+
+    if(geocache.needsMaintenance)
+    {
+        status += ", " + tr("Needs Maintenance");
+    }
+
+    labelName->setText(geocache.name + " - " + status);
     labelPositon->setText(strPos);
+    labelOwner->setText(geocache.owner);
+    labelSize->setText(geocache.container);
+    labelHiddenDate->setText(wpt.getTime().date().toString(Qt::SystemLocaleShortDate));
+    //Last found is set below to only loop logs once
 
     qreal d = geocache.difficulty;
     labelD1->setPixmap(QPixmap(d < 0.5 ? "://icons/cache/32x32/star_empty.png" : d < 1.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
@@ -82,14 +106,31 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
         desc += "<p>" + str.replace("\n","<br/>") + "</p>";
     }
 
-    CWebPage * webDescPage = new CWebPage(0);
+    CWebPage * webDescPage = new CWebPage(webDesc);
     webDesc->setPage(webDescPage);
     webDesc->setHtml(desc);
+
+    QDateTime lastFound;
+    QString logs;
+    for(const CGisItemWpt::geocachelog_t& log:geocache.logs)
+    {
+        QString thislog = log.text;
+        logs+="<p><b>"+log.date.date().toString(Qt::SystemLocaleShortDate) + ": " + log.type + tr(" by ") + log.finder + "</b></p><p>" + thislog.replace("\n","<br/>") + "</p><hr>";
+        if(lastFound.isValid()==false || (log.type=="Found It"&&log.date>lastFound))
+        {
+            lastFound=log.date;
+        }
+    }
+    labelLastFound->setText(lastFound.date().toString(Qt::SystemLocaleShortDate));
+
+    CWebPage * webLogPage = new CWebPage(webLogs);
+    webLogs->setPage(webLogPage);
+    webLogs->setHtml(logs);
 
     timerDownload = new QTimer(this);
     timerDownload->setSingleShot(true);
     connect(timerDownload,     &QTimer::timeout,       this, &CDetailsGeoCache::slotDownloadDone);
-
+    connect(buttonVisitWebsite,&QPushButton::clicked,  this, &CDetailsGeoCache::slotVisitWebsite);
     connect(checkHint,         &QCheckBox::toggled,    this, &CDetailsGeoCache::slotHintChanged);
     connect(webDescPage,       &CWebPage::linkClicked, this, &CDetailsGeoCache::slotLinkClicked);
     connect(toolUpdateSpoiler, &QToolButton::clicked,  this, &CDetailsGeoCache::slotCollectSpoiler);
@@ -119,6 +160,11 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
 CDetailsGeoCache::~CDetailsGeoCache()
 {
+}
+
+void CDetailsGeoCache::slotVisitWebsite()
+{
+    QDesktopServices::openUrl("https://www.coord.info/" + wpt.getName());
 }
 
 void CDetailsGeoCache::slotHintChanged(bool on)

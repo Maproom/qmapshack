@@ -52,6 +52,9 @@ public:
         QString text;
     };
 
+    /*
+     * The Date the geocache was hidden is stored in the enclosing wpt's time
+     */
     struct geocache_t
     {
         geocacheservice_e service = eOC;
@@ -59,9 +62,9 @@ public:
         quint32 id = 0;
         bool available = true;
         bool archived = false;
+        bool needsMaintenance = false;
         qreal difficulty = 0;
         qreal terrain = 0;
-        QString status;
         QString name;
         QString owner;
         QString ownerId;
@@ -308,6 +311,7 @@ public:
     void gainUserFocus(bool yes) override;
 
     void edit() override;
+    void editInitial();
 
     /**
        @brief Remove all links from the waypoint's link list with a given type
@@ -332,7 +336,8 @@ public:
     }
 
     static QString getLastName(const QString &name);
-    static bool getNewWptData(QPointF& pt, QString& icon, QString& name);
+    static void newWpt(QPointF& pt, const QString& name, const QString& desc, IGisProject *project);
+    static bool getIconAndName(QString& icon, QString& name);
 
     static void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool &avoid, const bool &selected);
     static qreal calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis);

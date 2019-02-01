@@ -126,7 +126,7 @@ void CRtOpenSkyInfo::slotToTrack()
         return;
     }
 
-    IGisProject * prj = CGisWorkspace::self().selectProject();
+    IGisProject * prj = CGisWorkspace::self().selectProject(false);
     if(prj == nullptr)
     {
         return;

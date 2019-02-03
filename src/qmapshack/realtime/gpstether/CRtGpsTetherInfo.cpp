@@ -76,11 +76,12 @@ CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
     dict["GLVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
     dict["GNVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
     dict["GAVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
-    dict["PQVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
+    dict["PQVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};    
 }
 
 CRtGpsTetherInfo::~CRtGpsTetherInfo()
 {
+    checkAutomaticConnect->setChecked(false);
     disconnectFromHost();
 }
 
@@ -97,6 +98,14 @@ void CRtGpsTetherInfo::disconnectFromHost()
     else if(socket->state() != QAbstractSocket::UnconnectedState)
     {
         socket->abort();
+    }
+}
+
+void CRtGpsTetherInfo::autoConnect(int msec)
+{
+    if(checkAutomaticConnect->isChecked())
+    {
+        QTimer::singleShot(msec, this, [&](){toolConnect->setChecked(true);});
     }
 }
 
@@ -119,12 +128,16 @@ void CRtGpsTetherInfo::loadSettings(QSettings& cfg)
 {
     lineHost->setText(cfg.value("host", "").toString());
     spinPort->setValue(cfg.value("port", 10110).toUInt());
+    checkAutomaticConnect->setChecked(cfg.value("automatic connect", false).toBool());
+
+    autoConnect(1000);
 }
 
 void CRtGpsTetherInfo::saveSettings(QSettings& cfg) const
 {
     cfg.setValue("host", lineHost->text());
     cfg.setValue("port", spinPort->value());
+    cfg.setValue("automatic connect", checkAutomaticConnect->isChecked());
 }
 
 QPointF CRtGpsTetherInfo::getPosition() const
@@ -173,6 +186,8 @@ void CRtGpsTetherInfo::slotDisconnected()
     lineHost->setEnabled(true);
     spinPort->setEnabled(true);
     toolConnect->setChecked(false);
+
+    autoConnect(5000);
 }
 
 void CRtGpsTetherInfo::slotError(QAbstractSocket::SocketError socketError)

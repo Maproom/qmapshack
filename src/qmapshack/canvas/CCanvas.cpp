@@ -1280,3 +1280,8 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
     }
     return true;
 }
+
+void CCanvas::followPosition(const QPointF& pos)
+{
+
+}

@@ -52,7 +52,6 @@ bool IRtRecord::readFile(const QString& filename)
     while(!stream.atEnd())
     {
         quint64 size = stream.device()->pos();
-        qDebug() << "size" << size;
 
         quint16 crc;
         QByteArray data;

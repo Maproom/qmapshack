@@ -16,11 +16,12 @@
 
 **********************************************************************************************/
 
+#include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "realtime/CRtDraw.h"
 #include "realtime/gpstether/CRtGpsTether.h"
 #include "realtime/gpstether/CRtGpsTetherInfo.h"
 #include "units/IUnit.h"
-#include "realtime/CRtDraw.h"
 
 #include <QtPositioning>
 #include <QtWidgets>
@@ -79,7 +80,6 @@ void CRtGpsTether::saveSettings(QSettings& cfg) const
     {
         info->saveSettings(cfg);
     }
-
 }
 
 
@@ -97,6 +97,11 @@ void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF
         return;
     }
 
+    if(checkState(eColumnCheckBox) != Qt::Checked)
+    {
+        return;
+    }
+
     QPointF pos = info->getPosition();
     if(pos == NOPOINTF)
     {
@@ -106,12 +111,13 @@ void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF
     pos *= DEG_TO_RAD;
     rt->convertRad2Px(pos);
 
-    p.setPen(QPen(Qt::darkBlue, 1));
+    p.setBrush(CDraw::brushBackSemiBlue);
+    p.setPen(CDraw::penBorderBlue);
     p.drawEllipse(pos, 10, 10);
 
+    p.drawEllipse(pos, 2, 2);
 }
 
 void CRtGpsTether::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
 {
-
 }

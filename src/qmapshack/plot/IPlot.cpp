@@ -26,6 +26,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "mouse/CMouseAdapter.h"
 #include "mouse/CScrOptRangeTrk.h"
 #include "widgets/CFadingIcon.h"
 
@@ -317,8 +318,14 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         return;
     }
 
-    QPoint pos      = e->pos();
-    mouseDidMove    = (e->buttons() == Qt::LeftButton);
+    QPoint pos = e->pos();
+    if (!mouseDidMove
+        && (e->buttons() == Qt::LeftButton)
+        && ((pos - posLast).manhattanLength() >= CMouseAdapter::minimalMouseMovingDistance))
+    {
+        mouseDidMove = true;
+    }
+
     if(mouseDidMove)
     {
         if(!scrOptRange.isNull())

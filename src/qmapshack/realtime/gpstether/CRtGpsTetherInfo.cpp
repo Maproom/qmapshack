@@ -76,10 +76,16 @@ CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
     dict["GLVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
     dict["GNVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
     dict["GAVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
-    dict["PQVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
+    dict["PQVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};    
 }
 
 CRtGpsTetherInfo::~CRtGpsTetherInfo()
+{
+    checkAutomaticConnect->setChecked(false);
+    disconnectFromHost();
+}
+
+void CRtGpsTetherInfo::disconnectFromHost()
 {
     if(socket->state() == QAbstractSocket::ConnectedState)
     {
@@ -92,6 +98,14 @@ CRtGpsTetherInfo::~CRtGpsTetherInfo()
     else if(socket->state() != QAbstractSocket::UnconnectedState)
     {
         socket->abort();
+    }
+}
+
+void CRtGpsTetherInfo::autoConnect(int msec)
+{
+    if(checkAutomaticConnect->isChecked())
+    {
+        QTimer::singleShot(msec, this, [&](){toolConnect->setChecked(true);});
     }
 }
 
@@ -114,12 +128,16 @@ void CRtGpsTetherInfo::loadSettings(QSettings& cfg)
 {
     lineHost->setText(cfg.value("host", "").toString());
     spinPort->setValue(cfg.value("port", 10110).toUInt());
+    checkAutomaticConnect->setChecked(cfg.value("automatic connect", false).toBool());
+
+    autoConnect(1000);
 }
 
 void CRtGpsTetherInfo::saveSettings(QSettings& cfg) const
 {
     cfg.setValue("host", lineHost->text());
     cfg.setValue("port", spinPort->value());
+    cfg.setValue("automatic connect", checkAutomaticConnect->isChecked());
 }
 
 QPointF CRtGpsTetherInfo::getPosition() const
@@ -138,11 +156,12 @@ QPointF CRtGpsTetherInfo::getPosition() const
 
 void CRtGpsTetherInfo::slotConnect(bool yes)
 {
+    rmc.isValid = false;
+    gga.isValid = false;
+    labelStatus->setText("-");
+
     if(yes)
-    {
-        rmc.isValid = false;
-        gga.isValid = false;
-        labelStatus->setText("-");
+    {        
         lineHost->setEnabled(false);
         spinPort->setEnabled(false);
         socket->connectToHost(lineHost->text(), spinPort->value());
@@ -150,16 +169,9 @@ void CRtGpsTetherInfo::slotConnect(bool yes)
     else
     {
         timer->stop();
-        if(socket->state() == QAbstractSocket::ConnectedState)
-        {
-            socket->disconnectFromHost();
-        }
-        else
-        {
-            socket->abort();
-            lineHost->setEnabled(true);
-            spinPort->setEnabled(true);
-        }
+        disconnectFromHost();
+        lineHost->setEnabled(true);
+        spinPort->setEnabled(true);
     }
 }
 
@@ -174,6 +186,8 @@ void CRtGpsTetherInfo::slotDisconnected()
     lineHost->setEnabled(true);
     spinPort->setEnabled(true);
     toolConnect->setChecked(false);
+
+    autoConnect(5000);
 }
 
 void CRtGpsTetherInfo::slotError(QAbstractSocket::SocketError socketError)
@@ -203,6 +217,11 @@ void CRtGpsTetherInfo::slotUpdate()
 {
     QDateTime timestamp;
 
+    labelPosition->setText("-");
+    labelSpeed->setText("-");
+    labelElevation->setText("-");
+    labelTime->setText("-");
+
     if(rmc.isValid)
     {
         timestamp = rmc.datetime;
@@ -227,17 +246,12 @@ void CRtGpsTetherInfo::slotUpdate()
         labelTime->setText(IUnit::datetime2string(gga.datetime,true));
     }
 
+
     if(lastTimestamp != timestamp)
     {
         emit sigChanged();
     }
-    else
-    {
-        labelPosition->setText("-");
-        labelSpeed->setText("-");
-        labelElevation->setText("-");
-        labelTime->setText("-");
-    }
+
     lastTimestamp = timestamp;
 }
 
@@ -310,7 +324,7 @@ void CRtGpsTetherInfo::nmeaGPGGA(const QStringList& tokens)
         return;
     }
 
-    //qDebug() << id << "ok" << tokens;
+    qDebug() << id << "ok" << tokens;
     if(tokens[6].toInt() == 0)
     {
         gga.isValid = false;

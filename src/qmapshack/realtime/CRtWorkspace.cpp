@@ -179,6 +179,12 @@ void CRtWorkspace::slotItemChanged(QTreeWidgetItem * item, int column)
 
     if(column == IRtSource::eColumnCheckBox)
     {
+        IRtSource * source = dynamic_cast<IRtSource*>(item);
+        if(source != nullptr)
+        {
+            source->blockSignals(source->checkState(IRtSource::eColumnCheckBox) == Qt::Unchecked);
+        }
+
         emit sigChanged();
     }
 }

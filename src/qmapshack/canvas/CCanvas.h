@@ -170,6 +170,8 @@ public:
      */
     void setMap(const QString& filename);
 
+    void followPosition(const QPointF& pos);
+
     static qreal gisLayerOpacity;
 signals:
     void sigMousePosition(const QPointF& pos, qreal ele, qreal slope);

@@ -56,6 +56,7 @@ private slots:
 private:
     bool verifyLine(const QString& line);
     void disconnectFromHost();
+    void autoConnect(int msec);
 
     fNemaLine nmeaDefault = [&](const QStringList& t){qDebug() << t[0] << "unknown";};
 

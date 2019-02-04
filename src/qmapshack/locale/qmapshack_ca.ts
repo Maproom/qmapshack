@@ -459,7 +459,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="44"/>
         <source>Failed to load file: %1</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
@@ -519,7 +519,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="311"/>
         <source>No images found</source>
-        <translation>  No s&apos;ha trobat cap imatge</translation>
+        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -783,7 +783,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="166"/>
         <source>Save project as %1</source>
-        <translation>  Desa el projecte com a %1</translation>
+        <translation>&#xa0; Desa el projecte com a %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="170"/>
@@ -1002,12 +1002,12 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
         <source>Failed to open FIT file %1.</source>
-        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
+        <translation>&#xa0; No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
     </message>
 </context>
 <context>
@@ -11783,7 +11783,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="119"/>
-        <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded an listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
+        <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12204,7 +12204,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>

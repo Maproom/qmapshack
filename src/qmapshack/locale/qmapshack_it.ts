@@ -95,7 +95,7 @@
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="98"/>
         <source>Set Track Activity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Modifica l&apos;attività</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="263"/>
@@ -1028,18 +1028,18 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGarminTyp</name>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="457"/>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="838"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="467"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
         <source>Warning...</source>
         <translation>Attenzione...</translation>
     </message>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="457"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="467"/>
         <source>This is a typ file with unknown polygon encoding. Please report!</source>
         <translation>Questo file TIP ha una codifica poligoni sconosciuta. Per favore segnala!</translation>
     </message>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="838"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
         <translation>Questo file TIP ha una codifica polilinee sconosciuta. Per favore segnala!</translation>
     </message>
@@ -2160,17 +2160,17 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1120"/>
+        <location filename="../gis/CGisListWks.cpp" line="1124"/>
         <source>Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1125"/>
+        <location filename="../gis/CGisListWks.cpp" line="1129"/>
         <source>Wayp. &amp; Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1127"/>
+        <location filename="../gis/CGisListWks.cpp" line="1131"/>
         <source>Tracks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2215,55 +2215,55 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Modifica punti dell&apos;area</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1046"/>
-        <location filename="../gis/CGisListWks.cpp" line="1131"/>
+        <location filename="../gis/CGisListWks.cpp" line="1050"/>
+        <location filename="../gis/CGisListWks.cpp" line="1135"/>
         <source>Set Track Color</source>
         <translation>Imposta il colore della traccia</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="635"/>
+        <location filename="../gis/CGisListWks.cpp" line="639"/>
         <source>Drop items...</source>
         <translation>Elimina voci...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1123"/>
+        <location filename="../gis/CGisListWks.cpp" line="1127"/>
         <source>Change Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="660"/>
-        <location filename="../gis/CGisListWks.cpp" line="2015"/>
-        <location filename="../gis/CGisListWks.cpp" line="2053"/>
+        <location filename="../gis/CGisListWks.cpp" line="664"/>
+        <location filename="../gis/CGisListWks.cpp" line="2019"/>
+        <location filename="../gis/CGisListWks.cpp" line="2057"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aggiornamento dispositivi&lt;/b&gt;&lt;p&gt;Aggiornamento di %1&lt;br/&gt;Attendere prego...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="786"/>
+        <location filename="../gis/CGisListWks.cpp" line="790"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Spazio di lavoro in salvataggio. Attendere prego.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="837"/>
+        <location filename="../gis/CGisListWks.cpp" line="841"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Spazio di lavoro in apertura. Attendere prego.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1415"/>
+        <location filename="../gis/CGisListWks.cpp" line="1419"/>
         <source>Close all projects...</source>
         <translation>Chiudi tutti i progetti...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1415"/>
+        <location filename="../gis/CGisListWks.cpp" line="1419"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Tutti i progetti nello spazio di lavoro saranno rimossi.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1441"/>
+        <location filename="../gis/CGisListWks.cpp" line="1445"/>
         <source>Delete project...</source>
         <translation>Elimina progetto...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1441"/>
+        <location filename="../gis/CGisListWks.cpp" line="1445"/>
         <source>Do you really want to delete %1?</source>
         <translation>Vuoi veramente eliminare %1?</translation>
     </message>
@@ -5430,12 +5430,12 @@ non è una definizione di coordinate valida:
 <context>
     <name>CSetupWorkspace</name>
     <message>
-        <location filename="../gis/db/CSetupWorkspace.cpp" line="55"/>
+        <location filename="../gis/db/CSetupWorkspace.cpp" line="57"/>
         <source>Setup database...</source>
         <translation>Imposta database...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupWorkspace.cpp" line="55"/>
+        <location filename="../gis/db/CSetupWorkspace.cpp" line="57"/>
         <source>Changes will become active after an application&apos;s restart.</source>
         <translation>I cambiamenti saranno applicati al riavvio dell&apos;applicazione.</translation>
     </message>
@@ -5587,12 +5587,12 @@ linea %2, colonna %3:
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="112"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vel.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="113"/>
         <source>Slope</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pend.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="114"/>
@@ -8058,7 +8058,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="35"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vel.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="42"/>
@@ -9775,44 +9775,44 @@ Suggerimenti:
 <context>
     <name>IPlot</name>
     <message>
-        <location filename="../plot/IPlot.cpp" line="94"/>
+        <location filename="../plot/IPlot.cpp" line="95"/>
         <source>Reset Zoom</source>
         <translation>Ripristina zoom</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="95"/>
+        <location filename="../plot/IPlot.cpp" line="96"/>
         <source>Stop Range</source>
         <translation>Fine intervallo</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="96"/>
+        <location filename="../plot/IPlot.cpp" line="97"/>
         <source>Save...</source>
         <translation>Salva...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="98"/>
+        <location filename="../plot/IPlot.cpp" line="99"/>
         <source>Add Waypoint</source>
         <translation>Aggiungi waypoint</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="99"/>
+        <location filename="../plot/IPlot.cpp" line="100"/>
         <source>Cut...</source>
         <translation>Taglia...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="542"/>
+        <location filename="../plot/IPlot.cpp" line="549"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation>Premere CTRL per lo zoom verticale.
 Premere ALT per lo zoom orizzontale.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="699"/>
+        <location filename="../plot/IPlot.cpp" line="706"/>
         <source>No or bad data.</source>
         <translation>Dati errati o mancanti.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1306"/>
+        <location filename="../plot/IPlot.cpp" line="1313"/>
         <source>Select output file</source>
         <translation>Seleziona il file di destinazione</translation>
     </message>
@@ -11787,6 +11787,11 @@ Una parola viene cercata come corrispondenza (come fosse &apos;*qualcosacosa*&ap
         <location filename="../gis/db/ISetupWorkspace.ui" line="63"/>
         <source>00000</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupWorkspace.ui" line="119"/>
+        <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded an listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

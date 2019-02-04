@@ -1049,18 +1049,18 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
 <context>
     <name>CGarminTyp</name>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="457"/>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="838"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="467"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
         <source>Warning...</source>
         <translation>Warnung...</translation>
     </message>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="457"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="467"/>
         <source>This is a typ file with unknown polygon encoding. Please report!</source>
         <translation>Dieser Dateityp hat eine unbekannte Polygon Kodierung. Bitte mitteilen!</translation>
     </message>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="838"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
         <translation>Dieser Dateityp hat eine unbekannte Polyline Kodierung. Bitte mitteilen!</translation>
     </message>
@@ -2142,39 +2142,39 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>In einen Track umwandeln</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="635"/>
+        <location filename="../gis/CGisListWks.cpp" line="639"/>
         <source>Drop items...</source>
         <translation>Elemente verwerfen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="660"/>
-        <location filename="../gis/CGisListWks.cpp" line="2015"/>
-        <location filename="../gis/CGisListWks.cpp" line="2053"/>
+        <location filename="../gis/CGisListWks.cpp" line="664"/>
+        <location filename="../gis/CGisListWks.cpp" line="2019"/>
+        <location filename="../gis/CGisListWks.cpp" line="2057"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1120"/>
+        <location filename="../gis/CGisListWks.cpp" line="1124"/>
         <source>Waypoints</source>
         <translation>Wegpunkte</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1125"/>
+        <location filename="../gis/CGisListWks.cpp" line="1129"/>
         <source>Wayp. &amp; Tracks</source>
         <translation>Wegp. &amp; Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1127"/>
+        <location filename="../gis/CGisListWks.cpp" line="1131"/>
         <source>Tracks</source>
         <translation>Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1441"/>
+        <location filename="../gis/CGisListWks.cpp" line="1445"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1441"/>
+        <location filename="../gis/CGisListWks.cpp" line="1445"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
@@ -2255,33 +2255,33 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Abstandsalarm ändern...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1123"/>
+        <location filename="../gis/CGisListWks.cpp" line="1127"/>
         <source>Change Icon</source>
         <translation>Symbol ändern</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1046"/>
-        <location filename="../gis/CGisListWks.cpp" line="1131"/>
+        <location filename="../gis/CGisListWks.cpp" line="1050"/>
+        <location filename="../gis/CGisListWks.cpp" line="1135"/>
         <source>Set Track Color</source>
         <translation>Trackfarbe einstellen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="786"/>
+        <location filename="../gis/CGisListWks.cpp" line="790"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Arbeitsplatz wird gespeichert. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="837"/>
+        <location filename="../gis/CGisListWks.cpp" line="841"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1415"/>
+        <location filename="../gis/CGisListWks.cpp" line="1419"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1415"/>
+        <location filename="../gis/CGisListWks.cpp" line="1419"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
@@ -5445,12 +5445,12 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CSetupWorkspace</name>
     <message>
-        <location filename="../gis/db/CSetupWorkspace.cpp" line="55"/>
+        <location filename="../gis/db/CSetupWorkspace.cpp" line="57"/>
         <source>Setup database...</source>
         <translation>Datenbank einrichten...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupWorkspace.cpp" line="55"/>
+        <location filename="../gis/db/CSetupWorkspace.cpp" line="57"/>
         <source>Changes will become active after an application&apos;s restart.</source>
         <translation>Änderungen werden erst nach Neustart der Anwendung aktiv.</translation>
     </message>
@@ -7116,7 +7116,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="363"/>
         <source>Pictures</source>
-        <translation type="unfinished">Bilder</translation>
+        <translation>Bilder</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="408"/>
@@ -9786,44 +9786,44 @@ Tipp:
 <context>
     <name>IPlot</name>
     <message>
-        <location filename="../plot/IPlot.cpp" line="94"/>
+        <location filename="../plot/IPlot.cpp" line="95"/>
         <source>Reset Zoom</source>
         <translation>Zoom zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="95"/>
+        <location filename="../plot/IPlot.cpp" line="96"/>
         <source>Stop Range</source>
         <translation>Bereichsauswahl beenden</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="96"/>
+        <location filename="../plot/IPlot.cpp" line="97"/>
         <source>Save...</source>
         <translation>Speichern ...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="98"/>
+        <location filename="../plot/IPlot.cpp" line="99"/>
         <source>Add Waypoint</source>
         <translation>Wegpunkt hinzufügen</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="99"/>
+        <location filename="../plot/IPlot.cpp" line="100"/>
         <source>Cut...</source>
         <translation>Teilen...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="542"/>
+        <location filename="../plot/IPlot.cpp" line="549"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation>Um nur vertikale zu zoomen, STRG Taste gedrückt halten.
 Um nur horizontal zu zoomen, ALT Taste gedrückt halten.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="699"/>
+        <location filename="../plot/IPlot.cpp" line="706"/>
         <source>No or bad data.</source>
         <translation>Keine oder schlechte Daten.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1306"/>
+        <location filename="../plot/IPlot.cpp" line="1313"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
@@ -11813,6 +11813,11 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
         <location filename="../gis/db/ISetupWorkspace.ui" line="63"/>
         <source>00000</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupWorkspace.ui" line="119"/>
+        <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded an listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
+        <translation>Geräte unterstützen. Wenn diese Option aktiv ist, wird ein Gerät, das angesteckt wird, automatisch erkannt. Die Dateistrucktur wird gelesen und alle Projekte werden geladen. Abhängig vom Gerät wird QMapShack alle Daten verwalten, die zum Beispiel nötg sind, um Bilder mit Wegpunkten zu verknüpfen.</translation>
     </message>
 </context>
 <context>

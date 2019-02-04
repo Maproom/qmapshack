@@ -1022,18 +1022,18 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGarminTyp</name>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="457"/>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="838"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="467"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
         <source>Warning...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="457"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="467"/>
         <source>This is a typ file with unknown polygon encoding. Please report!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="838"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2181,25 +2181,25 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1046"/>
-        <location filename="../gis/CGisListWks.cpp" line="1131"/>
+        <location filename="../gis/CGisListWks.cpp" line="1050"/>
+        <location filename="../gis/CGisListWks.cpp" line="1135"/>
         <source>Set Track Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="635"/>
+        <location filename="../gis/CGisListWks.cpp" line="639"/>
         <source>Drop items...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1123"/>
+        <location filename="../gis/CGisListWks.cpp" line="1127"/>
         <source>Change Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="660"/>
-        <location filename="../gis/CGisListWks.cpp" line="2015"/>
-        <location filename="../gis/CGisListWks.cpp" line="2053"/>
+        <location filename="../gis/CGisListWks.cpp" line="664"/>
+        <location filename="../gis/CGisListWks.cpp" line="2019"/>
+        <location filename="../gis/CGisListWks.cpp" line="2057"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2214,47 +2214,47 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="786"/>
+        <location filename="../gis/CGisListWks.cpp" line="790"/>
         <source>Saving workspace. Please wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="837"/>
+        <location filename="../gis/CGisListWks.cpp" line="841"/>
         <source>Loading workspace. Please wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1120"/>
+        <location filename="../gis/CGisListWks.cpp" line="1124"/>
         <source>Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1125"/>
+        <location filename="../gis/CGisListWks.cpp" line="1129"/>
         <source>Wayp. &amp; Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1127"/>
+        <location filename="../gis/CGisListWks.cpp" line="1131"/>
         <source>Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1415"/>
+        <location filename="../gis/CGisListWks.cpp" line="1419"/>
         <source>Close all projects...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1415"/>
+        <location filename="../gis/CGisListWks.cpp" line="1419"/>
         <source>This will remove all projects from the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1441"/>
+        <location filename="../gis/CGisListWks.cpp" line="1445"/>
         <source>Delete project...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1441"/>
+        <location filename="../gis/CGisListWks.cpp" line="1445"/>
         <source>Do you really want to delete %1?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5399,12 +5399,12 @@ is not a valid coordinate system definition:
 <context>
     <name>CSetupWorkspace</name>
     <message>
-        <location filename="../gis/db/CSetupWorkspace.cpp" line="55"/>
+        <location filename="../gis/db/CSetupWorkspace.cpp" line="57"/>
         <source>Setup database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupWorkspace.cpp" line="55"/>
+        <location filename="../gis/db/CSetupWorkspace.cpp" line="57"/>
         <source>Changes will become active after an application&apos;s restart.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9712,43 +9712,43 @@ Tip:
 <context>
     <name>IPlot</name>
     <message>
-        <location filename="../plot/IPlot.cpp" line="94"/>
+        <location filename="../plot/IPlot.cpp" line="95"/>
         <source>Reset Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="95"/>
+        <location filename="../plot/IPlot.cpp" line="96"/>
         <source>Stop Range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="96"/>
+        <location filename="../plot/IPlot.cpp" line="97"/>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="98"/>
+        <location filename="../plot/IPlot.cpp" line="99"/>
         <source>Add Waypoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="99"/>
+        <location filename="../plot/IPlot.cpp" line="100"/>
         <source>Cut...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="542"/>
+        <location filename="../plot/IPlot.cpp" line="549"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="699"/>
+        <location filename="../plot/IPlot.cpp" line="706"/>
         <source>No or bad data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1306"/>
+        <location filename="../plot/IPlot.cpp" line="1313"/>
         <source>Select output file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11704,6 +11704,11 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="63"/>
         <source>00000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupWorkspace.ui" line="119"/>
+        <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded an listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

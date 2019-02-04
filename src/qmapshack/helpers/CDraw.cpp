@@ -31,6 +31,7 @@ QPen CDraw::penBorderBlack(QColor(0,0,0,200),2);
 QPen CDraw::penBorderRed(Qt::red,2);
 QBrush CDraw::brushBackWhite(QColor(255,255,255,255));
 QBrush CDraw::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
+QBrush CDraw::brushBackSemiBlue(QColor(127,127, 255, 127));
 
 
 QImage CDraw::createBasicArrow(const QBrush &brush, qreal scale)

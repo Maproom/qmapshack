@@ -189,20 +189,24 @@ CGisListWks::CGisListWks(QWidget *parent)
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
 
+    if(cfg.value("Database/device support", true).toBool())
+    {
+        qDebug() << "Device support enabled";
 #ifdef Q_OS_MAC
-    deviceWatcher = new CDeviceWatcherMac(this);
-    connect(deviceWatcher, &CDeviceWatcherMac::sigChanged, this, &CGisListWks::sigChanged);
+        deviceWatcher = new CDeviceWatcherMac(this);
+        connect(deviceWatcher, &CDeviceWatcherMac::sigChanged, this, &CGisListWks::sigChanged);
 #else
     #ifdef Q_OS_WIN
-    deviceWatcher = new CDeviceWatcherWindows(this);
-    connect(deviceWatcher, &CDeviceWatcherWindows::sigChanged, this, &CGisListWks::sigChanged);
+        deviceWatcher = new CDeviceWatcherWindows(this);
+        connect(deviceWatcher, &CDeviceWatcherWindows::sigChanged, this, &CGisListWks::sigChanged);
     #else
         #ifdef HAVE_DBUS
-    deviceWatcher = new CDeviceWatcherLinux(this);
-    connect(deviceWatcher, &CDeviceWatcherLinux::sigChanged, this, &CGisListWks::sigChanged);
+        deviceWatcher = new CDeviceWatcherLinux(this);
+        connect(deviceWatcher, &CDeviceWatcherLinux::sigChanged, this, &CGisListWks::sigChanged);
         #endif // HAVE_DBUS
     #endif // Q_OS_WIN
 #endif // Q_OS_MAC
+    }
 }
 
 CGisListWks::~CGisListWks()

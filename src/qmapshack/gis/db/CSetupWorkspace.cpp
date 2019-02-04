@@ -33,6 +33,7 @@ CSetupWorkspace::CSetupWorkspace(QWidget *parent)
     spinSaveEvery->setValue(cfg.value("saveEvery",5).toInt());
     checkDbUpdate->setChecked(cfg.value("listenUpdate", false).toBool());
     linePort->setText(cfg.value("port", "34123").toString());
+    checkDeviceSupport->setChecked(cfg.value("device support", true).toBool());
     cfg.endGroup();
 
     connect(checkSaveOnExit, &QCheckBox::toggled, spinSaveEvery, &QSpinBox::setEnabled);
@@ -50,6 +51,7 @@ void CSetupWorkspace::accept()
     cfg.setValue("saveEvery", spinSaveEvery->value());
     cfg.setValue("listenUpdate", checkDbUpdate->isChecked());
     cfg.setValue("port", linePort->text());
+    cfg.setValue("device support", checkDeviceSupport->isChecked());
     cfg.endGroup();
 
     QMessageBox::information(this, tr("Setup database..."), tr("Changes will become active after an application's restart."), QMessageBox::Ok);

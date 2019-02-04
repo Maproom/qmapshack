@@ -295,6 +295,8 @@ set( SRCS
     realtime/CRtWorkspace.cpp
     realtime/IRtRecord.cpp
     realtime/IRtSource.cpp
+    realtime/gpstether/CRtGpsTether.cpp
+    realtime/gpstether/CRtGpsTetherInfo.cpp
     realtime/opensky/CRtOpenSky.cpp
     realtime/opensky/CRtOpenSkyInfo.cpp
     realtime/opensky/CRtOpenSkyRecord.cpp
@@ -624,6 +626,8 @@ set( HDRS
     realtime/CRtWorkspace.h
     realtime/IRtRecord.h
     realtime/IRtSource.h
+    realtime/gpstether/CRtGpsTether.h
+    realtime/gpstether/CRtGpsTetherInfo.h
     realtime/opensky/CRtOpenSky.h
     realtime/opensky/CRtOpenSkyInfo.h
     realtime/opensky/CRtOpenSkyRecord.h
@@ -775,6 +779,7 @@ set( UIS
     print/IPrintDialog.ui
     realtime/IRtSelectSource.ui
     realtime/IRtWorkspace.ui
+    realtime/gpstether/IRtGpsTetherInfo.ui
     realtime/opensky/IRtOpenSkyInfo.ui
     templates/Cycling_Tour_Summary.ui
     templates/Hiking_Tour_Summary.ui
@@ -874,6 +879,7 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Network
     Qt5::WebEngineWidgets
     Qt5::Qml
+    Qt5::Positioning
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}

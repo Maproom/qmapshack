@@ -16,43 +16,39 @@
 
 **********************************************************************************************/
 
+#ifndef CRTGPSTETHER_H
+#define CRTGPSTETHER_H
+
 #include "realtime/IRtSource.h"
-#include "realtime/opensky/CRtOpenSky.h"
-#include "realtime/gpstether/CRtGpsTether.h"
 
-#include <QtWidgets>
+#include <QPointer>
 
-QMutex IRtSource::mutex(QMutex::Recursive);
+class CRtGpsTetherInfo;
+class QGeoPositionInfoSource;
+class QGeoPositionInfo;
 
-IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget *parent)
-    : QObject(parent)
-    , QTreeWidgetItem(parent)
-    , type(type)
-    , singleInstanceOnly(singleInstanceOnly)
+class CRtGpsTether : public IRtSource
 {
-}
+    Q_OBJECT
+public:
+    CRtGpsTether(QTreeWidget * parent);
+    virtual ~CRtGpsTether() = default;
 
-void IRtSource::loadSettings(QSettings& cfg)
-{
-    setCheckState(eColumnCheckBox, Qt::CheckState(cfg.value("checkState", Qt::Checked).toInt()));
-}
+    void registerWithTreeWidget() override;
 
-void IRtSource::saveSettings(QSettings& cfg) const
-{
-    cfg.setValue("checkState", checkState(eColumnCheckBox));
-}
+    QString getDescription() const override;
+    void loadSettings(QSettings& cfg) override;
+    void saveSettings(QSettings& cfg) const override;
 
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
 
-IRtSource* IRtSource::create(int type, QTreeWidget * parent)
-{
-    switch(type)
-    {
-    case eTypeOpenSky:
-        return new CRtOpenSky(parent);
+    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) override;
 
-    case eTypeGps:
-        return new CRtGpsTether(parent);
-    }
+    static const QString strIcon;
 
-    return nullptr;
-}
+private:   
+    QPointer<CRtGpsTetherInfo> info;
+};
+
+#endif //CRTGPSTETHER_H
+

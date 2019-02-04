@@ -1,3 +1,11 @@
+V 1.12.2
+[Issue #419] Add option to project to receive all newly created items
+[Issue #417] Only one line of Geocache description
+[Issue #421] Improve "edit" view of Geocaches
+[Issue #425] Add option to disable device support
+Fix: Garmin IMG: Fix type parser to accept sections with zero size
+Fix: Plot: make left click more robust to small mouse moves
+
 V 1.12.1
 [Issue #390] Ruler: Add steps for distance and angle
 [Issue #393] Some Linux dsitributions do not have planetsplitter but routino-planetsplitter

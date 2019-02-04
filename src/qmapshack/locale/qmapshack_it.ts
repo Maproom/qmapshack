@@ -11790,7 +11790,7 @@ Una parola viene cercata come corrispondenza (come fosse &apos;*qualcosacosa*&ap
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="119"/>
-        <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded an listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
+        <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

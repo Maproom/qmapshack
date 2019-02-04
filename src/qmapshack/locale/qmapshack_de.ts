@@ -11816,8 +11816,12 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="119"/>
+        <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded an listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
-        <translation>Geräte unterstützen. Wenn diese Option aktiv ist, wird ein Gerät, das angesteckt wird, automatisch erkannt. Die Dateistrucktur wird gelesen und alle Projekte werden geladen. Abhängig vom Gerät wird QMapShack alle Daten verwalten, die zum Beispiel nötg sind, um Bilder mit Wegpunkten zu verknüpfen.</translation>
+        <translation type="vanished">Geräte unterstützen. Wenn diese Option aktiv ist, wird ein Gerät, das angesteckt wird, automatisch erkannt. Die Dateistrucktur wird gelesen und alle Projekte werden geladen. Abhängig vom Gerät wird QMapShack alle Daten verwalten, die zum Beispiel nötg sind, um Bilder mit Wegpunkten zu verknüpfen.</translation>
     </message>
 </context>
 <context>

@@ -116,7 +116,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Enable device support. When enabled the device will be automatically detected when plugged in. It's file structure will be parsed and all projects will be loaded an listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</string>
+        <string>Enable device support. When enabled the device will be automatically detected when plugged in. It's file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>

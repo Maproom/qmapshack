@@ -36,7 +36,7 @@ QBrush CDraw::brushBackSemiBlue(QColor(127,127, 255, 127));
 
 QImage CDraw::createBasicArrow(const QBrush &brush, qreal scale)
 {
-    QImage arrow(21*scale, 16*scale, QImage::Format_ARGB32);
+    QImage arrow(20*scale, 15*scale, QImage::Format_ARGB32);
     arrow.fill(qRgba(0, 0, 0, 0));
 
     QPainter painter(&arrow);
@@ -46,14 +46,21 @@ QImage CDraw::createBasicArrow(const QBrush &brush, qreal scale)
     painter.setPen(QPen(Qt::white, 2));
     painter.setBrush(brush);
 
-    QPointF arrowPoints[4] =
+//    *..............
+//    .             .
+//    .   *         *
+//    .             .
+//    *..............
+
+    QPointF arrowPoints[5] =
     {
-        QPointF(20.0*scale,  7.0*scale), // front
+        QPointF(19.0*scale,  7.0*scale), // front
         QPointF( 0.0*scale,  0.0*scale), // upper tail
         QPointF( 5.0*scale,  7.0*scale), // mid   tail
-        QPointF( 0.0*scale, 15.0*scale)  // lower tail
+        QPointF( 0.0*scale, 14.0*scale), // lower tail
+        QPointF(19.0*scale,  7.0*scale)  // front
     };
-    painter.drawPolygon(arrowPoints, 4);
+    painter.drawPolygon(arrowPoints, 5);
     painter.end();
 
     return arrow;

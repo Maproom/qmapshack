@@ -19,6 +19,7 @@
 #ifndef CRTGPSINFO_H
 #define CRTGPSINFO_H
 
+#include "realtime/gpstether/CRtGpsTetherRecord.h"
 #include "ui_IRtGpsTetherInfo.h"
 
 #include <functional>
@@ -38,9 +39,10 @@ public:
     virtual ~CRtGpsTetherInfo();
 
     void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg) const;    
+    void saveSettings(QSettings& cfg) const;
 
     QPointF getPosition() const;
+    qreal getHeading() const;
 signals:
     void sigChanged();
 
@@ -66,8 +68,14 @@ private:
     void nmeaGPVTG(const QStringList& tokens);
     void nmeaGPGSA(const QStringList& tokens);
 
+private slots:
+    void slotSetFilename();
+    void slotResetRecord();
+    void slotToTrack();
+
 private:
     CRtGpsTether& source;
+    QPointer<CRtGpsTetherRecord> record;
 
     QTcpSocket * socket;
     QTimer * timer;
@@ -105,6 +113,27 @@ private:
     };
 
     gga_t gga;
+
+    struct vtg_t
+    {
+        bool isValid {false};
+        qreal trackDegreesTrue {0.0};
+        qreal trackDegreesMagnetic {0.0};
+        qreal speedKnots {0.0};
+        qreal speedMeters {0.0};
+    };
+
+    vtg_t vtg;
+
+    struct gsa_t
+    {
+        bool isValid {false};
+        int fix {0};
+        qreal hdop {0.0};
+        qreal vdop {0.0};
+    };
+
+    gsa_t gsa;
 };
 
 #endif //CRTGPSINFO_H

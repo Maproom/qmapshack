@@ -16,6 +16,8 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "CMainWindow.h"
 #include "realtime/gpstether/CRtGpsTether.h"
 #include "realtime/gpstether/CRtGpsTetherInfo.h"
@@ -34,6 +36,12 @@ CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
     setupUi(this);
     connect(toolHelp, &QToolButton::clicked, this, &CRtGpsTetherInfo::slotHelp);
     connect(toolConnect, &QToolButton::toggled, this, &CRtGpsTetherInfo::slotConnect);
+    connect(toolPause, &QToolButton::toggled, toolReset, &QToolButton::setEnabled);
+    connect(toolPause, &QToolButton::toggled, toolFile, &QToolButton::setEnabled);
+    connect(toolPause, &QToolButton::toggled, toolToTrack, &QToolButton::setEnabled);
+    connect(toolFile, &QToolButton::clicked, this, &CRtGpsTetherInfo::slotSetFilename);
+    connect(toolReset, &QToolButton::clicked, this, &CRtGpsTetherInfo::slotResetRecord);
+    connect(toolToTrack, &QToolButton::clicked, this, &CRtGpsTetherInfo::slotToTrack);
 
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::connected, this, &CRtGpsTetherInfo::slotConnected);
@@ -76,7 +84,7 @@ CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
     dict["GLVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
     dict["GNVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
     dict["GAVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
-    dict["PQVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};    
+    dict["PQVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
 }
 
 CRtGpsTetherInfo::~CRtGpsTetherInfo()
@@ -129,6 +137,7 @@ void CRtGpsTetherInfo::loadSettings(QSettings& cfg)
     lineHost->setText(cfg.value("host", "").toString());
     spinPort->setValue(cfg.value("port", 10110).toUInt());
     checkAutomaticConnect->setChecked(cfg.value("automatic connect", false).toBool());
+    checkCenterPosition->setChecked(cfg.value("center position", false).toBool());
 
     autoConnect(1000);
 }
@@ -138,6 +147,7 @@ void CRtGpsTetherInfo::saveSettings(QSettings& cfg) const
     cfg.setValue("host", lineHost->text());
     cfg.setValue("port", spinPort->value());
     cfg.setValue("automatic connect", checkAutomaticConnect->isChecked());
+    cfg.setValue("center position", checkCenterPosition->isChecked());
 }
 
 QPointF CRtGpsTetherInfo::getPosition() const
@@ -154,6 +164,16 @@ QPointF CRtGpsTetherInfo::getPosition() const
     return NOPOINTF;
 }
 
+qreal CRtGpsTetherInfo::getHeading() const
+{
+    if(vtg.isValid)
+    {
+        return vtg.trackDegreesTrue;
+    }
+
+    return NOFLOAT;
+}
+
 void CRtGpsTetherInfo::slotConnect(bool yes)
 {
     rmc.isValid = false;
@@ -161,7 +181,7 @@ void CRtGpsTetherInfo::slotConnect(bool yes)
     labelStatus->setText("-");
 
     if(yes)
-    {        
+    {
         lineHost->setEnabled(false);
         spinPort->setEnabled(false);
         socket->connectToHost(lineHost->text(), spinPort->value());
@@ -221,6 +241,7 @@ void CRtGpsTetherInfo::slotUpdate()
     labelSpeed->setText("-");
     labelElevation->setText("-");
     labelTime->setText("-");
+    labelHeading->setText("-");
 
     if(rmc.isValid)
     {
@@ -246,13 +267,46 @@ void CRtGpsTetherInfo::slotUpdate()
         labelTime->setText(IUnit::datetime2string(gga.datetime,true));
     }
 
+    if(vtg.isValid)
+    {
+        QString val, unit;
+        IUnit::self().meter2speed(vtg.speedMeters, val, unit);
+        labelSpeed->setText(QString("%1%2").arg(val).arg(unit));
+        labelHeading->setText(QString("%1°").arg(vtg.trackDegreesTrue,0,'f',0));
+    }
+
 
     if(lastTimestamp != timestamp)
     {
+        if(checkCenterPosition->isChecked())
+        {
+            CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+            if(canvas != nullptr)
+            {
+                const QPointF& pos = getPosition();
+                if(pos != NOPOINTF)
+                {
+                    canvas->followPosition(getPosition());
+                }
+            }
+        }
         emit sigChanged();
     }
 
     lastTimestamp = timestamp;
+}
+
+
+void CRtGpsTetherInfo::slotSetFilename()
+{
+}
+
+void CRtGpsTetherInfo::slotResetRecord()
+{
+}
+
+void CRtGpsTetherInfo::slotToTrack()
+{
 }
 
 bool CRtGpsTetherInfo::verifyLine(const QString& line)
@@ -275,6 +329,23 @@ void CRtGpsTetherInfo::nmeaGPGSV(const QStringList& tokens)
 
 void CRtGpsTetherInfo::nmeaGPGSA(const QStringList& tokens)
 {
+    const QString& id= tokens[0];
+    if(tokens.count() < 18)
+    {
+        qDebug() << id << "too short";
+        return;
+    }
+
+//    qDebug() << id << "ok" << tokens;
+    if(tokens[2].toInt() < 2)
+    {
+        gsa.isValid = false;
+        return;
+    }
+    gsa.isValid = true;
+    gsa.fix = tokens[2].toInt();
+    gsa.hdop = tokens[16].toDouble();
+    gsa.vdop = tokens[17].toDouble();
 }
 
 void CRtGpsTetherInfo::nmeaGPRMC(const QStringList& tokens)
@@ -317,14 +388,14 @@ void CRtGpsTetherInfo::nmeaGPRMC(const QStringList& tokens)
 
 void CRtGpsTetherInfo::nmeaGPGGA(const QStringList& tokens)
 {
-    const QString& id= tokens[0];
+    const QString& id = tokens[0];
     if(tokens.count() < 15)
     {
         qDebug() << id << "too short";
         return;
     }
 
-    qDebug() << id << "ok" << tokens;
+    // qDebug() << id << "ok" << tokens;
     if(tokens[6].toInt() == 0)
     {
         gga.isValid = false;
@@ -364,5 +435,23 @@ void CRtGpsTetherInfo::nmeaGPGGA(const QStringList& tokens)
 
 void CRtGpsTetherInfo::nmeaGPVTG(const QStringList& tokens)
 {
-//    qDebug() << tokens;
+    const QString& id = tokens[0];
+    if(tokens.count() < 9)
+    {
+        qDebug() << id << "too short";
+        return;
+    }
+
+//    qDebug() << id << "ok" << tokens;
+    if(tokens[1] == "")
+    {
+        vtg.isValid = false;
+        return;
+    }
+
+    vtg.isValid = true;
+    vtg.trackDegreesTrue = tokens[1].toDouble();
+    vtg.trackDegreesMagnetic = tokens[3].toDouble();
+    vtg.speedKnots = tokens[5].toDouble();
+    vtg.speedMeters = tokens[7].toDouble() / 3.6;
 }

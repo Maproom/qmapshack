@@ -297,6 +297,7 @@ set( SRCS
     realtime/IRtSource.cpp
     realtime/gpstether/CRtGpsTether.cpp
     realtime/gpstether/CRtGpsTetherInfo.cpp
+    realtime/gpstether/CRtGpsTetherRecord.cpp
     realtime/opensky/CRtOpenSky.cpp
     realtime/opensky/CRtOpenSkyInfo.cpp
     realtime/opensky/CRtOpenSkyRecord.cpp
@@ -628,6 +629,7 @@ set( HDRS
     realtime/IRtSource.h
     realtime/gpstether/CRtGpsTether.h
     realtime/gpstether/CRtGpsTetherInfo.h
+    realtime/gpstether/CRtGpsTetherRecord.h
     realtime/opensky/CRtOpenSky.h
     realtime/opensky/CRtOpenSkyInfo.h
     realtime/opensky/CRtOpenSkyRecord.h

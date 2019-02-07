@@ -114,8 +114,24 @@ void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF
     p.setBrush(CDraw::brushBackSemiBlue);
     p.setPen(CDraw::penBorderBlue);
     p.drawEllipse(pos, 10, 10);
-
     p.drawEllipse(pos, 2, 2);
+
+    qreal heading = info->getHeading();
+    if(heading == NOFLOAT)
+    {
+        return;
+    }
+
+    QImage arrow = CDraw::createBasicArrow(CDraw::brushBackSemiBlue, 5);
+    p.save();
+    p.translate(pos);
+    p.rotate(heading - 90);
+
+    p.setPen(Qt::black);
+//    p.drawLine(-100,0,100,0);
+//    p.drawLine(0,-100,0,100);
+    p.drawImage(-arrow.rect().center() + QPoint(2,2), arrow);
+    p.restore();
 }
 
 void CRtGpsTether::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)

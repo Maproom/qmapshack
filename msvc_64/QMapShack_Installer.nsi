@@ -19,6 +19,10 @@
 ;Revision Log
 ; 03-Aug-2014 First version of QMapShack installer based on the existing QLandkarteGT installer
 ; 01-Aug-2018 Adapt for VS2017
+; 09-Feb-2019 Adapt to use of Qt 5.12.1 and fusion style
+;  Note: the command line parameter "--style fusion" for qmapshack.exe switches to a GUI appearance which is perceived as less antique than the default
+;  See https://doc.qt.io/qt-5/qstyle.html https://doc.qt.io/qt-5/qstylefactory.html https://forum.qt.io/topic/23978/qfusionstyle https://forum.qt.io/topic/23978/qfusionstyle)
+
 
 ;=================== BEGIN SCRIPT ====================
 ; Include for nice Setup UI, see http://nsis.sourceforge.net/Docs/Modern%20UI%202/Readme.html
@@ -253,11 +257,11 @@ Section "StartMenue" StartMenue
   fileClose $0
 
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-     ;Create shortcuts
+    ;Create shortcuts
     CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack.lnk" "$INSTDIR\qmapshack.exe" "--style fusion" "$INSTDIR\QMapShack.ico"
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapTool.lnk" "$INSTDIR\qmaptool.exe" "" "$INSTDIR\QMapTool.ico"
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapTool.lnk" "$INSTDIR\qmaptool.exe" "--style fusion" "$INSTDIR\QMapTool.ico"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\qmapshack.org.lnk" "https://bitbucket.org/maproom/qmapshack/wiki/Home" "" "$INSTDIR\kfm_home.ico"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Help.lnk" "https://bitbucket.org/maproom/qmapshack/wiki/DocMain" "" "$INSTDIR\Help.ico"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\gdal.org.lnk" "http://www.gdal.org/" "" "$INSTDIR\gdalicon.ico"

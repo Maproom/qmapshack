@@ -43,8 +43,8 @@ QMS depends on the 3rd party software listed below:
 8.) MariaDB, https://mariadb.com/
   For MySql/MariaDB support, the Qt mysql plugin needs libmysql.dll.
   This DLL can be downloaded as part of the precompiled MariaDB binaries at https://downloads.mariadb.org/mariadb/+releases/
-  For the current QMS binary distribution, libmysql.dll is taken from mariadb version 10.1.11: 
-  https://downloads.mariadb.org/mariadb/10.1.11/ --> mariadb-10.1.11-winx64.zip
+  For the current QMS binary distribution, libmysql.dll is taken from mariadb version 10.1.34: 
+  https://downloads.mariadb.org/mariadb/10.1.34 --> mariadb-10.1.34-winx64.zip
 
 9.) libjpeg
   The libjpeg.lib and header files are needed to compile the helper program qmt_map2jnx.exe

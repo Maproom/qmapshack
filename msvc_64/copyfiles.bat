@@ -1,15 +1,11 @@
 rem Batch file to copy the necessary files for the Windows Installer
 rem Please adapt environment variables in section 1) to your system
 
-rem useful links
-rem http://technet.microsoft.com/en-us/library/bb491035.aspx
-rem http://vlaurie.com/computers2/Articles/environment.htm
 
 rem Section 1.) Define path to Qt, MSVC, .... installations
-set QMSI_QT_PATH="C:\Qt5\5.11.1\msvc2017_64"
+set QMSI_QT_PATH="C:\Qt5\5.12.1\msvc2017_64"
 rem get the VC redistributable installer from https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 set QMSI_VCREDIST_PATH="M:\deploy_2017"
-rem set QLGTI_LIBEXIF_PATH="D:\qlgt\tools\libexif"
 set QMSI_GDAL_PATH="M:\lib2017\gdal"
 set QMSI_PROJ_PATH="M:\lib2017\PROJ"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
@@ -19,10 +15,9 @@ set QMSI_CURL_PATH="M:\lib2017\cURL"
 set QMSI_SQLI_PATH="M:\lib2017\sqlite"
 rem runtime libraries from mingw/msys - in my installation originally at C:\msys\opt\windows_64\bin
 set QMSI_MGW6_PATH="M:\lib2017\mingw64"
-rem runtime libraries from mysql/mariadb 
-rem ToDo: describe from where to get - could this be optional?
+rem runtime libraries from mysql/mariadb - see 3rdparty.txt from where to get - could this be optional?
 set QMSI_MSQL_PATH="M:\lib2017\mysql"
-rem And finally of courss the path to your build directory!
+rem And finally of course the path to your build directory!
 set QMSI_BUILD_PATH="..\..\build\"
 
 rem Section 2.) Copy Files
@@ -31,7 +26,7 @@ mkdir Files
 cd Files
 
 rem Section 2.1) Copy Qt files
-rem Note: Qt5WebEngine deployment is super crazy - see https://doc.qt.io/qt-5.11/qtwebengine-deploying.html
+rem Note: Qt5WebEngine deployment is super crazy - see https://doc.qt.io/qt-5.12/qtwebengine-deploying.html
 copy %QMSI_QT_PATH%\bin\Qt5Core.dll
 copy %QMSI_QT_PATH%\bin\Qt5Gui.dll
 copy %QMSI_QT_PATH%\bin\Qt5Multimedia.dll

@@ -1,3 +1,6 @@
+V 1.12.3
+[Issue #428] natural=water not shown
+
 V 1.12.2
 [Issue #419] Add option to project to receive all newly created items
 [Issue #417] Only one line of Geocache description

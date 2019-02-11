@@ -136,7 +136,7 @@ bool CGarminTyp::parseHeader(QDataStream& in)
 
 bool CGarminTyp::parseDrawOrder(QDataStream& in, QList<quint32>& drawOrder)
 {
-    if(sectOrder.dataLength == 0)
+    if(sectOrder.arraySize == 0)
     {
         return true;
     }
@@ -222,7 +222,7 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
 {
     bool tainted = false;
 
-    if(sectPolygons.dataLength == 0)
+    if(sectPolygons.arraySize == 0)
     {
         return true;
     }
@@ -541,7 +541,7 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
 {
     bool tainted = false;
 
-    if(sectPolylines.dataLength == 0)
+    if(sectPolylines.arraySize == 0)
     {
         return true;
     }

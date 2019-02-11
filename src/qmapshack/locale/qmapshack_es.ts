@@ -11818,7 +11818,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="119"/>
         <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar detección del dispositivo. Si está habilitado los dispositivos GPS se detectan, se analiza su contenido y se muestran  sus elementos y proyectos. QMapShack instalará lo necesario para poder enlazar imágenes a los waypoints, etc. </translation>
     </message>
 </context>
 <context>

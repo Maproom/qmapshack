@@ -6,7 +6,7 @@ rem http://technet.microsoft.com/en-us/library/bb491035.aspx
 rem http://vlaurie.com/computers2/Articles/environment.htm
 
 rem Section 1.) Define path to Qt, MSVC, .... installations
-set QMSI_QT_PATH="C:\Qt5\5.11.1\msvc2017_64"
+set QMSI_QT_PATH="C:\Qt5\5.12.1\msvc2017_64"
 rem get the VC redistributable installer from https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 set QMSI_VCREDIST_PATH="M:\deploy_2017"
 rem set QLGTI_LIBEXIF_PATH="D:\qlgt\tools\libexif"

@@ -23,25 +23,31 @@ CRtGpsTetherRecord::CRtGpsTetherRecord(QObject *parent)
 {
 }
 
-void CRtGpsTetherRecord::reset()
+bool CRtGpsTetherRecord::writeEntry(qreal lon, qreal lat, qreal ele, qreal speed, const QDateTime& timestamp)
 {
+    QByteArray data;
+    QDataStream stream(&data, QIODevice::WriteOnly);
+    stream.setVersion(QDataStream::Qt_5_2);
+    stream.setByteOrder(QDataStream::LittleEndian);
+
+    // it's always a good idea to start with a version tag for future changes.
+    stream << quint8(1);
+
+    CTrackData::trkpt_t trkpt;
+    trkpt.lon   = lon;
+    trkpt.lat   = lat;
+    trkpt.ele   = ele;
+    trkpt.time  = timestamp;
+
+    if(speed != NOFLOAT)
+    {
+        trkpt.extensions["speed"] = speed;
+    }
+
+    stream << trkpt;
+    track << trkpt;
+
+    return writeEntry(data);
 }
 
-bool CRtGpsTetherRecord::setFile(const QString& filename)
-{
-    return false;
-}
 
-bool CRtGpsTetherRecord::writeEntry(qreal lon, qreal lat, qreal ele, const QDateTime& timestamp)
-{
-    return false;
-}
-
-void CRtGpsTetherRecord::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
-{
-}
-
-bool CRtGpsTetherRecord::readEntry(QByteArray& data)
-{
-    return false;
-}

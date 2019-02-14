@@ -46,7 +46,7 @@ public:
 
     static const QString strIcon;
 
-private:   
+private:
     QPointer<CRtGpsTetherInfo> info;
 };
 

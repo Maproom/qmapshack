@@ -18,8 +18,8 @@
 
 #include "realtime/CRtSelectSource.h"
 #include "realtime/CRtWorkspace.h"
-#include "realtime/opensky/CRtOpenSky.h"
 #include "realtime/gpstether/CRtGpsTether.h"
+#include "realtime/opensky/CRtOpenSky.h"
 
 
 #include <QtWidgets>

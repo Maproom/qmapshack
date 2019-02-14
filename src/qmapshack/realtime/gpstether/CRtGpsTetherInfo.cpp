@@ -30,8 +30,7 @@
 class CRtGpsTether;
 
 CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
-    : QWidget(parent)
-    , source(source)
+    : IRtInfo(&source, parent)
 {
     setupUi(this);
     connect(toolHelp, &QToolButton::clicked, this, &CRtGpsTetherInfo::slotHelp);
@@ -138,6 +137,11 @@ void CRtGpsTetherInfo::loadSettings(QSettings& cfg)
     spinPort->setValue(cfg.value("port", 10110).toUInt());
     checkAutomaticConnect->setChecked(cfg.value("automatic connect", false).toBool());
     checkCenterPosition->setChecked(cfg.value("center position", false).toBool());
+    startRecord(cfg.value("filename", "").toString());
+    if(toolRecord->isEnabled())
+    {
+        toolRecord->setChecked(cfg.value("record", false).toBool());
+    }
 
     autoConnect(1000);
 }
@@ -148,7 +152,10 @@ void CRtGpsTetherInfo::saveSettings(QSettings& cfg) const
     cfg.setValue("port", spinPort->value());
     cfg.setValue("automatic connect", checkAutomaticConnect->isChecked());
     cfg.setValue("center position", checkCenterPosition->isChecked());
+    cfg.setValue("filename", toolFile->toolTip());
+    cfg.setValue("record", toolRecord->isChecked());
 }
+
 
 QPointF CRtGpsTetherInfo::getPosition() const
 {
@@ -235,49 +242,53 @@ void CRtGpsTetherInfo::slotReadyRead()
 
 void CRtGpsTetherInfo::slotUpdate()
 {
+    qreal lon = NOFLOAT;
+    qreal lat = NOFLOAT;
+    qreal ele = NOFLOAT;
+    qreal speed = NOFLOAT;
+    qreal heading = NOFLOAT;
     QDateTime timestamp;
-
-    labelPosition->setText("-");
-    labelSpeed->setText("-");
-    labelElevation->setText("-");
-    labelTime->setText("-");
-    labelHeading->setText("-");
 
     if(rmc.isValid)
     {
         timestamp = rmc.datetime;
-        QString val, unit;
-        IUnit::degToStr(rmc.lon, rmc.lat, val);
-        labelPosition->setText(val);
-
-        IUnit::self().meter2speed(rmc.groundSpeed, val, unit);
-        labelSpeed->setText(QString("%1%2").arg(val).arg(unit));
-        labelTime->setText(IUnit::datetime2string(rmc.datetime,true));
+        lon = rmc.lon;
+        lat = rmc.lat;
+        speed = rmc.groundSpeed;
     }
 
     if(gga.isValid)
     {
         timestamp = gga.datetime;
-        QString val, unit;
-        IUnit::degToStr(gga.lon, gga.lat, val);
-        labelPosition->setText(val);
-        IUnit::self().meter2elevation(gga.altAboveSeaLevel, val, unit);
-        labelElevation->setText(QString("%1%2").arg(val).arg(unit));
-        labelTime->setText(IUnit::datetime2string(gga.datetime,true));
-        labelTime->setText(IUnit::datetime2string(gga.datetime,true));
+        lon = gga.lon;
+        lat = gga.lat;
+        ele = gga.altAboveSeaLevel;
     }
 
     if(vtg.isValid)
     {
-        QString val, unit;
-        IUnit::self().meter2speed(vtg.speedMeters, val, unit);
-        labelSpeed->setText(QString("%1%2").arg(val).arg(unit));
-        labelHeading->setText(QString("%1°").arg(vtg.trackDegreesTrue,0,'f',0));
+        heading = vtg.trackDegreesTrue;
+        speed = vtg.speedMeters;
     }
 
+    QString val, unit;
+    IUnit::degToStr(lon, lat, val);
+    labelPosition->setText(val);
+    IUnit::self().meter2elevation(ele, val, unit);
+    labelElevation->setText(QString("%1%2").arg(val).arg(unit));
+    IUnit::self().meter2speed(speed, val, unit);
+    labelSpeed->setText(QString("%1%2").arg(val).arg(unit));
+    labelHeading->setText(heading != NOFLOAT ? QString("%1°").arg(heading,0,'f',0) : "-");
+    labelTime->setText(timestamp.isValid() ? timestamp.toLocalTime().toString() : "-");
 
     if(lastTimestamp != timestamp)
     {
+        CRtGpsTetherRecord * _record = dynamic_cast<CRtGpsTetherRecord*>(record.data());
+        if(toolRecord->isChecked() && _record != nullptr && lon != NOFLOAT && lat != NOFLOAT)
+        {
+            _record->writeEntry(lon, lat, ele, speed, timestamp);
+        }
+
         if(checkCenterPosition->isChecked())
         {
             CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
@@ -294,19 +305,6 @@ void CRtGpsTetherInfo::slotUpdate()
     }
 
     lastTimestamp = timestamp;
-}
-
-
-void CRtGpsTetherInfo::slotSetFilename()
-{
-}
-
-void CRtGpsTetherInfo::slotResetRecord()
-{
-}
-
-void CRtGpsTetherInfo::slotToTrack()
-{
 }
 
 bool CRtGpsTetherInfo::verifyLine(const QString& line)
@@ -454,4 +452,35 @@ void CRtGpsTetherInfo::nmeaGPVTG(const QStringList& tokens)
     vtg.trackDegreesMagnetic = tokens[3].toDouble();
     vtg.speedKnots = tokens[5].toDouble();
     vtg.speedMeters = tokens[7].toDouble() / 3.6;
+}
+
+
+void CRtGpsTetherInfo::startRecord(const QString& filename)
+{
+    delete record;
+
+    toolFile->setToolTip(filename);
+    toolRecord->setEnabled(false);
+
+    if(filename.trimmed().isEmpty())
+    {
+        return;
+    }
+
+    record = new CRtGpsTetherRecord(this);
+
+    if(!record->setFile(filename))
+    {
+        QMessageBox::critical(this, tr("Failed..."), record->getError(), QMessageBox::Ok);
+    }
+
+    toolRecord->setEnabled(true);
+}
+
+void CRtGpsTetherInfo::fillTrackData(CTrackData& data)
+{
+    CTrackData::trkseg_t seg;
+    seg.pts = record->getTrack();
+    data.segs << seg;
+    data.name = lineHost->text();
 }

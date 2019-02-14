@@ -20,6 +20,7 @@
 #define CRTGPSINFO_H
 
 #include "realtime/gpstether/CRtGpsTetherRecord.h"
+#include "realtime/IRtInfo.h"
 #include "ui_IRtGpsTetherInfo.h"
 
 #include <functional>
@@ -31,7 +32,7 @@ using fNemaLine = std::function<void(const QStringList&)>;
 class CRtGpsTether;
 class QSettings;
 
-class CRtGpsTetherInfo : public QWidget, private Ui::IRtGpsTetherInfo
+class CRtGpsTetherInfo : public IRtInfo, private Ui::IRtGpsTetherInfo
 {
     Q_OBJECT
 public:
@@ -68,14 +69,10 @@ private:
     void nmeaGPVTG(const QStringList& tokens);
     void nmeaGPGSA(const QStringList& tokens);
 
-private slots:
-    void slotSetFilename();
-    void slotResetRecord();
-    void slotToTrack();
 
 private:
-    CRtGpsTether& source;
-    QPointer<CRtGpsTetherRecord> record;
+    void startRecord(const QString& filename) override;
+    void fillTrackData(CTrackData& data) override;
 
     QTcpSocket * socket;
     QTimer * timer;

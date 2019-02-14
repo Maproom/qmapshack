@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "realtime/gpstether/CRtGpsTether.h"
 #include "realtime/IRtSource.h"
 #include "realtime/opensky/CRtOpenSky.h"
-#include "realtime/gpstether/CRtGpsTether.h"
 
 #include <QtWidgets>
 

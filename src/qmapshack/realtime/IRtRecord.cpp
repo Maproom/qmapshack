@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "realtime/CRtDraw.h"
 #include "realtime/IRtRecord.h"
 
 #include <QtCore>
@@ -27,6 +28,7 @@ IRtRecord::IRtRecord(QObject *parent)
 
 bool IRtRecord::setFile(const QString& fn)
 {
+    track.clear();
     filename = fn;
 
     if(QFile::exists(filename))
@@ -99,7 +101,38 @@ bool IRtRecord::writeEntry(const QByteArray& data)
     return true;
 }
 
+bool IRtRecord::readEntry(QByteArray& data)
+{
+    QDataStream stream(&data, QIODevice::ReadOnly);
+    stream.setVersion(QDataStream::Qt_5_2);
+    stream.setByteOrder(QDataStream::LittleEndian);
+
+    quint8 version;
+    stream >> version;
+
+    CTrackData::trkpt_t trkpt;
+    stream  >> trkpt;
+    track << trkpt;
+    return true;
+}
+
 void IRtRecord::reset()
 {
+    track.clear();
     QFile::resize(filename, 0);
 }
+
+void IRtRecord::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+{
+    QPolygonF tmp;
+    for(const CTrackData::trkpt_t& trkpt : track)
+    {
+        tmp << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+    }
+
+    rt->convertRad2Px(tmp);
+    p.setPen(QPen(Qt::black, 3));
+    p.drawPolyline(tmp);
+}
+
+

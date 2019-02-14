@@ -29,21 +29,10 @@ public:
     CRtGpsTetherRecord(QObject * parent);
     virtual ~CRtGpsTetherRecord() = default;
 
-    void reset() override;
-    bool setFile(const QString& filename) override;
-    bool writeEntry(qreal lon, qreal lat, qreal ele, const QDateTime& timestamp);
-    void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
-
-    const QVector<CTrackData::trkpt_t>& geTrack() const
-    {
-        return track;
-    }
+    bool writeEntry(qreal lon, qreal lat, qreal ele, qreal speed, const QDateTime& timestamp);
 
 protected:
     using IRtRecord::writeEntry;
-    bool readEntry(QByteArray& data) override;
-
-    QVector<CTrackData::trkpt_t> track;
 };
 
 #endif //CRTGPSTETHERRECORD_H

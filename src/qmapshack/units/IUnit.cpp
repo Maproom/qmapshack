@@ -521,6 +521,13 @@ void IUnit::setUnitType(type_e t, QObject * parent)
 
 void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
 {
+    if(meter == NOFLOAT)
+    {
+        val = "-";
+        unit.clear();
+        return;
+    }
+
     val.sprintf("%2.2f",meter * speedfactor);
     unit = speedunit;
 }
@@ -687,6 +694,12 @@ QByteArray IUnit::pos2timezone(const QPointF& pos)
 
 void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
 {
+    if(x == NOFLOAT || y == NOFLOAT)
+    {
+        str = "-";
+        return;
+    }
+
     switch(coordFormat)
     {
     case eCoordFormat1:

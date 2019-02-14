@@ -293,6 +293,7 @@ set( SRCS
     realtime/CRtDraw.cpp
     realtime/CRtSelectSource.cpp
     realtime/CRtWorkspace.cpp
+    realtime/IRtInfo.cpp
     realtime/IRtRecord.cpp
     realtime/IRtSource.cpp
     realtime/gpstether/CRtGpsTether.cpp
@@ -625,7 +626,8 @@ set( HDRS
     realtime/CRtDraw.h
     realtime/CRtSelectSource.h
     realtime/CRtWorkspace.h
-    realtime/IRtRecord.h
+    realtime/IRtInfo.h
+    realtime/IRtRecord.h    
     realtime/IRtSource.h
     realtime/gpstether/CRtGpsTether.h
     realtime/gpstether/CRtGpsTetherInfo.h

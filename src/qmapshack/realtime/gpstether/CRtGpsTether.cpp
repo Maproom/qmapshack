@@ -34,7 +34,7 @@ CRtGpsTether::CRtGpsTether(QTreeWidget *parent)
     : IRtSource(eTypeGps, false, parent)
 {
     setIcon(eColumnIcon, QIcon(strIcon));
-    setText(eColumnName, "GPS");
+    setText(eColumnName, "GPS TCP/IP");
     setCheckState(eColumnCheckBox, Qt::Checked);
 
     registerWithTreeWidget();
@@ -97,6 +97,8 @@ void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF
         return;
     }
 
+    info->draw(p, viewport, blockedAreas, rt);
+
     if(checkState(eColumnCheckBox) != Qt::Checked)
     {
         return;
@@ -128,8 +130,6 @@ void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF
     p.rotate(heading - 90);
 
     p.setPen(Qt::black);
-//    p.drawLine(-100,0,100,0);
-//    p.drawLine(0,-100,0,100);
     p.drawImage(-arrow.rect().center() + QPoint(2,2), arrow);
     p.restore();
 }

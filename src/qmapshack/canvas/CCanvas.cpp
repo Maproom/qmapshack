@@ -1296,5 +1296,4 @@ void CCanvas::followPosition(const QPointF& pos)
     }
 
     moveMap(r1.center() - pos_);
-
 }

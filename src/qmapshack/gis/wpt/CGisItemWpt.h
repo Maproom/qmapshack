@@ -70,6 +70,9 @@ public:
         QString ownerId;
         QString type;
         QString container;
+        //See ZGeocacheAttributes for meanings. Index equals number, 0 is not present, -1 is negative, 1 is positive
+        //As there is no attribute with id 0, this will be our marker, whether the attributes were imported or not
+        QVector<qint8> attributes = QVector<qint8>(68, 0);
         bool shortDescIsHtml = false;
         QString shortDesc;
         bool longDescIsHtml = false;
@@ -79,6 +82,8 @@ public:
         QString state;
         QString locale;
         QList<geocachelog_t> logs;
+
+        const static QString attributeMeanings[68];
     };
 
     struct image_t

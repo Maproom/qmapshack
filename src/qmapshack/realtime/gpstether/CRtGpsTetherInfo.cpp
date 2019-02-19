@@ -192,6 +192,7 @@ void CRtGpsTetherInfo::slotConnect(bool yes)
         lineHost->setEnabled(false);
         spinPort->setEnabled(false);
         socket->connectToHost(lineHost->text(), spinPort->value());
+        toolConnect->setIcon(QIcon("://icons/32x32/Connecting.png"));
     }
     else
     {
@@ -206,6 +207,7 @@ void CRtGpsTetherInfo::slotConnected()
 {
     timer->start();
     toolConnect->setChecked(true);
+    toolConnect->setIcon(QIcon("://icons/32x32/Connected.png"));
 }
 
 void CRtGpsTetherInfo::slotDisconnected()
@@ -213,6 +215,7 @@ void CRtGpsTetherInfo::slotDisconnected()
     lineHost->setEnabled(true);
     spinPort->setEnabled(true);
     toolConnect->setChecked(false);
+    toolConnect->setIcon(QIcon("://icons/32x32/Disconnected.png"));
 
     autoConnect(5000);
 }

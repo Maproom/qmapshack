@@ -26,8 +26,8 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/UnLock.png</normaloff>
-         <normalon>:/icons/32x32/Lock.png</normalon>:/icons/32x32/UnLock.png</iconset>
+         <normaloff>:/icons/32x32/Disconnected.png</normaloff>
+         <normalon>:/icons/32x32/Connected.png</normalon>:/icons/32x32/Disconnected.png</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>

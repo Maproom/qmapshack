@@ -5179,6 +5179,34 @@ non è una definizione di coordinate valida:
     </message>
 </context>
 <context>
+    <name>CRtGpsTether</name>
+    <message>
+        <location filename="../realtime/gpstether/CRtGpsTether.cpp" line="88"/>
+        <source>&lt;b&gt;GPS Tether&lt;/b&gt;&lt;br/&gt;Get position via NMEA over TCP/IP.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CRtGpsTetherInfo</name>
+    <message>
+        <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="97"/>
+        <source>Help</source>
+        <translation type="unfinished">Guida</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="98"/>
+        <source>GPS Tether
+The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hot spot.
+For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="457"/>
+        <source>Failed...</source>
+        <translation type="unfinished">Non riuscito...</translation>
+    </message>
+</context>
+<context>
     <name>CRtOpenSky</name>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="96"/>
@@ -5274,27 +5302,12 @@ non è una definizione di coordinate valida:
 <context>
     <name>CRtOpenSkyInfo</name>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="78"/>
+        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="76"/>
         <source>Error...</source>
         <translation>Errore...</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="89"/>
-        <source>Select record file</source>
-        <translation>Seleziona il file per memorizzare</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
-        <source>Reset record...</source>
-        <translation>Azzera memoria...</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
-        <source>Do you really want to reset the current record?</source>
-        <translation>Vuoi davvero ripristinare il record corrente?</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="160"/>
+        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="101"/>
         <source>Failed...</source>
         <translation>Non riuscito...</translation>
     </message>
@@ -5302,7 +5315,7 @@ non è una definizione di coordinate valida:
 <context>
     <name>CRtSelectSource</name>
     <message>
-        <location filename="../realtime/CRtSelectSource.cpp" line="62"/>
+        <location filename="../realtime/CRtSelectSource.cpp" line="63"/>
         <source>Select a real time source from the list. Some sources can be added multiple times. For others only a single instance can be added.</source>
         <translation>Seleziona una fonte in tempo reale dall&apos;elenco. Alcune fonti possono essere aggiunte più volte. Per gli altri è possibile aggiungere solo una singola istanza.</translation>
     </message>
@@ -5310,17 +5323,17 @@ non è una definizione di coordinate valida:
 <context>
     <name>CRtWorkspace</name>
     <message>
-        <location filename="../realtime/CRtWorkspace.cpp" line="65"/>
+        <location filename="../realtime/CRtWorkspace.cpp" line="67"/>
         <source>To add a real time source do a right click on the list above. </source>
         <translation>Per aggiungere una fonte in tempo reale fai un clic destro sulla lista. </translation>
     </message>
     <message>
-        <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
+        <location filename="../realtime/CRtWorkspace.cpp" line="262"/>
         <source>Delete Source...</source>
         <translation>Elimina sorgente...</translation>
     </message>
     <message>
-        <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
+        <location filename="../realtime/CRtWorkspace.cpp" line="262"/>
         <source>Do you really want to remove the realtime source?</source>
         <translation>Vuoi veramente rimuovere la sorgente in tempo reale?</translation>
     </message>
@@ -10454,6 +10467,128 @@ oppure
     </message>
 </context>
 <context>
+    <name>IRtGpsTetherInfo</name>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="25"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="63"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="130"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="150"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="173"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="187"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="201"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="46"/>
+        <source>Port</source>
+        <translation type="unfinished">Porta</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="89"/>
+        <source>Host</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="96"/>
+        <source>Automatically connect to the host.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="99"/>
+        <source>auto. conn.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="127"/>
+        <source>Start recording.</source>
+        <translation type="unfinished">Inizia registrazione.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="147"/>
+        <source>Pause recording.</source>
+        <translation type="unfinished">Metti in pausa.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="170"/>
+        <source>Convert record to track.</source>
+        <translation type="unfinished">Converti registrazione in traccia.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="184"/>
+        <source>Reset record.</source>
+        <translation type="unfinished">Ripristina registrazione.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="198"/>
+        <source>Select record file.</source>
+        <translation type="unfinished">Seleziona file di registrazione.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="214"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="230"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="237"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="253"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="260"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="297"/>
+        <source>-</source>
+        <translation type="unfinished">-</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="221"/>
+        <source>Position</source>
+        <translation type="unfinished">Posizione</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="246"/>
+        <source>Time</source>
+        <translation type="unfinished">Tempo</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="267"/>
+        <source>Speed</source>
+        <translation type="unfinished">Vel.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="274"/>
+        <source>Elevation</source>
+        <translation type="unfinished">Elevazione</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="281"/>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="288"/>
+        <source>center to position</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IRtInfo</name>
+    <message>
+        <location filename="../realtime/IRtInfo.cpp" line="37"/>
+        <source>Select record file</source>
+        <translation type="unfinished">Seleziona il file per memorizzare</translation>
+    </message>
+    <message>
+        <location filename="../realtime/IRtInfo.cpp" line="62"/>
+        <source>Reset record...</source>
+        <translation type="unfinished">Azzera memoria...</translation>
+    </message>
+    <message>
+        <location filename="../realtime/IRtInfo.cpp" line="62"/>
+        <source>Do you really want to reset the current record?</source>
+        <translation type="unfinished">Vuoi davvero ripristinare il record corrente?</translation>
+    </message>
+</context>
+<context>
     <name>IRtOpenSkyInfo</name>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="14"/>
@@ -10534,22 +10669,22 @@ oppure
 <context>
     <name>IRtRecord</name>
     <message>
-        <location filename="../realtime/IRtRecord.cpp" line="44"/>
+        <location filename="../realtime/IRtRecord.cpp" line="46"/>
         <source>Failed to open record for reading.</source>
         <translation>Impossibile aprire in lettura la registrazione.</translation>
     </message>
     <message>
-        <location filename="../realtime/IRtRecord.cpp" line="63"/>
+        <location filename="../realtime/IRtRecord.cpp" line="64"/>
         <source>Failed to read entry. Truncate record to last valid entry.</source>
         <translation>Impossibile leggere la voce. Troncato il record sull&apos;ultima voce valida.</translation>
     </message>
     <message>
-        <location filename="../realtime/IRtRecord.cpp" line="81"/>
+        <location filename="../realtime/IRtRecord.cpp" line="82"/>
         <source>Failed to open record for writing.</source>
         <translation>Impossibile aprire in scrittura la registrazione.</translation>
     </message>
     <message>
-        <location filename="../realtime/IRtRecord.cpp" line="94"/>
+        <location filename="../realtime/IRtRecord.cpp" line="95"/>
         <source>Failed to write entry.</source>
         <translation>Impossibile scrivere la voce.</translation>
     </message>
@@ -12239,18 +12374,18 @@ Una parola viene cercata come corrispondenza (come fosse &apos;*qualcosacosa*&ap
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="798"/>
-        <location filename="../units/IUnit.cpp" line="804"/>
+        <location filename="../units/IUnit.cpp" line="811"/>
+        <location filename="../units/IUnit.cpp" line="817"/>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="798"/>
+        <location filename="../units/IUnit.cpp" line="811"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Formato errato. Valori accettati sono: [N|S] ddd mm.sss [W|E] ddd mm.sss&quot; oppure &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="804"/>
+        <location filename="../units/IUnit.cpp" line="817"/>
         <source>Position values out of bounds. </source>
         <translation>Valori fuori norma. </translation>
     </message>

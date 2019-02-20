@@ -459,7 +459,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="44"/>
         <source>Failed to load file: %1</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
@@ -519,7 +519,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="311"/>
         <source>No images found</source>
-        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
+        <translation>  No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -783,7 +783,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="166"/>
         <source>Save project as %1</source>
-        <translation>&#xa0; Desa el projecte com a %1</translation>
+        <translation>  Desa el projecte com a %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="170"/>
@@ -1002,12 +1002,12 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
         <source>Failed to open FIT file %1.</source>
-        <translation>&#xa0; No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
+        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
     </message>
 </context>
 <context>
@@ -5173,6 +5173,34 @@ no és una coordenada vàlida en la configuración activa:
     </message>
 </context>
 <context>
+    <name>CRtGpsTether</name>
+    <message>
+        <location filename="../realtime/gpstether/CRtGpsTether.cpp" line="88"/>
+        <source>&lt;b&gt;GPS Tether&lt;/b&gt;&lt;br/&gt;Get position via NMEA over TCP/IP.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CRtGpsTetherInfo</name>
+    <message>
+        <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="97"/>
+        <source>Help</source>
+        <translation type="unfinished">Ajuda</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="98"/>
+        <source>GPS Tether
+The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hot spot.
+For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="457"/>
+        <source>Failed...</source>
+        <translation type="unfinished">Ha fallat ...</translation>
+    </message>
+</context>
+<context>
     <name>CRtOpenSky</name>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="96"/>
@@ -5268,27 +5296,12 @@ no és una coordenada vàlida en la configuración activa:
 <context>
     <name>CRtOpenSkyInfo</name>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="78"/>
+        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="76"/>
         <source>Error...</source>
         <translation>Error...</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="89"/>
-        <source>Select record file</source>
-        <translation>Seleccionar el fitxer de registre</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
-        <source>Reset record...</source>
-        <translation>Posar a zero el registre...</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
-        <source>Do you really want to reset the current record?</source>
-        <translation>Està segur de voler posar a zero el registre?</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="160"/>
+        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="101"/>
         <source>Failed...</source>
         <translation>Ha fallat ...</translation>
     </message>
@@ -5296,7 +5309,7 @@ no és una coordenada vàlida en la configuración activa:
 <context>
     <name>CRtSelectSource</name>
     <message>
-        <location filename="../realtime/CRtSelectSource.cpp" line="62"/>
+        <location filename="../realtime/CRtSelectSource.cpp" line="63"/>
         <source>Select a real time source from the list. Some sources can be added multiple times. For others only a single instance can be added.</source>
         <translation>Selecciona un temps real original de la llista. Alguns orígens es poden afegir vàries vegades. En d&apos;altres casos sols es pot afegir una vegada. </translation>
     </message>
@@ -5304,17 +5317,17 @@ no és una coordenada vàlida en la configuración activa:
 <context>
     <name>CRtWorkspace</name>
     <message>
-        <location filename="../realtime/CRtWorkspace.cpp" line="65"/>
+        <location filename="../realtime/CRtWorkspace.cpp" line="67"/>
         <source>To add a real time source do a right click on the list above. </source>
         <translation>Fes clic amb el botó dret a la llista de sobre per afegir un temps real original.</translation>
     </message>
     <message>
-        <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
+        <location filename="../realtime/CRtWorkspace.cpp" line="262"/>
         <source>Delete Source...</source>
         <translation>Suprimir l&apos;origen...</translation>
     </message>
     <message>
-        <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
+        <location filename="../realtime/CRtWorkspace.cpp" line="262"/>
         <source>Do you really want to remove the realtime source?</source>
         <translation>Estàs segur de suprimir el temps real original? </translation>
     </message>
@@ -10449,6 +10462,128 @@ o
     </message>
 </context>
 <context>
+    <name>IRtGpsTetherInfo</name>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulari</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="25"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="63"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="130"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="150"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="173"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="187"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="201"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="46"/>
+        <source>Port</source>
+        <translation type="unfinished">Port</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="89"/>
+        <source>Host</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="96"/>
+        <source>Automatically connect to the host.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="99"/>
+        <source>auto. conn.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="127"/>
+        <source>Start recording.</source>
+        <translation type="unfinished">Inicia l&apos;enregistrament.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="147"/>
+        <source>Pause recording.</source>
+        <translation type="unfinished">Fes una pausa en l&apos;enregistrament.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="170"/>
+        <source>Convert record to track.</source>
+        <translation type="unfinished">Converteix el registre a track.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="184"/>
+        <source>Reset record.</source>
+        <translation type="unfinished">Posar a zero el registre.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="198"/>
+        <source>Select record file.</source>
+        <translation type="unfinished">Seleccionar el fitxer de registre.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="214"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="230"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="237"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="253"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="260"/>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="297"/>
+        <source>-</source>
+        <translation type="unfinished">-</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="221"/>
+        <source>Position</source>
+        <translation type="unfinished">Possició</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="246"/>
+        <source>Time</source>
+        <translation type="unfinished">Hora</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="267"/>
+        <source>Speed</source>
+        <translation type="unfinished">Velocitat</translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="274"/>
+        <source>Elevation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="281"/>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="288"/>
+        <source>center to position</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IRtInfo</name>
+    <message>
+        <location filename="../realtime/IRtInfo.cpp" line="37"/>
+        <source>Select record file</source>
+        <translation type="unfinished">Seleccionar el fitxer de registre</translation>
+    </message>
+    <message>
+        <location filename="../realtime/IRtInfo.cpp" line="62"/>
+        <source>Reset record...</source>
+        <translation type="unfinished">Posar a zero el registre...</translation>
+    </message>
+    <message>
+        <location filename="../realtime/IRtInfo.cpp" line="62"/>
+        <source>Do you really want to reset the current record?</source>
+        <translation type="unfinished">Està segur de voler posar a zero el registre?</translation>
+    </message>
+</context>
+<context>
     <name>IRtOpenSkyInfo</name>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="14"/>
@@ -10529,22 +10664,22 @@ o
 <context>
     <name>IRtRecord</name>
     <message>
-        <location filename="../realtime/IRtRecord.cpp" line="44"/>
+        <location filename="../realtime/IRtRecord.cpp" line="46"/>
         <source>Failed to open record for reading.</source>
         <translation>Error en obrir per lectura el registre.</translation>
     </message>
     <message>
-        <location filename="../realtime/IRtRecord.cpp" line="63"/>
+        <location filename="../realtime/IRtRecord.cpp" line="64"/>
         <source>Failed to read entry. Truncate record to last valid entry.</source>
         <translation>Error en la lectura de dades. Registre truncat fins a la darrera dada vàlida.</translation>
     </message>
     <message>
-        <location filename="../realtime/IRtRecord.cpp" line="81"/>
+        <location filename="../realtime/IRtRecord.cpp" line="82"/>
         <source>Failed to open record for writing.</source>
         <translation>Error en obrir per escriptura el registre.</translation>
     </message>
     <message>
-        <location filename="../realtime/IRtRecord.cpp" line="94"/>
+        <location filename="../realtime/IRtRecord.cpp" line="95"/>
         <source>Failed to write entry.</source>
         <translation>Error en l&apos;escriptura de dades.</translation>
     </message>
@@ -12204,7 +12339,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>
@@ -12232,18 +12367,18 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="798"/>
-        <location filename="../units/IUnit.cpp" line="804"/>
+        <location filename="../units/IUnit.cpp" line="811"/>
+        <location filename="../units/IUnit.cpp" line="817"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="798"/>
+        <location filename="../units/IUnit.cpp" line="811"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Format amb possicions incorrectes. Ha de ser: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; o &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="804"/>
+        <location filename="../units/IUnit.cpp" line="817"/>
         <source>Position values out of bounds. </source>
         <translation>Els valors de la posició estan fora dels límits.</translation>
     </message>

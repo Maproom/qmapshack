@@ -27,7 +27,6 @@
 #include <QTcpSocket>
 #include <QWidget>
 
-using fNemaLine = std::function<void(const QStringList&)>;
 
 class CRtGpsTether;
 class QSettings;
@@ -61,13 +60,14 @@ private:
     void disconnectFromHost();
     void autoConnect(int msec);
 
+    using fNemaLine = std::function<void(const QStringList&)>;
     fNemaLine nmeaDefault = [&](const QStringList& t){qDebug() << t[0] << "unknown";};
 
-    void nmeaGPGSV(const QStringList& tokens);
-    void nmeaGPRMC(const QStringList& tokens);
-    void nmeaGPGGA(const QStringList& tokens);
-    void nmeaGPVTG(const QStringList& tokens);
-    void nmeaGPGSA(const QStringList& tokens);
+    void nmeaGSV(const QStringList& tokens);
+    void nmeaRMC(const QStringList& tokens);
+    void nmeaGGA(const QStringList& tokens);
+    void nmeaVTG(const QStringList& tokens);
+    void nmeaGSA(const QStringList& tokens);
 
 
 private:

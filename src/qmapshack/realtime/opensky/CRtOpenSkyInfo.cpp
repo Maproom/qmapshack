@@ -97,7 +97,9 @@ void CRtOpenSkyInfo::startRecord(const QString& filename)
 
     if(!record->setFile(filename))
     {
+        delete record;
         QMessageBox::critical(this, tr("Failed..."), record->getError(), QMessageBox::Ok);
+        return;
     }
 
     toolRecord->setEnabled(true);

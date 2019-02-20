@@ -19,6 +19,7 @@
 #ifndef CRTOPENSKYINFO_H
 #define CRTOPENSKYINFO_H
 
+#include "realtime/IRtInfo.h"
 #include "ui_IRtOpenSkyInfo.h"
 
 #include <QPointer>
@@ -27,7 +28,7 @@ class CRtOpenSkyRecord;
 class CRtOpenSky;
 class CRtDraw;
 
-class CRtOpenSkyInfo : public QWidget, private Ui::IRtOpenSkyInfo
+class CRtOpenSkyInfo : public IRtInfo, private Ui::IRtOpenSkyInfo
 {
     Q_OBJECT
 public:
@@ -37,21 +38,12 @@ public:
     void loadSettings(QSettings& cfg);
     void saveSettings(QSettings& cfg) const;
 
-    void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt);
-
 public slots:
     void slotUpdate();
 
-private slots:
-    void slotSetFilename();
-    void slotResetRecord();
-    void slotToTrack();
-
 private:
-    void startRecord(const QString& filename);
-
-    CRtOpenSky& source;
-    QPointer<CRtOpenSkyRecord> record;
+    void startRecord(const QString& filename) override;
+    void fillTrackData(CTrackData& data) override;
 };
 
 #endif //CRTOPENSKYINFO_H

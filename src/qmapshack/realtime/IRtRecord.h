@@ -19,6 +19,8 @@
 #ifndef IRTRECORD_H
 #define IRTRECORD_H
 
+#include "gis/trk/CTrackData.h"
+
 #include <QDataStream>
 #include <QFile>
 #include <QObject>
@@ -63,8 +65,11 @@ public:
        @param blockedAreas  a list of blocked areas
        @param rt            the draw context
      */
-    virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+    virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt);
+
+    virtual const QVector<CTrackData::trkpt_t>& getTrack() const
     {
+        return track;
     }
 
 protected:
@@ -90,7 +95,10 @@ protected:
 
        @return Return true on success.
      */
-    virtual bool readEntry(QByteArray& data) = 0;
+    virtual bool readEntry(QByteArray& data);
+
+protected:
+    QVector<CTrackData::trkpt_t> track;
 
 private:
 

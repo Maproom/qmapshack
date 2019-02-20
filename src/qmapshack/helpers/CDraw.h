@@ -44,6 +44,7 @@ public:
     static QPen penBorderRed;
     static QBrush brushBackWhite;
     static QBrush brushBackYellow;
+    static QBrush brushBackSemiBlue;
 
     /**
        @brief Draw arrows along a line
@@ -84,7 +85,7 @@ public:
     static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth = 20, float pointerBasePos = .5f, const QPen& pen = penBorderGray);
 
     static bool doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect);
-private:
+
     /**
        @brief   Creates a new arrow using the brush specified
        @return  A QImage containing the arrow

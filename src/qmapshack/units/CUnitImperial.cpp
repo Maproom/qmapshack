@@ -34,7 +34,7 @@ void CUnitImperial::meter2elevation(qreal meter, QString& val, QString& unit) co
     if(meter == NOFLOAT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
     }
     else
     {
@@ -49,7 +49,7 @@ void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit) con
     if(meter == NOFLOAT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
     }
     else if(meter < 10)
     {
@@ -83,7 +83,7 @@ void CUnitImperial::meter2area(qreal meter, QString& val, QString& unit) const /
     if(meter == NOFLOAT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
     }
     else
     {

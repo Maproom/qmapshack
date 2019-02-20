@@ -55,35 +55,11 @@ CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
 
     labelStatus->setText("-");
 
-    dict["GPGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
-    dict["GLGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
-    dict["GNGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
-    dict["GAGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
-    dict["PQGSV"] = [&](const QStringList& t){nmeaGPGSV(t);};
-
-    dict["GPGSA"] = [&](const QStringList& t){nmeaGPGSA(t);};
-    dict["GLGSA"] = [&](const QStringList& t){nmeaGPGSA(t);};
-    dict["GNGSA"] = [&](const QStringList& t){nmeaGPGSA(t);};
-    dict["GAGSA"] = [&](const QStringList& t){nmeaGPGSA(t);};
-    dict["PQGSA"] = [&](const QStringList& t){nmeaGPGSA(t);};
-
-    dict["GPRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
-    dict["GLRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
-    dict["GNRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
-    dict["GARMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
-    dict["PQRMC"] = [&](const QStringList& t){nmeaGPRMC(t);};
-
-    dict["GPGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
-    dict["GLGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
-    dict["GNGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
-    dict["GAGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
-    dict["PQGGA"] = [&](const QStringList& t){nmeaGPGGA(t);};
-
-    dict["GPVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
-    dict["GLVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
-    dict["GNVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
-    dict["GAVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
-    dict["PQVTG"] = [&](const QStringList& t){nmeaGPVTG(t);};
+    dict["GSV"] = [&](const QStringList& t){nmeaGSV(t);};
+    dict["GSA"] = [&](const QStringList& t){nmeaGSA(t);};
+    dict["RMC"] = [&](const QStringList& t){nmeaRMC(t);};
+    dict["GGA"] = [&](const QStringList& t){nmeaGGA(t);};
+    dict["VTG"] = [&](const QStringList& t){nmeaVTG(t);};
 }
 
 CRtGpsTetherInfo::~CRtGpsTetherInfo()
@@ -183,8 +159,6 @@ qreal CRtGpsTetherInfo::getHeading() const
 
 void CRtGpsTetherInfo::slotConnect(bool yes)
 {
-    rmc.isValid = false;
-    gga.isValid = false;
     labelStatus->setText("-");
 
     if(yes)
@@ -217,6 +191,12 @@ void CRtGpsTetherInfo::slotDisconnected()
     toolConnect->setChecked(false);
     toolConnect->setIcon(QIcon("://icons/32x32/Disconnected.png"));
 
+    rmc.isValid = false;
+    gga.isValid = false;
+    vtg.isValid = false;
+
+    slotUpdate();
+
     autoConnect(5000);
 }
 
@@ -239,7 +219,7 @@ void CRtGpsTetherInfo::slotReadyRead()
         line.chop(3);
 
         const QStringList& tokens = line.mid(1).split(',');
-        dict.value(tokens[0], nmeaDefault)(tokens);
+        dict.value(tokens[0].mid(2), nmeaDefault)(tokens);
     }
 }
 
@@ -315,7 +295,6 @@ bool CRtGpsTetherInfo::verifyLine(const QString& line)
     quint8 cs = 0;
     const QByteArray& data = line.toLatin1();
 
-
     for(int i = 1; i < data.size() - 3; i++)
     {
         cs ^= data[i];
@@ -324,11 +303,11 @@ bool CRtGpsTetherInfo::verifyLine(const QString& line)
     return line.right(2).toInt(0,16) == cs;
 }
 
-void CRtGpsTetherInfo::nmeaGPGSV(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaGSV(const QStringList& tokens)
 {
 }
 
-void CRtGpsTetherInfo::nmeaGPGSA(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaGSA(const QStringList& tokens)
 {
     const QString& id= tokens[0];
     if(tokens.count() < 18)
@@ -349,7 +328,7 @@ void CRtGpsTetherInfo::nmeaGPGSA(const QStringList& tokens)
     gsa.vdop = tokens[17].toDouble();
 }
 
-void CRtGpsTetherInfo::nmeaGPRMC(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaRMC(const QStringList& tokens)
 {
     const QString& id= tokens[0];
     if(tokens.count() < 12)
@@ -387,7 +366,7 @@ void CRtGpsTetherInfo::nmeaGPRMC(const QStringList& tokens)
     rmc.trackMadeGood = tokens[8].toDouble();
 }
 
-void CRtGpsTetherInfo::nmeaGPGGA(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaGGA(const QStringList& tokens)
 {
     const QString& id = tokens[0];
     if(tokens.count() < 15)
@@ -434,7 +413,7 @@ void CRtGpsTetherInfo::nmeaGPGGA(const QStringList& tokens)
 //             << gga.altAboveSeaLevel << gga.geodialSeparation << gga.horizDilution;
 }
 
-void CRtGpsTetherInfo::nmeaGPVTG(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaVTG(const QStringList& tokens)
 {
     const QString& id = tokens[0];
     if(tokens.count() < 9)
@@ -474,7 +453,9 @@ void CRtGpsTetherInfo::startRecord(const QString& filename)
 
     if(!record->setFile(filename))
     {
+        delete record;
         QMessageBox::critical(this, tr("Failed..."), record->getError(), QMessageBox::Ok);
+        return;
     }
 
     toolRecord->setEnabled(true);

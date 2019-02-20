@@ -31,7 +31,7 @@
 const QString CRtGpsTether::strIcon("://icons/48x48/Gps.png");
 
 CRtGpsTether::CRtGpsTether(QTreeWidget *parent)
-    : IRtSource(eTypeGps, false, parent)
+    : IRtSource(eTypeGpsTether, false, parent)
 {
     setIcon(eColumnIcon, QIcon(strIcon));
     setText(eColumnName, "GPS TCP/IP");

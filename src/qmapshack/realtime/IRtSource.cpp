@@ -50,7 +50,7 @@ IRtSource* IRtSource::create(int type, QTreeWidget * parent)
     case eTypeOpenSky:
         return new CRtOpenSky(parent);
 
-    case eTypeGps:
+    case eTypeGpsTether:
         return new CRtGpsTether(parent);
     }
 

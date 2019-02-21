@@ -323,7 +323,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         cursor1.setCharFormat(fmtCharStandard);
         cursor1.setBlockFormat(fmtBlockStandard);
 
-        QTextTable * table = cursor1.insertTable(1, 2, fmtTableHidden);
+        QTextTable * table = cursor1.insertTable(2, 2, fmtTableHidden);
 
         QTextCursor cursor2 = table->cellAt(0,0).firstCursorPosition();
         drawInfo(cursor2, isReadOnly);
@@ -332,6 +332,12 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         {
             QTextCursor cursor3 = table->cellAt(0,1).firstCursorPosition();
             drawTrackSummary(cursor3, trks, isReadOnly);
+        }
+
+        if(wpts.count()!=0)
+        {
+            QTextCursor cursor3 = table->cellAt(1,1).firstCursorPosition();
+            drawWaypointSummary(cursor3, wpts, isReadOnly);
         }
     }
 
@@ -395,6 +401,52 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*
     str += tr("<b>Summary over all tracks in project</b><br/>");
     CActivityTrk::printSummary(summaries, acts, str);
 
+
+    cursor1.insertHtml(str);
+}
+
+void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemWpt*> wpts, bool /*isReadOnly*/)
+{
+    QMap<QString, quint32> summary;
+    QMap<QString, quint32> GCsummary;
+    for(const CGisItemWpt* wpt : wpts)
+    {
+        summary[wpt->getIconName()]++;
+        const CGisItemWpt::geocache_t& gc =wpt->getGeoCache();
+        if(gc.hasData)
+        {
+            GCsummary[gc.type]++;
+        }
+    }
+
+    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameTrackSummary);
+
+    QTextCursor cursor1(diaryFrame);
+
+    cursor1.setCharFormat(fmtCharStandard);
+    cursor1.setBlockFormat(fmtBlockStandard);
+
+    QString str;
+    str += tr("<b>Summary over all waypoints in project</b><br/>");
+
+    if(summary["Geocache"] != 0)
+    {
+        str+= QString::number(summary["Geocache"]) + tr(" x Geocache, consisting of: <br/>");
+        str+="<div style=\"margin-left: 40px\">";
+        for(QMap<QString, quint32>::const_iterator it = GCsummary.cbegin(); it != GCsummary.end(); it++)
+        {
+            str+= "\t" + QString::number(it.value()) + " x " + it.key()+ "<br/>";
+        }
+        str+="</div>";
+    }
+
+    for(QMap<QString, quint32>::const_iterator it = summary.cbegin(); it != summary.end(); it++)
+    {
+        if(it.key()!="Geocache")
+        {
+            str+= QString::number(it.value()) + " x " + it.key()+ "<br/>";
+        }
+    }
 
     cursor1.insertHtml(str);
 }

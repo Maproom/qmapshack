@@ -432,15 +432,14 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
     if(summary["Geocache"] != 0)
     {
         str+= QString::number(summary["Geocache"]) + tr(" x Geocache, consisting of: <br/>");
-        str+="<div style=\"margin-left: 40px\">";
-        for(QMap<QString, quint32>::const_iterator it = GCsummary.cbegin(); it != GCsummary.end(); it++)
+        str+="<ul>";
+        for(QMap<QString, quint32>::const_iterator it = GCsummary.cbegin(); it != GCsummary.cend(); it++)
         {
-            str+= "\t" + QString::number(it.value()) + " x " + it.key()+ "<br/>";
+            str+= "<li>" + QString::number(it.value()) + " x " + it.key()+ "</li>";
         }
-        str+="</div>";
+        str+="</ul>";
     }
-
-    for(QMap<QString, quint32>::const_iterator it = summary.cbegin(); it != summary.end(); it++)
+    for(QMap<QString, quint32>::const_iterator it = summary.cbegin(); it != summary.cend(); it++)
     {
         if(it.key()!="Geocache")
         {

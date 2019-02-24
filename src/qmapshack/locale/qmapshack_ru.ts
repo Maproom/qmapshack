@@ -5197,7 +5197,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../realtime/gpstether/CRtGpsTether.cpp" line="88"/>
         <source>&lt;b&gt;GPS Tether&lt;/b&gt;&lt;br/&gt;Get position via NMEA over TCP/IP.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Привязка GPS&lt;/b&gt;&lt;br/&gt;Получить позицию от GPS NMEA данных используя соединение TCP/IP.</translation>
     </message>
 </context>
 <context>
@@ -5205,19 +5205,21 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="97"/>
         <source>Help</source>
-        <translation type="unfinished">Справки</translation>
+        <translation>Справки</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="98"/>
         <source>GPS Tether
 The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hot spot.
 For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
-        <translation type="unfinished"></translation>
+        <translation>Привязка GPS
+Основная идея этого источника - это получить поток GPS NMEA данных через соединение по протоколу TCP/IP. Вы можете использовать Android-приложение &quot;GPS Tether&quot; как сервер, передающий поток данных NMEA. Ваше устройство Android должно быть в той же сети, что и компьютер или обеспечивать точку доступа.
+Для настройки вам нужно знать IP-адрес вашего Android устройства или его имя, известное DNS-серверу. Тогда приложение сообщит вам адрес. Кроме того, вам нужен номер порта, который показан в приложении.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="457"/>
         <source>Failed...</source>
-        <translation type="unfinished">Не удалось...</translation>
+        <translation>Не удалось...</translation>
     </message>
 </context>
 <context>
@@ -7092,27 +7094,27 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="203"/>
         <source>Difficulty:</source>
-        <translation>Сложность:</translation>
+        <translation>Доступность:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="216"/>
         <source>Size:</source>
-        <translation>Величина:</translation>
+        <translation>Размер:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="242"/>
         <source>Date Hidden:</source>
-        <translation>Дата сокрытия:</translation>
+        <translation>Создан:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="255"/>
         <source>Last Found:</source>
-        <translation>Дата последнего обнаружения:</translation>
+        <translation>Последнее посещение:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="288"/>
         <source>Listing</source>
-        <translation>Перечень:</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="310"/>
@@ -7127,12 +7129,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="347"/>
         <source>Logs</source>
-        <translation>Журнал</translation>
+        <translation>Блокнот</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="363"/>
         <source>Pictures</source>
-        <translation>Снимки</translation>
+        <translation>Фотографии</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="408"/>
@@ -10494,7 +10496,7 @@ or
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="25"/>
@@ -10505,52 +10507,52 @@ or
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="187"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="201"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="46"/>
         <source>Port</source>
-        <translation type="unfinished">Порт</translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="89"/>
         <source>Host</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="96"/>
         <source>Automatically connect to the host.</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключить автоматически к серверу.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="99"/>
         <source>auto. conn.</source>
-        <translation type="unfinished"></translation>
+        <translation>подключить автоматически</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="127"/>
         <source>Start recording.</source>
-        <translation type="unfinished">Начать запись.</translation>
+        <translation>Начать запись.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="147"/>
         <source>Pause recording.</source>
-        <translation type="unfinished">Приостановить запись.</translation>
+        <translation>Приостановить запись.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="170"/>
         <source>Convert record to track.</source>
-        <translation type="unfinished">Преобразовать запись в трек.</translation>
+        <translation>Преобразовать запись в трек.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="184"/>
         <source>Reset record.</source>
-        <translation type="unfinished">Сбросить запись.</translation>
+        <translation>Сбросить запись.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="198"/>
         <source>Select record file.</source>
-        <translation type="unfinished">Выбрать файл записи.</translation>
+        <translation>Выбрать файл записи.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="214"/>
@@ -10560,37 +10562,37 @@ or
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="260"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="297"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="221"/>
         <source>Position</source>
-        <translation type="unfinished">Позиция</translation>
+        <translation>Позиция</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="246"/>
         <source>Time</source>
-        <translation type="unfinished">Время</translation>
+        <translation>Время</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="267"/>
         <source>Speed</source>
-        <translation type="unfinished">Скорость</translation>
+        <translation>Скорость</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="274"/>
         <source>Elevation</source>
-        <translation type="unfinished">Высота</translation>
+        <translation>Высота</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="281"/>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Запись</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="288"/>
         <source>center to position</source>
-        <translation type="unfinished"></translation>
+        <translation>центрировать</translation>
     </message>
 </context>
 <context>
@@ -10598,17 +10600,17 @@ or
     <message>
         <location filename="../realtime/IRtInfo.cpp" line="37"/>
         <source>Select record file</source>
-        <translation type="unfinished">Выбрать файл записи</translation>
+        <translation>Выбрать файл записи</translation>
     </message>
     <message>
         <location filename="../realtime/IRtInfo.cpp" line="62"/>
         <source>Reset record...</source>
-        <translation type="unfinished">Сбросить запись...</translation>
+        <translation>Сбросить запись...</translation>
     </message>
     <message>
         <location filename="../realtime/IRtInfo.cpp" line="62"/>
         <source>Do you really want to reset the current record?</source>
-        <translation type="unfinished">Вы действительно хотите сбросить текущую запись?</translation>
+        <translation>Вы действительно хотите сбросить текущую запись?</translation>
     </message>
 </context>
 <context>

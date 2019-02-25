@@ -33,11 +33,6 @@
 #include <QtWidgets>
 #include <QtXml>
 
-#include <functional>
-
-using std::bind;
-
-
 CGeoSearch::CGeoSearch(CGisListWks * parent)
     : IGisProject(eTypeGeoSearch, "", parent)
     , searchConfig(&CGeoSearchConfig::self())
@@ -141,7 +136,8 @@ QAction * CGeoSearch::addService(CGeoSearchConfig::service_e service, const QStr
 {
     QAction* action  = menu->addAction(name);
     action->setCheckable(true);
-    connect(action,  &QAction::triggered, this, bind(&CGeoSearch::slotServiceSelected, this, service, std::placeholders::_1));
+
+    connect(action,  &QAction::triggered, this, [=](bool checked){slotServiceSelected(service, checked);});
     action->setChecked(searchConfig->currentService == service);
 
     return action;

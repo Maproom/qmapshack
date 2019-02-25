@@ -51,8 +51,8 @@ public:
     static const QString defaultIcon;
     QList<service_t> defaultServices();
 
-    QMenu * getMenu(const QPointF& pt, QWidget * parent, bool execute = false) const;
-    void search(const QPointF& pt) const;
+    QMenu * getMenu(const QPointF& pt, QWidget * parent, bool execute = false);
+    void search(const QPointF& pt);
 
 private slots:
     void slotConfigureServices();

@@ -56,10 +56,6 @@ void CRtOpenSkyInfo::slotUpdate()
 {
     CRtOpenSky * _source = dynamic_cast<CRtOpenSky*>(source.data());
     CRtOpenSkyRecord * _record = dynamic_cast<CRtOpenSkyRecord*>(record.data());
-    if(_record == nullptr)
-    {
-        return;
-    }
 
     checkShowNames->setChecked(_source->getShowNames());
     labelTimestamp->setText(_source->getTimestamp().toString());

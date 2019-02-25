@@ -95,7 +95,7 @@ CGeoSearchWeb::~CGeoSearchWeb()
     cfg.endGroup(); // Search
 }
 
-QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute) const
+QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute)
 {
     QMenu * menu = new QMenu(tr("Search Web for Position"), parent);
     menu->setIcon(QIcon("://icons/32x32/SearchWeb.png"));
@@ -105,8 +105,8 @@ QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute)
     for(const service_t& service : services)
     {
         action = menu->addAction(QIcon(service.icon), service.name);
-        auto func = std::bind(&CGeoSearchWeb::slotSearchWeb, &self(), serviceId++, pt);
-        connect(action, &QAction::triggered, this, func);
+        connect(action, &QAction::triggered, this, [&,serviceId, pt](){slotSearchWeb(serviceId, pt);});
+        serviceId++;
     }
 
     menu->addSeparator();
@@ -123,7 +123,7 @@ QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute)
     return menu;
 }
 
-void CGeoSearchWeb::search(const QPointF& pt) const
+void CGeoSearchWeb::search(const QPointF& pt)
 {
     QMenu * menu = getMenu(pt, CMainWindow::self().getBestWidgetForParent());
     menu->exec(QCursor::pos());

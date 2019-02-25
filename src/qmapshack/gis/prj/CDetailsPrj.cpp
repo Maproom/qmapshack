@@ -334,7 +334,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
             drawTrackSummary(cursor3, trks, isReadOnly);
         }
 
-        if(wpts.count()!=0)
+        if(!wpts.isEmpty())
         {
             QTextCursor cursor3 = table->cellAt(1,1).firstCursorPosition();
             drawWaypointSummary(cursor3, wpts, isReadOnly);
@@ -411,7 +411,16 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
     QMap<QString, quint32> GCsummary;
     for(const CGisItemWpt* wpt : wpts)
     {
-        summary[wpt->getIconName()]++;
+        auto iconName = wpt->getIconName();
+        if(iconName.isEmpty())
+        {
+            summary["Waypoint"]++;
+        }
+        else
+        {
+            summary[iconName]++;
+        }
+
         const CGisItemWpt::geocache_t& gc =wpt->getGeoCache();
         if(gc.hasData)
         {

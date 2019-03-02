@@ -5197,7 +5197,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/gpstether/CRtGpsTether.cpp" line="88"/>
         <source>&lt;b&gt;GPS Tether&lt;/b&gt;&lt;br/&gt;Get position via NMEA over TCP/IP.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vincular GPS&lt;/b&gt;&lt;br/&gt;Obtener la posición a través de NMEA sobre TCP/IP.</translation>
     </message>
 </context>
 <context>
@@ -5205,19 +5205,27 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="97"/>
         <source>Help</source>
-        <translation type="unfinished">Ayuda</translation>
+        <translation>Ayuda</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="98"/>
         <source>GPS Tether
 The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hot spot.
 For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vincular GPS:
+La idea básica es recibir datos GPS en tiempo real utilizando el standard NMEA desde un dispositivo externo vinculado a Qmapshack. Se puede usar un dispositivo GPS Android junto con la aplicación "GPS Tether" o similar para enviar un flujo de datos NMEA a QMapShack a través de una red Ethernet. 
+
+Para vincular el dispositivo Android con Qmapshack:
+
+- El dispositivo Android y Qmapshack deben estar conectados a la misma red. Puede ser una red Wi-Fi. También se puede configurar el Android como punto de acceso Wi-Fi.
+
+- Es necesario indicar en QMapShack la dirección IP del dispositivo o su nombre de host, y el número de puerto tal y como está configurado en la aplicación. La aplicación Android te dirá cuál es esa dirección IP y el numero del puerto.
+</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="457"/>
         <source>Failed...</source>
-        <translation type="unfinished">Falló...</translation>
+        <translation>Falló...</translation>
     </message>
 </context>
 <context>
@@ -8098,7 +8106,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="59"/>
         <source> Type</source>
-        <translation type="unfinished"> Tipo</translation>
+        <translation> Tipo</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="122"/>
@@ -10503,7 +10511,7 @@ o
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="46"/>
         <source>Port</source>
-        <translation type="unfinished">Puerto</translation>
+        <translation>Puerto</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="89"/>
@@ -10513,37 +10521,37 @@ o
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="96"/>
         <source>Automatically connect to the host.</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar automáticamente al host.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="99"/>
         <source>auto. conn.</source>
-        <translation type="unfinished"></translation>
+        <translation>con. auto.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="127"/>
         <source>Start recording.</source>
-        <translation type="unfinished">Iniciar registro.</translation>
+        <translation>Iniciar registro.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="147"/>
         <source>Pause recording.</source>
-        <translation type="unfinished">Pausar registro.</translation>
+        <translation>Pausar registro.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="170"/>
         <source>Convert record to track.</source>
-        <translation type="unfinished">Convertir el registro en un track.</translation>
+        <translation>Convertir el registro en track.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="184"/>
         <source>Reset record.</source>
-        <translation type="unfinished">Poner a cero el registro.</translation>
+        <translation>Poner a cero el registro.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="198"/>
         <source>Select record file.</source>
-        <translation type="unfinished">Seleccionar archivo de registro.</translation>
+        <translation>Seleccionar archivo de registro.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="214"/>
@@ -10553,37 +10561,37 @@ o
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="260"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="297"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="221"/>
         <source>Position</source>
-        <translation type="unfinished">Posición</translation>
+        <translation>Posición</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="246"/>
         <source>Time</source>
-        <translation type="unfinished">Hora</translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="267"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="274"/>
         <source>Elevation</source>
-        <translation type="unfinished">Altitud</translation>
+        <translation>Altitud</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="281"/>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Grabación</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="288"/>
         <source>center to position</source>
-        <translation type="unfinished"></translation>
+        <translation>Mapa móvil</translation>
     </message>
 </context>
 <context>
@@ -10591,17 +10599,17 @@ o
     <message>
         <location filename="../realtime/IRtInfo.cpp" line="37"/>
         <source>Select record file</source>
-        <translation type="unfinished">Seleccionar archivo de registro</translation>
+        <translation>Seleccionar archivo de registro</translation>
     </message>
     <message>
         <location filename="../realtime/IRtInfo.cpp" line="62"/>
         <source>Reset record...</source>
-        <translation type="unfinished">Reiniciar registro...</translation>
+        <translation>Reiniciar registro...</translation>
     </message>
     <message>
         <location filename="../realtime/IRtInfo.cpp" line="62"/>
         <source>Do you really want to reset the current record?</source>
-        <translation type="unfinished">¿Está seguro de reiniciar el registro actual?</translation>
+        <translation>¿Está seguro de reiniciar el registro actual?</translation>
     </message>
 </context>
 <context>
@@ -10669,7 +10677,7 @@ o
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="145"/>
         <source>Convert record to track.</source>
-        <translation>Convertir el registro en un track.</translation>
+        <translation>Convertir el registro en track.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="159"/>
@@ -10728,7 +10736,7 @@ o
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="95"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>

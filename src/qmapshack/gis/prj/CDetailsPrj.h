@@ -66,6 +66,7 @@ private:
     void draw(QTextDocument& doc, bool printable);
     void drawInfo(QTextCursor& cursor, bool isReadOnly);
     void drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk *> trks, bool);
+    void drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemWpt *> wpts, bool);
     void drawByGroup(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, CProgressDialog &progress, int &n, bool printable);
     void drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, CProgressDialog &progress, int &n, bool printable);
     void drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas, CProgressDialog &progress, int &n, bool printable);

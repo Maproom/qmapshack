@@ -366,7 +366,7 @@ QAction * CGisListWks::addSortAction(QObject * parent, QActionGroup * actionGrou
     QAction * action = new QAction(QIcon(icon), text, parent);
     action->setCheckable(true);
 
-    connect(action, &QAction::toggled, this, [this](bool checked){slotSetSortMode(mode, checked);});
+    connect(action, &QAction::toggled, this, [this, mode](bool checked){slotSetSortMode(mode, checked);});
 
     actionGroup->addAction(action);
 

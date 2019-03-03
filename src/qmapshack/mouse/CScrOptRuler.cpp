@@ -44,7 +44,7 @@ CScrOptRuler::CScrOptRuler(IMouse *mouse, CCanvas *canvas)
 
     connect(pushClose, &QPushButton::clicked, this, &CScrOptRuler::slotClose);
 
-    auto func = [this](){canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);};
+    auto func = [canvas](){canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);};
     connect(toolShowTable, &QToolButton::toggled, this, func);
     connect(toolShowAscent, &QToolButton::toggled, this, func);
     connect(toolShowCourse, &QToolButton::toggled, this, func);

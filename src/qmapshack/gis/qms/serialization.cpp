@@ -28,13 +28,14 @@
 
 #include <QtWidgets>
 
-#define VER_TRK         quint8(5)
+#define VER_TRK         quint8(6)
 #define VER_WPT         quint8(2)
 #define VER_RTE         quint8(3)
 #define VER_AREA        quint8(1)
 #define VER_LINK        quint8(1)
 #define VER_TRKSEG      quint8(1)
 #define VER_TRKPT       quint8(3)
+#define VER_TRKPTINFO   quint8(1)
 #define VER_RTEPT       quint8(2)
 #define VER_RTESUBPT    quint8(2)
 #define VER_WPT_T       quint8(1)
@@ -385,6 +386,25 @@ QDataStream& operator>>(QDataStream& stream, CTrackData::trkpt_t& pt)
     return stream;
 }
 
+QDataStream& operator<<(QDataStream& stream, const CTrackData::trkptinfo_t& pt)
+{
+    stream << VER_TRKPTINFO;
+    stream << pt.idxTotal;
+    stream << pt.desc;
+
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CTrackData::trkptinfo_t& pt)
+{
+    quint8 version;
+    stream >> version;
+    stream >> pt.idxTotal;
+    stream >> pt.desc;
+
+    return stream;
+}
+
 QDataStream& operator<<(QDataStream& stream, const CGisItemRte::subpt_t& pt)
 {
     stream << VER_RTESUBPT;
@@ -544,6 +564,7 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
     out << limitsGraph2;
     out << limitsGraph3;
     out << trk.segs;
+    out << trk.infos;
 
     stream.writeRawData(MAGIC_TRK, MAGIC_SIZE);
     stream << VER_TRK;
@@ -620,6 +641,12 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
 
     trk.segs.clear();
     in >> trk.segs;
+
+    if(version > 5)
+    {
+        trk.infos.clear();
+        in >> trk.infos;
+    }
 
     /* [Issue #408] Export of a database is broken
 

@@ -424,6 +424,89 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="tab_6">
+        <attribute name="title">
+         <string>Info+</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_9">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QFrame" name="frameHelpTrackPointInfo">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_10">
+            <item>
+             <widget class="QLabel" name="labelHelpTrackPointInfo">
+              <property name="text">
+               <string>-</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="CTableTrkInfo" name="treeTrackPointInfo">
+           <property name="contextMenuPolicy">
+            <enum>Qt::CustomContextMenu</enum>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::ExtendedSelection</enum>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="indentation">
+            <number>0</number>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>false</bool>
+           </property>
+           <property name="itemsExpandable">
+            <bool>false</bool>
+           </property>
+           <property name="expandsOnDoubleClick">
+            <bool>false</bool>
+           </property>
+           <attribute name="headerVisible">
+            <bool>false</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string notr="true">1</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
        <widget class="QWidget" name="tabStyle">
         <attribute name="title">
          <string>Style</string>
@@ -1482,7 +1565,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="CTableTrk" name="treeWidget">
+          <widget class="CTableTrk" name="treeTrackPoint">
            <property name="alternatingRowColors">
             <bool>true</bool>
            </property>
@@ -1621,16 +1704,21 @@
    <header>gis/trk/CSelectActivityColor.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>CTableTrkInfo</class>
+   <extends>QTreeWidget</extends>
+   <header>gis/trk/CTableTrkInfo.h</header>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupLineWidth"/>
-  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph3"/>
-  <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupGraph2"/>
+  <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupLineWidth"/>
  </buttongroups>
 </ui>

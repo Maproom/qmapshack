@@ -261,3 +261,42 @@ bool CDraw::doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect)
     }
     return false;
 }
+
+
+void CDraw::number(int num, int size, QPainter& p, const QPointF& center, const QColor &color)
+{
+    const qreal size_2 = (size - 1) / 2.0;
+
+    p.setPen(color);
+    p.setBrush(Qt::white);
+    p.drawEllipse(center, size_2, size_2);
+
+    p.setPen(color);
+    p.setBrush(color);
+    p.drawEllipse(center, size_2 - 3, size_2 - 3);
+
+    const QString& s = QString::number(num);
+    QRectF r = p.boundingRect(QRectF(), s);
+    r.moveCenter(center);
+
+    p.setPen(Qt::white);
+    p.setBrush(Qt::white);
+    p.drawText(r, s);
+}
+
+QPixmap CDraw::number(int num, int size, const QColor &color)
+{
+    const qreal size_2 = (size - 1) / 2.0;
+
+    QPixmap pixmap(size,size);
+    pixmap.fill(Qt::transparent);
+    QPainter p(&pixmap);
+
+    QFont f = p.font();
+    f.setPointSize(size_2 - 2);
+    p.setFont(f);
+
+    CDraw::number(num, size, p, {size_2,size_2}, color);
+
+    return pixmap;
+}

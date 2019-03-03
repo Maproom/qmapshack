@@ -129,6 +129,7 @@
         <file>../icons/32x32/GridSetup.png</file>
         <file>../icons/32x32/GridWizard.png</file>
         <file>../icons/32x32/Help.png</file>
+        <file>../icons/32x32/I.png</file>
         <file>../icons/32x32/Image.png</file>
         <file>../icons/32x32/Info.png</file>
         <file>../icons/32x32/Left.png</file>
@@ -384,6 +385,7 @@
         <file>../icons/48x48/GridSetup.png</file>
         <file>../icons/48x48/GridWizard.png</file>
         <file>../icons/48x48/Help.png</file>
+        <file>../icons/48x48/I.png</file>
         <file>../icons/48x48/Image.png</file>
         <file>../icons/48x48/Info.png</file>
         <file>../icons/48x48/Left.png</file>

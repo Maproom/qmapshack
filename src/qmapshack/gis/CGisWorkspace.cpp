@@ -986,6 +986,19 @@ void CGisWorkspace::cutTrkByKey(const IGisItem::key_t& key)
     emit sigChanged();
 }
 
+void CGisWorkspace::addTrkInfoByKey(const IGisItem::key_t& key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+    if(nullptr != trk)
+    {
+        trk->addInfo();
+    }
+
+    emit sigChanged();
+}
+
 void CGisWorkspace::reverseTrkByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);

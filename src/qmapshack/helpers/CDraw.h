@@ -91,6 +91,10 @@ public:
        @return  A QImage containing the arrow
      */
     static QImage createBasicArrow(const QBrush &brush, qreal scale);
+
+    static void number(int num, int size, QPainter& p, const QPointF& center, const QColor &color);
+
+    static QPixmap number(int num, int size, const QColor &color);
 };
 
 #endif // CPAINTER_H

@@ -360,6 +360,8 @@ public:
 
     void cutTrkByKey(const IGisItem::key_t &key);
 
+    void addTrkInfoByKey(const IGisItem::key_t& key);
+
     void editTrkByKey(const IGisItem::key_t &key);
 
     void reverseTrkByKey(const IGisItem::key_t &key);

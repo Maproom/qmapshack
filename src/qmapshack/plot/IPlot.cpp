@@ -92,12 +92,13 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     }
 
     menu = new QMenu(this);
-    actionResetZoom = menu->addAction(QIcon("://icons/32x32/Zoom.png"),        tr("Reset Zoom"), this, SLOT(slotResetZoom()));
-    actionStopRange = menu->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Stop Range"), this, SLOT(slotStopRange()));
-    actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
+    actionResetZoom     = menu->addAction(QIcon("://icons/32x32/Zoom.png"),        tr("Reset Zoom"), this, SLOT(slotResetZoom()));
+    actionStopRange     = menu->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Stop Range"), this, SLOT(slotStopRange()));
+    actionPrint         = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
     menu->addSeparator();
-    actionAddWpt    = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, SLOT(slotAddWpt()));
-    actionCutTrk    = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),       tr("Cut..."),    this, SLOT(slotCutTrk()));
+    actionAddWpt        = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, SLOT(slotAddWpt()));
+    actionAddTrkPtInfo  = menu->addAction(QIcon("://icons/32x32/I.png"),           tr("Add Trackpoint Info"), this, SLOT(slotAddTrkPtInfo()));
+    actionCutTrk        = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),      tr("Cut..."),    this, SLOT(slotCutTrk()));
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
@@ -1403,6 +1404,24 @@ void IPlot::slotAddWpt()
     }
 
     CGisWorkspace::self().addWptByPos({trkpt->lon, trkpt->lat});
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
+}
+
+void IPlot::slotAddTrkPtInfo()
+{
+    if(posMouse2 == NOPOINT)
+    {
+        return;
+    }
+
+    const CTrackData::trkpt_t * trkpt = trk->getMouseMoveFocusPoint();
+    if(trkpt == nullptr)
+    {
+        return;
+    }
+
+    trk->setMouseFocusByTotalIndex(trkpt->idxTotal, CGisItemTrk::eFocusMouseClick, "IPlot");
+    CGisWorkspace::self().addTrkInfoByKey(trk->getKey());
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 

@@ -206,7 +206,11 @@ public:
         }
     };
 
-
+    struct trkptinfo_t
+    {
+        quint32 idxTotal = NOIDX;
+        QString desc;
+    };
 
     CTrackData() {}
 
@@ -222,7 +226,7 @@ public:
     QString type;
     QVector<trkseg_t> segs;
     // -- all gpx tags - stop
-
+    QList<trkptinfo_t> infos;
     QString color;
 
     void removeEmptySegments();
@@ -330,6 +334,7 @@ public:
 
     iterator<const CTrackData, const trkpt_t> begin() const { return iterator<const CTrackData, const trkpt_t>(*this,            0, 0); }
     iterator<const CTrackData, const trkpt_t> end()   const { return iterator<const CTrackData, const trkpt_t>(*this, segs.count(), 0); }
+
 };
 
 QDataStream& operator<<(QDataStream& stream, const CTrackData::trkpt_t& pt);

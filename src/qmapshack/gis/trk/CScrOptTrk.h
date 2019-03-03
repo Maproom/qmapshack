@@ -50,6 +50,7 @@ private slots:
     void slotCopyWithWpt();
     void slotNogo();
     void slotAddElevation();
+    void slotAddInfo();
 
 
 private:

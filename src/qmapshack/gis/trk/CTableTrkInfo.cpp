@@ -82,14 +82,18 @@ void CTableTrkInfo::updateData()
 
     qint32 cnt = 1;
     QList<QTreeWidgetItem*> items;
-    const CTrackData& t = trk->getTrackData();
-    for(const CTrackData::trkptinfo_t& info : t.infos)
+    for(const CTrackData::trkpt_t& trkpt : trk->getTrackData())
     {
+        if(trkpt.desc.isEmpty())
+        {
+            continue;
+        }
+
         QTreeWidgetItem * item = new QTreeWidgetItem();
         item->setIcon(eColNum, CDraw::number(cnt++, 21, Qt::black));
-        item->setText(eColDesc, info.desc);
+        item->setText(eColDesc, trkpt.desc);
         item->setFlags(item->flags()|Qt::ItemIsEditable);
-
+        item->setData(eColDesc,Qt::UserRole,trkpt.idxTotal);
         items << item;
     }
 
@@ -133,10 +137,10 @@ void CTableTrkInfo::slotDelete()
     QList<int> indices;
     for(QTreeWidgetItem* item : selectedItems())
     {
-        indices << indexOfTopLevelItem(item);
+        indices << item->data(eColDesc, Qt::UserRole).toInt();
     }
 
-    trk->removeTrackPointInfosByIndex(indices);
+    trk->delTrkPtDesc(indices);
 }
 
 
@@ -147,5 +151,5 @@ void CTableTrkInfo::slotItemChanged(QTreeWidgetItem * item, int column)
         return;
     }
 
-    trk->editTrackPointInfoByIndex(indexOfTopLevelItem(item), item->text(eColDesc));
+    trk->setTrkPtDesc(item->data(eColDesc, Qt::UserRole).toInt(), item->text(eColDesc));
 }

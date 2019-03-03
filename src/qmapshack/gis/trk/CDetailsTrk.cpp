@@ -381,7 +381,7 @@ void CDetailsTrk::updateData()
 
     bool isReadOnly = trk.isReadOnly();
     bool isNogo = trk.isNogo();
-    bool hasTrkPtInfo = !trk.getTrackData().infos.isEmpty();
+    bool hasTrkPtInfo = true; // !trk.getTrackData().infos.isEmpty();
 
     tabWidget->widget(eTabFilter)->setEnabled(!isReadOnly);
 

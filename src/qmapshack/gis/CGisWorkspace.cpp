@@ -993,7 +993,7 @@ void CGisWorkspace::addTrkInfoByKey(const IGisItem::key_t& key)
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(nullptr != trk)
     {
-        trk->addInfo();
+        trk->addTrkPtDesc();
     }
 
     emit sigChanged();

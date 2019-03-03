@@ -124,14 +124,17 @@ void CPlotProfile::updateData()
     if((mode != eModeIcon))
     {
         qint32 cnt = 1;
-        for(const CTrackData::trkptinfo_t& info : t.infos)
+        for(const CTrackData::trkpt_t& trkpt : trk->getTrackData())
         {
-            const CTrackData::trkpt_t* trkpt = t.getTrkPtByTotalIndex(info.idxTotal);
+            if(trkpt.desc.isEmpty())
+            {
+                continue;
+            }
 
             CPlotData::point_t tag;
-            tag.point = QPointF(trkpt->distance, trkpt->ele * basefactor);
+            tag.point = QPointF(trkpt.distance, trkpt.ele * basefactor);
             tag.icon  = CDraw::number(cnt++, 20, Qt::black);
-            tag.label = info.desc.size() < 20 ? info.desc : info.desc.left(17) + "...";
+            tag.label = trkpt.desc.size() < 20 ? trkpt.desc : trkpt.desc.left(17) + "...";
             data->tags << tag;
         }
     }

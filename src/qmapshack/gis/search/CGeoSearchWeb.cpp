@@ -105,7 +105,7 @@ QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute)
     for(const service_t& service : services)
     {
         action = menu->addAction(QIcon(service.icon), service.name);
-        connect(action, &QAction::triggered, this, [&,serviceId, pt](){slotSearchWeb(serviceId, pt);});
+        connect(action, &QAction::triggered, this, [this, serviceId, pt](){slotSearchWeb(serviceId, pt);});
         serviceId++;
     }
 

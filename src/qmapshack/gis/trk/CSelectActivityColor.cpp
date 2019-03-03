@@ -17,11 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/trk/CSelectActivityColor.h"
-
-#include <functional>
 #include <QtWidgets>
-
-using std::bind;
 
 CSelectActivityColor::CSelectActivityColor(QWidget *parent)
     : QWidget(parent)
@@ -96,8 +92,7 @@ void CSelectActivityColor::updateData()
         button->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
         horizontalLayout->addWidget(button);
 
-        auto setColorFunc = bind(&CSelectActivityColor::slotSetColor, this, button, trkact_t(i));
-        connect(button, &QToolButton::clicked, this, setColorFunc);
+        connect(button, &QToolButton::clicked, this, [this,button,i](){slotSetColor(button, trkact_t(i));});
 
         allActColors << button;
     }

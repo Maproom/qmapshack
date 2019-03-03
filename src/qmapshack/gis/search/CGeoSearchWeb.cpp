@@ -95,7 +95,7 @@ CGeoSearchWeb::~CGeoSearchWeb()
     cfg.endGroup(); // Search
 }
 
-QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute)
+QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute) const
 {
     QMenu * menu = new QMenu(tr("Search Web for Position"), parent);
     menu->setIcon(QIcon("://icons/32x32/SearchWeb.png"));
@@ -130,7 +130,7 @@ void CGeoSearchWeb::search(const QPointF& pt)
     delete menu;
 }
 
-void CGeoSearchWeb::slotSearchWeb(int serviceId, const QPointF pt)
+void CGeoSearchWeb::slotSearchWeb(int serviceId, const QPointF pt) const
 {
     QString url = services[serviceId].url;
     url = url.replace("%1", QString::number(pt.x(), 'g', 8));

@@ -71,6 +71,7 @@ private slots:
     void slotResetZoom();
     void slotAddWpt();
     void slotCutTrk();
+    void slotAddTrkPtInfo();
 
 
 protected:
@@ -182,6 +183,7 @@ protected:
     QAction * actionStopRange;
     QAction * actionAddWpt;
     QAction * actionCutTrk;
+    QAction * actionAddTrkPtInfo;
 
     qint32 idxSel1 = NOIDX;
     qint32 idxSel2 = NOIDX;

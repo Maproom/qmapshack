@@ -78,6 +78,7 @@ public:
         , eVisualProject     = 0x08
         , eVisualColorAct    = 0x10
         , eVisualTrkTable    = 0x20
+        , eVisualTrkInfo     = 0x40
         , eVisualAll         = -1
     };
 
@@ -252,6 +253,9 @@ public:
     void getMouseRange(int &idx1, int &idx2, bool total) const;
     void getMouseRange(const CTrackData::trkpt_t * &mr1, const CTrackData::trkpt_t * &mr2) const;
 
+    void removeTrackPointInfosByIndex(QList<int> &indices);
+    void editTrackPointInfoByIndex(int index, const QString& desc);
+
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
         @{
@@ -384,6 +388,12 @@ public:
        @return Return true on success.
      */
     bool cut();
+
+    /**
+       @brief Add some text info at mouseClickFocus
+       @return Return true on success.
+     */
+    bool addInfo();
 
     /**
        @brief Reverse the complete track

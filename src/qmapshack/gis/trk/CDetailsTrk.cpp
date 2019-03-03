@@ -92,13 +92,28 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
         comboColor->addItem(icon, color.label, color.color);
     }
 
+    labelHelpTrackPointInfo->setText(tr(
+                                         "<b>Track Point Information</b><br/>"
+                                         "This is a feature special to QMapShack and not portable to any other "
+                                         "application or device. You can add a short information to a track point "
+                                         "marking a special location on the track, e.g. a sight, location or "
+                                         "viewpoint. As this information is only avalable in QMapShack it's usefull "
+                                         "for documentation. However if you want to have this information on you "
+                                         "device waypoints are the element of choice.\n"
+                                         "To add track point information you simply click on a track point in the "
+                                         "map view or you do a right click in the profile graph. Use the 'Add Info' "
+                                         "option."
+                                         ));
+
     widgetColorLayout->setAlignment(Qt::AlignTop);
 
     widgetColorActivity->setTrack(&trk);
 
     updateData();
 
-    treeWidget->setTrack(&trk);
+    treeTrackPoint->setTrack(&trk);
+
+    treeTrackPointInfo->setTrack(&trk);
 
     plot1 = new CPlotProfile(&trk, trk.limitsGraph1, IPlot::eModeNormal, this);
     plot2 = new CPlot(&trk, trk.limitsGraph2, this);
@@ -366,8 +381,12 @@ void CDetailsTrk::updateData()
 
     bool isReadOnly = trk.isReadOnly();
     bool isNogo = trk.isNogo();
+    bool hasTrkPtInfo = !trk.getTrackData().infos.isEmpty();
 
     tabWidget->widget(eTabFilter)->setEnabled(!isReadOnly);
+
+    frameHelpTrackPointInfo->setVisible(!hasTrkPtInfo);
+    treeTrackPointInfo->setVisible(hasTrkPtInfo);
 
     labelTainted->setVisible(trk.isTainted());
 
@@ -549,9 +568,9 @@ void CDetailsTrk::setMouseClickFocus(const CTrackData::trkpt_t *pt)
 {
     if(nullptr != pt)
     {
-        treeWidget->blockSignals(true);
-        treeWidget->setCurrentItem(treeWidget->topLevelItem(pt->idxTotal));
-        treeWidget->blockSignals(false);
+        treeTrackPoint->blockSignals(true);
+        treeTrackPoint->setCurrentItem(treeTrackPoint->topLevelItem(pt->idxTotal));
+        treeTrackPoint->blockSignals(false);
     }
 }
 

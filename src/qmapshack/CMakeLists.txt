@@ -164,6 +164,7 @@ set( SRCS
     gis/trk/CScrOptTrk.cpp
     gis/trk/CSelectActivityColor.cpp
     gis/trk/CTableTrk.cpp
+    gis/trk/CTableTrkInfo.cpp
     gis/trk/CTrackData.cpp
     gis/trk/filter/CFilterChangeStartPoint.cpp
     gis/trk/filter/CFilterDelete.cpp
@@ -494,6 +495,7 @@ set( HDRS
     gis/trk/CScrOptTrk.h
     gis/trk/CSelectActivityColor.h
     gis/trk/CTableTrk.h
+    gis/trk/CTableTrkInfo.h
     gis/trk/CTrackData.h
     gis/trk/filter/CFilterChangeStartPoint.h
     gis/trk/filter/CFilterDelete.h

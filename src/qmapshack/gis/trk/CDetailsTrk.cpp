@@ -254,9 +254,9 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     connect(toolLimitAutoGraph, &QToolButton::toggled, spinMinGraph, &QDoubleSpinBox::setDisabled);
     connect(toolLimitAutoGraph, &QToolButton::toggled, spinMaxGraph, &QDoubleSpinBox::setDisabled);
 
-    auto limitAutoFunc = [=,&limit](bool checked){slotSetLimitModeGraph(CLimit::eModeAuto, &limit, spinMinGraph, spinMaxGraph, checked);};
-    auto limitUserFunc = [=,&limit](bool checked){slotSetLimitModeGraph(CLimit::eModeUser, &limit, spinMinGraph, spinMaxGraph, checked);};
-    auto limitSysFunc = [=,&limit](bool checked){slotSetLimitModeGraph(CLimit::eModeSys, &limit, spinMinGraph, spinMaxGraph, checked);};
+    auto limitAutoFunc = [this,&limit](bool checked){slotSetLimitModeGraph(CLimit::eModeAuto, &limit, spinMinGraph, spinMaxGraph, checked);};
+    auto limitUserFunc = [this,&limit](bool checked){slotSetLimitModeGraph(CLimit::eModeUser, &limit, spinMinGraph, spinMaxGraph, checked);};
+    auto limitSysFunc = [this,&limit](bool checked){slotSetLimitModeGraph(CLimit::eModeSys, &limit, spinMinGraph, spinMaxGraph, checked);};
 
     connect(toolLimitAutoGraph, &QToolButton::toggled, this, limitAutoFunc);
     connect(toolLimitUsrGraph,  &QToolButton::toggled, this, limitUserFunc);
@@ -265,7 +265,7 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     connect(spinMinGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMin);
     connect(spinMaxGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMax);
 
-    auto limitChangedFunc = [=,&limit](){setupLimits(&limit, spinMinGraph, spinMaxGraph);};
+    auto limitChangedFunc = [this,&limit](){setupLimits(&limit, spinMinGraph, spinMaxGraph);};
     connect(&limit, &CLimit::sigChanged, this, limitChangedFunc);
 }
 
@@ -299,16 +299,16 @@ void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QT
     connect(toolLimitAuto, &QToolButton::toggled, spinMax, &QDoubleSpinBox::setDisabled);
     connect(toolLimitAuto, &QToolButton::toggled, spinMin, &QDoubleSpinBox::setDisabled);
 
-    connect(toolLimitAuto, &QToolButton::toggled, [&](bool checked){slotSetLimitModeStyle(CLimit::eModeAuto, checked);});
-    connect(toolLimitUsr,  &QToolButton::toggled, [&](bool checked){slotSetLimitModeStyle(CLimit::eModeUser, checked);});
-    connect(toolLimitSys,  &QToolButton::toggled, [&](bool checked){slotSetLimitModeStyle(CLimit::eModeSys, checked);});
+    connect(toolLimitAuto, &QToolButton::toggled, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeAuto, checked);});
+    connect(toolLimitUsr,  &QToolButton::toggled, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeUser, checked);});
+    connect(toolLimitSys,  &QToolButton::toggled, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeSys, checked);});
 
     connect(spinMax,       &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitHighChanged);
     connect(spinMax,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitHighChanged);
     connect(spinMin,       &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
     connect(spinMin,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
 
-    connect(&limit, &CLimit::sigChanged, this, [=,&limit]{setupLimits(&limit, spinMin, spinMax);});
+    connect(&limit, &CLimit::sigChanged, this, [this,&limit]{setupLimits(&limit, spinMin, spinMax);});
 }
 
 void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault)

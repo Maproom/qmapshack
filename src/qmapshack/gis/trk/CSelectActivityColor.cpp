@@ -92,7 +92,7 @@ void CSelectActivityColor::updateData()
         button->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
         horizontalLayout->addWidget(button);
 
-        connect(button, &QToolButton::clicked, this, [=](){slotSetColor(button, trkact_t(i));});
+        connect(button, &QToolButton::clicked, this, [this](){slotSetColor(button, trkact_t(i));});
 
         allActColors << button;
     }

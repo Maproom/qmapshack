@@ -137,7 +137,7 @@ QAction * CGeoSearch::addService(CGeoSearchConfig::service_e service, const QStr
     QAction* action  = menu->addAction(name);
     action->setCheckable(true);
 
-    connect(action,  &QAction::triggered, this, [=](bool checked){slotServiceSelected(service, checked);});
+    connect(action,  &QAction::triggered, this, [this](bool checked){slotServiceSelected(service, checked);});
     action->setChecked(searchConfig->currentService == service);
 
     return action;

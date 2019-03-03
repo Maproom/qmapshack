@@ -51,12 +51,12 @@ public:
     static const QString defaultIcon;
     QList<service_t> defaultServices();
 
-    QMenu * getMenu(const QPointF& pt, QWidget * parent, bool execute = false);
+    QMenu * getMenu(const QPointF& pt, QWidget * parent, bool execute = false) const;
     void search(const QPointF& pt);
 
 private slots:
     void slotConfigureServices();
-    void slotSearchWeb(int serviceId, const QPointF pt);
+    void slotSearchWeb(int serviceId, const QPointF pt) const;
 
 private:
     CGeoSearchWeb(QObject *parent);

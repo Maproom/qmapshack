@@ -206,12 +206,6 @@ public:
         }
     };
 
-    struct trkptinfo_t
-    {
-        quint32 idxTotal = NOIDX;
-        QString desc;
-    };
-
     CTrackData() {}
 
     CTrackData(const QString &name, const CTrackData &other, qint32 rangeStart, qint32 rangeEnd);
@@ -226,7 +220,6 @@ public:
     QString type;
     QVector<trkseg_t> segs;
     // -- all gpx tags - stop
-    QList<trkptinfo_t> infos;
     QString color;
 
     void removeEmptySegments();
@@ -281,6 +274,9 @@ public:
      */
     bool isTrkPtLastVisible(qint32 idxTotal) const;
 
+    void setTrkPtDesc(int idxTotal, const QString& desc);
+
+    void delTrkPtDesc(const QList<int>& idxTotal);
 
     template<typename T1, typename T2>
     class iterator : public std::iterator<std::forward_iterator_tag, T2>

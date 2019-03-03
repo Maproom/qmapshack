@@ -229,3 +229,26 @@ CTrackData::trkpt_t* CTrackData::getTrkPtByCondition(std::function<bool(const CT
     }
     return nullptr;
 }
+
+void CTrackData::setTrkPtDesc(int idxTotal, const QString& desc)
+{
+    auto condition = [idxTotal](const trkpt_t &pt) { return pt.idxTotal == idxTotal;  };
+    trkpt_t * trkpt = getTrkPtByCondition(condition);
+    if(trkpt != nullptr)
+    {
+        trkpt->desc = desc;
+    }
+}
+
+void CTrackData::delTrkPtDesc(const QList<int>& idxTotal)
+{
+    for(int idx : idxTotal)
+    {
+        auto condition = [idx](const trkpt_t &pt) { return pt.idxTotal == idx;  };
+        trkpt_t * trkpt = getTrkPtByCondition(condition);
+        if(trkpt != nullptr)
+        {
+            trkpt->desc.clear();
+        }
+    }
+}

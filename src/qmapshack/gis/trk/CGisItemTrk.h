@@ -253,9 +253,6 @@ public:
     void getMouseRange(int &idx1, int &idx2, bool total) const;
     void getMouseRange(const CTrackData::trkpt_t * &mr1, const CTrackData::trkpt_t * &mr2) const;
 
-    void removeTrackPointInfosByIndex(QList<int> &indices);
-    void editTrackPointInfoByIndex(int index, const QString& desc);
-
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
         @{
@@ -393,7 +390,11 @@ public:
        @brief Add some text info at mouseClickFocus
        @return Return true on success.
      */
-    bool addInfo();
+    bool addTrkPtDesc();
+
+    bool setTrkPtDesc(int idxTotal, const QString& desc);
+
+    void delTrkPtDesc(const QList<int>& idxTotal);
 
     /**
        @brief Reverse the complete track

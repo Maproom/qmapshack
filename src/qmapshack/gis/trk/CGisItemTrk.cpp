@@ -1419,31 +1419,45 @@ bool CGisItemTrk::cut()
     return askToDeleteOriginal;
 }
 
-bool CGisItemTrk::addInfo()
+bool CGisItemTrk::addTrkPtDesc()
 {
     if(nullptr == mouseClickFocus)
     {
         return false;
     }
 
-    CTrackData::trkptinfo_t info;
-    info.desc = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(),tr("Track point info..."),
-                                      tr("Enter some text info to be attached to this track point:"));
 
-    if(info.desc.isEmpty())
+    const QString& desc = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(),tr("Track point info..."),
+                                                tr("Enter some text info to be attached to this track point:"));
+
+    if(desc.isEmpty())
     {
         return false;
     }
 
-    info.idxTotal = mouseClickFocus->idxTotal;
+    trk.setTrkPtDesc(mouseClickFocus->idxTotal, desc);
 
-    trk.infos << info;
-
-    using info_t = const CTrackData::trkptinfo_t&;
-    qSort(trk.infos.begin(), trk.infos.end(),[](info_t i1, info_t i2){return i1.idxTotal < i2.idxTotal;});
-
-    changed(tr("Add info point: %1").arg(info.desc), "://icons/48x48/I.png");
+    changed(tr("Add track point desc.: %1").arg(desc), "://icons/48x48/I.png");
     return true;
+}
+
+bool CGisItemTrk::setTrkPtDesc(int idxTotal, const QString& desc)
+{
+    if(desc.isEmpty())
+    {
+        return false;
+    }
+
+    trk.setTrkPtDesc(idxTotal, desc);
+
+    changed(tr("Changed track point desc.: %1").arg(desc), "://icons/48x48/I.png");
+    return true;
+}
+
+void CGisItemTrk::delTrkPtDesc(const QList<int>& idxTotal)
+{
+    trk.delTrkPtDesc(idxTotal);
+    changed(tr("Removed track point desc."), "://icons/48x48/DeleteMultiple.png");
 }
 
 void CGisItemTrk::reverse()
@@ -1812,28 +1826,23 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         }
     }
 
-    if(!trk.infos.isEmpty())
+    const QFont& f  = CMainWindow::self().getMapFont();
+    const int pointSize = f.pointSize();
+    const int size = (pointSize + (f.bold() ? 3 : 2)) * 2;
+    p.setFont(f);
+    quint32 cnt = 1;
+    for(const CTrackData::trkpt_t &trkpt : trk)
     {
-        const QFont& f  = CMainWindow::self().getMapFont();
-        const int pointSize = f.pointSize();
-        const int size = (pointSize + (f.bold() ? 3 : 2)) * 2;
-        p.setFont(f);
-        quint32 cnt = 1;
-
-        for(const CTrackData::trkptinfo_t& info : trk.infos)
+        if(trkpt.desc.isEmpty())
         {
-            const CTrackData::trkpt_t * trkpt = trk.getTrkPtByTotalIndex(info.idxTotal);
-            if(trkpt == nullptr)
-            {
-                continue;
-            }
-
-            QPointF pos(trkpt->lon, trkpt->lat);
-            pos *= DEG_TO_RAD;
-            gis->convertRad2Px(pos);
-
-            CDraw::number(cnt++, size, p, pos, Qt::black);
+            continue;
         }
+
+        QPointF pos(trkpt.lon, trkpt.lat);
+        pos *= DEG_TO_RAD;
+        gis->convertRad2Px(pos);
+
+        CDraw::number(cnt++, size, p, pos, Qt::black);
     }
 }
 
@@ -2811,25 +2820,3 @@ void CGisItemTrk::checkForInvalidPoints()
     }
 }
 
-void CGisItemTrk::removeTrackPointInfosByIndex(QList<int>& indices)
-{
-    qSort(indices.begin(), indices.end(), [](int i1, int i2){return i1 > i2;});
-    for(int index : indices)
-    {
-        trk.infos.removeAt(index);
-    }
-
-    changed(tr("Removed track point info."), "://icons/48x48/DeleteMultiple.png");
-}
-
-void CGisItemTrk::editTrackPointInfoByIndex(int index, const QString& desc)
-{
-    if(trk.infos.size() <= index)
-    {
-        return;
-    }
-
-    trk.infos[index].desc = desc;
-
-    changed(tr("Changed track point info."), "://icons/48x48/EditText.png");
-}

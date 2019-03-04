@@ -569,6 +569,8 @@ void IPlot::setSizes()
     deadAreaX    = fontWidth >> 1;
     deadAreaY    = ( fontHeight + 1 ) >> 1;
 
+    iconBarHeight = height() > 350 ? 16 : 9;
+
     setLRTB();
     setSizeIconArea();
     setSizeXLabel();
@@ -592,7 +594,7 @@ void IPlot::setLRTB()
     top = 0;
     if(!data->tags.isEmpty())
     {
-        top += 9;
+        top += iconBarHeight;
     }
     top += deadAreaY;
 
@@ -657,7 +659,7 @@ void IPlot::setSizeTrackInfo()
     }
 
     rectTrackInfo.setWidth(right - left);
-    rectTrackInfo.setHeight(fontHeight);
+    rectTrackInfo.setHeight(qMax(fontHeight,iconBarHeight));
     rectTrackInfo.moveLeft(left);
     rectTrackInfo.moveTop(size().height() - fontHeight);
 }
@@ -1198,11 +1200,11 @@ void IPlot::drawTags(QPainter& p)
 
         if (left < ptx &&  ptx < right)
         {
-            QPixmap icon = tag->icon.scaled(10,10, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            QPixmap icon = tag->icon.scaled(iconBarHeight,iconBarHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
             p.drawPixmap(ptx - icon.width() / 2, 2, icon);
 
             p.setPen(QPen(Qt::white, 3));
-            if( 9 < pty)
+            if( iconBarHeight < pty)
             {
                 if (pty > bottom)
                 {

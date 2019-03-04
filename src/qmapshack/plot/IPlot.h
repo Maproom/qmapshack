@@ -167,6 +167,8 @@ protected:
     int scaleWidthX1 = 0;
     int scaleWidthY1 = 0;
 
+    int iconBarHeight = 0;
+
     QRect rectX1Label;
     QRect rectY1Label;
     QRect rectGraphArea;

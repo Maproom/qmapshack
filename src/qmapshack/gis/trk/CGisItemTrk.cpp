@@ -1426,7 +1426,6 @@ bool CGisItemTrk::addTrkPtDesc()
         return false;
     }
 
-
     const QString& desc = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(),tr("Track point info..."),
                                                 tr("Enter some text info to be attached to this track point:"));
 
@@ -1435,29 +1434,32 @@ bool CGisItemTrk::addTrkPtDesc()
         return false;
     }
 
-    trk.setTrkPtDesc(mouseClickFocus->idxTotal, desc);
-
-    changed(tr("Add track point desc.: %1").arg(desc), "://icons/48x48/I.png");
-    return true;
+    if(trk.setTrkPtDesc(mouseClickFocus->idxTotal, desc))
+    {
+        changed(tr("Add track point desc.: %1").arg(desc), "://icons/48x48/I.png");
+        return true;
+    }
+    return false;
 }
 
 bool CGisItemTrk::setTrkPtDesc(int idxTotal, const QString& desc)
 {
-    if(desc.isEmpty())
+    if(trk.setTrkPtDesc(idxTotal, desc))
     {
-        return false;
+        changed(tr("Changed track point desc.: %1").arg(desc), "://icons/48x48/I.png");
+        return true;
     }
-
-    trk.setTrkPtDesc(idxTotal, desc);
-
-    changed(tr("Changed track point desc.: %1").arg(desc), "://icons/48x48/I.png");
-    return true;
+    return false;
 }
 
-void CGisItemTrk::delTrkPtDesc(const QList<int>& idxTotal)
+bool CGisItemTrk::delTrkPtDesc(const QList<int>& idxTotal)
 {
-    trk.delTrkPtDesc(idxTotal);
-    changed(tr("Removed track point desc."), "://icons/48x48/DeleteMultiple.png");
+    if(trk.delTrkPtDesc(idxTotal))
+    {
+        changed(tr("Removed track point desc."), "://icons/48x48/DeleteMultiple.png");
+        return true;
+    }
+    return false;
 }
 
 void CGisItemTrk::reverse()

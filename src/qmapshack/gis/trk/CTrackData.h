@@ -274,9 +274,9 @@ public:
      */
     bool isTrkPtLastVisible(qint32 idxTotal) const;
 
-    void setTrkPtDesc(int idxTotal, const QString& desc);
+    bool setTrkPtDesc(int idxTotal, const QString& desc);
 
-    void delTrkPtDesc(const QList<int>& idxTotal);
+    bool delTrkPtDesc(const QList<int>& idxTotal);
 
     template<typename T1, typename T2>
     class iterator : public std::iterator<std::forward_iterator_tag, T2>

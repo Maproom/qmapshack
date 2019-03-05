@@ -43,12 +43,16 @@ public:
         ,eColMax
     };
 
+signals:
+    void sigHasTrkPtInfo(bool yes);
+
 private slots:
     void slotContextMenu(const QPoint& point);
     void slotEdit();
     void slotDelete();
 
     void slotItemChanged(QTreeWidgetItem * item, int column);
+    void slotItemSelectionChanged();
 
 private:
     CGisItemTrk * trk = nullptr;

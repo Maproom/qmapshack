@@ -1835,7 +1835,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     quint32 cnt = 1;
     for(const CTrackData::trkpt_t &trkpt : trk)
     {
-        if(trkpt.desc.isEmpty())
+        if(trkpt.desc.isEmpty() || trkpt.isHidden())
         {
             continue;
         }
@@ -2090,6 +2090,19 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         // create trackpoint info text
         QString str = getInfoTrkPt(*mouseMoveFocus);
 
+
+        const int idxMin = qMax(mouseMoveFocus->idxTotal - 3,0);
+        const int idxMax = qMin(mouseMoveFocus->idxTotal + 3, cntTotalPoints - 1);
+        for(int idx = idxMin; idx <= idxMax; idx++)
+        {
+            const QString& desc = trk.getTrkPtByTotalIndex(idx)->desc;
+            if(!desc.isEmpty())
+            {
+                str += "\nInfo: " + desc;
+                break;
+            }
+        }
+
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
         QFontMetrics fm(f);
@@ -2326,8 +2339,7 @@ void CGisItemTrk::setLinks(const QList<link_t>& links)
 
 void CGisItemTrk::setElevation(qint32 idx, qint32 ele)
 {
-    auto condition = [idx](const CTrackData::trkpt_t &pt) { return pt.idxTotal == idx; };
-    CTrackData::trkpt_t * trkpt = trk.getTrkPtByCondition(condition);
+    CTrackData::trkpt_t * trkpt = trk.getTrkPtByTotalIndex(idx);
     if((trkpt != nullptr) && (trkpt->ele != ele))
     {
         trkpt->ele = ele;

@@ -88,17 +88,13 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
         comboColor->addItem(icon, color.label, color.color);
     }
 
-    labelHelpTrackPointInfo->setText(tr(
-                                         "<b>Track Point Information</b><br/>"
-                                         "This is a feature special to QMapShack and not portable to any other "
-                                         "application or device. You can add a short information to a track point "
-                                         "marking a special location on the track, e.g. a sight, location or "
-                                         "viewpoint. As this information is only avalable in QMapShack it's usefull "
-                                         "for documentation. However if you want to have this information on you "
-                                         "device waypoints are the element of choice.\n"
-                                         "To add track point information you simply click on a track point in the "
-                                         "map view or you do a right click in the profile graph. Use the 'Add Info' "
-                                         "option."
+    labelHelpTrackPointInfo->setText(tr( "<b>Track Point Information</b><br/>"
+                                         "To document your tracks you can add a short description to a track "
+                                         "point. All points with description will be marked along the track "
+                                         "with auto-numbered bullets.\n"
+                                         "Saving the track as GPX will stored the information in the <desc> "
+                                         "field of the track point. This is in accordance to the GPX specification "
+                                         "but might cause problems on some devices. "
                                          ));
 
     widgetColorLayout->setAlignment(Qt::AlignTop);
@@ -107,8 +103,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
 
     updateData();
 
+    connect(treeTrackPointInfo, &CTableTrkInfo::sigHasTrkPtInfo, this, &CDetailsTrk::slotHasTrkPtInfo);
     treeTrackPoint->setTrack(&trk);
-
     treeTrackPointInfo->setTrack(&trk);
 
     plot1 = new CPlotProfile(&trk, trk.limitsGraph1, IPlot::eModeNormal, this);
@@ -223,6 +219,12 @@ CDetailsTrk::~CDetailsTrk()
     trk.clearDlgDetails();
 }
 
+void CDetailsTrk::slotHasTrkPtInfo(bool yes)
+{
+    frameHelpTrackPointInfo->setVisible(!yes);
+    treeTrackPointInfo->setVisible(yes);
+}
+
 void CDetailsTrk::slotSetLimitModeStyle(CLimit::mode_e mode, bool on)
 {
     if(!on)
@@ -323,7 +325,7 @@ void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QT
     connect(spinMin,       &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
     connect(spinMin,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
 
-    connect(&limit, &CLimit::sigChanged, this, [this,&limit,spinMin, spinMax]{setupLimits(&limit, spinMin, spinMax);});
+    connect(&limit, &CLimit::sigChanged, this, [this,&limit,spinMin, spinMax] {setupLimits(&limit, spinMin, spinMax);});
 }
 
 void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault)
@@ -373,12 +375,8 @@ void CDetailsTrk::updateData()
 
     bool isReadOnly = trk.isReadOnly();
     bool isNogo = trk.isNogo();
-    bool hasTrkPtInfo = true; // !trk.getTrackData().infos.isEmpty();
 
     tabWidget->widget(eTabFilter)->setEnabled(!isReadOnly);
-
-    frameHelpTrackPointInfo->setVisible(!hasTrkPtInfo);
-    treeTrackPointInfo->setVisible(hasTrkPtInfo);
 
     labelTainted->setVisible(trk.isTainted());
 
@@ -512,7 +510,6 @@ void CDetailsTrk::updateData()
     }
 
     enableTabFilter();
-
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");
 }

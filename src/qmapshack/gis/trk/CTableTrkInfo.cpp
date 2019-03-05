@@ -37,6 +37,7 @@ CTableTrkInfo::CTableTrkInfo(QWidget *parent)
 
     connect(this, &CTableTrkInfo::customContextMenuRequested, this, &CTableTrkInfo::slotContextMenu);
     connect(this, &CTableTrkInfo::itemChanged, this, &CTableTrkInfo::slotItemChanged);
+    connect(this, &CTableTrkInfo::itemSelectionChanged, this, &CTableTrkInfo::slotItemSelectionChanged);
 }
 
 CTableTrkInfo::~CTableTrkInfo()
@@ -100,6 +101,8 @@ void CTableTrkInfo::updateData()
     clear();
     addTopLevelItems(items);
     header()->resizeSections(QHeaderView::ResizeToContents);
+
+    emit sigHasTrkPtInfo(cnt > 1);
 }
 
 void CTableTrkInfo::slotContextMenu(const QPoint& point)
@@ -153,3 +156,18 @@ void CTableTrkInfo::slotItemChanged(QTreeWidgetItem * item, int column)
 
     trk->setTrkPtDesc(item->data(eColDesc, Qt::UserRole).toInt(), item->text(eColDesc));
 }
+
+void CTableTrkInfo::slotItemSelectionChanged()
+{
+    if(trk == nullptr)
+    {
+        return;
+    }
+
+    QTreeWidgetItem * item = currentItem();
+    if(nullptr != item)
+    {
+        trk->setMouseFocusByTotalIndex(item->data(eColDesc, Qt::UserRole).toInt(), CGisItemTrk::eFocusMouseMove, "CTableTrk");
+    }
+}
+

@@ -177,6 +177,7 @@ CMainWindow::CMainWindow()
     connect(actionMapToolTip,            &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionMinMaxTrackValues,     &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionTrackInfo,             &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionProfileIsWindow,       &QAction::toggled,              this,      &CMainWindow::slotSetProfileMode);
     connect(actionSetupMapFont,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapFont);
     connect(actionSetupMapBackground,    &QAction::triggered,            this,      &CMainWindow::slotSetupMapBackground);
@@ -248,6 +249,7 @@ CMainWindow::CMainWindow()
     actionMapToolTip->setChecked(cfg.value("MapToolTip", true).toBool());
     actionNightDay->setChecked(cfg.value("isNight", false).toBool());
     actionMinMaxTrackValues->setChecked(cfg.value("MinMaxTrackValues", false).toBool());
+    actionTrackInfo->setChecked(cfg.value("TrackInfo", false).toBool());
     actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
     actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
@@ -352,6 +354,7 @@ CMainWindow::CMainWindow()
                      << actionNightDay
                      << actionMapToolTip
                      << actionMinMaxTrackValues
+                     << actionTrackInfo
                      << actionSetupDEMPaths
                      << actionAbout
                      << actionHelp
@@ -406,6 +409,7 @@ CMainWindow::CMainWindow()
                    << actionNightDay
                    << actionMapToolTip
                    << actionMinMaxTrackValues
+                   << actionTrackInfo
                    << actionProfileIsWindow
                    << separator1
                    << actionSetupToolbar
@@ -512,6 +516,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("MapToolTip", actionMapToolTip->isChecked());
     cfg.setValue("isNight", actionNightDay->isChecked());
     cfg.setValue("MinMaxTrackValues", actionMinMaxTrackValues->isChecked());
+    cfg.setValue("TrackInfo", actionTrackInfo->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("profileIsWindow",actionProfileIsWindow->isChecked());
     cfg.setValue("mapFont", mapFont);
@@ -547,6 +552,10 @@ CMainWindow::~CMainWindow()
 
     toolBarConfig->saveSettings();
     geoSearchConfig->save();
+
+    // delete icon manager explicitely to make sure temporary icon files are
+    // removed upon destruction
+    delete wptIconManager;
 }
 
 void CMainWindow::setupHomePath()
@@ -584,6 +593,7 @@ CCanvas *CMainWindow::addView(const QString& name)
     tabWidget->addTab(view, view->objectName());
     connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
     connect(actionMinMaxTrackValues, &QAction::triggered, view, &CCanvas::slotUpdateTrackStatistic);
+    connect(actionTrackInfo, &QAction::triggered, view, &CCanvas::slotUpdateTrackInfo);
 
     return view;
 }
@@ -655,6 +665,11 @@ bool CMainWindow::isMapToolTip() const
 bool CMainWindow::isMinMaxTrackValues() const
 {
     return actionMinMaxTrackValues->isChecked();
+}
+
+bool CMainWindow::isTrackInfo() const
+{
+    return actionTrackInfo->isChecked();
 }
 
 bool CMainWindow::flipMouseWheel() const

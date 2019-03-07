@@ -2090,10 +2090,10 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         // create trackpoint info text
         QString str = getInfoTrkPt(*mouseMoveFocus);
 
-
-        const int idxMin = qMax(mouseMoveFocus->idxTotal - 3,0);
-        const int idxMax = qMin(mouseMoveFocus->idxTotal + 3, cntTotalPoints - 1);
-        for(int idx = idxMin; idx <= idxMax; idx++)
+        // search for track point information in the neighboring points
+        const int idxMin = qMax(mouseMoveFocus->idxTotal - 2,0);
+        const int idxMax = qMin(mouseMoveFocus->idxTotal + 3, cntTotalPoints);
+        for(int idx = idxMin; idx < idxMax; idx++)
         {
             const QString& desc = trk.getTrkPtByTotalIndex(idx)->desc;
             if(!desc.isEmpty())

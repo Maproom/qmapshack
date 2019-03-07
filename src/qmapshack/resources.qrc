@@ -268,6 +268,7 @@
         <file>../icons/32x32/ToolBarSetup.png</file>
         <file>../icons/32x32/ToolTip.png</file>
         <file>../icons/32x32/Track.png</file>
+        <file>../icons/32x32/TrackInfo.png</file>
         <file>../icons/32x32/TrackMinMax.png</file>
         <file>../icons/32x32/TrackOn.png</file>
         <file>../icons/32x32/TrkCut.png</file>
@@ -524,6 +525,7 @@
         <file>../icons/48x48/ToolBarSetup.png</file>
         <file>../icons/48x48/ToolTip.png</file>
         <file>../icons/48x48/Track.png</file>
+        <file>../icons/48x48/TrackInfo.png</file>
         <file>../icons/48x48/TrackMinMax.png</file>
         <file>../icons/48x48/TrackOn.png</file>
         <file>../icons/48x48/TrkCut.png</file>

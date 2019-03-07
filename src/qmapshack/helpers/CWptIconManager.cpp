@@ -19,6 +19,7 @@
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"
 #include "setup/IAppSetup.h"
+#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 
@@ -30,6 +31,12 @@ CWptIconManager::CWptIconManager(QObject *parent)
     pSelf = this;
 
     init();
+}
+
+CWptIconManager::~CWptIconManager()
+{
+    qDebug()<< "CWptIconManager::~CWptIconManager()";
+    mapNumberedBullets.clear();
 }
 
 void CWptIconManager::init()
@@ -239,3 +246,24 @@ QMenu * CWptIconManager::getWptIconMenu(const QString& title, QObject * obj, con
 }
 
 
+QString CWptIconManager::getNumberedBullet(qint32 n)
+{
+    if(mapNumberedBullets.contains(n))
+    {
+        return mapNumberedBullets[n]->fileName();
+    }
+
+    using file_t = QSharedPointer<QTemporaryFile>;
+    file_t file = file_t::create(QDir::temp().absoluteFilePath("BulletXXXXXX.png"));
+    mapNumberedBullets[n] = file;
+    file->open();
+    file->close();
+    file->setAutoRemove(true);
+
+    const QString& filename = file->fileName();
+
+    const QPixmap& pixmap = CDraw::number(n, 21, Qt::black);
+    pixmap.save(filename);
+
+    return filename;
+}

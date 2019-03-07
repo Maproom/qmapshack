@@ -569,7 +569,7 @@ void IPlot::setSizes()
     deadAreaX    = fontWidth >> 1;
     deadAreaY    = ( fontHeight + 1 ) >> 1;
 
-    iconBarHeight = height() > 350 ? 16 : 9;
+    iconBarHeight = height() > 350 ? 21 : 9;
 
     setLRTB();
     setSizeIconArea();

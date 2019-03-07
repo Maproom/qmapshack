@@ -286,11 +286,13 @@ void CDraw::number(int num, int size, QPainter& p, const QPointF& center, const 
 
 QPixmap CDraw::number(int num, int size, const QColor &color)
 {
-    const qreal size_2 = (size - 1) / 2.0;
+    const qreal size_2 = (size - 2) / 2.0;
 
     QPixmap pixmap(size,size);
     pixmap.fill(Qt::transparent);
     QPainter p(&pixmap);
+    USE_ANTI_ALIASING(p, true);
+    p.translate(1,1);
 
     QFont f = p.font();
     f.setPointSize(size_2 - 2);

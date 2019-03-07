@@ -89,6 +89,7 @@
     <addaction name="actionMapToolTip"/>
     <addaction name="actionNightDay"/>
     <addaction name="actionMinMaxTrackValues"/>
+    <addaction name="actionTrackInfo"/>
     <addaction name="separator"/>
     <addaction name="actionFlipMouseWheel"/>
     <addaction name="actionProfileIsWindow"/>
@@ -879,6 +880,21 @@
    </property>
    <property name="text">
     <string>Change Map View Name</string>
+   </property>
+  </action>
+  <action name="actionTrackInfo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/48x48/TrackInfo.png</normaloff>:/icons/48x48/TrackInfo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Track Info</string>
+   </property>
+   <property name="toolTip">
+    <string>Show table of track point information for the current highlighted track on the canvas.</string>
    </property>
   </action>
  </widget>

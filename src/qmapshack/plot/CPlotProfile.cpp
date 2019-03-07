@@ -133,7 +133,7 @@ void CPlotProfile::updateData()
 
             CPlotData::point_t tag;
             tag.point = QPointF(trkpt.distance, trkpt.ele * basefactor);
-            tag.icon  = CDraw::number(cnt++, 20, Qt::black);
+            tag.icon  = CDraw::number(cnt++, 21, Qt::black);
             tag.label = trkpt.desc.size() < 20 ? trkpt.desc : trkpt.desc.left(17) + "...";
             data->tags << tag;
         }

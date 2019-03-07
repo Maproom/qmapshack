@@ -27,11 +27,13 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/Poi.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CTableTrkInfo.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconManager.h"
 #include "map/CMapDraw.h"
 #include "mouse/CMouseAdapter.h"
 #include "mouse/CMouseEditArea.h"
@@ -49,6 +51,7 @@
 #include "realtime/CRtDraw.h"
 #include "units/IUnit.h"
 #include "widgets/CColorLegend.h"
+
 
 #include <QtWidgets>
 
@@ -137,6 +140,9 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     labelTrackStatistic->setWordWrap(true);
     labelTrackStatistic->setMinimumWidth(300);
     labelTrackStatistic->hide();
+
+    labelTrackInfo = new QLabel(this);
+    labelTrackInfo->hide();
 
     connect(map, &CMapDraw::sigStartThread, mapLoadIndicator, &QLabel::show);
     connect(map, &CMapDraw::sigStopThread,  mapLoadIndicator, &QLabel::hide);
@@ -796,6 +802,15 @@ void CCanvas::drawTrackStatistic(QPainter& p)
         p.setBrush(CDraw::brushBackWhite);
         p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
     }
+
+    if(labelTrackInfo->isVisible())
+    {
+        QRect r = labelTrackInfo->frameGeometry();
+        r.adjust(-5, -5, 5, 5);
+        p.setPen(CDraw::penBorderGray);
+        p.setBrush(CDraw::brushBackWhite);
+        p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
+    }
 }
 
 void CCanvas::drawScale(QPainter& p)
@@ -896,6 +911,9 @@ void CCanvas::slotCheckTrackOnFocus()
         labelTrackStatistic->clear();
         labelTrackStatistic->hide();
 
+        labelTrackInfo->clear();
+        labelTrackInfo->hide();
+
         // get access to next track object
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
         if(nullptr == trk2)
@@ -918,6 +936,7 @@ void CCanvas::slotCheckTrackOnFocus()
         keyTrackOnFocus = key;
 
         slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
+        slotUpdateTrackInfo(true);
     }
 }
 
@@ -942,6 +961,47 @@ void CCanvas::slotUpdateTrackStatistic(bool show)
     {
         labelTrackStatistic->clear();
         labelTrackStatistic->hide();
+    }
+
+    slotUpdateTrackInfo(labelTrackInfo->isVisible());
+}
+
+void CCanvas::slotUpdateTrackInfo(bool show)
+{
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrackOnFocus));
+
+    if(show && trk)
+    {
+        int cnt = 1;
+        QString text;
+
+        text += "<table>";
+        for(const CTrackData::trkpt_t& trkpt: trk->getTrackData())
+        {
+            if(trkpt.isHidden() || trkpt.desc.isEmpty())
+            {
+                continue;
+            }
+            text += "<tr><td><img src=" + CWptIconManager::self().getNumberedBullet(cnt++) + "/></td><td>" + trkpt.desc + "</td></tr>";
+        }
+        text += "</table>";
+
+        labelTrackInfo->setMinimumWidth((trk->getActivities().getActivityCount() > 1) ? 450 : 350);
+        labelTrackInfo->setText(text);
+        labelTrackInfo->adjustSize();
+
+        const int x = rect().width() - labelTrackInfo->width() - 20;
+        const int y =  rect().height()
+                      - (labelTrackStatistic->isVisible() ? labelTrackStatistic->height() + 20 : 0)
+                      - labelTrackInfo->height() - 60;
+
+        labelTrackInfo->move(x,y);
+        labelTrackInfo->setVisible(cnt > 1);
+    }
+    else
+    {
+        labelTrackInfo->clear();
+        labelTrackInfo->hide();
     }
 }
 

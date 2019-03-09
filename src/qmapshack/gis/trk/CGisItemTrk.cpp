@@ -2668,6 +2668,14 @@ void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
             visual->updateData();
         }
     }
+
+    CMainWindow& main = CMainWindow::self();
+    const QList<CCanvas*>& allCanvas = main.getCanvas();
+    for(CCanvas * canvas : allCanvas)
+    {
+        canvas->slotUpdateTrackInfo(main.isTrackInfo());
+        canvas->slotUpdateTrackStatistic(main.isMinMaxTrackValues());
+    }
 }
 
 void CGisItemTrk::setMouseFocusVisuals(const CTrackData::trkpt_t * pt)

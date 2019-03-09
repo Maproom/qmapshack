@@ -32,6 +32,7 @@
 #include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 #include "gis/trk/filter/CFilterReset.h"
+#include "gis/trk/filter/CFilterEnergyCycle.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
 #include "gis/trk/filter/CFilterSubPt2Pt.h"
@@ -179,7 +180,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
         (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png", minWidth);
 
-    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint, CFilterLoopsCut>
+    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint, CFilterLoopsCut, CFilterEnergyCycle>
         (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png", minWidth);
 
     // limit tree widget horizontal size to the filter widget with the largest minimum size
@@ -490,6 +491,19 @@ void CDetailsTrk::updateData()
     if(nullptr != filterChangeStartPoint)
     {
         filterChangeStartPoint->updateUi();
+    }
+
+    CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
+    if(nullptr != filterEnergyCycle)
+    {
+        if(treeFilter->hasFocus())
+        {
+            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromFilter);
+        }
+        else if(listHistory->hasFocus())
+        {
+            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromHistory);
+        }
     }
 
     enableTabFilter();

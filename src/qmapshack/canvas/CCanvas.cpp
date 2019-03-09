@@ -562,6 +562,7 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     textStatusMessages->move(X_OFF_STATUS, Y_OFF_STATUS);
 
     slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
+    slotUpdateTrackInfo(CMainWindow::self().isTrackInfo());
     setSizeTrackProfile();
 
     QSize s = e->size() - QSize(50,50);
@@ -936,7 +937,7 @@ void CCanvas::slotCheckTrackOnFocus()
         keyTrackOnFocus = key;
 
         slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
-        slotUpdateTrackInfo(true);
+        slotUpdateTrackInfo(CMainWindow::self().isTrackInfo());
     }
 }
 
@@ -963,7 +964,7 @@ void CCanvas::slotUpdateTrackStatistic(bool show)
         labelTrackStatistic->hide();
     }
 
-    slotUpdateTrackInfo(labelTrackInfo->isVisible());
+    slotUpdateTrackInfo(CMainWindow::self().isTrackInfo());
 }
 
 void CCanvas::slotUpdateTrackInfo(bool show)
@@ -992,7 +993,7 @@ void CCanvas::slotUpdateTrackInfo(bool show)
 
         const int x = rect().width() - labelTrackInfo->width() - 20;
         const int y =  rect().height()
-                      - (labelTrackStatistic->isVisible() ? labelTrackStatistic->height() + 20 : 0)
+                      - (CMainWindow::self().isMinMaxTrackValues() ? labelTrackStatistic->height() + 20 : 0)
                       - labelTrackInfo->height() - 60;
 
         labelTrackInfo->move(x,y);

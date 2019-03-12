@@ -48,10 +48,6 @@
 #include <proj_api.h>
 #include <QtWidgets>
 
-#include <functional>
-
-using std::bind;
-
 /* base case: add the filter specified in template parameter */
 template<typename filter>
 static void addFilters(QTreeWidgetItem *itemGroup, CGisItemTrk& trk, qint32& minWidth)
@@ -258,12 +254,9 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     connect(toolLimitAutoGraph, &QToolButton::toggled, spinMinGraph, &QDoubleSpinBox::setDisabled);
     connect(toolLimitAutoGraph, &QToolButton::toggled, spinMaxGraph, &QDoubleSpinBox::setDisabled);
 
-    /* creates "lambdas" which look like:
-     *   (bool on) { slotSetLimitModeGraph(CLimit::eModeAuto, &limit, spinMinGraph, spinMaxGraph, on); }
-     */
-    auto limitAutoFunc = bind(&CDetailsTrk::slotSetLimitModeGraph, this, CLimit::eModeAuto, &limit, spinMinGraph, spinMaxGraph, std::placeholders::_1);
-    auto limitUserFunc = bind(&CDetailsTrk::slotSetLimitModeGraph, this, CLimit::eModeUser, &limit, spinMinGraph, spinMaxGraph, std::placeholders::_1);
-    auto limitSysFunc  = bind(&CDetailsTrk::slotSetLimitModeGraph, this, CLimit::eModeSys,  &limit, spinMinGraph, spinMaxGraph, std::placeholders::_1);
+    auto limitAutoFunc = [this,&limit,spinMinGraph, spinMaxGraph](bool checked){slotSetLimitModeGraph(CLimit::eModeAuto, &limit, spinMinGraph, spinMaxGraph, checked);};
+    auto limitUserFunc = [this,&limit,spinMinGraph, spinMaxGraph](bool checked){slotSetLimitModeGraph(CLimit::eModeUser, &limit, spinMinGraph, spinMaxGraph, checked);};
+    auto limitSysFunc = [this,&limit,spinMinGraph, spinMaxGraph](bool checked){slotSetLimitModeGraph(CLimit::eModeSys, &limit, spinMinGraph, spinMaxGraph, checked);};
 
     connect(toolLimitAutoGraph, &QToolButton::toggled, this, limitAutoFunc);
     connect(toolLimitUsrGraph,  &QToolButton::toggled, this, limitUserFunc);
@@ -272,7 +265,7 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     connect(spinMinGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMin);
     connect(spinMaxGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMax);
 
-    auto limitChangedFunc = bind(&CDetailsTrk::setupLimits, this, &limit, spinMinGraph, spinMaxGraph);
+    auto limitChangedFunc = [this,&limit,spinMinGraph, spinMaxGraph](){setupLimits(&limit, spinMinGraph, spinMaxGraph);};
     connect(&limit, &CLimit::sigChanged, this, limitChangedFunc);
 }
 
@@ -306,17 +299,16 @@ void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QT
     connect(toolLimitAuto, &QToolButton::toggled, spinMax, &QDoubleSpinBox::setDisabled);
     connect(toolLimitAuto, &QToolButton::toggled, spinMin, &QDoubleSpinBox::setDisabled);
 
-    connect(toolLimitAuto, &QToolButton::toggled, bind(&CDetailsTrk::slotSetLimitModeStyle, this, CLimit::eModeAuto, std::placeholders::_1));
-    connect(toolLimitUsr,  &QToolButton::toggled, bind(&CDetailsTrk::slotSetLimitModeStyle, this, CLimit::eModeUser, std::placeholders::_1));
-    connect(toolLimitSys,  &QToolButton::toggled, bind(&CDetailsTrk::slotSetLimitModeStyle, this, CLimit::eModeSys,  std::placeholders::_1));
+    connect(toolLimitAuto, &QToolButton::toggled, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeAuto, checked);});
+    connect(toolLimitUsr,  &QToolButton::toggled, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeUser, checked);});
+    connect(toolLimitSys,  &QToolButton::toggled, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeSys, checked);});
 
     connect(spinMax,       &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitHighChanged);
     connect(spinMax,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitHighChanged);
     connect(spinMin,       &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
     connect(spinMin,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
 
-    auto limitChangedFunc = bind(&CDetailsTrk::setupLimits, this, &limit, spinMin, spinMax);
-    connect(&limit,        &CLimit::sigChanged, this, limitChangedFunc);
+    connect(&limit, &CLimit::sigChanged, this, [this,&limit,spinMin, spinMax]{setupLimits(&limit, spinMin, spinMax);});
 }
 
 void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault)

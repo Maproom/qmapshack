@@ -105,8 +105,8 @@ QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute)
     for(const service_t& service : services)
     {
         action = menu->addAction(QIcon(service.icon), service.name);
-        auto func = std::bind(&CGeoSearchWeb::slotSearchWeb, &self(), serviceId++, pt);
-        connect(action, &QAction::triggered, this, func);
+        connect(action, &QAction::triggered, this, [this, serviceId, pt](){slotSearchWeb(serviceId, pt);});
+        serviceId++;
     }
 
     menu->addSeparator();
@@ -123,14 +123,14 @@ QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute)
     return menu;
 }
 
-void CGeoSearchWeb::search(const QPointF& pt) const
+void CGeoSearchWeb::search(const QPointF& pt)
 {
     QMenu * menu = getMenu(pt, CMainWindow::self().getBestWidgetForParent());
     menu->exec(QCursor::pos());
     delete menu;
 }
 
-void CGeoSearchWeb::slotSearchWeb(int serviceId, const QPointF pt)
+void CGeoSearchWeb::slotSearchWeb(int serviceId, const QPointF pt) const
 {
     QString url = services[serviceId].url;
     url = url.replace("%1", QString::number(pt.x(), 'g', 8));

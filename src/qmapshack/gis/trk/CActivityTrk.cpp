@@ -100,13 +100,13 @@ QMenu * CActivityTrk::getMenu(const QList<IGisItem::key_t> &keys, QWidget *paren
     QAction * act;
 
     act = menu->addAction(QIcon("://icons/32x32/ActNone.png"), tr("No Activity"));
-    auto func = std::bind(&CGisWorkspace::slotActivityTrkByKey, &CGisWorkspace::self(), keys, CTrackData::trkpt_t::eAct20None);
+    auto func = [keys](){CGisWorkspace::self().slotActivityTrkByKey(keys, CTrackData::trkpt_t::eAct20None);};
     QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
 
     for(const desc_t &desc : actDescriptor)
     {
         act = menu->addAction(QIcon(desc.iconLarge), desc.name);
-        auto func = std::bind(&CGisWorkspace::slotActivityTrkByKey, &CGisWorkspace::self(), keys, desc.activity);
+        auto func = [keys, desc](){CGisWorkspace::self().slotActivityTrkByKey(keys, desc.activity);};
         QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
     }
 
@@ -289,19 +289,19 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     for(const desc_t *desc : descs)
     {
         const summary_t& s = summary[desc->activity];
-        IUnit::self().meter2elevation(s.ascent, val, unit);
+        IUnit::self().meter2elevation(qMin(s.ascent,NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ascent;
     }
     if(printNoAct)
     {
-        IUnit::self().meter2elevation(sumActNone.ascent, val, unit);
+        IUnit::self().meter2elevation(qMin(sumActNone.ascent,NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += sumActNone.ascent;
     }
     if(printTotal)
     {
-        IUnit::self().meter2elevation(total, val, unit);
+        IUnit::self().meter2elevation(qMin(total,NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
@@ -313,19 +313,19 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     for(const desc_t *desc : descs)
     {
         const summary_t& s = summary[desc->activity];
-        IUnit::self().meter2elevation(s.descent, val, unit);
+        IUnit::self().meter2elevation(qMin(s.descent,NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.descent;
     }
     if(printNoAct)
     {
-        IUnit::self().meter2elevation(sumActNone.descent, val, unit);
+        IUnit::self().meter2elevation(qMin(sumActNone.descent,NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += sumActNone.descent;
     }
     if(printTotal)
     {
-        IUnit::self().meter2elevation(total, val, unit);
+        IUnit::self().meter2elevation(qMin(total,NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
     }
     str += "</tr>";

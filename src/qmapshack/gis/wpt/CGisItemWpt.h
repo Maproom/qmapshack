@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -70,9 +71,8 @@ public:
         QString ownerId;
         QString type;
         QString container;
-        //See ZGeocacheAttributes for meanings. Index equals number, 0 is not present, -1 is negative, 1 is positive
-        //As there is no attribute with id 0, this will be our marker, whether the attributes were imported or not
-        QVector<qint8> attributes = QVector<qint8>(68, 0);
+        //See ZGeocacheAttributes.txt for meanings.
+        QMap<qint8,bool> attributes;
         bool shortDescIsHtml = false;
         QString shortDesc;
         bool longDescIsHtml = false;

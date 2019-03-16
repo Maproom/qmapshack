@@ -626,7 +626,6 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     geocache.archived   = attr.namedItem("archived").nodeValue().toLocal8Bit() == "True";
     geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
 
-    geocache.attributes[0]=1;
     for(QDomNode thisAttribute = geocacheAttributes.firstChild(); !thisAttribute.isNull(); thisAttribute=thisAttribute.nextSibling())
     {
         qint8 id = thisAttribute.attributes().namedItem("id").nodeValue().toUInt();

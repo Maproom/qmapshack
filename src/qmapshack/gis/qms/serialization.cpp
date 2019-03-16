@@ -299,10 +299,6 @@ QDataStream& operator>>(QDataStream& stream, CGisItemWpt::geocache_t& geocache)
         {
             stream>>geocache.attributes;
         }
-        else
-        {
-            geocache.attributes[0]=-1;//To mark that there are no attributes because it is an old version
-        }
         stream >> tmp8;
         geocache.shortDescIsHtml = tmp8;
         stream >> geocache.shortDesc;

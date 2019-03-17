@@ -196,8 +196,32 @@ const CTrackData::trkpt_t* CTrackData::getTrkPtByVisibleIndex(qint32 idx) const
 
 const CTrackData::trkpt_t* CTrackData::getTrkPtByTotalIndex(qint32 idx) const
 {
-    auto condition = [idx](const trkpt_t &pt) { return pt.idxTotal == idx;  };
-    return getTrkPtByCondition(condition);
+    for(const trkseg_t& seg : segs)
+    {
+        if(seg.isEmpty() || idx < seg.pts.first().idxTotal || idx > seg.pts.last().idxTotal)
+        {
+            continue;
+        }
+
+        return &seg.pts[idx - seg.pts.first().idxTotal];
+    }
+
+    return nullptr;
+}
+
+CTrackData::trkpt_t *CTrackData::getTrkPtByTotalIndex(qint32 idx)
+{
+    for(trkseg_t& seg : segs)
+    {
+        if(seg.isEmpty() || idx < seg.pts.first().idxTotal || idx > seg.pts.last().idxTotal)
+        {
+            continue;
+        }
+
+        return &seg.pts[idx - seg.pts.first().idxTotal];
+    }
+
+    return nullptr;
 }
 
 bool CTrackData::isTrkPtLastVisible(qint32 idxTotal) const
@@ -228,4 +252,33 @@ CTrackData::trkpt_t* CTrackData::getTrkPtByCondition(std::function<bool(const CT
         }
     }
     return nullptr;
+}
+
+bool CTrackData::setTrkPtDesc(int idxTotal, const QString& desc)
+{
+    trkpt_t * trkpt = getTrkPtByTotalIndex(idxTotal);
+
+    if((trkpt != nullptr) && !trkpt->isHidden() && (trkpt->desc != desc))
+    {
+        trkpt->desc = desc;
+        return true;
+    }
+    return false;
+}
+
+bool CTrackData::delTrkPtDesc(const QList<int>& idxTotal)
+{
+    bool result = false;
+
+    for(int idx : idxTotal)
+    {
+        trkpt_t * trkpt = getTrkPtByTotalIndex(idx);
+        if(trkpt != nullptr)
+        {
+            trkpt->desc.clear();
+            result = true;
+        }
+    }
+
+    return result;
 }

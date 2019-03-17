@@ -23,13 +23,15 @@
 #include <QObject>
 #include <QPoint>
 #include <QString>
+#include <QTemporaryFile>
+#include <QFont>
 
 class QMenu;
 
 class CWptIconManager : public QObject
 {
 public:
-    virtual ~CWptIconManager() = default;
+    virtual ~CWptIconManager();
     static CWptIconManager& self(){return *pSelf;}
 
     struct icon_t
@@ -56,6 +58,8 @@ public:
         return wptIcons;
     }
 
+    QString getNumberedBullet(qint32 n);
+
 private:
     friend class CMainWindow;
     CWptIconManager(QObject * parent);
@@ -66,7 +70,11 @@ private:
     static CWptIconManager * pSelf;
     static const char * wptDefault;
 
+    QFont lastFont;
+
     QMap<QString, icon_t> wptIcons;
+
+    QMap<qint32, QSharedPointer<QTemporaryFile>> mapNumberedBullets;
 };
 
 #endif //CWPTICONMANAGER_H

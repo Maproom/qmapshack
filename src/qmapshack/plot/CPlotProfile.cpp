@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CDraw.h"
 #include "plot/CPlotAxis.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
@@ -116,6 +117,24 @@ void CPlotProfile::updateData()
             tag.point = lineEle.last();
             tag.icon  = wpt->getIcon();
             tag.label = wpt->getName();
+            data->tags << tag;
+        }
+    }
+
+    if((mode != eModeIcon))
+    {
+        qint32 cnt = 1;
+        for(const CTrackData::trkpt_t& trkpt : trk->getTrackData())
+        {
+            if(trkpt.desc.isEmpty())
+            {
+                continue;
+            }
+
+            CPlotData::point_t tag;
+            tag.point = QPointF(trkpt.distance, trkpt.ele * basefactor);
+            tag.icon  = CDraw::number(cnt++, Qt::black);
+            tag.label = trkpt.desc.size() < 20 ? trkpt.desc : trkpt.desc.left(17) + "...";
             data->tags << tag;
         }
     }

@@ -71,6 +71,7 @@ private slots:
     void slotResetZoom();
     void slotAddWpt();
     void slotCutTrk();
+    void slotAddTrkPtInfo();
 
 
 protected:
@@ -166,6 +167,8 @@ protected:
     int scaleWidthX1 = 0;
     int scaleWidthY1 = 0;
 
+    int iconBarHeight = 0;
+
     QRect rectX1Label;
     QRect rectY1Label;
     QRect rectGraphArea;
@@ -182,6 +185,7 @@ protected:
     QAction * actionStopRange;
     QAction * actionAddWpt;
     QAction * actionCutTrk;
+    QAction * actionAddTrkPtInfo;
 
     qint32 idxSel1 = NOIDX;
     qint32 idxSel2 = NOIDX;

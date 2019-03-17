@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,47 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTTRK_H
-#define CSCROPTTRK_H
+#ifndef CSCREENSHOTDIALOG_H
+#define CSCREENSHOTDIALOG_H
 
-#include "gis/IGisItem.h"
-#include "mouse/IScrOpt.h"
-#include "ui_IScrOptTrk.h"
+#include "ui_IScreenshotDialog.h"
 
-class CGisItemTrk;
-class IMouse;
+class CCanvas;
 
-class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
+class CScreenshotDialog : public QDialog, private Ui::IScreenshotDialog
 {
     Q_OBJECT
 public:
-    CScrOptTrk(CGisItemTrk * trk, const QPoint &point, IMouse *parent);
-    virtual ~CScrOptTrk();
-
-    void draw(QPainter& p) override;
+    CScreenshotDialog(CCanvas& canvas, QWidget * parent);
+    virtual ~CScreenshotDialog() = default;
 
 private slots:
-    void slotDelete();
-    void slotCopy();
-    void slotEditDetails();
-    void slotProfile(bool on);
-    void slotCut();
-    void slotEdit();
-    void slotReverse();
-    void slotCombine();
-    void slotRange();
-    void slotActivity();
-    void slotColor();
-    void slotCopyWithWpt();
-    void slotNogo();
-    void slotAddElevation();
-    void slotAddInfo();
-
+    void slotSave();
+    void slotPrint();
 
 private:
-    IGisItem::key_t key;
-    QPointF anchor;
+    CCanvas& canvas;
 };
 
-#endif //CSCROPTTRK_H
+#endif //CSCREENSHOTDIALOG_H
 

@@ -21,7 +21,7 @@ else (PROJ_LIBRARIES AND PROJ_INCLUDE_DIRS)
 
   find_path(PROJ_INCLUDE_DIR
     NAMES
-      proj_api.h
+      proj.h
     PATHS
 if(WIN32)	
       ${PROJ_DEV_PATH}/include
@@ -72,6 +72,7 @@ endif(WIN32)
 
   if (PROJ_INCLUDE_DIRS AND PROJ_LIBRARIES)
      set(PROJ_FOUND TRUE)
+     add_definitions(-DACCEPT_USE_OF_DEPRECATED_PROJ_API_H)
   endif (PROJ_INCLUDE_DIRS AND PROJ_LIBRARIES)
 
   if (PROJ_FOUND)

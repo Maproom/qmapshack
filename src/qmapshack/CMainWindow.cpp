@@ -45,6 +45,7 @@
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
+#include "print/CScreenshotDialog.h"
 #include "realtime/CRtWorkspace.h"
 #include "setup/IAppSetup.h"
 #include "tool/CImportDatabase.h"
@@ -177,6 +178,12 @@ CMainWindow::CMainWindow()
     connect(actionMapToolTip,            &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionMinMaxTrackValues,     &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionShowMinMaxInformation, &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionShowTrackInfoTable,    &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionShowTrackInfoPoints,   &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionShowTrackSummary,      &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionShowTrackProfile,      &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionShowTrackInfoPoints,   &QAction::toggled, actionShowTrackInfoTable, &QAction::setEnabled);
     connect(actionProfileIsWindow,       &QAction::toggled,              this,      &CMainWindow::slotSetProfileMode);
     connect(actionSetupMapFont,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapFont);
     connect(actionSetupMapBackground,    &QAction::triggered,            this,      &CMainWindow::slotSetupMapBackground);
@@ -198,6 +205,7 @@ CMainWindow::CMainWindow()
     connect(actionClose,                 &QAction::triggered,            this,      &CMainWindow::close);
     connect(actionCreateRoutinoDatabase, &QAction::triggered,            this,      &CMainWindow::slotCreateRoutinoDatabase);
     connect(actionPrintMap,              &QAction::triggered,            this,      &CMainWindow::slotPrintMap);
+    connect(actionTakeScreenshot,        &QAction::triggered,            this,      &CMainWindow::slotTakeScreenshot);
     connect(actionSetupWaypointIcons,    &QAction::triggered,            this,      &CMainWindow::slotSetupWptIcons);
     connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
     connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
@@ -248,6 +256,11 @@ CMainWindow::CMainWindow()
     actionMapToolTip->setChecked(cfg.value("MapToolTip", true).toBool());
     actionNightDay->setChecked(cfg.value("isNight", false).toBool());
     actionMinMaxTrackValues->setChecked(cfg.value("MinMaxTrackValues", false).toBool());
+    actionShowMinMaxInformation->setChecked(cfg.value("ShowMinMaxInformation", true).toBool());
+    actionShowTrackInfoTable->setChecked(cfg.value("ShowTrackInfoTable", true).toBool());
+    actionShowTrackInfoPoints->setChecked(cfg.value("ShowTrackInfoPoints", true).toBool());
+    actionShowTrackSummary->setChecked(cfg.value("ShowTrackSummary", true).toBool());
+    actionShowTrackProfile->setChecked(cfg.value("ShowTrackProfile", true).toBool());
     actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
     actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
@@ -332,8 +345,16 @@ CMainWindow::CMainWindow()
     actionToggleRte->setIcon(QIcon(":/icons/32x32/ToggleRouter.png"));
     menuWindow->insertAction(actionSetupToolbar,actionToggleRte);
 
-
     menuWindow->insertSeparator(actionSetupToolbar);
+
+    QMenu * menu = new QMenu(this);
+    menu->addAction(actionShowMinMaxInformation);
+    menu->addAction(actionShowTrackSummary);
+    menu->addAction(actionShowTrackInfoPoints);
+    menu->addAction(actionShowTrackInfoTable);
+    menu->addAction(actionShowTrackProfile);
+    actionTrackInfo->setMenu(menu);
+
 
     QAction * separator = new QAction("---------------",this);
     separator->setSeparator(true);
@@ -352,6 +373,7 @@ CMainWindow::CMainWindow()
                      << actionNightDay
                      << actionMapToolTip
                      << actionMinMaxTrackValues
+                     << actionTrackInfo
                      << actionSetupDEMPaths
                      << actionAbout
                      << actionHelp
@@ -373,6 +395,7 @@ CMainWindow::CMainWindow()
                      << actionCloneMapView
                      << actionCreateRoutinoDatabase
                      << actionPrintMap
+                     << actionTakeScreenshot
                      << actionSetupCoordFormat
                      << actionSetupMapBackground
                      << actionSetupWaypointIcons
@@ -406,6 +429,7 @@ CMainWindow::CMainWindow()
                    << actionNightDay
                    << actionMapToolTip
                    << actionMinMaxTrackValues
+                   << actionTrackInfo
                    << actionProfileIsWindow
                    << separator1
                    << actionSetupToolbar
@@ -512,6 +536,11 @@ CMainWindow::~CMainWindow()
     cfg.setValue("MapToolTip", actionMapToolTip->isChecked());
     cfg.setValue("isNight", actionNightDay->isChecked());
     cfg.setValue("MinMaxTrackValues", actionMinMaxTrackValues->isChecked());
+    cfg.setValue("ShowMinMaxInformation", actionShowMinMaxInformation->isChecked());
+    cfg.setValue("ShowTrackInfoTable", actionShowTrackInfoTable->isChecked());
+    cfg.setValue("ShowTrackInfoPoints", actionShowTrackInfoPoints->isChecked());
+    cfg.setValue("ShowTrackSummary", actionShowTrackSummary->isChecked());
+    cfg.setValue("ShowTrackProfile", actionShowTrackProfile->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("profileIsWindow",actionProfileIsWindow->isChecked());
     cfg.setValue("mapFont", mapFont);
@@ -547,6 +576,10 @@ CMainWindow::~CMainWindow()
 
     toolBarConfig->saveSettings();
     geoSearchConfig->save();
+
+    // delete icon manager explicitely to make sure temporary icon files are
+    // removed upon destruction
+    delete wptIconManager;
 }
 
 void CMainWindow::setupHomePath()
@@ -583,7 +616,11 @@ CCanvas *CMainWindow::addView(const QString& name)
     CCanvas * view = new CCanvas(tabWidget, name);
     tabWidget->addTab(view, view->objectName());
     connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
-    connect(actionMinMaxTrackValues, &QAction::triggered, view, &CCanvas::slotUpdateTrackStatistic);
+    connect(actionShowMinMaxInformation, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
+    connect(actionShowTrackInfoTable, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
+    connect(actionShowTrackInfoPoints, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
+    connect(actionShowTrackSummary, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
+    connect(actionShowTrackProfile, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
 
     return view;
 }
@@ -655,6 +692,31 @@ bool CMainWindow::isMapToolTip() const
 bool CMainWindow::isMinMaxTrackValues() const
 {
     return actionMinMaxTrackValues->isChecked();
+}
+
+bool CMainWindow::isShowMinMaxInformation() const
+{
+    return actionShowMinMaxInformation->isChecked();
+}
+
+bool CMainWindow::isShowTrackSummary() const
+{
+    return actionShowTrackSummary->isChecked();
+}
+
+bool CMainWindow::isShowTrackInfoTable() const
+{
+    return actionShowTrackInfoTable->isChecked() && actionShowTrackInfoPoints->isChecked();
+}
+
+bool CMainWindow::isShowTrackInfoPoints() const
+{
+    return actionShowTrackInfoPoints->isChecked();
+}
+
+bool CMainWindow::isShowTrackProfile() const
+{
+    return actionShowTrackProfile->isChecked();
 }
 
 bool CMainWindow::flipMouseWheel() const
@@ -1340,6 +1402,16 @@ void CMainWindow::slotPrintMap()
     if(nullptr != canvas)
     {
         canvas->setMousePrint();
+    }
+}
+
+void CMainWindow::slotTakeScreenshot()
+{
+    CCanvas * canvas = getVisibleCanvas();
+    if(nullptr != canvas)
+    {
+        CScreenshotDialog dlg(*canvas, this);
+        dlg.exec();
     }
 }
 

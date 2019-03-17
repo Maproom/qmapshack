@@ -51,6 +51,7 @@ class QTextBrowser;
 class IPlot;
 struct SGisLine;
 struct poi_t;
+class CTableTrkInfo;
 
 class CCanvas : public QWidget
 {
@@ -180,7 +181,8 @@ signals:
 
 public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
-    void slotUpdateTrackStatistic(bool show);
+    void slotUpdateTrackInfo();
+    void slotCheckTrackOnFocus();
 
 protected:
     bool event(QEvent *) override;
@@ -199,8 +201,6 @@ protected:
 
 private slots:
     void slotToolTip();
-    void slotCheckTrackOnFocus();
-
 
 private:
     void drawStatusMessages(QPainter& p);
@@ -261,6 +261,8 @@ private:
     QPointer<IPlot>  plotTrackProfile;
     /// a label with a track
     QLabel * labelTrackStatistic;
+
+    QLabel * labelTrackInfo;
 
     QTextBrowser * textStatusMessages;
     QMap<QString, QString> statusMessages;

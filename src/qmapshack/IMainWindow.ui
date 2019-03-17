@@ -72,6 +72,7 @@
     <addaction name="actionSetupDEMPaths"/>
     <addaction name="separator"/>
     <addaction name="actionPrintMap"/>
+    <addaction name="actionTakeScreenshot"/>
     <addaction name="separator"/>
     <addaction name="actionClose"/>
    </widget>
@@ -89,6 +90,7 @@
     <addaction name="actionMapToolTip"/>
     <addaction name="actionNightDay"/>
     <addaction name="actionMinMaxTrackValues"/>
+    <addaction name="actionTrackInfo"/>
     <addaction name="separator"/>
     <addaction name="actionFlipMouseWheel"/>
     <addaction name="actionProfileIsWindow"/>
@@ -734,7 +736,7 @@
      <normaloff>:/icons/32x32/PrintSave.png</normaloff>:/icons/32x32/PrintSave.png</iconset>
    </property>
    <property name="text">
-    <string>Save(Print) Map Screenshot</string>
+    <string>Save(Print) Map</string>
    </property>
    <property name="toolTip">
     <string>Print a selected area of the map</string>
@@ -879,6 +881,79 @@
    </property>
    <property name="text">
     <string>Change Map View Name</string>
+   </property>
+  </action>
+  <action name="actionTrackInfo">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/48x48/TrackInfo.png</normaloff>:/icons/48x48/TrackInfo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Track Info</string>
+   </property>
+   <property name="toolTip">
+    <string>Select what information is shown for a highlighted track.</string>
+   </property>
+  </action>
+  <action name="actionShowTrackInfoTable">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Track Info Table</string>
+   </property>
+   <property name="toolTip">
+    <string>Show the table of all track points with information attached.</string>
+   </property>
+  </action>
+  <action name="actionShowTrackSummary">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Track Summary</string>
+   </property>
+   <property name="toolTip">
+    <string>Show text box with track summary information.</string>
+   </property>
+  </action>
+  <action name="actionShowMinMaxInformation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Min./Max Information</string>
+   </property>
+   <property name="toolTip">
+    <string>Show minimum and maximum of track data.</string>
+   </property>
+  </action>
+  <action name="actionShowTrackProfile">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Track Profile</string>
+   </property>
+  </action>
+  <action name="actionTakeScreenshot">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/Screenshot.png</normaloff>:/icons/32x32/Screenshot.png</iconset>
+   </property>
+   <property name="text">
+    <string>Take Screenshot</string>
+   </property>
+   <property name="toolTip">
+    <string>Take a screenshot from the current active map view.</string>
+   </property>
+  </action>
+  <action name="actionShowTrackInfoPoints">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Track Info Points</string>
    </property>
   </action>
  </widget>

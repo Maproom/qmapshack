@@ -206,8 +206,6 @@ public:
         }
     };
 
-
-
     CTrackData() {}
 
     CTrackData(const QString &name, const CTrackData &other, qint32 rangeStart, qint32 rangeEnd);
@@ -222,7 +220,6 @@ public:
     QString type;
     QVector<trkseg_t> segs;
     // -- all gpx tags - stop
-
     QString color;
 
     void removeEmptySegments();
@@ -269,6 +266,7 @@ public:
        @return A null pointer of no point is found.
      */
     const trkpt_t *getTrkPtByTotalIndex(qint32 idx) const;
+    trkpt_t *getTrkPtByTotalIndex(qint32 idx);
 
     /**
        @brief Check if the track point at index it the last one visible
@@ -277,6 +275,9 @@ public:
      */
     bool isTrkPtLastVisible(qint32 idxTotal) const;
 
+    bool setTrkPtDesc(int idxTotal, const QString& desc);
+
+    bool delTrkPtDesc(const QList<int>& idxTotal);
 
     template<typename T1, typename T2>
     class iterator : public std::iterator<std::forward_iterator_tag, T2>
@@ -329,7 +330,7 @@ public:
     iterator<CTrackData, trkpt_t> end()   { return iterator<CTrackData, trkpt_t>(*this, segs.count(), 0); }
 
     iterator<const CTrackData, const trkpt_t> begin() const { return iterator<const CTrackData, const trkpt_t>(*this,            0, 0); }
-    iterator<const CTrackData, const trkpt_t> end()   const { return iterator<const CTrackData, const trkpt_t>(*this, segs.count(), 0); }
+    iterator<const CTrackData, const trkpt_t> end()   const { return iterator<const CTrackData, const trkpt_t>(*this, segs.count(), 0); }    
 };
 
 QDataStream& operator<<(QDataStream& stream, const CTrackData::trkpt_t& pt);

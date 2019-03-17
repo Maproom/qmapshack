@@ -27,11 +27,13 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/Poi.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CTableTrkInfo.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconManager.h"
 #include "map/CMapDraw.h"
 #include "mouse/CMouseAdapter.h"
 #include "mouse/CMouseEditArea.h"
@@ -49,6 +51,7 @@
 #include "realtime/CRtDraw.h"
 #include "units/IUnit.h"
 #include "widgets/CColorLegend.h"
+
 
 #include <QtWidgets>
 
@@ -134,9 +137,10 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     textStatusMessages->hide();
 
     labelTrackStatistic = new QLabel(this);
-    labelTrackStatistic->setWordWrap(true);
-    labelTrackStatistic->setMinimumWidth(300);
     labelTrackStatistic->hide();
+
+    labelTrackInfo = new QLabel(this);
+    labelTrackInfo->hide();
 
     connect(map, &CMapDraw::sigStartThread, mapLoadIndicator, &QLabel::show);
     connect(map, &CMapDraw::sigStopThread,  mapLoadIndicator, &QLabel::hide);
@@ -555,7 +559,7 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 
     textStatusMessages->move(X_OFF_STATUS, Y_OFF_STATUS);
 
-    slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
+    slotUpdateTrackInfo();
     setSizeTrackProfile();
 
     QSize s = e->size() - QSize(50,50);
@@ -788,14 +792,23 @@ void CCanvas::drawStatusMessages(QPainter& p)
 
 void CCanvas::drawTrackStatistic(QPainter& p)
 {
+    p.save();
+    p.setPen(CDraw::penBorderGray);
+    p.setBrush(CDraw::brushBackWhite);
     if(labelTrackStatistic->isVisible())
     {
         QRect r = labelTrackStatistic->frameGeometry();
         r.adjust(-5, -5, 5, 5);
-        p.setPen(CDraw::penBorderGray);
-        p.setBrush(CDraw::brushBackWhite);
         p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
     }
+
+    if(labelTrackInfo->isVisible())
+    {
+        QRect r = labelTrackInfo->frameGeometry();
+        r.adjust(-5, -5, 5, 5);
+        p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
+    }
+    p.restore();
 }
 
 void CCanvas::drawScale(QPainter& p)
@@ -896,6 +909,10 @@ void CCanvas::slotCheckTrackOnFocus()
         labelTrackStatistic->clear();
         labelTrackStatistic->hide();
 
+        labelTrackInfo->clear();
+        labelTrackInfo->hide();
+
+
         // get access to next track object
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
         if(nullptr == trk2)
@@ -903,12 +920,13 @@ void CCanvas::slotCheckTrackOnFocus()
             return;
         }
 
+        const CMainWindow& w = CMainWindow::self();
         // create new profile plot, the plot will register itself at the track
-        plotTrackProfile = new CPlotProfile(trk2, trk2->limitsGraph1, CMainWindow::self().profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
+        plotTrackProfile = new CPlotProfile(trk2, trk2->limitsGraph1, w.profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
         setSizeTrackProfile();
         if(isVisible())
         {
-            plotTrackProfile->show();
+            plotTrackProfile->setVisible(w.isShowTrackProfile());
         }
 
         colorLegend = new CColorLegend(this, trk2);
@@ -917,32 +935,93 @@ void CCanvas::slotCheckTrackOnFocus()
         // finally store the new key as track on focus
         keyTrackOnFocus = key;
 
-        slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
+        slotUpdateTrackInfo();
     }
 }
 
-void CCanvas::slotUpdateTrackStatistic(bool show)
+void CCanvas::slotUpdateTrackInfo()
 {
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrackOnFocus));
 
-    if(show && trk)
+    if(trk == nullptr)
     {
-        QString text = trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity);
-        text += trk->getInfoLimits();
+        labelTrackInfo->clear();
+        labelTrackInfo->hide();
+        labelTrackStatistic->clear();
+        labelTrackStatistic->hide();
+        return;
+    }
 
-        labelTrackStatistic->setMinimumWidth((trk->getActivities().getActivityCount() > 1) ? 450 : 350);
+    bool trackStatisticIsVisible = false;
+    CMainWindow& w = CMainWindow::self();
+    if(w.isShowTrackSummary() || w.isShowMinMaxInformation())
+    {
+        trackStatisticIsVisible = true;
+
+        QString text;
+        if(w.isShowTrackSummary())
+        {
+            text += trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity);
+        }
+
+        if(w.isShowMinMaxInformation())
+        {
+            text += trk->getInfoLimits();
+        }
+
         labelTrackStatistic->setText(text);
         labelTrackStatistic->adjustSize();
 
         labelTrackStatistic->move(rect().width() - labelTrackStatistic->width() - 20, rect().height() - labelTrackStatistic->height() - 60);
         labelTrackStatistic->show();
-        update();
     }
     else
     {
         labelTrackStatistic->clear();
         labelTrackStatistic->hide();
     }
+
+
+    if(w.isShowTrackInfoTable())
+    {
+        int cnt = 1;
+        QString text;
+
+        text += "<table>";
+        for(const CTrackData::trkpt_t& trkpt: trk->getTrackData())
+        {
+            if(trkpt.isHidden() || trkpt.desc.isEmpty())
+            {
+                continue;
+            }
+            text += "<tr><td><img src=" + CWptIconManager::self().getNumberedBullet(cnt++) + "/></td><td>" + trkpt.desc + "</td></tr>";
+        }
+        text += "</table>";
+
+        labelTrackInfo->setText(text);
+        labelTrackInfo->adjustSize();
+
+        const int x = rect().width() - labelTrackInfo->width() - 20;
+        const int y =  rect().height()
+                      - (trackStatisticIsVisible ? labelTrackStatistic->height() + 20 : 0)
+                      - labelTrackInfo->height() - 60;
+
+        labelTrackInfo->move(x,y);
+        labelTrackInfo->setVisible(cnt > 1);
+    }
+    else
+    {
+        labelTrackInfo->clear();
+        labelTrackInfo->hide();
+    }
+
+    if(isVisible() && (plotTrackProfile != nullptr))
+    {
+        plotTrackProfile->setVisible(w.isShowTrackProfile());
+    }
+
+
+    update();
 }
 
 void CCanvas::moveMap(const QPointF& delta)
@@ -1168,7 +1247,7 @@ void CCanvas::showProfile(bool yes)
 {
     if(nullptr != plotTrackProfile)
     {
-        plotTrackProfile->setVisible(yes);
+        plotTrackProfile->setVisible(yes && CMainWindow::self().isShowTrackProfile());
     }
 }
 

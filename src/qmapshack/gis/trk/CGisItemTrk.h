@@ -78,6 +78,7 @@ public:
         , eVisualProject     = 0x08
         , eVisualColorAct    = 0x10
         , eVisualTrkTable    = 0x20
+        , eVisualTrkInfo     = 0x40
         , eVisualAll         = -1
     };
 
@@ -384,6 +385,26 @@ public:
        @return Return true on success.
      */
     bool cut();
+
+    /**
+       @brief Add the desc field for the track point mouseClickFocus is pointing to
+       @return Return true on success.
+     */
+    bool addTrkPtDesc();
+
+    /**
+       @brief Set the desc field for a track point referenced by it's total index
+       @param idxTotal  the index of the track point
+       @param desc      the string to set
+       @return Return true on success
+     */
+    bool setTrkPtDesc(int idxTotal, const QString& desc);
+
+    /**
+       @brief Delete track point descriptions for one or several track points
+       @param idxTotal  a list of total indices
+     */
+    bool delTrkPtDesc(const QList<int>& idxTotal);
 
     /**
        @brief Reverse the complete track

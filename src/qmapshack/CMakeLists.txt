@@ -164,6 +164,7 @@ set( SRCS
     gis/trk/CScrOptTrk.cpp
     gis/trk/CSelectActivityColor.cpp
     gis/trk/CTableTrk.cpp
+    gis/trk/CTableTrkInfo.cpp
     gis/trk/CTrackData.cpp
     gis/trk/filter/CFilterChangeStartPoint.cpp
     gis/trk/filter/CFilterDelete.cpp
@@ -279,6 +280,7 @@ set( SRCS
     plot/IPlot.cpp
     plot/ITrack.cpp
     print/CPrintDialog.cpp
+    print/CScreenshotDialog.cpp
     qlgt/CQlb.cpp
     qlgt/CQlgtDb.cpp
     qlgt/CQlgtDiary.cpp
@@ -494,6 +496,7 @@ set( HDRS
     gis/trk/CScrOptTrk.h
     gis/trk/CSelectActivityColor.h
     gis/trk/CTableTrk.h
+    gis/trk/CTableTrkInfo.h
     gis/trk/CTrackData.h
     gis/trk/filter/CFilterChangeStartPoint.h
     gis/trk/filter/CFilterDelete.h
@@ -613,6 +616,7 @@ set( HDRS
     plot/IPlot.h
     plot/ITrack.h
     print/CPrintDialog.h
+    print/CScreenshotDialog.h
     qlgt/CQlb.h
     qlgt/CQlgtDb.h
     qlgt/CQlgtDiary.h
@@ -781,6 +785,7 @@ set( UIS
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui
     print/IPrintDialog.ui
+    print/IScreenshotDialog.ui
     realtime/IRtSelectSource.ui
     realtime/IRtWorkspace.ui
     realtime/gpstether/IRtGpsTetherInfo.ui

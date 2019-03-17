@@ -129,6 +129,7 @@
         <file>../icons/32x32/GridSetup.png</file>
         <file>../icons/32x32/GridWizard.png</file>
         <file>../icons/32x32/Help.png</file>
+        <file>../icons/32x32/I.png</file>
         <file>../icons/32x32/Image.png</file>
         <file>../icons/32x32/Info.png</file>
         <file>../icons/32x32/Left.png</file>
@@ -200,6 +201,7 @@
         <file>../icons/32x32/RouteOn.png</file>
         <file>../icons/32x32/RouteSetup.png</file>
         <file>../icons/32x32/RteInstr.png</file>
+        <file>../icons/32x32/Screenshot.png</file>
         <file>../icons/32x32/SQLite.png</file>
         <file>../icons/32x32/SQLiteNoConn.png</file>
         <file>../icons/32x32/Save.png</file>
@@ -267,6 +269,7 @@
         <file>../icons/32x32/ToolBarSetup.png</file>
         <file>../icons/32x32/ToolTip.png</file>
         <file>../icons/32x32/Track.png</file>
+        <file>../icons/32x32/TrackInfo.png</file>
         <file>../icons/32x32/TrackMinMax.png</file>
         <file>../icons/32x32/TrackOn.png</file>
         <file>../icons/32x32/TrkCut.png</file>
@@ -384,6 +387,7 @@
         <file>../icons/48x48/GridSetup.png</file>
         <file>../icons/48x48/GridWizard.png</file>
         <file>../icons/48x48/Help.png</file>
+        <file>../icons/48x48/I.png</file>
         <file>../icons/48x48/Image.png</file>
         <file>../icons/48x48/Info.png</file>
         <file>../icons/48x48/Left.png</file>
@@ -455,6 +459,7 @@
         <file>../icons/48x48/RouteOn.png</file>
         <file>../icons/48x48/RouteSetup.png</file>
         <file>../icons/48x48/RteInstr.png</file>
+        <file>../icons/48x48/Screenshot.png</file>
         <file>../icons/48x48/SQLite.png</file>
         <file>../icons/48x48/SQLiteNoConn.png</file>
         <file>../icons/48x48/Save.png</file>
@@ -522,6 +527,7 @@
         <file>../icons/48x48/ToolBarSetup.png</file>
         <file>../icons/48x48/ToolTip.png</file>
         <file>../icons/48x48/Track.png</file>
+        <file>../icons/48x48/TrackInfo.png</file>
         <file>../icons/48x48/TrackMinMax.png</file>
         <file>../icons/48x48/TrackOn.png</file>
         <file>../icons/48x48/TrkCut.png</file>

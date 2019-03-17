@@ -96,10 +96,10 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
             }
             filepath += QString::number(attribute) + ".gif";
 
-            QLabel* attrLabel = new QLabel;
+            QLabel* attrLabel = new QLabel(labelNoAttr);//To avoid memory leak
             attrLabel->setAlignment(Qt::AlignLeft);
             attrLabel->setPixmap(QPixmap(filepath));
-            attributeHorLayout->addWidget(attrLabel);
+            attributeHorLayout->insertWidget(0,attrLabel);
         }
 
         labelNoAttr->setHidden(true);

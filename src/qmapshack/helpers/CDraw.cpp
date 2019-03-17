@@ -284,21 +284,21 @@ void CDraw::number(int num, int size, QPainter& p, const QPointF& center, const 
     p.drawText(r, s);
 }
 
-QPixmap CDraw::number(int num, int size, const QColor &color)
+QPixmap CDraw::number(int num, const QColor &color)
 {
-    const qreal size_2 = (size - 2) / 2.0;
+    const QFont& f  = CMainWindow::self().getMapFont();
+    const int pointSize = f.pointSize();
+    const int size = (pointSize + (f.bold() ? 3 : 2)) * 2;
 
     QPixmap pixmap(size,size);
     pixmap.fill(Qt::transparent);
     QPainter p(&pixmap);
+
+    p.setFont(f);
     USE_ANTI_ALIASING(p, true);
     p.translate(1,1);
 
-    QFont f = p.font();
-    f.setPointSize(size_2 - 2);
-    p.setFont(f);
-
-    CDraw::number(num, size, p, {size_2,size_2}, color);
+    CDraw::number(num, size, p, {(size-2)/2.0,(size-2)/2.0}, color);
 
     return pixmap;
 }

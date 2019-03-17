@@ -194,9 +194,10 @@ void CScrOptTrk::slotAddElevation()
 
 void CScrOptTrk::slotAddInfo()
 {
+    close();
+
     CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().addTrkInfoByKey(key);
-    close();
 }
 
 void CScrOptTrk::draw(QPainter& p)

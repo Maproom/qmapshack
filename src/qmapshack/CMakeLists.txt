@@ -280,6 +280,7 @@ set( SRCS
     plot/IPlot.cpp
     plot/ITrack.cpp
     print/CPrintDialog.cpp
+    print/CScreenshotDialog.cpp
     qlgt/CQlb.cpp
     qlgt/CQlgtDb.cpp
     qlgt/CQlgtDiary.cpp
@@ -615,6 +616,7 @@ set( HDRS
     plot/IPlot.h
     plot/ITrack.h
     print/CPrintDialog.h
+    print/CScreenshotDialog.h
     qlgt/CQlb.h
     qlgt/CQlgtDb.h
     qlgt/CQlgtDiary.h
@@ -783,6 +785,7 @@ set( UIS
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui
     print/IPrintDialog.ui
+    print/IScreenshotDialog.ui
     realtime/IRtSelectSource.ui
     realtime/IRtWorkspace.ui
     realtime/gpstether/IRtGpsTetherInfo.ui

@@ -94,7 +94,7 @@ public:
 
     static void number(int num, int size, QPainter& p, const QPointF& center, const QColor &color);
 
-    static QPixmap number(int num, int size, const QColor &color);
+    static QPixmap number(int num, const QColor &color);
 };
 
 #endif // CPAINTER_H

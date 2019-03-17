@@ -24,6 +24,7 @@
 #include <QPoint>
 #include <QString>
 #include <QTemporaryFile>
+#include <QFont>
 
 class QMenu;
 
@@ -68,6 +69,8 @@ private:
 
     static CWptIconManager * pSelf;
     static const char * wptDefault;
+
+    QFont lastFont;
 
     QMap<QString, icon_t> wptIcons;
 

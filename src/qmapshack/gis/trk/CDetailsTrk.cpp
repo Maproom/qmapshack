@@ -221,8 +221,9 @@ CDetailsTrk::~CDetailsTrk()
 
 void CDetailsTrk::slotHasTrkPtInfo(bool yes)
 {
-    frameHelpTrackPointInfo->setVisible(!yes);
-    treeTrackPointInfo->setVisible(yes);
+    const CMainWindow& w = CMainWindow::self();
+    labelHelpTrackPointInfo->setVisible(!yes && w.isShowTrackInfoPoints());
+    treeTrackPointInfo->setVisible(yes && w.isShowTrackInfoTable());
 }
 
 void CDetailsTrk::slotSetLimitModeStyle(CLimit::mode_e mode, bool on)

@@ -137,8 +137,6 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     textStatusMessages->hide();
 
     labelTrackStatistic = new QLabel(this);
-    labelTrackStatistic->setWordWrap(true);
-    labelTrackStatistic->setMinimumWidth(300);
     labelTrackStatistic->hide();
 
     labelTrackInfo = new QLabel(this);
@@ -561,8 +559,7 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 
     textStatusMessages->move(X_OFF_STATUS, Y_OFF_STATUS);
 
-    slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
-    slotUpdateTrackInfo(CMainWindow::self().isTrackInfo());
+    slotUpdateTrackInfo();
     setSizeTrackProfile();
 
     QSize s = e->size() - QSize(50,50);
@@ -795,12 +792,13 @@ void CCanvas::drawStatusMessages(QPainter& p)
 
 void CCanvas::drawTrackStatistic(QPainter& p)
 {
+    p.save();
+    p.setPen(CDraw::penBorderGray);
+    p.setBrush(CDraw::brushBackWhite);
     if(labelTrackStatistic->isVisible())
     {
         QRect r = labelTrackStatistic->frameGeometry();
         r.adjust(-5, -5, 5, 5);
-        p.setPen(CDraw::penBorderGray);
-        p.setBrush(CDraw::brushBackWhite);
         p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
     }
 
@@ -808,10 +806,9 @@ void CCanvas::drawTrackStatistic(QPainter& p)
     {
         QRect r = labelTrackInfo->frameGeometry();
         r.adjust(-5, -5, 5, 5);
-        p.setPen(CDraw::penBorderGray);
-        p.setBrush(CDraw::brushBackWhite);
         p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
     }
+    p.restore();
 }
 
 void CCanvas::drawScale(QPainter& p)
@@ -915,6 +912,7 @@ void CCanvas::slotCheckTrackOnFocus()
         labelTrackInfo->clear();
         labelTrackInfo->hide();
 
+
         // get access to next track object
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
         if(nullptr == trk2)
@@ -922,12 +920,13 @@ void CCanvas::slotCheckTrackOnFocus()
             return;
         }
 
+        const CMainWindow& w = CMainWindow::self();
         // create new profile plot, the plot will register itself at the track
-        plotTrackProfile = new CPlotProfile(trk2, trk2->limitsGraph1, CMainWindow::self().profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
+        plotTrackProfile = new CPlotProfile(trk2, trk2->limitsGraph1, w.profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
         setSizeTrackProfile();
         if(isVisible())
         {
-            plotTrackProfile->show();
+            plotTrackProfile->setVisible(w.isShowTrackProfile());
         }
 
         colorLegend = new CColorLegend(this, trk2);
@@ -936,27 +935,45 @@ void CCanvas::slotCheckTrackOnFocus()
         // finally store the new key as track on focus
         keyTrackOnFocus = key;
 
-        slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
-        slotUpdateTrackInfo(CMainWindow::self().isTrackInfo());
+        slotUpdateTrackInfo();
     }
 }
 
-void CCanvas::slotUpdateTrackStatistic(bool show)
+void CCanvas::slotUpdateTrackInfo()
 {
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrackOnFocus));
 
-    if(show && trk)
+    if(trk == nullptr)
     {
-        QString text = trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity);
-        text += trk->getInfoLimits();
+        labelTrackInfo->clear();
+        labelTrackInfo->hide();
+        labelTrackStatistic->clear();
+        labelTrackStatistic->hide();
+        return;
+    }
 
-        labelTrackStatistic->setMinimumWidth((trk->getActivities().getActivityCount() > 1) ? 450 : 350);
+    bool trackStatisticIsVisible = false;
+    CMainWindow& w = CMainWindow::self();
+    if(w.isShowTrackSummary() || w.isShowMinMaxInformation())
+    {
+        trackStatisticIsVisible = true;
+
+        QString text;
+        if(w.isShowTrackSummary())
+        {
+            text += trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity);
+        }
+
+        if(w.isShowMinMaxInformation())
+        {
+            text += trk->getInfoLimits();
+        }
+
         labelTrackStatistic->setText(text);
         labelTrackStatistic->adjustSize();
 
         labelTrackStatistic->move(rect().width() - labelTrackStatistic->width() - 20, rect().height() - labelTrackStatistic->height() - 60);
         labelTrackStatistic->show();
-        update();
     }
     else
     {
@@ -964,14 +981,8 @@ void CCanvas::slotUpdateTrackStatistic(bool show)
         labelTrackStatistic->hide();
     }
 
-    slotUpdateTrackInfo(CMainWindow::self().isTrackInfo());
-}
 
-void CCanvas::slotUpdateTrackInfo(bool show)
-{
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrackOnFocus));
-
-    if(show && trk)
+    if(w.isShowTrackInfoTable())
     {
         int cnt = 1;
         QString text;
@@ -987,13 +998,12 @@ void CCanvas::slotUpdateTrackInfo(bool show)
         }
         text += "</table>";
 
-        labelTrackInfo->setMinimumWidth((trk->getActivities().getActivityCount() > 1) ? 450 : 350);
         labelTrackInfo->setText(text);
         labelTrackInfo->adjustSize();
 
         const int x = rect().width() - labelTrackInfo->width() - 20;
         const int y =  rect().height()
-                      - (CMainWindow::self().isMinMaxTrackValues() ? labelTrackStatistic->height() + 20 : 0)
+                      - (trackStatisticIsVisible ? labelTrackStatistic->height() + 20 : 0)
                       - labelTrackInfo->height() - 60;
 
         labelTrackInfo->move(x,y);
@@ -1004,6 +1014,14 @@ void CCanvas::slotUpdateTrackInfo(bool show)
         labelTrackInfo->clear();
         labelTrackInfo->hide();
     }
+
+    if(isVisible() && (plotTrackProfile != nullptr))
+    {
+        plotTrackProfile->setVisible(w.isShowTrackProfile());
+    }
+
+
+    update();
 }
 
 void CCanvas::moveMap(const QPointF& delta)
@@ -1229,7 +1247,7 @@ void CCanvas::showProfile(bool yes)
 {
     if(nullptr != plotTrackProfile)
     {
-        plotTrackProfile->setVisible(yes);
+        plotTrackProfile->setVisible(yes && CMainWindow::self().isShowTrackProfile());
     }
 }
 

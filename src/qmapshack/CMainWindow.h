@@ -92,7 +92,13 @@ public:
     bool isPOIText()       const;
     bool isMapToolTip()    const;
     bool isMinMaxTrackValues() const;
-    bool isTrackInfo() const;
+
+    bool isShowMinMaxInformation() const;
+    bool isShowTrackSummary() const;
+    bool isShowTrackInfoTable() const;
+    bool isShowTrackInfoPoints() const;
+    bool isShowTrackProfile() const;
+
     bool flipMouseWheel()  const;
     bool profileIsWindow() const;
     const QFont& getMapFont() const
@@ -179,6 +185,7 @@ private slots:
     void slotSetProfileMode(bool on);
     void slotCreateRoutinoDatabase();
     void slotPrintMap();
+    void slotTakeScreenshot();
     void slotSetupWptIcons();
     void slotSanityTest();
     void slotCloseTab();

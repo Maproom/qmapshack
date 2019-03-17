@@ -248,9 +248,18 @@ QMenu * CWptIconManager::getWptIconMenu(const QString& title, QObject * obj, con
 
 QString CWptIconManager::getNumberedBullet(qint32 n)
 {
-    if(mapNumberedBullets.contains(n))
+
+    const QFont& font = CMainWindow::self().getMapFont();
+    if(mapNumberedBullets.contains(n) && (lastFont == font))
     {
         return mapNumberedBullets[n]->fileName();
+    }
+
+    if(lastFont != font)
+    {
+        qDebug() << "clear map";
+        mapNumberedBullets.clear();
+        lastFont = font;
     }
 
     using file_t = QSharedPointer<QTemporaryFile>;
@@ -261,8 +270,7 @@ QString CWptIconManager::getNumberedBullet(qint32 n)
     file->setAutoRemove(true);
 
     const QString& filename = file->fileName();
-
-    const QPixmap& pixmap = CDraw::number(n, 21, Qt::black);
+    const QPixmap& pixmap = CDraw::number(n, Qt::black);
     pixmap.save(filename);
 
     return filename;

@@ -181,8 +181,8 @@ signals:
 
 public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
-    void slotUpdateTrackStatistic(bool show);
-    void slotUpdateTrackInfo(bool show);
+    void slotUpdateTrackInfo();
+    void slotCheckTrackOnFocus();
 
 protected:
     bool event(QEvent *) override;
@@ -201,8 +201,6 @@ protected:
 
 private slots:
     void slotToolTip();
-    void slotCheckTrackOnFocus();
-
 
 private:
     void drawStatusMessages(QPainter& p);

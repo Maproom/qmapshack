@@ -91,7 +91,7 @@ void CTableTrkInfo::updateData()
         }
 
         QTreeWidgetItem * item = new QTreeWidgetItem();
-        item->setIcon(eColNum, CDraw::number(cnt++, 21, Qt::black));
+        item->setIcon(eColNum, CDraw::number(cnt++, Qt::black));
         item->setText(eColDesc, trkpt.desc);
         item->setFlags(item->flags()|Qt::ItemIsEditable);
         item->setData(eColDesc,Qt::UserRole,trkpt.idxTotal);

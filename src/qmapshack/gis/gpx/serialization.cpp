@@ -630,9 +630,9 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     {
         qint8 id = thisAttribute.attributes().namedItem("id").nodeValue().toUInt();
         qint8 intvalue = thisAttribute.attributes().namedItem("inc").nodeValue().toUInt();
-        bool boolvalue = intvalue == 0 ? false : true;
+        bool boolvalue = (intvalue == 1);
         geocache.attributes[id]=boolvalue;
-        if(id == 42) //42 is the code for 'Needs maintenance' and it only appeas, when there attribute is set
+        if(id == 42) //42 is the code for 'Needs maintenance' and it only appears, when there attribute is set
         {
             geocache.needsMaintenance = true;
         }

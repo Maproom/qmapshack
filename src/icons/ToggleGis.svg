@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   id="svg3462"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="ToggleGis.svg"
+   inkscape:export-filename="/home/norbert/Development/QMapShack/QMapShack_touch/src/icons/48x48/ToggleGis.png"
+   inkscape:export-xdpi="67.5"
+   inkscape:export-ydpi="67.5">
+  <defs
+     id="defs3464">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect4326"
+       is_visible="true" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.89"
+     inkscape:cx="4.4096682"
+     inkscape:cy="34.818224"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="744"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     showguides="false" />
+  <metadata
+     id="metadata3467">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.12671447px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect3336"
+       width="30.114006"
+       height="30.114006"
+       x="21.06686"
+       y="11.871966" />
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.12671447px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect3338"
+       width="20.690577"
+       height="20.690577"
+       x="35.816578"
+       y="5.9311075" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000080;stroke-width:1.54111087px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect3336-3"
+       width="41.189693"
+       height="41.189693"
+       x="3.9911385"
+       y="18.45553" />
+    <path
+       style="fill:none;stroke:#000080;stroke-width:2.14614534;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 42.303546,37.548698 c 0,0 -10.730727,0.715382 -16.453779,4.292291 -4.890909,3.056826 10.535269,3.056968 7.869198,5.723055 -2.66607,2.666084 -20.29971,1.727289 -23.506998,3.70954 -1.4343443,0.886429 -3.5769101,3.576909 -3.5769101,3.576909"
+       id="path3078"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csssc" />
+    <g
+       id="g3015"
+       transform="matrix(0.7153818,0,0,0.7153818,3.5328241,-690.69412)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3763"
+         d="m 27.270471,996.11501 25.339695,10.78739 -28.507157,10.7873 3.167462,-21.57469"
+         style="fill:#008000;stroke:#008000;stroke-width:1.34993112;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccc"
+         inkscape:connector-curvature="0"
+         id="path3761"
+         d="m 20.720056,1034.6463 3.609174,-39.39147 3.609174,0 z"
+         style="fill:#000000;stroke:#000000;stroke-width:0.71901649px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+    </g>
+    <rect
+       style="fill:none;stroke:none"
+       id="rect3769"
+       width="28.615273"
+       height="28.615273"
+       x="5.4218798"
+       y="21.03591" />
+    <flowRoot
+       transform="translate(-47.854615,-997.38718)"
+       xml:space="preserve"
+       id="flowRoot3859"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><flowRegion
+         id="flowRegion3861"><rect
+           id="rect3863"
+           width="75.35714"
+           height="62.142857"
+           x="-9.4642859"
+           y="2.2142856" /></flowRegion><flowPara
+         id="flowPara3865" /></flowRoot>  </g>
+</svg>

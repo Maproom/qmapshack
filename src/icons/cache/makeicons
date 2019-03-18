@@ -1,0 +1,4 @@
+#!/bin/bash
+
+for i in *.svg; do inkscape -D -w 32 -h 32 $i --export-png=32x32/`echo $i | sed -e 's/svg$/png/'`; done
+

@@ -1,0 +1,25 @@
+<expected>
+    <name>Garmin TPX1 Test NS cns</name>
+    <desc></desc>
+
+    <waypoints></waypoints>
+
+    <tracks>
+        <track name="Track" colorIdx="12" colorName="Blue" segcount="1" pointcount="8">
+            <colorSources>
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:slope"                        />
+                <colorSource known="true" everypoint="false" derived="false" name="::ql:ele"                          />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:progress"                     />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:speed"                        />
+                <colorSource known="true" everypoint="true"  derived="false" name="cns:TrackPointExtension|cns:atemp" />
+                <colorSource known="true" everypoint="true"  derived="false" name="cns:TrackPointExtension|cns:wtemp" />
+                <colorSource known="true" everypoint="true"  derived="false" name="cns:TrackPointExtension|cns:depth" />
+                <colorSource known="true" everypoint="true"  derived="false" name="cns:TrackPointExtension|cns:hr"    />
+                <colorSource known="true" everypoint="true"  derived="false" name="cns:TrackPointExtension|cns:cad"   />
+            </colorSources>
+        </track>
+    </tracks>
+
+    <routes></routes>
+    <areas></areas>
+</expected>

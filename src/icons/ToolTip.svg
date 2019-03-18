@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   id="svg3513"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="NightDay.svg">
+  <defs
+     id="defs3515">
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4038"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4041"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.5"
+     inkscape:cx="32"
+     inkscape:cy="32"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="657"
+     inkscape:window-height="421"
+     inkscape:window-x="-2"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3518">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <g
+       transform="translate(-427.64358,-205.8852)"
+       id="g3364"
+       inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/16x16/toolTip.png"
+       inkscape:export-xdpi="36"
+       inkscape:export-ydpi="36">
+      <g
+         id="g3359">
+        <path
+           transform="matrix(0.67539562,0,0,0.6447077,420.01108,19.25786)"
+           inkscape:transform-center-y="-0.44074938"
+           inkscape:transform-center-x="0.5244475"
+           d="m 70,342.36218 -8.893841,-3.01599 -7.526554,5.61673 0.120027,-9.39054 -7.667654,-5.42251 L 55,327.36218 l 2.787683,-8.96802 5.422515,7.66766 9.390537,-0.12003 -5.616724,7.52655 z"
+           inkscape:randomized="0"
+           inkscape:rounded="0"
+           inkscape:flatsided="false"
+           sodipodi:arg2="1.4137167"
+           sodipodi:arg1="0.78539816"
+           sodipodi:r2="7.0710678"
+           sodipodi:r1="14.142136"
+           sodipodi:cy="332.36218"
+           sodipodi:cx="60"
+           sodipodi:sides="5"
+           id="path3356"
+           style="fill:#ffff00;fill-opacity:1;fill-rule:nonzero;stroke:#000000"
+           sodipodi:type="star" />
+        <text
+           sodipodi:linespacing="125%"
+           id="text3344"
+           y="235.82008"
+           x="465.51398"
+           style="font-size:22.27394676px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Bold"
+           xml:space="preserve"
+           transform="scale(0.93445097,1.0701471)"><tspan
+             style="font-size:22.27394676px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000080;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Bold"
+             y="235.82008"
+             x="465.51398"
+             id="tspan3346"
+             sodipodi:role="line">Tip</tspan></text>
+      </g>
+      <rect
+         y="220.9761"
+         x="432.55267"
+         height="40"
+         width="40"
+         id="rect3358"
+         style="fill:none;stroke:none" />
+    </g>
+  </g>
+</svg>

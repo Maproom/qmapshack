@@ -105,6 +105,11 @@ void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit) const /* 
         val  = "-";
         unit.clear();
     }
+    else if(meter < 100000)
+    {
+        val.sprintf("%1.0f", meter);
+        unit = "m²";
+    }
     else
     {
         val.sprintf("%1.2f", meter / 1000000);

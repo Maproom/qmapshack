@@ -94,7 +94,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
             {
                 filepath.append('_');
             }
-            filepath += QString::number(attribute) + ".gif";
+            filepath += QString::number(attribute) + ".png";
 
             QLabel* attrLabel = new QLabel(labelNoAttr);//To avoid memory leak
             attrLabel->setAlignment(Qt::AlignLeft);

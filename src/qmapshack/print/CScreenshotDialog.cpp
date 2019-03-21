@@ -24,6 +24,7 @@
 #include "plot/CPlotProfile.h"
 #include "print/CScreenshotDialog.h"
 
+#include <QtPrintSupport>
 #include <QtWidgets>
 
 CScreenshotDialog::CScreenshotDialog(CCanvas &canvas, QWidget *parent)
@@ -33,17 +34,20 @@ CScreenshotDialog::CScreenshotDialog(CCanvas &canvas, QWidget *parent)
     setupUi(this);
 
     labelHelp->setText(tr("<b>Screenshot</b><br/>"
-                          "You can either save or print the current view. "
+                          "You can save or print a screenshot of your current map view. If the "
+                          "profile graph is configured as extended profile (CTRL+E, profile is in "
+                          "it's own window) it is appended to the screenshot. Check the pre-view "
+                          "below. "
                           ));
 
-    QPixmap pixmap(canvas.size());
-    QPainter p(&pixmap);
-    canvas.render(&p);
+    const QPixmap& pixmap = getScreenshot(getTrackForProfile());
 
-    labelPreview->setPixmap(pixmap.scaled(300,200, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelPreview->setPixmap(pixmap.scaled(400,300, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     connect(pushSave, &QPushButton::clicked, this, &CScreenshotDialog::slotSave);
     connect(pushPrint, &QPushButton::clicked, this, &CScreenshotDialog::slotPrint);
+
+    adjustSize();
 }
 
 void CScreenshotDialog::slotSave()
@@ -75,17 +79,83 @@ void CScreenshotDialog::slotSave()
         filename += "." + expectedSuffix;
     }
 
-    QSize s                     = canvas.size();
-    bool renderProfile          = false;
-    const IGisItem::key_t& key  = CGisItemTrk::getKeyUserFocus();
-    CGisItemTrk * trk           = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
-    const CMainWindow& w        = CMainWindow::self();
-    constexpr int heightProfile = 400;
+    const QPixmap& pixmap = getScreenshot(getTrackForProfile());
+    pixmap.save(filename);
 
-    if(w.isShowTrackProfile() && w.profileIsWindow() && (trk != nullptr))
+    cfg.setValue("Paths/lastScreenshotPath", fi.absolutePath());
+    QDialog::accept();
+}
+
+CGisItemTrk * CScreenshotDialog::getTrackForProfile()
+{
+    const CMainWindow& w  = CMainWindow::self();
+    if(!(w.isShowTrackProfile() && w.profileIsWindow()))
+    {
+        return nullptr;
+    }
+
+    const IGisItem::key_t& key  = CGisItemTrk::getKeyUserFocus();
+    return dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
+}
+
+void CScreenshotDialog::slotPrint()
+{
+    const QPixmap& pixmap       = getScreenshot(nullptr);
+    const QSize& sizePixmap     = pixmap.size();
+
+    QPrinter printer;
+    printer.setOrientation(sizePixmap.width() > sizePixmap.height() ? QPrinter::Landscape : QPrinter::Portrait);
+    printer.setPaperSize(QPrinter::A4);
+    printer.setColorMode(QPrinter::Color);
+    printer.setResolution(1200);
+
+    QPrintDialog dialog(&printer, this);
+    dialog.setWindowTitle(tr("Print Diary"));
+    if (dialog.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    const QRectF& r = printer.pageRect(QPrinter::DevicePixel);    
+    const QPixmap& canvasScaled = pixmap.scaled(r.size().toSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    QPainter p(&printer);
+    p.drawPixmap(0,0,canvasScaled);
+
+    CGisItemTrk * trk = getTrackForProfile();
+    if(trk != nullptr)
+    {
+        CPlotProfile plot(trk, trk->limitsGraph1, IPlot::eModeNormal, CMainWindow::self().getBestWidgetForParent());
+        plot.resize(pixmap.width(), heightProfile);
+        QImage image(plot.size(),QImage::Format_ARGB32);
+        plot.save(image);
+
+        const QImage& profileScaled = image.scaled(r.size().toSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+        if(r.height() > (canvasScaled.height() + profileScaled.height()))
+        {
+            p.translate(0,canvasScaled.height());
+        }
+        else
+        {
+            printer.newPage();
+        }
+
+        p.drawImage(0,0,profileScaled);
+    }
+
+
+    QDialog::accept();
+}
+
+
+QPixmap CScreenshotDialog::getScreenshot(CGisItemTrk * trk)
+{
+    QSize s = canvas.size();
+
+    if(trk != nullptr)
     {
         s.setHeight(s.height() + heightProfile);
-        renderProfile = true;
     }
 
     QPixmap pixmap(s);
@@ -93,9 +163,9 @@ void CScreenshotDialog::slotSave()
 
     canvas.render(&p);
 
-    if(renderProfile)
+    if(trk != nullptr)
     {
-        CPlotProfile plot(trk, trk->limitsGraph1, IPlot::eModeNormal, w.getBestWidgetForParent());
+        CPlotProfile plot(trk, trk->limitsGraph1, IPlot::eModeNormal, CMainWindow::self().getBestWidgetForParent());
         plot.resize(pixmap.width(), heightProfile);
 
         QImage image(plot.size(),QImage::Format_ARGB32);
@@ -103,13 +173,5 @@ void CScreenshotDialog::slotSave()
         p.drawImage(0,canvas.height(),image);
     }
 
-    pixmap.save(filename);
-
-    cfg.setValue("Paths/lastScreenshotPath", fi.absolutePath());
-    QDialog::accept();
+    return pixmap;
 }
-
-void CScreenshotDialog::slotPrint()
-{
-}
-

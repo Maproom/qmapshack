@@ -22,6 +22,7 @@
 #include "ui_IScreenshotDialog.h"
 
 class CCanvas;
+class CGisItemTrk;
 
 class CScreenshotDialog : public QDialog, private Ui::IScreenshotDialog
 {
@@ -35,7 +36,12 @@ private slots:
     void slotPrint();
 
 private:
+    QPixmap getScreenshot(CGisItemTrk *trk);
+    CGisItemTrk * getTrackForProfile();
+
     CCanvas& canvas;
+
+    static constexpr int heightProfile = 400;
 };
 
 #endif //CSCREENSHOTDIALOG_H

@@ -135,6 +135,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     checkGraph3->setChecked(cfg.value("showGraph3", true).toBool());
     splitter1->restoreState (cfg.value("splitterSizes1").toByteArray());
     splitter2->restoreState (cfg.value("splitterSizes2").toByteArray());
+    splitter3->restoreState (cfg.value("splitterSizes3").toByteArray());
     tabWidget->setCurrentIndex(cfg.value("visibleTab", 0).toInt());
     cfg.endGroup();
 
@@ -208,6 +209,7 @@ CDetailsTrk::~CDetailsTrk()
     cfg.setValue("showGraph3",    checkGraph3->isChecked());
     cfg.setValue("splitterSizes1", splitter1->saveState());
     cfg.setValue("splitterSizes2", splitter2->saveState());
+    cfg.setValue("splitterSizes3", splitter3->saveState());
     cfg.setValue("visibleTab",    tabWidget->currentIndex());
     cfg.endGroup();
 

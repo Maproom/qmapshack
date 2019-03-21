@@ -96,7 +96,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
             }
             filepath += QString::number(attribute) + ".png";
 
-            QLabel* attrLabel = new QLabel(labelNoAttr);//To avoid memory leak
+            QLabel* attrLabel = new QLabel(this);//To avoid memory leak
             attrLabel->setAlignment(Qt::AlignLeft);
             attrLabel->setPixmap(QPixmap(filepath));
             attributeHorLayout->insertWidget(0,attrLabel);

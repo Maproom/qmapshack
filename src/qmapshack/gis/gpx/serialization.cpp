@@ -626,12 +626,11 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     geocache.archived   = attr.namedItem("archived").nodeValue().toLocal8Bit() == "True";
     geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
 
-    for(QDomNode thisAttribute = geocacheAttributes.firstChild(); !thisAttribute.isNull(); thisAttribute=thisAttribute.nextSibling())
+    for(QDomNode XmlAttribute = geocacheAttributes.firstChild(); !XmlAttribute.isNull(); XmlAttribute=XmlAttribute.nextSibling())
     {
-        qint8 id = thisAttribute.attributes().namedItem("id").nodeValue().toUInt();
-        qint8 intvalue = thisAttribute.attributes().namedItem("inc").nodeValue().toUInt();
-        bool boolvalue = (intvalue == 1);
-        geocache.attributes[id]=boolvalue;
+        qint8 id = XmlAttribute.attributes().namedItem("id").nodeValue().toUInt();
+        qint8 intvalue = XmlAttribute.attributes().namedItem("inc").nodeValue().toUInt();
+        geocache.attributes[id]=(intvalue == 1);
         if(id == 42) //42 is the code for 'Needs maintenance' and it only appears, when there attribute is set
         {
             geocache.needsMaintenance = true;
@@ -691,17 +690,17 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
     writeXml(xmlCache, "groundspeak:type", geocache.type);
     writeXml(xmlCache, "groundspeak:container", geocache.container);
 
-    QDomElement attributes = xmlCache.ownerDocument().createElement("groundspeak:attributes");
-    for(auto GCattribute : geocache.attributes.keys())
+    QDomElement XmlAttributes = xmlCache.ownerDocument().createElement("groundspeak:attributes");
+    for(auto attribute : geocache.attributes.keys())
     {
-        QDomElement attribute = xmlCache.ownerDocument().createElement("groundspeak:attribute");
-        attribute.setAttribute("id", GCattribute);
-        qint8 inc = geocache.attributes[GCattribute] ? 1 : 0;
-        attribute.setAttribute("inc", inc);
-        QDomText text = xmlCache.ownerDocument().createTextNode(geocache.attributeMeanings[GCattribute]);
-        attribute.appendChild(text);
-        attributes.appendChild(attribute);
-        xmlCache.appendChild(attributes);
+        QDomElement XmlAttribute = xmlCache.ownerDocument().createElement("groundspeak:attribute");
+        XmlAttribute.setAttribute("id", attribute);
+        qint8 inc = geocache.attributes[attribute] ? 1 : 0;
+        XmlAttribute.setAttribute("inc", inc);
+        QDomText text = xmlCache.ownerDocument().createTextNode(geocache.attributeMeanings[attribute]);
+        XmlAttribute.appendChild(text);
+        XmlAttributes.appendChild(XmlAttribute);
+        xmlCache.appendChild(XmlAttributes);
     }
 
     if(geocache.difficulty == int(geocache.difficulty))

@@ -59,7 +59,6 @@ private:
     QAction * actionDelete;
     QAction * actionEdit;
     QMenu * menu;
-
 };
 
 #endif //CTABLETRKINFO_H

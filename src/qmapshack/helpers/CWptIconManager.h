@@ -19,12 +19,12 @@
 #ifndef CWPTICONMANAGER_H
 #define CWPTICONMANAGER_H
 
+#include <QFont>
 #include <QMap>
 #include <QObject>
 #include <QPoint>
 #include <QString>
 #include <QTemporaryFile>
-#include <QFont>
 
 class QMenu;
 
@@ -74,7 +74,7 @@ private:
 
     QMap<QString, icon_t> wptIcons;
 
-    QMap<qint32, QSharedPointer<QTemporaryFile>> mapNumberedBullets;
+    QMap<qint32, QSharedPointer<QTemporaryFile> > mapNumberedBullets;
 };
 
 #endif //CWPTICONMANAGER_H

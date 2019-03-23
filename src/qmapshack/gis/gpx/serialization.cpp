@@ -690,17 +690,17 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
     writeXml(xmlCache, "groundspeak:type", geocache.type);
     writeXml(xmlCache, "groundspeak:container", geocache.container);
 
-    QDomElement XmlAttributes = xmlCache.ownerDocument().createElement("groundspeak:attributes");
-    for(auto attribute : geocache.attributes.keys())
+    QDomElement xmlAttributes = xmlCache.ownerDocument().createElement("groundspeak:attributes");
+    for(auto& attribute : geocache.attributes.keys())
     {
-        QDomElement XmlAttribute = xmlCache.ownerDocument().createElement("groundspeak:attribute");
-        XmlAttribute.setAttribute("id", attribute);
+        QDomElement xmlAttribute = xmlCache.ownerDocument().createElement("groundspeak:attribute");
+        xmlAttribute.setAttribute("id", attribute);
         qint8 inc = geocache.attributes[attribute] ? 1 : 0;
-        XmlAttribute.setAttribute("inc", inc);
+        xmlAttribute.setAttribute("inc", inc);
         QDomText text = xmlCache.ownerDocument().createTextNode(geocache.attributeMeanings[attribute]);
-        XmlAttribute.appendChild(text);
-        XmlAttributes.appendChild(XmlAttribute);
-        xmlCache.appendChild(XmlAttributes);
+        xmlAttribute.appendChild(text);
+        xmlAttributes.appendChild(xmlAttribute);
+        xmlCache.appendChild(xmlAttributes);
     }
 
     if(geocache.difficulty == int(geocache.difficulty))

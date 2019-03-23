@@ -672,6 +672,10 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/ProfileToWindow.png</normaloff>:/icons/32x32/ProfileToWindow.png</iconset>
+   </property>
    <property name="text">
     <string>Profile as Window</string>
    </property>
@@ -848,6 +852,10 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/Label.png</normaloff>:/icons/32x32/Label.png</iconset>
+   </property>
    <property name="text">
     <string>Min./Max. Labels</string>
    </property>
@@ -892,6 +900,10 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/PointInfoTable.png</normaloff>:/icons/32x32/PointInfoTable.png</iconset>
+   </property>
    <property name="text">
     <string>Track Point Info Table</string>
    </property>
@@ -902,6 +914,10 @@
   <action name="actionShowTrackSummary">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/Summary.png</normaloff>:/icons/32x32/Summary.png</iconset>
    </property>
    <property name="text">
     <string>Track Summary</string>
@@ -914,6 +930,10 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/LabelInfo.png</normaloff>:/icons/32x32/LabelInfo.png</iconset>
+   </property>
    <property name="text">
     <string>Min./Max Summary</string>
    </property>
@@ -924,6 +944,10 @@
   <action name="actionShowTrackProfile">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/Profile.png</normaloff>:/icons/32x32/Profile.png</iconset>
    </property>
    <property name="text">
     <string>Track Profile</string>
@@ -944,6 +968,10 @@
   <action name="actionShowTrackInfoPoints">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/PointInfo.png</normaloff>:/icons/32x32/PointInfo.png</iconset>
    </property>
    <property name="text">
     <string>Track Point Info</string>

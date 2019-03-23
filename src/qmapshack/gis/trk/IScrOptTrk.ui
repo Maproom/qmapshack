@@ -205,14 +205,14 @@ recording. Use the range tool. </string>
      <item>
       <widget class="QToolButton" name="toolAddInfo">
        <property name="toolTip">
-        <string>Add some information to the selected point. This is very similar to a waypoint. However this information will be shown by QMapShack only. Use it to document a special point of interest during your tour.</string>
+        <string>Add a description to the selected track point. The track point will be marked with an auto-numbered bullet. A table with all descriptions will be shown in the track details dialog and for highlighted tracks in the map view.</string>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/I.png</normaloff>:/icons/32x32/I.png</iconset>
+         <normaloff>:/icons/32x32/AddPointInfo.png</normaloff>:/icons/32x32/AddPointInfo.png</iconset>
        </property>
       </widget>
      </item>

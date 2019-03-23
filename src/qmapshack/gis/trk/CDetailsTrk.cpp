@@ -91,10 +91,11 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     labelHelpTrackPointInfo->setText(tr( "<b>Track Point Information</b><br/>"
                                          "To document your tracks you can add a short description to a track "
                                          "point. All points with description will be marked along the track "
-                                         "with auto-numbered bullets.\n"
-                                         "Saving the track as GPX will stored the information in the <desc> "
-                                         "field of the track point. This is in accordance to the GPX specification "
-                                         "but might cause problems on some devices. "
+                                         "with auto-numbered bullets.<br/>"
+                                         "You can add a description by a right click on a track point in the graphs. "
+                                         "Or you do a left click on a track point in the map view.<br/>"
+                                         "With the first track point you add information to this text will be replaced "
+                                         "by a table. Use it to edit and delete track point information.<br/>"
                                          ));
 
     widgetColorLayout->setAlignment(Qt::AlignTop);

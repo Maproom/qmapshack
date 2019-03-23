@@ -376,6 +376,13 @@ CMainWindow::CMainWindow()
                      << actionNightDay
                      << actionMapToolTip
                      << actionTrackInfo
+                     << actionShowMinMaxSummary
+                     << actionShowMinMaxTrackLabels
+                     << actionShowTrackInfoPoints
+                     << actionShowTrackInfoTable
+                     << actionShowTrackSummary
+                     << actionShowTrackProfile
+                     << actionProfileIsWindow
                      << actionSetupDEMPaths
                      << actionAbout
                      << actionHelp

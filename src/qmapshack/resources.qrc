@@ -52,6 +52,7 @@
         <file>../icons/32x32/AddArea.png</file>
         <file>../icons/32x32/AddImage.png</file>
         <file>../icons/32x32/AddMapWorkspace.png</file>
+        <file>../icons/32x32/AddPointInfo.png</file>
         <file>../icons/32x32/AddProject.png</file>
         <file>../icons/32x32/AddRte.png</file>
         <file>../icons/32x32/AddTrk.png</file>
@@ -132,6 +133,8 @@
         <file>../icons/32x32/I.png</file>
         <file>../icons/32x32/Image.png</file>
         <file>../icons/32x32/Info.png</file>
+        <file>../icons/32x32/Label.png</file>
+        <file>../icons/32x32/LabelInfo.png</file>
         <file>../icons/32x32/Left.png</file>
         <file>../icons/32x32/Limit.png</file>
         <file>../icons/32x32/LimitSys.png</file>
@@ -179,11 +182,14 @@
         <file>../icons/32x32/PointAdd.png</file>
         <file>../icons/32x32/PointDel.png</file>
         <file>../icons/32x32/PointHide.png</file>
+        <file>../icons/32x32/PointInfo.png</file>
+        <file>../icons/32x32/PointInfoTable.png</file>
         <file>../icons/32x32/PointMove.png</file>
         <file>../icons/32x32/PointShow.png</file>
         <file>../icons/32x32/Precision.png</file>
         <file>../icons/32x32/Print.png</file>
         <file>../icons/32x32/PrintSave.png</file>
+        <file>../icons/32x32/Profile.png</file>
         <file>../icons/32x32/ProfileToWindow.png</file>
         <file>../icons/32x32/Progress.png</file>
         <file>../icons/32x32/QMapShack.png</file>
@@ -242,6 +248,7 @@
         <file>../icons/32x32/Sort.png</file>
         <file>../icons/32x32/SortName.png</file>
         <file>../icons/32x32/Start.png</file>
+        <file>../icons/32x32/Summary.png</file>
         <file>../icons/32x32/T.png</file>
         <file>../icons/32x32/Table.png</file>
         <file>../icons/32x32/Tainted.png</file>
@@ -309,6 +316,7 @@
         <file>../icons/48x48/AddArea.png</file>
         <file>../icons/48x48/AddImage.png</file>
         <file>../icons/48x48/AddMapWorkspace.png</file>
+        <file>../icons/48x48/AddPointInfo.png</file>
         <file>../icons/48x48/AddProject.png</file>
         <file>../icons/48x48/AddRte.png</file>
         <file>../icons/48x48/AddTrk.png</file>
@@ -390,6 +398,8 @@
         <file>../icons/48x48/I.png</file>
         <file>../icons/48x48/Image.png</file>
         <file>../icons/48x48/Info.png</file>
+        <file>../icons/48x48/Label.png</file>
+        <file>../icons/48x48/LabelInfo.png</file>
         <file>../icons/48x48/Left.png</file>
         <file>../icons/48x48/Limit.png</file>
         <file>../icons/48x48/LimitSys.png</file>
@@ -437,11 +447,14 @@
         <file>../icons/48x48/PointAdd.png</file>
         <file>../icons/48x48/PointDel.png</file>
         <file>../icons/48x48/PointHide.png</file>
+        <file>../icons/48x48/PointInfo.png</file>
+        <file>../icons/48x48/PointInfoTable.png</file>
         <file>../icons/48x48/PointMove.png</file>
         <file>../icons/48x48/PointShow.png</file>
         <file>../icons/48x48/Precision.png</file>
         <file>../icons/48x48/Print.png</file>
         <file>../icons/48x48/PrintSave.png</file>
+        <file>../icons/48x48/Profile.png</file>
         <file>../icons/48x48/ProfileToWindow.png</file>
         <file>../icons/48x48/Progress.png</file>
         <file>../icons/48x48/QMapShack.png</file>
@@ -500,6 +513,7 @@
         <file>../icons/48x48/Sort.png</file>
         <file>../icons/48x48/SortName.png</file>
         <file>../icons/48x48/Start.png</file>
+        <file>../icons/48x48/Summary.png</file>
         <file>../icons/48x48/T.png</file>
         <file>../icons/48x48/Table.png</file>
         <file>../icons/48x48/Tainted.png</file>

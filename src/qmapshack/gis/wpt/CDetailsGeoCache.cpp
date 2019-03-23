@@ -87,7 +87,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     if(!geocache.attributes.isEmpty())
     {
-        for(auto attribute:geocache.attributes.keys())
+        for(auto& attribute:geocache.attributes.keys())
         {
             QString filepath = "://icons/geocaching/attributes/";
             if(!geocache.attributes[attribute])

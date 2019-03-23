@@ -626,10 +626,10 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     geocache.archived   = attr.namedItem("archived").nodeValue().toLocal8Bit() == "True";
     geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
 
-    for(QDomNode XmlAttribute = geocacheAttributes.firstChild(); !XmlAttribute.isNull(); XmlAttribute=XmlAttribute.nextSibling())
+    for(QDomNode xmlAttribute = geocacheAttributes.firstChild(); !xmlAttribute.isNull(); xmlAttribute=xmlAttribute.nextSibling())
     {
-        qint8 id = XmlAttribute.attributes().namedItem("id").nodeValue().toUInt();
-        qint8 intvalue = XmlAttribute.attributes().namedItem("inc").nodeValue().toUInt();
+        qint8 id = xmlAttribute.attributes().namedItem("id").nodeValue().toUInt();
+        qint8 intvalue = xmlAttribute.attributes().namedItem("inc").nodeValue().toUInt();
         geocache.attributes[id]=(intvalue == 1);
         if(id == 42) //42 is the code for 'Needs maintenance' and it only appears, when there attribute is set
         {

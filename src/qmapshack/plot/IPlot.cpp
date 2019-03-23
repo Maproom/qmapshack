@@ -97,7 +97,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     actionPrint         = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
     menu->addSeparator();
     actionAddWpt        = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, SLOT(slotAddWpt()));
-    actionAddTrkPtInfo  = menu->addAction(QIcon("://icons/32x32/I.png"),           tr("Add Trackpoint Info"), this, SLOT(slotAddTrkPtInfo()));
+    actionAddTrkPtInfo  = menu->addAction(QIcon("://icons/32x32/AddPointInfo.png"),           tr("Add Trackpoint Info"), this, SLOT(slotAddTrkPtInfo()));
     actionCutTrk        = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),      tr("Cut..."),    this, SLOT(slotCutTrk()));
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);

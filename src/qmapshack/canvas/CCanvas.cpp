@@ -1020,6 +1020,10 @@ void CCanvas::slotUpdateTrackInfo()
         plotTrackProfile->setVisible(w.isShowTrackProfile());
     }
 
+    if(plotTrackProfile != nullptr)
+    {
+        plotTrackProfile->updateData();
+    }
 
     update();
 }

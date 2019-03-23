@@ -22,10 +22,7 @@
 #include "mouse/CScrOptSelect.h"
 #include "mouse/IMouse.h"
 
-#include <functional>
 #include <QtWidgets>
-
-using std::bind;
 
 CScrOptSelect::CScrOptSelect(IMouse *mouse)
     : IScrOpt(mouse)
@@ -50,19 +47,12 @@ CScrOptSelect::CScrOptSelect(IMouse *mouse)
     modeSelection |= toolItemRte->isChecked() ? IGisItem::eSelectionRte : 0;
     modeSelection |= toolItemOvl->isChecked() ? IGisItem::eSelectionOvl : 0;
 
-    auto slotModeExact      = bind(&CScrOptSelect::slotModeSwitch, this, IGisItem::eSelectionExact, std::placeholders::_1);
-    auto slotModeIntersect  = bind(&CScrOptSelect::slotModeSwitch, this, IGisItem::eSelectionIntersect, std::placeholders::_1);
-    auto slotModeTrk        = bind(&CScrOptSelect::slotModeSwitch, this, IGisItem::eSelectionTrk, std::placeholders::_1);
-    auto slotModeWpt        = bind(&CScrOptSelect::slotModeSwitch, this, IGisItem::eSelectionWpt, std::placeholders::_1);
-    auto slotModeRte        = bind(&CScrOptSelect::slotModeSwitch, this, IGisItem::eSelectionRte, std::placeholders::_1);
-    auto slotModeOvl        = bind(&CScrOptSelect::slotModeSwitch, this, IGisItem::eSelectionOvl, std::placeholders::_1);
-
-    connect(toolModeExact,     &QToolButton::toggled, this, slotModeExact);
-    connect(toolModeIntersect, &QToolButton::toggled, this, slotModeIntersect);
-    connect(toolItemTrk,       &QToolButton::toggled, this, slotModeTrk);
-    connect(toolItemWpt,       &QToolButton::toggled, this, slotModeWpt);
-    connect(toolItemRte,       &QToolButton::toggled, this, slotModeRte);
-    connect(toolItemOvl,       &QToolButton::toggled, this, slotModeOvl);
+    connect(toolModeExact,     &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionExact, checked);});
+    connect(toolModeIntersect, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionIntersect, checked);});
+    connect(toolItemTrk,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionTrk, checked);});
+    connect(toolItemWpt,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionWpt, checked);});
+    connect(toolItemRte,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionRte, checked);});
+    connect(toolItemOvl,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionOvl, checked);});
 }
 
 CScrOptSelect::~CScrOptSelect()

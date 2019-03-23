@@ -16,33 +16,39 @@
 
 **********************************************************************************************/
 
+#ifndef CRTGPSTETHER_H
+#define CRTGPSTETHER_H
 
-#include "realtime/opensky/CRtOpenSkyRecord.h"
+#include "realtime/IRtSource.h"
 
-CRtOpenSkyRecord::CRtOpenSkyRecord(QObject *parent)
-    : IRtRecord(parent)
+#include <QPointer>
+
+class CRtGpsTetherInfo;
+class QGeoPositionInfoSource;
+class QGeoPositionInfo;
+
+class CRtGpsTether : public IRtSource
 {
-}
+    Q_OBJECT
+public:
+    CRtGpsTether(QTreeWidget * parent);
+    virtual ~CRtGpsTether() = default;
 
-bool CRtOpenSkyRecord::writeEntry(const CRtOpenSky::aircraft_t& aircraft)
-{
-    QByteArray data;
-    QDataStream stream(&data, QIODevice::WriteOnly);
-    stream.setVersion(QDataStream::Qt_5_2);
-    stream.setByteOrder(QDataStream::LittleEndian);
+    void registerWithTreeWidget() override;
 
-    // it's always a good idea to start with a version tag for future changes.
-    stream << quint8(1);
+    QString getDescription() const override;
+    void loadSettings(QSettings& cfg) override;
+    void saveSettings(QSettings& cfg) const override;
 
-    CTrackData::trkpt_t trkpt;
-    trkpt.lon   = aircraft.longitude;
-    trkpt.lat   = aircraft.latitude;
-    trkpt.ele   = aircraft.geoAltitude;
-    trkpt.time  = QDateTime::fromTime_t(aircraft.timePosition);
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
 
-    stream << trkpt;
-    track << trkpt;
+    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) override;
 
-    return writeEntry(data);
-}
+    static const QString strIcon;
+
+private:
+    QPointer<CRtGpsTetherInfo> info;
+};
+
+#endif //CRTGPSTETHER_H
 

@@ -773,10 +773,14 @@ void CGisItemRte::setDataFromPolyline(const SGisLine &l)
     QMutexLocker lock(&mutexItems);
     mouseMoveFocus = nullptr;
 
-    readRouteDataFromGisLine(l);
-
+    // [Issue #436] Add histrory entry befor the new GIS line is stored
+    // because this will update the current history entry several times.
+    // Therefore the new entry must be in place else the updated route
+    // is stored in the previous entry as well.
     flags |= eFlagTainted;
     changed(tr("Changed route points."), "://icons/48x48/LineMove.png");
+
+    readRouteDataFromGisLine(l);
 }
 
 void CGisItemRte::getPolylineFromData(SGisLine& l) const

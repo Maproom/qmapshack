@@ -16,33 +16,38 @@
 
 **********************************************************************************************/
 
+#ifndef IRTINFO_H
+#define IRTINFO_H
 
-#include "realtime/opensky/CRtOpenSkyRecord.h"
+#include <realtime/IRtRecord.h>
+#include <realtime/IRtSource.h>
 
-CRtOpenSkyRecord::CRtOpenSkyRecord(QObject *parent)
-    : IRtRecord(parent)
+#include <QPointer>
+#include <QWidget>
+
+class CTrackData;
+
+class IRtInfo : public QWidget
 {
-}
+    Q_OBJECT
+public:
+    IRtInfo(IRtSource* source, QWidget * parent);
+    virtual ~IRtInfo() = default;
 
-bool CRtOpenSkyRecord::writeEntry(const CRtOpenSky::aircraft_t& aircraft)
-{
-    QByteArray data;
-    QDataStream stream(&data, QIODevice::WriteOnly);
-    stream.setVersion(QDataStream::Qt_5_2);
-    stream.setByteOrder(QDataStream::LittleEndian);
+    virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt);
 
-    // it's always a good idea to start with a version tag for future changes.
-    stream << quint8(1);
+protected slots:
+    void slotSetFilename();
+    void slotResetRecord();
+    void slotToTrack();
 
-    CTrackData::trkpt_t trkpt;
-    trkpt.lon   = aircraft.longitude;
-    trkpt.lat   = aircraft.latitude;
-    trkpt.ele   = aircraft.geoAltitude;
-    trkpt.time  = QDateTime::fromTime_t(aircraft.timePosition);
+protected:
+    virtual void startRecord(const QString& filename) = 0;
+    virtual void fillTrackData(CTrackData& data) = 0;
 
-    stream << trkpt;
-    track << trkpt;
+    QPointer<IRtSource> source;
+    QPointer<IRtRecord> record;
+};
 
-    return writeEntry(data);
-}
+#endif //IRTINFO_H
 

@@ -26,8 +26,7 @@
 #include <QtWidgets>
 
 CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky &source, QWidget *parent)
-    : QWidget(parent)
-    , source(source)
+    : IRtInfo(&source, parent)
 {
     setupUi(this);
     connect(&source, &CRtOpenSky::sigChanged, this, &CRtOpenSkyInfo::slotUpdate);
@@ -53,27 +52,22 @@ void CRtOpenSkyInfo::saveSettings(QSettings& cfg) const
     cfg.setValue("filename", toolFile->toolTip());
 }
 
-void CRtOpenSkyInfo::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
-{
-    if(record != nullptr)
-    {
-        record->draw(p, viewport, blockedAreas, rt);
-    }
-}
-
 void CRtOpenSkyInfo::slotUpdate()
 {
-    checkShowNames->setChecked(source.getShowNames());
-    labelTimestamp->setText(source.getTimestamp().toString());
-    labelNumberOfAircrafts->setText(QString::number(source.getNumberOfAircrafts()));
+    CRtOpenSky * _source = dynamic_cast<CRtOpenSky*>(source.data());
+    CRtOpenSkyRecord * _record = dynamic_cast<CRtOpenSkyRecord*>(record.data());
+
+    checkShowNames->setChecked(_source->getShowNames());
+    labelTimestamp->setText(_source->getTimestamp().toString());
+    labelNumberOfAircrafts->setText(QString::number(_source->getNumberOfAircrafts()));
 
     if(!record.isNull() && toolRecord->isChecked())
     {
         bool ok = false;
-        const CRtOpenSky::aircraft_t& aircraft = source.getAircraftByKey(lineKey->text(), ok);
+        const CRtOpenSky::aircraft_t& aircraft = _source->getAircraftByKey(lineKey->text(), ok);
         if(ok)
         {
-            if(!record->writeEntry(aircraft))
+            if(!_record->writeEntry(aircraft))
             {
                 QMessageBox::critical(this, tr("Error..."), record->getError(), QMessageBox::Ok);
                 toolPause->setChecked(true);
@@ -82,64 +76,6 @@ void CRtOpenSkyInfo::slotUpdate()
     }
 }
 
-void CRtOpenSkyInfo::slotSetFilename()
-{
-    SETTINGS;
-    QString path = cfg.value("Paths/realtimeData", QDir::homePath()).toString();
-    QString filename = QFileDialog::getSaveFileName( this, tr("Select record file"), path, "QMapShack Record (*.rec)");
-
-    if(filename.isEmpty())
-    {
-        return;
-    }
-    QFileInfo fi(filename);
-    if(fi.suffix().toLower() != "rec")
-    {
-        filename += ".rec";
-    }
-
-    startRecord(filename);
-
-    path = fi.absolutePath();
-    cfg.setValue("Paths/realtimeData", path);
-}
-
-void CRtOpenSkyInfo::slotResetRecord()
-{
-    if(record == nullptr)
-    {
-        return;
-    }
-
-    int res = QMessageBox::question(this, tr("Reset record..."), tr("Do you really want to reset the current record?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
-    if(res == QMessageBox::Yes)
-    {
-        record->reset();
-        emit source.sigChanged();
-    }
-}
-
-void CRtOpenSkyInfo::slotToTrack()
-{
-    if(record == nullptr)
-    {
-        return;
-    }
-
-    IGisProject * prj = CGisWorkspace::self().selectProject(false);
-    if(prj == nullptr)
-    {
-        return;
-    }
-
-    CTrackData data;
-    CTrackData::trkseg_t seg;
-    seg.pts = record->geTrack();
-    data.segs << seg;
-    data.name = lineKey->text();
-
-    new CGisItemTrk(data, prj);
-}
 
 void CRtOpenSkyInfo::startRecord(const QString& filename)
 {
@@ -157,8 +93,18 @@ void CRtOpenSkyInfo::startRecord(const QString& filename)
 
     if(!record->setFile(filename))
     {
+        delete record;
         QMessageBox::critical(this, tr("Failed..."), record->getError(), QMessageBox::Ok);
+        return;
     }
 
     toolRecord->setEnabled(true);
+}
+
+void CRtOpenSkyInfo::fillTrackData(CTrackData& data)
+{
+    CTrackData::trkseg_t seg;
+    seg.pts = record->getTrack();
+    data.segs << seg;
+    data.name = lineKey->text();
 }

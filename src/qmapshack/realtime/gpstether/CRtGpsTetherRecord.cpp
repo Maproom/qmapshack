@@ -16,15 +16,14 @@
 
 **********************************************************************************************/
 
+#include "CRtGpsTetherRecord.h"
 
-#include "realtime/opensky/CRtOpenSkyRecord.h"
-
-CRtOpenSkyRecord::CRtOpenSkyRecord(QObject *parent)
+CRtGpsTetherRecord::CRtGpsTetherRecord(QObject *parent)
     : IRtRecord(parent)
 {
 }
 
-bool CRtOpenSkyRecord::writeEntry(const CRtOpenSky::aircraft_t& aircraft)
+bool CRtGpsTetherRecord::writeEntry(qreal lon, qreal lat, qreal ele, qreal speed, const QDateTime& timestamp)
 {
     QByteArray data;
     QDataStream stream(&data, QIODevice::WriteOnly);
@@ -35,14 +34,20 @@ bool CRtOpenSkyRecord::writeEntry(const CRtOpenSky::aircraft_t& aircraft)
     stream << quint8(1);
 
     CTrackData::trkpt_t trkpt;
-    trkpt.lon   = aircraft.longitude;
-    trkpt.lat   = aircraft.latitude;
-    trkpt.ele   = aircraft.geoAltitude;
-    trkpt.time  = QDateTime::fromTime_t(aircraft.timePosition);
+    trkpt.lon   = lon;
+    trkpt.lat   = lat;
+    trkpt.ele   = ele;
+    trkpt.time  = timestamp;
+
+    if(speed != NOFLOAT)
+    {
+        trkpt.extensions["speed"] = speed;
+    }
 
     stream << trkpt;
     track << trkpt;
 
     return writeEntry(data);
 }
+
 

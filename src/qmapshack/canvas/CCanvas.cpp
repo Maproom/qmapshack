@@ -954,7 +954,7 @@ void CCanvas::slotUpdateTrackInfo()
 
     bool trackStatisticIsVisible = false;
     CMainWindow& w = CMainWindow::self();
-    if(w.isShowTrackSummary() || w.isShowMinMaxInformation())
+    if(w.isShowTrackSummary() || w.isShowMinMaxSummary())
     {
         trackStatisticIsVisible = true;
 
@@ -964,7 +964,7 @@ void CCanvas::slotUpdateTrackInfo()
             text += trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity);
         }
 
-        if(w.isShowMinMaxInformation())
+        if(w.isShowMinMaxSummary())
         {
             text += trk->getInfoLimits();
         }

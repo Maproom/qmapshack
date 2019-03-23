@@ -1929,7 +1929,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     // draw min/max labels
     const CMainWindow& w = CMainWindow::self();
-    if(w.isMinMaxTrackValues())
+    if(w.isShowMinMaxTrackLabels())
     {
         if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
         {
@@ -2349,7 +2349,7 @@ void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF&, QList<QRectF>& blocke
     }
 
     const CMainWindow& w = CMainWindow::self();
-    if(w.isMinMaxTrackValues())
+    if(w.isShowMinMaxTrackLabels())
     {
         for(const QString& key : extrema.keys())
         {

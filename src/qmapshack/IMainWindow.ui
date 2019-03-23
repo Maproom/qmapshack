@@ -89,11 +89,9 @@
     <addaction name="actionPOIText"/>
     <addaction name="actionMapToolTip"/>
     <addaction name="actionNightDay"/>
-    <addaction name="actionMinMaxTrackValues"/>
     <addaction name="actionTrackInfo"/>
     <addaction name="separator"/>
     <addaction name="actionFlipMouseWheel"/>
-    <addaction name="actionProfileIsWindow"/>
     <addaction name="actionSetupMapFont"/>
     <addaction name="actionSetupMapBackground"/>
     <addaction name="actionSetupUnits"/>
@@ -674,12 +672,11 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/ProfileToWindow.png</normaloff>:/icons/32x32/ProfileToWindow.png</iconset>
-   </property>
    <property name="text">
-    <string>Ext. Profile</string>
+    <string>Profile as Window</string>
+   </property>
+   <property name="toolTip">
+    <string>Show profile in it's own window instead within the map view.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+E</string>
@@ -847,16 +844,12 @@
     <string>F11</string>
    </property>
   </action>
-  <action name="actionMinMaxTrackValues">
+  <action name="actionShowMinMaxTrackLabels">
    <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/TrackMinMax.png</normaloff>:/icons/32x32/TrackMinMax.png</iconset>
-   </property>
    <property name="text">
-    <string>Min./Max. Track Values</string>
+    <string>Min./Max. Labels</string>
    </property>
    <property name="toolTip">
     <string>Show the minimum and maximum values of the track properties along the track in the map view.</string>
@@ -900,7 +893,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Track Info Table</string>
+    <string>Track Point Info Table</string>
    </property>
    <property name="toolTip">
     <string>Show the table of all track points with information attached.</string>
@@ -917,12 +910,12 @@
     <string>Show text box with track summary information.</string>
    </property>
   </action>
-  <action name="actionShowMinMaxInformation">
+  <action name="actionShowMinMaxSummary">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Min./Max Information</string>
+    <string>Min./Max Summary</string>
    </property>
    <property name="toolTip">
     <string>Show minimum and maximum of track data.</string>
@@ -953,7 +946,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Show Track Info Points</string>
+    <string>Track Point Info</string>
+   </property>
+   <property name="toolTip">
+    <string>Track Point Info</string>
    </property>
   </action>
  </widget>

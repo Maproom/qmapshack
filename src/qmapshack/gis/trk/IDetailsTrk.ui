@@ -517,6 +517,9 @@
                <property name="expandsOnDoubleClick">
                 <bool>false</bool>
                </property>
+               <attribute name="headerMinimumSectionSize">
+                <number>21</number>
+               </attribute>
                <column>
                 <property name="text">
                  <string notr="true">1</string>

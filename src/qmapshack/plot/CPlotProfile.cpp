@@ -121,7 +121,7 @@ void CPlotProfile::updateData()
         }
     }
 
-    if((mode != eModeIcon))
+    if((mode != eModeIcon) && CMainWindow::self().isShowTrackInfoPoints())
     {
         qint32 cnt = 1;
         for(const CTrackData::trkpt_t& trkpt : trk->getTrackData())

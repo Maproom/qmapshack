@@ -91,9 +91,9 @@ public:
     bool isNight()         const;
     bool isPOIText()       const;
     bool isMapToolTip()    const;
-    bool isMinMaxTrackValues() const;
+    bool isShowMinMaxTrackLabels() const;
 
-    bool isShowMinMaxInformation() const;
+    bool isShowMinMaxSummary() const;
     bool isShowTrackSummary() const;
     bool isShowTrackInfoTable() const;
     bool isShowTrackInfoPoints() const;

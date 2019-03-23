@@ -177,13 +177,14 @@ CMainWindow::CMainWindow()
     connect(actionPOIText,               &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionMapToolTip,            &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionMinMaxTrackValues,     &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionShowMinMaxInformation, &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionShowMinMaxTrackLabels, &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionShowMinMaxSummary,     &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionShowTrackInfoTable,    &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionShowTrackInfoPoints,   &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionShowTrackSummary,      &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionShowTrackProfile,      &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionShowTrackInfoPoints,   &QAction::toggled, actionShowTrackInfoTable, &QAction::setEnabled);
+    connect(actionShowTrackProfile,      &QAction::toggled, actionProfileIsWindow,    &QAction::setEnabled);
     connect(actionProfileIsWindow,       &QAction::toggled,              this,      &CMainWindow::slotSetProfileMode);
     connect(actionSetupMapFont,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapFont);
     connect(actionSetupMapBackground,    &QAction::triggered,            this,      &CMainWindow::slotSetupMapBackground);
@@ -255,8 +256,8 @@ CMainWindow::CMainWindow()
     actionPOIText->setChecked(cfg.value("POIText", true).toBool());
     actionMapToolTip->setChecked(cfg.value("MapToolTip", true).toBool());
     actionNightDay->setChecked(cfg.value("isNight", false).toBool());
-    actionMinMaxTrackValues->setChecked(cfg.value("MinMaxTrackValues", false).toBool());
-    actionShowMinMaxInformation->setChecked(cfg.value("ShowMinMaxInformation", true).toBool());
+    actionShowMinMaxTrackLabels->setChecked(cfg.value("MinMaxTrackValues", false).toBool());
+    actionShowMinMaxSummary->setChecked(cfg.value("ShowMinMaxInformation", true).toBool());
     actionShowTrackInfoTable->setChecked(cfg.value("ShowTrackInfoTable", true).toBool());
     actionShowTrackInfoPoints->setChecked(cfg.value("ShowTrackInfoPoints", true).toBool());
     actionShowTrackSummary->setChecked(cfg.value("ShowTrackSummary", true).toBool());
@@ -348,11 +349,13 @@ CMainWindow::CMainWindow()
     menuWindow->insertSeparator(actionSetupToolbar);
 
     QMenu * menu = new QMenu(this);
-    menu->addAction(actionShowMinMaxInformation);
+    menu->addAction(actionShowMinMaxTrackLabels);
+    menu->addAction(actionShowMinMaxSummary);
     menu->addAction(actionShowTrackSummary);
     menu->addAction(actionShowTrackInfoPoints);
     menu->addAction(actionShowTrackInfoTable);
     menu->addAction(actionShowTrackProfile);
+    menu->addAction(actionProfileIsWindow);
     actionTrackInfo->setMenu(menu);
 
 
@@ -372,7 +375,6 @@ CMainWindow::CMainWindow()
                      << actionPOIText
                      << actionNightDay
                      << actionMapToolTip
-                     << actionMinMaxTrackValues
                      << actionTrackInfo
                      << actionSetupDEMPaths
                      << actionAbout
@@ -390,7 +392,6 @@ CMainWindow::CMainWindow()
                      << actionVrtBuilder
                      << actionStoreView
                      << actionLoadView
-                     << actionProfileIsWindow
                      << actionClose
                      << actionCloneMapView
                      << actionCreateRoutinoDatabase
@@ -428,9 +429,7 @@ CMainWindow::CMainWindow()
                    << actionPOIText
                    << actionNightDay
                    << actionMapToolTip
-                   << actionMinMaxTrackValues
                    << actionTrackInfo
-                   << actionProfileIsWindow
                    << separator1
                    << actionSetupToolbar
                    << actionToggleMaps
@@ -535,8 +534,8 @@ CMainWindow::~CMainWindow()
     cfg.setValue("POIText", actionPOIText->isChecked());
     cfg.setValue("MapToolTip", actionMapToolTip->isChecked());
     cfg.setValue("isNight", actionNightDay->isChecked());
-    cfg.setValue("MinMaxTrackValues", actionMinMaxTrackValues->isChecked());
-    cfg.setValue("ShowMinMaxInformation", actionShowMinMaxInformation->isChecked());
+    cfg.setValue("MinMaxTrackValues", actionShowMinMaxTrackLabels->isChecked());
+    cfg.setValue("ShowMinMaxInformation", actionShowMinMaxSummary->isChecked());
     cfg.setValue("ShowTrackInfoTable", actionShowTrackInfoTable->isChecked());
     cfg.setValue("ShowTrackInfoPoints", actionShowTrackInfoPoints->isChecked());
     cfg.setValue("ShowTrackSummary", actionShowTrackSummary->isChecked());
@@ -616,7 +615,7 @@ CCanvas *CMainWindow::addView(const QString& name)
     CCanvas * view = new CCanvas(tabWidget, name);
     tabWidget->addTab(view, view->objectName());
     connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
-    connect(actionShowMinMaxInformation, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
+    connect(actionShowMinMaxSummary, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
     connect(actionShowTrackInfoTable, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
     connect(actionShowTrackInfoPoints, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
     connect(actionShowTrackSummary, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
@@ -689,14 +688,14 @@ bool CMainWindow::isMapToolTip() const
     return actionMapToolTip->isChecked();
 }
 
-bool CMainWindow::isMinMaxTrackValues() const
+bool CMainWindow::isShowMinMaxTrackLabels() const
 {
-    return actionMinMaxTrackValues->isChecked();
+    return actionShowMinMaxTrackLabels->isChecked();
 }
 
-bool CMainWindow::isShowMinMaxInformation() const
+bool CMainWindow::isShowMinMaxSummary() const
 {
-    return actionShowMinMaxInformation->isChecked();
+    return actionShowMinMaxSummary->isChecked();
 }
 
 bool CMainWindow::isShowTrackSummary() const

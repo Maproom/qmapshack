@@ -35,9 +35,8 @@ CScreenshotDialog::CScreenshotDialog(CCanvas &canvas, QWidget *parent)
 
     labelHelp->setText(tr("<b>Screenshot</b><br/>"
                           "You can save or print a screenshot of your current map view. If the "
-                          "profile graph is configured as extended profile (CTRL+E, profile is in "
-                          "it's own window) it is appended to the screenshot. Check the pre-view "
-                          "below. "
+                          "track profile is shown in it's own window it is appended to the "
+                          "screenshot. Check the pre-view below. "
                           ));
 
     const QPixmap& pixmap = getScreenshot(getTrackForProfile());

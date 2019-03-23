@@ -66,7 +66,6 @@
 #include <QtSql>
 #include <QtWidgets>
 
-using std::bind;
 
 #undef  DB_VERSION
 #define DB_VERSION 4
@@ -367,8 +366,7 @@ QAction * CGisListWks::addSortAction(QObject * parent, QActionGroup * actionGrou
     QAction * action = new QAction(QIcon(icon), text, parent);
     action->setCheckable(true);
 
-    auto func = std::bind(&CGisListWks::slotSetSortMode, this, mode, std::placeholders::_1);
-    connect(action, &QAction::toggled, this, func);
+    connect(action, &QAction::toggled, this, [this, mode](bool checked){slotSetSortMode(mode, checked);});
 
     actionGroup->addAction(action);
 

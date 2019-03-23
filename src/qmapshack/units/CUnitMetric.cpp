@@ -29,7 +29,7 @@ void CUnitMetric::meter2elevation(qreal meter, QString& val, QString& unit) cons
     if(meter == NOFLOAT || meter == NOINT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
     }
     else
     {
@@ -44,7 +44,7 @@ void CUnitMetric::meter2distance(qreal meter, QString& val, QString& unit) const
     if(meter == NOFLOAT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
     }
     else if(meter < 10)
     {
@@ -79,7 +79,7 @@ void CUnitMetric::meter2speed(qreal meter, QString& val, QString& unit) const /*
     if(meter == NOFLOAT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
     }
     else if (meter < 0.27)
     {
@@ -103,7 +103,12 @@ void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit) const /* 
     if(meter == NOFLOAT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
+    }
+    else if(meter < 100000)
+    {
+        val.sprintf("%1.0f", meter);
+        unit = "m²";
     }
     else
     {

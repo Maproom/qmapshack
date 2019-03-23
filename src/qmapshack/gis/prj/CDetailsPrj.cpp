@@ -323,7 +323,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         cursor1.setCharFormat(fmtCharStandard);
         cursor1.setBlockFormat(fmtBlockStandard);
 
-        QTextTable * table = cursor1.insertTable(1, 2, fmtTableHidden);
+        QTextTable * table = cursor1.insertTable(2, 2, fmtTableHidden);
 
         QTextCursor cursor2 = table->cellAt(0,0).firstCursorPosition();
         drawInfo(cursor2, isReadOnly);
@@ -332,6 +332,12 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         {
             QTextCursor cursor3 = table->cellAt(0,1).firstCursorPosition();
             drawTrackSummary(cursor3, trks, isReadOnly);
+        }
+
+        if(!wpts.isEmpty())
+        {
+            QTextCursor cursor3 = table->cellAt(1,1).firstCursorPosition();
+            drawWaypointSummary(cursor3, wpts, isReadOnly);
         }
     }
 
@@ -395,6 +401,60 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*
     str += tr("<b>Summary over all tracks in project</b><br/>");
     CActivityTrk::printSummary(summaries, acts, str);
 
+
+    cursor1.insertHtml(str);
+}
+
+void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemWpt*> wpts, bool /*isReadOnly*/)
+{
+    QMap<QString, quint32> summary;
+    QMap<QString, quint32> GCsummary;
+    for(const CGisItemWpt* wpt : wpts)
+    {
+        auto iconName = wpt->getIconName();
+        if(iconName.isEmpty())
+        {
+            summary["Waypoint"]++;
+        }
+        else
+        {
+            summary[iconName]++;
+        }
+
+        const CGisItemWpt::geocache_t& gc =wpt->getGeoCache();
+        if(gc.hasData)
+        {
+            GCsummary[gc.type]++;
+        }
+    }
+
+    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameTrackSummary);
+
+    QTextCursor cursor1(diaryFrame);
+
+    cursor1.setCharFormat(fmtCharStandard);
+    cursor1.setBlockFormat(fmtBlockStandard);
+
+    QString str;
+    str += tr("<b>Summary over all waypoints in project</b><br/>");
+
+    if(summary["Geocache"] != 0)
+    {
+        str+= QString::number(summary["Geocache"]) + tr(" x Geocache, consisting of: <br/>");
+        str+="<ul>";
+        for(auto key:GCsummary.keys())
+        {
+            str+= "<li>" + QString::number(GCsummary[key]) + " x " + key+ "</li>";
+        }
+        str+="</ul>";
+    }
+    for(auto key: summary.keys())
+    {
+        if(key!="Geocache")
+        {
+            str+= QString::number(summary[key]) + " x " + key+ "<br/>";
+        }
+    }
 
     cursor1.insertHtml(str);
 }

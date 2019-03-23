@@ -30,7 +30,7 @@ void CUnitNautic::meter2elevation(qreal meter, QString& val, QString& unit) cons
     if(meter == NOFLOAT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
     }
     else
     {
@@ -45,7 +45,7 @@ void CUnitNautic::meter2distance(qreal meter, QString& val, QString& unit) const
     if(meter == NOFLOAT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
     }
     else
     {
@@ -60,7 +60,7 @@ void CUnitNautic::meter2speed(qreal meter, QString& val, QString& unit) const /*
     if(meter == NOFLOAT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
     }
     else
     {
@@ -74,7 +74,7 @@ void CUnitNautic::meter2area(qreal meter, QString& val, QString& unit) const /* 
     if(meter == NOFLOAT)
     {
         val  = "-";
-        unit = "";
+        unit.clear();
     }
     else
     {

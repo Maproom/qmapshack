@@ -1280,3 +1280,20 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
     }
     return true;
 }
+
+void CCanvas::followPosition(const QPointF& pos)
+{
+    QPointF pos_ = pos * DEG_TO_RAD;
+    convertRad2Px(pos_);
+
+    const QRect& r1 = rect();
+    QRectF r2(0,0,r1.width() * 0.3, r1.height() * 0.3);
+    r2.moveCenter(r1.center());
+
+    if(r2.contains(pos_))
+    {
+        return;
+    }
+
+    moveMap(r1.center() - pos_);
+}

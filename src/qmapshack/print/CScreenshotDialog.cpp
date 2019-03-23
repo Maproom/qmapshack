@@ -115,7 +115,7 @@ void CScreenshotDialog::slotPrint()
         return;
     }
 
-    const QRectF& r = printer.pageRect(QPrinter::DevicePixel);    
+    const QRectF& r = printer.pageRect(QPrinter::DevicePixel);
     const QPixmap& canvasScaled = pixmap.scaled(r.size().toSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     QPainter p(&printer);

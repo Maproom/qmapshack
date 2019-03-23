@@ -677,7 +677,7 @@
      <normaloff>:/icons/32x32/ProfileToWindow.png</normaloff>:/icons/32x32/ProfileToWindow.png</iconset>
    </property>
    <property name="text">
-    <string>Profile as Window</string>
+    <string>Track Profile as Window</string>
    </property>
    <property name="toolTip">
     <string>Show profile in it's own window instead within the map view.</string>

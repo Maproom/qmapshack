@@ -133,7 +133,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionDelete        = addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
     // track related actions
-    actionFocusTrk      = addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"), this, SLOT(slotFocusTrk(bool)));
+    actionFocusTrk      = addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Information"), this, SLOT(slotFocusTrk(bool)));
     actionFocusTrk->setCheckable(true);
     actionRangeTrk      = addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Select Range"), this, SLOT(slotRangeTrk()));
     actionEditTrk       = addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Track Points"), this, SLOT(slotEditTrk()));

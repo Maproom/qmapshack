@@ -512,11 +512,14 @@
                 <bool>false</bool>
                </property>
                <property name="headerHidden">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="expandsOnDoubleClick">
                 <bool>false</bool>
                </property>
+               <attribute name="headerVisible">
+                <bool>true</bool>
+               </attribute>
                <attribute name="headerMinimumSectionSize">
                 <number>21</number>
                </attribute>
@@ -1741,10 +1744,10 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph2"/>
+  <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupLineWidth"/>
  </buttongroups>
 </ui>

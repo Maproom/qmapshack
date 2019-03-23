@@ -330,7 +330,7 @@ public:
     iterator<CTrackData, trkpt_t> end()   { return iterator<CTrackData, trkpt_t>(*this, segs.count(), 0); }
 
     iterator<const CTrackData, const trkpt_t> begin() const { return iterator<const CTrackData, const trkpt_t>(*this,            0, 0); }
-    iterator<const CTrackData, const trkpt_t> end()   const { return iterator<const CTrackData, const trkpt_t>(*this, segs.count(), 0); }    
+    iterator<const CTrackData, const trkpt_t> end()   const { return iterator<const CTrackData, const trkpt_t>(*this, segs.count(), 0); }
 };
 
 QDataStream& operator<<(QDataStream& stream, const CTrackData::trkpt_t& pt);

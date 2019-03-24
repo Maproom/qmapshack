@@ -71,105 +71,88 @@ struct cluster_t
         clusters.append({number,r});
     }
 
+    static const QPointF point1[];
+    static const QPointF point2[];
+    static const QPointF point3[];
+    static const QPointF point4[];
+    static const QPointF point5[];
+    static const QPointF point6[];
+    static const QPointF point7[];
+    static const QPointF point8[];
+    static const QPointF point9[];
+
+    static constexpr int MAX_CONST_SIZE = 9;
+    static const QPointF * constellations[MAX_CONST_SIZE];
+
     static void draw(const QList<cluster_t>&clusters, QPainter& p, int size)
     {
         for(const cluster_t& cluster : clusters)
         {
-            switch(cluster.size())
+            const int N = cluster.size();
+            if(N >= MAX_CONST_SIZE)
             {
-            case 1:
-            {
-                CDraw::number(cluster.elements[0], size, p, cluster.box.center(), Qt::black);
-                break;
+                continue;
             }
 
-            case 2:
+            const QPointF* constellation = constellations[N];
+            for(int n = 0; n < N; n++)
             {
-                CDraw::number(cluster.elements[0], size, p, cluster.box.center() + QPoint(-size/2,0), Qt::black);
-                CDraw::number(cluster.elements[1], size, p, cluster.box.center() + QPoint( size/2,0), Qt::black);
-                break;
-            }
-
-            case 3:
-            {
-                CDraw::number(cluster.elements[0], size, p, cluster.box.center() + QPoint(-size,0), Qt::black);
-                CDraw::number(cluster.elements[1], size, p, cluster.box.center(), Qt::black);
-                CDraw::number(cluster.elements[2], size, p, cluster.box.center() + QPoint( size,0), Qt::black);
-                break;
-            }
-
-            case 4:
-            {
-                CDraw::number(cluster.elements[0], size, p, cluster.box.center() + QPoint(-size,-size/2), Qt::black);
-                CDraw::number(cluster.elements[1], size, p, cluster.box.center() + QPoint(    0,-size/2), Qt::black);
-                CDraw::number(cluster.elements[2], size, p, cluster.box.center() + QPoint( size,-size/2), Qt::black);
-                CDraw::number(cluster.elements[3], size, p, cluster.box.center() + QPoint(-size, size/2), Qt::black);
-                break;
-            }
-
-            case 5:
-            {
-                CDraw::number(cluster.elements[0], size, p, cluster.box.center() + QPoint(-size,-size/2), Qt::black);
-                CDraw::number(cluster.elements[1], size, p, cluster.box.center() + QPoint(    0,-size/2), Qt::black);
-                CDraw::number(cluster.elements[2], size, p, cluster.box.center() + QPoint( size,-size/2), Qt::black);
-                CDraw::number(cluster.elements[3], size, p, cluster.box.center() + QPoint(-size, size/2), Qt::black);
-                CDraw::number(cluster.elements[4], size, p, cluster.box.center() + QPoint(    0, size/2), Qt::black);
-                break;
-            }
-
-            case 6:
-            {
-                CDraw::number(cluster.elements[0], size, p, cluster.box.center() + QPoint(-size,-size/2), Qt::black);
-                CDraw::number(cluster.elements[1], size, p, cluster.box.center() + QPoint(    0,-size/2), Qt::black);
-                CDraw::number(cluster.elements[2], size, p, cluster.box.center() + QPoint( size,-size/2), Qt::black);
-                CDraw::number(cluster.elements[3], size, p, cluster.box.center() + QPoint(-size, size/2), Qt::black);
-                CDraw::number(cluster.elements[4], size, p, cluster.box.center() + QPoint(    0, size/2), Qt::black);
-                CDraw::number(cluster.elements[5], size, p, cluster.box.center() + QPoint( size, size/2), Qt::black);
-                break;
-            }
-
-            case 7:
-            {
-                CDraw::number(cluster.elements[0], size, p, cluster.box.center() + QPoint(-size,-size), Qt::black);
-                CDraw::number(cluster.elements[1], size, p, cluster.box.center() + QPoint(    0,-size), Qt::black);
-                CDraw::number(cluster.elements[2], size, p, cluster.box.center() + QPoint( size,-size), Qt::black);
-                CDraw::number(cluster.elements[3], size, p, cluster.box.center() + QPoint(-size,    0), Qt::black);
-                CDraw::number(cluster.elements[4], size, p, cluster.box.center() + QPoint(    0,    0), Qt::black);
-                CDraw::number(cluster.elements[5], size, p, cluster.box.center() + QPoint( size,    0), Qt::black);
-                CDraw::number(cluster.elements[6], size, p, cluster.box.center() + QPoint(-size, size), Qt::black);
-                break;
-            }
-
-            case 8:
-            {
-                CDraw::number(cluster.elements[0], size, p, cluster.box.center() + QPoint(-size,-size), Qt::black);
-                CDraw::number(cluster.elements[1], size, p, cluster.box.center() + QPoint(    0,-size), Qt::black);
-                CDraw::number(cluster.elements[2], size, p, cluster.box.center() + QPoint( size,-size), Qt::black);
-                CDraw::number(cluster.elements[3], size, p, cluster.box.center() + QPoint(-size,    0), Qt::black);
-                CDraw::number(cluster.elements[4], size, p, cluster.box.center() + QPoint(    0,    0), Qt::black);
-                CDraw::number(cluster.elements[5], size, p, cluster.box.center() + QPoint( size,    0), Qt::black);
-                CDraw::number(cluster.elements[6], size, p, cluster.box.center() + QPoint(-size, size), Qt::black);
-                CDraw::number(cluster.elements[7], size, p, cluster.box.center() + QPoint(    0, size), Qt::black);
-                break;
-            }
-
-            case 9:
-            {
-                CDraw::number(cluster.elements[0], size, p, cluster.box.center() + QPoint(-size,-size), Qt::black);
-                CDraw::number(cluster.elements[1], size, p, cluster.box.center() + QPoint(    0,-size), Qt::black);
-                CDraw::number(cluster.elements[2], size, p, cluster.box.center() + QPoint( size,-size), Qt::black);
-                CDraw::number(cluster.elements[3], size, p, cluster.box.center() + QPoint(-size,    0), Qt::black);
-                CDraw::number(cluster.elements[4], size, p, cluster.box.center() + QPoint(    0,    0), Qt::black);
-                CDraw::number(cluster.elements[5], size, p, cluster.box.center() + QPoint( size,    0), Qt::black);
-                CDraw::number(cluster.elements[6], size, p, cluster.box.center() + QPoint(-size, size), Qt::black);
-                CDraw::number(cluster.elements[7], size, p, cluster.box.center() + QPoint(    0, size), Qt::black);
-                CDraw::number(cluster.elements[8], size, p, cluster.box.center() + QPoint( size, size), Qt::black);
-                break;
-            }
+                CDraw::number(cluster.elements[n], size, p, cluster.box.center() + constellation[n] * size, Qt::black);
             }
         }
     }
 };
+
+const QPointF cluster_t::point1[] = {
+    {0,0}
+};
+
+const QPointF cluster_t::point2[] = {
+    {-0.5,0}, {0.5,0}
+};
+
+const QPointF cluster_t::point3[] = {
+    {  -1,0}, {  0,0}, {1,0}
+};
+
+const QPointF cluster_t::point4[] = {
+    {-1,-0.5}, {0,-0.5}, {1,-0.5},
+    {-1, 0.5}
+};
+
+const QPointF cluster_t::point5[] = {
+    {-1,-0.5}, {0,-0.5}, {1,-0.5},
+    {-1, 0.5}, {0, 0.5}
+};
+
+const QPointF cluster_t::point6[] = {
+    {-1,-0.5}, {0,-0.5}, {1,-0.5},
+    {-1, 0.5}, {0, 0.5}, {1, 0.5}
+};
+
+const QPointF cluster_t::point7[] = {
+    {-1,-1}, {0,-1}, {1,-1},
+    {-1, 0}, {0, 0}, {1, 0},
+    {-1, 1}
+};
+
+const QPointF cluster_t::point8[] = {
+    {-1,-1}, {0,-1}, {1,-1},
+    {-1, 0}, {0, 0}, {1, 0},
+    {-1, 1}, {0, 1}
+};
+
+const QPointF cluster_t::point9[] = {
+    {-1,-1}, {0,-1}, {1,-1},
+    {-1, 0}, {0, 0}, {1, 0},
+    {-1, 1}, {0, 1}, {1, 1}
+};
+
+const QPointF * cluster_t::constellations[MAX_CONST_SIZE] =
+{
+    point1, point2, point3, point4, point5, point6, point7, point8, point9
+};
+
 
 struct trkwpt_t
 {

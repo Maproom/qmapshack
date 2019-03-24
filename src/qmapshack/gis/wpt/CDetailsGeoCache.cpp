@@ -85,6 +85,26 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     toolIcon->setIcon(wpt.getIcon());
     labelStatus->hide();
 
+    if(!geocache.attributes.isEmpty())
+    {
+        for(auto& attribute:geocache.attributes.keys())
+        {
+            QString filepath = "://icons/geocaching/attributes/";
+            if(!geocache.attributes[attribute])
+            {
+                filepath.append('_');
+            }
+            filepath += QString::number(attribute) + ".png";
+
+            QLabel* attrLabel = new QLabel(this);//To avoid memory leak
+            attrLabel->setAlignment(Qt::AlignLeft);
+            attrLabel->setPixmap(QPixmap(filepath));
+            attributeHorLayout->insertWidget(0,attrLabel);
+        }
+
+        labelNoAttr->setHidden(true);
+    }
+
     QString desc;
     if(geocache.shortDescIsHtml)
     {

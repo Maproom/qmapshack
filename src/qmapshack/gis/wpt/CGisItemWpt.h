@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -70,6 +71,8 @@ public:
         QString ownerId;
         QString type;
         QString container;
+        //See ZGeocacheAttributes.txt for meanings.
+        QMap<qint8,bool> attributes;
         bool shortDescIsHtml = false;
         QString shortDesc;
         bool longDescIsHtml = false;
@@ -79,6 +82,8 @@ public:
         QString state;
         QString locale;
         QList<geocachelog_t> logs;
+
+        const static QString attributeMeanings[68];
     };
 
     struct image_t

@@ -680,7 +680,7 @@
     <string>Track Profile as Window</string>
    </property>
    <property name="toolTip">
-    <string>Show profile in it's own window instead within the map view.</string>
+    <string>Show the track profile in it's own window instead within the map view.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+E</string>
@@ -908,7 +908,7 @@
     <string>Track Point Info Table</string>
    </property>
    <property name="toolTip">
-    <string>Show the table of all track points with information attached.</string>
+    <string>Show a legend for all track point info bullets along the track.</string>
    </property>
   </action>
   <action name="actionShowTrackSummary">
@@ -923,7 +923,7 @@
     <string>Track Summary</string>
    </property>
    <property name="toolTip">
-    <string>Show text box with track summary information.</string>
+    <string>Show the track summary.</string>
    </property>
   </action>
   <action name="actionShowMinMaxSummary">
@@ -938,7 +938,7 @@
     <string>Min./Max Summary</string>
    </property>
    <property name="toolTip">
-    <string>Show minimum and maximum of track data.</string>
+    <string>Show the minimum and the maximum values of the track properties in a table.</string>
    </property>
   </action>
   <action name="actionShowTrackProfile">
@@ -951,6 +951,9 @@
    </property>
    <property name="text">
     <string>Track Profile</string>
+   </property>
+   <property name="toolTip">
+    <string>Show the track profile.</string>
    </property>
   </action>
   <action name="actionTakeScreenshot">
@@ -977,7 +980,7 @@
     <string>Track Point Info</string>
    </property>
    <property name="toolTip">
-    <string>Track Point Info</string>
+    <string>Mark track points with additional information by auto-numbered bullets.</string>
    </property>
   </action>
  </widget>

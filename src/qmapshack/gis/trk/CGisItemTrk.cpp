@@ -1537,8 +1537,8 @@ bool CGisItemTrk::addTrkPtDesc()
         return false;
     }
 
-    const QString& desc = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(),tr("Track point info..."),
-                                                tr("Enter some text info to be attached to this track point:"));
+    const QString& desc = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(),tr("Track Point Info..."),
+                                                tr("Enter some text to be attached to this track point:"));
 
     if(desc.isEmpty())
     {

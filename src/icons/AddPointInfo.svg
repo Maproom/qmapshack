@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11"
-     inkscape:cx="22.805076"
-     inkscape:cy="30.721557"
+     inkscape:cx="22.123258"
+     inkscape:cy="33.44883"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
@@ -64,7 +64,7 @@
      inkscape:groupmode="layer">
     <g
        id="g845"
-       transform="translate(-4,-4)">
+       transform="matrix(1.1886511,0,0,1.1841526,-5.867502,-5.8396657)">
       <path
          d="M 47.903019,12.710272 A 25,25 0 0 1 51.324217,47.861223 25,25 0 0 1 16.180754,51.358508 25,25 0 0 1 12.607399,16.222698 25,25 0 0 1 47.735391,12.57329"
          sodipodi:open="true"
@@ -89,13 +89,5 @@
            id="tspan908"
            sodipodi:role="line">1</tspan></text>
     </g>
-    <path
-       style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2.44399405;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 27.631027,50.403566 H 40 V 62.9787 H 50.593079 V 50.403566 H 62.962041 V 39.575184 H 50.593079 L 50.593069,27 H 40 l -9e-6,12.575184 H 27.631027 Z"
-       id="rect3117-7"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/16x16/add.png"
-       inkscape:export-xdpi="75.913841"
-       inkscape:export-ydpi="75.913841" />
   </g>
 </svg>

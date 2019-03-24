@@ -91,15 +91,15 @@ void CWptIconManager::init()
     wptIcons["Start"]               = icon_t("://icons/waypoints/32x32/Start.png", 16, 16);
     wptIcons["End"]                 = icon_t("://icons/waypoints/32x32/End.png", 16, 16);
 
-    setWptIconByName("Traditional Cache", "://icons/cache/32x32/traditional.png");
-    setWptIconByName("Multi-cache", "://icons/cache/32x32/multi.png");
-    setWptIconByName("Unknown Cache", "://icons/cache/32x32/unknown.png");
-    setWptIconByName("Wherigo Cache", "://icons/cache/32x32/wherigo.png");
-    setWptIconByName("Event Cache", "://icons/cache/32x32/event.png");
-    setWptIconByName("Earthcache", "://icons/cache/32x32/earth.png");
-    setWptIconByName("Letterbox Hybrid", "://icons/cache/32x32/letterbox.png");
-    setWptIconByName("Virtual Cache", "://icons/cache/32x32/virtual.png");
-    setWptIconByName("Webcam Cache", "://icons/cache/32x32/webcam.png");
+    setWptIconByName("Traditional Cache", "://icons/geocaching/icons/traditional.png");
+    setWptIconByName("Multi-cache", "://icons/geocaching/icons/multi.png");
+    setWptIconByName("Unknown Cache", "://icons/geocaching/icons/unknown.png");
+    setWptIconByName("Wherigo Cache", "://icons/geocaching/icons/wherigo.png");
+    setWptIconByName("Event Cache", "://icons/geocaching/icons/event.png");
+    setWptIconByName("Earthcache", "://icons/geocaching/icons/earth.png");
+    setWptIconByName("Letterbox Hybrid", "://icons/geocaching/icons/letterbox.png");
+    setWptIconByName("Virtual Cache", "://icons/geocaching/icons/virtual.png");
+    setWptIconByName("Webcam Cache", "://icons/geocaching/icons/webcam.png");
 
     SETTINGS;
     QDir dirIcon(cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString());

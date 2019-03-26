@@ -174,6 +174,7 @@ public:
     void followPosition(const QPointF& pos);
 
     static qreal gisLayerOpacity;
+
 signals:
     void sigMousePosition(const QPointF& pos, qreal ele, qreal slope);
     void sigZoom();
@@ -181,7 +182,7 @@ signals:
 
 public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
-    void slotUpdateTrackInfo();
+    void slotUpdateTrackInfo(bool updateVisuals);
     void slotCheckTrackOnFocus();
 
 protected:

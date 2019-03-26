@@ -2797,7 +2797,7 @@ void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
     const QList<CCanvas*>& allCanvas = main.getCanvas();
     for(CCanvas * canvas : allCanvas)
     {
-        canvas->slotUpdateTrackInfo();
+        canvas->slotUpdateTrackInfo(false);
     }
 }
 

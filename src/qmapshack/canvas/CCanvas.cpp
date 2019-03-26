@@ -559,7 +559,7 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 
     textStatusMessages->move(X_OFF_STATUS, Y_OFF_STATUS);
 
-    slotUpdateTrackInfo();
+    slotUpdateTrackInfo(false);
     setSizeTrackProfile();
 
     QSize s = e->size() - QSize(50,50);
@@ -935,11 +935,11 @@ void CCanvas::slotCheckTrackOnFocus()
         // finally store the new key as track on focus
         keyTrackOnFocus = key;
 
-        slotUpdateTrackInfo();
+        slotUpdateTrackInfo(false);
     }
 }
 
-void CCanvas::slotUpdateTrackInfo()
+void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
 {
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrackOnFocus));
 
@@ -1020,9 +1020,9 @@ void CCanvas::slotUpdateTrackInfo()
         plotTrackProfile->setVisible(w.isShowTrackProfile());
     }
 
-    if(plotTrackProfile != nullptr)
+    if(updateVisuals)
     {
-        plotTrackProfile->updateData();
+        trk->updateVisuals(CGisItemTrk::eVisualPlot,"CCanvas::slotUpdateTrackInfo()");
     }
 
     update();

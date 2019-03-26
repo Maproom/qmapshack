@@ -165,7 +165,7 @@ private slots:
     void slotCurrentTabMaps(int i);
     void slotCurrentTabDem(int i);
     void slotMousePosition(const QPointF& pos, qreal ele, qreal slope);
-    void slotUpdateCurrentWidget();
+    void slotUpdateTabWidgets();
     void slotSetupMapFont();
     void slotSetupMapBackground();
     void slotSetupGrid();
@@ -195,7 +195,7 @@ private slots:
     void slotStartQMapTool();
     void slotGeoSearchConfigChanged();
     void slotDockFloating(bool floating);
-    void slotRenameView();
+    void slotRenameView();    
 private:
     friend int main(int argc, char ** argv);
     CMainWindow();

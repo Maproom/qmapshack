@@ -172,20 +172,20 @@ CMainWindow::CMainWindow()
     connect(actionQuickstart,            &QAction::triggered,            this,      &CMainWindow::slotQuickstart);
     connect(actionAddMapView,            &QAction::triggered,            this,      &CMainWindow::slotAddCanvas);
     connect(actionCloneMapView,          &QAction::triggered,            this,      &CMainWindow::slotCloneCanvas);
-    connect(actionShowScale,             &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionShowGrid,              &QAction::changed,              this,      static_cast<void (CMainWindow::*)()>(&CMainWindow::update));
-    connect(actionPOIText,               &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionMapToolTip,            &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionShowMinMaxTrackLabels, &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionShowMinMaxSummary,     &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionShowTrackInfoTable,    &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionShowTrackInfoPoints,   &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionShowTrackSummary,      &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionShowTrackProfile,      &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
-    connect(actionShowTrackInfoPoints,   &QAction::toggled, actionShowTrackInfoTable, &QAction::setEnabled);
-    connect(actionShowTrackProfile,      &QAction::toggled, actionProfileIsWindow,    &QAction::setEnabled);
-    connect(actionProfileIsWindow,       &QAction::toggled,              this,      &CMainWindow::slotSetProfileMode);
+    connect(actionShowGrid,              &QAction::changed,              this,      [this](){this->update();});
+    connect(actionShowScale,             &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionPOIText,               &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionMapToolTip,            &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowMinMaxTrackLabels, &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowMinMaxSummary,     &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackInfoTable,    &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackInfoPoints,   &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackSummary,      &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackProfile,      &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackInfoPoints,   &QAction::triggered, actionShowTrackInfoTable, &QAction::setEnabled);
+    connect(actionShowTrackProfile,      &QAction::triggered, actionProfileIsWindow,    &QAction::setEnabled);
+    connect(actionProfileIsWindow,       &QAction::triggered,            this,      &CMainWindow::slotSetProfileMode);
     connect(actionSetupMapFont,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapFont);
     connect(actionSetupMapBackground,    &QAction::triggered,            this,      &CMainWindow::slotSetupMapBackground);
     connect(actionSetupGrid,             &QAction::triggered,            this,      &CMainWindow::slotSetupGrid);
@@ -622,11 +622,11 @@ CCanvas *CMainWindow::addView(const QString& name)
     CCanvas * view = new CCanvas(tabWidget, name);
     tabWidget->addTab(view, view->objectName());
     connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
-    connect(actionShowMinMaxSummary, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
-    connect(actionShowTrackInfoTable, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
-    connect(actionShowTrackInfoPoints, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
-    connect(actionShowTrackSummary, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
-    connect(actionShowTrackProfile, &QAction::changed, view, &CCanvas::slotUpdateTrackInfo);
+    connect(actionShowMinMaxSummary, &QAction::changed, view, [=](){view->slotUpdateTrackInfo(false);});
+    connect(actionShowTrackInfoTable, &QAction::changed, view, [=](){view->slotUpdateTrackInfo(false);});
+    connect(actionShowTrackInfoPoints, &QAction::changed, view, [=](){view->slotUpdateTrackInfo(true);});
+    connect(actionShowTrackSummary, &QAction::changed, view, [=](){view->slotUpdateTrackInfo(false);});
+    connect(actionShowTrackProfile, &QAction::changed, view, [=](){view->slotUpdateTrackInfo(false);});
 
     return view;
 }
@@ -1167,23 +1167,30 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
     }
 }
 
-void CMainWindow::slotUpdateCurrentWidget()
+void CMainWindow::slotUpdateTabWidgets()
 {
-    CCanvas * canvas = getVisibleCanvas();
-    if(canvas)
+    const int N = tabWidget->count();
+    for(int n = 0; n < N; n++)
     {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
-        return;
-    }
+        QWidget * w = tabWidget->widget(n);
 
-    QWidget * w = tabWidget->currentWidget();
-    if(w)
-    {
+        CCanvas * canvas = dynamic_cast<CCanvas*>(w);
+        if(canvas != nullptr)
+        {
+            canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
+            continue;
+        }
+
+        CDetailsTrk * trkDetails = dynamic_cast<CDetailsTrk*>(w);
+        if(trkDetails != nullptr)
+        {
+            trkDetails->updateData();
+            continue;
+        }
+
         w->update();
-        return;
     }
 }
-
 
 void CMainWindow::slotSetupMapFont()
 {

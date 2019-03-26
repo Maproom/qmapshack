@@ -102,8 +102,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
 
     widgetColorActivity->setTrack(&trk);
 
-    updateData();
-
     connect(treeTrackPointInfo, &CTableTrkInfo::sigHasTrkPtInfo, this, &CDetailsTrk::slotHasTrkPtInfo);
     treeTrackPoint->setTrack(&trk);
     treeTrackPointInfo->setTrack(&trk);
@@ -198,7 +196,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     // limit tree widget horizontal size to the filter widget with the largest minimum size
     treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
 
-    slotShowPlots();
+    slotShowPlots();    
+    updateData();
 }
 
 CDetailsTrk::~CDetailsTrk()
@@ -224,9 +223,8 @@ CDetailsTrk::~CDetailsTrk()
 
 void CDetailsTrk::slotHasTrkPtInfo(bool yes)
 {
-    const CMainWindow& w = CMainWindow::self();
-    labelHelpTrackPointInfo->setVisible(!yes && w.isShowTrackInfoPoints());
-    treeTrackPointInfo->setVisible(yes && w.isShowTrackInfoTable());
+    labelHelpTrackPointInfo->setVisible(!yes);
+    treeTrackPointInfo->setVisible(yes);
 }
 
 void CDetailsTrk::slotSetLimitModeStyle(CLimit::mode_e mode, bool on)
@@ -380,6 +378,8 @@ void CDetailsTrk::updateData()
     bool isReadOnly = trk.isReadOnly();
     bool isNogo = trk.isNogo();
 
+    frameTrackInfo->setVisible(CMainWindow::self().isShowTrackInfoPoints());
+
     tabWidget->widget(eTabFilter)->setEnabled(!isReadOnly);
 
     labelTainted->setVisible(trk.isTainted());
@@ -419,6 +419,10 @@ void CDetailsTrk::updateData()
             tabWidget->setTabText(idx, trk.getName());
         }
     }
+
+    plot1->updateData();
+    plot2->updateData();
+    plot3->updateData();
 
     X______________BlockAllSignals______________X(this);
 

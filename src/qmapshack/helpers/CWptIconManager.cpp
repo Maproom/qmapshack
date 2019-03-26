@@ -36,6 +36,11 @@ CWptIconManager::CWptIconManager(QObject *parent)
 CWptIconManager::~CWptIconManager()
 {
     qDebug()<< "CWptIconManager::~CWptIconManager()";
+    for(const QString& filename : mapNumberedBullets)
+    {
+        QFile::remove(filename);
+    }
+
     mapNumberedBullets.clear();
 }
 
@@ -251,24 +256,23 @@ QString CWptIconManager::getNumberedBullet(qint32 n)
     const QFont& font = CMainWindow::self().getMapFont();
     if(mapNumberedBullets.contains(n) && (lastFont == font))
     {
-        return mapNumberedBullets[n]->fileName();
+        return mapNumberedBullets[n];
     }
 
     if(lastFont != font)
     {
         qDebug() << "clear map";
+        for(const QString& filename : mapNumberedBullets)
+        {
+            QFile::remove(filename);
+        }
         mapNumberedBullets.clear();
         lastFont = font;
     }
 
-    using file_t = QSharedPointer<QTemporaryFile>;
-    file_t file = file_t::create(QDir::temp().absoluteFilePath("BulletXXXXXX.png"));
-    mapNumberedBullets[n] = file;
-    file->open();
-    file->close();
-    file->setAutoRemove(true);
+    const QString& filename = QDir::temp().absoluteFilePath(QString("Bullet%1.png").arg(n));
+    mapNumberedBullets[n] = filename;
 
-    const QString& filename = file->fileName();
     const QPixmap& pixmap = CDraw::number(n, Qt::black);
     pixmap.save(filename);
 

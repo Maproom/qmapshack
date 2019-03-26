@@ -74,7 +74,7 @@ private:
 
     QMap<QString, icon_t> wptIcons;
 
-    QMap<qint32, QSharedPointer<QTemporaryFile> > mapNumberedBullets;
+    QMap<qint32, QString> mapNumberedBullets;
 };
 
 #endif //CWPTICONMANAGER_H

@@ -109,7 +109,7 @@ void CScreenshotDialog::slotPrint()
     printer.setResolution(1200);
 
     QPrintDialog dialog(&printer, this);
-    dialog.setWindowTitle(tr("Print Diary"));
+    dialog.setWindowTitle(tr("Print Screenshot..."));
     if (dialog.exec() != QDialog::Accepted)
     {
         return;

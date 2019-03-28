@@ -622,11 +622,11 @@ CCanvas *CMainWindow::addView(const QString& name)
     CCanvas * view = new CCanvas(tabWidget, name);
     tabWidget->addTab(view, view->objectName());
     connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
-    connect(actionShowMinMaxSummary, &QAction::changed, view, [=](){view->slotUpdateTrackInfo(false);});
-    connect(actionShowTrackInfoTable, &QAction::changed, view, [=](){view->slotUpdateTrackInfo(false);});
-    connect(actionShowTrackInfoPoints, &QAction::changed, view, [=](){view->slotUpdateTrackInfo(true);});
-    connect(actionShowTrackSummary, &QAction::changed, view, [=](){view->slotUpdateTrackInfo(false);});
-    connect(actionShowTrackProfile, &QAction::changed, view, [=](){view->slotUpdateTrackInfo(false);});
+    connect(actionShowMinMaxSummary, &QAction::changed,     view, [view]{view->slotUpdateTrackInfo(false);});
+    connect(actionShowTrackInfoTable, &QAction::changed,    view, [view]{view->slotUpdateTrackInfo(false);});
+    connect(actionShowTrackInfoPoints, &QAction::changed,   view, [view]{view->slotUpdateTrackInfo(true);});
+    connect(actionShowTrackSummary, &QAction::changed,      view, [view]{view->slotUpdateTrackInfo(false);});
+    connect(actionShowTrackProfile, &QAction::changed,      view, [view]{view->slotUpdateTrackInfo(false);});
 
     return view;
 }

@@ -908,7 +908,6 @@ void CCanvas::slotCheckTrackOnFocus()
         keyTrackOnFocus.clear();
         labelTrackStatistic->clear();
         labelTrackStatistic->hide();
-
         labelTrackInfo->clear();
         labelTrackInfo->hide();
 
@@ -924,10 +923,7 @@ void CCanvas::slotCheckTrackOnFocus()
         // create new profile plot, the plot will register itself at the track
         plotTrackProfile = new CPlotProfile(trk2, trk2->limitsGraph1, w.profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
         setSizeTrackProfile();
-        if(isVisible())
-        {
-            plotTrackProfile->setVisible(w.isShowTrackProfile());
-        }
+        // track profile visibility is set in slotUpdateTrackInfo()
 
         colorLegend = new CColorLegend(this, trk2);
         colorLegend->setGeometry(20, 20, 40, 300);

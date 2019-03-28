@@ -36,11 +36,15 @@ CWptIconManager::CWptIconManager(QObject *parent)
 CWptIconManager::~CWptIconManager()
 {
     qDebug()<< "CWptIconManager::~CWptIconManager()";
+    removeNumberedBullets();
+}
+
+void CWptIconManager::removeNumberedBullets()
+{
     for(const QString& filename : mapNumberedBullets)
     {
         QFile::remove(filename);
     }
-
     mapNumberedBullets.clear();
 }
 
@@ -250,7 +254,6 @@ QMenu * CWptIconManager::getWptIconMenu(const QString& title, QObject * obj, con
     return menu;
 }
 
-
 QString CWptIconManager::getNumberedBullet(qint32 n)
 {
     const QFont& font = CMainWindow::self().getMapFont();
@@ -261,12 +264,7 @@ QString CWptIconManager::getNumberedBullet(qint32 n)
 
     if(lastFont != font)
     {
-        qDebug() << "clear map";
-        for(const QString& filename : mapNumberedBullets)
-        {
-            QFile::remove(filename);
-        }
-        mapNumberedBullets.clear();
+        removeNumberedBullets();
         lastFont = font;
     }
 

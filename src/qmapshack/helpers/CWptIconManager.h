@@ -66,6 +66,7 @@ private:
 
     void setWptIconByName(const QString& name, const QString& filename);
     void setWptIconByName(const QString& name, const QPixmap& icon);
+    void removeNumberedBullets();
 
     static CWptIconManager * pSelf;
     static const char * wptDefault;

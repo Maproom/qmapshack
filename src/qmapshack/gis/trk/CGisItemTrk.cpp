@@ -46,20 +46,19 @@
 
 namespace
 {
-struct cluster_t
+// helper to declutter and draw clusters of track info points
+class cluster
 {
-    cluster_t(int number, const QRect& r) : box(r)
+public:
+    cluster(int number, const QRect& r) : box(r)
     {
         elements.append({number});
     }
     int size() const {return elements.size();}
 
-    QRect box;
-    QList<int> elements;
-
-    static void addToCluster(const QRect& r, QList<cluster_t>& clusters, int number)
+    static void addToCluster(const QRect& r, QList<cluster>& clusters, int number)
     {
-        for(cluster_t& cluster : clusters)
+        for(cluster& cluster : clusters)
         {
             if(cluster.box.intersects(r))
             {
@@ -71,22 +70,9 @@ struct cluster_t
         clusters.append({number,r});
     }
 
-    static const QPointF point1[];
-    static const QPointF point2[];
-    static const QPointF point3[];
-    static const QPointF point4[];
-    static const QPointF point5[];
-    static const QPointF point6[];
-    static const QPointF point7[];
-    static const QPointF point8[];
-    static const QPointF point9[];
-
-    static constexpr int MAX_CONST_SIZE = 9;
-    static const QPointF * constellations[MAX_CONST_SIZE];
-
-    static void draw(const QList<cluster_t>&clusters, QPainter& p, int size)
+    static void draw(const QList<cluster>&clusters, QPainter& p, int size)
     {
-        for(const cluster_t& cluster : clusters)
+        for(const cluster& cluster : clusters)
         {
             const int N = cluster.size();
             if(N >= MAX_CONST_SIZE)
@@ -101,54 +87,71 @@ struct cluster_t
             }
         }
     }
+
+private:
+    QRect box;
+    QList<int> elements;
+
+    static const QPointF point1[];
+    static const QPointF point2[];
+    static const QPointF point3[];
+    static const QPointF point4[];
+    static const QPointF point5[];
+    static const QPointF point6[];
+    static const QPointF point7[];
+    static const QPointF point8[];
+    static const QPointF point9[];
+
+    static constexpr int MAX_CONST_SIZE = 9;
+    static const QPointF * constellations[MAX_CONST_SIZE];
 };
 
-const QPointF cluster_t::point1[] = {
+const QPointF cluster::point1[] = {
     {0,0}
 };
 
-const QPointF cluster_t::point2[] = {
+const QPointF cluster::point2[] = {
     {-0.5,0}, {0.5,0}
 };
 
-const QPointF cluster_t::point3[] = {
+const QPointF cluster::point3[] = {
     {  -1,0}, {  0,0}, {1,0}
 };
 
-const QPointF cluster_t::point4[] = {
+const QPointF cluster::point4[] = {
     {-1,-0.5}, {0,-0.5}, {1,-0.5},
     {-1, 0.5}
 };
 
-const QPointF cluster_t::point5[] = {
+const QPointF cluster::point5[] = {
     {-1,-0.5}, {0,-0.5}, {1,-0.5},
     {-1, 0.5}, {0, 0.5}
 };
 
-const QPointF cluster_t::point6[] = {
+const QPointF cluster::point6[] = {
     {-1,-0.5}, {0,-0.5}, {1,-0.5},
     {-1, 0.5}, {0, 0.5}, {1, 0.5}
 };
 
-const QPointF cluster_t::point7[] = {
+const QPointF cluster::point7[] = {
     {-1,-1}, {0,-1}, {1,-1},
     {-1, 0}, {0, 0}, {1, 0},
     {-1, 1}
 };
 
-const QPointF cluster_t::point8[] = {
+const QPointF cluster::point8[] = {
     {-1,-1}, {0,-1}, {1,-1},
     {-1, 0}, {0, 0}, {1, 0},
     {-1, 1}, {0, 1}
 };
 
-const QPointF cluster_t::point9[] = {
+const QPointF cluster::point9[] = {
     {-1,-1}, {0,-1}, {1,-1},
     {-1, 0}, {0, 0}, {1, 0},
     {-1, 1}, {0, 1}, {1, 1}
 };
 
-const QPointF * cluster_t::constellations[MAX_CONST_SIZE] =
+const QPointF * cluster::constellations[MAX_CONST_SIZE] =
 {
     point1, point2, point3, point4, point5, point6, point7, point8, point9
 };
@@ -1950,7 +1953,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         p.setFont(f);
 
         quint32 cnt = 1;
-        QList<cluster_t> clusters;
+        QList<cluster> clusters;
         for(const CTrackData::trkpt_t &trkpt : trk)
         {
             if(trkpt.desc.isEmpty() || trkpt.isHidden())
@@ -1964,10 +1967,10 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
             QRect r(0,0,size,size);
             r.moveCenter(pos.toPoint());
-            cluster_t::addToCluster(r, clusters, cnt++);
+            cluster::addToCluster(r, clusters, cnt++);
         }
 
-        cluster_t::draw(clusters, p, size);
+        cluster::draw(clusters, p, size);
     }
 }
 

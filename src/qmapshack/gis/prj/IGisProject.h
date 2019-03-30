@@ -82,6 +82,15 @@ public:
         ,eFilterModeText
     };
 
+    enum filter_comapartives
+    {
+        eFilterComapartiveWith,
+        eFilterComapartiveWithout,
+        eFilterComparativeSmaller,
+        eFilterComparativeBigger,
+        eFilterComparativeBetween
+    };
+
     struct person_t
     {
         QString name;
@@ -113,6 +122,14 @@ public:
         // -- all gpx tags - stop
         QMap<QString, QVariant> extensions;
     };
+
+    struct filter_t
+    {
+        QString property;
+        filter_comapartives comparator;
+        float value1;
+        float value2;
+    }
 
     static const QString filedialogAllSupported;
     static const QString filedialogFilterGPX;

@@ -1187,6 +1187,111 @@ void IGisProject::filter(const QString& str)
         return;
     }
 
+    QList<filter_t> filters;
+    bool done = false;
+    unsigned int currentUnitPos = 0;
+    while(!done)
+    {
+        QString currentUnit = str.section(' ',currentUnitPos, currentUnitPos).toLower();
+        QString firstWord = str.section(' ',0,0).toLower();
+        filter_t newFilter;
+
+        switch(firstWord)
+        {
+        case tr("with"):
+            newFilter.comparator = eFilterComapartiveWith;
+            newFilter.property = currentUnit.section(' ',1); //until the end
+            break;
+
+        case tr("without"):
+            newFilter.comparator = eFilterComapartiveWithout;
+            newFilter.property = currentUnit.section(' ',1); //until the end
+            break;
+
+        case tr("shorter"):
+            newFilter.comparator = eFilterComparativeSmaller;
+            newFilter.property = tr("distance");
+            QString value = currentUnit.section(' ',1); //until the end
+            if(value.contains(tr("than")))
+            {
+                value = currentUnit.section(' ',2); //until the end
+            }
+            newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+            break;
+
+        case tr("longer"):
+            newFilter.comparator = eFilterComparativeBigger;
+            newFilter.property = tr("distance");
+            QString value = currentUnit.section(' ',1); //until the end
+            if(value.contains(tr("than")))
+            {
+                value = currentUnit.section(' ',2); //until the end
+            }
+            newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+            break;
+
+        case tr("lower"):
+            newFilter.comparator = eFilterComparativeSmaller;
+            newFilter.property = tr("elevation");
+            QString value = currentUnit.section(' ',1); //until the end
+            if(value.contains(tr("than")))
+            {
+                value = currentUnit.section(' ',2); //until the end
+            }
+            newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+            break;
+
+        case tr("higher"):
+            newFilter.comparator = eFilterComparativeBigger;
+            newFilter.property = tr("elevation");
+            QString value = currentUnit.section(' ',1); //until the end
+            if(value.contains(tr("than")))
+            {
+                value = currentUnit.section(' ',2); //until the end
+            }
+            newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+            break;
+
+        default:
+            switch(currentUnit.section(' ',1,1))
+            {
+            case tr("bigger"):
+            case tr("higher"):
+            case tr("greater"):
+            case tr("over"):
+                newFilter.comparator = eFilterComparativeBigger;
+                newFilter.property = firstWord;
+                QString value = currentUnit.section(' ',2); //until the end
+                if(value.contains(tr("than")))
+                {
+                    value = currentUnit.section(' ',3); //until the end
+                }
+                newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+                break;
+
+            case tr("smaller"):
+            case tr("lower"):
+            case tr("under"):
+                newFilter.comparator = eFilterComparativeBigger;
+                newFilter.property = firstWord;
+                QString value = currentUnit.section(' ',2); //until the end
+                if(value.contains(tr("than")))
+                {
+                    value = currentUnit.section(' ',3); //until the end
+                }
+                newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+                break;
+
+            default:
+                newFilter.comparator = eFilterComapartiveWith;
+                newFilter.property = firstWord;
+                break;
+            }
+        }
+
+        currentUnitPos++;
+    }
+
     for(int n = 0; n < N; n++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(n));

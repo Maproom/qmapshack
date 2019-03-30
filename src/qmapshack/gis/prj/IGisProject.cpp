@@ -1196,19 +1196,18 @@ void IGisProject::filter(const QString& str)
         QString firstWord = str.section(' ',0,0).toLower();
         filter_t newFilter;
 
-        switch(firstWord)
+        if(firstWord == tr("with"))
         {
-        case tr("with"):
             newFilter.comparator = eFilterComapartiveWith;
             newFilter.property = currentUnit.section(' ',1); //until the end
-            break;
-
-        case tr("without"):
+        }
+        else if(firstWord == tr("without"))
+        {
             newFilter.comparator = eFilterComapartiveWithout;
             newFilter.property = currentUnit.section(' ',1); //until the end
-            break;
-
-        case tr("shorter"):
+        }
+        else if(firstWord == tr("shorter"))
+        {
             newFilter.comparator = eFilterComparativeSmaller;
             newFilter.property = tr("distance");
             QString value = currentUnit.section(' ',1); //until the end
@@ -1217,9 +1216,9 @@ void IGisProject::filter(const QString& str)
                 value = currentUnit.section(' ',2); //until the end
             }
             newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
-            break;
-
-        case tr("longer"):
+        }
+        else if(firstWord == tr("longer"))
+        {
             newFilter.comparator = eFilterComparativeBigger;
             newFilter.property = tr("distance");
             QString value = currentUnit.section(' ',1); //until the end
@@ -1228,9 +1227,9 @@ void IGisProject::filter(const QString& str)
                 value = currentUnit.section(' ',2); //until the end
             }
             newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
-            break;
-
-        case tr("lower"):
+        }
+        else if(firstWord == tr("lower"))
+        {
             newFilter.comparator = eFilterComparativeSmaller;
             newFilter.property = tr("elevation");
             QString value = currentUnit.section(' ',1); //until the end
@@ -1239,9 +1238,9 @@ void IGisProject::filter(const QString& str)
                 value = currentUnit.section(' ',2); //until the end
             }
             newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
-            break;
-
-        case tr("higher"):
+        }
+        else if(firstWord == tr("higher"))
+        {
             newFilter.comparator = eFilterComparativeBigger;
             newFilter.property = tr("elevation");
             QString value = currentUnit.section(' ',1); //until the end
@@ -1250,15 +1249,16 @@ void IGisProject::filter(const QString& str)
                 value = currentUnit.section(' ',2); //until the end
             }
             newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
-            break;
+        }
+        else
+        {
+            QString secondWord = currentUnit.section(' ',1,1);
 
-        default:
-            switch(currentUnit.section(' ',1,1))
+            if(secondWord == tr("bigger")||
+               secondWord == tr("higher")||
+               secondWord == tr("greater")||
+               secondWord == tr("over"))
             {
-            case tr("bigger"):
-            case tr("higher"):
-            case tr("greater"):
-            case tr("over"):
                 newFilter.comparator = eFilterComparativeBigger;
                 newFilter.property = firstWord;
                 QString value = currentUnit.section(' ',2); //until the end
@@ -1267,11 +1267,11 @@ void IGisProject::filter(const QString& str)
                     value = currentUnit.section(' ',3); //until the end
                 }
                 newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
-                break;
-
-            case tr("smaller"):
-            case tr("lower"):
-            case tr("under"):
+            }
+            else if(secondWord == tr("smaller")||
+                    secondWord == tr("lower")||
+                    secondWord == tr("under"))
+            {
                 newFilter.comparator = eFilterComparativeBigger;
                 newFilter.property = firstWord;
                 QString value = currentUnit.section(' ',2); //until the end
@@ -1280,15 +1280,15 @@ void IGisProject::filter(const QString& str)
                     value = currentUnit.section(' ',3); //until the end
                 }
                 newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
-                break;
-
-            default:
+            }
+            else
+            {
                 newFilter.comparator = eFilterComapartiveWith;
                 newFilter.property = firstWord;
-                break;
             }
         }
 
+        filters.append(newFilter);
         currentUnitPos++;
     }
 

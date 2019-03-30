@@ -129,7 +129,7 @@ public:
         filter_comapartives comparator;
         float value1;
         float value2;
-    }
+    };
 
     static const QString filedialogAllSupported;
     static const QString filedialogFilterGPX;

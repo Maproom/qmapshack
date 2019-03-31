@@ -554,12 +554,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="439"/>
         <source>&lt;b&gt;Summary over all waypoints in project&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Сводка по всем маршрутным точкам в проекте&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="443"/>
         <source> x Geocache, consisting of: &lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> x Тайник, состоящий из: &lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="479"/>
@@ -672,7 +672,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="91"/>
         <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;To document your tracks you can add a short description to a track point. All points with description will be marked along the track with auto-numbered bullets.&lt;br/&gt;You can add a description by a right click on a track point in the graphs. Or you do a left click on a track point in the map view.&lt;br/&gt;With the first track point you add information to this text will be replaced by a table. Use it to edit and delete track point information.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Информация о точек трека&lt;/b&gt;&lt;br/&gt;Для документирования ваших треков вы можете добавить краткое описание к точке трека. Все точки с описанием будут отмечены вдоль трека с нумерованными маркерами.&lt;br/&gt;Вы можете добавить описание, щелкнув правой кнопкой мышки точку трека на одном из графиков трека этого окна. Или вы щелкаете левой кнопкой мышки на точке трека в виде карты и выбираете икон добавления информации на панели инструментов.&lt;br/&gt;При первом добавлении информации точки трека этот текст будет заменен таблицей. Используйте эту таблицу для редактирования и удаления информации о точке трека.br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="185"/>
@@ -1650,27 +1650,27 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1543"/>
         <source>Track Point Info...</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация о точках трека ...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1544"/>
         <source>Enter some text to be attached to this track point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите текст, который будет прикреплен к этой точке трека:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1553"/>
         <source>Add track point desc.: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить описание точки трека: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1563"/>
         <source>Changed track point desc.: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменено описание точки трека: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1573"/>
         <source>Removed track point desc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалено описание точки трека</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1751"/>
@@ -2128,7 +2128,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="136"/>
         <source>Track Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация о треке</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="174"/>
@@ -5460,17 +5460,17 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <message>
         <location filename="../print/CScreenshotDialog.cpp" line="36"/>
         <source>&lt;b&gt;Screenshot&lt;/b&gt;&lt;br/&gt;You can save or print a screenshot of your current map view. If the track profile is shown in it&apos;s own window it is appended to the screenshot. Check the pre-view below. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Скриншот&lt;/b&gt;&lt;br/&gt;Вы можете сохранить или распечатать скриншот текущего вида карты. Если профиль трека отображается в собственном окне, он добавляется к скриншоту. Проверьте предварительный просмотр ниже. </translation>
     </message>
     <message>
         <location filename="../print/CScreenshotDialog.cpp" line="59"/>
         <source>Save screenshot...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить скриншот ...</translation>
     </message>
     <message>
         <location filename="../print/CScreenshotDialog.cpp" line="112"/>
         <source>Print Screenshot...</source>
-        <translation type="unfinished"></translation>
+        <translation>Печать скриншот ...</translation>
     </message>
 </context>
 <context>
@@ -5718,17 +5718,17 @@ line %2, column %3:
     <message>
         <location filename="../gis/trk/CTableTrkInfo.cpp" line="28"/>
         <source>Edit...</source>
-        <translation type="unfinished">Изменить...</translation>
+        <translation>Изменить...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrkInfo.cpp" line="29"/>
         <source>Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrkInfo.cpp" line="57"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание</translation>
     </message>
 </context>
 <context>
@@ -7190,7 +7190,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="499"/>
         <source>No Attributes present</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет атрибутов</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="85"/>
@@ -9324,92 +9324,92 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="680"/>
         <source>Track Profile as Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Профиль трека в отдельном окне</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="683"/>
         <source>Show the track profile in it&apos;s own window instead within the map view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать профиль трека в отдельном окне, а не в виде карты.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="740"/>
         <source>Save(Print) Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить (распечатать) карту</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="860"/>
         <source>Min./Max. Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Метки мин./макс.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="893"/>
         <source>Track Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация о треке</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="896"/>
         <source>Select what information is shown for a highlighted track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите, какая информация отображается для выделенного трека.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="908"/>
         <source>Track Point Info Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Таблица с информацией о точках трека</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="911"/>
         <source>Show a legend for all track point info bullets along the track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать легенду для всех маркеров точек трека вдоль трека.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="923"/>
         <source>Track Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Сводка трека</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="926"/>
         <source>Show the track summary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать сводку трека.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="938"/>
         <source>Min./Max Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Сводка мин./макс.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="941"/>
         <source>Show the minimum and the maximum values of the track properties in a table.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать минимальное и максимальное значения трека в таблице.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="953"/>
         <source>Track Profile</source>
-        <translation type="unfinished">Профиль трека</translation>
+        <translation>Профиль трека</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="956"/>
         <source>Show the track profile.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать профиль трека.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="965"/>
         <source>Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Сделать скриншот</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="968"/>
         <source>Take a screenshot from the current active map view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сделать скриншот текущего активного вида карты.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="980"/>
         <source>Track Point Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация о точках трека</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="983"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отметьте точки трека дополнительной информацией с помощью автоматически пронумерованных маркеров.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="686"/>
@@ -9991,7 +9991,7 @@ Tip:
     <message>
         <location filename="../plot/IPlot.cpp" line="100"/>
         <source>Add Trackpoint Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить информацию о точке трека</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="101"/>
@@ -11571,7 +11571,7 @@ recording. Use the range tool. </source>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="208"/>
         <source>Add a description to the selected track point. The track point will be marked with an auto-numbered bullet. A table with all descriptions will be shown in the track details dialog and for highlighted tracks in the map view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить описание к выбранной точке трека. Точка трека будет отмечена маркером с автоматическим номером. Таблица со всеми описаниями будет показана в окне редактирования трека и для выделенных треков в виде карты.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
@@ -11721,23 +11721,23 @@ recording. Use the range tool. </source>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="14"/>
         <source>Screenshot...</source>
-        <translation type="unfinished"></translation>
+        <translation>Скриншот ...</translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="20"/>
         <location filename="../print/IScreenshotDialog.ui" line="30"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Метка текста</translation>
+        <translation>Метка текста</translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="55"/>
         <source>Save Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить скриншот</translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="66"/>
         <source>Print Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Печать скриншот</translation>
     </message>
 </context>
 <context>

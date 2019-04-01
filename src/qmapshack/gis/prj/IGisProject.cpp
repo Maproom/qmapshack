@@ -1198,67 +1198,48 @@ void IGisProject::filter(const QString& str)
             break;
         }
 
-        while(currentUnit[0]==' ')
-        {
-            currentUnit.remove(0,1); //since for some reason the section sometimes doesn't skip the leading spaces
-        }
+        currentUnit=currentUnit.simplified(); //removes leading and trailing whitespaces and double ones
 
-        QString firstWord = currentUnit.section(' ',0,0,QString::SectionSkipEmpty);
+        QString firstWord = currentUnit.section(' ',0,0);
         filter_t newFilter;
 
         if(firstWord == tr("with").toUpper())
         {
             newFilter.comparator = eFilterComapartiveWith;
-            newFilter.property = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
+            newFilter.property = currentUnit.section(' ',1); //until the end
         }
         else if(firstWord == tr("without").toUpper())
         {
             newFilter.comparator = eFilterComapartiveWithout;
-            newFilter.property = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
+            newFilter.property = currentUnit.section(' ',1); //until the end
         }
         else if(firstWord == tr("shorter").toUpper())
         {
             newFilter.comparator = eFilterComparativeSmaller;
-            newFilter.property = tr("length");
-            QString value = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
-            if(value.contains(tr("than")))
-            {
-                value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
-            }
-            newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+            newFilter.property = tr("length").toUpper();
+            QString value = currentUnit.section(' ',1).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
+            newFilter.value1 = value.toFloat();//Not aware of unit. Not sure if this is a problem
         }
         else if(firstWord == tr("longer").toUpper())
         {
             newFilter.comparator = eFilterComparativeBigger;
-            newFilter.property = tr("length");
-            QString value = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
-            if(value.contains(tr("than").toUpper()))
-            {
-                value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
-            }
-            newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+            newFilter.property = tr("length").toUpper();
+            QString value = currentUnit.section(' ',1).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
+            newFilter.value1 = value.toFloat();//Not aware of unit. Not sure if this is a problem
         }
         else if(firstWord == tr("lower").toUpper())
         {
             newFilter.comparator = eFilterComparativeSmaller;
-            newFilter.property = tr("elevation");
-            QString value = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
-            if(value.contains(tr("than").toUpper()))
-            {
-                value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
-            }
-            newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+            newFilter.property = tr("elevation").toUpper();
+            QString value = currentUnit.section(' ',1).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
+            newFilter.value1 = value.toFloat();//Not aware of unit. Not sure if this is a problem
         }
         else if(firstWord == tr("higher").toUpper())
         {
             newFilter.comparator = eFilterComparativeBigger;
-            newFilter.property = tr("elevation");
-            QString value = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
-            if(value.contains(tr("than").toUpper()))
-            {
-                value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
-            }
-            newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+            newFilter.property = tr("elevation").toUpper();
+            QString value = currentUnit.section(' ',1).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
+            newFilter.value1 = value.toFloat();//Not aware of unit. Not sure if this is a problem
         }
         else
         {
@@ -1271,25 +1252,17 @@ void IGisProject::filter(const QString& str)
             {
                 newFilter.comparator = eFilterComparativeBigger;
                 newFilter.property = firstWord;
-                QString value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
-                if(value.contains(tr("than").toUpper()))
-                {
-                    value = currentUnit.section(' ',3,QString::SectionSkipEmpty); //until the end
-                }
-                newFilter.value1 = value.remove("[a-z,A-Z]").toFloat();//Not aware of unit. Not sure if this is a problem
+                QString value = currentUnit.section(' ',2).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
+                newFilter.value1 = value.toFloat();         //Not aware of unit. Not sure if this is a problem
             }
             else if(secondWord == tr("smaller").toUpper()||
                     secondWord == tr("lower").toUpper()||
                     secondWord == tr("under").toUpper())
             {
-                newFilter.comparator = eFilterComparativeBigger;
+                newFilter.comparator = eFilterComparativeSmaller;
                 newFilter.property = firstWord;
-                QString value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
-                if(value.contains(tr("than").toUpper()))
-                {
-                    value = currentUnit.section(' ',3,QString::SectionSkipEmpty); //until the end
-                }
-                newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+                QString value = currentUnit.section(' ',2).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
+                newFilter.value1 = value.toFloat();//Not aware of unit. Not sure if this is a problem.
             }
             else
             {
@@ -1346,9 +1319,9 @@ void IGisProject::filter(const QString& str)
                     else
                     {
                         int indexOfFirstSep = info.indexOf(" ",indexOfProperty);
-                        int indexOfSecondSep = info.indexOf("[A-Z,a-z]",indexOfFirstSep);
-                        int value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep).toFloat();
-                        if(value>filter.value1)
+                        int indexOfSecondSep = info.indexOf(QRegExp("[A-Z ]"),indexOfFirstSep+1);
+                        QStringRef value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep);
+                        if(value.toFloat()>filter.value1)
                         {
                             hide = true;
                         }
@@ -1366,9 +1339,9 @@ void IGisProject::filter(const QString& str)
                     else
                     {
                         int indexOfFirstSep = info.indexOf(" ",indexOfProperty);
-                        int indexOfSecondSep = info.indexOf("[A-Z,a-z]",indexOfFirstSep);
-                        int value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep).toFloat();
-                        if(value<filter.value1)
+                        int indexOfSecondSep = info.indexOf(QRegExp("[A-Z ]"),indexOfFirstSep+1);
+                        QStringRef value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep);
+                        if(value.toFloat()<filter.value1)
                         {
                             hide = true;
                         }
@@ -1386,11 +1359,11 @@ void IGisProject::filter(const QString& str)
                     else
                     {
                         int indexOfFirstSep = info.indexOf(" ",indexOfProperty);
-                        int indexOfSecondSep = info.indexOf("[A-Z,a-z]",indexOfFirstSep);
-                        float value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep).toFloat();
+                        int indexOfSecondSep = info.indexOf(QRegExp("[A-Z ]"),indexOfFirstSep+1);
+                        QStringRef value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep);
                         float maxValue = (filter.value1>filter.value2) ? filter.value1 : filter.value2;
                         float minValue = (filter.value1<filter.value2) ? filter.value1 : filter.value2;
-                        if(value>maxValue||value<minValue)
+                        if(value.toFloat()>maxValue||value.toFloat()<minValue)
                         {
                             hide = true;
                         }

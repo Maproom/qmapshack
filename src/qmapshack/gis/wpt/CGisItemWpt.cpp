@@ -292,16 +292,6 @@ QString CGisItemWpt::getInfo(quint32 feature) const
         str = "<b>" + getName() + "</b>";
     }
 
-    if(geocache.hasData)
-    {
-        if(str.size() > initialSize)
-        {
-            str += "<br/>\n";
-        }
-
-        str += QString(" %4 (%1, D %2, T %3)").arg(geocache.container).arg(geocache.difficulty, 0,'f',1).arg(geocache.terrain, 0,'f',1).arg(geocache.name);
-    }
-
     if(wpt.ele != NOINT)
     {
         if(str.size() > initialSize)
@@ -325,20 +315,32 @@ QString CGisItemWpt::getInfo(quint32 feature) const
     }
 
     QString desc = removeHtml(wpt.desc).simplified();
-    if(desc.count())
+    if(geocache.hasData)
     {
         if(str.size() > initialSize)
         {
             str += "<br/>\n";
         }
 
-        if((feature & eFeatureShowFullText) || (desc.count() < 300))
+        str += QString(" %4 (%1, D %2, T %3)").arg(geocache.container).arg(geocache.difficulty, 0,'f',1).arg(geocache.terrain, 0,'f',1).arg(geocache.name);
+    }
+    else
+    {
+        if(desc.count())
         {
-            str += desc;
-        }
-        else
-        {
-            str += desc.left(297) + "...";
+            if(str.size() > initialSize)
+            {
+                str += "<br/>\n";
+            }
+
+            if((feature & eFeatureShowFullText) || (desc.count() < 300))
+            {
+                str += desc;
+            }
+            else
+            {
+                str += desc.left(297) + "...";
+            }
         }
     }
 

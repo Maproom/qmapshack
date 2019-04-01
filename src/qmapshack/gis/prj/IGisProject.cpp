@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg   hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -1188,65 +1189,74 @@ void IGisProject::filter(const QString& str)
     }
 
     QList<filter_t> filters;
-    bool done = false;
-    unsigned int currentUnitPos = 0;
-    while(!done)
+    QString currentUnit;
+    for(unsigned int currentUnitPos = 0; true; currentUnitPos++)
     {
-        QString currentUnit = str.section(' ',currentUnitPos, currentUnitPos).toLower();
-        QString firstWord = str.section(' ',0,0).toLower();
+        QString currentUnit = str.section(',',currentUnitPos, currentUnitPos,QString::SectionSkipEmpty);
+        if(currentUnit=="")
+        {
+            break;
+        }
+
+        while(currentUnit[0]==' ')
+        {
+            currentUnit.remove(0,1); //since for some reason the section sometimes doesn't skip the leading spaces
+        }
+
+        QString firstWord = currentUnit.section(' ',0,0,QString::SectionSkipEmpty);
         filter_t newFilter;
 
-        if(firstWord == tr("with"))
+        if(firstWord == tr("with").toUpper())
         {
             newFilter.comparator = eFilterComapartiveWith;
-            newFilter.property = currentUnit.section(' ',1); //until the end
+            newFilter.property = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
         }
-        else if(firstWord == tr("without"))
+        else if(firstWord == tr("without").toUpper())
         {
             newFilter.comparator = eFilterComapartiveWithout;
-            newFilter.property = currentUnit.section(' ',1); //until the end
+            newFilter.property = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
         }
-        else if(firstWord == tr("shorter"))
+        else if(firstWord == tr("shorter").toUpper())
         {
             newFilter.comparator = eFilterComparativeSmaller;
-            newFilter.property = tr("distance");
-            QString value = currentUnit.section(' ',1); //until the end
+            newFilter.property = tr("length");
+            QString value = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
             if(value.contains(tr("than")))
             {
-                value = currentUnit.section(' ',2); //until the end
+                value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
             }
             newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
         }
-        else if(firstWord == tr("longer"))
+        else if(firstWord == tr("longer").toUpper())
         {
             newFilter.comparator = eFilterComparativeBigger;
-            newFilter.property = tr("distance");
-            QString value = currentUnit.section(' ',1); //until the end
-            if(value.contains(tr("than")))
+            newFilter.property = tr("length");
+            QString value = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
+            if(value.contains(tr("than").toUpper()))
             {
-                value = currentUnit.section(' ',2); //until the end
+                value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
             }
             newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
         }
-        else if(firstWord == tr("lower"))
+        else if(firstWord == tr("lower").toUpper())
         {
             newFilter.comparator = eFilterComparativeSmaller;
             newFilter.property = tr("elevation");
-            QString value = currentUnit.section(' ',1); //until the end
-            if(value.contains(tr("than")))
+            QString value = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
+            if(value.contains(tr("than").toUpper()))
             {
-                value = currentUnit.section(' ',2); //until the end
+                value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
             }
             newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
         }
-        else if(firstWord == tr("higher"))
+        else if(firstWord == tr("higher").toUpper())
         {
             newFilter.comparator = eFilterComparativeBigger;
             newFilter.property = tr("elevation");
-            QString value = currentUnit.section(' ',1); //until the end
-            if(value.contains(tr("than")))
+            QString value = currentUnit.section(' ',1,QString::SectionSkipEmpty); //until the end
+            if(value.contains(tr("than").toUpper()))
             {
-                value = currentUnit.section(' ',2); //until the end
+                value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
             }
             newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
         }
@@ -1254,42 +1264,41 @@ void IGisProject::filter(const QString& str)
         {
             QString secondWord = currentUnit.section(' ',1,1);
 
-            if(secondWord == tr("bigger")||
-               secondWord == tr("higher")||
-               secondWord == tr("greater")||
-               secondWord == tr("over"))
+            if(secondWord == tr("bigger").toUpper()||
+               secondWord == tr("higher").toUpper()||
+               secondWord == tr("greater").toUpper()||
+               secondWord == tr("over").toUpper())
             {
                 newFilter.comparator = eFilterComparativeBigger;
                 newFilter.property = firstWord;
-                QString value = currentUnit.section(' ',2); //until the end
-                if(value.contains(tr("than")))
+                QString value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
+                if(value.contains(tr("than").toUpper()))
                 {
-                    value = currentUnit.section(' ',3); //until the end
+                    value = currentUnit.section(' ',3,QString::SectionSkipEmpty); //until the end
                 }
-                newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
+                newFilter.value1 = value.remove("[a-z,A-Z]").toFloat();//Not aware of unit. Not sure if this is a problem
             }
-            else if(secondWord == tr("smaller")||
-                    secondWord == tr("lower")||
-                    secondWord == tr("under"))
+            else if(secondWord == tr("smaller").toUpper()||
+                    secondWord == tr("lower").toUpper()||
+                    secondWord == tr("under").toUpper())
             {
                 newFilter.comparator = eFilterComparativeBigger;
                 newFilter.property = firstWord;
-                QString value = currentUnit.section(' ',2); //until the end
-                if(value.contains(tr("than")))
+                QString value = currentUnit.section(' ',2,QString::SectionSkipEmpty); //until the end
+                if(value.contains(tr("than").toUpper()))
                 {
-                    value = currentUnit.section(' ',3); //until the end
+                    value = currentUnit.section(' ',3,QString::SectionSkipEmpty); //until the end
                 }
                 newFilter.value1 = value.remove("[a-z]").toFloat();//Not aware of unit. Not sure if this is a problem
             }
             else
             {
                 newFilter.comparator = eFilterComapartiveWith;
-                newFilter.property = firstWord;
+                newFilter.property = currentUnit;
             }
         }
 
         filters.append(newFilter);
-        currentUnitPos++;
     }
 
     for(int n = 0; n < N; n++)
@@ -1307,7 +1316,95 @@ void IGisProject::filter(const QString& str)
             break;
 
         case eFilterModeText:
-            item->setHidden(!item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText).toUpper().contains(str));
+            QString info =item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText).toUpper();
+            bool hide = false;
+            for(filter_t filter:filters)
+            {
+                switch(filter.comparator)
+                {
+                case eFilterComapartiveWith:
+                    if(!info.contains(filter.property))
+                    {
+                        hide = true;
+                    }
+                    break;
+
+                case eFilterComapartiveWithout:
+                    if(info.contains(filter.property))
+                    {
+                        hide = true;
+                    }
+                    break;
+
+                case eFilterComparativeSmaller:
+                {
+                    int indexOfProperty = info.indexOf(filter.property);
+                    if(indexOfProperty<0)
+                    {
+                        hide = true;
+                    }
+                    else
+                    {
+                        int indexOfFirstSep = info.indexOf(" ",indexOfProperty);
+                        int indexOfSecondSep = info.indexOf("[A-Z,a-z]",indexOfFirstSep);
+                        int value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep).toFloat();
+                        if(value>filter.value1)
+                        {
+                            hide = true;
+                        }
+                    }
+                }
+                break;
+
+                case eFilterComparativeBigger:
+                {
+                    int indexOfProperty = info.indexOf(filter.property);
+                    if(indexOfProperty<0)
+                    {
+                        hide = true;
+                    }
+                    else
+                    {
+                        int indexOfFirstSep = info.indexOf(" ",indexOfProperty);
+                        int indexOfSecondSep = info.indexOf("[A-Z,a-z]",indexOfFirstSep);
+                        int value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep).toFloat();
+                        if(value<filter.value1)
+                        {
+                            hide = true;
+                        }
+                    }
+                }
+                break;
+
+                case eFilterComparativeBetween:
+                {
+                    int indexOfProperty = info.indexOf(filter.property);
+                    if(indexOfProperty<0)
+                    {
+                        hide = true;
+                    }
+                    else
+                    {
+                        int indexOfFirstSep = info.indexOf(" ",indexOfProperty);
+                        int indexOfSecondSep = info.indexOf("[A-Z,a-z]",indexOfFirstSep);
+                        float value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep).toFloat();
+                        float maxValue = (filter.value1>filter.value2) ? filter.value1 : filter.value2;
+                        float minValue = (filter.value1<filter.value2) ? filter.value1 : filter.value2;
+                        if(value>maxValue||value<minValue)
+                        {
+                            hide = true;
+                        }
+                    }
+                }
+                break;
+                }
+
+                if(hide ==true)
+                {
+                    break;
+                }
+            }
+            item->setHidden(hide);
             break;
         }
     }

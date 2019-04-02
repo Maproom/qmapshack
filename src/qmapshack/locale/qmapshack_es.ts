@@ -538,12 +538,12 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="439"/>
         <source>&lt;b&gt;Summary over all waypoints in project&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Resumen de los waypoints&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="443"/>
         <source> x Geocache, consisting of: &lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> x Geocache, consiste en: &lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="479"/>
@@ -626,7 +626,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="401"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Resumen de todos los tracks del proyecto&lt;/b&gt;&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Resumen de los tracks del proyecto&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="671"/>
@@ -671,7 +671,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="91"/>
         <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;To document your tracks you can add a short description to a track point. All points with description will be marked along the track with auto-numbered bullets.&lt;br/&gt;You can add a description by a right click on a track point in the graphs. Or you do a left click on a track point in the map view.&lt;br/&gt;With the first track point you add information to this text will be replaced by a table. Use it to edit and delete track point information.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Información de los puntos del track&lt;/b&gt;&lt;br/&gt;Se puede añadir una breve descripción a ciertos puntos del track para crear una reseña y todos ellos se marcarán con una etiqueta numerada.&lt;br/&gt;La reseña se puede añadir con clic derecho en las gráficas o con clic izquierdo en la vista&lt;br/&gt;Se puede editar directamente en la tabla.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="185"/>
@@ -1646,27 +1646,27 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1543"/>
         <source>Track Point Info...</source>
-        <translation type="unfinished"></translation>
+        <translation>Información del punto del track...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1544"/>
         <source>Enter some text to be attached to this track point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Reseñar este punto del track:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1553"/>
         <source>Add track point desc.: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir reseña al punto: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1563"/>
         <source>Changed track point desc.: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Se cambió la reseña del punto: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1573"/>
         <source>Removed track point desc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se eliminó la reseña del punto.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1751"/>
@@ -2228,7 +2228,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="136"/>
         <source>Track Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Información del track</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="138"/>
@@ -3940,32 +3940,32 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="194"/>
         <source>track</source>
-        <translation type="unfinished">track</translation>
+        <translation>track</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="208"/>
         <source>route</source>
-        <translation type="unfinished">ruta</translation>
+        <translation>ruta</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="221"/>
         <source>area</source>
-        <translation type="unfinished">área</translation>
+        <translation>área</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="315"/>
         <source>Distance</source>
-        <translation type="unfinished">Distancia</translation>
+        <translation>Distancia</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="317"/>
         <source>Ascent</source>
-        <translation type="unfinished">Ascenso</translation>
+        <translation>Ascenso</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="319"/>
         <source>Descent</source>
-        <translation type="unfinished">Descenso</translation>
+        <translation>Descenso</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="321"/>
@@ -4074,7 +4074,7 @@ Estructura desconocida.</translation>
 %1x%2 pixel
 x: %3 m/px
 y: %4 m/px</source>
-        <translation>Zoom con la rueda del ratón en el mapa de abajo para cambiar la resolución:
+        <translation>Zoom con la rueda del ratón en el mapa inferior para cambiar la resolución:
 
 %1x%2 pixel
 x: %3 m/px
@@ -4136,7 +4136,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../grid/CProjWizard.cpp" line="230"/>
         <source>Lat/Lon projection is not allowed in this case.</source>
-        <translation>La proyección de Lat/Lon no está permitida en este caso.</translation>
+        <translation>La proyección de Lat/Long no está permitida en este caso.</translation>
     </message>
 </context>
 <context>
@@ -4157,17 +4157,17 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="55"/>
         <source>Failed to open...</source>
-        <translation type="unfinished">Fallo al abrir...</translation>
+        <translation>Fallo al abrir...</translation>
     </message>
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="55"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Fallo al abrir %1</translation>
+        <translation>Fallo al abrir %1</translation>
     </message>
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="138"/>
         <source>Could not convert...</source>
-        <translation type="unfinished">No se pudo convertir...</translation>
+        <translation>No se pudo convertir...</translation>
     </message>
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="139"/>
@@ -4311,7 +4311,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../qlgt/CQlgtTrack.cpp" line="218"/>
         <source>Number of trackpoints is not equal the number of extended data trackpoints.</source>
-        <translation>El número de puntos de track no es igual al número de datos extendidos</translation>
+        <translation>El número de puntos de track no es igual al número de puntos de la extensión.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtTrack.cpp" line="265"/>
@@ -4436,7 +4436,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="645"/>
         <source>BRouter (Version %1.%2.%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (Version %1.%2.%3)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
@@ -4459,42 +4459,42 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="192"/>
         <source>Error:</source>
-        <translation type="unfinished">Error:</translation>
+        <translation>Error:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="198"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation type="unfinished">QMapShack se comunica con BRouter a través de una conexión de red. Por lo general, esto se hace en una dirección especial a la que no se puede acceder si no es a través de su dispositivo. Sin embargo, BRouter recibe las conexiones en todas las interfaces disponibles. Si se encuentra en su propia red privada con un firewall activo, no debe de suponer un problema. Si se conecta con una red pública, cada puerto abierto es un riesgo, ya que puede ser utilizado por otra persona para comprometer su sistema. No recomendamos utilizar el servicio local BRouter en este caso. Si ve esta advertencia y utiliza la versión de BRouter &gt;= 1.4.10 puede aplicar el enlace a la dirección local estableciendo el nombre de host en &quot;localhost&quot; y probar &quot;Nombre host solamente&quot; en la cofiguración en modo experto</translation>
+        <translation>QMapShack se comunica con BRouter a través de una conexión de red. Por lo general, esto se hace en una dirección especial a la que no se puede acceder si no es a través de su dispositivo. Sin embargo, BRouter recibe las conexiones en todas las interfaces disponibles. Si se encuentra en su propia red privada con un firewall activo, no debe de suponer un problema. Si se conecta con una red pública, cada puerto abierto es un riesgo, ya que puede ser utilizado por otra persona para comprometer su sistema. No recomendamos utilizar el servicio local BRouter en este caso. Si ve esta advertencia y utiliza la versión de BRouter &gt;= 1.4.10 puede aplicar el enlace a la dirección local estableciendo el nombre de host en &quot;localhost&quot; y probar &quot;Nombre host solamente&quot; en la configuración en modo experto</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="219"/>
         <source>Warning...</source>
-        <translation type="unfinished">Aviso...</translation>
+        <translation>Aviso...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="224"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
-        <translation type="unfinished">Asumo el riesgo. No avisar de nuevo.</translation>
+        <translation>Asumo el riesgo. No avisar de nuevo.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="229"/>
         <source>starting</source>
-        <translation type="unfinished">comenzando</translation>
+        <translation>iniciando</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="237"/>
         <source>running</source>
-        <translation type="unfinished">En marcha</translation>
+        <translation>iniciado</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="244"/>
         <source>stopped</source>
-        <translation type="unfinished">Parado</translation>
+        <translation>Parado</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="255"/>
         <source>not installed</source>
-        <translation type="unfinished">No instalado</translation>
+        <translation>No instalado</translation>
     </message>
 </context>
 <context>
@@ -4540,7 +4540,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="419"/>
         <source>please select BRouter installation directory</source>
-        <translation>Seleccione carpeta de instalacion de BRouter</translation>
+        <translation>Seleccione carpeta de instalación de BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="424"/>
@@ -4555,7 +4555,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="432"/>
         <source>existing BRouter installation</source>
-        <translation>Instalacion de BRouter detectada</translation>
+        <translation>Instalación de BRouter detectada</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="433"/>
@@ -4565,12 +4565,12 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="438"/>
         <source>empty directory, create new BRouter installation here</source>
-        <translation>Carpeta vacia, instale BRouter aquí</translation>
+        <translation>Carpeta vacía, instale BRouter aquí</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="439"/>
         <source>create new BRouter installation</source>
-        <translation>Crear nueva instalacion de BRouter</translation>
+        <translation>Crear nueva instalación de BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="447"/>
@@ -4610,7 +4610,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="538"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
-        <translation>Descarga:%1&lt;br/&gt;&lt;br/&gt; Esto descargará e instalará un archivo zip desde un servidor de descarga no está protegido por ningún estándar, usando HTTP normal. Normalmente debería ser HTTPS. El riesgo es que alguien redireccione la solicitud y le envíe un código malicioso. No es posible que QMapShack lo detecte. &lt;br/&gt; Si no lo entiende o si tiene alguna duda, no siga y cancele. Utilice la versión web de BRouter en su lugar.</translation>
+        <translation>Descarga:%1&lt;br/&gt;&lt;br/&gt; Esto descargará e instalará un archivo zip desde un servidor de descarga no está protegido por ningún estándar, usando HTTP normal. Normalmente debería ser HTTPS. El riesgo es que alguien redireccione la solicitud y le envíe un código malicioso indetectable por QMapShack. &lt;br/&gt; Si esto no se comprende o si se tienen dudas es mejor cancelar y usar la versión web de BRouter.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="550"/>
@@ -4816,7 +4816,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="831"/>
         <source>no routing-data available</source>
-        <translation>Datos de ruteo no disponibles</translation>
+        <translation>Datos de enrutamiento no disponibles</translation>
     </message>
 </context>
 <context>
@@ -4839,7 +4839,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="37"/>
         <source>Fastest</source>
-        <translation>Más rapido</translation>
+        <translation>Más rápido</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="38"/>
@@ -4998,7 +4998,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
         <source>Goods</source>
-        <translation>Mercancias</translation>
+        <translation>Mercancías</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="64"/>
@@ -5108,37 +5108,37 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="169"/>
         <source>The profile and database do not work together.</source>
-        <translation>El perfil y la base de datos no funcionan juntos</translation>
+        <translation>El perfil y la base de datos no funcionan juntos.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="172"/>
         <source>The profile being used has not been validated.</source>
-        <translation>El perfil que se utiliza no ha sido validado</translation>
+        <translation>El perfil que se utiliza no ha sido validado.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="175"/>
         <source>The user specified profile contained invalid data.</source>
-        <translation>El perfil especificado por el usuario contenía datos no válidos</translation>
+        <translation>El perfil especificado por el usuario contenía datos no válidos.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="178"/>
         <source>The routing options specified are not consistent with each other.</source>
-        <translation>Las opciones de enrutamiento especificadas no son coherentes entre sí</translation>
+        <translation>Las opciones de enrutamiento especificadas no son coherentes entre sí.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="181"/>
         <source>There is a mismatch between the library and caller API version.</source>
-        <translation>Hay un desajuste entre la biblioteca y la versión de la API del llamante</translation>
+        <translation>Hay un desajuste entre la biblioteca y la versión de la API del llamante.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="184"/>
         <source>Route calculation was aborted by user.</source>
-        <translation>El cálculo de la ruta ha sido cancelado por el usuario</translation>
+        <translation>El cálculo de la ruta ha sido cancelado por el usuario.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="190"/>
         <source>A route could not be found to waypoint %1.</source>
-        <translation>No se pudo encontrar una ruta al waypoint %1</translation>
+        <translation>No se pudo encontrar una ruta al waypoint %1.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="193"/>
@@ -5163,7 +5163,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="166"/>
         <source>In the routing database there is no highway near the coordinates to place a waypoint.</source>
-        <translation>En la base de datos de enrutamiento no hay ninguna via cerca de las coordenadas para colocar un waypoint.</translation>
+        <translation>En la base de datos de enrutamiento no hay ninguna vía cerca de las coordenadas para colocar un waypoint.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="349"/>
@@ -5182,12 +5182,12 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/routino/CRouterRoutinoPathSetup.cpp" line="40"/>
         <source>Add or remove paths containing Routino data. There can be multiple databases in a path but no sub-path is parsed.</source>
-        <translation>Agregar o quitar carpetas que contienen datos de Routino. Puede haber varias bases de datos en una carpeta, pero no se analiza ninguna subcarpeta.</translation>
+        <translation>Agregar o quitar carpetas que contienen datos de Routino. Puede haber varias bases de datos en una carpeta, pero no se analizan las subcarpetas.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/routino/CRouterRoutinoPathSetup.cpp" line="55"/>
         <source>Select routing data file path...</source>
-        <translation>Seleccione la carpeta del archivo de datos de enrutamiento</translation>
+        <translation>Seleccione la carpeta del archivo de datos de enrutamiento...</translation>
     </message>
 </context>
 <context>
@@ -5259,7 +5259,7 @@ Para vincular el dispositivo Android con Qmapshack:
 
 - El dispositivo Android y Qmapshack deben estar conectados a la misma red. Puede ser una red Wi-Fi. También se puede configurar el Android como punto de acceso Wi-Fi.
 
-- Es necesario indicar en QMapShack la dirección IP del dispositivo o su nombre de host, y el número de puerto tal y como está configurado en la aplicación. La aplicación Android te dirá cuál es esa dirección IP y el numero del puerto.
+- Es necesario indicar en QMapShack la dirección IP del dispositivo o su nombre de host, y el número de puerto tal y como está configurado en la aplicación. La aplicación Android indicará cuál es esa dirección IP y el número del puerto.
 </translation>
     </message>
     <message>
@@ -5333,12 +5333,12 @@ Para vincular el dispositivo Android con Qmapshack:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="211"/>
         <source>heading:</source>
-        <translation type="unfinished">Rumbo:</translation>
+        <translation>Rumbo:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="212"/>
         <source>vert. rate:</source>
-        <translation type="unfinished">Velocidad vert.:</translation>
+        <translation>Velocidad vert.:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="213"/>
@@ -5358,7 +5358,7 @@ Para vincular el dispositivo Android con Qmapshack:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="216"/>
         <source>position source:</source>
-        <translation type="unfinished">Origen Posición:</translation>
+        <translation>Origen Posición:</translation>
     </message>
 </context>
 <context>
@@ -5392,7 +5392,7 @@ Para vincular el dispositivo Android con Qmapshack:
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="262"/>
         <source>Delete Source...</source>
-        <translation type="unfinished">Borrar Fuente...</translation>
+        <translation>Borrar Fuente...</translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="262"/>
@@ -5413,12 +5413,12 @@ Para vincular el dispositivo Android con Qmapshack:
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="84"/>
         <source>&lt;b&gt;Exact Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be completely inside the selected area.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Modo exacto&lt;/b&gt;&lt;br/&gt;Todos los elementos seleccionados estan completamente dentro del área.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Modo exacto&lt;/b&gt;&lt;br/&gt;Todos los elementos seleccionados están completamente dentro del área.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="88"/>
         <source>&lt;b&gt;Intersecting Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be inside or at least intersect the selected area.&lt;br/&gt;</source>
-        <translation>Modo de intersección&lt;/b&gt;&lt;br/&gt;Todos los elementos seleccionados deben estar dentro o al menos intersecar el área seleccionada.&lt;br/&gt;</translation>
+        <translation>Modo de intersección&lt;/b&gt;&lt;br/&gt;Todos los elementos seleccionados deben estar dentro o al menos intersectar el área seleccionada.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="92"/>
@@ -5466,17 +5466,17 @@ Para vincular el dispositivo Android con Qmapshack:
     <message>
         <location filename="../print/CScreenshotDialog.cpp" line="36"/>
         <source>&lt;b&gt;Screenshot&lt;/b&gt;&lt;br/&gt;You can save or print a screenshot of your current map view. If the track profile is shown in it&apos;s own window it is appended to the screenshot. Check the pre-view below. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Captura de pantalla&lt;/b&gt;&lt;br/&gt;Se puede hacer una captura de pantalla de la vista actual para guardar o imprimir. Si el perfil del track está en ventana externa será adjuntado a la captura. Comprobar en la vista previa. </translation>
     </message>
     <message>
         <location filename="../print/CScreenshotDialog.cpp" line="59"/>
         <source>Save screenshot...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar captura de pantalla...</translation>
     </message>
     <message>
         <location filename="../print/CScreenshotDialog.cpp" line="112"/>
         <source>Print Screenshot...</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimir captura de pantalla...</translation>
     </message>
 </context>
 <context>
@@ -5723,17 +5723,17 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/trk/CTableTrkInfo.cpp" line="28"/>
         <source>Edit...</source>
-        <translation type="unfinished">Editar...</translation>
+        <translation>Editar...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrkInfo.cpp" line="29"/>
         <source>Delete</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrkInfo.cpp" line="57"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción</translation>
     </message>
 </context>
 <context>
@@ -7176,7 +7176,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="499"/>
         <source>No Attributes present</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin atributos</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="85"/>
@@ -8251,7 +8251,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="50"/>
         <source> Type</source>
-        <translation type="unfinished"> Tipo</translation>
+        <translation> Tipo</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="113"/>
@@ -8498,7 +8498,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="62"/>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="67"/>
@@ -8508,7 +8508,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="112"/>
         <source>To add a database do a right click on the database list above.</source>
-        <translation type="unfinished">Para añadir una base de datos haga click con el botón derecho en la lista de bases de datos.</translation>
+        <translation>Para añadir una base de datos haga click con el botón derecho en la lista de bases de datos.</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="135"/>
@@ -8848,7 +8848,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="43"/>
         <source>Opacity</source>
-        <translation type="unfinished">Opacidad</translation>
+        <translation>Opacidad</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="50"/>
@@ -8863,27 +8863,27 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="111"/>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="123"/>
         <source>Clear Filter</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="132"/>
         <source>Setup Filter</source>
-        <translation type="unfinished">Configurar filtro</translation>
+        <translation>Configurar filtro</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="140"/>
         <source>name only</source>
-        <translation type="unfinished">Solo nombre</translation>
+        <translation>Solo nombre</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="148"/>
         <source>complete text</source>
-        <translation type="unfinished">Texto completo</translation>
+        <translation>Texto completo</translation>
     </message>
 </context>
 <context>
@@ -9240,92 +9240,92 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="680"/>
         <source>Track Profile as Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil del track en ventana externa</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="683"/>
         <source>Show the track profile in it&apos;s own window instead within the map view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver el perfil del track en su propia ventana en lugar de en la vista. </translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="740"/>
         <source>Save(Print) Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar/Imprimir captura.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="860"/>
         <source>Min./Max. Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas de Min./Max.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="893"/>
         <source>Track Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Información del track</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="896"/>
         <source>Select what information is shown for a highlighted track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar que información del track seleccionado será mostrada.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="908"/>
         <source>Track Point Info Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Reseña del track</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="911"/>
         <source>Show a legend for all track point info bullets along the track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar la reseña con etiquetas a lo largo del track.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="923"/>
         <source>Track Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Resumen del track.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="926"/>
         <source>Show the track summary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar el resumen del track.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="938"/>
         <source>Min./Max Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Resumen de min/max.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="941"/>
         <source>Show the minimum and the maximum values of the track properties in a table.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar los valores mininos y máximos del track en una tabla.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="953"/>
         <source>Track Profile</source>
-        <translation type="unfinished">Perfil del Track</translation>
+        <translation>Perfil del track</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="956"/>
         <source>Show the track profile.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver el perfil del track.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="965"/>
         <source>Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Tomar captura de pantalla</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="968"/>
         <source>Take a screenshot from the current active map view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tomar captura de pantalla de la actual vista.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="980"/>
         <source>Track Point Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Reseña de los puntos del track</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="983"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Señalar los puntos  de track que tengan reseña añadida con etiquetas auto-numeradas.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="686"/>
@@ -9360,7 +9360,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="743"/>
         <source>Print a selected area of the map</source>
-        <translation>Imprimir area seleccionada del mapa</translation>
+        <translation>Imprimir área seleccionada del mapa</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="746"/>
@@ -9405,7 +9405,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="809"/>
         <source>Quickstart Help</source>
-        <translation>Guia de inicio rápido</translation>
+        <translation>Guía de inicio rápido</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="818"/>
@@ -9991,7 +9991,7 @@ Consejos:
     <message>
         <location filename="../plot/IPlot.cpp" line="100"/>
         <source>Add Trackpoint Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir información al punto de track</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="101"/>
@@ -11569,7 +11569,9 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="208"/>
         <source>Add a description to the selected track point. The track point will be marked with an auto-numbered bullet. A table with all descriptions will be shown in the track details dialog and for highlighted tracks in the map view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir una descripción a un punto del track.
+Se marcará el punto con una etiqueta numerada automáticamente y se podrá ver en la pestaña de edición una lista con todas las reseñas que se hayan añadido.
+La misma lista se podrá ver sobre la vista del mapa para los tracks seleccionados.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
@@ -11719,23 +11721,23 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="14"/>
         <source>Screenshot...</source>
-        <translation type="unfinished"></translation>
+        <translation>Captura de pantalla...</translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="20"/>
         <location filename="../print/IScreenshotDialog.ui" line="30"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="55"/>
         <source>Save Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar captura</translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="66"/>
         <source>Print Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimir captura</translation>
     </message>
 </context>
 <context>

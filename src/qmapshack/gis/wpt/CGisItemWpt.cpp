@@ -959,6 +959,20 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
+searchValue_t CGisItemWpt::getValueByKeyword(QString keyword)
+{
+    keyword = keyword.toUpper();
+    searchValue_t value;
+
+    if(keyword == "DIFFICULTY" || keyword == tr("Difficulty").toUpper())
+    {
+        value.value1 = geocache.difficulty;
+        return value;
+    }
+
+    return value;
+}
+
 void CGisItemWpt::processMouseOverBubble(const QPoint &pos)
 {
     if(rectBubbleMove.contains(pos) || rectBubbleEdit.contains(pos) || rectBubbleSize.contains(pos))

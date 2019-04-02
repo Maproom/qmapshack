@@ -2731,6 +2731,21 @@ void CGisItemTrk::getMouseRange(const CTrackData::trkpt_t * &mr1, const CTrackDa
     mr2 = mouseRange2;
 }
 
+searchValue_t CGisItemTrk::getValueByKeyword(QString keyword)
+{
+    keyword = keyword.toUpper();
+    searchValue_t value;
+
+    if(keyword == "LENGTH" || keyword == tr("length").toUpper()||
+       keyword == "DISTANCE" || keyword == tr("distance").toUpper())
+    {
+        value.value1 = totalDistance;
+        return value;
+    }
+
+    return value;
+}
+
 bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline)
 {
     qreal dist1 = GPS_Math_DistPointPolyline(lineSimple, pt1, threshold);

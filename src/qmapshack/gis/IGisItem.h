@@ -40,7 +40,7 @@ class IScrOpt;
 class IMouse;
 class QSqlDatabase;
 class IGisProject;
-
+struct searchValue_t;
 
 class IGisItem : public QTreeWidgetItem
 {
@@ -582,6 +582,8 @@ public:
         return colorMap;
     }
 
+    virtual searchValue_t getValueByKeyword(QString keyword) = 0;
+
 protected:
     /// set icon of QTreeWidgetItem
     virtual void setSymbol() = 0;
@@ -645,7 +647,6 @@ protected:
 
     static QVector<color_t> colorMap;
 private:
-
     void showIcon();
 };
 

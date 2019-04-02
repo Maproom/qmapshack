@@ -180,6 +180,21 @@ bool CGisItemRte::isCalculated()
     return yes;
 }
 
+searchValue_t CGisItemRte::getValueByKeyword(QString keyword)
+{
+    keyword = keyword.toUpper();
+    searchValue_t value;
+
+    if(keyword == "LENGTH" || keyword == tr("length").toUpper()||
+       keyword == "DISTANCE" || keyword == tr("distance").toUpper())
+    {
+        value.value1 = rte.totalDistance;
+        return value;
+    }
+
+    return value;
+}
+
 void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
 {
     if(ele == NOFLOAT)

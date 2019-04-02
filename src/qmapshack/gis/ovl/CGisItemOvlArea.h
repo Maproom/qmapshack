@@ -117,6 +117,8 @@ public:
 
     void gainUserFocus(bool yes) override;
 
+    searchValue_t getValueByKeyword(QString keyword) override;
+
     struct width_t
     {
         int width;

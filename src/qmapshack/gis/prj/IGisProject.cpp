@@ -62,7 +62,7 @@ const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; 
 
 QString IGisProject::keyUserFocus;
 
-IGisProject::filter_mode_e IGisProject::filterMode = IGisProject::eFilterModeName;
+CSearch::search_mode_e IGisProject::searchMode = CSearch::eSearchModeName;
 
 IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
@@ -1188,91 +1188,7 @@ void IGisProject::filter(const QString& str)
         return;
     }
 
-    QList<filter_t> filters;
-    QString currentUnit;
-    for(unsigned int currentUnitPos = 0; true; currentUnitPos++)
-    {
-        QString currentUnit = str.section(',',currentUnitPos, currentUnitPos,QString::SectionSkipEmpty);
-        if(currentUnit=="")
-        {
-            break;
-        }
-
-        currentUnit=currentUnit.simplified(); //removes leading and trailing whitespaces and double ones
-
-        QString firstWord = currentUnit.section(' ',0,0);
-        filter_t newFilter;
-
-        if(firstWord == tr("with").toUpper())
-        {
-            newFilter.comparator = eFilterComapartiveWith;
-            newFilter.property = currentUnit.section(' ',1); //until the end
-        }
-        else if(firstWord == tr("without").toUpper())
-        {
-            newFilter.comparator = eFilterComapartiveWithout;
-            newFilter.property = currentUnit.section(' ',1); //until the end
-        }
-        else if(firstWord == tr("shorter").toUpper())
-        {
-            newFilter.comparator = eFilterComparativeSmaller;
-            newFilter.property = tr("length").toUpper();
-            QString value = currentUnit.section(' ',1).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
-            newFilter.value1 = value.toFloat();//Not aware of unit. Not sure if this is a problem
-        }
-        else if(firstWord == tr("longer").toUpper())
-        {
-            newFilter.comparator = eFilterComparativeBigger;
-            newFilter.property = tr("length").toUpper();
-            QString value = currentUnit.section(' ',1).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
-            newFilter.value1 = value.toFloat();//Not aware of unit. Not sure if this is a problem
-        }
-        else if(firstWord == tr("lower").toUpper())
-        {
-            newFilter.comparator = eFilterComparativeSmaller;
-            newFilter.property = tr("elevation").toUpper();
-            QString value = currentUnit.section(' ',1).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
-            newFilter.value1 = value.toFloat();//Not aware of unit. Not sure if this is a problem
-        }
-        else if(firstWord == tr("higher").toUpper())
-        {
-            newFilter.comparator = eFilterComparativeBigger;
-            newFilter.property = tr("elevation").toUpper();
-            QString value = currentUnit.section(' ',1).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
-            newFilter.value1 = value.toFloat();//Not aware of unit. Not sure if this is a problem
-        }
-        else
-        {
-            QString secondWord = currentUnit.section(' ',1,1);
-
-            if(secondWord == tr("bigger").toUpper()||
-               secondWord == tr("higher").toUpper()||
-               secondWord == tr("greater").toUpper()||
-               secondWord == tr("over").toUpper())
-            {
-                newFilter.comparator = eFilterComparativeBigger;
-                newFilter.property = firstWord;
-                QString value = currentUnit.section(' ',2).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
-                newFilter.value1 = value.toFloat();         //Not aware of unit. Not sure if this is a problem
-            }
-            else if(secondWord == tr("smaller").toUpper()||
-                    secondWord == tr("lower").toUpper()||
-                    secondWord == tr("under").toUpper())
-            {
-                newFilter.comparator = eFilterComparativeSmaller;
-                newFilter.property = firstWord;
-                QString value = currentUnit.section(' ',2).remove(QRegExp("[A-Z ]+")); //until the end, regex removes all alphabetical values and spaces
-                newFilter.value1 = value.toFloat();//Not aware of unit. Not sure if this is a problem.
-            }
-            else
-            {
-                newFilter.comparator = eFilterComapartiveWith;
-                newFilter.property = currentUnit;
-            }
-        }
-
-        filters.append(newFilter);
-    }
+    CSearch searchObj (str,searchMode);
 
     for(int n = 0; n < N; n++)
     {
@@ -1282,104 +1198,7 @@ void IGisProject::filter(const QString& str)
             continue;
         }
 
-        switch(filterMode)
-        {
-        case eFilterModeName:
-            item->setHidden(!item->getName().toUpper().contains(str));
-            break;
-
-        case eFilterModeText:
-            QString info =item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText).toUpper();
-            bool hide = false;
-            for(filter_t filter:filters)
-            {
-                switch(filter.comparator)
-                {
-                case eFilterComapartiveWith:
-                    if(!info.contains(filter.property))
-                    {
-                        hide = true;
-                    }
-                    break;
-
-                case eFilterComapartiveWithout:
-                    if(info.contains(filter.property))
-                    {
-                        hide = true;
-                    }
-                    break;
-
-                case eFilterComparativeSmaller:
-                {
-                    int indexOfProperty = info.indexOf(filter.property);
-                    if(indexOfProperty<0)
-                    {
-                        hide = true;
-                    }
-                    else
-                    {
-                        int indexOfFirstSep = info.indexOf(" ",indexOfProperty);
-                        int indexOfSecondSep = info.indexOf(QRegExp("[A-Z ]"),indexOfFirstSep+1);
-                        QStringRef value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep);
-                        if(value.toFloat()>filter.value1)
-                        {
-                            hide = true;
-                        }
-                    }
-                }
-                break;
-
-                case eFilterComparativeBigger:
-                {
-                    int indexOfProperty = info.indexOf(filter.property);
-                    if(indexOfProperty<0)
-                    {
-                        hide = true;
-                    }
-                    else
-                    {
-                        int indexOfFirstSep = info.indexOf(" ",indexOfProperty);
-                        int indexOfSecondSep = info.indexOf(QRegExp("[A-Z ]"),indexOfFirstSep+1);
-                        QStringRef value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep);
-                        if(value.toFloat()<filter.value1)
-                        {
-                            hide = true;
-                        }
-                    }
-                }
-                break;
-
-                case eFilterComparativeBetween:
-                {
-                    int indexOfProperty = info.indexOf(filter.property);
-                    if(indexOfProperty<0)
-                    {
-                        hide = true;
-                    }
-                    else
-                    {
-                        int indexOfFirstSep = info.indexOf(" ",indexOfProperty);
-                        int indexOfSecondSep = info.indexOf(QRegExp("[A-Z ]"),indexOfFirstSep+1);
-                        QStringRef value = info.midRef(indexOfFirstSep,indexOfSecondSep-indexOfFirstSep);
-                        float maxValue = (filter.value1>filter.value2) ? filter.value1 : filter.value2;
-                        float minValue = (filter.value1<filter.value2) ? filter.value1 : filter.value2;
-                        if(value.toFloat()>maxValue||value.toFloat()<minValue)
-                        {
-                            hide = true;
-                        }
-                    }
-                }
-                break;
-                }
-
-                if(hide ==true)
-                {
-                    break;
-                }
-            }
-            item->setHidden(hide);
-            break;
-        }
+        item->setHidden(!searchObj.getSearchResult(item));//get search result returns wether the object matches
     }
 }
 

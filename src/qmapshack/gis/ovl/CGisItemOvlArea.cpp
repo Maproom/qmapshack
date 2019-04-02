@@ -341,6 +341,20 @@ void CGisItemOvlArea::gainUserFocus(bool yes)
     keyUserFocus = yes ? key : key_t();
 }
 
+searchValue_t CGisItemOvlArea::getValueByKeyword(QString keyword)
+{
+    keyword = keyword.toUpper();
+    searchValue_t value;
+
+    if(keyword == "AREA" || keyword == tr("area").toUpper())
+    {
+        value.value1 = area.area;
+        return value;
+    }
+
+    return value;
+}
+
 QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)
 {
     qreal x = 0;

@@ -219,6 +219,8 @@ public:
 
     bool isCalculated();
 
+    searchValue_t getValueByKeyword(QString keyword) override;
+
 private:
     void deriveSecondaryData();
     void setElevation(qreal ele, subpt_t &subpt, qreal &lastEle);

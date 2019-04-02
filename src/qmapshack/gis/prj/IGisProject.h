@@ -22,6 +22,7 @@
 
 #include "gis/IGisItem.h"
 #include "gis/rte/router/IRouter.h"
+#include "helpers/CSearch.h"
 #include <QDebug>
 #include <QMessageBox>
 #include <QPointer>
@@ -76,21 +77,6 @@ public:
         ,eSortFolderSymbol
     };
 
-    enum filter_mode_e
-    {
-        eFilterModeName
-        ,eFilterModeText
-    };
-
-    enum filter_comapartives
-    {
-        eFilterComapartiveWith,
-        eFilterComapartiveWithout,
-        eFilterComparativeSmaller,
-        eFilterComparativeBigger,
-        eFilterComparativeBetween
-    };
-
     struct person_t
     {
         QString name;
@@ -123,14 +109,6 @@ public:
         QMap<QString, QVariant> extensions;
     };
 
-    struct filter_t
-    {
-        QString property;
-        filter_comapartives comparator;
-        float value1;
-        float value2;
-    };
-
     static const QString filedialogAllSupported;
     static const QString filedialogFilterGPX;
     static const QString filedialogFilterTCX;
@@ -143,7 +121,7 @@ public:
     static const QString filedialogSaveFilters;
     static const QString filedialogLoadFilters;
 
-    static filter_mode_e filterMode;
+    static CSearch::search_mode_e searchMode;
 
     IGisProject(type_e type, const QString &filename, CGisListWks *parent);
     IGisProject(type_e type, const QString &filename, IDevice     *parent);

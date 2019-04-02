@@ -200,6 +200,7 @@ set( SRCS
     grid/mitab.cpp
     helpers/CDraw.cpp
     helpers/CElevationDialog.cpp
+    helpers/CSearch.cpp
     helpers/CInputDialog.cpp
     helpers/CLimit.cpp
     helpers/CLinksDialog.cpp
@@ -530,6 +531,7 @@ set( HDRS
     helpers/CDraw.h
     helpers/CElevationDialog.h
     helpers/CFileExt.h
+    helpers/CSearch.h
     helpers/CInputDialog.h
     helpers/CLimit.h
     helpers/CLinksDialog.h

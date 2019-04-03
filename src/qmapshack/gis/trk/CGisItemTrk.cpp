@@ -2731,19 +2731,16 @@ void CGisItemTrk::getMouseRange(const CTrackData::trkpt_t * &mr1, const CTrackDa
     mr2 = mouseRange2;
 }
 
-searchValue_t CGisItemTrk::getValueByKeyword(QString keyword)
+const QSharedPointer<searchValue_t> CGisItemTrk::getValueByKeyword(searchKeyword_e keyword)
 {
-    keyword = keyword.toUpper();
-    searchValue_t value;
-
-    if(keyword == "LENGTH" || keyword == tr("length").toUpper()||
-       keyword == "DISTANCE" || keyword == tr("distance").toUpper())
+    if(keywordLambdaMap.contains(keyword))
     {
-        value.value1 = totalDistance;
-        return value;
+        return keywordLambdaMap.value(keyword)(this);
     }
-
-    return value;
+    else
+    {
+        return QSharedPointer<searchValue_t>  (new searchValue_t);
+    }
 }
 
 bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline)
@@ -2773,4 +2770,17 @@ void CGisItemTrk::checkForInvalidPoints()
         CInvalidTrk dlg(*this, CMainWindow::self().getBestWidgetForParent());
         dlg.exec();
     }
+}
+
+
+QMap<searchKeyword_e,CGisItemTrk::fSearch > CGisItemTrk::keywordLambdaMap = CGisItemTrk::initKeywordLambdaMap();
+QMap<searchKeyword_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
+{
+    QMap<searchKeyword_e, CGisItemTrk::fSearch> map;
+    map.insert(searchKeyword_e::eSearchKeywordRteTrkDistance,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->totalDistance;
+        return searchValue;
+    });
+    return map;
 }

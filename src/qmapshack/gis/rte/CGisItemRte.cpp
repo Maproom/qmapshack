@@ -180,19 +180,16 @@ bool CGisItemRte::isCalculated()
     return yes;
 }
 
-searchValue_t CGisItemRte::getValueByKeyword(QString keyword)
+const QSharedPointer<searchValue_t> CGisItemRte::getValueByKeyword(searchKeyword_e keyword)
 {
-    keyword = keyword.toUpper();
-    searchValue_t value;
-
-    if(keyword == "LENGTH" || keyword == tr("length").toUpper()||
-       keyword == "DISTANCE" || keyword == tr("distance").toUpper())
+    if(keywordLambdaMap.contains(keyword))
     {
-        value.value1 = rte.totalDistance;
-        return value;
+        return keywordLambdaMap.value(keyword)(this);
     }
-
-    return value;
+    else
+    {
+        return QSharedPointer<searchValue_t> (new searchValue_t);
+    }
 }
 
 void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
@@ -1310,4 +1307,16 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
 
     deriveSecondaryData();
     updateHistory();
+}
+
+QMap<searchKeyword_e,CGisItemRte::fSearch > CGisItemRte::keywordLambdaMap = CGisItemRte::initKeywordLambdaMap();
+QMap<searchKeyword_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
+{
+    QMap<searchKeyword_e, CGisItemRte::fSearch> map;
+    map.insert(searchKeyword_e::eSearchKeywordRteTrkDistance,[](CGisItemRte* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->rte.totalDistance;
+        return searchValue;
+    });
+    return map;
 }

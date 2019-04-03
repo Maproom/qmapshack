@@ -959,18 +959,16 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
-searchValue_t CGisItemWpt::getValueByKeyword(QString keyword)
+const QSharedPointer<searchValue_t> CGisItemWpt::getValueByKeyword(searchKeyword_e keyword)
 {
-    keyword = keyword.toUpper();
-    searchValue_t value;
-
-    if(keyword == "DIFFICULTY" || keyword == tr("Difficulty").toUpper())
+    if(keywordLambdaMap.contains(keyword))
     {
-        value.value1 = geocache.difficulty;
-        return value;
+        return keywordLambdaMap.value(keyword)(this);
     }
-
-    return value;
+    else
+    {
+        return QSharedPointer<searchValue_t>  (new searchValue_t);
+    }
 }
 
 void CGisItemWpt::processMouseOverBubble(const QPoint &pos)
@@ -1081,3 +1079,16 @@ const QString CGisItemWpt::geocache_t::attributeMeanings[] = {
     "Teamwork Required",
     "GeoTour"
 };
+
+
+QMap<searchKeyword_e,CGisItemWpt::fSearch > CGisItemWpt::keywordLambdaMap = CGisItemWpt::initKeywordLambdaMap();
+QMap<searchKeyword_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
+{
+    QMap<searchKeyword_e, CGisItemWpt::fSearch> map;
+    map.insert(searchKeyword_e::eSearchKeywordWptElevation,[](CGisItemWpt* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->wpt.ele;
+        return searchValue;
+    });
+    return map;
+}

@@ -22,7 +22,7 @@
 
 #include "gis/IGisItem.h"
 #include "gis/rte/router/IRouter.h"
-#include "helpers/CSearch.h"
+#include "gis/search/CSearch.h"
 #include <QDebug>
 #include <QMessageBox>
 #include <QPointer>

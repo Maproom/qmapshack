@@ -341,18 +341,16 @@ void CGisItemOvlArea::gainUserFocus(bool yes)
     keyUserFocus = yes ? key : key_t();
 }
 
-searchValue_t CGisItemOvlArea::getValueByKeyword(QString keyword)
+const QSharedPointer<searchValue_t> CGisItemOvlArea::getValueByKeyword(searchKeyword_e keyword)
 {
-    keyword = keyword.toUpper();
-    searchValue_t value;
-
-    if(keyword == "AREA" || keyword == tr("area").toUpper())
+    if(keywordLambdaMap.contains(keyword))
     {
-        value.value1 = area.area;
-        return value;
+        return keywordLambdaMap.value(keyword)(this);
     }
-
-    return value;
+    else
+    {
+        return QSharedPointer<searchValue_t>  (new searchValue_t);
+    }
 }
 
 QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)
@@ -568,4 +566,16 @@ void CGisItemOvlArea::setIcon(const QString& c)
     mask.fill( str2color(c) );
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
     IGisItem::setIcon(mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+}
+
+QMap<searchKeyword_e,CGisItemOvlArea::fSearch > CGisItemOvlArea::keywordLambdaMap = CGisItemOvlArea::initKeywordLambdaMap();
+QMap<searchKeyword_e, CGisItemOvlArea::fSearch> CGisItemOvlArea::initKeywordLambdaMap()
+{
+    QMap<searchKeyword_e, CGisItemOvlArea::fSearch> map;
+    map.insert(searchKeyword_e::eSearchKeywordAreaArea,[](CGisItemOvlArea* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->area.area;
+        return searchValue;
+    });
+    return map;
 }

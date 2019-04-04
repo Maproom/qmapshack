@@ -60,7 +60,7 @@ private slots:
     void slotSetScrollbar();
 
 private:
-    void addIcon(QTextTable *table, int col, int row, IGisItem * item, bool printable);
+    void addIcon(QTextTable *table, int col, int row, const QPixmap &icon, const QString &key, bool isReadOnly, bool printable);
     void getTrackProfile(CGisItemTrk * trk, QImage& image);
     void getTrackOverview(CGisItemTrk * trk, QImage& image);
     void draw(QTextDocument& doc, bool printable);

@@ -27,6 +27,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CProgressDialog.h"
+#include "helpers/CWptIconManager.h"
 #include "helpers/Signals.h"
 #include "plot/CPlotProfile.h"
 #include "plot/CPlotTrack.h"
@@ -459,13 +460,13 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
     cursor1.insertHtml(str);
 }
 
-void CDetailsPrj::addIcon(QTextTable * table, int col, int row, IGisItem * item, bool printable)
+void CDetailsPrj::addIcon(QTextTable * table, int col, int row, const QPixmap& icon, const QString& key, bool isReadOnly, bool printable)
 {
-    table->cellAt(row,col).firstCursorPosition().insertImage(item->getDisplayIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+    table->cellAt(row,col).firstCursorPosition().insertImage(icon.toImage().scaledToWidth(16, Qt::SmoothTransformation));
 
-    if(!(printable||item->isReadOnly()))
+    if(!(printable||isReadOnly))
     {
-        table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<p><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a></p>").arg(item->getKey().item));
+        table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<p><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a></p>").arg(key));
     }
 }
 
@@ -491,7 +492,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
         {
             PROGRESS(n++, return );
 
-            addIcon(table, eSym1, cnt, wpt, printable);
+            addIcon(table, eSym1, cnt, wpt->getDisplayIcon(), wpt->getKey().item, wpt->isReadOnly(), printable);
             table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(wpt->getInfo(IGisItem::eFeatureShowName));
             table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly()||printable, wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
             cnt++;
@@ -518,7 +519,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
         {
             PROGRESS(n++, return );
 
-            addIcon(table, eSym1, cnt, trk, printable);
+            addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item,trk->isReadOnly(), printable);
 
             int w1 = qRound(w/3.5 > 300 ? 300 : w/3.5);
             int h1 = qRound(w1/2.0);
@@ -565,6 +566,15 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
 struct wpt_info_t
 {
     IGisItem::key_t key;
+
+    bool isReadOnly = true;
+    QString desc;
+    QString cmt;
+    QString info;
+    QList<CGisItemWpt::image_t> images;
+    QList<IGisItem::link_t> links;
+    QPixmap icon;
+
     qreal distance1 = NOFLOAT;
     qreal ascent1 = NOFLOAT;
     qreal elapsedSeconds1 = 0;
@@ -583,29 +593,67 @@ struct wpt_info_t
 
 void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, CProgressDialog &progress, int &n, bool printable)
 {
-    int cnt, w = cursor.document()->textWidth();
-
+    int w = cursor.document()->textWidth();
 
     const qreal w1 = qRound(w/3.5 > 300 ? 300 : w/3.5);
     const qreal h1 = qRound(w1/2.0);
 
-
     for(CGisItemTrk * trk : trks)
     {
+        int cnt = 1;
         const CTrackData::trkpt_t* lastTrkpt = nullptr;
         wpt_info_t * lastWptInfo = nullptr;
         QList<wpt_info_t> wptInfo;
         const CTrackData& t = trk->getTrackData();
+
+        bool hasValidTime = trk->getTimeStart().isValid();
         for(const CTrackData::trkpt_t& trkpt : t)
         {
-            if(trkpt.isHidden() || trkpt.keyWpt.item.isEmpty())
+            if(trkpt.isHidden() || (trkpt.keyWpt.item.isEmpty() && trkpt.desc.isEmpty()))
             {
                 continue;
             }
 
             wptInfo << wpt_info_t();
             wpt_info_t& info = wptInfo.last();
-            info.key        = trkpt.keyWpt;
+            if(!trkpt.keyWpt.item.isEmpty())
+            {
+                CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(prj.getItemByKey(trkpt.keyWpt));
+                if(wpt != nullptr)
+                {
+                    info.key        = wpt->getKey();
+                    info.isReadOnly = wpt->isReadOnly();
+                    info.icon       = wpt->getDisplayIcon();
+                    info.desc       = wpt->getDescription();
+                    info.cmt        = wpt->getComment();
+                    info.links      = wpt->getLinks();
+                    if(hasValidTime)
+                    {
+                        info.info = wpt->getInfo(IGisItem::eFeatureShowName);
+                    }
+                    else
+                    {
+                        info.info = wpt->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowDateTime);
+                    }
+                }
+                else
+                {
+                    wptInfo.pop_back();
+                    continue;
+                }
+            }
+            else if(!trkpt.desc.isEmpty())
+            {
+                CWptIconManager& m = CWptIconManager::self();
+                info.desc = trkpt.desc;
+                info.info = info.desc;
+                info.icon = m.loadIcon(m.getNumberedBullet(cnt++));
+            }
+            else
+            {
+                wptInfo.pop_back();
+                continue;
+            }
             info.distance1  = trkpt.distance;
             info.elapsedSeconds1 = trkpt.elapsedSeconds;
             info.ascent1    = trkpt.ascent;
@@ -645,104 +693,100 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
         {
             PROGRESS(n++, return );
 
-            CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(prj.getItemByKey(info.key));
-            if(wpt != nullptr)
+            addIcon(table, eSym2, cnt, info.icon, info.key.item, info.isReadOnly, printable);
+            QString timeStr = "";
+            QDateTime arrivalTime = trk->getTimeStart();
+            if (arrivalTime.isValid())
             {
-                addIcon(table, eSym2, cnt, wpt, printable);
-                QString timeStr = "";
-                QDateTime arrivalTime = trk->getTimeStart();
-                if (arrivalTime.isValid())
+                timeStr += info.info + "<br/>\n" +
+                           tr("Arrival: ") + QString("%1").arg(IUnit::datetime2string(arrivalTime.addSecs(info.elapsedSeconds1), false));
+            }
+            else
+            {
+                timeStr = info.info;
+            }
+            table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(timeStr);
+            QTextTable * table1 = table->cellAt(cnt,eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+
+            QString text, val, unit;
+            text += "<table sytle='border=1px;'>";
+            text += "<tr><td></td><td><nobr>&nbsp;" + tr("From Start") + "&nbsp;</nobr></td><td><nobr>&nbsp;" + tr("To Next") + "&nbsp;</nobr></td><td><nobr>&nbsp;" + tr("To End")  + "&nbsp;</nobr></td></tr>";
+
+            text += "<tr>";
+            text += "<td>" + tr("Distance: ") + "</td>";
+            IUnit::self().meter2distance(info.distance1, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+            IUnit::self().meter2distance(info.distance2, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+            IUnit::self().meter2distance(info.distance3, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+            text += "</tr>";
+
+            text += "<tr>";
+            text += "<td>" + tr("Time: ") + "</td>";
+            IUnit::self().seconds2time(info.elapsedSeconds1, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+            IUnit::self().seconds2time(info.elapsedSeconds2, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+            IUnit::self().seconds2time(info.elapsedSeconds3, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+            text += "</tr>";
+
+            text += "<tr>";
+            text += "<td>" + tr("Ascent: ") + "</td>";
+            IUnit::self().meter2elevation(info.ascent1, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+            IUnit::self().meter2elevation(info.ascent2, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+            IUnit::self().meter2elevation(info.ascent3, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+            text += "</tr>";
+
+            text += "<tr>";
+            text += "<td>" + tr("Descent: ") + "</td>";
+            IUnit::self().meter2elevation(info.descent1, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+            IUnit::self().meter2elevation(info.descent2, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+            IUnit::self().meter2elevation(info.descent3, val, unit);
+            text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+            text += "</tr>";
+
+            text += "</table>";
+
+            table1->cellAt(0,0).firstCursorPosition().insertHtml(text);
+
+            if(!info.images.isEmpty())
+            {
+                QImage image(info.images.first().pixmap);
+                qDebug() << image.size();
+
+                int w = image.width();
+                int h = image.height();
+
+                if(w < h)
                 {
-                    timeStr += wpt->getInfo(IGisItem::eFeatureShowName) + "<br/>\n" +
-                               tr("Arrival: ") + QString("%1").arg(IUnit::datetime2string(arrivalTime.addSecs(info.elapsedSeconds1), false));
+                    h *= 100.0 / w;
+                    w  = 100;
                 }
                 else
                 {
-                    timeStr = wpt->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowDateTime);
+                    h *= 200.0 / w;
+                    w  = 200;
                 }
-                table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(timeStr);
-                QTextTable * table1 = table->cellAt(cnt,eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
-
-                QString text, val, unit;
-                text += "<table sytle='border=1px;'>";
-                text += "<tr><td></td><td><nobr>&nbsp;" + tr("From Start") + "&nbsp;</nobr></td><td><nobr>&nbsp;" + tr("To Next") + "&nbsp;</nobr></td><td><nobr>&nbsp;" + tr("To End")  + "&nbsp;</nobr></td></tr>";
-
-                text += "<tr>";
-                text += "<td>" + tr("Distance: ") + "</td>";
-                IUnit::self().meter2distance(info.distance1, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
-                IUnit::self().meter2distance(info.distance2, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
-                IUnit::self().meter2distance(info.distance3, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
-                text += "</tr>";
-
-                text += "<tr>";
-                text += "<td>" + tr("Time: ") + "</td>";
-                IUnit::self().seconds2time(info.elapsedSeconds1, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
-                IUnit::self().seconds2time(info.elapsedSeconds2, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
-                IUnit::self().seconds2time(info.elapsedSeconds3, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
-                text += "</tr>";
-
-                text += "<tr>";
-                text += "<td>" + tr("Ascent: ") + "</td>";
-                IUnit::self().meter2elevation(info.ascent1, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
-                IUnit::self().meter2elevation(info.ascent2, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
-                IUnit::self().meter2elevation(info.ascent3, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
-                text += "</tr>";
-
-                text += "<tr>";
-                text += "<td>" + tr("Descent: ") + "</td>";
-                IUnit::self().meter2elevation(info.descent1, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
-                IUnit::self().meter2elevation(info.descent2, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
-                IUnit::self().meter2elevation(info.descent3, val, unit);
-                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
-                text += "</tr>";
-
-                text += "</table>";
-
-                table1->cellAt(0,0).firstCursorPosition().insertHtml(text);
-
-                const QList<CGisItemWpt::image_t>& images = wpt->getImages();
-                if(!images.isEmpty())
-                {
-                    QImage image(images.first().pixmap);
-                    qDebug() << image.size();
-
-                    int w = image.width();
-                    int h = image.height();
-
-                    if(w < h)
-                    {
-                        h *= 100.0 / w;
-                        w  = 100;
-                    }
-                    else
-                    {
-                        h *= 200.0 / w;
-                        w  = 200;
-                    }
-                    qDebug() << w << h;
-                    image = image.scaled(w,h,Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                qDebug() << w << h;
+                image = image.scaled(w,h,Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
 
-                    table1->cellAt(0,1).firstCursorPosition().insertImage(image);
-                }
-
-                table->cellAt(cnt,eComment2).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly()||printable, wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
+                table1->cellAt(0,1).firstCursorPosition().insertImage(image);
             }
+
+            table->cellAt(cnt,eComment2).firstCursorPosition().insertHtml(IGisItem::createText(info.isReadOnly||printable, info.cmt, info.desc, info.links, info.key.item));
+
             cnt++;
         }
 
-        addIcon(table, eSym1, cnt, trk, printable);
+        addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item, trk->isReadOnly(), printable);
         table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
 
         QTextTable * table1 = table->cellAt(cnt,eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
@@ -782,7 +826,7 @@ void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas,
     {
         PROGRESS(n++, return );
 
-        addIcon(table, eSym1, cnt, area, printable);
+        addIcon(table, eSym1, cnt, area->getDisplayIcon(), area->getKey().item, area->isReadOnly(), printable);
         table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(area->getInfo(IGisItem::eFeatureShowName));
         table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly()||printable, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
         cnt++;
@@ -812,7 +856,7 @@ void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte *> &rtes, CPr
     {
         PROGRESS(n++, return );
 
-        addIcon(table, eSym1, cnt, rte, printable);
+        addIcon(table, eSym1, cnt, rte->getDisplayIcon(), rte->getKey().item, rte->isReadOnly(), printable);
         table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(rte->getInfo(IGisItem::eFeatureShowName));
         table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(rte->isReadOnly()||printable, rte->getComment(), rte->getDescription(), rte->getLinks(), rte->getKey().item));
         cnt++;

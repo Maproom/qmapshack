@@ -51,7 +51,6 @@ public:
     bool isLbl6 = false;
     bool hasSubType = false;
 
-    //QString label;
     QPointF pos;
 
     QStringList labels;

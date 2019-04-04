@@ -19,6 +19,7 @@
 #include "helpers/CFileExt.h"
 #include "helpers/Platform.h"
 #include "IGarminStrTbl.h"
+#include "units/IUnit.h"
 
 #include <QtCore>
 
@@ -144,4 +145,31 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
     newOffset <<= addrshift1;
     //     qDebug() << hex << newOffset;
     return newOffset;
+}
+
+
+QString IGarminStrTbl::processLabel(const char * buffer, unsigned lastSeperator)
+{
+    QString label;
+    if (codepage != 0)
+    {
+        label = codec->toUnicode(buffer);
+    }
+    else
+    {
+        label = buffer;
+    }
+
+    if(lastSeperator == 0x1F)
+    {
+        bool ok =false;
+        qreal ele = label.toDouble(&ok);
+        if(ok)
+        {
+            QString val, unit;
+            IUnit::self().feet2elevation(ele, val, unit);
+            label = val + " " + unit;
+        }
+    }
+    return label;
 }

@@ -56,6 +56,8 @@ protected:
     void readFile(CFileExt &file, quint32 offset, quint32 size, QByteArray& data);
     quint32 calcOffset(CFileExt& file, const quint32 offset, type_e t);
 
+    QString processLabel(const char * buffer, unsigned lastSeperator);
+
     quint32 offsetLBL1 = 0;
     quint32 sizeLBL1 = 0;
     quint32 offsetLBL6 = 0;

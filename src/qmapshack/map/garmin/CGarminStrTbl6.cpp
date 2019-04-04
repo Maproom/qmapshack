@@ -98,6 +98,8 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
     p = (quint8*)data.data();
 
     fill();
+
+    unsigned lastSeperator = 0;
     while(idx < (sizeof(buffer) - 1))
     {
         c1 = reg >> 26;
@@ -131,17 +133,11 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
             }
             else if(c1 > 0x1C && c1 < 0x20)
             {
+                lastSeperator = c1;
                 buffer[idx] = 0;
                 if(strlen(buffer))
                 {
-                    if (codepage != 0)
-                    {
-                        labels << codec->toUnicode(buffer);
-                    }
-                    else
-                    {
-                        labels << buffer;
-                    }
+                    labels << processLabel(buffer, lastSeperator);
                 }
                 idx = 0;
                 buffer[0] = 0;
@@ -156,13 +152,6 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
     buffer[idx] = 0;
     if(strlen(buffer))
     {
-        if (codepage != 0)
-        {
-            labels << codec->toUnicode(buffer);
-        }
-        else
-        {
-            labels << buffer;
-        }
+        labels << processLabel(buffer, lastSeperator);
     }
 }

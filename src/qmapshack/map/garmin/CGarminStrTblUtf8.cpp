@@ -54,7 +54,7 @@ void CGarminStrTblUtf8::get(CFileExt& file, quint32 offset, type_e t, QStringLis
     char * pBuffer = buffer;
     *pBuffer = 0;
 
-    unsigned lastSeperator;
+    unsigned lastSeperator = 0;
     while(*lbl != 0)
     {
         if((unsigned)*lbl >= 0x1B && (unsigned)*lbl <= 0x1F)

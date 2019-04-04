@@ -1313,7 +1313,7 @@ QMap<searchKeyword_e,CGisItemRte::fSearch > CGisItemRte::keywordLambdaMap = CGis
 QMap<searchKeyword_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
 {
     QMap<searchKeyword_e, CGisItemRte::fSearch> map;
-    map.insert(searchKeyword_e::eSearchKeywordRteTrkDistance,[](CGisItemRte* item){
+    map.insert(eSearchKeywordRteTrkDistance,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->value1 = item->rte.totalDistance;
         return searchValue;

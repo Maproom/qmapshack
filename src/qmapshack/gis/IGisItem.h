@@ -41,7 +41,7 @@ class IMouse;
 class QSqlDatabase;
 class IGisProject;
 struct searchValue_t;
-enum class searchKeyword_e;
+enum searchKeyword_e : unsigned int;
 
 class IGisItem : public QTreeWidgetItem
 {

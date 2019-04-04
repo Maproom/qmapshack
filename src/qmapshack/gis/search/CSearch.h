@@ -36,7 +36,7 @@ struct searchValue_t //Outside of CSearch to avoid problem of nested type
     QString str2 = "";
 };
 
-enum class searchKeyword_e
+enum searchKeyword_e: unsigned int
 {
     //General keywords
     eSearchKeywordGeneralName,

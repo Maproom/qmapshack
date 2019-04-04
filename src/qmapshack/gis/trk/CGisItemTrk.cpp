@@ -2777,7 +2777,7 @@ QMap<searchKeyword_e,CGisItemTrk::fSearch > CGisItemTrk::keywordLambdaMap = CGis
 QMap<searchKeyword_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
 {
     QMap<searchKeyword_e, CGisItemTrk::fSearch> map;
-    map.insert(searchKeyword_e::eSearchKeywordRteTrkDistance,[](CGisItemTrk* item){
+    map.insert(eSearchKeywordRteTrkDistance,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->value1 = item->totalDistance;
         return searchValue;

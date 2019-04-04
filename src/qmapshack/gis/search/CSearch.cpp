@@ -65,27 +65,29 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
 
             QRegExp argumentCapture("(\\d+)(?:\\s*)(m|km|mi|ft)?(\\d+)?(?:\\s*)(m|km|mi|ft)?",Qt::CaseInsensitive);
 
-            switch(argumentCapture.captureCount())    //fallthrough is intentional
+            if(argumentCapture.indexIn(filterValueString)!=-1)
             {
-            case 4:
                 filterValue.str2=argumentCapture.cap(4);
 
-            case 3:
-                filterValue.value2=argumentCapture.cap(3).toFloat();
+                if(argumentCapture.cap(3)!="") //to avoid removal of NOFLOAT
+                {
+                    filterValue.value2=argumentCapture.cap(3).toFloat();
+                }
 
-            case 2:
                 filterValue.str1=argumentCapture.cap(2);
 
-            case 1:
-                filterValue.value1=argumentCapture.cap(1).toFloat();
-                if(filterValue.str1!=""&&filterValue.str2=="")
+                if(argumentCapture.cap(1)!="") //to avoid removal of NOFLOAT
                 {
-                    //Assume they have the same unit
-                    filterValue.str2=filterValue.str1;
+                    filterValue.value1=argumentCapture.cap(1).toFloat();
+                    if(filterValue.str1!=""&&filterValue.str2=="")
+                    {
+                        //Assume they have the same unit
+                        filterValue.str2=filterValue.str1;
+                    }
                 }
-                break;
-
-            default:
+            }
+            else
+            {
                 filterValue.str1 = filterValueString;
             }
 
@@ -178,7 +180,7 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         return false;
     });
     map.insert(eSearchTypeSmaller, [](const searchValue_t& itemValue, const searchValue_t& searchValue){
-        if(searchValue.value1 != NOFLOAT)
+        if(searchValue.value1 != NOFLOAT && itemValue.value1 != NOFLOAT)
         {
             //TODO unit conversion
             /*
@@ -191,7 +193,7 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         return false;
     });
     map.insert(eSearchTypeBigger, [](const searchValue_t& itemValue, const searchValue_t& searchValue){
-        if(searchValue.value1 != NOFLOAT)
+        if(searchValue.value1 != NOFLOAT && itemValue.value1 != NOFLOAT)
         {
             //TODO unit conversion
             /*
@@ -204,8 +206,8 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         return false;
     });
 
-    map.insert(eSearchTypeSmaller, [](const searchValue_t& itemValue, const searchValue_t& searchValue){
-        if(searchValue.value1 != NOFLOAT && searchValue.value2 != NOFLOAT)
+    map.insert(eSearchTypeBetween, [](const searchValue_t& itemValue, const searchValue_t& searchValue){
+        if(searchValue.value1 != NOFLOAT && itemValue.value1 != NOFLOAT && searchValue.value2 != NOFLOAT && itemValue.value2 != NOFLOAT)
         {
             //TODO unit conversion
             /*

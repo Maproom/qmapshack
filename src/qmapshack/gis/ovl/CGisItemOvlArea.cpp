@@ -572,7 +572,7 @@ QMap<searchKeyword_e,CGisItemOvlArea::fSearch > CGisItemOvlArea::keywordLambdaMa
 QMap<searchKeyword_e, CGisItemOvlArea::fSearch> CGisItemOvlArea::initKeywordLambdaMap()
 {
     QMap<searchKeyword_e, CGisItemOvlArea::fSearch> map;
-    map.insert(searchKeyword_e::eSearchKeywordAreaArea,[](CGisItemOvlArea* item){
+    map.insert(eSearchKeywordAreaArea,[](CGisItemOvlArea* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->value1 = item->area.area;
         return searchValue;

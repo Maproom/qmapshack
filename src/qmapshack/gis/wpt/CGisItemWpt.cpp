@@ -1085,7 +1085,7 @@ QMap<searchKeyword_e,CGisItemWpt::fSearch > CGisItemWpt::keywordLambdaMap = CGis
 QMap<searchKeyword_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
 {
     QMap<searchKeyword_e, CGisItemWpt::fSearch> map;
-    map.insert(searchKeyword_e::eSearchKeywordWptElevation,[](CGisItemWpt* item){
+    map.insert(eSearchKeywordWptElevation,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->value1 = item->wpt.ele;
         return searchValue;

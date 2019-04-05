@@ -107,5 +107,36 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
 
 QString CGarminPoint::getLabelText() const
 {
-    return labels.join(" ");
+    QString str;
+    if(!labels.isEmpty())
+    {
+        if((type == 0x6200) || (type == 0x6300))
+        {
+            qDebug() << "1" <<  labels;
+            QString unit;
+            QString val = labels[0];
+            IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+            str = QString("%1 %2").arg(val).arg(unit);
+        }
+//        else if(type == 0x6616) //669 DAV
+//        {
+//            qDebug() << "2" << labels;
+//            if(labels.size() > 1)
+//            {
+//                QString unit;
+//                QString val = labels[1];
+//                IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+//                str = QString("%1 %2 %3").arg(labels[0]).arg(val).arg(unit);
+//            }
+//            else
+//            {
+//                str = labels[0];
+//            }
+//        }
+        else
+        {
+            str = labels.join(" ");
+        }
+    }
+    return str;
 }

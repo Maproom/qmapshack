@@ -42,6 +42,7 @@ private slots:
     void slotDelete();
     void slotEdit();
     void slotCopy();
+    void slotCopyToClipboard();
     void slotMove();
     void slotProj();
     void slotBubble();

@@ -30,8 +30,8 @@ class IGisItem;
 
 struct searchValue_t //Outside of CSearch to avoid problem of nested type
 {
-    float value1 = NOFLOAT;
-    float value2 = NOFLOAT;
+    qreal value1 = NOFLOAT;
+    qreal value2 = NOFLOAT;
     QString str1 = "";
     QString str2 = "";
 };

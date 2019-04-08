@@ -135,15 +135,19 @@ find_package(Qt5Network             REQUIRED)
 find_package(Qt5WebEngineWidgets    REQUIRED)
 find_package(Qt5Qml                 REQUIRED)
 find_package(GDAL                   REQUIRED)
-find_package(PROJ                   REQUIRED)
+find_package(PROJ4                  REQUIRED)
 find_package(JPEG                   REQUIRED)
 find_package(ROUTINO                REQUIRED)
-find_package(QuaZip                 REQUIRED)
+find_package(QuaZip5                REQUIRED)
 find_package(ALGLIB                         ) # optional as we can use our local version
 
 
 if(${Qt5Widgets_VERSION} VERSION_LESS 5.8.0)
     message( SEND_ERROR "You need at least Qt5.8 or newer.")
+endif()
+
+if(${PROJ4_VERSION} VERSION_LESS 5.0.0)
+    message( SEND_ERROR "You need at least PROJ4 5.0.0 or newer.")
 endif()
 
 if(USE_QT5DBus)
@@ -166,6 +170,8 @@ if(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
     set(ALGLIB_LIBRARIES alg)
     add_subdirectory(3rdparty/alglib)
 endif(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
+
+add_definitions(-DACCEPT_USE_OF_DEPRECATED_PROJ_API_H)
 
 ###############################################################################################
 # Create global config.h

@@ -43,6 +43,12 @@ public:
 
     /// convert meter of elevation into a value and unit string
     virtual void meter2elevation(qreal meter, QString& val, QString& unit) const = 0;
+
+    virtual void feet2elevation(qreal feet, QString& val, QString& unit) const
+    {
+        meter2elevation(feet / 3.28084, val, unit);
+    }
+
     /// convert meter of distance into a value and unit string
     virtual void meter2distance(qreal meter, QString& val, QString& unit) const = 0;
     /// convert meter per second to a speed value string and unit label

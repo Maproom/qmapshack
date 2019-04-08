@@ -171,6 +171,8 @@ if(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
     add_subdirectory(3rdparty/alglib)
 endif(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
 
+add_definitions(-DACCEPT_USE_OF_DEPRECATED_PROJ_API_H)
+
 ###############################################################################################
 # Create global config.h
 ###############################################################################################

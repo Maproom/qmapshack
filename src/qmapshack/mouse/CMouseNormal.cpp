@@ -458,8 +458,8 @@ void CMouseNormal::showContextMenu(const QPoint &point)
     menu.addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, SLOT(slotSelectArea()));
     menu.addSeparator();
     menu.addMenu(CGeoSearchWeb::self().getMenu(pt * RAD_TO_DEG, &menu));
-    menu.addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
-    menu.addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position (Grid)"), this, SLOT(slotCopyPositionGrid()));
+    menu.addAction(QIcon("://icons/32x32/CopyPosition.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
+    menu.addAction(QIcon("://icons/32x32/CopyGrid.png"), tr("Copy position (Grid)"), this, SLOT(slotCopyPositionGrid()));
 
     QPoint p = canvas->mapToGlobal(point);
     menu.exec(p);

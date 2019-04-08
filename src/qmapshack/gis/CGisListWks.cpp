@@ -153,7 +153,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionDelRadiusWpt  = addAction(QIcon("://icons/32x32/WptDelProx.png"), tr("Delete Radius"), this, SLOT(slotDelRadiusWpt()));
     actionNogoWpt       = addAction(QIcon("://icons/32x32/NoGo.png"),  tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
     actionNogoWpt->setCheckable(true);
-    actionCopyCoordWpt  = addAction(QIcon("://icons/32x32/CoordToClipboard.png"),  tr("Copy position"), this, SLOT(slotCopyCoordWpt()));
+    actionCopyCoordWpt  = addAction(QIcon("://icons/32x32/CopyCoord.png"),  tr("Copy position"), this, SLOT(slotCopyCoordWpt()));
 
     // route related actions
     actionFocusRte      = addAction(QIcon("://icons/32x32/RteInstr.png"), tr("Route Instructions"), this, SLOT(slotFocusRte(bool)));

@@ -91,8 +91,10 @@
         <file>../icons/32x32/Connected.png</file>
         <file>../icons/32x32/Connecting.png</file>
         <file>../icons/32x32/Copy.png</file>
-        <file>../icons/32x32/CoordToClipboard.png</file>
-        <file>../icons/32x32/CopyTrkWithWpt.png</file>
+        <file>../icons/32x32/CopyCoord.png</file>
+        <file>../icons/32x32/CopyGrid.png</file>
+        <file>../icons/32x32/CopyPosition.png</file>
+        <file>../icons/32x32/CopyTrkWithWpt.png</file>        
         <file>../icons/32x32/Cut.png</file>
         <file>../icons/32x32/CutHistoryAfter.png</file>
         <file>../icons/32x32/CutHistoryBefore.png</file>
@@ -356,7 +358,9 @@
         <file>../icons/48x48/Connected.png</file>
         <file>../icons/48x48/Connecting.png</file>
         <file>../icons/48x48/Copy.png</file>
-        <file>../icons/48x48/CoordToClipboard.png</file>
+        <file>../icons/48x48/CopyCoord.png</file>
+        <file>../icons/48x48/CopyGrid.png</file>
+        <file>../icons/48x48/CopyPosition.png</file>
         <file>../icons/48x48/CopyTrkWithWpt.png</file>
         <file>../icons/48x48/Cut.png</file>
         <file>../icons/48x48/CutHistoryAfter.png</file>

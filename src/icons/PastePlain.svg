@@ -14,7 +14,7 @@
    height="64px"
    id="svg3513"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
    sodipodi:docname="PastePlain.svg">
   <defs
      id="defs3515">
@@ -50,16 +50,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.7781746"
-     inkscape:cx="70.530928"
+     inkscape:cx="-1.4011161"
      inkscape:cy="43.339245"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
-     inkscape:window-width="1916"
-     inkscape:window-height="1041"
+     inkscape:window-width="1912"
+     inkscape:window-height="993"
      inkscape:window-x="0"
-     inkscape:window-y="18"
+     inkscape:window-y="0"
      inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
@@ -73,7 +73,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -81,45 +81,63 @@
      id="layer1"
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
-    <rect
-       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="rect3795"
-       width="40"
-       height="40"
-       x="7"
-       y="15" />
-    <rect
-       style="fill:#000080;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.8538155;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect3005"
-       width="24.146185"
-       height="34.146187"
-       x="14.926908"
-       y="19.154181" />
-    <rect
-       style="fill:#80b3ff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.70689117999999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect3005-2"
-       width="19.293108"
-       height="29.293108"
-       x="17.353447"
-       y="19.717089" />
-    <rect
-       style="fill:#4d4d4d;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect3775"
-       width="9"
-       height="4"
-       x="22.5"
-       y="16.772724" />
+    <g
+       id="g864"
+       transform="translate(0.00134316,0.05394258)">
+      <g
+         style="stroke-width:2.76948881;stroke-miterlimit:4;stroke-dasharray:none"
+         transform="matrix(1.4572544,0,0,1.4314803,-36.677609,-4.0197373)"
+         id="g833">
+        <rect
+           style="fill:#80b3ff;fill-opacity:1;fill-rule:evenodd;stroke:#000080;stroke-width:2.76948881;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect3828"
+           width="24.230301"
+           height="34.230301"
+           x="35.560623"
+           y="10.415644" />
+        <path
+           style="fill:#80b3ff;fill-opacity:1;fill-rule:evenodd;stroke:#000080;stroke-width:2.76948881;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 42.039412,13.985339 h 11 V 7.9853392 h -3 c 0,0 -1,-2.5 -2.5,-2.5 -1.5,0 -2.5,2.5 -2.5,2.5 h -3 z"
+           id="path4527"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cccczccc" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000080;stroke-width:2.76948881;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 40.039412,19.985339 h 15"
+           id="path4529"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000080;stroke-width:2.76948881;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 40.039412,28.485339 h 15"
+           id="path4531"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000080;stroke-width:2.76948881;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 40.039412,36.985339 h 15"
+           id="path4535"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="g844">
+        <rect
+           style="fill:none;stroke:none;stroke-width:3.93846154;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none"
+           id="rect836"
+           width="64"
+           height="64"
+           x="0"
+           y="-3.5527137e-15" />
+      </g>
+    </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="22.36899"
-       y="56.63636"
-       id="text4336"
-       sodipodi:linespacing="125%"><tspan
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="17.226395"
+       y="57.536316"
+       id="text4336"><tspan
          sodipodi:role="line"
          id="tspan4338"
-         x="22.36899"
-         y="56.63636"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:0.80000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">P</tspan></text>
+         x="17.226395"
+         y="57.536316"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:46.66666794px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">P</tspan></text>
   </g>
 </svg>

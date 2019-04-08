@@ -267,13 +267,9 @@ void CDraw::number(int num, int size, QPainter& p, const QPointF& center, const 
 {
     const qreal size_2 = (size - 1) / 2.0;
 
-    p.setPen(color);
-    p.setBrush(Qt::white);
-    p.drawEllipse(center, size_2, size_2);
-
-    p.setPen(color);
+    p.setPen(QPen(Qt::white,2));
     p.setBrush(color);
-    p.drawEllipse(center, size_2 - 3, size_2 - 3);
+    p.drawEllipse(center, size_2, size_2);
 
     const QString& s = QString::number(num);
     QRectF r = p.boundingRect(QRectF(), s);

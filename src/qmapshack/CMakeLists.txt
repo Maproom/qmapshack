@@ -856,7 +856,7 @@ include_directories(
     SYSTEM # this prevents warnings from non-QMS headers
     ${CMAKE_BINARY_DIR}
     ${GDAL_INCLUDE_DIRS}
-    ${PROJ_INCLUDE_DIRS}
+    ${PROJ4_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}
     ${ALGLIB_INCLUDE_DIRS}
     ${QUAZIP_INCLUDE_DIRS}
@@ -891,7 +891,7 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Positioning
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}
-    ${PROJ_LIBRARIES}
+    ${PROJ4_LIBRARIES}
     ${ROUTINO_LIBRARIES}
     ${ALGLIB_LIBRARIES}
     ${QUAZIP_LIBRARIES}

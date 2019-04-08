@@ -52,23 +52,19 @@ void CGarminStrTbl8::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
     readFile(file, offsetLBL1 + offset, size, data);
     char * lbl = data.data();
 
+    unsigned lastSeperator = 0;
+
     char * pBuffer = buffer;
     *pBuffer = 0;
     while(*lbl != 0)
     {
         if((unsigned)*lbl >= 0x1B && (unsigned)*lbl <= 0x1F)
         {
+            lastSeperator = *lbl;
             *pBuffer = 0;
             if(strlen(buffer))
             {
-                if (codepage != 0)
-                {
-                    info << codec->toUnicode(buffer);
-                }
-                else
-                {
-                    info << buffer;
-                }
+                info << processLabel(buffer, lastSeperator);
                 pBuffer = buffer;
                 *pBuffer = 0;
             }
@@ -89,13 +85,6 @@ void CGarminStrTbl8::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
     *pBuffer = 0;
     if(strlen(buffer))
     {
-        if (codepage != 0)
-        {
-            info << codec->toUnicode(buffer);
-        }
-        else
-        {
-            info << buffer;
-        }
+        info << processLabel(buffer, lastSeperator);
     }
 }

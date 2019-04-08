@@ -54,18 +54,18 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    connect(toolDelete,          &QToolButton::clicked, this, &CScrOptWpt::slotDelete);
-    connect(toolEdit,            &QToolButton::clicked, this, &CScrOptWpt::slotEdit);
-    connect(toolCopy,            &QToolButton::clicked, this, &CScrOptWpt::slotCopy);
-    connect(toolCopyToClipboard, &QToolButton::clicked, this, &CScrOptWpt::slotCopyToClipboard);
-    connect(toolMove,            &QToolButton::clicked, this, &CScrOptWpt::slotMove);
-    connect(toolProj,            &QToolButton::clicked, this, &CScrOptWpt::slotProj);
-    connect(toolAddElevation,    &QToolButton::clicked, this, &CScrOptWpt::slotAddElevation);
-    connect(toolBubble,          &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
-    connect(toolDelRadius,       &QToolButton::clicked, this, &CScrOptWpt::slotDeleteRadius);
-    connect(toolNogoArea,        &QToolButton::clicked, this, &CScrOptWpt::slotNogoArea);
-    connect(toolEditRadius,      &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
-    connect(toolSearchWeb,       &QToolButton::clicked, this, &CScrOptWpt::slotSearchWeb);
+    connect(toolDelete,           &QToolButton::clicked, this, &CScrOptWpt::slotDelete);
+    connect(toolEdit,             &QToolButton::clicked, this, &CScrOptWpt::slotEdit);
+    connect(toolCopy,             &QToolButton::clicked, this, &CScrOptWpt::slotCopy);
+    connect(toolCoordToClipboard, &QToolButton::clicked, this, &CScrOptWpt::slotCoordToClipboard);
+    connect(toolMove,             &QToolButton::clicked, this, &CScrOptWpt::slotMove);
+    connect(toolProj,             &QToolButton::clicked, this, &CScrOptWpt::slotProj);
+    connect(toolAddElevation,     &QToolButton::clicked, this, &CScrOptWpt::slotAddElevation);
+    connect(toolBubble,           &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
+    connect(toolDelRadius,        &QToolButton::clicked, this, &CScrOptWpt::slotDeleteRadius);
+    connect(toolNogoArea,         &QToolButton::clicked, this, &CScrOptWpt::slotNogoArea);
+    connect(toolEditRadius,       &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
+    connect(toolSearchWeb,        &QToolButton::clicked, this, &CScrOptWpt::slotSearchWeb);
 
     connect(label, &QLabel::linkActivated, this, &CScrOptWpt::slotLinkActivated);
 
@@ -97,11 +97,11 @@ void CScrOptWpt::slotCopy()
     close();
 }
 
-void CScrOptWpt::slotCopyToClipboard()
+void CScrOptWpt::slotCoordToClipboard()
 {
     CScrOptSemaphoreLocker lock(*this);
     CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
-    if(wpt) {
+    if(wpt != nullptr) {
         QString strPos;
         QPointF pos = wpt->getPosition();
         IUnit::degToStr(pos.x(), pos.y(), strPos);

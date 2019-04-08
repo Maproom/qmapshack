@@ -95,6 +95,7 @@ private slots:
     void slotEditRadiusWpt();
     void slotProjWpt();
     void slotMoveWpt();
+    void slotCopyCoordWpt();
     void slotFocusTrk(bool on);
     void slotEditTrk();
     void slotReverseTrk();
@@ -174,6 +175,7 @@ private:
     QAction * actionEditRadiusWpt;
     QAction * actionProjWpt;
     QAction * actionMoveWpt;
+    QAction * actionCopyCoordWpt;
     QAction * actionFocusTrk;
     QAction * actionEditTrk;
     QAction * actionReverseTrk;

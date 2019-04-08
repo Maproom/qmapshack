@@ -218,8 +218,8 @@ bool CProjWizard::validProjStr(const QString projStr, bool allowLonLatToo)
     projPJ projCheck = pj_init_plus(projStr.toUtf8().data());
 
     if (!projCheck)
-    {
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr).arg(pj_strerrno(pj_errno)),QMessageBox::Abort,QMessageBox::Abort);
+    {   /* For some reason pj_errno does not work as expected in some versions of Visual Studio, so using pj_get_errno_ref instead */
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr).arg(pj_strerrno(*pj_get_errno_ref())),QMessageBox::Abort,QMessageBox::Abort);
         return false;
     }
     else

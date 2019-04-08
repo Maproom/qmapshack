@@ -33,7 +33,11 @@ set(VERSION_SUFFIX "")
 # Define paths and include other modules
 ###############################################################################################
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
+if(WIN32)
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules;${CMAKE_SOURCE_DIR}/msvc_64/cmake)
+else(WIN32)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
+endif(WIN32)
 
 # all binaries are collected in the ./bin directory
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
@@ -88,7 +92,7 @@ endif(APPLE)
 if(WIN32)
     set(QT_DEV_PATH   "C:\\Qt5\\5.12.1\\msvc2017_64" CACHE PATH "Path to directory containing Qt5 include and lib, e.g. C:\\Qt5\\5.12.1\\msvc2017_64")
     set(GDAL_DEV_PATH "C:\\GDAL" CACHE PATH "Path to directory containing GDAL include and lib, e.g. M:\\lib\\gdal")
-    set(PROJ_DEV_PATH "C:\\PROJ" CACHE PATH "Path to directory containing PROJ.4 include and lib, e.g. M:\\lib\\PROJ")
+    set(PROJ4_DEV_PATH "C:\\PROJ6" CACHE PATH "Path to directory containing PROJ.4 include and lib, e.g. M:\\lib\\PROJ6")
     set(ROUTINO_DEV_PATH "C:\\routino" CACHE PATH "Path to directory containing routino include and lib, e.g. M:\\lib\\routino")
     set(QUAZIP_DEV_PATH "C:\\quazip" CACHE PATH "Path to directory containing quazip include and lib, e.g. M:\\lib\\quazip5")
     set(JPEG_DEV_PATH "C:\\JPEG" CACHE PATH "Path to directory containing JPEG include and lib, e.g. M:\\lib\\JPEG")

@@ -59,5 +59,4 @@ QMS depends on the 3rd party software listed below:
   The source code can be downloaded from https://curl.haxx.se/
 
 12.) sqlite
-  cURL is used to build GDAL with support for additional formats
-  The source code can be downloaded from https://www.sqlite.org/download.html 
+  The source code can be downloaded from https://www.sqlite.org/download.html

@@ -7,7 +7,7 @@ set QMSI_QT_PATH="C:\Qt5\5.12.1\msvc2017_64"
 rem get the VC redistributable installer from https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 set QMSI_VCREDIST_PATH="M:\deploy_2017"
 set QMSI_GDAL_PATH="M:\lib2017\gdal"
-set QMSI_PROJ_PATH="M:\lib2017\PROJ"
+set QMSI_PROJ_PATH="M:\lib2017\PROJ6"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
 set QMSI_QUAZIP_PATH="M:\lib2017\quazip"
 set QMSI_ZLIB_PATH="M:\lib2017\zlib"
@@ -17,6 +17,8 @@ rem runtime libraries from mingw/msys - in my installation originally at C:\msys
 set QMSI_MGW6_PATH="M:\lib2017\mingw64"
 rem runtime libraries from mysql/mariadb - see 3rdparty.txt from where to get - could this be optional?
 set QMSI_MSQL_PATH="M:\lib2017\mysql"
+rem uncomment the following line if you want OpenSSL
+rem set QMSI_OSSL_PATH="M:\deploy_2017"
 rem And finally of course the path to your build directory!
 set QMSI_BUILD_PATH="..\..\build\"
 
@@ -95,8 +97,13 @@ copy %QMSI_GDAL_PATH%\bin\*.dll
 copy %QMSI_GDAL_PATH%\bin\*.exe
 rem section 2.2.4) PROJ.4
 xcopy %QMSI_PROJ_PATH%\share share /s /i
-copy %QMSI_PROJ_PATH%\bin\*.dll
+copy %QMSI_PROJ_PATH%\bin\proj_6_0.dll
 copy %QMSI_PROJ_PATH%\bin\proj.exe
+copy %QMSI_PROJ_PATH%\bin\projinfo.exe
+copy %QMSI_PROJ_PATH%\bin\cct.exe
+copy %QMSI_PROJ_PATH%\bin\cs2cs.exe
+copy %QMSI_PROJ_PATH%\bin\geod.exe
+copy %QMSI_PROJ_PATH%\bin\gie.exe
 rem section 2.2.5) Routino
 copy %QMSI_ROUT_PATH%\lib\routino.dll
 copy %QMSI_ROUT_PATH%\bin\planetsplitter.exe
@@ -114,6 +121,14 @@ copy %QMSI_CURL_PATH%\bin\libcurl.dll
 copy %QMSI_CURL_PATH%\bin\curl.exe
 rem section 2.2.10) sqlite
 copy %QMSI_SQLI_PATH%\sqlite3.dll
+copy %QMSI_SQLI_PATH%\sqldiff.exe
+copy %QMSI_SQLI_PATH%\sqlite3.exe
+copy %QMSI_SQLI_PATH%\sqlite3_analyzer.exe
+rem uncomment the following line if you want OpenSSL
+rem copy %QMSI_OSSL_PATH%\libeay32.dll
+rem copy %QMSI_OSSL_PATH%\ssleay32.dll
+rem copy %QMSI_OSSL_PATH%\openssl.exe
+
 
 rem section 2.3) Copy MSVC Redist Files
 copy %QMSI_VCREDIST_PATH%\VC_redist.x64.exe

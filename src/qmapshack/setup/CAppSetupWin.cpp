@@ -26,7 +26,7 @@ void CAppSetupWin::initQMapShack()
     QString apppath = QCoreApplication::applicationDirPath();
     apppath = apppath.replace("/", "\\");
     QString gdalDir = QString("%1\\data").arg(apppath);
-    QString projDir = QString("%1\\share").arg(apppath);
+    QString projDir = QString("%1\\share\\proj").arg(apppath);
 
     qunsetenv("GDAL_DRIVER_PATH");
     IAppSetup::prepareGdal(gdalDir, projDir);

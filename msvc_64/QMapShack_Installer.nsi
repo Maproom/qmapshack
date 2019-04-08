@@ -22,7 +22,7 @@
 ; 09-Feb-2019 Adapt to use of Qt 5.12.1 and fusion style
 ;  Note: the command line parameter "--style fusion" for qmapshack.exe switches to a GUI appearance which is perceived as less antique than the default
 ;  See https://doc.qt.io/qt-5/qstyle.html https://doc.qt.io/qt-5/qstylefactory.html https://forum.qt.io/topic/23978/qfusionstyle https://forum.qt.io/topic/23978/qfusionstyle)
-
+; 08-Apr-2019 Adapt to use of PROJ4 version 6.0
 
 ;=================== BEGIN SCRIPT ====================
 ; Include for nice Setup UI, see http://nsis.sourceforge.net/Docs/Modern%20UI%202/Readme.html
@@ -192,11 +192,16 @@ Section "QMapShack" QMapShack
 
   ;BEGIN PROJ.4 Files    
   SetOutPath $INSTDIR
-    File Files\proj*.dll
-    File Files\proj*.exe
+    File Files\proj_6_0.dll
+    File Files\proj.exe
+    File Files\projinfo.exe
+    File Files\cct.exe
+    File Files\cs2cs.exe
+    File Files\geod.exe
+    File Files\gie.exe    
   SetOutPath "$INSTDIR\share\"
     File /r Files\share\*.*
-  ;END PROJ.4 Files        
+  ;END PROJ.4 Files
 
   ;BEGIN QuaZip Files
   SetOutPath $INSTDIR
@@ -217,6 +222,9 @@ Section "QMapShack" QMapShack
   ;BEGIN sqlite Files
   SetOutPath $INSTDIR
     File Files\sqlite3.dll
+    File Files\sqldiff.exe
+    File Files\sqlite3.exe
+    File Files\sqlite3_analyzer.exe
   ;END sqlite Files
 
   ;BEGIN Routino Files    
@@ -228,15 +236,21 @@ Section "QMapShack" QMapShack
   SetOutPath "$INSTDIR\routino-xml\"
     File /r Files\routino-xml\*.*
   ;END Routino Files     
-  
+
   ;BEGIN additional Files    
   SetOutPath $INSTDIR
     File Files\libmysql.dll  
     File Files\3rdparty.txt
     File Files\qt.conf
-    ;File Files\libexif-12.dll
-  ;END additional Files    
-    
+  ;END additional Files
+
+  ;BEGIN OpenSSL Files
+    ;File Files\libeay32.dll
+    ;File Files\ssleay32.dll
+    ;File Files\openssl.exe
+  ;END OpenSSL Files
+
+
   ;the last "SetOutPath" will be the default directory
   SetOutPath $INSTDIR    
   

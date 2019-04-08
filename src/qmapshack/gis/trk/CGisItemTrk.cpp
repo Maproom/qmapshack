@@ -1912,16 +1912,11 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
 
     // -------------------------
-
-    // draw min/max labels
+    bool skipDecorations = (!keyUserFocus.item.isEmpty() && (key != keyUserFocus));
+    // draw min/max labels    
     const CMainWindow& w = CMainWindow::self();
-    if(w.isShowMinMaxTrackLabels())
+    if(w.isShowMinMaxTrackLabels() && !skipDecorations)
     {
-        if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
-        {
-            return;
-        }
-
         for(const QString& key : extrema.keys())
         {
             if(key == CKnownExtension::internalProgress)
@@ -1945,7 +1940,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
 
     // draw info points
-    if(w.isShowTrackInfoPoints())
+    if(w.isShowTrackInfoPoints() && !skipDecorations)
     {
         const QFont& f  = w.getMapFont();
         const int pointSize = f.pointSize();

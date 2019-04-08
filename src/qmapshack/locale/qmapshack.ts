@@ -521,143 +521,143 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDetailsPrj</name>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="127"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="128"/>
         <source>You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="128"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="129"/>
         <source>Correlation...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="267"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="842"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="268"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="886"/>
         <source>none</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="346"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="347"/>
         <source>Build diary...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="401"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="402"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="439"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="440"/>
         <source>&lt;b&gt;Summary over all waypoints in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="443"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="444"/>
         <source> x Geocache, consisting of: &lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="479"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="480"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="486"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="512"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="639"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="777"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="807"/>
-        <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="487"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="513"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="640"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="778"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="808"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="687"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="821"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="851"/>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="488"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="514"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="688"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="822"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="852"/>
         <source>Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="505"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="506"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="657"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="702"/>
         <source>Arrival: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="668"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
         <source>From Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="668"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
         <source>To Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="668"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
         <source>To End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="671"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="716"/>
         <source>Distance: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="681"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="726"/>
         <source>Time: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="691"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="736"/>
         <source>Ascent: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="701"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="746"/>
         <source>Descent: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="770"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="814"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="800"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="844"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="828"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="855"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="872"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="899"/>
         <source>Edit name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="828"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="855"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="872"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="899"/>
         <source>Enter new project name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="837"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="881"/>
         <source>Edit keywords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="837"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="881"/>
         <source>Enter keywords.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="983"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1027"/>
         <source>Print Diary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1804,72 +1804,72 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="313"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="303"/>
         <source>Elevation: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="324"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="314"/>
         <source>Proximity: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="370"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="372"/>
         <source>Created: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="442"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="444"/>
         <source>Changed name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="452"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="454"/>
         <source>Changed position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="458"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="460"/>
         <source>Changed elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="467"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="469"/>
         <source>Removed proximity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="472"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="474"/>
         <source>Changed proximity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="491"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="493"/>
         <source>Changed icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="497"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="499"/>
         <source>Changed comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="503"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="505"/>
         <source>Changed description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="509"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="511"/>
         <source>Changed links</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="515"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="517"/>
         <source>Changed images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="521"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="523"/>
         <source>Add image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2145,7 +2145,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="144"/>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
+        <location filename="../gis/CGisListWks.cpp" line="166"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2171,7 +2171,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="154"/>
-        <location filename="../gis/CGisListWks.cpp" line="170"/>
+        <location filename="../gis/CGisListWks.cpp" line="171"/>
         <source>Toggle Nogo-Area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2181,60 +2181,60 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="158"/>
+        <location filename="../gis/CGisListWks.cpp" line="159"/>
         <source>Route Instructions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="160"/>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
         <source>Calculate Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="161"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Reset Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="162"/>
+        <location filename="../gis/CGisListWks.cpp" line="163"/>
         <source>Edit Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Reverse Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="164"/>
+        <location filename="../gis/CGisListWks.cpp" line="165"/>
         <source>Convert to Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="169"/>
+        <location filename="../gis/CGisListWks.cpp" line="170"/>
         <source>Edit Area Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1048"/>
-        <location filename="../gis/CGisListWks.cpp" line="1133"/>
+        <location filename="../gis/CGisListWks.cpp" line="1049"/>
+        <location filename="../gis/CGisListWks.cpp" line="1135"/>
         <source>Set Track Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="637"/>
+        <location filename="../gis/CGisListWks.cpp" line="638"/>
         <source>Drop items...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1125"/>
+        <location filename="../gis/CGisListWks.cpp" line="1127"/>
         <source>Change Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="662"/>
-        <location filename="../gis/CGisListWks.cpp" line="2017"/>
-        <location filename="../gis/CGisListWks.cpp" line="2055"/>
+        <location filename="../gis/CGisListWks.cpp" line="663"/>
+        <location filename="../gis/CGisListWks.cpp" line="2029"/>
+        <location filename="../gis/CGisListWks.cpp" line="2067"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2244,57 +2244,62 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="174"/>
-        <source>Create Route...</source>
+        <location filename="../gis/CGisListWks.cpp" line="156"/>
+        <source>Copy position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="175"/>
+        <source>Create Route...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="176"/>
         <source>Change Proximity...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="788"/>
+        <location filename="../gis/CGisListWks.cpp" line="789"/>
         <source>Saving workspace. Please wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="839"/>
+        <location filename="../gis/CGisListWks.cpp" line="840"/>
         <source>Loading workspace. Please wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1122"/>
+        <location filename="../gis/CGisListWks.cpp" line="1124"/>
         <source>Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1127"/>
+        <location filename="../gis/CGisListWks.cpp" line="1129"/>
         <source>Wayp. &amp; Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1129"/>
+        <location filename="../gis/CGisListWks.cpp" line="1131"/>
         <source>Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1417"/>
+        <location filename="../gis/CGisListWks.cpp" line="1419"/>
         <source>Close all projects...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1417"/>
+        <location filename="../gis/CGisListWks.cpp" line="1419"/>
         <source>This will remove all projects from the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1443"/>
+        <location filename="../gis/CGisListWks.cpp" line="1445"/>
         <source>Delete project...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1443"/>
+        <location filename="../gis/CGisListWks.cpp" line="1445"/>
         <source>Do you really want to delete %1?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2366,22 +2371,22 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="979"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="993"/>
         <source>Cut Track...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="979"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="993"/>
         <source>Do you want to delete the original track?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1248"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1262"/>
         <source>Enter new proximity range.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1249"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1263"/>
         <source>Is no-go area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11504,6 +11509,7 @@ recording. Use the range tool. </source>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="167"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="198"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="222"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="236"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11558,7 +11564,12 @@ recording. Use the range tool. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="266"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="233"/>
+        <source>Copy position of waypoint to Clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="280"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>

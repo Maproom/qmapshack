@@ -1,3 +1,15 @@
+V 1.13.0
+[Issue #298] Live GPS data
+[Issue #430] Add waypoint summary to project details
+[Issue #436] Route history is buggy and causes data loss when auto-routing is enabled
+[Issue #433] Suppress ascent/descent if wrong
+[Issue #438] Partially: Support for PROJ 6.0.0
+[Issue #429] Add Geocaching Attributes
+[Issue #434] Mega-fancy tour description on screen
+[Issue #448] Project Details: Add track points with additional information to lists
+[Issue #443] Garmin Map: Fixing elevation marks
+[Issue #450] Waypoint: copy coordinate to clipboard
+
 V 1.12.3
 [Issue #428] natural=water not shown
 

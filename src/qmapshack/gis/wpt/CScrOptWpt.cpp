@@ -100,14 +100,7 @@ void CScrOptWpt::slotCopy()
 void CScrOptWpt::slotCoordToClipboard()
 {
     CScrOptSemaphoreLocker lock(*this);
-    CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
-    if(wpt != nullptr) {
-        QString strPos;
-        QPointF pos = wpt->getPosition();
-        IUnit::degToStr(pos.x(), pos.y(), strPos);
-        QClipboard *clipboard = QApplication::clipboard();
-        clipboard->setText(strPos);
-    }
+    CGisWorkspace::self().copyWptCoordByKey(key);
     close();
 }
 

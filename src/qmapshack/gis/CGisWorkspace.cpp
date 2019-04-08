@@ -918,6 +918,20 @@ void CGisWorkspace::editWptRadius(const IGisItem::key_t &key)
     }
 }
 
+void CGisWorkspace::copyWptCoordByKey(const IGisItem::key_t &key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(nullptr != wpt)
+    {
+        QString strPos;
+        QPointF pos = wpt->getPosition();
+        IUnit::degToStr(pos.x(), pos.y(), strPos);
+        QClipboard *clipboard = QApplication::clipboard();
+        clipboard->setText(strPos);
+    }
+}
+
 void CGisWorkspace::addWptByPos(QPointF pt, const QString& name, const QString& desc) const
 {
     QMutexLocker lock(&IGisItem::mutexItems);

@@ -153,6 +153,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionDelRadiusWpt  = addAction(QIcon("://icons/32x32/WptDelProx.png"), tr("Delete Radius"), this, SLOT(slotDelRadiusWpt()));
     actionNogoWpt       = addAction(QIcon("://icons/32x32/NoGo.png"),  tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
     actionNogoWpt->setCheckable(true);
+    actionCopyCoordWpt  = addAction(QIcon("://icons/32x32/CoordToClipboard.png"),  tr("Copy position"), this, SLOT(slotCopyCoordWpt()));
 
     // route related actions
     actionFocusRte      = addAction(QIcon("://icons/32x32/RteInstr.png"), tr("Route Instructions"), this, SLOT(slotFocusRte(bool)));
@@ -1072,6 +1073,7 @@ void CGisListWks::showMenuItemWpt(const QPoint &p, CGisItemWpt * wpt)
     menu.addAction(actionNogoWpt);
     menu.addSeparator();
     menu.addMenu(CGeoSearchWeb::self().getMenu(wpt->getPosition(), &menu));
+    menu.addAction(actionCopyCoordWpt);
     menu.addSeparator();
     menu.addAction(actionDelete);
     menu.exec(p);
@@ -1326,7 +1328,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionNogoWpt->setEnabled(isProjectVisible && radius);
                 actionNogoWpt->setChecked(radius && wpt->isNogo());
                 actionMoveWpt->setEnabled(isProjectVisible && !isOnDevice);
-                actionProjWpt->setDisabled(isOnDevice);
+                actionProjWpt->setDisabled(isOnDevice);                
                 showMenuItemWpt(p, wpt);
                 break;
             }
@@ -1699,6 +1701,16 @@ void CGisListWks::slotMoveWpt()
     if(gisItem != nullptr)
     {
         CGisWorkspace::self().moveWptByKey(gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotCopyCoordWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+    CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
+    if(gisItem != nullptr)
+    {
+        CGisWorkspace::self().copyWptCoordByKey(gisItem->getKey());
     }
 }
 

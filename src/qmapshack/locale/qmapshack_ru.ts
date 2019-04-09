@@ -2133,7 +2133,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Copy position</source>
-        <translation type="unfinished">Скопировать позицию</translation>
+        <translation>Скопировать позицию</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="175"/>
@@ -11684,7 +11684,7 @@ recording. Use the range tool. </source>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="233"/>
         <source>Copy position of waypoint to Clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать позицию маршрутной точки в буфер обмена</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="280"/>

@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -791,6 +791,17 @@ void* aligned_malloc(size_t size, size_t alignment)
 #endif
 }
 
+void* aligned_extract_ptr(void *block)
+{
+#if AE_MALLOC==AE_BASIC_STATIC_MALLOC
+    return NULL;
+#else
+    if( block==NULL )
+        return NULL;
+    return *((void**)((char*)block-sizeof(void*)));
+#endif
+}
+
 void aligned_free(void *block)
 {
 #if AE_MALLOC==AE_BASIC_STATIC_MALLOC
@@ -799,7 +810,7 @@ void aligned_free(void *block)
     void *p;
     if( block==NULL )
         return;
-    p = *((void**)((char*)block-sizeof(void*)));
+    p = aligned_extract_ptr(block);
     free(p);
     if( _use_alloc_counter )
         ae_optional_atomic_sub_i(&_alloc_counter, 1);
@@ -891,11 +902,40 @@ on entry are correctly initialized by zeros.
 ************************************************************************/
 ae_bool ae_check_zeros(const void *ptr, ae_int_t n)
 {
-    const unsigned char *p = (const unsigned char*)ptr;
-    unsigned char c = 0x0;
-    ae_int_t i;
-    for(i=0; i<n; i++)
-        c |= p[i];
+    ae_int_t nu, nr, i;
+    unsigned long long c = 0x0;
+    
+    /*
+     * determine leading and trailing lengths
+     */
+    nu = n/sizeof(unsigned long long);
+    nr = n%sizeof(unsigned long long);
+    
+    /*
+     * handle leading nu long long elements
+     */
+    if( nu>0 )
+    {
+        const unsigned long long *p_ull;
+        p_ull = (const unsigned long long *)ptr;
+        for(i=0; i<nu; i++)
+            c |= p_ull[i];
+    }
+    
+    /*
+     * handle trailing nr char elements
+     */
+    if( nr>0 )
+    {
+        const unsigned char *p_uc;
+        p_uc  = ((const unsigned char *)ptr)+nu*sizeof(unsigned long long);
+        for(i=0; i<nr; i++)
+            c |= p_uc[i];
+    }
+    
+    /*
+     * done
+     */
     return c==0x0;
 }
 
@@ -1104,13 +1144,18 @@ void ae_db_init(ae_dyn_block *block, ae_int_t size, ae_state *state, ae_bool mak
      */
     ae_assert(size>=0, "ae_db_init(): negative size", state);
     block->ptr = NULL;
+    block->valgrind_hint = NULL;
     ae_touch_ptr(block->ptr);
+    ae_touch_ptr(block->valgrind_hint);
     if( make_automatic )
         ae_db_attach(block, state);
     else
         block->p_next = NULL;
     if( size!=0 )
+    {
         block->ptr = ae_malloc((size_t)size, state);
+        block->valgrind_hint = aligned_extract_ptr(block->ptr);
+    }
     block->deallocator = ae_free;
 }
 
@@ -1148,8 +1193,10 @@ void ae_db_realloc(ae_dyn_block *block, ae_int_t size, ae_state *state)
     {
         ((ae_deallocator)block->deallocator)(block->ptr);
         block->ptr = NULL;
+        block->valgrind_hint = NULL;
     }
     block->ptr = ae_malloc((size_t)size, state);
+    block->valgrind_hint = aligned_extract_ptr(block->ptr);
     block->deallocator = ae_free;
 }
 
@@ -1169,6 +1216,7 @@ void ae_db_free(ae_dyn_block *block)
     if( block->ptr!=NULL )
         ((ae_deallocator)block->deallocator)(block->ptr);
     block->ptr = NULL;
+    block->valgrind_hint = NULL;
     block->deallocator = ae_free;
 }
 
@@ -1184,11 +1232,18 @@ void ae_db_swap(ae_dyn_block *block1, ae_dyn_block *block2)
 {
     void (*deallocator)(void*) = NULL;
     void * volatile ptr;
+    void * valgrind_hint;
+    
     ptr = block1->ptr;
+    valgrind_hint = block1->valgrind_hint;
     deallocator = block1->deallocator;
+    
     block1->ptr = block2->ptr;
+    block1->valgrind_hint = block2->valgrind_hint;
     block1->deallocator = block2->deallocator;
+    
     block2->ptr = ptr;
+    block2->valgrind_hint = valgrind_hint;
     block2->deallocator = deallocator;
 }
 
@@ -1283,7 +1338,7 @@ void ae_vector_init_from_x(ae_vector *dst, x_vector *src, ae_state *state, ae_bo
     
     ae_vector_init(dst, (ae_int_t)src->cnt, (ae_datatype)src->datatype, state, make_automatic);
     if( src->cnt>0 )
-        memmove(dst->ptr.p_ptr, src->ptr, (size_t)(((ae_int_t)src->cnt)*ae_sizeof((ae_datatype)src->datatype)));
+        memmove(dst->ptr.p_ptr, src->x_ptr.p_ptr, (size_t)(((ae_int_t)src->cnt)*ae_sizeof((ae_datatype)src->datatype)));
 }
 
 /************************************************************************
@@ -1333,7 +1388,7 @@ void ae_vector_init_attach_to_x(ae_vector *dst, x_vector *src, ae_state *state, 
     
     /* init */
     dst->cnt = cnt;
-    dst->ptr.p_ptr = src->ptr;
+    dst->ptr.p_ptr = src->x_ptr.p_ptr;
     dst->is_attached = ae_true;
 }
 
@@ -1539,7 +1594,7 @@ void ae_matrix_init_from_x(ae_matrix *dst, x_matrix *src, ae_state *state, ae_bo
     ae_matrix_init(dst, (ae_int_t)src->rows, (ae_int_t)src->cols, (ae_datatype)src->datatype, state, make_automatic);
     if( src->rows!=0 && src->cols!=0 )
     {
-        p_src_row = (char*)src->ptr;
+        p_src_row = (char*)src->x_ptr.p_ptr;
         p_dst_row = (char*)(dst->ptr.pp_void[0]);
         row_size = ae_sizeof((ae_datatype)src->datatype)*(ae_int_t)src->cols;
         for(i=0; i<src->rows; i++, p_src_row+=src->stride*ae_sizeof((ae_datatype)src->datatype), p_dst_row+=dst->stride*ae_sizeof((ae_datatype)src->datatype))
@@ -1610,7 +1665,7 @@ void ae_matrix_init_attach_to_x(ae_matrix *dst, x_matrix *src, ae_state *state, 
         char *p_row;
         void **pp_ptr;
         
-        p_row = (char*)src->ptr;
+        p_row = (char*)src->x_ptr.p_ptr;
         rowsize = dst->stride*ae_sizeof(dst->datatype);
         pp_ptr  = (void**)dst->data.ptr;
         dst->ptr.pp_void = pp_ptr;
@@ -1908,7 +1963,7 @@ NOTES:
 ************************************************************************/
 void ae_x_set_vector(x_vector *dst, ae_vector *src, ae_state *state)
 {
-    if( src->ptr.p_ptr == dst->ptr )
+    if( src->ptr.p_ptr == dst->x_ptr.p_ptr )
     {
         /* src->ptr points to the beginning of dst, attached matrices, no need to copy */
         return;
@@ -1916,9 +1971,9 @@ void ae_x_set_vector(x_vector *dst, ae_vector *src, ae_state *state)
     if( dst->cnt!=src->cnt || dst->datatype!=src->datatype )
     {
         if( dst->owner==OWN_AE )
-            ae_free(dst->ptr);
-        dst->ptr = ae_malloc((size_t)(src->cnt*ae_sizeof(src->datatype)), state);
-        if( src->cnt!=0 && dst->ptr==NULL )
+            ae_free(dst->x_ptr.p_ptr);
+        dst->x_ptr.p_ptr = ae_malloc((size_t)(src->cnt*ae_sizeof(src->datatype)), state);
+        if( src->cnt!=0 && dst->x_ptr.p_ptr==NULL )
             ae_break(state, ERR_OUT_OF_MEMORY, "ae_malloc(): out of memory");
         dst->last_action = ACT_NEW_LOCATION;
         dst->cnt = src->cnt;
@@ -1937,7 +1992,7 @@ void ae_x_set_vector(x_vector *dst, ae_vector *src, ae_state *state)
             ae_assert(ae_false, "ALGLIB: internal error in ae_x_set_vector()", state);
     }
     if( src->cnt )
-        memmove(dst->ptr, src->ptr.p_ptr, (size_t)(src->cnt*ae_sizeof(src->datatype)));
+        memmove(dst->x_ptr.p_ptr, src->ptr.p_ptr, (size_t)(src->cnt*ae_sizeof(src->datatype)));
 }
 
 /************************************************************************
@@ -1972,7 +2027,7 @@ void ae_x_set_matrix(x_matrix *dst, ae_matrix *src, ae_state *state)
     char *p_dst_row;
     ae_int_t i;
     ae_int_t row_size;
-    if( src->ptr.pp_void!=NULL && src->ptr.pp_void[0] == dst->ptr )
+    if( src->ptr.pp_void!=NULL && src->ptr.pp_void[0] == dst->x_ptr.p_ptr )
     {
         /* src->ptr points to the beginning of dst, attached matrices, no need to copy */
         return;
@@ -1980,13 +2035,13 @@ void ae_x_set_matrix(x_matrix *dst, ae_matrix *src, ae_state *state)
     if( dst->rows!=src->rows || dst->cols!=src->cols || dst->datatype!=src->datatype )
     {
         if( dst->owner==OWN_AE )
-            ae_free(dst->ptr);
+            ae_free(dst->x_ptr.p_ptr);
         dst->rows = src->rows;
         dst->cols = src->cols;
         dst->stride = src->cols;
         dst->datatype = src->datatype;
-        dst->ptr = ae_malloc((size_t)(dst->rows*((ae_int_t)dst->stride)*ae_sizeof(src->datatype)), state);
-        if( dst->rows!=0 && dst->stride!=0 && dst->ptr==NULL )
+        dst->x_ptr.p_ptr = ae_malloc((size_t)(dst->rows*((ae_int_t)dst->stride)*ae_sizeof(src->datatype)), state);
+        if( dst->rows!=0 && dst->stride!=0 && dst->x_ptr.p_ptr==NULL )
             ae_break(state, ERR_OUT_OF_MEMORY, "ae_malloc(): out of memory");
         dst->last_action = ACT_NEW_LOCATION;
         dst->owner = OWN_AE;
@@ -2005,7 +2060,7 @@ void ae_x_set_matrix(x_matrix *dst, ae_matrix *src, ae_state *state)
     if( src->rows!=0 && src->cols!=0 )
     {
         p_src_row = (char*)(src->ptr.pp_void[0]);
-        p_dst_row = (char*)dst->ptr;
+        p_dst_row = (char*)dst->x_ptr.p_ptr;
         row_size = ae_sizeof(src->datatype)*src->cols;
         for(i=0; i<src->rows; i++, p_src_row+=src->stride*ae_sizeof(src->datatype), p_dst_row+=dst->stride*ae_sizeof(src->datatype))
             memmove(p_dst_row, p_src_row, (size_t)(row_size));
@@ -2030,8 +2085,8 @@ NOTES:
 void ae_x_attach_to_vector(x_vector *dst, ae_vector *src)
 {
     if( dst->owner==OWN_AE )
-        ae_free(dst->ptr);
-    dst->ptr = src->ptr.p_ptr;
+        ae_free(dst->x_ptr.p_ptr);
+    dst->x_ptr.p_ptr = src->ptr.p_ptr;
     dst->last_action = ACT_NEW_LOCATION;
     dst->cnt = src->cnt;
     dst->datatype = src->datatype;
@@ -2056,12 +2111,12 @@ NOTES:
 void ae_x_attach_to_matrix(x_matrix *dst, ae_matrix *src)
 {
     if( dst->owner==OWN_AE )
-            ae_free(dst->ptr);
+            ae_free(dst->x_ptr.p_ptr);
     dst->rows = src->rows;
     dst->cols = src->cols;
     dst->stride = src->stride;
     dst->datatype = src->datatype;
-    dst->ptr = &(src->ptr.pp_double[0][0]);
+    dst->x_ptr.p_ptr = &(src->ptr.pp_double[0][0]);
     dst->last_action = ACT_NEW_LOCATION;
     dst->owner = OWN_CALLER;
 }
@@ -2075,8 +2130,8 @@ dst                 vector
 void x_vector_clear(x_vector *dst)
 {
     if( dst->owner==OWN_AE )
-        aligned_free(dst->ptr);
-    dst->ptr = NULL;
+        aligned_free(dst->x_ptr.p_ptr);
+    dst->x_ptr.p_ptr = NULL;
     dst->cnt = 0;
 }
 
@@ -2638,8 +2693,8 @@ static void is_symmetric_rec_off_stat(x_matrix *a, ae_int_t offset0, ae_int_t of
         double v;
         ae_int_t i, j;
 
-        p1 = (double*)(a->ptr)+offset0*a->stride+offset1;
-        p2 = (double*)(a->ptr)+offset1*a->stride+offset0;
+        p1 = (double*)(a->x_ptr.p_ptr)+offset0*a->stride+offset1;
+        p2 = (double*)(a->x_ptr.p_ptr)+offset1*a->stride+offset0;
         for(i=0; i<len0; i++)
         {
             pcol = p2+i;
@@ -2697,7 +2752,7 @@ static void is_symmetric_rec_diag_stat(x_matrix *a, ae_int_t offset, ae_int_t le
     }
     
     /* base case */
-    p = (double*)(a->ptr)+offset*a->stride+offset;
+    p = (double*)(a->x_ptr.p_ptr)+offset*a->stride+offset;
     for(i=0; i<len; i++)
     {
         pcol = p+i;
@@ -2764,8 +2819,8 @@ static void is_hermitian_rec_off_stat(x_matrix *a, ae_int_t offset0, ae_int_t of
         double v;
         ae_int_t i, j;
 
-        p1 = (ae_complex*)(a->ptr)+offset0*a->stride+offset1;
-        p2 = (ae_complex*)(a->ptr)+offset1*a->stride+offset0;
+        p1 = (ae_complex*)(a->x_ptr.p_ptr)+offset0*a->stride+offset1;
+        p2 = (ae_complex*)(a->x_ptr.p_ptr)+offset1*a->stride+offset0;
         for(i=0; i<len0; i++)
         {
             pcol = p2+i;
@@ -2823,7 +2878,7 @@ static void is_hermitian_rec_diag_stat(x_matrix *a, ae_int_t offset, ae_int_t le
     }
     
     /* base case */
-    p = (ae_complex*)(a->ptr)+offset*a->stride+offset;
+    p = (ae_complex*)(a->x_ptr.p_ptr)+offset*a->stride+offset;
     for(i=0; i<len; i++)
     {
         pcol = p+i;
@@ -2894,8 +2949,8 @@ static void force_symmetric_rec_off_stat(x_matrix *a, ae_int_t offset0, ae_int_t
         double *p1, *p2, *prow, *pcol;
         ae_int_t i, j;
 
-        p1 = (double*)(a->ptr)+offset0*a->stride+offset1;
-        p2 = (double*)(a->ptr)+offset1*a->stride+offset0;
+        p1 = (double*)(a->x_ptr.p_ptr)+offset0*a->stride+offset1;
+        p2 = (double*)(a->x_ptr.p_ptr)+offset1*a->stride+offset0;
         for(i=0; i<len0; i++)
         {
             pcol = p2+i;
@@ -2936,7 +2991,7 @@ static void force_symmetric_rec_diag_stat(x_matrix *a, ae_int_t offset, ae_int_t
     }
     
     /* base case */
-    p = (double*)(a->ptr)+offset*a->stride+offset;
+    p = (double*)(a->x_ptr.p_ptr)+offset*a->stride+offset;
     for(i=0; i<len; i++)
     {
         pcol = p+i;
@@ -2981,8 +3036,8 @@ static void force_hermitian_rec_off_stat(x_matrix *a, ae_int_t offset0, ae_int_t
         ae_complex *p1, *p2, *prow, *pcol;
         ae_int_t i, j;
 
-        p1 = (ae_complex*)(a->ptr)+offset0*a->stride+offset1;
-        p2 = (ae_complex*)(a->ptr)+offset1*a->stride+offset0;
+        p1 = (ae_complex*)(a->x_ptr.p_ptr)+offset0*a->stride+offset1;
+        p2 = (ae_complex*)(a->x_ptr.p_ptr)+offset1*a->stride+offset0;
         for(i=0; i<len0; i++)
         {
             pcol = p2+i;
@@ -3023,7 +3078,7 @@ static void force_hermitian_rec_diag_stat(x_matrix *a, ae_int_t offset, ae_int_t
     }
     
     /* base case */
-    p = (ae_complex*)(a->ptr)+offset*a->stride+offset;
+    p = (ae_complex*)(a->x_ptr.p_ptr)+offset*a->stride+offset;
     for(i=0; i<len; i++)
     {
         pcol = p+i;
@@ -7487,7 +7542,7 @@ void alglib::real_1d_array::attach_to_ptr(ae_int_t iLen, double *pContent ) // T
     x.datatype = alglib_impl::DT_REAL;
     x.owner = alglib_impl::OWN_CALLER;
     x.last_action = alglib_impl::ACT_UNCHANGED;
-    x.ptr = pContent;
+    x.x_ptr.p_ptr = pContent;
     attach_to(&x, &_state);
     ae_state_clear(&_state);
 }
@@ -8070,7 +8125,7 @@ void alglib::real_2d_array::attach_to_ptr(ae_int_t irows, ae_int_t icols, double
     x.datatype = alglib_impl::DT_REAL;
     x.owner = alglib_impl::OWN_CALLER;
     x.last_action = alglib_impl::ACT_UNCHANGED;
-    x.ptr = pContent;
+    x.x_ptr.p_ptr = pContent;
     attach_to(&x, &_state);
     ae_state_clear(&_state);
 }

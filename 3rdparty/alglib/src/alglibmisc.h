@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -95,7 +95,7 @@ namespace alglib
 Buffer object which is used to perform nearest neighbor  requests  in  the
 multithreaded mode (multiple threads working with same KD-tree object).
 
-This object should be created with KDTreeCreateBuffer().
+This object should be created with KDTreeCreateRequestBuffer().
 *************************************************************************/
 class _kdtreerequestbuffer_owner
 {
@@ -361,7 +361,7 @@ OUTPUT PARAMETERS
 
 
 IMPORTANT: KD-tree buffer should be used only with  KD-tree  object  which
-           was used to initialize buffer. Any attempt to use biffer   with
+           was used to initialize buffer. Any attempt to use buffer   with
            different object is dangerous - you  may  get  integrity  check
            failure (exception) because sizes of internal arrays do not fit
            to dimensions of KD-tree structure.
@@ -456,13 +456,18 @@ ae_int_t kdtreetsqueryknn(const kdtree &kdt, const kdtreerequestbuffer &buf, con
 
 
 /*************************************************************************
-R-NN query: all points within R-sphere centered at X
+R-NN query: all points within R-sphere centered at X, ordered by  distance
+between point and X (by ascending).
+
+NOTE: it is also possible to perform undordered queries performed by means
+      of kdtreequeryrnnu() and kdtreetsqueryrnnu() functions. Such queries
+      are faster because we do not have to use heap structure for sorting.
 
 IMPORTANT: this function can not be used in multithreaded code because  it
            uses internal temporary buffer of kd-tree object, which can not
            be shared between multiple threads.  If  you  want  to  perform
            parallel requests, use function  which  uses  external  request
-           buffer: KDTreeTsQueryRNN() ("Ts" stands for "thread-safe").
+           buffer: kdtreetsqueryrnn() ("Ts" stands for "thread-safe").
 
 INPUT PARAMETERS
     KDT         -   KD-tree
@@ -494,12 +499,58 @@ ae_int_t kdtreequeryrnn(const kdtree &kdt, const real_1d_array &x, const double 
 
 
 /*************************************************************************
+R-NN query: all points within R-sphere  centered  at  X,  no  ordering  by
+distance as undicated by "U" suffix (faster that ordered query, for  large
+queries - significantly faster).
+
+IMPORTANT: this function can not be used in multithreaded code because  it
+           uses internal temporary buffer of kd-tree object, which can not
+           be shared between multiple threads.  If  you  want  to  perform
+           parallel requests, use function  which  uses  external  request
+           buffer: kdtreetsqueryrnn() ("Ts" stands for "thread-safe").
+
+INPUT PARAMETERS
+    KDT         -   KD-tree
+    X           -   point, array[0..NX-1].
+    R           -   radius of sphere (in corresponding norm), R>0
+    SelfMatch   -   whether self-matches are allowed:
+                    * if True, nearest neighbor may be the point itself
+                      (if it exists in original dataset)
+                    * if False, then only points with non-zero distance
+                      are returned
+                    * if not given, considered True
+
+RESULT
+    number of neighbors found, >=0
+
+This  subroutine  performs  query  and  stores  its result in the internal
+structures of the KD-tree. You can use  following  subroutines  to  obtain
+actual results:
+* KDTreeQueryResultsX() to get X-values
+* KDTreeQueryResultsXY() to get X- and Y-values
+* KDTreeQueryResultsTags() to get tag values
+* KDTreeQueryResultsDistances() to get distances
+
+As indicated by "U" suffix, this function returns unordered results.
+
+  -- ALGLIB --
+     Copyright 01.11.2018 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t kdtreequeryrnnu(const kdtree &kdt, const real_1d_array &x, const double r, const bool selfmatch, const xparams _xparams = alglib::xdefault);
+ae_int_t kdtreequeryrnnu(const kdtree &kdt, const real_1d_array &x, const double r, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
 R-NN query: all points within  R-sphere  centered  at  X,  using  external
-thread-local buffer.
+thread-local buffer, sorted by distance between point and X (by ascending)
 
 You can call this function from multiple threads for same kd-tree instance,
 assuming that different instances of buffer object are passed to different
 threads.
+
+NOTE: it is also possible to perform undordered queries performed by means
+      of kdtreequeryrnnu() and kdtreetsqueryrnnu() functions. Such queries
+      are faster because we do not have to use heap structure for sorting.
 
 INPUT PARAMETERS
     KDT         -   KD-tree
@@ -537,6 +588,55 @@ IMPORTANT: kd-tree buffer should be used only with  KD-tree  object  which
 *************************************************************************/
 ae_int_t kdtreetsqueryrnn(const kdtree &kdt, const kdtreerequestbuffer &buf, const real_1d_array &x, const double r, const bool selfmatch, const xparams _xparams = alglib::xdefault);
 ae_int_t kdtreetsqueryrnn(const kdtree &kdt, const kdtreerequestbuffer &buf, const real_1d_array &x, const double r, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+R-NN query: all points within  R-sphere  centered  at  X,  using  external
+thread-local buffer, no ordering by distance as undicated  by  "U"  suffix
+(faster that ordered query, for large queries - significantly faster).
+
+You can call this function from multiple threads for same kd-tree instance,
+assuming that different instances of buffer object are passed to different
+threads.
+
+INPUT PARAMETERS
+    KDT         -   KD-tree
+    Buf         -   request buffer  object  created  for  this  particular
+                    instance of kd-tree structure with kdtreecreaterequestbuffer()
+                    function.
+    X           -   point, array[0..NX-1].
+    R           -   radius of sphere (in corresponding norm), R>0
+    SelfMatch   -   whether self-matches are allowed:
+                    * if True, nearest neighbor may be the point itself
+                      (if it exists in original dataset)
+                    * if False, then only points with non-zero distance
+                      are returned
+                    * if not given, considered True
+
+RESULT
+    number of neighbors found, >=0
+
+This  subroutine  performs  query  and  stores  its result in the internal
+structures  of  the  buffer object. You can use following  subroutines  to
+obtain these results (pay attention to "buf" in their names):
+* KDTreeTsQueryResultsX() to get X-values
+* KDTreeTsQueryResultsXY() to get X- and Y-values
+* KDTreeTsQueryResultsTags() to get tag values
+* KDTreeTsQueryResultsDistances() to get distances
+
+As indicated by "U" suffix, this function returns unordered results.
+
+IMPORTANT: kd-tree buffer should be used only with  KD-tree  object  which
+           was used to initialize buffer. Any attempt to use biffer   with
+           different object is dangerous - you  may  get  integrity  check
+           failure (exception) because sizes of internal arrays do not fit
+           to dimensions of KD-tree structure.
+
+  -- ALGLIB --
+     Copyright 18.03.2016 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t kdtreetsqueryrnnu(const kdtree &kdt, const kdtreerequestbuffer &buf, const real_1d_array &x, const double r, const bool selfmatch, const xparams _xparams = alglib::xdefault);
+ae_int_t kdtreetsqueryrnnu(const kdtree &kdt, const kdtreerequestbuffer &buf, const real_1d_array &x, const double r, const xparams _xparams = alglib::xdefault);
 
 
 /*************************************************************************
@@ -1696,7 +1796,18 @@ ae_int_t kdtreequeryrnn(kdtree* kdt,
      double r,
      ae_bool selfmatch,
      ae_state *_state);
+ae_int_t kdtreequeryrnnu(kdtree* kdt,
+     /* Real    */ ae_vector* x,
+     double r,
+     ae_bool selfmatch,
+     ae_state *_state);
 ae_int_t kdtreetsqueryrnn(kdtree* kdt,
+     kdtreerequestbuffer* buf,
+     /* Real    */ ae_vector* x,
+     double r,
+     ae_bool selfmatch,
+     ae_state *_state);
+ae_int_t kdtreetsqueryrnnu(kdtree* kdt,
      kdtreerequestbuffer* buf,
      /* Real    */ ae_vector* x,
      double r,

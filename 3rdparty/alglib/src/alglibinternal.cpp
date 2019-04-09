@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -434,6 +434,26 @@ ae_int_t getspline2dserializationcode(ae_state *_state)
 
 
     result = 6;
+    return result;
+}
+
+
+ae_int_t getidwserializationcode(ae_state *_state)
+{
+    ae_int_t result;
+
+
+    result = 7;
+    return result;
+}
+
+
+ae_int_t getknnserializationcode(ae_state *_state)
+{
+    ae_int_t result;
+
+
+    result = 108;
     return result;
 }
 
@@ -984,6 +1004,65 @@ c) new size can be larger than N, so subsequent grow() calls can return
   -- ALGLIB --
      Copyright 20.03.2009 by Bochkanov Sergey
 *************************************************************************/
+void bvectorgrowto(/* Boolean */ ae_vector* x,
+     ae_int_t n,
+     ae_state *_state)
+{
+    ae_frame _frame_block;
+    ae_vector oldx;
+    ae_int_t i;
+    ae_int_t n2;
+
+    ae_frame_make(_state, &_frame_block);
+    memset(&oldx, 0, sizeof(oldx));
+    ae_vector_init(&oldx, 0, DT_BOOL, _state, ae_true);
+
+    
+    /*
+     * Enough place
+     */
+    if( x->cnt>=n )
+    {
+        ae_frame_leave(_state);
+        return;
+    }
+    
+    /*
+     * Choose new size
+     */
+    n = ae_maxint(n, ae_round(1.8*x->cnt+1, _state), _state);
+    
+    /*
+     * Grow
+     */
+    n2 = x->cnt;
+    ae_swap_vectors(x, &oldx);
+    ae_vector_set_length(x, n, _state);
+    for(i=0; i<=n-1; i++)
+    {
+        if( i<n2 )
+        {
+            x->ptr.p_bool[i] = oldx.ptr.p_bool[i];
+        }
+        else
+        {
+            x->ptr.p_bool[i] = ae_false;
+        }
+    }
+    ae_frame_leave(_state);
+}
+
+
+/*************************************************************************
+Grows X, i.e. changes its size in such a way that:
+a) contents is preserved
+b) new size is at least N
+c) new size can be larger than N, so subsequent grow() calls can return
+   without reallocation
+
+  -- ALGLIB --
+     Copyright 20.03.2009 by Bochkanov Sergey
+*************************************************************************/
 void ivectorgrowto(/* Integer */ ae_vector* x,
      ae_int_t n,
      ae_state *_state)
@@ -1090,6 +1169,71 @@ void rmatrixgrowrowsto(/* Real    */ ae_matrix* a,
     for(i=0; i<=n2-1; i++)
     {
         for(j=0; j<=m-1; j++)
+        {
+            a->ptr.pp_double[i][j] = olda.ptr.pp_double[i][j];
+        }
+    }
+    ae_frame_leave(_state);
+}
+
+
+/*************************************************************************
+Grows X, i.e. appends cols in such a way that:
+a) contents is preserved
+b) new col count is at least N
+c) new col count can be larger than N, so subsequent grow() calls can return
+   without reallocation
+d) new matrix has at least MinRows row (if less than specified amount
+   of rows is present, new rows are added with undefined contents);
+   MinRows can be 0 or negative value = ignored
+
+  -- ALGLIB --
+     Copyright 20.03.2009 by Bochkanov Sergey
+*************************************************************************/
+void rmatrixgrowcolsto(/* Real    */ ae_matrix* a,
+     ae_int_t n,
+     ae_int_t minrows,
+     ae_state *_state)
+{
+    ae_frame _frame_block;
+    ae_matrix olda;
+    ae_int_t i;
+    ae_int_t j;
+    ae_int_t n2;
+    ae_int_t m;
+
+    ae_frame_make(_state, &_frame_block);
+    memset(&olda, 0, sizeof(olda));
+    ae_matrix_init(&olda, 0, 0, DT_REAL, _state, ae_true);
+
+    
+    /*
+     * Enough place?
+     */
+    if( a->cols>=n&&a->rows>=minrows )
+    {
+        ae_frame_leave(_state);
+        return;
+    }
+    
+    /*
+     * Sizes and metrics
+     */
+    if( a->cols<n )
+    {
+        n = ae_maxint(n, ae_round(1.8*a->cols+1, _state), _state);
+    }
+    n2 = ae_minint(a->cols, n, _state);
+    m = a->rows;
+    
+    /*
+     * Grow
+     */
+    ae_swap_matrices(a, &olda);
+    ae_matrix_set_length(a, ae_maxint(m, minrows, _state), n, _state);
+    for(i=0; i<=m-1; i++)
+    {
+        for(j=0; j<=n2-1; j++)
         {
             a->ptr.pp_double[i][j] = olda.ptr.pp_double[i][j];
         }
@@ -1370,6 +1514,7 @@ ae_bool isfinitevector(/* Real    */ ae_vector* x,
      ae_state *_state)
 {
     ae_int_t i;
+    double v;
     ae_bool result;
 
 
@@ -1384,15 +1529,12 @@ ae_bool isfinitevector(/* Real    */ ae_vector* x,
         result = ae_false;
         return result;
     }
+    v = (double)(0);
     for(i=0; i<=n-1; i++)
     {
-        if( !ae_isfinite(x->ptr.p_double[i], _state) )
-        {
-            result = ae_false;
-            return result;
-        }
+        v = 0.01*v+x->ptr.p_double[i];
     }
-    result = ae_true;
+    result = ae_isfinite(v, _state);
     return result;
 }
 
@@ -2175,6 +2317,27 @@ void countdown(ae_int_t* v, ae_state *_state)
 
 
 /*************************************************************************
+This function returns +1 or -1 depending on sign of X.
+x=0 results in +1 being returned.
+*************************************************************************/
+double possign(double x, ae_state *_state)
+{
+    double result;
+
+
+    if( ae_fp_greater_eq(x,(double)(0)) )
+    {
+        result = (double)(1);
+    }
+    else
+    {
+        result = (double)(-1);
+    }
+    return result;
+}
+
+
+/*************************************************************************
 This function returns product of two real numbers. It is convenient when
 you have to perform typecast-and-product of two INTEGERS.
 *************************************************************************/
@@ -2415,6 +2578,57 @@ double rboundval(double x, double b1, double b2, ae_state *_state)
         return result;
     }
     result = x;
+    return result;
+}
+
+
+/*************************************************************************
+Returns number of non-zeros
+*************************************************************************/
+ae_int_t countnz1(/* Real    */ ae_vector* v,
+     ae_int_t n,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t result;
+
+
+    result = 0;
+    for(i=0; i<=n-1; i++)
+    {
+        if( !(v->ptr.p_double[i]==0) )
+        {
+            result = result+1;
+        }
+    }
+    return result;
+}
+
+
+/*************************************************************************
+Returns number of non-zeros
+*************************************************************************/
+ae_int_t countnz2(/* Real    */ ae_matrix* v,
+     ae_int_t m,
+     ae_int_t n,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t j;
+    ae_int_t result;
+
+
+    result = 0;
+    for(i=0; i<=m-1; i++)
+    {
+        for(j=0; j<=n-1; j++)
+        {
+            if( !(v->ptr.pp_double[i][j]==0) )
+            {
+                result = result+1;
+            }
+        }
+    }
     return result;
 }
 
@@ -2697,6 +2911,28 @@ void unserializerealmatrix(ae_serializer* s,
         {
             ae_serializer_unserialize_double(s, &t, _state);
             v->ptr.pp_double[i][j] = t;
+        }
+    }
+}
+
+
+/*************************************************************************
+Copy boolean array
+*************************************************************************/
+void copybooleanarray(/* Boolean */ ae_vector* src,
+     /* Boolean */ ae_vector* dst,
+     ae_state *_state)
+{
+    ae_int_t i;
+
+    ae_vector_clear(dst);
+
+    if( src->cnt>0 )
+    {
+        ae_vector_set_length(dst, src->cnt, _state);
+        for(i=0; i<=src->cnt-1; i++)
+        {
+            dst->ptr.p_bool[i] = src->ptr.p_bool[i];
         }
     }
 }
@@ -2996,6 +3232,25 @@ ae_int_t chunkscount(ae_int_t tasksize,
     {
         result = result+1;
     }
+    return result;
+}
+
+
+/*************************************************************************
+Returns maximum density for level 2 sparse/dense functions. Density values
+below one returned by this function are better to handle via sparse Level 2
+functionality.
+
+  -- ALGLIB routine --
+     10.01.2019
+     Bochkanov Sergey
+*************************************************************************/
+double sparselevel2density(ae_state *_state)
+{
+    double result;
+
+
+    result = 0.1;
     return result;
 }
 
@@ -3877,6 +4132,12 @@ void tagsortmiddleir(/* Integer */ ae_vector* a,
     ae_int_t t;
     ae_int_t tmp;
     double tmpr;
+    ae_int_t p0;
+    ae_int_t p1;
+    ae_int_t at;
+    ae_int_t ak;
+    ae_int_t ak1;
+    double bt;
 
 
     
@@ -3891,76 +4152,167 @@ void tagsortmiddleir(/* Integer */ ae_vector* a,
     /*
      * General case, N>1: sort, update B
      */
-    i = 2;
-    do
+    for(i=2; i<=n; i++)
     {
         t = i;
         while(t!=1)
         {
             k = t/2;
-            if( a->ptr.p_int[offset+k-1]>=a->ptr.p_int[offset+t-1] )
+            p0 = offset+k-1;
+            p1 = offset+t-1;
+            ak = a->ptr.p_int[p0];
+            at = a->ptr.p_int[p1];
+            if( ak>=at )
             {
-                t = 1;
+                break;
             }
-            else
-            {
-                tmp = a->ptr.p_int[offset+k-1];
-                a->ptr.p_int[offset+k-1] = a->ptr.p_int[offset+t-1];
-                a->ptr.p_int[offset+t-1] = tmp;
-                tmpr = b->ptr.p_double[offset+k-1];
-                b->ptr.p_double[offset+k-1] = b->ptr.p_double[offset+t-1];
-                b->ptr.p_double[offset+t-1] = tmpr;
-                t = k;
-            }
+            a->ptr.p_int[p0] = at;
+            a->ptr.p_int[p1] = ak;
+            tmpr = b->ptr.p_double[p0];
+            b->ptr.p_double[p0] = b->ptr.p_double[p1];
+            b->ptr.p_double[p1] = tmpr;
+            t = k;
         }
-        i = i+1;
     }
-    while(i<=n);
-    i = n-1;
-    do
+    for(i=n-1; i>=1; i--)
     {
-        tmp = a->ptr.p_int[offset+i];
-        a->ptr.p_int[offset+i] = a->ptr.p_int[offset+0];
-        a->ptr.p_int[offset+0] = tmp;
-        tmpr = b->ptr.p_double[offset+i];
-        b->ptr.p_double[offset+i] = b->ptr.p_double[offset+0];
-        b->ptr.p_double[offset+0] = tmpr;
-        t = 1;
-        while(t!=0)
+        p0 = offset+0;
+        p1 = offset+i;
+        tmp = a->ptr.p_int[p1];
+        a->ptr.p_int[p1] = a->ptr.p_int[p0];
+        a->ptr.p_int[p0] = tmp;
+        at = tmp;
+        tmpr = b->ptr.p_double[p1];
+        b->ptr.p_double[p1] = b->ptr.p_double[p0];
+        b->ptr.p_double[p0] = tmpr;
+        bt = tmpr;
+        t = 0;
+        for(;;)
         {
-            k = 2*t;
-            if( k>i )
+            k = 2*t+1;
+            if( k+1>i )
             {
-                t = 0;
+                break;
             }
-            else
+            p0 = offset+t;
+            p1 = offset+k;
+            ak = a->ptr.p_int[p1];
+            if( k+1<i )
             {
-                if( k<i )
+                ak1 = a->ptr.p_int[p1+1];
+                if( ak1>ak )
                 {
-                    if( a->ptr.p_int[offset+k]>a->ptr.p_int[offset+k-1] )
-                    {
-                        k = k+1;
-                    }
-                }
-                if( a->ptr.p_int[offset+t-1]>=a->ptr.p_int[offset+k-1] )
-                {
-                    t = 0;
-                }
-                else
-                {
-                    tmp = a->ptr.p_int[offset+k-1];
-                    a->ptr.p_int[offset+k-1] = a->ptr.p_int[offset+t-1];
-                    a->ptr.p_int[offset+t-1] = tmp;
-                    tmpr = b->ptr.p_double[offset+k-1];
-                    b->ptr.p_double[offset+k-1] = b->ptr.p_double[offset+t-1];
-                    b->ptr.p_double[offset+t-1] = tmpr;
-                    t = k;
+                    ak = ak1;
+                    p1 = p1+1;
+                    k = k+1;
                 }
             }
+            if( at>=ak )
+            {
+                break;
+            }
+            a->ptr.p_int[p1] = at;
+            a->ptr.p_int[p0] = ak;
+            b->ptr.p_double[p0] = b->ptr.p_double[p1];
+            b->ptr.p_double[p1] = bt;
+            t = k;
         }
-        i = i-1;
     }
-    while(i>=1);
+}
+
+
+/*************************************************************************
+Sorting function optimized for integer values (only keys, no labels),  can
+be used to sort middle of the array
+
+  -- ALGLIB --
+     Copyright 11.12.2008 by Bochkanov Sergey
+*************************************************************************/
+void sortmiddlei(/* Integer */ ae_vector* a,
+     ae_int_t offset,
+     ae_int_t n,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t k;
+    ae_int_t t;
+    ae_int_t tmp;
+    ae_int_t p0;
+    ae_int_t p1;
+    ae_int_t at;
+    ae_int_t ak;
+    ae_int_t ak1;
+
+
+    
+    /*
+     * Special cases
+     */
+    if( n<=1 )
+    {
+        return;
+    }
+    
+    /*
+     * General case, N>1: sort, update B
+     */
+    for(i=2; i<=n; i++)
+    {
+        t = i;
+        while(t!=1)
+        {
+            k = t/2;
+            p0 = offset+k-1;
+            p1 = offset+t-1;
+            ak = a->ptr.p_int[p0];
+            at = a->ptr.p_int[p1];
+            if( ak>=at )
+            {
+                break;
+            }
+            a->ptr.p_int[p0] = at;
+            a->ptr.p_int[p1] = ak;
+            t = k;
+        }
+    }
+    for(i=n-1; i>=1; i--)
+    {
+        p0 = offset+0;
+        p1 = offset+i;
+        tmp = a->ptr.p_int[p1];
+        a->ptr.p_int[p1] = a->ptr.p_int[p0];
+        a->ptr.p_int[p0] = tmp;
+        at = tmp;
+        t = 0;
+        for(;;)
+        {
+            k = 2*t+1;
+            if( k+1>i )
+            {
+                break;
+            }
+            p0 = offset+t;
+            p1 = offset+k;
+            ak = a->ptr.p_int[p1];
+            if( k+1<i )
+            {
+                ak1 = a->ptr.p_int[p1+1];
+                if( ak1>ak )
+                {
+                    ak = ak1;
+                    p1 = p1+1;
+                    k = k+1;
+                }
+            }
+            if( at>=ak )
+            {
+                break;
+            }
+            a->ptr.p_int[p1] = at;
+            a->ptr.p_int[p0] = ak;
+            t = k;
+        }
+    }
 }
 
 
@@ -4021,7 +4373,7 @@ void tagheappushi(/* Real    */ ae_vector* a,
     {
         k = (j-1)/2;
         v = a->ptr.p_double[k];
-        if( ae_fp_less(v,va) )
+        if( v<va )
         {
             
             /*
@@ -4115,7 +4467,7 @@ void tagheapreplacetopi(/* Real    */ ae_vector* a,
              * have no siblings due to heap structure)
              */
             v = a->ptr.p_double[k1];
-            if( ae_fp_greater(v,va) )
+            if( v>va )
             {
                 a->ptr.p_double[j] = v;
                 b->ptr.p_int[j] = b->ptr.p_int[k1];
@@ -4131,9 +4483,9 @@ void tagheapreplacetopi(/* Real    */ ae_vector* a,
              */
             v1 = a->ptr.p_double[k1];
             v2 = a->ptr.p_double[k2];
-            if( ae_fp_greater(v1,v2) )
+            if( v1>v2 )
             {
-                if( ae_fp_less(va,v1) )
+                if( va<v1 )
                 {
                     a->ptr.p_double[j] = v1;
                     b->ptr.p_int[j] = b->ptr.p_int[k1];
@@ -4146,7 +4498,7 @@ void tagheapreplacetopi(/* Real    */ ae_vector* a,
             }
             else
             {
-                if( ae_fp_less(va,v2) )
+                if( va<v2 )
                 {
                     a->ptr.p_double[j] = v2;
                     b->ptr.p_int[j] = b->ptr.p_int[k2];

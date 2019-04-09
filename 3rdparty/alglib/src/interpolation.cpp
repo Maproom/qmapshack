@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -40,7 +40,7 @@ http://www.fsf.org/licensing/licenses
 namespace alglib
 {
 
-#if defined(AE_COMPILE_IDWINT) || !defined(AE_PARTIAL_BUILD)
+#if defined(AE_COMPILE_IDW) || !defined(AE_PARTIAL_BUILD)
 
 #endif
 
@@ -96,11 +96,14 @@ namespace alglib
 
 #endif
 
-#if defined(AE_COMPILE_IDWINT) || !defined(AE_PARTIAL_BUILD)
+#if defined(AE_COMPILE_IDW) || !defined(AE_PARTIAL_BUILD)
 /*************************************************************************
-IDW interpolant.
+Buffer  object  which  is  used  to  perform  evaluation  requests  in  the
+multithreaded mode (multiple threads working with same IDW object).
+
+This object should be created with idwcreatecalcbuffer().
 *************************************************************************/
-_idwinterpolant_owner::_idwinterpolant_owner()
+_idwcalcbuffer_owner::_idwcalcbuffer_owner()
 {
     jmp_buf _break_jump;
     alglib_impl::ae_state _state;
@@ -110,7 +113,7 @@ _idwinterpolant_owner::_idwinterpolant_owner()
     {
         if( p_struct!=NULL )
         {
-            alglib_impl::_idwinterpolant_destroy(p_struct);
+            alglib_impl::_idwcalcbuffer_destroy(p_struct);
             alglib_impl::ae_free(p_struct);
         }
         p_struct = NULL;
@@ -123,13 +126,13 @@ _idwinterpolant_owner::_idwinterpolant_owner()
     }
     alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
     p_struct = NULL;
-    p_struct = (alglib_impl::idwinterpolant*)alglib_impl::ae_malloc(sizeof(alglib_impl::idwinterpolant), &_state);
-    memset(p_struct, 0, sizeof(alglib_impl::idwinterpolant));
-    alglib_impl::_idwinterpolant_init(p_struct, &_state, ae_false);
+    p_struct = (alglib_impl::idwcalcbuffer*)alglib_impl::ae_malloc(sizeof(alglib_impl::idwcalcbuffer), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::idwcalcbuffer));
+    alglib_impl::_idwcalcbuffer_init(p_struct, &_state, ae_false);
     ae_state_clear(&_state);
 }
 
-_idwinterpolant_owner::_idwinterpolant_owner(const _idwinterpolant_owner &rhs)
+_idwcalcbuffer_owner::_idwcalcbuffer_owner(const _idwcalcbuffer_owner &rhs)
 {
     jmp_buf _break_jump;
     alglib_impl::ae_state _state;
@@ -139,7 +142,7 @@ _idwinterpolant_owner::_idwinterpolant_owner(const _idwinterpolant_owner &rhs)
     {
         if( p_struct!=NULL )
         {
-            alglib_impl::_idwinterpolant_destroy(p_struct);
+            alglib_impl::_idwcalcbuffer_destroy(p_struct);
             alglib_impl::ae_free(p_struct);
         }
         p_struct = NULL;
@@ -152,14 +155,14 @@ _idwinterpolant_owner::_idwinterpolant_owner(const _idwinterpolant_owner &rhs)
     }
     alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
     p_struct = NULL;
-    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: idwinterpolant copy constructor failure (source is not initialized)", &_state);
-    p_struct = (alglib_impl::idwinterpolant*)alglib_impl::ae_malloc(sizeof(alglib_impl::idwinterpolant), &_state);
-    memset(p_struct, 0, sizeof(alglib_impl::idwinterpolant));
-    alglib_impl::_idwinterpolant_init_copy(p_struct, const_cast<alglib_impl::idwinterpolant*>(rhs.p_struct), &_state, ae_false);
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: idwcalcbuffer copy constructor failure (source is not initialized)", &_state);
+    p_struct = (alglib_impl::idwcalcbuffer*)alglib_impl::ae_malloc(sizeof(alglib_impl::idwcalcbuffer), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::idwcalcbuffer));
+    alglib_impl::_idwcalcbuffer_init_copy(p_struct, const_cast<alglib_impl::idwcalcbuffer*>(rhs.p_struct), &_state, ae_false);
     ae_state_clear(&_state);
 }
 
-_idwinterpolant_owner& _idwinterpolant_owner::operator=(const _idwinterpolant_owner &rhs)
+_idwcalcbuffer_owner& _idwcalcbuffer_owner::operator=(const _idwcalcbuffer_owner &rhs)
 {
     if( this==&rhs )
         return *this;
@@ -177,68 +180,1133 @@ _idwinterpolant_owner& _idwinterpolant_owner::operator=(const _idwinterpolant_ow
 #endif
     }
     alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
-    alglib_impl::ae_assert(p_struct!=NULL, "ALGLIB: idwinterpolant assignment constructor failure (destination is not initialized)", &_state);
-    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: idwinterpolant assignment constructor failure (source is not initialized)", &_state);
-    alglib_impl::_idwinterpolant_destroy(p_struct);
-    memset(p_struct, 0, sizeof(alglib_impl::idwinterpolant));
-    alglib_impl::_idwinterpolant_init_copy(p_struct, const_cast<alglib_impl::idwinterpolant*>(rhs.p_struct), &_state, ae_false);
+    alglib_impl::ae_assert(p_struct!=NULL, "ALGLIB: idwcalcbuffer assignment constructor failure (destination is not initialized)", &_state);
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: idwcalcbuffer assignment constructor failure (source is not initialized)", &_state);
+    alglib_impl::_idwcalcbuffer_destroy(p_struct);
+    memset(p_struct, 0, sizeof(alglib_impl::idwcalcbuffer));
+    alglib_impl::_idwcalcbuffer_init_copy(p_struct, const_cast<alglib_impl::idwcalcbuffer*>(rhs.p_struct), &_state, ae_false);
     ae_state_clear(&_state);
     return *this;
 }
 
-_idwinterpolant_owner::~_idwinterpolant_owner()
+_idwcalcbuffer_owner::~_idwcalcbuffer_owner()
 {
     if( p_struct!=NULL )
     {
-        alglib_impl::_idwinterpolant_destroy(p_struct);
+        alglib_impl::_idwcalcbuffer_destroy(p_struct);
         ae_free(p_struct);
     }
 }
 
-alglib_impl::idwinterpolant* _idwinterpolant_owner::c_ptr()
+alglib_impl::idwcalcbuffer* _idwcalcbuffer_owner::c_ptr()
 {
     return p_struct;
 }
 
-alglib_impl::idwinterpolant* _idwinterpolant_owner::c_ptr() const
+alglib_impl::idwcalcbuffer* _idwcalcbuffer_owner::c_ptr() const
 {
-    return const_cast<alglib_impl::idwinterpolant*>(p_struct);
+    return const_cast<alglib_impl::idwcalcbuffer*>(p_struct);
 }
-idwinterpolant::idwinterpolant() : _idwinterpolant_owner() 
-{
-}
-
-idwinterpolant::idwinterpolant(const idwinterpolant &rhs):_idwinterpolant_owner(rhs) 
+idwcalcbuffer::idwcalcbuffer() : _idwcalcbuffer_owner() 
 {
 }
 
-idwinterpolant& idwinterpolant::operator=(const idwinterpolant &rhs)
+idwcalcbuffer::idwcalcbuffer(const idwcalcbuffer &rhs):_idwcalcbuffer_owner(rhs) 
+{
+}
+
+idwcalcbuffer& idwcalcbuffer::operator=(const idwcalcbuffer &rhs)
 {
     if( this==&rhs )
         return *this;
-    _idwinterpolant_owner::operator=(rhs);
+    _idwcalcbuffer_owner::operator=(rhs);
     return *this;
 }
 
-idwinterpolant::~idwinterpolant()
+idwcalcbuffer::~idwcalcbuffer()
 {
 }
 
+
 /*************************************************************************
-IDW interpolation
+IDW (Inverse Distance Weighting) model object.
+*************************************************************************/
+_idwmodel_owner::_idwmodel_owner()
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_idwmodel_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    p_struct = (alglib_impl::idwmodel*)alglib_impl::ae_malloc(sizeof(alglib_impl::idwmodel), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::idwmodel));
+    alglib_impl::_idwmodel_init(p_struct, &_state, ae_false);
+    ae_state_clear(&_state);
+}
 
-INPUT PARAMETERS:
-    Z   -   IDW interpolant built with one of model building
-            subroutines.
-    X   -   array[0..NX-1], interpolation point
+_idwmodel_owner::_idwmodel_owner(const _idwmodel_owner &rhs)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_idwmodel_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: idwmodel copy constructor failure (source is not initialized)", &_state);
+    p_struct = (alglib_impl::idwmodel*)alglib_impl::ae_malloc(sizeof(alglib_impl::idwmodel), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::idwmodel));
+    alglib_impl::_idwmodel_init_copy(p_struct, const_cast<alglib_impl::idwmodel*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+}
 
-Result:
-    IDW interpolant Z(X)
+_idwmodel_owner& _idwmodel_owner::operator=(const _idwmodel_owner &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return *this;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    alglib_impl::ae_assert(p_struct!=NULL, "ALGLIB: idwmodel assignment constructor failure (destination is not initialized)", &_state);
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: idwmodel assignment constructor failure (source is not initialized)", &_state);
+    alglib_impl::_idwmodel_destroy(p_struct);
+    memset(p_struct, 0, sizeof(alglib_impl::idwmodel));
+    alglib_impl::_idwmodel_init_copy(p_struct, const_cast<alglib_impl::idwmodel*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+    return *this;
+}
+
+_idwmodel_owner::~_idwmodel_owner()
+{
+    if( p_struct!=NULL )
+    {
+        alglib_impl::_idwmodel_destroy(p_struct);
+        ae_free(p_struct);
+    }
+}
+
+alglib_impl::idwmodel* _idwmodel_owner::c_ptr()
+{
+    return p_struct;
+}
+
+alglib_impl::idwmodel* _idwmodel_owner::c_ptr() const
+{
+    return const_cast<alglib_impl::idwmodel*>(p_struct);
+}
+idwmodel::idwmodel() : _idwmodel_owner() 
+{
+}
+
+idwmodel::idwmodel(const idwmodel &rhs):_idwmodel_owner(rhs) 
+{
+}
+
+idwmodel& idwmodel::operator=(const idwmodel &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    _idwmodel_owner::operator=(rhs);
+    return *this;
+}
+
+idwmodel::~idwmodel()
+{
+}
+
+
+/*************************************************************************
+Builder object used to generate IDW (Inverse Distance Weighting) model.
+*************************************************************************/
+_idwbuilder_owner::_idwbuilder_owner()
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_idwbuilder_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    p_struct = (alglib_impl::idwbuilder*)alglib_impl::ae_malloc(sizeof(alglib_impl::idwbuilder), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::idwbuilder));
+    alglib_impl::_idwbuilder_init(p_struct, &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_idwbuilder_owner::_idwbuilder_owner(const _idwbuilder_owner &rhs)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_idwbuilder_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: idwbuilder copy constructor failure (source is not initialized)", &_state);
+    p_struct = (alglib_impl::idwbuilder*)alglib_impl::ae_malloc(sizeof(alglib_impl::idwbuilder), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::idwbuilder));
+    alglib_impl::_idwbuilder_init_copy(p_struct, const_cast<alglib_impl::idwbuilder*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_idwbuilder_owner& _idwbuilder_owner::operator=(const _idwbuilder_owner &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return *this;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    alglib_impl::ae_assert(p_struct!=NULL, "ALGLIB: idwbuilder assignment constructor failure (destination is not initialized)", &_state);
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: idwbuilder assignment constructor failure (source is not initialized)", &_state);
+    alglib_impl::_idwbuilder_destroy(p_struct);
+    memset(p_struct, 0, sizeof(alglib_impl::idwbuilder));
+    alglib_impl::_idwbuilder_init_copy(p_struct, const_cast<alglib_impl::idwbuilder*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+    return *this;
+}
+
+_idwbuilder_owner::~_idwbuilder_owner()
+{
+    if( p_struct!=NULL )
+    {
+        alglib_impl::_idwbuilder_destroy(p_struct);
+        ae_free(p_struct);
+    }
+}
+
+alglib_impl::idwbuilder* _idwbuilder_owner::c_ptr()
+{
+    return p_struct;
+}
+
+alglib_impl::idwbuilder* _idwbuilder_owner::c_ptr() const
+{
+    return const_cast<alglib_impl::idwbuilder*>(p_struct);
+}
+idwbuilder::idwbuilder() : _idwbuilder_owner() 
+{
+}
+
+idwbuilder::idwbuilder(const idwbuilder &rhs):_idwbuilder_owner(rhs) 
+{
+}
+
+idwbuilder& idwbuilder::operator=(const idwbuilder &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    _idwbuilder_owner::operator=(rhs);
+    return *this;
+}
+
+idwbuilder::~idwbuilder()
+{
+}
+
+
+/*************************************************************************
+IDW fitting report:
+    rmserror        RMS error
+    avgerror        average error
+    maxerror        maximum error
+    r2              coefficient of determination,  R-squared, 1-RSS/TSS
+*************************************************************************/
+_idwreport_owner::_idwreport_owner()
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_idwreport_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    p_struct = (alglib_impl::idwreport*)alglib_impl::ae_malloc(sizeof(alglib_impl::idwreport), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::idwreport));
+    alglib_impl::_idwreport_init(p_struct, &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_idwreport_owner::_idwreport_owner(const _idwreport_owner &rhs)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_idwreport_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: idwreport copy constructor failure (source is not initialized)", &_state);
+    p_struct = (alglib_impl::idwreport*)alglib_impl::ae_malloc(sizeof(alglib_impl::idwreport), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::idwreport));
+    alglib_impl::_idwreport_init_copy(p_struct, const_cast<alglib_impl::idwreport*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_idwreport_owner& _idwreport_owner::operator=(const _idwreport_owner &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return *this;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    alglib_impl::ae_assert(p_struct!=NULL, "ALGLIB: idwreport assignment constructor failure (destination is not initialized)", &_state);
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: idwreport assignment constructor failure (source is not initialized)", &_state);
+    alglib_impl::_idwreport_destroy(p_struct);
+    memset(p_struct, 0, sizeof(alglib_impl::idwreport));
+    alglib_impl::_idwreport_init_copy(p_struct, const_cast<alglib_impl::idwreport*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+    return *this;
+}
+
+_idwreport_owner::~_idwreport_owner()
+{
+    if( p_struct!=NULL )
+    {
+        alglib_impl::_idwreport_destroy(p_struct);
+        ae_free(p_struct);
+    }
+}
+
+alglib_impl::idwreport* _idwreport_owner::c_ptr()
+{
+    return p_struct;
+}
+
+alglib_impl::idwreport* _idwreport_owner::c_ptr() const
+{
+    return const_cast<alglib_impl::idwreport*>(p_struct);
+}
+idwreport::idwreport() : _idwreport_owner() ,rmserror(p_struct->rmserror),avgerror(p_struct->avgerror),maxerror(p_struct->maxerror),r2(p_struct->r2)
+{
+}
+
+idwreport::idwreport(const idwreport &rhs):_idwreport_owner(rhs) ,rmserror(p_struct->rmserror),avgerror(p_struct->avgerror),maxerror(p_struct->maxerror),r2(p_struct->r2)
+{
+}
+
+idwreport& idwreport::operator=(const idwreport &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    _idwreport_owner::operator=(rhs);
+    return *this;
+}
+
+idwreport::~idwreport()
+{
+}
+
+
+/*************************************************************************
+This function serializes data structure to string.
+
+Important properties of s_out:
+* it contains alphanumeric characters, dots, underscores, minus signs
+* these symbols are grouped into words, which are separated by spaces
+  and Windows-style (CR+LF) newlines
+* although  serializer  uses  spaces and CR+LF as separators, you can 
+  replace any separator character by arbitrary combination of spaces,
+  tabs, Windows or Unix newlines. It allows flexible reformatting  of
+  the  string  in  case you want to include it into text or XML file. 
+  But you should not insert separators into the middle of the "words"
+  nor you should change case of letters.
+* s_out can be freely moved between 32-bit and 64-bit systems, little
+  and big endian machines, and so on. You can serialize structure  on
+  32-bit machine and unserialize it on 64-bit one (or vice versa), or
+  serialize  it  on  SPARC  and  unserialize  on  x86.  You  can also 
+  serialize  it  in  C++ version of ALGLIB and unserialize in C# one, 
+  and vice versa.
+*************************************************************************/
+void idwserialize(idwmodel &obj, std::string &s_out)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state state;
+    alglib_impl::ae_serializer serializer;
+    alglib_impl::ae_int_t ssize;
+
+    alglib_impl::ae_state_init(&state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&state, &_break_jump);
+    alglib_impl::ae_serializer_init(&serializer);
+    alglib_impl::ae_serializer_alloc_start(&serializer);
+    alglib_impl::idwalloc(&serializer, obj.c_ptr(), &state);
+    ssize = alglib_impl::ae_serializer_get_alloc_size(&serializer);
+    s_out.clear();
+    s_out.reserve((size_t)(ssize+1));
+    alglib_impl::ae_serializer_sstart_str(&serializer, &s_out);
+    alglib_impl::idwserialize(&serializer, obj.c_ptr(), &state);
+    alglib_impl::ae_serializer_stop(&serializer, &state);
+    alglib_impl::ae_assert( s_out.length()<=(size_t)ssize, "ALGLIB: serialization integrity error", &state);
+    alglib_impl::ae_serializer_clear(&serializer);
+    alglib_impl::ae_state_clear(&state);
+}
+/*************************************************************************
+This function unserializes data structure from string.
+*************************************************************************/
+void idwunserialize(const std::string &s_in, idwmodel &obj)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state state;
+    alglib_impl::ae_serializer serializer;
+
+    alglib_impl::ae_state_init(&state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&state, &_break_jump);
+    alglib_impl::ae_serializer_init(&serializer);
+    alglib_impl::ae_serializer_ustart_str(&serializer, &s_in);
+    alglib_impl::idwunserialize(&serializer, obj.c_ptr(), &state);
+    alglib_impl::ae_serializer_stop(&serializer, &state);
+    alglib_impl::ae_serializer_clear(&serializer);
+    alglib_impl::ae_state_clear(&state);
+}
+
+
+/*************************************************************************
+This function serializes data structure to C++ stream.
+
+Data stream generated by this function is same as  string  representation
+generated  by  string  version  of  serializer - alphanumeric characters,
+dots, underscores, minus signs, which are grouped into words separated by
+spaces and CR+LF.
+
+We recommend you to read comments on string version of serializer to find
+out more about serialization of AlGLIB objects.
+*************************************************************************/
+void idwserialize(idwmodel &obj, std::ostream &s_out)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state state;
+    alglib_impl::ae_serializer serializer;
+
+    alglib_impl::ae_state_init(&state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&state, &_break_jump);
+    alglib_impl::ae_serializer_init(&serializer);
+    alglib_impl::ae_serializer_alloc_start(&serializer);
+    alglib_impl::idwalloc(&serializer, obj.c_ptr(), &state);
+    alglib_impl::ae_serializer_get_alloc_size(&serializer); // not actually needed, but we have to ask
+    alglib_impl::ae_serializer_sstart_stream(&serializer, &s_out);
+    alglib_impl::idwserialize(&serializer, obj.c_ptr(), &state);
+    alglib_impl::ae_serializer_stop(&serializer, &state);
+    alglib_impl::ae_serializer_clear(&serializer);
+    alglib_impl::ae_state_clear(&state);
+}
+/*************************************************************************
+This function unserializes data structure from stream.
+*************************************************************************/
+void idwunserialize(const std::istream &s_in, idwmodel &obj)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state state;
+    alglib_impl::ae_serializer serializer;
+
+    alglib_impl::ae_state_init(&state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&state, &_break_jump);
+    alglib_impl::ae_serializer_init(&serializer);
+    alglib_impl::ae_serializer_ustart_stream(&serializer, &s_in);
+    alglib_impl::idwunserialize(&serializer, obj.c_ptr(), &state);
+    alglib_impl::ae_serializer_stop(&serializer, &state);
+    alglib_impl::ae_serializer_clear(&serializer);
+    alglib_impl::ae_state_clear(&state);
+}
+
+/*************************************************************************
+This function creates buffer  structure  which  can  be  used  to  perform
+parallel  IDW  model  evaluations  (with  one  IDW  model  instance  being
+used from multiple threads, as long as  different  threads  use  different
+instances of buffer).
+
+This buffer object can be used with  idwtscalcbuf()  function  (here  "ts"
+stands for "thread-safe", "buf" is a suffix which denotes  function  which
+reuses previously allocated output space).
+
+How to use it:
+* create IDW model structure or load it from file
+* call idwcreatecalcbuffer(), once per thread working with IDW model  (you
+  should call this function only AFTER model initialization, see below for
+  more information)
+* call idwtscalcbuf() from different threads,  with  each  thread  working
+  with its own copy of buffer object.
+
+INPUT PARAMETERS
+    S           -   IDW model
+
+OUTPUT PARAMETERS
+    Buf         -   external buffer.
+
+
+IMPORTANT: buffer object should be used only with  IDW model object  which
+           was used to initialize buffer. Any attempt to use buffer   with
+           different object is dangerous - you may  get  memory  violation
+           error because sizes of internal arrays do not fit to dimensions
+           of the IDW structure.
+
+IMPORTANT: you  should  call  this function only for model which was built
+           with model builder (or unserialized from file). Sizes  of  some
+           internal structures are determined only after model  is  built,
+           so buffer object created before model construction  stage  will
+           be useless (and any attempt to use it will result in exception).
 
   -- ALGLIB --
-     Copyright 02.03.2010 by Bochkanov Sergey
+     Copyright 22.10.2018 by Sergey Bochkanov
 *************************************************************************/
-double idwcalc(const idwinterpolant &z, const real_1d_array &x, const xparams _xparams)
+void idwcreatecalcbuffer(const idwmodel &s, idwcalcbuffer &buf, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwcreatecalcbuffer(const_cast<alglib_impl::idwmodel*>(s.c_ptr()), const_cast<alglib_impl::idwcalcbuffer*>(buf.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This subroutine creates builder object used  to  generate IDW  model  from
+irregularly sampled (scattered) dataset.  Multidimensional  scalar/vector-
+-valued are supported.
+
+Builder object is used to fit model to data as follows:
+* builder object is created with idwbuildercreate() function
+* dataset is added with idwbuildersetpoints() function
+* one of the modern IDW algorithms is chosen with either:
+  * idwbuildersetalgomstab()            - Multilayer STABilized algorithm (interpolation)
+  Alternatively, one of the textbook algorithms can be chosen (not recommended):
+  * idwbuildersetalgotextbookshepard()  - textbook Shepard algorithm
+  * idwbuildersetalgotextbookmodshepard()-textbook modified Shepard algorithm
+* finally, model construction is performed with idwfit() function.
+
+  ! COMMERCIAL EDITION OF ALGLIB:
+  !
+  ! Commercial Edition of ALGLIB includes following important improvements
+  ! of this function:
+  ! * high-performance native backend with same C# interface (C# version)
+  ! * multithreading support (C++ and C# versions)
+  !
+  ! We recommend you to read 'Working with commercial version' section  of
+  ! ALGLIB Reference Manual in order to find out how to  use  performance-
+  ! related features provided by commercial edition of ALGLIB.
+
+INPUT PARAMETERS:
+    NX  -   dimensionality of the argument, NX>=1
+    NY  -   dimensionality of the function being modeled, NY>=1;
+            NY=1 corresponds to classic scalar function, NY>=1 corresponds
+            to vector-valued function.
+
+OUTPUT PARAMETERS:
+    State-  builder object
+
+  -- ALGLIB PROJECT --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildercreate(const ae_int_t nx, const ae_int_t ny, idwbuilder &state, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwbuildercreate(nx, ny, const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function changes number of layers used by IDW-MSTAB algorithm.
+
+The more layers you have, the finer details can  be  reproduced  with  IDW
+model. The less layers you have, the less memory and CPU time is  consumed
+by the model.
+
+Memory consumption grows linearly with layers count,  running  time  grows
+sub-linearly.
+
+The default number of layers is 16, which allows you to reproduce  details
+at distance down to SRad/65536. You will rarely need to change it.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    NLayers -   NLayers>=1, the number of layers used by the model.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetnlayers(const idwbuilder &state, const ae_int_t nlayers, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwbuildersetnlayers(const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), nlayers, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function adds dataset to the builder object.
+
+This function overrides results of the previous calls, i.e. multiple calls
+of this function will result in only the last set being added.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    XY      -   points, array[N,NX+NY]. One row  corresponds to  one point
+                in the dataset. First NX elements  are  coordinates,  next
+                NY elements are function values. Array may  be larger than
+                specified, in  this  case  only leading [N,NX+NY] elements
+                will be used.
+    N       -   number of points in the dataset, N>=0.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetpoints(const idwbuilder &state, const real_2d_array &xy, const ae_int_t n, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwbuildersetpoints(const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), n, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function adds dataset to the builder object.
+
+This function overrides results of the previous calls, i.e. multiple calls
+of this function will result in only the last set being added.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    XY      -   points, array[N,NX+NY]. One row  corresponds to  one point
+                in the dataset. First NX elements  are  coordinates,  next
+                NY elements are function values. Array may  be larger than
+                specified, in  this  case  only leading [N,NX+NY] elements
+                will be used.
+    N       -   number of points in the dataset, N>=0.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+#if !defined(AE_NO_EXCEPTIONS)
+void idwbuildersetpoints(const idwbuilder &state, const real_2d_array &xy, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;    
+    ae_int_t n;
+
+    n = xy.rows();
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwbuildersetpoints(const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), n, &_alglib_env_state);
+
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+#endif
+
+/*************************************************************************
+This function sets IDW model  construction  algorithm  to  the  Multilayer
+Stabilized IDW method (IDW-MSTAB), a  latest  incarnation  of  the inverse
+distance weighting interpolation which fixes shortcomings of  the original
+and modified Shepard's variants.
+
+The distinctive features of IDW-MSTAB are:
+1) exact interpolation  is  pursued  (as  opposed  to  fitting  and  noise
+   suppression)
+2) improved robustness when compared with that of other algorithms:
+   * MSTAB shows almost no strange  fitting  artifacts  like  ripples  and
+     sharp spikes (unlike N-dimensional splines and HRBFs)
+   * MSTAB does not return function values far from the  interval  spanned
+     by the dataset; say, if all your points have |f|<=1, you  can be sure
+     that model value won't deviate too much from [-1,+1]
+3) good model construction time competing with that of HRBFs  and  bicubic
+   splines
+4) ability to work with any number of dimensions, starting from NX=1
+
+The drawbacks of IDW-MSTAB (and all IDW algorithms in general) are:
+1) dependence of the model evaluation time on the search radius
+2) bad extrapolation properties, models built by this method  are  usually
+   conservative in their predictions
+
+Thus, IDW-MSTAB is  a  good  "default"  option  if  you  want  to  perform
+scattered multidimensional interpolation. Although it has  its  drawbacks,
+it is easy to use and robust, which makes it a good first step.
+
+
+INPUT PARAMETERS:
+    State   -   builder object
+    SRad    -   initial search radius, SRad>0 is required. A model  value
+                is obtained by "smart" averaging  of  the  dataset  points
+                within search radius.
+
+NOTE 1: IDW interpolation can  correctly  handle  ANY  dataset,  including
+        datasets with non-distinct points. In case non-distinct points are
+        found, an average value for this point will be calculated.
+
+NOTE 2: the memory requirements for model storage are O(NPoints*NLayers).
+        The model construction needs twice as much memory as model storage.
+
+NOTE 3: by default 16 IDW layers are built which is enough for most cases.
+        You can change this parameter with idwbuildersetnlayers()  method.
+        Larger values may be necessary if you need to reproduce  extrafine
+        details at distances smaller than SRad/65536.  Smaller value   may
+        be necessary if you have to save memory and  computing  time,  and
+        ready to sacrifice some model quality.
+
+
+ALGORITHM DESCRIPTION
+
+ALGLIB implementation of IDW is somewhat similar to the modified Shepard's
+method (one with search radius R) but overcomes several of its  drawbacks,
+namely:
+1) a tendency to show stepwise behavior for uniform datasets
+2) a tendency to show terrible interpolation properties for highly
+   nonuniform datasets which often arise in geospatial tasks
+  (function values are densely sampled across multiple separated
+  "tracks")
+
+IDW-MSTAB method performs several passes over dataset and builds a sequence
+of progressively refined IDW models  (layers),  which starts from one with
+largest search radius SRad  and continues to smaller  search  radii  until
+required number of  layers  is  built.  Highest  layers  reproduce  global
+behavior of the target function at larger distances  whilst  lower  layers
+reproduce fine details at smaller distances.
+
+Each layer is an IDW model built with following modifications:
+* weights go to zero when distance approach to the current search radius
+* an additional regularizing term is added to the distance: w=1/(d^2+lambda)
+* an additional fictional term with unit weight and zero function value is
+  added in order to promote continuity  properties  at  the  isolated  and
+  boundary points
+
+By default, 16 layers is built, which is enough for most  cases.  You  can
+change this parameter with idwbuildersetnlayers() method.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetalgomstab(const idwbuilder &state, const double srad, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwbuildersetalgomstab(const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), srad, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function sets  IDW  model  construction  algorithm  to  the  textbook
+Shepard's algorithm with custom (user-specified) power parameter.
+
+IMPORTANT: we do NOT recommend using textbook IDW algorithms because  they
+           have terrible interpolation properties. Use MSTAB in all cases.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    P       -   power parameter, P>0; good value to start with is 2.0
+
+NOTE 1: IDW interpolation can  correctly  handle  ANY  dataset,  including
+        datasets with non-distinct points. In case non-distinct points are
+        found, an average value for this point will be calculated.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetalgotextbookshepard(const idwbuilder &state, const double p, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwbuildersetalgotextbookshepard(const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), p, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function sets  IDW  model  construction  algorithm  to the 'textbook'
+modified Shepard's algorithm with user-specified search radius.
+
+IMPORTANT: we do NOT recommend using textbook IDW algorithms because  they
+           have terrible interpolation properties. Use MSTAB in all cases.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    R       -   search radius
+
+NOTE 1: IDW interpolation can  correctly  handle  ANY  dataset,  including
+        datasets with non-distinct points. In case non-distinct points are
+        found, an average value for this point will be calculated.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetalgotextbookmodshepard(const idwbuilder &state, const double r, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwbuildersetalgotextbookmodshepard(const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), r, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function sets prior term (model value at infinity) as  user-specified
+value.
+
+INPUT PARAMETERS:
+    S       -   spline builder
+    V       -   value for user-defined prior
+
+NOTE: for vector-valued models all components of the prior are set to same
+      user-specified value
+
+  -- ALGLIB --
+     Copyright 29.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetuserterm(const idwbuilder &state, const double v, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwbuildersetuserterm(const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), v, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function sets constant prior term (model value at infinity).
+
+Constant prior term is determined as mean value over dataset.
+
+INPUT PARAMETERS:
+    S       -   spline builder
+
+  -- ALGLIB --
+     Copyright 29.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetconstterm(const idwbuilder &state, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwbuildersetconstterm(const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function sets zero prior term (model value at infinity).
+
+INPUT PARAMETERS:
+    S       -   spline builder
+
+  -- ALGLIB --
+     Copyright 29.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetzeroterm(const idwbuilder &state, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwbuildersetzeroterm(const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+IDW interpolation: scalar target, 1-dimensional argument
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object.
+
+INPUT PARAMETERS:
+    S   -   IDW interpolant built with IDW builder
+    X0  -   argument value
+
+Result:
+    IDW interpolant S(X0)
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+double idwcalc1(const idwmodel &s, const double x0, const xparams _xparams)
 {
     jmp_buf _break_jump;
     alglib_impl::ae_state _alglib_env_state;
@@ -255,67 +1323,119 @@ double idwcalc(const idwinterpolant &z, const real_1d_array &x, const xparams _x
     ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
     if( _xparams.flags!=0x0 )
         ae_state_set_flags(&_alglib_env_state, _xparams.flags);
-    double result = alglib_impl::idwcalc(const_cast<alglib_impl::idwinterpolant*>(z.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), &_alglib_env_state);
+    double result = alglib_impl::idwcalc1(const_cast<alglib_impl::idwmodel*>(s.c_ptr()), x0, &_alglib_env_state);
     alglib_impl::ae_state_clear(&_alglib_env_state);
     return *(reinterpret_cast<double*>(&result));
 }
 
 /*************************************************************************
-IDW interpolant using modified Shepard method for uniform point
-distributions.
+IDW interpolation: scalar target, 2-dimensional argument
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object.
 
 INPUT PARAMETERS:
-    XY  -   X and Y values, array[0..N-1,0..NX].
-            First NX columns contain X-values, last column contain
-            Y-values.
-    N   -   number of nodes, N>0.
-    NX  -   space dimension, NX>=1.
-    D   -   nodal function type, either:
-            * 0     constant  model.  Just  for  demonstration only, worst
-                    model ever.
-            * 1     linear model, least squares fitting. Simpe  model  for
-                    datasets too small for quadratic models
-            * 2     quadratic  model,  least  squares  fitting. Best model
-                    available (if your dataset is large enough).
-            * -1    "fast"  linear  model,  use  with  caution!!!   It  is
-                    significantly  faster than linear/quadratic and better
-                    than constant model. But it is less robust (especially
-                    in the presence of noise).
-    NQ  -   number of points used to calculate  nodal  functions  (ignored
-            for constant models). NQ should be LARGER than:
-            * max(1.5*(1+NX),2^NX+1) for linear model,
-            * max(3/4*(NX+2)*(NX+1),2^NX+1) for quadratic model.
-            Values less than this threshold will be silently increased.
-    NW  -   number of points used to calculate weights and to interpolate.
-            Required: >=2^NX+1, values less than this  threshold  will  be
-            silently increased.
-            Recommended value: about 2*NQ
+    S       -   IDW interpolant built with IDW builder
+    X0, X1  -   argument value
+
+Result:
+    IDW interpolant S(X0,X1)
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+double idwcalc2(const idwmodel &s, const double x0, const double x1, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::idwcalc2(const_cast<alglib_impl::idwmodel*>(s.c_ptr()), x0, x1, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+IDW interpolation: scalar target, 3-dimensional argument
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object.
+
+INPUT PARAMETERS:
+    S       -   IDW interpolant built with IDW builder
+    X0,X1,X2-   argument value
+
+Result:
+    IDW interpolant S(X0,X1,X2)
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+double idwcalc3(const idwmodel &s, const double x0, const double x1, const double x2, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::idwcalc3(const_cast<alglib_impl::idwmodel*>(s.c_ptr()), x0, x1, x2, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+This function calculates values of the IDW model at the given point.
+
+This is general function which can be used for arbitrary NX (dimension  of
+the space of arguments) and NY (dimension of the function itself). However
+when  you  have  NY=1  you  may  find more convenient to  use  idwcalc1(),
+idwcalc2() or idwcalc3().
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object.
+
+INPUT PARAMETERS:
+    S       -   IDW model
+    X       -   coordinates, array[NX]. X may have more than NX  elements,
+                in this case only leading NX will be used.
 
 OUTPUT PARAMETERS:
-    Z   -   IDW interpolant.
+    Y       -   function value, array[NY]. Y is out-parameter and will  be
+                reallocated after call to this function. In case you  want
+                to reuse previously allocated Y, you may use idwcalcbuf(),
+                which reallocates Y only when it is too small.
 
-NOTES:
-  * best results are obtained with quadratic models, worst - with constant
-    models
-  * when N is large, NQ and NW must be significantly smaller than  N  both
-    to obtain optimal performance and to obtain optimal accuracy. In 2  or
-    3-dimensional tasks NQ=15 and NW=25 are good values to start with.
-  * NQ  and  NW  may  be  greater  than  N.  In  such  cases  they will be
-    automatically decreased.
-  * this subroutine is always succeeds (as long as correct parameters  are
-    passed).
-  * see  'Multivariate  Interpolation  of Large Sets of Scattered Data' by
-    Robert J. Renka for more information on this algorithm.
-  * this subroutine assumes that point distribution is uniform at the small
-    scales.  If  it  isn't  -  for  example,  points are concentrated along
-    "lines", but "lines" distribution is uniform at the larger scale - then
-    you should use IDWBuildModifiedShepardR()
-
-
-  -- ALGLIB PROJECT --
-     Copyright 02.03.2010 by Bochkanov Sergey
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
 *************************************************************************/
-void idwbuildmodifiedshepard(const real_2d_array &xy, const ae_int_t n, const ae_int_t nx, const ae_int_t d, const ae_int_t nq, const ae_int_t nw, idwinterpolant &z, const xparams _xparams)
+void idwcalc(const idwmodel &s, const real_1d_array &x, real_1d_array &y, const xparams _xparams)
 {
     jmp_buf _break_jump;
     alglib_impl::ae_state _alglib_env_state;
@@ -332,39 +1452,36 @@ void idwbuildmodifiedshepard(const real_2d_array &xy, const ae_int_t n, const ae
     ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
     if( _xparams.flags!=0x0 )
         ae_state_set_flags(&_alglib_env_state, _xparams.flags);
-    alglib_impl::idwbuildmodifiedshepard(const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), n, nx, d, nq, nw, const_cast<alglib_impl::idwinterpolant*>(z.c_ptr()), &_alglib_env_state);
+    alglib_impl::idwcalc(const_cast<alglib_impl::idwmodel*>(s.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), const_cast<alglib_impl::ae_vector*>(y.c_ptr()), &_alglib_env_state);
     alglib_impl::ae_state_clear(&_alglib_env_state);
     return;
 }
 
 /*************************************************************************
-IDW interpolant using modified Shepard method for non-uniform datasets.
+This function calculates values of the IDW model at the given point.
 
-This type of model uses  constant  nodal  functions and interpolates using
-all nodes which are closer than user-specified radius R. It  may  be  used
-when points distribution is non-uniform at the small scale, but it  is  at
-the distances as large as R.
+Same as idwcalc(), but does not reallocate Y when in is large enough to
+store function values.
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object.
 
 INPUT PARAMETERS:
-    XY  -   X and Y values, array[0..N-1,0..NX].
-            First NX columns contain X-values, last column contain
-            Y-values.
-    N   -   number of nodes, N>0.
-    NX  -   space dimension, NX>=1.
-    R   -   radius, R>0
+    S       -   IDW model
+    X       -   coordinates, array[NX]. X may have more than NX  elements,
+                in this case only leading NX will be used.
+    Y       -   possibly preallocated array
 
 OUTPUT PARAMETERS:
-    Z   -   IDW interpolant.
+    Y       -   function value, array[NY]. Y is not reallocated when it
+                is larger than NY.
 
-NOTES:
-* if there is less than IDWKMin points within  R-ball,  algorithm  selects
-  IDWKMin closest ones, so that continuity properties of  interpolant  are
-  preserved even far from points.
-
-  -- ALGLIB PROJECT --
-     Copyright 11.04.2010 by Bochkanov Sergey
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
 *************************************************************************/
-void idwbuildmodifiedshepardr(const real_2d_array &xy, const ae_int_t n, const ae_int_t nx, const double r, idwinterpolant &z, const xparams _xparams)
+void idwcalcbuf(const idwmodel &s, const real_1d_array &x, real_1d_array &y, const xparams _xparams)
 {
     jmp_buf _break_jump;
     alglib_impl::ae_state _alglib_env_state;
@@ -381,75 +1498,36 @@ void idwbuildmodifiedshepardr(const real_2d_array &xy, const ae_int_t n, const a
     ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
     if( _xparams.flags!=0x0 )
         ae_state_set_flags(&_alglib_env_state, _xparams.flags);
-    alglib_impl::idwbuildmodifiedshepardr(const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), n, nx, r, const_cast<alglib_impl::idwinterpolant*>(z.c_ptr()), &_alglib_env_state);
+    alglib_impl::idwcalcbuf(const_cast<alglib_impl::idwmodel*>(s.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), const_cast<alglib_impl::ae_vector*>(y.c_ptr()), &_alglib_env_state);
     alglib_impl::ae_state_clear(&_alglib_env_state);
     return;
 }
 
 /*************************************************************************
-IDW model for noisy data.
+This function calculates values of the IDW model at the given point, using
+external  buffer  object  (internal  temporaries  of  IDW  model  are  not
+modified).
 
-This subroutine may be used to handle noisy data, i.e. data with noise  in
-OUTPUT values.  It differs from IDWBuildModifiedShepard() in the following
-aspects:
-* nodal functions are not constrained to pass through  nodes:  Qi(xi)<>yi,
-  i.e. we have fitting  instead  of  interpolation.
-* weights which are used during least  squares fitting stage are all equal
-  to 1.0 (independently of distance)
-* "fast"-linear or constant nodal functions are not supported (either  not
-  robust enough or too rigid)
-
-This problem require far more complex tuning than interpolation  problems.
-Below you can find some recommendations regarding this problem:
-* focus on tuning NQ; it controls noise reduction. As for NW, you can just
-  make it equal to 2*NQ.
-* you can use cross-validation to determine optimal NQ.
-* optimal NQ is a result of complex tradeoff  between  noise  level  (more
-  noise = larger NQ required) and underlying  function  complexity  (given
-  fixed N, larger NQ means smoothing of compex features in the data).  For
-  example, NQ=N will reduce noise to the minimum level possible,  but  you
-  will end up with just constant/linear/quadratic (depending on  D)  least
-  squares model for the whole dataset.
+This function allows to use same IDW model object  in  different  threads,
+assuming  that  different   threads  use different instances of the buffer
+structure.
 
 INPUT PARAMETERS:
-    XY  -   X and Y values, array[0..N-1,0..NX].
-            First NX columns contain X-values, last column contain
-            Y-values.
-    N   -   number of nodes, N>0.
-    NX  -   space dimension, NX>=1.
-    D   -   nodal function degree, either:
-            * 1     linear model, least squares fitting. Simpe  model  for
-                    datasets too small for quadratic models (or  for  very
-                    noisy problems).
-            * 2     quadratic  model,  least  squares  fitting. Best model
-                    available (if your dataset is large enough).
-    NQ  -   number of points used to calculate nodal functions.  NQ should
-            be  significantly   larger   than  1.5  times  the  number  of
-            coefficients in a nodal function to overcome effects of noise:
-            * larger than 1.5*(1+NX) for linear model,
-            * larger than 3/4*(NX+2)*(NX+1) for quadratic model.
-            Values less than this threshold will be silently increased.
-    NW  -   number of points used to calculate weights and to interpolate.
-            Required: >=2^NX+1, values less than this  threshold  will  be
-            silently increased.
-            Recommended value: about 2*NQ or larger
+    S       -   IDW model, may be shared between different threads
+    Buf     -   buffer object created for this particular instance of  IDW
+                model with idwcreatecalcbuffer().
+    X       -   coordinates, array[NX]. X may have more than NX  elements,
+                in this case only  leading NX will be used.
+    Y       -   possibly preallocated array
 
 OUTPUT PARAMETERS:
-    Z   -   IDW interpolant.
+    Y       -   function value, array[NY]. Y is not reallocated when it
+                is larger than NY.
 
-NOTES:
-  * best results are obtained with quadratic models, linear models are not
-    recommended to use unless you are pretty sure that it is what you want
-  * this subroutine is always succeeds (as long as correct parameters  are
-    passed).
-  * see  'Multivariate  Interpolation  of Large Sets of Scattered Data' by
-    Robert J. Renka for more information on this algorithm.
-
-
-  -- ALGLIB PROJECT --
-     Copyright 02.03.2010 by Bochkanov Sergey
+  -- ALGLIB --
+     Copyright 13.12.2011 by Bochkanov Sergey
 *************************************************************************/
-void idwbuildnoisy(const real_2d_array &xy, const ae_int_t n, const ae_int_t nx, const ae_int_t d, const ae_int_t nq, const ae_int_t nw, idwinterpolant &z, const xparams _xparams)
+void idwtscalcbuf(const idwmodel &s, const idwcalcbuffer &buf, const real_1d_array &x, real_1d_array &y, const xparams _xparams)
 {
     jmp_buf _break_jump;
     alglib_impl::ae_state _alglib_env_state;
@@ -466,7 +1544,49 @@ void idwbuildnoisy(const real_2d_array &xy, const ae_int_t n, const ae_int_t nx,
     ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
     if( _xparams.flags!=0x0 )
         ae_state_set_flags(&_alglib_env_state, _xparams.flags);
-    alglib_impl::idwbuildnoisy(const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), n, nx, d, nq, nw, const_cast<alglib_impl::idwinterpolant*>(z.c_ptr()), &_alglib_env_state);
+    alglib_impl::idwtscalcbuf(const_cast<alglib_impl::idwmodel*>(s.c_ptr()), const_cast<alglib_impl::idwcalcbuffer*>(buf.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), const_cast<alglib_impl::ae_vector*>(y.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function fits IDW model to the dataset using current IDW construction
+algorithm. A model being built and fitting report are returned.
+
+INPUT PARAMETERS:
+    State   -   builder object
+
+OUTPUT PARAMETERS:
+    Model   -   an IDW model built with current algorithm
+    Rep     -   model fitting report, fields of this structure contain
+                information about average fitting errors.
+
+NOTE: although IDW-MSTAB algorithm is an  interpolation  method,  i.e.  it
+      tries to fit the model exactly, it can  handle  datasets  with  non-
+      distinct points which can not be fit exactly; in such  cases  least-
+      squares fitting is performed.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwfit(const idwbuilder &state, idwmodel &model, idwreport &rep, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::idwfit(const_cast<alglib_impl::idwbuilder*>(state.c_ptr()), const_cast<alglib_impl::idwmodel*>(model.c_ptr()), const_cast<alglib_impl::idwreport*>(rep.c_ptr()), &_alglib_env_state);
     alglib_impl::ae_state_clear(&_alglib_env_state);
     return;
 }
@@ -1236,7 +2356,7 @@ original nonsmooth one, but much easier  to  approach.  We solve  it  with
 MinNLC solver provided by ALGLIB.
 
 
-NOTE: ON INSTABILITY OF SEQUENTIAL LINEAR PROGRAMMING APPROACJ
+NOTE: ON INSTABILITY OF SEQUENTIAL LINEARIZATION APPROACH
 
 ALGLIB  has  nonlinearly  constrained  solver which proved to be stable on
 such problems. However, some authors proposed to linearize constraints  in
@@ -1244,7 +2364,7 @@ the vicinity of current approximation (Ci,Ri) and to get next  approximate
 solution (Ci+1,Ri+1) as solution to linear programming problem. Obviously,
 LP problems are easier than nonlinearly constrained ones.
 
-Indeed,  SLP  approach  to   MC/MI/MZ   resulted   in  ~10-20x increase in
+Indeed,  such approach  to   MC/MI/MZ   resulted   in  ~10-20x increase in
 performance (when compared with NLC solver). However, it turned  out  that
 in some cases linearized model fails to predict correct direction for next
 step and tells us that we converged to solution even when we are still 2-4
@@ -1255,7 +2375,7 @@ linear model;  even  when  solved  exactly,  it  fails  to  handle  subtle
 nonlinearities which arise near the solution. We validated it by comparing
 results returned by ALGLIB linear solver with that of MATLAB.
 
-In our experiments with SLP solver:
+In our experiments with linearization:
 * MC failed most often, at both realistic and synthetic datasets
 * MI sometimes failed, but sometimes succeeded
 * MZ often  succeeded; our guess is that presence of two independent  sets
@@ -1264,8 +2384,8 @@ In our experiments with SLP solver:
   model fails to handle nonlinearities from Rlo, it uses  Rhi  as  a  hint
   (and vice versa).
 
-Because SLP approach failed to achieve stable results, we do  not  include
-it in ALGLIB.
+Because linearization approach failed to achieve stable results, we do not
+include it in ALGLIB.
 
 
   -- ALGLIB --
@@ -7504,6 +8624,10 @@ OUTPUT PARAMETERS:
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
 
+NOTE: for stability reasons the B parameter is restricted by [1/1000,1000]
+      range. It prevents  algorithm from making trial steps  deep into the
+      area of bad parameters.
+
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc4() function.
 
@@ -7613,6 +8737,10 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
+
+NOTE: for stability reasons the B parameter is restricted by [1/1000,1000]
+      range. It prevents  algorithm from making trial steps  deep into the
+      area of bad parameters.
 
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc4() function.
@@ -7724,6 +8852,10 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
+
+NOTE: for better stability B  parameter is restricted by [+-1/1000,+-1000]
+      range, and G is restricted by [1/10,10] range. It prevents algorithm
+      from making trial steps deep into the area of bad parameters.
 
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc5() function.
@@ -7837,6 +8969,10 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
+
+NOTE: for better stability B  parameter is restricted by [+-1/1000,+-1000]
+      range, and G is restricted by [1/10,10] range. It prevents algorithm
+      from making trial steps deep into the area of bad parameters.
 
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc5() function.
@@ -7962,6 +9098,10 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
+
+NOTE: for better stability B  parameter is restricted by [+-1/1000,+-1000]
+      range, and G is restricted by [1/10,10] range. It prevents algorithm
+      from making trial steps deep into the area of bad parameters.
 
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc5() function.
@@ -14956,6 +16096,8 @@ INPUT PARAMETERS:
                          features - NX=1 or NX>3; points with per-dimension
                          scales.
                   *  1 - successful termination
+                  *  8 - a termination request was submitted via
+                         rbfrequesttermination() function.
 
                 Fields which are set only by modern RBF solvers (hierarchical
                 or nonnegative; older solvers like QNN and ML initialize these
@@ -15801,6 +16943,91 @@ ae_int_t rbfgetmodelversion(const rbfmodel &s, const xparams _xparams)
     alglib_impl::ae_state_clear(&_alglib_env_state);
     return *(reinterpret_cast<ae_int_t*>(&result));
 }
+
+/*************************************************************************
+This function is used to peek into hierarchical RBF  construction  process
+from  some  other  thread  and  get current progress indicator. It returns
+value in [0,1].
+
+IMPORTANT: only HRBFs (hierarchical RBFs) support  peeking  into  progress
+           indicator. Legacy RBF-ML and RBF-QNN do  not  support  it.  You
+           will always get 0 value.
+
+INPUT PARAMETERS:
+    S           -   RBF model object
+
+RESULT:
+    progress value, in [0,1]
+
+  -- ALGLIB --
+     Copyright 17.11.2018 by Bochkanov Sergey
+*************************************************************************/
+double rbfpeekprogress(const rbfmodel &s, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::rbfpeekprogress(const_cast<alglib_impl::rbfmodel*>(s.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+This function  is  used  to  submit  a  request  for  termination  of  the
+hierarchical RBF construction process from some other thread.  As  result,
+RBF construction is terminated smoothly (with proper deallocation  of  all
+necessary resources) and resultant model is filled by zeros.
+
+A rep.terminationtype=8 will be returned upon receiving such request.
+
+IMPORTANT: only  HRBFs  (hierarchical  RBFs) support termination requests.
+           Legacy RBF-ML and RBF-QNN do not  support  it.  An  attempt  to
+           terminate their construction will be ignored.
+
+IMPORTANT: termination request flag is cleared when the model construction
+           starts. Thus, any pre-construction termination requests will be
+           silently ignored - only ones submitted AFTER  construction  has
+           actually began will be handled.
+
+INPUT PARAMETERS:
+    S           -   RBF model object
+
+  -- ALGLIB --
+     Copyright 17.11.2018 by Bochkanov Sergey
+*************************************************************************/
+void rbfrequesttermination(const rbfmodel &s, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::rbfrequesttermination(const_cast<alglib_impl::rbfmodel*>(s.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
 #endif
 
 #if defined(AE_COMPILE_INTCOMP) || !defined(AE_PARTIAL_BUILD)
@@ -15930,29 +17157,14 @@ void nsfitspherex(const real_2d_array &xy, const ae_int_t npoints, const ae_int_
 /////////////////////////////////////////////////////////////////////////
 namespace alglib_impl
 {
-#if defined(AE_COMPILE_IDWINT) || !defined(AE_PARTIAL_BUILD)
-static double idwint_idwqfactor = 1.5;
-static ae_int_t idwint_idwkmin = 5;
-static double idwint_idwcalcq(idwinterpolant* z,
-     /* Real    */ ae_vector* x,
-     ae_int_t k,
-     ae_state *_state);
-static void idwint_idwinit1(ae_int_t n,
-     ae_int_t nx,
-     ae_int_t d,
-     ae_int_t nq,
-     ae_int_t nw,
-     idwinterpolant* z,
-     ae_state *_state);
-static void idwint_idwinternalsolver(/* Real    */ ae_vector* y,
-     /* Real    */ ae_vector* w,
-     /* Real    */ ae_matrix* fmatrix,
-     /* Real    */ ae_vector* temp,
-     ae_int_t n,
-     ae_int_t m,
-     ae_int_t* info,
-     /* Real    */ ae_vector* x,
-     double* taskrcond,
+#if defined(AE_COMPILE_IDW) || !defined(AE_PARTIAL_BUILD)
+static double idw_w0 = 1.0;
+static double idw_meps = 1.0E-50;
+static ae_int_t idw_defaultnlayers = 16;
+static double idw_defaultlambda0 = 0.3333;
+static void idw_errormetricsviacalc(idwbuilder* state,
+     idwmodel* model,
+     idwreport* rep,
      ae_state *_state);
 
 
@@ -16322,6 +17534,11 @@ static void rbfv2_designmatrixgeneraterow(/* Integer */ ae_vector* kdnodes,
      /* Integer */ ae_vector* rowidx,
      /* Real    */ ae_vector* rowval,
      ae_int_t* rowsize,
+     ae_state *_state);
+static void rbfv2_zerofill(rbfv2model* s,
+     ae_int_t nx,
+     ae_int_t ny,
+     ae_int_t bf,
      ae_state *_state);
 
 
@@ -16703,1220 +17920,1808 @@ static void rbf_clearreportfields(rbfreport* rep, ae_state *_state);
 
 #endif
 
-#if defined(AE_COMPILE_IDWINT) || !defined(AE_PARTIAL_BUILD)
+#if defined(AE_COMPILE_IDW) || !defined(AE_PARTIAL_BUILD)
 
 
 /*************************************************************************
-IDW interpolation
+This function creates buffer  structure  which  can  be  used  to  perform
+parallel  IDW  model  evaluations  (with  one  IDW  model  instance  being
+used from multiple threads, as long as  different  threads  use  different
+instances of buffer).
+
+This buffer object can be used with  idwtscalcbuf()  function  (here  "ts"
+stands for "thread-safe", "buf" is a suffix which denotes  function  which
+reuses previously allocated output space).
+
+How to use it:
+* create IDW model structure or load it from file
+* call idwcreatecalcbuffer(), once per thread working with IDW model  (you
+  should call this function only AFTER model initialization, see below for
+  more information)
+* call idwtscalcbuf() from different threads,  with  each  thread  working
+  with its own copy of buffer object.
+
+INPUT PARAMETERS
+    S           -   IDW model
+
+OUTPUT PARAMETERS
+    Buf         -   external buffer.
+    
+    
+IMPORTANT: buffer object should be used only with  IDW model object  which
+           was used to initialize buffer. Any attempt to use buffer   with
+           different object is dangerous - you may  get  memory  violation
+           error because sizes of internal arrays do not fit to dimensions
+           of the IDW structure.
+           
+IMPORTANT: you  should  call  this function only for model which was built
+           with model builder (or unserialized from file). Sizes  of  some
+           internal structures are determined only after model  is  built,
+           so buffer object created before model construction  stage  will
+           be useless (and any attempt to use it will result in exception).
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Sergey Bochkanov
+*************************************************************************/
+void idwcreatecalcbuffer(idwmodel* s,
+     idwcalcbuffer* buf,
+     ae_state *_state)
+{
+
+    _idwcalcbuffer_clear(buf);
+
+    ae_assert(s->nx>=1, "IDWCreateCalcBuffer: integrity check failed", _state);
+    ae_assert(s->ny>=1, "IDWCreateCalcBuffer: integrity check failed", _state);
+    ae_assert(s->nlayers>=0, "IDWCreateCalcBuffer: integrity check failed", _state);
+    ae_assert(s->algotype>=0, "IDWCreateCalcBuffer: integrity check failed", _state);
+    if( s->nlayers>=1&&s->algotype!=0 )
+    {
+        kdtreecreaterequestbuffer(&s->tree, &buf->requestbuffer, _state);
+    }
+    rvectorsetlengthatleast(&buf->x, s->nx, _state);
+    rvectorsetlengthatleast(&buf->y, s->ny, _state);
+    rvectorsetlengthatleast(&buf->tsyw, s->ny*ae_maxint(s->nlayers, 1, _state), _state);
+    rvectorsetlengthatleast(&buf->tsw, ae_maxint(s->nlayers, 1, _state), _state);
+}
+
+
+/*************************************************************************
+This subroutine creates builder object used  to  generate IDW  model  from
+irregularly sampled (scattered) dataset.  Multidimensional  scalar/vector-
+-valued are supported.
+
+Builder object is used to fit model to data as follows:
+* builder object is created with idwbuildercreate() function
+* dataset is added with idwbuildersetpoints() function
+* one of the modern IDW algorithms is chosen with either:
+  * idwbuildersetalgomstab()            - Multilayer STABilized algorithm (interpolation)
+  Alternatively, one of the textbook algorithms can be chosen (not recommended):
+  * idwbuildersetalgotextbookshepard()  - textbook Shepard algorithm
+  * idwbuildersetalgotextbookmodshepard()-textbook modified Shepard algorithm
+* finally, model construction is performed with idwfit() function.
+
+  ! COMMERCIAL EDITION OF ALGLIB:
+  ! 
+  ! Commercial Edition of ALGLIB includes following important improvements
+  ! of this function:
+  ! * high-performance native backend with same C# interface (C# version)
+  ! * multithreading support (C++ and C# versions)
+  ! 
+  ! We recommend you to read 'Working with commercial version' section  of
+  ! ALGLIB Reference Manual in order to find out how to  use  performance-
+  ! related features provided by commercial edition of ALGLIB.
 
 INPUT PARAMETERS:
-    Z   -   IDW interpolant built with one of model building
-            subroutines.
-    X   -   array[0..NX-1], interpolation point
+    NX  -   dimensionality of the argument, NX>=1
+    NY  -   dimensionality of the function being modeled, NY>=1;
+            NY=1 corresponds to classic scalar function, NY>=1 corresponds
+            to vector-valued function.
+    
+OUTPUT PARAMETERS:
+    State-  builder object
+
+  -- ALGLIB PROJECT --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildercreate(ae_int_t nx,
+     ae_int_t ny,
+     idwbuilder* state,
+     ae_state *_state)
+{
+
+    _idwbuilder_clear(state);
+
+    ae_assert(nx>=1, "IDWBuilderCreate: NX<=0", _state);
+    ae_assert(ny>=1, "IDWBuilderCreate: NY<=0", _state);
+    
+    /*
+     * We choose reasonable defaults for the algorithm:
+     * * MSTAB algorithm
+     * * 12 layers
+     * * default radius
+     * * default Lambda0
+     */
+    state->algotype = 2;
+    state->priortermtype = 2;
+    rvectorsetlengthatleast(&state->priortermval, ny, _state);
+    state->nlayers = idw_defaultnlayers;
+    state->r0 = (double)(0);
+    state->rdecay = 0.5;
+    state->lambda0 = idw_defaultlambda0;
+    state->lambdalast = (double)(0);
+    state->lambdadecay = 1.0;
+    
+    /*
+     * Other parameters, not used but initialized
+     */
+    state->shepardp = (double)(0);
+    
+    /*
+     * Initial dataset is empty
+     */
+    state->npoints = 0;
+    state->nx = nx;
+    state->ny = ny;
+}
+
+
+/*************************************************************************
+This function changes number of layers used by IDW-MSTAB algorithm.
+
+The more layers you have, the finer details can  be  reproduced  with  IDW
+model. The less layers you have, the less memory and CPU time is  consumed
+by the model.
+
+Memory consumption grows linearly with layers count,  running  time  grows
+sub-linearly.
+
+The default number of layers is 16, which allows you to reproduce  details
+at distance down to SRad/65536. You will rarely need to change it.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    NLayers -   NLayers>=1, the number of layers used by the model.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetnlayers(idwbuilder* state,
+     ae_int_t nlayers,
+     ae_state *_state)
+{
+
+
+    ae_assert(nlayers>=1, "IDWBuilderSetNLayers: N<1", _state);
+    state->nlayers = nlayers;
+}
+
+
+/*************************************************************************
+This function adds dataset to the builder object.
+
+This function overrides results of the previous calls, i.e. multiple calls
+of this function will result in only the last set being added.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    XY      -   points, array[N,NX+NY]. One row  corresponds to  one point
+                in the dataset. First NX elements  are  coordinates,  next
+                NY elements are function values. Array may  be larger than 
+                specified, in  this  case  only leading [N,NX+NY] elements 
+                will be used.
+    N       -   number of points in the dataset, N>=0.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetpoints(idwbuilder* state,
+     /* Real    */ ae_matrix* xy,
+     ae_int_t n,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t j;
+    ae_int_t ew;
+
+
+    ae_assert(n>=0, "IDWBuilderSetPoints: N<0", _state);
+    ae_assert(xy->rows>=n, "IDWBuilderSetPoints: Rows(XY)<N", _state);
+    ae_assert(n==0||xy->cols>=state->nx+state->ny, "IDWBuilderSetPoints: Cols(XY)<NX+NY", _state);
+    ae_assert(apservisfinitematrix(xy, n, state->nx+state->ny, _state), "IDWBuilderSetPoints: XY contains infinite or NaN values!", _state);
+    state->npoints = n;
+    ew = state->nx+state->ny;
+    rvectorsetlengthatleast(&state->xy, n*ew, _state);
+    for(i=0; i<=n-1; i++)
+    {
+        for(j=0; j<=ew-1; j++)
+        {
+            state->xy.ptr.p_double[i*ew+j] = xy->ptr.pp_double[i][j];
+        }
+    }
+}
+
+
+/*************************************************************************
+This function sets IDW model  construction  algorithm  to  the  Multilayer
+Stabilized IDW method (IDW-MSTAB), a  latest  incarnation  of  the inverse
+distance weighting interpolation which fixes shortcomings of  the original
+and modified Shepard's variants.
+
+The distinctive features of IDW-MSTAB are:
+1) exact interpolation  is  pursued  (as  opposed  to  fitting  and  noise
+   suppression)
+2) improved robustness when compared with that of other algorithms:
+   * MSTAB shows almost no strange  fitting  artifacts  like  ripples  and
+     sharp spikes (unlike N-dimensional splines and HRBFs)
+   * MSTAB does not return function values far from the  interval  spanned
+     by the dataset; say, if all your points have |f|<=1, you  can be sure
+     that model value won't deviate too much from [-1,+1]
+3) good model construction time competing with that of HRBFs  and  bicubic
+   splines
+4) ability to work with any number of dimensions, starting from NX=1
+
+The drawbacks of IDW-MSTAB (and all IDW algorithms in general) are:
+1) dependence of the model evaluation time on the search radius
+2) bad extrapolation properties, models built by this method  are  usually
+   conservative in their predictions
+
+Thus, IDW-MSTAB is  a  good  "default"  option  if  you  want  to  perform
+scattered multidimensional interpolation. Although it has  its  drawbacks,
+it is easy to use and robust, which makes it a good first step.
+
+
+INPUT PARAMETERS:
+    State   -   builder object
+    SRad    -   initial search radius, SRad>0 is required. A model  value
+                is obtained by "smart" averaging  of  the  dataset  points
+                within search radius.
+
+NOTE 1: IDW interpolation can  correctly  handle  ANY  dataset,  including
+        datasets with non-distinct points. In case non-distinct points are
+        found, an average value for this point will be calculated.
+        
+NOTE 2: the memory requirements for model storage are O(NPoints*NLayers).
+        The model construction needs twice as much memory as model storage.
+  
+NOTE 3: by default 16 IDW layers are built which is enough for most cases.
+        You can change this parameter with idwbuildersetnlayers()  method.
+        Larger values may be necessary if you need to reproduce  extrafine
+        details at distances smaller than SRad/65536.  Smaller value   may
+        be necessary if you have to save memory and  computing  time,  and
+        ready to sacrifice some model quality.
+
+
+ALGORITHM DESCRIPTION
+  
+ALGLIB implementation of IDW is somewhat similar to the modified Shepard's
+method (one with search radius R) but overcomes several of its  drawbacks,
+namely:
+1) a tendency to show stepwise behavior for uniform datasets
+2) a tendency to show terrible interpolation properties for highly
+   nonuniform datasets which often arise in geospatial tasks
+  (function values are densely sampled across multiple separated
+  "tracks")
+
+IDW-MSTAB method performs several passes over dataset and builds a sequence
+of progressively refined IDW models  (layers),  which starts from one with
+largest search radius SRad  and continues to smaller  search  radii  until
+required number of  layers  is  built.  Highest  layers  reproduce  global
+behavior of the target function at larger distances  whilst  lower  layers
+reproduce fine details at smaller distances.
+
+Each layer is an IDW model built with following modifications:
+* weights go to zero when distance approach to the current search radius
+* an additional regularizing term is added to the distance: w=1/(d^2+lambda)
+* an additional fictional term with unit weight and zero function value is
+  added in order to promote continuity  properties  at  the  isolated  and
+  boundary points
+  
+By default, 16 layers is built, which is enough for most  cases.  You  can
+change this parameter with idwbuildersetnlayers() method.
+   
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetalgomstab(idwbuilder* state,
+     double srad,
+     ae_state *_state)
+{
+
+
+    ae_assert(ae_isfinite(srad, _state), "IDWBuilderSetAlgoMSTAB: SRad is not finite", _state);
+    ae_assert(ae_fp_greater(srad,(double)(0)), "IDWBuilderSetAlgoMSTAB: SRad<=0", _state);
+    
+    /*
+     * Set algorithm
+     */
+    state->algotype = 2;
+    
+    /*
+     * Set options
+     */
+    state->r0 = srad;
+    state->rdecay = 0.5;
+    state->lambda0 = idw_defaultlambda0;
+    state->lambdalast = (double)(0);
+    state->lambdadecay = 1.0;
+}
+
+
+/*************************************************************************
+This function sets  IDW  model  construction  algorithm  to  the  textbook
+Shepard's algorithm with custom (user-specified) power parameter.
+
+IMPORTANT: we do NOT recommend using textbook IDW algorithms because  they
+           have terrible interpolation properties. Use MSTAB in all cases.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    P       -   power parameter, P>0; good value to start with is 2.0
+
+NOTE 1: IDW interpolation can  correctly  handle  ANY  dataset,  including
+        datasets with non-distinct points. In case non-distinct points are
+        found, an average value for this point will be calculated.
+   
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetalgotextbookshepard(idwbuilder* state,
+     double p,
+     ae_state *_state)
+{
+
+
+    ae_assert(ae_isfinite(p, _state), "IDWBuilderSetAlgoShepard: P is not finite", _state);
+    ae_assert(ae_fp_greater(p,(double)(0)), "IDWBuilderSetAlgoShepard: P<=0", _state);
+    
+    /*
+     * Set algorithm and options
+     */
+    state->algotype = 0;
+    state->shepardp = p;
+}
+
+
+/*************************************************************************
+This function sets  IDW  model  construction  algorithm  to the 'textbook'
+modified Shepard's algorithm with user-specified search radius.
+
+IMPORTANT: we do NOT recommend using textbook IDW algorithms because  they
+           have terrible interpolation properties. Use MSTAB in all cases.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    R       -   search radius
+
+NOTE 1: IDW interpolation can  correctly  handle  ANY  dataset,  including
+        datasets with non-distinct points. In case non-distinct points are
+        found, an average value for this point will be calculated.
+   
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetalgotextbookmodshepard(idwbuilder* state,
+     double r,
+     ae_state *_state)
+{
+
+
+    ae_assert(ae_isfinite(r, _state), "IDWBuilderSetAlgoModShepard: R is not finite", _state);
+    ae_assert(ae_fp_greater(r,(double)(0)), "IDWBuilderSetAlgoModShepard: R<=0", _state);
+    
+    /*
+     * Set algorithm and options
+     */
+    state->algotype = 1;
+    state->r0 = r;
+}
+
+
+/*************************************************************************
+This function sets prior term (model value at infinity) as  user-specified
+value.
+
+INPUT PARAMETERS:
+    S       -   spline builder
+    V       -   value for user-defined prior
+    
+NOTE: for vector-valued models all components of the prior are set to same
+      user-specified value
+
+  -- ALGLIB --
+     Copyright 29.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetuserterm(idwbuilder* state, double v, ae_state *_state)
+{
+    ae_int_t j;
+
+
+    ae_assert(ae_isfinite(v, _state), "IDWBuilderSetUserTerm: infinite/NAN value passed", _state);
+    state->priortermtype = 0;
+    for(j=0; j<=state->ny-1; j++)
+    {
+        state->priortermval.ptr.p_double[j] = v;
+    }
+}
+
+
+/*************************************************************************
+This function sets constant prior term (model value at infinity).
+
+Constant prior term is determined as mean value over dataset.
+
+INPUT PARAMETERS:
+    S       -   spline builder
+
+  -- ALGLIB --
+     Copyright 29.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetconstterm(idwbuilder* state, ae_state *_state)
+{
+
+
+    state->priortermtype = 2;
+}
+
+
+/*************************************************************************
+This function sets zero prior term (model value at infinity).
+
+INPUT PARAMETERS:
+    S       -   spline builder
+
+  -- ALGLIB --
+     Copyright 29.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetzeroterm(idwbuilder* state, ae_state *_state)
+{
+
+
+    state->priortermtype = 3;
+}
+
+
+/*************************************************************************
+IDW interpolation: scalar target, 1-dimensional argument
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object. 
+      
+INPUT PARAMETERS:
+    S   -   IDW interpolant built with IDW builder
+    X0  -   argument value
 
 Result:
-    IDW interpolant Z(X)
+    IDW interpolant S(X0)
 
   -- ALGLIB --
-     Copyright 02.03.2010 by Bochkanov Sergey
+     Copyright 22.10.2018 by Bochkanov Sergey
 *************************************************************************/
-double idwcalc(idwinterpolant* z,
-     /* Real    */ ae_vector* x,
-     ae_state *_state)
+double idwcalc1(idwmodel* s, double x0, ae_state *_state)
 {
-    ae_int_t i;
-    ae_int_t k;
-    double r;
-    double s;
-    double w;
-    double v1;
-    double v2;
-    double d0;
-    double di;
     double result;
 
 
-    
-    /*
-     * these initializers are not really necessary,
-     * but without them compiler complains about uninitialized locals
-     */
-    k = 0;
-    
-    /*
-     * Query
-     */
-    if( z->modeltype==0 )
-    {
-        
-        /*
-         * NQ/NW-based model
-         */
-        k = kdtreequeryknn(&z->tree, x, z->nw, ae_true, _state);
-        kdtreequeryresultsdistances(&z->tree, &z->rbuf, _state);
-        kdtreequeryresultstags(&z->tree, &z->tbuf, _state);
-    }
-    if( z->modeltype==1 )
-    {
-        
-        /*
-         * R-based model
-         */
-        k = kdtreequeryrnn(&z->tree, x, z->r, ae_true, _state);
-        kdtreequeryresultsdistances(&z->tree, &z->rbuf, _state);
-        kdtreequeryresultstags(&z->tree, &z->tbuf, _state);
-        if( k<idwint_idwkmin )
-        {
-            
-            /*
-             * we need at least IDWKMin points
-             */
-            k = kdtreequeryknn(&z->tree, x, idwint_idwkmin, ae_true, _state);
-            kdtreequeryresultsdistances(&z->tree, &z->rbuf, _state);
-            kdtreequeryresultstags(&z->tree, &z->tbuf, _state);
-        }
-    }
-    
-    /*
-     * initialize weights for linear/quadratic members calculation.
-     *
-     * NOTE 1: weights are calculated using NORMALIZED modified
-     * Shepard's formula. Original formula gives w(i) = sqr((R-di)/(R*di)),
-     * where di is i-th distance, R is max(di). Modified formula have
-     * following form:
-     *     w_mod(i) = 1, if di=d0
-     *     w_mod(i) = w(i)/w(0), if di<>d0
-     *
-     * NOTE 2: self-match is USED for this query
-     *
-     * NOTE 3: last point almost always gain zero weight, but it MUST
-     * be used for fitting because sometimes it will gain NON-ZERO
-     * weight - for example, when all distances are equal.
-     */
-    r = z->rbuf.ptr.p_double[k-1];
-    d0 = z->rbuf.ptr.p_double[0];
-    result = (double)(0);
-    s = (double)(0);
-    for(i=0; i<=k-1; i++)
-    {
-        di = z->rbuf.ptr.p_double[i];
-        if( ae_fp_eq(di,d0) )
-        {
-            
-            /*
-             * distance is equal to shortest, set it 1.0
-             * without explicitly calculating (which would give
-             * us same result, but 'll expose us to the risk of
-             * division by zero).
-             */
-            w = (double)(1);
-        }
-        else
-        {
-            
-            /*
-             * use normalized formula
-             */
-            v1 = (r-di)/(r-d0);
-            v2 = d0/di;
-            w = ae_sqr(v1*v2, _state);
-        }
-        result = result+w*idwint_idwcalcq(z, x, z->tbuf.ptr.p_int[i], _state);
-        s = s+w;
-    }
-    result = result/s;
+    ae_assert(s->nx==1, "IDWCalc1: S.NX<>1", _state);
+    ae_assert(s->ny==1, "IDWCalc1: S.NY<>1", _state);
+    ae_assert(ae_isfinite(x0, _state), "IDWCalc1: X0 is INF or NAN", _state);
+    s->buffer.x.ptr.p_double[0] = x0;
+    idwtscalcbuf(s, &s->buffer, &s->buffer.x, &s->buffer.y, _state);
+    result = s->buffer.y.ptr.p_double[0];
     return result;
 }
 
 
 /*************************************************************************
-IDW interpolant using modified Shepard method for uniform point
-distributions.
+IDW interpolation: scalar target, 2-dimensional argument
 
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object. 
+      
 INPUT PARAMETERS:
-    XY  -   X and Y values, array[0..N-1,0..NX].
-            First NX columns contain X-values, last column contain
-            Y-values.
-    N   -   number of nodes, N>0.
-    NX  -   space dimension, NX>=1.
-    D   -   nodal function type, either:
-            * 0     constant  model.  Just  for  demonstration only, worst
-                    model ever.
-            * 1     linear model, least squares fitting. Simpe  model  for
-                    datasets too small for quadratic models
-            * 2     quadratic  model,  least  squares  fitting. Best model
-                    available (if your dataset is large enough).
-            * -1    "fast"  linear  model,  use  with  caution!!!   It  is
-                    significantly  faster than linear/quadratic and better
-                    than constant model. But it is less robust (especially
-                    in the presence of noise).
-    NQ  -   number of points used to calculate  nodal  functions  (ignored
-            for constant models). NQ should be LARGER than:
-            * max(1.5*(1+NX),2^NX+1) for linear model,
-            * max(3/4*(NX+2)*(NX+1),2^NX+1) for quadratic model.
-            Values less than this threshold will be silently increased.
-    NW  -   number of points used to calculate weights and to interpolate.
-            Required: >=2^NX+1, values less than this  threshold  will  be
-            silently increased.
-            Recommended value: about 2*NQ
+    S       -   IDW interpolant built with IDW builder
+    X0, X1  -   argument value
 
-OUTPUT PARAMETERS:
-    Z   -   IDW interpolant.
-    
-NOTES:
-  * best results are obtained with quadratic models, worst - with constant
-    models
-  * when N is large, NQ and NW must be significantly smaller than  N  both
-    to obtain optimal performance and to obtain optimal accuracy. In 2  or
-    3-dimensional tasks NQ=15 and NW=25 are good values to start with.
-  * NQ  and  NW  may  be  greater  than  N.  In  such  cases  they will be
-    automatically decreased.
-  * this subroutine is always succeeds (as long as correct parameters  are
-    passed).
-  * see  'Multivariate  Interpolation  of Large Sets of Scattered Data' by
-    Robert J. Renka for more information on this algorithm.
-  * this subroutine assumes that point distribution is uniform at the small
-    scales.  If  it  isn't  -  for  example,  points are concentrated along
-    "lines", but "lines" distribution is uniform at the larger scale - then
-    you should use IDWBuildModifiedShepardR()
-
-
-  -- ALGLIB PROJECT --
-     Copyright 02.03.2010 by Bochkanov Sergey
-*************************************************************************/
-void idwbuildmodifiedshepard(/* Real    */ ae_matrix* xy,
-     ae_int_t n,
-     ae_int_t nx,
-     ae_int_t d,
-     ae_int_t nq,
-     ae_int_t nw,
-     idwinterpolant* z,
-     ae_state *_state)
-{
-    ae_frame _frame_block;
-    ae_int_t i;
-    ae_int_t j;
-    ae_int_t k;
-    ae_int_t j2;
-    ae_int_t j3;
-    double v;
-    double r;
-    double s;
-    double d0;
-    double di;
-    double v1;
-    double v2;
-    ae_int_t nc;
-    ae_int_t offs;
-    ae_vector x;
-    ae_vector qrbuf;
-    ae_matrix qxybuf;
-    ae_vector y;
-    ae_matrix fmatrix;
-    ae_vector w;
-    ae_vector qsol;
-    ae_vector temp;
-    ae_vector tags;
-    ae_int_t info;
-    double taskrcond;
-
-    ae_frame_make(_state, &_frame_block);
-    memset(&x, 0, sizeof(x));
-    memset(&qrbuf, 0, sizeof(qrbuf));
-    memset(&qxybuf, 0, sizeof(qxybuf));
-    memset(&y, 0, sizeof(y));
-    memset(&fmatrix, 0, sizeof(fmatrix));
-    memset(&w, 0, sizeof(w));
-    memset(&qsol, 0, sizeof(qsol));
-    memset(&temp, 0, sizeof(temp));
-    memset(&tags, 0, sizeof(tags));
-    _idwinterpolant_clear(z);
-    ae_vector_init(&x, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&qrbuf, 0, DT_REAL, _state, ae_true);
-    ae_matrix_init(&qxybuf, 0, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&y, 0, DT_REAL, _state, ae_true);
-    ae_matrix_init(&fmatrix, 0, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&w, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&qsol, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&temp, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&tags, 0, DT_INT, _state, ae_true);
-
-    
-    /*
-     * these initializers are not really necessary,
-     * but without them compiler complains about uninitialized locals
-     */
-    nc = 0;
-    
-    /*
-     * assertions
-     */
-    ae_assert(n>0, "IDWBuildModifiedShepard: N<=0!", _state);
-    ae_assert(nx>=1, "IDWBuildModifiedShepard: NX<1!", _state);
-    ae_assert(d>=-1&&d<=2, "IDWBuildModifiedShepard: D<>-1 and D<>0 and D<>1 and D<>2!", _state);
-    
-    /*
-     * Correct parameters if needed
-     */
-    if( d==1 )
-    {
-        nq = ae_maxint(nq, ae_iceil(idwint_idwqfactor*(1+nx), _state)+1, _state);
-        nq = ae_maxint(nq, ae_round(ae_pow((double)(2), (double)(nx), _state), _state)+1, _state);
-    }
-    if( d==2 )
-    {
-        nq = ae_maxint(nq, ae_iceil(idwint_idwqfactor*(nx+2)*(nx+1)/2, _state)+1, _state);
-        nq = ae_maxint(nq, ae_round(ae_pow((double)(2), (double)(nx), _state), _state)+1, _state);
-    }
-    nw = ae_maxint(nw, ae_round(ae_pow((double)(2), (double)(nx), _state), _state)+1, _state);
-    nq = ae_minint(nq, n, _state);
-    nw = ae_minint(nw, n, _state);
-    
-    /*
-     * primary initialization of Z
-     */
-    idwint_idwinit1(n, nx, d, nq, nw, z, _state);
-    z->modeltype = 0;
-    
-    /*
-     * Create KD-tree
-     */
-    ae_vector_set_length(&tags, n, _state);
-    for(i=0; i<=n-1; i++)
-    {
-        tags.ptr.p_int[i] = i;
-    }
-    kdtreebuildtagged(xy, &tags, n, nx, 1, 2, &z->tree, _state);
-    
-    /*
-     * build nodal functions
-     */
-    ae_vector_set_length(&temp, nq+1, _state);
-    ae_vector_set_length(&x, nx, _state);
-    ae_vector_set_length(&qrbuf, nq, _state);
-    ae_matrix_set_length(&qxybuf, nq, nx+1, _state);
-    if( d==-1 )
-    {
-        ae_vector_set_length(&w, nq, _state);
-    }
-    if( d==1 )
-    {
-        ae_vector_set_length(&y, nq, _state);
-        ae_vector_set_length(&w, nq, _state);
-        ae_vector_set_length(&qsol, nx, _state);
-        
-        /*
-         * NX for linear members,
-         * 1 for temporary storage
-         */
-        ae_matrix_set_length(&fmatrix, nq, nx+1, _state);
-    }
-    if( d==2 )
-    {
-        ae_vector_set_length(&y, nq, _state);
-        ae_vector_set_length(&w, nq, _state);
-        ae_vector_set_length(&qsol, nx+ae_round(nx*(nx+1)*0.5, _state), _state);
-        
-        /*
-         * NX for linear members,
-         * Round(NX*(NX+1)*0.5) for quadratic model,
-         * 1 for temporary storage
-         */
-        ae_matrix_set_length(&fmatrix, nq, nx+ae_round(nx*(nx+1)*0.5, _state)+1, _state);
-    }
-    for(i=0; i<=n-1; i++)
-    {
-        
-        /*
-         * Initialize center and function value.
-         * If D=0 it is all what we need
-         */
-        ae_v_move(&z->q.ptr.pp_double[i][0], 1, &xy->ptr.pp_double[i][0], 1, ae_v_len(0,nx));
-        if( d==0 )
-        {
-            continue;
-        }
-        
-        /*
-         * calculate weights for linear/quadratic members calculation.
-         *
-         * NOTE 1: weights are calculated using NORMALIZED modified
-         * Shepard's formula. Original formula is w(i) = sqr((R-di)/(R*di)),
-         * where di is i-th distance, R is max(di). Modified formula have
-         * following form:
-         *     w_mod(i) = 1, if di=d0
-         *     w_mod(i) = w(i)/w(0), if di<>d0
-         *
-         * NOTE 2: self-match is NOT used for this query
-         *
-         * NOTE 3: last point almost always gain zero weight, but it MUST
-         * be used for fitting because sometimes it will gain NON-ZERO
-         * weight - for example, when all distances are equal.
-         */
-        ae_v_move(&x.ptr.p_double[0], 1, &xy->ptr.pp_double[i][0], 1, ae_v_len(0,nx-1));
-        k = kdtreequeryknn(&z->tree, &x, nq, ae_false, _state);
-        kdtreequeryresultsxy(&z->tree, &qxybuf, _state);
-        kdtreequeryresultsdistances(&z->tree, &qrbuf, _state);
-        r = qrbuf.ptr.p_double[k-1];
-        d0 = qrbuf.ptr.p_double[0];
-        for(j=0; j<=k-1; j++)
-        {
-            di = qrbuf.ptr.p_double[j];
-            if( ae_fp_eq(di,d0) )
-            {
-                
-                /*
-                 * distance is equal to shortest, set it 1.0
-                 * without explicitly calculating (which would give
-                 * us same result, but 'll expose us to the risk of
-                 * division by zero).
-                 */
-                w.ptr.p_double[j] = (double)(1);
-            }
-            else
-            {
-                
-                /*
-                 * use normalized formula
-                 */
-                v1 = (r-di)/(r-d0);
-                v2 = d0/di;
-                w.ptr.p_double[j] = ae_sqr(v1*v2, _state);
-            }
-        }
-        
-        /*
-         * calculate linear/quadratic members
-         */
-        if( d==-1 )
-        {
-            
-            /*
-             * "Fast" linear nodal function calculated using
-             * inverse distance weighting
-             */
-            for(j=0; j<=nx-1; j++)
-            {
-                x.ptr.p_double[j] = (double)(0);
-            }
-            s = (double)(0);
-            for(j=0; j<=k-1; j++)
-            {
-                
-                /*
-                 * calculate J-th inverse distance weighted gradient:
-                 *     grad_k = (y_j-y_k)*(x_j-x_k)/sqr(norm(x_j-x_k))
-                 *     grad   = sum(wk*grad_k)/sum(w_k)
-                 */
-                v = (double)(0);
-                for(j2=0; j2<=nx-1; j2++)
-                {
-                    v = v+ae_sqr(qxybuf.ptr.pp_double[j][j2]-xy->ptr.pp_double[i][j2], _state);
-                }
-                
-                /*
-                 * Although x_j<>x_k, sqr(norm(x_j-x_k)) may be zero due to
-                 * underflow. If it is, we assume than J-th gradient is zero
-                 * (i.e. don't add anything)
-                 */
-                if( ae_fp_neq(v,(double)(0)) )
-                {
-                    for(j2=0; j2<=nx-1; j2++)
-                    {
-                        x.ptr.p_double[j2] = x.ptr.p_double[j2]+w.ptr.p_double[j]*(qxybuf.ptr.pp_double[j][nx]-xy->ptr.pp_double[i][nx])*(qxybuf.ptr.pp_double[j][j2]-xy->ptr.pp_double[i][j2])/v;
-                    }
-                }
-                s = s+w.ptr.p_double[j];
-            }
-            for(j=0; j<=nx-1; j++)
-            {
-                z->q.ptr.pp_double[i][nx+1+j] = x.ptr.p_double[j]/s;
-            }
-        }
-        else
-        {
-            
-            /*
-             * Least squares models: build
-             */
-            if( d==1 )
-            {
-                
-                /*
-                 * Linear nodal function calculated using
-                 * least squares fitting to its neighbors
-                 */
-                for(j=0; j<=k-1; j++)
-                {
-                    for(j2=0; j2<=nx-1; j2++)
-                    {
-                        fmatrix.ptr.pp_double[j][j2] = qxybuf.ptr.pp_double[j][j2]-xy->ptr.pp_double[i][j2];
-                    }
-                    y.ptr.p_double[j] = qxybuf.ptr.pp_double[j][nx]-xy->ptr.pp_double[i][nx];
-                }
-                nc = nx;
-            }
-            if( d==2 )
-            {
-                
-                /*
-                 * Quadratic nodal function calculated using
-                 * least squares fitting to its neighbors
-                 */
-                for(j=0; j<=k-1; j++)
-                {
-                    offs = 0;
-                    for(j2=0; j2<=nx-1; j2++)
-                    {
-                        fmatrix.ptr.pp_double[j][offs] = qxybuf.ptr.pp_double[j][j2]-xy->ptr.pp_double[i][j2];
-                        offs = offs+1;
-                    }
-                    for(j2=0; j2<=nx-1; j2++)
-                    {
-                        for(j3=j2; j3<=nx-1; j3++)
-                        {
-                            fmatrix.ptr.pp_double[j][offs] = (qxybuf.ptr.pp_double[j][j2]-xy->ptr.pp_double[i][j2])*(qxybuf.ptr.pp_double[j][j3]-xy->ptr.pp_double[i][j3]);
-                            offs = offs+1;
-                        }
-                    }
-                    y.ptr.p_double[j] = qxybuf.ptr.pp_double[j][nx]-xy->ptr.pp_double[i][nx];
-                }
-                nc = nx+ae_round(nx*(nx+1)*0.5, _state);
-            }
-            idwint_idwinternalsolver(&y, &w, &fmatrix, &temp, k, nc, &info, &qsol, &taskrcond, _state);
-            
-            /*
-             * Least squares models: copy results
-             */
-            if( info>0 )
-            {
-                
-                /*
-                 * LLS task is solved, copy results
-                 */
-                z->debugworstrcond = ae_minreal(z->debugworstrcond, taskrcond, _state);
-                z->debugbestrcond = ae_maxreal(z->debugbestrcond, taskrcond, _state);
-                for(j=0; j<=nc-1; j++)
-                {
-                    z->q.ptr.pp_double[i][nx+1+j] = qsol.ptr.p_double[j];
-                }
-            }
-            else
-            {
-                
-                /*
-                 * Solver failure, very strange, but we will use
-                 * zero values to handle it.
-                 */
-                z->debugsolverfailures = z->debugsolverfailures+1;
-                for(j=0; j<=nc-1; j++)
-                {
-                    z->q.ptr.pp_double[i][nx+1+j] = (double)(0);
-                }
-            }
-        }
-    }
-    ae_frame_leave(_state);
-}
-
-
-/*************************************************************************
-IDW interpolant using modified Shepard method for non-uniform datasets.
-
-This type of model uses  constant  nodal  functions and interpolates using
-all nodes which are closer than user-specified radius R. It  may  be  used
-when points distribution is non-uniform at the small scale, but it  is  at
-the distances as large as R.
-
-INPUT PARAMETERS:
-    XY  -   X and Y values, array[0..N-1,0..NX].
-            First NX columns contain X-values, last column contain
-            Y-values.
-    N   -   number of nodes, N>0.
-    NX  -   space dimension, NX>=1.
-    R   -   radius, R>0
-
-OUTPUT PARAMETERS:
-    Z   -   IDW interpolant.
-
-NOTES:
-* if there is less than IDWKMin points within  R-ball,  algorithm  selects
-  IDWKMin closest ones, so that continuity properties of  interpolant  are
-  preserved even far from points.
-
-  -- ALGLIB PROJECT --
-     Copyright 11.04.2010 by Bochkanov Sergey
-*************************************************************************/
-void idwbuildmodifiedshepardr(/* Real    */ ae_matrix* xy,
-     ae_int_t n,
-     ae_int_t nx,
-     double r,
-     idwinterpolant* z,
-     ae_state *_state)
-{
-    ae_frame _frame_block;
-    ae_int_t i;
-    ae_vector tags;
-
-    ae_frame_make(_state, &_frame_block);
-    memset(&tags, 0, sizeof(tags));
-    _idwinterpolant_clear(z);
-    ae_vector_init(&tags, 0, DT_INT, _state, ae_true);
-
-    
-    /*
-     * assertions
-     */
-    ae_assert(n>0, "IDWBuildModifiedShepardR: N<=0!", _state);
-    ae_assert(nx>=1, "IDWBuildModifiedShepardR: NX<1!", _state);
-    ae_assert(ae_fp_greater(r,(double)(0)), "IDWBuildModifiedShepardR: R<=0!", _state);
-    
-    /*
-     * primary initialization of Z
-     */
-    idwint_idwinit1(n, nx, 0, 0, n, z, _state);
-    z->modeltype = 1;
-    z->r = r;
-    
-    /*
-     * Create KD-tree
-     */
-    ae_vector_set_length(&tags, n, _state);
-    for(i=0; i<=n-1; i++)
-    {
-        tags.ptr.p_int[i] = i;
-    }
-    kdtreebuildtagged(xy, &tags, n, nx, 1, 2, &z->tree, _state);
-    
-    /*
-     * build nodal functions
-     */
-    for(i=0; i<=n-1; i++)
-    {
-        ae_v_move(&z->q.ptr.pp_double[i][0], 1, &xy->ptr.pp_double[i][0], 1, ae_v_len(0,nx));
-    }
-    ae_frame_leave(_state);
-}
-
-
-/*************************************************************************
-IDW model for noisy data.
-
-This subroutine may be used to handle noisy data, i.e. data with noise  in
-OUTPUT values.  It differs from IDWBuildModifiedShepard() in the following
-aspects:
-* nodal functions are not constrained to pass through  nodes:  Qi(xi)<>yi,
-  i.e. we have fitting  instead  of  interpolation.
-* weights which are used during least  squares fitting stage are all equal
-  to 1.0 (independently of distance)
-* "fast"-linear or constant nodal functions are not supported (either  not
-  robust enough or too rigid)
-
-This problem require far more complex tuning than interpolation  problems.
-Below you can find some recommendations regarding this problem:
-* focus on tuning NQ; it controls noise reduction. As for NW, you can just
-  make it equal to 2*NQ.
-* you can use cross-validation to determine optimal NQ.
-* optimal NQ is a result of complex tradeoff  between  noise  level  (more
-  noise = larger NQ required) and underlying  function  complexity  (given
-  fixed N, larger NQ means smoothing of compex features in the data).  For
-  example, NQ=N will reduce noise to the minimum level possible,  but  you
-  will end up with just constant/linear/quadratic (depending on  D)  least
-  squares model for the whole dataset.
-
-INPUT PARAMETERS:
-    XY  -   X and Y values, array[0..N-1,0..NX].
-            First NX columns contain X-values, last column contain
-            Y-values.
-    N   -   number of nodes, N>0.
-    NX  -   space dimension, NX>=1.
-    D   -   nodal function degree, either:
-            * 1     linear model, least squares fitting. Simpe  model  for
-                    datasets too small for quadratic models (or  for  very
-                    noisy problems).
-            * 2     quadratic  model,  least  squares  fitting. Best model
-                    available (if your dataset is large enough).
-    NQ  -   number of points used to calculate nodal functions.  NQ should
-            be  significantly   larger   than  1.5  times  the  number  of
-            coefficients in a nodal function to overcome effects of noise:
-            * larger than 1.5*(1+NX) for linear model,
-            * larger than 3/4*(NX+2)*(NX+1) for quadratic model.
-            Values less than this threshold will be silently increased.
-    NW  -   number of points used to calculate weights and to interpolate.
-            Required: >=2^NX+1, values less than this  threshold  will  be
-            silently increased.
-            Recommended value: about 2*NQ or larger
-
-OUTPUT PARAMETERS:
-    Z   -   IDW interpolant.
-
-NOTES:
-  * best results are obtained with quadratic models, linear models are not
-    recommended to use unless you are pretty sure that it is what you want
-  * this subroutine is always succeeds (as long as correct parameters  are
-    passed).
-  * see  'Multivariate  Interpolation  of Large Sets of Scattered Data' by
-    Robert J. Renka for more information on this algorithm.
-
-
-  -- ALGLIB PROJECT --
-     Copyright 02.03.2010 by Bochkanov Sergey
-*************************************************************************/
-void idwbuildnoisy(/* Real    */ ae_matrix* xy,
-     ae_int_t n,
-     ae_int_t nx,
-     ae_int_t d,
-     ae_int_t nq,
-     ae_int_t nw,
-     idwinterpolant* z,
-     ae_state *_state)
-{
-    ae_frame _frame_block;
-    ae_int_t i;
-    ae_int_t j;
-    ae_int_t k;
-    ae_int_t j2;
-    ae_int_t j3;
-    double v;
-    ae_int_t nc;
-    ae_int_t offs;
-    double taskrcond;
-    ae_vector x;
-    ae_vector qrbuf;
-    ae_matrix qxybuf;
-    ae_vector y;
-    ae_vector w;
-    ae_matrix fmatrix;
-    ae_vector qsol;
-    ae_vector tags;
-    ae_vector temp;
-    ae_int_t info;
-
-    ae_frame_make(_state, &_frame_block);
-    memset(&x, 0, sizeof(x));
-    memset(&qrbuf, 0, sizeof(qrbuf));
-    memset(&qxybuf, 0, sizeof(qxybuf));
-    memset(&y, 0, sizeof(y));
-    memset(&w, 0, sizeof(w));
-    memset(&fmatrix, 0, sizeof(fmatrix));
-    memset(&qsol, 0, sizeof(qsol));
-    memset(&tags, 0, sizeof(tags));
-    memset(&temp, 0, sizeof(temp));
-    _idwinterpolant_clear(z);
-    ae_vector_init(&x, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&qrbuf, 0, DT_REAL, _state, ae_true);
-    ae_matrix_init(&qxybuf, 0, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&y, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&w, 0, DT_REAL, _state, ae_true);
-    ae_matrix_init(&fmatrix, 0, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&qsol, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&tags, 0, DT_INT, _state, ae_true);
-    ae_vector_init(&temp, 0, DT_REAL, _state, ae_true);
-
-    
-    /*
-     * these initializers are not really necessary,
-     * but without them compiler complains about uninitialized locals
-     */
-    nc = 0;
-    
-    /*
-     * assertions
-     */
-    ae_assert(n>0, "IDWBuildNoisy: N<=0!", _state);
-    ae_assert(nx>=1, "IDWBuildNoisy: NX<1!", _state);
-    ae_assert(d>=1&&d<=2, "IDWBuildNoisy: D<>1 and D<>2!", _state);
-    
-    /*
-     * Correct parameters if needed
-     */
-    if( d==1 )
-    {
-        nq = ae_maxint(nq, ae_iceil(idwint_idwqfactor*(1+nx), _state)+1, _state);
-    }
-    if( d==2 )
-    {
-        nq = ae_maxint(nq, ae_iceil(idwint_idwqfactor*(nx+2)*(nx+1)/2, _state)+1, _state);
-    }
-    nw = ae_maxint(nw, ae_round(ae_pow((double)(2), (double)(nx), _state), _state)+1, _state);
-    nq = ae_minint(nq, n, _state);
-    nw = ae_minint(nw, n, _state);
-    
-    /*
-     * primary initialization of Z
-     */
-    idwint_idwinit1(n, nx, d, nq, nw, z, _state);
-    z->modeltype = 0;
-    
-    /*
-     * Create KD-tree
-     */
-    ae_vector_set_length(&tags, n, _state);
-    for(i=0; i<=n-1; i++)
-    {
-        tags.ptr.p_int[i] = i;
-    }
-    kdtreebuildtagged(xy, &tags, n, nx, 1, 2, &z->tree, _state);
-    
-    /*
-     * build nodal functions
-     * (special algorithm for noisy data is used)
-     */
-    ae_vector_set_length(&temp, nq+1, _state);
-    ae_vector_set_length(&x, nx, _state);
-    ae_vector_set_length(&qrbuf, nq, _state);
-    ae_matrix_set_length(&qxybuf, nq, nx+1, _state);
-    if( d==1 )
-    {
-        ae_vector_set_length(&y, nq, _state);
-        ae_vector_set_length(&w, nq, _state);
-        ae_vector_set_length(&qsol, 1+nx, _state);
-        
-        /*
-         * 1 for constant member,
-         * NX for linear members,
-         * 1 for temporary storage
-         */
-        ae_matrix_set_length(&fmatrix, nq, 1+nx+1, _state);
-    }
-    if( d==2 )
-    {
-        ae_vector_set_length(&y, nq, _state);
-        ae_vector_set_length(&w, nq, _state);
-        ae_vector_set_length(&qsol, 1+nx+ae_round(nx*(nx+1)*0.5, _state), _state);
-        
-        /*
-         * 1 for constant member,
-         * NX for linear members,
-         * Round(NX*(NX+1)*0.5) for quadratic model,
-         * 1 for temporary storage
-         */
-        ae_matrix_set_length(&fmatrix, nq, 1+nx+ae_round(nx*(nx+1)*0.5, _state)+1, _state);
-    }
-    for(i=0; i<=n-1; i++)
-    {
-        
-        /*
-         * Initialize center.
-         */
-        ae_v_move(&z->q.ptr.pp_double[i][0], 1, &xy->ptr.pp_double[i][0], 1, ae_v_len(0,nx-1));
-        
-        /*
-         * Calculate linear/quadratic members
-         * using least squares fit
-         * NOTE 1: all weight are equal to 1.0
-         * NOTE 2: self-match is USED for this query
-         */
-        ae_v_move(&x.ptr.p_double[0], 1, &xy->ptr.pp_double[i][0], 1, ae_v_len(0,nx-1));
-        k = kdtreequeryknn(&z->tree, &x, nq, ae_true, _state);
-        kdtreequeryresultsxy(&z->tree, &qxybuf, _state);
-        kdtreequeryresultsdistances(&z->tree, &qrbuf, _state);
-        if( d==1 )
-        {
-            
-            /*
-             * Linear nodal function calculated using
-             * least squares fitting to its neighbors
-             */
-            for(j=0; j<=k-1; j++)
-            {
-                fmatrix.ptr.pp_double[j][0] = 1.0;
-                for(j2=0; j2<=nx-1; j2++)
-                {
-                    fmatrix.ptr.pp_double[j][1+j2] = qxybuf.ptr.pp_double[j][j2]-xy->ptr.pp_double[i][j2];
-                }
-                y.ptr.p_double[j] = qxybuf.ptr.pp_double[j][nx];
-                w.ptr.p_double[j] = (double)(1);
-            }
-            nc = 1+nx;
-        }
-        if( d==2 )
-        {
-            
-            /*
-             * Quadratic nodal function calculated using
-             * least squares fitting to its neighbors
-             */
-            for(j=0; j<=k-1; j++)
-            {
-                fmatrix.ptr.pp_double[j][0] = (double)(1);
-                offs = 1;
-                for(j2=0; j2<=nx-1; j2++)
-                {
-                    fmatrix.ptr.pp_double[j][offs] = qxybuf.ptr.pp_double[j][j2]-xy->ptr.pp_double[i][j2];
-                    offs = offs+1;
-                }
-                for(j2=0; j2<=nx-1; j2++)
-                {
-                    for(j3=j2; j3<=nx-1; j3++)
-                    {
-                        fmatrix.ptr.pp_double[j][offs] = (qxybuf.ptr.pp_double[j][j2]-xy->ptr.pp_double[i][j2])*(qxybuf.ptr.pp_double[j][j3]-xy->ptr.pp_double[i][j3]);
-                        offs = offs+1;
-                    }
-                }
-                y.ptr.p_double[j] = qxybuf.ptr.pp_double[j][nx];
-                w.ptr.p_double[j] = (double)(1);
-            }
-            nc = 1+nx+ae_round(nx*(nx+1)*0.5, _state);
-        }
-        idwint_idwinternalsolver(&y, &w, &fmatrix, &temp, k, nc, &info, &qsol, &taskrcond, _state);
-        
-        /*
-         * Least squares models: copy results
-         */
-        if( info>0 )
-        {
-            
-            /*
-             * LLS task is solved, copy results
-             */
-            z->debugworstrcond = ae_minreal(z->debugworstrcond, taskrcond, _state);
-            z->debugbestrcond = ae_maxreal(z->debugbestrcond, taskrcond, _state);
-            for(j=0; j<=nc-1; j++)
-            {
-                z->q.ptr.pp_double[i][nx+j] = qsol.ptr.p_double[j];
-            }
-        }
-        else
-        {
-            
-            /*
-             * Solver failure, very strange, but we will use
-             * zero values to handle it.
-             */
-            z->debugsolverfailures = z->debugsolverfailures+1;
-            v = (double)(0);
-            for(j=0; j<=k-1; j++)
-            {
-                v = v+qxybuf.ptr.pp_double[j][nx];
-            }
-            z->q.ptr.pp_double[i][nx] = v/k;
-            for(j=0; j<=nc-2; j++)
-            {
-                z->q.ptr.pp_double[i][nx+1+j] = (double)(0);
-            }
-        }
-    }
-    ae_frame_leave(_state);
-}
-
-
-/*************************************************************************
-Internal subroutine: K-th nodal function calculation
+Result:
+    IDW interpolant S(X0,X1)
 
   -- ALGLIB --
-     Copyright 02.03.2010 by Bochkanov Sergey
+     Copyright 22.10.2018 by Bochkanov Sergey
 *************************************************************************/
-static double idwint_idwcalcq(idwinterpolant* z,
-     /* Real    */ ae_vector* x,
-     ae_int_t k,
+double idwcalc2(idwmodel* s, double x0, double x1, ae_state *_state)
+{
+    double result;
+
+
+    ae_assert(s->nx==2, "IDWCalc2: S.NX<>2", _state);
+    ae_assert(s->ny==1, "IDWCalc2: S.NY<>1", _state);
+    ae_assert(ae_isfinite(x0, _state), "IDWCalc2: X0 is INF or NAN", _state);
+    ae_assert(ae_isfinite(x1, _state), "IDWCalc2: X1 is INF or NAN", _state);
+    s->buffer.x.ptr.p_double[0] = x0;
+    s->buffer.x.ptr.p_double[1] = x1;
+    idwtscalcbuf(s, &s->buffer, &s->buffer.x, &s->buffer.y, _state);
+    result = s->buffer.y.ptr.p_double[0];
+    return result;
+}
+
+
+/*************************************************************************
+IDW interpolation: scalar target, 3-dimensional argument
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object. 
+
+INPUT PARAMETERS:
+    S       -   IDW interpolant built with IDW builder
+    X0,X1,X2-   argument value
+
+Result:
+    IDW interpolant S(X0,X1,X2)
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+double idwcalc3(idwmodel* s,
+     double x0,
+     double x1,
+     double x2,
      ae_state *_state)
 {
+    double result;
+
+
+    ae_assert(s->nx==3, "IDWCalc3: S.NX<>3", _state);
+    ae_assert(s->ny==1, "IDWCalc3: S.NY<>1", _state);
+    ae_assert(ae_isfinite(x0, _state), "IDWCalc3: X0 is INF or NAN", _state);
+    ae_assert(ae_isfinite(x1, _state), "IDWCalc3: X1 is INF or NAN", _state);
+    ae_assert(ae_isfinite(x2, _state), "IDWCalc3: X2 is INF or NAN", _state);
+    s->buffer.x.ptr.p_double[0] = x0;
+    s->buffer.x.ptr.p_double[1] = x1;
+    s->buffer.x.ptr.p_double[2] = x2;
+    idwtscalcbuf(s, &s->buffer, &s->buffer.x, &s->buffer.y, _state);
+    result = s->buffer.y.ptr.p_double[0];
+    return result;
+}
+
+
+/*************************************************************************
+This function calculates values of the IDW model at the given point.
+
+This is general function which can be used for arbitrary NX (dimension  of 
+the space of arguments) and NY (dimension of the function itself). However
+when  you  have  NY=1  you  may  find more convenient to  use  idwcalc1(),
+idwcalc2() or idwcalc3().
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object. 
+      
+INPUT PARAMETERS:
+    S       -   IDW model
+    X       -   coordinates, array[NX]. X may have more than NX  elements,
+                in this case only leading NX will be used.
+
+OUTPUT PARAMETERS:
+    Y       -   function value, array[NY]. Y is out-parameter and will  be
+                reallocated after call to this function. In case you  want
+                to reuse previously allocated Y, you may use idwcalcbuf(),
+                which reallocates Y only when it is too small.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwcalc(idwmodel* s,
+     /* Real    */ ae_vector* x,
+     /* Real    */ ae_vector* y,
+     ae_state *_state)
+{
+
+    ae_vector_clear(y);
+
+    idwtscalcbuf(s, &s->buffer, x, y, _state);
+}
+
+
+/*************************************************************************
+This function calculates values of the IDW model at the given point.
+
+Same as idwcalc(), but does not reallocate Y when in is large enough to 
+store function values.
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object. 
+      
+INPUT PARAMETERS:
+    S       -   IDW model
+    X       -   coordinates, array[NX]. X may have more than NX  elements,
+                in this case only leading NX will be used.
+    Y       -   possibly preallocated array
+
+OUTPUT PARAMETERS:
+    Y       -   function value, array[NY]. Y is not reallocated when it
+                is larger than NY.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwcalcbuf(idwmodel* s,
+     /* Real    */ ae_vector* x,
+     /* Real    */ ae_vector* y,
+     ae_state *_state)
+{
+
+
+    idwtscalcbuf(s, &s->buffer, x, y, _state);
+}
+
+
+/*************************************************************************
+This function calculates values of the IDW model at the given point, using
+external  buffer  object  (internal  temporaries  of  IDW  model  are  not
+modified).
+
+This function allows to use same IDW model object  in  different  threads,
+assuming  that  different   threads  use different instances of the buffer
+structure.
+
+INPUT PARAMETERS:
+    S       -   IDW model, may be shared between different threads
+    Buf     -   buffer object created for this particular instance of  IDW
+                model with idwcreatecalcbuffer().
+    X       -   coordinates, array[NX]. X may have more than NX  elements,
+                in this case only  leading NX will be used.
+    Y       -   possibly preallocated array
+
+OUTPUT PARAMETERS:
+    Y       -   function value, array[NY]. Y is not reallocated when it
+                is larger than NY.
+
+  -- ALGLIB --
+     Copyright 13.12.2011 by Bochkanov Sergey
+*************************************************************************/
+void idwtscalcbuf(idwmodel* s,
+     idwcalcbuffer* buf,
+     /* Real    */ ae_vector* x,
+     /* Real    */ ae_vector* y,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t j;
+    ae_int_t ew;
+    ae_int_t k;
+    ae_int_t layeridx;
     ae_int_t nx;
-    ae_int_t i;
-    ae_int_t j;
-    ae_int_t offs;
-    double result;
-
-
-    nx = z->nx;
-    
-    /*
-     * constant member
-     */
-    result = z->q.ptr.pp_double[k][nx];
-    
-    /*
-     * linear members
-     */
-    if( z->d>=1 )
-    {
-        for(i=0; i<=nx-1; i++)
-        {
-            result = result+z->q.ptr.pp_double[k][nx+1+i]*(x->ptr.p_double[i]-z->q.ptr.pp_double[k][i]);
-        }
-    }
-    
-    /*
-     * quadratic members
-     */
-    if( z->d>=2 )
-    {
-        offs = nx+1+nx;
-        for(i=0; i<=nx-1; i++)
-        {
-            for(j=i; j<=nx-1; j++)
-            {
-                result = result+z->q.ptr.pp_double[k][offs]*(x->ptr.p_double[i]-z->q.ptr.pp_double[k][i])*(x->ptr.p_double[j]-z->q.ptr.pp_double[k][j]);
-                offs = offs+1;
-            }
-        }
-    }
-    return result;
-}
-
-
-/*************************************************************************
-Initialization of internal structures.
-
-It assumes correctness of all parameters.
-
-  -- ALGLIB --
-     Copyright 02.03.2010 by Bochkanov Sergey
-*************************************************************************/
-static void idwint_idwinit1(ae_int_t n,
-     ae_int_t nx,
-     ae_int_t d,
-     ae_int_t nq,
-     ae_int_t nw,
-     idwinterpolant* z,
-     ae_state *_state)
-{
-
-
-    z->debugsolverfailures = 0;
-    z->debugworstrcond = 1.0;
-    z->debugbestrcond = (double)(0);
-    z->n = n;
-    z->nx = nx;
-    z->d = 0;
-    if( d==1 )
-    {
-        z->d = 1;
-    }
-    if( d==2 )
-    {
-        z->d = 2;
-    }
-    if( d==-1 )
-    {
-        z->d = 1;
-    }
-    z->nw = nw;
-    if( d==-1 )
-    {
-        ae_matrix_set_length(&z->q, n, nx+1+nx, _state);
-    }
-    if( d==0 )
-    {
-        ae_matrix_set_length(&z->q, n, nx+1, _state);
-    }
-    if( d==1 )
-    {
-        ae_matrix_set_length(&z->q, n, nx+1+nx, _state);
-    }
-    if( d==2 )
-    {
-        ae_matrix_set_length(&z->q, n, nx+1+nx+ae_round(nx*(nx+1)*0.5, _state), _state);
-    }
-    ae_vector_set_length(&z->tbuf, nw, _state);
-    ae_vector_set_length(&z->rbuf, nw, _state);
-    ae_matrix_set_length(&z->xybuf, nw, nx+1, _state);
-    ae_vector_set_length(&z->xbuf, nx, _state);
-}
-
-
-/*************************************************************************
-Linear least squares solver for small tasks.
-
-Works faster than standard ALGLIB solver in non-degenerate cases  (due  to
-absense of internal allocations and optimized row/colums).  In  degenerate
-cases it calls standard solver, which results in small performance penalty
-associated with preliminary steps.
-
-INPUT PARAMETERS:
-    Y           array[0..N-1]
-    W           array[0..N-1]
-    FMatrix     array[0..N-1,0..M], have additional column for temporary
-                values
-    Temp        array[0..N]
-*************************************************************************/
-static void idwint_idwinternalsolver(/* Real    */ ae_vector* y,
-     /* Real    */ ae_vector* w,
-     /* Real    */ ae_matrix* fmatrix,
-     /* Real    */ ae_vector* temp,
-     ae_int_t n,
-     ae_int_t m,
-     ae_int_t* info,
-     /* Real    */ ae_vector* x,
-     double* taskrcond,
-     ae_state *_state)
-{
-    ae_frame _frame_block;
-    ae_int_t i;
-    ae_int_t j;
+    ae_int_t ny;
+    ae_int_t npoints;
     double v;
-    double tau;
-    ae_vector b;
-    densesolverlsreport srep;
+    double vv;
+    double f;
+    double p;
+    double r;
+    double eps;
+    double lambdacur;
+    double lambdadecay;
+    double invrdecay;
+    double invr;
+    ae_bool fastcalcpossible;
+    double wf0;
+    double ws0;
+    double wf1;
+    double ws1;
 
-    ae_frame_make(_state, &_frame_block);
-    memset(&b, 0, sizeof(b));
-    memset(&srep, 0, sizeof(srep));
-    *info = 0;
-    ae_vector_init(&b, 0, DT_REAL, _state, ae_true);
-    _densesolverlsreport_init(&srep, _state, ae_true);
 
+    nx = s->nx;
+    ny = s->ny;
+    ae_assert(x->cnt>=nx, "IDWTsCalcBuf: Length(X)<NX", _state);
+    ae_assert(isfinitevector(x, nx, _state), "IDWTsCalcBuf: X contains infinite or NaN values", _state);
     
     /*
-     * set up info
+     * Avoid spurious compiler warnings
      */
-    *info = 1;
+    wf0 = (double)(0);
+    ws0 = (double)(0);
+    wf1 = (double)(0);
+    ws1 = (double)(0);
     
     /*
-     * prepare matrix
+     * Allocate output
      */
-    for(i=0; i<=n-1; i++)
+    if( y->cnt<ny )
     {
-        fmatrix->ptr.pp_double[i][m] = y->ptr.p_double[i];
-        v = w->ptr.p_double[i];
-        ae_v_muld(&fmatrix->ptr.pp_double[i][0], 1, ae_v_len(0,m), v);
+        ae_vector_set_length(y, ny, _state);
     }
     
     /*
-     * use either fast algorithm or general algorithm
+     * Quick exit for NLayers=0 (no dataset)
      */
-    if( m<=n )
+    if( s->nlayers==0 )
     {
-        
-        /*
-         * QR decomposition
-         * We assume that M<=N (we would have called LSFit() otherwise)
-         */
-        for(i=0; i<=m-1; i++)
+        for(j=0; j<=ny-1; j++)
         {
-            if( i<n-1 )
-            {
-                ae_v_move(&temp->ptr.p_double[1], 1, &fmatrix->ptr.pp_double[i][i], fmatrix->stride, ae_v_len(1,n-i));
-                generatereflection(temp, n-i, &tau, _state);
-                fmatrix->ptr.pp_double[i][i] = temp->ptr.p_double[1];
-                temp->ptr.p_double[1] = (double)(1);
-                for(j=i+1; j<=m; j++)
-                {
-                    v = ae_v_dotproduct(&fmatrix->ptr.pp_double[i][j], fmatrix->stride, &temp->ptr.p_double[1], 1, ae_v_len(i,n-1));
-                    v = tau*v;
-                    ae_v_subd(&fmatrix->ptr.pp_double[i][j], fmatrix->stride, &temp->ptr.p_double[1], 1, ae_v_len(i,n-1), v);
-                }
-            }
+            y->ptr.p_double[j] = s->globalprior.ptr.p_double[j];
         }
-        
-        /*
-         * Check condition number
-         */
-        *taskrcond = rmatrixtrrcondinf(fmatrix, m, ae_true, ae_false, _state);
-        
-        /*
-         * use either fast algorithm for non-degenerate cases
-         * or slow algorithm for degenerate cases
-         */
-        if( ae_fp_greater(*taskrcond,10000*n*ae_machineepsilon) )
+        return;
+    }
+    
+    /*
+     * Textbook Shepard's method
+     */
+    if( s->algotype==0 )
+    {
+        npoints = s->npoints;
+        ae_assert(npoints>0, "IDWTsCalcBuf: integrity check failed", _state);
+        eps = 1.0E-50;
+        ew = nx+ny;
+        p = s->shepardp;
+        for(j=0; j<=ny-1; j++)
+        {
+            y->ptr.p_double[j] = (double)(0);
+            buf->tsyw.ptr.p_double[j] = eps;
+        }
+        for(i=0; i<=npoints-1; i++)
         {
             
             /*
-             * solve triangular system R*x = FMatrix[0:M-1,M]
-             * using fast algorithm, then exit
+             * Compute squared distance
              */
-            x->ptr.p_double[m-1] = fmatrix->ptr.pp_double[m-1][m]/fmatrix->ptr.pp_double[m-1][m-1];
-            for(i=m-2; i>=0; i--)
+            v = (double)(0);
+            for(j=0; j<=nx-1; j++)
             {
-                v = ae_v_dotproduct(&fmatrix->ptr.pp_double[i][i+1], 1, &x->ptr.p_double[i+1], 1, ae_v_len(i+1,m-1));
-                x->ptr.p_double[i] = (fmatrix->ptr.pp_double[i][m]-v)/fmatrix->ptr.pp_double[i][i];
+                vv = s->shepardxy.ptr.p_double[i*ew+j]-x->ptr.p_double[j];
+                v = v+vv*vv;
+            }
+            
+            /*
+             * Compute weight (with small regularizing addition)
+             */
+            v = ae_pow(v, p*0.5, _state);
+            v = 1/(eps+v);
+            
+            /*
+             * Accumulate
+             */
+            for(j=0; j<=ny-1; j++)
+            {
+                y->ptr.p_double[j] = y->ptr.p_double[j]+v*s->shepardxy.ptr.p_double[i*ew+nx+j];
+                buf->tsyw.ptr.p_double[j] = buf->tsyw.ptr.p_double[j]+v;
+            }
+        }
+        for(j=0; j<=ny-1; j++)
+        {
+            y->ptr.p_double[j] = y->ptr.p_double[j]/buf->tsyw.ptr.p_double[j]+s->globalprior.ptr.p_double[j];
+        }
+        return;
+    }
+    
+    /*
+     * Textbook modified Shepard's method
+     */
+    if( s->algotype==1 )
+    {
+        eps = 1.0E-50;
+        r = s->r0;
+        for(j=0; j<=ny-1; j++)
+        {
+            y->ptr.p_double[j] = (double)(0);
+            buf->tsyw.ptr.p_double[j] = eps;
+        }
+        k = kdtreetsqueryrnn(&s->tree, &buf->requestbuffer, x, r, ae_true, _state);
+        kdtreetsqueryresultsxy(&s->tree, &buf->requestbuffer, &buf->tsxy, _state);
+        kdtreetsqueryresultsdistances(&s->tree, &buf->requestbuffer, &buf->tsdist, _state);
+        for(i=0; i<=k-1; i++)
+        {
+            v = buf->tsdist.ptr.p_double[i];
+            v = (r-v)/(r*v+eps);
+            v = v*v;
+            for(j=0; j<=ny-1; j++)
+            {
+                y->ptr.p_double[j] = y->ptr.p_double[j]+v*buf->tsxy.ptr.pp_double[i][nx+j];
+                buf->tsyw.ptr.p_double[j] = buf->tsyw.ptr.p_double[j]+v;
+            }
+        }
+        for(j=0; j<=ny-1; j++)
+        {
+            y->ptr.p_double[j] = y->ptr.p_double[j]/buf->tsyw.ptr.p_double[j]+s->globalprior.ptr.p_double[j];
+        }
+        return;
+    }
+    
+    /*
+     * MSTAB
+     */
+    if( s->algotype==2 )
+    {
+        ae_assert(ae_fp_eq(idw_w0,(double)(1)), "IDWTsCalcBuf: unexpected W0, integrity check failed", _state);
+        invrdecay = 1/s->rdecay;
+        invr = 1/s->r0;
+        lambdadecay = s->lambdadecay;
+        fastcalcpossible = (ny==1&&s->nlayers>=3)&&ae_fp_eq(lambdadecay,(double)(1));
+        if( fastcalcpossible )
+        {
+            
+            /*
+             * Important special case, NY=1, no lambda-decay,
+             * we can perform optimized fast evaluation
+             */
+            wf0 = (double)(0);
+            ws0 = idw_w0;
+            wf1 = (double)(0);
+            ws1 = idw_w0;
+            for(j=0; j<=s->nlayers-1; j++)
+            {
+                buf->tsyw.ptr.p_double[j] = (double)(0);
+                buf->tsw.ptr.p_double[j] = idw_w0;
             }
         }
         else
         {
             
             /*
-             * use more general algorithm
+             * Setup variables for generic evaluation path
              */
-            ae_vector_set_length(&b, m, _state);
-            for(i=0; i<=m-1; i++)
+            for(j=0; j<=ny*s->nlayers-1; j++)
             {
-                for(j=0; j<=i-1; j++)
-                {
-                    fmatrix->ptr.pp_double[i][j] = 0.0;
-                }
-                b.ptr.p_double[i] = fmatrix->ptr.pp_double[i][m];
+                buf->tsyw.ptr.p_double[j] = (double)(0);
             }
-            rmatrixsolvels(fmatrix, m, m, &b, 10000*ae_machineepsilon, info, &srep, x, _state);
+            for(j=0; j<=s->nlayers-1; j++)
+            {
+                buf->tsw.ptr.p_double[j] = idw_w0;
+            }
+        }
+        k = kdtreetsqueryrnnu(&s->tree, &buf->requestbuffer, x, s->r0, ae_true, _state);
+        kdtreetsqueryresultsxy(&s->tree, &buf->requestbuffer, &buf->tsxy, _state);
+        kdtreetsqueryresultsdistances(&s->tree, &buf->requestbuffer, &buf->tsdist, _state);
+        for(i=0; i<=k-1; i++)
+        {
+            lambdacur = s->lambda0;
+            vv = buf->tsdist.ptr.p_double[i]*invr;
+            if( fastcalcpossible )
+            {
+                
+                /*
+                 * Important special case, fast evaluation possible
+                 */
+                v = vv*vv;
+                v = (1-v)*(1-v)/(v+lambdacur);
+                f = buf->tsxy.ptr.pp_double[i][nx+0];
+                wf0 = wf0+v*f;
+                ws0 = ws0+v;
+                vv = vv*invrdecay;
+                if( vv>=1.0 )
+                {
+                    continue;
+                }
+                v = vv*vv;
+                v = (1-v)*(1-v)/(v+lambdacur);
+                f = buf->tsxy.ptr.pp_double[i][nx+1];
+                wf1 = wf1+v*f;
+                ws1 = ws1+v;
+                vv = vv*invrdecay;
+                if( vv>=1.0 )
+                {
+                    continue;
+                }
+                for(layeridx=2; layeridx<=s->nlayers-1; layeridx++)
+                {
+                    if( layeridx==s->nlayers-1 )
+                    {
+                        lambdacur = s->lambdalast;
+                    }
+                    v = vv*vv;
+                    v = (1-v)*(1-v)/(v+lambdacur);
+                    f = buf->tsxy.ptr.pp_double[i][nx+layeridx];
+                    buf->tsyw.ptr.p_double[layeridx] = buf->tsyw.ptr.p_double[layeridx]+v*f;
+                    buf->tsw.ptr.p_double[layeridx] = buf->tsw.ptr.p_double[layeridx]+v;
+                    vv = vv*invrdecay;
+                    if( vv>=1.0 )
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                
+                /*
+                 * General case
+                 */
+                for(layeridx=0; layeridx<=s->nlayers-1; layeridx++)
+                {
+                    if( layeridx==s->nlayers-1 )
+                    {
+                        lambdacur = s->lambdalast;
+                    }
+                    if( vv>=1.0 )
+                    {
+                        break;
+                    }
+                    v = vv*vv;
+                    v = (1-v)*(1-v)/(v+lambdacur);
+                    for(j=0; j<=ny-1; j++)
+                    {
+                        f = buf->tsxy.ptr.pp_double[i][nx+layeridx*ny+j];
+                        buf->tsyw.ptr.p_double[layeridx*ny+j] = buf->tsyw.ptr.p_double[layeridx*ny+j]+v*f;
+                    }
+                    buf->tsw.ptr.p_double[layeridx] = buf->tsw.ptr.p_double[layeridx]+v;
+                    lambdacur = lambdacur*lambdadecay;
+                    vv = vv*invrdecay;
+                }
+            }
+        }
+        if( fastcalcpossible )
+        {
+            
+            /*
+             * Important special case, finalize evaluations
+             */
+            buf->tsyw.ptr.p_double[0] = wf0;
+            buf->tsw.ptr.p_double[0] = ws0;
+            buf->tsyw.ptr.p_double[1] = wf1;
+            buf->tsw.ptr.p_double[1] = ws1;
+        }
+        for(j=0; j<=ny-1; j++)
+        {
+            y->ptr.p_double[j] = s->globalprior.ptr.p_double[j];
+        }
+        for(layeridx=0; layeridx<=s->nlayers-1; layeridx++)
+        {
+            for(j=0; j<=ny-1; j++)
+            {
+                y->ptr.p_double[j] = y->ptr.p_double[j]+buf->tsyw.ptr.p_double[layeridx*ny+j]/buf->tsw.ptr.p_double[layeridx];
+            }
+        }
+        return;
+    }
+    
+    /*
+     *
+     */
+    ae_assert(ae_false, "IDWTsCalcBuf: unexpected AlgoType", _state);
+}
+
+
+/*************************************************************************
+This function fits IDW model to the dataset using current IDW construction
+algorithm. A model being built and fitting report are returned.
+
+INPUT PARAMETERS:
+    State   -   builder object
+
+OUTPUT PARAMETERS:
+    Model   -   an IDW model built with current algorithm
+    Rep     -   model fitting report, fields of this structure contain
+                information about average fitting errors.
+                
+NOTE: although IDW-MSTAB algorithm is an  interpolation  method,  i.e.  it
+      tries to fit the model exactly, it can  handle  datasets  with  non-
+      distinct points which can not be fit exactly; in such  cases  least-
+      squares fitting is performed.
+   
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwfit(idwbuilder* state,
+     idwmodel* model,
+     idwreport* rep,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t i0;
+    ae_int_t j;
+    ae_int_t k;
+    ae_int_t layeridx;
+    ae_int_t srcidx;
+    double v;
+    double vv;
+    ae_int_t npoints;
+    ae_int_t nx;
+    ae_int_t ny;
+    double rcur;
+    double lambdacur;
+    double rss;
+    double tss;
+
+    _idwmodel_clear(model);
+    _idwreport_clear(rep);
+
+    nx = state->nx;
+    ny = state->ny;
+    npoints = state->npoints;
+    
+    /*
+     * Clear report fields
+     */
+    rep->rmserror = (double)(0);
+    rep->avgerror = (double)(0);
+    rep->maxerror = (double)(0);
+    rep->r2 = 1.0;
+    
+    /*
+     * Quick exit for empty dataset
+     */
+    if( state->npoints==0 )
+    {
+        model->nx = nx;
+        model->ny = ny;
+        ae_vector_set_length(&model->globalprior, ny, _state);
+        for(i=0; i<=ny-1; i++)
+        {
+            model->globalprior.ptr.p_double[i] = (double)(0);
+        }
+        model->algotype = 0;
+        model->nlayers = 0;
+        model->r0 = (double)(1);
+        model->rdecay = 0.5;
+        model->lambda0 = (double)(0);
+        model->lambdalast = (double)(0);
+        model->lambdadecay = (double)(1);
+        model->shepardp = (double)(2);
+        model->npoints = 0;
+        idwcreatecalcbuffer(model, &model->buffer, _state);
+        return;
+    }
+    
+    /*
+     * Compute temporaries which will be required later:
+     * * global mean
+     */
+    ae_assert(state->npoints>0, "IDWFit: integrity check failed", _state);
+    rvectorsetlengthatleast(&state->tmpmean, ny, _state);
+    for(j=0; j<=ny-1; j++)
+    {
+        state->tmpmean.ptr.p_double[j] = (double)(0);
+    }
+    for(i=0; i<=npoints-1; i++)
+    {
+        for(j=0; j<=ny-1; j++)
+        {
+            state->tmpmean.ptr.p_double[j] = state->tmpmean.ptr.p_double[j]+state->xy.ptr.p_double[i*(nx+ny)+nx+j];
         }
     }
-    else
+    for(j=0; j<=ny-1; j++)
+    {
+        state->tmpmean.ptr.p_double[j] = state->tmpmean.ptr.p_double[j]/npoints;
+    }
+    
+    /*
+     * Compute global prior
+     *
+     * NOTE: for original Shepard's method it is always mean value
+     */
+    rvectorsetlengthatleast(&model->globalprior, ny, _state);
+    for(j=0; j<=ny-1; j++)
+    {
+        model->globalprior.ptr.p_double[j] = state->tmpmean.ptr.p_double[j];
+    }
+    if( state->algotype!=0 )
     {
         
         /*
-         * use more general algorithm
+         * Algorithm is set to one of the "advanced" versions with search
+         * radius which can handle non-mean prior term
          */
-        ae_vector_set_length(&b, n, _state);
-        for(i=0; i<=n-1; i++)
+        if( state->priortermtype==0 )
         {
-            b.ptr.p_double[i] = fmatrix->ptr.pp_double[i][m];
+            
+            /*
+             * User-specified prior
+             */
+            for(j=0; j<=ny-1; j++)
+            {
+                model->globalprior.ptr.p_double[j] = state->priortermval.ptr.p_double[j];
+            }
         }
-        rmatrixsolvels(fmatrix, n, m, &b, 10000*ae_machineepsilon, info, &srep, x, _state);
-        *taskrcond = srep.r2;
+        if( state->priortermtype==3 )
+        {
+            
+            /*
+             * Zero prior
+             */
+            for(j=0; j<=ny-1; j++)
+            {
+                model->globalprior.ptr.p_double[j] = (double)(0);
+            }
+        }
     }
-    ae_frame_leave(_state);
+    
+    /*
+     * Textbook Shepard
+     */
+    if( state->algotype==0 )
+    {
+        
+        /*
+         * Initialize model
+         */
+        model->algotype = 0;
+        model->nx = nx;
+        model->ny = ny;
+        model->nlayers = 1;
+        model->r0 = (double)(1);
+        model->rdecay = 0.5;
+        model->lambda0 = (double)(0);
+        model->lambdalast = (double)(0);
+        model->lambdadecay = (double)(1);
+        model->shepardp = state->shepardp;
+        
+        /*
+         * Copy dataset
+         */
+        rvectorsetlengthatleast(&model->shepardxy, npoints*(nx+ny), _state);
+        for(i=0; i<=npoints-1; i++)
+        {
+            for(j=0; j<=nx-1; j++)
+            {
+                model->shepardxy.ptr.p_double[i*(nx+ny)+j] = state->xy.ptr.p_double[i*(nx+ny)+j];
+            }
+            for(j=0; j<=ny-1; j++)
+            {
+                model->shepardxy.ptr.p_double[i*(nx+ny)+nx+j] = state->xy.ptr.p_double[i*(nx+ny)+nx+j]-model->globalprior.ptr.p_double[j];
+            }
+        }
+        model->npoints = npoints;
+        
+        /*
+         * Prepare internal buffer
+         * Evaluate report fields
+         */
+        idwcreatecalcbuffer(model, &model->buffer, _state);
+        idw_errormetricsviacalc(state, model, rep, _state);
+        return;
+    }
+    
+    /*
+     * Textbook modified Shepard's method
+     */
+    if( state->algotype==1 )
+    {
+        
+        /*
+         * Initialize model
+         */
+        model->algotype = 1;
+        model->nx = nx;
+        model->ny = ny;
+        model->nlayers = 1;
+        model->r0 = state->r0;
+        model->rdecay = (double)(1);
+        model->lambda0 = (double)(0);
+        model->lambdalast = (double)(0);
+        model->lambdadecay = (double)(1);
+        model->shepardp = (double)(0);
+        
+        /*
+         * Build kd-tree search structure
+         */
+        rmatrixsetlengthatleast(&state->tmpxy, npoints, nx+ny, _state);
+        for(i=0; i<=npoints-1; i++)
+        {
+            for(j=0; j<=nx-1; j++)
+            {
+                state->tmpxy.ptr.pp_double[i][j] = state->xy.ptr.p_double[i*(nx+ny)+j];
+            }
+            for(j=0; j<=ny-1; j++)
+            {
+                state->tmpxy.ptr.pp_double[i][nx+j] = state->xy.ptr.p_double[i*(nx+ny)+nx+j]-model->globalprior.ptr.p_double[j];
+            }
+        }
+        kdtreebuild(&state->tmpxy, npoints, nx, ny, 2, &model->tree, _state);
+        
+        /*
+         * Prepare internal buffer
+         * Evaluate report fields
+         */
+        idwcreatecalcbuffer(model, &model->buffer, _state);
+        idw_errormetricsviacalc(state, model, rep, _state);
+        return;
+    }
+    
+    /*
+     * MSTAB algorithm
+     */
+    if( state->algotype==2 )
+    {
+        ae_assert(state->nlayers>=1, "IDWFit: integrity check failed", _state);
+        
+        /*
+         * Initialize model
+         */
+        model->algotype = 2;
+        model->nx = nx;
+        model->ny = ny;
+        model->nlayers = state->nlayers;
+        model->r0 = state->r0;
+        model->rdecay = 0.5;
+        model->lambda0 = state->lambda0;
+        model->lambdadecay = 1.0;
+        model->lambdalast = idw_meps;
+        model->shepardp = (double)(0);
+        
+        /*
+         * Build kd-tree search structure,
+         * prepare input residuals for the first layer of the model
+         */
+        rmatrixsetlengthatleast(&state->tmpxy, npoints, nx, _state);
+        rmatrixsetlengthatleast(&state->tmplayers, npoints, nx+ny*(state->nlayers+1), _state);
+        ivectorsetlengthatleast(&state->tmptags, npoints, _state);
+        for(i=0; i<=npoints-1; i++)
+        {
+            for(j=0; j<=nx-1; j++)
+            {
+                v = state->xy.ptr.p_double[i*(nx+ny)+j];
+                state->tmpxy.ptr.pp_double[i][j] = v;
+                state->tmplayers.ptr.pp_double[i][j] = v;
+            }
+            state->tmptags.ptr.p_int[i] = i;
+            for(j=0; j<=ny-1; j++)
+            {
+                state->tmplayers.ptr.pp_double[i][nx+j] = state->xy.ptr.p_double[i*(nx+ny)+nx+j]-model->globalprior.ptr.p_double[j];
+            }
+        }
+        kdtreebuildtagged(&state->tmpxy, &state->tmptags, npoints, nx, 0, 2, &state->tmptree, _state);
+        
+        /*
+         * Iteratively build layer by layer
+         */
+        rvectorsetlengthatleast(&state->tmpx, nx, _state);
+        rvectorsetlengthatleast(&state->tmpwy, ny, _state);
+        rvectorsetlengthatleast(&state->tmpw, ny, _state);
+        for(layeridx=0; layeridx<=state->nlayers-1; layeridx++)
+        {
+            
+            /*
+             * Determine layer metrics
+             */
+            rcur = model->r0*ae_pow(model->rdecay, (double)(layeridx), _state);
+            lambdacur = model->lambda0*ae_pow(model->lambdadecay, (double)(layeridx), _state);
+            if( layeridx==state->nlayers-1 )
+            {
+                lambdacur = model->lambdalast;
+            }
+            
+            /*
+             * For each point compute residual from fitting with current layer
+             */
+            for(i=0; i<=npoints-1; i++)
+            {
+                for(j=0; j<=nx-1; j++)
+                {
+                    state->tmpx.ptr.p_double[j] = state->tmplayers.ptr.pp_double[i][j];
+                }
+                k = kdtreequeryrnn(&state->tmptree, &state->tmpx, rcur, ae_true, _state);
+                kdtreequeryresultstags(&state->tmptree, &state->tmptags, _state);
+                kdtreequeryresultsdistances(&state->tmptree, &state->tmpdist, _state);
+                for(j=0; j<=ny-1; j++)
+                {
+                    state->tmpwy.ptr.p_double[j] = (double)(0);
+                    state->tmpw.ptr.p_double[j] = idw_w0;
+                }
+                for(i0=0; i0<=k-1; i0++)
+                {
+                    vv = state->tmpdist.ptr.p_double[i0]/rcur;
+                    vv = vv*vv;
+                    v = (1-vv)*(1-vv)/(vv+lambdacur);
+                    srcidx = state->tmptags.ptr.p_int[i0];
+                    for(j=0; j<=ny-1; j++)
+                    {
+                        state->tmpwy.ptr.p_double[j] = state->tmpwy.ptr.p_double[j]+v*state->tmplayers.ptr.pp_double[srcidx][nx+layeridx*ny+j];
+                        state->tmpw.ptr.p_double[j] = state->tmpw.ptr.p_double[j]+v;
+                    }
+                }
+                for(j=0; j<=ny-1; j++)
+                {
+                    v = state->tmplayers.ptr.pp_double[i][nx+layeridx*ny+j];
+                    state->tmplayers.ptr.pp_double[i][nx+(layeridx+1)*ny+j] = v-state->tmpwy.ptr.p_double[j]/state->tmpw.ptr.p_double[j];
+                }
+            }
+        }
+        kdtreebuild(&state->tmplayers, npoints, nx, ny*state->nlayers, 2, &model->tree, _state);
+        
+        /*
+         * Evaluate report fields
+         */
+        rep->rmserror = (double)(0);
+        rep->avgerror = (double)(0);
+        rep->maxerror = (double)(0);
+        rss = (double)(0);
+        tss = (double)(0);
+        for(i=0; i<=npoints-1; i++)
+        {
+            for(j=0; j<=ny-1; j++)
+            {
+                v = ae_fabs(state->tmplayers.ptr.pp_double[i][nx+state->nlayers*ny+j], _state);
+                rep->rmserror = rep->rmserror+v*v;
+                rep->avgerror = rep->avgerror+v;
+                rep->maxerror = ae_maxreal(rep->maxerror, ae_fabs(v, _state), _state);
+                rss = rss+v*v;
+                tss = tss+ae_sqr(state->xy.ptr.p_double[i*(nx+ny)+nx+j]-state->tmpmean.ptr.p_double[j], _state);
+            }
+        }
+        rep->rmserror = ae_sqrt(rep->rmserror/(npoints*ny), _state);
+        rep->avgerror = rep->avgerror/(npoints*ny);
+        rep->r2 = 1.0-rss/coalesce(tss, 1.0, _state);
+        
+        /*
+         * Prepare internal buffer
+         */
+        idwcreatecalcbuffer(model, &model->buffer, _state);
+        return;
+    }
+    
+    /*
+     * Unknown algorithm
+     */
+    ae_assert(ae_false, "IDWFit: integrity check failed, unexpected algorithm", _state);
 }
 
 
-void _idwinterpolant_init(void* _p, ae_state *_state, ae_bool make_automatic)
+/*************************************************************************
+Serializer: allocation
+
+  -- ALGLIB --
+     Copyright 28.02.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwalloc(ae_serializer* s, idwmodel* model, ae_state *_state)
 {
-    idwinterpolant *p = (idwinterpolant*)_p;
+    ae_bool processed;
+
+
+    
+    /*
+     * Header
+     */
+    ae_serializer_alloc_entry(s);
+    
+    /*
+     * Algorithm type and fields which are set for all algorithms
+     */
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    allocrealarray(s, &model->globalprior, -1, _state);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    
+    /*
+     * Algorithm-specific fields
+     */
+    processed = ae_false;
+    if( model->algotype==0 )
+    {
+        ae_serializer_alloc_entry(s);
+        allocrealarray(s, &model->shepardxy, -1, _state);
+        processed = ae_true;
+    }
+    if( model->algotype>0 )
+    {
+        kdtreealloc(s, &model->tree, _state);
+        processed = ae_true;
+    }
+    ae_assert(processed, "IDW: integrity check failed during serialization", _state);
+}
+
+
+/*************************************************************************
+Serializer: serialization
+
+  -- ALGLIB --
+     Copyright 28.02.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwserialize(ae_serializer* s, idwmodel* model, ae_state *_state)
+{
+    ae_bool processed;
+
+
+    
+    /*
+     * Header
+     */
+    ae_serializer_serialize_int(s, getidwserializationcode(_state), _state);
+    
+    /*
+     * Algorithm type and fields which are set for all algorithms
+     */
+    ae_serializer_serialize_int(s, model->algotype, _state);
+    ae_serializer_serialize_int(s, model->nx, _state);
+    ae_serializer_serialize_int(s, model->ny, _state);
+    serializerealarray(s, &model->globalprior, -1, _state);
+    ae_serializer_serialize_int(s, model->nlayers, _state);
+    ae_serializer_serialize_double(s, model->r0, _state);
+    ae_serializer_serialize_double(s, model->rdecay, _state);
+    ae_serializer_serialize_double(s, model->lambda0, _state);
+    ae_serializer_serialize_double(s, model->lambdalast, _state);
+    ae_serializer_serialize_double(s, model->lambdadecay, _state);
+    ae_serializer_serialize_double(s, model->shepardp, _state);
+    
+    /*
+     * Algorithm-specific fields
+     */
+    processed = ae_false;
+    if( model->algotype==0 )
+    {
+        ae_serializer_serialize_int(s, model->npoints, _state);
+        serializerealarray(s, &model->shepardxy, -1, _state);
+        processed = ae_true;
+    }
+    if( model->algotype>0 )
+    {
+        kdtreeserialize(s, &model->tree, _state);
+        processed = ae_true;
+    }
+    ae_assert(processed, "IDW: integrity check failed during serialization", _state);
+}
+
+
+/*************************************************************************
+Serializer: unserialization
+
+  -- ALGLIB --
+     Copyright 28.02.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwunserialize(ae_serializer* s, idwmodel* model, ae_state *_state)
+{
+    ae_bool processed;
+    ae_int_t scode;
+
+    _idwmodel_clear(model);
+
+    
+    /*
+     * Header
+     */
+    ae_serializer_unserialize_int(s, &scode, _state);
+    ae_assert(scode==getidwserializationcode(_state), "IDWUnserialize: stream header corrupted", _state);
+    
+    /*
+     * Algorithm type and fields which are set for all algorithms
+     */
+    ae_serializer_unserialize_int(s, &model->algotype, _state);
+    ae_serializer_unserialize_int(s, &model->nx, _state);
+    ae_serializer_unserialize_int(s, &model->ny, _state);
+    unserializerealarray(s, &model->globalprior, _state);
+    ae_serializer_unserialize_int(s, &model->nlayers, _state);
+    ae_serializer_unserialize_double(s, &model->r0, _state);
+    ae_serializer_unserialize_double(s, &model->rdecay, _state);
+    ae_serializer_unserialize_double(s, &model->lambda0, _state);
+    ae_serializer_unserialize_double(s, &model->lambdalast, _state);
+    ae_serializer_unserialize_double(s, &model->lambdadecay, _state);
+    ae_serializer_unserialize_double(s, &model->shepardp, _state);
+    
+    /*
+     * Algorithm-specific fields
+     */
+    processed = ae_false;
+    if( model->algotype==0 )
+    {
+        ae_serializer_unserialize_int(s, &model->npoints, _state);
+        unserializerealarray(s, &model->shepardxy, _state);
+        processed = ae_true;
+    }
+    if( model->algotype>0 )
+    {
+        kdtreeunserialize(s, &model->tree, _state);
+        processed = ae_true;
+    }
+    ae_assert(processed, "IDW: integrity check failed during serialization", _state);
+    
+    /*
+     * Temporary buffers
+     */
+    idwcreatecalcbuffer(model, &model->buffer, _state);
+}
+
+
+/*************************************************************************
+This function evaluates error metrics for the model  using  IDWTsCalcBuf()
+to calculate model at each point.
+
+NOTE: modern IDW algorithms (MSTAB, MSMOOTH) can generate residuals during
+      model construction, so they do not need this function  in  order  to
+      evaluate error metrics.
+
+Following fields of Rep are filled:
+* rep.rmserror
+* rep.avgerror
+* rep.maxerror
+* rep.r2
+   
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+static void idw_errormetricsviacalc(idwbuilder* state,
+     idwmodel* model,
+     idwreport* rep,
+     ae_state *_state)
+{
+    ae_int_t npoints;
+    ae_int_t nx;
+    ae_int_t ny;
+    ae_int_t i;
+    ae_int_t j;
+    double v;
+    double vv;
+    double rss;
+    double tss;
+
+
+    npoints = state->npoints;
+    nx = state->nx;
+    ny = state->ny;
+    if( npoints==0 )
+    {
+        rep->rmserror = (double)(0);
+        rep->avgerror = (double)(0);
+        rep->maxerror = (double)(0);
+        rep->r2 = (double)(1);
+        return;
+    }
+    rep->rmserror = (double)(0);
+    rep->avgerror = (double)(0);
+    rep->maxerror = (double)(0);
+    rss = (double)(0);
+    tss = (double)(0);
+    for(i=0; i<=npoints-1; i++)
+    {
+        for(j=0; j<=nx-1; j++)
+        {
+            model->buffer.x.ptr.p_double[j] = state->xy.ptr.p_double[i*(nx+ny)+j];
+        }
+        idwtscalcbuf(model, &model->buffer, &model->buffer.x, &model->buffer.y, _state);
+        for(j=0; j<=ny-1; j++)
+        {
+            vv = state->xy.ptr.p_double[i*(nx+ny)+nx+j];
+            v = ae_fabs(vv-model->buffer.y.ptr.p_double[j], _state);
+            rep->rmserror = rep->rmserror+v*v;
+            rep->avgerror = rep->avgerror+v;
+            rep->maxerror = ae_maxreal(rep->maxerror, v, _state);
+            rss = rss+v*v;
+            tss = tss+ae_sqr(vv-state->tmpmean.ptr.p_double[j], _state);
+        }
+    }
+    rep->rmserror = ae_sqrt(rep->rmserror/(npoints*ny), _state);
+    rep->avgerror = rep->avgerror/(npoints*ny);
+    rep->r2 = 1.0-rss/coalesce(tss, 1.0, _state);
+}
+
+
+void _idwcalcbuffer_init(void* _p, ae_state *_state, ae_bool make_automatic)
+{
+    idwcalcbuffer *p = (idwcalcbuffer*)_p;
     ae_touch_ptr((void*)p);
+    ae_vector_init(&p->x, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->y, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->tsyw, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->tsw, 0, DT_REAL, _state, make_automatic);
+    ae_matrix_init(&p->tsxy, 0, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->tsdist, 0, DT_REAL, _state, make_automatic);
+    _kdtreerequestbuffer_init(&p->requestbuffer, _state, make_automatic);
+}
+
+
+void _idwcalcbuffer_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
+{
+    idwcalcbuffer *dst = (idwcalcbuffer*)_dst;
+    idwcalcbuffer *src = (idwcalcbuffer*)_src;
+    ae_vector_init_copy(&dst->x, &src->x, _state, make_automatic);
+    ae_vector_init_copy(&dst->y, &src->y, _state, make_automatic);
+    ae_vector_init_copy(&dst->tsyw, &src->tsyw, _state, make_automatic);
+    ae_vector_init_copy(&dst->tsw, &src->tsw, _state, make_automatic);
+    ae_matrix_init_copy(&dst->tsxy, &src->tsxy, _state, make_automatic);
+    ae_vector_init_copy(&dst->tsdist, &src->tsdist, _state, make_automatic);
+    _kdtreerequestbuffer_init_copy(&dst->requestbuffer, &src->requestbuffer, _state, make_automatic);
+}
+
+
+void _idwcalcbuffer_clear(void* _p)
+{
+    idwcalcbuffer *p = (idwcalcbuffer*)_p;
+    ae_touch_ptr((void*)p);
+    ae_vector_clear(&p->x);
+    ae_vector_clear(&p->y);
+    ae_vector_clear(&p->tsyw);
+    ae_vector_clear(&p->tsw);
+    ae_matrix_clear(&p->tsxy);
+    ae_vector_clear(&p->tsdist);
+    _kdtreerequestbuffer_clear(&p->requestbuffer);
+}
+
+
+void _idwcalcbuffer_destroy(void* _p)
+{
+    idwcalcbuffer *p = (idwcalcbuffer*)_p;
+    ae_touch_ptr((void*)p);
+    ae_vector_destroy(&p->x);
+    ae_vector_destroy(&p->y);
+    ae_vector_destroy(&p->tsyw);
+    ae_vector_destroy(&p->tsw);
+    ae_matrix_destroy(&p->tsxy);
+    ae_vector_destroy(&p->tsdist);
+    _kdtreerequestbuffer_destroy(&p->requestbuffer);
+}
+
+
+void _idwmodel_init(void* _p, ae_state *_state, ae_bool make_automatic)
+{
+    idwmodel *p = (idwmodel*)_p;
+    ae_touch_ptr((void*)p);
+    ae_vector_init(&p->globalprior, 0, DT_REAL, _state, make_automatic);
     _kdtree_init(&p->tree, _state, make_automatic);
-    ae_matrix_init(&p->q, 0, 0, DT_REAL, _state, make_automatic);
-    ae_vector_init(&p->xbuf, 0, DT_REAL, _state, make_automatic);
-    ae_vector_init(&p->tbuf, 0, DT_INT, _state, make_automatic);
-    ae_vector_init(&p->rbuf, 0, DT_REAL, _state, make_automatic);
-    ae_matrix_init(&p->xybuf, 0, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->shepardxy, 0, DT_REAL, _state, make_automatic);
+    _idwcalcbuffer_init(&p->buffer, _state, make_automatic);
 }
 
 
-void _idwinterpolant_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
+void _idwmodel_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
 {
-    idwinterpolant *dst = (idwinterpolant*)_dst;
-    idwinterpolant *src = (idwinterpolant*)_src;
-    dst->n = src->n;
+    idwmodel *dst = (idwmodel*)_dst;
+    idwmodel *src = (idwmodel*)_src;
     dst->nx = src->nx;
-    dst->d = src->d;
-    dst->r = src->r;
-    dst->nw = src->nw;
+    dst->ny = src->ny;
+    ae_vector_init_copy(&dst->globalprior, &src->globalprior, _state, make_automatic);
+    dst->algotype = src->algotype;
+    dst->nlayers = src->nlayers;
+    dst->r0 = src->r0;
+    dst->rdecay = src->rdecay;
+    dst->lambda0 = src->lambda0;
+    dst->lambdalast = src->lambdalast;
+    dst->lambdadecay = src->lambdadecay;
+    dst->shepardp = src->shepardp;
     _kdtree_init_copy(&dst->tree, &src->tree, _state, make_automatic);
-    dst->modeltype = src->modeltype;
-    ae_matrix_init_copy(&dst->q, &src->q, _state, make_automatic);
-    ae_vector_init_copy(&dst->xbuf, &src->xbuf, _state, make_automatic);
-    ae_vector_init_copy(&dst->tbuf, &src->tbuf, _state, make_automatic);
-    ae_vector_init_copy(&dst->rbuf, &src->rbuf, _state, make_automatic);
-    ae_matrix_init_copy(&dst->xybuf, &src->xybuf, _state, make_automatic);
-    dst->debugsolverfailures = src->debugsolverfailures;
-    dst->debugworstrcond = src->debugworstrcond;
-    dst->debugbestrcond = src->debugbestrcond;
+    dst->npoints = src->npoints;
+    ae_vector_init_copy(&dst->shepardxy, &src->shepardxy, _state, make_automatic);
+    _idwcalcbuffer_init_copy(&dst->buffer, &src->buffer, _state, make_automatic);
 }
 
 
-void _idwinterpolant_clear(void* _p)
+void _idwmodel_clear(void* _p)
 {
-    idwinterpolant *p = (idwinterpolant*)_p;
+    idwmodel *p = (idwmodel*)_p;
     ae_touch_ptr((void*)p);
+    ae_vector_clear(&p->globalprior);
     _kdtree_clear(&p->tree);
-    ae_matrix_clear(&p->q);
-    ae_vector_clear(&p->xbuf);
-    ae_vector_clear(&p->tbuf);
-    ae_vector_clear(&p->rbuf);
-    ae_matrix_clear(&p->xybuf);
+    ae_vector_clear(&p->shepardxy);
+    _idwcalcbuffer_clear(&p->buffer);
 }
 
 
-void _idwinterpolant_destroy(void* _p)
+void _idwmodel_destroy(void* _p)
 {
-    idwinterpolant *p = (idwinterpolant*)_p;
+    idwmodel *p = (idwmodel*)_p;
     ae_touch_ptr((void*)p);
+    ae_vector_destroy(&p->globalprior);
     _kdtree_destroy(&p->tree);
-    ae_matrix_destroy(&p->q);
-    ae_vector_destroy(&p->xbuf);
-    ae_vector_destroy(&p->tbuf);
-    ae_vector_destroy(&p->rbuf);
-    ae_matrix_destroy(&p->xybuf);
+    ae_vector_destroy(&p->shepardxy);
+    _idwcalcbuffer_destroy(&p->buffer);
+}
+
+
+void _idwbuilder_init(void* _p, ae_state *_state, ae_bool make_automatic)
+{
+    idwbuilder *p = (idwbuilder*)_p;
+    ae_touch_ptr((void*)p);
+    ae_vector_init(&p->priortermval, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->xy, 0, DT_REAL, _state, make_automatic);
+    ae_matrix_init(&p->tmpxy, 0, 0, DT_REAL, _state, make_automatic);
+    ae_matrix_init(&p->tmplayers, 0, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->tmptags, 0, DT_INT, _state, make_automatic);
+    ae_vector_init(&p->tmpdist, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->tmpx, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->tmpwy, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->tmpw, 0, DT_REAL, _state, make_automatic);
+    _kdtree_init(&p->tmptree, _state, make_automatic);
+    ae_vector_init(&p->tmpmean, 0, DT_REAL, _state, make_automatic);
+}
+
+
+void _idwbuilder_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
+{
+    idwbuilder *dst = (idwbuilder*)_dst;
+    idwbuilder *src = (idwbuilder*)_src;
+    dst->priortermtype = src->priortermtype;
+    ae_vector_init_copy(&dst->priortermval, &src->priortermval, _state, make_automatic);
+    dst->algotype = src->algotype;
+    dst->nlayers = src->nlayers;
+    dst->r0 = src->r0;
+    dst->rdecay = src->rdecay;
+    dst->lambda0 = src->lambda0;
+    dst->lambdalast = src->lambdalast;
+    dst->lambdadecay = src->lambdadecay;
+    dst->shepardp = src->shepardp;
+    ae_vector_init_copy(&dst->xy, &src->xy, _state, make_automatic);
+    dst->npoints = src->npoints;
+    dst->nx = src->nx;
+    dst->ny = src->ny;
+    ae_matrix_init_copy(&dst->tmpxy, &src->tmpxy, _state, make_automatic);
+    ae_matrix_init_copy(&dst->tmplayers, &src->tmplayers, _state, make_automatic);
+    ae_vector_init_copy(&dst->tmptags, &src->tmptags, _state, make_automatic);
+    ae_vector_init_copy(&dst->tmpdist, &src->tmpdist, _state, make_automatic);
+    ae_vector_init_copy(&dst->tmpx, &src->tmpx, _state, make_automatic);
+    ae_vector_init_copy(&dst->tmpwy, &src->tmpwy, _state, make_automatic);
+    ae_vector_init_copy(&dst->tmpw, &src->tmpw, _state, make_automatic);
+    _kdtree_init_copy(&dst->tmptree, &src->tmptree, _state, make_automatic);
+    ae_vector_init_copy(&dst->tmpmean, &src->tmpmean, _state, make_automatic);
+}
+
+
+void _idwbuilder_clear(void* _p)
+{
+    idwbuilder *p = (idwbuilder*)_p;
+    ae_touch_ptr((void*)p);
+    ae_vector_clear(&p->priortermval);
+    ae_vector_clear(&p->xy);
+    ae_matrix_clear(&p->tmpxy);
+    ae_matrix_clear(&p->tmplayers);
+    ae_vector_clear(&p->tmptags);
+    ae_vector_clear(&p->tmpdist);
+    ae_vector_clear(&p->tmpx);
+    ae_vector_clear(&p->tmpwy);
+    ae_vector_clear(&p->tmpw);
+    _kdtree_clear(&p->tmptree);
+    ae_vector_clear(&p->tmpmean);
+}
+
+
+void _idwbuilder_destroy(void* _p)
+{
+    idwbuilder *p = (idwbuilder*)_p;
+    ae_touch_ptr((void*)p);
+    ae_vector_destroy(&p->priortermval);
+    ae_vector_destroy(&p->xy);
+    ae_matrix_destroy(&p->tmpxy);
+    ae_matrix_destroy(&p->tmplayers);
+    ae_vector_destroy(&p->tmptags);
+    ae_vector_destroy(&p->tmpdist);
+    ae_vector_destroy(&p->tmpx);
+    ae_vector_destroy(&p->tmpwy);
+    ae_vector_destroy(&p->tmpw);
+    _kdtree_destroy(&p->tmptree);
+    ae_vector_destroy(&p->tmpmean);
+}
+
+
+void _idwreport_init(void* _p, ae_state *_state, ae_bool make_automatic)
+{
+    idwreport *p = (idwreport*)_p;
+    ae_touch_ptr((void*)p);
+}
+
+
+void _idwreport_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
+{
+    idwreport *dst = (idwreport*)_dst;
+    idwreport *src = (idwreport*)_src;
+    dst->rmserror = src->rmserror;
+    dst->avgerror = src->avgerror;
+    dst->maxerror = src->maxerror;
+    dst->r2 = src->r2;
+}
+
+
+void _idwreport_clear(void* _p)
+{
+    idwreport *p = (idwreport*)_p;
+    ae_touch_ptr((void*)p);
+}
+
+
+void _idwreport_destroy(void* _p)
+{
+    idwreport *p = (idwreport*)_p;
+    ae_touch_ptr((void*)p);
 }
 
 
@@ -19079,7 +20884,7 @@ original nonsmooth one, but much easier  to  approach.  We solve  it  with
 MinNLC solver provided by ALGLIB.
 
 
-NOTE: ON INSTABILITY OF SEQUENTIAL LINEAR PROGRAMMING APPROACJ
+NOTE: ON INSTABILITY OF SEQUENTIAL LINEARIZATION APPROACH
 
 ALGLIB  has  nonlinearly  constrained  solver which proved to be stable on
 such problems. However, some authors proposed to linearize constraints  in
@@ -19087,7 +20892,7 @@ the vicinity of current approximation (Ci,Ri) and to get next  approximate
 solution (Ci+1,Ri+1) as solution to linear programming problem. Obviously,
 LP problems are easier than nonlinearly constrained ones.
 
-Indeed,  SLP  approach  to   MC/MI/MZ   resulted   in  ~10-20x increase in
+Indeed,  such approach  to   MC/MI/MZ   resulted   in  ~10-20x increase in
 performance (when compared with NLC solver). However, it turned  out  that
 in some cases linearized model fails to predict correct direction for next
 step and tells us that we converged to solution even when we are still 2-4
@@ -19098,7 +20903,7 @@ linear model;  even  when  solved  exactly,  it  fails  to  handle  subtle
 nonlinearities which arise near the solution. We validated it by comparing
 results returned by ALGLIB linear solver with that of MATLAB.
 
-In our experiments with SLP solver:
+In our experiments with linearization:
 * MC failed most often, at both realistic and synthetic datasets
 * MI sometimes failed, but sometimes succeeded
 * MZ often  succeeded; our guess is that presence of two independent  sets
@@ -19107,8 +20912,8 @@ In our experiments with SLP solver:
   model fails to handle nonlinearities from Rlo, it uses  Rhi  as  a  hint
   (and vice versa).
   
-Because SLP approach failed to achieve stable results, we do  not  include
-it in ALGLIB.
+Because linearization approach failed to achieve stable results, we do not
+include it in ALGLIB.
 
                                     
   -- ALGLIB --
@@ -19164,15 +20969,17 @@ INPUT PARAMETERS:
                     Rhi and Rlo is minimized), denoted as MZ
     SolverType- solver to use:
                 * 0 use best solver available (1 in current version)
-                * 1 use nonlinearly constrained optimization approach, NLC
-                    (it is roughly 10-20 times slower than  SLP,  but much
-                    more stable)
-                * 2 use special fast IMPRECISE solver, sequential   linear
-                    programming approach; SLP is fast, but sometimes fails
-                    to converge with more than 3 digits of precision;  see
-                    comments below.
+                * 1 use nonlinearly constrained optimization approach, AUL
+                    (it is roughly 10-20 times  slower  than  SPC-LIN, but
+                    much more stable)
+                * 2 use special fast IMPRECISE solver, SPC-LIN  sequential
+                    linearization approach; SPC-LIN is fast, but sometimes
+                    fails to converge with more than 3 digits of precision;
+                    see comments below.
                     NOT RECOMMENDED UNLESS YOU REALLY NEED HIGH PERFORMANCE
                     AT THE COST OF SOME PRECISION.
+                * 3 use nonlinearly constrained optimization approach, SLP
+                    (most robust one, but somewhat slower than AUL)
                 Ignored for ProblemType=0.
     EpsX    -   stopping criteria for SLP and NLC optimizers:
                 * must be non-negative
@@ -19304,7 +21111,7 @@ void fitsphereinternal(/* Real    */ ae_matrix* xy,
     ae_assert(nx>0, "FitSphereX: NX<=0", _state);
     ae_assert(apservisfinitematrix(xy, npoints, nx, _state), "FitSphereX: XY contains infinite or NAN values", _state);
     ae_assert(problemtype>=0&&problemtype<=3, "FitSphereX: ProblemType is neither 0, 1, 2 or 3", _state);
-    ae_assert(solvertype>=0&&solvertype<=2, "FitSphereX: ProblemType is neither 1, 2 or 3", _state);
+    ae_assert(solvertype>=0&&solvertype<=3, "FitSphereX: ProblemType is neither 1, 2 or 3", _state);
     ae_assert(ae_isfinite(penalty, _state)&&ae_fp_greater_eq(penalty,(double)(0)), "FitSphereX: Penalty<0 or is not finite", _state);
     ae_assert(ae_isfinite(epsx, _state)&&ae_fp_greater_eq(epsx,(double)(0)), "FitSphereX: EpsX<0 or is not finite", _state);
     ae_assert(aulits>=0, "FitSphereX: AULIts<0", _state);
@@ -19511,9 +21318,9 @@ void fitsphereinternal(/* Real    */ ae_matrix* xy,
         
         /*
          * Solve with NLC solver; problem is treated as general nonlinearly constrained
-         * programming, with augmented Lagrangian solver being used.
+         * programming, with augmented Lagrangian solver or SLP being used.
          */
-        if( solvertype==1 )
+        if( solvertype==1||solvertype==3 )
         {
             minnlccreate(nx+2, &pcr, &nlcstate, _state);
             minnlcsetscale(&nlcstate, &scr, _state);
@@ -19522,7 +21329,14 @@ void fitsphereinternal(/* Real    */ ae_matrix* xy,
             minnlcsetcond(&nlcstate, epsx, maxits, _state);
             minnlcsetprecexactrobust(&nlcstate, 5, _state);
             minnlcsetstpmax(&nlcstate, 0.1, _state);
-            minnlcsetalgoaul(&nlcstate, penalty, aulits, _state);
+            if( solvertype==1 )
+            {
+                minnlcsetalgoaul(&nlcstate, penalty, aulits, _state);
+            }
+            else
+            {
+                minnlcsetalgoslp(&nlcstate, _state);
+            }
             minnlcrestartfrom(&nlcstate, &pcr, _state);
             while(minnlciteration(&nlcstate, _state))
             {
@@ -30648,7 +32462,11 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
-                  
+
+NOTE: for stability reasons the B parameter is restricted by [1/1000,1000]
+      range. It prevents  algorithm from making trial steps  deep into the
+      area of bad parameters.
+
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc4() function.
 
@@ -30769,6 +32587,10 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
+
+NOTE: for stability reasons the B parameter is restricted by [1/1000,1000]
+      range. It prevents  algorithm from making trial steps  deep into the
+      area of bad parameters.
 
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc4() function.
@@ -30894,6 +32716,10 @@ OUTPUT PARAMETERS:
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
 
+NOTE: for better stability B  parameter is restricted by [+-1/1000,+-1000]
+      range, and G is restricted by [1/10,10] range. It prevents algorithm
+      from making trial steps deep into the area of bad parameters.
+
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc5() function.
 
@@ -31018,6 +32844,10 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
+
+NOTE: for better stability B  parameter is restricted by [+-1/1000,+-1000]
+      range, and G is restricted by [1/10,10] range. It prevents algorithm
+      from making trial steps deep into the area of bad parameters.
 
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc5() function.
@@ -31158,6 +32988,10 @@ OUTPUT PARAMETERS:
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
                 
+NOTE: for better stability B  parameter is restricted by [+-1/1000,+-1000]
+      range, and G is restricted by [1/10,10] range. It prevents algorithm
+      from making trial steps deep into the area of bad parameters.
+
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc5() function.
 
@@ -31501,6 +33335,24 @@ void logisticfit45x(/* Real    */ ae_vector* x,
             rep->iterationscount = rep->iterationscount+replm.iterationscount;
             
             /*
+             * Relax constraints more, run optimization one more time
+             */
+            bndl.ptr.p_double[1] = 0.01;
+            bndu.ptr.p_double[1] = 100.0;
+            minlmsetbc(&state, &bndl, &bndu, _state);
+            lsfit_logisticfitinternal(x, y, n, is4pl, lambdav, &state, &replm, &p1, &flast, _state);
+            rep->iterationscount = rep->iterationscount+replm.iterationscount;
+            
+            /*
+             * Relax constraints ever more, run optimization one more time
+             */
+            bndl.ptr.p_double[1] = 0.001;
+            bndu.ptr.p_double[1] = 1000.0;
+            minlmsetbc(&state, &bndl, &bndu, _state);
+            lsfit_logisticfitinternal(x, y, n, is4pl, lambdav, &state, &replm, &p1, &flast, _state);
+            rep->iterationscount = rep->iterationscount+replm.iterationscount;
+            
+            /*
              * Compare results with best value found so far.
              */
             if( ae_fp_less(flast,fbest) )
@@ -31622,6 +33474,24 @@ void logisticfit45x(/* Real    */ ae_vector* x,
             rep->iterationscount = rep->iterationscount+replm.iterationscount;
             
             /*
+             * Prepare stronger relaxation of constraints
+             */
+            bndl1.ptr.p_double[1] = 0.01;
+            bndu1.ptr.p_double[1] = 100.0;
+            minlmsetbc(&state, &bndl1, &bndu1, _state);
+            lsfit_logisticfitinternal(x, y, n, is4pl, lambdav, &state, &replm, &p1, &flast, _state);
+            rep->iterationscount = rep->iterationscount+replm.iterationscount;
+            
+            /*
+             * Prepare stronger relaxation of constraints
+             */
+            bndl1.ptr.p_double[1] = 0.001;
+            bndu1.ptr.p_double[1] = 1000.0;
+            minlmsetbc(&state, &bndl1, &bndu1, _state);
+            lsfit_logisticfitinternal(x, y, n, is4pl, lambdav, &state, &replm, &p1, &flast, _state);
+            rep->iterationscount = rep->iterationscount+replm.iterationscount;
+            
+            /*
              * Compare results with best value found so far.
              */
             if( ae_fp_less(flast,fbest) )
@@ -31638,7 +33508,7 @@ void logisticfit45x(/* Real    */ ae_vector* x,
         {
             
             /*
-             * Prepare relaxed constraints assuming that B is positive
+             * Prepare relaxed constraints assuming that B is negative
              */
             bndl2.ptr.p_double[1] = -10.0;
             bndu2.ptr.p_double[1] = -0.1;
@@ -31646,6 +33516,24 @@ void logisticfit45x(/* Real    */ ae_vector* x,
             bndu2.ptr.p_double[2] = scalex/ae_machineepsilon;
             bndl2.ptr.p_double[4] = 0.1;
             bndu2.ptr.p_double[4] = 10.0;
+            minlmsetbc(&state, &bndl2, &bndu2, _state);
+            lsfit_logisticfitinternal(x, y, n, is4pl, lambdav, &state, &replm, &p2, &flast, _state);
+            rep->iterationscount = rep->iterationscount+replm.iterationscount;
+            
+            /*
+             * Prepare stronger relaxation
+             */
+            bndl2.ptr.p_double[1] = -100.0;
+            bndu2.ptr.p_double[1] = -0.01;
+            minlmsetbc(&state, &bndl2, &bndu2, _state);
+            lsfit_logisticfitinternal(x, y, n, is4pl, lambdav, &state, &replm, &p2, &flast, _state);
+            rep->iterationscount = rep->iterationscount+replm.iterationscount;
+            
+            /*
+             * Prepare stronger relaxation
+             */
+            bndl2.ptr.p_double[1] = -1000.0;
+            bndu2.ptr.p_double[1] = -0.001;
             minlmsetbc(&state, &bndl2, &bndu2, _state);
             lsfit_logisticfitinternal(x, y, n, is4pl, lambdav, &state, &replm, &p2, &flast, _state);
             rep->iterationscount = rep->iterationscount+replm.iterationscount;
@@ -37508,12 +39396,22 @@ INPUT PARAMETERS:
     LambdaNS-   non-smoothness penalty coefficient. Exactly zero value means
                 that no penalty is applied, and even system matrix does not
                 contain penalty-related rows. Value of 1 means
-    Nonnegative-whether model is nonnegatively constrained or not. Depending
-                on presence of nonnegativity constraint different solvers are
-                used: layerwise LSQR for unconstrained model, single-step BLEIC
-                for constrained models.
-    MaxNNIts-   iteration count for BLEIC solver; ignored for Nonnegative=False.
     S       -   RBF model, initialized by RBFCreate() call.
+    progress10000- variable used for progress reports, it is regularly set
+                to the current progress multiplied by 10000, in order to
+                get value in [0,10000] range. The rationale for such scaling
+                is that it allows us to use integer type to store progress,
+                which has less potential for non-atomic corruption on unprotected
+                reads from another threads.
+                You can read this variable from some other thread to get
+                estimate of the current progress.
+                Initial value of this variable is ignored, it is written by
+                this function, but not read.
+    terminationrequest - variable used for termination requests; its initial
+                value must be False, and you can set it to True from some
+                other thread. This routine regularly checks this variable
+                and will terminate model construction shortly upon discovering
+                that termination was requested.
     
 OUTPUT PARAMETERS:
     S       -   updated model (for rep.terminationtype>0, unchanged otherwise)
@@ -37523,6 +39421,7 @@ OUTPUT PARAMETERS:
                          interpolation aborted
                   * -4 - nonconvergence of the internal SVD solver
                   *  1 - successful termination
+                  *  8 terminated by user via rbfrequesttermination()
                 Fields are used for debugging purposes:
                 * Rep.IterationsCount - iterations count of the LSQR solver
                 * Rep.NMV - number of matrix-vector products
@@ -37545,9 +39444,9 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
      ae_int_t nh,
      double rbase,
      double lambdans,
-     ae_bool nonnegative,
-     ae_int_t nnmaxits,
      rbfv2model* s,
+     ae_int_t* progress10000,
+     ae_bool* terminationrequest,
      rbfv2report* rep,
      ae_state *_state)
 {
@@ -37581,8 +39480,8 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
     ae_vector nncnt;
     ae_vector rowsizes;
     ae_vector diagata;
-    ae_vector bndl;
-    ae_vector bndu;
+    ae_vector prec;
+    ae_vector tmpx;
     ae_int_t i;
     ae_int_t j;
     ae_int_t k;
@@ -37594,6 +39493,10 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
     double criticalr;
     ae_int_t cnt;
     double avgdiagata;
+    ae_vector avgrowsize;
+    double sumrowsize;
+    double rprogress;
+    ae_int_t maxits;
     linlsqrstate linstate;
     linlsqrreport lsqrrep;
     sparsematrix sparseacrs;
@@ -37630,8 +39533,9 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
     memset(&nncnt, 0, sizeof(nncnt));
     memset(&rowsizes, 0, sizeof(rowsizes));
     memset(&diagata, 0, sizeof(diagata));
-    memset(&bndl, 0, sizeof(bndl));
-    memset(&bndu, 0, sizeof(bndu));
+    memset(&prec, 0, sizeof(prec));
+    memset(&tmpx, 0, sizeof(tmpx));
+    memset(&avgrowsize, 0, sizeof(avgrowsize));
     memset(&linstate, 0, sizeof(linstate));
     memset(&lsqrrep, 0, sizeof(lsqrrep));
     memset(&sparseacrs, 0, sizeof(sparseacrs));
@@ -37666,8 +39570,9 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
     ae_vector_init(&nncnt, 0, DT_INT, _state, ae_true);
     ae_vector_init(&rowsizes, 0, DT_INT, _state, ae_true);
     ae_vector_init(&diagata, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&bndl, 0, DT_REAL, _state, ae_true);
-    ae_vector_init(&bndu, 0, DT_REAL, _state, ae_true);
+    ae_vector_init(&prec, 0, DT_REAL, _state, ae_true);
+    ae_vector_init(&tmpx, 0, DT_REAL, _state, ae_true);
+    ae_vector_init(&avgrowsize, 0, DT_REAL, _state, ae_true);
     _linlsqrstate_init(&linstate, _state, ae_true);
     _linlsqrreport_init(&lsqrrep, _state, ae_true);
     _sparsematrix_init(&sparseacrs, _state, ae_true);
@@ -37681,7 +39586,6 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
 
     ae_assert(s->nx>0, "RBFV2BuildHierarchical: incorrect NX", _state);
     ae_assert(s->ny>0, "RBFV2BuildHierarchical: incorrect NY", _state);
-    ae_assert(!nonnegative||nnmaxits>0, "RBFV2BuildHierarchical: incorrect NNMaxIts", _state);
     ae_assert(ae_fp_greater_eq(lambdans,(double)(0)), "RBFV2BuildHierarchical: incorrect LambdaNS", _state);
     for(j=0; j<=s->nx-1; j++)
     {
@@ -37693,31 +39597,20 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
     ae_assert(bf==0||bf==1, "RBFV2BuildHierarchical: incorrect BF", _state);
     
     /*
+     * Clean up communication and report fields
+     */
+    *progress10000 = 0;
+    rep->maxerror = (double)(0);
+    rep->rmserror = (double)(0);
+    
+    /*
      * Quick exit when we have no points
      */
     if( n==0 )
     {
+        rbfv2_zerofill(s, nx, ny, bf, _state);
         rep->terminationtype = 1;
-        rep->maxerror = (double)(0);
-        rep->rmserror = (double)(0);
-        s->bf = bf;
-        s->nh = 0;
-        ae_vector_set_length(&s->ri, 0, _state);
-        ae_vector_set_length(&s->s, 0, _state);
-        ae_vector_set_length(&s->kdroots, 0, _state);
-        ae_vector_set_length(&s->kdnodes, 0, _state);
-        ae_vector_set_length(&s->kdsplits, 0, _state);
-        ae_vector_set_length(&s->kdboxmin, 0, _state);
-        ae_vector_set_length(&s->kdboxmax, 0, _state);
-        ae_vector_set_length(&s->cw, 0, _state);
-        ae_matrix_set_length(&s->v, ny, nx+1, _state);
-        for(i=0; i<=ny-1; i++)
-        {
-            for(j=0; j<=nx; j++)
-            {
-                s->v.ptr.pp_double[i][j] = (double)(0);
-            }
-        }
+        *progress10000 = 10000;
         ae_frame_leave(_state);
         return;
     }
@@ -37737,7 +39630,9 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
     }
     if( !rbfv2_rbfv2buildlinearmodel(x, &residualy, n, nx, ny, aterm, &v, _state) )
     {
+        rbfv2_zerofill(s, nx, ny, bf, _state);
         rep->terminationtype = -5;
+        *progress10000 = 10000;
         ae_frame_leave(_state);
         return;
     }
@@ -37749,17 +39644,7 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
     if( nh==0 )
     {
         rep->terminationtype = 1;
-        s->bf = bf;
-        s->nh = 0;
-        ae_vector_set_length(&s->ri, 0, _state);
-        ae_vector_set_length(&s->s, 0, _state);
-        ae_vector_set_length(&s->kdroots, 0, _state);
-        ae_vector_set_length(&s->kdnodes, 0, _state);
-        ae_vector_set_length(&s->kdsplits, 0, _state);
-        ae_vector_set_length(&s->kdboxmin, 0, _state);
-        ae_vector_set_length(&s->kdboxmax, 0, _state);
-        ae_vector_set_length(&s->cw, 0, _state);
-        ae_matrix_set_length(&s->v, ny, nx+1, _state);
+        rbfv2_zerofill(s, nx, ny, bf, _state);
         for(i=0; i<=ny-1; i++)
         {
             for(j=0; j<=nx; j++)
@@ -37778,6 +39663,7 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
             }
         }
         rep->rmserror = ae_sqrt(rep->rmserror/(n*ny), _state);
+        *progress10000 = 10000;
         ae_frame_leave(_state);
         return;
     }
@@ -37967,113 +39853,213 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
     }
     
     /*
-     * Depending on presence of nonnegativity constraint, use different solvers
+     * Calculate average row sizes for each layer; these values are used
+     * for smooth progress reporting (it adds some overhead, but in most
+     * cases - insignificant one).
      */
-    if( !nonnegative )
+    rvectorsetlengthatleast(&avgrowsize, nh, _state);
+    sumrowsize = (double)(0);
+    for(levelidx=0; levelidx<=nh-1; levelidx++)
+    {
+        cnt = 0;
+        for(i=0; i<=n-1; i++)
+        {
+            for(j=0; j<=nx-1; j++)
+            {
+                x0.ptr.p_double[j] = curxy.ptr.pp_double[i][j];
+            }
+            cnt = cnt+rbfv2_designmatrixrowsize(&kdnodes, &kdsplits, &cw, &ri, &kdroots, &kdboxmin, &kdboxmax, nx, ny, nh, levelidx, rbfv2nearradius(bf, _state), &x0, &calcbuf, _state);
+        }
+        avgrowsize.ptr.p_double[levelidx] = coalesce((double)(cnt), (double)(1), _state)/coalesce((double)(n), (double)(1), _state);
+        sumrowsize = sumrowsize+avgrowsize.ptr.p_double[levelidx];
+    }
+    
+    /*
+     * Build unconstrained model with LSQR solver, applied layer by layer
+     */
+    for(levelidx=0; levelidx<=nh-1; levelidx++)
     {
         
         /*
-         * Build unconstrained model with LSQR solver, applied layer by layer
+         * Generate A - matrix of basis functions (near radius is used)
+         *
+         * NOTE: AvgDiagATA is average value of diagonal element of A^T*A.
+         *       It is used to calculate value of Tikhonov regularization
+         *       coefficient.
          */
-        for(levelidx=0; levelidx<=nh-1; levelidx++)
+        nbasis = (cwrange.ptr.p_int[levelidx+1]-cwrange.ptr.p_int[levelidx])/(nx+ny);
+        ae_assert(cwrange.ptr.p_int[levelidx+1]-cwrange.ptr.p_int[levelidx]==nbasis*(nx+ny), "Assertion failed", _state);
+        for(i=0; i<=n-1; i++)
+        {
+            for(j=0; j<=nx-1; j++)
+            {
+                x0.ptr.p_double[j] = curxy.ptr.pp_double[i][j];
+            }
+            cnt = rbfv2_designmatrixrowsize(&kdnodes, &kdsplits, &cw, &ri, &kdroots, &kdboxmin, &kdboxmax, nx, ny, nh, levelidx, rbfv2nearradius(bf, _state), &x0, &calcbuf, _state);
+            nncnt.ptr.p_int[i] = cnt;
+            for(j=0; j<=rowsperpoint-1; j++)
+            {
+                rowsizes.ptr.p_int[i*rowsperpoint+j] = cnt;
+            }
+        }
+        ivectorsetlengthatleast(&rowindexes, nbasis, _state);
+        rvectorsetlengthatleast(&rowvals, nbasis*rowsperpoint, _state);
+        rvectorsetlengthatleast(&diagata, nbasis, _state);
+        sparsecreatecrsbuf(n*rowsperpoint, nbasis, &rowsizes, &sparseacrs, _state);
+        avgdiagata = 0.0;
+        for(j=0; j<=nbasis-1; j++)
+        {
+            diagata.ptr.p_double[j] = (double)(0);
+        }
+        for(i=0; i<=n-1; i++)
         {
             
             /*
-             * Generate A - matrix of basis functions (near radius is used)
-             *
-             * NOTE: AvgDiagATA is average value of diagonal element of A^T*A.
-             *       It is used to calculate value of Tikhonov regularization
-             *       coefficient.
+             * Fill design matrix row, diagonal of A^T*A
              */
-            nbasis = (cwrange.ptr.p_int[levelidx+1]-cwrange.ptr.p_int[levelidx])/(nx+ny);
-            ae_assert(cwrange.ptr.p_int[levelidx+1]-cwrange.ptr.p_int[levelidx]==nbasis*(nx+ny), "Assertion failed", _state);
-            for(i=0; i<=n-1; i++)
+            for(j=0; j<=nx-1; j++)
             {
-                for(j=0; j<=nx-1; j++)
-                {
-                    x0.ptr.p_double[j] = curxy.ptr.pp_double[i][j];
-                }
-                cnt = rbfv2_designmatrixrowsize(&kdnodes, &kdsplits, &cw, &ri, &kdroots, &kdboxmin, &kdboxmax, nx, ny, nh, levelidx, rbfv2nearradius(bf, _state), &x0, &calcbuf, _state);
-                nncnt.ptr.p_int[i] = cnt;
-                for(j=0; j<=rowsperpoint-1; j++)
-                {
-                    rowsizes.ptr.p_int[i*rowsperpoint+j] = cnt;
-                }
+                x0.ptr.p_double[j] = curxy.ptr.pp_double[i][j];
             }
-            ivectorsetlengthatleast(&rowindexes, nbasis, _state);
-            rvectorsetlengthatleast(&rowvals, nbasis*rowsperpoint, _state);
-            sparsecreatecrsbuf(n*rowsperpoint, nbasis, &rowsizes, &sparseacrs, _state);
-            avgdiagata = 0.0;
-            for(i=0; i<=n-1; i++)
+            rbfv2_designmatrixgeneraterow(&kdnodes, &kdsplits, &cw, &ri, &kdroots, &kdboxmin, &kdboxmax, &cwrange, nx, ny, nh, levelidx, bf, rbfv2nearradius(bf, _state), rowsperpoint, penalty, &x0, &calcbuf, &vr2, &voffs, &rowindexes, &rowvals, &cnt, _state);
+            ae_assert(cnt==nncnt.ptr.p_int[i], "RBFV2BuildHierarchical: integrity check failed", _state);
+            for(k=0; k<=rowsperpoint-1; k++)
             {
-                for(j=0; j<=nx-1; j++)
-                {
-                    x0.ptr.p_double[j] = curxy.ptr.pp_double[i][j];
-                }
-                rbfv2_designmatrixgeneraterow(&kdnodes, &kdsplits, &cw, &ri, &kdroots, &kdboxmin, &kdboxmax, &cwrange, nx, ny, nh, levelidx, bf, rbfv2nearradius(bf, _state), rowsperpoint, penalty, &x0, &calcbuf, &vr2, &voffs, &rowindexes, &rowvals, &cnt, _state);
-                ae_assert(cnt==nncnt.ptr.p_int[i], "RBFV2BuildHierarchical: integrity check failed", _state);
-                for(k=0; k<=rowsperpoint-1; k++)
-                {
-                    for(j=0; j<=cnt-1; j++)
-                    {
-                        val = rowvals.ptr.p_double[j*rowsperpoint+k];
-                        sparseset(&sparseacrs, i*rowsperpoint+k, rowindexes.ptr.p_int[j], val, _state);
-                        avgdiagata = avgdiagata+ae_sqr(val, _state);
-                    }
-                }
-            }
-            avgdiagata = avgdiagata/nbasis;
-            
-            /*
-             * solve
-             */
-            linlsqrcreate(n*rowsperpoint, nbasis, &linstate, _state);
-            linlsqrsetcond(&linstate, 0.0, 0.0, coalescei(s->maxits, rbfv2_defaultmaxits, _state), _state);
-            linlsqrsetlambdai(&linstate, ae_sqrt(s->lambdareg*avgdiagata, _state), _state);
-            for(j=0; j<=ny-1; j++)
-            {
-                for(i=0; i<=n*rowsperpoint-1; i++)
-                {
-                    denseb1.ptr.p_double[i] = rhs.ptr.pp_double[i][j];
-                }
-                linlsqrsolvesparse(&linstate, &sparseacrs, &denseb1, _state);
-                linlsqrresults(&linstate, &densew1, &lsqrrep, _state);
-                ae_assert(lsqrrep.terminationtype>0, "RBFV2BuildHierarchical: integrity check failed", _state);
-                for(i=0; i<=nbasis-1; i++)
-                {
-                    offsi = cwrange.ptr.p_int[levelidx]+(nx+ny)*i;
-                    cw.ptr.p_double[offsi+nx+j] = densew1.ptr.p_double[i];
-                }
-            }
-            
-            /*
-             * Update residuals (far radius is used)
-             */
-            for(i=0; i<=n-1; i++)
-            {
-                for(j=0; j<=nx-1; j++)
-                {
-                    x0.ptr.p_double[j] = curxy.ptr.pp_double[i][j];
-                }
-                rbfv2_designmatrixgeneraterow(&kdnodes, &kdsplits, &cw, &ri, &kdroots, &kdboxmin, &kdboxmax, &cwrange, nx, ny, nh, levelidx, bf, rbfv2farradius(bf, _state), rowsperpoint, penalty, &x0, &calcbuf, &vr2, &voffs, &rowindexes, &rowvals, &cnt, _state);
                 for(j=0; j<=cnt-1; j++)
                 {
-                    offsj = cwrange.ptr.p_int[levelidx]+(nx+ny)*rowindexes.ptr.p_int[j]+nx;
-                    for(k=0; k<=rowsperpoint-1; k++)
+                    val = rowvals.ptr.p_double[j*rowsperpoint+k];
+                    sparseset(&sparseacrs, i*rowsperpoint+k, rowindexes.ptr.p_int[j], val, _state);
+                    avgdiagata = avgdiagata+ae_sqr(val, _state);
+                    diagata.ptr.p_double[rowindexes.ptr.p_int[j]] = diagata.ptr.p_double[rowindexes.ptr.p_int[j]]+ae_sqr(val, _state);
+                }
+            }
+            
+            /*
+             * Handle possible termination requests
+             */
+            if( *terminationrequest )
+            {
+                
+                /*
+                 * Request for termination was submitted, terminate immediately
+                 */
+                rbfv2_zerofill(s, nx, ny, bf, _state);
+                rep->terminationtype = 8;
+                *progress10000 = 10000;
+                ae_frame_leave(_state);
+                return;
+            }
+        }
+        avgdiagata = avgdiagata/nbasis;
+        rvectorsetlengthatleast(&prec, nbasis, _state);
+        for(j=0; j<=nbasis-1; j++)
+        {
+            prec.ptr.p_double[j] = 1/coalesce(ae_sqrt(diagata.ptr.p_double[j], _state), (double)(1), _state);
+        }
+        
+        /*
+         * solve
+         */
+        maxits = coalescei(s->maxits, rbfv2_defaultmaxits, _state);
+        rvectorsetlengthatleast(&tmpx, nbasis, _state);
+        linlsqrcreate(n*rowsperpoint, nbasis, &linstate, _state);
+        linlsqrsetcond(&linstate, 0.0, 0.0, maxits, _state);
+        linlsqrsetlambdai(&linstate, ae_sqrt(s->lambdareg*avgdiagata, _state), _state);
+        for(j=0; j<=ny-1; j++)
+        {
+            for(i=0; i<=n*rowsperpoint-1; i++)
+            {
+                denseb1.ptr.p_double[i] = rhs.ptr.pp_double[i][j];
+            }
+            linlsqrsetb(&linstate, &denseb1, _state);
+            linlsqrrestart(&linstate, _state);
+            linlsqrsetxrep(&linstate, ae_true, _state);
+            while(linlsqriteration(&linstate, _state))
+            {
+                if( *terminationrequest )
+                {
+                    
+                    /*
+                     * Request for termination was submitted, terminate immediately
+                     */
+                    rbfv2_zerofill(s, nx, ny, bf, _state);
+                    rep->terminationtype = 8;
+                    *progress10000 = 10000;
+                    ae_frame_leave(_state);
+                    return;
+                }
+                if( linstate.needmv )
+                {
+                    for(i=0; i<=nbasis-1; i++)
                     {
-                        val = rowvals.ptr.p_double[j*rowsperpoint+k];
-                        for(k2=0; k2<=ny-1; k2++)
-                        {
-                            rhs.ptr.pp_double[i*rowsperpoint+k][k2] = rhs.ptr.pp_double[i*rowsperpoint+k][k2]-val*cw.ptr.p_double[offsj+k2];
-                        }
+                        tmpx.ptr.p_double[i] = prec.ptr.p_double[i]*linstate.x.ptr.p_double[i];
+                    }
+                    sparsemv(&sparseacrs, &tmpx, &linstate.mv, _state);
+                    continue;
+                }
+                if( linstate.needmtv )
+                {
+                    sparsemtv(&sparseacrs, &linstate.x, &linstate.mtv, _state);
+                    for(i=0; i<=nbasis-1; i++)
+                    {
+                        linstate.mtv.ptr.p_double[i] = prec.ptr.p_double[i]*linstate.mtv.ptr.p_double[i];
+                    }
+                    continue;
+                }
+                if( linstate.xupdated )
+                {
+                    rprogress = (double)(0);
+                    for(i=0; i<=levelidx-1; i++)
+                    {
+                        rprogress = rprogress+maxits*ny*avgrowsize.ptr.p_double[i];
+                    }
+                    rprogress = rprogress+(linlsqrpeekiterationscount(&linstate, _state)+j*maxits)*avgrowsize.ptr.p_double[levelidx];
+                    rprogress = rprogress/(sumrowsize*maxits*ny);
+                    rprogress = 10000*rprogress;
+                    rprogress = ae_maxreal(rprogress, (double)(0), _state);
+                    rprogress = ae_minreal(rprogress, (double)(10000), _state);
+                    ae_assert(*progress10000<=ae_round(rprogress, _state)+1, "HRBF: integrity check failed (progress indicator) even after +1 safeguard correction", _state);
+                    *progress10000 = ae_round(rprogress, _state);
+                    continue;
+                }
+                ae_assert(ae_false, "HRBF: unexpected request from LSQR solver", _state);
+            }
+            linlsqrresults(&linstate, &densew1, &lsqrrep, _state);
+            ae_assert(lsqrrep.terminationtype>0, "RBFV2BuildHierarchical: integrity check failed", _state);
+            for(i=0; i<=nbasis-1; i++)
+            {
+                densew1.ptr.p_double[i] = prec.ptr.p_double[i]*densew1.ptr.p_double[i];
+            }
+            for(i=0; i<=nbasis-1; i++)
+            {
+                offsi = cwrange.ptr.p_int[levelidx]+(nx+ny)*i;
+                cw.ptr.p_double[offsi+nx+j] = densew1.ptr.p_double[i];
+            }
+        }
+        
+        /*
+         * Update residuals (far radius is used)
+         */
+        for(i=0; i<=n-1; i++)
+        {
+            for(j=0; j<=nx-1; j++)
+            {
+                x0.ptr.p_double[j] = curxy.ptr.pp_double[i][j];
+            }
+            rbfv2_designmatrixgeneraterow(&kdnodes, &kdsplits, &cw, &ri, &kdroots, &kdboxmin, &kdboxmax, &cwrange, nx, ny, nh, levelidx, bf, rbfv2farradius(bf, _state), rowsperpoint, penalty, &x0, &calcbuf, &vr2, &voffs, &rowindexes, &rowvals, &cnt, _state);
+            for(j=0; j<=cnt-1; j++)
+            {
+                offsj = cwrange.ptr.p_int[levelidx]+(nx+ny)*rowindexes.ptr.p_int[j]+nx;
+                for(k=0; k<=rowsperpoint-1; k++)
+                {
+                    val = rowvals.ptr.p_double[j*rowsperpoint+k];
+                    for(k2=0; k2<=ny-1; k2++)
+                    {
+                        rhs.ptr.pp_double[i*rowsperpoint+k][k2] = rhs.ptr.pp_double[i*rowsperpoint+k][k2]-val*cw.ptr.p_double[offsj+k2];
                     }
                 }
             }
         }
-    }
-    else
-    {
-        ae_assert(ae_false, "RBFV2: unsupported mode", _state);
     }
     
     /*
@@ -38113,6 +40099,11 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
         }
     }
     rep->rmserror = ae_sqrt(rep->rmserror/(n*ny), _state);
+    
+    /*
+     * Update progress reports
+     */
+    *progress10000 = 10000;
     ae_frame_leave(_state);
 }
 
@@ -41115,6 +43106,43 @@ static void rbfv2_designmatrixgeneraterow(/* Integer */ ae_vector* kdnodes,
          * Update columns counter
          */
         *rowsize = *rowsize+cnt;
+    }
+}
+
+
+/*************************************************************************
+This function fills RBF model by zeros.
+
+  -- ALGLIB --
+     Copyright 17.11.2018 by Bochkanov Sergey
+*************************************************************************/
+static void rbfv2_zerofill(rbfv2model* s,
+     ae_int_t nx,
+     ae_int_t ny,
+     ae_int_t bf,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t j;
+
+
+    s->bf = bf;
+    s->nh = 0;
+    ae_vector_set_length(&s->ri, 0, _state);
+    ae_vector_set_length(&s->s, 0, _state);
+    ae_vector_set_length(&s->kdroots, 0, _state);
+    ae_vector_set_length(&s->kdnodes, 0, _state);
+    ae_vector_set_length(&s->kdsplits, 0, _state);
+    ae_vector_set_length(&s->kdboxmin, 0, _state);
+    ae_vector_set_length(&s->kdboxmax, 0, _state);
+    ae_vector_set_length(&s->cw, 0, _state);
+    ae_matrix_set_length(&s->v, ny, nx+1, _state);
+    for(i=0; i<=ny-1; i++)
+    {
+        for(j=0; j<=nx; j++)
+        {
+            s->v.ptr.pp_double[i][j] = (double)(0);
+        }
     }
 }
 
@@ -50923,6 +52951,12 @@ void rbfcreate(ae_int_t nx, ae_int_t ny, rbfmodel* s, ae_state *_state)
     {
         s->modelversion = 2;
     }
+    
+    /*
+     * Report fields
+     */
+    s->progress10000 = 0;
+    s->terminationrequest = ae_false;
 }
 
 
@@ -51696,6 +53730,8 @@ INPUT PARAMETERS:
                          features - NX=1 or NX>3; points with per-dimension
                          scales.
                   *  1 - successful termination
+                  *  8 - a termination request was submitted via
+                         rbfrequesttermination() function.
                 
                 Fields which are set only by modern RBF solvers (hierarchical
                 or nonnegative; older solvers like QNN and ML initialize these
@@ -51740,9 +53776,11 @@ void rbfbuildmodel(rbfmodel* s, rbfreport* rep, ae_state *_state)
 
     
     /*
-     * Clean report fields prior to processing
+     * Clean fields prior to processing
      */
     rbf_clearreportfields(rep, _state);
+    s->progress10000 = 0;
+    s->terminationrequest = ae_false;
     
     /*
      * Autoselect algorithm
@@ -51853,7 +53891,7 @@ void rbfbuildmodel(rbfmodel* s, rbfreport* rep, ae_state *_state)
         /*
          * Build model
          */
-        rbfv2buildhierarchical(&s->x, &s->y, s->n, &scalevec, s->aterm, s->nlayers, s->radvalue, s->lambdav, ae_false, 0, &s->model2, &rep2, _state);
+        rbfv2buildhierarchical(&s->x, &s->y, s->n, &scalevec, s->aterm, s->nlayers, s->radvalue, s->lambdav, &s->model2, &s->progress10000, &s->terminationrequest, &rep2, _state);
         s->modelversion = 2;
         
         /*
@@ -53169,6 +55207,65 @@ ae_int_t rbfgetmodelversion(rbfmodel* s, ae_state *_state)
 
 
 /*************************************************************************
+This function is used to peek into hierarchical RBF  construction  process
+from  some  other  thread  and  get current progress indicator. It returns
+value in [0,1].
+
+IMPORTANT: only HRBFs (hierarchical RBFs) support  peeking  into  progress
+           indicator. Legacy RBF-ML and RBF-QNN do  not  support  it.  You
+           will always get 0 value.
+
+INPUT PARAMETERS:
+    S           -   RBF model object
+
+RESULT:
+    progress value, in [0,1]
+
+  -- ALGLIB --
+     Copyright 17.11.2018 by Bochkanov Sergey
+*************************************************************************/
+double rbfpeekprogress(rbfmodel* s, ae_state *_state)
+{
+    double result;
+
+
+    result = (double)s->progress10000/(double)10000;
+    return result;
+}
+
+
+/*************************************************************************
+This function  is  used  to  submit  a  request  for  termination  of  the
+hierarchical RBF construction process from some other thread.  As  result,
+RBF construction is terminated smoothly (with proper deallocation  of  all
+necessary resources) and resultant model is filled by zeros.
+
+A rep.terminationtype=8 will be returned upon receiving such request.
+
+IMPORTANT: only  HRBFs  (hierarchical  RBFs) support termination requests.
+           Legacy RBF-ML and RBF-QNN do not  support  it.  An  attempt  to
+           terminate their construction will be ignored.
+
+IMPORTANT: termination request flag is cleared when the model construction
+           starts. Thus, any pre-construction termination requests will be
+           silently ignored - only ones submitted AFTER  construction  has
+           actually began will be handled.
+
+INPUT PARAMETERS:
+    S           -   RBF model object
+
+  -- ALGLIB --
+     Copyright 17.11.2018 by Bochkanov Sergey
+*************************************************************************/
+void rbfrequesttermination(rbfmodel* s, ae_state *_state)
+{
+
+
+    s->terminationrequest = ae_true;
+}
+
+
+/*************************************************************************
 Serializer: allocation
 
   -- ALGLIB --
@@ -53469,6 +55566,8 @@ void _rbfmodel_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_
     ae_matrix_init_copy(&dst->y, &src->y, _state, make_automatic);
     dst->hasscale = src->hasscale;
     ae_vector_init_copy(&dst->s, &src->s, _state, make_automatic);
+    dst->progress10000 = src->progress10000;
+    dst->terminationrequest = src->terminationrequest;
 }
 
 

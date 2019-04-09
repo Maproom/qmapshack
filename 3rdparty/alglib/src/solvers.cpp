@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -3482,6 +3482,8 @@ OUTPUT PARAMETERS:
                     *  7    rounding errors prevent further progress,
                             X contains best point found so far.
                             (sometimes returned on singular systems)
+                    *  8    user requested termination via calling
+                            linlsqrrequesttermination()
                 * Rep.IterationsCount contains iterations count
                 * NMV countains number of matrix-vector calculations
 
@@ -3541,6 +3543,90 @@ void linlsqrsetxrep(const linlsqrstate &state, const bool needxrep, const xparam
     if( _xparams.flags!=0x0 )
         ae_state_set_flags(&_alglib_env_state, _xparams.flags);
     alglib_impl::linlsqrsetxrep(const_cast<alglib_impl::linlsqrstate*>(state.c_ptr()), needxrep, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function is used to peek into LSQR solver and get  current  iteration
+counter. You can safely "peek" into the solver from another thread.
+
+INPUT PARAMETERS:
+    S           -   solver object
+
+RESULT:
+    iteration counter, in [0,INF)
+
+  -- ALGLIB --
+     Copyright 21.05.2018 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t linlsqrpeekiterationscount(const linlsqrstate &s, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::ae_int_t result = alglib_impl::linlsqrpeekiterationscount(const_cast<alglib_impl::linlsqrstate*>(s.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<ae_int_t*>(&result));
+}
+
+/*************************************************************************
+This subroutine submits request for termination of the running solver.  It
+can be called from some other thread which wants LSQR solver to  terminate
+(obviously, the  thread  running  LSQR  solver can not request termination
+because it is already busy working on LSQR).
+
+As result, solver  stops  at  point  which  was  "current  accepted"  when
+termination  request  was  submitted  and returns error code 8 (successful
+termination).  Such   termination   is  a smooth  process  which  properly
+deallocates all temporaries.
+
+INPUT PARAMETERS:
+    State   -   solver structure
+
+NOTE: calling this function on solver which is NOT running  will  have  no
+      effect.
+
+NOTE: multiple calls to this function are possible. First call is counted,
+      subsequent calls are silently ignored.
+
+NOTE: solver clears termination flag on its start, it means that  if  some
+      other thread will request termination too soon, its request will went
+      unnoticed.
+
+  -- ALGLIB --
+     Copyright 08.10.2014 by Bochkanov Sergey
+*************************************************************************/
+void linlsqrrequesttermination(const linlsqrstate &state, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::linlsqrrequesttermination(const_cast<alglib_impl::linlsqrstate*>(state.c_ptr()), &_alglib_env_state);
     alglib_impl::ae_state_clear(&_alglib_env_state);
     return;
 }
@@ -10190,6 +10276,7 @@ void linlsqrcreatebuf(ae_int_t m,
     state->lambdai = (double)(0);
     state->xrep = ae_false;
     state->running = ae_false;
+    state->repiterationscount = 0;
     
     /*
      * * allocate arrays
@@ -10390,13 +10477,14 @@ ae_bool linlsqriteration(linlsqrstate* state, ae_state *_state)
      * Routine body
      */
     ae_assert(state->b.cnt>0, "LinLSQRIteration: using non-allocated array B", _state);
+    summn = state->m+state->n;
     bnorm = ae_sqrt(state->bnorm2, _state);
+    state->userterminationneeded = ae_false;
     state->running = ae_true;
     state->repnmv = 0;
-    linlsqr_clearrfields(state, _state);
     state->repiterationscount = 0;
-    summn = state->m+state->n;
     state->r2 = state->bnorm2;
+    linlsqr_clearrfields(state, _state);
     
     /*
      *estimate for ANorm
@@ -10741,6 +10829,17 @@ lbl_17:
         result = ae_false;
         return result;
     }
+    if( state->userterminationneeded )
+    {
+        
+        /*
+         * User requested termination
+         */
+        state->running = ae_false;
+        state->repterminationtype = 8;
+        result = ae_false;
+        return result;
+    }
     
     /*
      * Update omega
@@ -10970,6 +11069,8 @@ OUTPUT PARAMETERS:
                     *  7    rounding errors prevent further progress,
                             X contains best point found so far.
                             (sometimes returned on singular systems)
+                    *  8    user requested termination via calling
+                            linlsqrrequesttermination()
                 * Rep.IterationsCount contains iterations count
                 * NMV countains number of matrix-vector calculations
                 
@@ -11034,6 +11135,65 @@ void linlsqrrestart(linlsqrstate* state, ae_state *_state)
     ae_vector_set_length(&state->rstate.ra, 0+1, _state);
     state->rstate.stage = -1;
     linlsqr_clearrfields(state, _state);
+    state->repiterationscount = 0;
+}
+
+
+/*************************************************************************
+This function is used to peek into LSQR solver and get  current  iteration
+counter. You can safely "peek" into the solver from another thread.
+
+INPUT PARAMETERS:
+    S           -   solver object
+
+RESULT:
+    iteration counter, in [0,INF)
+
+  -- ALGLIB --
+     Copyright 21.05.2018 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t linlsqrpeekiterationscount(linlsqrstate* s, ae_state *_state)
+{
+    ae_int_t result;
+
+
+    result = s->repiterationscount;
+    return result;
+}
+
+
+/*************************************************************************
+This subroutine submits request for termination of the running solver.  It
+can be called from some other thread which wants LSQR solver to  terminate
+(obviously, the  thread  running  LSQR  solver can not request termination
+because it is already busy working on LSQR).
+
+As result, solver  stops  at  point  which  was  "current  accepted"  when
+termination  request  was  submitted  and returns error code 8 (successful
+termination).  Such   termination   is  a smooth  process  which  properly
+deallocates all temporaries.
+
+INPUT PARAMETERS:
+    State   -   solver structure
+
+NOTE: calling this function on solver which is NOT running  will  have  no
+      effect.
+      
+NOTE: multiple calls to this function are possible. First call is counted,
+      subsequent calls are silently ignored.
+
+NOTE: solver clears termination flag on its start, it means that  if  some
+      other thread will request termination too soon, its request will went
+      unnoticed.
+
+  -- ALGLIB --
+     Copyright 08.10.2014 by Bochkanov Sergey
+*************************************************************************/
+void linlsqrrequesttermination(linlsqrstate* state, ae_state *_state)
+{
+
+
+    state->userterminationneeded = ae_true;
 }
 
 
@@ -11129,6 +11289,7 @@ void _linlsqrstate_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool m
     dst->repnmv = src->repnmv;
     dst->repterminationtype = src->repterminationtype;
     dst->running = src->running;
+    dst->userterminationneeded = src->userterminationneeded;
     ae_vector_init_copy(&dst->tmpd, &src->tmpd, _state, make_automatic);
     ae_vector_init_copy(&dst->tmpx, &src->tmpx, _state, make_automatic);
     _rcommstate_init_copy(&dst->rstate, &src->rstate, _state, make_automatic);

@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -23,8 +23,8 @@ http://www.fsf.org/licensing/licenses
 #include "alglibinternal.h"
 #include "alglibmisc.h"
 #include "linalg.h"
-#include "solvers.h"
 #include "optimization.h"
+#include "solvers.h"
 #include "specialfunctions.h"
 #include "integration.h"
 
@@ -35,25 +35,68 @@ http://www.fsf.org/licensing/licenses
 /////////////////////////////////////////////////////////////////////////
 namespace alglib_impl
 {
-#if defined(AE_COMPILE_IDWINT) || !defined(AE_PARTIAL_BUILD)
+#if defined(AE_COMPILE_IDW) || !defined(AE_PARTIAL_BUILD)
 typedef struct
 {
-    ae_int_t n;
+    ae_vector x;
+    ae_vector y;
+    ae_vector tsyw;
+    ae_vector tsw;
+    ae_matrix tsxy;
+    ae_vector tsdist;
+    kdtreerequestbuffer requestbuffer;
+} idwcalcbuffer;
+typedef struct
+{
     ae_int_t nx;
-    ae_int_t d;
-    double r;
-    ae_int_t nw;
+    ae_int_t ny;
+    ae_vector globalprior;
+    ae_int_t algotype;
+    ae_int_t nlayers;
+    double r0;
+    double rdecay;
+    double lambda0;
+    double lambdalast;
+    double lambdadecay;
+    double shepardp;
     kdtree tree;
-    ae_int_t modeltype;
-    ae_matrix q;
-    ae_vector xbuf;
-    ae_vector tbuf;
-    ae_vector rbuf;
-    ae_matrix xybuf;
-    ae_int_t debugsolverfailures;
-    double debugworstrcond;
-    double debugbestrcond;
-} idwinterpolant;
+    ae_int_t npoints;
+    ae_vector shepardxy;
+    idwcalcbuffer buffer;
+} idwmodel;
+typedef struct
+{
+    ae_int_t priortermtype;
+    ae_vector priortermval;
+    ae_int_t algotype;
+    ae_int_t nlayers;
+    double r0;
+    double rdecay;
+    double lambda0;
+    double lambdalast;
+    double lambdadecay;
+    double shepardp;
+    ae_vector xy;
+    ae_int_t npoints;
+    ae_int_t nx;
+    ae_int_t ny;
+    ae_matrix tmpxy;
+    ae_matrix tmplayers;
+    ae_vector tmptags;
+    ae_vector tmpdist;
+    ae_vector tmpx;
+    ae_vector tmpwy;
+    ae_vector tmpw;
+    kdtree tmptree;
+    ae_vector tmpmean;
+} idwbuilder;
+typedef struct
+{
+    double rmserror;
+    double avgerror;
+    double maxerror;
+    double r2;
+} idwreport;
 #endif
 #if defined(AE_COMPILE_RATINT) || !defined(AE_PARTIAL_BUILD)
 typedef struct
@@ -433,6 +476,8 @@ typedef struct
     ae_matrix y;
     ae_bool hasscale;
     ae_vector s;
+    ae_int_t progress10000;
+    ae_bool terminationrequest;
 } rbfmodel;
 typedef struct
 {
@@ -459,29 +504,118 @@ typedef struct
 namespace alglib
 {
 
-#if defined(AE_COMPILE_IDWINT) || !defined(AE_PARTIAL_BUILD)
+#if defined(AE_COMPILE_IDW) || !defined(AE_PARTIAL_BUILD)
 /*************************************************************************
-IDW interpolant.
+Buffer  object  which  is  used  to  perform  evaluation  requests  in  the
+multithreaded mode (multiple threads working with same IDW object).
+
+This object should be created with idwcreatecalcbuffer().
 *************************************************************************/
-class _idwinterpolant_owner
+class _idwcalcbuffer_owner
 {
 public:
-    _idwinterpolant_owner();
-    _idwinterpolant_owner(const _idwinterpolant_owner &rhs);
-    _idwinterpolant_owner& operator=(const _idwinterpolant_owner &rhs);
-    virtual ~_idwinterpolant_owner();
-    alglib_impl::idwinterpolant* c_ptr();
-    alglib_impl::idwinterpolant* c_ptr() const;
+    _idwcalcbuffer_owner();
+    _idwcalcbuffer_owner(const _idwcalcbuffer_owner &rhs);
+    _idwcalcbuffer_owner& operator=(const _idwcalcbuffer_owner &rhs);
+    virtual ~_idwcalcbuffer_owner();
+    alglib_impl::idwcalcbuffer* c_ptr();
+    alglib_impl::idwcalcbuffer* c_ptr() const;
 protected:
-    alglib_impl::idwinterpolant *p_struct;
+    alglib_impl::idwcalcbuffer *p_struct;
 };
-class idwinterpolant : public _idwinterpolant_owner
+class idwcalcbuffer : public _idwcalcbuffer_owner
 {
 public:
-    idwinterpolant();
-    idwinterpolant(const idwinterpolant &rhs);
-    idwinterpolant& operator=(const idwinterpolant &rhs);
-    virtual ~idwinterpolant();
+    idwcalcbuffer();
+    idwcalcbuffer(const idwcalcbuffer &rhs);
+    idwcalcbuffer& operator=(const idwcalcbuffer &rhs);
+    virtual ~idwcalcbuffer();
+
+};
+
+
+/*************************************************************************
+IDW (Inverse Distance Weighting) model object.
+*************************************************************************/
+class _idwmodel_owner
+{
+public:
+    _idwmodel_owner();
+    _idwmodel_owner(const _idwmodel_owner &rhs);
+    _idwmodel_owner& operator=(const _idwmodel_owner &rhs);
+    virtual ~_idwmodel_owner();
+    alglib_impl::idwmodel* c_ptr();
+    alglib_impl::idwmodel* c_ptr() const;
+protected:
+    alglib_impl::idwmodel *p_struct;
+};
+class idwmodel : public _idwmodel_owner
+{
+public:
+    idwmodel();
+    idwmodel(const idwmodel &rhs);
+    idwmodel& operator=(const idwmodel &rhs);
+    virtual ~idwmodel();
+
+};
+
+
+/*************************************************************************
+Builder object used to generate IDW (Inverse Distance Weighting) model.
+*************************************************************************/
+class _idwbuilder_owner
+{
+public:
+    _idwbuilder_owner();
+    _idwbuilder_owner(const _idwbuilder_owner &rhs);
+    _idwbuilder_owner& operator=(const _idwbuilder_owner &rhs);
+    virtual ~_idwbuilder_owner();
+    alglib_impl::idwbuilder* c_ptr();
+    alglib_impl::idwbuilder* c_ptr() const;
+protected:
+    alglib_impl::idwbuilder *p_struct;
+};
+class idwbuilder : public _idwbuilder_owner
+{
+public:
+    idwbuilder();
+    idwbuilder(const idwbuilder &rhs);
+    idwbuilder& operator=(const idwbuilder &rhs);
+    virtual ~idwbuilder();
+
+};
+
+
+/*************************************************************************
+IDW fitting report:
+    rmserror        RMS error
+    avgerror        average error
+    maxerror        maximum error
+    r2              coefficient of determination,  R-squared, 1-RSS/TSS
+*************************************************************************/
+class _idwreport_owner
+{
+public:
+    _idwreport_owner();
+    _idwreport_owner(const _idwreport_owner &rhs);
+    _idwreport_owner& operator=(const _idwreport_owner &rhs);
+    virtual ~_idwreport_owner();
+    alglib_impl::idwreport* c_ptr();
+    alglib_impl::idwreport* c_ptr() const;
+protected:
+    alglib_impl::idwreport *p_struct;
+};
+class idwreport : public _idwreport_owner
+{
+public:
+    idwreport();
+    idwreport(const idwreport &rhs);
+    idwreport& operator=(const idwreport &rhs);
+    virtual ~idwreport();
+    double &rmserror;
+    double &avgerror;
+    double &maxerror;
+    double &r2;
 
 };
 #endif
@@ -1055,176 +1189,524 @@ public:
 
 #endif
 
-#if defined(AE_COMPILE_IDWINT) || !defined(AE_PARTIAL_BUILD)
+#if defined(AE_COMPILE_IDW) || !defined(AE_PARTIAL_BUILD)
 /*************************************************************************
-IDW interpolation
+This function serializes data structure to string.
 
-INPUT PARAMETERS:
-    Z   -   IDW interpolant built with one of model building
-            subroutines.
-    X   -   array[0..NX-1], interpolation point
+Important properties of s_out:
+* it contains alphanumeric characters, dots, underscores, minus signs
+* these symbols are grouped into words, which are separated by spaces
+  and Windows-style (CR+LF) newlines
+* although  serializer  uses  spaces and CR+LF as separators, you can 
+  replace any separator character by arbitrary combination of spaces,
+  tabs, Windows or Unix newlines. It allows flexible reformatting  of
+  the  string  in  case you want to include it into text or XML file. 
+  But you should not insert separators into the middle of the "words"
+  nor you should change case of letters.
+* s_out can be freely moved between 32-bit and 64-bit systems, little
+  and big endian machines, and so on. You can serialize structure  on
+  32-bit machine and unserialize it on 64-bit one (or vice versa), or
+  serialize  it  on  SPARC  and  unserialize  on  x86.  You  can also 
+  serialize  it  in  C++ version of ALGLIB and unserialize in C# one, 
+  and vice versa.
+*************************************************************************/
+void idwserialize(idwmodel &obj, std::string &s_out);
 
-Result:
-    IDW interpolant Z(X)
+
+/*************************************************************************
+This function unserializes data structure from string.
+*************************************************************************/
+void idwunserialize(const std::string &s_in, idwmodel &obj);
+
+
+
+
+/*************************************************************************
+This function serializes data structure to C++ stream.
+
+Data stream generated by this function is same as  string  representation
+generated  by  string  version  of  serializer - alphanumeric characters,
+dots, underscores, minus signs, which are grouped into words separated by
+spaces and CR+LF.
+
+We recommend you to read comments on string version of serializer to find
+out more about serialization of AlGLIB objects.
+*************************************************************************/
+void idwserialize(idwmodel &obj, std::ostream &s_out);
+
+
+/*************************************************************************
+This function unserializes data structure from stream.
+*************************************************************************/
+void idwunserialize(const std::istream &s_in, idwmodel &obj);
+
+
+/*************************************************************************
+This function creates buffer  structure  which  can  be  used  to  perform
+parallel  IDW  model  evaluations  (with  one  IDW  model  instance  being
+used from multiple threads, as long as  different  threads  use  different
+instances of buffer).
+
+This buffer object can be used with  idwtscalcbuf()  function  (here  "ts"
+stands for "thread-safe", "buf" is a suffix which denotes  function  which
+reuses previously allocated output space).
+
+How to use it:
+* create IDW model structure or load it from file
+* call idwcreatecalcbuffer(), once per thread working with IDW model  (you
+  should call this function only AFTER model initialization, see below for
+  more information)
+* call idwtscalcbuf() from different threads,  with  each  thread  working
+  with its own copy of buffer object.
+
+INPUT PARAMETERS
+    S           -   IDW model
+
+OUTPUT PARAMETERS
+    Buf         -   external buffer.
+
+
+IMPORTANT: buffer object should be used only with  IDW model object  which
+           was used to initialize buffer. Any attempt to use buffer   with
+           different object is dangerous - you may  get  memory  violation
+           error because sizes of internal arrays do not fit to dimensions
+           of the IDW structure.
+
+IMPORTANT: you  should  call  this function only for model which was built
+           with model builder (or unserialized from file). Sizes  of  some
+           internal structures are determined only after model  is  built,
+           so buffer object created before model construction  stage  will
+           be useless (and any attempt to use it will result in exception).
 
   -- ALGLIB --
-     Copyright 02.03.2010 by Bochkanov Sergey
+     Copyright 22.10.2018 by Sergey Bochkanov
 *************************************************************************/
-double idwcalc(const idwinterpolant &z, const real_1d_array &x, const xparams _xparams = alglib::xdefault);
+void idwcreatecalcbuffer(const idwmodel &s, idwcalcbuffer &buf, const xparams _xparams = alglib::xdefault);
 
 
 /*************************************************************************
-IDW interpolant using modified Shepard method for uniform point
-distributions.
+This subroutine creates builder object used  to  generate IDW  model  from
+irregularly sampled (scattered) dataset.  Multidimensional  scalar/vector-
+-valued are supported.
+
+Builder object is used to fit model to data as follows:
+* builder object is created with idwbuildercreate() function
+* dataset is added with idwbuildersetpoints() function
+* one of the modern IDW algorithms is chosen with either:
+  * idwbuildersetalgomstab()            - Multilayer STABilized algorithm (interpolation)
+  Alternatively, one of the textbook algorithms can be chosen (not recommended):
+  * idwbuildersetalgotextbookshepard()  - textbook Shepard algorithm
+  * idwbuildersetalgotextbookmodshepard()-textbook modified Shepard algorithm
+* finally, model construction is performed with idwfit() function.
+
+  ! COMMERCIAL EDITION OF ALGLIB:
+  !
+  ! Commercial Edition of ALGLIB includes following important improvements
+  ! of this function:
+  ! * high-performance native backend with same C# interface (C# version)
+  ! * multithreading support (C++ and C# versions)
+  !
+  ! We recommend you to read 'Working with commercial version' section  of
+  ! ALGLIB Reference Manual in order to find out how to  use  performance-
+  ! related features provided by commercial edition of ALGLIB.
 
 INPUT PARAMETERS:
-    XY  -   X and Y values, array[0..N-1,0..NX].
-            First NX columns contain X-values, last column contain
-            Y-values.
-    N   -   number of nodes, N>0.
-    NX  -   space dimension, NX>=1.
-    D   -   nodal function type, either:
-            * 0     constant  model.  Just  for  demonstration only, worst
-                    model ever.
-            * 1     linear model, least squares fitting. Simpe  model  for
-                    datasets too small for quadratic models
-            * 2     quadratic  model,  least  squares  fitting. Best model
-                    available (if your dataset is large enough).
-            * -1    "fast"  linear  model,  use  with  caution!!!   It  is
-                    significantly  faster than linear/quadratic and better
-                    than constant model. But it is less robust (especially
-                    in the presence of noise).
-    NQ  -   number of points used to calculate  nodal  functions  (ignored
-            for constant models). NQ should be LARGER than:
-            * max(1.5*(1+NX),2^NX+1) for linear model,
-            * max(3/4*(NX+2)*(NX+1),2^NX+1) for quadratic model.
-            Values less than this threshold will be silently increased.
-    NW  -   number of points used to calculate weights and to interpolate.
-            Required: >=2^NX+1, values less than this  threshold  will  be
-            silently increased.
-            Recommended value: about 2*NQ
+    NX  -   dimensionality of the argument, NX>=1
+    NY  -   dimensionality of the function being modeled, NY>=1;
+            NY=1 corresponds to classic scalar function, NY>=1 corresponds
+            to vector-valued function.
 
 OUTPUT PARAMETERS:
-    Z   -   IDW interpolant.
-
-NOTES:
-  * best results are obtained with quadratic models, worst - with constant
-    models
-  * when N is large, NQ and NW must be significantly smaller than  N  both
-    to obtain optimal performance and to obtain optimal accuracy. In 2  or
-    3-dimensional tasks NQ=15 and NW=25 are good values to start with.
-  * NQ  and  NW  may  be  greater  than  N.  In  such  cases  they will be
-    automatically decreased.
-  * this subroutine is always succeeds (as long as correct parameters  are
-    passed).
-  * see  'Multivariate  Interpolation  of Large Sets of Scattered Data' by
-    Robert J. Renka for more information on this algorithm.
-  * this subroutine assumes that point distribution is uniform at the small
-    scales.  If  it  isn't  -  for  example,  points are concentrated along
-    "lines", but "lines" distribution is uniform at the larger scale - then
-    you should use IDWBuildModifiedShepardR()
-
+    State-  builder object
 
   -- ALGLIB PROJECT --
-     Copyright 02.03.2010 by Bochkanov Sergey
+     Copyright 22.10.2018 by Bochkanov Sergey
 *************************************************************************/
-void idwbuildmodifiedshepard(const real_2d_array &xy, const ae_int_t n, const ae_int_t nx, const ae_int_t d, const ae_int_t nq, const ae_int_t nw, idwinterpolant &z, const xparams _xparams = alglib::xdefault);
+void idwbuildercreate(const ae_int_t nx, const ae_int_t ny, idwbuilder &state, const xparams _xparams = alglib::xdefault);
 
 
 /*************************************************************************
-IDW interpolant using modified Shepard method for non-uniform datasets.
+This function changes number of layers used by IDW-MSTAB algorithm.
 
-This type of model uses  constant  nodal  functions and interpolates using
-all nodes which are closer than user-specified radius R. It  may  be  used
-when points distribution is non-uniform at the small scale, but it  is  at
-the distances as large as R.
+The more layers you have, the finer details can  be  reproduced  with  IDW
+model. The less layers you have, the less memory and CPU time is  consumed
+by the model.
+
+Memory consumption grows linearly with layers count,  running  time  grows
+sub-linearly.
+
+The default number of layers is 16, which allows you to reproduce  details
+at distance down to SRad/65536. You will rarely need to change it.
 
 INPUT PARAMETERS:
-    XY  -   X and Y values, array[0..N-1,0..NX].
-            First NX columns contain X-values, last column contain
-            Y-values.
-    N   -   number of nodes, N>0.
-    NX  -   space dimension, NX>=1.
-    R   -   radius, R>0
+    State   -   builder object
+    NLayers -   NLayers>=1, the number of layers used by the model.
 
-OUTPUT PARAMETERS:
-    Z   -   IDW interpolant.
-
-NOTES:
-* if there is less than IDWKMin points within  R-ball,  algorithm  selects
-  IDWKMin closest ones, so that continuity properties of  interpolant  are
-  preserved even far from points.
-
-  -- ALGLIB PROJECT --
-     Copyright 11.04.2010 by Bochkanov Sergey
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
 *************************************************************************/
-void idwbuildmodifiedshepardr(const real_2d_array &xy, const ae_int_t n, const ae_int_t nx, const double r, idwinterpolant &z, const xparams _xparams = alglib::xdefault);
+void idwbuildersetnlayers(const idwbuilder &state, const ae_int_t nlayers, const xparams _xparams = alglib::xdefault);
 
 
 /*************************************************************************
-IDW model for noisy data.
+This function adds dataset to the builder object.
 
-This subroutine may be used to handle noisy data, i.e. data with noise  in
-OUTPUT values.  It differs from IDWBuildModifiedShepard() in the following
-aspects:
-* nodal functions are not constrained to pass through  nodes:  Qi(xi)<>yi,
-  i.e. we have fitting  instead  of  interpolation.
-* weights which are used during least  squares fitting stage are all equal
-  to 1.0 (independently of distance)
-* "fast"-linear or constant nodal functions are not supported (either  not
-  robust enough or too rigid)
-
-This problem require far more complex tuning than interpolation  problems.
-Below you can find some recommendations regarding this problem:
-* focus on tuning NQ; it controls noise reduction. As for NW, you can just
-  make it equal to 2*NQ.
-* you can use cross-validation to determine optimal NQ.
-* optimal NQ is a result of complex tradeoff  between  noise  level  (more
-  noise = larger NQ required) and underlying  function  complexity  (given
-  fixed N, larger NQ means smoothing of compex features in the data).  For
-  example, NQ=N will reduce noise to the minimum level possible,  but  you
-  will end up with just constant/linear/quadratic (depending on  D)  least
-  squares model for the whole dataset.
+This function overrides results of the previous calls, i.e. multiple calls
+of this function will result in only the last set being added.
 
 INPUT PARAMETERS:
-    XY  -   X and Y values, array[0..N-1,0..NX].
-            First NX columns contain X-values, last column contain
-            Y-values.
-    N   -   number of nodes, N>0.
-    NX  -   space dimension, NX>=1.
-    D   -   nodal function degree, either:
-            * 1     linear model, least squares fitting. Simpe  model  for
-                    datasets too small for quadratic models (or  for  very
-                    noisy problems).
-            * 2     quadratic  model,  least  squares  fitting. Best model
-                    available (if your dataset is large enough).
-    NQ  -   number of points used to calculate nodal functions.  NQ should
-            be  significantly   larger   than  1.5  times  the  number  of
-            coefficients in a nodal function to overcome effects of noise:
-            * larger than 1.5*(1+NX) for linear model,
-            * larger than 3/4*(NX+2)*(NX+1) for quadratic model.
-            Values less than this threshold will be silently increased.
-    NW  -   number of points used to calculate weights and to interpolate.
-            Required: >=2^NX+1, values less than this  threshold  will  be
-            silently increased.
-            Recommended value: about 2*NQ or larger
+    State   -   builder object
+    XY      -   points, array[N,NX+NY]. One row  corresponds to  one point
+                in the dataset. First NX elements  are  coordinates,  next
+                NY elements are function values. Array may  be larger than
+                specified, in  this  case  only leading [N,NX+NY] elements
+                will be used.
+    N       -   number of points in the dataset, N>=0.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetpoints(const idwbuilder &state, const real_2d_array &xy, const ae_int_t n, const xparams _xparams = alglib::xdefault);
+void idwbuildersetpoints(const idwbuilder &state, const real_2d_array &xy, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function sets IDW model  construction  algorithm  to  the  Multilayer
+Stabilized IDW method (IDW-MSTAB), a  latest  incarnation  of  the inverse
+distance weighting interpolation which fixes shortcomings of  the original
+and modified Shepard's variants.
+
+The distinctive features of IDW-MSTAB are:
+1) exact interpolation  is  pursued  (as  opposed  to  fitting  and  noise
+   suppression)
+2) improved robustness when compared with that of other algorithms:
+   * MSTAB shows almost no strange  fitting  artifacts  like  ripples  and
+     sharp spikes (unlike N-dimensional splines and HRBFs)
+   * MSTAB does not return function values far from the  interval  spanned
+     by the dataset; say, if all your points have |f|<=1, you  can be sure
+     that model value won't deviate too much from [-1,+1]
+3) good model construction time competing with that of HRBFs  and  bicubic
+   splines
+4) ability to work with any number of dimensions, starting from NX=1
+
+The drawbacks of IDW-MSTAB (and all IDW algorithms in general) are:
+1) dependence of the model evaluation time on the search radius
+2) bad extrapolation properties, models built by this method  are  usually
+   conservative in their predictions
+
+Thus, IDW-MSTAB is  a  good  "default"  option  if  you  want  to  perform
+scattered multidimensional interpolation. Although it has  its  drawbacks,
+it is easy to use and robust, which makes it a good first step.
+
+
+INPUT PARAMETERS:
+    State   -   builder object
+    SRad    -   initial search radius, SRad>0 is required. A model  value
+                is obtained by "smart" averaging  of  the  dataset  points
+                within search radius.
+
+NOTE 1: IDW interpolation can  correctly  handle  ANY  dataset,  including
+        datasets with non-distinct points. In case non-distinct points are
+        found, an average value for this point will be calculated.
+
+NOTE 2: the memory requirements for model storage are O(NPoints*NLayers).
+        The model construction needs twice as much memory as model storage.
+
+NOTE 3: by default 16 IDW layers are built which is enough for most cases.
+        You can change this parameter with idwbuildersetnlayers()  method.
+        Larger values may be necessary if you need to reproduce  extrafine
+        details at distances smaller than SRad/65536.  Smaller value   may
+        be necessary if you have to save memory and  computing  time,  and
+        ready to sacrifice some model quality.
+
+
+ALGORITHM DESCRIPTION
+
+ALGLIB implementation of IDW is somewhat similar to the modified Shepard's
+method (one with search radius R) but overcomes several of its  drawbacks,
+namely:
+1) a tendency to show stepwise behavior for uniform datasets
+2) a tendency to show terrible interpolation properties for highly
+   nonuniform datasets which often arise in geospatial tasks
+  (function values are densely sampled across multiple separated
+  "tracks")
+
+IDW-MSTAB method performs several passes over dataset and builds a sequence
+of progressively refined IDW models  (layers),  which starts from one with
+largest search radius SRad  and continues to smaller  search  radii  until
+required number of  layers  is  built.  Highest  layers  reproduce  global
+behavior of the target function at larger distances  whilst  lower  layers
+reproduce fine details at smaller distances.
+
+Each layer is an IDW model built with following modifications:
+* weights go to zero when distance approach to the current search radius
+* an additional regularizing term is added to the distance: w=1/(d^2+lambda)
+* an additional fictional term with unit weight and zero function value is
+  added in order to promote continuity  properties  at  the  isolated  and
+  boundary points
+
+By default, 16 layers is built, which is enough for most  cases.  You  can
+change this parameter with idwbuildersetnlayers() method.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetalgomstab(const idwbuilder &state, const double srad, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function sets  IDW  model  construction  algorithm  to  the  textbook
+Shepard's algorithm with custom (user-specified) power parameter.
+
+IMPORTANT: we do NOT recommend using textbook IDW algorithms because  they
+           have terrible interpolation properties. Use MSTAB in all cases.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    P       -   power parameter, P>0; good value to start with is 2.0
+
+NOTE 1: IDW interpolation can  correctly  handle  ANY  dataset,  including
+        datasets with non-distinct points. In case non-distinct points are
+        found, an average value for this point will be calculated.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetalgotextbookshepard(const idwbuilder &state, const double p, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function sets  IDW  model  construction  algorithm  to the 'textbook'
+modified Shepard's algorithm with user-specified search radius.
+
+IMPORTANT: we do NOT recommend using textbook IDW algorithms because  they
+           have terrible interpolation properties. Use MSTAB in all cases.
+
+INPUT PARAMETERS:
+    State   -   builder object
+    R       -   search radius
+
+NOTE 1: IDW interpolation can  correctly  handle  ANY  dataset,  including
+        datasets with non-distinct points. In case non-distinct points are
+        found, an average value for this point will be calculated.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetalgotextbookmodshepard(const idwbuilder &state, const double r, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function sets prior term (model value at infinity) as  user-specified
+value.
+
+INPUT PARAMETERS:
+    S       -   spline builder
+    V       -   value for user-defined prior
+
+NOTE: for vector-valued models all components of the prior are set to same
+      user-specified value
+
+  -- ALGLIB --
+     Copyright 29.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetuserterm(const idwbuilder &state, const double v, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function sets constant prior term (model value at infinity).
+
+Constant prior term is determined as mean value over dataset.
+
+INPUT PARAMETERS:
+    S       -   spline builder
+
+  -- ALGLIB --
+     Copyright 29.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetconstterm(const idwbuilder &state, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function sets zero prior term (model value at infinity).
+
+INPUT PARAMETERS:
+    S       -   spline builder
+
+  -- ALGLIB --
+     Copyright 29.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwbuildersetzeroterm(const idwbuilder &state, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+IDW interpolation: scalar target, 1-dimensional argument
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object.
+
+INPUT PARAMETERS:
+    S   -   IDW interpolant built with IDW builder
+    X0  -   argument value
+
+Result:
+    IDW interpolant S(X0)
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+double idwcalc1(const idwmodel &s, const double x0, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+IDW interpolation: scalar target, 2-dimensional argument
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object.
+
+INPUT PARAMETERS:
+    S       -   IDW interpolant built with IDW builder
+    X0, X1  -   argument value
+
+Result:
+    IDW interpolant S(X0,X1)
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+double idwcalc2(const idwmodel &s, const double x0, const double x1, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+IDW interpolation: scalar target, 3-dimensional argument
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object.
+
+INPUT PARAMETERS:
+    S       -   IDW interpolant built with IDW builder
+    X0,X1,X2-   argument value
+
+Result:
+    IDW interpolant S(X0,X1,X2)
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+double idwcalc3(const idwmodel &s, const double x0, const double x1, const double x2, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function calculates values of the IDW model at the given point.
+
+This is general function which can be used for arbitrary NX (dimension  of
+the space of arguments) and NY (dimension of the function itself). However
+when  you  have  NY=1  you  may  find more convenient to  use  idwcalc1(),
+idwcalc2() or idwcalc3().
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object.
+
+INPUT PARAMETERS:
+    S       -   IDW model
+    X       -   coordinates, array[NX]. X may have more than NX  elements,
+                in this case only leading NX will be used.
 
 OUTPUT PARAMETERS:
-    Z   -   IDW interpolant.
+    Y       -   function value, array[NY]. Y is out-parameter and will  be
+                reallocated after call to this function. In case you  want
+                to reuse previously allocated Y, you may use idwcalcbuf(),
+                which reallocates Y only when it is too small.
 
-NOTES:
-  * best results are obtained with quadratic models, linear models are not
-    recommended to use unless you are pretty sure that it is what you want
-  * this subroutine is always succeeds (as long as correct parameters  are
-    passed).
-  * see  'Multivariate  Interpolation  of Large Sets of Scattered Data' by
-    Robert J. Renka for more information on this algorithm.
-
-
-  -- ALGLIB PROJECT --
-     Copyright 02.03.2010 by Bochkanov Sergey
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
 *************************************************************************/
-void idwbuildnoisy(const real_2d_array &xy, const ae_int_t n, const ae_int_t nx, const ae_int_t d, const ae_int_t nq, const ae_int_t nw, idwinterpolant &z, const xparams _xparams = alglib::xdefault);
+void idwcalc(const idwmodel &s, const real_1d_array &x, real_1d_array &y, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function calculates values of the IDW model at the given point.
+
+Same as idwcalc(), but does not reallocate Y when in is large enough to
+store function values.
+
+NOTE: this function modifies internal temporaries of the  IDW  model, thus
+      IT IS NOT  THREAD-SAFE!  If  you  want  to  perform  parallel  model
+      evaluation from the multiple threads, use idwtscalcbuf()  with  per-
+      thread buffer object.
+
+INPUT PARAMETERS:
+    S       -   IDW model
+    X       -   coordinates, array[NX]. X may have more than NX  elements,
+                in this case only leading NX will be used.
+    Y       -   possibly preallocated array
+
+OUTPUT PARAMETERS:
+    Y       -   function value, array[NY]. Y is not reallocated when it
+                is larger than NY.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwcalcbuf(const idwmodel &s, const real_1d_array &x, real_1d_array &y, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function calculates values of the IDW model at the given point, using
+external  buffer  object  (internal  temporaries  of  IDW  model  are  not
+modified).
+
+This function allows to use same IDW model object  in  different  threads,
+assuming  that  different   threads  use different instances of the buffer
+structure.
+
+INPUT PARAMETERS:
+    S       -   IDW model, may be shared between different threads
+    Buf     -   buffer object created for this particular instance of  IDW
+                model with idwcreatecalcbuffer().
+    X       -   coordinates, array[NX]. X may have more than NX  elements,
+                in this case only  leading NX will be used.
+    Y       -   possibly preallocated array
+
+OUTPUT PARAMETERS:
+    Y       -   function value, array[NY]. Y is not reallocated when it
+                is larger than NY.
+
+  -- ALGLIB --
+     Copyright 13.12.2011 by Bochkanov Sergey
+*************************************************************************/
+void idwtscalcbuf(const idwmodel &s, const idwcalcbuffer &buf, const real_1d_array &x, real_1d_array &y, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function fits IDW model to the dataset using current IDW construction
+algorithm. A model being built and fitting report are returned.
+
+INPUT PARAMETERS:
+    State   -   builder object
+
+OUTPUT PARAMETERS:
+    Model   -   an IDW model built with current algorithm
+    Rep     -   model fitting report, fields of this structure contain
+                information about average fitting errors.
+
+NOTE: although IDW-MSTAB algorithm is an  interpolation  method,  i.e.  it
+      tries to fit the model exactly, it can  handle  datasets  with  non-
+      distinct points which can not be fit exactly; in such  cases  least-
+      squares fitting is performed.
+
+  -- ALGLIB --
+     Copyright 22.10.2018 by Bochkanov Sergey
+*************************************************************************/
+void idwfit(const idwbuilder &state, idwmodel &model, idwreport &rep, const xparams _xparams = alglib::xdefault);
 #endif
 
 #if defined(AE_COMPILE_RATINT) || !defined(AE_PARTIAL_BUILD)
@@ -1635,7 +2117,7 @@ original nonsmooth one, but much easier  to  approach.  We solve  it  with
 MinNLC solver provided by ALGLIB.
 
 
-NOTE: ON INSTABILITY OF SEQUENTIAL LINEAR PROGRAMMING APPROACJ
+NOTE: ON INSTABILITY OF SEQUENTIAL LINEARIZATION APPROACH
 
 ALGLIB  has  nonlinearly  constrained  solver which proved to be stable on
 such problems. However, some authors proposed to linearize constraints  in
@@ -1643,7 +2125,7 @@ the vicinity of current approximation (Ci,Ri) and to get next  approximate
 solution (Ci+1,Ri+1) as solution to linear programming problem. Obviously,
 LP problems are easier than nonlinearly constrained ones.
 
-Indeed,  SLP  approach  to   MC/MI/MZ   resulted   in  ~10-20x increase in
+Indeed,  such approach  to   MC/MI/MZ   resulted   in  ~10-20x increase in
 performance (when compared with NLC solver). However, it turned  out  that
 in some cases linearized model fails to predict correct direction for next
 step and tells us that we converged to solution even when we are still 2-4
@@ -1654,7 +2136,7 @@ linear model;  even  when  solved  exactly,  it  fails  to  handle  subtle
 nonlinearities which arise near the solution. We validated it by comparing
 results returned by ALGLIB linear solver with that of MATLAB.
 
-In our experiments with SLP solver:
+In our experiments with linearization:
 * MC failed most often, at both realistic and synthetic datasets
 * MI sometimes failed, but sometimes succeeded
 * MZ often  succeeded; our guess is that presence of two independent  sets
@@ -1663,8 +2145,8 @@ In our experiments with SLP solver:
   model fails to handle nonlinearities from Rlo, it uses  Rhi  as  a  hint
   (and vice versa).
 
-Because SLP approach failed to achieve stable results, we do  not  include
-it in ALGLIB.
+Because linearization approach failed to achieve stable results, we do not
+include it in ALGLIB.
 
 
   -- ALGLIB --
@@ -3877,6 +4359,10 @@ OUTPUT PARAMETERS:
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
 
+NOTE: for stability reasons the B parameter is restricted by [1/1000,1000]
+      range. It prevents  algorithm from making trial steps  deep into the
+      area of bad parameters.
+
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc4() function.
 
@@ -3967,6 +4453,10 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
+
+NOTE: for stability reasons the B parameter is restricted by [1/1000,1000]
+      range. It prevents  algorithm from making trial steps  deep into the
+      area of bad parameters.
 
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc4() function.
@@ -4059,6 +4549,10 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
+
+NOTE: for better stability B  parameter is restricted by [+-1/1000,+-1000]
+      range, and G is restricted by [1/10,10] range. It prevents algorithm
+      from making trial steps deep into the area of bad parameters.
 
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc5() function.
@@ -4153,6 +4647,10 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
+
+NOTE: for better stability B  parameter is restricted by [+-1/1000,+-1000]
+      range, and G is restricted by [1/10,10] range. It prevents algorithm
+      from making trial steps deep into the area of bad parameters.
 
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc5() function.
@@ -4259,6 +4757,10 @@ OUTPUT PARAMETERS:
                   coefficient   is  calculated  as  R2=1-RSS/TSS  (in case
                   of nonlinear  regression  there  are  multiple  ways  to
                   define R2, each of them giving different results).
+
+NOTE: for better stability B  parameter is restricted by [+-1/1000,+-1000]
+      range, and G is restricted by [1/10,10] range. It prevents algorithm
+      from making trial steps deep into the area of bad parameters.
 
 NOTE: after  you  obtained  coefficients,  you  can  evaluate  model  with
       LogisticCalc5() function.
@@ -7248,6 +7750,8 @@ INPUT PARAMETERS:
                          features - NX=1 or NX>3; points with per-dimension
                          scales.
                   *  1 - successful termination
+                  *  8 - a termination request was submitted via
+                         rbfrequesttermination() function.
 
                 Fields which are set only by modern RBF solvers (hierarchical
                 or nonnegative; older solvers like QNN and ML initialize these
@@ -7826,6 +8330,53 @@ RESULT:
      Copyright 06.07.2016 by Bochkanov Sergey
 *************************************************************************/
 ae_int_t rbfgetmodelversion(const rbfmodel &s, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function is used to peek into hierarchical RBF  construction  process
+from  some  other  thread  and  get current progress indicator. It returns
+value in [0,1].
+
+IMPORTANT: only HRBFs (hierarchical RBFs) support  peeking  into  progress
+           indicator. Legacy RBF-ML and RBF-QNN do  not  support  it.  You
+           will always get 0 value.
+
+INPUT PARAMETERS:
+    S           -   RBF model object
+
+RESULT:
+    progress value, in [0,1]
+
+  -- ALGLIB --
+     Copyright 17.11.2018 by Bochkanov Sergey
+*************************************************************************/
+double rbfpeekprogress(const rbfmodel &s, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function  is  used  to  submit  a  request  for  termination  of  the
+hierarchical RBF construction process from some other thread.  As  result,
+RBF construction is terminated smoothly (with proper deallocation  of  all
+necessary resources) and resultant model is filled by zeros.
+
+A rep.terminationtype=8 will be returned upon receiving such request.
+
+IMPORTANT: only  HRBFs  (hierarchical  RBFs) support termination requests.
+           Legacy RBF-ML and RBF-QNN do not  support  it.  An  attempt  to
+           terminate their construction will be ignored.
+
+IMPORTANT: termination request flag is cleared when the model construction
+           starts. Thus, any pre-construction termination requests will be
+           silently ignored - only ones submitted AFTER  construction  has
+           actually began will be handled.
+
+INPUT PARAMETERS:
+    S           -   RBF model object
+
+  -- ALGLIB --
+     Copyright 17.11.2018 by Bochkanov Sergey
+*************************************************************************/
+void rbfrequesttermination(const rbfmodel &s, const xparams _xparams = alglib::xdefault);
 #endif
 
 #if defined(AE_COMPILE_INTCOMP) || !defined(AE_PARTIAL_BUILD)
@@ -7878,36 +8429,76 @@ void nsfitspherex(const real_2d_array &xy, const ae_int_t npoints, const ae_int_
 /////////////////////////////////////////////////////////////////////////
 namespace alglib_impl
 {
-#if defined(AE_COMPILE_IDWINT) || !defined(AE_PARTIAL_BUILD)
-double idwcalc(idwinterpolant* z,
-     /* Real    */ ae_vector* x,
+#if defined(AE_COMPILE_IDW) || !defined(AE_PARTIAL_BUILD)
+void idwcreatecalcbuffer(idwmodel* s,
+     idwcalcbuffer* buf,
      ae_state *_state);
-void idwbuildmodifiedshepard(/* Real    */ ae_matrix* xy,
-     ae_int_t n,
-     ae_int_t nx,
-     ae_int_t d,
-     ae_int_t nq,
-     ae_int_t nw,
-     idwinterpolant* z,
+void idwbuildercreate(ae_int_t nx,
+     ae_int_t ny,
+     idwbuilder* state,
      ae_state *_state);
-void idwbuildmodifiedshepardr(/* Real    */ ae_matrix* xy,
+void idwbuildersetnlayers(idwbuilder* state,
+     ae_int_t nlayers,
+     ae_state *_state);
+void idwbuildersetpoints(idwbuilder* state,
+     /* Real    */ ae_matrix* xy,
      ae_int_t n,
-     ae_int_t nx,
+     ae_state *_state);
+void idwbuildersetalgomstab(idwbuilder* state,
+     double srad,
+     ae_state *_state);
+void idwbuildersetalgotextbookshepard(idwbuilder* state,
+     double p,
+     ae_state *_state);
+void idwbuildersetalgotextbookmodshepard(idwbuilder* state,
      double r,
-     idwinterpolant* z,
      ae_state *_state);
-void idwbuildnoisy(/* Real    */ ae_matrix* xy,
-     ae_int_t n,
-     ae_int_t nx,
-     ae_int_t d,
-     ae_int_t nq,
-     ae_int_t nw,
-     idwinterpolant* z,
+void idwbuildersetuserterm(idwbuilder* state, double v, ae_state *_state);
+void idwbuildersetconstterm(idwbuilder* state, ae_state *_state);
+void idwbuildersetzeroterm(idwbuilder* state, ae_state *_state);
+double idwcalc1(idwmodel* s, double x0, ae_state *_state);
+double idwcalc2(idwmodel* s, double x0, double x1, ae_state *_state);
+double idwcalc3(idwmodel* s,
+     double x0,
+     double x1,
+     double x2,
      ae_state *_state);
-void _idwinterpolant_init(void* _p, ae_state *_state, ae_bool make_automatic);
-void _idwinterpolant_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic);
-void _idwinterpolant_clear(void* _p);
-void _idwinterpolant_destroy(void* _p);
+void idwcalc(idwmodel* s,
+     /* Real    */ ae_vector* x,
+     /* Real    */ ae_vector* y,
+     ae_state *_state);
+void idwcalcbuf(idwmodel* s,
+     /* Real    */ ae_vector* x,
+     /* Real    */ ae_vector* y,
+     ae_state *_state);
+void idwtscalcbuf(idwmodel* s,
+     idwcalcbuffer* buf,
+     /* Real    */ ae_vector* x,
+     /* Real    */ ae_vector* y,
+     ae_state *_state);
+void idwfit(idwbuilder* state,
+     idwmodel* model,
+     idwreport* rep,
+     ae_state *_state);
+void idwalloc(ae_serializer* s, idwmodel* model, ae_state *_state);
+void idwserialize(ae_serializer* s, idwmodel* model, ae_state *_state);
+void idwunserialize(ae_serializer* s, idwmodel* model, ae_state *_state);
+void _idwcalcbuffer_init(void* _p, ae_state *_state, ae_bool make_automatic);
+void _idwcalcbuffer_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic);
+void _idwcalcbuffer_clear(void* _p);
+void _idwcalcbuffer_destroy(void* _p);
+void _idwmodel_init(void* _p, ae_state *_state, ae_bool make_automatic);
+void _idwmodel_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic);
+void _idwmodel_clear(void* _p);
+void _idwmodel_destroy(void* _p);
+void _idwbuilder_init(void* _p, ae_state *_state, ae_bool make_automatic);
+void _idwbuilder_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic);
+void _idwbuilder_clear(void* _p);
+void _idwbuilder_destroy(void* _p);
+void _idwreport_init(void* _p, ae_state *_state, ae_bool make_automatic);
+void _idwreport_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic);
+void _idwreport_clear(void* _p);
+void _idwreport_destroy(void* _p);
 #endif
 #if defined(AE_COMPILE_RATINT) || !defined(AE_PARTIAL_BUILD)
 double barycentriccalc(barycentricinterpolant* b,
@@ -8823,9 +9414,9 @@ void rbfv2buildhierarchical(/* Real    */ ae_matrix* x,
      ae_int_t nh,
      double rbase,
      double lambdans,
-     ae_bool nonnegative,
-     ae_int_t nnmaxits,
      rbfv2model* s,
+     ae_int_t* progress10000,
+     ae_bool* terminationrequest,
      rbfv2report* rep,
      ae_state *_state);
 void rbfv2alloc(ae_serializer* s, rbfv2model* model, ae_state *_state);
@@ -9380,6 +9971,8 @@ void rbfunpack(rbfmodel* s,
      ae_int_t* modelversion,
      ae_state *_state);
 ae_int_t rbfgetmodelversion(rbfmodel* s, ae_state *_state);
+double rbfpeekprogress(rbfmodel* s, ae_state *_state);
+void rbfrequesttermination(rbfmodel* s, ae_state *_state);
 void rbfalloc(ae_serializer* s, rbfmodel* model, ae_state *_state);
 void rbfserialize(ae_serializer* s, rbfmodel* model, ae_state *_state);
 void rbfunserialize(ae_serializer* s, rbfmodel* model, ae_state *_state);

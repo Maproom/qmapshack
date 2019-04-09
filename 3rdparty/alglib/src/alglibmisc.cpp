@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -57,7 +57,7 @@ namespace alglib
 Buffer object which is used to perform nearest neighbor  requests  in  the
 multithreaded mode (multiple threads working with same KD-tree object).
 
-This object should be created with KDTreeCreateBuffer().
+This object should be created with KDTreeCreateRequestBuffer().
 *************************************************************************/
 _kdtreerequestbuffer_owner::_kdtreerequestbuffer_owner()
 {
@@ -708,7 +708,7 @@ OUTPUT PARAMETERS
 
 
 IMPORTANT: KD-tree buffer should be used only with  KD-tree  object  which
-           was used to initialize buffer. Any attempt to use biffer   with
+           was used to initialize buffer. Any attempt to use buffer   with
            different object is dangerous - you  may  get  integrity  check
            failure (exception) because sizes of internal arrays do not fit
            to dimensions of KD-tree structure.
@@ -975,13 +975,18 @@ ae_int_t kdtreetsqueryknn(const kdtree &kdt, const kdtreerequestbuffer &buf, con
 #endif
 
 /*************************************************************************
-R-NN query: all points within R-sphere centered at X
+R-NN query: all points within R-sphere centered at X, ordered by  distance
+between point and X (by ascending).
+
+NOTE: it is also possible to perform undordered queries performed by means
+      of kdtreequeryrnnu() and kdtreetsqueryrnnu() functions. Such queries
+      are faster because we do not have to use heap structure for sorting.
 
 IMPORTANT: this function can not be used in multithreaded code because  it
            uses internal temporary buffer of kd-tree object, which can not
            be shared between multiple threads.  If  you  want  to  perform
            parallel requests, use function  which  uses  external  request
-           buffer: KDTreeTsQueryRNN() ("Ts" stands for "thread-safe").
+           buffer: kdtreetsqueryrnn() ("Ts" stands for "thread-safe").
 
 INPUT PARAMETERS
     KDT         -   KD-tree
@@ -1031,13 +1036,18 @@ ae_int_t kdtreequeryrnn(const kdtree &kdt, const real_1d_array &x, const double 
 }
 
 /*************************************************************************
-R-NN query: all points within R-sphere centered at X
+R-NN query: all points within R-sphere centered at X, ordered by  distance
+between point and X (by ascending).
+
+NOTE: it is also possible to perform undordered queries performed by means
+      of kdtreequeryrnnu() and kdtreetsqueryrnnu() functions. Such queries
+      are faster because we do not have to use heap structure for sorting.
 
 IMPORTANT: this function can not be used in multithreaded code because  it
            uses internal temporary buffer of kd-tree object, which can not
            be shared between multiple threads.  If  you  want  to  perform
            parallel requests, use function  which  uses  external  request
-           buffer: KDTreeTsQueryRNN() ("Ts" stands for "thread-safe").
+           buffer: kdtreetsqueryrnn() ("Ts" stands for "thread-safe").
 
 INPUT PARAMETERS
     KDT         -   KD-tree
@@ -1086,12 +1096,135 @@ ae_int_t kdtreequeryrnn(const kdtree &kdt, const real_1d_array &x, const double 
 #endif
 
 /*************************************************************************
+R-NN query: all points within R-sphere  centered  at  X,  no  ordering  by
+distance as undicated by "U" suffix (faster that ordered query, for  large
+queries - significantly faster).
+
+IMPORTANT: this function can not be used in multithreaded code because  it
+           uses internal temporary buffer of kd-tree object, which can not
+           be shared between multiple threads.  If  you  want  to  perform
+           parallel requests, use function  which  uses  external  request
+           buffer: kdtreetsqueryrnn() ("Ts" stands for "thread-safe").
+
+INPUT PARAMETERS
+    KDT         -   KD-tree
+    X           -   point, array[0..NX-1].
+    R           -   radius of sphere (in corresponding norm), R>0
+    SelfMatch   -   whether self-matches are allowed:
+                    * if True, nearest neighbor may be the point itself
+                      (if it exists in original dataset)
+                    * if False, then only points with non-zero distance
+                      are returned
+                    * if not given, considered True
+
+RESULT
+    number of neighbors found, >=0
+
+This  subroutine  performs  query  and  stores  its result in the internal
+structures of the KD-tree. You can use  following  subroutines  to  obtain
+actual results:
+* KDTreeQueryResultsX() to get X-values
+* KDTreeQueryResultsXY() to get X- and Y-values
+* KDTreeQueryResultsTags() to get tag values
+* KDTreeQueryResultsDistances() to get distances
+
+As indicated by "U" suffix, this function returns unordered results.
+
+  -- ALGLIB --
+     Copyright 01.11.2018 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t kdtreequeryrnnu(const kdtree &kdt, const real_1d_array &x, const double r, const bool selfmatch, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::ae_int_t result = alglib_impl::kdtreequeryrnnu(const_cast<alglib_impl::kdtree*>(kdt.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), r, selfmatch, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<ae_int_t*>(&result));
+}
+
+/*************************************************************************
+R-NN query: all points within R-sphere  centered  at  X,  no  ordering  by
+distance as undicated by "U" suffix (faster that ordered query, for  large
+queries - significantly faster).
+
+IMPORTANT: this function can not be used in multithreaded code because  it
+           uses internal temporary buffer of kd-tree object, which can not
+           be shared between multiple threads.  If  you  want  to  perform
+           parallel requests, use function  which  uses  external  request
+           buffer: kdtreetsqueryrnn() ("Ts" stands for "thread-safe").
+
+INPUT PARAMETERS
+    KDT         -   KD-tree
+    X           -   point, array[0..NX-1].
+    R           -   radius of sphere (in corresponding norm), R>0
+    SelfMatch   -   whether self-matches are allowed:
+                    * if True, nearest neighbor may be the point itself
+                      (if it exists in original dataset)
+                    * if False, then only points with non-zero distance
+                      are returned
+                    * if not given, considered True
+
+RESULT
+    number of neighbors found, >=0
+
+This  subroutine  performs  query  and  stores  its result in the internal
+structures of the KD-tree. You can use  following  subroutines  to  obtain
+actual results:
+* KDTreeQueryResultsX() to get X-values
+* KDTreeQueryResultsXY() to get X- and Y-values
+* KDTreeQueryResultsTags() to get tag values
+* KDTreeQueryResultsDistances() to get distances
+
+As indicated by "U" suffix, this function returns unordered results.
+
+  -- ALGLIB --
+     Copyright 01.11.2018 by Bochkanov Sergey
+*************************************************************************/
+#if !defined(AE_NO_EXCEPTIONS)
+ae_int_t kdtreequeryrnnu(const kdtree &kdt, const real_1d_array &x, const double r, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;    
+    bool selfmatch;
+
+    selfmatch = true;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::ae_int_t result = alglib_impl::kdtreequeryrnnu(const_cast<alglib_impl::kdtree*>(kdt.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), r, selfmatch, &_alglib_env_state);
+
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<ae_int_t*>(&result));
+}
+#endif
+
+/*************************************************************************
 R-NN query: all points within  R-sphere  centered  at  X,  using  external
-thread-local buffer.
+thread-local buffer, sorted by distance between point and X (by ascending)
 
 You can call this function from multiple threads for same kd-tree instance,
 assuming that different instances of buffer object are passed to different
 threads.
+
+NOTE: it is also possible to perform undordered queries performed by means
+      of kdtreequeryrnnu() and kdtreetsqueryrnnu() functions. Such queries
+      are faster because we do not have to use heap structure for sorting.
 
 INPUT PARAMETERS
     KDT         -   KD-tree
@@ -1151,11 +1284,15 @@ ae_int_t kdtreetsqueryrnn(const kdtree &kdt, const kdtreerequestbuffer &buf, con
 
 /*************************************************************************
 R-NN query: all points within  R-sphere  centered  at  X,  using  external
-thread-local buffer.
+thread-local buffer, sorted by distance between point and X (by ascending)
 
 You can call this function from multiple threads for same kd-tree instance,
 assuming that different instances of buffer object are passed to different
 threads.
+
+NOTE: it is also possible to perform undordered queries performed by means
+      of kdtreequeryrnnu() and kdtreetsqueryrnnu() functions. Such queries
+      are faster because we do not have to use heap structure for sorting.
 
 INPUT PARAMETERS
     KDT         -   KD-tree
@@ -1206,6 +1343,139 @@ ae_int_t kdtreetsqueryrnn(const kdtree &kdt, const kdtreerequestbuffer &buf, con
     if( _xparams.flags!=0x0 )
         ae_state_set_flags(&_alglib_env_state, _xparams.flags);
     alglib_impl::ae_int_t result = alglib_impl::kdtreetsqueryrnn(const_cast<alglib_impl::kdtree*>(kdt.c_ptr()), const_cast<alglib_impl::kdtreerequestbuffer*>(buf.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), r, selfmatch, &_alglib_env_state);
+
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<ae_int_t*>(&result));
+}
+#endif
+
+/*************************************************************************
+R-NN query: all points within  R-sphere  centered  at  X,  using  external
+thread-local buffer, no ordering by distance as undicated  by  "U"  suffix
+(faster that ordered query, for large queries - significantly faster).
+
+You can call this function from multiple threads for same kd-tree instance,
+assuming that different instances of buffer object are passed to different
+threads.
+
+INPUT PARAMETERS
+    KDT         -   KD-tree
+    Buf         -   request buffer  object  created  for  this  particular
+                    instance of kd-tree structure with kdtreecreaterequestbuffer()
+                    function.
+    X           -   point, array[0..NX-1].
+    R           -   radius of sphere (in corresponding norm), R>0
+    SelfMatch   -   whether self-matches are allowed:
+                    * if True, nearest neighbor may be the point itself
+                      (if it exists in original dataset)
+                    * if False, then only points with non-zero distance
+                      are returned
+                    * if not given, considered True
+
+RESULT
+    number of neighbors found, >=0
+
+This  subroutine  performs  query  and  stores  its result in the internal
+structures  of  the  buffer object. You can use following  subroutines  to
+obtain these results (pay attention to "buf" in their names):
+* KDTreeTsQueryResultsX() to get X-values
+* KDTreeTsQueryResultsXY() to get X- and Y-values
+* KDTreeTsQueryResultsTags() to get tag values
+* KDTreeTsQueryResultsDistances() to get distances
+
+As indicated by "U" suffix, this function returns unordered results.
+
+IMPORTANT: kd-tree buffer should be used only with  KD-tree  object  which
+           was used to initialize buffer. Any attempt to use biffer   with
+           different object is dangerous - you  may  get  integrity  check
+           failure (exception) because sizes of internal arrays do not fit
+           to dimensions of KD-tree structure.
+
+  -- ALGLIB --
+     Copyright 18.03.2016 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t kdtreetsqueryrnnu(const kdtree &kdt, const kdtreerequestbuffer &buf, const real_1d_array &x, const double r, const bool selfmatch, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::ae_int_t result = alglib_impl::kdtreetsqueryrnnu(const_cast<alglib_impl::kdtree*>(kdt.c_ptr()), const_cast<alglib_impl::kdtreerequestbuffer*>(buf.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), r, selfmatch, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<ae_int_t*>(&result));
+}
+
+/*************************************************************************
+R-NN query: all points within  R-sphere  centered  at  X,  using  external
+thread-local buffer, no ordering by distance as undicated  by  "U"  suffix
+(faster that ordered query, for large queries - significantly faster).
+
+You can call this function from multiple threads for same kd-tree instance,
+assuming that different instances of buffer object are passed to different
+threads.
+
+INPUT PARAMETERS
+    KDT         -   KD-tree
+    Buf         -   request buffer  object  created  for  this  particular
+                    instance of kd-tree structure with kdtreecreaterequestbuffer()
+                    function.
+    X           -   point, array[0..NX-1].
+    R           -   radius of sphere (in corresponding norm), R>0
+    SelfMatch   -   whether self-matches are allowed:
+                    * if True, nearest neighbor may be the point itself
+                      (if it exists in original dataset)
+                    * if False, then only points with non-zero distance
+                      are returned
+                    * if not given, considered True
+
+RESULT
+    number of neighbors found, >=0
+
+This  subroutine  performs  query  and  stores  its result in the internal
+structures  of  the  buffer object. You can use following  subroutines  to
+obtain these results (pay attention to "buf" in their names):
+* KDTreeTsQueryResultsX() to get X-values
+* KDTreeTsQueryResultsXY() to get X- and Y-values
+* KDTreeTsQueryResultsTags() to get tag values
+* KDTreeTsQueryResultsDistances() to get distances
+
+As indicated by "U" suffix, this function returns unordered results.
+
+IMPORTANT: kd-tree buffer should be used only with  KD-tree  object  which
+           was used to initialize buffer. Any attempt to use biffer   with
+           different object is dangerous - you  may  get  integrity  check
+           failure (exception) because sizes of internal arrays do not fit
+           to dimensions of KD-tree structure.
+
+  -- ALGLIB --
+     Copyright 18.03.2016 by Bochkanov Sergey
+*************************************************************************/
+#if !defined(AE_NO_EXCEPTIONS)
+ae_int_t kdtreetsqueryrnnu(const kdtree &kdt, const kdtreerequestbuffer &buf, const real_1d_array &x, const double r, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;    
+    bool selfmatch;
+
+    selfmatch = true;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::ae_int_t result = alglib_impl::kdtreetsqueryrnnu(const_cast<alglib_impl::kdtree*>(kdt.c_ptr()), const_cast<alglib_impl::kdtreerequestbuffer*>(buf.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), r, selfmatch, &_alglib_env_state);
 
     alglib_impl::ae_state_clear(&_alglib_env_state);
     return *(reinterpret_cast<ae_int_t*>(&result));
@@ -3870,6 +4140,13 @@ namespace alglib_impl
 #if defined(AE_COMPILE_NEARESTNEIGHBOR) || !defined(AE_PARTIAL_BUILD)
 static ae_int_t nearestneighbor_splitnodesize = 6;
 static ae_int_t nearestneighbor_kdtreefirstversion = 0;
+static ae_int_t nearestneighbor_tsqueryrnn(kdtree* kdt,
+     kdtreerequestbuffer* buf,
+     /* Real    */ ae_vector* x,
+     double r,
+     ae_bool selfmatch,
+     ae_bool orderedbydist,
+     ae_state *_state);
 static void nearestneighbor_kdtreesplit(kdtree* kdt,
      ae_int_t i1,
      ae_int_t i2,
@@ -4049,7 +4326,6 @@ void kdtreebuildtagged(/* Real    */ ae_matrix* xy,
 {
     ae_int_t i;
     ae_int_t j;
-    ae_int_t maxnodes;
     ae_int_t nodesoffs;
     ae_int_t splitsoffs;
 
@@ -4112,18 +4388,15 @@ void kdtreebuildtagged(/* Real    */ ae_matrix* xy,
     }
     
     /*
-     * prepare tree structure
-     * * MaxNodes=N because we guarantee no trivial splits, i.e.
-     *   every split will generate two non-empty boxes
+     * Generate tree
      */
-    maxnodes = n;
-    ae_vector_set_length(&kdt->nodes, nearestneighbor_splitnodesize*2*maxnodes, _state);
-    ae_vector_set_length(&kdt->splits, 2*maxnodes, _state);
     nodesoffs = 0;
     splitsoffs = 0;
     ae_v_move(&kdt->innerbuf.curboxmin.ptr.p_double[0], 1, &kdt->boxmin.ptr.p_double[0], 1, ae_v_len(0,nx-1));
     ae_v_move(&kdt->innerbuf.curboxmax.ptr.p_double[0], 1, &kdt->boxmax.ptr.p_double[0], 1, ae_v_len(0,nx-1));
     nearestneighbor_kdtreegeneratetreerec(kdt, &nodesoffs, &splitsoffs, 0, n, 8, _state);
+    ivectorresize(&kdt->nodes, nodesoffs, _state);
+    rvectorresize(&kdt->splits, splitsoffs, _state);
 }
 
 
@@ -4146,7 +4419,7 @@ OUTPUT PARAMETERS
     
     
 IMPORTANT: KD-tree buffer should be used only with  KD-tree  object  which
-           was used to initialize buffer. Any attempt to use biffer   with
+           was used to initialize buffer. Any attempt to use buffer   with
            different object is dangerous - you  may  get  integrity  check
            failure (exception) because sizes of internal arrays do not fit
            to dimensions of KD-tree structure.
@@ -4284,13 +4557,18 @@ ae_int_t kdtreetsqueryknn(kdtree* kdt,
 
 
 /*************************************************************************
-R-NN query: all points within R-sphere centered at X
+R-NN query: all points within R-sphere centered at X, ordered by  distance
+between point and X (by ascending).
+
+NOTE: it is also possible to perform undordered queries performed by means
+      of kdtreequeryrnnu() and kdtreetsqueryrnnu() functions. Such queries
+      are faster because we do not have to use heap structure for sorting.
 
 IMPORTANT: this function can not be used in multithreaded code because  it
            uses internal temporary buffer of kd-tree object, which can not
            be shared between multiple threads.  If  you  want  to  perform
            parallel requests, use function  which  uses  external  request
-           buffer: KDTreeTsQueryRNN() ("Ts" stands for "thread-safe").
+           buffer: kdtreetsqueryrnn() ("Ts" stands for "thread-safe").
 
 INPUT PARAMETERS
     KDT         -   KD-tree
@@ -4335,12 +4613,71 @@ ae_int_t kdtreequeryrnn(kdtree* kdt,
 
 
 /*************************************************************************
+R-NN query: all points within R-sphere  centered  at  X,  no  ordering  by
+distance as undicated by "U" suffix (faster that ordered query, for  large
+queries - significantly faster).
+
+IMPORTANT: this function can not be used in multithreaded code because  it
+           uses internal temporary buffer of kd-tree object, which can not
+           be shared between multiple threads.  If  you  want  to  perform
+           parallel requests, use function  which  uses  external  request
+           buffer: kdtreetsqueryrnn() ("Ts" stands for "thread-safe").
+
+INPUT PARAMETERS
+    KDT         -   KD-tree
+    X           -   point, array[0..NX-1].
+    R           -   radius of sphere (in corresponding norm), R>0
+    SelfMatch   -   whether self-matches are allowed:
+                    * if True, nearest neighbor may be the point itself
+                      (if it exists in original dataset)
+                    * if False, then only points with non-zero distance
+                      are returned
+                    * if not given, considered True
+
+RESULT
+    number of neighbors found, >=0
+
+This  subroutine  performs  query  and  stores  its result in the internal
+structures of the KD-tree. You can use  following  subroutines  to  obtain
+actual results:
+* KDTreeQueryResultsX() to get X-values
+* KDTreeQueryResultsXY() to get X- and Y-values
+* KDTreeQueryResultsTags() to get tag values
+* KDTreeQueryResultsDistances() to get distances
+
+As indicated by "U" suffix, this function returns unordered results.
+
+  -- ALGLIB --
+     Copyright 01.11.2018 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t kdtreequeryrnnu(kdtree* kdt,
+     /* Real    */ ae_vector* x,
+     double r,
+     ae_bool selfmatch,
+     ae_state *_state)
+{
+    ae_int_t result;
+
+
+    ae_assert(ae_fp_greater(r,(double)(0)), "KDTreeQueryRNNU: incorrect R!", _state);
+    ae_assert(x->cnt>=kdt->nx, "KDTreeQueryRNNU: Length(X)<NX!", _state);
+    ae_assert(isfinitevector(x, kdt->nx, _state), "KDTreeQueryRNNU: X contains infinite or NaN values!", _state);
+    result = kdtreetsqueryrnnu(kdt, &kdt->innerbuf, x, r, selfmatch, _state);
+    return result;
+}
+
+
+/*************************************************************************
 R-NN query: all points within  R-sphere  centered  at  X,  using  external
-thread-local buffer.
+thread-local buffer, sorted by distance between point and X (by ascending)
 
 You can call this function from multiple threads for same kd-tree instance,
 assuming that different instances of buffer object are passed to different
 threads.
+
+NOTE: it is also possible to perform undordered queries performed by means
+      of kdtreequeryrnnu() and kdtreetsqueryrnnu() functions. Such queries
+      are faster because we do not have to use heap structure for sorting.
 
 INPUT PARAMETERS
     KDT         -   KD-tree
@@ -4383,69 +4720,76 @@ ae_int_t kdtreetsqueryrnn(kdtree* kdt,
      ae_bool selfmatch,
      ae_state *_state)
 {
-    ae_int_t i;
-    ae_int_t j;
     ae_int_t result;
 
 
-    ae_assert(ae_fp_greater(r,(double)(0)), "KDTreeTsQueryRNN: incorrect R!", _state);
+    ae_assert(ae_isfinite(r, _state)&&ae_fp_greater(r,(double)(0)), "KDTreeTsQueryRNN: incorrect R!", _state);
     ae_assert(x->cnt>=kdt->nx, "KDTreeTsQueryRNN: Length(X)<NX!", _state);
     ae_assert(isfinitevector(x, kdt->nx, _state), "KDTreeTsQueryRNN: X contains infinite or NaN values!", _state);
+    result = nearestneighbor_tsqueryrnn(kdt, buf, x, r, selfmatch, ae_true, _state);
+    return result;
+}
+
+
+/*************************************************************************
+R-NN query: all points within  R-sphere  centered  at  X,  using  external
+thread-local buffer, no ordering by distance as undicated  by  "U"  suffix
+(faster that ordered query, for large queries - significantly faster).
+
+You can call this function from multiple threads for same kd-tree instance,
+assuming that different instances of buffer object are passed to different
+threads.
+
+INPUT PARAMETERS
+    KDT         -   KD-tree
+    Buf         -   request buffer  object  created  for  this  particular
+                    instance of kd-tree structure with kdtreecreaterequestbuffer()
+                    function.
+    X           -   point, array[0..NX-1].
+    R           -   radius of sphere (in corresponding norm), R>0
+    SelfMatch   -   whether self-matches are allowed:
+                    * if True, nearest neighbor may be the point itself
+                      (if it exists in original dataset)
+                    * if False, then only points with non-zero distance
+                      are returned
+                    * if not given, considered True
+
+RESULT
+    number of neighbors found, >=0
+
+This  subroutine  performs  query  and  stores  its result in the internal
+structures  of  the  buffer object. You can use following  subroutines  to
+obtain these results (pay attention to "buf" in their names):
+* KDTreeTsQueryResultsX() to get X-values
+* KDTreeTsQueryResultsXY() to get X- and Y-values
+* KDTreeTsQueryResultsTags() to get tag values
+* KDTreeTsQueryResultsDistances() to get distances
+
+As indicated by "U" suffix, this function returns unordered results.
     
-    /*
-     * Handle special case: KDT.N=0
-     */
-    if( kdt->n==0 )
-    {
-        buf->kcur = 0;
-        result = 0;
-        return result;
-    }
-    
-    /*
-     * Check consistency of request buffer
-     */
-    nearestneighbor_checkrequestbufferconsistency(kdt, buf, _state);
-    
-    /*
-     * Prepare parameters
-     */
-    buf->kneeded = 0;
-    if( kdt->normtype!=2 )
-    {
-        buf->rneeded = r;
-    }
-    else
-    {
-        buf->rneeded = ae_sqr(r, _state);
-    }
-    buf->selfmatch = selfmatch;
-    buf->approxf = (double)(1);
-    buf->kcur = 0;
-    
-    /*
-     * calculate distance from point to current bounding box
-     */
-    nearestneighbor_kdtreeinitbox(kdt, x, buf, _state);
-    
-    /*
-     * call recursive search
-     * results are returned as heap
-     */
-    nearestneighbor_kdtreequerynnrec(kdt, buf, 0, _state);
-    
-    /*
-     * pop from heap to generate ordered representation
-     *
-     * last element is not pop'ed because it is already in
-     * its place
-     */
-    result = buf->kcur;
-    j = buf->kcur;
-    for(i=buf->kcur; i>=2; i--)
-    {
-        tagheappopi(&buf->r, &buf->idx, &j, _state);
-    }
+IMPORTANT: kd-tree buffer should be used only with  KD-tree  object  which
+           was used to initialize buffer. Any attempt to use biffer   with
+           different object is dangerous - you  may  get  integrity  check
+           failure (exception) because sizes of internal arrays do not fit
+           to dimensions of KD-tree structure.
+
+  -- ALGLIB --
+     Copyright 18.03.2016 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t kdtreetsqueryrnnu(kdtree* kdt,
+     kdtreerequestbuffer* buf,
+     /* Real    */ ae_vector* x,
+     double r,
+     ae_bool selfmatch,
+     ae_state *_state)
+{
+    ae_int_t result;
+
+
+    ae_assert(ae_isfinite(r, _state)&&ae_fp_greater(r,(double)(0)), "KDTreeTsQueryRNNU: incorrect R!", _state);
+    ae_assert(x->cnt>=kdt->nx, "KDTreeTsQueryRNNU: Length(X)<NX!", _state);
+    ae_assert(isfinitevector(x, kdt->nx, _state), "KDTreeTsQueryRNNU: X contains infinite or NaN values!", _state);
+    result = nearestneighbor_tsqueryrnn(kdt, buf, x, r, selfmatch, ae_false, _state);
     return result;
 }
 
@@ -5587,6 +5931,127 @@ void kdtreeunserialize(ae_serializer* s, kdtree* tree, ae_state *_state)
 
 
 /*************************************************************************
+R-NN query: all points within  R-sphere  centered  at  X,  using  external
+thread-local buffer, sorted by distance between point and X (by ascending)
+
+You can call this function from multiple threads for same kd-tree instance,
+assuming that different instances of buffer object are passed to different
+threads.
+
+NOTE: it is also possible to perform undordered queries performed by means
+      of kdtreequeryrnnu() and kdtreetsqueryrnnu() functions. Such queries
+      are faster because we do not have to use heap structure for sorting.
+
+INPUT PARAMETERS
+    KDT         -   KD-tree
+    Buf         -   request buffer  object  created  for  this  particular
+                    instance of kd-tree structure with kdtreecreaterequestbuffer()
+                    function.
+    X           -   point, array[0..NX-1].
+    R           -   radius of sphere (in corresponding norm), R>0
+    SelfMatch   -   whether self-matches are allowed:
+                    * if True, nearest neighbor may be the point itself
+                      (if it exists in original dataset)
+                    * if False, then only points with non-zero distance
+                      are returned
+                    * if not given, considered True
+
+RESULT
+    number of neighbors found, >=0
+
+This  subroutine  performs  query  and  stores  its result in the internal
+structures  of  the  buffer object. You can use following  subroutines  to
+obtain these results (pay attention to "buf" in their names):
+* KDTreeTsQueryResultsX() to get X-values
+* KDTreeTsQueryResultsXY() to get X- and Y-values
+* KDTreeTsQueryResultsTags() to get tag values
+* KDTreeTsQueryResultsDistances() to get distances
+    
+IMPORTANT: kd-tree buffer should be used only with  KD-tree  object  which
+           was used to initialize buffer. Any attempt to use biffer   with
+           different object is dangerous - you  may  get  integrity  check
+           failure (exception) because sizes of internal arrays do not fit
+           to dimensions of KD-tree structure.
+
+  -- ALGLIB --
+     Copyright 18.03.2016 by Bochkanov Sergey
+*************************************************************************/
+static ae_int_t nearestneighbor_tsqueryrnn(kdtree* kdt,
+     kdtreerequestbuffer* buf,
+     /* Real    */ ae_vector* x,
+     double r,
+     ae_bool selfmatch,
+     ae_bool orderedbydist,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t j;
+    ae_int_t result;
+
+
+    
+    /*
+     * Handle special case: KDT.N=0
+     */
+    if( kdt->n==0 )
+    {
+        buf->kcur = 0;
+        result = 0;
+        return result;
+    }
+    
+    /*
+     * Check consistency of request buffer
+     */
+    nearestneighbor_checkrequestbufferconsistency(kdt, buf, _state);
+    
+    /*
+     * Prepare parameters
+     */
+    buf->kneeded = 0;
+    if( kdt->normtype!=2 )
+    {
+        buf->rneeded = r;
+    }
+    else
+    {
+        buf->rneeded = ae_sqr(r, _state);
+    }
+    buf->selfmatch = selfmatch;
+    buf->approxf = (double)(1);
+    buf->kcur = 0;
+    
+    /*
+     * calculate distance from point to current bounding box
+     */
+    nearestneighbor_kdtreeinitbox(kdt, x, buf, _state);
+    
+    /*
+     * call recursive search
+     * results are returned as heap
+     */
+    nearestneighbor_kdtreequerynnrec(kdt, buf, 0, _state);
+    result = buf->kcur;
+    
+    /*
+     * pop from heap to generate ordered representation
+     *
+     * last element is not pop'ed because it is already in
+     * its place
+     */
+    if( orderedbydist )
+    {
+        j = buf->kcur;
+        for(i=buf->kcur; i>=2; i--)
+        {
+            tagheappopi(&buf->r, &buf->idx, &j, _state);
+        }
+    }
+    return result;
+}
+
+
+/*************************************************************************
 Rearranges nodes [I1,I2) using partition in D-th dimension with S as threshold.
 Returns split position I3: [I1,I3) and [I3,I2) are created as result.
 
@@ -5624,7 +6089,7 @@ static void nearestneighbor_kdtreesplit(kdtree* kdt,
     iright = i2-1;
     while(ileft<iright)
     {
-        if( ae_fp_less_eq(kdt->xy.ptr.pp_double[ileft][d],s) )
+        if( kdt->xy.ptr.pp_double[ileft][d]<=s )
         {
             
             /*
@@ -5652,7 +6117,7 @@ static void nearestneighbor_kdtreesplit(kdtree* kdt,
             iright = iright-1;
         }
     }
-    if( ae_fp_less_eq(kdt->xy.ptr.pp_double[ileft][d],s) )
+    if( kdt->xy.ptr.pp_double[ileft][d]<=s )
     {
         ileft = ileft+1;
     }
@@ -5737,7 +6202,7 @@ static void nearestneighbor_kdtreegeneratetreerec(kdtree* kdt,
     for(i=1; i<=nx-1; i++)
     {
         v = kdt->innerbuf.curboxmax.ptr.p_double[i]-kdt->innerbuf.curboxmin.ptr.p_double[i];
-        if( ae_fp_greater(v,ds) )
+        if( v>ds )
         {
             ds = v;
             d = i;
@@ -5771,26 +6236,26 @@ static void nearestneighbor_kdtreegeneratetreerec(kdtree* kdt,
     for(i=0; i<=n-1; i++)
     {
         v = kdt->innerbuf.buf.ptr.p_double[i];
-        if( ae_fp_less(v,minv) )
+        if( v<minv )
         {
             minv = v;
             minidx = i1+i;
         }
-        if( ae_fp_greater(v,maxv) )
+        if( v>maxv )
         {
             maxv = v;
             maxidx = i1+i;
         }
-        if( ae_fp_less(v,s) )
+        if( v<s )
         {
             cntless = cntless+1;
         }
-        if( ae_fp_greater(v,s) )
+        if( v>s )
         {
             cntgreater = cntgreater+1;
         }
     }
-    if( ae_fp_eq(minv,maxv) )
+    if( minv==maxv )
     {
         
         /*
@@ -5881,7 +6346,7 @@ static void nearestneighbor_kdtreegeneratetreerec(kdtree* kdt,
     *splitsoffs = *splitsoffs+1;
     
     /*
-     * Recirsive generation:
+     * Recursive generation:
      * * update CurBox
      * * call subroutine
      * * restore CurBox
@@ -5896,6 +6361,13 @@ static void nearestneighbor_kdtreegeneratetreerec(kdtree* kdt,
     kdt->innerbuf.curboxmin.ptr.p_double[d] = s;
     nearestneighbor_kdtreegeneratetreerec(kdt, nodesoffs, splitsoffs, i3, i2, maxleafsize, _state);
     kdt->innerbuf.curboxmin.ptr.p_double[d] = v;
+    
+    /*
+     * Zero-fill unused portions of the node (avoid false warnings by Valgrind
+     * about attempt to serialize uninitialized values)
+     */
+    ae_assert(nearestneighbor_splitnodesize==6, "KDTreeGenerateTreeRec: node size has unexpectedly changed", _state);
+    kdt->nodes.ptr.p_int[oldoffs+5] = 0;
 }
 
 
@@ -5972,7 +6444,7 @@ static void nearestneighbor_kdtreequerynnrec(kdtree* kdt,
             /*
              * Skip points with zero distance if self-matches are turned off
              */
-            if( ae_fp_eq(ptdist,(double)(0))&&!buf->selfmatch )
+            if( ptdist==0&&!buf->selfmatch )
             {
                 continue;
             }
@@ -5981,7 +6453,7 @@ static void nearestneighbor_kdtreequerynnrec(kdtree* kdt,
              * We CAN'T process point if R-criterion isn't satisfied,
              * i.e. (RNeeded<>0) AND (PtDist>R).
              */
-            if( ae_fp_eq(buf->rneeded,(double)(0))||ae_fp_less_eq(ptdist,buf->rneeded) )
+            if( buf->rneeded==0||ptdist<=buf->rneeded )
             {
                 
                 /*
@@ -6005,7 +6477,7 @@ static void nearestneighbor_kdtreequerynnrec(kdtree* kdt,
                      * New points are added or not, depending on their distance.
                      * If added, they replace element at the top of the heap
                      */
-                    if( ae_fp_less(ptdist,buf->r.ptr.p_double[0]) )
+                    if( ptdist<buf->r.ptr.p_double[0] )
                     {
                         if( buf->kneeded==1 )
                         {
@@ -6042,7 +6514,7 @@ static void nearestneighbor_kdtreequerynnrec(kdtree* kdt,
          * * ChildBestOffs      child box with best chances
          * * ChildWorstOffs     child box with worst chances
          */
-        if( ae_fp_less_eq(buf->x.ptr.p_double[d],s) )
+        if( buf->x.ptr.p_double[d]<=s )
         {
             childbestoffs = kdt->nodes.ptr.p_int[offs+3];
             childworstoffs = kdt->nodes.ptr.p_int[offs+4];
@@ -6086,7 +6558,7 @@ static void nearestneighbor_kdtreequerynnrec(kdtree* kdt,
                 prevdist = buf->curdist;
                 t1 = buf->x.ptr.p_double[d];
                 v = buf->curboxmin.ptr.p_double[d];
-                if( ae_fp_less_eq(t1,s) )
+                if( t1<=s )
                 {
                     if( kdt->normtype==0 )
                     {
@@ -6108,7 +6580,7 @@ static void nearestneighbor_kdtreequerynnrec(kdtree* kdt,
                 prevdist = buf->curdist;
                 t1 = buf->x.ptr.p_double[d];
                 v = buf->curboxmax.ptr.p_double[d];
-                if( ae_fp_greater_eq(t1,s) )
+                if( t1>=s )
                 {
                     if( kdt->normtype==0 )
                     {
@@ -6129,7 +6601,7 @@ static void nearestneighbor_kdtreequerynnrec(kdtree* kdt,
             /*
              * Decide: to dive into cell or not to dive
              */
-            if( ae_fp_neq(buf->rneeded,(double)(0))&&ae_fp_greater(buf->curdist,buf->rneeded) )
+            if( buf->rneeded!=0&&buf->curdist>buf->rneeded )
             {
                 todive = ae_false;
             }
@@ -6150,7 +6622,7 @@ static void nearestneighbor_kdtreequerynnrec(kdtree* kdt,
                      * KCur=KNeeded, decide to dive or not to dive
                      * using point position relative to bounding box.
                      */
-                    todive = ae_fp_less_eq(buf->curdist,buf->r.ptr.p_double[0]*buf->approxf);
+                    todive = buf->curdist<=buf->r.ptr.p_double[0]*buf->approxf;
                 }
             }
             if( todive )
@@ -6209,11 +6681,11 @@ static void nearestneighbor_kdtreequeryboxrec(kdtree* kdt,
     {
         for(j=0; j<=nx-1; j++)
         {
-            if( ae_fp_greater(buf->boxmin.ptr.p_double[j],buf->curboxmax.ptr.p_double[j]) )
+            if( buf->boxmin.ptr.p_double[j]>buf->curboxmax.ptr.p_double[j] )
             {
                 return;
             }
-            if( ae_fp_less(buf->boxmax.ptr.p_double[j],buf->curboxmin.ptr.p_double[j]) )
+            if( buf->boxmax.ptr.p_double[j]<buf->curboxmin.ptr.p_double[j] )
             {
                 return;
             }
@@ -6237,8 +6709,8 @@ static void nearestneighbor_kdtreequeryboxrec(kdtree* kdt,
             inbox = ae_true;
             for(j=0; j<=nx-1; j++)
             {
-                inbox = inbox&&ae_fp_greater_eq(kdt->xy.ptr.pp_double[i][j],buf->boxmin.ptr.p_double[j]);
-                inbox = inbox&&ae_fp_less_eq(kdt->xy.ptr.pp_double[i][j],buf->boxmax.ptr.p_double[j]);
+                inbox = inbox&&kdt->xy.ptr.pp_double[i][j]>=buf->boxmin.ptr.p_double[j];
+                inbox = inbox&&kdt->xy.ptr.pp_double[i][j]<=buf->boxmax.ptr.p_double[j];
             }
             if( !inbox )
             {
@@ -6272,7 +6744,7 @@ static void nearestneighbor_kdtreequeryboxrec(kdtree* kdt,
         /*
          * Check lower split (S is upper bound of new bounding box)
          */
-        if( ae_fp_greater_eq(s,buf->boxmin.ptr.p_double[d]) )
+        if( s>=buf->boxmin.ptr.p_double[d] )
         {
             v = buf->curboxmax.ptr.p_double[d];
             buf->curboxmax.ptr.p_double[d] = s;
@@ -6283,7 +6755,7 @@ static void nearestneighbor_kdtreequeryboxrec(kdtree* kdt,
         /*
          * Check upper split (S is lower bound of new bounding box)
          */
-        if( ae_fp_less_eq(s,buf->boxmax.ptr.p_double[d]) )
+        if( s<=buf->boxmax.ptr.p_double[d] )
         {
             v = buf->curboxmin.ptr.p_double[d];
             buf->curboxmin.ptr.p_double[d] = s;
@@ -6330,13 +6802,13 @@ static void nearestneighbor_kdtreeinitbox(kdtree* kdt,
             buf->x.ptr.p_double[i] = vx;
             buf->curboxmin.ptr.p_double[i] = vmin;
             buf->curboxmax.ptr.p_double[i] = vmax;
-            if( ae_fp_less(vx,vmin) )
+            if( vx<vmin )
             {
                 buf->curdist = ae_maxreal(buf->curdist, vmin-vx, _state);
             }
             else
             {
-                if( ae_fp_greater(vx,vmax) )
+                if( vx>vmax )
                 {
                     buf->curdist = ae_maxreal(buf->curdist, vx-vmax, _state);
                 }
@@ -6353,13 +6825,13 @@ static void nearestneighbor_kdtreeinitbox(kdtree* kdt,
             buf->x.ptr.p_double[i] = vx;
             buf->curboxmin.ptr.p_double[i] = vmin;
             buf->curboxmax.ptr.p_double[i] = vmax;
-            if( ae_fp_less(vx,vmin) )
+            if( vx<vmin )
             {
                 buf->curdist = buf->curdist+vmin-vx;
             }
             else
             {
-                if( ae_fp_greater(vx,vmax) )
+                if( vx>vmax )
                 {
                     buf->curdist = buf->curdist+vx-vmax;
                 }
@@ -6376,13 +6848,13 @@ static void nearestneighbor_kdtreeinitbox(kdtree* kdt,
             buf->x.ptr.p_double[i] = vx;
             buf->curboxmin.ptr.p_double[i] = vmin;
             buf->curboxmax.ptr.p_double[i] = vmax;
-            if( ae_fp_less(vx,vmin) )
+            if( vx<vmin )
             {
                 buf->curdist = buf->curdist+ae_sqr(vmin-vx, _state);
             }
             else
             {
-                if( ae_fp_greater(vx,vmax) )
+                if( vx>vmax )
                 {
                     buf->curdist = buf->curdist+ae_sqr(vx-vmax, _state);
                 }

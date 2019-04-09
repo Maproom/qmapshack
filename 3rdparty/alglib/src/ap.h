@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -307,11 +307,15 @@ Members of this structure are ae_int64_t to avoid alignment problems.
 ************************************************************************/
 typedef struct
 {
-    ALIGNED ae_int64_t     cnt;
-    ALIGNED ae_int64_t     datatype;
-    ALIGNED ae_int64_t     owner;
-    ALIGNED ae_int64_t     last_action;
-    ALIGNED void *ptr;
+    ae_int64_t     cnt;
+    ae_int64_t     datatype;
+    ae_int64_t     owner;
+    ae_int64_t     last_action;
+    union
+    {
+        void *p_ptr;
+        ae_int64_t portable_alignment_enforcer;
+    } x_ptr;
 } x_vector;
 
 
@@ -344,13 +348,17 @@ Members of this structure are ae_int64_t to avoid alignment problems.
 ************************************************************************/
 typedef struct
 {
-    ALIGNED ae_int64_t     rows;
-    ALIGNED ae_int64_t     cols;
-    ALIGNED ae_int64_t     stride;
-    ALIGNED ae_int64_t     datatype;
-    ALIGNED ae_int64_t     owner;
-    ALIGNED ae_int64_t     last_action;
-    ALIGNED void *ptr;
+    ae_int64_t     rows;
+    ae_int64_t     cols;
+    ae_int64_t     stride;
+    ae_int64_t     datatype;
+    ae_int64_t     owner;
+    ae_int64_t     last_action;
+    union
+    {
+        void *p_ptr;
+        ae_int64_t portable_alignment_enforcer;
+    } x_ptr;
 } x_matrix;
 
 
@@ -365,6 +373,18 @@ ptr             pointer which should be passed to the deallocator.
                 may be null (for zero-size block), DYN_BOTTOM or DYN_FRAME
                 for "special" blocks (frame/stack boundaries).
 
+valgrind_hint   is a special field which stores a special hint pointer for
+                Valgrind and other similar memory checking tools.  ALGLIB
+                manually aligns pointers obtained via malloc, so ptr usually
+                points to location past the beginning  of  the  actuallly
+                allocated memory. In such cases memory testing tools  may
+                report "(possibly) lost" memory.
+                
+                This "hint" field stores  pointer  actually  returned  by
+                malloc (or NULL, if for some reason  we  do  not  support
+                this feature). This field is used merely as  a  hint  for
+                Valgrind - it should NOT be used for anything else.
+
 ************************************************************************/
 typedef struct ae_dyn_block
 {
@@ -372,6 +392,7 @@ typedef struct ae_dyn_block
     /* void *deallocator; */
     void (*deallocator)(void*);
     void * volatile ptr;
+    void* valgrind_hint;
 } ae_dyn_block;
 
 typedef void(*ae_deallocator)(void*);
@@ -711,6 +732,7 @@ void  ae_optional_atomic_add_i(ae_int_t *p, ae_int_t v);
 void  ae_optional_atomic_sub_i(ae_int_t *p, ae_int_t v);
 
 void* aligned_malloc(size_t size, size_t alignment);
+void* aligned_extract_ptr(void *block);
 void  aligned_free(void *block);
 void* eternal_malloc(size_t size);
 #if AE_MALLOC==AE_BASIC_STATIC_MALLOC
@@ -2140,6 +2162,26 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASMKL
 #endif
 
+#ifdef AE_COMPILE_DLU
+#define AE_PARTIAL_BUILD
+#define AE_COMPILE_APSERV
+#define AE_COMPILE_ABLASF
+#define AE_COMPILE_ABLASMKL
+#define AE_COMPILE_ABLAS
+#endif
+
+#ifdef AE_COMPILE_SPTRF
+#define AE_PARTIAL_BUILD
+#define AE_COMPILE_APSERV
+#define AE_COMPILE_ABLASF
+#define AE_COMPILE_ABLASMKL
+#define AE_COMPILE_ABLAS
+#define AE_COMPILE_HQRND
+#define AE_COMPILE_TSORT
+#define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#endif
+
 #ifdef AE_COMPILE_CREFLECTIONS
 #define AE_PARTIAL_BUILD
 #endif
@@ -2164,11 +2206,13 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #endif
 
@@ -2186,11 +2230,13 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -2203,11 +2249,13 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -2255,17 +2303,24 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_HBLAS
 #define AE_COMPILE_SBLAS
 #define AE_COMPILE_ORTFAC
 #define AE_COMPILE_FBLS
+#endif
+
+#ifdef AE_COMPILE_OPTGUARDAPI
+#define AE_PARTIAL_BUILD
+#define AE_COMPILE_APSERV
 #endif
 
 #ifdef AE_COMPILE_BLAS
@@ -2302,6 +2357,7 @@ namespace alglib_impl
 #define AE_PARTIAL_BUILD
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -2309,6 +2365,8 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -2329,11 +2387,13 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_HBLAS
@@ -2348,11 +2408,13 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_HBLAS
@@ -2360,6 +2422,7 @@ namespace alglib_impl
 #define AE_COMPILE_ORTFAC
 #define AE_COMPILE_FBLS
 #define AE_COMPILE_SNNLS
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_TRLINSOLVE
 #define AE_COMPILE_SAFESOLVE
 #define AE_COMPILE_RCOND
@@ -2379,6 +2442,8 @@ namespace alglib_impl
 #define AE_COMPILE_SPARSE
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLAS
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
@@ -2392,6 +2457,7 @@ namespace alglib_impl
 #define AE_COMPILE_ORTFAC
 #define AE_COMPILE_FBLS
 #define AE_COMPILE_CQMODELS
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_BLAS
 #define AE_COMPILE_BDSVD
 #define AE_COMPILE_SVD
@@ -2409,6 +2475,7 @@ namespace alglib_impl
 #define AE_COMPILE_LINMIN
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -2416,6 +2483,8 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -2451,9 +2520,11 @@ namespace alglib_impl
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_BDSVD
 #define AE_COMPILE_SVD
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
 #define AE_COMPILE_SAFESOLVE
@@ -2504,6 +2575,8 @@ namespace alglib_impl
 #define AE_COMPILE_SPARSE
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLAS
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
@@ -2523,6 +2596,7 @@ namespace alglib_impl
 #define AE_COMPILE_NORMESTIMATOR
 #define AE_COMPILE_LINLSQR
 #define AE_COMPILE_LINMIN
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_OPTSERV
 #define AE_COMPILE_FBLS
 #define AE_COMPILE_MINLBFGS
@@ -2532,38 +2606,12 @@ namespace alglib_impl
 #define AE_COMPILE_QQPSOLVER
 #endif
 
-#ifdef AE_COMPILE_MINCG
-#define AE_PARTIAL_BUILD
-#define AE_COMPILE_LINMIN
-#define AE_COMPILE_APSERV
-#define AE_COMPILE_TSORT
-#define AE_COMPILE_ABLASF
-#define AE_COMPILE_ABLASMKL
-#define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
-#define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
-#define AE_COMPILE_SPARSE
-#define AE_COMPILE_ROTATIONS
-#define AE_COMPILE_TRFAC
-#define AE_COMPILE_TRLINSOLVE
-#define AE_COMPILE_SAFESOLVE
-#define AE_COMPILE_RCOND
-#define AE_COMPILE_MATINV
-#define AE_COMPILE_HBLAS
-#define AE_COMPILE_SBLAS
-#define AE_COMPILE_ORTFAC
-#define AE_COMPILE_BLAS
-#define AE_COMPILE_BDSVD
-#define AE_COMPILE_SVD
-#define AE_COMPILE_OPTSERV
-#endif
-
 #ifdef AE_COMPILE_MINBLEIC
 #define AE_PARTIAL_BUILD
 #define AE_COMPILE_LINMIN
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -2571,6 +2619,8 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -2588,9 +2638,6 @@ namespace alglib_impl
 #define AE_COMPILE_CQMODELS
 #define AE_COMPILE_SNNLS
 #define AE_COMPILE_SACTIVESETS
-#define AE_COMPILE_MINCG
-#define AE_COMPILE_XBLAS
-#define AE_COMPILE_DIRECTDENSESOLVERS
 #endif
 
 #ifdef AE_COMPILE_QPBLEICSOLVER
@@ -2602,6 +2649,8 @@ namespace alglib_impl
 #define AE_COMPILE_SPARSE
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLAS
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
@@ -2611,6 +2660,7 @@ namespace alglib_impl
 #define AE_COMPILE_RCOND
 #define AE_COMPILE_MATINV
 #define AE_COMPILE_LINMIN
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_HBLAS
 #define AE_COMPILE_SBLAS
 #define AE_COMPILE_ORTFAC
@@ -2622,9 +2672,6 @@ namespace alglib_impl
 #define AE_COMPILE_CQMODELS
 #define AE_COMPILE_SNNLS
 #define AE_COMPILE_SACTIVESETS
-#define AE_COMPILE_MINCG
-#define AE_COMPILE_XBLAS
-#define AE_COMPILE_DIRECTDENSESOLVERS
 #define AE_COMPILE_MINBLEIC
 #endif
 
@@ -2637,6 +2684,8 @@ namespace alglib_impl
 #define AE_COMPILE_SPARSE
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLAS
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
@@ -2656,6 +2705,7 @@ namespace alglib_impl
 #define AE_COMPILE_NORMESTIMATOR
 #define AE_COMPILE_LINLSQR
 #define AE_COMPILE_LINMIN
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_OPTSERV
 #define AE_COMPILE_FBLS
 #define AE_COMPILE_MINLBFGS
@@ -2664,36 +2714,43 @@ namespace alglib_impl
 #define AE_COMPILE_SACTIVESETS
 #define AE_COMPILE_QQPSOLVER
 #define AE_COMPILE_QPDENSEAULSOLVER
-#define AE_COMPILE_MINCG
 #define AE_COMPILE_MINBLEIC
 #define AE_COMPILE_QPBLEICSOLVER
 #endif
 
-#ifdef AE_COMPILE_MINBC
+#ifdef AE_COMPILE_REVISEDDUALSIMPLEX
 #define AE_PARTIAL_BUILD
-#define AE_COMPILE_LINMIN
 #define AE_COMPILE_APSERV
-#define AE_COMPILE_TSORT
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
+#define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
-#define AE_COMPILE_TRLINSOLVE
-#define AE_COMPILE_SAFESOLVE
-#define AE_COMPILE_RCOND
-#define AE_COMPILE_MATINV
-#define AE_COMPILE_HBLAS
-#define AE_COMPILE_SBLAS
-#define AE_COMPILE_ORTFAC
-#define AE_COMPILE_BLAS
-#define AE_COMPILE_BDSVD
-#define AE_COMPILE_SVD
-#define AE_COMPILE_OPTSERV
+#endif
+
+#ifdef AE_COMPILE_MINLP
+#define AE_PARTIAL_BUILD
+#define AE_COMPILE_APSERV
+#define AE_COMPILE_ABLASMKL
+#define AE_COMPILE_HQRND
+#define AE_COMPILE_TSORT
+#define AE_COMPILE_SPARSE
+#define AE_COMPILE_ABLASF
+#define AE_COMPILE_ABLAS
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
+#define AE_COMPILE_ROTATIONS
+#define AE_COMPILE_TRFAC
+#define AE_COMPILE_REVISEDDUALSIMPLEX
 #endif
 
 #ifdef AE_COMPILE_NLCSLP
@@ -2701,6 +2758,7 @@ namespace alglib_impl
 #define AE_COMPILE_LINMIN
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -2708,6 +2766,8 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -2721,16 +2781,7 @@ namespace alglib_impl
 #define AE_COMPILE_BDSVD
 #define AE_COMPILE_SVD
 #define AE_COMPILE_OPTSERV
-#define AE_COMPILE_FBLS
-#define AE_COMPILE_SNNLS
-#define AE_COMPILE_MINLBFGS
-#define AE_COMPILE_CQMODELS
-#define AE_COMPILE_SACTIVESETS
-#define AE_COMPILE_MINCG
-#define AE_COMPILE_XBLAS
-#define AE_COMPILE_DIRECTDENSESOLVERS
-#define AE_COMPILE_MINBLEIC
-#define AE_COMPILE_MINBC
+#define AE_COMPILE_REVISEDDUALSIMPLEX
 #endif
 
 #ifdef AE_COMPILE_MINNLC
@@ -2738,6 +2789,7 @@ namespace alglib_impl
 #define AE_COMPILE_LINMIN
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -2745,6 +2797,8 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -2763,19 +2817,17 @@ namespace alglib_impl
 #define AE_COMPILE_MINLBFGS
 #define AE_COMPILE_CQMODELS
 #define AE_COMPILE_SACTIVESETS
-#define AE_COMPILE_MINCG
-#define AE_COMPILE_XBLAS
-#define AE_COMPILE_DIRECTDENSESOLVERS
 #define AE_COMPILE_MINBLEIC
-#define AE_COMPILE_MINBC
+#define AE_COMPILE_REVISEDDUALSIMPLEX
 #define AE_COMPILE_NLCSLP
 #endif
 
-#ifdef AE_COMPILE_MINNS
+#ifdef AE_COMPILE_MINBC
 #define AE_PARTIAL_BUILD
 #define AE_COMPILE_LINMIN
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -2783,6 +2835,38 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_ROTATIONS
+#define AE_COMPILE_TRFAC
+#define AE_COMPILE_TRLINSOLVE
+#define AE_COMPILE_SAFESOLVE
+#define AE_COMPILE_RCOND
+#define AE_COMPILE_MATINV
+#define AE_COMPILE_HBLAS
+#define AE_COMPILE_SBLAS
+#define AE_COMPILE_ORTFAC
+#define AE_COMPILE_BLAS
+#define AE_COMPILE_BDSVD
+#define AE_COMPILE_SVD
+#define AE_COMPILE_OPTSERV
+#endif
+
+#ifdef AE_COMPILE_MINNS
+#define AE_PARTIAL_BUILD
+#define AE_COMPILE_LINMIN
+#define AE_COMPILE_APSERV
+#define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
+#define AE_COMPILE_ABLASF
+#define AE_COMPILE_ABLASMKL
+#define AE_COMPILE_ABLAS
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_HQRND
+#define AE_COMPILE_MATGEN
+#define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -2800,9 +2884,6 @@ namespace alglib_impl
 #define AE_COMPILE_SNNLS
 #define AE_COMPILE_CQMODELS
 #define AE_COMPILE_SACTIVESETS
-#define AE_COMPILE_MINCG
-#define AE_COMPILE_XBLAS
-#define AE_COMPILE_DIRECTDENSESOLVERS
 #define AE_COMPILE_MINBLEIC
 #endif
 
@@ -2811,6 +2892,7 @@ namespace alglib_impl
 #define AE_COMPILE_LINMIN
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -2818,6 +2900,8 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -2836,16 +2920,15 @@ namespace alglib_impl
 #define AE_COMPILE_CQMODELS
 #define AE_COMPILE_SNNLS
 #define AE_COMPILE_SACTIVESETS
-#define AE_COMPILE_MINCG
-#define AE_COMPILE_XBLAS
-#define AE_COMPILE_DIRECTDENSESOLVERS
 #define AE_COMPILE_MINBLEIC
 #endif
 
-#ifdef AE_COMPILE_MINLM
+#ifdef AE_COMPILE_MINCG
 #define AE_PARTIAL_BUILD
+#define AE_COMPILE_LINMIN
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -2853,6 +2936,37 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_ROTATIONS
+#define AE_COMPILE_TRFAC
+#define AE_COMPILE_TRLINSOLVE
+#define AE_COMPILE_SAFESOLVE
+#define AE_COMPILE_RCOND
+#define AE_COMPILE_MATINV
+#define AE_COMPILE_HBLAS
+#define AE_COMPILE_SBLAS
+#define AE_COMPILE_ORTFAC
+#define AE_COMPILE_BLAS
+#define AE_COMPILE_BDSVD
+#define AE_COMPILE_SVD
+#define AE_COMPILE_OPTSERV
+#endif
+
+#ifdef AE_COMPILE_MINLM
+#define AE_PARTIAL_BUILD
+#define AE_COMPILE_APSERV
+#define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
+#define AE_COMPILE_ABLASF
+#define AE_COMPILE_ABLASMKL
+#define AE_COMPILE_ABLAS
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_HQRND
+#define AE_COMPILE_MATGEN
+#define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -2878,7 +2992,6 @@ namespace alglib_impl
 #define AE_COMPILE_SACTIVESETS
 #define AE_COMPILE_QQPSOLVER
 #define AE_COMPILE_QPDENSEAULSOLVER
-#define AE_COMPILE_MINCG
 #define AE_COMPILE_MINBLEIC
 #define AE_COMPILE_QPBLEICSOLVER
 #define AE_COMPILE_MINQP
@@ -3004,6 +3117,8 @@ namespace alglib_impl
 #define AE_COMPILE_HSSCHUR
 #define AE_COMPILE_BASICSTATOPS
 #define AE_COMPILE_EVD
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
 #define AE_COMPILE_SAFESOLVE
@@ -3118,6 +3233,8 @@ namespace alglib_impl
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_BDSVD
 #define AE_COMPILE_SVD
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -3132,6 +3249,7 @@ namespace alglib_impl
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_LINMIN
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -3139,6 +3257,8 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -3156,9 +3276,6 @@ namespace alglib_impl
 #define AE_COMPILE_CQMODELS
 #define AE_COMPILE_SNNLS
 #define AE_COMPILE_SACTIVESETS
-#define AE_COMPILE_MINCG
-#define AE_COMPILE_XBLAS
-#define AE_COMPILE_DIRECTDENSESOLVERS
 #define AE_COMPILE_MINBLEIC
 #endif
 
@@ -3195,6 +3312,8 @@ namespace alglib_impl
 #define AE_COMPILE_SPARSE
 #define AE_COMPILE_MLPBASE
 #define AE_COMPILE_MLPE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
@@ -3204,6 +3323,7 @@ namespace alglib_impl
 #define AE_COMPILE_RCOND
 #define AE_COMPILE_MATINV
 #define AE_COMPILE_LINMIN
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_HBLAS
 #define AE_COMPILE_SBLAS
 #define AE_COMPILE_ORTFAC
@@ -3236,6 +3356,21 @@ namespace alglib_impl
 #define AE_COMPILE_SCODES
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_HQRND
+#define AE_COMPILE_BASICSTATOPS
+#define AE_COMPILE_ABLASF
+#define AE_COMPILE_ABLASMKL
+#define AE_COMPILE_ABLAS
+#define AE_COMPILE_BASESTAT
+#define AE_COMPILE_BDSS
+#endif
+
+#ifdef AE_COMPILE_KNN
+#define AE_PARTIAL_BUILD
+#define AE_COMPILE_APSERV
+#define AE_COMPILE_SCODES
+#define AE_COMPILE_TSORT
+#define AE_COMPILE_HQRND
+#define AE_COMPILE_NEARESTNEIGHBOR
 #define AE_COMPILE_BASICSTATOPS
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
@@ -3369,32 +3504,16 @@ namespace alglib_impl
 #define AE_COMPILE_CONV
 #endif
 
-#ifdef AE_COMPILE_IDWINT
+#ifdef AE_COMPILE_IDW
 #define AE_PARTIAL_BUILD
 #define AE_COMPILE_SCODES
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_NEARESTNEIGHBOR
+#define AE_COMPILE_HQRND
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_HQRND
-#define AE_COMPILE_HBLAS
-#define AE_COMPILE_CREFLECTIONS
-#define AE_COMPILE_SBLAS
-#define AE_COMPILE_ORTFAC
-#define AE_COMPILE_BLAS
-#define AE_COMPILE_ROTATIONS
-#define AE_COMPILE_BDSVD
-#define AE_COMPILE_SVD
-#define AE_COMPILE_MATGEN
-#define AE_COMPILE_SPARSE
-#define AE_COMPILE_TRFAC
-#define AE_COMPILE_TRLINSOLVE
-#define AE_COMPILE_SAFESOLVE
-#define AE_COMPILE_RCOND
-#define AE_COMPILE_XBLAS
-#define AE_COMPILE_DIRECTDENSESOLVERS
 #endif
 
 #ifdef AE_COMPILE_RATINT
@@ -3408,6 +3527,7 @@ namespace alglib_impl
 #define AE_COMPILE_LINMIN
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -3415,6 +3535,8 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -3432,10 +3554,9 @@ namespace alglib_impl
 #define AE_COMPILE_CQMODELS
 #define AE_COMPILE_SNNLS
 #define AE_COMPILE_SACTIVESETS
-#define AE_COMPILE_MINCG
+#define AE_COMPILE_MINBLEIC
 #define AE_COMPILE_XBLAS
 #define AE_COMPILE_DIRECTDENSESOLVERS
-#define AE_COMPILE_MINBLEIC
 #define AE_COMPILE_NORMESTIMATOR
 #define AE_COMPILE_LINLSQR
 #define AE_COMPILE_MINLBFGS
@@ -3444,7 +3565,7 @@ namespace alglib_impl
 #define AE_COMPILE_QPBLEICSOLVER
 #define AE_COMPILE_MINQP
 #define AE_COMPILE_MINLM
-#define AE_COMPILE_MINBC
+#define AE_COMPILE_REVISEDDUALSIMPLEX
 #define AE_COMPILE_NLCSLP
 #define AE_COMPILE_MINNLC
 #endif
@@ -3455,11 +3576,13 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #endif
@@ -3471,10 +3594,12 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_INTFITSERV
@@ -3492,9 +3617,11 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
+#define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_MATGEN
-#define AE_COMPILE_SPARSE
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_INTFITSERV
@@ -3520,10 +3647,12 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_INTFITSERV
@@ -3547,11 +3676,13 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_INTFITSERV
@@ -3562,6 +3693,7 @@ namespace alglib_impl
 #define AE_COMPILE_ORTFAC
 #define AE_COMPILE_FBLS
 #define AE_COMPILE_SPLINE1D
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_TRLINSOLVE
 #define AE_COMPILE_SAFESOLVE
 #define AE_COMPILE_RCOND
@@ -3581,7 +3713,6 @@ namespace alglib_impl
 #define AE_COMPILE_SACTIVESETS
 #define AE_COMPILE_QQPSOLVER
 #define AE_COMPILE_QPDENSEAULSOLVER
-#define AE_COMPILE_MINCG
 #define AE_COMPILE_MINBLEIC
 #define AE_COMPILE_QPBLEICSOLVER
 #define AE_COMPILE_MINQP
@@ -3597,10 +3728,12 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_INTFITSERV
@@ -3611,6 +3744,7 @@ namespace alglib_impl
 #define AE_COMPILE_ORTFAC
 #define AE_COMPILE_FBLS
 #define AE_COMPILE_SPLINE1D
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_TRLINSOLVE
 #define AE_COMPILE_SAFESOLVE
 #define AE_COMPILE_RCOND
@@ -3630,7 +3764,6 @@ namespace alglib_impl
 #define AE_COMPILE_SACTIVESETS
 #define AE_COMPILE_QQPSOLVER
 #define AE_COMPILE_QPDENSEAULSOLVER
-#define AE_COMPILE_MINCG
 #define AE_COMPILE_MINBLEIC
 #define AE_COMPILE_QPBLEICSOLVER
 #define AE_COMPILE_MINQP
@@ -3645,11 +3778,13 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_INTFITSERV
@@ -3674,10 +3809,12 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_INTFITSERV
@@ -3688,6 +3825,7 @@ namespace alglib_impl
 #define AE_COMPILE_ORTFAC
 #define AE_COMPILE_FBLS
 #define AE_COMPILE_SPLINE1D
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_TRLINSOLVE
 #define AE_COMPILE_SAFESOLVE
 #define AE_COMPILE_RCOND
@@ -3707,7 +3845,6 @@ namespace alglib_impl
 #define AE_COMPILE_SACTIVESETS
 #define AE_COMPILE_QQPSOLVER
 #define AE_COMPILE_QPDENSEAULSOLVER
-#define AE_COMPILE_MINCG
 #define AE_COMPILE_MINBLEIC
 #define AE_COMPILE_QPBLEICSOLVER
 #define AE_COMPILE_MINQP
@@ -3724,10 +3861,12 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_INTFITSERV
@@ -3738,6 +3877,7 @@ namespace alglib_impl
 #define AE_COMPILE_ORTFAC
 #define AE_COMPILE_FBLS
 #define AE_COMPILE_SPLINE1D
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_TRLINSOLVE
 #define AE_COMPILE_SAFESOLVE
 #define AE_COMPILE_RCOND
@@ -3757,7 +3897,6 @@ namespace alglib_impl
 #define AE_COMPILE_SACTIVESETS
 #define AE_COMPILE_QQPSOLVER
 #define AE_COMPILE_QPDENSEAULSOLVER
-#define AE_COMPILE_MINCG
 #define AE_COMPILE_MINBLEIC
 #define AE_COMPILE_QPBLEICSOLVER
 #define AE_COMPILE_MINQP
@@ -3772,6 +3911,7 @@ namespace alglib_impl
 #define AE_COMPILE_LINMIN
 #define AE_COMPILE_APSERV
 #define AE_COMPILE_TSORT
+#define AE_COMPILE_OPTGUARDAPI
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
@@ -3779,6 +3919,8 @@ namespace alglib_impl
 #define AE_COMPILE_HQRND
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_TRLINSOLVE
@@ -3796,10 +3938,9 @@ namespace alglib_impl
 #define AE_COMPILE_CQMODELS
 #define AE_COMPILE_SNNLS
 #define AE_COMPILE_SACTIVESETS
-#define AE_COMPILE_MINCG
+#define AE_COMPILE_MINBLEIC
 #define AE_COMPILE_XBLAS
 #define AE_COMPILE_DIRECTDENSESOLVERS
-#define AE_COMPILE_MINBLEIC
 #define AE_COMPILE_NORMESTIMATOR
 #define AE_COMPILE_LINLSQR
 #define AE_COMPILE_MINLBFGS
@@ -3808,7 +3949,7 @@ namespace alglib_impl
 #define AE_COMPILE_QPBLEICSOLVER
 #define AE_COMPILE_MINQP
 #define AE_COMPILE_MINLM
-#define AE_COMPILE_MINBC
+#define AE_COMPILE_REVISEDDUALSIMPLEX
 #define AE_COMPILE_NLCSLP
 #define AE_COMPILE_MINNLC
 #define AE_COMPILE_FITSPHERE
@@ -3997,11 +4138,13 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #define AE_COMPILE_SBLAS
@@ -4027,11 +4170,13 @@ namespace alglib_impl
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLASMKL
 #define AE_COMPILE_ABLAS
-#define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_HQRND
-#define AE_COMPILE_MATGEN
 #define AE_COMPILE_TSORT
 #define AE_COMPILE_SPARSE
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
+#define AE_COMPILE_CREFLECTIONS
+#define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS
 #define AE_COMPILE_TRFAC
 #endif
@@ -4055,6 +4200,8 @@ namespace alglib_impl
 #define AE_COMPILE_HSSCHUR
 #define AE_COMPILE_BASICSTATOPS
 #define AE_COMPILE_EVD
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_TRFAC
 #endif
 
@@ -4082,6 +4229,8 @@ namespace alglib_impl
 #define AE_COMPILE_SPARSE
 #define AE_COMPILE_ABLASF
 #define AE_COMPILE_ABLAS
+#define AE_COMPILE_DLU
+#define AE_COMPILE_SPTRF
 #define AE_COMPILE_CREFLECTIONS
 #define AE_COMPILE_MATGEN
 #define AE_COMPILE_ROTATIONS

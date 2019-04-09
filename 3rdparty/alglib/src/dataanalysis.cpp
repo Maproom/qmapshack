@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -89,6 +89,10 @@ namespace alglib
 #endif
 
 #if defined(AE_COMPILE_DFOREST) || !defined(AE_PARTIAL_BUILD)
+
+#endif
+
+#if defined(AE_COMPILE_KNN) || !defined(AE_PARTIAL_BUILD)
 
 #endif
 
@@ -301,8 +305,13 @@ OUTPUT PARAMETERS:
                     matrix, whose columns store basis vectors.
 
 NOTE: passing eps=0 and maxits=0 results in small eps  being  selected  as
-stopping condition. Exact value of automatically selected eps is  version-
--dependent.
+      a stopping condition. Exact value of automatically selected  eps  is
+      version-dependent.
+
+NOTE: zero  MaxIts  is  silently  replaced  by some reasonable value which
+      prevents eternal loops (possible when inputs are degenerate and  too
+      stringent stopping criteria are specified). In  current  version  it
+      is 50+2*NVars.
 
   -- ALGLIB --
      Copyright 10.01.2017 by Bochkanov Sergey
@@ -12936,6 +12945,138 @@ decisionforestbuilder::~decisionforestbuilder()
 
 
 /*************************************************************************
+Buffer object which is used to perform  various  requests  (usually  model
+inference) in the multithreaded mode (multiple threads working  with  same
+DF object).
+
+This object should be created with DFCreateBuffer().
+*************************************************************************/
+_decisionforestbuffer_owner::_decisionforestbuffer_owner()
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_decisionforestbuffer_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    p_struct = (alglib_impl::decisionforestbuffer*)alglib_impl::ae_malloc(sizeof(alglib_impl::decisionforestbuffer), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::decisionforestbuffer));
+    alglib_impl::_decisionforestbuffer_init(p_struct, &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_decisionforestbuffer_owner::_decisionforestbuffer_owner(const _decisionforestbuffer_owner &rhs)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_decisionforestbuffer_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: decisionforestbuffer copy constructor failure (source is not initialized)", &_state);
+    p_struct = (alglib_impl::decisionforestbuffer*)alglib_impl::ae_malloc(sizeof(alglib_impl::decisionforestbuffer), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::decisionforestbuffer));
+    alglib_impl::_decisionforestbuffer_init_copy(p_struct, const_cast<alglib_impl::decisionforestbuffer*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_decisionforestbuffer_owner& _decisionforestbuffer_owner::operator=(const _decisionforestbuffer_owner &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return *this;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    alglib_impl::ae_assert(p_struct!=NULL, "ALGLIB: decisionforestbuffer assignment constructor failure (destination is not initialized)", &_state);
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: decisionforestbuffer assignment constructor failure (source is not initialized)", &_state);
+    alglib_impl::_decisionforestbuffer_destroy(p_struct);
+    memset(p_struct, 0, sizeof(alglib_impl::decisionforestbuffer));
+    alglib_impl::_decisionforestbuffer_init_copy(p_struct, const_cast<alglib_impl::decisionforestbuffer*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+    return *this;
+}
+
+_decisionforestbuffer_owner::~_decisionforestbuffer_owner()
+{
+    if( p_struct!=NULL )
+    {
+        alglib_impl::_decisionforestbuffer_destroy(p_struct);
+        ae_free(p_struct);
+    }
+}
+
+alglib_impl::decisionforestbuffer* _decisionforestbuffer_owner::c_ptr()
+{
+    return p_struct;
+}
+
+alglib_impl::decisionforestbuffer* _decisionforestbuffer_owner::c_ptr() const
+{
+    return const_cast<alglib_impl::decisionforestbuffer*>(p_struct);
+}
+decisionforestbuffer::decisionforestbuffer() : _decisionforestbuffer_owner() 
+{
+}
+
+decisionforestbuffer::decisionforestbuffer(const decisionforestbuffer &rhs):_decisionforestbuffer_owner(rhs) 
+{
+}
+
+decisionforestbuffer& decisionforestbuffer::operator=(const decisionforestbuffer &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    _decisionforestbuffer_owner::operator=(rhs);
+    return *this;
+}
+
+decisionforestbuffer::~decisionforestbuffer()
+{
+}
+
+
+/*************************************************************************
 Decision forest (random forest) model.
 *************************************************************************/
 _decisionforest_owner::_decisionforest_owner()
@@ -13353,6 +13494,55 @@ void dfunserialize(const std::istream &s_in, decisionforest &obj)
 }
 
 /*************************************************************************
+This function creates buffer  structure  which  can  be  used  to  perform
+parallel inference requests.
+
+DF subpackage  provides two sets of computing functions - ones  which  use
+internal buffer of DF model  (these  functions are single-threaded because
+they use same buffer, which can not  shared  between  threads),  and  ones
+which use external buffer.
+
+This function is used to initialize external buffer.
+
+INPUT PARAMETERS
+    Model       -   DF model which is associated with newly created buffer
+
+OUTPUT PARAMETERS
+    Buf         -   external buffer.
+
+
+IMPORTANT: buffer object should be used only with model which was used  to
+           initialize buffer. Any attempt to  use  buffer  with  different
+           object is dangerous - you  may   get  integrity  check  failure
+           (exception) because sizes of internal  arrays  do  not  fit  to
+           dimensions of the model structure.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void dfcreatebuffer(const decisionforest &model, decisionforestbuffer &buf, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::dfcreatebuffer(const_cast<alglib_impl::decisionforest*>(model.c_ptr()), const_cast<alglib_impl::decisionforestbuffer*>(buf.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
 This subroutine creates DecisionForestBuilder  object  which  is  used  to
 train random forests.
 
@@ -13739,15 +13929,8 @@ void dfbuildersetrdfsplitstrength(const decisionforestbuilder &s, const ae_int_t
 }
 
 /*************************************************************************
-This function is used to peek into random forest construction process from
-other thread and get current progress indicator. It returns value in [0,1].
-
-INPUT PARAMETERS:
-    S           -   decision forest builder object used  to  build  random
-                    forest in some other thread
-
-RESULT:
-    progress value, in [0,1]
+This function is an alias for dfbuilderpeekprogress(), left in ALGLIB  for
+backward compatibility reasons.
 
   -- ALGLIB --
      Copyright 21.05.2018 by Bochkanov Sergey
@@ -13770,6 +13953,44 @@ double dfbuildergetprogress(const decisionforestbuilder &s, const xparams _xpara
     if( _xparams.flags!=0x0 )
         ae_state_set_flags(&_alglib_env_state, _xparams.flags);
     double result = alglib_impl::dfbuildergetprogress(const_cast<alglib_impl::decisionforestbuilder*>(s.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+This function is used to peek into random forest construction process from
+other thread and get current progress indicator. It returns value in [0,1].
+
+You can "peek" into decision forest builder from another thread.
+
+INPUT PARAMETERS:
+    S           -   decision forest builder object used  to  build  random
+                    forest in some other thread
+
+RESULT:
+    progress value, in [0,1]
+
+  -- ALGLIB --
+     Copyright 21.05.2018 by Bochkanov Sergey
+*************************************************************************/
+double dfbuilderpeekprogress(const decisionforestbuilder &s, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::dfbuilderpeekprogress(const_cast<alglib_impl::decisionforestbuilder*>(s.c_ptr()), &_alglib_env_state);
     alglib_impl::ae_state_clear(&_alglib_env_state);
     return *(reinterpret_cast<double*>(&result));
 }
@@ -13833,17 +14054,26 @@ void dfbuilderbuildrandomforest(const decisionforestbuilder &s, const ae_int_t n
 }
 
 /*************************************************************************
-Procesing
+Inference using decision forest
+
+IMPORTANT: this  function  is  thread-unsafe  and  may   modify   internal
+           structures of the model! You can not use same model  object for
+           parallel evaluation from several threads.
+
+           Use dftsprocess()  with  independent  thread-local  buffers  if
+           you need thread-safe evaluation.
 
 INPUT PARAMETERS:
     DF      -   decision forest model
-    X       -   input vector,  array[0..NVars-1].
+    X       -   input vector,  array[NVars]
+    Y       -   possibly preallocated buffer, reallocated if too small
 
 OUTPUT PARAMETERS:
     Y       -   result. Regression estimate when solving regression  task,
                 vector of posterior probabilities for classification task.
 
 See also DFProcessI.
+
 
   -- ALGLIB --
      Copyright 16.02.2009 by Bochkanov Sergey
@@ -13878,6 +14108,13 @@ This function allocates new array on each call,  so  it  is  significantly
 slower than its 'non-interactive' counterpart, but it is  more  convenient
 when you call it from command line.
 
+IMPORTANT: this  function  is  thread-unsafe  and  may   modify   internal
+           structures of the model! You can not use same model  object for
+           parallel evaluation from several threads.
+
+           Use dftsprocess()  with  independent  thread-local  buffers  if
+           you need thread-safe evaluation.
+
   -- ALGLIB --
      Copyright 28.02.2010 by Bochkanov Sergey
 *************************************************************************/
@@ -13899,6 +14136,155 @@ void dfprocessi(const decisionforest &df, const real_1d_array &x, real_1d_array 
     if( _xparams.flags!=0x0 )
         ae_state_set_flags(&_alglib_env_state, _xparams.flags);
     alglib_impl::dfprocessi(const_cast<alglib_impl::decisionforest*>(df.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), const_cast<alglib_impl::ae_vector*>(y.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function returns first component of the  inferred  vector  (i.e.  one
+with index #0).
+
+It is a convenience wrapper for dfprocess() intended for either:
+* 1-dimensional regression problems
+* 2-class classification problems
+
+In the former case this function returns inference result as scalar, which
+is definitely more convenient that wrapping it as vector.  In  the  latter
+case it returns probability of object belonging to class #0.
+
+If you call it for anything different from two cases above, it  will  work
+as defined, i.e. return y[0], although it is of less use in such cases.
+
+IMPORTANT: this function is thread-unsafe and modifies internal structures
+           of the model! You can not use same model  object  for  parallel
+           evaluation from several threads.
+
+           Use dftsprocess() with  independent  thread-local  buffers,  if
+           you need thread-safe evaluation.
+
+INPUT PARAMETERS:
+    Model   -   DF model
+    X       -   input vector,  array[0..NVars-1].
+
+RESULT:
+    Y[0]
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double dfprocess0(const decisionforest &model, const real_1d_array &x, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::dfprocess0(const_cast<alglib_impl::decisionforest*>(model.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+This function returns most probable class number for an  input  X.  It  is
+same as calling  dfprocess(model,x,y), then determining i=argmax(y[i]) and
+returning i.
+
+A class number in [0,NOut) range in returned for classification  problems,
+-1 is returned when this function is called for regression problems.
+
+IMPORTANT: this function is thread-unsafe and modifies internal structures
+           of the model! You can not use same model  object  for  parallel
+           evaluation from several threads.
+
+           Use dftsprocess()  with independent  thread-local  buffers,  if
+           you need thread-safe evaluation.
+
+INPUT PARAMETERS:
+    Model   -   decision forest model
+    X       -   input vector,  array[0..NVars-1].
+
+RESULT:
+    class number, -1 for regression tasks
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t dfclassify(const decisionforest &model, const real_1d_array &x, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::ae_int_t result = alglib_impl::dfclassify(const_cast<alglib_impl::decisionforest*>(model.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<ae_int_t*>(&result));
+}
+
+/*************************************************************************
+Inference using decision forest
+
+Thread-safe procesing using external buffer for temporaries.
+
+This function is thread-safe (i.e .  you  can  use  same  DF   model  from
+multiple threads) as long as you use different buffer objects for different
+threads.
+
+INPUT PARAMETERS:
+    DF      -   decision forest model
+    Buf     -   buffer object, must be  allocated  specifically  for  this
+                model with dfcreatebuffer().
+    X       -   input vector,  array[NVars]
+    Y       -   possibly preallocated buffer, reallocated if too small
+
+OUTPUT PARAMETERS:
+    Y       -   result. Regression estimate when solving regression  task,
+                vector of posterior probabilities for classification task.
+
+See also DFProcessI.
+
+
+  -- ALGLIB --
+     Copyright 16.02.2009 by Bochkanov Sergey
+*************************************************************************/
+void dftsprocess(const decisionforest &df, const decisionforestbuffer &buf, const real_1d_array &x, real_1d_array &y, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::dftsprocess(const_cast<alglib_impl::decisionforest*>(df.c_ptr()), const_cast<alglib_impl::decisionforestbuffer*>(buf.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), const_cast<alglib_impl::ae_vector*>(y.c_ptr()), &_alglib_env_state);
     alglib_impl::ae_state_clear(&_alglib_env_state);
     return;
 }
@@ -14148,6 +14534,1526 @@ void dfbuildrandomdecisionforestx1(const real_2d_array &xy, const ae_int_t npoin
     if( _xparams.flags!=0x0 )
         ae_state_set_flags(&_alglib_env_state, _xparams.flags);
     alglib_impl::dfbuildrandomdecisionforestx1(const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), npoints, nvars, nclasses, ntrees, nrndvars, r, &info, const_cast<alglib_impl::decisionforest*>(df.c_ptr()), const_cast<alglib_impl::dfreport*>(rep.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+#endif
+
+#if defined(AE_COMPILE_KNN) || !defined(AE_PARTIAL_BUILD)
+/*************************************************************************
+Buffer object which is used to perform  various  requests  (usually  model
+inference) in the multithreaded mode (multiple threads working  with  same
+KNN object).
+
+This object should be created with KNNCreateBuffer().
+*************************************************************************/
+_knnbuffer_owner::_knnbuffer_owner()
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_knnbuffer_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    p_struct = (alglib_impl::knnbuffer*)alglib_impl::ae_malloc(sizeof(alglib_impl::knnbuffer), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::knnbuffer));
+    alglib_impl::_knnbuffer_init(p_struct, &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_knnbuffer_owner::_knnbuffer_owner(const _knnbuffer_owner &rhs)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_knnbuffer_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: knnbuffer copy constructor failure (source is not initialized)", &_state);
+    p_struct = (alglib_impl::knnbuffer*)alglib_impl::ae_malloc(sizeof(alglib_impl::knnbuffer), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::knnbuffer));
+    alglib_impl::_knnbuffer_init_copy(p_struct, const_cast<alglib_impl::knnbuffer*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_knnbuffer_owner& _knnbuffer_owner::operator=(const _knnbuffer_owner &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return *this;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    alglib_impl::ae_assert(p_struct!=NULL, "ALGLIB: knnbuffer assignment constructor failure (destination is not initialized)", &_state);
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: knnbuffer assignment constructor failure (source is not initialized)", &_state);
+    alglib_impl::_knnbuffer_destroy(p_struct);
+    memset(p_struct, 0, sizeof(alglib_impl::knnbuffer));
+    alglib_impl::_knnbuffer_init_copy(p_struct, const_cast<alglib_impl::knnbuffer*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+    return *this;
+}
+
+_knnbuffer_owner::~_knnbuffer_owner()
+{
+    if( p_struct!=NULL )
+    {
+        alglib_impl::_knnbuffer_destroy(p_struct);
+        ae_free(p_struct);
+    }
+}
+
+alglib_impl::knnbuffer* _knnbuffer_owner::c_ptr()
+{
+    return p_struct;
+}
+
+alglib_impl::knnbuffer* _knnbuffer_owner::c_ptr() const
+{
+    return const_cast<alglib_impl::knnbuffer*>(p_struct);
+}
+knnbuffer::knnbuffer() : _knnbuffer_owner() 
+{
+}
+
+knnbuffer::knnbuffer(const knnbuffer &rhs):_knnbuffer_owner(rhs) 
+{
+}
+
+knnbuffer& knnbuffer::operator=(const knnbuffer &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    _knnbuffer_owner::operator=(rhs);
+    return *this;
+}
+
+knnbuffer::~knnbuffer()
+{
+}
+
+
+/*************************************************************************
+A KNN builder object; this object encapsulates  dataset  and  all  related
+settings, it is used to create an actual instance of KNN model.
+*************************************************************************/
+_knnbuilder_owner::_knnbuilder_owner()
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_knnbuilder_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    p_struct = (alglib_impl::knnbuilder*)alglib_impl::ae_malloc(sizeof(alglib_impl::knnbuilder), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::knnbuilder));
+    alglib_impl::_knnbuilder_init(p_struct, &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_knnbuilder_owner::_knnbuilder_owner(const _knnbuilder_owner &rhs)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_knnbuilder_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: knnbuilder copy constructor failure (source is not initialized)", &_state);
+    p_struct = (alglib_impl::knnbuilder*)alglib_impl::ae_malloc(sizeof(alglib_impl::knnbuilder), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::knnbuilder));
+    alglib_impl::_knnbuilder_init_copy(p_struct, const_cast<alglib_impl::knnbuilder*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_knnbuilder_owner& _knnbuilder_owner::operator=(const _knnbuilder_owner &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return *this;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    alglib_impl::ae_assert(p_struct!=NULL, "ALGLIB: knnbuilder assignment constructor failure (destination is not initialized)", &_state);
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: knnbuilder assignment constructor failure (source is not initialized)", &_state);
+    alglib_impl::_knnbuilder_destroy(p_struct);
+    memset(p_struct, 0, sizeof(alglib_impl::knnbuilder));
+    alglib_impl::_knnbuilder_init_copy(p_struct, const_cast<alglib_impl::knnbuilder*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+    return *this;
+}
+
+_knnbuilder_owner::~_knnbuilder_owner()
+{
+    if( p_struct!=NULL )
+    {
+        alglib_impl::_knnbuilder_destroy(p_struct);
+        ae_free(p_struct);
+    }
+}
+
+alglib_impl::knnbuilder* _knnbuilder_owner::c_ptr()
+{
+    return p_struct;
+}
+
+alglib_impl::knnbuilder* _knnbuilder_owner::c_ptr() const
+{
+    return const_cast<alglib_impl::knnbuilder*>(p_struct);
+}
+knnbuilder::knnbuilder() : _knnbuilder_owner() 
+{
+}
+
+knnbuilder::knnbuilder(const knnbuilder &rhs):_knnbuilder_owner(rhs) 
+{
+}
+
+knnbuilder& knnbuilder::operator=(const knnbuilder &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    _knnbuilder_owner::operator=(rhs);
+    return *this;
+}
+
+knnbuilder::~knnbuilder()
+{
+}
+
+
+/*************************************************************************
+KNN model, can be used for classification or regression
+*************************************************************************/
+_knnmodel_owner::_knnmodel_owner()
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_knnmodel_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    p_struct = (alglib_impl::knnmodel*)alglib_impl::ae_malloc(sizeof(alglib_impl::knnmodel), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::knnmodel));
+    alglib_impl::_knnmodel_init(p_struct, &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_knnmodel_owner::_knnmodel_owner(const _knnmodel_owner &rhs)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_knnmodel_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: knnmodel copy constructor failure (source is not initialized)", &_state);
+    p_struct = (alglib_impl::knnmodel*)alglib_impl::ae_malloc(sizeof(alglib_impl::knnmodel), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::knnmodel));
+    alglib_impl::_knnmodel_init_copy(p_struct, const_cast<alglib_impl::knnmodel*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_knnmodel_owner& _knnmodel_owner::operator=(const _knnmodel_owner &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return *this;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    alglib_impl::ae_assert(p_struct!=NULL, "ALGLIB: knnmodel assignment constructor failure (destination is not initialized)", &_state);
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: knnmodel assignment constructor failure (source is not initialized)", &_state);
+    alglib_impl::_knnmodel_destroy(p_struct);
+    memset(p_struct, 0, sizeof(alglib_impl::knnmodel));
+    alglib_impl::_knnmodel_init_copy(p_struct, const_cast<alglib_impl::knnmodel*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+    return *this;
+}
+
+_knnmodel_owner::~_knnmodel_owner()
+{
+    if( p_struct!=NULL )
+    {
+        alglib_impl::_knnmodel_destroy(p_struct);
+        ae_free(p_struct);
+    }
+}
+
+alglib_impl::knnmodel* _knnmodel_owner::c_ptr()
+{
+    return p_struct;
+}
+
+alglib_impl::knnmodel* _knnmodel_owner::c_ptr() const
+{
+    return const_cast<alglib_impl::knnmodel*>(p_struct);
+}
+knnmodel::knnmodel() : _knnmodel_owner() 
+{
+}
+
+knnmodel::knnmodel(const knnmodel &rhs):_knnmodel_owner(rhs) 
+{
+}
+
+knnmodel& knnmodel::operator=(const knnmodel &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    _knnmodel_owner::operator=(rhs);
+    return *this;
+}
+
+knnmodel::~knnmodel()
+{
+}
+
+
+/*************************************************************************
+KNN training report.
+
+Following fields store training set errors:
+* relclserror       -   fraction of misclassified cases, [0,1]
+* avgce             -   average cross-entropy in bits per symbol
+* rmserror          -   root-mean-square error
+* avgerror          -   average error
+* avgrelerror       -   average relative error
+
+For classification problems:
+* RMS, AVG and AVGREL errors are calculated for posterior probabilities
+
+For regression problems:
+* RELCLS and AVGCE errors are zero
+*************************************************************************/
+_knnreport_owner::_knnreport_owner()
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_knnreport_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    p_struct = (alglib_impl::knnreport*)alglib_impl::ae_malloc(sizeof(alglib_impl::knnreport), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::knnreport));
+    alglib_impl::_knnreport_init(p_struct, &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_knnreport_owner::_knnreport_owner(const _knnreport_owner &rhs)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+        if( p_struct!=NULL )
+        {
+            alglib_impl::_knnreport_destroy(p_struct);
+            alglib_impl::ae_free(p_struct);
+        }
+        p_struct = NULL;
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    p_struct = NULL;
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: knnreport copy constructor failure (source is not initialized)", &_state);
+    p_struct = (alglib_impl::knnreport*)alglib_impl::ae_malloc(sizeof(alglib_impl::knnreport), &_state);
+    memset(p_struct, 0, sizeof(alglib_impl::knnreport));
+    alglib_impl::_knnreport_init_copy(p_struct, const_cast<alglib_impl::knnreport*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+}
+
+_knnreport_owner& _knnreport_owner::operator=(const _knnreport_owner &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _state;
+    
+    alglib_impl::ae_state_init(&_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_state.error_msg);
+        return *this;
+#endif
+    }
+    alglib_impl::ae_state_set_break_jump(&_state, &_break_jump);
+    alglib_impl::ae_assert(p_struct!=NULL, "ALGLIB: knnreport assignment constructor failure (destination is not initialized)", &_state);
+    alglib_impl::ae_assert(rhs.p_struct!=NULL, "ALGLIB: knnreport assignment constructor failure (source is not initialized)", &_state);
+    alglib_impl::_knnreport_destroy(p_struct);
+    memset(p_struct, 0, sizeof(alglib_impl::knnreport));
+    alglib_impl::_knnreport_init_copy(p_struct, const_cast<alglib_impl::knnreport*>(rhs.p_struct), &_state, ae_false);
+    ae_state_clear(&_state);
+    return *this;
+}
+
+_knnreport_owner::~_knnreport_owner()
+{
+    if( p_struct!=NULL )
+    {
+        alglib_impl::_knnreport_destroy(p_struct);
+        ae_free(p_struct);
+    }
+}
+
+alglib_impl::knnreport* _knnreport_owner::c_ptr()
+{
+    return p_struct;
+}
+
+alglib_impl::knnreport* _knnreport_owner::c_ptr() const
+{
+    return const_cast<alglib_impl::knnreport*>(p_struct);
+}
+knnreport::knnreport() : _knnreport_owner() ,relclserror(p_struct->relclserror),avgce(p_struct->avgce),rmserror(p_struct->rmserror),avgerror(p_struct->avgerror),avgrelerror(p_struct->avgrelerror)
+{
+}
+
+knnreport::knnreport(const knnreport &rhs):_knnreport_owner(rhs) ,relclserror(p_struct->relclserror),avgce(p_struct->avgce),rmserror(p_struct->rmserror),avgerror(p_struct->avgerror),avgrelerror(p_struct->avgrelerror)
+{
+}
+
+knnreport& knnreport::operator=(const knnreport &rhs)
+{
+    if( this==&rhs )
+        return *this;
+    _knnreport_owner::operator=(rhs);
+    return *this;
+}
+
+knnreport::~knnreport()
+{
+}
+
+
+/*************************************************************************
+This function serializes data structure to string.
+
+Important properties of s_out:
+* it contains alphanumeric characters, dots, underscores, minus signs
+* these symbols are grouped into words, which are separated by spaces
+  and Windows-style (CR+LF) newlines
+* although  serializer  uses  spaces and CR+LF as separators, you can 
+  replace any separator character by arbitrary combination of spaces,
+  tabs, Windows or Unix newlines. It allows flexible reformatting  of
+  the  string  in  case you want to include it into text or XML file. 
+  But you should not insert separators into the middle of the "words"
+  nor you should change case of letters.
+* s_out can be freely moved between 32-bit and 64-bit systems, little
+  and big endian machines, and so on. You can serialize structure  on
+  32-bit machine and unserialize it on 64-bit one (or vice versa), or
+  serialize  it  on  SPARC  and  unserialize  on  x86.  You  can also 
+  serialize  it  in  C++ version of ALGLIB and unserialize in C# one, 
+  and vice versa.
+*************************************************************************/
+void knnserialize(knnmodel &obj, std::string &s_out)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state state;
+    alglib_impl::ae_serializer serializer;
+    alglib_impl::ae_int_t ssize;
+
+    alglib_impl::ae_state_init(&state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&state, &_break_jump);
+    alglib_impl::ae_serializer_init(&serializer);
+    alglib_impl::ae_serializer_alloc_start(&serializer);
+    alglib_impl::knnalloc(&serializer, obj.c_ptr(), &state);
+    ssize = alglib_impl::ae_serializer_get_alloc_size(&serializer);
+    s_out.clear();
+    s_out.reserve((size_t)(ssize+1));
+    alglib_impl::ae_serializer_sstart_str(&serializer, &s_out);
+    alglib_impl::knnserialize(&serializer, obj.c_ptr(), &state);
+    alglib_impl::ae_serializer_stop(&serializer, &state);
+    alglib_impl::ae_assert( s_out.length()<=(size_t)ssize, "ALGLIB: serialization integrity error", &state);
+    alglib_impl::ae_serializer_clear(&serializer);
+    alglib_impl::ae_state_clear(&state);
+}
+/*************************************************************************
+This function unserializes data structure from string.
+*************************************************************************/
+void knnunserialize(const std::string &s_in, knnmodel &obj)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state state;
+    alglib_impl::ae_serializer serializer;
+
+    alglib_impl::ae_state_init(&state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&state, &_break_jump);
+    alglib_impl::ae_serializer_init(&serializer);
+    alglib_impl::ae_serializer_ustart_str(&serializer, &s_in);
+    alglib_impl::knnunserialize(&serializer, obj.c_ptr(), &state);
+    alglib_impl::ae_serializer_stop(&serializer, &state);
+    alglib_impl::ae_serializer_clear(&serializer);
+    alglib_impl::ae_state_clear(&state);
+}
+
+
+/*************************************************************************
+This function serializes data structure to C++ stream.
+
+Data stream generated by this function is same as  string  representation
+generated  by  string  version  of  serializer - alphanumeric characters,
+dots, underscores, minus signs, which are grouped into words separated by
+spaces and CR+LF.
+
+We recommend you to read comments on string version of serializer to find
+out more about serialization of AlGLIB objects.
+*************************************************************************/
+void knnserialize(knnmodel &obj, std::ostream &s_out)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state state;
+    alglib_impl::ae_serializer serializer;
+
+    alglib_impl::ae_state_init(&state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&state, &_break_jump);
+    alglib_impl::ae_serializer_init(&serializer);
+    alglib_impl::ae_serializer_alloc_start(&serializer);
+    alglib_impl::knnalloc(&serializer, obj.c_ptr(), &state);
+    alglib_impl::ae_serializer_get_alloc_size(&serializer); // not actually needed, but we have to ask
+    alglib_impl::ae_serializer_sstart_stream(&serializer, &s_out);
+    alglib_impl::knnserialize(&serializer, obj.c_ptr(), &state);
+    alglib_impl::ae_serializer_stop(&serializer, &state);
+    alglib_impl::ae_serializer_clear(&serializer);
+    alglib_impl::ae_state_clear(&state);
+}
+/*************************************************************************
+This function unserializes data structure from stream.
+*************************************************************************/
+void knnunserialize(const std::istream &s_in, knnmodel &obj)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state state;
+    alglib_impl::ae_serializer serializer;
+
+    alglib_impl::ae_state_init(&state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&state, &_break_jump);
+    alglib_impl::ae_serializer_init(&serializer);
+    alglib_impl::ae_serializer_ustart_stream(&serializer, &s_in);
+    alglib_impl::knnunserialize(&serializer, obj.c_ptr(), &state);
+    alglib_impl::ae_serializer_stop(&serializer, &state);
+    alglib_impl::ae_serializer_clear(&serializer);
+    alglib_impl::ae_state_clear(&state);
+}
+
+/*************************************************************************
+This function creates buffer  structure  which  can  be  used  to  perform
+parallel KNN requests.
+
+KNN subpackage provides two sets of computing functions - ones  which  use
+internal buffer of KNN model (these  functions are single-threaded because
+they use same buffer, which can not  shared  between  threads),  and  ones
+which use external buffer.
+
+This function is used to initialize external buffer.
+
+INPUT PARAMETERS
+    Model       -   KNN model which is associated with newly created buffer
+
+OUTPUT PARAMETERS
+    Buf         -   external buffer.
+
+
+IMPORTANT: buffer object should be used only with model which was used  to
+           initialize buffer. Any attempt to  use  buffer  with  different
+           object is dangerous - you  may   get  integrity  check  failure
+           (exception) because sizes of internal  arrays  do  not  fit  to
+           dimensions of the model structure.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knncreatebuffer(const knnmodel &model, knnbuffer &buf, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knncreatebuffer(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::knnbuffer*>(buf.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This subroutine creates KNNBuilder object which is used to train KNN models.
+
+By default, new builder stores empty dataset and some  reasonable  default
+settings. At the very least, you should specify dataset prior to  building
+KNN model. You can also tweak settings of the model construction algorithm
+(recommended, although default settings should work well).
+
+Following actions are mandatory:
+* calling knnbuildersetdataset() to specify dataset
+* calling knnbuilderbuildknnmodel() to build KNN model using current
+  dataset and default settings
+
+Additionally, you may call:
+* knnbuildersetnorm() to change norm being used
+
+INPUT PARAMETERS:
+    none
+
+OUTPUT PARAMETERS:
+    S           -   KNN builder
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnbuildercreate(knnbuilder &s, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knnbuildercreate(const_cast<alglib_impl::knnbuilder*>(s.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+Specifies regression problem (one or more continuous  output variables are
+predicted). There also exists "classification" version of this function.
+
+This subroutine adds dense dataset to the internal storage of the  builder
+object. Specifying your dataset in the dense format means that  the  dense
+version of the KNN construction algorithm will be invoked.
+
+INPUT PARAMETERS:
+    S           -   KNN builder object
+    XY          -   array[NPoints,NVars+NOut] (note: actual  size  can  be
+                    larger, only leading part is used anyway), dataset:
+                    * first NVars elements of each row store values of the
+                      independent variables
+                    * next NOut elements store  values  of  the  dependent
+                      variables
+    NPoints     -   number of rows in the dataset, NPoints>=1
+    NVars       -   number of independent variables, NVars>=1
+    NOut        -   number of dependent variables, NOut>=1
+
+OUTPUT PARAMETERS:
+    S           -   KNN builder
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnbuildersetdatasetreg(const knnbuilder &s, const real_2d_array &xy, const ae_int_t npoints, const ae_int_t nvars, const ae_int_t nout, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knnbuildersetdatasetreg(const_cast<alglib_impl::knnbuilder*>(s.c_ptr()), const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), npoints, nvars, nout, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+Specifies classification problem (two  or  more  classes  are  predicted).
+There also exists "regression" version of this function.
+
+This subroutine adds dense dataset to the internal storage of the  builder
+object. Specifying your dataset in the dense format means that  the  dense
+version of the KNN construction algorithm will be invoked.
+
+INPUT PARAMETERS:
+    S           -   KNN builder object
+    XY          -   array[NPoints,NVars+1] (note:   actual   size  can  be
+                    larger, only leading part is used anyway), dataset:
+                    * first NVars elements of each row store values of the
+                      independent variables
+                    * next element stores class index, in [0,NClasses)
+    NPoints     -   number of rows in the dataset, NPoints>=1
+    NVars       -   number of independent variables, NVars>=1
+    NClasses    -   number of classes, NClasses>=2
+
+OUTPUT PARAMETERS:
+    S           -   KNN builder
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnbuildersetdatasetcls(const knnbuilder &s, const real_2d_array &xy, const ae_int_t npoints, const ae_int_t nvars, const ae_int_t nclasses, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knnbuildersetdatasetcls(const_cast<alglib_impl::knnbuilder*>(s.c_ptr()), const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), npoints, nvars, nclasses, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function sets norm type used for neighbor search.
+
+INPUT PARAMETERS:
+    S           -   decision forest builder object
+    NormType    -   norm type:
+                    * 0      inf-norm
+                    * 1      1-norm
+                    * 2      Euclidean norm (default)
+
+OUTPUT PARAMETERS:
+    S           -   decision forest builder
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnbuildersetnorm(const knnbuilder &s, const ae_int_t nrmtype, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knnbuildersetnorm(const_cast<alglib_impl::knnbuilder*>(s.c_ptr()), nrmtype, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This subroutine builds KNN model  according  to  current  settings,  using
+dataset internally stored in the builder object.
+
+The model being built performs inference using Eps-approximate  K  nearest
+neighbors search algorithm, with:
+* K=1,  Eps=0 corresponding to the "nearest neighbor algorithm"
+* K>1,  Eps=0 corresponding to the "K nearest neighbors algorithm"
+* K>=1, Eps>0 corresponding to "approximate nearest neighbors algorithm"
+
+An approximate KNN is a good option for high-dimensional  datasets  (exact
+KNN works slowly when dimensions count grows).
+
+An ALGLIB implementation of kd-trees is used to perform k-nn searches.
+
+  ! COMMERCIAL EDITION OF ALGLIB:
+  !
+  ! Commercial Edition of ALGLIB includes following important improvements
+  ! of this function:
+  ! * high-performance native backend with same C# interface (C# version)
+  ! * multithreading support (C++ and C# versions)
+  !
+  ! We recommend you to read 'Working with commercial version' section  of
+  ! ALGLIB Reference Manual in order to find out how to  use  performance-
+  ! related features provided by commercial edition of ALGLIB.
+
+INPUT PARAMETERS:
+    S       -   KNN builder object
+    K       -   number of neighbors to search for, K>=1
+    Eps     -   approximation factor:
+                * Eps=0 means that exact kNN search is performed
+                * Eps>0 means that (1+Eps)-approximate search is performed
+
+OUTPUT PARAMETERS:
+    Model       -   KNN model
+    Rep         -   report
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnbuilderbuildknnmodel(const knnbuilder &s, const ae_int_t k, const double eps, knnmodel &model, knnreport &rep, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knnbuilderbuildknnmodel(const_cast<alglib_impl::knnbuilder*>(s.c_ptr()), k, eps, const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::knnreport*>(rep.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+Changing search settings of KNN model.
+
+K and EPS parameters of KNN  (AKNN)  search  are  specified  during  model
+construction. However, plain KNN algorithm with Euclidean distance  allows
+you to change them at any moment.
+
+NOTE: future versions of KNN model may support advanced versions  of  KNN,
+      such as NCA or LMNN. It is possible that such algorithms won't allow
+      you to change search settings on the fly. If you call this  function
+      for an algorithm which does not support on-the-fly changes, it  will
+      throw an exception.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    K       -   K>=1, neighbors count
+    EPS     -   accuracy of the EPS-approximate NN search. Set to 0.0,  if
+                you want to perform "classic" KNN search.  Specify  larger
+                values  if  you  need  to  speed-up  high-dimensional  KNN
+                queries.
+
+OUTPUT PARAMETERS:
+    nothing on success, exception on failure
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnrewritekeps(const knnmodel &model, const ae_int_t k, const double eps, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knnrewritekeps(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), k, eps, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+Inference using KNN model.
+
+See also knnprocess0(), knnprocessi() and knnclassify() for options with a
+bit more convenient interface.
+
+IMPORTANT: this function is thread-unsafe and modifies internal structures
+           of the model! You can not use same model  object  for  parallel
+           evaluation from several threads.
+
+           Use knntsprocess() with independent  thread-local  buffers,  if
+           you need thread-safe evaluation.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    X       -   input vector,  array[0..NVars-1].
+    Y       -   possible preallocated buffer. Reused if long enough.
+
+OUTPUT PARAMETERS:
+    Y       -   result. Regression estimate when solving regression  task,
+                vector of posterior probabilities for classification task.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnprocess(const knnmodel &model, const real_1d_array &x, real_1d_array &y, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knnprocess(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), const_cast<alglib_impl::ae_vector*>(y.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+This function returns first component of the  inferred  vector  (i.e.  one
+with index #0).
+
+It is a convenience wrapper for knnprocess() intended for either:
+* 1-dimensional regression problems
+* 2-class classification problems
+
+In the former case this function returns inference result as scalar, which
+is definitely more convenient that wrapping it as vector.  In  the  latter
+case it returns probability of object belonging to class #0.
+
+If you call it for anything different from two cases above, it  will  work
+as defined, i.e. return y[0], although it is of less use in such cases.
+
+IMPORTANT: this function is thread-unsafe and modifies internal structures
+           of the model! You can not use same model  object  for  parallel
+           evaluation from several threads.
+
+           Use knntsprocess() with independent  thread-local  buffers,  if
+           you need thread-safe evaluation.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    X       -   input vector,  array[0..NVars-1].
+
+RESULT:
+    Y[0]
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnprocess0(const knnmodel &model, const real_1d_array &x, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::knnprocess0(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+This function returns most probable class number for an  input  X.  It  is
+same as calling knnprocess(model,x,y), then determining i=argmax(y[i]) and
+returning i.
+
+A class number in [0,NOut) range in returned for classification  problems,
+-1 is returned when this function is called for regression problems.
+
+IMPORTANT: this function is thread-unsafe and modifies internal structures
+           of the model! You can not use same model  object  for  parallel
+           evaluation from several threads.
+
+           Use knntsprocess() with independent  thread-local  buffers,  if
+           you need thread-safe evaluation.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    X       -   input vector,  array[0..NVars-1].
+
+RESULT:
+    class number, -1 for regression tasks
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t knnclassify(const knnmodel &model, const real_1d_array &x, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::ae_int_t result = alglib_impl::knnclassify(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<ae_int_t*>(&result));
+}
+
+/*************************************************************************
+'interactive' variant of knnprocess()  for  languages  like  Python  which
+support constructs like "y = knnprocessi(model,x)" and interactive mode of
+the interpreter.
+
+This function allocates new array on each call,  so  it  is  significantly
+slower than its 'non-interactive' counterpart, but it is  more  convenient
+when you call it from command line.
+
+IMPORTANT: this  function  is  thread-unsafe  and  may   modify   internal
+           structures of the model! You can not use same model  object for
+           parallel evaluation from several threads.
+
+           Use knntsprocess()  with  independent  thread-local  buffers if
+           you need thread-safe evaluation.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnprocessi(const knnmodel &model, const real_1d_array &x, real_1d_array &y, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knnprocessi(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), const_cast<alglib_impl::ae_vector*>(y.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+Thread-safe procesing using external buffer for temporaries.
+
+This function is thread-safe (i.e .  you  can  use  same  KNN  model  from
+multiple threads) as long as you use different buffer objects for different
+threads.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    Buf     -   buffer object, must be  allocated  specifically  for  this
+                model with knncreatebuffer().
+    X       -   input vector,  array[NVars]
+
+OUTPUT PARAMETERS:
+    Y       -   result, array[NOut].   Regression  estimate  when  solving
+                regression task,  vector  of  posterior  probabilities for
+                a classification task.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knntsprocess(const knnmodel &model, const knnbuffer &buf, const real_1d_array &x, real_1d_array &y, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knntsprocess(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::knnbuffer*>(buf.c_ptr()), const_cast<alglib_impl::ae_vector*>(x.c_ptr()), const_cast<alglib_impl::ae_vector*>(y.c_ptr()), &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return;
+}
+
+/*************************************************************************
+Relative classification error on the test set
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set
+    NPoints -   test set size
+
+RESULT:
+    percent of incorrectly classified cases.
+    Zero if model solves regression task.
+
+NOTE: if  you  need several different kinds of error metrics, it is better
+      to use knnallerrors() which computes all error metric  with just one
+      pass over dataset.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnrelclserror(const knnmodel &model, const real_2d_array &xy, const ae_int_t npoints, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::knnrelclserror(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), npoints, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+Average cross-entropy (in bits per element) on the test set
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set
+    NPoints -   test set size
+
+RESULT:
+    CrossEntropy/NPoints.
+    Zero if model solves regression task.
+
+NOTE: the cross-entropy metric is too unstable when used to  evaluate  KNN
+      models (such models can report exactly  zero probabilities),  so  we
+      do not recommend using it.
+
+NOTE: if  you  need several different kinds of error metrics, it is better
+      to use knnallerrors() which computes all error metric  with just one
+      pass over dataset.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnavgce(const knnmodel &model, const real_2d_array &xy, const ae_int_t npoints, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::knnavgce(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), npoints, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+RMS error on the test set.
+
+Its meaning for regression task is obvious. As for classification problems,
+RMS error means error when estimating posterior probabilities.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set
+    NPoints -   test set size
+
+RESULT:
+    root mean square error.
+
+NOTE: if  you  need several different kinds of error metrics, it is better
+      to use knnallerrors() which computes all error metric  with just one
+      pass over dataset.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnrmserror(const knnmodel &model, const real_2d_array &xy, const ae_int_t npoints, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::knnrmserror(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), npoints, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+Average error on the test set
+
+Its meaning for regression task is obvious. As for classification problems,
+average error means error when estimating posterior probabilities.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set
+    NPoints -   test set size
+
+RESULT:
+    average error
+
+NOTE: if  you  need several different kinds of error metrics, it is better
+      to use knnallerrors() which computes all error metric  with just one
+      pass over dataset.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnavgerror(const knnmodel &model, const real_2d_array &xy, const ae_int_t npoints, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::knnavgerror(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), npoints, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+Average relative error on the test set
+
+Its meaning for regression task is obvious. As for classification problems,
+average relative error means error when estimating posterior probabilities.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set
+    NPoints -   test set size
+
+RESULT:
+    average relative error
+
+NOTE: if  you  need several different kinds of error metrics, it is better
+      to use knnallerrors() which computes all error metric  with just one
+      pass over dataset.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnavgrelerror(const knnmodel &model, const real_2d_array &xy, const ae_int_t npoints, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return 0;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    double result = alglib_impl::knnavgrelerror(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), npoints, &_alglib_env_state);
+    alglib_impl::ae_state_clear(&_alglib_env_state);
+    return *(reinterpret_cast<double*>(&result));
+}
+
+/*************************************************************************
+Calculates all kinds of errors for the model in one call.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set:
+                * one row per point
+                * first NVars columns store independent variables
+                * depending on problem type:
+                  * next column stores class number in [0,NClasses) -  for
+                    classification problems
+                  * next NOut columns  store  dependent  variables  -  for
+                    regression problems
+    NPoints -   test set size, NPoints>=0
+
+OUTPUT PARAMETERS:
+    Rep     -   following fields are loaded with errors for both regression
+                and classification models:
+                * rep.rmserror - RMS error for the output
+                * rep.avgerror - average error
+                * rep.avgrelerror - average relative error
+                following fields are set only  for classification  models,
+                zero for regression ones:
+                * relclserror   - relative classification error, in [0,1]
+                * avgce - average cross-entropy in bits per dataset entry
+
+NOTE: the cross-entropy metric is too unstable when used to  evaluate  KNN
+      models (such models can report exactly  zero probabilities),  so  we
+      do not recommend using it.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnallerrors(const knnmodel &model, const real_2d_array &xy, const ae_int_t npoints, knnreport &rep, const xparams _xparams)
+{
+    jmp_buf _break_jump;
+    alglib_impl::ae_state _alglib_env_state;
+    alglib_impl::ae_state_init(&_alglib_env_state);
+    if( setjmp(_break_jump) )
+    {
+#if !defined(AE_NO_EXCEPTIONS)
+        _ALGLIB_CPP_EXCEPTION(_alglib_env_state.error_msg);
+#else
+        _ALGLIB_SET_ERROR_FLAG(_alglib_env_state.error_msg);
+        return;
+#endif
+    }
+    ae_state_set_break_jump(&_alglib_env_state, &_break_jump);
+    if( _xparams.flags!=0x0 )
+        ae_state_set_flags(&_alglib_env_state, _xparams.flags);
+    alglib_impl::knnallerrors(const_cast<alglib_impl::knnmodel*>(model.c_ptr()), const_cast<alglib_impl::ae_matrix*>(xy.c_ptr()), npoints, const_cast<alglib_impl::knnreport*>(rep.c_ptr()), &_alglib_env_state);
     alglib_impl::ae_state_clear(&_alglib_env_state);
     return;
 }
@@ -14753,6 +16659,15 @@ static void dforest_dfprocessinternal(decisionforest* df,
 
 
 #endif
+#if defined(AE_COMPILE_KNN) || !defined(AE_PARTIAL_BUILD)
+static ae_int_t knn_knnfirstversion = 0;
+static void knn_clearreport(knnreport* rep, ae_state *_state);
+static void knn_processinternal(knnmodel* model,
+     knnbuffer* buf,
+     ae_state *_state);
+
+
+#endif
 #if defined(AE_COMPILE_DATACOMP) || !defined(AE_PARTIAL_BUILD)
 
 
@@ -15164,8 +17079,13 @@ OUTPUT PARAMETERS:
                     matrix, whose columns store basis vectors.
                     
 NOTE: passing eps=0 and maxits=0 results in small eps  being  selected  as
-stopping condition. Exact value of automatically selected eps is  version-
--dependent.
+      a stopping condition. Exact value of automatically selected  eps  is
+      version-dependent.
+
+NOTE: zero  MaxIts  is  silently  replaced  by some reasonable value which
+      prevents eternal loops (possible when inputs are degenerate and  too
+      stringent stopping criteria are specified). In  current  version  it
+      is 50+2*NVars.
 
   -- ALGLIB --
      Copyright 10.01.2017 by Bochkanov Sergey
@@ -15268,6 +17188,14 @@ void pcatruncatedsubspacesparse(sparsematrix* x,
      */
     ae_vector_set_length(&b1, npoints, _state);
     ae_vector_set_length(&z1, nvars, _state);
+    if( ae_fp_eq(eps,(double)(0))&&maxits==0 )
+    {
+        eps = 1.0E-6;
+    }
+    if( maxits==0 )
+    {
+        maxits = 50+2*nvars;
+    }
     
     /*
      * Calculate mean values
@@ -23375,8 +25303,14 @@ static void mlpbase_mlpcreate(ae_int_t nin,
     ae_vector_set_length(&network->derror, ntotal-1+1, _state);
     
     /*
-     * Fill structure: global info
+     * Fill structure:
+     * * first, fill by dummy values to avoid spurious reports by Valgrind
+     * * then fill global info header
      */
+    for(i=0; i<=ssize-1; i++)
+    {
+        network->structinfo.ptr.p_int[i] = -999999;
+    }
     network->structinfo.ptr.p_int[0] = ssize;
     network->structinfo.ptr.p_int[1] = nin;
     network->structinfo.ptr.p_int[2] = nout;
@@ -42050,6 +43984,45 @@ void _kmeansreport_destroy(void* _p)
 
 
 /*************************************************************************
+This function creates buffer  structure  which  can  be  used  to  perform
+parallel inference requests.
+
+DF subpackage  provides two sets of computing functions - ones  which  use
+internal buffer of DF model  (these  functions are single-threaded because
+they use same buffer, which can not  shared  between  threads),  and  ones
+which use external buffer.
+
+This function is used to initialize external buffer.
+
+INPUT PARAMETERS
+    Model       -   DF model which is associated with newly created buffer
+
+OUTPUT PARAMETERS
+    Buf         -   external buffer.
+    
+    
+IMPORTANT: buffer object should be used only with model which was used  to
+           initialize buffer. Any attempt to  use  buffer  with  different
+           object is dangerous - you  may   get  integrity  check  failure
+           (exception) because sizes of internal  arrays  do  not  fit  to
+           dimensions of the model structure.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void dfcreatebuffer(decisionforest* model,
+     decisionforestbuffer* buf,
+     ae_state *_state)
+{
+
+    _decisionforestbuffer_clear(buf);
+
+    ae_vector_set_length(&buf->x, model->nvars, _state);
+    ae_vector_set_length(&buf->y, model->nclasses, _state);
+}
+
+
+/*************************************************************************
 This subroutine creates DecisionForestBuilder  object  which  is  used  to
 train random forests.
 
@@ -42405,8 +44378,27 @@ void dfbuildersetrdfsplitstrength(decisionforestbuilder* s,
 
 
 /*************************************************************************
+This function is an alias for dfbuilderpeekprogress(), left in ALGLIB  for
+backward compatibility reasons.
+
+  -- ALGLIB --
+     Copyright 21.05.2018 by Bochkanov Sergey
+*************************************************************************/
+double dfbuildergetprogress(decisionforestbuilder* s, ae_state *_state)
+{
+    double result;
+
+
+    result = dfbuilderpeekprogress(s, _state);
+    return result;
+}
+
+
+/*************************************************************************
 This function is used to peek into random forest construction process from
 other thread and get current progress indicator. It returns value in [0,1].
+
+You can "peek" into decision forest builder from another thread.
 
 INPUT PARAMETERS:
     S           -   decision forest builder object used  to  build  random
@@ -42418,7 +44410,7 @@ RESULT:
   -- ALGLIB --
      Copyright 21.05.2018 by Bochkanov Sergey
 *************************************************************************/
-double dfbuildergetprogress(decisionforestbuilder* s, ae_state *_state)
+double dfbuilderpeekprogress(decisionforestbuilder* s, ae_state *_state)
 {
     double result;
 
@@ -42519,6 +44511,7 @@ void dfbuilderbuildrandomforest(decisionforestbuilder* s,
         df->trees.ptr.p_double[0] = (double)(1+dforest_leafnodewidth);
         df->trees.ptr.p_double[1] = (double)(-1);
         df->trees.ptr.p_double[2] = 0.0;
+        dfcreatebuffer(df, &df->buffer, _state);
         ae_frame_leave(_state);
         return;
     }
@@ -42593,22 +44586,36 @@ void dfbuilderbuildrandomforest(decisionforestbuilder* s,
      * Update progress counter
      */
     s->rdfprogress = s->rdftotal;
+    
+    /*
+     * Prepare buffer
+     */
+    dfcreatebuffer(df, &df->buffer, _state);
     ae_frame_leave(_state);
 }
 
 
 /*************************************************************************
-Procesing
+Inference using decision forest
+
+IMPORTANT: this  function  is  thread-unsafe  and  may   modify   internal
+           structures of the model! You can not use same model  object for
+           parallel evaluation from several threads.
+           
+           Use dftsprocess()  with  independent  thread-local  buffers  if
+           you need thread-safe evaluation.
 
 INPUT PARAMETERS:
     DF      -   decision forest model
-    X       -   input vector,  array[0..NVars-1].
+    X       -   input vector,  array[NVars]
+    Y       -   possibly preallocated buffer, reallocated if too small
 
 OUTPUT PARAMETERS:
     Y       -   result. Regression estimate when solving regression  task,
                 vector of posterior probabilities for classification task.
 
 See also DFProcessI.
+      
 
   -- ALGLIB --
      Copyright 16.02.2009 by Bochkanov Sergey
@@ -42625,7 +44632,13 @@ void dfprocess(decisionforest* df,
 
     
     /*
-     * Proceed
+     * Process
+     *
+     * Although comments above warn you about thread-unsafety of this
+     * function, it is de facto thread-safe. However, thread safety is
+     * an accidental side-effect of the specific inference algorithm
+     * being used. It may disappear in the future versions of the DF
+     * models, so you should NOT rely on it.
      */
     if( y->cnt<df->nclasses )
     {
@@ -42662,6 +44675,13 @@ This function allocates new array on each call,  so  it  is  significantly
 slower than its 'non-interactive' counterpart, but it is  more  convenient
 when you call it from command line.
 
+IMPORTANT: this  function  is  thread-unsafe  and  may   modify   internal
+           structures of the model! You can not use same model  object for
+           parallel evaluation from several threads.
+           
+           Use dftsprocess()  with  independent  thread-local  buffers  if
+           you need thread-safe evaluation.
+
   -- ALGLIB --
      Copyright 28.02.2010 by Bochkanov Sergey
 *************************************************************************/
@@ -42673,6 +44693,163 @@ void dfprocessi(decisionforest* df,
 
     ae_vector_clear(y);
 
+    dfprocess(df, x, y, _state);
+}
+
+
+/*************************************************************************
+This function returns first component of the  inferred  vector  (i.e.  one
+with index #0).
+
+It is a convenience wrapper for dfprocess() intended for either:
+* 1-dimensional regression problems
+* 2-class classification problems
+
+In the former case this function returns inference result as scalar, which
+is definitely more convenient that wrapping it as vector.  In  the  latter
+case it returns probability of object belonging to class #0.
+
+If you call it for anything different from two cases above, it  will  work
+as defined, i.e. return y[0], although it is of less use in such cases.
+
+IMPORTANT: this function is thread-unsafe and modifies internal structures
+           of the model! You can not use same model  object  for  parallel
+           evaluation from several threads.
+           
+           Use dftsprocess() with  independent  thread-local  buffers,  if
+           you need thread-safe evaluation.
+
+INPUT PARAMETERS:
+    Model   -   DF model
+    X       -   input vector,  array[0..NVars-1].
+
+RESULT:
+    Y[0]
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double dfprocess0(decisionforest* model,
+     /* Real    */ ae_vector* x,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t nvars;
+    double result;
+
+
+    nvars = model->nvars;
+    for(i=0; i<=nvars-1; i++)
+    {
+        model->buffer.x.ptr.p_double[i] = x->ptr.p_double[i];
+    }
+    dfprocess(model, &model->buffer.x, &model->buffer.y, _state);
+    result = model->buffer.y.ptr.p_double[0];
+    return result;
+}
+
+
+/*************************************************************************
+This function returns most probable class number for an  input  X.  It  is
+same as calling  dfprocess(model,x,y), then determining i=argmax(y[i]) and
+returning i.
+
+A class number in [0,NOut) range in returned for classification  problems,
+-1 is returned when this function is called for regression problems.
+
+IMPORTANT: this function is thread-unsafe and modifies internal structures
+           of the model! You can not use same model  object  for  parallel
+           evaluation from several threads.
+           
+           Use dftsprocess()  with independent  thread-local  buffers,  if
+           you need thread-safe evaluation.
+
+INPUT PARAMETERS:
+    Model   -   decision forest model
+    X       -   input vector,  array[0..NVars-1].
+
+RESULT:
+    class number, -1 for regression tasks
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t dfclassify(decisionforest* model,
+     /* Real    */ ae_vector* x,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t nvars;
+    ae_int_t nout;
+    ae_int_t result;
+
+
+    if( model->nclasses<2 )
+    {
+        result = -1;
+        return result;
+    }
+    nvars = model->nvars;
+    nout = model->nclasses;
+    for(i=0; i<=nvars-1; i++)
+    {
+        model->buffer.x.ptr.p_double[i] = x->ptr.p_double[i];
+    }
+    dfprocess(model, &model->buffer.x, &model->buffer.y, _state);
+    result = 0;
+    for(i=1; i<=nout-1; i++)
+    {
+        if( model->buffer.y.ptr.p_double[i]>model->buffer.y.ptr.p_double[result] )
+        {
+            result = i;
+        }
+    }
+    return result;
+}
+
+
+/*************************************************************************
+Inference using decision forest
+
+Thread-safe procesing using external buffer for temporaries.
+
+This function is thread-safe (i.e .  you  can  use  same  DF   model  from
+multiple threads) as long as you use different buffer objects for different
+threads.
+
+INPUT PARAMETERS:
+    DF      -   decision forest model
+    Buf     -   buffer object, must be  allocated  specifically  for  this
+                model with dfcreatebuffer().
+    X       -   input vector,  array[NVars]
+    Y       -   possibly preallocated buffer, reallocated if too small
+
+OUTPUT PARAMETERS:
+    Y       -   result. Regression estimate when solving regression  task,
+                vector of posterior probabilities for classification task.
+
+See also DFProcessI.
+      
+
+  -- ALGLIB --
+     Copyright 16.02.2009 by Bochkanov Sergey
+*************************************************************************/
+void dftsprocess(decisionforest* df,
+     decisionforestbuffer* buf,
+     /* Real    */ ae_vector* x,
+     /* Real    */ ae_vector* y,
+     ae_state *_state)
+{
+
+
+    
+    /*
+     * Although docs warn you about thread-unsafety of the dfprocess()
+     * function, it is de facto thread-safe. However, thread safety is
+     * an accidental side-effect of the specific inference algorithm
+     * being used. It may disappear in the future versions of the DF
+     * models, so you should NOT rely on it.
+     */
     dfprocess(df, x, y, _state);
 }
 
@@ -43045,6 +45222,7 @@ void dfcopy(decisionforest* df1, decisionforest* df2, ae_state *_state)
     df2->bufsize = df1->bufsize;
     ae_vector_set_length(&df2->trees, df1->bufsize-1+1, _state);
     ae_v_move(&df2->trees.ptr.p_double[0], 1, &df1->trees.ptr.p_double[0], 1, ae_v_len(0,df1->bufsize-1));
+    dfcreatebuffer(df2, &df2->buffer, _state);
 }
 
 
@@ -43122,6 +45300,11 @@ void dfunserialize(ae_serializer* s,
     ae_serializer_unserialize_int(s, &forest->ntrees, _state);
     ae_serializer_unserialize_int(s, &forest->bufsize, _state);
     unserializerealarray(s, &forest->trees, _state);
+    
+    /*
+     * Prepare buffer
+     */
+    dfcreatebuffer(forest, &forest->buffer, _state);
 }
 
 
@@ -43469,7 +45652,6 @@ static void dforest_buildrandomtreerec(decisionforestbuilder* s,
      ae_state *_state)
 {
     ae_int_t npoints;
-    //ae_int_t nvars;
     ae_int_t nclasses;
     ae_int_t i;
     ae_int_t j;
@@ -43489,7 +45671,6 @@ static void dforest_buildrandomtreerec(decisionforestbuilder* s,
     ae_assert(idx0<idx1, "BuildRandomTreeRec: integrity check failed (3445)", _state);
     ae_assert(oobidx0<=oobidx1, "BuildRandomTreeRec: integrity check failed (7452)", _state);
     npoints = s->npoints;
-    //nvars = s->nvars;
     nclasses = s->nclasses;
     
     /*
@@ -43698,8 +45879,6 @@ static void dforest_choosecurrentsplitdense(decisionforestbuilder* s,
      ae_state *_state)
 {
     ae_int_t npoints;
-    //ae_int_t nvars;
-    //ae_int_t nclasses;
     double errbest;
     ae_int_t varstried;
     ae_int_t varcur;
@@ -43719,8 +45898,6 @@ static void dforest_choosecurrentsplitdense(decisionforestbuilder* s,
     ae_assert(s->rdfalgo==0, "BuildRandomTreeRec: integrity check failed (1657)", _state);
     ae_assert(idx0<idx1, "BuildRandomTreeRec: integrity check failed (3445)", _state);
     npoints = s->npoints;
-    //nvars = s->nvars;
-    //nclasses = s->nclasses;
     
     /*
      * Select split according to dense direct RDF algorithm
@@ -43823,8 +46000,6 @@ static void dforest_evaluatedensesplit(decisionforestbuilder* s,
      double* rms,
      ae_state *_state)
 {
-    //ae_int_t npoints;
-    //ae_int_t nvars;
     ae_int_t nclasses;
     ae_int_t i;
     ae_int_t j;
@@ -43842,8 +46017,6 @@ static void dforest_evaluatedensesplit(decisionforestbuilder* s,
     *rms = 0;
 
     ae_assert(idx0<idx1, "BuildRandomTreeRec: integrity check failed (8754)", _state);
-    //npoints = s->npoints;
-    //nvars = s->nvars;
     nclasses = s->nclasses;
     if( s->dsbinary.ptr.p_bool[splitvar] )
     {
@@ -45021,7 +47194,7 @@ static void dforest_dfprocessinternal(decisionforest* df,
             }
             break;
         }
-        if( ae_fp_less(x->ptr.p_double[ae_round(df->trees.ptr.p_double[k], _state)],df->trees.ptr.p_double[k+1]) )
+        if( x->ptr.p_double[ae_round(df->trees.ptr.p_double[k], _state)]<df->trees.ptr.p_double[k+1] )
         {
             k = k+dforest_innernodewidth;
         }
@@ -45296,11 +47469,48 @@ void _dftreebuf_destroy(void* _p)
 }
 
 
+void _decisionforestbuffer_init(void* _p, ae_state *_state, ae_bool make_automatic)
+{
+    decisionforestbuffer *p = (decisionforestbuffer*)_p;
+    ae_touch_ptr((void*)p);
+    ae_vector_init(&p->x, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->y, 0, DT_REAL, _state, make_automatic);
+}
+
+
+void _decisionforestbuffer_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
+{
+    decisionforestbuffer *dst = (decisionforestbuffer*)_dst;
+    decisionforestbuffer *src = (decisionforestbuffer*)_src;
+    ae_vector_init_copy(&dst->x, &src->x, _state, make_automatic);
+    ae_vector_init_copy(&dst->y, &src->y, _state, make_automatic);
+}
+
+
+void _decisionforestbuffer_clear(void* _p)
+{
+    decisionforestbuffer *p = (decisionforestbuffer*)_p;
+    ae_touch_ptr((void*)p);
+    ae_vector_clear(&p->x);
+    ae_vector_clear(&p->y);
+}
+
+
+void _decisionforestbuffer_destroy(void* _p)
+{
+    decisionforestbuffer *p = (decisionforestbuffer*)_p;
+    ae_touch_ptr((void*)p);
+    ae_vector_destroy(&p->x);
+    ae_vector_destroy(&p->y);
+}
+
+
 void _decisionforest_init(void* _p, ae_state *_state, ae_bool make_automatic)
 {
     decisionforest *p = (decisionforest*)_p;
     ae_touch_ptr((void*)p);
     ae_vector_init(&p->trees, 0, DT_REAL, _state, make_automatic);
+    _decisionforestbuffer_init(&p->buffer, _state, make_automatic);
 }
 
 
@@ -45313,6 +47523,7 @@ void _decisionforest_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool
     dst->ntrees = src->ntrees;
     dst->bufsize = src->bufsize;
     ae_vector_init_copy(&dst->trees, &src->trees, _state, make_automatic);
+    _decisionforestbuffer_init_copy(&dst->buffer, &src->buffer, _state, make_automatic);
 }
 
 
@@ -45321,6 +47532,7 @@ void _decisionforest_clear(void* _p)
     decisionforest *p = (decisionforest*)_p;
     ae_touch_ptr((void*)p);
     ae_vector_clear(&p->trees);
+    _decisionforestbuffer_clear(&p->buffer);
 }
 
 
@@ -45329,6 +47541,7 @@ void _decisionforest_destroy(void* _p)
     decisionforest *p = (decisionforest*)_p;
     ae_touch_ptr((void*)p);
     ae_vector_destroy(&p->trees);
+    _decisionforestbuffer_destroy(&p->buffer);
 }
 
 
@@ -45443,6 +47656,1396 @@ void _dfinternalbuffers_destroy(void* _p)
     ae_vector_destroy(&p->varpool);
     ae_vector_destroy(&p->evsbin);
     ae_vector_destroy(&p->evssplits);
+}
+
+
+#endif
+#if defined(AE_COMPILE_KNN) || !defined(AE_PARTIAL_BUILD)
+
+
+/*************************************************************************
+This function creates buffer  structure  which  can  be  used  to  perform
+parallel KNN requests.
+
+KNN subpackage provides two sets of computing functions - ones  which  use
+internal buffer of KNN model (these  functions are single-threaded because
+they use same buffer, which can not  shared  between  threads),  and  ones
+which use external buffer.
+
+This function is used to initialize external buffer.
+
+INPUT PARAMETERS
+    Model       -   KNN model which is associated with newly created buffer
+
+OUTPUT PARAMETERS
+    Buf         -   external buffer.
+    
+    
+IMPORTANT: buffer object should be used only with model which was used  to
+           initialize buffer. Any attempt to  use  buffer  with  different
+           object is dangerous - you  may   get  integrity  check  failure
+           (exception) because sizes of internal  arrays  do  not  fit  to
+           dimensions of the model structure.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knncreatebuffer(knnmodel* model, knnbuffer* buf, ae_state *_state)
+{
+
+    _knnbuffer_clear(buf);
+
+    if( !model->isdummy )
+    {
+        kdtreecreaterequestbuffer(&model->tree, &buf->treebuf, _state);
+    }
+    ae_vector_set_length(&buf->x, model->nvars, _state);
+    ae_vector_set_length(&buf->y, model->nout, _state);
+}
+
+
+/*************************************************************************
+This subroutine creates KNNBuilder object which is used to train KNN models.
+
+By default, new builder stores empty dataset and some  reasonable  default
+settings. At the very least, you should specify dataset prior to  building
+KNN model. You can also tweak settings of the model construction algorithm
+(recommended, although default settings should work well).
+
+Following actions are mandatory:
+* calling knnbuildersetdataset() to specify dataset
+* calling knnbuilderbuildknnmodel() to build KNN model using current
+  dataset and default settings
+  
+Additionally, you may call:
+* knnbuildersetnorm() to change norm being used
+
+INPUT PARAMETERS:
+    none
+
+OUTPUT PARAMETERS:
+    S           -   KNN builder
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnbuildercreate(knnbuilder* s, ae_state *_state)
+{
+
+    _knnbuilder_clear(s);
+
+    
+    /*
+     * Empty dataset
+     */
+    s->dstype = -1;
+    s->npoints = 0;
+    s->nvars = 0;
+    s->iscls = ae_false;
+    s->nout = 1;
+    
+    /*
+     * Default training settings
+     */
+    s->knnnrm = 2;
+}
+
+
+/*************************************************************************
+Specifies regression problem (one or more continuous  output variables are
+predicted). There also exists "classification" version of this function.
+
+This subroutine adds dense dataset to the internal storage of the  builder
+object. Specifying your dataset in the dense format means that  the  dense
+version of the KNN construction algorithm will be invoked.
+
+INPUT PARAMETERS:
+    S           -   KNN builder object
+    XY          -   array[NPoints,NVars+NOut] (note: actual  size  can  be
+                    larger, only leading part is used anyway), dataset:
+                    * first NVars elements of each row store values of the
+                      independent variables
+                    * next NOut elements store  values  of  the  dependent
+                      variables
+    NPoints     -   number of rows in the dataset, NPoints>=1
+    NVars       -   number of independent variables, NVars>=1 
+    NOut        -   number of dependent variables, NOut>=1
+
+OUTPUT PARAMETERS:
+    S           -   KNN builder
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnbuildersetdatasetreg(knnbuilder* s,
+     /* Real    */ ae_matrix* xy,
+     ae_int_t npoints,
+     ae_int_t nvars,
+     ae_int_t nout,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t j;
+
+
+    
+    /*
+     * Check parameters
+     */
+    ae_assert(npoints>=1, "knnbuildersetdatasetreg: npoints<1", _state);
+    ae_assert(nvars>=1, "knnbuildersetdatasetreg: nvars<1", _state);
+    ae_assert(nout>=1, "knnbuildersetdatasetreg: nout<1", _state);
+    ae_assert(xy->rows>=npoints, "knnbuildersetdatasetreg: rows(xy)<npoints", _state);
+    ae_assert(xy->cols>=nvars+nout, "knnbuildersetdatasetreg: cols(xy)<nvars+nout", _state);
+    ae_assert(apservisfinitematrix(xy, npoints, nvars+nout, _state), "knnbuildersetdatasetreg: xy parameter contains INFs or NANs", _state);
+    
+    /*
+     * Set dataset
+     */
+    s->dstype = 0;
+    s->iscls = ae_false;
+    s->npoints = npoints;
+    s->nvars = nvars;
+    s->nout = nout;
+    rmatrixsetlengthatleast(&s->dsdata, npoints, nvars, _state);
+    for(i=0; i<=npoints-1; i++)
+    {
+        for(j=0; j<=nvars-1; j++)
+        {
+            s->dsdata.ptr.pp_double[i][j] = xy->ptr.pp_double[i][j];
+        }
+    }
+    rvectorsetlengthatleast(&s->dsrval, npoints*nout, _state);
+    for(i=0; i<=npoints-1; i++)
+    {
+        for(j=0; j<=nout-1; j++)
+        {
+            s->dsrval.ptr.p_double[i*nout+j] = xy->ptr.pp_double[i][nvars+j];
+        }
+    }
+}
+
+
+/*************************************************************************
+Specifies classification problem (two  or  more  classes  are  predicted).
+There also exists "regression" version of this function.
+
+This subroutine adds dense dataset to the internal storage of the  builder
+object. Specifying your dataset in the dense format means that  the  dense
+version of the KNN construction algorithm will be invoked.
+
+INPUT PARAMETERS:
+    S           -   KNN builder object
+    XY          -   array[NPoints,NVars+1] (note:   actual   size  can  be
+                    larger, only leading part is used anyway), dataset:
+                    * first NVars elements of each row store values of the
+                      independent variables
+                    * next element stores class index, in [0,NClasses)
+    NPoints     -   number of rows in the dataset, NPoints>=1
+    NVars       -   number of independent variables, NVars>=1 
+    NClasses    -   number of classes, NClasses>=2
+
+OUTPUT PARAMETERS:
+    S           -   KNN builder
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnbuildersetdatasetcls(knnbuilder* s,
+     /* Real    */ ae_matrix* xy,
+     ae_int_t npoints,
+     ae_int_t nvars,
+     ae_int_t nclasses,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t j;
+
+
+    
+    /*
+     * Check parameters
+     */
+    ae_assert(npoints>=1, "knnbuildersetdatasetcls: npoints<1", _state);
+    ae_assert(nvars>=1, "knnbuildersetdatasetcls: nvars<1", _state);
+    ae_assert(nclasses>=2, "knnbuildersetdatasetcls: nclasses<2", _state);
+    ae_assert(xy->rows>=npoints, "knnbuildersetdatasetcls: rows(xy)<npoints", _state);
+    ae_assert(xy->cols>=nvars+1, "knnbuildersetdatasetcls: cols(xy)<nvars+1", _state);
+    ae_assert(apservisfinitematrix(xy, npoints, nvars+1, _state), "knnbuildersetdatasetcls: xy parameter contains INFs or NANs", _state);
+    for(i=0; i<=npoints-1; i++)
+    {
+        j = ae_round(xy->ptr.pp_double[i][nvars], _state);
+        ae_assert(j>=0&&j<nclasses, "knnbuildersetdatasetcls: last column of xy contains invalid class number", _state);
+    }
+    
+    /*
+     * Set dataset
+     */
+    s->iscls = ae_true;
+    s->dstype = 0;
+    s->npoints = npoints;
+    s->nvars = nvars;
+    s->nout = nclasses;
+    rmatrixsetlengthatleast(&s->dsdata, npoints, nvars, _state);
+    for(i=0; i<=npoints-1; i++)
+    {
+        for(j=0; j<=nvars-1; j++)
+        {
+            s->dsdata.ptr.pp_double[i][j] = xy->ptr.pp_double[i][j];
+        }
+    }
+    ivectorsetlengthatleast(&s->dsival, npoints, _state);
+    for(i=0; i<=npoints-1; i++)
+    {
+        s->dsival.ptr.p_int[i] = ae_round(xy->ptr.pp_double[i][nvars], _state);
+    }
+}
+
+
+/*************************************************************************
+This function sets norm type used for neighbor search.
+
+INPUT PARAMETERS:
+    S           -   decision forest builder object
+    NormType    -   norm type:
+                    * 0      inf-norm
+                    * 1      1-norm
+                    * 2      Euclidean norm (default)
+
+OUTPUT PARAMETERS:
+    S           -   decision forest builder
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnbuildersetnorm(knnbuilder* s, ae_int_t nrmtype, ae_state *_state)
+{
+
+
+    ae_assert((nrmtype==0||nrmtype==1)||nrmtype==2, "knnbuildersetnorm: unexpected norm type", _state);
+    s->knnnrm = nrmtype;
+}
+
+
+/*************************************************************************
+This subroutine builds KNN model  according  to  current  settings,  using
+dataset internally stored in the builder object.
+
+The model being built performs inference using Eps-approximate  K  nearest
+neighbors search algorithm, with:
+* K=1,  Eps=0 corresponding to the "nearest neighbor algorithm"
+* K>1,  Eps=0 corresponding to the "K nearest neighbors algorithm"
+* K>=1, Eps>0 corresponding to "approximate nearest neighbors algorithm"
+
+An approximate KNN is a good option for high-dimensional  datasets  (exact
+KNN works slowly when dimensions count grows).
+
+An ALGLIB implementation of kd-trees is used to perform k-nn searches.
+
+  ! COMMERCIAL EDITION OF ALGLIB:
+  ! 
+  ! Commercial Edition of ALGLIB includes following important improvements
+  ! of this function:
+  ! * high-performance native backend with same C# interface (C# version)
+  ! * multithreading support (C++ and C# versions)
+  ! 
+  ! We recommend you to read 'Working with commercial version' section  of
+  ! ALGLIB Reference Manual in order to find out how to  use  performance-
+  ! related features provided by commercial edition of ALGLIB.
+
+INPUT PARAMETERS:
+    S       -   KNN builder object
+    K       -   number of neighbors to search for, K>=1
+    Eps     -   approximation factor:
+                * Eps=0 means that exact kNN search is performed
+                * Eps>0 means that (1+Eps)-approximate search is performed
+
+OUTPUT PARAMETERS:
+    Model       -   KNN model
+    Rep         -   report
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnbuilderbuildknnmodel(knnbuilder* s,
+     ae_int_t k,
+     double eps,
+     knnmodel* model,
+     knnreport* rep,
+     ae_state *_state)
+{
+    ae_frame _frame_block;
+    ae_int_t i;
+    ae_int_t j;
+    ae_int_t nvars;
+    ae_int_t nout;
+    ae_int_t npoints;
+    ae_bool iscls;
+    ae_matrix xy;
+    ae_vector tags;
+
+    ae_frame_make(_state, &_frame_block);
+    memset(&xy, 0, sizeof(xy));
+    memset(&tags, 0, sizeof(tags));
+    _knnmodel_clear(model);
+    _knnreport_clear(rep);
+    ae_matrix_init(&xy, 0, 0, DT_REAL, _state, ae_true);
+    ae_vector_init(&tags, 0, DT_INT, _state, ae_true);
+
+    npoints = s->npoints;
+    nvars = s->nvars;
+    nout = s->nout;
+    iscls = s->iscls;
+    
+    /*
+     * Check settings
+     */
+    ae_assert(k>=1, "knnbuilderbuildknnmodel: k<1", _state);
+    ae_assert(ae_isfinite(eps, _state)&&ae_fp_greater_eq(eps,(double)(0)), "knnbuilderbuildknnmodel: eps<0", _state);
+    
+    /*
+     * Prepare output
+     */
+    knn_clearreport(rep, _state);
+    model->nvars = nvars;
+    model->nout = nout;
+    model->iscls = iscls;
+    model->k = k;
+    model->eps = eps;
+    model->isdummy = ae_false;
+    
+    /*
+     * Quick exit for empty dataset
+     */
+    if( s->dstype==-1 )
+    {
+        model->isdummy = ae_true;
+        ae_frame_leave(_state);
+        return;
+    }
+    
+    /*
+     * Build kd-tree
+     */
+    if( iscls )
+    {
+        ae_matrix_set_length(&xy, npoints, nvars+1, _state);
+        ae_vector_set_length(&tags, npoints, _state);
+        for(i=0; i<=npoints-1; i++)
+        {
+            for(j=0; j<=nvars-1; j++)
+            {
+                xy.ptr.pp_double[i][j] = s->dsdata.ptr.pp_double[i][j];
+            }
+            xy.ptr.pp_double[i][nvars] = (double)(s->dsival.ptr.p_int[i]);
+            tags.ptr.p_int[i] = s->dsival.ptr.p_int[i];
+        }
+        kdtreebuildtagged(&xy, &tags, npoints, nvars, 0, s->knnnrm, &model->tree, _state);
+    }
+    else
+    {
+        ae_matrix_set_length(&xy, npoints, nvars+nout, _state);
+        for(i=0; i<=npoints-1; i++)
+        {
+            for(j=0; j<=nvars-1; j++)
+            {
+                xy.ptr.pp_double[i][j] = s->dsdata.ptr.pp_double[i][j];
+            }
+            for(j=0; j<=nout-1; j++)
+            {
+                xy.ptr.pp_double[i][nvars+j] = s->dsrval.ptr.p_double[i*nout+j];
+            }
+        }
+        kdtreebuild(&xy, npoints, nvars, nout, s->knnnrm, &model->tree, _state);
+    }
+    
+    /*
+     * Build buffer
+     */
+    knncreatebuffer(model, &model->buffer, _state);
+    
+    /*
+     * Report
+     */
+    knnallerrors(model, &xy, npoints, rep, _state);
+    ae_frame_leave(_state);
+}
+
+
+/*************************************************************************
+Changing search settings of KNN model.
+
+K and EPS parameters of KNN  (AKNN)  search  are  specified  during  model
+construction. However, plain KNN algorithm with Euclidean distance  allows
+you to change them at any moment.
+
+NOTE: future versions of KNN model may support advanced versions  of  KNN,
+      such as NCA or LMNN. It is possible that such algorithms won't allow
+      you to change search settings on the fly. If you call this  function
+      for an algorithm which does not support on-the-fly changes, it  will
+      throw an exception.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    K       -   K>=1, neighbors count
+    EPS     -   accuracy of the EPS-approximate NN search. Set to 0.0,  if
+                you want to perform "classic" KNN search.  Specify  larger
+                values  if  you  need  to  speed-up  high-dimensional  KNN
+                queries.
+
+OUTPUT PARAMETERS:
+    nothing on success, exception on failure
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnrewritekeps(knnmodel* model,
+     ae_int_t k,
+     double eps,
+     ae_state *_state)
+{
+
+
+    ae_assert(k>=1, "knnrewritekeps: k<1", _state);
+    ae_assert(ae_isfinite(eps, _state)&&ae_fp_greater_eq(eps,(double)(0)), "knnrewritekeps: eps<0", _state);
+    model->k = k;
+    model->eps = eps;
+}
+
+
+/*************************************************************************
+Inference using KNN model.
+
+See also knnprocess0(), knnprocessi() and knnclassify() for options with a
+bit more convenient interface.
+
+IMPORTANT: this function is thread-unsafe and modifies internal structures
+           of the model! You can not use same model  object  for  parallel
+           evaluation from several threads.
+           
+           Use knntsprocess() with independent  thread-local  buffers,  if
+           you need thread-safe evaluation.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    X       -   input vector,  array[0..NVars-1].
+    Y       -   possible preallocated buffer. Reused if long enough.
+
+OUTPUT PARAMETERS:
+    Y       -   result. Regression estimate when solving regression  task,
+                vector of posterior probabilities for classification task.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnprocess(knnmodel* model,
+     /* Real    */ ae_vector* x,
+     /* Real    */ ae_vector* y,
+     ae_state *_state)
+{
+
+
+    knntsprocess(model, &model->buffer, x, y, _state);
+}
+
+
+/*************************************************************************
+This function returns first component of the  inferred  vector  (i.e.  one
+with index #0).
+
+It is a convenience wrapper for knnprocess() intended for either:
+* 1-dimensional regression problems
+* 2-class classification problems
+
+In the former case this function returns inference result as scalar, which
+is definitely more convenient that wrapping it as vector.  In  the  latter
+case it returns probability of object belonging to class #0.
+
+If you call it for anything different from two cases above, it  will  work
+as defined, i.e. return y[0], although it is of less use in such cases.
+
+IMPORTANT: this function is thread-unsafe and modifies internal structures
+           of the model! You can not use same model  object  for  parallel
+           evaluation from several threads.
+           
+           Use knntsprocess() with independent  thread-local  buffers,  if
+           you need thread-safe evaluation.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    X       -   input vector,  array[0..NVars-1].
+
+RESULT:
+    Y[0]
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnprocess0(knnmodel* model,
+     /* Real    */ ae_vector* x,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t nvars;
+    double result;
+
+
+    nvars = model->nvars;
+    for(i=0; i<=nvars-1; i++)
+    {
+        model->buffer.x.ptr.p_double[i] = x->ptr.p_double[i];
+    }
+    knn_processinternal(model, &model->buffer, _state);
+    result = model->buffer.y.ptr.p_double[0];
+    return result;
+}
+
+
+/*************************************************************************
+This function returns most probable class number for an  input  X.  It  is
+same as calling knnprocess(model,x,y), then determining i=argmax(y[i]) and
+returning i.
+
+A class number in [0,NOut) range in returned for classification  problems,
+-1 is returned when this function is called for regression problems.
+
+IMPORTANT: this function is thread-unsafe and modifies internal structures
+           of the model! You can not use same model  object  for  parallel
+           evaluation from several threads.
+           
+           Use knntsprocess() with independent  thread-local  buffers,  if
+           you need thread-safe evaluation.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    X       -   input vector,  array[0..NVars-1].
+
+RESULT:
+    class number, -1 for regression tasks
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t knnclassify(knnmodel* model,
+     /* Real    */ ae_vector* x,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t nvars;
+    ae_int_t nout;
+    ae_int_t result;
+
+
+    if( !model->iscls )
+    {
+        result = -1;
+        return result;
+    }
+    nvars = model->nvars;
+    nout = model->nout;
+    for(i=0; i<=nvars-1; i++)
+    {
+        model->buffer.x.ptr.p_double[i] = x->ptr.p_double[i];
+    }
+    knn_processinternal(model, &model->buffer, _state);
+    result = 0;
+    for(i=1; i<=nout-1; i++)
+    {
+        if( model->buffer.y.ptr.p_double[i]>model->buffer.y.ptr.p_double[result] )
+        {
+            result = i;
+        }
+    }
+    return result;
+}
+
+
+/*************************************************************************
+'interactive' variant of knnprocess()  for  languages  like  Python  which
+support constructs like "y = knnprocessi(model,x)" and interactive mode of
+the interpreter.
+
+This function allocates new array on each call,  so  it  is  significantly
+slower than its 'non-interactive' counterpart, but it is  more  convenient
+when you call it from command line.
+
+IMPORTANT: this  function  is  thread-unsafe  and  may   modify   internal
+           structures of the model! You can not use same model  object for
+           parallel evaluation from several threads.
+           
+           Use knntsprocess()  with  independent  thread-local  buffers if
+           you need thread-safe evaluation.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnprocessi(knnmodel* model,
+     /* Real    */ ae_vector* x,
+     /* Real    */ ae_vector* y,
+     ae_state *_state)
+{
+
+    ae_vector_clear(y);
+
+    knnprocess(model, x, y, _state);
+}
+
+
+/*************************************************************************
+Thread-safe procesing using external buffer for temporaries.
+
+This function is thread-safe (i.e .  you  can  use  same  KNN  model  from
+multiple threads) as long as you use different buffer objects for different
+threads.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    Buf     -   buffer object, must be  allocated  specifically  for  this
+                model with knncreatebuffer().
+    X       -   input vector,  array[NVars]
+
+OUTPUT PARAMETERS:
+    Y       -   result, array[NOut].   Regression  estimate  when  solving
+                regression task,  vector  of  posterior  probabilities for
+                a classification task.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knntsprocess(knnmodel* model,
+     knnbuffer* buf,
+     /* Real    */ ae_vector* x,
+     /* Real    */ ae_vector* y,
+     ae_state *_state)
+{
+    ae_int_t i;
+    ae_int_t nvars;
+    ae_int_t nout;
+
+
+    nvars = model->nvars;
+    nout = model->nout;
+    for(i=0; i<=nvars-1; i++)
+    {
+        buf->x.ptr.p_double[i] = x->ptr.p_double[i];
+    }
+    knn_processinternal(model, buf, _state);
+    if( y->cnt<nout )
+    {
+        ae_vector_set_length(y, nout, _state);
+    }
+    for(i=0; i<=nout-1; i++)
+    {
+        y->ptr.p_double[i] = buf->y.ptr.p_double[i];
+    }
+}
+
+
+/*************************************************************************
+Relative classification error on the test set
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set
+    NPoints -   test set size
+
+RESULT:
+    percent of incorrectly classified cases.
+    Zero if model solves regression task.
+    
+NOTE: if  you  need several different kinds of error metrics, it is better
+      to use knnallerrors() which computes all error metric  with just one
+      pass over dataset. 
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnrelclserror(knnmodel* model,
+     /* Real    */ ae_matrix* xy,
+     ae_int_t npoints,
+     ae_state *_state)
+{
+    ae_frame _frame_block;
+    knnreport rep;
+    double result;
+
+    ae_frame_make(_state, &_frame_block);
+    memset(&rep, 0, sizeof(rep));
+    _knnreport_init(&rep, _state, ae_true);
+
+    knnallerrors(model, xy, npoints, &rep, _state);
+    result = rep.relclserror;
+    ae_frame_leave(_state);
+    return result;
+}
+
+
+/*************************************************************************
+Average cross-entropy (in bits per element) on the test set
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set
+    NPoints -   test set size
+
+RESULT:
+    CrossEntropy/NPoints.
+    Zero if model solves regression task.
+
+NOTE: the cross-entropy metric is too unstable when used to  evaluate  KNN
+      models (such models can report exactly  zero probabilities),  so  we
+      do not recommend using it.
+    
+NOTE: if  you  need several different kinds of error metrics, it is better
+      to use knnallerrors() which computes all error metric  with just one
+      pass over dataset. 
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnavgce(knnmodel* model,
+     /* Real    */ ae_matrix* xy,
+     ae_int_t npoints,
+     ae_state *_state)
+{
+    ae_frame _frame_block;
+    knnreport rep;
+    double result;
+
+    ae_frame_make(_state, &_frame_block);
+    memset(&rep, 0, sizeof(rep));
+    _knnreport_init(&rep, _state, ae_true);
+
+    knnallerrors(model, xy, npoints, &rep, _state);
+    result = rep.avgce;
+    ae_frame_leave(_state);
+    return result;
+}
+
+
+/*************************************************************************
+RMS error on the test set.
+
+Its meaning for regression task is obvious. As for classification problems,
+RMS error means error when estimating posterior probabilities.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set
+    NPoints -   test set size
+
+RESULT:
+    root mean square error.
+    
+NOTE: if  you  need several different kinds of error metrics, it is better
+      to use knnallerrors() which computes all error metric  with just one
+      pass over dataset.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnrmserror(knnmodel* model,
+     /* Real    */ ae_matrix* xy,
+     ae_int_t npoints,
+     ae_state *_state)
+{
+    ae_frame _frame_block;
+    knnreport rep;
+    double result;
+
+    ae_frame_make(_state, &_frame_block);
+    memset(&rep, 0, sizeof(rep));
+    _knnreport_init(&rep, _state, ae_true);
+
+    knnallerrors(model, xy, npoints, &rep, _state);
+    result = rep.rmserror;
+    ae_frame_leave(_state);
+    return result;
+}
+
+
+/*************************************************************************
+Average error on the test set
+
+Its meaning for regression task is obvious. As for classification problems,
+average error means error when estimating posterior probabilities.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set
+    NPoints -   test set size
+
+RESULT:
+    average error
+    
+NOTE: if  you  need several different kinds of error metrics, it is better
+      to use knnallerrors() which computes all error metric  with just one
+      pass over dataset.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnavgerror(knnmodel* model,
+     /* Real    */ ae_matrix* xy,
+     ae_int_t npoints,
+     ae_state *_state)
+{
+    ae_frame _frame_block;
+    knnreport rep;
+    double result;
+
+    ae_frame_make(_state, &_frame_block);
+    memset(&rep, 0, sizeof(rep));
+    _knnreport_init(&rep, _state, ae_true);
+
+    knnallerrors(model, xy, npoints, &rep, _state);
+    result = rep.avgerror;
+    ae_frame_leave(_state);
+    return result;
+}
+
+
+/*************************************************************************
+Average relative error on the test set
+
+Its meaning for regression task is obvious. As for classification problems,
+average relative error means error when estimating posterior probabilities.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set
+    NPoints -   test set size
+
+RESULT:
+    average relative error
+    
+NOTE: if  you  need several different kinds of error metrics, it is better
+      to use knnallerrors() which computes all error metric  with just one
+      pass over dataset.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+double knnavgrelerror(knnmodel* model,
+     /* Real    */ ae_matrix* xy,
+     ae_int_t npoints,
+     ae_state *_state)
+{
+    ae_frame _frame_block;
+    knnreport rep;
+    double result;
+
+    ae_frame_make(_state, &_frame_block);
+    memset(&rep, 0, sizeof(rep));
+    _knnreport_init(&rep, _state, ae_true);
+
+    knnallerrors(model, xy, npoints, &rep, _state);
+    result = rep.avgrelerror;
+    ae_frame_leave(_state);
+    return result;
+}
+
+
+/*************************************************************************
+Calculates all kinds of errors for the model in one call.
+
+INPUT PARAMETERS:
+    Model   -   KNN model
+    XY      -   test set:
+                * one row per point
+                * first NVars columns store independent variables
+                * depending on problem type:
+                  * next column stores class number in [0,NClasses) -  for
+                    classification problems
+                  * next NOut columns  store  dependent  variables  -  for
+                    regression problems
+    NPoints -   test set size, NPoints>=0
+
+OUTPUT PARAMETERS:
+    Rep     -   following fields are loaded with errors for both regression
+                and classification models:
+                * rep.rmserror - RMS error for the output
+                * rep.avgerror - average error
+                * rep.avgrelerror - average relative error
+                following fields are set only  for classification  models,
+                zero for regression ones:
+                * relclserror   - relative classification error, in [0,1]
+                * avgce - average cross-entropy in bits per dataset entry
+
+NOTE: the cross-entropy metric is too unstable when used to  evaluate  KNN
+      models (such models can report exactly  zero probabilities),  so  we
+      do not recommend using it.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnallerrors(knnmodel* model,
+     /* Real    */ ae_matrix* xy,
+     ae_int_t npoints,
+     knnreport* rep,
+     ae_state *_state)
+{
+    ae_frame _frame_block;
+    knnbuffer buf;
+    ae_vector desiredy;
+    ae_vector errbuf;
+    ae_int_t nvars;
+    ae_int_t nout;
+    ae_int_t ny;
+    ae_bool iscls;
+    ae_int_t i;
+    ae_int_t j;
+
+    ae_frame_make(_state, &_frame_block);
+    memset(&buf, 0, sizeof(buf));
+    memset(&desiredy, 0, sizeof(desiredy));
+    memset(&errbuf, 0, sizeof(errbuf));
+    _knnreport_clear(rep);
+    _knnbuffer_init(&buf, _state, ae_true);
+    ae_vector_init(&desiredy, 0, DT_REAL, _state, ae_true);
+    ae_vector_init(&errbuf, 0, DT_REAL, _state, ae_true);
+
+    nvars = model->nvars;
+    nout = model->nout;
+    iscls = model->iscls;
+    if( iscls )
+    {
+        ny = 1;
+    }
+    else
+    {
+        ny = nout;
+    }
+    
+    /*
+     * Check input
+     */
+    ae_assert(npoints>=0, "knnallerrors: npoints<0", _state);
+    ae_assert(xy->rows>=npoints, "knnallerrors: rows(xy)<npoints", _state);
+    ae_assert(xy->cols>=nvars+ny, "knnallerrors: cols(xy)<nvars+nout", _state);
+    ae_assert(apservisfinitematrix(xy, npoints, nvars+ny, _state), "knnallerrors: xy parameter contains INFs or NANs", _state);
+    
+    /*
+     * Clean up report
+     */
+    knn_clearreport(rep, _state);
+    
+    /*
+     * Quick exit if needed
+     */
+    if( model->isdummy||npoints==0 )
+    {
+        ae_frame_leave(_state);
+        return;
+    }
+    
+    /*
+     * Process using local buffer
+     */
+    knncreatebuffer(model, &buf, _state);
+    if( iscls )
+    {
+        dserrallocate(nout, &errbuf, _state);
+    }
+    else
+    {
+        dserrallocate(-nout, &errbuf, _state);
+    }
+    ae_vector_set_length(&desiredy, ny, _state);
+    for(i=0; i<=npoints-1; i++)
+    {
+        for(j=0; j<=nvars-1; j++)
+        {
+            buf.x.ptr.p_double[j] = xy->ptr.pp_double[i][j];
+        }
+        if( iscls )
+        {
+            j = ae_round(xy->ptr.pp_double[i][nvars], _state);
+            ae_assert(j>=0&&j<nout, "knnallerrors: one of the class labels is not in [0,NClasses)", _state);
+            desiredy.ptr.p_double[0] = (double)(j);
+        }
+        else
+        {
+            for(j=0; j<=nout-1; j++)
+            {
+                desiredy.ptr.p_double[j] = xy->ptr.pp_double[i][nvars+j];
+            }
+        }
+        knn_processinternal(model, &buf, _state);
+        dserraccumulate(&errbuf, &buf.y, &desiredy, _state);
+    }
+    dserrfinish(&errbuf, _state);
+    
+    /*
+     * Extract results
+     */
+    if( iscls )
+    {
+        rep->relclserror = errbuf.ptr.p_double[0];
+        rep->avgce = errbuf.ptr.p_double[1];
+    }
+    rep->rmserror = errbuf.ptr.p_double[2];
+    rep->avgerror = errbuf.ptr.p_double[3];
+    rep->avgrelerror = errbuf.ptr.p_double[4];
+    ae_frame_leave(_state);
+}
+
+
+/*************************************************************************
+Serializer: allocation
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnalloc(ae_serializer* s, knnmodel* model, ae_state *_state)
+{
+
+
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    ae_serializer_alloc_entry(s);
+    if( !model->isdummy )
+    {
+        kdtreealloc(s, &model->tree, _state);
+    }
+}
+
+
+/*************************************************************************
+Serializer: serialization
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnserialize(ae_serializer* s, knnmodel* model, ae_state *_state)
+{
+
+
+    ae_serializer_serialize_int(s, getknnserializationcode(_state), _state);
+    ae_serializer_serialize_int(s, knn_knnfirstversion, _state);
+    ae_serializer_serialize_int(s, model->nvars, _state);
+    ae_serializer_serialize_int(s, model->nout, _state);
+    ae_serializer_serialize_int(s, model->k, _state);
+    ae_serializer_serialize_double(s, model->eps, _state);
+    ae_serializer_serialize_bool(s, model->iscls, _state);
+    ae_serializer_serialize_bool(s, model->isdummy, _state);
+    if( !model->isdummy )
+    {
+        kdtreeserialize(s, &model->tree, _state);
+    }
+}
+
+
+/*************************************************************************
+Serializer: unserialization
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+void knnunserialize(ae_serializer* s, knnmodel* model, ae_state *_state)
+{
+    ae_int_t i0;
+    ae_int_t i1;
+
+    _knnmodel_clear(model);
+
+    
+    /*
+     * check correctness of header
+     */
+    ae_serializer_unserialize_int(s, &i0, _state);
+    ae_assert(i0==getknnserializationcode(_state), "KNNUnserialize: stream header corrupted", _state);
+    ae_serializer_unserialize_int(s, &i1, _state);
+    ae_assert(i1==knn_knnfirstversion, "KNNUnserialize: stream header corrupted", _state);
+    
+    /*
+     * Unserialize data
+     */
+    ae_serializer_unserialize_int(s, &model->nvars, _state);
+    ae_serializer_unserialize_int(s, &model->nout, _state);
+    ae_serializer_unserialize_int(s, &model->k, _state);
+    ae_serializer_unserialize_double(s, &model->eps, _state);
+    ae_serializer_unserialize_bool(s, &model->iscls, _state);
+    ae_serializer_unserialize_bool(s, &model->isdummy, _state);
+    if( !model->isdummy )
+    {
+        kdtreeunserialize(s, &model->tree, _state);
+    }
+    
+    /*
+     * Prepare local buffer
+     */
+    knncreatebuffer(model, &model->buffer, _state);
+}
+
+
+/*************************************************************************
+Sets report fields to their default values
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+static void knn_clearreport(knnreport* rep, ae_state *_state)
+{
+
+
+    rep->relclserror = (double)(0);
+    rep->avgce = (double)(0);
+    rep->rmserror = (double)(0);
+    rep->avgerror = (double)(0);
+    rep->avgrelerror = (double)(0);
+}
+
+
+/*************************************************************************
+This function processes buf.X and stores result to buf.Y
+
+INPUT PARAMETERS
+    Model       -   KNN model
+    Buf         -   processing buffer.
+    
+    
+IMPORTANT: buffer object should be used only with model which was used  to
+           initialize buffer. Any attempt to  use  buffer  with  different
+           object is dangerous - you  may   get  integrity  check  failure
+           (exception) because sizes of internal  arrays  do  not  fit  to
+           dimensions of the model structure.
+
+  -- ALGLIB --
+     Copyright 15.02.2019 by Bochkanov Sergey
+*************************************************************************/
+static void knn_processinternal(knnmodel* model,
+     knnbuffer* buf,
+     ae_state *_state)
+{
+    ae_int_t nvars;
+    ae_int_t nout;
+    ae_bool iscls;
+    ae_int_t nncnt;
+    ae_int_t i;
+    ae_int_t j;
+    double v;
+
+
+    nvars = model->nvars;
+    nout = model->nout;
+    iscls = model->iscls;
+    
+    /*
+     * Quick exit if needed
+     */
+    if( model->isdummy )
+    {
+        for(i=0; i<=nout-1; i++)
+        {
+            buf->y.ptr.p_double[i] = (double)(0);
+        }
+        return;
+    }
+    
+    /*
+     * Perform request, average results
+     */
+    for(i=0; i<=nout-1; i++)
+    {
+        buf->y.ptr.p_double[i] = (double)(0);
+    }
+    nncnt = kdtreetsqueryaknn(&model->tree, &buf->treebuf, &buf->x, model->k, ae_true, model->eps, _state);
+    v = 1/coalesce((double)(nncnt), (double)(1), _state);
+    if( iscls )
+    {
+        kdtreetsqueryresultstags(&model->tree, &buf->treebuf, &buf->tags, _state);
+        for(i=0; i<=nncnt-1; i++)
+        {
+            j = buf->tags.ptr.p_int[i];
+            buf->y.ptr.p_double[j] = buf->y.ptr.p_double[j]+v;
+        }
+    }
+    else
+    {
+        kdtreetsqueryresultsxy(&model->tree, &buf->treebuf, &buf->xy, _state);
+        for(i=0; i<=nncnt-1; i++)
+        {
+            for(j=0; j<=nout-1; j++)
+            {
+                buf->y.ptr.p_double[j] = buf->y.ptr.p_double[j]+v*buf->xy.ptr.pp_double[i][nvars+j];
+            }
+        }
+    }
+}
+
+
+void _knnbuffer_init(void* _p, ae_state *_state, ae_bool make_automatic)
+{
+    knnbuffer *p = (knnbuffer*)_p;
+    ae_touch_ptr((void*)p);
+    _kdtreerequestbuffer_init(&p->treebuf, _state, make_automatic);
+    ae_vector_init(&p->x, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->y, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->tags, 0, DT_INT, _state, make_automatic);
+    ae_matrix_init(&p->xy, 0, 0, DT_REAL, _state, make_automatic);
+}
+
+
+void _knnbuffer_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
+{
+    knnbuffer *dst = (knnbuffer*)_dst;
+    knnbuffer *src = (knnbuffer*)_src;
+    _kdtreerequestbuffer_init_copy(&dst->treebuf, &src->treebuf, _state, make_automatic);
+    ae_vector_init_copy(&dst->x, &src->x, _state, make_automatic);
+    ae_vector_init_copy(&dst->y, &src->y, _state, make_automatic);
+    ae_vector_init_copy(&dst->tags, &src->tags, _state, make_automatic);
+    ae_matrix_init_copy(&dst->xy, &src->xy, _state, make_automatic);
+}
+
+
+void _knnbuffer_clear(void* _p)
+{
+    knnbuffer *p = (knnbuffer*)_p;
+    ae_touch_ptr((void*)p);
+    _kdtreerequestbuffer_clear(&p->treebuf);
+    ae_vector_clear(&p->x);
+    ae_vector_clear(&p->y);
+    ae_vector_clear(&p->tags);
+    ae_matrix_clear(&p->xy);
+}
+
+
+void _knnbuffer_destroy(void* _p)
+{
+    knnbuffer *p = (knnbuffer*)_p;
+    ae_touch_ptr((void*)p);
+    _kdtreerequestbuffer_destroy(&p->treebuf);
+    ae_vector_destroy(&p->x);
+    ae_vector_destroy(&p->y);
+    ae_vector_destroy(&p->tags);
+    ae_matrix_destroy(&p->xy);
+}
+
+
+void _knnbuilder_init(void* _p, ae_state *_state, ae_bool make_automatic)
+{
+    knnbuilder *p = (knnbuilder*)_p;
+    ae_touch_ptr((void*)p);
+    ae_matrix_init(&p->dsdata, 0, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->dsrval, 0, DT_REAL, _state, make_automatic);
+    ae_vector_init(&p->dsival, 0, DT_INT, _state, make_automatic);
+}
+
+
+void _knnbuilder_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
+{
+    knnbuilder *dst = (knnbuilder*)_dst;
+    knnbuilder *src = (knnbuilder*)_src;
+    dst->dstype = src->dstype;
+    dst->npoints = src->npoints;
+    dst->nvars = src->nvars;
+    dst->iscls = src->iscls;
+    dst->nout = src->nout;
+    ae_matrix_init_copy(&dst->dsdata, &src->dsdata, _state, make_automatic);
+    ae_vector_init_copy(&dst->dsrval, &src->dsrval, _state, make_automatic);
+    ae_vector_init_copy(&dst->dsival, &src->dsival, _state, make_automatic);
+    dst->knnnrm = src->knnnrm;
+}
+
+
+void _knnbuilder_clear(void* _p)
+{
+    knnbuilder *p = (knnbuilder*)_p;
+    ae_touch_ptr((void*)p);
+    ae_matrix_clear(&p->dsdata);
+    ae_vector_clear(&p->dsrval);
+    ae_vector_clear(&p->dsival);
+}
+
+
+void _knnbuilder_destroy(void* _p)
+{
+    knnbuilder *p = (knnbuilder*)_p;
+    ae_touch_ptr((void*)p);
+    ae_matrix_destroy(&p->dsdata);
+    ae_vector_destroy(&p->dsrval);
+    ae_vector_destroy(&p->dsival);
+}
+
+
+void _knnmodel_init(void* _p, ae_state *_state, ae_bool make_automatic)
+{
+    knnmodel *p = (knnmodel*)_p;
+    ae_touch_ptr((void*)p);
+    _kdtree_init(&p->tree, _state, make_automatic);
+    _knnbuffer_init(&p->buffer, _state, make_automatic);
+}
+
+
+void _knnmodel_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
+{
+    knnmodel *dst = (knnmodel*)_dst;
+    knnmodel *src = (knnmodel*)_src;
+    dst->nvars = src->nvars;
+    dst->nout = src->nout;
+    dst->k = src->k;
+    dst->eps = src->eps;
+    dst->iscls = src->iscls;
+    dst->isdummy = src->isdummy;
+    _kdtree_init_copy(&dst->tree, &src->tree, _state, make_automatic);
+    _knnbuffer_init_copy(&dst->buffer, &src->buffer, _state, make_automatic);
+}
+
+
+void _knnmodel_clear(void* _p)
+{
+    knnmodel *p = (knnmodel*)_p;
+    ae_touch_ptr((void*)p);
+    _kdtree_clear(&p->tree);
+    _knnbuffer_clear(&p->buffer);
+}
+
+
+void _knnmodel_destroy(void* _p)
+{
+    knnmodel *p = (knnmodel*)_p;
+    ae_touch_ptr((void*)p);
+    _kdtree_destroy(&p->tree);
+    _knnbuffer_destroy(&p->buffer);
+}
+
+
+void _knnreport_init(void* _p, ae_state *_state, ae_bool make_automatic)
+{
+    knnreport *p = (knnreport*)_p;
+    ae_touch_ptr((void*)p);
+}
+
+
+void _knnreport_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
+{
+    knnreport *dst = (knnreport*)_dst;
+    knnreport *src = (knnreport*)_src;
+    dst->relclserror = src->relclserror;
+    dst->avgce = src->avgce;
+    dst->rmserror = src->rmserror;
+    dst->avgerror = src->avgerror;
+    dst->avgrelerror = src->avgrelerror;
+}
+
+
+void _knnreport_clear(void* _p)
+{
+    knnreport *p = (knnreport*)_p;
+    ae_touch_ptr((void*)p);
+}
+
+
+void _knnreport_destroy(void* _p)
+{
+    knnreport *p = (knnreport*)_p;
+    ae_touch_ptr((void*)p);
 }
 
 

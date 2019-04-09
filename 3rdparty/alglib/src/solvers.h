@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -97,6 +97,7 @@ typedef struct
     ae_int_t repnmv;
     ae_int_t repterminationtype;
     ae_bool running;
+    ae_bool userterminationneeded;
     ae_vector tmpd;
     ae_vector tmpx;
     rcommstate rstate;
@@ -2583,6 +2584,8 @@ OUTPUT PARAMETERS:
                     *  7    rounding errors prevent further progress,
                             X contains best point found so far.
                             (sometimes returned on singular systems)
+                    *  8    user requested termination via calling
+                            linlsqrrequesttermination()
                 * Rep.IterationsCount contains iterations count
                 * NMV countains number of matrix-vector calculations
 
@@ -2606,6 +2609,52 @@ provided to MinCGOptimize().
      Copyright 30.11.2011 by Bochkanov Sergey
 *************************************************************************/
 void linlsqrsetxrep(const linlsqrstate &state, const bool needxrep, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This function is used to peek into LSQR solver and get  current  iteration
+counter. You can safely "peek" into the solver from another thread.
+
+INPUT PARAMETERS:
+    S           -   solver object
+
+RESULT:
+    iteration counter, in [0,INF)
+
+  -- ALGLIB --
+     Copyright 21.05.2018 by Bochkanov Sergey
+*************************************************************************/
+ae_int_t linlsqrpeekiterationscount(const linlsqrstate &s, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+This subroutine submits request for termination of the running solver.  It
+can be called from some other thread which wants LSQR solver to  terminate
+(obviously, the  thread  running  LSQR  solver can not request termination
+because it is already busy working on LSQR).
+
+As result, solver  stops  at  point  which  was  "current  accepted"  when
+termination  request  was  submitted  and returns error code 8 (successful
+termination).  Such   termination   is  a smooth  process  which  properly
+deallocates all temporaries.
+
+INPUT PARAMETERS:
+    State   -   solver structure
+
+NOTE: calling this function on solver which is NOT running  will  have  no
+      effect.
+
+NOTE: multiple calls to this function are possible. First call is counted,
+      subsequent calls are silently ignored.
+
+NOTE: solver clears termination flag on its start, it means that  if  some
+      other thread will request termination too soon, its request will went
+      unnoticed.
+
+  -- ALGLIB --
+     Copyright 08.10.2014 by Bochkanov Sergey
+*************************************************************************/
+void linlsqrrequesttermination(const linlsqrstate &state, const xparams _xparams = alglib::xdefault);
 #endif
 
 #if defined(AE_COMPILE_POLYNOMIALSOLVER) || !defined(AE_PARTIAL_BUILD)
@@ -3477,6 +3526,8 @@ void linlsqrsetxrep(linlsqrstate* state,
      ae_bool needxrep,
      ae_state *_state);
 void linlsqrrestart(linlsqrstate* state, ae_state *_state);
+ae_int_t linlsqrpeekiterationscount(linlsqrstate* s, ae_state *_state);
+void linlsqrrequesttermination(linlsqrstate* state, ae_state *_state);
 void _linlsqrstate_init(void* _p, ae_state *_state, ae_bool make_automatic);
 void _linlsqrstate_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic);
 void _linlsqrstate_clear(void* _p);

@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.14.0 (source code generated 2018-06-16)
+ALGLIB 3.15.0 (source code generated 2019-02-20)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -214,6 +214,8 @@ ae_int_t getmlpserializationcode(ae_state *_state);
 ae_int_t getmlpeserializationcode(ae_state *_state);
 ae_int_t getrbfserializationcode(ae_state *_state);
 ae_int_t getspline2dserializationcode(ae_state *_state);
+ae_int_t getidwserializationcode(ae_state *_state);
+ae_int_t getknnserializationcode(ae_state *_state);
 #endif
 #if defined(AE_COMPILE_APSERV) || !defined(AE_PARTIAL_BUILD)
 void seterrorflagdiff(ae_bool* flag,
@@ -272,12 +274,19 @@ void rmatrixsetlengthatleast(/* Real    */ ae_matrix* x,
      ae_int_t m,
      ae_int_t n,
      ae_state *_state);
+void bvectorgrowto(/* Boolean */ ae_vector* x,
+     ae_int_t n,
+     ae_state *_state);
 void ivectorgrowto(/* Integer */ ae_vector* x,
      ae_int_t n,
      ae_state *_state);
 void rmatrixgrowrowsto(/* Real    */ ae_matrix* a,
      ae_int_t n,
      ae_int_t mincols,
+     ae_state *_state);
+void rmatrixgrowcolsto(/* Real    */ ae_matrix* a,
+     ae_int_t n,
+     ae_int_t minrows,
      ae_state *_state);
 void rvectorgrowto(/* Real    */ ae_vector* x,
      ae_int_t n,
@@ -361,6 +370,7 @@ void inc(ae_int_t* v, ae_state *_state);
 void dec(ae_int_t* v, ae_state *_state);
 void threadunsafeinc(ae_int_t* v, ae_state *_state);
 void countdown(ae_int_t* v, ae_state *_state);
+double possign(double x, ae_state *_state);
 double rmul2(double v0, double v1, ae_state *_state);
 double rmul3(double v0, double v1, double v2, ae_state *_state);
 ae_int_t idivup(ae_int_t a, ae_int_t b, ae_state *_state);
@@ -373,6 +383,13 @@ double rmaxabs3(double r0, double r1, double r2, ae_state *_state);
 double boundval(double x, double b1, double b2, ae_state *_state);
 ae_int_t iboundval(ae_int_t x, ae_int_t b1, ae_int_t b2, ae_state *_state);
 double rboundval(double x, double b1, double b2, ae_state *_state);
+ae_int_t countnz1(/* Real    */ ae_vector* v,
+     ae_int_t n,
+     ae_state *_state);
+ae_int_t countnz2(/* Real    */ ae_matrix* v,
+     ae_int_t m,
+     ae_int_t n,
+     ae_state *_state);
 void alloccomplex(ae_serializer* s, ae_complex v, ae_state *_state);
 void serializecomplex(ae_serializer* s, ae_complex v, ae_state *_state);
 ae_complex unserializecomplex(ae_serializer* s, ae_state *_state);
@@ -411,6 +428,9 @@ void serializerealmatrix(ae_serializer* s,
 void unserializerealmatrix(ae_serializer* s,
      /* Real    */ ae_matrix* v,
      ae_state *_state);
+void copybooleanarray(/* Boolean */ ae_vector* src,
+     /* Boolean */ ae_vector* dst,
+     ae_state *_state);
 void copyintegerarray(/* Integer */ ae_vector* src,
      /* Integer */ ae_vector* dst,
      ae_state *_state);
@@ -442,6 +462,7 @@ void splitlengtheven(ae_int_t tasksize,
 ae_int_t chunkscount(ae_int_t tasksize,
      ae_int_t chunksize,
      ae_state *_state);
+double sparselevel2density(ae_state *_state);
 ae_int_t matrixtilesizea(ae_state *_state);
 ae_int_t matrixtilesizeb(ae_state *_state);
 double smpactivationlevel(ae_state *_state);
@@ -518,6 +539,10 @@ void tagsortfast(/* Real    */ ae_vector* a,
      ae_state *_state);
 void tagsortmiddleir(/* Integer */ ae_vector* a,
      /* Real    */ ae_vector* b,
+     ae_int_t offset,
+     ae_int_t n,
+     ae_state *_state);
+void sortmiddlei(/* Integer */ ae_vector* a,
      ae_int_t offset,
      ae_int_t n,
      ae_state *_state);

@@ -11684,7 +11684,7 @@ La misma lista se podrá ver sobre la vista del mapa para los tracks seleccionad
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="233"/>
         <source>Copy position of waypoint to Clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar coordenadas del waypoint.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="280"/>

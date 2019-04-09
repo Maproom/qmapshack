@@ -24,9 +24,9 @@ Next to QT5 you will need the development packages of:
 
 * [Qt5](https://www.qt.io/) (at least 5.8)
 * [GDAL](http://www.gdal.org/)
-* [Proj4](https://github.com/OSGeo/proj.4/wiki)
+* [Proj4](https://github.com/OSGeo/proj.4/wiki) (at least 5.0.0)
 * [Routino](http://www.routino.org/) (at least 3.1)
-* [QuaZip](http://quazip.sourceforge.net/index.html)
+* [QuaZip](http://quazip.sourceforge.net/index.html) (Qt5 version)
 * CMake/Make
 * a C++ compiler (supporting C++11)
 

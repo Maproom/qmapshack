@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -1009,7 +1010,7 @@ void CGisItemWpt::detBoundingRect()
     }
 }
 
-const QString CGisItemWpt::geocache_t::attributeMeanings[] = {
+const QList<QString> CGisItemWpt::geocache_t::attributeMeanings = {
     "QMS Attribute Flag",         //Not to be serialized in GPX files
     "Dogs",
     "Access or parking fee",
@@ -1080,15 +1081,124 @@ const QString CGisItemWpt::geocache_t::attributeMeanings[] = {
     "GeoTour"
 };
 
+QList<QString> CGisItemWpt::geocache_t::attributeMeaningsTranslated = CGisItemWpt::geocache_t::initAttributeMeaningsTranslated();
+QList<QString> CGisItemWpt::geocache_t::initAttributeMeaningsTranslated()
+{
+    QList<QString> translated  = {
+        tr("QMS Attribute Flag"),         //Not to be serialized in GPX files
+        tr("Dogs"),
+        tr("Access or parking fee"),
+        tr("Climbing gear"),
+        tr("Boat"),
+        tr("Scuba gear"),
+        tr("Recommended for kids"),
+        tr("Takes less than an hour"),
+        tr("Scenic view"),
+        tr("Significant hike"),
+        tr("Difficult climbing"),
+        tr("May require wading"),
+        tr("May require swimming"),
+        tr("Available at all times"),
+        tr("Recommended at night"),
+        tr("Available during winter"),
+        "",
+        tr("Poison plants"),
+        tr("Dangerous Animals"),
+        tr("Ticks"),
+        tr("Abandoned mines"),
+        tr("Cliff / falling rocks"),
+        tr("Hunting"),
+        tr("Dangerous area"),
+        tr("Wheelchair accessible"),
+        tr("Parking available"),
+        tr("Public transportation"),
+        tr("Drinking water nearby"),
+        tr("Public restrooms nearby"),
+        tr("Telephone nearby"),
+        tr("Picnic tables nearby"),
+        tr("Camping available"),
+        tr("Bicycles"),
+        tr("Motorcycles"),
+        tr("Quads"),
+        tr("Off-road vehicles"),
+        tr("Snowmobiles"),
+        tr("Horses"),
+        tr("Campfires"),
+        tr("Thorns"),
+        tr("Stealth required"),
+        tr("Stroller accessible"),
+        tr("Needs maintenance"),
+        tr("Watch for livestock"),
+        tr("Flashlight required"),
+        "",
+        tr("Truck Driver/RV"),
+        tr("Field Puzzle"),
+        tr("UV Light Required"),
+        tr("Snowshoes"),
+        tr("Cross Country Skis"),
+        tr("Special Tool Required"),
+        tr("Night Cache"),
+        tr("Park and Grab"),
+        tr("Abandoned Structure"),
+        tr("Short hike (less than 1km)"),
+        tr("Medium hike (1km-10km)"),
+        tr("Long Hike (+10km)"),
+        tr("Fuel Nearby"),
+        tr("Food Nearby"),
+        tr("Wireless Beacon"),
+        tr("Partnership cache"),
+        tr("Seasonal Access"),
+        tr("Tourist Friendly"),
+        tr("Tree Climbing"),
+        tr("Front Yard (Private Residence)"),
+        tr("Teamwork Required"),
+        tr("GeoTour")
+    };
+    return translated;
+}
 
 QMap<searchKeyword_e,CGisItemWpt::fSearch > CGisItemWpt::keywordLambdaMap = CGisItemWpt::initKeywordLambdaMap();
 QMap<searchKeyword_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
 {
     QMap<searchKeyword_e, CGisItemWpt::fSearch> map;
-    map.insert(eSearchKeywordWptElevation,[](CGisItemWpt* item){
+    map.insert(eSearchKeywordGeneralName,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->wpt.ele;
+        searchValue->str1 = item->getName();
+        return searchValue;
+    });
+    map.insert(eSearchKeywordGeneralFullText,[](CGisItemWpt* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        return searchValue;
+    });
+    map.insert(eSearchKeywordGeneralElevation,[](CGisItemWpt* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        IUnit::self().meter2elevation(item->wpt.ele,searchValue->value1,searchValue->str1);
+        return searchValue;
+    });
+    //Geocache keywords
+    map.insert(eSearchKeywordGeocacheDifficulty,[](CGisItemWpt* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->geocache.difficulty;
+        return searchValue;
+    });
+    map.insert(eSearchKeywordGeocacheTerrain,[](CGisItemWpt* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->geocache.terrain;
+        return searchValue;
+    });
+    /*
+       map.insert(eSearchKeywordGeocacheAttributes,[](CGisItemWpt* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->geocache;
+        return searchValue;
+       });
+     */
+    map.insert(eSearchKeywordGeocacheSize,[](CGisItemWpt* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->geocache.container;
         return searchValue;
     });
     return map;
 }
+

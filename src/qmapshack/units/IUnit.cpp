@@ -452,6 +452,88 @@ void IUnit::meter2base(qreal meter, QString& val, QString& unit) const
     val.sprintf("%1.0f", meter * basefactor);
 }
 
+void IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
+{
+    unit = unit.toLower(); //since targetUnit is in lower
+    if(unit == targetUnit)
+    {
+        return;
+    }
+
+    //Convert to m
+    if( unit ==  "m²"|| unit ==  "m"||  unit ==  "m/h")
+    {
+        //do nothing
+    }
+    else if(unit == "km²")
+    {
+        value *= 1000 * 1000;
+    }
+    else if(unit == "km" || unit == "km/h")
+    {
+        value *= 1000;
+    }
+    else if( unit == "ft²")
+    {
+        value /= CUnitImperial::footPerMeter * CUnitImperial::footPerMeter;
+    }
+    else if( unit == "ft"||unit == "ft/h")
+    {
+        value /= CUnitImperial::footPerMeter;
+    }
+    else if(unit == "ml²")
+    {
+        value /= CUnitImperial::milePerMeter * CUnitImperial::milePerMeter;
+    }
+    else if(unit == "ml" || unit == "ml/h")
+    {
+        value /= CUnitImperial::milePerMeter;
+    }
+
+    if(unit.contains("/h"))
+    {
+        unit = "m/h";
+    }
+    else if (unit.contains("²"))
+    {
+        unit = "m²";
+    }
+    else
+    {
+        unit = "m";
+    }
+
+    //convert to target
+    if( targetUnit ==  "m²"|| targetUnit ==  "m"||  targetUnit ==  "m/h")
+    {
+        //do nothing
+    }
+    else if(targetUnit == "km²")
+    {
+        value /= 1000 * 1000;
+    }
+    else if(targetUnit == "km" || targetUnit == "km/h")
+    {
+        value /= 1000;
+    }
+    else if( targetUnit == "ft²")
+    {
+        value *= CUnitImperial::footPerMeter * CUnitImperial::footPerMeter;
+    }
+    else if( targetUnit == "ft"||targetUnit == "ft/h")
+    {
+        value *= CUnitImperial::footPerMeter;
+    }
+    else if(targetUnit == "ml²")
+    {
+        value *= CUnitImperial::milePerMeter * CUnitImperial::milePerMeter;
+    }
+    else if(targetUnit == "ml" || targetUnit == "ml/h")
+    {
+        value *= CUnitImperial::milePerMeter;
+    }
+}
+
 void IUnit::slope2string(qreal slope, QString &val, QString &unit)
 {
     switch(slopeMode)
@@ -529,6 +611,19 @@ void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
     }
 
     val.sprintf("%2.2f",meter * speedfactor);
+    unit = speedunit;
+}
+
+void IUnit::meter2speed(qreal meter, qreal& val, QString& unit) const
+{
+    if(meter == NOFLOAT)
+    {
+        val = NOFLOAT;
+        unit.clear();
+        return;
+    }
+
+    val = meter * speedfactor;
     unit = speedunit;
 }
 

@@ -83,7 +83,9 @@ public:
         QString locale;
         QList<geocachelog_t> logs;
 
-        const static QString attributeMeanings[68];
+        const static QList<QString> attributeMeanings;
+        static QList<QString> attributeMeaningsTranslated;
+        static QList<QString> initAttributeMeaningsTranslated();
     };
 
     struct image_t

@@ -34,6 +34,21 @@ struct searchValue_t //Outside of CSearch to avoid problem of nested type
     qreal value2 = NOFLOAT;
     QString str1 = "";
     QString str2 = "";
+    QString toString() const
+    {
+        QString str;
+        str.append(str1);
+        if(value1 != NOFLOAT)
+        {
+            str.append(QString::number(value1));
+        }
+        str.append(str2);
+        if(value2 != NOFLOAT)
+        {
+            str.append(QString::number(value2));
+        }
+        return str;
+    }
 };
 
 enum searchKeyword_e: unsigned int
@@ -41,18 +56,29 @@ enum searchKeyword_e: unsigned int
     //General keywords
     eSearchKeywordGeneralName,
     eSearchKeywordGeneralFullText,
+    eSearchKeywordGeneralElevation,
 
     //Area keywords
     eSearchKeywordAreaArea,
 
     //Geocache keywords
     eSearchKeywordGeocacheDifficulty,
+    eSearchKeywordGeocacheTerrain,
+    eSearchKeywordGeocacheAttributes,
+    eSearchKeywordGeocacheSize,
 
     //Waypoint keywords
-    eSearchKeywordWptElevation,
+
 
     //Route / track keywords
-    eSearchKeywordRteTrkDistance
+    eSearchKeywordRteTrkDistance,
+    eSearchKeywordRteTrkAscent,
+    eSearchKeywordRteTrkDescent,
+    eSearchKeywordRteTrkMinElevation,
+    eSearchKeywordRteTrkMaxElevation,
+    eSearchKeywordRteTrkMaxSpeed,
+    eSearchKeywordRteTrkMinSpeed,
+    eSearchKeywordRteTrkAvgSpeed,
 };
 
 class CSearch
@@ -68,7 +94,8 @@ public:
         eSearchTypeSmaller,
         eSearchTypeBigger,
         eSearchTypeBetween,
-        eSearchTypeEquals
+        eSearchTypeEquals,
+        eSearchTypeRegEx
     };
 
     enum search_mode_e
@@ -100,6 +127,8 @@ public:
 
 private:
 
+    static void adjustUnits(const searchValue_t &itemValue, searchValue_t &searchValue);
+
     search_mode_e searchMode;
     QList<search_t> searches;
 
@@ -109,7 +138,8 @@ private:
     static QMap<QString,searchKeyword_e> searchKeywordEnumMap;
     static QMap<QString,searchKeyword_e> initSearchKeywordEnumMap();
 
-    using fSearch = std::function<bool(const searchValue_t&, const searchValue_t&)>;
+//First is itemValue, escond is searchValue, which is non const to adjust units
+    using fSearch = std::function<bool(const searchValue_t&, searchValue_t&)>;
     static QMap<search_type_e,fSearch > searchTypeLambdaMap;
     static QMap<search_type_e,fSearch > initSearchTypeLambdaMap();
 };

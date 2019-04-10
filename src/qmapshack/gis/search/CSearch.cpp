@@ -115,13 +115,37 @@ bool CSearch::getSearchResult(IGisItem *item)
     return true;
 }
 
+void CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchValue)
+{
+    if(searchValue.str1 != "" && searchValue.str1 != itemValue.str1)
+    {
+        IUnit::convert(searchValue.value1,searchValue.str1,itemValue.str1);
+    }
+    else
+    {
+        searchValue.str1 = itemValue.str1;
+    }
+
+    if(searchValue.str2 != "" && searchValue.str2 != itemValue.str2)
+    {
+        IUnit::convert(searchValue.value2,searchValue.str2,itemValue.str2);
+    }
+    else
+    {
+        searchValue.str2 = itemValue.str2;
+    }
+}
+
 QMap<QString,CSearch::search_type_e> CSearch::keywordSearchTypeMap = CSearch::initKeywordSearchTypeMap();
 QMap<QString,CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
 {
     QMap<QString,search_type_e> map;
     map.insert(tr("with"),eSearchTypeWith);
+    map.insert(tr("contains"),eSearchTypeWith);
     map.insert(tr("without"),eSearchTypeWithout);
     map.insert(tr("shorter than"),eSearchTypeSmaller);
+    map.insert(tr("smaller than"),eSearchTypeSmaller);
+    map.insert(tr("under"),eSearchTypeSmaller);
     map.insert(tr("longer than"),eSearchTypeBigger);
     map.insert(tr("lower than"),eSearchTypeSmaller);
     map.insert(tr("higher than"),eSearchTypeBigger);
@@ -129,8 +153,7 @@ QMap<QString,CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
     map.insert(tr("greater than"),eSearchTypeBigger);
     map.insert(tr("above"),eSearchTypeBigger);
     map.insert(tr("over"),eSearchTypeBigger);
-    map.insert(tr("smaller than"),eSearchTypeSmaller);
-    map.insert(tr("under"),eSearchTypeSmaller);
+    map.insert(tr("regex"),eSearchTypeRegEx);
     return map;
 }
 
@@ -140,20 +163,38 @@ QMap<QString,searchKeyword_e> CSearch::initSearchKeywordEnumMap()
     //Everything to upper since search comes in CAPS and we can't get value() case insensitive easily
     QMap<QString,searchKeyword_e> map;
     //General keywords
-    map.insert(tr("name").toUpper(),searchKeyword_e::eSearchKeywordGeneralName);
+    map.insert(tr("name").toUpper(),eSearchKeywordGeneralName);
+    map.insert(tr("full text").toUpper(),eSearchKeywordGeneralFullText);
+    map.insert(tr("elevation").toUpper(),eSearchKeywordGeneralElevation);
 
     //Area keywords
-    map.insert(tr("area").toUpper(),searchKeyword_e::eSearchKeywordAreaArea);
+    map.insert(tr("area").toUpper(),eSearchKeywordAreaArea);
 
     //Geocache keywords
-    map.insert(tr("difficulty").toUpper(),searchKeyword_e::eSearchKeywordGeocacheDifficulty);
-    map.insert("D",searchKeyword_e::eSearchKeywordGeocacheDifficulty);
+    map.insert(tr("difficulty").toUpper(),eSearchKeywordGeocacheDifficulty);
+    map.insert("D",eSearchKeywordGeocacheDifficulty);
+    map.insert(tr("terrain").toUpper(),eSearchKeywordGeocacheTerrain);
+    map.insert(tr("T").toUpper(),eSearchKeywordGeocacheTerrain);
+    map.insert(tr("attributes").toUpper(),eSearchKeywordGeocacheAttributes);
+    map.insert(tr("size").toUpper(),eSearchKeywordGeocacheSize);
 
     //Waypoint keywords
-    map.insert(tr("elevation").toUpper(),searchKeyword_e::eSearchKeywordWptElevation);
 
     //Route / track keywords
-    map.insert(tr("distance").toUpper(),searchKeyword_e::eSearchKeywordRteTrkDistance);
+    map.insert(tr("distance").toUpper(),eSearchKeywordRteTrkDistance);
+    map.insert(tr("length").toUpper(),eSearchKeywordRteTrkDistance);
+    map.insert(tr("ascent").toUpper(),eSearchKeywordRteTrkAscent);
+    map.insert(tr("elevation gain").toUpper(),eSearchKeywordRteTrkAscent);
+    map.insert(tr("descent").toUpper(),eSearchKeywordRteTrkDescent);
+    map.insert(tr("min elevation").toUpper(),eSearchKeywordRteTrkMinElevation);
+    map.insert(tr("minimal elevation").toUpper(),eSearchKeywordRteTrkMinElevation);
+    map.insert(tr("max elevation").toUpper(),eSearchKeywordRteTrkMaxElevation);
+    map.insert(tr("maximal elevation").toUpper(),eSearchKeywordRteTrkMaxElevation);
+    map.insert(tr("max speed").toUpper(),eSearchKeywordRteTrkMaxSpeed);
+    map.insert(tr("maximal speed").toUpper(),eSearchKeywordRteTrkMaxSpeed);
+    map.insert(tr("min speed").toUpper(),eSearchKeywordRteTrkMinSpeed);
+    map.insert(tr("minimal speed").toUpper(),eSearchKeywordRteTrkMinSpeed);
+    map.insert(tr("average speed").toUpper(),eSearchKeywordRteTrkAvgSpeed);
 
     return map;
 }
@@ -162,15 +203,10 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::searchTypeLambdaMap = CS
 QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap()
 {
     QMap<CSearch::search_type_e, CSearch::fSearch> map;
-    map.insert(eSearchTypeEquals, [](const searchValue_t& itemValue, const searchValue_t& searchValue){
+    map.insert(eSearchTypeEquals, [](const searchValue_t& itemValue, searchValue_t& searchValue){
         if(searchValue.value1 != NOFLOAT)
         {
-            //TODO unit conversion
-            /*
-             * if(filterValue.str1 != "")
-               {
-               }else
-             */
+            adjustUnits(itemValue, searchValue);
             return itemValue.value1 == searchValue.value1;
         }
         else if(searchValue.str1 != "")
@@ -179,42 +215,41 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         }
         return false;
     });
-    map.insert(eSearchTypeSmaller, [](const searchValue_t& itemValue, const searchValue_t& searchValue){
+    map.insert(eSearchTypeSmaller, [](const searchValue_t& itemValue, searchValue_t& searchValue){
         if(searchValue.value1 != NOFLOAT && itemValue.value1 != NOFLOAT)
         {
-            //TODO unit conversion
-            /*
-             * if(filterValue.str1 != "")
-               {
-               }else
-             */
-            return itemValue.value1 < searchValue.value1;
+            adjustUnits(itemValue, searchValue);
+            if(itemValue.value2 == NOFLOAT)
+            {
+                return itemValue.value1 < searchValue.value1;
+            }
+            else
+            {
+                return qMax(itemValue.value1,itemValue.value2)<searchValue.value1;
+            }
         }
         return false;
     });
-    map.insert(eSearchTypeBigger, [](const searchValue_t& itemValue, const searchValue_t& searchValue){
+    map.insert(eSearchTypeBigger, [](const searchValue_t& itemValue, searchValue_t& searchValue){
         if(searchValue.value1 != NOFLOAT && itemValue.value1 != NOFLOAT)
         {
-            //TODO unit conversion
-            /*
-             * if(filterValue.str1 != "")
-               {
-               }else
-             */
-            return itemValue.value1 > searchValue.value1;
+            adjustUnits(itemValue, searchValue);
+            if(itemValue.value2 == NOFLOAT)
+            {
+                return itemValue.value1 > searchValue.value1;
+            }
+            else
+            {
+                return qMin(itemValue.value1,itemValue.value2)>searchValue.value1;
+            }
         }
         return false;
     });
 
-    map.insert(eSearchTypeBetween, [](const searchValue_t& itemValue, const searchValue_t& searchValue){
+    map.insert(eSearchTypeBetween, [](const searchValue_t& itemValue, searchValue_t& searchValue){
         if(searchValue.value1 != NOFLOAT && itemValue.value1 != NOFLOAT && searchValue.value2 != NOFLOAT && itemValue.value2 != NOFLOAT)
         {
-            //TODO unit conversion
-            /*
-             * if(filterValue.str1 != "")
-               {
-               }else
-             */
+            adjustUnits(itemValue, searchValue);
             if(itemValue.value2 == NOFLOAT)
             {
                 return itemValue.value1 < qMax(searchValue.value1,searchValue.value2) && itemValue.value1 > qMin(searchValue.value1,searchValue.value2);
@@ -226,25 +261,35 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         }
         return false;
     });
-    map.insert(eSearchTypeWith, [](const searchValue_t& itemValue, const searchValue_t& searchValue){
-        if(searchValue.str1 != "" && searchValue.str1 != "")
+    map.insert(eSearchTypeWith, [](const searchValue_t& itemValue, searchValue_t& searchValue){
+        if(searchValue.str1 != "")
         {
-            return itemValue.str1.contains(searchValue.str1);
+            return itemValue.toString().contains(searchValue.str1);
         }
         else
         {
-            return itemValue.str1.contains(QString::number(searchValue.value1));
+            return itemValue.toString().contains(QString::number(searchValue.value1));
         }
+
         return false;
     });
-    map.insert(eSearchTypeWithout, [](const searchValue_t& itemValue, const searchValue_t& searchValue){
-        if(searchValue.str1 != "" && searchValue.str1 != "")
+    map.insert(eSearchTypeWithout, [](const searchValue_t& itemValue, searchValue_t& searchValue){
+        if(searchValue.str1 != "")
         {
-            return !itemValue.str1.contains(searchValue.str1);
+            return !itemValue.toString().contains(searchValue.str1);
         }
         else
         {
-            return !itemValue.str1.contains(QString::number(searchValue.value1));
+            return !itemValue.toString().contains(QString::number(searchValue.value1));
+        }
+
+        return false;
+    });
+
+    map.insert(eSearchTypeRegEx, [](const searchValue_t& itemValue, searchValue_t& searchValue){
+        if( searchValue.str1 != "")
+        {
+            return itemValue.str1.contains(QRegExp(searchValue.str1));
         }
         return false;
     });

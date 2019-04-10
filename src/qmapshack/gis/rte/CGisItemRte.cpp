@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -1313,10 +1314,49 @@ QMap<searchKeyword_e,CGisItemRte::fSearch > CGisItemRte::keywordLambdaMap = CGis
 QMap<searchKeyword_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
 {
     QMap<searchKeyword_e, CGisItemRte::fSearch> map;
-    map.insert(eSearchKeywordRteTrkDistance,[](CGisItemRte* item){
+    map.insert(eSearchKeywordGeneralName,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->rte.totalDistance;
+        searchValue->str1 = item->rte.name;
         return searchValue;
     });
+    map.insert(eSearchKeywordGeneralFullText,[](CGisItemRte* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        return searchValue;
+    });
+    /*
+       map.insert(eSearchKeywordGeneralElevation,[](CGisItemRte* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->rte.;
+        return searchValue;
+       });
+     */
+    map.insert(eSearchKeywordRteTrkDistance,[](CGisItemRte* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        IUnit::self().meter2distance(item->rte.totalDistance,searchValue->value1,searchValue->str1);
+        return searchValue;
+    });
+    map.insert(eSearchKeywordRteTrkAscent,[](CGisItemRte* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        IUnit::self().meter2elevation(item->rte.ascent,searchValue->value1,searchValue->str1);
+        return searchValue;
+    });
+    map.insert(eSearchKeywordRteTrkDescent,[](CGisItemRte* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        IUnit::self().meter2elevation(item->rte.descent,searchValue->value1,searchValue->str1);
+        return searchValue;
+    });
+    /* TODO get min/max elevation
+       map.insert(eSearchKeywordRteTrkMinElevation,[](CGisItemRte* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->rte.;
+        return searchValue;
+       });
+       map.insert(eSearchKeywordRteTrkMaxElevation,[](CGisItemRte* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->rte.;
+        return searchValue;
+       });
+     */
     return map;
 }

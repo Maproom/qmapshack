@@ -183,6 +183,7 @@ CMainWindow::CMainWindow()
     connect(actionShowTrackInfoPoints,   &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
     connect(actionShowTrackSummary,      &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
     connect(actionShowTrackProfile,      &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackHighlight,    &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
     connect(actionShowTrackInfoPoints,   &QAction::triggered, actionShowTrackInfoTable, &QAction::setEnabled);
     connect(actionShowTrackProfile,      &QAction::triggered, actionProfileIsWindow,    &QAction::setEnabled);
     connect(actionProfileIsWindow,       &QAction::triggered,            this,      &CMainWindow::slotSetProfileMode);
@@ -262,6 +263,7 @@ CMainWindow::CMainWindow()
     actionShowTrackInfoPoints->setChecked(cfg.value("ShowTrackInfoPoints", true).toBool());
     actionShowTrackSummary->setChecked(cfg.value("ShowTrackSummary", true).toBool());
     actionShowTrackProfile->setChecked(cfg.value("ShowTrackProfile", true).toBool());
+    actionShowTrackHighlight->setChecked(cfg.value("ShowTrackHighlight", true).toBool());
     actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
     actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
@@ -349,6 +351,7 @@ CMainWindow::CMainWindow()
     menuWindow->insertSeparator(actionSetupToolbar);
 
     QMenu * menu = new QMenu(this);
+    menu->addAction(actionShowTrackHighlight);
     menu->addAction(actionShowMinMaxTrackLabels);
     menu->addAction(actionShowMinMaxSummary);
     menu->addAction(actionShowTrackSummary);
@@ -376,6 +379,7 @@ CMainWindow::CMainWindow()
                      << actionNightDay
                      << actionMapToolTip
                      << actionTrackInfo
+                     << actionShowTrackHighlight
                      << actionShowMinMaxSummary
                      << actionShowMinMaxTrackLabels
                      << actionShowTrackInfoPoints
@@ -547,6 +551,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("ShowTrackInfoPoints", actionShowTrackInfoPoints->isChecked());
     cfg.setValue("ShowTrackSummary", actionShowTrackSummary->isChecked());
     cfg.setValue("ShowTrackProfile", actionShowTrackProfile->isChecked());
+    cfg.setValue("ShowTrackHighlight", actionShowTrackHighlight->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("profileIsWindow",actionProfileIsWindow->isChecked());
     cfg.setValue("mapFont", mapFont);
@@ -622,6 +627,7 @@ CCanvas *CMainWindow::addView(const QString& name)
     CCanvas * view = new CCanvas(tabWidget, name);
     tabWidget->addTab(view, view->objectName());
     connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
+    connect(actionShowTrackHighlight, &QAction::changed,    view, [view]{view->slotUpdateTrackInfo(false);});
     connect(actionShowMinMaxSummary, &QAction::changed,     view, [view]{view->slotUpdateTrackInfo(false);});
     connect(actionShowTrackInfoTable, &QAction::changed,    view, [view]{view->slotUpdateTrackInfo(false);});
     connect(actionShowTrackInfoPoints, &QAction::changed,   view, [view]{view->slotUpdateTrackInfo(true);});
@@ -723,6 +729,11 @@ bool CMainWindow::isShowTrackInfoPoints() const
 bool CMainWindow::isShowTrackProfile() const
 {
     return actionShowTrackProfile->isChecked();
+}
+
+bool CMainWindow::isShowTrackHighlight() const
+{
+    return actionShowTrackHighlight->isChecked();
 }
 
 bool CMainWindow::flipMouseWheel() const

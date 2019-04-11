@@ -98,6 +98,7 @@ public:
     bool isShowTrackInfoTable() const;
     bool isShowTrackInfoPoints() const;
     bool isShowTrackProfile() const;
+    bool isShowTrackHighlight() const;
 
     bool flipMouseWheel()  const;
     bool profileIsWindow() const;

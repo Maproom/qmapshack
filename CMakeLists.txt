@@ -18,6 +18,20 @@ if (COMMAND CMAKE_POLICY)
 endif()
 
 ###############################################################################################
+# Do distribution dependent stuff
+###############################################################################################
+if(EXISTS "/etc/debian_version")
+    message( STATUS "Apply patches to fix build system on Debian")
+    execute_process(COMMAND bash "-c" "patch --quiet -p1 < FindPROJ4.patch"
+                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+                    OUTPUT_QUIET)
+    execute_process(COMMAND bash "-c" "patch --quiet -p1 < FindQuaZip5.patch"
+                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+                    OUTPUT_QUIET)
+endif(EXISTS "/etc/debian_version")
+
+
+###############################################################################################
 # Define project name and version tags
 ###############################################################################################
 # this is not only the QMS version it will be the package version, too.

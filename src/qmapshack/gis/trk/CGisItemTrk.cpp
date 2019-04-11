@@ -1864,7 +1864,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     QList<QPolygonF> lines;
     splitLineToViewport(lineSimple, extViewport, lines);
 
-    if(key == keyUserFocus)
+    const CMainWindow& w = CMainWindow::self();
+    if(key == keyUserFocus && w.isShowTrackHighlight())
     {
         p.setPen(QPen(Qt::red, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         for(const QPolygonF &l : lines)
@@ -1913,8 +1914,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     // -------------------------
     bool skipDecorations = (!keyUserFocus.item.isEmpty() && (key != keyUserFocus));
-    // draw min/max labels    
-    const CMainWindow& w = CMainWindow::self();
+    // draw min/max labels        
     if(w.isShowMinMaxTrackLabels() && !skipDecorations)
     {
         for(const QString& key : extrema.keys())

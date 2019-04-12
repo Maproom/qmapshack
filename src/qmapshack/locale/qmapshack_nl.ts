@@ -1508,13 +1508,13 @@ You can modify both parameters to customize the behavior of the filter. For the 
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1980"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1975"/>
         <source>min.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1980"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1975"/>
         <source>max.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1654,37 +1654,37 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Toon punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2446"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2441"/>
         <source>Changed name</source>
         <translation>Naam aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2452"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2447"/>
         <source>Changed comment</source>
         <translation>Notitie aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2458"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2453"/>
         <source>Changed description</source>
         <translation>Beschrijving aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2464"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2459"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2474"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2469"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2497"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2492"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor gehele track.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2535"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2530"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor bereik(%2..%3).</translation>
     </message>
@@ -2842,69 +2842,69 @@ lijn %2, kolom %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="595"/>
+        <location filename="../CMainWindow.cpp" line="600"/>
         <source>Select folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1004"/>
+        <location filename="../CMainWindow.cpp" line="1015"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1133"/>
+        <location filename="../CMainWindow.cpp" line="1144"/>
         <source>Ele.: %1%2</source>
         <translation type="unfinished">Hoogte.: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1145"/>
+        <location filename="../CMainWindow.cpp" line="1156"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1161"/>
+        <location filename="../CMainWindow.cpp" line="1172"/>
         <source>[Grid: %1]</source>
         <translation>[Raster: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1309"/>
+        <location filename="../CMainWindow.cpp" line="1320"/>
         <source>Load GIS Data...</source>
         <translation>GIS gegevens laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1343"/>
+        <location filename="../CMainWindow.cpp" line="1354"/>
         <source>Select output file</source>
         <translation>Selecteer bestand</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1343"/>
-        <location filename="../CMainWindow.cpp" line="1369"/>
+        <location filename="../CMainWindow.cpp" line="1354"/>
+        <location filename="../CMainWindow.cpp" line="1380"/>
         <source>QMapShack View (*.view)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1369"/>
+        <location filename="../CMainWindow.cpp" line="1380"/>
         <source>Select file to load</source>
         <translation>Selecteer bestand</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1661"/>
+        <location filename="../CMainWindow.cpp" line="1672"/>
         <source>Rename View...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1661"/>
+        <location filename="../CMainWindow.cpp" line="1672"/>
         <source>Enter new name for view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1811"/>
+        <location filename="../CMainWindow.cpp" line="1822"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1812"/>
+        <location filename="../CMainWindow.cpp" line="1823"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9296,6 +9296,16 @@ Bestandsnaam: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="983"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="996"/>
+        <source>Track Highlight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="999"/>
+        <source>Mark the highlighted track with a red border.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

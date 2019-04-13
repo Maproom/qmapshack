@@ -671,7 +671,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="91"/>
         <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;To document your tracks you can add a short description to a track point. All points with description will be marked along the track with auto-numbered bullets.&lt;br/&gt;You can add a description by a right click on a track point in the graphs. Or you do a left click on a track point in the map view.&lt;br/&gt;With the first track point you add information to this text will be replaced by a table. Use it to edit and delete track point information.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Información de los puntos del track&lt;/b&gt;&lt;br/&gt;Se puede añadir una breve descripción a ciertos puntos del track para crear una reseña y todos ellos se marcarán con una etiqueta numerada.&lt;br/&gt;La reseña se puede añadir con clic derecho en las gráficas o con clic izquierdo en la vista&lt;br/&gt;Se puede editar directamente en la tabla.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Etiquetas numeradas&lt;/b&gt;&lt;br/&gt;Se puede añadir una breve descripción a ciertos puntos del track y todos ellos se marcarán con una etiqueta auto-numerada.&lt;/br&gt;Es útil para para mostrar  una leyenda de las etiquetas numeradas sobre la vista del mapa y crear una reseña.&lt;br/&gt;Para añadir una etiqueta a un punto haz clic derecho sobre una de las gráficas o clic izquierdo sobre la vista del mapa&lt;br/&gt;Se pueden editar o borrar las etiquetas en la lista que se mostrará en este mismo panel.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="185"/>
@@ -1651,22 +1651,22 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1544"/>
         <source>Enter some text to be attached to this track point:</source>
-        <translation>Reseñar este punto del track:</translation>
+        <translation>Escribir descripción de este punto del track:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1553"/>
         <source>Add track point desc.: %1</source>
-        <translation>Añadir reseña al punto: %1</translation>
+        <translation>Añadir etiqueta al punto: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1563"/>
         <source>Changed track point desc.: %1</source>
-        <translation>Se cambió la reseña del punto: %1</translation>
+        <translation>Se cambió la etiqueta del punto: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1573"/>
         <source>Removed track point desc.</source>
-        <translation>Se eliminó la reseña del punto.</translation>
+        <translation>Se eliminó la etiqueta del punto.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1751"/>
@@ -2264,7 +2264,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Copy position</source>
-        <translation type="unfinished">Copiar posición</translation>
+        <translation>Copiar posición</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="170"/>
@@ -2380,17 +2380,17 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="176"/>
         <source>Apply filter to</source>
-        <translation type="unfinished">Aplicar filtro a</translation>
+        <translation>Aplicar filtro a</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="240"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
-        <translation type="unfinished">&lt;b&gt;Selección de elementos: &lt;/b&gt;Elemento seleccionado de la lista del espacio de trabajo. Haga clic en el mapa para volver al comportamiento normal de selección del mouse.</translation>
+        <translation>&lt;b&gt;Selección de elementos: &lt;/b&gt;Elemento seleccionado de la lista del espacio de trabajo. Haga clic en el mapa para volver al comportamiento normal de selección del mouse.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="721"/>
         <source>Copy items...</source>
-        <translation type="unfinished">Copiar elementos....</translation>
+        <translation>Copiar elementos....</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="751"/>
@@ -2400,17 +2400,17 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="993"/>
         <source>Cut Track...</source>
-        <translation type="unfinished">Dividir Track...</translation>
+        <translation>Dividir Track...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="993"/>
         <source>Do you want to delete the original track?</source>
-        <translation type="unfinished">¿Desea borrar el track original?</translation>
+        <translation>¿Borrar el track original?</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="1262"/>
         <source>Enter new proximity range.</source>
-        <translation type="unfinished">Introducir el valor de proximidad.</translation>
+        <translation>Introducir el valor de proximidad.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="1263"/>
@@ -2544,12 +2544,12 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/trk/CInvalidTrk.cpp" line="44"/>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation type="unfinished">El track &apos;%1&apos; tiene %2 puntos inválidos de  %3 visibles. ¿Quiere ocultar los puntos inválidos?</translation>
+        <translation>El track &apos;%1&apos; tiene %2 puntos inválidos de  %3 visibles. ¿Ocultar los puntos inválidos?</translation>
     </message>
     <message>
         <location filename="../gis/trk/CInvalidTrk.cpp" line="68"/>
         <source>Show Details...</source>
-        <translation type="unfinished">Ver detalles...</translation>
+        <translation>Ver detalles...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CInvalidTrk.cpp" line="75"/>
@@ -2867,12 +2867,12 @@ línea %2, columna %3.
     <message>
         <location filename="../CMainWindow.cpp" line="600"/>
         <source>Select folder...</source>
-        <translation type="unfinished">Seleccione carpeta...</translation>
+        <translation>Seleccionar carpeta...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1015"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
-        <translation>Haga clic en &lt;b&gt;Menu-&gt;Ver-&gt;Añadir vista&lt;/b&gt; para abrir una nueva vista, o &lt;b&gt;Menu-&gt;Archivo-&gt;Cargar Vista&lt;/b&gt; para restaurar una vista guardada, o clic &lt;a href=&apos;NewView&apos;&gt;aquí&lt;/a&gt;.</translation>
+        <translation>Hacer clic en &lt;b&gt;Menu-&gt;Ver-&gt;Añadir vista&lt;/b&gt; para abrir una nueva vista, o &lt;b&gt;Menu-&gt;Archivo-&gt;Cargar Vista&lt;/b&gt; para restaurar una vista guardada, o clic &lt;a href=&apos;NewView&apos;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1144"/>
@@ -4459,7 +4459,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="174"/>
         <source>BRouter: not found</source>
-        <translation type="unfinished">BRouter: No encontrado</translation>
+        <translation>BRouter: No encontrado</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="192"/>
@@ -5675,12 +5675,12 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="110"/>
         <source>Delta</source>
-        <translation type="unfinished">Delta</translation>
+        <translation>Delta</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="111"/>
         <source>Dist.</source>
-        <translation type="unfinished">Dist.</translation>
+        <translation>Dist.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="112"/>
@@ -6070,7 +6070,7 @@ línea %2, columna %3.
         <location filename="../templates/Running_Summary.ui" line="224"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="186"/>
         <source>city/road</source>
-        <translation type="unfinished">ciudad/crta.</translation>
+        <translation>ciudad/crta.</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="231"/>
@@ -6187,7 +6187,7 @@ línea %2, columna %3.
         <location filename="../templates/Running_Summary.ui" line="615"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="512"/>
         <source>SAC scale</source>
-        <translation type="unfinished">escala SAC</translation>
+        <translation>escala SAC</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="627"/>
@@ -6988,7 +6988,7 @@ Si quieres mantener sólo una parte se pùeden eliminar los puntos simplemente, 
         <location filename="../dem/IDemPathSetup.ui" line="143"/>
         <source>Help! I want DEMs!
 I don&apos;t want to read the documentation!</source>
-        <translation type="unfinished">¡Ayuda!¡Quiero DEM&apos;s!
+        <translation>¡Ayuda!¡Quiero DEM&apos;s!
 ¡No quiero leer la documentación!</translation>
     </message>
 </context>
@@ -8223,27 +8223,27 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="197"/>
         <source>Uphill:</source>
-        <translation type="unfinished">Ascenso:</translation>
+        <translation>Ascenso:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="207"/>
         <source>at negative Slope</source>
-        <translation type="unfinished">descenso</translation>
+        <translation>descenso</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="217"/>
         <source>at positive Slope</source>
-        <translation type="unfinished">ascenso</translation>
+        <translation>ascenso</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="227"/>
         <source>Speed at zero Slope</source>
-        <translation type="unfinished">Vel. en llano</translation>
+        <translation>Vel. en llano</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="259"/>
         <source>Downhill:</source>
-        <translation type="unfinished">Descenso:</translation>
+        <translation>Descenso:</translation>
     </message>
 </context>
 <context>
@@ -8353,12 +8353,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="35"/>
         <source>Distance</source>
-        <translation type="unfinished">Distancia</translation>
+        <translation>Distancia</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="70"/>
         <source>m</source>
-        <translation type="unfinished">m</translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="86"/>
@@ -8399,7 +8399,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="14"/>
         <source>Setup Geo-Search</source>
-        <translation type="unfinished">Configurar Búsqueda de Lugares</translation>
+        <translation>Configurar Búsqueda de Lugares</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="50"/>
@@ -8450,12 +8450,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="55"/>
@@ -8996,7 +8996,7 @@ Nombre de archivo %1</translation>
         <location filename="../gis/trk/IInvalidTrk.ui" line="28"/>
         <location filename="../gis/trk/IInvalidTrk.ui" line="44"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="37"/>
@@ -9102,7 +9102,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="259"/>
         <source>Routing</source>
-        <translation type="unfinished">Enrutamiento</translation>
+        <translation>Enrutamiento</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="277"/>
@@ -9245,7 +9245,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="680"/>
         <source>Track Profile as Window</source>
-        <translation>Perfil del track en ventana externa</translation>
+        <translation>Perfil del track en ventana externa.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="683"/>
@@ -9275,12 +9275,12 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="908"/>
         <source>Track Point Info Table</source>
-        <translation>Reseña del track</translation>
+        <translation>Lista de las etiquetas numeradas</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="911"/>
         <source>Show a legend for all track point info bullets along the track.</source>
-        <translation>Mostrar la reseña con etiquetas a lo largo del track.</translation>
+        <translation>Mostrar la lista de las etiquetas numeradas.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="923"/>
@@ -9305,7 +9305,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="953"/>
         <source>Track Profile</source>
-        <translation>Perfil del track</translation>
+        <translation>Perfil del track.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="956"/>
@@ -9320,27 +9320,27 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="968"/>
         <source>Take a screenshot from the current active map view.</source>
-        <translation>Tomar captura de pantalla de la actual vista.</translation>
+        <translation>Tomar captura de pantalla de la vista actual.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="980"/>
         <source>Track Point Info</source>
-        <translation>Reseña de los puntos del track</translation>
+        <translation>Información del punto del track</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="983"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
-        <translation>Señalar los puntos  de track que tengan reseña añadida con etiquetas auto-numeradas.</translation>
+        <translation>Marcar con etiquetas auto-numeradas los puntos  de track que tengan imformación añadida.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="996"/>
         <source>Track Highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Resaltar track</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="999"/>
         <source>Mark the highlighted track with a red border.</source>
-        <translation type="unfinished"></translation>
+        <translation>Resaltar el track seleccionado con bordes rojos.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="686"/>
@@ -9808,7 +9808,7 @@ Tip:
 &lt;li&gt;Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.&lt;/li&gt;
 &lt;li&gt;The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.&lt;/li&gt;
 &lt;/ul&gt;</source>
-        <translation type="unfinished">&lt;ol&gt;
+        <translation>&lt;ol&gt;
 &lt;li&gt;Selecciona uno o varios archivos de origen.&lt;/li&gt;
 &lt;li&gt;Elige un nombre para el archivo VRT de destino.&lt;/li&gt;
 &lt;li&gt;Pulsa el botón &quot;Empezar&quot;.&lt;/li&gt;
@@ -10109,7 +10109,7 @@ o
     <message>
         <location filename="../grid/IProjWizard.ui" line="14"/>
         <source>Proj4 Wizard</source>
-        <translation type="unfinished">Asistente de Proj4</translation>
+        <translation>Asistente de Proj4</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="29"/>
@@ -10800,7 +10800,7 @@ o
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="35"/>
@@ -10913,7 +10913,7 @@ o
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="95"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>
@@ -11584,9 +11584,8 @@ corregir los puntos erróneos de un track grabado.</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="208"/>
         <source>Add a description to the selected track point. The track point will be marked with an auto-numbered bullet. A table with all descriptions will be shown in the track details dialog and for highlighted tracks in the map view.</source>
-        <translation>Añadir una descripción a un punto del track.
-Se marcará el punto con una etiqueta numerada automáticamente y se podrá ver en la pestaña de edición una lista con todas las reseñas que se hayan añadido.
-La misma lista se podrá ver sobre la vista del mapa para los tracks seleccionados.</translation>
+        <translation>Añadir Etiqueta Numerada.
+Añadir una breve descripción a un punto y marcarlo con una etiqueta auto-numerada. Se puede mostrar la lista de las etiquetas sobre la vista del mapa para crear una reseña. Se pueden editar en la pestaña de edición del track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
@@ -11694,7 +11693,7 @@ La misma lista se podrá ver sobre la vista del mapa para los tracks seleccionad
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="233"/>
         <source>Copy position of waypoint to Clipboard.</source>
-        <translation>Copiar coordenadas del waypoint.</translation>
+        <translation>Copiar posición del waypoint.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="280"/>
@@ -11734,7 +11733,7 @@ La misma lista se podrá ver sobre la vista del mapa para los tracks seleccionad
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="127"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11748,7 +11747,7 @@ La misma lista se podrá ver sobre la vista del mapa para los tracks seleccionad
         <location filename="../print/IScreenshotDialog.ui" line="20"/>
         <location filename="../print/IScreenshotDialog.ui" line="30"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="55"/>
@@ -12133,17 +12132,17 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="22"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="32"/>
         <source>Symbol</source>
-        <translation type="unfinished">Símbolo</translation>
+        <translation>Símbolo</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="39"/>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
 </context>
 <context>
@@ -12763,147 +12762,147 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="101"/>
         <source>cold</source>
-        <translation type="unfinished">frío</translation>
+        <translation>frío</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="111"/>
         <source>freezing</source>
-        <translation type="unfinished">bajo cero</translation>
+        <translation>bajo cero</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="121"/>
         <source>foggy</source>
-        <translation type="unfinished">niebla</translation>
+        <translation>niebla</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="128"/>
         <source>windy</source>
-        <translation type="unfinished">viento</translation>
+        <translation>viento</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="138"/>
         <source>humid</source>
-        <translation type="unfinished">humedo</translation>
+        <translation>húmedo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="161"/>
         <source>hail/soft hail</source>
-        <translation type="unfinished">granizo</translation>
+        <translation>granizo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="171"/>
         <source>Character</source>
-        <translation type="unfinished">Carácter</translation>
+        <translation>Carácter</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="183"/>
         <source>Rating 5 stars</source>
-        <translation type="unfinished">***** Excelente</translation>
+        <translation>***** Excelente</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="188"/>
         <source>Rating 4 stars</source>
-        <translation type="unfinished">**** Muy bueno</translation>
+        <translation>**** Muy bueno</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="193"/>
         <source>Rating 3 stars</source>
-        <translation type="unfinished">*** Bueno</translation>
+        <translation>*** Bueno</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="198"/>
         <source>Rating 2 stars</source>
-        <translation type="unfinished">** Regular</translation>
+        <translation>** Regular</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="203"/>
         <source>Rating 1 star</source>
-        <translation type="unfinished">* Malo</translation>
+        <translation>* Malo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="211"/>
         <source>easy hiking</source>
-        <translation type="unfinished">Senderismo</translation>
+        <translation>Senderismo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="218"/>
         <source>long distance</source>
-        <translation type="unfinished">larga distancia</translation>
+        <translation>larga distancia</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="225"/>
         <source>alpine</source>
-        <translation type="unfinished">Actividad alpina</translation>
+        <translation>Actividad alpina</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="232"/>
         <source>aborted</source>
-        <translation type="unfinished">Intento frustrado</translation>
+        <translation>Intento frustrado</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="239"/>
         <source>large ascend</source>
-        <translation type="unfinished">gran desnivel</translation>
+        <translation>gran desnivel</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="249"/>
         <source>Rating</source>
-        <translation type="unfinished">Calificación</translation>
+        <translation>Calificación</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="256"/>
         <source>climbing</source>
-        <translation type="unfinished">escalada</translation>
+        <translation>escalada</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="263"/>
         <source>via ferrata</source>
-        <translation type="unfinished">ferrata</translation>
+        <translation>ferrata</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="273"/>
         <source>Equipment</source>
-        <translation type="unfinished">Material</translation>
+        <translation>Material</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="279"/>
         <source>camping gear</source>
-        <translation type="unfinished">acampada/vivac</translation>
+        <translation>acampada/vivac</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="286"/>
         <source>ski</source>
-        <translation type="unfinished">esquis</translation>
+        <translation>esquis</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="293"/>
         <source>snow shoes</source>
-        <translation type="unfinished">raquetas</translation>
+        <translation>raquetas</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="300"/>
         <source>climbing gear</source>
-        <translation type="unfinished">Material de escalada</translation>
+        <translation>Material de escalada</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="307"/>
         <source>ferrata gear</source>
-        <translation type="unfinished">Equipo de ferrata</translation>
+        <translation>Equipo de ferrata</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="314"/>
         <source>night gear</source>
-        <translation type="unfinished">iluminación</translation>
+        <translation>iluminación</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="321"/>
         <source>crampon</source>
-        <translation type="unfinished">crampones</translation>
+        <translation>crampones</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="328"/>
         <source>ice pick</source>
-        <translation type="unfinished">piolet</translation>
+        <translation>piolet</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="338"/>

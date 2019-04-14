@@ -2790,14 +2790,14 @@ QMap<searchKeyword_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
         searchValue->str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
         return searchValue;
     });
-    /*
-       map.insert(eSearchKeywordGeneralElevation,[](CGisItemTrk* item){
+    map.insert(eSearchKeywordGeneralElevation,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->getMin();
-        searchValue->value2 = item->getMax();
+        searchValue->value1 = item->getMin(CKnownExtension::internalEle);
+        searchValue->str1 = CKnownExtension::get(CKnownExtension::internalEle).unit;
+        searchValue->value2 = item->getMax(CKnownExtension::internalEle);
+        searchValue->str2 = CKnownExtension::get(CKnownExtension::internalEle).unit;
         return searchValue;
-       });
-     */
+    });
     //Route / track keywords
     map.insert(eSearchKeywordRteTrkDistance,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
@@ -2814,31 +2814,33 @@ QMap<searchKeyword_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
         IUnit::self().meter2elevation(item->totalDescent,searchValue->value1,searchValue->str1);
         return searchValue;
     });
-    /*
-       map.insert(eSearchKeywordRteTrkMinElevation,[](CGisItemTrk* item){
+    map.insert(eSearchKeywordRteTrkMinElevation,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->getMin();
+        searchValue->value1 = item->getMin(CKnownExtension::internalEle);
+        searchValue->str1 = CKnownExtension::get(CKnownExtension::internalEle).unit;
         return searchValue;
-       });
-       map.insert(eSearchKeywordRteTrkMaxElevation,[](CGisItemTrk* item){
+    });
+    map.insert(eSearchKeywordRteTrkMaxElevation,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->getMax();
+        searchValue->value1 = item->getMax(CKnownExtension::internalEle);
+        searchValue->str1 = CKnownExtension::get(CKnownExtension::internalEle).unit;
         return searchValue;
-       });
-       map.insert(eSearchKeywordRteTrkMaxSpeed,[](CGisItemTrk* item){
+    });
+    map.insert(eSearchKeywordRteTrkMaxSpeed,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->;
+        searchValue->value1 = item->getMax(CKnownExtension::internalSpeedDist);
+        searchValue->str1 = CKnownExtension::get(CKnownExtension::internalSpeedDist).unit;
         return searchValue;
-       });
-       map.insert(eSearchKeywordRteTrkMinSpeed,[](CGisItemTrk* item){
+    });
+    map.insert(eSearchKeywordRteTrkMinSpeed,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->;
+        searchValue->value1 = item->getMin(CKnownExtension::internalSpeedDist);
+        searchValue->str1 = CKnownExtension::get(CKnownExtension::internalSpeedDist).unit;
         return searchValue;
-       });
-     */
+    });
     map.insert(eSearchKeywordRteTrkAvgSpeed,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->totalDistance/item->totalElapsedSecondsMoving;
+        IUnit::self().meter2speed(item->totalDistance/item->totalElapsedSecondsMoving,searchValue->value1,searchValue->str1);
         return searchValue;
     });
 

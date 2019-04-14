@@ -203,6 +203,20 @@ void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
 
     subpt.ele = qRound(ele);
 
+    if(subpt.ele != NOINT)
+    {
+        if(rte.minElevation == NOINT) //Without bug they are either both NOINT or none
+        {
+            rte.minElevation = subpt.ele;
+            rte.minElevation = subpt.ele;
+        }
+        else
+        {
+            rte.minElevation = qMin(rte.minElevation, subpt.ele);
+            rte.maxElevation = qMax(rte.maxElevation, subpt.ele);
+        }
+    }
+
     if(lastEle != NOFLOAT)
     {
         qreal delta   = subpt.ele - lastEle;
@@ -1324,13 +1338,12 @@ QMap<searchKeyword_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
         searchValue->str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
         return searchValue;
     });
-    /*
-       map.insert(eSearchKeywordGeneralElevation,[](CGisItemRte* item){
+    map.insert(eSearchKeywordGeneralElevation,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->rte.;
+        IUnit::self().meter2elevation(item->rte.minElevation,searchValue->value1,searchValue->str1);
+        IUnit::self().meter2elevation(item->rte.maxElevation,searchValue->value1,searchValue->str1);
         return searchValue;
-       });
-     */
+    });
     map.insert(eSearchKeywordRteTrkDistance,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         IUnit::self().meter2distance(item->rte.totalDistance,searchValue->value1,searchValue->str1);
@@ -1346,17 +1359,16 @@ QMap<searchKeyword_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
         IUnit::self().meter2elevation(item->rte.descent,searchValue->value1,searchValue->str1);
         return searchValue;
     });
-    /* TODO get min/max elevation
-       map.insert(eSearchKeywordRteTrkMinElevation,[](CGisItemRte* item){
+    map.insert(eSearchKeywordRteTrkMinElevation,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->rte.;
+        IUnit::self().meter2elevation(item->rte.minElevation,searchValue->value1,searchValue->str1);
         return searchValue;
-       });
-       map.insert(eSearchKeywordRteTrkMaxElevation,[](CGisItemRte* item){
+    });
+    map.insert(eSearchKeywordRteTrkMaxElevation,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->rte.;
+        IUnit::self().meter2elevation(item->rte.maxElevation,searchValue->value1,searchValue->str1);
         return searchValue;
-       });
-     */
+    });
+
     return map;
 }

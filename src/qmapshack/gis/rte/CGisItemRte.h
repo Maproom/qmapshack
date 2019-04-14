@@ -105,6 +105,8 @@ public:
         quint32 totalTime = 0;
         qreal ascent  = NOFLOAT;
         qreal descent = NOFLOAT;
+        qint32 minElevation = NOINT;
+        qint32 maxElevation = NOINT;
     };
 
     CGisItemRte(const QDomNode &xml, IGisProject *parent);

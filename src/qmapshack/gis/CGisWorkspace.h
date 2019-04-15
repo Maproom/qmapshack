@@ -28,6 +28,7 @@
 #include "db/IDBFolder.h"
 #include "gis/IGisItem.h"
 #include "gis/rte/router/IRouter.h"
+#include "gis/search/CSearchExplanationDialog.h"
 
 class CGisDraw;
 class IGisProject;
@@ -437,6 +438,7 @@ private slots:
     void slotSetGisLayerOpacity(int val);
     void slotSearch(const QString& str);
     void slotSetupSearch();
+    void slotSearchHelp();
 
     void slotWksItemSelectionChanged();
     void slotWksItemPressed(QTreeWidgetItem * item);

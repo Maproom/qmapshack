@@ -960,7 +960,7 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
-const QSharedPointer<searchValue_t> CGisItemWpt::getValueByKeyword(searchKeyword_e keyword)
+const QSharedPointer<searchValue_t> CGisItemWpt::getValueByKeyword(searchProperty_e keyword)
 {
     if(keywordLambdaMap.contains(keyword))
     {
@@ -1157,32 +1157,32 @@ QList<QString> CGisItemWpt::geocache_t::initAttributeMeaningsTranslated()
     return translated;
 }
 
-QMap<searchKeyword_e,CGisItemWpt::fSearch > CGisItemWpt::keywordLambdaMap = CGisItemWpt::initKeywordLambdaMap();
-QMap<searchKeyword_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
+QMap<searchProperty_e,CGisItemWpt::fSearch > CGisItemWpt::keywordLambdaMap = CGisItemWpt::initKeywordLambdaMap();
+QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
 {
-    QMap<searchKeyword_e, CGisItemWpt::fSearch> map;
-    map.insert(eSearchKeywordGeneralName,[](CGisItemWpt* item){
+    QMap<searchProperty_e, CGisItemWpt::fSearch> map;
+    map.insert(eSearchPropertyGeneralName,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->str1 = item->getName();
         return searchValue;
     });
-    map.insert(eSearchKeywordGeneralFullText,[](CGisItemWpt* item){
+    map.insert(eSearchPropertyGeneralFullText,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
         return searchValue;
     });
-    map.insert(eSearchKeywordGeneralElevation,[](CGisItemWpt* item){
+    map.insert(eSearchPropertyGeneralElevation,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         IUnit::self().meter2elevation(item->wpt.ele,searchValue->value1,searchValue->str1);
         return searchValue;
     });
     //Geocache keywords
-    map.insert(eSearchKeywordGeocacheDifficulty,[](CGisItemWpt* item){
+    map.insert(eSearchPropertyGeocacheDifficulty,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->value1 = item->geocache.difficulty;
         return searchValue;
     });
-    map.insert(eSearchKeywordGeocacheTerrain,[](CGisItemWpt* item){
+    map.insert(eSearchPropertyGeocacheTerrain,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->value1 = item->geocache.terrain;
         return searchValue;
@@ -1194,7 +1194,7 @@ QMap<searchKeyword_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
         return searchValue;
        });
      */
-    map.insert(eSearchKeywordGeocacheSize,[](CGisItemWpt* item){
+    map.insert(eSearchPropertyGeocacheSize,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->str1 = item->geocache.container;
         return searchValue;

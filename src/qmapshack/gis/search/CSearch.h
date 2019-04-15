@@ -51,36 +51,36 @@ struct searchValue_t //Outside of CSearch to avoid problem of nested type
     }
 };
 
-enum searchKeyword_e: unsigned int
+enum searchProperty_e: unsigned int
 {
-    eSearchKeywordNoMatch,
+    eSearchPropertyNoMatch,
 
     //General keywords
-    eSearchKeywordGeneralName,
-    eSearchKeywordGeneralFullText,
-    eSearchKeywordGeneralElevation,
+    eSearchPropertyGeneralName,
+    eSearchPropertyGeneralFullText,
+    eSearchPropertyGeneralElevation,
 
     //Area keywords
-    eSearchKeywordAreaArea,
+    eSearchPropertyAreaArea,
 
     //Geocache keywords
-    eSearchKeywordGeocacheDifficulty,
-    eSearchKeywordGeocacheTerrain,
-    eSearchKeywordGeocacheAttributes,
-    eSearchKeywordGeocacheSize,
+    eSearchPropertyGeocacheDifficulty,
+    eSearchPropertyGeocacheTerrain,
+    eSearchPropertyGeocacheAttributes,
+    eSearchPropertyGeocacheSize,
 
     //Waypoint keywords
 
 
     //Route / track keywords
-    eSearchKeywordRteTrkDistance,
-    eSearchKeywordRteTrkAscent,
-    eSearchKeywordRteTrkDescent,
-    eSearchKeywordRteTrkMinElevation,
-    eSearchKeywordRteTrkMaxElevation,
-    eSearchKeywordRteTrkMaxSpeed,
-    eSearchKeywordRteTrkMinSpeed,
-    eSearchKeywordRteTrkAvgSpeed,
+    eSearchPropertyRteTrkDistance,
+    eSearchPropertyRteTrkAscent,
+    eSearchPropertyRteTrkDescent,
+    eSearchPropertyRteTrkMinElevation,
+    eSearchPropertyRteTrkMaxElevation,
+    eSearchPropertyRteTrkMaxSpeed,
+    eSearchPropertyRteTrkMinSpeed,
+    eSearchPropertyRteTrkAvgSpeed,
 };
 
 class CSearch
@@ -108,7 +108,7 @@ public:
 
     struct search_t
     {
-        searchKeyword_e property;
+        searchProperty_e property;
         search_type_e searchType;
         searchValue_t searchValue;
     };
@@ -125,6 +125,11 @@ public:
         return keywordSearchTypeMap.keys();
     }
 
+    static QStringList getSearchPropertyKeywords()
+    {
+        return searchPropertyEnumMap.keys();
+    }
+
     bool getSearchResult(IGisItem * item);
 
 private:
@@ -138,8 +143,8 @@ private:
     static QMap<QString,search_type_e> keywordSearchTypeMap;
     static QMap<QString,search_type_e> initKeywordSearchTypeMap();
 
-    static QMap<QString,searchKeyword_e> searchKeywordEnumMap;
-    static QMap<QString,searchKeyword_e> initSearchKeywordEnumMap();
+    static QMap<QString,searchProperty_e> searchPropertyEnumMap;
+    static QMap<QString,searchProperty_e> initSearchPropertyEnumMap();
 
 //First is itemValue, escond is searchValue, which is non const to adjust units
     using fSearch = std::function<bool(const searchValue_t&, searchValue_t&)>;

@@ -181,7 +181,7 @@ bool CGisItemRte::isCalculated()
     return yes;
 }
 
-const QSharedPointer<searchValue_t> CGisItemRte::getValueByKeyword(searchKeyword_e keyword)
+const QSharedPointer<searchValue_t> CGisItemRte::getValueByKeyword(searchProperty_e keyword)
 {
     if(keywordLambdaMap.contains(keyword))
     {
@@ -1324,47 +1324,47 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
     updateHistory();
 }
 
-QMap<searchKeyword_e,CGisItemRte::fSearch > CGisItemRte::keywordLambdaMap = CGisItemRte::initKeywordLambdaMap();
-QMap<searchKeyword_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
+QMap<searchProperty_e,CGisItemRte::fSearch > CGisItemRte::keywordLambdaMap = CGisItemRte::initKeywordLambdaMap();
+QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
 {
-    QMap<searchKeyword_e, CGisItemRte::fSearch> map;
-    map.insert(eSearchKeywordGeneralName,[](CGisItemRte* item){
+    QMap<searchProperty_e, CGisItemRte::fSearch> map;
+    map.insert(eSearchPropertyGeneralName,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->str1 = item->rte.name;
         return searchValue;
     });
-    map.insert(eSearchKeywordGeneralFullText,[](CGisItemRte* item){
+    map.insert(eSearchPropertyGeneralFullText,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
         return searchValue;
     });
-    map.insert(eSearchKeywordGeneralElevation,[](CGisItemRte* item){
+    map.insert(eSearchPropertyGeneralElevation,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         IUnit::self().meter2elevation(item->rte.minElevation,searchValue->value1,searchValue->str1);
         IUnit::self().meter2elevation(item->rte.maxElevation,searchValue->value1,searchValue->str1);
         return searchValue;
     });
-    map.insert(eSearchKeywordRteTrkDistance,[](CGisItemRte* item){
+    map.insert(eSearchPropertyRteTrkDistance,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         IUnit::self().meter2distance(item->rte.totalDistance,searchValue->value1,searchValue->str1);
         return searchValue;
     });
-    map.insert(eSearchKeywordRteTrkAscent,[](CGisItemRte* item){
+    map.insert(eSearchPropertyRteTrkAscent,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         IUnit::self().meter2elevation(item->rte.ascent,searchValue->value1,searchValue->str1);
         return searchValue;
     });
-    map.insert(eSearchKeywordRteTrkDescent,[](CGisItemRte* item){
+    map.insert(eSearchPropertyRteTrkDescent,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         IUnit::self().meter2elevation(item->rte.descent,searchValue->value1,searchValue->str1);
         return searchValue;
     });
-    map.insert(eSearchKeywordRteTrkMinElevation,[](CGisItemRte* item){
+    map.insert(eSearchPropertyRteTrkMinElevation,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         IUnit::self().meter2elevation(item->rte.minElevation,searchValue->value1,searchValue->str1);
         return searchValue;
     });
-    map.insert(eSearchKeywordRteTrkMaxElevation,[](CGisItemRte* item){
+    map.insert(eSearchPropertyRteTrkMaxElevation,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         IUnit::self().meter2elevation(item->rte.maxElevation,searchValue->value1,searchValue->str1);
         return searchValue;

@@ -46,18 +46,18 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
             newSearch.searchType=eSearchTypeWith;
             if(searchMode == eSearchModeText)
             {
-                newSearch.property=searchKeyword_e::eSearchKeywordGeneralFullText;
+                newSearch.property=searchProperty_e::eSearchPropertyGeneralFullText;
             }
             else
             {
-                newSearch.property=searchKeyword_e::eSearchKeywordGeneralName;
+                newSearch.property=searchProperty_e::eSearchPropertyGeneralName;
             }
             newSearch.searchValue.str1 = currentSection.simplified();
         }
         else
         {
             newSearch.searchType=keywordSearchTypeMap.value(searchTypeKeyword);
-            newSearch.property=searchKeywordEnumMap.value(currentSection.section(searchTypeKeyword,0,0,QString::SectionCaseInsensitiveSeps).simplified(),eSearchKeywordNoMatch);
+            newSearch.property=searchPropertyEnumMap.value(currentSection.section(searchTypeKeyword,0,0,QString::SectionCaseInsensitiveSeps).simplified(),eSearchPropertyNoMatch);
 
             QString filterValueString = currentSection.section(searchTypeKeyword,1,-1,QString::SectionCaseInsensitiveSeps).simplified();
             searchValue_t filterValue;
@@ -149,19 +149,19 @@ void CSearch::improveQuery(search_t &search)
         search.searchValue.str2 = "ML"; //ml is used in CUnit
     }
 
-    if(search.property == eSearchKeywordNoMatch)
+    if(search.property == eSearchPropertyNoMatch)
     {
         if(search.searchValue.str1.contains("/H")||search.searchValue.str1.contains("/S"))
         {
-            search.property = eSearchKeywordRteTrkAvgSpeed;
+            search.property = eSearchPropertyRteTrkAvgSpeed;
         }
         if(search.searchValue.str1 == "KM" || search.searchValue.str1 == "MI" || search.searchValue.str1 == "ML")
         {
-            search.property = eSearchKeywordRteTrkDistance;
+            search.property = eSearchPropertyRteTrkDistance;
         }
         if(search.searchValue.str1 == "M" || search.searchValue.str1 == "FT")
         {
-            search.property = eSearchKeywordGeneralElevation;
+            search.property = eSearchPropertyGeneralElevation;
         }
     }
 }
@@ -187,44 +187,44 @@ QMap<QString,CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
     return map;
 }
 
-QMap<QString,searchKeyword_e> CSearch::searchKeywordEnumMap = CSearch::initSearchKeywordEnumMap();
-QMap<QString,searchKeyword_e> CSearch::initSearchKeywordEnumMap()
+QMap<QString,searchProperty_e> CSearch::searchPropertyEnumMap = CSearch::initSearchPropertyEnumMap();
+QMap<QString,searchProperty_e> CSearch::initSearchPropertyEnumMap()
 {
     //Everything to upper since search comes in CAPS and we can't get value() case insensitive easily
-    QMap<QString,searchKeyword_e> map;
+    QMap<QString,searchProperty_e> map;
     //General keywords
-    map.insert(tr("name").toUpper(),eSearchKeywordGeneralName);
-    map.insert(tr("full text").toUpper(),eSearchKeywordGeneralFullText);
-    map.insert(tr("elevation").toUpper(),eSearchKeywordGeneralElevation);
+    map.insert(tr("name").toUpper(),eSearchPropertyGeneralName);
+    map.insert(tr("full text").toUpper(),eSearchPropertyGeneralFullText);
+    map.insert(tr("elevation").toUpper(),eSearchPropertyGeneralElevation);
 
     //Area keywords
-    map.insert(tr("area").toUpper(),eSearchKeywordAreaArea);
+    map.insert(tr("area").toUpper(),eSearchPropertyAreaArea);
 
     //Geocache keywords
-    map.insert(tr("difficulty").toUpper(),eSearchKeywordGeocacheDifficulty);
-    map.insert("D",eSearchKeywordGeocacheDifficulty);
-    map.insert(tr("terrain").toUpper(),eSearchKeywordGeocacheTerrain);
-    map.insert(tr("T").toUpper(),eSearchKeywordGeocacheTerrain);
-    map.insert(tr("attributes").toUpper(),eSearchKeywordGeocacheAttributes);
-    map.insert(tr("size").toUpper(),eSearchKeywordGeocacheSize);
+    map.insert(tr("difficulty").toUpper(),eSearchPropertyGeocacheDifficulty);
+    map.insert("D",eSearchPropertyGeocacheDifficulty);
+    map.insert(tr("terrain").toUpper(),eSearchPropertyGeocacheTerrain);
+    map.insert(tr("T").toUpper(),eSearchPropertyGeocacheTerrain);
+    map.insert(tr("attributes").toUpper(),eSearchPropertyGeocacheAttributes);
+    map.insert(tr("size").toUpper(),eSearchPropertyGeocacheSize);
 
     //Waypoint keywords
 
     //Route / track keywords
-    map.insert(tr("distance").toUpper(),eSearchKeywordRteTrkDistance);
-    map.insert(tr("length").toUpper(),eSearchKeywordRteTrkDistance);
-    map.insert(tr("ascent").toUpper(),eSearchKeywordRteTrkAscent);
-    map.insert(tr("elevation gain").toUpper(),eSearchKeywordRteTrkAscent);
-    map.insert(tr("descent").toUpper(),eSearchKeywordRteTrkDescent);
-    map.insert(tr("min elevation").toUpper(),eSearchKeywordRteTrkMinElevation);
-    map.insert(tr("minimal elevation").toUpper(),eSearchKeywordRteTrkMinElevation);
-    map.insert(tr("max elevation").toUpper(),eSearchKeywordRteTrkMaxElevation);
-    map.insert(tr("maximal elevation").toUpper(),eSearchKeywordRteTrkMaxElevation);
-    map.insert(tr("max speed").toUpper(),eSearchKeywordRteTrkMaxSpeed);
-    map.insert(tr("maximal speed").toUpper(),eSearchKeywordRteTrkMaxSpeed);
-    map.insert(tr("min speed").toUpper(),eSearchKeywordRteTrkMinSpeed);
-    map.insert(tr("minimal speed").toUpper(),eSearchKeywordRteTrkMinSpeed);
-    map.insert(tr("average speed").toUpper(),eSearchKeywordRteTrkAvgSpeed);
+    map.insert(tr("distance").toUpper(),eSearchPropertyRteTrkDistance);
+    map.insert(tr("length").toUpper(),eSearchPropertyRteTrkDistance);
+    map.insert(tr("ascent").toUpper(),eSearchPropertyRteTrkAscent);
+    map.insert(tr("elevation gain").toUpper(),eSearchPropertyRteTrkAscent);
+    map.insert(tr("descent").toUpper(),eSearchPropertyRteTrkDescent);
+    map.insert(tr("min elevation").toUpper(),eSearchPropertyRteTrkMinElevation);
+    map.insert(tr("minimal elevation").toUpper(),eSearchPropertyRteTrkMinElevation);
+    map.insert(tr("max elevation").toUpper(),eSearchPropertyRteTrkMaxElevation);
+    map.insert(tr("maximal elevation").toUpper(),eSearchPropertyRteTrkMaxElevation);
+    map.insert(tr("max speed").toUpper(),eSearchPropertyRteTrkMaxSpeed);
+    map.insert(tr("maximal speed").toUpper(),eSearchPropertyRteTrkMaxSpeed);
+    map.insert(tr("min speed").toUpper(),eSearchPropertyRteTrkMinSpeed);
+    map.insert(tr("minimal speed").toUpper(),eSearchPropertyRteTrkMinSpeed);
+    map.insert(tr("average speed").toUpper(),eSearchPropertyRteTrkAvgSpeed);
 
     return map;
 }

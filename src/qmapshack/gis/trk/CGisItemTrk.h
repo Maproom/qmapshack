@@ -253,7 +253,7 @@ public:
     void getMouseRange(int &idx1, int &idx2, bool total) const;
     void getMouseRange(const CTrackData::trkpt_t * &mr1, const CTrackData::trkpt_t * &mr2) const;
 
-    const QSharedPointer<searchValue_t> getValueByKeyword(searchKeyword_e keyword) override;
+    const QSharedPointer<searchValue_t> getValueByKeyword(searchProperty_e keyword) override;
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
@@ -931,8 +931,8 @@ private:
     interpolate_t interp;
 
     using fSearch = std::function<const QSharedPointer<searchValue_t> (CGisItemTrk*)>;
-    static QMap<searchKeyword_e,fSearch > keywordLambdaMap;
-    static QMap<searchKeyword_e,fSearch > initKeywordLambdaMap();
+    static QMap<searchProperty_e,fSearch > keywordLambdaMap;
+    static QMap<searchProperty_e,fSearch > initKeywordLambdaMap();
 
     /**@}*/
 };

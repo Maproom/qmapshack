@@ -58,6 +58,7 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
     setupUi(this);
 
     lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
+    lineFilter->addAction(actionHelp,QLineEdit::TrailingPosition);
     lineFilter->addAction(actionSetupFilter, QLineEdit::LeadingPosition);
 
     treeWks->setExternalMenu(menuProject);
@@ -76,6 +77,7 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
 
     connect(actionNameOnly, &QAction::triggered, this, &CGisWorkspace::slotSearchNameOnly);
     connect(actionCompleteText, &QAction::triggered, this, &CGisWorkspace::slotSearchCompleteText);
+    connect(actionHelp, &QAction::triggered, this, &CGisWorkspace::slotSearchHelp);
 
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
     //              is up and running.
@@ -194,6 +196,12 @@ void CGisWorkspace::slotSetupSearch()
 
     menu->move(lineFilter->parentWidget()->mapToGlobal(lineFilter->geometry().topLeft()));
     menu->exec();
+}
+
+void CGisWorkspace::slotSearchHelp()
+{
+    CSearchExplanationDialog dlg(this->treeWidget());
+    dlg.exec();
 }
 
 void CGisWorkspace::slotSaveAll()

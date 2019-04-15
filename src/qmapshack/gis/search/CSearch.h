@@ -53,6 +53,8 @@ struct searchValue_t //Outside of CSearch to avoid problem of nested type
 
 enum searchKeyword_e: unsigned int
 {
+    eSearchKeywordNoMatch,
+
     //General keywords
     eSearchKeywordGeneralName,
     eSearchKeywordGeneralFullText,
@@ -128,6 +130,7 @@ public:
 private:
 
     static void adjustUnits(const searchValue_t &itemValue, searchValue_t &searchValue);
+    static void improveQuery(search_t& search);
 
     search_mode_e searchMode;
     QList<search_t> searches;

@@ -25,75 +25,70 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
     const QStringList& sections = searchstring.split(",");
     for(const QString& currentSection : sections)
     {
-        search_t newFilter;
+        search_t newSearch;
         if(currentSection.simplified()=="")
         {
             continue;
         }
 
-        QString keyword = "";
+        QString searchTypeKeyword = "";
         for(QString& key:keywordSearchTypeMap.keys())
         {
             if(currentSection.contains(key,Qt::CaseInsensitive))
             {
-                keyword=key;
+                searchTypeKeyword=key;
                 break;
             }
         }
-        if(keyword == "")
+        if(searchTypeKeyword == "")
         {
-            newFilter.searchType=eSearchTypeWith;
+            //Search for what the user typed in the name or the full text
+            newSearch.searchType=eSearchTypeWith;
             if(searchMode == eSearchModeText)
             {
-                newFilter.property=searchKeyword_e::eSearchKeywordGeneralFullText;
+                newSearch.property=searchKeyword_e::eSearchKeywordGeneralFullText;
             }
             else
             {
-                newFilter.property=searchKeyword_e::eSearchKeywordGeneralName;
+                newSearch.property=searchKeyword_e::eSearchKeywordGeneralName;
             }
-            searchValue_t filterValue;
-            filterValue.str1 = currentSection.simplified();
-            newFilter.searchValue=filterValue;
+            newSearch.searchValue.str1 = currentSection.simplified();
         }
         else
         {
-            newFilter.searchType=keywordSearchTypeMap.value(keyword);
-            newFilter.property=searchKeywordEnumMap.value(currentSection.section(keyword,0,0,QString::SectionCaseInsensitiveSeps).simplified());
+            newSearch.searchType=keywordSearchTypeMap.value(searchTypeKeyword);
+            newSearch.property=searchKeywordEnumMap.value(currentSection.section(searchTypeKeyword,0,0,QString::SectionCaseInsensitiveSeps).simplified(),eSearchKeywordNoMatch);
 
-            QString filterValueString = currentSection.section(keyword,1,-1,QString::SectionCaseInsensitiveSeps).simplified();
+            QString filterValueString = currentSection.section(searchTypeKeyword,1,-1,QString::SectionCaseInsensitiveSeps).simplified();
             searchValue_t filterValue;
 
-            QRegExp argumentCapture("(\\d+)(?:\\s*)(m|km|mi|ft)?(\\d+)?(?:\\s*)(m|km|mi|ft)?",Qt::CaseInsensitive);
+            QRegExp numericArguments("(\\d+)(?:\\s*)(m|km|mi|ft|ml)?(/)?(h|min|s|sec)?(" + tr("and") + ")?(\\d+)?(?:\\s*)(m|km|mi|ft|ml)?(/)?(h|min|s|sec)?",Qt::CaseInsensitive);
 
-            if(argumentCapture.indexIn(filterValueString)!=-1)
+            if(numericArguments.indexIn(filterValueString)!=-1)
             {
-                filterValue.str2=argumentCapture.cap(4);
-
-                if(argumentCapture.cap(3)!="") //to avoid removal of NOFLOAT
+                if(numericArguments.cap(1)!="") //to avoid removal of NOFLOAT
                 {
-                    filterValue.value2=argumentCapture.cap(3).toFloat();
+                    filterValue.value1=numericArguments.cap(1).toFloat();
                 }
 
-                filterValue.str1=argumentCapture.cap(2);
+                filterValue.str1=numericArguments.cap(2) + numericArguments.cap(4) + numericArguments.cap(5);
 
-                if(argumentCapture.cap(1)!="") //to avoid removal of NOFLOAT
+                if(numericArguments.cap(7)!="") //to avoid removal of NOFLOAT
                 {
-                    filterValue.value1=argumentCapture.cap(1).toFloat();
-                    if(filterValue.str1!=""&&filterValue.str2=="")
-                    {
-                        //Assume they have the same unit
-                        filterValue.str2=filterValue.str1;
-                    }
+                    filterValue.value2=numericArguments.cap(3).toFloat();
                 }
+
+                filterValue.str2=numericArguments.cap(8) + numericArguments.cap(9) + numericArguments.cap(10);
             }
             else
             {
                 filterValue.str1 = filterValueString;
             }
 
-            newFilter.searchValue=filterValue;
+            newSearch.searchValue=filterValue;
         }
-        searches.append(newFilter);
+        improveQuery(newSearch);
+        searches.append(newSearch);
     }
 }
 
@@ -133,6 +128,41 @@ void CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchV
     else
     {
         searchValue.str2 = itemValue.str2;
+    }
+}
+
+void CSearch::improveQuery(search_t &search)
+{
+    if(search.searchValue.str1!=""&&search.searchValue.str2=="")
+    {
+        //Assume they have the same unit
+        search.searchValue.str2=search.searchValue.str1;
+    }
+
+    if(search.searchValue.str1 == "MI")
+    {
+        search.searchValue.str1 = "ML"; //ml is used in CUnit
+    }
+
+    if(search.searchValue.str2 == "MI")
+    {
+        search.searchValue.str2 = "ML"; //ml is used in CUnit
+    }
+
+    if(search.property == eSearchKeywordNoMatch)
+    {
+        if(search.searchValue.str1.contains("/H")||search.searchValue.str1.contains("/S"))
+        {
+            search.property = eSearchKeywordRteTrkAvgSpeed;
+        }
+        if(search.searchValue.str1 == "KM" || search.searchValue.str1 == "MI" || search.searchValue.str1 == "ML")
+        {
+            search.property = eSearchKeywordRteTrkDistance;
+        }
+        if(search.searchValue.str1 == "M" || search.searchValue.str1 == "FT")
+        {
+            search.property = eSearchKeywordGeneralElevation;
+        }
     }
 }
 

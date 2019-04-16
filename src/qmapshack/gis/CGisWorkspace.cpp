@@ -200,7 +200,7 @@ void CGisWorkspace::slotSetupSearch()
 
 void CGisWorkspace::slotSearchHelp()
 {
-    CSearchExplanationDialog dlg(this->treeWidget());
+    CSearchExplanationDialog dlg(treeWks);
     dlg.exec();
 }
 

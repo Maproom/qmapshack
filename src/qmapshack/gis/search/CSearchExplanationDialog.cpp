@@ -22,7 +22,9 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
 {
     setupUi(this);
 
-    connect(buttonBox,       &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
-    listViewComparison.append(CSearch::getSearchTypeKeywords());
-    listViewProperties.append(CSearch::getSearchPropertyKeywords());
+    //connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
+
+    // Really QListView? Not QListWidget?
+    //listViewComparison->append(CSearch::getSearchTypeKeywords());
+    //listViewProperties->append(CSearch::getSearchPropertyKeywords());
 }

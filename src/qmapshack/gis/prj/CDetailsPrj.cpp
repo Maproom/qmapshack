@@ -605,6 +605,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
         wpt_info_t * lastWptInfo = nullptr;
         QList<wpt_info_t> wptInfo;
         const CTrackData& t = trk->getTrackData();
+        CWptIconManager& wptMgr = CWptIconManager::self();
 
         bool hasValidTime = trk->getTimeStart().isValid();
         for(const CTrackData::trkpt_t& trkpt : t)
@@ -644,10 +645,20 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
             }
             else if(!trkpt.desc.isEmpty())
             {
-                CWptIconManager& m = CWptIconManager::self();
-                info.desc = trkpt.desc;
-                info.info = info.desc;
-                info.icon = m.loadIcon(m.getNumberedBullet(cnt++));
+                info.info = "<b>" + trkpt.desc + "</b>";
+                if(trkpt.ele != NOINT)
+                {
+                    QString val, unit;
+                    IUnit::self().meter2elevation(trkpt.ele, val, unit);
+                    info.info += "<br/>" + tr("Elevation: %1%2").arg(val).arg(unit);
+                }
+
+                if(!hasValidTime && trkpt.time.isValid())
+                {
+                    info.info += "<br/>" + tr("Created: %1").arg(IUnit::datetime2string(trkpt.time, false, QPointF(trkpt.lon*DEG_TO_RAD, trkpt.lat*DEG_TO_RAD)));
+                }
+
+                info.icon = wptMgr.loadIcon(wptMgr.getNumberedBullet(cnt++));
             }
             else
             {

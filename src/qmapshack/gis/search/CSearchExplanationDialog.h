@@ -22,7 +22,7 @@
 #include "gis/search/CSearch.h"
 #include "ui_ISearchExplanationDialog.h"
 
-class CSearchExplanationDialog : public QDialog, Ui_ISearchExplanationDialog
+class CSearchExplanationDialog : public QDialog, private Ui::ISearchExplanationDialog
 {
 public:
     CSearchExplanationDialog(QWidget* parent);

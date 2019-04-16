@@ -24,7 +24,6 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
 
     //connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
 
-    // Really QListView? Not QListWidget?
-    //listViewComparison->append(CSearch::getSearchTypeKeywords());
-    //listViewProperties->append(CSearch::getSearchPropertyKeywords());
+    listWidgetComparison->addItems(CSearch::getSearchTypeKeywords());
+    listWidgetProperties->addItems(CSearch::getSearchPropertyKeywords());
 }

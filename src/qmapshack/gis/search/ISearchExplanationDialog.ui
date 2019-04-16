@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Help</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../resources.qrc">
+    <normaloff>:/icons/48x48/CSrcUnknown.png</normaloff>:/icons/48x48/CSrcUnknown.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -27,10 +31,10 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QListView" name="listViewProperties"/>
+      <widget class="QListWidget" name="listWidgetProperties"/>
      </item>
      <item>
-      <widget class="QListView" name="listViewComparison"/>
+      <widget class="QListWidget" name="listWidgetComparison"/>
      </item>
     </layout>
    </item>
@@ -46,7 +50,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

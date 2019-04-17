@@ -537,7 +537,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="268"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="886"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="897"/>
         <source>none</source>
         <translation>нет</translation>
     </message>
@@ -569,18 +569,18 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="487"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="513"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="687"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="821"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="851"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="698"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="832"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="862"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="488"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="514"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="688"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="822"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="852"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="699"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="833"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="863"/>
         <source>Comment</source>
         <translation>Комментарий</translation>
     </message>
@@ -590,79 +590,89 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>&lt;h2&gt;Треки&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="702"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="653"/>
+        <source>Elevation: %1%2</source>
+        <translation type="unfinished">Высота: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="658"/>
+        <source>Created: %1</source>
+        <translation type="unfinished">Создан: %1</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
         <source>Arrival: </source>
         <translation>Прибытие: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
         <source>From Start</source>
         <translation>С начала</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
         <source>To Next</source>
         <translation>До следующего</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
         <source>To End</source>
         <translation>До конца</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="716"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="727"/>
         <source>Distance: </source>
         <translation>Расстояние: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="726"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="737"/>
         <source>Time: </source>
         <translation>Время: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="736"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
         <source>Ascent: </source>
         <translation>Подъём: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="746"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="757"/>
         <source>Descent: </source>
         <translation>Спуск: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="814"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="825"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Области&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="844"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="855"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Маршруты&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="872"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="899"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="883"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
         <source>Edit name...</source>
         <translation>Изменить имя...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="872"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="899"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="883"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
         <source>Enter new project name.</source>
         <translation>Ввести новое имя проекта.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="881"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
         <source>Edit keywords...</source>
         <translation>Изменить ключевые слова...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="881"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
         <source>Enter keywords.</source>
         <translation>Ввести ключевые слова.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1027"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1038"/>
         <source>Print Diary</source>
         <translation>Печатать дневник</translation>
     </message>
@@ -4040,12 +4050,17 @@ Unknown structure.</source>
 <context>
     <name>CPlotProfile</name>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="80"/>
+        <location filename="../plot/CPlotProfile.cpp" line="68"/>
+        <source>Show Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlotProfile.cpp" line="108"/>
         <source>Distance [%1]</source>
         <translation>Расстояние [%1]</translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="81"/>
+        <location filename="../plot/CPlotProfile.cpp" line="109"/>
         <source>Ele. [%1]</source>
         <translation>Высота: [%1]</translation>
     </message>
@@ -10010,8 +10025,12 @@ Tip:
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="101"/>
+        <source>Cut Track...</source>
+        <translation type="unfinished">Вырезать трек...</translation>
+    </message>
+    <message>
         <source>Cut...</source>
-        <translation>Вырезать...</translation>
+        <translation type="vanished">Вырезать...</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="550"/>
@@ -10026,7 +10045,7 @@ Hold ALT key for horizontal zoom, only.</source>
         <translation>Отсутствующие или неверные данные.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1316"/>
+        <location filename="../plot/IPlot.cpp" line="1334"/>
         <source>Select output file</source>
         <translation>Выбрать выходной файл</translation>
     </message>

@@ -526,7 +526,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <name>CDetailsPrj</name>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="268"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="886"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="897"/>
         <source>none</source>
         <translation>ninguna</translation>
     </message>
@@ -553,18 +553,18 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="487"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="513"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="687"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="821"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="851"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="698"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="832"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="862"/>
         <source>Info</source>
         <translation>Información</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="488"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="514"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="688"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="822"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="852"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="699"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="833"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="863"/>
         <source>Comment</source>
         <translation>Comentario</translation>
     </message>
@@ -574,42 +574,52 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
         <translation>&lt;h2&gt;Tracks&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="702"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="653"/>
+        <source>Elevation: %1%2</source>
+        <translation type="unfinished">Altitud: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="658"/>
+        <source>Created: %1</source>
+        <translation type="unfinished">Creado: %1</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
         <source>Arrival: </source>
         <translation>Llegada: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
         <source>From Start</source>
         <translation>Desde el inicio</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
         <source>To Next</source>
         <translation>Al siguiente</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
         <source>To End</source>
         <translation>Al Final</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="726"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="737"/>
         <source>Time: </source>
         <translation>Tiempo: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="736"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
         <source>Ascent: </source>
         <translation>Ascenso: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="746"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="757"/>
         <source>Descent: </source>
         <translation>Descenso: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="814"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="825"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Áreas&lt;/h2&gt;</translation>
     </message>
@@ -629,39 +639,39 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
         <translation>&lt;b&gt;Resumen de los tracks del proyecto&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="716"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="727"/>
         <source>Distance: </source>
         <translation>Distancia: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="844"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="855"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Rutas&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="872"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="899"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="883"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
         <source>Edit name...</source>
         <translation>Editar nombre...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="872"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="899"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="883"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
         <source>Enter new project name.</source>
         <translation>Introducir nuevo nombre de proyecto.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="881"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
         <source>Edit keywords...</source>
         <translation>Editar etiquetas...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="881"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
         <source>Enter keywords.</source>
         <translation>Introducir etiquetas.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1027"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1038"/>
         <source>Print Diary</source>
         <translation>Imprimir Diario</translation>
     </message>
@@ -4040,12 +4050,17 @@ Estructura desconocida.</translation>
 <context>
     <name>CPlotProfile</name>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="80"/>
+        <location filename="../plot/CPlotProfile.cpp" line="68"/>
+        <source>Show Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlotProfile.cpp" line="108"/>
         <source>Distance [%1]</source>
         <translation>Distancia [%1]</translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="81"/>
+        <location filename="../plot/CPlotProfile.cpp" line="109"/>
         <source>Ele. [%1]</source>
         <translation>Alt. [%1]</translation>
     </message>
@@ -8450,7 +8465,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Denominación</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
@@ -8996,7 +9011,7 @@ Nombre de archivo %1</translation>
         <location filename="../gis/trk/IInvalidTrk.ui" line="28"/>
         <location filename="../gis/trk/IInvalidTrk.ui" line="44"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Denominación</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="37"/>
@@ -10010,8 +10025,12 @@ Consejos:
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="101"/>
+        <source>Cut Track...</source>
+        <translation type="unfinished">Dividir Track...</translation>
+    </message>
+    <message>
         <source>Cut...</source>
-        <translation>Cortar.</translation>
+        <translation type="vanished">Cortar.</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="550"/>
@@ -10026,7 +10045,7 @@ Pulse tecla ALT para hacer zoom sólo verticalmente</translation>
         <translation>Datos incorrectos o inexistentes.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1316"/>
+        <location filename="../plot/IPlot.cpp" line="1334"/>
         <source>Select output file</source>
         <translation>Nombre del archivo de salida</translation>
     </message>
@@ -10913,7 +10932,7 @@ o
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="95"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Denominación</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>
@@ -11733,7 +11752,7 @@ Añadir una breve descripción a un punto y marcarlo con una etiqueta auto-numer
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="127"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Denominación</translation>
     </message>
 </context>
 <context>
@@ -11747,7 +11766,7 @@ Añadir una breve descripción a un punto y marcarlo con una etiqueta auto-numer
         <location filename="../print/IScreenshotDialog.ui" line="20"/>
         <location filename="../print/IScreenshotDialog.ui" line="30"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Denominación</translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="55"/>

@@ -536,7 +536,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="268"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="886"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="897"/>
         <source>none</source>
         <translation>cap</translation>
     </message>
@@ -568,18 +568,18 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="487"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="513"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="687"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="821"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="851"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="698"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="832"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="862"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="488"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="514"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="688"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="822"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="852"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="699"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="833"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="863"/>
         <source>Comment</source>
         <translation>Comentari</translation>
     </message>
@@ -589,79 +589,89 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>&lt;h2&gt;Pistes&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="702"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="653"/>
+        <source>Elevation: %1%2</source>
+        <translation type="unfinished">Elevació: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="658"/>
+        <source>Created: %1</source>
+        <translation type="unfinished">Creat: %1</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
         <source>Arrival: </source>
         <translation>Arribada:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
         <source>From Start</source>
         <translation>Des de l&apos;inici</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
         <source>To Next</source>
         <translation>Al Següent</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
         <source>To End</source>
         <translation>Al Final</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="716"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="727"/>
         <source>Distance: </source>
         <translation>Distància:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="726"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="737"/>
         <source>Time: </source>
         <translation>Hora:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="736"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
         <source>Ascent: </source>
         <translation>Ascens:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="746"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="757"/>
         <source>Descent: </source>
         <translation>Descens:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="814"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="825"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Àrees&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="844"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="855"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Rutes&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="872"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="899"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="883"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
         <source>Edit name...</source>
         <translation>Edita el nom...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="872"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="899"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="883"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
         <source>Enter new project name.</source>
         <translation>Introdueix el nom del nou projecte.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="881"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
         <source>Edit keywords...</source>
         <translation>Edita les paraules clau...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="881"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
         <source>Enter keywords.</source>
         <translation> Introduïu les paraules clau.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1027"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1038"/>
         <source>Print Diary</source>
         <translation>Imprimir Diari</translation>
     </message>
@@ -4037,12 +4047,17 @@ Estructura desconeguda.</translation>
 <context>
     <name>CPlotProfile</name>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="80"/>
+        <location filename="../plot/CPlotProfile.cpp" line="68"/>
+        <source>Show Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlotProfile.cpp" line="108"/>
         <source>Distance [%1]</source>
         <translation>Distància [%1]</translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="81"/>
+        <location filename="../plot/CPlotProfile.cpp" line="109"/>
         <source>Ele. [%1]</source>
         <translation>Ele. [%1]</translation>
     </message>
@@ -10003,8 +10018,12 @@ Consell:
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="101"/>
+        <source>Cut Track...</source>
+        <translation type="unfinished">Tallar el Track...</translation>
+    </message>
+    <message>
         <source>Cut...</source>
-        <translation>Talla...</translation>
+        <translation type="vanished">Talla...</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="550"/>
@@ -10019,7 +10038,7 @@ Mantenir premuda la tecla ALT només per zoom horitzontal.</translation>
         <translation>No hi ha dades o són incorrectes.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1316"/>
+        <location filename="../plot/IPlot.cpp" line="1334"/>
         <source>Select output file</source>
         <translation>Selecciona el fitter de sortida</translation>
     </message>

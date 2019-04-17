@@ -38,8 +38,10 @@ public:
 
 public slots:
     void setLimits();
+    void slotToggleWptLabels(bool on);
 
 private:
+    void init();
     CLimit * limit = nullptr;
 };
 

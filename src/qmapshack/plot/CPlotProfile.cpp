@@ -23,19 +23,22 @@
 #include "plot/CPlotAxis.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
-#include <interpolation.h>
+#include "helpers/CSettings.h"
 
+#include <interpolation.h>
 #include <proj_api.h>
 
 CPlotProfile::CPlotProfile(QWidget * parent)
     : IPlot(nullptr, CPlotData::eAxisLinear, eModeNormal, parent)
 {
+    init();
 }
 
 CPlotProfile::CPlotProfile(CGisItemTrk *trk, CLimit& lim, mode_e mode, QWidget *parent)
     : IPlot(trk, CPlotData::eAxisLinear, mode, parent)
     , limit(&lim)
 {
+    init();
     connect(limit, &CLimit::sigChanged, this, &CPlotProfile::setLimits);
     setWindowTitle(trk->getNameEx());
     updateData();
@@ -43,6 +46,31 @@ CPlotProfile::CPlotProfile(CGisItemTrk *trk, CLimit& lim, mode_e mode, QWidget *
 
 CPlotProfile::~CPlotProfile()
 {
+    if(mode != eModeIcon)
+    {
+        SETTINGS;
+        cfg.beginGroup("Plot");
+        cfg.setValue("showWptLabels", showWptLabels);
+        cfg.endGroup();
+    }
+}
+
+void CPlotProfile::init()
+{
+    if(mode != eModeIcon)
+    {
+        SETTINGS;
+        cfg.beginGroup("Plot");
+        showWptLabels = cfg.value("showWptLabels", showWptLabels).toBool();
+        cfg.endGroup();
+
+        menu->addSeparator();
+        QAction * action = new QAction(tr("Show Labels"),this);
+        action->setCheckable(true);
+        action->setChecked(showWptLabels);
+        menu->addAction(action);
+        connect(action, &QAction::toggled, this, &CPlotProfile::slotToggleWptLabels);
+    }
 }
 
 void CPlotProfile::setTrack(CGisItemTrk * track, CLimit &lim)
@@ -197,5 +225,11 @@ void CPlotProfile::setLimits()
 
     data->y().setLimits(data->ymin, data->ymax);
     resetZoom();
+    update();
+}
+
+void CPlotProfile::slotToggleWptLabels(bool on)
+{
+    showWptLabels = on;
     update();
 }

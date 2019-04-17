@@ -128,6 +128,7 @@ protected:
     // buffer needs update
     bool needsRedraw    = true;
 
+    bool showWptLabels  = false;
     bool showScale      = true;
     bool thinLine       = false;
     bool solid          = false;

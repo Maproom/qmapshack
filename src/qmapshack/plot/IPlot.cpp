@@ -98,7 +98,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     menu->addSeparator();
     actionAddWpt        = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, SLOT(slotAddWpt()));
     actionAddTrkPtInfo  = menu->addAction(QIcon("://icons/32x32/AddPointInfo.png"),tr("Add Trackpoint Info"), this, SLOT(slotAddTrkPtInfo()));
-    actionCutTrk        = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),      tr("Cut..."),    this, SLOT(slotCutTrk()));
+    actionCutTrk        = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),      tr("Cut Track..."),    this, SLOT(slotCutTrk()));
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
@@ -711,7 +711,7 @@ void IPlot::draw()
     }
 
     p.setFont(CMainWindow::self().getMapFont());
-    drawTags(p);
+    //drawTags(p);
     p.setClipping(true);
     p.setClipRect(rectGraphArea);
     drawData(p);
@@ -729,8 +729,10 @@ void IPlot::draw()
     drawYTic(p);
     p.setPen(QPen(Qt::black,2));
     p.drawRect(rectGraphArea);
-
     drawLegend(p);
+
+    p.setClipping(false);
+    drawTags(p);
 }
 
 QPointF IPlot::getBasePoint(int ptx) const
@@ -1117,28 +1119,31 @@ void IPlot::drawDecoration( QPainter &p )
             p.drawLine(x, top, x, bottom);
 
             // check if the mouse is near a waypoint
-            for(const CPlotData::point_t& tag : data->tags)
+            if(!showWptLabels)
             {
-                int ptx = left + data->x().val2pt( tag.point.x() );
-
-                if(qAbs(x - ptx) < 10)
+                for(const CPlotData::point_t& tag : data->tags)
                 {
-                    QFont f = CMainWindow::self().getMapFont();
-                    f.setBold(true);
-                    QFontMetrics fm(f);
-                    QRect r = fm.boundingRect(tag.label);
-                    r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
-                    r.adjust(-3,-2,3,0);
+                    int ptx = left + data->x().val2pt( tag.point.x() );
 
-                    p.setPen(Qt::NoPen);
-                    p.setBrush(Qt::white);
-                    p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
+                    if(qAbs(x - ptx) < 10)
+                    {
+                        QFont f = CMainWindow::self().getMapFont();
+                        f.setBold(true);
+                        QFontMetrics fm(f);
+                        QRect r = fm.boundingRect(tag.label);
+                        r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
+                        r.adjust(-3,-2,3,0);
 
-                    p.setFont(f);
-                    p.setPen(Qt::darkBlue);
-                    p.drawText(r, Qt::AlignCenter, tag.label);
+                        p.setPen(Qt::NoPen);
+                        p.setBrush(Qt::white);
+                        p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
 
-                    break;
+                        p.setFont(f);
+                        p.setPen(Qt::darkBlue);
+                        p.drawText(r, Qt::AlignCenter, tag.label);
+
+                        break;
+                    }
                 }
             }
         }
@@ -1192,15 +1197,14 @@ void IPlot::drawTags(QPainter& p)
     CPlotAxis& xaxis = data->x();
     CPlotAxis& yaxis = data->y();
 
-    QVector<CPlotData::point_t>::const_iterator tag = data->tags.begin();
-    while(tag != data->tags.end())
+    for(const CPlotData::point_t& tag : data->tags)
     {
-        int ptx = left   + xaxis.val2pt( tag->point.x() );
-        int pty = bottom - yaxis.val2pt( tag->point.y() );
+        int ptx = left   + xaxis.val2pt( tag.point.x() );
+        int pty = bottom - yaxis.val2pt( tag.point.y() );
 
         if (left < ptx &&  ptx < right)
         {
-            QPixmap icon = tag->icon.scaled(iconBarHeight,iconBarHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            QPixmap icon = tag.icon.scaled(iconBarHeight,iconBarHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
             p.drawPixmap(ptx - icon.width() / 2, 2, icon);
 
             p.setPen(QPen(Qt::white, 3));
@@ -1214,9 +1218,18 @@ void IPlot::drawTags(QPainter& p)
                 p.drawLine(ptx, top, ptx, pty);
                 p.setPen(QPen(Qt::black, 1));
                 p.drawLine(ptx, top, ptx, pty);
+
+                if(showWptLabels)
+                {
+                    p.save();
+                    p.translate(ptx, top);
+                    p.rotate(90);
+                    p.translate(5, -3);
+                    CDraw::text(tag.label, p, fm.boundingRect(tag.label), Qt::black);
+                    p.restore();
+                }
             }
         }
-        ++tag;
     }
 }
 

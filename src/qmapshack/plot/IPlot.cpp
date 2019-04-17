@@ -711,7 +711,6 @@ void IPlot::draw()
     }
 
     p.setFont(CMainWindow::self().getMapFont());
-    //drawTags(p);
     p.setClipping(true);
     p.setClipRect(rectGraphArea);
     drawData(p);
@@ -1125,25 +1124,26 @@ void IPlot::drawDecoration( QPainter &p )
                 {
                     int ptx = left + data->x().val2pt( tag.point.x() );
 
-                    if(qAbs(x - ptx) < 10)
+                    if(qAbs(x - ptx) >= 10)
                     {
-                        QFont f = CMainWindow::self().getMapFont();
-                        f.setBold(true);
-                        QFontMetrics fm(f);
-                        QRect r = fm.boundingRect(tag.label);
-                        r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
-                        r.adjust(-3,-2,3,0);
-
-                        p.setPen(Qt::NoPen);
-                        p.setBrush(Qt::white);
-                        p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
-
-                        p.setFont(f);
-                        p.setPen(Qt::darkBlue);
-                        p.drawText(r, Qt::AlignCenter, tag.label);
-
-                        break;
+                        continue;
                     }
+                    QFont f = CMainWindow::self().getMapFont();
+                    f.setBold(true);
+                    QFontMetrics fm(f);
+                    QRect r = fm.boundingRect(tag.label);
+                    r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
+                    r.adjust(-3,-2,3,0);
+
+                    p.setPen(Qt::NoPen);
+                    p.setBrush(Qt::white);
+                    p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
+
+                    p.setFont(f);
+                    p.setPen(Qt::darkBlue);
+                    p.drawText(r, Qt::AlignCenter, tag.label);
+
+                    break;
                 }
             }
         }
@@ -1202,34 +1202,39 @@ void IPlot::drawTags(QPainter& p)
         int ptx = left   + xaxis.val2pt( tag.point.x() );
         int pty = bottom - yaxis.val2pt( tag.point.y() );
 
-        if (left < ptx &&  ptx < right)
+        if (!((left < ptx) &&  (ptx < right)))
         {
-            QPixmap icon = tag.icon.scaled(iconBarHeight,iconBarHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-            p.drawPixmap(ptx - icon.width() / 2, 2, icon);
-
-            p.setPen(QPen(Qt::white, 3));
-            if( iconBarHeight < pty)
-            {
-                if (pty > bottom)
-                {
-                    pty = bottom;
-                }
-
-                p.drawLine(ptx, top, ptx, pty);
-                p.setPen(QPen(Qt::black, 1));
-                p.drawLine(ptx, top, ptx, pty);
-
-                if(showWptLabels)
-                {
-                    p.save();
-                    p.translate(ptx, top);
-                    p.rotate(90);
-                    p.translate(5, -3);
-                    CDraw::text(tag.label, p, fm.boundingRect(tag.label), Qt::black);
-                    p.restore();
-                }
-            }
+            continue;
         }
+
+        if( iconBarHeight >= pty)
+        {
+            continue;
+        }
+
+        QPixmap icon = tag.icon.scaled(iconBarHeight,iconBarHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        p.drawPixmap(ptx - icon.width() / 2, 2, icon);
+
+        if (pty > bottom)
+        {
+            pty = bottom;
+        }
+
+        p.setPen(QPen(Qt::white, 3));
+        p.drawLine(ptx, top, ptx, pty);
+        p.setPen(QPen(Qt::black, 1));
+        p.drawLine(ptx, top, ptx, pty);
+
+        if(!showWptLabels)
+        {
+            continue;
+        }
+        p.save();
+        p.translate(ptx, top);
+        p.rotate(90);
+        p.translate(5, -3);
+        CDraw::text(tag.label, p, fm.boundingRect(tag.label), Qt::black);
+        p.restore();
     }
 }
 

@@ -1347,6 +1347,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         pt1.y = qSin(a1 * DEG_TO_RAD) * d;
     }
 
+    bool doDeriveData = false;
     numberOfAttachedWpt = 0;
     for(const trkwpt_t &trkwpt : trkwpts)
     {
@@ -1373,7 +1374,11 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
                 {
                     ++numberOfAttachedWpt;
                     trkpt->keyWpt = trkwpt.key;
-                    trkpt->unsetFlag(CTrackData::trkpt_t::eFlagHidden);
+                    if(trkpt->isHidden())
+                    {
+                        trkpt->unsetFlag(CTrackData::trkpt_t::eFlagHidden);
+                        doDeriveData = true;
+                    }
                 }
 
                 index = NOIDX;
@@ -1394,11 +1399,19 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             {
                 ++numberOfAttachedWpt;
                 trkpt->keyWpt = trkwpt.key;
-                trkpt->unsetFlag(CTrackData::trkpt_t::eFlagHidden);
+                if(trkpt->isHidden())
+                {
+                    trkpt->unsetFlag(CTrackData::trkpt_t::eFlagHidden);
+                    doDeriveData = true;
+                }
             }
         }
     }
 
+    if(doDeriveData)
+    {
+        deriveSecondaryData();
+    }
     updateVisuals(eVisualDetails|eVisualPlot, "findWaypointsCloseBy()");
 }
 

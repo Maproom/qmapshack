@@ -90,7 +90,7 @@ bool CFitBaseType::isFloat() const
 
 bool CFitBaseType::isNumber() const
 {
-    return isInteger() ||isFloat();
+    return isInteger() || isFloat();
 }
 
 

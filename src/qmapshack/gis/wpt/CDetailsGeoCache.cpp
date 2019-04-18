@@ -136,7 +136,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     {
         QString thislog = log.text;
         logs+="<p><b>"+log.date.date().toString(Qt::SystemLocaleShortDate) + ": " + log.type + tr(" by ") + log.finder + "</b></p><p>" + thislog.replace("\n","<br/>") + "</p><hr>";
-        if(lastFound.isValid()==false || (log.type=="Found It"&&log.date>lastFound))
+        if(lastFound.isValid() == false || (log.type == "Found It" && log.date > lastFound))
         {
             lastFound=log.date;
         }

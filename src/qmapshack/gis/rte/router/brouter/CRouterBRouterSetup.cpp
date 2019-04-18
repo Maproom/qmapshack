@@ -447,7 +447,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
         const qint32 len = profiles.property("length").toInt();
 
         QStringList onlineProfilesLoaded;
-        for(qint32 i=0; i<len; i++)
+        for(qint32 i=0; i < len; i++)
         {
             const QJSValue &profile = profiles.property(i);
             if (!profile.isString() || profile.isError())

@@ -26,6 +26,7 @@
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSpeedCycle.h"
 #include "gis/trk/filter/CFilterSpeedHike.h"
+#include "gis/trk/filter/CFilterEnergyCycle.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
@@ -185,9 +186,12 @@ public:
         return trk.name.isEmpty() ? noName : trk.name;
     }
 
+    qreal getEnergyUse() const { return energyUse; }
+    void setEnergyUse(qreal value) { energyUse = value; }
+
     /// returns "true" when trk has no time-related invalid points
-    bool isTrkTimeValid() { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }
-    bool isTrkElevationInvalid() { return allValidFlags & CTrackData::trkpt_t::eInvalidEle; }
+    bool isTrkTimeValid() const { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0; }
+    bool isTrkElevationInvalid() const { return allValidFlags & CTrackData::trkpt_t::eInvalidEle; }
 
     QDateTime getTimestamp() const override {return getTimeStart(); }
 
@@ -576,6 +580,7 @@ public:
     void filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName);
     void filterLoopsCut(qreal dist);
     void filterZeroSpeedDriftCleaner(qreal distance, qreal ratio);
+    void filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet);
     /** @} */
 
     /**
@@ -802,6 +807,7 @@ private:
     qreal totalElapsedSeconds = 0;
     qreal totalElapsedSecondsMoving = 0;
     quint32 numberOfAttachedWpt = 0;
+    qreal energyUse = NOFLOAT;
 
     void checkForInvalidPoints();
     /**@}*/

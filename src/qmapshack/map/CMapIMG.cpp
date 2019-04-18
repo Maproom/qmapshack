@@ -777,7 +777,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     quint32 nsubdivs_last = 0;
 
     // count subsections
-    for(quint32 i=0; i<nlevels; ++i)
+    for(quint32 i=0; i < nlevels; ++i)
     {
         maplevel_t ml;
         ml.inherited    = TRE_MAP_INHER(pMapLevel);
@@ -834,7 +834,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
     // parse all 16 byte subdivision entries
     quint32 i;
-    for(i=0; i<nsubdivs_next; ++i, --nsubdiv)
+    for(i=0; i < nsubdivs_next; ++i, --nsubdiv)
     {
         subdiv->n = i;
         subdiv->next         = gar_load(uint16_t, pSubDivN->next);
@@ -893,7 +893,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     // witch pointer to 14 byte subdivision sections
     tre_subdiv_t* pSubDivL = pSubDivN;
     // parse all 14 byte subdivision entries of last map level
-    for(; i<nsubdivs; ++i)
+    for(; i < nsubdivs; ++i)
     {
         subdiv->n = i;
         subdiv->next         = 0;
@@ -2425,7 +2425,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
         }
 
         // see http://local.wasp.uwa.edu.au/~pbourke/geometry/pointline/
-        for(int i=1; i<len; ++i)
+        for(int i=1; i < len; ++i)
         {
             p1.u = line.pixel[i-1].x();
             p1.v = line.pixel[i-1].y();

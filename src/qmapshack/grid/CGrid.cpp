@@ -361,7 +361,7 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     p.restore();
 
     QColor textColor;
-    textColor.setHsv(color.hslHue(), color.hsvSaturation(), (color.value()>128 ? color.value()-128 : 0));
+    textColor.setHsv(color.hslHue(), color.hsvSaturation(), (color.value() > 128 ? color.value()-128 : 0));
 
     if(pj_is_latlong(pjGrid))
     {
@@ -371,22 +371,22 @@ void CGrid::draw(QPainter& p, const QRect& rect)
 
         for(const val_t &val : horzTopTicks)
         {
-            CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, yoff), textColor);
+            CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, yoff), textColor);
         }
 
         for(const val_t &val : horzBtmTicks)
         {
-            CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, h), textColor);
+            CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, h), textColor);
         }
 
         for(const val_t &val : vertLftTicks)
         {
-            CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(xoff, val.pos), textColor);
+            CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(xoff, val.pos), textColor);
         }
 
         for(const val_t &val : vertRgtTicks)
         {
-            CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(w - xoff, val.pos), textColor);
+            CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(w - xoff, val.pos), textColor);
         }
     }
     else

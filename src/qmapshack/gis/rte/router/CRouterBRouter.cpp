@@ -260,7 +260,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
         case IGisItem::eTypeTrk:
         {
             IGisLine* line = dynamic_cast<IGisLine*>(item);
-            Q_ASSERT(line!=nullptr);
+            Q_ASSERT(line != nullptr);
             QPolygonF polygon;
             line->getPolylineDegFromData(polygon);
             QString nogoPoints;

@@ -967,6 +967,9 @@
    <property name="toolTip">
     <string>Take a screenshot from the current active map view.</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+P</string>
+   </property>
   </action>
   <action name="actionShowTrackInfoPoints">
    <property name="checkable">

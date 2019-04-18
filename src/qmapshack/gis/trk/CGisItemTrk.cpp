@@ -1914,7 +1914,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     // -------------------------
     bool skipDecorations = (!keyUserFocus.item.isEmpty() && (key != keyUserFocus));
-    // draw min/max labels        
+    // draw min/max labels
     if(w.isShowMinMaxTrackLabels() && !skipDecorations)
     {
         for(const QString& key : extrema.keys())

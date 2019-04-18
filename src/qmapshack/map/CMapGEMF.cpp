@@ -93,7 +93,7 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
     stream >> rangeNum;
     QList<range_t> ranges;
     quint64 tiles=0;
-    for (quint32 i=0; i<rangeNum; i++)
+    for (quint32 i=0; i < rangeNum; i++)
     {
         range_t range;
         stream >> range.zoomlevel;
@@ -112,7 +112,7 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
     minZoom = MAX_ZOOM_LEVEL;
     maxZoom = MIN_ZOOM_LEVEL;
 
-    for(quint32 i=0; i<=MAX_ZOOM_LEVEL; i++)
+    for(quint32 i=0; i <= MAX_ZOOM_LEVEL; i++)
     {
         QList<range_t> rangeZoom;
         for(const range_t &range : ranges)

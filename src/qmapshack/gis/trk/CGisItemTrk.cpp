@@ -1278,17 +1278,24 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
     bool withDoubles = project->getSortingRoadbook() != IGisProject::eSortRoadbookTrackWithoutDouble;
 
+
+    qreal north = -90 * DEG_TO_RAD;
+    qreal south = 90 * DEG_TO_RAD;
+    qreal west = 180 * DEG_TO_RAD;
+    qreal east = -180 * DEG_TO_RAD;
     QVector<pointDP> line;
     // combine all segments to a single line
     for(CTrackData::trkpt_t& pt : trk)
     {
         pt.keyWpt.clear();
-        if(pt.isHidden())
-        {
-            continue;
-        }
         pointDP dp(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD, 0);
-        dp.idx = pt.idxVisible;
+        dp.idx = pt.idxTotal;
+
+        north = qMax(north, dp.y);
+        south = qMin(south, dp.y);
+        west = qMin(west, dp.x);
+        east = qMax(east, dp.x);
+
         line << dp;
     }
 
@@ -1296,6 +1303,9 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
     {
         return;
     }
+
+    constexpr qreal OFFSET = 0.1 * DEG_TO_RAD;
+    QRectF _boundingRect(QPointF(west - OFFSET, north + OFFSET), QPointF(east + OFFSET, south - OFFSET));
 
     // convert coordinates of all waypoints into meter coordinates relative to the first track point
     point3D pt0 = line[0];
@@ -1308,7 +1318,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             continue;
         }
 
-        if(!boundingRect.contains(wpt->getBoundingRect().topLeft()))
+        if(!_boundingRect.contains(wpt->getBoundingRect().topLeft()))
         {
             continue;
         }
@@ -1358,11 +1368,12 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             }
             else if(withDoubles && (d > WPT_FOCUS_DIST_OUT))
             {
-                CTrackData::trkpt_t * trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByVisibleIndex(index));
+                CTrackData::trkpt_t * trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByTotalIndex(index));
                 if(trkpt)
                 {
                     ++numberOfAttachedWpt;
                     trkpt->keyWpt = trkwpt.key;
+                    trkpt->unsetFlag(CTrackData::trkpt_t::eFlagHidden);
                 }
 
                 index = NOIDX;
@@ -1378,11 +1389,12 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
         if(index != NOIDX)
         {
-            CTrackData::trkpt_t * trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByVisibleIndex(index));
+            CTrackData::trkpt_t * trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByTotalIndex(index));
             if(trkpt)
             {
                 ++numberOfAttachedWpt;
                 trkpt->keyWpt = trkwpt.key;
+                trkpt->unsetFlag(CTrackData::trkpt_t::eFlagHidden);
             }
         }
     }
@@ -1706,7 +1718,8 @@ void CGisItemTrk::hideSelectedPoints()
     // iterate over all segments and delete points between idx1 and idx2
     for(CTrackData::trkpt_t& trkpt : trk)
     {
-        if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
+        if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2)
+           && trkpt.desc.isEmpty() && trkpt.keyWpt.item.isEmpty())
         {
             trkpt.setFlag(CTrackData::trkpt_t::eFlagHidden);
         }
@@ -1914,7 +1927,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     // -------------------------
     bool skipDecorations = (!keyUserFocus.item.isEmpty() && (key != keyUserFocus));
-    // draw min/max labels        
+    // draw min/max labels
     if(w.isShowMinMaxTrackLabels() && !skipDecorations)
     {
         for(const QString& key : extrema.keys())

@@ -916,6 +916,7 @@ void CCanvas::slotCheckTrackOnFocus()
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
         if(nullptr == trk2)
         {
+            update();
             return;
         }
 
@@ -932,6 +933,7 @@ void CCanvas::slotCheckTrackOnFocus()
         keyTrackOnFocus = key;
 
         slotUpdateTrackInfo(false);
+        update();
     }
 }
 

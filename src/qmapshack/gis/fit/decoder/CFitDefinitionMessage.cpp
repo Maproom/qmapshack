@@ -85,7 +85,7 @@ void CFitDefinitionMessage::addDevField(CFitFieldDefinition fieldDef)
 
 bool CFitDefinitionMessage::hasField(const quint8 fieldNum) const
 {
-    for (int i=0; i< fields.size(); i++)
+    for (int i=0; i < fields.size(); i++)
     {
         if (fieldNum == fields[i].getDefNr())
         {
@@ -97,7 +97,7 @@ bool CFitDefinitionMessage::hasField(const quint8 fieldNum) const
 
 const CFitFieldDefinition& CFitDefinitionMessage::getField(const quint8 fieldNum) const
 {
-    for (int i=0; i< fields.size(); i++)
+    for (int i=0; i < fields.size(); i++)
     {
         if (fieldNum == fields[i].getDefNr())
         {

@@ -106,7 +106,7 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
         cosLambda = qCos(lambda);
         sinSigma = qSqrt((cosU2*sinLambda) * (cosU2*sinLambda) + (cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));
 
-        if (sinSigma==0)
+        if (sinSigma == 0)
         {
             return 0;   // co-incident points
         }
@@ -126,7 +126,7 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
         lambdaP = lambda;
         lambda = L + (1-C) * f * sinAlpha * (sigma + C*sinSigma*(cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
     }
-    if (iterLimit==0)
+    if (iterLimit == 0)
     {
         return FP_NAN;                // formula failed to converge
     }
@@ -168,7 +168,7 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
         cosLambda = qCos(lambda);
         sinSigma = qSqrt((cosU2*sinLambda) * (cosU2*sinLambda) + (cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));
 
-        if (sinSigma==0)
+        if (sinSigma == 0)
         {
             return 0;   // co-incident points
         }
@@ -188,7 +188,7 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
         lambdaP = lambda;
         lambda = L + (1-C) * f * sinAlpha * (sigma + C*sinSigma*(cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
     }
-    if (iterLimit==0)
+    if (iterLimit == 0)
     {
         return FP_NAN;                // formula failed to converge
     }
@@ -267,7 +267,7 @@ qreal GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q)
     QPointF dbq = b - q;
     qreal dist  = sqrlen(dbq);
 
-    for (qint32 i = 1; i<count; ++i)
+    for (qint32 i = 1; i < count; ++i)
     {
         const QPointF a = b;
         const QPointF daq = dbq;
@@ -283,7 +283,7 @@ qreal GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q)
             continue;
         }
         qreal current_dist;
-        if (t<=1.)
+        if (t <= 1.)
         {
             current_dist = sqr(dab.x()*dbq.y() - dab.y()*dbq.x())*inv_sqrlen;
         }
@@ -291,7 +291,7 @@ qreal GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q)
         {
             current_dist = sqrlen(dbq);
         }
-        if (current_dist<dist)
+        if (current_dist < dist)
         {
             dist = current_dist;
         }
@@ -305,7 +305,7 @@ qreal GPS_Math_DistPointPolyline(const QPolygonF& line, const QPointF& pt, qreal
 
     const int len = line.size();
     // see http://local.wasp.uwa.edu.au/~pbourke/geometry/pointline/
-    for(int i=1; i<len; ++i)
+    for(int i=1; i < len; ++i)
     {
         const QPointF &p1 = line[i-1];
         const QPointF &p2 = line[i];
@@ -624,7 +624,7 @@ QPointF GPS_Math_Wpt_Projection(const QPointF& p1, qreal distance, qreal bearing
         Sigma_ = Sigma;
         Sigma = s / (b*A) + deltaSigma;
     }
-    while (qAbs(Sigma-Sigma_) > 1e-12 && ++iterations<100);
+    while (qAbs(Sigma-Sigma_) > 1e-12 && ++iterations < 100);
     if (iterations >= 100)
     {
         return NOPOINTF;

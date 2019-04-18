@@ -167,7 +167,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
         return NOFLOAT;
     }
 
-    if(hasNoData && ((e[0] == noData)||(e[1] == noData)||(e[2] == noData)||(e[3] == noData)))
+    if(hasNoData && ((e[0] == noData) || (e[1] == noData) || (e[2] == noData) || (e[3] == noData)))
     {
         return NOFLOAT;
     }
@@ -211,7 +211,7 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos)
     {
         return NOFLOAT;
     }
-    for(int i=0; i<eWinsize4x4; i++)
+    for(int i=0; i < eWinsize4x4; i++)
     {
         if(hasNoData && win[i] == noData)
         {

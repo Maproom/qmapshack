@@ -196,7 +196,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     // limit tree widget horizontal size to the filter widget with the largest minimum size
     treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
 
-    slotShowPlots();    
+    slotShowPlots();
     updateData();
 }
 
@@ -457,7 +457,7 @@ void CDetailsTrk::updateData()
     bool enabledColorize = !source.isEmpty() && (source != "activity");
     bool enabledActivity = source == "activity";
 
-    comboColor->setVisible(!(enabledColorize||enabledActivity));
+    comboColor->setVisible(!(enabledColorize || enabledActivity));
     widgetColorLabel->setVisible(enabledColorize);
     widgetColorLabel->setEnabled(enabledColorize);
     toolLimitAutoStyle->setEnabled(enabledColorize);

@@ -1194,6 +1194,11 @@ void IPlot::drawTags(QPainter& p)
         return;
     }
 
+    QFont f = CMainWindow::self().getMapFont();
+    f.setBold(true);
+    QFontMetrics fm(f);
+    p.setFont(f);
+
     CPlotAxis& xaxis = data->x();
     CPlotAxis& yaxis = data->y();
 
@@ -1229,7 +1234,7 @@ void IPlot::drawTags(QPainter& p)
         {
             continue;
         }
-        p.save();
+        p.save();        
         p.translate(ptx, top);
         p.rotate(90);
         p.translate(5, -3);

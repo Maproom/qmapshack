@@ -2798,6 +2798,14 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
         searchValue->str2 = CKnownExtension::get(CKnownExtension::internalEle).unit;
         return searchValue;
     });
+    map.insert(eSearchPropertyGeneralDate,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->timeStart.toSecsSinceEpoch();
+        searchValue->str1 = "SsE";
+        searchValue->value2 = item->timeEnd.toSecsSinceEpoch();
+        searchValue->str2 = "SsE";
+        return searchValue;
+    });
     //Route / track keywords
     map.insert(eSearchPropertyRteTrkDistance,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
@@ -2841,6 +2849,25 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
     map.insert(eSearchPropertyRteTrkAvgSpeed,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         IUnit::self().meter2speed(item->totalDistance/item->totalElapsedSecondsMoving,searchValue->value1,searchValue->str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkActivity,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        QStringList strL;
+        item->activities.getActivityNames(strL);
+        searchValue->str1=strL.join(", ");
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkTotalTime,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->totalElapsedSeconds;
+        searchValue->str1="S";
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkTimeMoving,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->totalElapsedSecondsMoving;
+        searchValue->str1="S";
         return searchValue;
     });
 

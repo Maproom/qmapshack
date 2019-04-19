@@ -460,8 +460,8 @@ void IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
         return;
     }
 
-    //Convert to m
-    if( unit ==  "m²"|| unit ==  "m"||  unit ==  "m/h")
+    //Convert to m or s
+    if( unit ==  "m²"|| unit ==  "m"||  unit ==  "m/h" || unit =="s")
     {
         //do nothing
     }
@@ -489,6 +489,14 @@ void IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
     {
         value /= CUnitImperial::milePerMeter;
     }
+    else if(unit == "min")
+    {
+        value *= 60;
+    }
+    else if(unit == "h")
+    {
+        value *= 3600;
+    }
 
     if(unit.contains("/h"))
     {
@@ -498,13 +506,17 @@ void IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
     {
         unit = "m²";
     }
+    else if(unit == "h" || unit == "min")
+    {
+        unit = "s";
+    }
     else
     {
         unit = "m";
     }
 
     //convert to target
-    if( targetUnit ==  "m²"|| targetUnit ==  "m"||  targetUnit ==  "m/h")
+    if( targetUnit ==  "m²"|| targetUnit ==  "m"||  targetUnit ==  "m/h" || targetUnit == "s")
     {
         //do nothing
     }
@@ -531,6 +543,14 @@ void IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
     else if(targetUnit == "ml" || targetUnit == "ml/h")
     {
         value *= CUnitImperial::milePerMeter;
+    }
+    else if(targetUnit == "min")
+    {
+        value /= 60;
+    }
+    else if(targetUnit == "h")
+    {
+        value /= 3600;
     }
 }
 

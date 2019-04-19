@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>526</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
    <item>
     <widget class="QLabel" name="labelExplanation">
      <property name="text">
-      <string>The underlying syntax of the search is &quot;Property Comparison Value&quot;, however there are measures in place to make searching more intuitive. Following keywords are available for searching:</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Text set in constructor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

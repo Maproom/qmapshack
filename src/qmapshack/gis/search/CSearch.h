@@ -59,6 +59,7 @@ enum searchProperty_e: unsigned int
     eSearchPropertyGeneralName,
     eSearchPropertyGeneralFullText,
     eSearchPropertyGeneralElevation,
+    eSearchPropertyGeneralDate,
 
     //Area keywords
     eSearchPropertyAreaArea,
@@ -81,6 +82,9 @@ enum searchProperty_e: unsigned int
     eSearchPropertyRteTrkMaxSpeed,
     eSearchPropertyRteTrkMinSpeed,
     eSearchPropertyRteTrkAvgSpeed,
+    eSearchPropertyRteTrkActivity,
+    eSearchPropertyRteTrkTotalTime,
+    eSearchPropertyRteTrkTimeMoving
 };
 
 class CSearch

@@ -1176,6 +1176,12 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
         IUnit::self().meter2elevation(item->wpt.ele,searchValue->value1,searchValue->str1);
         return searchValue;
     });
+    map.insert(eSearchPropertyGeneralDate,[](CGisItemWpt* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->wpt.time.toSecsSinceEpoch();
+        searchValue->str1 = "SsE";
+        return searchValue;
+    });
     //Geocache keywords
     map.insert(eSearchPropertyGeocacheDifficulty,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
@@ -1187,13 +1193,18 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
         searchValue->value1 = item->geocache.terrain;
         return searchValue;
     });
-    /*
-       map.insert(eSearchKeywordGeocacheAttributes,[](CGisItemWpt* item){
+    map.insert(eSearchPropertyGeocacheAttributes,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->str1 = item->geocache;
+        for(qint8 attr : item->geocache.attributes)
+        {
+            if(!item->geocache.attributes[attr])
+            {
+                searchValue->str1 += tr("No") + " ";
+            }
+            searchValue->str1 += item->geocache.attributeMeaningsTranslated[attr] + ", ";
+        }
         return searchValue;
-       });
-     */
+    });
     map.insert(eSearchPropertyGeocacheSize,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->str1 = item->geocache.container;

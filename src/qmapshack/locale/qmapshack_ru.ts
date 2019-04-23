@@ -592,12 +592,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="653"/>
         <source>Elevation: %1%2</source>
-        <translation type="unfinished">Высота: %1%2</translation>
+        <translation>Высота: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="658"/>
         <source>Created: %1</source>
-        <translation type="unfinished">Создан: %1</translation>
+        <translation>Создан: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
@@ -4052,7 +4052,7 @@ Unknown structure.</source>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="68"/>
         <source>Show Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать текст</translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="108"/>
@@ -9434,12 +9434,12 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="996"/>
         <source>Track Highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Выделить трек</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="999"/>
         <source>Mark the highlighted track with a red border.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отметить выделенный трек красной рамкой.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="686"/>
@@ -10026,7 +10026,7 @@ Tip:
     <message>
         <location filename="../plot/IPlot.cpp" line="101"/>
         <source>Cut Track...</source>
-        <translation type="unfinished">Вырезать трек...</translation>
+        <translation>Вырезать трек...</translation>
     </message>
     <message>
         <source>Cut...</source>

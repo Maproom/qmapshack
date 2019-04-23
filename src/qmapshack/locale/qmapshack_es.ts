@@ -3928,7 +3928,7 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMousePrint.cpp" line="32"/>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
-        <translation>&lt;b&gt;Guardar/imprimir mapa&lt;/b&gt;&lt;br/&gt;Seleccione un area rectangular en el mapa pulsando el boton izquierdo del ratón y moviendolo hacia la esquina opuesta. Cancele con el boton derecho. Ajuste la seleccion haciendo clic y moviendo las esquinas.</translation>
+        <translation>&lt;b&gt;Guardar o imprimir mapa&lt;/b&gt;&lt;br/&gt;Seleccione un area rectangular en el mapa pulsando el boton izquierdo del ratón y moviendolo hacia la esquina opuesta. Cancele con el boton derecho. Ajuste la seleccion haciendo clic y moviendo las esquinas.</translation>
     </message>
 </context>
 <context>
@@ -4052,7 +4052,7 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="68"/>
         <source>Show Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar nombres</translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="108"/>
@@ -4094,7 +4094,7 @@ Estructura desconocida.</translation>
 %1x%2 pixel
 x: %3 m/px
 y: %4 m/px</source>
-        <translation>Zoom con la rueda del ratón en el mapa inferior para cambiar la resolución:
+        <translation>Zoom con la rueda del ratón sobre el mapa inferior para cambiar la resolución:
 
 %1x%2 pixel
 x: %3 m/px
@@ -4150,7 +4150,7 @@ is not a valid coordinate system definition:
 %2</source>
         <translation>El valor
 &apos;%1&apos;
-no es una definición de sistema de coordenadas válido:
+no es una definición de un sistema de coordenadas válido:
 %2</translation>
     </message>
     <message>
@@ -4200,27 +4200,27 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="308"/>
         <source>Migrating database from version 4 to 5.</source>
-        <translation>Migrando base de datos de version 4 a 5.</translation>
+        <translation>Migrando base de datos de versión 4 a 5.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="362"/>
         <source>Migrating database from version 5 to 6.</source>
-        <translation>Migrando base de datos de version 5 a 6.</translation>
+        <translation>Migrando base de datos de versión 5 a 6.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="420"/>
         <source>Migrating database from version 6 to 7.</source>
-        <translation>Migrando base de datos de version 6 a 7.</translation>
+        <translation>Migrando base de datos de versión 6 a 7.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="486"/>
         <source>Migrating database from version 7 to 8.</source>
-        <translation>Migrando base de datos de version 7 a 8.</translation>
+        <translation>Migrando base de datos de versión 7 a 8.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="515"/>
         <source>Migrating database from version 8 to 9.</source>
-        <translation>Migrando base de datos de version 8 a 9.</translation>
+        <translation>Migrando base de datos de versión 8 a 9.</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="538"/>
@@ -4295,7 +4295,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="667"/>
         <source>Copy items...</source>
-        <translation>Copia elementos....</translation>
+        <translation>Copia elementos...</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="685"/>
@@ -4350,7 +4350,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../qlgt/CQmsDb.cpp" line="47"/>
         <source>Remove existing %1?</source>
-        <translation>¿Eliminar los %1?</translation>
+        <translation>¿Eliminar %1?</translation>
     </message>
     <message>
         <location filename="../qlgt/CQmsDb.cpp" line="52"/>
@@ -4484,7 +4484,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="198"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation>QMapShack se comunica con BRouter a través de una conexión de red. Por lo general, esto se hace en una dirección especial a la que no se puede acceder si no es a través de su dispositivo. Sin embargo, BRouter recibe las conexiones en todas las interfaces disponibles. Si se encuentra en su propia red privada con un firewall activo, no debe de suponer un problema. Si se conecta con una red pública, cada puerto abierto es un riesgo, ya que puede ser utilizado por otra persona para comprometer su sistema. No recomendamos utilizar el servicio local BRouter en este caso. Si ve esta advertencia y utiliza la versión de BRouter &gt;= 1.4.10 puede aplicar el enlace a la dirección local estableciendo el nombre de host en &quot;localhost&quot; y probar &quot;Nombre host solamente&quot; en la configuración en modo experto</translation>
+        <translation>QMapShack se comunica con BRouter a través de una conexión de red. Por lo general, esto se hace en una dirección especial a la que no se puede acceder si no es a través de su dispositivo. Sin embargo, BRouter recibe las conexiones en todas las interfaces disponibles. Si se encuentra en su propia red privada con un firewall activo, no debe de suponer un problema. Si se conecta con una red pública, cada puerto abierto es un riesgo, ya que puede ser utilizado por otra persona para comprometer su sistema. No recomendamos utilizar el servicio local BRouter en este caso. Si ve esta advertencia y utiliza la versión de BRouter &gt;= 1.4.10 puede aplicar el enlace a la dirección local estableciendo el nombre de host en &quot;localhost&quot; y probar &quot;Nombre host solamente&quot; en la configuración del modo experto</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="219"/>
@@ -4494,7 +4494,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="224"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
-        <translation>Asumo el riesgo. No avisar de nuevo.</translation>
+        <translation>Entiendo el riesgo. No avisar de nuevo.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="229"/>
@@ -4630,7 +4630,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="538"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
-        <translation>Descarga:%1&lt;br/&gt;&lt;br/&gt; Esto descargará e instalará un archivo zip desde un servidor de descarga no está protegido por ningún estándar, usando HTTP normal. Normalmente debería ser HTTPS. El riesgo es que alguien redireccione la solicitud y le envíe un código malicioso indetectable por QMapShack. &lt;br/&gt; Si esto no se comprende o si se tienen dudas es mejor cancelar y usar la versión web de BRouter.</translation>
+        <translation>Descarga:%1&lt;br/&gt;&lt;br/&gt; Se descargará e instalará un archivo zip desde un servidor de descarga no protegido por ningún estándar usando HTTP normal. Normalmente sería HTTPS. El riesgo es que alguien redireccione la solicitud y envíe un código malicioso indetectable por QMapShack. &lt;br/&gt; Si esto no se comprende o si se tienen dudas es mejor cancelar y usar la versión web de BRouter.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="550"/>
@@ -5183,7 +5183,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="166"/>
         <source>In the routing database there is no highway near the coordinates to place a waypoint.</source>
-        <translation>En la base de datos de enrutamiento no hay ninguna vía cerca de las coordenadas para colocar un waypoint.</translation>
+        <translation>En la base de datos de enrutamiento no hay ninguna vía cerca de las coordenadas para poner un punto.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="349"/>
@@ -5207,7 +5207,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/routino/CRouterRoutinoPathSetup.cpp" line="55"/>
         <source>Select routing data file path...</source>
-        <translation>Seleccione la carpeta del archivo de datos de enrutamiento...</translation>
+        <translation>Seleccionar la carpeta del archivo de datos de enrutamiento...</translation>
     </message>
 </context>
 <context>
@@ -5273,13 +5273,13 @@ no es una definición de sistema de coordenadas válido:
 The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hot spot.
 For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
         <translation>Vincular GPS:
-La idea básica es recibir datos GPS en tiempo real utilizando el standard NMEA desde un dispositivo externo vinculado a Qmapshack. Se puede usar un dispositivo GPS Android junto con la aplicación &quot;GPS Tether&quot; o similar para enviar un flujo de datos NMEA a QMapShack a través de una red Ethernet. 
+La idea básica es recibir datos GPS en tiempo real utilizando el standard NMEA desde un dispositivo vinculado a Qmapshack. Se puede usar un dispositivo GPS Android junto con la aplicación &quot;GPS Tether&quot; o similar para enviar un flujo de datos NMEA a QMapShack a través de una red Ethernet. 
 
-Para vincular el dispositivo Android con Qmapshack:
+Para vincular el dispositivo con Qmapshack:
 
-- El dispositivo Android y Qmapshack deben estar conectados a la misma red. Puede ser una red Wi-Fi. También se puede configurar el Android como punto de acceso Wi-Fi.
+- El dispositivo y Qmapshack deben estar conectados a la misma red. Puede ser una red Wi-Fi. También se puede configurar un dispositivo Android como punto de acceso Wi-Fi.
 
-- Es necesario indicar en QMapShack la dirección IP del dispositivo o su nombre de host, y el número de puerto tal y como está configurado en la aplicación. La aplicación Android indicará cuál es esa dirección IP y el número del puerto.
+- Es necesario indicar a QMapShack la dirección IP del dispositivo o su nombre de host, y el número de puerto tal y como está configurado en la aplicación. La aplicación Android indicará cuál es esa dirección IP y el número del puerto.
 </translation>
     </message>
     <message>
@@ -5399,7 +5399,7 @@ Para vincular el dispositivo Android con Qmapshack:
     <message>
         <location filename="../realtime/CRtSelectSource.cpp" line="63"/>
         <source>Select a real time source from the list. Some sources can be added multiple times. For others only a single instance can be added.</source>
-        <translation>Seleccione una fuente en tiempo real de la lista. Algunas fuentes se pueden agregar varias veces, otras solo se pueden agregar en una sola instancia.</translation>
+        <translation>Seleccione una fuente en tiempo real de la lista. Algunas fuentes se pueden agregar varias veces.</translation>
     </message>
 </context>
 <context>
@@ -5800,12 +5800,12 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="276"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
-        <translation>El archivo existe y no ha sido creado por QMapShack. Si pulsa &apos;si&apos; se perderán todos los datos, incluso si este archivo contiene datos y ha sido cargado por QMapShack, QMapShack puede no ser capaz de cargar y almacenar todos los elementos de este archivo. Estos elementos se perderán. Se recomienda usar otro archivo. &lt;b&gt;¿Realmente desea sobrescribir el archivo?&lt;/b&gt;</translation>
+        <translation>El archivo existe y no ha sido creado por QMapShack. Si se pulsa &apos;si&apos; se perderán todos los datos, incluso si este archivo contiene datos y ha sido cargado por QMapShack, QMapShack puede no ser capaz de cargar y almacenar todos los elementos de este archivo. Estos elementos se perderán. Se recomienda usar otro archivo. &lt;b&gt;¿sobrescribir realmente el archivo?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="315"/>
         <source>The track &lt;b&gt;%1&lt;/b&gt; you have selected contains trackpoints with invalid timestamps. Device might not accept the generated TCX course file if left as is. &lt;b&gt;Do you want to apply a filter with constant speed (10 m/s) and continue?&lt;/b&gt;</source>
-        <translation>El track &lt;b&gt;%1&lt;/b&gt; Que ha seleccionado contiene puntos y marcas de tiempo no válidas. Es posible que el dispositivo no acepte el archivo de curso TCX generado si se deja como está &lt;b&gt;¿Desea aplicar un filtro con velocidad constante (10 m / s) y continuar?&lt;/b&gt;</translation>
+        <translation>El track &lt;b&gt;%1&lt;/b&gt; Que ha seleccionado contiene puntos y marcas de tiempo no válidas. Es posible que el dispositivo no acepte el archivo TCX generado si se deja como está &lt;b&gt;¿Desea aplicar un filtro con velocidad constante (10 m / s) y continuar?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="339"/>
@@ -5825,7 +5825,7 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="314"/>
         <source>Track with invalid timestamps...</source>
-        <translation>Track con marcas de tiempo inválidas.</translation>
+        <translation>Track con marcas de tiempo inválidas...</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="334"/>
@@ -5835,7 +5835,7 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="335"/>
         <source>QMapShack does not know how track &lt;b&gt;%1&lt;/b&gt; should be saved. &lt;b&gt;Do you want to save it as a course or as an activity? &lt;/b&gt;Remember that only waypoints close enough to the track will be saved when saving as a course. Waypoints will not be saved when saving as an activity.</source>
-        <translation>QMapShack no sabe cómo el track &lt;b&gt;%1&lt;/b&gt; debe ser guardado. &lt;b&gt;¿Quieres guardarlo como trayecto o como actividad? &lt;/b&gt;Recuerda que sólo se guardarán waypoints lo suficientemente cercanos al track al guardar como trayecto y no se guardarán al hacerlo como actividad.</translation>
+        <translation>QMapShack no sabe cómo el track &lt;b&gt;%1&lt;/b&gt; debe ser guardado. &lt;b&gt;¿Guardar como trayecto o como actividad? &lt;/b&gt;Recordar que sólo se guardarán waypoints lo suficientemente cercanos al track al guardar como trayecto y no se guardarán al hacerlo como actividad.</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="432"/>
@@ -6067,7 +6067,7 @@ línea %2, columna %3.
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="93"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="99"/>
         <source>humid</source>
-        <translation>humedo</translation>
+        <translation>húmedo</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="153"/>
@@ -6196,7 +6196,7 @@ línea %2, columna %3.
         <location filename="../templates/Running_Summary.ui" line="601"/>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="432"/>
         <source>Cal. consumption</source>
-        <translation>Calorias Cons.</translation>
+        <translation>Calorías Cons.</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="615"/>
@@ -8465,7 +8465,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
@@ -9011,7 +9011,7 @@ Nombre de archivo %1</translation>
         <location filename="../gis/trk/IInvalidTrk.ui" line="28"/>
         <location filename="../gis/trk/IInvalidTrk.ui" line="44"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="37"/>
@@ -9270,7 +9270,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="740"/>
         <source>Save(Print) Map</source>
-        <translation>Guardar/Imprimir captura.</translation>
+        <translation>Guardar o imprimir captura del mapa.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="860"/>
@@ -9290,7 +9290,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="908"/>
         <source>Track Point Info Table</source>
-        <translation>Lista de las etiquetas numeradas</translation>
+        <translation>Información del punto del track</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="911"/>
@@ -9315,7 +9315,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="941"/>
         <source>Show the minimum and the maximum values of the track properties in a table.</source>
-        <translation>Mostrar los valores mininos y máximos del track en una tabla.</translation>
+        <translation>Mostrar los valores mininos y máximos del track en una panel.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="953"/>
@@ -9340,17 +9340,17 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="980"/>
         <source>Track Point Info</source>
-        <translation>Información del punto del track</translation>
+        <translation>Etiquetas numeradas</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="983"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
-        <translation>Marcar con etiquetas auto-numeradas los puntos  de track que tengan imformación añadida.</translation>
+        <translation>Marcar con etiquetas auto-numeradas los puntos  de track que tengan información añadida.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="996"/>
         <source>Track Highlight</source>
-        <translation>Resaltar track</translation>
+        <translation>Resaltado del track</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="999"/>
@@ -10932,7 +10932,7 @@ o
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="95"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>
@@ -11752,7 +11752,7 @@ Añadir una breve descripción a un punto y marcarlo con una etiqueta auto-numer
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="127"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11766,7 +11766,7 @@ Añadir una breve descripción a un punto y marcarlo con una etiqueta auto-numer
         <location filename="../print/IScreenshotDialog.ui" line="20"/>
         <location filename="../print/IScreenshotDialog.ui" line="30"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="55"/>

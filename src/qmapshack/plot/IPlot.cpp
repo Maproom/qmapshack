@@ -711,6 +711,7 @@ void IPlot::draw()
     }
 
     p.setFont(CMainWindow::self().getMapFont());
+    drawTags(p);
     p.setClipping(true);
     p.setClipRect(rectGraphArea);
     drawData(p);
@@ -731,7 +732,7 @@ void IPlot::draw()
     drawLegend(p);
 
     p.setClipping(false);
-    drawTags(p);
+    drawTagLabels(p);
 }
 
 QPointF IPlot::getBasePoint(int ptx) const
@@ -1229,12 +1230,39 @@ void IPlot::drawTags(QPainter& p)
         p.drawLine(ptx, top, ptx, pty);
         p.setPen(QPen(Qt::black, 1));
         p.drawLine(ptx, top, ptx, pty);
+    }
+}
 
-        if(!showWptLabels)
+void IPlot::drawTagLabels(QPainter& p)
+{
+    if(data->tags.isEmpty())
+    {
+        return;
+    }
+
+    if(!showWptLabels)
+    {
+        return;
+    }
+
+
+    QFont f = CMainWindow::self().getMapFont();
+    f.setBold(true);
+    QFontMetrics fm(f);
+    p.setFont(f);
+
+    CPlotAxis& xaxis = data->x();
+
+    for(const CPlotData::point_t& tag : data->tags)
+    {
+        int ptx = left   + xaxis.val2pt( tag.point.x() );
+
+        if (!((left < ptx) &&  (ptx < right)))
         {
             continue;
         }
-        p.save();        
+
+        p.save();
         p.translate(ptx, top);
         p.rotate(90);
         p.translate(5, -3);

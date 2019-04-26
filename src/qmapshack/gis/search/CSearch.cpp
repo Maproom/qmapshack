@@ -284,6 +284,8 @@ QMap<QString,CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
     map.insert(tr("lower than"),eSearchTypeSmaller);
     map.insert(tr("earlier than"),eSearchTypeSmaller);
     map.insert(tr("before"),eSearchTypeSmaller);
+    map.insert(tr("less than"),eSearchTypeSmaller);
+    map.insert("<",eSearchTypeSmaller);
     map.insert(tr("longer than"),eSearchTypeBigger);
     map.insert(tr("higher than"),eSearchTypeBigger);
     map.insert(tr("bigger than"),eSearchTypeBigger);
@@ -292,7 +294,10 @@ QMap<QString,CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
     map.insert(tr("over"),eSearchTypeBigger);
     map.insert(tr("after"),eSearchTypeBigger);
     map.insert(tr("later than"),eSearchTypeBigger);
+    map.insert(">",eSearchTypeBigger);
     map.insert(tr("regex"),eSearchTypeRegEx);
+    map.insert("=",eSearchTypeEquals);
+    map.insert(tr("equals"),eSearchTypeEquals);
     return map;
 }
 

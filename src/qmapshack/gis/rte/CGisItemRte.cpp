@@ -203,19 +203,8 @@ void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
 
     subpt.ele = qRound(ele);
 
-    if(subpt.ele != NOINT)
-    {
-        if(rte.minElevation == NOINT) //Without bug they are either both NOINT or none
-        {
-            rte.minElevation = subpt.ele;
-            rte.minElevation = subpt.ele;
-        }
-        else
-        {
-            rte.minElevation = qMin(rte.minElevation, subpt.ele);
-            rte.maxElevation = qMax(rte.maxElevation, subpt.ele);
-        }
-    }
+    rte.minElevation = qMin(rte.minElevation, subpt.ele);
+    rte.maxElevation = qMax(rte.maxElevation, subpt.ele);
 
     if(lastEle != NOFLOAT)
     {

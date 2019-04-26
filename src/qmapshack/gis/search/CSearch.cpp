@@ -19,19 +19,17 @@
 #include "CSearch.h"
 
 CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
+    : searchMode(searchMode)
 {
-    this->searchMode=searchMode;
-
     const QStringList& sections = searchstring.split(",");
     for(const QString& currentSection : sections)
     {
-        search_t newSearch;
-        if(currentSection.simplified()=="")
+        if(currentSection.simplified().isEmpty())
         {
             continue;
         }
 
-        QString searchTypeKeyword = "";
+        QString searchTypeKeyword;
         for(QString& key:keywordSearchTypeMap.keys())
         {
             if(currentSection.contains(key,Qt::CaseInsensitive))
@@ -40,7 +38,8 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
                 break;
             }
         }
-        if(searchTypeKeyword == "")
+        search_t newSearch;
+        if(searchTypeKeyword.isEmpty())
         {
             //Search for what the user typed in the name or the full text
             newSearch.searchType=eSearchTypeWith;
@@ -62,15 +61,15 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
             QString filterValueString = currentSection.section(searchTypeKeyword,1,-1,QString::SectionCaseInsensitiveSeps).simplified();
             searchValue_t filterValue;
 
-//Try if it is a time
-            QList<QString> timeFormats = {
+            //Try if it is a time
+            const static QList<QString> timeFormats = {
                 QLocale::system().timeFormat(QLocale::LongFormat),
                 QLocale::system().timeFormat(QLocale::ShortFormat),
                 QLocale::c().timeFormat(QLocale::LongFormat),
                 QLocale::c().timeFormat(QLocale::ShortFormat)
             };
 
-            for(QString tf:timeFormats)
+            for(const QString& tf:timeFormats)
             {
                 QTime time1 = QLocale::system().toTime(filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified(),tf);
                 if(time1.isValid())
@@ -87,10 +86,10 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
                 }
             }
 
-            if(filterValue.toString()=="")
+            if(filterValue.toString().isEmpty())
             {
                 //Try if it is a date
-                QList<QString> dateFormats = {
+                const static QList<QString> dateFormats = {
                     QLocale::system().dateTimeFormat(QLocale::LongFormat),
                     QLocale::system().dateTimeFormat(QLocale::ShortFormat),
                     QLocale::c().dateTimeFormat(QLocale::LongFormat),
@@ -101,7 +100,7 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
                     QLocale::c().dateFormat(QLocale::ShortFormat)
                 };
 
-                for(QString df:dateFormats)
+                for(const QString& df:dateFormats)
                 {
                     QDateTime time1 = QLocale::system().toDateTime(filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified(),df);
                     if(time1.isValid())
@@ -118,7 +117,7 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
                     }
                 }
             }
-            if(filterValue.toString()=="")
+            if(filterValue.toString().isEmpty())
             {
                 //Match speeds and distances
                 const static QString capNum = "(?:[^\\.\\d\\/\\:])(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
@@ -162,11 +161,12 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
 bool CSearch::getSearchResult(IGisItem *item)
 {
     bool passed = true;
-    for(search_t search:searches)
+    //No const search_t& to avoid multiple unit conversions
+    for(search_t& search:searches)
     {
         if(searchTypeLambdaMap.contains(search.searchType))
         {
-            searchValue_t itemFilterValue = *(dynamic_cast<IGisItem*>(item)->getValueByKeyword(search.property));
+            searchValue_t itemFilterValue = *((item)->getValueByKeyword(search.property));
             passed = searchTypeLambdaMap.value(search.searchType)(itemFilterValue,search.searchValue);
             if(!passed)
             {

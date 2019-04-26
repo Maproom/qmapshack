@@ -355,7 +355,7 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         }
         else if(searchValue.str1 != "")
         {
-            return itemValue.str1 == searchValue.str1;
+            return itemValue.str1.toUpper() == searchValue.str1.toUpper();
         }
         return false;
     });
@@ -408,11 +408,11 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
     map.insert(eSearchTypeWith, [](const searchValue_t& itemValue, searchValue_t& searchValue){
         if(searchValue.str1 != "")
         {
-            return itemValue.toString().contains(searchValue.str1);
+            return itemValue.toString().contains(searchValue.str1,Qt::CaseInsensitive);
         }
         else
         {
-            return itemValue.toString().contains(QString::number(searchValue.value1));
+            return itemValue.toString().contains(QString::number(searchValue.value1),Qt::CaseInsensitive);
         }
 
         return false;
@@ -420,11 +420,11 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
     map.insert(eSearchTypeWithout, [](const searchValue_t& itemValue, searchValue_t& searchValue){
         if(searchValue.str1 != "")
         {
-            return !itemValue.toString().contains(searchValue.str1);
+            return !itemValue.toString().contains(searchValue.str1,Qt::CaseInsensitive);
         }
         else
         {
-            return !itemValue.toString().contains(QString::number(searchValue.value1));
+            return !itemValue.toString().contains(QString::number(searchValue.value1),Qt::CaseInsensitive);
         }
 
         return false;

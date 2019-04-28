@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -104,6 +105,8 @@ public:
         quint32 totalTime = 0;
         qreal ascent  = NOFLOAT;
         qreal descent = NOFLOAT;
+        qint32 minElevation = NOINT;
+        qint32 maxElevation = -NOINT;
     };
 
     CGisItemRte(const QDomNode &xml, IGisProject *parent);
@@ -219,6 +222,8 @@ public:
 
     bool isCalculated();
 
+    const QSharedPointer<searchValue_t> getValueByKeyword(searchProperty_e keyword) override;
+
 private:
     void deriveSecondaryData();
     void setElevation(qreal ele, subpt_t &subpt, qreal &lastEle);
@@ -241,6 +246,10 @@ private:
     const subpt_t * mouseMoveFocus = nullptr;
 
     QPointer<CScrOptRte>  scrOpt;
+
+    using fSearch = std::function<const QSharedPointer<searchValue_t> (CGisItemRte*)>;
+    static QMap<searchProperty_e,fSearch > keywordLambdaMap;
+    static QMap<searchProperty_e,fSearch > initKeywordLambdaMap();
 };
 
 #endif //CGISITEMRTE_H

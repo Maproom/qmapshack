@@ -58,24 +58,26 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
     setupUi(this);
 
     lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
+    lineFilter->addAction(actionHelp,QLineEdit::TrailingPosition);
     lineFilter->addAction(actionSetupFilter, QLineEdit::LeadingPosition);
 
     treeWks->setExternalMenu(menuProject);
 
     SETTINGS;
     treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
-    IGisProject::filterMode = IGisProject::filter_mode_e(cfg.value("Workspace/projects/filterMode", IGisProject::filterMode).toInt());
+    IGisProject::searchMode = CSearch::search_mode_e(cfg.value("Workspace/projects/filterMode", IGisProject::searchMode).toInt());
 
     connect(treeWks, &CGisListWks::sigChanged, this, &CGisWorkspace::sigChanged);
     connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWorkspace::slotSetGisLayerOpacity);
-    connect(lineFilter, &QLineEdit::textChanged, this, &CGisWorkspace::slotFilter);
-    connect(actionSetupFilter, &QAction::triggered, this, &CGisWorkspace::slotSetupFilter);
+    connect(lineFilter, &QLineEdit::textChanged, this, &CGisWorkspace::slotSearch);
+    connect(actionSetupFilter, &QAction::triggered, this, &CGisWorkspace::slotSetupSearch);
     connect(treeWks, &CGisListWks::itemPressed, this, &CGisWorkspace::slotWksItemPressed);
     connect(treeWks, &CGisListWks::itemSelectionChanged, this, &CGisWorkspace::slotWksItemSelectionChanged);
     connect(treeWks, &CGisListWks::sigItemDeleted, this, &CGisWorkspace::slotWksItemSelectionChanged);
 
-    connect(actionNameOnly, &QAction::triggered, this, &CGisWorkspace::slotFilterNameOnly);
-    connect(actionCompleteText, &QAction::triggered, this, &CGisWorkspace::slotFilterCompleteText);
+    connect(actionNameOnly, &QAction::triggered, this, &CGisWorkspace::slotSearchNameOnly);
+    connect(actionCompleteText, &QAction::triggered, this, &CGisWorkspace::slotSearchCompleteText);
+    connect(actionHelp, &QAction::triggered, this, &CGisWorkspace::slotSearchHelp);
 
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
     //              is up and running.
@@ -86,7 +88,7 @@ CGisWorkspace::~CGisWorkspace()
 {
     SETTINGS;
     cfg.setValue("Workspace/treeWks/state", treeWks->header()->saveState());
-    cfg.setValue("Workspace/projects/filterMode", IGisProject::filterMode);
+    cfg.setValue("Workspace/projects/filterMode", IGisProject::searchMode);
     /*
         Explicitly delete workspace here, as database projects use
         CGisWorkspace upon destruction to signal the database their destruction.
@@ -140,12 +142,12 @@ void CGisWorkspace::slotSetGisLayerOpacity(int val)
     }
 }
 
-void CGisWorkspace::applyFilter()
+void CGisWorkspace::applySearch()
 {
-    slotFilter(lineFilter->text());
+    slotSearch(lineFilter->text());
 }
 
-void CGisWorkspace::slotFilter(const QString& str)
+void CGisWorkspace::slotSearch(const QString& str)
 {
     actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
 
@@ -170,7 +172,7 @@ void CGisWorkspace::slotFilter(const QString& str)
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CGisWorkspace::slotSetupFilter()
+void CGisWorkspace::slotSetupSearch()
 {
     QMenu * menu = new QMenu(lineFilter);
     menu->addSection(tr("Apply filter to"));
@@ -181,19 +183,25 @@ void CGisWorkspace::slotSetupFilter()
     actionGroup->addAction(actionNameOnly);
     actionGroup->addAction(actionCompleteText);
 
-    switch(IGisProject::filterMode)
+    switch(IGisProject::searchMode)
     {
-    case IGisProject::eFilterModeName:
+    case CSearch::eSearchModeName:
         actionNameOnly->setChecked(true);
         break;
 
-    case IGisProject::eFilterModeText:
+    case CSearch::eSearchModeText:
         actionCompleteText->setChecked(true);
         break;
     }
 
     menu->move(lineFilter->parentWidget()->mapToGlobal(lineFilter->geometry().topLeft()));
     menu->exec();
+}
+
+void CGisWorkspace::slotSearchHelp()
+{
+    CSearchExplanationDialog dlg(treeWks);
+    dlg.exec();
 }
 
 void CGisWorkspace::slotSaveAll()
@@ -258,21 +266,21 @@ void CGisWorkspace::slotWksItemSelectionReset()
     }
 }
 
-void CGisWorkspace::slotFilterNameOnly(bool yes)
+void CGisWorkspace::slotSearchNameOnly(bool yes)
 {
     if(yes)
     {
-        IGisProject::filterMode = IGisProject::eFilterModeName;
-        applyFilter();
+        IGisProject::searchMode = CSearch::eSearchModeName;
+        applySearch();
     }
 }
 
-void CGisWorkspace::slotFilterCompleteText(bool yes)
+void CGisWorkspace::slotSearchCompleteText(bool yes)
 {
     if(yes)
     {
-        IGisProject::filterMode = IGisProject::eFilterModeText;
-        applyFilter();
+        IGisProject::searchMode = CSearch::eSearchModeText;
+        applySearch();
     }
 }
 

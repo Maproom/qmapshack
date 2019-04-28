@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,119 +45,6 @@
 #define WPT_FOCUS_DIST_IN   (50*50)
 #define WPT_FOCUS_DIST_OUT  (200*200)
 
-namespace
-{
-// helper to declutter and draw clusters of track info points
-class cluster
-{
-public:
-    cluster(int number, const QRect& r) : box(r)
-    {
-        elements.append({number});
-    }
-    int size() const {return elements.size();}
-
-    static void addToCluster(const QRect& r, QList<cluster>& clusters, int number)
-    {
-        for(cluster& cluster : clusters)
-        {
-            if(cluster.box.intersects(r))
-            {
-                cluster.box &= r;
-                cluster.elements.append(number);
-                return;
-            }
-        }
-        clusters.append({number,r});
-    }
-
-    static void draw(const QList<cluster>&clusters, QPainter& p, int size)
-    {
-        for(const cluster& cluster : clusters)
-        {
-            const int N = cluster.size();
-            if(N >= MAX_CONST_SIZE)
-            {
-                continue;
-            }
-
-            const QPointF* constellation = constellations[N];
-            for(int n = 0; n < N; n++)
-            {
-                CDraw::number(cluster.elements[n], size, p, cluster.box.center() + constellation[n] * size, Qt::black);
-            }
-        }
-    }
-
-private:
-    QRect box;
-    QList<int> elements;
-
-    static const QPointF point1[];
-    static const QPointF point2[];
-    static const QPointF point3[];
-    static const QPointF point4[];
-    static const QPointF point5[];
-    static const QPointF point6[];
-    static const QPointF point7[];
-    static const QPointF point8[];
-    static const QPointF point9[];
-
-    static constexpr int MAX_CONST_SIZE = 9;
-    static const QPointF * constellations[MAX_CONST_SIZE];
-};
-
-const QPointF cluster::point1[] = {
-    {0,0}
-};
-
-const QPointF cluster::point2[] = {
-    {-0.5,0}, {0.5,0}
-};
-
-const QPointF cluster::point3[] = {
-    {  -1,0}, {  0,0}, {1,0}
-};
-
-const QPointF cluster::point4[] = {
-    {-1,-0.5}, {0,-0.5}, {1,-0.5},
-    {-1, 0.5}
-};
-
-const QPointF cluster::point5[] = {
-    {-1,-0.5}, {0,-0.5}, {1,-0.5},
-    {-1, 0.5}, {0, 0.5}
-};
-
-const QPointF cluster::point6[] = {
-    {-1,-0.5}, {0,-0.5}, {1,-0.5},
-    {-1, 0.5}, {0, 0.5}, {1, 0.5}
-};
-
-const QPointF cluster::point7[] = {
-    {-1,-1}, {0,-1}, {1,-1},
-    {-1, 0}, {0, 0}, {1, 0},
-    {-1, 1}
-};
-
-const QPointF cluster::point8[] = {
-    {-1,-1}, {0,-1}, {1,-1},
-    {-1, 0}, {0, 0}, {1, 0},
-    {-1, 1}, {0, 1}
-};
-
-const QPointF cluster::point9[] = {
-    {-1,-1}, {0,-1}, {1,-1},
-    {-1, 0}, {0, 0}, {1, 0},
-    {-1, 1}, {0, 1}, {1, 1}
-};
-
-const QPointF * cluster::constellations[MAX_CONST_SIZE] =
-{
-    point1, point2, point3, point4, point5, point6, point7, point8, point9
-};
-
-
 struct trkwpt_t
 {
     QString name;
@@ -164,7 +52,6 @@ struct trkwpt_t
     qreal y = 0;
     IGisItem::key_t key;
 };
-}
 
 IGisItem::key_t CGisItemTrk::keyUserFocus;
 
@@ -1254,7 +1141,7 @@ void CGisItemTrk::deriveSecondaryData()
 
     setupInterpolation(interp.valid, interp.Q);
 
-    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct|eVisualTrkTable|eVisualTrkInfo, "deriveSecondaryData()");
+    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct|eVisualTrkTable, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";
 //    qDebug() << "allValidFlags" << hex << allValidFlags;
@@ -1278,24 +1165,17 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
     bool withDoubles = project->getSortingRoadbook() != IGisProject::eSortRoadbookTrackWithoutDouble;
 
-
-    qreal north = -90 * DEG_TO_RAD;
-    qreal south = 90 * DEG_TO_RAD;
-    qreal west = 180 * DEG_TO_RAD;
-    qreal east = -180 * DEG_TO_RAD;
     QVector<pointDP> line;
     // combine all segments to a single line
     for(CTrackData::trkpt_t& pt : trk)
     {
         pt.keyWpt.clear();
+        if(pt.isHidden())
+        {
+            continue;
+        }
         pointDP dp(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD, 0);
-        dp.idx = pt.idxTotal;
-
-        north = qMax(north, dp.y);
-        south = qMin(south, dp.y);
-        west = qMin(west, dp.x);
-        east = qMax(east, dp.x);
-
+        dp.idx = pt.idxVisible;
         line << dp;
     }
 
@@ -1303,9 +1183,6 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
     {
         return;
     }
-
-    constexpr qreal OFFSET = 0.1 * DEG_TO_RAD;
-    QRectF _boundingRect(QPointF(west - OFFSET, north + OFFSET), QPointF(east + OFFSET, south - OFFSET));
 
     // convert coordinates of all waypoints into meter coordinates relative to the first track point
     point3D pt0 = line[0];
@@ -1318,7 +1195,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             continue;
         }
 
-        if(!_boundingRect.contains(wpt->getBoundingRect().topLeft()))
+        if(!boundingRect.contains(wpt->getBoundingRect().topLeft()))
         {
             continue;
         }
@@ -1347,7 +1224,6 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         pt1.y = qSin(a1 * DEG_TO_RAD) * d;
     }
 
-    bool doDeriveData = false;
     numberOfAttachedWpt = 0;
     for(const trkwpt_t &trkwpt : trkwpts)
     {
@@ -1369,16 +1245,11 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             }
             else if(withDoubles && (d > WPT_FOCUS_DIST_OUT))
             {
-                CTrackData::trkpt_t * trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByTotalIndex(index));
+                CTrackData::trkpt_t * trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByVisibleIndex(index));
                 if(trkpt)
                 {
                     ++numberOfAttachedWpt;
                     trkpt->keyWpt = trkwpt.key;
-                    if(trkpt->isHidden())
-                    {
-                        trkpt->unsetFlag(CTrackData::trkpt_t::eFlagHidden);
-                        doDeriveData = true;
-                    }
                 }
 
                 index = NOIDX;
@@ -1394,24 +1265,15 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
         if(index != NOIDX)
         {
-            CTrackData::trkpt_t * trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByTotalIndex(index));
+            CTrackData::trkpt_t * trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByVisibleIndex(index));
             if(trkpt)
             {
                 ++numberOfAttachedWpt;
                 trkpt->keyWpt = trkwpt.key;
-                if(trkpt->isHidden())
-                {
-                    trkpt->unsetFlag(CTrackData::trkpt_t::eFlagHidden);
-                    doDeriveData = true;
-                }
             }
         }
     }
 
-    if(doDeriveData)
-    {
-        deriveSecondaryData();
-    }
     updateVisuals(eVisualDetails|eVisualPlot, "findWaypointsCloseBy()");
 }
 
@@ -1558,49 +1420,6 @@ bool CGisItemTrk::cut()
     return askToDeleteOriginal;
 }
 
-bool CGisItemTrk::addTrkPtDesc()
-{
-    if(nullptr == mouseClickFocus)
-    {
-        return false;
-    }
-
-    const QString& desc = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(),tr("Track Point Info..."),
-                                                tr("Enter some text to be attached to this track point:"));
-
-    if(desc.isEmpty())
-    {
-        return false;
-    }
-
-    if(trk.setTrkPtDesc(mouseClickFocus->idxTotal, desc))
-    {
-        changed(tr("Add track point desc.: %1").arg(desc), "://icons/48x48/I.png");
-        return true;
-    }
-    return false;
-}
-
-bool CGisItemTrk::setTrkPtDesc(int idxTotal, const QString& desc)
-{
-    if(trk.setTrkPtDesc(idxTotal, desc))
-    {
-        changed(tr("Changed track point desc.: %1").arg(desc), "://icons/48x48/I.png");
-        return true;
-    }
-    return false;
-}
-
-bool CGisItemTrk::delTrkPtDesc(const QList<int>& idxTotal)
-{
-    if(trk.delTrkPtDesc(idxTotal))
-    {
-        changed(tr("Removed track point desc."), "://icons/48x48/DeleteMultiple.png");
-        return true;
-    }
-    return false;
-}
-
 void CGisItemTrk::reverse()
 {
     QString name = getName() + "_rev";
@@ -1731,8 +1550,7 @@ void CGisItemTrk::hideSelectedPoints()
     // iterate over all segments and delete points between idx1 and idx2
     for(CTrackData::trkpt_t& trkpt : trk)
     {
-        if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2)
-           && trkpt.desc.isEmpty() && trkpt.keyWpt.item.isEmpty())
+        if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
         {
             trkpt.setFlag(CTrackData::trkpt_t::eFlagHidden);
         }
@@ -1796,7 +1614,6 @@ void CGisItemTrk::copySelectedPoints() const
 
     new CGisItemTrk(name, idx1, idx2, trk, project);
 }
-
 
 void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
@@ -1890,8 +1707,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     QList<QPolygonF> lines;
     splitLineToViewport(lineSimple, extViewport, lines);
 
-    const CMainWindow& w = CMainWindow::self();
-    if(key == keyUserFocus && w.isShowTrackHighlight())
+    if(key == keyUserFocus)
     {
         p.setPen(QPen(Qt::red, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         for(const QPolygonF &l : lines)
@@ -1939,10 +1755,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
 
     // -------------------------
-    bool skipDecorations = (!keyUserFocus.item.isEmpty() && (key != keyUserFocus));
+
     // draw min/max labels
-    if(w.isShowMinMaxTrackLabels() && !skipDecorations)
+    if(CMainWindow::self().isMinMaxTrackValues())
     {
+        if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
+        {
+            return;
+        }
+
         for(const QString& key : extrema.keys())
         {
             if(key == CKnownExtension::internalProgress)
@@ -1963,35 +1784,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
             p.setBrush(Qt::darkRed);
             p.drawEllipse(posMax, 5, 5);
         }
-    }
-
-    // draw info points
-    if(w.isShowTrackInfoPoints() && !skipDecorations)
-    {
-        const QFont& f  = w.getMapFont();
-        const int pointSize = f.pointSize();
-        const int size = (pointSize + (f.bold() ? 3 : 2)) * 2;
-        p.setFont(f);
-
-        quint32 cnt = 1;
-        QList<cluster> clusters;
-        for(const CTrackData::trkpt_t &trkpt : trk)
-        {
-            if(trkpt.desc.isEmpty() || trkpt.isHidden())
-            {
-                continue;
-            }
-
-            QPointF pos(trkpt.lon, trkpt.lat);
-            pos *= DEG_TO_RAD;
-            gis->convertRad2Px(pos);
-
-            QRect r(0,0,size,size);
-            r.moveCenter(pos.toPoint());
-            cluster::addToCluster(r, clusters, cnt++);
-        }
-
-        cluster::draw(clusters, p, size);
     }
 }
 
@@ -2237,19 +2029,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         // create trackpoint info text
         QString str = getInfoTrkPt(*mouseMoveFocus);
 
-        // search for track point information in the neighboring points
-        const int idxMin = qMax(mouseMoveFocus->idxTotal - 2,0);
-        const int idxMax = qMin(mouseMoveFocus->idxTotal + 3, cntTotalPoints);
-        for(int idx = idxMin; idx < idxMax; idx++)
-        {
-            const QString& desc = trk.getTrkPtByTotalIndex(idx)->desc;
-            if(!desc.isEmpty())
-            {
-                str += "\nInfo: " + desc;
-                break;
-            }
-        }
-
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
         QFontMetrics fm(f);
@@ -2355,8 +2134,7 @@ void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF&, QList<QRectF>& blocke
         return;
     }
 
-    const CMainWindow& w = CMainWindow::self();
-    if(w.isShowMinMaxTrackLabels())
+    if(CMainWindow::self().isMinMaxTrackValues())
     {
         for(const QString& key : extrema.keys())
         {
@@ -2487,7 +2265,8 @@ void CGisItemTrk::setLinks(const QList<link_t>& links)
 
 void CGisItemTrk::setElevation(qint32 idx, qint32 ele)
 {
-    CTrackData::trkpt_t * trkpt = trk.getTrkPtByTotalIndex(idx);
+    auto condition = [idx](const CTrackData::trkpt_t &pt) { return pt.idxTotal == idx; };
+    CTrackData::trkpt_t * trkpt = trk.getTrkPtByCondition(condition);
     if((trkpt != nullptr) && (trkpt->ele != ele))
     {
         trkpt->ele = ele;
@@ -2816,13 +2595,6 @@ void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
             visual->updateData();
         }
     }
-
-    const CMainWindow& main = CMainWindow::self();
-    const QList<CCanvas*>& allCanvas = main.getCanvas();
-    for(CCanvas * canvas : allCanvas)
-    {
-        canvas->slotUpdateTrackInfo(false);
-    }
 }
 
 void CGisItemTrk::setMouseFocusVisuals(const CTrackData::trkpt_t * pt)
@@ -2960,6 +2732,18 @@ void CGisItemTrk::getMouseRange(const CTrackData::trkpt_t * &mr1, const CTrackDa
     mr2 = mouseRange2;
 }
 
+const QSharedPointer<searchValue_t> CGisItemTrk::getValueByKeyword(searchProperty_e keyword)
+{
+    if(keywordLambdaMap.contains(keyword))
+    {
+        return keywordLambdaMap.value(keyword)(this);
+    }
+    else
+    {
+        return QSharedPointer<searchValue_t>  (new searchValue_t);
+    }
+}
+
 bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline)
 {
     qreal dist1 = GPS_Math_DistPointPolyline(lineSimple, pt1, threshold);
@@ -2989,3 +2773,103 @@ void CGisItemTrk::checkForInvalidPoints()
     }
 }
 
+
+QMap<searchProperty_e,CGisItemTrk::fSearch > CGisItemTrk::keywordLambdaMap = CGisItemTrk::initKeywordLambdaMap();
+QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
+{
+    QMap<searchProperty_e, CGisItemTrk::fSearch> map;
+
+    //General keywords
+    map.insert(eSearchPropertyGeneralName,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->trk.name;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralFullText,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralElevation,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->getMin(CKnownExtension::internalEle);
+        searchValue->str1 = CKnownExtension::get(CKnownExtension::internalEle).unit;
+        searchValue->value2 = item->getMax(CKnownExtension::internalEle);
+        searchValue->str2 = CKnownExtension::get(CKnownExtension::internalEle).unit;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDate,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->timeStart.toSecsSinceEpoch();
+        searchValue->str1 = "SsE";
+        searchValue->value2 = item->timeEnd.toSecsSinceEpoch();
+        searchValue->str2 = "SsE";
+        return searchValue;
+    });
+    //Route / track keywords
+    map.insert(eSearchPropertyRteTrkDistance,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        IUnit::self().meter2distance(item->totalDistance,searchValue->value1,searchValue->str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkAscent,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        IUnit::self().meter2elevation(item->totalAscent,searchValue->value1,searchValue->str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkDescent,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        IUnit::self().meter2elevation(item->totalDescent,searchValue->value1,searchValue->str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkMinElevation,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->getMin(CKnownExtension::internalEle);
+        searchValue->str1 = CKnownExtension::get(CKnownExtension::internalEle).unit;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkMaxElevation,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->getMax(CKnownExtension::internalEle);
+        searchValue->str1 = CKnownExtension::get(CKnownExtension::internalEle).unit;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkMaxSpeed,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->getMax(CKnownExtension::internalSpeedDist);
+        searchValue->str1 = CKnownExtension::get(CKnownExtension::internalSpeedDist).unit;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkMinSpeed,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->getMin(CKnownExtension::internalSpeedDist);
+        searchValue->str1 = CKnownExtension::get(CKnownExtension::internalSpeedDist).unit;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkAvgSpeed,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        IUnit::self().meter2speed(item->totalDistance/item->totalElapsedSecondsMoving,searchValue->value1,searchValue->str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkActivity,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        QStringList strL;
+        item->activities.getActivityNames(strL);
+        searchValue->str1=strL.join(", ");
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkTotalTime,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->totalElapsedSeconds;
+        searchValue->str1="S";
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkTimeMoving,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->value1 = item->totalElapsedSecondsMoving;
+        searchValue->str1="S";
+        return searchValue;
+    });
+
+    return map;
+}

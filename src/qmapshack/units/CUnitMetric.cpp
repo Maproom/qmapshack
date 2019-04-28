@@ -38,6 +38,19 @@ void CUnitMetric::meter2elevation(qreal meter, QString& val, QString& unit) cons
     }
 }
 
+void CUnitMetric::meter2elevation(qreal meter, qreal& val, QString& unit) const /* override */
+{
+    if(meter == NOFLOAT || meter == NOINT)
+    {
+        val  = NOFLOAT;
+        unit.clear();
+    }
+    else
+    {
+        val = meter;
+        unit = "m";
+    }
+}
 
 void CUnitMetric::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
@@ -73,6 +86,24 @@ void CUnitMetric::meter2distance(qreal meter, QString& val, QString& unit) const
     }
 }
 
+void CUnitMetric::meter2distance(qreal meter, qreal& val, QString& unit) const /* override */
+{
+    if(meter == NOFLOAT)
+    {
+        val  = NOFLOAT;
+        unit.clear();
+    }
+    else if(meter < 1000)
+    {
+        val = meter;
+        unit = "m";
+    }
+    else
+    {
+        val = meter / 1000;
+        unit = "km";
+    }
+}
 
 void CUnitMetric::meter2speed(qreal meter, QString& val, QString& unit) const /* override */
 {
@@ -98,6 +129,30 @@ void CUnitMetric::meter2speed(qreal meter, QString& val, QString& unit) const /*
     }
 }
 
+void CUnitMetric::meter2speed(qreal meter, qreal& val, QString& unit) const /* override */
+{
+    if(meter == NOFLOAT)
+    {
+        val  = NOFLOAT;
+        unit.clear();
+    }
+    else if (meter < 0.27)
+    {
+        val = meter * speedfactor * 1000;
+        unit = "m/h";
+    }
+    else if (meter < 10.0)
+    {
+        val = meter * speedfactor;
+        unit = speedunit;
+    }
+    else
+    {
+        val = meter * speedfactor;
+        unit = speedunit;
+    }
+}
+
 void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit) const /* override */
 {
     if(meter == NOFLOAT)
@@ -113,6 +168,25 @@ void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit) const /* 
     else
     {
         val.sprintf("%1.2f", meter / 1000000);
+        unit = "km²";
+    }
+}
+
+void CUnitMetric::meter2area(qreal meter, qreal& val, QString& unit) const /* override */
+{
+    if(meter == NOFLOAT)
+    {
+        val  = NOFLOAT;
+        unit.clear();
+    }
+    else if(meter < 100000)
+    {
+        val = meter;
+        unit = "m²";
+    }
+    else
+    {
+        val = meter / 1000000;
         unit = "km²";
     }
 }

@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg   hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -61,7 +62,7 @@ const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; 
 
 QString IGisProject::keyUserFocus;
 
-IGisProject::filter_mode_e IGisProject::filterMode = IGisProject::eFilterModeName;
+CSearch::search_mode_e IGisProject::searchMode = CSearch::eSearchModeName;
 
 IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
@@ -1187,6 +1188,8 @@ void IGisProject::filter(const QString& str)
         return;
     }
 
+    CSearch searchObj (str,searchMode);
+
     for(int n = 0; n < N; n++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(n));
@@ -1195,16 +1198,7 @@ void IGisProject::filter(const QString& str)
             continue;
         }
 
-        switch(filterMode)
-        {
-        case eFilterModeName:
-            item->setHidden(!item->getName().toUpper().contains(str));
-            break;
-
-        case eFilterModeText:
-            item->setHidden(!item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText).toUpper().contains(str));
-            break;
-        }
+        item->setHidden(!searchObj.getSearchResult(item));//get search result returns wether the object matches
     }
 }
 

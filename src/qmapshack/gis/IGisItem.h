@@ -40,7 +40,8 @@ class IScrOpt;
 class IMouse;
 class QSqlDatabase;
 class IGisProject;
-
+struct searchValue_t;
+enum searchProperty_e : unsigned int;
 
 class IGisItem : public QTreeWidgetItem
 {
@@ -582,6 +583,8 @@ public:
         return colorMap;
     }
 
+    virtual const QSharedPointer<searchValue_t> getValueByKeyword(searchProperty_e keyword) = 0;
+
 protected:
     /// set icon of QTreeWidgetItem
     virtual void setSymbol() = 0;
@@ -645,7 +648,6 @@ protected:
 
     static QVector<color_t> colorMap;
 private:
-
     void showIcon();
 };
 

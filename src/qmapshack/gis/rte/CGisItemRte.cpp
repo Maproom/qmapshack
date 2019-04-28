@@ -1333,6 +1333,16 @@ QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
         IUnit::self().meter2elevation(item->rte.maxElevation,searchValue->value1,searchValue->str1);
         return searchValue;
     });
+    map.insert(eSearchPropertyGeneralComment,[](CGisItemRte* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getComment();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDescription,[](CGisItemRte* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getDescription();
+        return searchValue;
+    });
     map.insert(eSearchPropertyRteTrkDistance,[](CGisItemRte* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         IUnit::self().meter2distance(item->rte.totalDistance,searchValue->value1,searchValue->str1);

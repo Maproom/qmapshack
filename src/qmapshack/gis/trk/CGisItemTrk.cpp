@@ -1420,6 +1420,49 @@ bool CGisItemTrk::cut()
     return askToDeleteOriginal;
 }
 
+bool CGisItemTrk::addTrkPtDesc()
+{
+    if(nullptr == mouseClickFocus)
+    {
+        return false;
+    }
+
+    const QString& desc = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(),tr("Track Point Info..."),
+                                                tr("Enter some text to be attached to this track point:"));
+
+    if(desc.isEmpty())
+    {
+        return false;
+    }
+
+    if(trk.setTrkPtDesc(mouseClickFocus->idxTotal, desc))
+    {
+        changed(tr("Add track point desc.: %1").arg(desc), "://icons/48x48/I.png");
+        return true;
+    }
+    return false;
+}
+
+bool CGisItemTrk::setTrkPtDesc(int idxTotal, const QString& desc)
+{
+    if(trk.setTrkPtDesc(idxTotal, desc))
+    {
+        changed(tr("Changed track point desc.: %1").arg(desc), "://icons/48x48/I.png");
+        return true;
+    }
+    return false;
+}
+
+bool CGisItemTrk::delTrkPtDesc(const QList<int>& idxTotal)
+{
+    if(trk.delTrkPtDesc(idxTotal))
+    {
+        changed(tr("Removed track point desc."), "://icons/48x48/DeleteMultiple.png");
+        return true;
+    }
+    return false;
+}
+
 void CGisItemTrk::reverse()
 {
     QString name = getName() + "_rev";
@@ -1757,7 +1800,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     // -------------------------
 
     // draw min/max labels
-    if(CMainWindow::self().isMinMaxTrackValues())
+    if(CMainWindow::self().isShowMinMaxTrackLabels())
     {
         if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
         {
@@ -2134,7 +2177,7 @@ void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF&, QList<QRectF>& blocke
         return;
     }
 
-    if(CMainWindow::self().isMinMaxTrackValues())
+    if(CMainWindow::self().isShowMinMaxTrackLabels())
     {
         for(const QString& key : extrema.keys())
         {

@@ -573,6 +573,26 @@ QMap<searchProperty_e,CGisItemOvlArea::fSearch > CGisItemOvlArea::keywordLambdaM
 QMap<searchProperty_e, CGisItemOvlArea::fSearch> CGisItemOvlArea::initKeywordLambdaMap()
 {
     QMap<searchProperty_e, CGisItemOvlArea::fSearch> map;
+    map.insert(eSearchPropertyGeneralName,[](CGisItemOvlArea* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getName();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralFullText,[](CGisItemOvlArea* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralComment,[](CGisItemOvlArea* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getComment();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDescription,[](CGisItemOvlArea* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getDescription();
+        return searchValue;
+    });
     map.insert(eSearchPropertyAreaArea,[](CGisItemOvlArea* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->value1 = item->area.area;

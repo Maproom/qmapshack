@@ -129,27 +129,27 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
                 QRegExp numericArguments(capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNum + capIgnWS + capUnit,Qt::CaseInsensitive);
                 //Prepend whitespace to make sure regex works, as there is no lookbehind in qt
                 numericArguments.indexIn(filterValueString.prepend(' ').append(' '));
-                if(numericArguments.cap(0).simplified()!="")
+                if(numericArguments.cap(0).simplified() != "")
                 {
-                    if(numericArguments.cap(1)!="") //to avoid removal of NOFLOAT
+                    if(numericArguments.cap(1) != "") //to avoid removal of NOFLOAT
                     {
                         filterValue.value1=numericArguments.cap(1).toFloat();
                     }
 
                     filterValue.str1=numericArguments.cap(2);
 
-                    if(numericArguments.cap(3)!="") //to avoid removal of NOFLOAT
+                    if(numericArguments.cap(3) != "") //to avoid removal of NOFLOAT
                     {
                         filterValue.value2=numericArguments.cap(3).toFloat();
                     }
 
                     filterValue.str2=numericArguments.cap(4);
                 }
-                else
-                {
-                    filterValue.str1 = filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified();
-                    filterValue.str2 = filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified();
-                }
+            }
+            if(filterValue.toString().isEmpty())
+            {
+                filterValue.str1 = filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified();
+                filterValue.str2 = filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified();
             }
             newSearch.searchValue=filterValue;
         }
@@ -200,7 +200,7 @@ void CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchV
 
 void CSearch::improveQuery(search_t &search)
 {
-    if(search.searchValue.str1!=""&&search.searchValue.str2==""&&search.searchValue.value1!=NOFLOAT)
+    if(search.searchValue.str1 != "" && search.searchValue.str2 == "" && search.searchValue.value1 != NOFLOAT)
     {
         //Assume they have the same unit
         search.searchValue.str2=search.searchValue.str1;
@@ -218,7 +218,7 @@ void CSearch::improveQuery(search_t &search)
 
     if(search.property == eSearchPropertyNoMatch)
     {
-        if(search.searchValue.str1.contains("/H")||search.searchValue.str1.contains("/S"))
+        if(search.searchValue.str1.contains("/H") || search.searchValue.str1.contains("/S"))
         {
             search.property = eSearchPropertyRteTrkAvgSpeed;
         }
@@ -242,10 +242,10 @@ void CSearch::improveQuery(search_t &search)
 
     if(search.property == eSearchPropertyGeneralDate)
     {
-        if(search.searchValue.value1!=NOFLOAT)
+        if(search.searchValue.value1 != NOFLOAT)
         {
             //Try to catch if user only entered a year. Not done in regular detecting as it could be a speed or so.
-            if(search.searchValue.value1<=QDateTime::currentDateTime().date().year()&&search.searchValue.value1>=1970)
+            if(search.searchValue.value1 <= QDateTime::currentDateTime().date().year() && search.searchValue.value1 >= 1970)
             {
                 search.searchValue.value1=QDateTime(QDate(search.searchValue.value1,1,1)).toSecsSinceEpoch();
             }
@@ -255,10 +255,10 @@ void CSearch::improveQuery(search_t &search)
                 search.searchValue.value1=QDateTime::fromSecsSinceEpoch(search.searchValue.value1).addYears(100).toSecsSinceEpoch();
             }
         }
-        if(search.searchValue.value1!=NOFLOAT)
+        if(search.searchValue.value1 != NOFLOAT)
         {
             //Try to catch if user only entered a year. Not done in regular detecting as it could be a speed or so.
-            if(search.searchValue.value2<=QDateTime::currentDateTime().date().year()&&search.searchValue.value2>=1970)
+            if(search.searchValue.value2 <= QDateTime::currentDateTime().date().year() && search.searchValue.value2 >= 1970)
             {
                 search.searchValue.value2=QDateTime(QDate(search.searchValue.value2,0,0)).toSecsSinceEpoch();
             }
@@ -311,6 +311,8 @@ QMap<QString,searchProperty_e> CSearch::initSearchPropertyEnumMap()
     map.insert(tr("full text").toUpper(),eSearchPropertyGeneralFullText);
     map.insert(tr("elevation").toUpper(),eSearchPropertyGeneralElevation);
     map.insert(tr("date").toUpper(),eSearchPropertyGeneralDate);
+    map.insert(tr("comment").toUpper(),eSearchPropertyGeneralComment);
+    map.insert(tr("description").toUpper(),eSearchPropertyGeneralDescription);
 
     //Area keywords
     map.insert(tr("area").toUpper(),eSearchPropertyAreaArea);
@@ -374,7 +376,7 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
             }
             else
             {
-                return qMax(itemValue.value1,itemValue.value2)<searchValue.value1;
+                return qMax(itemValue.value1,itemValue.value2) < searchValue.value1;
             }
         }
         return false;
@@ -389,7 +391,7 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
             }
             else
             {
-                return qMin(itemValue.value1,itemValue.value2)>searchValue.value1;
+                return qMin(itemValue.value1,itemValue.value2) > searchValue.value1;
             }
         }
         return false;

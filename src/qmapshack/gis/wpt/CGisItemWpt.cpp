@@ -1179,7 +1179,17 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     map.insert(eSearchPropertyGeneralDate,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
         searchValue->value1 = item->wpt.time.toSecsSinceEpoch();
-        searchValue->str1 = "SsE";
+        searchValue->str1 = "SsE"; //To differentiate Dates and Durations
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralComment,[](CGisItemWpt* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getComment();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDescription,[](CGisItemWpt* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getDescription();
         return searchValue;
     });
     //Geocache keywords

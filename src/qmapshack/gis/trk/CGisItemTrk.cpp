@@ -2849,6 +2849,16 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
         searchValue->str2 = "SsE";
         return searchValue;
     });
+    map.insert(eSearchPropertyGeneralComment,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getComment();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDescription,[](CGisItemTrk* item){
+        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue->str1 = item->getDescription();
+        return searchValue;
+    });
     //Route / track keywords
     map.insert(eSearchPropertyRteTrkDistance,[](CGisItemTrk* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);

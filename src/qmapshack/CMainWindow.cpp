@@ -423,7 +423,8 @@ CMainWindow::CMainWindow()
                      << actionToggleDocks
                      << actionToggleToolBar
                      << actionFullScreen
-                     << actionStartQMapTool;
+                     << actionStartQMapTool
+                     << actionRenameView;
 
     QAction * separator1 = new QAction("---------------",this);
     separator1->setSeparator(true);

@@ -120,13 +120,14 @@ CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
             if(filterValue.toString().isEmpty())
             {
                 //Match speeds and distances
-                const static QString capNum = "(?:[^\\.\\d\\/\\:])(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
+                const static QString capNum = "(?:[^\\.\\d\\/\\:])(\\d+\\.?\\d*)(?![\\.\\d\\/\\:])";
+                const static QString capNumOpt = "(?:[^\\.\\d\\/\\:])(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
                 const static QString capIgnWS = "(?:\\s*)"; //Ignore Whitespaces
                 //Capture only distances and speeds. Times get handled by QDateTime. QT does not support lookbehind
                 const static QString capUnit = "(m|km|mi|ft|ml|m\\/h|km\\/h|mi\\/h|ft\\/h|ml\\/h|h|min|s)?";
                 const static QString capIgnAnd =  "(?:" + tr("and") + ")?";
                 //The second number, the units and the "and" are optional
-                QRegExp numericArguments(capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNum + capIgnWS + capUnit,Qt::CaseInsensitive);
+                QRegExp numericArguments(capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit,Qt::CaseInsensitive);
                 //Prepend whitespace to make sure regex works, as there is no lookbehind in qt
                 numericArguments.indexIn(filterValueString.prepend(' ').append(' '));
                 if(numericArguments.cap(0).simplified() != "")
@@ -440,7 +441,8 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
     map.insert(eSearchTypeRegEx, [](const searchValue_t& itemValue, searchValue_t& searchValue){
         if( searchValue.str1 != "")
         {
-            return itemValue.str1.contains(QRegExp(searchValue.str1));
+            //toUpper() since searches are handled in upper case
+            return itemValue.str1.toUpper().contains(QRegExp(searchValue.str1));
         }
         return false;
     });

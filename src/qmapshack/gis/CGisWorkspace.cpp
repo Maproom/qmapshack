@@ -57,6 +57,10 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
     pSelf = this;
     setupUi(this);
 
+    CSearchCompleter* completer = new CSearchCompleter(new CSearchModel(this),this);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+    completer->setSeparator(" ");
+    lineFilter->setCompleter(completer);
     lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
     lineFilter->addAction(actionHelp,QLineEdit::TrailingPosition);
     lineFilter->addAction(actionSetupFilter, QLineEdit::LeadingPosition);

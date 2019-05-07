@@ -140,6 +140,8 @@ set( SRCS
     gis/search/CGeoSearchConfig.cpp
     gis/search/CGeoSearchConfigDialog.cpp
     gis/search/CSearchExplanationDialog.cpp
+    gis/search/CSearchCompleter.cpp
+    gis/search/CSearchModel.cpp
     gis/search/CGeoSearchWeb.cpp
     gis/search/CGeoSearchWebConfigDialog.cpp
     gis/slf/CSlfProject.cpp
@@ -478,6 +480,8 @@ set( HDRS
     gis/search/CGeoSearchWeb.h
     gis/search/CGeoSearchWebConfigDialog.h
     gis/search/CSearchExplanationDialog.h
+    gis/search/CSearchCompleter.h
+    gis/search/CSearchModel.h
     gis/slf/CSlfProject.h
     gis/slf/CSlfReader.h
     gis/summary/CGisSummary.h

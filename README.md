@@ -1,4 +1,4 @@
-You need a working mercurial, g++, cmake and QT5 (at least 5.4) installation to compile QMapShack on your computer. Clone and compile the code base by:
+Next to all dependencies you need a working mercurial, g++ and cmake installation to compile QMapShack on your computer. Clone and compile the code base by:
 
         hg clone https://bitbucket.org/maproom/qmapshack QMapShack
         mkdir build_QMapShack
@@ -18,9 +18,6 @@ And change back to build_QMapShack:
 As everything is better with a GUI you might want to have a look at [TortoiseHg](https://tortoisehg.bitbucket.io/).
 
 Dependencies
-
-Next to QT5 you will need the development packages of:
-
 
 * [Qt5](https://www.qt.io/) (at least 5.8)
 * [GDAL](http://www.gdal.org/)

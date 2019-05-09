@@ -28,7 +28,6 @@
 #include "db/IDBFolder.h"
 #include "gis/IGisItem.h"
 #include "gis/rte/router/IRouter.h"
-#include "gis/search/CSearchCompleter.h"
 #include "gis/search/CSearchExplanationDialog.h"
 
 class CGisDraw;

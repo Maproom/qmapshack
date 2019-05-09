@@ -2410,7 +2410,8 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
     qreal shortest = 20;        // shortest distance so far
 
     QPointF resPt = pt;
-    QString key, value;
+    QString key;
+    QStringList value;
     quint32 type = 0;
 
     bool found = false;
@@ -2454,15 +2455,25 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
             if(distance < shortest)
             {
                 type  = line.type;
-                value = line.hasLabel() ? line.getLabelText() : "-";
+                value.clear();
+                value << (line.hasLabel() ? line.getLabelText() : "-");
 
                 resPt.setX(x);
                 resPt.setY(y);
                 shortest = distance;
                 found = true;
             }
+            else if(distance == shortest)
+            {
+                if(line.hasLabel())
+                {
+                    value << line.getLabelText();
+                }
+            }
         }
     }
+
+    value.removeDuplicates();
 
     if(!found)
     {
@@ -2476,17 +2487,17 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
 
     if(!key.isEmpty())
     {
-        dict.insert(key + QString("(%1)").arg(type,2,16,QChar('0')),value);
+        dict.insert(key + QString("(%1)").arg(type,2,16,QChar('0')),value.join("\n"));
     }
     else
     {
         if(polylineProperties[type].strings.isEmpty())
         {
-            dict.insert(tr("Unknown") + QString("(%1)").arg(type,2,16,QChar('0')),value);
+            dict.insert(tr("Unknown") + QString("(%1)").arg(type,2,16,QChar('0')),value.join("\n"));
         }
         else
         {
-            dict.insert(polylineProperties[type].strings[0] + QString("(%1)").arg(type,2,16,QChar('0')),value);
+            dict.insert(polylineProperties[type].strings[0] + QString("(%1)").arg(type,2,16,QChar('0')),value.join("\n"));
         }
     }
 

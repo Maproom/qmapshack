@@ -34,7 +34,7 @@ struct searchValue_t //Outside of CSearch to avoid problem of nested type
     qreal value2 = NOFLOAT;
     QString str1 = "";
     QString str2 = "";
-    QString toString() const
+    QString toString(bool lowerCase = false) const
     {
         QString str;
         str.append(str1);
@@ -47,7 +47,15 @@ struct searchValue_t //Outside of CSearch to avoid problem of nested type
         {
             str.append(QString::number(value2));
         }
-        return str;
+
+        if(lowerCase)
+        {
+            return str.toLower();
+        }
+        else
+        {
+            return str;
+        }
     }
 };
 
@@ -119,7 +127,7 @@ public:
         searchValue_t searchValue;
     };
 
-    CSearch(QString searchstring, search_mode_e searchMode);
+    CSearch(QString searchstring);
 
     search_type_e getSearchType(QString keyword)
     {
@@ -138,12 +146,32 @@ public:
 
     bool getSearchResult(IGisItem * item);
 
+    static Qt::CaseSensitivity getCaseSensitivity()
+    {
+        return caseSensitivity;
+    }
+    static void setCaseSensitivity(const Qt::CaseSensitivity &value)
+    {
+        caseSensitivity=value;
+    }
+
+    static search_mode_e getSearchMode()
+    {
+        return searchMode;
+    }
+    static void setSearchMode(const search_mode_e &value)
+    {
+        searchMode = value;
+    }
+
 private:
+
+    static Qt::CaseSensitivity caseSensitivity;
+    static search_mode_e searchMode;
 
     static void adjustUnits(const searchValue_t &itemValue, searchValue_t &searchValue);
     static void improveQuery(search_t& search);
 
-    search_mode_e searchMode;
     QList<search_t> searches;
 
     static QMap<QString,search_type_e> keywordSearchTypeMap;

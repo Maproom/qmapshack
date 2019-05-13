@@ -160,6 +160,14 @@
     <string>help with searching</string>
    </property>
   </action>
+  <action name="actionCaseSensitive">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Case Sensitive</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

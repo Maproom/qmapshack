@@ -18,8 +18,10 @@
 
 #include "CSearch.h"
 
-CSearch::CSearch(QString searchstring, CSearch::search_mode_e searchMode)
-    : searchMode(searchMode)
+Qt::CaseSensitivity CSearch::caseSensitivity = Qt::CaseInsensitive;
+CSearch::search_mode_e CSearch::searchMode = CSearch::eSearchModeText;
+
+CSearch::CSearch(QString searchstring)
 {
     const QStringList& sections = searchstring.split(",");
     for(const QString& currentSection : sections)
@@ -207,35 +209,38 @@ void CSearch::improveQuery(search_t &search)
         search.searchValue.str2=search.searchValue.str1;
     }
 
-    if(search.searchValue.str1 == "MI")
+    if(search.searchValue.str1.compare("MI",Qt::CaseInsensitive) == 0)
     {
         search.searchValue.str1 = "ML"; //ml is used in CUnit
     }
 
-    if(search.searchValue.str2 == "MI")
+    if(search.searchValue.str2.compare("MI",Qt::CaseInsensitive) == 0)
     {
         search.searchValue.str2 = "ML"; //ml is used in CUnit
     }
 
     if(search.property == eSearchPropertyNoMatch)
     {
-        if(search.searchValue.str1.contains("/H") || search.searchValue.str1.contains("/S"))
+        if(search.searchValue.str1.contains("/H",Qt::CaseInsensitive) ||
+           search.searchValue.str1.contains("/S",Qt::CaseInsensitive))
         {
             search.property = eSearchPropertyRteTrkAvgSpeed;
         }
-        else if(search.searchValue.str1 == "KM" || search.searchValue.str1 == "MI" || search.searchValue.str1 == "ML")
+        else if(search.searchValue.str1.compare("KM",Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("ML",Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyRteTrkDistance;
         }
-        else if(search.searchValue.str1 == "M" || search.searchValue.str1 == "FT")
+        else if(search.searchValue.str1.compare("M",Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("FT",Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyGeneralElevation;
         }
-        else if(search.searchValue.str1 == "S")
+        else if(search.searchValue.str1.compare("S",Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyRteTrkTimeMoving;
         }
-        else if(search.searchValue.str1 == "SsE")
+        else if(search.searchValue.str1.compare("SsE",Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyGeneralDate;
         }
@@ -305,48 +310,47 @@ QMap<QString,CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
 QMap<QString,searchProperty_e> CSearch::searchPropertyEnumMap = CSearch::initSearchPropertyEnumMap();
 QMap<QString,searchProperty_e> CSearch::initSearchPropertyEnumMap()
 {
-    //Everything to upper since search comes in CAPS and we can't get value() case insensitive easily
     QMap<QString,searchProperty_e> map;
     //General keywords
-    map.insert(tr("name").toUpper(),eSearchPropertyGeneralName);
-    map.insert(tr("full text").toUpper(),eSearchPropertyGeneralFullText);
-    map.insert(tr("elevation").toUpper(),eSearchPropertyGeneralElevation);
-    map.insert(tr("date").toUpper(),eSearchPropertyGeneralDate);
-    map.insert(tr("comment").toUpper(),eSearchPropertyGeneralComment);
-    map.insert(tr("description").toUpper(),eSearchPropertyGeneralDescription);
+    map.insert(tr("name"),eSearchPropertyGeneralName);
+    map.insert(tr("full text"),eSearchPropertyGeneralFullText);
+    map.insert(tr("elevation"),eSearchPropertyGeneralElevation);
+    map.insert(tr("date"),eSearchPropertyGeneralDate);
+    map.insert(tr("comment"),eSearchPropertyGeneralComment);
+    map.insert(tr("description"),eSearchPropertyGeneralDescription);
 
     //Area keywords
-    map.insert(tr("area").toUpper(),eSearchPropertyAreaArea);
+    map.insert(tr("area"),eSearchPropertyAreaArea);
 
     //Geocache keywords
-    map.insert(tr("difficulty").toUpper(),eSearchPropertyGeocacheDifficulty);
+    map.insert(tr("difficulty"),eSearchPropertyGeocacheDifficulty);
     map.insert("D",eSearchPropertyGeocacheDifficulty);
-    map.insert(tr("terrain").toUpper(),eSearchPropertyGeocacheTerrain);
-    map.insert(tr("T").toUpper(),eSearchPropertyGeocacheTerrain);
-    map.insert(tr("attributes").toUpper(),eSearchPropertyGeocacheAttributes);
-    map.insert(tr("size").toUpper(),eSearchPropertyGeocacheSize);
+    map.insert(tr("terrain"),eSearchPropertyGeocacheTerrain);
+    map.insert(tr("T"),eSearchPropertyGeocacheTerrain);
+    map.insert(tr("attributes"),eSearchPropertyGeocacheAttributes);
+    map.insert(tr("size"),eSearchPropertyGeocacheSize);
 
     //Waypoint keywords
 
     //Route / track keywords
-    map.insert(tr("distance").toUpper(),eSearchPropertyRteTrkDistance);
-    map.insert(tr("length").toUpper(),eSearchPropertyRteTrkDistance);
-    map.insert(tr("ascent").toUpper(),eSearchPropertyRteTrkAscent);
-    map.insert(tr("elevation gain").toUpper(),eSearchPropertyRteTrkAscent);
-    map.insert(tr("descent").toUpper(),eSearchPropertyRteTrkDescent);
-    map.insert(tr("min elevation").toUpper(),eSearchPropertyRteTrkMinElevation);
-    map.insert(tr("minimal elevation").toUpper(),eSearchPropertyRteTrkMinElevation);
-    map.insert(tr("max elevation").toUpper(),eSearchPropertyRteTrkMaxElevation);
-    map.insert(tr("maximal elevation").toUpper(),eSearchPropertyRteTrkMaxElevation);
-    map.insert(tr("max speed").toUpper(),eSearchPropertyRteTrkMaxSpeed);
-    map.insert(tr("maximal speed").toUpper(),eSearchPropertyRteTrkMaxSpeed);
-    map.insert(tr("min speed").toUpper(),eSearchPropertyRteTrkMinSpeed);
-    map.insert(tr("minimal speed").toUpper(),eSearchPropertyRteTrkMinSpeed);
-    map.insert(tr("average speed").toUpper(),eSearchPropertyRteTrkAvgSpeed);
-    map.insert(tr("activity").toUpper(),eSearchPropertyRteTrkActivity);
-    map.insert(tr("total time").toUpper(),eSearchPropertyRteTrkTotalTime);
-    map.insert(tr("duration").toUpper(),eSearchPropertyRteTrkTotalTime);
-    map.insert(tr("time moving").toUpper(),eSearchPropertyRteTrkTimeMoving);
+    map.insert(tr("distance"),eSearchPropertyRteTrkDistance);
+    map.insert(tr("length"),eSearchPropertyRteTrkDistance);
+    map.insert(tr("ascent"),eSearchPropertyRteTrkAscent);
+    map.insert(tr("elevation gain"),eSearchPropertyRteTrkAscent);
+    map.insert(tr("descent"),eSearchPropertyRteTrkDescent);
+    map.insert(tr("min elevation"),eSearchPropertyRteTrkMinElevation);
+    map.insert(tr("minimal elevation"),eSearchPropertyRteTrkMinElevation);
+    map.insert(tr("max elevation"),eSearchPropertyRteTrkMaxElevation);
+    map.insert(tr("maximal elevation"),eSearchPropertyRteTrkMaxElevation);
+    map.insert(tr("max speed"),eSearchPropertyRteTrkMaxSpeed);
+    map.insert(tr("maximal speed"),eSearchPropertyRteTrkMaxSpeed);
+    map.insert(tr("min speed"),eSearchPropertyRteTrkMinSpeed);
+    map.insert(tr("minimal speed"),eSearchPropertyRteTrkMinSpeed);
+    map.insert(tr("average speed"),eSearchPropertyRteTrkAvgSpeed);
+    map.insert(tr("activity"),eSearchPropertyRteTrkActivity);
+    map.insert(tr("total time"),eSearchPropertyRteTrkTotalTime);
+    map.insert(tr("duration"),eSearchPropertyRteTrkTotalTime);
+    map.insert(tr("time moving"),eSearchPropertyRteTrkTimeMoving);
 
     return map;
 }
@@ -356,16 +360,7 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
 {
     QMap<CSearch::search_type_e, CSearch::fSearch> map;
     map.insert(eSearchTypeEquals, [](const searchValue_t& itemValue, searchValue_t& searchValue){
-        if(searchValue.value1 != NOFLOAT)
-        {
-            adjustUnits(itemValue, searchValue);
-            return itemValue.value1 == searchValue.value1;
-        }
-        else if(searchValue.str1 != "")
-        {
-            return itemValue.str1.toUpper() == searchValue.str1.toUpper();
-        }
-        return false;
+        return itemValue.toString() == searchValue.toString();
     });
     map.insert(eSearchTypeSmaller, [](const searchValue_t& itemValue, searchValue_t& searchValue){
         if(searchValue.value1 != NOFLOAT && itemValue.value1 != NOFLOAT)
@@ -414,37 +409,13 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         return false;
     });
     map.insert(eSearchTypeWith, [](const searchValue_t& itemValue, searchValue_t& searchValue){
-        if(searchValue.str1 != "")
-        {
-            return itemValue.toString().contains(searchValue.str1,Qt::CaseInsensitive);
-        }
-        else
-        {
-            return itemValue.toString().contains(QString::number(searchValue.value1),Qt::CaseInsensitive);
-        }
-
-        return false;
+        return itemValue.toString().contains(searchValue.toString(), CSearch::caseSensitivity);
     });
     map.insert(eSearchTypeWithout, [](const searchValue_t& itemValue, searchValue_t& searchValue){
-        if(searchValue.str1 != "")
-        {
-            return !itemValue.toString().contains(searchValue.str1,Qt::CaseInsensitive);
-        }
-        else
-        {
-            return !itemValue.toString().contains(QString::number(searchValue.value1),Qt::CaseInsensitive);
-        }
-
-        return false;
+        return !itemValue.toString().contains(searchValue.toString(), CSearch::caseSensitivity);
     });
-
     map.insert(eSearchTypeRegEx, [](const searchValue_t& itemValue, searchValue_t& searchValue){
-        if( searchValue.str1 != "")
-        {
-            //toUpper() since searches are handled in upper case
-            return itemValue.str1.toUpper().contains(QRegExp(searchValue.str1));
-        }
-        return false;
+        return itemValue.toString().contains(QRegExp(searchValue.toString()));
     });
     return map;
 }

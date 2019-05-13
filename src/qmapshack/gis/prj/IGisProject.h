@@ -121,8 +121,6 @@ public:
     static const QString filedialogSaveFilters;
     static const QString filedialogLoadFilters;
 
-    static CSearch::search_mode_e searchMode;
-
     IGisProject(type_e type, const QString &filename, CGisListWks *parent);
     IGisProject(type_e type, const QString &filename, IDevice     *parent);
     virtual ~IGisProject();

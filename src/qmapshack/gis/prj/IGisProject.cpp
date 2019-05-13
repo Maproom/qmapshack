@@ -62,8 +62,6 @@ const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; 
 
 QString IGisProject::keyUserFocus;
 
-CSearch::search_mode_e IGisProject::searchMode = CSearch::eSearchModeName;
-
 IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
     , type(type)
@@ -1188,7 +1186,7 @@ void IGisProject::filter(const QString& str)
         return;
     }
 
-    CSearch searchObj (str,searchMode);
+    CSearch searchObj (str);
 
     for(int n = 0; n < N; n++)
     {

@@ -450,6 +450,8 @@ private slots:
     void slotSearchNameOnly(bool yes);
     void slotSearchCompleteText(bool yes);
 
+    void slotCaseSensitive(bool yes);
+
 private:
     friend class CMainWindow;
     CGisWorkspace(QMenu * menuProject, QWidget * parent);

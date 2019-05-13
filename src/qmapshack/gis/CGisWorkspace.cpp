@@ -65,7 +65,8 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
 
     SETTINGS;
     treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
-    IGisProject::searchMode = CSearch::search_mode_e(cfg.value("Workspace/projects/filterMode", IGisProject::searchMode).toInt());
+    CSearch::setSearchMode(CSearch::search_mode_e(cfg.value("Workspace/projects/filterMode", CSearch::getSearchMode()).toInt()));
+    CSearch::setCaseSensitivity(Qt::CaseSensitivity(cfg.value("Workspace/projects/CaseSensitivity", CSearch::getCaseSensitivity()).toInt()));
 
     connect(treeWks, &CGisListWks::sigChanged, this, &CGisWorkspace::sigChanged);
     connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWorkspace::slotSetGisLayerOpacity);
@@ -77,6 +78,7 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
 
     connect(actionNameOnly, &QAction::triggered, this, &CGisWorkspace::slotSearchNameOnly);
     connect(actionCompleteText, &QAction::triggered, this, &CGisWorkspace::slotSearchCompleteText);
+    connect(actionCaseSensitive, &QAction::triggered, this, &CGisWorkspace::slotCaseSensitive);
     connect(actionHelp, &QAction::triggered, this, &CGisWorkspace::slotSearchHelp);
 
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
@@ -88,7 +90,8 @@ CGisWorkspace::~CGisWorkspace()
 {
     SETTINGS;
     cfg.setValue("Workspace/treeWks/state", treeWks->header()->saveState());
-    cfg.setValue("Workspace/projects/filterMode", IGisProject::searchMode);
+    cfg.setValue("Workspace/projects/filterMode", CSearch::getSearchMode());
+    cfg.setValue("Workspace/projects/CaseSensitivity", CSearch::getCaseSensitivity());
     /*
         Explicitly delete workspace here, as database projects use
         CGisWorkspace upon destruction to signal the database their destruction.
@@ -163,7 +166,7 @@ void CGisWorkspace::slotSearch(const QString& str)
             continue;
         }
 
-        item->filter(str.toUpper());
+        item->filter(str);
         item->setExpanded(!str.isEmpty());
     }
 
@@ -178,12 +181,14 @@ void CGisWorkspace::slotSetupSearch()
     menu->addSection(tr("Apply filter to"));
     menu->addAction(actionNameOnly);
     menu->addAction(actionCompleteText);
+    menu->addSection(tr("Case sensitivity"));
+    menu->addAction(actionCaseSensitive);
 
     QActionGroup* actionGroup = new QActionGroup(menu);
     actionGroup->addAction(actionNameOnly);
     actionGroup->addAction(actionCompleteText);
 
-    switch(IGisProject::searchMode)
+    switch(CSearch::getSearchMode())
     {
     case CSearch::eSearchModeName:
         actionNameOnly->setChecked(true);
@@ -194,6 +199,14 @@ void CGisWorkspace::slotSetupSearch()
         break;
     }
 
+    if(CSearch::getCaseSensitivity() == Qt::CaseSensitive)
+    {
+        actionCaseSensitive->setChecked(true);
+    }
+    else
+    {
+        actionCaseSensitive->setChecked(false);
+    }
     menu->move(lineFilter->parentWidget()->mapToGlobal(lineFilter->geometry().topLeft()));
     menu->exec();
 }
@@ -270,7 +283,7 @@ void CGisWorkspace::slotSearchNameOnly(bool yes)
 {
     if(yes)
     {
-        IGisProject::searchMode = CSearch::eSearchModeName;
+        CSearch::setSearchMode(CSearch::eSearchModeName);
         applySearch();
     }
 }
@@ -279,9 +292,22 @@ void CGisWorkspace::slotSearchCompleteText(bool yes)
 {
     if(yes)
     {
-        IGisProject::searchMode = CSearch::eSearchModeText;
+        CSearch::setSearchMode(CSearch::eSearchModeText);
         applySearch();
     }
+}
+
+void CGisWorkspace::slotCaseSensitive(bool yes)
+{
+    if(yes)
+    {
+        CSearch::setCaseSensitivity(Qt::CaseSensitive);
+    }
+    else
+    {
+        CSearch::setCaseSensitivity(Qt::CaseInsensitive);
+    }
+    applySearch();
 }
 
 void CGisWorkspace::slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trkact_t act)

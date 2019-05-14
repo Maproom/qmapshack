@@ -209,12 +209,12 @@ void CSearch::improveQuery(search_t &search)
         search.searchValue.str2=search.searchValue.str1;
     }
 
-    if(search.searchValue.str1.compare("MI",Qt::CaseInsensitive) == 0)
+    if(search.searchValue.value1 != NOFLOAT && search.searchValue.str1.compare("MI",Qt::CaseInsensitive) == 0)
     {
         search.searchValue.str1 = "ML"; //ml is used in CUnit
     }
 
-    if(search.searchValue.str2.compare("MI",Qt::CaseInsensitive) == 0)
+    if(search.searchValue.value2 != NOFLOAT && search.searchValue.str2.compare("MI",Qt::CaseInsensitive) == 0)
     {
         search.searchValue.str2 = "ML"; //ml is used in CUnit
     }
@@ -415,7 +415,14 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         return !itemValue.toString().contains(searchValue.toString(), CSearch::caseSensitivity);
     });
     map.insert(eSearchTypeRegEx, [](const searchValue_t& itemValue, searchValue_t& searchValue){
-        return itemValue.toString().contains(QRegExp(searchValue.toString()));
+        if(CSearch::caseSensitivity == Qt::CaseInsensitive)//There is no option to make regex caseinsensitive
+        {
+            return itemValue.toString().toLower().contains(QRegExp(searchValue.toString().toLower()));
+        }
+        else
+        {
+            return itemValue.toString().contains(QRegExp(searchValue.toString()));
+        }
     });
     return map;
 }

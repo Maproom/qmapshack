@@ -1205,7 +1205,7 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeocacheAttributes,[](CGisItemWpt* item){
         QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        for(qint8 attr : item->geocache.attributes)
+        for(qint8 attr : item->geocache.attributes.keys())
         {
             if(!item->geocache.attributes[attr])
             {

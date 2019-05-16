@@ -1907,7 +1907,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         p.drawPolyline(l);
         if(!isNogo() && showArrows.val().toBool())
         {
-            CDraw::arrows(l, extViewport, p, 10, 80, lineScale.val().toDouble());
+            CDraw::arrows(l, extViewport, p, 2, 80, lineScale.val().toDouble());
         }
     }
 

@@ -575,6 +575,7 @@ public:
         const QString label;
         const QColor color;
         const QString bullet;
+        const QString line;
     };
 
     static const QVector<color_t>& getColorMap()

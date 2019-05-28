@@ -67,8 +67,7 @@ public:
         qreal t1;
         qreal t2;
 
-        QString icon;
-        QString name;
+        trkact_t activity;
     };
 
     struct desc_t
@@ -78,6 +77,7 @@ public:
         QString iconLarge;
         QString iconSmall;
         QColor color;
+        QString line;
     };
 
 
@@ -131,11 +131,9 @@ public:
        This will change the track color of an activity globally for all tracks.
 
        @param act   the activity to select
-       @param color the color as a color string
+       @param color the color as IGisItem::color_t
      */
-    static void setColor(trkact_t act, const QString& color);
-
-
+    static void setColor(trkact_t act, const IGisItem::color_t &color);
 
     /**
        @brief Update internal summary array

@@ -109,10 +109,15 @@ void CSelectActivityColor::slotSetColor(QToolButton * button, trkact_t act)
         return;
     }
 
-    const QColor& color = IGisItem::getColorMap()[colorIdx].color;
+    const IGisItem::color_t& color = IGisItem::getColorMap()[colorIdx];
     QPixmap pixmap(16,16);
-    pixmap.fill(color);
+    pixmap.fill(color.color);
     button->setIcon(QIcon(pixmap));
 
-    CActivityTrk::setColor(act, color.name(QColor::HexRgb));
+    CActivityTrk::setColor(act, color);
+
+    if(trk != nullptr)
+    {
+        trk->updateVisuals(CGisItemTrk::eVisualDetails|CGisItemTrk::eVisualPlot|CGisItemTrk::eVisualProject|CGisItemTrk::eVisualTrkInfo, "CSelectActivityColor::slotSetColor()");
+    }
 }

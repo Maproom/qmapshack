@@ -1286,49 +1286,67 @@ void IPlot::drawActivities(QPainter& p)
 
     const QList<CActivityTrk::range_t>& ranges = trk->getActivities().getActivityRanges();
 
+    constexpr int bar_height    = 26;
+    constexpr int color_width   = 3;
+    constexpr int icon_frame    = 20;
+    constexpr int icon_size     = 16;
 
-    QRect rectClipping = QRect(0,0,right - left,22);
+    QRect rectClipping = QRect(0,0,right - left,27);
     p.save();
-    p.translate(left, bottom - 22);
-    p.setClipRect(rectClipping);
+    p.setClipping(true);
+    p.translate(left, bottom - bar_height);
     p.setBrush(QColor(0,170,0,100));
     p.setPen(Qt::NoPen);
     p.drawRect(rectClipping);
 
-    QRect rectIconFrame(0,0,20,20);
-    QRect rectIcon(2,2,16,16);
+    QRect rectIconFrame(0,0,icon_frame,icon_frame);
+    QRect rectIcon(0,0,icon_size,icon_size);
     for(const CActivityTrk::range_t& range : ranges)
     {
-        int x1, x2;
+        int x1, x2, y1 = 0;
+        const CTrackData::trkpt_t * trkpt = nullptr;
         if(data->axisType == CPlotData::eAxisTime)
         {
             x1 = data->x().val2pt(range.t1);
             x2 = data->x().val2pt(range.t2);
+            auto condition = [range](const CTrackData::trkpt_t &pt) { return pt.time.toTime_t() == range.t1; };
+            trkpt = trk->getTrackData().getTrkPtByCondition(condition);
         }
         else
         {
             x1 = data->x().val2pt(range.d1);
             x2 = data->x().val2pt(range.d2);
+
+            auto condition = [range](const CTrackData::trkpt_t &pt) { return pt.distance == range.d1; };
+            trkpt = trk->getTrackData().getTrkPtByCondition(condition);
+        }
+        if(trkpt != nullptr && !data->lines.isEmpty())
+        {
+            y1 = data->y().val2pt(data->lines[0].points[trkpt->idxVisible].y());
         }
 
-        p.setPen(QPen(Qt::darkGreen,2));
-        p.drawLine(x1, 0, x1, 20);
-        p.drawLine(x2, 0, x2, 20);
+        const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(range.activity);
+
 
         int d = (x2 - x1);
-        if(d < 20)
+        if(d >= 20)
         {
-            continue;
+            int c = x1 + d/2;
+
+            p.setPen(QPen(desc.color,1));
+            rectIconFrame.moveCenter(QPoint(c, icon_frame/2 + color_width));
+            p.setBrush(QColor(255, 255, 255, 100));
+            p.drawRoundedRect(rectIconFrame, RECT_RADIUS, RECT_RADIUS);
+
+            rectIcon.moveCenter(QPoint(c, icon_frame/2 + color_width));
+            p.drawPixmap(rectIcon, QPixmap(desc.iconSmall));
         }
 
-        int c = x1 + d/2;
+        p.setPen(QPen(Qt::darkGreen,1));
+        p.drawLine(x1, bar_height, x1, qMin(0, bar_height - y1));
 
-        rectIconFrame.moveCenter(QPoint(c,10));
-        p.setBrush(QColor(255, 255, 255, 100));
-        p.drawRoundedRect(rectIconFrame, RECT_RADIUS, RECT_RADIUS);
-
-        rectIcon.moveCenter(QPoint(c, 10));
-        p.drawPixmap(rectIcon, QPixmap(range.icon));
+        p.setPen(QPen(desc.color, color_width, Qt::SolidLine, Qt::FlatCap));
+        p.drawLine(x1, color_width/2, x2, color_width/2);
     }
 
     p.restore();

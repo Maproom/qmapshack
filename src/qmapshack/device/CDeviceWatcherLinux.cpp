@@ -174,7 +174,9 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path)
 #if defined(Q_OS_FREEBSD)
     for(const QVariant &arg : reply.arguments())
     {
-        points.append(arg.value<QDBusVariant>().variant().value<QStringList>().first());
+        if(!arg.value<QDBusVariant>().variant().value<QStringList>().isEmpty()) {
+            points.append(arg.value<QDBusVariant>().variant().value<QStringList>().first());
+        }
     }
 #else
     QList<QByteArray> list;

@@ -777,7 +777,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     quint32 nsubdivs_last = 0;
 
     // count subsections
-    for(quint32 i=0; i<nlevels; ++i)
+    for(quint32 i=0; i < nlevels; ++i)
     {
         maplevel_t ml;
         ml.inherited    = TRE_MAP_INHER(pMapLevel);
@@ -834,7 +834,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
     // parse all 16 byte subdivision entries
     quint32 i;
-    for(i=0; i<nsubdivs_next; ++i, --nsubdiv)
+    for(i=0; i < nsubdivs_next; ++i, --nsubdiv)
     {
         subdiv->n = i;
         subdiv->next         = gar_load(uint16_t, pSubDivN->next);
@@ -893,7 +893,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     // witch pointer to 14 byte subdivision sections
     tre_subdiv_t* pSubDivL = pSubDivN;
     // parse all 14 byte subdivision entries of last map level
-    for(; i<nsubdivs; ++i)
+    for(; i < nsubdivs; ++i)
     {
         subdiv->n = i;
         subdiv->next         = 0;
@@ -2410,7 +2410,8 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
     qreal shortest = 20;        // shortest distance so far
 
     QPointF resPt = pt;
-    QString key, value;
+    QString key;
+    QStringList value;
     quint32 type = 0;
 
     bool found = false;
@@ -2425,7 +2426,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
         }
 
         // see http://local.wasp.uwa.edu.au/~pbourke/geometry/pointline/
-        for(int i=1; i<len; ++i)
+        for(int i=1; i < len; ++i)
         {
             p1.u = line.pixel[i-1].x();
             p1.v = line.pixel[i-1].y();
@@ -2454,15 +2455,25 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
             if(distance < shortest)
             {
                 type  = line.type;
-                value = line.hasLabel() ? line.getLabelText() : "-";
+                value.clear();
+                value << (line.hasLabel() ? line.getLabelText() : "-");
 
                 resPt.setX(x);
                 resPt.setY(y);
                 shortest = distance;
                 found = true;
             }
+            else if(distance == shortest)
+            {
+                if(line.hasLabel())
+                {
+                    value << line.getLabelText();
+                }
+            }
         }
     }
+
+    value.removeDuplicates();
 
     if(!found)
     {
@@ -2476,17 +2487,17 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
 
     if(!key.isEmpty())
     {
-        dict.insert(key + QString("(%1)").arg(type,2,16,QChar('0')),value);
+        dict.insert(key + QString("(%1)").arg(type,2,16,QChar('0')),value.join("\n"));
     }
     else
     {
         if(polylineProperties[type].strings.isEmpty())
         {
-            dict.insert(tr("Unknown") + QString("(%1)").arg(type,2,16,QChar('0')),value);
+            dict.insert(tr("Unknown") + QString("(%1)").arg(type,2,16,QChar('0')),value.join("\n"));
         }
         else
         {
-            dict.insert(polylineProperties[type].strings[0] + QString("(%1)").arg(type,2,16,QChar('0')),value);
+            dict.insert(polylineProperties[type].strings[0] + QString("(%1)").arg(type,2,16,QChar('0')),value.join("\n"));
         }
     }
 

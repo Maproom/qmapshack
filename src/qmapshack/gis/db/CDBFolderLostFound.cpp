@@ -87,7 +87,7 @@ bool CDBFolderLostFound::update()
 void CDBFolderLostFound::expanding()
 {
     const int N = childCount();
-    for(int i=0; i<N; i++)
+    for(int i=0; i < N; i++)
     {
         CDBItem * item = dynamic_cast<CDBItem*>(child(i));
         if(item)

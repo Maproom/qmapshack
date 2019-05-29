@@ -1180,47 +1180,47 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
             subpt.type              = subpt_t::eTypeJunct;
             subpt.instruction       = xmlManeuver.firstChildElement("desc").text();
             const QString &command = xmlManeuver.firstChildElement("extensions").firstChildElement("turn").text(); // command
-            if(command=="TU")        // u-turn
+            if(command == "TU")        // u-turn
             {
                 subpt.bearing = 180;
             }
-            else if(command=="TSHL") // turn sharp left
+            else if(command == "TSHL") // turn sharp left
             {
                 subpt.bearing = -135;
             }
-            else if(command=="TL")   // turn left
+            else if(command == "TL")   // turn left
             {
                 subpt.bearing = -90;
             }
-            else if(command=="TSLL") // turn slight left
+            else if(command == "TSLL") // turn slight left
             {
                 subpt.bearing = -45;
             }
-            else if(command=="KL")   // keep left
+            else if(command == "KL")   // keep left
             {
                 subpt.bearing = 0;
             }
-            else if(command=="C")    // straight
+            else if(command == "C")    // straight
             {
                 subpt.bearing = 0;
             }
-            else if(command=="KR")   // keep right
+            else if(command == "KR")   // keep right
             {
                 subpt.bearing = 0;
             }
-            else if(command=="TSLR") // turn slight right
+            else if(command == "TSLR") // turn slight right
             {
                 subpt.bearing = 45;
             }
-            else if(command=="TR")   // turn right
+            else if(command == "TR")   // turn right
             {
                 subpt.bearing = 90;
             }
-            else if(command=="TSHR") // turn sharp right
+            else if(command == "TSHR") // turn sharp right
             {
                 subpt.bearing = 135;
             }
-            else if(command=="TRU")  // u-turn
+            else if(command == "TRU")  // u-turn
             {
                 subpt.bearing = 180;
             }

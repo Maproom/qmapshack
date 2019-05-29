@@ -451,7 +451,7 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
     }
     for(auto key: summary.keys())
     {
-        if(key!="Geocache")
+        if(key != "Geocache")
         {
             str+= QString::number(summary[key]) + " x " + key+ "<br/>";
         }
@@ -464,7 +464,7 @@ void CDetailsPrj::addIcon(QTextTable * table, int col, int row, const QPixmap& i
 {
     table->cellAt(row,col).firstCursorPosition().insertImage(icon.toImage().scaledToWidth(16, Qt::SmoothTransformation));
 
-    if(!(printable||isReadOnly))
+    if(!(printable || isReadOnly))
     {
         table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<p><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a></p>").arg(key));
     }
@@ -494,7 +494,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
 
             addIcon(table, eSym1, cnt, wpt->getDisplayIcon(), wpt->getKey().item, wpt->isReadOnly(), printable);
             table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(wpt->getInfo(IGisItem::eFeatureShowName));
-            table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly()||printable, wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
+            table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly() || printable, wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
             cnt++;
         }
 
@@ -553,7 +553,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
                 table1->cellAt(0,2).firstCursorPosition().insertImage(overview);
             }
 
-            table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly()||printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
+            table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly() || printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
 
             cnt++;
         }
@@ -792,7 +792,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
                 table1->cellAt(0,1).firstCursorPosition().insertImage(image);
             }
 
-            table->cellAt(cnt,eComment2).firstCursorPosition().insertHtml(IGisItem::createText(info.isReadOnly||printable, info.cmt, info.desc, info.links, info.key.item));
+            table->cellAt(cnt,eComment2).firstCursorPosition().insertHtml(IGisItem::createText(info.isReadOnly || printable, info.cmt, info.desc, info.links, info.key.item));
 
             cnt++;
         }
@@ -810,7 +810,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
         getTrackOverview(trk, overview);
         table1->cellAt(0,1).firstCursorPosition().insertImage(overview);
 
-        table->cellAt(cnt,eComment2).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly()||printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
+        table->cellAt(cnt,eComment2).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly() || printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
 
         cursor.setPosition(table->lastPosition() + 1);
     }
@@ -839,7 +839,7 @@ void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas,
 
         addIcon(table, eSym1, cnt, area->getDisplayIcon(), area->getKey().item, area->isReadOnly(), printable);
         table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(area->getInfo(IGisItem::eFeatureShowName));
-        table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly()||printable, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
+        table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly() || printable, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
         cnt++;
     }
 
@@ -869,7 +869,7 @@ void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte *> &rtes, CPr
 
         addIcon(table, eSym1, cnt, rte->getDisplayIcon(), rte->getKey().item, rte->isReadOnly(), printable);
         table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(rte->getInfo(IGisItem::eFeatureShowName));
-        table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(rte->isReadOnly()||printable, rte->getComment(), rte->getDescription(), rte->getLinks(), rte->getKey().item));
+        table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(rte->isReadOnly() || printable, rte->getComment(), rte->getDescription(), rte->getLinks(), rte->getKey().item));
         cnt++;
     }
 

@@ -77,7 +77,7 @@ void CGisItemTrk::filterReducePoints(qreal dist)
         }
         else
         {
-            if(!pt.isHidden())
+            if(!pt.isHidden() && pt.desc.isEmpty() && pt.keyWpt.item.isEmpty())
             {
                 nothingDone = false;
                 pt.setFlag(CTrackData::trkpt_t::eFlagHidden);
@@ -758,7 +758,7 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
     for(CTrackData::trkpt_t& pt : trk)
     {
         bool toBeHidden = trackPoints.takeFirst();
-        if (toBeHidden)
+        if (toBeHidden && pt.desc.isEmpty() && pt.keyWpt.item.isEmpty())
         {
             pt.setFlag(CTrackData::trkpt_t::eFlagHidden);
         }

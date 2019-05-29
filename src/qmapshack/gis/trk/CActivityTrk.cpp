@@ -32,7 +32,8 @@ QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
         , name \
         , "://icons/48x48/" icon \
         , "://icons/16x16/" icon \
-        , IGisItem::getColorMap()[qMax(colorIdx,IGisItem::eColorTransparent)].color \
+        , IGisItem::getColorMap()[qMin(colorIdx,IGisItem::eColorTransparent)].color \
+        , IGisItem::getColorMap()[qMin(colorIdx,IGisItem::eColorTransparent)].line \
     }
 
 CActivityTrk::desc_t CActivityTrk::dummyDesc;
@@ -67,6 +68,7 @@ void CActivityTrk::init()
     for(desc_t &desc : actDescriptor)
     {
         desc.color = QColor(cfg.value(QString("color%1").arg(i), desc.color.name()).toString());
+        desc.line  = cfg.value(QString("line%1").arg(i), desc.line).toString();
         ++i;
     }
     cfg.endGroup(); // Activities
@@ -80,6 +82,7 @@ void CActivityTrk::release()
     for(desc_t &desc : actDescriptor)
     {
         cfg.setValue(QString("color%1").arg(i), desc.color.name());
+        cfg.setValue(QString("line%1").arg(i), desc.line);
         ++i;
     }
     cfg.endGroup(); // Activities
@@ -158,10 +161,7 @@ void CActivityTrk::update()
                 activity.d2 = pt.distance;
                 activity.t1 = startTrkpt->time.toTime_t();
                 activity.t2 = pt.time.toTime_t();
-
-                const desc_t& desc = getDescriptor(lastAct);
-                activity.name = desc.name;
-                activity.icon = desc.iconSmall;
+                activity.activity = lastAct;
             }
 
             startTrkpt  = &pt;
@@ -188,10 +188,8 @@ void CActivityTrk::update()
     activity.d2 = lastTrkpt->distance;
     activity.t1 = startTrkpt->time.toTime_t();
     activity.t2 = lastTrkpt->time.toTime_t();
+    activity.activity = lastAct;
 
-    const desc_t& desc = getDescriptor(lastAct);
-    activity.name = desc.name;
-    activity.icon = desc.iconSmall;
 
 //    for(int i = 0; i < 9; i++)
 //    {
@@ -246,7 +244,10 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     str += "<th></th>";
     for(const desc_t *desc : descs)
     {
-        str += QString("<th align='right'><img src='%1'/></th>").arg(desc->iconSmall);
+        str += QString("<th align='right'>"
+                       "<img src='%1'/><br/>"
+                       "<img src='%2'/>"
+                       "</th>").arg(desc->iconSmall).arg(desc->line);
     }
     if(printNoAct)
     {
@@ -457,13 +458,14 @@ const CActivityTrk::desc_t& CActivityTrk::getDescriptor(trkact_t act)
     return dummyDesc;
 }
 
-void CActivityTrk::setColor(trkact_t act, const QString& color)
+void CActivityTrk::setColor(trkact_t act, const IGisItem::color_t& color)
 {
     for(desc_t &desc : actDescriptor)
     {
         if(desc.activity == act)
         {
-            desc.color = QColor(color);
+            desc.color = color.color;
+            desc.line  = color.line;
             return;
         }
     }

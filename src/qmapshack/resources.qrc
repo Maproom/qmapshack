@@ -916,5 +916,22 @@
         <file>../icons/geocaching/attributes/66.png</file>
         <file>../icons/geocaching/icons/15.png</file>
         <file>../icons/geocaching/icons/16.png</file>
+        <file>../icons/lines/line_black.png</file>
+        <file>../icons/lines/line_blue.png</file>
+        <file>../icons/lines/line_cyan.png</file>
+        <file>../icons/lines/line_dark_blue.png</file>
+        <file>../icons/lines/line_dark_cyan.png</file>
+        <file>../icons/lines/line_dark_gray.png</file>
+        <file>../icons/lines/line_dark_green.png</file>
+        <file>../icons/lines/line_dark_magenta.png</file>
+        <file>../icons/lines/line_dark_red.png</file>
+        <file>../icons/lines/line_dark_yellow.png</file>
+        <file>../icons/lines/line_green.png</file>
+        <file>../icons/lines/line_gray.png</file>
+        <file>../icons/lines/line_magenta.png</file>
+        <file>../icons/lines/line_red.png</file>
+        <file>../icons/lines/line_transparent.png</file>
+        <file>../icons/lines/line_white.png</file>
+        <file>../icons/lines/line_yellow.png</file>
     </qresource>
 </RCC>

@@ -278,7 +278,7 @@ QDataStream& operator>>(QDataStream& stream, CGisItemWpt::geocache_t& geocache)
         geocache.available = tmp8;
         stream >> tmp8;
         geocache.archived = tmp8;
-        if(version>1)
+        if(version > 1)
         {
             stream >> tmp8;
             geocache.needsMaintenance = tmp8;
@@ -295,7 +295,7 @@ QDataStream& operator>>(QDataStream& stream, CGisItemWpt::geocache_t& geocache)
         stream >> geocache.ownerId;
         stream >> geocache.type;
         stream >> geocache.container;
-        if(version>2)
+        if(version > 2)
         {
             stream>>geocache.attributes;
         }

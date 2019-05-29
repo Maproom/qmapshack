@@ -57,7 +57,7 @@ void ILineOp::startDelayedRouting()
     {
         timerRouting->start();
     }
-    else if(parentHandler->useVectorRouting()||parentHandler->useTrackRouting())
+    else if(parentHandler->useVectorRouting() || parentHandler->useTrackRouting())
     {
         slotTimeoutRouting();
     }
@@ -141,7 +141,7 @@ void ILineOp::updateLeadLines(qint32 idx)
     subLinePixel1.clear();
     subLinePixel2.clear();
 
-    if((parentHandler->useVectorRouting()||parentHandler->useTrackRouting()) && (idx != NOIDX))
+    if((parentHandler->useVectorRouting() || parentHandler->useTrackRouting()) && (idx != NOIDX))
     {
         leadLineCoord1.clear();
         leadLineCoord2.clear();
@@ -245,7 +245,7 @@ void ILineOp::finalizeOperation(qint32 idx)
         }
         CCanvas::restoreOverrideCursor("ILineOp::finalizeOperation");
     }
-    else if(parentHandler->useVectorRouting()||parentHandler->useTrackRouting())
+    else if(parentHandler->useVectorRouting() || parentHandler->useTrackRouting())
     {
         if(idx > 0)
         {

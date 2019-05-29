@@ -468,9 +468,9 @@ QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString &fileName)
 
 QString CRouterBRouterTilesSelect::fileNameFromTile(const QPoint tile)
 {
-    return QString("%1%2_%3%4.rd5").arg(tile.x()<0 ? "W" : "E")
+    return QString("%1%2_%3%4.rd5").arg(tile.x() < 0 ? "W" : "E")
            .arg(abs(tile.x()))
-           .arg(tile.y()<0 ? "S" : "N")
+           .arg(tile.y() < 0 ? "S" : "N")
            .arg(abs(tile.y()));
 }
 

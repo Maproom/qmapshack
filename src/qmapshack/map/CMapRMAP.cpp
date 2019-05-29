@@ -78,7 +78,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
         levels << level;
     }
 
-    for(int i=0; i<levels.size(); i++)
+    for(int i=0; i < levels.size(); i++)
     {
         level_t& level = levels[i];
         file.seek(level.offsetLevel);
@@ -88,7 +88,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
         stream >> level.xTiles;
         stream >> level.yTiles;
 
-        for(int j=0; j<(level.xTiles * level.yTiles); j++)
+        for(int j=0; j < (level.xTiles * level.yTiles); j++)
         {
             quint64 offset;
             stream >> offset;
@@ -323,7 +323,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     qreal widthL0  = levels[0].width;
     qreal heightL0 = levels[0].height;
 
-    for(int i=0; i<levels.size(); i++)
+    for(int i=0; i < levels.size(); i++)
     {
         level_t& level = levels[i];
 

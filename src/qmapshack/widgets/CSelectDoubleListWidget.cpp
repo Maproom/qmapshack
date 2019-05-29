@@ -157,7 +157,7 @@ void CSelectDoubleListWidget::slotRemove() const
         if (filter == nullptr || filter->shouldBeMoved(item))
         {
             int index = -1;
-            for (int i = available.indexOf(item)-1; i>=0; i--)
+            for (int i = available.indexOf(item)-1; i >= 0; i--)
             {
                 index = listAvailable->row(available.at(i));
                 if (index >= 0)

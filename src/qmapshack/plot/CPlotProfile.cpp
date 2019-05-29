@@ -20,10 +20,10 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
+#include "helpers/CSettings.h"
 #include "plot/CPlotAxis.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
-#include "helpers/CSettings.h"
 
 #include <interpolation.h>
 #include <proj_api.h>
@@ -46,13 +46,6 @@ CPlotProfile::CPlotProfile(CGisItemTrk *trk, CLimit& lim, mode_e mode, QWidget *
 
 CPlotProfile::~CPlotProfile()
 {
-    if(mode != eModeIcon)
-    {
-        SETTINGS;
-        cfg.beginGroup("Plot");
-        cfg.setValue("showWptLabels", showWptLabels);
-        cfg.endGroup();
-    }
 }
 
 void CPlotProfile::init()
@@ -231,5 +224,14 @@ void CPlotProfile::setLimits()
 void CPlotProfile::slotToggleWptLabels(bool on)
 {
     showWptLabels = on;
+
+    if(mode != eModeIcon)
+    {
+        SETTINGS;
+        cfg.beginGroup("Plot");
+        cfg.setValue("showWptLabels", showWptLabels);
+        cfg.endGroup();
+    }
+
     update();
 }

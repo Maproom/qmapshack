@@ -299,7 +299,7 @@ void CMapWMTS::saveConfig(QSettings& cfg) /* override */
 
     // save indices of enabled layers
     QStringList enabled;
-    for(int i = 0; i< layers.size(); i++)
+    for(int i = 0; i < layers.size(); i++)
     {
         if(layers[i].enabled)
         {
@@ -321,7 +321,7 @@ void CMapWMTS::loadConfig(QSettings& cfg) /* override */
 
     QStringList enabled;
     // set all layers to disabled first
-    for(int i = 0; i< layers.size(); i++)
+    for(int i = 0; i < layers.size(); i++)
     {
         layers[i].enabled = false;
         enabled << QString::number(i);

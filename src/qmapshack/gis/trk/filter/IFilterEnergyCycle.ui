@@ -79,7 +79,7 @@
      <item>
       <widget class="QPushButton" name="pushButtonRemove">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Löscht den 'Energy Use Cycling' Wert aus dem Track.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Remove the 'Energy Use Cycling' value from the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Löscht den 'Energy Use Cycling' Wert aus dem Track.&lt;/p&gt;&lt;p&gt;Remove the 'Energy Use Cycling' value from the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>Remove</string>

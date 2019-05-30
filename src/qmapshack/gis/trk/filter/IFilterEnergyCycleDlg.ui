@@ -225,7 +225,7 @@
        <item row="5" column="6">
         <widget class="QLabel" name="labelPositivePedalForce">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pedalkraft&lt;/p&gt;&lt;p&gt;Die Kraft in Newton, die im Durchschnitt über alle Trackpunkte auf das Pedal aufgebracht wird. Negative Kräfte aus starken Gegenwind oder Bergabfahrt werden nicht berücksichtigt. Diese Kraft muss durch den Fahrer auf das Pedal aufgebracht werden. Je größer die Trittfrequenz, desto niedriger ist die Pedalkraft.&lt;/p&gt;&lt;p&gt;The force in Newton applied to the pedal on average over all track points. Negative forces from strong headwinds or downhill driving are not considered. This force must be applied to the pedal by the rider. The higher the cadence, the lower the pedal force.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pedalkraft&lt;/p&gt;&lt;p&gt;Die Kraft in Newton, die im Durchschnitt über alle Trackpunkte auf das Pedal aufgebracht wird. Negative Kräfte aus starken Rückenwind oder Bergabfahrt sind nicht berücksichtigt. Diese Kraft muss durch den Fahrer auf das Pedal aufgebracht werden. Je größer die Trittfrequenz, desto niedriger ist die Pedalkraft.&lt;/p&gt;&lt;p&gt;The force in Newton applied to the pedal on average over all track points. Negative forces from strong tail wind or downhill driving are not considered. This force must be applied to the pedal by the rider. The higher the cadence, the lower the pedal force.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;0000N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -435,7 +435,7 @@
        <item row="4" column="6">
         <widget class="QLabel" name="labelGravitySlopeForce">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Neigungskraft&lt;/p&gt;&lt;p&gt;Die Neigungskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung der Neigung bei der Bergauffahrt benötigt. Bei überwiegender Bergabfahrt kann die Neigungskraft negativ sein.&lt;/p&gt;&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on the uphill. In the case of mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Neigungskraft&lt;/p&gt;&lt;p&gt;Die Neigungskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung der Neigung bei der Bergauffahrt benötigt wird. Bei überwiegender Bergabfahrt kann die Neigungskraft negativ sein.&lt;/p&gt;&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on the uphill. In the case of mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -547,7 +547,7 @@
        <item row="6" column="6">
         <widget class="QLabel" name="labelPower">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Leistung&lt;/p&gt;&lt;p&gt;Die Leistung in Watt im Durchschnitt über alle Trackpunkte. Negative Leistung aus starken Gegenwind oder Bergabfahrt sind berücksichtigt.&lt;/p&gt;&lt;p&gt;The power in Watt on average over all track points. Negative power from strong headwinds or downhill driving are taken into account.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Leistung&lt;/p&gt;&lt;p&gt;Die Leistung in Watt im Durchschnitt über alle Trackpunkte. Negative Leistung aus starken Rückenwind oder Bergabfahrt sind berücksichtigt.&lt;/p&gt;&lt;p&gt;The power in Watt on average over all track points. Negative power from strong tailwind or downhill driving are taken into account.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0W&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -580,7 +580,7 @@
        <item row="6" column="8">
         <widget class="QLabel" name="labelPositivePower">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Positive Leistung&lt;/p&gt;&lt;p&gt;Die positive Leistung in Watt, die im Durchschnitt über alle Trackpunkte aufgebracht werden muss. Negative Leistung aus starken Gegenwind oder Bergabfahrt sind nicht berücksichtigt. Diese Leistung muss durch den Fahrer im Durchschnitt für den Track aufgebracht werden.&lt;/p&gt;&lt;p&gt;The positive power in Watt that must be applied to all track points on average. Negative power from strong headwinds or downhill driving are not taken into account. This power must be applied by the driver on average for the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Positive Leistung&lt;/p&gt;&lt;p&gt;Die positive Leistung in Watt, die im Durchschnitt über alle Trackpunkte aufgebracht werden muss. Negative Leistung aus starken Rückenwind oder Bergabfahrt sind nicht berücksichtigt. Diese Leistung muss durch den Fahrer im Durchschnitt für den Track aufgebracht werden.&lt;/p&gt;&lt;p&gt;The positive power in Watt that must be applied to all track points on average. Negative power from strong tailwind or downhill driving are not taken into account. This power must be applied by the driver on average for the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0W&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -612,7 +612,7 @@
        <item row="7" column="8">
         <widget class="QLabel" name="labelPowerMovingTimeRatio">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Verhältnis Leistungsbewegungszeit&lt;/p&gt;&lt;p&gt;Das Verhältnis der Leistungsbewegungszeit bezogen auf die Track Bewegungszeit in Prozent. Je geringer das Verhältnis ist, desto größer ist der Einfluss des Rückenwind und Bergabfahrt.&lt;/p&gt;&lt;p&gt;The ratio of the power moving time related to the track moving time in percent. The lower the ratio, the greater the influence of tailwind and downhill.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Verhältnis Leistungsbewegungszeit&lt;/p&gt;&lt;p&gt;Das Verhältnis der Leistungsbewegungszeit bezogen auf die Track Bewegungszeit in Prozent. Je geringer das Verhältnis ist, desto größer ist der Einfluss des Rückenwinds und Bergabfahrt.&lt;/p&gt;&lt;p&gt;The ratio of the power moving time related to the track moving time in percent. The lower the ratio, the greater the influence of tailwind and downhill.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00.0%&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

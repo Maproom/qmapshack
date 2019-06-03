@@ -213,8 +213,8 @@ void CGisWorkspace::slotSetupSearch()
 
 void CGisWorkspace::slotSearchHelp()
 {
-    CSearchExplanationDialog dlg(treeWks);
-    dlg.exec();
+    CSearchExplanationDialog* dlg = new CSearchExplanationDialog(this);
+    dlg->show();
 }
 
 void CGisWorkspace::slotSaveAll()

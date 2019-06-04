@@ -583,7 +583,7 @@ public:
         return colorMap;
     }
 
-    virtual const QSharedPointer<searchValue_t> getValueByKeyword(searchProperty_e keyword) = 0;
+    virtual const searchValue_t getValueByKeyword(searchProperty_e keyword) = 0;
 
 protected:
     /// set icon of QTreeWidgetItem

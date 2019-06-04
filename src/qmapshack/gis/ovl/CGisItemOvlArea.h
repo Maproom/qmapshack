@@ -118,7 +118,7 @@ public:
 
     void gainUserFocus(bool yes) override;
 
-    const QSharedPointer<searchValue_t> getValueByKeyword(searchProperty_e keyword) override;
+    const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
 
     struct width_t
     {
@@ -208,7 +208,7 @@ private:
 
     QPointer<CScrOptOvlArea>  scrOpt;
 
-    using fSearch = std::function<const QSharedPointer<searchValue_t> (CGisItemOvlArea*)>;
+    using fSearch = std::function<const searchValue_t (CGisItemOvlArea*)>;
     static QMap<searchProperty_e,fSearch > keywordLambdaMap;
     static QMap<searchProperty_e,fSearch > initKeywordLambdaMap();
 };

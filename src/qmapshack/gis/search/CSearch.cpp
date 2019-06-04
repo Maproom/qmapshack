@@ -122,14 +122,15 @@ CSearch::CSearch(QString searchstring)
             if(filterValue.toString().isEmpty())
             {
                 //Match speeds and distances after dates to have less problems with avoid sorting them out
-                const static QString capNum = "^(\\d+\\.?\\d*)(?![\\.\\d\\/\\:])";//Match all numbers making sure no numbers are omitted directly at the end and that we are at the start of the string
+                const static QString capNum = "(\\d+\\.?\\d*)(?![\\.\\d\\/\\:])";//Match all numbers making sure no numbers are omitted directly at the end
                 const static QString capNumOpt = "(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
                 const static QString capIgnWS = "(?:\\s*)"; //Ignore Whitespaces
                 //Capture only distances and speeds. Times get handled by QDateTime. QT does not support lookbehind
                 const static QString capUnit = "(m|km|mi|ft|ml|m\\/h|km\\/h|mi\\/h|ft\\/h|ml\\/h|h|min|s)?";
                 const static QString capIgnAnd =  "(?:" + tr("and") + ")?";
                 //The second number, the units and the "and" are optional
-                QRegExp numericArguments(capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit,Qt::CaseInsensitive);
+                //The String has to be matched completely in order to avoid false positives thus the ^ and the $
+                QRegExp numericArguments("^" + capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit + "$",Qt::CaseInsensitive);
                 numericArguments.indexIn(filterValueString);
                 if(numericArguments.cap(0).simplified() != "")
                 {
@@ -329,6 +330,7 @@ QMap<QString,searchProperty_e> CSearch::initSearchPropertyEnumMap()
     map.insert(tr("T"),eSearchPropertyGeocacheTerrain);
     map.insert(tr("attributes"),eSearchPropertyGeocacheAttributes);
     map.insert(tr("size"),eSearchPropertyGeocacheSize);
+    map.insert(tr("GCCode"),eSearchPropertyGeocacheGCCode);
 
     //Waypoint keywords
 
@@ -375,6 +377,7 @@ QMap<searchProperty_e,QString> CSearch::initSearchPropertyMeaningMap()
     map.insert(eSearchPropertyGeocacheTerrain, tr("searches the terrain rating of a geocache"));
     map.insert(eSearchPropertyGeocacheAttributes, tr("searches the translated meanings of the attributes"));
     map.insert(eSearchPropertyGeocacheSize, tr("searches the size of a geocache. (micro, small, regular, large)"));
+    map.insert(eSearchPropertyGeocacheGCCode, tr("searches the GCCode of a geocache."));
 
     //Waypoint keywords
 

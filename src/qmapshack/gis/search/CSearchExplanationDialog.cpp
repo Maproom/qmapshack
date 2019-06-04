@@ -32,5 +32,10 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     explanation+= tr("\nFollowing keywords are available for searching:");
     labelExplanation->setText(explanation);
     listWidgetComparison->addItems(CSearch::getSearchTypeKeywords());
-    listWidgetProperties->addItems(CSearch::getSearchPropertyKeywords());
+    for(QString property : CSearch::getSearchPropertyKeywords())
+    {
+        QListWidgetItem* item = new QListWidgetItem(property);
+        item->setToolTip(CSearch::getSearchPropertyMeaning(property));
+        listWidgetProperties->addItem(item);
+    }
 }

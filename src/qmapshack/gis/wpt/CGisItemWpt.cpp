@@ -1163,7 +1163,14 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     QMap<searchProperty_e, CGisItemWpt::fSearch> map;
     map.insert(eSearchPropertyGeneralName,[](CGisItemWpt* item){
         searchValue_t searchValue;
-        searchValue.str1 = item->getName();
+        if(item->geocache.hasData)
+        {
+            searchValue.str1 = item->geocache.name;
+        }
+        else
+        {
+            searchValue.str1 = item->getName();
+        }
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralFullText,[](CGisItemWpt* item){
@@ -1218,6 +1225,11 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     map.insert(eSearchPropertyGeocacheSize,[](CGisItemWpt* item){
         searchValue_t searchValue;
         searchValue.str1 = item->geocache.container;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheGCCode,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getName();
         return searchValue;
     });
     return map;

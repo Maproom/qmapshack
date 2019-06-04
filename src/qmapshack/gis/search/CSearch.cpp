@@ -203,7 +203,7 @@ void CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchV
 
 void CSearch::improveQuery(search_t &search)
 {
-    if(search.searchValue.str1 != "" && search.searchValue.str2 == "" && search.searchValue.value1 != NOFLOAT)
+    if(search.searchValue.str1 != "" && search.searchValue.str2 == "" && search.searchValue.value1 != NOFLOAT && search.searchValue.value2 != NOFLOAT)
     {
         //Assume they have the same unit
         search.searchValue.str2=search.searchValue.str1;

@@ -304,6 +304,7 @@ QMap<QString,CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
     map.insert(tr("regex"),eSearchTypeRegEx);
     map.insert("=",eSearchTypeEquals);
     map.insert(tr("equals"),eSearchTypeEquals);
+    map.insert(tr("between"),eSearchTypeBetween);
     return map;
 }
 
@@ -351,6 +352,45 @@ QMap<QString,searchProperty_e> CSearch::initSearchPropertyEnumMap()
     map.insert(tr("total time"),eSearchPropertyRteTrkTotalTime);
     map.insert(tr("duration"),eSearchPropertyRteTrkTotalTime);
     map.insert(tr("time moving"),eSearchPropertyRteTrkTimeMoving);
+
+    return map;
+}
+
+QMap<searchProperty_e,QString> CSearch::searchPropertyMeaningMap = CSearch::initSearchPropertyMeaningMap();
+QMap<searchProperty_e,QString> CSearch::initSearchPropertyMeaningMap()
+{
+    QMap<searchProperty_e,QString> map;
+    //General keywords
+    map.insert(eSearchPropertyGeneralName, tr("searches the name"));
+    map.insert(eSearchPropertyGeneralFullText, tr("searches the full text"));
+    map.insert(eSearchPropertyGeneralElevation, tr("searches the elevation. For items consisting of multiple points the minimum and the maximum is used"));
+    map.insert(eSearchPropertyGeneralDate, tr("searches the Date"));
+    map.insert(eSearchPropertyGeneralComment, tr("searches the Comment"));
+    map.insert(eSearchPropertyGeneralDescription, tr("searches the Description"));
+
+    //Area keywords
+    map.insert(eSearchPropertyAreaArea, tr("searches the area"));
+
+    //Geocache keywords
+    map.insert(eSearchPropertyGeocacheDifficulty, tr("searches the difficulty rating of a geocache"));
+    map.insert(eSearchPropertyGeocacheTerrain, tr("searches the terrain rating of a geocache"));
+    map.insert(eSearchPropertyGeocacheAttributes, tr("searches the translated meanings of the attributes"));
+    map.insert(eSearchPropertyGeocacheSize, tr("searches the size of a geocache. (micro, small, regular, large)"));
+
+    //Waypoint keywords
+
+    //Route / track keywords
+    map.insert(eSearchPropertyRteTrkDistance, tr("searches the distance covered by a route or track"));
+    map.insert(eSearchPropertyRteTrkAscent, tr("searches the total ascent in a route or track"));
+    map.insert(eSearchPropertyRteTrkDescent, tr("searches the total descent in a route or track"));
+    map.insert(eSearchPropertyRteTrkMinElevation, tr("searches the minimal elevation in a route or track"));
+    map.insert(eSearchPropertyRteTrkMaxElevation, tr("searches the maximal elevation in a route or track"));
+    map.insert(eSearchPropertyRteTrkMaxSpeed, tr("searches the maximal speed in a route or track"));
+    map.insert(eSearchPropertyRteTrkMinSpeed, tr("searches the minimal speed in a route or track"));
+    map.insert(eSearchPropertyRteTrkAvgSpeed, tr("searches the average speed in a route or track"));
+    map.insert(eSearchPropertyRteTrkActivity, tr("searches the activity of a route or track"));
+    map.insert(eSearchPropertyRteTrkTotalTime, tr("searches the total time spent on a route or track"));
+    map.insert(eSearchPropertyRteTrkTimeMoving, tr("searches the time spent moving on a route or track"));
 
     return map;
 }

@@ -144,6 +144,11 @@ public:
         return searchPropertyEnumMap.keys();
     }
 
+    static QString getSearchPropertyMeaning(QString property)
+    {
+        return searchPropertyMeaningMap.value(searchPropertyEnumMap.value(property), tr("No information available"));
+    }
+
     bool getSearchResult(IGisItem * item);
 
     static Qt::CaseSensitivity getCaseSensitivity()
@@ -180,8 +185,11 @@ private:
     static QMap<QString,searchProperty_e> searchPropertyEnumMap;
     static QMap<QString,searchProperty_e> initSearchPropertyEnumMap();
 
+    static QMap<searchProperty_e,QString> searchPropertyMeaningMap;
+    static QMap<searchProperty_e,QString> initSearchPropertyMeaningMap();
+
 //First is itemValue, escond is searchValue, which is non const to adjust units
-    using fSearch = std::function<bool(const searchValue_t&, searchValue_t&)>;
+    using fSearch = std::function<bool (const searchValue_t&, searchValue_t&)>;
     static QMap<search_type_e,fSearch > searchTypeLambdaMap;
     static QMap<search_type_e,fSearch > initSearchTypeLambdaMap();
 };

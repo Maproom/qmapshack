@@ -37,16 +37,16 @@ struct searchValue_t //Outside of CSearch to avoid problem of nested type
     QString toString(bool lowerCase = false) const
     {
         QString str;
-        str.append(str1);
         if(value1 != NOFLOAT)
         {
             str.append(QString::number(value1));
         }
-        str.append(str2);
+        str.append(str1);
         if(value2 != NOFLOAT)
         {
             str.append(QString::number(value2));
         }
+        str.append(str2);
 
         if(lowerCase)
         {

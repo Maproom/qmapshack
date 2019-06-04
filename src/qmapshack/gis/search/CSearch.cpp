@@ -121,17 +121,16 @@ CSearch::CSearch(QString searchstring)
             }
             if(filterValue.toString().isEmpty())
             {
-                //Match speeds and distances
-                const static QString capNum = "(?:[^\\.\\d\\/\\:])(\\d+\\.?\\d*)(?![\\.\\d\\/\\:])";
-                const static QString capNumOpt = "(?:[^\\.\\d\\/\\:])(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
+                //Match speeds and distances after dates to have less problems with avoid sorting them out
+                const static QString capNum = "^(\\d+\\.?\\d*)(?![\\.\\d\\/\\:])";//Match all numbers making sure no numbers are omitted directly at the end and that we are at the start of the string
+                const static QString capNumOpt = "(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
                 const static QString capIgnWS = "(?:\\s*)"; //Ignore Whitespaces
                 //Capture only distances and speeds. Times get handled by QDateTime. QT does not support lookbehind
                 const static QString capUnit = "(m|km|mi|ft|ml|m\\/h|km\\/h|mi\\/h|ft\\/h|ml\\/h|h|min|s)?";
                 const static QString capIgnAnd =  "(?:" + tr("and") + ")?";
                 //The second number, the units and the "and" are optional
                 QRegExp numericArguments(capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit,Qt::CaseInsensitive);
-                //Prepend whitespace to make sure regex works, as there is no lookbehind in qt
-                numericArguments.indexIn(filterValueString.prepend(' ').append(' '));
+                numericArguments.indexIn(filterValueString);
                 if(numericArguments.cap(0).simplified() != "")
                 {
                     if(numericArguments.cap(1) != "") //to avoid removal of NOFLOAT

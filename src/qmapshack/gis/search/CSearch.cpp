@@ -32,7 +32,7 @@ CSearch::CSearch(QString searchstring)
         }
 
         QString searchTypeKeyword;
-        for(QString& key:keywordSearchTypeMap.keys())
+        for(const QString& key:keywordSearchTypeMap.keys())
         {
             if(currentSection.contains(key,Qt::CaseInsensitive))
             {
@@ -169,7 +169,7 @@ bool CSearch::getSearchResult(IGisItem *item)
     {
         if(searchTypeLambdaMap.contains(search.searchType))
         {
-            searchValue_t itemFilterValue = *((item)->getValueByKeyword(search.property));
+            const searchValue_t& itemFilterValue = item->getValueByKeyword(search.property);
             passed = searchTypeLambdaMap.value(search.searchType)(itemFilterValue,search.searchValue);
             if(!passed)
             {

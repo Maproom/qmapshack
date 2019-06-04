@@ -342,7 +342,7 @@ public:
         hideArea = hide;
     }
 
-    const QSharedPointer<searchValue_t> getValueByKeyword(searchProperty_e keyword) override;
+    const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
 
     static QString getLastName(const QString &name);
     static void newWpt(QPointF& pt, const QString& name, const QString& desc, IGisProject *project);
@@ -398,7 +398,7 @@ private:
     QPoint offsetBubble {-320, -150};
     quint32 widthBubble = 300;
 
-    using fSearch = std::function<const QSharedPointer<searchValue_t> (CGisItemWpt*)>;
+    using fSearch = std::function<const searchValue_t (CGisItemWpt*)>;
     static QMap<searchProperty_e,fSearch > keywordLambdaMap;
     static QMap<searchProperty_e,fSearch > initKeywordLambdaMap();
 };

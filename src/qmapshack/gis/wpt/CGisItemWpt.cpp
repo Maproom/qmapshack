@@ -960,7 +960,7 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
-const QSharedPointer<searchValue_t> CGisItemWpt::getValueByKeyword(searchProperty_e keyword)
+const searchValue_t CGisItemWpt::getValueByKeyword(searchProperty_e keyword)
 {
     if(keywordLambdaMap.contains(keyword))
     {
@@ -968,7 +968,7 @@ const QSharedPointer<searchValue_t> CGisItemWpt::getValueByKeyword(searchPropert
     }
     else
     {
-        return QSharedPointer<searchValue_t>  (new searchValue_t);
+        return searchValue_t();
     }
 }
 
@@ -1162,62 +1162,62 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
 {
     QMap<searchProperty_e, CGisItemWpt::fSearch> map;
     map.insert(eSearchPropertyGeneralName,[](CGisItemWpt* item){
-        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->str1 = item->getName();
+        searchValue_t searchValue;
+        searchValue.str1 = item->getName();
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralFullText,[](CGisItemWpt* item){
-        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        searchValue_t searchValue;
+        searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralElevation,[](CGisItemWpt* item){
-        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        IUnit::self().meter2elevation(item->wpt.ele,searchValue->value1,searchValue->str1);
+        searchValue_t searchValue;
+        IUnit::self().meter2elevation(item->wpt.ele,searchValue.value1,searchValue.str1);
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralDate,[](CGisItemWpt* item){
-        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->wpt.time.toSecsSinceEpoch();
-        searchValue->str1 = "SsE"; //To differentiate Dates and Durations
+        searchValue_t searchValue;
+        searchValue.value1 = item->wpt.time.toSecsSinceEpoch();
+        searchValue.str1 = "SsE"; //To differentiate Dates and Durations
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralComment,[](CGisItemWpt* item){
-        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->str1 = item->getComment();
+        searchValue_t searchValue;
+        searchValue.str1 = item->getComment();
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralDescription,[](CGisItemWpt* item){
-        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->str1 = item->getDescription();
+        searchValue_t searchValue;
+        searchValue.str1 = item->getDescription();
         return searchValue;
     });
     //Geocache keywords
     map.insert(eSearchPropertyGeocacheDifficulty,[](CGisItemWpt* item){
-        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->geocache.difficulty;
+        searchValue_t searchValue;
+        searchValue.value1 = item->geocache.difficulty;
         return searchValue;
     });
     map.insert(eSearchPropertyGeocacheTerrain,[](CGisItemWpt* item){
-        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->value1 = item->geocache.terrain;
+        searchValue_t searchValue;
+        searchValue.value1 = item->geocache.terrain;
         return searchValue;
     });
     map.insert(eSearchPropertyGeocacheAttributes,[](CGisItemWpt* item){
-        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
+        searchValue_t searchValue;
         for(qint8 attr : item->geocache.attributes.keys())
         {
             if(!item->geocache.attributes[attr])
             {
-                searchValue->str1 += tr("No") + " ";
+                searchValue.str1 += tr("No") + " ";
             }
-            searchValue->str1 += item->geocache.attributeMeaningsTranslated[attr] + ", ";
+            searchValue.str1 += item->geocache.attributeMeaningsTranslated[attr] + ", ";
         }
         return searchValue;
     });
     map.insert(eSearchPropertyGeocacheSize,[](CGisItemWpt* item){
-        QSharedPointer<searchValue_t> searchValue (new searchValue_t);
-        searchValue->str1 = item->geocache.container;
+        searchValue_t searchValue;
+        searchValue.str1 = item->geocache.container;
         return searchValue;
     });
     return map;

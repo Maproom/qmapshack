@@ -222,7 +222,7 @@ public:
 
     bool isCalculated();
 
-    const QSharedPointer<searchValue_t> getValueByKeyword(searchProperty_e keyword) override;
+    const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
 
 private:
     void deriveSecondaryData();
@@ -247,7 +247,7 @@ private:
 
     QPointer<CScrOptRte>  scrOpt;
 
-    using fSearch = std::function<const QSharedPointer<searchValue_t> (CGisItemRte*)>;
+    using fSearch = std::function<const searchValue_t (CGisItemRte*)>;
     static QMap<searchProperty_e,fSearch > keywordLambdaMap;
     static QMap<searchProperty_e,fSearch > initKeywordLambdaMap();
 };

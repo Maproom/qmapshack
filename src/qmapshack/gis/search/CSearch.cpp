@@ -23,142 +23,138 @@ CSearch::search_mode_e CSearch::searchMode = CSearch::eSearchModeText;
 
 CSearch::CSearch(QString searchstring)
 {
-    const QStringList& sections = searchstring.split(",");
-    for(const QString& currentSection : sections)
+    if(searchstring.simplified().isEmpty())
     {
-        if(currentSection.simplified().isEmpty())
-        {
-            continue;
-        }
+        return;
+    }
 
-        QString searchTypeKeyword;
-        for(const QString& key:keywordSearchTypeMap.keys())
+    QString searchTypeKeyword;
+    for(const QString& key:keywordSearchTypeMap.keys())
+    {
+        if(searchstring.contains(key,Qt::CaseInsensitive))
         {
-            if(currentSection.contains(key,Qt::CaseInsensitive))
-            {
-                searchTypeKeyword=key;
-                break;
-            }
+            searchTypeKeyword=key;
+            break;
         }
-        search_t newSearch;
-        if(searchTypeKeyword.isEmpty())
+    }
+    search_t newSearch;
+    if(searchTypeKeyword.isEmpty())
+    {
+        //Search for what the user typed in the name or the full text
+        newSearch.searchType=eSearchTypeWith;
+        if(searchMode == eSearchModeText)
         {
-            //Search for what the user typed in the name or the full text
-            newSearch.searchType=eSearchTypeWith;
-            if(searchMode == eSearchModeText)
-            {
-                newSearch.property=searchProperty_e::eSearchPropertyGeneralFullText;
-            }
-            else
-            {
-                newSearch.property=searchProperty_e::eSearchPropertyGeneralName;
-            }
-            newSearch.searchValue.str1 = currentSection.simplified();
+            newSearch.property=searchProperty_e::eSearchPropertyGeneralFullText;
         }
         else
         {
-            newSearch.searchType=keywordSearchTypeMap.value(searchTypeKeyword);
-            newSearch.property=searchPropertyEnumMap.value(currentSection.section(searchTypeKeyword,0,0,QString::SectionCaseInsensitiveSeps).simplified(),eSearchPropertyNoMatch);
+            newSearch.property=searchProperty_e::eSearchPropertyGeneralName;
+        }
+        newSearch.searchValue.str1 = searchstring.simplified();
+    }
+    else
+    {
+        newSearch.searchType=keywordSearchTypeMap.value(searchTypeKeyword);
+        newSearch.property=searchPropertyEnumMap.value(searchstring.section(searchTypeKeyword,0,0,QString::SectionCaseInsensitiveSeps).simplified(),eSearchPropertyNoMatch);
 
-            QString filterValueString = currentSection.section(searchTypeKeyword,1,-1,QString::SectionCaseInsensitiveSeps).simplified();
-            searchValue_t filterValue;
+        QString filterValueString = searchstring.section(searchTypeKeyword,1,-1,QString::SectionCaseInsensitiveSeps).simplified();
+        searchValue_t filterValue;
 
-            //Try if it is a time
-            const static QList<QString> timeFormats = {
-                QLocale::system().timeFormat(QLocale::LongFormat),
-                QLocale::system().timeFormat(QLocale::ShortFormat),
-                QLocale::c().timeFormat(QLocale::LongFormat),
-                QLocale::c().timeFormat(QLocale::ShortFormat)
-            };
+        //Try if it is a time
+        const static QList<QString> timeFormats = {
+            QLocale::system().timeFormat(QLocale::LongFormat),
+            QLocale::system().timeFormat(QLocale::ShortFormat),
+            QLocale::c().timeFormat(QLocale::LongFormat),
+            QLocale::c().timeFormat(QLocale::ShortFormat)
+        };
 
-            for(const QString& tf:timeFormats)
+        for(const QString& tf:timeFormats)
+        {
+            QTime time1 = QLocale::system().toTime(filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified(),tf);
+            if(time1.isValid())
             {
-                QTime time1 = QLocale::system().toTime(filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified(),tf);
+                filterValue.value1=time1.msecsSinceStartOfDay()/1000;
+                filterValue.str1="S";
+                QTime time2 = QLocale::system().toTime(filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified(),tf);
                 if(time1.isValid())
                 {
-                    filterValue.value1=time1.msecsSinceStartOfDay()/1000;
-                    filterValue.str1="S";
-                    QTime time2 = QLocale::system().toTime(filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified(),tf);
-                    if(time1.isValid())
+                    filterValue.value2=time2.msecsSinceStartOfDay()/1000;
+                    filterValue.str2="S";
+                }
+                break;
+            }
+        }
+
+        if(filterValue.toString().isEmpty())
+        {
+            //Try if it is a date
+            const static QList<QString> dateFormats = {
+                QLocale::system().dateTimeFormat(QLocale::LongFormat),
+                QLocale::system().dateTimeFormat(QLocale::ShortFormat),
+                QLocale::c().dateTimeFormat(QLocale::LongFormat),
+                QLocale::c().dateTimeFormat(QLocale::ShortFormat),
+                QLocale::system().dateFormat(QLocale::LongFormat),
+                QLocale::system().dateFormat(QLocale::ShortFormat),
+                QLocale::c().dateFormat(QLocale::LongFormat),
+                QLocale::c().dateFormat(QLocale::ShortFormat)
+            };
+
+            for(const QString& df:dateFormats)
+            {
+                QDateTime time1 = QLocale::system().toDateTime(filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified(),df);
+                if(time1.isValid())
+                {
+                    filterValue.value1=time1.toSecsSinceEpoch();
+                    filterValue.str1="SsE";
+                    QDateTime time2 = QLocale::system().toDateTime(filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified(),df);
+                    if(time2.isValid())
                     {
-                        filterValue.value2=time2.msecsSinceStartOfDay()/1000;
-                        filterValue.str2="S";
+                        filterValue.value2=time2.toSecsSinceEpoch();
+                        filterValue.str2="SsE";
                     }
                     break;
                 }
             }
-
-            if(filterValue.toString().isEmpty())
-            {
-                //Try if it is a date
-                const static QList<QString> dateFormats = {
-                    QLocale::system().dateTimeFormat(QLocale::LongFormat),
-                    QLocale::system().dateTimeFormat(QLocale::ShortFormat),
-                    QLocale::c().dateTimeFormat(QLocale::LongFormat),
-                    QLocale::c().dateTimeFormat(QLocale::ShortFormat),
-                    QLocale::system().dateFormat(QLocale::LongFormat),
-                    QLocale::system().dateFormat(QLocale::ShortFormat),
-                    QLocale::c().dateFormat(QLocale::LongFormat),
-                    QLocale::c().dateFormat(QLocale::ShortFormat)
-                };
-
-                for(const QString& df:dateFormats)
-                {
-                    QDateTime time1 = QLocale::system().toDateTime(filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified(),df);
-                    if(time1.isValid())
-                    {
-                        filterValue.value1=time1.toSecsSinceEpoch();
-                        filterValue.str1="SsE";
-                        QDateTime time2 = QLocale::system().toDateTime(filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified(),df);
-                        if(time2.isValid())
-                        {
-                            filterValue.value2=time2.toSecsSinceEpoch();
-                            filterValue.str2="SsE";
-                        }
-                        break;
-                    }
-                }
-            }
-            if(filterValue.toString().isEmpty())
-            {
-                //Match speeds and distances after dates to have less problems with avoid sorting them out
-                const static QString capNum = "(\\d+\\.?\\d*)(?![\\.\\d\\/\\:])";//Match all numbers making sure no numbers are omitted directly at the end
-                const static QString capNumOpt = "(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
-                const static QString capIgnWS = "(?:\\s*)"; //Ignore Whitespaces
-                //Capture only distances and speeds. Times get handled by QDateTime. QT does not support lookbehind
-                const static QString capUnit = "(m|km|mi|ft|ml|m\\/h|km\\/h|mi\\/h|ft\\/h|ml\\/h|h|min|s)?";
-                const static QString capIgnAnd =  "(?:" + tr("and") + ")?";
-                //The second number, the units and the "and" are optional
-                //The String has to be matched completely in order to avoid false positives thus the ^ and the $
-                QRegExp numericArguments("^" + capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit + "$",Qt::CaseInsensitive);
-                numericArguments.indexIn(filterValueString);
-                if(numericArguments.cap(0).simplified() != "")
-                {
-                    if(numericArguments.cap(1) != "") //to avoid removal of NOFLOAT
-                    {
-                        filterValue.value1=numericArguments.cap(1).toFloat();
-                    }
-
-                    filterValue.str1=numericArguments.cap(2);
-
-                    if(numericArguments.cap(3) != "") //to avoid removal of NOFLOAT
-                    {
-                        filterValue.value2=numericArguments.cap(3).toFloat();
-                    }
-
-                    filterValue.str2=numericArguments.cap(4);
-                }
-            }
-            if(filterValue.toString().isEmpty())
-            {
-                filterValue.str1 = filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified();
-                filterValue.str2 = filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified();
-            }
-            newSearch.searchValue=filterValue;
         }
-        improveQuery(newSearch);
-        searches.append(newSearch);
+        if(filterValue.toString().isEmpty())
+        {
+            //Match speeds and distances after dates to have less problems with avoid sorting them out
+            const static QString capNum = "(\\d+\\.?\\d*)(?![\\.\\d\\/\\:])";    //Match all numbers making sure no numbers are omitted directly at the end
+            const static QString capNumOpt = "(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
+            const static QString capIgnWS = "(?:\\s*)";     //Ignore Whitespaces
+            //Capture only distances and speeds. Times get handled by QDateTime. QT does not support lookbehind
+            const static QString capUnit = "(m|km|mi|ft|ml|m\\/h|km\\/h|mi\\/h|ft\\/h|ml\\/h|h|min|s)?";
+            const static QString capIgnAnd =  "(?:" + tr("and") + ")?";
+            //The second number, the units and the "and" are optional
+            //The String has to be matched completely in order to avoid false positives thus the ^ and the $
+            QRegExp numericArguments("^" + capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit + "$",Qt::CaseInsensitive);
+            numericArguments.indexIn(filterValueString);
+            if(numericArguments.cap(0).simplified() != "")
+            {
+                if(numericArguments.cap(1) != "")     //to avoid removal of NOFLOAT
+                {
+                    filterValue.value1=numericArguments.cap(1).toFloat();
+                }
+
+                filterValue.str1=numericArguments.cap(2);
+
+                if(numericArguments.cap(3) != "")     //to avoid removal of NOFLOAT
+                {
+                    filterValue.value2=numericArguments.cap(3).toFloat();
+                }
+
+                filterValue.str2=numericArguments.cap(4);
+            }
+        }
+        if(filterValue.toString().isEmpty())
+        {
+            filterValue.str1 = filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified();
+            filterValue.str2 = filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified();
+        }
+        newSearch.searchValue=filterValue;
     }
+    improveQuery(newSearch);
+    searches.append(newSearch);
 }
 
 bool CSearch::getSearchResult(IGisItem *item)

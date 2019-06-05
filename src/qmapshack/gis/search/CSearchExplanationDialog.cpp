@@ -32,7 +32,12 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     explanation += tr("\n The regex search uses this syntax: https://perldoc.perl.org/perlre.html");
     explanation += tr("\nFollowing keywords are available for searching:");
     labelExplanation->setText(explanation);
-    listWidgetComparison->addItems(CSearch::getSearchTypeKeywords());
+    for(QString property : CSearch::getSearchTypeKeywords())
+    {
+        QListWidgetItem* item = new QListWidgetItem(property);
+        item->setToolTip(CSearch::getSearchTypeExample(property));
+        listWidgetComparison->addItem(item);
+    }
     for(QString property : CSearch::getSearchPropertyKeywords())
     {
         QListWidgetItem* item = new QListWidgetItem(property);

@@ -317,6 +317,37 @@ QMap<QString,CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
     return map;
 }
 
+QMap<QString,QString> CSearch::keywordSearchExampleMap = CSearch::initKeywordSearchExampleMap();
+QMap<QString,QString> CSearch::initKeywordSearchExampleMap()
+{
+    QMap<QString,QString> map;
+    map.insert(tr("with"),tr("example: attributes with dog"));
+    map.insert(tr("contains"),tr("example: name contains bike"));
+    map.insert(tr("without"),tr("example: name without water"));
+    map.insert(tr("shorter than"),tr("example: shorter than 5km"));
+    map.insert(tr("smaller than"),tr("example: area smaller than 5m²"));
+    map.insert(tr("under"),tr("example: elevation under 1000ft"));
+    map.insert(tr("lower than"),tr("example: lower than 500m"));
+    map.insert(tr("earlier than"),tr("example: date earlier than 2015"));
+    map.insert(tr("before"),tr("example: date before 10.05.2017"));//Localisation of date in example!
+    map.insert(tr("less than"),tr("example: ascent less than 500m"));
+    map.insert("<",tr("example: D<3"));
+    map.insert(tr("longer than"),tr("example: distance longer than 20mi"));
+    map.insert(tr("higher than"),tr("example: terrain hiigher than 2"));
+    map.insert(tr("bigger than"),tr("example: area bigger than 50m²"));
+    map.insert(tr("greater than"),tr("example: descent greater than 3000ft"));
+    map.insert(tr("above"),tr("example: above 50m"));
+    map.insert(tr("over"),tr("example: elevation over 400m"));
+    map.insert(tr("after"),tr("example: date after 2013"));
+    map.insert(tr("later than"),tr("example: date later than 2015"));
+    map.insert(">",tr("example: T>4"));
+    map.insert(tr("regex"),tr("example: size regex (regular|large)"));
+    map.insert("=",tr("example: size equals micro"));
+    map.insert(tr("equals"),tr("example: activity equals bike"));
+    map.insert(tr("between"),tr("example: length between 20km and 20mi"));
+    return map;
+}
+
 QMap<QString,searchProperty_e> CSearch::searchPropertyEnumMap = CSearch::initSearchPropertyEnumMap();
 QMap<QString,searchProperty_e> CSearch::initSearchPropertyEnumMap()
 {

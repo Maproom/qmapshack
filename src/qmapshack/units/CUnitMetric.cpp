@@ -141,11 +141,6 @@ void CUnitMetric::meter2speed(qreal meter, qreal& val, QString& unit) const /* o
         val = meter * speedfactor * 1000;
         unit = "m/h";
     }
-    else if (meter < 10.0)
-    {
-        val = meter * speedfactor;
-        unit = speedunit;
-    }
     else
     {
         val = meter * speedfactor;

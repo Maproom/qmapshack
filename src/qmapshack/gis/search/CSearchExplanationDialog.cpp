@@ -21,7 +21,7 @@
 CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
 {
     setupUi(this);
-
+    setWindowFlag(Qt::Tool, true);
     //connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
     QString explanation = tr("The underlying syntax of the search is \"Property Comparison Value\", however there are measures in place to make searching more intuitive. \nThe searches are always exclusive, thus for a track \"elevation under 500m\" only shows tracks that are completly under 500m meters. ");
     explanation += tr("\nYou can write Dates in the following formats:");

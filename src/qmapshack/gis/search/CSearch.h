@@ -141,6 +141,11 @@ public:
         return keywordSearchTypeMap.keys();
     }
 
+    static QString getSearchTypeExample(QString searchType)
+    {
+        return keywordSearchExampleMap.value(searchType, tr("No information available"));
+    }
+
     static QStringList getSearchPropertyKeywords()
     {
         return searchPropertyEnumMap.keys();
@@ -183,6 +188,9 @@ private:
 
     static QMap<QString,search_type_e> keywordSearchTypeMap;
     static QMap<QString,search_type_e> initKeywordSearchTypeMap();
+
+    static QMap<QString,QString> keywordSearchExampleMap;
+    static QMap<QString,QString> initKeywordSearchExampleMap();
 
     static QMap<QString,searchProperty_e> searchPropertyEnumMap;
     static QMap<QString,searchProperty_e> initSearchPropertyEnumMap();

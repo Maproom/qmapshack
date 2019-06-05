@@ -454,103 +454,191 @@ void IUnit::meter2base(qreal meter, QString& val, QString& unit) const
 
 void IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
 {
-    unit = unit.toLower(); //since targetUnit is in lower
+    unit = unit.toLower(); //since comparison is made in lower
     if(unit == targetUnit)
     {
         return;
     }
 
-    //Convert to m or s
-    if( unit ==  "m²"|| unit ==  "m"||  unit ==  "m/h" || unit =="s")
+    //Convert to mks base units and then to the target to make the code shorter
+    if( unit ==  "m²" || unit ==  "m" ||  unit ==  "m/s" || unit == "s")
     {
         //do nothing
     }
     else if(unit == "km²")
     {
         value *= 1000 * 1000;
+        unit = "m²";
     }
-    else if(unit == "km" || unit == "km/h")
+    else if(unit == "km")
     {
         value *= 1000;
+        unit = "m";
+    }
+    else if(unit == "km/h")
+    {
+        value *= 1000/3600;
+        unit = "m/s";
     }
     else if( unit == "ft²")
     {
         value /= CUnitImperial::footPerMeter * CUnitImperial::footPerMeter;
+        unit = "m²";
     }
-    else if( unit == "ft"||unit == "ft/h")
+    else if( unit == "ft")
     {
         value /= CUnitImperial::footPerMeter;
+        unit = "m";
+    }
+    else if(unit == "ft/h")
+    {
+        value /= CUnitImperial::footPerMeter*3600;
+        unit = "m/s";
+    }
+    else if(unit == "ft/min")
+    {
+        value /= CUnitImperial::footPerMeter*60;
+        unit = "m/s";
+    }
+    else if(unit == "ft/s")
+    {
+        value /= CUnitImperial::footPerMeter;
+        unit = "m/s";
     }
     else if(unit == "ml²")
     {
         value /= CUnitImperial::milePerMeter * CUnitImperial::milePerMeter;
+        unit = "m²";
     }
-    else if(unit == "ml" || unit == "ml/h")
+    else if(unit == "ml")
     {
         value /= CUnitImperial::milePerMeter;
+        unit = "m";
+    }
+    else if(unit == "ml/h")
+    {
+        value /= CUnitImperial::milePerMeter*3600;
+        unit = "m/s";
+    }
+    else if(unit == "ml/min")
+    {
+        value /= CUnitImperial::milePerMeter*60;
+        unit = "m/s";
+    }
+    else if(unit == "ml/s")
+    {
+        value /= CUnitImperial::milePerMeter;
+        unit = "m/s";
     }
     else if(unit == "min")
     {
         value *= 60;
+        unit="s";
     }
     else if(unit == "h")
     {
         value *= 3600;
-    }
-
-    if(unit.contains("/h"))
-    {
-        unit = "m/h";
-    }
-    else if (unit.contains("²"))
-    {
-        unit = "m²";
-    }
-    else if(unit == "h" || unit == "min")
-    {
-        unit = "s";
-    }
-    else
-    {
-        unit = "m";
+        unit ="s";
     }
 
     //convert to target
-    if( targetUnit ==  "m²"|| targetUnit ==  "m"||  targetUnit ==  "m/h" || targetUnit == "s")
+    if( targetUnit ==  "m²" || targetUnit ==  "m" ||  targetUnit ==  "m/s" || targetUnit == "s")
     {
         //do nothing
+    }
+    else if (targetUnit == "m/h")
+    {
+        value *= 3600;
+        unit = targetUnit;
+    }
+    else if (targetUnit == "m/min")
+    {
+        value *= 60;
+        unit = targetUnit;
     }
     else if(targetUnit == "km²")
     {
         value /= 1000 * 1000;
+        unit = targetUnit;
     }
-    else if(targetUnit == "km" || targetUnit == "km/h")
+    else if(targetUnit == "km")
     {
         value /= 1000;
+        unit = targetUnit;
     }
-    else if( targetUnit == "ft²")
+    else if(targetUnit == "km/h")
+    {
+        value *= 3600 / 1000;
+        unit = targetUnit;
+    }
+    else if(targetUnit == "km/min")
+    {
+        value *= 60 / 1000;
+        unit = targetUnit;
+    }
+    else if(targetUnit == "km/s")
+    {
+        value /= 1000;
+        unit = targetUnit;
+    }
+    else if(targetUnit == "ft²")
     {
         value *= CUnitImperial::footPerMeter * CUnitImperial::footPerMeter;
+        unit = targetUnit;
     }
-    else if( targetUnit == "ft"||targetUnit == "ft/h")
+    else if(targetUnit == "ft")
     {
         value *= CUnitImperial::footPerMeter;
+        unit = targetUnit;
+    }
+    else if(targetUnit == "ft/h")
+    {
+        value *= CUnitImperial::footPerMeter * 3600;
+        unit = targetUnit;
+    }
+    else if(targetUnit == "ft/min")
+    {
+        value *= CUnitImperial::footPerMeter * 60;
+        unit = targetUnit;
+    }
+    else if(targetUnit == "ft/s")
+    {
+        value *= CUnitImperial::footPerMeter;
+        unit = targetUnit;
     }
     else if(targetUnit == "ml²")
     {
         value *= CUnitImperial::milePerMeter * CUnitImperial::milePerMeter;
     }
-    else if(targetUnit == "ml" || targetUnit == "ml/h")
+    else if(targetUnit == "ml")
     {
         value *= CUnitImperial::milePerMeter;
+        unit = targetUnit;
+    }
+    else if(targetUnit == "ml/h")
+    {
+        value *= CUnitImperial::milePerMeter * 3600;
+        unit = targetUnit;
+    }
+    else if(targetUnit == "ml/min")
+    {
+        value *= CUnitImperial::milePerMeter * 60;
+        unit = targetUnit;
+    }
+    else if(targetUnit == "ml/s")
+    {
+        value *= CUnitImperial::milePerMeter;
+        unit = targetUnit;
     }
     else if(targetUnit == "min")
     {
         value /= 60;
+        unit = targetUnit;
     }
     else if(targetUnit == "h")
     {
         value /= 3600;
+        unit = targetUnit;
     }
 }
 

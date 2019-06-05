@@ -28,6 +28,7 @@ CSearch::CSearch(QString searchstring)
         return;
     }
 
+    //Detect which comparison keyword in order to later spilt the string at this word.
     QString searchTypeKeyword;
     for(const QString& key:keywordSearchTypeMap.keys())
     {
@@ -37,10 +38,11 @@ CSearch::CSearch(QString searchstring)
             break;
         }
     }
+
     search_t newSearch;
     if(searchTypeKeyword.isEmpty())
     {
-        //Search for what the user typed in the name or the full text
+        //Default to search for what the user typed in the name or the full text
         newSearch.searchType=eSearchTypeWith;
         if(searchMode == eSearchModeText)
         {
@@ -55,12 +57,13 @@ CSearch::CSearch(QString searchstring)
     else
     {
         newSearch.searchType=keywordSearchTypeMap.value(searchTypeKeyword);
+        //Everything before the Search Type keyword is the property, i.e. "date after 2019" would result in "date"
         newSearch.property=searchPropertyEnumMap.value(searchstring.section(searchTypeKeyword,0,0,QString::SectionCaseInsensitiveSeps).simplified(),eSearchPropertyNoMatch);
-
+        //Everything after the Search Type keyword is the value, i.e. "date after 2019" would result in "2019"
         QString filterValueString = searchstring.section(searchTypeKeyword,1,-1,QString::SectionCaseInsensitiveSeps).simplified();
         searchValue_t filterValue;
 
-        //Try if it is a time
+        //Try if it is a time. Do so first, since this is the most exclusive
         const static QList<QString> timeFormats = {
             QLocale::system().timeFormat(QLocale::LongFormat),
             QLocale::system().timeFormat(QLocale::ShortFormat),
@@ -116,13 +119,14 @@ CSearch::CSearch(QString searchstring)
                 }
             }
         }
+
         if(filterValue.toString().isEmpty())
         {
             //Match speeds and distances after dates to have less problems with avoid sorting them out
             const static QString capNum = "(\\d+\\.?\\d*)(?![\\.\\d\\/\\:])";    //Match all numbers making sure no numbers are omitted directly at the end
             const static QString capNumOpt = "(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
             const static QString capIgnWS = "(?:\\s*)";     //Ignore Whitespaces
-            //Capture only distances and speeds. Times get handled by QDateTime. QT does not support lookbehind
+            //Capture distances, speeds and simple Times that don't get caught by QDateTime.
             const static QString capUnit = "(m|km|mi|ft|ml|m\\/h|km\\/h|mi\\/h|ft\\/h|ml\\/h|h|min|s)?";
             const static QString capIgnAnd =  "(?:" + tr("and") + ")?";
             //The second number, the units and the "and" are optional
@@ -197,24 +201,26 @@ void CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchV
     }
 }
 
+//Make life easier for the user. The method tries to make assumption on what the user meant
 void CSearch::improveQuery(search_t &search)
 {
+    //If the user entered a number with a unit and another number, assume they have the same unit
     if(search.searchValue.str1 != "" && search.searchValue.str2 == "" && search.searchValue.value1 != NOFLOAT && search.searchValue.value2 != NOFLOAT)
     {
-        //Assume they have the same unit
         search.searchValue.str2=search.searchValue.str1;
     }
 
+    //Adjust abbreviations for miles
     if(search.searchValue.value1 != NOFLOAT && search.searchValue.str1.compare("MI",Qt::CaseInsensitive) == 0)
     {
         search.searchValue.str1 = "ML"; //ml is used in CUnit
     }
-
     if(search.searchValue.value2 != NOFLOAT && search.searchValue.str2.compare("MI",Qt::CaseInsensitive) == 0)
     {
         search.searchValue.str2 = "ML"; //ml is used in CUnit
     }
 
+    //Try to guess what property the user meant when there is no match. I.e. make "shorter than 5km" work
     if(search.property == eSearchPropertyNoMatch)
     {
         if(search.searchValue.str1.contains("/H",Qt::CaseInsensitive) ||
@@ -232,7 +238,9 @@ void CSearch::improveQuery(search_t &search)
         {
             search.property = eSearchPropertyGeneralElevation;
         }
-        else if(search.searchValue.str1.compare("S",Qt::CaseInsensitive) == 0)
+        else if(search.searchValue.str1.compare("S",Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("MIN",Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("H",Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyRteTrkTimeMoving;
         }
@@ -242,6 +250,7 @@ void CSearch::improveQuery(search_t &search)
         }
     }
 
+    //Searching for dates is error prone, thus some checks to make sure one searche sfor a probable value.
     if(search.property == eSearchPropertyGeneralDate)
     {
         if(search.searchValue.value1 != NOFLOAT)

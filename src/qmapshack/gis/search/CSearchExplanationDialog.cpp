@@ -23,13 +23,14 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     setupUi(this);
     setWindowFlag(Qt::Tool, true);
     //connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
-    QString explanation = tr("The underlying syntax of the search is \"Property Comparison Value\", however there are measures in place to make searching more intuitive. \nThe searches are always exclusive, thus for a track \"elevation under 500m\" only shows tracks that are completly under 500m meters. ");
+    QString explanation = tr("The underlying syntax of the search is \"Property Comparison Value\", i.e. \"name contains water\", however there are measures in place to make searching more intuitive so you can omit parts in special cases. Just try it out. \nThe searches are always exclusive, thus for a track \"elevation under 500m\" only shows tracks that are completly under 500m meters. ");
     explanation += tr("\nYou can write Dates in the following formats:");
     explanation += "\n\t" + QLocale::system().dateTimeFormat(QLocale::LongFormat);
-    explanation += "\n\t" + QLocale::system().dateTimeFormat(QLocale::ShortFormat),
-    explanation += "\n\t" + QLocale::c().dateTimeFormat(QLocale::LongFormat),
-    explanation += "\n\t" + QLocale::c().dateTimeFormat(QLocale::ShortFormat),
-    explanation+= tr("\nFollowing keywords are available for searching:");
+    explanation += "\n\t" + QLocale::system().dateTimeFormat(QLocale::ShortFormat);
+    explanation += "\n\t" + QLocale::c().dateTimeFormat(QLocale::LongFormat);
+    explanation += "\n\t" + QLocale::c().dateTimeFormat(QLocale::ShortFormat);
+    explanation += tr("\n The regex search uses this syntax: https://perldoc.perl.org/perlre.html");
+    explanation += tr("\nFollowing keywords are available for searching:");
     labelExplanation->setText(explanation);
     listWidgetComparison->addItems(CSearch::getSearchTypeKeywords());
     for(QString property : CSearch::getSearchPropertyKeywords())

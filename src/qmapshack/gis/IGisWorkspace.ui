@@ -63,7 +63,10 @@
      <item row="1" column="0" colspan="2">
       <widget class="QLineEdit" name="lineFilter">
        <property name="toolTip">
-        <string>Filter: Start to type and the list will be reduced to matching items.</string>
+        <string>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</string>
+       </property>
+       <property name="placeholderText">
+        <string>start typing...</string>
        </property>
        <property name="clearButtonEnabled">
         <bool>false</bool>

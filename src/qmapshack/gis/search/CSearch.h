@@ -198,7 +198,7 @@ private:
     static QMap<searchProperty_e,QString> searchPropertyMeaningMap;
     static QMap<searchProperty_e,QString> initSearchPropertyMeaningMap();
 
-//First is itemValue, escond is searchValue, which is non const to adjust units
+    //First is itemValue, second is searchValue, which is non const to adjust units
     using fSearch = std::function<bool (const searchValue_t&, searchValue_t&)>;
     static QMap<search_type_e,fSearch > searchTypeLambdaMap;
     static QMap<search_type_e,fSearch > initSearchTypeLambdaMap();

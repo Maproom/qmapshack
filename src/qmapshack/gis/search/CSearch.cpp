@@ -331,18 +331,18 @@ QMap<QString,QString> CSearch::initKeywordSearchExampleMap()
     map.insert(tr("earlier than"),tr("example: date earlier than 2015"));
     map.insert(tr("before"),tr("example: date before 10.05.2017"));//Localisation of date in example!
     map.insert(tr("less than"),tr("example: ascent less than 500m"));
-    map.insert("<",tr("example: D<3"));
+    map.insert("<",tr("example: D < 3"));
     map.insert(tr("longer than"),tr("example: distance longer than 20mi"));
-    map.insert(tr("higher than"),tr("example: terrain hiigher than 2"));
+    map.insert(tr("higher than"),tr("example: terrain higher than 2"));
     map.insert(tr("bigger than"),tr("example: area bigger than 50m²"));
     map.insert(tr("greater than"),tr("example: descent greater than 3000ft"));
     map.insert(tr("above"),tr("example: above 50m"));
     map.insert(tr("over"),tr("example: elevation over 400m"));
     map.insert(tr("after"),tr("example: date after 2013"));
     map.insert(tr("later than"),tr("example: date later than 2015"));
-    map.insert(">",tr("example: T>4"));
+    map.insert(">",tr("example: T > 4"));
     map.insert(tr("regex"),tr("example: size regex (regular|large)"));
-    map.insert("=",tr("example: size equals micro"));
+    map.insert("=",tr("example: size = micro"));
     map.insert(tr("equals"),tr("example: activity equals bike"));
     map.insert(tr("between"),tr("example: length between 20km and 20mi"));
     return map;

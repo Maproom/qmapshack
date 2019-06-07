@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>711</width>
-    <height>36</height>
+    <height>89</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -107,12 +107,41 @@
         <property name="spacing">
          <number>3</number>
         </property>
-        <item row="0" column="4">
-         <widget class="QLabel" name="label_14">
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_12">
           <property name="text">
-           <string>Descending</string>
+           <string>Ascending Speed</string>
           </property>
          </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="spinAscending">
+          <property name="decimals">
+           <number>0</number>
+          </property>
+          <property name="minimum">
+           <double>1.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>10000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>1.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>0</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="0" column="1">
          <widget class="QDoubleSpinBox" name="spinPlainSpeed">
@@ -140,7 +169,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="5">
+        <item row="2" column="1">
          <widget class="QDoubleSpinBox" name="spinDescending">
           <property name="decimals">
            <number>0</number>
@@ -156,30 +185,14 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
-         <widget class="QDoubleSpinBox" name="spinAscending">
-          <property name="decimals">
-           <number>0</number>
-          </property>
-          <property name="minimum">
-           <double>1.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>10000.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>1.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QLabel" name="label_12">
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_14">
           <property name="text">
-           <string>Ascending</string>
+           <string>Descending Speed</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
+        <item row="3" column="1">
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -187,26 +200,13 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>40</height>
+            <height>0</height>
            </size>
           </property>
          </spacer>
         </item>
        </layout>
       </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -215,8 +215,6 @@
  <tabstops>
   <tabstop>comboHikingType</tabstop>
   <tabstop>spinPlainSpeed</tabstop>
-  <tabstop>spinAscending</tabstop>
-  <tabstop>spinDescending</tabstop>
  </tabstops>
  <resources/>
  <connections/>

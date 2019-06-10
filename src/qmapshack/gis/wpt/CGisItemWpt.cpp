@@ -997,7 +997,7 @@ void CGisItemWpt::detBoundingRect()
     }
 }
 
-const QString CGisItemWpt::geocache_t::attributeMeanings[] = {
+const QVector<QString> CGisItemWpt::geocache_t::attributeMeanings = {
     "QMS Attribute Flag",         //Not to be serialized in GPX files
     "Dogs",
     "Access or parking fee",

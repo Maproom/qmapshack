@@ -72,7 +72,7 @@ public:
         QString type;
         QString container;
         //See ZGeocacheAttributes.txt for meanings.
-        QMap<qint8,bool> attributes;
+        QMap<quint8,bool> attributes;
         bool shortDescIsHtml = false;
         QString shortDesc;
         bool longDescIsHtml = false;
@@ -83,7 +83,7 @@ public:
         QString locale;
         QList<geocachelog_t> logs;
 
-        const static QString attributeMeanings[68];
+        const static QVector<QString> attributeMeanings;
     };
 
     struct image_t

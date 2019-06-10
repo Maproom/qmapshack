@@ -628,7 +628,13 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
 
     for(QDomNode xmlAttribute = geocacheAttributes.firstChild(); !xmlAttribute.isNull(); xmlAttribute=xmlAttribute.nextSibling())
     {
-        qint8 id = xmlAttribute.attributes().namedItem("id").nodeValue().toUInt();
+        quint8 id = xmlAttribute.attributes().namedItem("id").nodeValue().toUInt();
+        if(id >= geocache.attributeMeanings.size())
+        {
+            qWarning() << "CGisItemWpt::readGcExt(): Ignore unknown attribute ID " << id;
+            continue;
+        }
+
         qint8 intvalue = xmlAttribute.attributes().namedItem("inc").nodeValue().toUInt();
         geocache.attributes[id]=(intvalue == 1);
         if(id == 42) //42 is the code for 'Needs maintenance' and it only appears, when there attribute is set
@@ -691,13 +697,17 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
     writeXml(xmlCache, "groundspeak:container", geocache.container);
 
     QDomElement xmlAttributes = xmlCache.ownerDocument().createElement("groundspeak:attributes");
-    for(auto& attribute : geocache.attributes.keys())
+    for(quint8& attribute : geocache.attributes.keys())
     {
         QDomElement xmlAttribute = xmlCache.ownerDocument().createElement("groundspeak:attribute");
         xmlAttribute.setAttribute("id", attribute);
         qint8 inc = geocache.attributes[attribute] ? 1 : 0;
         xmlAttribute.setAttribute("inc", inc);
-        QDomText text = xmlCache.ownerDocument().createTextNode(geocache.attributeMeanings[attribute]);
+        QDomText text;
+        if(attribute < geocache.attributeMeanings.size())
+        {
+            text = xmlCache.ownerDocument().createTextNode(geocache.attributeMeanings[attribute]);
+        }
         xmlAttribute.appendChild(text);
         xmlAttributes.appendChild(xmlAttribute);
         xmlCache.appendChild(xmlAttributes);

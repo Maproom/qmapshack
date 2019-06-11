@@ -335,7 +335,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
 
     // start to draw the map
     QPainter p(&buf.image);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 

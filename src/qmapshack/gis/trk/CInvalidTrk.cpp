@@ -33,7 +33,7 @@ CInvalidTrk::CInvalidTrk(CGisItemTrk &trk, QWidget *parent)
     connect(checkDoNotAskAgain, &QCheckBox::clicked, this, &CInvalidTrk::slotDoNotAskAgain);
 
     int s = QApplication::style()->pixelMetric(QStyle::PM_MessageBoxIconSize);
-    labelIcon->setPixmap( QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(s,s));
+    labelIcon->setPixmap( QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(s, s));
 
     IGisProject * p = trk.getParentProject();
     if(p != nullptr && !p->getName().isEmpty())

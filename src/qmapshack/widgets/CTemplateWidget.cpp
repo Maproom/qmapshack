@@ -102,7 +102,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
             {
                 if(obj->isChecked())
                 {
-                    str += pre + obj->text().replace("&","");
+                    str += pre + obj->text().replace("&", "");
                 }
                 continue;
             }
@@ -114,7 +114,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
             {
                 if(obj->isChecked())
                 {
-                    str += pre + obj->text().replace("&","");
+                    str += pre + obj->text().replace("&", "");
                 }
                 continue;
             }
@@ -231,7 +231,7 @@ void CTemplateWidget::slotTemplateActivated(int idx)
         }
     }
 
-    layoutWidget->insertWidget(0,widget);
+    layoutWidget->insertWidget(0, widget);
     pushPreview->setEnabled(success);
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(success);
 

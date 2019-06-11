@@ -31,7 +31,7 @@ CFilterTerrainSlope::CFilterTerrainSlope(CGisItemTrk &trk, QWidget *parent)
 
 void CFilterTerrainSlope::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterTerrainSlope");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterTerrainSlope");
     trk.filterTerrainSlope();
     CCanvas::restoreOverrideCursor("CFilterTerrainSlope");
 }

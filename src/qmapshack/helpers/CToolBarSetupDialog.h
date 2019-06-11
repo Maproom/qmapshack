@@ -43,7 +43,7 @@ public:
             : QListWidgetItem(icon, text, nullptr, QListWidgetItem::UserType),
             actionName(name) {}
         ~CDialogItem() override {}
-        QListWidgetItem * clone() const override { return new CDialogItem(this->icon(),this->text(),this->actionName); }
+        QListWidgetItem * clone() const override { return new CDialogItem(this->icon(), this->text(), this->actionName); }
 private:
         const QString actionName;
         friend class CToolBarSetupDialog;

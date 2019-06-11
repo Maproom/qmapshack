@@ -29,7 +29,7 @@ public:
     IQlgtOverlay(quint64 id, QObject * parent);
     virtual ~IQlgtOverlay();
 
-    enum type_e {eEnd,eBase};
+    enum type_e {eEnd, eBase};
 
     struct pt_t : public projXY
     {

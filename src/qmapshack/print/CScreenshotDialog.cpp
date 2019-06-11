@@ -41,7 +41,7 @@ CScreenshotDialog::CScreenshotDialog(CCanvas &canvas, QWidget *parent)
 
     const QPixmap& pixmap = getScreenshot(getTrackForProfile());
 
-    labelPreview->setPixmap(pixmap.scaled(400,300, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelPreview->setPixmap(pixmap.scaled(400, 300, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     connect(pushSave, &QPushButton::clicked, this, &CScreenshotDialog::slotSave);
     connect(pushPrint, &QPushButton::clicked, this, &CScreenshotDialog::slotPrint);
@@ -119,28 +119,28 @@ void CScreenshotDialog::slotPrint()
     const QPixmap& canvasScaled = pixmap.scaled(r.size().toSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     QPainter p(&printer);
-    p.drawPixmap(0,0,canvasScaled);
+    p.drawPixmap(0, 0, canvasScaled);
 
     CGisItemTrk * trk = getTrackForProfile();
     if(trk != nullptr)
     {
         CPlotProfile plot(trk, trk->limitsGraph1, IPlot::eModeNormal, CMainWindow::self().getBestWidgetForParent());
         plot.resize(pixmap.width(), heightProfile);
-        QImage image(plot.size(),QImage::Format_ARGB32);
+        QImage image(plot.size(), QImage::Format_ARGB32);
         plot.save(image);
 
         const QImage& profileScaled = image.scaled(r.size().toSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
         if(r.height() > (canvasScaled.height() + profileScaled.height()))
         {
-            p.translate(0,canvasScaled.height());
+            p.translate(0, canvasScaled.height());
         }
         else
         {
             printer.newPage();
         }
 
-        p.drawImage(0,0,profileScaled);
+        p.drawImage(0, 0, profileScaled);
     }
 
 
@@ -167,9 +167,9 @@ QPixmap CScreenshotDialog::getScreenshot(CGisItemTrk * trk)
         CPlotProfile plot(trk, trk->limitsGraph1, IPlot::eModeNormal, CMainWindow::self().getBestWidgetForParent());
         plot.resize(pixmap.width(), heightProfile);
 
-        QImage image(plot.size(),QImage::Format_ARGB32);
+        QImage image(plot.size(), QImage::Format_ARGB32);
         plot.save(image);
-        p.drawImage(0,canvas.height(),image);
+        p.drawImage(0, canvas.height(), image);
     }
 
     return pixmap;

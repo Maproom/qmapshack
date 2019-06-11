@@ -166,14 +166,14 @@ void CRouterBRouter::updateDialog() const
 {
     if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
-        routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (offline)"));
+        routerSetup->setRouterTitle(CRouterSetup::RouterBRouter, tr("BRouter (offline)"));
         labelCopyrightBRouter->setVisible(true);
         labelCopyrightBRouterWeb->setVisible(false);
     }
     else
     {
         Q_ASSERT(setup->installMode == CRouterBRouterSetup::eModeOnline);
-        routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (online)"));
+        routerSetup->setRouterTitle(CRouterSetup::RouterBRouter, tr("BRouter (online)"));
         labelCopyrightBRouter->setVisible(false);
         labelCopyrightBRouterWeb->setVisible(true);
     }
@@ -181,7 +181,7 @@ void CRouterBRouter::updateDialog() const
     bool hasItems = false;
     for(const QString& profile : setup->getProfiles())
     {
-        comboProfile->addItem(profile,profile);
+        comboProfile->addItem(profile, profile);
         hasItems = true;
     }
     comboProfile->setEnabled(hasItems);
@@ -228,7 +228,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
         {
             lonLats.append("|");
         }
-        lonLats.append(QString("%1,%2").arg(pt.x(),0,'f',6).arg(pt.y(),0,'f',6));
+        lonLats.append(QString("%1,%2").arg(pt.x(), 0, 'f', 6).arg(pt.y(), 0, 'f', 6));
     }
 
     QString nogoStr;
@@ -250,7 +250,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
                 {
                     nogoStr.append("|");
                 }
-                nogoStr.append(QString("%1,%2,%3").arg(pos.x(),0,'f',6).arg(pos.y(),0,'f',6).arg(rad,0,'f',0));
+                nogoStr.append(QString("%1,%2,%3").arg(pos.x(), 0, 'f', 6).arg(pos.y(), 0, 'f', 6).arg(rad, 0, 'f', 0));
             }
             break;
         }
@@ -270,7 +270,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
                 {
                     nogoPoints.append(",");
                 }
-                nogoPoints.append(QString("%1,%2").arg(point.x(),0,'f',6).arg(point.y(),0,'f',6));
+                nogoPoints.append(QString("%1,%2").arg(point.x(), 0, 'f', 6).arg(point.y(), 0, 'f', 6));
             }
             if (item->type() == IGisItem::eTypeOvl)
             {
@@ -299,7 +299,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
     }
 
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("lonlats",lonLats.toLatin1());
+    urlQuery.addQueryItem("lonlats", lonLats.toLatin1());
     if (!nogoStr.isEmpty())
     {
         urlQuery.addQueryItem("nogos", nogoStr.toLatin1());
@@ -335,7 +335,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     QList<IGisItem*> nogos;
     CGisWorkspace::self().getNogoAreas(nogos);
 
-    return synchronousRequest(points,nogos,coords,false);
+    return synchronousRequest(points, nogos, coords, false);
 }
 
 int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QList<IGisItem *> &nogos, QPolygonF &coords, bool isVersionRequest)
@@ -358,7 +358,7 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
 
     synchronous = true;
 
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points,nogos));
+    QNetworkReply * reply = networkAccessManager->get(getRequest(points, nogos));
 
     try
     {
@@ -374,7 +374,7 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
         eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
 
         const QNetworkReply::NetworkError& netErr = reply->error();
-        if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1,4,10))
+        if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1, 4, 10))
         {
             throw tr("this version of BRouter does not support more then 1 nogo-area");
         }
@@ -472,12 +472,12 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     QVector<QPointF> points;
     for(const CGisItemRte::rtept_t &pt : rte->getRoute().pts)
     {
-        points << QPointF(pt.lon,pt.lat);
+        points << QPointF(pt.lon, pt.lat);
     }
 
     synchronous = false;
 
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points,nogos));
+    QNetworkReply * reply = networkAccessManager->get(getRequest(points, nogos));
 
     reply->setProperty("key.item", key.item);
     reply->setProperty("key.project", key.project);
@@ -509,7 +509,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     try
     {
         const QNetworkReply::NetworkError& netErr = reply->error();
-        if (netErr == QNetworkReply::RemoteHostClosedError && reply->property("nogos").toInt() > 1 && !isMinimumVersion(1,4,10))
+        if (netErr == QNetworkReply::RemoteHostClosedError && reply->property("nogos").toInt() > 1 && !isMinimumVersion(1, 4, 10))
         {
             throw tr("this version of BRouter does not support more then 1 nogo-area");
         }
@@ -547,7 +547,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
         CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
         if(rte != nullptr)
         {
-            rte->setResultFromBRouter(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0,'f',2));
+            rte->setResultFromBRouter(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0, 'f', 2));
         }
     }
     catch(const QString& msg)
@@ -616,14 +616,14 @@ void CRouterBRouter::getBRouterVersion()
     {
         // use 2 points known to be routable:
         QVector<QPointF> points(2);
-        points.replace(0,QPointF(0.1944047317331011,0.8495732565736815)*RAD_TO_DEG);
-        points.replace(1,QPointF(0.1944047317331012,0.8495732565736816)*RAD_TO_DEG);
+        points.replace(0, QPointF(0.1944047317331011, 0.8495732565736815)*RAD_TO_DEG);
+        points.replace(1, QPointF(0.1944047317331012, 0.8495732565736816)*RAD_TO_DEG);
         QPolygonF rt;
         QList<IGisItem*> nogos;
         // parseBRouterVersion is called while parsing remote brouters xml-response:
         try
         {
-            synchronousRequest(points,nogos,rt,true);
+            synchronousRequest(points, nogos, rt, true);
         }
         catch(const QString&)
         {

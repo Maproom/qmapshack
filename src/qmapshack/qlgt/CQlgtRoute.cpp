@@ -36,9 +36,9 @@ QDataStream& operator >>(QDataStream& s, CQlgtRoute& route)
     qint64 pos = dev->pos();
 
     char magic[9];
-    s.readRawData(magic,9);
+    s.readRawData(magic, 9);
 
-    if(strncmp(magic,"QLRte   ",9))
+    if(strncmp(magic, "QLRte   ", 9))
     {
         dev->seek(pos);
         return s;
@@ -228,7 +228,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtRoute& route)
     //---------------------------------------
     //---------------------------------------
     // write magic key
-    s.writeRawData("QLRte   ",9);
+    s.writeRawData("QLRte   ", 9);
 
     // calculate offset table
     quint32 offset = entries.count() * 8 + 9;

@@ -39,8 +39,8 @@ public:
     enum column_e
     {
         eColumnCheckbox = 0
-        ,eColumnName = 1
-        ,eColumnTime = 2
+        , eColumnName = 1
+        , eColumnTime = 2
     };
 
     bool hasDatabase(const QString& name);

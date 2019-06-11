@@ -46,13 +46,13 @@ CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk &trk, QWidg
 CFilterInterpolateElevation::~CFilterInterpolateElevation()
 {
     SETTINGS;
-    cfg.setValue("TrackDetails/Filter/Interp/quality",comboQuality->currentData());
+    cfg.setValue("TrackDetails/Filter/Interp/quality", comboQuality->currentData());
     trk.setupInterpolation(false, CGisItemTrk::eQualityCoarse);
 }
 
 void CFilterInterpolateElevation::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterInterpolateElevation");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterInterpolateElevation");
     trk.filterInterpolateElevation();
     checkPreview->setChecked(trk.isInterpolationEnabled());
     CCanvas::restoreOverrideCursor("CFilterInterpolateElevation");

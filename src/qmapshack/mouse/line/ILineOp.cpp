@@ -73,13 +73,13 @@ void ILineOp::slotTimeoutRouting()
 
 void ILineOp::drawBg(QPainter& p)
 {
-    drawLeadLine(leadLinePixel1,p);
-    drawLeadLine(leadLinePixel2,p);
+    drawLeadLine(leadLinePixel1, p);
+    drawLeadLine(leadLinePixel2, p);
 }
 
 void ILineOp::drawSinglePointSmall(const QPointF& pt, QPainter& p)
 {
-    QRect r(0,0,3,3);
+    QRect r(0, 0, 3, 3);
     r.moveCenter(pt.toPoint());
 
     p.setPen(QPen(Qt::white, 2));
@@ -234,7 +234,7 @@ void ILineOp::finalizeOperation(qint32 idx)
 
     if(parentHandler->useAutoRouting())
     {
-        CCanvas::setOverrideCursor(Qt::WaitCursor,"ILineOp::finalizeOperation");
+        CCanvas::setOverrideCursor(Qt::WaitCursor, "ILineOp::finalizeOperation");
         if(idx > 0)
         {
             tryRouting(points[idx - 1], points[idx]);

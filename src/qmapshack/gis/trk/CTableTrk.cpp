@@ -178,7 +178,7 @@ void CTableTrk::updateData()
             item->setForeground(i, fg);
         }
 
-        item->setText(eColNum,QString::number(trkpt.idxTotal));
+        item->setText(eColNum, QString::number(trkpt.idxTotal));
 
         item->setText(eColTime, trkpt.time.isValid()
                       ? IUnit::self().datetime2string(trkpt.time, true, QPointF(trkpt.lon, trkpt.lat)*DEG_TO_RAD)
@@ -225,7 +225,7 @@ void CTableTrk::updateData()
         // position
         QString str;
         IUnit::degToStr(trkpt.lon, trkpt.lat, str);
-        item->setText(eColPosition,str);
+        item->setText(eColPosition, str);
 
         items << item;
     }

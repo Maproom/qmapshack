@@ -110,7 +110,7 @@ QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute)
     }
 
     menu->addSeparator();
-    action = menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
+    action = menu->addAction(QIcon("://icons/32x32/Apply.png"), tr("Configure Services"));
     connect(action, &QAction::triggered, this, &CGeoSearchWeb::slotConfigureServices);
 
     if(execute)

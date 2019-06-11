@@ -31,7 +31,7 @@ inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
 }
 
 #define RECT_RADIUS 3
-#define PAINT_ROUNDED_RECT(p,r) p.drawRoundedRect(r,RECT_RADIUS,RECT_RADIUS)
+#define PAINT_ROUNDED_RECT(p, r) p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS)
 
 
 class CDraw

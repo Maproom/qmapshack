@@ -94,7 +94,7 @@ void CPhotoAlbum::slotAddImage()
                 h *= 600.0 / w;
                 w  = 600;
             }
-            image.pixmap = image.pixmap.scaled(w,h,Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            image.pixmap = image.pixmap.scaled(w, h, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
             images << image;
         }
@@ -191,8 +191,8 @@ void CPhotoAlbum::updateView()
         int yoff = (height()- r.height()) / 2;
 
         p.save();
-        p.translate(xoff,yoff);
-        p.drawImage(0,0,tmp);
+        p.translate(xoff, yoff);
+        p.drawImage(0, 0, tmp);
         p.setPen(QPen(Qt::black, 3));
         p.setBrush(Qt::NoBrush);
         p.drawRect(r);

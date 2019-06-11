@@ -30,7 +30,7 @@ const QPen CRouterBRouterTilesSelectArea::selectedTilesPen    = QPen(Qt::blue);
 const QPen CRouterBRouterTilesSelectArea::outstandingTilesPen = QPen(Qt::yellow);
 const QPen CRouterBRouterTilesSelectArea::invalidTilesPen     = QPen(Qt::gray);
 const QBrush CRouterBRouterTilesSelectArea::outdatedTilesBrush    = QBrush(Qt::gray,     Qt::Dense5Pattern);
-const QBrush CRouterBRouterTilesSelectArea::currentTilesBrush     = QBrush(Qt::darkGreen,Qt::Dense3Pattern);
+const QBrush CRouterBRouterTilesSelectArea::currentTilesBrush     = QBrush(Qt::darkGreen, Qt::Dense3Pattern);
 const QBrush CRouterBRouterTilesSelectArea::selectedTilesBrush    = QBrush(Qt::blue,     Qt::Dense3Pattern);
 const QBrush CRouterBRouterTilesSelectArea::outstandingTilesBrush = QBrush(Qt::yellow,   Qt::Dense3Pattern);
 const QBrush CRouterBRouterTilesSelectArea::invalidTilesBrush     = QBrush(Qt::gray,     Qt::DiagCrossPattern);
@@ -135,16 +135,16 @@ QPoint CRouterBRouterTilesSelectArea::tileUnderMouse(const QPointF & mousePos) c
     canvas->convertPx2Rad(pos);
     QPointF posDegF = pos * RAD_TO_DEG;
     QPoint tile(posDegF.x() > 0 ? posDegF.x()/CRouterBRouterTilesSelect::tileSize : posDegF.x()/CRouterBRouterTilesSelect::tileSize - 1
-                ,posDegF.y() > 0 ? posDegF.y()/CRouterBRouterTilesSelect::tileSize : posDegF.y()/CRouterBRouterTilesSelect::tileSize - 1);
+                , posDegF.y() > 0 ? posDegF.y()/CRouterBRouterTilesSelect::tileSize : posDegF.y()/CRouterBRouterTilesSelect::tileSize - 1);
     return tile * CRouterBRouterTilesSelect::tileSize;
 }
 
 QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile) const
 {
-    QPointF p0(tile.x(),tile.y());
-    QPointF p1(tile.x()+CRouterBRouterTilesSelect::tileSize,tile.y());
-    QPointF p2(tile.x()+CRouterBRouterTilesSelect::tileSize,tile.y()+CRouterBRouterTilesSelect::tileSize);
-    QPointF p3(tile.x(),tile.y()+CRouterBRouterTilesSelect::tileSize);
+    QPointF p0(tile.x(), tile.y());
+    QPointF p1(tile.x()+CRouterBRouterTilesSelect::tileSize, tile.y());
+    QPointF p2(tile.x()+CRouterBRouterTilesSelect::tileSize, tile.y()+CRouterBRouterTilesSelect::tileSize);
+    QPointF p3(tile.x(), tile.y()+CRouterBRouterTilesSelect::tileSize);
 
     p0 *= DEG_TO_RAD;
     p1 *= DEG_TO_RAD;
@@ -167,9 +167,9 @@ QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile) const
 
 QPolygonF CRouterBRouterTilesSelectArea::gridPolygon(const QPoint & tile) const
 {
-    QPointF p0(tile.x(),tile.y());
-    QPointF p1(tile.x()+CRouterBRouterTilesSelect::tileSize,tile.y());
-    QPointF p2(tile.x()+CRouterBRouterTilesSelect::tileSize,tile.y()+CRouterBRouterTilesSelect::tileSize);
+    QPointF p0(tile.x(), tile.y());
+    QPointF p1(tile.x()+CRouterBRouterTilesSelect::tileSize, tile.y());
+    QPointF p2(tile.x()+CRouterBRouterTilesSelect::tileSize, tile.y()+CRouterBRouterTilesSelect::tileSize);
 
     p0 *= DEG_TO_RAD;
     p1 *= DEG_TO_RAD;

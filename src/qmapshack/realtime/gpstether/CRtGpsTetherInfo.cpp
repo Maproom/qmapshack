@@ -261,7 +261,7 @@ void CRtGpsTetherInfo::slotUpdate()
     labelElevation->setText(QString("%1%2").arg(val).arg(unit));
     IUnit::self().meter2speed(speed, val, unit);
     labelSpeed->setText(QString("%1%2").arg(val).arg(unit));
-    labelHeading->setText(heading != NOFLOAT ? QString("%1°").arg(heading,0,'f',0) : "-");
+    labelHeading->setText(heading != NOFLOAT ? QString("%1°").arg(heading, 0, 'f', 0) : "-");
     labelTime->setText(timestamp.isValid() ? timestamp.toLocalTime().toString() : "-");
 
     if(lastTimestamp != timestamp)
@@ -300,7 +300,7 @@ bool CRtGpsTetherInfo::verifyLine(const QString& line)
         cs ^= data[i];
     }
 
-    return line.right(2).toInt(0,16) == cs;
+    return line.right(2).toInt(0, 16) == cs;
 }
 
 void CRtGpsTetherInfo::nmeaGSV(const QStringList& tokens)
@@ -383,7 +383,7 @@ void CRtGpsTetherInfo::nmeaGGA(const QStringList& tokens)
     }
 
     gga.isValid = true;
-    gga.datetime.setTime(QTime::fromString(tokens[1],"hhmmss.00"));
+    gga.datetime.setTime(QTime::fromString(tokens[1], "hhmmss.00"));
     gga.datetime.setDate(QDate::currentDate());
     gga.datetime.setTimeSpec(Qt::UTC);
 

@@ -32,7 +32,7 @@ CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *pare
 
 void CFilterChangeStartPoint::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"filterChangeStartPoint");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "filterChangeStartPoint");
 
     trk.filterChangeStartPoint(comboBox->currentData().toInt(), comboBox->currentText());
     updateUi();

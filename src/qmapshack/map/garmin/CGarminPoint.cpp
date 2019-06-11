@@ -50,7 +50,7 @@ quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift
 
     qint32 x1 = ((qint32)dLng << shift) + iCenterLon;
     qint32 y1 = ((qint32)dLat << shift) + iCenterLat;
-    pos = QPointF(GARMIN_RAD(x1),GARMIN_RAD(y1));
+    pos = QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
 
 #ifdef DEBUG_SHOW_POINTS
     qDebug() << x1 << y1 << point.u << point.v;
@@ -88,11 +88,11 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
     qint16 dLat = gar_ptr_load(int16_t, pData);
     pData += 2;
 
-    qint32 x1,y1;
+    qint32 x1, y1;
 
     x1 = ((qint32)dLng << shift) + iCenterLon;
     y1 = ((qint32)dLat << shift) + iCenterLat;
-    pos = QPointF(GARMIN_RAD(x1),GARMIN_RAD(y1));
+    pos = QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
 
     if(subtype & 0x20)
     {

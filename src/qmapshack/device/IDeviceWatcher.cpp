@@ -47,7 +47,7 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
     qDebug() << "Probe device at" << mountPoint << path << label;
     QStringList entries = dir.entryList();
 
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"probeForDevice");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "probeForDevice");
     if(entries.contains("Garmin"))
     {
         if(dir.exists("Garmin/GarminDevice.xml"))

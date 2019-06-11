@@ -31,7 +31,7 @@ CFilterOffsetElevation::CFilterOffsetElevation(CGisItemTrk &trk, QWidget *parent
     spinBox->setSuffix(IUnit::self().baseunit);
 
     SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/OffsetElevation/offset",0).toInt());
+    spinBox->setValue(cfg.value("TrackDetails/Filter/OffsetElevation/offset", 0).toInt());
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterOffsetElevation::slotApply);
 }
@@ -44,7 +44,7 @@ CFilterOffsetElevation::~CFilterOffsetElevation()
 
 void CFilterOffsetElevation::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterOffsetElevation");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterOffsetElevation");
     trk.filterOffsetElevation(spinBox->value()/IUnit::self().basefactor);
     CCanvas::restoreOverrideCursor("CFilterOffsetElevation");
 }

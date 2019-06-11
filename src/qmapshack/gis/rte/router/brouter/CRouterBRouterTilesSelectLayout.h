@@ -36,7 +36,7 @@ public:
 
     void addItem(QLayoutItem * item) override { items.append(item); }
 
-    QSize sizeHint() const override { return QSize(200,200); }
+    QSize sizeHint() const override { return QSize(200, 200); }
 
     void setGeometry(const QRect & r) override { for (QLayoutItem *item : items) { item->setGeometry(r); }}
 

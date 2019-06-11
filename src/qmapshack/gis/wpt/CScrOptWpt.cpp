@@ -51,7 +51,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     toolDelRadius->setEnabled(radius);
 
     anchor = wpt->getPointCloseBy(point);
-    move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
+    move(anchor.toPoint() + QPoint(-width()/2, SCR_OPT_OFFSET));
     show();
 
     connect(toolDelete,           &QToolButton::clicked, this, &CScrOptWpt::slotDelete);

@@ -76,7 +76,7 @@ void CMouseWptBubble::mouseDragged(const QPoint& start, const QPoint &last, cons
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
     {
-        wpt->mouseDragged(start,last,end);
+        wpt->mouseDragged(start, last, end);
     }
     else
     {

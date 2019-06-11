@@ -82,7 +82,7 @@ CGisListDB::CGisListDB(QWidget *parent)
         QString type = cfg.value("type", "SQLite").toString();
         if(type == "SQLite")
         {
-            QString filename = cfg.value("filename","").toString();
+            QString filename = cfg.value("filename", "").toString();
             if(filename.isEmpty())
             {
                 QMessageBox::information(this, name, tr("Due to changes in the database system QMapShack forgot about the filename of your database '%1'. You have to select it again in the next step.").arg(name), QMessageBox::Ok);
@@ -223,7 +223,7 @@ void CGisListDB::saveDatabaseConfiguration()
             cfg.setValue("port", mysql->getPort());
             cfg.setValue("user", mysql->getUser());
             cfg.setValue("passwd", mysql->getPasswd());
-            cfg.setValue("noPasswd",mysql->hasNoPasswd());
+            cfg.setValue("noPasswd", mysql->hasNoPasswd());
             cfg.endGroup(); // name
         }
     }
@@ -984,7 +984,7 @@ void CGisListDB::slotSearchDatabase()
     }
 
     isInternalEdit--;
-    dlgSearch = new CSearchDatabase(*db,this);
+    dlgSearch = new CSearchDatabase(*db, this);
     connect(dlgSearch.data(), &CSearchDatabase::sigItemChanged, this, &CGisListDB::slotItemChanged);
     dlgSearch->exec();
     delete dlgSearch;

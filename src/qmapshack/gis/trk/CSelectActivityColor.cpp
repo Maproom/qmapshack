@@ -73,15 +73,15 @@ void CSelectActivityColor::updateData()
         const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(trkact_t(i));
 
         QLabel * label = new QLabel(this);
-        label->setMinimumSize(16,16);
-        label->setMaximumSize(16,16);
+        label->setMinimumSize(16, 16);
+        label->setMaximumSize(16, 16);
         label->setPixmap(desc.iconSmall);
         label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
         horizontalLayout->addWidget(label);
 
         allActLabels << label;
 
-        QPixmap pixmap(16,16);
+        QPixmap pixmap(16, 16);
         pixmap.fill(desc.color);
 
         QToolButton * button = new QToolButton(this);
@@ -92,12 +92,12 @@ void CSelectActivityColor::updateData()
         button->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
         horizontalLayout->addWidget(button);
 
-        connect(button, &QToolButton::clicked, this, [this,button,i](){slotSetColor(button, trkact_t(i));});
+        connect(button, &QToolButton::clicked, this, [this, button, i](){slotSetColor(button, trkact_t(i));});
 
         allActColors << button;
     }
 
-    QSpacerItem * spacer = new QSpacerItem(0,0,QSizePolicy::Minimum, QSizePolicy::Minimum);
+    QSpacerItem * spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum);
     horizontalLayout->addItem(spacer);
 }
 
@@ -110,7 +110,7 @@ void CSelectActivityColor::slotSetColor(QToolButton * button, trkact_t act)
     }
 
     const IGisItem::color_t& color = IGisItem::getColorMap()[colorIdx];
-    QPixmap pixmap(16,16);
+    QPixmap pixmap(16, 16);
     pixmap.fill(color.color);
     button->setIcon(QIcon(pixmap));
 

@@ -172,7 +172,7 @@ void CCombineTrk::slotUp()
         }
         listSelected->takeItem(row);
         row = row - 1;
-        listSelected->insertItem(row,item);
+        listSelected->insertItem(row, item);
         listSelected->setCurrentItem(item);
     }
     updatePreview();
@@ -190,7 +190,7 @@ void CCombineTrk::slotDown()
         }
         listSelected->takeItem(row);
         row = row + 1;
-        listSelected->insertItem(row,item);
+        listSelected->insertItem(row, item);
         listSelected->setCurrentItem(item);
     }
 

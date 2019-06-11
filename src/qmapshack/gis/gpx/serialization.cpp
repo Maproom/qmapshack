@@ -186,7 +186,7 @@ static void readXml(const QDomNode& xml, const QString& tag, QPoint& offsetBubbl
         const QDomElement& xmlBubble = xml.namedItem(tag).toElement();
         int x = xmlBubble.attributes().namedItem("xoff").nodeValue().toInt();
         int y = xmlBubble.attributes().namedItem("yoff").nodeValue().toInt();
-        offsetBubble = QPoint(x,y);
+        offsetBubble = QPoint(x, y);
         widthBubble = xmlBubble.attributes().namedItem("width").nodeValue().toInt();
     }
 }
@@ -242,7 +242,7 @@ static void writeXml(QDomNode& xml, const QString& tag, qreal val)
     {
         QDomElement elem = xml.ownerDocument().createElement(tag);
         xml.appendChild(elem);
-        QDomText text = xml.ownerDocument().createTextNode(QString("%1").arg(val,0,'f',8));
+        QDomText text = xml.ownerDocument().createTextNode(QString("%1").arg(val, 0, 'f', 8));
         elem.appendChild(text);
     }
 }
@@ -298,9 +298,9 @@ static void writeXml(QDomNode& xml, const IGisItem::history_t& history)
             const IGisItem::history_event_t& event = history.events[i];
             QDomElement xmlEvent = xml.ownerDocument().createElement("ql:event");
             xmlHistory.appendChild(xmlEvent);
-            writeXml(xmlEvent,"ql:icon",    event.icon);
-            writeXml(xmlEvent,"ql:time",    event.time);
-            writeXml(xmlEvent,"ql:comment", event.comment);
+            writeXml(xmlEvent, "ql:icon",    event.icon);
+            writeXml(xmlEvent, "ql:time",    event.time);
+            writeXml(xmlEvent, "ql:comment", event.comment);
         }
     }
 }
@@ -407,13 +407,13 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
 
 void IGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
 {
-    readXml(xml,"name", metadata.name);
-    readXml(xml,"desc", metadata.desc);
+    readXml(xml, "name", metadata.name);
+    readXml(xml, "desc", metadata.desc);
 
     const QDomNode& xmlAuthor = xml.namedItem("author");
     if(xmlAuthor.isElement())
     {
-        readXml(xml,"name", metadata.author.name);
+        readXml(xml, "name", metadata.author.name);
 
         const QDomNode& xmlEmail = xmlAuthor.namedItem("email");
         if(xmlEmail.isElement())
@@ -440,9 +440,9 @@ void IGisProject::readMetadata(const QDomNode& xml, metadata_t& metadata)
         readXml(xmlCopyright, "license", metadata.copyright.license);
     }
 
-    readXml(xml,"link",     metadata.links);
-    readXml(xml,"time",     metadata.time);
-    readXml(xml,"keywords", metadata.keywords);
+    readXml(xml, "link",     metadata.links);
+    readXml(xml, "time",     metadata.time);
+    readXml(xml, "keywords", metadata.keywords);
 
     const QDomNode& xmlBounds = xml.namedItem("bounds");
     if(xmlBounds.isElement())
@@ -460,8 +460,8 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
     QDomElement gpx = doc.createElement("gpx");
     doc.appendChild(gpx);
 
-    gpx.setAttribute("version","1.1");
-    gpx.setAttribute("creator","QMapShack " VER_STR " http://www.qlandkarte.org/");
+    gpx.setAttribute("version", "1.1");
+    gpx.setAttribute("creator", "QMapShack " VER_STR " http://www.qlandkarte.org/");
     gpx.setAttribute("xmlns",        gpx_ns);
     gpx.setAttribute("xmlns:xsi",    xsi_ns);
 
@@ -474,7 +474,7 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
         gpx.setAttribute("xmlns:rmc",    rmc_ns);
         gpx.setAttribute("xmlns:ql",     ql_ns);
         gpx.setAttribute("xmlns:tp1",    tp1_ns);
-        gpx.setAttribute("xmlns:gpxdata",gpxdata_ns);
+        gpx.setAttribute("xmlns:gpxdata", gpxdata_ns);
 
 
 
@@ -498,15 +498,15 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
     QDomElement xmlMetadata = doc.createElement("metadata");
     gpx.appendChild(xmlMetadata);
 
-    writeXml(xmlMetadata,"name", metadata.name);
-    writeXml(xmlMetadata,"desc", html2Dev(metadata.desc));
+    writeXml(xmlMetadata, "name", metadata.name);
+    writeXml(xmlMetadata, "desc", html2Dev(metadata.desc));
 
     if(!metadata.author.name.isEmpty())
     {
         QDomElement xmlAuthor = doc.createElement("author");
         xmlMetadata.appendChild(xmlAuthor);
 
-        writeXml(xmlAuthor,"name", metadata.author.name);
+        writeXml(xmlAuthor, "name", metadata.author.name);
 
         if(!metadata.author.id.isEmpty() && !metadata.author.domain.isEmpty())
         {
@@ -1078,7 +1078,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
 
     QDomElement adventure = doc.createElement("Adventure");
     doc.appendChild(adventure);
-    adventure.setAttribute("xmlns","http://www.garmin.com/xmlschemas/GarminAdventure/v1");
+    adventure.setAttribute("xmlns", "http://www.garmin.com/xmlschemas/GarminAdventure/v1");
 
     writeXml(adventure, "GlobalId", project->getKey());
     writeXml(adventure, "Name", project->getName());

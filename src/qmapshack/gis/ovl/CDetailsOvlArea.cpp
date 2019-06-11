@@ -30,11 +30,11 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
 {
     setupUi(this);
 
-    QPixmap icon(64,24);
+    QPixmap icon(64, 24);
     for(const IGisItem::color_t& color : IGisItem::getColorMap())
     {
         icon.fill(color.color);
-        comboColor->addItem(icon,"", color.color);
+        comboColor->addItem(icon, "", color.color);
     }
 
     for(const Qt::BrushStyle& style : area.brushStyles)
@@ -45,7 +45,7 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
         p.setBrush(style);
         p.drawRect(icon.rect());
 
-        comboStyle->addItem(icon,"",int(style));
+        comboStyle->addItem(icon, "", int(style));
     }
 
     for(const CGisItemOvlArea::width_t& width : area.lineWidths)
@@ -226,12 +226,12 @@ void CDetailsOvlArea::setupGui()
     {
         QTreeWidgetItem * item = new QTreeWidgetItem();
 
-        item->setText(eColNum,QString::number(idx++));
+        item->setText(eColNum, QString::number(idx++));
 
         // position
         QString str;
         IUnit::degToStr(pt.lon, pt.lat, str);
-        item->setText(eColPosition,str);
+        item->setText(eColPosition, str);
         items << item;
     }
 

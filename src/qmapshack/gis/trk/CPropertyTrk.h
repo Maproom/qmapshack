@@ -39,7 +39,7 @@ public:
         enum axistype_e
         {
             eAxisDistance
-            ,eAxisTime
+            , eAxisTime
         };
 
         property_t() = default;

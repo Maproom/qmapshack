@@ -40,7 +40,7 @@ CProjWpt::CProjWpt(CGisItemWpt& wpt, QWidget *parent)
     labelName->setText(QString("<a href='name'>%2</a>").arg(name));
 
     QString val, unit;
-    IUnit::self().meter2distance(0,val,unit);
+    IUnit::self().meter2distance(0, val, unit);
     labelDistUnit->setText(unit);
 
     connect(labelName, &QLabel::linkActivated, this, &CProjWpt::slotChangeName);

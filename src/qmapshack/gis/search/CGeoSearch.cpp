@@ -71,11 +71,11 @@ void CGeoSearch::setIcon()
 {
     if(searchConfig->accumulativeResults)
     {
-        QPixmap displayIcon = QPixmap(48,48);
+        QPixmap displayIcon = QPixmap(48, 48);
         displayIcon.fill(Qt::transparent);
         QPainter painter(&displayIcon);
-        painter.drawPixmap(0,0,searchConfig->getCurrentIcon().pixmap(32,32).scaled(48,48,Qt::KeepAspectRatio, Qt::SmoothTransformation));
-        painter.drawPixmap(22,22,QPixmap("://icons/48x48/AddGreen.png").scaled(26,26,Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        painter.drawPixmap(0, 0, searchConfig->getCurrentIcon().pixmap(32, 32).scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        painter.drawPixmap(22, 22, QPixmap("://icons/48x48/AddGreen.png").scaled(26, 26, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         QTreeWidgetItem::setIcon(CGisListWks::eColumnDecoration, displayIcon);
     }
     else
@@ -112,19 +112,19 @@ void CGeoSearch::slotSelectService()
     actionGroup->addAction(addService(CGeoSearchConfig::eServiceGoogle, tr("Google"), menu));
 
     menu->addSeparator();
-    QAction * actAccu = menu->addAction(QIcon("://icons/32x32/AddGreen.png"),tr("Accumulative Results"));
+    QAction * actAccu = menu->addAction(QIcon("://icons/32x32/AddGreen.png"), tr("Accumulative Results"));
     actAccu->setCheckable(true);
     actAccu->setChecked(searchConfig->accumulativeResults);
     connect(actAccu, &QAction::triggered, this, &CGeoSearch::slotAccuResults);
 
-    QAction * actReset = menu->addAction(QIcon("://icons/32x32/Reset.png"),tr("Reset Results"));
+    QAction * actReset = menu->addAction(QIcon("://icons/32x32/Reset.png"), tr("Reset Results"));
     actReset->setEnabled(childCount() != 0);
     connect(actReset, &QAction::triggered, this, &CGeoSearch::slotResetResults);
 
 
     menu->addSeparator();
 
-    QAction* actSetup = menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
+    QAction* actSetup = menu->addAction(QIcon("://icons/32x32/Apply.png"), tr("Configure Services"));
     actSetup->setToolTip(tr("configure providers of geocoding search services"));
     connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSetupGeoSearch);
 
@@ -155,7 +155,7 @@ void CGeoSearch::slotServiceSelected(CGeoSearchConfig::service_e service, bool c
 
 void CGeoSearch::slotSetupGeoSearch()
 {
-    CGeoSearchConfigDialog dlg(this->treeWidget(),searchConfig);
+    CGeoSearchConfigDialog dlg(this->treeWidget(), searchConfig);
     dlg.exec();
 }
 
@@ -279,18 +279,18 @@ void CGeoSearch::requestGoogle(QString& addr) const
     url.setPath("/maps/api/geocode/xml");
 
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("address",addr.replace(" ","+"));
+    urlQuery.addQueryItem("address", addr.replace(" ", "+"));
     if (!searchConfig->googleApiKey.isEmpty())
     {
-        urlQuery.addQueryItem("key",searchConfig->googleApiKey);
+        urlQuery.addQueryItem("key", searchConfig->googleApiKey);
     }
-    urlQuery.addQueryItem("sensor","false");
+    urlQuery.addQueryItem("sensor", "false");
     url.setQuery(urlQuery);
 
     QNetworkRequest request;
     request.setUrl(url);
     QNetworkReply* reply = networkAccessManager->get(request);
-    reply->setProperty("service",QVariant(CGeoSearchConfig::eServiceGoogle));
+    reply->setProperty("service", QVariant(CGeoSearchConfig::eServiceGoogle));
 }
 
 void CGeoSearch::requestGeonamesSearch(QString& addr) const
@@ -299,17 +299,17 @@ void CGeoSearch::requestGeonamesSearch(QString& addr) const
     url.setPath("/search");
 
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("q",addr.replace(" ","+"));
+    urlQuery.addQueryItem("q", addr.replace(" ", "+"));
     if (!searchConfig->geonamesUsername.isEmpty())
     {
-        urlQuery.addQueryItem("username",searchConfig->geonamesUsername);
+        urlQuery.addQueryItem("username", searchConfig->geonamesUsername);
     }
     url.setQuery(urlQuery);
 
     QNetworkRequest request;
     request.setUrl(url);
     QNetworkReply* reply = networkAccessManager->get(request);
-    reply->setProperty("service",QVariant(CGeoSearchConfig::eServiceGeonamesSearch));
+    reply->setProperty("service", QVariant(CGeoSearchConfig::eServiceGeonamesSearch));
 }
 
 void CGeoSearch::requestGeonamesAddress(QString& addr) const
@@ -318,17 +318,17 @@ void CGeoSearch::requestGeonamesAddress(QString& addr) const
     url.setPath("/geoCodeAddress");
 
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("q",addr.replace(" ","+"));
+    urlQuery.addQueryItem("q", addr.replace(" ", "+"));
     if (!searchConfig->geonamesUsername.isEmpty())
     {
-        urlQuery.addQueryItem("username",searchConfig->geonamesUsername);
+        urlQuery.addQueryItem("username", searchConfig->geonamesUsername);
     }
     url.setQuery(urlQuery);
 
     QNetworkRequest request;
     request.setUrl(url);
     QNetworkReply* reply = networkAccessManager->get(request);
-    reply->setProperty("service",QVariant(CGeoSearchConfig::eServiceGeonamesAddress));
+    reply->setProperty("service", QVariant(CGeoSearchConfig::eServiceGeonamesAddress));
 }
 
 void CGeoSearch::requestNominatim(QString& addr) const
@@ -343,10 +343,10 @@ void CGeoSearch::requestNominatim(QString& addr) const
     limit.setNum(searchConfig->nominatimLimit);
 
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("q",addr.replace(" ","+"));
-    urlQuery.addQueryItem("format","xml");
-    urlQuery.addQueryItem("addressdetails","1");
-    urlQuery.addQueryItem("limit",limit);
+    urlQuery.addQueryItem("q", addr.replace(" ", "+"));
+    urlQuery.addQueryItem("format", "xml");
+    urlQuery.addQueryItem("addressdetails", "1");
+    urlQuery.addQueryItem("limit", limit);
     if (!searchConfig->nominatimEmail.isEmpty())
     {
         urlQuery.addQueryItem("email", searchConfig->nominatimEmail);
@@ -357,7 +357,7 @@ void CGeoSearch::requestNominatim(QString& addr) const
     request.setUrl(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, userAgent);
     QNetworkReply* reply = networkAccessManager->get(request);
-    reply->setProperty("service",QVariant(CGeoSearchConfig::eServiceNominatim));
+    reply->setProperty("service", QVariant(CGeoSearchConfig::eServiceNominatim));
 }
 
 void CGeoSearch::parseGoogle(const QByteArray& data)
@@ -406,7 +406,7 @@ void CGeoSearch::parseGoogle(const QByteArray& data)
                 qreal lat = xmlLocation.namedItem("lat").toElement().text().toDouble();
 
 
-                new CGisItemWpt(QPointF(lon,lat), address, actSymbol->objectName(), this);
+                new CGisItemWpt(QPointF(lon, lat), address, actSymbol->objectName(), this);
             }
         }
     }
@@ -485,7 +485,7 @@ void CGeoSearch::parseGeonamesSearch(const QByteArray& data)
                     qreal lon = xmlLng.text().toDouble();
                     qreal lat = xmlLat.text().toDouble();
 
-                    new CGisItemWpt(QPointF(lon,lat), address, actSymbol->objectName(), this);
+                    new CGisItemWpt(QPointF(lon, lat), address, actSymbol->objectName(), this);
                 }
             }
         }
@@ -635,7 +635,7 @@ void CGeoSearch::parseGeonamesAddress(const QByteArray& data)
                     qreal lon = xmlLng.text().toDouble();
                     qreal lat = xmlLat.text().toDouble();
 
-                    new CGisItemWpt(QPointF(lon,lat), address, actSymbol->objectName(), this);
+                    new CGisItemWpt(QPointF(lon, lat), address, actSymbol->objectName(), this);
                 }
             }
         }
@@ -778,7 +778,7 @@ void CGeoSearch::parseNominatim(const QByteArray& data)
                     isNotFirst = true;
                 }
 
-                new CGisItemWpt(QPointF(lon,lat), address, actSymbol->objectName(), this);
+                new CGisItemWpt(QPointF(lon, lat), address, actSymbol->objectName(), this);
             }
         }
     }
@@ -789,7 +789,7 @@ void CGeoSearch::createErrorItem(const QString& status)
     itemStatus = new QTreeWidgetItem(this);
     itemStatus->setText(CGisListWks::eColumnName, status);
     itemStatus->setToolTip(CGisListWks::eColumnName, status);
-    itemStatus->setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/Error.png"));
+    itemStatus->setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/Error.png"));
 }
 
 void CGeoSearch::slotConfigChanged()

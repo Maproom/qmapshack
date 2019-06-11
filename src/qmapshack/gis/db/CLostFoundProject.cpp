@@ -33,7 +33,7 @@ CLostFoundProject::CLostFoundProject(const QString &dbName, CGisListWks * parent
 {
     type    = eTypeLostFound;
     db      = QSqlDatabase::database(dbName);
-    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/DeleteMultiple.png"));
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/DeleteMultiple.png"));
 
     filename        = dbName;
     metadata.name   = tr("Lost & Found");
@@ -62,5 +62,5 @@ void CLostFoundProject::updateFromDb()
         IGisItem::newGisItem(type, id, db, this);
     }
 
-    setText(CGisListWks::eColumnDecoration,"");
+    setText(CGisListWks::eColumnDecoration, "");
 }

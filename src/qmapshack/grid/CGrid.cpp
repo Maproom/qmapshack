@@ -52,7 +52,7 @@ void CGrid::convertPos2Str(const QPointF& pos, QString& info, bool simple)
 
     if(pj_is_latlong(pjGrid))
     {
-        QString lat,lng;
+        QString lat, lng;
         pt *= RAD_TO_DEG;
         lat = pt.y() < 0 ? "S" : "N";
         lng = pt.x() < 0 ? "W" : "E";
@@ -69,11 +69,11 @@ void CGrid::convertPos2Str(const QPointF& pos, QString& info, bool simple)
     {
         if(simple)
         {
-            info += tr("%1m, %2m ").arg(pt.y(),0,'f',0).arg(pt.x(),0,'f',0);
+            info += tr("%1m, %2m ").arg(pt.y(), 0, 'f', 0).arg(pt.x(), 0, 'f', 0);
         }
         else
         {
-            info += tr("N %1m, E %2m ").arg(pt.y(),0,'f',0).arg(pt.x(),0,'f',0);
+            info += tr("N %1m, E %2m ").arg(pt.y(), 0, 'f', 0).arg(pt.x(), 0, 'f', 0);
         }
     }
 }
@@ -298,8 +298,8 @@ void CGrid::draw(QPainter& p, const QRect& rect)
 
     p.save();
     p.setBrush(Qt::NoBrush);
-    p.setPen(QPen(color,1));
-    USE_ANTI_ALIASING(p,false);
+    p.setPen(QPen(color, 1));
+    USE_ANTI_ALIASING(p, false);
 
     qreal h = rect.height();
     qreal w = rect.width();
@@ -329,20 +329,20 @@ void CGrid::draw(QPainter& p, const QRect& rect)
             map->convertRad2Px(p3);
             map->convertRad2Px(p4);
 
-            qreal xx,yy;
-            if(calcIntersection(0,0,w,0, p1.x(), p1.y(), p4.x(), p4.y(), xx, yy))
+            qreal xx, yy;
+            if(calcIntersection(0, 0, w, 0, p1.x(), p1.y(), p4.x(), p4.y(), xx, yy))
             {
                 horzTopTicks << val_t(xx, xVal);
             }
-            if(calcIntersection(0,h,w,h, p1.x(), p1.y(), p4.x(), p4.y(), xx, yy))
+            if(calcIntersection(0, h, w, h, p1.x(), p1.y(), p4.x(), p4.y(), xx, yy))
             {
                 horzBtmTicks << val_t(xx, xVal);
             }
-            if(calcIntersection(0,0,0,h, p1.x(), p1.y(), p2.x(), p2.y(), xx, yy))
+            if(calcIntersection(0, 0, 0, h, p1.x(), p1.y(), p2.x(), p2.y(), xx, yy))
             {
                 vertLftTicks << val_t(yy, yVal);
             }
-            if(calcIntersection(w,0,w,h, p1.x(), p1.y(), p2.x(), p2.y(), xx, yy))
+            if(calcIntersection(w, 0, w, h, p1.x(), p1.y(), p2.x(), p2.y(), xx, yy))
             {
                 vertRgtTicks << val_t(yy, yVal);
             }
@@ -357,7 +357,7 @@ void CGrid::draw(QPainter& p, const QRect& rect)
         x  = xStart;
         y -= yGridSpace;
     }
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
     p.restore();
 
     QColor textColor;

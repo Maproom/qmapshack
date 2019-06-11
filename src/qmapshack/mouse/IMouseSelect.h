@@ -55,10 +55,10 @@ protected:
     enum state_e
     {
         eStateIdle
-        ,eStateInitial
-        ,eStateMap
-        ,eStateMapMoving
-        ,eStateResize
+        , eStateInitial
+        , eStateMap
+        , eStateMapMoving
+        , eStateResize
     };
 
     state_e state = eStateIdle;

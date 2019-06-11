@@ -236,7 +236,7 @@ QString IGisProject::getDeviceKey() const
 
 QPixmap IGisProject::getIcon() const
 {
-    return icon(CGisListWks::eColumnIcon).pixmap(22,22);
+    return icon(CGisListWks::eColumnIcon).pixmap(22, 22);
 }
 
 qint32 IGisProject::isOnDevice() const
@@ -316,7 +316,7 @@ void IGisProject::setChanged()
 {
     if(autoSave)
     {
-        setText(CGisListWks::eColumnDecoration,"A");
+        setText(CGisListWks::eColumnDecoration, "A");
 
         if(!autoSavePending)
         {
@@ -326,7 +326,7 @@ void IGisProject::setChanged()
     }
     else
     {
-        setText(CGisListWks::eColumnDecoration,"*");
+        setText(CGisListWks::eColumnDecoration, "*");
     }
     updateItems();
 }
@@ -518,7 +518,7 @@ void IGisProject::setupName(const QString &defaultName)
 
 void IGisProject::markAsSaved()
 {
-    setText(CGisListWks::eColumnDecoration,autoSave ? "A" : "");
+    setText(CGisListWks::eColumnDecoration, autoSave ? "A" : "");
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));

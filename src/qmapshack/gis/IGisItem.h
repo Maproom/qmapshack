@@ -136,9 +136,9 @@ public:
     enum mark_e
     {
         eMarkNone      = 0
-        ,eMarkChanged   = 0x00000001
-        ,eMarkNotPart   = 0x00000002
-        ,eMarkNotInDB   = 0x00000004
+        , eMarkChanged   = 0x00000001
+        , eMarkNotPart   = 0x00000002
+        , eMarkNotInDB   = 0x00000004
     };
 
     enum selection_e
@@ -417,7 +417,7 @@ public:
     virtual void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     {
     }
-    virtual void drawLabel(QPainter& p, const QPolygonF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
+    virtual void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
     virtual void drawHighlight(QPainter& p) = 0;
 
     virtual void gainUserFocus(bool yes) = 0;
@@ -638,10 +638,10 @@ protected:
     enum flags_e
     {
         eFlagCreatedInQms   = 0x00000001
-        ,eFlagWriteAllowed  = 0x00000002
-        ,eFlagTainted       = 0x00000004
-        ,eFlagWptBubble     = 0x00000100
-        ,eFlagNogo          = 0x00000200
+        , eFlagWriteAllowed  = 0x00000002
+        , eFlagTainted       = 0x00000004
+        , eFlagWptBubble     = 0x00000100
+        , eFlagNogo          = 0x00000200
     };
 
     static QVector<color_t> colorMap;

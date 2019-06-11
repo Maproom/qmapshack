@@ -57,9 +57,9 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
     qint64 pos = dev->pos();
 
     char magic[9];
-    s.readRawData(magic,9);
+    s.readRawData(magic, 9);
 
-    if(strncmp(magic,"QLTrk   ",9))
+    if(strncmp(magic, "QLTrk   ", 9))
     {
         dev->seek(pos);
         return s;
@@ -161,7 +161,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
             s1 >> nTrkPts1;
             if(nTrkPts1 != nTrkPts)
             {
-                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), CQlgtTrack::tr("Corrupt track ..."), CQlgtTrack::tr("Number of trackpoints is not equal the number of training data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), CQlgtTrack::tr("Corrupt track ..."), CQlgtTrack::tr("Number of trackpoints is not equal the number of training data trackpoints."), QMessageBox::Ignore, QMessageBox::Ignore);
                 break;
             }
 
@@ -215,7 +215,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
             s1 >> nTrkPts1;
             if(nTrkPts1 != nTrkPts)
             {
-                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), CQlgtTrack::tr("Corrupt track ..."), CQlgtTrack::tr("Number of trackpoints is not equal the number of extended data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), CQlgtTrack::tr("Corrupt track ..."), CQlgtTrack::tr("Number of trackpoints is not equal the number of extended data trackpoints."), QMessageBox::Ignore, QMessageBox::Ignore);
                 break;
             }
 
@@ -262,7 +262,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
             s1 >> nTrkPts1;
             if(nTrkPts1 != nTrkPts)
             {
-                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), CQlgtTrack::tr("Corrupt track ..."), CQlgtTrack::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), CQlgtTrack::tr("Corrupt track ..."), CQlgtTrack::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore, QMessageBox::Ignore);
                 break;
             }
 
@@ -288,7 +288,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
             s1 >> nTrkPts1;
             if(nTrkPts1 != nTrkPts)
             {
-                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), CQlgtTrack::tr("Corrupt track ..."), CQlgtTrack::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore,QMessageBox::Ignore);
+                QMessageBox::warning(CMainWindow::getBestWidgetForParent(), CQlgtTrack::tr("Corrupt track ..."), CQlgtTrack::tr("Number of trackpoints is not equal the number of shadow data trackpoints."), QMessageBox::Ignore, QMessageBox::Ignore);
                 break;
             }
 

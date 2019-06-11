@@ -139,8 +139,8 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         const QDomNamedNodeMap& attr = xmlResourceURL.attributes();
 
         layer.resourceURL = attr.namedItem("template").nodeValue();
-        layer.resourceURL = layer.resourceURL.replace("{style}",layer.styles[0], Qt::CaseInsensitive);
-        layer.resourceURL = layer.resourceURL.replace("{TileMatrixSet}",layer.tileMatrixSet, Qt::CaseInsensitive);
+        layer.resourceURL = layer.resourceURL.replace("{style}", layer.styles[0], Qt::CaseInsensitive);
+        layer.resourceURL = layer.resourceURL.replace("{TileMatrixSet}", layer.tileMatrixSet, Qt::CaseInsensitive);
 
         // read and replace dimensions in url string by default value
         const QDomNodeList& xmlDimensions = xmlLayer.toElement().elementsByTagName("Dimension");
@@ -206,7 +206,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         char * ptr1 = (char*)malloc(str.toLatin1().size() + 1);
         char * ptr2 = nullptr;
 
-        strncpy(ptr1,str.toLatin1().data(), str.toLatin1().size() + 1);
+        strncpy(ptr1, str.toLatin1().data(), str.toLatin1().size() + 1);
         OGRSpatialReference oSRS;
 
         if(str.startsWith("EPSG"))
@@ -393,7 +393,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
 
     // start to draw the map
     QPainter p(&buf.image);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
@@ -414,7 +414,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
     }
 
 
-    QRectF viewport(QPointF(x1,y1) * RAD_TO_DEG, QPointF(x2,y2) * RAD_TO_DEG);
+    QRectF viewport(QPointF(x1, y1) * RAD_TO_DEG, QPointF(x2, y2) * RAD_TO_DEG);
 
     // draw layers
     for(const layer_t &layer : layers)
@@ -425,11 +425,11 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
         }
 
         const tileset_t& tileset            = tilesets[layer.tileMatrixSet];
-        const QMap<QString,limit_t>& limits = layer.limits;
+        const QMap<QString, limit_t>& limits = layer.limits;
 
         // convert viewport to layer's coordinate system
-        QPointF pt1(x1,y1);
-        QPointF pt2(x2,y2);
+        QPointF pt1(x1, y1);
+        QPointF pt2(x2, y2);
 
         pj_transform(pjtar, tileset.pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
         pj_transform(pjtar, tileset.pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
@@ -537,9 +537,9 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
             for(qint32 col = col1; col <= col2; col++)
             {
                 QString url = layer.resourceURL;
-                url = url.replace("{TileMatrix}",tileMatrixId, Qt::CaseInsensitive);
-                url = url.replace("{TileRow}",QString::number(row), Qt::CaseInsensitive);
-                url = url.replace("{TileCol}",QString::number(col), Qt::CaseInsensitive);
+                url = url.replace("{TileMatrix}", tileMatrixId, Qt::CaseInsensitive);
+                url = url.replace("{TileRow}", QString::number(row), Qt::CaseInsensitive);
+                url = url.replace("{TileCol}", QString::number(col), Qt::CaseInsensitive);
 
                 if(diskCache->contains(url))
                 {
@@ -554,10 +554,10 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
                     qreal yy2 = (row + 1) * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
 
                     l << QPointF(xx1, yy1) << QPointF(xx2, yy1) << QPointF(xx2, yy2) << QPointF(xx1, yy2);
-                    pj_transform(tileset.pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
-                    pj_transform(tileset.pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
-                    pj_transform(tileset.pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
-                    pj_transform(tileset.pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
+                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
+                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
+                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
 
                     drawTile(img, l, p);
                 }

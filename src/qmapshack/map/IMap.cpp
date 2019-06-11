@@ -92,7 +92,7 @@ void IMap::convertRad2M(QPointF &p) const
     {
         return;
     }
-    pj_transform(pjtar,pjsrc,1,0,&p.rx(),&p.ry(),0);
+    pj_transform(pjtar, pjsrc, 1, 0, &p.rx(), &p.ry(), 0);
 }
 
 void IMap::convertM2Rad(QPointF &p) const
@@ -101,7 +101,7 @@ void IMap::convertM2Rad(QPointF &p) const
     {
         return;
     }
-    pj_transform(pjsrc,pjtar,1,0,&p.rx(),&p.ry(),0);
+    pj_transform(pjsrc, pjtar, 1, 0, &p.rx(), &p.ry(), 0);
 }
 
 

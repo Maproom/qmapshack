@@ -28,7 +28,7 @@ public:
     CQlgtDiary(quint64 id, QObject * parent);
     virtual ~CQlgtDiary();
 
-    enum type_e {eEnd,eBase, eWpt, eTrk, eRte};
+    enum type_e {eEnd, eBase, eWpt, eTrk, eRte};
 
     quint64 keyProjectGeoDB = 0;
 };

@@ -40,7 +40,7 @@ public:
     enum cutmode_e
     {
         eCutMode1
-        ,eCutMode2
+        , eCutMode2
     };
 
     mode_e getMode() const

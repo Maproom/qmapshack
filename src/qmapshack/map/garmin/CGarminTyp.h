@@ -31,18 +31,18 @@ public:
     enum label_type_e
     {
         eStandard  = 0
-        ,eNone      = 1
-        ,eSmall     = 2
-        ,eNormal    = 3
-        ,eLarge     = 4
+        , eNone      = 1
+        , eSmall     = 2
+        , eNormal    = 3
+        , eLarge     = 4
     };
 
     struct polyline_property
     {
         polyline_property()
             : type(0)
-            , penLineDay(Qt::magenta,3)
-            , penLineNight(Qt::magenta,3)
+            , penLineDay(Qt::magenta, 3)
+            , penLineNight(Qt::magenta, 3)
             , hasBorder(false)
             , penBorderDay(Qt::NoPen)
             , penBorderNight(Qt::NoPen)
@@ -98,7 +98,7 @@ public:
         QImage imgDay;
         QImage imgNight;
 
-        QMap<int,QString> strings;
+        QMap<int, QString> strings;
         label_type_e labelType;
         QColor colorLabelDay;
         QColor colorLabelNight;
@@ -135,7 +135,7 @@ public:
 
         polygon_property(quint16 type, const QColor& penColor, const QColor& brushColor, Qt::BrushStyle pattern)
             : type(type)
-            , pen(penColor,1)
+            , pen(penColor, 1)
             , brushDay(brushColor, pattern)
             , brushNight(brushColor.darker(150), pattern)
             , labelType(eStandard)
@@ -150,7 +150,7 @@ public:
         QBrush brushDay;
         QBrush brushNight;
 
-        QMap<int,QString> strings;
+        QMap<int, QString> strings;
         label_type_e labelType;
         QColor colorLabelDay;
         QColor colorLabelNight;
@@ -165,7 +165,7 @@ public:
         QImage imgDay;
         QImage imgNight;
 
-        QMap<int,QString> strings;
+        QMap<int, QString> strings;
         label_type_e labelType;
         QColor colorLabelDay;
         QColor colorLabelNight;

@@ -35,19 +35,19 @@ class IGisProject;
 enum event_types_e
 {
     eEvtD2WReqInfo     = QEvent::User + 1
-    ,eEvtD2WShowFolder  = QEvent::User + 2
-    ,eEvtD2WHideFolder  = QEvent::User + 3
-    ,eEvtD2WShowItems   = QEvent::User + 4
-    ,eEvtD2WHideItems   = QEvent::User + 5
-    ,eEvtD2WUpdateLnF   = QEvent::User + 6
-    ,eEvtD2WUpdateItems = QEvent::User + 7
-    ,eEvtD2WReload      = QEvent::User + 8
+    , eEvtD2WShowFolder  = QEvent::User + 2
+    , eEvtD2WHideFolder  = QEvent::User + 3
+    , eEvtD2WShowItems   = QEvent::User + 4
+    , eEvtD2WHideItems   = QEvent::User + 5
+    , eEvtD2WUpdateLnF   = QEvent::User + 6
+    , eEvtD2WUpdateItems = QEvent::User + 7
+    , eEvtD2WReload      = QEvent::User + 8
 
-    ,eEvtW2DAckInfo     = QEvent::User + 100
-    ,eEvtW2DCreate      = QEvent::User + 101
+    , eEvtW2DAckInfo     = QEvent::User + 100
+    , eEvtW2DCreate      = QEvent::User + 101
 
-    ,eEvtA2WCutTrk      = QEvent::User + 200
-    ,eEvtA2WSave        = QEvent::User + 201
+    , eEvtA2WCutTrk      = QEvent::User + 200
+    , eEvtA2WSave        = QEvent::User + 201
 };
 
 struct evt_item_t

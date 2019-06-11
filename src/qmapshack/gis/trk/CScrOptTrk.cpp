@@ -58,7 +58,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
         toolCut->setEnabled(false);
     }
 
-    move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
+    move(anchor.toPoint() + QPoint(-width()/2, SCR_OPT_OFFSET));
     show();
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptTrk::slotEditDetails);
@@ -74,7 +74,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     connect(toolColor,       &QToolButton::clicked, this, &CScrOptTrk::slotColor);
     connect(toolCopyWithWpt, &QToolButton::clicked, this, &CScrOptTrk::slotCopyWithWpt);
     connect(toolNogo,        &QToolButton::clicked, this, &CScrOptTrk::slotNogo);
-    connect(toolAddElevation,&QToolButton::clicked, this, &CScrOptTrk::slotAddElevation);
+    connect(toolAddElevation, &QToolButton::clicked, this, &CScrOptTrk::slotAddElevation);
     connect(toolAddInfo,     &QToolButton::clicked, this, &CScrOptTrk::slotAddInfo);
 
     connect(label, &QLabel::linkActivated, this, &CScrOptTrk::slotLinkActivated);

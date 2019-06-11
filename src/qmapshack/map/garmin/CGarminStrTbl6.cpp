@@ -21,27 +21,27 @@
 
 const char CGarminStrTbl6::str6tbl1[] =
 {
-    ' ','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
-    ,0,0,0,0,0
-    ,'0','1','2','3','4','5','6','7','8','9'
-    ,0,0,0,0,0,0
+    ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    , 0, 0, 0, 0, 0
+    , '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+    , 0, 0, 0, 0, 0, 0
 };
 
 const char CGarminStrTbl6::str6tbl2[] =
 {
     //@   !   "   #   $   %   &    '   (   )   *   +   ,   -   .   /
-    '@','!','"','#','$','%','&','\'','(',')','*','+',',','-','.','/'
-    ,0,0,0,0,0,0,0,0,0,0
+    '@', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/'
+    , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     //:   ;   <   =   >   ?
-    ,':',';','<','=','>','?'
-    ,0,0,0,0,0,0,0,0,0,0,0
+    , ':', ';', '<', '=', '>', '?'
+    , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     //[    \   ]   ^   _
-    ,'[','\\',']','^','_'
+    , '[', '\\', ']', '^', '_'
 };
 
 const char CGarminStrTbl6::str6tbl3[] =
 {
-    '`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
+    '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 };
 
 CGarminStrTbl6::CGarminStrTbl6(const quint16 codepage, const quint8 mask, QObject * parent)
@@ -71,7 +71,7 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
 {
     labels.clear();
 
-    offset = calcOffset(file, offset,t);
+    offset = calcOffset(file, offset, t);
 
     if(offset == 0xFFFFFFFF)
     {

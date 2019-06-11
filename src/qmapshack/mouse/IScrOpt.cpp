@@ -36,7 +36,7 @@ IScrOpt::~IScrOpt()
 {
     if(hasFocus() && !mouse.isNull())
     {
-        CCanvas::setOverrideCursor(*mouse,"IScrOpt::~IScrOpt");
+        CCanvas::setOverrideCursor(*mouse, "IScrOpt::~IScrOpt");
     }
     CGisWorkspace::self().slotWksItemSelectionReset();
 }
@@ -57,7 +57,7 @@ void IScrOpt::leaveEvent(QEvent * e)
     QWidget::leaveEvent(e);
     if(!mouse.isNull())
     {
-        CCanvas::setOverrideCursor(*mouse,"IScrOpt::leaveEvent");
+        CCanvas::setOverrideCursor(*mouse, "IScrOpt::leaveEvent");
     }
 }
 

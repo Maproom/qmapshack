@@ -78,7 +78,7 @@ static quint32 scale2jnx(qreal scale)
 
 
 CMapJNX::CMapJNX(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility,parent)
+    : IMap(eFeatVisibility, parent)
     , filename(filename)
 {
     qDebug() << "------------------------------";
@@ -302,7 +302,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
 
     // ----- start drawing -----
     QPainter p(&buf.image);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
@@ -350,7 +350,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
             continue;
         }
 
-        QByteArray data(1024*1024*4,0);
+        QByteArray data(1024*1024*4, 0);
         //(char) typecast needed to avoid MSVC compiler warning
         //in MSVC, char is a signed type.
         //Maybe the QByteArray declaration should be fixed ;-)

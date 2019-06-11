@@ -103,10 +103,10 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     dbPaths = cfg.value("Route/routino/paths", dbPaths).toStringList();
     buildDatabaseList();
 
-    comboProfile->setCurrentIndex(cfg.value("Route/routino/profile",0).toInt());
-    comboLanguage->setCurrentIndex(cfg.value("Route/routino/language",0).toInt());
-    comboMode->setCurrentIndex(cfg.value("Route/routino/mode",0).toInt());
-    comboDatabase->setCurrentIndex(cfg.value("Route/routino/database",0).toInt());
+    comboProfile->setCurrentIndex(cfg.value("Route/routino/profile", 0).toInt());
+    comboLanguage->setCurrentIndex(cfg.value("Route/routino/language", 0).toInt());
+    comboMode->setCurrentIndex(cfg.value("Route/routino/mode", 0).toInt());
+    comboDatabase->setCurrentIndex(cfg.value("Route/routino/database", 0).toInt());
 
     updateHelpText();
 }
@@ -315,7 +315,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
         Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
 
-        int res = Routino_ValidateProfile(data,profile);
+        int res = Routino_ValidateProfile(data, profile);
         if(res != 0)
         {
             throw xlateRoutinoError(Routino_errno);
@@ -348,13 +348,13 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
         progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
 
-        Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints.data(),waypoints.size(),options, ProgressFunc);
+        Routino_Output * route = Routino_CalculateRoute(data, profile, translation, waypoints.data(), waypoints.size(), options, ProgressFunc);
 
         delete progress;
 
         if(nullptr != route)
         {
-            rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed()/1000.0, 0,'f',2));
+            rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed()/1000.0, 0, 'f', 2));
             Routino_DeleteRoute(route);
         }
         else
@@ -400,7 +400,7 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
         Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
 
-        int res = Routino_ValidateProfile(data,profile);
+        int res = Routino_ValidateProfile(data, profile);
         if(res != 0)
         {
             throw xlateRoutinoError(Routino_errno);
@@ -431,7 +431,7 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
         progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
 
-        Routino_Output * route = Routino_CalculateRoute(data,profile,translation,waypoints,2,options, ProgressFunc);
+        Routino_Output * route = Routino_CalculateRoute(data, profile, translation, waypoints, 2, options, ProgressFunc);
 
         delete progress;
 

@@ -196,9 +196,9 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     int w = doc.textWidth();
     int nItems = 0;
 
-    QFontMetrics fm(QFont(font().family(),12));
+    QFontMetrics fm(QFont(font().family(), 12));
     int pointSize = ((10 * (w - 2 * ROOT_FRAME_MARGIN)) / (CHAR_PER_LINE *  fm.width("X")));
-    pointSize = qMax(pointSize,CMainWindow::self().getMapFont().pointSize());
+    pointSize = qMax(pointSize, CMainWindow::self().getMapFont().pointSize());
 
     QFont f = textDesc->font();
     f.setPointSize(pointSize);
@@ -326,18 +326,18 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
         QTextTable * table = cursor1.insertTable(2, 2, fmtTableHidden);
 
-        QTextCursor cursor2 = table->cellAt(0,0).firstCursorPosition();
+        QTextCursor cursor2 = table->cellAt(0, 0).firstCursorPosition();
         drawInfo(cursor2, isReadOnly);
 
         if(prj.getItemCountByType(IGisItem::eTypeTrk) != 0)
         {
-            QTextCursor cursor3 = table->cellAt(0,1).firstCursorPosition();
+            QTextCursor cursor3 = table->cellAt(0, 1).firstCursorPosition();
             drawTrackSummary(cursor3, trks, isReadOnly);
         }
 
         if(!wpts.isEmpty())
         {
-            QTextCursor cursor3 = table->cellAt(1,1).firstCursorPosition();
+            QTextCursor cursor3 = table->cellAt(1, 1).firstCursorPosition();
             drawWaypointSummary(cursor3, wpts, isReadOnly);
         }
     }
@@ -462,11 +462,11 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
 
 void CDetailsPrj::addIcon(QTextTable * table, int col, int row, const QPixmap& icon, const QString& key, bool isReadOnly, bool printable)
 {
-    table->cellAt(row,col).firstCursorPosition().insertImage(icon.toImage().scaledToWidth(16, Qt::SmoothTransformation));
+    table->cellAt(row, col).firstCursorPosition().insertImage(icon.toImage().scaledToWidth(16, Qt::SmoothTransformation));
 
     if(!(printable || isReadOnly))
     {
-        table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<p><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a></p>").arg(key));
+        table->cellAt(row, col).lastCursorPosition().insertHtml(QString("<p><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a></p>").arg(key));
     }
 }
 
@@ -480,12 +480,12 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
         cursor.insertHtml(tr("<h2>Waypoints</h2>"));
         QTextTable * table = cursor.insertTable(wpts.count()+1, eMax1, fmtTableStandard);
 
-        table->cellAt(0,eSym1).setFormat(fmtCharHeader);
-        table->cellAt(0,eInfo1).setFormat(fmtCharHeader);
-        table->cellAt(0,eComment1).setFormat(fmtCharHeader);
+        table->cellAt(0, eSym1).setFormat(fmtCharHeader);
+        table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
+        table->cellAt(0, eComment1).setFormat(fmtCharHeader);
 
-        table->cellAt(0,eInfo1).firstCursorPosition().insertText(tr("Info"));
-        table->cellAt(0,eComment1).firstCursorPosition().insertText(tr("Comment"));
+        table->cellAt(0, eInfo1).firstCursorPosition().insertText(tr("Info"));
+        table->cellAt(0, eComment1).firstCursorPosition().insertText(tr("Comment"));
 
         cnt = 1;
         for(CGisItemWpt * wpt : wpts)
@@ -493,8 +493,8 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
             PROGRESS(n++, return );
 
             addIcon(table, eSym1, cnt, wpt->getDisplayIcon(), wpt->getKey().item, wpt->isReadOnly(), printable);
-            table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(wpt->getInfo(IGisItem::eFeatureShowName));
-            table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly() || printable, wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
+            table->cellAt(cnt, eInfo1).firstCursorPosition().insertHtml(wpt->getInfo(IGisItem::eFeatureShowName));
+            table->cellAt(cnt, eComment1).firstCursorPosition().insertHtml(IGisItem::createText(wpt->isReadOnly() || printable, wpt->getComment(), wpt->getDescription(), wpt->getLinks(), wpt->getKey().item));
             cnt++;
         }
 
@@ -506,12 +506,12 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
         cursor.insertHtml(tr("<h2>Tracks</h2>"));
         QTextTable * table = cursor.insertTable(trks.count()+1, eMax1, fmtTableStandard);
 
-        table->cellAt(0,eSym1).setFormat(fmtCharHeader);
-        table->cellAt(0,eInfo1).setFormat(fmtCharHeader);
-        table->cellAt(0,eComment1).setFormat(fmtCharHeader);
+        table->cellAt(0, eSym1).setFormat(fmtCharHeader);
+        table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
+        table->cellAt(0, eComment1).setFormat(fmtCharHeader);
 
-        table->cellAt(0,eInfo1).firstCursorPosition().insertText(tr("Info"));
-        table->cellAt(0,eComment1).firstCursorPosition().insertText(tr("Comment"));
+        table->cellAt(0, eInfo1).firstCursorPosition().insertText(tr("Info"));
+        table->cellAt(0, eComment1).firstCursorPosition().insertText(tr("Comment"));
 
         cnt = 1;
 
@@ -519,41 +519,41 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
         {
             PROGRESS(n++, return );
 
-            addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item,trk->isReadOnly(), printable);
+            addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item, trk->isReadOnly(), printable);
 
             int w1 = qRound(w/3.5 > 300 ? 300 : w/3.5);
             int h1 = qRound(w1/2.0);
 
             if(w1 < 300)
             {
-                table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
+                table->cellAt(cnt, eInfo1).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
 
-                QTextTable * table1 = table->cellAt(cnt,eInfo1).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+                QTextTable * table1 = table->cellAt(cnt, eInfo1).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
-                QImage profile(w1,h1,QImage::Format_ARGB32);
+                QImage profile(w1, h1, QImage::Format_ARGB32);
                 getTrackProfile(trk, profile);
-                table1->cellAt(0,0).firstCursorPosition().insertImage(profile);
+                table1->cellAt(0, 0).firstCursorPosition().insertImage(profile);
 
-                QImage overview(h1,h1,QImage::Format_ARGB32);
+                QImage overview(h1, h1, QImage::Format_ARGB32);
                 getTrackOverview(trk, overview);
-                table1->cellAt(0,1).firstCursorPosition().insertImage(overview);
+                table1->cellAt(0, 1).firstCursorPosition().insertImage(overview);
             }
             else
             {
-                QTextTable * table1 = table->cellAt(cnt,eInfo1).firstCursorPosition().insertTable(1, 3, fmtTableInfo);
+                QTextTable * table1 = table->cellAt(cnt, eInfo1).firstCursorPosition().insertTable(1, 3, fmtTableInfo);
 
-                table1->cellAt(0,0).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
+                table1->cellAt(0, 0).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
 
-                QImage profile(w1,h1,QImage::Format_ARGB32);
+                QImage profile(w1, h1, QImage::Format_ARGB32);
                 getTrackProfile(trk, profile);
-                table1->cellAt(0,1).firstCursorPosition().insertImage(profile);
+                table1->cellAt(0, 1).firstCursorPosition().insertImage(profile);
 
-                QImage overview(h1,h1,QImage::Format_ARGB32);
+                QImage overview(h1, h1, QImage::Format_ARGB32);
                 getTrackOverview(trk, overview);
-                table1->cellAt(0,2).firstCursorPosition().insertImage(overview);
+                table1->cellAt(0, 2).firstCursorPosition().insertImage(overview);
             }
 
-            table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly() || printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
+            table->cellAt(cnt, eComment1).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly() || printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
 
             cnt++;
         }
@@ -690,13 +690,13 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
         cursor.insertHtml(QString("<h2>%1</h2>").arg(trk->getName()));
         QTextTable * table = cursor.insertTable(wptInfo.count()+2, eMax2, fmtTableStandard);
 
-        table->cellAt(0,eSym2).setFormat(fmtCharHeader);
-        table->cellAt(0,eInfo2).setFormat(fmtCharHeader);
-        table->cellAt(0,eData2).setFormat(fmtCharHeader);
-        table->cellAt(0,eComment2).setFormat(fmtCharHeader);
+        table->cellAt(0, eSym2).setFormat(fmtCharHeader);
+        table->cellAt(0, eInfo2).setFormat(fmtCharHeader);
+        table->cellAt(0, eData2).setFormat(fmtCharHeader);
+        table->cellAt(0, eComment2).setFormat(fmtCharHeader);
 
-        table->cellAt(0,eInfo2).firstCursorPosition().insertText(tr("Info"));
-        table->cellAt(0,eComment2).firstCursorPosition().insertText(tr("Comment"));
+        table->cellAt(0, eInfo2).firstCursorPosition().insertText(tr("Info"));
+        table->cellAt(0, eComment2).firstCursorPosition().insertText(tr("Comment"));
 
         cnt = 1;
 
@@ -716,8 +716,8 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
             {
                 timeStr = info.info;
             }
-            table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(timeStr);
-            QTextTable * table1 = table->cellAt(cnt,eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+            table->cellAt(cnt, eInfo2).firstCursorPosition().insertHtml(timeStr);
+            QTextTable * table1 = table->cellAt(cnt, eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
             QString text, val, unit;
             text += "<table sytle='border=1px;'>";
@@ -765,7 +765,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
 
             text += "</table>";
 
-            table1->cellAt(0,0).firstCursorPosition().insertHtml(text);
+            table1->cellAt(0, 0).firstCursorPosition().insertHtml(text);
 
             if(!info.images.isEmpty())
             {
@@ -786,31 +786,31 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
                     w  = 200;
                 }
                 qDebug() << w << h;
-                image = image.scaled(w,h,Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                image = image.scaled(w, h, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
 
-                table1->cellAt(0,1).firstCursorPosition().insertImage(image);
+                table1->cellAt(0, 1).firstCursorPosition().insertImage(image);
             }
 
-            table->cellAt(cnt,eComment2).firstCursorPosition().insertHtml(IGisItem::createText(info.isReadOnly || printable, info.cmt, info.desc, info.links, info.key.item));
+            table->cellAt(cnt, eComment2).firstCursorPosition().insertHtml(IGisItem::createText(info.isReadOnly || printable, info.cmt, info.desc, info.links, info.key.item));
 
             cnt++;
         }
 
         addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item, trk->isReadOnly(), printable);
-        table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
+        table->cellAt(cnt, eInfo2).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
 
-        QTextTable * table1 = table->cellAt(cnt,eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+        QTextTable * table1 = table->cellAt(cnt, eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
-        QImage profile(w1,h1,QImage::Format_ARGB32);
+        QImage profile(w1, h1, QImage::Format_ARGB32);
         getTrackProfile(trk, profile);
-        table1->cellAt(0,0).firstCursorPosition().insertImage(profile);
+        table1->cellAt(0, 0).firstCursorPosition().insertImage(profile);
 
-        QImage overview(h1,h1,QImage::Format_ARGB32);
+        QImage overview(h1, h1, QImage::Format_ARGB32);
         getTrackOverview(trk, overview);
-        table1->cellAt(0,1).firstCursorPosition().insertImage(overview);
+        table1->cellAt(0, 1).firstCursorPosition().insertImage(overview);
 
-        table->cellAt(cnt,eComment2).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly() || printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
+        table->cellAt(cnt, eComment2).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly() || printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
 
         cursor.setPosition(table->lastPosition() + 1);
     }
@@ -825,12 +825,12 @@ void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas,
     cursor.insertHtml(tr("<h2>Areas</h2>"));
     QTextTable * table = cursor.insertTable(areas.count()+1, eMax1, fmtTableStandard);
 
-    table->cellAt(0,eSym1).setFormat(fmtCharHeader);
-    table->cellAt(0,eInfo1).setFormat(fmtCharHeader);
-    table->cellAt(0,eComment1).setFormat(fmtCharHeader);
+    table->cellAt(0, eSym1).setFormat(fmtCharHeader);
+    table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
+    table->cellAt(0, eComment1).setFormat(fmtCharHeader);
 
-    table->cellAt(0,eInfo1).firstCursorPosition().insertText(tr("Info"));
-    table->cellAt(0,eComment1).firstCursorPosition().insertText(tr("Comment"));
+    table->cellAt(0, eInfo1).firstCursorPosition().insertText(tr("Info"));
+    table->cellAt(0, eComment1).firstCursorPosition().insertText(tr("Comment"));
 
     int cnt = 1;
     for(CGisItemOvlArea * area : areas)
@@ -838,8 +838,8 @@ void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas,
         PROGRESS(n++, return );
 
         addIcon(table, eSym1, cnt, area->getDisplayIcon(), area->getKey().item, area->isReadOnly(), printable);
-        table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(area->getInfo(IGisItem::eFeatureShowName));
-        table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly() || printable, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
+        table->cellAt(cnt, eInfo1).firstCursorPosition().insertHtml(area->getInfo(IGisItem::eFeatureShowName));
+        table->cellAt(cnt, eComment1).firstCursorPosition().insertHtml(IGisItem::createText(area->isReadOnly() || printable, area->getComment(), area->getDescription(), area->getLinks(), area->getKey().item));
         cnt++;
     }
 
@@ -855,12 +855,12 @@ void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte *> &rtes, CPr
     cursor.insertHtml(tr("<h2>Routes</h2>"));
     QTextTable * table = cursor.insertTable(rtes.count()+1, eMax1, fmtTableStandard);
 
-    table->cellAt(0,eSym1).setFormat(fmtCharHeader);
-    table->cellAt(0,eInfo1).setFormat(fmtCharHeader);
-    table->cellAt(0,eComment1).setFormat(fmtCharHeader);
+    table->cellAt(0, eSym1).setFormat(fmtCharHeader);
+    table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
+    table->cellAt(0, eComment1).setFormat(fmtCharHeader);
 
-    table->cellAt(0,eInfo1).firstCursorPosition().insertText(tr("Info"));
-    table->cellAt(0,eComment1).firstCursorPosition().insertText(tr("Comment"));
+    table->cellAt(0, eInfo1).firstCursorPosition().insertText(tr("Info"));
+    table->cellAt(0, eComment1).firstCursorPosition().insertText(tr("Comment"));
 
     int cnt = 1;
     for(CGisItemRte * rte : rtes)
@@ -868,8 +868,8 @@ void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte *> &rtes, CPr
         PROGRESS(n++, return );
 
         addIcon(table, eSym1, cnt, rte->getDisplayIcon(), rte->getKey().item, rte->isReadOnly(), printable);
-        table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(rte->getInfo(IGisItem::eFeatureShowName));
-        table->cellAt(cnt,eComment1).firstCursorPosition().insertHtml(IGisItem::createText(rte->isReadOnly() || printable, rte->getComment(), rte->getDescription(), rte->getLinks(), rte->getKey().item));
+        table->cellAt(cnt, eInfo1).firstCursorPosition().insertHtml(rte->getInfo(IGisItem::eFeatureShowName));
+        table->cellAt(cnt, eComment1).firstCursorPosition().insertHtml(IGisItem::createText(rte->isReadOnly() || printable, rte->getComment(), rte->getDescription(), rte->getLinks(), rte->getKey().item));
         cnt++;
     }
 

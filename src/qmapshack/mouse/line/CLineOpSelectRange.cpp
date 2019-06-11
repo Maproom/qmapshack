@@ -27,7 +27,7 @@
 CLineOpSelectRange::CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
     : ILineOp(points, gis, canvas, parent)
 {
-    cursor = QCursor(QPixmap(":/cursors/cursorSelectRange.png"),0,0);
+    cursor = QCursor(QPixmap(":/cursors/cursorSelectRange.png"), 0, 0);
 }
 
 CLineOpSelectRange::~CLineOpSelectRange()

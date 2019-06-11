@@ -123,7 +123,7 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     p.translate(l[0]);
     p.scale(w/img.width(), h/img.height());
     p.rotate(a);
-    p.drawImage(0,0,img);
+    p.drawImage(0, 0, img);
     p.restore();
 }
 
@@ -189,7 +189,7 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     // canvas using the view's projection
     context.convertRad2Px(quads);
 
-    QRectF rect(0,0, img.width()/nStepsX, img.height() / nStepsY);
+    QRectF rect(0, 0, img.width()/nStepsX, img.height() / nStepsY);
     const qreal rw = rect.width();
     const qreal rh = rect.height();
 
@@ -220,7 +220,7 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
             p.translate(pPt[0]);
             p.scale(w/rw, h/rh);
             p.rotate(a);
-            p.drawImage(QPoint(0,0),img, rect);
+            p.drawImage(QPoint(0, 0), img, rect);
             p.restore();
         }
     }

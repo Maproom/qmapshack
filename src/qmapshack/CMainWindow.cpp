@@ -98,7 +98,7 @@ CMainWindow::CMainWindow()
     IGisItem::init();
     wptIconManager = new CWptIconManager(this);
 
-    IUnit::setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
+    IUnit::setUnitType((IUnit::type_e)cfg.value("MainWindow/units", IUnit::eTypeMetric).toInt(), this);
     IUnit::setSlopeMode((IUnit::slope_mode_e)cfg.value("Units/slopeMode", IUnit::eSlopeDegrees).toInt());
 
     QByteArray tz;
@@ -157,7 +157,7 @@ CMainWindow::CMainWindow()
         dockStates = cfg.value("dockstate").toByteArray();
     }
 
-    menuVisible = cfg.value("menuvisible",false).toBool();
+    menuVisible = cfg.value("menuvisible", false).toBool();
 
     if(windowState() == Qt::WindowFullScreen)
     {
@@ -248,7 +248,7 @@ CMainWindow::CMainWindow()
     cfg.endGroup(); // Views
     testForNoView();
 
-    CCanvas::gisLayerOpacity = cfg.value("gisLayerOpacity",1.0).toFloat();
+    CCanvas::gisLayerOpacity = cfg.value("gisLayerOpacity", 1.0).toFloat();
     widgetGisWorkspace->setOpacity(CCanvas::gisLayerOpacity);
 
     actionGeoSearch->setChecked(cfg.value("isGeosearchVisible", false).toBool());
@@ -267,7 +267,7 @@ CMainWindow::CMainWindow()
     actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
     actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
-    tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
+    tabWidget->setCurrentIndex(cfg.value("visibleCanvas", 0).toInt());
     cfg.endGroup(); // Canvas
 
 
@@ -316,37 +316,37 @@ CMainWindow::CMainWindow()
     QAction * actionToggleToolBar = toolBar->toggleViewAction();
     actionToggleToolBar->setObjectName("actionToggleToolBar");
     actionToggleToolBar->setIcon(QIcon(":/icons/32x32/ToolBar.png"));
-    menuWindow->insertAction(actionSetupToolbar,actionToggleToolBar);
+    menuWindow->insertAction(actionSetupToolbar, actionToggleToolBar);
 
     QAction * actionToggleMaps = dockMaps->toggleViewAction();
     actionToggleMaps->setObjectName("actionToggleMaps");
     actionToggleMaps->setIcon(QIcon(":/icons/32x32/ToggleMaps.png"));
-    menuWindow->insertAction(actionSetupToolbar,actionToggleMaps);
+    menuWindow->insertAction(actionSetupToolbar, actionToggleMaps);
 
     QAction * actionToggleDem = dockDem->toggleViewAction();
     actionToggleDem->setObjectName("actionToggleDem");
     actionToggleDem->setIcon(QIcon(":/icons/32x32/ToggleDem.png"));
-    menuWindow->insertAction(actionSetupToolbar,actionToggleDem);
+    menuWindow->insertAction(actionSetupToolbar, actionToggleDem);
 
     QAction * actionToggleWorkspace = dockWorkspace->toggleViewAction();
     actionToggleWorkspace->setObjectName("actionToggleWorkspace");
     actionToggleWorkspace->setIcon(QIcon(":/icons/32x32/ToggleGis.png"));
-    menuWindow->insertAction(actionSetupToolbar,actionToggleWorkspace);
+    menuWindow->insertAction(actionSetupToolbar, actionToggleWorkspace);
 
     QAction * actionToggleRealtime = dockRealtime->toggleViewAction();
     actionToggleRealtime->setObjectName("actionToggleRealtime");
     actionToggleRealtime->setIcon(QIcon(":/icons/32x32/ToggleRealTime.png"));
-    menuWindow->insertAction(actionSetupToolbar,actionToggleRealtime);
+    menuWindow->insertAction(actionSetupToolbar, actionToggleRealtime);
 
     QAction * actionToggleDatabase = dockDatabase->toggleViewAction();
     actionToggleDatabase->setObjectName("actionToggleDatabase");
     actionToggleDatabase->setIcon(QIcon(":/icons/32x32/ToggleDatabase.png"));
-    menuWindow->insertAction(actionSetupToolbar,actionToggleDatabase);
+    menuWindow->insertAction(actionSetupToolbar, actionToggleDatabase);
 
     QAction * actionToggleRte = dockRte->toggleViewAction();
     actionToggleRte->setObjectName("actionToggleRte");
     actionToggleRte->setIcon(QIcon(":/icons/32x32/ToggleRouter.png"));
-    menuWindow->insertAction(actionSetupToolbar,actionToggleRte);
+    menuWindow->insertAction(actionSetupToolbar, actionToggleRte);
 
     menuWindow->insertSeparator(actionSetupToolbar);
 
@@ -362,7 +362,7 @@ CMainWindow::CMainWindow()
     actionTrackInfo->setMenu(menu);
 
 
-    QAction * separator = new QAction("---------------",this);
+    QAction * separator = new QAction("---------------", this);
     separator->setSeparator(true);
     separator->setObjectName("separator");
 
@@ -426,7 +426,7 @@ CMainWindow::CMainWindow()
                      << actionStartQMapTool
                      << actionRenameView;
 
-    QAction * separator1 = new QAction("---------------",this);
+    QAction * separator1 = new QAction("---------------", this);
     separator1->setSeparator(true);
     separator1->setObjectName("separator");
 
@@ -500,11 +500,11 @@ CMainWindow::~CMainWindow()
     {
         activeDockNames << dock->objectName();
     }
-    cfg.setValue("activedocks",activeDockNames);
+    cfg.setValue("activedocks", activeDockNames);
 
-    cfg.setValue("displaymode",static_cast<int>(displayMode));
-    cfg.setValue("dockstate",dockStates);
-    cfg.setValue("menuvisible",menuVisible);
+    cfg.setValue("displaymode", static_cast<int>(displayMode));
+    cfg.setValue("dockstate", dockStates);
+    cfg.setValue("menuvisible", menuVisible);
     cfg.endGroup();
 
     /*
@@ -554,7 +554,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("ShowTrackProfile", actionShowTrackProfile->isChecked());
     cfg.setValue("ShowTrackHighlight", actionShowTrackHighlight->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
-    cfg.setValue("profileIsWindow",actionProfileIsWindow->isChecked());
+    cfg.setValue("profileIsWindow", actionProfileIsWindow->isChecked());
     cfg.setValue("mapFont", mapFont);
     CMapDraw::saveMapPath(cfg);
     CDemDraw::saveDemPath(cfg);
@@ -749,12 +749,12 @@ bool CMainWindow::profileIsWindow() const
 
 void CMainWindow::addMapList(CMapList * list, const QString &name)
 {
-    tabMaps->addTab(list,name);
+    tabMaps->addTab(list, name);
 }
 
 void CMainWindow::addDemList(CDemList * list, const QString &name)
 {
-    tabDem->addTab(list,name);
+    tabDem->addTab(list, name);
 }
 
 void CMainWindow::addWidgetToTab(QWidget * w)
@@ -1290,7 +1290,7 @@ void CMainWindow::slotSetupCoordFormat()
 
 void CMainWindow::slotSetupToolbar()
 {
-    CToolBarSetupDialog dlg(this,toolBarConfig);
+    CToolBarSetupDialog dlg(this, toolBarConfig);
     dlg.exec();
 }
 
@@ -1821,8 +1821,8 @@ void CMainWindow::slotSanityTest()
     if(pjsrc == nullptr)
     {
         QMessageBox::critical(this, tr("Fatal...")
-                              ,tr("QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.")
-                              ,QMessageBox::Close);
+                              , tr("QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.")
+                              , QMessageBox::Close);
 
         deleteLater();
         return;

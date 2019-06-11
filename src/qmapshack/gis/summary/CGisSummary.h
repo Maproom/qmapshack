@@ -33,10 +33,10 @@ public:
     enum dropzone_e
     {
         eDropZone1 = 0
-        ,eDropZone2 = 1
-        ,eDropZone3 = 2
-        ,eDropZone4 = 3
-        ,eDropZoneMax = 4
+        , eDropZone2 = 1
+        , eDropZone3 = 2
+        , eDropZone4 = 3
+        , eDropZoneMax = 4
     };
 
     struct folder_t

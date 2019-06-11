@@ -47,7 +47,7 @@ CFitProject::CFitProject(const QString &filename, IDevice *parent)
 
 void CFitProject::loadFitFromFile(const QString &filename, bool showErrorMsg)
 {
-    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/FitProject.png"));
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/FitProject.png"));
     blockUpdateItems(true);
     try
     {

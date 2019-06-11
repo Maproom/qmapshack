@@ -55,7 +55,7 @@ inline double tile2lat(int y, int z)
 
 
 CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility,parent)
+    : IMap(eFeatVisibility, parent)
     , filename(filename)
 {
     qDebug() << "CMapGEMF: try to open " << filename;
@@ -84,8 +84,8 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
             len = NAMEBUFLEN;
         }
 
-        stream.readRawData(name.data(),len);
-        source.name = QString().fromLocal8Bit(name,len);
+        stream.readRawData(name.data(), len);
+        source.name = QString().fromLocal8Bit(name, len);
         sources << source;
         qDebug() << "CMapGEMF: Read Source " << i << " " << source.name;
     }
@@ -165,7 +165,7 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
 
     // start to draw the map
     QPainter p(&buf.image);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
@@ -286,9 +286,9 @@ QImage CMapGEMF::getTile(const quint32 row, const quint32 col, const quint32 z)
             QFile imageFile(splitfile);
             imageFile.open(QIODevice::ReadOnly);
             imageFile.seek(imageDataOffset);
-            QByteArray imageData(size,0);
-            imageFile.read(imageData.data(),size);
-            return QImage::fromData((uchar *)imageData.data(),size,0);
+            QByteArray imageData(size, 0);
+            imageFile.read(imageData.data(), size);
+            return QImage::fromData((uchar *)imageData.data(), size, 0);
         }
     }
 

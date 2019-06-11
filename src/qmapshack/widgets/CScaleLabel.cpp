@@ -48,7 +48,7 @@ void CScaleLabel::paintEvent(QPaintEvent *e)
 
     QPainter p;
     p.begin(this);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
 
     p.fillRect(rect(), Qt::transparent);
     // draw bar background

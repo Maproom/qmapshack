@@ -52,17 +52,17 @@ CSelectDBFolder::CSelectDBFolder(QList<quint64> &ids, QString &db, QString &host
         QString type = cfg.value("type", "SQLite").toString();
         if(type == "SQLite")
         {
-            QString filename = cfg.value("filename","").toString();
+            QString filename = cfg.value("filename", "").toString();
             new CDBFolderSqlite(filename, name, treeWidget);
         }
 
         if(type == "MySQL")
         {
-            QString server  = cfg.value("server","").toString();
-            QString port    = cfg.value("port","").toString();
-            QString user    = cfg.value("user","").toString();
-            QString passwd  = cfg.value("passwd","").toString();
-            bool noPasswd   = cfg.value("noPasswd",false).toBool();
+            QString server  = cfg.value("server", "").toString();
+            QString port    = cfg.value("port", "").toString();
+            QString user    = cfg.value("user", "").toString();
+            QString passwd  = cfg.value("passwd", "").toString();
+            bool noPasswd   = cfg.value("noPasswd", false).toBool();
             new CDBFolderMysql(server, port, user, passwd, noPasswd, name, treeWidget);
         }
         cfg.endGroup(); // name

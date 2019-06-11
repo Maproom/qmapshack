@@ -33,18 +33,18 @@ void CGeoSearchConfig::load()
 {
     SETTINGS;
     cfg.beginGroup("Search");
-    accumulativeResults = cfg.value("accumulativeResults",accumulativeResults).toBool();
-    symbolName = cfg.value("symbol","Default").toString();
-    currentService = service_e(cfg.value("current",eServiceNominatim).toInt());
+    accumulativeResults = cfg.value("accumulativeResults", accumulativeResults).toBool();
+    symbolName = cfg.value("symbol", "Default").toString();
+    currentService = service_e(cfg.value("current", eServiceNominatim).toInt());
     cfg.beginGroup("google");
-    googleApiKey = cfg.value("key","").toString();
+    googleApiKey = cfg.value("key", "").toString();
     cfg.endGroup();
     cfg.beginGroup("geonames");
-    geonamesUsername = cfg.value("username","").toString();
+    geonamesUsername = cfg.value("username", "").toString();
     cfg.endGroup();
     cfg.beginGroup("nominatim");
-    nominatimEmail = cfg.value("email","").toString();
-    nominatimLimit = cfg.value("limit",nominatimLimit).toInt();
+    nominatimEmail = cfg.value("email", "").toString();
+    nominatimLimit = cfg.value("limit", nominatimLimit).toInt();
     cfg.endGroup();
     cfg.endGroup();
     emit sigConfigChanged();
@@ -54,18 +54,18 @@ void CGeoSearchConfig::save() const
 {
     SETTINGS;
     cfg.beginGroup("Search");
-    cfg.setValue("accumulativeResults",accumulativeResults);
-    cfg.setValue("symbol",symbolName);
-    cfg.setValue("current",currentService);
+    cfg.setValue("accumulativeResults", accumulativeResults);
+    cfg.setValue("symbol", symbolName);
+    cfg.setValue("current", currentService);
     cfg.beginGroup("google");
-    cfg.setValue("key",googleApiKey);
+    cfg.setValue("key", googleApiKey);
     cfg.endGroup();
     cfg.beginGroup("geonames");
-    cfg.setValue("username",geonamesUsername);
+    cfg.setValue("username", geonamesUsername);
     cfg.endGroup();
     cfg.beginGroup("nominatim");
-    cfg.setValue("email",nominatimEmail);
-    cfg.setValue("limit",nominatimLimit);
+    cfg.setValue("email", nominatimEmail);
+    cfg.setValue("limit", nominatimLimit);
     cfg.endGroup();
     cfg.endGroup();
 }

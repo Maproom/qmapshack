@@ -35,7 +35,7 @@
 CQlbProject::CQlbProject(const QString &filename, CGisListWks *parent)
     : IGisProject(eTypeQlb, filename, parent)
 {
-    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/QlbProject.png"));
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/QlbProject.png"));
 
     // create file instance
     QFile file(filename);
@@ -123,7 +123,7 @@ void CQlbProject::loadOvls(QByteArray &array)
     bool warningDone = false;
     while(!stream.atEnd())
     {
-        IQlgtOverlay ovl(0,nullptr);
+        IQlgtOverlay ovl(0, nullptr);
         stream >> ovl;
         if(ovl.type == "Area")
         {

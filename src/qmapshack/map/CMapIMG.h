@@ -98,7 +98,7 @@ public:
         /// the name of the subfile (not really needed)
         QString name;
         /// location information of all parts
-        QMap<QString,subfile_part_t> parts;
+        QMap<QString, subfile_part_t> parts;
 
         qreal north = 0.0; //< north boundary of area covered by this subfile [rad]
         qreal east  = 0.0; //< east  boundary of area covered by this subfile [rad]
@@ -171,7 +171,7 @@ private:
     void readSubfileBasics(subfile_desc_t& subfile, CFileExt &file);
     void processPrimaryMapData();
     void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data);
-    void loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polylines, pointtype_t& points, pointtype_t& pois, unsigned level, const QRectF& viewport,QPainter& p);
+    void loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polylines, pointtype_t& points, pointtype_t& pois, unsigned level, const QRectF& viewport, QPainter& p);
     void loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStrTbl * strtbl, const QByteArray& rgndata, bool fast, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons, pointtype_t& points, pointtype_t& pois);
     bool intersectsWithExistingLabel(const QRect &rect) const;
     void addLabel(const CGarminPoint &pt, const QRect &rect, CGarminTyp::label_type_e type);
@@ -477,7 +477,7 @@ private:
         gmapsupp.img files can hold several subfiles each with it's
         own subfile parts.
      */
-    QMap<QString,subfile_desc_t> subfiles;
+    QMap<QString, subfile_desc_t> subfiles;
     /// relay the transparent flags from the subfiles
     bool transparent = false;
 

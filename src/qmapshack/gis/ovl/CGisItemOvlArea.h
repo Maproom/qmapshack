@@ -107,7 +107,7 @@ public:
 
     using IGisItem::drawItem;
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
-    void drawLabel(QPainter& p, const QPolygonF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
     void drawHighlight(QPainter& p) override;
 
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
@@ -126,9 +126,9 @@ public:
     const width_t lineWidths[OVL_N_WIDTHS] =
     {
         {3,  tr("thin")}
-        ,{5,  tr("normal")}
-        ,{9,  tr("wide")}
-        ,{13, tr("strong")}
+        , {5,  tr("normal")}
+        , {9,  tr("wide")}
+        , {13, tr("strong")}
     };
 
     const Qt::BrushStyle brushStyles[OVL_N_STYLES] =

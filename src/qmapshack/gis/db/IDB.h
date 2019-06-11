@@ -41,7 +41,7 @@ public:
     }
 
 protected:
-    static QMap<QString,int> references;
+    static QMap<QString, int> references;
     QSqlDatabase db;
     void setup(const QString& connectionName);
     bool setupDB(QString &error);

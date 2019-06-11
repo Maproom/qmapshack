@@ -98,7 +98,7 @@ void CDemItem::updateIcon()
         img = QPixmap("://icons/32x32/MimeDemWCS.png");
     }
 
-    setIcon(0,QIcon(img));
+    setIcon(0, QIcon(img));
 }
 
 bool CDemItem::isActivated()

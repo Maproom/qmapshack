@@ -43,7 +43,7 @@ void IMouseSelect::rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const
     gis->convertRad2Px(pt1);
     gis->convertRad2Px(pt2);
 
-    rectTar = QRectF(pt1,pt2);
+    rectTar = QRectF(pt1, pt2);
 }
 
 void IMouseSelect::placeScrOpt()
@@ -90,7 +90,7 @@ void IMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     path.addRect(rectSel);
 
     p.setPen(Qt::black);
-    p.setBrush(QColor(0,0,0,128));
+    p.setBrush(QColor(0, 0, 0, 128));
     p.drawPath(path);
 
     p.setBrush(Qt::lightGray);
@@ -274,7 +274,7 @@ void IMouseSelect::dragFinished(const QPoint& pos)
         gis->convertRad2Px(pt1);
         gis->convertRad2Px(pt2);
 
-        QRectF rectSel(pt1,pt2);
+        QRectF rectSel(pt1, pt2);
 
         if(rectSel.width() < 40 || rectSel.height() < 40)
         {

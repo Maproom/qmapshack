@@ -67,7 +67,7 @@ CMapList::CMapList(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
+    lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
     connect(treeWidget,     &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);
     connect(treeWidget,     &CMapTreeWidget::sigChanged,                 this, &CMapList::sigChanged);

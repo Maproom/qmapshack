@@ -97,7 +97,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     actionPrint         = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
     menu->addSeparator();
     actionAddWpt        = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, SLOT(slotAddWpt()));
-    actionAddTrkPtInfo  = menu->addAction(QIcon("://icons/32x32/AddPointInfo.png"),tr("Add Trackpoint Info"), this, SLOT(slotAddTrkPtInfo()));
+    actionAddTrkPtInfo  = menu->addAction(QIcon("://icons/32x32/AddPointInfo.png"), tr("Add Trackpoint Info"), this, SLOT(slotAddTrkPtInfo()));
     actionCutTrk        = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),      tr("Cut Track..."),    this, SLOT(slotCutTrk()));
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
@@ -269,7 +269,7 @@ void IPlot::draw(QPainter& p)
         needsRedraw = false;
     }
 
-    p.drawImage(0,0,buffer);
+    p.drawImage(0, 0, buffer);
     drawDecoration(p);
 }
 
@@ -546,8 +546,8 @@ void IPlot::wheelEvent(QWheelEvent * e)
     }
 
 
-    QPoint p = mapToGlobal(e->pos() + QPoint(32,0));
-    QToolTip::showText(p,tr("Hold CTRL key for vertical zoom, only.\nHold ALT key for horizontal zoom, only."), this, QRect(), 500);
+    QPoint p = mapToGlobal(e->pos() + QPoint(32, 0));
+    QToolTip::showText(p, tr("Hold CTRL key for vertical zoom, only.\nHold ALT key for horizontal zoom, only."), this, QRect(), 500);
     needsRedraw = true;
     update();
 
@@ -659,7 +659,7 @@ void IPlot::setSizeTrackInfo()
     }
 
     rectTrackInfo.setWidth(right - left);
-    rectTrackInfo.setHeight(qMax(fontHeight,iconBarHeight));
+    rectTrackInfo.setHeight(qMax(fontHeight, iconBarHeight));
     rectTrackInfo.moveLeft(left);
     rectTrackInfo.moveTop(size().height() - fontHeight);
 }
@@ -683,12 +683,12 @@ void IPlot::draw()
 
     if(mode == eModeNormal)
     {
-        p.fillRect(rect(),Qt::white);
+        p.fillRect(rect(), Qt::white);
     }
     else if(mode == eModeIcon)
     {
         QRect r = rect();
-        r.adjust(2,2,-2,-2);
+        r.adjust(2, 2, -2, -2);
         if(underMouse() || posMouse1 != NOPOINT || solid)
         {
             p.setPen(solid ? CDraw::penBorderBlack : CDraw::penBorderBlue);
@@ -699,9 +699,9 @@ void IPlot::draw()
             p.setPen(CDraw::penBorderBlack);
             p.setOpacity(0.6);
         }
-        p.setBrush(QColor(255,255,255,255));
+        p.setBrush(QColor(255, 255, 255, 255));
 
-        PAINT_ROUNDED_RECT(p,r);
+        PAINT_ROUNDED_RECT(p, r);
     }
 
     if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())
@@ -727,7 +727,7 @@ void IPlot::draw()
     drawActivities(p);
     drawXTic(p);
     drawYTic(p);
-    p.setPen(QPen(Qt::black,2));
+    p.setPen(QPen(Qt::black, 2));
     p.drawRect(rectGraphArea);
     drawLegend(p);
 
@@ -910,8 +910,8 @@ void IPlot::drawXScale( QPainter &p )
     int y = bottom + 5;
     int w = (useMax - useMin) * scale;
 
-    p.setPen(QPen(Qt::red,3));
-    p.drawLine(x,y, x + w, y);
+    p.setPen(QPen(Qt::red, 3));
+    p.drawLine(x, y, x + w, y);
 }
 
 
@@ -982,8 +982,8 @@ void IPlot::drawYScale( QPainter &p )
     int y = bottom + (useMin - limMin) * scale;
     int h = (useMax - useMin) * scale;
 
-    p.setPen(QPen(Qt::red,3));
-    p.drawLine(x,y, x, y + h);
+    p.setPen(QPen(Qt::red, 3));
+    p.drawLine(x, y, x, y + h);
 }
 
 
@@ -995,7 +995,7 @@ void IPlot::drawGridX( QPainter &p )
     const CPlotAxis::tic_t * t = data->x().ticmark();
 
     QPen oldpen = p.pen();
-    p.setPen( QPen( QColor(0,150,0,128), 1, Qt::DotLine ) );
+    p.setPen( QPen( QColor(0, 150, 0, 128), 1, Qt::DotLine ) );
 
     const int iy = rectGraphArea.top();
     while ( t )
@@ -1016,7 +1016,7 @@ void IPlot::drawGridY( QPainter &p )
     const CPlotAxis::tic_t * t = data->y().ticmark();
 
     QPen oldpen = p.pen();
-    p.setPen( QPen( QColor(0,150,0,128), 1, Qt::DotLine ) );
+    p.setPen( QPen( QColor(0, 150, 0, 128), 1, Qt::DotLine ) );
 
     const int ix = rectGraphArea.left();
     while(nullptr != t)
@@ -1098,7 +1098,7 @@ void IPlot::drawLegend(QPainter& p)
     while(line != lines.end())
     {
         p.setPen(Qt::black);
-        p.drawText(x + 30,y,line->label);
+        p.drawText(x + 30, y, line->label);
         p.setPen(pens[penIdx++]);
         p.drawLine(x, y, x + 20, y);
 
@@ -1134,7 +1134,7 @@ void IPlot::drawDecoration( QPainter &p )
                     QFontMetrics fm(f);
                     QRect r = fm.boundingRect(tag.label);
                     r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
-                    r.adjust(-3,-2,3,0);
+                    r.adjust(-3, -2, 3, 0);
 
                     p.setPen(Qt::NoPen);
                     p.setBrush(Qt::white);
@@ -1218,7 +1218,7 @@ void IPlot::drawTags(QPainter& p)
             continue;
         }
 
-        QPixmap icon = tag.icon.scaled(iconBarHeight,iconBarHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        QPixmap icon = tag.icon.scaled(iconBarHeight, iconBarHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         p.drawPixmap(ptx - icon.width() / 2, 2, icon);
 
         if (pty > bottom)
@@ -1291,16 +1291,16 @@ void IPlot::drawActivities(QPainter& p)
     constexpr int icon_frame    = 20;
     constexpr int icon_size     = 16;
 
-    QRect rectClipping = QRect(0,0,right - left,27);
+    QRect rectClipping = QRect(0, 0, right - left, 27);
     p.save();
     p.setClipping(true);
     p.translate(left, bottom - bar_height);
-    p.setBrush(QColor(0,170,0,100));
+    p.setBrush(QColor(0, 170, 0, 100));
     p.setPen(Qt::NoPen);
     p.drawRect(rectClipping);
 
-    QRect rectIconFrame(0,0,icon_frame,icon_frame);
-    QRect rectIcon(0,0,icon_size,icon_size);
+    QRect rectIconFrame(0, 0, icon_frame, icon_frame);
+    QRect rectIcon(0, 0, icon_size, icon_size);
     for(const CActivityTrk::range_t& range : ranges)
     {
         int x1, x2, y1 = 0;
@@ -1333,7 +1333,7 @@ void IPlot::drawActivities(QPainter& p)
         {
             int c = x1 + d/2;
 
-            p.setPen(QPen(desc.color,1));
+            p.setPen(QPen(desc.color, 1));
             rectIconFrame.moveCenter(QPoint(c, icon_frame/2 + color_width));
             p.setBrush(QColor(255, 255, 255, 100));
             p.drawRoundedRect(rectIconFrame, RECT_RADIUS, RECT_RADIUS);
@@ -1342,7 +1342,7 @@ void IPlot::drawActivities(QPainter& p)
             p.drawPixmap(rectIcon, QPixmap(desc.iconSmall));
         }
 
-        p.setPen(QPen(Qt::darkGreen,1));
+        p.setPen(QPen(Qt::darkGreen, 1));
         p.drawLine(x1, bar_height, x1, qMin(0, bar_height - y1));
 
         p.setPen(QPen(desc.color, color_width, Qt::SolidLine, Qt::FlatCap));

@@ -67,7 +67,7 @@ public:
                 return;
             }
         }
-        clusters.append({number,r});
+        clusters.append({number, r});
     }
 
     static void draw(const QList<cluster>&clusters, QPainter& p, int size)
@@ -107,46 +107,46 @@ private:
 };
 
 const QPointF cluster::point1[] = {
-    {0,0}
+    {0, 0}
 };
 
 const QPointF cluster::point2[] = {
-    {-0.5,0}, {0.5,0}
+    {-0.5, 0}, {0.5, 0}
 };
 
 const QPointF cluster::point3[] = {
-    {  -1,0}, {  0,0}, {1,0}
+    {  -1, 0}, {  0, 0}, {1, 0}
 };
 
 const QPointF cluster::point4[] = {
-    {-1,-0.5}, {0,-0.5}, {1,-0.5},
+    {-1, -0.5}, {0, -0.5}, {1, -0.5},
     {-1, 0.5}
 };
 
 const QPointF cluster::point5[] = {
-    {-1,-0.5}, {0,-0.5}, {1,-0.5},
+    {-1, -0.5}, {0, -0.5}, {1, -0.5},
     {-1, 0.5}, {0, 0.5}
 };
 
 const QPointF cluster::point6[] = {
-    {-1,-0.5}, {0,-0.5}, {1,-0.5},
+    {-1, -0.5}, {0, -0.5}, {1, -0.5},
     {-1, 0.5}, {0, 0.5}, {1, 0.5}
 };
 
 const QPointF cluster::point7[] = {
-    {-1,-1}, {0,-1}, {1,-1},
+    {-1, -1}, {0, -1}, {1, -1},
     {-1, 0}, {0, 0}, {1, 0},
     {-1, 1}
 };
 
 const QPointF cluster::point8[] = {
-    {-1,-1}, {0,-1}, {1,-1},
+    {-1, -1}, {0, -1}, {1, -1},
     {-1, 0}, {0, 0}, {1, 0},
     {-1, 1}, {0, 1}
 };
 
 const QPointF cluster::point9[] = {
-    {-1,-1}, {0,-1}, {1,-1},
+    {-1, -1}, {0, -1}, {1, -1},
     {-1, 0}, {0, 0}, {1, 0},
     {-1, 1}, {0, 1}, {1, 1}
 };
@@ -1151,7 +1151,7 @@ void CGisItemTrk::deriveSecondaryData()
         lastTrkpt = &trkpt;
     }
 
-    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
+    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD, south * DEG_TO_RAD));
 
     for(int p = 0; p < lintrk.size(); p++)
     {
@@ -1565,7 +1565,7 @@ bool CGisItemTrk::addTrkPtDesc()
         return false;
     }
 
-    const QString& desc = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(),tr("Track Point Info..."),
+    const QString& desc = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(), tr("Track Point Info..."),
                                                 tr("Enter some text to be attached to this track point:"));
 
     if(desc.isEmpty())
@@ -1805,7 +1805,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     lineSimple.clear();
     lineFull.clear();
 
-    if(!isVisible(boundingRect, viewport,gis))
+    if(!isVisible(boundingRect, viewport, gis))
     {
         return;
     }
@@ -1820,7 +1820,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     QPointF p2 = viewport[2];
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);
-    QRectF extViewport(p1,p2);
+    QRectF extViewport(p1, p2);
 
     if(mode == eModeNormal)
     {
@@ -1988,7 +1988,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
             pos *= DEG_TO_RAD;
             gis->convertRad2Px(pos);
 
-            QRect r(0,0,size,size);
+            QRect r(0, 0, size, size);
             r.moveCenter(pos.toPoint());
             cluster::addToCluster(r, clusters, cnt++);
         }
@@ -2002,8 +2002,8 @@ void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const
 {
     const QString& fullLabel = (type == eLimitTypeMin ? tr("min.") : tr("max.")) + " " + label;
     QRectF rect = fm.boundingRect(fullLabel);
-    rect.moveBottomLeft(pos.toPoint() + QPoint(10,-10));
-    rect.adjust(-4,-2,4,2);
+    rect.moveBottomLeft(pos.toPoint() + QPoint(10, -10));
+    rect.adjust(-4, -2, 4, 2);
 
     qint32 baseWidth    = 10;
     qint32 basePos      = 10;
@@ -2011,17 +2011,17 @@ void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const
 
     if(CDraw::doesOverlap(blockedAreas, rect))
     {
-        rect.moveBottomRight(pos.toPoint() + QPoint(-10,-10));
+        rect.moveBottomRight(pos.toPoint() + QPoint(-10, -10));
         basePos = rect.width() - 10;
 
         if(CDraw::doesOverlap(blockedAreas, rect))
         {
-            rect.moveTopLeft(pos.toPoint() + QPoint(10,10));
+            rect.moveTopLeft(pos.toPoint() + QPoint(10, 10));
             basePos = 10;
 
             if(CDraw::doesOverlap(blockedAreas, rect))
             {
-                rect.moveTopRight(pos.toPoint() + QPoint(-10,10));
+                rect.moveTopRight(pos.toPoint() + QPoint(-10, 10));
                 basePos = rect.width() - 10;
 
                 if(CDraw::doesOverlap(blockedAreas, rect))
@@ -2240,7 +2240,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         QString str = getInfoTrkPt(*mouseMoveFocus);
 
         // search for track point information in the neighboring points
-        const int idxMin = qMax(mouseMoveFocus->idxTotal - 2,0);
+        const int idxMin = qMax(mouseMoveFocus->idxTotal - 2, 0);
         const int idxMax = qMin(mouseMoveFocus->idxTotal + 3, cntTotalPoints);
         for(int idx = idxMin; idx < idxMax; idx++)
         {
@@ -2409,7 +2409,7 @@ void CGisItemTrk::drawHighlight(QPainter& p)
     QList<QPolygonF> lines;
     splitLineToViewport(lineSimple, p.viewport(), lines);
 
-    p.setPen(QPen(QColor(255,0,0,100), penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(QColor(255, 0, 0, 100), penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
     for(const QPolygonF &line : lines)
     {
@@ -2587,7 +2587,7 @@ void CGisItemTrk::setIcon(const QString& iconColor)
     QPixmap mask( icon.size() );
     mask.fill( str2color(iconColor) );
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
-    IGisItem::setIcon(mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    IGisItem::setIcon(mask.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString &owner)
@@ -2878,7 +2878,7 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
     }
 
     const qint32 N = getNumberOfVisiblePoints();
-    alglib::real_1d_array x,y;
+    alglib::real_1d_array x, y;
     x.setlength(N);
     y.setlength(N);
 

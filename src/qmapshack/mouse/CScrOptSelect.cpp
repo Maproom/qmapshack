@@ -67,7 +67,7 @@ CScrOptSelect::~CScrOptSelect()
     cfg.setValue("itemOvl", toolItemOvl->isChecked());
     cfg.endGroup(); //Selection
 
-    mouse->getCanvas()->reportStatus("CScrOptSelect","");
+    mouse->getCanvas()->reportStatus("CScrOptSelect", "");
 }
 
 void CScrOptSelect::slotModeSwitch(IGisItem::selection_e mode, bool checked)

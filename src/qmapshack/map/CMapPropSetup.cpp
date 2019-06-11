@@ -136,7 +136,7 @@ void CMapPropSetup::slotSetMaxScale(bool checked)
 void CMapPropSetup::slotLoadTypeFile()
 {
     SETTINGS;
-    QString path = cfg.value("Paths/lastTypePath",QDir::homePath()).toString();
+    QString path = cfg.value("Paths/lastTypePath", QDir::homePath()).toString();
     QString filename = QFileDialog::getOpenFileName(this, tr("Select type file..."), path, "Garmin type file (*.typ)");
     if(filename.isEmpty())
     {

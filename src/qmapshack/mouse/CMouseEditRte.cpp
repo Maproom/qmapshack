@@ -67,20 +67,20 @@ IGisLine * CMouseEditRte::getGisLine() const
 
 void CMouseEditRte::slotAbort()
 {
-    canvas->reportStatus(key.item,"");
+    canvas->reportStatus(key.item, "");
     IMouseEditLine::slotAbortEx(false);
 }
 
 void CMouseEditRte::slotCopyToOrig()
 {
-    canvas->reportStatus(key.item,"");
+    canvas->reportStatus(key.item, "");
     IMouseEditLine::slotCopyToOrig();
 }
 
 
 void CMouseEditRte::slotCopyToNew()
 {
-    canvas->reportStatus(key.item,"");
+    canvas->reportStatus(key.item, "");
 
     if(points.size() < 2)
     {
@@ -105,7 +105,7 @@ void CMouseEditRte::slotCopyToNew()
 
     {
         QMutexLocker lock(&IGisItem::mutexItems);
-        new CGisItemRte(points,name, project, NOIDX);
+        new CGisItemRte(points, name, project, NOIDX);
     }
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

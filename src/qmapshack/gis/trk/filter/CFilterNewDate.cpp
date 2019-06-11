@@ -34,7 +34,7 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
 
 void CFilterNewDate::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterNewDate");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterNewDate");
     trk.filterNewDate(dateTimeEdit->dateTime().toUTC());
     CCanvas::restoreOverrideCursor("CFilterNewDate");
 }

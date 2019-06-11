@@ -32,7 +32,7 @@ CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
     connect(toolSourceFiles, &QToolButton::clicked, this, &CMapVrtBuilder::slotSelectSourceFiles);
     connect(toolTargetFile,  &QToolButton::clicked, this, &CMapVrtBuilder::slotSelectTargetFile);
     connect(pushStart,       &QPushButton::clicked, this, &CMapVrtBuilder::slotStart);
-    connect(labelHelpGDAL,   &QLabel::linkActivated,this, &CMapVrtBuilder::slotLinkActivated);
+    connect(labelHelpGDAL,   &QLabel::linkActivated, this, &CMapVrtBuilder::slotLinkActivated);
 
     pushStart->setDisabled(true);
 
@@ -77,7 +77,7 @@ CMapVrtBuilder::~CMapVrtBuilder()
 void CMapVrtBuilder::slotSelectSourceFiles()
 {
     SETTINGS;
-    QString path = cfg.value("VrtBuilder/sourcePath",QDir::homePath()).toString();
+    QString path = cfg.value("VrtBuilder/sourcePath", QDir::homePath()).toString();
 
     QStringList files = QFileDialog::getOpenFileNames(this, tr("Select files..."), path);
     if(files.isEmpty())

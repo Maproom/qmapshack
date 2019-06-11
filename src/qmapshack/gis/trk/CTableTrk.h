@@ -40,16 +40,16 @@ public:
     enum columns_t
     {
         eColNum
-        ,eColTime
-        ,eColEle
-        ,eColDelta
-        ,eColDist
-        ,eColSpeed
-        ,eColSlope
-        ,eColAscent
-        ,eColDescent
-        ,eColPosition
-        ,eColMax
+        , eColTime
+        , eColEle
+        , eColDelta
+        , eColDist
+        , eColSpeed
+        , eColSlope
+        , eColAscent
+        , eColDescent
+        , eColPosition
+        , eColMax
     };
 
     void showTopItem();

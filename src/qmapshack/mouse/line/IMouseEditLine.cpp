@@ -68,8 +68,8 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool e
 
 IMouseEditLine::~IMouseEditLine()
 {
-    canvas->reportStatus("IMouseEditLine","");
-    canvas->reportStatus(key.item,"");
+    canvas->reportStatus("IMouseEditLine", "");
+    canvas->reportStatus(key.item, "");
 
     int mode = 0;
     if(scrOptEditLine->toolNoRoute->isChecked())
@@ -119,7 +119,7 @@ void IMouseEditLine::commonSetup()
     connect(scrOptEditLine->toolRedo,        &QPushButton::clicked, this, &IMouseEditLine::slotRedo         );
 
     SETTINGS;
-    int mode = cfg.value("Route/drawMode",0).toInt();
+    int mode = cfg.value("Route/drawMode", 0).toInt();
     switch(mode)
     {
     case 0:
@@ -213,7 +213,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
 
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::white);
-    QRect r1(0,0,9,9);
+    QRect r1(0, 0, 9, 9);
     for(const QPointF &pt : pixelPts)
     {
         r1.moveCenter(pt.toPoint());
@@ -224,7 +224,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
 
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::black);
-    QRect r2(0,0,7,7);
+    QRect r2(0, 0, 7, 7);
     for(const QPointF &pt : pixelPts)
     {
         r2.moveCenter(pt.toPoint());
@@ -236,14 +236,14 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
         p.drawEllipse(pt, 2, 2);
     }
 
-    QRect r3(0,0,9,9);
+    QRect r3(0, 0, 9, 9);
     p.setBrush(Qt::NoBrush);
 
-    p.setPen(QPen(Qt::yellow,2));
+    p.setPen(QPen(Qt::yellow, 2));
     r3.moveCenter(pixelPts.first().toPoint());
     p.drawRect(r3);
 
-    p.setPen(QPen(Qt::green,2));
+    p.setPen(QPen(Qt::green, 2));
     r3.moveCenter(pixelPts.last().toPoint());
     p.drawRect(r3);
 
@@ -355,7 +355,7 @@ void IMouseEditLine::changeCursor()
     cursor = lineOp->getCursor();
     if(QApplication::overrideCursor() != 0)
     {
-        CCanvas::changeOverrideCursor(cursor,"IMouseEditLine::changeCursor");
+        CCanvas::changeOverrideCursor(cursor, "IMouseEditLine::changeCursor");
     }
 }
 
@@ -527,5 +527,5 @@ void IMouseEditLine::updateStatus()
     msg += "<tr><td>" + tr("Descent:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
     msg += "</table>";
 
-    canvas->reportStatus("IMouseEditLine",msg);
+    canvas->reportStatus("IMouseEditLine", msg);
 }

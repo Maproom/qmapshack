@@ -38,7 +38,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     qDebug() << "------------------------------";
     qDebug() << "VRT: try to open" << filename;
 
-    dataset = (GDALDataset*)GDALOpen(filename.toUtf8(),GA_ReadOnly);
+    dataset = (GDALDataset*)GDALOpen(filename.toUtf8(), GA_ReadOnly);
     if(nullptr == dataset)
     {
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
@@ -101,7 +101,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     yscale  = adfGeoTransform[5];
 
     trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
-    trFwd.scale(adfGeoTransform[1],adfGeoTransform[5]);
+    trFwd.scale(adfGeoTransform[1], adfGeoTransform[5]);
 
     if(adfGeoTransform[4] != 0.0)
     {
@@ -118,10 +118,10 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     trInv = trFwd.inverted();
 
-    ref1 = trFwd.map(QPointF(0,0));
-    ref2 = trFwd.map(QPointF(xsize_px,0));
-    ref3 = trFwd.map(QPointF(xsize_px,ysize_px));
-    ref4 = trFwd.map(QPointF(0,ysize_px));
+    ref1 = trFwd.map(QPointF(0, 0));
+    ref2 = trFwd.map(QPointF(xsize_px, 0));
+    ref3 = trFwd.map(QPointF(xsize_px, ysize_px));
+    ref4 = trFwd.map(QPointF(0, ysize_px));
 
     qDebug() << ref1 << ref2 << ref3 << ref4;
     boundingBox = QRectF(ref1, ref3);
@@ -249,10 +249,10 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     QPointF pt3 = buf.ref3;
     QPointF pt4 = buf.ref4;
 
-    pj_transform(pjtar,pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-    pj_transform(pjtar,pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
-    pj_transform(pjtar,pjsrc, 1, 0, &pt3.rx(), &pt3.ry(), 0);
-    pj_transform(pjtar,pjsrc, 1, 0, &pt4.rx(), &pt4.ry(), 0);
+    pj_transform(pjtar, pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
+    pj_transform(pjtar, pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
+    pj_transform(pjtar, pjsrc, 1, 0, &pt3.rx(), &pt3.ry(), 0);
+    pj_transform(pjtar, pjsrc, 1, 0, &pt4.rx(), &pt4.ry(), 0);
 
     pt1 = trInv.map(pt1);
     pt2 = trInv.map(pt2);
@@ -315,7 +315,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
     // start to draw the map
     QPainter p(&buf.image);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
     p.translate(-pp);
 
     qreal o1 = getOpacity()/100.0;
@@ -383,16 +383,16 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                 l[2] = QPointF(x + 1 + w_used, y + 1 + h_used);
                 l[3] = QPointF(x + 1, y + 1 + h_used);
                 l = trFwd.map(l);
-                pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
-                pj_transform(pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
-                pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
-                pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+                pj_transform(pjsrc, pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
+                pj_transform(pjsrc, pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
+                pj_transform(pjsrc, pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
+                pj_transform(pjsrc, pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
 
                 if(doHillshading())
                 {
                     QPolygonF r = l;
 
-                    QImage img(w_used,h_used,QImage::Format_Indexed8);
+                    QImage img(w_used, h_used, QImage::Format_Indexed8);
                     img.setColorTable(graytable);
 
                     hillshading(data, w_used, h_used, img);
@@ -404,7 +404,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                 {
                     QPolygonF r = l;
 
-                    QImage img(w_used,h_used,QImage::Format_Indexed8);
+                    QImage img(w_used, h_used, QImage::Format_Indexed8);
                     img.setColorTable(slopetable);
 
                     slopecolor(data, w_used, h_used, img);

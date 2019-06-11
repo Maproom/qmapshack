@@ -72,14 +72,14 @@ public:
     enum sorting_folder_e
     {
         eSortFolderTime
-        ,eSortFolderName
-        ,eSortFolderSymbol
+        , eSortFolderName
+        , eSortFolderSymbol
     };
 
     enum filter_mode_e
     {
         eFilterModeName
-        ,eFilterModeText
+        , eFilterModeText
     };
 
     struct person_t

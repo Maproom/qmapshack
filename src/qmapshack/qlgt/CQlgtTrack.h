@@ -105,16 +105,16 @@ public:
     virtual ~CQlgtTrack();
 
 
-    enum type_e {eEnd,eBase,eTrkPts,eTrain,eTrkExt1,eTrkGpxExt,eTrkShdw, eTrkShdw2, eTrkPts2};
+    enum type_e {eEnd, eBase, eTrkPts, eTrain, eTrkExt1, eTrkGpxExt, eTrkShdw, eTrkShdw2, eTrkPts2};
 
     struct pt_t
     {
         enum flag_e
         {
             eSelected  = 1       ///< selected by track info view
-            ,eCursor    = 2      ///< selected by cursor
-            ,eDeleted   = 4      ///< mark point as deleted
-            ,eFocus     = 8      ///< mark current point of user focus
+            , eCursor    = 2      ///< selected by cursor
+            , eDeleted   = 4      ///< mark point as deleted
+            , eFocus     = 8      ///< mark current point of user focus
         };
 
         pt_t() : idx(-1), lon(WPT_NOFLOAT), lat(WPT_NOFLOAT), ele(WPT_NOFLOAT), timestamp(0), timestamp_msec(0),
@@ -122,7 +122,7 @@ public:
             ascent(0), descent(0), heartReateBpm(-1), cadenceRpm(-1), slope(0), slope2(WPT_NOFLOAT), timeSinceStart(0),
             fix(""), sat(0), velocity(WPT_NOFLOAT), heading(WPT_NOFLOAT),
             vdop(WPT_NOFLOAT), hdop(WPT_NOFLOAT), pdop(WPT_NOFLOAT),
-            _lon(WPT_NOFLOAT),_lat(WPT_NOFLOAT),_ele(WPT_NOFLOAT), _timestamp(0), _timestamp_msec(0),
+            _lon(WPT_NOFLOAT), _lat(WPT_NOFLOAT), _ele(WPT_NOFLOAT), _timestamp(0), _timestamp_msec(0),
             flags(0), px_valid(false), dem(WPT_NOFLOAT), editItem(nullptr)
         {
         }

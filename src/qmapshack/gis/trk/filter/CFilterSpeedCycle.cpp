@@ -24,7 +24,7 @@
 CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     : QWidget(parent), trk(trk), noOfFixTypes(4), noOfCustomTypes(3)
     // 4 fix and 3 custom cycling types has be defined as default
-    ,cyclingTypeDefaults
+    , cyclingTypeDefaults
     {
     {
         tr("City")                // Fix: name

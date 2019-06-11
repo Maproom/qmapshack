@@ -29,7 +29,7 @@
 CRouterBRouterLocal::CRouterBRouterLocal(CRouterBRouter &parent) : QObject(&parent), brouter(parent)
 {
     //set textBRouterOutput as parent of ToolShell to ensure Toolshell is destroyed before text
-    brouterShell = new CRouterBRouterToolShell(brouter.textBRouterOutput,brouter.textBRouterOutput);
+    brouterShell = new CRouterBRouterToolShell(brouter.textBRouterOutput, brouter.textBRouterOutput);
     connect(brouterShell, &CRouterBRouterToolShell::sigProcessStateChanged, this, &CRouterBRouterLocal::slotBRouterStateChanged);
     connect(brouterShell, &CRouterBRouterToolShell::sigProcessError,        this, &CRouterBRouterLocal::slotBRouterError);
 }
@@ -98,7 +98,7 @@ void CRouterBRouterLocal::startBRouter()
 
         while (timer.remainingTime() > 0 && brouterState == QProcess::Running)
         {
-            socket.connectToHost(brouter.setup->localHost,brouter.setup->localPort.toInt());
+            socket.connectToHost(brouter.setup->localHost, brouter.setup->localPort.toInt());
             //Processing userinputevents in local eventloop would cause a SEGV when clicking 'abort' of calling LineOp
             connectState = connect_state_e(eventLoop->exec(QEventLoop::ExcludeUserInputEvents));
 
@@ -159,7 +159,7 @@ void CRouterBRouterLocal::getBRouterVersion() const
         args << "btools.server.RouteServer";
 
         cmd.setWorkingDirectory(brouter.setup->localDir);
-        cmd.start(brouter.setup->localJavaExecutable,args);
+        cmd.start(brouter.setup->localJavaExecutable, args);
 
         cmd.waitForStarted();
         if (!cmd.waitForFinished(3000))
@@ -177,7 +177,7 @@ void CRouterBRouterLocal::getBRouterVersion() const
 
 bool CRouterBRouterLocal::usesLocalBindaddress() const
 {
-    return brouter.setup->localBindLocalonly && brouter.isMinimumVersion(1,4,10);
+    return brouter.setup->localBindLocalonly && brouter.isMinimumVersion(1, 4, 10);
 }
 
 void CRouterBRouterLocal::slotBRouterStateChanged(const QProcess::ProcessState newState)
@@ -189,7 +189,7 @@ void CRouterBRouterLocal::slotBRouterStateChanged(const QProcess::ProcessState n
 void CRouterBRouterLocal::slotBRouterError(const QProcess::ProcessError error, const QString &errorString)
 {
     brouterError = error;
-    brouter.slotDisplayError(tr("Error:"),errorString);
+    brouter.slotDisplayError(tr("Error:"), errorString);
     brouter.updateBRouterStatus();
 }
 

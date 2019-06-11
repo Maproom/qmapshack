@@ -67,10 +67,10 @@ void CMapMAP::readBasics()
     stream.setByteOrder(QDataStream::BigEndian);
 
     // ---------- start file header ----------------------
-    stream.readRawData(header.signature,sizeof(header.signature));
+    stream.readRawData(header.signature, sizeof(header.signature));
     if(strncmp(header.signature, "mapsforge binary OSM", sizeof(header.signature)) != 0)
     {
-        throw exce_t(errFormat,tr("Bad file format: ") + filename);
+        throw exce_t(errFormat, tr("Bad file format: ") + filename);
     }
 
     stream >> header.sizeHeader;

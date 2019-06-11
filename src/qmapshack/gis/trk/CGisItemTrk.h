@@ -60,7 +60,7 @@ public:
     enum focusmode_e
     {
         eFocusMouseMove
-        ,eFocusMouseClick
+        , eFocusMouseClick
     };
 
     enum mode_e

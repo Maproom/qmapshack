@@ -128,7 +128,7 @@ static inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
 
 
 CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility|eFeatVectorItems|eFeatTypFile,parent)
+    : IMap(eFeatVisibility|eFeatVectorItems|eFeatTypFile, parent)
     , filename(filename)
     , fm(CMainWindow::self().getMapFont())
     , selectedLanguage(NOIDX)
@@ -345,8 +345,8 @@ void CMapIMG::setupTyp()
     polygonProperties[0x48] = CGarminTyp::polygon_property(0x48, Qt::NoPen, "#0080ff", Qt::SolidPattern);
     polygonProperties[0x49] = CGarminTyp::polygon_property(0x49, Qt::NoPen, "#0080ff", Qt::SolidPattern);
 #ifdef WIN32
-    polygonProperties[0x4a] = CGarminTyp::polygon_property(0x4a, "#000000", qRgba(255,255,255,0), Qt::SolidPattern);
-    polygonProperties[0x4b] = CGarminTyp::polygon_property(0x4b, "#000000", qRgba(255,255,255,0), Qt::SolidPattern);
+    polygonProperties[0x4a] = CGarminTyp::polygon_property(0x4a, "#000000", qRgba(255, 255, 255, 0), Qt::SolidPattern);
+    polygonProperties[0x4b] = CGarminTyp::polygon_property(0x4b, "#000000", qRgba(255, 255, 255, 0), Qt::SolidPattern);
 #else
     polygonProperties[0x4a] = CGarminTyp::polygon_property(0x4a, "#000000", Qt::transparent, Qt::NoBrush);
     polygonProperties[0x4b] = CGarminTyp::polygon_property(0x4b, "#000000", Qt::transparent, Qt::NoBrush);
@@ -444,7 +444,7 @@ void CMapIMG::setupTyp()
     }
     else
     {
-        QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();
+        QMap<QString, subfile_desc_t>::iterator subfile = subfiles.begin();
         while(subfile != subfiles.end())
         {
             if(!(*subfile).parts.contains("TYP"))
@@ -518,7 +518,7 @@ void CMapIMG::readBasics()
         throw exce_t(eErrOpen, tr("Failed to open: ") + filename);
     }
 
-    mask = (quint8)*file.data(0,1);
+    mask = (quint8)*file.data(0, 1);
 
     mask32 = mask;
     mask32 <<= 8;
@@ -537,16 +537,16 @@ void CMapIMG::readBasics()
     readFile(file, 0, sizeof(hdr_img_t), imghdr);
     hdr_img_t * pImgHdr = (hdr_img_t*)imghdr.data();
 
-    if(strncmp(pImgHdr->signature,"DSKIMG",7) != 0)
+    if(strncmp(pImgHdr->signature, "DSKIMG", 7) != 0)
     {
-        throw exce_t(errFormat,tr("Bad file format: ") + filename);
+        throw exce_t(errFormat, tr("Bad file format: ") + filename);
     }
-    if(strncmp(pImgHdr->identifier,"GARMIN",7) != 0)
+    if(strncmp(pImgHdr->identifier, "GARMIN", 7) != 0)
     {
-        throw exce_t(errFormat,tr("Bad file format: ") + filename);
+        throw exce_t(errFormat, tr("Bad file format: ") + filename);
     }
 
-    mapdesc  = QByteArray((const char*)pImgHdr->desc1,20);
+    mapdesc  = QByteArray((const char*)pImgHdr->desc1, 20);
     mapdesc += pImgHdr->desc2;
     qDebug() << mapdesc;
 
@@ -600,23 +600,23 @@ void CMapIMG::readBasics()
             break;
         }
 
-        memcpy(tmpstr,pFATBlock->name,sizeof(pFATBlock->name) + sizeof(pFATBlock->type));
+        memcpy(tmpstr, pFATBlock->name, sizeof(pFATBlock->name) + sizeof(pFATBlock->type));
         tmpstr[sizeof(pFATBlock->name) + sizeof(pFATBlock->type)] = 0;
 
         if(gar_load(quint32, pFATBlock->size) != 0 && !subfileNames.contains(tmpstr) && tmpstr[0] != 0x20)
         {
             subfileNames << tmpstr;
 
-            memcpy(tmpstr,pFATBlock->name,sizeof(pFATBlock->name));
+            memcpy(tmpstr, pFATBlock->name, sizeof(pFATBlock->name));
             tmpstr[sizeof(pFATBlock->name)] = 0;
 
             // skip MAPSORC.MPS section
-            if(strcmp(tmpstr,"MAPSOURC") && strcmp(tmpstr,"SENDMAP2"))
+            if(strcmp(tmpstr, "MAPSOURC") && strcmp(tmpstr, "SENDMAP2"))
             {
                 subfile_desc_t& subfile = subfiles[tmpstr];
                 subfile.name = tmpstr;
 
-                memcpy(tmpstr,pFATBlock->type,sizeof(pFATBlock->type));
+                memcpy(tmpstr, pFATBlock->type, sizeof(pFATBlock->type));
                 tmpstr[sizeof(pFATBlock->type)] = 0;
 
                 subfile_part_t& part = subfile.parts[tmpstr];
@@ -632,7 +632,7 @@ void CMapIMG::readBasics()
 
     if((dataoffset == sizeof(hdr_img_t)) || (dataoffset >= (size_t)fsize))
     {
-        throw exce_t(errFormat,tr("Failed to read file structure: ") + filename);
+        throw exce_t(errFormat, tr("Failed to read file structure: ") + filename);
     }
 
     // gmapsupp.img files do not have a data offset field
@@ -649,11 +649,11 @@ void CMapIMG::readBasics()
 
 #ifdef DEBUG_SHOW_SECT_DESC
     {
-        QMap<QString,subfile_desc_t>::const_iterator subfile = subfiles.begin();
+        QMap<QString, subfile_desc_t>::const_iterator subfile = subfiles.begin();
         while(subfile != subfiles.end())
         {
             qDebug() << "--- subfile" << subfile->name << "---";
-            QMap<QString,subfile_part_t>::const_iterator part = subfile->parts.begin();
+            QMap<QString, subfile_part_t>::const_iterator part = subfile->parts.begin();
             while(part != subfile->parts.end())
             {
                 qDebug() << part.key() << hex << part->offset << part->size;
@@ -670,13 +670,13 @@ void CMapIMG::readBasics()
     PROGRESS_SETUP(tr("Loading %1").arg(QFileInfo(filename).fileName()), 0, tot, CMainWindow::getBestWidgetForParent());
 
     maparea = QRectF();
-    QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();
+    QMap<QString, subfile_desc_t>::iterator subfile = subfiles.begin();
     while(subfile != subfiles.end())
     {
-        PROGRESS(cnt++, throw exce_t(errAbort,tr("User abort: ") + filename));
+        PROGRESS(cnt++, throw exce_t(errAbort, tr("User abort: ") + filename));
         if((*subfile).parts.contains("GMP"))
         {
-            throw exce_t(errFormat,tr("File is NT format. QMapShack is unable to read map files with NT format: ") + filename);
+            throw exce_t(errFormat, tr("File is NT format. QMapShack is unable to read map files with NT format: ") + filename);
         }
 
         readSubfileBasics(*subfile, file);
@@ -722,7 +722,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     qDebug() << "TRE2 size          :" << dec << gar_load(quint32, pTreHdr->tre2_size);
 #endif                       // DEBUG_SHOW_TRE_DATA
 
-    copyrights << QString(file.data(subfile.parts["TRE"].offset + gar_load(uint16_t, pTreHdr->length),0x7FFF));
+    copyrights << QString(file.data(subfile.parts["TRE"].offset + gar_load(uint16_t, pTreHdr->length), 0x7FFF));
 
     // read map boundaries from header
     qint32 i32;
@@ -767,9 +767,9 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
     if(pTreHdr->flag & 0x80)
     {
-        throw exce_t(errLock,tr("File contains locked / encrypted data. Garmin does not "
-                                "want you to use this file with any other software than "
-                                "the one supplied by Garmin."));
+        throw exce_t(errLock, tr("File contains locked / encrypted data. Garmin does not "
+                                 "want you to use this file with any other software than "
+                                 "the one supplied by Garmin."));
     }
 
     quint32 nlevels       = gar_load(quint32, pTreHdr->tre1_size) / sizeof(tre_map_level_t);
@@ -1234,7 +1234,7 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
 
     QPainter p(&buf.image);
     p.setOpacity(getOpacity()/100.0);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
 
     QFont f = CMainWindow::self().getMapFont();
     fm = QFontMetrics(f);
@@ -1261,7 +1261,7 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
     qreal v1 = qMax(buf.ref1.y(), buf.ref2.y());
     qreal v2 = qMin(buf.ref4.y(), buf.ref3.y());
 
-    QRectF viewport(u1,v1, u2 - u1, v2 - v1);
+    QRectF viewport(u1, v1, u2 - u1, v2 - v1);
     QVector<QRectF> rectPois;
 
     polygons.clear();
@@ -1408,7 +1408,7 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
 
             map->convertRad2Px(poly);
 
-            p.setPen(QPen(Qt::magenta,2));
+            p.setPen(QPen(Qt::magenta, 2));
             p.setBrush(Qt::NoBrush);
             p.drawPolygon(poly);
 #endif // DEBUG_SHOW_SECTION_BORDERS
@@ -1588,11 +1588,11 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
 
             if(strtbl && !p.lbl_in_NET && p.lbl_info)
             {
-                strtbl->get(file, p.lbl_info,IGarminStrTbl::norm, p.labels);
+                strtbl->get(file, p.lbl_info, IGarminStrTbl::norm, p.labels);
             }
             else if(strtbl && p.lbl_in_NET && p.lbl_info)
             {
-                strtbl->get(file, p.lbl_info,IGarminStrTbl::net, p.labels);
+                strtbl->get(file, p.lbl_info, IGarminStrTbl::net, p.labels);
             }
 
             polylines.push_back(p);
@@ -1618,11 +1618,11 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
 
             if(strtbl && !p.lbl_in_NET && p.lbl_info && !fast)
             {
-                strtbl->get(file, p.lbl_info,IGarminStrTbl::norm, p.labels);
+                strtbl->get(file, p.lbl_info, IGarminStrTbl::norm, p.labels);
             }
             else if(strtbl && p.lbl_in_NET && p.lbl_info && !fast)
             {
-                strtbl->get(file, p.lbl_info,IGarminStrTbl::net, p.labels);
+                strtbl->get(file, p.lbl_info, IGarminStrTbl::net, p.labels);
             }
             polygons.push_back(p);
         }
@@ -1657,7 +1657,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
 
             if(strtbl && !p.lbl_in_NET && p.lbl_info && !fast)
             {
-                strtbl->get(file, p.lbl_info,IGarminStrTbl::norm, p.labels);
+                strtbl->get(file, p.lbl_info, IGarminStrTbl::norm, p.labels);
             }
 
             polygons.push_back(p);
@@ -1681,7 +1681,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
 
             if(strtbl && !p.lbl_in_NET && p.lbl_info)
             {
-                strtbl->get(file, p.lbl_info,IGarminStrTbl::norm, p.labels);
+                strtbl->get(file, p.lbl_info, IGarminStrTbl::norm, p.labels);
             }
 
             polylines.push_back(p);
@@ -1864,7 +1864,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
                         p.save();
                         p.translate(p1);
                         p.rotate(angle);
-                        p.drawImage(0,-h/2, img2line(pixmap, segLength));
+                        p.drawImage(0, -h/2, img2line(pixmap, segLength));
                         //imageCount++;
 
                         p.restore();
@@ -2082,7 +2082,7 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
         {
             // calculate bounding rectangle with a border of 2 px
             QRect rect = fm.boundingRect(pt->labels.join(" "));
-            rect.adjust(0,0,4,4);
+            rect.adjust(0, 0, 4, 4);
             rect.moveCenter(pt->pos.toPoint());
 
             // if no intersection was found, add label to list
@@ -2135,7 +2135,7 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
         {
             // calculate bounding rectangle with a border of 2 px
             QRect rect = fm.boundingRect(pt.labels.join(" "));
-            rect.adjust(0,0,4,4);
+            rect.adjust(0, 0, 4, 4);
             rect.moveCenter(pt.pos.toPoint());
 
             // if no intersection was found, add label to list
@@ -2264,19 +2264,19 @@ void CMapIMG::drawText(QPainter& p)
 
             p.translate(0, -(textpath.lineWidth + 2));
 
-            QString str = text.mid(i,1);
+            QString str = text.mid(i, 1);
             p.setPen(Qt::white);
-            p.drawText(-1,-1,str);
-            p.drawText( 0,-1,str);
-            p.drawText(+1,-1,str);
-            p.drawText(-1, 0,str);
-            p.drawText(+1, 0,str);
-            p.drawText(-1,+1,str);
-            p.drawText( 0,+1,str);
-            p.drawText(+1,+1,str);
+            p.drawText(-1, -1, str);
+            p.drawText( 0, -1, str);
+            p.drawText(+1, -1, str);
+            p.drawText(-1, 0, str);
+            p.drawText(+1, 0, str);
+            p.drawText(-1, +1, str);
+            p.drawText( 0, +1, str);
+            p.drawText(+1, +1, str);
 
             p.setPen(Qt::black);
-            p.drawText( 0, 0,str);
+            p.drawText( 0, 0, str);
 
             p.restore();
 
@@ -2369,7 +2369,7 @@ void CMapIMG::findPOICloseBy(const QPoint& pt, poi_t& poi) const /*override;*/
                 }
                 else
                 {
-                    poi.symbolSize = QSize(16,16);
+                    poi.symbolSize = QSize(16, 16);
                 }
                 return;
             }
@@ -2392,7 +2392,7 @@ void CMapIMG::getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiM
             {
                 if(pointProperties.contains(point.type))
                 {
-                    dict.insert(tr("Point of Interest"),pointProperties[point.type].strings[selectedLanguage != NOIDX ? selectedLanguage : 0]);
+                    dict.insert(tr("Point of Interest"), pointProperties[point.type].strings[selectedLanguage != NOIDX ? selectedLanguage : 0]);
                 }
                 else
                 {
@@ -2487,17 +2487,17 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
 
     if(!key.isEmpty())
     {
-        dict.insert(key + QString("(%1)").arg(type,2,16,QChar('0')),value.join("\n"));
+        dict.insert(key + QString("(%1)").arg(type, 2, 16, QChar('0')), value.join("\n"));
     }
     else
     {
         if(polylineProperties[type].strings.isEmpty())
         {
-            dict.insert(tr("Unknown") + QString("(%1)").arg(type,2,16,QChar('0')),value.join("\n"));
+            dict.insert(tr("Unknown") + QString("(%1)").arg(type, 2, 16, QChar('0')), value.join("\n"));
         }
         else
         {
-            dict.insert(polylineProperties[type].strings[0] + QString("(%1)").arg(type,2,16,QChar('0')),value.join("\n"));
+            dict.insert(polylineProperties[type].strings[0] + QString("(%1)").arg(type, 2, 16, QChar('0')), value.join("\n"));
         }
     }
 

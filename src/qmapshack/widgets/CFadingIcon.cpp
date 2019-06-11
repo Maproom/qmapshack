@@ -54,7 +54,7 @@ void CFadingIcon::slotTimeout()
 
         QPainter p(&tmp);
         p.setOpacity(o);
-        p.drawPixmap(0,0,icon);
+        p.drawPixmap(0, 0, icon);
         setPixmap(tmp);
     }
 }

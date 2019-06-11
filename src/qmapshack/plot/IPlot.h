@@ -116,7 +116,7 @@ protected:
     void drawYTic(QPainter &p);
     void drawLegend(QPainter& p);
     void drawDecoration(QPainter &p);
-    void drawTags(QPainter& p);    
+    void drawTags(QPainter& p);
     void drawTagLabels(QPainter& p);
     void drawActivities(QPainter& p);
 

@@ -27,7 +27,7 @@
 enum datatypes_e
 {
     eDataPointer = Qt::UserRole     ///< to store the pointer to the IRtSource
-    ,eDataUsed = Qt::UserRole + 1   ///< to store a flag if the value in eDataPointer is used and must not be destroyed
+    , eDataUsed = Qt::UserRole + 1   ///< to store a flag if the value in eDataPointer is used and must not be destroyed
 };
 
 template<typename T>
@@ -37,7 +37,7 @@ void addSource(CRtWorkspace& wks, QListWidget * list)
 
     QListWidgetItem * item = new QListWidgetItem(list);
     item->setIcon(QIcon(t->strIcon));
-    item->setSizeHint(QSize(0,100));
+    item->setSizeHint(QSize(0, 100));
     item->setData(eDataPointer, QVariant::fromValue<IRtSource*>(t));
     item->setData(eDataUsed, false);
 

@@ -35,9 +35,9 @@ QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
     qint64 pos = dev->pos();
 
     char magic[9];
-    s.readRawData(magic,9);
+    s.readRawData(magic, 9);
 
-    if(strncmp(magic,"QLOvl   ",9))
+    if(strncmp(magic, "QLOvl   ", 9))
     {
         dev->seek(pos);
         return s;
@@ -152,7 +152,7 @@ QDataStream& operator <<(QDataStream& s, IQlgtOverlay& ovl)
     //---------------------------------------
     //---------------------------------------
     // write magic key
-    s.writeRawData("QLOvl   ",9);
+    s.writeRawData("QLOvl   ", 9);
 
     // calculate offset table
     quint32 offset = entries.count() * 8 + 9;

@@ -41,7 +41,7 @@ public:
     enum focusmode_e
     {
         eFocusMouseMove
-        ,eFocusMouseClick
+        , eFocusMouseClick
     };
 
     struct subpt_t

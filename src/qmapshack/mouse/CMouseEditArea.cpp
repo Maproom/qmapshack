@@ -58,19 +58,19 @@ IGisLine * CMouseEditArea::getGisLine() const
 
 void CMouseEditArea::slotAbort()
 {
-    canvas->reportStatus(key.item,"");
+    canvas->reportStatus(key.item, "");
     IMouseEditLine::slotAbortEx(false);
 }
 
 void CMouseEditArea::slotCopyToOrig()
 {
-    canvas->reportStatus(key.item,"");
+    canvas->reportStatus(key.item, "");
     IMouseEditLine::slotCopyToOrig();
 }
 
 void CMouseEditArea::slotCopyToNew()
 {
-    canvas->reportStatus(key.item,"");
+    canvas->reportStatus(key.item, "");
 
     if(points.size() < 3)
     {

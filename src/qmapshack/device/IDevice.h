@@ -36,8 +36,8 @@ public:
     enum type_e
     {
         eTypeNone       = 0
-        ,eTypeGarmin    = 1
-        ,eTypeTwoNav    = 2
+        , eTypeGarmin    = 1
+        , eTypeTwoNav    = 2
     };
 
     IDevice(const QString& path, type_e type, const QString& key, QTreeWidget * parent);

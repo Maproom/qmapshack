@@ -35,9 +35,9 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
     qint64 pos = dev->pos();
 
     char magic[9];
-    s.readRawData(magic,9);
+    s.readRawData(magic, 9);
 
-    if(strncmp(magic,"QLDry   ",9))
+    if(strncmp(magic, "QLDry   ", 9))
     {
         dev->seek(pos);
         return s;
@@ -66,7 +66,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
         {
         case CQlgtDiary::eBase:
         {
-            QString comment, name,key;
+            QString comment, name, key;
             QDataStream s1(&entry->data, QIODevice::ReadOnly);
             s1.setVersion(QDataStream::Qt_4_5);
 
@@ -218,7 +218,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary)
     //---------------------------------------
     //---------------------------------------
     // write magic key
-    s.writeRawData("QLDry   ",9);
+    s.writeRawData("QLDry   ", 9);
 
     // calculate offset table
     quint32 offset = entries.count() * 8 + 9;

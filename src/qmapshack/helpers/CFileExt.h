@@ -59,7 +59,7 @@ public:
     // data access function
     const char *data(qint64 offset, qint64 s)
     {
-        uchar * p = map(offset,s);
+        uchar * p = map(offset, s);
         return (const char *)p;
     }
 #endif

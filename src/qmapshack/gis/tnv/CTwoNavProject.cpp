@@ -34,7 +34,7 @@
 CTwoNavProject::CTwoNavProject(const QString &filename, IDevice * parent)
     : IGisProject(eTypeTwoNav, filename, parent)
 {
-    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/2NavProject.png"));
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/2NavProject.png"));
 
     load(filename);
 
@@ -48,7 +48,7 @@ CTwoNavProject::CTwoNavProject(const QString &filename, IDevice * parent)
 CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * project, IDevice * parent)
     : IGisProject(eTypeTwoNav, filename, parent)
 {
-    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/2NavProject.png"));
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/2NavProject.png"));
     *(IGisProject*)this = *project;
 
     int res     = CSelectCopyAction::eResultNone;

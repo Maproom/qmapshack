@@ -31,35 +31,35 @@ struct twonav_icon_t
 
 static const twonav_icon_t TwoNavIcons[] =
 {
-    {"City (Capitol)","City (Capitol)"}
-    ,{"City (Large)","City (Large)"}
-    ,{"City (Medium)","City (Medium)"}
-    ,{"City (Small)","City (Small)"}
-    ,{"City (Small)","Small City"}
-    ,{"Closed Box","Geocache"}
-    ,{"Open Box","Geocache Found"}
-    ,{"Red Flag","Flag, Red"}
-    ,{"Blue Flag","Flag, Blue"}
-    ,{"Green Flag","Flag, Green"}
-    ,{"Red Booble","Pin, Red"}
-    ,{"Blue Booble","Pin, Blue"}
-    ,{"Green Booble","Pin, Green"}
-    ,{"Red Cube","Block, Red"}
-    ,{"Blue Cube","Block, Blue"}
-    ,{"Green Cube","Block, Green"}
-    ,{"Blue Diamond","Blue Diamond"}
-    ,{"Green Diamond","Green Diamond"}
-    ,{"Red Diamond","Red Diamond"}
-    ,{"Traditional Cache","Traditional Cache"}
-    ,{"Multi-cache","Multi-cache"}
-    ,{"Unknown Cache","Unknown Cache"}
-    ,{"Wherigo","Wherigo Cache"}
-    ,{"Event Cache","Event Cache"}
-    ,{"Earthcache","Earthcache"}
-    ,{"Letterbox","Letterbox Hybrid"}
-    ,{"Virtual Cache","Virtual Cache"}
-    ,{"Webcam Cache","Webcam Cache"}
-    ,{0,0}
+    {"City (Capitol)", "City (Capitol)"}
+    , {"City (Large)", "City (Large)"}
+    , {"City (Medium)", "City (Medium)"}
+    , {"City (Small)", "City (Small)"}
+    , {"City (Small)", "Small City"}
+    , {"Closed Box", "Geocache"}
+    , {"Open Box", "Geocache Found"}
+    , {"Red Flag", "Flag, Red"}
+    , {"Blue Flag", "Flag, Blue"}
+    , {"Green Flag", "Flag, Green"}
+    , {"Red Booble", "Pin, Red"}
+    , {"Blue Booble", "Pin, Blue"}
+    , {"Green Booble", "Pin, Green"}
+    , {"Red Cube", "Block, Red"}
+    , {"Blue Cube", "Block, Blue"}
+    , {"Green Cube", "Block, Green"}
+    , {"Blue Diamond", "Blue Diamond"}
+    , {"Green Diamond", "Green Diamond"}
+    , {"Red Diamond", "Red Diamond"}
+    , {"Traditional Cache", "Traditional Cache"}
+    , {"Multi-cache", "Multi-cache"}
+    , {"Unknown Cache", "Unknown Cache"}
+    , {"Wherigo", "Wherigo Cache"}
+    , {"Event Cache", "Event Cache"}
+    , {"Earthcache", "Earthcache"}
+    , {"Letterbox", "Letterbox Hybrid"}
+    , {"Virtual Cache", "Virtual Cache"}
+    , {"Webcam Cache", "Webcam Cache"}
+    , {0, 0}
 };
 
 
@@ -120,17 +120,17 @@ static QDateTime readCompeTime(QString str, bool isTrack)
 
         QHash<QString, QString> monthStr2Num {
             {"JAN", "01"}
-            ,{"FEB", "02"}
-            ,{"MAR", "03"}
-            ,{"APR", "04"}
-            ,{"MAY", "05"}
-            ,{"JUN", "06"}
-            ,{"JUL", "07"}
-            ,{"AUG", "08"}
-            ,{"SEP", "09"}
-            ,{"OCT", "10"}
-            ,{"NOV", "11"}
-            ,{"DEC", "12"}
+            , {"FEB", "02"}
+            , {"MAR", "03"}
+            , {"APR", "04"}
+            , {"MAY", "05"}
+            , {"JUN", "06"}
+            , {"JUL", "07"}
+            , {"AUG", "08"}
+            , {"SEP", "09"}
+            , {"OCT", "10"}
+            , {"NOV", "11"}
+            , {"DEC", "12"}
         };
 
         str.replace(monthStr, monthStr2Num.value(monthStr.toUpper()));
@@ -223,7 +223,7 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
     out << "U  1" << endl;
 
     QString name = getName();
-    name = name.replace(" ","_");
+    name = name.replace(" ", "_");
 
     QColor color = getColor();
 
@@ -248,8 +248,8 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
 
             list << "T";
             list << "A";
-            list << (trkpt.lat > 0 ? QString("%1%2N") : QString("%1%2S")).arg(trkpt.lat,0,'f').arg(QChar(186));
-            list << (trkpt.lon > 0 ? QString("%1%2E") : QString("%1%2W")).arg(trkpt.lon,0,'f').arg(QChar(186));
+            list << (trkpt.lat > 0 ? QString("%1%2N") : QString("%1%2S")).arg(trkpt.lat, 0, 'f').arg(QChar(186));
+            list << (trkpt.lon > 0 ? QString("%1%2E") : QString("%1%2W")).arg(trkpt.lon, 0, 'f').arg(QChar(186));
             list << writeCompeTime(trkpt.time, true);
             list << "s";
             list << QString("%1").arg(trkpt.ele == NOINT ? 0 : trkpt.ele);
@@ -344,7 +344,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
     QFile file(filename);
     if(!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to open %1.").arg(filename),QMessageBox::Abort,QMessageBox::Abort);
+        QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to open %1.").arg(filename), QMessageBox::Abort, QMessageBox::Abort);
         return false;
     }
     QTextStream in(&file);
@@ -373,7 +373,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             QString name  = line.mid(1).simplified();
             if(name != "WGS 84")
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Only support lon/lat WGS 84 format."), QMessageBox::Abort, QMessageBox::Abort);
                 return false;
             }
             break;
@@ -384,7 +384,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             QString name  = line.mid(1).simplified();
             if(name != "1")
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Only support lon/lat WGS 84 format."), QMessageBox::Abort, QMessageBox::Abort);
                 return false;
             }
             break;
@@ -395,15 +395,15 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             QStringList values = line.split(' ', QString::SkipEmptyParts);
             if(values.size() > 2)
             {
-                QColor c(values[1].toInt(),values[2].toInt(),values[3].toInt());
+                QColor c(values[1].toInt(), values[2].toInt(), values[3].toInt());
                 setColor(c);
             }
             else
             {
-                values = values[1].split(',',QString::SkipEmptyParts);
+                values = values[1].split(',', QString::SkipEmptyParts);
                 if(values.size() >= 3)
                 {
-                    QColor c(values[0].toInt(),values[1].toInt(),values[2].toInt());
+                    QColor c(values[0].toInt(), values[1].toInt(), values[2].toInt());
                     setColor(c);
                 }
             }
@@ -418,12 +418,12 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             const int N = values.size();
             if(N < 8)
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read data."), QMessageBox::Abort, QMessageBox::Abort);
                 return false;
             }
 
-            QString lat = values[2].replace(QChar(186),"").replace(QChar(-3),"");
-            QString lon = values[3].replace(QChar(186),"").replace(QChar(-3),"");
+            QString lat = values[2].replace(QChar(186), "").replace(QChar(-3), "");
+            QString lon = values[3].replace(QChar(186), "").replace(QChar(-3), "");
             IUnit::strToDeg(lat + " " + lon, pt.lon, pt.lat);
 
             pt.time = readCompeTime(values[4] + " " + values[5], true);
@@ -502,7 +502,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
 void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
 {
     QString name = getName();
-    name = name.replace(" ","_");
+    name = name.replace(" ", "_");
 
     QString description = getDescription();
     description = removeHtml(description);
@@ -511,8 +511,8 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     list << "W";
     list << name;
     list << "A";
-    list << (wpt.lat > 0 ? QString("%1%2N") : QString("%1%2S")).arg(wpt.lat,0,'f').arg(QChar(186));
-    list << (wpt.lon > 0 ? QString("%1%2E") : QString("%1%2W")).arg(wpt.lon,0,'f').arg(QChar(186));
+    list << (wpt.lat > 0 ? QString("%1%2N") : QString("%1%2S")).arg(wpt.lat, 0, 'f').arg(QChar(186));
+    list << (wpt.lon > 0 ? QString("%1%2E") : QString("%1%2W")).arg(wpt.lon, 0, 'f').arg(QChar(186));
     list << writeCompeTime(wpt.time, false);
     list << QString("%1").arg(wpt.ele == NOINT ? 0 : wpt.ele);
 
@@ -528,7 +528,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     list << "1";
     list << "37";                // 1 Name 2 Beschreibung 4 Symbol 8 Hhe 16 URL 32 Radius
     list << "";                  //wpt->link;
-    list << QString("%1").arg(proximity == NOFLOAT ? 0 : proximity,0,'f');
+    list << QString("%1").arg(proximity == NOFLOAT ? 0 : proximity, 0, 'f');
     list << getKey().item;
 
     out << "w ";
@@ -594,7 +594,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
     QFile file(filename);
     if(!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to open %1.").arg(filename),QMessageBox::Abort,QMessageBox::Abort);
+        QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to open %1.").arg(filename), QMessageBox::Abort, QMessageBox::Abort);
         return false;
     }
     QTextStream in(&file);
@@ -622,7 +622,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             QString name  = line.mid(1).simplified();
             if(name != "WGS 84")
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Only support lon/lat WGS 84 format."), QMessageBox::Abort, QMessageBox::Abort);
                 return false;
             }
             break;
@@ -633,7 +633,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             QString name  = line.mid(1).simplified();
             if(name != "1")
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Only support lon/lat WGS 84 format."), QMessageBox::Abort, QMessageBox::Abort);
                 return false;
             }
             break;
@@ -651,14 +651,14 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
             if(values.size() < 8)
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read data."), QMessageBox::Abort, QMessageBox::Abort);
                 return false;
             }
 
             wpt.name = values[1];
 
-            QString lat = values[3].replace(QChar(186),"").replace(QChar(-3),"");
-            QString lon = values[4].replace(QChar(186),"").replace(QChar(-3),"");
+            QString lat = values[3].replace(QChar(186), "").replace(QChar(-3), "");
+            QString lon = values[4].replace(QChar(186), "").replace(QChar(-3), "");
             IUnit::strToDeg(lat + " " + lon, wpt.lon, wpt.lat);
 
             wpt.time = readCompeTime(values[5] + " " + values[6], false);
@@ -679,7 +679,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
             if(values.size() < 10)
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read data."), QMessageBox::Abort, QMessageBox::Abort);
                 return false;
             }
 
@@ -753,14 +753,14 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             QStringList values = line.mid(1).simplified().split(',', QString::KeepEmptyParts);
             if(values.size() < 1)
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read data."), QMessageBox::Abort, QMessageBox::Abort);
                 return false;
             }
 
             QString fn = values[0].simplified();
 
 #ifndef WIN32
-            fn = fn.replace("\\","/");
+            fn = fn.replace("\\", "/");
 #endif
             QFileInfo fi(dir.absoluteFilePath(fn));
             img.image.load(dir.absoluteFilePath(fn));

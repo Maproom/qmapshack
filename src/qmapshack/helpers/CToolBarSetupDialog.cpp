@@ -83,13 +83,13 @@ void CToolBarSetupDialog::configure() const
 
     for(QAction * const & action : config->availableActions())
     {
-        availableItems << new CDialogItem(action->icon(),action->iconText(),action->objectName());
+        availableItems << new CDialogItem(action->icon(), action->iconText(), action->objectName());
     }
     for(QAction * const & action : config->configuredActions())
     {
         if (action->isSeparator())
         {
-            selectedItems << new CDialogItem(action->icon(),"---------------",action->objectName());
+            selectedItems << new CDialogItem(action->icon(), "---------------", action->objectName());
         }
         else
         {

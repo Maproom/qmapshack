@@ -97,7 +97,7 @@ private:
 CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
 {
-    db = QSqlDatabase::addDatabase("QSQLITE","Workspace1");
+    db = QSqlDatabase::addDatabase("QSQLITE", "Workspace1");
     QString config = QDir(IAppSetup::getPlatformInstance()->userDataPath()).filePath("workspace.db");
     db.setDatabaseName(config);
     db.open();
@@ -124,16 +124,16 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionCloseProj     = addAction(QIcon("://icons/32x32/Close.png"), tr("Close"), this, SLOT(slotCloseProject()));
 
     // device project related actions
-    actionSyncDevWks    = addAction(QIcon("://icons/32x32/Device.png"),tr("Update Project on Device"), this, SLOT(slotSyncDevWks()));
-    actionDelProj       = addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteProject()));
+    actionSyncDevWks    = addAction(QIcon("://icons/32x32/Device.png"), tr("Update Project on Device"), this, SLOT(slotSyncDevWks()));
+    actionDelProj       = addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete"), this, SLOT(slotDeleteProject()));
 
     // common to all items actions
-    actionEditDetails   = addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
-    actionCopyItem      = addAction(QIcon("://icons/32x32/Copy.png"),tr("Copy to..."), this, SLOT(slotCopyItem()));
-    actionDelete        = addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
+    actionEditDetails   = addAction(QIcon("://icons/32x32/EditDetails.png"), tr("Edit..."), this, SLOT(slotEditItem()));
+    actionCopyItem      = addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy to..."), this, SLOT(slotCopyItem()));
+    actionDelete        = addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete"), this, SLOT(slotDeleteItem()));
 
     // track related actions
-    actionFocusTrk      = addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Information"), this, SLOT(slotFocusTrk(bool)));
+    actionFocusTrk      = addAction(QIcon("://icons/32x32/TrkProfile.png"), tr("Track Information"), this, SLOT(slotFocusTrk(bool)));
     actionFocusTrk->setCheckable(true);
     actionRangeTrk      = addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Select Range"), this, SLOT(slotRangeTrk()));
     actionEditTrk       = addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Track Points"), this, SLOT(slotEditTrk()));
@@ -167,8 +167,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionNogoRte->setCheckable(true);
 
     // area related actions
-    actionEditArea      = addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
-    actionNogoArea      = addAction(QIcon("://icons/32x32/NoGo.png"),tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
+    actionEditArea      = addAction(QIcon("://icons/32x32/AreaMove.png"), tr("Edit Area Points"), this, SLOT(slotEditArea()));
+    actionNogoArea      = addAction(QIcon("://icons/32x32/NoGo.png"), tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
     actionNogoArea->setCheckable(true);
 
     // several GIS items related actions
@@ -773,7 +773,7 @@ CDBProject * CGisListWks::getProjectById(quint64 id, const QString& db)
 
 void CGisListWks::slotSaveWorkspace()
 {
-    CGisListWksEditLock lock(true,IGisItem::mutexItems);
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     if(!saveOnExit)
     {
@@ -829,7 +829,7 @@ void CGisListWks::slotSaveWorkspace()
 
 void CGisListWks::slotLoadWorkspace()
 {
-    CGisListWksEditLock lock(true,IGisItem::mutexItems);
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     QSqlQuery query(db);
 
@@ -954,7 +954,7 @@ void CGisListWks::slotLoadWorkspace()
                 // is large and takes some time to load.
                 // When done directly after construction there is no `blinking` of the check mark
 
-                project->setToolTip(eColumnName,project->getInfo());
+                project->setToolTip(eColumnName, project->getInfo());
                 if(changed)
                 {
                     project->setChanged();
@@ -970,7 +970,7 @@ void CGisListWks::slotLoadWorkspace()
         CGisWorkspace::self().loadGisProject(filename);
     }
 
-    QUERY_RUN("SELECT focus FROM userfocus",);
+    QUERY_RUN("SELECT focus FROM userfocus", );
     if(query.next())
     {
         QString key = query.value(0).toString();
@@ -1442,7 +1442,7 @@ void CGisListWks::slotDeleteProject()
         if(nullptr != project)
         {
             CCanvas::setOverrideCursor(Qt::ArrowCursor, "slotDeleteProject");
-            int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete project..."), tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No,QMessageBox::Ok);
+            int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete project..."), tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
             CCanvas::restoreOverrideCursor("slotDeleteProject");
             if(res != QMessageBox::Ok)
             {

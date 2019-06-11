@@ -60,7 +60,7 @@ void CFilterDeleteExtension::updateUi()
 
 void CFilterDeleteExtension::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterDeleteExtension");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterDeleteExtension");
 
     int idx = comboExtensions->currentIndex();
     trk.filterDeleteExtension(comboExtensions->itemData(idx).toString());

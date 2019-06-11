@@ -63,7 +63,7 @@ private:
         QString tileMatrixSet;
         QRectF boundingBox;
         QString resourceURL;
-        QMap<QString,limit_t> limits;
+        QMap<QString, limit_t> limits;
     };
 
     QList<layer_t> layers;
@@ -92,10 +92,10 @@ private:
         }
 
         projPJ pjsrc;
-        QMap<QString,tilematrix_t> tilematrix;
+        QMap<QString, tilematrix_t> tilematrix;
     };
 
-    QMap<QString,tileset_t> tilesets;
+    QMap<QString, tileset_t> tilesets;
 };
 
 #endif //CMAPWMTS_H

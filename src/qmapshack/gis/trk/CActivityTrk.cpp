@@ -32,8 +32,8 @@ QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
         , name \
         , "://icons/48x48/" icon \
         , "://icons/16x16/" icon \
-        , IGisItem::getColorMap()[qMin(colorIdx,IGisItem::eColorTransparent)].color \
-        , IGisItem::getColorMap()[qMin(colorIdx,IGisItem::eColorTransparent)].line \
+        , IGisItem::getColorMap()[qMin(colorIdx, IGisItem::eColorTransparent)].color \
+        , IGisItem::getColorMap()[qMin(colorIdx, IGisItem::eColorTransparent)].line \
     }
 
 CActivityTrk::desc_t CActivityTrk::dummyDesc;
@@ -51,15 +51,15 @@ void CActivityTrk::init()
     actDescriptor =
     {
         DESCRIPTOR_ENTRY(tr("Foot"),               "ActFoot.png",  eAct20Foot,     IGisItem::eColorBlack)
-        ,DESCRIPTOR_ENTRY(tr("Bicycle"),            "ActCycle.png", eAct20Cycle,    IGisItem::eColorDarkRed)
-        ,DESCRIPTOR_ENTRY(tr("Motor Bike"),         "ActBike.png",  eAct20Bike,     IGisItem::eColorDarkGreen)
-        ,DESCRIPTOR_ENTRY(tr("Car"),                "ActCar.png",   eAct20Car,      IGisItem::eColorDarkYellow)
-        ,DESCRIPTOR_ENTRY(tr("Cable Car"),          "ActCable.png", eAct20Cable,    IGisItem::eColorDarkBlue)
-        ,DESCRIPTOR_ENTRY(tr("Swim"),               "ActSwim.png",  eAct20Swim,     IGisItem::eColorDarkMagenta)
-        ,DESCRIPTOR_ENTRY(tr("Ship"),               "ActShip.png",  eAct20Ship,     IGisItem::eColorDarkCyan)
-        ,DESCRIPTOR_ENTRY(tr("Aeronautic"),         "ActAero.png",  eAct20Aero,     IGisItem::eColorLightGray)
-        ,DESCRIPTOR_ENTRY(tr("Ski/Winter"),         "ActSki.png",   eAct20Ski,      IGisItem::eColorDarkGray)
-        ,DESCRIPTOR_ENTRY(tr("Public Transport"),   "ActTrain.png", eAct20Train,    IGisItem::eColorRed)
+        , DESCRIPTOR_ENTRY(tr("Bicycle"),            "ActCycle.png", eAct20Cycle,    IGisItem::eColorDarkRed)
+        , DESCRIPTOR_ENTRY(tr("Motor Bike"),         "ActBike.png",  eAct20Bike,     IGisItem::eColorDarkGreen)
+        , DESCRIPTOR_ENTRY(tr("Car"),                "ActCar.png",   eAct20Car,      IGisItem::eColorDarkYellow)
+        , DESCRIPTOR_ENTRY(tr("Cable Car"),          "ActCable.png", eAct20Cable,    IGisItem::eColorDarkBlue)
+        , DESCRIPTOR_ENTRY(tr("Swim"),               "ActSwim.png",  eAct20Swim,     IGisItem::eColorDarkMagenta)
+        , DESCRIPTOR_ENTRY(tr("Ship"),               "ActShip.png",  eAct20Ship,     IGisItem::eColorDarkCyan)
+        , DESCRIPTOR_ENTRY(tr("Aeronautic"),         "ActAero.png",  eAct20Aero,     IGisItem::eColorLightGray)
+        , DESCRIPTOR_ENTRY(tr("Ski/Winter"),         "ActSki.png",   eAct20Ski,      IGisItem::eColorDarkGray)
+        , DESCRIPTOR_ENTRY(tr("Public Transport"),   "ActTrain.png", eAct20Train,    IGisItem::eColorRed)
     };
 
     SETTINGS;
@@ -290,19 +290,19 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     for(const desc_t *desc : descs)
     {
         const summary_t& s = summary[desc->activity];
-        IUnit::self().meter2elevation(qMin(s.ascent,NOFLOAT), val, unit);
+        IUnit::self().meter2elevation(qMin(s.ascent, NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ascent;
     }
     if(printNoAct)
     {
-        IUnit::self().meter2elevation(qMin(sumActNone.ascent,NOFLOAT), val, unit);
+        IUnit::self().meter2elevation(qMin(sumActNone.ascent, NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += sumActNone.ascent;
     }
     if(printTotal)
     {
-        IUnit::self().meter2elevation(qMin(total,NOFLOAT), val, unit);
+        IUnit::self().meter2elevation(qMin(total, NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
@@ -314,19 +314,19 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     for(const desc_t *desc : descs)
     {
         const summary_t& s = summary[desc->activity];
-        IUnit::self().meter2elevation(qMin(s.descent,NOFLOAT), val, unit);
+        IUnit::self().meter2elevation(qMin(s.descent, NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.descent;
     }
     if(printNoAct)
     {
-        IUnit::self().meter2elevation(qMin(sumActNone.descent,NOFLOAT), val, unit);
+        IUnit::self().meter2elevation(qMin(sumActNone.descent, NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += sumActNone.descent;
     }
     if(printTotal)
     {
-        IUnit::self().meter2elevation(qMin(total,NOFLOAT), val, unit);
+        IUnit::self().meter2elevation(qMin(total, NOFLOAT), val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
     }
     str += "</tr>";

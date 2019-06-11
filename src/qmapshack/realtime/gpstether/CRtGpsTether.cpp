@@ -130,7 +130,7 @@ void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF
     p.rotate(heading - 90);
 
     p.setPen(Qt::black);
-    p.drawImage(-arrow.rect().center() + QPoint(2,2), arrow);
+    p.drawImage(-arrow.rect().center() + QPoint(2, 2), arrow);
     p.restore();
 }
 

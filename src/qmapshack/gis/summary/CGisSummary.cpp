@@ -49,7 +49,7 @@ CGisSummary::~CGisSummary()
         cfg.beginGroup(name);
         cfg.setValue("name", dropZone.name);
         const int N = dropZone.folders.size();
-        cfg.setValue("numberOfFolders",N);
+        cfg.setValue("numberOfFolders", N);
         for(int n = 0; n < N; n++)
         {
             cfg.beginGroup(QString("Folder%1").arg(n));
@@ -77,7 +77,7 @@ void CGisSummary::slotStartup()
         const QString& name = QString("DropZone%1").arg(cnt++);
         cfg.beginGroup(name);
         dropZone.name = cfg.value("name", name).toString();
-        const int N = cfg.value("numberOfFolders",0).toInt();
+        const int N = cfg.value("numberOfFolders", 0).toInt();
         for(int n = 0; n < N; n++)
         {
             cfg.beginGroup(QString("Folder%1").arg(n));
@@ -131,7 +131,7 @@ void CGisSummary::setupDropZones()
 
         if(!dropZone.folders.isEmpty())
         {
-            dropZone.zone = new CGisSummaryDropZone(dropZone,this);
+            dropZone.zone = new CGisSummaryDropZone(dropZone, this);
             theLayout->addWidget(dropZone.zone);
             isEmpty = false;
         }

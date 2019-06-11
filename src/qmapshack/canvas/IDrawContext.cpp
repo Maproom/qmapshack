@@ -258,14 +258,14 @@ void IDrawContext::convertRad2M(QPointF &p) const
      */
     if(fixWest)
     {
-        QPointF o(-180*DEG_TO_RAD,y);
+        QPointF o(-180*DEG_TO_RAD, y);
         convertRad2M(o);
         p.rx() = 2*o.x() + p.x();
     }
 
     if(fixEast)
     {
-        QPointF o(180*DEG_TO_RAD,y);
+        QPointF o(180*DEG_TO_RAD, y);
         convertRad2M(o);
         p.rx() = 2*o.x() + p.x();
     }
@@ -453,7 +453,7 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
     // add offset
     p.translate(off);
     // draw buffer to painter
-    p.drawImage(0,0, currentBuffer.image);
+    p.drawImage(0, 0, currentBuffer.image);
     p.restore();
 
     // intNeedsRedraw is reset by the thread

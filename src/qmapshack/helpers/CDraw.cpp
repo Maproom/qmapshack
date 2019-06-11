@@ -25,13 +25,13 @@
 #include <QPointF>
 #include <QtMath>
 
-QPen CDraw::penBorderBlue(QColor(10,10,150,220),2);
-QPen CDraw::penBorderGray(Qt::lightGray,2);
-QPen CDraw::penBorderBlack(QColor(0,0,0,200),2);
-QPen CDraw::penBorderRed(Qt::red,2);
-QBrush CDraw::brushBackWhite(QColor(255,255,255,255));
+QPen CDraw::penBorderBlue(QColor(10, 10, 150, 220), 2);
+QPen CDraw::penBorderGray(Qt::lightGray, 2);
+QPen CDraw::penBorderBlack(QColor(0, 0, 0, 200), 2);
+QPen CDraw::penBorderRed(Qt::red, 2);
+QBrush CDraw::brushBackWhite(QColor(255, 255, 255, 255));
 QBrush CDraw::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
-QBrush CDraw::brushBackSemiBlue(QColor(127,127, 255, 127));
+QBrush CDraw::brushBackSemiBlue(QColor(127, 127, 255, 127));
 
 
 QImage CDraw::createBasicArrow(const QBrush &brush, qreal scale)
@@ -118,7 +118,7 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
 
 void CDraw::nogos(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minNogoDist)
 {
-    static const QImage nogo = QImage("://icons/48x48/NoGo.png").scaled(14,14, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    static const QImage nogo = QImage("://icons/48x48/NoGo.png").scaled(14, 14, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     double l = minNogoDist / 3;
 
@@ -267,7 +267,7 @@ void CDraw::number(int num, int size, QPainter& p, const QPointF& center, const 
 {
     const qreal size_2 = (size - 1) / 2.0;
 
-    p.setPen(QPen(Qt::white,2));
+    p.setPen(QPen(Qt::white, 2));
     p.setBrush(color);
     p.drawEllipse(center, size_2, size_2);
 
@@ -286,15 +286,15 @@ QPixmap CDraw::number(int num, const QColor &color)
     const int pointSize = f.pointSize();
     const int size = (pointSize + (f.bold() ? 3 : 2)) * 2;
 
-    QPixmap pixmap(size,size);
+    QPixmap pixmap(size, size);
     pixmap.fill(Qt::transparent);
     QPainter p(&pixmap);
 
     p.setFont(f);
     USE_ANTI_ALIASING(p, true);
-    p.translate(1,1);
+    p.translate(1, 1);
 
-    CDraw::number(num, size, p, {(size-2)/2.0,(size-2)/2.0}, color);
+    CDraw::number(num, size, p, {(size-2)/2.0, (size-2)/2.0}, color);
 
     return pixmap;
 }

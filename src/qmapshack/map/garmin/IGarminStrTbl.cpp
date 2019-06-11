@@ -33,7 +33,7 @@ IGarminStrTbl::IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject 
         if(1250 <= codepage && codepage <= 1258)
         {
             char strcp[64];
-            sprintf(strcp,"Windows-%i",codepage);
+            sprintf(strcp, "Windows-%i", codepage);
             codec = QTextCodec::codecForName(strcp);
         }
         else if(codepage == 950)
@@ -82,7 +82,7 @@ void IGarminStrTbl::readFile(CFileExt &file, quint32 offset, quint32 size, QByte
         return;
     }
 
-    data = QByteArray::fromRawData(file.data(offset,size), size);
+    data = QByteArray::fromRawData(file.data(offset, size), size);
     // wenn mask == 0 ist kein xor noetig
     if(mask == 0)
     {

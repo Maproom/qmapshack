@@ -46,7 +46,7 @@ CRouterSetup::CRouterSetup(QWidget * parent)
     connect(comboRouter, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CRouterSetup::slotSelectRouter);
 
     SETTINGS;
-    comboRouter->setCurrentIndex(cfg.value("Route/current",0).toInt());
+    comboRouter->setCurrentIndex(cfg.value("Route/current", 0).toInt());
 }
 
 CRouterSetup::~CRouterSetup()
@@ -97,5 +97,5 @@ int CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coo
 
 void CRouterSetup::setRouterTitle(const router_e router, const QString title)
 {
-    comboRouter->setItemText(router,title);
+    comboRouter->setItemText(router, title);
 }

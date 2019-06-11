@@ -42,13 +42,13 @@ void CRouterBRouterSetup::load()
 {
     SETTINGS;
     cfg.beginGroup("Route/brouter");
-    installMode = modeFromString(cfg.value("installMode",stringFromMode(defaultInstallMode)).toString());
-    expertMode = cfg.value("expertMode",defaultExpertMode).toBool();
+    installMode = modeFromString(cfg.value("installMode", stringFromMode(defaultInstallMode)).toString());
+    expertMode = cfg.value("expertMode", defaultExpertMode).toBool();
     onlineWebUrl = cfg.value("onlineWebUrl", defaultOnlineWebUrl).toString();
     onlineServiceUrl = cfg.value("onlineServiceUrl", defaultOnlineServiceUrl).toString();
     onlineProfilesUrl = cfg.value("onlineProfilesUrl", defaultOnlineProfilesUrl).toString();
     localDir = cfg.value("localDir", defaultLocalDir).toString();
-    localJavaExecutable = cfg.value("localJava",findJava()).toString();
+    localJavaExecutable = cfg.value("localJava", findJava()).toString();
     localProfileDir = cfg.value("localProfileDir", defaultLocalProfileDir).toString();
     localCustomProfileDir = cfg.value("localCustomProfileDir", defaultLocalCustomProfileDir).toString();
     localSegmentsDir = cfg.value("localSegmentsDir", defaultLocalSegmentsDir).toString();
@@ -58,8 +58,8 @@ void CRouterBRouterSetup::load()
     localNumberThreads = cfg.value("localNumberThreads", defaultLocalNumberThreads).toString();
     localMaxRunningTime = cfg.value("localMaxRunningTime", defaultLocalMaxRunningTime).toString();
     localJavaOpts = cfg.value("localJavaOpts", defaultLocalJavaOpts).toString();
-    binariesUrl = cfg.value("binariesUrl",defaultBinariesUrl).toString();
-    segmentsUrl = cfg.value("segmentsUrl",defaultSegmentsUrl).toString();
+    binariesUrl = cfg.value("binariesUrl", defaultBinariesUrl).toString();
+    segmentsUrl = cfg.value("segmentsUrl", defaultSegmentsUrl).toString();
     onlineProfiles.clear();
     int size = cfg.beginReadArray("online");
     for (int i=0; i < size; i++)
@@ -96,7 +96,7 @@ void CRouterBRouterSetup::save()
 {
     SETTINGS;
     cfg.beginGroup("Route/brouter");
-    cfg.setValue("expertMode",expertMode);
+    cfg.setValue("expertMode", expertMode);
     cfg.setValue("installMode", stringFromMode(installMode));
     cfg.setValue("onlineWebUrl", onlineWebUrl);
     cfg.setValue("onlineServiceUrl", onlineServiceUrl);
@@ -125,7 +125,7 @@ void CRouterBRouterSetup::save()
     for (int i=0; i < localProfiles.size(); i++)
     {
         cfg.setArrayIndex(i);
-        cfg.setValue("profile",localProfiles.at(i));
+        cfg.setValue("profile", localProfiles.at(i));
     }
     cfg.endArray();
     cfg.endGroup();
@@ -228,7 +228,7 @@ void CRouterBRouterSetup::profileUp(const QString &profile)
         if (index > 0)
         {
             localProfiles.removeAt(index);
-            localProfiles.insert(index-1,profile);
+            localProfiles.insert(index-1, profile);
             emit sigProfilesChanged();
         }
     }
@@ -239,7 +239,7 @@ void CRouterBRouterSetup::profileUp(const QString &profile)
         if (index > 0)
         {
             onlineProfiles.removeAt(index);
-            onlineProfiles.insert(index-1,profile);
+            onlineProfiles.insert(index-1, profile);
             emit sigProfilesChanged();
         }
     }
@@ -253,7 +253,7 @@ void CRouterBRouterSetup::profileDown(const QString &profile)
         if (index > -1 && index < localProfiles.size()-1)
         {
             localProfiles.removeAt(index);
-            localProfiles.insert(index+1,profile);
+            localProfiles.insert(index+1, profile);
             emit sigProfilesChanged();
         }
     }
@@ -264,7 +264,7 @@ void CRouterBRouterSetup::profileDown(const QString &profile)
         if (index > -1 && index < onlineProfiles.size()-1)
         {
             onlineProfiles.removeAt(index);
-            onlineProfiles.insert(index+1,profile);
+            onlineProfiles.insert(index+1, profile);
             emit sigProfilesChanged();
         }
     }
@@ -350,8 +350,8 @@ void CRouterBRouterSetup::loadOnlineConfig() const
     const QString &configHost = configUrl.host();
 
     QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(configUrl));
-    reply->setProperty("configHost",configHost);
-    reply->setProperty("type",eTypeConfig);
+    reply->setProperty("configHost", configHost);
+    reply->setProperty("type", eTypeConfig);
 }
 
 void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
@@ -536,12 +536,12 @@ void CRouterBRouterSetup::mergeOnlineProfiles(const QStringList &onlineProfilesL
 
 void CRouterBRouterSetup::emitOnlineConfigScriptError(const QJSValue &error) const
 {
-    emit sigError(tr("Error parsing online-config:"),error.toString());
+    emit sigError(tr("Error parsing online-config:"), error.toString());
 }
 
 void CRouterBRouterSetup::emitNetworkError(QString error) const
 {
-    emit sigError(tr("Network error:"),error);
+    emit sigError(tr("Network error:"), error);
 }
 
 void CRouterBRouterSetup::displayProfileAsync(const QString &profile) const
@@ -572,7 +572,7 @@ void CRouterBRouterSetup::displayOnlineProfileAsync(const QString &profile) cons
 void CRouterBRouterSetup::loadOnlineProfileAsync(const QString &profile, const profileRequest_e mode) const
 {
     QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(QUrl(onlineProfilesUrl + profile +".brf")));
-    reply->setProperty("type",eTypeProfile);
+    reply->setProperty("type", eTypeProfile);
     reply->setProperty("profile", profile);
     reply->setProperty("request", mode);
 }

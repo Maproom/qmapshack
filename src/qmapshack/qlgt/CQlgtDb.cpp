@@ -51,7 +51,7 @@ CQlgtDb::CQlgtDb(const QString &filename, CImportDatabase *parent)
     , nOvl(0)
     , nDiary(0)
 {
-    db = QSqlDatabase::addDatabase("QSQLITE","qlandkarte");
+    db = QSqlDatabase::addDatabase("QSQLITE", "qlandkarte");
     db.setDatabaseName(filename);
     db.open();
 
@@ -318,7 +318,7 @@ void CQlgtDb::migrateDB(int version)
                 }
                 else if(query.value(1).toInt() == eTrk)
                 {
-                    pixmap = QPixmap(16,16);
+                    pixmap = QPixmap(16, 16);
                     pixmap.fill(query.value(2).toString());
                 }
                 else

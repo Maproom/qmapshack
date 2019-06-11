@@ -36,7 +36,7 @@
 CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     : IMouse(gis, canvas, mouse)
 {
-    cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"),0,0);
+    cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"), 0, 0);
     screenUnclutter = new CScrOptUnclutter(this);
 }
 
@@ -138,7 +138,7 @@ void CMouseNormal::mouseDragged(const QPoint& start, const QPoint& last, const Q
     // has triggered a selection of any kind
     if (stateItemSel < eStateNoMapMovePossible)
     {
-        IMouse::mouseDragged(start,last,end);
+        IMouse::mouseDragged(start, last, end);
     }
     else
     {
@@ -290,7 +290,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
             const QSize s = curPOI.symbolSize;
             const qint32 x = (qMax(qMax(s.width(), s.height()), 7)<<1) & 0xFFFFFFFE;
 
-            p.drawImage(curPOI.pos - QPointF(x,x), QImage("://cursors/wptHighlightBlue.png").scaled(x<<1, x<<1, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            p.drawImage(curPOI.pos - QPointF(x, x), QImage("://cursors/wptHighlightBlue.png").scaled(x<<1, x<<1, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         }
 
         /*

@@ -74,10 +74,10 @@ void CCreateRouteFromWpt::accept()
     for(int i = 0; i < listWidget->count(); i++)
     {
         QListWidgetItem * item = listWidget->item(i);
-        points << IGisLine::point_t(item->data(Qt::UserRole + 0).toPointF(),item->text());
+        points << IGisLine::point_t(item->data(Qt::UserRole + 0).toPointF(), item->text());
     }
 
-    CGisItemRte* rte = new CGisItemRte(points,name, project, NOIDX);
+    CGisItemRte* rte = new CGisItemRte(points, name, project, NOIDX);
     rte->calc();
 }
 
@@ -109,7 +109,7 @@ void CCreateRouteFromWpt::slotUp()
         }
         listWidget->takeItem(row);
         row = row - 1;
-        listWidget->insertItem(row,item);
+        listWidget->insertItem(row, item);
         listWidget->setCurrentItem(item);
     }
 }
@@ -126,7 +126,7 @@ void CCreateRouteFromWpt::slotDown()
         }
         listWidget->takeItem(row);
         row = row + 1;
-        listWidget->insertItem(row,item);
+        listWidget->insertItem(row, item);
         listWidget->setCurrentItem(item);
     }
 }

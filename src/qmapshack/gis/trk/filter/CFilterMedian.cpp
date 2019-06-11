@@ -29,7 +29,7 @@ CFilterMedian::CFilterMedian(CGisItemTrk &trk, QWidget *parent)
     setupUi(this);
 
     SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/Median/points",5).toInt());
+    spinBox->setValue(cfg.value("TrackDetails/Filter/Median/points", 5).toInt());
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterMedian::slotApply);
 }
@@ -42,7 +42,7 @@ CFilterMedian::~CFilterMedian()
 
 void CFilterMedian::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterMedian");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterMedian");
     trk.filterSmoothProfile(spinBox->value());
     CCanvas::restoreOverrideCursor("CFilterMedian");
 }

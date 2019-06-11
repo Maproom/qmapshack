@@ -57,7 +57,7 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
     pSelf = this;
     setupUi(this);
 
-    lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
+    lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
     lineFilter->addAction(actionSetupFilter, QLineEdit::LeadingPosition);
 
     treeWks->setExternalMenu(menuProject);

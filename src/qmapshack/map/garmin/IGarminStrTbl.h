@@ -31,7 +31,7 @@ public:
     IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject * parent);
     virtual ~IGarminStrTbl();
 
-    enum type_e {norm,poi,net};
+    enum type_e {norm, poi, net};
 
     void registerLBL1(const quint32 offset, const quint32 size, const quint8 shift)
     {

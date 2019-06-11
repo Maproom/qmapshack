@@ -36,7 +36,7 @@
 CMouseRuler::CMouseRuler(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     : IMouse(gis, canvas, mouse)
 {
-    cursor = QCursor(QPixmap(":/cursors/cursorRuler.png"),0,0);
+    cursor = QCursor(QPixmap(":/cursors/cursorRuler.png"), 0, 0);
 
     scrOptRuler = new CScrOptRuler(this, canvas);
     connect(scrOptRuler->toolUndo, &QToolButton::clicked, this, &CMouseRuler::slotUndo);
@@ -411,7 +411,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
         p.setPen(QPen(Qt::blue, 3));
         p.drawPolyline(line);
 
-        QRectF r(0,0,50,50);
+        QRectF r(0, 0, 50, 50);
         for(int n = 1; n < N; n++)
         {
             QPointF pt1 = ruler[n-1];
@@ -469,7 +469,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
             p.save();
             p.translate(seg.center().toPoint());
             p.rotate(a1 + ((a1 > 0) ? -90 : 90));
-            CDraw::text(str, p, QPoint(0,0), Qt::black);
+            CDraw::text(str, p, QPoint(0, 0), Qt::black);
             p.restore();
         }
     }

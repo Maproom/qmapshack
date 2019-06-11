@@ -61,7 +61,7 @@ void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVa
     QString idLabel = blockIface->property("IdLabel").toString().toUpper();
 
     // read vendor string attached to drive
-    QDBusInterface * driveIface = new QDBusInterface("org.freedesktop.UDisks2", drive_object.path(),"org.freedesktop.UDisks2.Drive", QDBusConnection::systemBus(), this);
+    QDBusInterface * driveIface = new QDBusInterface("org.freedesktop.UDisks2", drive_object.path(), "org.freedesktop.UDisks2.Drive", QDBusConnection::systemBus(), this);
     QString vendor = driveIface->property("Vendor").toString();
     QString model  = driveIface->property("Model").toString();
 
@@ -103,7 +103,7 @@ void CDeviceWatcherLinux::slotDeviceRemoved(const QDBusObjectPath& path, const Q
 void CDeviceWatcherLinux::slotUpdate()
 {
     QList<QDBusObjectPath> paths;
-    QDBusMessage call = QDBusMessage::createMethodCall("org.freedesktop.UDisks2","/org/freedesktop/UDisks2/block_devices","org.freedesktop.DBus.Introspectable","Introspect");
+    QDBusMessage call = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2/block_devices", "org.freedesktop.DBus.Introspectable", "Introspect");
     QDBusPendingReply<QString> reply = QDBusConnection::systemBus().call(call);
     if (!reply.isValid())
     {
@@ -131,7 +131,7 @@ void CDeviceWatcherLinux::slotUpdate()
 
     for(const QDBusObjectPath &path : paths)
     {
-        QDBusMessage call = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path.path(), "org.freedesktop.DBus.Introspectable","Introspect");
+        QDBusMessage call = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path.path(), "org.freedesktop.DBus.Introspectable", "Introspect");
         QDBusPendingReply<QString> reply = QDBusConnection::systemBus().call(call);
 
         if (!reply.isValid())
@@ -163,7 +163,7 @@ void CDeviceWatcherLinux::slotUpdate()
 QString CDeviceWatcherLinux::readMountPoint(const QString& path)
 {
     QStringList points;
-    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.DBus.Properties","Get");
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path, "org.freedesktop.DBus.Properties", "Get");
 
     QList<QVariant> args;
     args << "org.freedesktop.UDisks2.Filesystem" << "MountPoints";
@@ -174,7 +174,8 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path)
 #if defined(Q_OS_FREEBSD)
     for(const QVariant &arg : reply.arguments())
     {
-        if(!arg.value<QDBusVariant>().variant().value<QStringList>().isEmpty()) {
+        if(!arg.value<QDBusVariant>().variant().value<QStringList>().isEmpty())
+        {
             points.append(arg.value<QDBusVariant>().variant().value<QStringList>().first());
         }
     }

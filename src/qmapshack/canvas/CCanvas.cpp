@@ -213,7 +213,7 @@ void CCanvas::buildHelpText()
                                    "convenient download of maps, elevation data and routing data. You have to download these resources "
                                    "from various sites on your own. But this page might help you a bit</p>"
                                    );
-    addHtmlRow(msg,"<img src='://pics/DockWidgets.png'/>", msgWelcome, "rowspan='3' style='padding-right: 20px;'", "");
+    addHtmlRow(msg, "<img src='://pics/DockWidgets.png'/>", msgWelcome, "rowspan='3' style='padding-right: 20px;'", "");
 
     const QString& msgLetsStart = tr("<h2>Let's Start</h2>"
                                      "<p>As a first step make yourself comfortable by arranging the dock "
@@ -562,8 +562,8 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     slotUpdateTrackInfo(false);
     setSizeTrackProfile();
 
-    QSize s = e->size() - QSize(50,50);
-    labelHelp->move(25,25);
+    QSize s = e->size() - QSize(50, 50);
+    labelHelp->move(25, 25);
     labelHelp->resize(s);
     buildHelpText();
 }
@@ -577,7 +577,7 @@ void CCanvas::paintEvent(QPaintEvent*)
 
     QPainter p;
     p.begin(this);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
 
     // fill the background with default pattern
     p.fillRect(rect(), backColor);
@@ -819,9 +819,9 @@ void CCanvas::drawScale(QPainter& p)
     }
 
     // step I: get the approximate distance for 200px in the bottom right corner
-    QPointF brc(rect().bottomRight() - QPoint(50,30));
+    QPointF brc(rect().bottomRight() - QPoint(50, 30));
     QPointF pt1 = brc;
-    QPointF pt2 = brc - QPoint(-200,0);
+    QPointF pt2 = brc - QPoint(-200, 0);
 
     map->convertPx2Rad(pt1);
     map->convertPx2Rad(pt2);
@@ -834,15 +834,15 @@ void CCanvas::drawScale(QPainter& p)
 
     if(0 <= b && b < log10(3.0f))
     {
-        d = 1 * qPow(10,a);
+        d = 1 * qPow(10, a);
     }
     else if(log10(3.0f) < b && b < log10(5.0f))
     {
-        d = 3 * qPow(10,a);
+        d = 3 * qPow(10, a);
     }
     else
     {
-        d = 5 * qPow(10,a);
+        d = 5 * qPow(10, a);
     }
 
     // step III: convert the scale length from [m] into [px]
@@ -854,24 +854,24 @@ void CCanvas::drawScale(QPainter& p)
     map->convertRad2Px(pt2);
 
     p.setPen(QPen(Qt::white, 9));
-    p.drawLine(pt1, pt2 + QPoint(9,0));
+    p.drawLine(pt1, pt2 + QPoint(9, 0));
     p.setPen(QPen(Qt::black, 7));
-    p.drawLine(pt1, pt2 + QPoint(9,0));
+    p.drawLine(pt1, pt2 + QPoint(9, 0));
     p.setPen(QPen(Qt::white, 5));
-    p.drawLine(pt1, pt2 + QPoint(9,0));
+    p.drawLine(pt1, pt2 + QPoint(9, 0));
 
     QVector<qreal> pattern;
     pattern << 2 << 4;
     QPen pen(Qt::black, 5, Qt::CustomDashLine);
     pen.setDashPattern(pattern);
     p.setPen(pen);
-    p.drawLine(pt1, pt2 + QPoint(9,0));
+    p.drawLine(pt1, pt2 + QPoint(9, 0));
 
 
     QPoint pt3(pt2.x() + (pt1.x() - pt2.x())/2, pt2.y());
 
     QString val, unit;
-    IUnit::self().meter2distance(d,val,unit);
+    IUnit::self().meter2distance(d, val, unit);
     CDraw::text(QString("%1 %2").arg(val).arg(unit), p, pt3, Qt::black);
 }
 
@@ -890,8 +890,8 @@ void CCanvas::slotToolTip()
     {
         return;
     }
-    QPoint p = mapToGlobal(posToolTip + QPoint(32,0));
-    QToolTip::showText(p,str);
+    QPoint p = mapToGlobal(posToolTip + QPoint(32, 0));
+    QToolTip::showText(p, str);
 }
 
 void CCanvas::slotCheckTrackOnFocus()
@@ -1004,7 +1004,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
                       - (trackStatisticIsVisible ? labelTrackStatistic->height() + 20 : 0)
                       - labelTrackInfo->height() - 60;
 
-        labelTrackInfo->move(x,y);
+        labelTrackInfo->move(x, y);
         labelTrackInfo->setVisible(cnt > 1);
     }
     else
@@ -1020,7 +1020,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
 
     if(updateVisuals)
     {
-        trk->updateVisuals(CGisItemTrk::eVisualPlot,"CCanvas::slotUpdateTrackInfo()");
+        trk->updateVisuals(CGisItemTrk::eVisualPlot, "CCanvas::slotUpdateTrackInfo()");
     }
 
     update();
@@ -1217,8 +1217,8 @@ void CCanvas::setSizeTrackProfile()
         }
         else
         {
-            plotTrackProfile->resize(300,200);
-            plotTrackProfile->move(100,100);
+            plotTrackProfile->resize(300, 200);
+            plotTrackProfile->move(100, 100);
         }
 
         cfg.endGroup(); // objectName()
@@ -1295,7 +1295,7 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
     p.resetTransform();
     // ----- start to draw fast content -----
 
-    QRect r(QPoint(0,0), area.size().toSize());
+    QRect r(QPoint(0, 0), area.size().toSize());
 
     grid->draw(p, r);
     gis->draw(p, r);
@@ -1342,7 +1342,7 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
             if (pscale < 0.8f || pscale > 1.25f)
             {
                 const QPointF & center = pinch->centerPoint();
-                const QPointF & pos = mapFromGlobal(QPoint(center.x(),center.y()));
+                const QPointF & pos = mapFromGlobal(QPoint(center.x(), center.y()));
                 QPointF pt1 = pos;
                 map->convertPx2Rad(pt1);
                 setZoom(pscale > 1.0f, needsRedraw);
@@ -1368,7 +1368,7 @@ void CCanvas::followPosition(const QPointF& pos)
     convertRad2Px(pos_);
 
     const QRect& r1 = rect();
-    QRectF r2(0,0,r1.width() * 0.3, r1.height() * 0.3);
+    QRectF r2(0, 0, r1.width() * 0.3, r1.height() * 0.3);
     r2.moveCenter(r1.center());
 
     if(r2.contains(pos_))

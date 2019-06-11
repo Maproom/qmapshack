@@ -156,10 +156,10 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
 #endif                       // DEBUG_SHOW_POLY_DATA
 
     sign_info_t signinfo;
-    bits_per_coord(bs_info,*pData,bx,by,signinfo, false);
+    bits_per_coord(bs_info, *pData, bx, by, signinfo, false);
 
-    CShiftReg sr(pData,bs_len,bx,by,extra_bit,signinfo);
-    qint32 x1,y1,x = 0,y = 0;
+    CShiftReg sr(pData, bs_len, bx, by, extra_bit, signinfo);
+    qint32 x1, y1, x = 0, y = 0;
 
     bool isNegative = (iCenterLon >= 0x800000);
     // first point
@@ -174,7 +174,7 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
     coords << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
 
     // next points
-    while(sr.get(x,y))
+    while(sr.get(x, y))
     {
         x1 += (x << shift);
         y1 += (y << shift);
@@ -264,7 +264,7 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
 #endif                       // DEBUG_SHOW_POLY_DATA
 
     sign_info_t signinfo;
-    bits_per_coord(bs_info,*pData,bx,by,signinfo, true);
+    bits_per_coord(bs_info, *pData, bx, by, signinfo, true);
 
     //     qDebug() << ">>" << bs_len << bytes_total << (pEnd - pStart);
 
@@ -274,8 +274,8 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
         return pEnd - pStart;
     }
 
-    CShiftReg sr(pData,bs_len,bx,by,false,signinfo);
-    qint32 x1,y1,x = 0,y = 0;
+    CShiftReg sr(pData, bs_len, bx, by, false, signinfo);
+    qint32 x1, y1, x = 0, y = 0;
 
     bool isNegative = (iCenterLon >= 0x800000);
     // first point
@@ -290,7 +290,7 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     coords << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
 
     // next points
-    while(sr.get(x,y))
+    while(sr.get(x, y))
     {
         x1 += (x << shift);
         y1 += (y << shift);

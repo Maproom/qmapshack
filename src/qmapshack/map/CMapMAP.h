@@ -58,11 +58,11 @@ private:
     enum header_flags_e
     {
         eHeaderFlagDebugInfo = 0x80
-        ,eHeaderFlagStartPosition = 0x40
-        ,eHeaderFlagStartZoomLevel = 0x20
-        ,eHeaderFlagLanguage = 0x10
-        ,eHeaderFlagComment = 0x08
-        ,eHeaderFlagCreator = 0x04
+        , eHeaderFlagStartPosition = 0x40
+        , eHeaderFlagStartZoomLevel = 0x20
+        , eHeaderFlagLanguage = 0x10
+        , eHeaderFlagComment = 0x08
+        , eHeaderFlagCreator = 0x04
     };
 
     struct header_t

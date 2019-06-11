@@ -28,7 +28,7 @@
 CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     : IMouseSelect(gis, canvas, mouse)
 {
-    cursor = QCursor(QPixmap("://cursors/cursorSelectArea.png"),0,0);
+    cursor = QCursor(QPixmap("://cursors/cursorSelectArea.png"), 0, 0);
 
     canvas->reportStatus("IMouseSelect", tr("<b>Select Items On Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners."));
 
@@ -121,7 +121,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
             msg += tr("%1 areas<br/>").arg(cntOvl);
         }
 
-        canvas->reportStatus("CMouseSelect::Stat",msg);
+        canvas->reportStatus("CMouseSelect::Stat", msg);
 
         rectLastSel = rectSelection;
         modeLastSel = modeSelection;

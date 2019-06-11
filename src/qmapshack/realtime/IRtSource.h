@@ -35,8 +35,8 @@ public:
     enum type_e
     {
         eTypeNone
-        ,eTypeOpenSky
-        ,eTypeGpsTether
+        , eTypeOpenSky
+        , eTypeGpsTether
     };
 
     IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget * parent);
@@ -137,10 +137,10 @@ public:
     enum column_e
     {
         eColumnIcon = 0
-        ,eColumnCheckBox = eColumnIcon
-        ,eColumnDecoration = eColumnIcon
-        ,eColumnName = 1
-        ,eColumnWidget = eColumnName
+        , eColumnCheckBox = eColumnIcon
+        , eColumnDecoration = eColumnIcon
+        , eColumnName = 1
+        , eColumnWidget = eColumnName
     };
 
 signals:

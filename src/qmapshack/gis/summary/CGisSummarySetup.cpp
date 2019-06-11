@@ -52,9 +52,9 @@ CGisSummarySetup::CGisSummarySetup(CGisSummary &parent)
 
 void CGisSummarySetup::setupSignals(CGisSummary::dropzone_e number, QLineEdit * lineName, QListWidget * listWidget, QToolButton * toolAdd, QToolButton * toolDel)
 {
-    connect(toolAdd, &QToolButton::clicked, this, [this,listWidget](){slotAdd(listWidget);});
-    connect(toolDel, &QToolButton::clicked, this, [this,listWidget](){slotDel(listWidget);});
-    connect(listWidget, &QListWidget::itemSelectionChanged, this, [this,listWidget,toolDel](){slotItemSelectionChanged(listWidget,toolDel);});
+    connect(toolAdd, &QToolButton::clicked, this, [this, listWidget](){slotAdd(listWidget);});
+    connect(toolDel, &QToolButton::clicked, this, [this, listWidget](){slotDel(listWidget);});
+    connect(listWidget, &QListWidget::itemSelectionChanged, this, [this, listWidget, toolDel](){slotItemSelectionChanged(listWidget, toolDel);});
 
     CGisSummary::dropzone_t& dropzone = summary.getDropZone(number);
     for(const CGisSummary::folder_t& folder : dropzone.folders)

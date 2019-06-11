@@ -59,8 +59,8 @@ private:
     enum state_e
     {
         eStateIdle
-        ,eStateSelectRange
-        ,eStateRangeSelected
+        , eStateSelectRange
+        , eStateRangeSelected
     };
 
     state_e state   = eStateIdle;

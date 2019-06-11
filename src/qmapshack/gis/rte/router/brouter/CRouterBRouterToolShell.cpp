@@ -44,7 +44,7 @@ void CRouterBRouterToolShell::start(const QString &dir, const QString &command, 
     stdOut(command+" " + args.join(" ") + "\n");
     cmd.setWorkingDirectory(dir);
     startupTimer->start(200);
-    cmd.start(command,args);
+    cmd.start(command, args);
     cmd.waitForStarted();
 }
 

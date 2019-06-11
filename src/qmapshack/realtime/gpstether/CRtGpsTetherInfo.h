@@ -77,7 +77,7 @@ private:
     QTcpSocket * socket;
     QTimer * timer;
 
-    QHash<QString,fNemaLine> dict;
+    QHash<QString, fNemaLine> dict;
 
     QDateTime lastTimestamp;
 

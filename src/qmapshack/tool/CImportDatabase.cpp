@@ -31,10 +31,10 @@ CImportDatabase::CImportDatabase(QWidget *parent)
 
     SETTINGS;
 
-    labelSource->setText(cfg.value("ConvertDB/source","-").toString());
-    labelTarget->setText(cfg.value("ConvertDB/target","-").toString());
+    labelSource->setText(cfg.value("ConvertDB/source", "-").toString());
+    labelTarget->setText(cfg.value("ConvertDB/target", "-").toString());
 
-    textBrowser->setFont(QFont("Courier",10));
+    textBrowser->setFont(QFont("Courier", 10));
 
     connect(toolSelectSource, &QToolButton::clicked, this, &CImportDatabase::slotSelectSource);
     connect(toolSelectTarget, &QToolButton::clicked, this, &CImportDatabase::slotSelectTarget);
@@ -72,7 +72,7 @@ void CImportDatabase::stdErr(const QString& str)
 void CImportDatabase::slotSelectSource()
 {
     SETTINGS;
-    QString path = cfg.value("ConvertDB/sourcePath",QDir::homePath()).toString();
+    QString path = cfg.value("ConvertDB/sourcePath", QDir::homePath()).toString();
     QString filename = QFileDialog::getOpenFileName(this, tr("Select source database..."), path, "QLandkarte Database (*.db)");
     if(filename.isEmpty())
     {

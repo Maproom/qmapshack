@@ -32,7 +32,7 @@ CFilterSubPt2Pt::CFilterSubPt2Pt(CGisItemTrk &trk, QWidget *parent)
 
 void CFilterSubPt2Pt::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterSubPt2Pt");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterSubPt2Pt");
     trk.filterSubPt2Pt();
     CCanvas::restoreOverrideCursor("CFilterSubPt2Pt");
 }

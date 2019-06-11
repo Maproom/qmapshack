@@ -22,7 +22,7 @@
 CMouseDummy::CMouseDummy()
     : IMouse(nullptr, nullptr, nullptr)
 {
-    cursor = QCursor(QPixmap(":/cursors/cursorArrow.png"),0,0);
+    cursor = QCursor(QPixmap(":/cursors/cursorArrow.png"), 0, 0);
 }
 
 CMouseDummy::~CMouseDummy()

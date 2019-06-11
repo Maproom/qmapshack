@@ -23,7 +23,7 @@
 #include <QtSql>
 #include <QtWidgets>
 
-QMap<QString,int> IDB::references;
+QMap<QString, int> IDB::references;
 
 IDB::IDB()
 {

@@ -39,9 +39,9 @@ public:
         enum flag_e
         {
             eFlagReserved1 = 0x00000001
-            ,eFlagReserved2 = 0x00000002
-            ,eFlagHidden    = 0x00000004    ///< mark point as deleted
-            ,eFlagSubpt     = 0x00000008    ///< point has been derived as subpoint in a route
+            , eFlagReserved2 = 0x00000002
+            , eFlagHidden    = 0x00000004    ///< mark point as deleted
+            , eFlagSubpt     = 0x00000008    ///< point has been derived as subpoint in a route
         };
 
         /**
@@ -54,17 +54,17 @@ public:
         {
             // activity flags
             eActNone       = 0x00000000
-            ,eActFoot       = 0x80000000
-            ,eActCycle      = 0x40000000
-            ,eActBike       = 0x20000000
-            ,eActCar        = 0x10000000
-            ,eActCable      = 0x08000000
-            ,eActSwim       = 0x04000000
-            ,eActShip       = 0x02000000
-            ,eActAero       = 0x01000000
-            ,eActSki        = 0x00800000
-            ,eActTrain      = 0x00400000
-            ,eActMask       = 0xFFC00000    ///< mask for activity flags
+            , eActFoot       = 0x80000000
+            , eActCycle      = 0x40000000
+            , eActBike       = 0x20000000
+            , eActCar        = 0x10000000
+            , eActCable      = 0x08000000
+            , eActSwim       = 0x04000000
+            , eActShip       = 0x02000000
+            , eActAero       = 0x01000000
+            , eActSki        = 0x00800000
+            , eActTrain      = 0x00400000
+            , eActMask       = 0xFFC00000    ///< mask for activity flags
         };
 
         /**
@@ -75,36 +75,36 @@ public:
         enum act20_e
         {
             eAct20None      = 0
-            ,eAct20Foot     = 100
-            ,eAct20Cycle    = 200
-            ,eAct20Bike     = 300
-            ,eAct20Car      = 400
-            ,eAct20Cable    = 500
-            ,eAct20Swim     = 600
-            ,eAct20Ship     = 700
-            ,eAct20Aero     = 800
-            ,eAct20Ski      = 900
-            ,eAct20Train    = 1000
-            ,eAct20MaxNum   = 1100       ///< limit to speed up for loops
-            ,eAct20Bad      = 0x7FFF
+            , eAct20Foot     = 100
+            , eAct20Cycle    = 200
+            , eAct20Bike     = 300
+            , eAct20Car      = 400
+            , eAct20Cable    = 500
+            , eAct20Swim     = 600
+            , eAct20Ship     = 700
+            , eAct20Aero     = 800
+            , eAct20Ski      = 900
+            , eAct20Train    = 1000
+            , eAct20MaxNum   = 1100       ///< limit to speed up for loops
+            , eAct20Bad      = 0x7FFF
         };
 
         enum valid_e
         {
             eValidTime  = 0x00000001
-            ,eValidEle  = 0x00000002
-            ,eValidPos  = 0x00000004
-            ,eValidSlope= 0x00000008
-            ,eValidMask = 0x0000FFFF
+            , eValidEle  = 0x00000002
+            , eValidPos  = 0x00000004
+            , eValidSlope= 0x00000008
+            , eValidMask = 0x0000FFFF
         };
 
         enum invalid_e
         {
             eInvalidTime  = eValidTime  << 16
-            ,eInvalidEle  = eValidEle   << 16
-            ,eInvalidPos  = eValidPos   << 16
-            ,eInvalidSlope= eValidSlope << 16
-            ,eInvalidMask = 0xFFFF0000
+            , eInvalidEle  = eValidEle   << 16
+            , eInvalidPos  = eValidPos   << 16
+            , eInvalidSlope= eValidSlope << 16
+            , eInvalidMask = 0xFFFF0000
         };
 
 
@@ -190,7 +190,7 @@ public:
         qreal elapsedSeconds;               //< the seconds since the start of the track
         qreal elapsedSecondsMoving;         //< the seconds since the start of the track with moving speed
         IGisItem::key_t keyWpt;             //< the key of an attached waypoint
-        QHash<QString,QVariant> extensions; //< track point extensions
+        QHash<QString, QVariant> extensions; //< track point extensions
 
         static const QMap<act10_e, act20_e> act1to2;
         static const QMap<act20_e, act10_e> act2to1;

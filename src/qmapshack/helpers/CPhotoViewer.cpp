@@ -115,7 +115,7 @@ void CPhotoViewer::paintEvent(QPaintEvent * e)
 
     QPainter p(this);
     p.setPen(Qt::NoPen);
-    p.setBrush(QColor(0,0,0,190));
+    p.setBrush(QColor(0, 0, 0, 190));
     p.drawRect(rect());
 
     p.setPen(QPen(Qt::white, 11, Qt::SolidLine, Qt::RoundCap, Qt::MiterJoin));
@@ -127,14 +127,14 @@ void CPhotoViewer::paintEvent(QPaintEvent * e)
     if(idx != (images.size() - 1))
     {
         p.setPen(Qt::NoPen);
-        p.setBrush(QColor(255,255,255,128));
+        p.setBrush(QColor(255, 255, 255, 128));
         p.drawRect(rectNext);
-        p.drawPixmap(rectNext.left(),rectNext.bottom() - 32, 32, 32, QPixmap("://icons/32x32/Right.png"));
+        p.drawPixmap(rectNext.left(), rectNext.bottom() - 32, 32, 32, QPixmap("://icons/32x32/Right.png"));
     }
     if(idx != 0)
     {
         p.setPen(Qt::NoPen);
-        p.setBrush(QColor(255,255,255,128));
+        p.setBrush(QColor(255, 255, 255, 128));
         p.drawRect(rectPrev);
         p.drawPixmap(rectPrev.left(), rectPrev.bottom() - 32, 32, 32, QPixmap("://icons/32x32/Left.png"));
     }

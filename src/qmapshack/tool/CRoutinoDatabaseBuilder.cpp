@@ -60,7 +60,7 @@ CRoutinoDatabaseBuilder::~CRoutinoDatabaseBuilder()
 void CRoutinoDatabaseBuilder::slotSelectSourceFiles()
 {
     SETTINGS;
-    QString path = cfg.value("RoutinoDatabaseBuilder/sourcePath",QDir::homePath()).toString();
+    QString path = cfg.value("RoutinoDatabaseBuilder/sourcePath", QDir::homePath()).toString();
 
     QStringList files = QFileDialog::getOpenFileNames(this, tr("Select files..."), path, "OSM Database (*.pbf)");
     if(files.isEmpty())
@@ -84,7 +84,7 @@ void CRoutinoDatabaseBuilder::slotSelectSourceFiles()
 void CRoutinoDatabaseBuilder::slotSelectTargetPath()
 {
     SETTINGS;
-    QString path = cfg.value("RoutinoDatabaseBuilder/targetPath",QDir::homePath()).toString();
+    QString path = cfg.value("RoutinoDatabaseBuilder/targetPath", QDir::homePath()).toString();
 
     path = QFileDialog::getExistingDirectory(this, tr("Select target path..."), path);
     if(path.isEmpty())
@@ -152,7 +152,7 @@ void CRoutinoDatabaseBuilder::slotStart()
 
     textBrowser->clear();
 
-    slotFinished(0,QProcess::NormalExit);
+    slotFinished(0, QProcess::NormalExit);
 }
 
 void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status)

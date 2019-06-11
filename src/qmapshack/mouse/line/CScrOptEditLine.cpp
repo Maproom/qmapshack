@@ -25,7 +25,7 @@ CScrOptEditLine::CScrOptEditLine(IMouse *mouse)
 {
     setupUi(this);
 
-    move(0,0);
+    move(0, 0);
     adjustSize();
     show();
 }

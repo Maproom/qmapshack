@@ -44,10 +44,10 @@ public:
     enum features_e
     {
         eFeatVisibility  = 0x00000001
-        ,eFeatVectorItems = 0x00000002
-        ,eFeatTileCache   = 0x00000004
-        ,eFeatLayers      = 0x00000008
-        ,eFeatTypFile     = 0x00000010
+        , eFeatVectorItems = 0x00000002
+        , eFeatTileCache   = 0x00000004
+        , eFeatLayers      = 0x00000008
+        , eFeatTypFile     = 0x00000010
     };
 
     virtual void draw(IDrawContext::buffer_t& buf) = 0;

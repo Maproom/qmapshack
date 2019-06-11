@@ -87,16 +87,16 @@ IDem::IDem(CDemDraw *parent)
     graytable.resize(256);
     for(int i = 0; i < 255; i++)
     {
-        graytable[i] = qRgba(i,i,i,255);
+        graytable[i] = qRgba(i, i, i, 255);
     }
-    graytable[255] = qRgba(0,0,0,0);
+    graytable[255] = qRgba(0, 0, 0, 0);
 
-    slopetable << qRgba(0,0,0,0);
-    slopetable << qRgba(0,128,0,100);
-    slopetable << qRgba(0,255,0,100);
-    slopetable << qRgba(255,255,0,100);
-    slopetable << qRgba(255,128,0,100);
-    slopetable << qRgba(255,0,0,100);
+    slopetable << qRgba(0, 0, 0, 0);
+    slopetable << qRgba(0, 128, 0, 100);
+    slopetable << qRgba(0, 255, 0, 100);
+    slopetable << qRgba(255, 255, 0, 100);
+    slopetable << qRgba(255, 128, 0, 100);
+    slopetable << qRgba(255, 0, 0, 100);
 }
 
 IDem::~IDem()

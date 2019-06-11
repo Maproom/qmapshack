@@ -46,7 +46,7 @@ void CToolBarConfig::loadSettings()
     {
         setConfiguredActionsByName(actions);
     }
-    fullscreen = cfg.value("ToolBar/fullscreen",false).toBool();
+    fullscreen = cfg.value("ToolBar/fullscreen", false).toBool();
 }
 
 void CToolBarConfig::saveSettings() const
@@ -57,8 +57,8 @@ void CToolBarConfig::saveSettings() const
     {
         configuredNames << action->objectName();
     }
-    cfg.setValue("ToolBar/actions",configuredNames);
-    cfg.setValue("ToolBar/fullscreen",fullscreen);
+    cfg.setValue("ToolBar/actions", configuredNames);
+    cfg.setValue("ToolBar/fullscreen", fullscreen);
 }
 
 const QList<QAction *> & CToolBarConfig::availableActions() const

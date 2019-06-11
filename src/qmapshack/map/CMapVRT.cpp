@@ -32,13 +32,13 @@
 
 
 CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility,parent)
+    : IMap(eFeatVisibility, parent)
     , filename(filename)
 {
     qDebug() << "------------------------------";
     qDebug() << "VRT: try to open" << filename;
 
-    dataset = (GDALDataset*)GDALOpen(filename.toUtf8(),GA_ReadOnly);
+    dataset = (GDALDataset*)GDALOpen(filename.toUtf8(), GA_ReadOnly);
 
     if(nullptr == dataset)
     {
@@ -147,7 +147,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     yrot    = adfGeoTransform[2];
 
     trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
-    trFwd.scale(adfGeoTransform[1],adfGeoTransform[5]);
+    trFwd.scale(adfGeoTransform[1], adfGeoTransform[5]);
 
     if(adfGeoTransform[4] != 0.0)
     {
@@ -162,10 +162,10 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
     trInv = trFwd.inverted();
 
-    ref1 = trFwd.map(QPointF(0,0));
-    ref2 = trFwd.map(QPointF(xsize_px,0));
-    ref3 = trFwd.map(QPointF(xsize_px,ysize_px));
-    ref4 = trFwd.map(QPointF(0,ysize_px));
+    ref1 = trFwd.map(QPointF(0, 0));
+    ref2 = trFwd.map(QPointF(xsize_px, 0));
+    ref3 = trFwd.map(QPointF(xsize_px, ysize_px));
+    ref4 = trFwd.map(QPointF(0, ysize_px));
 
     qDebug() << "FF" << trFwd;
     qDebug() << "RR" << trInv;
@@ -193,10 +193,10 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     QPointF pt3 = ref3;
     QPointF pt4 = ref4;
 
-    pj_transform(pjsrc,pjtar, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-    pj_transform(pjsrc,pjtar, 1, 0, &pt2.rx(), &pt2.ry(), 0);
-    pj_transform(pjsrc,pjtar, 1, 0, &pt3.rx(), &pt3.ry(), 0);
-    pj_transform(pjsrc,pjtar, 1, 0, &pt4.rx(), &pt4.ry(), 0);
+    pj_transform(pjsrc, pjtar, 1, 0, &pt1.rx(), &pt1.ry(), 0);
+    pj_transform(pjsrc, pjtar, 1, 0, &pt2.rx(), &pt2.ry(), 0);
+    pj_transform(pjsrc, pjtar, 1, 0, &pt3.rx(), &pt3.ry(), 0);
+    pj_transform(pjsrc, pjtar, 1, 0, &pt4.rx(), &pt4.ry(), 0);
 
     QPolygonF boundingBox;
     boundingBox << pt1 << pt2 << pt3 << pt4;
@@ -212,10 +212,10 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     pt3 = buf.ref3;
     pt4 = buf.ref4;
 
-    pj_transform(pjtar,pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-    pj_transform(pjtar,pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
-    pj_transform(pjtar,pjsrc, 1, 0, &pt3.rx(), &pt3.ry(), 0);
-    pj_transform(pjtar,pjsrc, 1, 0, &pt4.rx(), &pt4.ry(), 0);
+    pj_transform(pjtar, pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
+    pj_transform(pjtar, pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
+    pj_transform(pjtar, pjsrc, 1, 0, &pt3.rx(), &pt3.ry(), 0);
+    pj_transform(pjtar, pjsrc, 1, 0, &pt4.rx(), &pt4.ry(), 0);
 
     pt1 = trInv.map(pt1);
     pt2 = trInv.map(pt2);
@@ -292,7 +292,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
 
     // start to draw the map
     QPainter p(&buf.image);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
@@ -353,20 +353,20 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
                     GDALRasterBand * pBand;
                     pBand = dataset->GetRasterBand(1);
 
-                    img = QImage(QSize(imgw_used,imgh_used),QImage::Format_Indexed8);
+                    img = QImage(QSize(imgw_used, imgh_used), QImage::Format_Indexed8);
                     img.setColorTable(colortable);
 
                     err = pBand->RasterIO(GF_Read
-                                          ,x,y
-                                          ,dx_used,dy_used
-                                          ,img.bits()
-                                          ,imgw_used,imgh_used
-                                          ,GDT_Byte,0,0);
+                                          , x, y
+                                          , dx_used, dy_used
+                                          , img.bits()
+                                          , imgw_used, imgh_used
+                                          , GDT_Byte, 0, 0);
                 }
                 else
                 {
-                    img = QImage(imgw_used,imgh_used, QImage::Format_ARGB32);
-                    img.fill(qRgba(255,255,255,255));
+                    img = QImage(imgw_used, imgh_used, QImage::Format_ARGB32);
+                    img.fill(qRgba(255, 255, 255, 255));
 
                     QVector<quint8> buffer(imgw_used * imgh_used);
 
@@ -416,13 +416,13 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
 
 
                 QPolygonF l;
-                l << QPointF(x,y) << QPointF(x+dx_used,y) << QPointF(x+dx_used,y+dy_used) << QPointF(x,y+dy_used);
+                l << QPointF(x, y) << QPointF(x+dx_used, y) << QPointF(x+dx_used, y+dy_used) << QPointF(x, y+dy_used);
                 l = trFwd.map(l);
 
-                pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
-                pj_transform(pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
-                pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
-                pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+                pj_transform(pjsrc, pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
+                pj_transform(pjsrc, pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
+                pj_transform(pjsrc, pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
+                pj_transform(pjsrc, pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
 
                 drawTile(img, l, p);
             }

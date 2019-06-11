@@ -60,7 +60,7 @@ int main(int argc, char ** argv)
 
         p.setPen(Qt::black);
         p.setFont(f);
-        p.drawText(400,395,"V " VER_STR);
+        p.drawText(400, 395, "V " VER_STR);
 
         splash = new QSplashScreen(pic);
 #ifdef Q_OS_MAC

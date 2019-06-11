@@ -56,7 +56,7 @@ void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem *> & avai
         else if(filter != nullptr && !filter->shouldBeMoved(item))
         {
             listSelected->takeItem(index);
-            listSelected->insertItem(index,item->clone());
+            listSelected->insertItem(index, item->clone());
             listAvailable->addItem(item);
         }
     }
@@ -167,7 +167,7 @@ void CSelectDoubleListWidget::slotRemove() const
             }
             index++;
             listSelected->takeItem(listSelected->row(item));
-            listAvailable->insertItem(index,item);
+            listAvailable->insertItem(index, item);
         }
         else
         {
@@ -184,15 +184,15 @@ void CSelectDoubleListWidget::slotUp() const
     {
         indices << modelIndex.row();
     }
-    std::sort(indices.begin(),indices.end());
+    std::sort(indices.begin(), indices.end());
 
     int i=0;
     for (int index : indices)
     {
         if (index > i)
         {
-            listSelected->insertItem(index-1,listSelected->takeItem(index));
-            listSelected->setCurrentRow(index-1,QItemSelectionModel::Select);
+            listSelected->insertItem(index-1, listSelected->takeItem(index));
+            listSelected->setCurrentRow(index-1, QItemSelectionModel::Select);
         }
         i++;
     }
@@ -213,8 +213,8 @@ void CSelectDoubleListWidget::slotDown() const
     {
         if (index < i)
         {
-            listSelected->insertItem(index+1,listSelected->takeItem(index));
-            listSelected->setCurrentRow(index+1,QItemSelectionModel::Select);
+            listSelected->insertItem(index+1, listSelected->takeItem(index));
+            listSelected->setCurrentRow(index+1, QItemSelectionModel::Select);
         }
         i--;
     }

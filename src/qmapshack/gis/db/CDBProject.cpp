@@ -41,14 +41,14 @@ CDBProject::CDBProject(CGisListWks * parent)
     : IGisProject(eTypeDb, "", parent)
     , id(0)
 {
-    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/DBProject.png"));
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/DBProject.png"));
 }
 
 CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     : IGisProject(eTypeDb, dbName, parent)
     , id(id)
 {
-    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/DBProject.png"));
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/DBProject.png"));
     db = QSqlDatabase::database(dbName);
 
     QSqlQuery query(db);
@@ -70,11 +70,11 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         // The time format can differ by database type
         if(date.contains('T'))
         {
-            metadata.time = QDateTime::fromString(date,"yyyy-MM-ddThh:mm:ss");
+            metadata.time = QDateTime::fromString(date, "yyyy-MM-ddThh:mm:ss");
         }
         else
         {
-            metadata.time = QDateTime::fromString(date,"yyyy-MM-dd hh:mm:ss");
+            metadata.time = QDateTime::fromString(date, "yyyy-MM-dd hh:mm:ss");
         }
 
         // Still no valid date? Bad as we need it to produce an unique key.
@@ -262,7 +262,7 @@ void CDBProject::postStatus(bool updateLostFound)
     // updateItems(); <--- don't! this is causing a crash
     if(!changedItems)
     {
-        setText(CGisListWks::eColumnDecoration,autoSave ? "A" : "");
+        setText(CGisListWks::eColumnDecoration, autoSave ? "A" : "");
     }
 
     CGisDatabase::self().postEventForDb(info);

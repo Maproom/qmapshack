@@ -46,8 +46,8 @@ private:
     enum columns_t
     {
         eColNum
-        ,eColPosition
-        ,eColMax
+        , eColPosition
+        , eColMax
     };
 
     CGisItemOvlArea& area;

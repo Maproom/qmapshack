@@ -33,14 +33,14 @@ CScrOptRuler::CScrOptRuler(IMouse *mouse, CCanvas *canvas)
     comboStepDist->addItem("100m", 100);
     comboStepDist->addItem("1000m", 1000);
 
-    comboStepAngle->addItem("-",0);
-    comboStepAngle->addItem("5°",5);
-    comboStepAngle->addItem("10°",10);
-    comboStepAngle->addItem("15°",15);
-    comboStepAngle->addItem("30°",30);
-    comboStepAngle->addItem("45°",45);
-    comboStepAngle->addItem("60°",60);
-    comboStepAngle->addItem("90°",90);
+    comboStepAngle->addItem("-", 0);
+    comboStepAngle->addItem("5°", 5);
+    comboStepAngle->addItem("10°", 10);
+    comboStepAngle->addItem("15°", 15);
+    comboStepAngle->addItem("30°", 30);
+    comboStepAngle->addItem("45°", 45);
+    comboStepAngle->addItem("60°", 60);
+    comboStepAngle->addItem("90°", 90);
 
     connect(pushClose, &QPushButton::clicked, this, &CScrOptRuler::slotClose);
 
@@ -62,7 +62,7 @@ CScrOptRuler::CScrOptRuler(IMouse *mouse, CCanvas *canvas)
     comboStepAngle->setCurrentIndex(cfg.value("comboStepAngle", 0).toInt());
     cfg.endGroup(); // Ruler
 
-    move(0,0);
+    move(0, 0);
     adjustSize();
     show();
 }
@@ -84,5 +84,5 @@ CScrOptRuler::~CScrOptRuler()
 
 void CScrOptRuler::slotClose()
 {
-    mouse->IMouse::rightButtonDown(QPoint(0,0));
+    mouse->IMouse::rightButtonDown(QPoint(0, 0));
 }

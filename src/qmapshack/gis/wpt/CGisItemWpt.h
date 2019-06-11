@@ -72,7 +72,7 @@ public:
         QString type;
         QString container;
         //See ZGeocacheAttributes.txt for meanings.
-        QMap<quint8,bool> attributes;
+        QMap<quint8, bool> attributes;
         bool shortDescIsHtml = false;
         QString shortDesc;
         bool longDescIsHtml = false;
@@ -386,9 +386,9 @@ private:
     bool doBubbleSize      = false;
     bool mouseIsOverBubble = false;
     QRect rectBubble;
-    QRect rectBubbleMove {0,0,16,16};
-    QRect rectBubbleEdit {0,0,16,16};
-    QRect rectBubbleSize {0,0,16,16};
+    QRect rectBubbleMove {0, 0, 16, 16};
+    QRect rectBubbleEdit {0, 0, 16, 16};
+    QRect rectBubbleSize {0, 0, 16, 16};
 
     QPoint offsetMouse;
     QPoint offsetBubble {-320, -150};

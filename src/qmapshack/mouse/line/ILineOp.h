@@ -99,7 +99,7 @@ protected:
     QPoint lastPos;
     QPoint firstPos;
 
-    QRect rectPoint {0,0,9,9};
+    QRect rectPoint {0, 0, 9, 9};
     const QPen penBgPoint {Qt::white, 4};
     const QPen penFgPoint {Qt::red, 2};
     const QBrush brushBgPoint {Qt::white};

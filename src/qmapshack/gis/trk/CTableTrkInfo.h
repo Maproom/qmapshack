@@ -39,8 +39,8 @@ public:
     enum columns_t
     {
         eColNum
-        ,eColDesc
-        ,eColMax
+        , eColDesc
+        , eColMax
     };
 
 signals:

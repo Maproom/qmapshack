@@ -94,7 +94,7 @@ void CTableTrkInfo::updateData()
         item->setIcon(eColNum, CDraw::number(cnt++, Qt::black));
         item->setText(eColDesc, trkpt.desc);
         item->setFlags(item->flags()|Qt::ItemIsEditable);
-        item->setData(eColDesc,Qt::UserRole,trkpt.idxTotal);
+        item->setData(eColDesc, Qt::UserRole, trkpt.idxTotal);
         items << item;
     }
 

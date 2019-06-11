@@ -26,7 +26,7 @@
 #include <QtWidgets>
 
 CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility,parent)
+    : IMap(eFeatVisibility, parent)
     , filename(filename)
 {
     qDebug() << "------------------------------";
@@ -40,7 +40,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     QDataStream stream(&file);
     stream.setByteOrder(QDataStream::LittleEndian);
 
-    QByteArray charbuf(20,0);
+    QByteArray charbuf(20, 0);
     stream.readRawData(charbuf.data(), 19);
 
     if("CompeGPSRasterImage" != QString(charbuf))
@@ -107,10 +107,10 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     QPoint p1;
     QPoint p2;
     QPoint p3;
-    projXY c0 = {0,0};
-    projXY c1 = {0,0};
-    projXY c2 = {0,0};
-    projXY c3 = {0,0};
+    projXY c0 = {0, 0};
+    projXY c1 = {0, 0};
+    projXY c2 = {0, 0};
+    projXY c3 = {0, 0};
 
     bool pointsAreLongLat = true;
     QString projection;
@@ -385,7 +385,7 @@ bool CMapRMAP::setProjection(const QString& projection, const QString& datum)
         return false;
     }
 
-    char * ptr = pj_get_def(pjsrc,0);
+    char * ptr = pj_get_def(pjsrc, 0);
     qDebug() << "rmap:" << ptr;
 
     return true;
@@ -490,7 +490,7 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
 
     // ----- start drawing -----
     QPainter p(&buf.image);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
@@ -521,7 +521,7 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
             stream >> tag >> len;
 
             QImage img;
-            img.load(&file,"JPG");
+            img.load(&file, "JPG");
 
             if(img.isNull())
             {
@@ -542,10 +542,10 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
             l[3].rx() = xref1 +  idxx * tileSizeX * level.xscale;
             l[3].ry() = yref1 + (idxy * tileSizeY + imgh) * level.yscale;
 
-            pj_transform(pjsrc,pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
-            pj_transform(pjsrc,pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
-            pj_transform(pjsrc,pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
-            pj_transform(pjsrc,pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+            pj_transform(pjsrc, pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
+            pj_transform(pjsrc, pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
+            pj_transform(pjsrc, pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
+            pj_transform(pjsrc, pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
 
             drawTile(img, l, p);
         }

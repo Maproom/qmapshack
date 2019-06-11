@@ -178,7 +178,7 @@ QString CTextEditWidget::getHtml()
 
         QRegExp re1("<body.*>");
         re1.setMinimal(true);
-        str = str.replace("body>","div>").replace(re1,"<div>");
+        str = str.replace("body>", "div>").replace(re1, "<div>");
     }
 
     return str;

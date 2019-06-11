@@ -373,7 +373,7 @@ void CRouterBRouterSetupWizard::beginLocalDirectory()
 
 void CRouterBRouterSetupWizard::slotLocalToolSelectDirectory()
 {
-    setup->localDir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),"", QFileDialog::ShowDirsOnly);
+    setup->localDir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "", QFileDialog::ShowDirsOnly);
     updateLocalDirectory();
 }
 
@@ -561,7 +561,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
     textLocalInstall->setTextColor(Qt::darkGreen);
     textLocalInstall->append(tr("download %1 started").arg(downloadUrl.toString()));
     QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(downloadUrl));
-    reply->setProperty("fileName",downloadUrl.fileName());
+    reply->setProperty("fileName", downloadUrl.fileName());
 }
 
 void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * reply)
@@ -593,7 +593,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
             outfile.close();
             textLocalInstall->setTextColor(Qt::darkGreen);
             textLocalInstall->append(tr("download %1 finished").arg(outfile.fileName()));
-            const QStringList &unzippedNames = JlCompress::extractDir(outfile.fileName(),setup->localDir);
+            const QStringList &unzippedNames = JlCompress::extractDir(outfile.fileName(), setup->localDir);
             textLocalInstall->append(tr("unzipping:"));
             for (const QString unzipped : unzippedNames)
             {
@@ -728,7 +728,7 @@ void CRouterBRouterSetupWizard::updateProfiles() const
     }
 
     QList<int> selected = updateProfileView(listProfiles, profiles);
-    qSort(selected.begin(),selected.end());
+    qSort(selected.begin(), selected.end());
     toolDeleteProfile->setEnabled(!selected.isEmpty());
     toolProfileUp->setEnabled(!selected.isEmpty() && selected.first() > 0);
     toolProfileDown->setEnabled(!selected.isEmpty() && selected.last() < profiles.size()-1);

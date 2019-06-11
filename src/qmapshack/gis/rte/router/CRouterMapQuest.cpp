@@ -271,7 +271,7 @@ void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
 
     QString xmlstr = xml.toString(0);
     qDebug() << xmlstr;
-    xmlstr = xmlstr.replace("\n","");
+    xmlstr = xmlstr.replace("\n", "");
 
     QUrl url("http://open.mapquestapi.com");
     url.setPath("/directions/v2/route");
@@ -360,7 +360,7 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
     if(rte != nullptr)
     {
-        rte->setResult(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0,'f',2));
+        rte->setResult(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0, 'f', 2));
     }
 
     slotCloseStatusMsg();

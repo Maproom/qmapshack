@@ -109,7 +109,7 @@ private:
     QNetworkAccessManager * tilesDownloadManager;
     QVector<QNetworkReply*> tilesDownloadManagerReplies;
 
-    QHash<QString,CRouterBRouterTilesStatus*> tilesDownloadStatus;
+    QHash<QString, CRouterBRouterTilesStatus*> tilesDownloadStatus;
 
     bool downloading { false };
     bool downloadSelected { false };

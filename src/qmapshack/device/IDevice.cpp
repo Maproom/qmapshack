@@ -55,7 +55,7 @@ IDevice::~IDevice()
 void IDevice::mount(const QString& path)
 {
 #ifdef HAVE_DBUS
-    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Mount");
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path, "org.freedesktop.UDisks2.Filesystem", "Mount");
     QVariantMap args;
     args.insert("options", "sync");
     message << args;
@@ -71,7 +71,7 @@ void IDevice::mount(const QString& path)
 void IDevice::umount(const QString &path)
 {
 #ifdef HAVE_DBUS
-    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Unmount");
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path, "org.freedesktop.UDisks2.Filesystem", "Unmount");
     QVariantMap args;
     message << args;
     QDBusConnection::systemBus().call(message);

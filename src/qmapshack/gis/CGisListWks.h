@@ -45,9 +45,9 @@ public:
     enum column_e
     {
         eColumnIcon = 0
-        ,eColumnCheckBox = eColumnIcon
-        ,eColumnDecoration = eColumnIcon
-        ,eColumnName = 1
+        , eColumnCheckBox = eColumnIcon
+        , eColumnDecoration = eColumnIcon
+        , eColumnName = 1
     };
 
 

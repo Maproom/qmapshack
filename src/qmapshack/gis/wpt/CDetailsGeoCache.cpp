@@ -68,17 +68,17 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     //Last found is set below to only loop logs once
 
     qreal d = geocache.difficulty;
-    labelD1->setPixmap(QPixmap(d < 0.5 ? "://icons/cache/32x32/star_empty.png" : d < 1.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    labelD2->setPixmap(QPixmap(d < 1.5 ? "://icons/cache/32x32/star_empty.png" : d < 2.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    labelD3->setPixmap(QPixmap(d < 2.5 ? "://icons/cache/32x32/star_empty.png" : d < 3.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    labelD4->setPixmap(QPixmap(d < 3.5 ? "://icons/cache/32x32/star_empty.png" : d < 4.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    labelD5->setPixmap(QPixmap(d < 4.5 ? "://icons/cache/32x32/star_empty.png" : d < 5.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelD1->setPixmap(QPixmap(d < 0.5 ? "://icons/cache/32x32/star_empty.png" : d < 1.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelD2->setPixmap(QPixmap(d < 1.5 ? "://icons/cache/32x32/star_empty.png" : d < 2.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelD3->setPixmap(QPixmap(d < 2.5 ? "://icons/cache/32x32/star_empty.png" : d < 3.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelD4->setPixmap(QPixmap(d < 3.5 ? "://icons/cache/32x32/star_empty.png" : d < 4.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelD5->setPixmap(QPixmap(d < 4.5 ? "://icons/cache/32x32/star_empty.png" : d < 5.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     qreal t = geocache.terrain;
-    labelT1->setPixmap(QPixmap(t < 0.5 ? "://icons/cache/32x32/star_empty.png" : t < 1.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    labelT2->setPixmap(QPixmap(t < 1.5 ? "://icons/cache/32x32/star_empty.png" : t < 2.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    labelT3->setPixmap(QPixmap(t < 2.5 ? "://icons/cache/32x32/star_empty.png" : t < 3.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    labelT4->setPixmap(QPixmap(t < 3.5 ? "://icons/cache/32x32/star_empty.png" : t < 4.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    labelT5->setPixmap(QPixmap(t < 4.5 ? "://icons/cache/32x32/star_empty.png" : t < 5.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16,16,Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelT1->setPixmap(QPixmap(t < 0.5 ? "://icons/cache/32x32/star_empty.png" : t < 1.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelT2->setPixmap(QPixmap(t < 1.5 ? "://icons/cache/32x32/star_empty.png" : t < 2.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelT3->setPixmap(QPixmap(t < 2.5 ? "://icons/cache/32x32/star_empty.png" : t < 3.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelT4->setPixmap(QPixmap(t < 3.5 ? "://icons/cache/32x32/star_empty.png" : t < 4.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    labelT5->setPixmap(QPixmap(t < 4.5 ? "://icons/cache/32x32/star_empty.png" : t < 5.0 ? "://icons/cache/32x32/halfstar.png" : "://icons/cache/32x32/star.png").scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     checkHint->setEnabled(!geocache.hint.isEmpty());
     labelHint->setText(geocache.hint.isEmpty() ? tr("none") : tr("???"));
@@ -99,7 +99,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
             QLabel* attrLabel = new QLabel(this);//To avoid memory leak
             attrLabel->setAlignment(Qt::AlignLeft);
             attrLabel->setPixmap(QPixmap(filepath));
-            attributeHorLayout->insertWidget(0,attrLabel);
+            attributeHorLayout->insertWidget(0, attrLabel);
         }
 
         labelNoAttr->setHidden(true);
@@ -113,7 +113,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     else
     {
         QString str = geocache.shortDesc;
-        desc += "<p>" + str.replace("\n","<br/>") + "</p>";
+        desc += "<p>" + str.replace("\n", "<br/>") + "</p>";
     }
 
     if(geocache.longDescIsHtml)
@@ -123,7 +123,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     else
     {
         QString str = geocache.longDesc;
-        desc += "<p>" + str.replace("\n","<br/>") + "</p>";
+        desc += "<p>" + str.replace("\n", "<br/>") + "</p>";
     }
 
     CWebPage * webDescPage = new CWebPage(webDesc);
@@ -135,7 +135,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     for(const CGisItemWpt::geocachelog_t& log:geocache.logs)
     {
         QString thislog = log.text;
-        logs+="<p><b>"+log.date.date().toString(Qt::SystemLocaleShortDate) + ": " + log.type + tr(" by ") + log.finder + "</b></p><p>" + thislog.replace("\n","<br/>") + "</p><hr>";
+        logs+="<p><b>"+log.date.date().toString(Qt::SystemLocaleShortDate) + ": " + log.type + tr(" by ") + log.finder + "</b></p><p>" + thislog.replace("\n", "<br/>") + "</p><hr>";
         if(lastFound.isValid() == false || (log.type == "Found It" && log.date > lastFound))
         {
             lastFound=log.date;
@@ -150,7 +150,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     timerDownload = new QTimer(this);
     timerDownload->setSingleShot(true);
     connect(timerDownload,     &QTimer::timeout,       this, &CDetailsGeoCache::slotDownloadDone);
-    connect(buttonVisitWebsite,&QPushButton::clicked,  this, &CDetailsGeoCache::slotVisitWebsite);
+    connect(buttonVisitWebsite, &QPushButton::clicked,  this, &CDetailsGeoCache::slotVisitWebsite);
     connect(checkHint,         &QCheckBox::toggled,    this, &CDetailsGeoCache::slotHintChanged);
     connect(webDescPage,       &CWebPage::linkClicked, this, &CDetailsGeoCache::slotLinkClicked);
     connect(toolUpdateSpoiler, &QToolButton::clicked,  this, &CDetailsGeoCache::slotCollectSpoiler);

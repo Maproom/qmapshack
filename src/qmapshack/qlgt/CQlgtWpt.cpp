@@ -36,9 +36,9 @@ QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
     qint64 pos = dev->pos();
 
     char magic[9];
-    s.readRawData(magic,9);
+    s.readRawData(magic, 9);
 
-    if(strncmp(magic,"QLWpt   ",9))
+    if(strncmp(magic, "QLWpt   ", 9))
     {
         dev->seek(pos);
         //         throw(tr("This is not waypoint data."));
@@ -326,7 +326,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
     //---------------------------------------
     //---------------------------------------
     // write magic key
-    s.writeRawData("QLWpt   ",9);
+    s.writeRawData("QLWpt   ", 9);
 
     // calculate offset table
     quint32 offset = entries.count() * 8 + 9;

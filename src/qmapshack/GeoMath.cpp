@@ -425,9 +425,9 @@ bool GPS_Math_LineCrossesRect(const QPointF &p1, const QPointF &p2, const QRectF
 void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel, segment_t &result)
 {
     projXY p1, p2;
-    qreal dx,dy;                // delta x and y defined by p1 and p2
+    qreal dx, dy;                // delta x and y defined by p1 and p2
     qreal d_p1_p2;              // distance between p1 and p2
-    qreal x,y;                  // coord. (x,y) of the point on line defined by [p1,p2] close to pt
+    qreal x, y;                  // coord. (x,y) of the point on line defined by [p1,p2] close to pt
     qreal shortest1 = threshold;
     qreal shortest2 = threshold;
     qint32 idx11 = NOIDX, idx21 = NOIDX, idx12 = NOIDX;

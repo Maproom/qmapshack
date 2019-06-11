@@ -63,7 +63,7 @@ CDemList::CDemList(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
+    lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
     connect(treeWidget,     &CDemTreeWidget::customContextMenuRequested, this, &CDemList::slotContextMenu);
     connect(actionMoveUp,   &QAction::triggered,                         this, &CDemList::slotMoveUp);

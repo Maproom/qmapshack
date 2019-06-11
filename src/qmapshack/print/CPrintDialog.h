@@ -32,7 +32,7 @@ public:
     enum type_e
     {
         eTypePrint
-        ,eTypeImage
+        , eTypeImage
     };
 
     CPrintDialog(type_e type, const QRectF &area, CCanvas * source);

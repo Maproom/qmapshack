@@ -34,7 +34,7 @@ CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk &trk, QWidget *pare
 
 void CFilterReplaceElevation::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterReplaceElevation");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterReplaceElevation");
 
     CCanvas * canvas = comboView->currentData().value<CCanvas*>();
     if(canvas != nullptr)

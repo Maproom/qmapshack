@@ -79,12 +79,12 @@ private:
     enum tabs_t
     {
         eTabInfo
-        ,eTabStyle
-        ,eTabGraphs
-        ,eTabActivity
-        ,eTabPoints
-        ,eTabFilter
-        ,eTabHistory
+        , eTabStyle
+        , eTabGraphs
+        , eTabActivity
+        , eTabPoints
+        , eTabFilter
+        , eTabHistory
     };
 
     /**

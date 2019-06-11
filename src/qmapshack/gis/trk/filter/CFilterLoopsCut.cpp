@@ -33,7 +33,7 @@ CFilterLoopsCut::CFilterLoopsCut(CGisItemTrk &trk, QWidget * parent)
     spinBox->setSuffix(IUnit::self().baseunit);
 
     SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/LoopsCut/minLoopLength",10 * IUnit::self().basefactor).toInt() * IUnit::self().basefactor);
+    spinBox->setValue(cfg.value("TrackDetails/Filter/LoopsCut/minLoopLength", 10 * IUnit::self().basefactor).toInt() * IUnit::self().basefactor);
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterLoopsCut::slotApply);
     connect(help, &QToolButton::clicked, this, &CFilterLoopsCut::showHelp);

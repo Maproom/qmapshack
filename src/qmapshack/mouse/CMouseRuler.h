@@ -55,8 +55,8 @@ private:
     enum mode_e
     {
         eModeIdle
-        ,eModePaused
-        ,eModeEdit
+        , eModePaused
+        , eModeEdit
     };
 
     mode_e mode = eModePaused;

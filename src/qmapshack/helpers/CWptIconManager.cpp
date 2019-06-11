@@ -151,7 +151,7 @@ QPixmap CWptIconManager::loadIcon(const QString& path)
     else
     {
         QImage img = QPixmap(path).toImage().convertToFormat(QImage::Format_Indexed8);
-        img.setColor(0,qRgba(0,0,0,0));
+        img.setColor(0, qRgba(0, 0, 0, 0));
         return QPixmap::fromImage(img);
     }
 }
@@ -199,7 +199,7 @@ QPixmap CWptIconManager::getWptIconByName(const QString& name, QPointF &focus, Q
         }
 
         focus = focus * s;
-        icon  = icon.scaled(icon.size()*s,Qt::KeepAspectRatio,Qt::SmoothTransformation);
+        icon  = icon.scaled(icon.size()*s, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     }
 
     return icon;

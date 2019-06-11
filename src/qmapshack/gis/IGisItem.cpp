@@ -151,22 +151,22 @@ void IGisItem::init()
     colorMap =
     {
         {"Black",       tr("Black"),      QColor(Qt::black),        QString("://icons/8x8/bullet_black.png"),       QString("://icons/lines/line_black.png")}
-        ,{"DarkRed",     tr("Dark Red"),    QColor(Qt::darkRed),     QString("://icons/8x8/bullet_dark_red.png"),    QString("://icons/lines/line_dark_red.png")}
-        ,{"DarkGreen",   tr("Dark Green"),  QColor(Qt::darkGreen),   QString("://icons/8x8/bullet_dark_green.png"),  QString("://icons/lines/line_dark_green.png")}
-        ,{"DarkYellow",  tr("Dark Yellow"), QColor(Qt::darkYellow),  QString("://icons/8x8/bullet_dark_yellow.png"), QString("://icons/lines/line_dark_yellow.png")}
-        ,{"DarkBlue",    tr("Dark Blue"),   QColor(Qt::darkBlue),    QString("://icons/8x8/bullet_dark_blue.png"),   QString("://icons/lines/line_dark_blue.png")}
-        ,{"DarkMagenta", tr("Dark Magenta"),QColor(Qt::darkMagenta), QString("://icons/8x8/bullet_dark_magenta.png"),QString("://icons/lines/line_dark_magenta.png")}
-        ,{"DarkCyan",    tr("Dark Cyan"),   QColor(Qt::darkCyan),    QString("://icons/8x8/bullet_dark_cyan.png"),   QString("://icons/lines/line_dark_cyan.png")}
-        ,{"LightGray",   tr("Light Gray"),  QColor(Qt::lightGray),   QString("://icons/8x8/bullet_gray.png"),        QString("://icons/lines/line_gray.png")}
-        ,{"DarkGray",    tr("Dark Gray"),   QColor(Qt::darkGray),    QString("://icons/8x8/bullet_dark_gray.png"),   QString("://icons/lines/line_dark_gray.png")}
-        ,{"Red",         tr("Red"),        QColor(Qt::red),         QString("://icons/8x8/bullet_red.png"),          QString("://icons/lines/line_red.png")}
-        ,{"Green",       tr("Green"),      QColor(Qt::green),       QString("://icons/8x8/bullet_green.png"),        QString("://icons/lines/line_green.png")}
-        ,{"Yellow",      tr("Yellow"),     QColor(Qt::yellow),      QString("://icons/8x8/bullet_yellow.png"),       QString("://icons/lines/line_yellow.png")}
-        ,{"Blue",        tr("Blue"),       QColor(Qt::blue),        QString("://icons/8x8/bullet_blue.png"),         QString("://icons/lines/line_blue.png")}
-        ,{"Magenta",     tr("Magenta"),    QColor(Qt::magenta),     QString("://icons/8x8/bullet_magenta.png"),      QString("://icons/lines/line_magenta.png")}
-        ,{"Cyan",        tr("Cyan"),       QColor(Qt::cyan),        QString("://icons/8x8/bullet_cyan.png"),         QString("://icons/lines/line_cyan.png")}
-        ,{"White",       tr("White"),      QColor(Qt::white),       QString("://icons/8x8/bullet_white.png"),        QString("://icons/lines/line_white.png")}
-        ,{"Transparent", tr("Transparent"),QColor(Qt::transparent), QString(),                                       QString("://icons/lines/line_transparent.png")}
+        , {"DarkRed",     tr("Dark Red"),    QColor(Qt::darkRed),     QString("://icons/8x8/bullet_dark_red.png"),    QString("://icons/lines/line_dark_red.png")}
+        , {"DarkGreen",   tr("Dark Green"),  QColor(Qt::darkGreen),   QString("://icons/8x8/bullet_dark_green.png"),  QString("://icons/lines/line_dark_green.png")}
+        , {"DarkYellow",  tr("Dark Yellow"), QColor(Qt::darkYellow),  QString("://icons/8x8/bullet_dark_yellow.png"), QString("://icons/lines/line_dark_yellow.png")}
+        , {"DarkBlue",    tr("Dark Blue"),   QColor(Qt::darkBlue),    QString("://icons/8x8/bullet_dark_blue.png"),   QString("://icons/lines/line_dark_blue.png")}
+        , {"DarkMagenta", tr("Dark Magenta"), QColor(Qt::darkMagenta), QString("://icons/8x8/bullet_dark_magenta.png"), QString("://icons/lines/line_dark_magenta.png")}
+        , {"DarkCyan",    tr("Dark Cyan"),   QColor(Qt::darkCyan),    QString("://icons/8x8/bullet_dark_cyan.png"),   QString("://icons/lines/line_dark_cyan.png")}
+        , {"LightGray",   tr("Light Gray"),  QColor(Qt::lightGray),   QString("://icons/8x8/bullet_gray.png"),        QString("://icons/lines/line_gray.png")}
+        , {"DarkGray",    tr("Dark Gray"),   QColor(Qt::darkGray),    QString("://icons/8x8/bullet_dark_gray.png"),   QString("://icons/lines/line_dark_gray.png")}
+        , {"Red",         tr("Red"),        QColor(Qt::red),         QString("://icons/8x8/bullet_red.png"),          QString("://icons/lines/line_red.png")}
+        , {"Green",       tr("Green"),      QColor(Qt::green),       QString("://icons/8x8/bullet_green.png"),        QString("://icons/lines/line_green.png")}
+        , {"Yellow",      tr("Yellow"),     QColor(Qt::yellow),      QString("://icons/8x8/bullet_yellow.png"),       QString("://icons/lines/line_yellow.png")}
+        , {"Blue",        tr("Blue"),       QColor(Qt::blue),        QString("://icons/8x8/bullet_blue.png"),         QString("://icons/lines/line_blue.png")}
+        , {"Magenta",     tr("Magenta"),    QColor(Qt::magenta),     QString("://icons/8x8/bullet_magenta.png"),      QString("://icons/lines/line_magenta.png")}
+        , {"Cyan",        tr("Cyan"),       QColor(Qt::cyan),        QString("://icons/8x8/bullet_cyan.png"),         QString("://icons/lines/line_cyan.png")}
+        , {"White",       tr("White"),      QColor(Qt::white),       QString("://icons/8x8/bullet_white.png"),        QString("://icons/lines/line_white.png")}
+        , {"Transparent", tr("Transparent"), QColor(Qt::transparent), QString(),                                       QString("://icons/lines/line_transparent.png")}
     };
 }
 
@@ -198,7 +198,7 @@ QMenu * IGisItem::getColorMenu(const QString& title, QObject * obj, const char *
     QAction * action;
     for(qint32 i = 0; i < IGisItem::colorMap.size(); i++)
     {
-        QPixmap pixmap(16,16);
+        QPixmap pixmap(16, 16);
         pixmap.fill(IGisItem::colorMap[i].color);
         action = menu->addAction(QIcon(pixmap), IGisItem::colorMap[i].label);
         action->setProperty("colorIdx", i);
@@ -330,7 +330,7 @@ QString IGisItem::getNameEx() const
 void IGisItem::updateDecoration(quint32 enable, quint32 disable)
 {
     // update text and icon
-    setToolTip(CGisListWks::eColumnName,getInfo(IGisItem::eFeatureShowName));
+    setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
     setText(CGisListWks::eColumnName, getName());
     setSymbol();
 
@@ -350,7 +350,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     }
 
     // set marks in column 1
-    quint32 mask = data(1,Qt::UserRole).toUInt();
+    quint32 mask = data(1, Qt::UserRole).toUInt();
     mask |=  enable;
     mask &= ~disable;
     setData(1, Qt::UserRole, mask);
@@ -680,17 +680,17 @@ void IGisItem::showIcon()
     {
         const int & width = icon.width();
         const int & height = icon.height();
-        displayIcon = QPixmap(width,height);
+        displayIcon = QPixmap(width, height);
         displayIcon.fill(Qt::transparent);
         QPainter painter(&displayIcon);
-        painter.drawPixmap(0,0,icon);
-        painter.drawPixmap(width*0.4,height*0.4,QPixmap("://icons/48x48/NoGo.png").scaled(width*0.6,height*0.6,Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        painter.drawPixmap(0, 0, icon);
+        painter.drawPixmap(width*0.4, height*0.4, QPixmap("://icons/48x48/NoGo.png").scaled(width*0.6, height*0.6, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     }
     else
     {
         displayIcon = icon;
     }
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,displayIcon);
+    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon, displayIcon);
 }
 
 
@@ -984,14 +984,14 @@ void IGisItem::setNogoFlag(bool yes)
 const QBrush& IGisItem::getNogoTextureBrush()
 {
     static QBrush texture = []() -> QBrush {
-                                QPixmap texture(40,40);
-                                QColor color = QColor(255,0,0,77);
+                                QPixmap texture(40, 40);
+                                QColor color = QColor(255, 0, 0, 77);
                                 texture.fill(color);
                                 QPainter painter(&texture);
-                                QPixmap nogo = QPixmap("://icons/48x48/NoGo.png").scaled(14,14,Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                                QPixmap nogo = QPixmap("://icons/48x48/NoGo.png").scaled(14, 14, Qt::KeepAspectRatio, Qt::SmoothTransformation);
                                 painter.setOpacity(0.5);
-                                painter.drawPixmap(0,0,nogo);
-                                painter.drawPixmap(20,20,nogo);
+                                painter.drawPixmap(0, 0, nogo);
+                                painter.drawPixmap(20, 20, nogo);
                                 return QBrush(texture);
                             } ();
     return texture;

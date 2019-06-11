@@ -31,7 +31,7 @@
 CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     : IMouse(gis, canvas, mouse)
 {
-    cursor      = QCursor(QPixmap("://cursors/cursorSelectRange.png"),0,0);
+    cursor      = QCursor(QPixmap("://cursors/cursorSelectRange.png"), 0, 0);
     key         = trk.getKey();
 
     // switch to full mode to show deleted (hidden) track points, too
@@ -62,7 +62,7 @@ void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
         if(anchor != NOPOINTF)
         {
             p.setPen(Qt::darkBlue);
-            p.setBrush(QColor(255,255,255,200));
+            p.setBrush(QColor(255, 255, 255, 200));
             p.drawEllipse(anchor, 6, 6);
 
             QPixmap bullet("://icons/8x8/bullet_magenta.png");

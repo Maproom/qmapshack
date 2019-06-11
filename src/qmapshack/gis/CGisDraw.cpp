@@ -51,14 +51,14 @@ void CGisDraw::drawt(buffer_t& currentBuffer)
     convertRad2Px(pp);
 
 
-    QRectF rect(QPointF(left,top), QPointF(right, bottom));
+    QRectF rect(QPointF(left, top), QPointF(right, bottom));
 
     QPolygonF viewport;
     viewport << pt1 << pt2 << pt3 << pt4;
 
     QPainter p(&currentBuffer.image);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
     p.translate(-pp);
 
-    CGisWorkspace::self().draw(p,viewport, this);
+    CGisWorkspace::self().draw(p, viewport, this);
 }

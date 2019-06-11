@@ -81,11 +81,11 @@ void CDBItem::updateAge()
         // The time format can differ by database type
         if(date.contains('T'))
         {
-            timestamp = QDateTime::fromString(date,"yyyy-MM-ddThh:mm:ss");
+            timestamp = QDateTime::fromString(date, "yyyy-MM-ddThh:mm:ss");
         }
         else
         {
-            timestamp = QDateTime::fromString(date,"yyyy-MM-dd hh:mm:ss");
+            timestamp = QDateTime::fromString(date, "yyyy-MM-dd hh:mm:ss");
         }
 
         if(timestamp.isValid())

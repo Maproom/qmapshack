@@ -27,7 +27,7 @@
 CHistoryListWidget::CHistoryListWidget(QWidget *parent)
     : QListWidget(parent)
 {
-    setIconSize(QSize(32,32));
+    setIconSize(QSize(32, 32));
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, &CHistoryListWidget::itemSelectionChanged,       this, &CHistoryListWidget::slotSelectionChanged);
     connect(this, &CHistoryListWidget::customContextMenuRequested, this, &CHistoryListWidget::slotContextMenu);

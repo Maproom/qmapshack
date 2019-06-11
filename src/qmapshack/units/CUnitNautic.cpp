@@ -64,7 +64,7 @@ void CUnitNautic::meter2speed(qreal meter, QString& val, QString& unit) const /*
     }
     else
     {
-        val.sprintf("%1.2f",meter * speedfactor);
+        val.sprintf("%1.2f", meter * speedfactor);
         unit = speedunit;
     }
 }

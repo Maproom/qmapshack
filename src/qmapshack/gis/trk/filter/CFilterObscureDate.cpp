@@ -28,7 +28,7 @@ CFilterObscureDate::CFilterObscureDate(CGisItemTrk &trk, QWidget *parent)
     setupUi(this);
 
     SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/ObscureTimestamp/delta",0).toInt());
+    spinBox->setValue(cfg.value("TrackDetails/Filter/ObscureTimestamp/delta", 0).toInt());
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterObscureDate::slotApply);
 }
@@ -41,7 +41,7 @@ CFilterObscureDate::~CFilterObscureDate()
 
 void CFilterObscureDate::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterObscureDate");
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterObscureDate");
     trk.filterObscureDate(spinBox->value());
     CCanvas::restoreOverrideCursor("CFilterObscureDate");
 }

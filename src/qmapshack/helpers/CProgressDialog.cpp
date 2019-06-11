@@ -133,7 +133,7 @@ void CProgressDialog::setValue(int val)
         QApplication::processEvents();
     }
     progressBar->setValue(val);
-    labelTime->setText(tr("Elapsed time: %1 seconds.").arg(time.elapsed()/1000.0, 0,'f',0));
+    labelTime->setText(tr("Elapsed time: %1 seconds.").arg(time.elapsed()/1000.0, 0, 'f', 0));
 }
 
 bool CProgressDialog::wasCanceled()

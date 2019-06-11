@@ -30,7 +30,7 @@ CExportDatabase::CExportDatabase(quint64 id, QSqlDatabase &db, QWidget *parent)
 
     SETTINGS;
     cfg.beginGroup("ExportDB");
-    labelPath->setText(cfg.value("path","-").toString());
+    labelPath->setText(cfg.value("path", "-").toString());
     checkGpx11->setChecked(cfg.value("asGpx11", false).toBool());
     cfg.endGroup();
 

@@ -269,7 +269,7 @@ void CGisItemRte::deriveSecondaryData()
         }
     }
 
-    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
+    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD, south * DEG_TO_RAD));
 }
 
 void CGisItemRte::edit()
@@ -345,7 +345,7 @@ void CGisItemRte::toTrack()
 
 void CGisItemRte::setSymbol()
 {
-    IGisItem::setIcon(QPixmap("://icons/48x48/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    IGisItem::setIcon(QPixmap("://icons/48x48/Route.png").scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void CGisItemRte::setName(const QString& str)
@@ -547,7 +547,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     QPointF p2 = viewport[2];
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);
-    QRectF extViewport(p1,p2);
+    QRectF extViewport(p1, p2);
 
     QVector<qint32>  points;
     QVector<QPixmap> icons;
@@ -591,11 +591,11 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         switch(points[i])
         {
         case 1:
-            p.drawEllipse(line[i],7,7);
+            p.drawEllipse(line[i], 7, 7);
             break;
 
         case 2:
-            p.drawEllipse(line[i],5,5);
+            p.drawEllipse(line[i], 5, 5);
             break;
         }
     }
@@ -620,7 +620,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         {
         case 1:
             p.setBrush(Qt::red);
-            p.drawEllipse(line[i],5,5);
+            p.drawEllipse(line[i], 5, 5);
             if(focus[n] != NOPOINTF)
             {
                 p.drawPixmap(line[i] - focus[n], icons[n]);
@@ -630,7 +630,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
         case 2:
             p.setBrush(Qt::cyan);
-            p.drawEllipse(line[i],3,3);
+            p.drawEllipse(line[i], 3, 3);
             break;
         }
     }
@@ -667,15 +667,15 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
         QFontMetrics fm(f);
-        QRect rectText = fm.boundingRect(QRect(0,0,500,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
+        QRect rectText = fm.boundingRect(QRect(0, 0, 500, 0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
         rectText.adjust(-5, -5, 5, 5);
-        rectText.moveBottomLeft(anchor.toPoint() + QPoint(-50,-50));
+        rectText.moveBottomLeft(anchor.toPoint() + QPoint(-50, -50));
 
         p.setFont(f);
         CDraw::bubble(p, rectText, anchor.toPoint(), 18 /* px */, 21 /* px */);
 
         p.save();
-        p.translate(5,5);
+        p.translate(5, 5);
         p.setPen(Qt::darkBlue);
         p.drawText(rectText, str);
         p.restore();
@@ -700,7 +700,7 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
         //p.drawPixmap(pt, rtept.icon);
 
         QRectF rect = fm.boundingRect(rtept.name);
-        rect.adjust(-2,-2,2,2);
+        rect.adjust(-2, -2, 2, 2);
 
         // place label on top
         rect.moveCenter(pt + QPointF(rtept.icon.width()/2, -fm.height()));
@@ -739,7 +739,7 @@ void CGisItemRte::drawHighlight(QPainter& p)
         return;
     }
 
-    p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(QColor(255, 0, 0, 100), 11, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(line);
 }
 
@@ -1257,7 +1257,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
             }
         }
         routePoint.ele = shape[startIdx].ele;
-        routePoint.subpts = shape.mid(startIdx,minDistIdx-startIdx);
+        routePoint.subpts = shape.mid(startIdx, minDistIdx-startIdx);
         routePoint.fakeSubpt.lon = routePoint.lon;
         routePoint.fakeSubpt.lat = routePoint.lat;
         routePoint.fakeSubpt.ele = routePoint.ele;

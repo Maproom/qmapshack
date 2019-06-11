@@ -172,7 +172,7 @@ void ITrack::draw()
 
     p.setPen(CDraw::penBorderBlack);
     p.setBrush(QColor(255, 255, 255, 255));
-    PAINT_ROUNDED_RECT(p, buffer.rect().adjusted(1,1,-1,-1));
+    PAINT_ROUNDED_RECT(p, buffer.rect().adjusted(1, 1, -1, -1));
 
     p.setPen(QPen(Qt::darkBlue, 2/scale.x()));
     p.scale(scale.x(), scale.y());

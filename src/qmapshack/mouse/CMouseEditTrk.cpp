@@ -85,7 +85,7 @@ void CMouseEditTrk::slotCopyToOrig()
 
 void CMouseEditTrk::slotCopyToNew()
 {
-    canvas->reportStatus(key.item,"");
+    canvas->reportStatus(key.item, "");
 
     if(points.size() < 2)
     {

@@ -65,6 +65,6 @@ void CPlotTrack::paintEvent(QPaintEvent * e)
     p.setBrush(Qt::red);
     p.scale(scale.x(), scale.y());
     p.translate(-xoff, -yoff);
-    p.drawEllipse(pos,5/scale.x(),5/scale.x());
+    p.drawEllipse(pos, 5/scale.x(), 5/scale.x());
 }
 

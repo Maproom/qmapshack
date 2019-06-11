@@ -29,7 +29,7 @@ CFilterSpeedHike::CFilterSpeedHike(QWidget *parent)
     //  - Path:                        4.5 / 500 / 700
     //  - Difficult Path:              3.6 / 400 / 560
     //  - Off Path or Rocky Terrain:   2.9 / 320 / 450
-    ,hikingTypeDefaults
+    , hikingTypeDefaults
     {
     {
         tr("Road or Track")                  // Fix: name

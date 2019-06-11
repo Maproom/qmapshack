@@ -26,16 +26,16 @@
 
 static const QList<extension_t> extensions =
 {
-    {"Latitude",           0.0000001,      0.0,        ASSIGN_VALUE(lat,NIL)}   // unit [°]
-    ,{"Longitude",          0.0000001,      0.0,        ASSIGN_VALUE(lon,NIL)}  // unit [°]
-    ,{"Altitude",           1.0,            0.0,        ASSIGN_VALUE(ele,NIL)}  // unit [m]
-    ,{"VerticalSpeed",      0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"],NIL)}                  // unit [m/h]
-    ,{"HR",                 1.0,            0.0,        ASSIGN_VALUE(extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"],qRound)}   // unit [bpm]
-    ,{"Cadence",            1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:cadence"],NIL)}                        // unit [bpm]
-    ,{"Temperature",        0.1,            0.0,        ASSIGN_VALUE(extensions["gpxdata:temp"],NIL)}                           // unit [°C]
-    ,{"SeaLevelPressure",   0.1,            0.0,        ASSIGN_VALUE(extensions["gpxdata:seaLevelPressure"],NIL)}               // unit [hPa]
-    ,{"Speed",              0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:speed"],NIL)}                          // unit [m/s]
-    ,{"EnergyConsumption",  0.1,            0.0,        ASSIGN_VALUE(extensions["gpxdata:energy"],NIL)}                         // unit [kCal/min]
+    {"Latitude",           0.0000001,      0.0,        ASSIGN_VALUE(lat, NIL)}   // unit [°]
+    , {"Longitude",          0.0000001,      0.0,        ASSIGN_VALUE(lon, NIL)}  // unit [°]
+    , {"Altitude",           1.0,            0.0,        ASSIGN_VALUE(ele, NIL)}  // unit [m]
+    , {"VerticalSpeed",      0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"], NIL)}                  // unit [m/h]
+    , {"HR",                 1.0,            0.0,        ASSIGN_VALUE(extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"], qRound)}   // unit [bpm]
+    , {"Cadence",            1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:cadence"], NIL)}                        // unit [bpm]
+    , {"Temperature",        0.1,            0.0,        ASSIGN_VALUE(extensions["gpxdata:temp"], NIL)}                           // unit [°C]
+    , {"SeaLevelPressure",   0.1,            0.0,        ASSIGN_VALUE(extensions["gpxdata:seaLevelPressure"], NIL)}               // unit [hPa]
+    , {"Speed",              0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:speed"], NIL)}                          // unit [m/s]
+    , {"EnergyConsumption",  0.1,            0.0,        ASSIGN_VALUE(extensions["gpxdata:energy"], NIL)}                         // unit [kCal/min]
 };
 
 

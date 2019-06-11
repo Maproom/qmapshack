@@ -145,7 +145,7 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
     p.setBrush(Qt::yellow);
     QPixmap icon("://icons/16x16/Aircraft.png");
     QRect rectIcon = icon.rect();
-    rectIcon.moveCenter(QPoint(0,0));
+    rectIcon.moveCenter(QPoint(0, 0));
 
     for(const QString& key : aircrafts.keys())
     {
@@ -169,8 +169,8 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
         {
             QString name = aircraft.callsign.isEmpty() ? tr("unkn.") : aircraft.callsign;
             QRect rectLabel = fm.boundingRect(name);
-            rectLabel.moveCenter(aircraft.point.toPoint() + QPoint(0,-8));
-            rectLabel.adjust(-1,-1,1,1);
+            rectLabel.moveCenter(aircraft.point.toPoint() + QPoint(0, -8));
+            rectLabel.adjust(-1, -1, 1, 1);
             if(!CDraw::doesOverlap(blockedAreas, rectLabel))
             {
                 CDraw::text(name, p, rectLabel.center(), Qt::darkBlue);
@@ -219,10 +219,10 @@ void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
         QTextDocument doc;
         doc.setHtml(text);
         doc.setTextWidth(300);
-        QRectF rectText(QPointF(0,0),doc.size());
+        QRectF rectText(QPointF(0, 0), doc.size());
 
-        rectText.moveTopLeft(aircraft.point + QPointF(32,0));
-        QRectF rectFrame = rectText.adjusted(-5,-5,5,5);
+        rectText.moveTopLeft(aircraft.point + QPointF(32, 0));
+        QRectF rectFrame = rectText.adjusted(-5, -5, 5, 5);
 
         p.setPen(CDraw::penBorderGray);
         p.setBrush(CDraw::brushBackWhite);
@@ -333,7 +333,7 @@ void CRtOpenSky::slotRequestFinished(QNetworkReply* reply)
             aircraft.spi            = jsonStateArray[15].toBool();
             aircraft.positionSource = jsonStateArray[16].toInt();
 
-            aircraft.pos            = QPointF(aircraft.longitude,aircraft.latitude);
+            aircraft.pos            = QPointF(aircraft.longitude, aircraft.latitude);
             aircrafts[key] = aircraft;
         }
     }

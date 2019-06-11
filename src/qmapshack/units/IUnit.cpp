@@ -516,7 +516,7 @@ void IUnit::setUnitType(type_e t, QObject * parent)
     }
 
     QSettings cfg;
-    cfg.setValue("Units/type",t);
+    cfg.setValue("Units/type", t);
 }
 
 void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
@@ -528,7 +528,7 @@ void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
         return;
     }
 
-    val.sprintf("%2.2f",meter * speedfactor);
+    val.sprintf("%2.2f", meter * speedfactor);
     unit = speedunit;
 }
 
@@ -541,7 +541,7 @@ void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit) const
     }
     else
     {
-        QTime time(0,0,0);
+        QTime time(0, 0, 0);
         quint32 days  = ttime / 86400;
 
         time = time.addSecs(ttime);
@@ -676,7 +676,7 @@ QByteArray IUnit::pos2timezone(const QPointF& pos)
     int x = qRound(2048.0 / 360.0 * (180.0 + pos.x() * RAD_TO_DEG));
     int y = qRound(1024.0 / 180.0 * (90.0  - pos.y() * RAD_TO_DEG));
 
-    QRgb rgb = imgTimezone.pixel(x,y);
+    QRgb rgb = imgTimezone.pixel(x, y);
 
     if(qRed(rgb) == 0 && qGreen(rgb) == 0)
     {
@@ -704,15 +704,15 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
     {
     case eCoordFormat1:
     {
-        qint32 degN,degE;
-        qreal minN,minE;
+        qint32 degN, degE;
+        qreal minN, minE;
 
         bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
         bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
 
         const QString &lat = signLat ? "S" : "N";
         const QString &lng = signLon ? "W" : "E";
-        str.sprintf("%s%02d° %06.3f %s%03d° %06.3f",lat.toUtf8().data(),qAbs(degN),minN,lng.toUtf8().data(),qAbs(degE),minE);
+        str.sprintf("%s%02d° %06.3f %s%03d° %06.3f", lat.toUtf8().data(), qAbs(degN), minN, lng.toUtf8().data(), qAbs(degE), minE);
         break;
     }
 
@@ -720,14 +720,14 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
     {
         const QString &lat = (y < 0) ? "S" : "N";
         const QString &lng = (x < 0) ? "W" : "E";
-        str.sprintf("%s%02.6f° %s%03.6f°",lat.toUtf8().data(),qAbs(y),lng.toUtf8().data(),qAbs(x));
+        str.sprintf("%s%02.6f° %s%03.6f°", lat.toUtf8().data(), qAbs(y), lng.toUtf8().data(), qAbs(x));
         break;
     }
 
     case eCoordFormat3:
     {
-        qint32 degN,degE;
-        qreal minN,minE;
+        qint32 degN, degE;
+        qreal minN, minE;
 
         bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
         bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
@@ -737,7 +737,7 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
 
         const QString &lat = signLat ? "S" : "N";
         const QString &lng = signLon ? "W" : "E";
-        str.sprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''",lat.toUtf8().data(),qAbs(degN),qFloor(minN),secN,lng.toUtf8().data(),qAbs(degE),qFloor(minE),secE);
+        str.sprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''", lat.toUtf8().data(), qAbs(degN), qFloor(minN), secN, lng.toUtf8().data(), qAbs(degE), qFloor(minE), secE);
         break;
     }
     }
@@ -808,13 +808,13 @@ bool IUnit::strToDeg(const QString& str, qreal& lon, qreal& lat)
     }
     else
     {
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(),tr("Error"),tr("Bad position format. Must be: \"[N|S] ddd mm.sss [W|E] ddd mm.sss\" or \"[N|S] ddd.ddd [W|E] ddd.ddd\""),QMessageBox::Ok,QMessageBox::NoButton);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error"), tr("Bad position format. Must be: \"[N|S] ddd mm.sss [W|E] ddd mm.sss\" or \"[N|S] ddd.ddd [W|E] ddd.ddd\""), QMessageBox::Ok, QMessageBox::NoButton);
         return false;
     }
 
     if(fabs(lon) > 180.0 || fabs(lat) > 90.0)
     {
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(),tr("Error"),tr("Position values out of bounds. "),QMessageBox::Ok,QMessageBox::NoButton);
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error"), tr("Position values out of bounds. "), QMessageBox::Ok, QMessageBox::NoButton);
         return false;
     }
 

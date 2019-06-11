@@ -30,7 +30,7 @@ public:
     void setIcon(const QString& str);
 
     enum geocacheservice_e {eGC, eOC, eTC};
-    enum type_e {eEnd,eBase,eImage,eGeoCache};
+    enum type_e {eEnd, eBase, eImage, eGeoCache};
 
     struct geocachelog_t
     {

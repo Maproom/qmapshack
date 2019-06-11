@@ -317,7 +317,7 @@ QDataStream& operator>>(QDataStream& stream, CGisItemWpt::geocache_t& geocache)
 QDataStream& operator<<(QDataStream& stream, const CGisItemWpt::image_t& image)
 {
     QBuffer imgBuf;
-    image.pixmap.save(&imgBuf,"JPEG");
+    image.pixmap.save(&imgBuf, "JPEG");
 
     stream << VER_IMAGE;
     stream << imgBuf.data();
@@ -341,7 +341,7 @@ QDataStream& operator>>(QDataStream& stream, CGisItemWpt::image_t& image)
     stream >> image.filePath;
     stream >> image.fileName;
 
-    image.pixmap.load(&imgBuf,"JPEG");
+    image.pixmap.load(&imgBuf, "JPEG");
 
     return stream;
 }
@@ -552,7 +552,7 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
 
     stream.writeRawData(MAGIC_TRK, MAGIC_SIZE);
     stream << VER_TRK;
-    stream << qCompress(buffer,9);
+    stream << qCompress(buffer, 9);
     return stream;
 }
 
@@ -564,9 +564,9 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     qint64 pos = dev->pos();
 
     char magic[10];
-    stream.readRawData(magic,MAGIC_SIZE);
+    stream.readRawData(magic, MAGIC_SIZE);
 
-    if(strncmp(magic,MAGIC_TRK,MAGIC_SIZE))
+    if(strncmp(magic, MAGIC_TRK, MAGIC_SIZE))
     {
         dev->seek(pos);
         return stream;
@@ -652,9 +652,9 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     qint64 pos = dev->pos();
 
     char magic[10];
-    stream.readRawData(magic,MAGIC_SIZE);
+    stream.readRawData(magic, MAGIC_SIZE);
 
-    if(strncmp(magic,MAGIC_WPT,MAGIC_SIZE))
+    if(strncmp(magic, MAGIC_WPT, MAGIC_SIZE))
     {
         dev->seek(pos);
         return stream;
@@ -708,7 +708,7 @@ QDataStream& CGisItemWpt::operator>>(QDataStream& stream) const
 
     stream.writeRawData(MAGIC_WPT, MAGIC_SIZE);
     stream << VER_WPT;
-    stream << qCompress(buffer,9);
+    stream << qCompress(buffer, 9);
 
     return stream;
 }
@@ -721,9 +721,9 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream)
     qint64 pos = dev->pos();
 
     char magic[10];
-    stream.readRawData(magic,MAGIC_SIZE);
+    stream.readRawData(magic, MAGIC_SIZE);
 
-    if(strncmp(magic,MAGIC_RTE,MAGIC_SIZE))
+    if(strncmp(magic, MAGIC_RTE, MAGIC_SIZE))
     {
         dev->seek(pos);
         return stream;
@@ -795,7 +795,7 @@ QDataStream& CGisItemRte::operator>>(QDataStream& stream) const
 
     stream.writeRawData(MAGIC_RTE, MAGIC_SIZE);
     stream << VER_RTE;
-    stream << qCompress(buffer,9);
+    stream << qCompress(buffer, 9);
 
     return stream;
 }
@@ -808,9 +808,9 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
     qint64 pos = dev->pos();
 
     char magic[10];
-    stream.readRawData(magic,MAGIC_SIZE);
+    stream.readRawData(magic, MAGIC_SIZE);
 
-    if(strncmp(magic,MAGIC_AREA,MAGIC_SIZE))
+    if(strncmp(magic, MAGIC_AREA, MAGIC_SIZE))
     {
         dev->seek(pos);
         return stream;
@@ -873,7 +873,7 @@ QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream) const
 
     stream.writeRawData(MAGIC_AREA, MAGIC_SIZE);
     stream << VER_AREA;
-    stream << qCompress(buffer,9);
+    stream << qCompress(buffer, 9);
 
     return stream;
 }
@@ -885,9 +885,9 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     qint64 pos = dev->pos();
 
     char magic[10];
-    stream.readRawData(magic,MAGIC_SIZE);
+    stream.readRawData(magic, MAGIC_SIZE);
 
-    if(strncmp(magic,MAGIC_PROJ,MAGIC_SIZE))
+    if(strncmp(magic, MAGIC_PROJ, MAGIC_SIZE))
     {
         dev->seek(pos);
         return stream;
@@ -1023,7 +1023,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << quint8(item->data(1, Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
         stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
@@ -1036,7 +1036,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << quint8(item->data(1, Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
         stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
@@ -1049,7 +1049,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << quint8(item->data(1, Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
         stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
@@ -1062,7 +1062,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
         stream << VER_ITEM;
         stream << quint8(item->type());
         stream << item->getHistory();
-        stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << quint8(item->data(1, Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
         stream << item->getLastDatabaseHash();
     }
 
@@ -1076,9 +1076,9 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
     qint64 pos = dev->pos();
 
     char magic[10];
-    stream.readRawData(magic,MAGIC_SIZE);
+    stream.readRawData(magic, MAGIC_SIZE);
 
-    if(strncmp(magic,MAGIC_PROJ,MAGIC_SIZE))
+    if(strncmp(magic, MAGIC_PROJ, MAGIC_SIZE))
     {
         dev->seek(pos);
         return stream;

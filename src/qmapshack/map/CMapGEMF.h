@@ -32,7 +32,7 @@ private:
     const quint32 MAX_ZOOM_LEVEL = 21;
     const quint32 MIN_ZOOM_LEVEL = 0;
 
-    QImage getTile(const quint32 col, const quint32 row,const quint32 z);
+    QImage getTile(const quint32 col, const quint32 row, const quint32 z);
     quint64 getFilenameFromAddress(const quint64 offset, QString &filename );
 
     struct source_t

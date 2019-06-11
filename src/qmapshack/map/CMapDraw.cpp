@@ -279,7 +279,7 @@ void CMapDraw::loadConfig(QSettings& cfg) /* override */
     {
         restoreActiveMapsList(cfg.value("active", "").toStringList());
     }
-    int idx = cfg.value("zoomIndex",zoomIndex).toInt();
+    int idx = cfg.value("zoomIndex", zoomIndex).toInt();
     cfg.endGroup();
 
     zoom(idx);

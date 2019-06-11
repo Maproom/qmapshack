@@ -230,7 +230,7 @@ void CGisItemOvlArea::deriveSecondaryData()
         }
     }
 
-    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
+    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD, south * DEG_TO_RAD));
 
     QPolygonF line(area.pts.size());
     for(int i = 1; i < area.pts.size(); i++)
@@ -316,7 +316,7 @@ void CGisItemOvlArea::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QR
     }
     QPointF pt  = getPolygonCentroid(polygonArea);
     QRectF rect = fm.boundingRect(area.name);
-    rect.adjust(-2,-2,2,2);
+    rect.adjust(-2, -2, 2, 2);
     rect.moveCenter(pt);
 
     CDraw::text(getName(), p, pt, Qt::darkBlue);
@@ -332,7 +332,7 @@ void CGisItemOvlArea::drawHighlight(QPainter& p)
         return;
     }
     p.setBrush(Qt::NoBrush);
-    p.setPen(QPen(QColor(255,0,0,100),11,Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(QColor(255, 0, 0, 100), 11, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolygon(polygonArea);
 }
 
@@ -355,7 +355,7 @@ QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)
     x = x / len;
     y = y / len;
 
-    return QPointF(x,y);
+    return QPointF(x, y);
 }
 
 IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse)
@@ -553,5 +553,5 @@ void CGisItemOvlArea::setIcon(const QString& c)
     QPixmap mask( icon.size() );
     mask.fill( str2color(c) );
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
-    IGisItem::setIcon(mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    IGisItem::setIcon(mask.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }

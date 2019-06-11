@@ -1905,9 +1905,11 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     for(const QPolygonF &l : lines)
     {
         p.drawPolyline(l);
-        if(!isNogo() && showArrows.val().toBool())
+        const QRectF& bounding = l.boundingRect();
+        auto area = bounding.width() * bounding.height();
+        if(!isNogo() && showArrows.val().toBool() && (area > (100 * 100)))
         {
-            CDraw::arrows(l, extViewport, p, 2, 80, lineScale.val().toDouble());
+            CDraw::arrows(l, extViewport, p, 2, 120, lineScale.val().toDouble());
         }
     }
 

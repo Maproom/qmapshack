@@ -23,102 +23,102 @@
 <context>
     <name>CActivityTrk</name>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="52"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="53"/>
         <source>Foot</source>
         <translation>A piedi</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="53"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="54"/>
         <source>Bicycle</source>
         <translation>Bicicletta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="54"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="55"/>
         <source>Motor Bike</source>
         <translation>Motocicletta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="55"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="56"/>
         <source>Car</source>
         <translation>Automobile</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="56"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="57"/>
         <source>Cable Car</source>
         <translation>Funivia</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="57"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="58"/>
         <source>Swim</source>
         <translation>Nuoto</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="58"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
         <source>Ship</source>
         <translation>In barca</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="60"/>
         <source>Aeronautic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="60"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="61"/>
         <source>Ski/Winter</source>
         <translation>Sci</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="102"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="105"/>
         <source>No Activity</source>
         <translation>Nessuna</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="257"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="258"/>
         <source>Total</source>
         <translation>Totale</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="287"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="288"/>
         <source>Ascent:</source>
         <translation>Ascesa:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="311"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="312"/>
         <source>Descent:</source>
         <translation>Discesa:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="61"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="62"/>
         <source>Public Transport</source>
         <translation>Trasporti publici</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="98"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="101"/>
         <source>Set Track Activity</source>
         <translation type="unfinished">Modifica l&apos;attività</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="263"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="264"/>
         <source>Distance:</source>
         <translation>Distanza:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="335"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="336"/>
         <source>Speed Moving:</source>
         <translation>Velocità in movimento:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="359"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="360"/>
         <source>Speed Total:</source>
         <translation>Velocità complessiva:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="383"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="384"/>
         <source>Time Moving:</source>
         <translation>Tempo in movimento:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="407"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="408"/>
         <source>Time Total:</source>
         <translation>Tempo complessivo:</translation>
     </message>
@@ -201,7 +201,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1060"/>
+        <location filename="../canvas/CCanvas.cpp" line="1062"/>
         <source>Setup Map Background</source>
         <translation>Impostazione sfondo mappa</translation>
     </message>
@@ -737,7 +737,7 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
         <translation>Figura%1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1107"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1117"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
@@ -1509,21 +1509,21 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>In movimento: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1471"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1484"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1583"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1627"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1766"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1496"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1509"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1608"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1652"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1792"/>
         <source>track</source>
         <translation>traccia</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1718"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1744"/>
         <source>Hide point %1.</source>
         <translation>Punti nascosti %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1722"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1748"/>
         <source>Hide points %1..%2.</source>
         <translation>Punti nascosti %1..%2.</translation>
     </message>
@@ -1535,13 +1535,13 @@ You can modify both parameters to customize the behavior of the filter. For the 
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1975"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2003"/>
         <source>min.</source>
         <translation>min.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1975"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2003"/>
         <source>max.</source>
         <translation>max.</translation>
     </message>
@@ -1631,72 +1631,72 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>, Tempo: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1530"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1555"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Rimossi %1..%2 punti in modo permanente</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1543"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1568"/>
         <source>Track Point Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1544"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1569"/>
         <source>Enter some text to be attached to this track point:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1553"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1578"/>
         <source>Add track point desc.: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1563"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1588"/>
         <source>Changed track point desc.: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1573"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1598"/>
         <source>Removed track point desc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1751"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1777"/>
         <source>Show points.</source>
         <translation>Visualizza punti (nascosti).</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2441"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2469"/>
         <source>Changed name</source>
         <translation>Nome cambiato</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2447"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2475"/>
         <source>Changed comment</source>
         <translation>Cambiato commento</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2453"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2481"/>
         <source>Changed description</source>
         <translation>Cambiata descrizione</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2459"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2487"/>
         <source>Changed links</source>
         <translation>Cambiato collegamento</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2469"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2497"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Cambiata l&apos;elevazione dei punti da %1 a %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2492"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2520"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Cambiata l&apos;attività a &apos;%1&apos; tracce complete.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2530"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2558"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Cambiata l&apos;attività a &apos;%1&apos; nell&apos;intervallo (%2..%3).</translation>
     </message>
@@ -2857,69 +2857,69 @@ linea %2, colonna %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="600"/>
+        <location filename="../CMainWindow.cpp" line="601"/>
         <source>Select folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1015"/>
+        <location filename="../CMainWindow.cpp" line="1016"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1144"/>
+        <location filename="../CMainWindow.cpp" line="1145"/>
         <source>Ele.: %1%2</source>
         <translation>Ele.: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1156"/>
+        <location filename="../CMainWindow.cpp" line="1157"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pendenza: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1172"/>
+        <location filename="../CMainWindow.cpp" line="1173"/>
         <source>[Grid: %1]</source>
         <translation>[Griglia: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1320"/>
+        <location filename="../CMainWindow.cpp" line="1321"/>
         <source>Load GIS Data...</source>
         <translation>Caricamento dati GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1354"/>
+        <location filename="../CMainWindow.cpp" line="1355"/>
         <source>Select output file</source>
         <translation>Selezione il file destinazione</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1354"/>
-        <location filename="../CMainWindow.cpp" line="1380"/>
+        <location filename="../CMainWindow.cpp" line="1355"/>
+        <location filename="../CMainWindow.cpp" line="1381"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Vista (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1380"/>
+        <location filename="../CMainWindow.cpp" line="1381"/>
         <source>Select file to load</source>
         <translation>Seleziona il file da caricare</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1672"/>
+        <location filename="../CMainWindow.cpp" line="1673"/>
         <source>Rename View...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1672"/>
+        <location filename="../CMainWindow.cpp" line="1673"/>
         <source>Enter new name for view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1822"/>
+        <location filename="../CMainWindow.cpp" line="1823"/>
         <source>Fatal...</source>
         <translation>Fatale...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1823"/>
+        <location filename="../CMainWindow.cpp" line="1824"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack ha rilevato una libreria Proj4 installata male. Mancano le tabelle di conversione per le proiezioni EPSG solitamente memorizzate in /usr/share/proj. Contatta il manutentore del pacchetto della tua distribuzione per risolvere.</translation>
     </message>
@@ -3550,14 +3550,14 @@ Impossibile riconoscere il tipo di file.</translation>
         <translation>Punto di interesse</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2485"/>
+        <location filename="../map/CMapIMG.cpp" line="2496"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2527"/>
-        <location filename="../map/CMapIMG.cpp" line="2535"/>
-        <location filename="../map/CMapIMG.cpp" line="2542"/>
+        <location filename="../map/CMapIMG.cpp" line="2538"/>
+        <location filename="../map/CMapIMG.cpp" line="2546"/>
+        <location filename="../map/CMapIMG.cpp" line="2553"/>
         <source>Area</source>
         <translation>Area</translation>
     </message>
@@ -4032,17 +4032,17 @@ struttura sconosciuta.</translation>
 <context>
     <name>CPlotProfile</name>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="68"/>
+        <location filename="../plot/CPlotProfile.cpp" line="61"/>
         <source>Show Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="108"/>
+        <location filename="../plot/CPlotProfile.cpp" line="101"/>
         <source>Distance [%1]</source>
         <translation>Distanza [%1]</translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="109"/>
+        <location filename="../plot/CPlotProfile.cpp" line="102"/>
         <source>Ele. [%1]</source>
         <translation>Ele. [%1]</translation>
     </message>
@@ -7072,47 +7072,52 @@ I don&apos;t want to read the documentation!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="119"/>
+        <location filename="../dem/IDemList.ui" line="38"/>
+        <source>start typing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="122"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="132"/>
+        <location filename="../dem/IDemList.ui" line="135"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
         <translation>Utilizzare il menù di scelta rapida (fare clic con il pulsante destro del mouse sulla voce) per attivare un file. Utilizzare il drag-n-drop per spostare il file attivato nell&apos;ordine processo.</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="157"/>
+        <location filename="../dem/IDemList.ui" line="160"/>
         <source>Activate</source>
         <translation>Attiva</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="166"/>
+        <location filename="../dem/IDemList.ui" line="169"/>
         <source>Move Up</source>
         <translation>Muovi su</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="169"/>
+        <location filename="../dem/IDemList.ui" line="172"/>
         <source>Hide DEM behind previous one</source>
         <translation>Nascondi DEM dietro quello precedente</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="178"/>
+        <location filename="../dem/IDemList.ui" line="181"/>
         <source>Move down</source>
         <translation>Muovi giù</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="181"/>
+        <location filename="../dem/IDemList.ui" line="184"/>
         <source>Show DEM on top of next one</source>
         <translation>Mostra DEM sopra al successivo</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="190"/>
+        <location filename="../dem/IDemList.ui" line="193"/>
         <source>Reload DEM</source>
         <translation>Ricarica DEM</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="199"/>
+        <location filename="../dem/IDemList.ui" line="202"/>
         <source>Clear Filter</source>
         <translation type="unfinished">Cancella filtro</translation>
     </message>
@@ -8171,12 +8176,12 @@ I don&apos;t want to read the documentation!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="35"/>
+        <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="54"/>
         <source>Speed</source>
         <translation type="unfinished">Vel.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="42"/>
+        <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="35"/>
         <source> km/h</source>
         <translation type="unfinished"> km/h</translation>
     </message>
@@ -8194,52 +8199,52 @@ I don&apos;t want to read the documentation!</source>
         <translation type="unfinished">Tipo</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="122"/>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="303"/>
         <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
         <translation type="unfinished">I valori di pendenza positivi e negativi definiti dall&apos;utente saranno sostituiti dai valori di pendenza minima e massima della traccia.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="125"/>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="306"/>
         <source>Set min/max slopes from Track</source>
         <translation type="unfinished">Imposta le pendenze min e max dalla traccia</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="148"/>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="122"/>
         <source>Max Speed</source>
         <translation type="unfinished">Vel. massima</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="158"/>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="261"/>
         <source>Min Speed</source>
         <translation type="unfinished">Vel. min</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="187"/>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="219"/>
         <source>Plain Level:</source>
         <translation type="unfinished">Falsopiano:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="197"/>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="161"/>
         <source>Uphill:</source>
         <translation type="unfinished">Salita:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="207"/>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="293"/>
         <source>at negative Slope</source>
         <translation type="unfinished">con pendenza neg.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="217"/>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="171"/>
         <source>at positive Slope</source>
         <translation type="unfinished">con pendenza pos.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="227"/>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="132"/>
         <source>Speed at zero Slope</source>
         <translation type="unfinished">Velocità a pend. zero</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="259"/>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="229"/>
         <source>Downhill:</source>
         <translation type="unfinished">Discesa:</translation>
     </message>
@@ -8258,18 +8263,18 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="113"/>
-        <source>Descending</source>
+        <source>Ascending Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="139"/>
+        <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="191"/>
+        <source>Descending Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="168"/>
         <source>Speed at zero Slope</source>
         <translation type="unfinished">Velocità a pend. zero</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="178"/>
-        <source>Ascending</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9398,22 +9403,27 @@ Nome file: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="980"/>
-        <source>Track Point Info</source>
+        <location filename="../IMainWindow.ui" line="971"/>
+        <source>Ctrl+Alt+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="983"/>
+        <source>Track Point Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="986"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="996"/>
+        <location filename="../IMainWindow.ui" line="999"/>
         <source>Track Highlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="999"/>
+        <location filename="../IMainWindow.ui" line="1002"/>
         <source>Mark the highlighted track with a red border.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9561,7 +9571,7 @@ Nome file: %1</translation>
         <translation>Mappe</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="123"/>
+        <location filename="../map/IMapList.ui" line="126"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
         <translation>Utilizzare il menù contestuale (tasto destro del mouse sulla voce di) per attivare una mappa. Usa il drag-n-drop per spostare la mappa attivata sull&apos;ordine di disegno. </translation>
     </message>
@@ -9571,42 +9581,47 @@ Nome file: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="110"/>
+        <location filename="../map/IMapList.ui" line="38"/>
+        <source>start typing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="113"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="148"/>
+        <location filename="../map/IMapList.ui" line="151"/>
         <source>Activate</source>
         <translation>Attivato</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="157"/>
+        <location filename="../map/IMapList.ui" line="160"/>
         <source>Move Up</source>
         <translation>Muovi su</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="160"/>
+        <location filename="../map/IMapList.ui" line="163"/>
         <source>Hide map behind previous map</source>
         <translation>Nascondi la mappa sotto la precedente</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="169"/>
+        <location filename="../map/IMapList.ui" line="172"/>
         <source>Move down</source>
         <translation>Muovi giù</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="172"/>
+        <location filename="../map/IMapList.ui" line="175"/>
         <source>Show map on top of next map</source>
         <translation>Visualizza la mappa sopra la successiva</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="181"/>
+        <location filename="../map/IMapList.ui" line="184"/>
         <source>Reload Maps</source>
         <translation>Ricarica la lista mappe</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="190"/>
+        <location filename="../map/IMapList.ui" line="193"/>
         <source>Clear Filter</source>
         <translation type="unfinished">Cancella filtro</translation>
     </message>
@@ -10021,7 +10036,7 @@ Premere ALT per lo zoom orizzontale.</translation>
         <translation>Dati errati o mancanti.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1334"/>
+        <location filename="../plot/IPlot.cpp" line="1385"/>
         <source>Select output file</source>
         <translation>Seleziona il file di destinazione</translation>
     </message>

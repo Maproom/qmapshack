@@ -34,6 +34,9 @@
      <property name="toolTip">
       <string>Filter: Start to type and the list will be reduced to matching items.</string>
      </property>
+     <property name="placeholderText">
+      <string>start typing...</string>
+     </property>
     </widget>
    </item>
    <item>

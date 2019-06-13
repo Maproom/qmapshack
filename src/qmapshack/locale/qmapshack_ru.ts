@@ -7091,7 +7091,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../dem/IDemList.ui" line="38"/>
         <source>start typing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Начинай печатать ...</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="122"/>
@@ -8281,12 +8281,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="113"/>
         <source>Ascending Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость при подъеме</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="191"/>
         <source>Descending Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость при спуске</translation>
     </message>
     <message>
         <source>Descending</source>
@@ -9437,7 +9437,7 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="971"/>
         <source>Ctrl+Alt+P</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Alt+P</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="983"/>
@@ -9615,7 +9615,7 @@ Filename: %1</source>
     <message>
         <location filename="../map/IMapList.ui" line="38"/>
         <source>start typing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Начинай печатать ...</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="113"/>

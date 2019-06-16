@@ -2024,7 +2024,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListDB.cpp" line="884"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
-        <translation>¿Desea realmente eliminar &apos;%1&apos; de la carpeta &apos;%2&apos;?</translation>
+        <translation>¿Eliminar &apos;%1&apos; de la carpeta &apos;%2&apos;?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="885"/>
@@ -2050,12 +2050,12 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListDB.cpp" line="776"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation>¿Desea realmente eliminar todos los elementos de &apos;Papelera&apos;? Se eliminarán definitivamente.</translation>
+        <translation>¿Eliminar todos los elementos de &apos;Papelera&apos;? Se eliminarán definitivamente.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="797"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation>¿Desea realmente eliminar todos los elementos.seleccionados de &apos;Papelera&apos;? Se eliminarán definitivamente.</translation>
+        <translation>¿Eliminar todos los elementos.seleccionados de &apos;Papelera&apos;? Se eliminarán definitivamente.</translation>
     </message>
 </context>
 <context>
@@ -2193,7 +2193,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1445"/>
         <source>Do you really want to delete %1?</source>
-        <translation>¿Desea realmente eliminar %1?</translation>
+        <translation>¿Eliminar %1?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="109"/>
@@ -3595,7 +3595,7 @@ Se vuelve al TYP interno.</translation>
     <message>
         <location filename="../map/CMapList.cpp" line="257"/>
         <source>Where do you want to store maps?</source>
-        <translation>¿Dónde desea almacenar mapas?</translation>
+        <translation>¿Dónde se almacenaran los mapas?</translation>
     </message>
 </context>
 <context>
@@ -3838,7 +3838,7 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="40"/>
         <source>&lt;b&gt;Edit Route Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation>&lt;/b&gt;Editar puntos de ruta&lt;br/&gt;Seleccione una función y un modo de dibujo a través de los botones de herramientas. A continuación, seleccione un punto del trazado. Sólo se pueden cambiar los puntos marcados con un cuadrado grande. Los puntitos negros son puntos secundarios introducidos automáticamente por el enrutamiento automático o el ajuste vectorial.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Editar puntos de ruta&lt;/b&gt;&lt;br/&gt;Escoger una función y un modo de dibujo con los botones de herramientas y seleccionar uno de los puntos. Sólo se pueden cambiar los puntos representados con un cuadrado grande. Los más pequeños son puntos secundarios introducidos por el enrutamiento automático o por el ajuste vectorial.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="100"/>
@@ -3857,7 +3857,7 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="39"/>
         <source>&lt;b&gt;Edit Track Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Editar puntos del track&lt;/b&gt;&lt;br/&gt;Seleccionar una función y un modo de dibujo a través de los botones de herramientas. A continuación, seleccionar un punto del trazado. Sólo se pueden cambiar los puntos marcados con un cuadrado grande, los más pequeños son puntos secundarios introducidos automáticamente por el enrutamiento automático o el ajuste vectorial.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Editar puntos de track&lt;/b&gt;&lt;br/&gt;Escoger una función y un modo de dibujo con los botones de herramientas y seleccionar uno de los puntos. Sólo se pueden cambiar los puntos representados con un cuadrado grande. Los más pequeños son puntos secundarios introducidos por el enrutamiento automático o por el ajuste vectorial.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="75"/>
@@ -5805,7 +5805,7 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="315"/>
         <source>The track &lt;b&gt;%1&lt;/b&gt; you have selected contains trackpoints with invalid timestamps. Device might not accept the generated TCX course file if left as is. &lt;b&gt;Do you want to apply a filter with constant speed (10 m/s) and continue?&lt;/b&gt;</source>
-        <translation>El track &lt;b&gt;%1&lt;/b&gt; Que ha seleccionado contiene puntos y marcas de tiempo no válidas. Es posible que el dispositivo no acepte el archivo TCX generado si se deja como está &lt;b&gt;¿Desea aplicar un filtro con velocidad constante (10 m / s) y continuar?&lt;/b&gt;</translation>
+        <translation>El track &lt;b&gt;%1&lt;/b&gt; escogido contiene puntos y marcas de tiempo no válidas. Es posible que el dispositivo no acepte el archivo TCX generado si se deja como está &lt;b&gt;¿Aplicar un filtro con velocidad constante (10 m/s) y continuar?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="339"/>
@@ -5958,7 +5958,7 @@ línea %2, columna %3.
         <location filename="../gis/tnv/serialization.cpp" line="625"/>
         <location filename="../gis/tnv/serialization.cpp" line="636"/>
         <source>Only support lon/lat WGS 84 format.</source>
-        <translation>Solamente soporta lon/lat en formato WGS 84.</translation>
+        <translation>Solamente soporta long/lat en formato WGS 84.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="654"/>
@@ -7093,7 +7093,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../dem/IDemList.ui" line="38"/>
         <source>start typing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Escribir...</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="122"/>
@@ -8045,7 +8045,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="45"/>
         <source>&lt;b&gt;Obscure Timestamps&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Incrementar/Eliminar Marcas de tiempo&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Incrementar o eliminar marcas de tiempo&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="54"/>
@@ -8083,7 +8083,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="69"/>
         <source>Add offset of</source>
-        <translation>Añadir una corrección de </translation>
+        <translation>Añadir una corrección de</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="95"/>
@@ -8238,7 +8238,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="219"/>
         <source>Plain Level:</source>
-        <translation type="unfinished">Llano:</translation>
+        <translation>Llano:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="161"/>
@@ -8281,12 +8281,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="113"/>
         <source>Ascending Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Vel. de ascenso</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="191"/>
         <source>Descending Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Vel. de descenso</translation>
     </message>
     <message>
         <source>Descending</source>
@@ -8340,7 +8340,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="47"/>
         <source>Convert subpoints obtained from routing to ordinary track points </source>
-        <translation>Convertir subpuntos obtenidos por el enrutamiento a puntos de track</translation>
+        <translation>Convertir subpuntos creados por el enrutamiento en puntos de track</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="54"/>
@@ -8363,7 +8363,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="63"/>
         <source>Calculate slope of the terrain based on loaded DEM files.</source>
-        <translation>Calcular la pendiente del terreno basandose en los DEM cargados.</translation>
+        <translation>Calcular la pendiente del terreno basándose en los DEM cargados.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="70"/>
@@ -8433,12 +8433,12 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="50"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please specify a valid email-address:&lt;/p&gt;
 </source>
-        <translation>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;para usar introduzca una dirección de correo válida aquí:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;introducir una dirección de correo válida aquí:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="63"/>
         <source>please specify a valid email-address</source>
-        <translation>Introduzca una dirección de correo válida</translation>
+        <translation>Introducir una dirección de correo válida</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="85"/>
@@ -8449,23 +8449,23 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="150"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
-        <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;para utilizar cree una cuenta en &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;luego habilite &apos;Free Webservices&apos; en su &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Cuenta&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;introduzca su nombre de usuario en geonames aqui:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;para utilizar crear una cuenta en &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;luego habilitar &apos;Free Webservices&apos; en su &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Cuenta&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;introduzcir su nombre de usuario en geonames aqui:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="163"/>
         <source>enter geonames username here</source>
-        <translation>introduzca su nombre de usuario en Geonames aqui</translation>
+        <translation>introduzcir nombre de usuario en Geonames aquí</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="206"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;please enter your &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; here:&lt;/p&gt;
 </source>
-        <translation>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;introduzca su &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; aquí:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;introduzcir la &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; aquí:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="219"/>
         <source>enter Google API-key here</source>
-        <translation>introduzca su Google API-key aquí</translation>
+        <translation>introduzcir la Google API-key aquí</translation>
     </message>
 </context>
 <context>
@@ -8478,7 +8478,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
@@ -8742,7 +8742,7 @@ Es un elemento nuevo o ha sido eliminado en la base de datos por alguien.</trans
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="392"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
-        <translation>&lt;h3&gt;%1&lt;/h3&gt;¿Desea omitir la correlación de pistas y waypoints para este proyecto en el futuro?</translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt;¿Omitir la correlación de pistas y waypoints para este proyecto en el futuro?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="393"/>
@@ -9353,7 +9353,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="971"/>
         <source>Ctrl+Alt+P</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Alt+P</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="983"/>
@@ -9612,7 +9612,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../map/IMapList.ui" line="38"/>
         <source>start typing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Escribir...</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="113"/>

@@ -28,6 +28,7 @@
 #include "db/IDBFolder.h"
 #include "gis/IGisItem.h"
 #include "gis/rte/router/IRouter.h"
+#include "gis/search/CSearchExplanationDialog.h"
 
 class CGisDraw;
 class IGisProject;
@@ -425,7 +426,7 @@ public:
 
     void setOpacity(qreal val);
 
-    void applyFilter();
+    void applySearch();
 
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
@@ -439,14 +440,17 @@ public slots:
 
 private slots:
     void slotSetGisLayerOpacity(int val);
-    void slotFilter(const QString& str);
-    void slotSetupFilter();
+    void slotSearch(const QString& str);
+    void slotSetupSearch();
+    void slotSearchHelp();
 
     void slotWksItemSelectionChanged();
     void slotWksItemPressed(QTreeWidgetItem * item);
 
-    void slotFilterNameOnly(bool yes);
-    void slotFilterCompleteText(bool yes);
+    void slotSearchNameOnly(bool yes);
+    void slotSearchCompleteText(bool yes);
+
+    void slotCaseSensitive(bool yes);
 
 private:
     friend class CMainWindow;

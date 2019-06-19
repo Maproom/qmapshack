@@ -43,7 +43,7 @@ public:
 
     /// convert meter of elevation into a value and unit string
     virtual void meter2elevation(qreal meter, QString& val, QString& unit) const = 0;
-
+    virtual void meter2elevation(qreal meter, qreal& val, QString& unit) const = 0;
     virtual void feet2elevation(qreal feet, QString& val, QString& unit) const
     {
         meter2elevation(feet / 3.28084, val, unit);
@@ -51,10 +51,13 @@ public:
 
     /// convert meter of distance into a value and unit string
     virtual void meter2distance(qreal meter, QString& val, QString& unit) const = 0;
+    virtual void meter2distance(qreal meter, qreal& val, QString& unit) const = 0;
     /// convert meter per second to a speed value string and unit label
     virtual void meter2speed(qreal meter, QString& val, QString& unit) const;
+    virtual void meter2speed(qreal meter, qreal& val, QString& unit) const;
     /// convert square meter to string and unit label
     virtual void meter2area(qreal meter, QString& val, QString& unit) const = 0;
+    virtual void meter2area(qreal meter, qreal& val, QString& unit) const = 0;
     /// convert seconds to a timespan of days, hours, minutes and seconds
     virtual void seconds2time(quint32 ttime, QString& val, QString& unit) const;
     /// convert an elevation string to a float
@@ -63,6 +66,8 @@ public:
     virtual void meter2unit(qreal meter, qreal& scale, QString&  unit) const  = 0;
     /// convert meter into the base unit (ft, m)
     virtual void meter2base(qreal meter, QString& val, QString& unit) const;
+
+    static void convert(qreal &value, QString &unit, const QString& targetUnit);
 
     enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
     /// instantiate the correct unit object

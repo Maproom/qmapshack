@@ -72,7 +72,7 @@ public:
         QString type;
         QString container;
         //See ZGeocacheAttributes.txt for meanings.
-        QMap<quint8, bool> attributes;
+        QMap<qint8,bool> attributes;
         bool shortDescIsHtml = false;
         QString shortDesc;
         bool longDescIsHtml = false;
@@ -83,7 +83,9 @@ public:
         QString locale;
         QList<geocachelog_t> logs;
 
-        const static QVector<QString> attributeMeanings;
+        const static QList<QString> attributeMeanings;
+        static QList<QString> attributeMeaningsTranslated;
+        static QList<QString> initAttributeMeaningsTranslated();
     };
 
     struct image_t
@@ -340,6 +342,8 @@ public:
         hideArea = hide;
     }
 
+    const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
+
     static QString getLastName(const QString &name);
     static void newWpt(QPointF& pt, const QString& name, const QString& desc, IGisProject *project);
     static bool getIconAndName(QString& icon, QString& name);
@@ -386,13 +390,17 @@ private:
     bool doBubbleSize      = false;
     bool mouseIsOverBubble = false;
     QRect rectBubble;
-    QRect rectBubbleMove {0, 0, 16, 16};
-    QRect rectBubbleEdit {0, 0, 16, 16};
-    QRect rectBubbleSize {0, 0, 16, 16};
+    QRect rectBubbleMove {0,0,16,16};
+    QRect rectBubbleEdit {0,0,16,16};
+    QRect rectBubbleSize {0,0,16,16};
 
     QPoint offsetMouse;
     QPoint offsetBubble {-320, -150};
     quint32 widthBubble = 300;
+
+    using fSearch = std::function<const searchValue_t (CGisItemWpt*)>;
+    static QMap<searchProperty_e,fSearch > keywordLambdaMap;
+    static QMap<searchProperty_e,fSearch > initKeywordLambdaMap();
 };
 
 #endif // CGISITEMWPT_H

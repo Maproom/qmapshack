@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -322,7 +323,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
             str += "<br/>\n";
         }
 
-        str += QString(" %4 (%1, D %2, T %3)").arg(geocache.container).arg(geocache.difficulty, 0, 'f', 1).arg(geocache.terrain, 0, 'f', 1).arg(geocache.name);
+        str += QString(" %4 (%1, D %2, T %3)").arg(geocache.container).arg(geocache.difficulty, 0,'f',1).arg(geocache.terrain, 0,'f',1).arg(geocache.name);
     }
     else
     {
@@ -413,7 +414,7 @@ QPointF CGisItemWpt::getPointCloseBy(const QPoint& point)
     if (closeToRadius)
     {
         QPointF l = (QPointF(point) - posScreen);
-        return posScreen + l * (radius / sqrt(QPointF::dotProduct(l, l)));
+        return posScreen + l * (radius / sqrt(QPointF::dotProduct(l,l)));
     }
     else
     {
@@ -441,7 +442,7 @@ void CGisItemWpt::setName(const QString& str)
     setText(CGisListWks::eColumnName, str);
 
     wpt.name = str;
-    changed(tr("Changed name"), "://icons/48x48/EditText.png");
+    changed(tr("Changed name"),"://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setPosition(const QPointF& pos)
@@ -451,13 +452,13 @@ void CGisItemWpt::setPosition(const QPointF& pos)
 
     detBoundingRect();
 
-    changed(tr("Changed position"), "://icons/48x48/WptMove.png");
+    changed(tr("Changed position"),"://icons/48x48/WptMove.png");
 }
 
 void CGisItemWpt::setElevation(qint32 val)
 {
     wpt.ele = val;
-    changed(tr("Changed elevation"), "://icons/48x48/SetEle.png");
+    changed(tr("Changed elevation"),"://icons/48x48/SetEle.png");
 }
 
 void CGisItemWpt::setProximity(qreal val)
@@ -466,12 +467,12 @@ void CGisItemWpt::setProximity(qreal val)
     {
         proximity = NOFLOAT;
         setNogoFlag(false);
-        changed(tr("Removed proximity"), "://icons/48x48/WptDelProx.png");
+        changed(tr("Removed proximity"),"://icons/48x48/WptDelProx.png");
     }
     else
     {
         proximity = qRound(val);
-        changed(tr("Changed proximity"), "://icons/48x48/WptEditProx.png");
+        changed(tr("Changed proximity"),"://icons/48x48/WptEditProx.png");
     }
 
     detBoundingRect();
@@ -543,7 +544,7 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
         return false;
     }
 
-    closeToRadius = abs(QPointF::dotProduct(dist, dist)/radius - radius) < 22;
+    closeToRadius = abs(QPointF::dotProduct(dist,dist)/radius - radius) < 22;
     return closeToRadius;
 }
 
@@ -600,7 +601,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     else
     {
         //remember radius for isCloseTo-method
-        radius = calcRadius(QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD), posScreen, proximity, gis);
+        radius = calcRadius(QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD),posScreen,proximity,gis);
 
         drawCircle(p, posScreen, radius, !hideArea && isNogo(), false);
     }
@@ -623,18 +624,18 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         QRect barTop(rectBubble.topLeft(), QSize(rectBubble.width(), 26));
         QRect barBottom(barTop);
         barBottom.moveBottomLeft(rectBubble.bottomLeft());
-        barBottom.adjust(1, 0, -1, -1);
-        barTop.adjust(1, 1, -1, 0);
+        barBottom.adjust(1,0,-1,-1);
+        barTop.adjust(1,1,-1,0);
 
         p.setPen(Qt::NoPen);
-        p.setBrush(QColor(200, 200, 255, 150));
+        p.setBrush(QColor(200,200,255,150));
         p.drawRect(barTop);
         p.drawRect(barBottom);
 
         p.setBrush(Qt::white);
-        p.drawRoundedRect(rectBubbleMove.adjusted(-2, -2, 2, 2), RECT_RADIUS, RECT_RADIUS);
-        p.drawRoundedRect(rectBubbleEdit.adjusted(-2, -2, 2, 2), RECT_RADIUS, RECT_RADIUS);
-        p.drawRoundedRect(rectBubbleSize.adjusted(-2, -2, 2, 2), RECT_RADIUS, RECT_RADIUS);
+        p.drawRoundedRect(rectBubbleMove.adjusted(-2,-2,2,2), RECT_RADIUS, RECT_RADIUS);
+        p.drawRoundedRect(rectBubbleEdit.adjusted(-2,-2,2,2), RECT_RADIUS, RECT_RADIUS);
+        p.drawRoundedRect(rectBubbleSize.adjusted(-2,-2,2,2), RECT_RADIUS, RECT_RADIUS);
 
         p.drawPixmap(rectBubbleMove, QPixmap("://icons/32x32/MoveArrow.png"));
         p.drawPixmap(rectBubbleEdit, QPixmap("://icons/32x32/EditDetails.png"));
@@ -658,7 +659,7 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
     QPointF pt = posScreen - focus;
 
     QRectF rect = fm.boundingRect(wpt.name);
-    rect.adjust(-2, -2, 2, 2);
+    rect.adjust(-2,-2,2,2);
 
     // place label on top
     rect.moveCenter(pt + QPointF(icon.width()/2, -fm.height()));
@@ -683,7 +684,7 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
         }
     }
 
-    CDraw::text(wpt.name, p, rect.toRect(), Qt::darkBlue);
+    CDraw::text(wpt.name,p,rect.toRect(), Qt::darkBlue);
     blockedAreas << rect;
 }
 
@@ -700,7 +701,7 @@ void CGisItemWpt::drawHighlight(QPainter& p)
     }
     else
     {
-        p.drawImage(posScreen - QPointF(31, 31), QImage("://cursors/wptHighlightRed.png"));
+        p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlightRed.png"));
     }
 }
 
@@ -733,9 +734,9 @@ void CGisItemWpt::drawBubble(QPainter& p)
     QPoint posBubble = posScreen.toPoint() + offsetBubble;
     rectBubble.moveTopLeft(posBubble);
 
-    rectBubbleMove.moveTopLeft(rectBubble.topLeft() + QPoint(5, 5));
-    rectBubbleEdit.moveTopLeft(rectBubbleMove.topRight() + QPoint(7, 0));
-    rectBubbleSize.moveBottomRight(rectBubble.bottomRight() - QPoint(5, 5));
+    rectBubbleMove.moveTopLeft(rectBubble.topLeft() + QPoint(5,5));
+    rectBubbleEdit.moveTopLeft(rectBubbleMove.topRight() + QPoint(7,0));
+    rectBubbleSize.moveBottomRight(rectBubble.bottomRight() - QPoint(5,5));
 
     QPolygonF frame = makePolyline(posScreen, rectBubble);
     p.setPen(CDraw::penBorderGray);
@@ -756,13 +757,13 @@ void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, co
     p.setBrush(Qt::NoBrush);
     if (selected)
     {
-        p.setPen(QPen(Qt::red, 3));
+        p.setPen(QPen(Qt::red,3));
     }
     else
     {
-        p.setPen(QPen(Qt::white, 3));
+        p.setPen(QPen(Qt::white,3));
         p.drawEllipse(circle);
-        p.setPen(QPen(Qt::red, 1));
+        p.setPen(QPen(Qt::red,1));
     }
     p.drawEllipse(circle);
     if (nogo)
@@ -802,23 +803,23 @@ QPolygonF CGisItemWpt::makePolyline(const QPointF& anchor, const QRectF& r)
             h = 30;
         }
 
-        w = h = qMin(w, h);
+        w = h = qMin(w,h);
 
         if(anchor.x() < r.left())
         {
-            poly2 << anchor << (r.center() + QPoint(0, -h)) << (r.center() + QPoint(0, h)) << anchor;
+            poly2 << anchor << (r.center() + QPoint(0,-h)) << (r.center() + QPoint(0,h)) << anchor;
         }
         else if(r.right() < anchor.x())
         {
-            poly2 << anchor << (r.center() + QPoint(0, -h)) << (r.center() + QPoint(0, h)) << anchor;
+            poly2 << anchor << (r.center() + QPoint(0,-h)) << (r.center() + QPoint(0,h)) << anchor;
         }
         else if(anchor.y() < r.top())
         {
-            poly2 << anchor << (r.center() + QPoint(-w, 0)) << (r.center() + QPoint(w, 0)) << anchor;
+            poly2 << anchor << (r.center() + QPoint(-w,0)) << (r.center() + QPoint(w,0)) << anchor;
         }
         else if(r.bottom() < anchor.y())
         {
-            poly2 << anchor << (r.center() + QPoint(-w, 0)) << (r.center() + QPoint(w, 0)) << anchor;
+            poly2 << anchor << (r.center() + QPoint(-w,0)) << (r.center() + QPoint(w,0)) << anchor;
         }
 
         QPainterPath path1;
@@ -959,6 +960,18 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
+const searchValue_t CGisItemWpt::getValueByKeyword(searchProperty_e keyword)
+{
+    if(keywordLambdaMap.contains(keyword))
+    {
+        return keywordLambdaMap.value(keyword)(this);
+    }
+    else
+    {
+        return searchValue_t();
+    }
+}
+
 void CGisItemWpt::processMouseOverBubble(const QPoint &pos)
 {
     if(rectBubbleMove.contains(pos) || rectBubbleEdit.contains(pos) || rectBubbleSize.contains(pos))
@@ -983,7 +996,7 @@ void CGisItemWpt::detBoundingRect()
 {
     if(proximity == NOFLOAT)
     {
-        boundingRect = QRectF(QPointF(wpt.lon, wpt.lat)*DEG_TO_RAD, QPointF(wpt.lon, wpt.lat)*DEG_TO_RAD);
+        boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
     }
     else
     {
@@ -993,11 +1006,11 @@ void CGisItemWpt::detBoundingRect()
         QPointF pt1 = GPS_Math_Wpt_Projection(cent, diag, 225 * DEG_TO_RAD);
         QPointF pt2 = GPS_Math_Wpt_Projection(cent, diag, 45 * DEG_TO_RAD);
 
-        boundingRect = QRectF(pt1, pt2);
+        boundingRect = QRectF(pt1,pt2);
     }
 }
 
-const QVector<QString> CGisItemWpt::geocache_t::attributeMeanings = {
+const QList<QString> CGisItemWpt::geocache_t::attributeMeanings = {
     "QMS Attribute Flag",         //Not to be serialized in GPX files
     "Dogs",
     "Access or parking fee",
@@ -1067,3 +1080,163 @@ const QVector<QString> CGisItemWpt::geocache_t::attributeMeanings = {
     "Teamwork Required",
     "GeoTour"
 };
+
+QList<QString> CGisItemWpt::geocache_t::attributeMeaningsTranslated = CGisItemWpt::geocache_t::initAttributeMeaningsTranslated();
+QList<QString> CGisItemWpt::geocache_t::initAttributeMeaningsTranslated()
+{
+    QList<QString> translated  = {
+        tr("QMS Attribute Flag"),         //Not to be serialized in GPX files
+        tr("Dogs"),
+        tr("Access or parking fee"),
+        tr("Climbing gear"),
+        tr("Boat"),
+        tr("Scuba gear"),
+        tr("Recommended for kids"),
+        tr("Takes less than an hour"),
+        tr("Scenic view"),
+        tr("Significant hike"),
+        tr("Difficult climbing"),
+        tr("May require wading"),
+        tr("May require swimming"),
+        tr("Available at all times"),
+        tr("Recommended at night"),
+        tr("Available during winter"),
+        "",
+        tr("Poison plants"),
+        tr("Dangerous Animals"),
+        tr("Ticks"),
+        tr("Abandoned mines"),
+        tr("Cliff / falling rocks"),
+        tr("Hunting"),
+        tr("Dangerous area"),
+        tr("Wheelchair accessible"),
+        tr("Parking available"),
+        tr("Public transportation"),
+        tr("Drinking water nearby"),
+        tr("Public restrooms nearby"),
+        tr("Telephone nearby"),
+        tr("Picnic tables nearby"),
+        tr("Camping available"),
+        tr("Bicycles"),
+        tr("Motorcycles"),
+        tr("Quads"),
+        tr("Off-road vehicles"),
+        tr("Snowmobiles"),
+        tr("Horses"),
+        tr("Campfires"),
+        tr("Thorns"),
+        tr("Stealth required"),
+        tr("Stroller accessible"),
+        tr("Needs maintenance"),
+        tr("Watch for livestock"),
+        tr("Flashlight required"),
+        "",
+        tr("Truck Driver/RV"),
+        tr("Field Puzzle"),
+        tr("UV Light Required"),
+        tr("Snowshoes"),
+        tr("Cross Country Skis"),
+        tr("Special Tool Required"),
+        tr("Night Cache"),
+        tr("Park and Grab"),
+        tr("Abandoned Structure"),
+        tr("Short hike (less than 1km)"),
+        tr("Medium hike (1km-10km)"),
+        tr("Long Hike (+10km)"),
+        tr("Fuel Nearby"),
+        tr("Food Nearby"),
+        tr("Wireless Beacon"),
+        tr("Partnership cache"),
+        tr("Seasonal Access"),
+        tr("Tourist Friendly"),
+        tr("Tree Climbing"),
+        tr("Front Yard (Private Residence)"),
+        tr("Teamwork Required"),
+        tr("GeoTour")
+    };
+    return translated;
+}
+
+QMap<searchProperty_e,CGisItemWpt::fSearch > CGisItemWpt::keywordLambdaMap = CGisItemWpt::initKeywordLambdaMap();
+QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
+{
+    QMap<searchProperty_e, CGisItemWpt::fSearch> map;
+    map.insert(eSearchPropertyGeneralName,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        if(item->geocache.hasData)
+        {
+            searchValue.str1 = item->geocache.name + " - " + item->getName();
+        }
+        else
+        {
+            searchValue.str1 = item->getName();
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralFullText,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralElevation,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        IUnit::self().meter2elevation(item->wpt.ele,searchValue.value1,searchValue.str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDate,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.value1 = item->wpt.time.toSecsSinceEpoch();
+        searchValue.str1 = "SsE"; //To differentiate Dates and Durations
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralComment,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getComment();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDescription,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getDescription();
+        return searchValue;
+    });
+    //Geocache keywords
+    map.insert(eSearchPropertyGeocacheDifficulty,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.value1 = item->geocache.difficulty;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheTerrain,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.value1 = item->geocache.terrain;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheAttributes,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        for(qint8 attr : item->geocache.attributes.keys())
+        {
+            if(!item->geocache.attributes[attr])
+            {
+                searchValue.str1 += tr("No") + " ";
+            }
+            searchValue.str1 += item->geocache.attributeMeaningsTranslated[attr] + ", ";
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheSize,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->geocache.container;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheGCCode,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getName();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheGCName,[](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->geocache.name;
+        return searchValue;
+    });
+    return map;
+}
+

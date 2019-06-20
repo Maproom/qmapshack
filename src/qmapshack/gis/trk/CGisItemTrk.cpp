@@ -561,6 +561,11 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 
     str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints) + "<br />";
 
+    if(getEnergyUse() != NOFLOAT)
+    {
+        str += tr("Energy Use Cycling: %1").arg(getEnergyUse(), 0, 'f', 0) + "kcal<br/>";
+    }
+
     if((allValidFlags & (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle)) == (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle))
     {
         str += "<b style='color: red;'>" + tr("Invalid elevations!") + "</b><br/>";

@@ -44,6 +44,9 @@ void CFilterEnergyCycle::loadSettings()
     SETTINGS;
     cfg.beginGroup("TrackDetails/Filter/EnergyCycle/");
 
+    energySets.clear();
+    comboBox->clear();
+
     energy_set_t energySet;
 
     cfg.beginReadArray("Set");
@@ -127,9 +130,11 @@ void CFilterEnergyCycle::slotRemove(bool)
 
 void CFilterEnergyCycle::slotEditSetting(bool)
 {
+    loadSettings(); // In case another track changed the settings in parallel
+
     energy_set_t &energySet = energySets[currentSet];
 
-    CFilterEnergyCycleDlg energyDlg(this, trk, energySet, energyDefaultSet);
+    CFilterEnergyCycleDlg energyDlg(this, trk, energySet, currentSet, energyDefaultSet);
     if(energyDlg.exec() == QDialog::Accepted)
     {
         updateUi(eUpdateFromApply);
@@ -137,8 +142,8 @@ void CFilterEnergyCycle::slotEditSetting(bool)
         if(comboBox->currentText() != energySet.nameOfSet)
         {
             comboBox->setItemText(currentSet, energySet.nameOfSet);
-            saveSettings();
         }
+        saveSettings();
     }
 }
 

@@ -19,7 +19,7 @@
 #include "gis/trk/filter/CFilterEnergyCycleDlg.h"
 
 CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
-                                             CFilterEnergyCycle::energy_set_t &energySet, const CFilterEnergyCycle::energy_set_t &defaultSet) :
+                                             CFilterEnergyCycle::energy_set_t &energySet, qint32 currentSet, const CFilterEnergyCycle::energy_set_t &defaultSet) :
     QDialog(parent)
   , windSpeeds
     {
@@ -76,6 +76,7 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     {
         comboGround->addItem(ground.name);
     }
+    labelNameOfSet->setText(tr("Name of Set") +  QString(" %1").arg(currentSet));
 
     updateUi();
 

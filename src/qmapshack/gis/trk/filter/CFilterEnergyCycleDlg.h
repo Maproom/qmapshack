@@ -30,7 +30,7 @@ class CFilterEnergyCycleDlg : public QDialog, private Ui::IFilterEnergyCycleDlg
 
 public:
     explicit CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
-                                   CFilterEnergyCycle::energy_set_t &tmpEnergySet, const CFilterEnergyCycle::energy_set_t &defaultSet);
+                                   CFilterEnergyCycle::energy_set_t &tmpEnergySet, qint32 currentSet, const CFilterEnergyCycle::energy_set_t &defaultSet);
     ~CFilterEnergyCycleDlg();
 
 private slots:

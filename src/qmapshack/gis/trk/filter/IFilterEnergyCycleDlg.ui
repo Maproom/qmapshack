@@ -632,7 +632,7 @@
        <item row="2" column="1">
         <widget class="QDoubleSpinBox" name="spinDriverWeight">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fahrergewicht&lt;/p&gt;&lt;p&gt;Das Fahrergewicht in kg einschließlich Kleidung.&lt;/p&gt;&lt;p&gt;The driver's weight in kg including clothing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fahrergewicht&lt;/p&gt;&lt;p&gt;Das Fahrergewicht in kg einschließlich Kleidung.&lt;/p&gt;&lt;p&gt;The driver's weight in kg including clothing.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Set Energy Use for Cycling&lt;/span&gt;&lt;/p&gt;&lt;p&gt;With this filter the personal energy use for a cycling tour can be comuputed.&lt;/p&gt;&lt;p&gt;The algorithm ist is an axproximation based on a simple but robust and fast mathematical background.&lt;/p&gt;&lt;p&gt;The following data will be considered from the track at each given track point.&lt;br/&gt;- Speed&lt;br/&gt;- xx&lt;br/&gt;- xx&lt;/p&gt;&lt;p&gt;To personalized the energy use for a track to a more realistic scenario the following data are needed:&lt;br/&gt;- Drivers and bicyle weight&lt;br/&gt;- air density, wind speed and position to the wind to consider the wind constraints&lt;br/&gt;- Averadge pedal cadence fot the computation of pedal force&lt;br/&gt;- Ground situation (tyre and ground) to consider the rolling resistance&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="whatsThis">
           <string/>
@@ -677,7 +677,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
      </property>
     </widget>
    </item>

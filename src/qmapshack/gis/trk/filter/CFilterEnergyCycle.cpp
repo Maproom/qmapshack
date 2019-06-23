@@ -15,6 +15,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "CFilterEnergyCycle.h"
 #include "CFilterEnergyCycleDlg.h"
@@ -35,6 +36,7 @@ CFilterEnergyCycle::CFilterEnergyCycle(CGisItemTrk &trk, QWidget *parent) :
     connect(pushButtonRemove, SIGNAL(clicked(bool)), this, SLOT(slotRemove(bool)));
     connect(pushButtonEdit, SIGNAL(clicked(bool)), this, SLOT(slotEditSetting(bool)));
     connect(toolApply, &QToolButton::clicked, this, &CFilterEnergyCycle::slotApply);
+    connect(pushButtonHelp, &QToolButton::clicked, this, &CFilterEnergyCycle::slotShowHelp);
 
     isValid();
 }
@@ -215,4 +217,29 @@ void CFilterEnergyCycle::compute()
         toolApply->setEnabled(false);
         trk.updateHistory(CGisItemTrk::eVisualDetails);
     }
+}
+
+void CFilterEnergyCycle::slotShowHelp()
+{
+    QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help")
+                             , tr(" \
+                                  <html> \
+                                  <head/> \
+                                  <body> \
+                                  <p><b>Set Energy Use for Cycling</b></p> \
+                                  <p>With this filter your personal energy use for a cycling tour can be computed.</p> \
+                                  <p>The algorithm is an axproximation based on a simple, robust and fast mathematical background.</p> \
+                                  <p>The speed and slope from each track data will be considered.</p> \
+                                  <p>To individualize your personal energy use (consumption) the following data are needed: \
+                                  <br/>* Drivers and bicyle weight \
+                                  <br/>* Air density, wind speed and position to the wind \
+                                  <br/>* Average pedal cadence for the computation of pedal force \
+                                  <br/>* Ground situation (tyre and ground) to consider the rolling resistance</p> \
+                                  <p>Five  parameter settings can be stored to reuse later on.</p> \
+                                  <p>The energy use in unit \"kcal\" will be stored in the track and can be remove later when not longer needed.</p> \
+                                  <p>The parameters sets will be defined in a separate \"Edit Setting\" dialog and more output values will be shown there.</p> \
+                                  <p>For more information see tooltip on input and output values and the help button in the \"Edit Setting\" dialog.</p> \
+                                  </body> \
+                                  </html> \
+                                 "));
 }

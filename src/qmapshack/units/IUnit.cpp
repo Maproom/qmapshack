@@ -452,15 +452,16 @@ void IUnit::meter2base(qreal meter, QString& val, QString& unit) const
     val.sprintf("%1.0f", meter * basefactor);
 }
 
-void IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
+bool IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
 {
     unit = unit.toLower(); //since comparison is made in lower
     if(unit == targetUnit)
     {
-        return;
+        return true;
     }
 
-    //Convert to mks base units and then to the target to make the code shorter
+    //Convert to mks base units and then to the target to make the code shorter.
+    //Also, assign the units to have a safetynet in case the conversion to the target fails.
     if( unit ==  "m²" || unit ==  "m" ||  unit ==  "m/s" || unit == "s")
     {
         //do nothing
@@ -539,6 +540,10 @@ void IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
     {
         value *= 3600;
         unit ="s";
+    }
+    else
+    {
+        return false; //Converting to base Unit failed
     }
 
     //convert to target
@@ -640,6 +645,11 @@ void IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
         value /= 3600;
         unit = targetUnit;
     }
+    else
+    {
+        return false;
+    }
+    return true;
 }
 
 void IUnit::slope2string(qreal slope, QString &val, QString &unit)

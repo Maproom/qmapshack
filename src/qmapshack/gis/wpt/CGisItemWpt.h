@@ -72,7 +72,7 @@ public:
         QString type;
         QString container;
         //See ZGeocacheAttributes.txt for meanings.
-        QMap<qint8,bool> attributes;
+        QMap<quint8, bool> attributes;
         bool shortDescIsHtml = false;
         QString shortDesc;
         bool longDescIsHtml = false;
@@ -390,17 +390,17 @@ private:
     bool doBubbleSize      = false;
     bool mouseIsOverBubble = false;
     QRect rectBubble;
-    QRect rectBubbleMove {0,0,16,16};
-    QRect rectBubbleEdit {0,0,16,16};
-    QRect rectBubbleSize {0,0,16,16};
+    QRect rectBubbleMove {0, 0, 16, 16};
+    QRect rectBubbleEdit {0, 0, 16, 16};
+    QRect rectBubbleSize {0, 0, 16, 16};
 
     QPoint offsetMouse;
     QPoint offsetBubble {-320, -150};
     quint32 widthBubble = 300;
 
     using fSearch = std::function<const searchValue_t (CGisItemWpt*)>;
-    static QMap<searchProperty_e,fSearch > keywordLambdaMap;
-    static QMap<searchProperty_e,fSearch > initKeywordLambdaMap();
+    static QMap<searchProperty_e, fSearch > keywordLambdaMap;
+    static QMap<searchProperty_e, fSearch > initKeywordLambdaMap();
 };
 
 #endif // CGISITEMWPT_H

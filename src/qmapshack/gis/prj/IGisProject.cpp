@@ -1173,20 +1173,9 @@ void IGisProject::sortItems(QList<IGisItem *> &items) const
     }
 }
 
-void IGisProject::filter(const QString& str)
+void IGisProject::filter(CSearch& search)
 {
     const int N = childCount();
-
-    if(str.isEmpty())
-    {
-        for(int n = 0; n < N; n++)
-        {
-            child(n)->setHidden(false);
-        }
-        return;
-    }
-
-    CSearch searchObj (str);
 
     for(int n = 0; n < N; n++)
     {
@@ -1196,7 +1185,7 @@ void IGisProject::filter(const QString& str)
             continue;
         }
 
-        item->setHidden(!searchObj.getSearchResult(item));//get search result returns wether the object matches
+        item->setHidden(!search.getSearchResult(item));//get search result returns wether the object matches
     }
 }
 

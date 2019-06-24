@@ -23,6 +23,9 @@ CSearch::search_mode_e CSearch::searchMode = CSearch::eSearchModeText;
 
 CSearch::CSearch(QString searchstring)
 {
+    //Initialisation
+    searchTypeLambdaMap = initSearchTypeLambdaMap();
+
     if(searchstring.simplified().isEmpty())
     {
         return;
@@ -32,35 +35,35 @@ CSearch::CSearch(QString searchstring)
     QString searchTypeKeyword;
     for(const QString& key:keywordSearchTypeMap.keys())
     {
-        if(searchstring.contains(key,Qt::CaseInsensitive))
+        if(searchstring.contains(key, Qt::CaseInsensitive))
         {
             searchTypeKeyword=key;
             break;
         }
     }
 
-    search_t newSearch;
     if(searchTypeKeyword.isEmpty())
     {
         //Default to search for what the user typed in the name or the full text
-        newSearch.searchType=eSearchTypeWith;
+        search.searchType=eSearchTypeWith;
         if(searchMode == eSearchModeText)
         {
-            newSearch.property=searchProperty_e::eSearchPropertyGeneralFullText;
+            search.property=searchProperty_e::eSearchPropertyGeneralFullText;
         }
         else
         {
-            newSearch.property=searchProperty_e::eSearchPropertyGeneralName;
+            search.property=searchProperty_e::eSearchPropertyGeneralName;
         }
-        newSearch.searchValue.str1 = searchstring.simplified();
+        search.searchValue.str1 = searchstring.simplified();
+        syntaxError = true;
     }
     else
     {
-        newSearch.searchType=keywordSearchTypeMap.value(searchTypeKeyword);
+        search.searchType=keywordSearchTypeMap.value(searchTypeKeyword);
         //Everything before the Search Type keyword is the property, i.e. "date after 2019" would result in "date"
-        newSearch.property=searchPropertyEnumMap.value(searchstring.section(searchTypeKeyword,0,0,QString::SectionCaseInsensitiveSeps).simplified(),eSearchPropertyNoMatch);
+        search.property=searchPropertyEnumMap.value(searchstring.section(searchTypeKeyword, 0, 0, QString::SectionCaseInsensitiveSeps).simplified(), eSearchPropertyNoMatch);
         //Everything after the Search Type keyword is the value, i.e. "date after 2019" would result in "2019"
-        QString filterValueString = searchstring.section(searchTypeKeyword,1,-1,QString::SectionCaseInsensitiveSeps).simplified();
+        QString filterValueString = searchstring.section(searchTypeKeyword, 1, -1, QString::SectionCaseInsensitiveSeps).simplified();
         searchValue_t filterValue;
 
         //Try if it is a time. Do so first, since this is the most exclusive
@@ -73,12 +76,12 @@ CSearch::CSearch(QString searchstring)
 
         for(const QString& tf:timeFormats)
         {
-            QTime time1 = QLocale::system().toTime(filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified(),tf);
+            QTime time1 = QLocale::system().toTime(filterValueString.section(tr("and"), 0, 0, QString::SectionCaseInsensitiveSeps).simplified(), tf);
             if(time1.isValid())
             {
                 filterValue.value1=time1.msecsSinceStartOfDay()/1000;
                 filterValue.str1="S";
-                QTime time2 = QLocale::system().toTime(filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified(),tf);
+                QTime time2 = QLocale::system().toTime(filterValueString.section(tr("and"), 1, 0, QString::SectionCaseInsensitiveSeps).simplified(), tf);
                 if(time1.isValid())
                 {
                     filterValue.value2=time2.msecsSinceStartOfDay()/1000;
@@ -104,12 +107,12 @@ CSearch::CSearch(QString searchstring)
 
             for(const QString& df:dateFormats)
             {
-                QDateTime time1 = QLocale::system().toDateTime(filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified(),df);
+                QDateTime time1 = QLocale::system().toDateTime(filterValueString.section(tr("and"), 0, 0, QString::SectionCaseInsensitiveSeps).simplified(), df);
                 if(time1.isValid())
                 {
                     filterValue.value1=time1.toSecsSinceEpoch();
                     filterValue.str1="SsE";
-                    QDateTime time2 = QLocale::system().toDateTime(filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified(),df);
+                    QDateTime time2 = QLocale::system().toDateTime(filterValueString.section(tr("and"), 1, 0, QString::SectionCaseInsensitiveSeps).simplified(), df);
                     if(time2.isValid())
                     {
                         filterValue.value2=time2.toSecsSinceEpoch();
@@ -131,7 +134,7 @@ CSearch::CSearch(QString searchstring)
             const static QString capIgnAnd =  "(?:" + tr("and") + ")?";
             //The second number, the units and the "and" are optional
             //The String has to be matched completely in order to avoid false positives thus the ^ and the $
-            QRegExp numericArguments("^" + capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit + "$",Qt::CaseInsensitive);
+            QRegExp numericArguments("^" + capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit + "$", Qt::CaseInsensitive);
             numericArguments.indexIn(filterValueString);
             if(numericArguments.cap(0).simplified() != "")
             {
@@ -152,39 +155,31 @@ CSearch::CSearch(QString searchstring)
         }
         if(filterValue.toString().isEmpty())
         {
-            filterValue.str1 = filterValueString.section(tr("and"),0,0,QString::SectionCaseInsensitiveSeps).simplified();
-            filterValue.str2 = filterValueString.section(tr("and"),1,0,QString::SectionCaseInsensitiveSeps).simplified();
+            filterValue.str1 = filterValueString.section(tr("and"), 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
+            filterValue.str2 = filterValueString.section(tr("and"), 1, 0, QString::SectionCaseInsensitiveSeps).simplified();
         }
-        newSearch.searchValue=filterValue;
+        search.searchValue=filterValue;
     }
-    improveQuery(newSearch);
-    searches.append(newSearch);
+    improveQuery();
 }
 
 bool CSearch::getSearchResult(IGisItem *item)
 {
     bool passed = true;
-    //No const search_t& to avoid multiple unit conversions
-    for(search_t& search:searches)
+    if(searchTypeLambdaMap.contains(search.searchType))
     {
-        if(searchTypeLambdaMap.contains(search.searchType))
-        {
-            const searchValue_t& itemFilterValue = item->getValueByKeyword(search.property);
-            passed = searchTypeLambdaMap.value(search.searchType)(itemFilterValue,search.searchValue);
-            if(!passed)
-            {
-                return false;
-            }
-        }
+        const searchValue_t& itemFilterValue = item->getValueByKeyword(search.property);
+        passed = searchTypeLambdaMap.value(search.searchType)(itemFilterValue, search.searchValue);
+        return passed;
     }
-    return true;
+    return true; //Empty search shouldn't hide anything
 }
 
 void CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchValue)
 {
     if(searchValue.str1 != "" && searchValue.str1 != itemValue.str1)
     {
-        IUnit::convert(searchValue.value1,searchValue.str1,itemValue.str1);
+        syntaxError |= IUnit::convert(searchValue.value1, searchValue.str1, itemValue.str1);
     }
     else
     {
@@ -193,7 +188,7 @@ void CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchV
 
     if(searchValue.str2 != "" && searchValue.str2 != itemValue.str2)
     {
-        IUnit::convert(searchValue.value2,searchValue.str2,itemValue.str2);
+        syntaxError |= IUnit::convert(searchValue.value2, searchValue.str2, itemValue.str2);
     }
     else
     {
@@ -202,7 +197,7 @@ void CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchV
 }
 
 //Make life easier for the user. The method tries to make assumption on what the user meant
-void CSearch::improveQuery(search_t &search)
+void CSearch::improveQuery()
 {
     //If the user entered a number with a unit and another number, assume they have the same unit
     if(search.searchValue.str1 != "" && search.searchValue.str2 == "" && search.searchValue.value1 != NOFLOAT && search.searchValue.value2 != NOFLOAT)
@@ -211,11 +206,11 @@ void CSearch::improveQuery(search_t &search)
     }
 
     //Adjust abbreviations for miles
-    if(search.searchValue.value1 != NOFLOAT && search.searchValue.str1.compare("MI",Qt::CaseInsensitive) == 0)
+    if(search.searchValue.value1 != NOFLOAT && search.searchValue.str1.compare("MI", Qt::CaseInsensitive) == 0)
     {
         search.searchValue.str1 = "ML"; //ml is used in CUnit
     }
-    if(search.searchValue.value2 != NOFLOAT && search.searchValue.str2.compare("MI",Qt::CaseInsensitive) == 0)
+    if(search.searchValue.value2 != NOFLOAT && search.searchValue.str2.compare("MI", Qt::CaseInsensitive) == 0)
     {
         search.searchValue.str2 = "ML"; //ml is used in CUnit
     }
@@ -223,28 +218,28 @@ void CSearch::improveQuery(search_t &search)
     //Try to guess what property the user meant when there is no match. I.e. make "shorter than 5km" work
     if(search.property == eSearchPropertyNoMatch)
     {
-        if(search.searchValue.str1.contains("/H",Qt::CaseInsensitive) ||
-           search.searchValue.str1.contains("/S",Qt::CaseInsensitive))
+        if(search.searchValue.str1.contains("/H", Qt::CaseInsensitive) ||
+           search.searchValue.str1.contains("/S", Qt::CaseInsensitive))
         {
             search.property = eSearchPropertyRteTrkAvgSpeed;
         }
-        else if(search.searchValue.str1.compare("KM",Qt::CaseInsensitive) == 0 ||
-                search.searchValue.str1.compare("ML",Qt::CaseInsensitive) == 0)
+        else if(search.searchValue.str1.compare("KM", Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("ML", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyRteTrkDistance;
         }
-        else if(search.searchValue.str1.compare("M",Qt::CaseInsensitive) == 0 ||
-                search.searchValue.str1.compare("FT",Qt::CaseInsensitive) == 0)
+        else if(search.searchValue.str1.compare("M", Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("FT", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyGeneralElevation;
         }
-        else if(search.searchValue.str1.compare("S",Qt::CaseInsensitive) == 0 ||
-                search.searchValue.str1.compare("MIN",Qt::CaseInsensitive) == 0 ||
-                search.searchValue.str1.compare("H",Qt::CaseInsensitive) == 0)
+        else if(search.searchValue.str1.compare("S", Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("MIN", Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("H", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyRteTrkTimeMoving;
         }
-        else if(search.searchValue.str1.compare("SsE",Qt::CaseInsensitive) == 0)
+        else if(search.searchValue.str1.compare("SsE", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyGeneralDate;
         }
@@ -258,7 +253,7 @@ void CSearch::improveQuery(search_t &search)
             //Try to catch if user only entered a year. Not done in regular detecting as it could be a speed or so.
             if(search.searchValue.value1 <= QDateTime::currentDateTime().date().year() && search.searchValue.value1 >= 1970)
             {
-                search.searchValue.value1=QDateTime(QDate(search.searchValue.value1,1,1)).toSecsSinceEpoch();
+                search.searchValue.value1=QDateTime(QDate(search.searchValue.value1, 1, 1)).toSecsSinceEpoch();
                 search.searchValue.str1="SsE";
             }
             //Assume you want 2012 and not 1912 (qt defaults to 19xx)
@@ -273,7 +268,7 @@ void CSearch::improveQuery(search_t &search)
             //Try to catch if user only entered a year. Not done in regular detecting as it could be a speed or so.
             if(search.searchValue.value2 <= QDateTime::currentDateTime().date().year() && search.searchValue.value2 >= 1970)
             {
-                search.searchValue.value2=QDateTime(QDate(search.searchValue.value2,1,1)).toSecsSinceEpoch();
+                search.searchValue.value2=QDateTime(QDate(search.searchValue.value2, 1, 1)).toSecsSinceEpoch();
                 search.searchValue.str1="SsE";
             }
             //Assume you want 2012 and not 1912 (qt defaults to 19xx)
@@ -286,122 +281,122 @@ void CSearch::improveQuery(search_t &search)
     }
 }
 
-QMap<QString,CSearch::search_type_e> CSearch::keywordSearchTypeMap = CSearch::initKeywordSearchTypeMap();
-QMap<QString,CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
+QMap<QString, CSearch::search_type_e> CSearch::keywordSearchTypeMap = CSearch::initKeywordSearchTypeMap();
+QMap<QString, CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
 {
-    QMap<QString,search_type_e> map;
-    map.insert(tr("with"),eSearchTypeWith);
-    map.insert(tr("contains"),eSearchTypeWith);
-    map.insert(tr("without"),eSearchTypeWithout);
-    map.insert(tr("shorter than"),eSearchTypeSmaller);
-    map.insert(tr("smaller than"),eSearchTypeSmaller);
-    map.insert(tr("under"),eSearchTypeSmaller);
-    map.insert(tr("lower than"),eSearchTypeSmaller);
-    map.insert(tr("earlier than"),eSearchTypeSmaller);
-    map.insert(tr("before"),eSearchTypeSmaller);
-    map.insert(tr("less than"),eSearchTypeSmaller);
-    map.insert("<",eSearchTypeSmaller);
-    map.insert(tr("longer than"),eSearchTypeBigger);
-    map.insert(tr("higher than"),eSearchTypeBigger);
-    map.insert(tr("bigger than"),eSearchTypeBigger);
-    map.insert(tr("greater than"),eSearchTypeBigger);
-    map.insert(tr("above"),eSearchTypeBigger);
-    map.insert(tr("over"),eSearchTypeBigger);
-    map.insert(tr("after"),eSearchTypeBigger);
-    map.insert(tr("later than"),eSearchTypeBigger);
-    map.insert(">",eSearchTypeBigger);
-    map.insert(tr("regex"),eSearchTypeRegEx);
-    map.insert("=",eSearchTypeEquals);
-    map.insert(tr("equals"),eSearchTypeEquals);
-    map.insert(tr("between"),eSearchTypeBetween);
+    QMap<QString, search_type_e> map;
+    map.insert(tr("with"), eSearchTypeWith);
+    map.insert(tr("contains"), eSearchTypeWith);
+    map.insert(tr("without"), eSearchTypeWithout);
+    map.insert(tr("shorter than"), eSearchTypeSmaller);
+    map.insert(tr("smaller than"), eSearchTypeSmaller);
+    map.insert(tr("under"), eSearchTypeSmaller);
+    map.insert(tr("lower than"), eSearchTypeSmaller);
+    map.insert(tr("earlier than"), eSearchTypeSmaller);
+    map.insert(tr("before"), eSearchTypeSmaller);
+    map.insert(tr("less than"), eSearchTypeSmaller);
+    map.insert("<", eSearchTypeSmaller);
+    map.insert(tr("longer than"), eSearchTypeBigger);
+    map.insert(tr("higher than"), eSearchTypeBigger);
+    map.insert(tr("bigger than"), eSearchTypeBigger);
+    map.insert(tr("greater than"), eSearchTypeBigger);
+    map.insert(tr("above"), eSearchTypeBigger);
+    map.insert(tr("over"), eSearchTypeBigger);
+    map.insert(tr("after"), eSearchTypeBigger);
+    map.insert(tr("later than"), eSearchTypeBigger);
+    map.insert(">", eSearchTypeBigger);
+    map.insert(tr("regex"), eSearchTypeRegEx);
+    map.insert("=", eSearchTypeEquals);
+    map.insert(tr("equals"), eSearchTypeEquals);
+    map.insert(tr("between"), eSearchTypeBetween);
     return map;
 }
 
-QMap<QString,QString> CSearch::keywordSearchExampleMap = CSearch::initKeywordSearchExampleMap();
-QMap<QString,QString> CSearch::initKeywordSearchExampleMap()
+QMap<QString, QString> CSearch::keywordSearchExampleMap = CSearch::initKeywordSearchExampleMap();
+QMap<QString, QString> CSearch::initKeywordSearchExampleMap()
 {
-    QMap<QString,QString> map;
-    map.insert(tr("with"),tr("example: attributes with dog"));
-    map.insert(tr("contains"),tr("example: name contains bike"));
-    map.insert(tr("without"),tr("example: name without water"));
-    map.insert(tr("shorter than"),tr("example: shorter than 5km"));
-    map.insert(tr("smaller than"),tr("example: area smaller than 5m²"));
-    map.insert(tr("under"),tr("example: elevation under 1000ft"));
-    map.insert(tr("lower than"),tr("example: lower than 500m"));
-    map.insert(tr("earlier than"),tr("example: date earlier than 2015"));
-    map.insert(tr("before"),tr("example: date before 10.05.2017"));//Localisation of date in example!
-    map.insert(tr("less than"),tr("example: ascent less than 500m"));
-    map.insert("<",tr("example: D < 3"));
-    map.insert(tr("longer than"),tr("example: distance longer than 20mi"));
-    map.insert(tr("higher than"),tr("example: terrain higher than 2"));
-    map.insert(tr("bigger than"),tr("example: area bigger than 50m²"));
-    map.insert(tr("greater than"),tr("example: descent greater than 3000ft"));
-    map.insert(tr("above"),tr("example: above 50m"));
-    map.insert(tr("over"),tr("example: elevation over 400m"));
-    map.insert(tr("after"),tr("example: date after 2013"));
-    map.insert(tr("later than"),tr("example: date later than 2015"));
-    map.insert(">",tr("example: T > 4"));
-    map.insert(tr("regex"),tr("example: size regex (regular|large)"));
-    map.insert("=",tr("example: size = micro"));
-    map.insert(tr("equals"),tr("example: activity equals bike"));
-    map.insert(tr("between"),tr("example: length between 20km and 20mi"));
+    QMap<QString, QString> map;
+    map.insert(tr("with"), tr("example: attributes with dog"));
+    map.insert(tr("contains"), tr("example: name contains bike"));
+    map.insert(tr("without"), tr("example: name without water"));
+    map.insert(tr("shorter than"), tr("example: shorter than 5km"));
+    map.insert(tr("smaller than"), tr("example: area smaller than 5m²"));
+    map.insert(tr("under"), tr("example: elevation under 1000ft"));
+    map.insert(tr("lower than"), tr("example: lower than 500m"));
+    map.insert(tr("earlier than"), tr("example: date earlier than 2015"));
+    map.insert(tr("before"), tr("example: date before 10.05.2017"));//Localisation of date in example!
+    map.insert(tr("less than"), tr("example: ascent less than 500m"));
+    map.insert("<", tr("example: D < 3"));
+    map.insert(tr("longer than"), tr("example: distance longer than 20mi"));
+    map.insert(tr("higher than"), tr("example: terrain higher than 2"));
+    map.insert(tr("bigger than"), tr("example: area bigger than 50m²"));
+    map.insert(tr("greater than"), tr("example: descent greater than 3000ft"));
+    map.insert(tr("above"), tr("example: above 50m"));
+    map.insert(tr("over"), tr("example: elevation over 400m"));
+    map.insert(tr("after"), tr("example: date after 2013"));
+    map.insert(tr("later than"), tr("example: date later than 2015"));
+    map.insert(">", tr("example: T > 4"));
+    map.insert(tr("regex"), tr("example: size regex (regular|large)"));
+    map.insert("=", tr("example: size = micro"));
+    map.insert(tr("equals"), tr("example: activity equals bike"));
+    map.insert(tr("between"), tr("example: length between 20km and 20mi"));
     return map;
 }
 
-QMap<QString,searchProperty_e> CSearch::searchPropertyEnumMap = CSearch::initSearchPropertyEnumMap();
-QMap<QString,searchProperty_e> CSearch::initSearchPropertyEnumMap()
+QMap<QString, searchProperty_e> CSearch::searchPropertyEnumMap = CSearch::initSearchPropertyEnumMap();
+QMap<QString, searchProperty_e> CSearch::initSearchPropertyEnumMap()
 {
-    QMap<QString,searchProperty_e> map;
+    QMap<QString, searchProperty_e> map;
     //General keywords
-    map.insert(tr("name"),eSearchPropertyGeneralName);
-    map.insert(tr("full text"),eSearchPropertyGeneralFullText);
-    map.insert(tr("elevation"),eSearchPropertyGeneralElevation);
-    map.insert(tr("date"),eSearchPropertyGeneralDate);
-    map.insert(tr("comment"),eSearchPropertyGeneralComment);
-    map.insert(tr("description"),eSearchPropertyGeneralDescription);
+    map.insert(tr("name"), eSearchPropertyGeneralName);
+    map.insert(tr("full text"), eSearchPropertyGeneralFullText);
+    map.insert(tr("elevation"), eSearchPropertyGeneralElevation);
+    map.insert(tr("date"), eSearchPropertyGeneralDate);
+    map.insert(tr("comment"), eSearchPropertyGeneralComment);
+    map.insert(tr("description"), eSearchPropertyGeneralDescription);
 
     //Area keywords
-    map.insert(tr("area"),eSearchPropertyAreaArea);
+    map.insert(tr("area"), eSearchPropertyAreaArea);
 
     //Geocache keywords
-    map.insert(tr("difficulty"),eSearchPropertyGeocacheDifficulty);
-    map.insert("D",eSearchPropertyGeocacheDifficulty);
-    map.insert(tr("terrain"),eSearchPropertyGeocacheTerrain);
-    map.insert(tr("T"),eSearchPropertyGeocacheTerrain);
-    map.insert(tr("attributes"),eSearchPropertyGeocacheAttributes);
-    map.insert(tr("size"),eSearchPropertyGeocacheSize);
-    map.insert(tr("GCCode"),eSearchPropertyGeocacheGCCode);
-    map.insert(tr("GCName"),eSearchPropertyGeocacheGCName);
+    map.insert(tr("difficulty"), eSearchPropertyGeocacheDifficulty);
+    map.insert("D", eSearchPropertyGeocacheDifficulty);
+    map.insert(tr("terrain"), eSearchPropertyGeocacheTerrain);
+    map.insert(tr("T"), eSearchPropertyGeocacheTerrain);
+    map.insert(tr("attributes"), eSearchPropertyGeocacheAttributes);
+    map.insert(tr("size"), eSearchPropertyGeocacheSize);
+    map.insert(tr("GCCode"), eSearchPropertyGeocacheGCCode);
+    map.insert(tr("GCName"), eSearchPropertyGeocacheGCName);
 
     //Waypoint keywords
 
     //Route / track keywords
-    map.insert(tr("distance"),eSearchPropertyRteTrkDistance);
-    map.insert(tr("length"),eSearchPropertyRteTrkDistance);
-    map.insert(tr("ascent"),eSearchPropertyRteTrkAscent);
-    map.insert(tr("elevation gain"),eSearchPropertyRteTrkAscent);
-    map.insert(tr("descent"),eSearchPropertyRteTrkDescent);
-    map.insert(tr("min elevation"),eSearchPropertyRteTrkMinElevation);
-    map.insert(tr("minimal elevation"),eSearchPropertyRteTrkMinElevation);
-    map.insert(tr("max elevation"),eSearchPropertyRteTrkMaxElevation);
-    map.insert(tr("maximal elevation"),eSearchPropertyRteTrkMaxElevation);
-    map.insert(tr("max speed"),eSearchPropertyRteTrkMaxSpeed);
-    map.insert(tr("maximal speed"),eSearchPropertyRteTrkMaxSpeed);
-    map.insert(tr("min speed"),eSearchPropertyRteTrkMinSpeed);
-    map.insert(tr("minimal speed"),eSearchPropertyRteTrkMinSpeed);
-    map.insert(tr("average speed"),eSearchPropertyRteTrkAvgSpeed);
-    map.insert(tr("activity"),eSearchPropertyRteTrkActivity);
-    map.insert(tr("total time"),eSearchPropertyRteTrkTotalTime);
-    map.insert(tr("duration"),eSearchPropertyRteTrkTotalTime);
-    map.insert(tr("time moving"),eSearchPropertyRteTrkTimeMoving);
+    map.insert(tr("distance"), eSearchPropertyRteTrkDistance);
+    map.insert(tr("length"), eSearchPropertyRteTrkDistance);
+    map.insert(tr("ascent"), eSearchPropertyRteTrkAscent);
+    map.insert(tr("elevation gain"), eSearchPropertyRteTrkAscent);
+    map.insert(tr("descent"), eSearchPropertyRteTrkDescent);
+    map.insert(tr("min elevation"), eSearchPropertyRteTrkMinElevation);
+    map.insert(tr("minimal elevation"), eSearchPropertyRteTrkMinElevation);
+    map.insert(tr("max elevation"), eSearchPropertyRteTrkMaxElevation);
+    map.insert(tr("maximal elevation"), eSearchPropertyRteTrkMaxElevation);
+    map.insert(tr("max speed"), eSearchPropertyRteTrkMaxSpeed);
+    map.insert(tr("maximal speed"), eSearchPropertyRteTrkMaxSpeed);
+    map.insert(tr("min speed"), eSearchPropertyRteTrkMinSpeed);
+    map.insert(tr("minimal speed"), eSearchPropertyRteTrkMinSpeed);
+    map.insert(tr("average speed"), eSearchPropertyRteTrkAvgSpeed);
+    map.insert(tr("activity"), eSearchPropertyRteTrkActivity);
+    map.insert(tr("total time"), eSearchPropertyRteTrkTotalTime);
+    map.insert(tr("duration"), eSearchPropertyRteTrkTotalTime);
+    map.insert(tr("time moving"), eSearchPropertyRteTrkTimeMoving);
 
     return map;
 }
 
-QMap<searchProperty_e,QString> CSearch::searchPropertyMeaningMap = CSearch::initSearchPropertyMeaningMap();
-QMap<searchProperty_e,QString> CSearch::initSearchPropertyMeaningMap()
+QMap<searchProperty_e, QString> CSearch::searchPropertyMeaningMap = CSearch::initSearchPropertyMeaningMap();
+QMap<searchProperty_e, QString> CSearch::initSearchPropertyMeaningMap()
 {
-    QMap<searchProperty_e,QString> map;
+    QMap<searchProperty_e, QString> map;
     //General keywords
     map.insert(eSearchPropertyGeneralName, tr("searches the name"));
     map.insert(eSearchPropertyGeneralFullText, tr("searches the full text"));
@@ -438,55 +433,75 @@ QMap<searchProperty_e,QString> CSearch::initSearchPropertyMeaningMap()
     return map;
 }
 
-QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::searchTypeLambdaMap = CSearch::initSearchTypeLambdaMap();
 QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap()
 {
     QMap<CSearch::search_type_e, CSearch::fSearch> map;
     map.insert(eSearchTypeEquals, [](const searchValue_t& itemValue, searchValue_t& searchValue){
         return itemValue.toString() == searchValue.toString();
     });
-    map.insert(eSearchTypeSmaller, [](const searchValue_t& itemValue, searchValue_t& searchValue){
-        if(searchValue.value1 != NOFLOAT && itemValue.value1 != NOFLOAT)
+    map.insert(eSearchTypeSmaller, [this](const searchValue_t& itemValue, searchValue_t& searchValue){
+        if(itemValue.value1 != NOFLOAT)
         {
-            adjustUnits(itemValue, searchValue);
-            if(itemValue.value2 == NOFLOAT)
+            if(searchValue.value1 != NOFLOAT)
             {
-                return itemValue.value1 < searchValue.value1;
+                adjustUnits(itemValue, searchValue);
+                if(itemValue.value2 == NOFLOAT)
+                {
+                    return itemValue.value1 < searchValue.value1;
+                }
+                else
+                {
+                    return qMax(itemValue.value1, itemValue.value2) < searchValue.value1;
+                }
             }
             else
             {
-                return qMax(itemValue.value1,itemValue.value2) < searchValue.value1;
+                syntaxError = true;
             }
         }
         return false;
     });
-    map.insert(eSearchTypeBigger, [](const searchValue_t& itemValue, searchValue_t& searchValue){
-        if(searchValue.value1 != NOFLOAT && itemValue.value1 != NOFLOAT)
+    map.insert(eSearchTypeBigger, [this](const searchValue_t& itemValue, searchValue_t& searchValue){
+        if(itemValue.value1 != NOFLOAT)
         {
-            adjustUnits(itemValue, searchValue);
-            if(itemValue.value2 == NOFLOAT)
+            if(searchValue.value1 != NOFLOAT)
             {
-                return itemValue.value1 > searchValue.value1;
+                adjustUnits(itemValue, searchValue);
+                if(itemValue.value2 == NOFLOAT)
+                {
+                    return itemValue.value1 > searchValue.value1;
+                }
+                else
+                {
+                    return qMin(itemValue.value1, itemValue.value2) > searchValue.value1;
+                }
             }
             else
             {
-                return qMin(itemValue.value1,itemValue.value2) > searchValue.value1;
+                syntaxError = true;
             }
         }
         return false;
     });
 
-    map.insert(eSearchTypeBetween, [](const searchValue_t& itemValue, searchValue_t& searchValue){
-        if(searchValue.value1 != NOFLOAT && itemValue.value1 != NOFLOAT && searchValue.value2 != NOFLOAT && itemValue.value2 != NOFLOAT)
+    map.insert(eSearchTypeBetween, [this](const searchValue_t& itemValue, searchValue_t& searchValue){
+        if(itemValue.value1 != NOFLOAT)
         {
-            adjustUnits(itemValue, searchValue);
-            if(itemValue.value2 == NOFLOAT)
+            if(searchValue.value1 != NOFLOAT && searchValue.value2 != NOFLOAT)
             {
-                return itemValue.value1 < qMax(searchValue.value1,searchValue.value2) && itemValue.value1 > qMin(searchValue.value1,searchValue.value2);
+                adjustUnits(itemValue, searchValue);
+                if(itemValue.value2 == NOFLOAT)
+                {
+                    return itemValue.value1 < qMax(searchValue.value1, searchValue.value2) && itemValue.value1 > qMin(searchValue.value1, searchValue.value2);
+                }
+                else
+                {
+                    return qMax(itemValue.value1, itemValue.value2) < qMax(searchValue.value1, searchValue.value2) && qMin(itemValue.value1, itemValue.value2) > qMin(searchValue.value1, searchValue.value2);
+                }
             }
             else
             {
-                return qMax(itemValue.value1,itemValue.value2) < qMax(searchValue.value1,searchValue.value2) && qMin(itemValue.value1,itemValue.value2) > qMin(searchValue.value1,searchValue.value2);
+                syntaxError = true;
             }
         }
         return false;

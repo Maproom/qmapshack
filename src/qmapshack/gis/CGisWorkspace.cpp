@@ -36,6 +36,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/IRouter.h"
 #include "gis/search/CGeoSearchWeb.h"
+#include "gis/search/CSearch.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -57,8 +58,8 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
     pSelf = this;
     setupUi(this);
 
-    lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
-    lineFilter->addAction(actionHelp,QLineEdit::TrailingPosition);
+    lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
+    lineFilter->addAction(actionHelp, QLineEdit::TrailingPosition);
     lineFilter->addAction(actionSetupFilter, QLineEdit::LeadingPosition);
 
     treeWks->setExternalMenu(menuProject);
@@ -157,6 +158,8 @@ void CGisWorkspace::slotSearch(const QString& str)
     CCanvas::setOverrideCursor(Qt::WaitCursor, "slotFilter");
     QMutexLocker lock(&IGisItem::mutexItems);
 
+    CSearch currentSearch (str);
+
     const int N = treeWks->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
@@ -166,9 +169,31 @@ void CGisWorkspace::slotSearch(const QString& str)
             continue;
         }
 
-        item->filter(str);
+        item->filter(currentSearch);
         item->setExpanded(!str.isEmpty());
     }
+
+    //test whether no syntax errors occured and show exclamation mark
+    QPalette palette = lineFilter->palette();
+    if(currentSearch.getSyntaxError())
+    {
+        palette.setColor(QPalette::Base, QColor("lightpink"));
+        if(currentSearch.getSearchMode() == CSearch::eSearchModeName)
+        {
+            lineFilter->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in names"));
+        }
+        else
+        {
+            lineFilter->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
+        }
+    }
+    else
+    {
+        palette.setColor(QPalette::Base, QColor("white"));
+        lineFilter->setToolTip(tr("Filter: Start to type and the list will be reduced to matching items. An example would be \"date between 2010 and 2012\""));
+    }
+    lineFilter->setPalette(palette);
+
 
     CCanvas::restoreOverrideCursor("slotFilter");
 

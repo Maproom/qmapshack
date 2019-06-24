@@ -73,8 +73,8 @@ public:
     enum sorting_folder_e
     {
         eSortFolderTime
-        ,eSortFolderName
-        ,eSortFolderSymbol
+        , eSortFolderName
+        , eSortFolderSymbol
     };
 
     struct person_t
@@ -515,7 +515,7 @@ public:
         return noUpdate;
     }
 
-    void filter(const QString& str);
+    void filter(CSearch& search);
 
     void confirmPendingAutoSave()
     {

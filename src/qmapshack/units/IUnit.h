@@ -67,7 +67,7 @@ public:
     /// convert meter into the base unit (ft, m)
     virtual void meter2base(qreal meter, QString& val, QString& unit) const;
 
-    static void convert(qreal &value, QString &unit, const QString& targetUnit);
+    static bool convert(qreal &value, QString &unit, const QString& targetUnit);
 
     enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
     /// instantiate the correct unit object

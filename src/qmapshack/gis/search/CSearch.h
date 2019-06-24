@@ -133,7 +133,12 @@ public:
 
     search_type_e getSearchType(QString keyword)
     {
-        return keywordSearchTypeMap.value(keyword,eSearchTypeNone);
+        return keywordSearchTypeMap.value(keyword, eSearchTypeNone);
+    }
+
+    bool getSyntaxError()
+    {
+        return syntaxError;
     }
 
     static QStringList getSearchTypeKeywords()
@@ -181,27 +186,28 @@ private:
     static Qt::CaseSensitivity caseSensitivity;
     static search_mode_e searchMode;
 
-    static void adjustUnits(const searchValue_t &itemValue, searchValue_t &searchValue);
-    static void improveQuery(search_t& search);
+    void adjustUnits(const searchValue_t &itemValue, searchValue_t &searchValue);
+    void improveQuery();
 
-    QList<search_t> searches;
+    search_t search;
+    bool syntaxError = false;
 
-    static QMap<QString,search_type_e> keywordSearchTypeMap;
-    static QMap<QString,search_type_e> initKeywordSearchTypeMap();
+    static QMap<QString, search_type_e> keywordSearchTypeMap;
+    static QMap<QString, search_type_e> initKeywordSearchTypeMap();
 
-    static QMap<QString,QString> keywordSearchExampleMap;
-    static QMap<QString,QString> initKeywordSearchExampleMap();
+    static QMap<QString, QString> keywordSearchExampleMap;
+    static QMap<QString, QString> initKeywordSearchExampleMap();
 
-    static QMap<QString,searchProperty_e> searchPropertyEnumMap;
-    static QMap<QString,searchProperty_e> initSearchPropertyEnumMap();
+    static QMap<QString, searchProperty_e> searchPropertyEnumMap;
+    static QMap<QString, searchProperty_e> initSearchPropertyEnumMap();
 
-    static QMap<searchProperty_e,QString> searchPropertyMeaningMap;
-    static QMap<searchProperty_e,QString> initSearchPropertyMeaningMap();
+    static QMap<searchProperty_e, QString> searchPropertyMeaningMap;
+    static QMap<searchProperty_e, QString> initSearchPropertyMeaningMap();
 
     //First is itemValue, second is searchValue, which is non const to adjust units
     using fSearch = std::function<bool (const searchValue_t&, searchValue_t&)>;
-    static QMap<search_type_e,fSearch > searchTypeLambdaMap;
-    static QMap<search_type_e,fSearch > initSearchTypeLambdaMap();
+    QMap<search_type_e, fSearch > searchTypeLambdaMap;
+    QMap<search_type_e, fSearch > initSearchTypeLambdaMap();
 };
 
 #endif // CSEARCH_H

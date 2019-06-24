@@ -68,6 +68,15 @@ public:
     virtual void meter2base(qreal meter, QString& val, QString& unit) const;
 
     static bool convert(qreal &value, QString &unit, const QString& targetUnit);
+    static QStringList getUnits()
+    {
+        QStringList list;
+        list.append(timeToMKSMap.keys());
+        list.append(distanceToMKSMap.keys());
+        list.append(speedToMKSMap.keys());
+        list.append(areaToMKSMap.keys());
+        return list;
+    }
 
     enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
     /// instantiate the correct unit object
@@ -176,5 +185,22 @@ private:
     static const QRegExp reCoord3;
     static const QRegExp reCoord4;
     static const QRegExp reCoord5;
+
+    enum unit_type_e
+    {
+        eUnitTypeTime,
+        eUnitTypeDistance,
+        eUnitTypeSpeed,
+        eUnitTypeArea
+    };
+
+    static QMap<QString, qreal> timeToMKSMap;
+    static QMap<QString, qreal> initTimeToMKSMap();
+    static QMap<QString, qreal> distanceToMKSMap;
+    static QMap<QString, qreal> initDistanceToMKSMap();
+    static QMap<QString, qreal> speedToMKSMap;
+    static QMap<QString, qreal> initSpeedToMKSMap();
+    static QMap<QString, qreal> areaToMKSMap;
+    static QMap<QString, qreal> initAreaToMKSMap();
 };
 #endif //IUNIT_H

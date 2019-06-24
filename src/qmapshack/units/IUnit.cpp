@@ -459,197 +459,87 @@ bool IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
     {
         return true;
     }
-
-    //Convert to mks base units and then to the target to make the code shorter.
-    //Also, assign the units to have a safetynet in case the conversion to the target fails.
-    if( unit ==  "m²" || unit ==  "m" ||  unit ==  "m/s" || unit == "s")
-    {
-        //do nothing
-    }
-    else if(unit == "km²")
-    {
-        value *= 1000 * 1000;
-        unit = "m²";
-    }
-    else if(unit == "km")
-    {
-        value *= 1000;
-        unit = "m";
-    }
-    else if(unit == "km/h")
-    {
-        value *= 1000/3600;
-        unit = "m/s";
-    }
-    else if( unit == "ft²")
-    {
-        value /= CUnitImperial::footPerMeter * CUnitImperial::footPerMeter;
-        unit = "m²";
-    }
-    else if( unit == "ft")
-    {
-        value /= CUnitImperial::footPerMeter;
-        unit = "m";
-    }
-    else if(unit == "ft/h")
-    {
-        value /= CUnitImperial::footPerMeter*3600;
-        unit = "m/s";
-    }
-    else if(unit == "ft/min")
-    {
-        value /= CUnitImperial::footPerMeter*60;
-        unit = "m/s";
-    }
-    else if(unit == "ft/s")
-    {
-        value /= CUnitImperial::footPerMeter;
-        unit = "m/s";
-    }
-    else if(unit == "ml²")
-    {
-        value /= CUnitImperial::milePerMeter * CUnitImperial::milePerMeter;
-        unit = "m²";
-    }
-    else if(unit == "ml")
-    {
-        value /= CUnitImperial::milePerMeter;
-        unit = "m";
-    }
-    else if(unit == "ml/h")
-    {
-        value /= CUnitImperial::milePerMeter*3600;
-        unit = "m/s";
-    }
-    else if(unit == "ml/min")
-    {
-        value /= CUnitImperial::milePerMeter*60;
-        unit = "m/s";
-    }
-    else if(unit == "ml/s")
-    {
-        value /= CUnitImperial::milePerMeter;
-        unit = "m/s";
-    }
-    else if(unit == "min")
-    {
-        value *= 60;
-        unit="s";
-    }
-    else if(unit == "h")
-    {
-        value *= 3600;
-        unit ="s";
-    }
     else
     {
-        return false; //Converting to base Unit failed
-    }
+        qreal toBase = NOFLOAT;
+        unit_type_e unitType;
+        toBase = timeToMKSMap.value(unit, NOFLOAT);
+        if(toBase != NOFLOAT)
+        {
+            unitType = eUnitTypeTime;
+        }
+        else
+        {
+            toBase = distanceToMKSMap.value(unit, NOFLOAT);
+            if(toBase != NOFLOAT)
+            {
+                unitType = eUnitTypeDistance;
+            }
+            else
+            {
+                toBase = speedToMKSMap.value(unit, NOFLOAT);
+                if(toBase != NOFLOAT)
+                {
+                    unitType = eUnitTypeSpeed;
+                }
+                else
+                {
+                    toBase = areaToMKSMap.value(unit, NOFLOAT);
+                    if(toBase != NOFLOAT)
+                    {
+                        unitType = eUnitTypeArea;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
 
-    //convert to target
-    if( targetUnit ==  "m²" || targetUnit ==  "m" ||  targetUnit ==  "m/s" || targetUnit == "s")
-    {
-        //do nothing
-    }
-    else if (targetUnit == "m/h")
-    {
-        value *= 3600;
+        qreal fromTarget = NOFLOAT;
+        switch(unitType)
+        {
+        case eUnitTypeTime:
+            fromTarget = timeToMKSMap.value(targetUnit, NOFLOAT);
+            if(fromTarget == NOFLOAT)
+            {
+                return false;
+            }
+            break;
+
+        case eUnitTypeDistance:
+            fromTarget = distanceToMKSMap.value(targetUnit, NOFLOAT);
+            if(fromTarget == NOFLOAT)
+            {
+                return false;
+            }
+            break;
+
+        case eUnitTypeSpeed:
+            fromTarget = speedToMKSMap.value(targetUnit, NOFLOAT);
+            if(fromTarget == NOFLOAT)
+            {
+                return false;
+            }
+            break;
+
+        case eUnitTypeArea:
+            fromTarget = areaToMKSMap.value(targetUnit, NOFLOAT);
+            if(fromTarget == NOFLOAT)
+            {
+                return false;
+            }
+            break;
+
+        default:
+            return false;
+        }
+
         unit = targetUnit;
+        value = value * toBase / fromTarget;
+        return true;
     }
-    else if (targetUnit == "m/min")
-    {
-        value *= 60;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "km²")
-    {
-        value /= 1000 * 1000;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "km")
-    {
-        value /= 1000;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "km/h")
-    {
-        value *= 3600 / 1000;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "km/min")
-    {
-        value *= 60 / 1000;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "km/s")
-    {
-        value /= 1000;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "ft²")
-    {
-        value *= CUnitImperial::footPerMeter * CUnitImperial::footPerMeter;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "ft")
-    {
-        value *= CUnitImperial::footPerMeter;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "ft/h")
-    {
-        value *= CUnitImperial::footPerMeter * 3600;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "ft/min")
-    {
-        value *= CUnitImperial::footPerMeter * 60;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "ft/s")
-    {
-        value *= CUnitImperial::footPerMeter;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "ml²")
-    {
-        value *= CUnitImperial::milePerMeter * CUnitImperial::milePerMeter;
-    }
-    else if(targetUnit == "ml")
-    {
-        value *= CUnitImperial::milePerMeter;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "ml/h")
-    {
-        value *= CUnitImperial::milePerMeter * 3600;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "ml/min")
-    {
-        value *= CUnitImperial::milePerMeter * 60;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "ml/s")
-    {
-        value *= CUnitImperial::milePerMeter;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "min")
-    {
-        value /= 60;
-        unit = targetUnit;
-    }
-    else if(targetUnit == "h")
-    {
-        value /= 3600;
-        unit = targetUnit;
-    }
-    else
-    {
-        return false;
-    }
-    return true;
 }
 
 void IUnit::slope2string(qreal slope, QString &val, QString &unit)
@@ -1057,4 +947,52 @@ bool IUnit::isValidCoordString(const QString& str)
         return true;
     }
     return false;
+}
+
+QMap<QString, qreal> IUnit::timeToMKSMap=IUnit::initTimeToMKSMap();
+QMap<QString, qreal> IUnit::initTimeToMKSMap()
+{
+    QMap<QString, qreal> map;
+    map.insert("s", 1);
+    map.insert("min", 60);
+    map.insert("h", 3600);
+    return map;
+}
+QMap<QString, qreal> IUnit::distanceToMKSMap=IUnit::initDistanceToMKSMap();
+QMap<QString, qreal> IUnit::initDistanceToMKSMap()
+{
+    QMap<QString, qreal> map;
+    map.insert("m", 1);
+    map.insert("km", 1000);
+    map.insert("ml", 1/CUnitImperial::milePerMeter);
+    map.insert("ft", 1/CUnitImperial::footPerMeter);
+    return map;
+}
+QMap<QString, qreal> IUnit::speedToMKSMap=IUnit::initSpeedToMKSMap();
+QMap<QString, qreal> IUnit::initSpeedToMKSMap()
+{
+    QMap<QString, qreal> map;
+    map.insert("m/s", 1);
+    map.insert("m/min", 1/60);
+    map.insert("m/h", 1/3600);
+    map.insert("km/s", 1000);
+    map.insert("km/min", 1000/60);
+    map.insert("km/h", 1000/3600);
+    map.insert("ml/s", 1/CUnitImperial::milePerMeter);
+    map.insert("ml/min", 1/(CUnitImperial::milePerMeter*60));
+    map.insert("ml/h", 1/(CUnitImperial::milePerMeter*3600));
+    map.insert("ft/s", 1/CUnitImperial::footPerMeter);
+    map.insert("ft/min", 1/(CUnitImperial::footPerMeter*60));
+    map.insert("ft/h", 1/(CUnitImperial::footPerMeter*3600));
+    return map;
+}
+QMap<QString, qreal> IUnit::areaToMKSMap=IUnit::initAreaToMKSMap();
+QMap<QString, qreal> IUnit::initAreaToMKSMap()
+{
+    QMap<QString, qreal> map;
+    map.insert("m²", 1);
+    map.insert("km²", 1000*1000);
+    map.insert("ml²", 1/(CUnitImperial::milePerMeter*CUnitImperial::milePerMeter));
+    map.insert("ft²", 1/(CUnitImperial::footPerMeter*CUnitImperial::footPerMeter));
+    return map;
 }

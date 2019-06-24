@@ -175,11 +175,17 @@ bool CSearch::getSearchResult(IGisItem *item)
     return true; //Empty search shouldn't hide anything
 }
 
-void CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchValue)
+bool CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchValue)
 {
+    bool success = false;
     if(searchValue.str1 != "" && searchValue.str1 != itemValue.str1)
     {
-        syntaxError |= IUnit::convert(searchValue.value1, searchValue.str1, itemValue.str1);
+        success = IUnit::convert(searchValue.value1, searchValue.str1, itemValue.str1);
+        syntaxError |= !success;
+        if(!success)
+        {
+            return false;
+        }
     }
     else
     {
@@ -188,12 +194,15 @@ void CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchV
 
     if(searchValue.str2 != "" && searchValue.str2 != itemValue.str2)
     {
-        syntaxError |= IUnit::convert(searchValue.value2, searchValue.str2, itemValue.str2);
+        success = IUnit::convert(searchValue.value2, searchValue.str2, itemValue.str2);
+        syntaxError |= !success;
     }
     else
     {
         searchValue.str2 = itemValue.str2;
+        success = true;
     }
+    return success;
 }
 
 //Make life easier for the user. The method tries to make assumption on what the user meant
@@ -444,7 +453,11 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         {
             if(searchValue.value1 != NOFLOAT)
             {
-                adjustUnits(itemValue, searchValue);
+                bool adjustSuccess = adjustUnits(itemValue, searchValue);
+                if(adjustSuccess == false)
+                {
+                    return false;
+                }
                 if(itemValue.value2 == NOFLOAT)
                 {
                     return itemValue.value1 < searchValue.value1;
@@ -466,7 +479,11 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         {
             if(searchValue.value1 != NOFLOAT)
             {
-                adjustUnits(itemValue, searchValue);
+                bool adjustSuccess = adjustUnits(itemValue, searchValue);
+                if(adjustSuccess == false)
+                {
+                    return false;
+                }
                 if(itemValue.value2 == NOFLOAT)
                 {
                     return itemValue.value1 > searchValue.value1;
@@ -489,7 +506,11 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         {
             if(searchValue.value1 != NOFLOAT && searchValue.value2 != NOFLOAT)
             {
-                adjustUnits(itemValue, searchValue);
+                bool adjustSuccess = adjustUnits(itemValue, searchValue);
+                if(adjustSuccess == false)
+                {
+                    return false;
+                }
                 if(itemValue.value2 == NOFLOAT)
                 {
                     return itemValue.value1 < qMax(searchValue.value1, searchValue.value2) && itemValue.value1 > qMin(searchValue.value1, searchValue.value2);

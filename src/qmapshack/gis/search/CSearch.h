@@ -186,7 +186,7 @@ private:
     static Qt::CaseSensitivity caseSensitivity;
     static search_mode_e searchMode;
 
-    void adjustUnits(const searchValue_t &itemValue, searchValue_t &searchValue);
+    bool adjustUnits(const searchValue_t &itemValue, searchValue_t &searchValue);
     void improveQuery();
 
     search_t search;

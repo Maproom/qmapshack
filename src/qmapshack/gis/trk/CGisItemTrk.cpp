@@ -2032,7 +2032,7 @@ void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const
         }
     }
 
-    CDraw::bubble(p, rect.toRect(), pos.toPoint(), baseWidth, basePos, (key == keyUserFocus) ? CDraw::penBorderRed : CDraw::penBorderGray);
+    CDraw::bubble(p, rect.toRect(), pos.toPoint(), Qt::white, baseWidth, basePos, (key == keyUserFocus) ? CDraw::penBorderRed : CDraw::penBorderGray);
     CDraw::text(fullLabel, p, rect.toRect(), type == eLimitTypeMin ? Qt::darkGreen : Qt::darkRed);
     blockedAreas << rect;
 }
@@ -2280,9 +2280,14 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         p.setFont(f);
 
         // draw the bubble
+        QWidget widget;
+        const QPalette& pal = widget.palette();
+        const QColor& colorBg = pal.color(QPalette::Background);
+        const QColor& colorFg = pal.color(QPalette::Foreground);
+
         QRect box(0, 0, w, h);
         box.moveBottomLeft(anchor.toPoint() + QPoint(-50, -50));
-        CDraw::bubble(p, box, anchor.toPoint(), 18 /* px */, 21 /* px */);
+        CDraw::bubble(p, box, anchor.toPoint(), colorBg, 18 /* px */, 21 /* px */);
 
         p.save();
         p.translate(box.topLeft());
@@ -2332,7 +2337,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         // draw text
         p.translate(0, fm.height() + 8);
-        p.setPen(Qt::darkBlue);
+        p.setPen(colorFg);
         p.drawText(rectText, Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
 
         p.restore();

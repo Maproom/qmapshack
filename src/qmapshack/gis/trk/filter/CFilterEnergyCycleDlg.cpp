@@ -15,6 +15,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterEnergyCycleDlg.h"
 
@@ -48,8 +49,8 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     {
         {tr("User defined"),            NOFLOAT}, // name, rollingCoeff
         {tr("Cycling race track"),      0.002},
-        {tr("Asphalt, small tire"),     0.004},
-        {tr("Asphalt, normal tire"),    0.005},
+        {tr("Asphalt, small tyres"),    0.004},
+        {tr("Asphalt, normal tyres"),   0.005},
         {tr("Mix Asphalt+Forest"),      0.007},
         {tr("Mountain Bike Trail"),     0.015},
         {tr("Hard Forest Path"),        0.010},

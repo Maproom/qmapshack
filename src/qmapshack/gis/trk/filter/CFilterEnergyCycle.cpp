@@ -221,25 +221,27 @@ void CFilterEnergyCycle::compute()
 
 void CFilterEnergyCycle::slotShowHelp()
 {
+
     QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help")
-                             , tr(" \
-                                  <html> \
-                                  <head/> \
-                                  <body> \
-                                  <p><b>Set Energy Use for Cycling</b></p> \
-                                  <p>With this filter your personal energy use for a cycling tour can be computed.</p> \
-                                  <p>The algorithm is an axproximation based on a simple, robust and fast mathematical background.</p> \
-                                  <p>The speed and slope from each track data will be considered.</p> \
-                                  <p>To individualize your personal energy use (consumption) the following data are needed: \
-                                  <br/>* Drivers and bicyle weight \
-                                  <br/>* Air density, wind speed and position to the wind \
-                                  <br/>* Average pedal cadence for the computation of pedal force \
-                                  <br/>* Ground situation (tyre and ground) to consider the rolling resistance</p> \
-                                  <p>Five  parameter settings can be stored to reuse later on.</p> \
-                                  <p>The energy use in unit \"kcal\" will be stored in the track and can be remove later when not longer needed.</p> \
-                                  <p>The parameters sets will be defined in a separate \"Edit Setting\" dialog and more output values will be shown there.</p> \
-                                  <p>For more information see tooltip on input and output values and the help button in the \"Edit Setting\" dialog.</p> \
-                                  </body> \
-                                  </html> \
-                                 "));
+    , tr(" \
+      <html> \
+      <head/> \
+      <body> \
+      <h3>Set Energy Use for Cycling</h3> \
+      <p>With this filter your personal energy use for a cycling tour can be computed. \
+      The computed vaule of \"Energy Use\" can be see as an indicator for the exertion of a cycling tour.</p> \
+      <p>The algorithm is an approximation based on a simple, robust and fast mathematical background.</p> \
+      <p>The tour length, speed and slope from each track point will be considered.</p> \
+      <p>To individualize your personal energy use (consumption) the following input data are needed: \
+      <ul><li>Drivers and bicyle weight</li> \
+      <li>Air density, wind speed and position to the wind</li> \
+      <li>Average pedal cadence for the computation of pedal force</li> \
+      <li>Ground situation (tyre and ground) to consider the rolling resistance</li></ul></p> \
+      <p>Five  parameter settings can be stored to reuse later on.</p> \
+      <p>The energy use in unit \"kcal\" will be stored in the track and can be remove later when not longer needed.</p> \
+      <p>The parameters sets will be defined in a separate \"Edit Setting\" dialog and more output values will be shown there.</p> \
+      <p>For more information see tooltips on input and output values the \"Edit Setting\" dialog.</p> \
+      </body> \
+      </html> \
+     "));
 }

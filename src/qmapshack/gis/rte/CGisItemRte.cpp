@@ -1313,59 +1313,59 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
     updateHistory();
 }
 
-QMap<searchProperty_e,CGisItemRte::fSearch > CGisItemRte::keywordLambdaMap = CGisItemRte::initKeywordLambdaMap();
+QMap<searchProperty_e, CGisItemRte::fSearch > CGisItemRte::keywordLambdaMap = CGisItemRte::initKeywordLambdaMap();
 QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
 {
     QMap<searchProperty_e, CGisItemRte::fSearch> map;
-    map.insert(eSearchPropertyGeneralName,[](CGisItemRte* item){
+    map.insert(eSearchPropertyGeneralName, [](CGisItemRte* item){
         searchValue_t searchValue;
         searchValue.str1 = item->rte.name;
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralFullText,[](CGisItemRte* item){
+    map.insert(eSearchPropertyGeneralFullText, [](CGisItemRte* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralElevation,[](CGisItemRte* item){
+    map.insert(eSearchPropertyGeneralElevation, [](CGisItemRte* item){
         searchValue_t searchValue;
-        IUnit::self().meter2elevation(item->rte.minElevation,searchValue.value1,searchValue.str1);
-        IUnit::self().meter2elevation(item->rte.maxElevation,searchValue.value1,searchValue.str1);
+        IUnit::self().meter2elevation(item->rte.minElevation, searchValue.value1, searchValue.str1);
+        IUnit::self().meter2elevation(item->rte.maxElevation, searchValue.value1, searchValue.str1);
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralComment,[](CGisItemRte* item){
+    map.insert(eSearchPropertyGeneralComment, [](CGisItemRte* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getComment();
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralDescription,[](CGisItemRte* item){
+    map.insert(eSearchPropertyGeneralDescription, [](CGisItemRte* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getDescription();
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkDistance,[](CGisItemRte* item){
+    map.insert(eSearchPropertyRteTrkDistance, [](CGisItemRte* item){
         searchValue_t searchValue;
-        IUnit::self().meter2distance(item->rte.totalDistance,searchValue.value1,searchValue.str1);
+        IUnit::self().meter2distance(item->rte.totalDistance, searchValue.value1, searchValue.str1);
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkAscent,[](CGisItemRte* item){
+    map.insert(eSearchPropertyRteTrkAscent, [](CGisItemRte* item){
         searchValue_t searchValue;
-        IUnit::self().meter2elevation(item->rte.ascent,searchValue.value1,searchValue.str1);
+        IUnit::self().meter2elevation(item->rte.ascent, searchValue.value1, searchValue.str1);
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkDescent,[](CGisItemRte* item){
+    map.insert(eSearchPropertyRteTrkDescent, [](CGisItemRte* item){
         searchValue_t searchValue;
-        IUnit::self().meter2elevation(item->rte.descent,searchValue.value1,searchValue.str1);
+        IUnit::self().meter2elevation(item->rte.descent, searchValue.value1, searchValue.str1);
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkMinElevation,[](CGisItemRte* item){
+    map.insert(eSearchPropertyRteTrkMinElevation, [](CGisItemRte* item){
         searchValue_t searchValue;
-        IUnit::self().meter2elevation(item->rte.minElevation,searchValue.value1,searchValue.str1);
+        IUnit::self().meter2elevation(item->rte.minElevation, searchValue.value1, searchValue.str1);
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkMaxElevation,[](CGisItemRte* item){
+    map.insert(eSearchPropertyRteTrkMaxElevation, [](CGisItemRte* item){
         searchValue_t searchValue;
-        IUnit::self().meter2elevation(item->rte.maxElevation,searchValue.value1,searchValue.str1);
+        IUnit::self().meter2elevation(item->rte.maxElevation, searchValue.value1, searchValue.str1);
         return searchValue;
     });
 

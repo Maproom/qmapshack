@@ -3004,23 +3004,23 @@ void CGisItemTrk::checkForInvalidPoints()
 }
 
 
-QMap<searchProperty_e,CGisItemTrk::fSearch > CGisItemTrk::keywordLambdaMap = CGisItemTrk::initKeywordLambdaMap();
+QMap<searchProperty_e, CGisItemTrk::fSearch > CGisItemTrk::keywordLambdaMap = CGisItemTrk::initKeywordLambdaMap();
 QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
 {
     QMap<searchProperty_e, CGisItemTrk::fSearch> map;
 
     //General keywords
-    map.insert(eSearchPropertyGeneralName,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyGeneralName, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.str1 = item->trk.name;
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralFullText,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyGeneralFullText, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralElevation,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyGeneralElevation, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.value1 = item->getMin(CKnownExtension::internalEle);
         searchValue.str1 = CKnownExtension::get(CKnownExtension::internalEle).unit;
@@ -3028,7 +3028,7 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
         searchValue.str2 = CKnownExtension::get(CKnownExtension::internalEle).unit;
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralDate,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyGeneralDate, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.value1 = item->timeStart.toSecsSinceEpoch();
         searchValue.str1 = "SsE";
@@ -3036,75 +3036,75 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
         searchValue.str2 = "SsE";
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralComment,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyGeneralComment, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getComment();
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralDescription,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyGeneralDescription, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getDescription();
         return searchValue;
     });
     //Route / track keywords
-    map.insert(eSearchPropertyRteTrkDistance,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkDistance, [](CGisItemTrk* item){
         searchValue_t searchValue;
-        IUnit::self().meter2distance(item->totalDistance,searchValue.value1,searchValue.str1);
+        IUnit::self().meter2distance(item->totalDistance, searchValue.value1, searchValue.str1);
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkAscent,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkAscent, [](CGisItemTrk* item){
         searchValue_t searchValue;
-        IUnit::self().meter2elevation(item->totalAscent,searchValue.value1,searchValue.str1);
+        IUnit::self().meter2elevation(item->totalAscent, searchValue.value1, searchValue.str1);
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkDescent,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkDescent, [](CGisItemTrk* item){
         searchValue_t searchValue;
-        IUnit::self().meter2elevation(item->totalDescent,searchValue.value1,searchValue.str1);
+        IUnit::self().meter2elevation(item->totalDescent, searchValue.value1, searchValue.str1);
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkMinElevation,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkMinElevation, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.value1 = item->getMin(CKnownExtension::internalEle);
         searchValue.str1 = CKnownExtension::get(CKnownExtension::internalEle).unit;
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkMaxElevation,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkMaxElevation, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.value1 = item->getMax(CKnownExtension::internalEle);
         searchValue.str1 = CKnownExtension::get(CKnownExtension::internalEle).unit;
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkMaxSpeed,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkMaxSpeed, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.value1 = item->getMax(CKnownExtension::internalSpeedDist);
         searchValue.str1 = CKnownExtension::get(CKnownExtension::internalSpeedDist).unit;
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkMinSpeed,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkMinSpeed, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.value1 = item->getMin(CKnownExtension::internalSpeedDist);
         searchValue.str1 = CKnownExtension::get(CKnownExtension::internalSpeedDist).unit;
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkAvgSpeed,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkAvgSpeed, [](CGisItemTrk* item){
         searchValue_t searchValue;
-        IUnit::self().meter2speed(item->totalDistance/item->totalElapsedSecondsMoving,searchValue.value1,searchValue.str1);
+        IUnit::self().meter2speed(item->totalDistance/item->totalElapsedSecondsMoving, searchValue.value1, searchValue.str1);
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkActivity,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkActivity, [](CGisItemTrk* item){
         searchValue_t searchValue;
         QStringList strL;
         item->activities.getActivityNames(strL);
         searchValue.str1=strL.join(", ");
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkTotalTime,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkTotalTime, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.value1 = item->totalElapsedSeconds;
         searchValue.str1="S";
         return searchValue;
     });
-    map.insert(eSearchPropertyRteTrkTimeMoving,[](CGisItemTrk* item){
+    map.insert(eSearchPropertyRteTrkTimeMoving, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.value1 = item->totalElapsedSecondsMoving;
         searchValue.str1="S";

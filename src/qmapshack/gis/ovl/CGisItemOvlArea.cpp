@@ -569,31 +569,31 @@ void CGisItemOvlArea::setIcon(const QString& c)
     IGisItem::setIcon(mask.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
-QMap<searchProperty_e,CGisItemOvlArea::fSearch > CGisItemOvlArea::keywordLambdaMap = CGisItemOvlArea::initKeywordLambdaMap();
+QMap<searchProperty_e, CGisItemOvlArea::fSearch > CGisItemOvlArea::keywordLambdaMap = CGisItemOvlArea::initKeywordLambdaMap();
 QMap<searchProperty_e, CGisItemOvlArea::fSearch> CGisItemOvlArea::initKeywordLambdaMap()
 {
     QMap<searchProperty_e, CGisItemOvlArea::fSearch> map;
-    map.insert(eSearchPropertyGeneralName,[](CGisItemOvlArea* item){
+    map.insert(eSearchPropertyGeneralName, [](CGisItemOvlArea* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getName();
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralFullText,[](CGisItemOvlArea* item){
+    map.insert(eSearchPropertyGeneralFullText, [](CGisItemOvlArea* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralComment,[](CGisItemOvlArea* item){
+    map.insert(eSearchPropertyGeneralComment, [](CGisItemOvlArea* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getComment();
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralDescription,[](CGisItemOvlArea* item){
+    map.insert(eSearchPropertyGeneralDescription, [](CGisItemOvlArea* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getDescription();
         return searchValue;
     });
-    map.insert(eSearchPropertyAreaArea,[](CGisItemOvlArea* item){
+    map.insert(eSearchPropertyAreaArea, [](CGisItemOvlArea* item){
         searchValue_t searchValue;
         searchValue.value1 = item->area.area;
         return searchValue;

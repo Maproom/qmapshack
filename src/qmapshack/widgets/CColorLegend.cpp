@@ -112,7 +112,7 @@ int CColorLegend::paintLabel(QPainter &p, qreal value)
 
     int posX = xOffset + colorWidth + 3;
 
-    p.setPen( QPen(QBrush(Qt::black), 2.) );
+    p.setPen( QPen(QBrush(palette().color(QPalette::Foreground)), 2.) );
     p.drawLine(posX, posY - fontHeight / 2 + 1, posX + 2, posY - fontHeight / 2 + 1);
 
     if(value == minimum || value == maximum
@@ -160,7 +160,7 @@ void CColorLegend::paintEvent(QPaintEvent *event)
             p.setOpacity(0.6);
 
             p.setPen( QPen(QBrush(Qt::darkGray), 2.) );
-            p.setBrush(Qt::white);
+            p.setBrush(palette().color(backgroundRole()));
             p.drawRoundedRect(1, 1, width() - 2, height() - 2, RECT_RADIUS, RECT_RADIUS);
 
             p.setOpacity(1.f);
@@ -170,7 +170,14 @@ void CColorLegend::paintEvent(QPaintEvent *event)
         // draw the black frame
         QRect borderRect(colorRect);
         borderRect += QMargins(1, 1, 1, 1);
-        p.setPen( QPen(QBrush(Qt::SolidPattern), 2., Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin) );
+        p.setPen( QPen(
+                      QBrush(palette().color(QPalette::Foreground)),
+                      2.,
+                      Qt::SolidLine,
+                      Qt::SquareCap,
+                      Qt::MiterJoin
+                      )
+                  );
         p.drawRect(borderRect);
 
         // draw the gradient

@@ -71,9 +71,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="comboBoxSetting">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Benutzer spezifische Auswahl eines Set von Parameter für die Berechnung des Energieverbrauchs.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Select a user specific set of parameters to compute energy use (consumption) for a cycling track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string/>
        </property>
        <property name="currentText">
         <string/>
@@ -92,7 +92,7 @@
      <item>
       <widget class="QPushButton" name="pushButtonEdit">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Öffnet den Dialog für die Änderung der Paramter für die Berechnung des Energieverbrauchs für einen Fahrrad Track.&lt;/p&gt;&lt;p&gt;Open dialog window to modify parameter set and compute energy use (consumption) for a cycling track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string/>
        </property>
        <property name="text">
         <string>Edit Setting</string>
@@ -102,7 +102,7 @@
      <item>
       <widget class="QPushButton" name="pushButtonRemove">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Löscht den 'Energy Use Cycling' Wert aus dem Track.&lt;/p&gt;&lt;p&gt;Remove the 'Energy Use Cycling' value from the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string/>
        </property>
        <property name="text">
         <string>Remove</string>
@@ -125,7 +125,7 @@
      <item>
       <widget class="QToolButton" name="toolApply">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Berechnet des Energieverbrauchs für einen Fahrrad Track auf Basis des gewählten Parameter Set.&lt;/p&gt;&lt;p&gt;Computes energy use (consumption) for a cycling track based on selected parameter set.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string/>
        </property>
        <property name="text">
         <string>...</string>

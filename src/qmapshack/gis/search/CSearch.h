@@ -181,6 +181,14 @@ public:
         searchMode = value;
     }
 
+    static void init()
+    {
+        searchPropertyMeaningMap = initSearchPropertyMeaningMap();
+        searchPropertyEnumMap = initSearchPropertyEnumMap();
+        keywordSearchExampleMap = initKeywordSearchExampleMap();
+        keywordSearchTypeMap = initKeywordSearchTypeMap();
+    }
+
 private:
 
     static Qt::CaseSensitivity caseSensitivity;

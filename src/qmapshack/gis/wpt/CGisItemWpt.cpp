@@ -40,6 +40,9 @@
 #include <QtXml>
 
 IGisItem::key_t CGisItemWpt::keyUserFocus;
+QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::keywordLambdaMap;
+QList<QString> CGisItemWpt::geocache_t::attributeMeaningsTranslated;
+
 
 CGisItemWpt::CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, const QString &name, const QString &icon, IGisProject *project)
     : IGisItem(project, eTypeWpt, NOIDX)
@@ -1081,7 +1084,6 @@ const QList<QString> CGisItemWpt::geocache_t::attributeMeanings = {
     "GeoTour"
 };
 
-QList<QString> CGisItemWpt::geocache_t::attributeMeaningsTranslated = CGisItemWpt::geocache_t::initAttributeMeaningsTranslated();
 QList<QString> CGisItemWpt::geocache_t::initAttributeMeaningsTranslated()
 {
     QList<QString> translated  = {
@@ -1157,7 +1159,6 @@ QList<QString> CGisItemWpt::geocache_t::initAttributeMeaningsTranslated()
     return translated;
 }
 
-QMap<searchProperty_e, CGisItemWpt::fSearch > CGisItemWpt::keywordLambdaMap = CGisItemWpt::initKeywordLambdaMap();
 QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
 {
     QMap<searchProperty_e, CGisItemWpt::fSearch> map;
@@ -1212,8 +1213,12 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeocacheAttributes, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        for(qint8 attr : item->geocache.attributes.keys())
+        for(quint8 attr : item->geocache.attributes.keys())
         {
+            if(attr >= item->geocache.attributeMeaningsTranslated.length())
+            {
+                continue;
+            }
             if(!item->geocache.attributes[attr])
             {
                 searchValue.str1 += tr("No") + " ";

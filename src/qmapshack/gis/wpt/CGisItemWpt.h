@@ -351,6 +351,12 @@ public:
     static void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool &avoid, const bool &selected);
     static qreal calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis);
 
+    static void init()
+    {
+        keywordLambdaMap = initKeywordLambdaMap();
+        geocache_t::attributeMeaningsTranslated = geocache_t::initAttributeMeaningsTranslated();
+    }
+
 private:
     void setIcon();
     void setSymbol() override;

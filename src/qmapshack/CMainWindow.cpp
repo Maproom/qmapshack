@@ -32,9 +32,11 @@
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/search/CGeoSearchConfig.h"
 #include "gis/search/CGeoSearchWeb.h"
+#include "gis/search/CSearch.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/CToolBarConfig.h"
@@ -95,7 +97,10 @@ CMainWindow::CMainWindow()
     setWindowTitle(WHAT_STR);
     dockRealtime->toggleViewAction()->setChecked(false);
 
+    CSearch::init();
+
     IGisItem::init();
+    CGisItemWpt::init();
     wptIconManager = new CWptIconManager(this);
 
     IUnit::setUnitType((IUnit::type_e)cfg.value("MainWindow/units", IUnit::eTypeMetric).toInt(), this);

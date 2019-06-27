@@ -21,6 +21,11 @@
 Qt::CaseSensitivity CSearch::caseSensitivity = Qt::CaseInsensitive;
 CSearch::search_mode_e CSearch::searchMode = CSearch::eSearchModeText;
 
+QMap<QString, CSearch::search_type_e> CSearch::keywordSearchTypeMap;
+QMap<QString, QString> CSearch::keywordSearchExampleMap;
+QMap<QString, searchProperty_e> CSearch::searchPropertyEnumMap;
+QMap<searchProperty_e, QString> CSearch::searchPropertyMeaningMap;
+
 CSearch::CSearch(QString searchstring)
 {
     //Initialisation
@@ -290,7 +295,6 @@ void CSearch::improveQuery()
     }
 }
 
-QMap<QString, CSearch::search_type_e> CSearch::keywordSearchTypeMap = CSearch::initKeywordSearchTypeMap();
 QMap<QString, CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
 {
     QMap<QString, search_type_e> map;
@@ -321,7 +325,6 @@ QMap<QString, CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
     return map;
 }
 
-QMap<QString, QString> CSearch::keywordSearchExampleMap = CSearch::initKeywordSearchExampleMap();
 QMap<QString, QString> CSearch::initKeywordSearchExampleMap()
 {
     QMap<QString, QString> map;
@@ -352,7 +355,6 @@ QMap<QString, QString> CSearch::initKeywordSearchExampleMap()
     return map;
 }
 
-QMap<QString, searchProperty_e> CSearch::searchPropertyEnumMap = CSearch::initSearchPropertyEnumMap();
 QMap<QString, searchProperty_e> CSearch::initSearchPropertyEnumMap()
 {
     QMap<QString, searchProperty_e> map;
@@ -402,7 +404,6 @@ QMap<QString, searchProperty_e> CSearch::initSearchPropertyEnumMap()
     return map;
 }
 
-QMap<searchProperty_e, QString> CSearch::searchPropertyMeaningMap = CSearch::initSearchPropertyMeaningMap();
 QMap<searchProperty_e, QString> CSearch::initSearchPropertyMeaningMap()
 {
     QMap<searchProperty_e, QString> map;

@@ -24,7 +24,7 @@ const qreal CUnitImperial::milePerMeter = 0.6213699E-3;
 const qreal CUnitImperial::meterPerSecToMilePerHour = 2.23693164;
 
 CUnitImperial::CUnitImperial(QObject * parent)
-    : IUnit(eTypeImperial, "ft", footPerMeter, "ml/h", meterPerSecToMilePerHour, parent)
+    : IUnit(eTypeImperial, "ft", footPerMeter, "mi/h", meterPerSecToMilePerHour, parent)
 {
 }
 
@@ -77,17 +77,17 @@ void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit) con
     else if(meter < 16000)
     {
         val.sprintf("%1.2f", meter * milePerMeter);
-        unit = "ml";
+        unit = "mi";
     }
     else if(meter < 32000)
     {
         val.sprintf("%1.1f", meter * milePerMeter);
-        unit = "ml";
+        unit = "mi";
     }
     else
     {
         val.sprintf("%1.0f", meter * milePerMeter);
-        unit = "ml";
+        unit = "mi";
     }
 }
 
@@ -106,7 +106,7 @@ void CUnitImperial::meter2distance(qreal meter, qreal& val, QString& unit) const
     else
     {
         val = meter * milePerMeter;
-        unit = "ml";
+        unit = "mi";
     }
 }
 
@@ -120,7 +120,7 @@ void CUnitImperial::meter2area(qreal meter, QString& val, QString& unit) const /
     else
     {
         val.sprintf("%1.2f", meter / (1/milePerMeter * 1/milePerMeter));
-        unit = "ml²";
+        unit = "mi²";
     }
 }
 
@@ -134,7 +134,7 @@ void CUnitImperial::meter2area(qreal meter, qreal& val, QString& unit) const /* 
     else
     {
         val= meter / (1/milePerMeter * 1/milePerMeter);
-        unit = "ml²";
+        unit = "mi²";
     }
 }
 
@@ -148,7 +148,7 @@ void CUnitImperial::meter2unit(qreal meter, qreal& scale, QString&  unit) const
     if(meter > 1600)
     {
         scale = milePerMeter;
-        unit  = "ml";
+        unit  = "mi";
     }
     else
     {

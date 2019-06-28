@@ -135,7 +135,7 @@ CSearch::CSearch(QString searchstring)
             const static QString capNumOpt = "(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
             const static QString capIgnWS = "(?:\\s*)";     //Ignore Whitespaces
             //Capture distances, speeds and simple Times that don't get caught by QDateTime.
-            const static QString capUnit = "(m|km|mi|ft|ml|m\\/h|km\\/h|mi\\/h|ft\\/h|ml\\/h|h|min|s)?";
+            const static QString capUnit = "(m|km|mi|ft|mi|m\\/h|km\\/h|mi\\/h|ft\\/h|mi\\/h|h|min|s)?";
             const static QString capIgnAnd =  "(?:" + tr("and") + ")?";
             //The second number, the units and the "and" are optional
             //The String has to be matched completely in order to avoid false positives thus the ^ and the $
@@ -219,16 +219,6 @@ void CSearch::improveQuery()
         search.searchValue.str2=search.searchValue.str1;
     }
 
-    //Adjust abbreviations for miles
-    if(search.searchValue.value1 != NOFLOAT && search.searchValue.str1.compare("MI", Qt::CaseInsensitive) == 0)
-    {
-        search.searchValue.str1 = "ML"; //ml is used in CUnit
-    }
-    if(search.searchValue.value2 != NOFLOAT && search.searchValue.str2.compare("MI", Qt::CaseInsensitive) == 0)
-    {
-        search.searchValue.str2 = "ML"; //ml is used in CUnit
-    }
-
     //Try to guess what property the user meant when there is no match. I.e. make "shorter than 5km" work
     if(search.property == eSearchPropertyNoMatch)
     {
@@ -238,7 +228,7 @@ void CSearch::improveQuery()
             search.property = eSearchPropertyRteTrkAvgSpeed;
         }
         else if(search.searchValue.str1.compare("KM", Qt::CaseInsensitive) == 0 ||
-                search.searchValue.str1.compare("ML", Qt::CaseInsensitive) == 0)
+                search.searchValue.str1.compare("mi", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyRteTrkDistance;
         }

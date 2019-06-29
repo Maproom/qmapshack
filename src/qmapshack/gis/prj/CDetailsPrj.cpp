@@ -208,7 +208,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     fmtFrameStandard.setBottomMargin(5);
     fmtFrameStandard.setWidth(w - 2 * ROOT_FRAME_MARGIN);
 
-    fmtFrameTrackSummary.setBackground(Qt::white);
+    fmtFrameTrackSummary.setBackground(palette().color(QPalette::Background));
     fmtFrameTrackSummary.setBorder(1);
     fmtFrameTrackSummary.setPadding(10);
 

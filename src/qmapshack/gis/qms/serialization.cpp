@@ -28,7 +28,7 @@
 
 #include <QtWidgets>
 
-#define VER_TRK         quint8(5)
+#define VER_TRK         quint8(6)
 #define VER_WPT         quint8(2)
 #define VER_RTE         quint8(3)
 #define VER_AREA        quint8(1)
@@ -541,6 +541,8 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
     out << trk.type;
     out << trk.color;
 
+    out << energyUse;
+
     out << colorSourceLimit;
     out << lineScale;
     out << showArrows;
@@ -590,6 +592,15 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.number;
     in >> trk.type;
     in >> trk.color;
+
+    if(version > 5)
+    {
+        in >> energyUse;
+    }
+    else
+    {
+        energyUse = NOFLOAT;
+    }
 
     if(version > 1 && version <= 4)
     {

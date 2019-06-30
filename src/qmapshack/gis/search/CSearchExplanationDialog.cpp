@@ -30,9 +30,9 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     explanation += "\n\t" + QLocale::c().dateTimeFormat(QLocale::LongFormat);
     explanation += "\n\t" + QLocale::c().dateTimeFormat(QLocale::ShortFormat);
     explanation += tr("\nThe search can only convert following units:");
-    explanation += IUnit::getUnits().join(", ");
-    explanation += tr("\n The regex search uses this syntax: https://perldoc.perl.org/perlre.html");
-    explanation += tr("\nFollowing keywords are available for searching:");
+    explanation += "\n"+IUnit::getUnits().join(", ");
+    explanation += tr("\n\nThe regex search uses this syntax: https://perldoc.perl.org/perlre.html");
+    explanation += tr("\n\nFollowing keywords are available for searching:");
     labelExplanation->setText(explanation);
     for(QString property : CSearch::getSearchTypeKeywords())
     {
@@ -46,4 +46,5 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
         item->setToolTip(CSearch::getSearchPropertyMeaning(property));
         listWidgetProperties->addItem(item);
     }
+    adjustSize();
 }

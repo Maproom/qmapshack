@@ -944,6 +944,9 @@ QMap<QString, qreal> IUnit::timeToMKSMap={
     {"s", 1},
     {"min", 60},
     {"h", 3600},
+    {"с", 1},
+    {"мин", 60},
+    {"ч", 3600},
 };
 
 QMap<QString, qreal> IUnit::distanceToMKSMap={
@@ -951,6 +954,8 @@ QMap<QString, qreal> IUnit::distanceToMKSMap={
     {"km", 1000},
     {"mi", 1/CUnitImperial::milePerMeter},
     {"ft", 1/CUnitImperial::footPerMeter},
+    {"м", 1},
+    {"км", 1000},
 };
 
 QMap<QString, qreal> IUnit::speedToMKSMap={
@@ -966,6 +971,12 @@ QMap<QString, qreal> IUnit::speedToMKSMap={
     {"ft/s", 1/CUnitImperial::footPerMeter},
     {"ft/min", 1/(CUnitImperial::footPerMeter*60)},
     {"ft/h", 1/(CUnitImperial::footPerMeter*3600)},
+    {"м/с", 1},
+    {"м/мин", 1/60},
+    {"м/ч", 1/3600},
+    {"км/с", 1000},
+    {"км/мин", 1000/60},
+    {"км/ч", 1000/3600},
 };
 
 QMap<QString, qreal> IUnit::areaToMKSMap={
@@ -973,4 +984,6 @@ QMap<QString, qreal> IUnit::areaToMKSMap={
     {"km²", 1000*1000},
     {"mi²", 1/(CUnitImperial::milePerMeter*CUnitImperial::milePerMeter)},
     {"ft²", 1/(CUnitImperial::footPerMeter*CUnitImperial::footPerMeter)},
+    {"м²", 1},
+    {"км²", 1000*1000},
 };

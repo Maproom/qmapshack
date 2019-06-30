@@ -135,7 +135,7 @@ CSearch::CSearch(QString searchstring)
             const static QString capNumOpt = "(\\d+\\.?\\d*)?(?![\\.\\d\\/\\:])";
             const static QString capIgnWS = "(?:\\s*)";     //Ignore Whitespaces
             //Capture distances, speeds and simple Times that don't get caught by QDateTime.
-            const static QString capUnit = "(m|km|mi|ft|mi|m\\/h|km\\/h|mi\\/h|ft\\/h|mi\\/h|h|min|s)?";
+            const static QString capUnit = "(m|km|mi|ft|mi|m\\/h|km\\/h|mi\\/h|ft\\/h|mi\\/h|h|min|s|м|км|м\\/ч|км\\/ч|ч|мин|с)?";
             const static QString capIgnAnd =  "(?:" + tr("and") + ")?";
             //The second number, the units and the "and" are optional
             //The String has to be matched completely in order to avoid false positives thus the ^ and the $

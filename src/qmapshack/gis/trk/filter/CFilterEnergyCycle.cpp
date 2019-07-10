@@ -41,24 +41,25 @@ CFilterEnergyCycle::CFilterEnergyCycle(CGisItemTrk &trk, QWidget *parent) :
 /*  GER:
     Benutzerspezifische Auswahl eines Parameterset für die Berechnung des Energieverbrauchs für einen Fahrrad Track.
 */
-    comboBoxSetting->setToolTip(tr("<p>Select a user defined parameter set to compute energy use (consumption) for a cycling track.</p>"));
+    comboBoxSetting->setToolTip("<p>" + tr("Select a user defined parameter set to compute energy use (consumption) for a cycling track.") + "</p>");
 
 /*  GER:
     Öffnet den Dialog für die Änderung der Parameter für die Berechnung des Energieverbrauchs für einen Fahrrad Track.
     Zeigt weitere Werte für Kraft, Leistung und Energie.
 */
-    pushButtonEdit->setToolTip(tr("<p>Open dialog window to modify parameter set and compute energy use (consumption) for a cycling track.</p>"
-                                  "<p>Shows more computed values for Force, Power and Energy.</p>"));
+    pushButtonEdit->setToolTip(
+                "<p>" + tr("Open dialog window to modify parameter set and compute energy use (consumption) for a cycling track.") + "</p>" +
+                "<p>" + tr("Shows more computed values for Force, Power and Energy.") + "</p>");
 
 /*  GER:
     Löscht den Wert für den Energieverbrauch aus dem Track.
 */
-    pushButtonRemove->setToolTip(tr("<p>Remove the Energy Use Cycling value from the track.</p>"));
+    pushButtonRemove->setToolTip("<p>" + tr("Remove the Energy Use Cycling value from the track.") + "</p>");
 
 /*  GER:
     Berechnet den Energieverbrauch für einen Fahrrad Track auf Basis des gewählten Parametersets.
 */
-    toolApply->setToolTip(tr("<p>Computes energy use (consumption) for a cycling track based on the selected parameter set.</p>"));
+    toolApply->setToolTip("<p>" + tr("Computes energy use (consumption) for a cycling track based on the selected parameter set.") + "</p>");
 
     isValid();
 }
@@ -208,7 +209,7 @@ bool CFilterEnergyCycle::isValid()
 {
     pushButtonRemove->setEnabled(trk.getEnergyUse() != NOFLOAT ? true : false);
 
-    if(!trk.isTrkTimeValid() || trk.isTrkElevationInvalid())
+    if(!trk.isTrkTimeValid() || trk.isTrkElevationInvalid() || trk.isTrkSlopeInvalid())
     {
         if(trk.getEnergyUse() != NOFLOAT)
         {
@@ -219,9 +220,15 @@ bool CFilterEnergyCycle::isValid()
         comboBoxSetting->setEnabled(false);
         pushButtonEdit->setEnabled(false);
         toolApply->setEnabled(false);
+
+        QString str = QString("<b style='color: red;'>" +
+                              tr("Track has invalid data. Please correct!") +
+                              "</b>");
+        labelWarning->setText(str);
         return false;
     }
 
+    labelWarning->setText("");
     comboBoxSetting->setEnabled(true);
     pushButtonEdit->setEnabled(true);
     toolApply->setEnabled(trk.getEnergyUse() == NOFLOAT ? true : false);
@@ -246,31 +253,33 @@ void CFilterEnergyCycle::slotShowHelp()
 /*  GER:
     Energieverbrauch beim Fahrradfahren
     Mit diesem Filter kann der Energieverbrauch beim Fahrradfahren berechnet werden.
-    Der Wert des \"Energieverbrauchs\" kann als Indikator für die Anstregung einer Fahrradtour angesehen werden.
+    Der Wert des Energieverbrauchs kann als Indikator für die Anstregung einer Fahrradtour angesehen werden.
     Die Tourlänge, die Geschwindigkeit und die Steigungen werden berücksichtigt.
     Um den persönlichen Energieverbrauch einer Tour zu spezifizieren werden weitere Daten benötigt:
     Das Gewicht des Fahrers und Fahrrads
     Die Luftdichte, Windgeschwindigkeit und die Position im Wind für die Berücksichtigung des Luftwiderstands
     Der Untergrund und die Bereifung für die Berücksichtigung des Rollwiderstands
     Die Trittfrequenz, um die Pedalkraft zu berechnen
-    Die Werte werden in einem separaten Dialog eingegeben und weitere Werte werden dort berechnet und angezeigt.
+    Die Daten werden in einem separaten Dialog eingegeben und weitere Werte werden dort berechnet und angezeigt.
     Fünf individualiserte Parametersets können für die spätere Wiederverwendung definiert werden.
-    Der berechnete Energieverbrauch in der Einheit kcal wird im Track gespeichert und kann auch wieder gelöscht werden, sollte er nicht mehr benötigt werden.
-    Weitere Information werden als Tooltipps für die Eingabe- und Ausgabewerte im Dialog \"Parameterset\" ausgegeben.
+    Der berechnete Energieverbrauch in der Einheit 'kcal' wird im Track gespeichert und kann auch wieder gelöscht werden, sollte er nicht mehr benötigt werden.
+    Weitere Information werden als Tooltipps für die Eingabe- und Ausgabewerte im Dialog 'Parameterset' ausgegeben.
 */
 
-    QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help")
-    , tr("<h3>Set Energy Use for Cycling</h3>"
-         "<p>With this filter your personal energy use (consumption) for a cycling tour can be computed.</p>"
-         "<p>The computed vaule of \"Energy Use\" can be see as an indicator for the exertion of a cycling tour.</p>"
-         "<p>The tour length, speed and slope values will be taken into account.</p>"
-         "<p>To individualize your personal energy use the following input data are more needed:"
-         "<ul><li>Drivers and bicyle weight</li>"
-         "<li>Air density, wind speed and position to the wind to consider the wind drag resistance</li>"
-         "<li>Ground situation (tyre and ground) to consider the rolling resistance</li>"
-         "<li>Average pedal cadence for the computation of pedal force</li></ul></p>"
-         "<p>The individualize data will be defined a separate \"Edit Setting\" dialog and more computed values will be shown in this dialog.</p>"
-         "<p>Five individualize parameter sets can be stored to reuse later on.</p>"
-         "<p>The energy use in unit \"kcal\" will be stored in the track and can be remove later on when not longer needed.</p>"
-         "<p>For more information see tooltips on input and output values in the \"Edit Setting\" dialog.</p>"));
+   QString msg =
+        "<h3>" + tr("Set Energy Use for Cycling") + "</h3>" +
+         "<p>" + tr("With this filter your personal energy use (consumption) for a cycling tour can be computed.") + "</p>" +
+         "<p>" + tr("The computed vaule of Energy Use can be see as an indicator for the exertion of a cycling tour.") + "</p>" +
+         "<p>" + tr("The tour length, speed and slope values will be taken into account.") + "</p>" +
+         "<p>" + tr("To individualize your personal energy use the following input data are more needed:") +
+         "<ul><li>" + tr("Drivers and bicyle weight") + "</li>" +
+         "<li>" + tr("Air density, wind speed and position to the wind to consider the wind drag resistance") + "</li>" +
+         "<li>" + tr("Ground situation (tyre and ground) to consider the rolling resistance") + "</li>" +
+         "<li>" + tr("Average pedal cadence for the computation of pedal force") + "</li></ul></p>" +
+         "<p>" + tr("The individualize data will be defined a separate 'Edit Setting' dialog and more computed values will be shown in this dialog.") + "</p>" +
+         "<p>" + tr("Five individualize parameter sets can be stored to reuse later on.") + "</p>" +
+         "<p>" + tr("The energy use in unit 'kcal' will be stored in the track and can be remove later on when not longer needed.") + "</p>" +
+         "<p>" + tr("For more information see tooltips on input and output values in the 'Edit Setting' dialog.") + "</p>";
+
+    QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"), msg);
 }

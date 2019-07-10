@@ -772,6 +772,17 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
 
 void CGisItemTrk::filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet)
 {
+    /* Related information:
+     * http://www.blog.ultracycle.net/2010/05/cycling-power-calculations (English)
+     * http://www.cptips.com/energy.htm  (English)
+     * http://www.tribology-abc.com/calculators/cycling.htm (English)
+     * http://www.kreuzotter.de/deutsch/speed.htm (German)
+     * http://horst-online.com/physik-des-fahrrads/index.html (German)
+     * http://www.helpster.de/wirkungsgrad-vom-mensch-erklaerung_198168 (German)
+     * http://www.wolfgang-menn.de/motion_d.htm (German)
+     * http://www.msporting.com/planung/5_3_6%20Aerodynamik.htm (German)
+    */
+
     // Input values
     const qreal joule2Calor = 4.1868;
     const qreal gravityAccel = 9.81;    // kg * m / s2

@@ -77,7 +77,8 @@ enum searchProperty_e: unsigned int
     //Geocache keywords
     eSearchPropertyGeocacheDifficulty,
     eSearchPropertyGeocacheTerrain,
-    eSearchPropertyGeocacheAttributes,
+    eSearchPropertyGeocachePositiveAttributes,
+    eSearchPropertyGeocacheNegatedAttributes,
     eSearchPropertyGeocacheSize,
     eSearchPropertyGeocacheGCCode,
     eSearchPropertyGeocacheGCName,

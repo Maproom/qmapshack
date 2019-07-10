@@ -1211,7 +1211,7 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
         searchValue.value1 = item->geocache.terrain;
         return searchValue;
     });
-    map.insert(eSearchPropertyGeocacheAttributes, [](CGisItemWpt* item){
+    map.insert(eSearchPropertyGeocachePositiveAttributes, [](CGisItemWpt* item){
         searchValue_t searchValue;
         for(quint8 attr : item->geocache.attributes.keys())
         {
@@ -1219,9 +1219,25 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
             {
                 continue;
             }
-            if(!item->geocache.attributes[attr])
+            if(!item->geocache.attributes[attr])// It is negated
             {
-                searchValue.str1 += tr("No") + " ";
+                continue;
+            }
+            searchValue.str1 += item->geocache.attributeMeaningsTranslated[attr] + ", ";
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheNegatedAttributes, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        for(quint8 attr : item->geocache.attributes.keys())
+        {
+            if(attr >= item->geocache.attributeMeaningsTranslated.length())
+            {
+                continue;
+            }
+            if(item->geocache.attributes[attr])// It is not negated
+            {
+                continue;
             }
             searchValue.str1 += item->geocache.attributeMeaningsTranslated[attr] + ", ";
         }

@@ -192,6 +192,7 @@ public:
     /// returns "true" when trk has no time-related invalid points
     bool isTrkTimeValid() const { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0; }
     bool isTrkElevationInvalid() const { return allValidFlags & CTrackData::trkpt_t::eInvalidEle; }
+    bool isTrkSlopeInvalid() const { return allValidFlags & CTrackData::trkpt_t::eInvalidSlope; }
 
     QDateTime getTimestamp() const override {return getTimeStart(); }
 

@@ -154,6 +154,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="labelWarning">
+       <property name="text">
+        <string>labelWarning</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="pushButtonHelp">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">

@@ -84,19 +84,19 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     Parameterset
     Individueller Name (max. 32 Zeichen) für das Parameterset.
 */
-    lineEditNameOfSet->setToolTip(tr("<p>Individual name (max. 32 characters) for the parameter set.</p>"));
+    lineEditNameOfSet->setToolTip("<p>" + tr("Individual name (max. 32 characters) for the parameter set.") + "</p>");
 
 /*  GER:
     Fahrergewicht
     Das Fahrergewicht in kg einschließlich Kleidung.
 */
-    spinDriverWeight->setToolTip(tr("<p>The driver's weight in kg including clothing.</p>"));
+    spinDriverWeight->setToolTip("<p>" + tr("The driver's weight in kg including clothing.") + "</p>");
 
 /*  GER:
     Fahrradgewicht
     Das Fahrradgewicht in kg einschließlich Gepäck.
 */
-    spinBikeWeight->setToolTip(tr("<p>The weight of the bicycle in kg including luggage.</p>"));
+    spinBikeWeight->setToolTip("<p>" + tr("The weight of the bicycle in kg including luggage.") + "</p>");
 
 /*  GER:
     Luftdichte
@@ -106,19 +106,19 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     1500 Meter: 1,056kg/m3
     3000 Meter: 0,905kg/m3
 */
-    spinAirDensity->setToolTip(tr("<p>Air density in kg/m3. The air density depends on barometric air pressure, altitude and temperature.</p>"
-                              "<p>Examples:"
-                              "<ul><li>Sea level: 1.226kg/m3</li>"
-                              "<li>1500 meter: 1.056kg/m3</li>"
-                              "<li>3000 meter: 0.905kg/m3</li></ul></p>"));
+    spinAirDensity->setToolTip("<p>" + tr("Air density in kg/m3. The air density depends on barometric air pressure, altitude and temperature.") + "</p>" +
+                               "<p>" + tr("Examples:") +
+                               "<ul><li>" + tr("Sea level: 1.226kg/m3") + "</li>" +
+                               "<li>" + tr("1500 meter: 1.056kg/m3") + "</li>"
+                               "<li>" + tr("3000 meter: 0.905kg/m3") + "</li></ul></p>");
 
 /*  GER:
     Windgeschw. in Bft
     Werte für die Windgeschwindigkeit in Beaufortskala für die Vorauswahl der Windgeschwindigkeit in km/h.
     Positive Werte für Gegenwind und negative Werte für Rückenwind.
 */
-    comboWindSpeed->setToolTip(tr("<p>Values for the wind speed in Beaufort scale for specifying the wind speed in km/h."
-                                  "<p>Positive values for headwind and negative values for tailwind."));
+    comboWindSpeed->setToolTip("<p>" + tr("Values for the wind speed in Beaufort scale for specifying the wind speed in km/h.") + "</p>" +
+                               "<p>" + tr("Positive values for headwind and negative values for tailwind.") + "</p>");
 
 /*  GER:
     Windgeschw. in km/h
@@ -126,28 +126,29 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     Positive Werte werden für Gegenwind und negative Werte für Rückenwind berücksichtigt.
     Die Werte können unabhängig von den Werten der Beaufortskala verändert werden.
 */
-    spinWindSpeed->setToolTip(tr("<p>The wind speed in km/h is taken into account when calculating the force required to overcome the air drag.</p>"
-                                 "<p>Positive values for headwind and negative values for tailwind are taken into account.</p>"
-                                 "<p>The value can be changed independently of the Beaufort scale values.</p>"));
+    spinWindSpeed->setToolTip("<p>" + tr("The wind speed in km/h is taken into account when calculating the force required to overcome the air drag.") + "</p>" +
+                              "<p>" + tr("Positive values for headwind and negative values for tailwind are taken into account.") + "</p>" +
+                              "<p>" + tr("The value can be changed independently of the Beaufort scale values.") + "</p>");
 
 /*  GER:
     Trittfrequenz
     Die durchschnittliche Trittfrequenz in U/min wird für die Berechnung der Pedalkraft benötigt.
     Realistische Werte liegen zwischen 50 und 100 U/min.
 */
-    spinPedalCadence->setToolTip(tr("<p>The average pedal cadence in rpm is needed to calculate the pedal force.</p>"
-                                "<p>Realistic values are between 50 and 100 rpm.</p>"));
+    spinPedalCadence->setToolTip("<p>" + tr("The average pedal cadence in rpm is needed to calculate the pedal force.") + "</p>" +
+                                 "<p>" + tr("Realistic values are between 50 and 100 rpm.") + "</p>");
+
 /*  GER:
     Position im Wind
     Werte für die Art der Sitzposition als Vorauswahl für die Windangriffsfläche in m2 und der Luftwiderstandszahl (cw-Wert).
 */
-    comboWindPosition->setToolTip(tr("<p>Values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).</p>"));
+    comboWindPosition->setToolTip("<p>" + tr("Values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).") + "</p>");
 
 /*  GER:
     Windangriffsfläche
     Die Fläche in m2 (Fahrer, Fahrrad, Gepäcktaschen, etc.), die dem Wind ausgesetzt ist.
 */
-    spinFrontalArea->setToolTip(tr("<p>The frontal area in m2 (driver, bicycle, bags, etc.) exposed to the wind.</p>"));
+    spinFrontalArea->setToolTip("<p>" + tr("The frontal area in m2 (driver, bicycle, bags, etc.) exposed to the wind.") + "</p>");
 
 /*  GER:
     cw-Wert (Luftwiderstandsbeiwert)
@@ -155,16 +156,16 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     Je größer dieser Wert ist, um so mehr Kraft wird für die Überwindung der Windkraft benötigt.
     Typische Werte für Fahrräder liegen zwischen 0,2 und 1.2.
 */
-    spinWindDragCoeff->setToolTip(tr("<p>The cw value (drag coefficient) indicates the wind slip of the driver and bicycle in relation to the air (wind).</p>"
-                                     "<p>The greater this value, the more force is required to overcome the wind force.</p>"
-                                     "<p>Typical values for bicycles are between 0.2 and 1.2.</p>"));
+    spinWindDragCoeff->setToolTip("<p>" + tr("The cw value (drag coefficient) indicates the wind slip of the driver and bicycle in relation to the air (wind).") + "</p>" +
+                                  "<p>" + tr("The greater this value, the more force is required to overcome the wind force.") + "</p>" +
+                                  "<p>" + tr("Typical values for bicycles are between 0.2 and 1.2.") + "</p>");
 
 /*  GER:
     Untergrund/Bereifung
     Werte für die Art des Untergrunds und der Bereifung für die Bestimmung des Rollwiderstandsbeiwerts.
 */
-    comboGround->setToolTip(tr("<p>Values for the type of ground surface and the tyres.</p>"
-                              "<p>Used to determine the rolling resistance coefficient.</p>"));
+    comboGround->setToolTip("<p>" + tr("Values for the type of ground surface and the tyres.") + "</p>" +
+                            "<p>" + tr("Used to determine the rolling resistance coefficient.") + "</p>");
 
 /*  GER:
     cr-Wert (Rollwiderstandsbeiwert)
@@ -172,15 +173,15 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     Maßgebliche Faktoren sind der Fahrbahnuntergrund und die Bereifung.
     Je größer dieser Wert ist, um so mehr Kraft wird für die Überwindung des Rollwiderstands benötigt.
 */
-    spinRollingCoeff->setToolTip(tr("<p>The rolling resistance coefficient specifies the force used to overcome the rolling resistance force.</p>"
-                                    "<p>The relevant factors are the road surface and the tyres.</p>"
-                                    "<p>The higher this value is, the more force is required to overcome the rolling resistance.</p>"));
+    spinRollingCoeff->setToolTip("<p>" + tr("The rolling resistance coefficient specifies the force used to overcome the rolling resistance force.") + "</p>" +
+                                 "<p>" + tr("The relevant factors are the road surface and the tyres.") + "</p>" +
+                                 "<p>" + tr("The higher this value is, the more force is required to overcome the rolling resistance.") + "</p>");
 
 /*  GER:
     Gesamtgewicht
     Das Gesamtgewicht in kg von Fahrer und Fahrrad inklusive Kleidung und Gepäck.
 */
-    labelTotalWeight->setToolTip(tr("<p>The total weight in kg of driver and bike including clothes and luggage.</p>"));
+    labelTotalWeight->setToolTip("<p>"+ tr("The total weight in kg of driver and bike including clothes and luggage.") + "</p>");
 
 /*  GER:
     Luftwiderstandskraft
@@ -188,31 +189,31 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     Berücksichtigt wird der Fahrtwind und Gegen- und Rückenwind.
     Bei starkem Rückenwind kann dieser Wert auch negativ sein.
 */
-    labelAirResistForce->setToolTip(tr("<p>The air resistance force is the force in Newton required on average over all track points to overcome the air resistance.<p>"
-                                       "<p>The airstream, headwind and tailwind are taken into account.</p>"
-                                       "<p>With a strong tailwind this value can be negative.</p"));
+    labelAirResistForce->setToolTip("<p>" + tr("The air resistance force is the force in Newton required on average over all track points to overcome the air resistance.") + "<p>" +
+                                    "<p>" + tr("The airstream, headwind and tailwind are taken into account.") + "</p>" +
+                                    "<p>" + tr("With a strong tailwind this value can be negative.") + "</p");
 
 /*  GER:
     Rollwiderstandskraft
     Die Rollwiderstandskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung des Rollwiderstands benötigt wird.
 */
-    labelRollResistForce->setToolTip(tr("<p>The rolling resistance force is the force in Newton required on average over all track points to overcome the rolling resistance.</p>"));
+    labelRollResistForce->setToolTip("<p>" + tr("The rolling resistance force is the force in Newton required on average over all track points to overcome the rolling resistance.") + "</p>");
 
 /*  GER:
     Neigungskraft
     Die Neigungskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung der Neigung bei der Bergauffahrt benötigt wird.
     Bei überwiegender Bergabfahrt kann die Neigungskraft negativ sein.
 */
-    labelGravitySlopeForce->setToolTip(tr("<p>The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on the uphill.</p>"
-                                          "<p>In the case of mostly downhill driving, the gravity slope force can be negative.</p>"));
+    labelGravitySlopeForce->setToolTip("<p>" + tr("The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on the uphill.") + "</p>" +
+                                       "<p>" + tr("When mostly downhill driving, the gravity slope force can be negative.") + "</p>");
 
 /*  GER:
     Summe Kräfte
     Summe der durchschnittlich benötigten Kraft für den Track für die Überwindung des Luftwiderstands, Rollwiderstands und Neigung.
     Dieser Wert kann negativ bei starkem Rückwind und/oder Bergabfahrt sein.
 */
-    labelSumForce->setToolTip(tr("<p>Sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.</p>"
-                                 "<p>This value can be negative for strong tailwind and/or downhill.</p>"));
+    labelSumForce->setToolTip("<p>" + tr("Sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.") + "</p>" +
+                              "<p>" + tr("This value can be negative for strong tailwind and/or downhill.") + "</p>");
 
 /*  GER:
     Pedalkraft
@@ -220,17 +221,17 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     Negative Kräfte aus starken Rückenwind oder Bergabfahrt sind nicht berücksichtigt.
     Diese Kraft muss durch den Fahrer auf das Pedal aufgebracht werden. Je größer die Trittfrequenz, desto niedriger ist die Pedalkraft.
 */
-    labelPositivePedalForce->setToolTip(tr("<p>The force in Newton applied to the pedal on average over all track points.</p>"
-                                           "<p>Negative forces from strong tail wind or downhill driving are not considered.</p>"
-                                           "<p>This force must be applied to the pedal by the driver.</p>"
-                                           "<p>The higher the pedal cadence, the lower the pedal force.</p>"));
+    labelPositivePedalForce->setToolTip("<p>" + tr("The force in Newton applied to the pedal on average over all track points.") + "</p>" +
+                                        "<p>" + tr("Negative forces from strong tail wind or downhill driving are not considered.") + "</p>" +
+                                        "<p>" + tr("This force must be applied to the pedal by the driver.") + "</p>" +
+                                        "<p>" + tr("The higher the pedal cadence, the lower the pedal force.") + "</p>");
 
 /*  GER:
     Leistung
     Die Leistung in Watt im Durchschnitt über alle Trackpunkte. Negative Leistung aus starken Rückenwind oder Bergabfahrt sind berücksichtigt.
 */
-    labelPower->setToolTip(tr("<p>The power in Watt on average over all track points.</p>"
-                              "<p>Negative power from strong tailwind or downhill driving are taken into account.</p>"));
+    labelPower->setToolTip("<p>" +tr("The power in Watt on average over all track points.") + "</p>" +
+                           "<p>" +tr("Negative power from strong tailwind or downhill driving are taken into account.") + "</p>");
 
 /*  GER:
     Positive Leistung
@@ -238,39 +239,39 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     Negative Leistung aus starken Rückenwind oder Bergabfahrt sind nicht berücksichtigt.
     Diese Leistung muss durch den Fahrer im Durchschnitt für den Track aufgebracht werden.
 */
-    labelPositivePower->setToolTip(tr("<p>The positive power in Watt that must be applied on average for all track points.</p>"
-                                      "<p>Negative power from strong tailwind or downhill driving are not taken into account.</p>"
-                                      "<p>This power must be applied by the driver on average for the track.</p>"));
+    labelPositivePower->setToolTip("<p>" + tr("The positive power in Watt that must be applied on average for all track points.") + "</p>" +
+                                   "<p>" + tr("Negative power from strong tailwind or downhill driving are not taken into account.") + "</p>" +
+                                   "<p>" + tr("This power must be applied by the driver on average for the track.") + "</p>");
 /*  GER:
     Leistungsbewegungszeit
     Die Zeit in Bewegung und gleichzeitiger positiver Leistung durch den Fahrer.
     Zeiten mit negativer Leistung aus starkem Rückenwind oder Bergabfahrt werden nicht berücksichtigt.
 */
-    labelPowerMovingTime->setToolTip(tr("<p>The time in moving and with positive power by the driver.</p>"
-                                        "<p>Times with negative power in strong tail wind or downhill driving are not taken into account.</p>"));
+    labelPowerMovingTime->setToolTip("<p>" + tr("The time in moving and with positive power by the driver.") + "</p>" +
+                                     "<p>" + tr("Times with negative power in strong tail wind or downhill driving are not taken into account.") + "</p>");
 
 /*  GER:
     Verhältnis Leistungsbewegungszeit
     Das Verhältnis der Leistungsbewegungszeit bezogen auf die Track Bewegungszeit in Prozent. Je geringer das Verhältnis ist, desto größer ist der Einfluss von Rückenwind und/oder Bergabfahrt.
 */
-    labelPowerMovingTimeRatio->setToolTip(tr("<p>The ratio of the power moving time related to the track moving time in percent.</p>"
-                                             "<p>The lower the ratio the greater the influence of tailwind and/or downhill driving.</p>"));
+    labelPowerMovingTimeRatio->setToolTip("<p>" + tr("The ratio of the power moving time related to the track moving time in percent.") + "</p>" +
+                                          "<p>" + tr("The lower the ratio the greater the influence of tailwind and/or downhill driving.") + "</p>");
 
 /*  GER:
     Energieverbrauch in kJoule
     Der Energieverbrauch in kJoule für die Umsetzung der positiven Leistung durch den Fahrer.
     Der Muskel-Wirkungsgrad ist mit 23% angenommen.
 */
-    labelEnergyKJoule->setToolTip(tr("<p>The energy use (consumption) in kJoule by transforming the positive power by the driver.</p>"
-                                   "<p>The muscle efficiency ratio ist considered with 23%.</p>"));
+    labelEnergyKJoule->setToolTip("<p>" + tr("The energy use (consumption) in kJoule by transforming the positive power by the driver.") + "</p>" +
+                                  "<p>" + tr("The muscle efficiency ratio ist considered by 23%.") + "</p>");
 
 /*  GER:
     Energieverbrauch in kcal
     Der Energieverbrauch in kcal für die Umsetzung der positiven Leistung durch den Fahrer.
     Der Muskel-Wirkungsgrad ist mit 23% angenommen.
 */
-    labelEnergyKcal->setToolTip(tr("<p>The energy use (consumption) in kcal by transforming the positive power by the driver.</p>"
-                                   "<p>The muscle efficiency ratio ist considered with 23%.</p>"));
+    labelEnergyKcal->setToolTip("<p>" + tr("The energy use (consumption) in kcal by transforming the positive power by the driver.") + "</p>" +
+                                "<p>" + tr("The muscle efficiency ratio ist considered by 23%.") + "</p>");
 
 /*  GER:
     Voreinstellung mit:
@@ -286,18 +287,18 @@ CFilterEnergyCycleDlg::CFilterEnergyCycleDlg(QWidget *parent, CGisItemTrk &trk,
     Untergrund/Reifen: Asphalt, normale Bereifung
     cr-Wert (Rollwiderstandsbeiwert): 0,005
 */
-    buttonBox->button(QDialogButtonBox::RestoreDefaults)->setToolTip(tr("<p><b>Set default values to:</b></p>"
-                                                                     "<p>Driver Weight: 75.0kg"
-                                                                     "<br/>Bicycle Weight: 15.0kg"
-                                                                     "<br/>Air Density: 1.200kg/m3"
-                                                                     "<br/>Wind Speed Bft: 0 No Wind"
-                                                                     "<br/>Wind Speed km/h: 0.0km/h"
-                                                                     "<br/>Pedal Cadence: 75 rpm"
-                                                                     "<br/>Position in Wind: Trekking"
-                                                                     "<br/>Frontal Area: 0.65m2"
-                                                                     "<br/>Wind drag Coeff: 1.000"
-                                                                     "<br/>Ground: Asphalt, normal tyres"
-                                                                     "<br/>Rolling Coeff: 0.005</p>"));
+    buttonBox->button(QDialogButtonBox::RestoreDefaults)->setToolTip("<p><b>" + tr("Set default values to:") + "</b></p>" +
+                                                                     "<p>" + tr("Driver Weight: 75.0kg") +
+                                                                     "<br/>" + tr("Bike Weight: 15.0kg") +
+                                                                     "<br/>" + tr("Air Density: 1.200kg/m3") +
+                                                                     "<br/>" + tr("Wind Speed Bft: 0 No Wind") +
+                                                                     "<br/>" + tr("Wind Speed km/h: 0.0km/h") +
+                                                                     "<br/>" + tr("Pedal Cadence: 75rpm") +
+                                                                     "<br/>" + tr("Position in Wind: Trekking") +
+                                                                     "<br/>" + tr("Frontal Area: 0.65m2") +
+                                                                     "<br/>" + tr("Wind drag Coeff: 1.000") +
+                                                                     "<br/>" + tr("Ground/Tyres: Asphalt, normal tyres") +
+                                                                     "<br/>" + tr("Rolling Coeff: 0.005") + "</p>");
 
     updateUi();
 

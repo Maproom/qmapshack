@@ -124,7 +124,7 @@
        <item row="9" column="0">
         <widget class="QLabel" name="label_14">
          <property name="text">
-          <string>Ground/Tyre</string>
+          <string>Ground/Tyres</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

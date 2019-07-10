@@ -290,6 +290,7 @@ QMap<QString, CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
     QMap<QString, search_type_e> map;
     map.insert(tr("with"), eSearchTypeWith);
     map.insert(tr("contains"), eSearchTypeWith);
+    map.insert(tr("containing"), eSearchTypeWith);
     map.insert(tr("without"), eSearchTypeWithout);
     map.insert(tr("shorter than"), eSearchTypeSmaller);
     map.insert(tr("smaller than"), eSearchTypeSmaller);
@@ -320,6 +321,7 @@ QMap<QString, QString> CSearch::initKeywordSearchExampleMap()
     QMap<QString, QString> map;
     map.insert(tr("with"), tr("example: attributes with dog"));
     map.insert(tr("contains"), tr("example: name contains bike"));
+    map.insert(tr("containing"), tr("example: name containin bike"));
     map.insert(tr("without"), tr("example: name without water"));
     map.insert(tr("shorter than"), tr("example: shorter than 5km"));
     map.insert(tr("smaller than"), tr("example: area smaller than 5m²"));
@@ -364,7 +366,9 @@ QMap<QString, searchProperty_e> CSearch::initSearchPropertyEnumMap()
     map.insert("D", eSearchPropertyGeocacheDifficulty);
     map.insert(tr("terrain"), eSearchPropertyGeocacheTerrain);
     map.insert(tr("T"), eSearchPropertyGeocacheTerrain);
-    map.insert(tr("attributes"), eSearchPropertyGeocacheAttributes);
+    map.insert(tr("positive attributes"), eSearchPropertyGeocachePositiveAttributes);
+    map.insert(tr("non-negated attributes"), eSearchPropertyGeocachePositiveAttributes);
+    map.insert(tr("negated attributes"), eSearchPropertyGeocacheNegatedAttributes);
     map.insert(tr("size"), eSearchPropertyGeocacheSize);
     map.insert(tr("GCCode"), eSearchPropertyGeocacheGCCode);
     map.insert(tr("GCName"), eSearchPropertyGeocacheGCName);
@@ -411,7 +415,8 @@ QMap<searchProperty_e, QString> CSearch::initSearchPropertyMeaningMap()
     //Geocache keywords
     map.insert(eSearchPropertyGeocacheDifficulty, tr("searches the difficulty rating of a geocache"));
     map.insert(eSearchPropertyGeocacheTerrain, tr("searches the terrain rating of a geocache"));
-    map.insert(eSearchPropertyGeocacheAttributes, tr("searches the translated meanings of the attributes"));
+    map.insert(eSearchPropertyGeocachePositiveAttributes, tr("searches the translated meanings of the non-negated attributes (Those not crossed out)"));
+    map.insert(eSearchPropertyGeocacheNegatedAttributes, tr("searches the translated meanings of the negated attributes (Those crossed out)"));
     map.insert(eSearchPropertyGeocacheSize, tr("searches the size of a geocache. (micro, small, regular, large)"));
     map.insert(eSearchPropertyGeocacheGCCode, tr("searches the GCCode of a geocache."));
 

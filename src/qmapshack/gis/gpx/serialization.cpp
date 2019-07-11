@@ -139,12 +139,17 @@ static void readXml(const QDomNode& xml, const QString& tag, QDateTime& value)
 static void readXml(const QDomNode& xml, const QString& tag, QList<IGisItem::link_t>& l)
 {
     if(xml.namedItem(tag).isElement())
-    {
+    {               
         const QDomNodeList& links = xml.toElement().elementsByTagName(tag);
         int N = links.count();
         for(int n = 0; n < N; ++n)
         {
             const QDomNode& link = links.item(n);
+
+            if(xml != link.parentNode())
+            {
+                continue;
+            }
 
             IGisItem::link_t tmp;
             tmp.uri.setUrl(link.attributes().namedItem("href").nodeValue());

@@ -67,6 +67,7 @@ public:
         eSortRoadbookNone
         , eSortRoadbookTrackWithDouble
         , eSortRoadbookTrackWithoutDouble
+        , eSortRoadbookTrackWithDetails
     };
 
     enum sorting_folder_e

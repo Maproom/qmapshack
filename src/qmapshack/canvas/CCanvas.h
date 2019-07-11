@@ -162,7 +162,7 @@ public:
      */
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
-    void print(QPainter &p, const QRectF& area, const QPointF &focus);
+    void print(QPainter &p, const QRectF& area, const QPointF &focus, bool printScale = true);
 
     /**
        @brief Set a single map file to be shown on the canvas
@@ -206,8 +206,12 @@ private slots:
 private:
     void drawStatusMessages(QPainter& p);
     void drawTrackStatistic(QPainter& p);
-    void drawScale(QPainter& p);
-    void setZoom(bool in, redraw_e &needsRedraw);
+    void drawScale(QPainter& p, QRectF drawRect);
+    void drawScale(QPainter& p)//Default use, drawRect is introduced for correct printing
+    {
+        drawScale(p, rect());
+    }
+    void setZoom(bool in, redraw_e & needsRedraw);
     void setSizeTrackProfile();
     void saveSizeTrackProfile();
     /**

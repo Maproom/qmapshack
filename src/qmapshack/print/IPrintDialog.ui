@@ -159,6 +159,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="checkScaleOnAll">
+        <property name="text">
+         <string>Draw scale on all pages</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QFrame" name="frameCanvas">
         <property name="minimumSize">
          <size>

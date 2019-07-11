@@ -617,6 +617,7 @@ void CDetailsTrk::slotShowPlots()
     plot1->setVisible(checkGraph1->isChecked());
     plot2->setVisible(checkGraph2->isChecked());
     plot3->setVisible(checkGraph3->isChecked());
+    updateData();
 }
 
 void CDetailsTrk::slotColorChanged(int idx)

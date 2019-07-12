@@ -220,16 +220,24 @@ void IGisItem::genKey() const
 {
     if(key.item.isEmpty())
     {
-        QByteArray buffer;
-        QDataStream stream(&buffer, QIODevice::WriteOnly);
-        stream.setByteOrder(QDataStream::LittleEndian);
-        stream.setVersion(QDataStream::Qt_5_2);
+        const CGisItemWpt* wpt = dynamic_cast<const CGisItemWpt*>(this);
+        if(wpt != nullptr && wpt->getGeoCache().hasData)
+        {
+            key.item=wpt->getGeoCache().id;
+        }
+        else
+        {
+            QByteArray buffer;
+            QDataStream stream(&buffer, QIODevice::WriteOnly);
+            stream.setByteOrder(QDataStream::LittleEndian);
+            stream.setVersion(QDataStream::Qt_5_2);
 
-        *this >> stream;
+            *this >> stream;
 
-        QCryptographicHash md5(QCryptographicHash::Md5);
-        md5.addData(buffer);
-        key.item = md5.result().toHex();
+            QCryptographicHash md5(QCryptographicHash::Md5);
+            md5.addData(buffer);
+            key.item = md5.result().toHex();
+        }
     }
     if(key.project.isEmpty())
     {

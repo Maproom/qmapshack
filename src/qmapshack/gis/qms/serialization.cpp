@@ -29,7 +29,7 @@
 #include <QtWidgets>
 
 #define VER_TRK         quint8(5)
-#define VER_WPT         quint8(2)
+#define VER_WPT         quint8(3)
 #define VER_RTE         quint8(3)
 #define VER_AREA        quint8(1)
 #define VER_LINK        quint8(1)
@@ -680,6 +680,11 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
         in >> widthBubble;
     }
 
+    if(version <= 2 && geocache.hasData)
+    {
+        //If the geocache was saved with an old Version of QMS recalculate it's key to make sure geocaches with the same id are treated as being the same
+        genKey();
+    }
     setIcon();
     setText   (CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));

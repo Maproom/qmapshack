@@ -469,11 +469,6 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
             continue;
         }
         qreal speed = 1 / formulaTerms[0] / 60 * 1000; // Transform from min/km to m/s
-//        qDebug() << "KKA: Pnt=" << i++
-//                 << "Slope tangens=" << A9
-//                 << "Max min/km=" << formulaTerms[0]
-//                 << "Speed m/s=" << speed
-//                 << "Speed km/h=" << speed * 3.6;
 
         timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
         pt.time   = timestamp;
@@ -773,4 +768,109 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
     QString val, unit;
     IUnit::self().meter2distance(distance, val, unit);
     changed(tr("Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)").arg(val).arg(unit).arg(ratio), "://icons/48x48/FilterZeroSpeedDriftCleaner.png");
+}
+
+void CGisItemTrk::filterEnergyCycle(CFilterEnergyCycle::energy_set_t &energySet)
+{
+    /* Related information:
+     * http://www.blog.ultracycle.net/2010/05/cycling-power-calculations (English)
+     * http://www.cptips.com/energy.htm  (English)
+     * http://www.tribology-abc.com/calculators/cycling.htm (English)
+     * http://www.kreuzotter.de/deutsch/speed.htm (German)
+     * http://horst-online.com/physik-des-fahrrads/index.html (German)
+     * http://www.helpster.de/wirkungsgrad-vom-mensch-erklaerung_198168 (German)
+     * http://www.wolfgang-menn.de/motion_d.htm (German)
+     * http://www.msporting.com/planung/5_3_6%20Aerodynamik.htm (German)
+    */
+
+    // Input values
+    const qreal joule2Calor = 4.1868;
+    const qreal gravityAccel = 9.81;    // kg * m / s2
+    const qreal muscleCoeff = 23;       // %
+    const qreal pedalRange = 70;        // Degree °
+    const qreal crankLength = 175;      // mm
+
+    qreal totalWeight = energySet.driverWeight + energySet.bikeWeight;
+    qreal airDensity = energySet.airDensity;
+    qreal windSpeed = energySet.windSpeed;
+    qreal pedalCadence = energySet.pedalCadence;
+    qreal frontalArea = energySet.frontalArea;
+    qreal windDragCoeff = energySet.windDragCoeff;
+    qreal rollingCoeff = energySet.rollingCoeff;
+
+    // Output values
+    energySet.airResistForce = 0;
+    energySet.rollResistForce = totalWeight * gravityAccel * rollingCoeff;
+    energySet.gravitySlopeForce = 0;
+    energySet.sumForce = 0;
+    energySet.positivePedalForce = 0;
+    energySet.power = 0;
+    energySet.positivePower = 0;
+    energySet.powerMovingTime = 0;
+    energySet.powerMovingTimeRatio = 0;
+    energySet.energyKJoule = 0;
+
+    qint32 cntPositivePowerPoints = 0;
+
+    qreal pedalSpeed = crankLength * pedalCadence * 2 * M_PI / 60 / 1000;
+
+    for(const CTrackData::trkpt_t &pt : trk)
+    {
+        if(pt.isHidden())
+        {
+            continue;
+        }
+
+        qreal speed = pt.speed;
+        if (speed <= 0.2)           // 0.2 ==> to be synchron with deriveSecondaryData()
+        {
+            continue;
+        }
+
+        qreal slope = pt.slope2;
+
+        qreal airResistForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
+
+        if ((speed + windSpeed) < 0)
+        {
+            airResistForce *= -1;
+        }
+        qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
+        energySet.airResistForce += airResistForce;
+        energySet.gravitySlopeForce += gravitySlopeForce;
+        energySet.sumForce += airResistForce + gravitySlopeForce + energySet.rollResistForce;
+
+        qreal power = (qAbs(airResistForce) * (speed + windSpeed)) + ((energySet.rollResistForce + gravitySlopeForce) * speed);
+        energySet.power += power;
+
+        if (power > 0)
+        {
+            qreal deltaPowerTime = pt.deltaDistance / speed;
+            energySet.powerMovingTime += deltaPowerTime;
+            energySet.positivePower += power;
+            energySet.energyKJoule += power * deltaPowerTime / muscleCoeff / 1000 * 100;
+            energySet.positivePedalForce += power / pedalSpeed * 180 / pedalRange;
+            cntPositivePowerPoints++;
+        }
+    }
+
+    if (cntVisiblePoints)
+    {
+        energySet.airResistForce /= cntVisiblePoints;
+        energySet.gravitySlopeForce /= cntVisiblePoints;
+        energySet.sumForce /= cntVisiblePoints;
+        energySet.power /= cntVisiblePoints;
+    }
+
+    if(totalElapsedSecondsMoving)
+    {
+        energySet.powerMovingTimeRatio = energySet.powerMovingTime / totalElapsedSecondsMoving;
+    }
+
+    if(cntPositivePowerPoints)
+    {
+        energySet.positivePedalForce /= cntPositivePowerPoints;
+        energySet.positivePower /= cntPositivePowerPoints;
+    }
+    energySet.energyKcal = energySet.energyKJoule / joule2Calor;
 }

@@ -202,7 +202,10 @@ void CGisItemWpt::setSymbol()
 
 void CGisItemWpt::genKey() const
 {
-    key.item=QString::number(geocache.id);
+    if(geocache.hasData)
+    {
+        key.item=QString::number(geocache.id);
+    }
     IGisItem::genKey();
 }
 

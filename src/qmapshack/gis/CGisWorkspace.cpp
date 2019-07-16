@@ -238,8 +238,15 @@ void CGisWorkspace::slotSetupSearch()
 
 void CGisWorkspace::slotSearchHelp()
 {
-    CSearchExplanationDialog* dlg = new CSearchExplanationDialog(this);
-    dlg->show();
+    if(explanationDlg == nullptr)
+    {
+        explanationDlg = new CSearchExplanationDialog(this);
+    }
+
+    if(!explanationDlg->isVisible())
+    {
+        explanationDlg->show();
+    }
 }
 
 void CGisWorkspace::slotSaveAll()

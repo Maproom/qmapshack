@@ -456,6 +456,8 @@ private:
     friend class CMainWindow;
     CGisWorkspace(QMenu * menuProject, QWidget * parent);
 
+    CSearchExplanationDialog* explanationDlg = nullptr;
+
     static CGisWorkspace * pSelf;
 
     /**

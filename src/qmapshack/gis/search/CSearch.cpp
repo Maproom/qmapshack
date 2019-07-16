@@ -160,8 +160,7 @@ CSearch::CSearch(QString searchstring)
         }
         if(filterValue.toString().isEmpty())
         {
-            filterValue.str1 = filterValueString.section(tr("and"), 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
-            filterValue.str2 = filterValueString.section(tr("and"), 1, 0, QString::SectionCaseInsensitiveSeps).simplified();
+            filterValue.str1 = filterValueString;
         }
         search.searchValue=filterValue;
     }

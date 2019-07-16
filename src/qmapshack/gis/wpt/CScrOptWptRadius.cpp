@@ -98,5 +98,5 @@ void CScrOptWptRadius::draw(QPainter& p)
     }
     item->drawHighlight(p);
 
-    CDraw::bubble(p, geometry(), anchor.toPoint());
+    CDraw::bubble(p, geometry(), anchor.toPoint(), backgroundColor);
 }

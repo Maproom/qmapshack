@@ -22,6 +22,9 @@
   <property name="windowTitle">
    <string>BRouter Setup</string>
   </property>
+  <property name="wizardStyle">
+   <enum>QWizard::ClassicStyle</enum>
+  </property>
   <property name="options">
    <set>QWizard::CancelButtonOnLeft|QWizard::HaveCustomButton1</set>
   </property>
@@ -243,14 +246,14 @@
      </widget>
     </item>
     <item>
-     <widget class="QWebEngineView" name="webLocalBRouterVersions" native="true">
+     <widget class="QWebEngineView" name="webLocalBRouterVersions">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="url" stdset="0">
+      <property name="url">
        <url>
         <string>about:blank</string>
        </url>
@@ -672,6 +675,12 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>CRouterBRouterTilesPage</class>
    <extends>QWizardPage</extends>
    <header>gis/rte/router/brouter/CRouterBRouterTilesPage.h</header>
@@ -681,12 +690,6 @@
    <class>CRouterBRouterSetupPage</class>
    <extends>QWizardPage</extends>
    <header>gis/rte/router/brouter/CRouterBRouterSetupPage.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>QWebEngineView</class>
-   <extends>QWidget</extends>
-   <header>QtWebEngineWidgets/QWebEngineView</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

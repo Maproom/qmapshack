@@ -81,6 +81,11 @@
          <string>Sort along track (single)</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>Track with details</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item>

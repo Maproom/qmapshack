@@ -681,18 +681,19 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         str += "\n" + mouseMoveFocus->instruction;
 
         // calculate bounding box of text
-        QFont f = CMainWindow::self().getMapFont();
+        const CMainWindow& w = CMainWindow::self();
+        QFont f = w.getMapFont();
         QFontMetrics fm(f);
         QRect rectText = fm.boundingRect(QRect(0, 0, 500, 0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
         rectText.adjust(-5, -5, 5, 5);
         rectText.moveBottomLeft(anchor.toPoint() + QPoint(-50, -50));
 
         p.setFont(f);
-        CDraw::bubble(p, rectText, anchor.toPoint(), 18 /* px */, 21 /* px */);
+        CDraw::bubble(p, rectText, anchor.toPoint(), w.palette().color(QPalette::Background), 18 /* px */, 21 /* px */);
 
         p.save();
         p.translate(5, 5);
-        p.setPen(Qt::darkBlue);
+        p.setPen(w.palette().color(QPalette::Foreground));
         p.drawText(rectText, str);
         p.restore();
     }
@@ -740,6 +741,7 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
                 }
             }
         }
+
 
         CDraw::text(rtept.name, p, rect.toRect(), Qt::darkBlue);
         blockedAreas << rect;

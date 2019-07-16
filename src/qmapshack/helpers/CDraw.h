@@ -82,7 +82,8 @@ public:
        @param pointerBaseWidth  The width of the pointer
        @param pointerBasePos    The (relative) location of the pointer (in percent / pixels)
      */
-    static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth = 20, float pointerBasePos = .5f, const QPen& pen = penBorderGray);
+    static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, const QColor &background,
+                         int pointerBaseWidth = 20, float pointerBasePos = .5f, const QPen& pen = penBorderGray);
 
     static bool doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect);
 

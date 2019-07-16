@@ -55,7 +55,7 @@ void CScrOptRangeTrk::draw(QPainter& p)
 {
     if(isVisible())
     {
-        CDraw::bubble(p, geometry(), origin);
+        CDraw::bubble(p, geometry(), origin, backgroundColor);
     }
 }
 

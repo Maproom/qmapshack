@@ -89,6 +89,9 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     {
         overrideWindowFlags(Qt::Tool);
         setAttribute(Qt::WA_DeleteOnClose, true);
+        QPalette pal = palette();
+        pal.setColor(QPalette::Background, Qt::white);
+        setPalette(pal);
     }
 
     menu = new QMenu(this);
@@ -1352,12 +1355,20 @@ void IPlot::drawActivities(QPainter& p)
     p.restore();
 }
 
-void IPlot::save(QImage& image)
+void IPlot::save(QImage& image, const CTrackData::trkpt_t * pTrkpt)
 {
     resize(image.size());
     setSizes();
     buffer = QImage(image.size(), QImage::Format_ARGB32);
     draw();
+    if(pTrkpt != nullptr)
+    {
+        posMouse1.rx() = left + data->x().val2pt(pTrkpt->distance);
+        posMouse1.ry() = top  + data->y().val2pt(pTrkpt->ele);
+
+        QPainter p(&buffer);
+        drawDecoration(p);
+    }
     image = buffer;
 }
 

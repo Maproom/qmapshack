@@ -204,6 +204,15 @@ void CGisItemWpt::setSymbol()
     setIcon();
 }
 
+void CGisItemWpt::genKey() const
+{
+    if(geocache.hasData)
+    {
+        key.item=QString::number(geocache.id);
+    }
+    IGisItem::genKey();
+}
+
 QString CGisItemWpt::getLastName(const QString& name)
 {
     SETTINGS;

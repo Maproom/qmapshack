@@ -19,6 +19,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CDraw.h"
 #include "plot/ITrack.h"
+#include "canvas/IDrawContext.h"
 
 #include <QtWidgets>
 
@@ -39,10 +40,23 @@ ITrack::~ITrack()
     }
 }
 
-void ITrack::save(QImage& image)
+void ITrack::save(QImage& image, const CTrackData::trkpt_t * pTrkpt)
 {
     setSize(image.width(), image.height());
     draw();
+    if(pTrkpt != nullptr)
+    {
+        QPointF pos(pTrkpt->lon * DEG_TO_RAD, pTrkpt->lat * DEG_TO_RAD);
+        pj_transform(pjtar, pjsrc, 1, 0, &pos.rx(), &pos.ry(), 0);
+
+        QPainter p(&buffer);
+        USE_ANTI_ALIASING(p, true);
+        p.setPen(Qt::red);
+        p.setBrush(Qt::red);
+        p.scale(scale.x(), scale.y());
+        p.translate(-xoff, -yoff);
+        p.drawEllipse(pos, 5/scale.x(), 5/scale.x());
+    }
     image = buffer;
 }
 

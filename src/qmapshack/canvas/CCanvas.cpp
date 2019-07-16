@@ -137,9 +137,11 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     textStatusMessages->hide();
 
     labelTrackStatistic = new QLabel(this);
+    labelTrackStatistic->setAutoFillBackground(true);
     labelTrackStatistic->hide();
 
     labelTrackInfo = new QLabel(this);
+    labelTrackInfo->setAutoFillBackground(true);
     labelTrackInfo->hide();
 
     connect(map, &CMapDraw::sigStartThread, mapLoadIndicator, &QLabel::show);
@@ -785,7 +787,7 @@ void CCanvas::drawStatusMessages(QPainter& p)
         QRect r = textStatusMessages->frameGeometry();
         r.adjust(-5, -5, 5, 5);
         p.setPen(CDraw::penBorderGray);
-        p.setBrush(CDraw::brushBackWhite);
+        p.setBrush(textStatusMessages->palette().color(textStatusMessages->backgroundRole()));
         p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
     }
 }
@@ -794,7 +796,7 @@ void CCanvas::drawTrackStatistic(QPainter& p)
 {
     p.save();
     p.setPen(CDraw::penBorderGray);
-    p.setBrush(CDraw::brushBackWhite);
+    p.setBrush(labelTrackStatistic->palette().color(labelTrackStatistic->backgroundRole()));
     if(labelTrackStatistic->isVisible())
     {
         QRect r = labelTrackStatistic->frameGeometry();

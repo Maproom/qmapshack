@@ -107,6 +107,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="checkScaleOnAll">
+          <property name="text">
+           <string>Draw scale on all pages</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="pushPrint">
           <property name="sizePolicy">
            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -155,13 +162,6 @@
         </property>
         <property name="wordWrap">
          <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkScaleOnAll">
-        <property name="text">
-         <string>Draw scale on all pages</string>
         </property>
        </widget>
       </item>

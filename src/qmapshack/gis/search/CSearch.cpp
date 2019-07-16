@@ -401,7 +401,7 @@ QMap<searchProperty_e, QString> CSearch::initSearchPropertyMeaningMap()
 {
     QMap<searchProperty_e, QString> map;
     //General keywords
-    map.insert(eSearchPropertyGeneralName, tr("searches the name"));
+    map.insert(eSearchPropertyGeneralName, tr("searches the name of the item. For Geocaches this is \"Name - GCCode\"."));
     map.insert(eSearchPropertyGeneralFullText, tr("searches the full text"));
     map.insert(eSearchPropertyGeneralElevation, tr("searches the elevation. For items consisting of multiple points the minimum and the maximum is used"));
     map.insert(eSearchPropertyGeneralDate, tr("searches the Date"));
@@ -418,6 +418,7 @@ QMap<searchProperty_e, QString> CSearch::initSearchPropertyMeaningMap()
     map.insert(eSearchPropertyGeocacheNegatedAttributes, tr("searches the translated meanings of the negated attributes (Those crossed out)"));
     map.insert(eSearchPropertyGeocacheSize, tr("searches the size of a geocache. (micro, small, regular, large)"));
     map.insert(eSearchPropertyGeocacheGCCode, tr("searches the GCCode of a geocache."));
+    map.insert(eSearchPropertyGeocacheGCName, tr("searches the Name of a geocache."));
 
     //Waypoint keywords
 

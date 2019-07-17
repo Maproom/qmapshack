@@ -29,7 +29,7 @@
 #include <QtWidgets>
 
 #define VER_TRK         quint8(6)
-#define VER_WPT         quint8(2)
+#define VER_WPT         quint8(3)
 #define VER_RTE         quint8(3)
 #define VER_AREA        quint8(1)
 #define VER_LINK        quint8(1)

@@ -691,6 +691,12 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
         in >> widthBubble;
     }
 
+    if(version <= 2 && geocache.hasData)
+    {
+        //If the geocache was saved with an old Version of QMS recalculate it's key to make sure geocaches with the same id are treated as being the same
+        key.item="";
+        genKey();
+    }
     setIcon();
     setText   (CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));

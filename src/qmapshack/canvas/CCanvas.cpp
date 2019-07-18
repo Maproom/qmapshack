@@ -1304,7 +1304,7 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool 
     rt->draw(p, r);
     if(printScale)
     {
-        drawScale(p, area);
+        drawScale(p, r);
     }
 
     setDrawContextSize(oldSize);

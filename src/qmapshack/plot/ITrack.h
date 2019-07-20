@@ -19,6 +19,8 @@
 #ifndef ITRACK_H
 #define ITRACK_H
 
+#include "gis/trk/CTrackData.h"
+
 #include <proj_api.h>
 #include <QImage>
 #include <QPolygonF>
@@ -37,7 +39,7 @@ public:
     void setTrack(CGisItemTrk * track);
     void setTrack(const QPolygonF &track);
 
-    void save(QImage& image);
+    void save(QImage& image, const CTrackData::trkpt_t *pTrkpt);
 
 protected:
     void setupProjection(const QRectF &boundingBox);

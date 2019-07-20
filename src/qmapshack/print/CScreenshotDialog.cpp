@@ -127,7 +127,7 @@ void CScreenshotDialog::slotPrint()
         CPlotProfile plot(trk, trk->limitsGraph1, IPlot::eModeNormal, CMainWindow::self().getBestWidgetForParent());
         plot.resize(pixmap.width(), heightProfile);
         QImage image(plot.size(), QImage::Format_ARGB32);
-        plot.save(image);
+        plot.save(image, nullptr);
 
         const QImage& profileScaled = image.scaled(r.size().toSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
@@ -168,7 +168,7 @@ QPixmap CScreenshotDialog::getScreenshot(CGisItemTrk * trk)
         plot.resize(pixmap.width(), heightProfile);
 
         QImage image(plot.size(), QImage::Format_ARGB32);
-        plot.save(image);
+        plot.save(image, nullptr);
         p.drawImage(0, canvas.height(), image);
     }
 

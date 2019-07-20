@@ -340,6 +340,8 @@ public:
         hideArea = hide;
     }
 
+    void genKey() const override;
+
     static QString getLastName(const QString &name);
     static void newWpt(QPointF& pt, const QString& name, const QString& desc, IGisProject *project);
     static bool getIconAndName(QString& icon, QString& name);

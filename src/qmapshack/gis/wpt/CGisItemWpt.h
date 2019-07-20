@@ -342,6 +342,7 @@ public:
         hideArea = hide;
     }
 
+    void genKey() const override;
     const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
 
     static QString getLastName(const QString &name);

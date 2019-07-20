@@ -318,6 +318,8 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
            + "</th><th>"
            + tr("Descent")
            + "</th><th>"
+           + tr("Slope")
+           + "</th><th>"
            + tr("Course")
            + "</th></tr>";
 
@@ -363,6 +365,9 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
                 totalDescent -= delta;
                 msg += QString("<td align=right></td><td align=right>%1%2</td>").arg(val).arg(unit);
             }
+            qreal slope = IUnit::slopeConvert(IUnit::eSlopePercent, delta / d * 100.0);
+            IUnit::self().slope2string(slope, val, unit);
+            msg += QString("<td align=right>%1%2</td>").arg(val).arg(unit);
         }
         else
         {

@@ -67,6 +67,10 @@ CSearch::CSearch(QString searchstring)
         search.searchType=keywordSearchTypeMap.value(searchTypeKeyword);
         //Everything before the Search Type keyword is the property, i.e. "date after 2019" would result in "date"
         search.property=searchPropertyEnumMap.value(searchstring.section(searchTypeKeyword, 0, 0, QString::SectionCaseInsensitiveSeps).simplified(), eSearchPropertyNoMatch);
+        if(search.property == eSearchPropertyNoMatch)
+        {
+            syntaxError=true;
+        }
         //Everything after the Search Type keyword is the value, i.e. "date after 2019" would result in "2019"
         QString filterValueString = searchstring.section(searchTypeKeyword, 1, -1, QString::SectionCaseInsensitiveSeps).simplified();
         searchValue_t filterValue;
@@ -179,6 +183,8 @@ bool CSearch::getSearchResult(IGisItem *item)
     return true; //Empty search shouldn't hide anything
 }
 
+//itemValue is the value returned by a GisItem and thus always has the same unit.
+//searchValue is what the user queried
 bool CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchValue)
 {
     bool success = false;
@@ -216,6 +222,10 @@ void CSearch::improveQuery()
     if(search.searchValue.str1 != "" && search.searchValue.str2 == "" && search.searchValue.value1 != NOFLOAT && search.searchValue.value2 != NOFLOAT)
     {
         search.searchValue.str2=search.searchValue.str1;
+    }
+    if(search.searchValue.str1 == "" && search.searchValue.str2 != "" && search.searchValue.value1 != NOFLOAT && search.searchValue.value2 != NOFLOAT)
+    {
+        search.searchValue.str1=search.searchValue.str2;
     }
 
     //Try to guess what property the user meant when there is no match. I.e. make "shorter than 5km" work

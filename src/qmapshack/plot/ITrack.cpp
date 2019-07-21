@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
+#include "canvas/IDrawContext.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CDraw.h"
 #include "plot/ITrack.h"
-#include "canvas/IDrawContext.h"
 
 #include <QtWidgets>
 

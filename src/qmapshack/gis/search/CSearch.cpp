@@ -40,7 +40,8 @@ CSearch::CSearch(QString searchstring)
     QString searchTypeKeyword;
     for(const QString& key:keywordSearchTypeMap.keys())
     {
-        if(searchstring.contains(key, Qt::CaseInsensitive))
+        //Make spaces around so for example with is not detected inside without
+        if(searchstring.contains(" " + key + " ", Qt::CaseInsensitive))
         {
             searchTypeKeyword=key;
             break;

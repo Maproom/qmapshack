@@ -202,15 +202,34 @@ bool CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchV
         searchValue.str1 = itemValue.str1;
     }
 
-    if(searchValue.str2 != "" && searchValue.str2 != itemValue.str2)
+    //Try to adjust unit of search to second value returned by item.
+    //If this fails (for example if the search is "max speed between a and b",
+    //adjust the unit of the search to the first returned unit
+    if(itemValue.str2 != "")
     {
-        success = IUnit::convert(searchValue.value2, searchValue.str2, itemValue.str2);
-        syntaxError |= !success;
+        if(searchValue.str2 != "" && searchValue.str2 != itemValue.str2)
+        {
+            success = IUnit::convert(searchValue.value2, searchValue.str2, itemValue.str2);
+            syntaxError |= !success;
+        }
+        else
+        {
+            searchValue.str2 = itemValue.str2;
+            success = true;
+        }
     }
     else
     {
-        searchValue.str2 = itemValue.str2;
-        success = true;
+        if(searchValue.str2 != "" && searchValue.str2 != itemValue.str1)
+        {
+            success = IUnit::convert(searchValue.value2, searchValue.str2, itemValue.str1);
+            syntaxError |= !success;
+        }
+        else
+        {
+            searchValue.str2 = itemValue.str1;
+            success = true;
+        }
     }
     return success;
 }

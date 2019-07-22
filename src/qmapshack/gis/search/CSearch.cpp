@@ -100,7 +100,7 @@ CSearch::CSearch(QString searchstring)
             {
                 filterValue.value1=time1.msecsSinceStartOfDay()/1000;
                 filterValue.str1="s";
-                QTime time2 = QLocale::system().toTime(filterValueString.section(tr("and"), 1, 0, QString::SectionCaseInsensitiveSeps).simplified(), tf);
+                QTime time2 = QLocale::system().toTime(filterValueString.section(tr("and"), 1, -1, QString::SectionCaseInsensitiveSeps).simplified(), tf);
                 if(time1.isValid())
                 {
                     filterValue.value2=time2.msecsSinceStartOfDay()/1000;
@@ -131,7 +131,8 @@ CSearch::CSearch(QString searchstring)
                 {
                     filterValue.value1=time1.toSecsSinceEpoch();
                     filterValue.str1="SsE";
-                    QDateTime time2 = QLocale::system().toDateTime(filterValueString.section(tr("and"), 1, 0, QString::SectionCaseInsensitiveSeps).simplified(), df);
+
+                    QDateTime time2 = QLocale::system().toDateTime(filterValueString.section(tr("and"), 1, -1, QString::SectionCaseInsensitiveSeps).simplified(), df);
                     if(time2.isValid())
                     {
                         filterValue.value2=time2.toSecsSinceEpoch();

@@ -310,6 +310,14 @@ void CSearch::improveQuery()
                 search.searchValue.str1="SsE";
             }
         }
+
+        //If the user searched for 'date equals' change it to 'between 0h and 24h of the day queried'
+        if(search.searchType == eSearchTypeEquals)
+        {
+            search.searchType=eSearchTypeBetween;
+            search.searchValue.str2="SsE";
+            search.searchValue.value2=search.searchValue.value1 + 24*60*60;
+        }
     }
 }
 

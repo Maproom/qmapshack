@@ -1195,8 +1195,11 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeneralDate, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        searchValue.value1 = item->wpt.time.toSecsSinceEpoch();
-        searchValue.str1 = "SsE"; //To differentiate Dates and Durations
+        if(item->wpt.time.isValid())
+        {
+            searchValue.value1 = item->wpt.time.toSecsSinceEpoch();
+            searchValue.str1 = "SsE"; //To differentiate Dates and Durations
+        }
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralComment, [](CGisItemWpt* item){

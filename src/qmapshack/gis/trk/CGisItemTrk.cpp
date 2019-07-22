@@ -3035,10 +3035,16 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeneralDate, [](CGisItemTrk* item){
         searchValue_t searchValue;
-        searchValue.value1 = item->timeStart.toSecsSinceEpoch();
-        searchValue.str1 = "SsE";
-        searchValue.value2 = item->timeEnd.toSecsSinceEpoch();
-        searchValue.str2 = "SsE";
+        if(item->timeStart.isValid())
+        {
+            searchValue.value1 = item->timeStart.toSecsSinceEpoch();
+            searchValue.str1 = "SsE";
+        }
+        if(item->timeEnd.isValid())
+        {
+            searchValue.value2 = item->timeEnd.toSecsSinceEpoch();
+            searchValue.str2 = "SsE";
+        }
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralComment, [](CGisItemTrk* item){

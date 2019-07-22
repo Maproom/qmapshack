@@ -90,12 +90,12 @@ CSearch::CSearch(QString searchstring)
             if(time1.isValid())
             {
                 filterValue.value1=time1.msecsSinceStartOfDay()/1000;
-                filterValue.str1="S";
+                filterValue.str1="s";
                 QTime time2 = QLocale::system().toTime(filterValueString.section(tr("and"), 1, 0, QString::SectionCaseInsensitiveSeps).simplified(), tf);
                 if(time1.isValid())
                 {
                     filterValue.value2=time2.msecsSinceStartOfDay()/1000;
-                    filterValue.str2="S";
+                    filterValue.str2="s";
                 }
                 break;
             }
@@ -188,7 +188,7 @@ bool CSearch::getSearchResult(IGisItem *item)
 //searchValue is what the user queried
 bool CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchValue)
 {
-    bool success = false;
+    bool success = true;
     if(searchValue.str1 != "" && searchValue.str1 != itemValue.str1)
     {
         success = IUnit::convert(searchValue.value1, searchValue.str1, itemValue.str1);
@@ -216,7 +216,6 @@ bool CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchV
         else
         {
             searchValue.str2 = itemValue.str2;
-            success = true;
         }
     }
     else
@@ -226,10 +225,10 @@ bool CSearch::adjustUnits(const searchValue_t& itemValue, searchValue_t& searchV
             success = IUnit::convert(searchValue.value2, searchValue.str2, itemValue.str1);
             syntaxError |= !success;
         }
-        else
+        //Don't add a unit if there is no valid value
+        else if(searchValue.value2 != NOFLOAT)
         {
             searchValue.str2 = itemValue.str1;
-            success = true;
         }
     }
     return success;
@@ -251,24 +250,24 @@ void CSearch::improveQuery()
     //Try to guess what property the user meant when there is no match. I.e. make "shorter than 5km" work
     if(search.property == eSearchPropertyNoMatch)
     {
-        if(search.searchValue.str1.contains("/H", Qt::CaseInsensitive) ||
-           search.searchValue.str1.contains("/S", Qt::CaseInsensitive))
+        if(search.searchValue.str1.contains("/h", Qt::CaseInsensitive) ||
+           search.searchValue.str1.contains("/s", Qt::CaseInsensitive))
         {
             search.property = eSearchPropertyRteTrkAvgSpeed;
         }
-        else if(search.searchValue.str1.compare("KM", Qt::CaseInsensitive) == 0 ||
+        else if(search.searchValue.str1.compare("km", Qt::CaseInsensitive) == 0 ||
                 search.searchValue.str1.compare("mi", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyRteTrkDistance;
         }
-        else if(search.searchValue.str1.compare("M", Qt::CaseInsensitive) == 0 ||
-                search.searchValue.str1.compare("FT", Qt::CaseInsensitive) == 0)
+        else if(search.searchValue.str1.compare("m", Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("ft", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyGeneralElevation;
         }
-        else if(search.searchValue.str1.compare("S", Qt::CaseInsensitive) == 0 ||
-                search.searchValue.str1.compare("MIN", Qt::CaseInsensitive) == 0 ||
-                search.searchValue.str1.compare("H", Qt::CaseInsensitive) == 0)
+        else if(search.searchValue.str1.compare("s", Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("min", Qt::CaseInsensitive) == 0 ||
+                search.searchValue.str1.compare("h", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyRteTrkTimeMoving;
         }

@@ -68,9 +68,10 @@ CSearch::CSearch(QString searchstring)
         search.searchType=keywordSearchTypeMap.value(searchTypeKeyword);
         //Everything before the Search Type keyword is the property, i.e. "date after 2019" would result in "date"
         search.property=eSearchPropertyNoMatch;
+        QString propertyString=searchstring.section(searchTypeKeyword, 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
         for(const QString& key:searchPropertyEnumMap.keys())
         {
-            if(searchstring.section(searchTypeKeyword, 0, 0, QString::SectionCaseInsensitiveSeps).compare(key, Qt::CaseInsensitive) == 0)
+            if(propertyString.compare(key, Qt::CaseInsensitive) == 0)
             {
                 search.property=searchPropertyEnumMap[key];
                 break;

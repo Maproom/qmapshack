@@ -83,6 +83,8 @@ CSearch::CSearch(QString searchstring)
         }
         //Everything after the Search Type keyword is the value, i.e. "date after 2019" would result in "2019"
         QString filterValueString = searchstring.section(searchTypeKeyword, 1, -1, QString::SectionCaseInsensitiveSeps).simplified();
+        QString filterValueStringFirstPart = filterValueString.section(tr("and"), 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
+        QString filterValueStringSecondPart = filterValueString.section(tr("and"), 1, -1, QString::SectionCaseInsensitiveSeps).simplified();
         searchValue_t filterValue;
 
         //Try if it is a time. Do so first, since this is the most exclusive
@@ -95,16 +97,34 @@ CSearch::CSearch(QString searchstring)
 
         for(const QString& tf:timeFormats)
         {
-            QTime time1 = QLocale::system().toTime(filterValueString.section(tr("and"), 0, 0, QString::SectionCaseInsensitiveSeps).simplified(), tf);
-            if(time1.isValid())
+            QTime time1a = QLocale::system().toTime(filterValueStringFirstPart, tf);
+            if(time1a.isValid())
             {
-                filterValue.value1=time1.msecsSinceStartOfDay()/1000;
-                filterValue.str1="s";
-                QTime time2 = QLocale::system().toTime(filterValueString.section(tr("and"), 1, -1, QString::SectionCaseInsensitiveSeps).simplified(), tf);
-                if(time1.isValid())
+                filterValue.value1=time1a.msecsSinceStartOfDay()/1000;
+                filterValue.str1="SsE";
+            }
+
+            QTime time1b=QLocale::c().toTime(filterValueStringFirstPart, tf);
+            if(time1b.isValid())
+            {
+                filterValue.value1=time1b.msecsSinceStartOfDay()/1000;
+                filterValue.str1="SsE";
+            }
+
+            if(time1a.isValid() || time1b.isValid())
+            {
+                QTime time2a = QLocale::system().toTime(filterValueStringSecondPart, tf);
+                if(time2a.isValid())
                 {
-                    filterValue.value2=time2.msecsSinceStartOfDay()/1000;
-                    filterValue.str2="s";
+                    filterValue.value2=time2a.msecsSinceStartOfDay()/1000;
+                    filterValue.str2="SsE";
+                }
+
+                QTime time2b=QLocale::c().toTime(filterValueStringSecondPart, tf);
+                if(time2b.isValid())
+                {
+                    filterValue.value2=time2b.msecsSinceStartOfDay()/1000;
+                    filterValue.str2="SsE";
                 }
                 break;
             }
@@ -126,16 +146,33 @@ CSearch::CSearch(QString searchstring)
 
             for(const QString& df:dateFormats)
             {
-                QDateTime time1 = QLocale::system().toDateTime(filterValueString.section(tr("and"), 0, 0, QString::SectionCaseInsensitiveSeps).simplified(), df);
-                if(time1.isValid())
+                QDateTime time1a = QLocale::system().toDateTime(filterValueStringFirstPart, df);
+                if(time1a.isValid())
                 {
-                    filterValue.value1=time1.toSecsSinceEpoch();
+                    filterValue.value1=time1a.toSecsSinceEpoch();
                     filterValue.str1="SsE";
+                }
 
-                    QDateTime time2 = QLocale::system().toDateTime(filterValueString.section(tr("and"), 1, -1, QString::SectionCaseInsensitiveSeps).simplified(), df);
-                    if(time2.isValid())
+                QDateTime time1b=QLocale::c().toDateTime(filterValueStringFirstPart, df);
+                if(time1b.isValid())
+                {
+                    filterValue.value1=time1b.toSecsSinceEpoch();
+                    filterValue.str1="SsE";
+                }
+
+                if(time1a.isValid() || time1b.isValid())
+                {
+                    QDateTime time2a = QLocale::system().toDateTime(filterValueStringSecondPart, df);
+                    if(time2a.isValid())
                     {
-                        filterValue.value2=time2.toSecsSinceEpoch();
+                        filterValue.value2=time2a.toSecsSinceEpoch();
+                        filterValue.str2="SsE";
+                    }
+
+                    QDateTime time2b=QLocale::c().toDateTime(filterValueStringSecondPart, df);
+                    if(time2b.isValid())
+                    {
+                        filterValue.value2=time2b.toSecsSinceEpoch();
                         filterValue.str2="SsE";
                     }
                     break;

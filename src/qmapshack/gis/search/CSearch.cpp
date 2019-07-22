@@ -330,7 +330,7 @@ void CSearch::improveQuery()
         if(search.searchValue.value1 != NOFLOAT)
         {
             //Try to catch if user only entered a year. Not done in regular detecting as it could be a speed or so.
-            if(search.searchValue.value1 <= QDateTime::currentDateTime().date().year() && search.searchValue.value1 >= 1970)
+            if(search.searchValue.str1.isEmpty())
             {
                 search.searchValue.value1=QDateTime(QDate(search.searchValue.value1, 1, 1)).toSecsSinceEpoch();
                 search.searchValue.str1="SsE";
@@ -345,16 +345,16 @@ void CSearch::improveQuery()
         if(search.searchValue.value2 != NOFLOAT)
         {
             //Try to catch if user only entered a year. Not done in regular detecting as it could be a speed or so.
-            if(search.searchValue.value2 <= QDateTime::currentDateTime().date().year() && search.searchValue.value2 >= 1970)
+            if(search.searchValue.str2.isEmpty())
             {
                 search.searchValue.value2=QDateTime(QDate(search.searchValue.value2, 1, 1)).toSecsSinceEpoch();
-                search.searchValue.str1="SsE";
+                search.searchValue.str2="SsE";
             }
             //Assume you want 2012 and not 1912 (qt defaults to 19xx)
-            if(QDateTime::fromSecsSinceEpoch(search.searchValue.value2).addYears(100) <=  QDateTime::currentDateTime())
+            else if(QDateTime::fromSecsSinceEpoch(search.searchValue.value2).addYears(100) <=  QDateTime::currentDateTime())
             {
                 search.searchValue.value2=QDateTime::fromSecsSinceEpoch(search.searchValue.value2).addYears(100).toSecsSinceEpoch();
-                search.searchValue.str1="SsE";
+                search.searchValue.str2="SsE";
             }
         }
 

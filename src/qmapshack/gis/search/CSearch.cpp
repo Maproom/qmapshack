@@ -564,7 +564,14 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
         return itemValue.toString().contains(searchValue.toString(), CSearch::caseSensitivity);
     });
     map.insert(eSearchTypeWithout, [](const searchValue_t& itemValue, searchValue_t& searchValue){
-        return !itemValue.toString().contains(searchValue.toString(), CSearch::caseSensitivity);
+        if(itemValue.toString().isEmpty())
+        {
+            return false;
+        }
+        else
+        {
+            return !itemValue.toString().contains(searchValue.toString(), CSearch::caseSensitivity);
+        }
     });
     map.insert(eSearchTypeRegEx, [](const searchValue_t& itemValue, searchValue_t& searchValue){
         if(CSearch::caseSensitivity == Qt::CaseInsensitive)//There is no option to make regex caseinsensitive

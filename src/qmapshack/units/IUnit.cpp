@@ -492,7 +492,7 @@ bool IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
         switch(unitType)
         {
         case eUnitTypeTime:
-            fromTarget = timeToMKSMap.value(targetUnit, NOFLOAT);
+            fromTarget = timeToMKSMap.value(targetUnit.toLower(), NOFLOAT);
             if(fromTarget == NOFLOAT)
             {
                 return false;
@@ -500,7 +500,7 @@ bool IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
             break;
 
         case eUnitTypeDistance:
-            fromTarget = distanceToMKSMap.value(targetUnit, NOFLOAT);
+            fromTarget = distanceToMKSMap.value(targetUnit.toLower(), NOFLOAT);
             if(fromTarget == NOFLOAT)
             {
                 return false;
@@ -508,7 +508,7 @@ bool IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
             break;
 
         case eUnitTypeSpeed:
-            fromTarget = speedToMKSMap.value(targetUnit, NOFLOAT);
+            fromTarget = speedToMKSMap.value(targetUnit.toLower(), NOFLOAT);
             if(fromTarget == NOFLOAT)
             {
                 return false;
@@ -516,7 +516,7 @@ bool IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
             break;
 
         case eUnitTypeArea:
-            fromTarget = areaToMKSMap.value(targetUnit, NOFLOAT);
+            fromTarget = areaToMKSMap.value(targetUnit.toLower(), NOFLOAT);
             if(fromTarget == NOFLOAT)
             {
                 return false;

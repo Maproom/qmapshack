@@ -525,6 +525,7 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
     }
     else
     {
+        textStatusMessages->setMinimumWidth(statusMessages.contains("CMouseRuler") ? 400 : 300);
         textStatusMessages->show();
         textStatusMessages->setText(report);
 

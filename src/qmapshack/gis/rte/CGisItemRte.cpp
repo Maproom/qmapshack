@@ -1370,6 +1370,11 @@ QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
         IUnit::self().meter2elevation(item->rte.maxElevation, searchValue.value1, searchValue.str1);
         return searchValue;
     });
-
+    map.insert(eSearchPropertyRteTrkTotalTime, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        searchValue.value1=item->rte.maxElevation;
+        searchValue.str1="s";
+        return searchValue;
+    });
     return map;
 }

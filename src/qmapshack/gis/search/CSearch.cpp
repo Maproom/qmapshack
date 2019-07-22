@@ -512,12 +512,12 @@ QMap<searchProperty_e, QString> CSearch::initSearchPropertyMeaningMap()
     map.insert(eSearchPropertyRteTrkDescent, tr("searches the total descent in a route or track"));
     map.insert(eSearchPropertyRteTrkMinElevation, tr("searches the minimal elevation in a route or track"));
     map.insert(eSearchPropertyRteTrkMaxElevation, tr("searches the maximal elevation in a route or track"));
-    map.insert(eSearchPropertyRteTrkMaxSpeed, tr("searches the maximal speed in a route or track"));
-    map.insert(eSearchPropertyRteTrkMinSpeed, tr("searches the minimal speed in a route or track"));
-    map.insert(eSearchPropertyRteTrkAvgSpeed, tr("searches the average speed in a route or track"));
+    map.insert(eSearchPropertyRteTrkMaxSpeed, tr("searches the maximal speed in a track"));
+    map.insert(eSearchPropertyRteTrkMinSpeed, tr("searches the minimal speed in a track"));
+    map.insert(eSearchPropertyRteTrkAvgSpeed, tr("searches the average speed in a track"));
     map.insert(eSearchPropertyRteTrkActivity, tr("searches the activity of a route or track"));
     map.insert(eSearchPropertyRteTrkTotalTime, tr("searches the total time spent on a route or track"));
-    map.insert(eSearchPropertyRteTrkTimeMoving, tr("searches the time spent moving on a route or track"));
+    map.insert(eSearchPropertyRteTrkTimeMoving, tr("searches the time spent moving on a track"));
 
     return map;
 }

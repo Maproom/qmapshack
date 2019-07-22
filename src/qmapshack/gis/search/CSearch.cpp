@@ -526,7 +526,7 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
 {
     QMap<CSearch::search_type_e, CSearch::fSearch> map;
     map.insert(eSearchTypeEquals, [](const searchValue_t& itemValue, searchValue_t& searchValue){
-        return itemValue.toString() == searchValue.toString();
+        return itemValue.toString().compare(searchValue.toString(), CSearch::caseSensitivity) == 0;
     });
     map.insert(eSearchTypeSmaller, [this](const searchValue_t& itemValue, searchValue_t& searchValue){
         if(itemValue.value1 != NOFLOAT)

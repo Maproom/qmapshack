@@ -644,7 +644,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/prj/CDetailsPrj.cpp" line="820"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="887"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Статистика</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="937"/>
@@ -3992,7 +3992,7 @@ Unknown structure.</source>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="321"/>
         <source>Slope</source>
-        <translation type="unfinished">Наклон</translation>
+        <translation>Наклон</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="323"/>
@@ -4116,7 +4116,8 @@ y: %4 м/пиксель</translation>
         <location filename="../print/CPrintDialog.cpp" line="174"/>
         <source>
  This equals to a scale of approx. 1:</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Это приблизительно масштаб 1:</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="221"/>
@@ -7375,7 +7376,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
         <source>Track with details</source>
-        <translation type="unfinished"></translation>
+        <translation>Трек с деталями</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="94"/>
@@ -10152,7 +10153,7 @@ or
     <message>
         <location filename="../print/IPrintDialog.ui" line="112"/>
         <source>Draw scale on all pages</source>
-        <translation type="unfinished"></translation>
+        <translation>Нарисовать масштаб на всех страницах</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="125"/>

@@ -24,8 +24,16 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     setWindowFlag(Qt::Tool, true);
     setWindowFlag(Qt::WindowStaysOnTopHint, true);
     //connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
-    QString explanation = tr("The underlying syntax of the search is \"Property Comparison Value\", i.e. \"name contains water\", however there are measures in place to make searching more intuitive so you can omit parts in special cases. Just try it out. \nThe searches are always exclusive, thus for a track \"elevation under 500m\" only shows tracks that are completly under 500m meters. ");
-    explanation += tr("\nYou can write Dates in the following formats:");
+    QString explanation = tr("The underlying syntax of the search is \"Property Comparison Value\", i.e. \"name contains water\", "
+                             "however there are measures in place to make searching more intuitive. (see below)"
+                             "\nThe searches are always exclusive, thus for a track \"elevation under 500m\" only shows "
+                             "tracks that are completly under 500m meters."
+                             "\n\nFollowing assumptions are made (for those that are pure guesses the field stays red):"
+                             "\n\tIf only one of two given numbers has a unit, the unit is assumed for both"
+                             "\n\tSpeed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date"
+                             "\n\t'Date equals' matches everything that is within 24h from the given date, thus normally the day typed."
+                             "\n\tIf you enter no unit the default unit (what you see when viewing the property of the item) is used.");
+    explanation += tr("\n\nYou can write Dates in the following formats:");
     explanation += "\n\t" + QLocale::system().dateTimeFormat(QLocale::LongFormat);
     explanation += "\n\t" + QLocale::system().dateTimeFormat(QLocale::ShortFormat);
     explanation += "\n\t" + QLocale::c().dateTimeFormat(QLocale::LongFormat);

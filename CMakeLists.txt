@@ -40,11 +40,11 @@ endif((EXISTS ${DEBIAN_RELEASE_INFO}) AND (${YEAR} LESS ${EXPIRE_YEAR}))
 # Define project name and version tags
 ###############################################################################################
 # this is not only the QMS version it will be the package version, too.
-project(QMapShack VERSION 1.13.0)
+project(QMapShack VERSION 1.13.1)
 
 # FOR A RELEASE:
 # remove "development" for a release
-set(VERSION_SUFFIX "develop")
+set(VERSION_SUFFIX "")
 # !!! Do not forget to update versions in the sub-repos, too!!!
 
 

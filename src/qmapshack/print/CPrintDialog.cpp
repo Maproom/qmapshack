@@ -57,10 +57,11 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
 
-    connect(canvas,    &CCanvas::sigZoom,     this, &CPrintDialog::slotUpdateMetrics);
-    connect(canvas,    &CCanvas::sigMove,     this, &CPrintDialog::slotUpdateMetrics);
-    connect(pushPrint, &QPushButton::pressed, this, &CPrintDialog::slotPrint);
-    connect(pushSave,  &QPushButton::pressed, this, &CPrintDialog::slotSave);
+    connect(canvas,         &CCanvas::sigZoom,     this, &CPrintDialog::slotUpdateMetrics);
+    connect(canvas,         &CCanvas::sigMove,     this, &CPrintDialog::slotUpdateMetrics);
+    connect(pushPrint,      &QPushButton::pressed, this, &CPrintDialog::slotPrint);
+    connect(pushSave,       &QPushButton::pressed, this, &CPrintDialog::slotSave);
+    connect(checkScaleOnAll, &QCheckBox::toggled,   this, &CPrintDialog::slotScaleOnAllChanged);
 
     if(type == eTypePrint)
     {
@@ -165,9 +166,13 @@ void CPrintDialog::slotUpdateMetrics()
     p.setBrush(Qt::BDiagPattern);
     p.drawRect(0, 0, rectSelAreaPixel.width() * scale, rectSelAreaPixel.height() * scale);
 
+    qreal xPageSizeMm = printer.pageRect(QPrinter::Millimeter).width();
+
     labelPages->setPixmap(img);
     labelPagesText->setText(tr("Pages: %1 x %2").arg(xPages, 0, 'f', 1).arg(yPages, 0, 'f', 1));
-    labelMapInfo->setText(tr("Zoom with mouse wheel on map below to change resolution:\n\n%1x%2 pixel\nx: %3 m/px\ny: %4 m/px").arg(rectSelAreaPixel.width()).arg(rectSelAreaPixel.height()).arg(mWidth/rectSelAreaPixel.width(), 0, 'f', 1).arg(mHeight/rectSelAreaPixel.height(), 0, 'f', 1));
+    QString labelMapInfoText = tr("Zoom with mouse wheel on map below to change resolution:\n\n%1x%2 pixel\nx: %3 m/px\ny: %4 m/px").arg(rectSelAreaPixel.width()).arg(rectSelAreaPixel.height()).arg(mWidth/rectSelAreaPixel.width(), 0, 'f', 1).arg(mHeight/rectSelAreaPixel.height(), 0, 'f', 1);
+    labelMapInfoText += tr("\n This equals to a scale of approx. 1:") + QString::number((int)(mWidth*1000/(xPages*xPageSizeMm)));
+    labelMapInfo->setText(labelMapInfoText);
 }
 
 void CPrintDialog::slotPrint()
@@ -225,8 +230,14 @@ void CPrintDialog::slotPrint()
         {
             first = false;
         }
-
-        canvas->print(p, rectPage, pt);
+        if(printScaleOnAllPages || pt == centers.last())
+        {
+            canvas->print(p, rectPage, pt, true);
+        }
+        else
+        {
+            canvas->print(p, rectPage, pt, false);
+        }
         PROGRESS(++n, break);
     }
 
@@ -284,4 +295,9 @@ void CPrintDialog::slotSave()
     cfg.setValue("Paths/lastImagePath", fi.absolutePath());
 
     QDialog::accept();
+}
+
+void CPrintDialog::slotScaleOnAllChanged(bool checked)
+{
+    printScaleOnAllPages=checked;
 }

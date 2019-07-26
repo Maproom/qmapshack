@@ -541,8 +541,6 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
     out << trk.type;
     out << trk.color;
 
-    out << energyUse;
-
     out << colorSourceLimit;
     out << lineScale;
     out << showArrows;
@@ -550,6 +548,9 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
     out << limitsGraph1;
     out << limitsGraph2;
     out << limitsGraph3;
+
+    out << energyUse;
+
     out << trk.segs;
 
     stream.writeRawData(MAGIC_TRK, MAGIC_SIZE);
@@ -593,15 +594,6 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.type;
     in >> trk.color;
 
-    if(version > 5)
-    {
-        in >> energyUse;
-    }
-    else
-    {
-        energyUse = NOFLOAT;
-    }
-
     if(version > 1 && version <= 4)
     {
         QString colorSource;
@@ -632,6 +624,15 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
         in >> limitsGraph1;
         in >> limitsGraph2;
         in >> limitsGraph3;
+    }
+
+    if(version > 5)
+    {
+        in >> energyUse;
+    }
+    else
+    {
+        energyUse = NOFLOAT;
     }
 
     trk.segs.clear();

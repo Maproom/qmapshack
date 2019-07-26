@@ -1,3 +1,25 @@
+V 1.13.1
+[Issue #451] Make red border around a highlighted track an option
+[Issue #452] Project Details: Add elevation info to entries with track point information.
+[Issue #455] Profile Plot: Add option to show waypoint labels along line
+[Issue #456] Clean up code regarding track info, attached wpt and hidden flag.
+[Issue #460] Missing "Change Map View Name" action in toolbar
+[Issue #465] Garmin IMG: Extend Tooltip
+[Issue #467] Add activity color to track info and graph
+[Issue #469] Reduce width of track detail dialog
+[Issue #470] Crash when saving geocache
+[Issue #471] Fix background color of textboxes and bubble for dark color themes
+[Issue #477] BRouter setup issue (Windows)
+[Issue #479] Unnecessary extra tag(s) when saving GPX file
+[Issue #480] Graph not appearing when activating it
+[Issue #481] Project Details: Add a roadbook with progress graphs
+[Issue #466] Geocache detecting duplicates
+[Issue #266] Scale on printed maps
+[Issue #484] MainWindow slope display does not honor slope unit setting
+[Issue #394] Added slope row in ruler table
+Trk: Increase desity of arrows for tracks with a high track point frequency
+BSD Fix: do not access QStringList.first() if list is empty
+
 V 1.13.0
 [Issue #298] Live GPS data
 [Issue #430] Add waypoint summary to project details

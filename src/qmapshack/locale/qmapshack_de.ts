@@ -130,79 +130,79 @@
         <translation>Ansicht %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="201"/>
+        <location filename="../canvas/CCanvas.cpp" line="203"/>
         <source>None selected</source>
         <translation>Nichts ausgewählt</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="206"/>
+        <location filename="../canvas/CCanvas.cpp" line="208"/>
         <source>&lt;p align=&apos;right&apos;&gt;This help will be closed the moment you activate a map.&lt;/p&gt;</source>
         <translation>&lt;p align=&apos;right&apos;&gt;Diese Hilfe wird sobald Sie eine Karte aktiviert haben geschlossen.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="209"/>
+        <location filename="../canvas/CCanvas.cpp" line="211"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
         <translation>&lt;h1&gt;Willkommen&lt;/h1&gt;&lt;p&gt;Vielen Dank, dass Sie QMapShack verwenden. QMapShack ist ein nichtkommerzielles Open Source Projekt. Es wird von Enthusiasten und Freiwilligen gepflegt. Die Entwicklung ist recht weit fortgeschritten, es fehlen aber ein paar Annehmlichkeiten, wie man sie vielleicht von kostenloser, kommerzieller Software kennt. Tatsächlich fehlen uns die Resourcen, um einen Dienst bereitzustellen, bei dem Sie bequem Karten, Höhendaten und Routendaten herunterladen können. Sie müssen selber diese Dateien aus verschiedenen Quellen zusammentragen. Aber diese Seite hilft Ihnen dabei ein wenig.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="218"/>
+        <location filename="../canvas/CCanvas.cpp" line="220"/>
         <source>&lt;h2&gt;Let&apos;s Start&lt;/h2&gt;&lt;p&gt;As a first step make yourself comfortable by arranging the dock widgets around this area to your personal liking. You can do this by grabbing the dock widget&apos;s title bars with your mouse (keep left button pressed on title bar) and move them where you want them. You can attach the dock widgets at the left, right, top or bottom. And you can stack them by placing them right above another dock widget. If you do not want to use the functionality of a dock widget you can close it and make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it anywhere you like.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Fangen wir an&lt;/h2&gt;&lt;p&gt;Zuallererst sollten Sie es sich bequem einrichten, indem Sie die Dock Widgets um diesen Bereich nach ihren persönlichen Vorlieben anbringen. Sie können das machen, indem Sie die Dock Widgets an der Titelleiste mit ihrer Maus anfassen (linke Maustaste auf der Titelleiste gedrückt halten) und sie dort hin verschieben, wo Sie möchten. Sie können die Dock Widgets rechts, links, oben und unten anbringen. Sie können sie stapeln, indem Sie sie über ein anderes Dock Widget schieben. Wenn sie die Funktion eines Dock Widgets nicht verwenden wollen, können Sie es schließen und so QMapShack für sich einfacher gestalten. Die Werkzeugleiste ist übrigens auch ein Dock Widget. Sie können sie überall anbringen.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="230"/>
+        <location filename="../canvas/CCanvas.cpp" line="232"/>
         <source>&lt;h2&gt;The Wiki&lt;/h2&gt;&lt;p&gt;QMapShack has an extensive &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; with a lot of information about how to use it. There is a &lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide&lt;/a&gt; translated into several languages. Read it and you will discover the full variety of features QMapShack offers you.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Das Wiki&lt;/h2&gt;&lt;p&gt;Zu QMapShack gibt es ein großes  &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; mit einer Menge Information zum Gebrauch. Es gibt eine &lt;a href=&apos;ShowQuickStart&apos;&gt;Schnellstartanleitung&lt;/a&gt;, die in mehrere Sprachen übersetzt wurde. Lesen Sie sie, um zu erfahren, was QMapShack Ihnen alles zu bieten hat.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="238"/>
+        <location filename="../canvas/CCanvas.cpp" line="240"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Current home:&lt;br/&gt;%1&lt;/p&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Aktuelles Hauptverzeichnis:&lt;br/&gt;%1&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="243"/>
+        <location filename="../canvas/CCanvas.cpp" line="245"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Wählen Sie ein Hauptverzeichnis&lt;/h2&gt;&lt;p&gt;QMapShack benötigt auf Ihrer Festplatte ein Verzeichnis, wo alle Daten liegen. Üblicherweise wird das sehr groß. Wir empfehlen deswegen einen Ordner mit mehreren Unterordnern:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - hier liegen alle verfügbaren Karten&lt;/li&gt;&lt;li&gt;DEM - hier liegen die verfügbaren Höhendaten&lt;/li&gt;&lt;li&gt;Routino - hier liegen die Daten für den Routino Offline Router&lt;/li&gt;&lt;li&gt;BRouter - hier liegen die Daten für den BRouter Offline Router&lt;/li&gt;&lt;li&gt;Databases - hier erstellen Sie Datenbanken, um ihre persönlichen GIS Daten zu verwalten&lt;/li&gt;&lt;li&gt;GPX - hier liegen ihre GPX Dateien&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Wollen Sie diese Ordner jetzt gleich anlegen? Geben Sie dazu einen &lt;a  href=&apos;SetupHome&apos;&gt;Pfad&lt;/a&gt; an und QMapShack wird alle Unterordnern erstellen und sich in den Grundeinstellungen merken.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="260"/>
+        <location filename="../canvas/CCanvas.cpp" line="262"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Für Ungeduldige:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;Ich will ein paar Online Karten.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Für Geduldige:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Schnellstartanleitung.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="275"/>
+        <location filename="../canvas/CCanvas.cpp" line="277"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Karten!&lt;/h2&gt;&lt;p&gt;Eine Karte muss immer über eine Datei, die von QMapShack erkannt wird, definiert sein. Diese Datei muss in einem der registrierten Kartenordnern liegen (&lt;a href=&apos;MapFolders&apos;&gt;Datei-&gt;Kartenverzeichnisse angeben&lt;/a&gt;). QMapShack wird die Datei finden und auflisten. Sie können die Kartenliste erneut laden, indem Sie mit der rechten Maustaste auf die Liste klicken und &apos;Karten erneut laden&apos; auswählen.&lt;/p&gt; &lt;p&gt;Eine Karte muss aktiviert werden, um sichtbar zu sein. Klicken Sie mit der rechten Maustaste auf den Karteneintrag in der Liste und wählen Sie &apos;Aktivieren&apos; aus. Sobald Sie eine Karte aktiviert haben, wird diese Hilfe verschwinden. Um sie wieder zu sehen, öffnen Sie einfach eine weitere Kartenansicht (&lt;a href=&apos;NewView&apos;&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Um mit ein paar Online Karten anzufangen, können sie auf den Link für &lt;a href=&apos;GetMaps&apos;&gt;Ungeduldige&lt;/a&gt; klicken. Wenn Sie ein Garmin mit nichtkommerziellen Karten haben,  können Sie die *.img und *.jnx Dateien von Ihrem Gerät in den Kartenordner kopieren.&lt;/p&gt; &lt;/p&gt;Wenn Sie Rasterkarten in einem Format haben, das von GDAL unterstützt wird, müssen Sie zuerst eine virtuelle Kartendefinition (*.vrt) erstellen. Eine *.vrt Datei kann auf eine oder mehrere Dateien verweisen. Sie können QMapShacks eigenen VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Werkzeug-&gt;VRT Builder&lt;/a&gt;) benutzen, um eine solche Datei zu erstellen.&lt;/p&gt;
 </translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="291"/>
+        <location filename="../canvas/CCanvas.cpp" line="293"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="298"/>
+        <location filename="../canvas/CCanvas.cpp" line="300"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Ihre Daten&lt;/h2&gt;&lt;p&gt;Um Tracks und Wegpunkte zu laden, benützen Sie im Menü &lt;a href=&apos;LoadData&apos;&gt;Datei-&gt;GIS Daten laden&lt;/a&gt;. Jede Datei ist ein unabhängiges Projekt im Arbeitsplatz. Sie können Ihre Daten in einzelnen Dateien oder einer Datenbank verwalten. Eine &lt;a href=&apos;CreateDB&apos;&gt;Datenbank erstellen&lt;/a&gt; Sie im Datenbank Dock Widget.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="306"/>
+        <location filename="../canvas/CCanvas.cpp" line="308"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Für Ungeduldige:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Ich will Online DEM Daten.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Für Geduldige:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="317"/>
+        <location filename="../canvas/CCanvas.cpp" line="319"/>
         <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;&lt;p&gt;To start with some online DEMs you can click on the link for &lt;a href=&apos;GetDems&apos;&gt;impatient users&lt;/a&gt;. But keep in mind that using online DEMs slows down QMapShack significantly.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Höhendaten&lt;/h2&gt;&lt;p&gt;Höhendaten (Digital Elevation Model - DEM) werden für verschiedenen Funktionen in QMapShack gebraucht und sind komplett unabhängig von den Karten. Allerdings gelten die selben Regeln, wie für Karten. Höhendaten müssen immer über eine Datei, die von QMapShack erkannt wird, definiert sein. Diese Datei muss in einem der registrierten Höhendatenordnern liegen (&lt;a href=&apos;DemFolders&apos;&gt;Datei-&gt;DEM Verzeichnisse angeben&lt;/a&gt;). QMapShack wird sie finden und auflisten. Sie können die Liste erneut laden, wenn Sie mit der rechten Maustaste in die DEM Liste klicken und &apos;DEM erneut laden&apos; aus dem Menü wählen.&lt;/p&gt;&lt;p&gt;Ähnlich wie die Karten müssen DEM Dateien in einer *.vrt Datei eingebettet sein, um erkannt zu werden. Eine *.vrt Datei kann auf eine oder mehrere andere Dateien verweisen. Auch hier können Sie QMapShacks eigenen VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Werkzeug-&gt;VRT Builder&lt;/a&gt;) verwenden, um solch einen Datei zu erstellen.&lt;/p&gt;&lt;p&gt; Um mit ein paar Online Höhendaten anzufangen, können Sie auf den Link für &lt;a href=&apos;GetDems&apos;&gt;Ungeduldige&lt;/a&gt; klicken. Aber bitte beachten Sie, dass Online Höhendaten QMapShack deutlich ausbremsen.&lt;/p&gt;
 </translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="332"/>
+        <location filename="../canvas/CCanvas.cpp" line="334"/>
         <source>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack supports online routing services. But if you really want to make use of the routing possibilities you need the routing database stored locally. There are two offline routing engines available.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;For Routino you have to create routing data from the Open Street Map database files. QMapShack has a built-in Routino Database Creator (&lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;A second option is to use a local BRouter installation with a local routing database. Use the &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter setup&lt;/a&gt; to download and install all necessary data.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Streckenführung (Routing)&lt;/h2&gt;&lt;p&gt;QMapShack unterstützt Online Routing Dienste. Wenn Sie aber wirklich alle Möglichkeiten einer Streckenführung nutzen wollen, brauchen Sie eine lokale Routendatenbank. Es stehen Ihnen zwei Möglichkeiten zur Verfügung.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Für Routino müssen Sie eine Datenbank aus der Open Street Map Datenbasis erstellen. QMapShack besitzt einen eingebauten &apos;Routino Database Creator&apos; (&lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Die zweite Option ist eine lokale BRouter Installation mit einer lokalen Datenbank. Klicken Sie auf &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter einstellen&lt;/a&gt;, um die nötigen Daten zu laden und zu installieren.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1062"/>
+        <location filename="../canvas/CCanvas.cpp" line="1064"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
@@ -527,153 +527,160 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CDetailsPrj</name>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="268"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="897"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="272"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1009"/>
         <source>none</source>
         <translation>keine</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="347"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="351"/>
         <source>Build diary...</source>
         <translation>Tagebuch erstellen...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="402"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="414"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Auswertung aller Tracks im Projekt&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="440"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="452"/>
         <source>&lt;b&gt;Summary over all waypoints in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;p&gt;Übersicht über alle Wegpunkte imProjekt&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="444"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="456"/>
         <source> x Geocache, consisting of: &lt;br/&gt;</source>
         <translation> x Geocache, bestehend aus: &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="480"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="496"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Wegpunkte&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="487"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="513"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="698"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="832"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="862"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="503"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="529"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="819"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="886"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="944"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="974"/>
         <source>Info</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="488"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="514"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="699"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="833"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="863"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="504"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="530"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="821"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="945"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="975"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="506"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="522"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Tracks&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="653"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="666"/>
         <source>Elevation: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="658"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="671"/>
         <source>Created: %1</source>
         <translation>Erstellt: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="714"/>
         <source>Arrival: </source>
         <translation>Ankunft: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="728"/>
         <source>From Start</source>
         <translation>Vom Anfang</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="728"/>
         <source>To Next</source>
         <translation>Zum Nächsten</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="728"/>
         <source>To End</source>
         <translation>Zum Ende</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="737"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="741"/>
         <source>Time: </source>
         <translation>Zeit: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="825"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="820"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="887"/>
+        <source>Statistics</source>
+        <translation>Statistik</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="937"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Gebiete&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="128"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="132"/>
         <source>You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?</source>
         <translation>Sie wollen Wegpunkte entlang eines Tracks sortieren, aber Sie haben die Verknüpfung von Wegpunkten und Tracks ausgeschaltet. Wollen Sie sie wieder einschalten?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="129"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="133"/>
         <source>Correlation...</source>
         <translation>Verknüpfungen...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="727"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="731"/>
         <source>Distance: </source>
         <translation>Entfernung: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
         <source>Ascent: </source>
         <translation>Anstieg: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="757"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="761"/>
         <source>Descent: </source>
         <translation>Abstieg: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="855"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="967"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Routen&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="883"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="995"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1022"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="883"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="995"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1022"/>
         <source>Enter new project name.</source>
         <translation>Geben Sie einen neuen Namen für das Projekt ein.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1038"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1150"/>
         <source>Print Diary</source>
         <translation>Tagebuch drucken</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1004"/>
         <source>Edit keywords...</source>
         <translation>Stichwörter bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1004"/>
         <source>Enter keywords.</source>
         <translation>Stichwörter eingeben.</translation>
     </message>
@@ -737,7 +744,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Bild %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1117"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1122"/>
         <source>Unknown</source>
         <translation>Unbekannt</translation>
     </message>
@@ -1381,7 +1388,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Entf.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="781"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="783"/>
         <source>Changed route points.</source>
         <translation>Geänderte Routenpunkte.</translation>
     </message>
@@ -1687,37 +1694,37 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Punkte anzeigen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2469"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2474"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2475"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2480"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2481"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2486"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2487"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2492"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2497"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2502"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Höhe von Punkt %1 auf %2 %3 geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2520"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2525"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Die Aktivität wurde für den gesamten Track auf &apos;%1&apos; geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2558"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2563"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Die Aktivität wurde für den Bereich (%2..%3) auf &apos;%1&apos; geändert.</translation>
     </message>
@@ -1841,72 +1848,72 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>_Klon</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="303"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="312"/>
         <source>Elevation: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="314"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="323"/>
         <source>Proximity: %1%2</source>
         <translation>Abstand: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="372"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="381"/>
         <source>Created: %1</source>
         <translation>Erstellt: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="444"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="453"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="454"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="463"/>
         <source>Changed position</source>
         <translation>Position geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="460"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="469"/>
         <source>Changed elevation</source>
         <translation>Höhe geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="469"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="478"/>
         <source>Removed proximity</source>
         <translation>Abstandsalarm entfernen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="474"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="483"/>
         <source>Changed proximity</source>
         <translation>Abstandsalarm geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="493"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="502"/>
         <source>Changed icon</source>
         <translation>Symbol geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="499"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="508"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="505"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="514"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="511"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="520"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="517"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="526"/>
         <source>Changed images</source>
         <translation>Bilder geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="523"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="532"/>
         <source>Add image</source>
         <translation>Bild hinzufügen</translation>
     </message>
@@ -2890,54 +2897,54 @@ Zeile %2, Spalte %3:
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1157"/>
+        <location filename="../CMainWindow.cpp" line="1158"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Hangneigung: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1173"/>
+        <location filename="../CMainWindow.cpp" line="1174"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1321"/>
+        <location filename="../CMainWindow.cpp" line="1322"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1355"/>
+        <location filename="../CMainWindow.cpp" line="1356"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1355"/>
-        <location filename="../CMainWindow.cpp" line="1381"/>
+        <location filename="../CMainWindow.cpp" line="1356"/>
+        <location filename="../CMainWindow.cpp" line="1382"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1381"/>
+        <location filename="../CMainWindow.cpp" line="1382"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1673"/>
+        <location filename="../CMainWindow.cpp" line="1674"/>
         <source>Rename View...</source>
         <translation>Kartenansicht umbenennen...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1673"/>
+        <location filename="../CMainWindow.cpp" line="1674"/>
         <source>Enter new name for view</source>
         <translation>Einen neuen Namen für die Kartenansicht eingeben</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1823"/>
+        <location filename="../CMainWindow.cpp" line="1824"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1824"/>
+        <location filename="../CMainWindow.cpp" line="1825"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack hat eine unvollständig installierte Proj4 Bibliothek gefunden. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution, um das zu beheben.</translation>
     </message>
@@ -3984,11 +3991,16 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="321"/>
+        <source>Slope</source>
+        <translation>Neig.</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseRuler.cpp" line="323"/>
         <source>Course</source>
         <translation>Kurs</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="381"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="386"/>
         <source>Sum</source>
         <translation>Summe</translation>
     </message>
@@ -4068,27 +4080,27 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CPrintDialog</name>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="67"/>
+        <location filename="../print/CPrintDialog.cpp" line="68"/>
         <source>Print Map...</source>
         <translation>Karte drucken...</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="74"/>
+        <location filename="../print/CPrintDialog.cpp" line="75"/>
         <source>Save Map as Image...</source>
         <translation>Karte als Bild speichern...</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="94"/>
+        <location filename="../print/CPrintDialog.cpp" line="95"/>
         <source>Printer Properties...</source>
         <translation>Drucker Eigenschaften...</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="169"/>
+        <location filename="../print/CPrintDialog.cpp" line="172"/>
         <source>Pages: %1 x %2</source>
         <translation>Seiten: %1 x %2</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="170"/>
+        <location filename="../print/CPrintDialog.cpp" line="173"/>
         <source>Zoom with mouse wheel on map below to change resolution:
 
 %1x%2 pixel
@@ -4101,12 +4113,18 @@ x: %3 m/px
 y: %4 m/px</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="216"/>
+        <location filename="../print/CPrintDialog.cpp" line="174"/>
+        <source>
+ This equals to a scale of approx. 1:</source>
+        <translation> Das entspricht einem Maßstab von ungefähr 1:</translation>
+    </message>
+    <message>
+        <location filename="../print/CPrintDialog.cpp" line="221"/>
         <source>Printing pages.</source>
         <translation>Drucke Seiten.</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="260"/>
+        <location filename="../print/CPrintDialog.cpp" line="271"/>
         <source>Save map...</source>
         <translation>Karte speichern...</translation>
     </message>
@@ -7332,14 +7350,14 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="110"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="115"/>
         <source>Print diary</source>
         <translation>Tagebuch drucken</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="89"/>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="113"/>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="133"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="94"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="118"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="138"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -7359,7 +7377,12 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Sort. entl. d. Tracks (einmalig)</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="130"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
+        <source>Track with details</source>
+        <translation>Track mit Details</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="135"/>
         <source>Rebuild diary.</source>
         <translation>Tagebuch aktualisieren.</translation>
     </message>
@@ -10011,32 +10034,32 @@ Tipp:
 <context>
     <name>IPlot</name>
     <message>
-        <location filename="../plot/IPlot.cpp" line="95"/>
+        <location filename="../plot/IPlot.cpp" line="98"/>
         <source>Reset Zoom</source>
         <translation>Zoom zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="96"/>
+        <location filename="../plot/IPlot.cpp" line="99"/>
         <source>Stop Range</source>
         <translation>Bereichsauswahl beenden</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="97"/>
+        <location filename="../plot/IPlot.cpp" line="100"/>
         <source>Save...</source>
         <translation>Speichern ...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="99"/>
+        <location filename="../plot/IPlot.cpp" line="102"/>
         <source>Add Waypoint</source>
         <translation>Wegpunkt hinzufügen</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="100"/>
+        <location filename="../plot/IPlot.cpp" line="103"/>
         <source>Add Trackpoint Info</source>
         <translation>Trackpunktinformation hinzufügen</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="101"/>
+        <location filename="../plot/IPlot.cpp" line="104"/>
         <source>Cut Track...</source>
         <translation>Track teilen...</translation>
     </message>
@@ -10045,19 +10068,19 @@ Tipp:
         <translation type="vanished">Teilen...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="550"/>
+        <location filename="../plot/IPlot.cpp" line="553"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation>Um nur vertikale zu zoomen, STRG Taste gedrückt halten.
 Um nur horizontal zu zoomen, ALT Taste gedrückt halten.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="709"/>
+        <location filename="../plot/IPlot.cpp" line="712"/>
         <source>No or bad data.</source>
         <translation>Keine oder schlechte Daten.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1385"/>
+        <location filename="../plot/IPlot.cpp" line="1396"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
@@ -10112,12 +10135,17 @@ sein</translation>
     <message>
         <location filename="../print/IPrintDialog.ui" line="89"/>
         <location filename="../print/IPrintDialog.ui" line="102"/>
-        <location filename="../print/IPrintDialog.ui" line="151"/>
+        <location filename="../print/IPrintDialog.ui" line="158"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
-        <location filename="../print/IPrintDialog.ui" line="118"/>
+        <location filename="../print/IPrintDialog.ui" line="112"/>
+        <source>Draw scale on all pages</source>
+        <translation>Maßstab auf allen Seiten anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../print/IPrintDialog.ui" line="125"/>
         <source>Print</source>
         <translation>Drucken</translation>
     </message>
@@ -10333,177 +10361,177 @@ sein</translation>
         <translation>BRouter Einrichtung</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="48"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="51"/>
         <source>choose which BRouter to use</source>
         <translation>bitte den zu verwendenden BRouters auswählen:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="54"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="57"/>
         <source>BRouter-Web (online)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="61"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="64"/>
         <source>local Installation</source>
         <translation>lokale Installation</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="68"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="71"/>
         <source>Expert Mode</source>
         <translation>Experten Modus</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="91"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="94"/>
         <source>local BRouter Installation directory:</source>
         <translation>lokales BRouter Installations-Verzeichnis:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="103"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="106"/>
         <source>select installation directory</source>
         <translation>Installationsverzeichnis auswählen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="106"/>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="162"/>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="342"/>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="356"/>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="389"/>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="400"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="109"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="165"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="345"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="359"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="392"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="403"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="119"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="122"/>
         <source>labelLocalDirResult</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="128"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="131"/>
         <source>create or update installation</source>
         <translation>Installation neu anlegen oder aktualisieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="152"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="155"/>
         <source>Java Executable</source>
         <translation>ausführbares Java Programm</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="175"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="178"/>
         <source>labelLocalJavaResult</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="184"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="187"/>
         <source>search for installed java</source>
         <translation>nach installiertem Java-programm suchen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="241"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="244"/>
         <source>Download and install BRouter Version</source>
         <translation>BRouter-Version herunterladen und installieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="255"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="258"/>
         <source>about:blank</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="263"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="266"/>
         <source>File to install</source>
         <translation>zu installierende Datei</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="272"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="275"/>
         <source>Download and Install</source>
         <translation>Herunterladen und Installieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="321"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="324"/>
         <source>available Profiles</source>
         <translation>Verfügbare Profile</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="339"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="342"/>
         <source>install profile</source>
         <translation>Profil installieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="353"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="356"/>
         <source>remove profile</source>
         <translation>Profil entfernen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="371"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="374"/>
         <source>installed Profiles</source>
         <translation>Installierte Profile</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="415"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="418"/>
         <source>content of profile</source>
         <translation>Profil-Inhalt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="451"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="454"/>
         <source>BRouter-Web URL:</source>
         <translation>Adresse (URL) von BRouter-Web</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="501"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="504"/>
         <source>Service-URL</source>
         <translation>Adresse (URL) des Routing Service</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="511"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="514"/>
         <source>Profile-URL</source>
         <translation>Adresse (URL) der Profile</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="561"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="564"/>
         <source>Hostname</source>
         <translation>Servername</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="571"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="574"/>
         <source>Port</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="581"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="584"/>
         <source>Profile directory</source>
         <translation>Profil-Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="591"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="594"/>
         <source>Segments directory</source>
         <translation>Segment-Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="601"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="604"/>
         <source>Custom Profiles dir</source>
         <translation>Verzeichnis für angepasste Profile</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="611"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="614"/>
         <source>Max Runtime</source>
         <translation>Maximale Laufzeit</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="621"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="624"/>
         <source>Number Threads</source>
         <translation>Anzahl Threads</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="631"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="634"/>
         <source>Java Options</source>
         <translation>Java Optionen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="641"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="644"/>
         <source>Bind to hostname only</source>
         <translation>Nur mit dem Hostnamen verbinden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="551"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="554"/>
         <source>Profiles Url</source>
         <translation>Profil-Url</translation>
     </message>

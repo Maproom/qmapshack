@@ -348,10 +348,7 @@ const searchValue_t CGisItemOvlArea::getValueByKeyword(searchProperty_e keyword)
     {
         return keywordLambdaMap.value(keyword)(this);
     }
-    else
-    {
-        return searchValue_t();
-    }
+    return searchValue_t();
 }
 
 QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)

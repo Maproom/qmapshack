@@ -2973,10 +2973,7 @@ const searchValue_t CGisItemTrk::getValueByKeyword(searchProperty_e keyword)
     {
         return keywordLambdaMap.value(keyword)(this);
     }
-    else
-    {
-        return searchValue_t();
-    }
+    return searchValue_t();
 }
 
 bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline)

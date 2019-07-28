@@ -187,10 +187,7 @@ const searchValue_t CGisItemRte::getValueByKeyword(searchProperty_e keyword)
     {
         return keywordLambdaMap.value(keyword)(this);
     }
-    else
-    {
-        return searchValue_t();
-    }
+    return searchValue_t();
 }
 
 void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)

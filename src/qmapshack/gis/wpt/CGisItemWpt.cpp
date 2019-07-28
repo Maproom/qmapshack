@@ -978,10 +978,7 @@ const searchValue_t CGisItemWpt::getValueByKeyword(searchProperty_e keyword)
     {
         return keywordLambdaMap.value(keyword)(this);
     }
-    else
-    {
-        return searchValue_t();
-    }
+    return searchValue_t();
 }
 
 void CGisItemWpt::processMouseOverBubble(const QPoint &pos)

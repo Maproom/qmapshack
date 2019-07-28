@@ -19,10 +19,6 @@
 
 #include "units/CUnitImperial.h"
 
-const qreal CUnitImperial::footPerMeter = 3.28084;
-const qreal CUnitImperial::milePerMeter = 0.6213699E-3;
-const qreal CUnitImperial::meterPerSecToMilePerHour = 2.23693164;
-
 CUnitImperial::CUnitImperial(QObject * parent)
     : IUnit(eTypeImperial, "ft", footPerMeter, "mi/h", meterPerSecToMilePerHour, parent)
 {

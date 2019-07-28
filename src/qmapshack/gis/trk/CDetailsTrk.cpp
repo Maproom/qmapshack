@@ -33,6 +33,7 @@
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 #include "gis/trk/filter/CFilterReset.h"
 #include "gis/trk/filter/CFilterEnergyCycle.h"
+#include "gis/trk/CEnergyCyclingDlg.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
 #include "gis/trk/filter/CFilterSubPt2Pt.h"
@@ -147,6 +148,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     connect(textCmtDesc,      &QTextBrowser::anchorClicked,        this, &CDetailsTrk::slotLinkActivated);
 
     connect(pushSetActivities,    &QPushButton::clicked, this, &CDetailsTrk::slotSetActivities);
+    connect(pushSetEnergyCycling, &QPushButton::clicked, this, &CDetailsTrk::slotSetEnergyCycling);
 
     connect(lineName,         &QLineEdit::textEdited,              this, &CDetailsTrk::slotNameChanged);
     connect(lineName,         &QLineEdit::editingFinished,         this, &CDetailsTrk::slotNameChangeFinished);
@@ -518,18 +520,27 @@ void CDetailsTrk::updateData()
         filterChangeStartPoint->updateUi();
     }
 
-    CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
-    if(nullptr != filterEnergyCycle)
+    if(trk.getEnergyCycling().isValid())
     {
-        if(treeFilter->hasFocus())
-        {
-            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromFilter);
-        }
-        else if(listHistory->hasFocus())
-        {
-            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromHistory);
-        }
+        pushSetEnergyCycling->setEnabled(true);
     }
+    else
+    {
+        pushSetEnergyCycling->setEnabled(false);
+    }
+
+//    CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
+//    if(nullptr != filterEnergyCycle)
+//    {
+//        if(treeFilter->hasFocus())
+//        {
+//            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromFilter);
+//        }
+//        else if(listHistory->hasFocus())
+//        {
+//            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromHistory);
+//        }
+//    }
 
     enableTabFilter();
     originator = false;
@@ -710,6 +721,32 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
 void CDetailsTrk::slotSetActivities()
 {
     CActivityTrk::getMenu(trk.getKey(), this, true);
+}
+
+void CDetailsTrk::slotSetEnergyCycling()
+{
+    CEnergyCyclingDlg energyCyclingDlg(this, trk.getEnergyCycling());
+
+    qint32 ret = 0;
+    if (trk.getEnergyCycling().isValid())
+    {
+        ret = energyCyclingDlg.exec();
+    }
+    if(ret == QDialog::Accepted || ret == QDialog::Rejected)
+    {
+        trk.updateVisuals(CGisItemTrk::eVisualDetails, "CDetailsTrk::slotSetEnergyCycling()");
+    }
+
+        //        updateUi(eUpdateFromApply);
+
+//        if(comboBoxSetting->currentText() != energySet.nameOfSet)
+//        {
+//            comboBoxSetting->setItemText(currentSet, energySet.nameOfSet);
+//        }
+//        saveSettings();
+//    }
+
+    //    CActivityTrk::getMenu(trk.getKey(), this, true);
 }
 
 void CDetailsTrk::setupGraph(CPlot * plot, const CLimit& limit, const QString& source, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax)

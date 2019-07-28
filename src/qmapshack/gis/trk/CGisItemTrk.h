@@ -27,6 +27,7 @@
 #include "gis/trk/filter/CFilterSpeedCycle.h"
 #include "gis/trk/filter/CFilterSpeedHike.h"
 #include "gis/trk/filter/CFilterEnergyCycle.h"
+#include "gis/trk/CEnergyCycling.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
@@ -188,6 +189,10 @@ public:
 
     qreal getEnergyUse() const { return energyUse; }
     void setEnergyUse(qreal value) { energyUse = value; }
+
+    CEnergyCycling::energy_set_t getEnergyTrkSet() { return energyCycling.getEnergyTrkSet(); }
+    const CEnergyCycling::energy_set_t &getEnergyLastSet() const { return energyCycling.getEnergyLastSet(); }
+    CEnergyCycling &getEnergyCycling() { return energyCycling; }
 
     /// returns "true" when trk has no time-related invalid points
     bool isTrkTimeValid() const { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0; }
@@ -809,6 +814,7 @@ private:
     qreal totalElapsedSecondsMoving = 0;
     quint32 numberOfAttachedWpt = 0;
     qreal energyUse = NOFLOAT;
+    CEnergyCycling energyCycling {*this};
 
     void checkForInvalidPoints();
     /**@}*/

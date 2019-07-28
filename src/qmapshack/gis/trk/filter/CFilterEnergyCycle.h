@@ -20,6 +20,7 @@
 
 #include "ui_IFilterEnergyCycle.h"
 #include <QWidget>
+#include <QObject>
 
 class CGisItemTrk;
 

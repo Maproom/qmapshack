@@ -49,6 +49,7 @@
 #define VER_ITEM        quint8(3)
 #define VER_CVALUE      quint8(1)
 #define VER_CLIMIT      quint8(1)
+#define VER_ENERGYCYCLE quint8(1)
 
 #define MAGIC_SIZE      10
 #define MAGIC_TRK       "QMTrk     "
@@ -520,6 +521,24 @@ QDataStream& operator>>(QDataStream& stream, CLimit& l)
     return stream;
 }
 
+QDataStream& operator<<(QDataStream& stream, const CEnergyCycling::energy_set_t &e)
+{
+    stream << VER_ENERGYCYCLE << e.driverWeight << e.bikeWeight << e.airDensity
+           << e.windSpeedIndex << e.windSpeed << e.windPositionIndex
+           << e.frontalArea << e.windDragCoeff << e.groundIndex
+           << e.rollingCoeff << e.pedalCadence << e.energyKcal;
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CEnergyCycling::energy_set_t &e)
+{
+    quint8 version;
+    stream >> version >> e.driverWeight >> e.bikeWeight >> e.airDensity
+           >> e.windSpeedIndex >> e.windSpeed >> e.windPositionIndex
+           >> e.frontalArea >> e.windDragCoeff >> e.groundIndex
+           >> e.rollingCoeff >> e.pedalCadence >> e.energyKcal;
+    return stream;
+}
 
 // ---------------- main objects ---------------------------------
 
@@ -550,6 +569,7 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
     out << limitsGraph3;
 
     out << energyUse;
+    out << energyCycling.getEnergyTrkSet();
 
     out << trk.segs;
 
@@ -629,6 +649,9 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     if(version > 5)
     {
         in >> energyUse;
+        CEnergyCycling::energy_set_t set;
+        in >> set;
+        energyCycling.setEnergyTrkSet(set, false);
     }
     else
     {

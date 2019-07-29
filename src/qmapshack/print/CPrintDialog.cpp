@@ -50,6 +50,7 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
     canvas = new CCanvas(this, "print");
     canvas->loadConfig(view);
     canvas->show();
+    canvas->hideAllTrackInfo();
 
     // add canvas canvas to dialog
     QLayout * layout = new QVBoxLayout(frameCanvas);

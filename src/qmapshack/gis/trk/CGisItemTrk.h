@@ -190,8 +190,8 @@ public:
     qreal getEnergyUse() const { return energyUse; }
     void setEnergyUse(qreal value) { energyUse = value; }
 
-    CEnergyCycling::energy_set_t getEnergyTrkSet() { return energyCycling.getEnergyTrkSet(); }
-    const CEnergyCycling::energy_set_t &getEnergyLastSet() const { return energyCycling.getEnergyLastSet(); }
+//    CEnergyCycling::energy_set_t getEnergyTrkSet() { return energyCycling.getEnergyTrkSet(); }
+//    const CEnergyCycling::energy_set_t &getEnergyLastSet() const { return energyCycling.getEnergyLastSet(); }
     CEnergyCycling &getEnergyCycling() { return energyCycling; }
 
     /// returns "true" when trk has no time-related invalid points

@@ -529,18 +529,18 @@ void CDetailsTrk::updateData()
         pushSetEnergyCycling->setEnabled(false);
     }
 
-//    CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
-//    if(nullptr != filterEnergyCycle)
-//    {
-//        if(treeFilter->hasFocus())
-//        {
-//            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromFilter);
-//        }
-//        else if(listHistory->hasFocus())
-//        {
-//            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromHistory);
-//        }
-//    }
+    CFilterEnergyCycle *filterEnergyCycle = treeFilter->findChild<CFilterEnergyCycle *>("IFilterEnergyCycle");
+    if(nullptr != filterEnergyCycle)
+    {
+        if(treeFilter->hasFocus())
+        {
+            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromFilter);
+        }
+        else if(listHistory->hasFocus())
+        {
+            filterEnergyCycle->updateUi(CFilterEnergyCycle::eUpdateFromHistory);
+        }
+    }
 
     enableTabFilter();
     originator = false;

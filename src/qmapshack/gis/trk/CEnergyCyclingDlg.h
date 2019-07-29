@@ -20,7 +20,7 @@
 
 #include "CEnergyCycling.h"
 #include "ui_IEnergyCyclingDlg.h"
-#include <QDialog>
+//#include <QDialog>
 
 class CGisItemTrk;
 
@@ -29,7 +29,6 @@ class CEnergyCyclingDlg : public QDialog, private Ui::IEnergyCyclingDlg
     Q_OBJECT
 
 public:
-//    explicit CEnergyCyclingDlg(QWidget *parent, CEnergyCycling::energy_set_t &energyTrkSet, const CEnergyCycling::energy_set_t &energyLastSet);
     explicit CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycling);
     ~CEnergyCyclingDlg();
 
@@ -50,7 +49,6 @@ private slots:
     void slotSetRollingCoeff(qreal rollingCoeff);
     void slotSetPedalCadence(qreal pedalCadence);
     void slotShowHelp();
-
 
 private:
     struct wind_speed_t

@@ -19,15 +19,11 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CEnergyCyclingDlg.h"
 
-//    CEnergyCyclingDlg::CEnergyCyclingDlg(QWidget *parent, CEnergyCycling::energy_set_t &energyTrkSet,
-//                                         const CEnergyCycling::energy_set_t &energyLastSet) :
 CEnergyCyclingDlg::CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycling) :
     QDialog(parent)
   , energyCycling(energyCycling)
 {
     setupUi(this);
-
-//    tmpEnergySet = energySet; // Changes will be made first in tmpEnergySet before saving back on OK button
 
     for(const wind_speed_t &windSpeed : windSpeeds)
     {
@@ -42,9 +38,6 @@ CEnergyCyclingDlg::CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycl
         comboGround->addItem(ground.name);
     }
     setWindowTitle(tr("Energy Use Cycling Parameter Set"));
-
-
-    //    labelNameOfSet->setText(tr("Name of Set") +  QString(" %1").arg(currentSet));
 
 // Tooltips
 /*  GER:
@@ -271,7 +264,6 @@ CEnergyCyclingDlg::CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycl
     connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(slotApply(bool)));
     connect(buttonBox->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked(bool)), this, SLOT(slotLoadFromSettings(bool)));
     connect(buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked(bool)), this, SLOT(slotRemove(bool)));
-//    connect(lineEditNameOfSet, SIGNAL(editingFinished()), this, SLOT(slotSetNameOfSet()));
     connect(spinDriverWeight, SIGNAL(valueChanged(double)), this, SLOT(slotSetWeight(double)));
     connect(spinBikeWeight, SIGNAL(valueChanged(double)), this, SLOT(slotSetWeight(double)));
     connect(comboWindSpeed, SIGNAL(activated(int)), this, SLOT(slotSetComboWindSpeed(int)));

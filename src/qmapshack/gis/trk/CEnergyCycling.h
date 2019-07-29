@@ -18,9 +18,6 @@
 #ifndef CENERGYCYCLING_H
 #define CENERGYCYCLING_H
 
-#include <QWidget>
-#include <QObject>
-
 class CGisItemTrk;
 class CTrackData;
 
@@ -59,7 +56,7 @@ public:
     const energy_set_t &getEnergyTrkSet() const { return energyTrkSet; }
     void setEnergyTrkSet(const energy_set_t &energyTrkSet, bool updateHistory);
 
-    const energy_set_t &getEnergyLastSet() const { return energyLastSet; }
+//    const energy_set_t &getEnergyLastSet() const { return energyLastSet; }
 
     qreal getEnergyUseCycling() const { return energyTrkSet.energyKcal; }
 
@@ -73,8 +70,7 @@ public:
     void saveSettings();
 
 private:
-    energy_set_t energyTrkSet;   // Computed for the track
-    energy_set_t energyLastSet;  // Load from Settings
+    energy_set_t energyTrkSet;
 
     CGisItemTrk &trk;
 };

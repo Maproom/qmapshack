@@ -398,11 +398,11 @@ void CCanvas::loadConfig(QSettings& cfg)
     backColor = QColor(backColorStr);
 
     isScaleVisible=cfg.value("isScaleVisible", true).toBool();
-    isGridVisible=cfg.value("isGridVisible", false).toBool();
-    isPOIText=cfg.value("POIText", true).toBool();
+    //isGridVisible=cfg.value("isGridVisible", false).toBool();
+    //isPOIText=cfg.value("POIText", true).toBool();
     isMapToolTip=cfg.value("MapToolTip", true).toBool();
-    isNight=cfg.value("isNight", false).toBool();
-    isShowMinMaxTrackLabels=cfg.value("MinMaxTrackValues", false).toBool();
+    //isNight=cfg.value("isNight", false).toBool();
+    //isShowMinMaxTrackLabels=cfg.value("MinMaxTrackValues", false).toBool();
     isShowMinMaxSummary=cfg.value("ShowMinMaxInformation", true).toBool();
     isShowTrackInfoTable=cfg.value("ShowTrackInfoTable", true).toBool();
     isShowTrackInfoPoints=cfg.value("ShowTrackInfoPoints", true).toBool();
@@ -829,7 +829,7 @@ void CCanvas::drawTrackStatistic(QPainter& p)
 
 void CCanvas::hideAllTrackInfo()
 {
-    isShowMinMaxTrackLabels=false;
+    //isShowMinMaxTrackLabels=false;
     isShowMinMaxSummary=false;
     isShowTrackSummary=false;
     isShowTrackInfoTable=false;
@@ -1056,26 +1056,30 @@ void CCanvas::slotScaleVisible(bool show)
 {
     isScaleVisible=show;
 }
-void CCanvas::slotGridVisible(bool show)
-{
+/*
+   void CCanvas::slotGridVisible(bool show)
+   {
     isGridVisible=show;
-}
-void CCanvas::slotNight(bool show)
-{
+   }
+   /*
+   void CCanvas::slotNight(bool show)
+   {
     isNight=show;
-}
-void CCanvas::slotPOIText(bool show)
-{
+   }*/
+/*
+   void CCanvas::slotPOIText(bool show)
+   {
     isPOIText=show;
-}
+   }*/
 void CCanvas::slotMapToolTip(bool show)
 {
     isMapToolTip=show;
 }
-void CCanvas::slotShowMinMaxTrackLabels(bool show)
-{
+/*
+   void CCanvas::slotShowMinMaxTrackLabels(bool show)
+   {
     isShowMinMaxTrackLabels=show;
-}
+   }*/
 void CCanvas::slotShowMinMaxSummary(bool show)
 {
     isShowMinMaxSummary=show;

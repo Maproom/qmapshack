@@ -172,8 +172,6 @@ set( SRCS
     gis/trk/filter/CFilterDelete.cpp
     gis/trk/filter/CFilterDeleteExtension.cpp
     gis/trk/filter/CFilterDouglasPeuker.cpp
-    gis/trk/filter/CFilterEnergyCycle.cpp
-    gis/trk/filter/CFilterEnergyCycleDlg.cpp
     gis/trk/filter/CFilterInterpolateElevation.cpp
     gis/trk/filter/CFilterInvalid.cpp
     gis/trk/filter/CFilterLoopsCut.cpp
@@ -508,8 +506,6 @@ set( HDRS
     gis/trk/filter/CFilterDelete.h
     gis/trk/filter/CFilterDeleteExtension.h
     gis/trk/filter/CFilterDouglasPeuker.h
-    gis/trk/filter/CFilterEnergyCycle.h
-    gis/trk/filter/CFilterEnergyCycleDlg.h
     gis/trk/filter/CFilterInterpolateElevation.h
     gis/trk/filter/CFilterInvalid.h
     gis/trk/filter/CFilterLoopsCut.h
@@ -750,8 +746,6 @@ set( UIS
     gis/trk/filter/IFilterDelete.ui
     gis/trk/filter/IFilterDeleteExtension.ui
     gis/trk/filter/IFilterDouglasPeuker.ui
-    gis/trk/filter/IFilterEnergyCycle.ui
-    gis/trk/filter/IFilterEnergyCycleDlg.ui
     gis/trk/filter/IFilterInterpolateElevation.ui
     gis/trk/filter/IFilterInvalid.ui
     gis/trk/filter/IFilterLoopsCut.ui

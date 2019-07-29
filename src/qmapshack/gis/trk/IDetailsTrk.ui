@@ -390,7 +390,7 @@
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab_3">
         <attribute name="title">
@@ -512,7 +512,7 @@
                 <bool>false</bool>
                </property>
                <property name="headerHidden">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
                <property name="expandsOnDoubleClick">
                 <bool>false</bool>
@@ -1755,10 +1755,10 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupGraph1"/>
-  <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupLineWidth"/>
   <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupGraph2"/>
  </buttongroups>
 </ui>

@@ -234,31 +234,14 @@ CEnergyCyclingDlg::CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycl
                                 "<p>" + tr("The muscle efficiency ratio ist considered by 23%.") + "</p>");
 
 /*  GER:
-    Voreinstellung mit:
-    Fahrergewicht: 75,0kg
-    Fahrradgewicht: 15,0kg
-    Luftdichte: 1,200kg/m3
-    Windgeschwindigkeit Bft: 0 Kein Wind
-    Windgeschwindigkeit km/h: 0,0km/h
-    Trittfrequenz: 75U/min
-    Position im Wind: Trekking
-    Frontalfläche: 0,65m2
-    cw-Wert (Luftwiderstandsbeiwert): 1,000
-    Untergrund/Reifen: Asphalt, normale Bereifung
-    cr-Wert (Rollwiderstandsbeiwert): 0,005
+    Lädt das zuletzt gespricherten Parameterset.
 */
-    buttonBox->button(QDialogButtonBox::RestoreDefaults)->setToolTip("<p><b>" + tr("Set default values to:") + "</b></p>" +
-                                                                     "<p>" + tr("Driver Weight: 75.0kg") +
-                                                                     "<br/>" + tr("Bike Weight: 15.0kg") +
-                                                                     "<br/>" + tr("Air Density: 1.200kg/m3") +
-                                                                     "<br/>" + tr("Wind Speed Bft: 0 No Wind") +
-                                                                     "<br/>" + tr("Wind Speed km/h: 0.0km/h") +
-                                                                     "<br/>" + tr("Pedal Cadence: 75rpm") +
-                                                                     "<br/>" + tr("Position in Wind: Trekking") +
-                                                                     "<br/>" + tr("Frontal Area: 0.65m2") +
-                                                                     "<br/>" + tr("Wind drag Coeff: 1.000") +
-                                                                     "<br/>" + tr("Ground/Tyres: Asphalt, normal tyres") +
-                                                                     "<br/>" + tr("Rolling Coeff: 0.005") + "</p>");
+    buttonBox->button(QDialogButtonBox::RestoreDefaults)->setToolTip(tr("Load the previous saved parameter set."));
+
+/*  GER:
+    Löschen den Energieverbrauch Wert aus dem Track.
+*/
+    buttonBox->button(QDialogButtonBox::Reset)->setToolTip(tr("Remove the Energy Use Cycling value from the track."));
 
     connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(slotOk(bool)));
     connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(slotApply(bool)));
@@ -504,16 +487,14 @@ void CEnergyCyclingDlg::slotShowHelp()
 //    Mit diesem Filter kann der Energieverbrauch beim Fahrradfahren berechnet werden.
 //    Der Wert des Energieverbrauchs kann als Indikator für die Anstregung einer Fahrradtour angesehen werden.
 //    Die Tourlänge, die Geschwindigkeit und die Steigungen werden berücksichtigt.
-//    Um den persönlichen Energieverbrauch einer Tour zu spezifizieren werden weitere Daten benötigt:
+//    Um den persönlichen Energieverbrauch einer Tour weiter zu spezifizieren werden zusätzliche Daten benötigt:
 //    Das Gewicht des Fahrers und Fahrrads
 //    Die Luftdichte, Windgeschwindigkeit und die Position im Wind für die Berücksichtigung des Luftwiderstands
 //    Der Untergrund und die Bereifung für die Berücksichtigung des Rollwiderstands
 //    Die Trittfrequenz, um die Pedalkraft zu berechnen
-//    Die Daten werden in einem separaten Dialog eingegeben und weitere Werte werden dort berechnet und angezeigt.
-//    Fünf individualiserte Parametersets können für die spätere Wiederverwendung definiert werden.
+//    Die Daten werden in diesem Dialog eingegeben und weitere Werte werden hier berechnet und angezeigt.
 //    Der berechnete Energieverbrauch in der Einheit 'kcal' wird im Track gespeichert und kann auch wieder gelöscht werden, sollte er nicht mehr benötigt werden.
-//    Weitere Information werden als Tooltipps für die Eingabe- und Ausgabewerte im Dialog 'Parameterset' ausgegeben.
-
+//    Weitere Information werden als Tooltipps für die Eingabe- und Ausgabewerte ausgegeben.
 
    QString msg =
         "<h3>" + tr("Set Energy Use for Cycling") + "</h3>" +
@@ -525,11 +506,9 @@ void CEnergyCyclingDlg::slotShowHelp()
          "<li>" + tr("Air density, wind speed and position to the wind to consider the wind drag resistance") + "</li>" +
          "<li>" + tr("Ground situation (tyre and ground) to consider the rolling resistance") + "</li>" +
          "<li>" + tr("Average pedal cadence for the computation of pedal force") + "</li></ul></p>" +
-         "<p>" + tr("The individualize data will be defined a separate 'Edit Setting' dialog and more computed values will be shown in this dialog.") + "</p>" +
-         "<p>" + tr("Five individualize parameter sets can be stored to reuse later on.") + "</p>" +
+         "<p>" + tr("The individualize data will be defined in this dialog and more computed values will be shown here.") + "</p>" +
          "<p>" + tr("The energy use in unit 'kcal' will be stored in the track and can be remove later on when not longer needed.") + "</p>" +
-         "<p>" + tr("For more information see tooltips on input and output values in the 'Edit Setting' dialog.") + "</p>";
+         "<p>" + tr("For more information see tooltips on input and output values.") + "</p>";
 
     QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"), msg);
 }
-

@@ -209,8 +209,8 @@ private:
     QPointer<CScrOptOvlArea>  scrOpt;
 
     using fSearch = std::function<const searchValue_t (CGisItemOvlArea*)>;
-    static QMap<searchProperty_e,fSearch > keywordLambdaMap;
-    static QMap<searchProperty_e,fSearch > initKeywordLambdaMap();
+    static QMap<searchProperty_e, fSearch > keywordLambdaMap;
+    static QMap<searchProperty_e, fSearch > initKeywordLambdaMap();
 };
 
 #endif //CGISITEMOVLAREA_H

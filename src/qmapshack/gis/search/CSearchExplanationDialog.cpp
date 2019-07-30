@@ -24,24 +24,30 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     setWindowFlag(Qt::Tool, true);
     setWindowFlag(Qt::WindowStaysOnTopHint, true);
     //connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
-    QString explanation = tr("The underlying syntax of the search is \"Property Comparison Value\", i.e. \"name contains water\", "
-                             "however there are measures in place to make searching more intuitive. (see below)"
-                             "\nThe searches are always exclusive, thus for a track \"elevation under 500m\" only shows "
-                             "tracks that are completly under 500m meters."
-                             "\n\nFollowing assumptions are made (for those that are pure guesses the field stays red):"
-                             "\n\tIf only one of two given numbers has a unit, the unit is assumed for both"
-                             "\n\tSpeed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date"
-                             "\n\t'Date equals' matches everything that is within 24h from the given date, thus normally the day typed."
-                             "\n\tIf you enter no unit the default unit (what you see when viewing the property of the item) is used.");
-    explanation += tr("\n\nYou can write Dates in the following formats:");
-    explanation += "\n\t" + QLocale::system().dateTimeFormat(QLocale::LongFormat);
-    explanation += "\n\t" + QLocale::system().dateTimeFormat(QLocale::ShortFormat);
-    explanation += "\n\t" + QLocale::c().dateTimeFormat(QLocale::LongFormat);
-    explanation += "\n\t" + QLocale::c().dateTimeFormat(QLocale::ShortFormat);
-    explanation += tr("\nThe search can only convert following units:");
-    explanation += "\n"+IUnit::getUnits().join(", ");
-    explanation += tr("\n\nThe regex search uses this syntax: https://perldoc.perl.org/perlre.html");
-    explanation += tr("\n\nFollowing keywords are available for searching:");
+    QString explanation = tr("<p>The underlying syntax of the search is \"Property Comparison Value\", i.e. \"name contains water\". "
+                             "However there are measures in place to make searching more intuitive. (see below)</p>"
+                             "<p>The searches are always exclusive, thus for a track \"elevation under 500m\" only shows "
+                             "tracks that are completly under 500m meters.</p>"
+                             "<p>Following assumptions are made:</p>"
+                             "<ul>"
+                             "<li>If only one of two given numbers has a unit, the unit is assumed for both</li>"
+                             "<li>Speed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date.</li>"
+                             "<li>'Date equals' matches everything that is within 24h from the given date, thus normally the day typed.</li>"
+                             "<li>If you enter no unit the default unit (what you see when viewing the property of the item) is used.</li>"
+                             "</ul>"
+                             );
+
+    explanation += tr("<p>You can write Dates in the following formats:</p>");
+    explanation += "<ul>";
+    explanation += "<li>" + QLocale::system().dateTimeFormat(QLocale::LongFormat) + "</li>";
+    explanation += "<li>" + QLocale::system().dateTimeFormat(QLocale::ShortFormat) + "</li>";
+    explanation += "<li>" + QLocale::c().dateTimeFormat(QLocale::LongFormat) + "</li>";
+    explanation += "<li>" + QLocale::c().dateTimeFormat(QLocale::ShortFormat) + "</li>";
+    explanation += "</ul>";
+    explanation += tr("<p>The search can only convert following units:</p>");
+    explanation += "<p>"+IUnit::getUnits().join(", ") + "</p>";
+    explanation += tr("<p>The regex search uses this syntax: https://perldoc.perl.org/perlre.html</p>");
+    explanation += tr("<p>Following keywords are available for searching:</p>");
     labelExplanation->setText(explanation);
     for(QString property : CSearch::getSearchTypeKeywords())
     {

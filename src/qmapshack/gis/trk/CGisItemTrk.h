@@ -952,8 +952,8 @@ private:
     interpolate_t interp;
 
     using fSearch = std::function<const searchValue_t(CGisItemTrk*)>;
-    static QMap<searchProperty_e,fSearch > keywordLambdaMap;
-    static QMap<searchProperty_e,fSearch > initKeywordLambdaMap();
+    static QMap<searchProperty_e, fSearch > keywordLambdaMap;
+    static QMap<searchProperty_e, fSearch > initKeywordLambdaMap();
 
     /**@}*/
 };

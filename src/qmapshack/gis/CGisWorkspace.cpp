@@ -37,6 +37,7 @@
 #include "gis/rte/router/IRouter.h"
 #include "gis/search/CGeoSearchWeb.h"
 #include "gis/search/CSearch.h"
+#include "gis/search/CSearchExplanationDialog.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"

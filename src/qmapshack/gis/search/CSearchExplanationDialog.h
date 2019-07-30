@@ -24,10 +24,9 @@
 
 class CSearchExplanationDialog : public QDialog, private Ui::ISearchExplanationDialog
 {
+    Q_OBJECT
 public:
     CSearchExplanationDialog(QWidget* parent);
-private slots:
-    void slotAccepted();
 };
 
 #endif // CSEARCHEXPLANATIONDIALOG_H

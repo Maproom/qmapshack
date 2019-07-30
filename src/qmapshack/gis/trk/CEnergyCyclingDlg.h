@@ -20,7 +20,6 @@
 
 #include "CEnergyCycling.h"
 #include "ui_IEnergyCyclingDlg.h"
-//#include <QDialog>
 
 class CGisItemTrk;
 

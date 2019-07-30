@@ -173,26 +173,23 @@ void CGisWorkspace::slotSearch(const QString& str)
         item->setExpanded(!str.isEmpty());
     }
 
-    //test whether no syntax errors occured and show exclamation mark
-    QPalette palette = lineFilter->palette();
+    //test whether no syntax errors occured and show error
     if(currentSearch.getSyntaxError())
     {
-        palette.setColor(QPalette::Base, QColor("lightpink"));
+        lineFilter->addAction(actionError, QLineEdit::TrailingPosition);
         if(currentSearch.getSearchMode() == CSearch::eSearchModeName)
         {
-            lineFilter->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in names"));
+            actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in names"));
         }
         else
         {
-            lineFilter->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
+            actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
         }
     }
     else
     {
-        palette.setColor(QPalette::Base, QColor("white"));
-        lineFilter->setToolTip(tr("Filter: Start to type and the list will be reduced to matching items. An example would be \"date between 2010 and 2012\""));
+        lineFilter->removeAction(actionError);
     }
-    lineFilter->setPalette(palette);
 
 
     CCanvas::restoreOverrideCursor("slotFilter");

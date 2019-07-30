@@ -525,6 +525,7 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
     }
     else
     {
+        textStatusMessages->setMinimumWidth(statusMessages.contains("CMouseRuler") ? 400 : 300);
         textStatusMessages->show();
         textStatusMessages->setText(report);
 
@@ -813,7 +814,7 @@ void CCanvas::drawTrackStatistic(QPainter& p)
     p.restore();
 }
 
-void CCanvas::drawScale(QPainter& p)
+void CCanvas::drawScale(QPainter& p, QRectF drawRect)
 {
     if(!CMainWindow::self().isScaleVisible())
     {
@@ -821,7 +822,7 @@ void CCanvas::drawScale(QPainter& p)
     }
 
     // step I: get the approximate distance for 200px in the bottom right corner
-    QPointF brc(rect().bottomRight() - QPoint(50, 30));
+    QPointF brc(drawRect.bottomRight() - QPoint(50, 30));
     QPointF pt1 = brc;
     QPointF pt2 = brc - QPoint(-200, 0);
 
@@ -1265,7 +1266,7 @@ bool CCanvas::setDrawContextSize(const QSize& s)
     return done;
 }
 
-void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
+void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool printScale)
 {
     const QSize oldSize = size();
     const QSize newSize(area.size().toSize());
@@ -1302,6 +1303,10 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
     grid->draw(p, r);
     gis->draw(p, r);
     rt->draw(p, r);
+    if(printScale)
+    {
+        drawScale(p, r);
+    }
 
     setDrawContextSize(oldSize);
 }

@@ -130,77 +130,77 @@
         <translation>Pohled %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="201"/>
+        <location filename="../canvas/CCanvas.cpp" line="203"/>
         <source>None selected</source>
         <translation>Nic není vybráno</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="206"/>
+        <location filename="../canvas/CCanvas.cpp" line="208"/>
         <source>&lt;p align=&apos;right&apos;&gt;This help will be closed the moment you activate a map.&lt;/p&gt;</source>
         <translation>&lt;p align=&apos;right&apos;&gt;Tato nápověda bude zavřena ve chvíli, kdy zapnete mapu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="209"/>
+        <location filename="../canvas/CCanvas.cpp" line="211"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
         <translation>&lt;h1&gt;Vítejte&lt;/h1&gt;&lt;p&gt;Děkujeme vám za používání programu QMapShack. QMapShack je neziskový projekt s otevřeným zdrojovým kódem. Je udržován nadšenci a dobrovolníky. Je dost zralý a užitečný, postrádá ale jisté vymoženosti, na něž byste mohl být navyklý z komerčních programů zdarma. Je to tím, že nemáme zdroje na to, abychom vám poskytli centralizované a pohodlné stahování map, výškových dat a dat se stanovením směru cesty. Tyto zdroje si musíte postahovat sami z různých stránek. Tato stránka vám s tím ale může trochu pomoci&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="218"/>
+        <location filename="../canvas/CCanvas.cpp" line="220"/>
         <source>&lt;h2&gt;Let&apos;s Start&lt;/h2&gt;&lt;p&gt;As a first step make yourself comfortable by arranging the dock widgets around this area to your personal liking. You can do this by grabbing the dock widget&apos;s title bars with your mouse (keep left button pressed on title bar) and move them where you want them. You can attach the dock widgets at the left, right, top or bottom. And you can stack them by placing them right above another dock widget. If you do not want to use the functionality of a dock widget you can close it and make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it anywhere you like.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Začněme&lt;/h2&gt;&lt;p&gt;Nejprve si zpříjemněte rozhraní uspořádáním prvků panelu okolo této oblasti tak, aby vám vyhovovalo. Uděláte to popadnutím titulkových pruhů prvků panelu myší (tiskněte levé tlačítko myši nad titulkovým pruhem) a jejich přesunutím tam, kde je chcete mít. Prvky panelu můžete připojit nalevo, napravo, nahoře nebo dole. A můžete je seskládat na sebe jejich umístěním rovnou nad jiný prvek panelu. Pokud nechcete používat funktionalitu prvku panelu, můžete jej zavřít a QMapShack si udělat pro sebe jednodušším. Také si povšimněte, že nástrojový pruh je také prvkem panelu. Můžete jej umístit kamkoli.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="230"/>
+        <location filename="../canvas/CCanvas.cpp" line="232"/>
         <source>&lt;h2&gt;The Wiki&lt;/h2&gt;&lt;p&gt;QMapShack has an extensive &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; with a lot of information about how to use it. There is a &lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide&lt;/a&gt; translated into several languages. Read it and you will discover the full variety of features QMapShack offers you.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Wiki&lt;/h2&gt;&lt;p&gt;QMapShack má rozsáhlou &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; se spoustou informací o tom, jak jej používat. Je tu &lt;a href=&apos;ShowQuickStart&apos;&gt;Průvodce rychlým začátkem&lt;/a&gt; přeložený do několika jazyků. Přečti si jej a objevíš celou šíři funkcí, jež ti QMapShack nabízí.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="238"/>
+        <location filename="../canvas/CCanvas.cpp" line="240"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Current home:&lt;br/&gt;%1&lt;/p&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Nynější hlavní adresář:&lt;br/&gt;%1&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="243"/>
+        <location filename="../canvas/CCanvas.cpp" line="245"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Vyberte hlavní adresář&lt;/h2&gt;&lt;p&gt;QMapShack potřebuje složku na pevném disku, kde jsou držena všechna data. Přirozeně narostou do velkých objemů. Doporučuje se složka s několika podsložkami:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Mapy - kde jsou uloženy všechny mapy&lt;/li&gt;&lt;li&gt;DEM - kde jsou uložena všechna výšková data&lt;/li&gt;&lt;li&gt;Routino - kde jsou uložena data se stanovením směru cesty pro k internetu nepřipojený směrovač Routino&lt;/li&gt;&lt;li&gt;BRouter - kde jsou uložena data se stanovením směru cesty pro k internetu nepřipojený směrovač BRouter&lt;/li&gt;&lt;li&gt;Databáze - kd vytvoříte databáze k uspořádání dat GIS&lt;/li&gt;&lt;li&gt;GPX - kde držíte soubory GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Chcete tyto složky vytvořit hned teď? Zadejte &lt;a  href=&apos;SetupHome&apos;&gt;cestu&lt;/a&gt; a QMapShack vytvoří všechny podsložky a zaktualizuje veškerá nastavení.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="260"/>
+        <location filename="../canvas/CCanvas.cpp" line="262"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Pro netrpělivé uživatele:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;Chci nějaké mapy z internetu.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Pro trpělivé:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Průvodce rychlým začátkem.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Začínáme.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Instalovat mapy a DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Základní mapy a DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Zdroje map&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="275"/>
+        <location filename="../canvas/CCanvas.cpp" line="277"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Mapy&lt;/h2&gt;&lt;p&gt;Mapa musí být vždy stanovena jedním souborem, který je rozpoznán QMapShackem. Tento soubor se musí umístit do jedné ze zapsaných složek s mapami (&lt;a href=&apos;MapFolders&apos;&gt;Soubor → Nastavit cesty k mapám&lt;/a&gt;). QMapShack ji najde a uvede ji v seznamu. Seznam map obnovíte klepnutím pravým tlačítkem myši na seznam map a vybráním Nahrát mapy znovu v nabídce.&lt;/p&gt; &lt;p&gt;Mapa musí být zapnuta, aby byla vidět. Klepněte pravým tlačítkem myši na položku mapy a v nabídce vyberte Zapnout. Se zapnutím mapy tato nabídka zmizí. Abyste ji viděl znovu, jednoduše přidejte další pohled na mapu (&lt;a href=&apos;NewView&apos;&gt;Pohled → Přidat pohled na mapu&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Abyste začal s některými internetovými mapami, klepněte na odkaz pro &lt;a href=&apos;GetMaps&apos;&gt;netrpělivé uživatele&lt;/a&gt;. Pokud máte zařízení GPS Garmin s nekomerčními mapami, můžete zkopírovat soubory *.img a *.jnx z vašeho zařízení do složky s mapou.&lt;/p&gt; &lt;/p&gt;Pokud vlastníte rastrové mapy ve formátu, jejž podporuje GDAL, musíte nejprve vytvořit definiční soubor virtuální mapy (*.vrt). Soubor *.vrt se může vztahovat k jednomu nebo několika jiným souborům. Na vytvoření takového souboru můžete použít vestavěný Sestavovač VRT QMapShacku (&lt;a href=&apos;VrtBuilder&apos;&gt;Nástroj → Sestavovač VRT&lt;/a&gt;).&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="291"/>
+        <location filename="../canvas/CCanvas.cpp" line="293"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="298"/>
+        <location filename="../canvas/CCanvas.cpp" line="300"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Vaše data&lt;/h2&gt;&lt;p&gt;K nahrání stop a cestovních bodů použijte v nabídce &lt;a href=&apos;LoadData&apos;&gt;Soubor → Nahrát data GIS&lt;/a&gt;. Každý soubor bude nezávislý projekt na pracovní ploše. Svá data můžete spravovat v jednotlivých souborech nebo v databázi. Můžete &lt;a href=&apos;CreateDB&apos;&gt;vytvořit databázi&lt;/a&gt; v prvku panelu pro databáze.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="306"/>
+        <location filename="../canvas/CCanvas.cpp" line="308"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Pro netrpělivé uživatele:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Chci internetová výšková data (DEM).&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Pro trpělivé:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Zdroje pro výšková data (DEM)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="317"/>
+        <location filename="../canvas/CCanvas.cpp" line="319"/>
         <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;&lt;p&gt;To start with some online DEMs you can click on the link for &lt;a href=&apos;GetDems&apos;&gt;impatient users&lt;/a&gt;. But keep in mind that using online DEMs slows down QMapShack significantly.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Výšková data&lt;/h2&gt;&lt;p&gt;Výšková data (Digitální výškový model - DEM) se používá pro různé funkce QMapShacku a je zcela nezávislý na mapách. Platí nicméně stejné zásady jako pro mapy. Data DEM musí být vždy stanovena jedním souborem, který je rozpoznán QMapShackem. Tento soubor musí být umístěn v jedné ze zapsaných složek s digitálními výškovými modely (&lt;a href=&apos;DemFolders&apos;&gt;Soubor → Nastavit cesty k výškovým modelům&lt;/a&gt;). QMapShack ji najde a uvede ji v seznamu. Seznam souborů s digitálními výškovými modely (DEM) obnovíte klepnutím pravým tlačítkem myši na seznam digitálních výškových modelů a vybráním Nahrát výškový model znovu v nabídce.&lt;/p&gt;&lt;p&gt;Podobně jako rastrové mapy soubory s digitálními výškovými modely musí být zabaleny v souboru *.vrt, aby byly rozpoznány. Soubor *.vrt se může vztahovat k jednomu nebo několika jiným souborům. Na vytvoření takového souboru můžete použít vestavěný Sestavovač VRT QMapShacku (&lt;a href=&apos;VrtBuilder&apos;&gt;Nástroj → Sestavovač VRT&lt;/a&gt;).&lt;/p&gt;&lt;p&gt;Abyste začal s některými internetovými digitálními výškovými modely, klepněte na odkaz pro &lt;a href=&apos;GetMaps&apos;&gt;netrpělivé uživatele&lt;/a&gt;. Mějte ale na paměti, že používání internetových digitálních výškových modelů podstatně zpomaluje QMapShack.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="332"/>
+        <location filename="../canvas/CCanvas.cpp" line="334"/>
         <source>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack supports online routing services. But if you really want to make use of the routing possibilities you need the routing database stored locally. There are two offline routing engines available.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;For Routino you have to create routing data from the Open Street Map database files. QMapShack has a built-in Routino Database Creator (&lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;A second option is to use a local BRouter installation with a local routing database. Use the &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter setup&lt;/a&gt; to download and install all necessary data.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack podporuje internetové služby pro stanovení směru cesty (vedení cesty). Pokud ale skutečně chcete využít možnosti stanovení směru cesty, potřebujete mít databázi se stanovením směru cesty uloženu místně. Jsou dvě možnosti, dvě stroje pracující bez připojení k internetu.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Pro Routino musíte vytvořit databázi se  v ze souborů databáze Open Street Map. QMapShack má vestavěného tvůrce databáze Routino (&lt;a href=&apos;CreateRoutino&apos;&gt;Nástroj → Vytvořit databázi Routino&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Druhou možností je použití místní instalace BRouter s místní databázi se stanovením směru cesty. Použijte &lt;a href=&apos;BRouterSetup&apos;&gt;Nastavení BRouter&lt;/a&gt; ke stažení a nainstalování všech nezbytných dat.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1062"/>
+        <location filename="../canvas/CCanvas.cpp" line="1064"/>
         <source>Setup Map Background</source>
         <translation>Nastavit pozadí mapy</translation>
     </message>
@@ -525,153 +525,160 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CDetailsPrj</name>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="268"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="897"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="272"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1009"/>
         <source>none</source>
         <translation>žádné</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="347"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="351"/>
         <source>Build diary...</source>
         <translation>Sestavit deník...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="480"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="496"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Cestovní body&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="487"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="513"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="698"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="832"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="862"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="503"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="529"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="819"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="886"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="944"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="974"/>
         <source>Info</source>
         <translation>Informace</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="488"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="514"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="699"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="833"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="863"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="504"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="530"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="821"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="945"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="975"/>
         <source>Comment</source>
         <translation>Poznámka</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="506"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="522"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Stopy&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="728"/>
         <source>From Start</source>
         <translation>Od začátku</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="728"/>
         <source>To Next</source>
         <translation>K další</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="724"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="728"/>
         <source>To End</source>
         <translation>Na konec</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="825"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="937"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Oblasti&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="128"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="132"/>
         <source>You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?</source>
         <translation>Chcete řadit cestovní body podél cesty, ale vypnul jste svázání cestovních bodů a cest (dání do vzájemného vztahu). Chcete je opět zapnout?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="129"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="133"/>
         <source>Correlation...</source>
         <translation>Svázání...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="402"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="414"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přehled všech stop v projektu&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="440"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="452"/>
         <source>&lt;b&gt;Summary over all waypoints in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="444"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="456"/>
         <source> x Geocache, consisting of: &lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="653"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="666"/>
         <source>Elevation: %1%2</source>
         <translation type="unfinished">Výška: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="658"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="671"/>
         <source>Created: %1</source>
         <translation type="unfinished">Vytvořeno: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="714"/>
         <source>Arrival: </source>
         <translation>Příchod: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="727"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="731"/>
         <source>Distance: </source>
         <translation>Vzdálenost: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="737"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="741"/>
         <source>Time: </source>
         <translation>Čas: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
         <source>Ascent: </source>
         <translation>Stoupání: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="757"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="761"/>
         <source>Descent: </source>
         <translation>Klesání: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="855"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="820"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="887"/>
+        <source>Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="967"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Cesty&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="883"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="995"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1022"/>
         <source>Edit name...</source>
         <translation>Upravit název...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="883"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="995"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1022"/>
         <source>Enter new project name.</source>
         <translation>Zadejte nový název projektu.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1004"/>
         <source>Edit keywords...</source>
         <translation>Upravit klíčová slova...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1004"/>
         <source>Enter keywords.</source>
         <translation>Zadejte klíčová slova.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1038"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1150"/>
         <source>Print Diary</source>
         <translation>Tisk deníku</translation>
     </message>
@@ -735,7 +742,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Obrázek %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1117"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1122"/>
         <source>Unknown</source>
         <translation>Neznámý</translation>
     </message>
@@ -1358,7 +1365,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>s %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="781"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="783"/>
         <source>Changed route points.</source>
         <translation>Změněné body cesty.</translation>
     </message>
@@ -1664,37 +1671,37 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Ukázat body.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2469"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2474"/>
         <source>Changed name</source>
         <translation>Změněný název</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2475"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2480"/>
         <source>Changed comment</source>
         <translation>Změněná poznámka</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2481"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2486"/>
         <source>Changed description</source>
         <translation>Změněný popis</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2487"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2492"/>
         <source>Changed links</source>
         <translation>Změněné odkazy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2497"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2502"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Výška bodu %1 byla změněna na %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2520"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2525"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Činnost byla pro celou stopu změněna na &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2558"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2563"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Činnost byla změněna pro oblast (%2...%3) na &apos;%1&apos;.</translation>
     </message>
@@ -1818,72 +1825,72 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>_Klon</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="303"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="312"/>
         <source>Elevation: %1%2</source>
         <translation>Výška: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="314"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="323"/>
         <source>Proximity: %1%2</source>
         <translation>Blízkost: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="372"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="381"/>
         <source>Created: %1</source>
         <translation>Vytvořeno: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="444"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="453"/>
         <source>Changed name</source>
         <translation>Změněný název</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="454"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="463"/>
         <source>Changed position</source>
         <translation>Změněná poloha</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="460"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="469"/>
         <source>Changed elevation</source>
         <translation>Změněná výška</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="469"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="478"/>
         <source>Removed proximity</source>
         <translation>Odstraněná blízkost</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="474"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="483"/>
         <source>Changed proximity</source>
         <translation>Změněná blízkost</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="493"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="502"/>
         <source>Changed icon</source>
         <translation>Změněná ikona</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="499"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="508"/>
         <source>Changed comment</source>
         <translation>Změněná poznámka</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="505"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="514"/>
         <source>Changed description</source>
         <translation>Změněný popis</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="511"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="520"/>
         <source>Changed links</source>
         <translation>Změněné odkazy</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="517"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="526"/>
         <source>Changed images</source>
         <translation>Změněné obrázky</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="523"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="532"/>
         <source>Add image</source>
         <translation>Přidat obrázek</translation>
     </message>
@@ -2867,54 +2874,54 @@ line %2, column %3:
         <translation>Výška: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1157"/>
+        <location filename="../CMainWindow.cpp" line="1158"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Sklon: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1173"/>
+        <location filename="../CMainWindow.cpp" line="1174"/>
         <source>[Grid: %1]</source>
         <translation>[Mřížka: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1321"/>
+        <location filename="../CMainWindow.cpp" line="1322"/>
         <source>Load GIS Data...</source>
         <translation>Nahrát data GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1355"/>
+        <location filename="../CMainWindow.cpp" line="1356"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1355"/>
-        <location filename="../CMainWindow.cpp" line="1381"/>
+        <location filename="../CMainWindow.cpp" line="1356"/>
+        <location filename="../CMainWindow.cpp" line="1382"/>
         <source>QMapShack View (*.view)</source>
         <translation>Pohled QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1381"/>
+        <location filename="../CMainWindow.cpp" line="1382"/>
         <source>Select file to load</source>
         <translation>Vybrat soubor k nahrání</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1673"/>
+        <location filename="../CMainWindow.cpp" line="1674"/>
         <source>Rename View...</source>
         <translation>Přejmenovat pohled...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1673"/>
+        <location filename="../CMainWindow.cpp" line="1674"/>
         <source>Enter new name for view</source>
         <translation>Zadejte nový název pohledu</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1823"/>
+        <location filename="../CMainWindow.cpp" line="1824"/>
         <source>Fatal...</source>
         <translation>Kritické...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1824"/>
+        <location filename="../CMainWindow.cpp" line="1825"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack zjistil, že knihovna Proj4 je nainstalována špatně. Chybí překladové tabulky pro promítání EPSG, jež jsou obvykle uloženy v /usr/share/proj. Spojte se, prosím, s údržbářem balíčku ve vaší distribuci, aby to spravil.</translation>
     </message>
@@ -3961,11 +3968,16 @@ Neznámá stavba.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="321"/>
+        <source>Slope</source>
+        <translation type="unfinished">Sklon</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseRuler.cpp" line="323"/>
         <source>Course</source>
         <translation>Směr</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="381"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="386"/>
         <source>Sum</source>
         <translation>Součet</translation>
     </message>
@@ -4045,27 +4057,27 @@ Neznámá stavba.</translation>
 <context>
     <name>CPrintDialog</name>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="67"/>
+        <location filename="../print/CPrintDialog.cpp" line="68"/>
         <source>Print Map...</source>
         <translation>Tisk mapy...</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="74"/>
+        <location filename="../print/CPrintDialog.cpp" line="75"/>
         <source>Save Map as Image...</source>
         <translation>Uložit mapu jako obrázek...</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="94"/>
+        <location filename="../print/CPrintDialog.cpp" line="95"/>
         <source>Printer Properties...</source>
         <translation>Vlastnosti tiskárny...</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="169"/>
+        <location filename="../print/CPrintDialog.cpp" line="172"/>
         <source>Pages: %1 x %2</source>
         <translation>Strany: %1 x %2</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="170"/>
+        <location filename="../print/CPrintDialog.cpp" line="173"/>
         <source>Zoom with mouse wheel on map below to change resolution:
 
 %1x%2 pixel
@@ -4078,12 +4090,18 @@ x: %3 m/px
 y: %4 m/px</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="216"/>
+        <location filename="../print/CPrintDialog.cpp" line="174"/>
+        <source>
+ This equals to a scale of approx. 1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../print/CPrintDialog.cpp" line="221"/>
         <source>Printing pages.</source>
         <translation>Probíhá tisk stran.</translation>
     </message>
     <message>
-        <location filename="../print/CPrintDialog.cpp" line="260"/>
+        <location filename="../print/CPrintDialog.cpp" line="271"/>
         <source>Save map...</source>
         <translation>Uložit mapu...</translation>
     </message>
@@ -7308,14 +7326,14 @@ Nechce se mi číst dokumentaci!</translation>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="110"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="115"/>
         <source>Print diary</source>
         <translation>Tisk deníku</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="89"/>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="113"/>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="133"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="94"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="118"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="138"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -7335,7 +7353,12 @@ Nechce se mi číst dokumentaci!</translation>
         <translation>Řadit podél stopy (jednorázově)</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IDetailsPrj.ui" line="130"/>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
+        <source>Track with details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/IDetailsPrj.ui" line="135"/>
         <source>Rebuild diary.</source>
         <translation>Sestavit deník znovu.</translation>
     </message>
@@ -9977,32 +10000,32 @@ Tip:
 <context>
     <name>IPlot</name>
     <message>
-        <location filename="../plot/IPlot.cpp" line="95"/>
+        <location filename="../plot/IPlot.cpp" line="98"/>
         <source>Reset Zoom</source>
         <translation>Nastavit znovu zvětšení</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="96"/>
+        <location filename="../plot/IPlot.cpp" line="99"/>
         <source>Stop Range</source>
         <translation>Ukončit výběr oblasti</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="97"/>
+        <location filename="../plot/IPlot.cpp" line="100"/>
         <source>Save...</source>
         <translation>Uložit...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="99"/>
+        <location filename="../plot/IPlot.cpp" line="102"/>
         <source>Add Waypoint</source>
         <translation>Přidat cestovní bod</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="100"/>
+        <location filename="../plot/IPlot.cpp" line="103"/>
         <source>Add Trackpoint Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="101"/>
+        <location filename="../plot/IPlot.cpp" line="104"/>
         <source>Cut Track...</source>
         <translation type="unfinished">Rozdělit stopu...</translation>
     </message>
@@ -10011,19 +10034,19 @@ Tip:
         <translation type="vanished">Vyjmout...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="550"/>
+        <location filename="../plot/IPlot.cpp" line="553"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation>Pro (pouze) svislé přiblížení podržte klávesu Ctrl.
 Pro (pouze) vodorovné přiblížení podržte klávesu Alt.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="709"/>
+        <location filename="../plot/IPlot.cpp" line="712"/>
         <source>No or bad data.</source>
         <translation>Žádná nebo špatná data.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1385"/>
+        <location filename="../plot/IPlot.cpp" line="1396"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
@@ -10077,12 +10100,17 @@ nebo
     <message>
         <location filename="../print/IPrintDialog.ui" line="89"/>
         <location filename="../print/IPrintDialog.ui" line="102"/>
-        <location filename="../print/IPrintDialog.ui" line="151"/>
+        <location filename="../print/IPrintDialog.ui" line="158"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
     </message>
     <message>
-        <location filename="../print/IPrintDialog.ui" line="118"/>
+        <location filename="../print/IPrintDialog.ui" line="112"/>
+        <source>Draw scale on all pages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../print/IPrintDialog.ui" line="125"/>
         <source>Print</source>
         <translation>Tisk</translation>
     </message>
@@ -10298,177 +10326,177 @@ nebo
         <translation>Nastavení BRouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="48"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="51"/>
         <source>choose which BRouter to use</source>
         <translation>Vybrat, který BRouter použít</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="54"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="57"/>
         <source>BRouter-Web (online)</source>
         <translation>Stránky BRouter (připojeno)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="61"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="64"/>
         <source>local Installation</source>
         <translation>Místní instalace</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="68"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="71"/>
         <source>Expert Mode</source>
         <translation>Režim znalce</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="91"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="94"/>
         <source>local BRouter Installation directory:</source>
         <translation>Místní instalační adresář BRouter:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="103"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="106"/>
         <source>select installation directory</source>
         <translation>Vybrat instalační adresář</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="106"/>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="162"/>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="342"/>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="356"/>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="389"/>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="400"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="109"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="165"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="345"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="359"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="392"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="403"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="119"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="122"/>
         <source>labelLocalDirResult</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="128"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="131"/>
         <source>create or update installation</source>
         <translation>Vytvořit nebo aktualizovat instalaci</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="152"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="155"/>
         <source>Java Executable</source>
         <translation>Spustitelný soubor Java</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="175"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="178"/>
         <source>labelLocalJavaResult</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="184"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="187"/>
         <source>search for installed java</source>
         <translation>Hledat nainstalovanou Javu</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="241"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="244"/>
         <source>Download and install BRouter Version</source>
         <translation>Stáhnout a nainstalovat verzi BRouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="255"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="258"/>
         <source>about:blank</source>
         <translation>o:prázdný</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="263"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="266"/>
         <source>File to install</source>
         <translation>Soubor k nainstalování</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="272"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="275"/>
         <source>Download and Install</source>
         <translation>Stáhnout a nainstalovat</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="321"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="324"/>
         <source>available Profiles</source>
         <translation>Dostupné profily</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="339"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="342"/>
         <source>install profile</source>
         <translation>Instalovat profil</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="353"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="356"/>
         <source>remove profile</source>
         <translation>Odstranit profil</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="371"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="374"/>
         <source>installed Profiles</source>
         <translation>Nainstalované profily</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="415"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="418"/>
         <source>content of profile</source>
         <translation>Obsah profilu</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="451"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="454"/>
         <source>BRouter-Web URL:</source>
         <translation>Adresa (URL) stránek BRouter:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="501"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="504"/>
         <source>Service-URL</source>
         <translation>Adresa (URL) služby</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="511"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="514"/>
         <source>Profile-URL</source>
         <translation>Adresa (URL) profilu</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="561"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="564"/>
         <source>Hostname</source>
         <translation>Jméno hostitelského počítače</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="571"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="574"/>
         <source>Port</source>
         <translation>Přípojka (port)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="581"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="584"/>
         <source>Profile directory</source>
         <translation>Adresář s profilem</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="591"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="594"/>
         <source>Segments directory</source>
         <translation>Adresář s částmi</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="601"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="604"/>
         <source>Custom Profiles dir</source>
         <translation>Adresář s vlastními profily</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="611"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="614"/>
         <source>Max Runtime</source>
         <translation>Nejdelší doba běhu programu</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="621"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="624"/>
         <source>Number Threads</source>
         <translation>Počet vláken</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="631"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="634"/>
         <source>Java Options</source>
         <translation>Volby pro Java</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="641"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="644"/>
         <source>Bind to hostname only</source>
         <translation>Jen spojit s názvem hostitele (serveru)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="551"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="554"/>
         <source>Profiles Url</source>
         <translation>Adresa (URL) profilu</translation>
     </message>

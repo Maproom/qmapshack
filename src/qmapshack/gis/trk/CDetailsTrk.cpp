@@ -711,28 +711,19 @@ void CDetailsTrk::slotSetActivities()
 
 void CDetailsTrk::slotSetEnergyCycling()
 {
+    if (!trk.getEnergyCycling().isValid())
+    {
+        return;
+    }
+
     CEnergyCyclingDlg energyCyclingDlg(this, trk.getEnergyCycling());
 
-    qint32 ret = 0;
-    if (trk.getEnergyCycling().isValid())
-    {
-        ret = energyCyclingDlg.exec();
-    }
+    qint32 ret = energyCyclingDlg.exec();
+
     if(ret == QDialog::Accepted || ret == QDialog::Rejected)
     {
         trk.updateVisuals(CGisItemTrk::eVisualDetails, "CDetailsTrk::slotSetEnergyCycling()");
     }
-
-        //        updateUi(eUpdateFromApply);
-
-//        if(comboBoxSetting->currentText() != energySet.nameOfSet)
-//        {
-//            comboBoxSetting->setItemText(currentSet, energySet.nameOfSet);
-//        }
-//        saveSettings();
-//    }
-
-    //    CActivityTrk::getMenu(trk.getKey(), this, true);
 }
 
 void CDetailsTrk::setupGraph(CPlot * plot, const CLimit& limit, const QString& source, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax)

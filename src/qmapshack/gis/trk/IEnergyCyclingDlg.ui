@@ -25,7 +25,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../resources.qrc">:/icons/48x48/FilterEnergyCycle.png</pixmap>
+        <pixmap resource="../../resources.qrc">:/icons/48x48/EnergyCycling.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

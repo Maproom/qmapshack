@@ -1520,7 +1520,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../resources.qrc">
-               <normaloff>:/icons/48x48/FilterEnergyCycle.png</normaloff>:/icons/48x48/FilterEnergyCycle.png</iconset>
+               <normaloff>:/icons/48x48/EnergyCycling.png</normaloff>:/icons/48x48/EnergyCycling.png</iconset>
              </property>
             </widget>
            </item>
@@ -1755,10 +1755,10 @@
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupLineWidth"/>
   <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph1"/>
-  <buttongroup name="buttonGroupGraph2"/>
  </buttongroups>
 </ui>

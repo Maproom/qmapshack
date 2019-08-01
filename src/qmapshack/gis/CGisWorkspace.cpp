@@ -258,6 +258,12 @@ void CGisWorkspace::slotSaveAll()
         {
             continue;
         }
+
+        if(item->skipSave())
+        {
+            continue;
+        }
+
         if(item->canSave())
         {
             item->save();

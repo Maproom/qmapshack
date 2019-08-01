@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -256,6 +257,8 @@ public:
 
     void getMouseRange(int &idx1, int &idx2, bool total) const;
     void getMouseRange(const CTrackData::trkpt_t * &mr1, const CTrackData::trkpt_t * &mr2) const;
+
+    const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
@@ -952,6 +955,10 @@ private:
     };
 
     interpolate_t interp;
+
+    using fSearch = std::function<const searchValue_t(CGisItemTrk*)>;
+    static QMap<searchProperty_e, fSearch > keywordLambdaMap;
+    static QMap<searchProperty_e, fSearch > initKeywordLambdaMap();
 
     /**@}*/
 };

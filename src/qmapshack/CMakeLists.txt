@@ -139,6 +139,7 @@ set( SRCS
     gis/search/CGeoSearch.cpp
     gis/search/CGeoSearchConfig.cpp
     gis/search/CGeoSearchConfigDialog.cpp
+    gis/search/CSearchExplanationDialog.cpp
     gis/search/CGeoSearchWeb.cpp
     gis/search/CGeoSearchWebConfigDialog.cpp
     gis/slf/CSlfProject.cpp
@@ -203,6 +204,7 @@ set( SRCS
     grid/mitab.cpp
     helpers/CDraw.cpp
     helpers/CElevationDialog.cpp
+    gis/search/CSearch.cpp
     helpers/CInputDialog.cpp
     helpers/CLimit.cpp
     helpers/CLinksDialog.cpp
@@ -477,6 +479,7 @@ set( HDRS
     gis/search/CGeoSearchConfigDialog.h
     gis/search/CGeoSearchWeb.h
     gis/search/CGeoSearchWebConfigDialog.h
+    gis/search/CSearchExplanationDialog.h
     gis/slf/CSlfProject.h
     gis/slf/CSlfReader.h
     gis/summary/CGisSummary.h
@@ -537,6 +540,7 @@ set( HDRS
     helpers/CDraw.h
     helpers/CElevationDialog.h
     helpers/CFileExt.h
+    gis/search/CSearch.h
     helpers/CInputDialog.h
     helpers/CLimit.h
     helpers/CLinksDialog.h
@@ -733,6 +737,7 @@ set( UIS
     gis/rte/router/routino/IRouterRoutinoPathSetup.ui
     gis/search/IGeoSearchConfigDialog.ui
     gis/search/IGeoSearchWebConfigDialog.ui
+    gis/search/ISearchExplanationDialog.ui
     gis/summary/IGisSummary.ui
     gis/summary/IGisSummarySetup.ui    
     gis/trk/ICombineTrk.ui

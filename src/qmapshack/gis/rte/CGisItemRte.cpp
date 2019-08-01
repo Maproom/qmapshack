@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -180,6 +181,15 @@ bool CGisItemRte::isCalculated()
     return yes;
 }
 
+const searchValue_t CGisItemRte::getValueByKeyword(searchProperty_e keyword)
+{
+    if(keywordLambdaMap.contains(keyword))
+    {
+        return keywordLambdaMap.value(keyword)(this);
+    }
+    return searchValue_t();
+}
+
 void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
 {
     if(ele == NOFLOAT)
@@ -189,6 +199,9 @@ void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
     }
 
     subpt.ele = qRound(ele);
+
+    rte.minElevation = qMin(rte.minElevation, subpt.ele);
+    rte.maxElevation = qMax(rte.maxElevation, subpt.ele);
 
     if(lastEle != NOFLOAT)
     {
@@ -1297,4 +1310,68 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
 
     deriveSecondaryData();
     updateHistory();
+}
+
+QMap<searchProperty_e, CGisItemRte::fSearch > CGisItemRte::keywordLambdaMap = CGisItemRte::initKeywordLambdaMap();
+QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
+{
+    QMap<searchProperty_e, CGisItemRte::fSearch> map;
+    map.insert(eSearchPropertyGeneralName, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->rte.name;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralFullText, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralElevation, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        IUnit::self().meter2elevation(item->rte.minElevation, searchValue.value1, searchValue.str1);
+        IUnit::self().meter2elevation(item->rte.maxElevation, searchValue.value1, searchValue.str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralComment, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getComment();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDescription, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getDescription();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkDistance, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        IUnit::self().meter2distance(item->rte.totalDistance, searchValue.value1, searchValue.str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkAscent, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        IUnit::self().meter2elevation(item->rte.ascent, searchValue.value1, searchValue.str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkDescent, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        IUnit::self().meter2elevation(item->rte.descent, searchValue.value1, searchValue.str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkMinElevation, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        IUnit::self().meter2elevation(item->rte.minElevation, searchValue.value1, searchValue.str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkMaxElevation, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        IUnit::self().meter2elevation(item->rte.maxElevation, searchValue.value1, searchValue.str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyRteTrkTotalTime, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        searchValue.value1=item->rte.maxElevation;
+        searchValue.str1="s";
+        return searchValue;
+    });
+    return map;
 }

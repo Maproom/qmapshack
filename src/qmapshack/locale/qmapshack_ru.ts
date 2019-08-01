@@ -6448,67 +6448,67 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="30"/>
         <source>&lt;p&gt;Following assumptions are made:&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Сделаны следующие предположения:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="28"/>
         <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completly under 500m meters.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Поиск всегда является эксклюзивным, поэтому для трека поиск &quot;высота ниже 500 м&quot; найдет только те треки, которые полностью находятся ниже 500 м.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="26"/>
         <source>&lt;p&gt;The underlying syntax of the search is &apos;property comparison value&apos;, e.g. &apos;name contains water&apos;. However some rules apply to make a search more intuitive.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Основной синтаксис поиска: &quot;свойство сравнение значение&quot;, т. е. &quot;имя содержит вода&quot;. Однако есть некоторые меры, чтобы сделать поиск более интуитивным (смотреть ниже).&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="33"/>
         <source>If only one of the two given values has a unit the unit is assumed for both</source>
-        <translation type="unfinished"></translation>
+        <translation>Если только одно из двух заданных чисел имеет единицу, данная единица принимается для обоих чисел</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="36"/>
         <source>If a search string in the short form &apos;comparison value&apos; is used the property is derived from the value and its unit: </source>
-        <translation type="unfinished"></translation>
+        <translation>Если задана строка поиска в краткой форме &quot;сравнение значение&quot;, то &quot;свойство&quot; выводится из &quot;значения&quot; и его единицы измерения:</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="40"/>
         <source>speed units: average speed</source>
-        <translation type="unfinished"></translation>
+        <translation>единицы измерения скорости: средняя скорость</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="43"/>
         <source>km and mi: distance</source>
-        <translation type="unfinished"></translation>
+        <translation>км и mi: расстояние</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="46"/>
         <source>m and ft: elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>м и ft: высота</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="49"/>
         <source>time: time moving</source>
-        <translation type="unfinished"></translation>
+        <translation>время: время движения</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="52"/>
         <source>date: date</source>
-        <translation type="unfinished"></translation>
+        <translation>дата: дата</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
         <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Дата равна&quot; соответствует всему, что находится в пределах 24 часов от данной даты.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="63"/>
         <source>&lt;p&gt;You can write dates in the following formats:&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вы можете записать даты в следующих форматах:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="60"/>
         <source>If you enter no unit the default unit (what you see when viewing the property of the item) is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если вы не вводите единицу измерения, тогда используется единица измерения по умолчанию (та, что вы видите при просмотре свойств элемента)</translation>
     </message>
     <message>
         <source>&lt;p&gt;You can write Dates in the following formats:&lt;/p&gt;</source>

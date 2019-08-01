@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -341,6 +342,15 @@ void CGisItemOvlArea::gainUserFocus(bool yes)
     keyUserFocus = yes ? key : key_t();
 }
 
+const searchValue_t CGisItemOvlArea::getValueByKeyword(searchProperty_e keyword)
+{
+    if(keywordLambdaMap.contains(keyword))
+    {
+        return keywordLambdaMap.value(keyword)(this);
+    }
+    return searchValue_t();
+}
+
 QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)
 {
     qreal x = 0;
@@ -554,4 +564,36 @@ void CGisItemOvlArea::setIcon(const QString& c)
     mask.fill( str2color(c) );
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
     IGisItem::setIcon(mask.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+}
+
+QMap<searchProperty_e, CGisItemOvlArea::fSearch > CGisItemOvlArea::keywordLambdaMap = CGisItemOvlArea::initKeywordLambdaMap();
+QMap<searchProperty_e, CGisItemOvlArea::fSearch> CGisItemOvlArea::initKeywordLambdaMap()
+{
+    QMap<searchProperty_e, CGisItemOvlArea::fSearch> map;
+    map.insert(eSearchPropertyGeneralName, [](CGisItemOvlArea* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getName();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralFullText, [](CGisItemOvlArea* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralComment, [](CGisItemOvlArea* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getComment();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDescription, [](CGisItemOvlArea* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getDescription();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyAreaArea, [](CGisItemOvlArea* item){
+        searchValue_t searchValue;
+        searchValue.value1 = item->area.area;
+        return searchValue;
+    });
+    return map;
 }

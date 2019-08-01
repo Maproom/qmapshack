@@ -64,6 +64,7 @@
         <file>../icons/32x32/AreaOn.png</file>
         <file>../icons/32x32/ArrowDef.png</file>
         <file>../icons/32x32/ArrowUser.png</file>
+        <file>../icons/32x32/Attention.png</file>
         <file>../icons/32x32/AutoSave.png</file>
         <file>../icons/32x32/Bubble.png</file>
         <file>../icons/32x32/CSrcATemp.png</file>
@@ -332,6 +333,7 @@
         <file>../icons/48x48/AreaOn.png</file>
         <file>../icons/48x48/ArrowDef.png</file>
         <file>../icons/48x48/ArrowUser.png</file>
+        <file>../icons/48x48/Attention.png</file>
         <file>../icons/48x48/AutoSave.png</file>
         <file>../icons/48x48/Bubble.png</file>
         <file>../icons/48x48/CSrcATemp.png</file>

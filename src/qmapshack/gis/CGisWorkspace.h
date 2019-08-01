@@ -29,8 +29,10 @@
 #include "gis/IGisItem.h"
 #include "gis/rte/router/IRouter.h"
 
+
 class CGisDraw;
 class IGisProject;
+class CSearchExplanationDialog;
 
 enum event_types_e
 {
@@ -425,7 +427,7 @@ public:
 
     void setOpacity(qreal val);
 
-    void applyFilter();
+    void applySearch();
 
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
@@ -439,18 +441,23 @@ public slots:
 
 private slots:
     void slotSetGisLayerOpacity(int val);
-    void slotFilter(const QString& str);
-    void slotSetupFilter();
+    void slotSearch(const QString& str);
+    void slotSetupSearch();
+    void slotSearchHelp();
 
     void slotWksItemSelectionChanged();
     void slotWksItemPressed(QTreeWidgetItem * item);
 
-    void slotFilterNameOnly(bool yes);
-    void slotFilterCompleteText(bool yes);
+    void slotSearchNameOnly(bool yes);
+    void slotSearchCompleteText(bool yes);
+
+    void slotCaseSensitive(bool yes);
 
 private:
     friend class CMainWindow;
     CGisWorkspace(QMenu * menuProject, QWidget * parent);
+
+    CSearchExplanationDialog* explanationDlg = nullptr;
 
     static CGisWorkspace * pSelf;
 

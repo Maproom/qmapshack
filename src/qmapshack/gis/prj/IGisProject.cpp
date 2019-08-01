@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg   hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -60,8 +61,6 @@ const QString IGisProject::filedialogSaveFilters = filedialogFilterGPX + ";; " +
 const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterSML + ";; " + filedialogFilterLOG + ";; " + filedialogFilterQLB + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";; " + filedialogFilterFIT;
 
 QString IGisProject::keyUserFocus;
-
-IGisProject::filter_mode_e IGisProject::filterMode = IGisProject::eFilterModeName;
 
 IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
@@ -1174,18 +1173,9 @@ void IGisProject::sortItems(QList<IGisItem *> &items) const
     }
 }
 
-void IGisProject::filter(const QString& str)
+void IGisProject::filter(CSearch& search)
 {
     const int N = childCount();
-
-    if(str.isEmpty())
-    {
-        for(int n = 0; n < N; n++)
-        {
-            child(n)->setHidden(false);
-        }
-        return;
-    }
 
     for(int n = 0; n < N; n++)
     {
@@ -1195,16 +1185,7 @@ void IGisProject::filter(const QString& str)
             continue;
         }
 
-        switch(filterMode)
-        {
-        case eFilterModeName:
-            item->setHidden(!item->getName().toUpper().contains(str));
-            break;
-
-        case eFilterModeText:
-            item->setHidden(!item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText).toUpper().contains(str));
-            break;
-        }
+        item->setHidden(!search.getSearchResult(item));//get search result returns wether the object matches
     }
 }
 

@@ -83,7 +83,9 @@ public:
         QString locale;
         QList<geocachelog_t> logs;
 
-        const static QVector<QString> attributeMeanings;
+        const static QList<QString> attributeMeanings;
+        static QList<QString> attributeMeaningsTranslated;
+        static QList<QString> initAttributeMeaningsTranslated();
     };
 
     struct image_t
@@ -341,6 +343,7 @@ public:
     }
 
     void genKey() const override;
+    const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
 
     static QString getLastName(const QString &name);
     static void newWpt(QPointF& pt, const QString& name, const QString& desc, IGisProject *project);
@@ -348,6 +351,12 @@ public:
 
     static void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool &avoid, const bool &selected);
     static qreal calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis);
+
+    static void init()
+    {
+        keywordLambdaMap = initKeywordLambdaMap();
+        geocache_t::attributeMeaningsTranslated = geocache_t::initAttributeMeaningsTranslated();
+    }
 
 private:
     void setIcon();
@@ -395,6 +404,10 @@ private:
     QPoint offsetMouse;
     QPoint offsetBubble {-320, -150};
     quint32 widthBubble = 300;
+
+    using fSearch = std::function<const searchValue_t (CGisItemWpt*)>;
+    static QMap<searchProperty_e, fSearch > keywordLambdaMap;
+    static QMap<searchProperty_e, fSearch > initKeywordLambdaMap();
 };
 
 #endif // CGISITEMWPT_H

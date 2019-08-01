@@ -38,6 +38,11 @@ public:
     CGeoSearch(CGisListWks * parent);
     virtual ~CGeoSearch();
 
+    bool skipSave() const override
+    {
+        return true;
+    }
+
 private slots:
     void slotChangeSymbol();
     void slotSelectService();

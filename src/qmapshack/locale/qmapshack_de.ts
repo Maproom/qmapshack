@@ -1930,7 +1930,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1098"/>
         <source>Access or parking fee</source>
-        <translation>Freier Zugang oder freies Parken</translation>
+        <translation>Eintritt oder Parkgebühren</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1099"/>

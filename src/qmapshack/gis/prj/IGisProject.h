@@ -157,6 +157,14 @@ public:
         return false;
     }
 
+    /**
+       @brief Return true if saving should be skipped.
+     */
+    virtual bool skipSave() const
+    {
+        return false;
+    }
+
     virtual const QString getFileDialogFilter() const
     {
         return QString();

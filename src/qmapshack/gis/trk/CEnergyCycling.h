@@ -56,8 +56,6 @@ public:
     const energy_set_t &getEnergyTrkSet() const { return energyTrkSet; }
     void setEnergyTrkSet(const energy_set_t &energyTrkSet, bool updateHistory);
 
-//    const energy_set_t &getEnergyLastSet() const { return energyLastSet; }
-
     qreal getEnergyUseCycling() const { return energyTrkSet.energyKcal; }
 
     void compute();

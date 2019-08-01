@@ -39,208 +39,8 @@ CEnergyCyclingDlg::CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycl
     }
     setWindowTitle(tr("Energy Use Cycling Parameter Set"));
 
-// Tooltips
-/*  GER:
-    Parameterset
-    Individueller Name (max. 32 Zeichen) für das Parameterset.
-*/
-//    lineEditNameOfSet->setToolTip("<p>" + tr("Individual name (max. 32 characters) for the parameter set.") + "</p>");
-
-/*  GER:
-    Fahrergewicht
-    Das Fahrergewicht in kg einschließlich Kleidung.
-*/
-    spinDriverWeight->setToolTip("<p>" + tr("The driver's weight in kg including clothing.") + "</p>");
-
-/*  GER:
-    Fahrradgewicht
-    Das Fahrradgewicht in kg einschließlich Gepäck.
-*/
-    spinBikeWeight->setToolTip("<p>" + tr("The weight of the bicycle in kg including luggage.") + "</p>");
-
-/*  GER:
-    Luftdichte
-    Luftdichte in kg/m3. Die Luftdichte ist abhängig von barometrischen Luftdruck, Höhe über Normalnull und Temperatur.
-    Beispiele:
-    Meereshöhe: 1,226kg/m3
-    1500 Meter: 1,056kg/m3
-    3000 Meter: 0,905kg/m3
-*/
-    spinAirDensity->setToolTip("<p>" + tr("Air density in kg/m3. The air density depends on barometric air pressure, altitude and temperature.") + "</p>" +
-                               "<p>" + tr("Examples:") +
-                               "<ul><li>" + tr("Sea level: 1.226kg/m3") + "</li>" +
-                               "<li>" + tr("1500 meter: 1.056kg/m3") + "</li>"
-                               "<li>" + tr("3000 meter: 0.905kg/m3") + "</li></ul></p>");
-
-/*  GER:
-    Windgeschw. in Bft
-    Werte für die Windgeschwindigkeit in Beaufortskala für die Vorauswahl der Windgeschwindigkeit in km/h.
-    Positive Werte für Gegenwind und negative Werte für Rückenwind.
-*/
-    comboWindSpeed->setToolTip("<p>" + tr("Values for the wind speed in Beaufort scale for specifying the wind speed in km/h.") + "</p>" +
-                               "<p>" + tr("Positive values for headwind and negative values for tailwind.") + "</p>");
-
-/*  GER:
-    Windgeschw. in km/h
-    Die Windgeschwindigkeit in km/h wird bei der Berechnung der benötigten Kraft für die Überwindung des Luftwiderstands berücksichtigt.
-    Positive Werte werden für Gegenwind und negative Werte für Rückenwind berücksichtigt.
-    Die Werte können unabhängig von den Werten der Beaufortskala verändert werden.
-*/
-    spinWindSpeed->setToolTip("<p>" + tr("The wind speed in km/h is taken into account when calculating the force required to overcome the air drag.") + "</p>" +
-                              "<p>" + tr("Positive values for headwind and negative values for tailwind are taken into account.") + "</p>" +
-                              "<p>" + tr("The value can be changed independently of the Beaufort scale values.") + "</p>");
-
-/*  GER:
-    Trittfrequenz
-    Die durchschnittliche Trittfrequenz in U/min wird für die Berechnung der Pedalkraft benötigt.
-    Realistische Werte liegen zwischen 50 und 100 U/min.
-*/
-    spinPedalCadence->setToolTip("<p>" + tr("The average pedal cadence in rpm is needed to calculate the pedal force.") + "</p>" +
-                                 "<p>" + tr("Realistic values are between 50 and 100 rpm.") + "</p>");
-
-/*  GER:
-    Position im Wind
-    Werte für die Art der Sitzposition als Vorauswahl für die Windangriffsfläche in m2 und der Luftwiderstandszahl (cw-Wert).
-*/
-    comboWindPosition->setToolTip("<p>" + tr("Values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).") + "</p>");
-
-/*  GER:
-    Windangriffsfläche
-    Die Fläche in m2 (Fahrer, Fahrrad, Gepäcktaschen, etc.), die dem Wind ausgesetzt ist.
-*/
-    spinFrontalArea->setToolTip("<p>" + tr("The frontal area in m2 (driver, bicycle, bags, etc.) exposed to the wind.") + "</p>");
-
-/*  GER:
-    cw-Wert (Luftwiderstandsbeiwert)
-    Der cw-Wert (Luftwiderstandsbeiwert) gibt die Windschlüpfigkeit von Fahrer und Fahrrad gegenüber der Luft (Wind) an.
-    Je größer dieser Wert ist, um so mehr Kraft wird für die Überwindung der Windkraft benötigt.
-    Typische Werte für Fahrräder liegen zwischen 0,2 und 1.2.
-*/
-    spinWindDragCoeff->setToolTip("<p>" + tr("The cw value (drag coefficient) indicates the wind slip of the driver and bicycle in relation to the air (wind).") + "</p>" +
-                                  "<p>" + tr("The greater this value, the more force is required to overcome the wind force.") + "</p>" +
-                                  "<p>" + tr("Typical values for bicycles are between 0.2 and 1.2.") + "</p>");
-
-/*  GER:
-    Untergrund/Bereifung
-    Werte für die Art des Untergrunds und der Bereifung für die Bestimmung des Rollwiderstandsbeiwerts.
-*/
-    comboGround->setToolTip("<p>" + tr("Values for the type of ground surface and the tyres.") + "</p>" +
-                            "<p>" + tr("Used to determine the rolling resistance coefficient.") + "</p>");
-
-/*  GER:
-    cr-Wert (Rollwiderstandsbeiwert)
-    Der Rollwiderstandsbeiwert bestimmt die Kraft, die für die Überwindung der Rollwiderstandskraft bestimmt.
-    Maßgebliche Faktoren sind der Fahrbahnuntergrund und die Bereifung.
-    Je größer dieser Wert ist, um so mehr Kraft wird für die Überwindung des Rollwiderstands benötigt.
-*/
-    spinRollingCoeff->setToolTip("<p>" + tr("The rolling resistance coefficient specifies the force used to overcome the rolling resistance force.") + "</p>" +
-                                 "<p>" + tr("The relevant factors are the road surface and the tyres.") + "</p>" +
-                                 "<p>" + tr("The higher this value is, the more force is required to overcome the rolling resistance.") + "</p>");
-
-/*  GER:
-    Gesamtgewicht
-    Das Gesamtgewicht in kg von Fahrer und Fahrrad inklusive Kleidung und Gepäck.
-*/
-    labelTotalWeight->setToolTip("<p>"+ tr("The total weight in kg of driver and bike including clothes and luggage.") + "</p>");
-
-/*  GER:
-    Luftwiderstandskraft
-    Die Luftwiderstandskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung des Luftwiderstands benötigt wird.
-    Berücksichtigt wird der Fahrtwind und Gegen- und Rückenwind.
-    Bei starkem Rückenwind kann dieser Wert auch negativ sein.
-*/
-    labelAirResistForce->setToolTip("<p>" + tr("The air resistance force is the force in Newton required on average over all track points to overcome the air resistance.") + "<p>" +
-                                    "<p>" + tr("The airstream, headwind and tailwind are taken into account.") + "</p>" +
-                                    "<p>" + tr("With a strong tailwind this value can be negative.") + "</p");
-
-/*  GER:
-    Rollwiderstandskraft
-    Die Rollwiderstandskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung des Rollwiderstands benötigt wird.
-*/
-    labelRollResistForce->setToolTip("<p>" + tr("The rolling resistance force is the force in Newton required on average over all track points to overcome the rolling resistance.") + "</p>");
-
-/*  GER:
-    Neigungskraft
-    Die Neigungskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung der Neigung bei der Bergauffahrt benötigt wird.
-    Bei überwiegender Bergabfahrt kann die Neigungskraft negativ sein.
-*/
-    labelGravitySlopeForce->setToolTip("<p>" + tr("The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on the uphill.") + "</p>" +
-                                       "<p>" + tr("When mostly downhill driving, the gravity slope force can be negative.") + "</p>");
-
-/*  GER:
-    Summe Kräfte
-    Summe der durchschnittlich benötigten Kraft für den Track für die Überwindung des Luftwiderstands, Rollwiderstands und Neigung.
-    Dieser Wert kann negativ bei starkem Rückwind und/oder Bergabfahrt sein.
-*/
-    labelSumForce->setToolTip("<p>" + tr("Sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.") + "</p>" +
-                              "<p>" + tr("This value can be negative for strong tailwind and/or downhill.") + "</p>");
-
-/*  GER:
-    Pedalkraft
-    Die Kraft in Newton, die im Durchschnitt über alle Trackpunkte auf das Pedal aufgebracht wird.
-    Negative Kräfte aus starken Rückenwind oder Bergabfahrt sind nicht berücksichtigt.
-    Diese Kraft muss durch den Fahrer auf das Pedal aufgebracht werden. Je größer die Trittfrequenz, desto niedriger ist die Pedalkraft.
-*/
-    labelPositivePedalForce->setToolTip("<p>" + tr("The force in Newton applied to the pedal on average over all track points.") + "</p>" +
-                                        "<p>" + tr("Negative forces from strong tail wind or downhill driving are not considered.") + "</p>" +
-                                        "<p>" + tr("This force must be applied to the pedal by the driver.") + "</p>" +
-                                        "<p>" + tr("The higher the pedal cadence, the lower the pedal force.") + "</p>");
-
-/*  GER:
-    Leistung
-    Die Leistung in Watt im Durchschnitt über alle Trackpunkte. Negative Leistung aus starken Rückenwind oder Bergabfahrt sind berücksichtigt.
-*/
-    labelPower->setToolTip("<p>" +tr("The power in Watt on average over all track points.") + "</p>" +
-                           "<p>" +tr("Negative power from strong tailwind or downhill driving are taken into account.") + "</p>");
-
-/*  GER:
-    Positive Leistung
-    Die positive Leistung in Watt, die im Durchschnitt über alle Trackpunkte aufgebracht werden muss.
-    Negative Leistung aus starken Rückenwind oder Bergabfahrt sind nicht berücksichtigt.
-    Diese Leistung muss durch den Fahrer im Durchschnitt für den Track aufgebracht werden.
-*/
-    labelPositivePower->setToolTip("<p>" + tr("The positive power in Watt that must be applied on average for all track points.") + "</p>" +
-                                   "<p>" + tr("Negative power from strong tailwind or downhill driving are not taken into account.") + "</p>" +
-                                   "<p>" + tr("This power must be applied by the driver on average for the track.") + "</p>");
-/*  GER:
-    Leistungsbewegungszeit
-    Die Zeit in Bewegung und gleichzeitiger positiver Leistung durch den Fahrer.
-    Zeiten mit negativer Leistung aus starkem Rückenwind oder Bergabfahrt werden nicht berücksichtigt.
-*/
-    labelPowerMovingTime->setToolTip("<p>" + tr("The time in moving and with positive power by the driver.") + "</p>" +
-                                     "<p>" + tr("Times with negative power in strong tail wind or downhill driving are not taken into account.") + "</p>");
-
-/*  GER:
-    Verhältnis Leistungsbewegungszeit
-    Das Verhältnis der Leistungsbewegungszeit bezogen auf die Track Bewegungszeit in Prozent. Je geringer das Verhältnis ist, desto größer ist der Einfluss von Rückenwind und/oder Bergabfahrt.
-*/
-    labelPowerMovingTimeRatio->setToolTip("<p>" + tr("The ratio of the power moving time related to the track moving time in percent.") + "</p>" +
-                                          "<p>" + tr("The lower the ratio the greater the influence of tailwind and/or downhill driving.") + "</p>");
-
-/*  GER:
-    Energieverbrauch in kJoule
-    Der Energieverbrauch in kJoule für die Umsetzung der positiven Leistung durch den Fahrer.
-    Der Muskel-Wirkungsgrad ist mit 23% angenommen.
-*/
-    labelEnergyKJoule->setToolTip("<p>" + tr("The energy use (consumption) in kJoule by transforming the positive power by the driver.") + "</p>" +
-                                  "<p>" + tr("The muscle efficiency ratio ist considered by 23%.") + "</p>");
-
-/*  GER:
-    Energieverbrauch in kcal
-    Der Energieverbrauch in kcal für die Umsetzung der positiven Leistung durch den Fahrer.
-    Der Muskel-Wirkungsgrad ist mit 23% angenommen.
-*/
-    labelEnergyKcal->setToolTip("<p>" + tr("The energy use (consumption) in kcal by transforming the positive power by the driver.") + "</p>" +
-                                "<p>" + tr("The muscle efficiency ratio ist considered by 23%.") + "</p>");
-
-/*  GER:
-    Lädt das zuletzt gespricherten Parameterset.
-*/
+// How to put this tooltips in the GUI?
     buttonBox->button(QDialogButtonBox::RestoreDefaults)->setToolTip(tr("Load the previous saved parameter set."));
-
-/*  GER:
-    Löschen den Energieverbrauch Wert aus dem Track.
-*/
     buttonBox->button(QDialogButtonBox::Reset)->setToolTip(tr("Remove the Energy Use Cycling value from the track."));
 
     connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(slotOk(bool)));
@@ -482,33 +282,20 @@ void CEnergyCyclingDlg::slotSetPedalCadence(qreal pedalCadence)
 
 void CEnergyCyclingDlg::slotShowHelp()
 {
-//  GER:
-//    Energieverbrauch beim Fahrradfahren
-//    Mit diesem Filter kann der Energieverbrauch beim Fahrradfahren berechnet werden.
-//    Der Wert des Energieverbrauchs kann als Indikator für die Anstregung einer Fahrradtour angesehen werden.
-//    Die Tourlänge, die Geschwindigkeit und die Steigungen werden berücksichtigt.
-//    Um den persönlichen Energieverbrauch einer Tour weiter zu spezifizieren werden zusätzliche Daten benötigt:
-//    Das Gewicht des Fahrers und Fahrrads
-//    Die Luftdichte, Windgeschwindigkeit und die Position im Wind für die Berücksichtigung des Luftwiderstands
-//    Der Untergrund und die Bereifung für die Berücksichtigung des Rollwiderstands
-//    Die Trittfrequenz, um die Pedalkraft zu berechnen
-//    Die Daten werden in diesem Dialog eingegeben und weitere Werte werden hier berechnet und angezeigt.
-//    Der berechnete Energieverbrauch in der Einheit 'kcal' wird im Track gespeichert und kann auch wieder gelöscht werden, sollte er nicht mehr benötigt werden.
-//    Weitere Information werden als Tooltipps für die Eingabe- und Ausgabewerte ausgegeben.
-
-   QString msg =
-        "<h3>" + tr("Set Energy Use for Cycling") + "</h3>" +
-         "<p>" + tr("With this filter your personal energy use (consumption) for a cycling tour can be computed.") + "</p>" +
-         "<p>" + tr("The computed vaule of Energy Use can be see as an indicator for the exertion of a cycling tour.") + "</p>" +
-         "<p>" + tr("The tour length, speed and slope values will be taken into account.") + "</p>" +
-         "<p>" + tr("To individualize your personal energy use the following input data are more needed:") +
-         "<ul><li>" + tr("Drivers and bicyle weight") + "</li>" +
-         "<li>" + tr("Air density, wind speed and position to the wind to consider the wind drag resistance") + "</li>" +
-         "<li>" + tr("Ground situation (tyre and ground) to consider the rolling resistance") + "</li>" +
-         "<li>" + tr("Average pedal cadence for the computation of pedal force") + "</li></ul></p>" +
-         "<p>" + tr("The individualize data will be defined in this dialog and more computed values will be shown here.") + "</p>" +
-         "<p>" + tr("The energy use in unit 'kcal' will be stored in the track and can be remove later on when not longer needed.") + "</p>" +
-         "<p>" + tr("For more information see tooltips on input and output values.") + "</p>";
+    QString msg = tr("<p><b>Set Energy Use for Cycling</b></p>"
+                     "<p>With this filter your personal energy use (consumption) for a cycling tour can be computed.</p>"
+                     "<p>The computed value of \"Energy Use Cycling\" can be see as an indicator for the exertion of a cycling tour.</p>"
+                     "<p>The tour length, speed and slope values will be taken into account.</p>"
+                     "<p>To individualize your personal energy use the following input data are more needed:"
+                     "<ul>"
+                     "<li>Driver and bicyle weight</li>"
+                     "<li>Air density, wind speed and position to the wind to consider the wind drag resistance</li>"
+                     "<li>Ground situation (tyre and ground) to consider the rolling resistance</li>"
+                     "<li>Average pedal cadence for the computation of pedal force</li>"
+                     "</ul></p>"
+                     "<p>The individualize data will be defined in this dialog and more computed values will be shown here.</p>"
+                     "<p>The energy use in unit 'kcal' will be stored in the track and can be remove later on when no longer needed.</p>"
+                     "<p>For more information see tooltips on input and output values.</p>");
 
     QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"), msg);
 }

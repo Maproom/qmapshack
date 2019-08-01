@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1002</width>
-    <height>312</height>
+    <width>989</width>
+    <height>335</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,7 +91,7 @@
        <item row="5" column="5">
         <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>Positive Pedal Force</string>
+          <string>Positive Pedal Force:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -101,7 +101,7 @@
        <item row="4" column="5">
         <widget class="QLabel" name="label_26">
          <property name="text">
-          <string>Gravity Slope Force</string>
+          <string>Gravity Slope Force:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -111,14 +111,15 @@
        <item row="9" column="1">
         <widget class="QComboBox" name="comboGround">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;Predefined selection for the type of ground surface and the tyres.&lt;/p&gt;
+&lt;p&gt;Used to determine the rolling resistance coefficient.&lt;/p&gt;</string>
          </property>
         </widget>
        </item>
        <item row="7" column="0">
         <widget class="QLabel" name="label_16">
          <property name="text">
-          <string>Frontal Area</string>
+          <string>Frontal Area:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -131,7 +132,7 @@
           <string/>
          </property>
          <property name="text">
-          <string>Total Weight</string>
+          <string>Total Weight:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -141,7 +142,7 @@
        <item row="9" column="0">
         <widget class="QLabel" name="label_14">
          <property name="text">
-          <string>Ground/Tyres</string>
+          <string>Ground/Tyres:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -164,7 +165,7 @@
        <item row="9" column="7">
         <widget class="QLabel" name="label_35">
          <property name="text">
-          <string>Energy Use</string>
+          <string>Energy Use:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -174,7 +175,7 @@
        <item row="3" column="8">
         <widget class="QLabel" name="labelRollResistForce">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The rolling resistance force is the force in Newton required on average over all track points to overcome the rolling resistance.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -184,7 +185,13 @@
        <item row="3" column="1">
         <widget class="QDoubleSpinBox" name="spinAirDensity">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;Air density in kg/m3. The air density depends on barometric air pressure, altitude and temperature.&lt;/p&gt;
+&lt;p&gt;Examples:
+&lt;ul&gt;
+&lt;li&gt;Sea level: 1.226kg/m3&lt;/li&gt;
+&lt;li&gt;1500 meter: 1.056kg/m3&lt;/li&gt;
+&lt;li&gt;3000 meter: 0.905kg/m3&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;</string>
          </property>
          <property name="suffix">
           <string>kg/m3</string>
@@ -209,7 +216,7 @@
        <item row="9" column="2">
         <widget class="QLabel" name="label_17">
          <property name="text">
-          <string>Rolling Coeff</string>
+          <string>Rolling Coeff:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -219,7 +226,7 @@
        <item row="3" column="5">
         <widget class="QLabel" name="label_23">
          <property name="text">
-          <string>Air Resistance Force</string>
+          <string>Air Resistance Force:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -232,7 +239,7 @@
           <string/>
          </property>
          <property name="text">
-          <string>Bike Weight</string>
+          <string>Bike Weight:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -242,7 +249,10 @@
        <item row="5" column="6">
         <widget class="QLabel" name="labelPositivePedalForce">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The force in Newton applied to the pedal on average over all track points.&lt;/p&gt;
+&lt;p&gt;Negative forces from strong tail wind or downhill driving are not considered.&lt;/p&gt;
+&lt;p&gt;This force must be applied to the pedal by the driver.&lt;/p&gt;
+&lt;p&gt;The higher the pedal cadence, the lower the pedal force.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;0000N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -252,7 +262,8 @@
        <item row="9" column="6">
         <widget class="QLabel" name="labelEnergyKJoule">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The energy use (consumption) in kJoule by transforming the positive power by the driver.&lt;/p&gt;
+&lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00000kJ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -262,7 +273,9 @@
        <item row="7" column="3">
         <widget class="QDoubleSpinBox" name="spinWindDragCoeff">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The cw value (drag coefficient) indicates the wind slip of the driver and bicycle in relation to the air (wind).&lt;/p&gt;
+&lt;p&gt;The greater this value, the more force is required to overcome the wind force.&lt;/p&gt;
+&lt;p&gt;Typical values for bicycles are between 0.2 and 1.2.&lt;/p&gt;</string>
          </property>
          <property name="suffix">
           <string/>
@@ -287,7 +300,7 @@
        <item row="7" column="5">
         <widget class="QLabel" name="label_31">
          <property name="text">
-          <string>Pos. Power Moving Time</string>
+          <string>Pos. Power Moving Time:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -297,7 +310,9 @@
        <item row="3" column="6">
         <widget class="QLabel" name="labelAirResistForce">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The air resistance force is the force in Newton required on average over all track points to overcome the air resistance.&lt;/p&gt;
+&lt;p&gt;The airstream, headwind and tailwind are taken into account.&lt;/p&gt;
+&lt;p&gt;With a strong tailwind this value can be negative.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -307,7 +322,7 @@
        <item row="2" column="3">
         <widget class="QDoubleSpinBox" name="spinBikeWeight">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The weight of the bicycle in kg including luggage.&lt;/p&gt;</string>
          </property>
          <property name="suffix">
           <string>kg</string>
@@ -332,14 +347,14 @@
        <item row="6" column="1">
         <widget class="QComboBox" name="comboWindPosition">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;Values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).&lt;/p&gt;</string>
          </property>
         </widget>
        </item>
        <item row="5" column="0">
         <widget class="QLabel" name="label_19">
          <property name="text">
-          <string>Pedal Cadence</string>
+          <string>Pedal Cadence:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -349,7 +364,7 @@
        <item row="7" column="1">
         <widget class="QDoubleSpinBox" name="spinFrontalArea">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The frontal area in m2 (driver, bicycle, bags, etc.) exposed to the wind.&lt;/p&gt;</string>
          </property>
          <property name="suffix">
           <string>m2</string>
@@ -374,7 +389,8 @@
        <item row="9" column="8">
         <widget class="QLabel" name="labelEnergyKcal">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The energy use (consumption) in kcal by transforming the positive power by the driver.&lt;/p&gt;
+&lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;00000kcal&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -384,7 +400,7 @@
        <item row="3" column="0">
         <widget class="QLabel" name="label_6">
          <property name="text">
-          <string>Air Density</string>
+          <string>Air Density:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -394,7 +410,10 @@
        <item row="9" column="3">
         <widget class="QDoubleSpinBox" name="spinRollingCoeff">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The rolling resistance coefficient specifies the force used to overcome the rolling resistance.&lt;/p&gt;
+&lt;p&gt;The relevant factors are the road surface and the tyres.&lt;/p&gt;
+&lt;p&gt;The higher this value is, the more force is required to overcome the rolling resistance.&lt;/p&gt;
+</string>
          </property>
          <property name="buttonSymbols">
           <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -422,7 +441,7 @@
        <item row="7" column="2">
         <widget class="QLabel" name="label_15">
          <property name="text">
-          <string>Wind Drag Coeff</string>
+          <string>Wind Drag Coeff:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -432,7 +451,7 @@
        <item row="2" column="6">
         <widget class="QLabel" name="labelTotalWeight">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The total weight in kg of driver and bike including clothes and luggage.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0kg&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -442,7 +461,8 @@
        <item row="7" column="6">
         <widget class="QLabel" name="labelPowerMovingTime">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The time in moving and with positive power by the driver.&lt;/p&gt;
+&lt;p&gt;Times with negative power in strong tail wind or downhill driving are not taken into account.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00:00:00h&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -452,7 +472,8 @@
        <item row="4" column="6">
         <widget class="QLabel" name="labelGravitySlopeForce">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on the uphill.&lt;/p&gt;
+&lt;p&gt;When mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -462,7 +483,7 @@
        <item row="6" column="7">
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Avg Positive Power</string>
+          <string>Avg Positive Power:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -472,7 +493,7 @@
        <item row="4" column="2">
         <widget class="QLabel" name="label_9">
          <property name="text">
-          <string>Wind Speed km/h</string>
+          <string>Wind Speed km/h:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -482,7 +503,7 @@
        <item row="9" column="5">
         <widget class="QLabel" name="label_11">
          <property name="text">
-          <string>Energy Use</string>
+          <string>Energy Use:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -492,7 +513,7 @@
        <item row="7" column="7">
         <widget class="QLabel" name="label_33">
          <property name="text">
-          <string>Ratio to Moving Time</string>
+          <string>Ratio to Moving Time:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -502,7 +523,7 @@
        <item row="6" column="5">
         <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>Average Power</string>
+          <string>Average Power:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -512,7 +533,8 @@
        <item row="4" column="8">
         <widget class="QLabel" name="labelSumForce">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;Sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.&lt;/p&gt;
+&lt;p&gt;This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -522,7 +544,7 @@
        <item row="4" column="7">
         <widget class="QLabel" name="label_28">
          <property name="text">
-          <string>Sum Forces</string>
+          <string>Sum Forces:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -532,7 +554,8 @@
        <item row="5" column="1">
         <widget class="QDoubleSpinBox" name="spinPedalCadence">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the pedal force.&lt;/p&gt;
+&lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</string>
          </property>
          <property name="suffix">
           <string>rpm</string>
@@ -557,14 +580,16 @@
        <item row="4" column="1">
         <widget class="QComboBox" name="comboWindSpeed">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;Values for the wind speed in Beaufort scale for specifying the wind speed in km/h.&lt;/p&gt;
+&lt;p&gt;Positive values for headwind and negative values for tailwind.&lt;/p&gt;</string>
          </property>
         </widget>
        </item>
        <item row="6" column="6">
         <widget class="QLabel" name="labelPower">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The power in Watt on average over all track points.&lt;/p&gt;
+&lt;p&gt;Negative power from strong tailwind or downhill driving are taken into account.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0W&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -577,7 +602,7 @@
           <string/>
          </property>
          <property name="text">
-          <string>Driver Weight</string>
+          <string>Driver Weight:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -587,7 +612,7 @@
        <item row="3" column="7">
         <widget class="QLabel" name="label_24">
          <property name="text">
-          <string>Rolling Resist. Force</string>
+          <string>Rolling Resist. Force:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -597,7 +622,9 @@
        <item row="6" column="8">
         <widget class="QLabel" name="labelPositivePower">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The positive power in Watt that must be applied on average for all track points.&lt;/p&gt;
+&lt;p&gt;Negative power from strong tailwind or downhill driving are not taken into account.&lt;/p&gt;
+&lt;p&gt;This power must be applied by the driver on average for the track.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0W&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -607,7 +634,9 @@
        <item row="4" column="3">
         <widget class="QDoubleSpinBox" name="spinWindSpeed">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The wind speed in km/h is taken into account when calculating the force required to overcome the air drag. &lt;/p&gt;
+&lt;p&gt;Positive values for headwind and negative values for tailwind are taken into account.&lt;/p&gt;
+&lt;p&gt;The value can be changed independently of the Beaufort scale values.&lt;/p&gt;</string>
          </property>
          <property name="suffix">
           <string>km/h</string>
@@ -629,7 +658,8 @@
        <item row="7" column="8">
         <widget class="QLabel" name="labelPowerMovingTimeRatio">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The ratio of the power moving time related to the track moving time in percent.&lt;/p&gt;
+&lt;p&gt;The lower the ratio the greater the influence of tailwind and/or downhill driving.&lt;/p&gt;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00.0%&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -639,7 +669,7 @@
        <item row="6" column="0">
         <widget class="QLabel" name="label_13">
          <property name="text">
-          <string>Position in Wind</string>
+          <string>Position in Wind:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -649,7 +679,7 @@
        <item row="2" column="1">
         <widget class="QDoubleSpinBox" name="spinDriverWeight">
          <property name="toolTip">
-          <string/>
+          <string>&lt;p&gt;The weight of the bicycle in kg including luggage.&lt;/p&gt;</string>
          </property>
          <property name="whatsThis">
           <string/>
@@ -677,7 +707,7 @@
        <item row="4" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Wind Speed Bft</string>
+          <string>Wind Speed Bft:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

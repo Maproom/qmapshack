@@ -23,21 +23,44 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     setupUi(this);
     setWindowFlag(Qt::Tool, true);
     setWindowFlag(Qt::WindowStaysOnTopHint, true);
-    //connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
-    QString explanation = tr("<p>The underlying syntax of the search is \"Property Comparison Value\", i.e. \"name contains water\". "
-                             "However there are measures in place to make searching more intuitive. (see below)</p>"
-                             "<p>The searches are always exclusive, thus for a track \"elevation under 500m\" only shows "
-                             "tracks that are completly under 500m meters.</p>"
-                             "<p>Following assumptions are made:</p>"
-                             "<ul>"
-                             "<li>If only one of two given numbers has a unit, the unit is assumed for both</li>"
-                             "<li>Speed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date.</li>"
-                             "<li>'Date equals' matches everything that is within 24h from the given date, thus normally the day typed.</li>"
-                             "<li>If you enter no unit the default unit (what you see when viewing the property of the item) is used.</li>"
-                             "</ul>"
-                             );
-
-    explanation += tr("<p>You can write Dates in the following formats:</p>");
+    QString explanation = tr("<p>The underlying syntax of the search is 'property comparison value', e.g. 'name contains water'. "
+                             "However some rules apply to make a search more intuitive.</p>");
+    explanation += tr(  "<p>The searches are always exclusive, e.g. searching for a track 'elevation under 500m' will find "
+                        "tracks that are completly under 500m meters.</p>");
+    explanation += tr(  "<p>Following assumptions are made:</p>");
+    explanation += "<ul>";
+    explanation += "<li>";
+    explanation += tr(  "If only one of the two given values has a unit the unit is assumed for both");
+    explanation += "</li>";
+    explanation += "<li>";
+    explanation += tr(  "If a search string in the short form 'comparison value' is used "
+                        "the property is derived from the value and its unit: ");
+    explanation += "<ul>";
+    explanation += "<li>";
+    explanation += tr(  "speed units: average speed");
+    explanation += "</li> ";
+    explanation += "<li>";
+    explanation += tr(  "km and mi: distance");
+    explanation += "</li>";
+    explanation += "<li>";
+    explanation += tr(  "m and ft: elevation");
+    explanation += "</li>";
+    explanation += "<li>";
+    explanation += tr(  "time: time moving");
+    explanation += "</li>";
+    explanation += "<li>";
+    explanation += tr(  "date: date");
+    explanation += "</li> ";
+    explanation += "</ul>";
+    explanation += "</li>";
+    explanation += "<li>";
+    explanation += tr(  "'Date equals' matches everything that is within 24h of the current day.");
+    explanation += "</li>";
+    explanation += "<li>";
+    explanation += tr(  "If you enter no unit the default unit (what you see when viewing the property of the item) is used.");
+    explanation += "</li>";
+    explanation += "</ul>";
+    explanation += tr(  "<p>You can write dates in the following formats:</p>");
     explanation += "<ul>";
     explanation += "<li>" + QLocale::system().dateTimeFormat(QLocale::LongFormat) + "</li>";
     explanation += "<li>" + QLocale::system().dateTimeFormat(QLocale::ShortFormat) + "</li>";

@@ -1921,332 +1921,332 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1096"/>
         <source>QMS Attribute Flag</source>
-        <translation type="unfinished"></translation>
+        <translation>QMS флаг атрибутов</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1097"/>
         <source>Dogs</source>
-        <translation type="unfinished"></translation>
+        <translation>Собаки</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1098"/>
         <source>Access or parking fee</source>
-        <translation type="unfinished"></translation>
+        <translation>Плата за доступ или парковку</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1099"/>
         <source>Climbing gear</source>
-        <translation type="unfinished"></translation>
+        <translation>Снаряжение для скалолазания</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1100"/>
         <source>Boat</source>
-        <translation type="unfinished"></translation>
+        <translation>Нужна лодка</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1101"/>
         <source>Scuba gear</source>
-        <translation type="unfinished"></translation>
+        <translation>Нужен акваланг</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1102"/>
         <source>Recommended for kids</source>
-        <translation type="unfinished"></translation>
+        <translation>Рекомендуется для детей</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1103"/>
         <source>Takes less than an hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Занимает меньше часа</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1104"/>
         <source>Scenic view</source>
-        <translation type="unfinished"></translation>
+        <translation>Прекрасный вид</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1105"/>
         <source>Significant hike</source>
-        <translation type="unfinished"></translation>
+        <translation>Много идти пешком</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1106"/>
         <source>Difficult climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Трудное лазание</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1107"/>
         <source>May require wading</source>
-        <translation type="unfinished"></translation>
+        <translation>Возможен брод</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1108"/>
         <source>May require swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Возможно, придется плыть</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1109"/>
         <source>Available at all times</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступен все время</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1110"/>
         <source>Recommended at night</source>
-        <translation type="unfinished"></translation>
+        <translation>Рекомендуется ночью</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1111"/>
         <source>Available during winter</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступен зимой</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1113"/>
         <source>Poison plants</source>
-        <translation type="unfinished"></translation>
+        <translation>Ядовитые растения</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1114"/>
         <source>Dangerous Animals</source>
-        <translation type="unfinished"></translation>
+        <translation>Опасные животные</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1115"/>
         <source>Ticks</source>
-        <translation type="unfinished"></translation>
+        <translation>Клещи</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1116"/>
         <source>Abandoned mines</source>
-        <translation type="unfinished"></translation>
+        <translation>Заброшенные рудники</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1117"/>
         <source>Cliff / falling rocks</source>
-        <translation type="unfinished"></translation>
+        <translation>Скалы / камнепад</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1118"/>
         <source>Hunting</source>
-        <translation type="unfinished"></translation>
+        <translation>Охота</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1119"/>
         <source>Dangerous area</source>
-        <translation type="unfinished"></translation>
+        <translation>Опасный район</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1120"/>
         <source>Wheelchair accessible</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступно для инвалидного кресла</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1121"/>
         <source>Parking available</source>
-        <translation type="unfinished"></translation>
+        <translation>Есть парковка</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1122"/>
         <source>Public transportation</source>
-        <translation type="unfinished"></translation>
+        <translation>Общественный транспорт</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1123"/>
         <source>Drinking water nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Рядом есть питьевая вода</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1124"/>
         <source>Public restrooms nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Рядом есть туалеты</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1125"/>
         <source>Telephone nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Рядом есть телефон</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1126"/>
         <source>Picnic tables nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Рядом столы для пикника</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1127"/>
         <source>Camping available</source>
-        <translation type="unfinished"></translation>
+        <translation>Можно с палаткой</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1128"/>
         <source>Bicycles</source>
-        <translation type="unfinished"></translation>
+        <translation>Велосипеды</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1129"/>
         <source>Motorcycles</source>
-        <translation type="unfinished"></translation>
+        <translation>Мотоциклы</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1130"/>
         <source>Quads</source>
-        <translation type="unfinished"></translation>
+        <translation>Квадроциклы</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1131"/>
         <source>Off-road vehicles</source>
-        <translation type="unfinished"></translation>
+        <translation>Внедорожники</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1132"/>
         <source>Snowmobiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Снегоходы</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1133"/>
         <source>Horses</source>
-        <translation type="unfinished"></translation>
+        <translation>Лошади</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1134"/>
         <source>Campfires</source>
-        <translation type="unfinished"></translation>
+        <translation>Костры</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1135"/>
         <source>Thorns</source>
-        <translation type="unfinished"></translation>
+        <translation>Колючки</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1136"/>
         <source>Stealth required</source>
-        <translation type="unfinished"></translation>
+        <translation>Требуется скрытность</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1137"/>
         <source>Stroller accessible</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступно для прогулочной коляски</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1138"/>
         <source>Needs maintenance</source>
-        <translation type="unfinished"></translation>
+        <translation>Нужна проверка</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1139"/>
         <source>Watch for livestock</source>
-        <translation type="unfinished"></translation>
+        <translation>Скот</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1140"/>
         <source>Flashlight required</source>
-        <translation type="unfinished"></translation>
+        <translation>Нужен фонарик</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1142"/>
         <source>Truck Driver/RV</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоприцепы</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1143"/>
         <source>Field Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Загадка на местности</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1144"/>
         <source>UV Light Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Нужна УФ-лампа</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1145"/>
         <source>Snowshoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Нужны снегоступы</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1146"/>
         <source>Cross Country Skis</source>
-        <translation type="unfinished"></translation>
+        <translation>Нужны лыжи для кросс-кантри</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1147"/>
         <source>Special Tool Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Нужен специальный инструмент</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1148"/>
         <source>Night Cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Ночной тайник</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1149"/>
         <source>Park and Grab</source>
-        <translation type="unfinished"></translation>
+        <translation>Припарковался и нашел</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1150"/>
         <source>Abandoned Structure</source>
-        <translation type="unfinished"></translation>
+        <translation>Заброшенное строение</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1151"/>
         <source>Short hike (less than 1km)</source>
-        <translation type="unfinished"></translation>
+        <translation>Короткая прогулка (менее 1 км)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1152"/>
         <source>Medium hike (1km-10km)</source>
-        <translation type="unfinished"></translation>
+        <translation>Средняя прогулка (1 км - 10 км)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1153"/>
         <source>Long Hike (+10km)</source>
-        <translation type="unfinished"></translation>
+        <translation>Долго идти пешком (10 км и больше)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1154"/>
         <source>Fuel Nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Рядом автозаправка</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1155"/>
         <source>Food Nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Рядом кафе (еда)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1156"/>
         <source>Wireless Beacon</source>
-        <translation type="unfinished"></translation>
+        <translation>Беспроводной передатчик</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1157"/>
         <source>Partnership cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Партнерский тайник</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1158"/>
         <source>Seasonal Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Сезонный доступ</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1159"/>
         <source>Tourist Friendly</source>
-        <translation type="unfinished"></translation>
+        <translation>Удобен для туристов</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1160"/>
         <source>Tree Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Нужно лезть на дерево</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1161"/>
         <source>Front Yard (Private Residence)</source>
-        <translation type="unfinished"></translation>
+        <translation>Двор частного дома</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1162"/>
         <source>Teamwork Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Нужно работать в команде</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1163"/>
         <source>GeoTour</source>
-        <translation type="unfinished"></translation>
+        <translation>GeoTour</translation>
     </message>
 </context>
 <context>
@@ -2729,17 +2729,17 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <location filename="../gis/CGisWorkspace.cpp" line="183"/>
         <location filename="../gis/CGisWorkspace.cpp" line="187"/>
         <source>Error parsing search.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка разбора строки поиска.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="183"/>
         <source>Continuing with search for match in names</source>
-        <translation type="unfinished"></translation>
+        <translation>Продолжаем поиск совпадения в именам</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="187"/>
         <source>Continuing with search for match in full text</source>
-        <translation type="unfinished"></translation>
+        <translation>Продолжение поиска совпадения в полном тексте</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="204"/>
@@ -2749,7 +2749,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="207"/>
         <source>Case sensitivity</source>
-        <translation type="unfinished"></translation>
+        <translation>Учитывать регистр</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="291"/>
@@ -5869,566 +5869,566 @@ For configuration you need to know your Android device&apos;s IP address or it&a
         <location filename="../gis/search/CSearch.h" line="152"/>
         <location filename="../gis/search/CSearch.h" line="162"/>
         <source>No information available</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет информации</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="86"/>
         <location filename="../gis/search/CSearch.cpp" line="87"/>
         <location filename="../gis/search/CSearch.cpp" line="191"/>
         <source>and</source>
-        <translation type="unfinished"></translation>
+        <translation>и</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="374"/>
         <location filename="../gis/search/CSearch.cpp" line="405"/>
         <source>with</source>
-        <translation type="unfinished"></translation>
+        <translation>содержащий</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="375"/>
         <location filename="../gis/search/CSearch.cpp" line="406"/>
         <source>contains</source>
-        <translation type="unfinished"></translation>
+        <translation>содержит</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="376"/>
         <location filename="../gis/search/CSearch.cpp" line="407"/>
         <source>containing</source>
-        <translation type="unfinished"></translation>
+        <translation>содержащий</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="377"/>
         <location filename="../gis/search/CSearch.cpp" line="408"/>
         <source>without</source>
-        <translation type="unfinished"></translation>
+        <translation>без</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="378"/>
         <location filename="../gis/search/CSearch.cpp" line="409"/>
         <source>shorter than</source>
-        <translation type="unfinished"></translation>
+        <translation>короче</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="379"/>
         <location filename="../gis/search/CSearch.cpp" line="410"/>
         <source>smaller than</source>
-        <translation type="unfinished"></translation>
+        <translation>меньше</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="380"/>
         <location filename="../gis/search/CSearch.cpp" line="411"/>
         <source>under</source>
-        <translation type="unfinished"></translation>
+        <translation>ниже</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="381"/>
         <location filename="../gis/search/CSearch.cpp" line="412"/>
         <source>lower than</source>
-        <translation type="unfinished"></translation>
+        <translation>ниже</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="382"/>
         <location filename="../gis/search/CSearch.cpp" line="413"/>
         <source>earlier than</source>
-        <translation type="unfinished"></translation>
+        <translation>раньше</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="383"/>
         <location filename="../gis/search/CSearch.cpp" line="414"/>
         <source>before</source>
-        <translation type="unfinished"></translation>
+        <translation>раньше</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="384"/>
         <location filename="../gis/search/CSearch.cpp" line="415"/>
         <source>less than</source>
-        <translation type="unfinished"></translation>
+        <translation>меньше</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="386"/>
         <location filename="../gis/search/CSearch.cpp" line="417"/>
         <source>longer than</source>
-        <translation type="unfinished"></translation>
+        <translation>больше</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="387"/>
         <location filename="../gis/search/CSearch.cpp" line="418"/>
         <source>higher than</source>
-        <translation type="unfinished"></translation>
+        <translation>выше</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="388"/>
         <location filename="../gis/search/CSearch.cpp" line="419"/>
         <source>bigger than</source>
-        <translation type="unfinished"></translation>
+        <translation>больше</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="389"/>
         <location filename="../gis/search/CSearch.cpp" line="420"/>
         <source>greater than</source>
-        <translation type="unfinished"></translation>
+        <translation>больше</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="390"/>
         <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>above</source>
-        <translation type="unfinished"></translation>
+        <translation>выше</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="391"/>
         <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>over</source>
-        <translation type="unfinished"></translation>
+        <translation>выше</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="392"/>
         <location filename="../gis/search/CSearch.cpp" line="423"/>
         <source>after</source>
-        <translation type="unfinished"></translation>
+        <translation>позднее</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="393"/>
         <location filename="../gis/search/CSearch.cpp" line="424"/>
         <source>later than</source>
-        <translation type="unfinished"></translation>
+        <translation>позднее</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="395"/>
         <location filename="../gis/search/CSearch.cpp" line="426"/>
         <source>regex</source>
-        <translation type="unfinished"></translation>
+        <translation>regex</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="397"/>
         <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>equals</source>
-        <translation type="unfinished"></translation>
+        <translation>равняется</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="398"/>
         <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>between</source>
-        <translation type="unfinished"></translation>
+        <translation>между</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="405"/>
         <source>example: attributes with dog</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: атрибуты без отрицания содержащий Собаки</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="406"/>
         <source>example: name contains bike</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: имя содержит велосипед</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="407"/>
         <source>example: name containin bike</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: имя содержащий велосипед</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="408"/>
         <source>example: name without water</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: имя без вода</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="409"/>
         <source>example: shorter than 5km</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: короче 5km</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="410"/>
         <source>example: area smaller than 5m²</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: площадь меньше 5м²</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="411"/>
         <source>example: elevation under 1000ft</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: высота ниже 1000ft</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="412"/>
         <source>example: lower than 500m</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: ниже 500m</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="413"/>
         <source>example: date earlier than 2015</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: дата раньше 2015</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="414"/>
         <source>example: date before 10.05.2017</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: дата раньше 10.05.2017</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="415"/>
         <source>example: ascent less than 500m</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: подъём меньше 500м</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="416"/>
         <source>example: D &lt; 3</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: D &lt; 3</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="417"/>
         <source>example: distance longer than 20mi</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: расстояние больше 20mi</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="418"/>
         <source>example: terrain higher than 2</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: местность выше 2</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="419"/>
         <source>example: area bigger than 50m²</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: площадь больше 50м²</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="420"/>
         <source>example: descent greater than 3000ft</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: спуск больше 3000ft</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>example: above 50m</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: выше 50м</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>example: elevation over 400m</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: высота выше 400m</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="423"/>
         <source>example: date after 2013</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: дата позднее 2013</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="424"/>
         <source>example: date later than 2015</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: дата позднее 2015</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="425"/>
         <source>example: T &gt; 4</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: местность &gt; 4</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="426"/>
         <source>example: size regex (regular|large)</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: размер regex  (regular|large)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="427"/>
         <source>example: size = micro</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: размер = micro</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>example: activity equals bike</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: активность равняется велосипед</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>example: length between 20km and 20mi</source>
-        <translation type="unfinished"></translation>
+        <translation>пример: длина между 20км и 20mi</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="437"/>
         <source>name</source>
-        <translation type="unfinished"></translation>
+        <translation>имя</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="438"/>
         <source>full text</source>
-        <translation type="unfinished"></translation>
+        <translation>полный текст</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="439"/>
         <source>elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>высота</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="440"/>
         <source>date</source>
-        <translation type="unfinished"></translation>
+        <translation>дата</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="441"/>
         <source>comment</source>
-        <translation type="unfinished"></translation>
+        <translation>комментарий</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="442"/>
         <source>description</source>
-        <translation type="unfinished"></translation>
+        <translation>описание</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="445"/>
         <source>area</source>
-        <translation type="unfinished">область</translation>
+        <translation>площадь</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="448"/>
         <source>difficulty</source>
-        <translation type="unfinished"></translation>
+        <translation>доступность</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="450"/>
         <source>terrain</source>
-        <translation type="unfinished"></translation>
+        <translation>местность</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="451"/>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>местность</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="452"/>
         <source>positive attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>атрибуты без отрицания</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="453"/>
         <source>non-negated attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>атрибуты без отрицания</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="454"/>
         <source>negated attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>атрибуты с отрицанием</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="455"/>
         <source>size</source>
-        <translation type="unfinished"></translation>
+        <translation>размер</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="456"/>
         <source>GCCode</source>
-        <translation type="unfinished"></translation>
+        <translation>GCCode</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="457"/>
         <source>GCName</source>
-        <translation type="unfinished"></translation>
+        <translation>GCName</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="462"/>
         <source>distance</source>
-        <translation type="unfinished"></translation>
+        <translation>расстояние</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="463"/>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>длина</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="464"/>
         <source>ascent</source>
-        <translation type="unfinished"></translation>
+        <translation>подъём</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="465"/>
         <source>elevation gain</source>
-        <translation type="unfinished"></translation>
+        <translation>подъём</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="466"/>
         <source>descent</source>
-        <translation type="unfinished"></translation>
+        <translation>спуск</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="467"/>
         <source>min elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>мин высота</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="468"/>
         <source>minimal elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>минимальная высота</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="469"/>
         <source>max elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>макс высота</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="470"/>
         <source>maximal elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>максимальная высота</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="471"/>
         <source>max speed</source>
-        <translation type="unfinished"></translation>
+        <translation>макс скорость</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="472"/>
         <source>maximal speed</source>
-        <translation type="unfinished"></translation>
+        <translation>максимальная скорость</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="473"/>
         <source>min speed</source>
-        <translation type="unfinished"></translation>
+        <translation>мин скорость</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="474"/>
         <source>minimal speed</source>
-        <translation type="unfinished"></translation>
+        <translation>минимальная скорость</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="475"/>
         <source>average speed</source>
-        <translation type="unfinished"></translation>
+        <translation>средняя скорость</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="476"/>
         <source>activity</source>
-        <translation type="unfinished"></translation>
+        <translation>активность</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="477"/>
         <source>total time</source>
-        <translation type="unfinished"></translation>
+        <translation>общее время</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="478"/>
         <source>duration</source>
-        <translation type="unfinished"></translation>
+        <translation>продолжительность</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="479"/>
         <source>time moving</source>
-        <translation type="unfinished"></translation>
+        <translation>время движения</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="488"/>
         <source>searches the name of the item. For Geocaches this is &quot;Name - GCCode&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск имени элемента. Для тайников это &quot;имя-GCCode&quot;.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="489"/>
         <source>searches the full text</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск в полном тексте</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="490"/>
         <source>searches the elevation. For items consisting of multiple points the minimum and the maximum is used</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск высоты. Для элементов, состоящих из нескольких точек используется все точки.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="491"/>
         <source>searches the Date</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск даты</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="492"/>
         <source>searches the Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск в комментарии</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="493"/>
         <source>searches the Description</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск в описании</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="496"/>
         <source>searches the area</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск площади</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="499"/>
         <source>searches the difficulty rating of a geocache</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск рейтинга доступности тайника</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="500"/>
         <source>searches the terrain rating of a geocache</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск рейтинга местности тайника</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="501"/>
         <source>searches the translated meanings of the non-negated attributes (Those not crossed out)</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск значений атрибутов без отрицаниея (не зачеркнутых)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="502"/>
         <source>searches the translated meanings of the negated attributes (Those crossed out)</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск значений атрибутов с отрицанием (зачеркнутых)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="503"/>
         <source>searches the size of a geocache. (micro, small, regular, large)</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск размера тайника  (micro, small, regular, large)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="504"/>
         <source>searches the GCCode of a geocache.</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск в GCCode тайника</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="505"/>
         <source>searches the Name of a geocache.</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск имени тайника</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="510"/>
         <source>searches the distance covered by a route or track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск расстояния, пройденного маршрутом или треком</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="511"/>
         <source>searches the total ascent in a route or track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск общего подъема маршрута или трека</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="512"/>
         <source>searches the total descent in a route or track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск общего спуска маршрута или трека</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="513"/>
         <source>searches the minimal elevation in a route or track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск минимальной высоты маршрута или трека</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="514"/>
         <source>searches the maximal elevation in a route or track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск максимальной высоты маршрута или трека</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="515"/>
         <source>searches the maximal speed in a track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск максимальной скорости трека</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="516"/>
         <source>searches the minimal speed in a track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск минимальной скорости трека</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="517"/>
         <source>searches the average speed in a track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск средней скорости трека</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="518"/>
         <source>searches the activity of a route or track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск активности трека</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="519"/>
         <source>searches the total time spent on a route or track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск общего времени, затраченного на трек</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="520"/>
         <source>searches the time spent moving on a track</source>
-        <translation type="unfinished"></translation>
+        <translation>поиск времени, затраченного на перемещение по треку</translation>
     </message>
 </context>
 <context>
@@ -6442,29 +6442,92 @@ For configuration you need to know your Android device&apos;s IP address or it&a
 <context>
     <name>CSearchExplanationDialog</name>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="27"/>
         <source>&lt;p&gt;The underlying syntax of the search is &quot;Property Comparison Value&quot;, i.e. &quot;name contains water&quot;. However there are measures in place to make searching more intuitive. (see below)&lt;/p&gt;&lt;p&gt;The searches are always exclusive, thus for a track &quot;elevation under 500m&quot; only shows tracks that are completly under 500m meters.&lt;/p&gt;&lt;p&gt;Following assumptions are made:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;If only one of two given numbers has a unit, the unit is assumed for both&lt;/li&gt;&lt;li&gt;Speed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date.&lt;/li&gt;&lt;li&gt;&apos;Date equals&apos; matches everything that is within 24h from the given date, thus normally the day typed.&lt;/li&gt;&lt;li&gt;If you enter no unit the default unit (what you see when viewing the property of the item) is used.&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation type="vanished">&lt;p&gt;Основной синтаксис поиска: &quot;свойство сравнение значение&quot;, т. е. &quot;имя содержит вода&quot;. Однако есть некоторые меры, чтобы сделать поиск более интуитивным (смотреть ниже).&lt;/p&gt;&lt;p&gt;Поиск всегда является эксклюзивным, поэтому для трека поиск &quot;высота ниже 500 м&quot; найдет только те треки, которые полностью находятся ниже 500 м.&lt;/p&gt;&lt;p&gt;Сделаны следующие предположения:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Если только одно из двух заданных чисел имеет единицу, данная единица принимается для обоих чисел&lt;/li&gt;&lt;li&gt;Если задана строка поиска в краткой форме &quot;сравнение значение&quot;, то &quot;свойство&quot; выводится из &quot;значения&quot; и его единицы измерения: единицы измерения скорости: средняя скорость, км и mi: расстояние, м и ft: высота, время: время движения, дата: дата.&lt;/li&gt;&lt;li&gt;&quot;Дата равна&quot; соответствует всему, что находится в пределах 24 часов от данной даты, таким образом, это обычно записанный день.&lt;/li&gt;&lt;li&gt;Если вы не вводите единицу измерения, тогда используется единица измерения по умолчанию (та, что вы видите при просмотре свойств элемента).&lt;/li&gt;&lt;/ul&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="30"/>
+        <source>&lt;p&gt;Following assumptions are made:&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="28"/>
+        <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completly under 500m meters.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="26"/>
+        <source>&lt;p&gt;The underlying syntax of the search is &apos;property comparison value&apos;, e.g. &apos;name contains water&apos;. However some rules apply to make a search more intuitive.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="33"/>
+        <source>If only one of the two given values has a unit the unit is assumed for both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="36"/>
+        <source>If a search string in the short form &apos;comparison value&apos; is used the property is derived from the value and its unit: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="40"/>
-        <source>&lt;p&gt;You can write Dates in the following formats:&lt;/p&gt;</source>
+        <source>speed units: average speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="47"/>
-        <source>&lt;p&gt;The search can only convert following units:&lt;/p&gt;</source>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="43"/>
+        <source>km and mi: distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="46"/>
+        <source>m and ft: elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="49"/>
-        <source>&lt;p&gt;The regex search uses this syntax: https://perldoc.perl.org/perlre.html&lt;/p&gt;</source>
+        <source>time: time moving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="50"/>
-        <source>&lt;p&gt;Following keywords are available for searching:&lt;/p&gt;</source>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="52"/>
+        <source>date: date</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
+        <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="63"/>
+        <source>&lt;p&gt;You can write dates in the following formats:&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="60"/>
+        <source>If you enter no unit the default unit (what you see when viewing the property of the item) is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You can write Dates in the following formats:&lt;/p&gt;</source>
+        <translation type="vanished">&lt;p&gt;Вы можете записать даты в следующих форматах:&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="70"/>
+        <source>&lt;p&gt;The search can only convert following units:&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Поиск может конвертировать только следующие единицы измерения:&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="72"/>
+        <source>&lt;p&gt;The regex search uses this syntax: https://perldoc.perl.org/perlre.html&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Поиск регулярных выражений использует синтаксис, описанный здесь: https://perldoc.perl.org/perlre.html&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="73"/>
+        <source>&lt;p&gt;Following keywords are available for searching:&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Для поиска доступны следующие ключевые слова (налево: свойство, направо: сравнение):&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -9869,12 +9932,12 @@ Filename: %1</source>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="66"/>
         <source>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр: начните вводить. Список будет уменьшен до соответствующих элементов. Примером может быть &quot;дата между 2010 и 2012&quot;</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="69"/>
         <source>start typing...</source>
-        <translation type="unfinished">Начинай печатать ...</translation>
+        <translation>Начинай печатать ...</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="114"/>
@@ -9904,22 +9967,22 @@ Filename: %1</source>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="160"/>
         <source>Help</source>
-        <translation type="unfinished">Справки</translation>
+        <translation>Справки</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="163"/>
         <source>help with searching</source>
-        <translation type="unfinished"></translation>
+        <translation>Помощь в поиске</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="171"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Учитывать регистр</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="180"/>
         <source>Could not parse searchstring</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось разобрать строку поиска</translation>
     </message>
 </context>
 <context>
@@ -12841,14 +12904,15 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
 <context>
     <name>ISearchExplanationDialog</name>
     <message>
-        <location filename="../gis/search/ISearchExplanationDialog.ui" line="14"/>
+        <location filename="../gis/search/ISearchExplanationDialog.ui" line="20"/>
         <source>Help</source>
-        <translation type="unfinished">Справки</translation>
+        <translation>Справки</translation>
     </message>
     <message>
-        <location filename="../gis/search/ISearchExplanationDialog.ui" line="24"/>
+        <location filename="../gis/search/ISearchExplanationDialog.ui" line="30"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Text set in constructor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Набор текста в конструкторе&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translatorcomment>
+        <translation></translation>
     </message>
 </context>
 <context>

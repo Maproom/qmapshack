@@ -6425,27 +6425,82 @@ For configuration you need to know your Android device&apos;s IP address or it&a
 <context>
     <name>CSearchExplanationDialog</name>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="27"/>
-        <source>&lt;p&gt;The underlying syntax of the search is &quot;Property Comparison Value&quot;, i.e. &quot;name contains water&quot;. However there are measures in place to make searching more intuitive. (see below)&lt;/p&gt;&lt;p&gt;The searches are always exclusive, thus for a track &quot;elevation under 500m&quot; only shows tracks that are completly under 500m meters.&lt;/p&gt;&lt;p&gt;Following assumptions are made:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;If only one of two given numbers has a unit, the unit is assumed for both&lt;/li&gt;&lt;li&gt;Speed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date.&lt;/li&gt;&lt;li&gt;&apos;Date equals&apos; matches everything that is within 24h from the given date, thus normally the day typed.&lt;/li&gt;&lt;li&gt;If you enter no unit the default unit (what you see when viewing the property of the item) is used.&lt;/li&gt;&lt;/ul&gt;</source>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="30"/>
+        <source>&lt;p&gt;Following assumptions are made:&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="28"/>
+        <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completly under 500m meters.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="40"/>
-        <source>&lt;p&gt;You can write Dates in the following formats:&lt;/p&gt;</source>
+        <source>speed units: average speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="47"/>
-        <source>&lt;p&gt;The search can only convert following units:&lt;/p&gt;</source>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="43"/>
+        <source>km and mi: distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="46"/>
+        <source>m and ft: elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="49"/>
+        <source>time: time moving</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="52"/>
+        <source>date: date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
+        <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="63"/>
+        <source>&lt;p&gt;You can write dates in the following formats:&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="60"/>
+        <source>If you enter no unit the default unit (what you see when viewing the property of the item) is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="26"/>
+        <source>&lt;p&gt;The underlying syntax of the search is &apos;property comparison value&apos;, e.g. &apos;name contains water&apos;. However some rules apply to make a search more intuitive.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="33"/>
+        <source>If only one of the two given values has a unit the unit is assumed for both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="36"/>
+        <source>If a search string in the short form &apos;comparison value&apos; is used the property is derived from the value and its unit: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="70"/>
+        <source>&lt;p&gt;The search can only convert following units:&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="72"/>
         <source>&lt;p&gt;The regex search uses this syntax: https://perldoc.perl.org/perlre.html&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="50"/>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="73"/>
         <source>&lt;p&gt;Following keywords are available for searching:&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12790,12 +12845,12 @@ Una parola viene cercata come corrispondenza (come fosse &apos;*qualcosacosa*&ap
 <context>
     <name>ISearchExplanationDialog</name>
     <message>
-        <location filename="../gis/search/ISearchExplanationDialog.ui" line="14"/>
+        <location filename="../gis/search/ISearchExplanationDialog.ui" line="20"/>
         <source>Help</source>
         <translation type="unfinished">Guida</translation>
     </message>
     <message>
-        <location filename="../gis/search/ISearchExplanationDialog.ui" line="24"/>
+        <location filename="../gis/search/ISearchExplanationDialog.ui" line="30"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Text set in constructor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>

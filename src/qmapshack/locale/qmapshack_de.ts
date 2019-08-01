@@ -6442,27 +6442,90 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
 <context>
     <name>CSearchExplanationDialog</name>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="27"/>
         <source>&lt;p&gt;The underlying syntax of the search is &quot;Property Comparison Value&quot;, i.e. &quot;name contains water&quot;. However there are measures in place to make searching more intuitive. (see below)&lt;/p&gt;&lt;p&gt;The searches are always exclusive, thus for a track &quot;elevation under 500m&quot; only shows tracks that are completly under 500m meters.&lt;/p&gt;&lt;p&gt;Following assumptions are made:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;If only one of two given numbers has a unit, the unit is assumed for both&lt;/li&gt;&lt;li&gt;Speed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date.&lt;/li&gt;&lt;li&gt;&apos;Date equals&apos; matches everything that is within 24h from the given date, thus normally the day typed.&lt;/li&gt;&lt;li&gt;If you enter no unit the default unit (what you see when viewing the property of the item) is used.&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation>&lt;p&gt;Die der Suche zugrunde liegende Syntax ist &quot;Property Comparison Value&quot;, d.h. &quot;name contains water&quot;. Es gibt jedoch Maßnahmen, um die Suche intuitiver zu gestalten. (siehe unten)&lt;/p&gt;&lt;p&gt;Die Suche ist immer exklusiv, so dass für eine Strecke &quot;Höhe unter 500m&quot; nur Spuren angezeigt werden, die vollständig unter 500m Meter liegen.&lt;/p&gt;&lt;p&gt;Folgende Annahmen werden getroffen:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Wenn nur eine von zwei gegebenen Zahlen eine Einheit hat, wird die Einheit für beide&lt;/li&gt;&lt;li&gt;Geschwindigkeitseinheiten angenommen, was zu Durchschnittsgeschwindigkeit, km und mi in Entfernung, m und ft in Höhe, Zeiten in Zeitverschiebung, Datum in Datum führt.&lt;/li&gt;&lt;li&gt;&apos;Datum ist gleich&apos; passt zu allem, was innerhalb von 24h ab dem angegebenen Datum liegt, also normalerweise der Tag, der eingegeben wird.&lt;/li&gt;&lt;li&gt;Wenn Sie keine Einheit eingeben, wird die Standardeinheit (was Sie beim Betrachten der Eigenschaft des Objekts sehen) verwendet.&lt;/li&gt;&lt;/ul&gt;</translation>
+        <translation type="vanished">&lt;p&gt;Die der Suche zugrunde liegende Syntax ist &quot;Property Comparison Value&quot;, d.h. &quot;name contains water&quot;. Es gibt jedoch Maßnahmen, um die Suche intuitiver zu gestalten. (siehe unten)&lt;/p&gt;&lt;p&gt;Die Suche ist immer exklusiv, so dass für eine Strecke &quot;Höhe unter 500m&quot; nur Spuren angezeigt werden, die vollständig unter 500m Meter liegen.&lt;/p&gt;&lt;p&gt;Folgende Annahmen werden getroffen:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Wenn nur eine von zwei gegebenen Zahlen eine Einheit hat, wird die Einheit für beide&lt;/li&gt;&lt;li&gt;Geschwindigkeitseinheiten angenommen, was zu Durchschnittsgeschwindigkeit, km und mi in Entfernung, m und ft in Höhe, Zeiten in Zeitverschiebung, Datum in Datum führt.&lt;/li&gt;&lt;li&gt;&apos;Datum ist gleich&apos; passt zu allem, was innerhalb von 24h ab dem angegebenen Datum liegt, also normalerweise der Tag, der eingegeben wird.&lt;/li&gt;&lt;li&gt;Wenn Sie keine Einheit eingeben, wird die Standardeinheit (was Sie beim Betrachten der Eigenschaft des Objekts sehen) verwendet.&lt;/li&gt;&lt;/ul&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="30"/>
+        <source>&lt;p&gt;Following assumptions are made:&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Folgende Annahmen werden getroffen:&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="28"/>
+        <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completly under 500m meters.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Die Suchanfragen sind immer exklusiv, z.B. die Suche nach einem Track &apos;Höhe unter 500m&apos;, findet Tracks, die vollständig unter 500 m liegen.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="26"/>
+        <source>&lt;p&gt;The underlying syntax of the search is &apos;property comparison value&apos;, e.g. &apos;name contains water&apos;. However some rules apply to make a search more intuitive.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Die der Suche zugrundeliegende Syntax ist &apos;Eigenschaft Vergleich Wert&apos;, z.B. &apos;Name enthält Wasser&apos;. Allerdings gelten einige Regeln, um die Suche intuitiver zu gestalten.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="33"/>
+        <source>If only one of the two given values has a unit the unit is assumed for both</source>
+        <translation>Wenn nur einer der beiden angegebenen Werte eine Einheit hat, wird die Einheit für beide angenommen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="36"/>
+        <source>If a search string in the short form &apos;comparison value&apos; is used the property is derived from the value and its unit: </source>
+        <translation>Bei Verwendung eines Suchbegriffs in der Kurzform &apos;Vergleich Vergleichswert&apos; wird die Eigenschaft aus dem Wert und seiner Einheit abgeleitet: </translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="40"/>
-        <source>&lt;p&gt;You can write Dates in the following formats:&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Sie können Daten in den folgenden Formaten schreiben:&lt;/p&gt;</translation>
+        <source>speed units: average speed</source>
+        <translation>Geschwindigkeitseinheiten: Durchschnittsgeschwindigkeit</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="47"/>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="43"/>
+        <source>km and mi: distance</source>
+        <translation>km und mi: Entfernung</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="46"/>
+        <source>m and ft: elevation</source>
+        <translation>m und ft: Höhe</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="49"/>
+        <source>time: time moving</source>
+        <translation>Zeit: Zeit in Bewegung</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="52"/>
+        <source>date: date</source>
+        <translation>Datum: Datum</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
+        <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>
+        <translation>&apos;Datum gleich&apos; findet alles, was innerhalb von 24 Stunden des aktuellen Tages liegt.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="63"/>
+        <source>&lt;p&gt;You can write dates in the following formats:&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Sie können ein Datum in den folgenden Formaten schreiben:&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="60"/>
+        <source>If you enter no unit the default unit (what you see when viewing the property of the item) is used.</source>
+        <translation>Wenn Sie keine Einheit eingeben, wird die Standardeinheit verwendet (die, die Sie bei der Anzeige der Eigenschaft des jeweiligen Wertes sehen).</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You can write Dates in the following formats:&lt;/p&gt;</source>
+        <translation type="vanished">&lt;p&gt;Sie können Daten in den folgenden Formaten schreiben:&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="70"/>
         <source>&lt;p&gt;The search can only convert following units:&lt;/p&gt;</source>
         <translation>&lt;p&gt;Die Suche kann nur folgende Einheiten umrechnen:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="49"/>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="72"/>
         <source>&lt;p&gt;The regex search uses this syntax: https://perldoc.perl.org/perlre.html&lt;/p&gt;</source>
         <translation>&lt;p&gt;Die regex-Suche verwendet folgende Syntax: https://perldoc.perl.org/perlre.html&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="50"/>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="73"/>
         <source>&lt;p&gt;Following keywords are available for searching:&lt;/p&gt;</source>
         <translation>&lt;p&gt;Folgende Schlüsselwörter stehen für die Suche zur Verfügung:&lt;/p&gt;</translation>
     </message>
@@ -12831,12 +12894,12 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
 <context>
     <name>ISearchExplanationDialog</name>
     <message>
-        <location filename="../gis/search/ISearchExplanationDialog.ui" line="14"/>
+        <location filename="../gis/search/ISearchExplanationDialog.ui" line="20"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../gis/search/ISearchExplanationDialog.ui" line="24"/>
+        <location filename="../gis/search/ISearchExplanationDialog.ui" line="30"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Text set in constructor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>

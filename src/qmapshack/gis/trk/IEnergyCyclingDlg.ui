@@ -41,7 +41,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Set parameters to compute 'Energy Use' for a cycling tour</string>
+        <string>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</string>
        </property>
       </widget>
      </item>

@@ -1930,22 +1930,22 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1098"/>
         <source>Access or parking fee</source>
-        <translation>Eintritt oder Parkgebühren</translation>
+        <translation>Eintritts- oder Parkgebühren</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1099"/>
         <source>Climbing gear</source>
-        <translation>Kletterausrüstung</translation>
+        <translation>Kletterausrüstung benötigt</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1100"/>
         <source>Boat</source>
-        <translation>Boot</translation>
+        <translation>Boot benötigt</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1101"/>
         <source>Scuba gear</source>
-        <translation>Taucherausrüstung</translation>
+        <translation>Boot benötigt</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1102"/>
@@ -1955,32 +1955,32 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1103"/>
         <source>Takes less than an hour</source>
-        <translation>Dauert kürzer als eine Stunde</translation>
+        <translation>Dauert weniger als eine Stunde</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1104"/>
         <source>Scenic view</source>
-        <translation>landschaftlich reizvolle Aussicht</translation>
+        <translation>Dauert weniger als eine Stunde</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1105"/>
         <source>Significant hike</source>
-        <translation>anspruchsvolle Wanderung</translation>
+        <translation>Lange Wanderung</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1106"/>
         <source>Difficult climbing</source>
-        <translation>anspruchsvolles Klettern</translation>
+        <translation>Schwieriges Klettern</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1107"/>
         <source>May require wading</source>
-        <translation>kann ein Waten erfordern</translation>
+        <translation>Evtl. Waten erforderlich</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1108"/>
         <source>May require swimming</source>
-        <translation>kann Schwimmen erfordern</translation>
+        <translation>Evtl. Waten erforderlich</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1109"/>
@@ -1990,17 +1990,17 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1110"/>
         <source>Recommended at night</source>
-        <translation>Empfohlen bei Nacht</translation>
+        <translation>Nachts empfohlen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1111"/>
         <source>Available during winter</source>
-        <translation>Im Winter verfügbar</translation>
+        <translation>Zugänglich im Winter</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1113"/>
         <source>Poison plants</source>
-        <translation>Giftpflanzen</translation>
+        <translation>Giftige Pflanzen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1114"/>
@@ -2020,32 +2020,32 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1117"/>
         <source>Cliff / falling rocks</source>
-        <translation>Klippe / Steinschlag</translation>
+        <translation>Felsen/Steinschlag</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1118"/>
         <source>Hunting</source>
-        <translation>Jagd</translation>
+        <translation>Jagdgebiet</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1119"/>
         <source>Dangerous area</source>
-        <translation>Gefährlicher Bereich</translation>
+        <translation>Gefährliches Gebiet</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1120"/>
         <source>Wheelchair accessible</source>
-        <translation>Rollstuhlgerecht</translation>
+        <translation>Rollstuhl geeignet</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1121"/>
         <source>Parking available</source>
-        <translation>Parkplätze vorhanden</translation>
+        <translation>Parkplatz verfügbar</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1122"/>
         <source>Public transportation</source>
-        <translation>Öffentliche Verkehrsmittel</translation>
+        <translation>Öffentlicher Nahverkehr</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1123"/>
@@ -2070,7 +2070,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1127"/>
         <source>Camping available</source>
-        <translation>Camping verfügbar</translation>
+        <translation>Camping möglich</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1128"/>
@@ -2105,7 +2105,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1134"/>
         <source>Campfires</source>
-        <translation>Campfeuer</translation>
+        <translation>Lagerfeuer</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1135"/>
@@ -2115,12 +2115,12 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1136"/>
         <source>Stealth required</source>
-        <translation>Tarnung erforderlich</translation>
+        <translation>Auf Muggel achten</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1137"/>
         <source>Stroller accessible</source>
-        <translation>Kinderwagen zugänglich</translation>
+        <translation>für Kinderwagen geeignet</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1138"/>
@@ -2130,7 +2130,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1139"/>
         <source>Watch for livestock</source>
-        <translation>Achten Sie auf Viehzucht</translation>
+        <translation>Achte auf Vieh</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1140"/>
@@ -2140,47 +2140,47 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1142"/>
         <source>Truck Driver/RV</source>
-        <translation>Lkw-Fahrer/RV</translation>
+        <translation>LKW/Wohnmobile</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1143"/>
         <source>Field Puzzle</source>
-        <translation>Feldpuzzle</translation>
+        <translation>Unterwegs-Rätsel</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1144"/>
         <source>UV Light Required</source>
-        <translation>UV Licht erforderlich</translation>
+        <translation>UV-Licht erforderlich</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1145"/>
         <source>Snowshoes</source>
-        <translation>Schneeschuhe</translation>
+        <translation>Schneeschuhe erforderlich</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1146"/>
         <source>Cross Country Skis</source>
-        <translation>Langlaufski</translation>
+        <translation>Langlauf-Skier erforderlich</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1147"/>
         <source>Special Tool Required</source>
-        <translation>Spezialwerkzeug erforderlich</translation>
+        <translation>Langlauf-Skier erforderlich</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1148"/>
         <source>Night Cache</source>
-        <translation>Nacht-Cache</translation>
+        <translation>Nachtcache</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1149"/>
         <source>Park and Grab</source>
-        <translation>Parken und Zugreifen</translation>
+        <translation>Parken und Loggen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1150"/>
         <source>Abandoned Structure</source>
-        <translation>Verlassene Struktur</translation>
+        <translation>Verlassene Gebäude</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1151"/>
@@ -2190,37 +2190,37 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1152"/>
         <source>Medium hike (1km-10km)</source>
-        <translation>Mittlere Wanderung (weniger als 1 km)</translation>
+        <translation>Mittlere Wanderung (1 km - 10 km)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1153"/>
         <source>Long Hike (+10km)</source>
-        <translation>Lange Wanderung (weniger als 1 km)</translation>
+        <translation>Lange Wanderung (+10 km)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1154"/>
         <source>Fuel Nearby</source>
-        <translation>Kraftstoff in der Nähe</translation>
+        <translation>Lange Wanderung (+10 km)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1155"/>
         <source>Food Nearby</source>
-        <translation>Essen in der Nähe</translation>
+        <translation>Verpflegung in der Nähe</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1156"/>
         <source>Wireless Beacon</source>
-        <translation>Drahtlose Signal</translation>
+        <translation>Funksignal</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1157"/>
         <source>Partnership cache</source>
-        <translation>Partnerschafts-Cache</translation>
+        <translation>Partnercache</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1158"/>
         <source>Seasonal Access</source>
-        <translation>Saisonaler Zugang</translation>
+        <translation>Jahreszeitlich beschränkter Zugang</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1159"/>
@@ -2230,12 +2230,12 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1160"/>
         <source>Tree Climbing</source>
-        <translation>Baumklettern</translation>
+        <translation>Baumklettern erforderlich</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1161"/>
         <source>Front Yard (Private Residence)</source>
-        <translation>Vorhof (Privatwohnung)</translation>
+        <translation>Vorgarten (Privatgelände)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1162"/>

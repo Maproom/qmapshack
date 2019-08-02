@@ -65,6 +65,12 @@ CEnergyCyclingDlg::CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycl
 
     energyTmpSet = energyCycling.getEnergyTrkSet();
     updateUi();
+
+    if (energyCycling.getEnergyUseCycling() == NOFLOAT)
+    {
+        buttonBox->button(QDialogButtonBox::Reset)->setEnabled(false);
+    }
+
     slotApply(true);
 }
 
@@ -294,7 +300,7 @@ void CEnergyCyclingDlg::slotShowHelp()
                      "<li>Average pedal cadence for the computation of pedal force</li>"
                      "</ul></p>"
                      "<p>The individualize data will be defined in this dialog and more computed values will be shown here.</p>"
-                     "<p>The energy use in unit 'kcal' will be stored in the track and can be remove later on when no longer needed.</p>"
+                     "<p>The energy use in unit \"kcal\" will be stored in the track and can be remove later on when no longer needed.</p>"
                      "<p>For more information see tooltips on input and output values.</p>");
 
     QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"), msg);

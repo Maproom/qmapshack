@@ -519,6 +519,7 @@ void CDetailsTrk::updateData()
         filterChangeStartPoint->updateUi();
     }
 
+    QString tooltip = tr("Set parameters to compute \"Energy Use Cycling\" for a cycling tour");
     if(trk.getEnergyCycling().isValid())
     {
         pushSetEnergyCycling->setEnabled(true);
@@ -526,7 +527,9 @@ void CDetailsTrk::updateData()
     else
     {
         pushSetEnergyCycling->setEnabled(false);
+        tooltip += "<b style='color: red;'>" + tr(" - Computation needs valid time, elevation and slope data.") + "</b>";
     }
+    pushSetEnergyCycling->setToolTip(tooltip);
 
     enableTabFilter();
     originator = false;

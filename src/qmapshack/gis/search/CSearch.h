@@ -142,6 +142,11 @@ public:
         return syntaxError;
     }
 
+    bool isAutodetectedProperty()
+    {
+        return autoDetectedProperty;
+    }
+
     static QStringList getSearchTypeKeywords()
     {
         return keywordSearchTypeMap.keys();
@@ -200,6 +205,7 @@ private:
 
     search_t search;
     bool syntaxError = false;
+    bool autoDetectedProperty = false;
 
     static QMap<QString, search_type_e> keywordSearchTypeMap;
     static QMap<QString, search_type_e> initKeywordSearchTypeMap();

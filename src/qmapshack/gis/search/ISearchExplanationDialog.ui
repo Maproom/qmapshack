@@ -25,12 +25,12 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="labelExplanation">
+    <widget class="QTextBrowser" name="textBrowserExplanation"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Text set in constructor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+      <string>Following keywords are available for searching:</string>
      </property>
     </widget>
    </item>

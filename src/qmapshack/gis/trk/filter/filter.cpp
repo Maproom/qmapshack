@@ -469,11 +469,6 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
             continue;
         }
         qreal speed = 1 / formulaTerms[0] / 60 * 1000; // Transform from min/km to m/s
-//        qDebug() << "KKA: Pnt=" << i++
-//                 << "Slope tangens=" << A9
-//                 << "Max min/km=" << formulaTerms[0]
-//                 << "Speed m/s=" << speed
-//                 << "Speed km/h=" << speed * 3.6;
 
         timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
         pt.time   = timestamp;

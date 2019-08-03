@@ -512,13 +512,13 @@
                 <bool>false</bool>
                </property>
                <property name="headerHidden">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
                <property name="expandsOnDoubleClick">
                 <bool>false</bool>
                </property>
                <attribute name="headerVisible">
-                <bool>true</bool>
+                <bool>false</bool>
                </attribute>
                <attribute name="headerMinimumSectionSize">
                 <number>21</number>
@@ -1514,6 +1514,17 @@
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="pushSetEnergyCycling">
+             <property name="text">
+              <string>Set Energy Cycling</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../../resources.qrc">
+               <normaloff>:/icons/48x48/EnergyCycling.png</normaloff>:/icons/48x48/EnergyCycling.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="verticalSpacer_4">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -1744,10 +1755,10 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupArrow"/>
-  <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupGraph2"/>
-  <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupLineWidth"/>
+  <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupGraph1"/>
  </buttongroups>
 </ui>

@@ -32,6 +32,7 @@
 #include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 #include "gis/trk/filter/CFilterReset.h"
+#include "gis/trk/CEnergyCyclingDlg.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
 #include "gis/trk/filter/CFilterSubPt2Pt.h"
@@ -146,6 +147,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     connect(textCmtDesc,      &QTextBrowser::anchorClicked,        this, &CDetailsTrk::slotLinkActivated);
 
     connect(pushSetActivities,    &QPushButton::clicked, this, &CDetailsTrk::slotSetActivities);
+    connect(pushSetEnergyCycling, &QPushButton::clicked, this, &CDetailsTrk::slotSetEnergyCycling);
 
     connect(lineName,         &QLineEdit::textEdited,              this, &CDetailsTrk::slotNameChanged);
     connect(lineName,         &QLineEdit::editingFinished,         this, &CDetailsTrk::slotNameChangeFinished);
@@ -517,6 +519,18 @@ void CDetailsTrk::updateData()
         filterChangeStartPoint->updateUi();
     }
 
+    QString tooltip = tr("Set parameters to compute \"Energy Use Cycling\" for a cycling tour");
+    if(trk.getEnergyCycling().isValid())
+    {
+        pushSetEnergyCycling->setEnabled(true);
+    }
+    else
+    {
+        pushSetEnergyCycling->setEnabled(false);
+        tooltip += "<b style='color: red;'>" + tr(" - Computation needs valid time, elevation and slope data.") + "</b>";
+    }
+    pushSetEnergyCycling->setToolTip(tooltip);
+
     enableTabFilter();
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");
@@ -696,6 +710,23 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
 void CDetailsTrk::slotSetActivities()
 {
     CActivityTrk::getMenu(trk.getKey(), this, true);
+}
+
+void CDetailsTrk::slotSetEnergyCycling()
+{
+    if (!trk.getEnergyCycling().isValid())
+    {
+        return;
+    }
+
+    CEnergyCyclingDlg energyCyclingDlg(this, trk.getEnergyCycling());
+
+    qint32 ret = energyCyclingDlg.exec();
+
+    if(ret == QDialog::Accepted || ret == QDialog::Rejected)
+    {
+        trk.updateVisuals(CGisItemTrk::eVisualDetails, "CDetailsTrk::slotSetEnergyCycling()");
+    }
 }
 
 void CDetailsTrk::setupGraph(CPlot * plot, const CLimit& limit, const QString& source, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax)

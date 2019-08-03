@@ -629,11 +629,11 @@ CCanvas *CMainWindow::addView(const QString& name)
     tabWidget->addTab(view, view->objectName());
     connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
     connect(actionShowGrid,              &QAction::changed, this, [this] {this->update();});
-    //connect(actionShowScale,             &QAction::changed, view, [view] {view->slotScaleVisible(CMainWindow::self().isGridVisible());});
-    //connect(actionPOIText,               &QAction::changed, view, [view] {view->slotPOIText(CMainWindow::self().isScaleVisible());});
-    connect(actionMapToolTip,            &QAction::changed, view, [view] {view->slotMapToolTip(CMainWindow::self().isPOIText());});
-    //connect(actionNightDay,              &QAction::changed, view, [view] {view->slotNight(CMainWindow::self().isMapToolTip());});
-    //connect(actionShowMinMaxTrackLabels, &QAction::changed, view, [view] {view->slotShowMinMaxTrackLabels(CMainWindow::self().isShowMinMaxTrackLabels());});
+    connect(actionShowScale,             &QAction::changed, view, [view] {view->slotGridVisible(CMainWindow::self().isGridVisible());});
+    connect(actionPOIText,               &QAction::changed, view, [view] {view->slotScaleVisible(CMainWindow::self().isScaleVisible());});
+    connect(actionMapToolTip,            &QAction::changed, view, [view] {view->slotPOIText(CMainWindow::self().isPOIText());});
+    connect(actionNightDay,              &QAction::changed, view, [view] {view->slotMapToolTip(CMainWindow::self().isMapToolTip());});
+    connect(actionShowMinMaxTrackLabels, &QAction::changed, view, [view] {view->slotShowMinMaxTrackLabels(CMainWindow::self().isShowMinMaxTrackLabels());});
     connect(actionShowTrackHighlight,    &QAction::changed, view, [view] {view->slotShowTrackHighlight(CMainWindow::self().isShowTrackHighlight());});
     connect(actionShowMinMaxSummary,     &QAction::changed, view, [view] {view->slotShowMinMaxSummary(CMainWindow::self().isShowMinMaxSummary());});
     connect(actionShowTrackInfoTable,    &QAction::changed, view, [view] {view->slotShowTrackInfoTable(CMainWindow::self().isShowTrackInfoTable());});

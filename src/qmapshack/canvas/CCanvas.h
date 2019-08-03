@@ -188,11 +188,11 @@ public slots:
     void slotCheckTrackOnFocus();
 
     void slotScaleVisible(bool show);
-    //void slotGridVisible(bool show);
-    //void slotNight(bool show);
-    //void slotPOIText(bool show);
+    void slotGridVisible(bool show);
+    void slotNight(bool show);
+    void slotPOIText(bool show);
     void slotMapToolTip(bool show);
-    //void slotShowMinMaxTrackLabels(bool show);
+    void slotShowMinMaxTrackLabels(bool show);
     void slotShowMinMaxSummary(bool show);
     void slotShowTrackSummary(bool show);
     void slotShowTrackInfoTable(bool show);
@@ -293,11 +293,11 @@ private:
     QTextBrowser * labelHelp = nullptr;
 
     bool isScaleVisible=false;
-    //bool isGridVisible=false;
-    //bool isNight=false;
-    //bool isPOIText=false;
+    bool isGridVisible=false;
+    bool isNight=false;
+    bool isPOIText=false;
     bool isMapToolTip=false;
-    //bool isShowMinMaxTrackLabels=false;
+    bool isShowMinMaxTrackLabels=false;
     bool isShowMinMaxSummary=false;
     bool isShowTrackSummary=false;
     bool isShowTrackInfoTable=false;

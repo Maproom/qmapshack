@@ -173,8 +173,6 @@ public:
 
     void followPosition(const QPointF& pos);
 
-    void hideAllTrackInfo();
-
     static qreal gisLayerOpacity;
 
 signals:
@@ -186,19 +184,6 @@ public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
     void slotUpdateTrackInfo(bool updateVisuals);
     void slotCheckTrackOnFocus();
-
-    void slotScaleVisible(bool show);
-    void slotGridVisible(bool show);
-    void slotNight(bool show);
-    void slotPOIText(bool show);
-    void slotMapToolTip(bool show);
-    void slotShowMinMaxTrackLabels(bool show);
-    void slotShowMinMaxSummary(bool show);
-    void slotShowTrackSummary(bool show);
-    void slotShowTrackInfoTable(bool show);
-    void slotShowTrackInfoPoints(bool show);
-    void slotShowTrackProfile(bool show);
-    void slotShowTrackHighlight(bool show);
 
 protected:
     bool event(QEvent *) override;
@@ -291,19 +276,6 @@ private:
     bool mouseLost = false;
 
     QTextBrowser * labelHelp = nullptr;
-
-    bool isScaleVisible=false;
-    bool isGridVisible=false;
-    bool isNight=false;
-    bool isPOIText=false;
-    bool isMapToolTip=false;
-    bool isShowMinMaxTrackLabels=false;
-    bool isShowMinMaxSummary=false;
-    bool isShowTrackSummary=false;
-    bool isShowTrackInfoTable=false;
-    bool isShowTrackInfoPoints=false;
-    bool isShowTrackProfile=false;
-    bool isShowTrackHighlight=false;
 };
 
 Q_DECLARE_METATYPE(CCanvas*)

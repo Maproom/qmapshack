@@ -397,19 +397,6 @@ void CCanvas::loadConfig(QSettings& cfg)
     const QString &backColorStr = cfg.value("backColor", "#FFFFBF").toString();
     backColor = QColor(backColorStr);
 
-    isScaleVisible=cfg.value("isScaleVisible", true).toBool();
-    isGridVisible=cfg.value("isGridVisible", false).toBool();
-    isPOIText=cfg.value("POIText", true).toBool();
-    isMapToolTip=cfg.value("MapToolTip", true).toBool();
-    isNight=cfg.value("isNight", false).toBool();
-    isShowMinMaxTrackLabels=cfg.value("MinMaxTrackValues", false).toBool();
-    isShowMinMaxSummary=cfg.value("ShowMinMaxInformation", true).toBool();
-    isShowTrackInfoTable=cfg.value("ShowTrackInfoTable", true).toBool();
-    isShowTrackInfoPoints=cfg.value("ShowTrackInfoPoints", true).toBool();
-    isShowTrackSummary=cfg.value("ShowTrackSummary", true).toBool();
-    isShowTrackProfile=cfg.value("ShowTrackProfile", true).toBool();
-    isShowTrackHighlight=cfg.value("ShowTrackHighlight", true).toBool();
-
     map->loadConfig(cfg);
     dem->loadConfig(cfg);
     grid->loadConfig(cfg);
@@ -827,20 +814,9 @@ void CCanvas::drawTrackStatistic(QPainter& p)
     p.restore();
 }
 
-void CCanvas::hideAllTrackInfo()
-{
-    isShowMinMaxTrackLabels=false;
-    isShowMinMaxSummary=false;
-    isShowTrackSummary=false;
-    isShowTrackInfoTable=false;
-    isShowTrackInfoPoints=false;
-    isShowTrackProfile=false;
-    isShowTrackHighlight=false;
-}
-
 void CCanvas::drawScale(QPainter& p, QRectF drawRect)
 {
-    if(!isScaleVisible)
+    if(!CMainWindow::self().isScaleVisible())
     {
         return;
     }
@@ -978,17 +954,18 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
     }
 
     bool trackStatisticIsVisible = false;
-    if(isShowTrackSummary || isShowMinMaxSummary)
+    CMainWindow& w = CMainWindow::self();
+    if(w.isShowTrackSummary() || w.isShowMinMaxSummary())
     {
         trackStatisticIsVisible = true;
 
         QString text;
-        if(isShowTrackSummary)
+        if(w.isShowTrackSummary())
         {
             text += trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity);
         }
 
-        if(isShowMinMaxSummary)
+        if(w.isShowMinMaxSummary())
         {
             text += trk->getInfoLimits();
         }
@@ -1006,7 +983,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
     }
 
 
-    if(isShowTrackInfoTable)
+    if(w.isShowTrackInfoTable())
     {
         int cnt = 1;
         QString text;
@@ -1041,7 +1018,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
 
     if(isVisible() && (plotTrackProfile != nullptr))
     {
-        plotTrackProfile->setVisible(isShowTrackProfile);
+        plotTrackProfile->setVisible(w.isShowTrackProfile());
     }
 
     if(updateVisuals)
@@ -1050,61 +1027,6 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
     }
 
     update();
-}
-
-void CCanvas::slotScaleVisible(bool show)
-{
-    isScaleVisible=show;
-}
-void CCanvas::slotGridVisible(bool show)
-{
-    isGridVisible=show;
-}
-void CCanvas::slotNight(bool show)
-{
-    isNight=show;
-}
-void CCanvas::slotPOIText(bool show)
-{
-    isPOIText=show;
-}
-void CCanvas::slotMapToolTip(bool show)
-{
-    isMapToolTip=show;
-}
-void CCanvas::slotShowMinMaxTrackLabels(bool show)
-{
-    isShowMinMaxTrackLabels=show;
-}
-void CCanvas::slotShowMinMaxSummary(bool show)
-{
-    isShowMinMaxSummary=show;
-    slotUpdateTrackInfo(false);
-}
-void CCanvas::slotShowTrackSummary(bool show)
-{
-    isShowTrackSummary=show;
-    slotUpdateTrackInfo(false);
-}
-void CCanvas::slotShowTrackInfoTable(bool show)
-{
-    isShowTrackInfoTable=show;
-    slotUpdateTrackInfo(false);
-}
-void CCanvas::slotShowTrackInfoPoints(bool show)
-{
-    isShowTrackInfoPoints=show;
-    slotUpdateTrackInfo(true);
-}
-void CCanvas::slotShowTrackProfile(bool show)
-{
-    isShowTrackProfile=show;
-    slotUpdateTrackInfo(false);
-}
-void CCanvas::slotShowTrackHighlight(bool show)
-{
-    isShowTrackHighlight=show;
-    slotUpdateTrackInfo(false);
 }
 
 void CCanvas::moveMap(const QPointF& delta)
@@ -1166,7 +1088,7 @@ void CCanvas::convertPx2Rad(QPointF& pos) const
 
 void CCanvas::displayInfo(const QPoint& px)
 {
-    if(isMapToolTip)
+    if(CMainWindow::self().isMapToolTip())
     {
         posToolTip = px;
 
@@ -1330,7 +1252,7 @@ void CCanvas::showProfile(bool yes)
 {
     if(nullptr != plotTrackProfile)
     {
-        plotTrackProfile->setVisible(yes && isShowTrackProfile);
+        plotTrackProfile->setVisible(yes && CMainWindow::self().isShowTrackProfile());
     }
 }
 
@@ -1463,5 +1385,3 @@ void CCanvas::followPosition(const QPointF& pos)
 
     moveMap(r1.center() - pos_);
 }
-
-

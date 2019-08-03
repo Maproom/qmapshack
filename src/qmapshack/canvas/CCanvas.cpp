@@ -923,9 +923,8 @@ void CCanvas::slotCheckTrackOnFocus()
             return;
         }
 
-        const CMainWindow& w = CMainWindow::self();
         // create new profile plot, the plot will register itself at the track
-        plotTrackProfile = new CPlotProfile(trk2, trk2->limitsGraph1, w.profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
+        plotTrackProfile = new CPlotProfile(trk2, trk2->limitsGraph1, CMainWindow::self().profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
         setSizeTrackProfile();
         // track profile visibility is set in slotUpdateTrackInfo()
 
@@ -954,18 +953,17 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
     }
 
     bool trackStatisticIsVisible = false;
-    CMainWindow& w = CMainWindow::self();
-    if(w.isShowTrackSummary() || w.isShowMinMaxSummary())
+    if(isShowTrackSummary() || isShowMinMaxSummary())
     {
         trackStatisticIsVisible = true;
 
         QString text;
-        if(w.isShowTrackSummary())
+        if(isShowTrackSummary())
         {
             text += trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity);
         }
 
-        if(w.isShowMinMaxSummary())
+        if(isShowMinMaxSummary())
         {
             text += trk->getInfoLimits();
         }
@@ -983,7 +981,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
     }
 
 
-    if(w.isShowTrackInfoTable())
+    if(isShowTrackInfoTable())
     {
         int cnt = 1;
         QString text;
@@ -1018,7 +1016,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
 
     if(isVisible() && (plotTrackProfile != nullptr))
     {
-        plotTrackProfile->setVisible(w.isShowTrackProfile());
+        plotTrackProfile->setVisible(isShowTrackProfile());
     }
 
     if(updateVisuals)
@@ -1384,4 +1382,30 @@ void CCanvas::followPosition(const QPointF& pos)
     }
 
     moveMap(r1.center() - pos_);
+}
+
+
+bool CCanvas::isShowMinMaxSummary() const
+{
+    return CMainWindow::self().isShowMinMaxSummary() && showTrackOverlays;
+}
+bool CCanvas::isShowTrackSummary() const
+{
+    return CMainWindow::self().isShowTrackSummary() && showTrackOverlays;
+}
+bool CCanvas::isShowTrackInfoTable() const
+{
+    return CMainWindow::self().isShowTrackInfoTable() && showTrackOverlays;
+}
+bool CCanvas::isShowTrackInfoPoints() const
+{
+    return CMainWindow::self().isShowTrackInfoPoints() && showTrackOverlays;
+}
+bool CCanvas::isShowTrackProfile() const
+{
+    return CMainWindow::self().isShowTrackProfile() && showTrackOverlays;
+}
+bool CCanvas::isShowTrackHighlight() const
+{
+    return CMainWindow::self().isShowTrackHighlight() && showTrackOverlays;
 }

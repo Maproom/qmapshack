@@ -109,7 +109,7 @@ if (APPLE)
 endif(APPLE)
 
 if(WIN32)
-    set(QT_DEV_PATH   "C:\\Qt5\\5.12.1\\msvc2017_64" CACHE PATH "Path to directory containing Qt5 include and lib, e.g. C:\\Qt5\\5.12.1\\msvc2017_64")
+    set(QT_DEV_PATH   "C:\\Qt5\\5.12.3\\msvc2017_64" CACHE PATH "Path to directory containing Qt5 include and lib, e.g. C:\\Qt5\\5.12.3\\msvc2017_64")
     set(GDAL_DEV_PATH "C:\\GDAL" CACHE PATH "Path to directory containing GDAL include and lib, e.g. M:\\lib\\gdal")
     set(PROJ4_DEV_PATH "C:\\PROJ6" CACHE PATH "Path to directory containing PROJ.4 include and lib, e.g. M:\\lib\\PROJ6")
     set(ROUTINO_DEV_PATH "C:\\routino" CACHE PATH "Path to directory containing routino include and lib, e.g. M:\\lib\\routino")

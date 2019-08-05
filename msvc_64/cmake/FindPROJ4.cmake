@@ -41,6 +41,7 @@ endif(WIN32)
   find_library(LIBPROJ4_LIBRARY
     NAMES
         proj_6_0
+        proj_6_1
     PATHS
 if(WIN32)
       ${PROJ4_DEV_PATH}/lib

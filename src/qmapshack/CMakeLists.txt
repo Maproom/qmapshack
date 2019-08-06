@@ -159,7 +159,7 @@ set( SRCS
     gis/trk/CCutTrk.cpp
     gis/trk/CDetailsTrk.cpp
     gis/trk/CEnergyCycling.cpp
-    gis/trk/CEnergyCyclingDlg.cpp
+    gis/trk/CEnergyCyclingDialog.cpp
     gis/trk/CGisItemTrk.cpp
     gis/trk/CInvalidTrk.cpp
     gis/trk/CKnownExtension.cpp
@@ -495,7 +495,7 @@ set( HDRS
     gis/trk/CCutTrk.h
     gis/trk/CDetailsTrk.h
     gis/trk/CEnergyCycling.h
-    gis/trk/CEnergyCyclingDlg.h
+    gis/trk/CEnergyCyclingDialog.h
     gis/trk/CGisItemTrk.h
     gis/trk/CInvalidTrk.h
     gis/trk/CKnownExtension.h
@@ -743,7 +743,7 @@ set( UIS
     gis/trk/ICombineTrk.ui
     gis/trk/ICutTrk.ui
     gis/trk/IDetailsTrk.ui
-    gis/trk/IEnergyCyclingDlg.ui
+    gis/trk/IEnergyCyclingDialog.ui
     gis/trk/IInvalidTrk.ui
     gis/trk/IScrOptTrk.ui
     gis/trk/ISelectActivityColor.ui

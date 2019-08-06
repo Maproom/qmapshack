@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IEnergyCyclingDlg</class>
- <widget class="QDialog" name="IEnergyCyclingDlg">
+ <class>IEnergyCyclingDialog</class>
+ <widget class="QDialog" name="IEnergyCyclingDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -753,7 +753,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>IEnergyCyclingDlg</receiver>
+   <receiver>IEnergyCyclingDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

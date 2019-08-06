@@ -18,6 +18,7 @@
 
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/trk/CEnergyCyclingDialog.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/filter/CFilterChangeStartPoint.h"
 #include "gis/trk/filter/CFilterDelete.h"
@@ -32,7 +33,6 @@
 #include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 #include "gis/trk/filter/CFilterReset.h"
-#include "gis/trk/CEnergyCyclingDlg.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
 #include "gis/trk/filter/CFilterSubPt2Pt.h"
@@ -147,7 +147,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     connect(textCmtDesc,      &QTextBrowser::anchorClicked,        this, &CDetailsTrk::slotLinkActivated);
 
     connect(pushSetActivities,    &QPushButton::clicked, this, &CDetailsTrk::slotSetActivities);
-    connect(pushSetEnergyCycling, &QPushButton::clicked, this, &CDetailsTrk::slotSetEnergyCycling);
+    connect(toolSetEnergyCycling, &QPushButton::clicked, this, &CDetailsTrk::slotSetEnergyCycling);
 
     connect(lineName,         &QLineEdit::textEdited,              this, &CDetailsTrk::slotNameChanged);
     connect(lineName,         &QLineEdit::editingFinished,         this, &CDetailsTrk::slotNameChangeFinished);
@@ -522,14 +522,14 @@ void CDetailsTrk::updateData()
     QString tooltip = tr("Set parameters to compute \"Energy Use Cycling\" for a cycling tour");
     if(trk.getEnergyCycling().isValid())
     {
-        pushSetEnergyCycling->setEnabled(true);
+        toolSetEnergyCycling->setEnabled(true);
     }
     else
     {
-        pushSetEnergyCycling->setEnabled(false);
+        toolSetEnergyCycling->setEnabled(false);
         tooltip += "<b style='color: red;'>" + tr(" - Computation needs valid time, elevation and slope data.") + "</b>";
     }
-    pushSetEnergyCycling->setToolTip(tooltip);
+    toolSetEnergyCycling->setToolTip(tooltip);
 
     enableTabFilter();
     originator = false;
@@ -719,7 +719,7 @@ void CDetailsTrk::slotSetEnergyCycling()
         return;
     }
 
-    CEnergyCyclingDlg energyCyclingDlg(this, trk.getEnergyCycling());
+    CEnergyCyclingDialog energyCyclingDlg(trk.getEnergyCycling(), this);
 
     qint32 ret = energyCyclingDlg.exec();
 

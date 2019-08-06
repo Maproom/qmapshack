@@ -15,21 +15,21 @@
 
 **********************************************************************************************/
 
-#ifndef CENERGYCYCLINGDLG_H
-#define CENERGYCYCLINGDLG_H
+#ifndef CENERGYCYCLINGDIALOG_H
+#define CENERGYCYCLINGDIALOG_H
 
 #include "CEnergyCycling.h"
-#include "ui_IEnergyCyclingDlg.h"
+#include "ui_IEnergyCyclingDialog.h"
 
 class CGisItemTrk;
 
-class CEnergyCyclingDlg : public QDialog, private Ui::IEnergyCyclingDlg
+class CEnergyCyclingDialog : public QDialog, private Ui::IEnergyCyclingDialog
 {
     Q_OBJECT
 
 public:
-    explicit CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycling);
-    ~CEnergyCyclingDlg();
+    explicit CEnergyCyclingDialog(CEnergyCycling &energyCycling, QWidget *parent);
+    ~CEnergyCyclingDialog();
 
 private slots:
     void slotOk(bool);
@@ -110,4 +110,4 @@ private:
     void updateUi();
 };
 
-#endif // CENERGYCYCLINGDLG_H
+#endif // CENERGYCYCLINGDIALOG_H

@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,6 +40,9 @@
 #include <QtXml>
 
 IGisItem::key_t CGisItemWpt::keyUserFocus;
+QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::keywordLambdaMap;
+QList<QString> CGisItemWpt::geocache_t::attributeMeaningsTranslated;
+
 
 CGisItemWpt::CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, const QString &name, const QString &icon, IGisProject *project)
     : IGisItem(project, eTypeWpt, NOIDX)
@@ -968,6 +972,15 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
+const searchValue_t CGisItemWpt::getValueByKeyword(searchProperty_e keyword)
+{
+    if(keywordLambdaMap.contains(keyword))
+    {
+        return keywordLambdaMap.value(keyword)(this);
+    }
+    return searchValue_t();
+}
+
 void CGisItemWpt::processMouseOverBubble(const QPoint &pos)
 {
     if(rectBubbleMove.contains(pos) || rectBubbleEdit.contains(pos) || rectBubbleSize.contains(pos))
@@ -1006,7 +1019,7 @@ void CGisItemWpt::detBoundingRect()
     }
 }
 
-const QVector<QString> CGisItemWpt::geocache_t::attributeMeanings = {
+const QList<QString> CGisItemWpt::geocache_t::attributeMeanings = {
     "QMS Attribute Flag",         //Not to be serialized in GPX files
     "Dogs",
     "Access or parking fee",
@@ -1076,3 +1089,184 @@ const QVector<QString> CGisItemWpt::geocache_t::attributeMeanings = {
     "Teamwork Required",
     "GeoTour"
 };
+
+QList<QString> CGisItemWpt::geocache_t::initAttributeMeaningsTranslated()
+{
+    QList<QString> translated  = {
+        tr("QMS Attribute Flag"),         //Not to be serialized in GPX files
+        tr("Dogs"),
+        tr("Access or parking fee"),
+        tr("Climbing gear"),
+        tr("Boat"),
+        tr("Scuba gear"),
+        tr("Recommended for kids"),
+        tr("Takes less than an hour"),
+        tr("Scenic view"),
+        tr("Significant hike"),
+        tr("Difficult climbing"),
+        tr("May require wading"),
+        tr("May require swimming"),
+        tr("Available at all times"),
+        tr("Recommended at night"),
+        tr("Available during winter"),
+        "",
+        tr("Poison plants"),
+        tr("Dangerous Animals"),
+        tr("Ticks"),
+        tr("Abandoned mines"),
+        tr("Cliff / falling rocks"),
+        tr("Hunting"),
+        tr("Dangerous area"),
+        tr("Wheelchair accessible"),
+        tr("Parking available"),
+        tr("Public transportation"),
+        tr("Drinking water nearby"),
+        tr("Public restrooms nearby"),
+        tr("Telephone nearby"),
+        tr("Picnic tables nearby"),
+        tr("Camping available"),
+        tr("Bicycles"),
+        tr("Motorcycles"),
+        tr("Quads"),
+        tr("Off-road vehicles"),
+        tr("Snowmobiles"),
+        tr("Horses"),
+        tr("Campfires"),
+        tr("Thorns"),
+        tr("Stealth required"),
+        tr("Stroller accessible"),
+        tr("Needs maintenance"),
+        tr("Watch for livestock"),
+        tr("Flashlight required"),
+        "",
+        tr("Truck Driver/RV"),
+        tr("Field Puzzle"),
+        tr("UV Light Required"),
+        tr("Snowshoes"),
+        tr("Cross Country Skis"),
+        tr("Special Tool Required"),
+        tr("Night Cache"),
+        tr("Park and Grab"),
+        tr("Abandoned Structure"),
+        tr("Short hike (less than 1km)"),
+        tr("Medium hike (1km-10km)"),
+        tr("Long Hike (+10km)"),
+        tr("Fuel Nearby"),
+        tr("Food Nearby"),
+        tr("Wireless Beacon"),
+        tr("Partnership cache"),
+        tr("Seasonal Access"),
+        tr("Tourist Friendly"),
+        tr("Tree Climbing"),
+        tr("Front Yard (Private Residence)"),
+        tr("Teamwork Required"),
+        tr("GeoTour")
+    };
+    return translated;
+}
+
+QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
+{
+    QMap<searchProperty_e, CGisItemWpt::fSearch> map;
+    map.insert(eSearchPropertyGeneralName, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        if(item->geocache.hasData)
+        {
+            searchValue.str1 = item->geocache.name + " - " + item->getName();
+        }
+        else
+        {
+            searchValue.str1 = item->getName();
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralFullText, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralElevation, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        IUnit::self().meter2elevation(item->wpt.ele, searchValue.value1, searchValue.str1);
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDate, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        if(item->wpt.time.isValid())
+        {
+            searchValue.value1 = item->wpt.time.toSecsSinceEpoch();
+            searchValue.str1 = "SsE"; //To differentiate Dates and Durations
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralComment, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getComment();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralDescription, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getDescription();
+        return searchValue;
+    });
+    //Geocache keywords
+    map.insert(eSearchPropertyGeocacheDifficulty, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.value1 = item->geocache.difficulty;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheTerrain, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.value1 = item->geocache.terrain;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocachePositiveAttributes, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        for(quint8 attr : item->geocache.attributes.keys())
+        {
+            if(attr >= item->geocache.attributeMeaningsTranslated.length())
+            {
+                continue;
+            }
+            if(!item->geocache.attributes[attr])// It is negated
+            {
+                continue;
+            }
+            searchValue.str1 += item->geocache.attributeMeaningsTranslated[attr] + ", ";
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheNegatedAttributes, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        for(quint8 attr : item->geocache.attributes.keys())
+        {
+            if(attr >= item->geocache.attributeMeaningsTranslated.length())
+            {
+                continue;
+            }
+            if(item->geocache.attributes[attr])// It is not negated
+            {
+                continue;
+            }
+            searchValue.str1 += item->geocache.attributeMeaningsTranslated[attr] + ", ";
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheSize, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->geocache.container;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheGCCode, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->getName();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheGCName, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->geocache.name;
+        return searchValue;
+    });
+    return map;
+}
+

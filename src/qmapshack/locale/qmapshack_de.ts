@@ -202,7 +202,7 @@
         <translation>&lt;h2&gt;Streckenführung (Routing)&lt;/h2&gt;&lt;p&gt;QMapShack unterstützt Online Routing Dienste. Wenn Sie aber wirklich alle Möglichkeiten einer Streckenführung nutzen wollen, brauchen Sie eine lokale Routendatenbank. Es stehen Ihnen zwei Möglichkeiten zur Verfügung.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Für Routino müssen Sie eine Datenbank aus der Open Street Map Datenbasis erstellen. QMapShack besitzt einen eingebauten &apos;Routino Database Creator&apos; (&lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Die zweite Option ist eine lokale BRouter Installation mit einer lokalen Datenbank. Klicken Sie auf &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter einstellen&lt;/a&gt;, um die nötigen Daten zu laden und zu installieren.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1064"/>
+        <location filename="../canvas/CCanvas.cpp" line="1065"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
@@ -1234,77 +1234,77 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
 <context>
     <name>CGisItemOvlArea</name>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.h" line="128"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.h" line="131"/>
         <source>thin</source>
         <translation>dünn</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.h" line="129"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.h" line="132"/>
         <source>normal</source>
         <translation>normal</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.h" line="130"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.h" line="133"/>
         <source>wide</source>
         <translation>breit</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.h" line="131"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.h" line="134"/>
         <source>strong</source>
         <translation>stark</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="58"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="59"/>
         <source>_Clone</source>
         <translation>_Klon</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="382"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="392"/>
         <source>Area: %1%2</source>
         <translation>Gebiet: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="465"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="475"/>
         <source>Changed area shape.</source>
         <translation>Gebietsform geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="473"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="483"/>
         <source>Changed name.</source>
         <translation>Name geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="479"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="489"/>
         <source>Changed border width.</source>
         <translation>Umrandungsbreite geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="485"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="495"/>
         <source>Changed fill pattern.</source>
         <translation>Füllung geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="491"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="501"/>
         <source>Changed opacity.</source>
         <translation>Deckkraft geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="497"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="507"/>
         <source>Changed comment.</source>
         <translation>Kommentar geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="503"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="513"/>
         <source>Changed description.</source>
         <translation>Beschreibung geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="509"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="519"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="520"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="530"/>
         <source>Changed color</source>
         <translation>Farbe geändert</translation>
     </message>
@@ -1312,83 +1312,83 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
 <context>
     <name>CGisItemRte</name>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="67"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="68"/>
         <source>_Clone</source>
         <translation>_Klon</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="285"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="298"/>
         <source>route</source>
         <translation>Route</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="329"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="342"/>
         <source>track</source>
         <translation>Track</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="355"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="368"/>
         <source>Changed name.</source>
         <translation>Name geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="361"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="374"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="367"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="380"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="373"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="386"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="389"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="402"/>
         <source>Length: %1%2</source>
         <translation>Länge: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="393"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="406"/>
         <source>Length: -</source>
         <translation>Länge: -</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="400"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="662"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="413"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="675"/>
         <source>Time: %1%2</source>
         <translation>Gesamtzeit: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="404"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="417"/>
         <source>Time: -</source>
         <translation>Gesamtzeit: -</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="414"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="427"/>
         <source>%1%2 %3, %4%5 %6</source>
         <translation>%1%2 %3, %4%5 %6</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="420"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="433"/>
         <source>Last time routed:&lt;br/&gt;%1</source>
         <translation>Letzte Routenberechnung: &lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="422"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="435"/>
         <source>with %1</source>
         <translation>mit %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="664"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="677"/>
         <source>Distance: %1%2</source>
         <translation>Entf.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="783"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="796"/>
         <source>Changed route points.</source>
         <translation>Geänderte Routenpunkte.</translation>
     </message>
@@ -1427,269 +1427,269 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Lesen der Daten fehlgeschlagen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="193"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="194"/>
         <source>_Clone</source>
         <translation>_Klon</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="374"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="375"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation>Wegpunkte geändert, alle vorherigen Daten sind verloren.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="511"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="512"/>
         <source>, %1-, %2-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="519"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="520"/>
         <source>Time: %1%2, Speed: %3%4</source>
         <translation>Zeit: %1%2, Geschw.: %3%4</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="523"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="524"/>
         <source>Time: -, Speed: -</source>
         <translation>Zeit: -, Geschw.: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="531"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="532"/>
         <source>Moving: %1%2, Speed: %3%4</source>
         <translation>Zeit in Bew.: %1%2, Geschw.: %3%4</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="535"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="536"/>
         <source>Moving: -, Speed: -</source>
         <translation>Zeit in Bew.: -, Geschw.: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="544"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="545"/>
         <source>Start: %1</source>
         <translation>Beginn: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="548"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="549"/>
         <source>Start: -</source>
         <translation>Beginn: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="554"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="555"/>
         <source>End: %1</source>
         <translation>Ende: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="558"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="559"/>
         <source>End: -</source>
         <translation>Ende: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="562"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="563"/>
         <source>Points: %1 (%2)</source>
         <translation>Punkte: %1 von %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="566"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="567"/>
         <source>Invalid elevations!</source>
         <translation>Ungültige Höhenwerte!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="571"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="572"/>
         <source>Invalid timestamps!</source>
         <translation>Ungültige Zeitmarken!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="576"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="577"/>
         <source>Invalid positions!</source>
         <translation>Ungültige Positionsdaten!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="590"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="591"/>
         <source>Activities: %1</source>
         <translation>Aktivitäten: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="713"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="714"/>
         <source>Index: %1</source>
         <translation>Index: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="717"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="718"/>
         <source>Index: visible %1, total %2</source>
         <translation>Index: angez. %1, total %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="732"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="733"/>
         <source>, Slope: %1%2</source>
         <translation>, Steigung: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="765"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="766"/>
         <source>... and %1 tags not displayed</source>
         <translation>... und %1 Tags werden nicht angezeigt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="777"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="778"/>
         <source>Distance: - (-)</source>
         <translation>Entfernung: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="778"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="779"/>
         <source>Moving: - (-)</source>
         <translation>Zeit in Bew.: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1496"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1509"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1608"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1652"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1792"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1497"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1510"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1609"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1653"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1793"/>
         <source>track</source>
         <translation>Track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1744"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1745"/>
         <source>Hide point %1.</source>
         <translation>Punkt %1 verbergen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1748"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1749"/>
         <source>Hide points %1..%2.</source>
         <translation>Punkte %1  %2 verbergen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="828"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="840"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="829"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="841"/>
         <source>, %1%2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="435"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2003"/>
         <source>min.</source>
         <translation>min.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="435"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2003"/>
         <source>max.</source>
         <translation>max.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="500"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="501"/>
         <source>Length: %1%2</source>
         <translation>Länge: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="507"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="508"/>
         <source>, %1%2%3, %4%5%6</source>
         <translation>, %1%2%3, %4%5%6</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="581"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
         <source>Invalid slopes!</source>
         <translation>Ungültige Steigungen!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="728"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="729"/>
         <source>Ele.: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="737"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="738"/>
         <source>, Speed: %1%2</source>
         <translation>, Geschw.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="775"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="776"/>
         <source>Ascent: - (-)</source>
         <translation>Anstieg: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="776"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="777"/>
         <source>Descent: - (-)</source>
         <translation>Abstieg: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="783"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="784"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation>Anstieg: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="789"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="790"/>
         <source>, Descent: %1%2 (%3%)</source>
         <translation>, Abstieg: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="795"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="796"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Entf.: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="801"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="802"/>
         <source>, Moving: %1%2 (%3%)</source>
         <translation>, Zeit in Bew.: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="817"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="818"/>
         <source>Ascent: -</source>
         <translation>Anstieg: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="818"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="819"/>
         <source>Descent: -</source>
         <translation>Abstieg: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="823"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="824"/>
         <source>Ascent: %1%2</source>
         <translation>Anstieg: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="835"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="836"/>
         <source>, Descent: %1%2</source>
         <translation>, Abstieg: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="845"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="846"/>
         <source>Distance: %1%2</source>
         <translation>Entf.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="850"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="851"/>
         <source>, Time: %1%2</source>
         <translation>, Zeit: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1555"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1556"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Punkte %1..%2 dauerhaft entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1568"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1569"/>
         <source>Track Point Info...</source>
         <translation>Trackpunktinformation...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1569"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1570"/>
         <source>Enter some text to be attached to this track point:</source>
         <translation>Geben Sie den Text ein, der an diesen Trackpunk angehängt werden soll:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1578"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1579"/>
         <source>Add track point desc.: %1</source>
         <translation>Trackpunktinformation hinzugefügt: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1588"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1589"/>
         <source>Changed track point desc.: %1</source>
         <translation>Trackpunktinformation geändert: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1598"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1599"/>
         <source>Removed track point desc.</source>
         <translation>Trackpunktinformation entfernt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1777"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1778"/>
         <source>Show points.</source>
         <translation>Punkte anzeigen.</translation>
     </message>
@@ -1843,79 +1843,409 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="106"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="110"/>
         <source>_Clone</source>
         <translation>_Klon</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="312"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="316"/>
         <source>Elevation: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="323"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="327"/>
         <source>Proximity: %1%2</source>
         <translation>Abstand: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="381"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="385"/>
         <source>Created: %1</source>
         <translation>Erstellt: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="453"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="457"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="463"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="467"/>
         <source>Changed position</source>
         <translation>Position geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="469"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="473"/>
         <source>Changed elevation</source>
         <translation>Höhe geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="478"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="482"/>
         <source>Removed proximity</source>
         <translation>Abstandsalarm entfernen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="483"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="487"/>
         <source>Changed proximity</source>
         <translation>Abstandsalarm geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="502"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="506"/>
         <source>Changed icon</source>
         <translation>Symbol geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="508"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="512"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="514"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="518"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="520"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="524"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="526"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="530"/>
         <source>Changed images</source>
         <translation>Bilder geändert</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="532"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="536"/>
         <source>Add image</source>
         <translation>Bild hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1096"/>
+        <source>QMS Attribute Flag</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1097"/>
+        <source>Dogs</source>
+        <translation>Hunde</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1098"/>
+        <source>Access or parking fee</source>
+        <translation>Eintritts- oder Parkgebühren</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1099"/>
+        <source>Climbing gear</source>
+        <translation>Kletterausrüstung benötigt</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1100"/>
+        <source>Boat</source>
+        <translation>Boot benötigt</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1101"/>
+        <source>Scuba gear</source>
+        <translation>Boot benötigt</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1102"/>
+        <source>Recommended for kids</source>
+        <translation>Empfohlen für Kinder</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1103"/>
+        <source>Takes less than an hour</source>
+        <translation>Dauert weniger als eine Stunde</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1104"/>
+        <source>Scenic view</source>
+        <translation>Dauert weniger als eine Stunde</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1105"/>
+        <source>Significant hike</source>
+        <translation>Lange Wanderung</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1106"/>
+        <source>Difficult climbing</source>
+        <translation>Schwieriges Klettern</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1107"/>
+        <source>May require wading</source>
+        <translation>Evtl. Waten erforderlich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1108"/>
+        <source>May require swimming</source>
+        <translation>Evtl. Waten erforderlich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1109"/>
+        <source>Available at all times</source>
+        <translation>Jederzeit verfügbar</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1110"/>
+        <source>Recommended at night</source>
+        <translation>Nachts empfohlen</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1111"/>
+        <source>Available during winter</source>
+        <translation>Zugänglich im Winter</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1113"/>
+        <source>Poison plants</source>
+        <translation>Giftige Pflanzen</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1114"/>
+        <source>Dangerous Animals</source>
+        <translation>Gefährliche Tiere</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1115"/>
+        <source>Ticks</source>
+        <translation>Zecken</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1116"/>
+        <source>Abandoned mines</source>
+        <translation>Verlassene Minen</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1117"/>
+        <source>Cliff / falling rocks</source>
+        <translation>Felsen/Steinschlag</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1118"/>
+        <source>Hunting</source>
+        <translation>Jagdgebiet</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1119"/>
+        <source>Dangerous area</source>
+        <translation>Gefährliches Gebiet</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1120"/>
+        <source>Wheelchair accessible</source>
+        <translation>Rollstuhl geeignet</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1121"/>
+        <source>Parking available</source>
+        <translation>Parkplatz verfügbar</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1122"/>
+        <source>Public transportation</source>
+        <translation>Öffentlicher Nahverkehr</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1123"/>
+        <source>Drinking water nearby</source>
+        <translation>Trinkwasser in der Nähe</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1124"/>
+        <source>Public restrooms nearby</source>
+        <translation>Öffentliche Toiletten in der Nähe</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1125"/>
+        <source>Telephone nearby</source>
+        <translation>Telefon in der Nähe</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1126"/>
+        <source>Picnic tables nearby</source>
+        <translation>Picknicktische in der Nähe</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1127"/>
+        <source>Camping available</source>
+        <translation>Camping möglich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1128"/>
+        <source>Bicycles</source>
+        <translation>Fahrräder</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1129"/>
+        <source>Motorcycles</source>
+        <translation>Motorräder</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1130"/>
+        <source>Quads</source>
+        <translation>Quads</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1131"/>
+        <source>Off-road vehicles</source>
+        <translation>Geländefahrzeuge</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1132"/>
+        <source>Snowmobiles</source>
+        <translation>Schneemobile</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1133"/>
+        <source>Horses</source>
+        <translation>Pferde</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1134"/>
+        <source>Campfires</source>
+        <translation>Lagerfeuer</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1135"/>
+        <source>Thorns</source>
+        <translation>Dornen</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1136"/>
+        <source>Stealth required</source>
+        <translation>Auf Muggel achten</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1137"/>
+        <source>Stroller accessible</source>
+        <translation>für Kinderwagen geeignet</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1138"/>
+        <source>Needs maintenance</source>
+        <translation>Benötigt Wartung</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1139"/>
+        <source>Watch for livestock</source>
+        <translation>Achte auf Vieh</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1140"/>
+        <source>Flashlight required</source>
+        <translation>Taschenlampe erforderlich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1142"/>
+        <source>Truck Driver/RV</source>
+        <translation>LKW/Wohnmobile</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1143"/>
+        <source>Field Puzzle</source>
+        <translation>Unterwegs-Rätsel</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1144"/>
+        <source>UV Light Required</source>
+        <translation>UV-Licht erforderlich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1145"/>
+        <source>Snowshoes</source>
+        <translation>Schneeschuhe erforderlich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1146"/>
+        <source>Cross Country Skis</source>
+        <translation>Langlauf-Skier erforderlich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1147"/>
+        <source>Special Tool Required</source>
+        <translation>Langlauf-Skier erforderlich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1148"/>
+        <source>Night Cache</source>
+        <translation>Nachtcache</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1149"/>
+        <source>Park and Grab</source>
+        <translation>Parken und Loggen</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1150"/>
+        <source>Abandoned Structure</source>
+        <translation>Verlassene Gebäude</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1151"/>
+        <source>Short hike (less than 1km)</source>
+        <translation>Kurze Wanderung (weniger als 1 km)</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1152"/>
+        <source>Medium hike (1km-10km)</source>
+        <translation>Mittlere Wanderung (1 km - 10 km)</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1153"/>
+        <source>Long Hike (+10km)</source>
+        <translation>Lange Wanderung (+10 km)</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1154"/>
+        <source>Fuel Nearby</source>
+        <translation>Lange Wanderung (+10 km)</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1155"/>
+        <source>Food Nearby</source>
+        <translation>Verpflegung in der Nähe</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1156"/>
+        <source>Wireless Beacon</source>
+        <translation>Funksignal</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1157"/>
+        <source>Partnership cache</source>
+        <translation>Partnercache</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1158"/>
+        <source>Seasonal Access</source>
+        <translation>Jahreszeitlich beschränkter Zugang</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1159"/>
+        <source>Tourist Friendly</source>
+        <translation>Touristenfreundlich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1160"/>
+        <source>Tree Climbing</source>
+        <translation>Baumklettern erforderlich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1161"/>
+        <source>Front Yard (Private Residence)</source>
+        <translation>Vorgarten (Privatgelände)</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1162"/>
+        <source>Teamwork Required</source>
+        <translation>Teamarbeit erforderlich</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1163"/>
+        <source>GeoTour</source>
+        <translation>GeoTour</translation>
     </message>
 </context>
 <context>
@@ -2385,52 +2715,73 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
 <context>
     <name>CGisWorkspace</name>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="120"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="127"/>
         <source>Load project...</source>
         <translation>Lade Projekt...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="120"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="127"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Das Projekt &quot;%1&quot; ist schon im Arbeitsplatz geladen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="176"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="183"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="187"/>
+        <source>Error parsing search.</source>
+        <translation>Fehler beim Parsen der Suche.</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWorkspace.cpp" line="183"/>
+        <source>Continuing with search for match in names</source>
+        <translation>Weiter mit der Suche nach namentlicher Übereinstimmung</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWorkspace.cpp" line="187"/>
+        <source>Continuing with search for match in full text</source>
+        <translation>Weiter mit der Volltextsuche</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWorkspace.cpp" line="204"/>
         <source>Apply filter to</source>
         <translation>Filter anwenden auf</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="240"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="207"/>
+        <source>Case sensitivity</source>
+        <translation>Groß-/Kleinschreibung</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWorkspace.cpp" line="291"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation>&lt;b&gt;Elementauswahl: &lt;/b&gt; Ein Element wurde aus der Arbeitplatzliste heraus ausgewählt. Klicken Sie auf die Karte, um wieder auf die normale Auswahl mit der Maus umzuschalten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="721"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="785"/>
         <source>Copy items...</source>
         <translation>Elemente kopieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="751"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="815"/>
         <source>Change waypoint symbols.</source>
         <translation>Symbol der Wegpunkte wird geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="993"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1057"/>
         <source>Cut Track...</source>
         <translation>Track teilen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="993"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1057"/>
         <source>Do you want to delete the original track?</source>
         <translation>Wollen Sie den ursprünglichen Track löschen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1262"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1326"/>
         <source>Enter new proximity range.</source>
         <translation>Geben Sie einen neuen Abstandsalarm ein.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1263"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1327"/>
         <source>Is no-go area</source>
         <translation>Gebietsvermeidung</translation>
     </message>
@@ -2882,69 +3233,69 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="601"/>
+        <location filename="../CMainWindow.cpp" line="606"/>
         <source>Select folder...</source>
         <translation>Ordner auswählen...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1016"/>
+        <location filename="../CMainWindow.cpp" line="1021"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;NewView&apos;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1145"/>
+        <location filename="../CMainWindow.cpp" line="1150"/>
         <source>Ele.: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1158"/>
+        <location filename="../CMainWindow.cpp" line="1163"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Hangneigung: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1174"/>
+        <location filename="../CMainWindow.cpp" line="1179"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1322"/>
+        <location filename="../CMainWindow.cpp" line="1327"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1356"/>
+        <location filename="../CMainWindow.cpp" line="1361"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1356"/>
-        <location filename="../CMainWindow.cpp" line="1382"/>
+        <location filename="../CMainWindow.cpp" line="1361"/>
+        <location filename="../CMainWindow.cpp" line="1387"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1382"/>
+        <location filename="../CMainWindow.cpp" line="1387"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1674"/>
+        <location filename="../CMainWindow.cpp" line="1679"/>
         <source>Rename View...</source>
         <translation>Kartenansicht umbenennen...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1674"/>
+        <location filename="../CMainWindow.cpp" line="1679"/>
         <source>Enter new name for view</source>
         <translation>Einen neuen Namen für die Kartenansicht eingeben</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1824"/>
+        <location filename="../CMainWindow.cpp" line="1829"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1825"/>
+        <location filename="../CMainWindow.cpp" line="1830"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack hat eine unvollständig installierte Proj4 Bibliothek gefunden. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution, um das zu beheben.</translation>
     </message>
@@ -5513,11 +5864,670 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     </message>
 </context>
 <context>
+    <name>CSearch</name>
+    <message>
+        <location filename="../gis/search/CSearch.h" line="152"/>
+        <location filename="../gis/search/CSearch.h" line="162"/>
+        <source>No information available</source>
+        <translation>Keine Informationen verfügbar</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="86"/>
+        <location filename="../gis/search/CSearch.cpp" line="87"/>
+        <location filename="../gis/search/CSearch.cpp" line="191"/>
+        <source>and</source>
+        <translation>und</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="374"/>
+        <location filename="../gis/search/CSearch.cpp" line="405"/>
+        <source>with</source>
+        <translation>mit</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="375"/>
+        <location filename="../gis/search/CSearch.cpp" line="406"/>
+        <source>contains</source>
+        <translation>enthält</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="376"/>
+        <location filename="../gis/search/CSearch.cpp" line="407"/>
+        <source>containing</source>
+        <translation>beinhaltet</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="377"/>
+        <location filename="../gis/search/CSearch.cpp" line="408"/>
+        <source>without</source>
+        <translation>ohne</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="378"/>
+        <location filename="../gis/search/CSearch.cpp" line="409"/>
+        <source>shorter than</source>
+        <translation>kürzer als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="379"/>
+        <location filename="../gis/search/CSearch.cpp" line="410"/>
+        <source>smaller than</source>
+        <translation>kleiner als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="380"/>
+        <location filename="../gis/search/CSearch.cpp" line="411"/>
+        <source>under</source>
+        <translation>unter</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="381"/>
+        <location filename="../gis/search/CSearch.cpp" line="412"/>
+        <source>lower than</source>
+        <translation>niedriger als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="382"/>
+        <location filename="../gis/search/CSearch.cpp" line="413"/>
+        <source>earlier than</source>
+        <translation>früher als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="383"/>
+        <location filename="../gis/search/CSearch.cpp" line="414"/>
+        <source>before</source>
+        <translation>vor dem</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="384"/>
+        <location filename="../gis/search/CSearch.cpp" line="415"/>
+        <source>less than</source>
+        <translation>weniger als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="386"/>
+        <location filename="../gis/search/CSearch.cpp" line="417"/>
+        <source>longer than</source>
+        <translation>länger als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="387"/>
+        <location filename="../gis/search/CSearch.cpp" line="418"/>
+        <source>higher than</source>
+        <translation>höher als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="388"/>
+        <location filename="../gis/search/CSearch.cpp" line="419"/>
+        <source>bigger than</source>
+        <translation>größer als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="389"/>
+        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <source>greater than</source>
+        <translation>mehr als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="390"/>
+        <location filename="../gis/search/CSearch.cpp" line="421"/>
+        <source>above</source>
+        <translation>höher als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="391"/>
+        <location filename="../gis/search/CSearch.cpp" line="422"/>
+        <source>over</source>
+        <translation>über</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="392"/>
+        <location filename="../gis/search/CSearch.cpp" line="423"/>
+        <source>after</source>
+        <translation>nach</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="393"/>
+        <location filename="../gis/search/CSearch.cpp" line="424"/>
+        <source>later than</source>
+        <translation>später als</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="395"/>
+        <location filename="../gis/search/CSearch.cpp" line="426"/>
+        <source>regex</source>
+        <translation>regex</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="397"/>
+        <location filename="../gis/search/CSearch.cpp" line="428"/>
+        <source>equals</source>
+        <translation>ist gleich</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="398"/>
+        <location filename="../gis/search/CSearch.cpp" line="429"/>
+        <source>between</source>
+        <translation>zwischen</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="405"/>
+        <source>example: attributes with dog</source>
+        <translation>Beispiel: Attribute mit Hund</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="406"/>
+        <source>example: name contains bike</source>
+        <translation>Beispiel: Name enthält Fahrrad</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="407"/>
+        <source>example: name containin bike</source>
+        <translation>Beispiel: Name beinhaltet Fahrrad</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="408"/>
+        <source>example: name without water</source>
+        <translation>Beispiel: Name ohne Wasser</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="409"/>
+        <source>example: shorter than 5km</source>
+        <translation>Beispiel: kürzer als 5km</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="410"/>
+        <source>example: area smaller than 5m²</source>
+        <translation>Beispiel: Fläche kleiner als 5m²</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="411"/>
+        <source>example: elevation under 1000ft</source>
+        <translation>Beispiel: Höhe unter 1000ft</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="412"/>
+        <source>example: lower than 500m</source>
+        <translation>Beispiel: niedriger als 500m</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="413"/>
+        <source>example: date earlier than 2015</source>
+        <translation>Beispiel: Datum früher als 2015</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="414"/>
+        <source>example: date before 10.05.2017</source>
+        <translation>Beispiel: Datum vor dem 10.05.2017</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="415"/>
+        <source>example: ascent less than 500m</source>
+        <translation>Beispiel: Aufstieg weniger als 500m</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="416"/>
+        <source>example: D &lt; 3</source>
+        <translation>Beispiel: D &lt; 3</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="417"/>
+        <source>example: distance longer than 20mi</source>
+        <translation>Beispiel: Entfernung länger als 20mi</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="418"/>
+        <source>example: terrain higher than 2</source>
+        <translation>Beispiel: Gelände höher als 2</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="419"/>
+        <source>example: area bigger than 50m²</source>
+        <translation>Beispiel: Fläche größer als 50m²</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <source>example: descent greater than 3000ft</source>
+        <translation>Beispiel: Abstieg mehr als 3000ft</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="421"/>
+        <source>example: above 50m</source>
+        <translation>Beispiel: höher als 50m</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="422"/>
+        <source>example: elevation over 400m</source>
+        <translation>Beispiel: Höhe über 400m</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="423"/>
+        <source>example: date after 2013</source>
+        <translation>Beispiel: Datum nach 2013</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="424"/>
+        <source>example: date later than 2015</source>
+        <translation>Beispiel: Datum später als 2013</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="425"/>
+        <source>example: T &gt; 4</source>
+        <translation>Beispiel: T &gt; 4</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="426"/>
+        <source>example: size regex (regular|large)</source>
+        <translation>Beispiel: Größe regex (regular|large)</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="427"/>
+        <source>example: size = micro</source>
+        <translation>Beispiel: Größe = Mikro</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="428"/>
+        <source>example: activity equals bike</source>
+        <translation>Beispiel: Aktivität ist gleich Fahrrad</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="429"/>
+        <source>example: length between 20km and 20mi</source>
+        <translation>Beispiel: Länge zwischen 20km und 20mi</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="437"/>
+        <source>name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="438"/>
+        <source>full text</source>
+        <translation>Volltext</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="439"/>
+        <source>elevation</source>
+        <translation>Höhe</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="440"/>
+        <source>date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="441"/>
+        <source>comment</source>
+        <translation>Kommentar</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="442"/>
+        <source>description</source>
+        <translation>Beschreibung</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="445"/>
+        <source>area</source>
+        <translation>Fläche</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="448"/>
+        <source>difficulty</source>
+        <translation>Schwierigkeit</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="450"/>
+        <source>terrain</source>
+        <translation>Gelände</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="451"/>
+        <source>T</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="452"/>
+        <source>positive attributes</source>
+        <translation>positive Eigenschaften</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="453"/>
+        <source>non-negated attributes</source>
+        <translation>nicht negierte Attribute</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="454"/>
+        <source>negated attributes</source>
+        <translation>negierte Attribute</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="455"/>
+        <source>size</source>
+        <translation>Größe</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="456"/>
+        <source>GCCode</source>
+        <translation>GCCode</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="457"/>
+        <source>GCName</source>
+        <translation>GCName</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="462"/>
+        <source>distance</source>
+        <translation>Entfernung</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="463"/>
+        <source>length</source>
+        <translation>Länge</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="464"/>
+        <source>ascent</source>
+        <translation>Anstieg</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="465"/>
+        <source>elevation gain</source>
+        <translation>Höhengewinn</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="466"/>
+        <source>descent</source>
+        <translation>Abstieg</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="467"/>
+        <source>min elevation</source>
+        <translation>min Höhe</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="468"/>
+        <source>minimal elevation</source>
+        <translation>minimale Höhe</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="469"/>
+        <source>max elevation</source>
+        <translation>max Höhe</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="470"/>
+        <source>maximal elevation</source>
+        <translation>maximale Höhe</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="471"/>
+        <source>max speed</source>
+        <translation>max Geschwindigkeit</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="472"/>
+        <source>maximal speed</source>
+        <translation>maximale Geschwindigkeit</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="473"/>
+        <source>min speed</source>
+        <translation>min Geschwindigkeit</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="474"/>
+        <source>minimal speed</source>
+        <translation>minimale Geschwindigkeit</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="475"/>
+        <source>average speed</source>
+        <translation>Durchschnittsgeschwindigkeit</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="476"/>
+        <source>activity</source>
+        <translation>Aktivität</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="477"/>
+        <source>total time</source>
+        <translation>Gesamtzeit</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="478"/>
+        <source>duration</source>
+        <translation>Dauer</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="479"/>
+        <source>time moving</source>
+        <translation>Zeit in Bew</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="488"/>
+        <source>searches the name of the item. For Geocaches this is &quot;Name - GCCode&quot;.</source>
+        <translation>sucht den Namen des Elements. Für Geocaches ist dies &quot;Name - GCCode&quot;.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="489"/>
+        <source>searches the full text</source>
+        <translation>durchsucht den Volltext</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="490"/>
+        <source>searches the elevation. For items consisting of multiple points the minimum and the maximum is used</source>
+        <translation>sucht die Höhe. Für Elemente, die aus mehreren Punkten bestehen, wird das Minimum und das Maximum verwendet.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="491"/>
+        <source>searches the Date</source>
+        <translation>durchsucht das Datum</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="492"/>
+        <source>searches the Comment</source>
+        <translation>durchsucht den Kommentar</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="493"/>
+        <source>searches the Description</source>
+        <translation>durchsucht die Beschreibung</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="496"/>
+        <source>searches the area</source>
+        <translation>durchsucht die Fläche</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="499"/>
+        <source>searches the difficulty rating of a geocache</source>
+        <translation>durchsucht die Schwierigkeitsbewertung eines Geocache</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="500"/>
+        <source>searches the terrain rating of a geocache</source>
+        <translation>durchsucht die Terrainbewertung eines Geocache</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="501"/>
+        <source>searches the translated meanings of the non-negated attributes (Those not crossed out)</source>
+        <translation>durchsucht die übersetzten Bedeutungen der nicht verneinten Attribute (die nicht durchgestrichenen).</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="502"/>
+        <source>searches the translated meanings of the negated attributes (Those crossed out)</source>
+        <translation>durchsucht die übersetzten Bedeutungen der negierten Attribute (die durchgestrichenen).</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="503"/>
+        <source>searches the size of a geocache. (micro, small, regular, large)</source>
+        <translation>sucht die Größe eines Geocache. (Mikro, klein, normal, groß)</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="504"/>
+        <source>searches the GCCode of a geocache.</source>
+        <translation>durchsucht den GCCode eines Geocache.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="505"/>
+        <source>searches the Name of a geocache.</source>
+        <translation>sucht den Namen eines Geocache.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="510"/>
+        <source>searches the distance covered by a route or track</source>
+        <translation>sucht die Strecke, die von einer Route oder einem Track zurückgelegt wird.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="511"/>
+        <source>searches the total ascent in a route or track</source>
+        <translation>sucht den gesamten Anstieg in einer Route oder Spur.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="512"/>
+        <source>searches the total descent in a route or track</source>
+        <translation>sucht den gesamten Abstieg in einer Route oder Spur.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="513"/>
+        <source>searches the minimal elevation in a route or track</source>
+        <translation>sucht die minimale Höhe in einer Route oder Track.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="514"/>
+        <source>searches the maximal elevation in a route or track</source>
+        <translation>sucht die maximale Höhe in einer Route oder einem Track.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="515"/>
+        <source>searches the maximal speed in a track</source>
+        <translation>sucht die maximale Geschwindigkeit in einem Track</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="516"/>
+        <source>searches the minimal speed in a track</source>
+        <translation>sucht die minimale Geschwindigkeit in einem Track</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="517"/>
+        <source>searches the average speed in a track</source>
+        <translation>durchsucht die Durchschnittsgeschwindigkeit in einem Track</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="518"/>
+        <source>searches the activity of a route or track</source>
+        <translation>sucht die Aktivität einer Route oder eines Tracks.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="519"/>
+        <source>searches the total time spent on a route or track</source>
+        <translation>durchsucht die gesamte Zeit, die auf einer Route oder einem Track verbracht wurde.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="520"/>
+        <source>searches the time spent moving on a track</source>
+        <translation>durchsucht die Zeit in Bewegung bei einem Track</translation>
+    </message>
+</context>
+<context>
     <name>CSearchDatabase</name>
     <message>
         <location filename="../gis/db/CSearchDatabase.cpp" line="38"/>
         <source>Search database &apos;%1&apos;:</source>
         <translation>Datenbank &apos;%1&apos; durchsuchen</translation>
+    </message>
+</context>
+<context>
+    <name>CSearchExplanationDialog</name>
+    <message>
+        <source>&lt;p&gt;The underlying syntax of the search is &quot;Property Comparison Value&quot;, i.e. &quot;name contains water&quot;. However there are measures in place to make searching more intuitive. (see below)&lt;/p&gt;&lt;p&gt;The searches are always exclusive, thus for a track &quot;elevation under 500m&quot; only shows tracks that are completly under 500m meters.&lt;/p&gt;&lt;p&gt;Following assumptions are made:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;If only one of two given numbers has a unit, the unit is assumed for both&lt;/li&gt;&lt;li&gt;Speed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date.&lt;/li&gt;&lt;li&gt;&apos;Date equals&apos; matches everything that is within 24h from the given date, thus normally the day typed.&lt;/li&gt;&lt;li&gt;If you enter no unit the default unit (what you see when viewing the property of the item) is used.&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation type="vanished">&lt;p&gt;Die der Suche zugrunde liegende Syntax ist &quot;Property Comparison Value&quot;, d.h. &quot;name contains water&quot;. Es gibt jedoch Maßnahmen, um die Suche intuitiver zu gestalten. (siehe unten)&lt;/p&gt;&lt;p&gt;Die Suche ist immer exklusiv, so dass für eine Strecke &quot;Höhe unter 500m&quot; nur Spuren angezeigt werden, die vollständig unter 500m Meter liegen.&lt;/p&gt;&lt;p&gt;Folgende Annahmen werden getroffen:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Wenn nur eine von zwei gegebenen Zahlen eine Einheit hat, wird die Einheit für beide&lt;/li&gt;&lt;li&gt;Geschwindigkeitseinheiten angenommen, was zu Durchschnittsgeschwindigkeit, km und mi in Entfernung, m und ft in Höhe, Zeiten in Zeitverschiebung, Datum in Datum führt.&lt;/li&gt;&lt;li&gt;&apos;Datum ist gleich&apos; passt zu allem, was innerhalb von 24h ab dem angegebenen Datum liegt, also normalerweise der Tag, der eingegeben wird.&lt;/li&gt;&lt;li&gt;Wenn Sie keine Einheit eingeben, wird die Standardeinheit (was Sie beim Betrachten der Eigenschaft des Objekts sehen) verwendet.&lt;/li&gt;&lt;/ul&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="30"/>
+        <source>&lt;p&gt;Following assumptions are made:&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Folgende Annahmen werden getroffen:&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="28"/>
+        <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completly under 500m meters.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Die Suchanfragen sind immer exklusiv, z.B. die Suche nach einem Track &apos;Höhe unter 500m&apos;, findet Tracks, die vollständig unter 500 m liegen.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="26"/>
+        <source>&lt;p&gt;The underlying syntax of the search is &apos;property comparison value&apos;, e.g. &apos;name contains water&apos;. However some rules apply to make a search more intuitive.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Die der Suche zugrundeliegende Syntax ist &apos;Eigenschaft Vergleich Wert&apos;, z.B. &apos;Name enthält Wasser&apos;. Allerdings gelten einige Regeln, um die Suche intuitiver zu gestalten.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="33"/>
+        <source>If only one of the two given values has a unit the unit is assumed for both</source>
+        <translation>Wenn nur einer der beiden angegebenen Werte eine Einheit hat, wird die Einheit für beide angenommen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="36"/>
+        <source>If a search string in the short form &apos;comparison value&apos; is used the property is derived from the value and its unit: </source>
+        <translation>Bei Verwendung eines Suchbegriffs in der Kurzform &apos;Vergleich Vergleichswert&apos; wird die Eigenschaft aus dem Wert und seiner Einheit abgeleitet: </translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="40"/>
+        <source>speed units: average speed</source>
+        <translation>Geschwindigkeitseinheiten: Durchschnittsgeschwindigkeit</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="43"/>
+        <source>km and mi: distance</source>
+        <translation>km und mi: Entfernung</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="46"/>
+        <source>m and ft: elevation</source>
+        <translation>m und ft: Höhe</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="49"/>
+        <source>time: time moving</source>
+        <translation>Zeit: Zeit in Bewegung</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="52"/>
+        <source>date: date</source>
+        <translation>Datum: Datum</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
+        <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>
+        <translation>&apos;Datum gleich&apos; findet alles, was innerhalb von 24 Stunden des aktuellen Tages liegt.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="63"/>
+        <source>&lt;p&gt;You can write dates in the following formats:&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Sie können ein Datum in den folgenden Formaten schreiben:&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="60"/>
+        <source>If you enter no unit the default unit (what you see when viewing the property of the item) is used.</source>
+        <translation>Wenn Sie keine Einheit eingeben, wird die Standardeinheit verwendet (die, die Sie bei der Anzeige der Eigenschaft des jeweiligen Wertes sehen).</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You can write Dates in the following formats:&lt;/p&gt;</source>
+        <translation type="vanished">&lt;p&gt;Sie können Daten in den folgenden Formaten schreiben:&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="70"/>
+        <source>&lt;p&gt;The search can only convert following units:&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Die Suche kann nur folgende Einheiten umrechnen:&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="72"/>
+        <source>&lt;p&gt;The regex search uses this syntax: https://perldoc.perl.org/perlre.html&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Die regex-Suche verwendet folgende Syntax: https://perldoc.perl.org/perlre.html&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="73"/>
+        <source>&lt;p&gt;Following keywords are available for searching:&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Folgende Schlüsselwörter stehen für die Suche zur Verfügung:&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -8744,70 +9754,70 @@ It is either a new item or it has been deleted in the database by someone else.<
 <context>
     <name>IGisProject</name>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="182"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="181"/>
         <source>Save project?</source>
         <translation>Projekt speichern?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="182"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="181"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern, bevor es geschlossen wird?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="382"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="381"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation>%1: Tracks und Wegpunkte verknüpfen.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="392"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="391"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Hat das zu lange gedauert? Wollen Sie die Verknüpfung von Tracks und Wegpunkten auch in Zukunft für dieses Projekt überspringen?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="393"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="392"/>
         <source>Canceled correlation...</source>
         <translation>Verknüpfung abgebrochen...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="438"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="495"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="437"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="494"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Speichere &quot;%1&quot; nach...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="580"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="579"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Dateiname: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="585"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="584"/>
         <source>Waypoints: %1</source>
         <translation>Wegpunkte: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="589"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="588"/>
         <source>Tracks: %1</source>
         <translation>Tracks: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="593"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="592"/>
         <source>Routes: %1</source>
         <translation>Routen: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="597"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="596"/>
         <source>Areas: %1</source>
         <translation>Gebiete: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="735"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="734"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Projekt &apos;%2&apos; löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="736"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="735"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
@@ -8906,34 +9916,63 @@ Dateiname: %1</translation>
         <translation>Ändert die Transparenz von allen GIS Elementen auf der Karte.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="66"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
-        <translation>Filter: Fangen Sie zu tippen an und die Liste wird auf passende Einträge reduziert.</translation>
+        <translation type="vanished">Filter: Fangen Sie zu tippen an und die Liste wird auf passende Einträge reduziert.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="111"/>
+        <location filename="../gis/IGisWorkspace.ui" line="66"/>
+        <source>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</source>
+        <translation>Filtern: Beginnen Sie mit der Eingabe und die Liste wird auf passende Elemente reduziert. Ein Beispiel wäre &quot;Datum zwischen 2010 und 2012&quot;.</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="69"/>
+        <source>start typing...</source>
+        <translation>mit dem Tippen anfangen...</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="114"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="123"/>
+        <location filename="../gis/IGisWorkspace.ui" line="126"/>
         <source>Clear Filter</source>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="132"/>
+        <location filename="../gis/IGisWorkspace.ui" line="135"/>
         <source>Setup Filter</source>
         <translation>Filter einstellen</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="140"/>
+        <location filename="../gis/IGisWorkspace.ui" line="143"/>
         <source>name only</source>
         <translation>den Namen</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="148"/>
+        <location filename="../gis/IGisWorkspace.ui" line="151"/>
         <source>complete text</source>
         <translation>den vollständigen Text</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="160"/>
+        <source>Help</source>
+        <translation>Hilfe</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="163"/>
+        <source>help with searching</source>
+        <translation>Hilfe bei der Suche</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="171"/>
+        <source>Case Sensitive</source>
+        <translation>Groß-/Kleinschreibung</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="180"/>
+        <source>Could not parse searchstring</source>
+        <translation>Suchbegriff konnte nicht analysiert werden</translation>
     </message>
 </context>
 <context>
@@ -11853,6 +12892,19 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     </message>
 </context>
 <context>
+    <name>ISearchExplanationDialog</name>
+    <message>
+        <location filename="../gis/search/ISearchExplanationDialog.ui" line="20"/>
+        <source>Help</source>
+        <translation>Hilfe</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/ISearchExplanationDialog.ui" line="30"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Text set in constructor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>ISelDevices</name>
     <message>
         <location filename="../gis/ISelDevices.ui" line="14"/>
@@ -12680,18 +13732,18 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="811"/>
-        <location filename="../units/IUnit.cpp" line="817"/>
+        <location filename="../units/IUnit.cpp" line="905"/>
+        <location filename="../units/IUnit.cpp" line="911"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="811"/>
+        <location filename="../units/IUnit.cpp" line="905"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Falsches Positionsformat. Muss entweder &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; oder &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot; sein.</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="817"/>
+        <location filename="../units/IUnit.cpp" line="911"/>
         <source>Position values out of bounds. </source>
         <translation>Position außerhalb der gültigen Werte.</translation>
     </message>

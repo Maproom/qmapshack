@@ -452,6 +452,87 @@ void IUnit::meter2base(qreal meter, QString& val, QString& unit) const
     val.sprintf("%1.0f", meter * basefactor);
 }
 
+bool IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
+{
+    unit = unit.toLower(); //since comparison is made in lower
+    if(unit == targetUnit)
+    {
+        return true;
+    }
+    else
+    {
+        qreal toBase = NOFLOAT;
+        unit_type_e unitType;
+        if(timeToMKSMap.contains(unit))
+        {
+            toBase = timeToMKSMap[unit];
+            unitType = eUnitTypeTime;
+        }
+        else if(distanceToMKSMap.contains(unit))
+        {
+            toBase = distanceToMKSMap[unit];
+            unitType = eUnitTypeDistance;
+        }
+        else if(speedToMKSMap.contains(unit))
+        {
+            toBase = speedToMKSMap[unit];
+            unitType = eUnitTypeSpeed;
+        }
+        else if(areaToMKSMap.contains(unit))
+        {
+            toBase = areaToMKSMap[unit];
+            unitType = eUnitTypeArea;
+        }
+        else
+        {
+            return false;
+        }
+
+        qreal fromTarget = NOFLOAT;
+        switch(unitType)
+        {
+        case eUnitTypeTime:
+            fromTarget = timeToMKSMap.value(targetUnit.toLower(), NOFLOAT);
+            if(fromTarget == NOFLOAT)
+            {
+                return false;
+            }
+            break;
+
+        case eUnitTypeDistance:
+            fromTarget = distanceToMKSMap.value(targetUnit.toLower(), NOFLOAT);
+            if(fromTarget == NOFLOAT)
+            {
+                return false;
+            }
+            break;
+
+        case eUnitTypeSpeed:
+            fromTarget = speedToMKSMap.value(targetUnit.toLower(), NOFLOAT);
+            if(fromTarget == NOFLOAT)
+            {
+                return false;
+            }
+            break;
+
+        case eUnitTypeArea:
+            fromTarget = areaToMKSMap.value(targetUnit.toLower(), NOFLOAT);
+            if(fromTarget == NOFLOAT)
+            {
+                return false;
+            }
+            break;
+
+        default:
+            return false;
+        }
+
+        unit = targetUnit;
+        value = value * toBase / fromTarget;
+        return true;
+    }
+}
+
 void IUnit::slope2string(qreal slope, QString &val, QString &unit)
 {
     switch(slopeMode)
@@ -529,6 +610,19 @@ void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
     }
 
     val.sprintf("%2.2f", meter * speedfactor);
+    unit = speedunit;
+}
+
+void IUnit::meter2speed(qreal meter, qreal& val, QString& unit) const
+{
+    if(meter == NOFLOAT)
+    {
+        val = NOFLOAT;
+        unit.clear();
+        return;
+    }
+
+    val = meter * speedfactor;
     unit = speedunit;
 }
 
@@ -845,3 +939,51 @@ bool IUnit::isValidCoordString(const QString& str)
     }
     return false;
 }
+
+QMap<QString, qreal> IUnit::timeToMKSMap={
+    {"s", 1.0},
+    {"min", 60.0},
+    {"h", 3600.0},
+    {"с", 1.0},
+    {"мин", 60.0},
+    {"ч", 3600.0},
+};
+
+QMap<QString, qreal> IUnit::distanceToMKSMap={
+    {"m", 1.0},
+    {"km", 1000.0},
+    {"mi", 1.0/CUnitImperial::milePerMeter},
+    {"ft", 1.0/CUnitImperial::footPerMeter},
+    {"м", 1.0},
+    {"км", 1000.0},
+};
+
+QMap<QString, qreal> IUnit::speedToMKSMap={
+    {"m/s", 1.0},
+    {"m/min", 1.0/60},
+    {"m/h", 1.0/3600},
+    {"km/s", 1000.0},
+    {"km/min", 1000.0/60},
+    {"km/h", 1000.0/3600},
+    {"mi/s", 1.0/CUnitImperial::milePerMeter},
+    {"mi/min", 1.0/(CUnitImperial::milePerMeter*60)},
+    {"mi/h", 1.0/(CUnitImperial::milePerMeter*3600)},
+    {"ft/s", 1.0/CUnitImperial::footPerMeter},
+    {"ft/min", 1.0/(CUnitImperial::footPerMeter*60)},
+    {"ft/h", 1.0/(CUnitImperial::footPerMeter*3600)},
+    {"м/с", 1.0},
+    {"м/мин", 1.0/60},
+    {"м/ч", 1.0/3600},
+    {"км/с", 1000.0},
+    {"км/мин", 1000.0/60},
+    {"км/ч", 1000.0/3600},
+};
+
+QMap<QString, qreal> IUnit::areaToMKSMap={
+    {"m²", 1.0},
+    {"km²", 1000.0*1000},
+    {"mi²", 1.0/(CUnitImperial::milePerMeter*CUnitImperial::milePerMeter)},
+    {"ft²", 1.0/(CUnitImperial::footPerMeter*CUnitImperial::footPerMeter)},
+    {"м²", 1.0},
+    {"км²", 1000.0*1000},
+};

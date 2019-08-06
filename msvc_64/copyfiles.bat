@@ -3,7 +3,7 @@ rem Please adapt environment variables in section 1) to your system
 
 
 rem Section 1.) Define path to Qt, MSVC, .... installations
-set QMSI_QT_PATH="C:\Qt5\5.12.1\msvc2017_64"
+set QMSI_QT_PATH="C:\Qt5\5.12.3\msvc2017_64"
 rem get the VC redistributable installer from https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 set QMSI_VCREDIST_PATH="M:\deploy_2017"
 set QMSI_GDAL_PATH="M:\lib2017\gdal"
@@ -97,7 +97,7 @@ copy %QMSI_GDAL_PATH%\bin\*.dll
 copy %QMSI_GDAL_PATH%\bin\*.exe
 rem section 2.2.4) PROJ.4
 xcopy %QMSI_PROJ_PATH%\share share /s /i
-copy %QMSI_PROJ_PATH%\bin\proj_6_0.dll
+copy %QMSI_PROJ_PATH%\bin\proj_6_1.dll
 copy %QMSI_PROJ_PATH%\bin\proj.exe
 copy %QMSI_PROJ_PATH%\bin\projinfo.exe
 copy %QMSI_PROJ_PATH%\bin\cct.exe

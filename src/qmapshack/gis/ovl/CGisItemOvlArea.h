@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -117,6 +118,8 @@ public:
 
     void gainUserFocus(bool yes) override;
 
+    const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
+
     struct width_t
     {
         int width;
@@ -204,6 +207,10 @@ private:
     QPolygonF polygonArea;
 
     QPointer<CScrOptOvlArea>  scrOpt;
+
+    using fSearch = std::function<const searchValue_t (CGisItemOvlArea*)>;
+    static QMap<searchProperty_e, fSearch > keywordLambdaMap;
+    static QMap<searchProperty_e, fSearch > initKeywordLambdaMap();
 };
 
 #endif //CGISITEMOVLAREA_H

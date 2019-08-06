@@ -36,6 +36,8 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/IRouter.h"
 #include "gis/search/CGeoSearchWeb.h"
+#include "gis/search/CSearch.h"
+#include "gis/search/CSearchExplanationDialog.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -58,24 +60,28 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
     setupUi(this);
 
     lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
+    lineFilter->addAction(actionHelp, QLineEdit::TrailingPosition);
     lineFilter->addAction(actionSetupFilter, QLineEdit::LeadingPosition);
 
     treeWks->setExternalMenu(menuProject);
 
     SETTINGS;
     treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
-    IGisProject::filterMode = IGisProject::filter_mode_e(cfg.value("Workspace/projects/filterMode", IGisProject::filterMode).toInt());
+    CSearch::setSearchMode(CSearch::search_mode_e(cfg.value("Workspace/projects/filterMode", CSearch::getSearchMode()).toInt()));
+    CSearch::setCaseSensitivity(Qt::CaseSensitivity(cfg.value("Workspace/projects/CaseSensitivity", CSearch::getCaseSensitivity()).toInt()));
 
     connect(treeWks, &CGisListWks::sigChanged, this, &CGisWorkspace::sigChanged);
     connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWorkspace::slotSetGisLayerOpacity);
-    connect(lineFilter, &QLineEdit::textChanged, this, &CGisWorkspace::slotFilter);
-    connect(actionSetupFilter, &QAction::triggered, this, &CGisWorkspace::slotSetupFilter);
+    connect(lineFilter, &QLineEdit::textChanged, this, &CGisWorkspace::slotSearch);
+    connect(actionSetupFilter, &QAction::triggered, this, &CGisWorkspace::slotSetupSearch);
     connect(treeWks, &CGisListWks::itemPressed, this, &CGisWorkspace::slotWksItemPressed);
     connect(treeWks, &CGisListWks::itemSelectionChanged, this, &CGisWorkspace::slotWksItemSelectionChanged);
     connect(treeWks, &CGisListWks::sigItemDeleted, this, &CGisWorkspace::slotWksItemSelectionChanged);
 
-    connect(actionNameOnly, &QAction::triggered, this, &CGisWorkspace::slotFilterNameOnly);
-    connect(actionCompleteText, &QAction::triggered, this, &CGisWorkspace::slotFilterCompleteText);
+    connect(actionNameOnly, &QAction::triggered, this, &CGisWorkspace::slotSearchNameOnly);
+    connect(actionCompleteText, &QAction::triggered, this, &CGisWorkspace::slotSearchCompleteText);
+    connect(actionCaseSensitive, &QAction::triggered, this, &CGisWorkspace::slotCaseSensitive);
+    connect(actionHelp, &QAction::triggered, this, &CGisWorkspace::slotSearchHelp);
 
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
     //              is up and running.
@@ -86,7 +92,8 @@ CGisWorkspace::~CGisWorkspace()
 {
     SETTINGS;
     cfg.setValue("Workspace/treeWks/state", treeWks->header()->saveState());
-    cfg.setValue("Workspace/projects/filterMode", IGisProject::filterMode);
+    cfg.setValue("Workspace/projects/filterMode", CSearch::getSearchMode());
+    cfg.setValue("Workspace/projects/CaseSensitivity", CSearch::getCaseSensitivity());
     /*
         Explicitly delete workspace here, as database projects use
         CGisWorkspace upon destruction to signal the database their destruction.
@@ -140,17 +147,19 @@ void CGisWorkspace::slotSetGisLayerOpacity(int val)
     }
 }
 
-void CGisWorkspace::applyFilter()
+void CGisWorkspace::applySearch()
 {
-    slotFilter(lineFilter->text());
+    slotSearch(lineFilter->text());
 }
 
-void CGisWorkspace::slotFilter(const QString& str)
+void CGisWorkspace::slotSearch(const QString& str)
 {
     actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
 
     CCanvas::setOverrideCursor(Qt::WaitCursor, "slotFilter");
     QMutexLocker lock(&IGisItem::mutexItems);
+
+    CSearch currentSearch (str);
 
     const int N = treeWks->topLevelItemCount();
     for(int n = 0; n < N; n++)
@@ -161,39 +170,81 @@ void CGisWorkspace::slotFilter(const QString& str)
             continue;
         }
 
-        item->filter(str.toUpper());
+        item->filter(currentSearch);
         item->setExpanded(!str.isEmpty());
     }
+
+    //test whether no syntax errors occured and show error
+    if(currentSearch.getSyntaxError())
+    {
+        lineFilter->addAction(actionError, QLineEdit::TrailingPosition);
+        if(currentSearch.getSearchMode() == CSearch::eSearchModeName)
+        {
+            actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in names"));
+        }
+        else
+        {
+            actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
+        }
+    }
+    else
+    {
+        lineFilter->removeAction(actionError);
+    }
+
 
     CCanvas::restoreOverrideCursor("slotFilter");
 
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CGisWorkspace::slotSetupFilter()
+void CGisWorkspace::slotSetupSearch()
 {
     QMenu * menu = new QMenu(lineFilter);
     menu->addSection(tr("Apply filter to"));
     menu->addAction(actionNameOnly);
     menu->addAction(actionCompleteText);
+    menu->addSection(tr("Case sensitivity"));
+    menu->addAction(actionCaseSensitive);
 
     QActionGroup* actionGroup = new QActionGroup(menu);
     actionGroup->addAction(actionNameOnly);
     actionGroup->addAction(actionCompleteText);
 
-    switch(IGisProject::filterMode)
+    switch(CSearch::getSearchMode())
     {
-    case IGisProject::eFilterModeName:
+    case CSearch::eSearchModeName:
         actionNameOnly->setChecked(true);
         break;
 
-    case IGisProject::eFilterModeText:
+    case CSearch::eSearchModeText:
         actionCompleteText->setChecked(true);
         break;
     }
 
+    if(CSearch::getCaseSensitivity() == Qt::CaseSensitive)
+    {
+        actionCaseSensitive->setChecked(true);
+    }
+    else
+    {
+        actionCaseSensitive->setChecked(false);
+    }
     menu->move(lineFilter->parentWidget()->mapToGlobal(lineFilter->geometry().topLeft()));
     menu->exec();
+}
+
+void CGisWorkspace::slotSearchHelp()
+{
+    if(explanationDlg == nullptr)
+    {
+        explanationDlg = new CSearchExplanationDialog(this);
+    }
+
+    if(!explanationDlg->isVisible())
+    {
+        explanationDlg->show();
+    }
 }
 
 void CGisWorkspace::slotSaveAll()
@@ -207,6 +258,12 @@ void CGisWorkspace::slotSaveAll()
         {
             continue;
         }
+
+        if(item->skipSave())
+        {
+            continue;
+        }
+
         if(item->canSave())
         {
             item->save();
@@ -258,22 +315,35 @@ void CGisWorkspace::slotWksItemSelectionReset()
     }
 }
 
-void CGisWorkspace::slotFilterNameOnly(bool yes)
+void CGisWorkspace::slotSearchNameOnly(bool yes)
 {
     if(yes)
     {
-        IGisProject::filterMode = IGisProject::eFilterModeName;
-        applyFilter();
+        CSearch::setSearchMode(CSearch::eSearchModeName);
+        applySearch();
     }
 }
 
-void CGisWorkspace::slotFilterCompleteText(bool yes)
+void CGisWorkspace::slotSearchCompleteText(bool yes)
 {
     if(yes)
     {
-        IGisProject::filterMode = IGisProject::eFilterModeText;
-        applyFilter();
+        CSearch::setSearchMode(CSearch::eSearchModeText);
+        applySearch();
     }
+}
+
+void CGisWorkspace::slotCaseSensitive(bool yes)
+{
+    if(yes)
+    {
+        CSearch::setCaseSensitivity(Qt::CaseSensitive);
+    }
+    else
+    {
+        CSearch::setCaseSensitivity(Qt::CaseInsensitive);
+    }
+    applySearch();
 }
 
 void CGisWorkspace::slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trkact_t act)

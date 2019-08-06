@@ -76,7 +76,7 @@ void CProjWpt::slotChangeName()
 
 void CProjWpt::accept()
 {
-    qreal dist = lineDist->text().toDouble();
+    qreal dist = IUnit::self().elevation2meter(lineDist->text());
     qreal bearing = lineBearing->text().toDouble();
 
     if((dist <= 0) || (bearing > 180) || (bearing < -180))

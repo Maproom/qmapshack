@@ -16,12 +16,12 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/trk/CEnergyCyclingDialog.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/CEnergyCyclingDlg.h"
 
-CEnergyCyclingDlg::CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycling) :
+CEnergyCyclingDialog::CEnergyCyclingDialog(CEnergyCycling &energyCycling, QWidget *parent) :
     QDialog(parent)
-  , energyCycling(energyCycling)
+    , energyCycling(energyCycling)
 {
     setupUi(this);
 
@@ -39,7 +39,6 @@ CEnergyCyclingDlg::CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycl
     }
     setWindowTitle(tr("Energy Use Cycling Parameter Set"));
 
-// How to put this tooltips in the GUI?
     buttonBox->button(QDialogButtonBox::RestoreDefaults)->setToolTip(tr("Load the previous saved parameter set."));
     buttonBox->button(QDialogButtonBox::Reset)->setToolTip(tr("Remove the Energy Use Cycling value from the track."));
 
@@ -74,11 +73,11 @@ CEnergyCyclingDlg::CEnergyCyclingDlg(QWidget *parent, CEnergyCycling &energyCycl
     slotApply(true);
 }
 
-CEnergyCyclingDlg::~CEnergyCyclingDlg()
+CEnergyCyclingDialog::~CEnergyCyclingDialog()
 {
 }
 
-void CEnergyCyclingDlg::updateUi()
+void CEnergyCyclingDialog::updateUi()
 {
     spinDriverWeight->setValue(energyTmpSet.driverWeight);
     spinBikeWeight->setValue(energyTmpSet.bikeWeight);
@@ -121,7 +120,7 @@ void CEnergyCyclingDlg::updateUi()
     spinPedalCadence->setValue(energyTmpSet.pedalCadence);
 }
 
-void CEnergyCyclingDlg::slotOk(bool)
+void CEnergyCyclingDialog::slotOk(bool)
 {
     energyCycling.setEnergyTrkSet(energyTmpSet, true);
     energyCycling.compute();
@@ -129,7 +128,7 @@ void CEnergyCyclingDlg::slotOk(bool)
     accept();
 }
 
-void CEnergyCyclingDlg::slotApply(bool)
+void CEnergyCyclingDialog::slotApply(bool)
 {
     energyCycling.compute(energyTmpSet);
 
@@ -154,27 +153,27 @@ void CEnergyCyclingDlg::slotApply(bool)
     labelPositivePedalForce->setText(QString("<b>%1N</b>").arg(energyTmpSet.positivePedalForce, 0, 'f', 1));
 }
 
-void CEnergyCyclingDlg::slotLoadFromSettings(bool)
+void CEnergyCyclingDialog::slotLoadFromSettings(bool)
 {
     energyCycling.loadSettings(energyTmpSet);
     updateUi();
     slotApply(true);
 }
 
-void CEnergyCyclingDlg::slotRemove(bool)
+void CEnergyCyclingDialog::slotRemove(bool)
 {
     energyCycling.remove();
     reject();
 }
 
-void CEnergyCyclingDlg::slotSetWeight(qreal)
+void CEnergyCyclingDialog::slotSetWeight(qreal)
 {
     energyTmpSet.driverWeight = spinDriverWeight->value();
     energyTmpSet.bikeWeight = spinBikeWeight->value();
     labelTotalWeight->setText(QString("<b>%1kg</b>").arg(energyTmpSet.driverWeight + energyTmpSet.bikeWeight, 0, 'f', 1));
 }
 
-void CEnergyCyclingDlg::slotSetComboWindSpeed(qint32 windSpeedIndex)
+void CEnergyCyclingDialog::slotSetComboWindSpeed(qint32 windSpeedIndex)
 {
     energyTmpSet.windSpeedIndex = windSpeedIndex;
     if(windSpeedIndex > 0)
@@ -184,7 +183,7 @@ void CEnergyCyclingDlg::slotSetComboWindSpeed(qint32 windSpeedIndex)
     }
 }
 
-void CEnergyCyclingDlg::slotSetWindSpeed(qreal windSpeed)
+void CEnergyCyclingDialog::slotSetWindSpeed(qreal windSpeed)
 {
     if(qFuzzyIsNull(windSpeed)) // to avoid numerical noise
     {
@@ -209,12 +208,12 @@ void CEnergyCyclingDlg::slotSetWindSpeed(qreal windSpeed)
     }
 }
 
-void CEnergyCyclingDlg::slotSetAirDensity(qreal airDensity)
+void CEnergyCyclingDialog::slotSetAirDensity(qreal airDensity)
 {
     energyTmpSet.airDensity = airDensity;
 }
 
-void CEnergyCyclingDlg::slotSetComboWindPosition(qint32 windPositionIndex)
+void CEnergyCyclingDialog::slotSetComboWindPosition(qint32 windPositionIndex)
 {
     energyTmpSet.windPositionIndex = windPositionIndex;
     if(windPositionIndex > 0)
@@ -226,19 +225,19 @@ void CEnergyCyclingDlg::slotSetComboWindPosition(qint32 windPositionIndex)
     }
 }
 
-void CEnergyCyclingDlg::slotSetFrontalAreaSpin(qreal)
+void CEnergyCyclingDialog::slotSetFrontalAreaSpin(qreal)
 {
     energyTmpSet.frontalArea = spinFrontalArea->value();
     checkWindPositionSpins();
 }
 
-void CEnergyCyclingDlg::slotSetWindDragCoeffSpin(qreal)
+void CEnergyCyclingDialog::slotSetWindDragCoeffSpin(qreal)
 {
     energyTmpSet.windDragCoeff = spinWindDragCoeff->value();
     checkWindPositionSpins();
 }
 
-void CEnergyCyclingDlg::checkWindPositionSpins()
+void CEnergyCyclingDialog::checkWindPositionSpins()
 {
     energyTmpSet.windPositionIndex = 0;
     comboWindPosition->setCurrentIndex(0);
@@ -254,7 +253,7 @@ void CEnergyCyclingDlg::checkWindPositionSpins()
     }
 }
 
-void CEnergyCyclingDlg::slotSetComboGround(qint32 groundIndex)
+void CEnergyCyclingDialog::slotSetComboGround(qint32 groundIndex)
 {
     energyTmpSet.groundIndex = groundIndex;
     if(groundIndex > 0)
@@ -264,7 +263,7 @@ void CEnergyCyclingDlg::slotSetComboGround(qint32 groundIndex)
     }
 }
 
-void CEnergyCyclingDlg::slotSetRollingCoeff(qreal rollingCoeff)
+void CEnergyCyclingDialog::slotSetRollingCoeff(qreal rollingCoeff)
 {
     energyTmpSet.rollingCoeff = rollingCoeff;
 
@@ -281,12 +280,12 @@ void CEnergyCyclingDlg::slotSetRollingCoeff(qreal rollingCoeff)
     }
 }
 
-void CEnergyCyclingDlg::slotSetPedalCadence(qreal pedalCadence)
+void CEnergyCyclingDialog::slotSetPedalCadence(qreal pedalCadence)
 {
     energyTmpSet.pedalCadence = pedalCadence;
 }
 
-void CEnergyCyclingDlg::slotShowHelp()
+void CEnergyCyclingDialog::slotShowHelp()
 {
     QString msg = tr("<p><b>Set Energy Use for Cycling</b></p>"
                      "<p>With this filter your personal energy use (consumption) for a cycling tour can be computed.</p>"

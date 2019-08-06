@@ -17,9 +17,8 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "CEnergyCycling.h"
+#include "gis/trk/CEnergyCycling.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
 
 CEnergyCycling::CEnergyCycling(CGisItemTrk &trk) :

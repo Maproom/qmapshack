@@ -173,6 +173,12 @@ public:
 
     void followPosition(const QPointF& pos);
 
+    //Allows showing the track overlays if they are set in CMainWindow
+    void allowShowTrackOverlays(bool show)
+    {
+        showTrackOverlays = show;
+    }
+
     static qreal gisLayerOpacity;
 
 signals:
@@ -223,6 +229,15 @@ private:
                because it's thread is running and blocking access to the data
      */
     bool setDrawContextSize(const QSize& s);
+
+    bool isShowMinMaxSummary() const;
+    bool isShowTrackSummary() const;
+    bool isShowTrackInfoTable() const;
+    bool isShowTrackInfoPoints() const;
+    bool isShowTrackProfile() const;
+    bool isShowTrackHighlight() const;
+
+    bool showTrackOverlays = true;
 
     QColor backColor = "#FFFFBF";       //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content

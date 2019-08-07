@@ -568,7 +568,6 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
     out << limitsGraph2;
     out << limitsGraph3;
 
-//    out << energyUse;
     out << energyCycling.getEnergyTrkSet();
 
     out << trk.segs;
@@ -648,15 +647,10 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
 
     if(version > 5)
     {
-//        in >> energyUse;
         CEnergyCycling::energy_set_t set;
         in >> set;
         energyCycling.setEnergyTrkSet(set, false);
     }
-//    else
-//    {
-//        energyUse = NOFLOAT;
-//    }
 
     trk.segs.clear();
     in >> trk.segs;

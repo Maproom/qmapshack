@@ -24,7 +24,7 @@ class CTrackData;
 class CEnergyCycling
 {
 public:
-    struct energy_set_t
+    struct energy_set_t                         // set of parameters (input and output) to compute "Energy Use Cylcing" value
     {
         qreal driverWeight          = 75;
         qreal bikeWeight            = 15;
@@ -54,23 +54,23 @@ public:
     virtual ~CEnergyCycling() = default;
 
     const energy_set_t &getEnergyTrkSet() const { return energyTrkSet; }
-    void setEnergyTrkSet(const energy_set_t &energyTrkSet, bool updateHistory);
+    void setEnergyTrkSet(const energy_set_t &energyTrkSet, bool updateHistory); // Used to saved the temporarily modified parameter set back to the track
 
-    qreal getEnergyUseCycling() const { return energyTrkSet.energyKcal; }
+    qreal getEnergyUseCycling() const { return energyTrkSet.energyKcal; }  // Returns the "Energy Use Cylcing" value shown in status panel
 
-    void compute();
+    void compute();                             // Computes "Energy Use Cylcing" and more output values based on the input shown in the dialog
     void compute(energy_set_t &energySet);
-    void remove();
+    void remove();                              // Remove the "Energy Use Cylcing" value from status panel
 
     bool isValid() const;
 
-    void loadSettings(energy_set_t &energySet);
+    void loadSettings(energy_set_t &energySet); // Load the setting directly in the track or temporarily in the dialog to modify first
     void saveSettings();
 
 private:
-    energy_set_t energyTrkSet;
+    energy_set_t energyTrkSet;                  // The set of parameters belongig to the track
 
-    CGisItemTrk &trk;
+    CGisItemTrk &trk;                           // reference to the track, non-const, due to update of the parameter set belonging to the track
 };
 
 #endif // CENERGYCYCLING_H

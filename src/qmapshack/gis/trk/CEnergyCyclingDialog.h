@@ -18,9 +18,9 @@
 #ifndef CENERGYCYCLINGDIALOG_H
 #define CENERGYCYCLINGDIALOG_H
 
-#include "CEnergyCycling.h"
 #include "ui_IEnergyCyclingDialog.h"
 
+class CEnergyCycling;
 class CGisItemTrk;
 
 class CEnergyCyclingDialog : public QDialog, private Ui::IEnergyCyclingDialog

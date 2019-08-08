@@ -16,6 +16,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/trk/CEnergyCycling.h"
 #include "gis/trk/CEnergyCyclingDialog.h"
 #include "gis/trk/CGisItemTrk.h"
 
@@ -39,8 +40,10 @@ CEnergyCyclingDialog::CEnergyCyclingDialog(CEnergyCycling &energyCycling, QWidge
     }
     setWindowTitle(tr("Energy Use Cycling Parameter Set"));
 
+    buttonBox->button(QDialogButtonBox::Ok)->setToolTip(tr("Compute the \"Energy Use Cycling\" value, store the parameter set and close this dialog."));
+    buttonBox->button(QDialogButtonBox::Apply)->setToolTip(tr("Compute the \"Energy Use Cycling\" value in this dialog."));
     buttonBox->button(QDialogButtonBox::RestoreDefaults)->setToolTip(tr("Load the previous saved parameter set."));
-    buttonBox->button(QDialogButtonBox::Reset)->setToolTip(tr("Remove the Energy Use Cycling value from the track."));
+    buttonBox->button(QDialogButtonBox::Reset)->setToolTip(tr("Remove the \"Energy Use Cycling\" value from the track."));
 
     connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(slotOk(bool)));
     connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(slotApply(bool)));
@@ -62,21 +65,23 @@ CEnergyCyclingDialog::CEnergyCyclingDialog(CEnergyCycling &energyCycling, QWidge
     buttonBox->button(QDialogButtonBox::RestoreDefaults)->setText(tr("Load previous Set"));
     buttonBox->button(QDialogButtonBox::Reset)->setText(tr("Remove"));
 
-    energyTmpSet = energyCycling.getEnergyTrkSet();
+    energyTmpSet = energyCycling.getEnergyTrkSet(); // put the track parameter set in a temporarily one, used by the dialog
     updateUi();
 
-    if (energyCycling.getEnergyUseCycling() == NOFLOAT)
+    if (energyCycling.getEnergyUseCycling() == NOFLOAT) // No need to remove the "Energy Use Cycling" value from the status panel
     {
         buttonBox->button(QDialogButtonBox::Reset)->setEnabled(false);
     }
 
-    slotApply(true);
+    slotApply(true); // Compute "Energy Use Cylcling" and put all results in the diolog output widgets
 }
 
 CEnergyCyclingDialog::~CEnergyCyclingDialog()
 {
 }
 
+/* Update all Widgets when input has changed in dialog
+*/
 void CEnergyCyclingDialog::updateUi()
 {
     spinDriverWeight->setValue(energyTmpSet.driverWeight);
@@ -120,6 +125,13 @@ void CEnergyCyclingDialog::updateUi()
     spinPedalCadence->setValue(energyTmpSet.pedalCadence);
 }
 
+/* "Ok" button is clicked:
+ *    - set the temporarily parameter set back to the tracks on
+ *    - compute the "Energy Use Cycling" value in track parameter set
+ *        - update history, updateHistory = true
+ *           - update status panel
+ *    - save parameter set to QMapShack.conf
+*/
 void CEnergyCyclingDialog::slotOk(bool)
 {
     energyCycling.setEnergyTrkSet(energyTmpSet, true);
@@ -128,6 +140,10 @@ void CEnergyCyclingDialog::slotOk(bool)
     accept();
 }
 
+/* "Apply button is clicked:
+ *    - compute the "Energy Use Cycling" value in the temporarily parameter set
+ *    - update all results in the dialog output widgets
+*/
 void CEnergyCyclingDialog::slotApply(bool)
 {
     energyCycling.compute(energyTmpSet);
@@ -153,6 +169,10 @@ void CEnergyCyclingDialog::slotApply(bool)
     labelPositivePedalForce->setText(QString("<b>%1N</b>").arg(energyTmpSet.positivePedalForce, 0, 'f', 1));
 }
 
+/* Loads the setting into the temporarily parameter set to be modify in the dialog
+ * and update all dialog GUI widgets
+ * In case of a "Ok" it will be saved back to the track parameter set
+*/
 void CEnergyCyclingDialog::slotLoadFromSettings(bool)
 {
     energyCycling.loadSettings(energyTmpSet);
@@ -160,6 +180,9 @@ void CEnergyCyclingDialog::slotLoadFromSettings(bool)
     slotApply(true);
 }
 
+/* Remove the "Energy Use Cycling" value from the status panel
+ * a rejected will be issued to be catched by the TrackDetails to update the status panel
+*/
 void CEnergyCyclingDialog::slotRemove(bool)
 {
     energyCycling.remove();
@@ -299,6 +322,8 @@ void CEnergyCyclingDialog::slotShowHelp()
                      "<li>Average pedal cadence for the computation of pedal force</li>"
                      "</ul></p>"
                      "<p>The individualize data will be defined in this dialog and more computed values will be shown here.</p>"
+                     "<p>When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set"
+                     ", the shown parameter set in this dialog can be replaced by the previous saved parameter set."
                      "<p>The energy use in unit \"kcal\" will be stored in the track and can be remove later on when no longer needed.</p>"
                      "<p>For more information see tooltips on input and output values.</p>");
 

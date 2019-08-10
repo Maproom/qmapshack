@@ -20,6 +20,11 @@
 #include "gis/trk/CEnergyCyclingDialog.h"
 #include "gis/trk/CGisItemTrk.h"
 
+/** @brief Constructor - Initiate the dialog GUI
+ *
+ * @param energyCycling Reference to the track's CEnergyCycling object
+ * @param parent Pointer to the parent widget
+ */
 CEnergyCyclingDialog::CEnergyCyclingDialog(CEnergyCycling &energyCycling, QWidget *parent) :
     QDialog(parent)
     , energyCycling(energyCycling)
@@ -80,7 +85,7 @@ CEnergyCyclingDialog::~CEnergyCyclingDialog()
 {
 }
 
-/* Update all Widgets when input has changed in dialog
+/** @brief Update all widgets when a input value has changed in dialog
 */
 void CEnergyCyclingDialog::updateUi()
 {
@@ -125,12 +130,12 @@ void CEnergyCyclingDialog::updateUi()
     spinPedalCadence->setValue(energyTmpSet.pedalCadence);
 }
 
-/* "Ok" button is clicked:
- *    - set the temporarily parameter set back to the tracks on
- *    - compute the "Energy Use Cycling" value in track parameter set
- *        - update history, updateHistory = true
- *           - update status panel
- *    - save parameter set to QMapShack.conf
+/** @brief When "Ok" button is clicked:
+ * * Set the temporarily parameter set back to parameter set of the track
+ * * Compute the "Energy Use Cycling" value in track parameter set
+ * * Update history
+ * * Update status panel
+ * * Save parameter set to SETTINGS
 */
 void CEnergyCyclingDialog::slotOk(bool)
 {
@@ -140,9 +145,9 @@ void CEnergyCyclingDialog::slotOk(bool)
     accept();
 }
 
-/* "Apply button is clicked:
- *    - compute the "Energy Use Cycling" value in the temporarily parameter set
- *    - update all results in the dialog output widgets
+/** @brief When "Apply" button is clicked:
+ * * Compute the "Energy Use Cycling" value in the temporarily parameter set
+ * * Update all computed values in the dialog output widgets
 */
 void CEnergyCyclingDialog::slotApply(bool)
 {
@@ -169,9 +174,8 @@ void CEnergyCyclingDialog::slotApply(bool)
     labelPositivePedalForce->setText(QString("<b>%1N</b>").arg(energyTmpSet.positivePedalForce, 0, 'f', 1));
 }
 
-/* Loads the setting into the temporarily parameter set to be modify in the dialog
- * and update all dialog GUI widgets
- * In case of a "Ok" it will be saved back to the track parameter set
+/** @brief Loads parameters from SETTINGS into the temporarily parameter for modifying in the dialog
+ * * Update all dialog GUI widgets
 */
 void CEnergyCyclingDialog::slotLoadFromSettings(bool)
 {
@@ -180,8 +184,8 @@ void CEnergyCyclingDialog::slotLoadFromSettings(bool)
     slotApply(true);
 }
 
-/* Remove the "Energy Use Cycling" value from the status panel
- * a rejected will be issued to be catched by the TrackDetails to update the status panel
+/** @brief Removes the "Energy Use Cycling" value from the status panel
+ * @note QDialog::reject() will be called to be catched by CTrackDetailsTrk for the update of the status panel
 */
 void CEnergyCyclingDialog::slotRemove(bool)
 {
@@ -189,7 +193,10 @@ void CEnergyCyclingDialog::slotRemove(bool)
     reject();
 }
 
-void CEnergyCyclingDialog::slotSetWeight(qreal)
+/** @brief Set the driver weight or the bike weight from the GUI widget to parameter set
+ * @note Slot will be used by two GUI widgets
+*/
+void CEnergyCyclingDialog::slotSetWeight(qreal /*weight*/)
 {
     energyTmpSet.driverWeight = spinDriverWeight->value();
     energyTmpSet.bikeWeight = spinBikeWeight->value();
@@ -248,15 +255,15 @@ void CEnergyCyclingDialog::slotSetComboWindPosition(qint32 windPositionIndex)
     }
 }
 
-void CEnergyCyclingDialog::slotSetFrontalAreaSpin(qreal)
+void CEnergyCyclingDialog::slotSetFrontalAreaSpin(qreal frontalArea)
 {
-    energyTmpSet.frontalArea = spinFrontalArea->value();
+    energyTmpSet.frontalArea = frontalArea;
     checkWindPositionSpins();
 }
 
-void CEnergyCyclingDialog::slotSetWindDragCoeffSpin(qreal)
+void CEnergyCyclingDialog::slotSetWindDragCoeffSpin(qreal windDragCoeff)
 {
-    energyTmpSet.windDragCoeff = spinWindDragCoeff->value();
+    energyTmpSet.windDragCoeff = windDragCoeff;
     checkWindPositionSpins();
 }
 
@@ -311,7 +318,7 @@ void CEnergyCyclingDialog::slotSetPedalCadence(qreal pedalCadence)
 void CEnergyCyclingDialog::slotShowHelp()
 {
     QString msg = tr("<p><b>Set Energy Use for Cycling</b></p>"
-                     "<p>With this filter your personal energy use (consumption) for a cycling tour can be computed.</p>"
+                     "<p>With this functionality your personal energy use (consumption) for a cycling tour can be computed.</p>"
                      "<p>The computed value of \"Energy Use Cycling\" can be see as an indicator for the exertion of a cycling tour.</p>"
                      "<p>The tour length, speed and slope values will be taken into account.</p>"
                      "<p>To individualize your personal energy use the following input data are more needed:"

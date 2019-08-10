@@ -23,6 +23,8 @@
 class CEnergyCycling;
 class CGisItemTrk;
 
+/** @brief GUI Dialog class to modify the CEnergyCycling parameter set
+ */
 class CEnergyCyclingDialog : public QDialog, private Ui::IEnergyCyclingDialog
 {
     Q_OBJECT
@@ -36,13 +38,13 @@ private slots:
     void slotApply(bool);
     void slotLoadFromSettings(bool);
     void slotRemove(bool);
-    void slotSetWeight(qreal);
+    void slotSetWeight(qreal weight);
     void slotSetComboWindSpeed(qint32 windSpeedIndex);
     void slotSetWindSpeed(qreal windSpeed);
     void slotSetAirDensity(qreal airDensity);
     void slotSetComboWindPosition(qint32 windPositionIndex);
-    void slotSetFrontalAreaSpin(qreal);
-    void slotSetWindDragCoeffSpin(qreal);
+    void slotSetFrontalAreaSpin(qreal frontalArea);
+    void slotSetWindDragCoeffSpin(qreal windDragCoeff);
     void checkWindPositionSpins();
     void slotSetComboGround(qint32 groundIndex);
     void slotSetRollingCoeff(qreal rollingCoeff);
@@ -104,8 +106,8 @@ private:
         {tr("Sand"),                    0.300}
     };
 
-    CEnergyCycling &energyCycling;
-    CEnergyCycling::energy_set_t energyTmpSet;
+    CEnergyCycling &energyCycling;   //!< Reference to tracks CEnergyCycling object
+    CEnergyCycling::energy_set_t energyTmpSet;  //!< Ttemporarily parameter set to be used in the dialog
 
     void updateUi();
 };

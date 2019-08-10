@@ -21,10 +21,34 @@
 class CGisItemTrk;
 class CTrackData;
 
+/** @brief Class to compute the "Energy Use Cycling" value
+ *
+ * With this functionality your personal energy use (consumption) for a cycling tour can be computed.
+ *
+ * The computed value of "Energy Use Cycling" can be see as an indicator for the exertion of a cycling tour.
+ *
+ * The tour length, speed and slope values will be taken into account.
+ *
+ * To individualize your personal energy use the following input data are more needed:
+ * * Driver and bicyle weight
+ * * Air density, wind speed and position to the wind to consider the wind drag resistance
+ * * Ground situation (tyre and ground) to consider the rolling resistance
+ * * Average pedal cadence for the computation of pedal force
+ *
+ * The individualize data will be defined in its own dialog (see CEnergyCyclingDialog) and more computed values will be shown here.
+
+ * When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set."
+
+ * The energy use in unit "kcal" will be stored in the track and can be remove later on when no longer needed.
+
+ *  For more information see tooltips on input and output values in the dialog.
+ */
 class CEnergyCycling
 {
 public:
-    struct energy_set_t                         // set of parameters (input and output) to compute "Energy Use Cylcing" value
+/** @brief The parameter set structure (input and output values) to compute "Energy Use Cycling" value
+ */
+    struct energy_set_t
     {
         qreal driverWeight          = 75;
         qreal bikeWeight            = 15;
@@ -53,24 +77,32 @@ public:
     CEnergyCycling(CGisItemTrk &trk);
     virtual ~CEnergyCycling() = default;
 
+    /** @brief Get the track's parameter set
+     *
+     * @return The track's parameter set
+     */
     const energy_set_t &getEnergyTrkSet() const { return energyTrkSet; }
-    void setEnergyTrkSet(const energy_set_t &energyTrkSet, bool updateHistory); // Used to saved the temporarily modified parameter set back to the track
 
-    qreal getEnergyUseCycling() const { return energyTrkSet.energyKcal; }  // Returns the "Energy Use Cylcing" value shown in status panel
+    void setEnergyTrkSet(const energy_set_t &energyTrkSet, bool updateHistory);
 
-    void compute();                             // Computes "Energy Use Cylcing" and more output values based on the input shown in the dialog
+    /** @brief Get the "Energy Use Cycling" value from the track's parameter set
+     *
+     * @return The "Energy Use Cycling" value
+     */
+    qreal getEnergyUseCycling() const { return energyTrkSet.energyKcal; }
+
+    void compute();
     void compute(energy_set_t &energySet);
-    void remove();                              // Remove the "Energy Use Cylcing" value from status panel
+    void remove();
 
     bool isValid() const;
 
-    void loadSettings(energy_set_t &energySet); // Load the setting directly in the track or temporarily in the dialog to modify first
+    void loadSettings(energy_set_t &energySet);
     void saveSettings();
 
 private:
-    energy_set_t energyTrkSet;                  // The set of parameters belongig to the track
-
-    CGisItemTrk &trk;                           // reference to the track, non-const, due to update of the parameter set belonging to the track
+    energy_set_t energyTrkSet;      //!< The track's parameter set
+    CGisItemTrk &trk;               //!< reference to the track, non-const, due to update of parameter set energyTrkSet
 };
 
 #endif // CENERGYCYCLING_H

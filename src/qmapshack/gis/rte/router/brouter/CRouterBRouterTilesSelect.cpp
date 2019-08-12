@@ -38,7 +38,8 @@ const int CRouterBRouterTilesSelect::tileSize   =    5;
 const QString CRouterBRouterTilesSelect::patternTileName = QString("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
 const QRegExp CRouterBRouterTilesSelect::regExpTileName = QRegExp(CRouterBRouterTilesSelect::patternTileName);
 //pattern for tiles date parsing: '16-Feb-2017 20:48  '
-const QRegExp CRouterBRouterTilesSelect::regExpDate = QRegExp("(\\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{4}) (\\d{1,2}):(\\d{2})");
+//const QRegExp CRouterBRouterTilesSelect::regExpDate = QRegExp("(\\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{4}) (\\d{1,2}):(\\d{2})");
+const QRegExp CRouterBRouterTilesSelect::regExpDate = QRegExp("(\\d{4})-(\\d{2})-(\\d{2}) (\\d{1,2}):(\\d{2})");
 //pattern for tiles size parsing: 8.2M 271K 9.3K
 const QRegExp CRouterBRouterTilesSelect::regExpSize = QRegExp(" {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])");
 
@@ -371,28 +372,16 @@ void CRouterBRouterTilesSelect::afterSlotLoadOnlineTilesRequestFinishedRunJavasc
                     status->isRemote = true;
 
                     const QString &date = tileMap.value("date").toString();
+
                     if (regExpDate.indexIn(date) < 0)
                     {
                         segmentsError(tr("cannot parse: %1 is not a date").arg(date));
                         update();
                         return;
                     }
-                    int day = regExpDate.cap(1).toInt();
-                    const QString &monthStr = regExpDate.cap(2);
-                    int month = monthStr == "Jan" ? 1 :
-                                monthStr == "Feb" ? 2 :
-                                monthStr == "Mar" ? 3 :
-                                monthStr == "Apr" ? 4 :
-                                monthStr == "May" ? 5 :
-                                monthStr == "Jun" ? 6 :
-                                monthStr == "Jul" ? 7 :
-                                monthStr == "Aug" ? 8 :
-                                monthStr == "Sep" ? 9 :
-                                monthStr == "Oct" ? 10 :
-                                monthStr == "Nov" ? 11 :
-                                monthStr == "Dec" ? 12 :
-                                0;
-                    int year = regExpDate.cap(3).toInt();
+                    int day = regExpDate.cap(3).toInt();
+                    int month = regExpDate.cap(2).toInt();
+                    int year = regExpDate.cap(1).toInt();
                     int hour = regExpDate.cap(4).toInt();
                     int min  = regExpDate.cap(5).toInt();
 

@@ -22,26 +22,26 @@ class CGisItemTrk;
 class CTrackData;
 
 /** @brief Class to compute the "Energy Use Cycling" value
- *
- * With this functionality your personal energy use (consumption) for a cycling tour can be computed.
- *
- * The computed value of "Energy Use Cycling" can be see as an indicator for the exertion of a cycling tour.
- *
- * The tour length, speed and slope values will be taken into account.
- *
- * To individualize your personal energy use the following input data are more needed:
- * * Driver and bicyle weight
- * * Air density, wind speed and position to the wind to consider the wind drag resistance
- * * Ground situation (tyre and ground) to consider the rolling resistance
- * * Average pedal cadence for the computation of pedal force
- *
- * The individualize data will be defined in its own dialog (see CEnergyCyclingDialog) and more computed values will be shown here.
 
- * When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set."
+   With this functionality your personal energy use (consumption) for a cycling tour can be computed.
 
- * The energy use in unit "kcal" will be stored in the track and can be remove later on when no longer needed.
+   The computed value of "Energy Use Cycling" can be see as an indicator for the exertion of a cycling tour.
 
- *  For more information see tooltips on input and output values in the dialog.
+   The tour length, speed and slope values will be taken into account.
+
+   To individualize your personal energy use the following input data are more needed:
+    - Driver and bicyle weight
+    - Air density, wind speed and position to the wind to consider the wind drag resistance
+    - Ground situation (tyre and ground) to consider the rolling resistance
+    - Average pedal cadence for the computation of pedal force
+
+   The individualize data will be defined in its own dialog (see CEnergyCyclingDialog) and more computed values will be shown here.
+
+   When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set."
+
+   The energy use in unit "kcal" will be stored in the track and can be remove later on when no longer needed.
+
+    For more information see tooltips on input and output values in the dialog.
  */
 class CEnergyCycling
 {
@@ -78,16 +78,16 @@ public:
     virtual ~CEnergyCycling() = default;
 
     /** @brief Get the track's parameter set
-     *
-     * @return The track's parameter set
+
+       @return The track's parameter set
      */
     const energy_set_t &getEnergyTrkSet() const { return energyTrkSet; }
 
     void setEnergyTrkSet(const energy_set_t &energyTrkSet, bool updateHistory);
 
     /** @brief Get the "Energy Use Cycling" value from the track's parameter set
-     *
-     * @return The "Energy Use Cycling" value
+
+       @return The "Energy Use Cycling" value
      */
     qreal getEnergyUseCycling() const { return energyTrkSet.energyKcal; }
 

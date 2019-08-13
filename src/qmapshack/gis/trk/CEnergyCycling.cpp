@@ -21,8 +21,8 @@
 #include "helpers/CSettings.h"
 
 /** @brief Constructor - Load parameter from SETTINGS to the track's parameter set
- *
- * @param trk The track for which the "Energy Use Cycling" value should computed
+
+   @param trk The track for which the "Energy Use Cycling" value should computed
  */
 CEnergyCycling::CEnergyCycling(CGisItemTrk &trk) :
     trk(trk)
@@ -31,30 +31,30 @@ CEnergyCycling::CEnergyCycling(CGisItemTrk &trk) :
 }
 
 /** @brief Loads parameters from SETTINGS
- *
- * On initial start (no parameters are saved in SETTINGS in file QMapShack.conf) the default parameters from header file be used.
- *
- * When modifying the parameters and clicking on button "Ok" parameters SETTINGS be saved TO SETTINGS. When loading a track
- * (ex. from GPS device) with Energy Use = NOFLOAT the parameters from SETTING will be used and shown in the dialog.
- *
- * When modifying and clicking on "Ok" the parameters will be saved back to SETTINGS file QMapShack.conf.
- *
- * SETTINGS will be load either in the energyTrkSet belonging to the track at at initiation
- * or in a energyTmpSet belonging to the Dialog. By clicking "Ok" in the dialog energyTmpSet will be saved back to track’s energyTrkSet.
- *
- * By clicking on buttons "Cancel" or "Remove" no changes will be made in track’s energyTrkSet and no SETTINGS will be saved.
- *
- * The button “Load previous Set” can be used for the following uses cases:
- * * You load an old track with a computed Energy Use value and you will replace
- *   all the parameter with your current active parameter set
- * * You have to “play” to much with all these parameters in the dialog and you
- *   are a bit confused, so you can load your last save parameter set
- * * When clicking in history and you will use an older track to start again with modifying
- *   you can you also use your latest save parameter set
- * * When you have some tracks in edit mode and you would like to update them all
- *   with the same parameter set, edit the first one and use “Load previous Set” for all the others
- *
- * @param energySet The parameter set in which the SETTINGS parameter will be load
+
+   On initial start (no parameters are saved in SETTINGS in file QMapShack.conf) the default parameters from header file be used.
+
+   When modifying the parameters and clicking on button "Ok" parameters SETTINGS be saved TO SETTINGS. When loading a track
+   (ex. from GPS device) with Energy Use = NOFLOAT the parameters from SETTING will be used and shown in the dialog.
+
+   When modifying and clicking on "Ok" the parameters will be saved back to SETTINGS file QMapShack.conf.
+
+   SETTINGS will be load either in the energyTrkSet belonging to the track at at initiation
+   or in a energyTmpSet belonging to the Dialog. By clicking "Ok" in the dialog energyTmpSet will be saved back to track’s energyTrkSet.
+
+   By clicking on buttons "Cancel" or "Remove" no changes will be made in track’s energyTrkSet and no SETTINGS will be saved.
+
+   The button “Load previous Set” can be used for the following uses cases:
+   - You load an old track with a computed Energy Use value and you will replace
+     all the parameter with your current active parameter set
+   - You have to “play” to much with all these parameters in the dialog and you
+     are a bit confused, so you can load your last save parameter set
+   - When clicking in history and you will use an older track to start again with modifying
+     you can you also use your latest save parameter set
+   - When you have some tracks in edit mode and you would like to update them all
+     with the same parameter set, edit the first one and use “Load previous Set” for all the others
+
+   @param energySet The parameter set in which the SETTINGS parameter will be load
  */
 void CEnergyCycling::loadSettings(CEnergyCycling::energy_set_t &energySet)
 {
@@ -76,8 +76,8 @@ void CEnergyCycling::loadSettings(CEnergyCycling::energy_set_t &energySet)
 }
 
 /** @brief Saves parameters to SETTINGS
- *
- * @note Will be triggered by clicking on "ok" button in the dialog
+
+   @note Will be triggered by clicking on "ok" button in the dialog
  */
 void CEnergyCycling::saveSettings()
 {
@@ -97,10 +97,10 @@ void CEnergyCycling::saveSettings()
 }
 
 /** @brief Computes the "Energy Use Cycling" value
- *
- *  @note
- *  * Computes only when "Energy Use Cycling" != NOFLOAT, which indicates a no-show in the info panel
- *  * Computation based directly on the track parameter set
+
+    @note
+      Computes only when "Energy Use Cycling" != NOFLOAT, which indicates a no-show in the info panel
+      Computation based directly on the track parameter set
  */
 void CEnergyCycling::compute()
 {
@@ -111,21 +111,21 @@ void CEnergyCycling::compute()
 }
 
 /**  @brief Computes the "Energy Use Cycling" value
- * @note
- * Used by dialog to compute temporarily parameter set in all cases
- *
- * Related information for the computation process and used formulas:
- * * http://www.blog.ultracycle.net/2010/05/cycling-power-calculations (English)
- * * http://www.cptips.com/energy.htm  (English)
- * * http://www.tribology-abc.com/calculators/cycling.htm (English)
- * * http://www.kreuzotter.de/deutsch/speed.htm (German)
- * * http://horst-online.com/physik-des-fahrrads/index.html (German)
- * * http://www.helpster.de/wirkungsgrad-vom-mensch-erklaerung_198168 (German)
- * * http://www.wolfgang-menn.de/motion_d.htm (German)
- * * http://www.msporting.com/planung/5_3_6%20Aerodynamik.htm (German)
- *
- * @param energySet The parameter set used for the computation algorithm (input and output values)
-*/
+   @note
+   Used by dialog to compute temporarily parameter set in all cases
+
+   Related information for the computation process and used formulas:
+    - http://www.blog.ultracycle.net/2010/05/cycling-power-calculations (English)
+    - http://www.cptips.com/energy.htm  (English)
+    - http://www.tribology-abc.com/calculators/cycling.htm (English)
+    - http://www.kreuzotter.de/deutsch/speed.htm (German)
+    - http://horst-online.com/physik-des-fahrrads/index.html (German)
+    - http://www.helpster.de/wirkungsgrad-vom-mensch-erklaerung_198168 (German)
+    - http://www.wolfgang-menn.de/motion_d.htm (German)
+    - http://www.msporting.com/planung/5_3_6%20Aerodynamik.htm (German)
+
+   @param energySet The parameter set used for the computation algorithm (input and output values)
+ */
 void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
 {
     if(!isValid())
@@ -228,9 +228,9 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
 }
 
 /** @brief Set the "Energy Use Cycling" value to NOFLOAT which indicates a remove
- *
- * Updates the info panel to noshow the "Energy Use Cycling" value
-*/
+
+   Updates the info panel to noshow the "Energy Use Cycling" value
+ */
 void CEnergyCycling::remove()
 {
     energyTrkSet.energyKcal = NOFLOAT;
@@ -238,10 +238,10 @@ void CEnergyCycling::remove()
 }
 
 /** @brief Verifies whether the track is valid to compute the "Energy Use Cycling" value
- *
- * @note
- * Time, elevation and slope needs to be valid for computation algorithm. On invaild toolButton in status panel will be disabled.
-*/
+
+   @note
+   Time, elevation and slope needs to be valid for computation algorithm. On invaild toolButton in status panel will be disabled.
+ */
 bool CEnergyCycling::isValid() const
 {
     if(!trk.isTrkTimeValid() || trk.isTrkElevationInvalid() || trk.isTrkSlopeInvalid())
@@ -252,15 +252,15 @@ bool CEnergyCycling::isValid() const
 }
 
 /** @brief Sets a parameter set to the track
- *
- * @note
- * Will be used:
- * * by serialization to load the parameter from the stream to the track
- * * by the dialog when clicking Ok, saving temporarily parameters back to the track
- *
- * @param energyTrkSet The parameter set which will be set to the track
- * @param updateHistory Set to true to trigger an update of history and info panel
-*/
+
+   @note
+   Will be used:
+    - by serialization to load the parameter from the stream to the track
+    - by the dialog when clicking Ok, saving temporarily parameters back to the track
+
+   @param energyTrkSet The parameter set which will be set to the track
+   @param updateHistory Set to true to trigger an update of history and info panel
+ */
 void CEnergyCycling::setEnergyTrkSet(const energy_set_t &energyTrkSet, bool updateHistory)
 {
     this->energyTrkSet = energyTrkSet;

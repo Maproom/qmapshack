@@ -21,9 +21,9 @@
 #include "gis/trk/CGisItemTrk.h"
 
 /** @brief Constructor - Initiate the dialog GUI
- *
- * @param energyCycling Reference to the track's CEnergyCycling object
- * @param parent Pointer to the parent widget
+
+   @param energyCycling Reference to the track's CEnergyCycling object
+   @param parent Pointer to the parent widget
  */
 CEnergyCyclingDialog::CEnergyCyclingDialog(CEnergyCycling &energyCycling, QWidget *parent) :
     QDialog(parent)
@@ -86,7 +86,7 @@ CEnergyCyclingDialog::~CEnergyCyclingDialog()
 }
 
 /** @brief Update all widgets when a input value has changed in dialog
-*/
+ */
 void CEnergyCyclingDialog::updateUi()
 {
     spinDriverWeight->setValue(energyTmpSet.driverWeight);
@@ -131,12 +131,12 @@ void CEnergyCyclingDialog::updateUi()
 }
 
 /** @brief When "Ok" button is clicked:
- * * Set the temporarily parameter set back to parameter set of the track
- * * Compute the "Energy Use Cycling" value in track parameter set
- * * Update history
- * * Update status panel
- * * Save parameter set to SETTINGS
-*/
+     Set the temporarily parameter set back to parameter set of the track
+     Compute the "Energy Use Cycling" value in track parameter set
+     Update history
+     Update status panel
+     Save parameter set to SETTINGS
+ */
 void CEnergyCyclingDialog::slotOk(bool)
 {
     energyCycling.setEnergyTrkSet(energyTmpSet, true);
@@ -146,9 +146,9 @@ void CEnergyCyclingDialog::slotOk(bool)
 }
 
 /** @brief When "Apply" button is clicked:
- * * Compute the "Energy Use Cycling" value in the temporarily parameter set
- * * Update all computed values in the dialog output widgets
-*/
+     Compute the "Energy Use Cycling" value in the temporarily parameter set
+     Update all computed values in the dialog output widgets
+ */
 void CEnergyCyclingDialog::slotApply(bool)
 {
     energyCycling.compute(energyTmpSet);
@@ -175,8 +175,8 @@ void CEnergyCyclingDialog::slotApply(bool)
 }
 
 /** @brief Loads parameters from SETTINGS into the temporarily parameter for modifying in the dialog
- * * Update all dialog GUI widgets
-*/
+     Update all dialog GUI widgets
+ */
 void CEnergyCyclingDialog::slotLoadFromSettings(bool)
 {
     energyCycling.loadSettings(energyTmpSet);
@@ -185,8 +185,8 @@ void CEnergyCyclingDialog::slotLoadFromSettings(bool)
 }
 
 /** @brief Removes the "Energy Use Cycling" value from the status panel
- * @note QDialog::reject() will be called to be catched by CTrackDetailsTrk for the update of the status panel
-*/
+   @note QDialog::reject() will be called to be catched by CTrackDetailsTrk for the update of the status panel
+ */
 void CEnergyCyclingDialog::slotRemove(bool)
 {
     energyCycling.remove();
@@ -194,8 +194,8 @@ void CEnergyCyclingDialog::slotRemove(bool)
 }
 
 /** @brief Set the driver weight or the bike weight from the GUI widget to parameter set
- * @note Slot will be used by two GUI widgets
-*/
+   @note Slot will be used by two GUI widgets
+ */
 void CEnergyCyclingDialog::slotSetWeight(qreal /*weight*/)
 {
     energyTmpSet.driverWeight = spinDriverWeight->value();
@@ -274,7 +274,7 @@ void CEnergyCyclingDialog::checkWindPositionSpins()
     for(qint32 i = 1; i < windPositions.size(); ++i)
     {
         if(qFuzzyCompare(1 + energyTmpSet.frontalArea, 1 + windPositions[i].frontalArea)
-                && qFuzzyCompare(1 + energyTmpSet.windDragCoeff, 1 + windPositions[i].windDragCoeff))
+           && qFuzzyCompare(1 + energyTmpSet.windDragCoeff, 1 + windPositions[i].windDragCoeff))
         {
             energyTmpSet.windPositionIndex = i;
             comboWindPosition->setCurrentIndex(i);

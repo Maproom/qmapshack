@@ -724,12 +724,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="522"/>
         <source>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</source>
-        <translation type="unfinished"></translation>
+        <translation>Набор параметров для вычисления использованной энергии велосипедного тура</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="530"/>
         <source> - Computation needs valid time, elevation and slope data.</source>
-        <translation type="unfinished"></translation>
+        <translation> - Для вычислений требуются данные о времени, высоте и склоне.</translation>
     </message>
 </context>
 <context>
@@ -786,7 +786,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="82"/>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="98"/>
         <source>User defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Определено пользователем</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="63"/>
@@ -794,12 +794,12 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="65"/>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="66"/>
         <source>Tailwind</source>
-        <translation type="unfinished"></translation>
+        <translation>Попутный ветер</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="67"/>
         <source>0 No Wind</source>
-        <translation type="unfinished"></translation>
+        <translation>0 Без ветра</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="68"/>
@@ -807,122 +807,122 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="70"/>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="71"/>
         <source>Headwind</source>
-        <translation type="unfinished"></translation>
+        <translation>Встречный ветер</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="83"/>
         <source>City</source>
-        <translation type="unfinished">городской</translation>
+        <translation>Город</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="84"/>
         <source>Trekking</source>
-        <translation type="unfinished">треккинг</translation>
+        <translation>Треккинг</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="85"/>
         <source>Trekking w. Bags</source>
-        <translation type="unfinished"></translation>
+        <translation>Треккинг с багажом</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="86"/>
         <source>Sportive</source>
-        <translation type="unfinished">спортивный</translation>
+        <translation>Спортивный</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="87"/>
         <source>Race</source>
-        <translation type="unfinished"></translation>
+        <translation>Гонки</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="88"/>
         <source>Mountain</source>
-        <translation type="unfinished">горный</translation>
+        <translation>Горы</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="99"/>
         <source>Cycling race track</source>
-        <translation type="unfinished"></translation>
+        <translation>Езда по велотрассе</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="100"/>
         <source>Asphalt, small tyres</source>
-        <translation type="unfinished"></translation>
+        <translation>Асфальт, маленькие шины</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="101"/>
         <source>Asphalt, normal tyres</source>
-        <translation type="unfinished"></translation>
+        <translation>Асфальт, нормальные шины</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="102"/>
         <source>Mix Asphalt+Forest</source>
-        <translation type="unfinished"></translation>
+        <translation>Асфальт и лесные дорожки</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="103"/>
         <source>Mountain Bike Trail</source>
-        <translation type="unfinished"></translation>
+        <translation>Горная велосипедная тропа</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="104"/>
         <source>Hard Forest Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Тяжелая лесная тропа</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="105"/>
         <source>Soft Forest Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Легкая лесная тропа</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="106"/>
         <source>Sand</source>
-        <translation type="unfinished"></translation>
+        <translation>Песок</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="46"/>
         <source>Energy Use Cycling Parameter Set</source>
-        <translation type="unfinished"></translation>
+        <translation>Набор параметров для вычисления использованной энергии велосипедного тура</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="48"/>
         <source>Compute the &quot;Energy Use Cycling&quot; value, store the parameter set and close this dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вычислить использованную энергию, сохранить набор параметров и закрыть это окно.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="49"/>
         <source>Compute the &quot;Energy Use Cycling&quot; value in this dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вычислить использованную энергию</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="50"/>
         <source>Load the previous saved parameter set.</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить предыдущий сохраненный набор параметров.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="51"/>
         <source>Remove the &quot;Energy Use Cycling&quot; value from the track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить значение использованной энергии из трека.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="70"/>
         <source>Load previous Set</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить предыдущий набор</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="71"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="320"/>
         <source>&lt;p&gt;&lt;b&gt;Set Energy Use for Cycling&lt;/b&gt;&lt;/p&gt;&lt;p&gt;With this functionality your personal energy use (consumption) for a cycling tour can be computed.&lt;/p&gt;&lt;p&gt;The computed value of &quot;Energy Use Cycling&quot; can be see as an indicator for the exertion of a cycling tour.&lt;/p&gt;&lt;p&gt;The tour length, speed and slope values will be taken into account.&lt;/p&gt;&lt;p&gt;To individualize your personal energy use the following input data are more needed:&lt;ul&gt;&lt;li&gt;Driver and bicyle weight&lt;/li&gt;&lt;li&gt;Air density, wind speed and position to the wind to consider the wind drag resistance&lt;/li&gt;&lt;li&gt;Ground situation (tyre and ground) to consider the rolling resistance&lt;/li&gt;&lt;li&gt;Average pedal cadence for the computation of pedal force&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;The individualize data will be defined in this dialog and more computed values will be shown here.&lt;/p&gt;&lt;p&gt;When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set.&lt;p&gt;The energy use in unit &quot;kcal&quot; will be stored in the track and can be remove later on when no longer needed.&lt;/p&gt;&lt;p&gt;For more information see tooltips on input and output values.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Настройка использования энергии для велосипедного тура&lt;/b&gt;&lt;/p&gt;&lt;p&gt;С помощью этой функции можно рассчитать личную использованную энергию велосипедного тура.&lt;/p&gt; &lt;p&gt;Вычисленное значение использованной энергии на велосипеде можно рассматривать как индикатор напряжения для велосипедного тура.&lt;/p&gt;&lt;p&gt;Длина маршрута, скорость и склон будут приняты во внимание.&lt;/p&gt;&lt;p&gt;Для индивидуализации личной использованной энергии требуется следующие входные данные:&lt;ul&gt;&lt;li&gt;Вес водителя и велосипеда&lt;/li&gt; &lt;li&gt;Плотность воздуха, скорость ветра и тип тура для учета сопротивления ветра&lt;/li&gt;&lt;li&gt;Поверхностная ситуация (шины и поверхность) для учета сопротивления качению&lt;/li&gt;&lt;li&gt;Средняя каденция педалей для расчета усилия на педалях&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;Личные данные будут определены в диалоговом окне, и там будут показаны другие вычисленные значения.&lt;/p&gt;&lt;p&gt;При загрузке более старых треков или при переключении в истории на треки с другим набором параметров, показанный набор параметров в диалоговом окне можно заменить предыдущим сохраненным набором параметров.&lt;p&gt;Использованная энергия в единицах «ккал» будет сохранена в треке и может быть удалено позже, когда в этом больше нет необходимости.&lt;/p&gt;&lt;p&gt;Для получения дополнительной информации см. подсказки по входным и выходным значениям.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="337"/>
         <source>Help</source>
-        <translation type="unfinished">Справки</translation>
+        <translation>Справки</translation>
     </message>
 </context>
 <context>
@@ -1743,7 +1743,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="568"/>
         <source>Energy Use Cycling: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Использованная энергия на велосипеде: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="588"/>
@@ -5015,7 +5015,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="198"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation>QMapShack связывается с маршрутизатором через сетевое соединение. Обычно это делается по специальному адресу, который не может быть достигнут вне вашего устройства. Однако BRouter прослушивает соединения на всех доступных интерфейсах. Если вы находитесь в своей собственной частной сети с активным брандмауэром, это не проблема. Если вы находитесь в общедоступной сети, каждый открытый порт представляет собой риск, поскольку он может быть использован кем-то другим для компрометации вашей системы. В этом случае мы pекомендуем не использовать локальный сервис BRouter. Если вы видите это предупреждение и используете версию BRouter &gt; = 1.4.10, вы можете принудительно привязать локальный адрес, установив имя хоста на &quot;localhost&quot; и установить флажок &quot;Привязать только к localhost&quot; в настройке с использованием экспертного режима.</translation>
+        <translation>QMapShack связывается с маршрутизатором через сетевое соединение. Обычно это делается по специальному адресу, который не может быть достигнут вне вашего устройства. Однако BRouter прослушивает соединения на всех доступных интерфейсах. Если вы находитесь в своей собственной частной сети с активным брандмауэром, это не проблема. Если вы находитесь в общедоступной сети, каждый открытый порт представляет собой риск, поскольку он может быть использован кем-то другим для компрометации вашей системы. В этом случае мы рекомендуем не использовать локальный сервис BRouter. Если вы видите это предупреждение и используете версию BRouter &gt; = 1.4.10, вы можете принудительно привязать локальный адрес, установив имя хоста на &quot;localhost&quot; и установить флажок &quot;Привязать только к localhost&quot; в настройке с использованием экспертного режима.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="219"/>
@@ -6061,7 +6061,7 @@ For configuration you need to know your Android device&apos;s IP address or it&a
         <location filename="../gis/search/CSearch.cpp" line="377"/>
         <location filename="../gis/search/CSearch.cpp" line="408"/>
         <source>without</source>
-        <translation>без</translation>
+        <translation>кроме</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="378"/>
@@ -6514,7 +6514,7 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <message>
         <location filename="../gis/search/CSearch.cpp" line="501"/>
         <source>searches the translated meanings of the non-negated attributes (Those not crossed out)</source>
-        <translation>поиск значений атрибутов без отрицаниея (не зачеркнутых)</translation>
+        <translation>поиск значений атрибутов без отрицания (не зачеркнутых)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="502"/>
@@ -7270,7 +7270,7 @@ line %2, column %3:
         <location filename="../templates/Running_Summary.ui" line="414"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="332"/>
         <source>3. Demands orientation by identification of geographic features and compass points</source>
-        <translation>3. Требует ориентации по географическим объектам и точам компаса</translation>
+        <translation>3. Требует ориентации по географическим объектам и точкам компаса</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="419"/>
@@ -8936,54 +8936,55 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Диалог</translation>
+        <translation>Диалог</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="44"/>
         <source>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</source>
-        <translation type="unfinished"></translation>
+        <translation>Набор параметров для вычисления использованной энергии велосипедного тура</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="94"/>
         <source>Positive Pedal Force:</source>
-        <translation type="unfinished"></translation>
+        <translation>Положительная сила на педаль:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="104"/>
         <source>Gravity Slope Force:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сила тяжести на склоне:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="114"/>
         <source>&lt;p&gt;Predefined selection for the type of ground surface and the tyres.&lt;/p&gt;
 &lt;p&gt;Used to determine the rolling resistance coefficient.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Тип поверхности земли и шин.&lt;/p&gt;
+&lt;p&gt;Используется для определения коэффициента сопротивления качению.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="122"/>
         <source>Frontal Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>Фронтальная зона:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="135"/>
         <source>Total Weight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Общий вес:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="145"/>
         <source>Ground/Tyres:</source>
-        <translation type="unfinished"></translation>
+        <translation>Поверхность/шины:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="168"/>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="506"/>
         <source>Energy Use:</source>
-        <translation type="unfinished"></translation>
+        <translation>Использование энергии:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="178"/>
         <source>&lt;p&gt;The rolling resistance force is the force in Newton required on average over all track points to overcome the rolling resistance.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Сила сопротивления качению - это сила в Ньютонах, необходимая в среднем по всем точкам трека для преодоления сопротивления качению.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="181"/>
@@ -8991,7 +8992,7 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="479"/>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="540"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="188"/>
@@ -9002,27 +9003,34 @@ I don&apos;t want to read the documentation!</source>
 &lt;li&gt;1500 meter: 1.056kg/m3&lt;/li&gt;
 &lt;li&gt;3000 meter: 0.905kg/m3&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Плотность воздуха в кг/м3. Плотность воздуха зависит от атмосферного давления, высоты и температуры.&lt;/p&gt;
+&lt;p&gt;Примеры:
+&lt;ul&gt;
+&lt;li&gt; Уровень моря: 1,226 кг/м3&lt;/li&gt;
+&lt;li&gt; 1500 метров: 1,056 кг/м3&lt;/li&gt;
+&lt;li&gt; 3000 метров: 0,905 кг/м3&lt;/li&gt;
+&lt;/ul&gt; &lt;/р&gt;
+</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="197"/>
         <source>kg/m3</source>
-        <translation type="unfinished"></translation>
+        <translation>кг/м3</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="219"/>
         <source>Rolling Coeff:</source>
-        <translation type="unfinished"></translation>
+        <translation>Коэффициент сопротивления качению:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="229"/>
         <source>Air Resistance Force:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сила воздушного сопротивления:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="242"/>
         <source>Bike Weight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Вес велосипеда:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="252"/>
@@ -9030,90 +9038,99 @@ I don&apos;t want to read the documentation!</source>
 &lt;p&gt;Negative forces from strong tail wind or downhill driving are not considered.&lt;/p&gt;
 &lt;p&gt;This force must be applied to the pedal by the driver.&lt;/p&gt;
 &lt;p&gt;The higher the pedal cadence, the lower the pedal force.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Сила в Ньютонах, приложенной к педали в среднем по всем точкам трека.&lt;/p&gt;
+&lt;p&gt;Негативные силы от сильного попутного ветра или спуска не рассматриваются.&lt;/p&gt;
+&lt;p&gt;Эта сила должна быть применена к педали водителем.&lt;/p&gt;
+&lt;p&gt;Чем выше каденция педалей, тем меньше сила на педали.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="258"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;0000N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;0000N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="265"/>
         <source>&lt;p&gt;The energy use (consumption) in kJoule by transforming the positive power by the driver.&lt;/p&gt;
 &lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Использование энергии (потребление энергии) в килоджоулах в результате положительной силы водителя.&lt;/p&gt;
+&lt;p&gt;Коэффициент мышечной эффективности предполагается равным 23%&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="269"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00000kJ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00000kJ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="276"/>
         <source>&lt;p&gt;The cw value (drag coefficient) indicates the wind slip of the driver and bicycle in relation to the air (wind).&lt;/p&gt;
 &lt;p&gt;The greater this value, the more force is required to overcome the wind force.&lt;/p&gt;
 &lt;p&gt;Typical values for bicycles are between 0.2 and 1.2.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Значение cw (коэффициент аэродинамического сопротивления) указывает скольжение ветра для водителя и велосипеда по отношению к воздуху (ветру).&lt;/p&gt;
+&lt;p&gt;Чем больше это значение, тем больше сил требуется, чтобы преодолеть силу ветра.&lt;/p&gt;
+&lt;p&gt;Типичные значения для велосипедов находятся между 0,2 и 1,2.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="303"/>
         <source>Pos. Power Moving Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Время движения с положительной силы:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="313"/>
         <source>&lt;p&gt;The air resistance force is the force in Newton required on average over all track points to overcome the air resistance.&lt;/p&gt;
 &lt;p&gt;The airstream, headwind and tailwind are taken into account.&lt;/p&gt;
 &lt;p&gt;With a strong tailwind this value can be negative.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Сила сопротивления воздуха - это сила в Ньютонах, необходимая в среднем по всем точкам трека для преодоления сопротивления воздуха.&lt;/p&gt;
+&lt;p&gt;Поток воздуха, встречный ветер и попутный ветер принимаются во внимание.&lt;/p&gt;
+&lt;p&gt;При сильном попутном ветре это значение может быть отрицательным.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="325"/>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="682"/>
         <source>&lt;p&gt;The weight of the bicycle in kg including luggage.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вес велосипеда в кг, включая багаж.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="328"/>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="688"/>
         <source>kg</source>
-        <translation type="unfinished"></translation>
+        <translation>кг</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="350"/>
         <source>&lt;p&gt;Values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Тип тура для предварительного выбора значения фронтальной зоны ветра в м2.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="357"/>
         <source>Pedal Cadence:</source>
-        <translation type="unfinished"></translation>
+        <translation>Каденция педалей:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="367"/>
         <source>&lt;p&gt;The frontal area in m2 (driver, bicycle, bags, etc.) exposed to the wind.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Фронтальная зона в м2 (водитель, велосипед, багаж и т. д.) подверженные воздействию ветра.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="370"/>
         <source>m2</source>
-        <translation type="unfinished"></translation>
+        <translation>м2</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="392"/>
         <source>&lt;p&gt;The energy use (consumption) in kcal by transforming the positive power by the driver.&lt;/p&gt;
 &lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Использование энергии (потребление энергии) в ккал в результате положительной силы водителя.&lt;/p&gt;
+&lt;p&gt;Коэффициент мышечной эффективности предполагается равным 23%.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="396"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;00000kcal&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;00000kcal&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="403"/>
         <source>Air Density:</source>
-        <translation type="unfinished"></translation>
+        <translation>Плотность воздуха:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="413"/>
@@ -9121,149 +9138,163 @@ I don&apos;t want to read the documentation!</source>
 &lt;p&gt;The relevant factors are the road surface and the tyres.&lt;/p&gt;
 &lt;p&gt;The higher this value is, the more force is required to overcome the rolling resistance.&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Коэффициент сопротивления качению определяет силу, используемую для преодоления сопротивления качению.&lt;/p&gt;
+&lt;p&gt;Соответствующими факторами являются дорожное покрытие и шины.&lt;/p&gt;
+&lt;p&gt;Чем выше это значение, тем больше сил требуется, чтобы преодолеть сопротивление качению.&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="444"/>
         <source>Wind Drag Coeff:</source>
-        <translation type="unfinished"></translation>
+        <translation>Коэффициент сопротивления ветра:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="454"/>
         <source>&lt;p&gt;The total weight in kg of driver and bike including clothes and luggage.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Общий вес в кг водителя и велосипеда включая одежду и багаж.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="457"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0kg&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0кг&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="464"/>
         <source>&lt;p&gt;The time in moving and with positive power by the driver.&lt;/p&gt;
 &lt;p&gt;Times with negative power in strong tail wind or downhill driving are not taken into account.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Время в движении с положительной энергией водителя.&lt;/p&gt;
+&lt;p&gt;Времена с отрицательной силы при сильном попутном ветре или движении на спуске не учитываются.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="468"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00:00:00h&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00:00:00ч&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="475"/>
         <source>&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on the uphill.&lt;/p&gt;
 &lt;p&gt;When mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Сила тяжести на склоне - это сила в Ньютонах, необходимая в среднем по всем точкам трека для преодоления склона на подъеме..&lt;/p&gt;
+&lt;p&gt;При движении по спуску сила тяжести на склоне может быть отрицательной.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="486"/>
         <source>Avg Positive Power:</source>
-        <translation type="unfinished"></translation>
+        <translation>Средняя положительная сила:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="496"/>
         <source>Wind Speed km/h:</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость ветра (км/ч):</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="516"/>
         <source>Ratio to Moving Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Отношение к времени движения:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="526"/>
         <source>Average Power:</source>
-        <translation type="unfinished"></translation>
+        <translation>Средняя сила:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="536"/>
         <source>&lt;p&gt;Sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.&lt;/p&gt;
 &lt;p&gt;This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Сумма средней силы, необходимой для преодоления сопротивления ветра, сопротивления качению и склона.&lt;/p&gt;
+&lt;p&gt;Это значение может быть отрицательным для сильного попутного ветра и/или движения вниз.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="547"/>
         <source>Sum Forces:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сумма сил:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="557"/>
         <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the pedal force.&lt;/p&gt;
 &lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Средняя каденция педалей в оборотах/мин необходима для расчета силы на педали.&lt;/p&gt;
+&lt;p&gt;Реалистичные значения находятся в диапазоне от 50 до 100 об/мин.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="561"/>
         <source>rpm</source>
-        <translation type="unfinished"></translation>
+        <translation>об/мин</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="583"/>
         <source>&lt;p&gt;Values for the wind speed in Beaufort scale for specifying the wind speed in km/h.&lt;/p&gt;
 &lt;p&gt;Positive values for headwind and negative values for tailwind.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Значения скорости ветра в шкале Бофорта для указания скорости ветра в км/ч.&lt;/p&gt;
+&lt;p&gt;Положительные значения для встречного ветра и отрицательные значения для попутного ветра.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="591"/>
         <source>&lt;p&gt;The power in Watt on average over all track points.&lt;/p&gt;
 &lt;p&gt;Negative power from strong tailwind or downhill driving are taken into account.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Сила в ваттах в среднем по всем точкам трека.&lt;/p&gt;
+&lt;p&gt;Отрицательная сила от сильного попутного ветра или спуска учитывается.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="595"/>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="630"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0W&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0W&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="605"/>
         <source>Driver Weight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Вес водителя:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="615"/>
         <source>Rolling Resist. Force:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сила сопротивления качению:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="625"/>
         <source>&lt;p&gt;The positive power in Watt that must be applied on average for all track points.&lt;/p&gt;
 &lt;p&gt;Negative power from strong tailwind or downhill driving are not taken into account.&lt;/p&gt;
 &lt;p&gt;This power must be applied by the driver on average for the track.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Положительная сила в ваттах, которая должна применяться в среднем для всех точек трека.&lt;/p&gt;
+&lt;p&gt;Отрицательная сила от сильного попутного ветра или спуска не учитывается.&lt;/p&gt;
+&lt;p&gt;Это сила должно применяться водителем в среднем на треке.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="637"/>
         <source>&lt;p&gt;The wind speed in km/h is taken into account when calculating the force required to overcome the air drag. &lt;/p&gt;
 &lt;p&gt;Positive values for headwind and negative values for tailwind are taken into account.&lt;/p&gt;
 &lt;p&gt;The value can be changed independently of the Beaufort scale values.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Скорость ветра в км/ч учитывается при расчете силы, необходимой для преодоления сопротивления воздуха.&lt;/p&gt;
+&lt;p&gt;Положительные значения для встречного ветра и отрицательные значения для попутного ветра учитываются.&lt;/p&gt;
+&lt;p&gt;Значение может быть изменено независимо от значений шкалы Бофорта.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="642"/>
         <source>km/h</source>
-        <translation type="unfinished"></translation>
+        <translation>км/ч</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="661"/>
         <source>&lt;p&gt;The ratio of the power moving time related to the track moving time in percent.&lt;/p&gt;
 &lt;p&gt;The lower the ratio the greater the influence of tailwind and/or downhill driving.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Соотношение времени движения с силой и времени движения на треке в процентах.&lt;/p&gt;
+&lt;p&gt;Чем ниже соотношение, тем больше влияние попутного ветра и/или спуска.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="665"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00.0%&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00.0%&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="672"/>
         <source>Position in Wind:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип тура:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="710"/>
         <source>Wind Speed Bft:</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость ветра по шкале Бофорта:</translation>
     </message>
 </context>
 <context>
@@ -13749,7 +13780,7 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="14"/>
         <source>Icon &amp; Name</source>
-        <translation>Ппиктограмма &amp; имя</translation>
+        <translation>Пиктограмма &amp; имя</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="22"/>

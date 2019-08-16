@@ -346,7 +346,7 @@
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="129"/>
         <source>The project &quot;%1&quot; has already been imported into the database. It will be skipped.</source>
-        <translation>Das Projekt &quot;%1&quot; wurde schon in die Datenbank importiert. Wird asugelassen.</translation>
+        <translation>Das Projekt &quot;%1&quot; wurde schon in die Datenbank importiert. Wird ausgelassen.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="294"/>
@@ -545,7 +545,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="452"/>
         <source>&lt;b&gt;Summary over all waypoints in project&lt;/b&gt;&lt;br/&gt;</source>
-        <translation>&lt;p&gt;Übersicht über alle Wegpunkte imProjekt&lt;/b&gt;&lt;br/&gt;</translation>
+        <translation>&lt;p&gt;Übersicht über alle Wegpunkte im Projekt&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="456"/>
@@ -690,7 +690,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="92"/>
         <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;To document your tracks you can add a short description to a track point. All points with description will be marked along the track with auto-numbered bullets.&lt;br/&gt;You can add a description by a right click on a track point in the graphs. Or you do a left click on a track point in the map view.&lt;br/&gt;With the first track point you add information to this text will be replaced by a table. Use it to edit and delete track point information.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Trackpunktinformation&lt;/b&gt;&lt;br/&gt;Sie können einem Trackpunk eine kurze Beschreibung hinzufügen, um ihre Tracks zu dokumentieren. Alle Punkte mit einer Beschreibung werden entlang des Tracks mit automatischen Nummern versehen.&lt;br/&gt;Sie können eine Beschreibung hinzufügen, indem Sie mit der rechten Maustaste in einen der Graphen klicken. Oder Sie klicken mit der linken Maustaste auf den Trackpunkt in der Kartenansicht.&lt;br/&gt;Mit dem ersten Trackpunkt, dem Sie Information hinzufügen, wird dieser Text mit einer Tabelle ersetzt. Mit deren Hilfe können Sie die Trackpunktinformation löschen oder ändern.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Trackpunktinformation&lt;/b&gt;&lt;br/&gt;Sie können einem Trackpunkt eine kurze Beschreibung hinzufügen, um ihre Tracks zu dokumentieren. Alle Punkte mit einer Beschreibung werden entlang des Tracks mit automatischen Nummern versehen.&lt;br/&gt;Sie können eine Beschreibung hinzufügen, indem Sie mit der rechten Maustaste in einen der Graphen klicken. Oder Sie klicken mit der linken Maustaste auf den Trackpunkt in der Kartenansicht.&lt;br/&gt;Mit dem ersten Trackpunkt, dem Sie Information hinzufügen, wird dieser Text mit einer Tabelle ersetzt. Mit deren Hilfe können Sie die Trackpunktinformation löschen oder ändern.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="187"/>
@@ -1832,7 +1832,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1578"/>
         <source>Enter some text to be attached to this track point:</source>
-        <translation>Geben Sie den Text ein, der an diesen Trackpunk angehängt werden soll:</translation>
+        <translation>Geben Sie den Text ein, der an diesen Trackpunkt angehängt werden soll:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1587"/>
@@ -2610,7 +2610,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Active Project</source>
-        <translation>Akives Projekt</translation>
+        <translation>Aktives Projekt</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="120"/>
@@ -4971,7 +4971,7 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="379"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="514"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
-        <translation>Diese Version von BRouter unterstütz nicht mehr als ein Vermeidungsgebiet</translation>
+        <translation>Diese Version von BRouter unterstützt nicht mehr als ein Vermeidungsgebiet</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="560"/>
@@ -5014,7 +5014,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="198"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation>QMapShack kommuniziert mit BRouter über eine Netzwerkverbindung. Normalerweise wird das über eine spezielle Addresse gemacht, die von außen nicht zugänglich ist. Allerdings horcht BRouter auf allen verfügbaren Netzwerkschnittstellen. Wenn Sie in ihrem eigenen privaten Netzwerk mit einer aktiven Firewall sind, ist das kein großes Problem. Wenn Sie in einem öffentlichen Netzwerk sind, stellt jeder offene Zugang ein Risiko dar, weil er von jemanden missbraucht werden kann, ihr System anzugreifen. Wir empfehlen in diesem Fall auf den lokal laufenden BRouter zu verzichten. Wenn Sie diese Warnung sehen und BRouter Version &gt;= 1.4.10 benutzen, können Sie die Benutzung der lokalen Adresse erzwingen, indem Sie den Hostnamen auf &quot;localhost&quot; setzen und in den Einstellungen im Experten Modus &quot;Nur mit dem Hostnamen verbinden&quot; auswählen.</translation>
+        <translation>QMapShack kommuniziert mit BRouter über eine Netzwerkverbindung. Normalerweise wird das über eine spezielle Adresse gemacht, die von außen nicht zugänglich ist. Allerdings horcht BRouter auf allen verfügbaren Netzwerkschnittstellen. Wenn Sie in ihrem eigenen privaten Netzwerk mit einer aktiven Firewall sind, ist das kein großes Problem. Wenn Sie in einem öffentlichen Netzwerk sind, stellt jeder offene Zugang ein Risiko dar, weil er von jemanden missbraucht werden kann, ihr System anzugreifen. Wir empfehlen in diesem Fall auf den lokal laufenden BRouter zu verzichten. Wenn Sie diese Warnung sehen und BRouter Version &gt;= 1.4.10 benutzen, können Sie die Benutzung der lokalen Adresse erzwingen, indem Sie den Hostnamen auf &quot;localhost&quot; setzen und in den Einstellungen im Experten Modus &quot;Nur mit dem Hostnamen verbinden&quot; auswählen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="219"/>
@@ -10203,7 +10203,7 @@ It is either a new item or it has been deleted in the database by someone else.<
     <message>
         <location filename="../gis/IGisItem.cpp" line="605"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
-        <translation>&lt;h3&gt;%1&lt;/h3&gt; Diese Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt; Dieses Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="606"/>
@@ -10860,7 +10860,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="911"/>
         <source>Show a legend for all track point info bullets along the track.</source>
-        <translation>Zeigt eine Legende für alle Trackpunktinfromationsmarken an.</translation>
+        <translation>Zeigt eine Legende für alle Trackpunktinformationsmarken an.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="923"/>
@@ -10915,7 +10915,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="986"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
-        <translation>Trackpunkte mit zusätzlicher Infromation versehen, die automatisch nummeriert wird.</translation>
+        <translation>Trackpunkte mit zusätzlicher Information versehen, die automatisch nummeriert wird.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="999"/>
@@ -11055,7 +11055,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="884"/>
         <source>Change Map View Name</source>
-        <translation>Namen der Katenansicht ändern</translation>
+        <translation>Namen der Kartenansicht ändern</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="247"/>
@@ -13160,8 +13160,8 @@ dazu benutzen um:
 
 Hinweis: Wenn Sie fehlerhafte Punkte in einer echten GPS 
 Aufzeichnung entfernen wollen, ist dies das richtige Wekzeug.
-Wählen Sie infach den Bereich mit den fehlerhaften Punkten aus
-(ein Einzelner ist auch ok) und vertecken Sie die Punkte.</translation>
+Wählen Sie einfach den Bereich mit den fehlerhaften Punkten aus
+(ein Einzelner ist auch ok) und verstecken Sie die Punkte.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="128"/>
@@ -13786,7 +13786,7 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="119"/>
         <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
-        <translation>Geräte unterstützen. Wenn diese Option aktiv ist, wird ein Gerät, das angesteckt wird, automatisch erkannt. Die Dateistruktur wird gelesen und alle Projekte werden geladen. Abhängig vom Gerät wird QMapShack alle Daten verwalten, die zum Beispiel nötg sind, um Bilder mit Wegpunkten zu verknüpfen.</translation>
+        <translation>Geräte unterstützen. Wenn diese Option aktiv ist, wird ein Gerät, das angesteckt wird, automatisch erkannt. Die Dateistruktur wird gelesen und alle Projekte werden geladen. Abhängig vom Gerät wird QMapShack alle Daten verwalten, die zum Beispiel nötig sind, um Bilder mit Wegpunkten zu verknüpfen.</translation>
     </message>
 </context>
 <context>

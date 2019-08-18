@@ -193,9 +193,6 @@ void CEnergyCyclingDialog::slotRemove(bool)
     reject();
 }
 
-/** @brief Set the driver weight or the bike weight from the GUI widget to parameter set
-   @note Slot will be used by two GUI widgets
- */
 void CEnergyCyclingDialog::slotSetDriverWeight(qreal /*weight*/)
 {
     energyTmpSet.driverWeight = spinDriverWeight->value();

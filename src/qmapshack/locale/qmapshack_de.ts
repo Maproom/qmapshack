@@ -725,12 +725,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="522"/>
         <source>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingabe des Parameter Set für die Berechnung des Energieverbrauchs beim Fahrradfahren</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="530"/>
         <source> - Computation needs valid time, elevation and slope data.</source>
-        <translation type="unfinished"></translation>
+        <translation> - Berechnung bedingt korrekte Zeit-, Höhen- und Steigungsdaten.</translation>
     </message>
 </context>
 <context>
@@ -783,147 +783,155 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CEnergyCyclingDialog</name>
     <message>
-        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="62"/>
-        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="82"/>
-        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="98"/>
+        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="63"/>
+        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="83"/>
+        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="99"/>
         <source>User defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzer definiert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="63"/>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="64"/>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="65"/>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="66"/>
-        <source>Tailwind</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="67"/>
-        <source>0 No Wind</source>
-        <translation type="unfinished"></translation>
+        <source>Tailwind</source>
+        <translation>Rückenwind</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="68"/>
+        <source>No Wind</source>
+        <translation>Kein Wind</translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="69"/>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="70"/>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="71"/>
+        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="72"/>
         <source>Headwind</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="83"/>
-        <source>City</source>
-        <translation type="unfinished">Stadtrad</translation>
+        <translation>Gegenwind</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="84"/>
-        <source>Trekking</source>
-        <translation type="unfinished">Trekkingrad</translation>
+        <source>City</source>
+        <translation>Stadtrad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="85"/>
-        <source>Trekking w. Bags</source>
-        <translation type="unfinished"></translation>
+        <source>Trekking</source>
+        <translation>Trekkingrad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="86"/>
-        <source>Sportive</source>
-        <translation type="unfinished">Sportrad</translation>
+        <source>Trekking w. Bags</source>
+        <translation>Trekkingrad m. Taschen</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="87"/>
-        <source>Race</source>
-        <translation type="unfinished"></translation>
+        <source>Sportive</source>
+        <translation>Sportliche Position</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="88"/>
-        <source>Mountain</source>
-        <translation type="unfinished">Mountain Bike</translation>
+        <source>Race</source>
+        <translation>Rennrad Position</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="99"/>
-        <source>Cycling race track</source>
-        <translation type="unfinished"></translation>
+        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="89"/>
+        <source>Mountain</source>
+        <translation>Mountain Bike</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="100"/>
-        <source>Asphalt, small tyres</source>
-        <translation type="unfinished"></translation>
+        <source>Cycling race track</source>
+        <translation>Radrennbahn</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="101"/>
-        <source>Asphalt, normal tyres</source>
-        <translation type="unfinished"></translation>
+        <source>Asphalt, small tyres</source>
+        <translation>Asphalt, schmale Bereifung</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="102"/>
-        <source>Mix Asphalt+Forest</source>
-        <translation type="unfinished"></translation>
+        <source>Asphalt, normal tyres</source>
+        <translation>Asphalt, normale Bereifung</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="103"/>
-        <source>Mountain Bike Trail</source>
-        <translation type="unfinished"></translation>
+        <source>Mix Asphalt+Forest</source>
+        <translation>Mix, Aphalt u. Waldweg</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="104"/>
-        <source>Hard Forest Path</source>
-        <translation type="unfinished"></translation>
+        <source>Mountain Bike Trail</source>
+        <translation>Mountain Bike Trail</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="105"/>
-        <source>Soft Forest Path</source>
-        <translation type="unfinished"></translation>
+        <source>Hard Forest Path</source>
+        <translation>Harter Waldweg</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="106"/>
-        <source>Sand</source>
-        <translation type="unfinished"></translation>
+        <source>Soft Forest Path</source>
+        <translation>Weicher Waldweg</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="46"/>
-        <source>Energy Use Cycling Parameter Set</source>
-        <translation type="unfinished"></translation>
+        <location filename="../gis/trk/CEnergyCyclingDialog.h" line="107"/>
+        <source>Sand</source>
+        <translation>Sand</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="48"/>
-        <source>Compute the &quot;Energy Use Cycling&quot; value, store the parameter set and close this dialog.</source>
-        <translation type="unfinished"></translation>
+        <source>Load previous Set</source>
+        <translation>Lade letztes Set</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="49"/>
-        <source>Compute the &quot;Energy Use Cycling&quot; value in this dialog.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="50"/>
-        <source>Load the previous saved parameter set.</source>
-        <translation type="unfinished"></translation>
+        <source>Remove</source>
+        <translation>Löschen</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="51"/>
+        <source>Compute the &quot;Energy Use Cycling&quot; value, store the parameter set and close this dialog.</source>
+        <translation>Berechnet den Energieverbrauch, speichert das Parameter Set und schliesst den Dialog.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="52"/>
+        <source>Compute the &quot;Energy Use Cycling&quot; value in this dialog.</source>
+        <translation>Berechnt den Energieverbrauch in diesem Dialog.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="53"/>
+        <source>Load the previous saved parameter set.</source>
+        <translation>Lädt das zuletzt gespeicherte Parameter Set.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="54"/>
         <source>Remove the &quot;Energy Use Cycling&quot; value from the track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Löscht den Wert des Energieverbrauchs aus dem Track.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="70"/>
-        <source>Load previous Set</source>
-        <translation type="unfinished"></translation>
+        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="325"/>
+        <source>&lt;p&gt;&lt;b&gt;Set Energy Use for Cycling&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Within this dialog your personal energy use (consumption) for a cycling tour can be computed.&lt;/p&gt;&lt;p&gt;The computed value of &quot;Energy Use Cycling&quot; can be see as an indicator for the exertion of a cycling tour.&lt;/p&gt;&lt;p&gt;The tour length, speed and slope values will be taken into account.&lt;/p&gt;&lt;p&gt;To individualize your personal energy use the following input data are more needed:&lt;ul&gt;&lt;li&gt;Driver and bicyle weight&lt;/li&gt;&lt;li&gt;Air density, wind speed and position to the wind to consider the wind drag resistance&lt;/li&gt;&lt;li&gt;Ground situation (tyre and ground) to consider the rolling resistance&lt;/li&gt;&lt;li&gt;Average pedal cadence for the computation of pedal force&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;The individualize data will be defined in this dialog and more computed values will be shown here.&lt;/p&gt;&lt;p&gt;When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set.&lt;p&gt;The energy use in unit &quot;kcal&quot; will be stored in the track (qms format only) and can be remove later on when no longer needed.&lt;/p&gt;&lt;p&gt;For more information see tooltips on input and output values.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;&lt;b&gt;Energieverbrauch beim Fahrradfahren&lt;/p&gt;&lt;/b&gt;
+&lt;p&gt;In diesem Dialog kann der Energieverbrauch beim Fahrradfahren berechnet werden.&lt;/p&gt;
+&lt;p&gt;Der Wert des Energieverbrauchs kann als Indikator für die Anstregung einer Fahrradtour angesehen werden.&lt;/p&gt;
+&lt;p&gt;Die Tourlänge, die Geschwindigkeit und die Steigungen werden berücksichtigt.&lt;/p&gt;
+&lt;p&gt;Um den persönlichen Energieverbrauch einer Tour weiter zu spezifizieren werden zusätzliche Daten benötigt:
+&lt;ul&gt;
+&lt;li&gt;Das Gewicht des Fahrers und des Fahrrads&lt;/li&gt;
+&lt;li&gt;Die Luftdichte, Windgeschwindigkeit und die Position im Wind für die Berücksichtigung des Luftwiderstands&lt;/li&gt;
+&lt;li&gt;Der Untergrund und die Bereifung für die Berücksichtigung des Rollwiderstands&lt;/li&gt;
+&lt;li&gt;Die Trittfrequenz, um die Pedalkraft zu berechnen&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;Die Daten werden in diesem Dialog eingegeben und weitere Werte werden berechnet und angezeigt.&lt;/p&gt;
+&lt;p&gt;Der berechnete Energieverbrauch in der Einheit &quot;kcal&quot; wird im Track gespeichert (nur .qms Format und Datenbank) und kann auch wieder gelöscht werden, sollte er nicht mehr benötigt werden.&lt;/p&gt;
+&lt;p&gt;Weitere Information werden als Tooltipps für die Eingabe- und Ausgabewerte ausgegeben.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="71"/>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="320"/>
-        <source>&lt;p&gt;&lt;b&gt;Set Energy Use for Cycling&lt;/b&gt;&lt;/p&gt;&lt;p&gt;With this functionality your personal energy use (consumption) for a cycling tour can be computed.&lt;/p&gt;&lt;p&gt;The computed value of &quot;Energy Use Cycling&quot; can be see as an indicator for the exertion of a cycling tour.&lt;/p&gt;&lt;p&gt;The tour length, speed and slope values will be taken into account.&lt;/p&gt;&lt;p&gt;To individualize your personal energy use the following input data are more needed:&lt;ul&gt;&lt;li&gt;Driver and bicyle weight&lt;/li&gt;&lt;li&gt;Air density, wind speed and position to the wind to consider the wind drag resistance&lt;/li&gt;&lt;li&gt;Ground situation (tyre and ground) to consider the rolling resistance&lt;/li&gt;&lt;li&gt;Average pedal cadence for the computation of pedal force&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;The individualize data will be defined in this dialog and more computed values will be shown here.&lt;/p&gt;&lt;p&gt;When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set.&lt;p&gt;The energy use in unit &quot;kcal&quot; will be stored in the track and can be remove later on when no longer needed.&lt;/p&gt;&lt;p&gt;For more information see tooltips on input and output values.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="337"/>
+        <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="342"/>
         <source>Help</source>
-        <translation type="unfinished">Hilfe</translation>
+        <translation>Hilfe</translation>
     </message>
 </context>
 <context>
@@ -1643,6 +1651,11 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Punkte: %1 von %2</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="568"/>
+        <source>Energy Use Cycling: %L1</source>
+        <translation>Energieverbrauch Fahrradfahren: %L1</translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="573"/>
         <source>Invalid elevations!</source>
         <translation>Ungültige Höhenwerte!</translation>
@@ -1738,11 +1751,6 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <location filename="../gis/trk/CGisItemTrk.cpp" line="508"/>
         <source>, %1%2%3, %4%5%6</source>
         <translation>, %1%2%3, %4%5%6</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="568"/>
-        <source>Energy Use Cycling: %1</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="588"/>
@@ -6603,10 +6611,6 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
 <context>
     <name>CSearchExplanationDialog</name>
     <message>
-        <source>&lt;p&gt;The underlying syntax of the search is &quot;Property Comparison Value&quot;, i.e. &quot;name contains water&quot;. However there are measures in place to make searching more intuitive. (see below)&lt;/p&gt;&lt;p&gt;The searches are always exclusive, thus for a track &quot;elevation under 500m&quot; only shows tracks that are completly under 500m meters.&lt;/p&gt;&lt;p&gt;Following assumptions are made:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;If only one of two given numbers has a unit, the unit is assumed for both&lt;/li&gt;&lt;li&gt;Speed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date.&lt;/li&gt;&lt;li&gt;&apos;Date equals&apos; matches everything that is within 24h from the given date, thus normally the day typed.&lt;/li&gt;&lt;li&gt;If you enter no unit the default unit (what you see when viewing the property of the item) is used.&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="vanished">&lt;p&gt;Die der Suche zugrunde liegende Syntax ist &quot;Property Comparison Value&quot;, d.h. &quot;name contains water&quot;. Es gibt jedoch Maßnahmen, um die Suche intuitiver zu gestalten. (siehe unten)&lt;/p&gt;&lt;p&gt;Die Suche ist immer exklusiv, so dass für eine Strecke &quot;Höhe unter 500m&quot; nur Spuren angezeigt werden, die vollständig unter 500m Meter liegen.&lt;/p&gt;&lt;p&gt;Folgende Annahmen werden getroffen:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Wenn nur eine von zwei gegebenen Zahlen eine Einheit hat, wird die Einheit für beide&lt;/li&gt;&lt;li&gt;Geschwindigkeitseinheiten angenommen, was zu Durchschnittsgeschwindigkeit, km und mi in Entfernung, m und ft in Höhe, Zeiten in Zeitverschiebung, Datum in Datum führt.&lt;/li&gt;&lt;li&gt;&apos;Datum ist gleich&apos; passt zu allem, was innerhalb von 24h ab dem angegebenen Datum liegt, also normalerweise der Tag, der eingegeben wird.&lt;/li&gt;&lt;li&gt;Wenn Sie keine Einheit eingeben, wird die Standardeinheit (was Sie beim Betrachten der Eigenschaft des Objekts sehen) verwendet.&lt;/li&gt;&lt;/ul&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="30"/>
         <source>&lt;p&gt;Following assumptions are made:&lt;/p&gt;</source>
         <translation>&lt;p&gt;Folgende Annahmen werden getroffen:&lt;/p&gt;</translation>
@@ -6670,10 +6674,6 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="60"/>
         <source>If you enter no unit the default unit (what you see when viewing the property of the item) is used.</source>
         <translation>Wenn Sie keine Einheit eingeben, wird die Standardeinheit verwendet (die, die Sie bei der Anzeige der Eigenschaft des jeweiligen Wertes sehen).</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;You can write Dates in the following formats:&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Sie können Daten in den folgenden Formaten schreiben:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="70"/>
@@ -8929,336 +8929,302 @@ Keine Lust die Anleitung zu lesen!</translation>
 <context>
     <name>IEnergyCyclingDialog</name>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="44"/>
         <source>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingabe des Parameter Set für die Berechnung des Energieverbrauchs beim Fahrradfahren</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="94"/>
         <source>Positive Pedal Force:</source>
-        <translation type="unfinished"></translation>
+        <translation>Positive Pedalkraft:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="104"/>
         <source>Gravity Slope Force:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neigungskraft:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="114"/>
-        <source>&lt;p&gt;Predefined selection for the type of ground surface and the tyres.&lt;/p&gt;
-&lt;p&gt;Used to determine the rolling resistance coefficient.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="122"/>
         <source>Frontal Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>Windangriffsfläche:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="135"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="127"/>
         <source>Total Weight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamtgewicht:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="145"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="310"/>
+        <source>&lt;p&gt;The values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Vorauswahl für die Art der Sitzposition für die Definition der Windangriffsfläche in m2 und des Luftwiderstandsbeiwerts (cw-Wert).&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="399"/>
+        <source>&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on downhill or uphill.&lt;/p&gt;
+&lt;p&gt;When mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Die Neigungskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung der Neigung bei Bergabfahrt- oder -auffahrt benötigt wird.&lt;/p&gt;
+&lt;p&gt;Bei überwiegender Bergabfahrt kann die Neigungskraft negativ sein.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="413"/>
+        <source>Positive Power:</source>
+        <translation>Positive Leistung:</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="443"/>
+        <source>Power:</source>
+        <translation>Leistung:</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="477"/>
+        <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positve Pedal Force.&lt;/p&gt;
+&lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Die durchschnittliche Trittfrequenz in U/min wird für die Berechnung der Pedalkraft benötigt.&lt;/p&gt;
+&lt;p&gt;Realistische Werte liegen zwischen 50 und 100 U/min.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="503"/>
+        <source>&lt;p&gt;The values for the wind speed in Beaufort scale for specifying the wind speed in km/h.&lt;/p&gt;
+&lt;p&gt;Positive values for headwind and negative values for tailwind.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Werte für die Windgeschwindigkeit in Beaufortskala für die Vorauswahl der Windgeschwindigkeit in km/h.&lt;/p&gt;
+&lt;p&gt;Positive Werte für Gegenwind und negative Werte für Rückenwind.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="563"/>
+        <source>&lt;p&gt;The wind speed in km/h is taken into account when calculating the force required to overcome the air drag.&lt;/p&gt;
+&lt;p&gt;Positive values for headwind and negative values for tailwind are taken into account.&lt;/p&gt;
+&lt;p&gt;The value can be changed independently of the Beaufort scale value.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Die Windgeschwindigkeit in km/h wird für die Berechnung der benötigten Kraft für die Überwindung des Luftwiderstands benötigt.&lt;/p&gt;
+&lt;p&gt;Positive Werte werden für Gegenwind und negative Werte für Rückenwind berücksichtigt.&lt;/p&gt;
+&lt;p&gt;Die Werte können unabhängig von den Werten der Beaufortskala verändert werden.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="611"/>
+        <source>&lt;p&gt;The weight of the driver in kg including clothes.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Das Gewicht des Fahrers in kg einschließlich Kleidung.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="649"/>
         <source>Ground/Tyres:</source>
-        <translation type="unfinished"></translation>
+        <translation>Untergrund/Bereifung:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="168"/>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="506"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="659"/>
+        <source>&lt;p&gt;The predefined selection for the type of ground surface and the tyres.&lt;/p&gt;
+&lt;p&gt;To be used to determine the rolling resistance coefficient.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Vorauswahl für den Fahrbahnuntergrund und der Bereifung für die Definition des Rollwiderstandsbeiwerts.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="707"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="731"/>
         <source>Energy Use:</source>
-        <translation type="unfinished"></translation>
+        <translation>Energieverbrauch:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="178"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="667"/>
+        <source>Rolling Coeff:</source>
+        <translation>Rollwiderst. Beiw.:</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="194"/>
+        <source>Air Resistance Force:</source>
+        <translation>Luftwiderstandskraft:</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="14"/>
+        <source>Energy Use Cycling Parameter Set</source>
+        <translation>Parameter Set für die Berechnung des Energieverbrauchs beim Fahrradfahren</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="150"/>
         <source>&lt;p&gt;The rolling resistance force is the force in Newton required on average over all track points to overcome the rolling resistance.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Die Rollwiderstandskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung des Rollwiderstands benötigt wird.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="181"/>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="318"/>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="479"/>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="540"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="188"/>
-        <source>&lt;p&gt;Air density in kg/m3. The air density depends on barometric air pressure, altitude and temperature.&lt;/p&gt;
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="163"/>
+        <source>&lt;p&gt;The air density depends on barometric air pressure, altitude and temperature.&lt;/p&gt;
 &lt;p&gt;Examples:
 &lt;ul&gt;
 &lt;li&gt;Sea level: 1.226kg/m3&lt;/li&gt;
-&lt;li&gt;1500 meter: 1.056kg/m3&lt;/li&gt;
-&lt;li&gt;3000 meter: 0.905kg/m3&lt;/li&gt;
+&lt;li&gt;1,500 meter: 1.056kg/m3&lt;/li&gt;
+&lt;li&gt;3,000 meter: 0.905kg/m3&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Die Luftdichte ist abhängig von barometrischen Luftdruck, Höhe über Normalnull und Temperatur.&lt;/p&gt;
+&lt;p&gt;Beispiele:
+&lt;ul&gt;
+&lt;li&gt;Meereshöhe: 1,226kg/m3&lt;/li&gt;
+&lt;li&gt;1.500 Meter: 1,056kg/m3&lt;/li&gt;
+&lt;li&gt;3.000 Meter: 0,905kg/m3&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="197"/>
-        <source>kg/m3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="219"/>
-        <source>Rolling Coeff:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="229"/>
-        <source>Air Resistance Force:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="242"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="207"/>
         <source>Bike Weight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewicht Fahrrad:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="252"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="217"/>
         <source>&lt;p&gt;The force in Newton applied to the pedal on average over all track points.&lt;/p&gt;
 &lt;p&gt;Negative forces from strong tail wind or downhill driving are not considered.&lt;/p&gt;
 &lt;p&gt;This force must be applied to the pedal by the driver.&lt;/p&gt;
 &lt;p&gt;The higher the pedal cadence, the lower the pedal force.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Die Kraft in Newton, die im Durchschnitt über alle Trackpunkte auf das Pedal aufgebracht wird.&lt;/p&gt;
+&lt;p&gt;Negative Kräfte aus starken Rückenwind oder Bergabfahrt sind nicht berücksichtigt.&lt;/p&gt;
+&lt;p&gt;Diese Kraft muss durch den Fahrer auf das Pedal aufgebracht werden.&lt;/p&gt;
+&lt;p&gt;Je größer die Trittfrequenz, desto niedriger ist die Pedalkraft.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="258"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;0000N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="265"/>
-        <source>&lt;p&gt;The energy use (consumption) in kJoule by transforming the positive power by the driver.&lt;/p&gt;
-&lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="269"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00000kJ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="276"/>
-        <source>&lt;p&gt;The cw value (drag coefficient) indicates the wind slip of the driver and bicycle in relation to the air (wind).&lt;/p&gt;
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="233"/>
+        <source>&lt;p&gt;The wind drag coefficient (cw value) indicates the wind slip of the driver and bicycle in relation to the air (wind).&lt;/p&gt;
 &lt;p&gt;The greater this value, the more force is required to overcome the wind force.&lt;/p&gt;
 &lt;p&gt;Typical values for bicycles are between 0.2 and 1.2.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Der Luftwiderstandsbeiwert( cw-Wert) gibt die Windschlüpfigkeit von Fahrer und Fahrrad gegenüber der Luft (Wind) an.&lt;/p&gt;
+&lt;p&gt;Je größer dieser Wert ist, um so mehr Kraft wird für die Überwindung der Windkraft benötigt.&lt;/p&gt;
+&lt;p&gt;Typische Werte für Fahrräder liegen zwischen 0,2 und 1.2.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="303"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="260"/>
         <source>Pos. Power Moving Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Positive Bew.-Zeit:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="313"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="270"/>
         <source>&lt;p&gt;The air resistance force is the force in Newton required on average over all track points to overcome the air resistance.&lt;/p&gt;
 &lt;p&gt;The airstream, headwind and tailwind are taken into account.&lt;/p&gt;
 &lt;p&gt;With a strong tailwind this value can be negative.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Die Luftwiderstandskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung des Luftwiderstands benötigt wird.&lt;/p&gt;
+&lt;p&gt;Berücksichtigt wird der Fahrtwind und Gegen- und Rückenwind.&lt;/p&gt;
+&lt;p&gt;Bei starkem Rückenwind kann dieser Wert auch negativ sein.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="325"/>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="682"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="285"/>
         <source>&lt;p&gt;The weight of the bicycle in kg including luggage.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Das Gewicht des Fahrrads in kg einschließlich Gepäck.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="328"/>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="688"/>
-        <source>kg</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="350"/>
-        <source>&lt;p&gt;Values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="357"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="317"/>
         <source>Pedal Cadence:</source>
-        <translation type="unfinished"></translation>
+        <translation>Trittfrequenz:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="367"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="327"/>
         <source>&lt;p&gt;The frontal area in m2 (driver, bicycle, bags, etc.) exposed to the wind.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Die Windangriffsfläche (Frontalfläche) in m2 (Fahrer, Fahrrad, Gepäcktaschen, etc.), die dem Wind ausgesetzt ist.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="370"/>
-        <source>m2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="392"/>
-        <source>&lt;p&gt;The energy use (consumption) in kcal by transforming the positive power by the driver.&lt;/p&gt;
-&lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="396"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;00000kcal&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="403"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="352"/>
         <source>Air Density:</source>
-        <translation type="unfinished"></translation>
+        <translation>Luftdichte:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="413"/>
-        <source>&lt;p&gt;The rolling resistance coefficient specifies the force used to overcome the rolling resistance.&lt;/p&gt;
-&lt;p&gt;The relevant factors are the road surface and the tyres.&lt;/p&gt;
-&lt;p&gt;The higher this value is, the more force is required to overcome the rolling resistance.&lt;/p&gt;
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="444"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="362"/>
         <source>Wind Drag Coeff:</source>
-        <translation type="unfinished"></translation>
+        <translation>Luftwiderst. Beiw.:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="454"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="372"/>
         <source>&lt;p&gt;The total weight in kg of driver and bike including clothes and luggage.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Das Gesamtgewicht in kg von Fahrer und Fahrrad inklusive Kleidung und Gepäck.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="457"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0kg&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="464"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="385"/>
         <source>&lt;p&gt;The time in moving and with positive power by the driver.&lt;/p&gt;
 &lt;p&gt;Times with negative power in strong tail wind or downhill driving are not taken into account.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Die Zeit in Bewegung und gleichzeitiger positiver Leistung durch den Fahrer.&lt;/p&gt;
+&lt;p&gt;Zeiten mit negativer Leistung aus starkem Rückenwind oder Bergabfahrt sind nicht berücksichtigt.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="468"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00:00:00h&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="475"/>
-        <source>&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on the uphill.&lt;/p&gt;
-&lt;p&gt;When mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="486"/>
-        <source>Avg Positive Power:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="496"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="423"/>
         <source>Wind Speed km/h:</source>
-        <translation type="unfinished"></translation>
+        <translation>Windgeschw. km/h:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="516"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="433"/>
         <source>Ratio to Moving Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verhält. zu Bew.-Zeit:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="526"/>
-        <source>Average Power:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="536"/>
-        <source>&lt;p&gt;Sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.&lt;/p&gt;
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="453"/>
+        <source>&lt;p&gt;The sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.&lt;/p&gt;
 &lt;p&gt;This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Summe der durchschnittlich benötigten Kraft für den Track für die Überwindung des Luftwiderstands, Rollwiderstands und Neigung.&lt;/p&gt;
+&lt;p&gt;Dieser Wert kann negativ bei starkem Rückwind und/oder Bergabfahrt sein.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="547"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="467"/>
         <source>Sum Forces:</source>
-        <translation type="unfinished"></translation>
+        <translation>Summe Kräfte:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="557"/>
-        <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the pedal force.&lt;/p&gt;
-&lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="561"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="481"/>
         <source>rpm</source>
-        <translation type="unfinished"></translation>
+        <translation>U/min</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="583"/>
-        <source>&lt;p&gt;Values for the wind speed in Beaufort scale for specifying the wind speed in km/h.&lt;/p&gt;
-&lt;p&gt;Positive values for headwind and negative values for tailwind.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="591"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="511"/>
         <source>&lt;p&gt;The power in Watt on average over all track points.&lt;/p&gt;
 &lt;p&gt;Negative power from strong tailwind or downhill driving are taken into account.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Die Leistung in Watt im Durchschnitt über alle Trackpunkte.&lt;/p&gt;
+&lt;p&gt;Die negative Leistung aus starken Rückenwind oder Bergabfahrt ist berücksichtigt.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="595"/>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="630"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000.0W&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="605"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="528"/>
         <source>Driver Weight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewicht Fahrer:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="615"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="538"/>
         <source>Rolling Resist. Force:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollwiderstandskraft:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="625"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="548"/>
         <source>&lt;p&gt;The positive power in Watt that must be applied on average for all track points.&lt;/p&gt;
 &lt;p&gt;Negative power from strong tailwind or downhill driving are not taken into account.&lt;/p&gt;
 &lt;p&gt;This power must be applied by the driver on average for the track.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Die positive Leistung in Watt, die im Durchschnitt über alle Trackpunkte aufgebracht werden muss.&lt;/p&gt;
+&lt;p&gt;Negative Leistung aus starken Rückenwind oder Bergabfahrt ist nicht berücksichtigt.&lt;/p&gt;
+&lt;p&gt;Die positive Leistung muss durch den Fahrer im Durchschnitt für den Track aufgebracht werden.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="637"/>
-        <source>&lt;p&gt;The wind speed in km/h is taken into account when calculating the force required to overcome the air drag. &lt;/p&gt;
-&lt;p&gt;Positive values for headwind and negative values for tailwind are taken into account.&lt;/p&gt;
-&lt;p&gt;The value can be changed independently of the Beaufort scale values.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="642"/>
-        <source>km/h</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="661"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="587"/>
         <source>&lt;p&gt;The ratio of the power moving time related to the track moving time in percent.&lt;/p&gt;
 &lt;p&gt;The lower the ratio the greater the influence of tailwind and/or downhill driving.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Das Verhältnis der positiven Bewegungszeit bezogen auf die gesamte Track Bewegungszeit in Prozent.&lt;/p&gt;
+&lt;p&gt;Je geringer das Verhältnis ist, desto größer ist der Einfluss von Rückenwind und/oder Bergabfahrt.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="665"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;00.0%&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="672"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="601"/>
         <source>Position in Wind:</source>
-        <translation type="unfinished"></translation>
+        <translation>Position im Wind:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="710"/>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="639"/>
         <source>Wind Speed Bft:</source>
-        <translation type="unfinished"></translation>
+        <translation>Windgeschw. Bft:</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="677"/>
+        <source>&lt;p&gt;The rolling resistance coefficient (cr value) specifies the force used to overcome the rolling resistance.&lt;/p&gt;
+&lt;p&gt;The relevant factors are the road surface and the tyres.&lt;/p&gt;
+&lt;p&gt;The higher this value is, the more force is required to overcome the rolling resistance.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Der Rollwiderstandsbeiwert (cr-Wert) bestimmt die Kraft, die für die Überwindung des Rollwiderstands benötigt wird.&lt;/p&gt;
+&lt;p&gt;Maßgebliche Faktoren sind der Fahrbahnuntergrund und die Bereifung.&lt;/p&gt;
+&lt;p&gt;Je größer dieser Wert ist, um so mehr Kraft wird für die Überwindung des Rollwiderstands benötigt.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="717"/>
+        <source>&lt;p&gt;The energy use (consumption) in kJoule by transforming the positive power by the driver.&lt;/p&gt;
+&lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Der Energieverbrauch in kJoule für die Umsetzung der positiven Leistung durch den Fahrer.&lt;/p&gt;
+&lt;p&gt;Der Muskel-Wirkungsgrad ist mit 23% angenommen.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="741"/>
+        <source>&lt;p&gt;The energy use (consumption) in kcal by transforming the positive power by the driver.&lt;/p&gt;
+&lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Der Energieverbrauch in kcal für die Umsetzung der positiven Leistung durch den Fahrer.&lt;/p&gt;
+&lt;p&gt;Der Muskel-Wirkungsgrad ist mit 23% angenommen.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -9815,17 +9781,9 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Abstiegsgeschw.</translation>
     </message>
     <message>
-        <source>Descending</source>
-        <translation type="vanished">Absteigend</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="168"/>
         <source>Speed at zero Slope</source>
         <translation>Geschw. ohne Steigung</translation>
-    </message>
-    <message>
-        <source>Ascending</source>
-        <translation type="vanished">Aufsteigend</translation>
     </message>
 </context>
 <context>
@@ -10411,10 +10369,6 @@ Dateiname: %1</translation>
         <location filename="../gis/IGisWorkspace.ui" line="50"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation>Ändert die Transparenz von allen GIS Elementen auf der Karte.</translation>
-    </message>
-    <message>
-        <source>Filter: Start to type and the list will be reduced to matching items.</source>
-        <translation type="vanished">Filter: Fangen Sie zu tippen an und die Liste wird auf passende Einträge reduziert.</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="66"/>
@@ -11598,10 +11552,6 @@ Tipp:
         <location filename="../plot/IPlot.cpp" line="104"/>
         <source>Cut Track...</source>
         <translation>Track teilen...</translation>
-    </message>
-    <message>
-        <source>Cut...</source>
-        <translation type="vanished">Teilen...</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="553"/>

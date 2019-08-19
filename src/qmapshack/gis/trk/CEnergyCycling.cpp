@@ -160,9 +160,12 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
     energySet.powerMovingTimeRatio = 0;
     energySet.energyKJoule = 0;
 
+    qint32 cntPowerPoints = 0;
     qint32 cntPositivePowerPoints = 0;
 
     qreal pedalSpeed = crankLength * pedalCadence * 2 * M_PI / 60 / 1000;
+
+    const CTrackData::trkpt_t *lastTrkpt  = nullptr;
 
     for(const CTrackData::trkpt_t &pt : trk.getTrackData())
     {
@@ -171,53 +174,61 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
             continue;
         }
 
-        qreal speed = pt.speed;
-        if (speed <= 0.2)           // 0.2 ==> to be synchron with deriveSecondaryData()
+        if(lastTrkpt != nullptr)
         {
-            continue;
+            qreal deltaTime = (pt.time.toMSecsSinceEpoch() - lastTrkpt->time.toMSecsSinceEpoch()) / 1000.0;
+            if(deltaTime > 0 && ((pt.deltaDistance / deltaTime) <= 0.2)) // 0.2 ==> to be synchron with deriveSecondaryData()
+            {
+                lastTrkpt = &pt;
+                continue;
+            }
+
+            qreal slope = pt.slope2;
+            qreal speed = pt.speed;
+
+            qreal airResistForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
+
+            if ((speed + windSpeed) < 0)
+            {
+                airResistForce *= -1;
+            }
+            qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
+            energySet.airResistForce += airResistForce;
+            energySet.gravitySlopeForce += gravitySlopeForce;
+            energySet.sumForce += airResistForce + gravitySlopeForce + energySet.rollResistForce;
+
+            qreal power = (qAbs(airResistForce) * (speed + windSpeed)) + ((energySet.rollResistForce + gravitySlopeForce) * speed);
+            energySet.power += power;
+
+            cntPowerPoints++;
+            if (power > 0)
+            {
+                energySet.powerMovingTime += deltaTime;
+                energySet.positivePower += power;
+                energySet.energyKJoule += power * deltaTime / muscleCoeff / 1000 * 100;
+                energySet.positivePedalForce += power / pedalSpeed * 180 / pedalRange;
+                cntPositivePowerPoints++;
+            }
         }
-
-        qreal slope = pt.slope2;
-
-        qreal airResistForce = 0.5 * windDragCoeff * frontalArea * airDensity * qPow(speed + windSpeed, 2);
-
-        if ((speed + windSpeed) < 0)
-        {
-            airResistForce *= -1;
-        }
-        qreal gravitySlopeForce = totalWeight * gravityAccel * slope / 100;
-        energySet.airResistForce += airResistForce;
-        energySet.gravitySlopeForce += gravitySlopeForce;
-        energySet.sumForce += airResistForce + gravitySlopeForce + energySet.rollResistForce;
-
-        qreal power = (qAbs(airResistForce) * (speed + windSpeed)) + ((energySet.rollResistForce + gravitySlopeForce) * speed);
-        energySet.power += power;
-
-        if (power > 0)
-        {
-            qreal deltaPowerTime = pt.deltaDistance / speed;
-            energySet.powerMovingTime += deltaPowerTime;
-            energySet.positivePower += power;
-            energySet.energyKJoule += power * deltaPowerTime / muscleCoeff / 1000 * 100;
-            energySet.positivePedalForce += power / pedalSpeed * 180 / pedalRange;
-            cntPositivePowerPoints++;
-        }
+        lastTrkpt = &pt;
     }
 
-    qint32 cntVisiblePoints = trk.getNumberOfVisiblePoints();
-    if (cntVisiblePoints)
+    if (cntPowerPoints)
     {
-        energySet.airResistForce /= cntVisiblePoints;
-        energySet.gravitySlopeForce /= cntVisiblePoints;
-        energySet.sumForce /= cntVisiblePoints;
-        energySet.power /= cntVisiblePoints;
+        energySet.airResistForce /= cntPowerPoints;
+        energySet.gravitySlopeForce /= cntPowerPoints;
+        energySet.sumForce /= cntPowerPoints;
+        energySet.power /= cntPowerPoints;
     }
 
     qreal totalElapsedSecondsMoving = trk.getTotalElapsedSecondsMoving();
     if(totalElapsedSecondsMoving)
     {
-        energySet.powerMovingTimeRatio = energySet.powerMovingTime / totalElapsedSecondsMoving;
+        energySet.powerMovingTimeRatio = (quint32)energySet.powerMovingTime / totalElapsedSecondsMoving;
+        qDebug() << "energySet.powerMovingTime:" << energySet.powerMovingTime << "totalElapsedSecondsMoving:" << totalElapsedSecondsMoving;
     }
+
+    qDebug() << "cntPowerPoints:" << cntPowerPoints << "cntPositivePowerPoints:" << cntPositivePowerPoints << "trk.cntVisiblePoints:" << trk.getNumberOfVisiblePoints();
 
     if(cntPositivePowerPoints)
     {

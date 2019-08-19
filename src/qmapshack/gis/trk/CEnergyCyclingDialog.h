@@ -38,7 +38,8 @@ private slots:
     void slotApply(bool);
     void slotLoadFromSettings(bool);
     void slotRemove(bool);
-    void slotSetWeight(qreal weight);
+    void slotSetDriverWeight(qreal weight);
+    void slotSetBikeWeight(qreal weight);
     void slotSetComboWindSpeed(qint32 windSpeedIndex);
     void slotSetWindSpeed(qreal windSpeed);
     void slotSetAirDensity(qreal airDensity);
@@ -64,7 +65,7 @@ private:
         {"-3 " + tr("Tailwind"),    -15.5 / 3.6},
         {"-2 " + tr("Tailwind"),     -8.5 / 3.6},
         {"-1 " + tr("Tailwind"),     -3.0 / 3.6},
-        {tr("0 No Wind"), 0},
+        {"0 "  + tr("No Wind"),      0         },
         {"+1 " + tr("Headwind"),     +3.0 / 3.6},
         {"+2 " + tr("Headwind"),     +8.5 / 3.6},
         {"+3 " + tr("Headwind"),    +15.5 / 3.6},

@@ -565,7 +565,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     qreal energyUseCycling = energyCycling.getEnergyUseCycling();
     if(energyCycling.isValid() && energyUseCycling != NOFLOAT)
     {
-        str += tr("Energy Use Cycling: %1").arg(energyUseCycling, 0, 'f', 0) + "kcal<br/>";
+        str += tr("Energy Use Cycling: %L1").arg(energyUseCycling, 0, 'f', 0) + "kcal<br/>";
     }
 
     if((allValidFlags & (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle)) == (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle))

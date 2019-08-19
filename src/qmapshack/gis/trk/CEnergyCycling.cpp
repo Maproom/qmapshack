@@ -225,10 +225,7 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
     if(totalElapsedSecondsMoving)
     {
         energySet.powerMovingTimeRatio = (quint32)energySet.powerMovingTime / totalElapsedSecondsMoving;
-        qDebug() << "energySet.powerMovingTime:" << energySet.powerMovingTime << "totalElapsedSecondsMoving:" << totalElapsedSecondsMoving;
     }
-
-    qDebug() << "cntPowerPoints:" << cntPowerPoints << "cntPositivePowerPoints:" << cntPositivePowerPoints << "trk.cntVisiblePoints:" << trk.getNumberOfVisiblePoints();
 
     if(cntPositivePowerPoints)
     {

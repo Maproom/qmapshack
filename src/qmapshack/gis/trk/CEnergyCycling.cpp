@@ -160,8 +160,8 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
     energySet.powerMovingTimeRatio = 0;
     energySet.energyKJoule = 0;
 
-    qint32 cntPowerPoints = 0;
-    qint32 cntPositivePowerPoints = 0;
+    qint32 cntPowerPoints = 0;            // Count the moving track points
+    qint32 cntPositivePowerPoints = 0;    // Count the moving track point and positive force to the pedal
 
     qreal pedalSpeed = crankLength * pedalCadence * 2 * M_PI / 60 / 1000;
 
@@ -174,13 +174,13 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
             continue;
         }
 
-        if(lastTrkpt != nullptr)
+        if(lastTrkpt != nullptr)     // First track point will not considered
         {
             qreal deltaTime = (pt.time.toMSecsSinceEpoch() - lastTrkpt->time.toMSecsSinceEpoch()) / 1000.0;
             if(deltaTime > 0 && ((pt.deltaDistance / deltaTime) <= 0.2)) // 0.2 ==> to be synchron with deriveSecondaryData()
             {
                 lastTrkpt = &pt;
-                continue;
+                continue;            // Standstill - no moving, track point will not considered 
             }
 
             qreal slope = pt.slope2;
@@ -198,13 +198,13 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
             energySet.sumForce += airResistForce + gravitySlopeForce + energySet.rollResistForce;
 
             qreal power = (qAbs(airResistForce) * (speed + windSpeed)) + ((energySet.rollResistForce + gravitySlopeForce) * speed);
-            energySet.power += power;
+            energySet.power += power; // Positive and negative power
 
             cntPowerPoints++;
             if (power > 0)
             {
                 energySet.powerMovingTime += deltaTime;
-                energySet.positivePower += power;
+                energySet.positivePower += power;  // Positive power only
                 energySet.energyKJoule += power * deltaTime / muscleCoeff / 1000 * 100;
                 energySet.positivePedalForce += power / pedalSpeed * 180 / pedalRange;
                 cntPositivePowerPoints++;
@@ -213,7 +213,7 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
         lastTrkpt = &pt;
     }
 
-    if (cntPowerPoints)
+    if (cntPowerPoints)  // For all moving points
     {
         energySet.airResistForce /= cntPowerPoints;
         energySet.gravitySlopeForce /= cntPowerPoints;
@@ -221,18 +221,18 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
         energySet.power /= cntPowerPoints;
     }
 
-    qreal totalElapsedSecondsMoving = trk.getTotalElapsedSecondsMoving();
+    qreal totalElapsedSecondsMoving = trk.getTotalElapsedSecondsMoving(); // The track moving time
     if(totalElapsedSecondsMoving)
     {
         energySet.powerMovingTimeRatio = (quint32)energySet.powerMovingTime / totalElapsedSecondsMoving;
     }
 
-    if(cntPositivePowerPoints)
+    if(cntPositivePowerPoints) // For the moving points with positve force to the pedal
     {
         energySet.positivePedalForce /= cntPositivePowerPoints;
         energySet.positivePower /= cntPositivePowerPoints;
     }
-    energySet.energyKcal = energySet.energyKJoule / joule2Calor;
+    energySet.energyKcal = energySet.energyKJoule / joule2Calor;  // The final energy use cycling value to show in the info panel
 }
 
 /** @brief Set the "Energy Use Cycling" value to NOFLOAT which indicates a remove

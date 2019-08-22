@@ -38,7 +38,7 @@ public:
     bool validateCurrentPage() override;
 
     enum { ePageChooseMode, ePageLocalDirectory, ePageLocalInstallation, ePageProfiles,
-           ePageLocalTiles, ePageOnlineUrl, ePageOnlineDetails, ePageLocalDetails };
+           ePageLocalTiles, ePageOnlineUrl, ePageOnlineDetails, ePageLocalDetails, ePageBinariesUrl };
 
 public slots:
     void accept() override;
@@ -58,6 +58,7 @@ private slots:
     void slotLocalJavaExecutableCursorPositionChanged() const;
     void slotLocalProfilesUrlCursorPositionChanged();
     void slotOnlineUrlCursorPositionChanged();
+    void slotBinariesUrlCursorPositionChanged();
     void slotWebLocalBRouterVersionsLoadFinished(bool ok);
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();
@@ -70,6 +71,7 @@ private slots:
     void slotProfileUpClicked() const;
     void slotProfileDownClicked() const;
     void slotOnlineConfigLoaded();
+    void slotBinariesPageLoaded();
     void slotSetupError(const QString &error, const QString &details);
     void slotOnlineProfilesLoaded();
 
@@ -104,6 +106,10 @@ private:
     void beginOnlineUrl();
     void updateOnlineUrl();
     void resetOnlineUrl();
+
+    void beginBinariesUrl();
+    void updateBinariesUrl();
+    void resetBinariesUrl();
 
     CRouterBRouterSetup * setup;
 

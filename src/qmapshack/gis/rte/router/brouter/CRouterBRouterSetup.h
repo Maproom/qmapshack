@@ -66,6 +66,7 @@ public:
     void readLocalProfiles();
 
     void loadOnlineConfig() const;
+    void loadBinariesPage() const;
     void loadLocalOnlineProfiles() const;
     void displayProfileAsync(const QString &profile) const;
     void displayOnlineProfileAsync(const QString &profile) const;
@@ -78,6 +79,7 @@ public:
 
 signals:
     void sigOnlineConfigLoaded() const;
+    void sigBinariesPageLoaded() const;
     void sigProfilesChanged() const;
     void sigDisplayOnlineProfileFinished(const QString profile, const QString content) const;
     void sigError(const QString error, const QString details) const;
@@ -87,12 +89,13 @@ private slots:
     void slotLoadOnlineProfilesRequestFinished(bool ok);
 
 private:
-    enum request_e { eTypeConfig, eTypeProfile };
+    enum request_e { eTypeConfig, eTypeProfile, eTypeBinariesPage };
     enum profileRequest_e { eProfileInstall, eProfileDisplay };
 
     QDir getProfileDir(const mode_e mode) const;
     void loadOnlineProfileAsync(const QString &profile, const profileRequest_e mode) const;
     void loadOnlineConfigFinished(QNetworkReply* reply);
+    void loadBinariesPageFinished(QNetworkReply* reply);
     void loadOnlineProfileFinished(QNetworkReply * reply);
     void afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant &v);
     void mergeOnlineProfiles(const QStringList &profilesLoaded);
@@ -129,9 +132,9 @@ private:
 
     const bool defaultExpertMode = false;
     const mode_e defaultInstallMode = eModeOnline;
-    const QString defaultOnlineWebUrl = "http://brouter.de/brouter-web/";
-    const QString defaultOnlineServiceUrl = "http://h2096617.stratoserver.net:443";
-    const QString defaultOnlineProfilesUrl = "http://brouter.de/brouter/profiles2/";
+    const QString defaultOnlineWebUrl = "https://brouter.de/brouter-web/";
+    const QString defaultOnlineServiceUrl = "https://h2096617.stratoserver.net:443";
+    const QString defaultOnlineProfilesUrl = "https://brouter.de/brouter/profiles2/";
     const QString defaultLocalDir = ".";
     const QString defaultLocalProfileDir = "profiles2";
     const QString defaultLocalCustomProfileDir = "customprofiles";
@@ -142,8 +145,8 @@ private:
     const QString defaultLocalNumberThreads = "1";
     const QString defaultLocalMaxRunningTime = "300";
     const QString defaultLocalJavaOpts = "-Xmx128M -Xms128M -Xmn8M";
-    const QString defaultBinariesUrl = "http://brouter.de/brouter_bin/";
-    const QString defaultSegmentsUrl = "http://brouter.de/brouter/segments4/";
+    const QString defaultBinariesUrl = "https://brouter.de/brouter_bin/";
+    const QString defaultSegmentsUrl = "https://brouter.de/brouter/segments4/";
 
     const QString onlineCacheDir = "BRouter";
 

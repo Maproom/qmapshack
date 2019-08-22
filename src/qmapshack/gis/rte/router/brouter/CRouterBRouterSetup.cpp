@@ -348,9 +348,11 @@ void CRouterBRouterSetup::loadOnlineConfig() const
 {
     const QUrl configUrl(onlineWebUrl + "config.js");
     const QString &configHost = configUrl.host();
+    const QString &configScheme = configUrl.scheme();
 
     QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(configUrl));
     reply->setProperty("configHost", configHost);
+    reply->setProperty("configScheme", configScheme);
     reply->setProperty("type", eTypeConfig);
 }
 
@@ -380,6 +382,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
     else
     {
         QString configHost = reply->property("configHost").toString();
+        QString configScheme = reply->property("configScheme").toString();
 
         const QString jsConfig(reply->readAll());
 
@@ -390,11 +393,12 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
                        window = {};\
                        window.location = {};\
                        window.location.hostname = '%1';\
+                       window.location.protocol = '%2:';\
                        window.location.search = {};\
                        window.location.search.slice = function() {};\
                        URLSearchParams = function() {};\
                        BR = {};\
-                      })();").arg(configHost);
+                      })();").arg(configHost).arg(configScheme);
 
         engine.evaluate(jsSetup);
         const QJSValue &val = engine.evaluate(jsConfig);

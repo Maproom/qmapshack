@@ -356,17 +356,31 @@ void CRouterBRouterSetup::loadOnlineConfig() const
     reply->setProperty("type", eTypeConfig);
 }
 
+void CRouterBRouterSetup::loadBinariesPage() const
+{
+    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(binariesUrl));
+    reply->setProperty("type", eTypeBinariesPage);
+}
+
 void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
 {
     const request_e type = request_e(reply->property("type").toInt());
-    if (type == eTypeConfig)
+    switch (type) {
+    case eTypeConfig:
     {
         loadOnlineConfigFinished(reply);
+        break;
     }
-    else
+    case eTypeProfile:
     {
-        Q_ASSERT(type ==  eTypeProfile);
         loadOnlineProfileFinished(reply);
+        break;
+    }
+    case eTypeBinariesPage:
+    {
+        loadBinariesPageFinished(reply);
+        break;
+    }
     }
 }
 
@@ -476,6 +490,19 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
         emit sigProfilesChanged();
         emit sigOnlineConfigLoaded();
     }
+}
+
+void CRouterBRouterSetup::loadBinariesPageFinished(QNetworkReply *reply)
+{
+    reply->deleteLater();
+
+    if (reply->error() != QNetworkReply::NoError)
+    {
+        emitNetworkError(reply->errorString());
+        return;
+    }
+
+    emit sigBinariesPageLoaded();
 }
 
 void CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished(bool ok)

@@ -70,7 +70,11 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(lineOnlineUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged);
     connect(lineOnlineUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged);
 
+    connect(lineBinariesUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotBinariesUrlCursorPositionChanged);
+    connect(lineBinariesUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotBinariesUrlCursorPositionChanged);
+
     connect(setup, &CRouterBRouterSetup::sigOnlineConfigLoaded, this, &CRouterBRouterSetupWizard::slotOnlineConfigLoaded);
+    connect(setup, &CRouterBRouterSetup::sigBinariesPageLoaded, this, &CRouterBRouterSetupWizard::slotBinariesPageLoaded);
     connect(setup, &CRouterBRouterSetup::sigDisplayOnlineProfileFinished, this, &CRouterBRouterSetupWizard::slotDisplayProfile);
     connect(setup, &CRouterBRouterSetup::sigProfilesChanged, this, &CRouterBRouterSetupWizard::slotOnlineProfilesLoaded);
     connect(setup, &CRouterBRouterSetup::sigError, this, &CRouterBRouterSetupWizard::slotSetupError);
@@ -110,13 +114,17 @@ int CRouterBRouterSetupWizard::nextId() const
 
     case ePageLocalDirectory:
     {
+        if (doLocalInstall)
+        {
+            if (setup->expertMode)
+            {
+                return ePageBinariesUrl;
+            }
+            return ePageLocalInstallation;
+        }
         if (setup->expertMode)
         {
             return ePageOnlineUrl;
-        }
-        if (doLocalInstall)
-        {
-            return ePageLocalInstallation;
         }
         return ePageProfiles;
     }
@@ -168,6 +176,11 @@ int CRouterBRouterSetupWizard::nextId() const
             return ePageOnlineDetails;
         }
         break;
+    }
+
+    case ePageBinariesUrl:
+    {
+        return ePageLocalInstallation;
     }
 
     case ePageLocalDetails:
@@ -267,6 +280,12 @@ void CRouterBRouterSetupWizard::slotCurrentIdChanged(const int id)
         break;
     }
 
+    case ePageBinariesUrl:
+    {
+        beginBinariesUrl();
+        break;
+    }
+
     case ePageLocalDetails:
     {
         beginLocalDetails();
@@ -297,6 +316,12 @@ void CRouterBRouterSetupWizard::slotCustomButtonClicked(const int id)
         case ePageLocalDetails:
         {
             resetLocalDetails();
+            break;
+        }
+
+        case ePageBinariesUrl:
+        {
+            resetBinariesUrl();
             break;
         }
         }
@@ -848,6 +873,36 @@ void CRouterBRouterSetupWizard::resetOnlineUrl()
     beginOnlineUrl();
 }
 
+void CRouterBRouterSetupWizard::beginBinariesUrl()
+{
+    setOption(QWizard::HaveCustomButton1, true);
+    isError = false;
+    setup->loadBinariesPage();
+}
+
+void CRouterBRouterSetupWizard::slotBinariesUrlCursorPositionChanged()
+{
+    setup->binariesUrl = lineBinariesUrl->text();
+    isError = false;
+    setup->loadBinariesPage();
+}
+
+void CRouterBRouterSetupWizard::updateBinariesUrl()
+{
+    lineBinariesUrl->setText(setup->binariesUrl);
+    textBinariesUrl->setVisible(isError);
+    if (isError)
+    {
+        textBinariesUrl->setText(error + ": "+ errorDetails);
+    }
+}
+
+void CRouterBRouterSetupWizard::resetBinariesUrl()
+{
+    setup->resetBinariesUrl();
+    beginBinariesUrl();
+}
+
 void CRouterBRouterSetupWizard::updateLocalDetails() const
 {
     lineLocalProfilesUrl->setText(setup->onlineProfilesUrl);
@@ -898,6 +953,8 @@ bool CRouterBRouterSetupWizard::validateLocalDetails() const
 void CRouterBRouterSetupWizard::resetLocalDetails() const
 {
     setup->resetOnlineProfilesUrl();
+    setup->resetBinariesUrl();
+    setup->resetSegmentsUrl();
     setup->resetLocalHost();
     setup->resetLocalPort();
     setup->resetLocalBindLocalonly();
@@ -935,6 +992,12 @@ void CRouterBRouterSetupWizard::slotOnlineConfigLoaded()
     }
 }
 
+void CRouterBRouterSetupWizard::slotBinariesPageLoaded()
+{
+    isError = false;
+    updateBinariesUrl();
+}
+
 void CRouterBRouterSetupWizard::slotSetupError(const QString &error, const QString &details)
 {
     isError = true;
@@ -946,6 +1009,12 @@ void CRouterBRouterSetupWizard::slotSetupError(const QString &error, const QStri
     case ePageOnlineUrl:
     {
         updateOnlineUrl();
+        break;
+    }
+
+    case ePageBinariesUrl:
+    {
+        updateBinariesUrl();
         break;
     }
 

@@ -59,6 +59,7 @@ private slots:
     void slotLocalProfilesUrlCursorPositionChanged();
     void slotOnlineUrlCursorPositionChanged();
     void slotBinariesUrlCursorPositionChanged();
+    void slotSegmentsUrlCursorPositionChanged();
     void slotWebLocalBRouterVersionsLoadFinished(bool ok);
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();
@@ -72,6 +73,7 @@ private slots:
     void slotProfileDownClicked() const;
     void slotOnlineConfigLoaded();
     void slotBinariesPageLoaded();
+    void slotSegmentsPageLoaded();
     void slotSetupError(const QString &error, const QString &details);
     void slotOnlineProfilesLoaded();
 

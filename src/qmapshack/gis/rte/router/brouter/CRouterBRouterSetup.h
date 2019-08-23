@@ -67,6 +67,7 @@ public:
 
     void loadOnlineConfig() const;
     void loadBinariesPage() const;
+    void loadSegmentsPage() const;
     void loadLocalOnlineProfiles() const;
     void displayProfileAsync(const QString &profile) const;
     void displayOnlineProfileAsync(const QString &profile) const;
@@ -80,6 +81,7 @@ public:
 signals:
     void sigOnlineConfigLoaded() const;
     void sigBinariesPageLoaded() const;
+    void sigSegmentsPageLoaded() const;
     void sigProfilesChanged() const;
     void sigDisplayOnlineProfileFinished(const QString profile, const QString content) const;
     void sigError(const QString error, const QString details) const;
@@ -89,13 +91,14 @@ private slots:
     void slotLoadOnlineProfilesRequestFinished(bool ok);
 
 private:
-    enum request_e { eTypeConfig, eTypeProfile, eTypeBinariesPage };
+    enum request_e { eTypeConfig, eTypeProfile, eTypeBinariesPage, eTypeSegmentsPage };
     enum profileRequest_e { eProfileInstall, eProfileDisplay };
 
     QDir getProfileDir(const mode_e mode) const;
     void loadOnlineProfileAsync(const QString &profile, const profileRequest_e mode) const;
     void loadOnlineConfigFinished(QNetworkReply* reply);
     void loadBinariesPageFinished(QNetworkReply* reply);
+    void loadSegmentsPageFinished(QNetworkReply* reply);
     void loadOnlineProfileFinished(QNetworkReply * reply);
     void afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant &v);
     void mergeOnlineProfiles(const QStringList &profilesLoaded);

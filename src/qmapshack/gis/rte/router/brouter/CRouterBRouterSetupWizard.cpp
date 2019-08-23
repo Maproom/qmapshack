@@ -46,6 +46,9 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
 
     connect(lineLocalProfilesUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged);
     connect(lineLocalProfilesUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged);
+    connect(lineLocalSegmentsUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotSegmentsUrlCursorPositionChanged);
+    connect(lineLocalSegmentsUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotSegmentsUrlCursorPositionChanged);
+
     connect(toolLocalDir, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectDirectory);
     connect(toolJavaExecutable, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectJava);
     connect(pushLocalFindJava, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalPushFindJava);
@@ -75,6 +78,7 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
 
     connect(setup, &CRouterBRouterSetup::sigOnlineConfigLoaded, this, &CRouterBRouterSetupWizard::slotOnlineConfigLoaded);
     connect(setup, &CRouterBRouterSetup::sigBinariesPageLoaded, this, &CRouterBRouterSetupWizard::slotBinariesPageLoaded);
+    connect(setup, &CRouterBRouterSetup::sigSegmentsPageLoaded, this, &CRouterBRouterSetupWizard::slotSegmentsPageLoaded);
     connect(setup, &CRouterBRouterSetup::sigDisplayOnlineProfileFinished, this, &CRouterBRouterSetupWizard::slotDisplayProfile);
     connect(setup, &CRouterBRouterSetup::sigProfilesChanged, this, &CRouterBRouterSetupWizard::slotOnlineProfilesLoaded);
     connect(setup, &CRouterBRouterSetup::sigError, this, &CRouterBRouterSetupWizard::slotSetupError);
@@ -906,6 +910,7 @@ void CRouterBRouterSetupWizard::resetBinariesUrl()
 void CRouterBRouterSetupWizard::updateLocalDetails() const
 {
     lineLocalProfilesUrl->setText(setup->onlineProfilesUrl);
+    lineLocalSegmentsUrl->setText(setup->segmentsUrl);
     lineLocalHost->setText(setup->localHost);
     lineLocalPort->setText(setup->localPort);
     checkLocalBindLocalonly->setChecked(setup->localBindLocalonly);
@@ -927,6 +932,7 @@ void CRouterBRouterSetupWizard::beginLocalDetails()
     setOption(QWizard::HaveCustomButton1, true);
     isError = false;
     setup->loadLocalOnlineProfiles();
+    setup->loadSegmentsPage();
 }
 
 void CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged()
@@ -934,6 +940,13 @@ void CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged()
     setup->onlineProfilesUrl = lineLocalProfilesUrl->text();
     isError = false;
     setup->loadLocalOnlineProfiles();
+}
+
+void CRouterBRouterSetupWizard::slotSegmentsUrlCursorPositionChanged()
+{
+    setup->segmentsUrl = lineLocalSegmentsUrl->text();
+    isError = false;
+    setup->loadSegmentsPage();
 }
 
 bool CRouterBRouterSetupWizard::validateLocalDetails() const
@@ -996,6 +1009,12 @@ void CRouterBRouterSetupWizard::slotBinariesPageLoaded()
 {
     isError = false;
     updateBinariesUrl();
+}
+
+void CRouterBRouterSetupWizard::slotSegmentsPageLoaded()
+{
+    isError = false;
+    updateLocalDetails();
 }
 
 void CRouterBRouterSetupWizard::slotSetupError(const QString &error, const QString &details)

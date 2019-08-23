@@ -362,6 +362,12 @@ void CRouterBRouterSetup::loadBinariesPage() const
     reply->setProperty("type", eTypeBinariesPage);
 }
 
+void CRouterBRouterSetup::loadSegmentsPage() const
+{
+    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(segmentsUrl));
+    reply->setProperty("type", eTypeSegmentsPage);
+}
+
 void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
 {
     const request_e type = request_e(reply->property("type").toInt());
@@ -379,6 +385,11 @@ void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
     case eTypeBinariesPage:
     {
         loadBinariesPageFinished(reply);
+        break;
+    }
+    case eTypeSegmentsPage:
+    {
+        loadSegmentsPageFinished(reply);
         break;
     }
     }
@@ -503,6 +514,19 @@ void CRouterBRouterSetup::loadBinariesPageFinished(QNetworkReply *reply)
     }
 
     emit sigBinariesPageLoaded();
+}
+
+void CRouterBRouterSetup::loadSegmentsPageFinished(QNetworkReply *reply)
+{
+    reply->deleteLater();
+
+    if (reply->error() != QNetworkReply::NoError)
+    {
+        emitNetworkError(reply->errorString());
+        return;
+    }
+
+    emit sigSegmentsPageLoaded();
 }
 
 void CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished(bool ok)

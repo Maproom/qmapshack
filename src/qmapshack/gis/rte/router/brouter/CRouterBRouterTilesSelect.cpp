@@ -38,7 +38,7 @@ const int CRouterBRouterTilesSelect::tileSize   =    5;
 const QString CRouterBRouterTilesSelect::patternTileName = QString("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
 const QRegExp CRouterBRouterTilesSelect::regExpTileName = QRegExp(CRouterBRouterTilesSelect::patternTileName);
 //pattern for tiles date parsing: '16-Feb-2017 20:48  '
-const QString CRouterBRouterTilesSelect::patternDate = "(\\d{1,2}-(Jan|Feb|Mar|Apr|Mai|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-\\d{4} \\d{1,2}:\\d{2})";
+const QString CRouterBRouterTilesSelect::patternDate = "(\\d{1,2}-[A-Za-z]{3}-\\d{4} \\d{1,2}:\\d{2})";
 const QRegExp CRouterBRouterTilesSelect::regExpDate = QRegExp(CRouterBRouterTilesSelect::patternDate);
 const QString CRouterBRouterTilesSelect::formatDate = "dd-MMM-yyyy HH:mm";
 const QLocale CRouterBRouterTilesSelect::localeDate = QLocale(QLocale::English,QLocale::UnitedStates);
@@ -338,7 +338,7 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
             "    tile.name = anchor.innerHTML;"
             "    var datesize = anchor.nextSibling.textContent.match(reDateSize);"
             "    tile.date = datesize[1];"
-            "    tile.size = datesize[3];"
+            "    tile.size = datesize[2];"
             "    tiles.push(tile);"
             "  }"
             "  anchor = xpathResult.iterateNext();"

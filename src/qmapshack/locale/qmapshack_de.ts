@@ -9359,7 +9359,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="57"/>
         <source>Hide track points if the distance to a line between neighboring points is less than</source>
-        <translation>Trackpunkte werden ausgeblendet, wenn der Abstand zu einer Linie zwischen benachbarten Punkten kleiner ist als</translation>
+        <translation type="unfinished">Trackpunkte werden ausgeblendet, wenn der Abstand zu&lt;br&gt;einer Linie zwischen benachbarten Punkten kleiner ist als</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="70"/>

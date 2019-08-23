@@ -317,8 +317,11 @@
  <tabstops>
   <tabstop>comboCyclingType</tabstop>
   <tabstop>spinPlainSpeed</tabstop>
+  <tabstop>pushSetMinMaxSlope</tabstop>
   <tabstop>spinMinSpeed</tabstop>
+  <tabstop>spinSlopeAtMinSpeed</tabstop>
   <tabstop>spinMaxSpeed</tabstop>
+  <tabstop>spinSlopeAtMaxSpeed</tabstop>
  </tabstops>
  <resources/>
  <connections/>

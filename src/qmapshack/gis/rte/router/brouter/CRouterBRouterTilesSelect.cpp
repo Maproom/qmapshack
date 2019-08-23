@@ -38,10 +38,13 @@ const int CRouterBRouterTilesSelect::tileSize   =    5;
 const QString CRouterBRouterTilesSelect::patternTileName = QString("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
 const QRegExp CRouterBRouterTilesSelect::regExpTileName = QRegExp(CRouterBRouterTilesSelect::patternTileName);
 //pattern for tiles date parsing: '16-Feb-2017 20:48  '
-//const QRegExp CRouterBRouterTilesSelect::regExpDate = QRegExp("(\\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{4}) (\\d{1,2}):(\\d{2})");
-const QRegExp CRouterBRouterTilesSelect::regExpDate = QRegExp("(\\d{4})-(\\d{2})-(\\d{2}) (\\d{1,2}):(\\d{2})");
+const QString CRouterBRouterTilesSelect::patternDate = "(\\d{1,2}-(Jan|Feb|Mar|Apr|Mai|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-\\d{4} \\d{1,2}:\\d{2})";
+const QRegExp CRouterBRouterTilesSelect::regExpDate = QRegExp(CRouterBRouterTilesSelect::patternDate);
+const QString CRouterBRouterTilesSelect::formatDate = "dd-MMM-yyyy HH:mm";
+const QLocale CRouterBRouterTilesSelect::localeDate = QLocale(QLocale::English,QLocale::UnitedStates);
 //pattern for tiles size parsing: 8.2M 271K 9.3K
-const QRegExp CRouterBRouterTilesSelect::regExpSize = QRegExp(" {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])");
+const QString CRouterBRouterTilesSelect::patternSize = " {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])";
+const QRegExp CRouterBRouterTilesSelect::regExpSize = QRegExp(CRouterBRouterTilesSelect::patternSize);
 
 CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     : QWidget(parent)
@@ -326,15 +329,16 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
             "var xpathResult = document.evaluate('.//a',document.body,null,XPathResult.UNORDERED_NODE_ITERATOR_TYPE,null);"
             "var reTileName = /").append(patternTileName).append("/;")
         .append(
+            "var reDateSize = / +").append(patternDate).append(" +(\\d+|").append(patternSize).append(")\\n$/;")
+        .append(
             "var anchor = xpathResult.iterateNext();"
             "while(anchor) {"
             "  if(reTileName.test(anchor.innerHTML)) {"
-            "    var dateElement = anchor.parentNode.nextSibling;"
-            "    var sizeElement = dateElement.nextSibling;"
             "    var tile = {};"
             "    tile.name = anchor.innerHTML;"
-            "    tile.date = dateElement.innerHTML;"
-            "    tile.size = sizeElement.innerHTML;"
+            "    var datesize = anchor.nextSibling.textContent.match(reDateSize);"
+            "    tile.date = datesize[1];"
+            "    tile.size = datesize[3];"
             "    tiles.push(tile);"
             "  }"
             "  anchor = xpathResult.iterateNext();"
@@ -379,25 +383,30 @@ void CRouterBRouterTilesSelect::afterSlotLoadOnlineTilesRequestFinishedRunJavasc
                         update();
                         return;
                     }
-                    int day = regExpDate.cap(3).toInt();
-                    int month = regExpDate.cap(2).toInt();
-                    int year = regExpDate.cap(1).toInt();
-                    int hour = regExpDate.cap(4).toInt();
-                    int min  = regExpDate.cap(5).toInt();
 
-                    status->remoteDate = QDateTime(QDate(year, month, day), QTime(hour, min, 0));
+                    status->remoteDate = localeDate.toDateTime(date, formatDate);
 
                     const QString &size = tileMap.value("size").toString();
+
                     if (regExpSize.indexIn(size) < 0)
                     {
-                        segmentsError(tr("cannot parse: %1 is not a valid size").arg(size));
-                        update();
-                        return;
+                        bool ok = false;
+                        status->remoteSize = size.toLongLong(&ok,10);
+                        if (!ok)
+                        {
+                            segmentsError(tr("cannot parse: %1 is not a valid size").arg(size));
+                            update();
+                            return;
+                        }
                     }
-                    status->remoteSize = regExpSize.cap(1).toFloat() * (regExpSize.cap(2) == "M" ? 1048576 :
-                                                                        regExpSize.cap(2) == "G" ? 1073741824 :
-                                                                        regExpSize.cap(2) == "K" ? 1024 :
-                                                                        1);
+                    else
+                    {
+                        status->remoteSize = regExpSize.cap(1).toFloat() * (regExpSize.cap(2) == "M" ? 1048576 :
+                                                                            regExpSize.cap(2) == "G" ? 1073741824 :
+                                                                            regExpSize.cap(2) == "K" ? 1024 :
+                                                                            1);
+                    }
+
                     if (status->isLocal && status->remoteDate > status->localDate)
                     {
                         status->isOutdated = true;

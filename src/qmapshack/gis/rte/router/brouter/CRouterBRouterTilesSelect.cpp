@@ -305,7 +305,7 @@ void CRouterBRouterTilesSelect::initialize()
         }
         clearError();
         initialized = true;
-        tilesWebPage->load(QUrl(setup->segmentsUrl));
+        tilesWebPage->load(QUrl(setup->getSegmentsUrl()));
     }
     catch (const QString &msg)
     {
@@ -511,7 +511,7 @@ void CRouterBRouterTilesSelect::slotDownload()
                 break;
             }
 
-            QNetworkReply* reply = tilesDownloadManager->get(QNetworkRequest(QUrl(setup->segmentsUrl + fileName)));
+            QNetworkReply* reply = tilesDownloadManager->get(QNetworkRequest(QUrl(setup->getSegmentsUrl().append(fileName))));
             reply->setProperty("tile", fileName);
 
             tilesDownloadManagerReplies << reply;
@@ -721,7 +721,7 @@ void CRouterBRouterTilesSelect::error(const QString &error) const
 
 void CRouterBRouterTilesSelect::segmentsError(const QString &msg) const
 {
-    error(tr("Error retrieving available routing data from %1: %2").arg(setup->segmentsUrl).arg(msg));
+    error(tr("Error retrieving available routing data from %1: %2").arg(setup->getSegmentsUrl()).arg(msg));
 }
 
 void CRouterBRouterTilesSelect::clearError() const

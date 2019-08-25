@@ -38,7 +38,7 @@ public:
     bool validateCurrentPage() override;
 
     enum { ePageChooseMode, ePageLocalDirectory, ePageLocalInstallation, ePageProfiles,
-           ePageLocalTiles, ePageOnlineUrl, ePageOnlineDetails, ePageLocalDetails, ePageBinariesUrl };
+           ePageLocalTiles, ePageOnlineDetails, ePageLocalDetails };
 
 public slots:
     void accept() override;
@@ -54,12 +54,14 @@ private slots:
     void slotLocalToolSelectJava();
     void slotLocalPushFindJava() const;
     void slotCreateOrUpdateLocalInstallClicked();
-    void slotLocalDirectoryCursonPositionChanged() const;
-    void slotLocalJavaExecutableCursorPositionChanged() const;
-    void slotLocalProfilesUrlCursorPositionChanged();
-    void slotOnlineUrlCursorPositionChanged();
-    void slotBinariesUrlCursorPositionChanged();
-    void slotSegmentsUrlCursorPositionChanged();
+    void slotLocalDirectoryEdited() const;
+    void slotLocalJavaExecutableEdited() const;
+    void slotProfilesUrlEdited();
+    void slotOnlineServiceUrlEdited();
+    void slotOnlineConfigUrlEdited();
+    void slotOnlineConfigButtonClicked() const;
+    void slotBinariesUrlCursorEdited();
+    void slotSegmentsUrlEdited();
     void slotWebLocalBRouterVersionsLoadFinished(bool ok);
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();
@@ -71,11 +73,8 @@ private slots:
     void slotDelProfileClicked() const;
     void slotProfileUpClicked() const;
     void slotProfileDownClicked() const;
-    void slotOnlineConfigLoaded();
-    void slotBinariesPageLoaded();
-    void slotSegmentsPageLoaded();
     void slotSetupError(const QString &error, const QString &details);
-    void slotOnlineProfilesLoaded();
+    void slotUpdateCurrentPage();
 
 private:
     void beginChooseMode();
@@ -108,10 +107,6 @@ private:
     void beginOnlineUrl();
     void updateOnlineUrl();
     void resetOnlineUrl();
-
-    void beginBinariesUrl();
-    void updateBinariesUrl();
-    void resetBinariesUrl();
 
     CRouterBRouterSetup * setup;
 

@@ -44,7 +44,7 @@ void CRouterBRouterSetup::load()
     cfg.beginGroup("Route/brouter");
     installMode = modeFromString(cfg.value("installMode", stringFromMode(defaultInstallMode)).toString());
     expertMode = cfg.value("expertMode", defaultExpertMode).toBool();
-    onlineWebUrl = cfg.value("onlineWebUrl", defaultOnlineWebUrl).toString();
+    expertConfigUrl = cfg.value("expertConfigUrl", defaultConfigUrl).toString();
     onlineServiceUrl = cfg.value("onlineServiceUrl", defaultOnlineServiceUrl).toString();
     onlineProfilesUrl = cfg.value("onlineProfilesUrl", defaultOnlineProfilesUrl).toString();
     localDir = cfg.value("localDir", defaultLocalDir).toString();
@@ -58,8 +58,8 @@ void CRouterBRouterSetup::load()
     localNumberThreads = cfg.value("localNumberThreads", defaultLocalNumberThreads).toString();
     localMaxRunningTime = cfg.value("localMaxRunningTime", defaultLocalMaxRunningTime).toString();
     localJavaOpts = cfg.value("localJavaOpts", defaultLocalJavaOpts).toString();
-    binariesUrl = cfg.value("binariesUrl", defaultBinariesUrl).toString();
-    segmentsUrl = cfg.value("segmentsUrl", defaultSegmentsUrl).toString();
+    expertBinariesUrl = cfg.value("expertBinariesUrl", defaultBinariesUrl).toString();
+    expertSegmentsUrl = cfg.value("expertSegmentsUrl", defaultSegmentsUrl).toString();
     onlineProfiles.clear();
     int size = cfg.beginReadArray("online");
     for (int i=0; i < size; i++)
@@ -84,7 +84,10 @@ void CRouterBRouterSetup::load()
     }
     else if (installMode == eModeOnline)
     {
-        loadOnlineConfig();
+        if (!expertMode)
+        {
+            loadOnlineConfig(true);
+        }
     }
     else
     {
@@ -98,7 +101,7 @@ void CRouterBRouterSetup::save()
     cfg.beginGroup("Route/brouter");
     cfg.setValue("expertMode", expertMode);
     cfg.setValue("installMode", stringFromMode(installMode));
-    cfg.setValue("onlineWebUrl", onlineWebUrl);
+    cfg.setValue("expertConfigUrl", expertConfigUrl);
     cfg.setValue("onlineServiceUrl", onlineServiceUrl);
     cfg.setValue("onlineProfilesUrl", onlineProfilesUrl);
     cfg.setValue("localDir", localDir);
@@ -112,8 +115,8 @@ void CRouterBRouterSetup::save()
     cfg.setValue("localNumberThreads", localNumberThreads);
     cfg.setValue("localMaxRunningTime", localMaxRunningTime);
     cfg.setValue("localJavaOpts", localJavaOpts);
-    cfg.setValue("binariesUrl", binariesUrl);
-    cfg.setValue("segmentsUrl", segmentsUrl);
+    cfg.setValue("expertBinariesUrl", expertBinariesUrl);
+    cfg.setValue("expertSegmentsUrl", expertSegmentsUrl);
     cfg.beginWriteArray("online");
     for (int i=0; i < onlineProfiles.size(); i++)
     {
@@ -134,7 +137,7 @@ void CRouterBRouterSetup::save()
 void CRouterBRouterSetup::resetAll()
 {
     resetInstallMode();
-    resetOnlineWebUrl();
+    resetOnlineConfigUrl();
     resetOnlineServiceUrl();
     resetOnlineProfilesUrl();
     resetLocalProfileDir();
@@ -339,14 +342,15 @@ QStringList CRouterBRouterSetup::getProfiles() const
     }
 }
 
-void CRouterBRouterSetup::loadLocalOnlineProfiles() const
+void CRouterBRouterSetup::loadLocalOnlineProfiles(bool update) const
 {
+    profilesWebPage->setProperty("update", update);
     profilesWebPage->load(QUrl(onlineProfilesUrl));
 }
 
-void CRouterBRouterSetup::loadOnlineConfig() const
+void CRouterBRouterSetup::loadOnlineConfig(bool update) const
 {
-    const QUrl configUrl(onlineWebUrl + "config.js");
+    const QUrl configUrl(getConfigUrl());
     const QString &configHost = configUrl.host();
     const QString &configScheme = configUrl.scheme();
 
@@ -354,23 +358,40 @@ void CRouterBRouterSetup::loadOnlineConfig() const
     reply->setProperty("configHost", configHost);
     reply->setProperty("configScheme", configScheme);
     reply->setProperty("type", eTypeConfig);
+    reply->setProperty("update", update);
 }
 
-void CRouterBRouterSetup::loadBinariesPage() const
+void CRouterBRouterSetup::loadOnlineVersion() const
 {
-    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(binariesUrl));
+    QUrl serviceUrl = getServiceUrl();
+    serviceUrl.setQuery(QUrlQuery("lonlats=11.138570,48.676961|11.138570,48.676961&profile=shortest&alternativeidx=0&format=gpx"));
+    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(serviceUrl));
+    reply->setProperty("type", eTypeVersion);
+}
+
+void CRouterBRouterSetup::loadExpertBinariesPage() const
+{
+    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(expertBinariesUrl));
     reply->setProperty("type", eTypeBinariesPage);
 }
 
-void CRouterBRouterSetup::loadSegmentsPage() const
+void CRouterBRouterSetup::loadExpertSegmentsPage() const
 {
-    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(segmentsUrl));
+    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(expertSegmentsUrl));
     reply->setProperty("type", eTypeSegmentsPage);
 }
 
 void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
 {
+    reply->deleteLater();
     const request_e type = request_e(reply->property("type").toInt());
+
+    if (reply->error() != QNetworkReply::NoError && type != eTypeVersion)
+    {
+        emitNetworkError(reply->errorString());
+        return;
+    }
+
     switch (type) {
     case eTypeConfig:
     {
@@ -382,14 +403,19 @@ void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
         loadOnlineProfileFinished(reply);
         break;
     }
+    case eTypeVersion:
+    {
+        loadOnlineVersionFinished(reply);
+        break;
+    }
     case eTypeBinariesPage:
     {
-        loadBinariesPageFinished(reply);
+        emit sigBinariesPageLoaded();
         break;
     }
     case eTypeSegmentsPage:
     {
-        loadSegmentsPageFinished(reply);
+        emit sigSegmentsPageLoaded();
         break;
     }
     }
@@ -397,137 +423,165 @@ void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
 
 void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
 {
-    reply->deleteLater();
+    const QString &configHost = reply->property("configHost").toString();
+    const QString &configScheme = reply->property("configScheme").toString();
+    const bool update = reply->property("update").toBool();
 
-    if (reply->error() != QNetworkReply::NoError)
+    const QString jsConfig(reply->readAll());
+
+    QJSEngine engine;
+
+    const QString &jsSetup = QString( \
+        "(function(){\
+                   window = {};\
+                   window.location = {};\
+                   window.location.hostname = '%1';\
+                   window.location.protocol = '%2:';\
+                   window.location.search = {};\
+                   window.location.search.slice = function() {};\
+                   URLSearchParams = function() {};\
+                   BR = {};\
+                  })();").arg(configHost).arg(configScheme);
+
+    engine.evaluate(jsSetup);
+    const QJSValue &val = engine.evaluate(jsConfig);
+    if (val.isError())
     {
-        emitNetworkError(reply->errorString());
+        emitOnlineConfigScriptError(val);
         return;
     }
-    else
+
+    const QJSValue &br = engine.globalObject().property("BR");
+    if (!br.isObject() || br.isError())
     {
-        QString configHost = reply->property("configHost").toString();
-        QString configScheme = reply->property("configScheme").toString();
+        emitOnlineConfigScriptError(br);
+        return;
+    }
+    const QJSValue &conf = br.property("conf");
+    if (!conf.isObject() || conf.isError())
+    {
+        emitOnlineConfigScriptError(conf);
+        return;
+    }
 
-        const QString jsConfig(reply->readAll());
+    const QJSValue &host = conf.property("host");
+    if (!host.isString() || host.isError())
+    {
+        emitOnlineConfigScriptError(host);
+        return;
+    }
+    if (update && onlineServiceUrl != host.toString())
+    {
+        onlineServiceUrl = host.toString();
+    }
+    const QJSValue &url = conf.property("profilesUrl");
+    if (!url.isString() || url.isError())
+    {
+        emitOnlineConfigScriptError(url);
+        return;
+    }
+    if (update && onlineProfilesUrl != url.toString())
+    {
+        onlineProfilesUrl = url.toString();
+    }
 
-        QJSEngine engine;
-
-        const QString &jsSetup = QString( \
-            "(function(){\
-                       window = {};\
-                       window.location = {};\
-                       window.location.hostname = '%1';\
-                       window.location.protocol = '%2:';\
-                       window.location.search = {};\
-                       window.location.search.slice = function() {};\
-                       URLSearchParams = function() {};\
-                       BR = {};\
-                      })();").arg(configHost).arg(configScheme);
-
-        engine.evaluate(jsSetup);
-        const QJSValue &val = engine.evaluate(jsConfig);
-        if (val.isError())
+    if (update && !expertMode)
+    {
+        if  (installMode == eModeOnline)
         {
-            emitOnlineConfigScriptError(val);
-            return;
-        }
-
-        const QJSValue &br = engine.globalObject().property("BR");
-        if (!br.isObject() || br.isError())
-        {
-            emitOnlineConfigScriptError(br);
-            return;
-        }
-        const QJSValue &conf = br.property("conf");
-        if (!conf.isObject() || conf.isError())
-        {
-            emitOnlineConfigScriptError(conf);
-            return;
-        }
-
-        const QJSValue &host = conf.property("host");
-        if (!host.isString() || host.isError())
-        {
-            emitOnlineConfigScriptError(host);
-            return;
-        }
-        if (onlineServiceUrl != host.toString())
-        {
-            onlineServiceUrl = host.toString();
-        }
-        const QJSValue &url = conf.property("profilesUrl");
-        if (!url.isString() || url.isError())
-        {
-            emitOnlineConfigScriptError(url);
-            return;
-        }
-        if (onlineProfilesUrl != url.toString())
-        {
-            onlineProfilesUrl = url.toString();
-        }
-
-        const QJSValue &profiles = conf.property("profiles");
-        if (!profiles.isArray() || profiles.isError())
-        {
-            emitOnlineConfigScriptError(profiles);
-            return;
-        }
-        const qint32 len = profiles.property("length").toInt();
-
-        QStringList onlineProfilesLoaded;
-        for(qint32 i=0; i < len; i++)
-        {
-            const QJSValue &profile = profiles.property(i);
-            if (!profile.isString() || profile.isError())
+            const QJSValue &profiles = conf.property("profiles");
+            if (!profiles.isArray() || profiles.isError())
             {
-                emitOnlineConfigScriptError(profile);
+                emitOnlineConfigScriptError(profiles);
                 return;
             }
-            onlineProfilesLoaded << profile.toString();
-        }
+            const qint32 len = profiles.property("length").toInt();
 
-        mergeOnlineProfiles(onlineProfilesLoaded);
-
-        const QStringList onlineProfilesTmp(onlineProfiles);
-        for (const QString &profile : onlineProfilesTmp)
-        {
-            if (!onlineProfilesAvailable.contains(profile))
+            QStringList onlineProfilesLoaded;
+            for(qint32 i=0; i < len; i++)
             {
-                onlineProfiles.removeAt(onlineProfiles.indexOf(profile));
+                const QJSValue &profile = profiles.property(i);
+                if (!profile.isString() || profile.isError())
+                {
+                    emitOnlineConfigScriptError(profile);
+                    return;
+                }
+                onlineProfilesLoaded << profile.toString();
             }
+
+            mergeOnlineProfiles(onlineProfilesLoaded);
+
+            const QStringList onlineProfilesTmp(onlineProfiles);
+            for (const QString &profile : onlineProfilesTmp)
+            {
+                if (!onlineProfilesAvailable.contains(profile))
+                {
+                    onlineProfiles.removeAt(onlineProfiles.indexOf(profile));
+                }
+            }
+
+            emit sigProfilesChanged();
         }
-
-        emit sigProfilesChanged();
-        emit sigOnlineConfigLoaded();
+        else
+        {
+            loadLocalOnlineProfiles(true);
+        }
     }
+    emit sigOnlineConfigLoaded();
 }
 
-void CRouterBRouterSetup::loadBinariesPageFinished(QNetworkReply *reply)
+void CRouterBRouterSetup::loadOnlineVersionFinished(QNetworkReply *reply)
 {
-    reply->deleteLater();
+    versionMajor = NOINT;
+    versionMinor = NOINT;
+    versionPatch = NOINT;
 
     if (reply->error() != QNetworkReply::NoError)
     {
         emitNetworkError(reply->errorString());
         return;
     }
+    const QString gpx(reply->readAll());
+    const QRegExp reVersion = QRegExp("^<\\?xml.+<gpx.+creator=\"(.*)\"");
 
-    emit sigBinariesPageLoaded();
-}
-
-void CRouterBRouterSetup::loadSegmentsPageFinished(QNetworkReply *reply)
-{
-    reply->deleteLater();
-
-    if (reply->error() != QNetworkReply::NoError)
+    if (reVersion.indexIn(gpx) > -1)
     {
-        emitNetworkError(reply->errorString());
+        parseBRouterVersion(reVersion.cap(1));
         return;
     }
-
-    emit sigSegmentsPageLoaded();
+    emit sigError("invalid reply","response is not brouter-gpx");
 }
+
+void CRouterBRouterSetup::parseBRouterVersion(const QString &text)
+{
+    // version string is either like "BRouter 1.4.9 / 24092017"
+    // or (without the date) like "BRouter-1.4.9"
+    QRegExp reVersion("\\bBRouter[- ](\\d+)\\.(\\d+)\\.(\\d+)\\b");
+    if (reVersion.indexIn(text) > -1)
+    {
+        bool ok;
+        versionMajor = reVersion.cap(1).toInt(&ok);
+        if (ok)
+        {
+            versionMinor = reVersion.cap(2).toInt(&ok);
+        }
+        if (ok)
+        {
+            versionPatch = reVersion.cap(3).toInt(&ok);
+        }
+        if (ok)
+        {
+            emit sigVersionChanged();
+            return;
+        }
+    }
+    versionMajor = NOINT;
+    versionMinor = NOINT;
+    versionPatch = NOINT;
+
+    emit sigVersionChanged();
+}
+
 
 void CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished(bool ok)
 {
@@ -565,7 +619,10 @@ void CRouterBRouterSetup::afterSlotLoadOnlineProfilesRequestFinishedRunJavascrip
     }
     else
     {
-        mergeOnlineProfiles(onlineProfilesLoaded);
+        if (profilesWebPage->property("update").toBool())
+        {
+            mergeOnlineProfiles(onlineProfilesLoaded);
+        }
         emit sigProfilesChanged();
     }
 }
@@ -626,7 +683,15 @@ void CRouterBRouterSetup::displayOnlineProfileAsync(const QString &profile) cons
 
 void CRouterBRouterSetup::loadOnlineProfileAsync(const QString &profile, const profileRequest_e mode) const
 {
-    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(QUrl(onlineProfilesUrl + profile +".brf")));
+    QUrl url(onlineProfilesUrl);
+    QString path = url.path();
+    if (!path.endsWith('/'))
+    {
+        path.append("/");
+    }
+    path.append(profile).append(".brf");
+    url.setPath(path);
+    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(url));
     reply->setProperty("type", eTypeProfile);
     reply->setProperty("profile", profile);
     reply->setProperty("request", mode);
@@ -634,32 +699,24 @@ void CRouterBRouterSetup::loadOnlineProfileAsync(const QString &profile, const p
 
 void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply * reply)
 {
-    reply->deleteLater();
-    if (reply->error() != QNetworkReply::NoError)
+    const QString &profile = reply->property("profile").toString();
+    const profileRequest_e mode = profileRequest_e(reply->property("request").toInt());
+
+    const QByteArray &content = reply->readAll();
+    if (mode == eProfileInstall)
     {
-        emitNetworkError(reply->errorString());
+        const QDir dir = getProfileDir(eModeLocal);
+        const QString filename = dir.absoluteFilePath(profile + ".brf");
+        QFile file(filename);
+        file.open(QIODevice::WriteOnly);
+        file.write(content);
+        file.close();
+        readLocalProfiles();
     }
     else
     {
-        const QString &profile = reply->property("profile").toString();
-        const profileRequest_e mode = profileRequest_e(reply->property("request").toInt());
-
-        const QByteArray &content = reply->readAll();
-        if (mode == eProfileInstall)
-        {
-            const QDir dir = getProfileDir(eModeLocal);
-            const QString filename = dir.absoluteFilePath(profile + ".brf");
-            QFile file(filename);
-            file.open(QIODevice::WriteOnly);
-            file.write(content);
-            file.close();
-            readLocalProfiles();
-        }
-        else
-        {
-            Q_ASSERT(mode == eProfileDisplay);
-            emit sigDisplayOnlineProfileFinished(profile, QString(content));
-        }
+        Q_ASSERT(mode == eProfileDisplay);
+        emit sigDisplayOnlineProfileFinished(profile, QString(content));
     }
 }
 
@@ -689,4 +746,41 @@ void CRouterBRouterSetup::onInvalidSetup()
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
     resetAll();
+}
+
+QUrl CRouterBRouterSetup::getServiceUrl() const
+{
+    if (installMode == CRouterBRouterSetup::eModeLocal)
+    {
+        QUrl url(QString("http://"));
+        url.setHost(localHost);
+        url.setPort(localPort.toInt());
+        url.setPath("/brouter");
+        return url;
+    }
+    else
+    {
+        Q_ASSERT(installMode == CRouterBRouterSetup::eModeOnline);
+        QUrl url(onlineServiceUrl);
+        if (url.path() == "")
+        {
+            url.setPath("/brouter");
+        }
+        return url;
+    }
+}
+
+QString CRouterBRouterSetup::getSegmentsUrl() const
+{
+    return expertMode ? expertSegmentsUrl : defaultSegmentsUrl;
+}
+
+QString CRouterBRouterSetup::getBinariesUrl() const
+{
+    return expertMode ? expertBinariesUrl : defaultBinariesUrl;
+}
+
+QString CRouterBRouterSetup::getConfigUrl() const
+{
+    return expertMode ? expertConfigUrl : defaultConfigUrl;
 }

@@ -58,6 +58,7 @@ public slots:
     void slotToolSetupClicked();
 
 private slots:
+    void slotVersionChanged();
     void slotRequestFinished(QNetworkReply* reply);
     void slotCloseStatusMsg() const;
     void slotToolProfileInfoClicked() const;
@@ -72,9 +73,8 @@ private:
     void updateDialog() const;
     void getBRouterVersion();
     bool isMinimumVersion(int major, int minor, int patch) const;
-    void parseBRouterVersion(const QString& text);
     void updateBRouterStatus() const;
-    int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem *> &nogos, QPolygonF &coords, bool isVersionRequest);
+    int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem *> &nogos, QPolygonF &coords);
     QNetworkRequest getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem *> &nogos) const;
     QUrl getServiceUrl() const;
 
@@ -89,10 +89,6 @@ private:
     CRouterBRouterInfo * info;
     CProgressDialog * progress { nullptr };
     bool isShutdown { false };
-
-    int versionMajor { NOINT };
-    int versionMinor { NOINT };
-    int versionPatch { NOINT };
 
     static CRouterBRouter * pSelf;
     friend class CRouterBRouterLocal;

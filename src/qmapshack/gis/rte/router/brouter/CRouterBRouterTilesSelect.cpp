@@ -511,7 +511,16 @@ void CRouterBRouterTilesSelect::slotDownload()
                 break;
             }
 
-            QNetworkReply* reply = tilesDownloadManager->get(QNetworkRequest(QUrl(setup->getSegmentsUrl().append(fileName))));
+            QUrl url(setup->getSegmentsUrl());
+            QString path = url.path();
+            if (!path.endsWith('/'))
+            {
+                path.append("/");
+            }
+            path.append(fileName);
+            url.setPath(path);
+
+            QNetworkReply* reply = tilesDownloadManager->get(QNetworkRequest(url));
             reply->setProperty("tile", fileName);
 
             tilesDownloadManagerReplies << reply;

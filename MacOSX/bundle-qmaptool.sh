@@ -36,16 +36,22 @@ if [[ "$1" == "bundle" ]]; then
     readRevisionHash
     echo "---build bundle --------------------"
     buildAppStructure
+    extendAppStructure
     echo "---replace version string ----------"
     updateInfoPlist
     echo "---qt deploy tool ------------------"
     qtDeploy
-    removeDuplicatedQtLibs
+    #removeDuplicatedQtLibs
     echo "---copy external files -------------"
     copyQtTrqnslations
+    copyExternalFiles
     echo "---link to QMS ------------------"
-    linkToQMapShack
+    #linkToQMapShack
     echo "---adjust linking ------------------"
     adjustLinking
+    echo "---external tools ------------------"
+    copyExtTools
+    adjustLinkingExtTools
+    printLinkingExtTools
     echo "------------------------------------"
 fi

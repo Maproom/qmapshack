@@ -57,6 +57,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     networkAccessManager = new QNetworkAccessManager(this);
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouter::slotRequestFinished);
+    connect(setup, &CRouterBRouterSetup::sigVersionChanged, this, &CRouterBRouter::slotVersionChanged);
 
     timerCloseStatusMsg = new QTimer(this);
     timerCloseStatusMsg->setSingleShot(true);
@@ -316,8 +317,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
     urlQuery.addQueryItem("alternativeidx", comboAlternative->currentData().toString());
     urlQuery.addQueryItem("format", "gpx");
 
-    QUrl url = getServiceUrl();
-    url.setPath("/brouter");
+    QUrl url = setup->getServiceUrl();
     url.setQuery(urlQuery);
 
     return QNetworkRequest(url);
@@ -335,17 +335,12 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     QList<IGisItem*> nogos;
     CGisWorkspace::self().getNogoAreas(nogos);
 
-    return synchronousRequest(points, nogos, coords, false);
+    return synchronousRequest(points, nogos, coords);
 }
 
-int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QList<IGisItem *> &nogos, QPolygonF &coords, bool isVersionRequest)
+int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QList<IGisItem *> &nogos, QPolygonF &coords)
 {
-    if (isVersionRequest)
-    {
-        // wait for previous request to finish before issuing version-request
-        mutex.lock();
-    }
-    else if (!mutex.tryLock())
+    if (!mutex.tryLock())
     {
         // skip further on-the-fly-requests as long a previous request is still running
         return -1;
@@ -404,24 +399,19 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
                 }
                 else
                 {
-                    if (isVersionRequest)
+                    setup->parseBRouterVersion(xmlGpx.attribute("creator"));
+
+                    // read the shape
+                    const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
+                                                    .firstChildElement("trkseg")
+                                                    .elementsByTagName("trkpt");
+                    for(int n = 0; n < xmlLatLng.size(); n++)
                     {
-                        parseBRouterVersion(xmlGpx.attribute("creator"));
-                    }
-                    else
-                    {
-                        // read the shape
-                        const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
-                                                        .firstChildElement("trkseg")
-                                                        .elementsByTagName("trkpt");
-                        for(int n = 0; n < xmlLatLng.size(); n++)
-                        {
-                            const QDomElement &elem   = xmlLatLng.item(n).toElement();
-                            coords << QPointF();
-                            QPointF &point = coords.last();
-                            point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
-                            point.setY(elem.attribute("lat").toFloat()*DEG_TO_RAD);
-                        }
+                        const QDomElement &elem   = xmlLatLng.item(n).toElement();
+                        coords << QPointF();
+                        QPointF &point = coords.last();
+                        point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
+                        point.setY(elem.attribute("lat").toFloat()*DEG_TO_RAD);
                     }
                 }
             }
@@ -430,10 +420,6 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
     catch(const QString& msg)
     {
         coords.clear();
-        if (isVersionRequest)
-        {
-            parseBRouterVersion("");
-        }
         if(!msg.isEmpty())
         {
             reply->deleteLater();
@@ -570,22 +556,6 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     mutex.unlock();
 }
 
-QUrl CRouterBRouter::getServiceUrl() const
-{
-    if (setup->installMode == CRouterBRouterSetup::eModeLocal)
-    {
-        QUrl url(QString("http://"));
-        url.setHost(setup->localHost);
-        url.setPort(setup->localPort.toInt());
-        return url;
-    }
-    else
-    {
-        Q_ASSERT(setup->installMode == CRouterBRouterSetup::eModeOnline);
-        return QUrl(setup->onlineServiceUrl);
-    }
-}
-
 void CRouterBRouter::slotToggleConsole() const
 {
     textBRouterOutput->setVisible(!textBRouterOutput->isVisible());
@@ -614,76 +584,52 @@ void CRouterBRouter::getBRouterVersion()
     }
     else
     {
-        // use 2 points known to be routable:
-        QVector<QPointF> points(2);
-        points.replace(0, QPointF(0.1944047317331011, 0.8495732565736815)*RAD_TO_DEG);
-        points.replace(1, QPointF(0.1944047317331012, 0.8495732565736816)*RAD_TO_DEG);
-        QPolygonF rt;
-        QList<IGisItem*> nogos;
-        // parseBRouterVersion is called while parsing remote brouters xml-response:
-        try
-        {
-            synchronousRequest(points, nogos, rt, true);
-        }
-        catch(const QString&)
-        {
-        }                        //fail silently
+        setup->loadOnlineVersion();
     }
 }
 
-void CRouterBRouter::parseBRouterVersion(const QString &text)
+void CRouterBRouter::slotVersionChanged()
 {
-    // version string is either like "BRouter 1.4.9 / 24092017"
-    // or (without the date) like "BRouter-1.4.9"
-    QRegExp rx("\\bBRouter[- ](\\d+)\\.(\\d+)\\.(\\d+)\\b");
-    if (rx.indexIn(text) > -1)
+    if (setup->versionMajor!=NOINT && setup->versionMinor!=NOINT && setup->versionPatch!=NOINT)
     {
-        versionMajor = rx.cap(1).toInt();
-        versionMinor = rx.cap(2).toInt();
-        versionPatch = rx.cap(3).toInt();
-
         labelBRouter->setToolTip(tr("BRouter (Version %1.%2.%3)")
-                                 .arg(versionMajor)
-                                 .arg(versionMinor)
-                                 .arg(versionPatch));
+                                 .arg(setup->versionMajor)
+                                 .arg(setup->versionMinor)
+                                 .arg(setup->versionPatch));
     }
     else
     {
-        versionMajor = NOINT;
-        versionMinor = NOINT;
-        versionPatch = NOINT;
-
         labelBRouter->setToolTip("BRouter: (failed to read version)");
     }
 }
 
 bool CRouterBRouter::isMinimumVersion(int major, int minor, int patch) const
 {
-    if (versionMajor == NOINT || versionMinor == NOINT || versionPatch == NOINT)
+    if (setup->versionMajor == NOINT || setup->versionMinor == NOINT || setup->versionPatch == NOINT)
     {
         return false;
     }
-    if (versionMajor > major)
+    if (setup->versionMajor > major)
     {
         return true;
     }
-    if (versionMajor < major)
+    if (setup->versionMajor < major)
     {
         return false;
     }
-    if (versionMinor > minor)
+    if (setup->versionMinor > minor)
     {
         return true;
     }
-    if (versionMinor < minor)
+    if (setup->versionMinor < minor)
     {
         return false;
     }
-    if (versionPatch > patch)
+    if (setup->versionPatch > patch)
     {
         return true;
     }
-    if (versionPatch < patch)
+    if (setup->versionPatch < patch)
     {
         return false;
     }

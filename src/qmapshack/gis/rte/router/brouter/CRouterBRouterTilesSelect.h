@@ -58,9 +58,13 @@ public:
     static const int maxTileLon;
     static const int tileSize;
     static const QString patternTileName;
+    static const QString patternDate;
+    static const QString patternSize;
     static const QRegExp regExpTileName;
     static const QRegExp regExpDate;
     static const QRegExp regExpSize;
+    static const QString formatDate;
+    static const QLocale localeDate;
 
 signals:
     void sigCompleteChanged() const;

@@ -44,13 +44,14 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(radioOnline, &QRadioButton::clicked, this, &CRouterBRouterSetupWizard::slotRadioOnlineClicked);
     connect(checkExpert, &QCheckBox::clicked,    this, &CRouterBRouterSetupWizard::slotCheckExpertClicked);
 
-    connect(lineLocalProfilesUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged);
-    connect(lineLocalProfilesUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged);
+    connect(lineLocalProfilesUrl, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotProfilesUrlEdited);
+    connect(lineLocalSegmentsUrl, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotSegmentsUrlEdited);
+
     connect(toolLocalDir, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectDirectory);
     connect(toolJavaExecutable, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectJava);
     connect(pushLocalFindJava, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalPushFindJava);
-    connect(lineLocalDir, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotLocalDirectoryCursonPositionChanged);
-    connect(lineJavaExecutable, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotLocalJavaExecutableCursorPositionChanged);
+    connect(lineLocalDir, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotLocalDirectoryEdited);
+    connect(lineJavaExecutable, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotLocalJavaExecutableEdited);
 
     connect(pushCreateOrUpdateLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked);
 
@@ -67,12 +68,19 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(toolProfileUp, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotProfileUpClicked);
     connect(toolProfileDown, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotProfileDownClicked);
 
-    connect(lineOnlineUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged);
-    connect(lineOnlineUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged);
+    connect(lineOnlineConfigUrl, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotOnlineConfigUrlEdited);
+    connect(pushOnlineConfig, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotOnlineConfigButtonClicked);
+    connect(lineOnlineProfilesUrl, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotProfilesUrlEdited);
+    connect(lineOnlineService, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotOnlineServiceUrlEdited);
 
-    connect(setup, &CRouterBRouterSetup::sigOnlineConfigLoaded, this, &CRouterBRouterSetupWizard::slotOnlineConfigLoaded);
+    connect(lineLocalBinariesUrl, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotBinariesUrlCursorEdited);
+
+    connect(setup, &CRouterBRouterSetup::sigOnlineConfigLoaded, this, &CRouterBRouterSetupWizard::slotUpdateCurrentPage);
+    connect(setup, &CRouterBRouterSetup::sigBinariesPageLoaded, this, &CRouterBRouterSetupWizard::slotUpdateCurrentPage);
+    connect(setup, &CRouterBRouterSetup::sigSegmentsPageLoaded, this, &CRouterBRouterSetupWizard::slotUpdateCurrentPage);
     connect(setup, &CRouterBRouterSetup::sigDisplayOnlineProfileFinished, this, &CRouterBRouterSetupWizard::slotDisplayProfile);
-    connect(setup, &CRouterBRouterSetup::sigProfilesChanged, this, &CRouterBRouterSetupWizard::slotOnlineProfilesLoaded);
+    connect(setup, &CRouterBRouterSetup::sigProfilesChanged, this, &CRouterBRouterSetupWizard::slotUpdateCurrentPage);
+    connect(setup, &CRouterBRouterSetup::sigVersionChanged, this, &CRouterBRouterSetupWizard::slotUpdateCurrentPage);
     connect(setup, &CRouterBRouterSetup::sigError, this, &CRouterBRouterSetupWizard::slotSetupError);
 
     QStringListModel *profilesModel = new QStringListModel();
@@ -99,21 +107,21 @@ int CRouterBRouterSetupWizard::nextId() const
     {
         if (setup->installMode == CRouterBRouterSetup::eModeLocal)
         {
+            if (setup->expertMode)
+            {
+                return ePageLocalDetails;
+            }
             return ePageLocalDirectory;
         }
         if (setup->expertMode) //ModeOnline
         {
-            return ePageOnlineUrl;
+            return ePageOnlineDetails;
         }
         return ePageProfiles;
     }
 
     case ePageLocalDirectory:
     {
-        if (setup->expertMode)
-        {
-            return ePageOnlineUrl;
-        }
         if (doLocalInstall)
         {
             return ePageLocalInstallation;
@@ -123,10 +131,6 @@ int CRouterBRouterSetupWizard::nextId() const
 
     case ePageLocalInstallation:
     {
-        if (setup->expertMode)
-        {
-            return ePageLocalDetails;
-        }
         return ePageProfiles;
     }
 
@@ -149,30 +153,9 @@ int CRouterBRouterSetupWizard::nextId() const
         return ePageProfiles;
     }
 
-    case ePageOnlineUrl:
-    {
-        if (setup->installMode == CRouterBRouterSetup::eModeLocal)
-        {
-            if (doLocalInstall)
-            {
-                return ePageLocalInstallation;
-            }
-            if (setup->expertMode)
-            {
-                return ePageLocalDetails;
-            }
-            return ePageProfiles;
-        }
-        else if (setup->installMode == CRouterBRouterSetup::eModeOnline)
-        {
-            return ePageOnlineDetails;
-        }
-        break;
-    }
-
     case ePageLocalDetails:
     {
-        return ePageProfiles;
+        return ePageLocalDirectory;
     }
     }
 
@@ -261,12 +244,6 @@ void CRouterBRouterSetupWizard::slotCurrentIdChanged(const int id)
         break;
     }
 
-    case ePageOnlineUrl:
-    {
-        beginOnlineUrl();
-        break;
-    }
-
     case ePageLocalDetails:
     {
         beginLocalDetails();
@@ -285,12 +262,6 @@ void CRouterBRouterSetupWizard::slotCustomButtonClicked(const int id)
         case ePageOnlineDetails:
         {
             resetOnlineDetails();
-            break;
-        }
-
-        case ePageOnlineUrl:
-        {
-            resetOnlineUrl();
             break;
         }
 
@@ -397,13 +368,13 @@ void CRouterBRouterSetupWizard::slotLocalPushFindJava() const
     updateLocalDirectory();
 }
 
-void CRouterBRouterSetupWizard::slotLocalDirectoryCursonPositionChanged() const
+void CRouterBRouterSetupWizard::slotLocalDirectoryEdited() const
 {
     setup->localDir = lineLocalDir->text();
     updateLocalDirectory();
 }
 
-void CRouterBRouterSetupWizard::slotLocalJavaExecutableCursorPositionChanged() const
+void CRouterBRouterSetupWizard::slotLocalJavaExecutableEdited() const
 {
     setup->localJavaExecutable = lineJavaExecutable->text();
     updateLocalDirectory();
@@ -412,8 +383,14 @@ void CRouterBRouterSetupWizard::slotLocalJavaExecutableCursorPositionChanged() c
 void CRouterBRouterSetupWizard::updateLocalDirectory() const
 {
     textLocalDirectory->setVisible(false);
-    lineLocalDir->setText(setup->localDir);
-    lineJavaExecutable->setText(setup->localJavaExecutable);
+    if (lineLocalDir->text() != setup->localDir)
+    {
+        lineLocalDir->setText(setup->localDir);
+    }
+    if (lineJavaExecutable->text() != setup->localJavaExecutable)
+    {
+        lineJavaExecutable->setText(setup->localJavaExecutable);
+    }
     if (setup->localDir.isEmpty())
     {
         labelLocalDirResult->setText(tr("please select BRouter installation directory"));
@@ -486,7 +463,7 @@ void CRouterBRouterSetupWizard::initLocalInstall()
 {
     pageLocalInstallation->setSetup(setup);
     localInstallLoaded = false;
-    localVersionsPage->load(QUrl(setup->binariesUrl));
+    localVersionsPage->load(QUrl(setup->getBinariesUrl()));
 }
 
 void CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished(bool ok)
@@ -497,7 +474,7 @@ void CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished(bool ok)
         {
             textLocalInstall->setVisible(true);
             textLocalInstall->setTextColor(Qt::red);
-            textLocalInstall->append(tr("Error loading installation-page at %1").arg(setup->binariesUrl));
+            textLocalInstall->append(tr("Error loading installation-page at %1").arg(setup->getBinariesUrl()));
         }
         else
         {
@@ -629,15 +606,17 @@ void CRouterBRouterSetupWizard::beginProfiles()
     updateProfiles();
     if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
-        textProfileContent->setText(tr("retrieving available profiles from %1").arg(setup->onlineProfilesUrl));
-        setup->loadLocalOnlineProfiles();
         setup->readLocalProfiles();
+    }
+    if (setup->expertMode)
+    {
+        textProfileContent->setText(tr("retrieving available profiles from %1").arg(setup->onlineProfilesUrl));
+        setup->loadLocalOnlineProfiles(true);
     }
     else
     {
-        Q_ASSERT(setup->installMode == CRouterBRouterSetup::eModeOnline);
-        textProfileContent->setText(tr("retrieving available profiles from %1").arg(setup->onlineWebUrl));
-        setup->loadOnlineConfig();
+        textProfileContent->setText(tr("retrieving online config from %1").arg(setup->getConfigUrl()));
+        setup->loadOnlineConfig(true);
     }
     setOption(QWizard::HaveCustomButton1, false);
 }
@@ -693,25 +672,6 @@ void CRouterBRouterSetupWizard::slotProfileDownClicked() const
     for (const QString &profile : selectedProfiles(listProfiles))
     {
         setup->profileDown(profile);
-    }
-}
-
-void CRouterBRouterSetupWizard::slotOnlineProfilesLoaded()
-{
-    isError = false;
-    switch(currentId())
-    {
-    case ePageProfiles:
-    {
-        updateProfiles();
-        break;
-    }
-
-    case ePageLocalDetails:
-    {
-        updateLocalDetails();
-        break;
-    }
     }
 }
 
@@ -794,63 +754,90 @@ void CRouterBRouterSetupWizard::beginLocalTiles()
 void CRouterBRouterSetupWizard::beginOnlineDetails()
 {
     setOption(QWizard::HaveCustomButton1, true);
-    updateOnlineDetails();
+    setup->loadOnlineConfig(false);
+    setup->loadLocalOnlineProfiles(false);
+    setup->loadOnlineVersion();
 }
 
 void CRouterBRouterSetupWizard::updateOnlineDetails() const
 {
-    lineOnlineProfileUrl->setText(setup->onlineProfilesUrl);
-    lineOnlineService->setText(setup->onlineServiceUrl);
+    if (lineOnlineConfigUrl->text() != setup->expertConfigUrl)
+    {
+        lineOnlineConfigUrl->setText(setup->expertConfigUrl);
+    }
+    if (lineOnlineProfilesUrl->text() != setup->onlineProfilesUrl)
+    {
+        lineOnlineProfilesUrl->setText(setup->onlineProfilesUrl);
+    }
+    if (lineOnlineService->text() != setup->onlineServiceUrl)
+    {
+        lineOnlineService->setText(setup->onlineServiceUrl);
+    }
+    textOnlineDetails->setVisible(isError);
+    if (setup->versionMajor == NOINT && setup->versionMinor == NOINT && setup->versionPatch == NOINT)
+    {
+        labelOnlineVersion->setText(tr("BRouter-Version: not accessible"));
+    }
+    else
+    {
+        labelOnlineVersion->setText(tr("BRouter-Version: %1.%2.%3").arg(setup->versionMajor).arg(setup->versionMinor).arg(setup->versionMinor));
+    }
+    if (isError)
+    {
+        textOnlineDetails->setText(error + ": "+ errorDetails);
+    }
 }
 
 bool CRouterBRouterSetupWizard::validateOnlineDetails() const
 {
-    setup->onlineProfilesUrl = lineOnlineProfileUrl->text();
+    setup->expertConfigUrl = lineOnlineConfigUrl->text();
+    setup->onlineProfilesUrl = lineOnlineProfilesUrl->text();
     setup->onlineServiceUrl = lineOnlineService->text();
     return true;
 }
 
 void CRouterBRouterSetupWizard::resetOnlineDetails() const
 {
+    setup->resetOnlineConfigUrl();
     setup->resetOnlineProfilesUrl();
     setup->resetOnlineServiceUrl();
 
     updateOnlineDetails();
 }
 
-void CRouterBRouterSetupWizard::beginOnlineUrl()
+void CRouterBRouterSetupWizard::slotOnlineConfigUrlEdited()
 {
-    setOption(QWizard::HaveCustomButton1, true);
+    setup->expertConfigUrl = lineOnlineConfigUrl->text();
     isError = false;
-    setup->loadOnlineConfig();
+    setup->loadOnlineConfig(false);
 }
 
-void CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged()
+void CRouterBRouterSetupWizard::slotOnlineConfigButtonClicked() const
 {
-    setup->onlineWebUrl = lineOnlineUrl->text();
+    setup->loadOnlineConfig(true);
+}
+
+void CRouterBRouterSetupWizard::slotBinariesUrlCursorEdited()
+{
+    setup->expertBinariesUrl = lineLocalBinariesUrl->text();
     isError = false;
-    setup->loadOnlineConfig();
-}
-
-void CRouterBRouterSetupWizard::updateOnlineUrl()
-{
-    lineOnlineUrl->setText(setup->onlineWebUrl);
-    textOnlineUrl->setVisible(isError);
-    if (isError)
-    {
-        textOnlineUrl->setText(error + ": "+ errorDetails);
-    }
-}
-
-void CRouterBRouterSetupWizard::resetOnlineUrl()
-{
-    setup->resetOnlineWebUrl();
-    beginOnlineUrl();
+    setup->loadExpertBinariesPage();
 }
 
 void CRouterBRouterSetupWizard::updateLocalDetails() const
 {
-    lineLocalProfilesUrl->setText(setup->onlineProfilesUrl);
+    if (lineLocalBinariesUrl->text() != setup->expertBinariesUrl)
+    {
+        lineLocalBinariesUrl->setText(setup->expertBinariesUrl);
+    }
+    if (lineLocalProfilesUrl->text() != setup->onlineProfilesUrl)
+    {
+        lineLocalProfilesUrl->setText(setup->onlineProfilesUrl);
+    }
+    if (lineLocalSegmentsUrl->text() != setup->expertSegmentsUrl)
+    {
+        lineLocalSegmentsUrl->setText(setup->expertSegmentsUrl);
+    }
     lineLocalHost->setText(setup->localHost);
     lineLocalPort->setText(setup->localPort);
     checkLocalBindLocalonly->setChecked(setup->localBindLocalonly);
@@ -871,18 +858,50 @@ void CRouterBRouterSetupWizard::beginLocalDetails()
 {
     setOption(QWizard::HaveCustomButton1, true);
     isError = false;
-    setup->loadLocalOnlineProfiles();
+    setup->loadExpertBinariesPage();
+    setup->loadExpertSegmentsPage();
+    setup->loadLocalOnlineProfiles(false);
 }
 
-void CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged()
+void CRouterBRouterSetupWizard::slotProfilesUrlEdited()
 {
-    setup->onlineProfilesUrl = lineLocalProfilesUrl->text();
+    switch (currentId()) {
+    case ePageOnlineDetails:
+    {
+        setup->onlineProfilesUrl = lineOnlineProfilesUrl->text();
+        break;
+    }
+    case ePageLocalDetails:
+    {
+        setup->onlineProfilesUrl = lineLocalProfilesUrl->text();
+        break;
+    }
+    default:
+        break;
+    }
     isError = false;
-    setup->loadLocalOnlineProfiles();
+    setup->loadLocalOnlineProfiles(false);
+}
+
+void CRouterBRouterSetupWizard::slotOnlineServiceUrlEdited()
+{
+    setup->onlineServiceUrl = lineOnlineService->text();
+    isError = false;
+    setup->loadOnlineVersion();
+}
+
+void CRouterBRouterSetupWizard::slotSegmentsUrlEdited()
+{
+    setup->expertSegmentsUrl = lineLocalSegmentsUrl->text();
+    isError = false;
+    setup->loadExpertSegmentsPage();
 }
 
 bool CRouterBRouterSetupWizard::validateLocalDetails() const
 {
+    setup->expertBinariesUrl = lineLocalBinariesUrl->text();
+    setup->expertSegmentsUrl = lineLocalSegmentsUrl->text();
+    setup->onlineProfilesUrl = lineLocalProfilesUrl->text();
     setup->localHost = lineLocalHost->text();
     setup->localPort = lineLocalPort->text();
     setup->localBindLocalonly = checkLocalBindLocalonly->isChecked();
@@ -897,6 +916,8 @@ bool CRouterBRouterSetupWizard::validateLocalDetails() const
 
 void CRouterBRouterSetupWizard::resetLocalDetails() const
 {
+    setup->resetBinariesUrl();
+    setup->resetSegmentsUrl();
     setup->resetOnlineProfilesUrl();
     setup->resetLocalHost();
     setup->resetLocalPort();
@@ -910,16 +931,11 @@ void CRouterBRouterSetupWizard::resetLocalDetails() const
     updateLocalDetails();
 }
 
-void CRouterBRouterSetupWizard::slotOnlineConfigLoaded()
+void CRouterBRouterSetupWizard::slotUpdateCurrentPage()
 {
     isError = false;
     switch(currentId())
     {
-    case ePageOnlineUrl:
-    {
-        updateOnlineUrl();
-        break;
-    }
 
     case ePageOnlineDetails:
     {
@@ -930,6 +946,12 @@ void CRouterBRouterSetupWizard::slotOnlineConfigLoaded()
     case ePageLocalDetails:
     {
         updateLocalDetails();
+        break;
+    }
+
+    case ePageProfiles:
+    {
+        updateProfiles();
         break;
     }
     }
@@ -943,9 +965,9 @@ void CRouterBRouterSetupWizard::slotSetupError(const QString &error, const QStri
 
     switch(currentId())
     {
-    case ePageOnlineUrl:
+    case ePageOnlineDetails:
     {
-        updateOnlineUrl();
+        updateOnlineDetails();
         break;
     }
 

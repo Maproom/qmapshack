@@ -167,7 +167,7 @@ void CRouterBRouterLocal::getBRouterVersion() const
             cmd.kill();
         }
 
-        brouter.parseBRouterVersion(QString(cmd.readAll()));
+        brouter.setup->parseBRouterVersion(QString(cmd.readAll()));
     }
     else
     {

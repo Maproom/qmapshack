@@ -1,7 +1,7 @@
 Howto Building QMapShack on OS-X ( 21/8/2019 )
 ********************************
 
-This document describes how to build QMapShack on OS-X in 2019.
+This document describes how to build QMapShack on OS-X.
 All commands listed in this how to are executed in a terminal. Bash version 3 and
 above must be installed to execute the scripts.
 
@@ -27,6 +27,7 @@ Download the adequate MacPorts package 2.5.4 from https://github.com/macports/ma
 sudo port install cmake
 sudo port install qt5-qtbase
 sudo port install qt5-mysql-plugin
+sudo port install qt5-sqlite-plugin
 sudo port install qt5-qttranslations
 sudo port install qt5-qtwebengine
 sudo port install gdal
@@ -62,11 +63,6 @@ Building QMapShack and QMapTool
 *******************************
 To get the source of QMapShack:
 hg clone https://bitbucket.org/maproom/qmapshack
-
-
-Create in terminal with patch < path to FindPROJ4.patch and patch < path to FindQuaZip5.patch the files FindPROJ4.cmake and FindQuaZip5.cmake
-Put the files FindPROJ4.cmake and FindQuaZip5.cmake in /opt/local/share/cmake-3.15/Modules
-
 
 In the same directory as this how to is the bash script "bundle-all.sh". The script 
 does all steps for packaging the application but not building the binary.

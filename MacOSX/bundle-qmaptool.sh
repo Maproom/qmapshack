@@ -41,12 +41,9 @@ if [[ "$1" == "bundle" ]]; then
     updateInfoPlist
     echo "---qt deploy tool ------------------"
     qtDeploy
-    #removeDuplicatedQtLibs
     echo "---copy external files -------------"
     copyQtTrqnslations
     copyExternalFiles
-    echo "---link to QMS ------------------"
-    #linkToQMapShack
     echo "---adjust linking ------------------"
     adjustLinking
     echo "---external tools ------------------"

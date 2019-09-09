@@ -24,7 +24,7 @@ string(TIMESTAMP YEAR "%Y")
 set(EXPIRE_YEAR "2021")
 set(DEBIAN_RELEASE_INFO "/etc/debian_version")
 
-if((EXISTS ${DEBIAN_RELEASE_INFO}) AND (${YEAR} LESS ${EXPIRE_YEAR}))
+if(((EXISTS ${DEBIAN_RELEASE_INFO}) AND (${YEAR} LESS ${EXPIRE_YEAR})) OR APPLE)
     message( STATUS "Apply patches to fix build system on Debian")
     execute_process(COMMAND bash "-c" "patch --quiet -p1 < FindPROJ4.patch"
                     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
@@ -32,7 +32,7 @@ if((EXISTS ${DEBIAN_RELEASE_INFO}) AND (${YEAR} LESS ${EXPIRE_YEAR}))
     execute_process(COMMAND bash "-c" "patch --quiet -p1 < FindQuaZip5.patch"
                     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
                     OUTPUT_QUIET)
-endif((EXISTS ${DEBIAN_RELEASE_INFO}) AND (${YEAR} LESS ${EXPIRE_YEAR}))
+endif(((EXISTS ${DEBIAN_RELEASE_INFO}) AND (${YEAR} LESS ${EXPIRE_YEAR})) OR APPLE)
 
 
 

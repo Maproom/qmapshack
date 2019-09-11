@@ -174,7 +174,7 @@ void CGisWorkspace::slotSearch(const QString& str)
         item->setExpanded(!str.isEmpty());
     }
 
-    //test whether no syntax errors occured and show error
+    //test whether syntax errors occured and show error
     if(currentSearch.getSyntaxError())
     {
         lineFilter->addAction(actionError, QLineEdit::TrailingPosition);
@@ -192,6 +192,15 @@ void CGisWorkspace::slotSearch(const QString& str)
         lineFilter->removeAction(actionError);
     }
 
+    if(currentSearch.isAutodetectedProperty())
+    {
+        lineFilter->addAction(actionAutoProperty, QLineEdit::TrailingPosition);
+        actionAutoProperty->setToolTip(tr("Automatically set the property, please make sure the results are correct."));
+    }
+    else
+    {
+        lineFilter->removeAction(actionAutoProperty);
+    }
 
     CCanvas::restoreOverrideCursor("slotFilter");
 

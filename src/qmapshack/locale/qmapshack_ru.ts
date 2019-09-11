@@ -162,7 +162,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="245"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Выберите основную папку&lt;/h2&gt;&lt;p&gt;QMapShack нужна папка на жестком диске, где хранятся все данные. Естественно, они будут расти очень быстро. Поэтому рекомендуется использовать папку с несколькими вложенными папками:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - здесь хранятся все карты&lt;/li&gt;&lt;li&gt;DEM - здесь доступны высотные данные&lt;/li&gt;&lt;li&gt;Routino - здесь хранятся данные для Routino маршрутизации&lt;/li&gt;&lt;li&gt;BRouter - здесь хранятся данные для BRouter маршрутизации&lt;/li&gt;&lt;li&gt;Databases - здесь хранятся базы данных для персональных данных ГИС&lt;/li&gt;&lt;li&gt;GPX - здесь находятся ваши файлы GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Вы хотите создать эти папки прямо сейчас? Дайте мне &lt;a  href=&apos;SetupHome&apos;&gt;папку&lt;/a&gt;. QMapShack создаст все подпапки и запомнит их в основных настройках.&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Выберите основную папку&lt;/h2&gt;&lt;p&gt;QMapShack нужна папка на жестком диске, где хранятся все данные. Естественно, они будут расти очень быстро. Поэтому рекомендуется использовать папку с несколькими вложенными папками:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - здесь хранятся все карты&lt;/li&gt;&lt;li&gt;DEM - здесь доступны высотные данные&lt;/li&gt;&lt;li&gt;Routino - здесь хранятся данные для Routino маршрутизации&lt;/li&gt;&lt;li&gt;BRouter - здесь хранятся данные для BRouter маршрутизации&lt;/li&gt;&lt;li&gt;Databases - здесь хранятся базы данных для персональных данных ГИС&lt;/li&gt;&lt;li&gt;GPX - здесь находятся ваши файлы GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Вы хотите создать эти папки прямо сейчас? Дайте мне &lt;a href=&apos;SetupHome&apos;&gt;папку&lt;/a&gt;. QMapShack создаст все подпапки и запомнит их в основных настройках.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="262"/>
@@ -172,7 +172,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="277"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Карты!&lt;/h2&gt;&lt;p&gt;Карта всегда должна быть определена с помощью файла, распознанного QMapShack. Этот файл должен быть помещен в одну из зарегистрированных папок карт  (&lt;a href=&apos;MapFolders&apos;&gt;Файл-&gt;Настройка пути к картам&lt;/a&gt;). QMapShack найдет и перечислит их. Вы можете перезагрузить список карт, щелкнув правой кнопкой мыши по списку и выбрав &quot;Перезагрузить карты&quot; из меню.&lt;/p&gt; &lt;p&gt;Карта должна быть активирована, чтобы быть видимой. Щелкните правой кнопкой мыши карту в списке и выберите &quot;Активировать&quot;  из меню. После активизации карты эта помощь исчезнет. Чтобы увидеть её снова, вы просто добавляете другой вид карты (&lt;a href=&apos;NewView&apos;&gt;Вид-&gt;Добавить окно карты&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Чтобы начать с онлайн карты, вы можете нажать на ссылку для &lt;a href=&apos;GetMaps&apos;&gt;нетерпеливых пользователей&lt;/a&gt;. Если у вас есть устройство GPS типа Garmin с некоммерческими картами, вы можете скопировать *.img и *.jnx файлы с вашего устройства в папку карт.&lt;/p&gt; &lt;/p&gt;Если у вас есть растровые карты в формате, поддерживаемом GDAL, сначала необходимо определить виртуальный файл (*.vrt). Один .* vrt файл может ссылаться на один или несколько других файлов. Для создания такого файла можно использовать встроенный в QMapShack VRT построитель (&lt;a href=&apos;VrtBuilder&apos;&gt;Инструмент-&gt;Создать файл VRT&lt;/a&gt;).&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Карты!&lt;/h2&gt;&lt;p&gt;Карта всегда должна быть определена с помощью файла, распознанного QMapShack. Этот файл должен быть помещен в одну из зарегистрированных папок карт (&lt;a href=&apos;MapFolders&apos;&gt;Файл-&gt;Настройка пути к картам&lt;/a&gt;). QMapShack найдет и перечислит их. Вы можете перезагрузить список карт, щелкнув правой кнопкой мыши по списку и выбрав &quot;Перезагрузить карты&quot; из меню.&lt;/p&gt; &lt;p&gt;Карта должна быть активирована, чтобы быть видимой. Щелкните правой кнопкой мыши карту в списке и выберите &quot;Активировать&quot; из меню. После активизации карты эта помощь исчезнет. Чтобы увидеть её снова, вы просто добавляете другой вид карты (&lt;a href=&apos;NewView&apos;&gt;Вид-&gt;Добавить окно карты&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Чтобы начать с онлайн карты, вы можете нажать на ссылку для &lt;a href=&apos;GetMaps&apos;&gt;нетерпеливых пользователей&lt;/a&gt;. Если у вас есть устройство GPS типа Garmin с некоммерческими картами, вы можете скопировать *.img и *.jnx файлы с вашего устройства в папку карт.&lt;/p&gt; &lt;/p&gt;Если у вас есть растровые карты в формате, поддерживаемом GDAL, сначала необходимо определить виртуальный файл (*.vrt). Один .* vrt файл может ссылаться на один или несколько других файлов. Для создания такого файла можно использовать встроенный в QMapShack VRT построитель (&lt;a href=&apos;VrtBuilder&apos;&gt;Инструмент-&gt;Создать файл VRT&lt;/a&gt;).&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="293"/>
@@ -187,7 +187,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="308"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Нетерпеливые пользователи:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Я хочу высотные данные онлайн.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Терпеливые  пользователи:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Источники для ЦМР&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Нетерпеливые пользователи:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Я хочу высотные данные онлайн.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Терпеливые пользователи:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Источники для ЦМР&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="319"/>
@@ -689,7 +689,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="92"/>
         <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;To document your tracks you can add a short description to a track point. All points with description will be marked along the track with auto-numbered bullets.&lt;br/&gt;You can add a description by a right click on a track point in the graphs. Or you do a left click on a track point in the map view.&lt;br/&gt;With the first track point you add information to this text will be replaced by a table. Use it to edit and delete track point information.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Информация о точек трека&lt;/b&gt;&lt;br/&gt;Для документирования ваших треков вы можете добавить краткое описание к точке трека. Все точки с описанием будут отмечены вдоль трека с нумерованными маркерами.&lt;br/&gt;Вы можете добавить описание, щелкнув правой кнопкой мышки точку трека на одном из графиков трека этого окна. Или вы щелкаете левой кнопкой мышки на точке трека в виде карты и выбираете икон добавления информации на панели инструментов.&lt;br/&gt;При первом добавлении информации точки трека этот текст будет заменен таблицей. Используйте эту таблицу для редактирования и удаления информации о точке трека.br/&gt;</translation>
+        <translation>&lt;b&gt;Информация о точках трека&lt;/b&gt;&lt;br/&gt;Для документирования ваших треков вы можете добавить краткое описание к точке трека. Все точки с описанием будут отмечены вдоль трека с нумерованными маркерами.&lt;br/&gt;Вы можете добавить описание, щелкнув правой кнопкой мышки точку трека на одном из графиков трека этого окна. Или вы щелкаете левой кнопкой мышки на точке трека в виде карты и выбираете икон добавления информации на панели инструментов.&lt;br/&gt;При первом добавлении информации точки трека этот текст будет заменен таблицей. Используйте эту таблицу для редактирования и удаления информации о точке трека.br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="187"/>
@@ -803,7 +803,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="68"/>
         <source>No Wind</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет ветра</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="69"/>
@@ -910,7 +910,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="322"/>
         <source>&lt;p&gt;&lt;b&gt;Set Energy Use for Cycling&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Within this dialog your personal energy use (consumption) for a cycling tour can be computed.&lt;/p&gt;&lt;p&gt;The computed value of &quot;Energy Use Cycling&quot; can be see as an indicator for the exertion of a cycling tour.&lt;/p&gt;&lt;p&gt;The tour length, speed and slope values will be taken into account.&lt;/p&gt;&lt;p&gt;To individualize your personal energy use the following input data are more needed:&lt;ul&gt;&lt;li&gt;Driver and bicyle weight&lt;/li&gt;&lt;li&gt;Air density, wind speed and position to the wind to consider the wind drag resistance&lt;/li&gt;&lt;li&gt;Ground situation (tyre and ground) to consider the rolling resistance&lt;/li&gt;&lt;li&gt;Average pedal cadence for the computation of pedal force&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;The individualize data will be defined in this dialog and more computed values will be shown here.&lt;/p&gt;&lt;p&gt;When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set.&lt;p&gt;The energy use in unit &quot;kcal&quot; will be stored in the track (qms format only) and can be remove later on when no longer needed.&lt;/p&gt;&lt;p&gt;For more information see tooltips on input and output values.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Настройка использования энергии для велосипедного тура&lt;/b&gt;&lt;/p&gt;&lt;p&gt;С помощью этого диалога можно рассчитать личную использованную энергию велосипедного тура.&lt;/p&gt; &lt;p&gt;Вычисленное значение использованной энергии на велосипеде можно рассматривать как индикатор напряжения для велосипедного тура.&lt;/p&gt;&lt;p&gt;Длина маршрута, скорость и склон будут приняты во внимание.&lt;/p&gt;&lt;p&gt;Для индивидуализации личной использованной энергии требуется следующие входные данные:&lt;ul&gt;&lt;li&gt;Вес водителя и велосипеда&lt;/li&gt; &lt;li&gt;Плотность воздуха, скорость ветра и тип тура для учета сопротивления ветра&lt;/li&gt;&lt;li&gt;Поверхностная ситуация (шины и поверхность) для учета сопротивления качению&lt;/li&gt;&lt;li&gt;Средняя каденция педалей для расчета усилия на педалях&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;Личные данные будут определены в диалоговом окне, и там будут показаны другие вычисленные значения.&lt;/p&gt;&lt;p&gt;При загрузке более старых треков или при переключении в истории на треки с другим набором параметров, показанный набор параметров в диалоговом окне можно заменить предыдущим сохраненным набором параметров.&lt;p&gt;Использованная энергия в единицах «ккал» будет сохранена в треке (толька в формате QMS) и может быть удалено позже, когда в этом больше нет необходимости.&lt;/p&gt;&lt;p&gt;Для получения дополнительной информации см. подсказки по входным и выходным значениям.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="48"/>
@@ -1048,7 +1048,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="127"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
-        <translation>Высотные данные трека отсутствуют или неверны. Пожалуйста исправьте или установите постоянную скорость!</translation>
+        <translation>Высотные данные трека отсутствуют или неверны. Пожалуйста, исправьте или установите постоянную скорость!</translation>
     </message>
 </context>
 <context>
@@ -1163,7 +1163,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
 - &apos;Расстояние&apos; определяет порог обнаружения узлов: серия точек трека может быть узлом, если расстояние между двумя соседними точками меньше, чем этот параметр.
 - &apos;Относительный показатель&apos; используется для идентификации частей трека на низкой скорости: эти части не являются узлами и не должны быть скрыты. Фильтр обнаружит узел, если длина серия точек больше, чем расстояние по прямой между началом серии и ее концом, умноженное на &apos;относительный показатель&apos;.
 
-Можно изменить оба параметра, чтобы настроить поведение фильтра. Для &apos;расстояния&apos; рекомендуется использовать значение меньше, чем точность GPS. Имейте в виду, что если указано большое &apos;расстояние&apos; и маленький &apos;относительный показатель&apos;, то фильтр может по ошибке обнаружить и скрыть узел (например, участки с горными серпантин или с очень низкой скоростью).</translation>
+Можно изменить оба параметра, чтобы настроить поведение фильтра. Для &apos;расстояния&apos; рекомендуется использовать значение меньше, чем точность GPS. Имейте в виду, что если указано большое &apos;расстояние&apos; и маленький &apos;относительный показатель&apos;, то фильтр может по ошибке обнаружить и скрыть узел (например, участки с горными серпантинами или с очень низкой скоростью).</translation>
     </message>
 </context>
 <context>
@@ -1367,7 +1367,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="46"/>
         <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Чтобы изменить сервис, выберите его имя или URL и сделайте двойной щелчок (альтернатива: нажмите F2). Вы также можете изменить  сервисы по умолчанию. Если вы удалите все сервисы, стандартные будут восстановлены при следующем запуске QMapShack.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Чтобы изменить сервис, выберите его имя или URL и сделайте двойной щелчок (альтернатива: нажмите F2). Вы также можете изменить сервисы по умолчанию. Если вы удалите все сервисы, стандартные будут восстановлены при следующем запуске QMapShack.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="103"/>
@@ -1653,7 +1653,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="568"/>
         <source>Energy Use Cycling: %L1</source>
-        <translation type="unfinished"></translation>
+        <translation>Использованная энергия на велосипеде: %L1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="573"/>
@@ -2916,7 +2916,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="198"/>
         <source>Automatically set the property, please make sure the results are correct.</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматически установлено свойство, пожалуйста, убедитесь, что результаты верны.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="213"/>
@@ -5222,7 +5222,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="618"/>
         <source>retrieving online config from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить онлайн конфигурацию с %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="642"/>
@@ -5238,12 +5238,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="779"/>
         <source>BRouter-Version: not accessible</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия BRouter не доступна</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="783"/>
         <source>BRouter-Version: %1.%2.%3</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия BRouter: %1.%2.%3</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="448"/>
@@ -6309,7 +6309,7 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <message>
         <location filename="../gis/search/CSearch.cpp" line="437"/>
         <source>example: size regex (regular|large)</source>
-        <translation>пример: размер regex  (regular|large)</translation>
+        <translation>пример: размер regex (regular|large)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="438"/>
@@ -6554,7 +6554,7 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <message>
         <location filename="../gis/search/CSearch.cpp" line="514"/>
         <source>searches the size of a geocache. (micro, small, regular, large)</source>
-        <translation>поиск размера тайника  (micro, small, regular, large)</translation>
+        <translation>поиск размера тайника (micro, small, regular, large)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="515"/>
@@ -7083,12 +7083,12 @@ line %2, column %3:
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="42"/>
         <source>Hiking Tour Summary (built-in)</source>
-        <translation>Сводка пешого тура (встроенная)</translation>
+        <translation>Сводка пешего тура (встроенная)</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="43"/>
         <source>Hiking Tour Summary - Advanced (built-in)</source>
-        <translation>Расширенная сводка пешого тура (встроенная)</translation>
+        <translation>Расширенная сводка пешего тура (встроенная)</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="44"/>
@@ -8990,7 +8990,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="114"/>
         <source>Frontal Area:</source>
-        <translation>Фронтальная зона:</translation>
+        <translation>Лобовая зона:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="127"/>
@@ -9006,65 +9006,80 @@ I don&apos;t want to read the documentation!</source>
 &lt;li&gt;1,500 meter: 1.056kg/m3&lt;/li&gt;
 &lt;li&gt;3,000 meter: 0.905kg/m3&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Плотность воздуха зависит от атмосферного давления, высоты и температуры.&lt;/p&gt;
+&lt;p&gt;Примеры:
+&lt;ul&gt;
+&lt;li&gt; Уровень моря: 1,226 кг/м3&lt;/li&gt;
+&lt;li&gt; 1500 метров: 1,056 кг/м3&lt;/li&gt;
+&lt;li&gt; 3000 метров: 0,905 кг/м3&lt;/li&gt;
+&lt;/ul&gt; &lt;/р&gt;
+</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="233"/>
         <source>&lt;p&gt;The wind drag coefficient (cw value) indicates the wind slip of the driver and bicycle in relation to the air (wind).&lt;/p&gt;
 &lt;p&gt;The greater this value, the more force is required to overcome the wind force.&lt;/p&gt;
 &lt;p&gt;Typical values for bicycles are between 0.2 and 1.2.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Значение аэродинамического сопротивления (коэффициент cw) указывает скольжение ветра для водителя и велосипеда по отношению к воздуху (ветру).&lt;/p&gt;
+&lt;p&gt;Чем больше это значение, тем больше сил требуется, чтобы преодолеть силу ветра.&lt;/p&gt;
+&lt;p&gt;Типичные значения для велосипедов находятся между 0,2 и 1,2.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="310"/>
         <source>&lt;p&gt;The values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Значения для типа положения сиденья в качестве предварительного выбора для лобовой площади в м2 и коэффициента аэродинамического сопротивления (значение cw).&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="399"/>
         <source>&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on downhill or uphill.&lt;/p&gt;
 &lt;p&gt;When mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Сила тяжести на склоне - это сила в Ньютонах, необходимая в среднем по всем точкам трека для преодоления склона на подъеме.&lt;/p&gt;
+&lt;p&gt;При движении по спуску сила тяжести на склоне может быть отрицательной.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="413"/>
         <source>Positive Power:</source>
-        <translation type="unfinished"></translation>
+        <translation>Положительная сила:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="443"/>
         <source>Power:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сила:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="453"/>
         <source>&lt;p&gt;The sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.&lt;/p&gt;
 &lt;p&gt;This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Сумма средней силы, необходимой для преодоления сопротивления ветра, сопротивления качению и склона.&lt;/p&gt;
+&lt;p&gt;Это значение может быть отрицательным для сильного попутного ветра и/или движения вниз.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="477"/>
         <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positve Pedal Force.&lt;/p&gt;
 &lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Средняя каденция педалей в оборотах/мин необходима для расчета силы на педали.&lt;/p&gt;
+&lt;p&gt;Реалистичные значения находятся в диапазоне от 50 до 100 об/мин.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="503"/>
         <source>&lt;p&gt;The values for the wind speed in Beaufort scale for specifying the wind speed in km/h.&lt;/p&gt;
 &lt;p&gt;Positive values for headwind and negative values for tailwind.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Значения скорости ветра в шкале Бофорта для указания скорости ветра в км/ч.&lt;/p&gt;
+&lt;p&gt;Положительные значения для встречного ветра и отрицательные значения для попутного ветра.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="563"/>
         <source>&lt;p&gt;The wind speed in km/h is taken into account when calculating the force required to overcome the air drag.&lt;/p&gt;
 &lt;p&gt;Positive values for headwind and negative values for tailwind are taken into account.&lt;/p&gt;
 &lt;p&gt;The value can be changed independently of the Beaufort scale value.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Скорость ветра в км/ч учитывается при расчете силы, необходимой для преодоления сопротивления воздуха.&lt;/p&gt;
+&lt;p&gt;Положительные значения для встречного ветра и отрицательные значения для попутного ветра учитываются.&lt;/p&gt;
+&lt;p&gt;Значение может быть изменено независимо от значений шкалы Бофорта.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="611"/>
         <source>&lt;p&gt;The weight of the driver in kg including clothes.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Общий вес в кг водителя включая одежду.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="649"/>
@@ -9075,14 +9090,18 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="659"/>
         <source>&lt;p&gt;The predefined selection for the type of ground surface and the tyres.&lt;/p&gt;
 &lt;p&gt;To be used to determine the rolling resistance coefficient.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Тип поверхности земли и шин.&lt;/p&gt;
+&lt;p&gt;Используется для определения коэффициента сопротивления качению.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="677"/>
         <source>&lt;p&gt;The rolling resistance coefficient (cr value) specifies the force used to overcome the rolling resistance.&lt;/p&gt;
 &lt;p&gt;The relevant factors are the road surface and the tyres.&lt;/p&gt;
 &lt;p&gt;The higher this value is, the more force is required to overcome the rolling resistance.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Коэффициент сопротивления качению (значение cr) определяет силу, используемую для преодоления сопротивления качению.&lt;/p&gt;
+&lt;p&gt;Соответствующими факторами являются дорожное покрытие и шины.&lt;/p&gt;
+&lt;p&gt;Чем выше это значение, тем больше сил требуется, чтобы преодолеть сопротивление качению.&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="707"/>
@@ -9133,7 +9152,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="14"/>
         <source>Energy Use Cycling Parameter Set</source>
-        <translation type="unfinished">Набор параметров для вычисления использованной энергии велосипедного тура</translation>
+        <translation>Набор параметров для вычисления использованной энергии велосипедного тура</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="207"/>
@@ -9159,7 +9178,7 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="717"/>
         <source>&lt;p&gt;The energy use (consumption) in kJoule by transforming the positive power by the driver.&lt;/p&gt;
 &lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Использование энергии (потребление энергии) в килоджоулах в результате положительной силы водителя.&lt;/p&gt;
+        <translation>&lt;p&gt;Использование энергии (потребление энергии) в килоджоулях в результате положительной силы водителя.&lt;/p&gt;
 &lt;p&gt;Коэффициент мышечной эффективности предполагается равным 23%&lt;/p&gt;</translation>
     </message>
     <message>
@@ -9199,7 +9218,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <source>&lt;p&gt;Values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Тип тура для предварительного выбора значения фронтальной зоны ветра в м2.&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;Тип тура для предварительного выбора значения лобовой зоны ветра в м2.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="317"/>
@@ -9209,7 +9228,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="327"/>
         <source>&lt;p&gt;The frontal area in m2 (driver, bicycle, bags, etc.) exposed to the wind.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Фронтальная зона в м2 (водитель, велосипед, багаж и т. д.) подверженные воздействию ветра.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Лобовая зона в м2 (водитель, велосипед, багаж и т. д.) подверженные воздействию ветра.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>m2</source>
@@ -9310,7 +9329,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="481"/>
         <source>rpm</source>
-        <translation>об/мин</translation>
+        <translation> об/мин</translation>
     </message>
     <message>
         <source>&lt;p&gt;Values for the wind speed in Beaufort scale for specifying the wind speed in km/h.&lt;/p&gt;
@@ -9346,7 +9365,7 @@ I don&apos;t want to read the documentation!</source>
 &lt;p&gt;This power must be applied by the driver on average for the track.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Положительная сила в ваттах, которая должна применяться в среднем для всех точек трека.&lt;/p&gt;
 &lt;p&gt;Отрицательная сила от сильного попутного ветра или спуска не учитывается.&lt;/p&gt;
-&lt;p&gt;Это сила должно применяться водителем в среднем на треке.&lt;/p&gt;</translation>
+&lt;p&gt;Эта сила должна применяться водителем в среднем на треке.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The wind speed in km/h is taken into account when calculating the force required to overcome the air drag. &lt;/p&gt;
@@ -10600,7 +10619,7 @@ Filename: %1</source>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="189"/>
         <source>Automatically set property</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматически установить свойство</translation>
     </message>
 </context>
 <context>
@@ -12156,27 +12175,27 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="457"/>
         <source>BRouter-Config-URL</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter URL для конфигурации</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="467"/>
         <source>load Service and Profile-URL from BRouter-Config-URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить URL для сервисов и профилей с BRouter URL для конфигурации</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="494"/>
         <source>BRouter-Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия BRoute</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="534"/>
         <source>BRouter-Binaries URL</source>
-        <translation type="unfinished"></translation>
+        <translation>URL для бинарников BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="554"/>
         <source>Segments Url</source>
-        <translation type="unfinished"></translation>
+        <translation>URL для сегментов</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="564"/>
@@ -13553,7 +13572,7 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../gis/search/ISearchExplanationDialog.ui" line="33"/>
         <source>Following keywords are available for searching:</source>
-        <translation type="unfinished"></translation>
+        <translation>Для поиска доступны следующие ключевые слова (налево: свойство, направо: сравнение):</translation>
     </message>
 </context>
 <context>

@@ -41,7 +41,7 @@ const QRegExp CRouterBRouterTilesSelect::regExpTileName = QRegExp(CRouterBRouter
 const QString CRouterBRouterTilesSelect::patternDate = "(\\d{1,2}-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-\\d{4} \\d{1,2}:\\d{2})";
 const QRegExp CRouterBRouterTilesSelect::regExpDate = QRegExp(CRouterBRouterTilesSelect::patternDate);
 const QString CRouterBRouterTilesSelect::formatDate = "dd-MMM-yyyy HH:mm";
-const QLocale CRouterBRouterTilesSelect::localeDate = QLocale(QLocale::English,QLocale::UnitedStates);
+const QLocale CRouterBRouterTilesSelect::localeDate = QLocale(QLocale::English, QLocale::UnitedStates);
 //pattern for tiles size parsing: 8.2M 271K 9.3K
 const QString CRouterBRouterTilesSelect::patternSize = " {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])";
 const QRegExp CRouterBRouterTilesSelect::regExpSize = QRegExp(CRouterBRouterTilesSelect::patternSize);
@@ -391,7 +391,7 @@ void CRouterBRouterTilesSelect::afterSlotLoadOnlineTilesRequestFinishedRunJavasc
                     if (regExpSize.indexIn(size) < 0)
                     {
                         bool ok = false;
-                        status->remoteSize = size.toLongLong(&ok,10);
+                        status->remoteSize = size.toLongLong(&ok, 10);
                         if (!ok)
                         {
                             segmentsError(tr("cannot parse: %1 is not a valid size").arg(size));

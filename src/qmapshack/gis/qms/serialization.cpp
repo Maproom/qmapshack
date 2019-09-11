@@ -534,9 +534,9 @@ QDataStream& operator>>(QDataStream& stream, CEnergyCycling::energy_set_t &e)
 {
     quint8 version;
     stream >> version >> e.driverWeight >> e.bikeWeight >> e.airDensity
-           >> e.windSpeedIndex >> e.windSpeed >> e.windPositionIndex
-           >> e.frontalArea >> e.windDragCoeff >> e.groundIndex
-           >> e.rollingCoeff >> e.pedalCadence >> e.energyKcal;
+    >> e.windSpeedIndex >> e.windSpeed >> e.windPositionIndex
+    >> e.frontalArea >> e.windDragCoeff >> e.groundIndex
+    >> e.rollingCoeff >> e.pedalCadence >> e.energyKcal;
     return stream;
 }
 

@@ -23,11 +23,11 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
+#include "gis/trk/CEnergyCycling.h"
 #include "gis/trk/CTrackData.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSpeedCycle.h"
 #include "gis/trk/filter/CFilterSpeedHike.h"
-#include "gis/trk/CEnergyCycling.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 

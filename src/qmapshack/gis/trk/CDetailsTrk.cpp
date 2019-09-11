@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "gis/trk/CDetailsTrk.h"
-#include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CEnergyCyclingDialog.h"
+#include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/filter/CFilterChangeStartPoint.h"
 #include "gis/trk/filter/CFilterDelete.h"

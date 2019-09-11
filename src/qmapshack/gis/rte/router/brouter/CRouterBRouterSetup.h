@@ -19,8 +19,8 @@
 #ifndef CROUTERBROUTERSETUP_H
 #define CROUTERBROUTERSETUP_H
 
-#include <QtCore>
 #include "units/IUnit.h"
+#include <QtCore>
 
 class QJSValue;
 class QNetworkAccessManager;

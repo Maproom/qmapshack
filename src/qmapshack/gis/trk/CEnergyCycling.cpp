@@ -180,7 +180,7 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
             if(deltaTime > 0 && ((pt.deltaDistance / deltaTime) <= 0.2)) // 0.2 ==> to be synchron with deriveSecondaryData()
             {
                 lastTrkpt = &pt;
-                continue;            // Standstill - no moving, track point will not considered 
+                continue;            // Standstill - no moving, track point will not considered
             }
 
             qreal slope = pt.slope2;

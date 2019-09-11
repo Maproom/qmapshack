@@ -590,7 +590,7 @@ void CRouterBRouter::getBRouterVersion()
 
 void CRouterBRouter::slotVersionChanged()
 {
-    if (setup->versionMajor!=NOINT && setup->versionMinor!=NOINT && setup->versionPatch!=NOINT)
+    if (setup->versionMajor != NOINT && setup->versionMinor != NOINT && setup->versionPatch != NOINT)
     {
         labelBRouter->setToolTip(tr("BRouter (Version %1.%2.%3)")
                                  .arg(setup->versionMajor)

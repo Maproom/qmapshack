@@ -865,20 +865,24 @@ void CRouterBRouterSetupWizard::beginLocalDetails()
 
 void CRouterBRouterSetupWizard::slotProfilesUrlEdited()
 {
-    switch (currentId()) {
+    switch (currentId())
+    {
     case ePageOnlineDetails:
     {
         setup->onlineProfilesUrl = lineOnlineProfilesUrl->text();
         break;
     }
+
     case ePageLocalDetails:
     {
         setup->onlineProfilesUrl = lineLocalProfilesUrl->text();
         break;
     }
+
     default:
         break;
     }
+
     isError = false;
     setup->loadLocalOnlineProfiles(false);
 }
@@ -936,7 +940,6 @@ void CRouterBRouterSetupWizard::slotUpdateCurrentPage()
     isError = false;
     switch(currentId())
     {
-
     case ePageOnlineDetails:
     {
         updateOnlineDetails();

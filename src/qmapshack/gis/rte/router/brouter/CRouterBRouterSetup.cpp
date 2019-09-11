@@ -392,27 +392,32 @@ void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
         return;
     }
 
-    switch (type) {
+    switch (type)
+    {
     case eTypeConfig:
     {
         loadOnlineConfigFinished(reply);
         break;
     }
+
     case eTypeProfile:
     {
         loadOnlineProfileFinished(reply);
         break;
     }
+
     case eTypeVersion:
     {
         loadOnlineVersionFinished(reply);
         break;
     }
+
     case eTypeBinariesPage:
     {
         emit sigBinariesPageLoaded();
         break;
     }
+
     case eTypeSegmentsPage:
     {
         emit sigSegmentsPageLoaded();
@@ -549,7 +554,7 @@ void CRouterBRouterSetup::loadOnlineVersionFinished(QNetworkReply *reply)
         parseBRouterVersion(reVersion.cap(1));
         return;
     }
-    emit sigError("invalid reply","response is not brouter-gpx");
+    emit sigError("invalid reply", "response is not brouter-gpx");
 }
 
 void CRouterBRouterSetup::parseBRouterVersion(const QString &text)

@@ -16,8 +16,8 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "gis/trk/filter/CFilterChangeStartPoint.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterChangeStartPoint.h"
 #include "gis/wpt/CGisItemWpt.h"
 
 CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *parent) :

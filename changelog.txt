@@ -1,3 +1,14 @@
+V 1.13.2
+[Issue #446] Advanced Filtering System
+[Issue #491] Skip saving of geo search
+[Issue #493] "Clone Waypoint and Move Clone" does not Respect Chosen Units
+[Issue #488] Printing Preview
+[Issue #494] BRouter segments download error
+[Issue #499] Screen overflow German localisation on a Notebook with 1.600 x 900 pixel
+[Issue #500]  Tab order in Filter Cycle dialog is confused
+[Issue #498 ] BRouter setup issue (Windows)
+Add: Computation of "Energy Use Cycling" (consumption) for cycling tours
+
 V 1.13.1
 [Issue #451] Make red border around a highlighted track an option
 [Issue #452] Project Details: Add elevation info to entries with track point information.

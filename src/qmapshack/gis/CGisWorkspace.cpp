@@ -187,14 +187,19 @@ void CGisWorkspace::slotSearch(const QString& str)
             actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
         }
     }
-    else if(currentSearch.isAutodetectedProperty())
-    {
-        lineFilter->addAction(actionError, QLineEdit::TrailingPosition);
-        actionError->setToolTip(tr("Automatically set the property, please make sure the results are correct."));
-    }
     else
     {
         lineFilter->removeAction(actionError);
+    }
+
+    if(currentSearch.isAutodetectedProperty())
+    {
+        lineFilter->addAction(actionAutoProperty, QLineEdit::TrailingPosition);
+        actionAutoProperty->setToolTip(tr("Automatically set the property, please make sure the results are correct."));
+    }
+    else
+    {
+        lineFilter->removeAction(actionAutoProperty);
     }
 
     CCanvas::restoreOverrideCursor("slotFilter");

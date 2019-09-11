@@ -2910,47 +2910,52 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Weiter mit der Volltextsuche</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="204"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="198"/>
+        <source>Automatically set the property, please make sure the results are correct.</source>
+        <translation>Der Parameter wurde automatisch bestimmt. Bitte überprüfen Sie, ob das Ergebnis ihrer Erwartung entspricht.</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWorkspace.cpp" line="213"/>
         <source>Apply filter to</source>
         <translation>Filter anwenden auf</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="207"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="216"/>
         <source>Case sensitivity</source>
         <translation>Groß-/Kleinschreibung</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="297"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="306"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation>&lt;b&gt;Elementauswahl: &lt;/b&gt; Ein Element wurde aus der Arbeitplatzliste heraus ausgewählt. Klicken Sie auf die Karte, um wieder auf die normale Auswahl mit der Maus umzuschalten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="791"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="800"/>
         <source>Copy items...</source>
         <translation>Elemente kopieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="821"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="830"/>
         <source>Change waypoint symbols.</source>
         <translation>Symbol der Wegpunkte wird geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1063"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1072"/>
         <source>Cut Track...</source>
         <translation>Track teilen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1063"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1072"/>
         <source>Do you want to delete the original track?</source>
         <translation>Wollen Sie den ursprünglichen Track löschen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1332"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1341"/>
         <source>Enter new proximity range.</source>
         <translation>Geben Sie einen neuen Abstandsalarm ein.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1333"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1342"/>
         <source>Is no-go area</source>
         <translation>Gebietsvermeidung</translation>
     </message>
@@ -4939,65 +4944,65 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>dritte Variante</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="169"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="170"/>
         <source>BRouter (offline)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="176"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="177"/>
         <source>BRouter (online)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="206"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="207"/>
         <source>profile: %1, alternative: %2</source>
         <translation>Profil: %1, Variante: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="393"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="526"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="388"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="512"/>
         <source>response is empty</source>
         <translation>Anwort ist leer</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="441"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="427"/>
         <source>Bad response from server: %1</source>
         <translation>Fehlerhafte Serverantwort: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="492"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="478"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routen-anfrage an den Server geschickt. Bitte warten...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="368"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="495"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="363"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="481"/>
         <source>Calculate route with %1</source>
         <translation>Berechne Route mit %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="379"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="514"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="374"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="500"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
         <translation>Diese Version von BRouter unterstützt nicht mehr als ein Vermeidungsgebiet</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="560"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="546"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Fehler-Antwort vom Server&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="550"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="536"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Berechnungszeit: %1 s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="645"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="595"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (Version %1.%2.%3)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="654"/>
         <source>online</source>
         <translation></translation>
     </message>
@@ -5058,22 +5063,22 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRouterBRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="481"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="590"/>
         <source>%1 not accessible</source>
         <translation>%1 ist nicht erreichbar</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="509"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="618"/>
         <source>%1 invalid result</source>
         <translation>ungültige Antwort von %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="539"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="651"/>
         <source>Error parsing online-config:</source>
         <translation>Fehler beim Auswerten der Online-konfiguration:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="544"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="656"/>
         <source>Network error:</source>
         <translation>Netzwerk Fehler:</translation>
     </message>
@@ -5086,159 +5091,173 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>Vorgabewerte wiederherstellen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="376"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="347"/>
         <source>Open Directory</source>
         <translation>Verzeichnis öffnen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="383"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="354"/>
         <source>select Java Executable</source>
         <translation>installiertes Java-Programm auswählen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="419"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="396"/>
         <source>please select BRouter installation directory</source>
         <translation>bitte das BRouter Installations-Verzeichnis auswählen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="424"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="401"/>
         <source>selected directory does not exist</source>
         <translation>ausgewähltes Verzeichnis existiert nicht</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="425"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="402"/>
         <source>create directory and install BRouter there</source>
         <translation>Verzeichnis anlegen und BRouter darin installieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="432"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="409"/>
         <source>existing BRouter installation</source>
         <translation>vorhandene BRouter-Installation gefunden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="433"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="410"/>
         <source>update existing BRouter installation</source>
         <translation>vorhandene BRouter-Installation aktualisieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="438"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="415"/>
         <source>empty directory, create new BRouter installation here</source>
         <translation>leeres Verzeichnis, neue BRouter-Installation hier einrichten</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="439"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="416"/>
         <source>create new BRouter installation</source>
         <translation>neue BRouter-Installation erzeugen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="447"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="424"/>
         <source>seems to be a valid Java-executable</source>
         <translation>es scheint eine gültige Java Installation zu geben</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="451"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="428"/>
         <source>doesn&apos;t seem to be a valid Java-executable</source>
         <translation>es scheint keine gültige Java Installation zu geben</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="456"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="433"/>
         <source>Java Executable not found</source>
         <translation>Java Programm nicht gefunden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="500"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="477"/>
         <source>Error loading installation-page at %1</source>
         <translation>Fehler beim Laden der Installationsseite von %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="514"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="491"/>
         <source>no brouter-version to install selected</source>
         <translation>keine BRouter-Version zum Installieren ausgewählt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="522"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="499"/>
         <source>selected %1 for download and installation</source>
         <translation>%1 zum Herunterladen und Installieren ausgewählt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="533"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="510"/>
         <source>Warning...</source>
         <translation>Warnung...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="538"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="515"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
         <translation>Download: %1&lt;br/&gt;&lt;br/&gt;Sie sind dabei eine ZIP Datei aus dem Netz zu laden und zu installieren. Dies Aktion ist nach keinem Standard gesichert und benutzt nur HTTP. Es sollte aber HTTPS sein. Sie haben damit das Risiko, dass jemand die Verbindung umleitet und Ihnen eine Datei mit Schadsoftware sendet. QMapShack kann das nicht unterscheiden. &lt;br/&gt;Wenn Si das nicht verstanden haben oder im Zweifel sind, brechen Sie hier ab. Benützen Sie stattdessen die Web-Version von BRouter.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="550"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="527"/>
         <source>I understand the risk and wish to proceed.</source>
         <translation>Ich verstehe das Risiko und möchte weiter machen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="562"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="539"/>
         <source>download %1 started</source>
         <translation>Herunterladen von %1 gestartet</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="574"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="551"/>
         <source>Network Error: %1</source>
         <translation>Netzwerkfehler: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="595"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="572"/>
         <source>download %1 finished</source>
         <translation>Herunterladen von %1 ist fertig</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="597"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="574"/>
         <source>unzipping:</source>
         <translation>entpacken:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="602"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="579"/>
         <source>ready.</source>
         <translation>fertig.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="622"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="599"/>
         <source>download of brouter failed: %1</source>
         <translation>Herunterladen von BRouter fehlgeschlagen: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="632"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="639"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="613"/>
         <source>retrieving available profiles from %1</source>
         <translation>Unter %1 verfügbare Profile werden ermittelt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="663"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="745"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="618"/>
+        <source>retrieving online config from %1</source>
+        <translation>die Online-Konfiguration wird von %1 abgeholt</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="642"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="705"/>
         <source>content of profile</source>
         <translation>Profil-Inhalt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="738"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="698"/>
         <source>Error:</source>
         <translation>Fehler:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="471"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="779"/>
+        <source>BRouter-Version: not accessible</source>
+        <translation>BRouter-Version: nicht verfügbar</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="783"/>
+        <source>BRouter-Version: %1.%2.%3</source>
+        <translation>BRouter-Version: %1.%2.%3</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="448"/>
         <source>Error creating directory %1</source>
         <translation>Fehler beim Anlegen des Verzeichnisses %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="580"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="557"/>
         <source>Error directory %1 does not exist</source>
         <translation>Fehler: Das Verzeichnis %1 existiert nicht</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="587"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="564"/>
         <source>Error creating file %1</source>
         <translation>Fehler beim Anlegen der Datei %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="591"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="568"/>
         <source>Error writing to file %1</source>
         <translation>Fehler beim Schreiben der Datei %1</translation>
     </message>
@@ -5254,125 +5273,125 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRouterBRouterTilesSelect</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="99"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="102"/>
         <source>available routing-data is being determined.</source>
         <translation>verfügbare Routing-daten werden ermittelt.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="109"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="112"/>
         <source>Select outdated</source>
         <translation>Veraltete Daten auswählen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="110"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="113"/>
         <source>Clear Selection</source>
         <translation>Auswahl aufheben</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="111"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="114"/>
         <source>Delete selection</source>
         <translation>Ausgewählte Daten löschen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="112"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="115"/>
         <source>Download</source>
         <translation>Herunterladen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="282"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="285"/>
         <source>Error creating segments directory %1</source>
         <translation>Fehler beim Anlegen des Verzeichnisses für die Routingdaten %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="378"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="382"/>
         <source>cannot parse: %1 is not a date</source>
         <translation>nicht interpretierbar: %1 ist kein Datum</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="393"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="397"/>
         <source>cannot parse: %1 is not a valid size</source>
         <translation>nicht interpretierbar: %1 ist keine gültige Größenangabe</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="715"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="733"/>
         <source>Error retrieving available routing data from %1: %2</source>
         <translation>Fehler beim Abruf der verfügbaren Routingdaten von %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="487"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="496"/>
         <source>segments directory does not exist: </source>
         <translation>Das Verzeichnis für die Routingdaten existiert nicht:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="501"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="510"/>
         <source>error creating file %1: %2</source>
         <translation>Fehler beim Anlegen der Datei %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="533"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="573"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="551"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="591"/>
         <source>no valid request for filename %1</source>
         <translation>keine gültige Netzwerkanfrage für die Datei %1 vorhanden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="538"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="581"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="556"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="599"/>
         <source>no open file assigned to request for %1</source>
         <translation>der Netzwerkanfrage für %1 ist keine offene Datei zugeordnet</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="548"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="591"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="566"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="609"/>
         <source>error writing to file %1: %2</source>
         <translation>Fehler beim Schreiben der Datei %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="617"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="635"/>
         <source>error renaming file %1 to %2: %3</source>
         <translation>Fehler beim Umbenennen der Datei von %1 nach %2: %3</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="691"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="709"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
         <translation>Aktuell: %1 (%2), Veraltet: %3 (%4), noch Herunterzuladen: %5 (%6)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="794"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="812"/>
         <source>being downloaded: %1 of %2</source>
         <translation>wird heruntergeladen: %1 von %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="814"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="832"/>
         <source>no local data, online available: %1 (%2)</source>
         <translation>lokale keine Daten. Verfügbar: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="800"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="818"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
         <translation>lokale Daten veraltet (%1, %2 - auf dem Server: %3, %4)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="191"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="194"/>
         <source>Error removing %1: %2</source>
         <translation>Fehler beim Löschen der Datei %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="319"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="322"/>
         <source>Network Error</source>
         <translation>Netzwerkfehler</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="352"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="356"/>
         <source>invalid result, no files found</source>
         <translation>ungültige Antwort, keine Dateien gefunden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="808"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="826"/>
         <source>local data up to date (%1, %2)</source>
         <translation>lokale Daten sind aktuell (%1, %2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="820"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="838"/>
         <source>no routing-data available</source>
         <translation>keine Routing-daten verfügbar</translation>
     </message>
@@ -6035,567 +6054,567 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
 <context>
     <name>CSearch</name>
     <message>
-        <location filename="../gis/search/CSearch.h" line="152"/>
-        <location filename="../gis/search/CSearch.h" line="162"/>
+        <location filename="../gis/search/CSearch.h" line="157"/>
+        <location filename="../gis/search/CSearch.h" line="167"/>
         <source>No information available</source>
         <translation>Keine Informationen verfügbar</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="86"/>
-        <location filename="../gis/search/CSearch.cpp" line="87"/>
-        <location filename="../gis/search/CSearch.cpp" line="191"/>
+        <location filename="../gis/search/CSearch.cpp" line="88"/>
+        <location filename="../gis/search/CSearch.cpp" line="89"/>
+        <location filename="../gis/search/CSearch.cpp" line="193"/>
         <source>and</source>
         <translation>und</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="374"/>
-        <location filename="../gis/search/CSearch.cpp" line="405"/>
+        <location filename="../gis/search/CSearch.cpp" line="385"/>
+        <location filename="../gis/search/CSearch.cpp" line="416"/>
         <source>with</source>
         <translation>mit</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="375"/>
-        <location filename="../gis/search/CSearch.cpp" line="406"/>
+        <location filename="../gis/search/CSearch.cpp" line="386"/>
+        <location filename="../gis/search/CSearch.cpp" line="417"/>
         <source>contains</source>
         <translation>enthält</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="376"/>
-        <location filename="../gis/search/CSearch.cpp" line="407"/>
+        <location filename="../gis/search/CSearch.cpp" line="387"/>
+        <location filename="../gis/search/CSearch.cpp" line="418"/>
         <source>containing</source>
         <translation>beinhaltet</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="377"/>
-        <location filename="../gis/search/CSearch.cpp" line="408"/>
+        <location filename="../gis/search/CSearch.cpp" line="388"/>
+        <location filename="../gis/search/CSearch.cpp" line="419"/>
         <source>without</source>
         <translation>ohne</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="378"/>
-        <location filename="../gis/search/CSearch.cpp" line="409"/>
+        <location filename="../gis/search/CSearch.cpp" line="389"/>
+        <location filename="../gis/search/CSearch.cpp" line="420"/>
         <source>shorter than</source>
         <translation>kürzer als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="379"/>
-        <location filename="../gis/search/CSearch.cpp" line="410"/>
+        <location filename="../gis/search/CSearch.cpp" line="390"/>
+        <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>smaller than</source>
         <translation>kleiner als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="380"/>
-        <location filename="../gis/search/CSearch.cpp" line="411"/>
+        <location filename="../gis/search/CSearch.cpp" line="391"/>
+        <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>under</source>
         <translation>unter</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="381"/>
-        <location filename="../gis/search/CSearch.cpp" line="412"/>
+        <location filename="../gis/search/CSearch.cpp" line="392"/>
+        <location filename="../gis/search/CSearch.cpp" line="423"/>
         <source>lower than</source>
         <translation>niedriger als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="382"/>
-        <location filename="../gis/search/CSearch.cpp" line="413"/>
+        <location filename="../gis/search/CSearch.cpp" line="393"/>
+        <location filename="../gis/search/CSearch.cpp" line="424"/>
         <source>earlier than</source>
         <translation>früher als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="383"/>
-        <location filename="../gis/search/CSearch.cpp" line="414"/>
+        <location filename="../gis/search/CSearch.cpp" line="394"/>
+        <location filename="../gis/search/CSearch.cpp" line="425"/>
         <source>before</source>
         <translation>vor dem</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="384"/>
-        <location filename="../gis/search/CSearch.cpp" line="415"/>
+        <location filename="../gis/search/CSearch.cpp" line="395"/>
+        <location filename="../gis/search/CSearch.cpp" line="426"/>
         <source>less than</source>
         <translation>weniger als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="386"/>
-        <location filename="../gis/search/CSearch.cpp" line="417"/>
+        <location filename="../gis/search/CSearch.cpp" line="397"/>
+        <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>longer than</source>
         <translation>länger als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="387"/>
-        <location filename="../gis/search/CSearch.cpp" line="418"/>
+        <location filename="../gis/search/CSearch.cpp" line="398"/>
+        <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>higher than</source>
         <translation>höher als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="388"/>
-        <location filename="../gis/search/CSearch.cpp" line="419"/>
+        <location filename="../gis/search/CSearch.cpp" line="399"/>
+        <location filename="../gis/search/CSearch.cpp" line="430"/>
         <source>bigger than</source>
         <translation>größer als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="389"/>
-        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <location filename="../gis/search/CSearch.cpp" line="400"/>
+        <location filename="../gis/search/CSearch.cpp" line="431"/>
         <source>greater than</source>
         <translation>mehr als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="390"/>
-        <location filename="../gis/search/CSearch.cpp" line="421"/>
+        <location filename="../gis/search/CSearch.cpp" line="401"/>
+        <location filename="../gis/search/CSearch.cpp" line="432"/>
         <source>above</source>
         <translation>höher als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="391"/>
-        <location filename="../gis/search/CSearch.cpp" line="422"/>
+        <location filename="../gis/search/CSearch.cpp" line="402"/>
+        <location filename="../gis/search/CSearch.cpp" line="433"/>
         <source>over</source>
         <translation>über</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="392"/>
-        <location filename="../gis/search/CSearch.cpp" line="423"/>
+        <location filename="../gis/search/CSearch.cpp" line="403"/>
+        <location filename="../gis/search/CSearch.cpp" line="434"/>
         <source>after</source>
         <translation>nach</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="393"/>
-        <location filename="../gis/search/CSearch.cpp" line="424"/>
+        <location filename="../gis/search/CSearch.cpp" line="404"/>
+        <location filename="../gis/search/CSearch.cpp" line="435"/>
         <source>later than</source>
         <translation>später als</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="395"/>
-        <location filename="../gis/search/CSearch.cpp" line="426"/>
+        <location filename="../gis/search/CSearch.cpp" line="406"/>
+        <location filename="../gis/search/CSearch.cpp" line="437"/>
         <source>regex</source>
         <translation>regex</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="397"/>
-        <location filename="../gis/search/CSearch.cpp" line="428"/>
+        <location filename="../gis/search/CSearch.cpp" line="408"/>
+        <location filename="../gis/search/CSearch.cpp" line="439"/>
         <source>equals</source>
         <translation>ist gleich</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="398"/>
-        <location filename="../gis/search/CSearch.cpp" line="429"/>
+        <location filename="../gis/search/CSearch.cpp" line="409"/>
+        <location filename="../gis/search/CSearch.cpp" line="440"/>
         <source>between</source>
         <translation>zwischen</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="405"/>
+        <location filename="../gis/search/CSearch.cpp" line="416"/>
         <source>example: attributes with dog</source>
         <translation>Beispiel: Attribute mit Hund</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="406"/>
+        <location filename="../gis/search/CSearch.cpp" line="417"/>
         <source>example: name contains bike</source>
         <translation>Beispiel: Name enthält Fahrrad</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="407"/>
+        <location filename="../gis/search/CSearch.cpp" line="418"/>
         <source>example: name containin bike</source>
         <translation>Beispiel: Name beinhaltet Fahrrad</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="408"/>
+        <location filename="../gis/search/CSearch.cpp" line="419"/>
         <source>example: name without water</source>
         <translation>Beispiel: Name ohne Wasser</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="409"/>
+        <location filename="../gis/search/CSearch.cpp" line="420"/>
         <source>example: shorter than 5km</source>
         <translation>Beispiel: kürzer als 5km</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="410"/>
+        <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>example: area smaller than 5m²</source>
         <translation>Beispiel: Fläche kleiner als 5m²</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="411"/>
+        <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>example: elevation under 1000ft</source>
         <translation>Beispiel: Höhe unter 1000ft</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="412"/>
+        <location filename="../gis/search/CSearch.cpp" line="423"/>
         <source>example: lower than 500m</source>
         <translation>Beispiel: niedriger als 500m</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="413"/>
+        <location filename="../gis/search/CSearch.cpp" line="424"/>
         <source>example: date earlier than 2015</source>
         <translation>Beispiel: Datum früher als 2015</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="414"/>
+        <location filename="../gis/search/CSearch.cpp" line="425"/>
         <source>example: date before 10.05.2017</source>
         <translation>Beispiel: Datum vor dem 10.05.2017</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="415"/>
+        <location filename="../gis/search/CSearch.cpp" line="426"/>
         <source>example: ascent less than 500m</source>
         <translation>Beispiel: Aufstieg weniger als 500m</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="416"/>
+        <location filename="../gis/search/CSearch.cpp" line="427"/>
         <source>example: D &lt; 3</source>
         <translation>Beispiel: D &lt; 3</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="417"/>
+        <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>example: distance longer than 20mi</source>
         <translation>Beispiel: Entfernung länger als 20mi</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="418"/>
+        <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>example: terrain higher than 2</source>
         <translation>Beispiel: Gelände höher als 2</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="419"/>
+        <location filename="../gis/search/CSearch.cpp" line="430"/>
         <source>example: area bigger than 50m²</source>
         <translation>Beispiel: Fläche größer als 50m²</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <location filename="../gis/search/CSearch.cpp" line="431"/>
         <source>example: descent greater than 3000ft</source>
         <translation>Beispiel: Abstieg mehr als 3000ft</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="421"/>
+        <location filename="../gis/search/CSearch.cpp" line="432"/>
         <source>example: above 50m</source>
         <translation>Beispiel: höher als 50m</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="422"/>
+        <location filename="../gis/search/CSearch.cpp" line="433"/>
         <source>example: elevation over 400m</source>
         <translation>Beispiel: Höhe über 400m</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="423"/>
+        <location filename="../gis/search/CSearch.cpp" line="434"/>
         <source>example: date after 2013</source>
         <translation>Beispiel: Datum nach 2013</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="424"/>
+        <location filename="../gis/search/CSearch.cpp" line="435"/>
         <source>example: date later than 2015</source>
         <translation>Beispiel: Datum später als 2013</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="425"/>
+        <location filename="../gis/search/CSearch.cpp" line="436"/>
         <source>example: T &gt; 4</source>
         <translation>Beispiel: T &gt; 4</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="426"/>
+        <location filename="../gis/search/CSearch.cpp" line="437"/>
         <source>example: size regex (regular|large)</source>
         <translation>Beispiel: Größe regex (regular|large)</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="427"/>
+        <location filename="../gis/search/CSearch.cpp" line="438"/>
         <source>example: size = micro</source>
         <translation>Beispiel: Größe = Mikro</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="428"/>
+        <location filename="../gis/search/CSearch.cpp" line="439"/>
         <source>example: activity equals bike</source>
         <translation>Beispiel: Aktivität ist gleich Fahrrad</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="429"/>
+        <location filename="../gis/search/CSearch.cpp" line="440"/>
         <source>example: length between 20km and 20mi</source>
         <translation>Beispiel: Länge zwischen 20km und 20mi</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="437"/>
+        <location filename="../gis/search/CSearch.cpp" line="448"/>
         <source>name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="438"/>
+        <location filename="../gis/search/CSearch.cpp" line="449"/>
         <source>full text</source>
         <translation>Volltext</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="439"/>
+        <location filename="../gis/search/CSearch.cpp" line="450"/>
         <source>elevation</source>
         <translation>Höhe</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="440"/>
+        <location filename="../gis/search/CSearch.cpp" line="451"/>
         <source>date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="441"/>
+        <location filename="../gis/search/CSearch.cpp" line="452"/>
         <source>comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="442"/>
+        <location filename="../gis/search/CSearch.cpp" line="453"/>
         <source>description</source>
         <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="445"/>
+        <location filename="../gis/search/CSearch.cpp" line="456"/>
         <source>area</source>
         <translation>Fläche</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="448"/>
+        <location filename="../gis/search/CSearch.cpp" line="459"/>
         <source>difficulty</source>
         <translation>Schwierigkeit</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="450"/>
+        <location filename="../gis/search/CSearch.cpp" line="461"/>
         <source>terrain</source>
         <translation>Gelände</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="451"/>
+        <location filename="../gis/search/CSearch.cpp" line="462"/>
         <source>T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="452"/>
+        <location filename="../gis/search/CSearch.cpp" line="463"/>
         <source>positive attributes</source>
         <translation>positive Eigenschaften</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="453"/>
+        <location filename="../gis/search/CSearch.cpp" line="464"/>
         <source>non-negated attributes</source>
         <translation>nicht negierte Attribute</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="454"/>
+        <location filename="../gis/search/CSearch.cpp" line="465"/>
         <source>negated attributes</source>
         <translation>negierte Attribute</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="455"/>
+        <location filename="../gis/search/CSearch.cpp" line="466"/>
         <source>size</source>
         <translation>Größe</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="456"/>
+        <location filename="../gis/search/CSearch.cpp" line="467"/>
         <source>GCCode</source>
         <translation>GCCode</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="457"/>
+        <location filename="../gis/search/CSearch.cpp" line="468"/>
         <source>GCName</source>
         <translation>GCName</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="462"/>
+        <location filename="../gis/search/CSearch.cpp" line="473"/>
         <source>distance</source>
         <translation>Entfernung</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="463"/>
+        <location filename="../gis/search/CSearch.cpp" line="474"/>
         <source>length</source>
         <translation>Länge</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="464"/>
+        <location filename="../gis/search/CSearch.cpp" line="475"/>
         <source>ascent</source>
         <translation>Anstieg</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="465"/>
+        <location filename="../gis/search/CSearch.cpp" line="476"/>
         <source>elevation gain</source>
         <translation>Höhengewinn</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="466"/>
+        <location filename="../gis/search/CSearch.cpp" line="477"/>
         <source>descent</source>
         <translation>Abstieg</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="467"/>
+        <location filename="../gis/search/CSearch.cpp" line="478"/>
         <source>min elevation</source>
         <translation>min Höhe</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="468"/>
+        <location filename="../gis/search/CSearch.cpp" line="479"/>
         <source>minimal elevation</source>
         <translation>minimale Höhe</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="469"/>
+        <location filename="../gis/search/CSearch.cpp" line="480"/>
         <source>max elevation</source>
         <translation>max Höhe</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="470"/>
+        <location filename="../gis/search/CSearch.cpp" line="481"/>
         <source>maximal elevation</source>
         <translation>maximale Höhe</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="471"/>
+        <location filename="../gis/search/CSearch.cpp" line="482"/>
         <source>max speed</source>
         <translation>max Geschwindigkeit</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="472"/>
+        <location filename="../gis/search/CSearch.cpp" line="483"/>
         <source>maximal speed</source>
         <translation>maximale Geschwindigkeit</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="473"/>
+        <location filename="../gis/search/CSearch.cpp" line="484"/>
         <source>min speed</source>
         <translation>min Geschwindigkeit</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="474"/>
+        <location filename="../gis/search/CSearch.cpp" line="485"/>
         <source>minimal speed</source>
         <translation>minimale Geschwindigkeit</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="475"/>
+        <location filename="../gis/search/CSearch.cpp" line="486"/>
         <source>average speed</source>
         <translation>Durchschnittsgeschwindigkeit</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="476"/>
+        <location filename="../gis/search/CSearch.cpp" line="487"/>
         <source>activity</source>
         <translation>Aktivität</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="477"/>
+        <location filename="../gis/search/CSearch.cpp" line="488"/>
         <source>total time</source>
         <translation>Gesamtzeit</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="478"/>
+        <location filename="../gis/search/CSearch.cpp" line="489"/>
         <source>duration</source>
         <translation>Dauer</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="479"/>
+        <location filename="../gis/search/CSearch.cpp" line="490"/>
         <source>time moving</source>
         <translation>Zeit in Bew</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="488"/>
+        <location filename="../gis/search/CSearch.cpp" line="499"/>
         <source>searches the name of the item. For Geocaches this is &quot;Name - GCCode&quot;.</source>
         <translation>sucht den Namen des Elements. Für Geocaches ist dies &quot;Name - GCCode&quot;.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="489"/>
+        <location filename="../gis/search/CSearch.cpp" line="500"/>
         <source>searches the full text</source>
         <translation>durchsucht den Volltext</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="490"/>
+        <location filename="../gis/search/CSearch.cpp" line="501"/>
         <source>searches the elevation. For items consisting of multiple points the minimum and the maximum is used</source>
         <translation>sucht die Höhe. Für Elemente, die aus mehreren Punkten bestehen, wird das Minimum und das Maximum verwendet.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="491"/>
+        <location filename="../gis/search/CSearch.cpp" line="502"/>
         <source>searches the Date</source>
         <translation>durchsucht das Datum</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="492"/>
+        <location filename="../gis/search/CSearch.cpp" line="503"/>
         <source>searches the Comment</source>
         <translation>durchsucht den Kommentar</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="493"/>
+        <location filename="../gis/search/CSearch.cpp" line="504"/>
         <source>searches the Description</source>
         <translation>durchsucht die Beschreibung</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="496"/>
+        <location filename="../gis/search/CSearch.cpp" line="507"/>
         <source>searches the area</source>
         <translation>durchsucht die Fläche</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="499"/>
+        <location filename="../gis/search/CSearch.cpp" line="510"/>
         <source>searches the difficulty rating of a geocache</source>
         <translation>durchsucht die Schwierigkeitsbewertung eines Geocache</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="500"/>
+        <location filename="../gis/search/CSearch.cpp" line="511"/>
         <source>searches the terrain rating of a geocache</source>
         <translation>durchsucht die Terrainbewertung eines Geocache</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="501"/>
+        <location filename="../gis/search/CSearch.cpp" line="512"/>
         <source>searches the translated meanings of the non-negated attributes (Those not crossed out)</source>
         <translation>durchsucht die übersetzten Bedeutungen der nicht verneinten Attribute (die nicht durchgestrichenen).</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="502"/>
+        <location filename="../gis/search/CSearch.cpp" line="513"/>
         <source>searches the translated meanings of the negated attributes (Those crossed out)</source>
         <translation>durchsucht die übersetzten Bedeutungen der negierten Attribute (die durchgestrichenen).</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="503"/>
+        <location filename="../gis/search/CSearch.cpp" line="514"/>
         <source>searches the size of a geocache. (micro, small, regular, large)</source>
         <translation>sucht die Größe eines Geocache. (Mikro, klein, normal, groß)</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="504"/>
+        <location filename="../gis/search/CSearch.cpp" line="515"/>
         <source>searches the GCCode of a geocache.</source>
         <translation>durchsucht den GCCode eines Geocache.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="505"/>
+        <location filename="../gis/search/CSearch.cpp" line="516"/>
         <source>searches the Name of a geocache.</source>
         <translation>sucht den Namen eines Geocache.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="510"/>
+        <location filename="../gis/search/CSearch.cpp" line="521"/>
         <source>searches the distance covered by a route or track</source>
         <translation>sucht die Strecke, die von einer Route oder einem Track zurückgelegt wird.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="511"/>
+        <location filename="../gis/search/CSearch.cpp" line="522"/>
         <source>searches the total ascent in a route or track</source>
         <translation>sucht den gesamten Anstieg in einer Route oder Spur.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="512"/>
+        <location filename="../gis/search/CSearch.cpp" line="523"/>
         <source>searches the total descent in a route or track</source>
         <translation>sucht den gesamten Abstieg in einer Route oder Spur.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="513"/>
+        <location filename="../gis/search/CSearch.cpp" line="524"/>
         <source>searches the minimal elevation in a route or track</source>
         <translation>sucht die minimale Höhe in einer Route oder Track.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="514"/>
+        <location filename="../gis/search/CSearch.cpp" line="525"/>
         <source>searches the maximal elevation in a route or track</source>
         <translation>sucht die maximale Höhe in einer Route oder einem Track.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="515"/>
+        <location filename="../gis/search/CSearch.cpp" line="526"/>
         <source>searches the maximal speed in a track</source>
         <translation>sucht die maximale Geschwindigkeit in einem Track</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="516"/>
+        <location filename="../gis/search/CSearch.cpp" line="527"/>
         <source>searches the minimal speed in a track</source>
         <translation>sucht die minimale Geschwindigkeit in einem Track</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="517"/>
+        <location filename="../gis/search/CSearch.cpp" line="528"/>
         <source>searches the average speed in a track</source>
         <translation>durchsucht die Durchschnittsgeschwindigkeit in einem Track</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="518"/>
+        <location filename="../gis/search/CSearch.cpp" line="529"/>
         <source>searches the activity of a route or track</source>
         <translation>sucht die Aktivität einer Route oder eines Tracks.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="519"/>
+        <location filename="../gis/search/CSearch.cpp" line="530"/>
         <source>searches the total time spent on a route or track</source>
         <translation>durchsucht die gesamte Zeit, die auf einer Route oder einem Track verbracht wurde.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="520"/>
+        <location filename="../gis/search/CSearch.cpp" line="531"/>
         <source>searches the time spent moving on a track</source>
         <translation>durchsucht die Zeit in Bewegung bei einem Track</translation>
     </message>
@@ -6686,9 +6705,8 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
         <translation>&lt;p&gt;Die regex-Suche verwendet folgende Syntax: https://perldoc.perl.org/perlre.html&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchExplanationDialog.cpp" line="73"/>
         <source>&lt;p&gt;Following keywords are available for searching:&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Folgende Schlüsselwörter stehen für die Suche zur Verfügung:&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;Folgende Schlüsselwörter stehen für die Suche zur Verfügung:&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -10425,6 +10443,11 @@ Dateiname: %1</translation>
         <source>Could not parse searchstring</source>
         <translation>Suchbegriff konnte nicht analysiert werden</translation>
     </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="189"/>
+        <source>Automatically set property</source>
+        <translation>Parameter automatisch setzen</translation>
+    </message>
 </context>
 <context>
     <name>IGridSetup</name>
@@ -11957,19 +11980,43 @@ sein</translation>
         <translation>Profil-Inhalt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="454"/>
         <source>BRouter-Web URL:</source>
-        <translation>Adresse (URL) von BRouter-Web</translation>
+        <translation type="vanished">Adresse (URL) von BRouter-Web</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="504"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="484"/>
         <source>Service-URL</source>
         <translation>Adresse (URL) des Routing Service</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="514"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="474"/>
         <source>Profile-URL</source>
         <translation>Adresse (URL) der Profile</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="457"/>
+        <source>BRouter-Config-URL</source>
+        <translation>BRouter Konfigurations URL</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="467"/>
+        <source>load Service and Profile-URL from BRouter-Config-URL</source>
+        <translation>Service und Profil URL aus dem BRouter Konfigurations URL heraus laden</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="494"/>
+        <source>BRouter-Version</source>
+        <translation>BRouter Version</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="534"/>
+        <source>BRouter-Binaries URL</source>
+        <translation>BRouter Installations URL</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="554"/>
+        <source>Segments Url</source>
+        <translation>Kartensegemente URL</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="564"/>
@@ -11982,42 +12029,42 @@ sein</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="584"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="598"/>
         <source>Profile directory</source>
         <translation>Profil-Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="594"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="608"/>
         <source>Segments directory</source>
         <translation>Segment-Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="604"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="618"/>
         <source>Custom Profiles dir</source>
         <translation>Verzeichnis für angepasste Profile</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="614"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="628"/>
         <source>Max Runtime</source>
         <translation>Maximale Laufzeit</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="624"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="638"/>
         <source>Number Threads</source>
         <translation>Anzahl Threads</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="634"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="648"/>
         <source>Java Options</source>
         <translation>Java Optionen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="644"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="584"/>
         <source>Bind to hostname only</source>
         <translation>Nur mit dem Hostnamen verbinden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="554"/>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="544"/>
         <source>Profiles Url</source>
         <translation>Profil-Url</translation>
     </message>
@@ -13346,9 +13393,9 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../gis/search/ISearchExplanationDialog.ui" line="30"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Text set in constructor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <location filename="../gis/search/ISearchExplanationDialog.ui" line="33"/>
+        <source>Following keywords are available for searching:</source>
+        <translation>Folgende Stichwörter können zum Suchen verwendet werden:</translation>
     </message>
 </context>
 <context>

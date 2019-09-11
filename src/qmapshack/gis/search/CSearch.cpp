@@ -36,6 +36,10 @@ CSearch::CSearch(QString searchstring)
         return;
     }
 
+    //Since in the shortened search the searchType may be at the beginning and for reasons stated below
+    //there must be a space before such a keyword, we prepend it here just to make sure.
+    searchstring.prepend(" ");
+
     //Detect which comparison keyword in order to later spilt the string at this word.
     QString searchTypeKeyword;
     for(const QString& key:keywordSearchTypeMap.keys())
@@ -77,10 +81,8 @@ CSearch::CSearch(QString searchstring)
                 break;
             }
         }
-        if(search.property == eSearchPropertyNoMatch)
-        {
-            syntaxError=true;
-        }
+        //Don't raise a syntax error yet, since the improve query might find the correct property
+
         //Everything after the Search Type keyword is the value, i.e. "date after 2019" would result in "2019"
         QString filterValueString = searchstring.section(searchTypeKeyword, 1, -1, QString::SectionCaseInsensitiveSeps).simplified();
         QString filterValueStringFirstPart = filterValueString.section(tr("and"), 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
@@ -217,6 +219,10 @@ CSearch::CSearch(QString searchstring)
         search.searchValue=filterValue;
     }
     improveQuery();
+    if(search.property == eSearchPropertyNoMatch)
+    {
+        syntaxError=true;
+    }
 }
 
 bool CSearch::getSearchResult(IGisItem *item)
@@ -301,26 +307,31 @@ void CSearch::improveQuery()
            search.searchValue.str1.contains("/s", Qt::CaseInsensitive))
         {
             search.property = eSearchPropertyRteTrkAvgSpeed;
+            autoDetectedProperty = true;
         }
         else if(search.searchValue.str1.compare("km", Qt::CaseInsensitive) == 0 ||
                 search.searchValue.str1.compare("mi", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyRteTrkDistance;
+            autoDetectedProperty = true;
         }
         else if(search.searchValue.str1.compare("m", Qt::CaseInsensitive) == 0 ||
                 search.searchValue.str1.compare("ft", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyGeneralElevation;
+            autoDetectedProperty = true;
         }
         else if(search.searchValue.str1.compare("s", Qt::CaseInsensitive) == 0 ||
                 search.searchValue.str1.compare("min", Qt::CaseInsensitive) == 0 ||
                 search.searchValue.str1.compare("h", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyRteTrkTimeMoving;
+            autoDetectedProperty = true;
         }
         else if(search.searchValue.str1.compare("SsE", Qt::CaseInsensitive) == 0)
         {
             search.property = eSearchPropertyGeneralDate;
+            autoDetectedProperty = true;
         }
     }
 

@@ -70,8 +70,7 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     explanation += tr("<p>The search can only convert following units:</p>");
     explanation += "<p>"+IUnit::getUnits().join(", ") + "</p>";
     explanation += tr("<p>The regex search uses this syntax: https://perldoc.perl.org/perlre.html</p>");
-    explanation += tr("<p>Following keywords are available for searching:</p>");
-    labelExplanation->setText(explanation);
+    textBrowserExplanation->setText(explanation);
     for(QString property : CSearch::getSearchTypeKeywords())
     {
         QListWidgetItem* item = new QListWidgetItem(property);

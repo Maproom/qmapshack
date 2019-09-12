@@ -26,7 +26,7 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     QString explanation = tr("<p>The underlying syntax of the search is 'property comparison value', e.g. 'name contains water'. "
                              "However some rules apply to make a search more intuitive.</p>");
     explanation += tr(  "<p>The searches are always exclusive, e.g. searching for a track 'elevation under 500m' will find "
-                        "tracks that are completly under 500m meters.</p>");
+                        "tracks that are completely under 500m meters.</p>");
     explanation += tr(  "<p>Following assumptions are made:</p>");
     explanation += "<ul>";
     explanation += "<li>";

@@ -45,7 +45,7 @@
 
 int CFileExt::cnt = 0;
 
-static inline bool isCompletlyOutside(const QPolygonF& poly, const QRectF &viewport)
+static inline bool isCompletelyOutside(const QPolygonF& poly, const QRectF &viewport)
 {
     qreal north =  -90.0 * DEG_TO_RAD;
     qreal south =   90.0 * DEG_TO_RAD;
@@ -1581,7 +1581,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             pData += p.decode(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, true, pData, pEnd);
 
             // skip points outside our current viewport
-            if(isCompletlyOutside(p.pixel, viewport))
+            if(isCompletelyOutside(p.pixel, viewport))
             {
                 continue;
             }
@@ -1611,7 +1611,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             pData += p.decode(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, false, pData, pEnd);
 
             // skip points outside our current viewport
-            if(isCompletlyOutside(p.pixel, viewport))
+            if(isCompletelyOutside(p.pixel, viewport))
             {
                 continue;
             }
@@ -1650,7 +1650,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             pData += p.decode2(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, false, pData, pEnd);
 
             // skip points outside our current viewport
-            if(isCompletlyOutside(p.pixel, viewport))
+            if(isCompletelyOutside(p.pixel, viewport))
             {
                 continue;
             }
@@ -1674,7 +1674,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
             pData += p.decode2(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, true, pData, pEnd);
 
             // skip points outside our current viewport
-            if(isCompletlyOutside(p.pixel, viewport))
+            if(isCompletelyOutside(p.pixel, viewport))
             {
                 continue;
             }

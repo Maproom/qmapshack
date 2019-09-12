@@ -227,7 +227,7 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
         energySet.powerMovingTimeRatio = (quint32)energySet.powerMovingTime / totalElapsedSecondsMoving;
     }
 
-    if(cntPositivePowerPoints) // For the moving points with positve force to the pedal
+    if(cntPositivePowerPoints) // For the moving points with positive force to the pedal
     {
         energySet.positivePedalForce /= cntPositivePowerPoints;
         energySet.positivePower /= cntPositivePowerPoints;

@@ -5063,22 +5063,22 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRouterBRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="590"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="595"/>
         <source>%1 not accessible</source>
         <translation>%1 ist nicht erreichbar</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="618"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="623"/>
         <source>%1 invalid result</source>
         <translation>ungültige Antwort von %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="651"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="656"/>
         <source>Error parsing online-config:</source>
         <translation>Fehler beim Auswerten der Online-konfiguration:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="656"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="661"/>
         <source>Network error:</source>
         <translation>Netzwerk Fehler:</translation>
     </message>
@@ -6636,7 +6636,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="28"/>
-        <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completly under 500m meters.&lt;/p&gt;</source>
+        <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completely under 500m meters.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Die Suchanfragen sind immer exklusiv, z.B. die Suche nach einem Track &apos;Höhe unter 500m&apos;, findet Tracks, die vollständig unter 500 m liegen.&lt;/p&gt;</translation>
     </message>
     <message>
@@ -8995,7 +8995,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="477"/>
-        <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positve Pedal Force.&lt;/p&gt;
+        <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positive Pedal Force.&lt;/p&gt;
 &lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Die durchschnittliche Trittfrequenz in U/min wird für die Berechnung der Pedalkraft benötigt.&lt;/p&gt;
 &lt;p&gt;Realistische Werte liegen zwischen 50 und 100 U/min.&lt;/p&gt;</translation>

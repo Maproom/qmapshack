@@ -5025,22 +5025,22 @@ n&apos;est pas une définition de système de coordonnées:
 <context>
     <name>CRouterBRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="590"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="595"/>
         <source>%1 not accessible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="618"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="623"/>
         <source>%1 invalid result</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="651"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="656"/>
         <source>Error parsing online-config:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="656"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="661"/>
         <source>Network error:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6595,7 +6595,7 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="28"/>
-        <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completly under 500m meters.&lt;/p&gt;</source>
+        <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completely under 500m meters.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8978,7 +8978,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="477"/>
-        <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positve Pedal Force.&lt;/p&gt;
+        <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positive Pedal Force.&lt;/p&gt;
 &lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>

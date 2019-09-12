@@ -5067,22 +5067,22 @@ is not a valid coordinate system definition:
 <context>
     <name>CRouterBRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="590"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="595"/>
         <source>%1 not accessible</source>
         <translation>%1 не доступно</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="618"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="623"/>
         <source>%1 invalid result</source>
         <translation>%1 неверный результат</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="651"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="656"/>
         <source>Error parsing online-config:</source>
         <translation>Ошибка при анализе онлайн конфигурации:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="656"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="661"/>
         <source>Network error:</source>
         <translation>Ошибка сети:</translation>
     </message>
@@ -6633,7 +6633,7 @@ For configuration you need to know your Android device&apos;s IP address or it&a
 <context>
     <name>CSearchExplanationDialog</name>
     <message>
-        <source>&lt;p&gt;The underlying syntax of the search is &quot;Property Comparison Value&quot;, i.e. &quot;name contains water&quot;. However there are measures in place to make searching more intuitive. (see below)&lt;/p&gt;&lt;p&gt;The searches are always exclusive, thus for a track &quot;elevation under 500m&quot; only shows tracks that are completly under 500m meters.&lt;/p&gt;&lt;p&gt;Following assumptions are made:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;If only one of two given numbers has a unit, the unit is assumed for both&lt;/li&gt;&lt;li&gt;Speed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date.&lt;/li&gt;&lt;li&gt;&apos;Date equals&apos; matches everything that is within 24h from the given date, thus normally the day typed.&lt;/li&gt;&lt;li&gt;If you enter no unit the default unit (what you see when viewing the property of the item) is used.&lt;/li&gt;&lt;/ul&gt;</source>
+        <source>&lt;p&gt;The underlying syntax of the search is &quot;Property Comparison Value&quot;, i.e. &quot;name contains water&quot;. However there are measures in place to make searching more intuitive. (see below)&lt;/p&gt;&lt;p&gt;The searches are always exclusive, thus for a track &quot;elevation under 500m&quot; only shows tracks that are completely under 500m meters.&lt;/p&gt;&lt;p&gt;Following assumptions are made:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;If only one of two given numbers has a unit, the unit is assumed for both&lt;/li&gt;&lt;li&gt;Speed units result in average speed, km and mi result in distance, m and ft in elevation, times in time moving, dates in date.&lt;/li&gt;&lt;li&gt;&apos;Date equals&apos; matches everything that is within 24h from the given date, thus normally the day typed.&lt;/li&gt;&lt;li&gt;If you enter no unit the default unit (what you see when viewing the property of the item) is used.&lt;/li&gt;&lt;/ul&gt;</source>
         <translation type="vanished">&lt;p&gt;Основной синтаксис поиска: &quot;свойство сравнение значение&quot;, т. е. &quot;имя содержит вода&quot;. Однако есть некоторые меры, чтобы сделать поиск более интуитивным (смотреть ниже).&lt;/p&gt;&lt;p&gt;Поиск всегда является эксклюзивным, поэтому для трека поиск &quot;высота ниже 500 м&quot; найдет только те треки, которые полностью находятся ниже 500 м.&lt;/p&gt;&lt;p&gt;Сделаны следующие предположения:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Если только одно из двух заданных чисел имеет единицу, данная единица принимается для обоих чисел&lt;/li&gt;&lt;li&gt;Если задана строка поиска в краткой форме &quot;сравнение значение&quot;, то &quot;свойство&quot; выводится из &quot;значения&quot; и его единицы измерения: единицы измерения скорости: средняя скорость, км и mi: расстояние, м и ft: высота, время: время движения, дата: дата.&lt;/li&gt;&lt;li&gt;&quot;Дата равна&quot; соответствует всему, что находится в пределах 24 часов от данной даты, таким образом, это обычно записанный день.&lt;/li&gt;&lt;li&gt;Если вы не вводите единицу измерения, тогда используется единица измерения по умолчанию (та, что вы видите при просмотре свойств элемента).&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
@@ -6643,7 +6643,7 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="28"/>
-        <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completly under 500m meters.&lt;/p&gt;</source>
+        <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completely under 500m meters.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Поиск всегда является эксклюзивным, поэтому для трека поиск &quot;высота ниже 500 м&quot; найдет только те треки, которые полностью находятся ниже 500 м.&lt;/p&gt;</translation>
     </message>
     <message>
@@ -9055,7 +9055,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="477"/>
-        <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positve Pedal Force.&lt;/p&gt;
+        <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positive Pedal Force.&lt;/p&gt;
 &lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Средняя каденция педалей в оборотах/мин необходима для расчета силы на педали.&lt;/p&gt;
 &lt;p&gt;Реалистичные значения находятся в диапазоне от 50 до 100 об/мин.&lt;/p&gt;</translation>

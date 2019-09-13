@@ -1,3 +1,11 @@
+V1.XX.X
+[QMS-5] App crashes on using the "Change Start Point" filter
+
+
+
+------------------------------------------------------------------------
+---------Restart issue numbering because of migration to GitHub---------
+------------------------------------------------------------------------
 V 1.13.2
 [Issue #446] Advanced Filtering System
 [Issue #491] Skip saving of geo search

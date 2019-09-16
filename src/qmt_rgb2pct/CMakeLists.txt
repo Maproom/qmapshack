@@ -9,21 +9,10 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
 ###############################################################################################
-# Setup application name and version tags
+# Setup application name
 ###############################################################################################
 
 set(APPLICATION_NAME qmt_rgb2pct)
-set(RGB2PCT_VERSION_MAJOR 1)
-set(RGB2PCT_VERSION_MINOR 0)
-set(RGB2PCT_VERSION_PATCH 0)
-
-add_definitions(
-    -DVER_MAJOR=${RGB2PCT_VERSION_MAJOR}
-    -DVER_MINOR=${RGB2PCT_VERSION_MINOR}
-    -DVER_STEP=${RGB2PCT_VERSION_PATCH}
-    -DVER_TWEAK=${VERSION_SUFFIX}
-    -DAPPLICATION_NAME=${APPLICATION_NAME}
-)
 
 ###############################################################################################
 # All source files needed to compile
@@ -91,6 +80,14 @@ endif(APPLE)
 # Build the executable and define necessary libraries.
 ###############################################################################################
 add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
+
+target_compile_definitions(${APPLICATION_NAME} PUBLIC
+    -DVER_MAJOR=${PROJECT_VERSION_MAJOR}
+    -DVER_MINOR=${PROJECT_VERSION_MINOR}
+    -DVER_STEP=${PROJECT_VERSION_PATCH}
+    -DVER_TWEAK=${VERSION_SUFFIX}
+    -DAPPLICATION_NAME=${APPLICATION_NAME}
+)
 
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Core

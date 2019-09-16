@@ -1,17 +1,6 @@
 
 
 set(APPLICATION_NAME qmt_map2jnx)
-set(MAP2JNX_VERSION_MAJOR 1)
-set(MAP2JNX_VERSION_MINOR 0)
-set(MAP2JNX_VERSION_PATCH 0)
-
-add_definitions(
-    -DVER_MAJOR=${MAP2JNX_VERSION_MAJOR}
-    -DVER_MINOR=${MAP2JNX_VERSION_MINOR}
-    -DVER_STEP=${MAP2JNX_VERSION_PATCH}
-    -DVER_TWEAK=${VERSION_SUFFIX}
-    -DAPPLICATION_NAME=${APPLICATION_NAME}
-)
 
 
 #if you don't want the full compiler output, remove the following line
@@ -41,6 +30,14 @@ endif(WIN32)
 
 #list all source files here
 ADD_EXECUTABLE( ${APPLICATION_NAME} ${SRCS} ${HDRS})
+
+target_compile_definitions(${APPLICATION_NAME} PUBLIC
+    -DVER_MAJOR=${PROJECT_VERSION_MAJOR}
+    -DVER_MINOR=${PROJECT_VERSION_MINOR}
+    -DVER_STEP=${PROJECT_VERSION_PATCH}
+    -DVER_TWEAK=${VERSION_SUFFIX}
+    -DAPPLICATION_NAME=${APPLICATION_NAME}
+)
 
 #add definitions, compiler switches, etc.
 IF(UNIX)

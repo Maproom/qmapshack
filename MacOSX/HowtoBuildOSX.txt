@@ -32,7 +32,7 @@ sudo port install qt5-qttranslations
 sudo port install qt5-qtwebengine
 sudo port install gdal
 sudo port install mercurial
-sudo port install proj4
+sudo port install proj6
 sudo port install quazip
 
 Download the brew package manager if you not already have:
@@ -70,7 +70,7 @@ So you need to build the binary first with the commands:
 
 mkdir build_QMapShack
 cd build_QMapShack
-cmake ../QMapShack -DCMAKE_PREFIX_PATH=/opt/local/libexec/qt5 -DCMAKE_OSX_DEPLOYMENT_TARGET=10.12 -DROUTINO_DEV_PATH=... -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DQUAZIP_INCLUDE_DIR=/opt/local/include/quazip5 -DQUAZIP_LIBRARIES=/opt/local/lib/libquazip5.1.0.0.dylib -DPROJ4_ROOT=/opt/local/lib/proj5 -DPROJ4_INCLUDE_DIRS=/opt/local/lib/proj5/include -DPROJ4_LIBRARIES=/opt/local/lib/proj5/lib/libproj.13.dylib
+cmake ../QMapShack -DCMAKE_PREFIX_PATH=/opt/local/libexec/qt5 -DCMAKE_OSX_DEPLOYMENT_TARGET=10.12 -DROUTINO_DEV_PATH=... -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DQUAZIP_INCLUDE_DIR=/opt/local/include/quazip5 -DQUAZIP_LIBRARIES=/opt/local/lib/libquazip5.1.0.0.dylib -DPROJ4_ROOT=/opt/local/lib/proj6 -DPROJ4_INCLUDE_DIRS=/opt/local/lib/proj6/include -DPROJ4_LIBRARIES=/opt/local/lib/proj6/lib/libproj.15.dylib
 make
 
 "QMapShack" is the relative path to where you have checked out QMapShack.
@@ -78,7 +78,7 @@ make
 The passed parameter are more or less self describing:
 
 CMAKE_PREFIX_PATH path to used libraries by QMapShack, QT5 needs to be set by default.
-CMAKE_OSX_DEPLOYMENT_TARGET the target system of the build (10.12 is the Sierra OS-X, see https://en.wikipedia.org/wiki/OS_X#Versions for a full list)
+CMAKE_OSX_DEPLOYMENT_TARGET the target system of the build (10.12 is the Sierra OS-X, see https://en.wikipedia.org/wiki/OS_X#Versions for a full list, best results when set to the OS X of build machine)
 ROUTINO_DEV_PATH  The path to the routino library (is the same as you set previously with ROUTINO_LIB_DIR)
 CMAKE_BUILD_TYPE "Debug" or "Release" depending what you want
 DCMAKE_VERBOSE_MAKEFILE enable verbose output from Makefile builds
@@ -96,7 +96,7 @@ variables set:
 
 QT_DIR=...            (absolute path to the qt5 library base package, same as in CMAKE_PREFIX_PATH, z.B. /opt/local/libexec/qt5 )
 GDAL_DIR=...          (absolute path to the gdal library base package, z.B. /opt/local )
-PROJ_DIR=...          (absolute path to the proj4 library base package, z.B. /opt/local/lib/proj5)
+PROJ_DIR=...          (absolute path to the proj4 library base package, z.B. /opt/local/lib/proj6)
 ROUTINO_LIB_DIR=..    (absolute path to the routino library base package, same as ROUTINO_LIB_DIR / ROUTINO_DEV_PATH, z.B. /Users/.../Desktop/ROUTINO_BUILD )
 QUAZIP_LIB_DIR=..     (absolute path to the Quazip library base package)
 BUILD_DIR=..          (absolute path to the QMapShack build directory, the created directory "build_QMapShack" for the cmake build)

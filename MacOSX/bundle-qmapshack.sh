@@ -61,7 +61,7 @@ function copyExtTools {
 function adjustLinkingExtTools {
     for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
     do
-        adjustLinkQt $F "/usr/local/"
+        adjustLinkQt $F "/opt/local/"
     done
 }
 

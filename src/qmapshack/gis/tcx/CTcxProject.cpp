@@ -31,13 +31,23 @@
 CTcxProject::CTcxProject(const QString &filename, CGisListWks * parent)
     : IGisProject(eTypeTcx, filename, parent)
 {
+    setup();
+}
+
+CTcxProject::CTcxProject(const QString &filename, IDevice * parent)
+    : IGisProject(eTypeGpx, filename, parent)
+{
+    setup();
+}
+
+void CTcxProject::setup()
+{
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/TcxProject.png"));
     blockUpdateItems(true);
     loadTcx(filename);
     blockUpdateItems(false);
     setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
 }
-
 
 void CTcxProject::loadTcx(const QString& filename)
 {

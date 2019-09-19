@@ -21,6 +21,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
+#include "gis/tcx/CTcxProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 
 
@@ -54,9 +55,9 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
     const QDomElement& xmlDevice    = dom.documentElement();
     const QDomNode& xmlModel        = xmlDevice.namedItem("Model");
 
-    id              = xmlDevice.namedItem("Id").toElement().text();
-    description     = xmlModel.namedItem("Description").toElement().text();
-    partno          = xmlModel.namedItem("PartNumber").toElement().text();
+    id              = xmlDevice.namedItem("Id").toElement().text().trimmed();
+    description     = xmlModel.namedItem("Description").toElement().text().trimmed();
+    partno          = xmlModel.namedItem("PartNumber").toElement().text().trimmed();
 
     setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(description).arg(model));
     setToolTip(CGisListWks::eColumnName, QString("%1 (%2, %3)").arg(description).arg(partno).arg(model));
@@ -73,35 +74,40 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
         const QDomNode& xmlLocation = xmlFile.namedItem("Location");
         const QDomNode& xmlPath     = xmlLocation.namedItem("Path");
 
-        QString name = xmlName.toElement().text();
+        QString name = xmlName.toElement().text().trimmed();
+
         if(name == "GPSData")
         {
-            pathGpx = xmlPath.toElement().text();
+            pathGpx = xmlPath.toElement().text().trimmed();
         }
         else if(name == "GeotaggedPhotos")
         {
-            pathPictures = xmlPath.toElement().text();
+            pathPictures = xmlPath.toElement().text().trimmed();
         }
         else if(name == "GeocachePhotos")
         {
-            pathSpoilers = xmlPath.toElement().text();
+            pathSpoilers = xmlPath.toElement().text().trimmed();
         }
         else if(name == "FIT_TYPE_4")
         {
-            pathActivities = xmlPath.toElement().text();
+            pathActivities = xmlPath.toElement().text().trimmed();
         }
         else if(name == "FIT_TYPE_6")
         {
             // courses
-            pathCourses = xmlPath.toElement().text();
+            pathCourses = xmlPath.toElement().text().trimmed();
         }
         else if(name == "FIT_TYPE_8")
         {
-            pathLocations = xmlPath.toElement().text();
+            pathLocations = xmlPath.toElement().text().trimmed();
         }
         else if(name == "Adventures")
         {
-            pathAdventures = xmlPath.toElement().text();
+            pathAdventures = xmlPath.toElement().text().trimmed();
+        }
+        else if(name == "FitnessCourses")
+        {
+            pathTcx = xmlPath.toElement().text().trimmed();
         }
     }
 
@@ -112,6 +118,7 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
     qDebug() << dir.absoluteFilePath(pathCourses);
     qDebug() << dir.absoluteFilePath(pathLocations);
     qDebug() << dir.absoluteFilePath(pathAdventures);
+    qDebug() << dir.absoluteFilePath(pathTcx);
 
 
     if(!dir.exists(pathGpx))
@@ -130,10 +137,13 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
     {
         dir.mkpath(pathAdventures);
     }
+    if(!pathTcx.isEmpty() && !dir.exists(pathTcx))
+    {
+        dir.mkpath(pathTcx);
+    }
 
-
-    this->createProjectsFromFiles(pathGpx, "gpx");
-    this->createProjectsFromFiles(pathGpx + "/Current", "gpx");
+    createProjectsFromFiles(pathGpx, "gpx");
+    createProjectsFromFiles(pathGpx + "/Current", "gpx");
 
     QDir dirArchive(dir.absoluteFilePath(pathGpx + "/Archive"));
     if(dirArchive.exists() && (dirArchive.entryList(QStringList("*.gpx")).count() != 0))
@@ -141,9 +151,13 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
         archive = new CDeviceGarminArchive(dir.absoluteFilePath(pathGpx + "/Archive"), this);
     }
 
-    this->createProjectsFromFiles(pathActivities, "fit");
-    this->createProjectsFromFiles(pathCourses, "fit");
-    this->createProjectsFromFiles(pathLocations, "fit");
+    createProjectsFromFiles(pathActivities, "fit");
+    createProjectsFromFiles(pathCourses, "fit");
+    createProjectsFromFiles(pathLocations, "fit");
+    if(!pathTcx.isEmpty())
+    {
+        createProjectsFromFiles(pathTcx, "tcx");
+    }
 }
 
 void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnding)
@@ -162,6 +176,10 @@ void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnd
         if (fileEnding == "gpx")
         {
             project = new CGpxProject(filename, this);
+        }
+        if (fileEnding == "tcx")
+        {
+            project = new CTcxProject(filename, this);
         }
 
         if(!project->isValid())

@@ -50,6 +50,7 @@ private:
     QString pathCourses       = "Garmin/Courses";
     QString pathLocations     = "Garmin/Locations";
     QString pathAdventures; // no default
+    QString pathTcx;        // no default
 
     int cntImages = 0;
 

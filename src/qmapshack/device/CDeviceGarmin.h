@@ -39,6 +39,12 @@ public:
 private:
     void createProjectsFromFiles(QString subdirecoty, QString fileEnding);
     void createAdventureFromProject(IGisProject * project, const QString &gpxFilename);
+    void insertCopyOfProjectAsGpx(IGisProject * project);
+    void insertCopyOfProjectAsTcx(IGisProject * project);
+
+    void reorderProjects(IGisProject * project);
+    QString createFileName(IGisProject * project, const QString& path, const QString &suffix);
+    QString simplifiedName(IGisProject * project);
 
     QString id;
     QString partno;

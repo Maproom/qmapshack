@@ -17,10 +17,12 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CSelectCopyAction.h"
 #include "version.h"
 
 #include <QtWidgets>
@@ -38,6 +40,30 @@ CTcxProject::CTcxProject(const QString &filename, IDevice * parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
     setup();
+}
+
+CTcxProject::CTcxProject(const QString &filename, const IGisProject * project, IDevice * parent)
+    : IGisProject(eTypeGpx, filename, parent)
+{
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/TcxProject.png"));
+    *(IGisProject*)this = *project;
+    blockUpdateItems(project->blockUpdateItems());
+
+    int res     = CSelectCopyAction::eResultNone;
+    const int N = project->childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
+        if(item)
+        {
+            insertCopyOfItem(item, NOIDX, res);
+        }
+    }
+
+    blockUpdateItems(false);
+    setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
+    setToolTip(CGisListWks::eColumnName, getInfo());
+    valid = true;
 }
 
 void CTcxProject::setup()
@@ -350,10 +376,14 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
             QAbstractButton* pButtonActivity = courseOrActivityMsgBox.addButton(tr("Activity"), QMessageBox::AcceptRole);
             QAbstractButton* pButtonCancel = courseOrActivityMsgBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
 
-            CTcxProject *CTcxProjectRef = dynamic_cast<CTcxProject*>(&project);
-            if (nullptr != CTcxProjectRef) // if a TCX project
+            CTcxProject *tcx = dynamic_cast<CTcxProject*>(&project);
+            if (nullptr != tcx) // if a TCX project
             {
-                if (!CTcxProjectRef->trackTypes.contains(trkItem->getKey().item))   // if this is an added track
+                if(dynamic_cast<IDevice*>(tcx->parent()) != nullptr)
+                {
+                    courseTrks << trkItem;
+                }
+                else if (!tcx->trackTypes.contains(trkItem->getKey().item))   // if this is an added track
                 {
                     courseOrActivityMsgBox.exec();
 
@@ -373,11 +403,11 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
                 }
                 else
                 {
-                    if (CTcxProjectRef->trackTypes.value(trkItem->getKey().item) == eCourse)    //if a course
+                    if (tcx->trackTypes.value(trkItem->getKey().item) == eCourse)    //if a course
                     {
                         courseTrks << trkItem;
                     }
-                    if (CTcxProjectRef->trackTypes.value(trkItem->getKey().item) == eActivity)   // if an activity
+                    if (tcx->trackTypes.value(trkItem->getKey().item) == eActivity)   // if an activity
                     {
                         activityTrks << trkItem;
                     }

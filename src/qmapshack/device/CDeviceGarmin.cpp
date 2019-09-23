@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "device/CDeviceGarmin.h"
 #include "device/CDeviceGarminArchive.h"
 #include "gis/CGisListWks.h"
@@ -23,7 +24,6 @@
 #include "gis/gpx/CGpxProject.h"
 #include "gis/tcx/CTcxProject.h"
 #include "gis/wpt/CGisItemWpt.h"
-
 
 #include <QtWidgets>
 #include <QtXml>
@@ -195,11 +195,83 @@ CDeviceGarmin::~CDeviceGarmin()
 
 void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
 {
-    QString name = project->getName();
-    name = name.remove(QRegExp("[^A-Za-z0-9_]"));
+    if(description.toUpper().startsWith("EDGE 5"))
+    {
+        insertCopyOfProjectAsTcx(project);
+    }
+    else
+    {
+        insertCopyOfProjectAsGpx(project);
+    }
+}
 
-    QDir dirGpx = dir.absoluteFilePath(pathGpx);
-    QString filename = dirGpx.absoluteFilePath(name + ".gpx");
+void CDeviceGarmin::reorderProjects(IGisProject *project)
+{
+    // move new project to top of any sub-folder/sub-device item
+    int newIdx      = NOIDX;
+    const int myIdx = childCount() - 1;
+    for(int i = myIdx - 1; i >= 0; i--)
+    {
+        IDevice * device = dynamic_cast<IDevice*>(child(i));
+        if(0 == device)
+        {
+            break;
+        }
+
+        newIdx = i;
+    }
+
+    if(newIdx != NOIDX)
+    {
+        takeChild(myIdx);
+        insertChild(newIdx, project);
+    }
+}
+
+QString CDeviceGarmin::simplifiedName(IGisProject * project)
+{
+    QString name = project->getName();
+    return name.remove(QRegExp("[^A-Za-z0-9_]"));
+}
+
+QString CDeviceGarmin::createFileName(IGisProject * project, const QString& path, const QString& suffix)
+{
+    QDir dirTarget = dir.absoluteFilePath(path);
+    return dirTarget.absoluteFilePath(simplifiedName(project) + suffix);
+}
+
+void CDeviceGarmin::insertCopyOfProjectAsTcx(IGisProject * project)
+{
+    QString filename = createFileName(project, pathTcx, ".tcx");
+
+    if(testForExternalProject(filename))
+    {
+        return;
+    }
+
+    CTcxProject * tcx = new CTcxProject(filename, project, this);
+    if(!tcx->isValid())
+    {
+        delete tcx;
+        return;
+    }
+
+    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CDeviceGarmin");
+    if(!tcx->save())
+    {
+        delete tcx;
+        CCanvas::restoreOverrideCursor("~CSelectProjectDialog");
+        return;
+    }
+    CCanvas::restoreOverrideCursor("~CSelectProjectDialog");
+
+    // move new project to top of any sub-folder/sub-device item
+    reorderProjects(tcx);
+}
+
+void CDeviceGarmin::insertCopyOfProjectAsGpx(IGisProject * project)
+{
+    QString filename = createFileName(project, pathGpx, ".gpx");
 
     if(testForExternalProject(filename))
     {
@@ -219,27 +291,10 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
         return;
     }
 
-    createAdventureFromProject(project, pathGpx + "/" + name + ".gpx");
+    createAdventureFromProject(project, pathGpx + "/" + simplifiedName(project) + ".gpx");
 
     // move new project to top of any sub-folder/sub-device item
-    int newIdx      = NOIDX;
-    const int myIdx = childCount() - 1;
-    for(int i = myIdx - 1; i >= 0; i--)
-    {
-        IDevice * device = dynamic_cast<IDevice*>(child(i));
-        if(0 == device)
-        {
-            break;
-        }
-
-        newIdx = i;
-    }
-
-    if(newIdx != NOIDX)
-    {
-        takeChild(myIdx);
-        insertChild(newIdx, gpx);
-    }
+    reorderProjects(gpx);
 }
 
 void CDeviceGarmin::saveImages(CGisItemWpt& wpt)

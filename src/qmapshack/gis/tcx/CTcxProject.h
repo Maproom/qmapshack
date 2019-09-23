@@ -28,6 +28,7 @@ class CTcxProject : public IGisProject
 public:
     CTcxProject(const QString &filename, CGisListWks * parent);
     CTcxProject(const QString &filename, IDevice * parent);
+    CTcxProject(const QString &filename, const IGisProject * project, IDevice * parent);
     virtual ~CTcxProject() = default;
 
     const QString getFileDialogFilter() const override

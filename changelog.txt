@@ -1,7 +1,7 @@
 V1.XX.X
 [QMS-5] App crashes on using the "Change Start Point" filter
 [QMS-12] Unify versions of all QMapShack tools
-
+[QMS-13] Add support for Garmin Edge 500
 
 ------------------------------------------------------------------------
 ---------Restart issue numbering because of migration to GitHub---------

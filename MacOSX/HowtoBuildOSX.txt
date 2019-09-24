@@ -17,7 +17,8 @@ required:
 - qmapshack
 - cmake (version 3.x and above)
 - svn command line tool (for routino)
-- mercurial (hg) command line tool
+- git (git) command line tool
+- Xcode and Xcode Command Line Tools
 
 Because brew nowadays does not include qt5 with mysql the best way is to install most of the required packages by using MacPorts and some by using brew.
 When your build machine runs Mojave 10.14 QMapShack will also need 10.14 to run. For older OS X build system has to be an older version too.
@@ -40,7 +41,6 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 After istalling brew use it to install the required packages:
 brew install svn
-brew install hg
 
 The routino library source must be downloaded from the SVN repository
 "http://routino.org/svn/trunk/" built manually.
@@ -62,7 +62,7 @@ Script call:
 Building QMapShack and QMapTool
 *******************************
 To get the source of QMapShack:
-hg clone https://bitbucket.org/maproom/qmapshack
+git clone https://github.com/Maproom/qmapshack.git QMapShack
 
 In the same directory as this how to is the bash script "bundle-all.sh". The script 
 does all steps for packaging the application but not building the binary.

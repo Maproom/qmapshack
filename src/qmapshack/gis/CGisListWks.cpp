@@ -1441,12 +1441,14 @@ void CGisListWks::slotDeleteProject()
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(nullptr != project)
         {
-            CCanvas::setOverrideCursor(Qt::ArrowCursor, "slotDeleteProject");
-            int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete project..."), tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
-            CCanvas::restoreOverrideCursor("slotDeleteProject");
-            if(res != QMessageBox::Ok)
             {
-                continue;
+                CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
+                int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete project..."), tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+
+                if(res != QMessageBox::Ok)
+                {
+                    continue;
+                }
             }
 
 

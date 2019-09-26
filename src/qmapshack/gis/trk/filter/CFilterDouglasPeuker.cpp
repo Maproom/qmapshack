@@ -46,7 +46,6 @@ CFilterDouglasPeuker::~CFilterDouglasPeuker()
 
 void CFilterDouglasPeuker::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterDouglasPeuker");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     trk.filterReducePoints(spinBox->value()/IUnit::self().basefactor);
-    CCanvas::restoreOverrideCursor("CFilterDouglasPeuker");
 }

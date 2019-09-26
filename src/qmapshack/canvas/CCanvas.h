@@ -60,7 +60,7 @@ public:
     CCanvas(QWidget * parent, const QString& name);
     virtual ~CCanvas();
 
-    static void setOverrideCursor(const QCursor &cursor, const QString&);
+    static void setOverrideCursor(const QCursor &cursor, const QString&src);
     static void restoreOverrideCursor(const QString &src);
     static void changeOverrideCursor(const QCursor& cursor, const QString &src);
 
@@ -292,6 +292,25 @@ private:
 
     QTextBrowser * labelHelp = nullptr;
 };
+
+class CCanvasCursorLock
+{
+public:
+    CCanvasCursorLock(const QCursor &cursor, const QString& src)
+        : src(src)
+    {
+        CCanvas::setOverrideCursor(cursor, src);
+    }
+
+    ~CCanvasCursorLock()
+    {
+        CCanvas::restoreOverrideCursor(src);
+    }
+
+private:
+    const QString src;
+};
+
 
 Q_DECLARE_METATYPE(CCanvas*)
 

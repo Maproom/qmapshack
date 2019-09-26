@@ -599,7 +599,7 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
 
         if(isReadOnly() && !readOnly && !doNotAsk)
         {
-            CCanvas::setOverrideCursor(Qt::ArrowCursor, "setReadOnlyMode");
+            CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
 
             QCheckBox * checkBox = new QCheckBox(tr("Never ask again."), 0);
             QString msg = tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press 'Ok'.").arg(getName());
@@ -608,7 +608,6 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
             box.setCheckBox(checkBox);
             int res = box.exec();
 
-            CCanvas::restoreOverrideCursor("setReadOnlyMode");
 
             if(res != QMessageBox::Ok)
             {

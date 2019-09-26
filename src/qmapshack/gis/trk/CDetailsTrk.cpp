@@ -374,7 +374,7 @@ void CDetailsTrk::updateData()
     {
         return;
     }
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CDetailsTrk::updateData");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     originator = true;
 
     bool isReadOnly = trk.isReadOnly();
@@ -533,7 +533,6 @@ void CDetailsTrk::updateData()
 
     enableTabFilter();
     originator = false;
-    CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");
 }
 
 void CDetailsTrk::setMouseFocus(const CTrackData::trkpt_t * pt)

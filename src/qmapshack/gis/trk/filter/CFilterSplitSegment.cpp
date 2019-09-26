@@ -32,7 +32,6 @@ CFilterSplitSegment::CFilterSplitSegment(CGisItemTrk &trk, QWidget *parent)
 
 void CFilterSplitSegment::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterSplitSegment");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     trk.filterSplitSegment();
-    CCanvas::restoreOverrideCursor("CFilterSplitSegment");
 }

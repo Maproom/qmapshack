@@ -42,7 +42,6 @@ CFilterMedian::~CFilterMedian()
 
 void CFilterMedian::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterMedian");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     trk.filterSmoothProfile(spinBox->value());
-    CCanvas::restoreOverrideCursor("CFilterMedian");
 }

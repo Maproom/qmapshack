@@ -256,14 +256,15 @@ void CDeviceGarmin::insertCopyOfProjectAsTcx(IGisProject * project)
         return;
     }
 
-    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CDeviceGarmin");
-    if(!tcx->save())
     {
-        delete tcx;
-        CCanvas::restoreOverrideCursor("~CSelectProjectDialog");
-        return;
+        CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
+        if(!tcx->save())
+        {
+            delete tcx;
+            CCanvas::restoreOverrideCursor("~CSelectProjectDialog");
+            return;
+        }
     }
-    CCanvas::restoreOverrideCursor("~CSelectProjectDialog");
 
     // move new project to top of any sub-folder/sub-device item
     reorderProjects(tcx);

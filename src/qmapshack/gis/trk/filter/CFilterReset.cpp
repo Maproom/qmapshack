@@ -32,7 +32,6 @@ CFilterReset::CFilterReset(CGisItemTrk &trk, QWidget *parent)
 
 void CFilterReset::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterReset");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     trk.filterReset();
-    CCanvas::restoreOverrideCursor("CFilterReset");
 }

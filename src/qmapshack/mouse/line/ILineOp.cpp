@@ -234,7 +234,7 @@ void ILineOp::finalizeOperation(qint32 idx)
 
     if(parentHandler->useAutoRouting())
     {
-        CCanvas::setOverrideCursor(Qt::WaitCursor, "ILineOp::finalizeOperation");
+        CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
         if(idx > 0)
         {
             tryRouting(points[idx - 1], points[idx]);
@@ -243,7 +243,6 @@ void ILineOp::finalizeOperation(qint32 idx)
         {
             tryRouting(points[idx], points[idx + 1]);
         }
-        CCanvas::restoreOverrideCursor("ILineOp::finalizeOperation");
     }
     else if(parentHandler->useVectorRouting() || parentHandler->useTrackRouting())
     {

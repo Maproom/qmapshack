@@ -350,7 +350,7 @@ void CCanvas::buildHelpText()
     labelHelp->ensureCursorVisible();
 }
 
-void CCanvas::setOverrideCursor(const QCursor &cursor, const QString&)
+void CCanvas::setOverrideCursor(const QCursor &cursor, const QString& src)
 {
 //    qDebug() << "setOverrideCursor" << src;
     QApplication::setOverrideCursor(cursor);

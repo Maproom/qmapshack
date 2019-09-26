@@ -779,9 +779,8 @@ void CGisListDB::slotDelLostFound()
         return;
     }
 
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "slotDelLostFound");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     folder->clear();
-    CCanvas::restoreOverrideCursor("slotDelLostFound");
 
     IDBFolderSql * dbfolder = folder->getDBFolder();
     if(dbfolder)
@@ -800,7 +799,7 @@ void CGisListDB::slotDelLostFoundItem()
         return;
     }
 
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "slotDelLostFoundItem");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     QSet<CDBFolderLostFound*> folders;
     QList<QTreeWidgetItem*> delItems;
     QList<QTreeWidgetItem*> items = selectedItems();
@@ -836,7 +835,6 @@ void CGisListDB::slotDelLostFoundItem()
             dbfolder->announceChange();
         }
     }
-    CCanvas::restoreOverrideCursor("slotDelLostFoundItem");
 }
 
 

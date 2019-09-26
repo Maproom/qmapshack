@@ -115,23 +115,24 @@ void CGisWorkspace::postEventForWks(QEvent * event)
 void CGisWorkspace::loadGisProject(const QString& filename)
 {
     // add project to workspace
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "loadGisProject");
-    treeWks->blockSignals(true);
-
-    QMutexLocker lock(&IGisItem::mutexItems);
-
-    IGisProject * item = IGisProject::create(filename, treeWks);
-    // skip if project is already loaded
-    if(item && treeWks->hasProject(item))
     {
-        QMessageBox::information(this, tr("Load project..."), tr("The project \"%1\" is already in the workspace.").arg(item->getName()), QMessageBox::Abort);
+        CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+        treeWks->blockSignals(true);
 
-        delete item;
-        item = nullptr;
+        QMutexLocker lock(&IGisItem::mutexItems);
+
+        IGisProject * item = IGisProject::create(filename, treeWks);
+        // skip if project is already loaded
+        if(item && treeWks->hasProject(item))
+        {
+            QMessageBox::information(this, tr("Load project..."), tr("The project \"%1\" is already in the workspace.").arg(item->getName()), QMessageBox::Abort);
+
+            delete item;
+            item = nullptr;
+        }
+
+        treeWks->blockSignals(false);
     }
-
-    treeWks->blockSignals(false);
-    CCanvas::restoreOverrideCursor("loadGisProject");
 
     emit sigChanged();
 }
@@ -156,53 +157,53 @@ void CGisWorkspace::slotSearch(const QString& str)
 {
     actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
 
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "slotFilter");
-    QMutexLocker lock(&IGisItem::mutexItems);
-
-    CSearch currentSearch (str);
-
-    const int N = treeWks->topLevelItemCount();
-    for(int n = 0; n < N; n++)
     {
-        IGisProject * item = dynamic_cast<IGisProject*>(treeWks->topLevelItem(n));
-        if(item == nullptr)
+        CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+        QMutexLocker lock(&IGisItem::mutexItems);
+
+        CSearch currentSearch (str);
+
+        const int N = treeWks->topLevelItemCount();
+        for(int n = 0; n < N; n++)
         {
-            continue;
+            IGisProject * item = dynamic_cast<IGisProject*>(treeWks->topLevelItem(n));
+            if(item == nullptr)
+            {
+                continue;
+            }
+
+            item->filter(currentSearch);
+            item->setExpanded(!str.isEmpty());
         }
 
-        item->filter(currentSearch);
-        item->setExpanded(!str.isEmpty());
-    }
-
-    //test whether syntax errors occured and show error
-    if(currentSearch.getSyntaxError())
-    {
-        lineFilter->addAction(actionError, QLineEdit::TrailingPosition);
-        if(currentSearch.getSearchMode() == CSearch::eSearchModeName)
+        //test whether syntax errors occured and show error
+        if(currentSearch.getSyntaxError())
         {
-            actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in names"));
+            lineFilter->addAction(actionError, QLineEdit::TrailingPosition);
+            if(currentSearch.getSearchMode() == CSearch::eSearchModeName)
+            {
+                actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in names"));
+            }
+            else
+            {
+                actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
+            }
         }
         else
         {
-            actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
+            lineFilter->removeAction(actionError);
+        }
+
+        if(currentSearch.isAutodetectedProperty())
+        {
+            lineFilter->addAction(actionAutoProperty, QLineEdit::TrailingPosition);
+            actionAutoProperty->setToolTip(tr("Automatically set the property, please make sure the results are correct."));
+        }
+        else
+        {
+            lineFilter->removeAction(actionAutoProperty);
         }
     }
-    else
-    {
-        lineFilter->removeAction(actionError);
-    }
-
-    if(currentSearch.isAutodetectedProperty())
-    {
-        lineFilter->addAction(actionAutoProperty, QLineEdit::TrailingPosition);
-        actionAutoProperty->setToolTip(tr("Automatically set the property, please make sure the results are correct."));
-    }
-    else
-    {
-        lineFilter->removeAction(actionAutoProperty);
-    }
-
-    CCanvas::restoreOverrideCursor("slotFilter");
 
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
@@ -258,7 +259,7 @@ void CGisWorkspace::slotSearchHelp()
 
 void CGisWorkspace::slotSaveAll()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "slotSaveAll");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
@@ -282,8 +283,6 @@ void CGisWorkspace::slotSaveAll()
             item->saveAs();
         }
     }
-
-    CCanvas::restoreOverrideCursor("slotSaveAll");
 }
 
 

@@ -86,7 +86,7 @@ CFilterSpeed::~CFilterSpeed()
 
 void CFilterSpeed::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterSpeed");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
 
     switch (comboActivityType->currentIndex())
     {
@@ -109,8 +109,6 @@ void CFilterSpeed::slotApply()
     default:
         break;
     }
-
-    CCanvas::restoreOverrideCursor("CFilterSpeed");
 }
 
 void CFilterSpeed::slotSetActivityType(int type)

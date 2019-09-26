@@ -44,7 +44,7 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem * item)
 
     QMutexLocker lock(&IGisItem::mutexItems);
     CDeviceMountLock mountLock(*this);
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CDeviceGarminArchive::slotExpanded()");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     qDebug() << "reading files from device: " << dir.path();
     QStringList entries = dir.entryList(QStringList("*.gpx"));
     for(const QString &entry : entries)
@@ -56,6 +56,5 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem * item)
             delete project;
         }
     }
-    CCanvas::restoreOverrideCursor("CDeviceGarminArchive::slotExpanded()");
 }
 

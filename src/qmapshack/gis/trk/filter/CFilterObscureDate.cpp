@@ -41,8 +41,7 @@ CFilterObscureDate::~CFilterObscureDate()
 
 void CFilterObscureDate::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterObscureDate");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     trk.filterObscureDate(spinBox->value());
-    CCanvas::restoreOverrideCursor("CFilterObscureDate");
 }
 

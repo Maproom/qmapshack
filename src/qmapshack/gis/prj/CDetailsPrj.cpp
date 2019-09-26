@@ -167,28 +167,29 @@ void CDetailsPrj::slotSetupGui()
     }
     X_____________UnBlockAllSignals_____________X(this);
 
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CDetailsPrj::slotSetupGui()");
-    // Create a new document, fill it and attach it to the text browser.
-    // This is much faster than to use the current one of the text browser.
-    // According to the docs, the text browser's current document should be
-    // deleted because the text browser is it's parent.
-    QTextDocument * doc = new QTextDocument();
-    doc->setTextWidth(textDesc->size().width() - 20);
-    draw(*doc, false);
-    doc->setParent(textDesc);
-    textDesc->setDocument(doc);
-
-    QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
-    if(tabWidget)
     {
-        int idx = tabWidget->indexOf(this);
-        if(idx != NOIDX)
+        CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+        // Create a new document, fill it and attach it to the text browser.
+        // This is much faster than to use the current one of the text browser.
+        // According to the docs, the text browser's current document should be
+        // deleted because the text browser is it's parent.
+        QTextDocument * doc = new QTextDocument();
+        doc->setTextWidth(textDesc->size().width() - 20);
+        draw(*doc, false);
+        doc->setParent(textDesc);
+        textDesc->setDocument(doc);
+
+        QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
+        if(tabWidget)
         {
-            setObjectName(prj.getName());
-            tabWidget->setTabText(idx, prj.getName().replace("&", "&&"));
+            int idx = tabWidget->indexOf(this);
+            if(idx != NOIDX)
+            {
+                setObjectName(prj.getName());
+                tabWidget->setTabText(idx, prj.getName().replace("&", "&&"));
+            }
         }
     }
-    CCanvas::restoreOverrideCursor("CDetailsPrj::slotSetupGui()");
     mutex.unlock();
 }
 

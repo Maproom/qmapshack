@@ -285,7 +285,8 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         _fn_ += ".tcx";
     }
 
-    project.mount();
+
+    CProjectMountLock mountLock(project);
 
     // safety check for existing files
     QFile file(_fn_);
@@ -318,7 +319,6 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
                                            , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
             if (res == QMessageBox::No)
             {
-                project.umount();
                 return false;
             }
         }
@@ -499,7 +499,6 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         }
         res = false;
     }
-    project.umount();
     return res;
 }
 

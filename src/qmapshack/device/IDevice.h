@@ -116,5 +116,24 @@ protected:
     QString key;
 };
 
+class CDeviceMountLock
+{
+public:
+    CDeviceMountLock(IDevice& device)
+        : device(device)
+    {
+        device.mount();
+    }
+
+    ~CDeviceMountLock()
+    {
+        device.umount();
+    }
+
+private:
+    IDevice& device;
+};
+
+
 #endif //IDEVICE_H
 

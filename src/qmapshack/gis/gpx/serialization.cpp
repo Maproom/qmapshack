@@ -1160,12 +1160,13 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
     QString filename = dirAdventures.absoluteFilePath(project->getKey() + ".adv");
     QFile file(filename);
 
-    mount();
+    CDeviceMountLock mountLock(*this);
+
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
     out.setCodec("UTF-8");
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;
     out << doc.toString();
     file.close();
-    umount();
+
 }

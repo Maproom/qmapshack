@@ -250,7 +250,8 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
         _fn_ += ".gpx";
     }
 
-    project.mount();
+
+    CProjectMountLock mountLock(project);
 
     // safety check for existing files
     QFile file(_fn_);
@@ -280,7 +281,6 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
                                            , QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
             if(res == QMessageBox::No)
             {
-                project.umount();
                 return false;
             }
         }
@@ -425,7 +425,6 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
         }
         res = false;
     }
-    project.umount();
     return res;
 }
 

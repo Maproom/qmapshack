@@ -969,7 +969,7 @@ void IGisProject::umount()
 
 bool IGisProject::remove()
 {
-    mount();
+    CProjectMountLock mountLock(*this);
 
     /*
        Check if parent is a device and give it a chance to take care of data.
@@ -992,7 +992,6 @@ bool IGisProject::remove()
         QDir(filename).removeRecursively();
     }
 
-    umount();
     return true;
 }
 

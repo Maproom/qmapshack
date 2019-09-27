@@ -3,6 +3,7 @@
 APP_VERSION=0
 BUILD_TIME=$(date +"%y-%m-%dT%H:%M:%S")
 BUILD_HASH_KEY=0
+COMMIT_STATUS=0
 
 
 function buildIcon {
@@ -250,16 +251,15 @@ function extractVersion {
     APP_VERSION="$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION"
 }
 
-
 function readRevisionHash {
-    cd $QMS_SRC_DIR
-    BUILD_HASH_KEY=$(hg --debug id -i)
-    
-    if [[ "$BUILD_HASH_KEY" == *"+"* ]]; then
-        read -p "BEWARE - There are uncommited chagnes..."
-    fi
-}
+cd $QMS_SRC_DIR
+BUILD_HASH_KEY=$(git rev-parse HEAD)
+COMMIT_STATUS=$(git status -s -uno)
 
+if [[ "$COMMIT_STATUS" != "" ]]; then
+read -p "BEWARE - There are uncommited changes..."
+fi
+}
 
 function updateInfoPlist {
     /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $APP_VERSION" "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"

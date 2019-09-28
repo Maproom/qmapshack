@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CCanvas</name>
     <message>
@@ -65,67 +65,75 @@
     <name>CDrawContextPixel</name>
     <message>
         <source>Error...</source>
-        <translation>Fehler...</translation>
+        <translation type="vanished">Fehler...</translation>
     </message>
     <message>
         <source>Failed to load file: %1</source>
-        <translation>Datei laden fehlgeschlagen: %1</translation>
+        <translation type="vanished">Datei laden fehlgeschlagen: %1</translation>
     </message>
     <message>
         <source>File must be 8 bit palette or gray indexed.</source>
-        <translation>Die Datei muss eine 8 Bit Farbpalette haben oder einen Graustufenindex.</translation>
+        <translation type="vanished">Die Datei muss eine 8 Bit Farbpalette haben oder einen Graustufenindex.</translation>
     </message>
     <message>
         <source>(color table)</source>
-        <translation>(Farbtabelle)</translation>
+        <translation type="vanished">(Farbtabelle)</translation>
     </message>
     <message>
         <source>(unknown)</source>
-        <translation>(unbekannt)</translation>
+        <translation type="vanished">(unbekannt)</translation>
     </message>
     <message>
-        <location filename="../canvas/CDrawContextPixel.cpp" line="73"/>
+        <location filename="../canvas/CDrawContextPixel.cpp" line="74"/>
         <source>Failed to load</source>
         <translation>Datei laden fehlgeschlagen</translation>
     </message>
 </context>
 <context>
+    <name>CDrawContextProj</name>
+    <message>
+        <location filename="../canvas/CDrawContextProj.cpp" line="72"/>
+        <source>Failed to load</source>
+        <translation type="unfinished">Datei laden fehlgeschlagen</translation>
+    </message>
+</context>
+<context>
     <name>CGdalFile</name>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="52"/>
-        <location filename="../helpers/CGdalFile.cpp" line="65"/>
-        <location filename="../helpers/CGdalFile.cpp" line="95"/>
+        <location filename="../helpers/CGdalFile.cpp" line="53"/>
+        <location filename="../helpers/CGdalFile.cpp" line="81"/>
+        <location filename="../helpers/CGdalFile.cpp" line="111"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="52"/>
-        <location filename="../helpers/CGdalFile.cpp" line="65"/>
+        <location filename="../helpers/CGdalFile.cpp" line="53"/>
+        <location filename="../helpers/CGdalFile.cpp" line="81"/>
         <source>Failed to load file: %1</source>
         <translation>Datei laden fehlgeschlagen: %1</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="95"/>
+        <location filename="../helpers/CGdalFile.cpp" line="111"/>
         <source>File must be 8 bit palette or gray indexed.</source>
         <translation>Die Datei muss eine 8 Bit Farbpalette haben oder einen Graustufenindex.</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="179"/>
+        <location filename="../helpers/CGdalFile.cpp" line="196"/>
         <source>(color table)</source>
         <translation>(Farbtabelle)</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="183"/>
+        <location filename="../helpers/CGdalFile.cpp" line="200"/>
         <source>(RGB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="187"/>
+        <location filename="../helpers/CGdalFile.cpp" line="204"/>
         <source>(RGBA)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="191"/>
+        <location filename="../helpers/CGdalFile.cpp" line="208"/>
         <source>(unknown)</source>
         <translation>(unbekannt)</translation>
     </message>
@@ -224,6 +232,32 @@
         <location filename="../items/CItemListWidget.cpp" line="103"/>
         <source>Select files...</source>
         <translation>Dateien auswählen...</translation>
+    </message>
+</context>
+<context>
+    <name>CItemMapLayer</name>
+    <message>
+        <location filename="../items/CItemMapLayer.cpp" line="34"/>
+        <source>Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CItemTreeWidget</name>
+    <message>
+        <location filename="../items/CItemTreeWidget.cpp" line="159"/>
+        <source>&lt;p&gt;The current map &lt;i&gt;&apos;%1&apos;&lt;/i&gt; does not match the projection of previous loaded maps. All map files need to have the same projection.&lt;/p&gt;&lt;p&gt;&lt;b&gt;This file&lt;/b&gt;: %2&lt;/p&gt;&lt;p&gt;&lt;b&gt;Expected&lt;/b&gt;: %3&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../items/CItemTreeWidget.cpp" line="164"/>
+        <source>Error...</source>
+        <translation type="unfinished">Fehler...</translation>
+    </message>
+    <message>
+        <location filename="../items/CItemTreeWidget.cpp" line="235"/>
+        <source>Select files...</source>
+        <translation type="unfinished">Dateien auswählen...</translation>
     </message>
 </context>
 <context>
@@ -467,7 +501,7 @@ Durch den Benutzer abgebrochen.</translation>
         <translation>Hinweis: Dieses Werkzeug verwendet alle Dateien in der Liste als Eingabe. Das funktioniert nur, wenn alle Karten die selbe Projektion verwenden.</translation>
     </message>
     <message>
-        <location filename="../tool/CToolExport.cpp" line="136"/>
+        <location filename="../tool/CToolExport.cpp" line="114"/>
         <source>Select filename...</source>
         <translation>Dateinamen auswählen...</translation>
     </message>
@@ -737,6 +771,42 @@ oder
         <location filename="../items/IItemListWidget.ui" line="91"/>
         <source>Reload the currently selected map.</source>
         <translation>Die aktuell ausgewählte Karte erneut laden.</translation>
+    </message>
+</context>
+<context>
+    <name>IItemTreeWidget</name>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="40"/>
+        <source>Add map files to list</source>
+        <translation type="unfinished">Kartendateien zur Liste hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="43"/>
+        <location filename="../items/IItemTreeWidget.ui" line="60"/>
+        <location filename="../items/IItemTreeWidget.ui" line="77"/>
+        <location filename="../items/IItemTreeWidget.ui" line="94"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="57"/>
+        <source>Remove selected file from the list.</source>
+        <translation type="unfinished">Ausgewählte Dateien aus der Liste entfernen.</translation>
+    </message>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="74"/>
+        <source>Clear complete list of map files.</source>
+        <translation type="unfinished">Die komplette Kartendateiliste löschen. </translation>
+    </message>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="91"/>
+        <source>Reload the currently selected map.</source>
+        <translation type="unfinished">Die aktuell ausgewählte Karte erneut laden.</translation>
     </message>
 </context>
 <context>

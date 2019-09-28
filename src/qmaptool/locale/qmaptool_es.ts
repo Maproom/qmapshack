@@ -92,48 +92,56 @@
         <translation type="obsolete">(desconocido)</translation>
     </message>
     <message>
-        <location filename="../canvas/CDrawContextPixel.cpp" line="73"/>
+        <location filename="../canvas/CDrawContextPixel.cpp" line="74"/>
         <source>Failed to load</source>
         <translation>Fallo al cargar</translation>
     </message>
 </context>
 <context>
+    <name>CDrawContextProj</name>
+    <message>
+        <location filename="../canvas/CDrawContextProj.cpp" line="72"/>
+        <source>Failed to load</source>
+        <translation type="unfinished">Fallo al cargar</translation>
+    </message>
+</context>
+<context>
     <name>CGdalFile</name>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="52"/>
-        <location filename="../helpers/CGdalFile.cpp" line="65"/>
-        <location filename="../helpers/CGdalFile.cpp" line="95"/>
+        <location filename="../helpers/CGdalFile.cpp" line="53"/>
+        <location filename="../helpers/CGdalFile.cpp" line="81"/>
+        <location filename="../helpers/CGdalFile.cpp" line="111"/>
         <source>Error...</source>
         <translation type="unfinished">Error...</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="52"/>
-        <location filename="../helpers/CGdalFile.cpp" line="65"/>
+        <location filename="../helpers/CGdalFile.cpp" line="53"/>
+        <location filename="../helpers/CGdalFile.cpp" line="81"/>
         <source>Failed to load file: %1</source>
         <translation type="unfinished">Fallo al cargar el archivo: %1</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="95"/>
+        <location filename="../helpers/CGdalFile.cpp" line="111"/>
         <source>File must be 8 bit palette or gray indexed.</source>
         <translation type="unfinished">El archivo debe de tener una paleta superior a 8 bits o gris indexado.</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="179"/>
+        <location filename="../helpers/CGdalFile.cpp" line="196"/>
         <source>(color table)</source>
         <translation type="unfinished">(tabla de color)</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="183"/>
+        <location filename="../helpers/CGdalFile.cpp" line="200"/>
         <source>(RGB)</source>
         <translation type="unfinished">(RGB)</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="187"/>
+        <location filename="../helpers/CGdalFile.cpp" line="204"/>
         <source>(RGBA)</source>
         <translation type="unfinished">(RGBA)</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="191"/>
+        <location filename="../helpers/CGdalFile.cpp" line="208"/>
         <source>(unknown)</source>
         <translation type="unfinished">(desconocido)</translation>
     </message>
@@ -232,6 +240,32 @@
         <location filename="../items/CItemListWidget.cpp" line="103"/>
         <source>Select files...</source>
         <translation>Seleccionar archivos...</translation>
+    </message>
+</context>
+<context>
+    <name>CItemMapLayer</name>
+    <message>
+        <location filename="../items/CItemMapLayer.cpp" line="34"/>
+        <source>Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CItemTreeWidget</name>
+    <message>
+        <location filename="../items/CItemTreeWidget.cpp" line="159"/>
+        <source>&lt;p&gt;The current map &lt;i&gt;&apos;%1&apos;&lt;/i&gt; does not match the projection of previous loaded maps. All map files need to have the same projection.&lt;/p&gt;&lt;p&gt;&lt;b&gt;This file&lt;/b&gt;: %2&lt;/p&gt;&lt;p&gt;&lt;b&gt;Expected&lt;/b&gt;: %3&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../items/CItemTreeWidget.cpp" line="164"/>
+        <source>Error...</source>
+        <translation type="unfinished">Error...</translation>
+    </message>
+    <message>
+        <location filename="../items/CItemTreeWidget.cpp" line="235"/>
+        <source>Select files...</source>
+        <translation type="unfinished">Seleccionar archivos...</translation>
     </message>
 </context>
 <context>
@@ -474,7 +508,7 @@ Canceled by user&apos;s request.
         <translation>Nota: Esta herramienta usa todos los archivos de la lista. Es necesario que todos tengan la misma proyección.</translation>
     </message>
     <message>
-        <location filename="../tool/CToolExport.cpp" line="136"/>
+        <location filename="../tool/CToolExport.cpp" line="114"/>
         <source>Select filename...</source>
         <translation>Seleccionar nombre de archivo...</translation>
     </message>
@@ -744,6 +778,42 @@ o
         <location filename="../items/IItemListWidget.ui" line="91"/>
         <source>Reload the currently selected map.</source>
         <translation>Recargar mapa seleccionado.</translation>
+    </message>
+</context>
+<context>
+    <name>IItemTreeWidget</name>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="40"/>
+        <source>Add map files to list</source>
+        <translation type="unfinished">Añadir archivos de mapa a la lista</translation>
+    </message>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="43"/>
+        <location filename="../items/IItemTreeWidget.ui" line="60"/>
+        <location filename="../items/IItemTreeWidget.ui" line="77"/>
+        <location filename="../items/IItemTreeWidget.ui" line="94"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="57"/>
+        <source>Remove selected file from the list.</source>
+        <translation type="unfinished">Borrar archivo seleccionado de la lista.</translation>
+    </message>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="74"/>
+        <source>Clear complete list of map files.</source>
+        <translation type="unfinished">Borrar lista completa de archivos de mapa.</translation>
+    </message>
+    <message>
+        <location filename="../items/IItemTreeWidget.ui" line="91"/>
+        <source>Reload the currently selected map.</source>
+        <translation type="unfinished">Recargar mapa seleccionado.</translation>
     </message>
 </context>
 <context>

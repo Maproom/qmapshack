@@ -1967,13 +1967,13 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Изменена средняя скорость движения на велосипеде с профилем &apos;%3&apos; к %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="629"/>
-        <location filename="../gis/trk/filter/filter.cpp" line="643"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="632"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="646"/>
         <source>%1 (Part %2)</source>
         <translation>%1 (Часть %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="770"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="773"/>
         <source>Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)</source>
         <translation>Скрыть узлы дрейфа с нулевой скоростью. Параметры: расстояние: %1%2, относительный показатель: %3</translation>
     </message>
@@ -2003,7 +2003,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Преобразованы подточки с маршрутных в точки трека</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="579"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="582"/>
         <source>Start Point moved to: </source>
         <translation>Начальная точка перемещена в: </translation>
     </message>
@@ -6688,8 +6688,12 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
+        <source>&apos;Date equals&apos; matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local time zone is taken for the query.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>
-        <translation>&quot;Дата равна&quot; соответствует всему, что находится в пределах 24 часов от данной даты.</translation>
+        <translation type="vanished">&quot;Дата равна&quot; соответствует всему, что находится в пределах 24 часов от данной даты.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="63"/>

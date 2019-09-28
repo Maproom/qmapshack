@@ -1947,13 +1947,13 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
         <translation>Se cambió la velocidad media en movimiento con el perfil &apos;%3&apos; a %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="629"/>
-        <location filename="../gis/trk/filter/filter.cpp" line="643"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="632"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="646"/>
         <source>%1 (Part %2)</source>
         <translation>%1 (Parte %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="770"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="773"/>
         <source>Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)</source>
         <translation>Ocultar ovillos en paradas con criterio de distancia (%1%2) y ratio de (%3)</translation>
     </message>
@@ -1983,7 +1983,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
         <translation>Convertidos puntos secundarios del ruteo en puntos de track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="579"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="582"/>
         <source>Start Point moved to: </source>
         <translation>Punto de Inicio movido a:</translation>
     </message>
@@ -6658,7 +6658,7 @@ Para vincular el dispositivo con Qmapshack:
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
-        <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>
+        <source>&apos;Date equals&apos; matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local time zone is taken for the query.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

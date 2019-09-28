@@ -3,6 +3,7 @@ V1.XX.X
 [QMS-12] Unify versions of all QMapShack tools
 [QMS-13] Add support for Garmin Edge 500
 [QMS-31] Fix all links to Bitbucket in the code
+[QMS-20] Windows Start Menu - change links from bitbucket to github
 
 ------------------------------------------------------------------------
 ---------Restart issue numbering because of migration to GitHub---------

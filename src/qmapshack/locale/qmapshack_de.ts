@@ -1963,13 +1963,13 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Durchschnittliche Fahrradgeschwindigkeit mit dem Profil &apos;%3&apos; auf %1%2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="629"/>
-        <location filename="../gis/trk/filter/filter.cpp" line="643"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="632"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="646"/>
         <source>%1 (Part %2)</source>
         <translation>%1 (Teil %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="770"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="773"/>
         <source>Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)</source>
         <translation>Pausenknödel ausgeblendet mit Abstandskriterium %1%2 and Verhältnis %3</translation>
     </message>
@@ -1999,7 +1999,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Punkte vom autom. Routing in Trackpunkte umgewandelt </translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="579"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="582"/>
         <source>Start Point moved to: </source>
         <translation>Startpunkt verschoben zu: </translation>
     </message>
@@ -6681,8 +6681,12 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
+        <source>&apos;Date equals&apos; matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local time zone is taken for the query.</source>
+        <translation>&apos;Datum ist gleich&apos; findet, falls ein Datum mit Uhrzeit angegeben wurde, alles, was innerhalb der nächsten 24h liegt, ansonsten alles was an dem angegebenen Tag ist. Beachte, dass alle Zeiten nach UTC konvertiert werden ehe die Prüfung vorgenommen wird und für die Abfrage die eingestellte Zeitzone verwendet wird.</translation>
+    </message>
+    <message>
         <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>
-        <translation>&apos;Datum gleich&apos; findet alles, was innerhalb von 24 Stunden des aktuellen Tages liegt.</translation>
+        <translation type="vanished">&apos;Datum gleich&apos; findet alles, was innerhalb von 24 Stunden des aktuellen Tages liegt.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="63"/>

@@ -459,7 +459,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="44"/>
         <source>Failed to load file: %1</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
@@ -519,7 +519,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="331"/>
         <source>No images found</source>
-        <translation>  No s&apos;ha trobat cap imatge</translation>
+        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -1205,7 +1205,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
@@ -1972,18 +1972,18 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <translation>Convertir els subpunts obtinguts d&apos;un itinerari a punts de track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="579"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="582"/>
         <source>Start Point moved to: </source>
         <translation>El Punt d&apos;Inici s&apos;ha mogut a:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="629"/>
-        <location filename="../gis/trk/filter/filter.cpp" line="643"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="632"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="646"/>
         <source>%1 (Part %2)</source>
         <translation>%1 (Part %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="770"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="773"/>
         <source>Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)</source>
         <translation>Amagar els punts repetits sense moviment amb una distància de (%1%2) i un ràti de (%3)</translation>
     </message>
@@ -6652,7 +6652,7 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
-        <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>
+        <source>&apos;Date equals&apos; matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local time zone is taken for the query.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -14178,7 +14178,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>

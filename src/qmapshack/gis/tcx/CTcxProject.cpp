@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
@@ -309,6 +310,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
 
         if (!createdByQMS)
         {
+            CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
             int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("File exists ...")
                                            , tr("The file exists and it has not been created by QMapShack. "
                                                 "If you press 'yes' all data in this file will be lost. "
@@ -347,6 +349,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         {
             if (!trkItem->isTrkTimeValid())
             {
+                CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
                 int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Track with invalid timestamps...")
                                                , tr("The track <b>%1</b> you have selected contains trackpoints with "
                                                     "invalid timestamps. "
@@ -385,7 +388,10 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
                 }
                 else if (!tcx->trackTypes.contains(trkItem->getKey().item))   // if this is an added track
                 {
-                    courseOrActivityMsgBox.exec();
+                    {
+                        CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
+                        courseOrActivityMsgBox.exec();
+                    }
 
                     if (courseOrActivityMsgBox.clickedButton() == pButtonCourse)
                     {
@@ -415,7 +421,10 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
             }
             else // not a TCX project, then it is necessary to ask for each track
             {
-                courseOrActivityMsgBox.exec();
+                {
+                    CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
+                    courseOrActivityMsgBox.exec();
+                }
 
                 if (courseOrActivityMsgBox.clickedButton() == pButtonCourse)
                 {
@@ -472,6 +481,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         msg = tr("Failed to create file '%1'").arg(_fn_);
         if (QThread::currentThread() == qApp->thread())
         {
+            CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
         }
         else
@@ -490,6 +500,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     {
         if (QThread::currentThread() == qApp->thread())
         {
+            CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
             msg = tr("Failed to write file '%1'").arg(_fn_);
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
         }

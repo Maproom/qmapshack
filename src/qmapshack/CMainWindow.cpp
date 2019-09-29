@@ -928,7 +928,7 @@ void CMainWindow::slotAbout()
 
 void CMainWindow::slotHelp()
 {
-    QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocMain"));
+    QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocMain"));
 }
 
 void CMainWindow::slotQuickstart()
@@ -940,24 +940,24 @@ void CMainWindow::slotQuickstart()
         locale = locale.left(2).toLower();
         if(locale == "de")
         {
-            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartGerman"));
+            QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartGerman"));
         }
         else if(locale == "ru")
         {
-            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartRussian"));
+            QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartRussian"));
         }
         else if(locale == "es")
         {
-            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartSpanish"));
+            QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartSpanish"));
         }
         else
         {
-            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartEnglish"));
+            QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartEnglish"));
         }
     }
     else
     {
-        QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartEnglish"));
+        QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartEnglish"));
     }
 }
 

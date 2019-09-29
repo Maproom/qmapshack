@@ -45,7 +45,7 @@ CSetupDatabase::CSetupDatabase(CGisListDB &parent)
         gridLayout->removeWidget(frameMysql);
 
         QString errorTitle = tr("Missing Requirement");
-        QString errorText  = tr("MySQL cannot be used at this point, because the corresponding driver (QMYSQL) is not available.<br />Please make sure you have installed the corresponding package.<br />If you don't know what to do now you should have <a href=\"%1\">a look at the wiki</a>.").arg("https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabaseAddRemove#markdown-header-mysql-565");
+        QString errorText  = tr("MySQL cannot be used at this point, because the corresponding driver (QMYSQL) is not available.<br />Please make sure you have installed the corresponding package.<br />If you don't know what to do now you should have <a href=\"%1\">a look at the wiki</a>.").arg("https://github.com/Maproom/qmapshack/wiki/DocGisDatabaseAddRemove#mysql--565");
 
         QLabel *errorMissingMySQL = new QLabel(QString("<b>%1</b><br /><br />%2").arg(errorTitle).arg(errorText));
         errorMissingMySQL->setOpenExternalLinks(true);

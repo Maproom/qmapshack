@@ -267,10 +267,10 @@ void CCanvas::buildHelpText()
                                     "<p>Patient Users:<p>"
                                     "<ul>"
                                     "<li><a href='ShowQuickStart'>Quick Start Guide.</a></li>"
-                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps'>Getting Started.</a></li>"
-                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem'>Install Maps & DEM</a></li>"
-                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem'>Basics Maps & DEM.</a></li>"
-                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources'>Sources for Maps</a></li>"
+                                    "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps'>Getting Started.</a></li>"
+                                    "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem'>Install Maps & DEM</a></li>"
+                                    "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem'>Basics Maps & DEM.</a></li>"
+                                    "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocMapDemSources'>Sources for Maps</a></li>"
                                     "</ul>"
                                     );
 
@@ -292,8 +292,8 @@ void CCanvas::buildHelpText()
 
     const QString msgDataLinks = tr("<h2>&nbsp;</h2>"
                                     "<ul>"
-                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabase'>Databases</a></li>"
-                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/AdvProjects'>Databases & Projects</a></li>"
+                                    "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocGisDatabase'>Databases</a></li>"
+                                    "<li><a href='https://github.com/Maproom/qmapshack/wiki/AdvProjects'>Databases & Projects</a></li>"
                                     "</ul>"
                                     );
 
@@ -312,7 +312,7 @@ void CCanvas::buildHelpText()
                                     "</ul>"
                                     "<p>Patient Users:<p>"
                                     "<ul>"
-                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources'>Sources for DEM</a></li>"
+                                    "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocMapDemSources'>Sources for DEM</a></li>"
                                     "</ul>"
                                     );
 

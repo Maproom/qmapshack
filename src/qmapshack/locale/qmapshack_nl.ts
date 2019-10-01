@@ -2058,327 +2058,327 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1097"/>
         <source>Dogs</source>
-        <translation type="unfinished"></translation>
+        <translation>Honden</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1098"/>
         <source>Access or parking fee</source>
-        <translation type="unfinished"></translation>
+        <translation>Toegangs- of parkeerkosten</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1099"/>
         <source>Climbing gear</source>
-        <translation type="unfinished"></translation>
+        <translation>Klimuitrusting vereist</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1100"/>
         <source>Boat</source>
-        <translation type="unfinished"></translation>
+        <translation>Boot vereist</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1101"/>
         <source>Scuba gear</source>
-        <translation type="unfinished"></translation>
+        <translation>Duikuitrusting vereist</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1102"/>
         <source>Recommended for kids</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanbevolen voor kinderen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1103"/>
         <source>Takes less than an hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Duurt minder dan 1 uur</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1104"/>
         <source>Scenic view</source>
-        <translation type="unfinished"></translation>
+        <translation>Mooi uitzicht</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1105"/>
         <source>Significant hike</source>
-        <translation type="unfinished"></translation>
+        <translation>Flinke wandeling</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1106"/>
         <source>Difficult climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Moeilijke klim</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1107"/>
         <source>May require wading</source>
-        <translation type="unfinished"></translation>
+        <translation>Waden kan nodig zijn</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1108"/>
         <source>May require swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwemmen kan nodig zijn</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1109"/>
         <source>Available at all times</source>
-        <translation type="unfinished"></translation>
+        <translation>Altijd mogelijk</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1110"/>
         <source>Recommended at night</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanbevolen voor de nacht</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1111"/>
         <source>Available during winter</source>
-        <translation type="unfinished"></translation>
+        <translation>Mogelijk in de winter</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1113"/>
         <source>Poison plants</source>
-        <translation type="unfinished"></translation>
+        <translation>Giftige planten</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1114"/>
         <source>Dangerous Animals</source>
-        <translation type="unfinished"></translation>
+        <translation>Gevaarlijke dieren</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1115"/>
         <source>Ticks</source>
-        <translation type="unfinished"></translation>
+        <translation>Teken</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1116"/>
         <source>Abandoned mines</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlaten mijnen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1117"/>
         <source>Cliff / falling rocks</source>
-        <translation type="unfinished"></translation>
+        <translation>Afgrond / vallende stenen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1118"/>
         <source>Hunting</source>
-        <translation type="unfinished"></translation>
+        <translation>Jagen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1119"/>
         <source>Dangerous area</source>
-        <translation type="unfinished"></translation>
+        <translation>Gevaarlijk gebied</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1120"/>
         <source>Wheelchair accessible</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolstoeltoegankelijk</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1121"/>
         <source>Parking available</source>
-        <translation type="unfinished"></translation>
+        <translation>Parkeerplaats aanwezig</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1122"/>
         <source>Public transportation</source>
-        <translation type="unfinished"></translation>
+        <translation>Openbaar vervoer</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1123"/>
         <source>Drinking water nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Drinkwater in de buurt</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1124"/>
         <source>Public restrooms nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Openbaar toilet in de buurt</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1125"/>
         <source>Telephone nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefoon in de buurt</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1126"/>
         <source>Picnic tables nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Picknicktafel in de buurt</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1127"/>
         <source>Camping available</source>
-        <translation type="unfinished"></translation>
+        <translation>Camping aanwezig</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1128"/>
         <source>Bicycles</source>
-        <translation type="unfinished"></translation>
+        <translation>Fietsen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1129"/>
         <source>Motorcycles</source>
-        <translation type="unfinished"></translation>
+        <translation>Motorfietsen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1130"/>
         <source>Quads</source>
-        <translation type="unfinished"></translation>
+        <translation>Quads</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1131"/>
         <source>Off-road vehicles</source>
-        <translation type="unfinished"></translation>
+        <translation>Terreinvoertuigen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1132"/>
         <source>Snowmobiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Sneeuwscooters</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1133"/>
         <source>Horses</source>
-        <translation type="unfinished"></translation>
+        <translation>Paarden</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1134"/>
         <source>Campfires</source>
-        <translation type="unfinished"></translation>
+        <translation>Kampvuur</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1135"/>
         <source>Thorns</source>
-        <translation type="unfinished"></translation>
+        <translation>Doorns</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1136"/>
         <source>Stealth required</source>
-        <translation type="unfinished"></translation>
+        <translation>Heimelijkheid geboden</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1137"/>
         <source>Stroller accessible</source>
-        <translation type="unfinished"></translation>
+        <translation>Toegankelijk voor wandelwagens</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1138"/>
         <source>Needs maintenance</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderhoud nodig</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1139"/>
         <source>Watch for livestock</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppassen voor vee</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1140"/>
         <source>Flashlight required</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaklamp nodig</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1142"/>
         <source>Truck Driver/RV</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrachtwagen / camper</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1143"/>
         <source>Field Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Veldpuzzel</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1144"/>
         <source>UV Light Required</source>
-        <translation type="unfinished"></translation>
+        <translation>UV-lamp noodzakelijk</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1145"/>
         <source>Snowshoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sneeuwschoenen vereist</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1146"/>
         <source>Cross Country Skis</source>
-        <translation type="unfinished"></translation>
+        <translation>Langlaufski&apos;s vereist</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1147"/>
         <source>Special Tool Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Speciaal gereedschap nodig</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1148"/>
         <source>Night Cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachtcache</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1149"/>
         <source>Park and Grab</source>
-        <translation type="unfinished"></translation>
+        <translation>Parkeer en pak</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1150"/>
         <source>Abandoned Structure</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlaten gebouw</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1151"/>
         <source>Short hike (less than 1km)</source>
-        <translation type="unfinished"></translation>
+        <translation>Korte wandeling (minder dan 1 km)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1152"/>
         <source>Medium hike (1km-10km)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gemiddelde wandeling (1 - 10 km)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1153"/>
         <source>Long Hike (+10km)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lange wandeling (meer dan 10 kilometer)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1154"/>
         <source>Fuel Nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Brandstof in de buurt</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1155"/>
         <source>Food Nearby</source>
-        <translation type="unfinished"></translation>
+        <translation>Eten vlakbij</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1156"/>
         <source>Wireless Beacon</source>
-        <translation type="unfinished"></translation>
+        <translation>Draadloos baken</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1157"/>
         <source>Partnership cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Samenwerkingscache</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1158"/>
         <source>Seasonal Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Seizoenstoegang</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1159"/>
         <source>Tourist Friendly</source>
-        <translation type="unfinished"></translation>
+        <translation>Toeristvriendelijk</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1160"/>
         <source>Tree Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Boomklimmen vereist</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1161"/>
         <source>Front Yard (Private Residence)</source>
-        <translation type="unfinished"></translation>
+        <translation>Voortuin (priveterrein)</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1162"/>
         <source>Teamwork Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Samenwerking vereist</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1163"/>
         <source>GeoTour</source>
-        <translation type="unfinished"></translation>
+        <translation>GeoTour</translation>
     </message>
 </context>
 <context>

@@ -1,13 +1,14 @@
 V1.XX.X
-[QMS-27] Error in workspace search for attributes
-[QMS-18] Improved explanation of 'Date equals'
 [QMS-5] App crashes on using the "Change Start Point" filter
+[QMS-6] Enhance overview detection for VRT maps
 [QMS-8] Incorrect elevation for fit files from GPSMAP 66s
 [QMS-12] Unify versions of all QMapShack tools
 [QMS-13] Add support for Garmin Edge 500
-[QMS-31] Fix all links to Bitbucket in the code
+[QMS-18] Improved explanation of 'Date equals'
 [QMS-19] Invalid GPX due to `::` in `ql` namespace
 [QMS-20] Windows Start Menu - change links from bitbucket to github
+[QMS-27] Error in workspace search for attributes
+[QMS-31] Fix all links to Bitbucket in the code
 
 ------------------------------------------------------------------------
 ---------Restart issue numbering because of migration to GitHub---------

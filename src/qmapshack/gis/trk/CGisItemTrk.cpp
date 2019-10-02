@@ -538,6 +538,15 @@ QString CGisItemTrk::getInfo(quint32 feature) const
         str += "<br />";
     }
 
+    //nominal walking time according to DIN 33466
+    CActivityTrk::summary_t walking = activities.getSummary(CTrackData::trkpt_t::eAct20Foot);
+    qreal elevationTime = walking.ascent/300 * 3600 + walking.descent/500 * 3600;
+    qreal distanceTime = walking.distance/4000 * 3600;
+    qreal nominalTime = qMax(elevationTime, distanceTime) + 0.5 * qMin(elevationTime, distanceTime);
+    IUnit::self().seconds2time(nominalTime, val1, unit1);
+    str += tr("Est. Walk. Time: %1%2").arg(val1).arg(unit1);
+
+    str += "<br/>";
     str += "<br/>";
 
     if(timeIsValid && timeStart.isValid())

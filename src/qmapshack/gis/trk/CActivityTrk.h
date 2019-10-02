@@ -181,7 +181,9 @@ public:
         return activityRanges;
     }
 
-
+    const summary_t getSummary(trkact_t act) const{
+        return activitySummary.value(act);
+    }
 private:
     friend class CGisItemTrk;
     CActivityTrk(CGisItemTrk * trk);

@@ -482,7 +482,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
 
 void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const
 {
-    const limits_t& limit = extrema["::ql:slope"];
+    const limits_t& limit = extrema["ql:slope"];
     minSlope = limit.min;
     maxSlope = limit.max;
 }

@@ -21,12 +21,12 @@
 #include "units/IUnit.h"
 #include <QStringBuilder>
 
-const QString CKnownExtension::internalSlope    = "::ql:slope";
-const QString CKnownExtension::internalSpeedDist    = "::ql:speeddist";
-const QString CKnownExtension::internalSpeedTime    = "::ql:speedtime";
-const QString CKnownExtension::internalEle      = "::ql:ele";
-const QString CKnownExtension::internalProgress = "::ql:progress";
-const QString CKnownExtension::internalTerrainSlope = "::ql:terrainslope";
+const QString CKnownExtension::internalSlope    = "ql:slope";
+const QString CKnownExtension::internalSpeedDist    = "ql:speeddist";
+const QString CKnownExtension::internalSpeedTime    = "ql:speedtime";
+const QString CKnownExtension::internalEle      = "ql:ele";
+const QString CKnownExtension::internalProgress = "ql:progress";
+const QString CKnownExtension::internalTerrainSlope = "ql:terrainslope";
 
 QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
 QSet<QString> CKnownExtension::registeredNS;

@@ -66,6 +66,8 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     : QTreeWidgetItem(parent)
     , type(type)
     , filename(filename)
+    , projectSearch("")
+    , workspaceSearch("")
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
@@ -98,6 +100,8 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     : QTreeWidgetItem(parent)
     , type(type)
     , filename(filename)
+    , projectSearch("")
+    , workspaceSearch("")
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
@@ -1141,6 +1145,7 @@ void IGisProject::sortItems()
     }
 
     addChildren(items);
+    applyFilters();
 }
 
 
@@ -1172,7 +1177,19 @@ void IGisProject::sortItems(QList<IGisItem *> &items) const
     }
 }
 
-void IGisProject::filter(CSearch& search)
+void IGisProject::setProjectFilter(CSearch& search)
+{
+    projectSearch=search;
+    applyFilters();
+}
+
+void IGisProject::setWorkspaceFilter(CSearch& search)
+{
+    workspaceSearch = search;
+    applyFilters();
+}
+
+void IGisProject::applyFilters()
 {
     const int N = childCount();
 
@@ -1184,7 +1201,10 @@ void IGisProject::filter(CSearch& search)
             continue;
         }
 
-        item->setHidden(!search.getSearchResult(item));//get search result returns wether the object matches
+        bool projectFilterResult = projectSearch.getSearchResult(item);
+        bool workspaceFilterResult = workspaceSearch.getSearchResult(item);
+
+        item->setHidden(!(projectFilterResult && workspaceFilterResult));//get search result returns wether the object matches
     }
 }
 

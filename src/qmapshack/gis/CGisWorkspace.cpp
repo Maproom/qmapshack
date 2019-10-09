@@ -172,7 +172,7 @@ void CGisWorkspace::slotSearch(const QString& str)
                 continue;
             }
 
-            item->filter(currentSearch);
+            item->setWorkspaceFilter(currentSearch);
             item->setExpanded(!str.isEmpty());
         }
 

@@ -112,6 +112,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionGroupSort->setExclusive(true);
     actionSortByTime    = addSortAction(this, actionGroupSort, "://icons/32x32/Time.png", tr("Sort by Time"), IGisProject::eSortFolderTime);
     actionSortByName    = addSortAction(this, actionGroupSort, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
+    actionFilterProject = addAction(QIcon("://icons/32x32/Filter.png"), tr("Filter Project"), this, SLOT(slotFilterProject()));
     actionAutoSave      = addAction(QIcon("://icons/32x32/AutoSave.png"), tr("Autom. Save"), this, SLOT(slotAutoSaveProject(bool)));
     actionAutoSave->setCheckable(true);
     actionUserFocusPrj  = addAction(QIcon("://icons/32x32/Focus.png"), tr("Active Project"), this, SLOT(slotUserFocusPrj(bool)));
@@ -994,6 +995,7 @@ void CGisListWks::showMenuProjectWks(const QPoint& p)
     menu.addSeparator();
     menu.addAction(actionSortByTime);
     menu.addAction(actionSortByName);
+    menu.addAction(actionFilterProject);
     menu.addSeparator();
     menu.addAction(actionAutoSave);
     menu.addAction(actionUserFocusPrj);
@@ -2081,6 +2083,59 @@ void CGisListWks::slotSyncDevWks()
     }
 }
 
+void CGisListWks::slotFilterProject()
+{
+//open window for user to type search in
+    bool ok;
+    QString query= QInputDialog::getText(this, tr("Enter query:"),
+                                         tr("For syntax details see Workspace search above projects."),
+                                         QLineEdit::Normal,
+                                         tr("Enter query"), &ok);
+    if(ok)
+    {
+        CSearch projectSearch = CSearch(query);
+        for(QTreeWidgetItem * item : selectedItems())
+        {
+            IGisProject * project = dynamic_cast<IGisProject*>(item);
+            if(project == nullptr)
+            {
+                continue;
+            }
+            project->setProjectFilter(projectSearch);
+
+            //test whether syntax errors occured and show error
+            if(projectSearch.getSyntaxError())
+            {
+                project->setIcon(eColumnName, QIcon(":/icons/32x32/Attention.png"));
+                if(projectSearch.getSearchMode() == CSearch::eSearchModeName)
+                {
+                    project->setToolTip(eColumnName, tr("Error parsing search.") + " " + tr("Continuing with search for match in names"));
+                }
+                else
+                {
+                    project->setToolTip(eColumnName, tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
+                }
+            }
+            //only show syntax error if present, since that is more severe
+            else if(projectSearch.isAutodetectedProperty())
+            {
+                project->setIcon(eColumnName, QIcon(":/icons/32x32/Hint.png"));
+                project->setToolTip(eColumnName, tr("Automatically set the property, please make sure the results are correct."));
+            }
+            else if(query == "")
+            {
+                //restore normal look
+                project->setIcon(eColumnName, QIcon());
+                project->setToolTip(eColumnName, project->getInfo());
+            }
+            else
+            {
+                project->setIcon(eColumnName, QIcon(":/icons/32x32/Filter.png"));
+                project->setToolTip(eColumnName, tr("Search query:") + query);
+            }
+        }
+    }
+}
 
 bool CGisListWks::event(QEvent * e)
 {

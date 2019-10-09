@@ -524,7 +524,9 @@ public:
         return noUpdate;
     }
 
-    void filter(CSearch& search);
+    void setProjectFilter(CSearch& search);
+    void setWorkspaceFilter(CSearch& search);
+    void applyFilters();
 
     void confirmPendingAutoSave()
     {
@@ -612,6 +614,9 @@ protected:
     quint32 totalElapsedSecondsMoving = 0;
 
     QString hashTrkWpt[2];
+
+    CSearch projectSearch;
+    CSearch workspaceSearch;
 };
 
 class CProjectMountLock

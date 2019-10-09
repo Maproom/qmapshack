@@ -19,6 +19,7 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterNewDate.h"
+#include "units/IUnit.h"
 
 CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
@@ -26,7 +27,11 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
 {
     setupUi(this);
 
-    labelTimeZone->setText(QDateTime::currentDateTime().timeZone().abbreviation(QDateTime::currentDateTime()));
+    IUnit::tz_mode_e mode;
+    QByteArray zone;
+    bool format;
+    IUnit::getTimeZoneSetup(mode, zone, format);
+    labelTimeZone->setText(zone);
     dateTimeEdit->setDateTime(QDateTime::currentDateTime());
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterNewDate::slotApply);
@@ -35,6 +40,12 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
 void CFilterNewDate::slotApply()
 {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterNewDate(dateTimeEdit->dateTime().toUTC());
+    IUnit::tz_mode_e mode;
+    QByteArray zone;
+    bool format;
+    IUnit::getTimeZoneSetup(mode, zone, format);
+    QDateTime newDateTime=dateTimeEdit->dateTime();
+    newDateTime.setTimeZone(QTimeZone(zone));
+    trk.filterNewDate(newDateTime.toUTC());
 }
 

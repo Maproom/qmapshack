@@ -1,4 +1,5 @@
 V1.XX.X
+[QMS-37] Fix inconsistent use of time zones
 [QMS-27] Error in workspace search for attributes
 [QMS-18] Improved explanation of 'Date equals'
 [QMS-5] App crashes on using the "Change Start Point" filter

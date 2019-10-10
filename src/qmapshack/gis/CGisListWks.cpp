@@ -112,7 +112,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionGroupSort->setExclusive(true);
     actionSortByTime    = addSortAction(this, actionGroupSort, "://icons/32x32/Time.png", tr("Sort by Time"), IGisProject::eSortFolderTime);
     actionSortByName    = addSortAction(this, actionGroupSort, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
-    actionFilterProject = addAction(QIcon("://icons/32x32/Filter.png"), tr("Filter Project"), this, SLOT(slotFilterProject()));
+    actionFilterProject = addAction(QIcon("://icons/32x32/Filter.png"), tr("Filter Project"), this, SLOT(slotAddProjectFilter()));
+    actionFilterProject->setCheckable(true);
     actionAutoSave      = addAction(QIcon("://icons/32x32/AutoSave.png"), tr("Autom. Save"), this, SLOT(slotAutoSaveProject(bool)));
     actionAutoSave->setCheckable(true);
     actionUserFocusPrj  = addAction(QIcon("://icons/32x32/Focus.png"), tr("Active Project"), this, SLOT(slotUserFocusPrj(bool)));
@@ -2083,17 +2084,10 @@ void CGisListWks::slotSyncDevWks()
     }
 }
 
-void CGisListWks::slotFilterProject()
+void CGisListWks::slotAddProjectFilter()
 {
-//open window for user to type search in
-    bool ok;
-    QString query= QInputDialog::getText(this, tr("Enter query:"),
-                                         tr("For syntax details see Workspace search above projects."),
-                                         QLineEdit::Normal,
-                                         tr("Enter query"), &ok);
-    if(ok)
+    if(actionFilterProject->isChecked())
     {
-        CSearch projectSearch = CSearch(query);
         for(QTreeWidgetItem * item : selectedItems())
         {
             IGisProject * project = dynamic_cast<IGisProject*>(item);
@@ -2101,37 +2095,34 @@ void CGisListWks::slotFilterProject()
             {
                 continue;
             }
-            project->setProjectFilter(projectSearch);
-
-            //test whether syntax errors occured and show error
-            if(projectSearch.getSyntaxError())
+            QTreeWidgetItem* searchItem = new QTreeWidgetItem(project, {tr("Search:")});
+            CSearchLineEdit* edit = new CSearchLineEdit(this, project);
+            project->insertChild(0, searchItem);
+            project->setExpanded(true);
+            this->setItemWidget(searchItem, eColumnName, edit);
+        }
+    }
+    else
+    {
+        for(QTreeWidgetItem * item : selectedItems())
+        {
+            IGisProject * project = dynamic_cast<IGisProject*>(item);
+            if(project == nullptr)
             {
-                project->setIcon(eColumnName, QIcon(":/icons/32x32/Attention.png"));
-                if(projectSearch.getSearchMode() == CSearch::eSearchModeName)
+                continue;
+            }
+            project->setProjectFilter(CSearch(""));
+            for(int i = 0; i < project->childCount(); i++)
+            {
+                QTreeWidgetItem* searchItem = project->child(i);
+                //Make sure not to remove the wrong item.
+                //Ideally one could only remove at index 0,
+                //but for some reason the search won't stay there
+                if(searchItem->text(0) == tr("Search:"))
                 {
-                    project->setToolTip(eColumnName, tr("Error parsing search.") + " " + tr("Continuing with search for match in names"));
+                    project->removeChild(searchItem);
+                    break;
                 }
-                else
-                {
-                    project->setToolTip(eColumnName, tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
-                }
-            }
-            //only show syntax error if present, since that is more severe
-            else if(projectSearch.isAutodetectedProperty())
-            {
-                project->setIcon(eColumnName, QIcon(":/icons/32x32/Hint.png"));
-                project->setToolTip(eColumnName, tr("Automatically set the property, please make sure the results are correct."));
-            }
-            else if(query == "")
-            {
-                //restore normal look
-                project->setIcon(eColumnName, QIcon());
-                project->setToolTip(eColumnName, project->getInfo());
-            }
-            else
-            {
-                project->setIcon(eColumnName, QIcon(":/icons/32x32/Filter.png"));
-                project->setToolTip(eColumnName, tr("Search query:") + query);
             }
         }
     }

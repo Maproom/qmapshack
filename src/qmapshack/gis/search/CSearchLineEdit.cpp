@@ -1,0 +1,162 @@
+#include "CSearchLineEdit.h"
+
+CSearchExplanationDialog* CSearchLineEdit::explanationDlg = nullptr;
+
+CSearchLineEdit::CSearchLineEdit(QWidget *parent, IGisProject * project)
+    : CSearchLineEdit(parent)
+{
+    connectedProject=project;
+}
+
+CSearchLineEdit::CSearchLineEdit(QWidget *parent)
+    : QLineEdit (parent)
+{
+    actionClearFilter = new QAction(QIcon(":/icons/32x32/Filter.png"), tr("Clear Filter"), this);
+    actionHelp = new QAction(QIcon(":/icons/32x32/CSrcUnknown.png"), tr("Clear Filter"), this);
+    actionSetupFilter = new QAction(QIcon(":/icons/32x32/Apply.png"), tr("Setup Filter"), this);
+    actionError = new QAction(QIcon(":/icons/32x32/Attention.png"), tr("Error parsing search"), this);
+    actionAutoProperty = new QAction(QIcon(":/icons/32x32/Hint.png"), tr("Auto selected property"), this);
+
+    actionNameOnly = new QAction(tr("Name Only"), this);
+    actionNameOnly->setCheckable(true);
+    actionCompleteText = new QAction(tr("Complete Text"), this);
+    actionCompleteText->setCheckable(true);
+    actionCaseSensitive = new QAction(tr("Clear Filter"), this);
+    actionCaseSensitive->setCheckable(true);
+
+    addAction(actionClearFilter, QLineEdit::TrailingPosition);
+    addAction(actionHelp, QLineEdit::TrailingPosition);
+    addAction(actionSetupFilter, QLineEdit::LeadingPosition);
+
+    connect(actionSetupFilter, &QAction::triggered, this, &CSearchLineEdit::slotSetupSearch);
+    connect(actionNameOnly, &QAction::triggered, this, &CSearchLineEdit::slotSearchNameOnly);
+    connect(actionCompleteText, &QAction::triggered, this, &CSearchLineEdit::slotSearchCompleteText);
+    connect(actionCaseSensitive, &QAction::triggered, this, &CSearchLineEdit::slotCaseSensitive);
+    connect(actionHelp, &QAction::triggered, this, &CSearchLineEdit::slotSearchHelp);
+    connect(this, &CSearchLineEdit::textChanged, this, &CSearchLineEdit::slotCreateSearch);
+}
+
+void CSearchLineEdit::slotSetupSearch()
+{
+    QMenu * menu = new QMenu(this);
+    menu->addSection(tr("Apply filter to"));
+    menu->addAction(actionNameOnly);
+    menu->addAction(actionCompleteText);
+    menu->addSection(tr("Case sensitivity"));
+    menu->addAction(actionCaseSensitive);
+
+    QActionGroup* actionGroup = new QActionGroup(menu);
+    actionGroup->addAction(actionNameOnly);
+    actionGroup->addAction(actionCompleteText);
+
+    switch(CSearch::getSearchMode())
+    {
+    case CSearch::eSearchModeName:
+        actionNameOnly->setChecked(true);
+        break;
+
+    case CSearch::eSearchModeText:
+        actionCompleteText->setChecked(true);
+        break;
+    }
+
+    if(CSearch::getCaseSensitivity() == Qt::CaseSensitive)
+    {
+        actionCaseSensitive->setChecked(true);
+    }
+    else
+    {
+        actionCaseSensitive->setChecked(false);
+    }
+    menu->move(parentWidget()->mapToGlobal(geometry().topLeft()));
+    menu->exec();
+}
+
+void CSearchLineEdit::slotSearchHelp()
+{
+    if(explanationDlg == nullptr)
+    {
+        explanationDlg = new CSearchExplanationDialog(this);
+    }
+
+    if(!explanationDlg->isVisible())
+    {
+        explanationDlg->show();
+    }
+}
+
+
+void CSearchLineEdit::slotSearchNameOnly(bool yes)
+{
+    if(yes)
+    {
+        CSearch::setSearchMode(CSearch::eSearchModeName);
+        //Trigger reprocessing of search
+        slotCreateSearch(text());
+    }
+}
+
+void CSearchLineEdit::slotSearchCompleteText(bool yes)
+{
+    if(yes)
+    {
+        CSearch::setSearchMode(CSearch::eSearchModeText);
+        //Trigger reprocessing of search
+        slotCreateSearch(text());
+    }
+}
+
+void CSearchLineEdit::slotCaseSensitive(bool yes)
+{
+    if(yes)
+    {
+        CSearch::setCaseSensitivity(Qt::CaseSensitive);
+    }
+    else
+    {
+        CSearch::setCaseSensitivity(Qt::CaseInsensitive);
+    }
+    //Trigger reprocessing of search
+    slotCreateSearch(text());
+}
+
+void CSearchLineEdit::slotCreateSearch(const QString& str)
+{
+    actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
+
+    CSearch currentSearch(str);
+
+    //test whether syntax errors occured and show error
+    if(currentSearch.getSyntaxError())
+    {
+        addAction(actionError, QLineEdit::TrailingPosition);
+        if(currentSearch.getSearchMode() == CSearch::eSearchModeName)
+        {
+            actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in names"));
+        }
+        else
+        {
+            actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
+        }
+    }
+    else
+    {
+        removeAction(actionError);
+    }
+
+    if(currentSearch.isAutodetectedProperty())
+    {
+        addAction(actionAutoProperty, QLineEdit::TrailingPosition);
+        actionAutoProperty->setToolTip(tr("Automatically set the property, please make sure the results are correct."));
+    }
+    else
+    {
+        removeAction(actionAutoProperty);
+    }
+
+    if(connectedProject != nullptr)
+    {
+        connectedProject->setProjectFilter(currentSearch);
+    }
+    emit searchChanged(currentSearch);
+}

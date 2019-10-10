@@ -66,8 +66,6 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     : QTreeWidgetItem(parent)
     , type(type)
     , filename(filename)
-    , projectSearch("")
-    , workspaceSearch("")
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
@@ -1090,6 +1088,7 @@ void IGisProject::sortItems()
     QList<IGisItem*> ovls;
 
     QList<QTreeWidgetItem*> items = takeChildren();
+    QList<QTreeWidgetItem*> others; //For example Search
     for(QTreeWidgetItem* item : items)
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
@@ -1145,6 +1144,8 @@ void IGisProject::sortItems()
     }
 
     addChildren(items);
+    //Since CSearchLineEdit is lost on reordering
+    setProjectFilter(CSearch(""));
     applyFilters();
 }
 
@@ -1177,13 +1178,13 @@ void IGisProject::sortItems(QList<IGisItem *> &items) const
     }
 }
 
-void IGisProject::setProjectFilter(CSearch& search)
+void IGisProject::setProjectFilter(const CSearch& search)
 {
     projectSearch=search;
     applyFilters();
 }
 
-void IGisProject::setWorkspaceFilter(CSearch& search)
+void IGisProject::setWorkspaceFilter(const CSearch& search)
 {
     workspaceSearch = search;
     applyFilters();

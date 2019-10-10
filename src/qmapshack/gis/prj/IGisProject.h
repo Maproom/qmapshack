@@ -524,8 +524,8 @@ public:
         return noUpdate;
     }
 
-    void setProjectFilter(CSearch& search);
-    void setWorkspaceFilter(CSearch& search);
+    void setProjectFilter(const CSearch& search);
+    void setWorkspaceFilter(const CSearch& search);
     void applyFilters();
 
     void confirmPendingAutoSave()
@@ -615,8 +615,8 @@ protected:
 
     QString hashTrkWpt[2];
 
-    CSearch projectSearch;
-    CSearch workspaceSearch;
+    CSearch projectSearch= CSearch("");
+    CSearch workspaceSearch= CSearch("");
 };
 
 class CProjectMountLock

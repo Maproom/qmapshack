@@ -21,6 +21,7 @@
 #define CGISLISTWKS_H
 
 #include "gis/prj/IGisProject.h"
+#include "gis/search/CSearchLineEdit.h"
 #include "gis/trk/CTrackData.h"
 
 #include <QPointer>
@@ -126,7 +127,7 @@ private slots:
     void slotEleWptTrk();
     void slotAutoSaveProject(bool on);
     void slotUserFocusPrj(bool yes);
-    void slotFilterProject();
+    void slotAddProjectFilter();
 
 private:
     void configDB();

@@ -1,18 +1,21 @@
 #include "CSearchLineEdit.h"
 
+#include <canvas/CCanvas.h>
+
 CSearchExplanationDialog* CSearchLineEdit::explanationDlg = nullptr;
 
-CSearchLineEdit::CSearchLineEdit(QWidget *parent, IGisProject * project)
+CSearchLineEdit::CSearchLineEdit(QWidget *parent, IGisProject * project, QTreeWidgetItem * searchItem)
     : CSearchLineEdit(parent)
 {
     connectedProject=project;
+    this->searchItem = searchItem;
 }
 
 CSearchLineEdit::CSearchLineEdit(QWidget *parent)
     : QLineEdit (parent)
 {
     actionClearFilter = new QAction(QIcon(":/icons/32x32/Filter.png"), tr("Clear Filter"), this);
-    actionHelp = new QAction(QIcon(":/icons/32x32/CSrcUnknown.png"), tr("Clear Filter"), this);
+    actionHelp = new QAction(QIcon(":/icons/32x32/CSrcUnknown.png"), tr("Open Help Window"), this);
     actionSetupFilter = new QAction(QIcon(":/icons/32x32/Apply.png"), tr("Setup Filter"), this);
     actionError = new QAction(QIcon(":/icons/32x32/Attention.png"), tr("Error parsing search"), this);
     actionAutoProperty = new QAction(QIcon(":/icons/32x32/Hint.png"), tr("Auto selected property"), this);
@@ -21,7 +24,7 @@ CSearchLineEdit::CSearchLineEdit(QWidget *parent)
     actionNameOnly->setCheckable(true);
     actionCompleteText = new QAction(tr("Complete Text"), this);
     actionCompleteText->setCheckable(true);
-    actionCaseSensitive = new QAction(tr("Clear Filter"), this);
+    actionCaseSensitive = new QAction(tr("Case Sensitive"), this);
     actionCaseSensitive->setCheckable(true);
 
     addAction(actionClearFilter, QLineEdit::TrailingPosition);
@@ -33,6 +36,7 @@ CSearchLineEdit::CSearchLineEdit(QWidget *parent)
     connect(actionCompleteText, &QAction::triggered, this, &CSearchLineEdit::slotSearchCompleteText);
     connect(actionCaseSensitive, &QAction::triggered, this, &CSearchLineEdit::slotCaseSensitive);
     connect(actionHelp, &QAction::triggered, this, &CSearchLineEdit::slotSearchHelp);
+    connect(actionClearFilter, &QAction::triggered, this, &CSearchLineEdit::slotClearFilter);
     connect(this, &CSearchLineEdit::textChanged, this, &CSearchLineEdit::slotCreateSearch);
 }
 
@@ -82,6 +86,16 @@ void CSearchLineEdit::slotSearchHelp()
     if(!explanationDlg->isVisible())
     {
         explanationDlg->show();
+    }
+}
+
+void CSearchLineEdit::slotClearFilter()
+{
+    setText("");
+    if(connectedProject != nullptr)
+    {
+        //This kind of cast, since Constuctor that accepts project only accepts QTreeWidgetItems
+        connectedProject->removeChild(searchItem);
     }
 }
 
@@ -157,6 +171,7 @@ void CSearchLineEdit::slotCreateSearch(const QString& str)
     if(connectedProject != nullptr)
     {
         connectedProject->setProjectFilter(currentSearch);
+        CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
     }
     emit searchChanged(currentSearch);
 }

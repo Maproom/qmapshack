@@ -11,7 +11,7 @@ class CSearchLineEdit : public QLineEdit
 {
     Q_OBJECT
 public:
-    CSearchLineEdit(QWidget *parent, IGisProject *project);
+    CSearchLineEdit(QWidget *parent, IGisProject *project, QTreeWidgetItem* searchItem);
     CSearchLineEdit(QWidget* parent);
 
 signals:
@@ -24,6 +24,7 @@ private slots:
     void slotCreateSearch(const QString &str);
     void slotSetupSearch();
     void slotSearchHelp();
+    void slotClearFilter();
 
 private:
     QAction * actionClearFilter;
@@ -36,6 +37,7 @@ private:
     QAction * actionAutoProperty;
 
     IGisProject * connectedProject = nullptr;
+    QTreeWidgetItem * searchItem = nullptr;
 
     static CSearchExplanationDialog* explanationDlg;
 };

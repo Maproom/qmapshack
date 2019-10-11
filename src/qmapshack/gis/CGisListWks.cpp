@@ -113,7 +113,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSortByTime    = addSortAction(this, actionGroupSort, "://icons/32x32/Time.png", tr("Sort by Time"), IGisProject::eSortFolderTime);
     actionSortByName    = addSortAction(this, actionGroupSort, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
     actionFilterProject = addAction(QIcon("://icons/32x32/Filter.png"), tr("Filter Project"), this, SLOT(slotAddProjectFilter()));
-    actionFilterProject->setCheckable(true);
     actionAutoSave      = addAction(QIcon("://icons/32x32/AutoSave.png"), tr("Autom. Save"), this, SLOT(slotAutoSaveProject(bool)));
     actionAutoSave->setCheckable(true);
     actionUserFocusPrj  = addAction(QIcon("://icons/32x32/Focus.png"), tr("Active Project"), this, SLOT(slotUserFocusPrj(bool)));
@@ -2086,45 +2085,34 @@ void CGisListWks::slotSyncDevWks()
 
 void CGisListWks::slotAddProjectFilter()
 {
-    if(actionFilterProject->isChecked())
+    for(QTreeWidgetItem * item : selectedItems())
     {
-        for(QTreeWidgetItem * item : selectedItems())
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project == nullptr)
         {
-            IGisProject * project = dynamic_cast<IGisProject*>(item);
-            if(project == nullptr)
+            continue;
+        }
+        bool hasSearch = false;
+        for(int i = 0; i < project->childCount(); i++)
+        {
+            QTreeWidgetItem* searchItem = project->child(i);
+            //Ideally one could only check at index 0,
+            //but for some reason the search won't stay there
+            if(searchItem->text(0) == tr("Search:"))
             {
-                continue;
+                hasSearch=true;
+                break;
             }
+        }
+        if(!hasSearch)
+        {
             QTreeWidgetItem* searchItem = new QTreeWidgetItem(project, {tr("Search:")});
-            CSearchLineEdit* edit = new CSearchLineEdit(this, project);
+            CSearchLineEdit* edit = new CSearchLineEdit(this, project, searchItem);
             project->insertChild(0, searchItem);
-            project->setExpanded(true);
             this->setItemWidget(searchItem, eColumnName, edit);
         }
-    }
-    else
-    {
-        for(QTreeWidgetItem * item : selectedItems())
-        {
-            IGisProject * project = dynamic_cast<IGisProject*>(item);
-            if(project == nullptr)
-            {
-                continue;
-            }
-            project->setProjectFilter(CSearch(""));
-            for(int i = 0; i < project->childCount(); i++)
-            {
-                QTreeWidgetItem* searchItem = project->child(i);
-                //Make sure not to remove the wrong item.
-                //Ideally one could only remove at index 0,
-                //but for some reason the search won't stay there
-                if(searchItem->text(0) == tr("Search:"))
-                {
-                    project->removeChild(searchItem);
-                    break;
-                }
-            }
-        }
+        //Set expanded anyways to show that search exists
+        project->setExpanded(true);
     }
 }
 

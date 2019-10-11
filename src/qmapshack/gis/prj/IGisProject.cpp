@@ -1118,6 +1118,8 @@ void IGisProject::sortItems()
             ovls << ovl;
             continue;
         }
+
+        others<<item;
     }
 
     sortItems(trks);
@@ -1126,6 +1128,7 @@ void IGisProject::sortItems()
     sortItems(ovls);
 
     items.clear();
+    items<<others;
     for(IGisItem * item : trks)
     {
         items << item;
@@ -1144,8 +1147,21 @@ void IGisProject::sortItems()
     }
 
     addChildren(items);
-    //Since CSearchLineEdit is lost on reordering
-    setProjectFilter(CSearch(""));
+    CGisListWks* widget = dynamic_cast<CGisListWks*>(treeWidget());
+    if(widget != nullptr)
+    {
+        for(QTreeWidgetItem * searchItem : others)
+        {
+            if(searchItem->text(0) == tr("Search:"))
+            {
+                CSearchLineEdit* edit = new CSearchLineEdit(widget, this, searchItem);
+                edit->setText(projectSearch.getSearchText());
+                //eColumnName is 1
+                widget->setItemWidget(searchItem, 1, edit);
+                break;
+            }
+        }
+    }
     applyFilters();
 }
 

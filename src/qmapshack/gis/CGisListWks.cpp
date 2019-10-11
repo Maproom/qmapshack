@@ -2109,6 +2109,7 @@ void CGisListWks::slotAddProjectFilter()
             QTreeWidgetItem* searchItem = new QTreeWidgetItem(project, {tr("Search:")});
             CSearchLineEdit* edit = new CSearchLineEdit(this, project, searchItem);
             project->insertChild(0, searchItem);
+            project->setSortingFolder(project->getSortingFolder());
             this->setItemWidget(searchItem, eColumnName, edit);
         }
         //Set expanded anyways to show that search exists

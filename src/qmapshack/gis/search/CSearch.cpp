@@ -31,6 +31,7 @@ CSearch::CSearch(QString searchstring)
     //Initialisation
     searchTypeLambdaMap = initSearchTypeLambdaMap();
 
+    searchText = searchstring;
     if(searchstring.simplified().isEmpty())
     {
         return;

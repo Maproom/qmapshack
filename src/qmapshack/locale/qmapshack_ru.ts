@@ -6689,7 +6689,7 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
         <source>&apos;Date equals&apos; matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local time zone is taken for the query.</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Дата равна&quot; соответствует всему, что находится в пределах следующих 24 часов, если время предоставляется с датой. Если нет времени, то это соответсвует всему в день запроса. Имейте в виду, что время преобразуется в UTC перед сравнением, и ваш местный часовой пояс берется для запроса.</translation>
     </message>
     <message>
         <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>

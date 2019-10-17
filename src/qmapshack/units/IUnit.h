@@ -78,7 +78,7 @@ public:
         return list;
     }
 
-    enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
+    enum type_e {eTypeMetric, eTypeImperial, eTypeNautic, eTypeAviation};
     /// instantiate the correct unit object
     static void setUnitType(type_e t, QObject * parent);
 

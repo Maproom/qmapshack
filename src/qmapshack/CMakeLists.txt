@@ -315,6 +315,7 @@ set( SRCS
     units/CUnitImperial.cpp
     units/CUnitMetric.cpp
     units/CUnitNautic.cpp
+    units/CUnitAviation.cpp
     units/CUnitsSetup.cpp
     units/IUnit.cpp
     widgets/CColorLegend.cpp
@@ -655,6 +656,7 @@ set( HDRS
     units/CUnitImperial.h
     units/CUnitMetric.h
     units/CUnitNautic.h
+    units/CUnitAviation.h
     units/CUnitsSetup.h
     units/IUnit.h
     version.h

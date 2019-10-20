@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-20] Windows Start Menu - change links from bitbucket to github
 [QMS-27] Error in workspace search for attributes
 [QMS-31] Fix all links to Bitbucket in the code
+[QMS-22] Aviation units: nm for distances and feet for altitude
 
 ------------------------------------------------------------------------
 ---------Restart issue numbering because of migration to GitHub---------

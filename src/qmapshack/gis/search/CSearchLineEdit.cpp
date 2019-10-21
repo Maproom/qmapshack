@@ -1,15 +1,23 @@
+/**********************************************************************************************
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
 #include "CSearchLineEdit.h"
 
-#include <canvas/CCanvas.h>
-
 CSearchExplanationDialog* CSearchLineEdit::explanationDlg = nullptr;
-
-CSearchLineEdit::CSearchLineEdit(QWidget *parent, IGisProject * project, QTreeWidgetItem * searchItem)
-    : CSearchLineEdit(parent)
-{
-    connectedProject=project;
-    this->searchItem = searchItem;
-}
 
 CSearchLineEdit::CSearchLineEdit(QWidget *parent)
     : QLineEdit (parent)
@@ -40,6 +48,14 @@ CSearchLineEdit::CSearchLineEdit(QWidget *parent)
     connect(this, &CSearchLineEdit::textChanged, this, &CSearchLineEdit::slotCreateSearch);
 }
 
+CSearchLineEdit::CSearchLineEdit(QWidget *parent, IGisProject* project, CSearch* search) : CSearchLineEdit(parent)
+{
+    connectedProject=project;
+    if(search != nullptr)
+    {
+        setText(search->getSearchText());
+    }
+}
 void CSearchLineEdit::slotSetupSearch()
 {
     QMenu * menu = new QMenu(this);
@@ -92,11 +108,7 @@ void CSearchLineEdit::slotSearchHelp()
 void CSearchLineEdit::slotClearFilter()
 {
     setText("");
-    if(connectedProject != nullptr)
-    {
-        //This kind of cast, since Constuctor that accepts project only accepts QTreeWidgetItems
-        connectedProject->removeChild(searchItem);
-    }
+    emit searchCleared(connectedProject);
 }
 
 
@@ -168,10 +180,5 @@ void CSearchLineEdit::slotCreateSearch(const QString& str)
         removeAction(actionAutoProperty);
     }
 
-    if(connectedProject != nullptr)
-    {
-        connectedProject->setProjectFilter(currentSearch);
-        CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
-    emit searchChanged(currentSearch);
+    emit searchChanged(currentSearch, connectedProject);
 }

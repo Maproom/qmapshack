@@ -131,6 +131,7 @@ set( SRCS
     gis/search/CGeoSearch.cpp
     gis/search/CGeoSearchConfig.cpp
     gis/search/CGeoSearchConfigDialog.cpp
+    gis/search/CProjectFilterItem.cpp
     gis/search/CSearchExplanationDialog.cpp
     gis/search/CSearchLineEdit.cpp
     gis/search/CGeoSearchWeb.cpp
@@ -473,6 +474,7 @@ set( HDRS
     gis/search/CGeoSearchConfigDialog.h
     gis/search/CGeoSearchWeb.h
     gis/search/CGeoSearchWebConfigDialog.h
+    gis/search/CProjectFilterItem.h
     gis/search/CSearchExplanationDialog.h
     gis/search/CSearchLineEdit.h
     gis/slf/CSlfProject.h

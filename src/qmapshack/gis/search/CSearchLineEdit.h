@@ -1,21 +1,43 @@
+/**********************************************************************************************
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
 #ifndef CSEARCHLINEEDIT_H
 #define CSEARCHLINEEDIT_H
 
 #include "CSearchExplanationDialog.h"
 #include "gis/search/CSearch.h"
-#include <gis/prj/IGisProject.h>
+#include <canvas/CCanvas.h>
 #include <QLineEdit>
 #include <QMenu>
+class IGisProject;
 
 class CSearchLineEdit : public QLineEdit
 {
     Q_OBJECT
 public:
-    CSearchLineEdit(QWidget *parent, IGisProject *project, QTreeWidgetItem* searchItem);
     CSearchLineEdit(QWidget* parent);
+    CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch *search=nullptr);
+    ~CSearchLineEdit()
+    {
+    }
 
 signals:
-    void searchChanged(CSearch newSearch);
+    void searchChanged(CSearch newSearch, IGisProject* project);
+    void searchCleared(IGisProject* project);
 
 private slots:
     void slotCaseSensitive(bool yes);

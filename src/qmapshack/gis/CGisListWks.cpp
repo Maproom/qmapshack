@@ -2092,29 +2092,21 @@ void CGisListWks::slotAddProjectFilter()
         {
             continue;
         }
-        bool hasSearch = false;
-        for(int i = 0; i < project->childCount(); i++)
-        {
-            QTreeWidgetItem* searchItem = project->child(i);
-            //Ideally one could only check at index 0,
-            //but for some reason the search won't stay there
-            if(searchItem->text(0) == tr("Search:"))
-            {
-                hasSearch=true;
-                break;
-            }
-        }
-        if(!hasSearch)
-        {
-            QTreeWidgetItem* searchItem = new QTreeWidgetItem(project, {tr("Search:")});
-            CSearchLineEdit* edit = new CSearchLineEdit(this, project, searchItem);
-            project->insertChild(0, searchItem);
-            project->setSortingFolder(project->getSortingFolder());
-            this->setItemWidget(searchItem, eColumnName, edit);
-        }
-        //Set expanded anyways to show that search exists
-        project->setExpanded(true);
+        CProjectFilterItem* projectFilter = project->filterProject(true);
+        connect(projectFilter->getLineEdit(), &CSearchLineEdit::searchChanged, this, &CGisListWks::slotUpdateProjectFilter);
+        connect(projectFilter->getLineEdit(), &CSearchLineEdit::searchCleared, this, &CGisListWks::slotRemoveProjectFilter);
     }
+}
+
+void CGisListWks::slotUpdateProjectFilter(CSearch search, IGisProject* project)
+{
+    project->setProjectFilter(search);
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
+}
+
+void CGisListWks::slotRemoveProjectFilter(IGisProject* project)
+{
+    project->filterProject(false);
 }
 
 bool CGisListWks::event(QEvent * e)
@@ -2352,7 +2344,6 @@ void CGisListWks::slotSetSortMode(IGisProject::sorting_folder_e mode, bool check
     {
         return;
     }
-
 
     IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
     if(project != nullptr)

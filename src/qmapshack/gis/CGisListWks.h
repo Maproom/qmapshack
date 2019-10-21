@@ -128,6 +128,8 @@ private slots:
     void slotAutoSaveProject(bool on);
     void slotUserFocusPrj(bool yes);
     void slotAddProjectFilter();
+    void slotUpdateProjectFilter(CSearch search, IGisProject* projectFilter);
+    void slotRemoveProjectFilter(IGisProject* projectFilter);
 
 private:
     void configDB();

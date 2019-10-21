@@ -22,6 +22,7 @@
 
 #include "gis/IGisItem.h"
 #include "gis/rte/router/IRouter.h"
+#include "gis/search/CProjectFilterItem.h"
 #include "gis/search/CSearch.h"
 #include <QDebug>
 #include <QMessageBox>
@@ -547,6 +548,11 @@ public:
         return keyUserFocus;
     }
 
+    CProjectFilterItem* filterProject(bool filter);
+    CProjectFilterItem* getProjectFilterItem()
+    {
+        return projectFilter;
+    }
 protected:
     void genKey() const;
     virtual void setupName(const QString& defaultName);
@@ -617,7 +623,10 @@ protected:
 
     CSearch projectSearch= CSearch("");
     CSearch workspaceSearch= CSearch("");
+
+    CProjectFilterItem* projectFilter = nullptr;
 };
+Q_DECLARE_METATYPE(IGisProject*)
 
 class CProjectMountLock
 {

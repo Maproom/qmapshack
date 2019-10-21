@@ -70,6 +70,9 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
 
+    //QObject::connect(projectFilter, &CProjectFilterItem::searchChanged, this, &IGisProject::slotSearchChanged);
+    //QObject::connect(projectFilter, &CProjectFilterItem::searchCleared, this, &IGisProject::slotSearchCleared);
+
     if(parent)
     {
         // move project up the list until there a re only projects, no devices
@@ -98,12 +101,13 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     : QTreeWidgetItem(parent)
     , type(type)
     , filename(filename)
-    , projectSearch("")
-    , workspaceSearch("")
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
     nameSuffix = parent->getName();
+
+    //QObject::connect(projectFilter, &CProjectFilterItem::searchChanged, this, &IGisProject::slotSearchChanged);
+    //QObject::connect(projectFilter, &CProjectFilterItem::searchCleared, this, &IGisProject::slotSearchCleared);
 }
 
 IGisProject::~IGisProject()
@@ -1147,20 +1151,9 @@ void IGisProject::sortItems()
     }
 
     addChildren(items);
-    CGisListWks* widget = dynamic_cast<CGisListWks*>(treeWidget());
-    if(widget != nullptr)
+    if(projectFilter != nullptr)
     {
-        for(QTreeWidgetItem * searchItem : others)
-        {
-            if(searchItem->text(0) == tr("Search:"))
-            {
-                CSearchLineEdit* edit = new CSearchLineEdit(widget, this, searchItem);
-                edit->setText(projectSearch.getSearchText());
-                //eColumnName is 1
-                widget->setItemWidget(searchItem, 1, edit);
-                break;
-            }
-        }
+        projectFilter->showLineEdit(&projectSearch);
     }
     applyFilters();
 }
@@ -1251,4 +1244,27 @@ void IGisProject::gainUserFocus(bool yes)
         setIcon(CGisListWks::eColumnName, QIcon());
         keyUserFocus.clear();
     }
+}
+
+CProjectFilterItem* IGisProject::filterProject(bool filter)
+{
+    if(filter)
+    {
+        if(projectFilter == nullptr)
+        {
+            projectFilter = new CProjectFilterItem(this);
+            insertChild(0, projectFilter);
+        }
+        //Set expanded anyways to show that search exists
+        projectFilter->showLineEdit();
+        setExpanded(true);
+    }
+    else
+    {
+        removeChild(projectFilter);
+        delete projectFilter;
+        projectFilter = nullptr;
+    }
+    sortItems();
+    return projectFilter;
 }

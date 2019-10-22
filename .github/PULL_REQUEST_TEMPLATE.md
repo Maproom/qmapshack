@@ -1,4 +1,4 @@
-**What is the linked issue for this pull request (start with a `#`):** #
+**What is the linked issue for this pull request (start with a `#`):** QMS-#
 
 **Describe roughly what you have done:**
 
@@ -24,4 +24,4 @@ I added...
 
 **If there are user facing changes did you add the ticket number and title into the changelog?**
 
-- [ ] yes
+- [ ] yes, I did't forget to change changelog.txt

@@ -167,17 +167,17 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="262"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Für Ungeduldige:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;Ich will ein paar Online Karten.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Für Geduldige:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Schnellstartanleitung.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="293"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="308"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Für Ungeduldige:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Ich will Online DEM Daten.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Für Geduldige:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;hhttps://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
@@ -4264,7 +4264,7 @@ Zeile %2, Spalte %3:
         <location filename="../map/CMapVRT.cpp" line="45"/>
         <location filename="../map/CMapVRT.cpp" line="59"/>
         <location filename="../map/CMapVRT.cpp" line="83"/>
-        <location filename="../map/CMapVRT.cpp" line="133"/>
+        <location filename="../map/CMapVRT.cpp" line="140"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
@@ -4280,9 +4280,18 @@ Zeile %2, Spalte %3:
         <translation>Die Datei muss eine 8 bit Palette oder Graustufen haben.</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="133"/>
+        <location filename="../map/CMapVRT.cpp" line="140"/>
         <source>No georeference information found.</source>
         <translation>Keine Georeferenzierung gefunden.</translation>
+    </message>
+    <message>
+        <location filename="../map/CMapVRT.cpp" line="204"/>
+        <source>Failed to read: %1
+line %2, column %3:
+ %4</source>
+        <translation>Fehler beim Lesen: %1
+Zeile %2, Spalte %3:
+-%4</translation>
     </message>
 </context>
 <context>
@@ -12589,29 +12598,26 @@ sein</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
+        <source>Connect points with a line from a loaded track if possible. (Key: T)</source>
+        <translation>Fügt Punkte aus einem Track zur Linie hinzu. (Taste: T)</translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="294"/>
+        <source>T</source>
+        <translation></translation>
+    </message>
+    <message>
         <source>No auto-routing or line snapping (Ctrl+O)</source>
-        <translation>Kein Auto-Routing oder Fangen an Linie (Strg+O)</translation>
+        <translation type="vanished">Kein Auto-Routing oder Fangen an Linie (Strg+O)</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
-        <source>Ctrl+O</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
         <source>Use auto-routing to between points. (Ctrl+A)</source>
-        <translation>Auto-Routing zwischen Punkten benutzen. (Strg+A)</translation>
+        <translation type="vanished">Auto-Routing zwischen Punkten benutzen. (Strg+A)</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
-        <source>Ctrl+A</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
         <source>Snap line along lines of a vector map. (Ctrl+V)</source>
-        <translation>Fängt die Linie entlang Linien einer Vektorkarte. (Strg+V)</translation>
+        <translation type="vanished">Fängt die Linie entlang Linien einer Vektorkarte. (Strg+V)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="92"/>
@@ -12619,8 +12625,8 @@ sein</translation>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="141"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="164"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="287"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="320"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="337"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="323"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="340"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -12635,37 +12641,53 @@ sein</translation>
         <translation></translation>
     </message>
     <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
+        <source>No auto-routing or line snapping (Key: O)</source>
+        <translation>Kein Auto-Routing oder Fangen an Linie (Taste: O)</translation>
+    </message>
+    <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="218"/>
         <source>0</source>
         <translation></translation>
     </message>
     <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
+        <source>O</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
+        <source>Use auto-routing to between points. (Key: A)</source>
+        <translation>Auto-Routing zwischen Punkten benutzen. (Taste: A)</translation>
+    </message>
+    <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="241"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
         <source>A</source>
         <translation></translation>
     </message>
     <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
+        <source>Snap line along lines of a vector map. (Key: V)</source>
+        <translation>Fängt die Linie entlang Linien einer Vektorkarte. (Taste: V)</translation>
+    </message>
+    <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="264"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="271"/>
         <source>V</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="271"/>
-        <source>Ctrl+V</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
         <source>Connect points with a line from a loaded track if possible.</source>
-        <translation>Fügt Punkte aus einem Track zur Linie hinzu.</translation>
+        <translation type="vanished">Fügt Punkte aus einem Track zur Linie hinzu.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="317"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="320"/>
         <source>Undo last change</source>
         <translation>Letzte Änderung rückgängig machen</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="334"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="337"/>
         <source>Redo last change</source>
         <translation>Letzte Änderung wiederherstellen</translation>
     </message>

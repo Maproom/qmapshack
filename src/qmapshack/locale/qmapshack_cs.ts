@@ -4223,7 +4223,7 @@ line %2, column %3:
         <location filename="../map/CMapVRT.cpp" line="45"/>
         <location filename="../map/CMapVRT.cpp" line="59"/>
         <location filename="../map/CMapVRT.cpp" line="83"/>
-        <location filename="../map/CMapVRT.cpp" line="133"/>
+        <location filename="../map/CMapVRT.cpp" line="140"/>
         <source>Error...</source>
         <translation>Chyba...</translation>
     </message>
@@ -4240,9 +4240,18 @@ line %2, column %3:
         <translation>Soubor musí mít 8 bitovou barevnou paletu nebo být v odstínech šedi.</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="133"/>
+        <location filename="../map/CMapVRT.cpp" line="140"/>
         <source>No georeference information found.</source>
         <translation>Nenalezeny žádné údaje o vyjádření prostorových vztahů.</translation>
+    </message>
+    <message>
+        <location filename="../map/CMapVRT.cpp" line="204"/>
+        <source>Failed to read: %1
+line %2, column %3:
+ %4</source>
+        <translation type="unfinished">Chyba při čtení: %1
+Řádek %2, Sloupec %3:
+%4</translation>
     </message>
 </context>
 <context>
@@ -12513,29 +12522,34 @@ nebo
         <translation>Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
+        <source>Connect points with a line from a loaded track if possible. (Key: T)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="294"/>
+        <source>T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>No auto-routing or line snapping (Ctrl+O)</source>
-        <translation>Žádné automatické stanovení cesty nebo přichycení k čáře (Ctrl+O)</translation>
+        <translation type="vanished">Žádné automatické stanovení cesty nebo přichycení k čáře (Ctrl+O)</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
         <source>Ctrl+O</source>
-        <translation>Ctrl+O</translation>
+        <translation type="vanished">Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
         <source>Use auto-routing to between points. (Ctrl+A)</source>
-        <translation>Použít automatické stanovení cesty mezi body. (Ctrl+A)</translation>
+        <translation type="vanished">Použít automatické stanovení cesty mezi body. (Ctrl+A)</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
         <source>Ctrl+A</source>
-        <translation>Ctrl+A</translation>
+        <translation type="vanished">Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
         <source>Snap line along lines of a vector map. (Ctrl+V)</source>
-        <translation>Přichytit čáru podél čáry vektorové mapy. (Ctrl+V)</translation>
+        <translation type="vanished">Přichytit čáru podél čáry vektorové mapy. (Ctrl+V)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="92"/>
@@ -12543,8 +12557,8 @@ nebo
         <location filename="../mouse/line/IScrOptEditLine.ui" line="141"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="164"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="287"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="320"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="337"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="323"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="340"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -12559,37 +12573,57 @@ nebo
         <translation>Ctrl+-</translation>
     </message>
     <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
+        <source>No auto-routing or line snapping (Key: O)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="218"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
+        <source>O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
+        <source>Use auto-routing to between points. (Key: A)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="241"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
         <source>A</source>
         <translation>A</translation>
     </message>
     <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
+        <source>Snap line along lines of a vector map. (Key: V)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="264"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="271"/>
         <source>V</source>
         <translation>V</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="271"/>
         <source>Ctrl+V</source>
-        <translation>Ctrl+V</translation>
+        <translation type="vanished">Ctrl+V</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
         <source>Connect points with a line from a loaded track if possible.</source>
-        <translation>Spojit body s čárou z nahrané stopy, je-li to možné.</translation>
+        <translation type="vanished">Spojit body s čárou z nahrané stopy, je-li to možné.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="317"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="320"/>
         <source>Undo last change</source>
         <translation>Vrátit poslední změnu zpět</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="334"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="337"/>
         <source>Redo last change</source>
         <translation>Obnovit poslední změnu</translation>
     </message>

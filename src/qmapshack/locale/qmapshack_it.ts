@@ -4220,7 +4220,7 @@ linea %2, colonna %3:
         <location filename="../map/CMapVRT.cpp" line="45"/>
         <location filename="../map/CMapVRT.cpp" line="59"/>
         <location filename="../map/CMapVRT.cpp" line="83"/>
-        <location filename="../map/CMapVRT.cpp" line="133"/>
+        <location filename="../map/CMapVRT.cpp" line="140"/>
         <source>Error...</source>
         <translation>Errore...</translation>
     </message>
@@ -4236,9 +4236,18 @@ linea %2, colonna %3:
         <translation>Il file deve avere una tavolozza a 8 bit oppure toni grigio indicizzati.</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="133"/>
+        <location filename="../map/CMapVRT.cpp" line="140"/>
         <source>No georeference information found.</source>
         <translation>Nessuna georeferenziazione trovata.</translation>
+    </message>
+    <message>
+        <location filename="../map/CMapVRT.cpp" line="204"/>
+        <source>Failed to read: %1
+line %2, column %3:
+ %4</source>
+        <translation type="unfinished">Errore nella lettura: %1
+linea %2, colonna %3:
+ %4</translation>
     </message>
 </context>
 <context>
@@ -12497,8 +12506,8 @@ oppure
         <location filename="../mouse/line/IScrOptEditLine.ui" line="141"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="164"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="287"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="320"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="337"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="323"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="340"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -12539,8 +12548,37 @@ oppure
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
+        <source>No auto-routing or line snapping (Key: O)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
+        <source>O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
+        <source>Use auto-routing to between points. (Key: A)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
+        <source>Snap line along lines of a vector map. (Key: V)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
+        <source>Connect points with a line from a loaded track if possible. (Key: T)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="294"/>
+        <source>T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>No auto-routing or line snapping (Ctrl+O)</source>
-        <translation>Nessun auto-instradamento o interruzione di linea (CTRL+O)</translation>
+        <translation type="vanished">Nessun auto-instradamento o interruzione di linea (CTRL+O)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="218"/>
@@ -12548,52 +12586,44 @@ oppure
         <translation></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
         <source>Ctrl+O</source>
-        <translation>CTRL+O</translation>
+        <translation type="vanished">CTRL+O</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
         <source>Use auto-routing to between points. (Ctrl+A)</source>
-        <translation>Usa l&apos;auto-routing tra punti. (CTRL+A)</translation>
+        <translation type="vanished">Usa l&apos;auto-routing tra punti. (CTRL+A)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="241"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
         <source>A</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
         <source>Ctrl+A</source>
-        <translation>CTRL+A</translation>
+        <translation type="vanished">CTRL+A</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
         <source>Snap line along lines of a vector map. (Ctrl+V)</source>
-        <translation>Tracciare una linea lungo le linee di una mappa vettoriale. (CTRL+V)</translation>
+        <translation type="vanished">Tracciare una linea lungo le linee di una mappa vettoriale. (CTRL+V)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="264"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="271"/>
         <source>V</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="271"/>
         <source>Ctrl+V</source>
-        <translation>CTRL+V</translation>
+        <translation type="vanished">CTRL+V</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
-        <source>Connect points with a line from a loaded track if possible.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="317"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="320"/>
         <source>Undo last change</source>
         <translation>Annulla l&apos;ultima op.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="334"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="337"/>
         <source>Redo last change</source>
         <translation>Ripeti l&apos;ultima op.</translation>
     </message>

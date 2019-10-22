@@ -4,6 +4,7 @@ V1.XX.X
 [QMS-8] Incorrect elevation for fit files from GPSMAP 66s
 [QMS-12] Unify versions of all QMapShack tools
 [QMS-13] Add support for Garmin Edge 500
+[QMS-14] Drawing track: Alternate mode O A V T with a simple key with no modifiers
 [QMS-18] Improved explanation of 'Date equals'
 [QMS-19] Invalid GPX due to `::` in `ql` namespace
 [QMS-20] Windows Start Menu - change links from bitbucket to github

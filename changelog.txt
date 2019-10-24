@@ -8,9 +8,11 @@ V1.XX.X
 [QMS-18] Improved explanation of 'Date equals'
 [QMS-19] Invalid GPX due to `::` in `ql` namespace
 [QMS-20] Windows Start Menu - change links from bitbucket to github
+[QMS-22] Aviation units: nm for distances and feet for altitude
 [QMS-27] Error in workspace search for attributes
 [QMS-31] Fix all links to Bitbucket in the code
-[QMS-22] Aviation units: nm for distances and feet for altitude
+[QMS-53] Unload Garmin `Archive` when folder is deflated
+
 
 ------------------------------------------------------------------------
 ---------Restart issue numbering because of migration to GitHub---------

@@ -3006,7 +3006,7 @@ void CGisItemTrk::checkForInvalidPoints()
         return;
     }
 
-    if((cntInvalidPoints != 0) && (cntInvalidPoints < cntVisiblePoints))
+    if((cntInvalidPoints != 0) && (cntInvalidPoints < cntVisiblePoints) && !isOnDevice())
     {
         CInvalidTrk dlg(*this, CMainWindow::self().getBestWidgetForParent());
         dlg.exec();

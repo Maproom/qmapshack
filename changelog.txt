@@ -12,6 +12,7 @@ V1.XX.X
 [QMS-27] Error in workspace search for attributes
 [QMS-31] Fix all links to Bitbucket in the code
 [QMS-53] Unload Garmin `Archive` when folder is deflated
+[QMS-54] Invalid point cannot be deactivated when tracks are read from the navigation device
 
 
 ------------------------------------------------------------------------

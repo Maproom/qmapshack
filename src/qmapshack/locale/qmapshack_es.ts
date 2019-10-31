@@ -167,17 +167,17 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="262"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;Obtener Mapas&apos;&gt;Quiero mapas online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Guia Rápida.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Primeros Pasos.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Instalar Mapas y DEM&apos;s&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Mapas Base y DEM&apos;s.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener Mapas&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="293"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Bases de Datos&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Bases de Datos y Proyectos&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="308"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios Impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Quiero DEMs online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios Pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener DEM&apos;s&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
@@ -772,12 +772,13 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
 <context>
     <name>CDeviceGarminArchive</name>
     <message>
-        <location filename="../device/CDeviceGarminArchive.cpp" line="30"/>
+        <location filename="../device/CDeviceGarminArchive.cpp" line="31"/>
+        <location filename="../device/CDeviceGarminArchive.cpp" line="76"/>
         <source>Archive - expand to load</source>
         <translation>Archivo: expanda para cargar</translation>
     </message>
     <message>
-        <location filename="../device/CDeviceGarminArchive.cpp" line="43"/>
+        <location filename="../device/CDeviceGarminArchive.cpp" line="45"/>
         <source>Archive - loaded</source>
         <translation>Archivo - cargado</translation>
     </message>
@@ -6097,6 +6098,7 @@ Para vincular el dispositivo con Qmapshack:
         <location filename="../gis/search/CSearch.cpp" line="387"/>
         <location filename="../gis/search/CSearch.cpp" line="418"/>
         <source>containing</source>
+        <translatorcomment>se unifca con contiene</translatorcomment>
         <translation>contiene</translation>
     </message>
     <message>
@@ -6110,21 +6112,21 @@ Para vincular el dispositivo con Qmapshack:
         <location filename="../gis/search/CSearch.cpp" line="420"/>
         <source>shorter than</source>
         <translatorcomment>en lugar de la traducción literal se unifica con mayor que / menor que para simplificar la lista y funciona igual</translatorcomment>
-        <translation type="unfinished">menor que</translation>
+        <translation>menor que</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="390"/>
         <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>smaller than</source>
         <translatorcomment>en lugar de la traducción literal se unifica con mayor que / menor que para simplificar la lista y funciona igual</translatorcomment>
-        <translation type="unfinished">menor que</translation>
+        <translation>menor que</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="391"/>
         <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>under</source>
         <translatorcomment>en lugar de la traducción literal se unifica con mayor que / menor que para simplificar la lista y funciona igual</translatorcomment>
-        <translation type="unfinished">menor que</translation>
+        <translation>menor que</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="392"/>
@@ -6144,7 +6146,7 @@ Para vincular el dispositivo con Qmapshack:
         <location filename="../gis/search/CSearch.cpp" line="425"/>
         <source>before</source>
         <translatorcomment>se unifica con &apos;anterior a&apos;</translatorcomment>
-        <translation type="unfinished">anterior a</translation>
+        <translation>anterior a</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="395"/>
@@ -6157,21 +6159,21 @@ Para vincular el dispositivo con Qmapshack:
         <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>longer than</source>
         <translatorcomment>en lugar de la traducción literal se unifica con mayor que / menor que para simplificar la lista y funciona igual</translatorcomment>
-        <translation type="unfinished">mayor que</translation>
+        <translation>mayor que</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="398"/>
         <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>higher than</source>
         <translatorcomment>en lugar de la traducción literal se unifica con mayor que / menor que para simplificar la lista y funciona igual</translatorcomment>
-        <translation type="unfinished">mayor que</translation>
+        <translation>mayor que</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="399"/>
         <location filename="../gis/search/CSearch.cpp" line="430"/>
         <source>bigger than</source>
         <translatorcomment>en lugar de la traducción literal se unifica con mayor que / menor que para simplificar la lista y funciona igual</translatorcomment>
-        <translation type="unfinished">mayor que</translation>
+        <translation>mayor que</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="400"/>
@@ -6184,27 +6186,27 @@ Para vincular el dispositivo con Qmapshack:
         <location filename="../gis/search/CSearch.cpp" line="432"/>
         <source>above</source>
         <translatorcomment>en lugar de la traducción literal se unifica con mayor que / menor que para simplificar la lista y funciona igual</translatorcomment>
-        <translation type="unfinished">mayor que</translation>
+        <translation>mayor que</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="402"/>
         <location filename="../gis/search/CSearch.cpp" line="433"/>
         <source>over</source>
         <translatorcomment>en lugar de la traducción literal se unifica con mayor que / menor que para simplificar la lista y funciona igual</translatorcomment>
-        <translation type="unfinished">mayor que</translation>
+        <translation>mayor que</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="403"/>
         <location filename="../gis/search/CSearch.cpp" line="434"/>
         <source>after</source>
         <translatorcomment>se unifica con posterior a</translatorcomment>
-        <translation type="unfinished">posterior a</translation>
+        <translation>posterior a</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="404"/>
         <location filename="../gis/search/CSearch.cpp" line="435"/>
         <source>later than</source>
-        <translation type="unfinished">posterior a</translation>
+        <translation>posterior a</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="406"/>
@@ -6242,27 +6244,27 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="419"/>
         <source>example: name without water</source>
-        <translation type="unfinished">ej: nombre sin variante</translation>
+        <translation>ej: nombre sin variante</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="420"/>
         <source>example: shorter than 5km</source>
-        <translation type="unfinished">ej: menor que 5 km</translation>
+        <translation>ej: menor que 5 km</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>example: area smaller than 5m²</source>
-        <translation type="unfinished">ej: área menor que 5 m²</translation>
+        <translation>ej: área menor que 5 m²</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>example: elevation under 1000ft</source>
-        <translation type="unfinished">ej: altitud menor que 1000 m</translation>
+        <translation>ej: altitud menor que 1000 m</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="423"/>
         <source>example: lower than 500m</source>
-        <translation type="unfinished">ej: menor que 500 m</translation>
+        <translation>ej: menor que 500 m</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="424"/>
@@ -6272,7 +6274,7 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="425"/>
         <source>example: date before 10.05.2017</source>
-        <translation type="unfinished">ej: fecha anterior a 10/05/17</translation>
+        <translation>ej: fecha anterior a 10/05/17</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="426"/>
@@ -6287,17 +6289,17 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>example: distance longer than 20mi</source>
-        <translation type="unfinished">ej: distancia mayor que 20 mi</translation>
+        <translation>ej: distancia mayor que 20 mi</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>example: terrain higher than 2</source>
-        <translation type="unfinished">ej: D mayor que 2</translation>
+        <translation>ej: D mayor que 2</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="430"/>
         <source>example: area bigger than 50m²</source>
-        <translation type="unfinished">ej: area mayor que 50 m²</translation>
+        <translation>ej: area mayor que 50 m²</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="431"/>
@@ -6307,17 +6309,17 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="432"/>
         <source>example: above 50m</source>
-        <translation type="unfinished">ej: mayor que 400 m</translation>
+        <translation>ej: mayor que 400 m</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="433"/>
         <source>example: elevation over 400m</source>
-        <translation type="unfinished">ej: altitud mayor que 400 m</translation>
+        <translation>ej: altitud mayor que 400 m</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="434"/>
         <source>example: date after 2013</source>
-        <translation type="unfinished">ej: fecha posterior a 2013</translation>
+        <translation>ej: fecha posterior a 2013</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="435"/>
@@ -6357,11 +6359,13 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="449"/>
         <source>full text</source>
+        <translatorcomment>en lugar de &quot;texto completo&quot; se simplifica a &quot;texto&quot; para agilizar el tecleo en las busquedas</translatorcomment>
         <translation>texto</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="450"/>
         <source>elevation</source>
+        <translatorcomment>se utiliza altitud en lugar de elevacion para ser concordante con otros dialogos</translatorcomment>
         <translation>altitud</translation>
     </message>
     <message>
@@ -6387,17 +6391,19 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="459"/>
         <source>difficulty</source>
-        <translation type="unfinished">D</translation>
+        <translatorcomment>se unifica con D</translatorcomment>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="461"/>
         <source>terrain</source>
-        <translation type="unfinished">T</translation>
+        <translatorcomment>se unifica con T</translatorcomment>
+        <translation>T</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="462"/>
         <source>T</source>
-        <translation type="unfinished">T</translation>
+        <translation>T</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="463"/>
@@ -6407,7 +6413,8 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="464"/>
         <source>non-negated attributes</source>
-        <translation type="unfinished">atributos positivos</translation>
+        <translatorcomment>se unifica con atributos positivos</translatorcomment>
+        <translation>atributos positivos</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="465"/>
@@ -6437,7 +6444,8 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="474"/>
         <source>length</source>
-        <translation type="unfinished">distancia</translation>
+        <translatorcomment>se unifica con distancia</translatorcomment>
+        <translation>distancia</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="475"/>
@@ -6447,7 +6455,8 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="476"/>
         <source>elevation gain</source>
-        <translation type="unfinished">ascenso</translation>
+        <translatorcomment>se unifica con ascenso</translatorcomment>
+        <translation>ascenso</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="477"/>
@@ -6457,47 +6466,56 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="478"/>
         <source>min elevation</source>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
         <translation>alt min</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="479"/>
         <source>minimal elevation</source>
-        <translation type="unfinished">alt min</translation>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
+        <translation>alt min</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="480"/>
         <source>max elevation</source>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
         <translation>alt max</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="481"/>
         <source>maximal elevation</source>
-        <translation type="unfinished">alt max</translation>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
+        <translation>alt max</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="482"/>
         <source>max speed</source>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
         <translation>vel max</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="483"/>
         <source>maximal speed</source>
-        <translation type="unfinished">vel max</translation>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
+        <translation>vel max</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="484"/>
         <source>min speed</source>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
         <translation>vel min</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="485"/>
         <source>minimal speed</source>
-        <translation type="unfinished">vel min</translation>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
+        <translation>vel min</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="486"/>
         <source>average speed</source>
-        <translation type="unfinished">vel media</translation>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
+        <translation>vel media</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="487"/>
@@ -6507,87 +6525,90 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="488"/>
         <source>total time</source>
-        <translation type="unfinished">tiempo</translation>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
+        <translation>tiempo</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="489"/>
         <source>duration</source>
-        <translation type="unfinished">tiempo</translation>
+        <translatorcomment>se unifica con tiempo, y se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
+        <translation>tiempo</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="490"/>
         <source>time moving</source>
-        <translation type="unfinished">movimiento</translation>
+        <translatorcomment>se utiliza el termino abreviado para agilizar el tecleo en busquedas</translatorcomment>
+        <translation>movimiento</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="499"/>
         <source>searches the name of the item. For Geocaches this is &quot;Name - GCCode&quot;.</source>
-        <translation type="unfinished">busca el nombre del elemento. Para Geocaches esto es &quot;Nombre - GCCode&quot;.</translation>
+        <translation>busca el nombre del elemento. Para Geocaches esto es &quot;Nombre - GCCode&quot;.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="500"/>
         <source>searches the full text</source>
-        <translation type="unfinished">busca en el texto completo</translation>
+        <translation>busca en el texto completo</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="501"/>
         <source>searches the elevation. For items consisting of multiple points the minimum and the maximum is used</source>
-        <translation type="unfinished">busca la altitud. Para elementos con muchos puntos se tiene en cuenta la mínima y máxima</translation>
+        <translation>busca la altitud. Para elementos con muchos puntos se tiene en cuenta la mínima y máxima</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="502"/>
         <source>searches the Date</source>
-        <translation type="unfinished">busca la fecha</translation>
+        <translation>busca la fecha</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="503"/>
         <source>searches the Comment</source>
-        <translation type="unfinished">busca en el Comentario</translation>
+        <translation>busca en el Comentario</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="504"/>
         <source>searches the Description</source>
-        <translation type="unfinished">busca en la Descripción</translation>
+        <translation>busca en la Descripción</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="507"/>
         <source>searches the area</source>
-        <translation type="unfinished">busca el área</translation>
+        <translation>busca el área</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="510"/>
         <source>searches the difficulty rating of a geocache</source>
-        <translation type="unfinished">busca la dificultad y calificación de un Geocache</translation>
+        <translation>busca la dificultad y calificación de un Geocache</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="511"/>
         <source>searches the terrain rating of a geocache</source>
-        <translation type="unfinished">busca la calificación del terreno de un Geocche</translation>
+        <translation>busca la calificación del terreno de un Geocche</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="512"/>
         <source>searches the translated meanings of the non-negated attributes (Those not crossed out)</source>
-        <translation type="unfinished">Geocache: busca los significados traducidos de los atributos positivos (los no tachados)</translation>
+        <translation>Geocache: busca los significados traducidos de los atributos positivos (los no tachados)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="513"/>
         <source>searches the translated meanings of the negated attributes (Those crossed out)</source>
-        <translation type="unfinished">Geocache: busca los significados traducidos de los atributos negados (los tachados)</translation>
+        <translation>Geocache: busca los significados traducidos de los atributos negados (los tachados)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="514"/>
         <source>searches the size of a geocache. (micro, small, regular, large)</source>
-        <translation type="unfinished">busca el tamaño de un Geocache (micro, pequeño, regular, grande)</translation>
+        <translation>busca el tamaño de un Geocache (micro, pequeño, regular, grande)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="515"/>
         <source>searches the GCCode of a geocache.</source>
-        <translation type="unfinished">busca el GCCode de un Geocache.</translation>
+        <translation>busca el GCCode de un Geocache.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="516"/>
         <source>searches the Name of a geocache.</source>
-        <translation type="unfinished">busca el nombre de un Geocache.</translation>
+        <translation>busca el nombre de un Geocache.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="521"/>
@@ -6607,7 +6628,7 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="524"/>
         <source>searches the minimal elevation in a route or track</source>
-        <translation type="unfinished">busca la altitud mínima en una ruta o track</translation>
+        <translation>busca la altitud mínima en una ruta o track</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="525"/>
@@ -6627,7 +6648,7 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="528"/>
         <source>searches the average speed in a track</source>
-        <translation type="unfinished">busca la velocidad media en una ruta o track (distancia / tiempo en movimiento)</translation>
+        <translation>busca la velocidad media en una ruta o track (distancia / tiempo en movimiento)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="529"/>
@@ -6663,22 +6684,22 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="28"/>
         <source>&lt;p&gt;The searches are always exclusive, e.g. searching for a track &apos;elevation under 500m&apos; will find tracks that are completely under 500m meters.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;La búsqueda es siempre excluyente.  Ej:  &apos; altitud inferior a 500 m &apos;  encontrará tracks que están completamente por debajo de 500 m &lt;/p&gt;</translation>
+        <translation>&lt;p&gt;La búsqueda es siempre excluyente.  Ej:  &apos; altitud menor que 500 m &apos;  encontrará tracks que están completamente por debajo de 500 m &lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="40"/>
         <source>speed units: average speed</source>
-        <translation type="unfinished">unidades de velocidad :  velocidad media</translation>
+        <translation>unidades de velocidad :  velocidad media</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="43"/>
         <source>km and mi: distance</source>
-        <translation type="unfinished">km o mi : distancia</translation>
+        <translation>km o mi : distancia</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="46"/>
         <source>m and ft: elevation</source>
-        <translation type="unfinished">m o ft: altitud</translation>
+        <translation>m o ft: altitud</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="49"/>
@@ -6693,7 +6714,7 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
         <source>&apos;Date equals&apos; matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local time zone is taken for the query.</source>
-        <translation type="unfinished">&apos;Fecha igual a ...&apos; encuentra todo lo que está completamente dentro de esa fecha. Si se indica fecha y hora se busca en las 24 horas siguientes desde esa fecha / hora.
+        <translation>&apos;Fecha igual a ...&apos; encuentra todo lo que está completamente dentro de esa fecha. Si se indica fecha y hora se busca en las 24 horas siguientes desde esa fecha / hora.
 Ten en cuenta que para hacer la comparación las horas que indiques se trasladan a UTC tomando como referencia tu hora local actual.</translation>
     </message>
     <message>
@@ -6709,6 +6730,7 @@ Ten en cuenta que para hacer la comparación las horas que indiques se trasladan
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="26"/>
         <source>&lt;p&gt;The underlying syntax of the search is &apos;property comparison value&apos;, e.g. &apos;name contains water&apos;. However some rules apply to make a search more intuitive.&lt;/p&gt;</source>
+        <translatorcomment>Se ha ordenado  mejorado la informacionen lugar de hacer traduccion literal</translatorcomment>
         <translation type="unfinished">&lt;p&gt;La búsqueda se compone con una cadena del tipo &lt;b&gt;&apos; propiedad condición valor &apos;&lt;/b&gt;.     Ej:   &lt;b&gt;nombre contiene alba&lt;/b&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;En algunos casos también se puede usar una forma corta del tipo &lt;b&gt;&apos; condición valor&apos;&lt;/b&gt;.     Ej:    &lt;b&gt; &gt; 1500 m &lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
@@ -6719,7 +6741,7 @@ Ten en cuenta que para hacer la comparación las horas que indiques se trasladan
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="36"/>
         <source>If a search string in the short form &apos;comparison value&apos; is used the property is derived from the value and its unit: </source>
-        <translation type="unfinished">Si se utiliza una cadena de búsqueda en la forma corta &apos;condición valor&apos;, la &apos;propiedad&apos; sobre la que buscar se deduce del valor y sus unidades: </translation>
+        <translation type="unfinished">Si se utiliza una cadena de búsqueda en la forma corta (Ej: &gt; 1500 m), la &apos;propiedad&apos; sobre la que buscar se deduce del valor y sus unidades: </translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="70"/>
@@ -6729,6 +6751,7 @@ Ten en cuenta que para hacer la comparación las horas que indiques se trasladan
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="72"/>
         <source>&lt;p&gt;The regex search uses this syntax: https://perldoc.perl.org/perlre.html&lt;/p&gt;</source>
+        <translatorcomment>Se ha añadido la info del separador decimal que falta en el original</translatorcomment>
         <translation type="unfinished">&lt;p&gt;Como separador decimal se utiliza el punto ( . )&lt;/p&gt;&lt;p&gt;La busqueda mediante expresiones regulares (regex) utiliza esta sintaxis: https://perldoc.perl.org/perlre.html&lt;/p&gt;</translation>
     </message>
 </context>
@@ -7741,17 +7764,17 @@ línea %2, columna %3.
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="158"/>
         <source>enduro</source>
-        <translation type="unfinished"></translation>
+        <translation>enduro</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="165"/>
         <source>freeride</source>
-        <translation type="unfinished"></translation>
+        <translation>freeride</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="172"/>
         <source>XC</source>
-        <translation type="unfinished"></translation>
+        <translation>XC</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="200"/>
@@ -7766,7 +7789,7 @@ línea %2, columna %3.
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="281"/>
         <source>E-Bike</source>
-        <translation type="unfinished"></translation>
+        <translation>E-bike</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="288"/>
@@ -12615,12 +12638,12 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
         <source>Connect points with a line from a loaded track if possible. (Key: T)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dibujar calcando un track cargado, cuando la continuidad es posible ( T )</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="294"/>
         <source>T</source>
-        <translation type="unfinished">T</translation>
+        <translation>T</translation>
     </message>
     <message>
         <source>No auto-routing or line snapping (Ctrl+O)</source>
@@ -12666,7 +12689,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
         <source>No auto-routing or line snapping (Key: O)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dibujo libre punto a punto, sin enrutamiento ( O )</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="218"/>
@@ -12676,12 +12699,12 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
         <source>O</source>
-        <translation type="unfinished"></translation>
+        <translation>O</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
         <source>Use auto-routing to between points. (Key: A)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dibujar usando el enrutamiento automático entre puntos ( A )</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="241"/>
@@ -12692,7 +12715,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
         <source>Snap line along lines of a vector map. (Key: V)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dibujar ajustándose a las lineas de un mapa vectorial. ( V )</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="264"/>
@@ -14292,18 +14315,18 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="905"/>
-        <location filename="../units/IUnit.cpp" line="911"/>
+        <location filename="../units/IUnit.cpp" line="910"/>
+        <location filename="../units/IUnit.cpp" line="916"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="905"/>
+        <location filename="../units/IUnit.cpp" line="910"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Formato de coordenadas incorrecto. Debe ser: &quot;[N|S] ggg mm.sss [W|E] ggg mm.sss&quot; o &quot;[N|S] ggg.ggg [W|E] ggg.ggg&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="911"/>
+        <location filename="../units/IUnit.cpp" line="916"/>
         <source>Position values out of bounds. </source>
         <translation>Los valores de posición están fuera de los límites.</translation>
     </message>
@@ -14331,22 +14354,27 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <translation>Métrico</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="52"/>
+        <location filename="../units/IUnitsSetup.ui" line="51"/>
+        <source>Aviation (nm, feet)</source>
+        <translation type="unfinished">Aviación (nm, feet)</translation>
+    </message>
+    <message>
+        <location filename="../units/IUnitsSetup.ui" line="59"/>
         <source>Slope unit</source>
         <translation>&quot;&gt;Unidad de pendiente</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="58"/>
+        <location filename="../units/IUnitsSetup.ui" line="65"/>
         <source>Degrees (°)</source>
         <translation>Grados (°)</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="65"/>
+        <location filename="../units/IUnitsSetup.ui" line="72"/>
         <source>Percent (%)</source>
         <translation>Porcentaje (%)</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="95"/>
+        <location filename="../units/IUnitsSetup.ui" line="102"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation>&lt;b&gt;Nota:&lt;/b&gt; El cambio de las unidades de algunos elementos no se producirá hasta el reinicio de QMapShack.</translation>
     </message>

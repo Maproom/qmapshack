@@ -38,6 +38,10 @@ CUnitsSetup::CUnitsSetup(QWidget *parent)
     case IUnit::eTypeNautic:
         radioNautic->setChecked(true);
         break;
+
+    case IUnit::eTypeAviation:
+        radioAviation->setChecked(true);
+        break;
     }
 
     switch(IUnit::getSlopeMode())
@@ -67,6 +71,10 @@ void CUnitsSetup::accept()
     else if(radioNautic->isChecked())
     {
         IUnit::setUnitType(IUnit::eTypeNautic, &CMainWindow::self());
+    }
+    else if(radioAviation->isChecked())
+    {
+        IUnit::setUnitType(IUnit::eTypeAviation, &CMainWindow::self());
     }
 
     if(radioDegrees->isChecked())

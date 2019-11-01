@@ -16,6 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **********************************************************************************************/
+#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "device/CDeviceGarmin.h"
 #include "device/IDevice.h"
@@ -309,8 +310,11 @@ void IDevice::updateProject(IGisProject * project)
 
 bool IDevice::testForExternalProject(const QString& filename)
 {
+    CDeviceMountLock mountLock(*this);
+
     if(QDir(filename).exists() || QFile::exists(filename))
     {
+        CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
         QString msg = tr("There is another project with the same name. If you press 'ok' it will be removed and replaced.");
         int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), getName(), msg, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
         if(res != QMessageBox::Ok)
@@ -333,7 +337,7 @@ bool IDevice::testForExternalProject(const QString& filename)
         for(int n = 0; n < N; n++)
         {
             QTreeWidgetItem * item = child(n);
-            if(item->text(CGisListWks::eColumnName) == fi.fileName())
+            if(item->text(CGisListWks::eColumnName) == fi.baseName())
             {
                 delete item;
                 break;

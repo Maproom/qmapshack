@@ -482,7 +482,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
 
 void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const
 {
-    const limits_t& limit = extrema["::ql:slope"];
+    const limits_t& limit = extrema["ql:slope"];
     minSlope = limit.min;
     maxSlope = limit.max;
 }
@@ -537,6 +537,11 @@ void CGisItemTrk::filterSubPt2Pt()
 
 void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName)
 {
+    if((idxNewStartPoint == 0) || (idxNewStartPoint >= cntVisiblePoints))
+    {
+        return;
+    }
+
     QVector<CTrackData::trkpt_t> pts;
     for(CTrackData::trkpt_t& pt : trk)
     {
@@ -567,12 +572,10 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
         pts[i].time = pts[i].time.addSecs(deltaStart);    // Adjust new Start to End
     }
 
-    for (i = 0; i < idxNewStartPoint; ++i) // Reorder points
-    {
-        pts.insert(pts.size(), pts.takeAt(0));
-    }
+    const QVector<CTrackData::trkpt_t>& part1 = pts.mid(0, idxNewStartPoint);
+    const QVector<CTrackData::trkpt_t>& part2 = pts.mid(idxNewStartPoint,-1);
 
-    trk.readFrom(pts);
+    trk.readFrom(part2 + part1);
 
     deriveSecondaryData();
 

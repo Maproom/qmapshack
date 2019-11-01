@@ -52,15 +52,14 @@ CFilterInterpolateElevation::~CFilterInterpolateElevation()
 
 void CFilterInterpolateElevation::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterInterpolateElevation");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     trk.filterInterpolateElevation();
     checkPreview->setChecked(trk.isInterpolationEnabled());
-    CCanvas::restoreOverrideCursor("CFilterInterpolateElevation");
 }
 
 void CFilterInterpolateElevation::slotPreview()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterInterpolateElevation::slotPreview()");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     bool yes = checkPreview->isChecked();
     qint32 Q = comboQuality->currentData().toInt();
     trk.setupInterpolation(yes, Q);
@@ -68,5 +67,4 @@ void CFilterInterpolateElevation::slotPreview()
     yes = trk.isInterpolationEnabled();
     checkPreview->setChecked(yes);
     toolApply->setEnabled(yes);
-    CCanvas::restoreOverrideCursor("CFilterInterpolateElevation::slotPreview()");
 }

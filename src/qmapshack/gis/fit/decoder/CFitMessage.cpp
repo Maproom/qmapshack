@@ -84,7 +84,10 @@ void CFitMessage::addField(CFitField &  field)
         {
             qCritical("fit field %d already added to map.", (int) field.getFieldDefNr());
         }
-        fields.insert(field.getFieldDefNr(), field);
+        else
+        {
+            fields.insert(field.getFieldDefNr(), field);
+        }
     }
     if (field.profile().getFieldType() == eFieldTypeDevelopment)
     {
@@ -92,7 +95,10 @@ void CFitMessage::addField(CFitField &  field)
         {
             qCritical("fit dev field %d already added to map.", (int) field.getFieldDefNr());
         }
-        devFields.insert(field.getFieldDefNr(), field);
+        else
+        {
+            devFields.insert(field.getFieldDefNr(), field);
+        }
     }
 }
 

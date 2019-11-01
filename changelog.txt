@@ -1,3 +1,23 @@
+V1.XX.X
+[QMS-5] App crashes on using the "Change Start Point" filter
+[QMS-6] Enhance overview detection for VRT maps
+[QMS-8] Incorrect elevation for fit files from GPSMAP 66s
+[QMS-12] Unify versions of all QMapShack tools
+[QMS-13] Add support for Garmin Edge 500
+[QMS-14] Drawing track: Alternate mode O A V T with a simple key with no modifiers
+[QMS-18] Improved explanation of 'Date equals'
+[QMS-19] Invalid GPX due to `::` in `ql` namespace
+[QMS-20] Windows Start Menu - change links from bitbucket to github
+[QMS-22] Aviation units: nm for distances and feet for altitude
+[QMS-27] Error in workspace search for attributes
+[QMS-31] Fix all links to Bitbucket in the code
+[QMS-53] Unload Garmin `Archive` when folder is deflated
+[QMS-54] Invalid point cannot be deactivated when tracks are read from the navigation device
+
+
+------------------------------------------------------------------------
+---------Restart issue numbering because of migration to GitHub---------
+------------------------------------------------------------------------
 V 1.13.2
 [Issue #446] Advanced Filtering System
 [Issue #491] Skip saving of geo search
@@ -138,7 +158,7 @@ V 1.11.0
 Add: QMapTool and friends as sub-project
 Add: Reverse route
 Add: BRoute binding to local address instead of all interfaces
-Add: Use track timestamp as arival time for waypoints attached to track 
+Add: Use track timestamp as arival time for waypoints attached to track
 Add: Optional overview generation to vrt builder
 Add: Add left button long press action to open menu on canvas
 Add: Framework to process and display realtime data
@@ -216,7 +236,7 @@ Add: Links to quickstart help
 Add: Russian translation
 Add: TCX file read and write support
 Add: Different cut modes for track cut function
-Add: Option for optimized build for local system architecture 
+Add: Option for optimized build for local system architecture
 Add: Support for BRouter (online/offline)
 Add: Enhance reprojection between projections like merc/utm/lcc
 [Issue #152] Garmin maps: Alter scale to detail level table
@@ -240,7 +260,7 @@ V 1.7.2
 * Add: Ctrl+W to close tabs that are not a map view
 * Add: Plot: X&Y zoom and drag graph by left mouse button
 * Add: Implement filter `Convert SubPoint to Point`
-* Add: Database: Export database to folders and GPX files 
+* Add: Database: Export database to folders and GPX files
 * Fix: Trk/Prj: Fixed missing update when changing roadbook mode. Disable copy with waypoints when no waypoints attached.
 * Fix: Prj: Fix update of project summary when changing the sorting mode
 * Fix: Trk: Fix nodata values for elevations applied by filter
@@ -288,7 +308,7 @@ V 1.6.3
 * [Issue #147] Fix bug preventing list formats to be removed
 * [Issue #148] Text editor: format of pasted text
 * [Issue #149] Properly initialize cachePath for systems without QMS configuration (new installations)
- 
+
 V 1.6.2
 * Add support kFreeBSD ports, treat like Linux.
 * Add support for GNU/Hurd, treat like Linux.
@@ -350,10 +370,10 @@ V 1.6.0
 * Add: User info to item history
 * Add: (Trk) Setup for line width and arrows
 * Add: (Trk) line coloring: local, global, automatic setup of limits
-* Add: (Trk) plot limits: local, global, automatic setup of limits 
+* Add: (Trk) plot limits: local, global, automatic setup of limits
 * Add: (Trk) colorize track by activity
 * Add: Adventures to Garmin devices. Projects are stored as adventure.
-* Add: "Archive" folder for Garmin devices. 
+* Add: "Archive" folder for Garmin devices.
 * Add: Show/hide action for projects on devices.
 * Add: Support GEMF raster maps
 * Add: Make custom waypoint symbols path configurable
@@ -464,7 +484,7 @@ V 1.3.0
 * Trk/Wpt: Make track/waypoint correlation an option if it takes too long.
 * Workspace: Add warning when loading a project twice
 * Speed up project file loading
-* Trk: Allow combining tracks for tracks on devices. 
+* Trk: Allow combining tracks for tracks on devices.
 * Trk: Allow pre-selection of several tracks for combining tracks
 * Many GUI fixes and code cleanup.
 
@@ -563,7 +583,7 @@ V 0.9.1
 V 0.9.0
 * Fix sign of area calculation
 * Mark item with user focus in item unclutter screen
-* Add support for multiple databases 
+* Add support for multiple databases
 * Add converter for QLandkarte GT to QMapShack database
 
 V 0.8.2
@@ -575,7 +595,7 @@ V 0.8.2
 
 V 0.8.1
 * Handle "no data" values in DEM files
-* Garmin maps: read copyright information 
+* Garmin maps: read copyright information
 * Save/Restore workspace on exit/start
 
 V 0.8.0

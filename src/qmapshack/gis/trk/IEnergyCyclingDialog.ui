@@ -474,7 +474,7 @@
        <item row="5" column="1">
         <widget class="QDoubleSpinBox" name="spinPedalCadence">
          <property name="toolTip">
-          <string>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positve Pedal Force.&lt;/p&gt;
+          <string>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positive Pedal Force.&lt;/p&gt;
 &lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</string>
          </property>
          <property name="suffix">

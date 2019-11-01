@@ -45,6 +45,13 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QRadioButton" name="radioAviation">
+         <property name="text">
+          <string>Aviation (nm, feet)</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tabSlope">

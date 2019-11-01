@@ -76,7 +76,7 @@ CTwoNavProject::~CTwoNavProject()
 bool CTwoNavProject::save()
 {
     bool res = true;
-    mount();
+    CProjectMountLock mountLock(*this);
     QDir().mkpath(filename);
     QDir dir(filename);
 
@@ -150,7 +150,6 @@ bool CTwoNavProject::save()
     {
         markAsSaved();
     }
-    umount();
     return res;
 }
 

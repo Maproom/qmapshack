@@ -34,9 +34,13 @@ public:
 
     void draw(IDrawContext::buffer_t& buf) override;
 
-
-
 private:
+    /**
+       @brief Test subfiles of VRT for overviews
+       @param filename The VRT filename to inspect
+       @return Return true if all subfiles have overviews.
+     */
+    bool testForOverviews(const QString& filename);
     QString filename;
     /// instance of GDAL dataset
     GDALDataset * dataset;

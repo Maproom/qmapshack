@@ -16,11 +16,14 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
+#include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CSelectCopyAction.h"
 #include "version.h"
 
 #include <QtWidgets>
@@ -31,13 +34,47 @@
 CTcxProject::CTcxProject(const QString &filename, CGisListWks * parent)
     : IGisProject(eTypeTcx, filename, parent)
 {
+    setup();
+}
+
+CTcxProject::CTcxProject(const QString &filename, IDevice * parent)
+    : IGisProject(eTypeGpx, filename, parent)
+{
+    setup();
+}
+
+CTcxProject::CTcxProject(const QString &filename, const IGisProject * project, IDevice * parent)
+    : IGisProject(eTypeGpx, filename, parent)
+{
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/TcxProject.png"));
+    *(IGisProject*)this = *project;
+    blockUpdateItems(project->blockUpdateItems());
+
+    int res     = CSelectCopyAction::eResultNone;
+    const int N = project->childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
+        if(item)
+        {
+            insertCopyOfItem(item, NOIDX, res);
+        }
+    }
+
+    blockUpdateItems(false);
+    setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
+    setToolTip(CGisListWks::eColumnName, getInfo());
+    valid = true;
+}
+
+void CTcxProject::setup()
+{
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/TcxProject.png"));
     blockUpdateItems(true);
     loadTcx(filename);
     blockUpdateItems(false);
     setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
 }
-
 
 void CTcxProject::loadTcx(const QString& filename)
 {
@@ -249,7 +286,8 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         _fn_ += ".tcx";
     }
 
-    project.mount();
+
+    CProjectMountLock mountLock(project);
 
     // safety check for existing files
     QFile file(_fn_);
@@ -272,6 +310,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
 
         if (!createdByQMS)
         {
+            CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
             int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("File exists ...")
                                            , tr("The file exists and it has not been created by QMapShack. "
                                                 "If you press 'yes' all data in this file will be lost. "
@@ -282,7 +321,6 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
                                            , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
             if (res == QMessageBox::No)
             {
-                project.umount();
                 return false;
             }
         }
@@ -311,6 +349,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         {
             if (!trkItem->isTrkTimeValid())
             {
+                CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
                 int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Track with invalid timestamps...")
                                                , tr("The track <b>%1</b> you have selected contains trackpoints with "
                                                     "invalid timestamps. "
@@ -340,12 +379,19 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
             QAbstractButton* pButtonActivity = courseOrActivityMsgBox.addButton(tr("Activity"), QMessageBox::AcceptRole);
             QAbstractButton* pButtonCancel = courseOrActivityMsgBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
 
-            CTcxProject *CTcxProjectRef = dynamic_cast<CTcxProject*>(&project);
-            if (nullptr != CTcxProjectRef) // if a TCX project
+            CTcxProject *tcx = dynamic_cast<CTcxProject*>(&project);
+            if (nullptr != tcx) // if a TCX project
             {
-                if (!CTcxProjectRef->trackTypes.contains(trkItem->getKey().item))   // if this is an added track
+                if(dynamic_cast<IDevice*>(tcx->parent()) != nullptr)
                 {
-                    courseOrActivityMsgBox.exec();
+                    courseTrks << trkItem;
+                }
+                else if (!tcx->trackTypes.contains(trkItem->getKey().item))   // if this is an added track
+                {
+                    {
+                        CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
+                        courseOrActivityMsgBox.exec();
+                    }
 
                     if (courseOrActivityMsgBox.clickedButton() == pButtonCourse)
                     {
@@ -363,11 +409,11 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
                 }
                 else
                 {
-                    if (CTcxProjectRef->trackTypes.value(trkItem->getKey().item) == eCourse)    //if a course
+                    if (tcx->trackTypes.value(trkItem->getKey().item) == eCourse)    //if a course
                     {
                         courseTrks << trkItem;
                     }
-                    if (CTcxProjectRef->trackTypes.value(trkItem->getKey().item) == eActivity)   // if an activity
+                    if (tcx->trackTypes.value(trkItem->getKey().item) == eActivity)   // if an activity
                     {
                         activityTrks << trkItem;
                     }
@@ -375,7 +421,10 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
             }
             else // not a TCX project, then it is necessary to ask for each track
             {
-                courseOrActivityMsgBox.exec();
+                {
+                    CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
+                    courseOrActivityMsgBox.exec();
+                }
 
                 if (courseOrActivityMsgBox.clickedButton() == pButtonCourse)
                 {
@@ -432,6 +481,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         msg = tr("Failed to create file '%1'").arg(_fn_);
         if (QThread::currentThread() == qApp->thread())
         {
+            CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
         }
         else
@@ -450,6 +500,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     {
         if (QThread::currentThread() == qApp->thread())
         {
+            CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
             msg = tr("Failed to write file '%1'").arg(_fn_);
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
         }
@@ -459,7 +510,6 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         }
         res = false;
     }
-    project.umount();
     return res;
 }
 

@@ -20,6 +20,7 @@
 #include "device/CDeviceGarmin.h"
 #include "device/CDeviceGarminArchive.h"
 #include "gis/CGisListWks.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/gpx/CGpxProject.h"
 
 #include <QtWidgets>
@@ -30,6 +31,7 @@ CDeviceGarminArchive::CDeviceGarminArchive(const QString &path, CDeviceGarmin *p
     setText(CGisListWks::eColumnName, tr("Archive - expand to load"));
     setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
     connect(treeWidget(), &QTreeWidget::itemExpanded, this, &CDeviceGarminArchive::slotExpanded);
+    connect(treeWidget(), &QTreeWidget::itemCollapsed, this, &CDeviceGarminArchive::slotCollapsed);
 }
 
 
@@ -43,8 +45,8 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem * item)
     setText(CGisListWks::eColumnName, tr("Archive - loaded"));
 
     QMutexLocker lock(&IGisItem::mutexItems);
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CDeviceGarminArchive::slotExpanded()");
-    mount();
+    CDeviceMountLock mountLock(*this);
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     qDebug() << "reading files from device: " << dir.path();
     QStringList entries = dir.entryList(QStringList("*.gpx"));
     for(const QString &entry : entries)
@@ -56,7 +58,21 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem * item)
             delete project;
         }
     }
-    umount();
-    CCanvas::restoreOverrideCursor("CDeviceGarminArchive::slotExpanded()");
 }
 
+void CDeviceGarminArchive::slotCollapsed(QTreeWidgetItem * item)
+{
+    if((item != this) || (childCount() == 0))
+    {
+        return;
+    }
+
+    QMutexLocker lock(&IGisItem::mutexItems);
+    CDeviceMountLock mountLock(*this);
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+
+    qDeleteAll(takeChildren());
+
+    setText(CGisListWks::eColumnName, tr("Archive - expand to load"));
+    emit CGisWorkspace::self().sigChanged();
+}

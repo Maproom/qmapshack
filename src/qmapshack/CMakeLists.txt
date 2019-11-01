@@ -10,18 +10,10 @@ set(CMAKE_AUTOMOC ON)
 
 
 ###############################################################################################
-# Setup application name and version tags
+# Setup application name and defines
 ###############################################################################################
 
 STRING(TOLOWER ${PROJECT_NAME} APPLICATION_NAME)
-
-add_definitions(
-    -DVER_MAJOR=${PROJECT_VERSION_MAJOR}
-    -DVER_MINOR=${PROJECT_VERSION_MINOR}
-    -DVER_STEP=${PROJECT_VERSION_PATCH}
-    -DVER_TWEAK=${VERSION_SUFFIX}
-    -DAPPLICATION_NAME=${PROJECT_NAME}
-)
 
 # and other funny defines -> maybe config.h is a better place for that
 add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
@@ -323,6 +315,7 @@ set( SRCS
     units/CUnitImperial.cpp
     units/CUnitMetric.cpp
     units/CUnitNautic.cpp
+    units/CUnitAviation.cpp
     units/CUnitsSetup.cpp
     units/IUnit.cpp
     widgets/CColorLegend.cpp
@@ -663,6 +656,7 @@ set( HDRS
     units/CUnitImperial.h
     units/CUnitMetric.h
     units/CUnitNautic.h
+    units/CUnitAviation.h
     units/CUnitsSetup.h
     units/IUnit.h
     version.h
@@ -882,6 +876,14 @@ endif(APPLE)
 # Build the executable and define necessary libraries.
 ###############################################################################################
 add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
+
+target_compile_definitions(${APPLICATION_NAME} PUBLIC
+    -DVER_MAJOR=${PROJECT_VERSION_MAJOR}
+    -DVER_MINOR=${PROJECT_VERSION_MINOR}
+    -DVER_STEP=${PROJECT_VERSION_PATCH}
+    -DVER_TWEAK=${VERSION_SUFFIX}
+    -DAPPLICATION_NAME=${PROJECT_NAME}
+)
 
 if(Qt5DBus_FOUND)
     set(DBUS_LIB Qt5::DBus)

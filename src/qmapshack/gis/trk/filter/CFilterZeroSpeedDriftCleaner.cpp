@@ -49,9 +49,8 @@ CFilterZeroSpeedDriftCleaner::~CFilterZeroSpeedDriftCleaner()
 
 void CFilterZeroSpeedDriftCleaner::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "FilterZeroSpeedDriftCleaner");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     trk.filterZeroSpeedDriftCleaner(distance->value()/IUnit::self().basefactor, ratio->value());
-    CCanvas::restoreOverrideCursor("CFilterZeroSpeedDriftCleaner");
 }
 
 void CFilterZeroSpeedDriftCleaner::showHelp()

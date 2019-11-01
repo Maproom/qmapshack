@@ -39,6 +39,7 @@ protected:
 
 private slots:
     void slotExpanded(QTreeWidgetItem * item);
+    void slotCollapsed(QTreeWidgetItem * item);
 };
 
 #endif //CDEVICEGARMINARCHIVE_H

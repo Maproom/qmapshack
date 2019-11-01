@@ -32,7 +32,6 @@ CFilterInvalid::CFilterInvalid(CGisItemTrk &trk, QWidget *parent)
 
 void CFilterInvalid::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterInvalid");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     trk.filterRemoveInvalidPoints();
-    CCanvas::restoreOverrideCursor("CFilterInvalid");
 }

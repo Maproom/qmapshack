@@ -31,7 +31,6 @@ CFilterDelete::CFilterDelete(CGisItemTrk &trk, QWidget *parent)
 
 void CFilterDelete::slotApply()
 {
-    CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterDelete");
+    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     trk.filterDelete();
-    CCanvas::restoreOverrideCursor("CFilterDelete");
 }

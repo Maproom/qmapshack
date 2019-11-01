@@ -614,5 +614,23 @@ protected:
     QString hashTrkWpt[2];
 };
 
+class CProjectMountLock
+{
+public:
+    CProjectMountLock(IGisProject& project)
+        : project(project)
+    {
+        project.mount();
+    }
+
+    ~CProjectMountLock()
+    {
+        project.umount();
+    }
+
+private:
+    IGisProject& project;
+};
+
 #endif //IGISPROJECT_H
 

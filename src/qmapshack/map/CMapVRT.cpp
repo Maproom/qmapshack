@@ -107,6 +107,13 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         hasOverviews = dataset->GetRasterBand(1)->GetOverviewCount() != 0;
     }
 
+    // if the master VRT does not return a positive overview feedback
+    // test all files combined by the VRT to have overviews.
+    if(!hasOverviews)
+    {
+        qDebug() << "extended test for overviews";
+        hasOverviews = testForOverviews(filename);
+    }
     qDebug() << "has overviews" << hasOverviews;
 
 
@@ -176,6 +183,105 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 CMapVRT::~CMapVRT()
 {
     GDALClose(dataset);
+}
+
+bool CMapVRT::testForOverviews(const QString& filename)
+{
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Failed to open" << filename;
+        return false;
+    }
+
+    QDomDocument xml;
+    QString msg;
+    int line;
+    int column;
+    if (!xml.setContent(&file, false, &msg, &line, &column))
+    {
+        file.close();
+        throw tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
+        qDebug() << "Failed to read:" << filename << endl
+                 << "line" << line << ", column" << column << endl
+                 << msg;
+        return false;
+    }
+    file.close();
+
+    QSet<QString> files;
+    QDir basePath(QFileInfo(filename).absoluteDir());
+    const QDomElement& xmlVrt = xml.documentElement();
+
+    {
+        const QDomNodeList& xmlComplexSources = xmlVrt.elementsByTagName("ComplexSource");
+        const int N = xmlComplexSources.count();
+        for(int n = 0; n < N; ++n)
+        {
+            const QDomNode& xmlComplexSource = xmlComplexSources.item(n);
+            const QDomNode& xmlSourceFilename = xmlComplexSource.namedItem("SourceFilename");
+            const QDomNamedNodeMap& attr = xmlSourceFilename.attributes();
+            QString subFilename = xmlSourceFilename.toElement().text();
+
+            if(attr.contains("relativeToVRT") && (attr.namedItem("relativeToVRT").nodeValue() == "1"))
+            {
+                subFilename = basePath.absoluteFilePath(subFilename);
+            }
+
+            files << subFilename;
+        }
+    }
+
+    {
+        const QDomNodeList& xmlSimpleSources = xmlVrt.elementsByTagName("SimpleSource");
+        const int N = xmlSimpleSources.count();
+        for(int n = 0; n < N; ++n)
+        {
+            const QDomNode& xmlSimpleSource = xmlSimpleSources.item(n);
+            const QDomNode& xmlSourceFilename = xmlSimpleSource.namedItem("SourceFilename");
+            const QDomNamedNodeMap& attr = xmlSourceFilename.attributes();
+            QString subFilename = xmlSourceFilename.toElement().text();
+
+            if(attr.contains("relativeToVRT") && (attr.namedItem("relativeToVRT").nodeValue() == "1"))
+            {
+                subFilename = basePath.absoluteFilePath(subFilename);
+            }
+
+            files << subFilename;
+        }
+    }
+
+    if(files.isEmpty())
+    {
+        return false;
+    }
+
+    for(const QString& file : files)
+    {
+        using pGDALDataset = QSharedPointer<GDALDataset>;
+        pGDALDataset _dataset = pGDALDataset((GDALDataset*)GDALOpen(file.toUtf8(), GA_ReadOnly), GDALClose);
+        // _dataset will be destroyed automatically by shared pointer.
+
+        if(_dataset == nullptr)
+        {
+            return false;
+        }
+
+        if(_dataset->GetRasterCount() > 0)
+        {
+            if(_dataset->GetRasterBand(1)->GetOverviewCount() == 0)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    return true;
 }
 
 void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */

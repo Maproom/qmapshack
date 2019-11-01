@@ -176,10 +176,10 @@ bool IGisProject::askBeforClose()
     int res = QMessageBox::Ok;
     if(isChanged())
     {
-        CCanvas::setOverrideCursor(Qt::ArrowCursor, "askBeforClose");
-
-        res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Save project?"), tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
-        CCanvas::restoreOverrideCursor("askBeforClose");
+        {
+            CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
+            res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Save project?"), tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
+        }
 
         if(res == QMessageBox::Save)
         {
@@ -969,7 +969,7 @@ void IGisProject::umount()
 
 bool IGisProject::remove()
 {
-    mount();
+    CProjectMountLock mountLock(*this);
 
     /*
        Check if parent is a device and give it a chance to take care of data.
@@ -992,7 +992,6 @@ bool IGisProject::remove()
         QDir(filename).removeRecursively();
     }
 
-    umount();
     return true;
 }
 

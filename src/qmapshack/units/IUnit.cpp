@@ -21,6 +21,7 @@
 #include "units/CUnitImperial.h"
 #include "units/CUnitMetric.h"
 #include "units/CUnitNautic.h"
+#include "units/CUnitAviation.h"
 
 #include <proj_api.h>
 #include <QtWidgets>
@@ -593,6 +594,10 @@ void IUnit::setUnitType(type_e t, QObject * parent)
 
     case eTypeNautic:
         new CUnitNautic(parent);
+        break;
+
+    case eTypeAviation:
+        new CUnitAviation(parent);
         break;
     }
 

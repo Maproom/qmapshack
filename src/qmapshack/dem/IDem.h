@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+                  2019 Johannes Zellner johannes@zellner.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -80,6 +81,16 @@ public:
         return bSlopeColor;
     }
 
+    bool doElevationLimit()
+    {
+        return bElevationLimit;
+    }
+
+    int getElevationLimit()
+    {
+        return elevationValue;
+    }
+
     const QVector<QRgb> getSlopeColorTable()
     {
         return slopetable;
@@ -97,6 +108,7 @@ public:
 
     void setSlopeStepTable(int idx);
     void setSlopeStepTableCustomValue(int idx, int val);
+    void setElevationLimit(int val);
 
     enum winsize_e {eWinsize3x3 = 9, eWinsize4x4 = 16};
 
@@ -113,11 +125,18 @@ public slots:
         bSlopeColor = yes;
     }
 
+    void slotSetElevationLimit(bool yes)
+    {
+        bElevationLimit = yes;
+    }
+
 protected:
 
     void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage &img);
 
     void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img);
+
+    void elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage &img);
 
     /**
        @brief Slope in degrees based on a window. Origin is at point (1,1), counting from zero.
@@ -174,6 +193,8 @@ protected:
 
     QVector<QRgb> slopetable;
 
+    QVector<QRgb> elevationtable;
+
     int hasNoData = 0;
 
     double noData = 0;
@@ -183,8 +204,10 @@ private:
     qreal factorHillshading = 0.1666666716337204;
 
     bool bSlopeColor = false;
+    bool bElevationLimit = false;
     int gradeSlopeColor = 0;
     qreal slopeCustomStepTable[5];
+    int elevationValue;
 };
 
 #endif //IDEM_H

@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+                  2019 Johannes Zellner johannes@zellner.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,6 +43,7 @@ private slots:
     void slotGradeIndex(int idx);
     void slotSlopeValiddateAfterEdit();
     void slotSlopeChanged(int val);
+    void slotElevationAfterEdit();
 
 private:
     CTinySpinBox* slopeSpins[SLOPE_LEVELS];

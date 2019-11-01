@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+                  2019 Johannes Zellner johannes@zellner.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -97,6 +98,9 @@ IDem::IDem(CDemDraw *parent)
     slopetable << qRgba(255, 255, 0, 100);
     slopetable << qRgba(255, 128, 0, 100);
     slopetable << qRgba(255, 0, 0, 100);
+
+    elevationtable << qRgba(0, 0, 0, 0); // transparent
+    elevationtable << qRgba(255, 0, 255, 128); // magenta
 }
 
 IDem::~IDem()
@@ -119,6 +123,9 @@ void IDem::saveConfig(QSettings& cfg)
     cfg.setValue("slopeCustomValue2", slopeCustomStepTable[2]);
     cfg.setValue("slopeCustomValue3", slopeCustomStepTable[3]);
     cfg.setValue("slopeCustomValue4", slopeCustomStepTable[4]);
+
+    cfg.setValue("doElevationLimit",  bElevationLimit);
+    cfg.setValue("elevationValue",    elevationValue);
 }
 
 void IDem::loadConfig(QSettings& cfg)
@@ -135,6 +142,9 @@ void IDem::loadConfig(QSettings& cfg)
     slopeCustomStepTable[2] = cfg.value("slopeCustomValue2", 15.).toFloat();
     slopeCustomStepTable[3] = cfg.value("slopeCustomValue3", 20.).toFloat();
     slopeCustomStepTable[4] = cfg.value("slopeCustomValue4", 25.).toFloat();
+
+    bElevationLimit = cfg.value("doElevationLimit",  bElevationLimit  ).toBool();
+    elevationValue  = cfg.value("elevationValue", 0).toInt();
 }
 
 IDemProp * IDem::getSetup()
@@ -166,6 +176,11 @@ void IDem::slotSetFactorHillshade(int f)
 void IDem::setSlopeStepTableCustomValue(int idx, int val)
 {
     slopeCustomStepTable[idx] = (qreal) val;
+}
+
+void IDem::setElevationLimit(int val)
+{
+    elevationValue = val;
 }
 
 void IDem::setSlopeStepTable(int idx)
@@ -323,6 +338,44 @@ void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
                 scan[n - 1] = 2;
             }
             else if(slope > currentSlopeStepTable[0])
+            {
+                scan[n - 1] = 1;
+            }
+            else
+            {
+                scan[n - 1] = 0;
+            }
+        }
+    }
+}
+
+void IDem::elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage &img)
+{
+    int wp2 = w + 2;
+
+    for(unsigned int m = 1; m <= h; m++)
+    {
+        unsigned char* scan = img.scanLine(m - 1);
+        for(unsigned int n = 1; n <= w; n++)
+        {
+            qint16 win[eWinsize3x3];
+            fillWindow(data, n, m, wp2, win);
+
+            // get maximum of window (_not_ mean)
+            //
+            qreal meters = -2.0;
+            for(unsigned int i = 0; i < eWinsize3x3; i++)
+            {
+                if(win[i] != noData && win[i] > meters)
+                {
+                    meters = win[i];
+                }
+            }
+
+            qreal elevation; // elevation in the units set by the user
+            QString unit; // result not used
+            IUnit::self().meter2elevation(meters, elevation, unit);
+            if(elevation >= getElevationLimit())
             {
                 scan[n - 1] = 1;
             }

@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+                  2019 Johannes Zellner johannes@zellner.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,20 +39,25 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
 
     slotPropertiesChanged();
 
-    connect(sliderOpacity,     &QSlider::valueChanged,          demfile, &IDem::slotSetOpacity);
-    connect(sliderOpacity,     &QSlider::valueChanged,          dem,     &CDemDraw::emitSigCanvasUpdate);
-    connect(dem,               &CDemDraw::sigScaleChanged,      this,    &CDemPropSetup::slotScaleChanged);
-    connect(toolSetMinScale,   &QToolButton::toggled,           this,    &CDemPropSetup::slotSetMinScale);
-    connect(toolSetMaxScale,   &QToolButton::toggled,           this,    &CDemPropSetup::slotSetMaxScale);
+    connect(sliderOpacity,         &QSlider::valueChanged,      demfile, &IDem::slotSetOpacity);
+    connect(sliderOpacity,         &QSlider::valueChanged,      dem,     &CDemDraw::emitSigCanvasUpdate);
+    connect(dem,                   &CDemDraw::sigScaleChanged,  this,    &CDemPropSetup::slotScaleChanged);
+    connect(toolSetMinScale,       &QToolButton::toggled,       this,    &CDemPropSetup::slotSetMinScale);
+    connect(toolSetMaxScale,       &QToolButton::toggled,       this,    &CDemPropSetup::slotSetMaxScale);
 
-    connect(checkHillshading,  &QCheckBox::toggled,             demfile, &IDem::slotSetHillshading);
-    connect(checkHillshading,  &QCheckBox::clicked,             dem,     &CDemDraw::emitSigCanvasUpdate);
-    connect(sliderHillshading, &QSlider::valueChanged,          demfile, &IDem::slotSetFactorHillshade);
-    connect(sliderHillshading, &QSlider::valueChanged,          dem,     &CDemDraw::emitSigCanvasUpdate);
+    connect(checkHillshading,      &QCheckBox::toggled,         demfile, &IDem::slotSetHillshading);
+    connect(checkHillshading,      &QCheckBox::clicked,         dem,     &CDemDraw::emitSigCanvasUpdate);
+    connect(sliderHillshading,     &QSlider::valueChanged,      demfile, &IDem::slotSetFactorHillshade);
+    connect(sliderHillshading,     &QSlider::valueChanged,      dem,     &CDemDraw::emitSigCanvasUpdate);
 
-    connect(checkSlopeColor,   &QCheckBox::toggled,             demfile, &IDem::slotSetSlopeColor);
-    connect(checkSlopeColor,   &QCheckBox::clicked,             dem,     &CDemDraw::emitSigCanvasUpdate);
+    connect(checkSlopeColor,       &QCheckBox::toggled,         demfile, &IDem::slotSetSlopeColor);
+    connect(checkSlopeColor,       &QCheckBox::clicked,         dem,     &CDemDraw::emitSigCanvasUpdate);
 
+    // elevation color
+    //
+    connect(checkElevationLimit,   &QCheckBox::toggled,         demfile, &IDem::slotSetElevationLimit);
+    connect(checkElevationLimit,   &QCheckBox::clicked,         dem,     &CDemDraw::emitSigCanvasUpdate);
+    connect(spinBoxElevationLimit, QOverload<int>::of(&QSpinBox::valueChanged), this, &CDemPropSetup::slotElevationAfterEdit);
 
     for(size_t i = 0; i < SLOPE_LEVELS; i++)
     {
@@ -121,6 +127,18 @@ void CDemPropSetup::slotPropertiesChanged()
         slopeSpins[i]->setValue(demfile->getCurrentSlopeStepTable()[i]);
     }
 
+    checkElevationLimit->setChecked(demfile->doElevationLimit());
+    spinBoxElevationLimit->setValue(demfile->getElevationLimit());
+
+    qreal meter = 0;
+    qreal val = 0;
+    QString elevationUnit;
+    IUnit::self().meter2elevation(meter, val, elevationUnit);
+    if(elevationLimitUnit->text() != elevationUnit)
+    {
+        elevationLimitUnit->setText(elevationUnit);
+    }
+
     dem->emitSigCanvasUpdate();
 
     X_____________UnBlockAllSignals_____________X(this);
@@ -188,5 +206,12 @@ void CDemPropSetup::slotGradeIndex(int idx)
     // enable the spins if the selected entry is `custom`
     demfile->setSlopeStepTable(idx == IDem::slopePresetCount ? -1 : idx);
     slotPropertiesChanged();
+}
+
+void CDemPropSetup::slotElevationAfterEdit()
+{
+    demfile->setElevationLimit(spinBoxElevationLimit->value());
+
+    dem->emitSigCanvasUpdate();
 }
 

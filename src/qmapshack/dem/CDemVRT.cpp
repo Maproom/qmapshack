@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+                  2019 Johannes Zellner johannes@zellner.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -231,7 +232,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
         return;
     }
 
-    if(!doHillshading() && !doSlopeColor())
+    if(!doHillshading() && !doSlopeColor() && !doElevationLimit())
     {
         QThread::msleep(100);
         return;
@@ -408,6 +409,20 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                     img.setColorTable(slopetable);
 
                     slopecolor(data, w_used, h_used, img);
+
+                    p.setOpacity(o2);
+                    drawTile(img, r, p);
+                    p.setOpacity(o1);
+                }
+
+                if(doElevationLimit())
+                {
+                    QPolygonF r = l;
+
+                    QImage img(w_used, h_used, QImage::Format_Indexed8);
+                    img.setColorTable(elevationtable);
+
+                    elevationLimit(data, w_used, h_used, img);
 
                     p.setOpacity(o2);
                     drawTile(img, r, p);

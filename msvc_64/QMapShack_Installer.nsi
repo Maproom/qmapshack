@@ -193,7 +193,7 @@ Section "QMapShack" QMapShack
 
   ;BEGIN PROJ.4 Files    
   SetOutPath $INSTDIR
-    File Files\proj_6_1.dll
+    File Files\proj_6_2.dll
     File Files\proj.exe
     File Files\projinfo.exe
     File Files\cct.exe

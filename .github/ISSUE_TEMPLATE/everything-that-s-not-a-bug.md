@@ -1,8 +1,8 @@
 ---
-name: Feature request
+name: Everything that's not a bug
 about: Suggest an idea for this project
 title: ''
-labels: ''
+labels: enhancement
 assignees: ''
 
 ---

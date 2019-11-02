@@ -99,7 +99,7 @@ void CPlotProfile::updateData()
     else
     {
         setXLabel(tr("Distance [%1]").arg(unit));
-        setYLabel(tr("Ele. [%1]").arg(IUnit::self().baseunit));
+        setYLabel(tr("Ele. [%1]").arg(IUnit::self().elevationUnit));
     }
 
     QPolygonF lineEle;
@@ -108,7 +108,7 @@ void CPlotProfile::updateData()
 
     IGisProject * project = dynamic_cast<IGisProject*>(trk->parent());
 
-    qreal basefactor = IUnit::self().basefactor;
+    qreal elevationFactor = IUnit::self().elevationFactor;
     const CTrackData& t = trk->getTrackData();
     for(const CTrackData::trkpt_t& trkpt : t)
     {
@@ -122,7 +122,7 @@ void CPlotProfile::updateData()
             continue;
         }
 
-        lineEle << QPointF(trkpt.distance, trkpt.ele * basefactor);
+        lineEle << QPointF(trkpt.distance, trkpt.ele * elevationFactor);
         coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
         lineDem << QPointF(trkpt.distance, NOFLOAT);
 
@@ -153,7 +153,7 @@ void CPlotProfile::updateData()
             }
 
             CPlotData::point_t tag;
-            tag.point = QPointF(trkpt.distance, trkpt.ele * basefactor);
+            tag.point = QPointF(trkpt.distance, trkpt.ele * elevationFactor);
             tag.icon  = CDraw::number(cnt++, Qt::black);
             tag.label = trkpt.desc.size() < 20 ? trkpt.desc : trkpt.desc.left(17) + "...";
             data->tags << tag;
@@ -163,7 +163,7 @@ void CPlotProfile::updateData()
     CMainWindow::self().getElevationAt(coords, lineDem);
     for(QPointF& pt : lineDem)
     {
-        pt.ry() *= basefactor;
+        pt.ry() *= elevationFactor;
     }
 
     newLine(lineEle, "GPS");
@@ -177,7 +177,7 @@ void CPlotProfile::updateData()
         QPolygonF spline;
         for(const QPointF& pt : lineEle)
         {
-            spline << QPointF(pt.x(), trk->getElevationInterpolated(pt.x()) * basefactor);
+            spline << QPointF(pt.x(), trk->getElevationInterpolated(pt.x()) * elevationFactor);
         }
 
         addLine(spline, "Interp.");

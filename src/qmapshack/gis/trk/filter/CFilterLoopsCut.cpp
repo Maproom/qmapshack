@@ -30,10 +30,10 @@ CFilterLoopsCut::CFilterLoopsCut(CGisItemTrk &trk, QWidget * parent)
 {
     setupUi(this);
 
-    spinBox->setSuffix(IUnit::self().baseunit);
+    spinBox->setSuffix(IUnit::self().baseUnit);
 
     SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/LoopsCut/minLoopLength", 10 * IUnit::self().basefactor).toInt() * IUnit::self().basefactor);
+    spinBox->setValue(cfg.value("TrackDetails/Filter/LoopsCut/minLoopLength", 10 * IUnit::self().baseFactor).toInt() * IUnit::self().baseFactor);
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterLoopsCut::slotApply);
     connect(help, &QToolButton::clicked, this, &CFilterLoopsCut::showHelp);
@@ -42,13 +42,13 @@ CFilterLoopsCut::CFilterLoopsCut(CGisItemTrk &trk, QWidget * parent)
 CFilterLoopsCut::~CFilterLoopsCut()
 {
     SETTINGS;
-    cfg.setValue("TrackDetails/Filter/LoopsCut/minLoopLength", spinBox->value() / IUnit::self().basefactor);
+    cfg.setValue("TrackDetails/Filter/LoopsCut/minLoopLength", spinBox->value() / IUnit::self().baseFactor);
 }
 
 void CFilterLoopsCut::slotApply()
 {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterLoopsCut(spinBox->value()/IUnit::self().basefactor);
+    trk.filterLoopsCut(spinBox->value()/IUnit::self().baseFactor);
 }
 
 void CFilterLoopsCut::showHelp()

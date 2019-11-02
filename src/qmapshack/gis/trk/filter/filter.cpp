@@ -357,10 +357,10 @@ void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
 
 void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType)
 {
-    qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedfactor;
-    qreal minSpeed = cyclingType.minSpeed / IUnit::self().speedfactor;
+    qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedFactor;
+    qreal minSpeed = cyclingType.minSpeed / IUnit::self().speedFactor;
     qreal slopeAtMinSpeed = cyclingType.slopeAtMinSpeed;
-    qreal maxSpeed = cyclingType.maxSpeed / IUnit::self().speedfactor;
+    qreal maxSpeed = cyclingType.maxSpeed / IUnit::self().speedFactor;
     qreal slopeAtMaxSpeed = cyclingType.slopeAtMaxSpeed;
 
     QDateTime timestamp = timeStart;
@@ -433,7 +433,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
     // Curve algorithm based on carloscoi curves
     // variable names according to carloscoi xls cell names, A9, B4, B5, B6
     // for better interpretation of formula
-    qreal B4 = hikingType.plainSpeed / IUnit::self().speedfactor * 3.6; // Transform from set format to km/h
+    qreal B4 = hikingType.plainSpeed / IUnit::self().speedFactor * 3.6; // Transform from set format to km/h
     qreal B5 = hikingType.ascending;
     qreal B6 = hikingType.descending;
 

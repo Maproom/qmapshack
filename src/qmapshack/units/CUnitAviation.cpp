@@ -21,38 +21,10 @@
 #include "units/CUnitAviation.h"
 
 CUnitAviation::CUnitAviation(QObject * parent)
-    : IUnit(eTypeAviation, "ft", footPerMeter, "kn", meterPerSecToKnots, parent)
+    : IUnit(eTypeAviation, "ft", footPerMeter, "kn", meterPerSecToKnots, "ft", footPerMeter, parent)
 {
 }
 
-
-void CUnitAviation::meter2elevation(qreal meter, QString& val, QString& unit) const /* override */
-{
-    if(meter == NOFLOAT)
-    {
-        val  = "-";
-        unit.clear();
-    }
-    else
-    {
-        val.sprintf("%1.0f", meter * footPerMeter);
-        unit = "ft";
-    }
-}
-
-void CUnitAviation::meter2elevation(qreal meter, qreal& val, QString& unit) const /* override */
-{
-    if(meter == NOFLOAT)
-    {
-        val  = NOFLOAT;
-        unit.clear();
-    }
-    else
-    {
-        val =  meter * footPerMeter;
-        unit = "ft";
-    }
-}
 
 void CUnitAviation::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {

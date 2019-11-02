@@ -73,7 +73,7 @@ void CKnownExtension::initGarminTPXv1(const IUnit &units, const QString &ns)
                              getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":wtemp")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":depth",
-                           { tr("Depth", "extShortName"), tr("Depth", "extLongName"), 2, 0., 12000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDepth.png", true, false,
+                           { tr("Depth", "extShortName"), tr("Depth", "extLongName"), 2, 0., 12000., units.elevationFactor, units.elevationUnit, "://icons/32x32/CSrcDepth.png", true, false,
                              getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":depth")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":hr",
@@ -97,11 +97,11 @@ void CKnownExtension::initMioTPX(const IUnit &units)
                              getExtensionValueFunc("cadence")});
 
     knownExtensions.insert("speed",
-                           { tr("Speed", "extShortName"), tr("Speed", "extLongName"), NOORDER, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
+                           { tr("Speed", "extShortName"), tr("Speed", "extLongName"), NOORDER, 0., 600., units.speedFactor, units.speedUnit, "://icons/32x32/CSrcSpeed.png", true, false,
                              getExtensionValueFunc("speed")});
 
     knownExtensions.insert("acceleration",
-                           { tr("Accel.", "extShortName"), tr("Acceleration", "extLongName"), NOORDER, std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), units.basefactor, units.baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true, false,
+                           { tr("Accel.", "extShortName"), tr("Acceleration", "extLongName"), NOORDER, std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), units.baseFactor, units.baseUnit + "/s²", "://icons/32x32/CSrcAccel.png", true, false,
                              getExtensionValueFunc("acceleration")});
 
     knownExtensions.insert("course",
@@ -120,11 +120,11 @@ void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
                              getExtensionValueFunc(ns % ":temp")});
 
     knownExtensions.insert(ns % ":distance",
-                           { tr("Dist.", "extShortName"), tr("Distance", "extLongName"), 2, 0., +100000000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDistance.png", true, false,
+                           { tr("Dist.", "extShortName"), tr("Distance", "extLongName"), 2, 0., +100000000., units.baseFactor, units.baseUnit, "://icons/32x32/CSrcDistance.png", true, false,
                              getExtensionValueFunc(ns % ":distance") });
 
     knownExtensions.insert(ns % ":altitude",
-                           { tr("Ele.", "extShortName"), tr("Elevation", "extLongName"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
+                           { tr("Ele.", "extShortName"), tr("Elevation", "extLongName"), 3, -1000., +10000., units.elevationFactor, units.elevationUnit, "://icons/32x32/CSrcElevation.png", true, false,
                              getExtensionValueFunc(ns % ":altitude") });
 
     knownExtensions.insert(ns % ":energy",
@@ -137,11 +137,11 @@ void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
                              getExtensionValueFunc(ns % ":seaLevelPressure") });
 
     knownExtensions.insert(ns % ":speed",
-                           { tr("Speed", "extShortName"), tr("Speed", "extLongName"), 6, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
+                           { tr("Speed", "extShortName"), tr("Speed", "extLongName"), 6, 0., 600., units.speedFactor, units.speedUnit, "://icons/32x32/CSrcSpeed.png", true, false,
                              getExtensionValueFunc(ns % ":speed")});
 
     knownExtensions.insert(ns % ":verticalSpeed",
-                           { tr("v. Speed", "extShortName"), tr("Vertical Speed", "extLongName"), 7, 0., 50., units.speedfactor, units.speedunit, "://icons/32x32/CSrcVertSpeed.png", true, false,
+                           { tr("v. Speed", "extShortName"), tr("Vertical Speed", "extLongName"), 7, 0., 50., units.speedFactor, units.speedUnit, "://icons/32x32/CSrcVertSpeed.png", true, false,
                              getExtensionValueFunc(ns % ":verticalSpeed")});
 }
 
@@ -156,22 +156,22 @@ void CKnownExtension::init(const IUnit &units)
         },
 
         {internalSpeedDist,
-         { tr("Speed", "extShortName"), tr("Speed over Distance*", "extLongName"), -1, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
+         { tr("Speed", "extShortName"), tr("Speed over Distance*", "extLongName"), -1, 0., 600., units.speedFactor, units.speedUnit, "://icons/32x32/CSrcSpeed.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.speed; }}
         },
 
         {internalSpeedTime,
-         { tr("Speed", "extShortName"), tr("Speed over Time*", "extLongName"), -1, 0., NOFLOAT, units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
+         { tr("Speed", "extShortName"), tr("Speed over Time*", "extLongName"), -1, 0., NOFLOAT, units.speedFactor, units.speedUnit, "://icons/32x32/CSrcSpeed.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.speed; }}
         },
 
         {internalEle,
-         { tr("Ele.", "extShortName"), tr("Elevation*", "extLongName"), -1, 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, true,
+         { tr("Ele.", "extShortName"), tr("Elevation*", "extLongName"), -1, 0., 100000., units.elevationFactor, units.elevationUnit, "://icons/32x32/CSrcElevation.png", true, true,
            [](const CTrackData::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
 
         {internalProgress,
-         { tr("Progress", "extShortName"), tr("Progress*", "extLongName"), -1, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true, true,
+         { tr("Progress", "extShortName"), tr("Progress*", "extLongName"), -1, 0., NOFLOAT, units.baseFactor, units.baseUnit, "://icons/32x32/Progress.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.distance; }}
         },
 

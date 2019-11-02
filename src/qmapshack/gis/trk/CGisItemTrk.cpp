@@ -2507,7 +2507,7 @@ void CGisItemTrk::setElevation(qint32 idx, qint32 ele)
     {
         trkpt->ele = ele;
         deriveSecondaryData();
-        changed(tr("Changed elevation of point %1 to %2 %3").arg(idx).arg(ele).arg(IUnit::self().baseunit), "://icons/48x48/SetEle.png");
+        changed(tr("Changed elevation of point %1 to %2 %3").arg(idx).arg(ele*IUnit::self().elevationFactor).arg(IUnit::self().elevationUnit), "://icons/48x48/SetEle.png");
     }
 }
 

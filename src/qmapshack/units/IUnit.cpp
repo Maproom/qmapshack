@@ -434,23 +434,54 @@ const QRegExp IUnit::reCoord4("^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]
 
 const QRegExp IUnit::reCoord5("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$");
 
-IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent)
+IUnit::IUnit(const type_e &type, const QString& baseUnit, const qreal baseFactor, const QString& speedUnit, const qreal speedFactor, const QString &elevationUnit, const qreal elevationFactor, QObject * parent)
     : QObject(parent)
     , type(type)
-    , baseunit(baseunit)
-    , basefactor(basefactor)
-    , speedunit(speedunit)
-    , speedfactor(speedfactor)
+    , baseUnit(baseUnit)
+    , baseFactor(baseFactor)
+    , speedUnit(speedUnit)
+    , speedFactor(speedFactor)
+    , elevationUnit(elevationUnit)
+    , elevationFactor(elevationFactor)
 {
     //there can be only one...
     delete m_self;
     m_self = this;
 }
 
+void IUnit::meter2elevation(qreal meter, QString& val, QString& unit) const
+{
+    if(meter == NOFLOAT)
+    {
+        val  = "-";
+        unit.clear();
+    }
+    else
+    {
+        val.sprintf("%1.0f", meter * elevationFactor);
+        unit = elevationUnit;
+    }
+}
+
+void IUnit::meter2elevation(qreal meter, qreal& val, QString& unit) const
+{
+    if(meter == NOFLOAT)
+    {
+        val  = NOFLOAT;
+        unit.clear();
+    }
+    else
+    {
+        val = meter * elevationFactor;
+        unit = elevationUnit;
+    }
+}
+
+
 void IUnit::meter2base(qreal meter, QString& val, QString& unit) const
 {
-    unit = baseunit;
-    val.sprintf("%1.0f", meter * basefactor);
+    unit = baseUnit;
+    val.sprintf("%1.0f", meter * baseFactor);
 }
 
 bool IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
@@ -614,8 +645,8 @@ void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
         return;
     }
 
-    val.sprintf("%2.2f", meter * speedfactor);
-    unit = speedunit;
+    val.sprintf("%2.2f", meter * speedFactor);
+    unit = speedUnit;
 }
 
 void IUnit::meter2speed(qreal meter, qreal& val, QString& unit) const
@@ -627,8 +658,8 @@ void IUnit::meter2speed(qreal meter, qreal& val, QString& unit) const
         return;
     }
 
-    val = meter * speedfactor;
-    unit = speedunit;
+    val = meter * speedFactor;
+    unit = speedUnit;
 }
 
 void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit) const

@@ -19,38 +19,10 @@
 #include "units/CUnitMetric.h"
 
 CUnitMetric::CUnitMetric(QObject * parent)
-    : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, parent)
+    : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, "m", 1.0, parent)
 {
 }
 
-
-void CUnitMetric::meter2elevation(qreal meter, QString& val, QString& unit) const /* override */
-{
-    if(meter == NOFLOAT || meter == NOINT)
-    {
-        val  = "-";
-        unit.clear();
-    }
-    else
-    {
-        val.sprintf("%1.0f", meter);
-        unit = "m";
-    }
-}
-
-void CUnitMetric::meter2elevation(qreal meter, qreal& val, QString& unit) const /* override */
-{
-    if(meter == NOFLOAT || meter == NOINT)
-    {
-        val  = NOFLOAT;
-        unit.clear();
-    }
-    else
-    {
-        val = meter;
-        unit = "m";
-    }
-}
 
 void CUnitMetric::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
@@ -114,18 +86,18 @@ void CUnitMetric::meter2speed(qreal meter, QString& val, QString& unit) const /*
     }
     else if (meter < 0.27)
     {
-        val.sprintf("%1.0f", meter * speedfactor * 1000);
+        val.sprintf("%1.0f", meter * speedFactor * 1000);
         unit = "m/h";
     }
     else if (meter < 10.0)
     {
-        val.sprintf("%1.1f", meter * speedfactor);
-        unit = speedunit;
+        val.sprintf("%1.1f", meter * speedFactor);
+        unit = speedUnit;
     }
     else
     {
-        val.sprintf("%1.0f", meter * speedfactor);
-        unit = speedunit;
+        val.sprintf("%1.0f", meter * speedFactor);
+        unit = speedUnit;
     }
 }
 
@@ -138,13 +110,13 @@ void CUnitMetric::meter2speed(qreal meter, qreal& val, QString& unit) const /* o
     }
     else if (meter < 0.27)
     {
-        val = meter * speedfactor * 1000;
+        val = meter * speedFactor * 1000;
         unit = "m/h";
     }
     else
     {
-        val = meter * speedfactor;
-        unit = speedunit;
+        val = meter * speedFactor;
+        unit = speedUnit;
     }
 }
 

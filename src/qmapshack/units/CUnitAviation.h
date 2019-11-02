@@ -25,15 +25,9 @@
 class CUnitAviation : public IUnit
 {
 public:
-    static constexpr qreal footPerMeter = 3.28084;
-    static constexpr qreal nauticalMilePerMeter = 1. / 1852;
-    static constexpr qreal meterPerSecToKnots = 1.94361780;
-
     CUnitAviation(QObject * parent);
     virtual ~CUnitAviation() = default;
 
-    void meter2elevation(qreal meter, QString& val, QString& unit) const override;
-    void meter2elevation(qreal meter, qreal& val, QString& unit) const override;
     void meter2distance(qreal meter, QString& val, QString& unit) const override;
     void meter2distance(qreal meter, qreal& val, QString& unit) const override;
     void meter2area(qreal meter, QString& val, QString& unit) const override;

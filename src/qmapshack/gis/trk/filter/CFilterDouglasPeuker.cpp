@@ -30,7 +30,7 @@ CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk &trk, QWidget * parent)
 {
     setupUi(this);
 
-    spinBox->setSuffix(IUnit::self().baseunit);
+    spinBox->setSuffix(IUnit::self().baseUnit);
 
     SETTINGS;
     spinBox->setValue(cfg.value("TrackDetails/Filter/DouglasPeuker/distance", 5).toInt());
@@ -47,5 +47,5 @@ CFilterDouglasPeuker::~CFilterDouglasPeuker()
 void CFilterDouglasPeuker::slotApply()
 {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterReducePoints(spinBox->value()/IUnit::self().basefactor);
+    trk.filterReducePoints(spinBox->value()/IUnit::self().baseFactor);
 }

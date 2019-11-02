@@ -28,7 +28,7 @@ CFilterOffsetElevation::CFilterOffsetElevation(CGisItemTrk &trk, QWidget *parent
 {
     setupUi(this);
 
-    spinBox->setSuffix(IUnit::self().baseunit);
+    spinBox->setSuffix(IUnit::self().elevationUnit);
 
     SETTINGS;
     spinBox->setValue(cfg.value("TrackDetails/Filter/OffsetElevation/offset", 0).toInt());
@@ -45,5 +45,5 @@ CFilterOffsetElevation::~CFilterOffsetElevation()
 void CFilterOffsetElevation::slotApply()
 {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterOffsetElevation(spinBox->value()/IUnit::self().basefactor);
+    trk.filterOffsetElevation(spinBox->value()/IUnit::self().elevationFactor);
 }

@@ -34,6 +34,13 @@ class IUnit : public QObject
 {
     Q_OBJECT
 public:
+
+    static constexpr qreal footPerMeter = 3.28084;
+    static constexpr qreal nauticalMilePerMeter = 1. / 1852;
+    static constexpr qreal meterPerSecToKnots = 1.94361780;
+    static constexpr qreal milePerMeter = 0.6213699E-3;
+    static constexpr qreal meterPerSecToMilePerHour = 2.23693164;
+
     virtual ~IUnit() = default;
 
     static const IUnit& self()
@@ -42,8 +49,8 @@ public:
     }
 
     /// convert meter of elevation into a value and unit string
-    virtual void meter2elevation(qreal meter, QString& val, QString& unit) const = 0;
-    virtual void meter2elevation(qreal meter, qreal& val, QString& unit) const = 0;
+    virtual void meter2elevation(qreal meter, QString& val, QString& unit) const;
+    virtual void meter2elevation(qreal meter, qreal& val, QString& unit) const;
     virtual void feet2elevation(qreal feet, QString& val, QString& unit) const
     {
         meter2elevation(feet / 3.28084, val, unit);
@@ -113,10 +120,12 @@ public:
     static QByteArray pos2timezone(const QPointF& pos);
 
     const type_e type;
-    const QString baseunit;
-    const qreal basefactor;
-    const QString speedunit;
-    const qreal speedfactor;
+    const QString baseUnit;
+    const qreal baseFactor;
+    const QString speedUnit;
+    const qreal speedFactor;
+    const QString elevationUnit;
+    const qreal elevationFactor;
     static const char *tblTimezone[];
 
     enum tz_mode_e
@@ -165,7 +174,14 @@ public:
     static bool isValidCoordString(const QString& str);
 
 protected:
-    IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject *parent);
+    IUnit(const type_e& type,
+          const QString& baseUnit,
+          const qreal baseFactor,
+          const QString& speedUnit,
+          const qreal speedFactor,
+          const QString& elevationUnit,
+          const qreal elevationFactor,
+          QObject *parent);
 
     static slope_mode_e slopeMode;
 

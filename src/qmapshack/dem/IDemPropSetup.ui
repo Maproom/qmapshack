@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>269</width>
-    <height>173</height>
+    <height>181</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -592,22 +592,6 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_3">
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="checkElevationLimit">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Elevation Limit</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="1">
       <widget class="QSpinBox" name="spinBoxElevationLimit">
        <property name="sizePolicy">
@@ -636,16 +620,19 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="elevationLimitUnit">
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="checkElevationLimit">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="text">
-        <string>m/ft</string>
+        <string>Elevation Limit</string>
        </property>
       </widget>
      </item>

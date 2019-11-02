@@ -35,14 +35,13 @@ CElevationDialog::CElevationDialog(QWidget * parent, QVariant &val, const QVaria
     connect(pushReset,  &QPushButton::clicked, this, &CElevationDialog::slotReset);
     connect(toolGetEle, &QToolButton::clicked, this, &CElevationDialog::slotGetEle);
 
-    QString str, unit;
-    IUnit::self().meter2elevation(100, str, unit);
-
-    labelUnit->setText(unit);
+    labelUnit->setText(IUnit::self().elevationUnit);
     if(val != NOINT)
     {
-        IUnit::self().meter2elevation(val.toDouble(), str, unit);
-        lineValue->setText(str);
+        QString unit;
+        QString value;
+        IUnit::self().meter2elevation(val.toDouble(), value, unit);
+        lineValue->setText(value);
     }
 }
 
@@ -58,7 +57,7 @@ void CElevationDialog::accept()
     }
     else
     {
-        val.setValue(lineValue->text().toDouble() / IUnit::self().basefactor);
+        val.setValue(lineValue->text().toDouble() / IUnit::self().elevationFactor);
     }
 
     QDialog::accept();

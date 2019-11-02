@@ -20,37 +20,8 @@
 #include "units/CUnitNautic.h"
 
 CUnitNautic::CUnitNautic(QObject * parent)
-    : IUnit(eTypeNautic, "nm", 0.00053989, "nm/h", 1.94361780, parent)
+    : IUnit(eTypeNautic, "nm", 0.00053989, "nm/h", 1.94361780, "m", 1.0, parent)
 {
-}
-
-
-void CUnitNautic::meter2elevation(qreal meter, QString& val, QString& unit) const /* override */
-{
-    if(meter == NOFLOAT)
-    {
-        val  = "-";
-        unit.clear();
-    }
-    else
-    {
-        val.sprintf("%1.0f", meter);
-        unit = "m";
-    }
-}
-
-void CUnitNautic::meter2elevation(qreal meter, qreal& val, QString& unit) const /* override */
-{
-    if(meter == NOFLOAT)
-    {
-        val  = NOFLOAT;
-        unit.clear();
-    }
-    else
-    {
-        val = meter;
-        unit = "m";
-    }
 }
 
 void CUnitNautic::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
@@ -62,8 +33,8 @@ void CUnitNautic::meter2distance(qreal meter, QString& val, QString& unit) const
     }
     else
     {
-        val.sprintf("%1.2f", meter * basefactor);
-        unit = baseunit;
+        val.sprintf("%1.2f", meter * baseFactor);
+        unit = baseUnit;
     }
 }
 
@@ -76,8 +47,8 @@ void CUnitNautic::meter2distance(qreal meter, qreal& val, QString& unit) const /
     }
     else
     {
-        val = meter * basefactor;
-        unit = baseunit;
+        val = meter * baseFactor;
+        unit = baseUnit;
     }
 }
 
@@ -90,8 +61,8 @@ void CUnitNautic::meter2speed(qreal meter, QString& val, QString& unit) const /*
     }
     else
     {
-        val.sprintf("%1.2f", meter * speedfactor);
-        unit = speedunit;
+        val.sprintf("%1.2f", meter * speedFactor);
+        unit = speedUnit;
     }
 }
 
@@ -104,8 +75,8 @@ void CUnitNautic::meter2speed(qreal meter, qreal& val, QString& unit) const /* o
     }
     else
     {
-        val=meter * speedfactor;
-        unit = speedunit;
+        val=meter * speedFactor;
+        unit = speedUnit;
     }
 }
 
@@ -144,6 +115,6 @@ qreal CUnitNautic::elevation2meter(const QString& val) const /* override */
 
 void CUnitNautic::meter2unit(qreal meter, qreal& scale, QString&  unit) const
 {
-    scale = basefactor;
+    scale = baseFactor;
     unit  = "nm";
 }

@@ -20,38 +20,10 @@
 #include "units/CUnitImperial.h"
 
 CUnitImperial::CUnitImperial(QObject * parent)
-    : IUnit(eTypeImperial, "ft", footPerMeter, "mi/h", meterPerSecToMilePerHour, parent)
+    : IUnit(eTypeImperial, "ft", footPerMeter, "mi/h", meterPerSecToMilePerHour, "ft", footPerMeter, parent)
 {
 }
 
-
-void CUnitImperial::meter2elevation(qreal meter, QString& val, QString& unit) const /* override */
-{
-    if(meter == NOFLOAT)
-    {
-        val  = "-";
-        unit.clear();
-    }
-    else
-    {
-        val.sprintf("%1.0f", meter * footPerMeter);
-        unit = "ft";
-    }
-}
-
-void CUnitImperial::meter2elevation(qreal meter, qreal& val, QString& unit) const /* override */
-{
-    if(meter == NOFLOAT)
-    {
-        val  = NOFLOAT;
-        unit.clear();
-    }
-    else
-    {
-        val =  meter * footPerMeter;
-        unit = "ft";
-    }
-}
 
 void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {

@@ -129,15 +129,7 @@ void CDemPropSetup::slotPropertiesChanged()
 
     checkElevationLimit->setChecked(demfile->doElevationLimit());
     spinBoxElevationLimit->setValue(demfile->getElevationLimit());
-
-    qreal meter = 0;
-    qreal val = 0;
-    QString elevationUnit;
-    IUnit::self().meter2elevation(meter, val, elevationUnit);
-    if(elevationLimitUnit->text() != elevationUnit)
-    {
-        elevationLimitUnit->setText(elevationUnit);
-    }
+    spinBoxElevationLimit->setSuffix(IUnit::self().elevationUnit);
 
     dem->emitSigCanvasUpdate();
 

@@ -19,6 +19,7 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterNewDate.h"
+#include "units/IUnit.h"
 
 CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
@@ -26,8 +27,42 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
 {
     setupUi(this);
 
-    labelTimeZone->setText(QDateTime::currentDateTime().timeZone().abbreviation(QDateTime::currentDateTime()));
-    dateTimeEdit->setDateTime(QDateTime::currentDateTime());
+    IUnit::tz_mode_e mode;
+    QByteArray zone;
+    bool format;
+    IUnit::self().getTimeZoneSetup(mode, zone, format);
+
+    switch(mode)
+    {
+    case IUnit::eTZUtc:
+    {
+        labelTimeZone->setText(QTimeZone::utc().abbreviation(QDateTime::currentDateTime().toUTC()));
+        dateTimeEdit->setDateTime(QDateTime::currentDateTime().toUTC());
+        break;
+    }
+
+    case IUnit::eTZLocal:
+    {
+        labelTimeZone->setText(QDateTime::currentDateTime().timeZone().abbreviation(QDateTime::currentDateTime()));
+        dateTimeEdit->setDateTime(QDateTime::currentDateTime());
+        break;
+    }
+
+    case IUnit::eTZAuto:
+    {
+        CTrackData::trkpt_t trkpt = *trk.getTrackData().begin();
+        zone = IUnit::pos2timezone(trkpt * DEG_TO_RAD);
+        // break; // intended
+    }
+
+    case IUnit::eTZSelected:
+    {
+        QDateTime datetime = QDateTime::currentDateTimeUtc().toTimeZone(QTimeZone(zone));
+        labelTimeZone->setText(datetime.timeZone().abbreviation(datetime));
+        dateTimeEdit->setDateTime(datetime);
+        break;
+    }
+    }
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterNewDate::slotApply);
 }

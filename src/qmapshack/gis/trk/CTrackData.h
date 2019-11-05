@@ -175,6 +175,11 @@ public:
             }
         }
 
+        operator QPointF() const
+        {
+            return QPointF(lon, lat);
+        }
+
         act20_e activity = eAct20None;
         quint32 flags = 0;
         quint32 valid = 0;

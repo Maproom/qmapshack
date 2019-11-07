@@ -335,7 +335,29 @@ QString CGisItemWpt::getInfo(quint32 feature) const
             str += "<br/>\n";
         }
 
-        str += QString(" %4 (%1, D %2, T %3)").arg(geocache.container).arg(geocache.difficulty, 0, 'f', 1).arg(geocache.terrain, 0, 'f', 1).arg(geocache.name);
+        str += QString(" %4 (%1, D %2, T %3)")
+               .arg(geocache.container)
+               .arg(geocache.difficulty, 0, 'f', 1)
+               .arg(geocache.terrain, 0, 'f', 1)
+               .arg(geocache.name);
+
+        const QDateTime& lastFound = geocache.getLastFound();
+        if(lastFound.isValid())
+        {
+            str += "<br/>" + tr("Last found: %1")
+                   .arg(IUnit::datetime2string(lastFound, false, wpt));
+        }
+
+        const IGisProject * project = getParentProject();
+        if(project != nullptr)
+        {
+            const QDateTime& projectDate = getParentProject()->getTime();
+            if(projectDate.isValid())
+            {
+                str += "<br/>" + tr("Project created: %1")
+                       .arg(IUnit::datetime2string(projectDate, false, wpt));
+            }
+        }
     }
     else
     {
@@ -1163,6 +1185,38 @@ QList<QString> CGisItemWpt::geocache_t::initAttributeMeaningsTranslated()
         tr("GeoTour")
     };
     return translated;
+}
+
+QDateTime CGisItemWpt::geocache_t::getLastFound() const
+{
+    QDateTime lastFound;
+    for(const geocachelog_t& log : logs)
+    {
+        if(lastFound.isValid() == false || (log.type == "Found It" && log.date > lastFound))
+        {
+            lastFound=log.date;
+        }
+    }
+    return lastFound;
+}
+
+QString CGisItemWpt::geocache_t::getLogs() const
+{
+    QString strLogs;
+    for(const geocachelog_t& log : logs)
+    {
+        QString thislog = log.text;
+        strLogs += "<p><b>"
+                   + log.date.date().toString(Qt::SystemLocaleShortDate)
+                   + ": "
+                   + log.type
+                   + tr(" by ")
+                   + log.finder
+                   + "</b></p><p>"
+                   + thislog.replace("\n", "<br/>")
+                   + "</p><hr>";
+    }
+    return strLogs;
 }
 
 QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()

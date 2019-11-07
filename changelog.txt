@@ -4,7 +4,7 @@ V1.XX.X
 [QMS-58] Windows Build and Installer: use PROJ 6.2
 [QMS-59] Version information in window title does not contain VERSION_SUFFIX "development"
 [QMS-64] Cleanup code in IUnit and subclasses
-
+[QMS-73] Info of a geocache is not correctly shown in Copy Element Window
 
 V1.14.0
 [QMS-5] App crashes on using the "Change Start Point" filter

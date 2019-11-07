@@ -99,6 +99,12 @@ public:
             dgpsid(NOINT)
         {
         }
+
+        operator QPointF() const
+        {
+            return QPointF(lon, lat);
+        }
+
         // -- all gpx tags - start
         qreal lat;
         qreal lon;

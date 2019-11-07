@@ -34,8 +34,6 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, Q
     labelIcon2->setPixmap(tar->getDisplayIcon());
     labelInfo2->setText(tar->getInfo(IGisItem::eFeatureShowName));
 
-    adjustSize();
-
     connect(pushCopy,  &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
     connect(pushSkip,  &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
     connect(pushClone, &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);

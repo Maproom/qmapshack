@@ -86,6 +86,8 @@ public:
         const static QList<QString> attributeMeanings;
         static QList<QString> attributeMeaningsTranslated;
         static QList<QString> initAttributeMeaningsTranslated();
+        QDateTime getLastFound() const;
+        QString getLogs() const;
     };
 
     struct image_t

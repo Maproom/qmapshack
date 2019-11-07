@@ -130,22 +130,12 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     webDesc->setPage(webDescPage);
     webDesc->setHtml(desc);
 
-    QDateTime lastFound;
-    QString logs;
-    for(const CGisItemWpt::geocachelog_t& log:geocache.logs)
-    {
-        QString thislog = log.text;
-        logs+="<p><b>"+log.date.date().toString(Qt::SystemLocaleShortDate) + ": " + log.type + tr(" by ") + log.finder + "</b></p><p>" + thislog.replace("\n", "<br/>") + "</p><hr>";
-        if(lastFound.isValid() == false || (log.type == "Found It" && log.date > lastFound))
-        {
-            lastFound=log.date;
-        }
-    }
+    const QDateTime& lastFound = geocache.getLastFound();
     labelLastFound->setText(lastFound.date().toString(Qt::SystemLocaleShortDate));
 
     CWebPage * webLogPage = new CWebPage(webLogs);
     webLogs->setPage(webLogPage);
-    webLogs->setHtml(logs);
+    webLogs->setHtml(geocache.getLogs());
 
     timerDownload = new QTimer(this);
     timerDownload->setSingleShot(true);

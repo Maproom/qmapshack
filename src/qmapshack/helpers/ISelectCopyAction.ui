@@ -6,42 +6,41 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>471</width>
-    <height>251</height>
+    <width>449</width>
+    <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Copy item...</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <property name="fieldGrowthPolicy">
-    <enum>QFormLayout::ExpandingFieldsGrow</enum>
-   </property>
-   <item row="0" column="1">
-    <widget class="QPushButton" name="pushCopy">
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="5" column="1">
+    <widget class="QPushButton" name="pushSkip">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="minimumSize">
+      <size>
+       <width>330</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="text">
-      <string>Replace existing item</string>
+      <string>Do not copy item</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="labelIcon1">
-     <property name="text">
-      <string>TextLabel</string>
+   <item row="7" column="1">
+    <widget class="QLabel" name="labelInfo2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLabel" name="labelInfo1">
      <property name="text">
       <string>TextLabel</string>
      </property>
@@ -60,31 +59,47 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
-    <widget class="QPushButton" name="pushSkip">
+   <item row="6" column="1">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Keep item:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="0" colspan="2">
+    <widget class="Line" name="line_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="pushCopy">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="minimumSize">
+      <size>
+       <width>330</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="text">
-      <string>Do not copy item</string>
+      <string>Replace existing item</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="labelIcon2">
-     <property name="text">
-      <string>TextLabel</string>
+   <item row="2" column="1">
+    <widget class="QLabel" name="labelInfo1">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QLabel" name="labelInfo2">
      <property name="text">
       <string>TextLabel</string>
      </property>
@@ -96,15 +111,8 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="0" colspan="2">
-    <widget class="Line" name="line_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="1">
-    <widget class="QPushButton" name="pushClone">
+   <item row="13" column="1">
+    <widget class="QCheckBox" name="checkAllOtherToo">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -112,7 +120,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Create a clone</string>
+      <string>And for all other items, too.</string>
      </property>
     </widget>
    </item>
@@ -123,15 +131,33 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
-    <widget class="QLabel" name="label_2">
+   <item row="10" column="1">
+    <widget class="QPushButton" name="pushClone">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>330</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="text">
-      <string>Keep item:</string>
+      <string>Create a clone</string>
      </property>
     </widget>
    </item>
-   <item row="9" column="1">
+   <item row="11" column="1">
     <widget class="QLabel" name="label_3">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>The clone's name will be appended with '_Clone'</string>
      </property>
@@ -140,19 +166,45 @@
      </property>
     </widget>
    </item>
-   <item row="10" column="0" colspan="2">
-    <widget class="Line" name="line_3">
+   <item row="8" column="0" colspan="2">
+    <widget class="Line" name="line_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
-   <item row="11" column="1">
-    <widget class="QCheckBox" name="checkAllOtherToo">
+   <item row="2" column="0">
+    <widget class="QLabel" name="labelIcon1">
      <property name="text">
-      <string>And for all other items, too.</string>
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
      </property>
     </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="labelIcon2">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>

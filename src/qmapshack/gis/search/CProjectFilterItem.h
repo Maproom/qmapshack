@@ -18,9 +18,10 @@
 #ifndef CPROJECTFILTERITEM_H
 #define CPROJECTFILTERITEM_H
 
-#include <gis/search/CSearchLineEdit.h>
 #include <QTreeWidgetItem>
 class IGisProject;
+class CSearch;
+class CSearchLineEdit;
 
 class CProjectFilterItem : public QTreeWidgetItem
 {

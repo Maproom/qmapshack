@@ -27,11 +27,11 @@ QMap<QString, searchProperty_e> CSearch::searchPropertyEnumMap;
 QMap<searchProperty_e, QString> CSearch::searchPropertyMeaningMap;
 
 CSearch::CSearch(QString searchstring)
+    : searchText(searchstring)
 {
     //Initialisation
     searchTypeLambdaMap = initSearchTypeLambdaMap();
 
-    searchText = searchstring;
     if(searchstring.simplified().isEmpty())
     {
         return;

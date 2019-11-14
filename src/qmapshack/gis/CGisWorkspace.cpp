@@ -68,7 +68,7 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
 
     connect(treeWks, &CGisListWks::sigChanged, this, &CGisWorkspace::sigChanged);
     connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWorkspace::slotSetGisLayerOpacity);
-    connect(lineFilter, &CSearchLineEdit::searchChanged, this, &CGisWorkspace::slotSearch);
+    connect(lineFilter, &CSearchLineEdit::workspaceSearchChanged, this, &CGisWorkspace::slotSearch);
     connect(treeWks, &CGisListWks::itemPressed, this, &CGisWorkspace::slotWksItemPressed);
     connect(treeWks, &CGisListWks::itemSelectionChanged, this, &CGisWorkspace::slotWksItemSelectionChanged);
     connect(treeWks, &CGisListWks::sigItemDeleted, this, &CGisWorkspace::slotWksItemSelectionChanged);

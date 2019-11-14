@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 #include "CSearchLineEdit.h"
+#include "gis/prj/IGisProject.h"
 
 CSearchExplanationDialog* CSearchLineEdit::explanationDlg = nullptr;
 
@@ -99,16 +100,21 @@ void CSearchLineEdit::slotSearchHelp()
         explanationDlg = new CSearchExplanationDialog(this);
     }
 
-    if(!explanationDlg->isVisible())
-    {
-        explanationDlg->show();
-    }
+    explanationDlg->setVisible(true);
 }
 
 void CSearchLineEdit::slotClearFilter()
 {
     setText("");
-    emit searchCleared(connectedProject);
+    if(connectedProject != nullptr)
+    {
+        connectedProject->filterProject(false);
+        CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+    else
+    {
+        emit searchCleared(connectedProject);
+    }
 }
 
 
@@ -180,5 +186,13 @@ void CSearchLineEdit::slotCreateSearch(const QString& str)
         removeAction(actionAutoProperty);
     }
 
-    emit searchChanged(currentSearch, connectedProject);
+    if(connectedProject != nullptr)
+    {
+        connectedProject->setProjectFilter(currentSearch);
+        CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+    else
+    {
+        emit workspaceSearchChanged(currentSearch);
+    }
 }

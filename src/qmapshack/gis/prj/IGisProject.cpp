@@ -70,9 +70,6 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
 
-    //QObject::connect(projectFilter, &CProjectFilterItem::searchChanged, this, &IGisProject::slotSearchChanged);
-    //QObject::connect(projectFilter, &CProjectFilterItem::searchCleared, this, &IGisProject::slotSearchCleared);
-
     if(parent)
     {
         // move project up the list until there a re only projects, no devices
@@ -105,9 +102,6 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
     setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
     nameSuffix = parent->getName();
-
-    //QObject::connect(projectFilter, &CProjectFilterItem::searchChanged, this, &IGisProject::slotSearchChanged);
-    //QObject::connect(projectFilter, &CProjectFilterItem::searchCleared, this, &IGisProject::slotSearchCleared);
 }
 
 IGisProject::~IGisProject()

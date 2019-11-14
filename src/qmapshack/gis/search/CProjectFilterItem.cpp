@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 #include "CProjectFilterItem.h"
+#include <gis/search/CSearchLineEdit.h>
 
 CProjectFilterItem::CProjectFilterItem(IGisProject *parent) : QTreeWidgetItem ((QTreeWidgetItem*)parent)
 {
@@ -30,8 +31,11 @@ void CProjectFilterItem::showLineEdit(CSearch *search)
 {
     if(treeWidget() != nullptr)
     {
-        //new CSearchLineEdit, since destructor is called when the reordering the list
+        //new CSearchLineEdit, since destructor is called when replacing ItemWidget
+        //using QPointer and checking for isNull() is not enough, since it happens after this point
+        lineEdit->deleteLater();
         lineEdit = new CSearchLineEdit(treeWidget(), parent, search);
+
         treeWidget()->setItemWidget(this, 1, lineEdit);
     }
 }

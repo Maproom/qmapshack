@@ -36,7 +36,7 @@ public:
     }
 
 signals:
-    void searchChanged(CSearch newSearch, IGisProject* project);
+    void workspaceSearchChanged(CSearch newSearch);
     void searchCleared(IGisProject* project);
 
 private slots:

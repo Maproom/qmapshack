@@ -2092,21 +2092,8 @@ void CGisListWks::slotAddProjectFilter()
         {
             continue;
         }
-        CProjectFilterItem* projectFilter = project->filterProject(true);
-        connect(projectFilter->getLineEdit(), &CSearchLineEdit::searchChanged, this, &CGisListWks::slotUpdateProjectFilter);
-        connect(projectFilter->getLineEdit(), &CSearchLineEdit::searchCleared, this, &CGisListWks::slotRemoveProjectFilter);
+        project->filterProject(true);
     }
-}
-
-void CGisListWks::slotUpdateProjectFilter(CSearch search, IGisProject* project)
-{
-    project->setProjectFilter(search);
-    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
-}
-
-void CGisListWks::slotRemoveProjectFilter(IGisProject* project)
-{
-    project->filterProject(false);
 }
 
 bool CGisListWks::event(QEvent * e)

@@ -183,6 +183,29 @@
          </property>
         </widget>
        </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_27">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Dutch:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="label_28">
+         <property name="text">
+          <string>Harrie Klomp</string>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="1">
         <widget class="QLabel" name="label_13">
          <property name="text">
@@ -213,29 +236,6 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_27">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Dutch:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLabel" name="label_28">
-         <property name="text">
-          <string>Harrie Klomp</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="2">
         <widget class="QLabel" name="label_14">
          <property name="sizePolicy">
@@ -259,14 +259,14 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="3">
+       <item row="3" column="3">
         <widget class="QLabel" name="label_17">
          <property name="text">
           <string>Jose Luis Domingo Lopez</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="2">
+       <item row="3" column="2">
         <widget class="QLabel" name="label_16">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -289,17 +289,31 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
+       <item row="4" column="2">
         <widget class="QLabel" name="label_29">
          <property name="text">
           <string>Russian:</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="3">
+       <item row="4" column="3">
         <widget class="QLabel" name="label_30">
          <property name="text">
           <string>Wolfgang Thämelt</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="label_31">
+         <property name="text">
+          <string>Italian:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QLabel" name="label_32">
+         <property name="text">
+          <string>Ivo Reano</string>
          </property>
         </widget>
        </item>

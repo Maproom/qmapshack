@@ -15,8 +15,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **********************************************************************************************/
+#include "CSearchExplanationDialog.h"
 #include "CSearchLineEdit.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/search/CSearch.h"
+#include <canvas/CCanvas.h>
+#include <QMenu>
 
 CSearchExplanationDialog* CSearchLineEdit::explanationDlg = nullptr;
 

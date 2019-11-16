@@ -18,12 +18,11 @@
 #ifndef CSEARCHLINEEDIT_H
 #define CSEARCHLINEEDIT_H
 
-#include "CSearchExplanationDialog.h"
-#include "gis/search/CSearch.h"
-#include <canvas/CCanvas.h>
 #include <QLineEdit>
-#include <QMenu>
 class IGisProject;
+class CSearch;
+class QTreeWidgetItem;
+class CSearchExplanationDialog;
 
 class CSearchLineEdit : public QLineEdit
 {
@@ -31,9 +30,6 @@ class CSearchLineEdit : public QLineEdit
 public:
     CSearchLineEdit(QWidget* parent);
     CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch *search=nullptr);
-    ~CSearchLineEdit()
-    {
-    }
 
 signals:
     void workspaceSearchChanged(CSearch newSearch);

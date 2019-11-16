@@ -1258,6 +1258,7 @@ CProjectFilterItem* IGisProject::filterProject(bool filter)
         removeChild(projectFilter);
         delete projectFilter;
         projectFilter = nullptr;
+        projectSearch = CSearch("");
     }
     sortItems();
     return projectFilter;

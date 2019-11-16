@@ -108,7 +108,7 @@ void CSearchLineEdit::slotClearFilter()
     setText("");
     if(connectedProject != nullptr)
     {
-        connectedProject->filterProject(false);
+        connectedProject->setProjectFilter(CSearch(""));
         CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
     }
     else

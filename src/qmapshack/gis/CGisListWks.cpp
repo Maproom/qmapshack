@@ -1,6 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -113,6 +114,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSortByTime    = addSortAction(this, actionGroupSort, "://icons/32x32/Time.png", tr("Sort by Time"), IGisProject::eSortFolderTime);
     actionSortByName    = addSortAction(this, actionGroupSort, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
     actionFilterProject = addAction(QIcon("://icons/32x32/Filter.png"), tr("Filter Project"), this, SLOT(slotAddProjectFilter()));
+    actionFilterProject->setCheckable(true);
     actionAutoSave      = addAction(QIcon("://icons/32x32/AutoSave.png"), tr("Autom. Save"), this, SLOT(slotAutoSaveProject(bool)));
     actionAutoSave->setCheckable(true);
     actionUserFocusPrj  = addAction(QIcon("://icons/32x32/Focus.png"), tr("Active Project"), this, SLOT(slotUserFocusPrj(bool)));
@@ -1194,6 +1196,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             else
             {
                 actionGroupSort->setEnabled(false);
+                actionFilterProject->setEnabled(false);
                 actionSyncWksDev->setEnabled(IDevice::count());
                 actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
                 actionAutoSave->setVisible(false);
@@ -1271,6 +1274,16 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                     }
 
                     blockSorting = false;
+
+                    actionFilterProject->setEnabled(true);
+                    if(project->getProjectFilterItem() == nullptr)
+                    {
+                        actionFilterProject->setChecked(false);
+                    }
+                    else
+                    {
+                        actionFilterProject->setChecked(true);
+                    }
 
                     bool hasUserFocus = project->hasUserFocus();
 
@@ -2085,14 +2098,18 @@ void CGisListWks::slotSyncDevWks()
 
 void CGisListWks::slotAddProjectFilter()
 {
-    for(QTreeWidgetItem * item : selectedItems())
+    //Since we only allow one Item to be selected at a time
+    IGisProject * project = dynamic_cast<IGisProject*>(selectedItems()[0]);
+    if(project != nullptr)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project == nullptr)
+        if(actionFilterProject->isChecked())
         {
-            continue;
+            project->filterProject(true);
         }
-        project->filterProject(true);
+        else
+        {
+            project->filterProject(false);
+        }
     }
 }
 

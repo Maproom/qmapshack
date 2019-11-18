@@ -1276,14 +1276,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                     blockSorting = false;
 
                     actionFilterProject->setEnabled(true);
-                    if(project->getProjectFilterItem() == nullptr)
-                    {
-                        actionFilterProject->setChecked(false);
-                    }
-                    else
-                    {
-                        actionFilterProject->setChecked(true);
-                    }
+                    actionFilterProject->setChecked(project->getProjectFilterItem() != nullptr);
 
                     bool hasUserFocus = project->hasUserFocus();
 
@@ -2102,14 +2095,7 @@ void CGisListWks::slotAddProjectFilter()
     IGisProject * project = dynamic_cast<IGisProject*>(selectedItems()[0]);
     if(project != nullptr)
     {
-        if(actionFilterProject->isChecked())
-        {
-            project->filterProject(true);
-        }
-        else
-        {
-            project->filterProject(false);
-        }
+        project->filterProject(actionFilterProject->isChecked());
     }
 }
 

@@ -32,8 +32,8 @@ public:
     CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch *search=nullptr);
 
 signals:
-    void workspaceSearchChanged(CSearch newSearch);
-    void searchCleared(IGisProject* project);
+    void sigWorkspaceSearchChanged(CSearch newSearch);
+    void sigSearchCleared(IGisProject* project);
 
 private slots:
     void slotCaseSensitive(bool yes);

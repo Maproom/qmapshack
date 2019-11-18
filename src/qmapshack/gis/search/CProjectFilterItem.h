@@ -18,10 +18,11 @@
 #ifndef CPROJECTFILTERITEM_H
 #define CPROJECTFILTERITEM_H
 
+#include "CSearchLineEdit.h"
+#include <QPointer>
 #include <QTreeWidgetItem>
 class IGisProject;
 class CSearch;
-class CSearchLineEdit;
 
 class CProjectFilterItem : public QTreeWidgetItem
 {
@@ -35,7 +36,7 @@ public:
     }
 
 private:
-    CSearchLineEdit* lineEdit;
+    QPointer<CSearchLineEdit> lineEdit;
     IGisProject* parent;
 };
 

@@ -51,6 +51,9 @@ CSearchLineEdit::CSearchLineEdit(QWidget *parent)
     connect(actionHelp, &QAction::triggered, this, &CSearchLineEdit::slotSearchHelp);
     connect(actionClearFilter, &QAction::triggered, this, &CSearchLineEdit::slotClearFilter);
     connect(this, &CSearchLineEdit::textChanged, this, &CSearchLineEdit::slotCreateSearch);
+
+    setPlaceholderText(tr("start typing..."));
+    setToolTip(tr("Filter: Start to type and the list will be reduced to matching items. An example would be \"date between 2010 and 2012\""));
 }
 
 CSearchLineEdit::CSearchLineEdit(QWidget *parent, IGisProject* project, CSearch* search) : CSearchLineEdit(parent)
@@ -85,14 +88,7 @@ void CSearchLineEdit::slotSetupSearch()
         break;
     }
 
-    if(CSearch::getCaseSensitivity() == Qt::CaseSensitive)
-    {
-        actionCaseSensitive->setChecked(true);
-    }
-    else
-    {
-        actionCaseSensitive->setChecked(false);
-    }
+    actionCaseSensitive->setChecked(CSearch::getCaseSensitivity() == Qt::CaseSensitive);
     menu->move(parentWidget()->mapToGlobal(geometry().topLeft()));
     menu->exec();
 }
@@ -117,7 +113,7 @@ void CSearchLineEdit::slotClearFilter()
     }
     else
     {
-        emit searchCleared(connectedProject);
+        emit sigSearchCleared(connectedProject);
     }
 }
 
@@ -197,6 +193,6 @@ void CSearchLineEdit::slotCreateSearch(const QString& str)
     }
     else
     {
-        emit workspaceSearchChanged(currentSearch);
+        emit sigWorkspaceSearchChanged(currentSearch);
     }
 }

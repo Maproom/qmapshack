@@ -33,7 +33,10 @@ void CProjectFilterItem::showLineEdit(CSearch *search)
     {
         //new CSearchLineEdit, since destructor is called when replacing ItemWidget
         //using QPointer and checking for isNull() is not enough, since it happens after this point
-        lineEdit->deleteLater();
+        if(!lineEdit.isNull())
+        {
+            lineEdit->deleteLater();
+        }
         lineEdit = new CSearchLineEdit(treeWidget(), parent, search);
 
         treeWidget()->setItemWidget(this, 1, lineEdit);

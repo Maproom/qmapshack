@@ -28,6 +28,11 @@ CFitBaseType::CFitBaseType() : CFitBaseType(eBaseTypeNrInvalid, "invalid", 0,
 CFitBaseType::CFitBaseType(fit_base_type_nr_e baseTypeNr, QString name, quint8 size, std::initializer_list<quint8> invalid)
     : typeSize(size), baseTypeNr(baseTypeNr), namestr(name)
 {
+    if(size == 0)
+    {
+        return;
+    }
+
     quint8 i = (quint8) (size - 1);
     for(quint8 bit : invalid)
     {

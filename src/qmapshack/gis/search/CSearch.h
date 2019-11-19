@@ -147,6 +147,11 @@ public:
         return autoDetectedProperty;
     }
 
+    const QString& getSearchText()
+    {
+        return searchText;
+    }
+
     static QStringList getSearchTypeKeywords()
     {
         return keywordSearchTypeMap.keys();
@@ -204,6 +209,7 @@ private:
     void improveQuery();
 
     search_t search;
+    QString searchText;
     bool syntaxError = false;
     bool autoDetectedProperty = false;
 

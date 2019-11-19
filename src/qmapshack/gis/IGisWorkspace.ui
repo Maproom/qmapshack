@@ -61,17 +61,7 @@
       </widget>
      </item>
      <item row="1" column="0" colspan="2">
-      <widget class="QLineEdit" name="lineFilter">
-       <property name="toolTip">
-        <string>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</string>
-       </property>
-       <property name="placeholderText">
-        <string>start typing...</string>
-       </property>
-       <property name="clearButtonEnabled">
-        <bool>false</bool>
-       </property>
-      </widget>
+      <widget class="CSearchLineEdit" name="lineFilter"/>
      </item>
     </layout>
    </item>
@@ -117,78 +107,6 @@
     </widget>
    </item>
   </layout>
-  <action name="actionClearFilter">
-   <property name="icon">
-    <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Filter.png</normaloff>:/icons/32x32/Filter.png</iconset>
-   </property>
-   <property name="text">
-    <string>Clear Filter</string>
-   </property>
-  </action>
-  <action name="actionSetupFilter">
-   <property name="icon">
-    <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Apply.png</normaloff>:/icons/32x32/Apply.png</iconset>
-   </property>
-   <property name="text">
-    <string>Setup Filter</string>
-   </property>
-  </action>
-  <action name="actionNameOnly">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>name only</string>
-   </property>
-  </action>
-  <action name="actionCompleteText">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>complete text</string>
-   </property>
-  </action>
-  <action name="actionHelp">
-   <property name="icon">
-    <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/CSrcUnknown.png</normaloff>:/icons/32x32/CSrcUnknown.png</iconset>
-   </property>
-   <property name="text">
-    <string>Help</string>
-   </property>
-   <property name="toolTip">
-    <string>help with searching</string>
-   </property>
-  </action>
-  <action name="actionCaseSensitive">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Case Sensitive</string>
-   </property>
-  </action>
-  <action name="actionError">
-   <property name="icon">
-    <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Attention.png</normaloff>:/icons/32x32/Attention.png</iconset>
-   </property>
-   <property name="text">
-    <string>Could not parse searchstring</string>
-   </property>
-  </action>
-  <action name="actionAutoProperty">
-   <property name="icon">
-    <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Hint.png</normaloff>:/icons/32x32/Hint.png</iconset>
-   </property>
-   <property name="text">
-    <string>Automatically set property</string>
-   </property>
-  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -196,26 +114,12 @@
    <extends>QTreeWidget</extends>
    <header>gis/CGisListWks.h</header>
   </customwidget>
+  <customwidget>
+   <class>CSearchLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>gis/search/CSearchLineEdit.h</header>
+  </customwidget>
  </customwidgets>
- <resources>
-  <include location="../resources.qrc"/>
- </resources>
- <connections>
-  <connection>
-   <sender>actionClearFilter</sender>
-   <signal>triggered()</signal>
-   <receiver>lineFilter</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>228</x>
-     <y>34</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <resources/>
+ <connections/>
 </ui>

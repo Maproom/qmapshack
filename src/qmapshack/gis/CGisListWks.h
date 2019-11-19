@@ -126,6 +126,7 @@ private slots:
     void slotEleWptTrk();
     void slotAutoSaveProject(bool on);
     void slotUserFocusPrj(bool yes);
+    void slotAddProjectFilter();
 
 private:
     void configDB();
@@ -164,6 +165,7 @@ private:
     QAction * actionSyncDB;
     QAction * actionSortByTime;
     QAction * actionSortByName;
+    QAction * actionFilterProject;
     QAction * actionDelProj;
     QAction * actionSyncDevWks;
     QAction * actionEditDetails;

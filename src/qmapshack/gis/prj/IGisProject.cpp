@@ -1086,6 +1086,7 @@ void IGisProject::sortItems()
     QList<IGisItem*> ovls;
 
     QList<QTreeWidgetItem*> items = takeChildren();
+    QList<QTreeWidgetItem*> others; //For example Search
     for(QTreeWidgetItem* item : items)
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
@@ -1115,6 +1116,8 @@ void IGisProject::sortItems()
             ovls << ovl;
             continue;
         }
+
+        others<<item;
     }
 
     sortItems(trks);
@@ -1123,6 +1126,7 @@ void IGisProject::sortItems()
     sortItems(ovls);
 
     items.clear();
+    items<<others;
     for(IGisItem * item : trks)
     {
         items << item;
@@ -1141,6 +1145,11 @@ void IGisProject::sortItems()
     }
 
     addChildren(items);
+    if(projectFilter != nullptr)
+    {
+        projectFilter->showLineEdit(&projectSearch);
+    }
+    applyFilters();
 }
 
 
@@ -1172,7 +1181,19 @@ void IGisProject::sortItems(QList<IGisItem *> &items) const
     }
 }
 
-void IGisProject::filter(CSearch& search)
+void IGisProject::setProjectFilter(const CSearch& search)
+{
+    projectSearch=search;
+    applyFilters();
+}
+
+void IGisProject::setWorkspaceFilter(const CSearch& search)
+{
+    workspaceSearch = search;
+    applyFilters();
+}
+
+void IGisProject::applyFilters()
 {
     const int N = childCount();
 
@@ -1184,7 +1205,10 @@ void IGisProject::filter(CSearch& search)
             continue;
         }
 
-        item->setHidden(!search.getSearchResult(item));//get search result returns wether the object matches
+        bool projectFilterResult = projectSearch.getSearchResult(item);
+        bool workspaceFilterResult = workspaceSearch.getSearchResult(item);
+
+        item->setHidden(!(projectFilterResult && workspaceFilterResult));//get search result returns wether the object matches
     }
 }
 
@@ -1214,4 +1238,28 @@ void IGisProject::gainUserFocus(bool yes)
         setIcon(CGisListWks::eColumnName, QIcon());
         keyUserFocus.clear();
     }
+}
+
+CProjectFilterItem* IGisProject::filterProject(bool filter)
+{
+    if(filter)
+    {
+        if(projectFilter == nullptr)
+        {
+            projectFilter = new CProjectFilterItem(this);
+            insertChild(0, projectFilter);
+        }
+        //Set expanded anyways to show that search exists
+        projectFilter->showLineEdit();
+        setExpanded(true);
+    }
+    else
+    {
+        removeChild(projectFilter);
+        delete projectFilter;
+        projectFilter = nullptr;
+        projectSearch = CSearch("");
+    }
+    sortItems();
+    return projectFilter;
 }

@@ -69,6 +69,11 @@ bool CLineOpAddPoint::abortStep()
 
 void CLineOpAddPoint::leftClick(const QPoint& pos)
 {
+    if(idxFocus == NOIDX)
+    {
+        return;
+    }
+
     if(addPoint)
     {
         // drop the new point at current position

@@ -378,6 +378,16 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     }
     setText(CGisListWks::eColumnDecoration, str);
     setToolTip(CGisListWks::eColumnDecoration, tt);
+
+    //Set Info column
+    if(rating >= 1 || !keywords.isEmpty())
+    {
+        QTreeWidgetItem::setIcon(CGisListWks::eColumnInfo, QPixmap("://icons/32x32/Tag.png"));
+    }
+    else
+    {
+        QTreeWidgetItem::setIcon(CGisListWks::eColumnInfo, QIcon());
+    }
 }
 
 
@@ -1036,4 +1046,38 @@ IGisItem * IGisItem::newGisItem(quint32 type, quint64 id, QSqlDatabase& db, IGis
     }
 
     return item;
+}
+
+qreal IGisItem::getRating()
+{
+    return rating;
+}
+
+void IGisItem::setRating(qreal rating)
+{
+    this->rating=rating;
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
+QSet<QString> &IGisItem::getKeywords()
+{
+    return keywords;
+}
+
+void IGisItem::addKeywords(const QSet<QString> &otherKeywords)
+{
+    keywords.unite(otherKeywords);
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
+void IGisItem::removeKeywords(const QSet<QString> &otherKeywords)
+{
+    keywords.subtract(otherKeywords);
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
+void IGisItem::clearKeywords()
+{
+    keywords.clear();
+    updateDecoration(eMarkNone, eMarkNone);
 }

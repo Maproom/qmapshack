@@ -51,7 +51,8 @@ set( SRCS
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
     gis/CGisWorkspace.cpp
-    gis/CSelDevices.cpp    
+    gis/CSelDevices.cpp
+    gis/CGisItemRate.cpp
     gis/IGisItem.cpp
     gis/IGisLine.cpp
     gis/db/CDBFolderGroup.cpp
@@ -392,6 +393,7 @@ set( HDRS
     gis/IGisItem.h
     gis/IGisLine.h
     gis/Poi.h
+    gis/CGisItemRate.h
     gis/db/CDBFolderGroup.h
     gis/db/CDBFolderLostFound.h
     gis/db/CDBFolderMysql.h
@@ -713,6 +715,7 @@ set( UIS
     gis/IGisDatabase.ui
     gis/IGisWorkspace.ui
     gis/ISelDevices.ui
+    gis/IGisItemRate.ui
     gis/db/IExportDatabase.ui
     gis/db/ISearchDatabase.ui
     gis/db/ISelectDBFolder.ui

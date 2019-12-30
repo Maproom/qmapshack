@@ -77,6 +77,7 @@ public:
         eSortFolderTime
         , eSortFolderName
         , eSortFolderSymbol
+        , eSortFolderRating
     };
 
     struct person_t

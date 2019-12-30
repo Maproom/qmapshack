@@ -592,6 +592,13 @@ public:
 
     virtual const searchValue_t getValueByKeyword(searchProperty_e keyword) = 0;
 
+    qreal getRating();
+    void setRating(qreal rating);
+    QSet<QString>& getKeywords();
+    void addKeywords(const QSet<QString> &otherKeywords);
+    void removeKeywords(const QSet<QString> &otherKeywords);
+    void clearKeywords();
+
 protected:
     /// set icon of QTreeWidgetItem
     virtual void setSymbol() = 0;
@@ -654,6 +661,10 @@ protected:
     };
 
     static QVector<color_t> colorMap;
+
+    /// labeling the GisItems
+    qreal rating = -1;
+    QSet<QString> keywords;
 private:
     void showIcon();
 };

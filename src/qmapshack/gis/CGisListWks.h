@@ -47,7 +47,8 @@ public:
         eColumnIcon = 0
         , eColumnCheckBox = eColumnIcon
         , eColumnDecoration = eColumnIcon
-        , eColumnName = 1
+        , eColumnName = 2
+        , eColumnInfo = 1
     };
 
 
@@ -88,6 +89,7 @@ private slots:
     void slotItemDoubleClicked(QTreeWidgetItem * item, int);
     void slotItemChanged(QTreeWidgetItem * item, int column);
     void slotEditItem();
+    void slotTagItem();
     void slotDeleteItem();
     void slotBubbleWpt();
     void slotNogoItem();
@@ -165,10 +167,12 @@ private:
     QAction * actionSyncDB;
     QAction * actionSortByTime;
     QAction * actionSortByName;
+    QAction * actionSortByRating;
     QAction * actionFilterProject;
     QAction * actionDelProj;
     QAction * actionSyncDevWks;
     QAction * actionEditDetails;
+    QAction * actionTagItem;
     QAction * actionCopyItem;
     QAction * actionDelete;
     QAction * actionBubbleWpt;

@@ -937,5 +937,6 @@
         <file>../icons/lines/line_white.png</file>
         <file>../icons/lines/line_yellow.png</file>
         <file>../icons/32x32/Hint.png</file>
+        <file>../icons/32x32/Tag.png</file>
     </qresource>
 </RCC>

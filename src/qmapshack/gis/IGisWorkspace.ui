@@ -91,9 +91,17 @@
      <property name="indentation">
       <number>14</number>
      </property>
+     <property name="columnCount">
+      <number>3</number>
+     </property>
      <attribute name="headerDefaultSectionSize">
       <number>100</number>
      </attribute>
+     <column>
+      <property name="text">
+       <string notr="true"/>
+      </property>
+     </column>
      <column>
       <property name="text">
        <string notr="true"/>

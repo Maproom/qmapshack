@@ -14,12 +14,17 @@ public:
     ~IGisItemRate();
 
     qreal getRating();
+    bool getRatingChanged();
     //Don't return a reference since this ends in a null reference when handed further
     QSet<QString> getAddedKeywords();
     QSet<QString> getRemovedKeywords();
 
 private:
     const QSet<QString>& commonKeywords;
+    bool ratingChanged = false;
+
+private slots:
+    void slotRatingChanged();
 };
 
 #endif // CGISITEMRATE_H

@@ -380,13 +380,21 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     setToolTip(CGisListWks::eColumnDecoration, tt);
 
     //Set Info column
-    if(rating >= 1 || !keywords.isEmpty())
+    if(!keywords.isEmpty())
     {
         QTreeWidgetItem::setIcon(CGisListWks::eColumnInfo, QPixmap("://icons/32x32/Tag.png"));
     }
     else
     {
         QTreeWidgetItem::setIcon(CGisListWks::eColumnInfo, QIcon());
+    }
+    if(rating > 0)
+    {
+        QTreeWidgetItem::setText(CGisListWks::eColumnInfo, QString::number(rating));
+    }
+    else
+    {
+        QTreeWidgetItem::setText(CGisListWks::eColumnInfo, "");
     }
 }
 
@@ -1056,7 +1064,7 @@ qreal IGisItem::getRating()
 void IGisItem::setRating(qreal rating)
 {
     this->rating=rating;
-    updateDecoration(eMarkNone, eMarkNone);
+    changed("changed rating", "://icons/32x32/Tag.png");
 }
 
 QSet<QString> &IGisItem::getKeywords()
@@ -1067,17 +1075,17 @@ QSet<QString> &IGisItem::getKeywords()
 void IGisItem::addKeywords(const QSet<QString> &otherKeywords)
 {
     keywords.unite(otherKeywords);
-    updateDecoration(eMarkNone, eMarkNone);
+    changed("changed keywords", "://icons/32x32/Tag.png");
 }
 
 void IGisItem::removeKeywords(const QSet<QString> &otherKeywords)
 {
     keywords.subtract(otherKeywords);
-    updateDecoration(eMarkNone, eMarkNone);
+    changed("changed keywords", "://icons/32x32/Tag.png");
 }
 
 void IGisItem::clearKeywords()
 {
     keywords.clear();
-    updateDecoration(eMarkNone, eMarkNone);
+    changed("changed keywords", "://icons/32x32/Tag.png");
 }

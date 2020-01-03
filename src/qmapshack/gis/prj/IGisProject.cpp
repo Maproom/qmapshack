@@ -1180,7 +1180,7 @@ void IGisProject::sortItems(QList<IGisItem *> &items) const
         break;
 
     case IGisProject::eSortFolderRating:
-        qSort(items.begin(), items.end(), [](IGisItem* a, IGisItem* b){return a->getRating() < b->getRating();});
+        qSort(items.begin(), items.end(), [](IGisItem* a, IGisItem* b){return a->getRating() > b->getRating();});
         break;
     }
 }

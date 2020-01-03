@@ -104,7 +104,7 @@
      </column>
      <column>
       <property name="text">
-       <string notr="true"/>
+       <string>Rating</string>
       </property>
      </column>
      <column>

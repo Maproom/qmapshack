@@ -28,10 +28,10 @@
 
 #include <QtWidgets>
 
-#define VER_TRK         quint8(6)
-#define VER_WPT         quint8(3)
-#define VER_RTE         quint8(3)
-#define VER_AREA        quint8(1)
+#define VER_TRK         quint8(7)
+#define VER_WPT         quint8(4)
+#define VER_RTE         quint8(4)
+#define VER_AREA        quint8(2)
 #define VER_LINK        quint8(1)
 #define VER_TRKSEG      quint8(1)
 #define VER_TRKPT       quint8(3)
@@ -559,6 +559,8 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
     out << trk.number;
     out << trk.type;
     out << trk.color;
+    out << rating;
+    out << keywords;
 
     out << colorSourceLimit;
     out << lineScale;
@@ -612,6 +614,12 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.number;
     in >> trk.type;
     in >> trk.color;
+
+    if(version > 6)
+    {
+        in >> rating;
+        in >> keywords;
+    }
 
     if(version > 1 && version <= 4)
     {
@@ -708,6 +716,11 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
         in >> offsetBubble;
         in >> widthBubble;
     }
+    if(version > 3)
+    {
+        in >> rating;
+        in >> keywords;
+    }
 
     if(version <= 2 && geocache.hasData)
     {
@@ -718,6 +731,7 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     setIcon();
     setText   (CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
+    IGisItem::updateDecoration(eMarkNone, eMarkNone);
 
     detBoundingRect();
     radius = NOFLOAT;
@@ -740,6 +754,8 @@ QDataStream& CGisItemWpt::operator>>(QDataStream& stream) const
     out << images;
     out << offsetBubble;
     out << widthBubble;
+    out << rating;
+    out << keywords;
 
     stream.writeRawData(MAGIC_WPT, MAGIC_SIZE);
     stream << VER_WPT;
@@ -794,6 +810,11 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream)
         in >> rte.ascent;
         in >> rte.descent;
     }
+    if(version > 3)
+    {
+        in >> rating;
+        in >> keywords;
+    }
 
 
     setSymbol();
@@ -827,6 +848,8 @@ QDataStream& CGisItemRte::operator>>(QDataStream& stream) const
     out << rte.totalTime;
     out << rte.ascent;
     out << rte.descent;
+    out << rating;
+    out << keywords;
 
     stream.writeRawData(MAGIC_RTE, MAGIC_SIZE);
     stream << VER_RTE;
@@ -874,6 +897,11 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
     in >> area.style;
     in >> tmp8;
     area.opacity = tmp8;
+    if(version > 1)
+    {
+        in >> rating;
+        in >> keywords;
+    }
 
     deriveSecondaryData();
 
@@ -905,6 +933,8 @@ QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream) const
     out << area.width;
     out << area.style;
     out << quint8(area.opacity);
+    out << rating;
+    out << keywords;
 
     stream.writeRawData(MAGIC_AREA, MAGIC_SIZE);
     stream << VER_AREA;

@@ -663,7 +663,7 @@ protected:
     static QVector<color_t> colorMap;
 
     /// labeling the GisItems
-    qreal rating = -1;
+    qreal rating = 0;
     QSet<QString> keywords;
 private:
     void showIcon();

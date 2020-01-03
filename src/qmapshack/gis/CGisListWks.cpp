@@ -134,7 +134,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     // common to all items actions
     actionEditDetails   = addAction(QIcon("://icons/32x32/EditDetails.png"), tr("Edit..."), this, SLOT(slotEditItem()));
-    actionTagItem       = addAction(QIcon("://icons/32x32/EditDetails.png"), tr("Set Tags"), this, SLOT(slotTagItem()));
+    actionTagItem       = addAction(QIcon("://icons/32x32/Tag.png"), tr("Set Tags"), this, SLOT(slotTagItem()));
     actionCopyItem      = addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy to..."), this, SLOT(slotCopyItem()));
     actionDelete        = addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete"), this, SLOT(slotDeleteItem()));
 
@@ -1000,6 +1000,7 @@ void CGisListWks::showMenuProjectWks(const QPoint& p)
     menu.addSeparator();
     menu.addAction(actionSortByTime);
     menu.addAction(actionSortByName);
+    menu.addAction(actionSortByRating);
     menu.addAction(actionFilterProject);
     menu.addSeparator();
     menu.addAction(actionAutoSave);
@@ -1651,7 +1652,10 @@ void CGisListWks::slotTagItem()
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem != nullptr)
         {
-            gisItem->setRating(dlg.getRating());
+            if(dlg.getRatingChanged())
+            {
+                gisItem->setRating(dlg.getRating());
+            }
             gisItem->removeKeywords(dlg.getRemovedKeywords());
             gisItem->addKeywords(dlg.getAddedKeywords());
         }

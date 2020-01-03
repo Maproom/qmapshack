@@ -9,6 +9,7 @@ IGisItemRate::IGisItemRate(QWidget *parent, const QSet<QString>& commonKeywords,
     setupUi(this);
     keywordPlainTextEdit->setPlainText(QStringList(commonKeywords.toList()).join("; "));
     ratingSlider->setValue(rating);
+    connect(ratingSlider, &QSlider::valueChanged, this, &IGisItemRate::slotRatingChanged);
 }
 
 IGisItemRate::~IGisItemRate()
@@ -18,6 +19,11 @@ IGisItemRate::~IGisItemRate()
 qreal IGisItemRate::getRating()
 {
     return ratingSlider->value();
+}
+
+bool IGisItemRate::getRatingChanged()
+{
+    return ratingChanged;
 }
 
 QSet<QString> IGisItemRate::getAddedKeywords()
@@ -32,4 +38,9 @@ QSet<QString> IGisItemRate::getRemovedKeywords()
     //Copy-construct the common keywords to keep things clean
     QSet<QString> removedKeywords = QSet<QString>(commonKeywords).subtract(keywords);
     return removedKeywords;
+}
+
+void IGisItemRate::slotRatingChanged()
+{
+    ratingChanged=true;
 }

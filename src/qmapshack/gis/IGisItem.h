@@ -592,9 +592,9 @@ public:
 
     virtual const searchValue_t getValueByKeyword(searchProperty_e keyword) = 0;
 
-    qreal getRating();
+    qreal getRating() const;
     void setRating(qreal rating);
-    QSet<QString>& getKeywords();
+    const QSet<QString>& getKeywords() const;
     void addKeywords(const QSet<QString> &otherKeywords);
     void removeKeywords(const QSet<QString> &otherKeywords);
     void clearKeywords();

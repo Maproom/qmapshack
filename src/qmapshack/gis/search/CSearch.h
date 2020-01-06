@@ -70,6 +70,8 @@ enum searchProperty_e: unsigned int
     eSearchPropertyGeneralDate,
     eSearchPropertyGeneralComment,
     eSearchPropertyGeneralDescription,
+    eSearchPropertyGeneralRating,
+    eSearchPropertyGeneralKeywords,
 
     //Area keywords
     eSearchPropertyAreaArea,

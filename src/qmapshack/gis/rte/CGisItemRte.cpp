@@ -483,6 +483,17 @@ QString CGisItemRte::getInfo(quint32 feature) const
         }
     }
 
+    if(getRating() > 0)
+    {
+        str += "<br/>\n";
+        str += tr("Rating: ") + QString::number(getRating());
+    }
+    if(!getKeywords().isEmpty())
+    {
+        str += "<br/>\n";
+        str += tr("Keywords: ") + QStringList(getKeywords().toList()).join("; ");
+    }
+
     return str + "</div>";
 }
 
@@ -1342,6 +1353,17 @@ QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
         searchValue.str1 = item->getDescription();
         return searchValue;
     });
+    map.insert(eSearchPropertyGeneralRating, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        searchValue.value1 = item->getRating();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralKeywords, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        searchValue.str1 = QStringList(item->getKeywords().toList()).join("; ");
+        return searchValue;
+    });
+    //Route specific
     map.insert(eSearchPropertyRteTrkDistance, [](CGisItemRte* item){
         searchValue_t searchValue;
         IUnit::self().meter2distance(item->rte.totalDistance, searchValue.value1, searchValue.str1);

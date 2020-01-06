@@ -6,6 +6,7 @@ V1.XX.X
 [QMS-59] Version information in window title does not contain VERSION_SUFFIX "development"
 [QMS-64] Cleanup code in IUnit and subclasses
 [QMS-73] Info of a geocache is not correctly shown in Copy Element Window
+[QMS-79] Possibility to 'star' Waypoints
 [QMS-80] Use ASAN to enhance code quality
 [QMS-83] Application Crash
 [QMS-89] Geo search hidden after restarting QMapShack

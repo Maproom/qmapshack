@@ -14240,7 +14240,8 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation>Stellen Sie sicher, dass die erforderlichen Pakete installiert sind, `%1` existiert und ist ausführbar.</translation>
+        <translation>Stellen Sie sicher, dass die erforderlichen Pakete installiert sind, `%1` existiert und ausführbar ist.
+</translation>
     </message>
     <message>
         <location filename="../tool/IToolShell.cpp" line="55"/>

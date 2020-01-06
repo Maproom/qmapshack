@@ -630,6 +630,17 @@ QString CGisItemTrk::getInfo(quint32 feature) const
         }
     }
 
+    if(getRating() > 0)
+    {
+        str += "<br/>\n";
+        str += tr("Rating: ") + QString::number(getRating());
+    }
+    if(!getKeywords().isEmpty())
+    {
+        str += "<br/>\n";
+        str += tr("Keywords: ") + QStringList(getKeywords().toList()).join("; ");
+    }
+
     return str + "</div>";
 }
 
@@ -3060,6 +3071,16 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
     map.insert(eSearchPropertyGeneralDescription, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.str1 = item->getDescription();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralRating, [](CGisItemTrk* item){
+        searchValue_t searchValue;
+        searchValue.value1 = item->getRating();
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeneralKeywords, [](CGisItemTrk* item){
+        searchValue_t searchValue;
+        searchValue.str1 = QStringList(item->getKeywords().toList()).join("; ");
         return searchValue;
     });
     //Route / track keywords

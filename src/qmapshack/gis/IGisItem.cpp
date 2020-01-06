@@ -383,6 +383,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     if(!keywords.isEmpty())
     {
         QTreeWidgetItem::setIcon(CGisListWks::eColumnInfo, QPixmap("://icons/32x32/Tag.png"));
+        setToolTip(CGisListWks::eColumnInfo, QStringList(keywords.toList()).join("; "));
     }
     else
     {
@@ -1056,7 +1057,7 @@ IGisItem * IGisItem::newGisItem(quint32 type, quint64 id, QSqlDatabase& db, IGis
     return item;
 }
 
-qreal IGisItem::getRating()
+qreal IGisItem::getRating() const
 {
     return rating;
 }
@@ -1067,7 +1068,7 @@ void IGisItem::setRating(qreal rating)
     changed("changed rating", "://icons/32x32/Tag.png");
 }
 
-QSet<QString> &IGisItem::getKeywords()
+const QSet<QString> &IGisItem::getKeywords() const
 {
     return keywords;
 }

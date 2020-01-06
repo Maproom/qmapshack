@@ -1647,17 +1647,20 @@ void CGisListWks::slotTagItem()
     IGisItemRate dlg (this, commonKeywords, ratingSum/items.size());
     dlg.exec();
 
-    for(QTreeWidgetItem * item : items)
+    if(dlg.result() == QDialog::Accepted)
     {
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-        if(gisItem != nullptr)
+        for(QTreeWidgetItem * item : items)
         {
-            if(dlg.getRatingChanged())
+            IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
+            if(gisItem != nullptr)
             {
-                gisItem->setRating(dlg.getRating());
+                if(dlg.getRatingChanged())
+                {
+                    gisItem->setRating(dlg.getRating());
+                }
+                gisItem->removeKeywords(dlg.getRemovedKeywords());
+                gisItem->addKeywords(dlg.getAddedKeywords());
             }
-            gisItem->removeKeywords(dlg.getRemovedKeywords());
-            gisItem->addKeywords(dlg.getAddedKeywords());
         }
     }
 }

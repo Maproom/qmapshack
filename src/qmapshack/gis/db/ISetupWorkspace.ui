@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>624</width>
-    <height>212</height>
+    <width>692</width>
+    <height>273</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Setup workspace...</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -124,6 +124,13 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="checkShowTags">
+     <property name="text">
+      <string>Show tags in workspace tree. Not recommended for small screens.</string>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">

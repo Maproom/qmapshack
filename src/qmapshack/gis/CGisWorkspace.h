@@ -430,6 +430,16 @@ public:
 
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
+    bool areTagsHidden() const
+    {
+        return treeWks->isColumnHidden(CGisListWks::eColumnInfo);
+    }
+
+    void setTagsHidden(bool hidden)
+    {
+        treeWks->setColumnHidden(CGisListWks::eColumnInfo, hidden);
+    }
+
 signals:
     void sigChanged();
 

@@ -94,8 +94,11 @@
      <property name="columnCount">
       <number>3</number>
      </property>
+     <attribute name="headerMinimumSectionSize">
+      <number>50</number>
+     </attribute>
      <attribute name="headerDefaultSectionSize">
-      <number>100</number>
+      <number>50</number>
      </attribute>
      <column>
       <property name="text">

@@ -638,7 +638,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     if(!getKeywords().isEmpty())
     {
         str += "<br/>\n";
-        str += tr("Keywords: ") + QStringList(getKeywords().toList()).join("; ");
+        str += tr("Keywords: ") + QStringList(getKeywords().toList()).join(", ");
     }
 
     return str + "</div>";
@@ -3080,7 +3080,7 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeneralKeywords, [](CGisItemTrk* item){
         searchValue_t searchValue;
-        searchValue.str1 = QStringList(item->getKeywords().toList()).join("; ");
+        searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
         return searchValue;
     });
     //Route / track keywords

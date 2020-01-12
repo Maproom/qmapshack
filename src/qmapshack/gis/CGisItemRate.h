@@ -20,11 +20,12 @@ public:
     QSet<QString> getRemovedKeywords();
 
 private:
+    void ratingLabelClicked(int labelNumber);
+
     const QSet<QString>& commonKeywords;
     bool ratingChanged = false;
-
-private slots:
-    void slotRatingChanged();
+    //keeping the rating in qreal if the wish for half stars emerges
+    qreal rating;
 };
 
 #endif // CGISITEMRATE_H

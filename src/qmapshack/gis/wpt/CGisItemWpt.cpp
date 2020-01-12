@@ -428,7 +428,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
     if(!getKeywords().isEmpty())
     {
         str += "<br/>\n";
-        str += tr("Keywords: ") + QStringList(getKeywords().toList()).join("; ");
+        str += tr("Keywords: ") + QStringList(getKeywords().toList()).join(", ");
     }
 
     return str + "</div>";
@@ -1281,7 +1281,7 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeneralKeywords, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        searchValue.str1 = QStringList(item->getKeywords().toList()).join("; ");
+        searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
         return searchValue;
     });
     //Geocache keywords

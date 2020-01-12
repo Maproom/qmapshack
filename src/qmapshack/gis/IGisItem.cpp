@@ -383,7 +383,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     if(!keywords.isEmpty())
     {
         QTreeWidgetItem::setIcon(CGisListWks::eColumnInfo, QPixmap("://icons/32x32/Tag.png"));
-        setToolTip(CGisListWks::eColumnInfo, QStringList(keywords.toList()).join("; "));
+        setToolTip(CGisListWks::eColumnInfo, QStringList(keywords.toList()).join(", "));
     }
     else
     {

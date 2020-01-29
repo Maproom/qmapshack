@@ -1285,7 +1285,7 @@ void CMainWindow::slotSetupUnits()
 
 void CMainWindow::slotSetupWorkspace()
 {
-    CSetupWorkspace dlg(this, widgetGisWorkspace);
+    CSetupWorkspace dlg(widgetGisWorkspace, this);
     dlg.exec();
 }
 

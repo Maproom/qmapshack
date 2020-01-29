@@ -1644,7 +1644,7 @@ void CGisListWks::slotTagItem()
         }
     }
 
-    IGisItemRate dlg (this, commonKeywords, ratingSum/items.size());
+    CGisItemRate dlg (this, commonKeywords, ratingSum/items.size());
     dlg.exec();
 
     if(dlg.result() == QDialog::Accepted)

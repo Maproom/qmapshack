@@ -1,5 +1,7 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2020 Henri Hornburg hrnbg@t-online.de
+
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,7 +24,7 @@
 #include "helpers/CSettings.h"
 #include <QtWidgets>
 
-CSetupWorkspace::CSetupWorkspace(QWidget *parent, CGisWorkspace * workspace)
+CSetupWorkspace::CSetupWorkspace(CGisWorkspace * workspace, QWidget *parent)
     : QDialog(parent), workspace(workspace)
 {
     setupUi(this);

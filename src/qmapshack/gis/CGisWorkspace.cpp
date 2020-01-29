@@ -63,6 +63,8 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
 
     SETTINGS;
     treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
+    setTagsHidden(cfg.value("Workspace/treeWks/tagsHidden", firstTimeWithTags()).toBool());
+
     CSearch::setSearchMode(CSearch::search_mode_e(cfg.value("Workspace/projects/filterMode", CSearch::getSearchMode()).toInt()));
     CSearch::setCaseSensitivity(Qt::CaseSensitivity(cfg.value("Workspace/projects/CaseSensitivity", CSearch::getCaseSensitivity()).toInt()));
 
@@ -80,6 +82,7 @@ CGisWorkspace::~CGisWorkspace()
     cfg.setValue("Workspace/treeWks/state", treeWks->header()->saveState());
     cfg.setValue("Workspace/projects/filterMode", CSearch::getSearchMode());
     cfg.setValue("Workspace/projects/CaseSensitivity", CSearch::getCaseSensitivity());
+    cfg.setValue("Workspace/treeWks/tagsHidden", areTagsHidden());
     /*
         Explicitly delete workspace here, as database projects use
         CGisWorkspace upon destruction to signal the database their destruction.
@@ -1343,4 +1346,20 @@ bool CGisWorkspace::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, 
     }
 
     return !polyline.isEmpty();
+}
+
+bool CGisWorkspace::areTagsHidden() const
+{
+    return treeWks->isColumnHidden(CGisListWks::eColumnRating);
+}
+
+void CGisWorkspace::setTagsHidden(bool hidden)
+{
+    treeWks->setColumnHidden(CGisListWks::eColumnRating, hidden);
+}
+
+bool CGisWorkspace::firstTimeWithTags()
+{
+    treeWks->setColumnWidth(CGisListWks::eColumnRating, 100);
+    return true;
 }

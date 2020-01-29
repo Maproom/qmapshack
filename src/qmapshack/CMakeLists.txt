@@ -48,11 +48,11 @@ set( SRCS
     device/IDeviceWatcher.cpp
     gis/CGisDatabase.cpp
     gis/CGisDraw.cpp
+    gis/CGisItemRate.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
     gis/CGisWorkspace.cpp
     gis/CSelDevices.cpp
-    gis/CGisItemRate.cpp
     gis/IGisItem.cpp
     gis/IGisLine.cpp
     gis/db/CDBFolderGroup.cpp
@@ -386,6 +386,7 @@ set( HDRS
     device/IDeviceWatcher.h
     gis/CGisDatabase.h
     gis/CGisDraw.h
+    gis/CGisItemRate.h
     gis/CGisListDB.h
     gis/CGisListWks.h
     gis/CGisWorkspace.h
@@ -393,7 +394,6 @@ set( HDRS
     gis/IGisItem.h
     gis/IGisLine.h
     gis/Poi.h
-    gis/CGisItemRate.h
     gis/db/CDBFolderGroup.h
     gis/db/CDBFolderLostFound.h
     gis/db/CDBFolderMysql.h
@@ -713,9 +713,9 @@ set( UIS
     dem/IDemPathSetup.ui
     dem/IDemPropSetup.ui
     gis/IGisDatabase.ui
+    gis/IGisItemRate.ui
     gis/IGisWorkspace.ui
     gis/ISelDevices.ui
-    gis/IGisItemRate.ui
     gis/db/IExportDatabase.ui
     gis/db/ISearchDatabase.ui
     gis/db/ISelectDBFolder.ui

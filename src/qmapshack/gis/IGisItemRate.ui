@@ -25,11 +25,14 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButtonR1">
+       <property name="styleSheet">
+        <string notr="true">QPushButton:pressed { border:none;}</string>
+       </property>
        <property name="text">
         <string/>
        </property>
        <property name="autoDefault">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="default">
         <bool>false</bool>
@@ -41,11 +44,14 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButtonR2">
+       <property name="styleSheet">
+        <string notr="true">QPushButton:pressed { border:none;}</string>
+       </property>
        <property name="text">
         <string/>
        </property>
        <property name="autoDefault">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="default">
         <bool>false</bool>
@@ -57,11 +63,14 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButtonR3">
+       <property name="styleSheet">
+        <string notr="true">QPushButton:pressed { border:none;}</string>
+       </property>
        <property name="text">
         <string/>
        </property>
        <property name="autoDefault">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="default">
         <bool>false</bool>
@@ -73,11 +82,14 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButtonR4">
+       <property name="styleSheet">
+        <string notr="true">QPushButton:pressed { border:none;}</string>
+       </property>
        <property name="text">
         <string/>
        </property>
        <property name="autoDefault">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="default">
         <bool>false</bool>
@@ -89,11 +101,14 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButtonR5">
+       <property name="styleSheet">
+        <string notr="true">QPushButton:pressed { border:none;}</string>
+       </property>
        <property name="text">
         <string/>
        </property>
        <property name="autoDefault">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="default">
         <bool>false</bool>
@@ -121,7 +136,7 @@
    <item>
     <widget class="QLabel" name="keywordLabel">
      <property name="text">
-      <string>Seperate keywords by semicolons:</string>
+      <string>Seperate keywords by colons:</string>
      </property>
     </widget>
    </item>

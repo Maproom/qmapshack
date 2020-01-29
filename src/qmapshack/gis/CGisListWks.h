@@ -47,8 +47,8 @@ public:
         eColumnIcon = 0
         , eColumnCheckBox = eColumnIcon
         , eColumnDecoration = eColumnIcon
+        , eColumnRating = 1
         , eColumnName = 2
-        , eColumnInfo = 1
     };
 
 

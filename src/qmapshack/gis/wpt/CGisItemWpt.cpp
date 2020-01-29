@@ -425,16 +425,8 @@ QString CGisItemWpt::getInfo(quint32 feature) const
         }
     }
 
-    if(getRating() > 0)
-    {
-        str += "<br/>\n";
-        str += tr("Rating: ") + QString::number(getRating());
-    }
-    if(!getKeywords().isEmpty())
-    {
-        str += "<br/>\n";
-        str += tr("Keywords: ") + QStringList(getKeywords().toList()).join(", ");
-    }
+
+    str += getRatingKeywordInfo();
 
     return str + "</div>";
 }

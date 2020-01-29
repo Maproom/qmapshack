@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2020 Henri Hornburg hrnbg@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -382,20 +383,20 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     //Set Info column
     if(!keywords.isEmpty())
     {
-        QTreeWidgetItem::setIcon(CGisListWks::eColumnInfo, QPixmap("://icons/32x32/Tag.png"));
-        setToolTip(CGisListWks::eColumnInfo, QStringList(keywords.toList()).join(", "));
+        QTreeWidgetItem::setIcon(CGisListWks::eColumnRating, QPixmap("://icons/32x32/Tag.png"));
+        setToolTip(CGisListWks::eColumnRating, QStringList(keywords.toList()).join(", "));
     }
     else
     {
-        QTreeWidgetItem::setIcon(CGisListWks::eColumnInfo, QIcon());
+        QTreeWidgetItem::setIcon(CGisListWks::eColumnRating, QIcon());
     }
     if(rating > 0)
     {
-        QTreeWidgetItem::setText(CGisListWks::eColumnInfo, QString::number(rating));
+        QTreeWidgetItem::setText(CGisListWks::eColumnRating, QString::number(rating));
     }
     else
     {
-        QTreeWidgetItem::setText(CGisListWks::eColumnInfo, "");
+        QTreeWidgetItem::setText(CGisListWks::eColumnRating, "");
     }
 }
 
@@ -1065,7 +1066,7 @@ qreal IGisItem::getRating() const
 void IGisItem::setRating(qreal rating)
 {
     this->rating=rating;
-    changed("changed rating", "://icons/32x32/Tag.png");
+    updateHistory();
 }
 
 const QSet<QString> &IGisItem::getKeywords() const
@@ -1076,17 +1077,27 @@ const QSet<QString> &IGisItem::getKeywords() const
 void IGisItem::addKeywords(const QSet<QString> &otherKeywords)
 {
     keywords.unite(otherKeywords);
-    changed("changed keywords", "://icons/32x32/Tag.png");
+    updateHistory();
 }
 
 void IGisItem::removeKeywords(const QSet<QString> &otherKeywords)
 {
     keywords.subtract(otherKeywords);
-    changed("changed keywords", "://icons/32x32/Tag.png");
+    updateHistory();
 }
 
-void IGisItem::clearKeywords()
+const QString IGisItem::getRatingKeywordInfo() const
 {
-    keywords.clear();
-    changed("changed keywords", "://icons/32x32/Tag.png");
+    QString str = "";
+    if(getRating() > 0)
+    {
+        str += "<br/>\n";
+        str += tr("Rating: ") + QString::number(getRating());
+    }
+    if(!getKeywords().isEmpty())
+    {
+        str += "<br/>\n";
+        str += tr("Keywords: ") + QStringList(getKeywords().toList()).join(", ");
+    }
+    return str;
 }

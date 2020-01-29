@@ -728,9 +728,7 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
         key.item="";
         genKey();
     }
-    setIcon();
-    setText   (CGisListWks::eColumnName, getName());
-    setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
+    //Also sets icon, tooltip and text
     IGisItem::updateDecoration(eMarkNone, eMarkNone);
 
     detBoundingRect();

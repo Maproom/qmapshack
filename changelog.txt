@@ -8,6 +8,7 @@ V1.XX.X
 [QMS-73] Info of a geocache is not correctly shown in Copy Element Window
 [QMS-80] Use ASAN to enhance code quality
 [QMS-83] Application Crash
+[QMS-100] Avoid whitespaces in project name and keywords
 
 V1.14.0
 [QMS-5] App crashes on using the "Change Start Point" filter

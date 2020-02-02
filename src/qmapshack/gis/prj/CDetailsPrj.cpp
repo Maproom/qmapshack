@@ -994,7 +994,7 @@ void CDetailsPrj::slotLinkActivated(const QString& link)
     if(link == "name")
     {
         QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new project name."), QLineEdit::Normal, prj.getName());
-        if(name.isEmpty())
+        if(name.trimmed().isEmpty())
         {
             return;
         }
@@ -1003,7 +1003,7 @@ void CDetailsPrj::slotLinkActivated(const QString& link)
     else if(link == "keywords")
     {
         QString keywords = QInputDialog::getText(this, tr("Edit keywords..."), tr("Enter keywords."), QLineEdit::Normal, prj.getKeywords());
-        if(keywords.isEmpty())
+        if(keywords.trimmed().isEmpty())
         {
             return;
         }
@@ -1021,7 +1021,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
     if(url.path() == "name")
     {
         QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new project name."), QLineEdit::Normal, prj.getName());
-        if(!name.isEmpty())
+        if(!name.trimmed().isEmpty())
         {
             prj.setName(name);
         }

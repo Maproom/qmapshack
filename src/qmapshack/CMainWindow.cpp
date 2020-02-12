@@ -476,6 +476,7 @@ CMainWindow::CMainWindow()
         }
     }
 
+    QTimer::singleShot(100, widgetGisWorkspace, SLOT(slotLateInit()));
 
     QTimer::singleShot(100, this, SLOT(slotSanityTest()));
 }

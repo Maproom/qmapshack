@@ -434,6 +434,7 @@ signals:
     void sigChanged();
 
 public slots:
+    void slotLateInit();
     void slotSaveAll();
     void slotWksItemSelectionReset();
     void slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trkact_t act);

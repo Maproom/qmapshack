@@ -72,10 +72,6 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
     connect(treeWks, &CGisListWks::itemPressed, this, &CGisWorkspace::slotWksItemPressed);
     connect(treeWks, &CGisListWks::itemSelectionChanged, this, &CGisWorkspace::slotWksItemSelectionChanged);
     connect(treeWks, &CGisListWks::sigItemDeleted, this, &CGisWorkspace::slotWksItemSelectionChanged);
-
-    // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
-    //              is up and running.
-    QTimer::singleShot(1000, treeWks, SLOT(slotLoadWorkspace()));
 }
 
 CGisWorkspace::~CGisWorkspace()
@@ -90,6 +86,13 @@ CGisWorkspace::~CGisWorkspace()
 
      */
     delete treeWks;
+}
+
+void CGisWorkspace::slotLateInit()
+{
+    // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
+    //              is up and running.
+    QTimer::singleShot(1000, treeWks, SLOT(slotLoadWorkspace()));
 }
 
 void CGisWorkspace::setOpacity(qreal val)

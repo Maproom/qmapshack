@@ -674,24 +674,6 @@
         <file>../icons/waypoints/32x32/Valley.png</file>
         <file>../icons/waypoints/32x32/Water.png</file>
         <file>../icons/waypoints/32x32/Waypoint.png</file>
-        <file>map/OSM_Topo.tms</file>
-        <file>map/OpenCycleMap.tms</file>
-        <file>map/OpenStreetMap.tms</file>
-        <file>map/WorldSat.wmts</file>
-        <file>map/WorldTopo.wmts</file>
-        <file>map/World.gemf</file>
-        <file>dem/World_Online_SRTM900.wcs</file>
-        <file>dem/Europe_Online_DEM25.vrt</file>
-        <file>pics/about.png</file>
-        <file>pics/compass.png</file>
-        <file>pics/noMap256x256.png</file>
-        <file>pics/splash.png</file>
-        <file>pics/timezones.png</file>
-        <file>pics/DockWidgets.png</file>
-        <file>templates/Hiking_Tour_Summary.ui</file>
-        <file>templates/Hiking_Tour_Summary_(Advanced).ui</file>
-        <file>templates/Cycling_Tour_Summary.ui</file>
-        <file>templates/Running_Summary.ui</file>
         <file>../macOS/closeButtonGrey.png</file>
         <file>../icons/geocaching/attributes/106.png</file>
         <file>../icons/geocaching/attributes/108.png</file>
@@ -938,5 +920,23 @@
         <file>../icons/lines/line_yellow.png</file>
         <file>../icons/32x32/Hint.png</file>
         <file>../icons/32x32/Tag.png</file>
+        <file>map/OSM_Topo.tms</file>
+        <file>map/OpenCycleMap.tms</file>
+        <file>map/OpenStreetMap.tms</file>
+        <file>map/WorldSat.wmts</file>
+        <file>map/WorldTopo.wmts</file>
+        <file>map/World.gemf</file>
+        <file>dem/World_Online_SRTM900.wcs</file>
+        <file>dem/Europe_Online_DEM25.vrt</file>
+        <file>pics/about.png</file>
+        <file>pics/compass.png</file>
+        <file>pics/noMap256x256.png</file>
+        <file>pics/splash.png</file>
+        <file>pics/timezones.png</file>
+        <file>pics/DockWidgets.png</file>
+        <file>templates/Hiking_Tour_Summary.ui</file>
+        <file>templates/Hiking_Tour_Summary_(Advanced).ui</file>
+        <file>templates/Cycling_Tour_Summary.ui</file>
+        <file>templates/Running_Summary.ui</file>
     </qresource>
 </RCC>

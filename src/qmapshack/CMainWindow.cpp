@@ -20,6 +20,7 @@
 #include "canvas/CCanvas.h"
 #include "config.h"
 #include "CAbout.h"
+#include "CHelp.h"
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemList.h"
@@ -174,6 +175,7 @@ CMainWindow::CMainWindow()
 
     connect(actionAbout,                 &QAction::triggered,            this,      &CMainWindow::slotAbout);
     connect(actionHelp,                  &QAction::triggered,            this,      &CMainWindow::slotHelp);
+    connect(actionNewHelp,               &QAction::triggered,            this,      &CMainWindow::slotNewHelp);
     connect(actionQuickstart,            &QAction::triggered,            this,      &CMainWindow::slotQuickstart);
     connect(actionAddMapView,            &QAction::triggered,            this,      &CMainWindow::slotAddCanvas);
     connect(actionCloneMapView,          &QAction::triggered,            this,      &CMainWindow::slotCloneCanvas);
@@ -1841,3 +1843,12 @@ void CMainWindow::slotSanityTest()
     qDebug() << "Sanity test passed.";
 }
 
+void CMainWindow::slotNewHelp()
+{
+    if(help.isNull())
+    {
+        help = new CHelp(this);
+    }
+
+    help->setVisible(true);
+}

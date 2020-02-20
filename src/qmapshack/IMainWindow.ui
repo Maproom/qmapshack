@@ -117,6 +117,7 @@
     <addaction name="actionAbout"/>
     <addaction name="actionHelp"/>
     <addaction name="actionQuickstart"/>
+    <addaction name="actionNewHelp"/>
    </widget>
    <widget class="QMenu" name="menuProject">
     <property name="title">
@@ -1000,6 +1001,15 @@
    </property>
    <property name="toolTip">
     <string>Mark the highlighted track with a red border.</string>
+   </property>
+  </action>
+  <action name="actionNewHelp">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
+   </property>
+   <property name="text">
+    <string>New Help</string>
    </property>
   </action>
  </widget>

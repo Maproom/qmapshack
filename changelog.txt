@@ -10,6 +10,7 @@ V1.XX.X
 [QMS-83] Application Crash
 [QMS-89] Geo search hidden after restarting QMapShack
 [QMS-100] Avoid whitespaces in project name and keywords
+[QMS-109] Direct link to geocaching logging page
 
 V1.14.0
 [QMS-5] App crashes on using the "Change Start Point" filter

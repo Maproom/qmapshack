@@ -150,9 +150,7 @@ void CScrOptWpt::slotEditRadius()
 void CScrOptWpt::slotAddElevation()
 {
     CScrOptSemaphoreLocker lock(*this);
-    QList<IGisItem::key_t> keys;
-    keys << key;
-    CGisWorkspace::self().addEleToWptTrkByKey(keys);
+    CGisWorkspace::self().addEleToWptTrkByKey({key});
     close();
 }
 
@@ -166,9 +164,7 @@ void CScrOptWpt::slotSearchWeb()
 void CScrOptWpt::slotTags()
 {
     CScrOptSemaphoreLocker lock(*this);
-    QList<IGisItem::key_t> keys;
-    keys << key;
-    CGisWorkspace::self().tagItemsByKey(keys);
+    CGisWorkspace::self().tagItemsByKey({key});
     close();
 }
 

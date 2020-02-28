@@ -142,9 +142,7 @@ void CScrOptRte::slotNogo()
 void CScrOptRte::slotTags()
 {
     CScrOptSemaphoreLocker lock(*this);
-    QList<IGisItem::key_t> keys;
-    keys << key;
-    CGisWorkspace::self().tagItemsByKey(keys);
+    CGisWorkspace::self().tagItemsByKey({key});
     close();
 }
 

@@ -51,6 +51,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     show();
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptRte::slotEditDetails);
+    connect(toolTags,        &QToolButton::clicked, this, &CScrOptRte::slotTags);
     connect(toolDelete,      &QToolButton::clicked, this, &CScrOptRte::slotDelete);
     connect(toolCopy,        &QToolButton::clicked, this, &CScrOptRte::slotCopy);
     connect(toolCalc,        &QToolButton::clicked, this, &CScrOptRte::slotCalc);
@@ -135,6 +136,15 @@ void CScrOptRte::slotNogo()
 {
     CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().toggleNogoItem(key);
+    close();
+}
+
+void CScrOptRte::slotTags()
+{
+    CScrOptSemaphoreLocker lock(*this);
+    QList<IGisItem::key_t> keys;
+    keys << key;
+    CGisWorkspace::self().tagItemsByKey(keys);
     close();
 }
 

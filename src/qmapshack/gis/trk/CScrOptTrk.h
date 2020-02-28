@@ -51,6 +51,7 @@ private slots:
     void slotNogo();
     void slotAddElevation();
     void slotAddInfo();
+    void slotTags();
 
 
 private:

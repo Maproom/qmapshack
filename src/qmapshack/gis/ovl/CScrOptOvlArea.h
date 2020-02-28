@@ -42,6 +42,7 @@ private slots:
     void slotDelete();
     void slotEdit();
     void slotNogo();
+    void slotTags();
 
 private:
     IGisItem::key_t key;

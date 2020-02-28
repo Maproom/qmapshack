@@ -434,6 +434,8 @@ public:
     void setTagsHidden(bool hidden);
     bool firstTimeWithTags();
 
+    void tagItemsByKey(const QList<IGisItem::key_t>& keys);
+
 signals:
     void sigChanged();
 

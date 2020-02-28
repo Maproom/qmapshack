@@ -48,6 +48,7 @@ private slots:
     void slotInstruction(bool on);
     void slotToTrack();
     void slotNogo();
+    void slotTags();
 
 private:
     IGisItem::key_t key;

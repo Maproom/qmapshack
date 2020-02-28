@@ -62,6 +62,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     show();
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptTrk::slotEditDetails);
+    connect(toolTags,        &QToolButton::clicked, this, &CScrOptTrk::slotTags);
     connect(toolDelete,      &QToolButton::clicked, this, &CScrOptTrk::slotDelete);
     connect(toolCopy,        &QToolButton::clicked, this, &CScrOptTrk::slotCopy);
     connect(toolProfile,     &QToolButton::toggled, this, &CScrOptTrk::slotProfile);
@@ -198,6 +199,15 @@ void CScrOptTrk::slotAddInfo()
 
     CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().addTrkInfoByKey(key);
+}
+
+void CScrOptTrk::slotTags()
+{
+    CScrOptSemaphoreLocker lock(*this);
+    QList<IGisItem::key_t> keys;
+    keys << key;
+    CGisWorkspace::self().tagItemsByKey(keys);
+    close();
 }
 
 void CScrOptTrk::draw(QPainter& p)

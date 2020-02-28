@@ -23,6 +23,7 @@
 #include "device/IDevice.h"
 #include "gis/CGisDatabase.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisItemRate.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CSelectDBFolder.h"
@@ -1359,4 +1360,48 @@ bool CGisWorkspace::firstTimeWithTags()
 {
     treeWks->setColumnWidth(CGisListWks::eColumnRating, 100);
     return true;
+}
+
+void CGisWorkspace::tagItemsByKey(const QList<IGisItem::key_t>& keys)
+{
+    QSet<QString> commonKeywords;
+    qreal ratingSum = 0;
+
+    QList<IGisItem*> items;
+    bool firstItem = true;
+    for(const IGisItem::key_t& key : keys)
+    {
+        IGisItem * gisItem = getItemByKey(key);
+        if(gisItem != nullptr)
+        {
+            if(firstItem)
+            {
+                commonKeywords = gisItem->getKeywords();
+                firstItem=false;
+            }
+            else
+            {
+                commonKeywords = commonKeywords.intersect(gisItem->getKeywords());
+            }
+            ratingSum += gisItem->getRating();
+
+            items << gisItem;
+        }
+    }
+
+    CGisItemRate dlg (this, commonKeywords, ratingSum/items.size());
+    dlg.exec();
+
+    if(dlg.result() == QDialog::Accepted)
+    {
+        for(IGisItem * gisItem : items)
+        {
+            if(dlg.getRatingChanged())
+            {
+                gisItem->setRating(dlg.getRating());
+            }
+            gisItem->removeKeywords(dlg.getRemovedKeywords());
+            gisItem->addKeywords(dlg.getAddedKeywords());
+        }
+    }
 }

@@ -31,7 +31,6 @@
 #endif
 #include "device/IDevice.h"
 #include "gis/CGisDatabase.h"
-#include "gis/CGisItemRate.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/CSelDevices.h"
@@ -1620,49 +1619,19 @@ void CGisListWks::slotTagItem()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
-    QList<QTreeWidgetItem*> items = selectedItems();
-
-    QSet<QString> commonKeywords;
-    qreal ratingSum = 0;
-
-    bool firstItem = true;
+    QList<QTreeWidgetItem*> items       = selectedItems();
+    QList<IGisItem::key_t>  keys;
     for(QTreeWidgetItem * item : items)
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem != nullptr)
         {
-            if(firstItem)
-            {
-                commonKeywords = gisItem->getKeywords();
-                firstItem=false;
-            }
-            else
-            {
-                commonKeywords = commonKeywords.intersect(gisItem->getKeywords());
-            }
-            ratingSum += gisItem->getRating();
+            keys << gisItem->getKey();
         }
     }
 
-    CGisItemRate dlg (this, commonKeywords, ratingSum/items.size());
-    dlg.exec();
+    CGisWorkspace::self().tagItemsByKey(keys);
 
-    if(dlg.result() == QDialog::Accepted)
-    {
-        for(QTreeWidgetItem * item : items)
-        {
-            IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-            if(gisItem != nullptr)
-            {
-                if(dlg.getRatingChanged())
-                {
-                    gisItem->setRating(dlg.getRating());
-                }
-                gisItem->removeKeywords(dlg.getRemovedKeywords());
-                gisItem->addKeywords(dlg.getAddedKeywords());
-            }
-        }
-    }
 }
 
 void CGisListWks::slotDeleteItem()

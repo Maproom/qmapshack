@@ -51,6 +51,7 @@ private slots:
     void slotEditRadius();
     void slotAddElevation();
     void slotSearchWeb();
+    void slotTags();
 
 private:
     IGisItem::key_t key;

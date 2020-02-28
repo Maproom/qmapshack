@@ -49,6 +49,20 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="toolTags">
+       <property name="toolTip">
+        <string>Set tags and rating.</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../resources.qrc">
+         <normaloff>:/icons/32x32/Tag.png</normaloff>:/icons/32x32/Tag.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="toolCopy">
        <property name="toolTip">
         <string>Copy area into another project.</string>

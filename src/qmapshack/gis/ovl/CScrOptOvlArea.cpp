@@ -44,6 +44,7 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     show();
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptOvlArea::slotEditDetails);
+    connect(toolTags,        &QToolButton::clicked, this, &CScrOptOvlArea::slotTags);
     connect(toolDelete,      &QToolButton::clicked, this, &CScrOptOvlArea::slotDelete);
     connect(toolCopy,        &QToolButton::clicked, this, &CScrOptOvlArea::slotCopy);
     connect(toolEdit,        &QToolButton::clicked, this, &CScrOptOvlArea::slotEdit);
@@ -88,6 +89,15 @@ void CScrOptOvlArea::slotNogo()
 {
     CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().toggleNogoItem(key);
+    close();
+}
+
+void CScrOptOvlArea::slotTags()
+{
+    CScrOptSemaphoreLocker lock(*this);
+    QList<IGisItem::key_t> keys;
+    keys << key;
+    CGisWorkspace::self().tagItemsByKey(keys);
     close();
 }
 

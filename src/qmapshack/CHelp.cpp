@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CHelp.h"
+#include "widgets/CHelpIndex.h"
 #include "helpers/CSettings.h"
 #include "version.h"
 #include "widgets/CHelpBrowser.h"
@@ -38,9 +39,16 @@ CHelp::CHelp(QWidget *parent)
     engine = new QHelpEngine(_MKSTR(HELPPATH) "/QMSHelp.qhc", this);
     engine->setupData();
 
-    splitter->insertWidget(0, engine->contentWidget());
+    index = new CHelpIndex(engine, this);
+
+    tabWidget = new QTabWidget(this);
+    tabWidget->addTab(engine->contentWidget(), tr("Content"));
+    tabWidget->addTab(index, tr("Index"));
+
+    splitter->insertWidget(0, tabWidget);
 
     CHelpBrowser *browser = new CHelpBrowser(engine, this);
+    browser->setSource(QUrl("qthelp://qms/doc/Home.html"));
     splitter->insertWidget(1, browser);
 
     connect(engine->contentWidget(), &QHelpContentWidget::linkActivated, browser, &CHelpBrowser::setSource);

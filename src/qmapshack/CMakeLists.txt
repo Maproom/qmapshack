@@ -24,7 +24,7 @@ add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
 
 set( SRCS    
     CAbout.cpp
-    CHelp.cpp
+    CHelp.cpp    
     CMainWindow.cpp
     CSingleInstanceProxy.cpp
     GeoMath.cpp
@@ -326,6 +326,7 @@ set( SRCS
     widgets/CDoubleSpinBox.cpp
     widgets/CFadingIcon.cpp
     widgets/CHelpBrowser.cpp
+    widgets/CHelpIndex.cpp
     widgets/CHistoryListWidget.cpp
     widgets/CLineEdit.cpp
     widgets/CPhotoAlbum.cpp
@@ -364,7 +365,7 @@ endif(WIN32)
 
 set( HDRS
     CAbout.h
-    CHelp.h
+    CHelp.h    
     CMainWindow.h
     CSingleInstanceProxy.h
     GeoMath.h
@@ -673,6 +674,7 @@ set( HDRS
     widgets/CDoubleSpinBox.h
     widgets/CFadingIcon.h
     widgets/CHelpBrowser.h
+    widgets/CHelpIndex.h
     widgets/CHistoryListWidget.h
     widgets/CLineEdit.h
     widgets/CPhotoAlbum.h

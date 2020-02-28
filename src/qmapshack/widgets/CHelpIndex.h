@@ -16,28 +16,30 @@
 
 **********************************************************************************************/
 
-#ifndef CHELP_H
-#define CHELP_H
+#ifndef CHELPINDEX_H
+#define CHELPINDEX_H
 
-#include <QDockWidget>
+#include <QWidget>
+
 class QHelpEngine;
-class QSplitter;
-class QTabWidget;
-class CHelpIndex;
+class QLabel;
+class QLineEdit;
+class QHelpIndexWidget;
 
-class CHelp :  public QDockWidget
+class CHelpIndex : public QWidget
 {
     Q_OBJECT
 public:
-    CHelp(QWidget * parent);
-    virtual ~CHelp();
+    CHelpIndex(QHelpEngine * engine, QWidget * parent);
+    virtual ~CHelpIndex() = default;
 
+private slots:
+    void slotSearch(const QString& text);
 private:
-    QHelpEngine * engine;
-    QTabWidget * tabWidget;
-    QSplitter * splitter;
-    CHelpIndex * index;
+    QLabel * labelSearch;
+    QLineEdit * lineSearch;
+    QHelpIndexWidget * index;
 };
 
-#endif //CHELP_H
+#endif //CHELPINDEX_H
 

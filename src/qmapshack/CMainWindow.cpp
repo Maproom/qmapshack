@@ -1848,6 +1848,7 @@ void CMainWindow::slotNewHelp()
     if(help.isNull())
     {
         help = new CHelp(this);
+        addDockWidget(Qt::AllDockWidgetAreas, help);
     }
 
     help->setVisible(true);

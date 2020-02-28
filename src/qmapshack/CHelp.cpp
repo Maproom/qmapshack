@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CHelp.h"
+#include "helpers/CSettings.h"
 #include "version.h"
 #include "widgets/CHelpBrowser.h"
 
@@ -26,12 +27,12 @@
 
 
 CHelp::CHelp(QWidget *parent)
-    : QDialog(parent)
+    : QDockWidget(tr("Help"),parent)
 {
     setWindowFlag(Qt::Tool, true);
-    setModal(false);
+    setAttribute(Qt::WA_DeleteOnClose, true);
 
-    QSplitter * splitter = new QSplitter(Qt::Horizontal, this);
+    splitter = new QSplitter(Qt::Horizontal, this);
 
     qDebug() << "search help at:" << (_MKSTR(HELPPATH) "/QMSHelp.qhc");
     engine = new QHelpEngine(_MKSTR(HELPPATH) "/QMSHelp.qhc", this);
@@ -45,11 +46,25 @@ CHelp::CHelp(QWidget *parent)
     connect(engine->contentWidget(), &QHelpContentWidget::linkActivated, browser, &CHelpBrowser::setSource);
     connect(engine->indexWidget(), &QHelpIndexWidget::linkActivated, browser, &CHelpBrowser::setSource);
 
-    QBoxLayout * l = new QBoxLayout(QBoxLayout::LeftToRight, this);
-    l->addWidget(splitter);
-    setLayout(l);
+    setWidget(splitter);
 
-    adjustSize();
+    SETTINGS;
+    cfg.beginGroup("Help");
+    if ( cfg.contains("geometry"))
+    {
+        restoreGeometry(cfg.value("geometry").toByteArray());
+        splitter->restoreState(cfg.value("splitter").toByteArray());
+    }
+    cfg.endGroup();
 }
 
+
+CHelp::~CHelp()
+{
+    SETTINGS;
+    cfg.beginGroup("Help");
+    cfg.setValue("geometry", saveGeometry());
+    cfg.setValue("splitter", splitter->saveState());
+    cfg.endGroup();
+}
 

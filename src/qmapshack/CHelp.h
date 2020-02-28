@@ -19,18 +19,20 @@
 #ifndef CHELP_H
 #define CHELP_H
 
-#include <QDialog>
+#include <QDockWidget>
 class QHelpEngine;
+class QSplitter;
 
-class CHelp :  public QDialog
+class CHelp :  public QDockWidget
 {
     Q_OBJECT
 public:
     CHelp(QWidget * parent);
-    virtual ~CHelp() = default;
+    virtual ~CHelp();
 
 private:
     QHelpEngine * engine;
+    QSplitter * splitter;
 };
 
 #endif //CHELP_H

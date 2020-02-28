@@ -150,6 +150,21 @@ private:
     void showMenuItemOvl(const QPoint &p);
     void showMenuItem(const QPoint &p, const QList<IGisItem::key_t> &keysTrks, const QList<IGisItem::key_t> &keysWpts);
 
+    template<typename T>
+    QList<IGisItem::key_t> selectedItems2Keys()
+    {
+        QList<IGisItem::key_t> keys;
+        for(QTreeWidgetItem * item : selectedItems())
+        {
+            T * gisItem = dynamic_cast<T*>(item);
+            if(nullptr != gisItem)
+            {
+                keys << gisItem->getKey();
+            }
+        }
+        return keys;
+    }
+
     QSqlDatabase db;
 
     QActionGroup * actionGroupSort;

@@ -163,9 +163,7 @@ void CScrOptTrk::slotActivity()
 void CScrOptTrk::slotColor()
 {
     CScrOptSemaphoreLocker lock(*this);
-    QList<IGisItem::key_t> keys;
-    keys << key;
-    CGisWorkspace::self().colorTrkByKey(keys);
+    CGisWorkspace::self().colorTrkByKey({key});
     close();
 }
 
@@ -187,9 +185,7 @@ void CScrOptTrk::slotNogo()
 void CScrOptTrk::slotAddElevation()
 {
     CScrOptSemaphoreLocker lock(*this);
-    QList<IGisItem::key_t> keys;
-    keys << key;
-    CGisWorkspace::self().addEleToWptTrkByKey(keys);
+    CGisWorkspace::self().addEleToWptTrkByKey({key});
     close();
 }
 
@@ -204,9 +200,7 @@ void CScrOptTrk::slotAddInfo()
 void CScrOptTrk::slotTags()
 {
     CScrOptSemaphoreLocker lock(*this);
-    QList<IGisItem::key_t> keys;
-    keys << key;
-    CGisWorkspace::self().tagItemsByKey(keys);
+    CGisWorkspace::self().tagItemsByKey({key});
     close();
 }
 

@@ -1618,38 +1618,13 @@ void CGisListWks::slotEditItem()
 void CGisListWks::slotTagItem()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
-
-    QList<QTreeWidgetItem*> items       = selectedItems();
-    QList<IGisItem::key_t>  keys;
-    for(QTreeWidgetItem * item : items)
-    {
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-        if(gisItem != nullptr)
-        {
-            keys << gisItem->getKey();
-        }
-    }
-
-    CGisWorkspace::self().tagItemsByKey(keys);
-
+    CGisWorkspace::self().tagItemsByKey(selectedItems2Keys<IGisItem>());
 }
 
 void CGisListWks::slotDeleteItem()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
-
-    QList<QTreeWidgetItem*> items       = selectedItems();
-    QList<IGisItem::key_t>  keys;
-    for(QTreeWidgetItem * item : items)
-    {
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-        if(gisItem != nullptr)
-        {
-            keys << gisItem->getKey();
-        }
-    }
-
-    CGisWorkspace::self().delItemsByKey(keys);
+    CGisWorkspace::self().delItemsByKey(selectedItems2Keys<IGisItem>());
 }
 
 void CGisListWks::slotCopyItem()
@@ -1665,18 +1640,7 @@ void CGisListWks::slotCopyItem()
      * later used to retrieve the item on the workspace via CGisWorkspace::getItemByKey()
      * again. This is always safe.
      */
-    QList<QTreeWidgetItem*> items = selectedItems();
-    QList<IGisItem::key_t>  keys;
-    for(QTreeWidgetItem * item : items)
-    {
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-        if(gisItem != nullptr)
-        {
-            keys << gisItem->getKey();
-        }
-    }
-
-    CGisWorkspace::self().copyItemsByKey(keys);
+    CGisWorkspace::self().copyItemsByKey(selectedItems2Keys<IGisItem>());
 }
 
 void CGisListWks::slotProjWpt()
@@ -1792,16 +1756,7 @@ void CGisListWks::slotCombineTrk()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
-    QList<IGisItem::key_t>  keys;
-    QList<QTreeWidgetItem*> items = selectedItems();
-    for(QTreeWidgetItem * item : items)
-    {
-        CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(item);
-        if(gisItem)
-        {
-            keys << gisItem->getKey();
-        }
-    }
+    const QList<IGisItem::key_t>& keys = selectedItems2Keys<CGisItemTrk>();
 
     if(!keys.isEmpty())
     {
@@ -2307,15 +2262,7 @@ void CGisListWks::slotRteFromWpt()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
-    QList<IGisItem::key_t> keys;
-    for(QTreeWidgetItem * item : selectedItems())
-    {
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
-        if(nullptr != wpt)
-        {
-            keys << wpt->getKey();
-        }
-    }
+    const QList<IGisItem::key_t>& keys = selectedItems2Keys<CGisItemWpt>();
 
     if(!keys.isEmpty())
     {
@@ -2327,15 +2274,7 @@ void CGisListWks::slotEditPrxWpt()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
-    QList<IGisItem::key_t> keys;
-    for(QTreeWidgetItem * item : selectedItems())
-    {
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
-        if(nullptr != wpt)
-        {
-            keys << wpt->getKey();
-        }
-    }
+    const QList<IGisItem::key_t>& keys = selectedItems2Keys<CGisItemWpt>();
 
     if(!keys.isEmpty())
     {
@@ -2413,35 +2352,11 @@ void CGisListWks::slotSymWpt()
     {
         return;
     }
-
-    QList<IGisItem::key_t> keys;
-    for(QTreeWidgetItem * item : selectedItems())
-    {
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
-        if(wpt == nullptr)
-        {
-            continue;
-        }
-
-        keys << wpt->getKey();
-    }
-
-    CGisWorkspace::self().changeWptSymByKey(keys, iconName);
+    CGisWorkspace::self().changeWptSymByKey(selectedItems2Keys<CGisItemWpt>(), iconName);
 }
 
 void CGisListWks::slotEleWptTrk()
 {
-    QList<IGisItem::key_t> keys;
-    for(QTreeWidgetItem * item : selectedItems())
-    {
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-        if(gisItem != nullptr)
-        {
-            keys << gisItem->getKey();
-            continue;
-        }
-    }
-
-    CGisWorkspace::self().addEleToWptTrkByKey(keys);
+    CGisWorkspace::self().addEleToWptTrkByKey(selectedItems2Keys<IGisItem>());
 }
 

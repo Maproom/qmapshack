@@ -622,7 +622,24 @@ void CGisItemWpt::save(QDomNode& gpx, bool strictGpx11)
 
 void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
 {
-    geocache.service = eGC;
+    //Geocaches only have one link
+    if(wpt.links.first().uri.url(QUrl::RemovePath).contains("geocaching.com"))
+    {
+        geocache.service = eGcCom;
+    }
+    else if(wpt.links.first().uri.url(QUrl::RemovePath).contains("opencaching"))
+    {
+        geocache.service = eOc;
+    }
+    else if(wpt.links.first().uri.url(QUrl::RemovePath).contains("geocaching.su"))
+    {
+        geocache.service = eGcSu;
+    }
+    else
+    {
+        geocache.service = eUnknown;
+    }
+
     const QDomNamedNodeMap& attr = xmlCache.attributes();
     geocache.id = attr.namedItem("id").nodeValue().toInt();
 
@@ -1168,5 +1185,4 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;
     out << doc.toString();
     file.close();
-
 }

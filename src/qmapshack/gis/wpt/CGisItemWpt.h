@@ -40,7 +40,7 @@ class CGisItemWpt : public IGisItem
 {
     Q_DECLARE_TR_FUNCTIONS(CGisItemWpt)
 public:
-    enum geocacheservice_e {eGC, eOC, eTC};
+    enum geocacheservice_e {eGcCom, eOc, eTc, eGcSu, eUnknown=-1};
 
     struct geocachelog_t
     {
@@ -58,7 +58,7 @@ public:
      */
     struct geocache_t
     {
-        geocacheservice_e service = eOC;
+        geocacheservice_e service = eUnknown;
         bool hasData = false;
         quint32 id = 0;
         bool available = true;

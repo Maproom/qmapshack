@@ -33,6 +33,7 @@
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "misc.h"
 #include "units/IUnit.h"
 
 #include <QtSql>
@@ -384,7 +385,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     if(!keywords.isEmpty())
     {
         QTreeWidgetItem::setIcon(CGisListWks::eColumnRating, QPixmap("://icons/32x32/Tag.png"));
-        setToolTip(CGisListWks::eColumnRating, QStringList(keywords.toList()).join(", "));
+        setToolTip(CGisListWks::eColumnRating, QStringList(getKeywordsSorted()).join(", "));
     }
     else
     {
@@ -1074,6 +1075,13 @@ const QSet<QString> &IGisItem::getKeywords() const
     return keywords;
 }
 
+QList<QString> IGisItem::getKeywordsSorted() const
+{
+    QList<QString> sortedKeywords = keywords.toList();
+    std::sort(sortedKeywords.begin(), sortedKeywords.end(), sortByString);
+    return sortedKeywords;
+}
+
 void IGisItem::addKeywords(const QSet<QString> &otherKeywords)
 {
     keywords.unite(otherKeywords);
@@ -1094,10 +1102,10 @@ const QString IGisItem::getRatingKeywordInfo() const
         str += "<br/>\n";
         str += tr("Rating: ") + QString::number(getRating());
     }
-    if(!getKeywords().isEmpty())
+    if(!getKeywordsSorted().isEmpty())
     {
         str += "<br/>\n";
-        str += tr("Keywords: ") + QStringList(getKeywords().toList()).join(", ");
+        str += tr("Keywords: ") + QStringList(getKeywordsSorted()).join(", ");
     }
     return str;
 }

@@ -33,6 +33,7 @@
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
+#include "misc.h"
 
 #include <proj_api.h>
 #include <QtWidgets>
@@ -419,14 +420,6 @@ static void addRowLimit(QString& str, const QString& name, const QString& min, c
     str += "</tr>";
 }
 
-static bool sortByName(const QString& item1, const QString& item2)
-{
-    static QCollator collator;
-    // this will set collator to natural sorting mode (instead of lexical)
-    collator.setNumericMode(true);
-    return collator.compare(item1, item2) < 0;
-}
-
 
 QString CGisItemTrk::getInfoLimits() const
 {
@@ -435,7 +428,7 @@ QString CGisItemTrk::getInfoLimits() const
     str += "<tr><th align='left'></th><th align='right'>" + tr("min.") + "</th><th align='right'>" + tr("max.") + "</th></tr>";
 
     QStringList keys = extrema.keys();
-    qSort(keys.begin(), keys.end(), sortByName);
+    qSort(keys.begin(), keys.end(), sortByString);
 
     for(const QString& key : keys)
     {

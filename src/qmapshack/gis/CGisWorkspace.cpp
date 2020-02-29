@@ -1365,10 +1365,10 @@ bool CGisWorkspace::firstTimeWithTags()
 void CGisWorkspace::tagItemsByKey(const QList<IGisItem::key_t>& keys)
 {
     QSet<QString> commonKeywords;
-    qreal ratingSum = 0;
 
     QList<IGisItem*> items;
     bool firstItem = true;
+    qreal rating = 0;
     for(const IGisItem::key_t& key : keys)
     {
         IGisItem * gisItem = getItemByKey(key);
@@ -1377,19 +1377,19 @@ void CGisWorkspace::tagItemsByKey(const QList<IGisItem::key_t>& keys)
             if(firstItem)
             {
                 commonKeywords = gisItem->getKeywords();
+                rating = gisItem->getRating();
                 firstItem=false;
             }
             else
             {
                 commonKeywords = commonKeywords.intersect(gisItem->getKeywords());
             }
-            ratingSum += gisItem->getRating();
 
             items << gisItem;
         }
     }
 
-    CGisItemRate dlg (this, commonKeywords, ratingSum/items.size());
+    CGisItemRate dlg (this, commonKeywords, items.size() > 1 ? 0 : rating);
     dlg.exec();
 
     if(dlg.result() == QDialog::Accepted)

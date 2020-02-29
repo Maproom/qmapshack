@@ -596,6 +596,7 @@ public:
     qreal getRating() const;
     void setRating(qreal rating);
     const QSet<QString>& getKeywords() const;
+    QList<QString> getKeywordsSorted() const;
     void addKeywords(const QSet<QString> &otherKeywords);
     void removeKeywords(const QSet<QString> &otherKeywords);
     const QString getRatingKeywordInfo() const;

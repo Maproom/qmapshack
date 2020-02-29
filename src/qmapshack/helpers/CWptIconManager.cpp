@@ -19,6 +19,7 @@
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"
+#include "misc.h"
 #include "setup/IAppSetup.h"
 
 #include <QtWidgets>
@@ -220,13 +221,6 @@ QString CWptIconManager::selectWptIcon(QWidget * parent)
     return icon;
 }
 
-static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
-{
-    static QCollator collator;
-    // this will set collator to natural sorting mode (instead of lexical)
-    collator.setNumericMode(true);
-    return collator.compare(s1, s2) < 0;
-}
 
 QMenu * CWptIconManager::getWptIconMenu(const QString& title, QObject * obj, const char * slot, QWidget * parent)
 {
@@ -236,7 +230,7 @@ QMenu * CWptIconManager::getWptIconMenu(const QString& title, QObject * obj, con
     const QMap<QString, icon_t>& wptIcons = getWptIcons();
     QStringList keys = wptIcons.keys();
 
-    qSort(keys.begin(), keys.end(), keyLessThanAlpha);
+    qSort(keys.begin(), keys.end(), sortByString);
 
     for(const QString &key : keys)
     {

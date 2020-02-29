@@ -26,13 +26,19 @@
     p = nullptr
 
 
-template<typename T>
-bool sortByName(T * item1, T * item2)
+
+inline bool sortByString(const QString& str1, const QString& str2)
 {
     static QCollator collator;
     // this will set collator to natural sorting mode (instead of lexical)
     collator.setNumericMode(true);
-    return collator.compare(item1->getName(), item2->getName()) < 0;
+    return collator.compare(str1, str2) < 0;
+}
+
+template<typename T>
+bool sortByName(T * item1, T * item2)
+{
+    return sortByString(item1->getName(), item2->getName());
 }
 
 

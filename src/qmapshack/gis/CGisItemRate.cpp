@@ -16,10 +16,12 @@
 
 **********************************************************************************************/
 
-#include "CGisItemRate.h"
-#include "IGisItem.h"
-#include "QPushButton"
-#include "ui_IGisItemRate.h"
+#include "gis/CGisItemRate.h"
+#include "gis/IGisItem.h"
+#include "misc.h"
+
+#include <QtGui>
+
 
 CGisItemRate::CGisItemRate(QWidget *parent, const QSet<QString>& commonKeywords, qreal rating) :
     QDialog(parent),
@@ -27,7 +29,10 @@ CGisItemRate::CGisItemRate(QWidget *parent, const QSet<QString>& commonKeywords,
     rating(rating)
 {
     setupUi(this);
-    keywordPlainTextEdit->setPlainText(QStringList(commonKeywords.toList()).join(", "));
+
+    QStringList stringList = QStringList(commonKeywords.toList());
+    std::sort(stringList.begin(), stringList.end(), sortByString);
+    keywordPlainTextEdit->setPlainText(stringList.join(", "));
 
     pushButtonR1->setFixedSize(32, 32);
     pushButtonR2->setFixedSize(32, 32);

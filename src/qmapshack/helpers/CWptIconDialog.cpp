@@ -20,17 +20,10 @@
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
 #include "helpers/CWptIconManager.h"
+#include "misc.h"
 #include "setup/IAppSetup.h"
 
 #include <QtWidgets>
-
-static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
-{
-    static QCollator collator;
-    // this will set collator to natural sorting mode (instead of lexical)
-    collator.setNumericMode(true);
-    return collator.compare(s1, s2) < 0;
-}
 
 
 CWptIconDialog::CWptIconDialog(CMainWindow * parent)
@@ -43,7 +36,7 @@ CWptIconDialog::CWptIconDialog(CMainWindow * parent)
 
 void CWptIconDialog::setupSignals()
 {
-    connect(toolPath,   &QToolButton::clicked,       this, &CWptIconDialog::slotSetupPath);
+    connect(toolPath, &QToolButton::clicked, this, &CWptIconDialog::slotSetupPath);
 }
 
 void CWptIconDialog::setupList(QObject * obj)
@@ -56,7 +49,7 @@ void CWptIconDialog::setupList(QObject * obj)
     const QMap<QString, CWptIconManager::icon_t>& wptIcons = CWptIconManager::self().getWptIcons();
     QStringList keys = wptIcons.keys();
 
-    qSort(keys.begin(), keys.end(), keyLessThanAlpha);
+    qSort(keys.begin(), keys.end(), sortByString);
 
     for(const QString &key : keys)
     {

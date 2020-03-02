@@ -17,18 +17,17 @@
 **********************************************************************************************/
 
 #include "CHelp.h"
-#include "widgets/CHelpIndex.h"
+#include "help/CHelpIndex.h"
 #include "helpers/CSettings.h"
-#include "version.h"
-#include "widgets/CHelpBrowser.h"
-#include "widgets/CHelpSearch.h"
+#include "help/CHelpBrowser.h"
+#include "help/CHelpSearch.h"
 
 
 #include <QtGui>
 #include <QtHelp>
 
 
-CHelp::CHelp(QWidget *parent)
+CHelp::CHelp(const QString& helpfile, const QString& homepage, QWidget *parent)
     : QDockWidget(tr("Help"),parent)
 {
     setWindowFlag(Qt::Tool, true);
@@ -36,8 +35,8 @@ CHelp::CHelp(QWidget *parent)
 
     splitter = new QSplitter(Qt::Horizontal, this);
 
-    qDebug() << "search help at:" << (_MKSTR(HELPPATH) "/QMSHelp.qhc");
-    engine = new QHelpEngine(_MKSTR(HELPPATH) "/QMSHelp.qhc", this);
+    qDebug() << "search help at:" << helpfile;
+    engine = new QHelpEngine(helpfile, this);
     engine->setupData();
 
     index = new CHelpIndex(engine, this);
@@ -51,7 +50,7 @@ CHelp::CHelp(QWidget *parent)
     splitter->insertWidget(0, tabWidget);
 
     CHelpBrowser *browser = new CHelpBrowser(engine, this);
-    browser->setSource(QUrl("qthelp://qms/doc/Home.html"));
+    browser->setSource(QUrl(homepage));
     splitter->insertWidget(1, browser);
 
     setWidget(splitter);

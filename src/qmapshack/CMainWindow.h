@@ -159,7 +159,7 @@ protected:
 
 private slots:
     void slotAbout();
-    void slotHelp();
+    void slotWiki();
     void slotQuickstart();
     void slotAddCanvas();
     void slotCloneCanvas();
@@ -199,7 +199,7 @@ private slots:
     void slotGeoSearchConfigChanged();
     void slotDockFloating(bool floating);
     void slotRenameView();
-    void slotNewHelp();
+    void slotHelp();
 
 private:
     friend int main(int argc, char ** argv);

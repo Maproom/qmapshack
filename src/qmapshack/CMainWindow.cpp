@@ -20,7 +20,6 @@
 #include "canvas/CCanvas.h"
 #include "config.h"
 #include "CAbout.h"
-#include "CHelp.h"
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemList.h"
@@ -38,6 +37,7 @@
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "help/CHelp.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/CToolBarConfig.h"
@@ -174,8 +174,8 @@ CMainWindow::CMainWindow()
     // end ---- restore window geometry -----
 
     connect(actionAbout,                 &QAction::triggered,            this,      &CMainWindow::slotAbout);
+    connect(actionWiki,                  &QAction::triggered,            this,      &CMainWindow::slotWiki);
     connect(actionHelp,                  &QAction::triggered,            this,      &CMainWindow::slotHelp);
-    connect(actionNewHelp,               &QAction::triggered,            this,      &CMainWindow::slotNewHelp);
     connect(actionQuickstart,            &QAction::triggered,            this,      &CMainWindow::slotQuickstart);
     connect(actionAddMapView,            &QAction::triggered,            this,      &CMainWindow::slotAddCanvas);
     connect(actionCloneMapView,          &QAction::triggered,            this,      &CMainWindow::slotCloneCanvas);
@@ -397,6 +397,7 @@ CMainWindow::CMainWindow()
                      << actionSetupDEMPaths
                      << actionAbout
                      << actionHelp
+                     << actionWiki
                      << actionSetupMapView
                      << actionLoadGISData
                      << actionSaveGISData
@@ -929,7 +930,7 @@ void CMainWindow::slotAbout()
     dlg.exec();
 }
 
-void CMainWindow::slotHelp()
+void CMainWindow::slotWiki()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocMain"));
 }
@@ -1457,7 +1458,7 @@ void CMainWindow::slotLinkActivated(const QString& link)
     }
     else if(link == "ShowWiki")
     {
-        slotHelp();
+        slotWiki();
     }
     else if(link == "ShowQuickStart")
     {
@@ -1843,11 +1844,11 @@ void CMainWindow::slotSanityTest()
     qDebug() << "Sanity test passed.";
 }
 
-void CMainWindow::slotNewHelp()
+void CMainWindow::slotHelp()
 {
     if(help.isNull())
     {
-        help = new CHelp(this);
+        help = new CHelp(_MKSTR(HELPPATH) "/QMSHelp.qhc", "qthelp://qms/doc/doc/html/DocMain.html", this);
         addDockWidget(Qt::AllDockWidgetAreas, help);
     }
 

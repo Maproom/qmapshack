@@ -249,8 +249,6 @@ if(BUILD_QMAPTOOL)
     install( FILES        qmaptool.1                        DESTINATION     ${MAN_INSTALL_DIR}/man1  )
     install( FILES        qmt_map2jnx.1                     DESTINATION     ${MAN_INSTALL_DIR}/man1  )
     install( FILES        qmt_rgb2pct.1                     DESTINATION     ${MAN_INSTALL_DIR}/man1  )
-    install( FILES        src/qmapshack/doc/QMTHelp.qhc     DESTINATION     ${HTML_INSTALL_DIR})
-    install( FILES        src/qmapshack/doc/QMTHelp.qch     DESTINATION     ${HTML_INSTALL_DIR})
 endif(BUILD_QMAPTOOL)
 endif (UNIX AND NOT WIN32 AND NOT APPLE)
 

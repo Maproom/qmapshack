@@ -325,8 +325,9 @@ set( SRCS
     widgets/CColorLegend.cpp
     widgets/CDoubleSpinBox.cpp
     widgets/CFadingIcon.cpp
-    widgets/CHelpBrowser.cpp
+    widgets/CHelpBrowser.cpp    
     widgets/CHelpIndex.cpp
+    widgets/CHelpSearch.cpp
     widgets/CHistoryListWidget.cpp
     widgets/CLineEdit.cpp
     widgets/CPhotoAlbum.cpp
@@ -675,6 +676,7 @@ set( HDRS
     widgets/CFadingIcon.h
     widgets/CHelpBrowser.h
     widgets/CHelpIndex.h
+    widgets/CHelpSearch.h
     widgets/CHistoryListWidget.h
     widgets/CLineEdit.h
     widgets/CPhotoAlbum.h

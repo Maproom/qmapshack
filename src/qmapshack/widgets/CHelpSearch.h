@@ -16,30 +16,33 @@
 
 **********************************************************************************************/
 
-#ifndef CHELP_H
-#define CHELP_H
+#ifndef CHELPSEARCH_H
+#define CHELPSEARCH_H
 
-#include <QDockWidget>
+#include <QWidget>
+
+class QLabel;
 class QHelpEngine;
-class QSplitter;
-class QTabWidget;
-class CHelpIndex;
-class CHelpSearch;
+class QHelpSearchEngine;
+class QHelpSearchQueryWidget;
+class QHelpSearchResultWidget;
 
-class CHelp :  public QDockWidget
+class CHelpSearch : public QWidget
 {
     Q_OBJECT
 public:
-    CHelp(QWidget * parent);
-    virtual ~CHelp();
+    CHelpSearch(QHelpEngine * engine, QWidget * parent);
+    virtual ~CHelpSearch() = default;
+
+private slots:
+    void slotSearch();
 
 private:
-    QHelpEngine * engine;
-    QTabWidget * tabWidget;
-    QSplitter * splitter;
-    CHelpIndex * index;
-    CHelpSearch * search;
+    QLabel * labelSearch;
+    QHelpSearchEngine * searchEngine;
+    QHelpSearchQueryWidget * query;
+    QHelpSearchResultWidget * result;
 };
 
-#endif //CHELP_H
+#endif //CHELPSEARCH_H
 

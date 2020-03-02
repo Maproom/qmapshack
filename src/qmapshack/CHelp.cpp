@@ -21,6 +21,7 @@
 #include "helpers/CSettings.h"
 #include "version.h"
 #include "widgets/CHelpBrowser.h"
+#include "widgets/CHelpSearch.h"
 
 
 #include <QtGui>
@@ -40,19 +41,18 @@ CHelp::CHelp(QWidget *parent)
     engine->setupData();
 
     index = new CHelpIndex(engine, this);
+    search = new CHelpSearch(engine, this);
 
     tabWidget = new QTabWidget(this);
     tabWidget->addTab(engine->contentWidget(), tr("Content"));
     tabWidget->addTab(index, tr("Index"));
+    tabWidget->addTab(search, tr("Search"));
 
     splitter->insertWidget(0, tabWidget);
 
     CHelpBrowser *browser = new CHelpBrowser(engine, this);
     browser->setSource(QUrl("qthelp://qms/doc/Home.html"));
     splitter->insertWidget(1, browser);
-
-    connect(engine->contentWidget(), &QHelpContentWidget::linkActivated, browser, &CHelpBrowser::setSource);
-    connect(engine->indexWidget(), &QHelpIndexWidget::linkActivated, browser, &CHelpBrowser::setSource);
 
     setWidget(splitter);
 

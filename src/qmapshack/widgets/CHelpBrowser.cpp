@@ -23,11 +23,17 @@ CHelpBrowser::CHelpBrowser(QHelpEngine *helpEngine, QWidget *parent)
     : QTextBrowser(parent)
     , engine(helpEngine)
 {
+
+    connect(engine->contentWidget(), &QHelpContentWidget::linkActivated, this, &CHelpBrowser::setSource);
+    connect(engine->indexWidget(), &QHelpIndexWidget::linkActivated, this, &CHelpBrowser::setSource);
+    connect(engine->searchEngine()->resultWidget(), &QHelpSearchResultWidget::requestShowLink, this, &CHelpBrowser::setSource);
+
 }
 
 
 QVariant CHelpBrowser::loadResource(int type, const QUrl &name)
 {
+    qDebug() << type << name;
     if (name.scheme() == "qthelp")
     {
         return QVariant(engine->fileData(name));

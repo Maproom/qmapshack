@@ -16,32 +16,30 @@
 
 **********************************************************************************************/
 
-#include "widgets/CHelpIndex.h"
+#ifndef CHELP_H
+#define CHELP_H
 
-#include <QtGui>
-#include <QtHelp>
-#include <QtWidgets>
+#include <QDockWidget>
+class QHelpEngine;
+class QSplitter;
+class QTabWidget;
+class CHelpIndex;
+class CHelpSearch;
 
-CHelpIndex::CHelpIndex(QHelpEngine *engine, QWidget *parent)
-    : QWidget(parent)
+class CHelp :  public QDockWidget
 {
+    Q_OBJECT
+public:
+    CHelp(const QString &helpfile, const QString &homepage, QWidget * parent);
+    virtual ~CHelp();
 
-    labelSearch = new QLabel(tr("Search:"), this);
-    lineSearch = new QLineEdit(this);
-    index = engine->indexWidget();
+private:
+    QHelpEngine * engine;
+    QTabWidget * tabWidget;
+    QSplitter * splitter;
+    CHelpIndex * index;
+    CHelpSearch * search;
+};
 
-    QVBoxLayout * l = new QVBoxLayout(this);
-    l->addWidget(labelSearch);
-    l->addWidget(lineSearch);
-    l->addWidget(index);
-
-    setLayout(l);
-
-    connect(lineSearch, &QLineEdit::textChanged, this, &CHelpIndex::slotSearch);
-}
-
-void CHelpIndex::slotSearch(const QString& text)
-{
-    index->filterIndices(text);
-}
+#endif //CHELP_H
 

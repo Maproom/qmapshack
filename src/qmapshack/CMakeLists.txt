@@ -23,8 +23,7 @@ add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
 ###############################################################################################
 
 set( SRCS    
-    CAbout.cpp
-    CHelp.cpp    
+    CAbout.cpp    
     CMainWindow.cpp
     CSingleInstanceProxy.cpp
     GeoMath.cpp
@@ -325,9 +324,6 @@ set( SRCS
     widgets/CColorLegend.cpp
     widgets/CDoubleSpinBox.cpp
     widgets/CFadingIcon.cpp
-    widgets/CHelpBrowser.cpp    
-    widgets/CHelpIndex.cpp
-    widgets/CHelpSearch.cpp
     widgets/CHistoryListWidget.cpp
     widgets/CLineEdit.cpp
     widgets/CPhotoAlbum.cpp
@@ -338,6 +334,10 @@ set( SRCS
     widgets/CTextEditWidget.cpp
     widgets/CTextEditWidgetSelMenu.cpp
     widgets/CTinySpinBox.cpp
+    ../common/help/CHelp.cpp
+    ../common/help/CHelpBrowser.cpp
+    ../common/help/CHelpIndex.cpp
+    ../common/help/CHelpSearch.cpp
 )
 
 
@@ -366,7 +366,6 @@ endif(WIN32)
 
 set( HDRS
     CAbout.h
-    CHelp.h    
     CMainWindow.h
     CSingleInstanceProxy.h
     GeoMath.h
@@ -674,9 +673,6 @@ set( HDRS
     widgets/CColorLegend.h
     widgets/CDoubleSpinBox.h
     widgets/CFadingIcon.h
-    widgets/CHelpBrowser.h
-    widgets/CHelpIndex.h
-    widgets/CHelpSearch.h
     widgets/CHistoryListWidget.h
     widgets/CLineEdit.h
     widgets/CPhotoAlbum.h
@@ -687,6 +683,10 @@ set( HDRS
     widgets/CTextEditWidget.h
     widgets/CTextEditWidgetSelMenu.h
     widgets/CTinySpinBox.h
+    ../common/help/CHelp.h
+    ../common/help/CHelpBrowser.h
+    ../common/help/CHelpIndex.h
+    ../common/help/CHelpSearch.h
 )
 
 
@@ -872,6 +872,7 @@ set(MAININP
 )
 
 include_directories(
+    ../common
     SYSTEM # this prevents warnings from non-QMS headers
     ${CMAKE_BINARY_DIR}
     ${GDAL_INCLUDE_DIRS}

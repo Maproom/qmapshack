@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "widgets/CHelpSearch.h"
+#include "help/CHelpSearch.h"
 
 #include <QtGui>
 #include <QtWidgets>

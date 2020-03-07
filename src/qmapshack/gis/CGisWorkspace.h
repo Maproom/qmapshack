@@ -432,7 +432,6 @@ public:
 
     bool areTagsHidden() const;
     void setTagsHidden(bool hidden);
-    bool firstTimeWithTags();
 
     void tagItemsByKey(const QList<IGisItem::key_t>& keys);
 
@@ -463,6 +462,14 @@ private:
         the mouse object to find items close by for highlight.
      */
     IGisItem::key_t keyWksSelection;
+
+
+    enum tags_hidden_e
+    {
+        eTagsHiddenTrue,
+        eTagsHiddenFalse,
+        eTagsHiddenUnknown
+    };
 };
 
 #endif //CGISWORKSPACE_H

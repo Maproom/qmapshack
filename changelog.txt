@@ -11,10 +11,12 @@ V1.XX.X
 [QMS-83] Application Crash
 [QMS-89] Geo search hidden after restarting QMapShack
 [QMS-100] Avoid whitespaces in project name and keywords
+[QMS-108] Integrate Wiki Page as help dialog
 [QMS-109] Direct link to geocaching logging page
 [QMS-111] Geocaching logging page - only 1 server used
 [QMS-116] Filter edit field lost
 [QMS-118] Too much whitespace in extended search help window
+
 
 V1.14.0
 [QMS-5] App crashes on using the "Change Start Point" filter

@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset resource="../qmapshack/resources.qrc">
     <normaloff>:/icons/48x48/QMapTool.png</normaloff>:/icons/48x48/QMapTool.png</iconset>
   </property>
   <widget class="CCanvas" name="canvas"/>
@@ -51,6 +51,7 @@
     <property name="title">
      <string>?</string>
     </property>
+    <addaction name="actionHelp"/>
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuSetup"/>
@@ -112,7 +113,7 @@
   </widget>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../qmapshack/resources.qrc">
      <normaloff>:/icons/32x32/Info.png</normaloff>:/icons/32x32/Info.png</iconset>
    </property>
    <property name="text">
@@ -121,7 +122,7 @@
   </action>
   <action name="actionSetupExtTools">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../qmapshack/resources.qrc">
      <normaloff>:/icons/32x32/Apply.png</normaloff>:/icons/32x32/Apply.png</iconset>
    </property>
    <property name="text">
@@ -136,7 +137,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../qmapshack/resources.qrc">
      <normaloff>:/icons/32x32/MouseWheel.png</normaloff>:/icons/32x32/MouseWheel.png</iconset>
    </property>
    <property name="text">
@@ -148,7 +149,7 @@
   </action>
   <action name="actionSetupUnits">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../qmapshack/resources.qrc">
      <normaloff>:/icons/32x32/UnitSetup.png</normaloff>:/icons/32x32/UnitSetup.png</iconset>
    </property>
    <property name="text">
@@ -160,7 +161,7 @@
   </action>
   <action name="actionSetupCoordFormat">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../qmapshack/resources.qrc">
      <normaloff>:/icons/32x32/SetupCoordFormat.png</normaloff>:/icons/32x32/SetupCoordFormat.png</iconset>
    </property>
    <property name="text">
@@ -179,6 +180,18 @@
    </property>
    <property name="text">
     <string>Show Tool Help</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="../qmapshack/resources.qrc">
+     <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
+   </property>
+   <property name="text">
+    <string>Help</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
    </property>
   </action>
  </widget>
@@ -202,7 +215,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../qmapshack/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

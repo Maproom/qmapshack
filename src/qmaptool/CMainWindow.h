@@ -31,6 +31,7 @@ class CCanvas;
 class CToolGrid;
 class CItemRefMap;
 class CToolExport;
+class CHelp;
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
@@ -76,6 +77,7 @@ private slots:
     void slotSetupUnits();
     void slotSetupCoordFormat();
     void slotSetupChanged();
+    void slotHelp();
 
 private:
     friend int main(int argc, char ** argv);
@@ -94,6 +96,8 @@ private:
     CToolRefMap * toolRefMap;
     CToolPalettize * toolPalettize;
     CToolExport * toolExport;
+
+    QPointer<CHelp> help;
 };
 
 #endif //CMAINWINDOW_H

@@ -77,6 +77,10 @@ set( SRCS
     units/CUnitNautic.cpp
     units/CUnitsSetup.cpp
     units/IUnit.cpp
+    ../common/help/CHelp.cpp
+    ../common/help/CHelpBrowser.cpp
+    ../common/help/CHelpIndex.cpp
+    ../common/help/CHelpSearch.cpp
 )
 
 set( HDRS
@@ -142,6 +146,10 @@ set( HDRS
     units/CUnitsSetup.h
     units/IUnit.h
     version.h
+    ../common/help/CHelp.h
+    ../common/help/CHelpBrowser.h
+    ../common/help/CHelpIndex.h
+    ../common/help/CHelpSearch.h
 )
 
 set( UIS
@@ -215,6 +223,7 @@ set(MAININP
 )
 
 include_directories(
+    ../common
     SYSTEM # this prevents warnings from non-QMS headers
     ${CMAKE_BINARY_DIR}
     ${GDAL_INCLUDE_DIRS}
@@ -243,6 +252,7 @@ target_compile_definitions(${APPLICATION_NAME} PUBLIC
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
     Qt5::Network
+    Qt5::Help
     ${GDAL_LIBRARIES}
     ${PROJ4_LIBRARIES}
 )

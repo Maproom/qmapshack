@@ -31,6 +31,7 @@
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
 #include "version.h"
+#include "help/CHelp.h"
 
 CMainWindow * CMainWindow::pSelf = nullptr;
 
@@ -50,6 +51,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupExtTools, &QAction::triggered, this, &CMainWindow::slotSetupExtTools);
     connect(actionSetupUnits, &QAction::triggered, this, &CMainWindow::slotSetupUnits);
     connect(actionSetupCoordFormat, &QAction::triggered, this, &CMainWindow::slotSetupCoordFormat);
+    connect(actionHelp, &QAction::triggered, this, &CMainWindow::slotHelp);
     connect(&IAppSetup::self(), &IAppSetup::sigSetupChanged, this, &CMainWindow::slotSetupChanged);
 
     menuWindow->addAction(dockTools->toggleViewAction());
@@ -179,4 +181,15 @@ void CMainWindow::slotSetupCoordFormat()
 void CMainWindow::slotSetupChanged()
 {
     toolStack->setupChanged();
+}
+
+void CMainWindow::slotHelp()
+{
+    if(help.isNull())
+    {
+        help = new CHelp(_MKSTR(HELPPATH) "/QMTHelp.qhc", "qthelp://qmt/doc/doc/html/QMapTool/QMTDocMain.html", this);
+        addDockWidget(Qt::AllDockWidgetAreas, help);
+    }
+
+    help->setVisible(true);
 }

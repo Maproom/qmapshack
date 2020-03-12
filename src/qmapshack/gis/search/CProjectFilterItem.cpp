@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 #include "CProjectFilterItem.h"
+#include <gis/CGisListWks.h>
 #include <gis/search/CSearchLineEdit.h>
 
 CProjectFilterItem::CProjectFilterItem(IGisProject *parent) : QTreeWidgetItem ((QTreeWidgetItem*)parent)
@@ -39,6 +40,6 @@ void CProjectFilterItem::showLineEdit(CSearch *search)
         }
         lineEdit = new CSearchLineEdit(treeWidget(), parent, search);
 
-        treeWidget()->setItemWidget(this, 1, lineEdit);
+        treeWidget()->setItemWidget(this, CGisListWks::eColumnName, lineEdit);
     }
 }

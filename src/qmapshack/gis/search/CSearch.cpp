@@ -507,6 +507,8 @@ QMap<searchProperty_e, QString> CSearch::initSearchPropertyMeaningMap()
     map.insert(eSearchPropertyGeneralDate, tr("searches the Date"));
     map.insert(eSearchPropertyGeneralComment, tr("searches the Comment"));
     map.insert(eSearchPropertyGeneralDescription, tr("searches the Description"));
+    map.insert(eSearchPropertyGeneralKeywords, tr("searches the Keywords"));
+    map.insert(eSearchPropertyGeneralRating, tr("compares the Rating"));
 
     //Area keywords
     map.insert(eSearchPropertyAreaArea, tr("searches the area"));

@@ -49,6 +49,16 @@ void CWptIconManager::removeNumberedBullets()
     mapNumberedBullets.clear();
 }
 
+QPixmap CWptIconManager::createGrayscale(QString path)
+{
+    QPixmap pixmap(path);
+    QBitmap alpha = pixmap.createHeuristicMask();
+    QImage image = pixmap.toImage().convertToFormat(QImage::Format_Grayscale8);
+    QPixmap pixmap_gray = QPixmap::fromImage(image.convertToFormat(QImage::Format_ARGB32));
+    pixmap_gray.setMask(alpha);
+    return pixmap_gray;
+}
+
 void CWptIconManager::init()
 {
     wptIcons.clear();
@@ -106,10 +116,26 @@ void CWptIconManager::init()
     setWptIconByName("Unknown Cache", "://icons/geocaching/icons/unknown.png");
     setWptIconByName("Wherigo Cache", "://icons/geocaching/icons/wherigo.png");
     setWptIconByName("Event Cache", "://icons/geocaching/icons/event.png");
+    setWptIconByName("Mega-Event Cache", "://icons/geocaching/icons/mega.png");
+    setWptIconByName("Giga-Event Cache", "://icons/geocaching/icons/giga.png");
+    setWptIconByName("Cache In Trash Out Event", "://icons/geocaching/icons/cito.png");
     setWptIconByName("Earthcache", "://icons/geocaching/icons/earth.png");
     setWptIconByName("Letterbox Hybrid", "://icons/geocaching/icons/letterbox.png");
     setWptIconByName("Virtual Cache", "://icons/geocaching/icons/virtual.png");
     setWptIconByName("Webcam Cache", "://icons/geocaching/icons/webcam.png");
+
+    setWptIconByName("gray:Traditional Cache", createGrayscale("://icons/geocaching/icons/traditional.png"));
+    setWptIconByName("gray:Multi-cache", createGrayscale("://icons/geocaching/icons/multi.png"));
+    setWptIconByName("gray:Unknown Cache", createGrayscale("://icons/geocaching/icons/unknown.png"));
+    setWptIconByName("gray:Wherigo Cache", createGrayscale("://icons/geocaching/icons/wherigo.png"));
+    setWptIconByName("gray:Event Cache", createGrayscale("://icons/geocaching/icons/event.png"));
+    setWptIconByName("gray:Mega-Event Cache", createGrayscale("://icons/geocaching/icons/mega.png"));
+    setWptIconByName("gray:Giga-Event Cache", createGrayscale("://icons/geocaching/icons/giga.png"));
+    setWptIconByName("gray:Cache In Trash Out Event", createGrayscale("://icons/geocaching/icons/cito.png"));
+    setWptIconByName("gray:Earthcache", createGrayscale("://icons/geocaching/icons/earth.png"));
+    setWptIconByName("gray:Letterbox Hybrid", createGrayscale("://icons/geocaching/icons/letterbox.png"));
+    setWptIconByName("gray:Virtual Cache", createGrayscale("://icons/geocaching/icons/virtual.png"));
+    setWptIconByName("gray:Webcam Cache", createGrayscale("://icons/geocaching/icons/webcam.png"));
 
     SETTINGS;
     QDir dirIcon(cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString());

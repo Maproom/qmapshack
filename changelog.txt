@@ -16,6 +16,7 @@ V1.XX.X
 [QMS-111] Geocaching logging page - only 1 server used
 [QMS-116] Filter edit field lost
 [QMS-118] Too much whitespace in extended search help window
+[QMS-119] Better handling of disabled and archived geocaches
 
 
 V1.14.0

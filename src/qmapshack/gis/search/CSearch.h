@@ -84,6 +84,7 @@ enum searchProperty_e: unsigned int
     eSearchPropertyGeocacheSize,
     eSearchPropertyGeocacheGCCode,
     eSearchPropertyGeocacheGCName,
+    eSearchPropertyGeocacheStatus,
 
     //Waypoint keywords
 

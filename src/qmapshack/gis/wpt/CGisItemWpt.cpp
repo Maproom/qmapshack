@@ -1339,6 +1339,22 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
         searchValue.str1 = item->geocache.name;
         return searchValue;
     });
+    map.insert(eSearchPropertyGeocacheStatus, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        if(item->geocache.archived)
+        {
+            searchValue.str1 = tr("archived");
+        }
+        else if (item->geocache.available)
+        {
+            searchValue.str1 = tr("available");
+        }
+        else
+        {
+            searchValue.str1 = tr("not available");
+        }
+        return searchValue;
+    });
     return map;
 }
 

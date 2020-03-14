@@ -471,6 +471,7 @@ QMap<QString, searchProperty_e> CSearch::initSearchPropertyEnumMap()
     map.insert(tr("size"), eSearchPropertyGeocacheSize);
     map.insert(tr("GCCode"), eSearchPropertyGeocacheGCCode);
     map.insert(tr("GCName"), eSearchPropertyGeocacheGCName);
+    map.insert(tr("status"), eSearchPropertyGeocacheStatus);
 
     //Waypoint keywords
 
@@ -521,6 +522,7 @@ QMap<searchProperty_e, QString> CSearch::initSearchPropertyMeaningMap()
     map.insert(eSearchPropertyGeocacheSize, tr("searches the size of a geocache. (micro, small, regular, large)"));
     map.insert(eSearchPropertyGeocacheGCCode, tr("searches the GCCode of a geocache."));
     map.insert(eSearchPropertyGeocacheGCName, tr("searches the Name of a geocache."));
+    map.insert(eSearchPropertyGeocacheStatus, tr("searches the status of a geocache. (available, not available, archived)"));
 
     //Waypoint keywords
 

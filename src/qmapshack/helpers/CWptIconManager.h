@@ -76,6 +76,8 @@ private:
     QMap<QString, icon_t> wptIcons;
 
     QMap<qint32, QString> mapNumberedBullets;
+
+    QPixmap createGrayscale(QString path);
 };
 
 #endif //CWPTICONMANAGER_H

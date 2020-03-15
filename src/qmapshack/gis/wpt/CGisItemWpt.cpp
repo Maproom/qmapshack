@@ -468,7 +468,14 @@ void CGisItemWpt::setIcon()
 {
     if(geocache.hasData)
     {
-        IGisItem::setIcon(CWptIconManager::self().getWptIconByName(geocache.type, focus));
+        if(geocache.available)
+        {
+            IGisItem::setIcon(CWptIconManager::self().getWptIconByName(geocache.type, focus));
+        }
+        else
+        {
+            IGisItem::setIcon(CWptIconManager::self().getWptIconByName("gray:"+geocache.type, focus));
+        }
     }
     else
     {

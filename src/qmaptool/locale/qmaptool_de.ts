@@ -94,7 +94,7 @@
     <message>
         <location filename="../canvas/CDrawContextProj.cpp" line="72"/>
         <source>Failed to load</source>
-        <translation type="unfinished">Datei laden fehlgeschlagen</translation>
+        <translation>Datei laden fehlgeschlagen</translation>
     </message>
 </context>
 <context>
@@ -227,6 +227,45 @@
     </message>
 </context>
 <context>
+    <name>CHelp</name>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="31"/>
+        <source>Help</source>
+        <translation>Hilfe</translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="46"/>
+        <source>Content</source>
+        <translation>Inhalt</translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="47"/>
+        <source>Index</source>
+        <translation>Index</translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="48"/>
+        <source>Search</source>
+        <translation>Suche</translation>
+    </message>
+</context>
+<context>
+    <name>CHelpIndex</name>
+    <message>
+        <location filename="../../common/help/CHelpIndex.cpp" line="29"/>
+        <source>Search:</source>
+        <translation>Suche:</translation>
+    </message>
+</context>
+<context>
+    <name>CHelpSearch</name>
+    <message>
+        <location filename="../../common/help/CHelpSearch.cpp" line="31"/>
+        <source>Search:</source>
+        <translation>Suche:</translation>
+    </message>
+</context>
+<context>
     <name>CItemListWidget</name>
     <message>
         <location filename="../items/CItemListWidget.cpp" line="103"/>
@@ -239,7 +278,7 @@
     <message>
         <location filename="../items/CItemMapLayer.cpp" line="34"/>
         <source>Layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Ebene</translation>
     </message>
 </context>
 <context>
@@ -247,17 +286,17 @@
     <message>
         <location filename="../items/CItemTreeWidget.cpp" line="159"/>
         <source>&lt;p&gt;The current map &lt;i&gt;&apos;%1&apos;&lt;/i&gt; does not match the projection of previous loaded maps. All map files need to have the same projection.&lt;/p&gt;&lt;p&gt;&lt;b&gt;This file&lt;/b&gt;: %2&lt;/p&gt;&lt;p&gt;&lt;b&gt;Expected&lt;/b&gt;: %3&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Die aktuelle Karte &lt;i&gt;&apos;%1&apos;&lt;/i&gt; entspricht nicht der Projektion der vorher geladenen Karten. Alle Kartendateien müssen die gleiche Projektion haben.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Diese Datei:&lt;/b&gt; %s&lt;/p&gt;&lt;p&gt;&lt;b&gt;Erwartet:&lt;/b&gt; %3&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../items/CItemTreeWidget.cpp" line="164"/>
         <source>Error...</source>
-        <translation type="unfinished">Fehler...</translation>
+        <translation>Fehler...</translation>
     </message>
     <message>
         <location filename="../items/CItemTreeWidget.cpp" line="235"/>
         <source>Select files...</source>
-        <translation type="unfinished">Dateien auswählen...</translation>
+        <translation>Dateien auswählen...</translation>
     </message>
 </context>
 <context>
@@ -778,12 +817,12 @@ oder
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="40"/>
         <source>Add map files to list</source>
-        <translation type="unfinished">Kartendateien zur Liste hinzufügen</translation>
+        <translation>Kartendateien zur Liste hinzufügen</translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="43"/>
@@ -791,22 +830,22 @@ oder
         <location filename="../items/IItemTreeWidget.ui" line="77"/>
         <location filename="../items/IItemTreeWidget.ui" line="94"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="57"/>
         <source>Remove selected file from the list.</source>
-        <translation type="unfinished">Ausgewählte Dateien aus der Liste entfernen.</translation>
+        <translation>Ausgewählte Dateien aus der Liste entfernen.</translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="74"/>
         <source>Clear complete list of map files.</source>
-        <translation type="unfinished">Die komplette Kartendateiliste löschen. </translation>
+        <translation>Die komplette Kartendateiliste löschen.</translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="91"/>
         <source>Reload the currently selected map.</source>
-        <translation type="unfinished">Die aktuell ausgewählte Karte erneut laden.</translation>
+        <translation>Die aktuell ausgewählte Karte erneut laden.</translation>
     </message>
 </context>
 <context>
@@ -837,56 +876,66 @@ oder
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="67"/>
+        <location filename="../IMainWindow.ui" line="68"/>
         <source>Tools</source>
         <translation>Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="100"/>
+        <location filename="../IMainWindow.ui" line="101"/>
         <source>Shell</source>
         <translation>Shell</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="119"/>
+        <location filename="../IMainWindow.ui" line="120"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="128"/>
+        <location filename="../IMainWindow.ui" line="129"/>
         <source>Ext. Tools</source>
         <translation>Ext. Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="131"/>
+        <location filename="../IMainWindow.ui" line="132"/>
         <source>Setup paths to external tools, like gdalwarp etc.</source>
         <translation>Pfade zu den externen Werkzeugen, wie z.B. gdalwarp, einrichten.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="143"/>
-        <location filename="../IMainWindow.ui" line="146"/>
+        <location filename="../IMainWindow.ui" line="144"/>
+        <location filename="../IMainWindow.ui" line="147"/>
         <source>Flip Mouse Wheel</source>
         <translation>Mausrad umdrehen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="155"/>
-        <location filename="../IMainWindow.ui" line="158"/>
+        <location filename="../IMainWindow.ui" line="156"/>
+        <location filename="../IMainWindow.ui" line="159"/>
         <source>Setup Units</source>
         <translation>Einheiten einrichten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="167"/>
+        <location filename="../IMainWindow.ui" line="168"/>
         <source>Setup Coord. Format</source>
         <translation>Koordinatenformat einrichten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="170"/>
+        <location filename="../IMainWindow.ui" line="171"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Das Format, in dem die Koordinaten angezeigt werden, ändern</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="181"/>
+        <location filename="../IMainWindow.ui" line="182"/>
         <source>Show Tool Help</source>
         <translation>Hilfstexte anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="191"/>
+        <source>Help</source>
+        <translation>Hilfe</translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="194"/>
+        <source>F1</source>
+        <translation></translation>
     </message>
 </context>
 <context>

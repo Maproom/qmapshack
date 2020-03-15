@@ -462,26 +462,26 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDemVRT</name>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="44"/>
-        <location filename="../dem/CDemVRT.cpp" line="52"/>
-        <location filename="../dem/CDemVRT.cpp" line="61"/>
-        <location filename="../dem/CDemVRT.cpp" line="90"/>
+        <location filename="../dem/CDemVRT.cpp" line="45"/>
+        <location filename="../dem/CDemVRT.cpp" line="53"/>
+        <location filename="../dem/CDemVRT.cpp" line="62"/>
+        <location filename="../dem/CDemVRT.cpp" line="91"/>
         <source>Error...</source>
         <translation>Ошибка...</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="44"/>
+        <location filename="../dem/CDemVRT.cpp" line="45"/>
         <source>Failed to load file: %1</source>
         <translation>Не удалось загрузить файл: %1</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="52"/>
-        <location filename="../dem/CDemVRT.cpp" line="61"/>
+        <location filename="../dem/CDemVRT.cpp" line="53"/>
+        <location filename="../dem/CDemVRT.cpp" line="62"/>
         <source>DEM must have one band with 16bit or 32bit data.</source>
         <translation>ЦМР должен иметь одну полосу с 16бит или 32бит данными.</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="90"/>
+        <location filename="../dem/CDemVRT.cpp" line="91"/>
         <source>No georeference information found.</source>
         <translation>Отсутствует геопозиционная информация.</translation>
     </message>
@@ -515,22 +515,21 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="198"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="188"/>
         <source>???</source>
         <translation>???</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="138"/>
         <source> by </source>
-        <translation>, регистратор: </translation>
+        <translation type="vanished">, регистратор: </translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="225"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="215"/>
         <source>Searching for images...</source>
         <translation>Поиск изображений...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="331"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="321"/>
         <source>No images found</source>
         <translation>Изображения не найдены</translation>
     </message>
@@ -765,7 +764,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Изображение %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1122"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1139"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
@@ -773,12 +772,13 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDeviceGarminArchive</name>
     <message>
-        <location filename="../device/CDeviceGarminArchive.cpp" line="30"/>
+        <location filename="../device/CDeviceGarminArchive.cpp" line="31"/>
+        <location filename="../device/CDeviceGarminArchive.cpp" line="76"/>
         <source>Archive - expand to load</source>
         <translation>Архив - развернуть, чтобы загрузить</translation>
     </message>
     <message>
-        <location filename="../device/CDeviceGarminArchive.cpp" line="43"/>
+        <location filename="../device/CDeviceGarminArchive.cpp" line="45"/>
         <source>Archive - loaded</source>
         <translation>Архив - загружен</translation>
     </message>
@@ -786,7 +786,7 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CElevationDialog</name>
     <message>
-        <location filename="../helpers/CElevationDialog.cpp" line="92"/>
+        <location filename="../helpers/CElevationDialog.cpp" line="91"/>
         <source>No DEM data found for that point.</source>
         <translation>Данные ЦМР для этой точки не найдены.</translation>
     </message>
@@ -1440,47 +1440,47 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Область: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="475"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="477"/>
         <source>Changed area shape.</source>
         <translation>Изменена фигура области.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="483"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="485"/>
         <source>Changed name.</source>
         <translation>Изменено имя.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="489"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="491"/>
         <source>Changed border width.</source>
         <translation>Изменена ширина границы.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="495"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="497"/>
         <source>Changed fill pattern.</source>
         <translation>Изменён узор заливки.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="501"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="503"/>
         <source>Changed opacity.</source>
         <translation>Изменена прозрачность.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="507"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="509"/>
         <source>Changed comment.</source>
         <translation>Изменён комментарий.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="513"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="515"/>
         <source>Changed description.</source>
         <translation>Изменено описание.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="519"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="521"/>
         <source>Changed links</source>
         <translation>Изменены ссылки</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="530"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="532"/>
         <source>Changed color</source>
         <translation>Изменён цвет</translation>
     </message>
@@ -1529,12 +1529,12 @@ You can modify both parameters to customize the behavior of the filter. For the 
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="413"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="675"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="678"/>
         <source>Time: %1%2</source>
         <translation>Время: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="677"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="680"/>
         <source>Distance: %1%2</source>
         <translation>Расстояние: %1 %2</translation>
     </message>
@@ -1564,7 +1564,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>с %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="796"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="799"/>
         <source>Changed route points.</source>
         <translation>Изменены точки маршрута.</translation>
     </message>
@@ -1603,164 +1603,164 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Не удалось читать данные.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="194"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="195"/>
         <source>_Clone</source>
         <translation>_клон</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="375"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="376"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation>Изменены точки трека, удалены все предыдущие данные.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="512"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="505"/>
         <source>, %1-, %2-</source>
         <translation>, %1-, %2-</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="520"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="513"/>
         <source>Time: %1%2, Speed: %3%4</source>
         <translation>Время: %1%2, скорость: %3%4</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="524"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="517"/>
         <source>Time: -, Speed: -</source>
         <translation>Время: -, скорость: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="532"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="525"/>
         <source>Moving: %1%2, Speed: %3%4</source>
         <translation>В движении: %1%2, скорость: %3%4</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="536"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="529"/>
         <source>Moving: -, Speed: -</source>
         <translation>В движении: -, скорость: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="545"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="538"/>
         <source>Start: %1</source>
         <translation>Начало: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="549"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="542"/>
         <source>Start: -</source>
         <translation>Начало: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="555"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="548"/>
         <source>End: %1</source>
         <translation>Конец: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="559"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="552"/>
         <source>End: -</source>
         <translation>Конец: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="563"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="556"/>
         <source>Points: %1 (%2)</source>
         <translation>Точки: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="568"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="561"/>
         <source>Energy Use Cycling: %L1</source>
         <translation>Использованная энергия на велосипеде: %L1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="573"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="566"/>
         <source>Invalid elevations!</source>
         <translation>Неверные высоты!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="578"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="571"/>
         <source>Invalid timestamps!</source>
         <translation>Неверные метки времени!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="583"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="576"/>
         <source>Invalid positions!</source>
         <translation>Неверные позиции!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="597"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="590"/>
         <source>Activities: %1</source>
         <translation>Активности: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="720"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="715"/>
         <source>Index: %1</source>
         <translation>Индекс: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="724"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="719"/>
         <source>Index: visible %1, total %2</source>
         <translation>Индекс: видимо %1, всего %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="739"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="734"/>
         <source>, Slope: %1%2</source>
         <translation>, Склон: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="772"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="767"/>
         <source>... and %1 tags not displayed</source>
         <translation>... и %1 не показанных элементов</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="784"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="779"/>
         <source>Distance: - (-)</source>
         <translation>Расстояние: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="785"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="780"/>
         <source>Moving: - (-)</source>
         <translation>В движении: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1505"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1518"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1617"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1661"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1801"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1500"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1513"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1612"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1656"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1796"/>
         <source>track</source>
         <translation>трек</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1753"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1748"/>
         <source>Hide point %1.</source>
         <translation>Скрыть точку %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1757"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1752"/>
         <source>Hide points %1..%2.</source>
         <translation>Скрыть точки %1..%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="835"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="847"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="830"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="842"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="435"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2011"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="428"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2006"/>
         <source>min.</source>
         <translation>мин.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="435"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2011"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="428"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2006"/>
         <source>max.</source>
         <translation>макс.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="501"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="494"/>
         <source>Length: %1%2</source>
         <translation>Длина: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="508"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="501"/>
         <source>, %1%2%3, %4%5%6</source>
         <translation>, %1%2 %3, %4%5%6</translation>
     </message>
@@ -1769,147 +1769,147 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="vanished">Использованная энергия на велосипеде: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="588"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="581"/>
         <source>Invalid slopes!</source>
         <translation>Неверные склоны!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="735"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="730"/>
         <source>Ele.: %1%2</source>
         <translation>Высота: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="744"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="739"/>
         <source>, Speed: %1%2</source>
         <translation>, Скорость: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="782"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="777"/>
         <source>Ascent: - (-)</source>
         <translation>Подъём: -(-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="783"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="778"/>
         <source>Descent: - (-)</source>
         <translation>Спуск: -(-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="790"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="785"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation>Подъём: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="796"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="791"/>
         <source>, Descent: %1%2 (%3%)</source>
         <translation>, Спуск: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="802"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="797"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Расстояние: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="808"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="803"/>
         <source>, Moving: %1%2 (%3%)</source>
         <translation>, В движении: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="824"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="819"/>
         <source>Ascent: -</source>
         <translation>Подъём: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="825"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="820"/>
         <source>Descent: -</source>
         <translation>Спуск: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="830"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="825"/>
         <source>Ascent: %1%2</source>
         <translation>Подъём: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="842"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="837"/>
         <source>, Descent: %1%2</source>
         <translation>, Спуск: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="852"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="847"/>
         <source>Distance: %1%2</source>
         <translation>Расстояние: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="857"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="852"/>
         <source>, Time: %1%2</source>
         <translation>, Время: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1564"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1559"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Удалены безвозвратно точки %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1577"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1572"/>
         <source>Track Point Info...</source>
         <translation>Информация о точках трека ...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1578"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1573"/>
         <source>Enter some text to be attached to this track point:</source>
         <translation>Введите текст, который будет прикреплен к этой точке трека:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1587"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1582"/>
         <source>Add track point desc.: %1</source>
         <translation>Добавить описание точки трека: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1597"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1592"/>
         <source>Changed track point desc.: %1</source>
         <translation>Изменено описание точки трека: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1607"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1602"/>
         <source>Removed track point desc.</source>
         <translation>Удалено описание точки трека</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1786"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1781"/>
         <source>Show points.</source>
         <translation>Показать точки.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2482"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2477"/>
         <source>Changed name</source>
         <translation>Изменено имя</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2488"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2483"/>
         <source>Changed comment</source>
         <translation>Изменён комментарий</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2494"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2489"/>
         <source>Changed description</source>
         <translation>Изменено описание</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2500"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2495"/>
         <source>Changed links</source>
         <translation>Изменены ссылки</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2510"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2505"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Изменена высота точки %1 на %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2533"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2528"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Активность изменена на &apos;%1&apos; для всего трека.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2571"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2566"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Активность изменена на &apos;%1&apos; для интервала (%2..%3).</translation>
     </message>
@@ -2043,394 +2043,409 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Радиус близости: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="385"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="347"/>
+        <source>Last found: %1</source>
+        <translation>Последнее обнаружение:%1</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="357"/>
+        <source>Project created: %1</source>
+        <translation>Проект создан: %1</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="407"/>
         <source>Created: %1</source>
         <translation>Создан: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="457"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="487"/>
         <source>Changed name</source>
         <translation>Изменено имя</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="467"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="497"/>
         <source>Changed position</source>
         <translation>Изменена позиция</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="473"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="503"/>
         <source>Changed elevation</source>
         <translation>Изменена высота</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="482"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="512"/>
         <source>Removed proximity</source>
         <translation>Удалён радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="487"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="517"/>
         <source>Changed proximity</source>
         <translation>Изменён радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="506"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="536"/>
         <source>Changed icon</source>
         <translation>Изменена пиктограмма</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="512"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="542"/>
         <source>Changed comment</source>
         <translation>Изменён комментарий</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="518"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="548"/>
         <source>Changed description</source>
         <translation>Изменено описание</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="524"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="554"/>
         <source>Changed links</source>
         <translation>Изменены ссылки</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="530"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="560"/>
         <source>Changed images</source>
         <translation>Изменены изображения</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="536"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="566"/>
         <source>Add image</source>
         <translation>Добавить изображение</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1096"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1126"/>
         <source>QMS Attribute Flag</source>
         <translation>QMS флаг атрибутов</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1097"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1127"/>
         <source>Dogs</source>
         <translation>Собаки</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1098"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1128"/>
         <source>Access or parking fee</source>
         <translation>Плата за доступ или парковку</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1099"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1129"/>
         <source>Climbing gear</source>
         <translation>Снаряжение для скалолазания</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1100"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1130"/>
         <source>Boat</source>
         <translation>Нужна лодка</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1101"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1131"/>
         <source>Scuba gear</source>
         <translation>Нужен акваланг</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1102"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1132"/>
         <source>Recommended for kids</source>
         <translation>Рекомендуется для детей</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1103"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1133"/>
         <source>Takes less than an hour</source>
         <translation>Занимает меньше часа</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1104"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1134"/>
         <source>Scenic view</source>
         <translation>Прекрасный вид</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1105"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1135"/>
         <source>Significant hike</source>
         <translation>Много идти пешком</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1106"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1136"/>
         <source>Difficult climbing</source>
         <translation>Трудное лазание</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1107"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1137"/>
         <source>May require wading</source>
         <translation>Возможен брод</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1108"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1138"/>
         <source>May require swimming</source>
         <translation>Возможно, придется плыть</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1109"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1139"/>
         <source>Available at all times</source>
         <translation>Доступен все время</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1110"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1140"/>
         <source>Recommended at night</source>
         <translation>Рекомендуется ночью</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1111"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1141"/>
         <source>Available during winter</source>
         <translation>Доступен зимой</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1113"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1143"/>
         <source>Poison plants</source>
         <translation>Ядовитые растения</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1114"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1144"/>
         <source>Dangerous Animals</source>
         <translation>Опасные животные</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1115"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1145"/>
         <source>Ticks</source>
         <translation>Клещи</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1116"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1146"/>
         <source>Abandoned mines</source>
         <translation>Заброшенные рудники</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1117"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1147"/>
         <source>Cliff / falling rocks</source>
         <translation>Скалы / камнепад</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1118"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1148"/>
         <source>Hunting</source>
         <translation>Охота</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1119"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1149"/>
         <source>Dangerous area</source>
         <translation>Опасный район</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1120"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1150"/>
         <source>Wheelchair accessible</source>
         <translation>Доступно для инвалидного кресла</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1121"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1151"/>
         <source>Parking available</source>
         <translation>Есть парковка</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1122"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1152"/>
         <source>Public transportation</source>
         <translation>Общественный транспорт</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1123"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1153"/>
         <source>Drinking water nearby</source>
         <translation>Рядом есть питьевая вода</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1124"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1154"/>
         <source>Public restrooms nearby</source>
         <translation>Рядом есть туалеты</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1125"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1155"/>
         <source>Telephone nearby</source>
         <translation>Рядом есть телефон</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1126"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1156"/>
         <source>Picnic tables nearby</source>
         <translation>Рядом столы для пикника</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1127"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1157"/>
         <source>Camping available</source>
         <translation>Можно с палаткой</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1128"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1158"/>
         <source>Bicycles</source>
         <translation>Велосипеды</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1129"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1159"/>
         <source>Motorcycles</source>
         <translation>Мотоциклы</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1130"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1160"/>
         <source>Quads</source>
         <translation>Квадроциклы</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1131"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1161"/>
         <source>Off-road vehicles</source>
         <translation>Внедорожники</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1132"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1162"/>
         <source>Snowmobiles</source>
         <translation>Снегоходы</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1133"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1163"/>
         <source>Horses</source>
         <translation>Лошади</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1134"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1164"/>
         <source>Campfires</source>
         <translation>Костры</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1135"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1165"/>
         <source>Thorns</source>
         <translation>Колючки</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1136"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1166"/>
         <source>Stealth required</source>
         <translation>Требуется скрытность</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1137"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1167"/>
         <source>Stroller accessible</source>
         <translation>Доступно для прогулочной коляски</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1138"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1168"/>
         <source>Needs maintenance</source>
         <translation>Нужна проверка</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1139"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1169"/>
         <source>Watch for livestock</source>
         <translation>Скот</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1140"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1170"/>
         <source>Flashlight required</source>
         <translation>Нужен фонарик</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1142"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1172"/>
         <source>Truck Driver/RV</source>
         <translation>Автоприцепы</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1143"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1173"/>
         <source>Field Puzzle</source>
         <translation>Загадка на местности</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1144"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1174"/>
         <source>UV Light Required</source>
         <translation>Нужна УФ-лампа</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1145"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1175"/>
         <source>Snowshoes</source>
         <translation>Нужны снегоступы</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1146"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1176"/>
         <source>Cross Country Skis</source>
         <translation>Нужны лыжи для кросс-кантри</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1147"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1177"/>
         <source>Special Tool Required</source>
         <translation>Нужен специальный инструмент</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1148"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1178"/>
         <source>Night Cache</source>
         <translation>Ночной тайник</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1149"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1179"/>
         <source>Park and Grab</source>
         <translation>Припарковался и нашел</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1150"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1180"/>
         <source>Abandoned Structure</source>
         <translation>Заброшенное строение</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1151"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1181"/>
         <source>Short hike (less than 1km)</source>
         <translation>Короткая прогулка (менее 1 км)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1152"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1182"/>
         <source>Medium hike (1km-10km)</source>
         <translation>Средняя прогулка (1 км - 10 км)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1153"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1183"/>
         <source>Long Hike (+10km)</source>
         <translation>Долго идти пешком (10 км и больше)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1154"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1184"/>
         <source>Fuel Nearby</source>
         <translation>Рядом автозаправка</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1155"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1185"/>
         <source>Food Nearby</source>
         <translation>Рядом кафе (еда)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1156"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1186"/>
         <source>Wireless Beacon</source>
         <translation>Беспроводной передатчик</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1157"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1187"/>
         <source>Partnership cache</source>
         <translation>Партнерский тайник</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1158"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1188"/>
         <source>Seasonal Access</source>
         <translation>Сезонный доступ</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1159"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1189"/>
         <source>Tourist Friendly</source>
         <translation>Удобен для туристов</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1160"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1190"/>
         <source>Tree Climbing</source>
         <translation>Нужно лезть на дерево</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1161"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1191"/>
         <source>Front Yard (Private Residence)</source>
         <translation>Двор частного дома</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1162"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1192"/>
         <source>Teamwork Required</source>
         <translation>Нужно работать в команде</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1163"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1193"/>
         <source>GeoTour</source>
         <translation>GeoTour</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1221"/>
+        <source> by </source>
+        <translation> регистратор </translation>
     </message>
 </context>
 <context>
@@ -2586,279 +2601,294 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="107"/>
+        <location filename="../gis/CGisListWks.cpp" line="108"/>
         <source>Edit..</source>
         <translation>Изменить..</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="109"/>
+        <location filename="../gis/CGisListWks.cpp" line="110"/>
         <source>Show on Map</source>
         <translation>Показать на карте</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="110"/>
+        <location filename="../gis/CGisListWks.cpp" line="111"/>
         <source>Hide from Map</source>
         <translation>Скрыть с карты</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="113"/>
+        <location filename="../gis/CGisListWks.cpp" line="114"/>
         <source>Sort by Time</source>
         <translation>Сортировать по времени</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="114"/>
+        <location filename="../gis/CGisListWks.cpp" line="115"/>
         <source>Sort by Name</source>
         <translation>Сортировать по именам</translation>
     </message>
     <message>
+        <location filename="../gis/CGisListWks.cpp" line="116"/>
+        <source>Sort by Rating</source>
+        <translation>Сортировать по рейтингу</translation>
+    </message>
+    <message>
         <location filename="../gis/CGisListWks.cpp" line="117"/>
+        <source>Filter Project</source>
+        <translation>Фильтровать проект</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="121"/>
         <source>Active Project</source>
         <translation>Активный проект</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="119"/>
+        <location filename="../gis/CGisListWks.cpp" line="123"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="121"/>
+        <location filename="../gis/CGisListWks.cpp" line="125"/>
         <source>Save as GPX 1.1 w/o ext...</source>
         <translation>Сохранить как GPX 1.1 без расширений...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="122"/>
+        <location filename="../gis/CGisListWks.cpp" line="126"/>
         <source>Send to Devices</source>
         <translation>Отправить в устройства</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="123"/>
+        <location filename="../gis/CGisListWks.cpp" line="127"/>
         <source>Sync. with Database</source>
         <translation>Синхронизировать с базой данных</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="124"/>
+        <location filename="../gis/CGisListWks.cpp" line="128"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="127"/>
+        <location filename="../gis/CGisListWks.cpp" line="131"/>
         <source>Update Project on Device</source>
         <translation>Обновить проект на устройстве</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="128"/>
-        <location filename="../gis/CGisListWks.cpp" line="133"/>
+        <location filename="../gis/CGisListWks.cpp" line="132"/>
+        <location filename="../gis/CGisListWks.cpp" line="138"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="131"/>
+        <location filename="../gis/CGisListWks.cpp" line="135"/>
         <source>Edit...</source>
         <translation>Изменить...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="136"/>
+        <source>Set Tags</source>
+        <translation>Установить теги</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="141"/>
         <source>Track Information</source>
         <translation>Информация о треке</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="156"/>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
         <source>Copy position</source>
         <translation>Скопировать позицию</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="175"/>
+        <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Create Route...</source>
         <translation>Создать маршрут...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="181"/>
         <source>Change Proximity...</source>
         <translation>Изменить радиус близости...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1124"/>
+        <location filename="../gis/CGisListWks.cpp" line="1136"/>
         <source>Waypoints</source>
         <translation>Маршрутные точки</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1129"/>
+        <location filename="../gis/CGisListWks.cpp" line="1141"/>
         <source>Wayp. &amp; Tracks</source>
         <translation>Мвршр.точки и треки</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1131"/>
+        <location filename="../gis/CGisListWks.cpp" line="1143"/>
         <source>Tracks</source>
         <translation>Треки</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="108"/>
-        <location filename="../gis/CGisListWks.cpp" line="132"/>
+        <location filename="../gis/CGisListWks.cpp" line="109"/>
+        <location filename="../gis/CGisListWks.cpp" line="137"/>
         <source>Copy to...</source>
         <translation>Копировать в...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="115"/>
+        <location filename="../gis/CGisListWks.cpp" line="119"/>
         <source>Autom. Save</source>
         <translation>Сохранить автоматически</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="120"/>
+        <location filename="../gis/CGisListWks.cpp" line="124"/>
         <source>Save as...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="138"/>
+        <location filename="../gis/CGisListWks.cpp" line="143"/>
         <source>Select Range</source>
         <translation>Выделить интервал</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="139"/>
+        <location filename="../gis/CGisListWks.cpp" line="144"/>
         <source>Edit Track Points</source>
         <translation>Изменить точки трека</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="140"/>
+        <location filename="../gis/CGisListWks.cpp" line="145"/>
         <source>Reverse Track</source>
         <translation>Обратить трек</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="141"/>
+        <location filename="../gis/CGisListWks.cpp" line="146"/>
         <source>Combine Tracks</source>
         <translation>Соединить треки</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="142"/>
+        <location filename="../gis/CGisListWks.cpp" line="147"/>
         <source>Replace Elevation by DEM</source>
         <translation>Заменить высоты данными файлов ЦМР</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="143"/>
+        <location filename="../gis/CGisListWks.cpp" line="148"/>
         <source>Copy Track with Waypoints</source>
         <translation>Копировать трек с маршрутными точками</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="148"/>
+        <location filename="../gis/CGisListWks.cpp" line="153"/>
         <source>Show Bubble</source>
         <translation>Показать пузырёк</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="150"/>
+        <location filename="../gis/CGisListWks.cpp" line="155"/>
         <source>Move Waypoint</source>
         <translation>Переместить маршрутную точку</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="151"/>
+        <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Proj. Waypoint...</source>
         <translation>Проекция маршрутной точки...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="152"/>
+        <location filename="../gis/CGisListWks.cpp" line="157"/>
         <source>Change Radius</source>
         <translation>Изменить радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="154"/>
-        <location filename="../gis/CGisListWks.cpp" line="171"/>
+        <location filename="../gis/CGisListWks.cpp" line="159"/>
+        <location filename="../gis/CGisListWks.cpp" line="176"/>
         <source>Toggle Nogo-Area</source>
         <translation>Переключить запретную зону</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="153"/>
+        <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Delete Radius</source>
         <translation>Удалить радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="144"/>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
+        <location filename="../gis/CGisListWks.cpp" line="149"/>
+        <location filename="../gis/CGisListWks.cpp" line="171"/>
         <source>Toggle Nogo-Line</source>
         <translation>Переключить запретную линию</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="159"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Route Instructions</source>
         <translation>Маршрутные инструкции</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="161"/>
+        <location filename="../gis/CGisListWks.cpp" line="166"/>
         <source>Calculate Route</source>
         <translation>Вычислить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="162"/>
+        <location filename="../gis/CGisListWks.cpp" line="167"/>
         <source>Reset Route</source>
         <translation>Сбросить маршрутизацию</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="168"/>
         <source>Edit Route</source>
         <translation>Изменить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="164"/>
+        <location filename="../gis/CGisListWks.cpp" line="169"/>
         <source>Reverse Route</source>
         <translation>Обратить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
+        <location filename="../gis/CGisListWks.cpp" line="170"/>
         <source>Convert to Track</source>
         <translation>Преобразовать в трек</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="170"/>
+        <location filename="../gis/CGisListWks.cpp" line="175"/>
         <source>Edit Area Points</source>
         <translation>Изменить точки области</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1049"/>
-        <location filename="../gis/CGisListWks.cpp" line="1135"/>
+        <location filename="../gis/CGisListWks.cpp" line="1057"/>
+        <location filename="../gis/CGisListWks.cpp" line="1147"/>
         <source>Set Track Color</source>
         <translation>Установить цвет трека</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="638"/>
+        <location filename="../gis/CGisListWks.cpp" line="643"/>
         <source>Drop items...</source>
         <translation>Удалить элементы...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1127"/>
+        <location filename="../gis/CGisListWks.cpp" line="1139"/>
         <source>Change Icon</source>
         <translation>Изменить пиктограмма</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="663"/>
-        <location filename="../gis/CGisListWks.cpp" line="2031"/>
-        <location filename="../gis/CGisListWks.cpp" line="2069"/>
+        <location filename="../gis/CGisListWks.cpp" line="668"/>
+        <location filename="../gis/CGisListWks.cpp" line="2025"/>
+        <location filename="../gis/CGisListWks.cpp" line="2063"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Обновить устройства&lt;/b&gt;&lt;p&gt;Обновить %1&lt;br/&gt;Подождите...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="789"/>
+        <location filename="../gis/CGisListWks.cpp" line="794"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Сохранение рабочей области. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="840"/>
+        <location filename="../gis/CGisListWks.cpp" line="845"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Загрузка рабочей области. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1419"/>
+        <location filename="../gis/CGisListWks.cpp" line="1439"/>
         <source>Close all projects...</source>
         <translation>Закрыть все проекты...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1419"/>
+        <location filename="../gis/CGisListWks.cpp" line="1439"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Это удалит все проекты из рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1446"/>
+        <location filename="../gis/CGisListWks.cpp" line="1466"/>
         <source>Delete project...</source>
         <translation>Удалить проект...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1446"/>
+        <location filename="../gis/CGisListWks.cpp" line="1466"/>
         <source>Do you really want to delete %1?</source>
         <translation>Вы действительно хотите удалить %1?</translation>
     </message>
@@ -2900,78 +2930,71 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGisWorkspace</name>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="128"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="139"/>
         <source>Load project...</source>
         <translation>Загрузить проект...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="128"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="139"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Проект &quot;%1&quot; уже находится в рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="185"/>
-        <location filename="../gis/CGisWorkspace.cpp" line="189"/>
         <source>Error parsing search.</source>
-        <translation>Ошибка разбора строки поиска.</translation>
+        <translation type="vanished">Ошибка разбора строки поиска.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="185"/>
         <source>Continuing with search for match in names</source>
-        <translation>Продолжаем поиск совпадения в именам</translation>
+        <translation type="vanished">Продолжаем поиск совпадения в именам</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="189"/>
         <source>Continuing with search for match in full text</source>
-        <translation>Продолжение поиска совпадения в полном тексте</translation>
+        <translation type="vanished">Продолжение поиска совпадения в полном тексте</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="200"/>
         <source>Automatically set the property, please make sure the results are correct.</source>
-        <translation>Автоматически установлено свойство, пожалуйста, убедитесь, что результаты верны.</translation>
+        <translation type="vanished">Автоматически установлено свойство, пожалуйста, убедитесь, что результаты верны.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="214"/>
         <source>Apply filter to</source>
-        <translation>Применить фильтр</translation>
+        <translation type="vanished">Применить фильтр</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="217"/>
         <source>Case sensitivity</source>
-        <translation>Учитывать регистр</translation>
+        <translation type="vanished">Учитывать регистр</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="305"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="229"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation>&lt;b&gt;Выбор элементов: &lt;/b&gt;Элемент выбран из списка рабочей области. Нажать на карту, чтобы вернуться к обычному поведению мышки.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="799"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="692"/>
         <source>Copy items...</source>
         <translation>Копировать элементы ...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="829"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="722"/>
         <source>Change waypoint symbols.</source>
         <translation>Изменить символы путевых точек.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1071"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="964"/>
         <source>Cut Track...</source>
         <translation>Вырезать трек...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1071"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="964"/>
         <source>Do you want to delete the original track?</source>
         <translation>Желаете удалить изначальный трек?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1340"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1233"/>
         <source>Enter new proximity range.</source>
         <translation>Ввести новый радиус близости.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1341"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1234"/>
         <source>Is no-go area</source>
         <translation>Использовать как запретную зону</translation>
     </message>
@@ -3049,6 +3072,45 @@ line %2, column %3:
         <location filename="../grid/CGrid.cpp" line="76"/>
         <source>N %1m, E %2m </source>
         <translation>С %1м, В %2м</translation>
+    </message>
+</context>
+<context>
+    <name>CHelp</name>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="31"/>
+        <source>Help</source>
+        <translation>Справки</translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="46"/>
+        <source>Content</source>
+        <translation>Содержание</translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="47"/>
+        <source>Index</source>
+        <translation>Индекс</translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="48"/>
+        <source>Search</source>
+        <translation>Поиск</translation>
+    </message>
+</context>
+<context>
+    <name>CHelpIndex</name>
+    <message>
+        <location filename="../../common/help/CHelpIndex.cpp" line="29"/>
+        <source>Search:</source>
+        <translation>Поиск:</translation>
+    </message>
+</context>
+<context>
+    <name>CHelpSearch</name>
+    <message>
+        <location filename="../../common/help/CHelpSearch.cpp" line="31"/>
+        <source>Search:</source>
+        <translation>Поиск:</translation>
     </message>
 </context>
 <context>
@@ -3423,69 +3485,69 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="606"/>
+        <location filename="../CMainWindow.cpp" line="610"/>
         <source>Select folder...</source>
         <translation>Выбрать папку...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1021"/>
+        <location filename="../CMainWindow.cpp" line="1025"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Использовать &lt;b&gt;Меню-&gt;Вид-&gt;Добавить окно карты&lt;/b&gt; для добавления нового вида. Или &lt;b&gt;Меню-&gt;Файл-&gt;Загрузить вид карты&lt;/b&gt; для восстановления сохраненного вида. Или нажмите &lt;a href=&apos;NewView&apos;&gt;здесь&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1150"/>
+        <location filename="../CMainWindow.cpp" line="1154"/>
         <source>Ele.: %1%2</source>
         <translation>Высота: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1163"/>
+        <location filename="../CMainWindow.cpp" line="1167"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Склон: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1179"/>
+        <location filename="../CMainWindow.cpp" line="1183"/>
         <source>[Grid: %1]</source>
         <translation>[Координатная сетка: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1327"/>
+        <location filename="../CMainWindow.cpp" line="1331"/>
         <source>Load GIS Data...</source>
         <translation>Загрузить данные ГИС...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1361"/>
+        <location filename="../CMainWindow.cpp" line="1365"/>
         <source>Select output file</source>
         <translation>Выбрать выходной файл</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1361"/>
-        <location filename="../CMainWindow.cpp" line="1387"/>
+        <location filename="../CMainWindow.cpp" line="1365"/>
+        <location filename="../CMainWindow.cpp" line="1391"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack вид (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1387"/>
+        <location filename="../CMainWindow.cpp" line="1391"/>
         <source>Select file to load</source>
         <translation>Выбрать файл для загрузки</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1679"/>
+        <location filename="../CMainWindow.cpp" line="1683"/>
         <source>Rename View...</source>
         <translation>Переименовать вид...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1679"/>
+        <location filename="../CMainWindow.cpp" line="1683"/>
         <source>Enter new name for view</source>
         <translation>Ввести новое имя вида</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1829"/>
+        <location filename="../CMainWindow.cpp" line="1833"/>
         <source>Fatal...</source>
         <translation>Неустранимая ошибка...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1830"/>
+        <location filename="../CMainWindow.cpp" line="1834"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack обнаружил плохо установленную библиотеку Proj4. Таблицы перевода для проекций EPSG обычно находятся в /usr/share/pro отсутствуют. Пожалуйста, сообщите об этом администратору пакета, чтобы поправить это.</translation>
     </message>
@@ -6078,567 +6140,602 @@ For configuration you need to know your Android device&apos;s IP address or it&a
 <context>
     <name>CSearch</name>
     <message>
-        <location filename="../gis/search/CSearch.h" line="157"/>
-        <location filename="../gis/search/CSearch.h" line="167"/>
+        <location filename="../gis/search/CSearch.h" line="164"/>
+        <location filename="../gis/search/CSearch.h" line="174"/>
         <source>No information available</source>
         <translation>Нет информации</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="88"/>
         <location filename="../gis/search/CSearch.cpp" line="89"/>
-        <location filename="../gis/search/CSearch.cpp" line="193"/>
+        <location filename="../gis/search/CSearch.cpp" line="90"/>
+        <location filename="../gis/search/CSearch.cpp" line="194"/>
         <source>and</source>
         <translation>и</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="385"/>
-        <location filename="../gis/search/CSearch.cpp" line="416"/>
+        <location filename="../gis/search/CSearch.cpp" line="386"/>
+        <location filename="../gis/search/CSearch.cpp" line="418"/>
         <source>with</source>
         <translation>содержащий</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="386"/>
-        <location filename="../gis/search/CSearch.cpp" line="417"/>
+        <location filename="../gis/search/CSearch.cpp" line="387"/>
+        <location filename="../gis/search/CSearch.cpp" line="419"/>
         <source>contains</source>
         <translation>содержит</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="387"/>
-        <location filename="../gis/search/CSearch.cpp" line="418"/>
+        <location filename="../gis/search/CSearch.cpp" line="388"/>
+        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <source>contain</source>
+        <translation>содержат</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="389"/>
+        <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>containing</source>
         <translation>содержащий</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="388"/>
-        <location filename="../gis/search/CSearch.cpp" line="419"/>
+        <location filename="../gis/search/CSearch.cpp" line="390"/>
+        <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>without</source>
         <translation>кроме</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="389"/>
-        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <location filename="../gis/search/CSearch.cpp" line="391"/>
+        <location filename="../gis/search/CSearch.cpp" line="423"/>
         <source>shorter than</source>
         <translation>короче</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="390"/>
-        <location filename="../gis/search/CSearch.cpp" line="421"/>
+        <location filename="../gis/search/CSearch.cpp" line="392"/>
+        <location filename="../gis/search/CSearch.cpp" line="424"/>
         <source>smaller than</source>
         <translation>меньше</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="391"/>
-        <location filename="../gis/search/CSearch.cpp" line="422"/>
+        <location filename="../gis/search/CSearch.cpp" line="393"/>
+        <location filename="../gis/search/CSearch.cpp" line="425"/>
         <source>under</source>
         <translation>ниже</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="392"/>
-        <location filename="../gis/search/CSearch.cpp" line="423"/>
+        <location filename="../gis/search/CSearch.cpp" line="394"/>
+        <location filename="../gis/search/CSearch.cpp" line="426"/>
         <source>lower than</source>
         <translation>ниже</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="393"/>
-        <location filename="../gis/search/CSearch.cpp" line="424"/>
+        <location filename="../gis/search/CSearch.cpp" line="395"/>
+        <location filename="../gis/search/CSearch.cpp" line="427"/>
         <source>earlier than</source>
         <translation>раньше</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="394"/>
-        <location filename="../gis/search/CSearch.cpp" line="425"/>
+        <location filename="../gis/search/CSearch.cpp" line="396"/>
+        <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>before</source>
         <translation>раньше</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="395"/>
-        <location filename="../gis/search/CSearch.cpp" line="426"/>
+        <location filename="../gis/search/CSearch.cpp" line="397"/>
+        <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>less than</source>
         <translation>меньше</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="397"/>
-        <location filename="../gis/search/CSearch.cpp" line="428"/>
+        <location filename="../gis/search/CSearch.cpp" line="399"/>
+        <location filename="../gis/search/CSearch.cpp" line="431"/>
         <source>longer than</source>
         <translation>больше</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="398"/>
-        <location filename="../gis/search/CSearch.cpp" line="429"/>
+        <location filename="../gis/search/CSearch.cpp" line="400"/>
+        <location filename="../gis/search/CSearch.cpp" line="432"/>
         <source>higher than</source>
         <translation>выше</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="399"/>
-        <location filename="../gis/search/CSearch.cpp" line="430"/>
+        <location filename="../gis/search/CSearch.cpp" line="401"/>
+        <location filename="../gis/search/CSearch.cpp" line="433"/>
         <source>bigger than</source>
         <translation>больше</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="400"/>
-        <location filename="../gis/search/CSearch.cpp" line="431"/>
+        <location filename="../gis/search/CSearch.cpp" line="402"/>
+        <location filename="../gis/search/CSearch.cpp" line="434"/>
         <source>greater than</source>
         <translation>больше</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="401"/>
-        <location filename="../gis/search/CSearch.cpp" line="432"/>
+        <location filename="../gis/search/CSearch.cpp" line="403"/>
+        <location filename="../gis/search/CSearch.cpp" line="435"/>
         <source>above</source>
         <translation>выше</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="402"/>
-        <location filename="../gis/search/CSearch.cpp" line="433"/>
+        <location filename="../gis/search/CSearch.cpp" line="404"/>
+        <location filename="../gis/search/CSearch.cpp" line="436"/>
         <source>over</source>
         <translation>выше</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="403"/>
-        <location filename="../gis/search/CSearch.cpp" line="434"/>
+        <location filename="../gis/search/CSearch.cpp" line="405"/>
+        <location filename="../gis/search/CSearch.cpp" line="437"/>
         <source>after</source>
         <translation>позднее</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="404"/>
-        <location filename="../gis/search/CSearch.cpp" line="435"/>
+        <location filename="../gis/search/CSearch.cpp" line="406"/>
+        <location filename="../gis/search/CSearch.cpp" line="438"/>
         <source>later than</source>
         <translation>позднее</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="406"/>
-        <location filename="../gis/search/CSearch.cpp" line="437"/>
+        <location filename="../gis/search/CSearch.cpp" line="408"/>
+        <location filename="../gis/search/CSearch.cpp" line="440"/>
         <source>regex</source>
         <translation>regex</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="408"/>
-        <location filename="../gis/search/CSearch.cpp" line="439"/>
+        <location filename="../gis/search/CSearch.cpp" line="410"/>
+        <location filename="../gis/search/CSearch.cpp" line="442"/>
         <source>equals</source>
         <translation>равняется</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="409"/>
-        <location filename="../gis/search/CSearch.cpp" line="440"/>
+        <location filename="../gis/search/CSearch.cpp" line="411"/>
+        <location filename="../gis/search/CSearch.cpp" line="443"/>
         <source>between</source>
         <translation>между</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="416"/>
+        <location filename="../gis/search/CSearch.cpp" line="418"/>
         <source>example: attributes with dog</source>
         <translation>пример: атрибуты без отрицания содержащий Собаки</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="417"/>
+        <location filename="../gis/search/CSearch.cpp" line="419"/>
         <source>example: name contains bike</source>
         <translation>пример: имя содержит велосипед</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="418"/>
         <source>example: name containin bike</source>
-        <translation>пример: имя содержащий велосипед</translation>
+        <translation type="vanished">пример: имя содержащий велосипед</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="419"/>
+        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <source>example: keywords contain bike</source>
+        <translation>пример: ключевые слова содержат велосипед</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="421"/>
+        <source>example: name containing bike</source>
+        <translation>пример: имя содержащее велосипед</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>example: name without water</source>
         <translation>пример: имя без вода</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <location filename="../gis/search/CSearch.cpp" line="423"/>
         <source>example: shorter than 5km</source>
         <translation>пример: короче 5km</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="421"/>
+        <location filename="../gis/search/CSearch.cpp" line="424"/>
         <source>example: area smaller than 5m²</source>
         <translation>пример: площадь меньше 5м²</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="422"/>
+        <location filename="../gis/search/CSearch.cpp" line="425"/>
         <source>example: elevation under 1000ft</source>
         <translation>пример: высота ниже 1000ft</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="423"/>
+        <location filename="../gis/search/CSearch.cpp" line="426"/>
         <source>example: lower than 500m</source>
         <translation>пример: ниже 500m</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="424"/>
+        <location filename="../gis/search/CSearch.cpp" line="427"/>
         <source>example: date earlier than 2015</source>
         <translation>пример: дата раньше 2015</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="425"/>
+        <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>example: date before 10.05.2017</source>
         <translation>пример: дата раньше 10.05.2017</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="426"/>
+        <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>example: ascent less than 500m</source>
         <translation>пример: подъём меньше 500м</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="427"/>
+        <location filename="../gis/search/CSearch.cpp" line="430"/>
         <source>example: D &lt; 3</source>
         <translation>пример: D &lt; 3</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="428"/>
+        <location filename="../gis/search/CSearch.cpp" line="431"/>
         <source>example: distance longer than 20mi</source>
         <translation>пример: расстояние больше 20mi</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="429"/>
+        <location filename="../gis/search/CSearch.cpp" line="432"/>
         <source>example: terrain higher than 2</source>
         <translation>пример: местность выше 2</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="430"/>
+        <location filename="../gis/search/CSearch.cpp" line="433"/>
         <source>example: area bigger than 50m²</source>
         <translation>пример: площадь больше 50м²</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="431"/>
+        <location filename="../gis/search/CSearch.cpp" line="434"/>
         <source>example: descent greater than 3000ft</source>
         <translation>пример: спуск больше 3000ft</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="432"/>
+        <location filename="../gis/search/CSearch.cpp" line="435"/>
         <source>example: above 50m</source>
         <translation>пример: выше 50м</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="433"/>
+        <location filename="../gis/search/CSearch.cpp" line="436"/>
         <source>example: elevation over 400m</source>
         <translation>пример: высота выше 400m</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="434"/>
+        <location filename="../gis/search/CSearch.cpp" line="437"/>
         <source>example: date after 2013</source>
         <translation>пример: дата позднее 2013</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="435"/>
+        <location filename="../gis/search/CSearch.cpp" line="438"/>
         <source>example: date later than 2015</source>
         <translation>пример: дата позднее 2015</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="436"/>
+        <location filename="../gis/search/CSearch.cpp" line="439"/>
         <source>example: T &gt; 4</source>
         <translation>пример: местность &gt; 4</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="437"/>
+        <location filename="../gis/search/CSearch.cpp" line="440"/>
         <source>example: size regex (regular|large)</source>
         <translation>пример: размер regex (regular|large)</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="438"/>
+        <location filename="../gis/search/CSearch.cpp" line="441"/>
         <source>example: size = micro</source>
         <translation>пример: размер = micro</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="439"/>
+        <location filename="../gis/search/CSearch.cpp" line="442"/>
         <source>example: activity equals bike</source>
         <translation>пример: активность равняется велосипед</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="440"/>
+        <location filename="../gis/search/CSearch.cpp" line="443"/>
         <source>example: length between 20km and 20mi</source>
         <translation>пример: длина между 20км и 20mi</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="448"/>
+        <location filename="../gis/search/CSearch.cpp" line="451"/>
         <source>name</source>
         <translation>имя</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="449"/>
+        <location filename="../gis/search/CSearch.cpp" line="452"/>
         <source>full text</source>
         <translation>полный текст</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="450"/>
+        <location filename="../gis/search/CSearch.cpp" line="453"/>
         <source>elevation</source>
         <translation>высота</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="451"/>
+        <location filename="../gis/search/CSearch.cpp" line="454"/>
         <source>date</source>
         <translation>дата</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="452"/>
+        <location filename="../gis/search/CSearch.cpp" line="455"/>
         <source>comment</source>
         <translation>комментарий</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="453"/>
+        <location filename="../gis/search/CSearch.cpp" line="456"/>
         <source>description</source>
         <translation>описание</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="456"/>
+        <location filename="../gis/search/CSearch.cpp" line="457"/>
+        <source>rating</source>
+        <translation>рейтинг</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="458"/>
+        <source>keywords</source>
+        <translation>ключевые слова</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="461"/>
         <source>area</source>
         <translation>площадь</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="459"/>
+        <location filename="../gis/search/CSearch.cpp" line="464"/>
         <source>difficulty</source>
         <translation>доступность</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="461"/>
+        <location filename="../gis/search/CSearch.cpp" line="466"/>
         <source>terrain</source>
         <translation>местность</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="462"/>
+        <location filename="../gis/search/CSearch.cpp" line="467"/>
         <source>T</source>
         <translation>местность</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="463"/>
+        <location filename="../gis/search/CSearch.cpp" line="468"/>
         <source>positive attributes</source>
         <translation>атрибуты без отрицания</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="464"/>
+        <location filename="../gis/search/CSearch.cpp" line="469"/>
         <source>non-negated attributes</source>
         <translation>атрибуты без отрицания</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="465"/>
+        <location filename="../gis/search/CSearch.cpp" line="470"/>
         <source>negated attributes</source>
         <translation>атрибуты с отрицанием</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="466"/>
+        <location filename="../gis/search/CSearch.cpp" line="471"/>
         <source>size</source>
         <translation>размер</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="467"/>
+        <location filename="../gis/search/CSearch.cpp" line="472"/>
         <source>GCCode</source>
         <translation>GCCode</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="468"/>
+        <location filename="../gis/search/CSearch.cpp" line="473"/>
         <source>GCName</source>
         <translation>GCName</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="473"/>
+        <location filename="../gis/search/CSearch.cpp" line="478"/>
         <source>distance</source>
         <translation>расстояние</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="474"/>
+        <location filename="../gis/search/CSearch.cpp" line="479"/>
         <source>length</source>
         <translation>длина</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="475"/>
+        <location filename="../gis/search/CSearch.cpp" line="480"/>
         <source>ascent</source>
         <translation>подъём</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="476"/>
+        <location filename="../gis/search/CSearch.cpp" line="481"/>
         <source>elevation gain</source>
         <translation>подъём</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="477"/>
+        <location filename="../gis/search/CSearch.cpp" line="482"/>
         <source>descent</source>
         <translation>спуск</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="478"/>
+        <location filename="../gis/search/CSearch.cpp" line="483"/>
         <source>min elevation</source>
         <translation>мин высота</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="479"/>
+        <location filename="../gis/search/CSearch.cpp" line="484"/>
         <source>minimal elevation</source>
         <translation>минимальная высота</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="480"/>
+        <location filename="../gis/search/CSearch.cpp" line="485"/>
         <source>max elevation</source>
         <translation>макс высота</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="481"/>
+        <location filename="../gis/search/CSearch.cpp" line="486"/>
         <source>maximal elevation</source>
         <translation>максимальная высота</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="482"/>
+        <location filename="../gis/search/CSearch.cpp" line="487"/>
         <source>max speed</source>
         <translation>макс скорость</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="483"/>
+        <location filename="../gis/search/CSearch.cpp" line="488"/>
         <source>maximal speed</source>
         <translation>максимальная скорость</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="484"/>
+        <location filename="../gis/search/CSearch.cpp" line="489"/>
         <source>min speed</source>
         <translation>мин скорость</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="485"/>
+        <location filename="../gis/search/CSearch.cpp" line="490"/>
         <source>minimal speed</source>
         <translation>минимальная скорость</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="486"/>
+        <location filename="../gis/search/CSearch.cpp" line="491"/>
         <source>average speed</source>
         <translation>средняя скорость</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="487"/>
+        <location filename="../gis/search/CSearch.cpp" line="492"/>
         <source>activity</source>
         <translation>активность</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="488"/>
+        <location filename="../gis/search/CSearch.cpp" line="493"/>
         <source>total time</source>
         <translation>общее время</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="489"/>
+        <location filename="../gis/search/CSearch.cpp" line="494"/>
         <source>duration</source>
         <translation>продолжительность</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="490"/>
+        <location filename="../gis/search/CSearch.cpp" line="495"/>
         <source>time moving</source>
         <translation>время движения</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="499"/>
+        <location filename="../gis/search/CSearch.cpp" line="504"/>
         <source>searches the name of the item. For Geocaches this is &quot;Name - GCCode&quot;.</source>
         <translation>поиск имени элемента. Для тайников это &quot;имя-GCCode&quot;.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="500"/>
+        <location filename="../gis/search/CSearch.cpp" line="505"/>
         <source>searches the full text</source>
         <translation>поиск в полном тексте</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="501"/>
+        <location filename="../gis/search/CSearch.cpp" line="506"/>
         <source>searches the elevation. For items consisting of multiple points the minimum and the maximum is used</source>
         <translation>поиск высоты. Для элементов, состоящих из нескольких точек используется все точки.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="502"/>
+        <location filename="../gis/search/CSearch.cpp" line="507"/>
         <source>searches the Date</source>
         <translation>поиск даты</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="503"/>
+        <location filename="../gis/search/CSearch.cpp" line="508"/>
         <source>searches the Comment</source>
         <translation>поиск в комментарии</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="504"/>
+        <location filename="../gis/search/CSearch.cpp" line="509"/>
         <source>searches the Description</source>
         <translation>поиск в описании</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="507"/>
+        <location filename="../gis/search/CSearch.cpp" line="510"/>
+        <source>searches the Keywords</source>
+        <translation>поиск в ключевых словах</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="511"/>
+        <source>compares the Rating</source>
+        <translation>сравнивает рейтинг</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="514"/>
         <source>searches the area</source>
         <translation>поиск площади</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="510"/>
+        <location filename="../gis/search/CSearch.cpp" line="517"/>
         <source>searches the difficulty rating of a geocache</source>
         <translation>поиск рейтинга доступности тайника</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="511"/>
+        <location filename="../gis/search/CSearch.cpp" line="518"/>
         <source>searches the terrain rating of a geocache</source>
         <translation>поиск рейтинга местности тайника</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="512"/>
+        <location filename="../gis/search/CSearch.cpp" line="519"/>
         <source>searches the translated meanings of the non-negated attributes (Those not crossed out)</source>
         <translation>поиск значений атрибутов без отрицания (не зачеркнутых)</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="513"/>
+        <location filename="../gis/search/CSearch.cpp" line="520"/>
         <source>searches the translated meanings of the negated attributes (Those crossed out)</source>
         <translation>поиск значений атрибутов с отрицанием (зачеркнутых)</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="514"/>
+        <location filename="../gis/search/CSearch.cpp" line="521"/>
         <source>searches the size of a geocache. (micro, small, regular, large)</source>
         <translation>поиск размера тайника (micro, small, regular, large)</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="515"/>
+        <location filename="../gis/search/CSearch.cpp" line="522"/>
         <source>searches the GCCode of a geocache.</source>
         <translation>поиск в GCCode тайника</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="516"/>
+        <location filename="../gis/search/CSearch.cpp" line="523"/>
         <source>searches the Name of a geocache.</source>
         <translation>поиск имени тайника</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="521"/>
+        <location filename="../gis/search/CSearch.cpp" line="528"/>
         <source>searches the distance covered by a route or track</source>
         <translation>поиск расстояния, пройденного маршрутом или треком</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="522"/>
+        <location filename="../gis/search/CSearch.cpp" line="529"/>
         <source>searches the total ascent in a route or track</source>
         <translation>поиск общего подъема маршрута или трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="523"/>
+        <location filename="../gis/search/CSearch.cpp" line="530"/>
         <source>searches the total descent in a route or track</source>
         <translation>поиск общего спуска маршрута или трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="524"/>
+        <location filename="../gis/search/CSearch.cpp" line="531"/>
         <source>searches the minimal elevation in a route or track</source>
         <translation>поиск минимальной высоты маршрута или трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="525"/>
+        <location filename="../gis/search/CSearch.cpp" line="532"/>
         <source>searches the maximal elevation in a route or track</source>
         <translation>поиск максимальной высоты маршрута или трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="526"/>
+        <location filename="../gis/search/CSearch.cpp" line="533"/>
         <source>searches the maximal speed in a track</source>
         <translation>поиск максимальной скорости трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="527"/>
+        <location filename="../gis/search/CSearch.cpp" line="534"/>
         <source>searches the minimal speed in a track</source>
         <translation>поиск минимальной скорости трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="528"/>
+        <location filename="../gis/search/CSearch.cpp" line="535"/>
         <source>searches the average speed in a track</source>
         <translation>поиск средней скорости трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="529"/>
+        <location filename="../gis/search/CSearch.cpp" line="536"/>
         <source>searches the activity of a route or track</source>
         <translation>поиск активности трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="530"/>
+        <location filename="../gis/search/CSearch.cpp" line="537"/>
         <source>searches the total time spent on a route or track</source>
         <translation>поиск общего времени, затраченного на трек</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="531"/>
+        <location filename="../gis/search/CSearch.cpp" line="538"/>
         <source>searches the time spent moving on a track</source>
         <translation>поиск времени, затраченного на перемещение по треку</translation>
     </message>
@@ -6746,6 +6843,90 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     </message>
 </context>
 <context>
+    <name>CSearchLineEdit</name>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="30"/>
+        <source>Clear Filter</source>
+        <translation>Очистить фильтр</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="31"/>
+        <source>Open Help Window</source>
+        <translation>Открыть окно справки</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="32"/>
+        <source>Setup Filter</source>
+        <translation>Настройка фильтра</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="33"/>
+        <source>Error parsing search</source>
+        <translation>Ошибка разбора строки поиска.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="34"/>
+        <source>Auto selected property</source>
+        <translation>Автоматически выбранное свойство</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="36"/>
+        <source>Name Only</source>
+        <translation>только к именам</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="38"/>
+        <source>Complete Text</source>
+        <translation>к полному тексту</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="40"/>
+        <source>Case Sensitive</source>
+        <translation>с учетом регистра</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="55"/>
+        <source>start typing...</source>
+        <translation>Начинайте печатать ...</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="56"/>
+        <source>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</source>
+        <translation>Фильтр: начните вводить. Список будет уменьшен до соответствующих элементов. Примером может быть &quot;дата между 2010 и 2012&quot;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="70"/>
+        <source>Apply filter to</source>
+        <translation>Применить фильтр</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="73"/>
+        <source>Case sensitivity</source>
+        <translation>Чувствительность к регистру</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="167"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="171"/>
+        <source>Error parsing search.</source>
+        <translation>Ошибка разбора строки поиска.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="167"/>
+        <source>Continuing with search for match in names</source>
+        <translation>Продолжаем поиск совпадения в именам</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="171"/>
+        <source>Continuing with search for match in full text</source>
+        <translation>Продолжение поиска совпадения в полном тексте</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="182"/>
+        <source>Automatically set the property, please make sure the results are correct.</source>
+        <translation>Автоматически установленное свойство, пожалуйста, убедитесь, что результаты верны.</translation>
+    </message>
+</context>
+<context>
     <name>CSetupDatabase</name>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="47"/>
@@ -6781,14 +6962,18 @@ For configuration you need to know your Android device&apos;s IP address or it&a
 <context>
     <name>CSetupWorkspace</name>
     <message>
-        <location filename="../gis/db/CSetupWorkspace.cpp" line="57"/>
+        <location filename="../gis/db/CSetupWorkspace.cpp" line="63"/>
         <source>Setup database...</source>
         <translation>Настройка базы данных...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupWorkspace.cpp" line="57"/>
+        <location filename="../gis/db/CSetupWorkspace.cpp" line="63"/>
+        <source>Changes to database settings will become active after an application&apos;s restart.</source>
+        <translation>Изменения в настройке базы данных станут активными после перезапуска приложения.</translation>
+    </message>
+    <message>
         <source>Changes will become active after an application&apos;s restart.</source>
-        <translation>Изменения вступят в силу после перезапуска приложения.</translation>
+        <translation type="vanished">Изменения вступят в силу после перезапуска приложения.</translation>
     </message>
 </context>
 <context>
@@ -7210,7 +7395,7 @@ line %2, column %3:
 <context>
     <name>CWptIconDialog</name>
     <message>
-        <location filename="../helpers/CWptIconDialog.cpp" line="94"/>
+        <location filename="../helpers/CWptIconDialog.cpp" line="87"/>
         <source>Path to user icons...</source>
         <translation>Путь к пользовательским пиктограммам...</translation>
     </message>
@@ -7850,27 +8035,27 @@ line %2, column %3:
         <translation>Чешский:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="189"/>
+        <location filename="../IAbout.ui" line="212"/>
         <source>Pavel Fric</source>
         <translation>Pavel Fric</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="202"/>
+        <location filename="../IAbout.ui" line="225"/>
         <source>German:</source>
         <translation>Немецкий:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="212"/>
+        <location filename="../IAbout.ui" line="235"/>
         <source>Oliver Eichler</source>
         <translation>Oliver Eichler</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="225"/>
+        <location filename="../IAbout.ui" line="195"/>
         <source>Dutch:</source>
         <translation>Голландский:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="235"/>
+        <location filename="../IAbout.ui" line="205"/>
         <source>Harrie Klomp</source>
         <translation>Harrie Klomp</translation>
     </message>
@@ -7910,42 +8095,52 @@ line %2, column %3:
         <translation>Wolfgang Thämelt</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="326"/>
+        <location filename="../IAbout.ui" line="309"/>
+        <source>Italian:</source>
+        <translation>Итальянский:</translation>
+    </message>
+    <message>
+        <location filename="../IAbout.ui" line="316"/>
+        <source>Ivo Reano</source>
+        <translation>Ivo Reano</translation>
+    </message>
+    <message>
+        <location filename="../IAbout.ui" line="340"/>
         <source>Win64:</source>
         <translation>Win64:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="342"/>
+        <location filename="../IAbout.ui" line="356"/>
         <source>OS X:</source>
         <translation>OS X:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="352"/>
+        <location filename="../IAbout.ui" line="366"/>
         <source>Helmut Schmidt</source>
         <translation>Helmut Schmidt</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="359"/>
+        <location filename="../IAbout.ui" line="373"/>
         <source>Ivo Kronenberg</source>
         <translation>Ivo Kronenberg</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="366"/>
+        <location filename="../IAbout.ui" line="380"/>
         <source>&lt;b&gt;Binaries:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Бинарники:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="375"/>
+        <location filename="../IAbout.ui" line="389"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
         <translation>... и благодарность всем поставщикам пакетов для дистрибутивов Linux за отличную работу. Особая благодарность Dan Horák и Bas Couwenberg за участие в дискуссиях о распределении QMapShack в списке рассылки.</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="395"/>
+        <location filename="../IAbout.ui" line="409"/>
         <source>&lt;b&gt;Contributors:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Участники:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="402"/>
+        <location filename="../IAbout.ui" line="416"/>
         <source>Christian Eichler (qms@christian-eichler.de)
 Ivo Kronenberg
 Norbert Truchsess (norbert.truchsess@t-online.de)</source>
@@ -7954,12 +8149,12 @@ Ivo Kronenberg
 Norbert Truchsess (norbert.truchsess@t-online.de)</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="421"/>
+        <location filename="../IAbout.ui" line="435"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Это программное обеспечение лицензировано под GPL3 или любой более поздней версией</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="428"/>
+        <location filename="../IAbout.ui" line="442"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</translation>
     </message>
@@ -8318,6 +8513,11 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../dem/IDemPropSetup.ui" line="525"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemPropSetup.ui" line="635"/>
+        <source>Elevation Limit</source>
+        <translation>Предел высоты</translation>
     </message>
 </context>
 <context>
@@ -10247,173 +10447,201 @@ I don&apos;t want to read the documentation!</source>
 <context>
     <name>IGisItem</name>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="45"/>
+        <location filename="../gis/IGisItem.cpp" line="47"/>
         <source>[no name]</source>
         <translation>[нет имени]</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="153"/>
+        <location filename="../gis/IGisItem.cpp" line="155"/>
         <source>Black</source>
         <translation>Черный</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="154"/>
+        <location filename="../gis/IGisItem.cpp" line="156"/>
         <source>Dark Red</source>
         <translation>Темно-красный</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="155"/>
+        <location filename="../gis/IGisItem.cpp" line="157"/>
         <source>Dark Green</source>
         <translation>Темно-зеленый</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="156"/>
+        <location filename="../gis/IGisItem.cpp" line="158"/>
         <source>Dark Yellow</source>
         <translation>Темно-желтый</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="157"/>
+        <location filename="../gis/IGisItem.cpp" line="159"/>
         <source>Dark Blue</source>
         <translation>Темно-синий</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="158"/>
+        <location filename="../gis/IGisItem.cpp" line="160"/>
         <source>Dark Magenta</source>
         <translation>Темно-пурпурный</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="159"/>
+        <location filename="../gis/IGisItem.cpp" line="161"/>
         <source>Dark Cyan</source>
         <translation>Темно-голубой</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="160"/>
+        <location filename="../gis/IGisItem.cpp" line="162"/>
         <source>Light Gray</source>
         <translation>Светлосерый</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="161"/>
+        <location filename="../gis/IGisItem.cpp" line="163"/>
         <source>Dark Gray</source>
         <translation>Темно-серый</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="162"/>
+        <location filename="../gis/IGisItem.cpp" line="164"/>
         <source>Red</source>
         <translation>Красный</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="163"/>
+        <location filename="../gis/IGisItem.cpp" line="165"/>
         <source>Green</source>
         <translation>Зеленый</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="164"/>
+        <location filename="../gis/IGisItem.cpp" line="166"/>
         <source>Yellow</source>
         <translation>Желтый</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="165"/>
+        <location filename="../gis/IGisItem.cpp" line="167"/>
         <source>Blue</source>
         <translation>Синий</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="166"/>
+        <location filename="../gis/IGisItem.cpp" line="168"/>
         <source>Magenta</source>
         <translation>Пурпурный</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="167"/>
+        <location filename="../gis/IGisItem.cpp" line="169"/>
         <source>Cyan</source>
         <translation>Голубой</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="168"/>
+        <location filename="../gis/IGisItem.cpp" line="170"/>
         <source>White</source>
         <translation>Белый</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="169"/>
+        <location filename="../gis/IGisItem.cpp" line="171"/>
         <source>Transparent</source>
         <translation>Прозрачный</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="363"/>
+        <location filename="../gis/IGisItem.cpp" line="365"/>
         <source>The item is not part of the project in the database.</source>
         <translation>Элемент не является частью проекта в базе данных.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="364"/>
+        <location filename="../gis/IGisItem.cpp" line="366"/>
         <source>
 It is either a new item or it has been deleted in the database by someone else.</source>
         <translation>
 Это или новый элемент, или элемент был удален из базы данных кем-то другим.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="370"/>
+        <location filename="../gis/IGisItem.cpp" line="372"/>
         <source>The item is not in the database.</source>
         <translation>Элемент не в базе данных.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="376"/>
+        <location filename="../gis/IGisItem.cpp" line="378"/>
         <source>The item might need to be saved</source>
         <translation>Возможно, нужно сохранить элемент</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="460"/>
+        <location filename="../gis/IGisItem.cpp" line="481"/>
         <source>Initial version.</source>
         <translation>Исходная версия.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="604"/>
+        <location filename="../gis/IGisItem.cpp" line="625"/>
         <source>Never ask again.</source>
         <translation>Больше не спрашивать.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="605"/>
+        <location filename="../gis/IGisItem.cpp" line="626"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Вероятно, это элемент доступен только для чтения, потому что он не был создан внутри QMapShack. Обычно нет необходимости изменить импортированные данные. Но если для вас это приемлемо нажмите &quot;Да&quot;.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="606"/>
+        <location filename="../gis/IGisItem.cpp" line="627"/>
         <source>Read Only Mode...</source>
         <translation>Режим &apos;только чтения&apos;...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="808"/>
-        <location filename="../gis/IGisItem.cpp" line="849"/>
+        <location filename="../gis/IGisItem.cpp" line="829"/>
+        <location filename="../gis/IGisItem.cpp" line="870"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Описание:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="852"/>
+        <location filename="../gis/IGisItem.cpp" line="873"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---нет описания---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="818"/>
+        <location filename="../gis/IGisItem.cpp" line="1103"/>
+        <source>Rating: </source>
+        <translation>Рейтинг:</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="1108"/>
+        <source>Keywords: </source>
+        <translation>Ключевые слова:</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="839"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Комментарий:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="828"/>
-        <location filename="../gis/IGisItem.cpp" line="863"/>
+        <location filename="../gis/IGisItem.cpp" line="849"/>
+        <location filename="../gis/IGisItem.cpp" line="884"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Ссылки:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="866"/>
+        <location filename="../gis/IGisItem.cpp" line="887"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---нет ссылок---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="1001"/>
+        <location filename="../gis/IGisItem.cpp" line="1022"/>
         <source>Edit name...</source>
         <translation>Изменить имя...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="1001"/>
+        <location filename="../gis/IGisItem.cpp" line="1022"/>
         <source>Enter new %1 name.</source>
         <translation>Задать новое имя (%1).</translation>
+    </message>
+</context>
+<context>
+    <name>IGisItemRate</name>
+    <message>
+        <location filename="../gis/IGisItemRate.ui" line="14"/>
+        <source>Dialog</source>
+        <translation>Диалог</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItemRate.ui" line="22"/>
+        <source>Set rating:</source>
+        <translation>Задать рейтинг:</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItemRate.ui" line="139"/>
+        <source>Seperate keywords by colons:</source>
+        <translation>(Разделить ключевые слова двоеточиями)</translation>
     </message>
 </context>
 <context>
@@ -10583,68 +10811,62 @@ Filename: %1</source>
         <translation>Изменить прозрачность всех элементов ГИС на карте.</translation>
     </message>
     <message>
+        <location filename="../gis/IGisWorkspace.ui" line="110"/>
+        <source>Rating</source>
+        <translation>Рейтинг</translation>
+    </message>
+    <message>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation type="vanished">Фильтр: начните вводить, и список будет уменьшен до совпадающих элементов.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="66"/>
         <source>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</source>
-        <translation>Фильтр: начните вводить. Список будет уменьшен до соответствующих элементов. Примером может быть &quot;дата между 2010 и 2012&quot;</translation>
+        <translation type="vanished">Фильтр: начните вводить. Список будет уменьшен до соответствующих элементов. Примером может быть &quot;дата между 2010 и 2012&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="69"/>
         <source>start typing...</source>
-        <translation>Начинай печатать ...</translation>
+        <translation type="vanished">Начинай печатать ...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="114"/>
+        <location filename="../gis/IGisWorkspace.ui" line="115"/>
         <source>Name</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="126"/>
         <source>Clear Filter</source>
-        <translation>Очистить фильтр</translation>
+        <translation type="vanished">Очистить фильтр</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="135"/>
         <source>Setup Filter</source>
-        <translation>Настройка фильтра</translation>
+        <translation type="vanished">Настройка фильтра</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="143"/>
         <source>name only</source>
-        <translation>только имя</translation>
+        <translation type="vanished">только имя</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="151"/>
         <source>complete text</source>
-        <translation>полный текст</translation>
+        <translation type="vanished">полный текст</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="160"/>
         <source>Help</source>
-        <translation>Справки</translation>
+        <translation type="vanished">Справки</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="163"/>
         <source>help with searching</source>
-        <translation>Помощь в поиске</translation>
+        <translation type="vanished">Помощь в поиске</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="171"/>
         <source>Case Sensitive</source>
-        <translation>Учитывать регистр</translation>
+        <translation type="vanished">Учитывать регистр</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="180"/>
         <source>Could not parse searchstring</source>
-        <translation>Не удалось разобрать строку поиска</translation>
+        <translation type="vanished">Не удалось разобрать строку поиска</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="189"/>
         <source>Automatically set property</source>
-        <translation>Автоматически установить свойство</translation>
+        <translation type="vanished">Автоматически установить свойство</translation>
     </message>
 </context>
 <context>
@@ -10835,487 +11057,492 @@ Filename: %1</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="134"/>
+        <location filename="../IMainWindow.ui" line="135"/>
         <source>Tool</source>
         <translation>Инструмент</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="154"/>
+        <location filename="../IMainWindow.ui" line="155"/>
         <source>Maps</source>
         <translation>Карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="191"/>
+        <location filename="../IMainWindow.ui" line="192"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Цифровая модель рельефа (ЦМР)</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="123"/>
-        <location filename="../IMainWindow.ui" line="224"/>
+        <location filename="../IMainWindow.ui" line="124"/>
+        <location filename="../IMainWindow.ui" line="225"/>
         <source>Workspace</source>
         <translation>Рабочая область</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="233"/>
+        <location filename="../IMainWindow.ui" line="234"/>
         <source>Toolbar</source>
         <translation>Панель инструментов</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="259"/>
+        <location filename="../IMainWindow.ui" line="260"/>
         <source>Routing</source>
         <translation>Маршрутизация</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="277"/>
+        <location filename="../IMainWindow.ui" line="278"/>
         <source>Realtime</source>
         <translation>Реальное время</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="290"/>
-        <location filename="../IMainWindow.ui" line="293"/>
+        <location filename="../IMainWindow.ui" line="291"/>
+        <location filename="../IMainWindow.ui" line="294"/>
         <source>Add Map View</source>
         <translation>Добавить окно карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="296"/>
+        <location filename="../IMainWindow.ui" line="297"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="311"/>
+        <location filename="../IMainWindow.ui" line="312"/>
         <source>Show Scale</source>
         <translation>Показать масштаб</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="323"/>
+        <location filename="../IMainWindow.ui" line="324"/>
         <source>Setup Map Font</source>
         <translation>Настройка шрифта карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="338"/>
+        <location filename="../IMainWindow.ui" line="339"/>
         <source>Show Grid</source>
         <translation>Показать координатную сетку</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="341"/>
+        <location filename="../IMainWindow.ui" line="342"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="353"/>
+        <location filename="../IMainWindow.ui" line="354"/>
         <source>Setup Grid</source>
         <translation>Настройка координатной сетки</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="356"/>
+        <location filename="../IMainWindow.ui" line="357"/>
         <source>Ctrl+Alt+G</source>
         <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="371"/>
+        <location filename="../IMainWindow.ui" line="372"/>
         <source>Flip Mouse Wheel</source>
         <translation>Флип колесо мышки</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="383"/>
-        <location filename="../IMainWindow.ui" line="386"/>
+        <location filename="../IMainWindow.ui" line="384"/>
+        <location filename="../IMainWindow.ui" line="387"/>
         <source>Setup Map Paths</source>
         <translation>Настройка пути к картам</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="401"/>
+        <location filename="../IMainWindow.ui" line="402"/>
         <source>POI Text</source>
         <translation>Текст для точек интереса</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="416"/>
+        <location filename="../IMainWindow.ui" line="417"/>
         <source>Night / Day</source>
         <translation>Ночь/день</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="431"/>
+        <location filename="../IMainWindow.ui" line="432"/>
         <source>Map Tool Tip</source>
         <translation>Подсказка карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="434"/>
+        <location filename="../IMainWindow.ui" line="435"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="446"/>
+        <location filename="../IMainWindow.ui" line="447"/>
         <source>Setup DEM Paths</source>
         <translation>Настройка пути к ЦМР</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="458"/>
+        <location filename="../IMainWindow.ui" line="459"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="470"/>
+        <location filename="../IMainWindow.ui" line="1009"/>
         <source>Help</source>
         <translation>Справки</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="473"/>
+        <location filename="../IMainWindow.ui" line="1012"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="485"/>
-        <location filename="../IMainWindow.ui" line="488"/>
+        <location filename="../IMainWindow.ui" line="483"/>
+        <location filename="../IMainWindow.ui" line="486"/>
         <source>Setup Map View</source>
         <translation>Настройка вида карт</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="500"/>
+        <location filename="../IMainWindow.ui" line="471"/>
+        <source>Online Wiki</source>
+        <translation>Онлайн вики</translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="498"/>
         <source>Load GIS Data</source>
         <translation>Загрузить данные ГИС</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="503"/>
+        <location filename="../IMainWindow.ui" line="501"/>
         <source>Load projects from file</source>
         <translation>Загрузить проекты с файла</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="506"/>
+        <location filename="../IMainWindow.ui" line="504"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="518"/>
+        <location filename="../IMainWindow.ui" line="516"/>
         <source>Save All GIS Data</source>
         <translation>Сохранить все данные ГИС</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="521"/>
+        <location filename="../IMainWindow.ui" line="519"/>
         <source>Save all projects in the workspace</source>
         <translation>Сохранить все проекты в рабочей области</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="524"/>
+        <location filename="../IMainWindow.ui" line="522"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="536"/>
+        <location filename="../IMainWindow.ui" line="534"/>
         <source>Setup Time Zone</source>
         <translation>Настройка часового пояса</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="548"/>
+        <location filename="../IMainWindow.ui" line="546"/>
         <source>Add empty project</source>
         <translation>Добавить пустой проект</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="563"/>
+        <location filename="../IMainWindow.ui" line="561"/>
         <source>Geosearch</source>
         <translation>Геопоиск</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="575"/>
+        <location filename="../IMainWindow.ui" line="573"/>
         <source>Close all projects</source>
         <translation>Закрыть все проекты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="578"/>
+        <location filename="../IMainWindow.ui" line="576"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="590"/>
+        <location filename="../IMainWindow.ui" line="588"/>
         <source>Setup Units</source>
         <translation>Настройка единиц</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="602"/>
+        <location filename="../IMainWindow.ui" line="600"/>
         <source>Setup Workspace</source>
         <translation>Настройка рабочей области</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="605"/>
+        <location filename="../IMainWindow.ui" line="603"/>
         <source>Setup save on exit.</source>
         <translation>Настройка рабочей области.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="617"/>
+        <location filename="../IMainWindow.ui" line="615"/>
         <source>Import Database from QLandkarte</source>
         <translation>Импортировать базу данных QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="620"/>
+        <location filename="../IMainWindow.ui" line="618"/>
         <source>Import QLandkarte GT database</source>
         <translation>Импортировать базу данных QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="632"/>
+        <location filename="../IMainWindow.ui" line="630"/>
         <source>VRT Builder</source>
         <translation>Создать файл VRT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="635"/>
+        <location filename="../IMainWindow.ui" line="633"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>Графический интерфейс к gdalbuildvrt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="647"/>
+        <location filename="../IMainWindow.ui" line="645"/>
         <source>Store Map View</source>
         <translation>Сохранить вид карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="650"/>
+        <location filename="../IMainWindow.ui" line="648"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Сохранить вид карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="662"/>
+        <location filename="../IMainWindow.ui" line="660"/>
         <source>Load Map View</source>
         <translation>Загрузить вид карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="665"/>
+        <location filename="../IMainWindow.ui" line="663"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translatorcomment>Tooltip??</translatorcomment>
         <translation>Загрузить вид карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="680"/>
+        <location filename="../IMainWindow.ui" line="678"/>
         <source>Track Profile as Window</source>
         <translation>Профиль трека в отдельном окне</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="683"/>
+        <location filename="../IMainWindow.ui" line="681"/>
         <source>Show the track profile in it&apos;s own window instead within the map view.</source>
         <translation>Показать профиль трека в отдельном окне, а не в виде карты.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="740"/>
+        <location filename="../IMainWindow.ui" line="738"/>
         <source>Save(Print) Map</source>
         <translation>Сохранить (распечатать) карту</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="860"/>
+        <location filename="../IMainWindow.ui" line="858"/>
         <source>Min./Max. Labels</source>
         <translation>Метки мин./макс.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="893"/>
+        <location filename="../IMainWindow.ui" line="891"/>
         <source>Track Info</source>
         <translation>Информация о треке</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="896"/>
+        <location filename="../IMainWindow.ui" line="894"/>
         <source>Select what information is shown for a highlighted track.</source>
         <translation>Выберите, какая информация отображается для выделенного трека.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="908"/>
+        <location filename="../IMainWindow.ui" line="906"/>
         <source>Track Point Info Table</source>
         <translation>Таблица с информацией о точках трека</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="911"/>
+        <location filename="../IMainWindow.ui" line="909"/>
         <source>Show a legend for all track point info bullets along the track.</source>
         <translation>Показать легенду для всех маркеров точек трека вдоль трека.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="923"/>
+        <location filename="../IMainWindow.ui" line="921"/>
         <source>Track Summary</source>
         <translation>Сводка трека</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="926"/>
+        <location filename="../IMainWindow.ui" line="924"/>
         <source>Show the track summary.</source>
         <translation>Показать сводку трека.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="938"/>
+        <location filename="../IMainWindow.ui" line="936"/>
         <source>Min./Max Summary</source>
         <translation>Сводка мин./макс.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="941"/>
+        <location filename="../IMainWindow.ui" line="939"/>
         <source>Show the minimum and the maximum values of the track properties in a table.</source>
         <translation>Показать минимальное и максимальное значения трека в таблице.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="953"/>
+        <location filename="../IMainWindow.ui" line="951"/>
         <source>Track Profile</source>
         <translation>Профиль трека</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="956"/>
+        <location filename="../IMainWindow.ui" line="954"/>
         <source>Show the track profile.</source>
         <translation>Показать профиль трека.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="965"/>
+        <location filename="../IMainWindow.ui" line="963"/>
         <source>Take Screenshot</source>
         <translation>Сделать скриншот</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="968"/>
+        <location filename="../IMainWindow.ui" line="966"/>
         <source>Take a screenshot from the current active map view.</source>
         <translation>Сделать скриншот текущего активного вида карты.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="971"/>
+        <location filename="../IMainWindow.ui" line="969"/>
         <source>Ctrl+Alt+P</source>
         <translation>Ctrl+Alt+P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="983"/>
+        <location filename="../IMainWindow.ui" line="981"/>
         <source>Track Point Info</source>
         <translation>Информация о точках трека</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="986"/>
+        <location filename="../IMainWindow.ui" line="984"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
         <translation>Отметьте точки трека дополнительной информацией с помощью автоматически пронумерованных маркеров.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="999"/>
+        <location filename="../IMainWindow.ui" line="997"/>
         <source>Track Highlight</source>
         <translation>Выделить трек</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1002"/>
+        <location filename="../IMainWindow.ui" line="1000"/>
         <source>Mark the highlighted track with a red border.</source>
         <translation>Отметить выделенный трек красной рамкой.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="686"/>
+        <location filename="../IMainWindow.ui" line="684"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="698"/>
+        <location filename="../IMainWindow.ui" line="696"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="701"/>
+        <location filename="../IMainWindow.ui" line="699"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="713"/>
+        <location filename="../IMainWindow.ui" line="711"/>
         <source>Clone Map View</source>
         <translation>Клонировать вид карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="716"/>
+        <location filename="../IMainWindow.ui" line="714"/>
         <source>Ctrl+Shift+T</source>
         <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="728"/>
+        <location filename="../IMainWindow.ui" line="726"/>
         <source>Create Routino Database</source>
         <translation>Создать базу данных Routino</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="743"/>
+        <location filename="../IMainWindow.ui" line="741"/>
         <source>Print a selected area of the map</source>
         <translation>Печатать выбранную область карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="746"/>
+        <location filename="../IMainWindow.ui" line="744"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="758"/>
+        <location filename="../IMainWindow.ui" line="756"/>
         <source>Setup Coord. Format</source>
         <translation>Настройка формата координат</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="761"/>
+        <location filename="../IMainWindow.ui" line="759"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Изменить формат отображения координат</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="773"/>
+        <location filename="../IMainWindow.ui" line="771"/>
         <source>Setup Map Background</source>
         <translation>Настройка фона карт</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="785"/>
+        <location filename="../IMainWindow.ui" line="783"/>
         <source>Setup Waypoint Icons</source>
         <translation>Настройка пиктограмм для маршрутных точек</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="788"/>
+        <location filename="../IMainWindow.ui" line="786"/>
         <source>Setup path to custom icons</source>
         <translation>Настройка пути к пользовательским пиктограммам</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="797"/>
+        <location filename="../IMainWindow.ui" line="795"/>
         <source>Close Tab</source>
         <translation>Закрыть вкладку</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="800"/>
+        <location filename="../IMainWindow.ui" line="798"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="809"/>
+        <location filename="../IMainWindow.ui" line="807"/>
         <source>Quickstart Help</source>
         <translation>Помощь для быстрого старта</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="818"/>
+        <location filename="../IMainWindow.ui" line="816"/>
         <source>Setup Toolbar</source>
         <translation>Настройка панели инструментов</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="830"/>
+        <location filename="../IMainWindow.ui" line="828"/>
         <source>Toggle Docks</source>
         <translation>Переключить закреплённые окна</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="833"/>
+        <location filename="../IMainWindow.ui" line="831"/>
         <source>Toggle visibility of dockable windows</source>
         <translation>Переключить видимость закреплённых окон</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="836"/>
+        <location filename="../IMainWindow.ui" line="834"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="845"/>
+        <location filename="../IMainWindow.ui" line="843"/>
         <source>Full Screen</source>
         <translation>Во весь экран</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="848"/>
+        <location filename="../IMainWindow.ui" line="846"/>
         <source>F11</source>
         <translation>F11</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="863"/>
+        <location filename="../IMainWindow.ui" line="861"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
         <translation>Показать минимальные и максимальные значения свойств трека в просмотре карт.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="866"/>
+        <location filename="../IMainWindow.ui" line="864"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="875"/>
+        <location filename="../IMainWindow.ui" line="873"/>
         <source>Start QMapTool</source>
         <translation>Запуск QMapTool</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="884"/>
+        <location filename="../IMainWindow.ui" line="882"/>
         <source>Change Map View Name</source>
         <translation>Изменить имя вида на карту</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="247"/>
+        <location filename="../IMainWindow.ui" line="248"/>
         <source>Database</source>
         <translation>База данных</translation>
     </message>
@@ -12898,33 +13125,39 @@ or
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="43"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="57"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="71"/>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="92"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="85"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="106"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="120"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
+        <source>Set tags and rating.</source>
+        <translation>Установить теги и рейтинг.</translation>
+    </message>
+    <message>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
         <source>Copy area into another project.</source>
         <translation>Копировать область в другой проект.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="82"/>
         <source>Delete area from project.</source>
         <translation>Удалить область с проекта.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="89"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="103"/>
         <source>Edit shape of the area.</source>
         <translation>Изменить фигуру области.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="103"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="117"/>
         <source>Toggle Nogo-Area</source>
         <translation>Переключить запретную зону</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="138"/>
+        <location filename="../gis/ovl/IScrOptOvlArea.ui" line="152"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>
@@ -13034,58 +13267,64 @@ or
         <location filename="../gis/rte/IScrOptRte.ui" line="43"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="57"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="71"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="89"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="106"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="85"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="103"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="120"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="148"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="162"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="176"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="190"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="54"/>
+        <source>Set tags and rating.</source>
+        <translation>Установить теги и рейтинг.</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/IScrOptRte.ui" line="68"/>
         <source>Copy route into another project.</source>
         <translation>Скопировать маршрут в другой проект.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="68"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="82"/>
         <source>Delete route from project.</source>
         <translation>Удалить маршрут с проекта.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="103"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="117"/>
         <source>Calculate route.</source>
         <translation>Вычислить маршрут.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="117"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="131"/>
         <source>Reset route calculation.</source>
         <translation>Сбросить маршрутизацию.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="131"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
         <source>Move route points.</source>
         <translation>Переместить точки маршрута.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="159"/>
         <source>Reverse Route</source>
         <translation>Обратить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="159"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="173"/>
         <source>Convert route to track</source>
         <translation>Преобразовать маршрут в трек</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="173"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="187"/>
         <source>Toggle Nogo-Line</source>
         <translation>Переключить запретную линию</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="205"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="219"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>
@@ -13306,38 +13545,44 @@ or
         <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="57"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="71"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="92"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="117"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="136"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="85"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="131"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="150"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="164"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="183"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="178"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="197"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="211"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="225"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="239"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="253"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="267"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="281"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
+        <source>Set tags and rating.</source>
+        <translation>Установить теги и рейтинг.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
         <source>Copy track into another project.</source>
         <translation>Скопировать трек в другой проект.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="82"/>
         <source>Delete track from project.</source>
         <translation>Удалить трек с проекта.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="89"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="103"/>
         <source>Show on-screen profile and detailed information about points.</source>
         <translation>Показать на экране профиль и подробные сведения о точках.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
         <source>Select a range of points. You can use that tool to:
 
 * Hide or show points of a track. 
@@ -13359,7 +13604,7 @@ this is the right tool. Simply select the section of bad points
 (возможно и лишь одну точку) и скройте их.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="128"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="142"/>
         <source>Edit the position of track points and use automatic routing 
 to create new track points. This is used to create new tracks 
 to plan a tour.
@@ -13375,17 +13620,17 @@ recording. Use the range tool. </source>
 Используйте для этого инструмент интервала.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="147"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="161"/>
         <source>Reverse track.</source>
         <translation>Обратить трек.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="161"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="175"/>
         <source>Combine tracks.</source>
         <translation>Объединить треки.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="175"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="189"/>
         <source>Cut track at selected point. You can use this to:
 
 * remove bad points at the start or end of the track
@@ -13400,37 +13645,37 @@ recording. Use the range tool. </source>
 </translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="194"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="208"/>
         <source>Set an activity for the complete track.</source>
         <translation>Установить активность для всего трека.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="208"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
         <source>Add a description to the selected track point. The track point will be marked with an auto-numbered bullet. A table with all descriptions will be shown in the track details dialog and for highlighted tracks in the map view.</source>
         <translation>Добавить описание к выбранной точке трека. Точка трека будет отмечена маркером с автоматическим номером. Таблица со всеми описаниями будет показана в окне редактирования трека и для выделенных треков в виде карты.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="236"/>
         <source>Change the color of the track.</source>
         <translation>Изменить цвет трека.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="236"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="250"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
         <translation>Заменить высоты данными файлов ЦМР для вида.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="250"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="264"/>
         <source>Copy track together with all attached waypoints into another project.</source>
         <translation>Скопировать трек вместе со всеми присоединёнными маршрутными точками в другой проект.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="264"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="278"/>
         <source>Toggle Nogo-Line</source>
         <translation>Переключить запретную линию</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="296"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="310"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>
@@ -13451,74 +13696,80 @@ recording. Use the range tool. </source>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="52"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="66"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="80"/>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="101"/>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="118"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="94"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="115"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="132"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="146"/>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="167"/>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="198"/>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="222"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="160"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="181"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="212"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="236"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="250"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="63"/>
+        <source>Set tags and rating.</source>
+        <translation>Установить теги и рейтинг.</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
         <source>Copy waypoint into another project.</source>
         <translation>Скопировать маршрутную точку в другой проект.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="91"/>
         <source>Delete waypoint from project.</source>
         <translation>Удалить маршрутную точку с проекта.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="98"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="112"/>
         <source>Show content as static bubble.</source>
         <translation>Показать содержимое в статическом пузырьке.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="115"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
         <source>Move waypoint to a new location.</source>
         <translation>Переместить маршрутную точку в новую позицию.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="143"/>
         <source>Clone waypoint and move clone a given distance and angle.</source>
         <translation>Клонировать маршрутную точку и переместить клон на данное расстояние под указанным углом.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="143"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="157"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
         <translation>Заменить высоты данными файлов ЦМР для вида.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="164"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="178"/>
         <source>edit radius of circular area</source>
         <translation>Изменить радиус круга близости</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="195"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="209"/>
         <source>Switch between proximity and nogo-area</source>
         <translation>Переключить между кругом близости и запретной зоной</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="181"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="195"/>
         <source>Delete circle defined by waypoint</source>
         <translation>Удалить круг близости маршрутной точки</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="219"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="233"/>
         <source>Search for information about the waypoint&apos;s position on selected websites.</source>
         <translation>Поиск информации о местоположении маршрутной точки на выбранных веб-сайтах.</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="233"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="247"/>
         <source>Copy position of waypoint to Clipboard.</source>
         <translation>Скопировать позицию маршрутной точки в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="280"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="294"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>
@@ -13620,7 +13871,7 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <translation>Справки</translation>
     </message>
     <message>
-        <location filename="../gis/search/ISearchExplanationDialog.ui" line="33"/>
+        <location filename="../gis/search/ISearchExplanationDialog.ui" line="44"/>
         <source>Following keywords are available for searching:</source>
         <translation>Для поиска доступны следующие ключевые слова (налево: свойство, направо: сравнение):</translation>
     </message>
@@ -13649,45 +13900,45 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <translation>Скопировать элемент...</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectCopyAction.ui" line="29"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="91"/>
         <source>Replace existing item</source>
         <translation>Заменить существующий элемент</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectCopyAction.ui" line="36"/>
-        <location filename="../helpers/ISelectCopyAction.ui" line="46"/>
-        <location filename="../helpers/ISelectCopyAction.ui" line="79"/>
-        <location filename="../helpers/ISelectCopyAction.ui" line="89"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="45"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="104"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="179"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="189"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectCopyAction.ui" line="72"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="32"/>
         <source>Do not copy item</source>
         <translation>Не копировать элемент</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectCopyAction.ui" line="115"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="149"/>
         <source>Create a clone</source>
         <translation>Создать клон</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectCopyAction.ui" line="122"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="130"/>
         <source>Replace with:</source>
         <translation>Заменить на:</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectCopyAction.ui" line="129"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="65"/>
         <source>Keep item:</source>
         <translation>Оставить элемент:</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectCopyAction.ui" line="136"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="162"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
         <translation>&apos;_клон&apos; будет добавлено к имени клона</translation>
     </message>
     <message>
-        <location filename="../helpers/ISelectCopyAction.ui" line="153"/>
+        <location filename="../helpers/ISelectCopyAction.ui" line="123"/>
         <source>And for all other items, too.</source>
         <translation>Также для всех остальных элементов.</translation>
     </message>
@@ -14011,6 +14262,11 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/db/ISetupWorkspace.ui" line="119"/>
         <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
         <translation>Включить поддержку устройств. Если выбрано включение, тогда устройство будет автоматически обнаружено при подключении. Структура файлов на устройстве будет проанализирована, и все проекты будут загружены и показаны в списке. В зависимости от устройства QMapShack добавит необходимую логику, например, свяжет картинки с путевыми точками и т.д.</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/ISetupWorkspace.ui" line="131"/>
+        <source>Show tags in workspace tree. Not recommended for small screens.</source>
+        <translation>Показывать теги в рабочем пространстве. Не рекомендуется для маленьких экранов.</translation>
     </message>
 </context>
 <context>
@@ -14456,18 +14712,18 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="905"/>
-        <location filename="../units/IUnit.cpp" line="911"/>
+        <location filename="../units/IUnit.cpp" line="941"/>
+        <location filename="../units/IUnit.cpp" line="947"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="905"/>
+        <location filename="../units/IUnit.cpp" line="941"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Неверный формат позиции. Должен быть: &quot;[С|Ю] ddd mm.sss [З|В] ddd mm.sss&quot; или &quot;[С|Ю] ddd.ddd [З|В] ddd.ddd&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="911"/>
+        <location filename="../units/IUnit.cpp" line="947"/>
         <source>Position values out of bounds. </source>
         <translation>Значения позиции вне допустимого интервала.</translation>
     </message>
@@ -14500,22 +14756,27 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <translation>Метрические</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="52"/>
+        <location filename="../units/IUnitsSetup.ui" line="51"/>
+        <source>Aviation (nm, feet)</source>
+        <translation>Авиация (nm, feet)</translation>
+    </message>
+    <message>
+        <location filename="../units/IUnitsSetup.ui" line="59"/>
         <source>Slope unit</source>
         <translation>Единица спуска</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="58"/>
+        <location filename="../units/IUnitsSetup.ui" line="65"/>
         <source>Degrees (°)</source>
         <translation>Градус (°)</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="65"/>
+        <location filename="../units/IUnitsSetup.ui" line="72"/>
         <source>Percent (%)</source>
         <translation>Процент (%)</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="95"/>
+        <location filename="../units/IUnitsSetup.ui" line="102"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation>&lt;b&gt;Примечание:&lt;/b&gt; Изменение единиц для некоторых элементов графического пользовательского интерфейса вступят в силу только после перезапуска QMapShack.</translation>
     </message>

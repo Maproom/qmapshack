@@ -207,6 +207,45 @@
     </message>
 </context>
 <context>
+    <name>CHelp</name>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="31"/>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="46"/>
+        <source>Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="47"/>
+        <source>Index</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelp.cpp" line="48"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CHelpIndex</name>
+    <message>
+        <location filename="../../common/help/CHelpIndex.cpp" line="29"/>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CHelpSearch</name>
+    <message>
+        <location filename="../../common/help/CHelpSearch.cpp" line="31"/>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CItemListWidget</name>
     <message>
         <location filename="../items/CItemListWidget.cpp" line="103"/>
@@ -804,55 +843,65 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="67"/>
+        <location filename="../IMainWindow.ui" line="68"/>
         <source>Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="100"/>
+        <location filename="../IMainWindow.ui" line="101"/>
         <source>Shell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="119"/>
+        <location filename="../IMainWindow.ui" line="120"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="128"/>
+        <location filename="../IMainWindow.ui" line="129"/>
         <source>Ext. Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="131"/>
+        <location filename="../IMainWindow.ui" line="132"/>
         <source>Setup paths to external tools, like gdalwarp etc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="143"/>
-        <location filename="../IMainWindow.ui" line="146"/>
+        <location filename="../IMainWindow.ui" line="144"/>
+        <location filename="../IMainWindow.ui" line="147"/>
         <source>Flip Mouse Wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="155"/>
-        <location filename="../IMainWindow.ui" line="158"/>
+        <location filename="../IMainWindow.ui" line="156"/>
+        <location filename="../IMainWindow.ui" line="159"/>
         <source>Setup Units</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="167"/>
+        <location filename="../IMainWindow.ui" line="168"/>
         <source>Setup Coord. Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="170"/>
+        <location filename="../IMainWindow.ui" line="171"/>
         <source>Change the format coordinates are displayed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="181"/>
+        <location filename="../IMainWindow.ui" line="182"/>
         <source>Show Tool Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="191"/>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="194"/>
+        <source>F1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -474,7 +474,7 @@ void CGisItemWpt::setIcon()
         }
         else
         {
-            IGisItem::setIcon(CWptIconManager::self().getWptIconByName("gray:"+geocache.type, focus));
+            IGisItem::setIcon(CWptIconManager::self().getWptIconByName("gray_"+geocache.type, focus));
         }
     }
     else

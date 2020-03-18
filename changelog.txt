@@ -18,6 +18,8 @@ V1.XX.X
 [QMS-118] Too much whitespace in extended search help window
 [QMS-119] Better handling of disabled and archived geocaches
 [QMS-125] Missing icon for not available geocache
+[QMS-126] Wrong results searching for geocache status
+
 
 V1.14.0
 [QMS-5] App crashes on using the "Change Start Point" filter

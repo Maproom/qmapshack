@@ -31,6 +31,7 @@ rem Section 2.1) Copy Qt files
 rem Note: Qt5WebEngine deployment is super crazy - see https://doc.qt.io/qt-5.12/qtwebengine-deploying.html
 copy %QMSI_QT_PATH%\bin\Qt5Core.dll
 copy %QMSI_QT_PATH%\bin\Qt5Gui.dll
+copy %QMSI_QT_PATH%\bin\Qt5Help.dll
 copy %QMSI_QT_PATH%\bin\Qt5Multimedia.dll
 copy %QMSI_QT_PATH%\bin\Qt5MultimediaWidgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Network.dll
@@ -141,6 +142,15 @@ copy %QMSI_BUILD_PATH%\bin\Release\qmt_rgb2pct.exe
 copy %QMSI_BUILD_PATH%\src\qmapshack\*.qm translations
 copy %QMSI_BUILD_PATH%\src\qmaptool\*.qm translations
 copy ..\*.ico
+
+rem section 2.4.1) Copy the documentation files
+mkdir doc
+cd doc
+mkdir HTML
+copy ..\..\..\src\qmapshack\doc\QMSHelp.* HTML
+copy ..\..\..\src\qmaptool\doc\QMTHelp.* HTML
+cd ..
+
 
 rem section 2.5) 3rd party SW description
 copy ..\3rdparty.txt

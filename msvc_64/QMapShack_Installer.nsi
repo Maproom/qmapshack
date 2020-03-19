@@ -122,12 +122,16 @@ Section "QMapShack" QMapShack
   SetOutPath "$INSTDIR\translations"
     File Files\translations\qmapshack_*.qm
     File Files\translations\qmaptool_*.qm
-  ;END QMapShack Files    
-   
+  SetOutPath "$INSTDIR\doc\HTML"
+    File Files\doc\HTML\QMSHelp.*
+    File Files\doc\HTML\QMTHelp.*
+  ;END QMapShack Files
+
   ;BEGIN Qt Files
   SetOutPath $INSTDIR
     File Files\Qt5Core.dll
     File Files\Qt5Gui.dll
+    File Files\Qt5Help.dll
     File Files\Qt5Multimedia.dll
     File Files\Qt5MultimediaWidgets.dll
     File Files\Qt5Network.dll

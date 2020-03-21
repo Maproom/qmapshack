@@ -9,7 +9,7 @@ I added...
 1. Open whatever
 2. Click here
 
-**Does the code comply to the coding rules and naming conventions [Coding Guidleines](https://github.com/Maproom/qmapshack/wiki/DeveloperCodingGuideline):**
+**Does the code comply to the coding rules and naming conventions [Coding Guidelines](https://github.com/Maproom/qmapshack/wiki/DeveloperCodingGuideline):**
 
 - [ ] yes
 

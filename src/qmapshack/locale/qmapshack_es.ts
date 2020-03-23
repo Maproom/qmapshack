@@ -936,7 +936,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/db/CExportDatabase.cpp" line="90"/>
         <source>Select export path...</source>
-        <translation>Seleccionar ruta de exportación ...</translation>
+        <translation>Seleccionar ruta de exportación...</translation>
     </message>
 </context>
 <context>
@@ -1030,7 +1030,7 @@ The purpose of this filter is to split the input track into several separate tra
 This filter detects loops by looking for intersections. A new track is created as soon as an intersection is detected.
 
 The only input parameter is minimum loop length: this is to prevent cutting tracks in tight switchbacks, where recorded tracks can be made of tiny loops. These loops will be ignored if their lengths are smaller that the given value.</source>
-        <translation>A menudo los tracks tiene bucles.
+        <translation>A menudo los tracks tienen bucles.
 
 Por ejemplo, una salida en BTT en la que se utiliza una misma pista forestal para ascender a un sitio desde el que comienzan varios senderos por los que se desciende para después volver a coger la misma pista una y otra vez. Un track de este tipo consta de varios bucles y resulta muy difícil de seguir en un dispositivo Garmin, ya que es imposible saber en que orden se deben hacer cada uno de ellos.
 
@@ -1038,7 +1038,7 @@ La utilidad de este filtro es la de dividir un track con esta particularidad en 
 
 El filtro detecta los bucles buscando las intersecciones, cuando halla una crea un nuevo track.
 
-El único valor a introducir es la longitud mínima del bucle: Esto sirve para evitar la creación de nuevos tracks ante pequeños bucles, que seran ignorados si su longitud es menor que la del parámetro dado.</translation>
+El único valor a introducir es la longitud mínima del bucle: Esto sirve para evitar la creación de nuevos tracks ante pequeños bucles, que serán ignorados si su longitud es menor que la del parámetro dado.</translation>
     </message>
 </context>
 <context>
@@ -2025,12 +2025,12 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="347"/>
         <source>Last found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Último encontrado: %1</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="357"/>
         <source>Project created: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Proyecto creado: %1</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="407"/>
@@ -2321,7 +2321,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1173"/>
         <source>Field Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieza de puzzle</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1174"/>
@@ -2386,12 +2386,12 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1186"/>
         <source>Wireless Beacon</source>
-        <translation type="unfinished"></translation>
+        <translation>Baliza inalámbrica</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1187"/>
         <source>Partnership cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Cache de club</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1188"/>
@@ -2401,7 +2401,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1189"/>
         <source>Tourist Friendly</source>
-        <translation>Amigable para turistas</translation>
+        <translation>Apto para turistas</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1190"/>
@@ -2739,12 +2739,12 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="116"/>
         <source>Sort by Rating</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordenar por puntuación</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Filter Project</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtro de proyectos</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="121"/>
@@ -2769,7 +2769,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="136"/>
         <source>Set Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetar</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="141"/>
@@ -3064,17 +3064,17 @@ línea %2, columna %3.
     <message>
         <location filename="../../common/help/CHelp.cpp" line="46"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Contenido</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelp.cpp" line="47"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Índice</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelp.cpp" line="48"/>
         <source>Search</source>
-        <translation type="unfinished">Buscar</translation>
+        <translation>Buscar</translation>
     </message>
 </context>
 <context>
@@ -3082,7 +3082,7 @@ línea %2, columna %3.
     <message>
         <location filename="../../common/help/CHelpIndex.cpp" line="29"/>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar:</translation>
     </message>
 </context>
 <context>
@@ -3090,7 +3090,7 @@ línea %2, columna %3.
     <message>
         <location filename="../../common/help/CHelpSearch.cpp" line="31"/>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar:</translation>
     </message>
 </context>
 <context>
@@ -6161,7 +6161,7 @@ Para vincular el dispositivo con Qmapshack:
         <location filename="../gis/search/CSearch.cpp" line="389"/>
         <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>containing</source>
-        <translatorcomment>se unifca con contiene</translatorcomment>
+        <translatorcomment>se unifica con contiene</translatorcomment>
         <translation>contiene</translation>
     </message>
     <message>
@@ -6306,17 +6306,17 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="420"/>
         <source>example: keywords contain bike</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">ej: palabras clave contiene bici</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>example: name containing bike</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">ej: nombre contiene bici</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>example: name without water</source>
-        <translation>ej: nombre sin variante</translation>
+        <translation>ej: nombre sin agua</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="423"/>
@@ -6458,12 +6458,12 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="457"/>
         <source>rating</source>
-        <translation type="unfinished"></translation>
+        <translation>Puntuación</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="458"/>
         <source>keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Palabra clave</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="461"/>
@@ -6655,12 +6655,12 @@ Para vincular el dispositivo con Qmapshack:
     <message>
         <location filename="../gis/search/CSearch.cpp" line="510"/>
         <source>searches the Keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>buscar palabras clave</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="511"/>
         <source>compares the Rating</source>
-        <translation type="unfinished"></translation>
+        <translation>buscar por puntuación</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="514"/>
@@ -6852,83 +6852,83 @@ Ten en cuenta que para hacer la comparación las horas que indiques se trasladan
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="30"/>
         <source>Clear Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar filtro</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="31"/>
         <source>Open Help Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir ventana de ayuda</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="32"/>
         <source>Setup Filter</source>
-        <translation type="unfinished">Configurar filtro</translation>
+        <translation>Configurar filtro</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="33"/>
         <source>Error parsing search</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en la búsqueda</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="34"/>
         <source>Auto selected property</source>
-        <translation type="unfinished"></translation>
+        <translation>Selección de propiedades automática</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="36"/>
         <source>Name Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo nombre</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="38"/>
         <source>Complete Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto completo</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="40"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished">Distinguir mayúsculas y minúsculas</translation>
+        <translation>Distinguir mayúsculas y minúsculas</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="55"/>
         <source>start typing...</source>
-        <translation type="unfinished">Escribir...</translation>
+        <translation>Escribir...</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="56"/>
         <source>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</source>
-        <translation type="unfinished">Filtro: Comienza a escribir y la lista solo mostrará aquellos elementos que cumplan la condición. Ejemplo: Altitud entre 1000 y 1500 m</translation>
+        <translation>Filtro: Comienza a escribir y la lista solo mostrará aquellos elementos que cumplan la condición. Ejemplo: Altitud entre 1000 y 1500 m</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="70"/>
         <source>Apply filter to</source>
-        <translation type="unfinished">Aplicar filtro a</translation>
+        <translation>Aplicar filtro a</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="73"/>
         <source>Case sensitivity</source>
-        <translation type="unfinished">Distinguir mayúsculas y minúsculas</translation>
+        <translation>Distinguir mayúsculas y minúsculas</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="167"/>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="171"/>
         <source>Error parsing search.</source>
-        <translation type="unfinished">Error al realizar la búsqueda.</translation>
+        <translation>Error en la búsqueda.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="167"/>
         <source>Continuing with search for match in names</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar búsqueda para coincidencias en los nombres</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="171"/>
         <source>Continuing with search for match in full text</source>
-        <translation type="unfinished">Continuar busqueda para coincidencias en el texto completo</translation>
+        <translation>Continuar búsqueda para coincidencias en el texto completo</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="182"/>
         <source>Automatically set the property, please make sure the results are correct.</source>
-        <translation type="unfinished">La propiedad de busqueda se deduce de las unidades. Verifica que los resultados son correctos</translation>
+        <translation>La propiedad de búsqueda se deduce de las unidades. Verifica que los resultados son correctos</translation>
     </message>
 </context>
 <context>
@@ -6974,7 +6974,7 @@ Ten en cuenta que para hacer la comparación las horas que indiques se trasladan
     <message>
         <location filename="../gis/db/CSetupWorkspace.cpp" line="63"/>
         <source>Changes to database settings will become active after an application&apos;s restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Los cambios en la base de datos surtirán efecto tras reiniciar la aplicación.</translation>
     </message>
     <message>
         <source>Changes will become active after an application&apos;s restart.</source>
@@ -8076,7 +8076,7 @@ línea %2, columna %3.
     <message>
         <location filename="../IAbout.ui" line="309"/>
         <source>Italian:</source>
-        <translation type="unfinished"></translation>
+        <translation>Italiano:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="316"/>
@@ -8518,7 +8518,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="635"/>
         <source>Elevation Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite de altitud</translation>
     </message>
 </context>
 <context>
@@ -9074,7 +9074,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Diálogo</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="106"/>
@@ -9188,7 +9188,7 @@ I don&apos;t want to read the documentation!</source>
     <name>IEnergyCyclingDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="obsolete">Diálogo</translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="44"/>
@@ -10288,7 +10288,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="112"/>
         <source>To add a database do a right click on the database list above.</source>
-        <translation>Para añadir una base de datos haga click con el botón derecho en la lista de bases de datos.</translation>
+        <translation>Para añadir una base de datos hacer click con el botón derecho en la lista de bases de datos.</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="135"/>
@@ -10445,12 +10445,12 @@ Es un elemento nuevo o ha sido eliminado en la base de datos por alguien.</trans
     <message>
         <location filename="../gis/IGisItem.cpp" line="1103"/>
         <source>Rating: </source>
-        <translation type="unfinished"></translation>
+        <translation>Puntuación</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="1108"/>
         <source>Keywords: </source>
-        <translation type="unfinished"></translation>
+        <translation>Palabras clave:</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="839"/>
@@ -10484,17 +10484,17 @@ Es un elemento nuevo o ha sido eliminado en la base de datos por alguien.</trans
     <message>
         <location filename="../gis/IGisItemRate.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Diálogo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="22"/>
         <source>Set rating:</source>
-        <translation type="unfinished"></translation>
+        <translation>Puntuación: </translation>
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="139"/>
         <source>Seperate keywords by colons:</source>
-        <translation type="unfinished"></translation>
+        <translation>Separar palabras clave con dos puntos:</translation>
     </message>
 </context>
 <context>
@@ -12375,7 +12375,7 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="51"/>
         <source>Language</source>
-        <translation>Lenguaje</translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterMapQuest.ui" line="58"/>
@@ -12989,7 +12989,7 @@ o
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
         <source>Set tags and rating.</source>
-        <translation type="unfinished"></translation>
+        <translation>Poner etiquetas y puntuación.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
@@ -13141,7 +13141,7 @@ o
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="54"/>
         <source>Set tags and rating.</source>
-        <translation type="unfinished"></translation>
+        <translation>Poner etiquetas y puntuación.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="82"/>
@@ -13423,7 +13423,7 @@ o
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
         <source>Set tags and rating.</source>
-        <translation type="unfinished"></translation>
+        <translation>Poner etiquetas y puntuación.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
@@ -13566,7 +13566,7 @@ Añadir una breve descripción a un punto y marcarlo con una etiqueta auto-numer
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="63"/>
         <source>Set tags and rating.</source>
-        <translation type="unfinished"></translation>
+        <translation>Poner etiquetas y puntuación.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
@@ -14121,7 +14121,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="131"/>
         <source>Show tags in workspace tree. Not recommended for small screens.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar etiquetas en el espacio de trabajo. No recomendado para pantallas pequeñas</translation>
     </message>
 </context>
 <context>

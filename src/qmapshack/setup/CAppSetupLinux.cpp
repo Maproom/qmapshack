@@ -18,6 +18,7 @@
 
 #include "config.h"
 #include "CAppSetupLinux.h"
+#include "version.h"
 
 #ifndef _MKSTR_1
 #define _MKSTR_1(x)    #x
@@ -65,4 +66,10 @@ QString CAppSetupLinux::userDataPath(QString subdir)
 QString CAppSetupLinux::logDir()
 {
     return QDir::temp().absolutePath();
+}
+
+QString CAppSetupLinux::helpFile()
+{
+    QDir dir(_MKSTR(HELPPATH));
+    return dir.absoluteFilePath("QMSHelp.qhc");
 }

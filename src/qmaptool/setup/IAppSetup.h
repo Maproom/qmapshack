@@ -174,6 +174,8 @@ public:
         return !pathQmtmap2jnxOverride.isEmpty();
     }
 
+
+    virtual QString helpFile() = 0;
 signals:
     void sigSetupChanged();
 

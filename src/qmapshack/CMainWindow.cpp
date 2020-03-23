@@ -1848,7 +1848,11 @@ void CMainWindow::slotHelp()
 {
     if(help.isNull())
     {
-        help = new CHelp(_MKSTR(HELPPATH) "/QMSHelp.qhc", "qthelp://qms/doc/doc/html/DocMain.html", this);
+        help = new CHelp(
+            IAppSetup::getPlatformInstance()->helpFile(),
+            "qthelp://qms/doc/doc/html/DocMain.html",
+            this
+            );
         addDockWidget(Qt::AllDockWidgetAreas, help);
     }
 

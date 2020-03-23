@@ -60,3 +60,9 @@ QString CAppSetupLinux::logDir()
 {
     return QDir::temp().absolutePath();
 }
+
+QString CAppSetupLinux::helpFile()
+{
+    QDir dir(_MKSTR(HELPPATH));
+    return dir.absoluteFilePath("QMTHelp.qhc");
+}

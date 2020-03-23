@@ -32,6 +32,7 @@ public:
     QString userDataPath(QString subdir = 0) override;
     QString logDir() override;
     QString findExecutable(const QString &name) override;
+    QString helpFile() override;
 
     QByteArray path;
 };

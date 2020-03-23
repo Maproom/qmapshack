@@ -18,6 +18,7 @@
 
 #include "config.h"
 #include "CAppSetupWin.h"
+#include "version.h"
 
 
 void CAppSetupWin::initQMapShack()
@@ -77,3 +78,11 @@ QString CAppSetupWin::findExecutable(const QString &name)
 {
     return QStandardPaths::findExecutable(name);
 }
+
+QString CAppSetupWin::helpFile()
+{
+    QDir dirApp(QCoreApplication::applicationDirPath());
+    QDir dirHelp(dirApp.absoluteFilePath(_MKSTR(HELPPATH)));
+    return dirHelp.absoluteFilePath("QMSHelp.qhc");
+}
+

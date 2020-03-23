@@ -18,8 +18,10 @@
 
 #include "CAbout.h"
 #include "CMainWindow.h"
+#include "help/CHelp.h"
 #include "helpers/CSettings.h"
 #include "setup/CSetupExtTools.h"
+#include "setup/IAppSetup.h"
 #include "tool/CToolAddOverview.h"
 #include "tool/CToolBox.h"
 #include "tool/CToolCutMap.h"
@@ -31,14 +33,13 @@
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
 #include "version.h"
-#include "help/CHelp.h"
 
 CMainWindow * CMainWindow::pSelf = nullptr;
 
 CMainWindow::CMainWindow()
 {
     SETTINGS;
-    IUnit::setUnitType((IUnit::type_e)cfg.value("Units/units",IUnit::eTypeMetric).toInt(), this);
+    IUnit::setUnitType((IUnit::type_e)cfg.value("Units/units", IUnit::eTypeMetric).toInt(), this);
     IUnit::setCoordFormat((IUnit::coord_format_e)cfg.value("Units/coordFormat", IUnit::eCoordFormat1).toInt());
 
     pSelf = this;
@@ -95,7 +96,7 @@ CMainWindow::CMainWindow()
     }
     // end ---- restore window geometry -----
     //toolStack->setCurrentIndex(cfg.value("Tool/Stack/current",0).toInt());
-    toolBox->setCurrentIndex(cfg.value("Tool/Box/current",0).toInt());
+    toolBox->setCurrentIndex(cfg.value("Tool/Box/current", 0).toInt());
     actionShowToolHelp->setChecked(cfg.value("Tool/showHelp", true).toBool());
     mapFont = cfg.value("Canvas/mapFont", font()).value<QFont>();
     actionFlipMouseWheel->setChecked(cfg.value("Canvas/flipMouseWheel", false).toBool());
@@ -187,7 +188,11 @@ void CMainWindow::slotHelp()
 {
     if(help.isNull())
     {
-        help = new CHelp(_MKSTR(HELPPATH) "/QMTHelp.qhc", "qthelp://qmt/doc/doc/html/QMapTool/QMTDocMain.html", this);
+        help = new CHelp(
+            IAppSetup::self().helpFile(),
+            "qthelp://qmt/doc/doc/html/QMapTool/QMTDocMain.html",
+            this
+            );
         addDockWidget(Qt::AllDockWidgetAreas, help);
     }
 

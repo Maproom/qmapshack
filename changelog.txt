@@ -1,4 +1,6 @@
 V1.XX.X
+
+V1.14.1
 [QMS-37] Inconsistent use of time zones
 [QMS-43] Individual filter for each project
 [QMS-49] Add "elevation limit" to DEM to highlight elevation above the limit

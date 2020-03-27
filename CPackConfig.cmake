@@ -18,7 +18,7 @@ set(CPACK_PACKAGE_INSTALL_DIRECTORY "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSI
 
 ### source package settings
 set(CPACK_SOURCE_GENERATOR "TGZ")
-set(CPACK_SOURCE_IGNORE_FILES "~$;[.]swp$;/[.]svn/;/[.]git/;[.]hg/;[.]hgsub;[.]hgsubstate;.gitignore;/build/;tags;cscope.*;[.]rej$;[.]orig$;svn-commit[.];/doc/")
+set(CPACK_SOURCE_IGNORE_FILES "~$;[.]swp$;/[.]svn/;/[.]git/;[.]hg/;[.]hgsub;[.]hgsubstate;.gitignore;/build/;tags;cscope.*;[.]rej$;[.]orig$;svn-commit[.]")
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
 
 include(CPack)

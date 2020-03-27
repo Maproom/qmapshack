@@ -10381,7 +10381,7 @@ Buď je to nový prvek nebo byl v databázi někým smazán.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="139"/>
-        <source>Seperate keywords by colons:</source>
+        <source>Separate keywords by colons:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

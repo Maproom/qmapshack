@@ -418,7 +418,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
                 str += QString("<a href='%1'>%2</a>").arg(link.uri.toString()).arg(link.text);
             }
         }
-        //Add logging link seperately, since the link to the geocache site is extracted from the gpx file.
+        //Add logging link separately, since the link to the geocache site is extracted from the gpx file.
         if(geocache.hasData && geocache.service == eGcCom)
         {
             str += " <a href='https://www.geocaching.com/play/geocache/" + wpt.name + "/log'>Log Geocache</a>";

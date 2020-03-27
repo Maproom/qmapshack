@@ -10493,7 +10493,7 @@ Es un elemento nuevo o ha sido eliminado en la base de datos por alguien.</trans
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="139"/>
-        <source>Seperate keywords by colons:</source>
+        <source>Separate keywords by colons:</source>
         <translation>Separar palabras clave con dos puntos:</translation>
     </message>
 </context>

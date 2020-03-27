@@ -10640,7 +10640,7 @@ It is either a new item or it has been deleted in the database by someone else.<
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="139"/>
-        <source>Seperate keywords by colons:</source>
+        <source>Separate keywords by colons:</source>
         <translation>(Разделить ключевые слова двоеточиями)</translation>
     </message>
 </context>

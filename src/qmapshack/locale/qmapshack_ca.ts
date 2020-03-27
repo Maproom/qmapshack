@@ -10462,7 +10462,7 @@ Es tracta d&apos;un element nou o bé algú l&apos;ha esborrat de la base de dad
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="139"/>
-        <source>Seperate keywords by colons:</source>
+        <source>Separate keywords by colons:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

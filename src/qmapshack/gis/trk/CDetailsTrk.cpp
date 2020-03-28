@@ -108,8 +108,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     treeTrackPointInfo->setTrack(&trk);
 
     plot1 = new CPlotProfile(&trk, trk.limitsGraph1, IPlot::eModeNormal, this);
-    plot2 = new CPlot(&trk, trk.limitsGraph2, this);
-    plot3 = new CPlot(&trk, trk.limitsGraph3, this);
+    plot2 = new CPlot(&trk, trk.limitsGraph2, IPlot::eModeNormal, this);
+    plot3 = new CPlot(&trk, trk.limitsGraph3, IPlot::eModeNormal, this);
 
     for(IPlot *plot : { static_cast<IPlot*>(plot1), static_cast<IPlot*>(plot2), static_cast<IPlot*>(plot3) })
     {

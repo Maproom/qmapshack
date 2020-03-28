@@ -35,8 +35,8 @@ CPlot::CPlot(CGisItemTrk * trk,  CLimit& limit, CPlotData::axistype_e type, cons
     updateData();
 }
 
-CPlot::CPlot(CGisItemTrk *trk,  CLimit& limit, QWidget *parent)
-    : IPlot(trk, CPlotData::eAxisLinear, eModeNormal, parent)
+CPlot::CPlot(CGisItemTrk *trk,  CLimit& limit, IPlot::mode_e mode, QWidget *parent)
+    : IPlot(trk, CPlotData::eAxisLinear, mode, parent)
     , limit(limit)
 {
     connect(&limit, &CLimit::sigChanged, this, &CPlot::setLimits);

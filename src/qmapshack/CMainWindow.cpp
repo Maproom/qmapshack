@@ -95,7 +95,13 @@ CMainWindow::CMainWindow()
 
     pSelf = this;
     setupUi(this);
-    setWindowTitle(WHAT_STR + (QString(VER_SUFFIX).isEmpty() ? "" : QString(".") + VER_SUFFIX));
+
+#ifdef DEVELOPMENT
+    setWindowTitle(WHAT_STR  ".develop");
+#else
+    setWindowTitle(WHAT_STR);
+#endif
+
     dockRealtime->toggleViewAction()->setChecked(false);
 
     CSearch::init();

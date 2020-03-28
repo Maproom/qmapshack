@@ -44,7 +44,7 @@ project(QMapShack VERSION 1.14.1)
 
 # FOR A RELEASE:
 # remove "development" for a release
-set(VERSION_SUFFIX "")
+set(DEVELOPMENT_VERSION OFF)
 
 
 ###############################################################################################
@@ -130,14 +130,14 @@ if(UNIX)
     add_definitions(-Wall -Wpedantic -Wno-switch -Wno-strict-aliasing)
 
     # Use ASAN for development versions
-    if(NOT ${VERSION_SUFFIX} STREQUAL "")
+    if(${DEVELOPMENT_VERSION})
         check_cxx_compiler_flag("-fsanitize=address" WITH_ASAN)
         if(NOT ${WITH_ASAN})
             message(FATAL_ERROR "Could not find ASAN! Please install ASAN if you want to compile development versions." )
         endif(NOT ${WITH_ASAN})
         message(STATUS "Using ASAN")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
-    endif(NOT ${VERSION_SUFFIX} STREQUAL "")
+    endif(${DEVELOPMENT_VERSION})
 endif(UNIX)
 
 

@@ -1250,7 +1250,7 @@ void CCanvas::showProfile(bool yes)
 {
     if(nullptr != plotTrackProfile)
     {
-        plotTrackProfile->setVisible(yes && CMainWindow::self().isShowTrackProfile());
+        plotTrackProfile->setVisible(yes && isShowTrackProfile());
     }
 }
 

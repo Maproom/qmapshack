@@ -26,8 +26,9 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "misc.h"
 #include "mouse/CMouseAdapter.h"
-#include "mouse/CScrOptRangeTrk.h"
+#include "mouse/range/CScrOptRangeTrk.h"
 #include "widgets/CFadingIcon.h"
 
 #include <QKeyEvent>
@@ -79,7 +80,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 
     data = new CPlotData(type, this);
 
-    if(mode == eModeIcon)
+    if((mode == eModeIcon) || (mode == eModeSimple))
     {
         showScale = false;
         thinLine = true;
@@ -96,7 +97,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 
     menu = new QMenu(this);
     actionResetZoom     = menu->addAction(QIcon("://icons/32x32/Zoom.png"),        tr("Reset Zoom"), this, SLOT(slotResetZoom()));
-    actionStopRange     = menu->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Stop Range"), this, SLOT(slotStopRange()));
+    actionStopRange     = menu->addAction(QIcon("://icons/32x32/SelectReset.png"), tr("Reset Range"), this, SLOT(slotStopRange()));
     actionPrint         = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
     menu->addSeparator();
     actionAddWpt        = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, SLOT(slotAddWpt()));
@@ -153,6 +154,10 @@ void IPlot::setXTicScale(qreal scale)
 
 void IPlot::setYLabel(const QString& str)
 {
+    if(mode == eModeSimple)
+    {
+        return;
+    }
     data->ylabel = str;
     setSizes();
     update();
@@ -161,6 +166,10 @@ void IPlot::setYLabel(const QString& str)
 
 void IPlot::setXLabel(const QString& str)
 {
+    if(mode == eModeSimple)
+    {
+        return;
+    }
     data->xlabel = str;
     setSizes();
     update();
@@ -368,21 +377,35 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
     update();
 }
 
-void IPlot::setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm)
+bool IPlot::setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm)
 {
     if(nullptr == trk)
     {
-        return;
+        return false;
+    }
+
+    if(fm == CGisItemTrk::eFocusMouseMove &&
+       trk->getMode() == CGisItemTrk::eModeRange &&
+       !is_in(trk->getRangState(), {
+        CGisItemTrk::eRangeStateIdle,
+        CGisItemTrk::eRangeStateClicked1st,
+        CGisItemTrk::eRangeStateMove1st,
+        CGisItemTrk::eRangeStateMove2nd,
+    }))
+    {
+        return false;
     }
 
     if(data->axisType == CPlotData::eAxisLinear)
     {
-        trk->setMouseFocusByDistance(pos, fm, objectName());
+        return trk->setMouseFocusByDistance(pos, fm, objectName());
     }
     else if(data->axisType == CPlotData::eAxisTime)
     {
-        trk->setMouseFocusByTime(pos, fm, objectName());
+        return trk->setMouseFocusByTime(pos, fm, objectName());
     }
+
+    return false;
 }
 
 void IPlot::mousePressEvent(QMouseEvent * e)
@@ -398,6 +421,8 @@ void IPlot::mousePressEvent(QMouseEvent * e)
 
 void IPlot::mouseReleaseEvent(QMouseEvent * e)
 {
+    bool wasProcessed = false;
+
     if(e->button() == Qt::LeftButton)
     {
         if((mode == eModeIcon) || mouseDidMove)
@@ -405,110 +430,139 @@ void IPlot::mouseReleaseEvent(QMouseEvent * e)
             mouseDidMove = false;
             return;
         }
+        else if(mode == eModeSimple)
+        {
+            wasProcessed = mouseReleaseEventSimple(e);
+        }
         else
         {
-            QPoint pos = e->pos();
-            posMouse1  = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
+            wasProcessed = mouseReleaseEventNormal(e);
+        }
+    }
 
-            bool wasProcessed = true;
-            // set point of focus at track object
-            qreal x = data->x().pt2val(posMouse1.x() - left);
 
-            switch(mouseClickState)
+    // Update canvas only if the object is the owner of the range selection
+    if(wasProcessed)
+    {
+        emit sigMouseClickState(mouseClickState);
+
+        // update canvas if visible
+        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        if(canvas)
+        {
+            canvas->update();
+        }
+    }
+    e->accept();
+    update();
+}
+
+bool IPlot::mouseReleaseEventSimple(QMouseEvent * e)
+{
+    QPoint pos = e->pos();
+    posMouse1  = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
+
+    // set point of focus at track object
+    qreal x = data->x().pt2val(posMouse1.x() - left);
+
+    bool wasProcessed = setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
+    if(!wasProcessed)
+    {
+        new CFadingIcon(posMouse1, "://icons/48x48/NotPossible.png", this);
+    }
+
+    return wasProcessed;
+}
+
+bool IPlot::mouseReleaseEventNormal(QMouseEvent * e)
+{
+    bool wasProcessed = true;
+
+    QPoint pos = e->pos();
+    posMouse1  = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
+
+    // set point of focus at track object
+    qreal x = data->x().pt2val(posMouse1.x() - left);
+
+    switch(mouseClickState)
+    {
+    case eMouseClickIdle:
+    {
+        // In idle state a mouse click will select the first point of a range
+        if(trk->setMode(CGisItemTrk::eModeRange, objectName()))
+        {
+            setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
+            mouseClickState = eMouseClick1st;
+        }
+        else
+        {
+            /*
+                If the object is not the owner of the range selection, no action has to be taken.
+                However the user has to be informed, that he clicked on the wrong widget.
+             */
+            new CFadingIcon(posMouse1, "://icons/48x48/NotPossible.png", this);
+            wasProcessed = false;
+        }
+        break;
+    }
+
+    case eMouseClick1st:
+    {
+        // In 1st click state a mouse click will select the second point of a range and display options
+        setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
+        /*
+            As the screen option is created on the fly it has to be connected to all slots,too.
+            Later, when destroyed the slots will be disconnected automatically.
+         */
+        delete scrOptRange;
+        scrOptRange = new CScrOptRangeTrk(pos, trk, nullptr, this);
+        connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &IPlot::slotHidePoints);
+        connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &IPlot::slotShowPoints);
+        connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &IPlot::slotCopy);
+        connect(scrOptRange->toolActivity,   &QToolButton::clicked, this, &IPlot::slotActivity);
+
+        /* Adjust position of screen option widget if the widget is out of the visible area*/
+        QRect r1 = scrOptRange->geometry();
+        QRect r2 = geometry();
+        r1.moveTopLeft(mapToParent(r1.topLeft()));
+        if(!r2.contains(r1))
+        {
+            // test if screen option is out of area on the right side
+            if(!r2.contains(r1.topRight()))
             {
-            case eMouseClickIdle:
-            {
-                // In idle state a mouse click will select the first point of a range
-                if(trk->setMode(CGisItemTrk::eModeRange, objectName()))
-                {
-                    setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
-                    mouseClickState = eMouseClick1st;
-                }
-                else
-                {
-                    /*
-                        If the object is not the owner of the range selection, no action has to be taken.
-                        However the user has to be informed, that he clicked on the wrong widget.
-                     */
-                    new CFadingIcon(posMouse1, "://icons/48x48/NotPossible.png", this);
-                    wasProcessed = false;
-                }
-                break;
+                QPoint pt = QPoint(r2.width(), r2.height()) - QPoint(r1.width(), r1.height());
+                scrOptRange->move(pt);
             }
-
-            case eMouseClick1st:
+            // test if screen option is out of area on the left side
+            else if(!r2.contains(r1.topLeft()))
             {
-                // In 1st click state a mouse click will select the second point of a range and display options
-                setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
-                /*
-                    As the screen option is created on the fly it has to be connected to all slots,too.
-                    Later, when destroyed the slots will be disconnected automatically.
-                 */
-                delete scrOptRange;
-                scrOptRange = new CScrOptRangeTrk(pos, trk, nullptr, this);
-                connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &IPlot::slotHidePoints);
-                connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &IPlot::slotShowPoints);
-                connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &IPlot::slotCopy);
-                connect(scrOptRange->toolActivity,   &QToolButton::clicked, this, &IPlot::slotActivity);
-
-                /* Adjust position of screen option widget if the widget is out of the visible area*/
-                QRect r1 = scrOptRange->geometry();
-                QRect r2 = geometry();
-                r1.moveTopLeft(mapToParent(r1.topLeft()));
-                if(!r2.contains(r1))
-                {
-                    // test if screen option is out of area on the right side
-                    if(!r2.contains(r1.topRight()))
-                    {
-                        QPoint pt = QPoint(r2.width(), r2.height()) - QPoint(r1.width(), r1.height());
-                        scrOptRange->move(pt);
-                    }
-                    // test if screen option is out of area on the left side
-                    else if(!r2.contains(r1.topLeft()))
-                    {
-                        QPoint pt = QPoint(0, r2.height()) - QPoint(0, r1.height());
-                        scrOptRange->move(pt);
-                    }
-                    // test if screen option is out of area on the bottom
-                    else if(!r2.contains(r1.bottomLeft()))
-                    {
-                        QPoint pt = QPoint(r1.left(), r2.height()) - QPoint(r2.left(), r1.height());
-                        scrOptRange->move(pt);
-                    }
-                }
-
-                mouseClickState = eMouseClick2nd;
-                break;
+                QPoint pt = QPoint(0, r2.height()) - QPoint(0, r1.height());
+                scrOptRange->move(pt);
             }
-
-            case eMouseClick2nd:
+            // test if screen option is out of area on the bottom
+            else if(!r2.contains(r1.bottomLeft()))
             {
-                // In second click state a mouse click will reset the range selection
-                delete scrOptRange;
-                trk->setMode(CGisItemTrk::eModeNormal, objectName());
-                idxSel1 = idxSel2 = NOIDX;
-                mouseClickState = eMouseClickIdle;
-                break;
-            }
-            }
-
-
-            // Update canvas only if the object is the owner of the range selection
-            if(wasProcessed)
-            {
-                emit sigMouseClickState(mouseClickState);
-
-                // update canvas if visible
-                CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-                if(canvas)
-                {
-                    canvas->update();
-                }
+                QPoint pt = QPoint(r1.left(), r2.height()) - QPoint(r2.left(), r1.height());
+                scrOptRange->move(pt);
             }
         }
-        e->accept();
+
+        mouseClickState = eMouseClick2nd;
+        break;
     }
-    update();
+
+    case eMouseClick2nd:
+    {
+        // In second click state a mouse click will reset the range selection
+        delete scrOptRange;
+        trk->setMode(CGisItemTrk::eModeNormal, objectName());
+        idxSel1 = idxSel2 = NOIDX;
+        mouseClickState = eMouseClickIdle;
+        break;
+    }
+    }
+
+    return wasProcessed;
 }
 
 void IPlot::wheelEvent(QWheelEvent * e)
@@ -569,8 +623,17 @@ void IPlot::setSizes()
 
     fontWidth    = fm.maxWidth();
     fontHeight   = fm.height();
-    deadAreaX    = fontWidth >> 1;
-    deadAreaY    = ( fontHeight + 1 ) >> 1;
+
+    if(mode == eModeSimple)
+    {
+        deadAreaX = 0;
+        deadAreaY = 0;
+    }
+    else
+    {
+        deadAreaX = fontWidth >> 1;
+        deadAreaY = ( fontHeight + 1 ) >> 1;
+    }
 
     iconBarHeight = height() > 350 ? 21 : 9;
 
@@ -624,10 +687,15 @@ void IPlot::setSizeIconArea()
 
 void IPlot::setSizeXLabel()
 {
+    if(mode == IPlot::eModeSimple)
+    {
+        rectX1Label = {0, 0, 0, 0};
+    }
+
     int y;
     if ( data->xlabel.isEmpty() )
     {
-        rectX1Label = QRect( 0, 0, 0, 0 );
+        rectX1Label = {0, 0, 0, 0};
     }
     else
     {
@@ -641,9 +709,14 @@ void IPlot::setSizeXLabel()
 
 void IPlot::setSizeYLabel()
 {
+    if(mode == IPlot::eModeSimple)
+    {
+        rectX1Label = {0, 0, 0, 0};
+    }
+
     if ( data->ylabel.isEmpty() )
     {
-        rectY1Label = QRect( 0, 0, 0, 0 );
+        rectY1Label = {0, 0, 0, 0};
     }
     else
     {
@@ -684,7 +757,7 @@ void IPlot::draw()
     QPainter p(&buffer);
     USE_ANTI_ALIASING(p, true);
 
-    if(mode == eModeNormal)
+    if((mode == eModeNormal) || (mode == eModeSimple))
     {
         p.fillRect(rect(), Qt::white);
     }
@@ -850,6 +923,11 @@ void IPlot::drawData(QPainter& p)
 
 void IPlot::drawLabels( QPainter &p )
 {
+    if(mode == IPlot::eModeSimple)
+    {
+        return;
+    }
+
     p.setPen(Qt::darkBlue);
 
     if ( rectX1Label.isValid() )
@@ -1083,7 +1161,7 @@ void IPlot::drawYTic( QPainter &p )
 
 void IPlot::drawLegend(QPainter& p)
 {
-    if((data->lines.size() < 2) || (mode == eModeIcon))
+    if((data->lines.size() < 2) || (mode == eModeIcon) || (mode == eModeSimple))
     {
         return;
     }
@@ -1289,10 +1367,10 @@ void IPlot::drawActivities(QPainter& p)
 
     const QList<CActivityTrk::range_t>& ranges = trk->getActivities().getActivityRanges();
 
-    constexpr int bar_height    = 26;
-    constexpr int color_width   = 3;
-    constexpr int icon_frame    = 20;
-    constexpr int icon_size     = 16;
+    int bar_height    = (mode == eModeSimple) ? 18 : 26;
+    int color_width   = (mode == eModeSimple) ? 3 : 3;
+    int icon_frame    = (mode == eModeSimple) ? 12 : 20;
+    int icon_size     = (mode == eModeSimple) ? 8 : 16;
 
     QRect rectClipping = QRect(0, 0, right - left, 27);
     p.save();
@@ -1304,28 +1382,29 @@ void IPlot::drawActivities(QPainter& p)
 
     QRect rectIconFrame(0, 0, icon_frame, icon_frame);
     QRect rectIcon(0, 0, icon_size, icon_size);
+
     for(const CActivityTrk::range_t& range : ranges)
     {
         int x1, x2, y1 = 0;
-        const CTrackData::trkpt_t * trkpt = nullptr;
+        const CTrackData& trkData = trk->getTrackData();
+
+        const CTrackData::trkpt_t * trkptBeg = trkData.getTrkPtByTotalIndex(range.idxTotalBeg);
+        const CTrackData::trkpt_t * trkptEnd = trkData.getTrkPtByTotalIndex(range.idxTotalEnd);
+
         if(data->axisType == CPlotData::eAxisTime)
         {
-            x1 = data->x().val2pt(range.t1);
-            x2 = data->x().val2pt(range.t2);
-            auto condition = [range](const CTrackData::trkpt_t &pt) { return pt.time.toTime_t() == range.t1; };
-            trkpt = trk->getTrackData().getTrkPtByCondition(condition);
+            x1 = data->x().val2pt(trkptBeg->time.toTime_t());
+            x2 = data->x().val2pt(trkptEnd->time.toTime_t());
         }
         else
         {
-            x1 = data->x().val2pt(range.d1);
-            x2 = data->x().val2pt(range.d2);
-
-            auto condition = [range](const CTrackData::trkpt_t &pt) { return pt.distance == range.d1; };
-            trkpt = trk->getTrackData().getTrkPtByCondition(condition);
+            x1 = data->x().val2pt(trkptBeg->distance);
+            x2 = data->x().val2pt(trkptEnd->distance);
         }
-        if(trkpt != nullptr && !data->lines.isEmpty())
+
+        if(trkptBeg != nullptr && !data->lines.isEmpty())
         {
-            y1 = data->y().val2pt(data->lines[0].points[trkpt->idxVisible].y());
+            y1 = data->y().val2pt(data->lines[0].points[trkptBeg->idxVisible].y());
         }
 
         const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(range.activity);
@@ -1376,12 +1455,23 @@ void IPlot::slotContextMenu(const QPoint & point)
 {
     QPoint p = mapToGlobal(point);
 
-    actionResetZoom->setEnabled(isZoomed());
-    actionStopRange->setEnabled((mouseClickState != eMouseClickIdle) && !(idxSel1 == NOIDX || idxSel2 == NOIDX));
-    actionPrint->setEnabled(mouseClickState != eMouseClick2nd);
-    actionAddWpt->setDisabled(posMouse1 == NOPOINT);
-    actionCutTrk->setDisabled(actionStopRange->isEnabled());
-
+    if(mode == IPlot::eModeSimple)
+    {
+        actionResetZoom->setEnabled(isZoomed());
+        actionStopRange->setEnabled(false);
+        actionPrint->setEnabled(false);
+        actionAddWpt->setEnabled(false);
+        actionCutTrk->setEnabled(false);
+        actionAddTrkPtInfo->setEnabled(false);
+    }
+    else
+    {
+        actionResetZoom->setEnabled(isZoomed());
+        actionStopRange->setEnabled((mouseClickState != eMouseClickIdle) && !(idxSel1 == NOIDX || idxSel2 == NOIDX));
+        actionPrint->setEnabled(mouseClickState != eMouseClick2nd);
+        actionAddWpt->setDisabled(posMouse1 == NOPOINT);
+        actionCutTrk->setDisabled(actionStopRange->isEnabled());
+    }
     posMouse2 = posMouse1;
 
     menu->exec(p);

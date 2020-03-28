@@ -31,7 +31,7 @@ class IPlot : public QWidget, public INotifyTrk
 {
     Q_OBJECT
 public:
-    enum mode_e {eModeNormal, eModeIcon, eModeWindow};
+    enum mode_e {eModeNormal, eModeIcon, eModeWindow, eModeSimple};
     enum mouse_click_state_e
     {
         eMouseClickIdle
@@ -93,6 +93,9 @@ protected:
     void mouseReleaseEvent(QMouseEvent * e) override;
     void wheelEvent(QWheelEvent *e) override;
 
+
+    bool mouseReleaseEventSimple(QMouseEvent * e);
+    bool mouseReleaseEventNormal(QMouseEvent * e);
 
     void setSizes();
     void setLRTB();
@@ -197,7 +200,7 @@ protected:
     QPointer<CScrOptRangeTrk> scrOptRange;
 
 private:
-    void setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm);
+    bool setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm);
     QPolygonF getVisiblePolygon(const QPolygonF &polyline, QPolygonF &line) const;
 };
 

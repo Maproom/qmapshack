@@ -31,7 +31,7 @@ class CPlot : public IPlot
     Q_OBJECT
 public:
     CPlot(CGisItemTrk *trk, CLimit& limit, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget *parent);
-    CPlot(CGisItemTrk *trk, CLimit& limit,  QWidget *parent);
+    CPlot(CGisItemTrk *trk, CLimit& limit, mode_e mode,  QWidget *parent);
     virtual ~CPlot() = default;
 
     void setup(const CPropertyTrk::property_t &p);

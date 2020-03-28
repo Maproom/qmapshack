@@ -451,7 +451,7 @@ IUnit::IUnit(const type_e &type, const QString& baseUnit, const qreal baseFactor
 
 void IUnit::meter2elevation(qreal meter, QString& val, QString& unit) const
 {
-    if(meter == NOFLOAT)
+    if(meter == NOFLOAT || meter == NOINT)
     {
         val  = "-";
         unit.clear();
@@ -567,6 +567,13 @@ bool IUnit::convert(qreal &value, QString &unit, const QString &targetUnit)
 
 void IUnit::slope2string(qreal slope, QString &val, QString &unit)
 {
+    if(slope == NOFLOAT)
+    {
+        val = "-";
+        unit = "";
+        return;
+    }
+
     switch(slopeMode)
     {
     case eSlopeDegrees:

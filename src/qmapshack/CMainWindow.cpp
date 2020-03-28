@@ -607,6 +607,12 @@ CMainWindow::~CMainWindow()
     // delete icon manager explicitely to make sure temporary icon files are
     // removed upon destruction
     delete wptIconManager;
+
+    // make sure to delete the workspace before the database as
+    // closing the workspace will send a couple of events to the
+    // database widget.
+    delete widgetGisWorkspace;
+    delete widgetGisDatabase;
 }
 
 void CMainWindow::setupHomePath()

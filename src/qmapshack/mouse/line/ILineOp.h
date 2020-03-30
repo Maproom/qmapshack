@@ -69,6 +69,7 @@ public:
     }
 
     void updateStatus();
+    void showRoutingErrorMessage(const QString &msg) const;
 
 protected slots:
     void slotTimeoutRouting();
@@ -116,7 +117,6 @@ protected:
     QPolygonF subLinePixel2;
 
 private:
-    void showRoutingErrorMessage(const QString &msg) const;
     void tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const;
 
     QTimer * timerRouting;

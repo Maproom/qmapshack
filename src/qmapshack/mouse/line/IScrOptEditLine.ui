@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
+    <width>734</width>
     <height>46</height>
    </rect>
   </property>
@@ -302,6 +302,17 @@
          </widget>
         </item>
        </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushOptimize">
+       <property name="toolTip">
+        <string>Optimizes the route by reordering the points using the router specified in the &quot;Routing&quot; tab. 
+This is known as solving the Traveling Salesman Problem, however start and end are kept fixed here</string>
+       </property>
+       <property name="text">
+        <string>Optimize</string>
+       </property>
       </widget>
      </item>
      <item>

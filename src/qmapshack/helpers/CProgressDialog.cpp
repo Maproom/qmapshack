@@ -30,14 +30,11 @@ QStack<CProgressDialog*> CProgressDialog::stackSelf;
 CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *parent)
     : QDialog(parent)
 {
-    if(!stackSelf.isEmpty())
-    {
-        stackSelf.top()->pause();
-    }
     stackSelf.push(this);
+    int oldTopIndex = stackSelf.length()-2;
 
     setupUi(this);
-    setWindowModality(Qt::WindowModal);
+    setWindowModality(Qt::ApplicationModal);
 
     label->setText(text);
     progressBar->setMinimum(min);
@@ -61,7 +58,11 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *
     QDialog::hide();
     timer = new QTimer(this);
     timer->setSingleShot(true);
-    connect(timer, &QTimer::timeout, this, [this] {
+    connect(timer, &QTimer::timeout, this, [this, oldTopIndex] {
+        if(oldTopIndex > 0)
+        {
+            stackSelf[oldTopIndex]->pause();
+        }
         show();
     });
     timer->start(DELAY);
@@ -94,6 +95,12 @@ void CProgressDialog::pause()
 
 void CProgressDialog::goOn()
 {
+    //if goOn() is called from the dtor of another progress bar this progress bar was not necessarily paused.
+    //Also, it the second of waiting might not have elapsed. Thus, if the timer is still running, we do nothing
+    if(timer->isActive())
+    {
+        return;
+    }
     if(timeElapsed <= DELAY)
     {
         timer->start(DELAY - timeElapsed);

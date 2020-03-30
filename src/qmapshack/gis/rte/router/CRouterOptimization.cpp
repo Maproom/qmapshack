@@ -19,6 +19,7 @@
 #include "CRouterOptimization.h"
 #include <gis/rte/router/CRouterSetup.h>
 #include <GeoMath.h>
+#include <helpers/CProgressDialog.h>
 
 CRouterOptimization::CRouterOptimization()
 {
@@ -37,6 +38,8 @@ int CRouterOptimization::optimize(SGisLine &line)
         return 0; //There is nothing to optimize
     }
 
+    CProgressDialog progress(CProgressDialog::tr("Optimizing route"), 0, line.length()+2, nullptr);
+
     //Optimize using air distance and known distances, since this is much faster than routing, especially brouter
     SGisLine newAirdistanceOrder;
     SGisLine oldAirdistanceOrder = line;
@@ -48,6 +51,8 @@ int CRouterOptimization::optimize(SGisLine &line)
     }
     //Do routing and calculate cost for order found
     qreal airdistanceOrderCosts = getRealRouteCosts(oldAirdistanceOrder);
+
+    progress.setValue(1);
 
     //Do routing and calculate costs of the order the user supplied
     //cancel the route calculation when the cost of the airdistance order is reached
@@ -70,6 +75,7 @@ int CRouterOptimization::optimize(SGisLine &line)
         line = oldAirdistanceOrder;
         fillSubPts(line);
     }
+    progress.setValue(2);
 
     SGisLine lastWorkingOrder = line;
     qreal lastWorkingOrderCosts = bestCosts;
@@ -78,6 +84,12 @@ int CRouterOptimization::optimize(SGisLine &line)
     // but you'd likely need more to find the global optimum if there are more possibilities
     while(numOfRestarts < line.length())
     {
+        progress.setValue(numOfRestarts+2);
+        if(progress.wasCanceled())
+        {
+            return -1;
+        }
+
         SGisLine newWorkingOrder;
         qreal bestInsertionGain = createNextBestOrder(lastWorkingOrder, newWorkingOrder);
 

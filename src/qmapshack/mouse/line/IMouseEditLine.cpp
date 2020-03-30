@@ -21,6 +21,7 @@
 #include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/IGisLine.h"
+#include "gis/rte/router/CRouterOptimization.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
@@ -70,6 +71,7 @@ IMouseEditLine::~IMouseEditLine()
 {
     canvas->reportStatus("IMouseEditLine", "");
     canvas->reportStatus(key.item, "");
+    canvas->reportStatus("Optimization", "");
 
     int mode = 0;
     if(scrOptEditLine->toolNoRoute->isChecked())
@@ -114,6 +116,7 @@ void IMouseEditLine::commonSetup()
     connect(scrOptEditLine->toolAutoRoute,   &QPushButton::clicked, this, &IMouseEditLine::slotAutoRouting  );
     connect(scrOptEditLine->toolVectorRoute, &QPushButton::clicked, this, &IMouseEditLine::slotVectorRouting);
     connect(scrOptEditLine->toolTrackRoute,  &QPushButton::clicked, this, &IMouseEditLine::slotTrackRouting );
+    connect(scrOptEditLine->pushOptimize,    &QPushButton::clicked, this, &IMouseEditLine::slotOptimize     );
 
     connect(scrOptEditLine->toolUndo,        &QPushButton::clicked, this, &IMouseEditLine::slotUndo         );
     connect(scrOptEditLine->toolRedo,        &QPushButton::clicked, this, &IMouseEditLine::slotRedo         );
@@ -348,6 +351,41 @@ void IMouseEditLine::slotTrackRouting()
 {
     canvas->reportStatus(key.item, tr("<b>Track Routing</b><br/>Connect points with a line from a loaded track if possible.<br/>"));
     canvas->reportStatus("Routino", QString());
+}
+
+void IMouseEditLine::slotOptimize()
+{
+    canvas->reportStatus(key.item, "");
+    canvas->reportStatus("Optimization", QString("<b>%1</b><br/>").arg(tr("Started Optimization.")));
+
+    int response = 0;
+    try
+    {
+        response = optimizer.optimize(points);
+    }
+    catch(const QString &msg)
+    {
+        response = -1;
+        lineOp->showRoutingErrorMessage(msg);
+    }
+
+    if(response == -1)
+    {
+        canvas->reportStatus("Optimization", QString("<b>%1</b><br/><b>%2</b> %3<br/>")
+                             .arg(tr("Optimization failed."))
+                             .arg(tr("Note:"))
+                             .arg(tr("The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can't.")));
+    }
+    else
+    {
+        canvas->reportStatus("Optimization", QString("<b>%1</b><br/>").arg(tr("Optimization successful.")));
+
+        points.updatePixel(gis);
+
+        storeToHistory(points);
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+    }
+    updateStatus();
 }
 
 void IMouseEditLine::changeCursor()

@@ -35,7 +35,7 @@ public:
     virtual ~CRouterMapQuest();
 
     void calcRoute(const IGisItem::key_t& key) override;
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) override
+    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr) override
     {
         return -1;
     }

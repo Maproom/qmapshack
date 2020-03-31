@@ -84,15 +84,26 @@ void CRouterSetup::calcRoute(const IGisItem::key_t& key)
     }
 }
 
-int CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
+int CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs)
 {
     IRouter * router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
     if(router)
     {
-        return router->calcRoute(p1, p2, coords);
+        return router->calcRoute(p1, p2, coords, costs);
     }
 
     return false;
+}
+
+QString CRouterSetup::getOptions()
+{
+    IRouter * router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+    if(router)
+    {
+        return router->getOptions();
+    }
+
+    return "";
 }
 
 void CRouterSetup::setRouterTitle(const router_e router, const QString title)

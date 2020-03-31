@@ -47,7 +47,7 @@ public:
     }
 
     void calcRoute(const IGisItem::key_t& key) override;
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) override;
+    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr) override;
     bool hasFastRouting() override;
     QString getOptions() override;
     void routerSelected() override;
@@ -74,7 +74,7 @@ private:
     void getBRouterVersion();
     bool isMinimumVersion(int major, int minor, int patch) const;
     void updateBRouterStatus() const;
-    int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem *> &nogos, QPolygonF &coords);
+    int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem *> &nogos, QPolygonF &coords, qreal *costs);
     QNetworkRequest getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem *> &nogos) const;
     QUrl getServiceUrl() const;
 

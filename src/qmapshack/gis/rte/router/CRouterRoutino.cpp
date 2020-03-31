@@ -38,7 +38,7 @@ int ProgressFunc(double complete)
         return true;
     }
 
-    CRouterRoutino::progress->setValue(complete*100);
+    CRouterRoutino::progress->setValue(complete * 100);
 
     return !CRouterRoutino::progress->wasCanceled();
 }
@@ -232,7 +232,7 @@ void CRouterRoutino::buildDatabaseList()
     for(const QString &path : dbPaths)
     {
         QDir dir(path);
-        for(const QString &filename : dir.entryList(QStringList("*segments.mem"), QDir::Files|QDir::Readable, QDir::Name))
+        for(const QString &filename : dir.entryList(QStringList("*segments.mem"), QDir::Files | QDir::Readable, QDir::Name))
         {
             QString prefix;
             if(re.exactMatch(filename))
@@ -385,7 +385,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         QVector<Routino_Waypoint*> waypoints(line.size(), nullptr);
         for(const IGisLine::point_t &pt : line)
         {
-            waypoints[idx] = Routino_FindWaypoint(data, profile, pt.coord.y()*RAD_TO_DEG, pt.coord.x()*RAD_TO_DEG);
+            waypoints[idx] = Routino_FindWaypoint(data, profile, pt.coord.y() * RAD_TO_DEG, pt.coord.x() * RAD_TO_DEG);
             if(waypoints[idx] == nullptr)
             {
                 throw xlateRoutinoError(Routino_errno);
@@ -401,7 +401,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
         if(nullptr != route)
         {
-            rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed()/1000.0, 0, 'f', 2));
+            rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed() / 1000.0, 0, 'f', 2));
             Routino_DeleteRoute(route);
         }
         else
@@ -426,7 +426,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 }
 
 
-int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
+int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr)
 {
     if(!mutex.tryLock())
     {
@@ -471,13 +471,13 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         }
 
         Routino_Waypoint* waypoints[2] = {0};
-        waypoints[0] = Routino_FindWaypoint(data, profile, p1.y()*RAD_TO_DEG, p1.x()*RAD_TO_DEG);
+        waypoints[0] = Routino_FindWaypoint(data, profile, p1.y() * RAD_TO_DEG, p1.x() * RAD_TO_DEG);
         if(waypoints[0] == nullptr)
         {
             throw xlateRoutinoError(Routino_errno);
         }
 
-        waypoints[1] = Routino_FindWaypoint(data, profile, p2.y()*RAD_TO_DEG, p2.x()*RAD_TO_DEG);
+        waypoints[1] = Routino_FindWaypoint(data, profile, p2.y() * RAD_TO_DEG, p2.x() * RAD_TO_DEG);
         if(waypoints[1] == nullptr)
         {
             throw xlateRoutinoError(Routino_errno);
@@ -497,6 +497,20 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
                 if(next->type != ROUTINO_POINT_WAYPOINT)
                 {
                     coords << QPointF(next->lon, next->lat);
+                }
+                if(costs != nullptr)
+                {
+                    if(comboMode->currentIndex() == 1)
+                    {
+                        // ROUTINO_ROUTE_QUICKEST
+                        // This works, since CRouteOptimization adapts it's weights according to the data it gets
+                        *costs = next->time;
+                    }
+                    else
+                    {
+                        // ROUTINO_ROUTE_SHORTEST
+                        *costs = next->dist;
+                    }
                 }
                 next = next->next;
             }

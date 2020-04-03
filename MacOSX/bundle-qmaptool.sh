@@ -23,6 +23,11 @@ function linkToQMapShack {
     cd ..
 }
 
+function copyExternalHelpFiles_QMT {
+    cp -v $HELP_QMT_DIR/QMTHelp.qch $BUILD_BUNDLE_RES_HELP_DIR
+    cp -v $HELP_QMT_DIR/QMTHelp.qhc $BUILD_BUNDLE_RES_HELP_DIR
+}
+
 
 function removeDuplicatedQtLibs {
     rm -rf $BUILD_BUNDLE_FRW_DIR
@@ -44,6 +49,7 @@ if [[ "$1" == "bundle" ]]; then
     echo "---copy external files -------------"
     copyQtTrqnslations
     copyExternalFiles
+    copyExternalHelpFiles_QMT
     echo "---adjust linking ------------------"
     adjustLinking
     echo "---external tools ------------------"

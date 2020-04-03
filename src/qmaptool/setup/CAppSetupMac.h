@@ -39,6 +39,7 @@ public:
     QString userDataPath(QString subdir = 0) override;
     QString logDir() override;
     QString findExecutable(const QString &name) override { return QStandardPaths::findExecutable(name); }
+    QString helpFile() override;
 
 private:
     QDir getApplicationDir(QString subdir);

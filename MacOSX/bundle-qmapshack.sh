@@ -13,6 +13,7 @@ function extendAppStructure {
     mkdir $BUILD_BUNDLE_RES_GDAL_DIR
     mkdir $BUILD_BUNDLE_RES_PROJ_DIR
     mkdir $BUILD_BUNDLE_RES_ROUTINO_DIR
+    mkdir $BUILD_BUNDLE_RES_HELP_DIR
     mkdir $BUILD_BUNDLE_RES_BIN_DIR
 }
 
@@ -43,6 +44,11 @@ function copyExternalFiles {
     cp -v $ROUTINO_LIB_XML_DIR/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
     cp -v $ROUTINO_LIB_XML_DIR/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
     cp -v $ROUTINO_LIB_XML_DIR/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+}
+
+function copyExternalHelpFiles_QMS {
+    cp -v $HELP_QMS_DIR/QMSHelp.qch $BUILD_BUNDLE_RES_HELP_DIR
+    cp -v $HELP_QMS_DIR/QMSHelp.qhc $BUILD_BUNDLE_RES_HELP_DIR
 }
 
 
@@ -101,6 +107,7 @@ if [[ "$1" == "bundle" ]]; then
     echo "---copy external files -------------"
     copyQtTrqnslations
     copyExternalFiles
+    copyExternalHelpFiles_QMS
     echo "---adjust linking ------------------"
     adjustLinking
     echo "---external tools ------------------"

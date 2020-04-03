@@ -1070,6 +1070,8 @@ void CGisItemTrk::deriveSecondaryData()
         return;
     }
 
+    activities.updateFlags();
+
     CTrackData::trkpt_t * lastValid  = nullptr;
     CTrackData::trkpt_t * lastTrkpt  = nullptr;
     qreal timestampStart = NOFLOAT;
@@ -1258,7 +1260,7 @@ void CGisItemTrk::deriveSecondaryData()
 
     energyCycling.compute();
 
-    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct|eVisualTrkTable|eVisualTrkInfo, "deriveSecondaryData()");
+    updateVisuals(eVisualAll, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";
 //    qDebug() << "allValidFlags" << hex << allValidFlags;
@@ -1691,22 +1693,12 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keys)
     trk1->updateDecoration(eMarkChanged, eMarkNone);
 }
 
-void CGisItemTrk::hideSelectedPoints()
+bool CGisItemTrk::adjustIndicesForRemoveOperations(qint32& idx1, qint32& idx2)
 {
-    if(!setReadOnlyMode(false))
-    {
-        return;
-    }
-
-    // read start/stop indices
-    qint32 idx1, idx2;
-    getMouseRange(idx1, idx2, true);
-
     if(NOIDX == idx1)
     {
-        return;
+        return false;
     }
-
 
     // if first index is the first point adjust index to hide it, too
     if(trk.isTrkPtFirstVisible(idx1))
@@ -1722,7 +1714,7 @@ void CGisItemTrk::hideSelectedPoints()
     // abort if there is no point between idx1 and idx2
     if(idx1 + 1 == idx2)
     {
-        return;
+        return false;
     }
 
     // special case for a single point
@@ -1730,6 +1722,24 @@ void CGisItemTrk::hideSelectedPoints()
     {
         --idx1;
         ++idx2;
+    }
+    return true;
+}
+
+void CGisItemTrk::hideSelectedPoints()
+{
+    if(!setReadOnlyMode(false))
+    {
+        return;
+    }
+
+    // read start/stop indices
+    qint32 idx1, idx2;
+    getMouseRange(idx1, idx2, true);
+
+    if(!adjustIndicesForRemoveOperations(idx1, idx2))
+    {
+        return;
     }
 
     // iterate over all segments and delete points between idx1 and idx2
@@ -1741,7 +1751,6 @@ void CGisItemTrk::hideSelectedPoints()
             trkpt.setFlag(CTrackData::trkpt_t::eFlagHidden);
         }
     }
-    resetMouseRange();
     deriveSecondaryData();
     if(idx1 + 1 == idx2 - 1)
     {
@@ -1750,6 +1759,53 @@ void CGisItemTrk::hideSelectedPoints()
     else
     {
         changed(tr("Hide points %1..%2.").arg(idx1 + 1).arg(idx2 - 1), "://icons/48x48/PointHide.png");
+    }
+}
+
+void CGisItemTrk::deleteSelectedPoints()
+{
+    if(!setReadOnlyMode(false))
+    {
+        return;
+    }
+
+    // read start/stop indices
+    qint32 idx1, idx2;
+    getMouseRange(idx1, idx2, true);
+
+    if(!adjustIndicesForRemoveOperations(idx1, idx2))
+    {
+        return;
+    }
+
+    for(CTrackData::trkseg_t& seg : trk.segs)
+    {
+        QVector<CTrackData::trkpt_t> pts;
+        for(const CTrackData::trkpt_t &pt : seg.pts)
+        {
+            if(idx1 < pt.idxTotal && pt.idxTotal < idx2)
+            {
+                continue;
+            }
+
+            pts << pt;
+        }
+
+        seg.pts = pts;
+    }
+
+    mouseRange1 = trk.getTrkPtByTotalIndex(idx1);
+    mouseRange2 = trk.getTrkPtByTotalIndex(idx1 + 1);
+    mouseMoveFocus = nullptr;
+
+    deriveSecondaryData();
+    if(idx1 + 1 == idx2 - 1)
+    {
+        changed(tr("Delete point %1.").arg(idx1 + 1), "://icons/48x48/DeleteOne.png");
+    }
+    else
+    {
+        changed(tr("Delete points %1..%2.").arg(idx1 + 1).arg(idx2 - 1), "://icons/48x48/DeleteMultiple.png");
     }
 }
 
@@ -1776,7 +1832,6 @@ void CGisItemTrk::showSelectedPoints()
         }
     }
 
-    resetMouseRange();
     deriveSecondaryData();
     changed(tr("Show points."), "://icons/48x48/PointShow.png");
 }
@@ -2069,12 +2124,13 @@ void CGisItemTrk::drawColorizedByActivity(QPainter& p) const
                 continue;
             }
 
+            p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
+
             if(ptPrev->getAct() != pt.getAct())
             {
                 setPen(p, pen, pt.getAct());
             }
 
-            p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
             ptPrev = &pt;
         }
     }
@@ -2355,7 +2411,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         p.drawPixmap(anchor - QPointF(4, 4), QPixmap(IGisItem::colorMap[colorIdx].bullet));
     }
 
-    drawRange(p);
+    drawRange(p, gis);
 }
 
 void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF&, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis)
@@ -2386,8 +2442,6 @@ void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF&, QList<QRectF>& blocke
 
             QString labelMin = ext.toString(limit.min, true, key);
             QString labelMax = ext.toString(limit.max, true, key);
-
-            qDebug() << labelMin << labelMax;
 
             if(!labelMin.isEmpty())
             {
@@ -2425,7 +2479,7 @@ void CGisItemTrk::drawHighlight(QPainter& p)
     }
 }
 
-void CGisItemTrk::drawRange(QPainter& p)
+void CGisItemTrk::drawRange(QPainter& p, CGisDraw* gis)
 {
     QMutexLocker lock(&mutexItems);
 
@@ -2441,11 +2495,41 @@ void CGisItemTrk::drawRange(QPainter& p)
 
     QPolygonF seg = line.mid(idx1, idx2 - idx1 + 1);
 
-    p.setPen(QPen(Qt::darkGreen, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    p.drawPolyline(seg);
+    if(seg.size() == 1)
+    {
+        const auto r1 = qRound(penWidthHi/2.0);
+        const auto r2 = qRound(penWidthFg/2.0);
 
-    p.setPen(QPen(Qt::green, penWidthFg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    p.drawPolyline(seg);
+        p.setPen(Qt::NoPen);
+        p.setBrush(Qt::darkGreen);
+        p.drawEllipse(seg[0], r1, r1);
+        p.setBrush(Qt::green);
+        p.drawEllipse(seg[0], r2, r2);
+    }
+    else
+    {
+        p.setPen(QPen(Qt::darkGreen, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.drawPolyline(seg);
+
+        p.setPen(QPen(Qt::green, penWidthFg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p.drawPolyline(seg);
+    }
+
+    if(mouseMoveFocus == mouseRange1 || mouseMoveFocus == mouseRange2)
+    {
+        QPointF pt(mouseMoveFocus->lon, mouseMoveFocus->lat);
+        pt *= DEG_TO_RAD;
+        gis->convertRad2Px(pt);
+
+        const auto r1 = qRound(penWidthHi/2.0) + 1;
+        const auto r2 = qRound(penWidthFg/2.0) + 1;
+
+        p.setPen(Qt::NoPen);
+        p.setBrush(Qt::darkGreen);
+        p.drawEllipse(pt, r1, r1);
+        p.setBrush(Qt::green);
+        p.drawEllipse(pt, r2, r2);
+    }
 }
 
 bool CGisItemTrk::setMode(mode_e m, const QString& owner)
@@ -2546,12 +2630,6 @@ void CGisItemTrk::setActivityRange(trkact_t act)
         return;
     }
 
-    // special case for a single point
-    if(idx1 == idx2)
-    {
-        --idx1;
-    }
-
     // iterate over all segments and set activity flag for points between idx1 and idx2
     for(CTrackData::trkpt_t& trkpt : trk)
     {
@@ -2561,7 +2639,6 @@ void CGisItemTrk::setActivityRange(trkact_t act)
         }
     }
 
-    resetMouseRange();
     deriveSecondaryData();
     changed(tr("Changed activity to '%1' for range(%2..%3).").arg(desc.name).arg(idx1).arg(idx2), desc.iconLarge);
 }
@@ -2687,6 +2764,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
         idx = getIdxPointCloseBy(pt, line);
         newPointOfFocus = (mode == eModeRange) ? trk.getTrkPtByTotalIndex(idx) : trk.getTrkPtByVisibleIndex(idx);
     }
+
     if(!publishMouseFocus(newPointOfFocus, fmode, owner))
     {
         newPointOfFocus = nullptr;
@@ -2711,12 +2789,119 @@ bool CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const
     return false;
 }
 
+bool CGisItemTrk::setMouseRangeByTotalIndex(qint32 idx1, qint32 idx2, const QString& owner)
+{
+    if(mode != eModeRange || mouseFocusOwner != owner)
+    {
+        return false;
+    }
+
+    mouseRange1 = trk.getTrkPtByTotalIndex(idx1);
+    mouseRange2 = trk.getTrkPtByTotalIndex(idx2);
+    setMouseFocusVisuals(mouseRange2);
+    setMouseRangeFocusVisuals(mouseRange1, mouseRange2);
+    return true;
+}
+
+bool CGisItemTrk::incMouseRangeBegin(qint32 i, const QString& owner)
+{
+    if(mouseRange1 == nullptr || mouseRange2 == nullptr)
+    {
+        return false;
+    }
+    const CTrackData::trkpt_t * &pt = mouseRange1->idxTotal < mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    return moveMouseFocus(pt, qMin(cntTotalPoints - 1, pt->idxTotal + i), owner);
+}
+
+bool CGisItemTrk::decMouseRangeBegin(qint32 i, const QString& owner)
+{
+    if(mouseRange1 == nullptr || mouseRange2 == nullptr)
+    {
+        return false;
+    }
+    const CTrackData::trkpt_t * &pt = mouseRange1->idxTotal < mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    return moveMouseFocus(pt, qMax(0, pt->idxTotal - i), owner);
+}
+
+bool CGisItemTrk::incMouseRangeEnd(qint32 i, const QString& owner)
+{
+    if(mouseRange1 == nullptr || mouseRange2 == nullptr)
+    {
+        return false;
+    }
+
+    const CTrackData::trkpt_t * &pt = mouseRange1->idxTotal > mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    return moveMouseFocus(pt, qMin(cntTotalPoints - 1, pt->idxTotal + i), owner);
+}
+
+bool CGisItemTrk::decMouseRangeEnd(qint32 i, const QString& owner)
+{
+    if(mouseRange1 == nullptr || mouseRange2 == nullptr)
+    {
+        return false;
+    }
+    const CTrackData::trkpt_t * &pt = mouseRange1->idxTotal > mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    return moveMouseFocus(pt, qMax(0, pt->idxTotal - i), owner);
+}
+
+bool CGisItemTrk::moveMouseFocus(const CTrackData::trkpt_t * &pt, qint32 idxNext, const QString& owner)
+{
+    if(mode != eModeRange || mouseFocusOwner != owner)
+    {
+        return false;
+    }
+
+    rangeState = eRangeStateClicked2nd;
+
+    pt = trk.getTrkPtByTotalIndex(idxNext);
+    mouseMoveFocus = pt;
+
+    setMouseFocusVisuals(pt);
+    setMouseRangeFocusVisuals(mouseRange1, mouseRange2);
+    return true;
+}
+
+bool CGisItemTrk::newMouseRangeBegin(const QString& owner)
+{
+    if(mode != eModeRange || mouseFocusOwner != owner || mouseRange1 == nullptr || mouseRange2 == nullptr)
+    {
+        return false;
+    }
+
+    const CTrackData::trkpt_t * pt = mouseRange1->idxTotal < mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    mouseRange1 = pt;
+    mouseRange2 = pt;
+    rangeState = eRangeStateClicked2nd;
+    setMouseFocusVisuals(pt);
+    setMouseRangeFocusVisuals(mouseRange1, mouseRange2);
+    return true;
+}
+
+bool CGisItemTrk::newMouseRangeEnd(const QString& owner)
+{
+    if(mode != eModeRange || mouseFocusOwner != owner || mouseRange1 == nullptr || mouseRange2 == nullptr)
+    {
+        return false;
+    }
+
+    const CTrackData::trkpt_t * pt = mouseRange1->idxTotal > mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    mouseRange1 = pt;
+    mouseRange2 = pt;
+    rangeState = eRangeStateClicked2nd;
+    setMouseFocusVisuals(pt);
+    setMouseRangeFocusVisuals(mouseRange1, mouseRange2);
+    return true;
+}
 
 void CGisItemTrk::resetMouseRange()
 {
+    mouseClickFocus = nullptr;
+    mouseMoveFocus = nullptr;
     mouseRange1 = nullptr;
     mouseRange2 = nullptr;
     rangeState  = eRangeStateIdle;
+    setMouseFocusVisuals(nullptr);
+    setMouseRangeFocusVisuals(nullptr, nullptr);
 }
 
 bool CGisItemTrk::publishMouseFocus(const CTrackData::trkpt_t * pt, focusmode_e fmode, const QString& owner)
@@ -2744,30 +2929,91 @@ void CGisItemTrk::publishMouseFocusRangeMode(const CTrackData::trkpt_t * pt, foc
     {
     case eRangeStateIdle:
     {
-        if((fmode == eFocusMouseClick) && (pt != nullptr))
+        if(pt == nullptr)
         {
-            mouseRange1 = pt;
-            rangeState  = eRangeState1st;
+            break;
         }
-        break;
-    }
 
-    case eRangeState1st:
-    {
+        mouseMoveFocus = pt;
+        mouseRange1 = pt;
         mouseRange2 = pt;
-        if((fmode == eFocusMouseClick) && (pt != nullptr))
-        {
-            rangeState = eRangeState2nd;
-        }
-        break;
-    }
 
-    case eRangeState2nd:
-    {
         if(fmode == eFocusMouseClick)
         {
-            resetMouseRange();
+            rangeState  = eRangeStateClicked1st;
         }
+        break;
+    }
+
+    case eRangeStateClicked1st:
+    {
+        if(pt == nullptr)
+        {
+            break;
+        }
+
+        mouseMoveFocus = pt;
+        mouseRange2 = pt;
+        if(fmode == eFocusMouseClick)
+        {
+            rangeState = eRangeStateClicked2nd;
+        }
+        break;
+    }
+
+    case eRangeStateClicked2nd:
+    {
+        mouseMoveFocus = pt;
+
+        if(fmode == eFocusMouseClick)
+        {
+            if(mouseMoveFocus == mouseRange1)
+            {
+                rangeState = eRangeStateMove1st;
+            }
+            else if(mouseMoveFocus == mouseRange2)
+            {
+                rangeState = eRangeStateMove2nd;
+            }
+            else
+            {
+                resetMouseRange();
+            }
+        }
+        break;
+    }
+
+    case eRangeStateMove1st:
+    {
+        if(pt == nullptr)
+        {
+            break;
+        }
+
+        mouseMoveFocus = pt;
+        mouseRange1 = pt;
+        if(fmode == eFocusMouseClick)
+        {
+            rangeState = eRangeStateClicked2nd;
+        }
+
+        break;
+    }
+
+    case eRangeStateMove2nd:
+    {
+        if(pt == nullptr)
+        {
+            break;
+        }
+
+        mouseMoveFocus = pt;
+        mouseRange2 = pt;
+        if(fmode == eFocusMouseClick)
+        {
+            rangeState = eRangeStateClicked2nd;
+        }
+
         break;
     }
     }

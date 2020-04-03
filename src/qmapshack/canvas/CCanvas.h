@@ -185,6 +185,7 @@ signals:
     void sigMousePosition(const QPointF& pos, qreal ele, qreal slope);
     void sigZoom();
     void sigMove();
+    void sigResize(const QSize& size);
 
 public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);

@@ -110,6 +110,7 @@ public:
     }
 
     void zoomCanvasTo(const QRectF rect);
+    void resetMouse();
     /**
        @brief Read the elevation from DEM data attached to the currently visible canvas for a given location
        @param pos   a position in units of [rad]

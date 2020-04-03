@@ -13,7 +13,7 @@
    height="64px"
    id="svg3513"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
    sodipodi:docname="SelectRange.svg">
   <defs
      id="defs3515">
@@ -92,16 +92,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11"
-     inkscape:cx="4.2132686"
+     inkscape:cx="17.213269"
      inkscape:cy="35.664608"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
      inkscape:window-width="1920"
-     inkscape:window-height="996"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-height="997"
+     inkscape:window-x="0"
+     inkscape:window-y="1080"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -123,71 +123,6 @@
      id="layer1"
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
-    <path
-       style="fill:none;stroke:#ff0000;stroke-width:8;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 12.590982,42.90909 37.636219,0"
-       id="path2999"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;stroke:#0000ff;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 6,42.90909 52,0"
-       id="path4223"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:#000080;stroke:#000080;stroke-width:2.80589914;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="M 12,9.3576325 12,53.096912"
-       id="path3002"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:#000080;stroke:#000080;stroke-width:2.82508969;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="M 52,8.8301885 52,53.169812"
-       id="path3002-0"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:#000080;stroke:#000080;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
-       d="m 12,21.90909 34,0"
-       id="path3024"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <path
-       sodipodi:type="arc"
-       style="fill:#0000ff;fill-opacity:1;stroke:none"
-       id="path3802"
-       sodipodi:cx="-24.5"
-       sodipodi:cy="39.5"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m -25,39.500682 a 0.5,0.5 0 1 1 5e-6,0.0015"
-       sodipodi:start="3.1402285"
-       sodipodi:end="9.4203312"
-       sodipodi:open="true"
-       transform="matrix(14,0,0,14,355.00002,-509.9091)" />
-    <path
-       sodipodi:type="arc"
-       style="fill:#0000ff;fill-opacity:1;stroke:none"
-       id="path3802-8"
-       sodipodi:cx="-24.5"
-       sodipodi:cy="39.5"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m -25,39.500682 a 0.5,0.5 0 1 1 5e-6,0.0015"
-       sodipodi:start="3.1402285"
-       sodipodi:end="9.4203312"
-       sodipodi:open="true"
-       transform="matrix(14,0,0,14,395.00001,-509.99999)" />
-    <path
-       sodipodi:type="arc"
-       style="fill:#0000ff;fill-opacity:1;stroke:none"
-       id="path3802-0"
-       sodipodi:cx="-24.5"
-       sodipodi:cy="39.5"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m -25,39.500682 a 0.5,0.5 0 1 1 5e-6,0.0015"
-       sodipodi:start="3.1402285"
-       sodipodi:end="9.4203312"
-       sodipodi:open="true"
-       transform="matrix(14,0,0,14,375.09092,-510.00001)" />
     <rect
        style="fill:none;stroke:none"
        id="rect3829"
@@ -195,5 +130,55 @@
        height="60"
        x="2"
        y="1" />
+    <g
+       id="g881"
+       transform="translate(-0.45454545)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3002"
+         d="M 12,9.3576325 V 53.096912"
+         style="fill:#000080;stroke:#000080;stroke-width:2.80589914;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3002-0"
+         d="M 54,8.8301885 V 53.169812"
+         style="fill:#000080;stroke:#000080;stroke-width:2.82508969;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path3024"
+         d="M 12,21.90909 H 49"
+         style="fill:#000080;stroke:#000080;stroke-width:3.12955546;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend)" />
+      <g
+         id="g986"
+         transform="translate(0.886269,-4.075344)">
+        <path
+           style="fill:#00ff00;fill-opacity:1;stroke:#0000ff;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 53.113731,51.075344 h -42"
+           id="path14175"
+           inkscape:connector-curvature="0" />
+        <circle
+           style="fill:#00ff00;fill-opacity:1;stroke:#000080;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+           id="path12704"
+           cx="-53.022823"
+           cy="50.893528"
+           r="9"
+           transform="scale(-1,1)" />
+        <circle
+           style="fill:#00ff00;fill-opacity:1;stroke:#000080;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+           id="path12704-1"
+           cx="-32.086666"
+           cy="50.947353"
+           r="9"
+           transform="scale(-1,1)" />
+        <circle
+           style="fill:#00ff00;fill-opacity:1;stroke:#000080;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+           id="path12704-2"
+           cx="-10.95602"
+           cy="50.937431"
+           r="9"
+           transform="scale(-1,1)" />
+      </g>
+    </g>
   </g>
 </svg>

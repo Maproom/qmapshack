@@ -569,6 +569,8 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     labelHelp->move(25, 25);
     labelHelp->resize(s);
     buildHelpText();
+
+    emit sigResize(e->size());
 }
 
 void CCanvas::paintEvent(QPaintEvent*)
@@ -612,12 +614,12 @@ void CCanvas::paintEvent(QPaintEvent*)
             rt->draw(p, rect());
         }
     }
+
+    drawScale(p);
     mouse->draw(p, needsRedraw, rect());
 
-
     drawStatusMessages(p);
-    drawTrackStatistic(p);
-    drawScale(p);
+    drawTrackStatistic(p);    
 
     p.end();
     needsRedraw = eRedrawNone;

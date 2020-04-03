@@ -71,6 +71,16 @@ public:
         , eModeRange
     };
 
+    enum rangestate_e
+    {
+        eRangeStateInvalid
+        , eRangeStateIdle
+        , eRangeStateClicked1st
+        , eRangeStateClicked2nd
+        , eRangeStateMove1st
+        , eRangeStateMove2nd
+    };
+
     enum visual_e
     {
         eVisualNone          = 0
@@ -81,6 +91,7 @@ public:
         , eVisualColorAct    = 0x10
         , eVisualTrkTable    = 0x20
         , eVisualTrkInfo     = 0x40
+        , eVisualRangeTool   = 0x80
         , eVisualAll         = -1
     };
 
@@ -364,7 +375,7 @@ public:
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
     void drawLabel(QPainter&p, const QPolygonF&, QList<QRectF>&blockedAreas, const QFontMetricsF&fm, CGisDraw*gis) override;
     void drawHighlight(QPainter& p) override;
-    void drawRange(QPainter& p);
+    void drawRange(QPainter& p, CGisDraw *gis);
 
     /**
        @brief Switch user focus on and off.
@@ -447,6 +458,11 @@ public:
 
      */
     void showSelectedPoints();
+
+    /**
+       @brief Permanently remove selected points from track
+     */
+    void deleteSelectedPoints();
 
     /**
        @brief Set the activity flag for all track points
@@ -535,7 +551,32 @@ public:
        @param idx
      */
     bool setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const QString& owner);
+    bool setMouseRangeByTotalIndex(qint32 idx1, qint32 idx2, const QString& owner);
 
+    bool incMouseRangeBegin(qint32 i, const QString& owner);
+    bool decMouseRangeBegin(qint32 i, const QString& owner);
+    bool incMouseRangeEnd(qint32 i, const QString& owner);
+    bool decMouseRangeEnd(qint32 i, const QString& owner);
+
+    /**
+       @brief Start a new mouse range right before the current selected
+       @param owner
+       @return
+     */
+    bool newMouseRangeBegin(const QString& owner);
+    /**
+       @brief Start a new mouse range right after the current selected
+       @param owner
+       @return
+     */
+    bool newMouseRangeEnd(const QString& owner);
+
+    rangestate_e getRangState() const
+    {
+        return mode != eModeRange ? eRangeStateInvalid : rangeState;
+    }
+
+    void resetMouseRange();
 
     /** @defgroup Filter All filters implemented by CGisItemTrks.
 
@@ -697,7 +738,6 @@ private:
     bool publishMouseFocus(const CTrackData::trkpt_t * pt, focusmode_e fmode, const QString &owner);
     void publishMouseFocusNormalMode(const CTrackData::trkpt_t * pt, focusmode_e fmode);
     void publishMouseFocusRangeMode(const CTrackData::trkpt_t * pt, focusmode_e fmode);
-    void resetMouseRange();
 
     /**
        @brief Replace all trackpoints by the coordinates stored in the polyline
@@ -726,9 +766,12 @@ private:
     /// setup track icon by color
     void setIcon(const QString& iconColor);
 
+    bool moveMouseFocus(const CTrackData::trkpt_t * &pt, qint32 idxNext, const QString& owner);
     void setMouseFocusVisuals(const CTrackData::trkpt_t * pt);
     void setMouseRangeFocusVisuals(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2);
     void setMouseClickFocusVisuals(const CTrackData::trkpt_t * pt);
+
+    bool adjustIndicesForRemoveOperations(qint32& idx1, qint32& idx2);
 
 public:
     /**
@@ -781,7 +824,7 @@ public:
     CLimit limitsGraph1 {"TrackDetails/Graph1", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp, _markChanged};
     CLimit limitsGraph2 {"TrackDetails/Graph2", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp, _markChanged};
     CLimit limitsGraph3 {"TrackDetails/Graph3", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp, _markChanged};
-
+    CLimit limitsGraphRange {"TrackDetails/Graph3", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp, _markChanged};
     CLimit colorSourceLimit {"TrackDetails/Style", _getMin, _getMax, _getMin, _getMax, _getUnitProp, _markChanged};
 
 private:
@@ -888,13 +931,6 @@ private:
         \defgroup FocusRange Variables to handle mouse focus and range selection
      */
     /**@{*/
-    enum rangestate_e
-    {
-        eRangeStateIdle
-        , eRangeState1st
-        , eRangeState2nd
-    };
-
     /// state variable for range selection
     rangestate_e rangeState = eRangeStateIdle;
 

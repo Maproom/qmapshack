@@ -22,6 +22,7 @@ static QString relTranslationDir = "Resources/translations"; // app
 static QString relRoutinoDir     = "Resources/routino"; // app
 static QString relGdalDir        = "Resources/gdal"; // app
 static QString relProjDir        = "Resources/proj"; // app
+static QString relHelpDir        = "Resources/help"; // app
 static QString relBinDir         = "Tools"; // app
 
 static QString relLogDir         = "Library/Logs"; // home
@@ -155,4 +156,10 @@ void CAppSetupMac::migrateDirContent(QString dest)
             qDebug() << "error migrating directory" << dirSource;
         }
     }
+}
+
+QString CAppSetupMac::helpFile()
+{
+    QDir dirHelp(getApplicationDir(relHelpDir));
+    return dirHelp.absoluteFilePath("QMSHelp.qhc");
 }

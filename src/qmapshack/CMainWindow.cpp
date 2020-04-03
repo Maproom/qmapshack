@@ -823,6 +823,14 @@ void CMainWindow::zoomCanvasTo(const QRectF rect)
     }
 }
 
+void CMainWindow::resetMouse()
+{
+    for(CCanvas * canvas : getCanvas())
+    {
+        canvas->resetMouse();
+    }
+}
+
 qreal CMainWindow::getElevationAt(const QPointF& pos) const
 {
     CCanvas * canvas = getVisibleCanvas();

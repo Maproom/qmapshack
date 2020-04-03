@@ -158,7 +158,8 @@ set( SRCS
     gis/trk/CGisItemTrk.cpp
     gis/trk/CInvalidTrk.cpp
     gis/trk/CKnownExtension.cpp
-    gis/trk/CPropertyTrk.cpp
+    gis/trk/CListTrkPts.cpp
+    gis/trk/CPropertyTrk.cpp    
     gis/trk/CScrOptTrk.cpp
     gis/trk/CSelectActivityColor.cpp
     gis/trk/CTableTrk.cpp
@@ -254,7 +255,10 @@ set( SRCS
     mouse/CMouseSelect.cpp
     mouse/CMouseWptBubble.cpp
     mouse/CScrOptPrint.cpp
-    mouse/CScrOptRangeTrk.cpp
+    mouse/range/CActionSelect.cpp
+    mouse/range/CRangeToolSetup.cpp
+    mouse/range/CScrOptRangeTool.cpp
+    mouse/range/CScrOptRangeTrk.cpp
     mouse/CScrOptRuler.cpp
     mouse/CScrOptSelect.cpp
     mouse/CScrOptSemaphoreLocker.cpp
@@ -502,7 +506,8 @@ set( HDRS
     gis/trk/CGisItemTrk.h
     gis/trk/CInvalidTrk.h
     gis/trk/CKnownExtension.h
-    gis/trk/CPropertyTrk.h
+    gis/trk/CListTrkPts.h
+    gis/trk/CPropertyTrk.h    
     gis/trk/CScrOptTrk.h
     gis/trk/CSelectActivityColor.h
     gis/trk/CTableTrk.h
@@ -602,7 +607,10 @@ set( HDRS
     mouse/CMouseSelect.h
     mouse/CMouseWptBubble.h
     mouse/CScrOptPrint.h
-    mouse/CScrOptRangeTrk.h
+    mouse/range/CActionSelect.h
+    mouse/range/CRangeToolSetup.h
+    mouse/range/CScrOptRangeTool.h
+    mouse/range/CScrOptRangeTrk.h
     mouse/CScrOptRuler.h
     mouse/CScrOptSelect.h
     mouse/CScrOptSemaphoreLocker.h
@@ -754,6 +762,7 @@ set( UIS
     gis/trk/IDetailsTrk.ui
     gis/trk/IEnergyCyclingDialog.ui
     gis/trk/IInvalidTrk.ui
+    gis/trk/IListTrkPts.ui
     gis/trk/IScrOptTrk.ui
     gis/trk/ISelectActivityColor.ui
     gis/trk/filter/IFilterChangeStartPoint.ui
@@ -798,7 +807,10 @@ set( UIS
     map/IMapPathSetup.ui
     map/IMapPropSetup.ui
     mouse/IScrOptPrint.ui
-    mouse/IScrOptRangeTrk.ui
+    mouse/range/IActionSelect.ui
+    mouse/range/IRangeToolSetup.ui
+    mouse/range/IScrOptRangeTool.ui
+    mouse/range/IScrOptRangeTrk.ui    
     mouse/IScrOptRuler.ui
     mouse/IScrOptSelect.ui
     mouse/line/IScrOptEditLine.ui

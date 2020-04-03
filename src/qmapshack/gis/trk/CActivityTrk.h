@@ -61,12 +61,8 @@ public:
 
     struct range_t
     {
-        qreal d1;
-        qreal d2;
-
-        qreal t1;
-        qreal t2;
-
+        qint32 idxTotalBeg = NOIDX;
+        qint32 idxTotalEnd = NOIDX;
         trkact_t activity;
     };
 
@@ -139,6 +135,18 @@ public:
        @brief Update internal summary array
      */
     void update();
+
+    /**
+       @brief Update track point flags
+
+       Track points that start a new activity must not be hidden and
+       the eFlagActivity flag has to be set. As range can even affect
+       hidden track points this might revert a hidden start point. This
+       will have influence on the visible index and the track statistics.
+       Therefore this operation has to be done in a very early stage
+       of CGisItemTrk::deriveSecondaryData().
+     */
+    void updateFlags();
 
     /**
        @brief Get sum of all activities seen in the track

@@ -40,8 +40,9 @@ public:
         {
             eFlagReserved1 = 0x00000001
             , eFlagReserved2 = 0x00000002
-            , eFlagHidden    = 0x00000004    ///< mark point as deleted
-            , eFlagSubpt     = 0x00000008    ///< point has been derived as subpoint in a route
+            , eFlagHidden    = 0x00000004   ///< mark point as deleted
+            , eFlagSubpt     = 0x00000008   ///< point has been derived as subpoint in a route
+            , eFlagActivity  = 0x00000010   ///< Startpoint of activity
         };
 
         /**
@@ -118,12 +119,24 @@ public:
             return flags & flag;
         }
 
-        inline void setFlag(enum flag_e flag)
+        inline void setFlag(enum flag_e flag) const
         {
+            // never hide an activity start point
+            if(flag == eFlagHidden && hasFlag(eFlagActivity))
+            {
+                return;
+            }
+
             flags |= flag;
         }
 
-        inline void unsetFlag(enum flag_e flag)
+        inline void setActivityFlag() const
+        {
+            unsetFlag(eFlagHidden);
+            flags |= eFlagActivity;
+        }
+
+        inline void unsetFlag(enum flag_e flag) const
         {
             flags &= ~flag;
         }
@@ -176,7 +189,6 @@ public:
         }
 
         act20_e activity = eAct20None;
-        quint32 flags = 0;
         quint32 valid = 0;
         qint32 idxTotal = NOIDX;            //< index within the complete track
         qint32 idxVisible;                  //< offset into lineSimple
@@ -194,6 +206,8 @@ public:
 
         static const QMap<act10_e, act20_e> act1to2;
         static const QMap<act20_e, act10_e> act2to1;
+
+        mutable quint32 flags = 0;
     };
 
     struct trkseg_t
@@ -279,13 +293,21 @@ public:
 
     bool delTrkPtDesc(const QList<int>& idxTotal);
 
+    const trkpt_t * last() const
+    {
+        if(segs.isEmpty() || segs.last().isEmpty())
+        {
+            return nullptr;
+        }
+        return &segs.last().pts.last();
+    }
+
     template<typename T1, typename T2>
     class iterator : public std::iterator<std::forward_iterator_tag, T2>
     {
         T1 &trk;
         int seg = 0;
         int pt  = 0;
-
 public:
         explicit iterator(T1 &trk, int seg, int pt) : trk(trk), seg(seg), pt(pt) {}
 

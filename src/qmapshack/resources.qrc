@@ -235,8 +235,15 @@
         <file>../icons/32x32/SearchWebMeteo.png</file>
         <file>../icons/32x32/SelectArea.png</file>
         <file>../icons/32x32/SelectColor.png</file>
+        <file>../icons/32x32/SelectEndPoint.png</file>
+        <file>../icons/32x32/SelectEndNextPoint.png</file>
+        <file>../icons/32x32/SelectEndPrevPoint.png</file>
         <file>../icons/32x32/SelectExactArea.png</file>
         <file>../icons/32x32/SelectIntersectArea.png</file>
+        <file>../icons/32x32/SelectReset.png</file>
+        <file>../icons/32x32/SelectStartNextPoint.png</file>
+        <file>../icons/32x32/SelectStartPrevPoint.png</file>
+        <file>../icons/32x32/SelectStartPoint.png</file>
         <file>../icons/32x32/SelectRange.png</file>
         <file>../icons/32x32/SetEle.png</file>
         <file>../icons/32x32/SetupCoordFormat.png</file>
@@ -268,6 +275,8 @@
         <file>../icons/32x32/Time.png</file>
         <file>../icons/32x32/TimeZoneSetup.png</file>
         <file>../icons/32x32/ToBottom.png</file>
+        <file>../icons/32x32/ToEnd.png</file>
+        <file>../icons/32x32/ToStart.png</file>
         <file>../icons/32x32/ToTop.png</file>
         <file>../icons/32x32/ToggleDatabase.png</file>
         <file>../icons/32x32/ToggleDem.png</file>
@@ -506,8 +515,15 @@
         <file>../icons/48x48/SearchWebMeteo.png</file>
         <file>../icons/48x48/SelectArea.png</file>
         <file>../icons/48x48/SelectColor.png</file>
+        <file>../icons/48x48/SelectEndPoint.png</file>
+        <file>../icons/48x48/SelectEndNextPoint.png</file>
+        <file>../icons/48x48/SelectEndPrevPoint.png</file>
         <file>../icons/48x48/SelectExactArea.png</file>
         <file>../icons/48x48/SelectIntersectArea.png</file>
+        <file>../icons/48x48/SelectReset.png</file>
+        <file>../icons/48x48/SelectStartNextPoint.png</file>
+        <file>../icons/48x48/SelectStartPrevPoint.png</file>
+        <file>../icons/48x48/SelectStartPoint.png</file>
         <file>../icons/48x48/SelectRange.png</file>
         <file>../icons/48x48/SetEle.png</file>
         <file>../icons/48x48/SetupCoordFormat.png</file>
@@ -539,6 +555,8 @@
         <file>../icons/48x48/Time.png</file>
         <file>../icons/48x48/TimeZoneSetup.png</file>
         <file>../icons/48x48/ToBottom.png</file>
+        <file>../icons/48x48/ToEnd.png</file>
+        <file>../icons/48x48/ToStart.png</file>
         <file>../icons/48x48/ToTop.png</file>
         <file>../icons/48x48/ToggleDatabase.png</file>
         <file>../icons/48x48/ToggleDem.png</file>

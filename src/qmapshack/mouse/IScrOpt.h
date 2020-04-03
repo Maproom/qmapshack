@@ -19,13 +19,13 @@
 #ifndef ISCROPT_H
 #define ISCROPT_H
 
+#include <QMouseEvent>
 #include <QPixmap>
 #include <QPointer>
 #include <QRect>
 #include <QSemaphore>
 #include <QWidget>
 
-class QMouseEvent;
 class IMouse;
 
 #define SCR_OPT_OFFSET 15
@@ -60,6 +60,16 @@ protected slots:
 protected:
     void enterEvent(QEvent *e) override;
     void leaveEvent(QEvent *e) override;
+    // block mouse actions to hit the canvas
+    void mousePressEvent(QMouseEvent * e) override
+    {
+        e->accept();
+    }
+    // block mouse actions to hit the canvas
+    void mouseMoveEvent(QMouseEvent *e) override
+    {
+        e->accept();
+    }
 
     QPoint origin;
     QPoint mousePos;

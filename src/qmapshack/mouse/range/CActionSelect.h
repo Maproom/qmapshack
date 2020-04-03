@@ -16,39 +16,25 @@
 
 **********************************************************************************************/
 
-#ifndef MISC_H
-#define MISC_H
+#ifndef CACTIONSELECT_H
+#define CACTIONSELECT_H
 
-#include <QCollator>
-#include <algorithm>
-#include <initializer_list>
+#include "mouse/range/CScrOptRangeTool.h"
+#include "ui_IActionSelect.h"
 
-#define QMS_DELETE(p) \
-    delete p; \
-    p = nullptr
-
-
-
-inline bool sortByString(const QString& str1, const QString& str2)
+class CActionSelect : public QWidget, private Ui::IActionSelect
 {
-    static QCollator collator;
-    // this will set collator to natural sorting mode (instead of lexical)
-    collator.setNumericMode(true);
-    return collator.compare(str1, str2) < 0;
-}
+    Q_OBJECT
+public:
+    CActionSelect(QWidget * parent);
+    virtual ~CActionSelect() = default;
 
-template<typename T>
-bool sortByName(T * item1, T * item2)
-{
-    return sortByString(item1->getName(), item2->getName());
-}
+    void setAction(CScrOptRangeTool::eAction action);
+    CScrOptRangeTool::eAction getAction() const;
 
-template <typename T>
-bool is_in(const T& v, std::initializer_list<T> lst)
-{
-    return std::find(std::begin(lst), std::end(lst), v) != std::end(lst);
-}
+private:
+    QVector<QRadioButton *> buttons;
+};
 
-
-#endif //MISC_H
+#endif //CACTIONSELECT_H
 

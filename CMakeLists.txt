@@ -44,7 +44,7 @@ project(QMapShack VERSION 1.14.1)
 
 # FOR A RELEASE:
 # remove "development" for a release
-set(DEVELOPMENT_VERSION OFF)
+set(DEVELOPMENT_VERSION ON)
 
 
 ###############################################################################################
@@ -236,7 +236,7 @@ endif(BUILD_QMAPTOOL)
 ###############################################################################################
 if (UNIX AND NOT WIN32 AND NOT APPLE)
 if(BUILD_QMAPSHACK)
-    install( FILES        src/icons/48x48/QMapShack.png     DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )    
+    install( FILES        src/icons/48x48/QMapShack.png     DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )
     install( DIRECTORY    src/icons/qmapshack/hicolor       DESTINATION     ${ICON_INSTALL_DIR} )
     install( FILES        qmapshack.1                       DESTINATION     ${MAN_INSTALL_DIR}/man1  )
     install( FILES        src/qmapshack/doc/QMSHelp.qhc     DESTINATION     ${HTML_INSTALL_DIR})

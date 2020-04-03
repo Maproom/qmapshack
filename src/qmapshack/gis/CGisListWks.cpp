@@ -1587,6 +1587,7 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
         IGisProject * project = gisItem->getParentProject();
         if (project != nullptr && project->isVisible())
         {
+            CMainWindow::self().resetMouse();
             CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
             CGisWorkspace::self().focusTrkByKey(true, gisItem->getKey());
         }

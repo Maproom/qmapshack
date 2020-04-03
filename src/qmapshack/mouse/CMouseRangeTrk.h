@@ -28,7 +28,7 @@
 class CGisItemTrk;
 class CGisDraw;
 class CCanvas;
-class CScrOptRangeTrk;
+class CScrOptRangeTool;
 
 class CMouseRangeTrk : public IMouse
 {
@@ -39,21 +39,12 @@ public:
 
     void draw(QPainter& p, CCanvas::redraw_e, const QRect &) override;
 
-    void unfocus() override;
     void leftClicked(const QPoint& point) override;
-    void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
     void mouseMoved(const QPoint& pos) override;
     void leftButtonDown(const QPoint& pos) override;
-    void scaleChanged() override;
 
-private slots:
-    void slotHidePoints();
-    void slotShowPoints();
-    void slotActivity();
-    void slotCopy();
-
-private:
-    void resetState();
+private:    
+    const QString owner;
     IGisItem::key_t key;
 
     enum state_e
@@ -66,7 +57,7 @@ private:
     state_e state   = eStateIdle;
     QPointF anchor  = NOPOINTF;
 
-    QPointer<CScrOptRangeTrk> scrOptRange;
+    QPointer<CScrOptRangeTool>  scrOptRangeTool;
 };
 
 #endif //CMOUSERANGETRK_H

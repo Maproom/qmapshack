@@ -596,6 +596,8 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
         return stream;
     }
 
+    resetMouseRange();
+
     stream >> version;
     stream >> buffer;
     buffer = qUncompress(buffer);

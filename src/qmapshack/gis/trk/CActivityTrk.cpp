@@ -123,6 +123,28 @@ QMenu * CActivityTrk::getMenu(const QList<IGisItem::key_t> &keys, QWidget *paren
     return menu;
 }
 
+void CActivityTrk::updateFlags()
+{
+    const CTrackData& data = trk->getTrackData();
+    trkact_t lastAct = CTrackData::trkpt_t::eAct20Bad;
+
+    for(const CTrackData::trkpt_t &pt : data)
+    {
+        pt.unsetFlag(CTrackData::trkpt_t::eFlagActivity);
+        if(lastAct != pt.getAct())
+        {
+            pt.setActivityFlag();
+            lastAct = pt.getAct();
+        }
+    }
+
+    const CTrackData::trkpt_t * last = data.last();
+    if(last != nullptr)
+    {
+        last->setActivityFlag();
+    }
+}
+
 void CActivityTrk::update()
 {
     allActivities.clear();
@@ -138,29 +160,23 @@ void CActivityTrk::update()
     {
         allActivities << pt.getAct();
 
-        if(pt.isHidden())
-        {
-            continue;
-        }
         lastTrkpt = &pt;
         if(pt.getAct() != lastAct)
         {
             if(startTrkpt != nullptr)
             {
                 summary_t& summary = activitySummary[lastAct];
-                summary.distance += pt.distance - startTrkpt->distance;
-                summary.ascent   += pt.ascent   - startTrkpt->ascent;
-                summary.descent  += pt.descent  - startTrkpt->descent;
-                summary.ellapsedSeconds += pt.elapsedSeconds - startTrkpt->elapsedSeconds;
-                summary.ellapsedSecondsMoving += pt.elapsedSecondsMoving - startTrkpt->elapsedSecondsMoving;
+                summary.distance += lastTrkpt->distance - startTrkpt->distance;
+                summary.ascent   += lastTrkpt->ascent   - startTrkpt->ascent;
+                summary.descent  += lastTrkpt->descent  - startTrkpt->descent;
+                summary.ellapsedSeconds += lastTrkpt->elapsedSeconds - startTrkpt->elapsedSeconds;
+                summary.ellapsedSecondsMoving += lastTrkpt->elapsedSecondsMoving - startTrkpt->elapsedSecondsMoving;
 
                 activityRanges << range_t();
                 range_t& activity = activityRanges.last();
 
-                activity.d1 = startTrkpt->distance;
-                activity.d2 = pt.distance;
-                activity.t1 = startTrkpt->time.toTime_t();
-                activity.t2 = pt.time.toTime_t();
+                activity.idxTotalBeg = startTrkpt->idxTotal;
+                activity.idxTotalEnd = lastTrkpt->idxTotal;
                 activity.activity = lastAct;
             }
 
@@ -184,12 +200,9 @@ void CActivityTrk::update()
     activityRanges << range_t();
     range_t& activity = activityRanges.last();
 
-    activity.d1 = startTrkpt->distance;
-    activity.d2 = lastTrkpt->distance;
-    activity.t1 = startTrkpt->time.toTime_t();
-    activity.t2 = lastTrkpt->time.toTime_t();
+    activity.idxTotalBeg = startTrkpt->idxTotal;
+    activity.idxTotalEnd = lastTrkpt->idxTotal;
     activity.activity = lastAct;
-
 
 //    for(int i = 0; i < 9; i++)
 //    {

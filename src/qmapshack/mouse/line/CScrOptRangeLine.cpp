@@ -34,7 +34,7 @@ CScrOptRangeLine::CScrOptRangeLine(const QPointF &point, IMouse *mouse, QWidget 
 
     setOrigin(point.toPoint());
 
-    move(point.toPoint() + QPoint(-width()/2, SCR_OPT_OFFSET));
+    moveTo(point.toPoint());
     show();
 }
 

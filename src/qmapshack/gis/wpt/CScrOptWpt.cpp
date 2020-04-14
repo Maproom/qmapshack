@@ -17,8 +17,6 @@
 
 **********************************************************************************************/
 
-
-#include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/search/CGeoSearchWeb.h"
@@ -51,7 +49,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     toolDelRadius->setEnabled(radius);
 
     anchor = wpt->getPointCloseBy(point);
-    move(anchor.toPoint() + QPoint(-width()/2, SCR_OPT_OFFSET));
+    moveTo(anchor.toPoint());
     show();
 
     connect(toolDelete,           &QToolButton::clicked, this, &CScrOptWpt::slotDelete);

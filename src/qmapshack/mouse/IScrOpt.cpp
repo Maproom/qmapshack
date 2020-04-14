@@ -42,6 +42,27 @@ IScrOpt::~IScrOpt()
     CGisWorkspace::self().slotWksItemSelectionReset();
 }
 
+void IScrOpt::moveTo(const QPoint& anchor)
+{
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas == nullptr)
+    {
+        move(anchor + QPoint(-width()/2, SCR_OPT_OFFSET));
+        return;
+    }
+
+    qint32 xmin = 0;
+    qint32 xmax = canvas->width() - width();
+    qint32 ymax = canvas->height() - height() - SCR_OPT_OFFSET;
+
+    QPoint pt = anchor + QPoint(-width()/2, SCR_OPT_OFFSET);
+    pt.rx() = qMax(xmin, pt.x());
+    pt.rx() = qMin(xmax, pt.x());
+    pt.ry() = qMin(ymax, pt.y());
+
+    move(pt);
+}
+
 void IScrOpt::mouseMove(const QPoint& pos)
 {
     mousePos = pos;

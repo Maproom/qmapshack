@@ -39,7 +39,7 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     {
         anchor = point;
     }
-    move(anchor.toPoint() + QPoint(-width()/2, SCR_OPT_OFFSET));
+    moveTo(anchor.toPoint());
     toolNogo->setChecked(area->isNogo());
     show();
 

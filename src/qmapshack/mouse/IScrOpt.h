@@ -71,6 +71,8 @@ protected:
         e->accept();
     }
 
+    void moveTo(const QPoint& anchor);
+
     QPoint origin;
     QPoint mousePos;
 

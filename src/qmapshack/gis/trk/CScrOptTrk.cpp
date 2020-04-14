@@ -58,7 +58,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
         toolCut->setEnabled(false);
     }
 
-    move(anchor.toPoint() + QPoint(-width()/2, SCR_OPT_OFFSET));
+    moveTo(anchor.toPoint());
     show();
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptTrk::slotEditDetails);

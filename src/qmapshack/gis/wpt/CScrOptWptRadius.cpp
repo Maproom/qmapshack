@@ -53,7 +53,7 @@ CScrOptWptRadius::CScrOptWptRadius(CGisItemWpt *wpt, const QPoint& point, IMouse
     toolNogoArea->setChecked(wpt->isNogo());
 
     anchor = wpt->getPointCloseBy(point);
-    move(anchor.toPoint() + QPoint(-width()/2, SCR_OPT_OFFSET));
+    moveTo(anchor.toPoint());
     show();
 
     connect(toolDelete,   &QToolButton::clicked, this, &CScrOptWptRadius::slotDelete);

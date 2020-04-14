@@ -46,7 +46,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     {
         anchor = point;
     }
-    move(anchor.toPoint() + QPoint(-width()/2, SCR_OPT_OFFSET));
+    moveTo(anchor.toPoint());
     toolNogo->setChecked(rte->isNogo());
     show();
 

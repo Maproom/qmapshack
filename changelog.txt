@@ -1,6 +1,7 @@
 V1.XX.X
 [QMS-134] Rework track range selection from scratch
 [QMS-140] Enhancements for OS X release
+[QMS-151] Missing tooltip in route toolbar
 
 V1.14.1
 [QMS-37] Inconsistent use of time zones

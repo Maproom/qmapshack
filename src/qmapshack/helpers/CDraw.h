@@ -79,11 +79,30 @@ public:
        @param p                 An active QPainter
        @param contentRect       The area the actual content will be in
        @param pointerPos        The position of the pointer's head
+       @param background        The color of the background
        @param pointerBaseWidth  The width of the pointer
        @param pointerBasePos    The (relative) location of the pointer (in percent / pixels)
+       @param pen               The border color
+
+       @return Top left corner of content rectangle.
      */
     static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, const QColor &background,
-                         int pointerBaseWidth = 20, float pointerBasePos = .5f, const QPen& pen = penBorderGray);
+                         int pointerBaseWidth, float pointerBasePos, const QPen& pen = penBorderGray);
+
+    /**
+       @brief Draw a cartoon bubble
+
+       Shift the pointerBasePos below pointerPos.
+
+       @param p                 An active QPainter
+       @param contentRect       The area the actual content will be in
+       @param pointerPos        The position of the pointer's head
+       @param background        The color of the background
+
+       @return Top left corner of content rectangle.
+     */
+    static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, const QColor &background);
+
 
     static bool doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect);
 

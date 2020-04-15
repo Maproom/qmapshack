@@ -204,6 +204,12 @@ void CDraw::text(const QString &str, QPainter &p, const QRect &r, const QColor &
     p.drawText(r, Qt::AlignCenter, str);
 }
 
+QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, const QColor& background)
+{
+    qint32 pointerBasePos = qMax(0, pointerPos.x() - contentRect.left());
+    return CDraw::bubble(p, contentRect, pointerPos, background, 20, pointerBasePos);
+}
+
 QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, const QColor& background,
                      int pointerBaseWidth, float pointerBasePos, const QPen &pen)
 {

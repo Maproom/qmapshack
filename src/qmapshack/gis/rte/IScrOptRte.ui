@@ -99,6 +99,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="toolInstruction">
+       <property name="toolTip">
+        <string>Show instructions and details.</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>

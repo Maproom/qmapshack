@@ -627,7 +627,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
         <source>Time: </source>
-        <translation>Heure: </translation>
+        <translation type="unfinished">Durée: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="752"/>
@@ -897,7 +897,20 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="322"/>
         <source>&lt;p&gt;&lt;b&gt;Set Energy Use for Cycling&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Within this dialog your personal energy use (consumption) for a cycling tour can be computed.&lt;/p&gt;&lt;p&gt;The computed value of &quot;Energy Use Cycling&quot; can be see as an indicator for the exertion of a cycling tour.&lt;/p&gt;&lt;p&gt;The tour length, speed and slope values will be taken into account.&lt;/p&gt;&lt;p&gt;To individualize your personal energy use the following input data are more needed:&lt;ul&gt;&lt;li&gt;Driver and bicyle weight&lt;/li&gt;&lt;li&gt;Air density, wind speed and position to the wind to consider the wind drag resistance&lt;/li&gt;&lt;li&gt;Ground situation (tyre and ground) to consider the rolling resistance&lt;/li&gt;&lt;li&gt;Average pedal cadence for the computation of pedal force&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;The individualize data will be defined in this dialog and more computed values will be shown here.&lt;/p&gt;&lt;p&gt;When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set.&lt;p&gt;The energy use in unit &quot;kcal&quot; will be stored in the track (qms format only) and can be remove later on when no longer needed.&lt;/p&gt;&lt;p&gt;For more information see tooltips on input and output values.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Énergie dépensée lors d&apos;une sortie de vélo&lt;/b&gt;&lt;p&gt;
+&lt;p&gt;Cette boîte de dialogue vous permet de calculer l&apos;énergie dépensée lors d&apos;une sortie vélo.&lt;/p&gt;
+&lt;p&gt;La valeur calculée est une estimation de l&apos;intensité de l&apos;effort fourni.&lt;/p&gt;
+&lt;p&gt;Le calcul prend en compte la distance parcourue, la vitesse et le dénivelé.&lt;/p&gt;
+&lt;p&gt;Pour plus de précision, certains paramètres supplémentaires sont requis :&lt;ul&gt;
+&lt;li&gt;Poids du cycliste et de son vélo&lt;/li&gt;
+&lt;li&gt;Densité de l&apos;air, vitesse et direction du vent, pour déterminer les frottements de l&apos;air&lt;/li&gt;
+&lt;li&gt;Nature du contact au sol (chemin, route, type de pneus)&lt;/li&gt;
+&lt;li&gt;Vitesse moyenne de pédalage&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;Vous pouvez entrer ces valeurs dans cette boîte de dialogue.&lt;/p&gt;
+&lt;p&gt;Il est possible d&apos;utiliser les valeurs entrée pour d&apos;anciennes traces lorsqu&apos;elles sont chargées.&lt;/p&gt;
+&lt;p&gt;La dépense énergétique, calculée en kcal, sera enregistrée dans les traces au format qms et peut être supprimée de la trace plus tard si nécessaire.&lt;p&gt;
+&lt;p&gt;Pour plus d&apos;informations, voir les infobulles sur chaque champ&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="48"/>
@@ -1131,7 +1144,19 @@ This filter is designed to detect and hide knots satisfying these two conditions
 - Ratio: The distance on a straight line between the first and the last point of the series is checked. When the distance on the track is greater than that distance multiplied by this ratio value, it is considered to be a knot and the trackpoints are hidden.
 
 You can modify both parameters to customize the behavior of the filter. For the distance it is advisable to indicate a value lower than the GPS accuracy. Keep in mind that if a high distance and a low ratio are indicated, it is possible for the filter to detect a knot by mistake (for example, ranges with sharp curves (serpentines) or sections of very slow speed). </source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer les nœuds de la trace:
+
+Les GPS continuent le plus souvent d&apos;enregistrer la trace pendant les pauses. Comme leur précision est limitée, le résultat sur la trace est un nuage de points formant une espèce de nœud. Cela peut fausser certaines statistiques, et donc donner envie de les enlever.
+
+Un nœud est généralement caractérisé par deux critères:
+- Les points sont très proches les uns des autres
+- La distance séparant deux points successifs est très faible.
+
+Ce filtre est conçu pour détecter et masquer les nœuds remplissant ces deux critères, où les seuils suivants sont réglables:
+- Distance: Si des points successifs sont éloignés de moins de cette distance, il remplissent le premier critère et passent à l&apos;étape suivante.
+- Ratio: La distance à vol d&apos;oiseau entre le premier et le dernier point identifiés à l&apos;étape précédente est calculée Si la distance en suivant la trace est supérieure à la distance à vol d&apos;oiseau multipliée par ce ratio, alors le nœud est confirmé et les points correspondants sont masqués.
+
+Il est possible de personnaliser ces deux paramètres. Il est conseillé de choisir une distance inférieure à la précision du GPS. Notez bien qu&apos;une distance trop élevée et ou un ratio trop faible peuvent provoquer des faux positifs: des portions de traces comme des montées en lacets ou des passages à vitesse faible pourraient être détectées à tord comme des nœuds et masquées.</translation>
     </message>
 </context>
 <context>
@@ -1502,7 +1527,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="417"/>
         <source>Time: -</source>
-        <translation>Heure : -</translation>
+        <translation>Durée : -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="427"/>
@@ -1545,13 +1570,13 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <location filename="../gis/tnv/serialization.cpp" line="211"/>
         <location filename="../gis/tnv/serialization.cpp" line="347"/>
         <source>Failed to open %1.</source>
-        <translation>Impossible d&apos;ouvrir %1</translation>
+        <translation>Impossible d&apos;ouvrir %1.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="376"/>
         <location filename="../gis/tnv/serialization.cpp" line="387"/>
         <source>Only support lon/lat WGS 84 format.</source>
-        <translation>Le seul format lon/lat autorisé est WGS 84</translation>
+        <translation>Le seul format lon/lat autorisé est WGS 84.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="421"/>
@@ -1898,7 +1923,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="201"/>
         <source>Smoothed profile with a Median filter of size %1</source>
-        <translation>Profile lissé avec un filtre médian de dimension %1</translation>
+        <translation>Profil lissé avec un filtre médian de dimension %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="223"/>
@@ -5286,7 +5311,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="515"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Téléchargement: %1&lt;br/&gt;&lt;br/&gt;L&apos;adresse de ce téléchargement n&apos;est pas sécurisée (elle utilise HTTP au lieu de  HTTPS). Il est possible qu&apos;un acteur malveillant redirige la requête vers un zip contenant un virus sans que QMapShack ne puisse le détecter. &lt;br/&gt;En cas de doute, ou si vous ne comprenez pas ce dont il retourne, cliquez sur annuler et utilisez plutôt la version Web de BRouter.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="527"/>
@@ -5798,7 +5823,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="169"/>
         <source>The profile and database do not work together.</source>
-        <translation>Le profile et la base de données ne fonctionnent pas ensemble.</translation>
+        <translation>Le profil et la base de données sont incompatibles.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="172"/>
@@ -5838,7 +5863,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="205"/>
         <source>profile &quot;%1&quot;</source>
-        <translation>profile &quot;%1&quot;</translation>
+        <translation>profil &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="206"/>
@@ -8240,7 +8265,7 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</translation>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="14"/>
         <source>Combine Tracks...</source>
-        <translation>Joindre des traces</translation>
+        <translation type="unfinished">Joindre des traces...</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="24"/>
@@ -9745,12 +9770,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="51"/>
         <source>&lt;b&gt;Smooth Profile (Median Method)&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Lisser le profile (méthode médian)&lt;/b&gt;</translation>
+        <translation type="unfinished">&lt;b&gt;Lisser le profil (méthode médiane)&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="63"/>
         <source>Smooth deviation of the track points elevation with a Median filter of size </source>
-        <translation>Lisse le profile avec un filtre médian de dimension</translation>
+        <translation type="unfinished">Lisse le profil avec un filtre médian de dimension</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="76"/>
@@ -9773,7 +9798,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="35"/>
         <source>&lt;b&gt;Change Time&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Modifier la date et l&apos;heure</translation>
+        <translation>&lt;b&gt;Modifier la date et l&apos;heure&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="44"/>
@@ -9895,7 +9920,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="47"/>
         <source>Make all trackpoints visible again.</source>
-        <translation>Rendre visible les points cachés</translation>
+        <translation type="unfinished">Rendre visible tous les points cachés.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="54"/>
@@ -9979,7 +10004,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="303"/>
         <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les valeurs de pente minimales et maximales seront remplacées par celles de la trace.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="306"/>
@@ -10009,7 +10034,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="293"/>
         <source>at negative Slope</source>
-        <translation>pour une pense (négative) de</translation>
+        <translation>pour une pente (négative) de</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="171"/>
@@ -13243,7 +13268,7 @@ or
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="82"/>
         <source>Copy track points as new track.</source>
-        <translation>Créer une nouvelle trace à partir des points sélectionnés</translation>
+        <translation type="unfinished">Créer une nouvelle trace à partir des points sélectionnés.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="117"/>
@@ -13301,7 +13326,7 @@ or
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="131"/>
         <source>Reset route calculation.</source>
-        <translation>Réinitialisationdu calcul d&apos;itinéraire</translation>
+        <translation>Réinitialisationdu calcul d&apos;itinéraire.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
@@ -13592,7 +13617,15 @@ Note: If you want to fix bad points in a real GPS recording
 this is the right tool. Simply select the section of bad points 
 (one is ok, too) and hide them.</source>
         <extracomment>use line breakes to keep a sensible tool tip width</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner un plage de points. Cet outil peut servir à :
+
+* Afficher ou masquer une plage de points.
+* Copier une plage de points.
+* Définir l&apos;activité correspondant à une plage de points.
+
+Notez que cet outil est le bon moyen de se débarrasser
+des points aberrants d&apos;un enregistrement GPS.
+Séléctionnez le ou les points défectueux et masquez les.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="142"/>
@@ -13603,7 +13636,12 @@ to plan a tour.
 Note: This is the wrong tool to fix bad points of a real GPS 
 recording. Use the range tool. </source>
         <extracomment>use line breakes to keep a sensible tool tip width</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer les points de la trace et utiliser le routage
+automatique pour en ajouter de nouveaux. Cet outil est 
+conçu pour créer une trace pour planifier une sortie.
+
+Utilisez plutôt l&apos;outil de sélection de points pour corriger
+les points aberrants d&apos;une véritable trace GPS.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="161"/>

@@ -627,7 +627,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
         <source>Time: </source>
-        <translation>Heure: </translation>
+        <translation type="unfinished">Durée: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="752"/>
@@ -1502,7 +1502,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="417"/>
         <source>Time: -</source>
-        <translation>Heure : -</translation>
+        <translation>Durée : -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="427"/>
@@ -1898,7 +1898,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="201"/>
         <source>Smoothed profile with a Median filter of size %1</source>
-        <translation>Profile lissé avec un filtre médian de dimension %1</translation>
+        <translation>Profil lissé avec un filtre médian de dimension %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="223"/>
@@ -5798,7 +5798,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="169"/>
         <source>The profile and database do not work together.</source>
-        <translation>Le profile et la base de données ne fonctionnent pas ensemble.</translation>
+        <translation>Le profil et la base de données sont incompatibles.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="172"/>
@@ -5838,7 +5838,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="205"/>
         <source>profile &quot;%1&quot;</source>
-        <translation>profile &quot;%1&quot;</translation>
+        <translation type="unfinished">profil &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="206"/>
@@ -9745,12 +9745,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="51"/>
         <source>&lt;b&gt;Smooth Profile (Median Method)&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Lisser le profile (méthode médian)&lt;/b&gt;</translation>
+        <translation type="unfinished">&lt;b&gt;Lisser le profil (méthode médiane)&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="63"/>
         <source>Smooth deviation of the track points elevation with a Median filter of size </source>
-        <translation>Lisse le profile avec un filtre médian de dimension</translation>
+        <translation type="unfinished">Lisse le profil avec un filtre médian de dimension</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="76"/>
@@ -9773,7 +9773,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="35"/>
         <source>&lt;b&gt;Change Time&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Modifier la date et l&apos;heure</translation>
+        <translation>&lt;b&gt;Modifier la date et l&apos;heure&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="44"/>

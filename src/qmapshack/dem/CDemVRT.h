@@ -57,6 +57,8 @@ private:
     bool hasOverviews = false;
 
     QRectF boundingBox;
+
+    bool outOfScale = false;
 };
 
 #endif //CDEMVRT_H

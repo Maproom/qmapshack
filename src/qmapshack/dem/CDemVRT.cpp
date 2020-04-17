@@ -140,7 +140,7 @@ CDemVRT::~CDemVRT()
 
 qreal CDemVRT::getElevationAt(const QPointF& pos)
 {
-    if(pjsrc == 0)
+    if(pjsrc == 0 || outOfScale)
     {
         return NOFLOAT;
     }
@@ -185,7 +185,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
 
 qreal CDemVRT::getSlopeAt(const QPointF& pos)
 {
-    if(pjsrc == 0)
+    if(pjsrc == 0 || outOfScale)
     {
         return NOFLOAT;
     }
@@ -232,13 +232,14 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
         return;
     }
 
-    if(!doHillshading() && !doSlopeColor() && !doElevationLimit())
+    QPointF bufferScale = buf.scale * buf.zoomFactor;
+    outOfScale = isOutOfScale(bufferScale);
+
+    if(outOfScale || (!doHillshading() && !doSlopeColor() && !doElevationLimit()))
     {
         QThread::msleep(100);
         return;
     }
-
-    QPointF bufferScale = buf.scale * buf.zoomFactor;
 
     // get pixel offset of top left buffer corner
     QPointF pp = buf.ref1;
@@ -324,7 +325,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     p.setOpacity(o1);
 
     qreal nTiles = ((right - left) * (bottom - top) / (w * h));
-    if(!isOutOfScale(bufferScale) && (nTiles < TILELIMIT))
+    if(nTiles < TILELIMIT)
     {
         for(qreal y = top - 1; y < bottom; y += h)
         {

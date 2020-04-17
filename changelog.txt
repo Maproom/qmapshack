@@ -1,10 +1,12 @@
 V1.XX.X
 [QMS-68] Route Optimization
+[QMS-132] DEMs: Make the scale range control cut off not only rendering but also loading or requesting the data.
 [QMS-134] Rework track range selection from scratch
 [QMS-135] Improved French translation
 [QMS-140] Enhancements for OS X release
 [QMS-148] Misplaced track info window
 [QMS-151] Missing tooltip in route toolbar
+[QMS-153] Improved French translation
 
 V1.14.1
 [QMS-37] Inconsistent use of time zones

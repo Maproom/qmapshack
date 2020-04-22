@@ -51,8 +51,8 @@ public:
 
     virtual void draw(IDrawContext::buffer_t& buf) = 0;
 
-    virtual qreal getElevationAt(const QPointF& pos) = 0;
-    virtual qreal getSlopeAt(const QPointF& pos) = 0;
+    virtual qreal getElevationAt(const QPointF& pos, bool checkScale) = 0;
+    virtual qreal getSlopeAt(const QPointF& pos, bool checkScale) = 0;
 
     bool activated()
     {

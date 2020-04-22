@@ -47,11 +47,11 @@ public:
      */
     void loadConfigForDemItem(CDemItem * item);
 
-    qreal getElevationAt(const QPointF& pos);
+    qreal getElevationAt(const QPointF& pos, bool checkScale = false);
     void  getElevationAt(const QPolygonF& pos, QPolygonF& ele);
     void  getElevationAt(SGisLine& line);
 
-    qreal getSlopeAt(const QPointF& pos);
+    qreal getSlopeAt(const QPointF& pos, bool checkScale = false);
     void  getSlopeAt(const QPolygonF& pos, QPolygonF& slope);
 
     void setProjection(const QString& proj) override;

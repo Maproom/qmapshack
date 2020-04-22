@@ -268,7 +268,7 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg)
 }
 
 
-qreal CDemDraw::getElevationAt(const QPointF& pos)
+qreal CDemDraw::getElevationAt(const QPointF& pos, bool checkScale)
 {
     qreal ele = NOFLOAT;
     if(CDemItem::mutexActiveDems.tryLock())
@@ -287,7 +287,7 @@ qreal CDemDraw::getElevationAt(const QPointF& pos)
                     break;
                 }
 
-                ele = item->demfile->getElevationAt(pos);
+                ele = item->demfile->getElevationAt(pos, checkScale);
                 if(ele != NOFLOAT)
                 {
                     break;
@@ -299,7 +299,7 @@ qreal CDemDraw::getElevationAt(const QPointF& pos)
     return ele;
 }
 
-qreal CDemDraw::getSlopeAt(const QPointF& pos)
+qreal CDemDraw::getSlopeAt(const QPointF& pos, bool checkScale)
 {
     qreal slope = NOFLOAT;
     if(CDemItem::mutexActiveDems.tryLock())
@@ -318,7 +318,7 @@ qreal CDemDraw::getSlopeAt(const QPointF& pos)
                     break;
                 }
 
-                slope = item->demfile->getSlopeAt(pos);
+                slope = item->demfile->getSlopeAt(pos, checkScale);
                 if(slope != NOFLOAT)
                 {
                     break;

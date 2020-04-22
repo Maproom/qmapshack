@@ -138,9 +138,9 @@ CDemVRT::~CDemVRT()
     GDALClose(dataset);
 }
 
-qreal CDemVRT::getElevationAt(const QPointF& pos)
+qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
 {
-    if(pjsrc == 0 || outOfScale)
+    if(pjsrc == 0 || (checkScale && outOfScale))
     {
         return NOFLOAT;
     }
@@ -183,9 +183,9 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
     return ele;
 }
 
-qreal CDemVRT::getSlopeAt(const QPointF& pos)
+qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale)
 {
-    if(pjsrc == 0 || outOfScale)
+    if(pjsrc == 0 || (checkScale && outOfScale))
     {
         return NOFLOAT;
     }

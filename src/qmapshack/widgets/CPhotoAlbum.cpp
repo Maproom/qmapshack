@@ -188,7 +188,7 @@ void CPhotoAlbum::updateView()
 
         QRect r     = tmp.rect();
 
-        int yoff = (height()- r.height()) / 2;
+        int yoff = (height() - r.height()) / 2;
 
         p.save();
         p.translate(xoff, yoff);

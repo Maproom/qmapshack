@@ -151,7 +151,7 @@ void CGisWorkspace::loadGisProject(const QString& filename)
 
 void CGisWorkspace::slotSetGisLayerOpacity(int val)
 {
-    CCanvas::gisLayerOpacity = qreal(val)/100;
+    CCanvas::gisLayerOpacity = qreal(val) / 100;
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas != nullptr)
     {
@@ -351,7 +351,7 @@ IGisProject * CGisWorkspace::selectProject(bool forceSelect)
             CDBProject * p = nullptr;
             while(nullptr == p)
             {
-                QApplication::processEvents(QEventLoop::WaitForMoreEvents|QEventLoop::ExcludeUserInputEvents, 100);
+                QApplication::processEvents(QEventLoop::WaitForMoreEvents | QEventLoop::ExcludeUserInputEvents, 100);
                 p = dynamic_cast<CDBProject*>(treeWks->getProjectById(evt.idChild, db));
             }
             /*
@@ -961,7 +961,7 @@ void CGisWorkspace::cutTrkByKey(const IGisItem::key_t& key)
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
     if(nullptr != trk && trk->cut())
     {
-        int res = QMessageBox::question(this, tr("Cut Track..."), tr("Do you want to delete the original track?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+        int res = QMessageBox::question(this, tr("Cut Track..."), tr("Do you want to delete the original track?"), QMessageBox::Ok | QMessageBox::No, QMessageBox::Ok);
         if(res == QMessageBox::Ok)
         {
             delete trk;
@@ -1237,7 +1237,7 @@ void CGisWorkspace::editPrxWpt(const QList<IGisItem::key_t>& keys)
         return;
     }
 
-    qreal proximity = var.toDouble()/IUnit::self().baseFactor;
+    qreal proximity = var.toDouble() / IUnit::self().baseFactor;
     bool isNoGo = dlg.optionIsChecked();
     for(const IGisItem::key_t& key : keys)
     {
@@ -1389,7 +1389,7 @@ void CGisWorkspace::tagItemsByKey(const QList<IGisItem::key_t>& keys)
             {
                 commonKeywords = gisItem->getKeywords();
                 rating = gisItem->getRating();
-                firstItem=false;
+                firstItem = false;
             }
             else
             {

@@ -64,7 +64,7 @@ CGisItemWpt::CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, c
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, IGisProject *project)
     : CGisItemWpt(pos, NOFLOAT, QDateTime::currentDateTimeUtc(), name, icon, project)
 {
-    flags = eFlagCreatedInQms|eFlagWriteAllowed;
+    flags = eFlagCreatedInQms | eFlagWriteAllowed;
     qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
@@ -85,7 +85,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
 
     key.clear();
     history.events.clear();
-    flags = eFlagCreatedInQms|eFlagWriteAllowed;
+    flags = eFlagCreatedInQms | eFlagWriteAllowed;
 
     qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
@@ -208,7 +208,7 @@ void CGisItemWpt::genKey() const
 {
     if(geocache.hasData)
     {
-        key.item=QString::number(geocache.id);
+        key.item = QString::number(geocache.id);
     }
     IGisItem::genKey();
 }
@@ -404,7 +404,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
             {
                 str += "<br/>\n";
             }
-            str += tr("Created: %1").arg(IUnit::datetime2string(wpt.time, false, QPointF(wpt.lon*DEG_TO_RAD, wpt.lat*DEG_TO_RAD)));
+            str += tr("Created: %1").arg(IUnit::datetime2string(wpt.time, false, QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD)));
         }
     }
 
@@ -474,7 +474,7 @@ void CGisItemWpt::setIcon()
         }
         else
         {
-            IGisItem::setIcon(CWptIconManager::self().getWptIconByName("gray_"+geocache.type, focus));
+            IGisItem::setIcon(CWptIconManager::self().getWptIconByName("gray_" + geocache.type, focus));
         }
     }
     else
@@ -593,7 +593,7 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
         return false;
     }
 
-    closeToRadius = abs(QPointF::dotProduct(dist, dist)/radius - radius) < 22;
+    closeToRadius = abs(QPointF::dotProduct(dist, dist) / radius - radius) < 22;
     return closeToRadius;
 }
 
@@ -711,19 +711,19 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
     rect.adjust(-2, -2, 2, 2);
 
     // place label on top
-    rect.moveCenter(pt + QPointF(icon.width()/2, -fm.height()));
+    rect.moveCenter(pt + QPointF(icon.width() / 2, -fm.height()));
     if(CDraw::doesOverlap(blockedAreas, rect))
     {
         // place label on bottom
-        rect.moveCenter(pt + QPointF( icon.width()/2, +fm.height() + icon.height()));
+        rect.moveCenter(pt + QPointF( icon.width() / 2, +fm.height() + icon.height()));
         if(CDraw::doesOverlap(blockedAreas, rect))
         {
             // place label on right
-            rect.moveCenter(pt + QPointF( icon.width() + rect.width()/2, +fm.height()));
+            rect.moveCenter(pt + QPointF( icon.width() + rect.width() / 2, +fm.height()));
             if(CDraw::doesOverlap(blockedAreas, rect))
             {
                 // place label on left
-                rect.moveCenter(pt + QPointF( -rect.width()/2, +fm.height()));
+                rect.moveCenter(pt + QPointF( -rect.width() / 2, +fm.height()));
                 if(CDraw::doesOverlap(blockedAreas, rect))
                 {
                     // failed to place label anywhere
@@ -801,7 +801,7 @@ void CGisItemWpt::drawBubble(QPainter& p)
 
 void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& nogo, const bool& selected)
 {
-    QRect circle(pos.x() - r - 1, pos.y() - r - 1, 2*r + 1, 2*r + 1);
+    QRect circle(pos.x() - r - 1, pos.y() - r - 1, 2 * r + 1, 2 * r + 1);
     p.save();
     p.setBrush(Qt::NoBrush);
     if (selected)
@@ -840,8 +840,8 @@ QPolygonF CGisItemWpt::makePolyline(const QPointF& anchor, const QRectF& r)
 
     if(!r.contains(anchor))
     {
-        qreal w = rectBubble.width()>>1;
-        qreal h = rectBubble.height()>>1;
+        qreal w = rectBubble.width() >> 1;
+        qreal h = rectBubble.height() >> 1;
 
         if(w > 30)
         {
@@ -1042,7 +1042,7 @@ void CGisItemWpt::detBoundingRect()
 {
     if(proximity == NOFLOAT)
     {
-        boundingRect = QRectF(QPointF(wpt.lon, wpt.lat)*DEG_TO_RAD, QPointF(wpt.lon, wpt.lat)*DEG_TO_RAD);
+        boundingRect = QRectF(QPointF(wpt.lon, wpt.lat) * DEG_TO_RAD, QPointF(wpt.lon, wpt.lat) * DEG_TO_RAD);
     }
     else
     {
@@ -1209,7 +1209,7 @@ QDateTime CGisItemWpt::geocache_t::getLastFound() const
     {
         if(lastFound.isValid() == false || (log.type == "Found It" && log.date > lastFound))
         {
-            lastFound=log.date;
+            lastFound = log.date;
         }
     }
     return lastFound;
@@ -1251,7 +1251,7 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeneralFullText, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        searchValue.str1 = item->getInfo(eFeatureShowFullText | eFeatureShowName);
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralElevation, [](CGisItemWpt* item){

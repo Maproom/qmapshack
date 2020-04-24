@@ -56,7 +56,7 @@ void CRtOpenSky::registerWithTreeWidget()
     if(tree != nullptr)
     {
         QTreeWidgetItem * itemInfo = new QTreeWidgetItem(this);
-        itemInfo->setFlags(Qt::ItemIsEnabled|Qt::ItemNeverHasChildren);
+        itemInfo->setFlags(Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
         info = new CRtOpenSkyInfo(*this, tree);
         tree->setItemWidget(itemInfo, eColumnWidget, info);
         emit sigChanged();
@@ -207,7 +207,7 @@ void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
         text += "<tr><td>" + tr("latitude:")        + "</td><td>" + QString::number(aircraft.latitude) + "°</td></tr>";
         text += "<tr><td>" + tr("geo. alt.:")       + "</td><td>" + QString::number(aircraft.geoAltitude) + "m</td></tr>";
         text += "<tr><td>" + tr("on ground:")       + "</td><td>" + QString::number(aircraft.onGround) + "</td></tr>";
-        text += "<tr><td>" + tr("velocity:")        + "</td><td>" + QString::number(aircraft.velocity*3.6) + "km/h</td></tr>";
+        text += "<tr><td>" + tr("velocity:")        + "</td><td>" + QString::number(aircraft.velocity * 3.6) + "km/h</td></tr>";
         text += "<tr><td>" + tr("heading:")         + "</td><td>" + QString::number(aircraft.heading) + "°</td></tr>";
         text += "<tr><td>" + tr("vert. rate:")      + "</td><td>" + QString::number(aircraft.verticalRate) + "m/s</td></tr>";
         text += "<tr><td>" + tr("baro. alt.:")      + "</td><td>" + QString::number(aircraft.baroAltitude) + "m</td></tr>";

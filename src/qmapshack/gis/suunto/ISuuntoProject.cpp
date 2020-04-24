@@ -174,7 +174,7 @@ ISuuntoProject::sample_t ISuuntoProject::mergeSamples(QList<sample_t> samples, Q
 
         if(cnt != 0)
         {
-            result[ext.tag] = sum/cnt; // averaged value is assigned to the merged sample
+            result[ext.tag] = sum / cnt; // averaged value is assigned to the merged sample
         }
     }
 

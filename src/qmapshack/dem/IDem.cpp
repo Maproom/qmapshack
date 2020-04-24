@@ -165,7 +165,7 @@ void IDem::slotSetFactorHillshade(int f)
     }
     else if(f < 0)
     {
-        factorHillshading = -1.0/f;
+        factorHillshading = -1.0 / f;
     }
     else
     {
@@ -209,7 +209,7 @@ int IDem::getFactorHillshading()
     }
     else if(factorHillshading < 1)
     {
-        return -1.0/factorHillshading;
+        return -1.0 / factorHillshading;
     }
     else
     {
@@ -222,9 +222,9 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
     int wp2 = w + 2;
 
 #define ZFACT           0.125
-#define ZFACT_BY_ZFACT  (ZFACT*ZFACT)
-#define SIN_ALT         (qSin(45*DEG_TO_RAD))
-#define ZFACT_COS_ALT   (ZFACT*qCos(45*DEG_TO_RAD))
+#define ZFACT_BY_ZFACT  (ZFACT * ZFACT)
+#define SIN_ALT         (qSin(45 * DEG_TO_RAD))
+#define ZFACT_COS_ALT   (ZFACT * qCos(45 * DEG_TO_RAD))
 #define AZ              (315 * DEG_TO_RAD)
     for(unsigned int m = 1; m <= h; m++)
     {
@@ -240,11 +240,11 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
                 continue;
             }
 
-            qreal dx         = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale*factorHillshading);
-            qreal dy         = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale*factorHillshading);
+            qreal dx         = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale * factorHillshading);
+            qreal dy         = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale * factorHillshading);
             qreal aspect     = qAtan2(dy, dx);
             qreal xx_plus_yy = dx * dx + dy * dy;
-            qreal cang       = (SIN_ALT - ZFACT_COS_ALT * qSqrt(xx_plus_yy) * qSin(aspect - AZ)) / qSqrt(1+ZFACT_BY_ZFACT*xx_plus_yy);
+            qreal cang       = (SIN_ALT - ZFACT_COS_ALT * qSqrt(xx_plus_yy) * qSin(aspect - AZ)) / qSqrt(1 + ZFACT_BY_ZFACT * xx_plus_yy);
 
             if (cang <= 0.0)
             {
@@ -281,17 +281,17 @@ qreal IDem::slopeOfWindowInterp(qint16* win2, winsize_e size, qreal x, qreal y)
         break;
 
     case eWinsize4x4:
-        win[0] = win2[0] + x * (win2[1]-win2[0]) + y * (win2[4]-win2[0]) + x*y*(win2[0]-win2[1]-win2[4]+win2[5]);
-        win[1] = win2[1] + x * (win2[2]-win2[1]) + y * (win2[5]-win2[1]) + x*y*(win2[1]-win2[2]-win2[5]+win2[6]);
-        win[2] = win2[2] + x * (win2[3]-win2[2]) + y * (win2[6]-win2[2]) + x*y*(win2[2]-win2[3]-win2[6]+win2[7]);
+        win[0] = win2[0] + x * (win2[1] - win2[0]) + y * (win2[4] - win2[0]) + x * y * (win2[0] - win2[1] - win2[4] + win2[5]);
+        win[1] = win2[1] + x * (win2[2] - win2[1]) + y * (win2[5] - win2[1]) + x * y * (win2[1] - win2[2] - win2[5] + win2[6]);
+        win[2] = win2[2] + x * (win2[3] - win2[2]) + y * (win2[6] - win2[2]) + x * y * (win2[2] - win2[3] - win2[6] + win2[7]);
 
-        win[3] = win2[4] + x * (win2[5]-win2[4]) + y * (win2[8]-win2[4]) + x*y*(win2[4]-win2[5]-win2[8]+win2[9]);
-        win[4] = win2[5] + x * (win2[6]-win2[5]) + y * (win2[9]-win2[5]) + x*y*(win2[5]-win2[6]-win2[9]+win2[10]);
-        win[5] = win2[6] + x * (win2[7]-win2[6]) + y * (win2[10]-win2[6]) + x*y*(win2[6]-win2[7]-win2[10]+win2[11]);
+        win[3] = win2[4] + x * (win2[5] - win2[4]) + y * (win2[8] - win2[4]) + x * y * (win2[4] - win2[5] - win2[8] + win2[9]);
+        win[4] = win2[5] + x * (win2[6] - win2[5]) + y * (win2[9] - win2[5]) + x * y * (win2[5] - win2[6] - win2[9] + win2[10]);
+        win[5] = win2[6] + x * (win2[7] - win2[6]) + y * (win2[10] - win2[6]) + x * y * (win2[6] - win2[7] - win2[10] + win2[11]);
 
-        win[6] = win2[8] + x * (win2[9]-win2[8]) + y * (win2[12]-win2[8]) + x*y*(win2[8]-win2[9]-win2[12]+win2[13]);
-        win[7] = win2[9] + x * (win2[10]-win2[9]) + y * (win2[13]-win2[9]) + x*y*(win2[9]-win2[10]-win2[13]+win2[14]);
-        win[8] = win2[10] + x * (win2[11]-win2[10]) + y * (win2[14]-win2[10]) + x*y*(win2[10]-win2[11]-win2[14]+win2[15]);
+        win[6] = win2[8] + x * (win2[9] - win2[8]) + y * (win2[12] - win2[8]) + x * y * (win2[8] - win2[9] - win2[12] + win2[13]);
+        win[7] = win2[9] + x * (win2[10] - win2[9]) + y * (win2[13] - win2[9]) + x * y * (win2[9] - win2[10] - win2[13] + win2[14]);
+        win[8] = win2[10] + x * (win2[11] - win2[10]) + y * (win2[14] - win2[10]) + x * y * (win2[10] - win2[11] - win2[14] + win2[15]);
         break;
 
     default:

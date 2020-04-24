@@ -325,7 +325,7 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
 
     for(int n = 1; n < N; n++)
     {
-        QPointF pt1 = ruler[n-1];
+        QPointF pt1 = ruler[n - 1];
         QPointF pt2 = ruler[n];
 
         qreal a1, a2;
@@ -419,7 +419,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
         QRectF r(0, 0, 50, 50);
         for(int n = 1; n < N; n++)
         {
-            QPointF pt1 = ruler[n-1];
+            QPointF pt1 = ruler[n - 1];
             QPointF pt2 = ruler[n];
 
             qreal a1, a2;
@@ -432,10 +432,10 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
 
             if((n > 1) && scrOptRuler->toolShowAngle->isChecked())
             {
-                r.moveCenter(line[n-1]);
+                r.moveCenter(line[n - 1]);
 
-                QLineF seg1(line[n-2], line[n-1]);
-                QLineF seg2(line[n-1], line[n]);
+                QLineF seg1(line[n - 2], line[n - 1]);
+                QLineF seg2(line[n - 1], line[n]);
 
                 qreal angleStart = seg2.angle();
                 qreal angleSpan  = (seg2.angleTo(seg1) - 180);
@@ -443,7 +443,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
                 p.setPen(Qt::black);
                 p.drawArc(r, angleStart * 16, angleSpan * 16);
 
-                CDraw::text(QString("%1°").arg(qAbs(qRound(angleSpan))), p, line[n-1], Qt::black);
+                CDraw::text(QString("%1°").arg(qAbs(qRound(angleSpan))), p, line[n - 1], Qt::black);
             }
 
 
@@ -470,7 +470,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
                 str += QString(", %1°").arg(val);
             }
 
-            QLineF seg(line[n-1], line[n]);
+            QLineF seg(line[n - 1], line[n]);
             p.save();
             p.translate(seg.center().toPoint());
             p.rotate(a1 + ((a1 > 0) ? -90 : 90));

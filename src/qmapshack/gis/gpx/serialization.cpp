@@ -39,7 +39,7 @@ const QString IGisProject::rmc_ns    = "urn:net:trekbuddy:1.0:nmea:rmc";
 const QString IGisProject::ql_ns     = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString IGisProject::gs_ns     = "http://www.groundspeak.com/cache/1/0";
 const QString IGisProject::tp1_ns    = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
-const QString IGisProject::gpxdata_ns= "http://www.cluetrust.com/XML/GPXDATA/1/0";
+const QString IGisProject::gpxdata_ns = "http://www.cluetrust.com/XML/GPXDATA/1/0";
 
 
 static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
@@ -489,7 +489,7 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
                          + gpxtpx_ns + " http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd "
                          + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd "
                          + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd "
-                         + gpxdata_ns+ " http://www.cluetrust.com/Schemas/gpxdata10.xsd";
+                         + gpxdata_ns + " http://www.cluetrust.com/Schemas/gpxdata10.xsd";
     }
     else
     {
@@ -648,7 +648,7 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     geocache.archived   = attr.namedItem("archived").nodeValue().toLocal8Bit() == "True";
     geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
 
-    for(QDomNode xmlAttribute = geocacheAttributes.firstChild(); !xmlAttribute.isNull(); xmlAttribute=xmlAttribute.nextSibling())
+    for(QDomNode xmlAttribute = geocacheAttributes.firstChild(); !xmlAttribute.isNull(); xmlAttribute = xmlAttribute.nextSibling())
     {
         quint8 id = xmlAttribute.attributes().namedItem("id").nodeValue().toUInt();
         if(id >= geocache.attributeMeanings.size())
@@ -658,7 +658,7 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
         }
 
         qint8 intvalue = xmlAttribute.attributes().namedItem("inc").nodeValue().toUInt();
-        geocache.attributes[id]=(intvalue == 1);
+        geocache.attributes[id] = (intvalue == 1);
         if(id == 42) //42 is the code for 'Needs maintenance' and it only appears, when there attribute is set
         {
             geocache.needsMaintenance = true;

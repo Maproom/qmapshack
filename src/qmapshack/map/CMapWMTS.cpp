@@ -394,7 +394,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
     // start to draw the map
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p, true);
-    p.setOpacity(getOpacity()/100.0);
+    p.setOpacity(getOpacity() / 100.0);
     p.translate(-pp);
 
     // calculate maximum viewport
@@ -404,13 +404,13 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
     qreal x2 = buf.ref2.x() > buf.ref3.x() ? buf.ref2.x() : buf.ref3.x();
     qreal y2 = buf.ref3.y() < buf.ref4.y() ? buf.ref3.y() : buf.ref4.y();
 
-    if(x1 < -180.0*DEG_TO_RAD)
+    if(x1 < -180.0 * DEG_TO_RAD)
     {
-        x1 = -180*DEG_TO_RAD;
+        x1 = -180 * DEG_TO_RAD;
     }
-    if(x2 >  180.0*DEG_TO_RAD)
+    if(x2 >  180.0 * DEG_TO_RAD)
     {
-        x2 =  180*DEG_TO_RAD;
+        x2 =  180 * DEG_TO_RAD;
     }
 
 
@@ -442,7 +442,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
 
         // search matrix ID of tile level with best matching scale
         QString tileMatrixId;
-        QPointF s1 = (pt2 - pt1)/QPointF(buf.image.width(), buf.image.height());
+        QPointF s1 = (pt2 - pt1) / QPointF(buf.image.width(), buf.image.height());
         qreal d = NOFLOAT;
         for(const QString &key : tileset.tilematrix.keys())
         {

@@ -130,7 +130,7 @@ void CDetailsPrj::slotSetupGui()
         X_____________UnBlockAllSignals_____________X(this);
 
         QString msg = tr("You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?");
-        int res = QMessageBox::question(this, tr("Correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+        int res = QMessageBox::question(this, tr("Correlation..."), msg, QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
         if(res == QMessageBox::Yes)
         {
             prj.switchOnCorrelation();
@@ -348,7 +348,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     }
 
 
-    int n=1;
+    int n = 1;
     PROGRESS_SETUP(tr("Build diary..."), 0, nItems, this);
 
     IGisProject::sorting_roadbook_e sorting = IGisProject::sorting_roadbook_e(comboSort->currentIndex());
@@ -435,7 +435,7 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
             summary[iconName]++;
         }
 
-        const CGisItemWpt::geocache_t& gc =wpt->getGeoCache();
+        const CGisItemWpt::geocache_t& gc = wpt->getGeoCache();
         if(gc.hasData)
         {
             GCsummary[gc.type]++;
@@ -454,19 +454,19 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
 
     if(summary["Geocache"] != 0)
     {
-        str+= QString::number(summary["Geocache"]) + tr(" x Geocache, consisting of: <br/>");
-        str+="<ul>";
+        str += QString::number(summary["Geocache"]) + tr(" x Geocache, consisting of: <br/>");
+        str += "<ul>";
         for(auto key:GCsummary.keys())
         {
-            str+= "<li>" + QString::number(GCsummary[key]) + " x " + key+ "</li>";
+            str += "<li>" + QString::number(GCsummary[key]) + " x " + key + "</li>";
         }
-        str+="</ul>";
+        str += "</ul>";
     }
     for(auto key: summary.keys())
     {
         if(key != "Geocache")
         {
-            str+= QString::number(summary[key]) + " x " + key+ "<br/>";
+            str += QString::number(summary[key]) + " x " + key + "<br/>";
         }
     }
 
@@ -495,7 +495,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor,
     if(!wpts.isEmpty())
     {
         cursor.insertHtml(tr("<h2>Waypoints</h2>"));
-        QTextTable * table = cursor.insertTable(wpts.count()+1, eMax1, fmtTableStandard);
+        QTextTable * table = cursor.insertTable(wpts.count() + 1, eMax1, fmtTableStandard);
 
         table->cellAt(0, eSym1).setFormat(fmtCharHeader);
         table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
@@ -521,7 +521,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor,
     if(!trks.isEmpty())
     {
         cursor.insertHtml(tr("<h2>Tracks</h2>"));
-        QTextTable * table = cursor.insertTable(trks.count()+1, eMax1, fmtTableStandard);
+        QTextTable * table = cursor.insertTable(trks.count() + 1, eMax1, fmtTableStandard);
 
         table->cellAt(0, eSym1).setFormat(fmtCharHeader);
         table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
@@ -538,12 +538,12 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor,
 
             addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item, trk->isReadOnly(), printable);
 
-            int w1 = qRound(w/3.5 > 300 ? 300 : w/3.5);
-            int h1 = qRound(w1/2.0);
+            int w1 = qRound(w / 3.5 > 300 ? 300 : w / 3.5);
+            int h1 = qRound(w1 / 2.0);
 
             if(w1 < 300)
             {
-                table->cellAt(cnt, eInfo1).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
+                table->cellAt(cnt, eInfo1).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
 
                 QTextTable * table1 = table->cellAt(cnt, eInfo1).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
@@ -559,7 +559,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor,
             {
                 QTextTable * table1 = table->cellAt(cnt, eInfo1).firstCursorPosition().insertTable(1, 3, fmtTableInfo);
 
-                table1->cellAt(0, 0).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
+                table1->cellAt(0, 0).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
 
                 QImage profile(w1, h1, QImage::Format_ARGB32);
                 getTrackProfile(trk, nullptr, profile);
@@ -669,7 +669,7 @@ QList<wpt_info_t> CDetailsPrj::getWptInfo(const CGisItemTrk& trk) const
 
             if(!hasValidTime && trkpt.time.isValid())
             {
-                info.info += "<br/>" + tr("Created: %1").arg(IUnit::datetime2string(trkpt.time, false, QPointF(trkpt.lon*DEG_TO_RAD, trkpt.lat*DEG_TO_RAD)));
+                info.info += "<br/>" + tr("Created: %1").arg(IUnit::datetime2string(trkpt.time, false, QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD)));
             }
 
             CWptIconManager& wptMgr = CWptIconManager::self();
@@ -731,41 +731,41 @@ QString CDetailsPrj::getStatistics(const wpt_info_t &info) const
     text += "<tr>";
     text += "<td>" + tr("Distance: ") + "</td>";
     IUnit::self().meter2distance(info.distance1, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
     IUnit::self().meter2distance(info.distance2, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
     IUnit::self().meter2distance(info.distance3, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
     text += "</tr>";
 
     text += "<tr>";
     text += "<td>" + tr("Time: ") + "</td>";
     IUnit::self().seconds2time(info.elapsedSeconds1, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
     IUnit::self().seconds2time(info.elapsedSeconds2, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
     IUnit::self().seconds2time(info.elapsedSeconds3, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
     text += "</tr>";
 
     text += "<tr>";
     text += "<td>" + tr("Ascent: ") + "</td>";
     IUnit::self().meter2elevation(info.ascent1, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
     IUnit::self().meter2elevation(info.ascent2, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
     IUnit::self().meter2elevation(info.ascent3, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
     text += "</tr>";
 
     text += "<tr>";
     text += "<td>" + tr("Descent: ") + "</td>";
     IUnit::self().meter2elevation(info.descent1, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
     IUnit::self().meter2elevation(info.descent2, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
     IUnit::self().meter2elevation(info.descent3, val, unit);
-    text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
     text += "</tr>";
 
     text += "</table>";
@@ -802,15 +802,15 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor,
 {
     int w = cursor.document()->textWidth();
 
-    const qreal w1 = qRound(w/3.5 > 300 ? 300 : w/3.5);
-    const qreal h1 = qRound(w1/2.0);
+    const qreal w1 = qRound(w / 3.5 > 300 ? 300 : w / 3.5);
+    const qreal h1 = qRound(w1 / 2.0);
 
     for(CGisItemTrk * trk : trks)
     {
         const QList<wpt_info_t>& wptInfo = getWptInfo(*trk);
 
         cursor.insertHtml(QString("<h2>%1</h2>").arg(trk->getName()));
-        QTextTable * table = cursor.insertTable(wptInfo.count()+2, eMax2, fmtTableStandard);
+        QTextTable * table = cursor.insertTable(wptInfo.count() + 2, eMax2, fmtTableStandard);
 
         table->cellAt(0, eSym2).setFormat(fmtCharHeader);
         table->cellAt(0, eInfo2).setFormat(fmtCharHeader);
@@ -843,7 +843,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor,
         }
 
         addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item, trk->isReadOnly(), printable);
-        table->cellAt(cnt, eInfo2).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
+        table->cellAt(cnt, eInfo2).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
 
         QTextTable * table1 = table->cellAt(cnt, eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
@@ -869,15 +869,15 @@ void CDetailsPrj::drawByDetails(QTextCursor& cursor,
 {
     int w = cursor.document()->textWidth();
 
-    const qreal w1 = qRound(w/3.5 > 300 ? 300 : w/3.5);
-    const qreal h1 = qRound(w1/2.0);
+    const qreal w1 = qRound(w / 3.5 > 300 ? 300 : w / 3.5);
+    const qreal h1 = qRound(w1 / 2.0);
 
     for(CGisItemTrk * trk : trks)
     {
         const QList<wpt_info_t>& wptInfo = getWptInfo(*trk);
 
         cursor.insertHtml(QString("<h2>%1</h2>").arg(trk->getName()));
-        QTextTable * table = cursor.insertTable(wptInfo.count()+2, eMax2, fmtTableStandard);
+        QTextTable * table = cursor.insertTable(wptInfo.count() + 2, eMax2, fmtTableStandard);
 
         table->cellAt(0, eSym2).setFormat(fmtCharHeader);
         table->cellAt(0, eInfo2).setFormat(fmtCharHeader);
@@ -920,7 +920,7 @@ void CDetailsPrj::drawByDetails(QTextCursor& cursor,
         }
 
         addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item, trk->isReadOnly(), printable);
-        table->cellAt(cnt, eInfo2).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
+        table->cellAt(cnt, eInfo2).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
 
         table->mergeCells(cnt, eData2, 1, 2);
         table->cellAt(cnt, eData2).firstCursorPosition().insertHtml(IGisItem::createText(trk->isReadOnly() || printable, trk->getComment(), trk->getDescription(), trk->getLinks(), trk->getKey().item));
@@ -936,7 +936,7 @@ void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas,
         return;
     }
     cursor.insertHtml(tr("<h2>Areas</h2>"));
-    QTextTable * table = cursor.insertTable(areas.count()+1, eMax1, fmtTableStandard);
+    QTextTable * table = cursor.insertTable(areas.count() + 1, eMax1, fmtTableStandard);
 
     table->cellAt(0, eSym1).setFormat(fmtCharHeader);
     table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
@@ -966,7 +966,7 @@ void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte *> &rtes, CPr
         return;
     }
     cursor.insertHtml(tr("<h2>Routes</h2>"));
-    QTextTable * table = cursor.insertTable(rtes.count()+1, eMax1, fmtTableStandard);
+    QTextTable * table = cursor.insertTable(rtes.count() + 1, eMax1, fmtTableStandard);
 
     table->cellAt(0, eSym1).setFormat(fmtCharHeader);
     table->cellAt(0, eInfo1).setFormat(fmtCharHeader);

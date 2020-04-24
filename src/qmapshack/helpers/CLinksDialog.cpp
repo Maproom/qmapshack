@@ -36,7 +36,7 @@ CLinksDialog::CLinksDialog(QList<IGisItem::link_t> &links, QWidget *parent)
         item->setText(0, link.type);
         item->setText(1, link.text);
         item->setText(2, link.uri.toString());
-        item->setFlags(item->flags()|Qt::ItemIsEditable);
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
     }
 }
 
@@ -56,7 +56,7 @@ void CLinksDialog::slotAddLink()
     item->setText(0, "");
     item->setText(1, "enter a text");
     item->setText(2, "enter a link");
-    item->setFlags(item->flags()|Qt::ItemIsEditable);
+    item->setFlags(item->flags() | Qt::ItemIsEditable);
 }
 
 void CLinksDialog::slotDelLink()

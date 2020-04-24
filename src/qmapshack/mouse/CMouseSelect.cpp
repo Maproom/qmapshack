@@ -134,7 +134,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
     scrOptSelect->toolCombineTrk->setEnabled(cntTrk > 1);
     scrOptSelect->toolActivityTrk->setEnabled(cntTrk > 0);
     scrOptSelect->toolColorTrk->setEnabled(cntTrk > 0);
-    scrOptSelect->toolEleWptTrk->setEnabled((cntWpt > 0)|(cntTrk > 0));
+    scrOptSelect->toolEleWptTrk->setEnabled((cntWpt > 0) | (cntTrk > 0));
 }
 
 void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)

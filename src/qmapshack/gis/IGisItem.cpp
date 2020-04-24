@@ -81,7 +81,7 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
                 if(childType == eTypeTrk)
                 {
                     parent->removeChild(this);
-                    parent->insertChild(n+1, this);
+                    parent->insertChild(n + 1, this);
                     break;
                 }
             }
@@ -97,7 +97,7 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
                 if( childType == eTypeRte || childType == eTypeTrk)
                 {
                     parent->removeChild(this);
-                    parent->insertChild(n+1, this);
+                    parent->insertChild(n + 1, this);
                     break;
                 }
             }
@@ -113,7 +113,7 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
                 if(childType == eTypeWpt || childType == eTypeRte || childType == eTypeTrk)
                 {
                     parent->removeChild(this);
-                    parent->insertChild(n+1, this);
+                    parent->insertChild(n + 1, this);
                     break;
                 }
             }
@@ -129,7 +129,7 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
                 if(childType == eTypeOvl || childType == eTypeWpt || childType == eTypeRte || childType == eTypeTrk)
                 {
                     parent->removeChild(this);
-                    parent->insertChild(n+1, this);
+                    parent->insertChild(n + 1, this);
                     break;
                 }
             }
@@ -338,7 +338,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
 
     // update project if necessary
     IGisProject * project = getParentProject();
-    if(project && (enable & (eMarkChanged|eMarkNotPart|eMarkNotInDB)))
+    if(project && (enable & (eMarkChanged | eMarkNotPart | eMarkNotInDB)))
     {
         project->setChanged();
     }
@@ -613,7 +613,7 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
     }
 
     // warn if item is external and read only
-    if(!(flags & (eFlagCreatedInQms|eFlagTainted)))
+    if(!(flags & (eFlagCreatedInQms | eFlagTainted)))
     {
         SETTINGS;
         bool doNotAsk = cfg.value("Dialog/Items/ReadOnly/doNotAsk", false).toBool();
@@ -624,7 +624,7 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
 
             QCheckBox * checkBox = new QCheckBox(tr("Never ask again."), 0);
             QString msg = tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press 'Ok'.").arg(getName());
-            QMessageBox box(QMessageBox::Warning, tr("Read Only Mode..."), msg, QMessageBox::Ok|QMessageBox::Abort, CMainWindow::getBestWidgetForParent());
+            QMessageBox box(QMessageBox::Warning, tr("Read Only Mode..."), msg, QMessageBox::Ok | QMessageBox::Abort, CMainWindow::getBestWidgetForParent());
             box.setDefaultButton(QMessageBox::Ok);
             box.setCheckBox(checkBox);
             int res = box.exec();
@@ -704,7 +704,7 @@ void IGisItem::showIcon()
         displayIcon.fill(Qt::transparent);
         QPainter painter(&displayIcon);
         painter.drawPixmap(0, 0, icon);
-        painter.drawPixmap(width*0.4, height*0.4, QPixmap("://icons/48x48/NoGo.png").scaled(width*0.6, height*0.6, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        painter.drawPixmap(width * 0.4, height * 0.4, QPixmap("://icons/48x48/NoGo.png").scaled(width * 0.6, height * 0.6, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     }
     else
     {
@@ -1066,7 +1066,7 @@ qreal IGisItem::getRating() const
 
 void IGisItem::setRating(qreal rating)
 {
-    this->rating=rating;
+    this->rating = rating;
     updateHistory();
 }
 

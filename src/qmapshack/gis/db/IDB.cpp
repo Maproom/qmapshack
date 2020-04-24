@@ -63,7 +63,7 @@ bool IDB::setupDB(QString &error)
             int res = QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(),
                                            tr("Migrate database..."),
                                            msg,
-                                           QMessageBox::Ok|QMessageBox::Abort);
+                                           QMessageBox::Ok | QMessageBox::Abort);
             if(res != QMessageBox::Ok)
             {
                 error = tr("Migration aborted by user");

@@ -206,7 +206,7 @@ QString CRouterBRouter::getOptions()
 {
     return QString(tr("profile: %1, alternative: %2")
                    .arg(comboProfile->currentData().toString())
-                   .arg(comboAlternative->currentData().toInt()+1));
+                   .arg(comboAlternative->currentData().toInt() + 1));
 }
 
 void CRouterBRouter::routerSelected()
@@ -330,7 +330,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         return -1;
     }
 
-    const QVector<QPointF> points = {p1*RAD_TO_DEG, p2*RAD_TO_DEG};
+    const QVector<QPointF> points = {p1*RAD_TO_DEG, p2 * RAD_TO_DEG};
 
     QList<IGisItem*> nogos;
     CGisWorkspace::self().getNogoAreas(nogos);
@@ -405,8 +405,8 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
             const QDomElement &elem   = xmlLatLng.item(n).toElement();
             coords << QPointF();
             QPointF &point = coords.last();
-            point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
-            point.setY(elem.attribute("lat").toFloat()*DEG_TO_RAD);
+            point.setX(elem.attribute("lon").toFloat() * DEG_TO_RAD);
+            point.setY(elem.attribute("lat").toFloat() * DEG_TO_RAD);
         }
 
         //find costs of route (copied and adapted from CGisItemRte::setResultFromBrouter)
@@ -553,7 +553,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
         CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
         if(rte != nullptr)
         {
-            rte->setResultFromBRouter(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0, 'f', 2));
+            rte->setResultFromBRouter(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time / 1000.0, 0, 'f', 2));
         }
     }
     catch(const QString& msg)

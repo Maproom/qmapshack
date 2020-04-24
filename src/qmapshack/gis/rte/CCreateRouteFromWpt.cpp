@@ -46,7 +46,7 @@ CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWi
         item->setText(wpt->getName());
         item->setIcon(wpt->getIcon());
         item->setToolTip(wpt->getInfo(IGisItem::eFeatureShowName));
-        item->setData(Qt::UserRole + 0, QPointF(wpt->getPosition()*DEG_TO_RAD));
+        item->setData(Qt::UserRole + 0, QPointF(wpt->getPosition() * DEG_TO_RAD));
     }
 
     connect(listWidget, &QListWidget::itemSelectionChanged, this, &CCreateRouteFromWpt::slotSelectionChanged);

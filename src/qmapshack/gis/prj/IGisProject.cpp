@@ -178,7 +178,7 @@ bool IGisProject::askBeforClose()
     {
         {
             CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
-            res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Save project?"), tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
+            res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Save project?"), tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save | QMessageBox::No | QMessageBox::Abort, QMessageBox::No);
         }
 
         if(res == QMessageBox::Save)
@@ -389,7 +389,7 @@ void IGisProject::updateItems()
             if(progress.wasCanceled())
             {
                 QString msg = tr("<h3>%1</h3>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?").arg(getNameEx());
-                int res = QMessageBox::question(&progress, tr("Canceled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+                int res = QMessageBox::question(&progress, tr("Canceled correlation..."), msg, QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
                 noCorrelation = res == QMessageBox::Yes;
                 break;
             }
@@ -721,7 +721,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
 {
     for(int i = childCount(); i > 0; i--)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i - 1));
         if(nullptr == item )
         {
             continue;
@@ -732,7 +732,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
             if(last != QMessageBox::YesToAll)
             {
                 QString msg = tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(CGisListWks::eColumnName));
-                last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+                last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete..."), msg, QMessageBox::YesToAll | QMessageBox::Cancel | QMessageBox::Ok | QMessageBox::No, QMessageBox::Ok);
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {
                     // as each item in the project has to be unique, we can stop searching.
@@ -761,7 +761,7 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
 {
     for(int i = childCount(); i > 0; i--)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i - 1));
         if(nullptr == item)
         {
             continue;
@@ -1117,7 +1117,7 @@ void IGisProject::sortItems()
             continue;
         }
 
-        others<<item;
+        others << item;
     }
 
     sortItems(trks);
@@ -1126,7 +1126,7 @@ void IGisProject::sortItems()
     sortItems(ovls);
 
     items.clear();
-    items<<others;
+    items << others;
     for(IGisItem * item : trks)
     {
         items << item;
@@ -1187,7 +1187,7 @@ void IGisProject::sortItems(QList<IGisItem *> &items) const
 
 void IGisProject::setProjectFilter(const CSearch& search)
 {
-    projectSearch=search;
+    projectSearch = search;
     applyFilters();
 }
 

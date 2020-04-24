@@ -32,7 +32,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity|IGisItem::eFeatureShowLinks));
+    label->setText(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity | IGisItem::eFeatureShowLinks));
     adjustSize();
 
     toolProfile->setChecked(trk->hasUserFocus());

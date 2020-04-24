@@ -38,7 +38,7 @@ int CRouterOptimization::optimize(SGisLine &line)
         return 0; //There is nothing to optimize
     }
 
-    CProgressDialog progress(CProgressDialog::tr("Optimizing route"), 0, line.length()+2, nullptr);
+    CProgressDialog progress(CProgressDialog::tr("Optimizing route"), 0, line.length() + 2, nullptr);
 
     //Optimize using air distance and known distances, since this is much faster than routing, especially brouter
     SGisLine newAirdistanceOrder;
@@ -84,7 +84,7 @@ int CRouterOptimization::optimize(SGisLine &line)
     // but you'd likely need more to find the global optimum if there are more possibilities
     while(numOfRestarts < line.length())
     {
-        progress.setValue(numOfRestarts+2);
+        progress.setValue(numOfRestarts + 2);
         if(progress.wasCanceled())
         {
             return -1;
@@ -135,22 +135,22 @@ qreal CRouterOptimization::createNextBestOrder(const SGisLine &oldOrder, SGisLin
     int bestInsertedItemIndex = -1;
 
     // lastWorkingOrder.length()-2, since we can't use the last two items as base
-    for(int baseIndex = 0; baseIndex < oldOrder.length() -2; baseIndex++)
+    for(int baseIndex = 0; baseIndex < oldOrder.length() - 2; baseIndex++)
     {
         // Keep start and end fixed
-        for(int insertedItemIndex = 1; insertedItemIndex < oldOrder.length() -1; insertedItemIndex++)
+        for(int insertedItemIndex = 1; insertedItemIndex < oldOrder.length() - 1; insertedItemIndex++)
         {
-            if(baseIndex == insertedItemIndex || baseIndex == insertedItemIndex-1)
+            if(baseIndex == insertedItemIndex || baseIndex == insertedItemIndex - 1)
             {
                 continue;
             }
 
             qreal insertionGain = bestKnownDistance(oldOrder[baseIndex], oldOrder[insertedItemIndex])
-                                  + bestKnownDistance(oldOrder[insertedItemIndex], oldOrder[baseIndex +1])
-                                  - bestKnownDistance(oldOrder[baseIndex], oldOrder[baseIndex+1])
-                                  + bestKnownDistance(oldOrder[insertedItemIndex-1], oldOrder[insertedItemIndex+1])
-                                  - bestKnownDistance(oldOrder[insertedItemIndex-1], oldOrder[insertedItemIndex])
-                                  - bestKnownDistance(oldOrder[insertedItemIndex], oldOrder[insertedItemIndex+1]);
+                                  + bestKnownDistance(oldOrder[insertedItemIndex], oldOrder[baseIndex + 1])
+                                  - bestKnownDistance(oldOrder[baseIndex], oldOrder[baseIndex + 1])
+                                  + bestKnownDistance(oldOrder[insertedItemIndex - 1], oldOrder[insertedItemIndex + 1])
+                                  - bestKnownDistance(oldOrder[insertedItemIndex - 1], oldOrder[insertedItemIndex])
+                                  - bestKnownDistance(oldOrder[insertedItemIndex], oldOrder[insertedItemIndex + 1]);
 
             if(insertionGain < bestInsertionGain)
             {
@@ -172,7 +172,7 @@ qreal CRouterOptimization::createNextBestOrder(const SGisLine &oldOrder, SGisLin
         }
         else
         {
-            newOrder.move(bestInsertedItemIndex, bestBaseIndex+1);
+            newOrder.move(bestInsertedItemIndex, bestBaseIndex + 1);
         }
     }
     return bestInsertionGain;
@@ -191,22 +191,22 @@ qreal CRouterOptimization::twoOptStep(const SGisLine &oldOrder, SGisLine &newOrd
     {
         for(int endIndex = beginIndex + 1; endIndex < oldOrder.length() - 1; endIndex++)
         {
-            qreal oldRangeCosts = bestKnownDistance(oldOrder[beginIndex-1], oldOrder[beginIndex])
-                                  + bestKnownDistance(oldOrder[endIndex], oldOrder[endIndex+1]);
+            qreal oldRangeCosts = bestKnownDistance(oldOrder[beginIndex - 1], oldOrder[beginIndex])
+                                  + bestKnownDistance(oldOrder[endIndex], oldOrder[endIndex + 1]);
 
-            qreal newRangeCosts = bestKnownDistance(oldOrder[beginIndex-1], oldOrder[endIndex])
-                                  +bestKnownDistance(oldOrder[beginIndex], oldOrder[endIndex+1]);
+            qreal newRangeCosts = bestKnownDistance(oldOrder[beginIndex - 1], oldOrder[endIndex])
+                                  + bestKnownDistance(oldOrder[beginIndex], oldOrder[endIndex + 1]);
             for(int i = beginIndex; i < endIndex; i++)
             {
-                oldRangeCosts+=bestKnownDistance(oldOrder[i], oldOrder[i+1]);
-                newRangeCosts+=bestKnownDistance(oldOrder[i+1], oldOrder[i]);
+                oldRangeCosts += bestKnownDistance(oldOrder[i], oldOrder[i + 1]);
+                newRangeCosts += bestKnownDistance(oldOrder[i + 1], oldOrder[i]);
             }
 
-            if(newRangeCosts-oldRangeCosts < bestTwoOptGain)
+            if(newRangeCosts - oldRangeCosts < bestTwoOptGain)
             {
                 bestBeginIndex = beginIndex;
                 bestEndIndex = endIndex;
-                bestTwoOptGain = newRangeCosts-oldRangeCosts;
+                bestTwoOptGain = newRangeCosts - oldRangeCosts;
             }
         }
     }
@@ -214,7 +214,7 @@ qreal CRouterOptimization::twoOptStep(const SGisLine &oldOrder, SGisLine &newOrd
     newOrder = SGisLine(oldOrder);
     if(bestEndIndex >= 0 && bestBeginIndex >= 0)
     {
-        std::reverse(newOrder.begin()+bestBeginIndex, newOrder.begin()+bestEndIndex);
+        std::reverse(newOrder.begin() + bestBeginIndex, newOrder.begin() + bestEndIndex);
     }
     return bestTwoOptGain;
 }
@@ -222,9 +222,9 @@ qreal CRouterOptimization::twoOptStep(const SGisLine &oldOrder, SGisLine &newOrd
 qreal CRouterOptimization::getRealRouteCosts(const SGisLine &line, qreal costCutoff)
 {
     qreal costs = 0;
-    for(int i = 0; i < line.length()-1; i++)
+    for(int i = 0; i < line.length() - 1; i++)
     {
-        const routing_cache_item_t* route = getRoute(line[i].coord, line[i+1].coord);
+        const routing_cache_item_t* route = getRoute(line[i].coord, line[i + 1].coord);
         if(route == nullptr)
         {
             return -1;
@@ -242,8 +242,8 @@ qreal CRouterOptimization::getRealRouteCosts(const SGisLine &line, qreal costCut
 qreal CRouterOptimization::bestKnownDistance(const IGisLine::point_t& start, const IGisLine::point_t& end)
 {
     //10 digits after the decimal point in exponential format should be by far enough
-    QString start_key=QString::number(start.coord.x(), 'e', 10) + QString::number(start.coord.y(), 'e', 10);
-    QString end_key=QString::number(end.coord.x(), 'e', 10) + QString::number(end.coord.y(), 'e', 10);
+    QString start_key = QString::number(start.coord.x(), 'e', 10) + QString::number(start.coord.y(), 'e', 10);
+    QString end_key = QString::number(end.coord.x(), 'e', 10) + QString::number(end.coord.y(), 'e', 10);
 
     if(!routingCache.contains(start_key))
     {
@@ -262,7 +262,7 @@ qreal CRouterOptimization::bestKnownDistance(const IGisLine::point_t& start, con
         {
             return GPS_Math_DistanceQuick(start.coord.x(), start.coord.y(),
                                           end.coord.x(), end.coord.y())
-                   * (totalAirToCosts/totalNumOfRoutes + minAirToCostFactor)/2;
+                   * (totalAirToCosts / totalNumOfRoutes + minAirToCostFactor) / 2;
         }
         else
         {
@@ -274,8 +274,8 @@ qreal CRouterOptimization::bestKnownDistance(const IGisLine::point_t& start, con
 
 const CRouterOptimization::routing_cache_item_t* CRouterOptimization::getRoute(const QPointF& start, const QPointF& end)
 {
-    QString start_key=QString::number(start.x(), 'e', 10) + QString::number(start.y(), 'e', 10);
-    QString end_key=QString::number(end.x(), 'e', 10) + QString::number(end.y(), 'e', 10);
+    QString start_key = QString::number(start.x(), 'e', 10) + QString::number(start.y(), 'e', 10);
+    QString end_key = QString::number(end.x(), 'e', 10) + QString::number(end.y(), 'e', 10);
 
     if(!routingCache.contains(start_key))
     {
@@ -292,7 +292,7 @@ const CRouterOptimization::routing_cache_item_t* CRouterOptimization::getRoute(c
         }
         routingCache[start_key][end_key] = cacheItem;
 
-        qreal airToCostFactor = cacheItem.costs/GPS_Math_DistanceQuick(start.x(), start.y(), end.x(), end.y());
+        qreal airToCostFactor = cacheItem.costs / GPS_Math_DistanceQuick(start.x(), start.y(), end.x(), end.y());
         if( airToCostFactor < minAirToCostFactor || minAirToCostFactor < 0)
         {
             minAirToCostFactor = airToCostFactor;
@@ -305,17 +305,17 @@ const CRouterOptimization::routing_cache_item_t* CRouterOptimization::getRoute(c
 
 int CRouterOptimization::fillSubPts(SGisLine &line)
 {
-    for(int i = 0; i < line.length()-1; i++)
+    for(int i = 0; i < line.length() - 1; i++)
     {
         line[i].subpts.clear();
-        const routing_cache_item_t* route= getRoute(line[i].coord, line[i+1].coord);
+        const routing_cache_item_t* route = getRoute(line[i].coord, line[i + 1].coord);
         if(route == nullptr)
         {
             return -1;
         }
         for(const QPointF& point : route->route)
         {
-            line[i].subpts<<IGisLine::subpt_t(point);
+            line[i].subpts << IGisLine::subpt_t(point);
         }
     }
     return 0;

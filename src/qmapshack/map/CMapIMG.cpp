@@ -128,7 +128,7 @@ static inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
 
 
 CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility|eFeatVectorItems|eFeatTypFile, parent)
+    : IMap(eFeatVisibility | eFeatVectorItems | eFeatTypFile, parent)
     , filename(filename)
     , fm(CMainWindow::self().getMapFont())
     , selectedLanguage(NOIDX)
@@ -484,7 +484,7 @@ void CMapIMG::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray&
 
 #ifdef HOST_IS_64_BIT
     quint64 * p64 = (quint64*)data.data();
-    for(quint32 i = 0; i < size/8; ++i)
+    for(quint32 i = 0; i < size / 8; ++i)
     {
         *p64++ ^= mask64;
     }
@@ -492,7 +492,7 @@ void CMapIMG::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray&
     quint8 * p = (quint8*)p64;
 #else
     quint32 * p32 = (quint32*)data.data();
-    for(quint32 i = 0; i < size/4; ++i)
+    for(quint32 i = 0; i < size / 4; ++i)
     {
         *p32++ ^= mask32;
     }
@@ -518,7 +518,7 @@ void CMapIMG::readBasics()
         throw exce_t(eErrOpen, tr("Failed to open: ") + filename);
     }
 
-    mask = (quint8)*file.data(0, 1);
+    mask = (quint8) * file.data(0, 1);
 
     mask32 = mask;
     mask32 <<= 8;
@@ -695,7 +695,7 @@ void CMapIMG::readBasics()
         copyright += str;
     }
 
-    qDebug() << "dimensions:\t" << "N" << (maparea.bottom()*RAD_TO_DEG) << "E" << (maparea.right()*RAD_TO_DEG) << "S" << (maparea.top()*RAD_TO_DEG) << "W" << (maparea.left()*RAD_TO_DEG);
+    qDebug() << "dimensions:\t" << "N" << (maparea.bottom() * RAD_TO_DEG) << "E" << (maparea.right() * RAD_TO_DEG) << "S" << (maparea.top() * RAD_TO_DEG) << "W" << (maparea.left() * RAD_TO_DEG);
 }
 
 void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
@@ -757,7 +757,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     }
 
 #ifdef DEBUG_SHOW_TRE_DATA
-    qDebug() << "bounding area (\260)" << (subfile.north*RAD_TO_DEG) << (subfile.east*RAD_TO_DEG) << (subfile.south*RAD_TO_DEG) << (subfile.west*RAD_TO_DEG);
+    qDebug() << "bounding area (\260)" << (subfile.north * RAD_TO_DEG) << (subfile.east * RAD_TO_DEG) << (subfile.south * RAD_TO_DEG) << (subfile.west * RAD_TO_DEG);
     qDebug() << "bounding area (rad)" << subfile.area;
 #endif                       // DEBUG_SHOW_TRE_DATA
 
@@ -777,7 +777,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     quint32 nsubdivs_last = 0;
 
     // count subsections
-    for(quint32 i=0; i < nlevels; ++i)
+    for(quint32 i = 0; i < nlevels; ++i)
     {
         maplevel_t ml;
         ml.inherited    = TRE_MAP_INHER(pMapLevel);
@@ -834,7 +834,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
     // parse all 16 byte subdivision entries
     quint32 i;
-    for(i=0; i < nsubdivs_next; ++i, --nsubdiv)
+    for(i = 0; i < nsubdivs_next; ++i, --nsubdiv)
     {
         subdiv->n = i;
         subdiv->next         = gar_load(uint16_t, pSubDivN->next);
@@ -1114,7 +1114,7 @@ void CMapIMG::processPrimaryMapData()
 
 
 #ifdef DEBUG_SHOW_MAPLEVELS
-    for(int i=0; i < maplevels.count(); ++i)
+    for(int i = 0; i < maplevels.count(); ++i)
     {
         map_level_t& ml = maplevels[i];
         qDebug() << ml.bits << ml.level << ml.useBaseMap;
@@ -1233,7 +1233,7 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
     }
 
     QPainter p(&buf.image);
-    p.setOpacity(getOpacity()/100.0);
+    p.setOpacity(getOpacity() / 100.0);
     USE_ANTI_ALIASING(p, true);
 
     QFont f = CMainWindow::self().getMapFont();
@@ -1719,7 +1719,7 @@ void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines)
     const int N = polygonDrawOrder.size();
     for(int n = 0; n < N; ++n)
     {
-        quint32 type = polygonDrawOrder[(N-1) - n];
+        quint32 type = polygonDrawOrder[(N - 1) - n];
 
         p.setPen(polygonProperties[type].pen);
         p.setBrush(CMainWindow::self().isNight() ? polygonProperties[type].brushNight : polygonProperties[type].brushDay);
@@ -1864,7 +1864,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
                         p.save();
                         p.translate(p1);
                         p.rotate(angle);
-                        p.drawImage(0, -h/2, img2line(pixmap, segLength));
+                        p.drawImage(0, -h / 2, img2line(pixmap, segLength));
                         //imageCount++;
 
                         p.restore();
@@ -1997,7 +1997,7 @@ void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, con
     const int size = line.size();
     for(int i = 1; i < size; ++i)
     {
-        const QPointF &p1 = line[i-1];
+        const QPointF &p1 = line[i - 1];
         const QPointF &p2 = line[i];
         qreal dx = p2.x() - p1.x();
         qreal dy = p2.y() - p1.y();
@@ -2056,7 +2056,7 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
         {
             if(size.width() <= 8 && size.height() <= 8)
             {
-                p.drawImage(pt->pos.x() - (size.width()/2), pt->pos.y() - (size.height()/2), icon);
+                p.drawImage(pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
             }
             else
             {
@@ -2070,7 +2070,7 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
 
         if(pointProperties.contains(pt->type))
         {
-            p.drawImage(pt->pos.x() - (size.width()/2), pt->pos.y() - (size.height()/2), icon);
+            p.drawImage(pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
             showLabel = pointProperties[pt->type].labelType != CGarminTyp::eNone;
         }
         else
@@ -2111,7 +2111,7 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
         {
             if(size.width() <= 8 && size.height() <= 8)
             {
-                p.drawImage(pt.pos.x() - (size.width()/2), pt.pos.y() - (size.height()/2), icon);
+                p.drawImage(pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
             }
             else
             {
@@ -2123,7 +2123,7 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
         labelType = CGarminTyp::eStandard;
         if(pointProperties.contains(pt.type))
         {
-            p.drawImage(pt.pos.x() - (size.width()/2), pt.pos.y() - (size.height()/2), icon);
+            p.drawImage(pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
             labelType = pointProperties[pt.type].labelType;
         }
         else
@@ -2208,14 +2208,14 @@ void CMapIMG::drawText(QPainter& p)
         {
             const qreal d = lengths[i];
 
-            if((offset + d/2) >= ref)
+            if((offset + d / 2) >= ref)
             {
                 offset = ref;
                 break;
             }
             if((offset + d) >= ref)
             {
-                offset += d/2;
+                offset += d / 2;
                 break;
             }
             offset += d;
@@ -2426,10 +2426,10 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
         }
 
         // see http://local.wasp.uwa.edu.au/~pbourke/geometry/pointline/
-        for(int i=1; i < len; ++i)
+        for(int i = 1; i < len; ++i)
         {
-            p1.u = line.pixel[i-1].x();
-            p1.v = line.pixel[i-1].y();
+            p1.u = line.pixel[i - 1].x();
+            p1.v = line.pixel[i - 1].y();
             p2.u = line.pixel[i].x();
             p2.v = line.pixel[i].y();
 
@@ -2450,7 +2450,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
             qreal x = p1.u + u * dx;
             qreal y = p1.v + u * dy;
 
-            qreal distance = qSqrt((x - pt.x())*(x - pt.x()) + (y - pt.y())*(y - pt.y()));
+            qreal distance = qSqrt((x - pt.x()) * (x - pt.x()) + (y - pt.y()) * (y - pt.y()));
 
             if(distance < shortest)
             {
@@ -2517,7 +2517,7 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
         {
             bool c = false;
             // see http://local.wasp.uwa.edu.au/~pbourke/geometry/insidepoly/
-            for (int i = 0, j = npol-1; i < npol; j = i++)
+            for (int i = 0, j = npol - 1; i < npol; j = i++)
             {
                 p1.u = line.pixel[j].x();
                 p1.v = line.pixel[j].y();

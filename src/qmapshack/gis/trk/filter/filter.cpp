@@ -345,7 +345,7 @@ void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
             continue;
         }
 
-        timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
+        timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
         pt.time   = timestamp;
     }
 
@@ -456,8 +456,8 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
         QVector<qreal> formulaTerms(7);
         formulaTerms[0] = 60 / B4;
         formulaTerms[1] = A9 * 60000 / B5;
-        formulaTerms[2] = (A9-0) * ((60 / B4 + 0.5 * (0.2 * 60000 / B5 - 60 / B4)) - (60 / B4)) / (0.2 - 0) + (60 / B4);
-        formulaTerms[3] = (A9 - 0.2) * ((60 / B4) - (0.2 * 60000 / B5)) / (((B5 / (B4 * 1000) - 0) * 0.5) -0.2) + (0.2 * 60000 / B5);
+        formulaTerms[2] = (A9 - 0) * ((60 / B4 + 0.5 * (0.2 * 60000 / B5 - 60 / B4)) - (60 / B4)) / (0.2 - 0) + (60 / B4);
+        formulaTerms[3] = (A9 - 0.2) * ((60 / B4) - (0.2 * 60000 / B5)) / (((B5 / (B4 * 1000) - 0) * 0.5) - 0.2) + (0.2 * 60000 / B5);
         formulaTerms[4] = -A9 * 60000 / B6;
         formulaTerms[5] = (A9 + 0.05) * ((60 / B4 + 0.5 * (0.25 * 60000 / B6 - 60 / B4)) - (60 / B4)) / (-0.25 + 0.05) + (60 / B4);
         formulaTerms[6] = (A9 + 0.25) * ((60 / B4) - (0.25 * 60000 / B6)) / ((-0.05 - 0.5 * (B6 / (B4 * 1000) - 0.05)) + 0.25) + (0.25 * 60000 / B6);
@@ -573,7 +573,7 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
     }
 
     const QVector<CTrackData::trkpt_t>& part1 = pts.mid(0, idxNewStartPoint);
-    const QVector<CTrackData::trkpt_t>& part2 = pts.mid(idxNewStartPoint,-1);
+    const QVector<CTrackData::trkpt_t>& part2 = pts.mid(idxNewStartPoint, -1);
 
     trk.readFrom(part2 + part1);
 
@@ -604,13 +604,13 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
 
         if (pts.size() >= 4)
         {
-            const QLineF headLine = QLineF(headPt.lon, headPt.lat, pts[pts.size()-2].lon, pts[pts.size()-2].lat);
+            const QLineF headLine = QLineF(headPt.lon, headPt.lat, pts[pts.size() - 2].lon, pts[pts.size() - 2].lat);
 
             bool firstCycle = true;
             CTrackData::trkpt_t prevScannedPt;
             for (const CTrackData::trkpt_t& scannedPt : pts)
             {
-                if (scannedPt.idxTotal == pts[pts.size()-2].idxTotal)
+                if (scannedPt.idxTotal == pts[pts.size() - 2].idxTotal)
                 {
                     break;
                 }
@@ -627,11 +627,11 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
 
                 if ( ( headLine.intersect(scannedLine, &intersectionPoint) == QLineF::BoundedIntersection)
                      &&
-                     (pts[pts.size()-2].distance - scannedPt.distance) > minLoopLength) // loop is long enough to cut the track)
+                     (pts[pts.size() - 2].distance - scannedPt.distance) > minLoopLength) // loop is long enough to cut the track)
                 {
-                    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts[pts.size()-2].idxTotal, trk, project);
+                    new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts[pts.size() - 2].idxTotal, trk, project);
                     part++;
-                    pts.remove(0, pts.size()-2);
+                    pts.remove(0, pts.size() - 2);
 
                     break;
                 }
@@ -670,7 +670,7 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
         }
         else
         {
-            const CTrackData::trkpt_t *prevVisiblePt = trk.getTrkPtByVisibleIndex(pt.idxVisible-1);
+            const CTrackData::trkpt_t *prevVisiblePt = trk.getTrkPtByVisibleIndex(pt.idxVisible - 1);
             qreal d = pt.distance - prevVisiblePt->distance; // "distance" field of trackpoints includes visible points only
 
             if (d < distance) // "distance" defines the threshold at which knots are detected: knot starts when

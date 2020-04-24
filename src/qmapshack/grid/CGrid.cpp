@@ -107,35 +107,35 @@ void CGrid::setProjAndColor(const QString& proj, const QColor& c)
 void CGrid::findGridSpace(qreal min, qreal max, qreal& xSpace, qreal& ySpace)
 {
     qreal dX = qAbs(min - max) / 10;
-    if(dX < M_PI/180000)
+    if(dX < M_PI / 180000)
     {
-        xSpace = 5*M_PI/1800000;
-        ySpace = 5*M_PI/1800000;
+        xSpace = 5 * M_PI / 1800000;
+        ySpace = 5 * M_PI / 1800000;
     }
-    else if(dX < M_PI/18000)
+    else if(dX < M_PI / 18000)
     {
-        xSpace = 5*M_PI/180000;
-        ySpace = 5*M_PI/180000;
+        xSpace = 5 * M_PI / 180000;
+        ySpace = 5 * M_PI / 180000;
     }
-    else if(dX < M_PI/1800)
+    else if(dX < M_PI / 1800)
     {
-        xSpace = 5*M_PI/18000;
-        ySpace = 5*M_PI/18000;
+        xSpace = 5 * M_PI / 18000;
+        ySpace = 5 * M_PI / 18000;
     }
-    else if(dX < M_PI/180)
+    else if(dX < M_PI / 180)
     {
-        xSpace = 5*M_PI/1800;
-        ySpace = 5*M_PI/1800;
+        xSpace = 5 * M_PI / 1800;
+        ySpace = 5 * M_PI / 1800;
     }
-    else if(dX < M_PI/18)
+    else if(dX < M_PI / 18)
     {
-        xSpace = 5*M_PI/180;
-        ySpace = 5*M_PI/180;
+        xSpace = 5 * M_PI / 180;
+        ySpace = 5 * M_PI / 180;
     }
-    else if(dX < M_PI/1.8)
+    else if(dX < M_PI / 1.8)
     {
-        xSpace = 5*M_PI/180;
-        ySpace = 5*M_PI/180;
+        xSpace = 5 * M_PI / 180;
+        ySpace = 5 * M_PI / 180;
     }
 
     else if(dX < 3000)
@@ -193,7 +193,7 @@ void CGrid::findGridSpace(qreal min, qreal max, qreal& xSpace, qreal& ySpace)
 
 bool CGrid::calcIntersection(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4, qreal& x, qreal& y)
 {
-    qreal ua = ((x4 - x3)*(y1 - y3) - (y4 - y3)*(x1 - x3))/((y4 - y3)*(x2 - x1) - (x4 - x3)*(y2 - y1));
+    qreal ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
 
     x = x1 + ua * (x2 - x1);
     y = y1 + ua * (y2 - y1);
@@ -269,13 +269,13 @@ void CGrid::draw(QPainter& p, const QRect& rect)
 
     if(pj_is_latlong(pjGrid))
     {
-        if(y > (85*DEG_TO_RAD))
+        if(y > (85 * DEG_TO_RAD))
         {
-            y = (85*DEG_TO_RAD);
+            y = (85 * DEG_TO_RAD);
         }
-        if(btmMin < -(85*DEG_TO_RAD - yGridSpace))
+        if(btmMin < -(85 * DEG_TO_RAD - yGridSpace))
         {
-            btmMin = -(85*DEG_TO_RAD - yGridSpace);
+            btmMin = -(85 * DEG_TO_RAD - yGridSpace);
         }
 
         if(x > rightMax)
@@ -361,13 +361,13 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     p.restore();
 
     QColor textColor;
-    textColor.setHsv(color.hslHue(), color.hsvSaturation(), (color.value() > 128 ? color.value()-128 : 0));
+    textColor.setHsv(color.hslHue(), color.hsvSaturation(), (color.value() > 128 ? color.value() - 128 : 0));
 
     if(pj_is_latlong(pjGrid))
     {
         QFontMetrics fm(CMainWindow::self().getMapFont());
         int yoff  = fm.height() + fm.ascent();
-        int xoff  = fm.width("XX.XXXX")>>1;
+        int xoff  = fm.width("XX.XXXX") >> 1;
 
         for(const val_t &val : horzTopTicks)
         {
@@ -393,26 +393,26 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     {
         QFontMetrics fm(CMainWindow::self().getMapFont());
         int yoff  = fm.height() + fm.ascent();
-        int xoff  = fm.width("XXXX")>>1;
+        int xoff  = fm.width("XXXX") >> 1;
 
         for(const val_t &val : horzTopTicks)
         {
-            CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(val.pos, yoff), textColor);
+            CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(val.pos, yoff), textColor);
         }
 
         for(const val_t &val : horzBtmTicks)
         {
-            CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(val.pos, h), textColor);
+            CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(val.pos, h), textColor);
         }
 
         for(const val_t &val : vertLftTicks)
         {
-            CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(xoff, val.pos), textColor);
+            CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(xoff, val.pos), textColor);
         }
 
         for(const val_t &val : vertRgtTicks)
         {
-            CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(w - xoff, val.pos), textColor);
+            CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(w - xoff, val.pos), textColor);
         }
     }
 }

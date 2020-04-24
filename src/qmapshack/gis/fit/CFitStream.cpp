@@ -38,7 +38,7 @@ const CFitMessage& CFitStream::nextMesg()
 
 const CFitMessage& CFitStream::lastMesg() const
 {
-    int pos = readPos-1;
+    int pos = readPos - 1;
     if(pos < 0)
     {
         pos = 0;

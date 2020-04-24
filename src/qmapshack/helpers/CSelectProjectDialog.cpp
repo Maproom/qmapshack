@@ -48,9 +48,9 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, IGisProj
             }
 
             QListWidgetItem * item = new QListWidgetItem(project->icon(CGisListWks::eColumnIcon), project->text(CGisListWks::eColumnName), listWidget);
-            item->setData(Qt::UserRole+0, project->getKey());
-            item->setData(Qt::UserRole+1, project->getType());
-            item->setData(Qt::UserRole+2, project->getName());
+            item->setData(Qt::UserRole + 0, project->getKey());
+            item->setData(Qt::UserRole + 1, project->getType());
+            item->setData(Qt::UserRole + 2, project->getName());
 
             if(project->getKey() == lastkey)
             {
@@ -126,9 +126,9 @@ void CSelectProjectDialog::reject()
 
 void CSelectProjectDialog::slotItemClicked(QListWidgetItem * item)
 {
-    lineEdit->setText(item->data(Qt::UserRole+2).toString());
+    lineEdit->setText(item->data(Qt::UserRole + 2).toString());
     key     = item->data(Qt::UserRole).toString();
-    type    = IGisProject::type_e(item->data(Qt::UserRole+1).toInt());
+    type    = IGisProject::type_e(item->data(Qt::UserRole + 1).toInt());
     setType(type);
 
     frameType->setEnabled(false);
@@ -136,9 +136,9 @@ void CSelectProjectDialog::slotItemClicked(QListWidgetItem * item)
 
 void CSelectProjectDialog::slotItemDoubleClicked(QListWidgetItem * item)
 {
-    lineEdit->setText(item->data(Qt::UserRole+2).toString());
+    lineEdit->setText(item->data(Qt::UserRole + 2).toString());
     key     = item->data(Qt::UserRole).toString();
-    type    = IGisProject::type_e(item->data(Qt::UserRole+1).toInt());
+    type    = IGisProject::type_e(item->data(Qt::UserRole + 1).toInt());
 
     QDialog::accept();
 }

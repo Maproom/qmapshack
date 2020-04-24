@@ -56,11 +56,11 @@ void CFitField::applyScaleAndOffset()
         // scale and offset is only for int / sint types
         if(baseType->isUnsignedInt())
         {
-            value = QVariant(rawValue.toUInt()/ profile().getScale() - profile().getOffset());
+            value = QVariant(rawValue.toUInt() / profile().getScale() - profile().getOffset());
         }
         if(baseType->isSignedInt())
         {
-            value = QVariant(rawValue.toInt()/ profile().getScale() - profile().getOffset());
+            value = QVariant(rawValue.toInt() / profile().getScale() - profile().getOffset());
         }
     }
     else

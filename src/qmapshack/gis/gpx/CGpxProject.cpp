@@ -278,7 +278,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
                                                 "QMapShack might not be able to load and store all elements of this file.  "
                                                 "Those elements will be lost. I recommend to use another file. "
                                                 "<b>Do you really want to overwrite the file?</b>")
-                                           , QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
+                                           , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
             if(res == QMessageBox::No)
             {
                 return false;

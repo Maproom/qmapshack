@@ -18,10 +18,10 @@
 **********************************************************************************************/
 #include "CMainWindow.h"
 #include "GeoMath.h"
+#include "units/CUnitAviation.h"
 #include "units/CUnitImperial.h"
 #include "units/CUnitMetric.h"
 #include "units/CUnitNautic.h"
-#include "units/CUnitAviation.h"
 
 #include <proj_api.h>
 #include <QtWidgets>
@@ -422,7 +422,7 @@ const char * IUnit::tblTimezone[] =
     0
 };
 
-const int N_TIMEZONES = sizeof(IUnit::tblTimezone)/sizeof(const char*);
+const int N_TIMEZONES = sizeof(IUnit::tblTimezone) / sizeof(const char*);
 
 const QRegExp IUnit::reCoord1("^\\s*([N|S]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s+([E|W|O]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s*$");
 
@@ -582,7 +582,7 @@ void IUnit::slope2string(qreal slope, QString &val, QString &unit)
         break;
 
     case eSlopePercent:
-        val.sprintf("%.0f", qTan(qDegreesToRadians(slope))*100.0);
+        val.sprintf("%.0f", qTan(qDegreesToRadians(slope)) * 100.0);
         unit = "%";
         break;
     }
@@ -612,7 +612,7 @@ void IUnit::slope2unit(qreal slope, qreal &val, QString &unit)
         break;
 
     case eSlopePercent:
-        val = qTan(qDegreesToRadians(slope))*100.0;
+        val = qTan(qDegreesToRadians(slope)) * 100.0;
         unit = "%";
         break;
     }
@@ -718,7 +718,7 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     i = timetext.indexOf(".");
     if (i != NOIDX)
     {
-        if(timetext[i+1] == '0')
+        if(timetext[i + 1] == '0')
         {
             format += ".zzz";
         }
@@ -803,7 +803,7 @@ QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPoi
     }
 
     QDateTime tmp = time.toTimeZone(tz);
-    return tmp.toString((shortDate|useShortFormat) ? Qt::ISODate : Qt::SystemLocaleLongDate);
+    return tmp.toString((shortDate | useShortFormat) ? Qt::ISODate : Qt::SystemLocaleLongDate);
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos)
@@ -983,7 +983,7 @@ bool IUnit::isValidCoordString(const QString& str)
     return false;
 }
 
-QMap<QString, qreal> IUnit::timeToMKSMap={
+QMap<QString, qreal> IUnit::timeToMKSMap = {
     {"s", 1.0},
     {"min", 60.0},
     {"h", 3600.0},
@@ -992,41 +992,41 @@ QMap<QString, qreal> IUnit::timeToMKSMap={
     {"ч", 3600.0},
 };
 
-QMap<QString, qreal> IUnit::distanceToMKSMap={
+QMap<QString, qreal> IUnit::distanceToMKSMap = {
     {"m", 1.0},
     {"km", 1000.0},
-    {"mi", 1.0/CUnitImperial::milePerMeter},
-    {"ft", 1.0/CUnitImperial::footPerMeter},
+    {"mi", 1.0 / CUnitImperial::milePerMeter},
+    {"ft", 1.0 / CUnitImperial::footPerMeter},
     {"м", 1.0},
     {"км", 1000.0},
 };
 
-QMap<QString, qreal> IUnit::speedToMKSMap={
+QMap<QString, qreal> IUnit::speedToMKSMap = {
     {"m/s", 1.0},
-    {"m/min", 1.0/60},
-    {"m/h", 1.0/3600},
+    {"m/min", 1.0 / 60},
+    {"m/h", 1.0 / 3600},
     {"km/s", 1000.0},
-    {"km/min", 1000.0/60},
-    {"km/h", 1000.0/3600},
-    {"mi/s", 1.0/CUnitImperial::milePerMeter},
-    {"mi/min", 1.0/(CUnitImperial::milePerMeter*60)},
-    {"mi/h", 1.0/(CUnitImperial::milePerMeter*3600)},
-    {"ft/s", 1.0/CUnitImperial::footPerMeter},
-    {"ft/min", 1.0/(CUnitImperial::footPerMeter*60)},
-    {"ft/h", 1.0/(CUnitImperial::footPerMeter*3600)},
+    {"km/min", 1000.0 / 60},
+    {"km/h", 1000.0 / 3600},
+    {"mi/s", 1.0 / CUnitImperial::milePerMeter},
+    {"mi/min", 1.0 / (CUnitImperial::milePerMeter*60)},
+    {"mi/h", 1.0 / (CUnitImperial::milePerMeter*3600)},
+    {"ft/s", 1.0 / CUnitImperial::footPerMeter},
+    {"ft/min", 1.0 / (CUnitImperial::footPerMeter*60)},
+    {"ft/h", 1.0 / (CUnitImperial::footPerMeter*3600)},
     {"м/с", 1.0},
-    {"м/мин", 1.0/60},
-    {"м/ч", 1.0/3600},
+    {"м/мин", 1.0 / 60},
+    {"м/ч", 1.0 / 3600},
     {"км/с", 1000.0},
-    {"км/мин", 1000.0/60},
-    {"км/ч", 1000.0/3600},
+    {"км/мин", 1000.0 / 60},
+    {"км/ч", 1000.0 / 3600},
 };
 
-QMap<QString, qreal> IUnit::areaToMKSMap={
+QMap<QString, qreal> IUnit::areaToMKSMap = {
     {"m²", 1.0},
-    {"km²", 1000.0*1000},
-    {"mi²", 1.0/(CUnitImperial::milePerMeter*CUnitImperial::milePerMeter)},
-    {"ft²", 1.0/(CUnitImperial::footPerMeter*CUnitImperial::footPerMeter)},
+    {"km²", 1000.0 * 1000},
+    {"mi²", 1.0 / (CUnitImperial::milePerMeter*CUnitImperial::milePerMeter)},
+    {"ft²", 1.0 / (CUnitImperial::footPerMeter*CUnitImperial::footPerMeter)},
     {"м²", 1.0},
-    {"км²", 1000.0*1000},
+    {"км²", 1000.0 * 1000},
 };

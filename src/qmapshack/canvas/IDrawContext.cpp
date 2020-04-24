@@ -106,7 +106,7 @@ bool IDrawContext::resize(const QSize& size)
     viewWidth  = size.width();
     viewHeight = size.height();
 
-    center     = QPointF(viewWidth/2.0, viewHeight/2.0);
+    center     = QPointF(viewWidth / 2.0, viewHeight / 2.0);
     bufWidth   = viewWidth  + 2 * BUFFER_BORDER;
     bufHeight  = viewHeight + 2 * BUFFER_BORDER;
 
@@ -246,8 +246,8 @@ void IDrawContext::convertRad2M(QPointF &p) const
         turnaround. It exceeds the values. We have to
         apply fixes in that case.
      */
-    bool fixWest = p.x() < (-180*DEG_TO_RAD);
-    bool fixEast = p.x() > ( 180*DEG_TO_RAD);
+    bool fixWest = p.x() < (-180 * DEG_TO_RAD);
+    bool fixEast = p.x() > ( 180 * DEG_TO_RAD);
 
     pj_transform(pjtar, pjsrc, 1, 0, &p.rx(), &p.ry(), 0);
 
@@ -258,16 +258,16 @@ void IDrawContext::convertRad2M(QPointF &p) const
      */
     if(fixWest)
     {
-        QPointF o(-180*DEG_TO_RAD, y);
+        QPointF o(-180 * DEG_TO_RAD, y);
         convertRad2M(o);
-        p.rx() = 2*o.x() + p.x();
+        p.rx() = 2 * o.x() + p.x();
     }
 
     if(fixEast)
     {
-        QPointF o(180*DEG_TO_RAD, y);
+        QPointF o(180 * DEG_TO_RAD, y);
         convertRad2M(o);
-        p.rx() = 2*o.x() + p.x();
+        p.rx() = 2 * o.x() + p.x();
     }
 }
 
@@ -342,11 +342,11 @@ void IDrawContext::convertRad2Px(QPolygonF& poly) const
      */
     for(int i = 0; i < N; ++i, ++pFix, pY += 2)
     {
-        if(*pY < (-180*DEG_TO_RAD))
+        if(*pY < (-180 * DEG_TO_RAD))
         {
             pFix->fixWest = *pY;
         }
-        if(*pY > ( 180*DEG_TO_RAD))
+        if(*pY > ( 180 * DEG_TO_RAD))
         {
             pFix->fixEast = *pY;
         }
@@ -366,15 +366,15 @@ void IDrawContext::convertRad2Px(QPolygonF& poly) const
          */
         if(pFix->fixWest != NOFLOAT)
         {
-            QPointF o(-180*DEG_TO_RAD, pFix->fixWest);
+            QPointF o(-180 * DEG_TO_RAD, pFix->fixWest);
             convertRad2M(o);
-            pPt->rx() = 2*o.x() + pPt->x();
+            pPt->rx() = 2 * o.x() + pPt->x();
         }
         if(pFix->fixEast != NOFLOAT)
         {
-            QPointF o(180*DEG_TO_RAD, pFix->fixEast);
+            QPointF o(180 * DEG_TO_RAD, pFix->fixEast);
             convertRad2M(o);
-            pPt->rx() = 2*o.x() + pPt->x();
+            pPt->rx() = 2 * o.x() + pPt->x();
         }
 
         *pPt = (*pPt - f) / (scale * zoomFactor) + center;
@@ -402,10 +402,10 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
     mutex.lock(); // --------- start serialize with thread
 
     // derive references for all corners coordinate of map buffer
-    ref1 = f1 + QPointF(-bufWidth/2, -bufHeight/2) * bufferScale;
-    ref2 = f1 + QPointF( bufWidth/2, -bufHeight/2) * bufferScale;
-    ref3 = f1 + QPointF( bufWidth/2,  bufHeight/2) * bufferScale;
-    ref4 = f1 + QPointF(-bufWidth/2,  bufHeight/2) * bufferScale;
+    ref1 = f1 + QPointF(-bufWidth / 2, -bufHeight / 2) * bufferScale;
+    ref2 = f1 + QPointF( bufWidth / 2, -bufHeight / 2) * bufferScale;
+    ref3 = f1 + QPointF( bufWidth / 2,  bufHeight / 2) * bufferScale;
+    ref4 = f1 + QPointF(-bufWidth / 2,  bufHeight / 2) * bufferScale;
     convertM2Rad(ref1);
     convertM2Rad(ref2);
     convertM2Rad(ref3);
@@ -416,20 +416,20 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
     {
         if(qAbs(ref1.x()) > qAbs(ref2.x()))
         {
-            ref1.rx() = -2*(180*DEG_TO_RAD) + ref1.rx();
+            ref1.rx() = -2 * (180 * DEG_TO_RAD) + ref1.rx();
         }
         if(qAbs(ref4.x()) > qAbs(ref3.x()))
         {
-            ref4.rx() = -2*(180*DEG_TO_RAD) + ref4.rx();
+            ref4.rx() = -2 * (180 * DEG_TO_RAD) + ref4.rx();
         }
 
         if(qAbs(ref1.x()) < qAbs(ref2.x()))
         {
-            ref2.rx() = 2*(180*DEG_TO_RAD) + ref2.rx();
+            ref2.rx() = 2 * (180 * DEG_TO_RAD) + ref2.rx();
         }
         if(qAbs(ref4.x()) < qAbs(ref3.x()))
         {
-            ref3.rx() = 2*(180*DEG_TO_RAD) + ref3.rx();
+            ref3.rx() = 2 * (180 * DEG_TO_RAD) + ref3.rx();
         }
     }
 
@@ -449,7 +449,7 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
 
     p.save();
     // scale image if current zoomfactor does not match buffer's zoomfactor
-    p.scale(currentBuffer.zoomFactor.x()/zoomFactor.x(), currentBuffer.zoomFactor.y()/zoomFactor.y());
+    p.scale(currentBuffer.zoomFactor.x() / zoomFactor.x(), currentBuffer.zoomFactor.y() / zoomFactor.y());
     // add offset
     p.translate(off);
     // draw buffer to painter

@@ -52,7 +52,7 @@ const CFitFieldProfile* CFitProfile::getField(quint8 fieldDefNr) const
 
 void CFitProfile::addField(QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16 offset, QString units)
 {
-    CFitFieldProfile* field= new CFitFieldProfile(this, name, baseType, fieldDefNr, scale, offset, units);
+    CFitFieldProfile* field = new CFitFieldProfile(this, name, baseType, fieldDefNr, scale, offset, units);
     fields.insert(fieldDefNr, field);
 }
 void CFitProfile::addSubfield(QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal

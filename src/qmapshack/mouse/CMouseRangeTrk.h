@@ -43,7 +43,7 @@ public:
     void mouseMoved(const QPoint& pos) override;
     void leftButtonDown(const QPoint& pos) override;
 
-private:    
+private:
     const QString owner;
     IGisItem::key_t key;
 

@@ -22,7 +22,7 @@
 
 inline qreal qLog10(qreal x)
 {
-    return qLn(x)/qLn(10);
+    return qLn(x) / qLn(10);
 }
 
 void CPlotAxis::setLimits(qreal min, qreal max)

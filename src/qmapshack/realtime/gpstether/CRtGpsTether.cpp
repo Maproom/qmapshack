@@ -47,7 +47,7 @@ void CRtGpsTether::registerWithTreeWidget()
     if(tree != nullptr)
     {
         QTreeWidgetItem * itemInfo = new QTreeWidgetItem(this);
-        itemInfo->setFlags(Qt::ItemIsEnabled|Qt::ItemNeverHasChildren);
+        itemInfo->setFlags(Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
         info = new CRtGpsTetherInfo(*this, tree);
         connect(info, &CRtGpsTetherInfo::sigChanged, this, &CRtGpsTether::sigChanged);
 

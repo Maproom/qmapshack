@@ -106,7 +106,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     if(adfGeoTransform[4] != 0.0)
     {
-        trFwd.rotate(qAtan(adfGeoTransform[2]/adfGeoTransform[4]));
+        trFwd.rotate(qAtan(adfGeoTransform[2] / adfGeoTransform[4]));
     }
 
     if(pj_is_latlong(pjsrc))
@@ -206,13 +206,13 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale)
 
     qint16 win[eWinsize4x4];
     mutex.lock();
-    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x())-1, qFloor(pt.y())-1, 4, 4, &win, 4, 4, GDT_Int16, 1, 0, 0, 0, 0);
+    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()) - 1, qFloor(pt.y()) - 1, 4, 4, &win, 4, 4, GDT_Int16, 1, 0, 0, 0, 0);
     mutex.unlock();
     if(err == CE_Failure)
     {
         return NOFLOAT;
     }
-    for(int i=0; i < eWinsize4x4; i++)
+    for(int i = 0; i < eWinsize4x4; i++)
     {
         if(hasNoData && win[i] == noData)
         {
@@ -320,7 +320,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     USE_ANTI_ALIASING(p, true);
     p.translate(-pp);
 
-    qreal o1 = getOpacity()/100.0;
+    qreal o1 = getOpacity() / 100.0;
     qreal o2 = ((o1 + 0.4) >= 1.0) ? o1 : (o1 + 0.4);
     p.setOpacity(o1);
 

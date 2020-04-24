@@ -151,6 +151,7 @@ public slots:
     void slotLinkActivated(const QUrl& url);
 
 protected:
+    bool eventFilter(QObject *obj, QEvent *event) override;
 #ifdef WIN32
     bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);
 #endif // WIN32

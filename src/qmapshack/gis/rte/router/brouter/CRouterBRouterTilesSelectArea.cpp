@@ -79,7 +79,7 @@ void CRouterBRouterTilesSelectArea::mouseMoveEvent(QMouseEvent * event)
 {
     if (event->buttons() == Qt::LeftButton)
     {
-        canvas->moveMap(QPointF(event->pos()-mousePos));
+        canvas->moveMap(QPointF(event->pos() - mousePos));
         mousePos = event->pos();
     }
 }
@@ -98,7 +98,7 @@ void CRouterBRouterTilesSelectArea::mouseReleaseEvent(QMouseEvent * event)
     if (button == Qt::LeftButton)
     {
         const QPoint &pos = event->pos();
-        canvas->moveMap(QPointF(pos-mousePos));
+        canvas->moveMap(QPointF(pos - mousePos));
         if (pos == startPos)
         {
             emit sigTileClicked(tileUnderMouse(pos));
@@ -134,17 +134,17 @@ QPoint CRouterBRouterTilesSelectArea::tileUnderMouse(const QPointF & mousePos) c
     QPointF pos(mousePos);
     canvas->convertPx2Rad(pos);
     QPointF posDegF = pos * RAD_TO_DEG;
-    QPoint tile(posDegF.x() > 0 ? posDegF.x()/CRouterBRouterTilesSelect::tileSize : posDegF.x()/CRouterBRouterTilesSelect::tileSize - 1
-                , posDegF.y() > 0 ? posDegF.y()/CRouterBRouterTilesSelect::tileSize : posDegF.y()/CRouterBRouterTilesSelect::tileSize - 1);
+    QPoint tile(posDegF.x() > 0 ? posDegF.x() / CRouterBRouterTilesSelect::tileSize : posDegF.x() / CRouterBRouterTilesSelect::tileSize - 1
+                , posDegF.y() > 0 ? posDegF.y() / CRouterBRouterTilesSelect::tileSize : posDegF.y() / CRouterBRouterTilesSelect::tileSize - 1);
     return tile * CRouterBRouterTilesSelect::tileSize;
 }
 
 QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile) const
 {
     QPointF p0(tile.x(), tile.y());
-    QPointF p1(tile.x()+CRouterBRouterTilesSelect::tileSize, tile.y());
-    QPointF p2(tile.x()+CRouterBRouterTilesSelect::tileSize, tile.y()+CRouterBRouterTilesSelect::tileSize);
-    QPointF p3(tile.x(), tile.y()+CRouterBRouterTilesSelect::tileSize);
+    QPointF p1(tile.x() + CRouterBRouterTilesSelect::tileSize, tile.y());
+    QPointF p2(tile.x() + CRouterBRouterTilesSelect::tileSize, tile.y() + CRouterBRouterTilesSelect::tileSize);
+    QPointF p3(tile.x(), tile.y() + CRouterBRouterTilesSelect::tileSize);
 
     p0 *= DEG_TO_RAD;
     p1 *= DEG_TO_RAD;
@@ -168,8 +168,8 @@ QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile) const
 QPolygonF CRouterBRouterTilesSelectArea::gridPolygon(const QPoint & tile) const
 {
     QPointF p0(tile.x(), tile.y());
-    QPointF p1(tile.x()+CRouterBRouterTilesSelect::tileSize, tile.y());
-    QPointF p2(tile.x()+CRouterBRouterTilesSelect::tileSize, tile.y()+CRouterBRouterTilesSelect::tileSize);
+    QPointF p1(tile.x() + CRouterBRouterTilesSelect::tileSize, tile.y());
+    QPointF p2(tile.x() + CRouterBRouterTilesSelect::tileSize, tile.y() + CRouterBRouterTilesSelect::tileSize);
 
     p0 *= DEG_TO_RAD;
     p1 *= DEG_TO_RAD;

@@ -34,12 +34,12 @@
 
 inline int lon2tile(double lon, int z)
 {
-    return (int)(qRound(256*(lon + 180.0) / 360.0 * qPow(2.0, z)));
+    return (int)(qRound(256 * (lon + 180.0) / 360.0 * qPow(2.0, z)));
 }
 
 inline int lat2tile(double lat, int z)
 {
-    return (int)(qRound(256*(1.0 - log( qTan(lat * M_PI/180.0) + 1.0 / qCos(lat * M_PI/180.0)) / M_PI) / 2.0 * qPow(2.0, z)));
+    return (int)(qRound(256 * (1.0 - log( qTan(lat * M_PI / 180.0) + 1.0 / qCos(lat * M_PI / 180.0)) / M_PI) / 2.0 * qPow(2.0, z)));
 }
 
 inline double tile2lon(int x, int z)
@@ -92,8 +92,8 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
 
     stream >> rangeNum;
     QList<range_t> ranges;
-    quint64 tiles=0;
-    for (quint32 i=0; i < rangeNum; i++)
+    quint64 tiles = 0;
+    for (quint32 i = 0; i < rangeNum; i++)
     {
         range_t range;
         stream >> range.zoomlevel;
@@ -105,14 +105,14 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
         stream >> range.offset;
 
         ranges << range;
-        tiles += (range.maxX + 1 - range.minX)*(range.maxY + 1 - range.minY);
+        tiles += (range.maxX + 1 - range.minX) * (range.maxY + 1 - range.minY);
     }
     qDebug() << "CMapGEMF: Read " << rangeNum << "Ranges with " << tiles << " Tiles";
 
     minZoom = MAX_ZOOM_LEVEL;
     maxZoom = MIN_ZOOM_LEVEL;
 
-    for(quint32 i=0; i <= MAX_ZOOM_LEVEL; i++)
+    for(quint32 i = 0; i <= MAX_ZOOM_LEVEL; i++)
     {
         QList<range_t> rangeZoom;
         for(const range_t &range : ranges)
@@ -133,11 +133,11 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
     QString partfile = filename;
     QFile f(partfile);
     f.open(QIODevice::ReadOnly);
-    quint32 i=1;
+    quint32 i = 1;
     do
     {
         gemffile_t gf;
-        gf.filename= partfile;
+        gf.filename = partfile;
         gf.size = f.size();
         f.close();
         files << gf;
@@ -166,7 +166,7 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
     // start to draw the map
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p, true);
-    p.setOpacity(getOpacity()/100.0);
+    p.setOpacity(getOpacity() / 100.0);
     p.translate(-pp);
 
     qreal x1 = qMin(buf.ref1.x(), buf.ref4.x());
@@ -175,13 +175,13 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
     qreal x2 = qMax(buf.ref2.x(), buf.ref3.x());
     qreal y2 = qMin(buf.ref3.y(), buf.ref4.y());
 
-    if(x1 < -180.0*DEG_TO_RAD)
+    if(x1 < -180.0 * DEG_TO_RAD)
     {
-        x1 = -180*DEG_TO_RAD;
+        x1 = -180 * DEG_TO_RAD;
     }
-    if(x2 > 180.0*DEG_TO_RAD)
+    if(x2 > 180.0 * DEG_TO_RAD)
     {
-        x2 = 180*DEG_TO_RAD;
+        x2 = 180 * DEG_TO_RAD;
     }
 
 
@@ -191,7 +191,7 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
 
     for(quint32 i = 0; i < MAX_ZOOM_LEVEL; i++)
     {
-        qreal s2 = 0.055 * (1<<i);
+        qreal s2 = 0.055 * (1 << i);
         if(qAbs(s2 - s1.x()) < d)
         {
             z = i;
@@ -238,7 +238,7 @@ quint64 CMapGEMF::getFilenameFromAddress(const quint64 offset, QString &filename
         temp -= gf.size;
     }
 
-    qDebug() << "CMAPGemf: ImageAddress was wrong "<< offset;
+    qDebug() << "CMAPGemf: ImageAddress was wrong " << offset;
     return 0;
 }
 

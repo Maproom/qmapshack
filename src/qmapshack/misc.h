@@ -19,9 +19,9 @@
 #ifndef MISC_H
 #define MISC_H
 
-#include <QCollator>
 #include <algorithm>
 #include <initializer_list>
+#include <QCollator>
 
 #define QMS_DELETE(p) \
     delete p; \

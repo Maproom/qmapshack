@@ -107,7 +107,7 @@ void CDetailsWpt::setupGui()
 
     if(wpt.getTime().isValid())
     {
-        labelTime->setText(IUnit::datetime2string(wpt.getTime(), false, QPointF(pos.x()*DEG_TO_RAD, pos.y()*DEG_TO_RAD)));
+        labelTime->setText(IUnit::datetime2string(wpt.getTime(), false, QPointF(pos.x() * DEG_TO_RAD, pos.y() * DEG_TO_RAD)));
     }
 
     textCmtDesc->document()->clear();
@@ -161,12 +161,12 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
     }
     else if(link == "proximity")
     {
-        QVariant var(wpt.getProximity()*IUnit::self().baseFactor);
+        QVariant var(wpt.getProximity() * IUnit::self().baseFactor);
         CInputDialog dlg(this, tr("Enter new proximity range."), var, QVariant(NOFLOAT), IUnit::self().baseUnit);
         dlg.setOption(tr("Is no-go area"), wpt.isNogo());
         if(dlg.exec() == QDialog::Accepted)
         {
-            wpt.setProximity(var.toDouble()/IUnit::self().baseFactor);
+            wpt.setProximity(var.toDouble() / IUnit::self().baseFactor);
             wpt.setNogo(dlg.optionIsChecked());
         }
     }

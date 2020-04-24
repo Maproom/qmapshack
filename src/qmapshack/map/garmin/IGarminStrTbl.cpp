@@ -91,7 +91,7 @@ void IGarminStrTbl::readFile(CFileExt &file, quint32 offset, quint32 size, QByte
 
 #ifdef HOST_IS_64_BIT
     quint64 * p64 = (quint64*)data.data();
-    for(quint32 i = 0; i < size/8; ++i)
+    for(quint32 i = 0; i < size / 8; ++i)
     {
         *p64++ ^= mask64;
     }
@@ -99,7 +99,7 @@ void IGarminStrTbl::readFile(CFileExt &file, quint32 offset, quint32 size, QByte
     quint8 * p = (quint8*)p64;
 #else
     quint32 * p32 = (quint32*)data.data();
-    for(quint32 i = 0; i < size/4; ++i)
+    for(quint32 i = 0; i < size / 4; ++i)
     {
         *p32++ ^= mask32;
     }
@@ -162,7 +162,7 @@ QString IGarminStrTbl::processLabel(const char * buffer, unsigned lastSeperator)
 
     if(lastSeperator == 0x1F)
     {
-        bool ok =false;
+        bool ok = false;
         qreal ele = label.toDouble(&ok);
         if(ok)
         {

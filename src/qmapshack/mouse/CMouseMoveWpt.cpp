@@ -34,7 +34,7 @@
 CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *canvas, CMouseAdapter *mouse)
     : IMouse(gis, canvas, mouse),
     key(wpt.getKey()),
-    origPos(wpt.getPosition()*DEG_TO_RAD),
+    origPos(wpt.getPosition() * DEG_TO_RAD),
     radius(wpt.getProximity()),
     avoid(wpt.isNogo())
 {

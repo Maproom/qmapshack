@@ -64,7 +64,7 @@ void CGeoSearchWebConfigDialog::setupTreeWidget()
         item->setIcon(0, QIcon(service.icon));
         item->setData(0, Qt::UserRole, service.icon);
         item->setText(1, service.url);
-        item->setFlags(item->flags()|Qt::ItemIsEditable);
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
     }
 
     treeServices->header()->resizeSections(QHeaderView::ResizeToContents);
@@ -103,14 +103,14 @@ void CGeoSearchWebConfigDialog::slotAddNew()
     item->setText(0, tr("enter name and URL"));
     item->setIcon(0, QIcon(CGeoSearchWeb::defaultIcon));
     item->setData(0, Qt::UserRole, CGeoSearchWeb::defaultIcon);
-    item->setFlags(item->flags()|Qt::ItemIsEditable);
+    item->setFlags(item->flags() | Qt::ItemIsEditable);
 
     treeServices->scrollToItem(item, QAbstractItemView::PositionAtCenter);
 }
 
 void CGeoSearchWebConfigDialog::slotDelSelected()
 {
-    int res = QMessageBox::question(this, tr("Remove..."), tr("Remove all selected services?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+    int res = QMessageBox::question(this, tr("Remove..."), tr("Remove all selected services?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     if(res != QMessageBox::Yes)
     {
         return;
@@ -121,7 +121,7 @@ void CGeoSearchWebConfigDialog::slotDelSelected()
 
 void CGeoSearchWebConfigDialog::slotReset()
 {
-    int res = QMessageBox::question(this, tr("Restore default..."), tr("Remove all services and restore default list?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+    int res = QMessageBox::question(this, tr("Restore default..."), tr("Remove all services and restore default list?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     if(res != QMessageBox::Yes)
     {
         return;

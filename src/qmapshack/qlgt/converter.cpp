@@ -127,7 +127,7 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1, IGisProject * project)
 
         images << image;
     }
-    boundingRect = QRectF(QPointF(wpt.lon, wpt.lat)*DEG_TO_RAD, QPointF(wpt.lon, wpt.lat)*DEG_TO_RAD);
+    boundingRect = QRectF(QPointF(wpt.lon, wpt.lat) * DEG_TO_RAD, QPointF(wpt.lon, wpt.lat) * DEG_TO_RAD);
     setIcon();
     genKey();
     setupHistory();

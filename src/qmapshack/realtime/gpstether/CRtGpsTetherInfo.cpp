@@ -309,7 +309,7 @@ void CRtGpsTetherInfo::nmeaGSV(const QStringList& tokens)
 
 void CRtGpsTetherInfo::nmeaGSA(const QStringList& tokens)
 {
-    const QString& id= tokens[0];
+    const QString& id = tokens[0];
     if(tokens.count() < 18)
     {
         qDebug() << id << "too short";
@@ -330,7 +330,7 @@ void CRtGpsTetherInfo::nmeaGSA(const QStringList& tokens)
 
 void CRtGpsTetherInfo::nmeaRMC(const QStringList& tokens)
 {
-    const QString& id= tokens[0];
+    const QString& id = tokens[0];
     if(tokens.count() < 12)
     {
         qDebug() << id << "too short";
@@ -344,20 +344,20 @@ void CRtGpsTetherInfo::nmeaRMC(const QStringList& tokens)
         return;
     }
     rmc.isValid = true;
-    rmc.datetime = QDateTime::fromString(tokens[1]+tokens[9], "hhmmss.00ddMMyy").addYears(100);
+    rmc.datetime = QDateTime::fromString(tokens[1] + tokens[9], "hhmmss.00ddMMyy").addYears(100);
     rmc.datetime.setTimeSpec(Qt::UTC);
 
     {
         qreal tmp = tokens[3].toDouble();
-        qreal val = int(tmp/100);
-        val += (tmp - val*100)/60;
+        qreal val = int(tmp / 100);
+        val += (tmp - val * 100) / 60;
         rmc.lat = tokens[4] == "N" ? val : -val;
     }
 
     {
         qreal tmp = tokens[5].toDouble();
-        qreal val = int(tmp/100);
-        val += (tmp - val*100)/60;
+        qreal val = int(tmp / 100);
+        val += (tmp - val * 100) / 60;
         rmc.lon = tokens[6] == "E" ? val : -val;
     }
 
@@ -389,15 +389,15 @@ void CRtGpsTetherInfo::nmeaGGA(const QStringList& tokens)
 
     {
         qreal tmp = tokens[2].toDouble();
-        qreal val = int(tmp/100);
-        val += (tmp - val*100)/60;
+        qreal val = int(tmp / 100);
+        val += (tmp - val * 100) / 60;
         gga.lat = tokens[3] == "N" ? val : -val;
     }
 
     {
         qreal tmp = tokens[4].toDouble();
-        qreal val = int(tmp/100);
-        val += (tmp - val*100)/60;
+        qreal val = int(tmp / 100);
+        val += (tmp - val * 100) / 60;
         gga.lon = tokens[5] == "E" ? val : -val;
     }
     gga.quality = tokens[6].toInt();

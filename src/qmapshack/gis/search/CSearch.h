@@ -183,7 +183,7 @@ public:
     }
     static void setCaseSensitivity(const Qt::CaseSensitivity &value)
     {
-        caseSensitivity=value;
+        caseSensitivity = value;
     }
 
     static search_mode_e getSearchMode()

@@ -32,7 +32,7 @@ public:
     virtual ~IDemProp();
 
 protected slots:
-    virtual void slotPropertiesChanged()= 0;
+    virtual void slotPropertiesChanged() = 0;
 
 protected:
     IDem * demfile;

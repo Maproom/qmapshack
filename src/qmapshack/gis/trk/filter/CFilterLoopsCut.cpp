@@ -48,7 +48,7 @@ CFilterLoopsCut::~CFilterLoopsCut()
 void CFilterLoopsCut::slotApply()
 {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterLoopsCut(spinBox->value()/IUnit::self().baseFactor);
+    trk.filterLoopsCut(spinBox->value() / IUnit::self().baseFactor);
 }
 
 void CFilterLoopsCut::showHelp()

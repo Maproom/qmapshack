@@ -44,7 +44,7 @@ CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
 {
     if(QFile::exists(filename))
     {
-        int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Existing file..."), tr("Remove existing %1?").arg(filename), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+        int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Existing file..."), tr("Remove existing %1?").arg(filename), QMessageBox::Ok | QMessageBox::Abort, QMessageBox::Ok);
         if(res != QMessageBox::Ok)
         {
             return;
@@ -266,7 +266,7 @@ quint64 CQmsDb::store(IGisItem& item)
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item.getName());
     query.bindValue(":date",    item.getTimestamp());
-    query.bindValue(":comment", item.getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText));
+    query.bindValue(":comment", item.getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowFullText));
     query.bindValue(":data", data);
     query.bindValue(":hash", item.getHash());
     QUERY_EXEC(return 0);

@@ -145,7 +145,7 @@ void CPrintDialog::slotUpdateMetrics()
     qreal h = rectPrinterPage.height() * scale;
 
     // the page rectangle
-    QRectF rectTile(1, 1, w-2, h-2);
+    QRectF rectTile(1, 1, w - 2, h - 2);
 
     // paint page matrix
     QPainter p(&img);
@@ -156,7 +156,7 @@ void CPrintDialog::slotUpdateMetrics()
     {
         for(int x = 0; x < qCeil(xPages); x++)
         {
-            rectTile.moveCenter(QPointF(w/2 + x * w, h/2 + y * h));
+            rectTile.moveCenter(QPointF(w / 2 + x * w, h / 2 + y * h));
             p.drawRect(rectTile);
         }
     }
@@ -171,8 +171,8 @@ void CPrintDialog::slotUpdateMetrics()
 
     labelPages->setPixmap(img);
     labelPagesText->setText(tr("Pages: %1 x %2").arg(xPages, 0, 'f', 1).arg(yPages, 0, 'f', 1));
-    QString labelMapInfoText = tr("Zoom with mouse wheel on map below to change resolution:\n\n%1x%2 pixel\nx: %3 m/px\ny: %4 m/px").arg(rectSelAreaPixel.width()).arg(rectSelAreaPixel.height()).arg(mWidth/rectSelAreaPixel.width(), 0, 'f', 1).arg(mHeight/rectSelAreaPixel.height(), 0, 'f', 1);
-    labelMapInfoText += tr("\n This equals to a scale of approx. 1:") + QString::number((int)(mWidth*1000/(xPages*xPageSizeMm)));
+    QString labelMapInfoText = tr("Zoom with mouse wheel on map below to change resolution:\n\n%1x%2 pixel\nx: %3 m/px\ny: %4 m/px").arg(rectSelAreaPixel.width()).arg(rectSelAreaPixel.height()).arg(mWidth / rectSelAreaPixel.width(), 0, 'f', 1).arg(mHeight / rectSelAreaPixel.height(), 0, 'f', 1);
+    labelMapInfoText += tr("\n This equals to a scale of approx. 1:") + QString::number((int)(mWidth * 1000 / (xPages * xPageSizeMm)));
     labelMapInfo->setText(labelMapInfoText);
 }
 
@@ -300,5 +300,5 @@ void CPrintDialog::slotSave()
 
 void CPrintDialog::slotScaleOnAllChanged(bool checked)
 {
-    printScaleOnAllPages=checked;
+    printScaleOnAllPages = checked;
 }

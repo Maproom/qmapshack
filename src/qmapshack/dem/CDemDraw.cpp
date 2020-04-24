@@ -153,7 +153,7 @@ void CDemDraw::buildMapList()
     {
         QDir dir(path);
         // find available maps
-        for(const QString &filename : dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
+        for(const QString &filename : dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name))
         {
             QFileInfo fi(filename);
 

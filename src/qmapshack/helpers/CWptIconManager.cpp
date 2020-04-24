@@ -36,7 +36,7 @@ CWptIconManager::CWptIconManager(QObject *parent)
 
 CWptIconManager::~CWptIconManager()
 {
-    qDebug()<< "CWptIconManager::~CWptIconManager()";
+    qDebug() << "CWptIconManager::~CWptIconManager()";
     removeNumberedBullets();
 }
 
@@ -154,7 +154,7 @@ void CWptIconManager::init()
 void CWptIconManager::setWptIconByName(const QString& name, const QString& filename)
 {
     QPixmap icon(filename);
-    wptIcons[name] = icon_t(filename, icon.width()>>1, icon.height()>>1);
+    wptIcons[name] = icon_t(filename, icon.width() >> 1, icon.height() >> 1);
 }
 
 
@@ -165,7 +165,7 @@ void CWptIconManager::setWptIconByName(const QString& name, const QPixmap& icon)
     QString filename = dirIcon.filePath(name + ".png");
 
     icon.save(filename);
-    wptIcons[name] = icon_t(filename, icon.width()>>1, icon.height()>>1);
+    wptIcons[name] = icon_t(filename, icon.width() >> 1, icon.height() >> 1);
 }
 
 QPixmap CWptIconManager::loadIcon(const QString& path)
@@ -218,15 +218,15 @@ QPixmap CWptIconManager::getWptIconByName(const QString& name, QPointF &focus, Q
         qreal s;
         if(icon.width() > icon.height())
         {
-            s = 22.0/icon.width();
+            s = 22.0 / icon.width();
         }
         else
         {
-            s = 22.0/icon.height();
+            s = 22.0 / icon.height();
         }
 
         focus = focus * s;
-        icon  = icon.scaled(icon.size()*s, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        icon  = icon.scaled(icon.size() * s, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     }
 
     return icon;

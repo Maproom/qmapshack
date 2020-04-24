@@ -303,7 +303,7 @@ void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
     {
         QString name = wpt.getName();
         quint32 size = name.size();
-        QString path = QString("%1/%2/%3").arg(name.at(size-1)).arg(name.at(size -2)).arg(name);
+        QString path = QString("%1/%2/%3").arg(name.at(size - 1)).arg(name.at(size - 2)).arg(name);
 
         const QDir dirSpoilers(dir.absoluteFilePath(pathSpoilers));
         const QDir dirCache(dirSpoilers.absoluteFilePath(path));
@@ -360,7 +360,7 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
     {
         QString name = wpt.getName();
         quint32 size = name.size();
-        QString path = QString("%1/%2/%3").arg(name.at(size-1)).arg(name.at(size -2)).arg(name);
+        QString path = QString("%1/%2/%3").arg(name.at(size - 1)).arg(name.at(size - 2)).arg(name);
 
         const QDir dirSpoilers(dir.absoluteFilePath(pathSpoilers));
         const QDir dirCache(dirSpoilers.absoluteFilePath(path));
@@ -442,7 +442,7 @@ void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
         {
             QString name = wpt->getName();
             quint32 size = name.size();
-            QString path = QString("%1/%2/%3").arg(name.at(size-1)).arg(name.at(size -2)).arg(name);
+            QString path = QString("%1/%2/%3").arg(name.at(size - 1)).arg(name.at(size - 2)).arg(name);
 
             QDir dirSpoilers(dir.absoluteFilePath(pathSpoilers));
             QDir dirCache(dirSpoilers.absoluteFilePath(path));

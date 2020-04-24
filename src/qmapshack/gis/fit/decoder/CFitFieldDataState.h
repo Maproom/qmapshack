@@ -21,7 +21,7 @@
 
 #include "gis/fit/decoder/IFitDecoderState.h"
 
-static const int fitMaxFieldSize =255;
+static const int fitMaxFieldSize = 255;
 
 class CFitFieldDataState final : public IFitDecoderState
 {

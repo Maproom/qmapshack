@@ -385,7 +385,7 @@ void CGarminPolygon::bits_per_coord(quint8 base, quint8 bfirst, quint32& bx, qui
         signinfo.y_has_sign = true;
     }
 
-    by = bits_per_coord((base>>4) & 0x0F, signinfo.y_has_sign);
+    by = bits_per_coord((base >> 4) & 0x0F, signinfo.y_has_sign);
 
     // Determine extra bits.
     if(isVer2)
@@ -434,11 +434,11 @@ int CGarminPolygon::bits_per_coord(quint8 base, bool is_signed)
 
     if ( base <= 9 )
     {
-        n+= base;
+        n += base;
     }
     else
     {
-        n+= (2*base-9);
+        n += (2 * base - 9);
     }
 
     if ( is_signed )
@@ -467,13 +467,13 @@ CShiftReg::CShiftReg(const quint8* pData, quint32 n, quint32 bx, quint32 by, boo
     , extraBit(extra_bit)
 {
     // create bit masks
-    xmask = (xmask << (32-bx)) >> (32-bx);
-    ymask = (ymask << (32-by)) >> (32-by);
+    xmask = (xmask << (32 - bx)) >> (32 - bx);
+    ymask = (ymask << (32 - by)) >> (32 - by);
 
     xsign   <<= (bits_per_x - 1);
     ysign   <<= (bits_per_y - 1);
-    xsign2  = xsign<<1;
-    ysign2  = ysign<<1;
+    xsign2  = xsign << 1;
+    ysign2  = ysign << 1;
 
     // add sufficient bytes for the first coord. pair
     fill(bits_per_coord + si.sign_info_bits);

@@ -29,7 +29,7 @@ class CSearchLineEdit : public QLineEdit
     Q_OBJECT
 public:
     CSearchLineEdit(QWidget* parent);
-    CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch *search=nullptr);
+    CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch *search = nullptr);
 
 signals:
     void sigWorkspaceSearchChanged(CSearch newSearch);

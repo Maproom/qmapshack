@@ -316,7 +316,7 @@ bool IDevice::testForExternalProject(const QString& filename)
     {
         CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
         QString msg = tr("There is another project with the same name. If you press 'ok' it will be removed and replaced.");
-        int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), getName(), msg, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+        int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), getName(), msg, QMessageBox::Ok | QMessageBox::Abort, QMessageBox::Ok);
         if(res != QMessageBox::Ok)
         {
             return true;

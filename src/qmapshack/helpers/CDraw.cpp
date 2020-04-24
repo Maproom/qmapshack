@@ -36,7 +36,7 @@ QBrush CDraw::brushBackSemiBlue(QColor(127, 127, 255, 127));
 
 QImage CDraw::createBasicArrow(const QBrush &brush, qreal scale)
 {
-    QImage arrow(20*scale, 15*scale, QImage::Format_ARGB32);
+    QImage arrow(20 * scale, 15 * scale, QImage::Format_ARGB32);
     arrow.fill(qRgba(0, 0, 0, 0));
 
     QPainter painter(&arrow);
@@ -54,11 +54,11 @@ QImage CDraw::createBasicArrow(const QBrush &brush, qreal scale)
 
     QPointF arrowPoints[5] =
     {
-        QPointF(19.0*scale,  7.0*scale), // front
-        QPointF( 0.0*scale,  0.0*scale), // upper tail
-        QPointF( 5.0*scale,  7.0*scale), // mid   tail
-        QPointF( 0.0*scale, 14.0*scale), // lower tail
-        QPointF(19.0*scale,  7.0*scale)  // front
+        QPointF(19.0 * scale,  7.0 * scale), // front
+        QPointF( 0.0 * scale,  0.0 * scale), // upper tail
+        QPointF( 5.0 * scale,  7.0 * scale), // mid   tail
+        QPointF( 0.0 * scale, 14.0 * scale), // lower tail
+        QPointF(19.0 * scale,  7.0 * scale)  // front
     };
     painter.drawPolygon(arrowPoints, 5);
     painter.end();
@@ -78,9 +78,9 @@ static inline int pointDistanceSquare(const QPointF &p1, const QPointF &p2)
 
 void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist, qreal scale)
 {
-    const QImage& arrow = createBasicArrow(p.brush(), qMin(qMax(1.0, scale/3), 3.0));
-    qreal xoff = qCeil(arrow.width()/2.0);
-    qreal yoff = qFloor((arrow.height()-1)/2.0);
+    const QImage& arrow = createBasicArrow(p.brush(), qMin(qMax(1.0, scale / 3), 3.0));
+    qreal xoff = qCeil(arrow.width() / 2.0);
+    qreal yoff = qFloor((arrow.height() - 1) / 2.0);
 
     const qreal minArrowDistSquare = minArrowDist * minArrowDist;
     const qreal minPointDistSquare = minPointDist * minPointDist;
@@ -95,7 +95,7 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
         // ensure there is enough space between two linepts
         if( pointDistanceSquare(pt, prevPt) >= minPointDistSquare )
         {
-            QPointF arrowPos = prevPt + (pt - prevPt)/2;
+            QPointF arrowPos = prevPt + (pt - prevPt) / 2;
 
             if( (viewport.contains(arrowPos) || 0 == viewport.height()) // ensure the point is visible
                 && (firstArrow || pointDistanceSquare(prevArrow, arrowPos) >= minArrowDistSquare) )
@@ -134,7 +134,7 @@ void CDraw::nogos(const QPolygonF &line, const QRectF &viewport, QPainter &p, in
             const QPointF line = pt - prevPt;
             do
             {
-                const QPointF nogoPos = prevPt + line * l/dist;
+                const QPointF nogoPos = prevPt + line * l / dist;
 
                 if( (viewport.contains(nogoPos) || 0 == viewport.height())) // ensure the point is visible
                 {
@@ -300,7 +300,7 @@ QPixmap CDraw::number(int num, const QColor &color)
     USE_ANTI_ALIASING(p, true);
     p.translate(1, 1);
 
-    CDraw::number(num, size, p, {(size-2)/2.0, (size-2)/2.0}, color);
+    CDraw::number(num, size, p, {(size - 2) / 2.0, (size - 2) / 2.0}, color);
 
     return pixmap;
 }

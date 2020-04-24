@@ -186,11 +186,11 @@ void CScrOptUnclutter::draw(QPainter& p)
             item.text = fm.boundingRect(item.name);
             if(cnt & 0x01)
             {
-                item.text.moveTopLeft(item.area.topRight() + QPoint( 17, fm.height()/2));
+                item.text.moveTopLeft(item.area.topRight() + QPoint( 17, fm.height() / 2));
             }
             else
             {
-                item.text.moveTopRight(item.area.topLeft() + QPoint(-17, fm.height()/2));
+                item.text.moveTopRight(item.area.topLeft() + QPoint(-17, fm.height() / 2));
             }
             item.text.adjust(-4, -3, 4, 3);
         }

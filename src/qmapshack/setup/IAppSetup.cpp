@@ -102,11 +102,11 @@ void IAppSetup::prepareTranslator(QString translationPath, QString translationPr
     if (qtTranslator->load(translationPrefix + locale, translationPath))
     {
         app->installTranslator(qtTranslator);
-        qDebug() << "using file '"+ translationPath + "/" + translationPrefix + locale + ".qm' for translations.";
+        qDebug() << "using file '" + translationPath + "/" + translationPrefix + locale + ".qm' for translations.";
     }
     else
     {
-        qWarning() << "no file found for translations '"+ translationPath + "/" + translationPrefix + locale + "' (using default).";
+        qWarning() << "no file found for translations '" + translationPath + "/" + translationPrefix + locale + "' (using default).";
     }
 }
 

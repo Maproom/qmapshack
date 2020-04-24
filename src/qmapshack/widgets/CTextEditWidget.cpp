@@ -250,7 +250,7 @@ void CTextEditWidget::textStyle(int styleIndex)
             QTextListFormat::ListUpperRoman
         };
 
-        if( (unsigned) styleIndex <= sizeof(indexToFormat)/sizeof(QTextListFormat::Style))
+        if( (unsigned) styleIndex <= sizeof(indexToFormat) / sizeof(QTextListFormat::Style))
         {
             style = indexToFormat[styleIndex - 1];
         }

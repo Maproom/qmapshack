@@ -356,7 +356,7 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
     query.bindValue(":date",    item->getTimestamp());
-    query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText));
+    query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowFullText));
     query.bindValue(":data",    data);
     query.bindValue(":hash",    item->getHash());
     query.bindValue(":id",      idItem);
@@ -404,7 +404,7 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
             query.bindValue(":icon",    buffer.data());
             query.bindValue(":name",    item->getName());
             query.bindValue(":date",    item->getTimestamp());
-            query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText));
+            query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowFullText));
             query.bindValue(":data",    data);
             query.bindValue(":hash",    item->getHash());
             query.bindValue(":id",      idItem);
@@ -457,7 +457,7 @@ quint64 CDBProject::insertItem(IGisItem * item, QSqlQuery &query)
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
     query.bindValue(":date",    item->getTimestamp());
-    query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText));
+    query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowFullText));
     query.bindValue(":data",    data);
     query.bindValue(":hash",    item->getHash());
     QUERY_EXEC(throw eReasonQueryFail);
@@ -563,7 +563,7 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& itemId, int& lastResul
     }
     else
     {
-        action = eActionInsert|eActionLink;
+        action = eActionInsert | eActionLink;
     }
 
     return action;
@@ -651,7 +651,7 @@ bool CDBProject::save(int lastResult)
                 query.bindValue(":child", idItem);
                 QUERY_EXEC(throw eReasonQueryFail);
             }
-            item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged|IGisItem::eMarkNotPart|IGisItem::eMarkNotInDB);
+            item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged | IGisItem::eMarkNotPart | IGisItem::eMarkNotInDB);
         }
         catch(reasons_e reason)
         {
@@ -776,7 +776,7 @@ void CDBProject::update()
     if(isChanged())
     {
         QString msg = tr("The project '%1' is about to update itself from the database. However there are changes not saved.").arg(getName());
-        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Save changes?"), msg, QMessageBox::Save|QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Save);
+        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Save changes?"), msg, QMessageBox::Save | QMessageBox::Ignore | QMessageBox::Abort, QMessageBox::Save);
 
         if(res == QMessageBox::Abort)
         {
@@ -875,13 +875,13 @@ void CDBProject::update()
                 {
                     // item is not connected to this project
                     item->updateFromDB(idItem, db);
-                    item->updateDecoration(IGisItem::eMarkNotPart|IGisItem::eMarkChanged, IGisItem::eMarkNone);
+                    item->updateDecoration(IGisItem::eMarkNotPart | IGisItem::eMarkChanged, IGisItem::eMarkNone);
                 }
             }
             else
             {
                 // item is not in the database at all.
-                item->updateDecoration(IGisItem::eMarkNotInDB|IGisItem::eMarkChanged, IGisItem::eMarkNone);
+                item->updateDecoration(IGisItem::eMarkNotInDB | IGisItem::eMarkChanged, IGisItem::eMarkNone);
             }
         }
 

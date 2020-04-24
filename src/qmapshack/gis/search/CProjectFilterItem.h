@@ -29,7 +29,7 @@ class CProjectFilterItem : public QTreeWidgetItem
 public:
     CProjectFilterItem(IGisProject *parent);
     virtual ~CProjectFilterItem();
-    void showLineEdit(CSearch* search=nullptr);
+    void showLineEdit(CSearch* search = nullptr);
     const CSearchLineEdit* getLineEdit()
     {
         return lineEdit;

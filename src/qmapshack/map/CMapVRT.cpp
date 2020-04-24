@@ -63,7 +63,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         if(pBand->GetColorInterpretation() ==  GCI_PaletteIndex )
         {
             GDALColorTable * pct = pBand->GetColorTable();
-            for(int i=0; i < pct->GetColorEntryCount(); ++i)
+            for(int i = 0; i < pct->GetColorEntryCount(); ++i)
             {
                 const GDALColorEntry& e = *pct->GetColorEntry(i);
                 colortable << qRgba(e.c1, e.c2, e.c3, e.c4);
@@ -71,7 +71,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         }
         else if(pBand->GetColorInterpretation() ==  GCI_GrayIndex )
         {
-            for(int i=0; i < 256; ++i)
+            for(int i = 0; i < 256; ++i)
             {
                 colortable << qRgba(i, i, i, 255);
             }
@@ -158,7 +158,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
     if(adfGeoTransform[4] != 0.0)
     {
-        trFwd.rotate(qAtan(adfGeoTransform[2]/adfGeoTransform[4]));
+        trFwd.rotate(qAtan(adfGeoTransform[2] / adfGeoTransform[4]));
     }
 
     if(pj_is_latlong(pjsrc))
@@ -378,7 +378,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
 
     // estimate number of tiles and use it as a limit if no
     // user defined limit is given
-    qreal nTiles = ((right - left) * (bottom - top) / (dx*dy));
+    qreal nTiles = ((right - left) * (bottom - top) / (dx * dy));
     if(hasOverviews)
     {
         // if there are overviews tiles can be reduced by reading
@@ -399,7 +399,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     // start to draw the map
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p, true);
-    p.setOpacity(getOpacity()/100.0);
+    p.setOpacity(getOpacity() / 100.0);
     p.translate(-pp);
 
 
@@ -522,7 +522,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
 
 
                 QPolygonF l;
-                l << QPointF(x, y) << QPointF(x+dx_used, y) << QPointF(x+dx_used, y+dy_used) << QPointF(x, y+dy_used);
+                l << QPointF(x, y) << QPointF(x + dx_used, y) << QPointF(x + dx_used, y + dy_used) << QPointF(x, y + dy_used);
                 l = trFwd.map(l);
 
                 pj_transform(pjsrc, pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);

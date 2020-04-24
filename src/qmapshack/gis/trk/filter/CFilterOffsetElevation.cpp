@@ -45,5 +45,5 @@ CFilterOffsetElevation::~CFilterOffsetElevation()
 void CFilterOffsetElevation::slotApply()
 {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterOffsetElevation(spinBox->value()/IUnit::self().elevationFactor);
+    trk.filterOffsetElevation(spinBox->value() / IUnit::self().elevationFactor);
 }

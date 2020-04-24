@@ -142,7 +142,7 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
 
             if(xmlHeader.namedItem("PeakTrainingEffect").isElement())
             {
-                trk.cmt += tr("Peak Training Effect: %1<br/>").arg(xmlHeader.namedItem("PeakTrainingEffect").toElement().text().toDouble()/10.0);
+                trk.cmt += tr("Peak Training Effect: %1<br/>").arg(xmlHeader.namedItem("PeakTrainingEffect").toElement().text().toDouble() / 10.0);
             }
 
             if(xmlHeader.namedItem("Energy").isElement())

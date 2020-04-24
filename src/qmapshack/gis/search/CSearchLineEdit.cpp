@@ -58,7 +58,7 @@ CSearchLineEdit::CSearchLineEdit(QWidget *parent)
 
 CSearchLineEdit::CSearchLineEdit(QWidget *parent, IGisProject* project, CSearch* search) : CSearchLineEdit(parent)
 {
-    connectedProject=project;
+    connectedProject = project;
     if(search != nullptr)
     {
         setText(search->getSearchText());

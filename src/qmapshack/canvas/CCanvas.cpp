@@ -554,10 +554,10 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     const QRect& r = rect();
 
     // move map loading indicator to new center of canvas
-    QPoint p1(mapLoadIndicator->width()>>1, mapLoadIndicator->height()>>1);
+    QPoint p1(mapLoadIndicator->width() >> 1, mapLoadIndicator->height() >> 1);
     mapLoadIndicator->move(r.center() - p1);
 
-    QPoint p2(demLoadIndicator->width()>>1, demLoadIndicator->height()>>1);
+    QPoint p2(demLoadIndicator->width() >> 1, demLoadIndicator->height() >> 1);
     demLoadIndicator->move(r.center() - p2);
 
     textStatusMessages->move(X_OFF_STATUS, Y_OFF_STATUS);
@@ -619,7 +619,7 @@ void CCanvas::paintEvent(QPaintEvent*)
     mouse->draw(p, needsRedraw, rect());
 
     drawStatusMessages(p);
-    drawTrackStatistic(p);    
+    drawTrackStatistic(p);
 
     p.end();
     needsRedraw = eRedrawNone;
@@ -747,19 +747,19 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
 
     /* move the map with keys up, down, left and right */
     case Qt::Key_Up:
-        moveMap(QPointF(0,  height()/4));
+        moveMap(QPointF(0,  height() / 4));
         break;
 
     case Qt::Key_Down:
-        moveMap(QPointF(0, -height()/4));
+        moveMap(QPointF(0, -height() / 4));
         break;
 
     case Qt::Key_Left:
-        moveMap(QPointF( width()/4, 0));
+        moveMap(QPointF( width() / 4, 0));
         break;
 
     case Qt::Key_Right:
-        moveMap(QPointF(-width()/4, 0));
+        moveMap(QPointF(-width() / 4, 0));
         break;
 
     case Qt::Key_Escape:
@@ -873,7 +873,7 @@ void CCanvas::drawScale(QPainter& p, QRectF drawRect)
     p.drawLine(pt1, pt2 + QPoint(9, 0));
 
 
-    QPoint pt3(pt2.x() + (pt1.x() - pt2.x())/2, pt2.y());
+    QPoint pt3(pt2.x() + (pt1.x() - pt2.x()) / 2, pt2.y());
 
     QString val, unit;
     IUnit::self().meter2distance(d, val, unit);
@@ -962,7 +962,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
         QString text;
         if(isShowTrackSummary())
         {
-            text += trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity);
+            text += trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity);
         }
 
         if(isShowMinMaxSummary())

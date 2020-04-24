@@ -619,7 +619,7 @@ void IPlot::setSizes()
     scaleWidthX1 = showScale ? data->x().getScaleWidth( fm ) : 0;
     scaleWidthY1 = showScale ? data->y().getScaleWidth( fm ) : 0;
 
-    scaleWidthY1 = (scaleWidthX1/2) > scaleWidthY1 ? scaleWidthX1/2 : scaleWidthY1;
+    scaleWidthY1 = (scaleWidthX1 / 2) > scaleWidthY1 ? scaleWidthX1 / 2 : scaleWidthY1;
 
     fontWidth    = fm.maxWidth();
     fontHeight   = fm.height();
@@ -1214,7 +1214,7 @@ void IPlot::drawDecoration( QPainter &p )
                     f.setBold(true);
                     QFontMetrics fm(f);
                     QRect r = fm.boundingRect(tag.label);
-                    r.moveCenter(QPoint(ptx, top - fm.height()/2 - fm.descent()));
+                    r.moveCenter(QPoint(ptx, top - fm.height() / 2 - fm.descent()));
                     r.adjust(-3, -2, 3, 0);
 
                     p.setPen(Qt::NoPen);
@@ -1413,14 +1413,14 @@ void IPlot::drawActivities(QPainter& p)
         int d = (x2 - x1);
         if(d >= 20)
         {
-            int c = x1 + d/2;
+            int c = x1 + d / 2;
 
             p.setPen(QPen(desc.color, 1));
-            rectIconFrame.moveCenter(QPoint(c, icon_frame/2 + color_width));
+            rectIconFrame.moveCenter(QPoint(c, icon_frame / 2 + color_width));
             p.setBrush(QColor(255, 255, 255, 100));
             p.drawRoundedRect(rectIconFrame, RECT_RADIUS, RECT_RADIUS);
 
-            rectIcon.moveCenter(QPoint(c, icon_frame/2 + color_width));
+            rectIcon.moveCenter(QPoint(c, icon_frame / 2 + color_width));
             p.drawPixmap(rectIcon, QPixmap(desc.iconSmall));
         }
 
@@ -1428,7 +1428,7 @@ void IPlot::drawActivities(QPainter& p)
         p.drawLine(x1, bar_height, x1, qMin(0, bar_height - y1));
 
         p.setPen(QPen(desc.color, color_width, Qt::SolidLine, Qt::FlatCap));
-        p.drawLine(x1, color_width/2, x2, color_width/2);
+        p.drawLine(x1, color_width / 2, x2, color_width / 2);
     }
 
     p.restore();

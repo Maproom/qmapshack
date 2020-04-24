@@ -34,12 +34,12 @@
 
 inline int lon2tile(double lon, int z)
 {
-    return (int)(qRound(256*(lon + 180.0) / 360.0 * qPow(2.0, z)));
+    return (int)(qRound(256 * (lon + 180.0) / 360.0 * qPow(2.0, z)));
 }
 
 inline int lat2tile(double lat, int z)
 {
-    return (int)(qRound(256*(1.0 - log( qTan(lat * M_PI/180.0) + 1.0 / qCos(lat * M_PI/180.0)) / M_PI) / 2.0 * qPow(2.0, z)));
+    return (int)(qRound(256 * (1.0 - log( qTan(lat * M_PI / 180.0) + 1.0 / qCos(lat * M_PI / 180.0)) / M_PI) / 2.0 * qPow(2.0, z)));
 }
 
 inline double tile2lon(int x, int z)
@@ -336,7 +336,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
     // start to draw the map
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p, true);
-    p.setOpacity(getOpacity()/100.0);
+    p.setOpacity(getOpacity() / 100.0);
     p.translate(-pp);
 
     // calculate maximum viewport
@@ -346,13 +346,13 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
     qreal x2 = buf.ref2.x() > buf.ref3.x() ? buf.ref2.x() : buf.ref3.x();
     qreal y2 = buf.ref3.y() < buf.ref4.y() ? buf.ref3.y() : buf.ref4.y();
 
-    if(x1 < -180.0*DEG_TO_RAD)
+    if(x1 < -180.0 * DEG_TO_RAD)
     {
-        x1 = -180*DEG_TO_RAD;
+        x1 = -180 * DEG_TO_RAD;
     }
-    if(x2 >  180.0*DEG_TO_RAD)
+    if(x2 >  180.0 * DEG_TO_RAD)
     {
-        x2 =  180*DEG_TO_RAD;
+        x2 =  180 * DEG_TO_RAD;
     }
 
     // draw layers
@@ -369,7 +369,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
 
         for(qint32 i = layer.minZoomLevel; i < 21; i++)
         {
-            qreal s2 = 0.055 * (1<<i);
+            qreal s2 = 0.055 * (1 << i);
             if(qAbs(s2 - s1.x()) < d)
             {
                 z = i;

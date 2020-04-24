@@ -622,8 +622,8 @@ protected:
 
     QString hashTrkWpt[2];
 
-    CSearch projectSearch= CSearch("");
-    CSearch workspaceSearch= CSearch("");
+    CSearch projectSearch = CSearch("");
+    CSearch workspaceSearch = CSearch("");
 
     CProjectFilterItem* projectFilter = nullptr;
 };

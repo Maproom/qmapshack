@@ -32,7 +32,7 @@ CFadingIcon::CFadingIcon(const QPoint& pt, const QString &resource, QWidget *par
 
     connect(timer, &QTimer::timeout, this, &CFadingIcon::slotTimeout);
 
-    move(pt.x() - icon.width()/2, pt.y() - icon.height()/2);
+    move(pt.x() - icon.width() / 2, pt.y() - icon.height() / 2);
     show();
 }
 

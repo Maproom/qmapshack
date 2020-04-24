@@ -127,7 +127,7 @@ CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *pr
     rte.name = name;
     readRouteDataFromGisLine(l);
 
-    flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
+    flags |=  eFlagCreatedInQms | eFlagWriteAllowed;
 
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -684,7 +684,7 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         const CMainWindow& w = CMainWindow::self();
         QFont f = w.getMapFont();
         QFontMetrics fm(f);
-        QRect rectText = fm.boundingRect(QRect(0, 0, 500, 0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
+        QRect rectText = fm.boundingRect(QRect(0, 0, 500, 0), Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, str);
         rectText.adjust(-5, -5, 5, 5);
         rectText.moveBottomLeft(anchor.toPoint() + QPoint(-50, -50));
 
@@ -720,19 +720,19 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
         rect.adjust(-2, -2, 2, 2);
 
         // place label on top
-        rect.moveCenter(pt + QPointF(rtept.icon.width()/2, -fm.height()));
+        rect.moveCenter(pt + QPointF(rtept.icon.width() / 2, -fm.height()));
         if(CDraw::doesOverlap(blockedAreas, rect))
         {
             // place label on bottom
-            rect.moveCenter(pt + QPointF( rtept.icon.width()/2, +fm.height() + rtept.icon.height()));
+            rect.moveCenter(pt + QPointF( rtept.icon.width() / 2, +fm.height() + rtept.icon.height()));
             if(CDraw::doesOverlap(blockedAreas, rect))
             {
                 // place label on right
-                rect.moveCenter(pt + QPointF( rtept.icon.width() + rect.width()/2, +fm.height()));
+                rect.moveCenter(pt + QPointF( rtept.icon.width() + rect.width() / 2, +fm.height()));
                 if(CDraw::doesOverlap(blockedAreas, rect))
                 {
                     // place label on left
-                    rect.moveCenter(pt + QPointF( -rect.width()/2, +fm.height()));
+                    rect.moveCenter(pt + QPointF( -rect.width() / 2, +fm.height()));
                     if(CDraw::doesOverlap(blockedAreas, rect))
                     {
                         // failed to place label anywhere
@@ -1134,7 +1134,7 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     for(int i = 0; i < rte.pts.size() - 1; i++ )
     {
         quint32 idx1 = idxLegs[i];
-        quint32 idx2 = idxLegs[i+1];
+        quint32 idx2 = idxLegs[i + 1];
 
         rtept_t& rtept      = rte.pts[i];
         rtept.subpts        = shape.mid(idx1, idx2 - idx1 + 1);
@@ -1262,10 +1262,10 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
     for(qint32 rtIdx = 0; rtIdx < rte.pts.size() - 1; rtIdx++)
     {
         rtept_t &routePoint = rte.pts[rtIdx];
-        const rtept_t &nextRoutePoint = rte.pts[rtIdx+1];
+        const rtept_t &nextRoutePoint = rte.pts[rtIdx + 1];
 
         qreal minDist = std::pow(nextRoutePoint.lon - shape[minDistIdx].lon, 2) + std::pow(nextRoutePoint.lat - shape[minDistIdx].lat, 2);
-        for (qint32 idx = startIdx+1; idx < shape.size(); idx++)
+        for (qint32 idx = startIdx + 1; idx < shape.size(); idx++)
         {
             qreal dist = std::pow(nextRoutePoint.lon - shape[idx].lon, 2) + std::pow(nextRoutePoint.lat - shape[idx].lat, 2);
             if (dist < minDist)
@@ -1275,7 +1275,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
             }
         }
         routePoint.ele = shape[startIdx].ele;
-        routePoint.subpts = shape.mid(startIdx, minDistIdx-startIdx);
+        routePoint.subpts = shape.mid(startIdx, minDistIdx - startIdx);
         routePoint.fakeSubpt.lon = routePoint.lon;
         routePoint.fakeSubpt.lat = routePoint.lat;
         routePoint.fakeSubpt.ele = routePoint.ele;
@@ -1326,7 +1326,7 @@ QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeneralFullText, [](CGisItemRte* item){
         searchValue_t searchValue;
-        searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        searchValue.str1 = item->getInfo(eFeatureShowFullText | eFeatureShowName);
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralElevation, [](CGisItemRte* item){
@@ -1383,8 +1383,8 @@ QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyRteTrkTotalTime, [](CGisItemRte* item){
         searchValue_t searchValue;
-        searchValue.value1=item->rte.maxElevation;
-        searchValue.str1="s";
+        searchValue.value1 = item->rte.maxElevation;
+        searchValue.str1 = "s";
         return searchValue;
     });
     return map;

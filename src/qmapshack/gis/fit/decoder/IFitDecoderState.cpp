@@ -129,7 +129,7 @@ void IFitDecoderState::addDevFieldProfile(const CFitFieldProfile &fieldProfile)
 
 CFitFieldProfile* IFitDecoderState::devFieldProfile(quint32 fieldNr)
 {
-    for (int i=0; i < data.devFieldProfiles.size(); i++)
+    for (int i = 0; i < data.devFieldProfiles.size(); i++)
     {
         if (fieldNr == data.devFieldProfiles[i].getFieldDefNum())
         {

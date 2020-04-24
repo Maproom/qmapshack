@@ -65,7 +65,7 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
         }
     }
 
-    entries = dirData.entryList(QDir::NoDotAndDotDot|QDir::Dirs);
+    entries = dirData.entryList(QDir::NoDotAndDotDot | QDir::Dirs);
     for(const QString &entry : entries)
     {
         IGisProject * project =  new CTwoNavProject(dirData.absoluteFilePath(entry), this);

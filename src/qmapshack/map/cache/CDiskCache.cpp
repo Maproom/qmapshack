@@ -146,7 +146,7 @@ void CDiskCache::slotCleanup()
 
     if(tmpSize > maxSizeBytes)
     {
-        files = dir.entryInfoList(QStringList("*.png"), QDir::Files, QDir::Time|QDir::Reversed);
+        files = dir.entryInfoList(QStringList("*.png"), QDir::Files, QDir::Time | QDir::Reversed);
         // if cache is still too large remove oldest files
         for(const QFileInfo &fileinfo : files)
         {

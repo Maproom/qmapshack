@@ -36,7 +36,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(wpt->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowLinks));
+    label->setText(wpt->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowLinks));
     adjustSize();
 
     toolProj->setDisabled(wpt->isGeocache() || wpt->isOnDevice());

@@ -408,6 +408,7 @@ QMap<QString, CSearch::search_type_e> CSearch::initKeywordSearchTypeMap()
     map.insert(tr("regex"), eSearchTypeRegEx);
     map.insert("=", eSearchTypeEquals);
     map.insert(tr("equals"), eSearchTypeEquals);
+    map.insert(tr("is"), eSearchTypeEquals);
     map.insert(tr("between"), eSearchTypeBetween);
     return map;
 }
@@ -440,6 +441,7 @@ QMap<QString, QString> CSearch::initKeywordSearchExampleMap()
     map.insert(tr("regex"), tr("example: size regex (regular|large)"));
     map.insert("=", tr("example: size = micro"));
     map.insert(tr("equals"), tr("example: activity equals bike"));
+    map.insert(tr("is"), tr("example: status is available"));
     map.insert(tr("between"), tr("example: length between 20km and 20mi"));
     return map;
 }

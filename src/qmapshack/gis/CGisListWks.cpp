@@ -2126,6 +2126,7 @@ bool CGisListWks::event(QEvent * e)
                 {
                     delete project;
                 }
+                project->setWorkspaceFilter(CGisWorkspace::self().getCurrentSearch());
             }
             e->accept();
             emit sigChanged();

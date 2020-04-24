@@ -96,6 +96,8 @@ CMainWindow::CMainWindow()
     pSelf = this;
     setupUi(this);
 
+    qApp->installEventFilter(this);
+
 #ifdef DEVELOPMENT
     setWindowTitle(WHAT_STR  ".develop");
 #else
@@ -1783,7 +1785,7 @@ bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long
         {
         case DBT_DEVICEARRIVAL:
         {
-            qDebug() << "DBT_DEVICEARRIVAL"<< pHdr->dbch_devicetype;
+            qDebug() << "DBT_DEVICEARRIVAL" << pHdr->dbch_devicetype;
             if (pHdr->dbch_devicetype == DBT_DEVTYP_VOLUME)
             {
                 PDEV_BROADCAST_VOLUME pHdrv = (PDEV_BROADCAST_VOLUME)pHdr;
@@ -1877,4 +1879,16 @@ void CMainWindow::slotHelp()
     }
 
     help->setVisible(true);
+}
+
+
+bool CMainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    if(event->type() == QEvent::FileOpen)
+    {
+        QFileOpenEvent *openEvent = static_cast<QFileOpenEvent *>(event);
+        qDebug() << "load GIS file:" << openEvent->file();
+        widgetGisWorkspace->loadGisProject(openEvent->file());
+    }
+    return QMainWindow::eventFilter(obj, event);
 }

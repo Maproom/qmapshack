@@ -459,7 +459,7 @@ void CGisListDB::slotDelDatabase()
         return;
     }
 
-    int res = QMessageBox::question(this, tr("Remove database..."), tr("Do you really want to remove '%1' from the list?").arg(folder->text(CGisListDB::eColumnName)), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+    int res = QMessageBox::question(this, tr("Remove database..."), tr("Do you really want to remove '%1' from the list?").arg(folder->text(CGisListDB::eColumnName)), QMessageBox::Ok | QMessageBox::Abort, QMessageBox::Ok);
     if(res != QMessageBox::Ok)
     {
         return;
@@ -523,7 +523,7 @@ void CGisListDB::slotDelFolder()
         return;
     }
 
-    int res = QMessageBox::question(this, tr("Delete database folder..."), tr("Are you sure you want to delete selected folders and all subfolders from the database?"), QMessageBox::Ok|QMessageBox::No);
+    int res = QMessageBox::question(this, tr("Delete database folder..."), tr("Are you sure you want to delete selected folders and all subfolders from the database?"), QMessageBox::Ok | QMessageBox::No);
     if(res != QMessageBox::Ok)
     {
         return;
@@ -773,7 +773,7 @@ void CGisListDB::slotDelLostFound()
         return;
     }
 
-    int res = QMessageBox::question(this, tr("Remove items..."), tr("Are you sure you want to delete all items from Lost&Found? This will remove them permanently."), QMessageBox::Ok|QMessageBox::No);
+    int res = QMessageBox::question(this, tr("Remove items..."), tr("Are you sure you want to delete all items from Lost&Found? This will remove them permanently."), QMessageBox::Ok | QMessageBox::No);
     if(res != QMessageBox::Ok)
     {
         return;
@@ -793,7 +793,7 @@ void CGisListDB::slotDelLostFoundItem()
 {
     CGisListDBEditLock lock(false, this, "slotDelLostFoundItem");
 
-    int res = QMessageBox::question(this, tr("Remove items..."), tr("Are you sure you want to delete all selected items from Lost&Found? This will remove them permanently."), QMessageBox::Ok|QMessageBox::No);
+    int res = QMessageBox::question(this, tr("Remove items..."), tr("Are you sure you want to delete all selected items from Lost&Found? This will remove them permanently."), QMessageBox::Ok | QMessageBox::No);
     if(res != QMessageBox::Ok)
     {
         return;
@@ -880,7 +880,7 @@ void CGisListDB::slotDelItem()
         if(last != QMessageBox::YesToAll)
         {
             QString msg = tr("Are you sure you want to delete '%1' from folder '%2'?").arg(dbItem->text(CGisListDB::eColumnName)).arg(folder->text(CGisListDB::eColumnName));
-            last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+            last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete..."), msg, QMessageBox::YesToAll | QMessageBox::Cancel | QMessageBox::Ok | QMessageBox::No, QMessageBox::Ok);
         }
         if(last == QMessageBox::No)
         {

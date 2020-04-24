@@ -178,7 +178,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     // several GIS items related actions
     actionRteFromWpt    = addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route..."), this, SLOT(slotRteFromWpt()));
-    actionEditPrxWpt=  addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Proximity..."), this, SLOT(slotEditPrxWpt()));
+    actionEditPrxWpt =  addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Proximity..."), this, SLOT(slotEditPrxWpt()));
 
     connect(qApp, &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
     connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
@@ -532,7 +532,7 @@ void CGisListWks::dropEvent( QDropEvent  * e )
     {
         // calc. index offset (below/above item)
         QRect r = visualItemRect(itemAt(e->pos()));
-        int y1 = r.top() + r.height()/2;
+        int y1 = r.top() + r.height() / 2;
         int y2 = e->pos().y();
         int off = y2 > y1 ? 1 : 0;
 
@@ -1241,7 +1241,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionRteFromWpt->setEnabled(keysWpt.count() > 1);
             actionEditPrxWpt->setEnabled(hasWpts);
             actionCombineTrk->setEnabled(keysTrk.count() > 1);
-            actionEleWptTrk->setEnabled(hasWpts|hasTrks);
+            actionEleWptTrk->setEnabled(hasWpts | hasTrks);
             showMenuItem(p, keysTrk, keysWpt);
             return;
         }
@@ -1436,7 +1436,7 @@ void CGisListWks::slotCloseProject()
 
 void CGisListWks::slotCloseAllProjects()
 {
-    int res = QMessageBox::question(this, tr("Close all projects..."), tr("This will remove all projects from the workspace."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+    int res = QMessageBox::question(this, tr("Close all projects..."), tr("This will remove all projects from the workspace."), QMessageBox::Ok | QMessageBox::Abort, QMessageBox::Ok);
     if(res != QMessageBox::Ok)
     {
         return;
@@ -1463,7 +1463,7 @@ void CGisListWks::slotDeleteProject()
         {
             {
                 CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
-                int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete project..."), tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+                int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete project..."), tr("Do you really want to delete %1?").arg(project->getFilename()), QMessageBox::Ok | QMessageBox::No, QMessageBox::Ok);
 
                 if(res != QMessageBox::Ok)
                 {

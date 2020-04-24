@@ -116,7 +116,7 @@ int CColorLegend::paintLabel(QPainter &p, qreal value)
     p.drawLine(posX, posY - fontHeight / 2 + 1, posX + 2, posY - fontHeight / 2 + 1);
 
     if(value == minimum || value == maximum
-       || (posY > colorRect.top() + 3*fontHeight / 2 && posY < colorRect.bottom() - fontHeight / 2))
+       || (posY > colorRect.top() + 3 * fontHeight / 2 && posY < colorRect.bottom() - fontHeight / 2))
     {
         posX += 5;
         int precision = !((int)value == value);     // returns 0 or 1
@@ -196,7 +196,7 @@ void CColorLegend::paintEvent(QPaintEvent *event)
         qreal step           = legendRound(delta / 8, 0);
         qreal roundedMinimum = legendRound(minimum, delta > 60 ? -1 : 0);
 
-        for(qreal v = roundedMinimum; v < maximum; v+= step)
+        for(qreal v = roundedMinimum; v < maximum; v += step)
         {
             reqWidth = qMax(paintLabel(p, v), reqWidth);
         }
@@ -209,7 +209,7 @@ void CColorLegend::paintEvent(QPaintEvent *event)
 
         if(val != NOFLOAT)
         {
-            qreal y = qFloor(colorRect.bottom() - (val - minimum) * (colorRect.height()-1)/(maximum - minimum));
+            qreal y = qFloor(colorRect.bottom() - (val - minimum) * (colorRect.height() - 1) / (maximum - minimum));
             p.setPen(QPen(Qt::darkGray, 2));
             p.drawLine(colorRect.left() + 2, y, colorRect.right() - 2, y);
         }

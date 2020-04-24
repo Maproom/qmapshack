@@ -423,27 +423,27 @@ QString CRouterBRouterTilesSelect::formatSize(const qint64 size)
 {
     if (size >= 2147483648)
     {
-        return QString("%1G").arg(size/1073741824);
+        return QString("%1G").arg(size / 1073741824);
     }
     else if (size >= 1073741824)
     {
-        return QString("%1G").arg(qreal(size/107374182)/10);
+        return QString("%1G").arg(qreal(size / 107374182) / 10);
     }
     else if (size >= 2097152)
     {
-        return QString("%1M").arg(size/1048576);
+        return QString("%1M").arg(size / 1048576);
     }
     else if (size >= 1048576)
     {
-        return QString("%1M").arg(qreal(size/104858)/10);
+        return QString("%1M").arg(qreal(size / 104858) / 10);
     }
     else if (size >= 2048)
     {
-        return QString("%1K").arg(size/1024);
+        return QString("%1K").arg(size / 1024);
     }
     else if (size >= 1000)
     {
-        return QString("%1K").arg(qreal(size/102)/10);
+        return QString("%1K").arg(qreal(size / 102) / 10);
     }
     else
     {
@@ -500,7 +500,7 @@ void CRouterBRouterTilesSelect::slotDownload()
             status->isSelected = false;
             changed = true;
 
-            status->file = new QFile(dir.absoluteFilePath(fileName+".tmp"));
+            status->file = new QFile(dir.absoluteFilePath(fileName + ".tmp"));
             if (!status->file->open(QIODevice::WriteOnly))
             {
                 const QString tmpName = status->file->fileName();
@@ -602,7 +602,7 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
         {
             if(reply->error() != QNetworkReply::NoError)
             {
-                error(fileName + ": "+reply->errorString());
+                error(fileName + ": " + reply->errorString());
             }
             else if (status->file->write(reply->readAll()) < 0)
             {

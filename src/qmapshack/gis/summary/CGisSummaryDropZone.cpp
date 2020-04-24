@@ -36,7 +36,7 @@ CGisSummaryDropZone::CGisSummaryDropZone(const CGisSummary::dropzone_t &dropZone
     }
 
     setToolTip(folderNames.join("\n") + "\n\n" + tr("Drag-n-drop items from the workspace into this drop zone."));
-    setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+    setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     setAutoFillBackground(true);
     setBackgroundRole(QPalette::Mid);
     setForegroundRole(QPalette::Text);

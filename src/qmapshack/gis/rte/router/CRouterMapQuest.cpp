@@ -180,7 +180,7 @@ void CRouterMapQuest::addMapQuestLocations(QDomDocument& xml, QDomElement& locat
     for(const IGisLine::point_t &pt : line)
     {
         QDomElement location = xml.createElement("location");
-        location.appendChild(xml.createTextNode(QString("%1,%2").arg(pt.coord.y()*RAD_TO_DEG).arg(pt.coord.x()*RAD_TO_DEG)));
+        location.appendChild(xml.createTextNode(QString("%1,%2").arg(pt.coord.y() * RAD_TO_DEG).arg(pt.coord.x() * RAD_TO_DEG)));
         locations.appendChild(location);
     }
 }
@@ -360,7 +360,7 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
     if(rte != nullptr)
     {
-        rte->setResult(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0, 'f', 2));
+        rte->setResult(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time / 1000.0, 0, 'f', 2));
     }
 
     slotCloseStatusMsg();

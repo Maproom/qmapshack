@@ -43,8 +43,8 @@
 #define MIN_DIST_CLOSE_TO   10
 #define MIN_DIST_FOCUS      200
 
-#define WPT_FOCUS_DIST_IN   (50*50)
-#define WPT_FOCUS_DIST_OUT  (200*200)
+#define WPT_FOCUS_DIST_IN   (50 * 50)
+#define WPT_FOCUS_DIST_OUT  (200 * 200)
 
 namespace
 {
@@ -561,22 +561,22 @@ QString CGisItemTrk::getInfo(quint32 feature) const
         str += tr("Energy Use Cycling: %L1").arg(energyUseCycling, 0, 'f', 0) + "kcal<br/>";
     }
 
-    if((allValidFlags & (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle)) == (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle))
+    if((allValidFlags & (CTrackData::trkpt_t::eValidEle | CTrackData::trkpt_t::eInvalidEle)) == (CTrackData::trkpt_t::eValidEle | CTrackData::trkpt_t::eInvalidEle))
     {
         str += "<b style='color: red;'>" + tr("Invalid elevations!") + "</b><br/>";
     }
 
-    if((allValidFlags & (CTrackData::trkpt_t::eValidTime|CTrackData::trkpt_t::eInvalidTime)) == (CTrackData::trkpt_t::eValidTime|CTrackData::trkpt_t::eInvalidTime))
+    if((allValidFlags & (CTrackData::trkpt_t::eValidTime | CTrackData::trkpt_t::eInvalidTime)) == (CTrackData::trkpt_t::eValidTime | CTrackData::trkpt_t::eInvalidTime))
     {
         str += "<b style='color: red;'>" + tr("Invalid timestamps!") + "</b><br/>";
     }
 
-    if((allValidFlags & (CTrackData::trkpt_t::eValidPos|CTrackData::trkpt_t::eInvalidPos)) == (CTrackData::trkpt_t::eValidPos|CTrackData::trkpt_t::eInvalidPos))
+    if((allValidFlags & (CTrackData::trkpt_t::eValidPos | CTrackData::trkpt_t::eInvalidPos)) == (CTrackData::trkpt_t::eValidPos | CTrackData::trkpt_t::eInvalidPos))
     {
         str += "<b style='color: red;'>" + tr("Invalid positions!") + "</b><br/>";
     }
 
-    if((allValidFlags & (CTrackData::trkpt_t::eValidSlope|CTrackData::trkpt_t::eInvalidSlope)) == (CTrackData::trkpt_t::eValidSlope|CTrackData::trkpt_t::eInvalidSlope))
+    if((allValidFlags & (CTrackData::trkpt_t::eValidSlope | CTrackData::trkpt_t::eInvalidSlope)) == (CTrackData::trkpt_t::eValidSlope | CTrackData::trkpt_t::eInvalidSlope))
     {
         str += "<b style='color: red;'>" + tr("Invalid slopes!") + "</b><br/>";
     }
@@ -668,7 +668,7 @@ QString CGisItemTrk::getInfoRange() const
 
         str += QString("%4 %1:%2:%3").arg(hh, 2, 10, QChar('0')).arg(mm, 2, 10, QChar('0')).arg(ss, 2, 10, QChar('0')).arg(QChar(0x231a));
 
-        IUnit::self().meter2speed(distance/deltaTime, val, unit);
+        IUnit::self().meter2speed(distance / deltaTime, val, unit);
         str += QString(", %3 %1%2").arg(val).arg(unit).arg(QChar(0x21A3));
     }
     str += "\n";
@@ -686,20 +686,20 @@ QString CGisItemTrk::getInfoRange() const
     str += QString("%3 %1%2 (%4%5)").arg(val).arg(unit).arg(QChar(0x2197)).arg(val2).arg(unit2);
     if(timeIsValid)
     {
-        IUnit::self().meter2speed(deltaAscent/deltaTime, val, unit);
+        IUnit::self().meter2speed(deltaAscent / deltaTime, val, unit);
         str += QString(", %1%2").arg(val).arg(unit);
     }
     str += "\n";
 
-    tmp    = qAtan(deltaDescent/distance);
-    slope1 = qAbs(tmp * 360.0/(2 * M_PI));
+    tmp    = qAtan(deltaDescent / distance);
+    slope1 = qAbs(tmp * 360.0 / (2 * M_PI));
     IUnit::self().slope2string(slope1, val2, unit2);
 
     IUnit::self().meter2elevation(deltaDescent, val, unit);
     str += QString("%3 %1%2 (%4%5)").arg(val).arg(unit).arg(QChar(0x2198)).arg(val2).arg(unit2);
     if(timeIsValid)
     {
-        IUnit::self().meter2speed(deltaDescent/deltaTime, val, unit);
+        IUnit::self().meter2speed(deltaDescent / deltaTime, val, unit);
         str += QString(", %1%2").arg(val).arg(unit);
     }
 
@@ -753,7 +753,7 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
         const CKnownExtension &ext = CKnownExtension::get(key);
         if(ext.known)
         {
-            str += "\n" + ext.nameLongText + ": " + QString("%1%2").arg(ext.valueFunc(pt)*ext.factor, 0, 'f', 1).arg(ext.unit);
+            str += "\n" + ext.nameLongText + ": " + QString("%1%2").arg(ext.valueFunc(pt) * ext.factor, 0, 'f', 1).arg(ext.unit);
         }
         else
         {
@@ -782,25 +782,25 @@ QString CGisItemTrk::getInfoProgress(const CTrackData::trkpt_t& pt) const
     if(pt.ascent != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.ascent, val, unit);
-        asc = tr("Ascent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascent * 100/totalAscent, 2, 'f', 0);
+        asc = tr("Ascent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascent * 100 / totalAscent, 2, 'f', 0);
     }
 
     if(pt.descent != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.descent, val, unit);
-        dsc = tr(", Descent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descent * 100/totalDescent, 2, 'f', 0);
+        dsc = tr(", Descent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descent * 100 / totalDescent, 2, 'f', 0);
     }
 
     if(pt.distance != NOFLOAT)
     {
         IUnit::self().meter2distance(pt.distance, val, unit);
-        dst = tr("Distance: %1%2 (%3%)").arg(val).arg(unit).arg(pt.distance * 100/totalDistance, 2, 'f', 0);
+        dst = tr("Distance: %1%2 (%3%)").arg(val).arg(unit).arg(pt.distance * 100 / totalDistance, 2, 'f', 0);
     }
 
     if(pt.elapsedSeconds != NOFLOAT)
     {
         IUnit::self().seconds2time(pt.elapsedSecondsMoving, val, unit);
-        mov = tr(", Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100/totalElapsedSecondsMoving, 2, 'f', 0);
+        mov = tr(", Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 2, 'f', 0);
     }
 
     return QString("%1%2\n%3%4").arg(asc).arg(dsc).arg(dst).arg(mov);
@@ -826,7 +826,7 @@ QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& pt1, const CTrackDa
 
         if(dt != NOFLOAT)
         {
-            IUnit::self().meter2speed((pt2.ascent - pt1.ascent)/dt, val, unit);
+            IUnit::self().meter2speed((pt2.ascent - pt1.ascent) / dt, val, unit);
             asc += tr(", %1%2").arg(val).arg(unit);
         }
     }
@@ -838,7 +838,7 @@ QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& pt1, const CTrackDa
 
         if(dt != NOFLOAT)
         {
-            IUnit::self().meter2speed((pt2.descent - pt1.descent)/dt, val, unit);
+            IUnit::self().meter2speed((pt2.descent - pt1.descent) / dt, val, unit);
             dsc += tr(", %1%2").arg(val).arg(unit);
         }
     }
@@ -1104,7 +1104,7 @@ void CGisItemTrk::deriveSecondaryData()
         {
             trkpt.deltaDistance  = lastTrkpt->distanceTo(trkpt);
             trkpt.distance       = lastTrkpt->distance + trkpt.deltaDistance;
-            trkpt.elapsedSeconds = trkpt.time.toMSecsSinceEpoch()/1000.0 - timestampStart;
+            trkpt.elapsedSeconds = trkpt.time.toMSecsSinceEpoch() / 1000.0 - timestampStart;
 
             // ascent descent
             if(lastEle != NOINT)
@@ -1116,7 +1116,7 @@ void CGisItemTrk::deriveSecondaryData()
 
                 if(qAbs(delta) >= ASCENT_THRESHOLD)
                 {
-                    const qint32 step = (delta/ASCENT_THRESHOLD)*ASCENT_THRESHOLD;
+                    const qint32 step = (delta / ASCENT_THRESHOLD) * ASCENT_THRESHOLD;
 
                     if(delta > 0)
                     {
@@ -1141,7 +1141,7 @@ void CGisItemTrk::deriveSecondaryData()
         else
         {
             timeStart      = trkpt.time;
-            timestampStart = timeStart.toMSecsSinceEpoch()/1000.0;
+            timestampStart = timeStart.toMSecsSinceEpoch() / 1000.0;
             lastEle        = trkpt.ele;
 
             trkpt.deltaDistance        = 0;
@@ -1176,7 +1176,7 @@ void CGisItemTrk::deriveSecondaryData()
             {
                 d1 = trkpt2.distance;
                 e1 = trkpt2.ele;
-                t1 = trkpt2.time.toMSecsSinceEpoch()/1000.0;
+                t1 = trkpt2.time.toMSecsSinceEpoch() / 1000.0;
                 break;
             }
         }
@@ -1203,8 +1203,8 @@ void CGisItemTrk::deriveSecondaryData()
 
         if(d1 < d2)
         {
-            qreal a      = qAtan((e2 - e1)/(d2 - d1));
-            trkpt.slope1 = a * 360.0/(2 * M_PI);
+            qreal a      = qAtan((e2 - e1) / (d2 - d1));
+            trkpt.slope1 = a * 360.0 / (2 * M_PI);
             trkpt.slope2 = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
         }
         else
@@ -1316,7 +1316,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
     // convert coordinates of all waypoints into meter coordinates relative to the first track point
     point3D pt0 = line[0];
     QList<trkwpt_t> trkwpts;
-    for(int i=0; i < project->childCount(); i++)
+    for(int i = 0; i < project->childCount(); i++)
     {
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->child(i));
         if(wpt == nullptr)
@@ -1363,7 +1363,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         for(const pointDP &pt : line)
         {
             ++current;
-            qreal d = (trkwpt.x - pt.x)*(trkwpt.x - pt.x) + (trkwpt.y - pt.y)*(trkwpt.y - pt.y);
+            qreal d = (trkwpt.x - pt.x) * (trkwpt.x - pt.x) + (trkwpt.y - pt.y) * (trkwpt.y - pt.y);
 
             if(d < WPT_FOCUS_DIST_IN)
             {
@@ -1418,7 +1418,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
     {
         deriveSecondaryData();
     }
-    updateVisuals(eVisualDetails|eVisualPlot, "findWaypointsCloseBy()");
+    updateVisuals(eVisualDetails | eVisualPlot, "findWaypointsCloseBy()");
 }
 
 bool CGisItemTrk::isCloseTo(const QPointF& pos)
@@ -1489,7 +1489,7 @@ bool CGisItemTrk::cut()
     if(askToDeleteOriginal)
     {
         // clone first part?
-        if((mode & (CCutTrk::eModeKeepBoth|CCutTrk::eModeKeepFirst)) != 0)
+        if((mode & (CCutTrk::eModeKeepBoth | CCutTrk::eModeKeepFirst)) != 0)
         {
             int idx = cutMode == CCutTrk::eCutMode1 ? idxMouse  - 1 : idxMouse;
             if(idx < 0)
@@ -1508,16 +1508,16 @@ bool CGisItemTrk::cut()
         }
 
         // clone second part?
-        if((mode & (CCutTrk::eModeKeepBoth|CCutTrk::eModeKeepSecond)) != 0)
+        if((mode & (CCutTrk::eModeKeepBoth | CCutTrk::eModeKeepSecond)) != 0)
         {
-            QString name = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints-1);
+            QString name = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints - 1);
             IGisProject *project = nullptr;
             if(!getNameAndProject(name, project, tr("track")))
             {
                 return false;
             }
 
-            new CGisItemTrk(name, idxMouse, cntTotalPoints-1, trk, project);
+            new CGisItemTrk(name, idxMouse, cntTotalPoints - 1, trk, project);
         }
     }
     else
@@ -2257,20 +2257,20 @@ void CGisItemTrk::setColorizeSource(QString src)
     if(src != getColorizeSource())
     {
         colorSourceLimit.setSource(src);
-        updateHistory(eVisualColorLegend|eVisualDetails);
+        updateHistory(eVisualColorLegend | eVisualDetails);
     }
 }
 
 void CGisItemTrk::setColorizeLimitLow(qreal limit)
 {
     colorSourceLimit.setMin(limit);
-    updateHistory(eVisualColorLegend|eVisualDetails);
+    updateHistory(eVisualColorLegend | eVisualDetails);
 }
 
 void CGisItemTrk::setColorizeLimitHigh(qreal limit)
 {
     colorSourceLimit.setMax(limit);
-    updateHistory(eVisualColorLegend|eVisualDetails);
+    updateHistory(eVisualColorLegend | eVisualDetails);
 }
 
 QString CGisItemTrk::getColorizeUnit() const
@@ -2314,7 +2314,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
         QFontMetrics fm(f);
-        QRect rectText = fm.boundingRect(QRect(0, 0, 500, 0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
+        QRect rectText = fm.boundingRect(QRect(0, 0, 500, 0), Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, str);
 
         // The initial minimum size of the box will be MIN_WIDTH_INFO_BOX.
         // If a larger box is needed the minimum grows. By that the width
@@ -2369,9 +2369,9 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         IUnit::self().meter2distance(mouseMoveFocus->distance, val1, unit1);
         IUnit::self().meter2distance(totalDistance - mouseMoveFocus->distance, val2, unit2);
         p.setPen(Qt::darkBlue);
-        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
+        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
         p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->distance * 100 / totalDistance, 0, 'f', 0));
-        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
 
         // draw progress bar time
         if(totalElapsedSeconds != 0)
@@ -2389,15 +2389,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
             IUnit::self().seconds2time(mouseMoveFocus->elapsedSecondsMoving, val1, unit1);
             IUnit::self().seconds2time(totalElapsedSecondsMoving - mouseMoveFocus->elapsedSecondsMoving, val2, unit2);
             p.setPen(Qt::darkBlue);
-            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
+            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
             p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
-            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
         }
 
         // draw text
         p.translate(0, fm.height() + 8);
         p.setPen(colorFg);
-        p.drawText(rectText, Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
+        p.drawText(rectText, Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, str);
 
         p.restore();
     }
@@ -2497,8 +2497,8 @@ void CGisItemTrk::drawRange(QPainter& p, CGisDraw* gis)
 
     if(seg.size() == 1)
     {
-        const auto r1 = qRound(penWidthHi/2.0);
-        const auto r2 = qRound(penWidthFg/2.0);
+        const auto r1 = qRound(penWidthHi / 2.0);
+        const auto r2 = qRound(penWidthFg / 2.0);
 
         p.setPen(Qt::NoPen);
         p.setBrush(Qt::darkGreen);
@@ -2521,8 +2521,8 @@ void CGisItemTrk::drawRange(QPainter& p, CGisDraw* gis)
         pt *= DEG_TO_RAD;
         gis->convertRad2Px(pt);
 
-        const auto r1 = qRound(penWidthHi/2.0) + 1;
-        const auto r2 = qRound(penWidthFg/2.0) + 1;
+        const auto r1 = qRound(penWidthHi / 2.0) + 1;
+        const auto r2 = qRound(penWidthFg / 2.0) + 1;
 
         p.setPen(Qt::NoPen);
         p.setBrush(Qt::darkGreen);
@@ -2586,7 +2586,7 @@ void CGisItemTrk::setElevation(qint32 idx, qint32 ele)
     {
         trkpt->ele = ele;
         deriveSecondaryData();
-        changed(tr("Changed elevation of point %1 to %2 %3").arg(idx).arg(ele*IUnit::self().elevationFactor).arg(IUnit::self().elevationUnit), "://icons/48x48/SetEle.png");
+        changed(tr("Changed elevation of point %1 to %2 %3").arg(idx).arg(ele * IUnit::self().elevationFactor).arg(IUnit::self().elevationUnit), "://icons/48x48/SetEle.png");
     }
 }
 
@@ -2595,7 +2595,7 @@ void CGisItemTrk::setColor(int idx)
     if(idx < IGisItem::getColorMap().count())
     {
         setColor(IGisItem::getColorMap()[idx].color);
-        updateHistory(eVisualColorLegend|eVisualDetails);
+        updateHistory(eVisualColorLegend | eVisualDetails);
     }
 }
 
@@ -3153,10 +3153,10 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
     }
 
     /// @todo find a better way to scale the algorithm
-    interp.m = interp.Q*50;
+    interp.m = interp.Q * 50;
     if(N < 400)
     {
-        interp.m = N / (16/interp.Q);
+        interp.m = N / (16 / interp.Q);
     }
 
     interp.m &= 0xFFFFFFFE;
@@ -3268,7 +3268,7 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeneralFullText, [](CGisItemTrk* item){
         searchValue_t searchValue;
-        searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        searchValue.str1 = item->getInfo(eFeatureShowFullText | eFeatureShowName);
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralElevation, [](CGisItemTrk* item){
@@ -3355,26 +3355,26 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyRteTrkAvgSpeed, [](CGisItemTrk* item){
         searchValue_t searchValue;
-        IUnit::self().meter2speed(item->totalDistance/item->totalElapsedSecondsMoving, searchValue.value1, searchValue.str1);
+        IUnit::self().meter2speed(item->totalDistance / item->totalElapsedSecondsMoving, searchValue.value1, searchValue.str1);
         return searchValue;
     });
     map.insert(eSearchPropertyRteTrkActivity, [](CGisItemTrk* item){
         searchValue_t searchValue;
         QStringList strL;
         item->activities.getActivityNames(strL);
-        searchValue.str1=strL.join(", ");
+        searchValue.str1 = strL.join(", ");
         return searchValue;
     });
     map.insert(eSearchPropertyRteTrkTotalTime, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.value1 = item->totalElapsedSeconds;
-        searchValue.str1="S";
+        searchValue.str1 = "S";
         return searchValue;
     });
     map.insert(eSearchPropertyRteTrkTimeMoving, [](CGisItemTrk* item){
         searchValue_t searchValue;
         searchValue.value1 = item->totalElapsedSecondsMoving;
-        searchValue.str1="S";
+        searchValue.str1 = "S";
         return searchValue;
     });
 

@@ -68,7 +68,7 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     explanation += "<li>" + QLocale::c().dateTimeFormat(QLocale::ShortFormat) + "</li>";
     explanation += "</ul>";
     explanation += tr("<p>The search can only convert following units:</p>");
-    explanation += "<p>"+IUnit::getUnits().join(", ") + "</p>";
+    explanation += "<p>" + IUnit::getUnits().join(", ") + "</p>";
     explanation += tr("<p>The regex search uses this syntax: https://perldoc.perl.org/perlre.html</p>");
     textBrowserExplanation->setText(explanation);
     for(QString property : CSearch::getSearchTypeKeywords())

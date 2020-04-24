@@ -146,8 +146,8 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
             {
                 trk.cmt += tr("Battery usage: %1 %/hour")
-                           .arg( 100*(xmlHeader.namedItem("BatteryChargeAtStart").toElement().text().toDouble()
-                                      - xmlHeader.namedItem("BatteryCharge").toElement().text().toDouble())
+                           .arg( 100 * (xmlHeader.namedItem("BatteryChargeAtStart").toElement().text().toDouble()
+                                        - xmlHeader.namedItem("BatteryCharge").toElement().text().toDouble())
                                  / (xmlHeader.namedItem("Duration").toElement().text().toDouble() / 3600), 0, 'f', 1);
             }
         }

@@ -303,7 +303,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
     // ----- start drawing -----
     QPainter p(&buf.image);
     USE_ANTI_ALIASING(p, true);
-    p.setOpacity(getOpacity()/100.0);
+    p.setOpacity(getOpacity() / 100.0);
     p.translate(-pp);
 
     for(const file_t &mapFile : files)
@@ -319,7 +319,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
         }
 
 
-        qint32 level = scale2level(bufferScale.x()/5, mapFile);
+        qint32 level = scale2level(bufferScale.x() / 5, mapFile);
 
         // no scalable level found, draw bounding box of map
         // derive maps corner coordinate
@@ -350,7 +350,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
             continue;
         }
 
-        QByteArray data(1024*1024*4, 0);
+        QByteArray data(1024 * 1024 * 4, 0);
         //(char) typecast needed to avoid MSVC compiler warning
         //in MSVC, char is a signed type.
         //Maybe the QByteArray declaration should be fixed ;-)

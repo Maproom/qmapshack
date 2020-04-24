@@ -62,7 +62,7 @@ void CRouterBRouterSetup::load()
     expertSegmentsUrl = cfg.value("expertSegmentsUrl", defaultSegmentsUrl).toString();
     onlineProfiles.clear();
     int size = cfg.beginReadArray("online");
-    for (int i=0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         cfg.setArrayIndex(i);
         onlineProfiles << cfg.value("profile").toString();
@@ -70,7 +70,7 @@ void CRouterBRouterSetup::load()
     cfg.endArray();
     localProfiles.clear();
     size = cfg.beginReadArray("local");
-    for (int i=0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         cfg.setArrayIndex(i);
         localProfiles << cfg.value("profile").toString();
@@ -118,14 +118,14 @@ void CRouterBRouterSetup::save()
     cfg.setValue("expertBinariesUrl", expertBinariesUrl);
     cfg.setValue("expertSegmentsUrl", expertSegmentsUrl);
     cfg.beginWriteArray("online");
-    for (int i=0; i < onlineProfiles.size(); i++)
+    for (int i = 0; i < onlineProfiles.size(); i++)
     {
         cfg.setArrayIndex(i);
         cfg.setValue("profile", onlineProfiles.at(i));
     }
     cfg.endArray();
     cfg.beginWriteArray("local");
-    for (int i=0; i < localProfiles.size(); i++)
+    for (int i = 0; i < localProfiles.size(); i++)
     {
         cfg.setArrayIndex(i);
         cfg.setValue("profile", localProfiles.at(i));
@@ -231,7 +231,7 @@ void CRouterBRouterSetup::profileUp(const QString &profile)
         if (index > 0)
         {
             localProfiles.removeAt(index);
-            localProfiles.insert(index-1, profile);
+            localProfiles.insert(index - 1, profile);
             emit sigProfilesChanged();
         }
     }
@@ -242,7 +242,7 @@ void CRouterBRouterSetup::profileUp(const QString &profile)
         if (index > 0)
         {
             onlineProfiles.removeAt(index);
-            onlineProfiles.insert(index-1, profile);
+            onlineProfiles.insert(index - 1, profile);
             emit sigProfilesChanged();
         }
     }
@@ -253,10 +253,10 @@ void CRouterBRouterSetup::profileDown(const QString &profile)
     if (installMode == eModeLocal)
     {
         int index = localProfiles.indexOf(profile);
-        if (index > -1 && index < localProfiles.size()-1)
+        if (index > -1 && index < localProfiles.size() - 1)
         {
             localProfiles.removeAt(index);
-            localProfiles.insert(index+1, profile);
+            localProfiles.insert(index + 1, profile);
             emit sigProfilesChanged();
         }
     }
@@ -264,10 +264,10 @@ void CRouterBRouterSetup::profileDown(const QString &profile)
     {
         Q_ASSERT(installMode == eModeOnline);
         int index = onlineProfiles.indexOf(profile);
-        if (index > -1 && index < onlineProfiles.size()-1)
+        if (index > -1 && index < onlineProfiles.size() - 1)
         {
             onlineProfiles.removeAt(index);
-            onlineProfiles.insert(index+1, profile);
+            onlineProfiles.insert(index + 1, profile);
             emit sigProfilesChanged();
         }
     }
@@ -284,7 +284,7 @@ void CRouterBRouterSetup::readLocalProfiles()
         {
             if (profile.endsWith(".brf"))
             {
-                installedProfiles << profile.left(profile.length()-4);
+                installedProfiles << profile.left(profile.length() - 4);
             }
         }
     }
@@ -503,7 +503,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
             const qint32 len = profiles.property("length").toInt();
 
             QStringList onlineProfilesLoaded;
-            for(qint32 i=0; i < len; i++)
+            for(qint32 i = 0; i < len; i++)
             {
                 const QJSValue &profile = profiles.property(i);
                 if (!profile.isString() || profile.isError())

@@ -65,7 +65,7 @@ public:
 
 private:
     // fixed size to 8, which is enough for float64
-    quint8 invalidBytes[8] {0,0,0,0,0,0,0,0};
+    quint8 invalidBytes[8] {0, 0, 0, 0, 0, 0, 0, 0};
     quint8 typeSize;
     fit_base_type_nr_e baseTypeNr;
     QString namestr;
@@ -98,7 +98,7 @@ static const CFitBaseType fitInvalidType = CFitBaseType(eBaseTypeNrInvalid, "Inv
 class CFitBaseTypeMap
 {
 public:
-    static const quint8 fitBaseTypeNumMask =0x1F; // 0000 0000 0001 1111
+    static const quint8 fitBaseTypeNumMask = 0x1F; // 0000 0000 0001 1111
 
     /**
      * param nr: either the "real" base type number (0 -13) or the masked base type byte.

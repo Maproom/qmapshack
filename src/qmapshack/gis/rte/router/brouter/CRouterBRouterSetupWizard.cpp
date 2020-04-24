@@ -509,7 +509,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
         QMessageBox mbox;
         mbox.setWindowTitle(tr("Warning..."));
         mbox.setIcon(QMessageBox::Warning);
-        mbox.setStandardButtons(QMessageBox::Ok|QMessageBox::Abort);
+        mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Abort);
         mbox.setDefaultButton(QMessageBox::Abort);
 
         QString msg = tr("Download: %1<br/>"
@@ -691,12 +691,12 @@ void CRouterBRouterSetupWizard::updateProfiles() const
     qSort(selected.begin(), selected.end());
     toolDeleteProfile->setEnabled(!selected.isEmpty());
     toolProfileUp->setEnabled(!selected.isEmpty() && selected.first() > 0);
-    toolProfileDown->setEnabled(!selected.isEmpty() && selected.last() < profiles.size()-1);
+    toolProfileDown->setEnabled(!selected.isEmpty() && selected.last() < profiles.size() - 1);
     if (isError)
     {
         toolAddProfile->setEnabled(false);
         labelProfileContent->setText(tr("Error:"));
-        textProfileContent->setText(error + ": "+ errorDetails);
+        textProfileContent->setText(error + ": " + errorDetails);
     }
     else
     {
@@ -784,7 +784,7 @@ void CRouterBRouterSetupWizard::updateOnlineDetails() const
     }
     if (isError)
     {
-        textOnlineDetails->setText(error + ": "+ errorDetails);
+        textOnlineDetails->setText(error + ": " + errorDetails);
     }
 }
 

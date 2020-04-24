@@ -468,7 +468,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             const int N = values.size();
             if(N > 0)
             {
-                pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = values[0].toFloat()/10;
+                pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = values[0].toFloat() / 10;
             }
             if(N > 1)
             {

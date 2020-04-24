@@ -177,7 +177,7 @@ void CDemList::slotMoveUp()
 
     item->showChildren(false);
     treeWidget->takeTopLevelItem(index);
-    treeWidget->insertTopLevelItem(index-1, item);
+    treeWidget->insertTopLevelItem(index - 1, item);
     item->showChildren(true);
     treeWidget->setCurrentItem(0);
     emit treeWidget->sigChanged();
@@ -199,7 +199,7 @@ void CDemList::slotMoveDown()
 
     item->showChildren(false);
     treeWidget->takeTopLevelItem(index);
-    treeWidget->insertTopLevelItem(index+1, item);
+    treeWidget->insertTopLevelItem(index + 1, item);
     item->showChildren(true);
     treeWidget->setCurrentItem(0);
     emit treeWidget->sigChanged();

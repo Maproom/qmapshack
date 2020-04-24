@@ -118,6 +118,6 @@ void CSelectActivityColor::slotSetColor(QToolButton * button, trkact_t act)
 
     if(trk != nullptr)
     {
-        trk->updateVisuals(CGisItemTrk::eVisualDetails|CGisItemTrk::eVisualPlot|CGisItemTrk::eVisualProject|CGisItemTrk::eVisualTrkInfo, "CSelectActivityColor::slotSetColor()");
+        trk->updateVisuals(CGisItemTrk::eVisualDetails | CGisItemTrk::eVisualPlot | CGisItemTrk::eVisualProject | CGisItemTrk::eVisualTrkInfo, "CSelectActivityColor::slotSetColor()");
     }
 }

@@ -31,7 +31,7 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *
     : QDialog(parent)
 {
     stackSelf.push(this);
-    int oldTopIndex = stackSelf.length()-2;
+    int oldTopIndex = stackSelf.length() - 2;
 
     setupUi(this);
     setWindowModality(Qt::ApplicationModal);
@@ -42,7 +42,7 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *
     progressBar->setValue(0);
 
     time.start();
-    labelTime->setText(tr("Elapsed time: %1").arg(time.elapsed()/1000));
+    labelTime->setText(tr("Elapsed time: %1").arg(time.elapsed() / 1000));
 
     if(max == NOINT)
     {
@@ -140,7 +140,7 @@ void CProgressDialog::setValue(int val)
         QApplication::processEvents();
     }
     progressBar->setValue(val);
-    labelTime->setText(tr("Elapsed time: %1 seconds.").arg(time.elapsed()/1000.0, 0, 'f', 0));
+    labelTime->setText(tr("Elapsed time: %1 seconds.").arg(time.elapsed() / 1000.0, 0, 'f', 0));
 }
 
 bool CProgressDialog::wasCanceled()

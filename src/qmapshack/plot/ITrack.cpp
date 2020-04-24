@@ -55,7 +55,7 @@ void ITrack::save(QImage& image, const CTrackData::trkpt_t * pTrkpt)
         p.setBrush(Qt::red);
         p.scale(scale.x(), scale.y());
         p.translate(-xoff, -yoff);
-        p.drawEllipse(pos, 5/scale.x(), 5/scale.x());
+        p.drawEllipse(pos, 5 / scale.x(), 5 / scale.x());
     }
     image = buffer;
 }
@@ -74,11 +74,11 @@ void ITrack::setupProjection(const QRectF& boundingBox)
         pjsrc = nullptr;
     }
 
-    if(boundingBox.top() > (60*DEG_TO_RAD))
+    if(boundingBox.top() > (60 * DEG_TO_RAD))
     {
         pjsrc = pj_init_plus("+init=epsg:32661");
     }
-    else if(boundingBox.bottom() < (-60*DEG_TO_RAD))
+    else if(boundingBox.bottom() < (-60 * DEG_TO_RAD))
     {
         pjsrc = pj_init_plus("+init=epsg:32761");
     }
@@ -149,18 +149,18 @@ void ITrack::updateData()
         scale.rx() = (w2 - 10) / w1;
         scale.ry() = -scale.x();
         xoff = 0;
-        yoff = -((h2 - 10)/scale.y() + h1) / 2;
+        yoff = -((h2 - 10) / scale.y() + h1) / 2;
     }
     else
     {
         scale.ry() = (-h2 + 10) / h1;
         scale.rx() = -scale.y();
-        xoff = -((w2 - 10)/scale.x() - w1) / 2;
+        xoff = -((w2 - 10) / scale.x() - w1) / 2;
         yoff = 0;
     }
 
-    xoff += r1.left()   - 5/scale.x();
-    yoff += r1.bottom() - 5/scale.y();
+    xoff += r1.left()   - 5 / scale.x();
+    yoff += r1.bottom() - 5 / scale.y();
 
     needsRedraw = true;
 }
@@ -188,7 +188,7 @@ void ITrack::draw()
     p.setBrush(QColor(255, 255, 255, 255));
     PAINT_ROUNDED_RECT(p, buffer.rect().adjusted(1, 1, -1, -1));
 
-    p.setPen(QPen(Qt::darkBlue, 2/scale.x()));
+    p.setPen(QPen(Qt::darkBlue, 2 / scale.x()));
     p.scale(scale.x(), scale.y());
     p.translate(-xoff, -yoff);
     p.drawPolyline(line);

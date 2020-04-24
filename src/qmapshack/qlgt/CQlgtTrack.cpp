@@ -22,7 +22,7 @@
 #include <QtWidgets>
 
 
-QDataStream& operator >>(QDataStream& s, CFlags& flag)
+QDataStream & operator >>(QDataStream& s, CFlags& flag)
 {
     quint32 f;
     s >> f;

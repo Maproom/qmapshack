@@ -50,7 +50,7 @@ CFilterZeroSpeedDriftCleaner::~CFilterZeroSpeedDriftCleaner()
 void CFilterZeroSpeedDriftCleaner::slotApply()
 {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterZeroSpeedDriftCleaner(distance->value()/IUnit::self().baseFactor, ratio->value());
+    trk.filterZeroSpeedDriftCleaner(distance->value() / IUnit::self().baseFactor, ratio->value());
 }
 
 void CFilterZeroSpeedDriftCleaner::showHelp()

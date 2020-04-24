@@ -24,14 +24,14 @@
 #include <proj_api.h>
 #include <QtWidgets>
 
-#define INT_TO_DEG(x) (qreal(x)/1e6)
+#define INT_TO_DEG(x) (qreal(x) / 1e6)
 
-#define INT_TO_RAD(x) (qreal(x)/(1e6*RAD_TO_DEG))
+#define INT_TO_RAD(x) (qreal(x) / (1e6 * RAD_TO_DEG))
 
 
 
 CMapMAP::CMapMAP(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility|eFeatVectorItems, parent)
+    : IMap(eFeatVisibility | eFeatVectorItems, parent)
     , filename(filename)
 {
     qDebug() << "------------------------------";

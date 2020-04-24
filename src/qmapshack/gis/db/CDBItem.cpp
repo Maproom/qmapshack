@@ -91,17 +91,17 @@ void CDBItem::updateAge()
         if(timestamp.isValid())
         {
             quint64 diff = QDateTime::currentDateTimeUtc().toTime_t() - timestamp.toTime_t();
-            if(diff < (60*60))
+            if(diff < (60 * 60))
             {
-                setText(CGisListDB::eColumnTime, tr("%1 min.").arg(diff/60));
+                setText(CGisListDB::eColumnTime, tr("%1 min.").arg(diff / 60));
             }
-            else if(diff < (60*60*24))
+            else if(diff < (60 * 60 * 24))
             {
-                setText(CGisListDB::eColumnTime, tr("%1 h").arg(diff/(60*60)));
+                setText(CGisListDB::eColumnTime, tr("%1 h").arg(diff / (60 * 60)));
             }
             else
             {
-                setText(CGisListDB::eColumnTime, tr("%1 days").arg(diff/(60*60*24)));
+                setText(CGisListDB::eColumnTime, tr("%1 days").arg(diff / (60 * 60 * 24)));
             }
         }
     }

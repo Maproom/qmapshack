@@ -65,7 +65,7 @@ private:
     qreal xPages = 0.0; //< number of pages in x dimension
     qreal yPages = 0.0; //< number of pages in y dimension
 
-    bool printScaleOnAllPages=false;
+    bool printScaleOnAllPages = false;
 };
 
 #endif //CPRINTDIALOG_H

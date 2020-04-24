@@ -239,11 +239,11 @@ CFitFieldProfile CFitFieldDataState::buildDevFieldProfile(CFitMessage& mesg)
         const CFitFieldProfile* nativeFieldProfile = CFitProfileLookup::getFieldForProfile(natvieMesgNum, nativeFieldNum);
         if (nativeFieldProfile->getBaseType().nr() == eBaseTypeNrInvalid)
         {
-            qWarning() << "DEV field"<< fieldName <<" field profile for mesg num"<< natvieMesgNum << "and field num" << nativeFieldNum << "does not exist.";
+            qWarning() << "DEV field" << fieldName << " field profile for mesg num" << natvieMesgNum << "and field num" << nativeFieldNum << "does not exist.";
         }
         if (nativeFieldProfile->getUnits() != units)
         {
-            qWarning() << "DEV field" << fieldName << "units" << units <<" do not match existing profile units" << nativeFieldProfile->getUnits();
+            qWarning() << "DEV field" << fieldName << "units" << units << " do not match existing profile units" << nativeFieldProfile->getUnits();
         }
         // scale and offset not allowed if a fit field is overwritten.
         scale = 0;

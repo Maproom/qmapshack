@@ -35,7 +35,7 @@ IMouse::~IMouse()
 
 void IMouse::mouseDragged(const QPoint &start, const QPoint &last, const QPoint &end)
 {
-    canvas->moveMap(end-last);
+    canvas->moveMap(end - last);
 }
 
 void IMouse::rightButtonDown(const QPoint &pos)

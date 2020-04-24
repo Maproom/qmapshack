@@ -259,7 +259,7 @@ void CRtWorkspace::slotAddSource()
 
 void CRtWorkspace::slotDeleteSource()
 {
-    int res = QMessageBox::question(this, tr("Delete Source..."), tr("Do you really want to remove the realtime source?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+    int res = QMessageBox::question(this, tr("Delete Source..."), tr("Do you really want to remove the realtime source?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     if(res != QMessageBox::Yes)
     {
         return;

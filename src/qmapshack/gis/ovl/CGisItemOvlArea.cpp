@@ -41,7 +41,7 @@ CGisItemOvlArea::CGisItemOvlArea(const SGisLine &line, const QString &name, IGis
     area.name = name;
     readAreaDataFromGisLine(line);
 
-    flags |=  eFlagCreatedInQms|eFlagWriteAllowed;
+    flags |=  eFlagCreatedInQms | eFlagWriteAllowed;
 
     setColor(str2color(""));
     setupHistory();
@@ -253,11 +253,11 @@ void CGisItemOvlArea::deriveSecondaryData()
     int j = line.size() - 1;
     for(int i = 0; i < line.size(); i++)
     {
-        area.area += (line[j].x() + line[i].x())*(line[j].y() - line[i].y());
+        area.area += (line[j].x() + line[i].x()) * (line[j].y() - line[i].y());
         j = i;
     }
 
-    area.area = qAbs(area.area/2);
+    area.area = qAbs(area.area / 2);
 }
 
 void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
@@ -579,7 +579,7 @@ QMap<searchProperty_e, CGisItemOvlArea::fSearch> CGisItemOvlArea::initKeywordLam
     });
     map.insert(eSearchPropertyGeneralFullText, [](CGisItemOvlArea* item){
         searchValue_t searchValue;
-        searchValue.str1 = item->getInfo(eFeatureShowFullText|eFeatureShowName);
+        searchValue.str1 = item->getInfo(eFeatureShowFullText | eFeatureShowName);
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralComment, [](CGisItemOvlArea* item){

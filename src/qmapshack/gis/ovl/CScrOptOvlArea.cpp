@@ -31,7 +31,7 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(area->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowLinks));
+    label->setText(area->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowLinks));
     adjustSize();
 
     anchor = area->getPointCloseBy(point);

@@ -101,8 +101,8 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     qreal dy1 = l[0].y() - l[1].y();
     qreal dx2 = l[0].x() - l[3].x();
     qreal dy2 = l[0].y() - l[3].y();
-    qreal w   = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
-    qreal h   = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
+    qreal w   = qCeil( qSqrt(dx1 * dx1 + dy1 * dy1));
+    qreal h   = qCeil( qSqrt(dx2 * dx2 + dy2 * dy2));
 
 
     // switch to HQ if the gaps get visible
@@ -116,12 +116,12 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     }
 
     // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
-    qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;
+    qreal a = qAtan(dy1 / dx1) * RAD_TO_DEG;
 
     // finally translate, scale, rotate and draw tile
     p.save();
     p.translate(l[0]);
-    p.scale(w/img.width(), h/img.height());
+    p.scale(w / img.width(), h / img.height());
     p.rotate(a);
     p.drawImage(0, 0, img);
     p.restore();
@@ -135,11 +135,11 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     // rounding effects.
     qint32 nStepsX = 8;
     qint32 nStepsY = 8;
-    if(img.width()/nStepsX < 32)
+    if(img.width() / nStepsX < 32)
     {
         nStepsX = 4;
     }
-    if(img.height()/nStepsY < 32)
+    if(img.height() / nStepsY < 32)
     {
         nStepsY = 4;
     }
@@ -189,7 +189,7 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     // canvas using the view's projection
     context.convertRad2Px(quads);
 
-    QRectF rect(0, 0, img.width()/nStepsX, img.height() / nStepsY);
+    QRectF rect(0, 0, img.width() / nStepsX, img.height() / nStepsY);
     const qreal rw = rect.width();
     const qreal rh = rect.height();
 
@@ -206,11 +206,11 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
             qreal dy1 = pPt[0].y() - pPt[1].y();
             qreal dx2 = pPt[0].x() - pPt[3].x();
             qreal dy2 = pPt[0].y() - pPt[3].y();
-            qreal w   = /*qRound*/ ( qSqrt(dx1*dx1 + dy1*dy1));
-            qreal h   = /*qRound*/ ( qSqrt(dx2*dx2 + dy2*dy2));
+            qreal w   = /*qRound*/ ( qSqrt(dx1 * dx1 + dy1 * dy1));
+            qreal h   = /*qRound*/ ( qSqrt(dx2 * dx2 + dy2 * dy2));
 
             // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
-            qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;
+            qreal a = qAtan(dy1 / dx1) * RAD_TO_DEG;
 
             // move rect to select the part of the tile to draw.
             rect.moveLeft(x * rw);
@@ -218,7 +218,7 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
             // finally translate, scale, rotate and draw tile
             p.save();
             p.translate(pPt[0]);
-            p.scale(w/rw, h/rh);
+            p.scale(w / rw, h / rh);
             p.rotate(a);
             p.drawImage(QPoint(0, 0), img, rect);
             p.restore();

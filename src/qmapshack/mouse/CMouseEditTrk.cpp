@@ -72,7 +72,7 @@ void CMouseEditTrk::slotCopyToOrig()
 
     if(!isNewLine)
     {
-        QMessageBox::StandardButton button = QMessageBox::warning(canvas, tr("Warning!"), tr("This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+        QMessageBox::StandardButton button = QMessageBox::warning(canvas, tr("Warning!"), tr("This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently."), QMessageBox::Ok | QMessageBox::Abort, QMessageBox::Ok);
 
         if(button != QMessageBox::Ok)
         {

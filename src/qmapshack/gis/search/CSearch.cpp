@@ -48,7 +48,7 @@ CSearch::CSearch(QString searchstring)
         //Make spaces around so for example with is not detected inside without
         if(searchstring.contains(" " + key + " ", Qt::CaseInsensitive))
         {
-            searchTypeKeyword=key;
+            searchTypeKeyword = key;
             break;
         }
     }
@@ -56,29 +56,29 @@ CSearch::CSearch(QString searchstring)
     if(searchTypeKeyword.isEmpty())
     {
         //Default to search for what the user typed in the name or the full text
-        search.searchType=eSearchTypeWith;
+        search.searchType = eSearchTypeWith;
         if(searchMode == eSearchModeText)
         {
-            search.property=searchProperty_e::eSearchPropertyGeneralFullText;
+            search.property = searchProperty_e::eSearchPropertyGeneralFullText;
         }
         else
         {
-            search.property=searchProperty_e::eSearchPropertyGeneralName;
+            search.property = searchProperty_e::eSearchPropertyGeneralName;
         }
         search.searchValue.str1 = searchstring.simplified();
         syntaxError = true;
     }
     else
     {
-        search.searchType=keywordSearchTypeMap.value(searchTypeKeyword);
+        search.searchType = keywordSearchTypeMap.value(searchTypeKeyword);
         //Everything before the Search Type keyword is the property, i.e. "date after 2019" would result in "date"
-        search.property=eSearchPropertyNoMatch;
-        QString propertyString=searchstring.section(searchTypeKeyword, 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
+        search.property = eSearchPropertyNoMatch;
+        QString propertyString = searchstring.section(searchTypeKeyword, 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
         for(const QString& key:searchPropertyEnumMap.keys())
         {
             if(propertyString.compare(key, Qt::CaseInsensitive) == 0)
             {
-                search.property=searchPropertyEnumMap[key];
+                search.property = searchPropertyEnumMap[key];
                 break;
             }
         }
@@ -103,15 +103,15 @@ CSearch::CSearch(QString searchstring)
             QTime time1a = QLocale::system().toTime(filterValueStringFirstPart, tf);
             if(time1a.isValid())
             {
-                filterValue.value1=time1a.msecsSinceStartOfDay()/1000;
-                filterValue.str1="SsE";
+                filterValue.value1 = time1a.msecsSinceStartOfDay() / 1000;
+                filterValue.str1 = "SsE";
             }
 
-            QTime time1b=QLocale::c().toTime(filterValueStringFirstPart, tf);
+            QTime time1b = QLocale::c().toTime(filterValueStringFirstPart, tf);
             if(time1b.isValid())
             {
-                filterValue.value1=time1b.msecsSinceStartOfDay()/1000;
-                filterValue.str1="SsE";
+                filterValue.value1 = time1b.msecsSinceStartOfDay() / 1000;
+                filterValue.str1 = "SsE";
             }
 
             if(time1a.isValid() || time1b.isValid())
@@ -119,15 +119,15 @@ CSearch::CSearch(QString searchstring)
                 QTime time2a = QLocale::system().toTime(filterValueStringSecondPart, tf);
                 if(time2a.isValid())
                 {
-                    filterValue.value2=time2a.msecsSinceStartOfDay()/1000;
-                    filterValue.str2="SsE";
+                    filterValue.value2 = time2a.msecsSinceStartOfDay() / 1000;
+                    filterValue.str2 = "SsE";
                 }
 
-                QTime time2b=QLocale::c().toTime(filterValueStringSecondPart, tf);
+                QTime time2b = QLocale::c().toTime(filterValueStringSecondPart, tf);
                 if(time2b.isValid())
                 {
-                    filterValue.value2=time2b.msecsSinceStartOfDay()/1000;
-                    filterValue.str2="SsE";
+                    filterValue.value2 = time2b.msecsSinceStartOfDay() / 1000;
+                    filterValue.str2 = "SsE";
                 }
                 break;
             }
@@ -152,15 +152,15 @@ CSearch::CSearch(QString searchstring)
                 QDateTime time1a = QLocale::system().toDateTime(filterValueStringFirstPart, df);
                 if(time1a.isValid())
                 {
-                    filterValue.value1=time1a.toSecsSinceEpoch();
-                    filterValue.str1="SsE";
+                    filterValue.value1 = time1a.toSecsSinceEpoch();
+                    filterValue.str1 = "SsE";
                 }
 
-                QDateTime time1b=QLocale::c().toDateTime(filterValueStringFirstPart, df);
+                QDateTime time1b = QLocale::c().toDateTime(filterValueStringFirstPart, df);
                 if(time1b.isValid())
                 {
-                    filterValue.value1=time1b.toSecsSinceEpoch();
-                    filterValue.str1="SsE";
+                    filterValue.value1 = time1b.toSecsSinceEpoch();
+                    filterValue.str1 = "SsE";
                 }
 
                 if(time1a.isValid() || time1b.isValid())
@@ -168,15 +168,15 @@ CSearch::CSearch(QString searchstring)
                     QDateTime time2a = QLocale::system().toDateTime(filterValueStringSecondPart, df);
                     if(time2a.isValid())
                     {
-                        filterValue.value2=time2a.toSecsSinceEpoch();
-                        filterValue.str2="SsE";
+                        filterValue.value2 = time2a.toSecsSinceEpoch();
+                        filterValue.str2 = "SsE";
                     }
 
-                    QDateTime time2b=QLocale::c().toDateTime(filterValueStringSecondPart, df);
+                    QDateTime time2b = QLocale::c().toDateTime(filterValueStringSecondPart, df);
                     if(time2b.isValid())
                     {
-                        filterValue.value2=time2b.toSecsSinceEpoch();
-                        filterValue.str2="SsE";
+                        filterValue.value2 = time2b.toSecsSinceEpoch();
+                        filterValue.str2 = "SsE";
                     }
                     break;
                 }
@@ -200,29 +200,29 @@ CSearch::CSearch(QString searchstring)
             {
                 if(numericArguments.cap(1) != "")     //to avoid removal of NOFLOAT
                 {
-                    filterValue.value1=numericArguments.cap(1).toFloat();
+                    filterValue.value1 = numericArguments.cap(1).toFloat();
                 }
 
-                filterValue.str1=numericArguments.cap(2);
+                filterValue.str1 = numericArguments.cap(2);
 
                 if(numericArguments.cap(3) != "")     //to avoid removal of NOFLOAT
                 {
-                    filterValue.value2=numericArguments.cap(3).toFloat();
+                    filterValue.value2 = numericArguments.cap(3).toFloat();
                 }
 
-                filterValue.str2=numericArguments.cap(4);
+                filterValue.str2 = numericArguments.cap(4);
             }
         }
         if(filterValue.toString().isEmpty())
         {
             filterValue.str1 = filterValueString;
         }
-        search.searchValue=filterValue;
+        search.searchValue = filterValue;
     }
     improveQuery();
     if(search.property == eSearchPropertyNoMatch)
     {
-        syntaxError=true;
+        syntaxError = true;
     }
 }
 
@@ -294,11 +294,11 @@ void CSearch::improveQuery()
     //If the user entered a number with a unit and another number, assume they have the same unit
     if(search.searchValue.str1 != "" && search.searchValue.str2 == "" && search.searchValue.value1 != NOFLOAT && search.searchValue.value2 != NOFLOAT)
     {
-        search.searchValue.str2=search.searchValue.str1;
+        search.searchValue.str2 = search.searchValue.str1;
     }
     if(search.searchValue.str1 == "" && search.searchValue.str2 != "" && search.searchValue.value1 != NOFLOAT && search.searchValue.value2 != NOFLOAT)
     {
-        search.searchValue.str1=search.searchValue.str2;
+        search.searchValue.str1 = search.searchValue.str2;
     }
 
     //Try to guess what property the user meant when there is no match. I.e. make "shorter than 5km" work
@@ -344,14 +344,14 @@ void CSearch::improveQuery()
             //Try to catch if user only entered a year. Not done in regular detecting as it could be a speed or so.
             if(search.searchValue.str1.isEmpty())
             {
-                search.searchValue.value1=QDateTime(QDate(search.searchValue.value1, 1, 1)).toSecsSinceEpoch();
-                search.searchValue.str1="SsE";
+                search.searchValue.value1 = QDateTime(QDate(search.searchValue.value1, 1, 1)).toSecsSinceEpoch();
+                search.searchValue.str1 = "SsE";
             }
             //Assume you want 2012 and not 1912 (qt defaults to 19xx)
             else if(QDateTime::fromSecsSinceEpoch(search.searchValue.value1).addYears(100) <=  QDateTime::currentDateTime())
             {
-                search.searchValue.value1=QDateTime::fromSecsSinceEpoch(search.searchValue.value1).addYears(100).toSecsSinceEpoch();
-                search.searchValue.str1="SsE";
+                search.searchValue.value1 = QDateTime::fromSecsSinceEpoch(search.searchValue.value1).addYears(100).toSecsSinceEpoch();
+                search.searchValue.str1 = "SsE";
             }
         }
         if(search.searchValue.value2 != NOFLOAT)
@@ -359,23 +359,23 @@ void CSearch::improveQuery()
             //Try to catch if user only entered a year. Not done in regular detecting as it could be a speed or so.
             if(search.searchValue.str2.isEmpty())
             {
-                search.searchValue.value2=QDateTime(QDate(search.searchValue.value2, 1, 1)).toSecsSinceEpoch();
-                search.searchValue.str2="SsE";
+                search.searchValue.value2 = QDateTime(QDate(search.searchValue.value2, 1, 1)).toSecsSinceEpoch();
+                search.searchValue.str2 = "SsE";
             }
             //Assume you want 2012 and not 1912 (qt defaults to 19xx)
             else if(QDateTime::fromSecsSinceEpoch(search.searchValue.value2).addYears(100) <=  QDateTime::currentDateTime())
             {
-                search.searchValue.value2=QDateTime::fromSecsSinceEpoch(search.searchValue.value2).addYears(100).toSecsSinceEpoch();
-                search.searchValue.str2="SsE";
+                search.searchValue.value2 = QDateTime::fromSecsSinceEpoch(search.searchValue.value2).addYears(100).toSecsSinceEpoch();
+                search.searchValue.str2 = "SsE";
             }
         }
 
         //If the user searched for 'date equals' change it to 'between 0h and 24h of the day queried'
         if(search.searchType == eSearchTypeEquals)
         {
-            search.searchType=eSearchTypeBetween;
-            search.searchValue.str2="SsE";
-            search.searchValue.value2=search.searchValue.value1 + 24*60*60;
+            search.searchType = eSearchTypeBetween;
+            search.searchValue.str2 = "SsE";
+            search.searchValue.value2 = search.searchValue.value1 + 24 * 60 * 60;
         }
     }
 }

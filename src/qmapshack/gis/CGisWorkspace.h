@@ -435,6 +435,11 @@ public:
 
     void tagItemsByKey(const QList<IGisItem::key_t>& keys);
 
+    const CSearch& getCurrentSearch() const
+    {
+        return currentSearch;
+    }
+
 signals:
     void sigChanged();
 
@@ -463,7 +468,7 @@ private:
         the mouse object to find items close by for highlight.
      */
     IGisItem::key_t keyWksSelection;
-
+    CSearch currentSearch;
 
     enum tags_hidden_e
     {

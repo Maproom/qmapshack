@@ -55,7 +55,7 @@
 CGisWorkspace * CGisWorkspace::pSelf = nullptr;
 
 CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent), currentSearch("")
 {
     pSelf = this;
     setupUi(this);
@@ -143,6 +143,11 @@ void CGisWorkspace::loadGisProject(const QString& filename)
         }
 
         treeWks->blockSignals(false);
+
+        if(item != nullptr)
+        {
+            item->setWorkspaceFilter(currentSearch);
+        }
     }
 
     emit sigChanged();
@@ -161,6 +166,7 @@ void CGisWorkspace::slotSetGisLayerOpacity(int val)
 
 void CGisWorkspace::slotSearch(const CSearch& currentSearch)
 {
+    this->currentSearch = currentSearch;
     {
         CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
         QMutexLocker lock(&IGisItem::mutexItems);

@@ -19,6 +19,7 @@
 #define CSEARCHLINEEDIT_H
 
 #include <QLineEdit>
+class QTimer;
 class IGisProject;
 class CSearch;
 class QTreeWidgetItem;
@@ -57,6 +58,7 @@ private:
     IGisProject * connectedProject = nullptr;
     QTreeWidgetItem * searchItem = nullptr;
 
+    QTimer * searchCreationTimer = nullptr;
     static CSearchExplanationDialog* explanationDlg;
 };
 

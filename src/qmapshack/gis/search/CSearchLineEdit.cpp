@@ -21,12 +21,19 @@
 #include "gis/search/CSearch.h"
 #include <canvas/CCanvas.h>
 #include <QMenu>
+#include <QTimer>
 
 CSearchExplanationDialog* CSearchLineEdit::explanationDlg = nullptr;
 
 CSearchLineEdit::CSearchLineEdit(QWidget *parent)
     : QLineEdit (parent)
 {
+    searchCreationTimer = new QTimer(this);
+    searchCreationTimer->setSingleShot(true);
+    connect(searchCreationTimer, &QTimer::timeout, this, [this] {
+        slotCreateSearch(text());
+    });
+
     actionClearFilter = new QAction(QIcon(":/icons/32x32/Filter.png"), tr("Clear Filter"), this);
     actionHelp = new QAction(QIcon(":/icons/32x32/CSrcUnknown.png"), tr("Open Help Window"), this);
     actionSetupFilter = new QAction(QIcon(":/icons/32x32/Apply.png"), tr("Setup Filter"), this);
@@ -50,7 +57,12 @@ CSearchLineEdit::CSearchLineEdit(QWidget *parent)
     connect(actionCaseSensitive, &QAction::triggered, this, &CSearchLineEdit::slotCaseSensitive);
     connect(actionHelp, &QAction::triggered, this, &CSearchLineEdit::slotSearchHelp);
     connect(actionClearFilter, &QAction::triggered, this, &CSearchLineEdit::slotClearFilter);
-    connect(this, &CSearchLineEdit::textChanged, this, &CSearchLineEdit::slotCreateSearch);
+
+    //make sure that the search is not conducted after every letter typed, but only if the user stops typing.
+    //One second is pretty long, but it may allow the user a second of thinking before the lineEdit blocks for filtering
+    connect(this, &CSearchLineEdit::textChanged, this, [this] {
+        searchCreationTimer->start(1000);
+    });
 
     setPlaceholderText(tr("start typing..."));
     setToolTip(tr("Filter: Start to type and the list will be reduced to matching items. An example would be \"date between 2010 and 2012\""));
@@ -155,7 +167,6 @@ void CSearchLineEdit::slotCaseSensitive(bool yes)
 void CSearchLineEdit::slotCreateSearch(const QString& str)
 {
     actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
-
     CSearch currentSearch(str);
 
     //test whether syntax errors occured and show error

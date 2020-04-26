@@ -264,7 +264,6 @@ void CDemList::slotDemHonk()
     QDir dir(demPath);
 
     saveResource("World_Online_SRTM900.wcs", dir);
-    saveResource("Europe_Online_DEM25.vrt", dir);
 
     CDemDraw::setupDemPath(demPath);
 }

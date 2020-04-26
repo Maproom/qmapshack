@@ -945,7 +945,6 @@
         <file>map/WorldTopo.wmts</file>
         <file>map/World.gemf</file>
         <file>dem/World_Online_SRTM900.wcs</file>
-        <file>dem/Europe_Online_DEM25.vrt</file>
         <file>pics/about.png</file>
         <file>pics/compass.png</file>
         <file>pics/noMap256x256.png</file>

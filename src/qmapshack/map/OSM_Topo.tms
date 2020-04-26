@@ -15,7 +15,7 @@
   <MaxZoomLevel>9</MaxZoomLevel>
  </Layer>
  <RawHeader>
-   <Value name="User-Agent">Whatever</Value>
+   <Value name="User-Agent">QMapShack</Value>
  </RawHeader>
  <Copyright>Map data: (c) OpenStreetMap contributors, ODbL | Rendering: (c) OpenTopoMap, CC-BY-SA | Trails by tile.waymarkedtrails.org </Copyright>
 </TMS>

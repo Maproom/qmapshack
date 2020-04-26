@@ -4,6 +4,7 @@ V1.XX.X
 [QMS-134] Rework track range selection from scratch
 [QMS-135] Improved French translation
 [QMS-140] Enhancements for OS X release
+[QMS-146] Fix issues with built-in online maps
 [QMS-148] Misplaced track info window
 [QMS-151] Missing tooltip in route toolbar
 [QMS-153] Improved French translation

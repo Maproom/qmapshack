@@ -47,7 +47,8 @@
      <item>
       <widget class="QToolButton" name="toolSetMinScale">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>Click to use the current zoom as maximum 
+zoom-in to display the map.</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -71,7 +72,11 @@
      <item>
       <widget class="CScaleLabel" name="labelScale">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>Control the zoom range for which the map is 
+displayed. Use the two buttons left  and right 
+to define the actual zoom as either maximum 
+zoom-in or zoom-out.
+</string>
        </property>
        <property name="text">
         <string/>
@@ -84,7 +89,8 @@
      <item>
       <widget class="QToolButton" name="toolSetMaxScale">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>Click to use the current zoom as maximum 
+zoom-out to display the map.</string>
        </property>
        <property name="text">
         <string>...</string>

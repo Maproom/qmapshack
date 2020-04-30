@@ -11,6 +11,7 @@ V1.XX.X
 [QMS-156] Request to unmount systemdrive on startup
 [QMS-164] Workspace filter is not applied to newly loaded projects
 [QMS-165] OSX: GIS files not loaded when clicked
+[QMS-173] Misleading help text for DEM range slider
 
 V1.14.1
 [QMS-37] Inconsistent use of time zones

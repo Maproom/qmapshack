@@ -64,9 +64,16 @@ void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVa
     QDBusInterface * driveIface = new QDBusInterface("org.freedesktop.UDisks2", drive_object.path(), "org.freedesktop.UDisks2.Drive", QDBusConnection::systemBus(), this);
     QString vendor = driveIface->property("Vendor").toString();
     QString model  = driveIface->property("Model").toString();
+    bool removable = driveIface->property("Removable").toBool();
 
     delete blockIface;
     delete driveIface;
+
+    // GPS device are always removable
+    if(!removable)
+    {
+        return;
+    }
 
 #if !defined(Q_OS_FREEBSD)
 // currently bsdisks does not report model or vendor

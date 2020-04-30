@@ -8,6 +8,7 @@ V1.XX.X
 [QMS-148] Misplaced track info window
 [QMS-151] Missing tooltip in route toolbar
 [QMS-153] Improved French translation
+[QMS-156] Request to unmount systemdrive on startup
 [QMS-165] OSX: GIS files not loaded when clicked
 
 V1.14.1

@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-style:k&r; c-basic-offset:4; -*- */
 /**********************************************************************************************
-    Copyright (C) 2008 Albrecht Dre <albrecht.dress@arcor.de>
+    Copyright (C) 2008 Albrecht Dress <albrecht.dress@arcor.de>
 
     This file contains macros for platform-independant access of data stored in little-endian
     format.

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 
 #include "CAbout.h"
 #include "version.h"
+#include "contributors.h"
 
 #include <gdal.h>
 #include <proj_api.h>
@@ -54,6 +55,8 @@ CAbout::CAbout(QWidget *parent)
     labelNoDBus->setText(tr("(no DBUS: device detection and handling disabled)"));
     #endif
 #endif
+
+    labelContributors->setText(contributors);
 }
 
 CAbout::~CAbout()

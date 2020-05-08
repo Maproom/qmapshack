@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2008 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2008 Oliver Eichler <oliver.eichler@gmx.de>
                   2019 Johannes Zellner johannes@zellner.org
 
     This program is free software; you can redistribute it and/or modify

@@ -320,83 +320,6 @@
       </layout>
      </item>
      <item>
-      <widget class="Line" name="line_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_19">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Win64:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="label_21">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>OS X:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="label_20">
-         <property name="text">
-          <string>Helmut Schmidt</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QLabel" name="label_22">
-         <property name="text">
-          <string>Ivo Kronenberg</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QLabel" name="label_24">
-         <property name="text">
-          <string>&lt;b&gt;Binaries:&lt;/b&gt;</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_23">
-       <property name="text">
-        <string>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="Line" name="line_4">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -406,16 +329,14 @@
      <item>
       <widget class="QLabel" name="label_25">
        <property name="text">
-        <string>&lt;b&gt;Contributors:&lt;/b&gt;</string>
+        <string>&lt;b&gt;Contributors to the code:&lt;/b&gt;</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_26">
+      <widget class="QLabel" name="labelContributors">
        <property name="text">
-        <string>Christian Eichler (qms@christian-eichler.de)
-Ivo Kronenberg
-Norbert Truchsess (norbert.truchsess@t-online.de)</string>
+        <string>-</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>

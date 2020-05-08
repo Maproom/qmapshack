@@ -374,6 +374,7 @@ set( HDRS
     CMainWindow.h
     CSingleInstanceProxy.h
     GeoMath.h
+    contributors.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/CCanvasSelect.h

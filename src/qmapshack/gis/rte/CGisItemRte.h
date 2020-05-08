@@ -1,7 +1,7 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
-    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
-    Copyright (C) 2019 Henri Hornburg hrnbg@t-online.de
+    Copyright (C) 2014 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2017 Norbert Truchsess <norbert.truchsess@t-online.de>
+    Copyright (C) 2019 Henri Hornburg <hrnbg@t-online.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

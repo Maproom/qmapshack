@@ -1,0 +1,12 @@
+constexpr auto contributors = ""
+"Oliver Eichler, "
+"Michel Durand, "
+"Digia Plc and/or its subsidiaries, "
+"Christian Eichler, "
+"Joerg Wunsch, "
+"Henri Hornburg, "
+"Ivo Kronenberg, "
+"Peter Schumann, "
+"Norbert Truchsess, "
+"Albrecht Dress, "
+"";

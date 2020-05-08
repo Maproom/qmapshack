@@ -1,6 +1,6 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
-    Copyright (C) 2020 Henri Hornburg hrnbg@t-online.de
+    Copyright (C) 2014 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2020 Henri Hornburg <hrnbg@t-online.de>
 
 
     This program is free software: you can redistribute it and/or modify

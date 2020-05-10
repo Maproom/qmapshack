@@ -56,7 +56,6 @@ private slots:
 private:
     virtual ~CRouterRoutino();
     void buildDatabaseList();
-    QList<QStringList> buildDatabasePrefixList();
     void freeDatabaseList();
     void updateHelpText();
     QString xlateRoutinoError(int err);

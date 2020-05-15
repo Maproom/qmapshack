@@ -29,9 +29,7 @@
 #include <QtWidgets>
 #include <routino.h>
 
-
 QPointer<CProgressDialog> CRouterRoutino::progress;
-
 
 int ProgressFunc(double complete)
 {
@@ -64,22 +62,15 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     comboMode->addItem(tr("Shortest"));
     comboMode->addItem(tr("Quickest"));
 
-    int res = 0;
-    IAppSetup *setup = IAppSetup::getPlatformInstance();
-    res = Routino_ParseXMLProfiles(setup->routinoPath("profiles.xml").toUtf8());
-    if(res)
-    {
-        QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
-        return;
-    }
 
+    IAppSetup *setup = IAppSetup::getPlatformInstance();
+    int res = 0;
     res = Routino_ParseXMLTranslations(setup->routinoPath("translations.xml").toUtf8());
     if(res)
     {
         QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
         return;
     }
-
     comboProfile->addItem(tr("Foot"),       "foot");
     comboProfile->addItem(tr("Horse"),      "horse");
     comboProfile->addItem(tr("Wheelchair"), "wheelchair");
@@ -233,6 +224,11 @@ void CRouterRoutino::buildDatabaseList()
     QRegExp re("(.*)-segments.mem");
     freeDatabaseList();
 
+    // initialise
+    currentProfilesPath = "";
+
+    IAppSetup *setup = IAppSetup::getPlatformInstance();
+
     for(const QString &path : dbPaths)
     {
         QDir dir(path);
@@ -248,19 +244,49 @@ void CRouterRoutino::buildDatabaseList()
                 continue;
             }
 
+            // qDebug() << "buildDatabase" << prefix;
+
 #ifdef Q_OS_WIN
             Routino_Database * data = Routino_LoadDatabase(dir.absolutePath().toLocal8Bit(), prefix.toLocal8Bit());
 #else
             Routino_Database * data = Routino_LoadDatabase(dir.absolutePath().toUtf8(), prefix.toUtf8());
 #endif
-            if(data)
+            qDebug() << "Loaded Routino DB" << dir.absolutePath().toUtf8().data() << "  " << prefix.toUtf8().data();
+
+            if(data == nullptr)
             {
-                comboDatabase->addItem(prefix.replace("_", " "), quint64(data));
+                QMessageBox::critical(this, "Routino Load...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
+                continue;
             }
-            else
+            /* determine the profile to use for each database*/
+            QVariantMap dmap;
+            dmap["db"] = QVariant ((qulonglong)data);
+
+            /* check possible profiles.xml locations and keep the first active one. */
+            dmap["profilesPath"] = "";
+            QStringList profilesPaths = {
+                dir.filePath(prefix+"-profiles.xml"),
+                dir.filePath("profiles.xml"),
+                setup->routinoPath("profiles.xml").toUtf8()
+            };
+            for(const QString& profilePath : profilesPaths)
             {
-                QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
+                QFileInfo pinfo = QFileInfo(profilePath);
+                if( pinfo.isReadable())
+                {
+                    dmap["profilesPath"] = pinfo.filePath();
+                    break;
+                }
             }
+            if( dmap["profilesPath"].toString().length() == 0)
+            {
+                QMessageBox::critical(this, "Routino...","Could not find a profiles XML file in expected folders. Routing will not function", QMessageBox::Ok);
+                return;
+            }
+
+            qDebug() << "Profile ... Using \n" << dmap["prefixpath"].toString();
+
+            comboDatabase->addItem(prefix.replace("_", " "), dmap);
         }
     }
 }
@@ -269,10 +295,27 @@ void CRouterRoutino::freeDatabaseList()
 {
     for(int i = 0; i < comboDatabase->count(); i++)
     {
-        Routino_Database * data = (Routino_Database*)comboDatabase->itemData(i, Qt::UserRole).toULongLong();
+        QVariantMap map = comboDatabase->itemData(i,Qt::UserRole).toMap();
+        Routino_Database * data = (Routino_Database*)(map["db"].toULongLong());
         Routino_UnloadDatabase(data);
     }
     comboDatabase->clear();
+}
+
+void CRouterRoutino::loadProfiles(QString profilesPath)
+{
+    // load xml profiles if it is new before setting the profile!
+    if( currentProfilesPath != profilesPath)
+    {
+        currentProfilesPath = profilesPath;
+        int res = 0;
+        res = Routino_ParseXMLProfiles(profilesPath.toStdString().data());
+        if(res)
+        {
+            QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
+            throw QString();
+        }
+    }
 }
 
 void CRouterRoutino::updateHelpText()
@@ -300,12 +343,16 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         {
             throw QString();
         }
-
-        Routino_Database * data = (Routino_Database*)comboDatabase->currentData(Qt::UserRole).toULongLong();
+        int res = 0;
+        QVariantMap map = comboDatabase->currentData(Qt::UserRole).toMap();
+        Routino_Database * data = (Routino_Database*)(map["db"].toULongLong());
         if(nullptr == data)
         {
             throw QString();
         }
+
+
+        loadProfiles(map["profilesPath"].toString());
 
         rte->reset();
 
@@ -315,7 +362,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
         Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
 
-        int res = Routino_ValidateProfile(data, profile);
+        res = Routino_ValidateProfile(data, profile);
         if(res != 0)
         {
             throw xlateRoutinoError(Routino_errno);
@@ -388,11 +435,17 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
     try
     {
+        QVariantMap map = comboDatabase->currentData(Qt::UserRole).toMap();
+        Routino_Database * data = (Routino_Database*)(map["db"].toULongLong());
+        /*
         Routino_Database * data = (Routino_Database*)comboDatabase->currentData(Qt::UserRole).toULongLong();
+        */
         if(nullptr == data)
         {
             throw QString();
         }
+
+        loadProfiles(map["profilesPath"].toString());
 
         QString strProfile      = comboProfile->currentData(Qt::UserRole).toString();
         QString strLanguage     = comboLanguage->currentData(Qt::UserRole).toString();
@@ -400,7 +453,8 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
         Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
 
-        int res = Routino_ValidateProfile(data, profile);
+        int res = 0;
+        res = Routino_ValidateProfile(data, profile);
         if(res != 0)
         {
             throw xlateRoutinoError(Routino_errno);

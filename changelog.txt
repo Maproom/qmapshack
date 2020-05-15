@@ -1,4 +1,6 @@
 V1.XX.X
+[QMS-158] Change Routino search for [prefix-]profiles.xml.
+Searches routino database path (user defined and writable) and default global location (not user writable). Allows user defined profiles.
 [QMS-68] Route Optimization
 [QMS-132] DEMs: Make the scale range control cut off not only rendering but also loading or requesting the data.
 [QMS-134] Rework track range selection from scratch

@@ -295,7 +295,7 @@ void CRouterRoutino::freeDatabaseList()
 {
     for(int i = 0; i < comboDatabase->count(); i++)
     {
-        QVariantMap map = comboDatabase->currentData(Qt::UserRole).toMap();
+        QVariantMap map = comboDatabase->itemData(i,Qt::UserRole).toMap();
         Routino_Database * data = (Routino_Database*)(map["db"].toULongLong());
         Routino_UnloadDatabase(data);
     }

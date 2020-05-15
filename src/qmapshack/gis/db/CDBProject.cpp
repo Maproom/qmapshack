@@ -20,6 +20,7 @@
 #include "gis/CGisDatabase.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/db/CDBProject.h"
+#include "gis/db/CResolveDatabaseConflict.h"
 #include "gis/db/CSelectSaveAction.h"
 #include "gis/db/IDB.h"
 #include "gis/db/macros.h"
@@ -297,28 +298,8 @@ int CDBProject::checkForAction2(IGisItem * item, quint64 &itemId, QString& hashI
             "your version and take the one from the database"
             ).arg(item->getNameEx()).arg(user).arg(date);
 
-        QMessageBox msgBox(QMessageBox::Question, tr("Conflict with database..."), msg, QMessageBox::NoButton, CMainWindow::self().getBestWidgetForParent());
-        QAbstractButton* pButClone  = msgBox.addButton(tr("Clone && Save"), QMessageBox::YesRole);
-        QAbstractButton* pButForce  = msgBox.addButton(tr("Force Save"),    QMessageBox::ApplyRole);
-        QAbstractButton* pButUpdate = msgBox.addButton(tr("Take remote"),   QMessageBox::DestructiveRole);
-        msgBox.addButton(QMessageBox::Abort);
-
-        CProgressDialog::setAllVisible(false);
-        msgBox.exec();
-        CProgressDialog::setAllVisible(true);
-
-        if(msgBox.clickedButton() == pButClone)
-        {
-            action = eActionClone;
-        }
-        else if(msgBox.clickedButton() == pButForce)
-        {
-            action = eActionUpdate;
-        }
-        else if(msgBox.clickedButton() == pButUpdate)
-        {
-            action = eActionReload;
-        }
+        CResolveDatabaseConflict dialog (msg, item, action2ForAll, CMainWindow::self().getBestWidgetForParent());
+        action = dialog.getAction();
     }
     else
     {
@@ -675,6 +656,8 @@ bool CDBProject::save(int lastResult)
             CProgressDialog::setAllVisible(true);
         }
     }
+    //Reset choice possible choice the user made for all items
+    action2ForAll = eActionNone;
 
     // serialize metadata of project
     QByteArray data;
@@ -884,6 +867,8 @@ void CDBProject::update()
                 item->updateDecoration(IGisItem::eMarkNotInDB | IGisItem::eMarkChanged, IGisItem::eMarkNone);
             }
         }
+        //Reset choice possible choice the user made for all items
+        action2ForAll = eActionNone;
 
         postStatus(false);
     }

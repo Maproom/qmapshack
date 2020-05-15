@@ -66,6 +66,7 @@ set( SRCS
     gis/db/CExportDatabase.cpp
     gis/db/CExportDatabaseThread.cpp
     gis/db/CLostFoundProject.cpp
+    gis/db/CResolveDatabaseConflict.cpp
     gis/db/CSearchDatabase.cpp
     gis/db/CSelectDBFolder.cpp
     gis/db/CSelectSaveAction.cpp
@@ -415,6 +416,7 @@ set( HDRS
     gis/db/CExportDatabase.h
     gis/db/CExportDatabaseThread.h
     gis/db/CLostFoundProject.h
+    gis/db/CResolveDatabaseConflict.h
     gis/db/CSearchDatabase.h
     gis/db/CSelectDBFolder.h
     gis/db/CSelectSaveAction.h
@@ -736,6 +738,7 @@ set( UIS
     gis/IGisWorkspace.ui
     gis/ISelDevices.ui
     gis/db/IExportDatabase.ui
+    gis/db/IResolveDatabaseConflict.ui
     gis/db/ISearchDatabase.ui
     gis/db/ISelectDBFolder.ui
     gis/db/ISelectSaveAction.ui

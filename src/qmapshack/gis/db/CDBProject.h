@@ -110,6 +110,16 @@ public:
 
     void update();
 
+    enum action_e
+    {
+        eActionNone = 0x00
+        , eActionLink = 0x01
+        , eActionUpdate = 0x02
+        , eActionInsert = 0x04
+        , eActionClone  = 0x08
+        , eActionReload = 0x10
+    };
+
 protected:
     /**
        @brief Setup the items text with the name and suffix
@@ -148,17 +158,9 @@ protected:
         , eReasonConflict   = -3
     };
 
-    enum action_e
-    {
-        eActionNone = 0x00
-        , eActionLink = 0x01
-        , eActionUpdate = 0x02
-        , eActionInsert = 0x04
-        , eActionClone  = 0x08
-        , eActionReload = 0x10
-    };
-
     Qt::CheckState checkState = Qt::Unchecked;
+
+    action_e action2ForAll = eActionNone;
 };
 
 #endif //CDBPROJECT_H

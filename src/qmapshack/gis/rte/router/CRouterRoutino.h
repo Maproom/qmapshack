@@ -57,11 +57,14 @@ private:
     virtual ~CRouterRoutino();
     void buildDatabaseList();
     void freeDatabaseList();
+    void loadProfiles(QString profilesPath);
     void updateHelpText();
     QString xlateRoutinoError(int err);
     static CRouterRoutino * pSelf;
 
     QStringList dbPaths;
+    QString currentProfilesPath;
+
 
     QMutex mutex {QMutex::NonRecursive};
 };

@@ -806,10 +806,17 @@ QString CGisItemTrk::getInfoProgress(const CTrackData::trkpt_t& pt) const
     return QString("%1%2\n%3%4").arg(asc).arg(dsc).arg(dst).arg(mov);
 }
 
-QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& pt1, const CTrackData::trkpt_t& pt2) const
+QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& trkpt1, const CTrackData::trkpt_t& trkpt2) const
 {
     QString val, unit;
     qreal dt = NOFLOAT;
+
+    CTrackData::trkpt_t pt1 = trkpt1;
+    CTrackData::trkpt_t pt2 = trkpt2;
+    if(pt1.idxTotal > pt2.idxTotal)
+    {
+        qSwap(pt1, pt2);
+    }
 
     if(pt1.time.isValid() && pt2.time.isValid())
     {

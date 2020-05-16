@@ -13,6 +13,7 @@ V1.XX.X
 [QMS-165] OSX: GIS files not loaded when clicked
 [QMS-173] Misleading help text for DEM range slider
 [QMS-178] Automate list of code contributors in about dialog
+[QMS-183] Backward range selection causing small issues
 
 V1.14.1
 [QMS-37] Inconsistent use of time zones

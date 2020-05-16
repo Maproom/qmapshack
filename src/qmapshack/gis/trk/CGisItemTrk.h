@@ -222,7 +222,7 @@ public:
     /// get a summary of a selected range
     QString getInfoRange() const;
     /// get a summary of a selected range defined by two track points
-    QString getInfoRange(const CTrackData::trkpt_t& pt1, const CTrackData::trkpt_t& pt2) const;
+    QString getInfoRange(const CTrackData::trkpt_t& trkpt1, const CTrackData::trkpt_t& trkpt2) const;
     /// get a summary for a track point
     QString getInfoTrkPt(const CTrackData::trkpt_t& pt) const;
     /// get a progress summary for a selected track point

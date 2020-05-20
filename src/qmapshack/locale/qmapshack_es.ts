@@ -11593,7 +11593,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../map/IMapOnline.cpp" line="41"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Este mapa requiere soporte de OpenSSL. Sin embargo, debido a restricciones legales en algunos países, OpenSSL no se incluye con QMapShack. Puede consultar la página &lt; a href = &lt; https: //www.openssl.org/community/binaries.html &apos;&gt; OpenSSL Homepage&lt;/a&gt; para obtener los binarios. Hay que copiar libeay32.dll y ssleay32.dll en el directorio del programa QMapShack.</translation>
+        <translation>Este mapa requiere soporte de OpenSSL. Sin embargo, debido a restricciones legales en algunos países, OpenSSL no se incluye con QMapShack. Puede consultar la página &lt; a href = &lt; https://www.openssl.org/community/binaries.html &apos;&gt; OpenSSL Homepage&lt;/a&gt; para obtener los binarios. Hay que copiar libeay32.dll y ssleay32.dll en el directorio del programa QMapShack.</translation>
     </message>
     <message>
         <location filename="../map/IMapOnline.cpp" line="47"/>

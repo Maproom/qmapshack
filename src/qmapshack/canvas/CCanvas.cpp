@@ -267,7 +267,7 @@ void CCanvas::buildHelpText()
                                     "<p>Patient Users:<p>"
                                     "<ul>"
                                     "<li><a href='ShowQuickStart'>Quick Start Guide.</a></li>"
-                                    "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps'>Getting Started.</a></li>"
+                                    "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#add-maps'>Getting Started.</a></li>"
                                     "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem'>Install Maps & DEM</a></li>"
                                     "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem'>Basics Maps & DEM.</a></li>"
                                     "<li><a href='https://github.com/Maproom/qmapshack/wiki/DocMapDemSources'>Sources for Maps</a></li>"

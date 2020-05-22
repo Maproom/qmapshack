@@ -38,7 +38,7 @@ int CRouterOptimization::optimize(SGisLine &line)
         return 0; //There is nothing to optimize
     }
 
-    CProgressDialog progress(CProgressDialog::tr("Optimizing route"), 0, line.length() + 2, nullptr);
+    CProgressDialog progress(tr("Optimizing route"), 0, line.length() + 2, nullptr);
 
     //Optimize using air distance and known distances, since this is much faster than routing, especially brouter
     SGisLine newAirdistanceOrder;

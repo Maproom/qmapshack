@@ -4,17 +4,17 @@
 <context>
     <name>CAbout</name>
     <message>
-        <location filename="../CAbout.cpp" line="43"/>
+        <location filename="../CAbout.cpp" line="44"/>
         <source>%1 (API V%2, expected V%3)</source>
         <translation>%1 (API verze %2, očekávána verze %3)</translation>
     </message>
     <message>
-        <location filename="../CAbout.cpp" line="47"/>
+        <location filename="../CAbout.cpp" line="48"/>
         <source>%1 (API V%2)</source>
         <translation>%1 (API verze %2)</translation>
     </message>
     <message>
-        <location filename="../CAbout.cpp" line="54"/>
+        <location filename="../CAbout.cpp" line="55"/>
         <source>(no DBUS: device detection and handling disabled)</source>
         <translation>(žádné DBUS: zjišťování zařízení a zacházení s ním zakázáno)</translation>
     </message>
@@ -166,7 +166,7 @@
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="262"/>
-        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1570,13 +1570,13 @@ You can modify both parameters to customize the behavior of the filter. For the 
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="428"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2061"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2068"/>
         <source>min.</source>
         <translation>min.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="428"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2061"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2068"/>
         <source>max.</source>
         <translation>max.</translation>
     </message>
@@ -1686,57 +1686,57 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>, Pohyb: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="837"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="844"/>
         <source>, Descent: %1%2</source>
         <translation>, Klesání: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1502"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1515"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1614"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1658"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1851"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1509"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1522"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1621"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1665"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1858"/>
         <source>track</source>
         <translation>Stopa</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1574"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1581"/>
         <source>Track Point Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1575"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1582"/>
         <source>Enter some text to be attached to this track point:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1584"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1591"/>
         <source>Add track point desc.: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1594"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1601"/>
         <source>Changed track point desc.: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1604"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1611"/>
         <source>Removed track point desc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1757"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1764"/>
         <source>Hide point %1.</source>
         <translation>Skrýt bod %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1761"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1768"/>
         <source>Hide points %1..%2.</source>
         <translation>Skrýt body %1  %2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="830"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="842"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="837"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="849"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
@@ -1796,82 +1796,82 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Vzdálenost: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="819"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="826"/>
         <source>Ascent: -</source>
         <translation>Stoupání: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="820"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="827"/>
         <source>Descent: -</source>
         <translation>Klesání: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="825"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="832"/>
         <source>Ascent: %1%2</source>
         <translation>Stoupání: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="847"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="854"/>
         <source>Distance: %1%2</source>
         <translation>Vzdálenost: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="852"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="859"/>
         <source>, Time: %1%2</source>
         <translation>, Čas: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1561"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1568"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Trvale odstraněné body %1 ... %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1804"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1811"/>
         <source>Delete point %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1808"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1815"/>
         <source>Delete points %1..%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1836"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1843"/>
         <source>Show points.</source>
         <translation>Ukázat body.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2561"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2568"/>
         <source>Changed name</source>
         <translation>Změněný název</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2567"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2574"/>
         <source>Changed comment</source>
         <translation>Změněná poznámka</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2573"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2580"/>
         <source>Changed description</source>
         <translation>Změněný popis</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2579"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2586"/>
         <source>Changed links</source>
         <translation>Změněné odkazy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2589"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2596"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Výška bodu %1 byla změněna na %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2612"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2619"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Činnost byla pro celou stopu změněna na &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2643"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2650"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Činnost byla změněna pro oblast (%2...%3) na &apos;%1&apos;.</translation>
     </message>
@@ -2921,37 +2921,37 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="vanished">Použít filtr na</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="229"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="235"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation>&lt;b&gt;Výběr prvků: &lt;/b&gt;Prvek vybrán ze seznamu pracovního prostoru. Klepněte na mapu pro přepnutí zpět do běžného chování při výběru myší.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="692"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="698"/>
         <source>Copy items...</source>
         <translation>Kopírovat prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="722"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="728"/>
         <source>Change waypoint symbols.</source>
         <translation>Změnit značky cestovních bodů.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="964"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="970"/>
         <source>Cut Track...</source>
         <translation>Rozdělit stopu...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="964"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="970"/>
         <source>Do you want to delete the original track?</source>
         <translation>Opravdu chcete smazat původní stopu?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1233"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1239"/>
         <source>Enter new proximity range.</source>
         <translation type="unfinished">Zadat nový poplach kvůli odstupu.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1234"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1240"/>
         <source>Is no-go area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3495,69 +3495,69 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="622"/>
+        <location filename="../CMainWindow.cpp" line="624"/>
         <source>Select folder...</source>
         <translation>Vybrat složku...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1045"/>
+        <location filename="../CMainWindow.cpp" line="1047"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Použít &lt;b&gt;Nabídka → Pohled → Přidat pohled na mapu&lt;/b&gt; k otevření nového pohledu. Nebo &lt;b&gt;Nabídka → Soubor → Nahrát pohled na mapu&lt;/b&gt; k obnovení uložené. Nebo klepněte na &lt;a href=&apos;newview&apos;&gt;sem&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1174"/>
+        <location filename="../CMainWindow.cpp" line="1176"/>
         <source>Ele.: %1%2</source>
         <translation>Výška: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1187"/>
+        <location filename="../CMainWindow.cpp" line="1189"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Sklon: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1203"/>
+        <location filename="../CMainWindow.cpp" line="1205"/>
         <source>[Grid: %1]</source>
         <translation>[Mřížka: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1351"/>
+        <location filename="../CMainWindow.cpp" line="1353"/>
         <source>Load GIS Data...</source>
         <translation>Nahrát data GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1385"/>
+        <location filename="../CMainWindow.cpp" line="1387"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1385"/>
-        <location filename="../CMainWindow.cpp" line="1411"/>
+        <location filename="../CMainWindow.cpp" line="1387"/>
+        <location filename="../CMainWindow.cpp" line="1413"/>
         <source>QMapShack View (*.view)</source>
         <translation>Pohled QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1411"/>
+        <location filename="../CMainWindow.cpp" line="1413"/>
         <source>Select file to load</source>
         <translation>Vybrat soubor k nahrání</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1703"/>
+        <location filename="../CMainWindow.cpp" line="1705"/>
         <source>Rename View...</source>
         <translation>Přejmenovat pohled...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1703"/>
+        <location filename="../CMainWindow.cpp" line="1705"/>
         <source>Enter new name for view</source>
         <translation>Zadejte nový název pohledu</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1853"/>
+        <location filename="../CMainWindow.cpp" line="1855"/>
         <source>Fatal...</source>
         <translation>Kritické...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1854"/>
+        <location filename="../CMainWindow.cpp" line="1856"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack zjistil, že knihovna Proj4 je nainstalována špatně. Chybí překladové tabulky pro promítání EPSG, jež jsou obvykle uloženy v /usr/share/proj. Spojte se, prosím, s údržbářem balíčku ve vaší distribuci, aby to spravil.</translation>
     </message>
@@ -4773,12 +4773,12 @@ y: %4 m/px</translation>
 <context>
     <name>CProgressDialog</name>
     <message>
-        <location filename="../helpers/CProgressDialog.cpp" line="48"/>
+        <location filename="../helpers/CProgressDialog.cpp" line="45"/>
         <source>Elapsed time: %1</source>
         <translation>Uplynulý čas: %1</translation>
     </message>
     <message>
-        <location filename="../helpers/CProgressDialog.cpp" line="136"/>
+        <location filename="../helpers/CProgressDialog.cpp" line="143"/>
         <source>Elapsed time: %1 seconds.</source>
         <translation>Uplynulý čas: %1 sekund.</translation>
     </message>
@@ -5075,50 +5075,50 @@ není platným vymezením soustavy souřadnic
         <translation>Profil: %1, náhradní: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="388"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="512"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="386"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="532"/>
         <source>response is empty</source>
         <translation>Odpověď je prázdná</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="427"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="447"/>
         <source>Bad response from server: %1</source>
         <translation>Špatná odpověď od serveru: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="478"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="498"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Požadavek na stanovení cesty poslán serveru. Počkejte, prosím...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="363"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="481"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="501"/>
         <source>Calculate route with %1</source>
         <translation>Spočítat cestu s %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="374"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="500"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="520"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
         <translation>Tato verze BRouter nepodporuje více než 1 oblast, kam se nedá jít</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="546"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="566"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Špatná odpověď od serveru:&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="536"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="556"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Doba výpočtu: %1 s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="595"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="615"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (verze %1.%2.%3)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="654"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="674"/>
         <source>online</source>
         <translation>Připojeno</translation>
     </message>
@@ -5652,6 +5652,14 @@ není platným vymezením soustavy souřadnic
     </message>
 </context>
 <context>
+    <name>CRouterOptimization</name>
+    <message>
+        <location filename="../gis/rte/router/CRouterOptimization.cpp" line="41"/>
+        <source>Optimizing route</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CRouterRoutino</name>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="83"/>
@@ -6181,594 +6189,605 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="386"/>
-        <location filename="../gis/search/CSearch.cpp" line="418"/>
+        <location filename="../gis/search/CSearch.cpp" line="419"/>
         <source>with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="387"/>
-        <location filename="../gis/search/CSearch.cpp" line="419"/>
+        <location filename="../gis/search/CSearch.cpp" line="420"/>
         <source>contains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="388"/>
-        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>contain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="389"/>
-        <location filename="../gis/search/CSearch.cpp" line="421"/>
+        <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>containing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="390"/>
-        <location filename="../gis/search/CSearch.cpp" line="422"/>
+        <location filename="../gis/search/CSearch.cpp" line="423"/>
         <source>without</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="391"/>
-        <location filename="../gis/search/CSearch.cpp" line="423"/>
+        <location filename="../gis/search/CSearch.cpp" line="424"/>
         <source>shorter than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="392"/>
-        <location filename="../gis/search/CSearch.cpp" line="424"/>
+        <location filename="../gis/search/CSearch.cpp" line="425"/>
         <source>smaller than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="393"/>
-        <location filename="../gis/search/CSearch.cpp" line="425"/>
+        <location filename="../gis/search/CSearch.cpp" line="426"/>
         <source>under</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="394"/>
-        <location filename="../gis/search/CSearch.cpp" line="426"/>
+        <location filename="../gis/search/CSearch.cpp" line="427"/>
         <source>lower than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="395"/>
-        <location filename="../gis/search/CSearch.cpp" line="427"/>
+        <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>earlier than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="396"/>
-        <location filename="../gis/search/CSearch.cpp" line="428"/>
+        <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>before</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="397"/>
-        <location filename="../gis/search/CSearch.cpp" line="429"/>
+        <location filename="../gis/search/CSearch.cpp" line="430"/>
         <source>less than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="399"/>
-        <location filename="../gis/search/CSearch.cpp" line="431"/>
+        <location filename="../gis/search/CSearch.cpp" line="432"/>
         <source>longer than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="400"/>
-        <location filename="../gis/search/CSearch.cpp" line="432"/>
+        <location filename="../gis/search/CSearch.cpp" line="433"/>
         <source>higher than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="401"/>
-        <location filename="../gis/search/CSearch.cpp" line="433"/>
+        <location filename="../gis/search/CSearch.cpp" line="434"/>
         <source>bigger than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="402"/>
-        <location filename="../gis/search/CSearch.cpp" line="434"/>
+        <location filename="../gis/search/CSearch.cpp" line="435"/>
         <source>greater than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="403"/>
-        <location filename="../gis/search/CSearch.cpp" line="435"/>
+        <location filename="../gis/search/CSearch.cpp" line="436"/>
         <source>above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="404"/>
-        <location filename="../gis/search/CSearch.cpp" line="436"/>
+        <location filename="../gis/search/CSearch.cpp" line="437"/>
         <source>over</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="405"/>
-        <location filename="../gis/search/CSearch.cpp" line="437"/>
+        <location filename="../gis/search/CSearch.cpp" line="438"/>
         <source>after</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="406"/>
-        <location filename="../gis/search/CSearch.cpp" line="438"/>
+        <location filename="../gis/search/CSearch.cpp" line="439"/>
         <source>later than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="408"/>
-        <location filename="../gis/search/CSearch.cpp" line="440"/>
+        <location filename="../gis/search/CSearch.cpp" line="441"/>
         <source>regex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="410"/>
-        <location filename="../gis/search/CSearch.cpp" line="442"/>
+        <location filename="../gis/search/CSearch.cpp" line="443"/>
         <source>equals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="411"/>
-        <location filename="../gis/search/CSearch.cpp" line="443"/>
+        <location filename="../gis/search/CSearch.cpp" line="444"/>
+        <source>is</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="412"/>
+        <location filename="../gis/search/CSearch.cpp" line="445"/>
         <source>between</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="418"/>
+        <location filename="../gis/search/CSearch.cpp" line="419"/>
         <source>example: attributes with dog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="419"/>
+        <location filename="../gis/search/CSearch.cpp" line="420"/>
         <source>example: name contains bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>example: keywords contain bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="421"/>
+        <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>example: name containing bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="422"/>
+        <location filename="../gis/search/CSearch.cpp" line="423"/>
         <source>example: name without water</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="423"/>
+        <location filename="../gis/search/CSearch.cpp" line="424"/>
         <source>example: shorter than 5km</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="424"/>
+        <location filename="../gis/search/CSearch.cpp" line="425"/>
         <source>example: area smaller than 5m²</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="425"/>
+        <location filename="../gis/search/CSearch.cpp" line="426"/>
         <source>example: elevation under 1000ft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="426"/>
+        <location filename="../gis/search/CSearch.cpp" line="427"/>
         <source>example: lower than 500m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="427"/>
+        <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>example: date earlier than 2015</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="428"/>
+        <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>example: date before 10.05.2017</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="429"/>
+        <location filename="../gis/search/CSearch.cpp" line="430"/>
         <source>example: ascent less than 500m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="430"/>
+        <location filename="../gis/search/CSearch.cpp" line="431"/>
         <source>example: D &lt; 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="431"/>
+        <location filename="../gis/search/CSearch.cpp" line="432"/>
         <source>example: distance longer than 20mi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="432"/>
+        <location filename="../gis/search/CSearch.cpp" line="433"/>
         <source>example: terrain higher than 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="433"/>
+        <location filename="../gis/search/CSearch.cpp" line="434"/>
         <source>example: area bigger than 50m²</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="434"/>
+        <location filename="../gis/search/CSearch.cpp" line="435"/>
         <source>example: descent greater than 3000ft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="435"/>
+        <location filename="../gis/search/CSearch.cpp" line="436"/>
         <source>example: above 50m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="436"/>
+        <location filename="../gis/search/CSearch.cpp" line="437"/>
         <source>example: elevation over 400m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="437"/>
+        <location filename="../gis/search/CSearch.cpp" line="438"/>
         <source>example: date after 2013</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="438"/>
+        <location filename="../gis/search/CSearch.cpp" line="439"/>
         <source>example: date later than 2015</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="439"/>
+        <location filename="../gis/search/CSearch.cpp" line="440"/>
         <source>example: T &gt; 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="440"/>
+        <location filename="../gis/search/CSearch.cpp" line="441"/>
         <source>example: size regex (regular|large)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="441"/>
+        <location filename="../gis/search/CSearch.cpp" line="442"/>
         <source>example: size = micro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="442"/>
+        <location filename="../gis/search/CSearch.cpp" line="443"/>
         <source>example: activity equals bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="443"/>
+        <location filename="../gis/search/CSearch.cpp" line="444"/>
+        <source>example: status is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="445"/>
         <source>example: length between 20km and 20mi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="451"/>
+        <location filename="../gis/search/CSearch.cpp" line="453"/>
         <source>name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="452"/>
+        <location filename="../gis/search/CSearch.cpp" line="454"/>
         <source>full text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="453"/>
+        <location filename="../gis/search/CSearch.cpp" line="455"/>
         <source>elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="454"/>
+        <location filename="../gis/search/CSearch.cpp" line="456"/>
         <source>date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="455"/>
+        <location filename="../gis/search/CSearch.cpp" line="457"/>
         <source>comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="456"/>
+        <location filename="../gis/search/CSearch.cpp" line="458"/>
         <source>description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="457"/>
+        <location filename="../gis/search/CSearch.cpp" line="459"/>
         <source>rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="458"/>
+        <location filename="../gis/search/CSearch.cpp" line="460"/>
         <source>keywords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="461"/>
+        <location filename="../gis/search/CSearch.cpp" line="463"/>
         <source>area</source>
         <translation type="unfinished">Oblast</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="464"/>
+        <location filename="../gis/search/CSearch.cpp" line="466"/>
         <source>difficulty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="466"/>
+        <location filename="../gis/search/CSearch.cpp" line="468"/>
         <source>terrain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="467"/>
+        <location filename="../gis/search/CSearch.cpp" line="469"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="468"/>
+        <location filename="../gis/search/CSearch.cpp" line="470"/>
         <source>positive attributes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="469"/>
+        <location filename="../gis/search/CSearch.cpp" line="471"/>
         <source>non-negated attributes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="470"/>
+        <location filename="../gis/search/CSearch.cpp" line="472"/>
         <source>negated attributes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="471"/>
+        <location filename="../gis/search/CSearch.cpp" line="473"/>
         <source>size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="472"/>
+        <location filename="../gis/search/CSearch.cpp" line="474"/>
         <source>GCCode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="473"/>
+        <location filename="../gis/search/CSearch.cpp" line="475"/>
         <source>GCName</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="474"/>
+        <location filename="../gis/search/CSearch.cpp" line="476"/>
         <source>status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="479"/>
+        <location filename="../gis/search/CSearch.cpp" line="481"/>
         <source>distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="480"/>
+        <location filename="../gis/search/CSearch.cpp" line="482"/>
         <source>length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="481"/>
+        <location filename="../gis/search/CSearch.cpp" line="483"/>
         <source>ascent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="482"/>
+        <location filename="../gis/search/CSearch.cpp" line="484"/>
         <source>elevation gain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="483"/>
+        <location filename="../gis/search/CSearch.cpp" line="485"/>
         <source>descent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="484"/>
+        <location filename="../gis/search/CSearch.cpp" line="486"/>
         <source>min elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="485"/>
+        <location filename="../gis/search/CSearch.cpp" line="487"/>
         <source>minimal elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="486"/>
+        <location filename="../gis/search/CSearch.cpp" line="488"/>
         <source>max elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="487"/>
+        <location filename="../gis/search/CSearch.cpp" line="489"/>
         <source>maximal elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="488"/>
+        <location filename="../gis/search/CSearch.cpp" line="490"/>
         <source>max speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="489"/>
+        <location filename="../gis/search/CSearch.cpp" line="491"/>
         <source>maximal speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="490"/>
+        <location filename="../gis/search/CSearch.cpp" line="492"/>
         <source>min speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="491"/>
+        <location filename="../gis/search/CSearch.cpp" line="493"/>
         <source>minimal speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="492"/>
+        <location filename="../gis/search/CSearch.cpp" line="494"/>
         <source>average speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="493"/>
+        <location filename="../gis/search/CSearch.cpp" line="495"/>
         <source>activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="494"/>
+        <location filename="../gis/search/CSearch.cpp" line="496"/>
         <source>total time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="495"/>
+        <location filename="../gis/search/CSearch.cpp" line="497"/>
         <source>duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="496"/>
+        <location filename="../gis/search/CSearch.cpp" line="498"/>
         <source>time moving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="505"/>
+        <location filename="../gis/search/CSearch.cpp" line="507"/>
         <source>searches the name of the item. For Geocaches this is &quot;Name - GCCode&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="506"/>
+        <location filename="../gis/search/CSearch.cpp" line="508"/>
         <source>searches the full text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="507"/>
+        <location filename="../gis/search/CSearch.cpp" line="509"/>
         <source>searches the elevation. For items consisting of multiple points the minimum and the maximum is used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="508"/>
+        <location filename="../gis/search/CSearch.cpp" line="510"/>
         <source>searches the Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="509"/>
+        <location filename="../gis/search/CSearch.cpp" line="511"/>
         <source>searches the Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="510"/>
+        <location filename="../gis/search/CSearch.cpp" line="512"/>
         <source>searches the Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="511"/>
+        <location filename="../gis/search/CSearch.cpp" line="513"/>
         <source>searches the Keywords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="512"/>
+        <location filename="../gis/search/CSearch.cpp" line="514"/>
         <source>compares the Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="515"/>
+        <location filename="../gis/search/CSearch.cpp" line="517"/>
         <source>searches the area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="518"/>
+        <location filename="../gis/search/CSearch.cpp" line="520"/>
         <source>searches the difficulty rating of a geocache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="519"/>
+        <location filename="../gis/search/CSearch.cpp" line="521"/>
         <source>searches the terrain rating of a geocache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="520"/>
+        <location filename="../gis/search/CSearch.cpp" line="522"/>
         <source>searches the translated meanings of the non-negated attributes (Those not crossed out)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="521"/>
+        <location filename="../gis/search/CSearch.cpp" line="523"/>
         <source>searches the translated meanings of the negated attributes (Those crossed out)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="522"/>
+        <location filename="../gis/search/CSearch.cpp" line="524"/>
         <source>searches the size of a geocache. (micro, small, regular, large)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="523"/>
+        <location filename="../gis/search/CSearch.cpp" line="525"/>
         <source>searches the GCCode of a geocache.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="524"/>
+        <location filename="../gis/search/CSearch.cpp" line="526"/>
         <source>searches the Name of a geocache.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="525"/>
+        <location filename="../gis/search/CSearch.cpp" line="527"/>
         <source>searches the status of a geocache. (available, not available, archived)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="530"/>
+        <location filename="../gis/search/CSearch.cpp" line="532"/>
         <source>searches the distance covered by a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="531"/>
+        <location filename="../gis/search/CSearch.cpp" line="533"/>
         <source>searches the total ascent in a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="532"/>
+        <location filename="../gis/search/CSearch.cpp" line="534"/>
         <source>searches the total descent in a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="533"/>
+        <location filename="../gis/search/CSearch.cpp" line="535"/>
         <source>searches the minimal elevation in a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="534"/>
+        <location filename="../gis/search/CSearch.cpp" line="536"/>
         <source>searches the maximal elevation in a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="535"/>
+        <location filename="../gis/search/CSearch.cpp" line="537"/>
         <source>searches the maximal speed in a track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="536"/>
+        <location filename="../gis/search/CSearch.cpp" line="538"/>
         <source>searches the minimal speed in a track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="537"/>
+        <location filename="../gis/search/CSearch.cpp" line="539"/>
         <source>searches the average speed in a track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="538"/>
+        <location filename="../gis/search/CSearch.cpp" line="540"/>
         <source>searches the activity of a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="539"/>
+        <location filename="../gis/search/CSearch.cpp" line="541"/>
         <source>searches the total time spent on a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="540"/>
+        <location filename="../gis/search/CSearch.cpp" line="542"/>
         <source>searches the time spent moving on a track</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6862,83 +6881,83 @@ For configuration you need to know your Android device&apos;s IP address or it&a
 <context>
     <name>CSearchLineEdit</name>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="30"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="37"/>
         <source>Clear Filter</source>
         <translation type="unfinished">Vyprázdnit filtr</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="31"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="38"/>
         <source>Open Help Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="32"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="39"/>
         <source>Setup Filter</source>
         <translation type="unfinished">Nastavit filtr</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="33"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="40"/>
         <source>Error parsing search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="34"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="41"/>
         <source>Auto selected property</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="36"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="43"/>
         <source>Name Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="38"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="45"/>
         <source>Complete Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="40"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="47"/>
         <source>Case Sensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="55"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="67"/>
         <source>start typing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="56"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="68"/>
         <source>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="70"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="82"/>
         <source>Apply filter to</source>
         <translation type="unfinished">Použít filtr na</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="73"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="85"/>
         <source>Case sensitivity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="167"/>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="171"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="178"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="182"/>
         <source>Error parsing search.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="167"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="178"/>
         <source>Continuing with search for match in names</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="171"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="182"/>
         <source>Continuing with search for match in full text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="182"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="193"/>
         <source>Automatically set the property, please make sure the results are correct.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8096,7 +8115,17 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="442"/>
+        <location filename="../IAbout.ui" line="332"/>
+        <source>&lt;b&gt;Contributors to the code:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IAbout.ui" line="339"/>
+        <source>-</source>
+        <translation type="unfinished">-</translation>
+    </message>
+    <message>
+        <location filename="../IAbout.ui" line="363"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</translation>
     </message>
@@ -8121,24 +8150,20 @@ line %2, column %3:
         <translation>Španělština:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="340"/>
         <source>Win64:</source>
-        <translation>Win64:</translation>
+        <translation type="vanished">Win64:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="356"/>
         <source>OS X:</source>
-        <translation>OS X:</translation>
+        <translation type="vanished">OS X:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="380"/>
         <source>&lt;b&gt;Binaries:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Spustitelné soubory:&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Spustitelné soubory:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="409"/>
         <source>&lt;b&gt;Contributors:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Přispěvatelé&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Přispěvatelé&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="265"/>
@@ -8146,31 +8171,27 @@ line %2, column %3:
         <translation>Jose Luis Domingo Lopez</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="373"/>
         <source>Ivo Kronenberg</source>
-        <translation>Ivo Kronenberg</translation>
+        <translation type="vanished">Ivo Kronenberg</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="366"/>
         <source>Helmut Schmidt</source>
-        <translation>Helmut Schmidt</translation>
+        <translation type="vanished">Helmut Schmidt</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="389"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
-        <translation>... a poděkování všem tvůrcům spustitelných souborů pro Linux za jejich dobrou práci. Zvláštní poděkování Danovi Horákovi a Basi Couwenbergovi za účast v diskuzi v poštovním seznamu.</translation>
+        <translation type="vanished">... a poděkování všem tvůrcům spustitelných souborů pro Linux za jejich dobrou práci. Zvláštní poděkování Danovi Horákovi a Basi Couwenbergovi za účast v diskuzi v poštovním seznamu.</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="416"/>
         <source>Christian Eichler (qms@christian-eichler.de)
 Ivo Kronenberg
 Norbert Truchsess (norbert.truchsess@t-online.de)</source>
-        <translation>Christian Eichler (qms@christian-eichler.de)
+        <translation type="vanished">Christian Eichler (qms@christian-eichler.de)
 Ivo Kronenberg
 Norbert Truchsess (norbert.truchsess@t-online.de)</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="435"/>
+        <location filename="../IAbout.ui" line="356"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Tento program je licencován pod GPL3 nebo kteroukoli pozdější verzí</translation>
     </message>
@@ -8480,65 +8501,82 @@ Nechce se mi číst dokumentaci!</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Změnit neprůhlednost mapy&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klepněte pro použití nynějšího měřítka jako nejmenšího měřítka pro zobrazení mapy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klepněte pro použití nynějšího měřítka jako nejmenšího měřítka pro zobrazení mapy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="53"/>
-        <location filename="../dem/IDemPropSetup.ui" line="90"/>
+        <location filename="../dem/IDemPropSetup.ui" line="54"/>
+        <location filename="../dem/IDemPropSetup.ui" line="95"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="74"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Je zobrazeno ovládání rozmezí měřítka mapy. Použijte tlačítka vlevo a vpravo pro stanovení skutečného měřítka jako buď nejmenšího nebo největšího měřítka.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Je zobrazeno ovládání rozmezí měřítka mapy. Použijte tlačítka vlevo a vpravo pro stanovení skutečného měřítka jako buď nejmenšího nebo největšího měřítka.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="87"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klepněte pro použití nynějšího měřítka jako nejmenšího měřítka pro zobrazení mapy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klepněte pro použití nynějšího měřítka jako nejmenšího měřítka pro zobrazení mapy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="118"/>
+        <location filename="../dem/IDemPropSetup.ui" line="50"/>
+        <source>Click to use the current zoom as maximum 
+zoom-in for use of the DEM data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemPropSetup.ui" line="75"/>
+        <source>Control the zoom range for which the DEM data 
+is used. Use the two buttons left and right to define 
+the actual zoom as either maximum zoom-in or zoom-out.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemPropSetup.ui" line="91"/>
+        <source>Click to use the current zoom as maximum 
+zoom-out for use of the DEM data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemPropSetup.ui" line="123"/>
         <source>Hillshading</source>
         <translation>Stínování kopců</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="144"/>
+        <location filename="../dem/IDemPropSetup.ui" line="149"/>
         <source>Slope </source>
         <translation>Sklon</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="229"/>
-        <location filename="../dem/IDemPropSetup.ui" line="329"/>
-        <location filename="../dem/IDemPropSetup.ui" line="413"/>
-        <location filename="../dem/IDemPropSetup.ui" line="497"/>
-        <location filename="../dem/IDemPropSetup.ui" line="581"/>
+        <location filename="../dem/IDemPropSetup.ui" line="234"/>
+        <location filename="../dem/IDemPropSetup.ui" line="334"/>
+        <location filename="../dem/IDemPropSetup.ui" line="418"/>
+        <location filename="../dem/IDemPropSetup.ui" line="502"/>
+        <location filename="../dem/IDemPropSetup.ui" line="586"/>
         <source>°</source>
         <translation>°</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="232"/>
-        <location filename="../dem/IDemPropSetup.ui" line="332"/>
-        <location filename="../dem/IDemPropSetup.ui" line="416"/>
-        <location filename="../dem/IDemPropSetup.ui" line="500"/>
-        <location filename="../dem/IDemPropSetup.ui" line="584"/>
+        <location filename="../dem/IDemPropSetup.ui" line="237"/>
+        <location filename="../dem/IDemPropSetup.ui" line="337"/>
+        <location filename="../dem/IDemPropSetup.ui" line="421"/>
+        <location filename="../dem/IDemPropSetup.ui" line="505"/>
+        <location filename="../dem/IDemPropSetup.ui" line="589"/>
         <source>&gt; </source>
         <translation>&gt; </translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="254"/>
-        <location filename="../dem/IDemPropSetup.ui" line="273"/>
-        <location filename="../dem/IDemPropSetup.ui" line="357"/>
-        <location filename="../dem/IDemPropSetup.ui" line="441"/>
-        <location filename="../dem/IDemPropSetup.ui" line="525"/>
+        <location filename="../dem/IDemPropSetup.ui" line="259"/>
+        <location filename="../dem/IDemPropSetup.ui" line="278"/>
+        <location filename="../dem/IDemPropSetup.ui" line="362"/>
+        <location filename="../dem/IDemPropSetup.ui" line="446"/>
+        <location filename="../dem/IDemPropSetup.ui" line="530"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="635"/>
+        <location filename="../dem/IDemPropSetup.ui" line="640"/>
         <source>Elevation Limit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11517,80 +11555,98 @@ Nechce se mi číst dokumentaci!</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Změnit neprůhlednost mapy&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klepněte pro použití nynějšího měřítka jako nejmenšího měřítka pro zobrazení mapy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klepněte pro použití nynějšího měřítka jako nejmenšího měřítka pro zobrazení mapy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="53"/>
-        <location filename="../map/IMapPropSetup.ui" line="90"/>
-        <location filename="../map/IMapPropSetup.ui" line="373"/>
-        <location filename="../map/IMapPropSetup.ui" line="387"/>
+        <location filename="../map/IMapPropSetup.ui" line="54"/>
+        <location filename="../map/IMapPropSetup.ui" line="96"/>
+        <location filename="../map/IMapPropSetup.ui" line="379"/>
+        <location filename="../map/IMapPropSetup.ui" line="393"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="74"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Je zobrazeno ovládání rozmezí měřítka mapy. Použijte tlačítka vlevo a vpravo pro stanovení skutečného měřítka jako buď nejmenšího nebo největšího měřítka.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Je zobrazeno ovládání rozmezí měřítka mapy. Použijte tlačítka vlevo a vpravo pro stanovení skutečného měřítka jako buď nejmenšího nebo největšího měřítka.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="87"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klepněte pro použití nynějšího měřítka jako nejmenšího měřítka pro zobrazení mapy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klepněte pro použití nynějšího měřítka jako nejmenšího měřítka pro zobrazení mapy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="139"/>
+        <location filename="../map/IMapPropSetup.ui" line="145"/>
         <source>Areas</source>
         <translation>Oblasti</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="146"/>
+        <location filename="../map/IMapPropSetup.ui" line="152"/>
         <source>Lines</source>
         <translation>Čáry</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="153"/>
+        <location filename="../map/IMapPropSetup.ui" line="159"/>
         <source>Points</source>
         <translation>Body</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="170"/>
+        <location filename="../map/IMapPropSetup.ui" line="176"/>
         <source>Details</source>
         <translation>Podrobnosti</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="264"/>
+        <location filename="../map/IMapPropSetup.ui" line="270"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="274"/>
+        <location filename="../map/IMapPropSetup.ui" line="280"/>
         <source>Cache Path</source>
         <translation>Cesta k vyrovnávací paměti</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="356"/>
+        <location filename="../map/IMapPropSetup.ui" line="362"/>
         <source>Type File:</source>
         <translation>Typ souboru:</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="370"/>
+        <location filename="../map/IMapPropSetup.ui" line="376"/>
         <source>Forget external type file and use internal types.</source>
         <translation>Zapomenout na vnější souborový typ a použít vnitřní typy.</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="384"/>
+        <location filename="../map/IMapPropSetup.ui" line="390"/>
         <source>Load an external type file.</source>
         <translation>Nahrát vnější typ souboru.</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="227"/>
+        <location filename="../map/IMapPropSetup.ui" line="233"/>
         <source>Cache Size (MB)</source>
         <translation>Velikost vyrovnávací paměti (MB)</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="247"/>
+        <location filename="../map/IMapPropSetup.ui" line="50"/>
+        <source>Click to use the current zoom as maximum 
+zoom-in to display the map.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapPropSetup.ui" line="75"/>
+        <source>Control the zoom range for which the map is 
+displayed. Use the two buttons left  and right 
+to define the actual zoom as either maximum 
+zoom-in or zoom-out.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapPropSetup.ui" line="92"/>
+        <source>Click to use the current zoom as maximum 
+zoom-out to display the map.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapPropSetup.ui" line="253"/>
         <source>Expiration (Days)</source>
         <translation>Datum vypršení (dny)</translation>
     </message>
@@ -11718,72 +11774,97 @@ Tip:
 <context>
     <name>IMouseEditLine</name>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="265"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="268"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Nová čára&lt;/b&gt;&lt;br/&gt;Posuňte ukazovátko myši a použijte levé tlačítko myši k upuštění bodů. Až to bude uděláno, použijte pravé tlačítko myši k zastavení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="300"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="303"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Smazat bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k bodu a stiskněte levé tlačítko myši pro jeho smazání.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="308"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="311"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Upravit rozsah bodů&lt;/b&gt;&lt;br/&gt;Klepněte levým tlačítkem myši na první bod pro započetí výběru. Klepněte levým tlačítkem myši na druhý bod pro dokončení výběru a vyberte z voleb. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="316"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="319"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přesunout bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k bodu a stiskněte levé tlačítko myši pro jeho držení v blízkosti ukazovátka. Posuňte myší pro přesunutí bodu. Upustěte bod klepnutím levým tlačítkem myši. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="324"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="327"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přidat bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k čáře a stiskněte levé tlačítko myši pro přidání bodu. Bod přilne k ukazovátku a vy jím budete moci pohnout. Bod upustěte klepnutím levým tlačítkem myši. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="332"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="335"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Žádné stanovení cesty&lt;/b&gt;&lt;br/&gt;Všechny body budou spojeny přímou čarou.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="338"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="341"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Automatické stanovení cesty&lt;/b&gt;&lt;br/&gt;Nynější nastavení směrování je používáno k vytváření cesty mezi body. &lt;b&gt;Poznámka:&lt;/b&gt; Vybraný směrovač musí být schopen rychle směrovat (za běhu). Směrovače nepřipojené k internetu toto obvykle dokáží, směrovače připojené k internetu to běžně neumí.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="343"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="346"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Vektorové stanovení cesty&lt;/b&gt;&lt;br/&gt;Spojuje body čárou z nahrané vektorové mapy, je-li to možné.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="349"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="352"/>
         <source>&lt;b&gt;Track Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded track if possible.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Stanovení směru cesty stopy&lt;/b&gt;&lt;br/&gt;Spojuje body čárou z nahrané stopy, je-li to možné.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="520"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="359"/>
+        <source>Started Optimization.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="375"/>
+        <source>Optimization failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="376"/>
+        <source>Note:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="377"/>
+        <source>The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="381"/>
+        <source>Optimization successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="558"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1 metrika&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="523"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="561"/>
         <source>Distance:</source>
         <translation>Vzdálenost:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="525"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="563"/>
         <source>Ascent:</source>
         <translation>Stoupání:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="527"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="565"/>
         <source>Descent:</source>
         <translation>Klesání:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.h" line="140"/>
+        <location filename="../mouse/line/IMouseEditLine.h" line="142"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;br/&gt;&lt;b&gt;Posunout mapu&lt;/b&gt;&lt;br/&gt;Pokud levé tlačítko myši podržíte stisknuté a myší pohnete, posunete mapu.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
@@ -12903,6 +12984,17 @@ nebo
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="310"/>
+        <source>Optimizes the route by reordering the points using the router specified in the &quot;Routing&quot; tab. 
+This is known as solving the Traveling Salesman Problem, however start and end are kept fixed here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="314"/>
+        <source>Optimize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>No auto-routing or line snapping (Ctrl+O)</source>
         <translation type="vanished">Žádné automatické stanovení cesty nebo přichycení k čáře (Ctrl+O)</translation>
     </message>
@@ -12928,8 +13020,8 @@ nebo
         <location filename="../mouse/line/IScrOptEditLine.ui" line="141"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="164"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="287"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="323"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="340"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="334"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="351"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -12989,12 +13081,12 @@ nebo
         <translation type="vanished">Spojit body s čárou z nahrané stopy, je-li to možné.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="320"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="331"/>
         <source>Undo last change</source>
         <translation>Vrátit poslední změnu zpět</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="337"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="348"/>
         <source>Redo last change</source>
         <translation>Obnovit poslední změnu</translation>
     </message>
@@ -13258,13 +13350,13 @@ nebo
         <location filename="../gis/rte/IScrOptRte.ui" line="57"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="71"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="85"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="103"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="120"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="148"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="162"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="176"/>
-        <location filename="../gis/rte/IScrOptRte.ui" line="190"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="106"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="123"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="137"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="151"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="165"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="179"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="193"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -13289,37 +13381,42 @@ nebo
         <translation>Smazat cestu z projektu.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="117"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="103"/>
+        <source>Show instructions and details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/IScrOptRte.ui" line="120"/>
         <source>Calculate route.</source>
         <translation>Spočítat cestu.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="131"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
         <source>Reset route calculation.</source>
         <translation>Vynulovat spočítání cesty.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="148"/>
         <source>Move route points.</source>
         <translation>Přesunout body cesty.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="159"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="162"/>
         <source>Reverse Route</source>
         <translation>Obrátit cestu</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="173"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="176"/>
         <source>Convert route to track</source>
         <translation>Převést cestu na stopu</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="187"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="190"/>
         <source>Toggle Nogo-Line</source>
         <translation>Přepnout úsek, kam nelze jít</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="219"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="222"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
     </message>

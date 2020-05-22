@@ -21,9 +21,11 @@
 #include <gis/IGisLine.h>
 #include <QMap>
 #include <QPolygonF>
+#include <QCoreApplication>
 
 class CRouterOptimization
 {
+    Q_DECLARE_TR_FUNCTIONS(CRouterOptimization)
 public:
     CRouterOptimization();
     int optimize(SGisLine & line);

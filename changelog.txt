@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-151] Missing tooltip in route toolbar
 [QMS-153] Improved French translation
 [QMS-156] Request to unmount systemdrive on startup
+[QMS-158] Change Routino Profiles search for [prefix-]profiles.xml
 [QMS-164] Workspace filter is not applied to newly loaded projects
 [QMS-165] OSX: GIS files not loaded when clicked
 [QMS-173] Misleading help text for DEM range slider

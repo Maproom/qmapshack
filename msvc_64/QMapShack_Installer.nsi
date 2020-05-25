@@ -1,4 +1,4 @@
-;NSIS Installer Script for https://bitbucket.org/maproom/qmapshack/wiki/Home
+;NSIS Installer Script for https://github.com/Maproom/qmapshack/wiki/Home
 
 ;NSIS References/Documentation 
 ;http://nsis.sourceforge.net/Docs/Modern%20UI%202/Readme.html

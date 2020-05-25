@@ -5,7 +5,7 @@ This installation of QMapShack for Windows (short: QMS)
 has been build with Visual Studio 2013 as 64bit application.
 
 If you want to build QMS on your own, have a look at
-https://bitbucket.org/maproom/qmapshack/wiki/BuildWindowsVisualStudio
+https://github.com/Maproom/qmapshack/wiki/BuildWindowsVisualStudio
 
 Dependencies
 ============

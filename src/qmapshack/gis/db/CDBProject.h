@@ -19,18 +19,29 @@
 #ifndef CDBPROJECT_H
 #define CDBPROJECT_H
 
+#include "gis/db/CSelectSaveAction.h"
 #include "gis/prj/IGisProject.h"
 #include <QSqlDatabase>
-
 class CEvtD2WShowItems;
 class CEvtD2WHideItems;
 class CQlgtFolder;
 class IDBFolder;
 
+
 class CDBProject : public IGisProject
 {
     Q_DECLARE_TR_FUNCTIONS(CDBProject)
 public:
+    enum action_e
+    {
+        eActionNone = 0x00
+        , eActionLink = 0x01
+        , eActionUpdate = 0x02
+        , eActionInsert = 0x04
+        , eActionClone  = 0x08
+        , eActionReload = 0x10
+    };
+
     CDBProject(CGisListWks * parent);
     CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);
     CDBProject(const QString &filename, IDBFolder *parentFolder, CGisListWks *parent);
@@ -50,8 +61,7 @@ public:
         return true;
     }
 
-    bool save(int lastResult);
-
+    bool save(CSelectSaveAction::result_e action1ForAll, action_e action2ForAll = eActionNone);
     bool save() override;
 
     quint64 getId() const
@@ -97,7 +107,7 @@ public:
 
        @param evt   the event sent by the database view
      */
-    void showItems(CEvtD2WShowItems * evt);
+    void showItems(CEvtD2WShowItems * evt, action_e action2ForAll = eActionNone);
     /**
        @brief Remove items from the project
 
@@ -109,16 +119,6 @@ public:
     void hideItems(CEvtD2WHideItems * evt);
 
     void update();
-
-    enum action_e
-    {
-        eActionNone = 0x00
-        , eActionLink = 0x01
-        , eActionUpdate = 0x02
-        , eActionInsert = 0x04
-        , eActionClone  = 0x08
-        , eActionReload = 0x10
-    };
 
 protected:
     /**
@@ -134,11 +134,11 @@ protected:
      * @param item      the item itself
      * @param idItem    the 64bit database key
      */
-    void updateItem(IGisItem *&item, quint64 idItem, QSqlQuery& query);
+    void updateItem(IGisItem *&item, quint64 idItem, action_e& action2ForAll, QSqlQuery& query);
 
 
-    int checkForAction1(IGisItem * item, quint64 &itemId, int &lastResult, QSqlQuery& query);
-    int checkForAction2(IGisItem * item, quint64 &itemId, QString &hashItem, QSqlQuery& query);
+    action_e checkForAction1(IGisItem * item, quint64 &itemId, CSelectSaveAction::result_e &action1ForAll, QSqlQuery& query);
+    action_e checkForAction2(IGisItem * item, quint64 &itemId, QString &hashItem, action_e &action2ForAll, QSqlQuery& query);
 
     /**
      * @brief Add item to database
@@ -159,8 +159,6 @@ protected:
     };
 
     Qt::CheckState checkState = Qt::Unchecked;
-
-    action_e action2ForAll = eActionNone;
 };
 
 #endif //CDBPROJECT_H

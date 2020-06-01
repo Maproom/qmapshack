@@ -509,7 +509,7 @@ void CGisListWks::dropEvent( QDropEvent  * e )
         return;
     }
 
-    int lastResult = CSelectCopyAction::eResultNone;
+    CSelectCopyAction::result_e lastResult = CSelectCopyAction::eResultNone;
 
     // go on with item insertion
     /*

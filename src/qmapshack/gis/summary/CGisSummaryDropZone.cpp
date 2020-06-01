@@ -117,16 +117,17 @@ void CGisSummaryDropZone::dropEvent(QDropEvent  * e)
         }
     }
 
-    int lastResult = CSelectCopyAction::eResultSkip;
+    CSelectSaveAction::result_e saveActionForAll = CSelectSaveAction::eResultSkip;
+    CSelectCopyAction::result_e copyActionForAll = CSelectCopyAction::eResultSkip;
     for(const CGisSummary::folder_t& folder : folders)
     {
         CDBProject * project = new CDBProject(folder.db, folder.id, nullptr);
         for(IGisItem * gisItem : gisItems)
         {
-            project->insertCopyOfItem(gisItem, -1, lastResult);
+            project->insertCopyOfItem(gisItem, -1, copyActionForAll);
         }
 
-        project->save(lastResult);
+        project->save(saveActionForAll);
         delete project;
     }
 }

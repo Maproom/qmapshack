@@ -24,6 +24,7 @@
 #include "gis/rte/router/IRouter.h"
 #include "gis/search/CProjectFilterItem.h"
 #include "gis/search/CSearch.h"
+#include "helpers/CSelectCopyAction.h"
 #include <QDebug>
 #include <QMessageBox>
 #include <QPointer>
@@ -416,7 +417,7 @@ public:
        @param off           the offset into the tree widget, -1 for none
        @param lastResult    a reference to hold the last result of the copy option dialog
      */
-    void insertCopyOfItem(IGisItem *item, int off, int &lastResult);
+    void insertCopyOfItem(IGisItem *item, int off, CSelectCopyAction::result_e &lastResult);
 
     /**
        @brief Check if the project was initialized correctly.

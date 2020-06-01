@@ -270,9 +270,9 @@ void CDBProject::postStatus(bool updateLostFound)
 }
 
 
-int CDBProject::checkForAction2(IGisItem * item, quint64 &itemId, QString& hashItem, QSqlQuery &query)
+CDBProject::action_e CDBProject::checkForAction2(IGisItem * item, quint64 &itemId, QString& hashItem, action_e& action2ForAll, QSqlQuery &query)
 {
-    int action = eActionNone;
+    action_e action = eActionNone;
 
     query.prepare("SELECT hash, last_user, last_change FROM items WHERE id=:id");
     query.bindValue(":id", itemId);
@@ -313,7 +313,7 @@ int CDBProject::checkForAction2(IGisItem * item, quint64 &itemId, QString& hashI
     return action;
 }
 
-void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
+void CDBProject::updateItem(IGisItem *&item, quint64 idItem, action_e& action2ForAll, QSqlQuery &query)
 {
     // serialize complete history of item
     QByteArray data;
@@ -356,7 +356,7 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
         // 1) the hash is different because another user changed the item
         // 2) the id was not found because another user removed the item
         // 3) the items was completely identical, therefore no row was affected.
-        int action = checkForAction2(item, idItem, hashInDb, query);
+        int action = checkForAction2(item, idItem, hashInDb, action2ForAll, query);
 
         switch(action)
         {
@@ -461,7 +461,7 @@ quint64 CDBProject::insertItem(IGisItem * item, QSqlQuery &query)
     return idItem;
 }
 
-int CDBProject::checkForAction1(IGisItem * item, quint64& itemId, int& lastResult, QSqlQuery &query)
+CDBProject::action_e CDBProject::checkForAction1(IGisItem * item, quint64& itemId, CSelectSaveAction::result_e& action1ForAll, QSqlQuery &query)
 {
     int action = eActionNone;
 
@@ -486,9 +486,9 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& itemId, int& lastResul
         if(!query.next())
         {
             // item is already in database but folder relation does not exit
-            int result  = lastResult;
+            CSelectSaveAction::result_e result  = action1ForAll;
 
-            if(lastResult == CSelectSaveAction::eResultNone)
+            if(action1ForAll == CSelectSaveAction::eResultNone)
             {
                 // Build the dialog to ask for user action
                 IGisItem * item1 = IGisItem::newGisItem(itemType, itemId, db, nullptr);
@@ -505,7 +505,7 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& itemId, int& lastResul
                 result = dlg.getResult();
                 if(dlg.allOthersToo())
                 {
-                    lastResult = result;
+                    action1ForAll = result;
                 }
             }
 
@@ -547,15 +547,15 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& itemId, int& lastResul
         action = eActionInsert | eActionLink;
     }
 
-    return action;
+    return (action_e)action;
 }
 
 bool CDBProject::save()
 {
-    return save(CSelectSaveAction::eResultNone);
+    return save(CSelectSaveAction::eResultNone, eActionNone);
 }
 
-bool CDBProject::save(int lastResult)
+bool CDBProject::save(CSelectSaveAction::result_e action1ForAll, action_e action2ForAll)
 {
     QSqlQuery query(db);
     bool stop       = false;
@@ -598,7 +598,7 @@ bool CDBProject::save(int lastResult)
 
             quint64 idItem = 0;
 
-            int action = checkForAction1(item, idItem, lastResult, query);
+            int action = checkForAction1(item, idItem, action1ForAll, query);
 
             if(action & eActionInsert)
             {
@@ -607,7 +607,7 @@ bool CDBProject::save(int lastResult)
 
             if(action & eActionUpdate)
             {
-                updateItem(item, idItem, query);
+                updateItem(item, idItem, action2ForAll, query);
             }
 
             if(action & eActionReload)
@@ -656,8 +656,6 @@ bool CDBProject::save(int lastResult)
             CProgressDialog::setAllVisible(true);
         }
     }
-    //Reset choice possible choice the user made for all items
-    action2ForAll = eActionNone;
 
     // serialize metadata of project
     QByteArray data;
@@ -682,7 +680,7 @@ bool CDBProject::save(int lastResult)
 }
 
 
-void CDBProject::showItems(CEvtD2WShowItems * evt)
+void CDBProject::showItems(CEvtD2WShowItems * evt, action_e action2ForAll)
 {
     bool restoreDlgDetails = false;
     if(evt->addItemsExclusively)
@@ -710,7 +708,7 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
             try
             {
                 QSqlQuery query(db);
-                updateItem(gisItem, item.id, query);
+                updateItem(gisItem, item.id, action2ForAll, query);
             }
             catch(int)
             {
@@ -867,8 +865,6 @@ void CDBProject::update()
                 item->updateDecoration(IGisItem::eMarkNotInDB | IGisItem::eMarkChanged, IGisItem::eMarkNone);
             }
         }
-        //Reset choice possible choice the user made for all items
-        action2ForAll = eActionNone;
 
         postStatus(false);
     }

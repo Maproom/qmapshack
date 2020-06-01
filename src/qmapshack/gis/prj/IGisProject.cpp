@@ -775,7 +775,7 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
 }
 
 
-void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
+void IGisProject::insertCopyOfItem(IGisItem * item, int off, CSelectCopyAction::result_e& lastResult)
 {
     bool clone = false;
     IGisItem::key_t key = item->getKey();
@@ -785,7 +785,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     IGisItem * item2 = getItemByKey(key);
     if(item2 != nullptr)
     {
-        int result = lastResult;
+        CSelectCopyAction::result_e result = lastResult;
         if(lastResult == CSelectCopyAction::eResultNone)
         {
             CSelectCopyAction dlg(item, item2, CMainWindow::getBestWidgetForParent());

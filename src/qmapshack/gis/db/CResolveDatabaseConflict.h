@@ -20,10 +20,10 @@
 #define CDATABASECONFLICT_H
 
 #include "gis/db/CDBProject.h"
-#include "ui_IDatabaseConflict.h"
+#include "ui_IResolveDatabaseConflict.h"
 #include <QDialog>
 
-class CResolveDatabaseConflict : public QDialog, private Ui_IDatabaseConflict
+class CResolveDatabaseConflict : public QDialog, private Ui::IResolveDatabaseConflict
 {
 public:
     CResolveDatabaseConflict(QString msg, IGisItem *item, CDBProject::action_e &actionForAll, QWidget *parent = nullptr);

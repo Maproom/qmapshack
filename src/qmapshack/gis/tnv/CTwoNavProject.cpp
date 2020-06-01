@@ -51,7 +51,7 @@ CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * proj
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/2NavProject.png"));
     *(IGisProject*)this = *project;
 
-    int res     = CSelectCopyAction::eResultNone;
+    CSelectCopyAction::result_e res = CSelectCopyAction::eResultNone;
     const int N = project->childCount();
     for(int n = 0; n < N; n++)
     {

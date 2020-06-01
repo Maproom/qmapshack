@@ -673,9 +673,8 @@ void CGisWorkspace::copyItemByKey(const IGisItem::key_t &key)
     {
         return;
     }
-
-    int lastResult = CSelectCopyAction::eResultNone;
-    project->insertCopyOfItem(item, NOIDX, lastResult);
+    CSelectCopyAction::result_e actionForAll = CSelectCopyAction::eResultNone;
+    project->insertCopyOfItem(item, NOIDX, actionForAll);
 
 
     emit sigChanged();
@@ -691,7 +690,7 @@ void CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t> &keys)
         return;
     }
 
-    int lastResult = CSelectCopyAction::eResultNone;
+    CSelectCopyAction::result_e lastResult = CSelectCopyAction::eResultNone;
 
     project->blockUpdateItems(true);
     int cnt = 1;

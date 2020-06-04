@@ -20,7 +20,7 @@ And change back to build_QMapShack:
 Dependencies
 
 * [Qt5](https://www.qt.io/) (at least 5.8)
-* [GDAL](http://www.gdal.org/)
+* [GDAL](http://www.gdal.org/) (at least GDAL 2.3)
 * [Proj4](https://github.com/OSGeo/proj.4/wiki) (at least 5.0.0)
 * [Routino](http://www.routino.org/) (at least 3.1)
 * [QuaZip](http://quazip.sourceforge.net/index.html) (Qt5 version)

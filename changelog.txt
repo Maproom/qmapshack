@@ -15,6 +15,7 @@ V1.XX.X
 [QMS-178] Automate list of code contributors in about dialog
 [QMS-183] Backward range selection causing small issues
 [QMS-192] Fix URLs still pointing to the bitbucket wiki
+[QMS-201] Fix GDAL deprecation warnings
 
 V1.14.1
 [QMS-37] Inconsistent use of time zones

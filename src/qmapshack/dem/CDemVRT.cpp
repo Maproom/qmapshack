@@ -76,7 +76,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
         strncpy(str, dataset->GetProjectionRef(), sizeof(str) - 1);
     }
     OGRSpatialReference oSRS;
-    char *wkt = str;
+    const char *wkt = str;
     oSRS.importFromWkt(&wkt);
 
     char *proj4 = nullptr;

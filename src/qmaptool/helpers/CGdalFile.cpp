@@ -62,7 +62,7 @@ void CGdalFile::load(const QString& filename)
 
     {
         OGRSpatialReference oSRS;
-        char *wkt = str;
+        const char *wkt = str;
         oSRS.importFromWkt(&wkt);
 
         char *proj4 = nullptr;

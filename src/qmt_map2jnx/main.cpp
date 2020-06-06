@@ -689,16 +689,18 @@ int main(int argc, char ** argv)
         }
 
         projPJ   pj;
-        char * ptr = projstr;
+        const char * wkt = projstr;
 
         if(dataset->GetProjectionRef())
         {
             strncpy(projstr,dataset->GetProjectionRef(),sizeof(projstr));
         }
-        oSRS.importFromWkt(&ptr);
-        oSRS.exportToProj4(&ptr);
+        oSRS.importFromWkt(&wkt);
 
-        pj = pj_init_plus(ptr);
+        char *proj4 = nullptr;
+        oSRS.exportToProj4(&proj4);
+
+        pj = pj_init_plus(proj4);
         if(pj == 0)
         {
             fprintf(stderr,"\nUnknown projection in file %s\n", argv[i]);
@@ -713,7 +715,7 @@ int main(int argc, char ** argv)
 
         file_t& file    = *f;
         file.filename   = argv[i];
-        file.projection = ptr;
+        file.projection = proj4;
         file.dataset    = dataset;
         file.pj         = pj;
         file.width      = dataset->GetRasterXSize();

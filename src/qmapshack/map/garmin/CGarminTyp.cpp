@@ -504,7 +504,10 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
 
                     str += t8;
                 }
-                property.strings[langcode] = codec->toUnicode(str);
+                if(codec != nullptr)
+                {
+                    property.strings[langcode] = codec->toUnicode(str);
+                }
 #ifdef DBG
                 qDebug() << len << langcode << property.strings[langcode];
 #endif
@@ -894,7 +897,10 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
 
                     str += t8_1;
                 }
-                property.strings[langcode] = codec->toUnicode(str);
+                if(codec != nullptr)
+                {
+                    property.strings[langcode] = codec->toUnicode(str);
+                }
 #ifdef DBG
                 qDebug() << len << langcode << property.strings[langcode];
 #endif
@@ -1298,7 +1304,10 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
 
                     str += t8_1;
                 }
-                property.strings[langcode] = codec->toUnicode(str);
+                if(codec != nullptr)
+                {
+                    property.strings[langcode] = codec->toUnicode(str);
+                }
 #ifdef DBG
                 qDebug() << len << langcode << property.strings[langcode];
 #endif

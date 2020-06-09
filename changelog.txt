@@ -16,6 +16,7 @@ V1.XX.X
 [QMS-183] Backward range selection causing small issues
 [QMS-192] Fix URLs still pointing to the bitbucket wiki
 [QMS-201] Fix GDAL deprecation warnings
+[QMS-204] Garmin Map: Fix crash because of bad codec number
 
 V1.14.1
 [QMS-37] Inconsistent use of time zones

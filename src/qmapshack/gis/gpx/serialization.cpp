@@ -645,8 +645,8 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
 
     QDomNode geocacheAttributes = xmlCache.namedItem("groundspeak:attributes");
 
-    geocache.archived   = attr.namedItem("archived").nodeValue().toLocal8Bit() == "True";
-    geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
+    geocache.archived   = attr.namedItem("archived").nodeValue().toLocal8Bit().toLower() == "true";
+    geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit().toLower() == "true";
 
     for(QDomNode xmlAttribute = geocacheAttributes.firstChild(); !xmlAttribute.isNull(); xmlAttribute = xmlAttribute.nextSibling())
     {

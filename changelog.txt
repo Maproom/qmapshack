@@ -18,6 +18,7 @@ V1.XX.X
 [QMS-192] Fix URLs still pointing to the bitbucket wiki
 [QMS-201] Fix GDAL deprecation warnings
 [QMS-204] Garmin Map: Fix crash because of bad codec number
+[QMS-207] Fixing Availability of Geocaches
 
 V1.14.1
 [QMS-37] Inconsistent use of time zones

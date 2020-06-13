@@ -114,8 +114,8 @@ with open('CMakeLists.txt', 'w') as fp:
 print('Reset version suffix in CMakeLists.txt.')
 with open('CMakeLists.txt') as fp:
     newText = re.sub(
-        r'^set\(VERSION_SUFFIX.*$',
-        'set(VERSION_SUFFIX "")',
+        r'^set\(DEVELOPMENT_VERSION.*$',
+        'set(DEVELOPMENT_VERSION OFF)',
         fp.read(),
         flags=re.MULTILINE
     )
@@ -123,10 +123,19 @@ with open('CMakeLists.txt') as fp:
 with open('CMakeLists.txt', 'w') as fp:
     fp.write(newText)
 
+print('Replace version string in changelog.txt.')
+with open('changelog.txt') as fp:
+    newText = fp.read().replace("V1.XX.X", "V" + str(next_version))
+
+with open('changelog.txt', 'w') as fp:
+    fp.write(newText)
+
+print('Update list of contributors.')
+subprocess.run("./collect_copyright.py", shell=True)
+
+
 print("Commit changes.")
 run(f'git commit {DRYRUN} -a -v -m "Update version to {next_version}"')
-#if not DRYRUN:
-#    run(f'git tag {DRYRUN} -a V_{next_version} -m "Release V{next_version}"')
 
 print(bcolors.OKGREEN + f"Successfully updated version to {next_version}" + bcolors.ENDC)
 
@@ -135,8 +144,12 @@ asw = get_input("Do you want ot merge to master and create a tag? [Y/n]") or "Y"
 
 if asw.upper() == "Y":
     run('git checkout master')
-    run(f'git merge --squash -m "Release V{next_version}" --log dev')
-    run(f'git commit -a -v -m "Release V{next_version}"')
+    run('git pull')
+    run('git checkout dev')
+    run('git merge master')
+    run('git checkout master')
+    run(f'git merge -m "Release V{next_version}" --log dev')
+    # run(f'git commit -a -v -m "Release V{next_version}"')
     run(f'git tag -a V_{next_version} -m "Release V{next_version}"')
 
 print(bcolors.OKGREEN + f"Successfully merged into master." + bcolors.ENDC)

@@ -333,27 +333,27 @@
 <context>
     <name>CDBProject</name>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="114"/>
+        <location filename="../gis/db/CDBProject.cpp" line="115"/>
         <source>Failed to load...</source>
         <translation>Laden fehlgeschlagen...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="115"/>
+        <location filename="../gis/db/CDBProject.cpp" line="116"/>
         <source>Can&apos;t load file &quot;%1&quot; . It will be skipped.</source>
         <translation>Konnte die Datei &quot;%1&quot; nicht laden. Wird ausgelassen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="128"/>
+        <location filename="../gis/db/CDBProject.cpp" line="129"/>
         <source>Project already in database...</source>
         <translation>Das Projekt ist schon in der Datenbank...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="129"/>
+        <location filename="../gis/db/CDBProject.cpp" line="130"/>
         <source>The project &quot;%1&quot; has already been imported into the database. It will be skipped.</source>
         <translation>Das Projekt &quot;%1&quot; wurde schon in die Datenbank importiert. Wird ausgelassen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="294"/>
+        <location filename="../gis/db/CDBProject.cpp" line="295"/>
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
@@ -362,47 +362,43 @@ To solve this conflict you can create and save a clone, force your version or dr
 Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihre Version oder verwerfen diese und nehmen die Version in der Datenbank</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="300"/>
         <source>Conflict with database...</source>
-        <translation>Konflikt mit der Datenbank...</translation>
+        <translation type="vanished">Konflikt mit der Datenbank...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="301"/>
         <source>Clone &amp;&amp; Save</source>
-        <translation>Klonen &amp;&amp; Speichern</translation>
+        <translation type="vanished">Klonen &amp;&amp; Speichern</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="302"/>
         <source>Force Save</source>
-        <translation>Speichern erzwingen</translation>
+        <translation type="vanished">Speichern erzwingen</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="303"/>
         <source>Take remote</source>
-        <translation>Entfernte Version nehmen</translation>
+        <translation type="vanished">Entfernte Version nehmen</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="590"/>
+        <location filename="../gis/db/CDBProject.cpp" line="571"/>
         <source>Missing folder...</source>
         <translation>Fehlender Ordner...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="591"/>
+        <location filename="../gis/db/CDBProject.cpp" line="572"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation>Speichern des Projektes fehlgeschlagen. Der Ordner wurde in der Datenbank gelöscht.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="598"/>
+        <location filename="../gis/db/CDBProject.cpp" line="579"/>
         <source>Save ...</source>
         <translation>Speichern ...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="662"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="662"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>There was an unexpected database error:
 
 %1</source>
@@ -411,12 +407,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="778"/>
+        <location filename="../gis/db/CDBProject.cpp" line="759"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation>Das Projekt &apos;%1&apos; will sich gerade aus der Datenbank aktualisieren. Es gibt allerdings nicht gespeicherte Änderungen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="779"/>
+        <location filename="../gis/db/CDBProject.cpp" line="760"/>
         <source>Save changes?</source>
         <translation>Änderungen speichern?</translation>
     </message>
@@ -1250,7 +1246,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <name>CGarminTyp</name>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="467"/>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="856"/>
         <source>Warning...</source>
         <translation>Warnung...</translation>
     </message>
@@ -1260,7 +1256,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Dieser Dateityp hat eine unbekannte Polygon Kodierung. Bitte mitteilen!</translation>
     </message>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="856"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
         <translation>Dieser Dateityp hat eine unbekannte Polyline Kodierung. Bitte mitteilen!</translation>
     </message>
@@ -2982,32 +2978,32 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>&lt;b&gt;Elementauswahl: &lt;/b&gt; Ein Element wurde aus der Arbeitplatzliste heraus ausgewählt. Klicken Sie auf die Karte, um wieder auf die normale Auswahl mit der Maus umzuschalten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="698"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="697"/>
         <source>Copy items...</source>
         <translation>Elemente kopieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="728"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="727"/>
         <source>Change waypoint symbols.</source>
         <translation>Symbol der Wegpunkte wird geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="970"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="969"/>
         <source>Cut Track...</source>
         <translation>Track teilen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="970"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="969"/>
         <source>Do you want to delete the original track?</source>
         <translation>Wollen Sie den ursprünglichen Track löschen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1239"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1238"/>
         <source>Enter new proximity range.</source>
         <translation>Geben Sie einen neuen Abstandsalarm ein.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1240"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1239"/>
         <source>Is no-go area</source>
         <translation>Gebietsvermeidung</translation>
     </message>
@@ -12271,6 +12267,44 @@ sein</translation>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="473"/>
         <source>Move map with selection focus</source>
         <translation>Karte mit dem Focus der Auswahl verschieben.</translation>
+    </message>
+</context>
+<context>
+    <name>IResolveDatabaseConflict</name>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="14"/>
+        <source>Database Conflict</source>
+        <translation>Datenbankkonflikt</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="26"/>
+        <source>TextLabel</source>
+        <translation>Bezeichnung</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="39"/>
+        <source>Remember choice for all items of this project</source>
+        <translation>Die Auswahl für alle Elemente im Projekt anwenden</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="48"/>
+        <source>Clone &amp;&amp; Save</source>
+        <translation>Klonen &amp;&amp; Speichern</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="55"/>
+        <source>Take Remote</source>
+        <translation>Entfernte Version nehmen</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="62"/>
+        <source>Force Save</source>
+        <translation>Speichern erzwingen</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="69"/>
+        <source>Abort</source>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>

@@ -172,12 +172,12 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="293"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Bases de Dades&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Bases de Dades i Projectes&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="308"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuaris Impacients:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Vull alguns DEMs en línia.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuaris amb Paciència:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Orígens per als DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
@@ -189,17 +189,9 @@
         <translation>&lt;h2&gt;Mapes!&lt;/h2&gt;&lt;p&gt;Un mapa ha d&apos;estar emmagatzemat en un fitxer que QMapShack ha de poder reconèixer. Aquest fitxer ha d&apos;estar situat en una de les carpetes de mapes definides a la configuració (&lt;a href=&apos;MapFolders&apos;&gt;Ftxer-&gt;Configurar els Camins a Mapes&lt;/a&gt;). QMapShack el buscarà allà i el mostrara en una llista. Es pot actualitzar la llista de mapes fent clic al botó dret sobre la llista de mapes i seleccionant la opció del menú &apos;Tornar a carregar Mapes&apos;.&lt;/p&gt; &lt;p&gt;Per a veure el mapa, s&apos;ha d&apos;activar. Clic al botó dret sobre el nom del mapa i seleccionar del menú la opció &apos;Activar&apos;. Aquesta ajuda desapareixerà en el moment en que s&apos;activi el mapa. Per a tornar-la a veure afegiu una altre vista de mapa (&lt;a href=&apos;NewView&apos;&gt;Vista-&gt;Afegir Vista de Mapa&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Per començar amb algun mapa en línia podeu fer clic a l&apos;enllaç &lt;a href=&apos;GetMaps&apos;&gt;si sou un usuari sense paciència&lt;/a&gt;. Si teniu un GPS Garmin i hi teniu instal·lats mapes no-comercials, podeu copiar els fitxers *.img i els fitxers *.jnx del dispositiu a la carpeta de mapes.&lt;/p&gt; &lt;/p&gt;Si disposeu de mapes ràster que siguin compatibles amb GDAL, primer heu de crear un fitxer per a definir de forma virtual el mapa (*.vrt). Un fitxer *.vrt pot servir per a un o més fitxers. Cas de no existir aquest fitxer, es pot crear dins de QMapShack&apos;s amb el generador de VRT (&lt;a href=&apos;VrtBuilder&apos;&gt;Eina-&gt;Creador de VRT&lt;/a&gt;).&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="vanished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Bases de Dades&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Bases de Dades i Projectes&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
-    </message>
-    <message>
         <location filename="../canvas/CCanvas.cpp" line="300"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Les vostre Dades&lt;/h2&gt;&lt;p&gt;Per a carregar tracks i fites escull &lt;a href=&apos;LoadData&apos;&gt;Fitxer-&gt;Carregar Dades GIS&lt;/a&gt; del menú. En l&apos;espai de treball, cada fitxer estarà en un projecte diferent. Podeu gestionar les dades fitxer a fitxer o utilitzar la base de dades. Podeu &lt;a href=&apos;CreateDB&apos;&gt;crear una base de dades&lt;/a&gt; en la finestra acoblable &quot;Base de Dades&quot;.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="vanished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuaris Impacients:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Vull alguns DEMs en línia.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuaris amb Paciència:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Orígens per als DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="319"/>
@@ -339,27 +331,27 @@
 <context>
     <name>CDBProject</name>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="114"/>
+        <location filename="../gis/db/CDBProject.cpp" line="115"/>
         <source>Failed to load...</source>
         <translation>No s&apos;ha pogut carregar...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="115"/>
+        <location filename="../gis/db/CDBProject.cpp" line="116"/>
         <source>Can&apos;t load file &quot;%1&quot; . It will be skipped.</source>
         <translation>No s&apos;ha pogut carregar el fitxer &quot;%1% . S&apos;ometrà l&apos;element.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="128"/>
+        <location filename="../gis/db/CDBProject.cpp" line="129"/>
         <source>Project already in database...</source>
         <translation>El Projecte ja és a la base de dades...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="129"/>
+        <location filename="../gis/db/CDBProject.cpp" line="130"/>
         <source>The project &quot;%1&quot; has already been imported into the database. It will be skipped.</source>
         <translation>El projecte &quot;%1&quot; ja és a la base de dades. S&apos;ometrà l&apos;element.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="294"/>
+        <location filename="../gis/db/CDBProject.cpp" line="295"/>
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
@@ -368,47 +360,43 @@ To solve this conflict you can create and save a clone, force your version or dr
 Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forçar la vostra versió o deixar-la estar I agafar-ne una de la base de dades</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="300"/>
         <source>Conflict with database...</source>
-        <translation>Conflicte amb la base de dades...</translation>
+        <translation type="vanished">Conflicte amb la base de dades...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="301"/>
         <source>Clone &amp;&amp; Save</source>
-        <translation>Clona &amp;&amp; Desa</translation>
+        <translation type="vanished">Clona &amp;&amp; Desa</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="302"/>
         <source>Force Save</source>
-        <translation>Desa forçosament</translation>
+        <translation type="vanished">Desa forçosament</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="303"/>
         <source>Take remote</source>
-        <translation>Agafa&apos;l remot</translation>
+        <translation type="vanished">Agafa&apos;l remot</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="590"/>
+        <location filename="../gis/db/CDBProject.cpp" line="571"/>
         <source>Missing folder...</source>
         <translation>Manca la carpeta...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="591"/>
+        <location filename="../gis/db/CDBProject.cpp" line="572"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation>No s&apos;ha pogut desar el projecte. La carpeta s&apos;ha esborrat de la base de dades.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="598"/>
+        <location filename="../gis/db/CDBProject.cpp" line="579"/>
         <source>Save ...</source>
         <translation>Desa...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="662"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="662"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>There was an unexpected database error:
 
 %1</source>
@@ -417,12 +405,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
 %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="778"/>
+        <location filename="../gis/db/CDBProject.cpp" line="759"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation>El projecte &apos;%1&apos; és a punt de modificar-se desde la base de dades. Tanmateix hi ha canvis que no s&apos;han desat.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="779"/>
+        <location filename="../gis/db/CDBProject.cpp" line="760"/>
         <source>Save changes?</source>
         <translation>Desar els canvis?</translation>
     </message>
@@ -1242,7 +1230,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <name>CGarminTyp</name>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="467"/>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="856"/>
         <source>Warning...</source>
         <translation>Avís...</translation>
     </message>
@@ -1252,7 +1240,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <translation>Aquest és un típus de fitxer amb una codificació de polígon desconeguda. Informeu de l&apos;error!</translation>
     </message>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="856"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
         <translation>Aquest és un típus de fitxer amb una codificació de polilínia desconeguda. Informeu de l&apos;error!</translation>
     </message>
@@ -2974,32 +2962,32 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <translation>&lt;b&gt;Selecció d&apos;Element: &lt;/b&gt;Element seleccionat de la llista d&apos;espais de treball. Feu clic en el mapa per tornar al comportament normal de selecció del ratolí.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="698"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="697"/>
         <source>Copy items...</source>
         <translation>Copia elements...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="728"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="727"/>
         <source>Change waypoint symbols.</source>
         <translation>Canviar el símbol de les fites.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="970"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="969"/>
         <source>Cut Track...</source>
         <translation>Tallar el Track...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="970"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="969"/>
         <source>Do you want to delete the original track?</source>
         <translation>Voleu suprimir el track original?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1239"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1238"/>
         <source>Enter new proximity range.</source>
         <translation>Inroduir un nou rang de proximitat.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1240"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1239"/>
         <source>Is no-go area</source>
         <translation>És una àrea no-go</translation>
     </message>
@@ -12278,6 +12266,44 @@ o
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="473"/>
         <source>Move map with selection focus</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IResolveDatabaseConflict</name>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="14"/>
+        <source>Database Conflict</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="26"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="39"/>
+        <source>Remember choice for all items of this project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="48"/>
+        <source>Clone &amp;&amp; Save</source>
+        <translation type="unfinished">Clona &amp;&amp; Desa</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="55"/>
+        <source>Take Remote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="62"/>
+        <source>Force Save</source>
+        <translation type="unfinished">Desa forçosament</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="69"/>
+        <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

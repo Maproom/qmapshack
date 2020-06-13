@@ -177,7 +177,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="308"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Pro netrpělivé uživatele:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Chci internetová výšková data (DEM).&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Pro trpělivé:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Zdroje pro výšková data (DEM)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
@@ -192,10 +192,6 @@
         <location filename="../canvas/CCanvas.cpp" line="300"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Vaše data&lt;/h2&gt;&lt;p&gt;K nahrání stop a cestovních bodů použijte v nabídce &lt;a href=&apos;LoadData&apos;&gt;Soubor → Nahrát data GIS&lt;/a&gt;. Každý soubor bude nezávislý projekt na pracovní ploše. Svá data můžete spravovat v jednotlivých souborech nebo v databázi. Můžete &lt;a href=&apos;CreateDB&apos;&gt;vytvořit databázi&lt;/a&gt; v prvku panelu pro databáze.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="vanished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Pro netrpělivé uživatele:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Chci internetová výšková data (DEM).&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Pro trpělivé:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Zdroje pro výšková data (DEM)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="319"/>
@@ -335,27 +331,27 @@
 <context>
     <name>CDBProject</name>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="114"/>
+        <location filename="../gis/db/CDBProject.cpp" line="115"/>
         <source>Failed to load...</source>
         <translation>Nepodařilo se nahrát...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="115"/>
+        <location filename="../gis/db/CDBProject.cpp" line="116"/>
         <source>Can&apos;t load file &quot;%1&quot; . It will be skipped.</source>
         <translation>Nelze nahrát soubor &quot;%1&quot;. Bude přeskočen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="128"/>
+        <location filename="../gis/db/CDBProject.cpp" line="129"/>
         <source>Project already in database...</source>
         <translation>Projekt již je v databázi...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="129"/>
+        <location filename="../gis/db/CDBProject.cpp" line="130"/>
         <source>The project &quot;%1&quot; has already been imported into the database. It will be skipped.</source>
         <translation>Projekt &quot;%1&quot; již byl zaveden do databáze. Bude přeskočen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="294"/>
+        <location filename="../gis/db/CDBProject.cpp" line="295"/>
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
@@ -364,47 +360,43 @@ To solve this conflict you can create and save a clone, force your version or dr
 K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji verzi, nebo ji zahodit a vzít jednu z databáze</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="300"/>
         <source>Conflict with database...</source>
-        <translation>Střet s databází...</translation>
+        <translation type="vanished">Střet s databází...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="301"/>
         <source>Clone &amp;&amp; Save</source>
-        <translation>Klonovat a uložit</translation>
+        <translation type="vanished">Klonovat a uložit</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="302"/>
         <source>Force Save</source>
-        <translation>Vynutit uložení</translation>
+        <translation type="vanished">Vynutit uložení</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="303"/>
         <source>Take remote</source>
-        <translation>Vzít vzdálenou verzi</translation>
+        <translation type="vanished">Vzít vzdálenou verzi</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="590"/>
+        <location filename="../gis/db/CDBProject.cpp" line="571"/>
         <source>Missing folder...</source>
         <translation>Chybí složka...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="591"/>
+        <location filename="../gis/db/CDBProject.cpp" line="572"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation>Nepodařilo se uložit projekt. Složka byla v databázi smazána.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="598"/>
+        <location filename="../gis/db/CDBProject.cpp" line="579"/>
         <source>Save ...</source>
         <translation>Uložit...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="662"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="662"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>There was an unexpected database error:
 
 %1</source>
@@ -413,12 +405,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="778"/>
+        <location filename="../gis/db/CDBProject.cpp" line="759"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation>Projekt &apos;%1&apos; se právě bude aktualizovat z databáze. Jsou tu ovšem neuložené změny.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="779"/>
+        <location filename="../gis/db/CDBProject.cpp" line="760"/>
         <source>Save changes?</source>
         <translation>Uložit změny?</translation>
     </message>
@@ -1214,7 +1206,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <name>CGarminTyp</name>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="467"/>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="856"/>
         <source>Warning...</source>
         <translation>Varování...</translation>
     </message>
@@ -1224,7 +1216,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Toto je souborový typ s neznámým kódováním mnohoúhelníku. Nahlašte to, prosím!</translation>
     </message>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="856"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
         <translation>Toto je souborový typ s neznámým kódováním čáry. Nahlašte to, prosím!</translation>
     </message>
@@ -2926,32 +2918,32 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>&lt;b&gt;Výběr prvků: &lt;/b&gt;Prvek vybrán ze seznamu pracovního prostoru. Klepněte na mapu pro přepnutí zpět do běžného chování při výběru myší.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="698"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="697"/>
         <source>Copy items...</source>
         <translation>Kopírovat prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="728"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="727"/>
         <source>Change waypoint symbols.</source>
         <translation>Změnit značky cestovních bodů.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="970"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="969"/>
         <source>Cut Track...</source>
         <translation>Rozdělit stopu...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="970"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="969"/>
         <source>Do you want to delete the original track?</source>
         <translation>Opravdu chcete smazat původní stopu?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1239"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1238"/>
         <source>Enter new proximity range.</source>
         <translation type="unfinished">Zadat nový poplach kvůli odstupu.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1240"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1239"/>
         <source>Is no-go area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12171,6 +12163,44 @@ nebo
         <location filename="../mouse/range/IRangeToolSetup.ui" line="473"/>
         <source>Move map with selection focus</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IResolveDatabaseConflict</name>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="14"/>
+        <source>Database Conflict</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="26"/>
+        <source>TextLabel</source>
+        <translation type="unfinished">Textový štítek</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="39"/>
+        <source>Remember choice for all items of this project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="48"/>
+        <source>Clone &amp;&amp; Save</source>
+        <translation type="unfinished">Klonovat a uložit</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="55"/>
+        <source>Take Remote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="62"/>
+        <source>Force Save</source>
+        <translation type="unfinished">Vynutit uložení</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="69"/>
+        <source>Abort</source>
+        <translation type="unfinished">Přerušit</translation>
     </message>
 </context>
 <context>

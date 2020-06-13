@@ -184,26 +184,14 @@
         <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios Impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Quiero DEMs online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios Pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener DEM&apos;s&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
-        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="vanished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;Obtener Mapas&apos;&gt;Quiero mapas online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Guia Rápida.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Primeros Pasos.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Instalar Mapas y DEM&apos;s&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Mapas Base y DEM&apos;s.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener Mapas&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
-    </message>
-    <message>
         <location filename="../canvas/CCanvas.cpp" line="277"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;¡Mapas!&lt;/h2&gt;&lt;p&gt;Un mapa es un solo archivo en un formato que pueda reconocer QMapShack y que se ubicará en una de las carpetas configuradas en &lt;a href=&apos;MapFolders&apos;&gt;Archivo-&gt;Configurar rutas a los Mapas&lt;/a&gt;. Serán mostrados en el panel &quot;Mapas&quot; todos ellos, es una lista que se puede refrescar para poder ver últimos cambios clicando con el botón derecho y eligiendo &apos;Recargar Mapas&apos;.&lt;/p&gt; &lt;p&gt;Debe de estar activado para ser visible. Para que un mapa sea visible debe de estar activado, esto se hace haciendo clic con el derecho sobre el y seleccionando &apos;Activar&apos;. Cuando actives el mapa esta ventana se cerrará, puedes verla otra vez si haces clic en &lt;a href=&apos;NewView&apos;&gt;Ver-&gt;Añadir Vista&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;Si prefieres algo mas rápido puedes ver mapas online en &lt;a href=&apos;GetMaps&apos;&gt;usuarios impacientes&lt;/a&gt;. Si tienes un Garmin con mapas no comerciales puedes copiar los archivos *.img y *.jnx en la carpeta de mapas. Si tienes mapas ráster en un formato admitido por GDAL lo puedes ver si creas un archivo *.vrt que haga referencia a uno o a varios de ellos. Para crear el vrt: &lt;a href=&apos;VrtBuilder&apos;&gt;Herramientas-&gt;Asistente VRT&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="vanished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Bases de Datos&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Bases de Datos y Proyectos&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
-    </message>
-    <message>
         <location filename="../canvas/CCanvas.cpp" line="300"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Tus Datos&lt;/h2&gt;&lt;p&gt;Para cargar tracks y waypoints haz clic en  &lt;a href=&apos;LoadData&apos;&gt;Archivo-&gt;Cargar Datos GIS&lt;/a&gt;. Cada uno que cargues se mostrará como un proyecto independiente en el área de trabajo. Puede gestionar los datos en archivos individuales o &lt;a href=&apos;CreateDB&apos;&gt;usar una base de datos&lt;/a&gt; en el panel correspondiente.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="vanished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios Impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Quiero DEM&apos;s online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios Pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener DEM&apos;s&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="319"/>
@@ -343,27 +331,27 @@
 <context>
     <name>CDBProject</name>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="114"/>
+        <location filename="../gis/db/CDBProject.cpp" line="115"/>
         <source>Failed to load...</source>
         <translation>Falló al cargar...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="115"/>
+        <location filename="../gis/db/CDBProject.cpp" line="116"/>
         <source>Can&apos;t load file &quot;%1&quot; . It will be skipped.</source>
         <translation>No se puede cargar el archivo &quot;%1&quot; . Se omitirá.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="128"/>
+        <location filename="../gis/db/CDBProject.cpp" line="129"/>
         <source>Project already in database...</source>
         <translation>Proyecto ya en base de datos ...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="129"/>
+        <location filename="../gis/db/CDBProject.cpp" line="130"/>
         <source>The project &quot;%1&quot; has already been imported into the database. It will be skipped.</source>
         <translation>El proyecto &quot;%1&quot; Ya se ha importado a la base de datos. Se omitirá.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="294"/>
+        <location filename="../gis/db/CDBProject.cpp" line="295"/>
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
@@ -372,47 +360,43 @@ To solve this conflict you can create and save a clone, force your version or dr
 Para resolver este conflicto puedes crear una copia y guardarla , forzar tu versión o eliminarla  o tomar la de la base de datos</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="300"/>
         <source>Conflict with database...</source>
-        <translation>Conflicto con la base de datos...</translation>
+        <translation type="vanished">Conflicto con la base de datos...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="301"/>
         <source>Clone &amp;&amp; Save</source>
-        <translation>Duplicar y Guardar</translation>
+        <translation type="vanished">Duplicar y Guardar</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="302"/>
         <source>Force Save</source>
-        <translation>Forzar guardado</translation>
+        <translation type="vanished">Forzar guardado</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="303"/>
         <source>Take remote</source>
-        <translation>Toma remota</translation>
+        <translation type="vanished">Toma remota</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="590"/>
+        <location filename="../gis/db/CDBProject.cpp" line="571"/>
         <source>Missing folder...</source>
         <translation>Falta la carpeta...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="591"/>
+        <location filename="../gis/db/CDBProject.cpp" line="572"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation>Error al guardar el proyecto. La carpeta se ha eliminado de la base de datos.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="598"/>
+        <location filename="../gis/db/CDBProject.cpp" line="579"/>
         <source>Save ...</source>
         <translation>Guardar...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="662"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="662"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>There was an unexpected database error:
 
 %1</source>
@@ -421,12 +405,12 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
 %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="778"/>
+        <location filename="../gis/db/CDBProject.cpp" line="759"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation>El proyecto &apos;%1&apos; Está a punto de actualizarse desde la base de datos pero hay cambios no guardados.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="779"/>
+        <location filename="../gis/db/CDBProject.cpp" line="760"/>
         <source>Save changes?</source>
         <translation>¿Guardar cambios?</translation>
     </message>
@@ -1246,7 +1230,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <name>CGarminTyp</name>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="467"/>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="856"/>
         <source>Warning...</source>
         <translation>Aviso...</translation>
     </message>
@@ -1256,7 +1240,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
         <translation>Este es un archivo TYP con una codificación de polígonos desconocida. ¡Reportar, por favor!</translation>
     </message>
     <message>
-        <location filename="../map/garmin/CGarminTyp.cpp" line="853"/>
+        <location filename="../map/garmin/CGarminTyp.cpp" line="856"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
         <translation>Este es un archivo TYP con una codificación de polilíneas desconocida. ¡Reportar, por favor!</translation>
     </message>
@@ -2978,32 +2962,32 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
         <translation>&lt;b&gt;Selección de elementos: &lt;/b&gt;Elemento seleccionado de la lista del espacio de trabajo. Haga clic en el mapa para volver al comportamiento normal de selección del mouse.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="698"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="697"/>
         <source>Copy items...</source>
         <translation>Copiar elementos....</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="728"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="727"/>
         <source>Change waypoint symbols.</source>
         <translation>Cambiar símbolos de waypoint.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="970"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="969"/>
         <source>Cut Track...</source>
         <translation>Dividir Track...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="970"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="969"/>
         <source>Do you want to delete the original track?</source>
         <translation>¿Borrar el track original?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1239"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1238"/>
         <source>Enter new proximity range.</source>
         <translation>Introducir el valor de proximidad.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1240"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1239"/>
         <source>Is no-go area</source>
         <translation>Área prohibida</translation>
     </message>
@@ -12303,6 +12287,44 @@ o
         <location filename="../mouse/range/IRangeToolSetup.ui" line="473"/>
         <source>Move map with selection focus</source>
         <translation>Centrar vista de mapa en la selección</translation>
+    </message>
+</context>
+<context>
+    <name>IResolveDatabaseConflict</name>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="14"/>
+        <source>Database Conflict</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="26"/>
+        <source>TextLabel</source>
+        <translation type="unfinished">Denominación</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="39"/>
+        <source>Remember choice for all items of this project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="48"/>
+        <source>Clone &amp;&amp; Save</source>
+        <translation type="unfinished">Duplicar y Guardar</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="55"/>
+        <source>Take Remote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="62"/>
+        <source>Force Save</source>
+        <translation type="unfinished">Forzar guardado</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IResolveDatabaseConflict.ui" line="69"/>
+        <source>Abort</source>
+        <translation type="unfinished">Cancelar</translation>
     </message>
 </context>
 <context>

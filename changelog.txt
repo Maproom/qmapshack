@@ -1,4 +1,4 @@
-V1.XX.X
+V1.15.0
 [QMS-68] Route Optimization
 [QMS-132] DEMs: Make the scale range control cut off not only rendering but also loading or requesting the data.
 [QMS-134] Rework track range selection from scratch

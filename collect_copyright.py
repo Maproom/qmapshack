@@ -35,6 +35,6 @@ for path in Path('src').rglob('*.h'):
 
 with open("src/qmapshack/contributors.h", "w") as file:
     print('constexpr auto contributors = ""', file=file)
-    for name in names:
+    for name in sorted(names):
         print(f'"{name}, "', file=file)
     print('"";', file=file)

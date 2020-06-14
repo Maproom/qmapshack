@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "contributors.h"
 #include "CAbout.h"
 #include "version.h"
-#include "contributors.h"
 
 #include <gdal.h>
 #include <proj_api.h>
@@ -56,7 +56,11 @@ CAbout::CAbout(QWidget *parent)
     #endif
 #endif
 
-    labelContributors->setText(contributors);
+    const QString& missing = tr(
+        "If you think your name is missing you probably have forgotten "
+        "to add your copyright in the source files."
+        );
+    labelContributors->setText(QString(contributors) + "\n\n" + missing);
 }
 
 CAbout::~CAbout()

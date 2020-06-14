@@ -12438,7 +12438,7 @@ or
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="312"/>
-        <source>Select one of the actions to be applied after the operations from above excuted on a selection.</source>
+        <source>Select one of the actions to be applied after the operations from above executed on a selection.</source>
         <translation>Выберите действие, которое будет применяться после того, как операция из вышеприведенного списка будет выполнена с выбранным интервалом.</translation>
     </message>
     <message>

@@ -12080,7 +12080,7 @@ of
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="312"/>
-        <source>Select one of the actions to be applied after the operations from above excuted on a selection.</source>
+        <source>Select one of the actions to be applied after the operations from above executed on a selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

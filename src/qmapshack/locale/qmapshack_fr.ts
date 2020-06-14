@@ -12175,7 +12175,7 @@ or
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="312"/>
-        <source>Select one of the actions to be applied after the operations from above excuted on a selection.</source>
+        <source>Select one of the actions to be applied after the operations from above executed on a selection.</source>
         <translation>Lorsque qu&apos;un des outils ci-dessus est utilisé, il est possible d&apos;agir sur la sélection. Choisissez l&apos;action à effectuer ci-dessus. La légende des icônes est la suivante:</translation>
     </message>
     <message>

@@ -309,7 +309,7 @@
    <item>
     <widget class="QLabel" name="label_15">
      <property name="text">
-      <string>Select one of the actions to be applied after the operations from above excuted on a selection.</string>
+      <string>Select one of the actions to be applied after the operations from above executed on a selection.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

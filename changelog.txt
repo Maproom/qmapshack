@@ -1,5 +1,6 @@
 V1.XX.X
 [QMS-158] Change Routino Profiles search for [prefix-]profiles.xml
+[QMS-217] Fix crash due to faulty profiles.xml
 
 V1.15.0
 [QMS-68] Route Optimization

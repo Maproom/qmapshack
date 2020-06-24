@@ -378,6 +378,10 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         QString strLanguage = comboLanguage->currentData(Qt::UserRole).toString();
 
         Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
+        if( profile == NULL )
+        {
+            throw tr("Required profile '%1' is not the current profiles file.").arg(strProfile);
+        }
         Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
 
         int res = Routino_ValidateProfile(data, profile);
@@ -466,6 +470,10 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         QString strLanguage     = comboLanguage->currentData(Qt::UserRole).toString();
 
         Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
+        if( profile == NULL )
+        {
+            throw tr("Required profile '%1' is not the current profiles file.").arg(strProfile);
+        }
         Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
 
 

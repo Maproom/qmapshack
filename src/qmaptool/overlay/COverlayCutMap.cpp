@@ -23,12 +23,14 @@
 #include "overlay/COverlayCutMap.h"
 
 #include <functional>
+#include <QPainterPath>
 #include <QtWidgets>
+
 using std::bind;
 
 static inline qreal sqr(qreal a)
 {
-    return a*a;
+    return a * a;
 }
 
 static inline qreal sqrlen(const QPointF &a)
@@ -88,14 +90,14 @@ bool COverlayCutMap::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
         path.addRect(rectMap);
         path.addPolygon(shape);
 
-        p.setPen(QPen(Qt::darkBlue,1));
+        p.setPen(QPen(Qt::darkBlue, 1));
 
         p.setBrush((idxFocus1 == NOIDX) ? Qt::BDiagPattern : Qt::NoBrush);
         p.drawPath(path);
     }
 
-    QRectF dot1(0,0,5,5);
-    QRectF dot2(0,0,7,7);
+    QRectF dot1(0, 0, 5, 5);
+    QRectF dot2(0, 0, 7, 7);
     const QPointF& pt1 = idxFocus1 != NOIDX ? shape[idxFocus1] : NOPOINTF;
     const QPointF& pt2 = idxFocus2 != NOIDX ? shape[idxFocus2] : NOPOINTF;
 
@@ -219,7 +221,7 @@ void COverlayCutMap::slotSetMode(mode_e m, bool on)
 
 void COverlayCutMap::slotResetMask()
 {
-    int res = QMessageBox::question(this, tr("Delete mask..."), tr("Are you sure to delete complete mask?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+    int res = QMessageBox::question(this, tr("Delete mask..."), tr("Are you sure to delete complete mask?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     if(res != QMessageBox::Yes)
     {
         return;
@@ -317,7 +319,7 @@ void COverlayCutMap::slotLoadShape()
                 qreal x, y;
                 in2 >> x >> y;
 
-                QPointF pt(x,y);
+                QPointF pt(x, y);
                 context->convertCoord2Map(pt);
 
                 region << pt;
@@ -428,7 +430,7 @@ void COverlayCutMap::isCloseToLine(QPointF pt, QPolygonF line, qint32& idx1, qin
 
     QPointF b   = line[0];
     QPointF dbq = b - pt;
-    qreal dist  = 30*30;
+    qreal dist  = 30 * 30;
 
     for (qint32 i = 1; i < count; ++i)
     {
@@ -439,8 +441,8 @@ void COverlayCutMap::isCloseToLine(QPointF pt, QPolygonF line, qint32& idx1, qin
 
         const QPointF dab = a - b;
 
-        const qreal inv_sqrlen = 1./sqrlen(dab);
-        const qreal t = (dab.x()*daq.x() + dab.y()*daq.y())*inv_sqrlen;
+        const qreal inv_sqrlen = 1. / sqrlen(dab);
+        const qreal t = (dab.x() * daq.x() + dab.y() * daq.y()) * inv_sqrlen;
         if (t < 0.)
         {
             continue;
@@ -448,7 +450,7 @@ void COverlayCutMap::isCloseToLine(QPointF pt, QPolygonF line, qint32& idx1, qin
         qreal current_dist;
         if (t <= 1.)
         {
-            current_dist = sqr(dab.x()*dbq.y() - dab.y()*dbq.x())*inv_sqrlen;
+            current_dist = sqr(dab.x() * dbq.y() - dab.y() * dbq.x()) * inv_sqrlen;
         }
         else//t>1.
         {

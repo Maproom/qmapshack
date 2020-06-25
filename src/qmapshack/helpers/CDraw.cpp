@@ -22,6 +22,7 @@
 
 #include <QDebug>
 #include <QImage>
+#include <QPainterPath>
 #include <QPointF>
 #include <QtMath>
 

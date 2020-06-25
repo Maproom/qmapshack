@@ -22,6 +22,7 @@
 #include "mouse/IMouseSelect.h"
 #include "mouse/IScrOpt.h"
 
+#include <QPainterPath>
 #include <QtWidgets>
 
 IMouseSelect::IMouseSelect(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)

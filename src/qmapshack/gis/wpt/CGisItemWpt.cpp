@@ -36,6 +36,7 @@
 #include "mouse/IMouse.h"
 #include "units/IUnit.h"
 
+#include <QPainterPath>
 #include <QtWidgets>
 #include <QtXml>
 

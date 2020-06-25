@@ -267,7 +267,7 @@ void CRouterRoutino::buildDatabaseList()
             int pError = 0;
             dmap["profilesPath"] = "";
             QStringList profilesPaths = {
-                dir.filePath(prefix+"-profiles.xml"),
+                dir.filePath(prefix + "-profiles.xml"),
                 dir.filePath("profiles.xml"),
                 setup->routinoPath("profiles.xml").toUtf8()
             };
@@ -283,7 +283,7 @@ void CRouterRoutino::buildDatabaseList()
             }
             if( dmap["profilesPath"].toString().isEmpty() )
             {
-                QMessageBox::critical(this, "Routino...",tr("Could not find a profiles XML file in expected folders. Routino Routing will not function"), QMessageBox::Ok);
+                QMessageBox::critical(this, "Routino...", tr("Could not find a profiles XML file in expected folders. Routino Routing will not function"), QMessageBox::Ok);
                 pError = 1;
             }
             else
@@ -319,7 +319,7 @@ void CRouterRoutino::freeDatabaseList()
 {
     for(int i = 0; i < comboDatabase->count(); i++)
     {
-        QVariantMap map = comboDatabase->itemData(i,Qt::UserRole).toMap();
+        QVariantMap map = comboDatabase->itemData(i, Qt::UserRole).toMap();
         Routino_Database * data = (Routino_Database*)(map["db"].toULongLong());
         Routino_UnloadDatabase(data);
     }

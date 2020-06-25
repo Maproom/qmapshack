@@ -32,6 +32,7 @@
 #include "map/garmin/CGarminTyp.h"
 #include "units/IUnit.h"
 
+#include <QPainterPath>
 #include <QtWidgets>
 
 #undef DEBUG_SHOW_SECT_DESC

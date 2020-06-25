@@ -19,9 +19,9 @@
 #ifndef CROUTEROPTIMIZATION_H
 #define CROUTEROPTIMIZATION_H
 #include <gis/IGisLine.h>
+#include <QCoreApplication>
 #include <QMap>
 #include <QPolygonF>
-#include <QCoreApplication>
 
 class CRouterOptimization
 {

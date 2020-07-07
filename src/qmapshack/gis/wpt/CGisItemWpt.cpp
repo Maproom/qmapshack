@@ -1289,6 +1289,11 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
         searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
         return searchValue;
     });
+    map.insert(eSearchPropertyGeneralType, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = tr("waypoint");
+        return searchValue;
+    });
     //Geocache keywords
     map.insert(eSearchPropertyGeocacheDifficulty, [](CGisItemWpt* item){
         searchValue_t searchValue;
@@ -1367,6 +1372,49 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
             searchValue.str1 = tr("not available");
         }
 
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheGCType, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->geocache.type;
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheLoggedBy, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        for(geocachelog_t log : item->geocache.logs)
+        {
+            searchValue.str1 += log.finder + ", ";
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheLastLogDate, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        if(item->geocache.logs.size() > 0)
+        {
+            searchValue.value1 = item->geocache.logs[0].date.toSecsSinceEpoch();
+            searchValue.str1 = "SsE"; //To differentiate Dates and Durations
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheLastLogType, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        if(item->geocache.logs.size() > 0)
+        {
+            searchValue.str1 = item->geocache.logs[0].type;
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheLastLogBy, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        if(item->geocache.logs.size() > 0)
+        {
+            searchValue.str1 = item->geocache.logs[0].finder;
+        }
+        return searchValue;
+    });
+    map.insert(eSearchPropertyGeocacheGCOwner, [](CGisItemWpt* item){
+        searchValue_t searchValue;
+        searchValue.str1 = item->geocache.owner;
         return searchValue;
     });
     return map;

@@ -602,6 +602,11 @@ QMap<searchProperty_e, CGisItemOvlArea::fSearch> CGisItemOvlArea::initKeywordLam
         searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
         return searchValue;
     });
+    map.insert(eSearchPropertyGeneralType, [](CGisItemOvlArea* item){
+        searchValue_t searchValue;
+        searchValue.str1 = tr("area");
+        return searchValue;
+    });
     //Area specific
     map.insert(eSearchPropertyAreaArea, [](CGisItemOvlArea* item){
         searchValue_t searchValue;

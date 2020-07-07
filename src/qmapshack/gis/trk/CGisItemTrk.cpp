@@ -3320,6 +3320,11 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
         searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
         return searchValue;
     });
+    map.insert(eSearchPropertyGeneralType, [](CGisItemTrk* item){
+        searchValue_t searchValue;
+        searchValue.str1 = tr("track");
+        return searchValue;
+    });
     //Route / track keywords
     map.insert(eSearchPropertyRteTrkDistance, [](CGisItemTrk* item){
         searchValue_t searchValue;

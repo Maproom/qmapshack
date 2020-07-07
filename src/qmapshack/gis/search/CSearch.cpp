@@ -458,6 +458,7 @@ QMap<QString, searchProperty_e> CSearch::initSearchPropertyEnumMap()
     map.insert(tr("description"), eSearchPropertyGeneralDescription);
     map.insert(tr("rating"), eSearchPropertyGeneralRating);
     map.insert(tr("keywords"), eSearchPropertyGeneralKeywords);
+    map.insert(tr("type"), eSearchPropertyGeneralType);
 
     //Area keywords
     map.insert(tr("area"), eSearchPropertyAreaArea);
@@ -474,6 +475,12 @@ QMap<QString, searchProperty_e> CSearch::initSearchPropertyEnumMap()
     map.insert(tr("GCCode"), eSearchPropertyGeocacheGCCode);
     map.insert(tr("GCName"), eSearchPropertyGeocacheGCName);
     map.insert(tr("status"), eSearchPropertyGeocacheStatus);
+    map.insert(tr("GCType"), eSearchPropertyGeocacheGCType);
+    map.insert(tr("logged by"), eSearchPropertyGeocacheLoggedBy);
+    map.insert(tr("latest log date"), eSearchPropertyGeocacheLastLogDate);
+    map.insert(tr("latest log type"), eSearchPropertyGeocacheLastLogType);
+    map.insert(tr("latest log by"), eSearchPropertyGeocacheLastLogBy);
+    map.insert(tr("GCOwner"), eSearchPropertyGeocacheGCOwner);
 
     //Waypoint keywords
 
@@ -512,6 +519,7 @@ QMap<searchProperty_e, QString> CSearch::initSearchPropertyMeaningMap()
     map.insert(eSearchPropertyGeneralDescription, tr("searches the Description"));
     map.insert(eSearchPropertyGeneralKeywords, tr("searches the Keywords"));
     map.insert(eSearchPropertyGeneralRating, tr("compares the Rating"));
+    map.insert(eSearchPropertyGeneralType, tr("searches the type of the GisItem (Waypoint, Track, Route, Area)"));
 
     //Area keywords
     map.insert(eSearchPropertyAreaArea, tr("searches the area"));
@@ -525,6 +533,12 @@ QMap<searchProperty_e, QString> CSearch::initSearchPropertyMeaningMap()
     map.insert(eSearchPropertyGeocacheGCCode, tr("searches the GCCode of a geocache."));
     map.insert(eSearchPropertyGeocacheGCName, tr("searches the Name of a geocache."));
     map.insert(eSearchPropertyGeocacheStatus, tr("searches the status of a geocache. (available, not available, archived)"));
+    map.insert(eSearchPropertyGeocacheGCType, tr("searches the type of a geocache. (traditional, unknown, virtual...)"));
+    map.insert(eSearchPropertyGeocacheLoggedBy, tr("searches the available logs for a username"));
+    map.insert(eSearchPropertyGeocacheLastLogDate, tr("searches the date of the latest log"));
+    map.insert(eSearchPropertyGeocacheLastLogType, tr("searches the type of the latest log (Found It, Didn't find it, Owner Maintenance, Write Note...)"));
+    map.insert(eSearchPropertyGeocacheLastLogBy, tr("searches the username of the latest log"));
+    map.insert(eSearchPropertyGeocacheGCOwner, tr("searches the username of the geocache owner"));
 
     //Waypoint keywords
 

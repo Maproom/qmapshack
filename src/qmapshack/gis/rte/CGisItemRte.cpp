@@ -1355,6 +1355,11 @@ QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
         searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
         return searchValue;
     });
+    map.insert(eSearchPropertyGeneralType, [](CGisItemRte* item){
+        searchValue_t searchValue;
+        searchValue.str1 = tr("route");
+        return searchValue;
+    });
     //Route specific
     map.insert(eSearchPropertyRteTrkDistance, [](CGisItemRte* item){
         searchValue_t searchValue;

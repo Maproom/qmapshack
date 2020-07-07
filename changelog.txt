@@ -2,6 +2,7 @@ V1.XX.X
 [QMS-158] Change Routino Profiles search for [prefix-]profiles.xml
 [QMS-216] QMapShack does not compile with Qt-5.15
 [QMS-217] Fix crash due to faulty profiles.xml
+[QMS-223] Add additional filter properties
 
 V1.15.0
 [QMS-68] Route Optimization

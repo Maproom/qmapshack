@@ -780,7 +780,7 @@ or
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="102"/>
         <source>Vert. Spacing</source>
-        <translation>Вертикальое расстояние</translation>
+        <translation>Вертикальное расстояние</translation>
     </message>
 </context>
 <context>

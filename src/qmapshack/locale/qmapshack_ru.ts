@@ -2727,7 +2727,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1141"/>
         <source>Wayp. &amp; Tracks</source>
-        <translation>Мвршр.точки и треки</translation>
+        <translation>Маршр. точки и треки</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1143"/>
@@ -4634,7 +4634,7 @@ Unknown structure.</source>
     <message>
         <location filename="../mouse/CMouseRangeTrk.cpp" line="52"/>
         <source>As an alternative you can use the buttons of the range tool to move the start and end point of a range. If you keep the buttons pressed the action will be repeated.</source>
-        <translation>В качестве альтернативы можно использовать кнопки инструмента интерваа для перемещения начальной и конечной точки интервала. Если держать кнопки нажатыми, действие повторится.</translation>
+        <translation>В качестве альтернативы можно использовать кнопки инструмента интервала для перемещения начальной и конечной точки интервала. Если держать кнопки нажатыми, действие повторится.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRangeTrk.cpp" line="58"/>
@@ -7194,7 +7194,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="148"/>
         <source>Battery usage: %1 %/hour</source>
-        <translatorcomment>Изпользование батареи: %1 %/час</translatorcomment>
+        <translatorcomment>Использование батареи: %1 %/час</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -8603,7 +8603,7 @@ I don&apos;t want to read the documentation!</source>
         <source>Click to use the current zoom as maximum 
 zoom-in for use of the DEM data.</source>
         <translation>Нажмите, чтобы использовать текущий масштаб как
-максимум увеличения для изпользования данных DEM.</translation>
+максимум увеличения для использования данных DEM.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="75"/>
@@ -8611,8 +8611,8 @@ zoom-in for use of the DEM data.</source>
 is used. Use the two buttons left and right to define 
 the actual zoom as either maximum zoom-in or zoom-out.
 </source>
-        <translation>Контролировать диапазон масштабирования, для которого данные DEM изпользуется.
-Используйте две кнопки влево и вправо чтобы изпользовать
+        <translation>Контролировать диапазон масштабирования, для которого данные DEM используется.
+Используйте две кнопки влево и вправо чтобы использовать
 данное увеличение как максимум увеличения или уменьшения.</translation>
     </message>
     <message>
@@ -8620,7 +8620,7 @@ the actual zoom as either maximum zoom-in or zoom-out.
         <source>Click to use the current zoom as maximum 
 zoom-out for use of the DEM data.</source>
         <translation>Нажмите, чтобы использовать текущий масштаб как
-максимум уменьшения для изпользования данных DEM.</translation>
+максимум уменьшения для использования данных DEM.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="123"/>
@@ -11867,7 +11867,7 @@ to define the actual zoom as either maximum
 zoom-in or zoom-out.
 </source>
         <translation>Контролировать диапазон масштабирования, для которого карты отображается.
-Используйте две кнопки влево и вправо чтобы изпользовать
+Используйте две кнопки влево и вправо чтобы использовать
 данное увеличение как максимум увеличения или уменьшения.</translation>
     </message>
     <message>
@@ -12748,7 +12748,7 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="494"/>
         <source>BRouter-Version</source>
-        <translation>Версия BRoute</translation>
+        <translation>Версия BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="534"/>
@@ -13368,7 +13368,7 @@ or
         <location filename="../mouse/line/IScrOptEditLine.ui" line="310"/>
         <source>Optimizes the route by reordering the points using the router specified in the &quot;Routing&quot; tab. 
 This is known as solving the Traveling Salesman Problem, however start and end are kept fixed here</source>
-        <translation>Оптимизирует маршрут маршрутиза переупорядочения точек используя маршрутизатор, указанный на вкладке «Маршрутизация».
+        <translation>Оптимизирует маршрут путем переупорядочения точек используя маршрутизатор, указанный на вкладке «Маршрутизация».
 Это известно как решение задачи коммивояжера, однако начало и конец фиксированы.</translation>
     </message>
     <message>

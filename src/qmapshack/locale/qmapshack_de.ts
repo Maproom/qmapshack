@@ -142,7 +142,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="211"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
-        <translation>&lt;h1&gt;Willkommen&lt;/h1&gt;&lt;p&gt;Vielen Dank, dass Sie QMapShack verwenden. QMapShack ist ein nichtkommerzielles Open Source Projekt. Es wird von Enthusiasten und Freiwilligen gepflegt. Die Entwicklung ist recht weit fortgeschritten, es fehlen aber ein paar Annehmlichkeiten, wie man sie vielleicht von kostenloser, kommerzieller Software kennt. Tatsächlich fehlen uns die Resourcen, um einen Dienst bereitzustellen, bei dem Sie bequem Karten, Höhendaten und Routendaten herunterladen können. Sie müssen selber diese Dateien aus verschiedenen Quellen zusammentragen. Aber diese Seite hilft Ihnen dabei ein wenig.&lt;/p&gt;</translation>
+        <translation>&lt;h1&gt;Willkommen&lt;/h1&gt;&lt;p&gt;Vielen Dank, dass Sie QMapShack verwenden. QMapShack ist ein nichtkommerzielles Open Source Projekt. Es wird von Enthusiasten und Freiwilligen gepflegt. Die Entwicklung ist recht weit fortgeschritten, es fehlen aber ein paar Annehmlichkeiten, wie man sie vielleicht von kostenloser, kommerzieller Software kennt. Tatsächlich fehlen uns die Ressourcen, um einen Dienst bereitzustellen, bei dem Sie bequem Karten, Höhendaten und Routendaten herunterladen können. Sie müssen selber diese Dateien aus verschiedenen Quellen zusammentragen. Aber diese Seite hilft Ihnen dabei ein wenig.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="220"/>
@@ -858,7 +858,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="103"/>
         <source>Mix Asphalt+Forest</source>
-        <translation>Mix, Aphalt u. Waldweg</translation>
+        <translation>Mix, Asphalt u. Waldweg</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.h" line="104"/>
@@ -898,7 +898,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="52"/>
         <source>Compute the &quot;Energy Use Cycling&quot; value in this dialog.</source>
-        <translation>Berechnt den Energieverbrauch in diesem Dialog.</translation>
+        <translation>Berechnet den Energieverbrauch in diesem Dialog.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="53"/>
@@ -915,7 +915,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <source>&lt;p&gt;&lt;b&gt;Set Energy Use for Cycling&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Within this dialog your personal energy use (consumption) for a cycling tour can be computed.&lt;/p&gt;&lt;p&gt;The computed value of &quot;Energy Use Cycling&quot; can be see as an indicator for the exertion of a cycling tour.&lt;/p&gt;&lt;p&gt;The tour length, speed and slope values will be taken into account.&lt;/p&gt;&lt;p&gt;To individualize your personal energy use the following input data are more needed:&lt;ul&gt;&lt;li&gt;Driver and bicyle weight&lt;/li&gt;&lt;li&gt;Air density, wind speed and position to the wind to consider the wind drag resistance&lt;/li&gt;&lt;li&gt;Ground situation (tyre and ground) to consider the rolling resistance&lt;/li&gt;&lt;li&gt;Average pedal cadence for the computation of pedal force&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;The individualize data will be defined in this dialog and more computed values will be shown here.&lt;/p&gt;&lt;p&gt;When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set.&lt;p&gt;The energy use in unit &quot;kcal&quot; will be stored in the track (qms format only) and can be remove later on when no longer needed.&lt;/p&gt;&lt;p&gt;For more information see tooltips on input and output values.&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;b&gt;Energieverbrauch beim Fahrradfahren&lt;/p&gt;&lt;/b&gt;
 &lt;p&gt;In diesem Dialog kann der Energieverbrauch beim Fahrradfahren berechnet werden.&lt;/p&gt;
-&lt;p&gt;Der Wert des Energieverbrauchs kann als Indikator für die Anstregung einer Fahrradtour angesehen werden.&lt;/p&gt;
+&lt;p&gt;Der Wert des Energieverbrauchs kann als Indikator für die Anstrengung einer Fahrradtour angesehen werden.&lt;/p&gt;
 &lt;p&gt;Die Tourlänge, die Geschwindigkeit und die Steigungen werden berücksichtigt.&lt;/p&gt;
 &lt;p&gt;Um den persönlichen Energieverbrauch einer Tour weiter zu spezifizieren werden zusätzliche Daten benötigt:
 &lt;ul&gt;
@@ -1035,11 +1035,11 @@ This filter detects loops by looking for intersections. A new track is created a
 The only input parameter is minimum loop length: this is to prevent cutting tracks in tight switchbacks, where recorded tracks can be made of tiny loops. These loops will be ignored if their lengths are smaller that the given value.</source>
         <translation>Manchmal bestehen Tracks aus Runden.
 
-Das passiert zum Beispiel bei Mountain Bike Touren, bei denen immer die selbe Forststraße verwendet wird, um auf einen höhergelegenen Ausgangspunkt zu kommen. Von diesem Punkt aus starten verschiedene Downhill Touren und die besagte Forststraße wird wieder und wieder verwendet, um nach oben zu fahren. Im aufgezeichneten Track entstehen so mehrere Runden. Einem solchen Track mit Runden auf einem Garmin Gerät zu folgen, ist sehr unübersichtlich, weil man nicht erkennen kann, in welcher Reihenfolge die einzelnen Runden gefahren werden sollen.
+Das passiert zum Beispiel bei Mountainbike-Touren, bei denen immer die selbe Forststraße verwendet wird, um auf einen höhergelegenen Ausgangspunkt zu kommen. Von diesem Punkt aus starten verschiedene Downhill-Touren und die besagte Forststraße wird wieder und wieder verwendet, um nach oben zu fahren. Im aufgezeichneten Track entstehen so mehrere Runden. Einem solchen Track mit Runden auf einem Garmin Gerät zu folgen, ist sehr unübersichtlich, weil man nicht erkennen kann, in welcher Reihenfolge die einzelnen Runden gefahren werden sollen.
 
 Der Zweck dieses Filters ist es den Track zu zerteilen. Die neuen Tracks beinhalten jeweils eine Runde und man behält auf dem Gerät somit die Übersicht: Man fängt mit dem ersten an und schaltet dann zum zweiten, etc...
 
-Der Filter erkennt Runden, indem er auf Überlappungen achtet. Ein neuer Track fängt an, wenn eine Überlappung detektiert wird. 
+Der Filter erkennt Runden, indem er auf Überlappungen achtet. Ein neuer Track fängt an, wenn eine Überlappung gefunden wird. 
 
 Der einzige Parameter ist die minimale Länge einer Runde. Damit kann man verhindern, dass bei kleinen Schleifen oder Überlappungen in der Aufzeichnung der Track zerteilt wird. Runden deren Länge kleiner als der Wert ist, werden ignoriert.</translation>
     </message>
@@ -1981,7 +1981,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="773"/>
         <source>Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)</source>
-        <translation>Pausenknödel ausgeblendet mit Abstandskriterium %1%2 and Verhältnis %3</translation>
+        <translation>Pausenknödel ausgeblendet mit Abstandskriterium %1%2 und Verhältnis %3</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="355"/>
@@ -2975,7 +2975,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="235"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
-        <translation>&lt;b&gt;Elementauswahl: &lt;/b&gt; Ein Element wurde aus der Arbeitplatzliste heraus ausgewählt. Klicken Sie auf die Karte, um wieder auf die normale Auswahl mit der Maus umzuschalten.</translation>
+        <translation>&lt;b&gt;Elementauswahl: &lt;/b&gt; Ein Element wurde aus der Arbeitsplatzliste heraus ausgewählt. Klicken Sie auf die Karte, um wieder auf die normale Auswahl mit der Maus umzuschalten.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="697"/>
@@ -3967,7 +3967,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../map/CMapIMG.cpp" line="301"/>
         <source>Hazard boundary</source>
-        <translation>Gefahrbereichgrenze</translation>
+        <translation>Gefahrenbereichsgrenze</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="366"/>
@@ -4626,7 +4626,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseRangeTrk.cpp" line="47"/>
         <source>Select a first track point with left mouse button and then a second one. Leave the range selection with a click of the right mouse button.</source>
-        <translation>Wählen Sie den ersten Punkt mit der linken Maustaste aus und dann den zweiten. Sie verlassen die Bereichsauswahl indem Sie die rechte Maustatste drücken.</translation>
+        <translation>Wählen Sie den ersten Punkt mit der linken Maustaste aus und dann den zweiten. Sie verlassen die Bereichsauswahl indem Sie die rechte Maustaste drücken.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRangeTrk.cpp" line="52"/>
@@ -5130,7 +5130,7 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="386"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="532"/>
         <source>response is empty</source>
-        <translation>Anwort ist leer</translation>
+        <translation>Antwort ist leer</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="447"/>
@@ -5684,7 +5684,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="169"/>
         <source>no crossing of country borders</source>
-        <translation>keine Überquerung von Landesgrenzen</translation>
+        <translation>Keine Überquerung von Landesgrenzen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="301"/>
@@ -6007,7 +6007,7 @@ ist keine gültige Koordinatensystemdefinition:
 The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hot spot.
 For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
         <translation>GPS Tether
-Die grundsätzliche Idee hinter dieser GPS Quelle ist es, NMEA Daten über eine Ethernetverbindung zu erhalten. Sie können die Android App &quot;GPS Tether&quot; verwenden, um einen Server, der NMEA Daten anbietet, zu betreiben. Ihr Android Gerät muss im selben Netzwerk sein oder ein Netztwerk als Hot Spot anbieten.
+Die grundsätzliche Idee hinter dieser GPS Quelle ist es, NMEA Daten über eine Ethernetverbindung zu erhalten. Sie können die Android App &quot;GPS Tether&quot; verwenden, um einen Server, der NMEA Daten anbietet, zu betreiben. Ihr Android Gerät muss im selben Netzwerk sein oder ein Netzwerk als Hotspot anbieten.
 Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder seinen Netzwerknamen, der von einem DNS Server angeboten wird. Die App zeigt ihnen die Adresse an. Zusätzlich benötigen Sie den Port, so wie er in der App konfiguriert wurde.</translation>
     </message>
     <message>
@@ -6214,7 +6214,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../print/CScreenshotDialog.cpp" line="36"/>
         <source>&lt;b&gt;Screenshot&lt;/b&gt;&lt;br/&gt;You can save or print a screenshot of your current map view. If the track profile is shown in it&apos;s own window it is appended to the screenshot. Check the pre-view below. </source>
-        <translation>&lt;b&gt;Bildschirmkopie&lt;/b&gt;&lt;br/&gt;Sie können eine Bildschirmkopie von ihrer aktuellen Kartenansicht speichern oder drucken. Wenn das Trackprofil in einem eigenen Fenster angezeigt wird, wird es an die Bildschirmkopie angehängt. Überprüfen Sie das mit der Voransicht.</translation>
+        <translation>&lt;b&gt;Bildschirmkopie&lt;/b&gt;&lt;br/&gt;Sie können eine Bildschirmkopie von ihrer aktuellen Kartenansicht speichern oder drucken. Wenn das Trackprofil in einem eigenen Fenster angezeigt wird, wird es an die Bildschirmkopie angehängt. Überprüfen Sie das mit der Vorschau.</translation>
     </message>
     <message>
         <location filename="../print/CScreenshotDialog.cpp" line="59"/>
@@ -6723,7 +6723,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../gis/search/CSearch.cpp" line="509"/>
         <source>searches the elevation. For items consisting of multiple points the minimum and the maximum is used</source>
-        <translation>sucht die Höhe. Für Elemente, die aus mehreren Punkten bestehen, wird das Minimum und das Maximum verwendet.</translation>
+        <translation>Sucht die Höhe. Für Elemente, die aus mehreren Punkten bestehen, wird das Minimum und das Maximum verwendet.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="510"/>
@@ -7964,7 +7964,7 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Running_Summary.ui" line="419"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="337"/>
         <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
-        <translation>4. Verlangt navigatorische Fähigkeiten, die über das Interpretieren von Karten und Umgebung herausgehen</translation>
+        <translation>4. Verlangt navigatorische Fähigkeiten, die über das Interpretieren von Karten und Umgebung hinausgehen</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="424"/>
@@ -7994,7 +7994,7 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Running_Summary.ui" line="465"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="383"/>
         <source>4. Contains sections where the use of hands is necessary for balance</source>
-        <translation>4. Hat Abschnitte bei denen man die Hände zur Ballance benötigt</translation>
+        <translation>4. Hat Abschnitte bei denen man die Hände zur Balance benötigt</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="470"/>
@@ -8575,9 +8575,9 @@ is used. Use the two buttons left and right to define
 the actual zoom as either maximum zoom-in or zoom-out.
 </source>
         <translation>Legt den Zoombereich fest, bei dem die DEM Daten 
-benutzt werden. Benützen Sie die beiden Knöpfe links und rechst, 
+benutzt werden. Benützen Sie die beiden Knöpfe links und rechts, 
 um den aktuellen Zoomlevel als Maximum beim Heraus- oder 
-Hereinzoomen zu vewenden.</translation>
+Hineinzoomen zu verwenden.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="91"/>
@@ -9329,7 +9329,7 @@ als den Maximalen beim Herauszoomen zu verwenden.</translation>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="399"/>
         <source>&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on downhill or uphill.&lt;/p&gt;
 &lt;p&gt;When mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Die Neigungskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung der Neigung bei Bergabfahrt- oder -auffahrt benötigt wird.&lt;/p&gt;
+        <translation>&lt;p&gt;Die Neigungskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung der Neigung bei Bergab- oder -auffahrt benötigt wird.&lt;/p&gt;
 &lt;p&gt;Bei überwiegender Bergabfahrt kann die Neigungskraft negativ sein.&lt;/p&gt;</translation>
     </message>
     <message>
@@ -9515,7 +9515,7 @@ als den Maximalen beim Herauszoomen zu verwenden.</translation>
         <source>&lt;p&gt;The sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.&lt;/p&gt;
 &lt;p&gt;This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Summe der durchschnittlich benötigten Kraft für den Track für die Überwindung des Luftwiderstands, Rollwiderstands und Neigung.&lt;/p&gt;
-&lt;p&gt;Dieser Wert kann negativ bei starkem Rückwind und/oder Bergabfahrt sein.&lt;/p&gt;</translation>
+&lt;p&gt;Dieser Wert kann negativ bei starkem Rückenwind und/oder Bergabfahrt sein.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="467"/>
@@ -11217,7 +11217,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="894"/>
         <source>Select what information is shown for a highlighted track.</source>
-        <translation>Wälen Sie aus welche Information für einen hervorgehobenen Track angezeigt wird.</translation>
+        <translation>Wählen Sie aus welche Information für einen hervorgehobenen Track angezeigt wird.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="906"/>
@@ -11579,7 +11579,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../map/IMapOnline.cpp" line="41"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binäries umsehen. Sie müssen die Dateien libeay32.dll and ssleay32.dll in das QMapShack Programmverzeichnis kopieren.</translation>
+        <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binärdateien umsehen. Sie müssen die Dateien libeay32.dll and ssleay32.dll in das QMapShack Programmverzeichnis kopieren.</translation>
     </message>
     <message>
         <location filename="../map/IMapOnline.cpp" line="47"/>
@@ -11722,9 +11722,9 @@ to define the actual zoom as either maximum
 zoom-in or zoom-out.
 </source>
         <translation>Legt den Zoombereich fest, bei dem die DEM Daten 
-benutzt werden. Benützen Sie die beiden Knöpfe links und rechst, 
+benutzt werden. Benutzen Sie die beiden Knöpfe links und rechts, 
 um den aktuellen Zoomlevel als Maximum beim Heraus- oder 
-Hereinzoomen zu vewenden.</translation>
+Hineinzoomen zu verwenden.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="92"/>
@@ -11794,7 +11794,7 @@ Tip:
 Tipp:
 &lt;ul&gt;
 &lt;li&gt;Wenn Sie mehrere Dateien haben, verschieben Sie diese in einen Unterordner des Kartenpfades. Erstellen Sie die VRT Datei im Kartenpfad.&lt;/li&gt;
-&lt;li&gt;Benützen Sie die erweiterten Optionen, um einen &quot;keine Daten&quot; Wert anzugeben, wenn ihre Quelldateien keinen haben und keinen rechteckigen Bereich abdecken. Gebiete ohne Karte werden dann transparent dargestellt.&lt;/li&gt;
+&lt;li&gt;Benutzen Sie die erweiterten Optionen, um einen &quot;keine Daten&quot; Wert anzugeben, wenn ihre Quelldateien keinen haben und keinen rechteckigen Bereich abdecken. Gebiete ohne Karte werden dann transparent dargestellt.&lt;/li&gt;
 &lt;li&gt;Mit der &quot;-a_srs&quot; Option können sie eine Projektion/Datum vorgeben, wenn dieses in den Quellen fehlt. Damit werden die Daten aber NICHT neu projiziert.&lt;/li&gt;
 &lt;/ul&gt;</translation>
     </message>
@@ -11925,7 +11925,7 @@ Tipp:
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="375"/>
         <source>Optimization failed.</source>
-        <translation>Optimierung fehlgeschalgen.</translation>
+        <translation>Optimierung fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="376"/>
@@ -12241,7 +12241,7 @@ sein</translation>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="312"/>
         <source>Select one of the actions to be applied after the operations from above executed on a selection.</source>
-        <translation>Wählen Siie eine Aktion aus die nach dem Anwenden der oben genannten Funktionen ausgeführt wird.</translation>
+        <translation>Wählen Sie eine Aktion aus die nach dem Anwenden der oben genannten Funktionen ausgeführt wird.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="324"/>
@@ -12559,7 +12559,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="554"/>
         <source>Segments Url</source>
-        <translation>Kartensegemente URL</translation>
+        <translation>Kartensegmente URL</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="564"/>
@@ -13130,7 +13130,7 @@ sein</translation>
         <source>Optimizes the route by reordering the points using the router specified in the &quot;Routing&quot; tab. 
 This is known as solving the Traveling Salesman Problem, however start and end are kept fixed here</source>
         <translation>Optimiert Routen, indem die Punkte neu geordnet werden. Dabei wird der aktuell eingestellte Router verwendet.
-Das ist auch bekannt als das &quot;Handlungsreisenderproblem lösen&quot;. Allerdings werden hier die Start- und Endpunkte beibehalten.</translation>
+Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werden hier die Start- und Endpunkte beibehalten.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="314"/>
@@ -13247,7 +13247,7 @@ Das ist auch bekannt als das &quot;Handlungsreisenderproblem lösen&quot;. Aller
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
         <source>Set tags and rating.</source>
-        <translation>Schalgworte und Bewertung setzen.</translation>
+        <translation>Schlagworte und Bewertung setzen.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
@@ -13499,7 +13499,7 @@ Das ist auch bekannt als das &quot;Handlungsreisenderproblem lösen&quot;. Aller
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="54"/>
         <source>Set tags and rating.</source>
-        <translation>Schalgworte und Bewertung setzen.</translation>
+        <translation>Schlagworte und Bewertung setzen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="68"/>
@@ -13830,7 +13830,7 @@ Das ist auch bekannt als das &quot;Handlungsreisenderproblem lösen&quot;. Aller
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
         <source>Set tags and rating.</source>
-        <translation>Schalgworte und Bewertung setzen.</translation>
+        <translation>Schlagworte und Bewertung setzen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
@@ -13852,7 +13852,7 @@ dazu benutzen um:
 * Für den ausgewählten Bereiche eine Aktivität festzulegen
 
 Hinweis: Wenn Sie fehlerhafte Punkte in einer echten GPS 
-Aufzeichnung entfernen wollen, ist dies das richtige Wekzeug.
+Aufzeichnung entfernen wollen, ist dies das richtige Werkzeug.
 Wählen Sie einfach den Bereich mit den fehlerhaften Punkten aus
 (ein Einzelner ist auch ok) und verstecken Sie die Punkte.</translation>
     </message>
@@ -13886,7 +13886,7 @@ Benützen Sie dazu die Werkzeuge der Bereichsauswahl.</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="250"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation>Ersetzt die Höhe duch die DEM Daten der Ansicht.</translation>
+        <translation>Ersetzt die Höhe durch die DEM Daten der Ansicht.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="264"/>
@@ -13935,7 +13935,7 @@ Benützen Sie dazu die Werkzeuge der Bereichsauswahl.</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="63"/>
         <source>Set tags and rating.</source>
-        <translation>Schalgworte und Bewertung setzen.</translation>
+        <translation>Schlagworte und Bewertung setzen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
@@ -13965,7 +13965,7 @@ Benützen Sie dazu die Werkzeuge der Bereichsauswahl.</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="157"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation>Ersetzt die Höhe duch die DEM Daten der Ansicht.</translation>
+        <translation>Ersetzt die Höhe durch die DEM Daten der Ansicht.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="178"/>
@@ -14475,7 +14475,7 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="56"/>
         <source>listen for database changes from other instances of QMapShack. On port</source>
-        <translation>lauscht nach Datenbankänderungen anderer QMapShack Instanzen. Auf Port</translation>
+        <translation>Lauscht nach Datenbankänderungen anderer QMapShack Instanzen. Auf Port</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="63"/>

@@ -532,7 +532,7 @@ Durch den Benutzer abgebrochen.</translation>
     <message>
         <location filename="../tool/CToolExport.cpp" line="33"/>
         <source>To use the maps on your device you have to export them to the proprietary format supported by the device. Depending on the device this can vary from a single layer map to a map stack with maps of different scale.</source>
-        <translation>Wenn Sie die Karten auf ihrem Gerät benützen wollen, müssen Sie diese in das jeweilige geschlossene Format. welches vom Gerät verwendet wird, exportieren. Abhängig vom Gerät kann das eine Karte mit einer einzelnen Auflösungsbene sein, oder eine mit mehreren Ebenen.</translation>
+        <translation>Wenn Sie die Karten auf ihrem Gerät benützen wollen, müssen Sie diese in das jeweilige geschlossene Format. welches vom Gerät verwendet wird, exportieren. Abhängig vom Gerät kann das eine Karte mit einer einzelnen Auflösungsebene sein, oder eine mit mehreren Ebenen.</translation>
     </message>
     <message>
         <location filename="../tool/CToolExport.cpp" line="41"/>
@@ -563,7 +563,7 @@ Durch den Benutzer abgebrochen.</translation>
     <message>
         <location filename="../tool/CToolPalettize.cpp" line="34"/>
         <source>Usually you use RGBA color while referencing a map because the large color space allows you to scale and rotate the map without any loss of quality. But it results into rather large files. The file size can be optimized by using a color palette instead of the RGBA color space. The impact on quality is low as long as you do not want to scale or rotate the map. If you want to combine files with a color palette all files need to have the same palette.</source>
-        <translation>Üblicherweise benützt man RGBA Farben während man eine Karte referenziert, weil der große Farbraum einem erlaubt, die Karte ohne Qualitätseinbuße zu drehen und zu skalieren. Leider wird deswegen auch die Datei sehr groß. Die Größe kann optimiert werden, wenn man eine Farbpalette anstelle von RGBA verwendet. Die Qualitätseinbußen sind gering, solange man die Karte nicht drehen oder skalieren möchte. Wenn Sie mehrer Karten zusammenfügen wolle, müssen alle dieselbe Palette benützen.</translation>
+        <translation>Üblicherweise benützt man RGBA Farben während man eine Karte referenziert, weil der große Farbraum einem erlaubt, die Karte ohne Qualitätseinbuße zu drehen und zu skalieren. Leider wird deswegen auch die Datei sehr groß. Die Größe kann optimiert werden, wenn man eine Farbpalette anstelle von RGBA verwendet. Die Qualitätseinbußen sind gering, solange man die Karte nicht drehen oder skalieren möchte. Wenn Sie mehrere Karten zusammenfügen wolle, müssen alle dieselbe Palette benützen.</translation>
     </message>
     <message>
         <location filename="../tool/CToolPalettize.cpp" line="46"/>

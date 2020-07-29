@@ -99,7 +99,7 @@ void CRtGpsTetherInfo::slotHelp() const
                                 "The basic idea of this GPS source is to receive a NMEA stream "
                                 "via Ethernet connection. You can use the Android app \"GPS Tether\" "
                                 "to provide a host streaming NMEA data. Your Android device must be "
-                                "in the same network or provide a network as a hot spot.\n"
+                                "in the same network or provide a network as a hotspot.\n"
                                 "For configuration you need to know your Android device's IP address "
                                 "or it's host name provided by a DNS. The app will tell you the address. "
                                 "Additionally you need the port number as configured in the app."

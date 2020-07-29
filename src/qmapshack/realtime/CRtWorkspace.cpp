@@ -64,7 +64,7 @@ CRtWorkspace::CRtWorkspace(QWidget *parent)
 
     cfg.endGroup();
 
-    labelHelp->setText(tr("To add a real time source do a right click on the list above. "));
+    labelHelp->setText(tr("To add a realtime source do a right click on the list above. "));
     slotChanged();
 }
 

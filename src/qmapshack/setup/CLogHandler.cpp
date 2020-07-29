@@ -45,7 +45,7 @@ void CLogHandler::log(QtMsgType type, const QMessageLogContext &context, const Q
 
 void CLogHandler::printLoggerInfo()
 {
-    qDebug() << "Log configuration:" << "log file=" << logFile.fileName() << "write to file=" << writeToFile <<
+    qDebug() << "Log configuration:" << "logfile=" << logFile.fileName() << "write to file=" << writeToFile <<
         "debug output=" << debugOutput;
 }
 

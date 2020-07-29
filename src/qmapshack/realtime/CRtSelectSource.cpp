@@ -60,7 +60,7 @@ CRtSelectSource::CRtSelectSource(CRtWorkspace &wks)
 
     connect(listWidget, &QListWidget::itemSelectionChanged, this, &CRtSelectSource::slotSelectionChanged);
 
-    labelHelp->setText(tr("Select a real time source from the list. "
+    labelHelp->setText(tr("Select a realtime source from the list. "
                           "Some sources can be added multiple times. "
                           "For others only a single instance can be added."
                           ));

@@ -281,7 +281,7 @@ void CMapIMG::setupTyp()
     polylineProperties[0x15].strings[0x00] = tr("Shoreline");
     polylineProperties[0x16].strings[0x00] = tr("Trail");
     polylineProperties[0x18].strings[0x00] = tr("Stream");
-    polylineProperties[0x19].strings[0x00] = tr("Time zone");
+    polylineProperties[0x19].strings[0x00] = tr("Timezone");
     polylineProperties[0x1a].strings[0x00] = tr("Ferry");
     polylineProperties[0x1b].strings[0x00] = tr("Ferry");
     polylineProperties[0x1c].strings[0x00] = tr("State/province border");

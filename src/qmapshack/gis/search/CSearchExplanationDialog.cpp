@@ -54,7 +54,7 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     explanation += "</ul>";
     explanation += "</li>";
     explanation += "<li>";
-    explanation += tr(  "'Date equals' matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local time zone is taken for the query.");
+    explanation += tr(  "'Date equals' matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local timezone is taken for the query.");
     explanation += "</li>";
     explanation += "<li>";
     explanation += tr(  "If you enter no unit the default unit (what you see when viewing the property of the item) is used.");

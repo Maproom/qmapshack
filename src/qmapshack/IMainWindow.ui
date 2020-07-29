@@ -429,7 +429,7 @@
      <normaloff>:/icons/32x32/ToolTip.png</normaloff>:/icons/32x32/ToolTip.png</iconset>
    </property>
    <property name="text">
-    <string>Map Tool Tip</string>
+    <string>Map Tooltip</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
@@ -531,7 +531,7 @@
      <normaloff>:/icons/32x32/TimeZoneSetup.png</normaloff>:/icons/32x32/TimeZoneSetup.png</iconset>
    </property>
    <property name="text">
-    <string>Setup Time Zone</string>
+    <string>Setup Timezone</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -840,7 +840,7 @@
      <normaloff>:/icons/32x32/FullScreen.png</normaloff>:/icons/32x32/FullScreen.png</iconset>
    </property>
    <property name="text">
-    <string>Full Screen</string>
+    <string>Fullscreen</string>
    </property>
    <property name="shortcut">
     <string>F11</string>

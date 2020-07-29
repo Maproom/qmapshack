@@ -117,7 +117,7 @@
      <item>
       <widget class="QToolButton" name="toolRange">
        <property name="toolTip">
-        <string extracomment="use line breakes to keep a sensible tool tip width">Select a range of points. You can use that tool to:
+        <string extracomment="use line breaks to keep a sensible tooltip width">Select a range of points. You can use that tool to:
 
 * Hide or show points of a track. 
 * You can copy the selected range. 
@@ -139,7 +139,7 @@ this is the right tool. Simply select the section of bad points
      <item>
       <widget class="QToolButton" name="toolEdit">
        <property name="toolTip">
-        <string extracomment="use line breakes to keep a sensible tool tip width">Edit the position of track points and use automatic routing 
+        <string extracomment="use line breaks to keep a sensible tooltip width">Edit the position of track points and use automatic routing 
 to create new track points. This is used to create new tracks 
 to plan a tour.
 

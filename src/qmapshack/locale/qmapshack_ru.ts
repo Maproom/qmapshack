@@ -18,6 +18,11 @@
         <source>(no DBUS: device detection and handling disabled)</source>
         <translation>(Нет DBUS: обнаружение устройств и управление ими отключено)</translation>
     </message>
+    <message>
+        <location filename="../CAbout.cpp" line="59"/>
+        <source>If you think your name is missing you probably have forgotten to add your copyright in the source files.</source>
+        <translation>Если вы думаете, что ваше имя отсутствует, вы, вероятно, забыли добавить свои авторские права в исходные файлы.</translation>
+    </message>
 </context>
 <context>
     <name>CActivityTrk</name>
@@ -1472,6 +1477,11 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <source>Changed color</source>
         <translation>Изменён цвет</translation>
     </message>
+    <message>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="607"/>
+        <source>area</source>
+        <translation>область</translation>
+    </message>
 </context>
 <context>
     <name>CGisItemRte</name>
@@ -1482,6 +1492,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="298"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="1360"/>
         <source>route</source>
         <translation>маршрут</translation>
     </message>
@@ -1711,6 +1722,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1621"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1665"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1858"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="3325"/>
         <source>track</source>
         <translation>трек</translation>
     </message>
@@ -2026,437 +2038,442 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="110"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="111"/>
         <source>_Clone</source>
         <translation>_клон</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="316"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="317"/>
         <source>Elevation: %1%2</source>
         <translation>Высота: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="327"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="328"/>
         <source>Proximity: %1%2</source>
         <translation>Радиус близости: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="347"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="348"/>
         <source>Last found: %1</source>
         <translation>Последнее обнаружение:%1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="357"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="358"/>
         <source>Project created: %1</source>
         <translation>Проект создан: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="407"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="408"/>
         <source>Created: %1</source>
         <translation>Создан: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="494"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="495"/>
         <source>Changed name</source>
         <translation>Изменено имя</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="504"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="505"/>
         <source>Changed position</source>
         <translation>Изменена позиция</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="510"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="511"/>
         <source>Changed elevation</source>
         <translation>Изменена высота</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="519"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="520"/>
         <source>Removed proximity</source>
         <translation>Удалён радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="524"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="525"/>
         <source>Changed proximity</source>
         <translation>Изменён радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="543"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="544"/>
         <source>Changed icon</source>
         <translation>Изменена пиктограмма</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="549"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="550"/>
         <source>Changed comment</source>
         <translation>Изменён комментарий</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="555"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="556"/>
         <source>Changed description</source>
         <translation>Изменено описание</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="561"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="562"/>
         <source>Changed links</source>
         <translation>Изменены ссылки</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="567"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="568"/>
         <source>Changed images</source>
         <translation>Изменены изображения</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="573"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="574"/>
         <source>Add image</source>
         <translation>Добавить изображение</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1133"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1134"/>
         <source>QMS Attribute Flag</source>
         <translation>QMS флаг атрибутов</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1134"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1135"/>
         <source>Dogs</source>
         <translation>Собаки</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1135"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1136"/>
         <source>Access or parking fee</source>
         <translation>Плата за доступ или парковку</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1136"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1137"/>
         <source>Climbing gear</source>
         <translation>Снаряжение для скалолазания</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1137"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1138"/>
         <source>Boat</source>
         <translation>Нужна лодка</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1138"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1139"/>
         <source>Scuba gear</source>
         <translation>Нужен акваланг</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1139"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1140"/>
         <source>Recommended for kids</source>
         <translation>Рекомендуется для детей</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1140"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1141"/>
         <source>Takes less than an hour</source>
         <translation>Занимает меньше часа</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1141"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1142"/>
         <source>Scenic view</source>
         <translation>Прекрасный вид</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1142"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1143"/>
         <source>Significant hike</source>
         <translation>Много идти пешком</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1143"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1144"/>
         <source>Difficult climbing</source>
         <translation>Трудное лазание</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1144"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1145"/>
         <source>May require wading</source>
         <translation>Возможен брод</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1145"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1146"/>
         <source>May require swimming</source>
         <translation>Возможно, придется плыть</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1146"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1147"/>
         <source>Available at all times</source>
         <translation>Доступен все время</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1147"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1148"/>
         <source>Recommended at night</source>
         <translation>Рекомендуется ночью</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1148"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1149"/>
         <source>Available during winter</source>
         <translation>Доступен зимой</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1150"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1151"/>
         <source>Poison plants</source>
         <translation>Ядовитые растения</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1151"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1152"/>
         <source>Dangerous Animals</source>
         <translation>Опасные животные</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1152"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1153"/>
         <source>Ticks</source>
         <translation>Клещи</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1153"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1154"/>
         <source>Abandoned mines</source>
         <translation>Заброшенные рудники</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1154"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1155"/>
         <source>Cliff / falling rocks</source>
         <translation>Скалы / камнепад</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1155"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1156"/>
         <source>Hunting</source>
         <translation>Охота</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1156"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1157"/>
         <source>Dangerous area</source>
         <translation>Опасный район</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1157"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1158"/>
         <source>Wheelchair accessible</source>
         <translation>Доступно для инвалидного кресла</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1158"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1159"/>
         <source>Parking available</source>
         <translation>Есть парковка</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1159"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1160"/>
         <source>Public transportation</source>
         <translation>Общественный транспорт</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1160"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1161"/>
         <source>Drinking water nearby</source>
         <translation>Рядом есть питьевая вода</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1161"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1162"/>
         <source>Public restrooms nearby</source>
         <translation>Рядом есть туалеты</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1162"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1163"/>
         <source>Telephone nearby</source>
         <translation>Рядом есть телефон</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1163"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1164"/>
         <source>Picnic tables nearby</source>
         <translation>Рядом столы для пикника</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1164"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1165"/>
         <source>Camping available</source>
         <translation>Можно с палаткой</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1165"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1166"/>
         <source>Bicycles</source>
         <translation>Велосипеды</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1166"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1167"/>
         <source>Motorcycles</source>
         <translation>Мотоциклы</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1167"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1168"/>
         <source>Quads</source>
         <translation>Квадроциклы</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1168"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1169"/>
         <source>Off-road vehicles</source>
         <translation>Внедорожники</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1169"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1170"/>
         <source>Snowmobiles</source>
         <translation>Снегоходы</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1170"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1171"/>
         <source>Horses</source>
         <translation>Лошади</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1171"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1172"/>
         <source>Campfires</source>
         <translation>Костры</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1172"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1173"/>
         <source>Thorns</source>
         <translation>Колючки</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1173"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1174"/>
         <source>Stealth required</source>
         <translation>Требуется скрытность</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1174"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1175"/>
         <source>Stroller accessible</source>
         <translation>Доступно для прогулочной коляски</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1175"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1176"/>
         <source>Needs maintenance</source>
         <translation>Нужна проверка</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1176"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1177"/>
         <source>Watch for livestock</source>
         <translation>Скот</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1177"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1178"/>
         <source>Flashlight required</source>
         <translation>Нужен фонарик</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1179"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1180"/>
         <source>Truck Driver/RV</source>
         <translation>Автоприцепы</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1180"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1181"/>
         <source>Field Puzzle</source>
         <translation>Загадка на местности</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1181"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1182"/>
         <source>UV Light Required</source>
         <translation>Нужна УФ-лампа</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1182"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1183"/>
         <source>Snowshoes</source>
         <translation>Нужны снегоступы</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1183"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1184"/>
         <source>Cross Country Skis</source>
         <translation>Нужны лыжи для кросс-кантри</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1184"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1185"/>
         <source>Special Tool Required</source>
         <translation>Нужен специальный инструмент</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1185"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1186"/>
         <source>Night Cache</source>
         <translation>Ночной тайник</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1186"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1187"/>
         <source>Park and Grab</source>
         <translation>Припарковался и нашел</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1187"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1188"/>
         <source>Abandoned Structure</source>
         <translation>Заброшенное строение</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1188"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1189"/>
         <source>Short hike (less than 1km)</source>
         <translation>Короткая прогулка (менее 1 км)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1189"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1190"/>
         <source>Medium hike (1km-10km)</source>
         <translation>Средняя прогулка (1 км - 10 км)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1190"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1191"/>
         <source>Long Hike (+10km)</source>
         <translation>Долго идти пешком (10 км и больше)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1191"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1192"/>
         <source>Fuel Nearby</source>
         <translation>Рядом автозаправка</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1192"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1193"/>
         <source>Food Nearby</source>
         <translation>Рядом кафе (еда)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1193"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1194"/>
         <source>Wireless Beacon</source>
         <translation>Беспроводной передатчик</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1194"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1195"/>
         <source>Partnership cache</source>
         <translation>Партнерский тайник</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1195"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1196"/>
         <source>Seasonal Access</source>
         <translation>Сезонный доступ</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1196"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1197"/>
         <source>Tourist Friendly</source>
         <translation>Удобен для туристов</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1197"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1198"/>
         <source>Tree Climbing</source>
         <translation>Нужно лезть на дерево</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1198"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1199"/>
         <source>Front Yard (Private Residence)</source>
         <translation>Двор частного дома</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1199"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1200"/>
         <source>Teamwork Required</source>
         <translation>Нужно работать в команде</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1200"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1201"/>
         <source>GeoTour</source>
         <translation>GeoTour</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1228"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1229"/>
         <source> by </source>
         <translation> регистратор </translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1358"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1294"/>
+        <source>waypoint</source>
+        <translation>маршрутная точка</translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1364"/>
         <source>archived</source>
         <translation>архивировано</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1362"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1368"/>
         <source>available</source>
         <translation>доступно</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1366"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1372"/>
         <source>not available</source>
         <translation>не доступно</translation>
     </message>
@@ -3621,637 +3638,641 @@ line %2, column %3:
 <context>
     <name>CMapIMG</name>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="147"/>
+        <location filename="../map/CMapIMG.cpp" line="148"/>
         <source>Failed ...</source>
         <translation>Не удалось...</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="176"/>
+        <location filename="../map/CMapIMG.cpp" line="177"/>
         <source>Unspecified</source>
         <translation>Не указано</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="177"/>
+        <location filename="../map/CMapIMG.cpp" line="178"/>
         <source>French</source>
         <translation>Французский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="178"/>
+        <location filename="../map/CMapIMG.cpp" line="179"/>
         <source>German</source>
         <translation>Немецкий</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="179"/>
+        <location filename="../map/CMapIMG.cpp" line="180"/>
         <source>Dutch</source>
         <translation>Голландский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="180"/>
+        <location filename="../map/CMapIMG.cpp" line="181"/>
         <source>English</source>
         <translation>Английский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="181"/>
+        <location filename="../map/CMapIMG.cpp" line="182"/>
         <source>Italian</source>
         <translation>Итальянский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="182"/>
+        <location filename="../map/CMapIMG.cpp" line="183"/>
         <source>Finnish</source>
         <translation>Финский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="183"/>
+        <location filename="../map/CMapIMG.cpp" line="184"/>
         <source>Swedish</source>
         <translation>Шведский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="184"/>
+        <location filename="../map/CMapIMG.cpp" line="185"/>
         <source>Spanish</source>
         <translation>Испанский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="185"/>
+        <location filename="../map/CMapIMG.cpp" line="186"/>
         <source>Basque</source>
         <translation>Баскский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="186"/>
+        <location filename="../map/CMapIMG.cpp" line="187"/>
         <source>Catalan</source>
         <translation>Каталонский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="187"/>
+        <location filename="../map/CMapIMG.cpp" line="188"/>
         <source>Galician</source>
         <translation>Галисийский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="188"/>
+        <location filename="../map/CMapIMG.cpp" line="189"/>
         <source>Welsh</source>
         <translation>Валлийский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="189"/>
+        <location filename="../map/CMapIMG.cpp" line="190"/>
         <source>Gaelic</source>
         <translation>Гэльский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="190"/>
+        <location filename="../map/CMapIMG.cpp" line="191"/>
         <source>Danish</source>
         <translation>Датский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="191"/>
+        <location filename="../map/CMapIMG.cpp" line="192"/>
         <source>Norwegian</source>
         <translation>Норвежский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="192"/>
+        <location filename="../map/CMapIMG.cpp" line="193"/>
         <source>Portuguese</source>
         <translation>Португальский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="193"/>
+        <location filename="../map/CMapIMG.cpp" line="194"/>
         <source>Slovak</source>
         <translation>Словацкий</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="194"/>
+        <location filename="../map/CMapIMG.cpp" line="195"/>
         <source>Czech</source>
         <translation>Чешский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="195"/>
+        <location filename="../map/CMapIMG.cpp" line="196"/>
         <source>Croatian</source>
         <translation>Хорватский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="196"/>
+        <location filename="../map/CMapIMG.cpp" line="197"/>
         <source>Hungarian</source>
         <translation>Венгерский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="197"/>
+        <location filename="../map/CMapIMG.cpp" line="198"/>
         <source>Polish</source>
         <translation>Польский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="198"/>
+        <location filename="../map/CMapIMG.cpp" line="199"/>
         <source>Turkish</source>
         <translation>Турецкий</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="199"/>
+        <location filename="../map/CMapIMG.cpp" line="200"/>
         <source>Greek</source>
         <translation>Греческий</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="200"/>
+        <location filename="../map/CMapIMG.cpp" line="201"/>
         <source>Slovenian</source>
         <translation>Словенский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="201"/>
+        <location filename="../map/CMapIMG.cpp" line="202"/>
         <source>Russian</source>
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="202"/>
+        <location filename="../map/CMapIMG.cpp" line="203"/>
         <source>Estonian</source>
         <translation>Эстонский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="203"/>
+        <location filename="../map/CMapIMG.cpp" line="204"/>
         <source>Latvian</source>
         <translation>Латвийский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="204"/>
+        <location filename="../map/CMapIMG.cpp" line="205"/>
         <source>Romanian</source>
         <translation>Румынский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="205"/>
+        <location filename="../map/CMapIMG.cpp" line="206"/>
         <source>Albanian</source>
         <translation>Албанский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="206"/>
+        <location filename="../map/CMapIMG.cpp" line="207"/>
         <source>Bosnian</source>
         <translation>Боснийский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="207"/>
+        <location filename="../map/CMapIMG.cpp" line="208"/>
         <source>Lithuanian</source>
         <translation>Литовский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="208"/>
+        <location filename="../map/CMapIMG.cpp" line="209"/>
         <source>Serbian</source>
         <translation>Сербский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="209"/>
+        <location filename="../map/CMapIMG.cpp" line="210"/>
         <source>Macedonian</source>
         <translation>Македонский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="210"/>
+        <location filename="../map/CMapIMG.cpp" line="211"/>
         <source>Bulgarian</source>
         <translation>Болгарский</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="267"/>
+        <location filename="../map/CMapIMG.cpp" line="268"/>
         <source>Major highway</source>
         <translation>Автомагистраль</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="268"/>
+        <location filename="../map/CMapIMG.cpp" line="269"/>
         <source>Principal highway</source>
         <translation>Шоссе основное</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="269"/>
+        <location filename="../map/CMapIMG.cpp" line="270"/>
         <source>Other highway</source>
         <translation>Прочие загородные дороги</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="270"/>
+        <location filename="../map/CMapIMG.cpp" line="271"/>
         <source>Arterial road</source>
         <translation>Городская магистраль</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="271"/>
+        <location filename="../map/CMapIMG.cpp" line="272"/>
         <source>Collector road</source>
         <translation>Улица крупная</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="272"/>
+        <location filename="../map/CMapIMG.cpp" line="273"/>
         <source>Residential street</source>
         <translation>Улица малая</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="273"/>
+        <location filename="../map/CMapIMG.cpp" line="274"/>
         <source>Alley/Private road</source>
         <translation>Переулок, внутриквартальный проезд</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="274"/>
+        <location filename="../map/CMapIMG.cpp" line="275"/>
         <source>Highway ramp, low speed</source>
         <translation>Наклонный съезд с путепровода</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="275"/>
+        <location filename="../map/CMapIMG.cpp" line="276"/>
         <source>Highway ramp, high speed</source>
         <translation>Наклонный съезд с путепровода скоростной</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="276"/>
+        <location filename="../map/CMapIMG.cpp" line="277"/>
         <source>Unpaved road</source>
         <translation>Грунтовая дорога</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="277"/>
+        <location filename="../map/CMapIMG.cpp" line="278"/>
         <source>Major highway connector</source>
         <translation>Соединительное шоссе</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="278"/>
+        <location filename="../map/CMapIMG.cpp" line="279"/>
         <source>Roundabout</source>
         <translation>Круговое движение</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="279"/>
+        <location filename="../map/CMapIMG.cpp" line="280"/>
         <source>Railroad</source>
         <translation>Железная дорога</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="280"/>
+        <location filename="../map/CMapIMG.cpp" line="281"/>
         <source>Shoreline</source>
         <translation>Береговая линия</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="281"/>
+        <location filename="../map/CMapIMG.cpp" line="282"/>
         <source>Trail</source>
         <translation>Тропа</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="282"/>
+        <location filename="../map/CMapIMG.cpp" line="283"/>
         <source>Stream</source>
         <translation>Ручей</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="283"/>
         <source>Time zone</source>
-        <translation>Граница часового пояса</translation>
+        <translation type="vanished">Граница часового пояса</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="284"/>
+        <source>Timezone</source>
+        <translation>Граница часового пояса</translation>
+    </message>
+    <message>
         <location filename="../map/CMapIMG.cpp" line="285"/>
+        <location filename="../map/CMapIMG.cpp" line="286"/>
         <source>Ferry</source>
         <translation>Паром</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="286"/>
+        <location filename="../map/CMapIMG.cpp" line="287"/>
         <source>State/province border</source>
         <translation>Граница области</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="287"/>
+        <location filename="../map/CMapIMG.cpp" line="288"/>
         <source>County/parish border</source>
         <translation>Граница района, округа</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="288"/>
+        <location filename="../map/CMapIMG.cpp" line="289"/>
         <source>International border</source>
         <translation>Международная граница</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="289"/>
+        <location filename="../map/CMapIMG.cpp" line="290"/>
         <source>River</source>
         <translation>Река</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="290"/>
+        <location filename="../map/CMapIMG.cpp" line="291"/>
         <source>Minor land contour</source>
         <translation>Изолиния высоты, вспомогательная</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="291"/>
+        <location filename="../map/CMapIMG.cpp" line="292"/>
         <source>Intermediate land contour</source>
         <translation>Изолиния высоты, основная</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="292"/>
+        <location filename="../map/CMapIMG.cpp" line="293"/>
         <source>Major land contour</source>
         <translation>Изолиния высоты, утолщённая</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="293"/>
+        <location filename="../map/CMapIMG.cpp" line="294"/>
         <source>Minor depth contour</source>
         <translation>Изолиния глубины, вспомогательная</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="294"/>
+        <location filename="../map/CMapIMG.cpp" line="295"/>
         <source>Intermediate depth contour</source>
         <translation>Изолиния глубины, основная</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="295"/>
+        <location filename="../map/CMapIMG.cpp" line="296"/>
         <source>Major depth contour</source>
         <translation>Изолиния глубины, утолщённая</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="296"/>
+        <location filename="../map/CMapIMG.cpp" line="297"/>
         <source>Intermittent stream</source>
         <translation>Пересыхающая река, ручей или канава</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="297"/>
-        <location filename="../map/CMapIMG.cpp" line="379"/>
+        <location filename="../map/CMapIMG.cpp" line="298"/>
+        <location filename="../map/CMapIMG.cpp" line="380"/>
         <source>Airport runway</source>
         <translation>Взлётно-посадочная полоса</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="298"/>
+        <location filename="../map/CMapIMG.cpp" line="299"/>
         <source>Pipeline</source>
         <translation>Трубопровод</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="299"/>
+        <location filename="../map/CMapIMG.cpp" line="300"/>
         <source>Powerline</source>
         <translation>Линия электропередачи</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="300"/>
+        <location filename="../map/CMapIMG.cpp" line="301"/>
         <source>Marine boundary</source>
         <translation>Морская граница</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="301"/>
+        <location filename="../map/CMapIMG.cpp" line="302"/>
         <source>Hazard boundary</source>
         <translation>Опасность для плавания</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="366"/>
+        <location filename="../map/CMapIMG.cpp" line="367"/>
         <source>Large urban area (&amp;gt;200K)</source>
         <translation>Городская застройка (&amp;gt;200 тыс.ж)</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="367"/>
+        <location filename="../map/CMapIMG.cpp" line="368"/>
         <source>Small urban area (&amp;lt;200K)</source>
         <translation>Городская застройка (&amp;lt;200 тыс.ж)</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="368"/>
+        <location filename="../map/CMapIMG.cpp" line="369"/>
         <source>Rural housing area</source>
         <translation>Застройка сельского типа</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="369"/>
+        <location filename="../map/CMapIMG.cpp" line="370"/>
         <source>Military base</source>
         <translation>Военная база</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="370"/>
+        <location filename="../map/CMapIMG.cpp" line="371"/>
         <source>Parking lot</source>
         <translation>Автостоянка</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="371"/>
+        <location filename="../map/CMapIMG.cpp" line="372"/>
         <source>Parking garage</source>
         <translation>Гараж</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="372"/>
+        <location filename="../map/CMapIMG.cpp" line="373"/>
         <source>Airport</source>
         <translation>Аэропорт</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="373"/>
+        <location filename="../map/CMapIMG.cpp" line="374"/>
         <source>Shopping center</source>
         <translation>Место для торговли</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="374"/>
+        <location filename="../map/CMapIMG.cpp" line="375"/>
         <source>Marina</source>
         <translation>Пристань</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="375"/>
+        <location filename="../map/CMapIMG.cpp" line="376"/>
         <source>University/College</source>
         <translation>Университет или колледж</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="376"/>
+        <location filename="../map/CMapIMG.cpp" line="377"/>
         <source>Hospital</source>
         <translation>Больница</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="377"/>
+        <location filename="../map/CMapIMG.cpp" line="378"/>
         <source>Industrial complex</source>
         <translation>Промышленная зона</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="378"/>
+        <location filename="../map/CMapIMG.cpp" line="379"/>
         <source>Reservation</source>
         <translation>Резервация, заповедник</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="380"/>
+        <location filename="../map/CMapIMG.cpp" line="381"/>
         <source>Man-made area</source>
         <translation>Здание, искусственное сооружение</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="381"/>
+        <location filename="../map/CMapIMG.cpp" line="382"/>
         <source>Sports complex</source>
         <translation>Спортивный комплекс</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="382"/>
+        <location filename="../map/CMapIMG.cpp" line="383"/>
         <source>Golf course</source>
         <translation>Площадка для гольфа</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="383"/>
+        <location filename="../map/CMapIMG.cpp" line="384"/>
         <source>Cemetery</source>
         <translation>Кладбище</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="384"/>
         <location filename="../map/CMapIMG.cpp" line="385"/>
         <location filename="../map/CMapIMG.cpp" line="386"/>
+        <location filename="../map/CMapIMG.cpp" line="387"/>
         <source>National park</source>
         <translation>Национальный парк</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="387"/>
+        <location filename="../map/CMapIMG.cpp" line="388"/>
         <source>City park</source>
         <translation>Городской парк</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="388"/>
         <location filename="../map/CMapIMG.cpp" line="389"/>
         <location filename="../map/CMapIMG.cpp" line="390"/>
+        <location filename="../map/CMapIMG.cpp" line="391"/>
         <source>State park</source>
         <translation>Парк регионального значения</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="391"/>
+        <location filename="../map/CMapIMG.cpp" line="392"/>
         <source>Forest</source>
         <translation>Лес</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="392"/>
+        <location filename="../map/CMapIMG.cpp" line="393"/>
         <source>Ocean</source>
         <translation>Море/океан</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="393"/>
-        <location filename="../map/CMapIMG.cpp" line="395"/>
-        <location filename="../map/CMapIMG.cpp" line="405"/>
+        <location filename="../map/CMapIMG.cpp" line="394"/>
+        <location filename="../map/CMapIMG.cpp" line="396"/>
+        <location filename="../map/CMapIMG.cpp" line="406"/>
         <source>Blue (unknown)</source>
         <translation>Синий (неизвестно)</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="394"/>
+        <location filename="../map/CMapIMG.cpp" line="395"/>
         <source>Sea</source>
         <translation>Море</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="396"/>
         <location filename="../map/CMapIMG.cpp" line="397"/>
-        <location filename="../map/CMapIMG.cpp" line="404"/>
+        <location filename="../map/CMapIMG.cpp" line="398"/>
+        <location filename="../map/CMapIMG.cpp" line="405"/>
         <source>Large lake</source>
         <translation>Озеро, большое</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="398"/>
         <location filename="../map/CMapIMG.cpp" line="399"/>
+        <location filename="../map/CMapIMG.cpp" line="400"/>
         <source>Medium lake</source>
         <translation>Озеро, среднее</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="400"/>
         <location filename="../map/CMapIMG.cpp" line="401"/>
+        <location filename="../map/CMapIMG.cpp" line="402"/>
         <source>Small lake</source>
         <translation>Озеро, малое</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="402"/>
         <location filename="../map/CMapIMG.cpp" line="403"/>
+        <location filename="../map/CMapIMG.cpp" line="404"/>
         <source>Major lake</source>
         <translation>Озеро, крупное</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="406"/>
+        <location filename="../map/CMapIMG.cpp" line="407"/>
         <source>Major River</source>
         <translation>Река, крупная</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="407"/>
+        <location filename="../map/CMapIMG.cpp" line="408"/>
         <source>Large River</source>
         <translation>Река, большая</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="408"/>
+        <location filename="../map/CMapIMG.cpp" line="409"/>
         <source>Medium River</source>
         <translation>Река, средняя</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="409"/>
+        <location filename="../map/CMapIMG.cpp" line="410"/>
         <source>Small River</source>
         <translation>Река, малая</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="412"/>
+        <location filename="../map/CMapIMG.cpp" line="413"/>
         <source>Intermittent water</source>
         <translation>Пересыхающая река, озеро</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="413"/>
+        <location filename="../map/CMapIMG.cpp" line="414"/>
         <source>Wetland/Swamp</source>
         <translation>Болото</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="414"/>
+        <location filename="../map/CMapIMG.cpp" line="415"/>
         <source>Glacier</source>
         <translation>Ледник</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="415"/>
+        <location filename="../map/CMapIMG.cpp" line="416"/>
         <source>Orchard/Plantation</source>
         <translation>Фруктовый сад, огород</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="416"/>
+        <location filename="../map/CMapIMG.cpp" line="417"/>
         <source>Scrub</source>
         <translation>Кустарник</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="417"/>
+        <location filename="../map/CMapIMG.cpp" line="418"/>
         <source>Tundra</source>
         <translation>Тундра</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="418"/>
+        <location filename="../map/CMapIMG.cpp" line="419"/>
         <source>Flat</source>
         <translation>Равнина</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="419"/>
+        <location filename="../map/CMapIMG.cpp" line="420"/>
         <source>???</source>
         <translation>???</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="433"/>
+        <location filename="../map/CMapIMG.cpp" line="434"/>
         <source>Read external type file...</source>
         <translation>Загрузить внешний файл типов...</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="433"/>
+        <location filename="../map/CMapIMG.cpp" line="434"/>
         <source>Failed to read type file: %1
 Fall back to internal types.</source>
         <translation>Не удалось читать файл типов: %1
 Возврат к внутренним типам.</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="475"/>
+        <location filename="../map/CMapIMG.cpp" line="476"/>
         <source>Failed to read: </source>
         <translation>Не удалось читать: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="518"/>
+        <location filename="../map/CMapIMG.cpp" line="519"/>
         <source>Failed to open: </source>
         <translation>Не удалось открыть: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="542"/>
-        <location filename="../map/CMapIMG.cpp" line="546"/>
+        <location filename="../map/CMapIMG.cpp" line="543"/>
+        <location filename="../map/CMapIMG.cpp" line="547"/>
         <source>Bad file format: </source>
         <translation>Неверный формат файла: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="635"/>
+        <location filename="../map/CMapIMG.cpp" line="636"/>
         <source>Failed to read file structure: </source>
         <translation>Не удалось читать структуру файла: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="670"/>
+        <location filename="../map/CMapIMG.cpp" line="671"/>
         <source>Loading %1</source>
         <translation>Идет загрузка %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="676"/>
+        <location filename="../map/CMapIMG.cpp" line="677"/>
         <source>User abort: </source>
         <translation>Прекращение пользователем: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="679"/>
+        <location filename="../map/CMapIMG.cpp" line="680"/>
         <source>File is NT format. QMapShack is unable to read map files with NT format: </source>
         <translation>Файл имеет формат NT. QMapShack не может считывать этот формат: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="770"/>
+        <location filename="../map/CMapIMG.cpp" line="771"/>
         <source>File contains locked / encrypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
         <translation>Файл содержит заблокированные / зашифрованные данные. Garmin позволяет использовать этот файл только с помощью программного обеспечения Garmin.</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2389"/>
-        <location filename="../map/CMapIMG.cpp" line="2395"/>
-        <location filename="../map/CMapIMG.cpp" line="2399"/>
+        <location filename="../map/CMapIMG.cpp" line="2390"/>
+        <location filename="../map/CMapIMG.cpp" line="2396"/>
+        <location filename="../map/CMapIMG.cpp" line="2400"/>
         <source>Point of Interest</source>
         <translation>Достопримечательность</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2496"/>
+        <location filename="../map/CMapIMG.cpp" line="2497"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2538"/>
-        <location filename="../map/CMapIMG.cpp" line="2546"/>
-        <location filename="../map/CMapIMG.cpp" line="2553"/>
+        <location filename="../map/CMapIMG.cpp" line="2539"/>
+        <location filename="../map/CMapIMG.cpp" line="2547"/>
+        <location filename="../map/CMapIMG.cpp" line="2554"/>
         <source>Area</source>
         <translation>Область</translation>
     </message>
@@ -5718,218 +5739,240 @@ is not a valid coordinate system definition:
 <context>
     <name>CRouterRoutino</name>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="60"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="58"/>
         <source>Warning...</source>
         <translation>Предупреждение...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="60"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="58"/>
         <source>Found Routino with a wrong version. Expected %1 found %2</source>
         <translation>Найдено Routino с неправильной версией. Ожидаема %1б найдена %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="64"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="62"/>
         <source>Shortest</source>
         <translation>Самый короткий</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="65"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="63"/>
         <source>Quickest</source>
         <translation>Самый быстрый</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="83"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="75"/>
         <source>Foot</source>
         <translation>Пешком</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="84"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="76"/>
         <source>Horse</source>
         <translation>Лошадь</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="85"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="77"/>
         <source>Wheelchair</source>
         <translation>Инвалидная коляска</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="86"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="78"/>
         <source>Bicycle</source>
         <translation>Велосипед</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="87"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="79"/>
         <source>Moped</source>
         <translation>Мопед</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="88"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="80"/>
         <source>Motorcycle</source>
         <translation>Мотоцикл</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="89"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="81"/>
         <source>Motorcar</source>
         <translation>Автомобиль</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="82"/>
         <source>Goods</source>
         <translation>Товары</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="92"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="84"/>
         <source>English</source>
         <translation>Английский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="93"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="85"/>
         <source>German</source>
         <translation>Немецкий</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="94"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="86"/>
         <source>French</source>
         <translation>Французский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="95"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="87"/>
         <source>Hungarian</source>
         <translation>Венгерский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="96"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="88"/>
         <source>Dutch</source>
         <translation>Голландский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="97"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="89"/>
         <source>Russian</source>
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="98"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
         <source>Polish</source>
         <translation>Польский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="133"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="125"/>
         <source>A function was called without the database variable set.</source>
         <translation>Функция была вызвана без переменной для базы данных.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="136"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="128"/>
         <source>A function was called without the profile variable set.</source>
         <translation>Функция была вызвана без переменной профиля.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="139"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="131"/>
         <source>A function was called without the translation variable set.</source>
         <translation>Функция была вызвана без переменной перевода.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="142"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="134"/>
         <source>The specified database to load did not exist.</source>
         <translation>Указанная к загрузке база данных не существует.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="145"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="137"/>
         <source>The specified database could not be loaded.</source>
         <translation>Указанная база данных не может быть загружена.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="148"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="140"/>
         <source>The specified profiles XML file did not exist.</source>
         <translation>Указанный XML файл профилей не существует.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="151"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="143"/>
         <source>The specified profiles XML file could not be loaded.</source>
         <translation>Указанный XML файл профилей невозможно загрузить.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="154"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="146"/>
         <source>The specified translations XML file did not exist.</source>
         <translation>Указанный XML файл перевода не существует.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="157"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="149"/>
         <source>The specified translations XML file could not be loaded.</source>
         <translation>Указанный XML файл перевода невозможно загрузить.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="160"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="152"/>
         <source>The requested profile name does not exist in the loaded XML file.</source>
         <translation>Запрошенное имя профиля не существует в загруженном XML файле.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="163"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="155"/>
         <source>The requested translation language does not exist in the loaded XML file.</source>
         <translation>Запрошенный язык перевода не существует в загруженном XML файле.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="166"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="158"/>
         <source>In the routing database there is no highway near the coordinates to place a waypoint.</source>
         <translation>В базе данных маршрутизации нет дороги вблизи координат данной маршрутной точки.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="169"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="161"/>
         <source>The profile and database do not work together.</source>
         <translation>Профиль и базы данных не работают совместно.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="172"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="164"/>
         <source>The profile being used has not been validated.</source>
         <translation>Использованный профиль не был подтвержден.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="175"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="167"/>
         <source>The user specified profile contained invalid data.</source>
         <translation>Указанный профиль содержит недопустимые данные.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="178"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="170"/>
         <source>The routing options specified are not consistent with each other.</source>
         <translation>Параметры маршрутизации несовместимы между собой.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="181"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="173"/>
         <source>There is a mismatch between the library and caller API version.</source>
         <translation>Есть несоответствие между API версиями библиотеки и абонента.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="184"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="176"/>
         <source>Route calculation was aborted by user.</source>
         <translation>Расчет маршрута был прерван пользователем.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="190"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="182"/>
         <source>A route could not be found to waypoint %1.</source>
         <translation>Невозможно найти маршрут к маршрутной точке %1.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="193"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="185"/>
         <source>Unknown error: %1</source>
         <translation>Неизвестная ошибка: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="205"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="197"/>
         <source>profile &quot;%1&quot;</source>
         <translation>профиль &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="206"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="198"/>
         <source>, mode &quot;%1&quot;</source>
         <translation>, режим &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="349"/>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="432"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="286"/>
+        <source>Could not find a profiles XML file in expected folders. Routino Routing will not function</source>
+        <translation>Не смог найти XML файл профилей в нужных папках. Маршрутизация не будет работать.</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="304"/>
+        <source>%1
+Error in &apos;%2&apos;
+This needs to be fixed
+The associated database &apos;%3&apos; is ignored</source>
+        <translation>%1
+Ошибка в &apos;%2&apos;.
+Это должно быть исправлено.
+Связанная с ней база данных &apos;%3&apos; игнорируется.</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="383"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="475"/>
+        <source>Required profile &apos;%1&apos; is not in the current profiles file.</source>
+        <translation>Необходимый профиль &apos;%1&apos; отсутствует в текущем файле профилей.</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="418"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="509"/>
         <source>Calculate route with %1</source>
         <translation>Вычислить маршрут с %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="357"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="426"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Время расчета: %1 сек.</translation>
     </message>
@@ -6007,9 +6050,17 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="98"/>
         <source>GPS Tether
-The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hot spot.
+The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hotspot.
 For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
         <translation>Привязка GPS
+Основная идея этого источника - это получить поток GPS NMEA данных через соединение по протоколу TCP/IP. Вы можете использовать Android-приложение &quot;GPS Tether&quot; как сервер, передающий поток данных NMEA. Ваше устройство Android должно быть в той же сети, что и компьютер или обеспечивать точку доступа.
+Для настройки вам нужно знать IP-адрес вашего Android устройства или его имя, известное DNS-серверу. Тогда приложение сообщит вам адрес. Кроме того, вам нужен номер порта, который показан в приложении.</translation>
+    </message>
+    <message>
+        <source>GPS Tether
+The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hot spot.
+For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
+        <translation type="vanished">Привязка GPS
 Основная идея этого источника - это получить поток GPS NMEA данных через соединение по протоколу TCP/IP. Вы можете использовать Android-приложение &quot;GPS Tether&quot; как сервер, передающий поток данных NMEA. Ваше устройство Android должно быть в той же сети, что и компьютер или обеспечивать точку доступа.
 Для настройки вам нужно знать IP-адрес вашего Android устройства или его имя, известное DNS-серверу. Тогда приложение сообщит вам адрес. Кроме того, вам нужен номер порта, который показан в приложении.</translation>
     </message>
@@ -6128,16 +6179,24 @@ For configuration you need to know your Android device&apos;s IP address or it&a
 <context>
     <name>CRtSelectSource</name>
     <message>
-        <location filename="../realtime/CRtSelectSource.cpp" line="63"/>
         <source>Select a real time source from the list. Some sources can be added multiple times. For others only a single instance can be added.</source>
+        <translation type="vanished">Выбрать источник данных в реальном времени из списка. Некоторые источники могут быть добавлены несколько раз. Другие можно добавить только один раз.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/CRtSelectSource.cpp" line="63"/>
+        <source>Select a realtime source from the list. Some sources can be added multiple times. For others only a single instance can be added.</source>
         <translation>Выбрать источник данных в реальном времени из списка. Некоторые источники могут быть добавлены несколько раз. Другие можно добавить только один раз.</translation>
     </message>
 </context>
 <context>
     <name>CRtWorkspace</name>
     <message>
-        <location filename="../realtime/CRtWorkspace.cpp" line="67"/>
         <source>To add a real time source do a right click on the list above. </source>
+        <translation type="vanished">Чтобы добавить источник данных в реальном времени, щелкните правой кнопкой мышки на верхнем списке.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/CRtWorkspace.cpp" line="67"/>
+        <source>To add a realtime source do a right click on the list above. </source>
         <translation>Чтобы добавить источник данных в реальном времени, щелкните правой кнопкой мышки на верхнем списке.</translation>
     </message>
     <message>
@@ -6233,8 +6292,8 @@ For configuration you need to know your Android device&apos;s IP address or it&a
 <context>
     <name>CSearch</name>
     <message>
-        <location filename="../gis/search/CSearch.h" line="165"/>
-        <location filename="../gis/search/CSearch.h" line="175"/>
+        <location filename="../gis/search/CSearch.h" line="172"/>
+        <location filename="../gis/search/CSearch.h" line="182"/>
         <source>No information available</source>
         <translation>Нет информации</translation>
     </message>
@@ -6569,287 +6628,357 @@ For configuration you need to know your Android device&apos;s IP address or it&a
         <translation>ключевые слова</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="463"/>
+        <location filename="../gis/search/CSearch.cpp" line="461"/>
+        <source>type</source>
+        <translation>тип</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="464"/>
         <source>area</source>
         <translation>площадь</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="466"/>
+        <location filename="../gis/search/CSearch.cpp" line="467"/>
         <source>difficulty</source>
         <translation>доступность</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="468"/>
+        <location filename="../gis/search/CSearch.cpp" line="469"/>
         <source>terrain</source>
         <translation>местность</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="469"/>
+        <location filename="../gis/search/CSearch.cpp" line="470"/>
         <source>T</source>
         <translation>местность</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="470"/>
+        <location filename="../gis/search/CSearch.cpp" line="471"/>
         <source>positive attributes</source>
         <translation>атрибуты без отрицания</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="471"/>
+        <location filename="../gis/search/CSearch.cpp" line="472"/>
         <source>non-negated attributes</source>
         <translation>атрибуты без отрицания</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="472"/>
+        <location filename="../gis/search/CSearch.cpp" line="473"/>
         <source>negated attributes</source>
         <translation>атрибуты с отрицанием</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="473"/>
+        <location filename="../gis/search/CSearch.cpp" line="474"/>
         <source>size</source>
         <translation>размер</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="474"/>
+        <location filename="../gis/search/CSearch.cpp" line="475"/>
         <source>GCCode</source>
         <translation>GCCode</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="475"/>
+        <location filename="../gis/search/CSearch.cpp" line="476"/>
         <source>GCName</source>
         <translation>GCName</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="476"/>
+        <location filename="../gis/search/CSearch.cpp" line="477"/>
         <source>status</source>
         <translation>статус</translation>
     </message>
     <message>
+        <location filename="../gis/search/CSearch.cpp" line="478"/>
+        <source>GCType</source>
+        <translation>GCType</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="479"/>
+        <source>logged by</source>
+        <translation>автор последней записи журнала</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="480"/>
+        <source>latest log date</source>
+        <translation>дата последней записи журнала</translation>
+    </message>
+    <message>
         <location filename="../gis/search/CSearch.cpp" line="481"/>
+        <source>latest log type</source>
+        <translation>тип последней записи журнала</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="482"/>
+        <source>latest log by</source>
+        <translation>автор последней записи журнала</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="483"/>
+        <source>GCOwner</source>
+        <translation>GCOwner</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="488"/>
         <source>distance</source>
         <translation>расстояние</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="482"/>
+        <location filename="../gis/search/CSearch.cpp" line="489"/>
         <source>length</source>
         <translation>длина</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="483"/>
+        <location filename="../gis/search/CSearch.cpp" line="490"/>
         <source>ascent</source>
         <translation>подъём</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="484"/>
+        <location filename="../gis/search/CSearch.cpp" line="491"/>
         <source>elevation gain</source>
         <translation>подъём</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="485"/>
+        <location filename="../gis/search/CSearch.cpp" line="492"/>
         <source>descent</source>
         <translation>спуск</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="486"/>
+        <location filename="../gis/search/CSearch.cpp" line="493"/>
         <source>min elevation</source>
         <translation>мин высота</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="487"/>
+        <location filename="../gis/search/CSearch.cpp" line="494"/>
         <source>minimal elevation</source>
         <translation>минимальная высота</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="488"/>
+        <location filename="../gis/search/CSearch.cpp" line="495"/>
         <source>max elevation</source>
         <translation>макс высота</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="489"/>
+        <location filename="../gis/search/CSearch.cpp" line="496"/>
         <source>maximal elevation</source>
         <translation>максимальная высота</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="490"/>
+        <location filename="../gis/search/CSearch.cpp" line="497"/>
         <source>max speed</source>
         <translation>макс скорость</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="491"/>
+        <location filename="../gis/search/CSearch.cpp" line="498"/>
         <source>maximal speed</source>
         <translation>максимальная скорость</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="492"/>
+        <location filename="../gis/search/CSearch.cpp" line="499"/>
         <source>min speed</source>
         <translation>мин скорость</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="493"/>
+        <location filename="../gis/search/CSearch.cpp" line="500"/>
         <source>minimal speed</source>
         <translation>минимальная скорость</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="494"/>
+        <location filename="../gis/search/CSearch.cpp" line="501"/>
         <source>average speed</source>
         <translation>средняя скорость</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="495"/>
+        <location filename="../gis/search/CSearch.cpp" line="502"/>
         <source>activity</source>
         <translation>активность</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="496"/>
+        <location filename="../gis/search/CSearch.cpp" line="503"/>
         <source>total time</source>
         <translation>общее время</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="497"/>
+        <location filename="../gis/search/CSearch.cpp" line="504"/>
         <source>duration</source>
         <translation>продолжительность</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="498"/>
+        <location filename="../gis/search/CSearch.cpp" line="505"/>
         <source>time moving</source>
         <translation>время движения</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="507"/>
+        <location filename="../gis/search/CSearch.cpp" line="514"/>
         <source>searches the name of the item. For Geocaches this is &quot;Name - GCCode&quot;.</source>
         <translation>поиск имени элемента. Для тайников это &quot;имя-GCCode&quot;.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="508"/>
+        <location filename="../gis/search/CSearch.cpp" line="515"/>
         <source>searches the full text</source>
         <translation>поиск в полном тексте</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="509"/>
+        <location filename="../gis/search/CSearch.cpp" line="516"/>
         <source>searches the elevation. For items consisting of multiple points the minimum and the maximum is used</source>
         <translation>поиск высоты. Для элементов, состоящих из нескольких точек используется все точки.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="510"/>
+        <location filename="../gis/search/CSearch.cpp" line="517"/>
         <source>searches the Date</source>
         <translation>поиск даты</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="511"/>
+        <location filename="../gis/search/CSearch.cpp" line="518"/>
         <source>searches the Comment</source>
         <translation>поиск в комментарии</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="512"/>
+        <location filename="../gis/search/CSearch.cpp" line="519"/>
         <source>searches the Description</source>
         <translation>поиск в описании</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="513"/>
+        <location filename="../gis/search/CSearch.cpp" line="520"/>
         <source>searches the Keywords</source>
         <translation>поиск в ключевых словах</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="514"/>
+        <location filename="../gis/search/CSearch.cpp" line="521"/>
         <source>compares the Rating</source>
         <translation>сравнивает рейтинг</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="517"/>
+        <location filename="../gis/search/CSearch.cpp" line="522"/>
+        <source>searches the type of the GisItem (Waypoint, Track, Route, Area)</source>
+        <translation>ищет тип объекта (путевая точка, трек, маршрут, область)</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="525"/>
         <source>searches the area</source>
         <translation>поиск площади</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="520"/>
+        <location filename="../gis/search/CSearch.cpp" line="528"/>
         <source>searches the difficulty rating of a geocache</source>
         <translation>поиск рейтинга доступности тайника</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="521"/>
+        <location filename="../gis/search/CSearch.cpp" line="529"/>
         <source>searches the terrain rating of a geocache</source>
         <translation>поиск рейтинга местности тайника</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="522"/>
+        <location filename="../gis/search/CSearch.cpp" line="530"/>
         <source>searches the translated meanings of the non-negated attributes (Those not crossed out)</source>
         <translation>поиск значений атрибутов без отрицания (не зачеркнутых)</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="523"/>
+        <location filename="../gis/search/CSearch.cpp" line="531"/>
         <source>searches the translated meanings of the negated attributes (Those crossed out)</source>
         <translation>поиск значений атрибутов с отрицанием (зачеркнутых)</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="524"/>
+        <location filename="../gis/search/CSearch.cpp" line="532"/>
         <source>searches the size of a geocache. (micro, small, regular, large)</source>
         <translation>поиск размера тайника (micro, small, regular, large)</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="525"/>
+        <location filename="../gis/search/CSearch.cpp" line="533"/>
         <source>searches the GCCode of a geocache.</source>
         <translation>поиск в GCCode тайника</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="526"/>
+        <location filename="../gis/search/CSearch.cpp" line="534"/>
         <source>searches the Name of a geocache.</source>
         <translation>поиск имени тайника</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="527"/>
+        <location filename="../gis/search/CSearch.cpp" line="535"/>
         <source>searches the status of a geocache. (available, not available, archived)</source>
         <translation>обыскать статус тайника (доступно, недоступно, архивировано).</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="532"/>
+        <location filename="../gis/search/CSearch.cpp" line="536"/>
+        <source>searches the type of a geocache. (traditional, unknown, virtual...)</source>
+        <translation>ищет тип тайника (традиционный, неизвестный, виртуальный...)</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="537"/>
+        <source>searches the available logs for a username</source>
+        <translation>ищет в доступных журналах имя пользователя</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="538"/>
+        <source>searches the date of the latest log</source>
+        <translation>ищет дату последней записи журнала</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="539"/>
+        <source>searches the type of the latest log (Found It, Didn&apos;t find it, Owner Maintenance, Write Note...)</source>
+        <translation>ищет тип последней записи журнала (нашел, не нашел, обслуживание владельцем, запись...)</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="540"/>
+        <source>searches the username of the latest log</source>
+        <translation>ищет пользовательское имя последней записи в журнале</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="541"/>
+        <source>searches the username of the geocache owner</source>
+        <translation>ищет пользовательское имя владельца тайника</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="546"/>
         <source>searches the distance covered by a route or track</source>
         <translation>поиск расстояния, пройденного маршрутом или треком</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="533"/>
+        <location filename="../gis/search/CSearch.cpp" line="547"/>
         <source>searches the total ascent in a route or track</source>
         <translation>поиск общего подъема маршрута или трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="534"/>
+        <location filename="../gis/search/CSearch.cpp" line="548"/>
         <source>searches the total descent in a route or track</source>
         <translation>поиск общего спуска маршрута или трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="535"/>
+        <location filename="../gis/search/CSearch.cpp" line="549"/>
         <source>searches the minimal elevation in a route or track</source>
         <translation>поиск минимальной высоты маршрута или трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="536"/>
+        <location filename="../gis/search/CSearch.cpp" line="550"/>
         <source>searches the maximal elevation in a route or track</source>
         <translation>поиск максимальной высоты маршрута или трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="537"/>
+        <location filename="../gis/search/CSearch.cpp" line="551"/>
         <source>searches the maximal speed in a track</source>
         <translation>поиск максимальной скорости трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="538"/>
+        <location filename="../gis/search/CSearch.cpp" line="552"/>
         <source>searches the minimal speed in a track</source>
         <translation>поиск минимальной скорости трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="539"/>
+        <location filename="../gis/search/CSearch.cpp" line="553"/>
         <source>searches the average speed in a track</source>
         <translation>поиск средней скорости трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="540"/>
+        <location filename="../gis/search/CSearch.cpp" line="554"/>
         <source>searches the activity of a route or track</source>
         <translation>поиск активности трека</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="541"/>
+        <location filename="../gis/search/CSearch.cpp" line="555"/>
         <source>searches the total time spent on a route or track</source>
         <translation>поиск общего времени, затраченного на трек</translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="542"/>
+        <location filename="../gis/search/CSearch.cpp" line="556"/>
         <source>searches the time spent moving on a track</source>
         <translation>поиск времени, затраченного на перемещение по треку</translation>
     </message>
@@ -6920,8 +7049,12 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="57"/>
-        <source>&apos;Date equals&apos; matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local time zone is taken for the query.</source>
+        <source>&apos;Date equals&apos; matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local timezone is taken for the query.</source>
         <translation>&quot;Дата равна&quot; соответствует всему, что находится в пределах следующих 24 часов, если время предоставляется с датой. Если нет времени, то это соответсвует всему в день запроса. Имейте в виду, что время преобразуется в UTC перед сравнением, и ваш местный часовой пояс берется для запроса.</translation>
+    </message>
+    <message>
+        <source>&apos;Date equals&apos; matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local time zone is taken for the query.</source>
+        <translation type="vanished">&quot;Дата равна&quot; соответствует всему, что находится в пределах следующих 24 часов, если время предоставляется с датой. Если нет времени, то это соответсвует всему в день запроса. Имейте в виду, что время преобразуется в UTC перед сравнением, и ваш местный часовой пояс берется для запроса.</translation>
     </message>
     <message>
         <source>&apos;Date equals&apos; matches everything that is within 24h of the current day.</source>
@@ -11314,9 +11447,8 @@ Filename: %1</source>
         <translation>Ночь/день</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="432"/>
         <source>Map Tool Tip</source>
-        <translation>Подсказка карты</translation>
+        <translation type="vanished">Подсказка карты</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="435"/>
@@ -11385,9 +11517,8 @@ Filename: %1</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="534"/>
         <source>Setup Time Zone</source>
-        <translation>Настройка часового пояса</translation>
+        <translation type="vanished">Настройка часового пояса</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="546"/>
@@ -11479,6 +11610,11 @@ Filename: %1</source>
         <location filename="../IMainWindow.ui" line="738"/>
         <source>Save(Print) Map</source>
         <translation>Сохранить (распечатать) карту</translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="843"/>
+        <source>Fullscreen</source>
+        <translation>Во весь экран</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="858"/>
@@ -11576,6 +11712,16 @@ Filename: %1</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
+        <location filename="../IMainWindow.ui" line="432"/>
+        <source>Map Tooltip</source>
+        <translation>Подсказка карты</translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="534"/>
+        <source>Setup Timezone</source>
+        <translation>Настройка часового пояса</translation>
+    </message>
+    <message>
         <location filename="../IMainWindow.ui" line="696"/>
         <source>Close</source>
         <translation>Закрыть</translation>
@@ -11671,9 +11817,8 @@ Filename: %1</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="843"/>
         <source>Full Screen</source>
-        <translation>Во весь экран</translation>
+        <translation type="vanished">Во весь экран</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="846"/>
@@ -14025,7 +14170,7 @@ This is known as solving the Traveling Salesman Problem, however start and end a
 Note: If you want to fix bad points in a real GPS recording 
 this is the right tool. Simply select the section of bad points 
 (one is ok, too) and hide them.</source>
-        <extracomment>use line breakes to keep a sensible tool tip width</extracomment>
+        <extracomment>use line breaks to keep a sensible tooltip width</extracomment>
         <translation>Выбрать интервал точек. Вы можете использовать этот инструмент чтобы:
 
 * скрыть или показать точки трека,
@@ -14044,7 +14189,7 @@ to plan a tour.
 
 Note: This is the wrong tool to fix bad points of a real GPS 
 recording. Use the range tool. </source>
-        <extracomment>use line breakes to keep a sensible tool tip width</extracomment>
+        <extracomment>use line breaks to keep a sensible tooltip width</extracomment>
         <translation>Изменить положение точек трека и использовать автоматическую маршрутизацию
 для создания новых точек трека. Используется для создания новых треков
 если спланировать тур.
@@ -15049,8 +15194,12 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
 <context>
     <name>ITimeZoneSetup</name>
     <message>
-        <location filename="../units/ITimeZoneSetup.ui" line="14"/>
         <source>Setup Time Zone ...</source>
+        <translation type="vanished">Настройка часового пояса...</translation>
+    </message>
+    <message>
+        <location filename="../units/ITimeZoneSetup.ui" line="14"/>
+        <source>Setup Timezone ...</source>
         <translation>Настройка часового пояса...</translation>
     </message>
     <message>

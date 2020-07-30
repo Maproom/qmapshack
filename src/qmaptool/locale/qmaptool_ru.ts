@@ -302,32 +302,32 @@
 <context>
     <name>COverlayCutMap</name>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="222"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="224"/>
         <source>Delete mask...</source>
         <translation>Удалить маску ...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="222"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="224"/>
         <source>Are you sure to delete complete mask?</source>
         <translation>Вы действительно хотите удалить всю маску?</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="239"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="241"/>
         <source>Save mask...</source>
         <translation>Сохранить маску ...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="287"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="289"/>
         <source>Load mask...</source>
         <translation>Загрузить маску ...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="301"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="303"/>
         <source>Failed...</source>
         <translation>Не удалось...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="301"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="303"/>
         <source>Not a shape file.</source>
         <translation>Не файл фигуры.</translation>
     </message>
@@ -1266,8 +1266,12 @@ or
 <context>
     <name>ITimeZoneSetup</name>
     <message>
-        <location filename="../units/ITimeZoneSetup.ui" line="14"/>
         <source>Setup Time Zone ...</source>
+        <translation type="vanished">Настройка часового пояса...</translation>
+    </message>
+    <message>
+        <location filename="../units/ITimeZoneSetup.ui" line="14"/>
+        <source>Setup Timezone ...</source>
         <translation>Настройка часового пояса...</translation>
     </message>
     <message>

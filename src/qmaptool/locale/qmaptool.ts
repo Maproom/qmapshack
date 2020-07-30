@@ -282,32 +282,32 @@
 <context>
     <name>COverlayCutMap</name>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="222"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="224"/>
         <source>Delete mask...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="222"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="224"/>
         <source>Are you sure to delete complete mask?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="239"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="241"/>
         <source>Save mask...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="287"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="289"/>
         <source>Load mask...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="301"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="303"/>
         <source>Failed...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="301"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="303"/>
         <source>Not a shape file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1227,7 +1227,7 @@ or
     <name>ITimeZoneSetup</name>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="14"/>
-        <source>Setup Time Zone ...</source>
+        <source>Setup Timezone ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

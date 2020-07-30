@@ -380,7 +380,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
         if( profile == NULL )
         {
-            throw tr("Required profile '%1' is not the current profiles file.").arg(strProfile);
+            throw tr("Required profile '%1' is not in the current profiles file.").arg(strProfile);
         }
         Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
 
@@ -472,7 +472,7 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
         if( profile == NULL )
         {
-            throw tr("Required profile '%1' is not the current profiles file.").arg(strProfile);
+            throw tr("Required profile '%1' is not in the current profiles file.").arg(strProfile);
         }
         Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
 

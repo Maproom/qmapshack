@@ -282,32 +282,32 @@
 <context>
     <name>COverlayCutMap</name>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="222"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="224"/>
         <source>Delete mask...</source>
         <translation>Cancella maschera...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="222"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="224"/>
         <source>Are you sure to delete complete mask?</source>
         <translation>Eliminare la maschera completa?</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="239"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="241"/>
         <source>Save mask...</source>
         <translation>Salva maschera...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="287"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="289"/>
         <source>Load mask...</source>
         <translation>Apri maschera...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="301"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="303"/>
         <source>Failed...</source>
         <translation>Fallito...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="301"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="303"/>
         <source>Not a shape file.</source>
         <translation>Shape file non valido.</translation>
     </message>
@@ -1245,9 +1245,13 @@ o
 <context>
     <name>ITimeZoneSetup</name>
     <message>
-        <location filename="../units/ITimeZoneSetup.ui" line="14"/>
         <source>Setup Time Zone ...</source>
-        <translation>Setup Time Zone ...</translation>
+        <translation type="vanished">Setup Time Zone ...</translation>
+    </message>
+    <message>
+        <location filename="../units/ITimeZoneSetup.ui" line="14"/>
+        <source>Setup Timezone ...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="22"/>

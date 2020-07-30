@@ -310,32 +310,32 @@
 <context>
     <name>COverlayCutMap</name>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="222"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="224"/>
         <source>Delete mask...</source>
         <translation>Borrar máscara...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="222"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="224"/>
         <source>Are you sure to delete complete mask?</source>
         <translation>¿Estás seguro de eliminar la máscara completa?</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="239"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="241"/>
         <source>Save mask...</source>
         <translation>Guardar máscara...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="287"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="289"/>
         <source>Load mask...</source>
         <translation>Cargar máscara...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="301"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="303"/>
         <source>Failed...</source>
         <translation>Fallo...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayCutMap.cpp" line="301"/>
+        <location filename="../overlay/COverlayCutMap.cpp" line="303"/>
         <source>Not a shape file.</source>
         <translation>No es un archivo shape.</translation>
     </message>
@@ -1266,9 +1266,13 @@ o
 <context>
     <name>ITimeZoneSetup</name>
     <message>
-        <location filename="../units/ITimeZoneSetup.ui" line="14"/>
         <source>Setup Time Zone ...</source>
-        <translation>Configurar Zona Horaria...</translation>
+        <translation type="vanished">Configurar Zona Horaria...</translation>
+    </message>
+    <message>
+        <location filename="../units/ITimeZoneSetup.ui" line="14"/>
+        <source>Setup Timezone ...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="22"/>

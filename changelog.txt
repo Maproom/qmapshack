@@ -4,6 +4,7 @@ V1.XX.X
 [QMS-217] Fix crash due to faulty profiles.xml
 [QMS-223] Add additional filter properties
 [QMS-231] Improve English spelling
+[QMS-240] Fix negative courses in the ruler tool
 
 V1.15.0
 [QMS-68] Route Optimization

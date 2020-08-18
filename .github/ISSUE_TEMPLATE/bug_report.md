@@ -9,8 +9,8 @@ assignees: ''
 
 **Important Notice:**
 
-**Do not delete any of the sections. Answer them. If you really**
-**think they do not apply to you give a short statement. Bug**
+**Do not delete any of the sections. Read what is requested.**
+**_Replace(!)_ the instructions by your _answer(!)_. Bug**
 **reports that are not properly filed might be closed without**
 **further notice.**
 

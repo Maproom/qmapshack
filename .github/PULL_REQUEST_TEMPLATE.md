@@ -1,3 +1,8 @@
+_**Note: Do not delete any of the sections**_
+_**Answer them all. Replace the descriptive text**_
+_**by your answer**_
+
+
 **What is the linked issue for this pull request (start with a `#`):** QMS-#
 
 **Describe roughly what you have done:**
@@ -17,11 +22,6 @@ I added...
 
 - [ ] yes
 
-**Is the change user facing?**
-
-- [ ] yes,
-- [ ] no
-
-**If there are user facing changes did you add the ticket number and title into the changelog?**
+**Did you add the ticket number and title into the changelog? Keep the numeric order in each release block.**
 
 - [ ] yes, I didn't forget to change changelog.txt

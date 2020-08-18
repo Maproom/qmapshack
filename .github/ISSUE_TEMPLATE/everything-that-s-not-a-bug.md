@@ -9,9 +9,9 @@ assignees: ''
 
 **Important Notice:**
 
-**Do not delete any of the sections. Answer them. If you really**
-**think they do not apply to you give a short statement. Feature**
-**requests that are not properly filed might be closed without**
+**Do not delete any of the sections. Read what is requested.**
+**_Replace(!)_ the instructions by your _answer(!)_. Feature requests**
+**reports that are not properly filed might be closed without**
 **further notice.**
 
 **Choose a good title**

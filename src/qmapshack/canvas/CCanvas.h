@@ -173,11 +173,14 @@ public:
 
     void followPosition(const QPointF& pos);
 
-    //Allows showing the track overlays if they are set in CMainWindow
+    /// Allows showing the track overlays if they are set in CMainWindow
     void allowShowTrackOverlays(bool show)
     {
         showTrackOverlays = show;
     }
+
+    /// save the size of the track profile if it is in window mode
+    void saveSizeTrackProfile();
 
     static qreal gisLayerOpacity;
 
@@ -220,7 +223,6 @@ private:
     }
     void setZoom(bool in, redraw_e & needsRedraw);
     void setSizeTrackProfile();
-    void saveSizeTrackProfile();
     /**
        @brief Resize all registered drwa context objects
 

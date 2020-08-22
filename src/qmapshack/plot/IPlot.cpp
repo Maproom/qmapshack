@@ -130,6 +130,7 @@ IPlot::~IPlot()
             CCanvas * canvas = dynamic_cast<CCanvas*>(parent());
             if(canvas)
             {
+                canvas->saveSizeTrackProfile();
                 canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
             }
         }

@@ -166,6 +166,8 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
 CCanvas::~CCanvas()
 {
+    saveSizeTrackProfile();
+
     /* stop running drawing-threads and don't destroy unless they have finished*/
     for(IDrawContext * context : allDrawContext)
     {
@@ -182,7 +184,6 @@ CCanvas::~CCanvas()
         in CCanvas is destroyed.
      */
     delete mouse;
-    saveSizeTrackProfile();
 }
 
 void addHtmlRow(QString& text, const QString& col1, const QString& col2, const QString& td1, const QString& td2)
@@ -906,7 +907,6 @@ void CCanvas::slotCheckTrackOnFocus()
     // any changes?
     if(key != keyTrackOnFocus)
     {
-        saveSizeTrackProfile();
         // get access to current track object
         delete plotTrackProfile;
         delete colorLegend;

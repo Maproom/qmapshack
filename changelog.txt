@@ -4,6 +4,7 @@ V1.XX.X
 [QMS-217] Fix crash due to faulty profiles.xml
 [QMS-223] Add additional filter properties
 [QMS-231] Improve English spelling
+[QMS-235] Save track profile window's geometry when window gets closed
 [QMS-240] Fix negative courses in the ruler tool
 [QMS-244] Unable to create rotino database (planetsplitter: cannot open file)
 

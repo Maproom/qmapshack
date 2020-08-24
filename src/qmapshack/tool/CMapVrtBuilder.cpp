@@ -173,9 +173,10 @@ void CMapVrtBuilder::slotStart()
     tempFile->open();
     tempFile->resize(0);
     QTextStream stream(tempFile);
-    for(const QListWidgetItem * item : listWidget->findItems("*", Qt::MatchWildcard))
+    const int N = listWidget->count();
+    for(int n = 0; n < N; n++)
     {
-        stream << item->text() << endl;
+        stream << listWidget->item(n)->text() << endl;
     }
     tempFile->close();
     args << "-input_file_list" << tempFile->fileName();

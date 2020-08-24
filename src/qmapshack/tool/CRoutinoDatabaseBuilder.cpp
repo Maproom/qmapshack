@@ -140,9 +140,10 @@ void CRoutinoDatabaseBuilder::slotStart()
     pushStart->setDisabled(true);
 
     sourceFiles.clear();
-    for(const QListWidgetItem * item : listWidget->findItems("*", Qt::MatchWildcard))
+    const int N = listWidget->count();
+    for(int n = 0; n < N; n++)
     {
-        sourceFiles << item->text();
+        sourceFiles << listWidget->item(n)->text();
     }
 
     targetPrefix    = lineTargetPrefix->text();

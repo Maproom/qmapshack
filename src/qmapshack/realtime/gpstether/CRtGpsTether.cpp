@@ -23,7 +23,6 @@
 #include "realtime/gpstether/CRtGpsTetherInfo.h"
 #include "units/IUnit.h"
 
-#include <QtPositioning>
 #include <QtWidgets>
 
 #define GPS_TETHER "GPS Tether"

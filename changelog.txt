@@ -7,6 +7,7 @@ V1.XX.X
 [QMS-235] Save track profile window's geometry when window gets closed
 [QMS-240] Fix negative courses in the ruler tool
 [QMS-244] Unable to create rotino database (planetsplitter: cannot open file)
+[QMS-247] Build error: "Target "qmapshack" links to target "Qt5::Positioning" but the target was not found"
 
 V1.15.0
 [QMS-68] Route Optimization

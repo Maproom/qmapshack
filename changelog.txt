@@ -8,6 +8,7 @@ V1.XX.X
 [QMS-240] Fix negative courses in the ruler tool
 [QMS-244] Unable to create rotino database (planetsplitter: cannot open file)
 [QMS-247] Build error: "Target "qmapshack" links to target "Qt5::Positioning" but the target was not found"
+[QMS-254] MySQL: QMapShack does not automatically reconnect
 
 V1.15.0
 [QMS-68] Route Optimization

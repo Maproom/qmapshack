@@ -44,6 +44,7 @@ bool IDBMysql::setupDB(const QString& server, const QString& port, const QString
         db = QSqlDatabase::addDatabase("QMYSQL", connectionName);
         db.setDatabaseName(name);
         db.setHostName(server);
+        db.setConnectOptions("MYSQL_OPT_RECONNECT=1");
 
         if(!port.isEmpty())
         {

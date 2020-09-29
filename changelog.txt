@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-244] Unable to create rotino database (planetsplitter: cannot open file)
 [QMS-247] Build error: "Target "qmapshack" links to target "Qt5::Positioning" but the target was not found"
 [QMS-254] MySQL: QMapShack does not automatically reconnect
+[QMS-257] Import gpx file to group folder does not trigger update
 
 V1.15.0
 [QMS-68] Route Optimization

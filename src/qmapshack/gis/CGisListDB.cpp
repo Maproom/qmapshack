@@ -1091,6 +1091,7 @@ void CGisListDB::slotImport()
     IDBFolderSql * dbfolder = folder->getDBFolder();
     if(dbfolder)
     {
+        dbfolder->update();
         dbfolder->announceChange();
     }
 

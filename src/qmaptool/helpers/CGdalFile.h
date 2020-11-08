@@ -33,7 +33,13 @@ class CGdalFile
 {
     Q_DECLARE_TR_FUNCTIONS(CGdalFile)
 public:
-    CGdalFile();
+    enum type_e
+    {
+        eTypePixel,
+        eTypeProj
+    };
+
+    CGdalFile(type_e type);
     virtual ~CGdalFile() = default;
 
     bool getIsValid() const
@@ -47,6 +53,8 @@ protected:
     virtual QString getInfo() const;
     virtual void load(const QString& filename);
     virtual void unload();
+
+    type_e type;
 
     GDALDataset * dataset = nullptr;
 
@@ -83,6 +91,9 @@ protected:
 
     QTransform trFwd;
     QTransform trInv;
+
+    QTransform trFwdProj;
+    QTransform trInvProj;
 
     QString proj4str;
 

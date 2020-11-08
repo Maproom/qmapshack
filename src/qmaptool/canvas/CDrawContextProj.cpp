@@ -24,6 +24,7 @@
 
 CDrawContextProj::CDrawContextProj(CCanvas *canvas, QObject *parent)
     : IDrawContext(canvas, parent)
+    , CGdalFile(CGdalFile::eTypeProj)
 {
 }
 

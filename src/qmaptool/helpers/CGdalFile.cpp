@@ -25,7 +25,8 @@
 
 #include <QtWidgets>
 
-CGdalFile::CGdalFile()
+CGdalFile::CGdalFile(type_e type)
+    : type(type)
 {
 }
 
@@ -46,7 +47,7 @@ void CGdalFile::load(const QString& filename)
     qDebug() << filename;
     CCanvas * canvas = CMainWindow::self().getCanvas();
 
-    dataset = (GDALDataset*)GDALOpenShared(filename.toUtf8(),GA_ReadOnly);
+    dataset = (GDALDataset*)GDALOpenShared(filename.toUtf8(), GA_ReadOnly);
 
     if(nullptr == dataset)
     {
@@ -91,7 +92,7 @@ void CGdalFile::load(const QString& filename)
         if(pBand->GetColorInterpretation() ==  GCI_PaletteIndex )
         {
             GDALColorTable * pct = pBand->GetColorTable();
-            for(int i=0; i < pct->GetColorEntryCount(); ++i)
+            for(int i = 0; i < pct->GetColorEntryCount(); ++i)
             {
                 const GDALColorEntry& e = *pct->GetColorEntry(i);
                 colortable << qRgba(e.c1, e.c2, e.c3, e.c4);
@@ -99,7 +100,7 @@ void CGdalFile::load(const QString& filename)
         }
         else if(pBand->GetColorInterpretation() ==  GCI_GrayIndex )
         {
-            for(int i=0; i < 256; ++i)
+            for(int i = 0; i < 256; ++i)
             {
                 colortable << qRgba(i, i, i, 255);
             }
@@ -135,29 +136,54 @@ void CGdalFile::load(const QString& filename)
     xsize_px = dataset->GetRasterXSize();
     ysize_px = dataset->GetRasterYSize();
 
-    qreal adfGeoTransform[6];
-    dataset->GetGeoTransform( adfGeoTransform );
+    qreal adfGeoTransform[6] = {0, 1, 0, 0, 0, 1};
+    if(type == eTypeProj)
+    {
+        dataset->GetGeoTransform( adfGeoTransform );
+    }
 
     xscale  = adfGeoTransform[1];
     yscale  = adfGeoTransform[5];
     xrot    = adfGeoTransform[4];
     yrot    = adfGeoTransform[2];
 
+    // Setup the basic transformation. Depending on the type this
+    // can be the transformation into pixel coordinates or into
+    // geo coordinates if the file is referenced.
     trFwd = QTransform();
     trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
-    trFwd.scale(adfGeoTransform[1], adfGeoTransform[5]);
+    trFwd.scale(xscale, yscale);
 
     if(adfGeoTransform[4] != 0.0)
     {
-        trFwd.rotate(qAtan(adfGeoTransform[2]/adfGeoTransform[4]));
+        trFwd.rotate(qAtan(xrot / yrot));
     }
 
     trInv = trFwd.inverted();
 
-    ref1 = trFwd.map(QPointF(0,0));
-    ref2 = trFwd.map(QPointF(xsize_px,0));
-    ref3 = trFwd.map(QPointF(xsize_px,ysize_px));
-    ref4 = trFwd.map(QPointF(0,ysize_px));
+    ref1 = trFwd.map(QPointF(0, 0));
+    ref2 = trFwd.map(QPointF(xsize_px, 0));
+    ref3 = trFwd.map(QPointF(xsize_px, ysize_px));
+    ref4 = trFwd.map(QPointF(0, ysize_px));
+
+    {
+        // Setup the geo transformation. If the file is referenced
+        // this will be the transformation between points and geo
+        // coordinates. If not this will be point to pixel transformation
+        qreal adfGeoTransform[6] = {0, 1, 0, 0, 0, 1};
+        dataset->GetGeoTransform( adfGeoTransform );
+
+        trFwdProj = QTransform();
+        trFwdProj.translate(adfGeoTransform[0], adfGeoTransform[3]);
+        trFwdProj.scale(adfGeoTransform[1], adfGeoTransform[5]);
+
+        if(adfGeoTransform[4] != 0.0)
+        {
+            trFwdProj.rotate(qAtan(adfGeoTransform[4] / adfGeoTransform[2]));
+        }
+
+        trInvProj = trFwdProj.inverted();
+    }
 
     isValid = true;
 }

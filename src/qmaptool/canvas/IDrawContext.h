@@ -69,8 +69,37 @@ public:
     void convertMap2Screen(QPolygonF& line) const;
     void convertMap2Screen(QRectF &rect) const;
 
+    /**
+       @brief Convert point in map to coordinates
+
+        Depending on the type and the reference information
+        of the map the result can be:
+
+        * CGdalFile::eTypePixel: Pixel coordinates
+        * CGdalFile::eTypeProj: Geo coordinates, if the file
+          is referenced else pixel coordinates
+     */
     virtual void convertMap2Coord(QPointF &pt) const = 0;
     virtual void convertCoord2Map(QPointF &pt) const = 0;
+
+    /** Convert point in map to coordinates
+
+      Depending on the reference information of the map
+      the result can be:
+
+      * Referenced map: Geo coordinates
+      * Un-referenced map: Pixel coordinates
+
+    */
+    virtual void convertMap2Proj(QPointF &pt) const
+    {
+        convertMap2Coord(pt);
+    }
+
+    virtual void convertProj2Map(QPointF &pt) const
+    {
+        convertCoord2Map(pt);
+    }
 
     /**
        @brief draw
@@ -102,8 +131,8 @@ protected:
     {
         QImage image;
 
-        QPointF zoomFactor {1.0,1.0}; //< the zoomfactor used to draw the canvas
-        QPointF scale {1.0,1.0}; //< the scale of the global viewport
+        QPointF zoomFactor {1.0, 1.0}; //< the zoomfactor used to draw the canvas
+        QPointF scale {1.0, 1.0}; //< the scale of the global viewport
 
         QPointF ref1;  //< top left corner
         QPointF ref2;  //< top right corner

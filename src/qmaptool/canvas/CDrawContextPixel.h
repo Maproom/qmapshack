@@ -77,11 +77,13 @@ public:
 
     QRectF getMapArea() const override
     {
-        return QRectF(0,0, xsize_px, ysize_px);
+        return QRectF(0, 0, xsize_px, ysize_px);
     }
 
     void convertMap2Coord(QPointF &pt) const override;
     void convertCoord2Map(QPointF &pt) const override;
+    void convertMap2Proj(QPointF &pt) const override;
+    void convertProj2Map(QPointF &pt) const override;
 
 protected:
     void drawt(buffer_t& buf) override;

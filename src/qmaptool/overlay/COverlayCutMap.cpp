@@ -268,7 +268,7 @@ void COverlayCutMap::saveShape(const QString& filename)
     for(const QPointF& pt : line)
     {
         QPointF pt1 = pt;
-        context->convertMap2Coord(pt1);
+        context->convertMap2Proj(pt1);
 
         if(!first)
         {
@@ -320,7 +320,7 @@ void COverlayCutMap::slotLoadShape()
                 in2 >> x >> y;
 
                 QPointF pt(x, y);
-                context->convertCoord2Map(pt);
+                context->convertProj2Map(pt);
 
                 region << pt;
 

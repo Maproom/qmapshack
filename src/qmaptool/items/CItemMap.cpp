@@ -26,7 +26,8 @@
 #include <QtWidgets>
 
 CItemMap::CItemMap(const QString &filename)
-    : IItem(filename)
+    : CGdalFile(CGdalFile::eTypeProj)
+    , IItem(filename)
 {
     setText(CItemTreeWidget::eColumnName, QFileInfo(filename).completeBaseName());
     setIcon(CItemTreeWidget::eColumnName, QIcon("://icons/32x32/FolderMap.png"));

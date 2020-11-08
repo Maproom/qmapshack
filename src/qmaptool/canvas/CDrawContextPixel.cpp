@@ -25,6 +25,7 @@
 
 CDrawContextPixel::CDrawContextPixel(CCanvas *canvas, QObject * parent)
     : IDrawContext(canvas, parent)
+    , CGdalFile(CGdalFile::eTypePixel)
 {
     scale = QPointF(1.0, 1.0);
 }
@@ -44,6 +45,15 @@ void CDrawContextPixel::convertCoord2Map(QPointF &pt) const
     pt = trInv.map(pt);
 }
 
+void CDrawContextPixel::convertMap2Proj(QPointF &pt) const
+{
+    pt = trFwdProj.map(pt);
+}
+
+void CDrawContextPixel::convertProj2Map(QPointF &pt) const
+{
+    pt = trInvProj.map(pt);
+}
 
 void CDrawContextPixel::setSourceFile(const QString& filename, bool resetContext)
 {
@@ -51,7 +61,7 @@ void CDrawContextPixel::setSourceFile(const QString& filename, bool resetContext
 
     if(resetContext)
     {
-        focus = QPointF(0,0);
+        focus = QPointF(0, 0);
         zoom(6);
     }
 
@@ -116,7 +126,7 @@ void CDrawContextPixel::drawt(buffer_t& buf)
         GDALRasterBand * pBand;
         pBand = dataset->GetRasterBand(1);
 
-        img = QImage(screenWidth,screenHeight,QImage::Format_Indexed8);
+        img = QImage(screenWidth, screenHeight, QImage::Format_Indexed8);
         img.setColorTable(colortable);
 
         mutex.lock();

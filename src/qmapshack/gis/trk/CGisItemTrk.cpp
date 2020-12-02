@@ -313,10 +313,15 @@ CGisItemTrk::~CGisItemTrk()
     /*
         Delete all registered INotifyTrk as they can't exist without the item.
         As the INotifyTrk objects will unregister via unregisterVisual() in their
-        destructor things will get a bit complicated here. Better create
-        a copy of the list before we start to delete.
+        destructor things will get a bit complicated here. Additionally visuals
+        can be parents of other visuals. Therefor destroying one might destroy
+        others. To cover that we destroy the first object in registeredVisuals
+        until there is none left
      */
-    qDeleteAll(registeredVisuals.toList());
+    while(registeredVisuals.size())
+    {
+        delete *registeredVisuals.begin();
+    }
 
     // now it is save to destroy the details dialog
     delete dlgDetails;

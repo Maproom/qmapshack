@@ -44,7 +44,7 @@ project(QMapShack VERSION 1.15.1)
 
 # FOR A RELEASE:
 # remove "development" for a release
-set(DEVELOPMENT_VERSION OFF)
+set(DEVELOPMENT_VERSION ON)
 
 
 ###############################################################################################

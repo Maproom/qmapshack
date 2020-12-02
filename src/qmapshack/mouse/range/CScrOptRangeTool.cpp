@@ -99,6 +99,7 @@ CScrOptRangeTool::~CScrOptRangeTool()
     trk.unregisterVisual(this);
     canvas->allowShowTrackOverlays(true);
     canvas->slotUpdateTrackInfo(false);
+    canvas->resetMouse();
 }
 
 void CScrOptRangeTool::slotCanvasResize(const QSize& sizeCanvas)

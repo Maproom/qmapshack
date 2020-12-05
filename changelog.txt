@@ -1,4 +1,5 @@
 V1.XX.X
+[QMS-264] Windows: adapt build scripts for 1.15.1 release
 [QMS-268] Crash after closing project where range is being selected
 
 V1.15.1

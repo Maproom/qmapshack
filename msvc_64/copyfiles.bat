@@ -3,7 +3,7 @@ rem Please adapt environment variables in section 1) to your system
 
 
 rem Section 1.) Define path to Qt, MSVC, .... installations
-set QMSI_QT_PATH="C:\Qt5\5.12.3\msvc2017_64"
+set QMSI_QT_PATH="C:\Qt\5.12.10\msvc2017_64"
 rem get the VC redistributable installer from https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 set QMSI_VCREDIST_PATH="M:\deploy_2017"
 set QMSI_GDAL_PATH="M:\lib2017\gdal"
@@ -18,7 +18,7 @@ set QMSI_MGW6_PATH="M:\lib2017\mingw64"
 rem runtime libraries from mysql/mariadb - see 3rdparty.txt from where to get - could this be optional?
 set QMSI_MSQL_PATH="M:\lib2017\mysql"
 rem uncomment the following line if you want OpenSSL
-rem set QMSI_OSSL_PATH="M:\deploy_2017"
+set QMSI_OSSL_PATH="M:\deploy_2017"
 rem And finally of course the path to your build directory!
 set QMSI_BUILD_PATH="..\..\build\"
 
@@ -29,6 +29,7 @@ cd Files
 
 rem Section 2.1) Copy Qt files
 rem Note: Qt5WebEngine deployment is super crazy - see https://doc.qt.io/qt-5.12/qtwebengine-deploying.html
+copy %QMSI_QT_PATH%\bin\assistant.exe
 copy %QMSI_QT_PATH%\bin\Qt5Core.dll
 copy %QMSI_QT_PATH%\bin\Qt5Gui.dll
 copy %QMSI_QT_PATH%\bin\Qt5Help.dll
@@ -39,6 +40,7 @@ copy %QMSI_QT_PATH%\bin\Qt5OpenGL.dll
 copy %QMSI_QT_PATH%\bin\Qt5Positioning.dll
 copy %QMSI_QT_PATH%\bin\Qt5PrintSupport.dll
 copy %QMSI_QT_PATH%\bin\Qt5Qml.dll
+copy %QMSI_QT_PATH%\bin\Qt5QmlModels.dll
 copy %QMSI_QT_PATH%\bin\Qt5Quick.dll
 copy %QMSI_QT_PATH%\bin\Qt5QuickWidgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Sensors.dll
@@ -65,7 +67,7 @@ cd ..
 mkdir sqldrivers
 cd sqldrivers
 copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlite.dll
-copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlmysql.dll
+rem copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlmysql.dll
 copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlodbc.dll
 copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlpsql.dll
 cd ..
@@ -98,7 +100,7 @@ copy %QMSI_GDAL_PATH%\bin\*.dll
 copy %QMSI_GDAL_PATH%\bin\*.exe
 rem section 2.2.4) PROJ.4
 xcopy %QMSI_PROJ_PATH%\share share /s /i
-copy %QMSI_PROJ_PATH%\bin\proj_6_2.dll
+copy %QMSI_PROJ_PATH%\bin\proj_6_3.dll
 copy %QMSI_PROJ_PATH%\bin\proj.exe
 copy %QMSI_PROJ_PATH%\bin\projinfo.exe
 copy %QMSI_PROJ_PATH%\bin\cct.exe
@@ -126,9 +128,9 @@ copy %QMSI_SQLI_PATH%\sqldiff.exe
 copy %QMSI_SQLI_PATH%\sqlite3.exe
 copy %QMSI_SQLI_PATH%\sqlite3_analyzer.exe
 rem uncomment the following line if you want OpenSSL
-rem copy %QMSI_OSSL_PATH%\libeay32.dll
-rem copy %QMSI_OSSL_PATH%\ssleay32.dll
-rem copy %QMSI_OSSL_PATH%\openssl.exe
+copy %QMSI_OSSL_PATH%\libcrypto-1_1-x64.dll
+copy %QMSI_OSSL_PATH%\libssl-1_1-x64.dll
+copy %QMSI_OSSL_PATH%\openssl.exe
 
 
 rem section 2.3) Copy MSVC Redist Files
@@ -152,8 +154,9 @@ copy ..\..\..\src\qmaptool\doc\QMTHelp.* HTML
 cd ..
 
 
-rem section 2.5) 3rd party SW description
+rem section 2.5) 3rd party SW description and LICENSE
 copy ..\3rdparty.txt
+copy ..\..\LICENSE
 
 rem section 2.6) qt.conf
 copy ..\qt.conf

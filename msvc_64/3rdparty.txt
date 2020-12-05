@@ -2,10 +2,12 @@
 #         QMapShack for Windows dependencies                #
 #############################################################
 This installation of QMapShack for Windows (short: QMS) 
-has been build with Visual Studio 2013 as 64bit application.
+has been build with Visual Studio 2017 as 64bit application.
 
 If you want to build QMS on your own, have a look at
 https://github.com/Maproom/qmapshack/wiki/BuildWindowsVisualStudio
+
+The QMS source code is available at https://github.com/Maproom/qmapshack
 
 Dependencies
 ============
@@ -19,9 +21,9 @@ QMS depends on the 3rd party software listed below:
   Note: Those runtime libraries may already be contained in Windows 10 installations.
 
 2.) Qt5 runtime libraries
-  The Qt DLL's are deployed in the QMS installation directory. 
-  They are part of Qt which you can download here:
-    http://qt-project.org/downloads
+  The Qt libraries are deployed in the QMS installation directory.
+  Qt is used according the GPLv3 open source License
+    See https://www.qt.io/download-open-source and https://www.gnu.org/licenses/gpl-3.0.html
 
 3.) The GDAL library, http://www.gdal.org/
 
@@ -60,3 +62,6 @@ QMS depends on the 3rd party software listed below:
 
 12.) sqlite
   The source code can be downloaded from https://www.sqlite.org/download.html
+
+13.) QuaZIP
+  The source code can be downloaded from https://stachenov.github.io/quazip/

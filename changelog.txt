@@ -1,7 +1,8 @@
 V1.XX.X
-[QMS-270] Windows: rename LICENSE file to 1LICENSE.txt
 [QMS-264] Windows: adapt build scripts for 1.15.1 release
 [QMS-268] Crash after closing project where range is being selected
+[QMS-270] Windows: rename LICENSE file to 1LICENSE.txt
+[QMS-273] Windows: install Help search index files
 
 V1.15.1
 [QMS-158] Change Routino Profiles search for [prefix-]profiles.xml

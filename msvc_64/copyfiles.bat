@@ -156,7 +156,7 @@ cd ..
 
 rem section 2.5) 3rd party SW description and LICENSE
 copy ..\3rdparty.txt
-copy ..\..\LICENSE
+copy ..\..\LICENSE 1LICENSE.txt
 
 rem section 2.6) qt.conf
 copy ..\qt.conf

@@ -248,7 +248,7 @@ Section "QMapShack" QMapShack
     File Files\libmysql.dll  
     File Files\3rdparty.txt
     File Files\qt.conf
-    File Files\LICENSE
+    File Files\1LICENSE.txt
   ;END additional Files
 
   ;BEGIN OpenSSL Files

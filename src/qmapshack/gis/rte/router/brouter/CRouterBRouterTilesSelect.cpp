@@ -59,6 +59,7 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     }
 
     outerLayout = new QVBoxLayout(this);
+    setLayout(outerLayout);
     outerLayout->setContentsMargins(0, 0, 0, 0);
     widgetSelect = new QWidget(this);
     widgetSelect->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
@@ -84,11 +85,12 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     selectArea = new CRouterBRouterTilesSelectArea(widgetSelect, canvas);
 
     QLayout * selectLayout = new CRouterBRouterTilesSelectLayout(widgetSelect);
+    widgetSelect->setLayout(selectLayout);
     selectLayout->addWidget(canvas);
     selectLayout->addWidget(selectArea);
     canvas->lower();
     canvas->show();
-    selectArea->show();
+    selectArea->show();        
 
     QHBoxLayout * statusLayout = new QHBoxLayout();
     outerLayout->addLayout(statusLayout);

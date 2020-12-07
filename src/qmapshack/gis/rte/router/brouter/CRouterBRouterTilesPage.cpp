@@ -26,6 +26,7 @@ CRouterBRouterTilesPage::CRouterBRouterTilesPage()
     : QWizardPage()
 {
     layout = new QVBoxLayout(this);
+    setLayout(layout);
     widgetLocalTilesSelect = new CRouterBRouterTilesSelect(this);
     widgetLocalTilesSelect->setObjectName("widgetLocalTilesSelect");
     QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);

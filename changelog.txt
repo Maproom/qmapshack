@@ -1,3 +1,6 @@
+V1.XX.X
+[QMS-275] Routino: Add Spanish and Czech as selectable languages for turn instructions
+
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release
 [QMS-265] Configuring BRouter offline on MacOS crashes

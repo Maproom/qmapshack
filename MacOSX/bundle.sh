@@ -37,7 +37,7 @@ function buildAppStructure {
     #         <libs>
     #      PlugIns
     #         <libs>
-    
+
     rm -rf $BUILD_BUNDLE_DIR
     mkdir $BUILD_BUNDLE_DIR
     mkdir $BUILD_BUNDLE_CONTENTS_DIR
@@ -67,7 +67,7 @@ function buildAppStructure {
         echo "cp -v $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR/"
         cp -v $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR/
     fi
-    
+
     # binary
     cp -v $BUILD_BIN_DIR/$APP_NAME_LOWER  $BUILD_BUNDLE_APP_DIR/$APP_NAME
 
@@ -85,7 +85,8 @@ function copyQtTrqnslations {
 
 
 function qtDeploy {
-    # -no-strip 
+    # -no-strip
+    echo "MACdeployQT  $QT_DIR/ und  $BUILD_BUNDLE_DIR/"
     $QT_DIR/bin/macdeployqt $BUILD_BUNDLE_DIR -always-overwrite -verbose=3
 }
 
@@ -93,56 +94,70 @@ function qtDeploy {
 function printLinkingApp {
     printLinking $BUILD_BUNDLE_APP_FILE
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`    
-    do
-        printLinking $F
-    done
-    
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
+    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
     do
         printLinking $F
     done
 
-    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
     do
         printLinking $F
     done
-    
+
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
+    do
+        printLinking $F
+    done
+
+    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
+    do
+        printLinking $F
+    done
+
     checkLibraries $BUILD_BUNDLE_APP_FILE
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`    
-    do
-        checkLibraries $F
-    done
-    
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
+    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
     do
         checkLibraries $F
     done
 
-    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
     do
         checkLibraries $F
-    done   
+    done
+
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
+    do
+        echo $F
+        checkLibraries $F
+    done
+
+    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
+    do
+        checkLibraries $F
+    done
 }
 
 
 function adjustLinking {
- 
-    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
-    do 
+
+    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
+    do
         adjustLinkQt $F "libq"
         adjustLinkQt $F "/usr/local/"
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
-    do 
-        adjustLinkQt $F "Qt"
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
+    do
+        #
+        #  2.12.20 switched off after using Qt5 from https://www.qt.io/offline-installers
+        #
+        #adjustLinkQt $F "Qt"
         adjustLinkQt $F "/usr/local/"
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
-    do 
+    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
+    do
         adjustLinkQt $F "Qt"
         adjustLinkQt $F "libroutino"
         adjustLinkQt $F "/usr/local/"
@@ -200,13 +215,18 @@ echo "PREL = $PREL"
     done
 }
 
-
 function checkLibraries {
 	F=$1 # file
 	DIR=${BUILD_BUNDLE_APP_FILE%/*}
-	
+
+    echo "--------------------"
+    echo "das File: $F"
+    echo "--------------------"
+
 	for P in `otool -L $F | awk '{print $1}'`
     do
+        #echo $P
+        
     	if [[ "$P" == "@executable_path"* ]]; then
     		FREL=${P##@executable_path}
     		LIB=${DIR}${FREL}
@@ -218,6 +238,7 @@ function checkLibraries {
     	if [[ "$P" == "/"* && "$P" != "/System/Library/"* && "$P" != "/usr/lib/"* && "$P" != *":" ]]; then
     		echo "external library: $P"
     	fi
+        
     done
 }
 
@@ -286,4 +307,3 @@ if [[ "$1" == "info-before" ]]; then
     # TODO
     printLinking $LIB_ROUTINO_LIB_DIR/libroutino.so
 fi
-

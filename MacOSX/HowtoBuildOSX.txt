@@ -21,16 +21,12 @@ required:
 - Xcode and Xcode Command Line Tools
 
 Because brew nowadays does not include qt5 with mysql the best way is to install most of the required packages by using MacPorts and some by using brew.
+Qt5 must be downloaded from https://www.qt.io/offline-installers. After installation compile the MySQL Plugin (QMYSQL driver) as described here: https://www.programmersought.com/article/71804811587/
 When your build machine runs Mojave 10.14 QMapShack will also need 10.14 to run. For older OS X build system has to be an older version too.
 
 Download the adequate MacPorts package 2.5.4 from https://github.com/macports/macports-base/releases/tag/v2.5.4, install it and use terminal to install the following packages:
 
 sudo port install cmake
-sudo port install qt5-qtbase
-sudo port install qt5-mysql-plugin
-sudo port install qt5-sqlite-plugin
-sudo port install qt5-qttranslations
-sudo port install qt5-qtwebengine
 sudo port install gdal
 sudo port install mercurial
 sudo port install proj6
@@ -70,7 +66,7 @@ So you need to build the binary first with the commands:
 
 mkdir build_QMapShack
 cd build_QMapShack
-cmake ../QMapShack -DCMAKE_PREFIX_PATH=/opt/local/libexec/qt5 -DCMAKE_OSX_DEPLOYMENT_TARGET=10.12 -DROUTINO_DEV_PATH=... -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DQUAZIP_INCLUDE_DIR=/opt/local/include/quazip5 -DQUAZIP_LIBRARIES=/opt/local/lib/libquazip5.1.0.0.dylib -DPROJ4_ROOT=/opt/local/lib/proj6 -DPROJ4_INCLUDE_DIRS=/opt/local/lib/proj6/include -DPROJ4_LIBRARIES=/opt/local/lib/proj6/lib/libproj.15.dylib
+cmake ../QMapShack -DCMAKE_PREFIX_PATH=/Users/user/Qt5.../.../clang_64 -DCMAKE_MACOSX_RPATH=ON -DCMAKE_OSX_DEPLOYMENT_TARGET=10.12 -DROUTINO_DEV_PATH=... -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DQUAZIP_INCLUDE_DIR=/opt/local/include/quazip5 -DQUAZIP_LIBRARIES=/opt/local/lib/libquazip5.1.0.0.dylib -DPROJ4_ROOT=/opt/local/lib/proj6 -DPROJ4_INCLUDE_DIRS=/opt/local/lib/proj6/include -DPROJ4_LIBRARIES=/opt/local/lib/proj6/lib/libproj.15.dylib
 make
 
 "QMapShack" is the relative path to where you have checked out QMapShack.
@@ -94,7 +90,7 @@ Bundling QMapShack and QMapTool
 If the build was successful, you can run the packaging with several environment 
 variables set:
 
-QT_DIR=...            (absolute path to the qt5 library base package, same as in CMAKE_PREFIX_PATH, z.B. /opt/local/libexec/qt5 )
+QT_DIR=...            (absolute path to the qt5 library base package, same as in CMAKE_PREFIX_PATH, z.B. /Users/userXYZ/Qt5.14.2/5.14.2/clang_64 )
 GDAL_DIR=...          (absolute path to the gdal library base package, z.B. /opt/local )
 PROJ_DIR=...          (absolute path to the proj4 library base package, z.B. /opt/local/lib/proj6)
 ROUTINO_LIB_DIR=..    (absolute path to the routino library base package, same as ROUTINO_LIB_DIR / ROUTINO_DEV_PATH, z.B. /Users/.../Desktop/ROUTINO_BUILD )

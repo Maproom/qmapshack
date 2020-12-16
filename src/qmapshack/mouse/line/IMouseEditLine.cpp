@@ -474,6 +474,7 @@ void IMouseEditLine::slotUndo()
     scrOptEditLine->toolRedo->setEnabled(true);
     scrOptEditLine->toolUndo->setEnabled(idxHistory > 0);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+    updateStatus();
 }
 
 void IMouseEditLine::slotRedo()
@@ -494,6 +495,7 @@ void IMouseEditLine::slotRedo()
     scrOptEditLine->toolRedo->setEnabled(idxHistory < (history.size() - 1));
     scrOptEditLine->toolUndo->setEnabled(true);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+    updateStatus();
 }
 
 void IMouseEditLine::updateStatus()

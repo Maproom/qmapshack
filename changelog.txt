@@ -1,6 +1,7 @@
 V1.XX.X
 [QMS-275] Routino: Add Spanish and Czech as selectable languages for turn instructions
 [QMS-279] Track metrics not updated when using UNDO / REDO in Edit mode
+[QMS-282] Tags icons/rating disappear from workspace after saving and closing a project
 
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release

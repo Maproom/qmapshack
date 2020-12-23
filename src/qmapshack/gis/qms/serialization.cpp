@@ -1047,9 +1047,17 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
             ;
         }
 
-        if(item && changed)
+        //Update decoration always, to set possible rating and tag markers
+        if(item)
         {
-            item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+            if(changed)
+            {
+                item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+            }
+            else
+            {
+                item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkNone);
+            }
         }
     }
 

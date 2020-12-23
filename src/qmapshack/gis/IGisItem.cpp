@@ -381,7 +381,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     setText(CGisListWks::eColumnDecoration, str);
     setToolTip(CGisListWks::eColumnDecoration, tt);
 
-    //Set Info column
+    //Set Rating column
     if(!keywords.isEmpty())
     {
         QTreeWidgetItem::setIcon(CGisListWks::eColumnRating, QPixmap("://icons/32x32/Tag.png"));

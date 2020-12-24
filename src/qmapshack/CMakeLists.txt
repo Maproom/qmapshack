@@ -284,6 +284,7 @@ set( SRCS
     plot/CPlotTrack.cpp
     plot/IPlot.cpp
     plot/ITrack.cpp
+    plugin/CPluginRunner.cpp
     print/CPrintDialog.cpp
     print/CScreenshotDialog.cpp
     qlgt/CQlb.cpp
@@ -639,6 +640,7 @@ set( HDRS
     plot/CPlotTrack.h
     plot/IPlot.h
     plot/ITrack.h
+    plugin/CPluginRunner.h
     print/CPrintDialog.h
     print/CScreenshotDialog.h
     qlgt/CQlb.h
@@ -898,6 +900,8 @@ include_directories(
     ${ROUTINO_INCLUDE_DIRS}
     ${ALGLIB_INCLUDE_DIRS}
     ${QUAZIP_INCLUDE_DIRS}
+    ${Python_INCLUDE_DIRS}
+    ${PythonQt_DIR}
 )
 
 if(APPLE)
@@ -946,6 +950,8 @@ target_link_libraries(${APPLICATION_NAME}
     ${ROUTINO_LIBRARIES}
     ${ALGLIB_LIBRARIES}
     ${QUAZIP_LIBRARIES}
+    ${Python_LIBRARIES}
+    ${PythonQt_LIB}
 )
 
 if(APPLE)

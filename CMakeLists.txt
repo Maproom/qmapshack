@@ -173,6 +173,12 @@ find_package(ROUTINO                REQUIRED)
 find_package(QuaZip5                REQUIRED)
 find_package(ALGLIB                         ) # optional as we can use our local version
 
+# Find Python and PythonQt for Python Plugins
+find_library(PythonQt_LIB PythonQt ${CMAKE_CURRENT_SOURCE_DIR}/../build_PythonQt)
+message( STATUS "Found PythonQt library at " ${PythonQt_LIB})
+find_path(PythonQt_DIR PythonQt.h ${CMAKE_CURRENT_SOURCE_DIR}/../PythonQt/src)
+message( STATUS "Found PythonQt includes at " ${PythonQt_DIR})
+find_package (Python COMPONENTS Development REQUIRED)
 
 if(${Qt5Widgets_VERSION} VERSION_LESS 5.8.0)
     message( SEND_ERROR "You need at least Qt5.8 or newer.")

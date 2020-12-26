@@ -38,6 +38,7 @@ class CGeoSearchWeb;
 struct SGisLine;
 class CWptIconManager;
 class CHelp;
+class PythonQtScriptingConsole;
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
@@ -238,6 +239,7 @@ private:
     CGisWorkspace * widgetGisWorkspace;
     CGisDatabase * widgetGisDatabase;
     CRtWorkspace * widgetRtWorkspace;
+    PythonQtScriptingConsole * widgetPluginConsole;
 
     CToolBarConfig * toolBarConfig;
     CGeoSearchConfig * geoSearchConfig;

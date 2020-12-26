@@ -284,7 +284,7 @@ set( SRCS
     plot/CPlotTrack.cpp
     plot/IPlot.cpp
     plot/ITrack.cpp
-    plugin/CPluginRunner.cpp
+    plugin/CPluginConsole.cpp
     print/CPrintDialog.cpp
     print/CScreenshotDialog.cpp
     qlgt/CQlb.cpp
@@ -640,7 +640,97 @@ set( HDRS
     plot/CPlotTrack.h
     plot/IPlot.h
     plot/ITrack.h
-    plugin/CPluginRunner.h
+    plugin/CPluginConsole.h
+    plugin/wrappers/CDBFolderGroupWrapper.h
+    plugin/wrappers/CDBFolderLostFoundWrapper.h
+    plugin/wrappers/CDBFolderMysqlWrapper.h
+    plugin/wrappers/CDBFolderOtherWrapper.h
+    plugin/wrappers/CDBFolderProjectWrapper.h
+    plugin/wrappers/CDBFolderSqliteWrapper.h
+    plugin/wrappers/CDBItemWrapper.h
+    plugin/wrappers/CDBProjectWrapper.h
+    plugin/wrappers/CExportDatabaseWrapper.h
+    plugin/wrappers/CExportDatabaseThreadWrapper.h
+    plugin/wrappers/CLostFoundProjectWrapper.h
+    plugin/wrappers/CResolveDatabaseConflictWrapper.h
+    plugin/wrappers/CSearchDatabaseWrapper.h
+    plugin/wrappers/CSelectDBFolderWrapper.h
+    plugin/wrappers/CSelectSaveActionWrapper.h
+    plugin/wrappers/CSetupDatabaseWrapper.h
+    plugin/wrappers/CSetupFolderWrapper.h
+    plugin/wrappers/CSetupWorkspaceWrapper.h
+    plugin/wrappers/IDBFolderWrapper.h
+    plugin/wrappers/IDBFolderSqlWrapper.h
+    plugin/wrappers/IDBWrapper.h
+    plugin/wrappers/IDBMysqlWrapper.h
+    plugin/wrappers/IDBSqliteWrapper.h
+    plugin/wrappers/macrosWrapper.h
+    plugin/wrappers/CFitProjectWrapper.h
+    plugin/wrappers/CFitStreamWrapper.h
+    plugin/wrappers/CGpxProjectWrapper.h
+    plugin/wrappers/CDetailsOvlAreaWrapper.h
+    plugin/wrappers/CGisItemOvlAreaWrapper.h
+    plugin/wrappers/CScrOptOvlAreaWrapper.h
+    plugin/wrappers/CDetailsPrjWrapper.h
+    plugin/wrappers/IGisProjectWrapper.h
+    plugin/wrappers/CQlbProjectWrapper.h
+    plugin/wrappers/CQmsProjectWrapper.h
+    plugin/wrappers/CCreateRouteFromWptWrapper.h
+    plugin/wrappers/CDetailsRteWrapper.h
+    plugin/wrappers/CGisItemRteWrapper.h
+    plugin/wrappers/CScrOptRteWrapper.h
+    plugin/wrappers/CGeoSearchConfigDialogWrapper.h
+    plugin/wrappers/CGeoSearchConfigWrapper.h
+    plugin/wrappers/CGeoSearchWrapper.h
+    plugin/wrappers/CGeoSearchWebConfigDialogWrapper.h
+    plugin/wrappers/CGeoSearchWebWrapper.h
+    plugin/wrappers/CProjectFilterItemWrapper.h
+    plugin/wrappers/CSearchExplanationDialogWrapper.h
+    plugin/wrappers/CSearchWrapper.h
+    plugin/wrappers/CSearchLineEditWrapper.h
+    plugin/wrappers/CSlfProjectWrapper.h
+    plugin/wrappers/CSlfReaderWrapper.h
+    plugin/wrappers/CGisSummaryDropZoneWrapper.h
+    plugin/wrappers/CGisSummaryWrapper.h
+    plugin/wrappers/CGisSummarySetupWrapper.h
+    plugin/wrappers/CLogProjectWrapper.h
+    plugin/wrappers/CSmlProjectWrapper.h
+    plugin/wrappers/ISuuntoProjectWrapper.h
+    plugin/wrappers/CTcxProjectWrapper.h
+    plugin/wrappers/CTwoNavProjectWrapper.h
+    plugin/wrappers/CActivityTrkWrapper.h
+    plugin/wrappers/CCombineTrkWrapper.h
+    plugin/wrappers/CCutTrkWrapper.h
+    plugin/wrappers/CDetailsTrkWrapper.h
+    plugin/wrappers/CEnergyCyclingDialogWrapper.h
+    plugin/wrappers/CEnergyCyclingWrapper.h
+    plugin/wrappers/CGisItemTrkWrapper.h
+    plugin/wrappers/CInvalidTrkWrapper.h
+    plugin/wrappers/CKnownExtensionWrapper.h
+    plugin/wrappers/CListTrkPtsWrapper.h
+    plugin/wrappers/CPropertyTrkWrapper.h
+    plugin/wrappers/CScrOptTrkWrapper.h
+    plugin/wrappers/CSelectActivityColorWrapper.h
+    plugin/wrappers/CTableTrkWrapper.h
+    plugin/wrappers/CTableTrkInfoWrapper.h
+    plugin/wrappers/CTrackDataWrapper.h
+    plugin/wrappers/CDetailsGeoCacheWrapper.h
+    plugin/wrappers/CDetailsWptWrapper.h
+    plugin/wrappers/CGisItemWptWrapper.h
+    plugin/wrappers/CProjWptWrapper.h
+    plugin/wrappers/CScrOptWptWrapper.h
+    plugin/wrappers/CScrOptWptRadiusWrapper.h
+    plugin/wrappers/CSetupIconAndNameWrapper.h
+    plugin/wrappers/CGisDatabaseWrapper.h
+    plugin/wrappers/CGisDrawWrapper.h
+    plugin/wrappers/CGisItemRateWrapper.h
+    plugin/wrappers/CGisListDBWrapper.h
+    plugin/wrappers/CGisListWksWrapper.h
+    plugin/wrappers/CGisWorkspaceWrapper.h
+    plugin/wrappers/CSelDevicesWrapper.h
+    plugin/wrappers/IGisItemWrapper.h
+    plugin/wrappers/IGisLineWrapper.h
+    plugin/wrappers/PoiWrapper.h
     print/CPrintDialog.h
     print/CScreenshotDialog.h
     qlgt/CQlb.h

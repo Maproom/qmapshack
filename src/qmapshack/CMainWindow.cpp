@@ -48,6 +48,7 @@
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
+#include "plugin/CPluginConsole.h"
 #include "print/CScreenshotDialog.h"
 #include "realtime/CRtWorkspace.h"
 #include "setup/IAppSetup.h"
@@ -64,6 +65,7 @@
 #include <QtSql>
 #include <QtWidgets>
 
+#include "PythonQt.h"
 #ifdef WIN32
 #include "device/CDeviceWatcherWindows.h"
 #include <dbt.h>
@@ -138,6 +140,11 @@ CMainWindow::CMainWindow()
 
     widgetRtWorkspace = new CRtWorkspace(this);
     dockRealtime->setWidget(widgetRtWorkspace);
+
+    // setup python console
+    PythonQt::init();
+    widgetPluginConsole = new CPluginConsole(this, PythonQt::self()->getMainModule());
+    dockPlugin->setWidget(widgetPluginConsole);
 
     geoSearchWeb = new CGeoSearchWeb(this);
 
@@ -363,6 +370,11 @@ CMainWindow::CMainWindow()
     actionToggleRte->setIcon(QIcon(":/icons/32x32/ToggleRouter.png"));
     menuWindow->insertAction(actionSetupToolbar, actionToggleRte);
 
+    QAction * actionTogglePluginConsole = dockPlugin->toggleViewAction();
+    actionTogglePluginConsole->setObjectName("actionTogglePluginConsole");
+    //actionTogglePluginConsole->setIcon(QIcon(":/icons/32x32/ToggleRouter.png"));
+    menuWindow->insertAction(actionSetupToolbar, actionTogglePluginConsole);
+
     menuWindow->insertSeparator(actionSetupToolbar);
 
     QMenu * menu = new QMenu(this);
@@ -436,6 +448,7 @@ CMainWindow::CMainWindow()
                      << actionToggleRealtime
                      << actionToggleDatabase
                      << actionToggleRte
+                     << actionTogglePluginConsole
                      << actionToggleDocks
                      << actionToggleToolBar
                      << actionFullScreen
@@ -466,6 +479,7 @@ CMainWindow::CMainWindow()
                    << actionToggleRealtime
                    << actionToggleDatabase
                    << actionToggleRte
+                   << actionTogglePluginConsole
                    << actionToggleDocks
                    << actionFullScreen;
 

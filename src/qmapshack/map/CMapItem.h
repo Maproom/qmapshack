@@ -34,6 +34,8 @@ public:
     CMapItem(QTreeWidget * parent, CMapDraw *map);
     virtual ~CMapItem();
 
+    void setFilename(const QString& name);
+
     void saveConfig(QSettings& cfg) const;
     void loadConfig(QSettings& cfg);
 
@@ -86,8 +88,11 @@ public:
         return text(0);
     }
 
+    QPointer<IMap>& getMapfile(){return mapfile;}
+
+    const QString& getKey(){return key;}
+
 private:
-    friend class CMapDraw;
     CMapDraw * map;
     /**
        @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map

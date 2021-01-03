@@ -142,7 +142,7 @@ void CMapDraw::getInfo(const QPoint& px, QString& str)
         {
             CMapItem * item = mapList->item(i);
 
-            if(!item || item->mapfile.isNull())
+            if(!item || item->getMapfile().isNull())
             {
                 // as all active maps have to be at the top of the list
                 // it is ok to break as soon as the first map with no
@@ -150,7 +150,7 @@ void CMapDraw::getInfo(const QPoint& px, QString& str)
                 break;
             }
 
-            item->mapfile->getInfo(px, str);
+            item->getMapfile()->getInfo(px, str);
         }
     }
     CMapItem::mutexActiveMaps.unlock();
@@ -169,7 +169,7 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
         {
             CMapItem * item = mapList->item(i);
 
-            if(!item || item->mapfile.isNull())
+            if(!item || item->getMapfile().isNull())
             {
                 // as all active maps have to be at the top of the list
                 // it is ok to break as soon as the first map with no
@@ -177,7 +177,7 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
                 break;
             }
 
-            item->mapfile->getToolTip(px, str);
+            item->getMapfile()->getToolTip(px, str);
         }
     }
     CMapItem::mutexActiveMaps.unlock();
@@ -198,7 +198,7 @@ poi_t CMapDraw::findPOICloseBy(const QPoint& px) const
         {
             CMapItem * item = mapList->item(i);
 
-            if(!item || item->mapfile.isNull())
+            if(!item || item->getMapfile().isNull())
             {
                 // as all active maps have to be at the top of the list
                 // it is ok to break as soon as the first map with no
@@ -206,7 +206,7 @@ poi_t CMapDraw::findPOICloseBy(const QPoint& px) const
                 break;
             }
 
-            item->mapfile->findPOICloseBy(px, poi);
+            item->getMapfile()->findPOICloseBy(px, poi);
             if(poi.pos != NOPOINTF)
             {
                 // stop at the 1st one found
@@ -233,7 +233,7 @@ bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint3
         {
             CMapItem * item = mapList->item(i);
 
-            if(!item || item->mapfile.isNull())
+            if(!item || item->getMapfile().isNull())
             {
                 // as all active maps have to be at the top of the list
                 // it is ok to break as soon as the first map with no
@@ -241,7 +241,7 @@ bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint3
                 break;
             }
 
-            res = item->mapfile->findPolylineCloseBy(pt1, pt2, threshold, polyline);
+            res = item->getMapfile()->findPolylineCloseBy(pt1, pt2, threshold, polyline);
             if(res)
             {
                 break;
@@ -293,17 +293,8 @@ CMapItem * CMapDraw::createMapItem(const QString& filename, QSet<QString>& maps)
     maps.insert(fi.completeBaseName());
 
     item->setText(0, fi.completeBaseName().replace("_", " "));
-    item->filename = filename;
+    item->setFilename(filename);
     item->updateIcon();
-
-    // calculate MD5 hash from the file's first 1024 bytes
-    QFile f(filename);
-    f.open(QIODevice::ReadOnly);
-    QCryptographicHash md5(QCryptographicHash::Md5);
-    md5.addData(f.read(1024));
-    item->key = md5.result().toHex();
-    f.close();
-
     return item;
 }
 
@@ -359,10 +350,10 @@ void CMapDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
     for(int i = 0; i < mapList->count(); i++)
     {
         CMapItem * item = mapList->item(i);
-        if(item && !item->mapfile.isNull())
+        if(item && !item->getMapfile().isNull())
         {
             item->saveConfig(cfg);
-            keys << item->key;
+            keys << item->getKey();
         }
     }
 }
@@ -392,7 +383,7 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys)
         {
             CMapItem * item = mapList->item(i);
 
-            if(item && item->key == key)
+            if(item && item->getKey() == key)
             {
                 /**
                     @Note   the item will load it's configuration upon successful activation
@@ -417,7 +408,7 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg)
         {
             CMapItem * item = mapList->item(i);
 
-            if(item && item->key == key)
+            if(item && item->getKey() == key)
             {
                 if(item->activate())
                 {
@@ -448,7 +439,7 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
         {
             CMapItem * item = mapList->item(i);
 
-            if(!item || item->mapfile.isNull())
+            if(!item || item->getMapfile().isNull())
             {
                 // as all active maps have to be at the top of the list
                 // it is ok to break as soon as the first map with no
@@ -456,7 +447,7 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
                 break;
             }
 
-            item->mapfile->draw(currentBuffer);
+            item->getMapfile()->draw(currentBuffer);
             seenActiveMap = true;
         }
     }

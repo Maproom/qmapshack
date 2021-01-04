@@ -46,10 +46,11 @@ CMapItem::~CMapItem()
 void CMapItem::setFilename(const QString& name)
 {
     filename = name;
+
     QFile f(filename);
     f.open(QIODevice::ReadOnly);
     QCryptographicHash md5(QCryptographicHash::Md5);
-    md5.addData(f.read(1024));
+    md5.addData(f.read(qMin(0x1000LL, f.size())));
     key = md5.result().toHex();
     f.close();
 }

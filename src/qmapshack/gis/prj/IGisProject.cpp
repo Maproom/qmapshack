@@ -27,6 +27,7 @@
 #include "gis/gpx/CGpxProject.h"
 #include "gis/IGisItem.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/poi/CPoiProject.h"
 #include "gis/prj/CDetailsPrj.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qlb/CQlbProject.h"
@@ -48,7 +49,7 @@
 #include <QtWidgets>
 
 
-const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.tcx *.TCX *.sml *.log *.qms *.qlb *.slf *.fit)";
+const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.tcx *.TCX *.sml *.log *.qms *.qlb *.slf *.fit *.poi)";
 const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx *.GPX)";
 const QString IGisProject::filedialogFilterTCX    = "TCX Garmin Proprietary (*.tcx *.TCX)";
 const QString IGisProject::filedialogFilterSML    = "Suunto XML format (*.sml)";
@@ -57,6 +58,7 @@ const QString IGisProject::filedialogFilterQLB    = "QLandkarte Binary (*.qlb)";
 const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
 const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
 const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
+const QString IGisProject::filedialogFilterPOI    = "Mapsforge POI database (*.poi)";
 const QString IGisProject::filedialogSaveFilters = filedialogFilterGPX + ";; " + filedialogFilterQLB + ";; " + filedialogFilterQMS + ";; " + filedialogFilterTCX;
 const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterSML + ";; " + filedialogFilterLOG + ";; " + filedialogFilterQLB + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";; " + filedialogFilterFIT;
 
@@ -155,6 +157,10 @@ IGisProject * IGisProject::create(const QString filename, CGisListWks * parent)
     else if (suffix == "qlb")
     {
         item = new CQlbProject(filename, parent);
+    }
+    else if (suffix == "poi")
+    {
+        item = new CPoiProject(filename, parent);
     }
 
     if(item && !item->isValid())

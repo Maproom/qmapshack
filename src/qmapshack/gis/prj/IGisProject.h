@@ -55,6 +55,7 @@ public:
         , eTypeSml
         , eTypeLog
         , eTypeQlb
+        , eTypePoi
     };
 
     /// flags used to serialize trivial flags in qms file
@@ -122,6 +123,7 @@ public:
     static const QString filedialogFilterQMS;
     static const QString filedialogFilterSLF;
     static const QString filedialogFilterFIT;
+    static const QString filedialogFilterPOI;
     static const QString filedialogSaveFilters;
     static const QString filedialogLoadFilters;
 

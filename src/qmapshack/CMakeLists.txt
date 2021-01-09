@@ -106,6 +106,8 @@ set( SRCS
     gis/ovl/CDetailsOvlArea.cpp
     gis/ovl/CGisItemOvlArea.cpp
     gis/ovl/CScrOptOvlArea.cpp
+    gis/poi/CPoiProject.cpp
+    gis/poi/CPoiProjectSettingsDialog.cpp
     gis/prj/CDetailsPrj.cpp
     gis/prj/IGisProject.cpp
     gis/qlb/CQlbProject.cpp
@@ -458,6 +460,8 @@ set( HDRS
     gis/ovl/CDetailsOvlArea.h
     gis/ovl/CGisItemOvlArea.h
     gis/ovl/CScrOptOvlArea.h
+    gis/poi/CPoiProject.h
+    gis/poi/CPoiProjectSettingsDialog.h
     gis/prj/CDetailsPrj.h
     gis/prj/IGisProject.h
     gis/qlb/CQlbProject.h
@@ -747,6 +751,7 @@ set( UIS
     gis/db/ISetupWorkspace.ui
     gis/ovl/IDetailsOvlArea.ui
     gis/ovl/IScrOptOvlArea.ui
+    gis/poi/IPoiProjectSettingsDialog.ui
     gis/prj/IDetailsPrj.ui
     gis/rte/ICreateRouteFromWpt.ui
     gis/rte/IDetailsRte.ui

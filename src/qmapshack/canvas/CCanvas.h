@@ -32,6 +32,7 @@ class IDrawContext;
 class CMapDraw;
 class CGrid;
 class CDemDraw;
+class CPoiDraw;
 class QGestureEvent;
 class CGisDraw;
 class CRtDraw;
@@ -108,6 +109,7 @@ public:
         , eRedrawGis = 0x04
         , eRedrawMouse = 0x08
         , eRedrawRt = 0x10
+        , eRedrawPoi = 0x20
         , eRedrawAll = 0xFFFFFFFF
     };
 
@@ -246,6 +248,7 @@ private:
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
     CMapDraw * map;                     //< the map object attached to this canvas
     CDemDraw * dem;                     //< the elevation data layer attached to this canvas
+    CPoiDraw * poi;                     //< the poi database attached to this canvas
     CGisDraw * gis;                     //< the GIS data layer attached to this canvas
     CRtDraw * rt;                       //< the real time data layer attached to this canvas
     CGrid * grid;                       //< the grid attached to this canvas
@@ -270,6 +273,10 @@ private:
     /// load indicator for DEM
     QMovie * loadIndicator2;
     QLabel * demLoadIndicator;
+
+    /// load indicator for POI
+    QMovie * loadIndicator3;
+    QLabel * poiLoadIndicator;
 
     QPointer<CColorLegend> colorLegend;
 

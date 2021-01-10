@@ -59,6 +59,7 @@ CEnergyCycling::CEnergyCycling(CGisItemTrk &trk) :
 void CEnergyCycling::loadSettings(CEnergyCycling::energy_set_t &energySet)
 {
     SETTINGS;
+    cfg.beginGroup("EnergyCycling");
 
     energy_set_t energyDefaultSet; // to get the default values defined in header
 
@@ -73,6 +74,8 @@ void CEnergyCycling::loadSettings(CEnergyCycling::energy_set_t &energySet)
     energySet.groundIndex = cfg.value("groundIndex", energyDefaultSet.groundIndex).toInt();
     energySet.rollingCoeff = cfg.value("rollingCoeff", energyDefaultSet.rollingCoeff).toDouble();
     energySet.pedalCadence = cfg.value("pedalCadence", energyDefaultSet.pedalCadence).toDouble();
+
+    cfg.endGroup();
 }
 
 /** @brief Saves parameters to SETTINGS
@@ -82,6 +85,7 @@ void CEnergyCycling::loadSettings(CEnergyCycling::energy_set_t &energySet)
 void CEnergyCycling::saveSettings()
 {
     SETTINGS;
+    cfg.beginGroup("EnergyCycling");
 
     cfg.setValue("personalWeight", energyTrkSet.driverWeight);
     cfg.setValue("bikeWeight", energyTrkSet.bikeWeight);
@@ -94,6 +98,8 @@ void CEnergyCycling::saveSettings()
     cfg.setValue("groundIndex", energyTrkSet.groundIndex);
     cfg.setValue("rollingCoeff", energyTrkSet.rollingCoeff);
     cfg.setValue("pedalCadence", energyTrkSet.pedalCadence);
+
+    cfg.endGroup();
 }
 
 /** @brief Computes the "Energy Use Cycling" value

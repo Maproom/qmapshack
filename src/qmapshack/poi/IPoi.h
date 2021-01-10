@@ -48,11 +48,6 @@ public:
 
     bool activated() const {return isActivated;}
 
-    virtual void addTreeWidgetItems(QTreeWidget* widget) = 0;
-
-public slots:
-    virtual void slotCheckedStateChanged(QTreeWidgetItem*item) = 0;
-
 protected:
     CPoiDraw * poi;
 

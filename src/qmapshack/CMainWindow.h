@@ -27,6 +27,7 @@
 
 class CMapList;
 class CDemList;
+class CPoiList;
 class QLabel;
 class CGisWorkspace;
 class CGisDatabase;
@@ -86,6 +87,8 @@ public:
 
     void addMapList(CMapList *list, const QString& name);
     void addDemList(CDemList *list, const QString& name);
+    void addPoiList(CPoiList * list, const QString &name);
+
     void addWidgetToTab(QWidget * w);
 
     bool isScaleVisible()  const;
@@ -139,6 +142,11 @@ public:
         return actionSetupDEMPaths;
     }
 
+    QAction * getPoiSetupAction()
+    {
+        return actionSetupPOIPaths;
+    }
+
     void loadGISData(const QStringList& filenames);
 
     const qint32 id;
@@ -175,6 +183,7 @@ private slots:
     void slotSetupMapBackground();
     void slotSetupGrid();
     void slotSetupMapPath();
+    void slotSetupPoiPath();
     void slotSetupDemPath();
     void slotSetupMapView();
     void slotSetupTimeZone();
@@ -219,6 +228,7 @@ private:
     static CMainWindow * pSelf;
     static QDir homeDir;
     static const QString mapsPath;
+    static const QString poisPath;
     static const QString demPath;
     static const QString routinoPath;
     static const QString brouterPath;

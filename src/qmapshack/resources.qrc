@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>../animation/loader.gif</file>
         <file>../animation/loader2.gif</file>
+        <file>../animation/loader3.gif</file>
         <file>../cursors/cursorArrow.png</file>
         <file>../cursors/cursorDelete.png</file>
         <file>../cursors/cursorMove.png</file>
@@ -162,6 +163,7 @@
         <file>../icons/32x32/MimeTMS.png</file>
         <file>../icons/32x32/MimeVRT.png</file>
         <file>../icons/32x32/MimeWMTS.png</file>
+        <file>../icons/32x32/MimePoiPOI.png</file>
         <file>../icons/32x32/MouseWheel.png</file>
         <file>../icons/32x32/Move.png</file>
         <file>../icons/32x32/MoveArrow.png</file>
@@ -196,6 +198,7 @@
         <file>../icons/32x32/Profile.png</file>
         <file>../icons/32x32/ProfileToWindow.png</file>
         <file>../icons/32x32/Progress.png</file>
+        <file>../icons/32x32/Poi.png</file>
         <file>../icons/32x32/QMapShack.png</file>
         <file>../icons/32x32/QlbProject.png</file>
         <file>../icons/32x32/QMapTool.png</file>
@@ -285,6 +288,7 @@
         <file>../icons/32x32/ToggleMaps.png</file>
         <file>../icons/32x32/ToggleRealTime.png</file>
         <file>../icons/32x32/ToggleRouter.png</file>
+        <file>../icons/32x32/TogglePoi.png</file>
         <file>../icons/32x32/ToolBar.png</file>
         <file>../icons/32x32/ToolBarSetup.png</file>
         <file>../icons/32x32/ToolTip.png</file>
@@ -437,11 +441,12 @@
         <file>../icons/48x48/MimeGEMF.png</file>
         <file>../icons/48x48/MimeIMG.png</file>
         <file>../icons/48x48/MimeJNX.png</file>
-        <file>../icons/48x48/MimeMAP.png</file>
+        <file>../icons/48x48/MimeMAP.png</file>       
         <file>../icons/48x48/MimeRMAP.png</file>
         <file>../icons/48x48/MimeTMS.png</file>
         <file>../icons/48x48/MimeVRT.png</file>
         <file>../icons/48x48/MimeWMTS.png</file>
+        <file>../icons/48x48/MimePoiPOI.png</file>
         <file>../icons/48x48/MouseWheel.png</file>
         <file>../icons/48x48/Move.png</file>
         <file>../icons/48x48/MoveArrow.png</file>
@@ -476,6 +481,7 @@
         <file>../icons/48x48/Profile.png</file>
         <file>../icons/48x48/ProfileToWindow.png</file>
         <file>../icons/48x48/Progress.png</file>
+        <file>../icons/48x48/Poi.png</file>
         <file>../icons/48x48/QMapShack.png</file>
         <file>../icons/48x48/QlbProject.png</file>
         <file>../icons/48x48/QMapTool.png</file>
@@ -565,6 +571,7 @@
         <file>../icons/48x48/ToggleMaps.png</file>
         <file>../icons/48x48/ToggleRealTime.png</file>
         <file>../icons/48x48/ToggleRouter.png</file>
+        <file>../icons/48x48/TogglePoi.png</file>
         <file>../icons/48x48/ToolBar.png</file>
         <file>../icons/48x48/ToolBarSetup.png</file>
         <file>../icons/48x48/ToolTip.png</file>

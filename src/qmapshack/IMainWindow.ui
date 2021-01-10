@@ -70,6 +70,7 @@
     <addaction name="separator"/>
     <addaction name="actionSetupMapPaths"/>
     <addaction name="actionSetupDEMPaths"/>
+    <addaction name="actionSetupPOIPaths"/>
     <addaction name="separator"/>
     <addaction name="actionPrintMap"/>
     <addaction name="actionTakeScreenshot"/>
@@ -282,6 +283,39 @@
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_5"/>
+  </widget>
+  <widget class="QDockWidget" name="dockPoi">
+   <property name="features">
+    <set>QDockWidget::DockWidgetFeatureMask</set>
+   </property>
+   <property name="windowTitle">
+    <string>POI Collections</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_8">
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QTabWidget" name="tabPoi"/>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <action name="actionAddMapView">
    <property name="icon">
@@ -1026,6 +1060,18 @@
    </property>
    <property name="toolTip">
     <string>All map views move and zoom to the same point.</string>
+   </property>
+  </action>
+  <action name="actionSetupPOIPaths">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/Poi.png</normaloff>:/icons/32x32/Poi.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup POI Paths</string>
+   </property>
+   <property name="toolTip">
+    <string>Setup paths to POI collections</string>
    </property>
   </action>
  </widget>

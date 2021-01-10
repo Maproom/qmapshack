@@ -283,6 +283,14 @@ set( SRCS
     plot/CPlotTrack.cpp
     plot/IPlot.cpp
     plot/ITrack.cpp
+    poi/CPoiDraw.cpp
+    poi/CPoiItem.cpp
+    poi/CPoiList.cpp
+    poi/CPoiPathSetup.cpp
+    poi/CPoiPropSetup.cpp
+    poi/CPoiPOI.cpp
+    poi/IPoi.cpp
+    poi/IPoiProp.cpp
     print/CPrintDialog.cpp
     print/CScreenshotDialog.cpp
     qlgt/CQlb.cpp
@@ -639,6 +647,14 @@ set( HDRS
     plot/CPlotTrack.h
     plot/IPlot.h
     plot/ITrack.h
+    poi/CPoiDraw.h
+    poi/CPoiItem.h
+    poi/CPoiList.h
+    poi/CPoiPathSetup.h
+    poi/CPoiPropSetup.h
+    poi/CPoiPOI.h
+    poi/IPoi.h
+    poi/IPoiProp.h
     print/CPrintDialog.h
     print/CScreenshotDialog.h
     qlgt/CQlb.h
@@ -823,8 +839,11 @@ set( UIS
     mouse/IScrOptSelect.ui
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui
+    poi/IPoiList.ui
+    poi/IPoiPathSetup.ui
+    poi/IPoiPropSetup.ui
     print/IPrintDialog.ui
-    print/IScreenshotDialog.ui
+    print/IScreenshotDialog.ui    
     realtime/IRtSelectSource.ui
     realtime/IRtWorkspace.ui
     realtime/gpstether/IRtGpsTetherInfo.ui

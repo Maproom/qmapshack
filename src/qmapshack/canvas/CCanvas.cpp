@@ -48,6 +48,7 @@
 #include "mouse/CMouseSelect.h"
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
+#include "poi/CPoiDraw.h"
 #include "realtime/CRtDraw.h"
 #include "units/IUnit.h"
 #include "widgets/CColorLegend.h"
@@ -99,18 +100,20 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     grabGesture(Qt::PinchGesture);
 
     map     = new CMapDraw(this);
+    poi     = new CPoiDraw(this);
     grid    = new CGrid(map);
     dem     = new CDemDraw(this);
     gis     = new CGisDraw(this);
     rt      = new CRtDraw(this);
 
     // map has to be first!
-    allDrawContext << map << dem << gis << rt;
+    allDrawContext << map << poi << dem << gis << rt;
 
     mouse = new CMouseAdapter(this);
     mouse->setDelegate(new CMouseNormal(gis, this, mouse));
 
     connect(map, &CMapDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
+    connect(poi, &CPoiDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
     connect(dem, &CDemDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
     connect(gis, &CGisDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
     connect(rt,  &CRtDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
@@ -131,6 +134,12 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     loadIndicator2->start();
     demLoadIndicator->show();
 
+    loadIndicator3 = new QMovie("://animation/loader3.gif", QByteArray(), this);
+    poiLoadIndicator = new QLabel(this);
+    poiLoadIndicator->setMovie(loadIndicator3);
+    loadIndicator3->start();
+    poiLoadIndicator->show();
+
     textStatusMessages = new QTextBrowser(this);
     textStatusMessages->setFrameStyle(QFrame::NoFrame);
     textStatusMessages->setMinimumWidth(300);
@@ -146,6 +155,9 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
     connect(map, &CMapDraw::sigStartThread, mapLoadIndicator, &QLabel::show);
     connect(map, &CMapDraw::sigStopThread,  mapLoadIndicator, &QLabel::hide);
+
+    connect(poi, &CPoiDraw::sigStartThread, poiLoadIndicator, &QLabel::show);
+    connect(poi, &CPoiDraw::sigStopThread,  poiLoadIndicator, &QLabel::hide);
 
     connect(dem, &CDemDraw::sigStartThread, demLoadIndicator, &QLabel::show);
     connect(dem, &CDemDraw::sigStopThread,  demLoadIndicator, &QLabel::hide);
@@ -249,6 +261,7 @@ void CCanvas::buildHelpText()
                                     "<ul>"
                                     "<li>Maps - where all maps are stored</li>"
                                     "<li>DEM - where all elevation data is stored</li>"
+                                    "<li>POI - where all POI collections are stored</li>"
                                     "<li>Routino - where routing data for the Routino offline router is stored</li>"
                                     "<li>BRouter - where routing data for the BRouter offline router is stored</li>"
                                     "<li>Databases - where you create databases to organize your GIS data</li>"
@@ -381,6 +394,7 @@ void CCanvas::triggerCompleteUpdate(CCanvas::redraw_e flags)
 void CCanvas::saveConfig(QSettings& cfg)
 {
     map->saveConfig(cfg);
+    poi->saveConfig(cfg);
     dem->saveConfig(cfg);
     grid->saveConfig(cfg);
     cfg.setValue("posFocus",  posFocus);
@@ -399,6 +413,7 @@ void CCanvas::loadConfig(QSettings& cfg)
     backColor = QColor(backColorStr);
 
     map->loadConfig(cfg);
+    poi->loadConfig(cfg);
     dem->loadConfig(cfg);
     grid->loadConfig(cfg);
 
@@ -561,6 +576,9 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     QPoint p2(demLoadIndicator->width() >> 1, demLoadIndicator->height() >> 1);
     demLoadIndicator->move(r.center() - p2);
 
+    QPoint p3(poiLoadIndicator->width() >> 1, poiLoadIndicator->height() >> 1);
+    poiLoadIndicator->move(r.center() - p3);
+
     textStatusMessages->move(X_OFF_STATUS, Y_OFF_STATUS);
 
     slotUpdateTrackInfo(false);
@@ -593,6 +611,7 @@ void CCanvas::paintEvent(QPaintEvent*)
     p.translate(width() >> 1, height() >> 1);
 
     map->draw(p, needsRedraw, posFocus);
+    poi->draw(p, needsRedraw, posFocus);
     dem->draw(p, needsRedraw, posFocus);
     p.setOpacity(gisLayerOpacity);
     gis->draw(p, needsRedraw, posFocus);

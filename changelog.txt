@@ -4,6 +4,7 @@ V1.XX.X
 [QMS-279] Track metrics not updated when using UNDO / REDO in Edit mode
 [QMS-282] Tags icons/rating disappear from workspace after saving and closing a project
 [QMS-285] WMTS-based maps aren't restored correctly
+[QMS-297] Add GUI framework for POI databases
 [QMS-299] CEnergyCycling is storing it's configuration in the `General` section instead of it's own.
 [QMS-311] Automatically save projects to device
 [QMS-337] Upgrade to Proj 8 API

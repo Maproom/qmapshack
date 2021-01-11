@@ -51,6 +51,7 @@
 #include "map/CMapList.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiList.h"
+#include "poi/CPoiPOI.h"
 #include "print/CScreenshotDialog.h"
 #include "realtime/CRtWorkspace.h"
 #include "setup/IAppSetup.h"
@@ -111,6 +112,8 @@ CMainWindow::CMainWindow()
     dockRealtime->toggleViewAction()->setChecked(false);
 
     CSearch::init();
+
+    CPoiPOI::init();
 
     IGisItem::init();
     CGisItemWpt::init();

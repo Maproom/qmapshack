@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2020 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2021 Henri Hornburg <pingurus@t-online.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +23,7 @@
 #include "poi/IPoi.h"
 
 #include <QMutex>
+#include <QTimer>
 
 class CPoiPOI : public IPoi
 {
@@ -29,11 +31,44 @@ public:
     CPoiPOI(const QString& filename, CPoiDraw *parent);
     virtual ~CPoiPOI() = default;
 
+    void addTreeWidgetItems(QTreeWidget *widget) override;
+    // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
+    void loadPOIsFromFile(const QString &category, int minLonM10, int minLatM10);
+
     void draw(IDrawContext::buffer_t& buf) override;
 
+    static void init()
+    {
+        tagMap = initTagMap();
+    }
+
+public slots:
+    void slotCheckedStateChanged(QTreeWidgetItem*item) override;
+
 private:
+    struct poi_t
+    {
+        QStringList data;
+        QPointF coordinates;
+    };
+    enum SqlColumn_e
+    {
+        eSqlColumnMaxLat,
+        eSqlColumnMaxLon,
+        eSqlColumnMinLat,
+        eSqlColumnMinLon,
+        eSqlColumnData
+    };
+
     QMutex mutex;
     QString filename;
+    QTimer* loadTimer;
+    QMap<QString, Qt::CheckState> categoryActivated;
+    // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
+    QMap<QString, QMap<int, QMap<int, QList<poi_t> > > > loadedPOIs;
+
+    static QMap<QString, QString> tagMap;
+    static QMap<QString, QString> initTagMap();
 };
 
 #endif //CPOIPOI_H

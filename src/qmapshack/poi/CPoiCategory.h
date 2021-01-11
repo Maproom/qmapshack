@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2020 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2021 Henri Hornburg <pingurus@t-online.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,30 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CPOIPROPSETUP_H
-#define CPOIPROPSETUP_H
+#ifndef CPOICATEGORY_H
+#define CPOICATEGORY_H
 
-#include "poi/IPoiProp.h"
-#include "ui_IPoiPropSetup.h"
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 
-class CPoiPropSetup : public IPoiProp, private Ui::IPoiPropSetup
+class CPoiCategory : public QTreeWidgetItem
 {
-    Q_OBJECT
 public:
-    enum treeColumn_e
+    CPoiCategory(const QString& categoryName, const QString& displayName, Qt::CheckState checkedState, CPoiCategory *parent);
+    CPoiCategory(const QString& displayName, QTreeWidget * parent);
+
+    const QString& getCategory()
     {
-        eTreeColumnCheckbox,
-        eTreeColumnDisplayName,
-    };
+        return categoryName;
+    }
 
-    CPoiPropSetup(IPoi *poifile, CPoiDraw *poi);
-    virtual ~CPoiPropSetup() = default;
-
-protected slots:
-    void slotPropertiesChanged() override;
+    Qt::CheckState checkState();
 
 private:
+    const QString categoryName;
 };
 
-#endif //CPOIPROPSETUP_H
-
+#endif // CPOICATEGORY_H

@@ -283,12 +283,14 @@ set( SRCS
     plot/CPlotTrack.cpp
     plot/IPlot.cpp
     plot/ITrack.cpp
+    poi/CPoiCategory.cpp
     poi/CPoiDraw.cpp
     poi/CPoiItem.cpp
     poi/CPoiList.cpp
     poi/CPoiPathSetup.cpp
     poi/CPoiPropSetup.cpp
     poi/CPoiPOI.cpp
+    poi/CPoiPOI_TagMap.cpp
     poi/IPoi.cpp
     poi/IPoiProp.cpp
     print/CPrintDialog.cpp
@@ -647,6 +649,7 @@ set( HDRS
     plot/CPlotTrack.h
     plot/IPlot.h
     plot/ITrack.h
+    poi/CPoiCategory.h
     poi/CPoiDraw.h
     poi/CPoiItem.h
     poi/CPoiList.h

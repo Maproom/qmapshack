@@ -1,0 +1,281 @@
+/**********************************************************************************************
+    Copyright (C) 2021 Henri Hornburg <pingurus@t-online.de>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY); without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
+
+#include "CPoiPOI.h"
+
+#define SQLQUERY(TAG) "main.poi_data.data LIKE '%" TAG "%'"
+QMap<QString, QString> CPoiPOI::tagMap;
+QMap<QString, QString> CPoiPOI::initTagMap()
+{
+    QMap<QString, QString> map;
+    map["accommodation_alpinehut"] = SQLQUERY("tourism=alpine_hut");
+    map["accommodation_bed_and_breakfast"] = SQLQUERY("tourism=guest_house");
+    map["accommodation_camping"] = SQLQUERY("tourism=camp_site");
+    map["accommodation_caravan_park"] = SQLQUERY("tourism=camp_site");
+    map["accommodation_chalet"] = SQLQUERY("tourism=chalet");
+    map["accommodation_hostel"] = SQLQUERY("tourism=hostel");
+    map["accommodation_hotel"] = SQLQUERY("tourism=hotel");
+    map["accommodation_motel"] = SQLQUERY("tourism=motel");
+    map["accommodation_shelter"] = SQLQUERY("amenity=shelter");
+    //map["accommodation_youth_hostel"] = SQLQUERY("MISSING");
+    map["amenity_bench"] = SQLQUERY("amenity=bench");
+    map["amenity_court"] = SQLQUERY("amenity=courthouse");
+    map["amenity_firestation"] = SQLQUERY("amenity=fire_station");
+    map["amenity_fountain"] = SQLQUERY("amenity=fountain");
+    map["amenity_library"] = SQLQUERY("amenity=library");
+    map["amenity_playground"] = SQLQUERY("leisure=playground");
+    map["amenity_police"] = SQLQUERY("amenity=police");
+    map["amenity_post_box"] = SQLQUERY("amenity=post_box");
+    map["amenity_post_office"] = SQLQUERY("amenity=post_office ");
+    map["amenity_prison"] = SQLQUERY("amenity=prison");
+    //map["amenity_public_building"] = SQLQUERY("MISSING");
+    map["amenity_recycling"] = SQLQUERY("amenity=recycling");
+    map["amenity_survey_point"] = SQLQUERY("man_made=survey_point");
+    map["amenity_telephone"] = SQLQUERY("amenity=telephone");
+    map["amenity_toilets_disabled"] = "(" SQLQUERY("amenity=toilets") " AND " SQLQUERY("wheelchair=yes") ")";
+    map["amenity_toilets_men"] = "(" SQLQUERY("amenity=toilets") " AND " SQLQUERY("male=yes") ")";
+    map["amenity_toilets"] = SQLQUERY("amenity=toilets");
+    map["amenity_toilets_women"] = "(" SQLQUERY("amenity=toilets") " AND " SQLQUERY("female=yes") ")";
+    map["amenity_town_hall"] = SQLQUERY("amenity=townhall");
+    map["amenity_waste_bin"] = SQLQUERY("amenity=waste_basket");
+    map["barrier_blocks"] = SQLQUERY("barrier=block");
+    map["barrier_bollard"] = SQLQUERY("barrier=bollard");
+    map["barrier_cattle_grid"] = SQLQUERY("barrier=cattle_grid");
+    map["barrier_cycle_barrier"] = SQLQUERY("barrier=cycle_barrier");
+    map["barrier_entrance"] = "(" SQLQUERY("barrier=entrance") " OR " SQLQUERY("entrance=yes")  " OR " SQLQUERY("entrance=main") ")";
+    map["barrier_exit"] = "(" SQLQUERY("entrance=exit")  " OR " SQLQUERY("entrance=emergency") ")";
+    map["barrier_gate"] = SQLQUERY("barrier=gate");
+    map["barrier_kissing_gate"] = SQLQUERY("barrier=kissing_gate");
+    map["barrier_lift_gate"] = SQLQUERY("barrier=lift_gate");
+    map["barrier_steps"] = SQLQUERY("highway=steps");
+    map["barrier_stile"] = SQLQUERY("barrier=stile");
+    map["barrier_toll_booth"] = SQLQUERY("barrier=toll_booth");
+    map["education_college"] = SQLQUERY("amenity=college");
+    //map["education_college_vocational"] = SQLQUERY("MISSING");
+    map["education_nursery"] = SQLQUERY("amenity=kindergarten");
+    map["education_school"] = SQLQUERY("amenity=school");
+    //map["education_school_primary"] = SQLQUERY("MISSING");
+    //map["education_school_secondary"] = SQLQUERY("MISSING");
+    map["education_university"] = SQLQUERY("amenity=university");
+    map["food_bar"] = SQLQUERY("amenity=bar");
+    map["food_biergarten"] = SQLQUERY("amenity=biergarten");
+    map["food_cafe"] = SQLQUERY("amenity=cafe");
+    map["food_drinkingtap"] = SQLQUERY("amenity=drinking_water");
+    map["food_fastfood"] = SQLQUERY("amenity=fast_food");
+    map["food_fastfood_pizza"] = "(" SQLQUERY("amenity=fast_food") " AND " SQLQUERY("cuisine=pizza") ")";
+    map["food_ice_cream"] = SQLQUERY("amenity=ice_cream");
+    map["food_pizza"] = "(" SQLQUERY("amenity=restaurant") " AND " SQLQUERY("cuisine=pizza") ")";
+    map["food_pub"] = SQLQUERY("amenity=pub");
+    map["food_restaurant"] = SQLQUERY("amenity=restaurant");
+    map["health_dentist"] = SQLQUERY("amenity=dentist");
+    map["health_doctors"] = SQLQUERY("amenity=doctors");
+    map["health_hospital_emergency"] = "(" SQLQUERY("amenity=hospital") " AND " SQLQUERY("emergency=yes") ")";
+    map["health_hospital"] = SQLQUERY("amenity=hospital");
+    map["health_opticians"] = SQLQUERY("healthcare=optometrist");
+    map["health_pharmacy_dispencing"] = "(" SQLQUERY("amenity=pharmacy") " AND " SQLQUERY("dispensing=yes") ")";
+    map["health_pharmacy"] = SQLQUERY("amenity=pharmacy");
+    map["health_veterinary"] = SQLQUERY("amenity=veterinary");
+    map["landuse_coniferous_and_deciduous"] = "(" SQLQUERY("natural=wood") " OR " SQLQUERY("landuse=forest") " OR " SQLQUERY("natural=tree") ")";
+    map["landuse_coniferous"] = SQLQUERY("leaf_cycle=evergreen");
+    map["landuse_deciduous"] = SQLQUERY("leaf_cycle=deciduous");
+    //map["landuse_grass"] = SQLQUERY("MISSING");
+    //map["landuse_hills"] = SQLQUERY("MISSING");
+    map["landuse_quary"] = SQLQUERY("landuse=quarry");
+    map["landuse_scrub"] = SQLQUERY("natural=scrub");
+    map["landuse_swamp"] = SQLQUERY("natural=wetland");
+    map["money_atm"] = SQLQUERY("amenity=atm");
+    map["money_bank"] = SQLQUERY("amenity=bank");
+    map["money_currency_exchange"] = SQLQUERY("amenity=bureau_de_change");
+    map["place_of_worship_bahai"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=bahai") ")";
+    map["place_of_worship_buddhist"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=buddhist") ")";
+    map["place_of_worship_christian"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=christian") ")";
+    map["place_of_worship_hindu"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=hindu") ")";
+    map["place_of_worship_islamic"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=muslim") ")";
+    map["place_of_worship_jain"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=jain") ")";
+    map["place_of_worship_jewish"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=jewish") ")";
+    map["place_of_worship_shinto"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=shinto") ")";
+    map["place_of_worship_sikh"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=sikh") ")";
+    map["place_of_worship_unknown"] = SQLQUERY("amenity=place_of_worship");
+    map["poi_boundary_administrative"] = SQLQUERY("boundary=administrative");
+    map["poi_cave"] = "(" SQLQUERY("natural=cave_entrance") " OR " SQLQUERY("man_made=adit") ")";
+    map["poi_crane"] = SQLQUERY("man_made=crane");
+    map["poi_embassy"] = SQLQUERY("amenity=embassy");
+    map["poi_military_bunker"] = SQLQUERY("military=bunker");
+    map["poi_mine"] = "(" SQLQUERY("industrial=mine") " OR " SQLQUERY("man_made=mineshaft") " OR (" SQLQUERY("man_made=adit") " AND " SQLQUERY("resource=") "))";
+    map["poi_mine_abandoned"] = "(" SQLQUERY("historic=mine") " OR (" + map["poi_mine"] + " AND " SQLQUERY("disused=yes");
+    map["poi_mountain_pass"] = SQLQUERY("mountain_pass=yes");
+    map["poi_peak"] = SQLQUERY("natural=peak");
+    map["poi_place_city"] = SQLQUERY("place=city");
+    map["poi_place_hamlet"] = SQLQUERY("place=hamlet");
+    map["poi_place_suburb"] = SQLQUERY("place=suburb");
+    map["poi_place_town"] = SQLQUERY("place=town");
+    map["poi_place_village"] = SQLQUERY("place=village");
+    //map["poi_point_of_interest"] = SQLQUERY("MISSING");
+    map["poi_tower_communications"] = "(" SQLQUERY("man_made=tower") " AND (" SQLQUERY("tower:type=communication") " OR " SQLQUERY("tower=communication") "))";
+    map["poi_tower_lookout"] = "(" SQLQUERY("man_made=tower") " AND (" SQLQUERY("tower:type=watchtower") " OR " SQLQUERY("tower=watchtower") " OR " SQLQUERY("tower=vigialrium") " OR " SQLQUERY("tourism=viewpoint") "))";
+    map["poi_tower_power"] = SQLQUERY("power=tower");
+    map["poi_tower_water"] = SQLQUERY("man_made=water_tower");
+    /* Not included in POI file
+       map["power_station_coal"] = SQLQUERY("MISSING");
+       map["power_station_gas"] = SQLQUERY("MISSING");
+       map["power_station_solar"] = SQLQUERY("MISSING");
+       map["power_station_water"] = SQLQUERY("MISSING");
+       map["power_station_wind"] = SQLQUERY("MISSING");
+       map["power_substation"] = SQLQUERY("MISSING");
+       map["power_tower_high"] = SQLQUERY("MISSING");
+       map["power_tower_low"] = SQLQUERY("MISSING");
+       map["power_transformer"] = SQLQUERY("MISSING");
+     */
+    map["shopping_alcohol"] = SQLQUERY("shop=alcohol");
+    map["shopping_bakery"] = SQLQUERY("shop=bakery");
+    map["shopping_bicycle"] = SQLQUERY("shop=bicycle");
+    map["shopping_book"] = SQLQUERY("shop=books");
+    map["shopping_butcher"] = SQLQUERY("shop=butcher");
+    map["shopping_car"] = SQLQUERY("shop=car");
+    map["shopping_car_repair"] = SQLQUERY("shop=car_repair");
+    map["shopping_clothes"] = SQLQUERY("shop=clothes");
+    map["shopping_computer"] = SQLQUERY("shop=computer");
+    map["shopping_confectionery"] = SQLQUERY("shop=confectionery");
+    map["shopping_convenience"] = SQLQUERY("shop=convenience");
+    map["shopping_copyshop"] = SQLQUERY("shop=copyshop");
+    map["shopping_department_store"] = SQLQUERY("shop=department_store");
+    map["shopping_diy"] = SQLQUERY("shop=craft");
+    map["shopping_estateagent"] = SQLQUERY("office=estateagent");
+    map["shopping_fish"] = SQLQUERY("shop=seafood");
+    map["shopping_florist"] = SQLQUERY("shop=florist");
+    map["shopping_garden_centre"] = SQLQUERY("shop=garden_centre");
+    map["shopping_gift"] = SQLQUERY("shop=gift");
+    map["shopping_greengrocer"] = SQLQUERY("shop=greengrocer");
+    map["shopping_hairdresser"] = SQLQUERY("shop=hairdresser");
+    map["shopping_hearing_aids"] = SQLQUERY("shop=hearing_aids");
+    map["shopping_hifi"] = SQLQUERY("shop=hifi");
+    map["shopping_jewelry"] = SQLQUERY("shop=jewelry");
+    map["shopping_kiosk"] = SQLQUERY("shop=kiosk");
+    map["shopping_laundrette"] = SQLQUERY("shop=laundry");
+    map["shopping_marketplace"] = SQLQUERY("amenity=marketplace");
+    map["shopping_mobile_phone"] = SQLQUERY("shop=mobile_phone");
+    map["shopping_motorcycle"] = SQLQUERY("shop=motorcycle");
+    map["shopping_music"] = SQLQUERY("shop=music");
+    map["shopping_newspaper"] = SQLQUERY("shop=newsagent");
+    map["shopping_pet"] = SQLQUERY("shop=pet");
+    map["shopping_photo"] = SQLQUERY("shop=photo");
+    map["shopping_supermarket"] = SQLQUERY("shop=supermarket");
+    map["shopping_tackle"] = SQLQUERY("shop=fishing");
+    map["shopping_tobacco"] = SQLQUERY("shop=tobacco");
+    map["shopping_toys"] = SQLQUERY("shop=toys");
+    map["shopping_vending_machine"] = SQLQUERY("amenity=vending_machine");
+    map["shopping_video_rental"] = SQLQUERY("shop=video");
+    map["sport_archery"] = SQLQUERY("sport=%archery");
+    map["sport_baseball"] = SQLQUERY("sport=%baseball");
+    map["sport_canoe"] = SQLQUERY("sport=%canoe");
+    map["sport_cricket"] = SQLQUERY("sport=%cricket");
+    map["sport_diving"] = SQLQUERY("sport=%cliff_diving");
+    map["sport_golf"] = SQLQUERY("leisure%=golf_course");
+    map["sport_gym"] = SQLQUERY("leisure%=fitness_centre");
+    map["sport_gymnasium"] = "(" SQLQUERY("leisure%=sports_hall") " OR " SQLQUERY("leisure%=sports_centre") ")";
+    //map["sport_hillclimbing"] = SQLQUERY("MISSING");
+    map["sport_horse_racing"] = SQLQUERY("sport=%horse_reacing");
+    map["sport_iceskating"] = SQLQUERY("sport=%ice_skating");
+    map["sport_jetski"] = SQLQUERY("shop=jetski");
+    map["sport_leisure_centre"] = SQLQUERY("landuse=recreation_ground");
+    map["sport_minature_golf"] = SQLQUERY("sport=%miniature_golf");
+    map["sport_motorracing"] = SQLQUERY("sport=%motor");
+    map["sport_playground"] = SQLQUERY("leisure=playground");
+    map["sport_sailing"] = SQLQUERY("sport=%sailing");
+    map["sport_shooting"] = SQLQUERY("sport=%shooting");
+    map["sport_skiing_crosscountry"] = SQLQUERY("piste:type=nordic");
+    map["sport_skiing_downhill"] = "(" SQLQUERY("sport=%skiing") " OR " SQLQUERY("piste:type=downhill") ")";
+    map["sport_snooker"] = SQLQUERY("sport=%snooker");
+    map["sport_soccer"] = SQLQUERY("sport=%soccer");
+    map["sport_stadium"] = SQLQUERY("leisure=stadium");
+    map["sport_swimming_indoor"] = "(" SQLQUERY("sport=%swimming") " AND " SQLQUERY("building=yes") ")";
+    map["sport_swimming_outdoor"] = SQLQUERY("sport=%swimming") " AND main.poi_data.data NOT LIKE '%building=yes%')";
+    map["sport_tennis"] = SQLQUERY("sport=%tennis");
+    map["sport_windsurfing"] = SQLQUERY("sport=%surfing");
+    map["tourist_archaeological"] = SQLQUERY("historic=archaeological_site");
+    map["tourist_art_gallery"] = SQLQUERY("tourism=gallery");
+    map["tourist_attraction"] = SQLQUERY("tourism=attraction");
+    map["tourist_battlefield"] = SQLQUERY("historic=battlefield");
+    map["tourist_beach"] = SQLQUERY("natural=beach");
+    map["tourist_casino"] = SQLQUERY("amenity=casino");
+    map["tourist_castle"] = SQLQUERY("historic=castle");
+    map["tourist_cinema"] = SQLQUERY("amenity=cinema");
+    map["tourist_clock"] = SQLQUERY("amenity=clock");
+    map["tourist_fountain"] = SQLQUERY("amenity=fountain");
+    map["tourist_guidepost"] = SQLQUERY("information=guidepost");
+    map["tourist_information"] = "(" SQLQUERY("tourism=information") " AND (" SQLQUERY("information=office") " OR " SQLQUERY("information=visitor_centre") "))";
+    map["tourist_map"] = "(" SQLQUERY("tourism=information") " AND (" SQLQUERY("information=board") " OR " SQLQUERY("information=map") "))";
+    map["tourist_memorial"] = SQLQUERY("memorial=");
+    map["tourist_monument"] = SQLQUERY("historic=monument");
+    map["tourist_museum"] = SQLQUERY("tourism=museum");
+    map["tourist_picnic"] = "(" SQLQUERY("leisure=picnic_table") " OR " SQLQUERY("leisure=picnic_site") ")";
+    map["tourist_ruin"] = SQLQUERY("historic=ruins");
+    map["tourist_steam_train"] = "(" SQLQUERY("railway=preserved") " OR " SQLQUERY("railway:preserved=yes") ")";
+    map["tourist_theatre"] = SQLQUERY("amenity=theatre");
+    map["tourist_theme_park"] = SQLQUERY("tourism=theme_park");
+    map["tourist_view_point"] = SQLQUERY("tourism=viewpoint");
+    map["tourist_waterwheel"] = SQLQUERY("man made=watermill");
+    map["tourist_wayside_cross"] = SQLQUERY("historic=wayside_cross");
+    map["tourist_wayside_shrine"] = SQLQUERY("historic=wayside_shrine");
+    map["tourist_windmill"] = SQLQUERY("man_made=windmill");
+    map["tourist_wreck"] = SQLQUERY("historic=wreck");
+    map["tourist_zoo"] = SQLQUERY("tourism=zoo");
+    map["transport_aerodrome"] = SQLQUERY("aeroway=aerodrome");
+    //map["transport_airport_gate"] = SQLQUERY("MISSING");
+    //map["transport_airport"] = SQLQUERY("MISSING");
+    //map["transport_airport_terminal"] = SQLQUERY("MISSING");
+    map["transport_bus_station"] = SQLQUERY("public_transport=station");
+    map["transport_bus_stop"] = SQLQUERY("highway=bus_stop");
+    map["transport_car_share"] = SQLQUERY("amenity=car_sharing");
+    map["transport_emergency_phone"] = SQLQUERY("amenity=emergency_phone");
+    map["transport_ford"] = SQLQUERY("ford=yes");
+    map["transport_fuel_lpg"] = "(" SQLQUERY("amenity=fuel") " AND " SQLQUERY("fuel:lpg=yes") ")";
+    map["transport_fuel"] = SQLQUERY("amenity=fuel");
+    //map["transport_helicopter"] = SQLQUERY("MISSING");
+    map["transport_helicopter_pad"] = SQLQUERY("aeroway=helipad");
+    map["transport_lighthouse"] = SQLQUERY("man_made=lighthouse");
+    map["transport_marina"] = SQLQUERY("leisure=marina");
+    //map["transport_miniroundabout_anticlockwise"] = SQLQUERY("MISSING");
+    //map["transport_miniroundabout_clockwise"] = SQLQUERY("MISSING");
+    map["transport_parking_bicycle"] = SQLQUERY("amenity=bicycle_parking");
+    map["transport_parking_car"] = "(" SQLQUERY("amenity=parking") " AND main.poi_data.data NOT LIKE '%fee=yes%')";
+    map["transport_parking_car_paid"] = "(" SQLQUERY("amenity=parking") " AND " SQLQUERY("fee=yes") ")";
+    //map["transport_parking_disabled"] = SQLQUERY("MISSING");
+    //map["transport_parking"] = SQLQUERY("MISSING");
+    //map["transport_parking_private"] = SQLQUERY("MISSING");
+    map["transport_port"] = "(" SQLQUERY("landuse=harbour") " OR " SQLQUERY("landuse=port") " OR (" SQLQUERY("landuse=industrial") " AND " SQLQUERY("industrial=port") "))";
+    map["transport_rental_bicycle"] = SQLQUERY("amenity=bicycle_rental");
+    map["transport_rental_car"] = SQLQUERY("amenity=car_rental");
+    //map["transport_roundabout_anticlockwise"] = SQLQUERY("MISSING");
+    //map["transport_roundabout_clockwise"] = SQLQUERY("MISSING");
+    map["transport_slipway"] = SQLQUERY("leisure=slipway");
+    //map["transport_speedbump"] = SQLQUERY("MISSING");
+    map["transport_subway"] = SQLQUERY("station=subway");
+    map["transport_taxi_rank"] = SQLQUERY("amenity=taxi");
+    //map["transport_traffic_lights"] = SQLQUERY("MISSING");
+    map["transport_train_station"] = SQLQUERY("railway=station");
+    map["transport_tram_stop"] = SQLQUERY("railway=tram_stop");
+    //map["transport_turning_circle"] = SQLQUERY("MISSING");
+    //map["transport_walking"] = SQLQUERY("MISSING");
+    //map["transport_zebra_crossing"] = SQLQUERY("MISSING");
+    map["water_dam"] = SQLQUERY("waterway=dam");
+    map["water_tower"] = SQLQUERY("man_made=water_tower");
+    map["water_weir"] = SQLQUERY("waterway=weir");
+
+    return map;
+}

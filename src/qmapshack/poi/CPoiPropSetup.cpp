@@ -18,6 +18,7 @@
 
 #include "helpers/Signals.h"
 #include "poi/CPoiDraw.h"
+#include "poi/CPoiPOI.h"
 #include "poi/CPoiPropSetup.h"
 #include "poi/IPoi.h"
 
@@ -29,6 +30,10 @@ CPoiPropSetup::CPoiPropSetup(IPoi *poifile, CPoiDraw *poi)
 
     connect(sliderOpacity,         &QSlider::valueChanged,      poifile, &IPoi::slotSetOpacity);
     connect(sliderOpacity,         &QSlider::valueChanged,      poi,     &CPoiDraw::emitSigCanvasUpdate);
+
+    poifile->addTreeWidgetItems(treeWidgetCategories);
+    treeWidgetCategories->sortItems(eTreeColumnDisplayName, Qt::SortOrder::AscendingOrder);
+    connect(treeWidgetCategories, SIGNAL(itemChanged(QTreeWidgetItem*,int)), poifile, SLOT(slotCheckedStateChanged(QTreeWidgetItem*)));
 }
 
 

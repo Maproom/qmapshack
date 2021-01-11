@@ -26,12 +26,19 @@ class CPoiPropSetup : public IPoiProp, private Ui::IPoiPropSetup
 {
     Q_OBJECT
 public:
+    enum treeColumn_e
+    {
+        eTreeColumnCheckbox,
+        eTreeColumnDisplayName,
+    };
+
     CPoiPropSetup(IPoi *poifile, CPoiDraw *poi);
     virtual ~CPoiPropSetup() = default;
 
 protected slots:
     void slotPropertiesChanged() override;
 
+private:
 };
 
 #endif //CPOIPROPSETUP_H

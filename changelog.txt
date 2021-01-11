@@ -6,6 +6,7 @@ V1.XX.X
 [QMS-285] WMTS-based maps aren't restored correctly
 [QMS-297] Add GUI framework for POI databases
 [QMS-299] CEnergyCycling is storing it's configuration in the `General` section instead of it's own.
+[QMS-303] Add POI icons
 
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release

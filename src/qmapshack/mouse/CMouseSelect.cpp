@@ -70,7 +70,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
         itemKeys.clear();
 
         QRectF area;
-        rectRad2Px(rectSelection, area);
+        rectRad2Deg(rectSelection, area);
         CGisWorkspace::self().getItemsByArea(area, modeSelection, items);
 
         cntWpt = 0;

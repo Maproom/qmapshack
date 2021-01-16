@@ -1442,7 +1442,9 @@ bool CGisItemTrk::isCloseTo(const QPointF& pos)
 
 bool CGisItemTrk::isWithin(const QRectF& area, selflags_t flags)
 {
-    return (flags & eSelectionTrk) ? IGisItem::isWithin(area, flags, lineSimple) : false;
+    QPolygonF l;
+    getPolylineDegFromData(l);
+    return (flags & eSelectionTrk) ? IGisItem::isWithin(area, flags, l) : false;
 }
 
 

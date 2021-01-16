@@ -41,6 +41,7 @@ public:
 
 protected:
     void rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const;
+    void rectRad2Deg(const QRectF& rectSrc, QRectF& rectTar) const;
     void placeScrOpt();
 
     QPointF offset;

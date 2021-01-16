@@ -600,7 +600,7 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
 
 bool CGisItemWpt::isWithin(const QRectF& area, selflags_t flags)
 {
-    return (flags & eSelectionWpt) ? area.contains(posScreen) : false;
+    return (flags & eSelectionWpt) ? area.contains(QPointF(wpt.lon, wpt.lat)) : false;
 }
 
 

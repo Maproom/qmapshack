@@ -47,6 +47,17 @@ void IMouseSelect::rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const
     rectTar = QRectF(pt1, pt2);
 }
 
+void IMouseSelect::rectRad2Deg(const QRectF& rectSrc, QRectF& rectTar) const
+{
+    QPointF pt1 = rectSrc.topLeft();
+    QPointF pt2 = rectSrc.bottomRight();
+
+    pt1 *= RAD_TO_DEG;
+    pt2 *= RAD_TO_DEG;
+
+    rectTar = QRectF(pt1, pt2);
+}
+
 void IMouseSelect::placeScrOpt()
 {
     if(scrOpt.isNull())

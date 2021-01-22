@@ -1121,6 +1121,11 @@ void CCanvas::displayInfo(const QPoint& px)
 
 poi_t CCanvas::findPOICloseBy(const QPoint& px) const
 {
+    poi_t poiItem = poi->findPOICloseBy(px);
+    if(poiItem.pos != NOPOINTF)
+    {
+        return poiItem;
+    }
     return map->findPOICloseBy(px);
 }
 

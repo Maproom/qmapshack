@@ -37,6 +37,8 @@ public:
 
     void draw(IDrawContext::buffer_t& buf) override;
 
+    virtual bool findPoiCloseBy(const QPoint& px, poi_t& poiItem) const override;
+
     static void init()
     {
         tagMap = initTagMap();
@@ -46,7 +48,7 @@ public slots:
     void slotCheckedStateChanged(QTreeWidgetItem*item) override;
 
 private:
-    struct poi_t
+    struct rawPoi_t
     {
         QStringList data;
         QPointF coordinates;
@@ -65,7 +67,7 @@ private:
     QTimer* loadTimer;
     QMap<QString, Qt::CheckState> categoryActivated;
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
-    QMap<QString, QMap<int, QMap<int, QList<poi_t> > > > loadedPOIs;
+    QMap<QString, QMap<int, QMap<int, QList<rawPoi_t> > > > loadedPOIs;
 
     static QMap<QString, QString> tagMap;
     static QMap<QString, QString> initTagMap();

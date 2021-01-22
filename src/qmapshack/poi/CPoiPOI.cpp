@@ -17,6 +17,7 @@
 
 **********************************************************************************************/
 
+#include "gis/Poi.h"
 #include "helpers/CDraw.h"
 #include "poi/CPoiCategory.h"
 #include "poi/CPoiDraw.h"
@@ -109,7 +110,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                     mutex.unlock();
                     return;
                 }
-                for(const poi_t& poiToDraw : loadedPOIs[category][minLonM10][minLatM10])
+                for(const rawPoi_t& poiToDraw : loadedPOIs[category][minLonM10][minLatM10])
                 {
                     QPointF pt = poiToDraw.coordinates;
                     poi->convertRad2Px(pt);
@@ -124,6 +125,45 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
         }
     }
     mutex.unlock();
+}
+
+bool CPoiPOI::findPoiCloseBy(const QPoint &px, poi_t & poiItem) const
+{
+    QPointF p = px;
+    poi->convertPx2Rad(p);
+    for(const QString& category : categoryActivated.keys(Qt::Checked))
+    {
+        int minLonM10 = qFloor(p.x() * RAD_TO_DEG * 10);
+        int minLatM10 = qFloor(p.y() * RAD_TO_DEG * 10);
+        //The tile that contains the POI has to be loaded, since a position on screen is given
+        for(const rawPoi_t& poiItemFound : loadedPOIs[category][minLonM10][minLatM10])
+        {
+            QPointF pt = poiItemFound.coordinates;
+            poi->convertRad2Px(pt);
+            QPointF x = px - pt;
+            if(x.manhattanLength() < 10)
+            {
+                poiItem.pos = poiItemFound.coordinates;
+                for(const QString& tag : {"name=", "brand=", "operator="})
+                {
+                    const QStringList& matches = poiItemFound.data.filter(tag);
+                    if (!matches.isEmpty())
+                    {
+                        poiItem.name = matches[0];
+                        poiItem.name.replace(tag, "");
+                        break;
+                    }
+                }
+                if(poiItem.name.isEmpty())
+                {
+                    poiItem.name = category;
+                }
+                poiItem.desc = poiItemFound.data.join("</br>\n");
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
@@ -194,7 +234,7 @@ void CPoiPOI::loadPOIsFromFile(const QString& category, int minLonM10, int minLa
     query.exec();
     while (query.next())
     {
-        poi_t poi;
+        rawPoi_t poi;
         poi.coordinates = QPointF((query.value(eSqlColumnMaxLon).toDouble() + query.value(eSqlColumnMinLon).toDouble()) / 2 * DEG_TO_RAD,
                                   (query.value(eSqlColumnMaxLat).toDouble() + query.value(eSqlColumnMinLat).toDouble()) / 2 * DEG_TO_RAD);
         poi.data = query.value(eSqlColumnData).toString().split("\r");

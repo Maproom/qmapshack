@@ -51,6 +51,8 @@ public:
     {
         return supportedFormats;
     }
+
+    poi_t findPOICloseBy(const QPoint& px) const;
 protected:
     void drawt(buffer_t& currentBuffer) override;
 

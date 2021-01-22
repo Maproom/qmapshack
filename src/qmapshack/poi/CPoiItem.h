@@ -81,6 +81,12 @@ public:
         return text(0);
     }
 
+    QPointer<IPoi>& getPoifile(){return poifile;}
+
+    bool findPoiCloseBy(const QPoint& px, poi_t& poiItem) const
+    {
+        return poifile->findPoiCloseBy(px, poiItem);
+    }
 private:
     friend class CPoiDraw;
     CPoiDraw * poi;

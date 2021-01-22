@@ -20,6 +20,8 @@
 #define POI_H
 
 #include "units/IUnit.h"
+#include <QPointF>
+#include <QSize>
 
 struct poi_t
 {

@@ -81,6 +81,7 @@ public:
         return text(0);
     }
 
+    QPointer<IPoi>& getPoifile(){return poifile;}
 private:
     friend class CPoiDraw;
     CPoiDraw * poi;

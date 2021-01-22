@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/Poi.h"
 #include "helpers/CSettings.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiItem.h"
@@ -135,6 +136,36 @@ void CPoiDraw::savePoiPath(QSettings &cfg)
 void CPoiDraw::loadPoiPath(QSettings &cfg)
 {
     poiPaths = cfg.value("poiPaths", poiPaths).toStringList();
+}
+
+poi_t CPoiDraw::findPOICloseBy(const QPoint &px) const
+{
+    poi_t poi;
+    CPoiItem::mutexActivePois.lock();
+    if(poiList)
+    {
+        for(int i = 0; i < poiList->count(); i++)
+        {
+            auto item = poiList->item(i);
+
+            if(!item || item->getPoifile().isNull())
+            {
+                // as all active maps have to be at the top of the list
+                // it is ok to break as soon as the first map with no
+                // active files is hit.
+                break;
+            }
+
+            item->getPoifile()->findPOICloseBy(px, poi);
+            if(poi.pos != NOPOINTF)
+            {
+                // stop at the 1st one found
+                break;
+            }
+        }
+    }
+    CPoiItem::mutexActivePois.unlock();
+    return poi;
 }
 
 void CPoiDraw::buildPoiList()

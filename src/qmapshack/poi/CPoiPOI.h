@@ -38,6 +38,7 @@ public:
     void draw(IDrawContext::buffer_t& buf) override;
 
     virtual bool findPoiCloseBy(const QPoint& px, poi_t& poiItem) const override;
+    virtual void findPoisIn(const QRectF& degRect, QList<poi_t>&pois) override;
 
     static void init()
     {
@@ -51,7 +52,8 @@ private:
     struct rawPoi_t
     {
         QStringList data;
-        QPointF coordinates;
+        QPointF coordinates; // in radians
+        poi_t toPoi(const QString &defaultName) const;
     };
     enum SqlColumn_e
     {

@@ -10,6 +10,7 @@ V1.XX.X
 [QMS-303] Add POI icons
 [QMS-311] Automatically save projects to device
 [QMS-315] Make POI Icons User-Selectable
+[QMS-318] Change poi_t to use radians
 [QMS-337] Upgrade to Proj 8 API
 [QMS-343] .fit files from Suunto app have many trackpoints with elevation = 0
 [QMS-344] Better integration of new PROJ lib into cmake build system

@@ -143,22 +143,36 @@ void CPoiPOI::findPOICloseBy(const QPoint &px, poi_t & poiItem) const
             QPointF x = px - pt;
             if(x.manhattanLength() < 10)
             {
-                poiItem.pos = poiItemFound.coordinates;
-                for(auto tag : {"name=", "brand=", "operator="})
+                poiItem = poiItemFound.toPoi(category);
+                return;
+            }
+        }
+    }
+}
+
+void CPoiPOI::findPoisIn(const QRectF &degRect, QList<poi_t> &pois)
+{
+    for(const QString& category : categoryActivated.keys(Qt::Checked))
+    {
+        for(int minLonM10 = qFloor(degRect.left() * 10); minLonM10 <= qFloor(degRect.right() * 10); minLonM10++)
+        {
+            for(int minLatM10 = qFloor(degRect.bottom() * 10); minLatM10 <= qFloor(degRect.top() * 10); minLatM10++)
+            {
+                //Imagine the user moves the screen in an l-shape while updating the selection rectangle. It is possible that some tiles are not laded then
+                if(!loadedPOIs.contains(category) ||
+                   !loadedPOIs[category].contains(minLonM10) ||
+                   !loadedPOIs[category][minLonM10].contains(minLatM10))
                 {
-                    auto matches = poiItemFound.data.filter(tag);
-                    if (matches.length() > 0)
+                    loadPOIsFromFile(category, minLonM10, minLatM10);
+                }
+                for(const rawPoi_t& poiItemFound : loadedPOIs[category][minLonM10][minLatM10])
+                {
+                    //Maybe look through the whole code of selecting items from a map to avoid this conversion
+                    if(degRect.contains(poiItemFound.coordinates * RAD_TO_DEG))
                     {
-                        poiItem.name = matches[0].replace(tag, "");
-                        break;
+                        pois.append(poiItemFound.toPoi(category));
                     }
                 }
-                if(poiItem.name == "")
-                {
-                    poiItem.name = category;
-                }
-                poiItem.desc = poiItemFound.data.join("</br>\n");
-                return;
             }
         }
     }
@@ -240,4 +254,25 @@ void CPoiPOI::loadPOIsFromFile(const QString& category, int minLonM10, int minLa
         loadedPOIs[category][minLonM10][minLatM10].append(poi);
         mutex.unlock();
     }
+}
+
+poi_t CPoiPOI::rawPoi_t::toPoi(QString defaultName) const
+{
+    poi_t poi;
+    poi.pos = coordinates;
+    for(auto tag : {"name=", "brand=", "operator="})
+    {
+        auto matches = data.filter(tag);
+        if (matches.length() > 0)
+        {
+            poi.name = matches[0].replace(tag, "");
+            break;
+        }
+    }
+    if(poi.name == "")
+    {
+        poi.name = defaultName;
+    }
+    poi.desc = data.join("</br>\n");
+    return poi;
 }

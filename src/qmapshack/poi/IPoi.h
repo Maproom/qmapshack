@@ -51,6 +51,7 @@ public:
     virtual void addTreeWidgetItems(QTreeWidget* widget) = 0;
 
     virtual void findPOICloseBy(const QPoint& px, poi_t&) const = 0;
+    virtual void findPoisIn(const QRectF& degRect, QList<poi_t>&pois) = 0;
 
 public slots:
     virtual void slotCheckedStateChanged(QTreeWidgetItem*item) = 0;

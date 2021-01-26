@@ -289,8 +289,9 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         {
             const QSize s = curPOI.symbolSize;
             const qint32 x = (qMax(qMax(s.width(), s.height()), 7) << 1) & 0xFFFFFFFE;
-
-            p.drawImage(curPOI.pos - QPointF(x, x), QImage("://cursors/wptHighlightBlue.png").scaled(x << 1, x << 1, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            QPointF pxPos = curPOI.pos;
+            gis->convertRad2Px(pxPos);
+            p.drawImage(pxPos - QPointF(x, x), QImage("://cursors/wptHighlightBlue.png").scaled(x << 1, x << 1, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         }
 
         /*
@@ -357,11 +358,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
 
 void CMouseNormal::slotAddPoi() const
 {
-    QPointF pt = curPOI.pos;
-    gis->convertPx2Rad(pt);
-    pt *= RAD_TO_DEG;
-
-    CGisWorkspace::self().addWptByPos(pt, curPOI.name, curPOI.desc);
+    CGisWorkspace::self().addWptByPos(curPOI.pos * RAD_TO_DEG, curPOI.name, curPOI.desc);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 

@@ -34,6 +34,7 @@
 class CGisDraw;
 class IGisProject;
 class CSearchExplanationDialog;
+struct poi_t;
 
 enum event_types_e
 {
@@ -332,7 +333,7 @@ public:
        @brief Select a project and add a copy of all items in the list
        @param keys      a list of item keys to copy
      */
-    void copyItemsByKey(const QList<IGisItem::key_t> &keys);
+    IGisProject *copyItemsByKey(const QList<IGisItem::key_t> &keys);
 
     /**
        @brief Clone waypoint and move clone
@@ -348,9 +349,10 @@ public:
 
     /**
        @brief Add a new waypoint by Position
-       @param pt    the position in [?]
+       @param pt    the position in degrees
      */
-    void addWptByPos(QPointF pt, const QString& name = QString::Null(), const QString& desc = QString::Null()) const;
+    void addWptByPos(const QPointF& pt, const QString& name = QString::Null(), const QString& desc = QString::Null()) const;
+    void addPoisAsWpt(const QList<poi_t> &pois, IGisProject *project = nullptr) const;
 
     void toggleWptBubble(const IGisItem::key_t &key);
 

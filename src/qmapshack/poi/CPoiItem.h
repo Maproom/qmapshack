@@ -87,6 +87,10 @@ public:
     {
         return poifile->findPoiCloseBy(px, poiItem);
     }
+    void findPoisIn(const QRectF& degRect, QList<poi_t>&pois)
+    {
+        getPoifile()->findPoisIn(degRect, pois);
+    }
 private:
     friend class CPoiDraw;
     CPoiDraw * poi;

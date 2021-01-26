@@ -273,7 +273,7 @@ bool CGisItemWpt::getIconAndName(QString& icon, QString& name)
     return true;
 }
 
-void CGisItemWpt::newWpt(QPointF& pt, const QString &name, const QString &desc, IGisProject * project)
+void CGisItemWpt::newWpt(const QPointF& pt, const QString &name, const QString &desc, IGisProject * project, bool openEditWIndow)
 {
     SETTINGS;
     QString icon = cfg.value("Waypoint/lastIcon", "Waypoint").toString();
@@ -290,7 +290,11 @@ void CGisItemWpt::newWpt(QPointF& pt, const QString &name, const QString &desc, 
     {
         wpt->setDescription(desc);
     }
-    wpt->editInitial();
+
+    if(openEditWIndow)
+    {
+        wpt->editInitial();
+    }
 
     cfg.setValue("Waypoint/lastName", wpt->getName());
     cfg.setValue("Waypoint/lastIcon", wpt->getIconName());

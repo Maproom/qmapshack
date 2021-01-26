@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/Poi.h"
 #include "gis/trk/CActivityTrk.h"
 #include "helpers/CWptIconManager.h"
 #include "mouse/CMouseSelect.h"
@@ -100,6 +101,16 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
             }
         }
 
+        if(modeSelection & IGisItem::eSelectionPoi)
+        {
+            poisFound = canvas->findPoisIn(area);
+        }
+        else
+        {
+            poisFound = {};
+        }
+        cntPoi = poisFound.count();
+
         QString msg = tr("<b>Selected:</b><br/>");
         if(scrOptSelect->toolItemTrk->isChecked())
         {
@@ -121,13 +132,18 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
             msg += tr("%1 areas<br/>").arg(cntOvl);
         }
 
+        if(scrOptSelect->toolItemPoi->isChecked())
+        {
+            msg += tr("%1 POIs<br/>").arg(cntPoi);
+        }
         canvas->reportStatus("CMouseSelect::Stat", msg);
 
         rectLastSel = rectSelection;
         modeLastSel = modeSelection;
     }
 
-    scrOptSelect->frameFunction->setDisabled(items.isEmpty());
+    scrOptSelect->frameFunction->setDisabled(items.isEmpty() && poisFound.isEmpty());
+    scrOptSelect->toolDelete->setDisabled(items.isEmpty());
     scrOptSelect->toolSymWpt->setEnabled(cntWpt);
     scrOptSelect->toolRoute->setEnabled(cntWpt > 1);
     scrOptSelect->toolEditPrxWpt->setEnabled(cntWpt);
@@ -152,6 +168,18 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         item->drawHighlight(p);
     }
 
+    for(const poi_t& poiItem : poisFound)
+    {
+        if(poiItem.pos != NOPOINTF)
+        {
+            const QSize s = poiItem.symbolSize;
+            const qint32 x = (qMax(qMax(s.width(), s.height()), 7) << 1) & 0xFFFFFFFE;
+            QPointF pxPos = poiItem.pos;
+            gis->convertRad2Px(pxPos);
+            p.drawImage(pxPos - QPointF(x, x), QImage("://cursors/wptHighlightBlue.png").scaled(x << 1, x << 1, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
+    }
+
     IMouseSelect::draw(p, needsRedraw, rect);
 }
 
@@ -159,7 +187,12 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
 
 void CMouseSelect::slotCopy() const
 {
-    CGisWorkspace::self().copyItemsByKey(itemKeys);
+    //Project is a nullptr if the user cancels the Dialog
+    IGisProject* project = CGisWorkspace::self().copyItemsByKey(itemKeys);
+    if(project != nullptr)
+    {
+        CGisWorkspace::self().addPoisAsWpt(poisFound, project);
+    }
     canvas->resetMouse();
 }
 

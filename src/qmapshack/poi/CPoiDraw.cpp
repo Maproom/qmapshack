@@ -166,6 +166,28 @@ poi_t CPoiDraw::findPOICloseBy(const QPoint &px) const
     return poi;
 }
 
+void CPoiDraw::findPoisIn(const QRectF &degRect, QList<poi_t> & pois) const
+{
+    if(CPoiItem::mutexActivePois.tryLock() && poiList)
+    {
+        for(int i = 0; i < poiList->count(); i++)
+        {
+            CPoiItem* item = poiList->item(i);
+
+            if(!item || item->getPoifile().isNull())
+            {
+                // as all active maps have to be at the top of the list
+                // it is ok to break as soon as the first map with no
+                // active files is hit.
+                break;
+            }
+
+            item->findPoisIn(degRect, pois);
+        }
+    }
+    CPoiItem::mutexActivePois.unlock();
+}
+
 void CPoiDraw::buildPoiList()
 {
     QCryptographicHash md5(QCryptographicHash::Md5);

@@ -2347,7 +2347,9 @@ void CMapIMG::findPOICloseBy(const QPoint& pt, poi_t& poi) const /*override;*/
             QPoint x = pt - QPoint(point.pos.x(), point.pos.y());
             if(x.manhattanLength() < 10)
             {
-                poi.pos = point.pos;
+                QPointF radPos = point.pos;
+                map->convertPx2Rad(radPos);
+                poi.pos = radPos;
                 if(!point.labels.isEmpty())
                 {
                     poi.name  = point.labels.first();

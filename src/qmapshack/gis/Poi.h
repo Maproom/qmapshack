@@ -26,7 +26,7 @@ struct poi_t
     poi_t() : pos(NOPOINTF){}
     QString name;
     QString desc;
-    QPointF pos;
+    QPointF pos; // in radians!
     QSize symbolSize;
 };
 

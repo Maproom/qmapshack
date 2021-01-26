@@ -143,27 +143,40 @@ bool CPoiPOI::findPoiCloseBy(const QPoint &px, poi_t & poiItem) const
             QPointF x = px - pt;
             if(x.manhattanLength() < 10)
             {
-                poiItem.pos = poiItemFound.coordinates;
-                for(const QString& tag : {"name=", "brand=", "operator="})
-                {
-                    const QStringList& matches = poiItemFound.data.filter(tag);
-                    if (!matches.isEmpty())
-                    {
-                        poiItem.name = matches[0];
-                        poiItem.name.replace(tag, "");
-                        break;
-                    }
-                }
-                if(poiItem.name.isEmpty())
-                {
-                    poiItem.name = category;
-                }
-                poiItem.desc = poiItemFound.data.join("</br>\n");
+                poiItem = poiItemFound.toPoi(category);
                 return true;
             }
         }
     }
     return false;
+}
+
+void CPoiPOI::findPoisIn(const QRectF &degRect, QList<poi_t> &pois)
+{
+    for(const QString& category : categoryActivated.keys(Qt::Checked))
+    {
+        for(int minLonM10 = qFloor(degRect.left() * 10); minLonM10 <= qFloor(degRect.right() * 10); minLonM10++)
+        {
+            for(int minLatM10 = qFloor(degRect.bottom() * 10); minLatM10 <= qFloor(degRect.top() * 10); minLatM10++)
+            {
+                //Imagine the user moves the screen in an l-shape while updating the selection rectangle. It is possible that some tiles are not laded then
+                if(!loadedPOIs.contains(category) ||
+                   !loadedPOIs[category].contains(minLonM10) ||
+                   !loadedPOIs[category][minLonM10].contains(minLatM10))
+                {
+                    loadPOIsFromFile(category, minLonM10, minLatM10);
+                }
+                for(const rawPoi_t& poiItemFound : loadedPOIs[category][minLonM10][minLatM10])
+                {
+                    //Maybe look through the whole code of selecting items from a map to avoid this conversion
+                    if(degRect.contains(poiItemFound.coordinates * RAD_TO_DEG))
+                    {
+                        pois.append(poiItemFound.toPoi(category));
+                    }
+                }
+            }
+        }
+    }
 }
 
 void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
@@ -242,4 +255,26 @@ void CPoiPOI::loadPOIsFromFile(const QString& category, int minLonM10, int minLa
         loadedPOIs[category][minLonM10][minLatM10].append(poi);
         mutex.unlock();
     }
+}
+
+poi_t CPoiPOI::rawPoi_t::toPoi(const QString& defaultName) const
+{
+    poi_t poi;
+    poi.pos = coordinates;
+    for(const QString& tag : {"name=", "brand=", "operator="})
+    {
+        const QStringList& matches = data.filter(tag);
+        if (!matches.isEmpty())
+        {
+            poi.name = matches[0];
+            poi.name.replace(tag, "");
+            break;
+        }
+    }
+    if(poi.name.isEmpty())
+    {
+        poi.name = defaultName;
+    }
+    poi.desc = data.join("</br>\n");
+    return poi;
 }

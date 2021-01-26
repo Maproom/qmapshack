@@ -59,6 +59,7 @@ private:
 
 
     QList<IGisItem::key_t> itemKeys;
+    QList<poi_t> poisFound;
     IGisItem::selflags_t modeLastSel   = IGisItem::eSelectionNone;
     QRectF rectLastSel;
 
@@ -66,6 +67,7 @@ private:
     quint32 cntTrk = 0;
     quint32 cntRte = 0;
     quint32 cntOvl = 0;
+    quint32 cntPoi = 0;
 };
 
 #endif //CMOUSESELECT_H

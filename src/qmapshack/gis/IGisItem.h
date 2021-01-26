@@ -158,6 +158,7 @@ public:
         , eSelectionWpt         = 0x40000000
         , eSelectionRte         = 0x20000000
         , eSelectionOvl         = 0x10000000
+        , eSelectionPoi         = 0x08000000
     };
 
     using selflags_t = quint32;

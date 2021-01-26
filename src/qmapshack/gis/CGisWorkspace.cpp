@@ -32,6 +32,7 @@
 #include "gis/IGisItem.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/Poi.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
@@ -680,14 +681,14 @@ void CGisWorkspace::copyItemByKey(const IGisItem::key_t &key)
     emit sigChanged();
 }
 
-void CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t> &keys)
+IGisProject* CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t> &keys)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
     IGisProject * project = selectProject(true);
     if(nullptr == project)
     {
-        return;
+        return nullptr;
     }
 
     CSelectCopyAction::result_e lastResult = CSelectCopyAction::eResultNone;
@@ -707,6 +708,7 @@ void CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t> &keys)
     project->blockUpdateItems(false);
 
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
+    return project;
 }
 
 void CGisWorkspace::searchWebByKey(const IGisItem::key_t &key)
@@ -908,7 +910,7 @@ void CGisWorkspace::copyWptCoordByKey(const IGisItem::key_t &key)
     }
 }
 
-void CGisWorkspace::addWptByPos(QPointF pt, const QString& name, const QString& desc) const
+void CGisWorkspace::addWptByPos(const QPointF& pt, const QString& name, const QString& desc) const
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -919,6 +921,24 @@ void CGisWorkspace::addWptByPos(QPointF pt, const QString& name, const QString& 
     }
 
     CGisItemWpt::newWpt(pt, name, desc, project);
+}
+
+void CGisWorkspace::addPoisAsWpt(const QList<poi_t> &pois, IGisProject * project) const
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    if(nullptr == project)
+    {
+        project = CGisWorkspace::self().selectProject(false);
+    }
+    if(nullptr == project)
+    {
+        return;
+    }
+    for(const poi_t& poi: pois)
+    {
+        CGisItemWpt::newWpt(poi.pos * RAD_TO_DEG, poi.name, poi.desc, project, false);
+    }
 }
 
 void CGisWorkspace::focusTrkByKey(bool yes, const IGisItem::key_t& key)

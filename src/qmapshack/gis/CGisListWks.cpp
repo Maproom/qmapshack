@@ -120,6 +120,9 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionAutoSave->setCheckable(true);
     actionUserFocusPrj  = addAction(QIcon("://icons/32x32/Focus.png"), tr("Active Project"), this, SLOT(slotUserFocusPrj(bool)));
     actionUserFocusPrj->setCheckable(true);
+    actionAutoSyncToDev = addAction(QIcon("://icons/32x32/Device.png"), tr("Autom. Sync. w. Device"), this, SLOT(slotAutoSyncProject(bool)));
+    actionAutoSyncToDev->setCheckable(true);
+
     actionSave          = addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Save"), this, SLOT(slotSaveProject()));
     actionSaveAs        = addAction(QIcon("://icons/32x32/SaveGISAs.png"), tr("Save as..."), this, SLOT(slotSaveAsProject()));
     actionSaveAsStrict  = addAction(QIcon("://icons/32x32/SaveGISAsGpx11.png"), tr("Save as GPX 1.1 w/o ext..."), this, SLOT(slotSaveAsStrictGpx11Project()));
@@ -178,7 +181,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     // several GIS items related actions
     actionRteFromWpt    = addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route..."), this, SLOT(slotRteFromWpt()));
-    actionEditPrxWpt =  addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Proximity..."), this, SLOT(slotEditPrxWpt()));
+    actionEditPrxWpt    =  addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Proximity..."), this, SLOT(slotEditPrxWpt()));
 
     connect(qApp, &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
     connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
@@ -199,18 +202,21 @@ CGisListWks::CGisListWks(QWidget *parent)
         qDebug() << "Device support enabled";
 #ifdef Q_OS_MAC
         deviceWatcher = new CDeviceWatcherMac(this);
-        connect(deviceWatcher, &CDeviceWatcherMac::sigChanged, this, &CGisListWks::sigChanged);
 #else
     #ifdef Q_OS_WIN
         deviceWatcher = new CDeviceWatcherWindows(this);
-        connect(deviceWatcher, &CDeviceWatcherWindows::sigChanged, this, &CGisListWks::sigChanged);
     #else
         #ifdef HAVE_DBUS
         deviceWatcher = new CDeviceWatcherLinux(this);
-        connect(deviceWatcher, &CDeviceWatcherLinux::sigChanged, this, &CGisListWks::sigChanged);
         #endif // HAVE_DBUS
     #endif // Q_OS_WIN
 #endif // Q_OS_MAC
+
+        if(deviceWatcher)
+        {
+            connect(deviceWatcher, &IDeviceWatcher::sigChanged, this, &CGisListWks::sigChanged);
+            connect(deviceWatcher, &IDeviceWatcher::sigChanged, this, &CGisListWks::slotNewDevice);
+        }
     }
 }
 
@@ -1010,6 +1016,7 @@ void CGisListWks::showMenuProjectWks(const QPoint& p)
     menu.addAction(actionSaveAsStrict);
     menu.addSeparator();
     menu.addAction(actionSyncWksDev);
+    menu.addAction(actionAutoSyncToDev);
     menu.addAction(actionSyncDB);
     menu.addSeparator();
     menu.addAction(actionCloseProj);
@@ -1206,6 +1213,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionGroupSort->setEnabled(false);
                 actionFilterProject->setEnabled(false);
                 actionSyncWksDev->setEnabled(IDevice::count());
+                actionAutoSyncToDev->setVisible(false);
                 actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
                 actionAutoSave->setVisible(false);
                 actionUserFocusPrj->setVisible(false);
@@ -1266,7 +1274,12 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 else
                 {
                     actionGroupSort->setEnabled(true);
-                    actionSyncWksDev->setEnabled(IDevice::count());
+
+                    bool autoSyncToDev = project->doAutoSyncToDevice();
+                    actionAutoSyncToDev->setVisible(true);
+                    actionAutoSyncToDev->setChecked(autoSyncToDev);
+
+                    actionSyncWksDev->setEnabled(IDevice::count() && !autoSyncToDev);
                     actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
 
                     blockSorting = true;
@@ -1412,6 +1425,11 @@ static void closeProjects(const QList<QTreeWidgetItem*> &items)
         IGisProject *project = dynamic_cast<IGisProject*>(item);
         if(nullptr != project)
         {
+            if(project->doAutoSyncToDevice())
+            {
+                continue;
+            }
+
             if(project->askBeforClose())
             {
                 break;
@@ -1562,6 +1580,21 @@ void CGisListWks::slotUserFocusPrj(bool yes)
     if(project != nullptr)
     {
         project->gainUserFocus(yes);
+    }
+}
+
+void CGisListWks::slotAutoSyncProject(bool yes)
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+    if(project != nullptr)
+    {
+        project->setAutoSyncToDevice(yes);
+        if(yes)
+        {
+            syncPrjToDevices(project, getAllDeviceKeys());
+        }
     }
 }
 
@@ -2012,29 +2045,7 @@ void CGisListWks::slotSyncWksDev()
             }
         }
     }
-
-    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
-    for(int n = 0; n < N; n++)
-    {
-        IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));
-        if(nullptr == device || keys.isEmpty() || !keys.contains(device->getKey()))
-        {
-            continue;
-        }
-        if(canvas)
-        {
-            canvas->reportStatus("device", tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->text(CGisListWks::eColumnName)));
-            canvas->update();
-            qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-        }
-
-        device->updateProject(project);
-    }
-    if(canvas)
-    {
-        canvas->reportStatus("device", "");
-    }
-    emit sigChanged();
+    syncPrjToDevices(project, keys);
 }
 
 void CGisListWks::slotSyncDevWks()
@@ -2078,6 +2089,8 @@ void CGisListWks::slotSyncDevWks()
 
 void CGisListWks::slotAddProjectFilter()
 {
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     //Since we only allow one Item to be selected at a time
     IGisProject * project = dynamic_cast<IGisProject*>(selectedItems()[0]);
     if(project != nullptr)
@@ -2086,12 +2099,75 @@ void CGisListWks::slotAddProjectFilter()
     }
 }
 
+void CGisListWks::slotNewDevice()
+{
+    QTimer::singleShot(200, this, SLOT(slotSyncPrjToDevices()));
+}
+
+void CGisListWks::slotSyncPrjToDevices()
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
+    const QSet<QString>& keys = getAllDeviceKeys();
+    const int N = topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject *project = dynamic_cast<IGisProject*>(topLevelItem(n));
+        if(project && project->doAutoSyncToDevice())
+        {
+            syncPrjToDevices(project, keys);
+        }
+    }
+}
+
+QSet<QString> CGisListWks::getAllDeviceKeys() const
+{
+    const int N = topLevelItemCount();
+    QSet<QString> keys;
+    for(int n = 0; n < N; n++)
+    {
+        IDevice *device = dynamic_cast<IDevice*>(topLevelItem(n));
+        if(nullptr != device)
+        {
+            keys << device->getKey();
+        }
+    }
+    return keys;
+}
+
+void CGisListWks::syncPrjToDevices(IGisProject * project, const QSet<QString>& keys)
+{
+    const int N = topLevelItemCount();
+    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
+    for(int n = 0; n < N; n++)
+    {
+        IDevice * device = dynamic_cast<IDevice*>(topLevelItem(n));
+        if(nullptr == device || keys.isEmpty() || !keys.contains(device->getKey()))
+        {
+            continue;
+        }
+        if(canvas)
+        {
+            canvas->reportStatus("device", tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->text(CGisListWks::eColumnName)));
+            canvas->update();
+            qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+        }
+
+        device->updateProject(project);
+    }
+    if(canvas)
+    {
+        canvas->reportStatus("device", "");
+    }
+    emit sigChanged();
+}
+
 bool CGisListWks::event(QEvent * e)
 {
     if(e->type() > QEvent::User)
     {
-        const bool doWaitCursoer = (eEvtA2WCutTrk != event_types_e(e->type()));
-        CGisListWksEditLock lock(doWaitCursoer, IGisItem::mutexItems);
+        const bool doWaitCursor = (eEvtA2WCutTrk != event_types_e(e->type()));
+        CGisListWksEditLock lock(doWaitCursor, IGisItem::mutexItems);
 
         switch(e->type())
         {
@@ -2249,6 +2325,20 @@ bool CGisListWks::event(QEvent * e)
             {
                 project->save();
                 project->confirmPendingAutoSave();
+            }
+            e->accept();
+            return true;
+        }
+
+        case eEvtA2WSync:
+        {
+            CEvtA2WSave * evt = (CEvtA2WSave*)e;
+
+            IGisProject * project = getProjectByKey(evt->key);
+            if(project)
+            {
+                syncPrjToDevices(project, getAllDeviceKeys());
+                project->confirmPendingAutoSyncToDev();
             }
             e->accept();
             return true;

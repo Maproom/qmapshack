@@ -246,7 +246,7 @@ qint32 IGisProject::isOnDevice() const
 
 bool IGisProject::isChanged() const
 {
-    return text(CGisListWks::eColumnDecoration) == "*";
+    return text(CGisListWks::eColumnDecoration).contains("*");
 }
 
 void IGisProject::edit()
@@ -315,18 +315,23 @@ void IGisProject::setChanged()
 {
     if(autoSave)
     {
-        setText(CGisListWks::eColumnDecoration, "A");
-
         if(!autoSavePending)
         {
             autoSavePending = true;
             CGisWorkspace::self().postEventForWks(new CEvtA2WSave(getKey()));
         }
     }
-    else
+
+    if(autoSyncToDev)
     {
-        setText(CGisListWks::eColumnDecoration, "*");
+        if(!autoSyncToDevPending)
+        {
+            autoSyncToDevPending = true;
+            CGisWorkspace::self().postEventForWks(new CEvtA2WSync(getKey()));
+        }
+
     }
+    updateDecoration(false);
     updateItems();
 }
 
@@ -340,6 +345,12 @@ void IGisProject::setAutoSave(bool on)
 
     autoSave = on;
     setChanged();
+}
+
+void IGisProject::setAutoSyncToDevice(bool yes)
+{
+    autoSyncToDev = yes;
+    updateDecoration();
 }
 
 void IGisProject::switchOnCorrelation()
@@ -517,7 +528,7 @@ void IGisProject::setupName(const QString &defaultName)
 
 void IGisProject::markAsSaved()
 {
-    setText(CGisListWks::eColumnDecoration, autoSave ? "A" : "");
+    updateDecoration(true);
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
@@ -1075,7 +1086,17 @@ void IGisProject::updateDecoration()
             break;
         }
     }
-    setText(CGisListWks::eColumnDecoration, autoSave ? "A" : saved ? "" : "*");
+    updateDecoration(saved);
+}
+
+void IGisProject::updateDecoration(bool saved)
+{
+    QString str = autoSave ? "A" : saved ? "" : "*";
+    if(autoSyncToDev)
+    {
+        str += "S";
+    }
+    setText(CGisListWks::eColumnDecoration, str);
 }
 
 void IGisProject::sortItems()

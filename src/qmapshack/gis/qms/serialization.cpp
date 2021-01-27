@@ -995,6 +995,8 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         noCorrelation   = (tmp & eFlagNoCorrelation) != 0;
         autoSave        = (tmp & eFlagAutoSave) != 0;
         invalidDataOk   = (tmp & eFlagInvalidDataOk) != 0;
+        autoSyncToDev   = (tmp & eFlagAutoSyncToDev) != 0;
+        updateDecoration();
     }
 
     if(version > 4)
@@ -1083,7 +1085,11 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
     stream << metadata.bounds;
     stream << key;
     stream << qint32(sortingRoadbook);
-    stream << qint8((noCorrelation ? eFlagNoCorrelation : 0) | (autoSave ? eFlagAutoSave : 0) | (invalidDataOk ? eFlagInvalidDataOk : 0)); // collect trivial flags in one field.
+    stream << qint8(
+        (noCorrelation ? eFlagNoCorrelation : 0) |
+        (autoSave ? eFlagAutoSave : 0) |
+        (invalidDataOk ? eFlagInvalidDataOk : 0) |
+        (autoSyncToDev ? eFlagAutoSyncToDev : 0));       // collect trivial flags in one field.
     stream << qint32(sortingFolder);
 
     for(int i = 0; i < childCount(); i++)
@@ -1184,7 +1190,10 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
         noCorrelation   = (tmp & eFlagNoCorrelation) != 0;
         autoSave        = (tmp & eFlagAutoSave) != 0;
         invalidDataOk   = (tmp & eFlagInvalidDataOk) != 0;
+        autoSyncToDev   = (tmp & eFlagAutoSyncToDev) != 0;
+        updateDecoration();
     }
+
     if(version > 4)
     {
         qint32 tmp;
@@ -1211,7 +1220,11 @@ QDataStream& CDBProject::operator>>(QDataStream& stream) const
     stream << metadata.bounds;
     stream << key;
     stream << qint32(sortingRoadbook);
-    stream << qint8((noCorrelation ? eFlagNoCorrelation : 0) | (autoSave ? eFlagAutoSave : 0) | (invalidDataOk ? eFlagInvalidDataOk : 0)); // collect trivial flags in one field.
+    stream << qint8(
+        (noCorrelation ? eFlagNoCorrelation : 0) |
+        (autoSave ? eFlagAutoSave : 0) |
+        (invalidDataOk ? eFlagInvalidDataOk : 0) |
+        (autoSyncToDev ? eFlagAutoSyncToDev : 0)); // collect trivial flags in one field.
     stream << qint32(sortingFolder);
 
     return stream;

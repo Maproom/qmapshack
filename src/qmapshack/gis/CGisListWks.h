@@ -128,7 +128,10 @@ private slots:
     void slotEleWptTrk();
     void slotAutoSaveProject(bool on);
     void slotUserFocusPrj(bool yes);
-    void slotAddProjectFilter();
+    void slotAutoSyncProject(bool yes);
+    void slotAddProjectFilter();    
+    void slotNewDevice();
+    void slotSyncPrjToDevices();
 
 private:
     void configDB();
@@ -149,6 +152,9 @@ private:
     void showMenuItemRte(const QPoint &p);
     void showMenuItemOvl(const QPoint &p);
     void showMenuItem(const QPoint &p, const QList<IGisItem::key_t> &keysTrks, const QList<IGisItem::key_t> &keysWpts);
+
+    void syncPrjToDevices(IGisProject * project, const QSet<QString>& keys);
+    QSet<QString> getAllDeviceKeys() const;
 
     template<typename T>
     QList<IGisItem::key_t> selectedItems2Keys()
@@ -173,6 +179,7 @@ private:
     QAction * actionSaveAsStrict;
     QAction * actionAutoSave;
     QAction * actionUserFocusPrj;
+    QAction * actionAutoSyncToDev;
     QAction * actionCopyPrj;
     QAction * actionEditPrj;
     QAction * actionCloseProj;

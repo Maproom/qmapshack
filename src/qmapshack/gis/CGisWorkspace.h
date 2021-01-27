@@ -51,6 +51,7 @@ enum event_types_e
 
     , eEvtA2WCutTrk      = QEvent::User + 200
     , eEvtA2WSave        = QEvent::User + 201
+    , eEvtA2WSync        = QEvent::User + 202
 };
 
 struct evt_item_t
@@ -217,6 +218,16 @@ class CEvtA2WSave : public QEvent
 {
 public:
     CEvtA2WSave(const QString& key) : QEvent(QEvent::Type(eEvtA2WSave)), key(key)
+    {
+    }
+
+    const QString key;
+};
+
+class CEvtA2WSync : public QEvent
+{
+public:
+    CEvtA2WSync(const QString& key) : QEvent(QEvent::Type(eEvtA2WSync)), key(key)
     {
     }
 

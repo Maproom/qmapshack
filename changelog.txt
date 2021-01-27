@@ -5,6 +5,7 @@ V1.XX.X
 [QMS-282] Tags icons/rating disappear from workspace after saving and closing a project
 [QMS-285] WMTS-based maps aren't restored correctly
 [QMS-299] CEnergyCycling is storing it's configuration in the `General` section instead of it's own.
+[QMS-311] Automatically save projects to device
 
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release

@@ -63,6 +63,7 @@ public:
         eFlagNoCorrelation      = 0x1
         , eFlagAutoSave         = 0x2
         , eFlagInvalidDataOk    = 0x4
+        , eFlagAutoSyncToDev    = 0x8
     };
 
     enum sorting_roadbook_e
@@ -535,6 +536,10 @@ public:
     {
         autoSavePending = false;
     }
+    void confirmPendingAutoSyncToDev()
+    {
+        autoSyncToDevPending = false;
+    }
 
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline);
 
@@ -550,6 +555,13 @@ public:
         return keyUserFocus;
     }
 
+    void setAutoSyncToDevice(bool yes);
+
+    bool doAutoSyncToDevice() const
+    {
+        return autoSyncToDev;
+    }
+
     CProjectFilterItem* filterProject(bool filter);
     CProjectFilterItem* getProjectFilterItem()
     {
@@ -563,6 +575,7 @@ protected:
     void updateItems();
     void updateItemCounters();
     void updateDecoration();
+    void updateDecoration(bool saved);
     void sortItems();
     void sortItems(QList<IGisItem*>& items) const;
 
@@ -603,6 +616,8 @@ protected:
     bool autoSave               = false; ///< flag to show if auto save is on or off
     bool autoSavePending        = false; ///< flag to show if auto save event has been sent. will be reset by save()
     bool invalidDataOk          = false; ///< if set invalid data in GIS items will not raise any dialog
+    bool autoSyncToDev          = false; ///< if set true sync the project with every device connected
+    bool autoSyncToDevPending   = false; ///< flag to show that a sync to device is already pending
 
     metadata_t metadata;
     QString nameSuffix;

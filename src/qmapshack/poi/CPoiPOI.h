@@ -38,11 +38,12 @@ public:
     void draw(IDrawContext::buffer_t& buf) override;
 
     virtual void findPOICloseBy(const QPoint& px, poi_t& poiItem) const override;
-    virtual void findPoisIn(const QRectF& degRect, QList<poi_t>&pois) override;
+    virtual void findPoisIn(const QRectF& degRect, QMap<QString, QList<poi_t> >& pois) override;
 
     static void init()
     {
-        tagMap = initTagMap();
+        tagMapSQL = initTagMapSQL();
+        tagMapGarmin = initTagMapGarmin();
     }
 
 public slots:
@@ -53,7 +54,7 @@ private:
     {
         QStringList data;
         QPointF coordinates; // in radians
-        poi_t toPoi(QString defaultName) const;
+        poi_t toPoi(QString category) const;
     };
     enum SqlColumn_e
     {
@@ -71,8 +72,10 @@ private:
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
     QMap<QString, QMap<int, QMap<int, QList<rawPoi_t> > > > loadedPOIs;
 
-    static QMap<QString, QString> tagMap;
-    static QMap<QString, QString> initTagMap();
+    static QMap<QString, QString> tagMapSQL;
+    static QMap<QString, QString> initTagMapSQL();
+    static QMap<QString, QString> tagMapGarmin;
+    static QMap<QString, QString> initTagMapGarmin();
 };
 
 #endif //CPOIPOI_H

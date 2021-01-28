@@ -59,7 +59,7 @@ private:
 
 
     QList<IGisItem::key_t> itemKeys;
-    QList<poi_t> poisFound;
+    QMap<QString, QList<poi_t> > poisFound;
     IGisItem::selflags_t modeLastSel   = IGisItem::eSelectionNone;
     QRectF rectLastSel;
 

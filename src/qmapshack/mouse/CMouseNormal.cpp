@@ -358,7 +358,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
 
 void CMouseNormal::slotAddPoi() const
 {
-    CGisWorkspace::self().addWptByPos(curPOI.pos * RAD_TO_DEG, curPOI.name, curPOI.desc);
+    CGisWorkspace::self().addWptByPos(curPOI);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 

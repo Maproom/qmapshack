@@ -30,6 +30,7 @@ struct poi_t
     QString desc;
     QPointF pos; // in radians!
     QSize symbolSize;
+    QString sym;
 };
 
 #endif //POI_H

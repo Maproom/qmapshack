@@ -168,15 +168,18 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         item->drawHighlight(p);
     }
 
-    for(poi_t poiItem : poisFound)
+    for(const QString& category: poisFound.keys())
     {
-        if(poiItem.pos != NOPOINTF)
+        for(poi_t poiItem : poisFound[category])
         {
-            const QSize s = poiItem.symbolSize;
-            const qint32 x = (qMax(qMax(s.width(), s.height()), 7) << 1) & 0xFFFFFFFE;
-            QPointF pxPos = poiItem.pos;
-            gis->convertRad2Px(pxPos);
-            p.drawImage(pxPos - QPointF(x, x), QImage("://cursors/wptHighlightBlue.png").scaled(x << 1, x << 1, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            if(poiItem.pos != NOPOINTF)
+            {
+                const QSize s = poiItem.symbolSize;
+                const qint32 x = (qMax(qMax(s.width(), s.height()), 7) << 1) & 0xFFFFFFFE;
+                QPointF pxPos = poiItem.pos;
+                gis->convertRad2Px(pxPos);
+                p.drawImage(pxPos - QPointF(x, x), QImage("://cursors/wptHighlightBlue.png").scaled(x << 1, x << 1, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            }
         }
     }
 

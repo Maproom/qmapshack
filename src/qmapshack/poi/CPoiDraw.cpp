@@ -168,7 +168,7 @@ poi_t CPoiDraw::findPOICloseBy(const QPoint &px) const
     return poi;
 }
 
-void CPoiDraw::findPoisIn(const QRectF &degRect, QList<poi_t> & pois) const
+void CPoiDraw::findPoisIn(const QRectF &degRect, QMap<QString, QList<poi_t> > & pois) const
 {
     CPoiItem::mutexActivePois.lock();
     if(poiList)

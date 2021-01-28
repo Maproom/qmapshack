@@ -53,7 +53,7 @@ public:
     }
 
     poi_t findPOICloseBy(const QPoint& px) const;
-    void findPoisIn(const QRectF& degRect, QList<poi_t>& pois) const;
+    void findPoisIn(const QRectF& degRect, QMap<QString, QList<poi_t> > &pois) const;
 protected:
     void drawt(buffer_t& currentBuffer) override;
 

@@ -18,6 +18,7 @@
 **********************************************************************************************/
 
 #include "gis/Poi.h"
+#include "gis/wpt/CSetupIconAndName.h"
 #include "helpers/CDraw.h"
 #include "poi/CPoiCategory.h"
 #include "poi/CPoiDraw.h"
@@ -135,6 +136,9 @@ void CPoiPOI::findPOICloseBy(const QPoint &px, poi_t & poiItem) const
     {
         int minLonM10 = qFloor(p.x() * RAD_TO_DEG * 10);
         int minLatM10 = qFloor(p.y() * RAD_TO_DEG * 10);
+
+        QString defaultIcon = "";
+        QString defaultName = category;
         //The tile that contains the POI has to be loaded, since a position on screen is given
         for(const rawPoi_t& poiItemFound : loadedPOIs[category][minLonM10][minLatM10])
         {
@@ -150,7 +154,7 @@ void CPoiPOI::findPOICloseBy(const QPoint &px, poi_t & poiItem) const
     }
 }
 
-void CPoiPOI::findPoisIn(const QRectF &degRect, QList<poi_t> &pois)
+void CPoiPOI::findPoisIn(const QRectF &degRect, QMap<QString, QList<poi_t> > &pois)
 {
     for(const QString& category : categoryActivated.keys(Qt::Checked))
     {
@@ -170,7 +174,7 @@ void CPoiPOI::findPoisIn(const QRectF &degRect, QList<poi_t> &pois)
                     //Maybe look through the whole code of selecting items from a map to avoid this conversion
                     if(degRect.contains(poiItemFound.coordinates * RAD_TO_DEG))
                     {
-                        pois.append(poiItemFound.toPoi(category));
+                        pois[category].append(poiItemFound.toPoi(category));
                     }
                 }
             }
@@ -182,7 +186,7 @@ void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
 {
     QMap<QString, CPoiCategory*> parentMap;
 
-    for(const QString& category : tagMap.keys())
+    for(const QString& category : tagMapSQL.keys())
     {
         QStringList parentChildNameList = category.split("_");
         QString parentName = parentChildNameList[0];
@@ -238,7 +242,7 @@ void CPoiPOI::loadPOIsFromFile(const QString& category, int minLonM10, int minLa
                   " AND main.poi_index.minLat>:minLat"
                   " AND main.poi_index.maxLon<:maxLon"
                   " AND main.poi_index.minLon>:minLon"
-                  " AND " + tagMap[category]);
+                  " AND " + tagMapSQL[category]);
     query.bindValue(":maxLat",  QString::number((minLatM10 + 1) / 10., 'f'));
     query.bindValue(":minLat",  QString::number(minLatM10 / 10., 'f'));
     query.bindValue(":maxLon",  QString::number((minLonM10 + 1) / 10., 'f'));
@@ -256,7 +260,7 @@ void CPoiPOI::loadPOIsFromFile(const QString& category, int minLonM10, int minLa
     }
 }
 
-poi_t CPoiPOI::rawPoi_t::toPoi(QString defaultName) const
+poi_t CPoiPOI::rawPoi_t::toPoi(QString category) const
 {
     poi_t poi;
     poi.pos = coordinates;
@@ -269,10 +273,7 @@ poi_t CPoiPOI::rawPoi_t::toPoi(QString defaultName) const
             break;
         }
     }
-    if(poi.name == "")
-    {
-        poi.name = defaultName;
-    }
     poi.desc = data.join("</br>\n");
+    poi.sym = CPoiPOI::tagMapGarmin[category];
     return poi;
 }

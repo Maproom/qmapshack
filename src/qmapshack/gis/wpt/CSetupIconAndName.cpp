@@ -31,6 +31,10 @@ CSetupIconAndName::CSetupIconAndName(QString &icon, QString &name, QWidget *pare
     toolIcon->setObjectName(icon);
     QPointF focus;
     toolIcon->setIcon(CWptIconManager::self().getWptIconByName(icon, focus));
+    if(icon == "")
+    {
+        toolIcon->setObjectName("Default");
+    }
     lineName->setText(name);
 
     connect(lineName, &QLineEdit::textEdited, this, &CSetupIconAndName::slotEditName);

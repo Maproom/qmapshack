@@ -44,6 +44,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
+#include "gis/wpt/CSetupIconAndName.h"
 #include "helpers/CInputDialog.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
@@ -923,7 +924,7 @@ void CGisWorkspace::addWptByPos(QPointF pt, const QString& name, const QString& 
     CGisItemWpt::newWpt(pt, name, desc, project);
 }
 
-void CGisWorkspace::addWptByPos(QList<poi_t> pois, IGisProject * project) const
+void CGisWorkspace::addWptByPos(poi_t poi, IGisProject * project) const
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -935,10 +936,47 @@ void CGisWorkspace::addWptByPos(QList<poi_t> pois, IGisProject * project) const
     {
         return;
     }
-    for(poi_t poi: pois)
+
+    QPointF pt = poi.pos * RAD_TO_DEG;
+    CGisItemWpt::newWpt(pt, poi.name, poi.desc, project, true, poi.sym);
+}
+
+void CGisWorkspace::addWptByPos(QMap<QString, QList<poi_t> >pois, IGisProject * project) const
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    if(nullptr == project)
     {
-        QPointF pt = poi.pos * RAD_TO_DEG;
-        CGisItemWpt::newWpt(pt, poi.name, poi.desc, project, false);
+        project = CGisWorkspace::self().selectProject(false);
+    }
+    if(nullptr == project)
+    {
+        return;
+    }
+    for(const QString& category : pois.keys())
+    {
+        QString defaultIcon = "";
+        QString defaultName = category;
+        for(poi_t poi: pois[category])
+        {
+            if(poi.name == "" || poi.sym == "")
+            {
+                if (defaultIcon == "")
+                {
+                    CSetupIconAndName(defaultIcon, defaultName, pSelf).exec();
+                }
+                if(poi.name == "")
+                {
+                    poi.name = defaultName;
+                }
+                if(poi.sym == "")
+                {
+                    poi.sym = defaultIcon;
+                }
+            }
+            QPointF pt = poi.pos * RAD_TO_DEG;
+            CGisItemWpt::newWpt(pt, poi.name, poi.desc, project, false, poi.sym);
+        }
     }
 }
 

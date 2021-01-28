@@ -1127,9 +1127,9 @@ poi_t CCanvas::findPOICloseBy(const QPoint& px) const
     return map->findPOICloseBy(px);
 }
 
-QList<poi_t> CCanvas::findPoisIn(const QRectF degRect) const
+QMap<QString, QList<poi_t> > CCanvas::findPoisIn(const QRectF degRect) const
 {
-    QList<poi_t> pois;
+    QMap<QString, QList<poi_t> > pois;
     poi->findPoisIn(degRect, pois);
     return pois;
 }

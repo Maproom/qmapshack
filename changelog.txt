@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-301] Load POI file
 [QMS-303] Add POI icons
 [QMS-311] Automatically save projects to device
+[QMS-315] Make POI Icons User-Selectable
 
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release

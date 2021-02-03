@@ -12,6 +12,7 @@ V1.XX.X
 [QMS-315] Make POI Icons User-Selectable
 [QMS-317] Enable user to add POI to project via right-click
 [QMS-318] Change poi_t to use radians
+[QMS-321] Improve name selection for POI
 [QMS-322] Make POIs show up in 'Select Items On Map'
 [QMS-337] Upgrade to Proj 8 API
 [QMS-343] .fit files from Suunto app have many trackpoints with elevation = 0

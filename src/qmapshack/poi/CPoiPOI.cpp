@@ -261,13 +261,17 @@ poi_t CPoiPOI::rawPoi_t::toPoi(const QString& defaultName) const
 {
     poi_t poi;
     poi.pos = coordinates;
-    for(const QString& tag : {"name=", "brand=", "operator="})
+    for(const QRegularExpression& regex : {QRegularExpression("name:" + QLocale::system().name() + "=(.+)", QRegularExpression::UseUnicodePropertiesOption),
+                                           QRegularExpression("name:en=(.+)", QRegularExpression::UseUnicodePropertiesOption),
+                                           QRegularExpression("name=(.+)", QRegularExpression::UseUnicodePropertiesOption),
+                                           QRegularExpression("name:\\w\\w=(.+)", QRegularExpression::UseUnicodePropertiesOption),
+                                           QRegularExpression("brand=(.+)", QRegularExpression::UseUnicodePropertiesOption),
+                                           QRegularExpression("operator=(.+)", QRegularExpression::UseUnicodePropertiesOption)})
     {
-        const QStringList& matches = data.filter(tag);
+        const QStringList& matches = data.filter(regex);
         if (!matches.isEmpty())
         {
-            poi.name = matches[0];
-            poi.name.replace(tag, "");
+            poi.name = regex.match(matches[0]).captured(1).trimmed();
             break;
         }
     }

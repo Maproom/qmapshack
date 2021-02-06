@@ -141,7 +141,7 @@ void CPoiDraw::loadPoiPath(QSettings &cfg)
 poi_t CPoiDraw::findPOICloseBy(const QPoint &px) const
 {
     poi_t poi;
-    if(CPoiItem::mutexActivePois.tryLock() && poiList)
+    if(poiList && CPoiItem::mutexActivePois.tryLock())
     {
         for(int i = 0; i < poiList->count(); i++)
         {
@@ -168,7 +168,7 @@ poi_t CPoiDraw::findPOICloseBy(const QPoint &px) const
 
 void CPoiDraw::findPoisIn(const QRectF &degRect, QList<poi_t> & pois) const
 {
-    if(CPoiItem::mutexActivePois.tryLock() && poiList)
+    if(poiList && CPoiItem::mutexActivePois.tryLock())
     {
         for(int i = 0; i < poiList->count(); i++)
         {
@@ -184,8 +184,35 @@ void CPoiDraw::findPoisIn(const QRectF &degRect, QList<poi_t> & pois) const
 
             item->findPoisIn(degRect, pois);
         }
+        CPoiItem::mutexActivePois.unlock();
     }
-    CPoiItem::mutexActivePois.unlock();
+}
+
+bool CPoiDraw::getToolTip(const QPoint &px, QString &str)
+{
+    if(poiList && CPoiItem::mutexActivePois.tryLock())
+    {
+        for(int i = 0; i < poiList->count(); i++)
+        {
+            CPoiItem* item = poiList->item(i);
+
+            if(!item || item->getPoifile().isNull())
+            {
+                // as all active maps have to be at the top of the list
+                // it is ok to break as soon as the first map with no
+                // active files is hit.
+                break;
+            }
+
+            if(item->getToolTip(px, str))
+            {
+                CPoiItem::mutexActivePois.unlock();
+                return true;
+            }
+        }
+        CPoiItem::mutexActivePois.unlock();
+    }
+    return false;
 }
 
 void CPoiDraw::buildPoiList()

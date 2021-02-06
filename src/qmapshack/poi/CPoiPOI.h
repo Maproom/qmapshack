@@ -39,6 +39,7 @@ public:
 
     virtual bool findPoiCloseBy(const QPoint& px, poi_t& poiItem) const override;
     virtual void findPoisIn(const QRectF& degRect, QList<poi_t>&pois) override;
+    virtual bool getToolTip(const QPoint& px, QString& str) const override;
 
     static void init()
     {

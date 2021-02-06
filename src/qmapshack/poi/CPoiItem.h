@@ -91,6 +91,10 @@ public:
     {
         getPoifile()->findPoisIn(degRect, pois);
     }
+    bool getToolTip(const QPoint& px, QString& str)
+    {
+        return getPoifile()->getToolTip(px, str);
+    }
 private:
     friend class CPoiDraw;
     CPoiDraw * poi;

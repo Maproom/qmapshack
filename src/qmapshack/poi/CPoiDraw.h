@@ -54,6 +54,7 @@ public:
 
     poi_t findPOICloseBy(const QPoint& px) const;
     void findPoisIn(const QRectF& degRect, QList<poi_t>& pois) const;
+    bool getToolTip(const QPoint& px, QString& str);
 protected:
     void drawt(buffer_t& currentBuffer) override;
 

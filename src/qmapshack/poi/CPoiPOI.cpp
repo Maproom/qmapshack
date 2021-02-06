@@ -179,6 +179,18 @@ void CPoiPOI::findPoisIn(const QRectF &degRect, QList<poi_t> &pois)
     }
 }
 
+bool CPoiPOI::getToolTip(const QPoint &px, QString &str) const
+{
+    poi_t poiFound;
+    bool success = findPoiCloseBy(px, poiFound);
+    if(success)
+    {
+        str += "<b>" + poiFound.name + "</b><br>";
+        str += poiFound.desc;
+    }
+    return success;
+}
+
 void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
 {
     QMap<QString, CPoiCategory*> parentMap;
@@ -279,6 +291,6 @@ poi_t CPoiPOI::rawPoi_t::toPoi(const QString& defaultName) const
     {
         poi.name = defaultName;
     }
-    poi.desc = data.join("</br>\n");
+    poi.desc = data.join("<br>\n");
     return poi;
 }

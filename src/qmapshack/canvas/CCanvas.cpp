@@ -910,10 +910,13 @@ void CCanvas::slotTriggerCompleteUpdate(CCanvas::redraw_e flags)
 void CCanvas::slotToolTip()
 {
     QString str;
-    map->getToolTip(posToolTip, str);
-    if(str.isEmpty())
+    if(!poi->getToolTip(posToolTip, str))
     {
-        return;
+        map->getToolTip(posToolTip, str);
+        if(str.isEmpty())
+        {
+            return;
+        }
     }
     QPoint p = mapToGlobal(posToolTip + QPoint(32, 0));
     QToolTip::showText(p, str);

@@ -30,6 +30,7 @@
 #include "mouse/CScrOptUnclutter.h"
 #include "realtime/CRtWorkspace.h"
 #include "widgets/CFadingIcon.h"
+#include "poi/IPoi.h"
 
 #include <QtWidgets>
 
@@ -289,9 +290,9 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         {
             QPointF pxPos = curPOI.pos;
             gis->convertRad2Px(pxPos);
-            QRectF r(0, 0, 42, 42);
+            QRectF r = IPoi::iconHighlight().rect();
             r.moveCenter(pxPos);
-            p.drawImage(r, QImage("://cursors/poiHighlightRed.png"));
+            p.drawImage(r, IPoi::iconHighlight());
         }
 
         /*

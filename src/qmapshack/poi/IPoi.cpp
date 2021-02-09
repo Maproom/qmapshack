@@ -20,6 +20,19 @@
 #include "poi/CPoiPropSetup.h"
 #include "poi/IPoi.h"
 
+constexpr int iconsize = 22;
+
+QSize IPoi::_iconSize = {iconsize, iconsize};
+QImage IPoi::_iconHighlight;
+
+void IPoi::init()
+{
+    // default sizes are for iconsize 22.
+    qreal sx = qreal(_iconSize.width()) * 42.0 / 22.0;
+    qreal sy = qreal(_iconSize.height()) * 42.0 / 22.0;
+    _iconHighlight = QImage("://cursors/poiHighlightRed.png").scaled(sx, sy, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+}
+
 IPoi::IPoi(CPoiDraw *parent)
     : IDrawObject(parent)
     , poi(parent)

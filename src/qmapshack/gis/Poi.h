@@ -29,7 +29,6 @@ struct poi_t
     QString name;
     QString desc;
     QPointF pos; // in radians!
-    QSize symbolSize;
 };
 
 #endif //POI_H

@@ -16,266 +16,352 @@
 
 **********************************************************************************************/
 
+#include "CPoiIconCategory.h"
 #include "CPoiPOI.h"
 
 #define SQLQUERY(TAG) "main.poi_data.data LIKE '%" TAG "%'"
-QMap<QString, QString> CPoiPOI::tagMap;
-QMap<QString, QString> CPoiPOI::initTagMap()
+QMap<QString, CPoiIconCategory> CPoiPOI::tagMap;
+QMap<QString, CPoiIconCategory> CPoiPOI::initTagMap()
 {
-    QMap<QString, QString> map;
-    map["accommodation_alpinehut"] = SQLQUERY("tourism=alpine_hut");
-    map["accommodation_bed_and_breakfast"] = SQLQUERY("tourism=guest_house");
-    map["accommodation_camping"] = SQLQUERY("tourism=camp_site");
-    map["accommodation_caravan_park"] = SQLQUERY("tourism=camp_site");
-    map["accommodation_chalet"] = SQLQUERY("tourism=chalet");
-    map["accommodation_hostel"] = SQLQUERY("tourism=hostel");
-    map["accommodation_hotel"] = SQLQUERY("tourism=hotel");
-    map["accommodation_motel"] = SQLQUERY("tourism=motel");
-    map["accommodation_shelter"] = SQLQUERY("amenity=shelter");
-    //map["accommodation_youth_hostel"] = SQLQUERY("MISSING");
-    map["amenity_bench"] = SQLQUERY("amenity=bench");
-    map["amenity_court"] = SQLQUERY("amenity=courthouse");
-    map["amenity_firestation"] = SQLQUERY("amenity=fire_station");
-    map["amenity_fountain"] = SQLQUERY("amenity=fountain");
-    map["amenity_library"] = SQLQUERY("amenity=library");
-    map["amenity_playground"] = SQLQUERY("leisure=playground");
-    map["amenity_police"] = SQLQUERY("amenity=police");
-    map["amenity_post_box"] = SQLQUERY("amenity=post_box");
-    map["amenity_post_office"] = SQLQUERY("amenity=post_office ");
-    map["amenity_prison"] = SQLQUERY("amenity=prison");
-    //map["amenity_public_building"] = SQLQUERY("MISSING");
-    map["amenity_recycling"] = SQLQUERY("amenity=recycling");
-    map["amenity_survey_point"] = SQLQUERY("man_made=survey_point");
-    map["amenity_telephone"] = SQLQUERY("amenity=telephone");
-    map["amenity_toilets_disabled"] = "(" SQLQUERY("amenity=toilets") " AND " SQLQUERY("wheelchair=yes") ")";
-    map["amenity_toilets_men"] = "(" SQLQUERY("amenity=toilets") " AND " SQLQUERY("male=yes") ")";
-    map["amenity_toilets"] = SQLQUERY("amenity=toilets");
-    map["amenity_toilets_women"] = "(" SQLQUERY("amenity=toilets") " AND " SQLQUERY("female=yes") ")";
-    map["amenity_town_hall"] = SQLQUERY("amenity=townhall");
-    map["amenity_waste_bin"] = SQLQUERY("amenity=waste_basket");
-    map["barrier_blocks"] = SQLQUERY("barrier=block");
-    map["barrier_bollard"] = SQLQUERY("barrier=bollard");
-    map["barrier_cattle_grid"] = SQLQUERY("barrier=cattle_grid");
-    map["barrier_cycle_barrier"] = SQLQUERY("barrier=cycle_barrier");
-    map["barrier_entrance"] = "(" SQLQUERY("barrier=entrance") " OR " SQLQUERY("entrance=yes")  " OR " SQLQUERY("entrance=main") ")";
-    map["barrier_exit"] = "(" SQLQUERY("entrance=exit")  " OR " SQLQUERY("entrance=emergency") ")";
-    map["barrier_gate"] = SQLQUERY("barrier=gate");
-    map["barrier_kissing_gate"] = SQLQUERY("barrier=kissing_gate");
-    map["barrier_lift_gate"] = SQLQUERY("barrier=lift_gate");
-    map["barrier_steps"] = SQLQUERY("highway=steps");
-    map["barrier_stile"] = SQLQUERY("barrier=stile");
-    map["barrier_toll_booth"] = SQLQUERY("barrier=toll_booth");
-    map["education_college"] = SQLQUERY("amenity=college");
-    //map["education_college_vocational"] = SQLQUERY("MISSING");
-    map["education_nursery"] = SQLQUERY("amenity=kindergarten");
-    map["education_school"] = SQLQUERY("amenity=school");
-    //map["education_school_primary"] = SQLQUERY("MISSING");
-    //map["education_school_secondary"] = SQLQUERY("MISSING");
-    map["education_university"] = SQLQUERY("amenity=university");
-    map["food_bar"] = SQLQUERY("amenity=bar");
-    map["food_biergarten"] = SQLQUERY("amenity=biergarten");
-    map["food_cafe"] = SQLQUERY("amenity=cafe");
-    map["food_drinkingtap"] = SQLQUERY("amenity=drinking_water");
-    map["food_fastfood"] = SQLQUERY("amenity=fast_food");
-    map["food_fastfood_pizza"] = "(" SQLQUERY("amenity=fast_food") " AND " SQLQUERY("cuisine=pizza") ")";
-    map["food_ice_cream"] = SQLQUERY("amenity=ice_cream");
-    map["food_pizza"] = "(" SQLQUERY("amenity=restaurant") " AND " SQLQUERY("cuisine=pizza") ")";
-    map["food_pub"] = SQLQUERY("amenity=pub");
-    map["food_restaurant"] = SQLQUERY("amenity=restaurant");
-    map["health_dentist"] = SQLQUERY("amenity=dentist");
-    map["health_doctors"] = SQLQUERY("amenity=doctors");
-    map["health_hospital_emergency"] = "(" SQLQUERY("amenity=hospital") " AND " SQLQUERY("emergency=yes") ")";
-    map["health_hospital"] = SQLQUERY("amenity=hospital");
-    map["health_opticians"] = SQLQUERY("healthcare=optometrist");
-    map["health_pharmacy_dispencing"] = "(" SQLQUERY("amenity=pharmacy") " AND " SQLQUERY("dispensing=yes") ")";
-    map["health_pharmacy"] = SQLQUERY("amenity=pharmacy");
-    map["health_veterinary"] = SQLQUERY("amenity=veterinary");
-    map["landuse_coniferous_and_deciduous"] = "(" SQLQUERY("natural=wood") " OR " SQLQUERY("landuse=forest") " OR " SQLQUERY("natural=tree") ")";
-    map["landuse_coniferous"] = SQLQUERY("leaf_cycle=evergreen");
-    map["landuse_deciduous"] = SQLQUERY("leaf_cycle=deciduous");
-    //map["landuse_grass"] = SQLQUERY("MISSING");
-    //map["landuse_hills"] = SQLQUERY("MISSING");
-    map["landuse_quary"] = SQLQUERY("landuse=quarry");
-    map["landuse_scrub"] = SQLQUERY("natural=scrub");
-    map["landuse_swamp"] = SQLQUERY("natural=wetland");
-    map["money_atm"] = SQLQUERY("amenity=atm");
-    map["money_bank"] = SQLQUERY("amenity=bank");
-    map["money_currency_exchange"] = SQLQUERY("amenity=bureau_de_change");
-    map["place_of_worship_bahai"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=bahai") ")";
-    map["place_of_worship_buddhist"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=buddhist") ")";
-    map["place_of_worship_christian"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=christian") ")";
-    map["place_of_worship_hindu"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=hindu") ")";
-    map["place_of_worship_islamic"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=muslim") ")";
-    map["place_of_worship_jain"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=jain") ")";
-    map["place_of_worship_jewish"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=jewish") ")";
-    map["place_of_worship_shinto"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=shinto") ")";
-    map["place_of_worship_sikh"] = "(" SQLQUERY("amenity=place_of_worship") " AND " SQLQUERY("religion=sikh") ")";
-    map["place_of_worship_unknown"] = SQLQUERY("amenity=place_of_worship");
-    map["poi_boundary_administrative"] = SQLQUERY("boundary=administrative");
-    map["poi_cave"] = "(" SQLQUERY("natural=cave_entrance") " OR " SQLQUERY("man_made=adit") ")";
-    map["poi_crane"] = SQLQUERY("man_made=crane");
-    map["poi_embassy"] = SQLQUERY("amenity=embassy");
-    map["poi_military_bunker"] = SQLQUERY("military=bunker");
-    map["poi_mine"] = "(" SQLQUERY("industrial=mine") " OR " SQLQUERY("man_made=mineshaft") " OR (" SQLQUERY("man_made=adit") " AND " SQLQUERY("resource=") "))";
-    map["poi_mine_abandoned"] = "(" SQLQUERY("historic=mine") " OR (" + map["poi_mine"] + " AND " SQLQUERY("disused=yes");
-    map["poi_mountain_pass"] = SQLQUERY("mountain_pass=yes");
-    map["poi_peak"] = SQLQUERY("natural=peak");
-    map["poi_place_city"] = SQLQUERY("place=city");
-    map["poi_place_hamlet"] = SQLQUERY("place=hamlet");
-    map["poi_place_suburb"] = SQLQUERY("place=suburb");
-    map["poi_place_town"] = SQLQUERY("place=town");
-    map["poi_place_village"] = SQLQUERY("place=village");
-    //map["poi_point_of_interest"] = SQLQUERY("MISSING");
-    map["poi_tower_communications"] = "(" SQLQUERY("man_made=tower") " AND (" SQLQUERY("tower:type=communication") " OR " SQLQUERY("tower=communication") "))";
-    map["poi_tower_lookout"] = "(" SQLQUERY("man_made=tower") " AND (" SQLQUERY("tower:type=watchtower") " OR " SQLQUERY("tower=watchtower") " OR " SQLQUERY("tower=vigialrium") " OR " SQLQUERY("tourism=viewpoint") "))";
-    map["poi_tower_power"] = SQLQUERY("power=tower");
-    map["poi_tower_water"] = SQLQUERY("man_made=water_tower");
-    /* Not included in POI file
-       map["power_station_coal"] = SQLQUERY("MISSING");
-       map["power_station_gas"] = SQLQUERY("MISSING");
-       map["power_station_solar"] = SQLQUERY("MISSING");
-       map["power_station_water"] = SQLQUERY("MISSING");
-       map["power_station_wind"] = SQLQUERY("MISSING");
-       map["power_substation"] = SQLQUERY("MISSING");
-       map["power_tower_high"] = SQLQUERY("MISSING");
-       map["power_tower_low"] = SQLQUERY("MISSING");
-       map["power_transformer"] = SQLQUERY("MISSING");
+    QMap<QString, CPoiIconCategory> map;
+    /*
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_youth_hostel.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_public_building.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/education_college_vocational.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/education_school_primary.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/education_school_secondary.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/landuse_grass.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/landuse_hills.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_point_of_interest.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/power_station_coal.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/power_station_gas.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/power_station_solar.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/power_station_water.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/power_station_wind.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/power_substation.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/power_tower_high.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/power_tower_low.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/power_transformer.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_hillclimbing.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_helicopter.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_miniroundabout_anticlockwise.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_miniroundabout_clockwise.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_parking_disabled.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_parking.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_parking_private.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_roundabout_anticlockwise.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_roundabout_clockwise.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_speedbump.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_traffic_lights.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_turning_circle.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_walking.n.32.png"));
+       map["MISSING"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_zebra_crossing.n.32.png"));
      */
-    map["shopping_alcohol"] = SQLQUERY("shop=alcohol");
-    map["shopping_bakery"] = SQLQUERY("shop=bakery");
-    map["shopping_bicycle"] = SQLQUERY("shop=bicycle");
-    map["shopping_book"] = SQLQUERY("shop=books");
-    map["shopping_butcher"] = SQLQUERY("shop=butcher");
-    map["shopping_car"] = SQLQUERY("shop=car");
-    map["shopping_car_repair"] = SQLQUERY("shop=car_repair");
-    map["shopping_clothes"] = SQLQUERY("shop=clothes");
-    map["shopping_computer"] = SQLQUERY("shop=computer");
-    map["shopping_confectionery"] = SQLQUERY("shop=confectionery");
-    map["shopping_convenience"] = SQLQUERY("shop=convenience");
-    map["shopping_copyshop"] = SQLQUERY("shop=copyshop");
-    map["shopping_department_store"] = SQLQUERY("shop=department_store");
-    map["shopping_diy"] = SQLQUERY("shop=craft");
-    map["shopping_estateagent"] = SQLQUERY("office=estateagent");
-    map["shopping_fish"] = SQLQUERY("shop=seafood");
-    map["shopping_florist"] = SQLQUERY("shop=florist");
-    map["shopping_garden_centre"] = SQLQUERY("shop=garden_centre");
-    map["shopping_gift"] = SQLQUERY("shop=gift");
-    map["shopping_greengrocer"] = SQLQUERY("shop=greengrocer");
-    map["shopping_hairdresser"] = SQLQUERY("shop=hairdresser");
-    map["shopping_hearing_aids"] = SQLQUERY("shop=hearing_aids");
-    map["shopping_hifi"] = SQLQUERY("shop=hifi");
-    map["shopping_jewelry"] = SQLQUERY("shop=jewelry");
-    map["shopping_kiosk"] = SQLQUERY("shop=kiosk");
-    map["shopping_laundrette"] = SQLQUERY("shop=laundry");
-    map["shopping_marketplace"] = SQLQUERY("amenity=marketplace");
-    map["shopping_mobile_phone"] = SQLQUERY("shop=mobile_phone");
-    map["shopping_motorcycle"] = SQLQUERY("shop=motorcycle");
-    map["shopping_music"] = SQLQUERY("shop=music");
-    map["shopping_newspaper"] = SQLQUERY("shop=newsagent");
-    map["shopping_pet"] = SQLQUERY("shop=pet");
-    map["shopping_photo"] = SQLQUERY("shop=photo");
-    map["shopping_supermarket"] = SQLQUERY("shop=supermarket");
-    map["shopping_tackle"] = SQLQUERY("shop=fishing");
-    map["shopping_tobacco"] = SQLQUERY("shop=tobacco");
-    map["shopping_toys"] = SQLQUERY("shop=toys");
-    map["shopping_vending_machine"] = SQLQUERY("amenity=vending_machine");
-    map["shopping_video_rental"] = SQLQUERY("shop=video");
-    map["sport_archery"] = SQLQUERY("sport=%archery");
-    map["sport_baseball"] = SQLQUERY("sport=%baseball");
-    map["sport_canoe"] = SQLQUERY("sport=%canoe");
-    map["sport_cricket"] = SQLQUERY("sport=%cricket");
-    map["sport_diving"] = SQLQUERY("sport=%cliff_diving");
-    map["sport_golf"] = SQLQUERY("leisure%=golf_course");
-    map["sport_gym"] = SQLQUERY("leisure%=fitness_centre");
-    map["sport_gymnasium"] = "(" SQLQUERY("leisure%=sports_hall") " OR " SQLQUERY("leisure%=sports_centre") ")";
-    //map["sport_hillclimbing"] = SQLQUERY("MISSING");
-    map["sport_horse_racing"] = SQLQUERY("sport=%horse_reacing");
-    map["sport_iceskating"] = SQLQUERY("sport=%ice_skating");
-    map["sport_jetski"] = SQLQUERY("shop=jetski");
-    map["sport_leisure_centre"] = SQLQUERY("landuse=recreation_ground");
-    map["sport_minature_golf"] = SQLQUERY("sport=%miniature_golf");
-    map["sport_motorracing"] = SQLQUERY("sport=%motor");
-    map["sport_playground"] = SQLQUERY("leisure=playground");
-    map["sport_sailing"] = SQLQUERY("sport=%sailing");
-    map["sport_shooting"] = SQLQUERY("sport=%shooting");
-    map["sport_skiing_crosscountry"] = SQLQUERY("piste:type=nordic");
-    map["sport_skiing_downhill"] = "(" SQLQUERY("sport=%skiing") " OR " SQLQUERY("piste:type=downhill") ")";
-    map["sport_snooker"] = SQLQUERY("sport=%snooker");
-    map["sport_soccer"] = SQLQUERY("sport=%soccer");
-    map["sport_stadium"] = SQLQUERY("leisure=stadium");
-    map["sport_swimming_indoor"] = "(" SQLQUERY("sport=%swimming") " AND " SQLQUERY("building=yes") ")";
-    map["sport_swimming_outdoor"] = SQLQUERY("sport=%swimming") " AND main.poi_data.data NOT LIKE '%building=yes%')";
-    map["sport_tennis"] = SQLQUERY("sport=%tennis");
-    map["sport_windsurfing"] = SQLQUERY("sport=%surfing");
-    map["tourist_archaeological"] = SQLQUERY("historic=archaeological_site");
-    map["tourist_art_gallery"] = SQLQUERY("tourism=gallery");
-    map["tourist_attraction"] = SQLQUERY("tourism=attraction");
-    map["tourist_battlefield"] = SQLQUERY("historic=battlefield");
-    map["tourist_beach"] = SQLQUERY("natural=beach");
-    map["tourist_casino"] = SQLQUERY("amenity=casino");
-    map["tourist_castle"] = SQLQUERY("historic=castle");
-    map["tourist_cinema"] = SQLQUERY("amenity=cinema");
-    map["tourist_clock"] = SQLQUERY("amenity=clock");
-    map["tourist_fountain"] = SQLQUERY("amenity=fountain");
-    map["tourist_guidepost"] = SQLQUERY("information=guidepost");
-    map["tourist_information"] = "(" SQLQUERY("tourism=information") " AND (" SQLQUERY("information=office") " OR " SQLQUERY("information=visitor_centre") "))";
-    map["tourist_map"] = "(" SQLQUERY("tourism=information") " AND (" SQLQUERY("information=board") " OR " SQLQUERY("information=map") "))";
-    map["tourist_memorial"] = SQLQUERY("memorial=");
-    map["tourist_monument"] = SQLQUERY("historic=monument");
-    map["tourist_museum"] = SQLQUERY("tourism=museum");
-    map["tourist_picnic"] = "(" SQLQUERY("leisure=picnic_table") " OR " SQLQUERY("leisure=picnic_site") ")";
-    map["tourist_ruin"] = SQLQUERY("historic=ruins");
-    map["tourist_steam_train"] = "(" SQLQUERY("railway=preserved") " OR " SQLQUERY("railway:preserved=yes") ")";
-    map["tourist_theatre"] = SQLQUERY("amenity=theatre");
-    map["tourist_theme_park"] = SQLQUERY("tourism=theme_park");
-    map["tourist_view_point"] = SQLQUERY("tourism=viewpoint");
-    map["tourist_waterwheel"] = SQLQUERY("man made=watermill");
-    map["tourist_wayside_cross"] = SQLQUERY("historic=wayside_cross");
-    map["tourist_wayside_shrine"] = SQLQUERY("historic=wayside_shrine");
-    map["tourist_windmill"] = SQLQUERY("man_made=windmill");
-    map["tourist_wreck"] = SQLQUERY("historic=wreck");
-    map["tourist_zoo"] = SQLQUERY("tourism=zoo");
-    map["transport_aerodrome"] = SQLQUERY("aeroway=aerodrome");
-    //map["transport_airport_gate"] = SQLQUERY("MISSING");
-    //map["transport_airport"] = SQLQUERY("MISSING");
-    //map["transport_airport_terminal"] = SQLQUERY("MISSING");
-    map["transport_bus_station"] = SQLQUERY("public_transport=station");
-    map["transport_bus_stop"] = SQLQUERY("highway=bus_stop");
-    map["transport_car_share"] = SQLQUERY("amenity=car_sharing");
-    map["transport_emergency_phone"] = SQLQUERY("amenity=emergency_phone");
-    map["transport_ford"] = SQLQUERY("ford=yes");
-    map["transport_fuel_lpg"] = "(" SQLQUERY("amenity=fuel") " AND " SQLQUERY("fuel:lpg=yes") ")";
-    map["transport_fuel"] = SQLQUERY("amenity=fuel");
-    //map["transport_helicopter"] = SQLQUERY("MISSING");
-    map["transport_helicopter_pad"] = SQLQUERY("aeroway=helipad");
-    map["transport_lighthouse"] = SQLQUERY("man_made=lighthouse");
-    map["transport_marina"] = SQLQUERY("leisure=marina");
-    //map["transport_miniroundabout_anticlockwise"] = SQLQUERY("MISSING");
-    //map["transport_miniroundabout_clockwise"] = SQLQUERY("MISSING");
-    map["transport_parking_bicycle"] = SQLQUERY("amenity=bicycle_parking");
-    map["transport_parking_car"] = "(" SQLQUERY("amenity=parking") " AND main.poi_data.data NOT LIKE '%fee=yes%')";
-    map["transport_parking_car_paid"] = "(" SQLQUERY("amenity=parking") " AND " SQLQUERY("fee=yes") ")";
-    //map["transport_parking_disabled"] = SQLQUERY("MISSING");
-    //map["transport_parking"] = SQLQUERY("MISSING");
-    //map["transport_parking_private"] = SQLQUERY("MISSING");
-    map["transport_port"] = "(" SQLQUERY("landuse=harbour") " OR " SQLQUERY("landuse=port") " OR (" SQLQUERY("landuse=industrial") " AND " SQLQUERY("industrial=port") "))";
-    map["transport_rental_bicycle"] = SQLQUERY("amenity=bicycle_rental");
-    map["transport_rental_car"] = SQLQUERY("amenity=car_rental");
-    //map["transport_roundabout_anticlockwise"] = SQLQUERY("MISSING");
-    //map["transport_roundabout_clockwise"] = SQLQUERY("MISSING");
-    map["transport_slipway"] = SQLQUERY("leisure=slipway");
-    //map["transport_speedbump"] = SQLQUERY("MISSING");
-    map["transport_subway"] = SQLQUERY("station=subway");
-    map["transport_taxi_rank"] = SQLQUERY("amenity=taxi");
-    //map["transport_traffic_lights"] = SQLQUERY("MISSING");
-    map["transport_train_station"] = SQLQUERY("railway=station");
-    map["transport_tram_stop"] = SQLQUERY("railway=tram_stop");
-    //map["transport_turning_circle"] = SQLQUERY("MISSING");
-    //map["transport_walking"] = SQLQUERY("MISSING");
-    //map["transport_zebra_crossing"] = SQLQUERY("MISSING");
-    map["water_dam"] = SQLQUERY("waterway=dam");
-    map["water_tower"] = SQLQUERY("man_made=water_tower");
-    map["water_weir"] = SQLQUERY("waterway=weir");
+    map["aeroway=aerodrome"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_aerodrome.n.32.png"));
+    map["aeroway=airport"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_airport.n.32.png"));
+    map["aeroway=gate"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_airport_gate.n.32.png"));
+    map["aeroway=terminal"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_airport_terminal.n.32.png"));
+    map["aeroway=helipad"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_helicopter_pad.n.32.png"));
+    map["amenity=atm"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/money_atm.n.32.png"));
+    map["amenity=bank"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/money_bank.n.32.png"));
+    map["amenity=bar"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_bar.n.32.png"));
+    map["amenity=beer_garden'"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_biergarten.n.32.png"));
+    map["amenity=bench"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_bench.n.32.png"));
+    map["amenity=bicycle_parking"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_parking_bicycle.n.32.png"));
+    map["amenity=bicycle_rental"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_rental_bicycle.n.32.png"));
+    map["amenity=biergarten"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_biergarten.n.32.png"));
+    map["amenity=bureau_de_change"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/money_currency_exchange.n.32.png"));
+    map["amenity=bus_station"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_bus_station.n.32.png"));
+    map["amenity=cafe"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_cafe.n.32.png"));
+    map["amenity=car_rental"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_rental_car.n.32.png"));
+    map["amenity=car_sharing"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_car_share.n.32.png"));
+    map["amenity=casino"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_casino.n.32.png"));
+    map["amenity=cinema"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_cinema.n.32.png"));
+    map["amenity=clock"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_clock.n.32.png"));
+    map["amenity=clinic"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/health_hospital.n.32.png"));
+    map["amenity=college"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/education_college.n.32.png"));
+    map["amenity=courthouse"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_court.n.32.png"));
+    map["amenity=court_house"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_court.n.32.png"));
+    map["amenity=dentist"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/health_dentist.n.32.png"));
+    map["amenity=doctors"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/health_doctors.n.32.png"));
+    map["amenity=drinking_water"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_drinkingtap.n.32.png"));
+    map["amenity=embassy"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_embassy.n.32.png"));
+    map["amenity=emergency_phone"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_emergency_phone.n.32.png"));
+    map["amenity=fast_food"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_fastfood.n.32.png"),
+    {
+        {"cuisine=pizza", QPixmap("://icons/poi/SJJB/png/food_fastfood_pizza.n.32.png")}
+    });
+    map["amenity=fire_station"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_firestation.n.32.png"));
+    map["amenity=fountain"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_fountain.n.32.png"));
+    map["amenity=fountain"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_fountain.n.32.png"));
+    map["amenity=fuel"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_fuel.n.32.png"),
+    {
+        {"fuel:lpg=yes", QPixmap("://icons/poi/SJJB/png/transport_fuel_lpg.n.32.png")}
+    });
+    map["amenity=hospital"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/health_hospital.n.32.png"),
+    {
+        {"emergency=yes", QPixmap("://icons/poi/SJJB/png/health_hospital_emergency.n.32.png")}
+    });
+    map["amenity=ice_cream"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_ice_cream.n.32.png"));
+    map["amenity=kindergarten"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/education_nursery.n.32.png"));
+    map["amenity=library"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_library.n.32.png"));
+    map["amenity=marketplace"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_marketplace.n.32.png"));
+    map["amenity=parking"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_parking_car.n.32.png"),
+    {
+        {"fee=yes", QPixmap("://icons/poi/SJJB/png/transport_parking_car_paid.n.32.png")}
+    });
+    map["amenity=pharmacy"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/health_pharmacy.n.32.png"),
+    {
+        {"dispensing=yes", QPixmap("://icons/poi/SJJB/png/health_pharmacy_dispencing.n.32.png")}
+    });
+    map["amenity=place_of_worship"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/place_of_worship_unknown.n.32.png"),
+    {
+        {"religion=bahai", QPixmap("://icons/poi/SJJB/png/place_of_worship_bahai.n.32.png")},
+        {"religion=buddhist", QPixmap("://icons/poi/SJJB/png/place_of_worship_buddhist.n.32.png")},
+        {"religion=christian", QPixmap("://icons/poi/SJJB/png/place_of_worship_christian.n.32.png")},
+        {"religion=hindu", QPixmap("://icons/poi/SJJB/png/place_of_worship_hindu.n.32.png")},
+        {"religion=muslim", QPixmap("://icons/poi/SJJB/png/place_of_worship_islamic.n.32.png")},
+        {"religion=jain", QPixmap("://icons/poi/SJJB/png/place_of_worship_jain.n.32.png")},
+        {"religion=jewish", QPixmap("://icons/poi/SJJB/png/place_of_worship_jewish.n.32.png")},
+        {"religion=shinto", QPixmap("://icons/poi/SJJB/png/place_of_worship_shinto.n.32.png")},
+        {"religion=sikh", QPixmap("://icons/poi/SJJB/png/place_of_worship_sikh.n.32.png")}
+    });
+    map["amenity=police"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_police.n.32.png"));
+    map["amenity=post_box"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_post_box.n.32.png"));
+    map["amenity=post_office"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_post_office.n.32.png"));
+    map["amenity=prison"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_prison.n.32.png"));
+    map["amenity=pub"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_pub.n.32.png"));
+    map["amenity=recycling"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_recycling.n.32.png"));
+    map["amenity=restaurant"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_restaurant.n.32.png"),
+    {
+        {"cuisine=pizza", QPixmap("://icons/poi/SJJB/png/food_pizza.n.32.png")}
+    });
+    map["amenity=school"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/education_school.n.32.png"));
+    map["amenity=shelter"] = CPoiIconCategory(QPixmap("://icons/poi/png/accommodation_shelter_r_n32.png"));
+    map["amenity=taxi"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_taxi_rank.n.32.png"));
+    map["amenity=telephone"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_telephone.n.32.png"));
+    map["amenity=theatre"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_theatre.n.32.png"));
+    map["amenity=toilets"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_toilets.n.32.png"),
+    {
+        {"wheelchair=yes", QPixmap("://icons/poi/SJJB/png/amenity_toilets_disabled.n.32.png")},
+        {"male=yes", QPixmap("://icons/poi/SJJB/png/amenity_toilets_men.n.32.png")},
+        {"female=yes", QPixmap("://icons/poi/SJJB/png/amenity_toilets_women.n.32.png")}
+    });
+    map["amenity=townhall"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_town_hall.n.32.png"));
+    map["amenity=university"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/education_university.n.32.png"));
+    map["amenity=vending_machine"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_vending_machine.n.32.png"));
+    map["amenity=veterinary"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/health_veterinary.n.32.png"));
+    map["amenity=water_point"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_drinkingtap.n.32.png"));
+    map["amenity=waste_basket"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_waste_bin.n.32.png"));
+    map["barrier=block"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_blocks.n.32.png"));
+    map["barrier=bollard"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_bollard.n.32.png"));
+    map["barrier=cattle_grid"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_cattle_grid.n.32.png"));
+    map["barrier=cycle_barrier"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_cycle_barrier.n.32.png"));
+    map["barrier=entrance"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_entrance.n.32.png"));
+    map["barrier=gate"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_gate.n.32.png"));
+    map["barrier=kissing_gate"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_kissing_gate.n.32.png"));
+    map["barrier=lift_gate"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_lift_gate.n.32.png"));
+    map["barrier=stile"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_stile.n.32.png"));
+    map["barrier=toll_booth"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_toll_booth.n.32.png"));
+    map["boundary=administrative"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_boundary_administrative.n.32.png"));
+    map["entrance=emergency"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_exit.n.32.png"));
+    map["entrance=exit"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_exit.n.32.png"));
+    map["entrance=main"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_entrance.n.32.png"));
+    map["entrance=yes"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_entrance.n.32.png"));
+    map["ford=yes"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_ford.n.32.png"));
+    map["healthcare=optometrist"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/health_opticians.n.32.png"));
+    map["highway=bus_stop"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_bus_stop.n.32.png"));
+    map["highway=steps"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/barrier_steps.n.32.png"));
+    map["historic=archaeological_site"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_archaeological.n.32.png"));
+    map["historic=battlefield"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_battlefield.n.32.png"));
+    map["historic=castle"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_castle.n.32.png"));
+    map["historic=memorial"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_memorial.n.32.png"));
+    map["historic=mine"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_mine_abandoned.n.32.png"));
+    map["historic=monument"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_monument.n.32.png"));
+    map["historic=ruins"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_ruin.n.32.png"));
+    map["historic=wayside_cross"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_wayside_cross.n.32.png"));
+    map["historic=wayside_shrine"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_wayside_shrine.n.32.png"));
+    map["historic=wreck"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_wreck.n.32.png"));
+    map["industrial=mine"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_mine.n.32.png"),
+    {
+        {"disused=yes", QPixmap("://icons/poi/SJJB/png/poi_mine_abandoned.n.32.png")}
+    });
+    map["industrial=port"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_port.n.32.png"));
+    map["information=guidepost"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_guidepost.n.32.png"));
+    map["landuse=forest"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/landuse_coniferous_and_deciduous.n.32.png"));
+    map["landuse=harbour"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_port.n.32.png"));
+    map["landuse=port"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_port.n.32.png"));
+    map["landuse=quarry"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/landuse_quary.n.32.png"));
+    map["landuse=recreation_ground"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_leisure_centre.n.32.png"));
+    map["leaf_cycle=deciduous"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/landuse_deciduous.n.32.png"));
+    map["leaf_cycle=evergreen"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/landuse_coniferous.n.32.png"));
+    map["leisure=fitness_centre"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_gym.n.32.png"));
+    map["leisure=golf_course"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_golf.n.32.png"));
+    map["leisure=marina"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_marina.n.32.png"));
+    map["leisure=park"] = CPoiIconCategory(QPixmap("://icons/poi/png/amenity_leisure_park_n32.png"));
+    map["leisure=picnic_site"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_picnic.n.32.png"));
+    map["leisure=picnic_table"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_picnic.n.32.png"));
+    map["leisure=playground"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_playground.n.32.png"));
+    map["leisure=playground"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_playground.n.32.png"));
+    map["leisure=slipway"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_slipway.n.32.png"));
+    map["leisure=sports_centre"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_gymnasium.n.32.png"));
+    map["leisure=sports_hall"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_gymnasium.n.32.png"));
+    map["leisure=stadium"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_stadium.n.32.png"));
+    map["leisure=swimming_pool"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_swimming_indoor.n.32.png"));
+    map["leisure=water_park"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_swimming_outdoor.n.32.png"));
+    map["man_made=adit"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_cave.n.32.png"));
+    map["man_made=adit"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_mine.n.32.png"),
+    {
+        {"disused=yes", QPixmap("://icons/poi/SJJB/png/poi_mine_abandoned.n.32.png")}
+    });
+    map["man_made=crane"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_crane.n.32.png"));
+    map["man_made=lighthouse"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_lighthouse.n.32.png"));
+    map["man_made=mast"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_tower_communications.n.32.png"));
+    map["man_made=mineshaft"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_mine.n.32.png"),
+    {
+        {"disused=yes", QPixmap("://icons/poi/SJJB/png/poi_mine_abandoned.n.32.png")}
+    });
+    map["man_made=survey_point"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/amenity_survey_point.n.32.png"));
+    map["man_made=tower"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_tower_lookout.n.32.png"),
+    {
+        {"tower:type=communication", QPixmap("://icons/poi/SJJB/png/poi_tower_communications.n.32.png")},
+        {"tower=communication", QPixmap("://icons/poi/SJJB/png/poi_tower_communications.n.32.png")}
+    });
+    map["man_made=water_tower"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_tower_water.n.32.png"));
+    map["man_made=water_tower"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/water_tower.n.32.png"));
+    map["man_made=water_well"] = CPoiIconCategory(QPixmap("://icons/poi/png/man_made_water_well.png"));
+    map["man_made=watermill"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_waterwheel.n.32.png"));
+    map["man_made=windmill"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_windmill.n.32.png"));
+    map["memorial="] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_memorial.n.32.png"));
+    map["military=bunker"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_military_bunker.n.32.png"));
+    map["military=range"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_shooting.n.32.png"));
+    map["mountain_pass=yes"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_mountain_pass.n.32.png"));
+    map["natural=beach"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_beach.n.32.png"));
+    map["natural=cave_entrance"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_cave.n.32.png"));
+    map["natural=peak"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_peak.n.32.png"));
+    map["natural=scrub"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/landuse_scrub.n.32.png"));
+    map["natural=spring"] = CPoiIconCategory(QPixmap("://icons/poi/png/water_spring_n32.png"));
+    map["natural=tree"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/landuse_coniferous_and_deciduous.n.32.png"));
+    map["natural=volcano"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_peak.n.32.png"));
+    map["natural=waterfall"] = CPoiIconCategory(QPixmap("://icons/poi/png/water_waterfall_n32.png"));
+    map["natural=wetland"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/landuse_swamp.n.32.png"));
+    map["natural=wood"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/landuse_coniferous_and_deciduous.n.32.png"));
+    map["office=estateagent"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_estateagent.n.32.png"));
+    map["piste:type=downhill"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_skiing_downhill.n.32.png"));
+    map["piste:type=nordic"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_skiing_crosscountry.n.32.png"));
+    map["place=city"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_place_city.n.32.png"));
+    map["place=hamlet"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_place_hamlet.n.32.png"));
+    map["place=suburb"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_place_suburb.n.32.png"));
+    map["place=town"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_place_town.n.32.png"));
+    map["place=village"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_place_village.n.32.png"));
+    map["power=tower"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/poi_tower_power.n.32.png"));
+    map["public_transport=platform"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_bus_station.n.32.png"),
+    {
+        {"railway=yes", QPixmap("://icons/poi/SJJB/png/transport_train_station.n.32.png")},
+        {"tram=yes", QPixmap("://icons/poi/SJJB/png/transport_tram_stop.n.32.png")},
+        {"bus=yes", QPixmap("://icons/poi/SJJB/png/transport_bus_station.n.32.png")},
+    });
+    map["public_transport=station"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_bus_station.n.32.png"),
+    {
+        {"railway=yes", QPixmap("://icons/poi/SJJB/png/transport_train_station.n.32.png")},
+        {"tram=yes", QPixmap("://icons/poi/SJJB/png/transport_tram_stop.n.32.png")},
+        {"bus=yes", QPixmap("://icons/poi/SJJB/png/transport_bus_station.n.32.png")},
+    });
+    map["public_transport=stop_position"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_bus_station.n.32.png"),
+    {
+        {"railway=yes", QPixmap("://icons/poi/SJJB/png/transport_train_station.n.32.png")},
+        {"tram=yes", QPixmap("://icons/poi/SJJB/png/transport_tram_stop.n.32.png")},
+        {"bus=yes", QPixmap("://icons/poi/SJJB/png/transport_bus_station.n.32.png")},
+    });
+    map["railway:preserved=yes"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_steam_train.n.32.png"));
+    map["railway=preserved"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_steam_train.n.32.png"));
+    map["railway=station"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_train_station.n.32.png"));
+    map["railway=tram_stop"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_tram_stop.n.32.png"));
+    map["shop=alcohol"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_alcohol.n.32.png"));
+    map["shop=bakery"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_bakery.n.32.png"));
+    map["shop=bicycle"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_bicycle.n.32.png"));
+    map["shop=books"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_book.n.32.png"));
+    map["shop=butcher"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_butcher.n.32.png"));
+    map["shop=car"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_car.n.32.png"));
+    map["shop=car_repair"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_car_repair.n.32.png"));
+    map["shop=clothes"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_clothes.n.32.png"));
+    map["shop=computer"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_computer.n.32.png"));
+    map["shop=confectionery"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_confectionery.n.32.png"));
+    map["shop=convenience"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_convenience.n.32.png"));
+    map["shop=copyshop"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_copyshop.n.32.png"));
+    map["shop=craft"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_diy.n.32.png"));
+    map["shop=department_store"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_department_store.n.32.png"));
+    map["shop=fishing"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_tackle.n.32.png"));
+    map["shop=florist"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_florist.n.32.png"));
+    map["shop=garden_centre"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_garden_centre.n.32.png"));
+    map["shop=gift"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_gift.n.32.png"));
+    map["shop=greengrocer"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_greengrocer.n.32.png"));
+    map["shop=hairdresser"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_hairdresser.n.32.png"));
+    map["shop=hearing_aids"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_hearing_aids.n.32.png"));
+    map["shop=hifi"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_hifi.n.32.png"));
+    map["shop=jetski"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_jetski.n.32.png"));
+    map["shop=jewelry"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_jewelry.n.32.png"));
+    map["shop=kiosk"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_kiosk.n.32.png"));
+    map["shop=laundry"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_laundrette.n.32.png"));
+    map["shop=mobile_phone"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_mobile_phone.n.32.png"));
+    map["shop=motorcycle"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_motorcycle.n.32.png"));
+    map["shop=music"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_music.n.32.png"));
+    map["shop=newsagent"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_newspaper.n.32.png"));
+    map["shop=pet"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_pet.n.32.png"));
+    map["shop=photo"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_photo.n.32.png"));
+    map["shop=seafood"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_fish.n.32.png"));
+    map["shop=supermarket"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_supermarket.n.32.png"));
+    map["shop=tobacco"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_tobacco.n.32.png"));
+    map["shop=toys"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_toys.n.32.png"));
+    map["shop=video"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/shopping_video_rental.n.32.png"));
+    map["sport=archery"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_archery.n.32.png"));
+    map["sport=baseball"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_baseball.n.32.png"));
+    map["sport=canoe"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_canoe.n.32.png"));
+    map["sport=cliff_diving"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_diving.n.32.png"));
+    map["sport=climbing"] = CPoiIconCategory(QPixmap("://icons/poi/png/sport_rock_climbing_n32.png"));
+    map["sport=cricket"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_cricket.n.32.png"));
+    map["sport=horse_reacing"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_horse_racing.n.32.png"));
+    map["sport=ice_skating"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_iceskating.n.32.png"));
+    map["sport=miniature_golf"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_minature_golf.n.32.png"));
+    map["sport=motor"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_motorracing.n.32.png"));
+    map["sport=sailing"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_sailing.n.32.png"));
+    map["sport=scuba_diving"] = CPoiIconCategory(QPixmap("://icons/poi/png/sport_scuba_diving_n32.png"));
+    map["sport=shooting"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_shooting.n.32.png"));
+    map["sport=skiing"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_skiing_downhill.n.32.png"));
+    map["sport=snooker"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_snooker.n.32.png"));
+    map["sport=soccer"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_soccer.n.32.png"));
+    map["sport=surfing"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_windsurfing.n.32.png"));
+    map["sport=swimming"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_swimming_outdoor.n.32.png"),
+    {
+        {"building=yes", QPixmap("://icons/poi/SJJB/png/sport_swimming_indoor.n.32.png")}
+    });
+    map["sport=tennis"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_tennis.n.32.png"));
+    map["station=subway"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_subway.n.32.png"));
+    map["tourism=alpine_hut"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_alpinehut_r_n32.png"));
+    map["tourism=attraction"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_attraction.n.32.png"));
+    map["tourism=camp_site"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_camping.n.32.png"));
+    map["tourism=caravan_site"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_caravan_park.n.32.png"));
+    map["tourism=chalet"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_chalet.n.32.png"));
+    map["tourism=gallery"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_art_gallery.n.32.png"));
+    map["tourism=guest_house"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_bed_and_breakfast.n.32.png"));
+    map["tourism=hostel"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_hostel.n.32.png"));
+    map["tourism=hotel"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_hotel.n.32.png"));
+    map["tourism=information"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_information.n.32.png"),
+    {
+        {"information=board", QPixmap("://icons/poi/SJJB/png/tourist_map.n.32.png")},
+        {"information=map", QPixmap("://icons/poi/SJJB/png/tourist_map.n.32.png")}
+    });
+    map["tourism=motel"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_motel.n.32.png"));
+    map["tourism=museum"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_museum.n.32.png"));
+    map["tourism=picnic_site"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_picnic.n.32.png"));
+    map["tourism=theme_park"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_theme_park.n.32.png"));
+    map["tourism=viewpoint"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_view_point.n.32.png"));
+    map["tourism=wilderness_hut"] = CPoiIconCategory(QPixmap("://icons/poi/png/accommodation_wilderness_hut_r_n32.png"));
+    map["tourism=zoo"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_zoo.n.32.png"));
+    map["waterway=dam"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/water_dam.n.32.png"));
+    map["waterway=water_point"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/food_drinkingtap.n.32.png"));
+    map["waterway=waterfall"] = CPoiIconCategory(QPixmap("://icons/poi/png/water_waterfall_n32.png"));
+    map["waterway=weir"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/water_weir.n.32.png"));
 
     return map;
 }

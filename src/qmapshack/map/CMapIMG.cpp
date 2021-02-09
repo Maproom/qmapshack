@@ -2366,14 +2366,6 @@ void CMapIMG::findPOICloseBy(const QPoint& pt, poi_t& poi) const /*override;*/
                         poi.name = QString(" (%1)").arg(point.type, 2, 16, QChar('0'));
                     }
                 }
-                if(pointProperties.contains(point.type))
-                {
-                    poi.symbolSize = pointProperties[point.type].imgDay.size();
-                }
-                else
-                {
-                    poi.symbolSize = QSize(16, 16);
-                }
                 return;
             }
         }

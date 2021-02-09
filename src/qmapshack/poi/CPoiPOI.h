@@ -20,6 +20,7 @@
 #ifndef CPOIPOI_H
 #define CPOIPOI_H
 
+#include "poi/CPoiIconCategory.h"
 #include "poi/IPoi.h"
 
 #include <QMutex>
@@ -33,7 +34,7 @@ public:
 
     void addTreeWidgetItems(QTreeWidget *widget) override;
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
-    void loadPOIsFromFile(const QString &category, int minLonM10, int minLatM10);
+    void loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10);
 
     void draw(IDrawContext::buffer_t& buf) override;
 
@@ -54,26 +55,36 @@ private:
     {
         QStringList data;
         QPointF coordinates; // in radians
-        poi_t toPoi(const QString &defaultName) const;
+        quint64 key;
+        poi_t toPoi(const QString &categoryName) const;
     };
-    enum SqlColumn_e
+    enum SqlColumnPOI_e
     {
-        eSqlColumnMaxLat,
-        eSqlColumnMaxLon,
-        eSqlColumnMinLat,
-        eSqlColumnMinLon,
-        eSqlColumnData
+        eSqlColumnPOIMaxLat,
+        eSqlColumnPOIMaxLon,
+        eSqlColumnPOIMinLat,
+        eSqlColumnPOIMinLon,
+        eSqlColumnPOIData,
+        eSqlColumnPOIID
+    };
+    enum SqlColumnCategory_e
+    {
+        eSqlColumnCategoryId,
+        eSqlColumnCategoryName,
+        eSqlColumnCategoryParent
     };
 
+    void getPoiIcon(QPixmap &icon, const rawPoi_t& poi, const QString& definingTag = "");
     QMutex mutex;
     QString filename;
     QTimer* loadTimer;
-    QMap<QString, Qt::CheckState> categoryActivated;
+    QMap<quint64, Qt::CheckState> categoryActivated;
+    QMap<quint64, QString> categoryNames;
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
-    QMap<QString, QMap<int, QMap<int, QList<rawPoi_t> > > > loadedPOIs;
+    QMap<uint, QMap<int, QMap<int, QList<rawPoi_t> > > > loadedPOIs;
 
-    static QMap<QString, QString> tagMap;
-    static QMap<QString, QString> initTagMap();
+    static QMap<QString, CPoiIconCategory> tagMap;
+    static QMap<QString, CPoiIconCategory> initTagMap();
 };
 
 #endif //CPOIPOI_H

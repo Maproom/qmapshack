@@ -285,6 +285,7 @@ set( SRCS
     plot/ITrack.cpp
     poi/CPoiCategory.cpp
     poi/CPoiDraw.cpp
+    poi/CPoiIconCategory.cpp
     poi/CPoiItem.cpp
     poi/CPoiList.cpp
     poi/CPoiPathSetup.cpp
@@ -651,6 +652,7 @@ set( HDRS
     plot/ITrack.h
     poi/CPoiCategory.h
     poi/CPoiDraw.h
+    poi/CPoiIconCategory.h
     poi/CPoiItem.h
     poi/CPoiList.h
     poi/CPoiPathSetup.h

@@ -54,6 +54,10 @@ public:
     virtual void findPoisIn(const QRectF& degRect, QList<poi_t>&pois) = 0;
     virtual bool getToolTip(const QPoint& px, QString& str) const = 0;
 
+    static void init();
+    static const QSize& iconSize(){return _iconSize;}
+    static const QImage& iconHighlight(){return _iconHighlight;}
+
 public slots:
     virtual void slotCheckedStateChanged(QTreeWidgetItem*item) = 0;
 
@@ -67,6 +71,11 @@ protected:
 
     /// the setup dialog. Use getSetup() for access
     QPointer<IPoiProp> setup;
+
+private:
+    static QSize _iconSize;
+    static QImage _iconHighlight;
+
 };
 
 #endif //IPOI_H

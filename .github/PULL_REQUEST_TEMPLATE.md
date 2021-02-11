@@ -1,9 +1,8 @@
-_**Note: Do not delete any of the sections**_
-_**Answer them all. Replace the descriptive text**_
-_**by your answer**_
+_**Note: Do not delete any of the sections Answer them all. Replace the descriptive text by your answer**_
 
+**What is the linked issue for this pull request (start with a `#`):**
 
-**What is the linked issue for this pull request (start with a `#`):** QMS-#
+QMS-#
 
 **Describe roughly what you have done:**
 

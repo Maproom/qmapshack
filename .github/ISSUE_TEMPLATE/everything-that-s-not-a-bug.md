@@ -9,19 +9,12 @@ assignees: ''
 
 **Important Notice:**
 
-**Do not delete any of the sections. Read what is requested.**
-**_Replace(!)_ the instructions by your _answer(!)_. Feature requests**
-**reports that are not properly filed might be closed without**
-**further notice.**
+**Do not delete any of the sections. Read what is requested. _Replace(!)_ the instructions by your _answer(!)_. Feature requests reports that are not properly filed might be closed without further notice.**
 
 **Choose a good title**
 
 What is a good title?
-The title will be listed in the changelog when the issue is fixed. Do
-you think someone else would understand what's fixed or done from your
-title? Does it really name the real topic of the issue?
-
-[ ] Did you choose a good title?
+The title will be listed in the changelog when the issue is fixed. Do you think someone else would understand what's fixed or done from your title? Does it really name the real topic of the issue?
 
 **Is your feature request related to a problem? Please describe.**
 

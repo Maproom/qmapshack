@@ -21,6 +21,7 @@
 #define CPOIPOI_H
 
 #include "poi/CPoiIconCategory.h"
+#include "poi/CRawPoi.h"
 #include "poi/IPoi.h"
 
 #include <QMutex>
@@ -38,8 +39,8 @@ public:
 
     void draw(IDrawContext::buffer_t& buf) override;
 
-    virtual bool findPoiCloseBy(const QPoint& px, poi_t& poiItem) const override;
-    virtual void findPoisIn(const QRectF& degRect, QList<poi_t>&pois) override;
+    virtual bool findPOICloseBy(const QPoint& px, QSet<poi_t> &poiItems, QList<QPointF>& posPOIHighlight) const override;
+    virtual void findPoisIn(const QRectF& degRect, QSet<poi_t>&pois, QList<QPointF>& posPOIHighlight) override;
     virtual bool getToolTip(const QPoint& px, QString& str) const override;
 
     static void init()
@@ -51,13 +52,15 @@ public slots:
     void slotCheckedStateChanged(QTreeWidgetItem*item) override;
 
 private:
-    struct rawPoi_t
+    struct poiGroup_t
     {
-        QStringList data;
-        QPointF coordinates; // in radians
-        quint64 key;
-        poi_t toPoi(const QString &categoryName) const;
+        ///Area covered by the icon in pixels
+        QRectF iconLocation;
+        ///Location of the center of the icon in rad
+        QPointF iconCenter;
+        QSet<quint64> pois;
     };
+
     enum SqlColumnPOI_e
     {
         eSqlColumnPOIMaxLat,
@@ -74,14 +77,21 @@ private:
         eSqlColumnCategoryParent
     };
 
-    void getPoiIcon(QPixmap &icon, const rawPoi_t& poi, const QString& definingTag = "");
+    void getPoiIcon(QPixmap &icon, const poiGroup_t& poiGroup);
+    void getPoiIcon(QPixmap &icon, const CRawPoi& poi, const QString& definingTag = "");
+    bool overlapsWithIcon(const QRectF& rect) const;
+    bool getPoiGroupCloseBy(const QPoint& px, poiGroup_t& poiItem) const;
+
     QMutex mutex;
     QString filename;
     QTimer* loadTimer;
     QMap<quint64, Qt::CheckState> categoryActivated;
     QMap<quint64, QString> categoryNames;
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
-    QMap<uint, QMap<int, QMap<int, QList<rawPoi_t> > > > loadedPOIs;
+    QMap<quint64, QMap<int, QMap<int, QList<quint64> > > > loadedPOIsByArea;
+    QMap<quint64, CRawPoi> loadedPois;
+    QList<poiGroup_t> displayedPois;
+
 
     static QMap<QString, CPoiIconCategory> tagMap;
     static QMap<QString, CPoiIconCategory> initTagMap();

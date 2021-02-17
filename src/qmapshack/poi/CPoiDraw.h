@@ -52,8 +52,8 @@ public:
         return supportedFormats;
     }
 
-    poi_t findPOICloseBy(const QPoint& px) const;
-    void findPoisIn(const QRectF& degRect, QList<poi_t>& pois) const;
+    QSet<poi_t> findPOICloseBy(const QPoint& px, QList<QPointF> &posPOIHighlight) const;
+    void findPoisIn(const QRectF& degRect, QSet<poi_t> &pois, QList<QPointF> &posPOIHighlight) const;
     bool getToolTip(const QPoint& px, QString& str);
 protected:
     void drawt(buffer_t& currentBuffer) override;

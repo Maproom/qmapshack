@@ -83,13 +83,13 @@ public:
 
     QPointer<IPoi>& getPoifile(){return poifile;}
 
-    bool findPoiCloseBy(const QPoint& px, poi_t& poiItem) const
+    bool findPOICloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPOIHighlight) const
     {
-        return poifile->findPoiCloseBy(px, poiItem);
+        return poifile->findPOICloseBy(px, poiItems, posPOIHighlight);
     }
-    void findPoisIn(const QRectF& degRect, QList<poi_t>&pois)
+    void findPoisIn(const QRectF& degRect, QSet<poi_t>&pois, QList<QPointF>& posPOIHighlight)
     {
-        getPoifile()->findPoisIn(degRect, pois);
+        getPoifile()->findPoisIn(degRect, pois, posPOIHighlight);
     }
     bool getToolTip(const QPoint& px, QString& str)
     {

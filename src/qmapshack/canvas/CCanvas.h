@@ -100,8 +100,8 @@ public:
     void zoomTo(const QRectF& rect);
     void zoom(int index);
     void displayInfo(const QPoint& px);
-    poi_t findPOICloseBy(const QPoint& px) const;
-    QList<poi_t> findPoisIn(const QRectF &degRect) const;
+    QSet<poi_t> findPOICloseBy(const QPoint& px, QList<QPointF> &posPOIHighlight) const;
+    QSet<poi_t> findPoisIn(const QRectF &degRect, QList<QPointF> &posPOIHighlight) const;
 
     enum redraw_e
     {

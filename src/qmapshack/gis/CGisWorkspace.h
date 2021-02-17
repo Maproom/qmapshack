@@ -352,7 +352,7 @@ public:
        @param pt    the position in degrees
      */
     void addWptByPos(const QPointF& pt, const QString& name = QString::Null(), const QString& desc = QString::Null()) const;
-    void addPoisAsWpt(const QList<poi_t> &pois, IGisProject *project = nullptr) const;
+    void addPoisAsWpt(const QSet<poi_t> &pois, IGisProject *project = nullptr) const;
 
     void toggleWptBubble(const IGisItem::key_t &key);
 

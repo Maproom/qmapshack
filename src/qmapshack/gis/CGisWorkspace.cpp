@@ -923,7 +923,7 @@ void CGisWorkspace::addWptByPos(const QPointF& pt, const QString& name, const QS
     CGisItemWpt::newWpt(pt, name, desc, project);
 }
 
-void CGisWorkspace::addPoisAsWpt(const QList<poi_t> &pois, IGisProject * project) const
+void CGisWorkspace::addPoisAsWpt(const QSet<poi_t> &pois, IGisProject * project) const
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 

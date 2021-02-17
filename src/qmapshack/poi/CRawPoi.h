@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2017 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2021 Henri Hornburg <pingurus@t-online.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,32 +16,34 @@
 
 **********************************************************************************************/
 
-#ifndef POI_H
-#define POI_H
+#ifndef CRAWPOI_H
+#define CRAWPOI_H
 
-#include "units/IUnit.h"
 #include <QPointF>
-#include <QSize>
+#include <QString>
+#include <QStringList>
 
-struct poi_t
+struct poi_t;
+
+class CRawPoi
 {
-    poi_t() : pos(NOPOINTF){}
+public:
+    //Dummy constructor for the usage of QMap
+    CRawPoi(){}
+    CRawPoi(QStringList data, QPointF coordinates, quint64 key, const QString &category);
+    const QString& getCategory() const;
+    const QString& getName(bool replaceEmptyByCategory = true) const;
+    const QPointF &getCoordinates() const;
+    const quint64 &getKey() const;
+    const QStringList &getData() const;
+    poi_t toPoi() const;
+
+private:
+    QString category;
+    QPointF coordinates; // in radians
+    QStringList data;
+    quint64 key;
     QString name;
-    QString desc;
-    QPointF pos; // in radians!
 };
 
-inline bool operator==(const poi_t &poi1, const poi_t &poi2)
-{
-    return poi1.name == poi2.name
-           && poi1.desc == poi2.desc
-           && poi1.pos == poi2.pos;
-}
-
-inline uint qHash(const poi_t &poi, uint seed)
-{
-    return qHash(poi.name, seed) ^ qHash(poi.desc, seed) ^ qHash(poi.pos.x(), seed) ^ qHash(poi.pos.y(), seed);
-}
-
-#endif //POI_H
-
+#endif // CRAWPOI_H

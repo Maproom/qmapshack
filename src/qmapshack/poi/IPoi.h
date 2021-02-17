@@ -50,8 +50,8 @@ public:
 
     virtual void addTreeWidgetItems(QTreeWidget* widget) = 0;
 
-    virtual bool findPoiCloseBy(const QPoint& px, poi_t&) const = 0;
-    virtual void findPoisIn(const QRectF& degRect, QList<poi_t>&pois) = 0;
+    virtual bool findPOICloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPOIHighlight) const = 0;
+    virtual void findPoisIn(const QRectF& degRect, QSet<poi_t>&pois, QList<QPointF>& posPOIHighlight) = 0;
     virtual bool getToolTip(const QPoint& px, QString& str) const = 0;
 
     static void init();
@@ -75,7 +75,6 @@ protected:
 private:
     static QSize _iconSize;
     static QImage _iconHighlight;
-
 };
 
 #endif //IPOI_H

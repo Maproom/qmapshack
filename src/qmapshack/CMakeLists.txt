@@ -292,6 +292,7 @@ set( SRCS
     poi/CPoiPropSetup.cpp
     poi/CPoiPOI.cpp
     poi/CPoiPOI_TagMap.cpp
+    poi/CRawPoi.cpp
     poi/IPoi.cpp
     poi/IPoiProp.cpp
     print/CPrintDialog.cpp
@@ -658,6 +659,7 @@ set( HDRS
     poi/CPoiPathSetup.h
     poi/CPoiPropSetup.h
     poi/CPoiPOI.h
+    poi/CRawPoi.h
     poi/IPoi.h
     poi/IPoiProp.h
     print/CPrintDialog.h

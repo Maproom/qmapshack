@@ -26,6 +26,7 @@
 #include <QPixmap>
 #include <QPointer>
 #include <QRect>
+#include <QSet>
 #include <QStringList>
 
 class CCanvas;
@@ -52,7 +53,7 @@ public:
     void scaleChanged() override;
 
 private slots:
-    void slotAddPoi()           const;
+    void slotAddPoi(QSet<poi_t>::const_iterator index)           const;
     void slotAddWpt()           const;
     void slotAddTrk()           const;
     void slotAddRte()           const;
@@ -86,7 +87,10 @@ protected:
     CScrOptUnclutter * screenUnclutter;
     QPointer<IScrOpt>  screenItemOption;
 
-    poi_t curPOI;
+    QSet<poi_t> curPOIs;
+    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+    /// Thus the location where to draw the highlight is separately given
+    QList<QPointF> posPOIHighlight;
 };
 
 #endif //CMOUSENORMAL_H

@@ -28,9 +28,9 @@
 #include "mouse/CMouseAdapter.h"
 #include "mouse/CMouseNormal.h"
 #include "mouse/CScrOptUnclutter.h"
+#include "poi/IPoi.h"
 #include "realtime/CRtWorkspace.h"
 #include "widgets/CFadingIcon.h"
-#include "poi/IPoi.h"
 
 #include <QtWidgets>
 
@@ -127,7 +127,8 @@ void CMouseNormal::mouseMoved(const QPoint& point)
         ;
     }
 
-    curPOI = canvas->findPOICloseBy(point);
+    posPOIHighlight.clear();
+    curPOIs = canvas->findPOICloseBy(point, posPOIHighlight);
 
     canvas->displayInfo(point);
     canvas->update();
@@ -286,13 +287,15 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     case eStateHooverSingle:
     case eStateHooverMultiple:
     {
-        if(curPOI.pos != NOPOINTF)
+        if(posPOIHighlight.count() > 0)
         {
-            QPointF pxPos = curPOI.pos;
-            gis->convertRad2Px(pxPos);
-            QRectF r = IPoi::iconHighlight().rect();
-            r.moveCenter(pxPos);
-            p.drawImage(r, IPoi::iconHighlight());
+            for(QPointF pos : posPOIHighlight)
+            {
+                gis->convertRad2Px(pos);
+                QRectF r = IPoi::iconHighlight().rect();
+                r.moveCenter(pos);
+                p.drawImage(r, IPoi::iconHighlight());
+            }
         }
 
         /*
@@ -357,9 +360,9 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     }
 }
 
-void CMouseNormal::slotAddPoi() const
+void CMouseNormal::slotAddPoi(QSet<poi_t>::const_iterator poi) const
 {
-    CGisWorkspace::self().addWptByPos(curPOI.pos * RAD_TO_DEG, curPOI.name, curPOI.desc);
+    CGisWorkspace::self().addWptByPos((*poi).pos * RAD_TO_DEG, (*poi).name, (*poi).desc);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
@@ -439,9 +442,16 @@ void CMouseNormal::slotSelectArea() const
 void CMouseNormal::showContextMenu(const QPoint &point)
 {
     QMenu menu(canvas);
-    if(curPOI.pos != NOPOINTF)
+    if(curPOIs.count() > 0 && curPOIs.count() <= 5)
     {
-        menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI as Waypoint"), this, SLOT(slotAddPoi()));
+        for(QSet<poi_t>::const_iterator poi = curPOIs.begin(); !(poi == curPOIs.end()); poi++)
+        {
+            menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI %1 as Waypoint").arg((*poi).name), this, [this, poi] {slotAddPoi(poi);});
+        }
+    }
+    else if (curPOIs.count() > 5 )
+    {
+        menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Zoom in to add POIs as Waypoints"));
     }
     QPointF pt = mouse->getPoint();
     gis->convertPx2Rad(pt);

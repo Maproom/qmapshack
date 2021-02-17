@@ -101,9 +101,10 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
             }
         }
 
+        posPOIHighlight.clear();
         if(modeSelection & IGisItem::eSelectionPoi)
         {
-            poisFound = canvas->findPoisIn(area);
+            poisFound = canvas->findPoisIn(area, posPOIHighlight);
         }
         else
         {
@@ -168,11 +169,11 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         item->drawHighlight(p);
     }
 
-    for(const poi_t& poiItem : poisFound)
+    for(const QPointF& pos : posPOIHighlight)
     {
-        if(poiItem.pos != NOPOINTF)
+        if(pos != NOPOINTF)
         {
-            QPointF pxPos = poiItem.pos;
+            QPointF pxPos = pos;
             gis->convertRad2Px(pxPos);
             QRectF r(0, 0, 42, 42);
             r.moveCenter(pxPos);

@@ -59,7 +59,10 @@ private:
 
 
     QList<IGisItem::key_t> itemKeys;
-    QList<poi_t> poisFound;
+    QSet<poi_t> poisFound;
+    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+    /// Thus the location where to draw the highlight is separately given
+    QList<QPointF> posPOIHighlight;
     IGisItem::selflags_t modeLastSel   = IGisItem::eSelectionNone;
     QRectF rectLastSel;
 

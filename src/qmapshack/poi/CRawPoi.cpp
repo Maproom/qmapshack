@@ -16,12 +16,12 @@
 
 **********************************************************************************************/
 
-#include "CRawPoi.h"
 #include "gis/Poi.h"
+#include "poi/CRawPoi.h"
 
 #include <QRegularExpression>
 
-CRawPoi::CRawPoi(QStringList data, QPointF coordinates, quint64 key, const QString& category)
+CRawPoi::CRawPoi(const QStringList &data, const QPointF &coordinates, const quint64 &key, const QString& category)
     : category(category), coordinates(coordinates), data(data), key(key)
 {
     for(const QRegularExpression& regex : {QRegularExpression("name:" + QLocale::system().name() + "=(.+)", QRegularExpression::UseUnicodePropertiesOption),

@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "CPoiCategory.h"
+#include "poi/CPoiCategory.h"
 #include "poi/CPoiPropSetup.h"
 
 CPoiCategory::CPoiCategory(const QString& categoryName, quint64 categoryID, Qt::CheckState checkedState, CPoiCategory *parent)
@@ -35,7 +35,7 @@ CPoiCategory::CPoiCategory(const QString& categoryName, quint64 categoryID, QTre
     setFlags(flags() | Qt::ItemIsAutoTristate);
 }
 
-Qt::CheckState CPoiCategory::checkState()
+Qt::CheckState CPoiCategory::checkState() const
 {
     return QTreeWidgetItem::checkState(CPoiPropSetup::eTreeColumnCheckbox);
 }

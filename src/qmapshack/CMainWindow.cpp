@@ -729,7 +729,7 @@ bool CMainWindow::isNight() const
     return actionNightDay->isChecked();
 }
 
-bool CMainWindow::isPOIText() const
+bool CMainWindow::isPoiText() const
 {
     return actionPOIText->isChecked();
 }

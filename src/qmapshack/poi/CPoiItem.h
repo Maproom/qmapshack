@@ -83,13 +83,17 @@ public:
 
     QPointer<IPoi>& getPoifile(){return poifile;}
 
-    bool findPOICloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPOIHighlight) const
+    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+    /// Thus the location where to draw the highlight is separately given
+    bool findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
     {
-        return poifile->findPOICloseBy(px, poiItems, posPOIHighlight);
+        return poifile->findPoiCloseBy(px, poiItems, posPoiHighlight);
     }
-    void findPoisIn(const QRectF& degRect, QSet<poi_t>&pois, QList<QPointF>& posPOIHighlight)
+    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+    /// Thus the location where to draw the highlight is separately given
+    void findPoisIn(const QRectF& degRect, QSet<poi_t>&pois, QList<QPointF>& posPoiHighlight)
     {
-        getPoifile()->findPoisIn(degRect, pois, posPOIHighlight);
+        getPoifile()->findPoisIn(degRect, pois, posPoiHighlight);
     }
     bool getToolTip(const QPoint& px, QString& str)
     {

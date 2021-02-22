@@ -53,7 +53,7 @@ public:
     void scaleChanged() override;
 
 private slots:
-    void slotAddPoi(QSet<poi_t>::const_iterator index)           const;
+    void slotAddPoi(const poi_t& poi)           const;
     void slotAddWpt()           const;
     void slotAddTrk()           const;
     void slotAddRte()           const;
@@ -87,10 +87,10 @@ protected:
     CScrOptUnclutter * screenUnclutter;
     QPointer<IScrOpt>  screenItemOption;
 
-    QSet<poi_t> curPOIs;
+    QSet<poi_t> curPois;
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    QList<QPointF> posPOIHighlight;
+    QList<QPointF> posPoiHighlight;
 };
 
 #endif //CMOUSENORMAL_H

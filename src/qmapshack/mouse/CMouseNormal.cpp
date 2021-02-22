@@ -127,8 +127,9 @@ void CMouseNormal::mouseMoved(const QPoint& point)
         ;
     }
 
-    posPOIHighlight.clear();
-    curPOIs = canvas->findPOICloseBy(point, posPOIHighlight);
+    posPoiHighlight.clear();
+    curPois.clear();
+    canvas->findPoiCloseBy(point, curPois, posPoiHighlight);
 
     canvas->displayInfo(point);
     canvas->update();
@@ -287,15 +288,12 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     case eStateHooverSingle:
     case eStateHooverMultiple:
     {
-        if(posPOIHighlight.count() > 0)
+        for(QPointF pos : posPoiHighlight)
         {
-            for(QPointF pos : posPOIHighlight)
-            {
-                gis->convertRad2Px(pos);
-                QRectF r = IPoi::iconHighlight().rect();
-                r.moveCenter(pos);
-                p.drawImage(r, IPoi::iconHighlight());
-            }
+            gis->convertRad2Px(pos);
+            QRectF r = IPoi::iconHighlight().rect();
+            r.moveCenter(pos);
+            p.drawImage(r, IPoi::iconHighlight());
         }
 
         /*
@@ -360,9 +358,9 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     }
 }
 
-void CMouseNormal::slotAddPoi(QSet<poi_t>::const_iterator poi) const
+void CMouseNormal::slotAddPoi(const poi_t& poi) const
 {
-    CGisWorkspace::self().addWptByPos((*poi).pos * RAD_TO_DEG, (*poi).name, (*poi).desc);
+    CGisWorkspace::self().addWptByPos(poi.pos * RAD_TO_DEG, poi.name, poi.desc);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
@@ -442,14 +440,14 @@ void CMouseNormal::slotSelectArea() const
 void CMouseNormal::showContextMenu(const QPoint &point)
 {
     QMenu menu(canvas);
-    if(curPOIs.count() > 0 && curPOIs.count() <= 5)
+    if(curPois.count() > 0 && curPois.count() <= 5)
     {
-        for(QSet<poi_t>::const_iterator poi = curPOIs.begin(); !(poi == curPOIs.end()); poi++)
+        for(poi_t poi : curPois)
         {
-            menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI %1 as Waypoint").arg((*poi).name), this, [this, poi] {slotAddPoi(poi);});
+            menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI %1 as Waypoint").arg(poi.name), this, [this, poi] {slotAddPoi(poi);});
         }
     }
-    else if (curPOIs.count() > 5 )
+    else if (curPois.count() > 5 )
     {
         menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Zoom in to add POIs as Waypoints"));
     }

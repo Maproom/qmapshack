@@ -94,7 +94,7 @@ public:
     bool isScaleVisible()  const;
     bool isGridVisible()   const;
     bool isNight()         const;
-    bool isPOIText()       const;
+    bool isPoiText()       const;
     bool isMapToolTip()    const;
     bool isShowMinMaxTrackLabels() const;
 

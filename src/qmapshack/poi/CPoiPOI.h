@@ -39,9 +39,13 @@ public:
 
     void draw(IDrawContext::buffer_t& buf) override;
 
-    virtual bool findPOICloseBy(const QPoint& px, QSet<poi_t> &poiItems, QList<QPointF>& posPOIHighlight) const override;
-    virtual void findPoisIn(const QRectF& degRect, QSet<poi_t>&pois, QList<QPointF>& posPOIHighlight) override;
-    virtual bool getToolTip(const QPoint& px, QString& str) const override;
+    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+    /// Thus the location where to draw the highlight is separately given
+    bool findPoiCloseBy(const QPoint& px, QSet<poi_t> &poiItems, QList<QPointF>& posPoiHighlight) const override;
+    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+    /// Thus the location where to draw the highlight is separately given
+    void findPoisIn(const QRectF& degRect, QSet<poi_t>&pois, QList<QPointF>& posPoiHighlight) override;
+    bool getToolTip(const QPoint& px, QString& str) const override;
 
     static void init()
     {
@@ -61,14 +65,14 @@ private:
         QSet<quint64> pois;
     };
 
-    enum SqlColumnPOI_e
+    enum SqlColumnPoi_e
     {
-        eSqlColumnPOIMaxLat,
-        eSqlColumnPOIMaxLon,
-        eSqlColumnPOIMinLat,
-        eSqlColumnPOIMinLon,
-        eSqlColumnPOIData,
-        eSqlColumnPOIID
+        eSqlColumnPoiMaxLat,
+        eSqlColumnPoiMaxLon,
+        eSqlColumnPoiMinLat,
+        eSqlColumnPoiMinLon,
+        eSqlColumnPoiData,
+        eSqlColumnPoiId
     };
     enum SqlColumnCategory_e
     {
@@ -88,7 +92,7 @@ private:
     QMap<quint64, Qt::CheckState> categoryActivated;
     QMap<quint64, QString> categoryNames;
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
-    QMap<quint64, QMap<int, QMap<int, QList<quint64> > > > loadedPOIsByArea;
+    QMap<quint64, QMap<int, QMap<int, QList<quint64> > > > loadedPoisByArea;
     QMap<quint64, CRawPoi> loadedPois;
     QList<poiGroup_t> displayedPois;
 

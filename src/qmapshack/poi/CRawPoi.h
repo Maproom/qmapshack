@@ -30,7 +30,7 @@ class CRawPoi
 public:
     //Dummy constructor for the usage of QMap
     CRawPoi(){}
-    CRawPoi(QStringList data, QPointF coordinates, quint64 key, const QString &category);
+    CRawPoi(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString &category);
     const QString& getCategory() const;
     const QString& getName(bool replaceEmptyByCategory = true) const;
     const QPointF &getCoordinates() const;

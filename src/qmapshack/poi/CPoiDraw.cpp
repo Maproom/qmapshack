@@ -138,9 +138,8 @@ void CPoiDraw::loadPoiPath(QSettings &cfg)
     poiPaths = cfg.value("poiPaths", poiPaths).toStringList();
 }
 
-QSet<poi_t> CPoiDraw::findPOICloseBy(const QPoint &px, QList<QPointF>& posPOIHighlight) const
+void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<poi_t> &poiItems, QList<QPointF> &posPoiHighlight) const
 {
-    QSet<poi_t> pois;
     if(poiList && CPoiItem::mutexActivePois.tryLock())
     {
         for(int i = 0; i < poiList->count(); i++)
@@ -155,14 +154,13 @@ QSet<poi_t> CPoiDraw::findPOICloseBy(const QPoint &px, QList<QPointF>& posPOIHig
                 break;
             }
 
-            item->findPOICloseBy(px, pois, posPOIHighlight);
+            item->findPoiCloseBy(px, poiItems, posPoiHighlight);
         }
         CPoiItem::mutexActivePois.unlock();
     }
-    return pois;
 }
 
-void CPoiDraw::findPoisIn(const QRectF &degRect, QSet<poi_t> & pois, QList<QPointF>&posPOIHighlight) const
+void CPoiDraw::findPoisIn(const QRectF &degRect, QSet<poi_t> &poiItems, QList<QPointF> &posPoiHighlight) const
 {
     if(poiList && CPoiItem::mutexActivePois.tryLock())
     {
@@ -178,7 +176,7 @@ void CPoiDraw::findPoisIn(const QRectF &degRect, QSet<poi_t> & pois, QList<QPoin
                 break;
             }
 
-            item->findPoisIn(degRect, pois, posPOIHighlight);
+            item->findPoisIn(degRect, poiItems, posPoiHighlight);
         }
         CPoiItem::mutexActivePois.unlock();
     }

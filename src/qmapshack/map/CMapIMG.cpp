@@ -2079,7 +2079,7 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
             p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
         }
 
-        if(CMainWindow::self().isPOIText() && showLabel)
+        if(CMainWindow::self().isPoiText() && showLabel)
         {
             // calculate bounding rectangle with a border of 2 px
             QRect rect = fm.boundingRect(pt->labels.join(" "));
@@ -2132,7 +2132,7 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
             p.drawPixmap(pt.pos.x() - 4, pt.pos.y() - 4, QPixmap(":/icons/8x8/bullet_red.png"));
         }
 
-        if(CMainWindow::self().isPOIText())
+        if(CMainWindow::self().isPoiText())
         {
             // calculate bounding rectangle with a border of 2 px
             QRect rect = fm.boundingRect(pt.labels.join(" "));

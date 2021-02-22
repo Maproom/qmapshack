@@ -38,7 +38,7 @@ public:
         return categoryID;
     }
 
-    Qt::CheckState checkState();
+    Qt::CheckState checkState() const;
 
 private:
     const QString categoryName;

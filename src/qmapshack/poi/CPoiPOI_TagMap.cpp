@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CPoiIconCategory.h"
-#include "CPoiPOI.h"
+#include "poi/CPoiIconCategory.h"
+#include "poi/CPoiPOI.h"
 
 #define SQLQUERY(TAG) "main.poi_data.data LIKE '%" TAG "%'"
 QMap<QString, CPoiIconCategory> CPoiPOI::tagMap;
@@ -337,7 +337,7 @@ QMap<QString, CPoiIconCategory> CPoiPOI::initTagMap()
     });
     map["sport=tennis"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/sport_tennis.n.32.png"));
     map["station=subway"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/transport_subway.n.32.png"));
-    map["tourism=alpine_hut"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_alpinehut_r_n32.png"));
+    map["tourism=alpine_hut"] = CPoiIconCategory(QPixmap("://icons/poi/png/accommodation_alpinehut_r_n32.png"));
     map["tourism=attraction"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/tourist_attraction.n.32.png"));
     map["tourism=camp_site"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_camping.n.32.png"));
     map["tourism=caravan_site"] = CPoiIconCategory(QPixmap("://icons/poi/SJJB/png/accommodation_caravan_park.n.32.png"));

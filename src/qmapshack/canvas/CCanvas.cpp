@@ -1120,24 +1120,21 @@ void CCanvas::displayInfo(const QPoint& px)
     QToolTip::hideText();
 }
 
-QSet<poi_t> CCanvas::findPOICloseBy(const QPoint& px, QList<QPointF>& posPOIHighlight) const
+void CCanvas::findPoiCloseBy(const QPoint& px, QSet<poi_t> &poiItems, QList<QPointF> &posPoiHighlight)  const
 {
-    QSet<poi_t> poiItems = poi->findPOICloseBy(px, posPOIHighlight);
+    poi->findPoiCloseBy(px, poiItems, posPoiHighlight);
 
     poi_t mapPoi = map->findPOICloseBy(px);
     if(mapPoi.pos != NOPOINTF)
     {
         poiItems.insert(mapPoi);
-        posPOIHighlight.append(mapPoi.pos);
+        posPoiHighlight.append(mapPoi.pos);
     }
-    return poiItems;
 }
 
-QSet<poi_t> CCanvas::findPoisIn(const QRectF& degRect, QList<QPointF>&posPOIHighlight) const
+void CCanvas::findPoisIn(const QRectF &degRect, QSet<poi_t> &poiItems, QList<QPointF> &posPoiHighlight) const
 {
-    QSet<poi_t> pois;
-    poi->findPoisIn(degRect, pois, posPOIHighlight);
-    return pois;
+    return poi->findPoisIn(degRect, poiItems, posPoiHighlight);
 }
 void CCanvas::setup()
 {

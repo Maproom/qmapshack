@@ -101,10 +101,11 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
             }
         }
 
-        posPOIHighlight.clear();
+        posPoiHighlight.clear();
+        poisFound.clear();
         if(modeSelection & IGisItem::eSelectionPoi)
         {
-            poisFound = canvas->findPoisIn(area, posPOIHighlight);
+            canvas->findPoisIn(area, poisFound, posPoiHighlight);
         }
         else
         {
@@ -169,14 +170,13 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         item->drawHighlight(p);
     }
 
-    for(const QPointF& pos : posPOIHighlight)
+    for(QPointF pos : posPoiHighlight)
     {
         if(pos != NOPOINTF)
         {
-            QPointF pxPos = pos;
-            gis->convertRad2Px(pxPos);
+            gis->convertRad2Px(pos);
             QRectF r(0, 0, 42, 42);
-            r.moveCenter(pxPos);
+            r.moveCenter(pos);
             p.drawImage(r, QImage("://cursors/poiHighlightRed.png"));
         }
     }

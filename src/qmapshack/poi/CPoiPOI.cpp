@@ -91,7 +91,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     // draw POI
     mutex.lock(); //Does this have to be so broad?
     displayedPois.clear();
-    QRectF freeSpaceRect = QRectF(QPointF(), IPoi::iconSize() * 2);
+    QRectF freeSpaceRect (QPointF(), IPoi::iconSize() * 2);
     //Find POIs in view
     for(quint64 categoryID : categoryActivated.keys(Qt::Checked))
     {
@@ -99,9 +99,9 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
         {
             for(int minLatM10 = qFloor(yMin * RAD_TO_DEG * 10); minLatM10 < qCeil(yMax * RAD_TO_DEG * 10); minLatM10++)
             {
-                if(!loadedPOIsByArea.contains(categoryID) ||
-                   !loadedPOIsByArea[categoryID].contains(minLonM10) ||
-                   !loadedPOIsByArea[categoryID][minLonM10].contains(minLatM10))
+                if(!loadedPoisByArea.contains(categoryID) ||
+                   !loadedPoisByArea[categoryID].contains(minLonM10) ||
+                   !loadedPoisByArea[categoryID][minLonM10].contains(minLatM10))
                 {
                     mutex.unlock();
                     loadPOIsFromFile(categoryID, minLonM10, minLatM10);
@@ -112,7 +112,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                     mutex.unlock();
                     return;
                 }
-                for(quint64 poiToDrawID : loadedPOIsByArea[categoryID][minLonM10][minLatM10])
+                for(quint64 poiToDrawID : loadedPoisByArea[categoryID][minLonM10][minLatM10])
                 {
                     const CRawPoi& poiToDraw = loadedPois[poiToDrawID];
                     QPointF pt = poiToDraw.getCoordinates();
@@ -134,7 +134,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                     if(!foundIntersection)
                     {
                         poiGroup_t poiGroup;
-                        QRectF iconRect = QRectF(QPointF(), IPoi::iconSize());
+                        QRectF iconRect (QPointF(), IPoi::iconSize());
                         iconRect.moveCenter(pt);
                         poiGroup.iconLocation = iconRect;
                         poiGroup.iconCenter = poiToDraw.getCoordinates();
@@ -147,7 +147,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     }
 
     //Draw Icons
-    for(poiGroup_t& poiGroup: displayedPois)
+    for(const poiGroup_t& poiGroup: displayedPois)
     {
         QFontMetricsF fm(CMainWindow::self().getMapFont());
 
@@ -155,17 +155,21 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
         getPoiIcon(icon, poiGroup);
         icon = icon.scaled(IPoi::iconSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
-        p.drawRect(poiGroup.iconLocation.adjusted(-1, -1, 1, 1));
-        p.drawPixmap(poiGroup.iconLocation.topLeft(), icon);
+        const QRectF& iconLocation = poiGroup.iconLocation;
+
+        p.drawRect(iconLocation.adjusted(-1, -1, 1, 1));
+        p.drawPixmap(iconLocation.topLeft(), icon);
         p.save();
         if(poiGroup.pois.count() > 1)
         {
-            QRectF labelRect = fm.boundingRect(QString::number(poiGroup.pois.count()));
-            labelRect.moveCenter(poiGroup.iconLocation.bottomRight());
+            const QString& text = QString::number(poiGroup.pois.count());
+
+            QRectF labelRect = fm.boundingRect(text);
+            labelRect.moveCenter(iconLocation.bottomRight());
             p.drawRect(labelRect.adjusted(-1, -1, 1, 1));
-            CDraw::text(QString::number(poiGroup.pois.count()), p, labelRect.toRect(), Qt::darkBlue);
+            CDraw::text(text, p, labelRect.toRect(), Qt::darkBlue);
         }
-        else if(CMainWindow::self().isPOIText())
+        else if(CMainWindow::self().isPoiText())
         {
             //Draw Name
             const QString& name = loadedPois[*poiGroup.pois.begin()].getName();
@@ -174,21 +178,21 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
 
             bool noLocationFound = false;
             // place label on bottom
-            rect.moveCenter(poiGroup.iconLocation.center());
-            rect.moveTop(poiGroup.iconLocation.bottom());
+            rect.moveCenter(iconLocation.center());
+            rect.moveTop(iconLocation.bottom());
             if(overlapsWithIcon(rect))
             {
                 // place label on top
-                rect.moveBottom(poiGroup.iconLocation.top());
+                rect.moveBottom(iconLocation.top());
                 if(overlapsWithIcon(rect))
                 {
                     // place label on right
-                    rect.moveCenter(poiGroup.iconLocation.center());
-                    rect.moveLeft(poiGroup.iconLocation.right());
+                    rect.moveCenter(iconLocation.center());
+                    rect.moveLeft(iconLocation.right());
                     if(overlapsWithIcon(rect))
                     {
                         // place label on left
-                        rect.moveRight(poiGroup.iconLocation.left());
+                        rect.moveRight(iconLocation.left());
                         if(overlapsWithIcon(rect))
                         {
                             // failed to place label anywhere
@@ -208,7 +212,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     mutex.unlock();
 }
 
-bool CPoiPOI::findPOICloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPOIHighlight) const
+bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     poiGroup_t poiGroup;
     if(getPoiGroupCloseBy(px, poiGroup))
@@ -217,13 +221,13 @@ bool CPoiPOI::findPOICloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPoi
         {
             poiItems.insert(loadedPois[key].toPoi());
         }
-        posPOIHighlight.append(poiGroup.iconCenter);
+        posPoiHighlight.append(poiGroup.iconCenter);
         return true;
     }
     return false;
 }
 
-void CPoiPOI::findPoisIn(const QRectF &degRect, QSet<poi_t> &pois, QList<QPointF> &posPOIHighlight)
+void CPoiPOI::findPoisIn(const QRectF &degRect, QSet<poi_t> &pois, QList<QPointF> &posPoiHighlight)
 {
     //Treat highlighting and POIs seperately, as highlighting only applies to items in the current view
 
@@ -236,13 +240,13 @@ void CPoiPOI::findPoisIn(const QRectF &degRect, QSet<poi_t> &pois, QList<QPointF
             for(int minLatM10 = qFloor(degRect.bottom() * 10); minLatM10 <= qFloor(degRect.top() * 10); minLatM10++)
             {
                 //Imagine the user moves the screen in an l-shape while updating the selection rectangle. It is possible that some tiles are not laded then
-                if(!loadedPOIsByArea.contains(categoryID) ||
-                   !loadedPOIsByArea[categoryID].contains(minLonM10) ||
-                   !loadedPOIsByArea[categoryID][minLonM10].contains(minLatM10))
+                if(!loadedPoisByArea.contains(categoryID) ||
+                   !loadedPoisByArea[categoryID].contains(minLonM10) ||
+                   !loadedPoisByArea[categoryID][minLonM10].contains(minLatM10))
                 {
                     loadPOIsFromFile(categoryID, minLonM10, minLatM10);
                 }
-                for(quint64 poiFoundID : loadedPOIsByArea[categoryID][minLonM10][minLatM10])
+                for(quint64 poiFoundID : loadedPoisByArea[categoryID][minLonM10][minLatM10])
                 {
                     const CRawPoi& poiItemFound = loadedPois[poiFoundID];
                     if(!copiedItems.contains(poiItemFound.getKey()))
@@ -264,7 +268,7 @@ void CPoiPOI::findPoisIn(const QRectF &degRect, QSet<poi_t> &pois, QList<QPointF
     {
         if(degRect.contains(poiGroup.iconCenter * RAD_TO_DEG))
         {
-            posPOIHighlight.append(poiGroup.iconCenter);
+            posPoiHighlight.append(poiGroup.iconCenter);
         }
     }
 }
@@ -283,15 +287,15 @@ bool CPoiPOI::getToolTip(const QPoint &px, QString &str) const
             {
                 str += "<b>" + name + "</b><br>\n";
             }
-            str += tr("From category <b>%1</b><br>\n").arg(poiFound.getCategory());
+            str += tr("From category ") + "<b>" + poiFound.getCategory() + "</b><br>\n";
             str += poiFound.getData().join("<br>\n");
         }
         else
         {
-            str += tr("<i>Zoom in to see more details.</i>");
+            str += "<i>" + tr("Zoom in to see more details.") + "</i>";
             if(poiGroup.pois.count() <= 10)
             {
-                str += tr("<br>\nPOIs at this point:");
+                str += "<br>\n" + tr("POIs at this point:");
                 for(quint64 poiID : poiGroup.pois)
                 {
                     str += "<br>\n<b>" + loadedPois[poiID].getName() + "</b>";
@@ -329,11 +333,11 @@ void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
         {
             continue; //This is the root item
         }
-        QString categoryName = query.value(eSqlColumnCategoryName).toString();
+        const QString& categoryName = query.value(eSqlColumnCategoryName).toString();
         quint64 categoryID = query.value(eSqlColumnCategoryId).toUInt();
         categoryNames[categoryID] = categoryName;
         // This assumes, that the parent categories always have a higher ID than their children. This seems to be the case for all Mapsforge poi files
-        if (categoryMap.keys().contains(parentID))
+        if (categoryMap.contains(parentID))
         {
             categoryMap[categoryID] = new CPoiCategory(categoryName, categoryID, categoryActivated[categoryID], categoryMap[parentID]);
         }
@@ -457,14 +461,14 @@ void CPoiPOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
     query.exec();
     while (query.next())
     {
-        QPointF coordinates = QPointF((query.value(eSqlColumnPOIMaxLon).toDouble() + query.value(eSqlColumnPOIMinLon).toDouble()) / 2 * DEG_TO_RAD,
-                                      (query.value(eSqlColumnPOIMaxLat).toDouble() + query.value(eSqlColumnPOIMinLat).toDouble()) / 2 * DEG_TO_RAD);
-        QStringList data = query.value(eSqlColumnPOIData).toString().split("\r");
-        quint64 key = query.value(eSqlColumnPOIID).toUInt();
+        quint64 key = query.value(eSqlColumnPoiId).toUInt();
         mutex.lock();
-        loadedPOIsByArea[categoryID][minLonM10][minLatM10].append(key);
+        loadedPoisByArea[categoryID][minLonM10][minLatM10].append(key);
         // TODO: this overwrites a POI if it already was loaded. The difference between those will be the category. Some better handling should be done
-        loadedPois[key] = CRawPoi(data, coordinates, key, categoryNames[categoryID]);
+        loadedPois[key] = CRawPoi(query.value(eSqlColumnPoiData).toString().split("\r"),
+                                  QPointF((query.value(eSqlColumnPoiMaxLon).toDouble() + query.value(eSqlColumnPoiMinLon).toDouble()) / 2 * DEG_TO_RAD,
+                                          (query.value(eSqlColumnPoiMaxLat).toDouble() + query.value(eSqlColumnPoiMinLat).toDouble()) / 2 * DEG_TO_RAD),
+                                  key, categoryNames[categoryID]);
         mutex.unlock();
     }
     //Close it, so it can be reopened from the right thread

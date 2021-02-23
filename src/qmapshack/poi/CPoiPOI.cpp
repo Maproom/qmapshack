@@ -208,7 +208,6 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
         }
         p.restore();
     }
-
     mutex.unlock();
 }
 
@@ -309,9 +308,9 @@ bool CPoiPOI::getToolTip(const QPoint &px, QString &str) const
 void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
 {
     // Open database here so it belongs to the right thread
-    if(!QSqlDatabase::contains(filename))
+    if(!QSqlDatabase::contains(filename + "_widget"))
     {
-        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", filename);
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", filename + "_widget");
         db.setDatabaseName(filename);
         if(!db.open())
         {
@@ -321,7 +320,7 @@ void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
         }
     }
 
-    QSqlQuery query("SELECT id, name, parent FROM main.poi_categories ORDER BY id DESC", QSqlDatabase::database(filename));
+    QSqlQuery query("SELECT id, name, parent FROM main.poi_categories ORDER BY id DESC", QSqlDatabase::database(filename + "_widget"));
 
     QMap<uint, CPoiCategory*> categoryMap;
 
@@ -346,9 +345,6 @@ void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
             categoryMap[categoryID] = new CPoiCategory(categoryName, categoryID, widget);
         }
     }
-
-    //Close it, so it can be reopened from the right thread
-    QSqlDatabase::removeDatabase(filename);
 }
 
 void CPoiPOI::slotCheckedStateChanged(QTreeWidgetItem * item)
@@ -471,6 +467,4 @@ void CPoiPOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
                                   key, categoryNames[categoryID]);
         mutex.unlock();
     }
-    //Close it, so it can be reopened from the right thread
-    QSqlDatabase::removeDatabase(filename);
 }

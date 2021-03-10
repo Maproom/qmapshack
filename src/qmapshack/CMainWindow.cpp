@@ -28,6 +28,7 @@
 #include "gis/db/CSetupWorkspace.h"
 #include "gis/IGisLine.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/proj_x.h"
 #include "gis/rte/router/CRouterBRouter.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/search/CGeoSearchConfig.h"
@@ -1849,21 +1850,37 @@ void CMainWindow::dropEvent(QDropEvent *event)
 
 void CMainWindow::slotSanityTest()
 {
-    projPJ pjsrc = pj_init_plus("+init=epsg:32661");
-    if(pjsrc == nullptr)
+    try
+    {
+        CProj proj("EPSG:4326", "EPSG:32661");
+
+        if(!proj.isValid())
+        {
+            throw QException();
+        }
+
+        QPointF pt(11 * DEG_TO_RAD, 80 * DEG_TO_RAD);
+
+        proj.transform(pt, PJ_FWD);
+        if((qFloor(pt.x()) != 2212361) | (qFloor(pt.y()) != 907496))
+        {
+            throw QException();
+        }
+
+        proj.transform(pt, PJ_INV);
+        if((qRound(pt.x() * RAD_TO_DEG) != 11) | (qRound(pt.y() * RAD_TO_DEG) != 80))
+        {
+            throw QException();
+        }
+        qDebug() << "Sanity test passed.";
+    }
+    catch(const QException& e)
     {
         QMessageBox::critical(this, tr("Fatal...")
-                              , tr("QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.")
+                              , tr("QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.")
                               , QMessageBox::Close);
-
         deleteLater();
-        return;
     }
-
-    pj_free(pjsrc);
-
-
-    qDebug() << "Sanity test passed.";
 }
 
 void CMainWindow::slotHelp()

@@ -21,6 +21,43 @@
 
 #include <proj.h>
 #include <proj_api.h>
+#include <QtCore>
+
+#include <functional>
+
+class CProj
+{
+    Q_DECLARE_TR_FUNCTIONS(CProj)
+public:
+    CProj() = delete;
+    CProj(const char *crsSrc, const char *crsTar);
+    virtual ~CProj();
+
+    void init(const char *crsSrc, const char *crsTar);
+
+    void transform(QPointF& pt, PJ_DIRECTION dir) const;
+    bool isValid()const {return nullptr != pj;}
+    bool isLatLong() const {return _isLatLong;}
+
+    const QString& getProjTar() const {return strProjTar;}
+    const QString& getProjSrc() const {return strProjSrc;}
+
+    using fErrMessage = std::function<void (const QString&)>;
+
+    static bool validProjStr(const QString projStr, bool allowLonLatToo, fErrMessage errMessage);
+
+private:
+    void transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
+
+    PJ * pj = nullptr;
+    bool _isLatLong = false;
+
+    QString strProjSrc;
+    QString strProjTar;
+};
+
+
+
 
 #endif //PROJ_X_H
 

@@ -133,7 +133,7 @@ void CProjWizard::findDatum(const QString& str)
             }
 
             cmp += QString("+a=%1 +b=%2 ").arg(si->dfA, 0, 'f', 4).arg(si->dfA * (1.0 - (1.0 / si->dfInvFlattening)), 0, 'f', 4);
-            cmp += QString("+towgs84=%1,%2,%3,%4,%5,%6,%7,%8 ").arg(di->dfShiftX).arg(di->dfShiftY).arg(di->dfShiftZ).arg(di->dfDatumParm0).arg(di->dfDatumParm1).arg(di->dfDatumParm2).arg(di->dfDatumParm3).arg(di->dfDatumParm4);
+            cmp += QString("+towgs84=%1,%2,%3,%4,%5,%6,%7 ").arg(di->dfShiftX).arg(di->dfShiftY).arg(di->dfShiftZ).arg(di->dfDatumParm0).arg(di->dfDatumParm1).arg(di->dfDatumParm2).arg(di->dfDatumParm3);
             cmp += "+units=m  +no_defs";
         }
 
@@ -164,11 +164,11 @@ void CProjWizard::slotChange()
     }
     else if(radioUPSNorth->isChecked())
     {
-        str += "+init=epsg:32661";
+        str += "EPSG:32661";
     }
     else if(radioUPSSouth->isChecked())
     {
-        str += "+init=epsg:32761";
+        str += "EPSG:32761";
     }
     else if(radioUTM->isChecked())
     {
@@ -194,7 +194,7 @@ void CProjWizard::slotChange()
         }
 
         str += QString("+a=%1 +b=%2 ").arg(si->dfA, 0, 'f', 4).arg(si->dfA * (1.0 - (1.0 / si->dfInvFlattening)), 0, 'f', 4);
-        str += QString("+towgs84=%1,%2,%3,%4,%5,%6,%7,%8 ").arg(di.dfShiftX).arg(di.dfShiftY).arg(di.dfShiftZ).arg(di.dfDatumParm0).arg(di.dfDatumParm1).arg(di.dfDatumParm2).arg(di.dfDatumParm3).arg(di.dfDatumParm4);
+        str += QString("+towgs84=%1,%2,%3,%4,%5,%6,%7 ").arg(di.dfShiftX).arg(di.dfShiftY).arg(di.dfShiftZ).arg(di.dfDatumParm0).arg(di.dfDatumParm1).arg(di.dfDatumParm2).arg(di.dfDatumParm3);
         str += "+units=m  +no_defs";
     }
 
@@ -215,25 +215,9 @@ void CProjWizard::accept()
 
 bool CProjWizard::validProjStr(const QString projStr, bool allowLonLatToo)
 {
-    projPJ projCheck = pj_init_plus(projStr.toUtf8().data());
-
-    if (!projCheck)
-    {   /* For some reason pj_errno does not work as expected in some versions of Visual Studio, so using pj_get_errno_ref instead */
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr).arg(pj_strerrno(*pj_get_errno_ref())), QMessageBox::Abort, QMessageBox::Abort);
-        return false;
-    }
-    else
-    {
-        bool res = true;
-        if(!allowLonLatToo && pj_is_latlong(projCheck))
-        {
-            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Lat/Lon projection is not allowed in this case."), QMessageBox::Abort, QMessageBox::Abort);
-            res = false;
-        }
-
-        pj_free(projCheck);
-        return res;
-    }
+    return CProj::validProjStr(projStr, allowLonLatToo, [](const QString& msg){
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), msg, QMessageBox::Abort, QMessageBox::Abort);
+    });
 }
 
 

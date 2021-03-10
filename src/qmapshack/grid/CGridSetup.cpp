@@ -31,11 +31,11 @@ CGridSetup::CGridSetup(CGrid *grid, CMapDraw * map)
 {
     setupUi(this);
 
-    lineProjection->setText(grid->projstr);
+    lineProjection->setText(grid->getGridProjString());
     lineProjection->setCursorPosition(0);
 
     QPalette palette = labelGridColor->palette();
-    palette.setColor(labelGridColor->foregroundRole(), grid->color);
+    palette.setColor(labelGridColor->foregroundRole(), grid->getColor());
     labelGridColor->setPalette(palette);
 
     connect(toolRestoreDefault, &QToolButton::clicked, this, &CGridSetup::slotRestoreDefault);

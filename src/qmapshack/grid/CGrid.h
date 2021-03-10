@@ -39,21 +39,20 @@ public:
 
     void draw(QPainter& p, const QRect &rect);
 
-    void setProjAndColor(const QString& proj, const QColor& c);
+    void setProjAndColor(const QString& projStr, const QColor& c);
+
+    const QColor& getColor(){return color;}
+    const QString getGridProjString(){return proj.getProjTar();}
 
     void convertPos2Str(const QPointF& pos, QString& info, bool simple);
 
 private:
-    friend class CGridSetup;
     void findGridSpace(qreal min, qreal max, qreal& xSpace, qreal& ySpace);
     bool calcIntersection(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4, qreal& x, qreal& y);
 
     CMapDraw * map;
 
-    projPJ pjWGS84 = nullptr;
-    projPJ pjGrid  = nullptr;
-
-    QString projstr = "+proj=longlat +datum=WGS84 +no_defs";
+    CProj proj = { "EPSG:4326",  "EPSG:4326"};
     QColor color = Qt::magenta;
 };
 

@@ -30,27 +30,25 @@ CGrid::CGrid(CMapDraw *map)
     : QObject(map)
     , map(map)
 {
-    pjWGS84 = pj_init_plus("+proj=longlat +datum=WGS84 +no_defs");
-    setProjAndColor(projstr, color);
 }
 
 CGrid::~CGrid()
 {
-    pj_free(pjWGS84);
-    pj_free(pjGrid);
 }
 
 void CGrid::convertPos2Str(const QPointF& pos, QString& info, bool simple)
 {
-    if(pjGrid == nullptr)
+    if(!proj.isValid())
     {
         return;
     }
 
-    QPointF pt = pos * DEG_TO_RAD;
-    pj_transform(pjWGS84, pjGrid, 1, 0, &pt.rx(), &pt.ry(), 0);
+    QPointF pt = pos;
 
-    if(pj_is_latlong(pjGrid))
+    pt *= DEG_TO_RAD;
+    proj.transform(pt, PJ_FWD);
+
+    if(proj.isLatLong())
     {
         QString lat, lng;
         pt *= RAD_TO_DEG;
@@ -81,27 +79,20 @@ void CGrid::convertPos2Str(const QPointF& pos, QString& info, bool simple)
 void CGrid::saveConfig(QSettings& cfg)
 {
     cfg.setValue("grid/color", color.name());
-    cfg.setValue("grid/proj", projstr);
+    cfg.setValue("grid/proj", proj.getProjTar());
 }
 
 void CGrid::loadConfig(QSettings& cfg)
 {
     color   = QColor(cfg.value("grid/color", color.name()).toString());
-    projstr = cfg.value("grid/proj", projstr).toString();
-    setProjAndColor(projstr, color);
+    setProjAndColor(cfg.value("grid/proj", "EPSG:4326").toString(), color);
 }
 
 
-void CGrid::setProjAndColor(const QString& proj, const QColor& c)
+void CGrid::setProjAndColor(const QString& projStr, const QColor& c)
 {
-    projstr = proj;
     color   = c;
-
-    if(nullptr != pjGrid)
-    {
-        pj_free(pjGrid);
-    }
-    pjGrid  = pj_init_plus(projstr.toLatin1());
+    proj.init("EPSG:4326", projStr.toLatin1());
 }
 
 void CGrid::findGridSpace(qreal min, qreal max, qreal& xSpace, qreal& ySpace)
@@ -220,7 +211,7 @@ struct val_t
 
 void CGrid::draw(QPainter& p, const QRect& rect)
 {
-    if(pjWGS84 == nullptr || pjGrid == nullptr || !CMainWindow::self().isGridVisible())
+    if(!proj.isValid() || !CMainWindow::self().isGridVisible())
     {
         return;
     }
@@ -235,10 +226,10 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     map->convertPx2Rad(btmLeft);
     map->convertPx2Rad(btmRight);
 
-    pj_transform(pjWGS84, pjGrid, 1, 0, &topLeft.rx(), &topLeft.ry(), 0);
-    pj_transform(pjWGS84, pjGrid, 1, 0, &topRight.rx(), &topRight.ry(), 0);
-    pj_transform(pjWGS84, pjGrid, 1, 0, &btmLeft.rx(), &btmLeft.ry(), 0);
-    pj_transform(pjWGS84, pjGrid, 1, 0, &btmRight.rx(), &btmRight.ry(), 0);
+    proj.transform(topLeft, PJ_FWD);
+    proj.transform(topRight, PJ_FWD);
+    proj.transform(btmLeft, PJ_FWD);
+    proj.transform(btmRight, PJ_FWD);
 
     //    qDebug() << "---";
     //    qDebug() << "topLeft " << topLeft.u  << topLeft.v;
@@ -267,7 +258,7 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     qreal x = xStart - xGridSpace;
     qreal y = yStart + yGridSpace;
 
-    if(pj_is_latlong(pjGrid))
+    if(proj.isLatLong())
     {
         if(y > (85 * DEG_TO_RAD))
         {
@@ -317,10 +308,10 @@ void CGrid::draw(QPainter& p, const QRect& rect)
             qreal xVal = p1.x();
             qreal yVal = p1.y();
 
-            pj_transform(pjGrid, pjWGS84, 1, 0, &p1.rx(), &p1.ry(), 0);
-            pj_transform(pjGrid, pjWGS84, 1, 0, &p2.rx(), &p2.ry(), 0);
-            pj_transform(pjGrid, pjWGS84, 1, 0, &p3.rx(), &p3.ry(), 0);
-            pj_transform(pjGrid, pjWGS84, 1, 0, &p4.rx(), &p4.ry(), 0);
+            proj.transform(p1, PJ_INV);
+            proj.transform(p2, PJ_INV);
+            proj.transform(p3, PJ_INV);
+            proj.transform(p4, PJ_INV);
 
 //            qDebug() << (p1 * RAD_TO_DEG) << (p2 * RAD_TO_DEG) << (p3 * RAD_TO_DEG) << (p4 * RAD_TO_DEG);
 
@@ -363,7 +354,7 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     QColor textColor;
     textColor.setHsv(color.hslHue(), color.hsvSaturation(), (color.value() > 128 ? color.value() - 128 : 0));
 
-    if(pj_is_latlong(pjGrid))
+    if(proj.isLatLong())
     {
         QFontMetrics fm(CMainWindow::self().getMapFont());
         int yoff  = fm.height() + fm.ascent();

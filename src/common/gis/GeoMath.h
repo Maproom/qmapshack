@@ -19,13 +19,48 @@
 
 #ifndef GEOMATH_H
 #define GEOMATH_H
+#include <QPointF>
+#include <QRectF>
+#include <QString>
 
-#include <QtGlobal>
 #include <stdint.h>
+
+class QPolygonF;
+class IDrawContext;
+
+struct point3D
+{
+    point3D() {}
+
+    point3D(const qreal &x, const qreal &y, const qreal &z)
+        : x(x), y(y), z(z) {}
+
+    qreal x = 0;
+    qreal y = 0;
+    qreal z = 0;
+};
+
+struct pointDP : public point3D
+{
+    pointDP();
+    pointDP(const qreal &x, const qreal &y, const qreal &z);
+    bool used;
+    qint32 idx;
+};
 
 void    GPS_Math_DegMin_To_Deg(bool sign, const qint32 d, const qreal m, qreal& deg);
 void    GPS_Math_DegMinSec_To_Deg(bool sign, const qint32 d, const qint32 m, const qreal s, qreal& deg);
 bool    GPS_Math_Deg_To_DegMin(qreal v, qint32 *deg, qreal *min);
+/// use for long distances
+qreal   GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2, qreal& a1, qreal& a2);
+qreal   GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2);
+/// use for short distances, much quicker processing
+qreal   GPS_Math_DistanceQuick(const qreal u1, const qreal v1, const qreal u2, const qreal v2);
+void    GPS_Math_DouglasPeucker(QVector<pointDP>& line, qreal d);
+QPointF GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qreal bearing);
+bool    GPS_Math_LineCrossesRect(const QPointF& p1, const QPointF& p2, const QRectF& rect);
+qreal   GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q);
+qreal   GPS_Math_DistPointPolyline(const QPolygonF& line, const QPointF& pt, qreal threshold);
 
 #endif                           //GEOMATH_H
 

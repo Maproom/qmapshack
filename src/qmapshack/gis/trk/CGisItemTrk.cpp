@@ -29,7 +29,7 @@
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"

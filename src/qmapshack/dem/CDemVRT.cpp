@@ -20,7 +20,7 @@
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemVRT.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 

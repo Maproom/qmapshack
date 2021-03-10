@@ -19,7 +19,7 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "gis/Poi.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"

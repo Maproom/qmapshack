@@ -19,7 +19,7 @@
 #include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 
 #include <QtWidgets>
 

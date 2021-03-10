@@ -17,7 +17,7 @@
 
 **********************************************************************************************/
 #include "CMainWindow.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "units/CUnitImperial.h"
 #include "units/CUnitMetric.h"
 #include "units/CUnitNautic.h"

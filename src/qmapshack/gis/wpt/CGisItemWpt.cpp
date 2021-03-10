@@ -29,7 +29,7 @@
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CScrOptWptRadius.h"
 #include "gis/wpt/CSetupIconAndName.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"

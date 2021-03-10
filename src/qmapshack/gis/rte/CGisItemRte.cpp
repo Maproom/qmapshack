@@ -28,7 +28,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CDraw.h"
 #include "helpers/CWptIconManager.h"

@@ -18,13 +18,13 @@
 
 #include "canvas/IDrawContext.h"
 #include "CMainWindow.h"
+#include "gis/proj_x.h"
 #include "helpers/CSettings.h"
 #include "items/CItemRefMap.h"
 #include "overlay/COverlayGridTool.h"
 #include "overlay/refmap/COverlayRefMapPoint.h"
 #include "overlay/refmap/CProjWizard.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
 COverlayGridTool::COverlayGridTool(QWidget *parent)
@@ -130,7 +130,7 @@ void COverlayGridTool::slotCheckInput()
     radioGridPlacer->setEnabled(group1Ok);
 
     bool group2Ok = widgetGridPlacer->isOk();
-    radioSelectArea->setEnabled(group2Ok&& group1Ok);
+    radioSelectArea->setEnabled(group2Ok && group1Ok);
 
     const QPointF& p1 = widgetGridPlacer->getPoint(0);
     const QPointF& p2 = widgetGridPlacer->getPoint(1);
@@ -158,7 +158,7 @@ bool COverlayGridTool::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     {
         widgetSelectArea->drawFx(p, needsRedraw);
 
-        QRectF dot1(0,0,7,7);
+        QRectF dot1(0, 0, 7, 7);
         p.setPen(QPen(Qt::white, 1));
         p.setBrush(Qt::darkGreen);
 
@@ -278,8 +278,8 @@ void COverlayGridTool::slotCalculate()
     qreal dx1       = (dx11 + dx12) / 2;
     qreal dy1       = (dy11 + dy12) / 2;
 
-    qreal alpha     = qAtan(dy1/dx1);
-    qreal distx     = qSqrt(dx1*dx1 + dy1*dy1);
+    qreal alpha     = qAtan(dy1 / dx1);
+    qreal distx     = qSqrt(dx1 * dx1 + dy1 * dy1);
 
     qreal dx21      = ptBottomLeft.x() - ptTopLeft.x();
     qreal dy21      = ptBottomLeft.y() - ptTopLeft.y();
@@ -288,7 +288,7 @@ void COverlayGridTool::slotCalculate()
     qreal dx2       = (dx21 + dx22) / 2;
     qreal dy2       = (dy21 + dy22) / 2;
 
-    qreal disty     = qSqrt(dx2*dx2 + dy2*dy2);
+    qreal disty     = qSqrt(dx2 * dx2 + dy2 * dy2);
 
     QMatrix translationMatrix(1, 0, 0, 1, ptTopLeft.x(), ptTopLeft.y());
     QMatrix rotationMatrix(qCos(alpha), qSin(alpha), -qSin(alpha), qCos(alpha), 0, 0);
@@ -319,7 +319,7 @@ void COverlayGridTool::slotCalculate()
     {
         for(int x =  xMin; x < xMax; x++)
         {
-            QPointF ptPtx = mxFwd.map(QPointF(x,y));
+            QPointF ptPtx = mxFwd.map(QPointF(x, y));
             if(area.contains(ptPtx))
             {
                 ptPtx.rx() = qRound(ptPtx.x());
@@ -338,7 +338,7 @@ void COverlayGridTool::slotCalculate()
                 lon *= RAD_TO_DEG;
                 lat *= RAD_TO_DEG;
 
-                refPoints << new COverlayRefMapPoint(0, QPointF(lon,lat), ptPtx, nullptr);
+                refPoints << new COverlayRefMapPoint(0, QPointF(lon, lat), ptPtx, nullptr);
             }
         }
     }

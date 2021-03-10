@@ -50,9 +50,9 @@ public:
     enum mode_e
     {
         eModeNone
-        ,eModePointMove
-        ,eModePointAdd
-        ,eModePointDel
+        , eModePointMove
+        , eModePointAdd
+        , eModePointDel
     };
 
     void saveShape(const QString& filename);

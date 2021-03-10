@@ -59,7 +59,7 @@ bool CGridPoint::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
         QPointF pt = ptPoint;
         context->convertMap2Screen(pt);
 
-        QRectF dot1(0,0,7,7);
+        QRectF dot1(0, 0, 7, 7);
         dot1.moveCenter(pt);
 
         if(state == eStateHighlight)

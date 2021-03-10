@@ -16,15 +16,11 @@
 
 **********************************************************************************************/
 
-#ifndef CLASSNAME_H
-#define CLASSNAME_H
+#ifndef PROJ_X_H
+#define PROJ_X_H
 
-class CLASSNAME
-{
-    public:
-        CLASSNAME();
-        virtual ~CLASSNAME() = default;
-};
+#include <proj.h>
+#include <proj_api.h>
 
-#endif //CLASSNAME_H
+#endif //PROJ_X_H
 

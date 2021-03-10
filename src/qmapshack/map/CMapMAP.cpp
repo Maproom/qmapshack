@@ -17,11 +17,11 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/proj_x.h"
 #include "helpers/CFileExt.h"
 #include "map/CMapDraw.h"
 #include "map/CMapMAP.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
 #define INT_TO_DEG(x) (qreal(x) / 1e6)

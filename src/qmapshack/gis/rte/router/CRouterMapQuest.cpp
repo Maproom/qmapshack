@@ -19,12 +19,11 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/proj_x.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterMapQuest.h"
 #include "helpers/CSettings.h"
 
-
-#include <proj_api.h>
 #include <QtNetwork>
 #include <QtWidgets>
 const QByteArray CRouterMapQuest::keyMapQuest = "Fmjtd%7Cluu2n16t2h%2Crw%3Do5-haya0";

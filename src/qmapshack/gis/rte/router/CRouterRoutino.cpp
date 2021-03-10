@@ -19,13 +19,14 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/proj_x.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/routino/CRouterRoutinoPathSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
-#include <proj_api.h>
+
 #include <QtWidgets>
 #include <routino.h>
 

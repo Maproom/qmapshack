@@ -32,7 +32,7 @@ void CAppSetupMac::extendPath()
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     QStringList envlist = env.toStringList();
     QString value = "";
-    for(int i=0; i < envlist.size(); i++)
+    for(int i = 0; i < envlist.size(); i++)
     {
         QString entry = envlist[i];
         if(entry.startsWith("PATH="))
@@ -41,7 +41,7 @@ void CAppSetupMac::extendPath()
 
             if(index != -1)
             {
-                value = entry.right(entry.length() - (index+1)) + ":";
+                value = entry.right(entry.length() - (index + 1)) + ":";
             }
             break;
         }
@@ -131,7 +131,7 @@ void CAppSetupMac::migrateDirContent(QString dest)
         wdir.mkdir(newdir);
         qDebug() << "directory created" << newdir;
 
-        qDebug() << "migrate data from "<<dirSource.absolutePath() << "to" << dirDest.absolutePath();
+        qDebug() << "migrate data from " << dirSource.absolutePath() << "to" << dirDest.absolutePath();
         QDir mvDir;
         if(!mvDir.rename(dirSource.absolutePath(), dirDest.absolutePath()))
         {

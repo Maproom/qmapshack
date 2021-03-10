@@ -5,11 +5,12 @@ set(APPLICATION_NAME qmt_map2jnx)
 
 #if you don't want the full compiler output, remove the following line
 SET(CMAKE_VERBOSE_MAKEFILE ON)
-SET(SRCS main.cpp argv.cpp)
-SET(HDRS argv.h)
+SET(SRCS main.cpp argv.cpp ../common/gis/proj_x.cpp)
+SET(HDRS argv.h ../common/gis/proj_x.h)
 
 
 include_directories(
+  ../common
   ${CMAKE_BINARY_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
   ${GDAL_INCLUDE_DIRS}

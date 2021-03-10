@@ -19,7 +19,8 @@
 #ifndef CGRID_H
 #define CGRID_H
 
-#include <proj_api.h>
+#include "gis/proj_x.h"
+
 #include <QColor>
 #include <QObject>
 class QPainter;

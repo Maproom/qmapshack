@@ -20,13 +20,13 @@
 #ifndef CCANVAS_H
 #define CCANVAS_H
 
-#include <proj_api.h>
+#include "gis/IGisItem.h"
+#include "gis/proj_x.h"
+
 #include <QMap>
 #include <QPainter>
 #include <QPointer>
 #include <QWidget>
-
-#include "gis/IGisItem.h"
 
 class IDrawContext;
 class CMapDraw;

@@ -19,8 +19,8 @@
 #ifndef IDRAWOBJECT_H
 #define IDRAWOBJECT_H
 
+#include "gis/proj_x.h"
 #include "units/IUnit.h"
-#include <proj_api.h>
 #include <QObject>
 
 class QSettings;

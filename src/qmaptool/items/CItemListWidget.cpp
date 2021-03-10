@@ -71,7 +71,7 @@ void CItemListWidget::loadSettings(QSettings& cfg)
         }
     }
 
-    listFiles->setCurrentRow(cfg.value("lastFile",0).toInt());
+    listFiles->setCurrentRow(cfg.value("lastFile", 0).toInt());
 }
 
 IItem * CItemListWidget::currentItem()
@@ -109,7 +109,7 @@ void CItemListWidget::slotFiles()
     cfg.setValue("Path/mapInput", QFileInfo(files.first()).absolutePath());
     addFiles(files);
 
-    if(listFiles->count() && (listFiles->currentItem() ==nullptr))
+    if(listFiles->count() && (listFiles->currentItem() == nullptr))
     {
         listFiles->setCurrentRow(0);
     }

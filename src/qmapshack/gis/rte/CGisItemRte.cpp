@@ -23,18 +23,18 @@
 #include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
+#include "gis/GeoMath.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/proj_x.h"
 #include "gis/rte/CDetailsRte.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CDraw.h"
 #include "helpers/CWptIconManager.h"
 #include "units/IUnit.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 #include <QtXml>
 

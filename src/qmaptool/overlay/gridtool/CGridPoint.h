@@ -54,9 +54,9 @@ private:
     enum state_e
     {
         eStateNotSet
-        ,eStateSet
-        ,eStateHighlight
-        ,eStateMove
+        , eStateSet
+        , eStateHighlight
+        , eStateMove
     };
 
     state_e state                   = eStateNotSet;

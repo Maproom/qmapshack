@@ -19,13 +19,12 @@
 #include "canvas/IDrawContext.h"
 #include "CMainWindow.h"
 #include "CToolRefMap.h"
+#include "gis/proj_x.h"
 #include "helpers/CSettings.h"
 #include "items/CItemRefMap.h"
 #include "overlay/refmap/COverlayRefMapPoint.h"
 #include "setup/IAppSetup.h"
 #include "shell/CShell.h"
-
-#include <proj_api.h>
 
 CToolRefMap::CToolRefMap(QWidget *parent)
     : IToolGui(parent)
@@ -59,7 +58,7 @@ CToolRefMap::CToolRefMap(QWidget *parent)
     checkCreateVrt->setChecked(cfg.value("createVrt", false).toBool());
     groupOverviews->loadSettings(cfg);
     checkAllFiles->setChecked(cfg.value("allFiles", false).toBool());
-    lineSuffix->setText(cfg.value("suffix","_ref").toString());
+    lineSuffix->setText(cfg.value("suffix", "_ref").toString());
     cfg.endGroup();
 
     slotSomethingChanged();
@@ -163,8 +162,8 @@ void CToolRefMap::buildCmd(QList<CShellCmd>& cmds, const IItem *iitem)
         args << QString::number(pt->getPtPtx().x());
         args << QString::number(pt->getPtPtx().y());
 
-        args << QString::number(lon,'f',6);
-        args << QString::number(lat,'f',6);
+        args << QString::number(lon, 'f', 6);
+        args << QString::number(lat, 'f', 6);
         args << "0";
     }
 

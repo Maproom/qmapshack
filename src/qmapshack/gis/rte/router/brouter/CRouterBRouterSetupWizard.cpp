@@ -18,12 +18,13 @@
 
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
+#include "gis/proj_x.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
 #include "helpers/CWebPage.h"
 #include "setup/IAppSetup.h"
+
 #include <JlCompress.h>
-#include <proj_api.h>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QNetworkReply>

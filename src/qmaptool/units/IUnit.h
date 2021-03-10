@@ -88,9 +88,9 @@ public:
     enum tz_mode_e
     {
         eTZUtc
-        ,eTZLocal
-        ,eTZAuto
-        ,eTZSelected
+        , eTZLocal
+        , eTZAuto
+        , eTZSelected
     };
 
     static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone, bool& format)
@@ -110,8 +110,8 @@ public:
     enum coord_format_e
     {
         eCoordFormat1
-        ,eCoordFormat2
-        ,eCoordFormat3
+        , eCoordFormat2
+        , eCoordFormat3
     };
 
     static enum coord_format_e getCoordFormat()

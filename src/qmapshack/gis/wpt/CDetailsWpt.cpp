@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "gis/proj_x.h"
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CElevationDialog.h"
@@ -26,7 +27,6 @@
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
 CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)

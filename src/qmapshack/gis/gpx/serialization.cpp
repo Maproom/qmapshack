@@ -20,6 +20,7 @@
 #include "device/CDeviceGarmin.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/proj_x.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
@@ -27,7 +28,6 @@
 #include "helpers/CWptIconManager.h"
 #include "version.h"
 
-#include <proj_api.h>
 #include <QtXml>
 
 const QString IGisProject::gpx_ns    = "http://www.topografix.com/GPX/1/1";

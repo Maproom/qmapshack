@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/proj_x.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
@@ -26,7 +27,7 @@
 #include "units/IUnit.h"
 
 #include <interpolation.h>
-#include <proj_api.h>
+
 
 CPlotProfile::CPlotProfile(QWidget * parent)
     : IPlot(nullptr, CPlotData::eAxisLinear, eModeNormal, parent)

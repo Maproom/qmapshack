@@ -40,12 +40,12 @@ IAppSetup& IAppSetup::self()
 IAppSetup::~IAppSetup()
 {
     SETTINGS;
-    cfg.setValue("ExtTools/pathGdaladdoOverride",pathGdaladdoOverride);
-    cfg.setValue("ExtTools/pathGdaltranslateOverride",pathGdaltranslateOverride);
-    cfg.setValue("ExtTools/pathGdalwarpOverride",pathGdalwarpOverride);
-    cfg.setValue("ExtTools/pathGdalbuildvrtOverride",pathGdalbuildvrtOverride);
-    cfg.setValue("ExtTools/pathQmtrgb2pctOverride",pathQmtrgb2pctOverride);
-    cfg.setValue("ExtTools/pathQmtmap2jnxOverride",pathQmtmap2jnxOverride);
+    cfg.setValue("ExtTools/pathGdaladdoOverride", pathGdaladdoOverride);
+    cfg.setValue("ExtTools/pathGdaltranslateOverride", pathGdaltranslateOverride);
+    cfg.setValue("ExtTools/pathGdalwarpOverride", pathGdalwarpOverride);
+    cfg.setValue("ExtTools/pathGdalbuildvrtOverride", pathGdalbuildvrtOverride);
+    cfg.setValue("ExtTools/pathQmtrgb2pctOverride", pathQmtrgb2pctOverride);
+    cfg.setValue("ExtTools/pathQmtmap2jnxOverride", pathQmtmap2jnxOverride);
 }
 
 IAppSetup& IAppSetup::createInstance(QObject * parent)
@@ -76,9 +76,9 @@ void IAppSetup::prepareToolPaths()
     pathQmtmap2jnx      = this->findExecutable("qmt_map2jnx");
 
     SETTINGS;
-    pathGdaladdoOverride        = cfg.value("ExtTools/pathGdaladdoOverride",pathGdaladdoOverride).toString();
-    pathGdaltranslateOverride   = cfg.value("ExtTools/pathGdaltranslateOverride",pathGdaltranslateOverride).toString();
-    pathGdalwarpOverride        = cfg.value("ExtTools/pathGdalwarpOverride",pathGdalwarpOverride).toString();
+    pathGdaladdoOverride        = cfg.value("ExtTools/pathGdaladdoOverride", pathGdaladdoOverride).toString();
+    pathGdaltranslateOverride   = cfg.value("ExtTools/pathGdaltranslateOverride", pathGdaltranslateOverride).toString();
+    pathGdalwarpOverride        = cfg.value("ExtTools/pathGdalwarpOverride", pathGdalwarpOverride).toString();
     pathGdalbuildvrtOverride    = cfg.value("ExtTools/pathGdalbuildvrtOverride", pathGdalbuildvrtOverride).toString();
     pathQmtrgb2pctOverride      = cfg.value("ExtTools/pathQmtrgb2pctOverride", pathQmtrgb2pctOverride).toString();
     pathQmtmap2jnxOverride      = cfg.value("ExtTools/pathQmtmap2jnxOverride", pathQmtmap2jnxOverride).toString();
@@ -138,11 +138,11 @@ void IAppSetup::prepareTranslator(QString translationPath, QString translationPr
     if (qtTranslator->load(translationPrefix + locale, translationPath))
     {
         app->installTranslator(qtTranslator);
-        qDebug() << "using file '"+ translationPath + "/" + translationPrefix + locale + ".qm' for translations.";
+        qDebug() << "using file '" + translationPath + "/" + translationPrefix + locale + ".qm' for translations.";
     }
     else
     {
-        qWarning() << "no file found for translations '"+ translationPath + "/" + translationPrefix + locale + "' (using default).";
+        qWarning() << "no file found for translations '" + translationPath + "/" + translationPrefix + locale + "' (using default).";
     }
 }
 

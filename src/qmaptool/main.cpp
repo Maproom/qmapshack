@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
 
         p.setPen(Qt::black);
         p.setFont(f);
-        p.drawText(260,195,"QMapTool, V " VER_STR);
+        p.drawText(260, 195, "QMapTool, V " VER_STR);
 
         splash = new QSplashScreen(pic);
 #ifdef Q_OS_MAC

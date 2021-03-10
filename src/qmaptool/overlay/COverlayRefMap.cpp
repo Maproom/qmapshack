@@ -113,7 +113,7 @@ void COverlayRefMap::loadSettings(QSettings& cfg)
         QPointF ptPtx;
         QPointF ptRef;
         stream >> ptPtx >> ptRef;
-        new COverlayRefMapPoint(n+1, ptRef, ptPtx, treeWidget);
+        new COverlayRefMapPoint(n + 1, ptRef, ptPtx, treeWidget);
     }
 
     updateGui();
@@ -181,7 +181,7 @@ const QList<COverlayRefMapPoint*> COverlayRefMap::getRefPoints() const
 
 bool COverlayRefMap::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
 {
-    QRectF dot1(0,0,5,5);
+    QRectF dot1(0, 0, 5, 5);
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
@@ -671,8 +671,8 @@ void COverlayRefMap::slotLoadGcp()
         {
             if(re1.exactMatch(line))
             {
-                QPointF ptPtx(re1.cap(1).toDouble(),re1.cap(2).toDouble());
-                QPointF ptRef(re1.cap(4).toDouble(),re1.cap(3).toDouble());
+                QPointF ptPtx(re1.cap(1).toDouble(), re1.cap(2).toDouble());
+                QPointF ptRef(re1.cap(4).toDouble(), re1.cap(3).toDouble());
                 new COverlayRefMapPoint(cnt++, ptRef, ptPtx, treeWidget);
             }
 
@@ -691,7 +691,7 @@ void COverlayRefMap::slotLoadGcp()
 
 void COverlayRefMap::slotResetRef()
 {
-    int res = QMessageBox::question(this, tr("Delete all reference points..."), tr("Are you sure to delete all reference points in the list?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+    int res = QMessageBox::question(this, tr("Delete all reference points..."), tr("Are you sure to delete all reference points in the list?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     if(res != QMessageBox::Yes)
     {
         return;
@@ -726,7 +726,7 @@ void COverlayRefMap::slotDelRefPoints()
     const QList<QTreeWidgetItem*>items = treeWidget->selectedItems();
     if(items.count() > 1)
     {
-        int res = QMessageBox::question(this, tr("Delete..."), tr("Delete all selected reference points?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+        int res = QMessageBox::question(this, tr("Delete..."), tr("Delete all selected reference points?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
         if(res != QMessageBox::Yes)
         {
             return;

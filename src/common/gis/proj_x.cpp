@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2020 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,51 +16,7 @@
 
 **********************************************************************************************/
 
-#ifndef ITRACK_H
-#define ITRACK_H
-
 #include "gis/proj_x.h"
-#include "gis/trk/CTrackData.h"
 
-#include <QImage>
-#include <QPolygonF>
 
-class QRectF;
-class QPainter;
-class CGisItemTrk;
-
-class ITrack
-{
-public:
-    ITrack();
-    virtual ~ITrack();
-
-    void setSize(int w, int h);
-    void setTrack(CGisItemTrk * track);
-    void setTrack(const QPolygonF &track);
-
-    void save(QImage& image, const CTrackData::trkpt_t *pTrkpt);
-
-protected:
-    void setupProjection(const QRectF &boundingBox);
-    void updateData();
-    void draw(QPainter& p);
-    void draw();
-
-    projPJ pjsrc = nullptr;
-    projPJ pjtar = nullptr;
-
-    bool needsRedraw = true;
-    CGisItemTrk * trk = nullptr;
-    QPolygonF coords;
-    QPolygonF line;
-
-    QImage buffer;
-
-    QPointF scale;
-    qint32 xoff = 0;
-    qint32 yoff = 0;
-};
-
-#endif //ITRACK_H
 

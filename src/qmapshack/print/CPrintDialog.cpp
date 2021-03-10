@@ -21,7 +21,7 @@
 #include "gis/CGisWorkspace.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"

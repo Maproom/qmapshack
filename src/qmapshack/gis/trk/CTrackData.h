@@ -2,7 +2,7 @@
 #define TRACKDATA_H
 
 #include "gis/IGisItem.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include <functional>
 #include <proj_api.h>
 #include <QPoint>

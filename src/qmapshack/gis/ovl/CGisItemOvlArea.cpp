@@ -23,7 +23,7 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
 #include "gis/prj/IGisProject.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 
 #include <proj_api.h>

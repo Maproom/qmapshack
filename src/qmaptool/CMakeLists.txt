@@ -25,7 +25,6 @@ set( SRCS
     canvas/IDrawContext.cpp
     CMainWindow.cpp
     CSingleInstanceProxy.cpp
-    GeoMath.cpp
     helpers/CDraw.cpp
     helpers/CGdalFile.cpp
     helpers/mitab.cpp
@@ -81,6 +80,7 @@ set( SRCS
     ../common/help/CHelpBrowser.cpp
     ../common/help/CHelpIndex.cpp
     ../common/help/CHelpSearch.cpp
+    ../common/gis/GeoMath.cpp
 )
 
 set( HDRS
@@ -91,7 +91,6 @@ set( HDRS
     canvas/IDrawContext.h
     CMainWindow.h
     CSingleInstanceProxy.h
-    GeoMath.h
     helpers/CDraw.h
     helpers/CGdalFile.h
     helpers/CSettings.h
@@ -150,6 +149,7 @@ set( HDRS
     ../common/help/CHelpBrowser.h
     ../common/help/CHelpIndex.h
     ../common/help/CHelpSearch.h
+    ../common/gis/GeoMath.h
 )
 
 set( UIS

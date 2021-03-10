@@ -19,7 +19,7 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "grid/CGrid.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"

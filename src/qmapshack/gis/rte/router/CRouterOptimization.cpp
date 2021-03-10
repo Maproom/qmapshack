@@ -17,9 +17,9 @@
 **********************************************************************************************/
 
 #include "CRouterOptimization.h"
-#include <gis/rte/router/CRouterSetup.h>
-#include <GeoMath.h>
-#include <helpers/CProgressDialog.h>
+#include "gis/GeoMath.h"
+#include "gis/rte/router/CRouterSetup.h"
+#include "helpers/CProgressDialog.h"
 
 CRouterOptimization::CRouterOptimization()
 {

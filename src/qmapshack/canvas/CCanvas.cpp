@@ -30,7 +30,7 @@
 #include "gis/trk/CTableTrkInfo.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"

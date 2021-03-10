@@ -26,7 +26,6 @@ set( SRCS
     CAbout.cpp    
     CMainWindow.cpp
     CSingleInstanceProxy.cpp
-    GeoMath.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
     canvas/CCanvasSelect.cpp
@@ -344,6 +343,7 @@ set( SRCS
     ../common/help/CHelpBrowser.cpp
     ../common/help/CHelpIndex.cpp
     ../common/help/CHelpSearch.cpp
+    ../common/gis/GeoMath.cpp
 )
 
 
@@ -374,7 +374,6 @@ set( HDRS
     CAbout.h
     CMainWindow.h
     CSingleInstanceProxy.h
-    GeoMath.h
     contributors.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
@@ -700,6 +699,7 @@ set( HDRS
     ../common/help/CHelpBrowser.h
     ../common/help/CHelpIndex.h
     ../common/help/CHelpSearch.h
+    ../common/gis/GeoMath.h
 )
 
 

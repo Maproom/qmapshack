@@ -23,7 +23,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 
 #include <proj_api.h>
 #include <QLineF>

@@ -23,7 +23,7 @@
 #include "gis/IGisLine.h"
 #include "gis/rte/router/CRouterOptimization.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "mouse/CMouseAdapter.h"

@@ -20,14 +20,14 @@
 #define IDRAWCONTEXT_H
 
 
-#include <proj_api.h>
+#include "canvas/CCanvas.h"
+#include "gis/proj_x.h"
+
 #include <QImage>
 #include <QMutex>
 #include <QPointF>
 #include <QThread>
 
-
-#include "canvas/CCanvas.h"
 
 #define CANVAS_MAX_ZOOM_LEVELS 31
 

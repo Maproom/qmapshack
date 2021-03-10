@@ -20,7 +20,9 @@
 #include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/GeoMath.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/proj_x.h"
 #include "gis/trk/CCutTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -29,13 +31,11 @@
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "misc.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 #include <QtXml>
 

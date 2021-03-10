@@ -21,7 +21,8 @@
 
 #include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
-#include <proj_api.h>
+#include "gis/proj_x.h"
+
 #include <QImage>
 #include <QMutex>
 #include <QPointer>

@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "gis/CGisListWks.h"
 #include "gis/gpx/CGpxProject.h"
+#include "gis/proj_x.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/tnv/CTwoNavProject.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -26,7 +27,6 @@
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSettings.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
 

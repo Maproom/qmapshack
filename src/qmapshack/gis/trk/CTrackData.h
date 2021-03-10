@@ -1,10 +1,11 @@
 #ifndef TRACKDATA_H
 #define TRACKDATA_H
 
-#include "gis/IGisItem.h"
 #include "gis/GeoMath.h"
+#include "gis/IGisItem.h"
+#include "gis/proj_x.h"
+
 #include <functional>
-#include <proj_api.h>
 #include <QPoint>
 #include <QtWidgets>
 

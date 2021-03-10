@@ -329,7 +329,6 @@ void IGisProject::setChanged()
             autoSyncToDevPending = true;
             CGisWorkspace::self().postEventForWks(new CEvtA2WSync(getKey()));
         }
-
     }
     updateDecoration(false);
     updateItems();

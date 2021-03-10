@@ -90,7 +90,7 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     selectLayout->addWidget(selectArea);
     canvas->lower();
     canvas->show();
-    selectArea->show();        
+    selectArea->show();
 
     QHBoxLayout * statusLayout = new QHBoxLayout();
     outerLayout->addLayout(statusLayout);

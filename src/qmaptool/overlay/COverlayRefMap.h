@@ -54,10 +54,10 @@ public:
     enum mode_e
     {
         eModeNone
-        ,eModePointMove
-        ,eModePointAdd
-        ,eModePointDel
-        ,eModePointMoveAuto
+        , eModePointMove
+        , eModePointAdd
+        , eModePointDel
+        , eModePointMoveAuto
     };
 
     bool isOk() const;

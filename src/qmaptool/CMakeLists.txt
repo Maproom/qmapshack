@@ -81,6 +81,7 @@ set( SRCS
     ../common/help/CHelpIndex.cpp
     ../common/help/CHelpSearch.cpp
     ../common/gis/GeoMath.cpp
+    ../common/gis/proj_x.cpp
 )
 
 set( HDRS
@@ -150,6 +151,7 @@ set( HDRS
     ../common/help/CHelpIndex.h
     ../common/help/CHelpSearch.h
     ../common/gis/GeoMath.h
+    ../common/gis/proj_x.h
 )
 
 set( UIS

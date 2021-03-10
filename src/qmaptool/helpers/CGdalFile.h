@@ -20,7 +20,8 @@
 #define CGDALFILE_H
 
 
-#include <proj_api.h>
+#include "gis/proj_x.h"
+
 #include <QCoreApplication>
 #include <QPointF>
 #include <QRgb>

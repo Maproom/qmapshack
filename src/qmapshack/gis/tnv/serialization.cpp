@@ -17,9 +17,9 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/GeoMath.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/GeoMath.h"
 
 #include <QtWidgets>
 

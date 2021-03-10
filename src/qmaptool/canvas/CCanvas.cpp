@@ -62,7 +62,7 @@ void CCanvas::resizeEvent(QResizeEvent *e)
     needsRedraw = eRedrawAll;
 
     // move map loading indicator to new center of canvas
-    QPoint p1(mapLoadIndicator->width()>>1, mapLoadIndicator->height()>>1);
+    QPoint p1(mapLoadIndicator->width() >> 1, mapLoadIndicator->height() >> 1);
     mapLoadIndicator->move(rect().center() - p1);
 
     emit sigChangedSize(e->size());
@@ -74,7 +74,7 @@ void CCanvas::paintEvent(QPaintEvent  *e)
 {
     QPainter p;
     p.begin(this);
-    USE_ANTI_ALIASING(p,true);
+    USE_ANTI_ALIASING(p, true);
 
     // fill the background with default pattern
     p.fillRect(rect(), backColor);
@@ -82,7 +82,7 @@ void CCanvas::paintEvent(QPaintEvent  *e)
     // ----- start to draw thread based content -----
 
     mutex.lock();
-    if(!tool->drawFx(p,needsRedraw))
+    if(!tool->drawFx(p, needsRedraw))
     {
         mutex.unlock();
         slotHideLoadIndicator();

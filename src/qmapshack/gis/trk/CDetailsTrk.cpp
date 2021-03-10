@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "gis/proj_x.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CEnergyCyclingDialog.h"
 #include "gis/trk/CKnownExtension.h"
@@ -46,7 +47,6 @@
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
 /* base case: add the filter specified in template parameter */

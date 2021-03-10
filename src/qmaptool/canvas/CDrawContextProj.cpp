@@ -34,7 +34,7 @@ void CDrawContextProj::setSourceFile(const QString& filename, bool resetContext)
 
     if(resetContext)
     {
-        focus = QPointF(0,0);
+        focus = QPointF(0, 0);
         zoom(6);
     }
 
@@ -115,7 +115,7 @@ void CDrawContextProj::drawt(buffer_t& buf)
         GDALRasterBand * pBand;
         pBand = dataset->GetRasterBand(1);
 
-        img = QImage(screenWidth,screenHeight,QImage::Format_Indexed8);
+        img = QImage(screenWidth, screenHeight, QImage::Format_Indexed8);
         img.setColorTable(colortable);
 
         mutex.lock();

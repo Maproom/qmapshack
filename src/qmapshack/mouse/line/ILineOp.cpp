@@ -84,7 +84,7 @@ static inline qreal distance(const QPointF &pa, const QPointF &pb)
 
 void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel, segment_t &result)
 {
-    projXY p1, p2;
+    PJ_UV p1, p2;
     qreal dx, dy;                // delta x and y defined by p1 and p2
     qreal d_p1_p2;              // distance between p1 and p2
     qreal x, y;                  // coord. (x,y) of the point on line defined by [p1,p2] close to pt

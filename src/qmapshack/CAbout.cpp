@@ -18,10 +18,10 @@
 
 #include "contributors.h"
 #include "CAbout.h"
+#include "gis/proj_x.h"
 #include "version.h"
 
 #include <gdal.h>
-#include <proj_api.h>
 #include <QtWidgets>
 #include <routino.h>
 

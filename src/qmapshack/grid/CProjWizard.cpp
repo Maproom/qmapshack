@@ -18,9 +18,9 @@
 
 #include "CMainWindow.h"
 #include "CProjWizard.h"
+#include "gis/proj_x.h"
 #include "grid/mitab.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
 struct mitab_entry_t

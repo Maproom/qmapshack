@@ -19,7 +19,8 @@
 #ifndef GARMIN_H
 #define GARMIN_H
 
-#include <proj_api.h>
+#include "gis/proj_x.h"
+
 #ifdef __MINGW32__
 #undef LP
 #endif

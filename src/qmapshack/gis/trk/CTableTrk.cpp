@@ -16,13 +16,12 @@
 
 **********************************************************************************************/
 
+#include "gis/proj_x.h"
 #include "gis/trk/CTableTrk.h"
 #include "helpers/CElevationDialog.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
-
-#include <proj_api.h>
 #include <QtWidgets>
 
 CTableTrk::CTableTrk(QWidget *parent)

@@ -21,12 +21,11 @@
 #include "gis/CGisWorkspace.h"
 #include "gis/IGisLine.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/proj_x.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/wpt/CGisItemWpt.h"
 
-
-#include <proj_api.h>
 #include <QtWidgets>
 
 CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWidget *parent)

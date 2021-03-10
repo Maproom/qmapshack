@@ -52,11 +52,11 @@ void CGridSetRef::saveSettings(QSettings& cfg)
 
 void CGridSetRef::loadSettings(QSettings& cfg)
 {
-    lineGridProj->setText(cfg.value("proj","").toString());
-    lineEasting->setText(cfg.value("easting","").toString());
-    lineNorthing->setText(cfg.value("northing","").toString());
-    lineHorizSpacing->setText(cfg.value("horizSpacing","").toString());
-    lineVertSpacing->setText(cfg.value("vertSpacing","").toString());
+    lineGridProj->setText(cfg.value("proj", "").toString());
+    lineEasting->setText(cfg.value("easting", "").toString());
+    lineNorthing->setText(cfg.value("northing", "").toString());
+    lineHorizSpacing->setText(cfg.value("horizSpacing", "").toString());
+    lineVertSpacing->setText(cfg.value("vertSpacing", "").toString());
     lineGridProj->setCursorPosition(0);
 }
 

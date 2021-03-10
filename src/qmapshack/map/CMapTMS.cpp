@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/proj_x.h"
 #include "helpers/CDraw.h"
 #include "map/cache/CDiskCache.h"
 #include "map/CMapDraw.h"
@@ -30,7 +31,7 @@
 #include <QtXml>
 
 #include <ogr_spatialref.h>
-#include <proj_api.h>
+
 
 inline int lon2tile(double lon, int z)
 {

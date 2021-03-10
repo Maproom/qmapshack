@@ -74,7 +74,7 @@ private:
     enum state_e
     {
         eStateIdle
-        ,eStateMove
+        , eStateMove
     };
 
     state_e state = eStateIdle;

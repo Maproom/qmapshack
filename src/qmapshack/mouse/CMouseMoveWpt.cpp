@@ -20,15 +20,15 @@
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
-#include "gis/wpt/CGisItemWpt.h"
 #include "gis/GeoMath.h"
+#include "gis/proj_x.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CWptIconManager.h"
 #include "mouse/CMouseAdapter.h"
 #include "mouse/CMouseMoveWpt.h"
 #include "units/IUnit.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
 CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *canvas, CMouseAdapter *mouse)

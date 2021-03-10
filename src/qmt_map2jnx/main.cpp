@@ -15,6 +15,7 @@
 **********************************************************************************************/
 
 #include "config.h"
+#include "gis/proj_x.h"
 
 #ifdef _MSC_VER
 #define fseeko _fseeki64
@@ -23,10 +24,11 @@
 #define _FILE_OFFSET_BITS 64
 #endif //
 
+
+#include <math.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
-#include <math.h>
 #include <wctype.h>
 
 
@@ -35,7 +37,6 @@
 #include <vector>
 
 #include <gdal_priv.h>
-#include <proj_api.h>
 #include <ogr_spatialref.h>
 
 extern "C"
@@ -65,13 +66,13 @@ extern "C"
 
 struct jnx_hdr_t
 {
-    jnx_hdr_t(): version(0x00000004), devid(0), expire(0), productId(0), crc(0), signature(0), signature_offset(0), zorder(25){}
+    jnx_hdr_t() : version(0x00000004), devid(0), expire(0), productId(0), crc(0), signature(0), signature_offset(0), zorder(25){}
     uint32_t version;           // byte 00000000..00000003
     uint32_t devid;             // byte 00000004..00000007
-    int32_t  top;               // byte 00000014..00000017
-    int32_t  right;             // byte 00000010..00000013
-    int32_t  bottom;            // byte 0000000C..0000000F
-    int32_t  left;              // byte 00000008..0000000B
+    int32_t top;                // byte 00000014..00000017
+    int32_t right;              // byte 00000010..00000013
+    int32_t bottom;             // byte 0000000C..0000000F
+    int32_t left;               // byte 00000008..0000000B
     uint32_t details;           // byte 00000018..0000001B
     uint32_t expire;            // byte 0000001C..0000001F
     uint32_t productId;         // byte 00000020..00000023
@@ -84,7 +85,7 @@ struct jnx_hdr_t
 
 struct jnx_level_t
 {
-    jnx_level_t(): nTiles(0), offset(0), scale(0), dummy(2){}
+    jnx_level_t() : nTiles(0), offset(0), scale(0), dummy(2){}
 
     uint32_t nTiles;
     uint32_t offset;
@@ -95,10 +96,10 @@ struct jnx_level_t
 struct jnx_tile_t
 {
     jnx_tile_t() : top(0), right(0), bottom(0), left(0), width(0), height(0), size(0), offset(0){}
-    int32_t  top;
-    int32_t  right;
-    int32_t  bottom;
-    int32_t  left;
+    int32_t top;
+    int32_t right;
+    int32_t bottom;
+    int32_t left;
     uint16_t width;
     uint16_t height;
     uint32_t size;
@@ -114,39 +115,38 @@ struct jnx_tile_t
 
 struct file_t
 {
-    file_t(): dataset(0), pj(0){memset(colortable,0, sizeof(colortable));}
+    file_t() : dataset(0), pj(0){memset(colortable, 0, sizeof(colortable));}
     ~file_t()
     {
         //if(dataset) delete dataset;
-        if(pj) pj_free(pj);
+        if(pj) {pj_free(pj);}
     }
 
     bool operator<(const file_t& other)  const
     {
-        return (xscale > other.xscale);
+        return xscale > other.xscale;
     }
 
-    std::string     filename;
-    std::string     projection;
+    std::string filename;
+    std::string projection;
     GDALDataset *   dataset;
-    projPJ          pj;
-    uint32_t        width;
-    uint32_t        height;
-    double          xscale;
-    double          yscale;
-    double          scale;
-    double          xref1;
-    double          yref1;
-    double          xref2;
-    double          yref2;
+    projPJ pj;
+    uint32_t width;
+    uint32_t height;
+    double xscale;
+    double yscale;
+    double scale;
+    double xref1;
+    double yref1;
+    double xref2;
+    double yref2;
 
-    double          lon1;
-    double          lat1;
-    double          lon2;
-    double          lat2;
+    double lon1;
+    double lat1;
+    double lon2;
+    double lat2;
 
-    uint32_t        colortable[256];
-
+    uint32_t colortable[256];
 };
 
 struct level_t : public jnx_level_t
@@ -174,7 +174,7 @@ static jnx_hdr_t jnx_hdr;
 /// the tile information table for all 5 levels
 static jnx_tile_t tileTable[JNX_MAX_TILES * 5];
 /// tile buffer for 8 bit palette tiles, private to readTile
-static uint8_t  tileBuf8Bit[JNX_MAX_TILE_SIZE * JNX_MAX_TILE_SIZE] = {0};
+static uint8_t tileBuf8Bit[JNX_MAX_TILE_SIZE * JNX_MAX_TILE_SIZE] = {0};
 /// tile buffer for 24 bit raw RGB tiles, private to writeTile
 static uint8_t tileBuf24Bit[JNX_MAX_TILE_SIZE * JNX_MAX_TILE_SIZE * 3] = {0};
 /// tile buffer for 32 bit raw RGBA tiles
@@ -207,13 +207,13 @@ bool readTile(uint32_t xoff, uint32_t yoff, uint32_t xsize, uint32_t ysize, file
     GDALDataset * dataset = file.dataset;
     int32_t rasterBandCount = dataset->GetRasterCount();
 
-    memset(output,-1, sizeof(uint32_t) * xsize * ysize);
+    memset(output, -1, sizeof(uint32_t) * xsize * ysize);
 
     if(rasterBandCount == 1)
     {
         GDALRasterBand * pBand;
         pBand = dataset->GetRasterBand(1);
-        if(pBand->RasterIO(GF_Read,(int)xoff,(int)yoff, xsize, ysize, tileBuf8Bit,xsize,ysize,GDT_Byte,0,0) == CE_Failure)
+        if(pBand->RasterIO(GF_Read, (int)xoff, (int)yoff, xsize, ysize, tileBuf8Bit, xsize, ysize, GDT_Byte, 0, 0) == CE_Failure)
         {
             return false;
         }
@@ -230,9 +230,9 @@ bool readTile(uint32_t xoff, uint32_t yoff, uint32_t xsize, uint32_t ysize, file
             GDALRasterBand * pBand;
             pBand = dataset->GetRasterBand(b);
 
-            uint32_t mask = ~(0x000000FF << (8*(b-1)));
+            uint32_t mask = ~(0x000000FF << (8 * (b - 1)));
 
-            if(pBand->RasterIO(GF_Read,(int)xoff,(int)yoff, xsize, ysize, tileBuf8Bit,xsize,ysize,GDT_Byte,0,0) == CE_Failure)
+            if(pBand->RasterIO(GF_Read, (int)xoff, (int)yoff, xsize, ysize, tileBuf8Bit, xsize, ysize, GDT_Byte, 0, 0) == CE_Failure)
             {
                 return false;
             }
@@ -242,7 +242,7 @@ bool readTile(uint32_t xoff, uint32_t yoff, uint32_t xsize, uint32_t ysize, file
                 uint32_t pixel = output[i];
 
                 pixel &= mask;
-                pixel |= tileBuf8Bit[i] << (8*(b-1));
+                pixel |= tileBuf8Bit[i] << (8 * (b - 1));
                 output[i] = pixel;
             }
         }
@@ -253,14 +253,14 @@ bool readTile(uint32_t xoff, uint32_t yoff, uint32_t xsize, uint32_t ysize, file
 
 
 
-static void init_destination (j_compress_ptr cinfo)
+static void init_destination(j_compress_ptr cinfo)
 {
     jpgbuf.resize(JPG_BLOCK_SIZE);
     cinfo->dest->next_output_byte   = &jpgbuf[0];
     cinfo->dest->free_in_buffer     = jpgbuf.size();
 }
 
-static boolean empty_output_buffer (j_compress_ptr cinfo)
+static boolean empty_output_buffer(j_compress_ptr cinfo)
 {
     size_t oldsize = jpgbuf.size();
     jpgbuf.resize(oldsize + JPG_BLOCK_SIZE);
@@ -269,7 +269,7 @@ static boolean empty_output_buffer (j_compress_ptr cinfo)
     return true;
 }
 
-static void term_destination (j_compress_ptr cinfo)
+static void term_destination(j_compress_ptr cinfo)
 {
     jpgbuf.resize(jpgbuf.size() - cinfo->dest->free_in_buffer);
 }
@@ -315,35 +315,37 @@ static uint32_t writeTile(uint32_t xsize, uint32_t ysize, uint32_t * raw_image, 
         switch (subsampling)
         {
         case 422:  // 2x1, 1x1, 1x1 (4:2:2) : Medium
-            {
-                cinfo.comp_info[0].h_samp_factor = 2;
-                cinfo.comp_info[0].v_samp_factor = 1;
-                cinfo.comp_info[1].h_samp_factor = 1;
-                cinfo.comp_info[1].v_samp_factor = 1;
-                cinfo.comp_info[2].h_samp_factor = 1;
-                cinfo.comp_info[2].v_samp_factor = 1;
-                break;
-            }
+        {
+            cinfo.comp_info[0].h_samp_factor = 2;
+            cinfo.comp_info[0].v_samp_factor = 1;
+            cinfo.comp_info[1].h_samp_factor = 1;
+            cinfo.comp_info[1].v_samp_factor = 1;
+            cinfo.comp_info[2].h_samp_factor = 1;
+            cinfo.comp_info[2].v_samp_factor = 1;
+            break;
+        }
+
         case 411:  // 2x2, 1x1, 1x1 (4:1:1) : High
-            {
-                cinfo.comp_info[0].h_samp_factor = 2;
-                cinfo.comp_info[0].v_samp_factor = 2;
-                cinfo.comp_info[1].h_samp_factor = 1;
-                cinfo.comp_info[1].v_samp_factor = 1;
-                cinfo.comp_info[2].h_samp_factor = 1;
-                cinfo.comp_info[2].v_samp_factor = 1;
-                break;
-            }
+        {
+            cinfo.comp_info[0].h_samp_factor = 2;
+            cinfo.comp_info[0].v_samp_factor = 2;
+            cinfo.comp_info[1].h_samp_factor = 1;
+            cinfo.comp_info[1].v_samp_factor = 1;
+            cinfo.comp_info[2].h_samp_factor = 1;
+            cinfo.comp_info[2].v_samp_factor = 1;
+            break;
+        }
+
         case 444:  // 1x1 1x1 1x1 (4:4:4) : None
-            {
-                cinfo.comp_info[0].h_samp_factor = 1;
-                cinfo.comp_info[0].v_samp_factor = 1;
-                cinfo.comp_info[1].h_samp_factor = 1;
-                cinfo.comp_info[1].v_samp_factor = 1;
-                cinfo.comp_info[2].h_samp_factor = 1;
-                cinfo.comp_info[2].v_samp_factor = 1;
-                break;
-            }
+        {
+            cinfo.comp_info[0].h_samp_factor = 1;
+            cinfo.comp_info[0].v_samp_factor = 1;
+            cinfo.comp_info[1].h_samp_factor = 1;
+            cinfo.comp_info[1].v_samp_factor = 1;
+            cinfo.comp_info[2].h_samp_factor = 1;
+            cinfo.comp_info[2].v_samp_factor = 1;
+            break;
+        }
         }
     }
 
@@ -375,7 +377,7 @@ static double distance(const double u1, const double v1, const double u2, const 
     double dU = u2 - u1; // lambda
     double dV = v2 - v1; // roh
 
-    double d = 2*asin(sqrt(sin(dV/2) * sin(dV/2) + cos(v1) * cos(v2) * sin(dU/2) * sin(dU/2)));
+    double d = 2 * asin(sqrt(sin(dV / 2) * sin(dV / 2) + cos(v1) * cos(v2) * sin(dU / 2) * sin(dU / 2)));
 
     return 6371010 * d;
 }
@@ -383,11 +385,11 @@ static double distance(const double u1, const double v1, const double u2, const 
 static uint32_t scale2jnx(double scale)
 {
     /*
-    Ok, I've made some calculations, and got the following formula to
-    calculate the JNX scale (S) depending on the map's meters/pixel
-    ratio (R):
+       Ok, I've made some calculations, and got the following formula to
+       calculate the JNX scale (S) depending on the map's meters/pixel
+       ratio (R):
 
-      S(R) =
+       S(R) =
         qRound(
           76437 *
           exp(
@@ -400,19 +402,19 @@ static uint32_t scale2jnx(double scale)
         )
 
 
-    where
-      qRound - is a function which returns the closest integer from
+       where
+       qRound - is a function which returns the closest integer from
         floating point value, [unfortunately its defined in C99 but not standard C++]
-      exp - exponent,
-      ln - natural logarithm.
+       exp - exponent,
+       ln - natural logarithm.
 
-    Magic number 130.2084 - is an average value for
-      (JNX scale) / (maps meters per pixel)
-    ratio among all zoom levels in metric system.
+       Magic number 130.2084 - is an average value for
+       (JNX scale) / (maps meters per pixel)
+       ratio among all zoom levels in metric system.
 
-    Magic number 2.000032708011 is a ratio on which our standard scale
-    table is built. It is (76437 / 4777) ^ (1/4).
-    */
+       Magic number 2.000032708011 is a ratio on which our standard scale
+       table is built. It is (76437 / 4777) ^ (1/4).
+     */
 
     return (uint32_t)floor(0.5 + 76437 * exp(log(2.000032708011) * floor(0.5 + log(scale * 10 * 130.2084 / 76437) / log(2.000032708011) ) ) );
 }
@@ -425,7 +427,7 @@ static char randChar()
 #else
     int r = (int)((rand() * 16.0) / RAND_MAX);
 #endif
-    sprintf(buf,"%X", r & 0x0F);
+    sprintf(buf, "%X", r & 0x0F);
     return buf[0];
 }
 
@@ -472,18 +474,17 @@ static void createGUID(char * guid)
     guid[34]    = randChar();
     guid[35]    = randChar();
     guid[36]    = 0;
-
 }
 
 /// this code is from the GDAL project
 static void printProgress(int current, int total)
 {
-    double dfComplete = double(current)/double(total);
+    double dfComplete = double(current) / double(total);
 
     static int nLastTick = -1;
     int nThisTick = (int) (dfComplete * 40.0);
 
-    nThisTick = MIN(40,MAX(0,nThisTick));
+    nThisTick = MIN(40, MAX(0, nThisTick));
 
     // Have we started a new progress run?
     if( nThisTick < nLastTick && nLastTick >= 39 )
@@ -517,7 +518,6 @@ static void printProgress(int current, int total)
     {
         fflush( stdout );
     }
-
 }
 
 
@@ -547,44 +547,44 @@ int main(int argc, char ** argv)
 
     if(argc < 2)
     {
-        fprintf(stderr,"\nusage: qmt_map2jnx -q <1..100> -s <411|422|444> -p <0..> -c \"copyright notice\" -m \"BirdsEye\" -n \"Unknown\" -x file1_scale,file2_scale,...,fileN_scale <file1> <file2> ... <fileN> <outputfile>\n");
-        fprintf(stderr,"\n");
-        fprintf(stderr,"  -q The JPEG quality from 1 to 100. Default is 75 \n");
-        fprintf(stderr,"  -s The chroma subsampling. Default is 411  \n");
-        fprintf(stderr,"  -p The product ID. Default is 0  \n");
-        fprintf(stderr,"  -c The copyright notice. Default is \"Unknown\"  \n");
-        fprintf(stderr,"  -m The subscription product name. Default is \"BirdsEye\"  \n");
-        fprintf(stderr,"  -n The map name. Default is \"Unknown\"  \n");
-        fprintf(stderr,"  -z The z order (drawing order). Default is 25\n");
-        fprintf(stderr,"  -x Override levels scale. Default: autodetect\n");
-        fprintf(stderr,"\n");
-        fprintf(stderr,"\nThe projection of the input files must have the same latitude along");
-        fprintf(stderr,"\na pixel row. Mecator and Longitude/Latitude projections match this");
-        fprintf(stderr,"\nthis property. Transversal Merkator or Lambert projections do not.");
-        fprintf(stderr,"\n");
-        fprintf(stderr,"\nTo rectify a geotiff map, you can use the gdalwarp command, e.g.");
-        fprintf(stderr,"\ngdalwarp -t_srs \"EPSG:4326\" <inputfile> <outputfile>");
-        fprintf(stderr,"\n");
-        fprintf(stderr,"Scale levels must be pass in same order as level files pointed.\n");
-        fprintf(stderr,"Empty and zero values equal to autodetect. We can point only needed\n");
-        fprintf(stderr,"levels, like:\n");
-        fprintf(stderr,"  -x 45356,,,75; -x ,,,,75\n");
-        fprintf(stderr,"Calculated levels table can be found:\n");
-        fprintf(stderr,"  English: http://whiter.brinkster.net/en/JNX.shtml\n");
-        fprintf(stderr,"  Russian: http://whiter.brinkster.net/JNX.shtml\n");
-        fprintf(stderr,"Most common values for different map scales:\n");
-        fprintf(stderr,"  JNX scale              Map scale\n");
-        fprintf(stderr,"  -------------          ---------\n");
-        fprintf(stderr,"  78125-31250            1:1 000 000\n");
-        fprintf(stderr,"  20834-7813             1:500 000\n");
-        fprintf(stderr,"  7813-3125              1:200 000\n");
-        fprintf(stderr,"  3125-2084              1:100 000\n");
-        fprintf(stderr,"  2084-782               1:50 000\n");
-        fprintf(stderr,"  782-32                 1:25 000\n");
-        fprintf(stderr,"  32-21                  1:10 000\n");
-        fprintf(stderr,"  21-14                  1:5000, 1:2000\n");
-        fprintf(stderr,"\n");
-        fprintf(stderr,"\n");
+        fprintf(stderr, "\nusage: qmt_map2jnx -q <1..100> -s <411|422|444> -p <0..> -c \"copyright notice\" -m \"BirdsEye\" -n \"Unknown\" -x file1_scale,file2_scale,...,fileN_scale <file1> <file2> ... <fileN> <outputfile>\n");
+        fprintf(stderr, "\n");
+        fprintf(stderr, "  -q The JPEG quality from 1 to 100. Default is 75 \n");
+        fprintf(stderr, "  -s The chroma subsampling. Default is 411  \n");
+        fprintf(stderr, "  -p The product ID. Default is 0  \n");
+        fprintf(stderr, "  -c The copyright notice. Default is \"Unknown\"  \n");
+        fprintf(stderr, "  -m The subscription product name. Default is \"BirdsEye\"  \n");
+        fprintf(stderr, "  -n The map name. Default is \"Unknown\"  \n");
+        fprintf(stderr, "  -z The z order (drawing order). Default is 25\n");
+        fprintf(stderr, "  -x Override levels scale. Default: autodetect\n");
+        fprintf(stderr, "\n");
+        fprintf(stderr, "\nThe projection of the input files must have the same latitude along");
+        fprintf(stderr, "\na pixel row. Mecator and Longitude/Latitude projections match this");
+        fprintf(stderr, "\nthis property. Transversal Merkator or Lambert projections do not.");
+        fprintf(stderr, "\n");
+        fprintf(stderr, "\nTo rectify a geotiff map, you can use the gdalwarp command, e.g.");
+        fprintf(stderr, "\ngdalwarp -t_srs \"EPSG:4326\" <inputfile> <outputfile>");
+        fprintf(stderr, "\n");
+        fprintf(stderr, "Scale levels must be pass in same order as level files pointed.\n");
+        fprintf(stderr, "Empty and zero values equal to autodetect. We can point only needed\n");
+        fprintf(stderr, "levels, like:\n");
+        fprintf(stderr, "  -x 45356,,,75; -x ,,,,75\n");
+        fprintf(stderr, "Calculated levels table can be found:\n");
+        fprintf(stderr, "  English: http://whiter.brinkster.net/en/JNX.shtml\n");
+        fprintf(stderr, "  Russian: http://whiter.brinkster.net/JNX.shtml\n");
+        fprintf(stderr, "Most common values for different map scales:\n");
+        fprintf(stderr, "  JNX scale              Map scale\n");
+        fprintf(stderr, "  -------------          ---------\n");
+        fprintf(stderr, "  78125-31250            1:1 000 000\n");
+        fprintf(stderr, "  20834-7813             1:500 000\n");
+        fprintf(stderr, "  7813-3125              1:200 000\n");
+        fprintf(stderr, "  3125-2084              1:100 000\n");
+        fprintf(stderr, "  2084-782               1:50 000\n");
+        fprintf(stderr, "  782-32                 1:25 000\n");
+        fprintf(stderr, "  32-21                  1:10 000\n");
+        fprintf(stderr, "  21-14                  1:5000, 1:2000\n");
+        fprintf(stderr, "\n");
+        fprintf(stderr, "\n");
         exit(-1);
     }
 
@@ -608,19 +608,19 @@ int main(int argc, char ** argv)
         {
             if (towupper(argv[i][1]) == 'Q')
             {
-                quality = atol(argv[i+1]);
+                quality = atol(argv[i + 1]);
                 skip_next_arg = 1;
                 continue;
             }
             else if (towupper(argv[i][1]) == 'S')
             {
-                subsampling = atol(argv[i+1]);
+                subsampling = atol(argv[i + 1]);
                 skip_next_arg = 1;
                 continue;
             }
             else if (towupper(argv[i][1]) == 'P')
             {
-                jnx_hdr.productId = atol(argv[i+1]);
+                jnx_hdr.productId = atol(argv[i + 1]);
                 skip_next_arg = 1;
                 continue;
             }
@@ -644,7 +644,7 @@ int main(int argc, char ** argv)
             }
             else if (towupper(argv[i][1]) == 'Z')
             {
-                jnx_hdr.zorder = atol(argv[i+1]);
+                jnx_hdr.zorder = atol(argv[i + 1]);
                 skip_next_arg = 1;
                 continue;
             }
@@ -673,7 +673,6 @@ int main(int argc, char ** argv)
 
                 continue;
             }
-
         }
 
         files_count++;
@@ -681,19 +680,19 @@ int main(int argc, char ** argv)
 
         double dist;
 
-        GDALDataset * dataset = (GDALDataset*)GDALOpen(argv[i],GA_ReadOnly);
+        GDALDataset * dataset = (GDALDataset*)GDALOpen(argv[i], GA_ReadOnly);
         if(dataset == 0)
         {
-            fprintf(stderr,"\nFailed to open %s\n", argv[i]);
+            fprintf(stderr, "\nFailed to open %s\n", argv[i]);
             exit(-1);
         }
 
-        projPJ   pj;
+        projPJ pj;
         const char * wkt = projstr;
 
         if(dataset->GetProjectionRef())
         {
-            strncpy(projstr,dataset->GetProjectionRef(),sizeof(projstr));
+            strncpy(projstr, dataset->GetProjectionRef(), sizeof(projstr));
         }
         oSRS.importFromWkt(&wkt);
 
@@ -703,7 +702,7 @@ int main(int argc, char ** argv)
         pj = pj_init_plus(proj4);
         if(pj == 0)
         {
-            fprintf(stderr,"\nUnknown projection in file %s\n", argv[i]);
+            fprintf(stderr, "\nUnknown projection in file %s\n", argv[i]);
             exit(-1);
         }
 
@@ -741,8 +740,8 @@ int main(int argc, char ** argv)
             file.lon2 = file.xref2;
             file.lat2 = file.yref2;
 
-            pj_transform(pj,wgs84,1,0,&file.lon1,&file.lat1,0);
-            pj_transform(pj,wgs84,1,0,&file.lon2,&file.lat2,0);
+            pj_transform(pj, wgs84, 1, 0, &file.lon1, &file.lat1, 0);
+            pj_transform(pj, wgs84, 1, 0, &file.lon2, &file.lat2, 0);
 
             file.lon1 *= RAD_TO_DEG;
             file.lat1 *= RAD_TO_DEG;
@@ -751,7 +750,7 @@ int main(int argc, char ** argv)
         }
 
         dist = distance(file.lon1 * DEG_TO_RAD, file.lat1 * DEG_TO_RAD, file.lon2 * DEG_TO_RAD, file.lat1 * DEG_TO_RAD);
-        file.scale = dist/file.width;
+        file.scale = dist / file.width;
 
         // fill color table if necessary
         GDALRasterBand * pBand;
@@ -760,7 +759,7 @@ int main(int argc, char ** argv)
         if(pBand->GetColorInterpretation() == GCI_PaletteIndex)
         {
             GDALColorTable * pct = pBand->GetColorTable();
-            for(int c=0; c < pct->GetColorEntryCount(); ++c)
+            for(int c = 0; c < pct->GetColorEntryCount(); ++c)
             {
                 const GDALColorEntry& e = *pct->GetColorEntry(c);
                 file.colortable[c] = e.c1 | (e.c2 << 8) | (e.c3 << 16) | (e.c4 << 24);
@@ -768,7 +767,7 @@ int main(int argc, char ** argv)
         }
         else if(pBand->GetColorInterpretation() ==  GCI_GrayIndex )
         {
-            for(int c=0; c < 256; ++c)
+            for(int c = 0; c < 256; ++c)
             {
                 file.colortable[c] = c | (c << 8) | (c << 16) | 0xFF000000;
             }
@@ -797,17 +796,29 @@ int main(int argc, char ** argv)
         file_t& file = *f;
         prinfFileinfo(file);
 
-        if(file.lon1 < left)    left   = file.lon1;
-        if(file.lat1 > top)     top    = file.lat1;
-        if(file.lat2 < bottom)  bottom = file.lat2;
-        if(file.lon2 > right)   right  = file.lon2;
+        if(file.lon1 < left)
+        {
+            left   = file.lon1;
+        }
+        if(file.lat1 > top)
+        {
+            top    = file.lat1;
+        }
+        if(file.lat2 < bottom)
+        {
+            bottom = file.lat2;
+        }
+        if(file.lon2 > right)
+        {
+            right  = file.lon2;
+        }
 
         if(scale != 0.0 && ((fabs(scale - file.xscale)) / scale) > 0.02)
         {
             nLevels++;
             if(nLevels > 4)
             {
-                fprintf(stderr,"\nToo many different detail levels.\n");
+                fprintf(stderr, "\nToo many different detail levels.\n");
                 exit(-1);
             }
         }
@@ -817,10 +828,10 @@ int main(int argc, char ** argv)
     }
     nLevels++;
 
-    FILE * fid = fopen(argv[argc-1],"wb");
+    FILE * fid = fopen(argv[argc - 1], "wb");
     if(fid == 0)
     {
-        fprintf(stderr,"\nFailed to create file %s\n", argv[argc-1]);
+        fprintf(stderr, "\nFailed to create file %s\n", argv[argc - 1]);
         exit(-1);
     }
 
@@ -838,11 +849,11 @@ int main(int argc, char ** argv)
     printf("\nz-order:                           %i\n", jnx_hdr.zorder);
 
 
-    for(int i=0; i<HEADER_BLOCK_SIZE; i++)
+    for(int i = 0; i < HEADER_BLOCK_SIZE; i++)
     {
         fwrite(&dummy, sizeof(dummy), 1, fid);
     }
-    fseeko(fid,0,SEEK_SET);
+    fseeko(fid, 0, SEEK_SET);
     fwrite(&jnx_hdr, sizeof(jnx_hdr), 1, fid);
 
     // --------------------------------------------------------------
@@ -895,7 +906,6 @@ int main(int argc, char ** argv)
 
 
         printf("\n    Level %i: % 5i tiles, offset %08X, scale: %i, %ix%i", i, level.nTiles, level.offset, level.scale, level.tileSize, level.tileSize);
-
     }
 
     // --------------------------------------------------------------
@@ -912,15 +922,15 @@ int main(int argc, char ** argv)
     fwrite(&dummy, sizeof(dummy), 1, fid);
     fwrite(&tmp16, sizeof(tmp16), 1, fid);
     fwrite(mapname, strlen(mapname) + 1, 1, fid);
-    fwrite(&nLevels , sizeof(nLevels), 1, fid);
+    fwrite(&nLevels, sizeof(nLevels), 1, fid);
     for(int i = 1; i <= nLevels; i++)
     {
         char str[40];
-        sprintf(str,"Level %i", i);
+        sprintf(str, "Level %i", i);
         fwrite(str, strlen(str) + 1, 1, fid);
         fwrite(str, strlen(str) + 1, 1, fid);
         fwrite(copyright, strlen(copyright) + 1, 1, fid);
-        fwrite(&i,sizeof(i), 1, fid);
+        fwrite(&i, sizeof(i), 1, fid);
     }
 
     // --------------------------------------------------------------
@@ -967,14 +977,13 @@ int main(int argc, char ** argv)
                     // //
                     if(!readTile(xoff, yoff, xsize, ysize, file, tileBuf32Bit))
                     {
-                        fprintf(stderr,"\nError reading tiles from map file\n");
+                        fprintf(stderr, "\nError reading tiles from map file\n");
                         exit(-1);
                     }
 
                     jnx_tile_t& tile = tileTable[tileCnt++];
                     if(pj_is_latlong(file.pj))
                     {
-
                         double u1 = file.lon1 + xoff * file.xscale;
                         double v1 = file.lat1 + yoff * file.yscale;
                         double u2 = file.lon1 + (xoff + xsize) * file.xscale;
@@ -985,7 +994,6 @@ int main(int argc, char ** argv)
                         tile.top    = (int32_t)(v1 * 0x7FFFFFFF / 180);
                         tile.right  = (int32_t)(u2 * 0x7FFFFFFF / 180);
                         tile.bottom = (int32_t)(v2 * 0x7FFFFFFF / 180);
-
                     }
                     else
                     {
@@ -994,8 +1002,8 @@ int main(int argc, char ** argv)
                         double u2 = file.xref1 + (xoff + xsize) * file.xscale;
                         double v2 = file.yref1 + (yoff + ysize) * file.yscale;
 
-                        pj_transform(file.pj,wgs84,1,0,&u1,&v1,0);
-                        pj_transform(file.pj,wgs84,1,0,&u2,&v2,0);
+                        pj_transform(file.pj, wgs84, 1, 0, &u1, &v1, 0);
+                        pj_transform(file.pj, wgs84, 1, 0, &u2, &v2, 0);
 
                         tile.left    = (int32_t)((u1 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
                         tile.top     = (int32_t)((v1 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
@@ -1031,11 +1039,17 @@ int main(int argc, char ** argv)
     pj_free(wgs84);
     GDALDestroyDriverManager();
     if (copyright_buf)
+    {
         free(copyright_buf);
+    }
     if (subscname_buf)
+    {
         free(subscname_buf);
+    }
     if (mapname_buf)
+    {
         free(mapname_buf);
+    }
     printf("\n\n");
     return 0;
 }

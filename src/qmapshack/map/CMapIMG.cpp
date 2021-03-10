@@ -18,8 +18,8 @@
 
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
-#include "gis/Poi.h"
 #include "gis/GeoMath.h"
+#include "gis/Poi.h"
 #include "helpers/CDraw.h"
 #include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"
@@ -2406,7 +2406,7 @@ void CMapIMG::getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiM
 
 void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& dict) const
 {
-    projXY p1, p2;              // the two points of the polyline close to pt
+    PJ_UV p1, p2;              // the two points of the polyline close to pt
     qreal u;                    // ratio u the tangent point will divide d_p1_p2
     qreal shortest = 20;        // shortest distance so far
 
@@ -2507,7 +2507,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
 
 void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict) const
 {
-    projXY p1, p2;               // the two points of the polyline close to pt
+    PJ_UV p1, p2;               // the two points of the polyline close to pt
     const qreal x = pt.x();
     const qreal y = pt.y();
 

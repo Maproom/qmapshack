@@ -54,7 +54,7 @@ CToolCutMap::CToolCutMap(QWidget *parent)
     itemList->loadSettings(cfg);
     groupOverviews->loadSettings(cfg);
     checkAllFiles->setChecked(cfg.value("allFiles", false).toBool());
-    lineSuffix->setText(cfg.value("suffix","_cut").toString());
+    lineSuffix->setText(cfg.value("suffix", "_cut").toString());
     cfg.endGroup();
 
     slotSomethingChanged();

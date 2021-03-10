@@ -240,9 +240,9 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw)
     // add offset
     p.translate(offset);
     // scale image if current zoomfactor does not match buffer's zoomfactor
-    p.scale(currentBuffer.zoomFactor.x()/zoomFactor.x(), currentBuffer.zoomFactor.y()/zoomFactor.y());
+    p.scale(currentBuffer.zoomFactor.x() / zoomFactor.x(), currentBuffer.zoomFactor.y() / zoomFactor.y());
     // draw buffer to painter
-    p.drawImage(0,0, currentBuffer.image);
+    p.drawImage(0, 0, currentBuffer.image);
     p.restore();
 
     emit sigDraw(p);

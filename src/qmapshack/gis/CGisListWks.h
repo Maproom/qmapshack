@@ -129,7 +129,7 @@ private slots:
     void slotAutoSaveProject(bool on);
     void slotUserFocusPrj(bool yes);
     void slotAutoSyncProject(bool yes);
-    void slotAddProjectFilter();    
+    void slotAddProjectFilter();
     void slotNewDevice();
     void slotSyncPrjToDevices();
 

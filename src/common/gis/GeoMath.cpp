@@ -19,8 +19,8 @@
 
 #include "canvas/IDrawContext.h"
 #include "gis/GeoMath.h"
+#include "gis/proj_x.h"
 #include "units/IUnit.h"
-#include <proj_api.h>
 #include <stdlib.h>
 
 #include <QtGui>

@@ -263,7 +263,7 @@ void CGridPlacer::slotSetArea() const
         right   = qMax(pt.x(), right);
     }
 
-    QRectF r(0,0,1,1);
+    QRectF r(0, 0, 1, 1);
     r.setLeft(left);
     r.setRight(right);
     r.setTop(top);

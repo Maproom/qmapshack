@@ -75,8 +75,8 @@ public:
         Depending on the type and the reference information
         of the map the result can be:
 
-        * CGdalFile::eTypePixel: Pixel coordinates
-        * CGdalFile::eTypeProj: Geo coordinates, if the file
+     * CGdalFile::eTypePixel: Pixel coordinates
+     * CGdalFile::eTypeProj: Geo coordinates, if the file
           is referenced else pixel coordinates
      */
     virtual void convertMap2Coord(QPointF &pt) const = 0;
@@ -84,13 +84,13 @@ public:
 
     /** Convert point in map to coordinates
 
-      Depending on the reference information of the map
-      the result can be:
+       Depending on the reference information of the map
+       the result can be:
 
-      * Referenced map: Geo coordinates
-      * Un-referenced map: Pixel coordinates
+     * Referenced map: Geo coordinates
+     * Un-referenced map: Pixel coordinates
 
-    */
+     */
     virtual void convertMap2Proj(QPointF &pt) const
     {
         convertMap2Coord(pt);

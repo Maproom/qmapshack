@@ -19,14 +19,14 @@
 
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
+#include "gis/GeoMath.h"
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
 #include "gis/prj/IGisProject.h"
-#include "gis/GeoMath.h"
+#include "gis/proj_x.h"
 #include "helpers/CDraw.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
 #define DEFAULT_COLOR       4

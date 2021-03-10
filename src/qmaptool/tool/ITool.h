@@ -47,35 +47,35 @@ class IItem;
     return def; \
 
 #define FORWARD_WIDGET_ALL() \
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override \
+    bool drawFx(QPainter & p, CCanvas::redraw_e needsRedraw) override \
     { \
         FORWARD_WIDGET_RETURN(drawFx(p, needsRedraw), false) \
     } \
-    void mousePressEventFx(QMouseEvent *e) override \
+    void mousePressEventFx(QMouseEvent * e) override \
     { \
         FORWARD_WIDGET_VOID(mousePressEventFx(e)) \
     } \
-    void mouseMoveEventFx(QMouseEvent *e) override \
+    void mouseMoveEventFx(QMouseEvent * e) override \
     { \
         FORWARD_WIDGET_VOID(mouseMoveEventFx(e)) \
     } \
-    void mouseReleaseEventFx(QMouseEvent *e) override \
+    void mouseReleaseEventFx(QMouseEvent * e) override \
     { \
         FORWARD_WIDGET_VOID(mouseReleaseEventFx(e)) \
     } \
-    void mouseDoubleClickEventFx(QMouseEvent *e) override \
+    void mouseDoubleClickEventFx(QMouseEvent * e) override \
     { \
         FORWARD_WIDGET_VOID(mouseDoubleClickEventFx(e)) \
     } \
-    void wheelEventFx(QWheelEvent *e) override \
+    void wheelEventFx(QWheelEvent * e) override \
     { \
         FORWARD_WIDGET_VOID(wheelEventFx(e)) \
     } \
-    void enterEventFx(QEvent *e) override \
+    void enterEventFx(QEvent * e) override \
     { \
         FORWARD_WIDGET_VOID(enterEventFx(e)) \
     } \
-    void leaveEventFx(QEvent *e) override \
+    void leaveEventFx(QEvent * e) override \
     { \
         FORWARD_WIDGET_VOID(leaveEventFx(e)) \
     } \
@@ -106,35 +106,35 @@ class IItem;
 
 
 #define FORWARD_LIST_ALL(list) \
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override \
+    bool drawFx(QPainter & p, CCanvas::redraw_e needsRedraw) override \
     { \
         FORWARD_LIST_RETURN(list, drawFx(p, needsRedraw), false) \
     } \
-    void mousePressEventFx(QMouseEvent *e) override \
+    void mousePressEventFx(QMouseEvent * e) override \
     { \
         FORWARD_LIST_VOID(list, mousePressEventFx(e)) \
     } \
-    void mouseMoveEventFx(QMouseEvent *e) override \
+    void mouseMoveEventFx(QMouseEvent * e) override \
     { \
         FORWARD_LIST_VOID(list, mouseMoveEventFx(e)) \
     } \
-    void mouseReleaseEventFx(QMouseEvent *e) override \
+    void mouseReleaseEventFx(QMouseEvent * e) override \
     { \
         FORWARD_LIST_VOID(list, mouseReleaseEventFx(e)) \
     } \
-    void mouseDoubleClickEventFx(QMouseEvent *e) override \
+    void mouseDoubleClickEventFx(QMouseEvent * e) override \
     { \
         FORWARD_LIST_VOID(list, mouseDoubleClickEventFx(e)) \
     } \
-    void wheelEventFx(QWheelEvent *e) override \
+    void wheelEventFx(QWheelEvent * e) override \
     { \
         FORWARD_LIST_VOID(list, wheelEventFx(e)) \
     } \
-    void enterEventFx(QEvent *e) override \
+    void enterEventFx(QEvent * e) override \
     { \
         FORWARD_LIST_VOID(list, enterEventFx(e)) \
     } \
-    void leaveEventFx(QEvent *e) override \
+    void leaveEventFx(QEvent * e) override \
     { \
         FORWARD_LIST_VOID(list, leaveEventFx(e)) \
     } \
@@ -163,35 +163,35 @@ class IItem;
     return def; \
 
 #define FORWARD_TREE_ALL(tree) \
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override \
+    bool drawFx(QPainter & p, CCanvas::redraw_e needsRedraw) override \
     { \
         return tree->drawFx(p, needsRedraw); \
     } \
-    void mousePressEventFx(QMouseEvent *e) override \
+    void mousePressEventFx(QMouseEvent * e) override \
     { \
         FORWARD_TREE_VOID(tree, mousePressEventFx(e)) \
     } \
-    void mouseMoveEventFx(QMouseEvent *e) override \
+    void mouseMoveEventFx(QMouseEvent * e) override \
     { \
         FORWARD_TREE_VOID(tree, mouseMoveEventFx(e)) \
     } \
-    void mouseReleaseEventFx(QMouseEvent *e) override \
+    void mouseReleaseEventFx(QMouseEvent * e) override \
     { \
         FORWARD_TREE_VOID(tree, mouseReleaseEventFx(e)) \
     } \
-    void mouseDoubleClickEventFx(QMouseEvent *e) override \
+    void mouseDoubleClickEventFx(QMouseEvent * e) override \
     { \
         FORWARD_TREE_VOID(tree, mouseDoubleClickEventFx(e)) \
     } \
-    void wheelEventFx(QWheelEvent *e) override \
+    void wheelEventFx(QWheelEvent * e) override \
     { \
         FORWARD_TREE_VOID(tree, wheelEventFx(e)) \
     } \
-    void enterEventFx(QEvent *e) override \
+    void enterEventFx(QEvent * e) override \
     { \
         FORWARD_TREE_VOID(tree, enterEventFx(e)) \
     } \
-    void leaveEventFx(QEvent *e) override \
+    void leaveEventFx(QEvent * e) override \
     { \
         FORWARD_TREE_VOID(tree, leaveEventFx(e)) \
     } \

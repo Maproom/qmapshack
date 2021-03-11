@@ -48,7 +48,7 @@ void CGrid::convertPos2Str(const QPointF& pos, QString& info, bool simple)
     pt *= DEG_TO_RAD;
     proj.transform(pt, PJ_FWD);
 
-    if(proj.isLatLong())
+    if(proj.isTarLatLong())
     {
         QString lat, lng;
         pt *= RAD_TO_DEG;
@@ -258,7 +258,7 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     qreal x = xStart - xGridSpace;
     qreal y = yStart + yGridSpace;
 
-    if(proj.isLatLong())
+    if(proj.isTarLatLong())
     {
         if(y > (85 * DEG_TO_RAD))
         {
@@ -354,7 +354,7 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     QColor textColor;
     textColor.setHsv(color.hslHue(), color.hsvSaturation(), (color.value() > 128 ? color.value() - 128 : 0));
 
-    if(proj.isLatLong())
+    if(proj.isTarLatLong())
     {
         QFontMetrics fm(CMainWindow::self().getMapFont());
         int yoff  = fm.height() + fm.ascent();

@@ -83,7 +83,6 @@ IDem::IDem(CDemDraw *parent)
     , dem(parent)
 {
     slotSetOpacity(17);
-    pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 
     graytable.resize(256);
     for(int i = 0; i < 255; i++)
@@ -105,8 +104,6 @@ IDem::IDem(CDemDraw *parent)
 
 IDem::~IDem()
 {
-    pj_free(pjtar);
-    pj_free(pjsrc);
 }
 
 void IDem::saveConfig(QSettings& cfg)
@@ -389,5 +386,5 @@ void IDem::elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage &img)
 
 void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p)
 {
-    drawTileLQ(img, l, p, *dem, pjsrc, pjtar);
+    drawTileLQ(img, l, p, *dem, proj);
 }

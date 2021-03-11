@@ -20,27 +20,30 @@
 #define PROJ_X_H
 
 #include <proj.h>
-#include <proj_api.h>
 #include <QtCore>
 
 #include <functional>
+
+#define RAD_TO_DEG    57.295779513082321
+#define DEG_TO_RAD   .017453292519943296
 
 class CProj
 {
     Q_DECLARE_TR_FUNCTIONS(CProj)
 public:
-    CProj() = delete;
-    CProj(const char *crsSrc, const char *crsTar);
+    CProj() = default;
     virtual ~CProj();
 
     void init(const char *crsSrc, const char *crsTar);
 
     void transform(QPointF& pt, PJ_DIRECTION dir) const;
+    void transform(QPolygonF& line, PJ_DIRECTION dir) const;
     bool isValid()const {return nullptr != pj;}
-    bool isLatLong() const {return _isLatLong;}
+    bool isSrcLatLong() const {return _isSrcLatLong;}
+    bool isTarLatLong() const {return _isTarLatLong;}
 
-    const QString& getProjTar() const {return strProjTar;}
-    const QString& getProjSrc() const {return strProjSrc;}
+    QString getProjTar() const {return isValid() ? strProjTar : "";}
+    QString getProjSrc() const {return isValid() ? strProjSrc : "";}
 
     using fErrMessage = std::function<void (const QString&)>;
 
@@ -48,9 +51,11 @@ public:
 
 private:
     void transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
+    bool isLatLong(const QString& crs) const;
 
     PJ * pj = nullptr;
-    bool _isLatLong = false;
+    bool _isSrcLatLong = false;
+    bool _isTarLatLong = false;
 
     QString strProjSrc;
     QString strProjTar;

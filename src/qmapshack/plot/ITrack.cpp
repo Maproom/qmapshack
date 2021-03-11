@@ -23,23 +23,6 @@
 
 #include <QtWidgets>
 
-ITrack::ITrack()
-{
-    pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
-}
-
-ITrack::~ITrack()
-{
-    if(pjtar)
-    {
-        pj_free(pjtar);
-    }
-    if(pjsrc)
-    {
-        pj_free(pjsrc);
-    }
-}
-
 void ITrack::save(QImage& image, const CTrackData::trkpt_t * pTrkpt)
 {
     setSize(image.width(), image.height());
@@ -47,7 +30,7 @@ void ITrack::save(QImage& image, const CTrackData::trkpt_t * pTrkpt)
     if(pTrkpt != nullptr)
     {
         QPointF pos(pTrkpt->lon * DEG_TO_RAD, pTrkpt->lat * DEG_TO_RAD);
-        pj_transform(pjtar, pjsrc, 1, 0, &pos.rx(), &pos.ry(), 0);
+        proj.transform(pos, PJ_INV);
 
         QPainter p(&buffer);
         USE_ANTI_ALIASING(p, true);
@@ -68,23 +51,17 @@ void ITrack::setSize(int w, int h)
 
 void ITrack::setupProjection(const QRectF& boundingBox)
 {
-    if(pjsrc)
-    {
-        pj_free(pjsrc);
-        pjsrc = nullptr;
-    }
-
     if(boundingBox.top() > (60 * DEG_TO_RAD))
     {
-        pjsrc = pj_init_plus("+init=epsg:32661");
+        proj.init("EPSG:32661", "EPSG:4326");
     }
     else if(boundingBox.bottom() < (-60 * DEG_TO_RAD))
     {
-        pjsrc = pj_init_plus("+init=epsg:32761");
+        proj.init("EPSG:32761", "EPSG:4326");
     }
     else
     {
-        pjsrc = pj_init_plus("+init=epsg:3857");
+        proj.init("EPSG:3857", "EPSG:4326");
     }
 }
 
@@ -108,7 +85,7 @@ void ITrack::setTrack(const QPolygonF& track)
 
 void ITrack::updateData()
 {
-    if((pjsrc == nullptr) || (nullptr == trk && coords.isEmpty()))
+    if(!proj.isValid() || (nullptr == trk && coords.isEmpty()))
     {
         return;
     }
@@ -132,7 +109,7 @@ void ITrack::updateData()
     for(const QPointF &trkpt : coords)
     {
         QPointF pt(trkpt.x(), trkpt.y());
-        pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
+        proj.transform(pt, PJ_INV);
         line << pt;
     }
 

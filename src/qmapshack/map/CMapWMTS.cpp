@@ -221,12 +221,13 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         oSRS.exportToProj4(&ptr2);
 
         qDebug() << ptr1 << ptr2;
-        tileset.pjsrc = pj_init_plus(ptr2);
+
+        tileset.proj.init(ptr2, "EPSG:4326");
 
         free(ptr1);
         free(ptr2);
 
-        if(tileset.pjsrc == nullptr)
+        if(!tileset.proj.isValid())
         {
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("No georeference information found."));
             return;
@@ -424,17 +425,17 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
             continue;
         }
 
-        const tileset_t& tileset            = tilesets[layer.tileMatrixSet];
+        const tileset_t& tileset = tilesets[layer.tileMatrixSet];
         const QMap<QString, limit_t>& limits = layer.limits;
 
         // convert viewport to layer's coordinate system
         QPointF pt1(x1, y1);
         QPointF pt2(x2, y2);
 
-        pj_transform(pjtar, tileset.pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-        pj_transform(pjtar, tileset.pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
+        tileset.proj.transform(pt1, PJ_INV);
+        tileset.proj.transform(pt2, PJ_INV);
 
-        if(pj_is_latlong(tileset.pjsrc))
+        if(tileset.proj.isSrcLatLong())
         {
             pt1 *= RAD_TO_DEG;
             pt2 *= RAD_TO_DEG;
@@ -554,10 +555,8 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
                     qreal yy2 = (row + 1) * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
 
                     l << QPointF(xx1, yy1) << QPointF(xx2, yy1) << QPointF(xx2, yy2) << QPointF(xx1, yy2);
-                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
-                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
-                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
-                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+
+                    tileset.proj.transform(l, PJ_FWD);
 
                     drawTile(img, l, p);
                 }

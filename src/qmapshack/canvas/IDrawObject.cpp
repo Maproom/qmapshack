@@ -91,7 +91,7 @@ void IDrawObject::setMaxScale(qreal s)
     maxScale = s;
 }
 
-void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, projPJ pjsrc, projPJ pjtar)
+void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, const CProj& proj)
 {
     QPolygonF tmp = l;
     context.convertRad2Px(l);
@@ -106,11 +106,11 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
 
 
     // switch to HQ if the gaps get visible
-    if((context.getZoomFactor().x() > 70) && (pjsrc != nullptr))
+    if((context.getZoomFactor().x() > 70) && proj.isValid())
     {
         if((qAbs(dy1) > 2) || (qAbs(dx2) > 2))
         {
-            drawTileHQ(img, tmp, p, context, pjsrc, pjtar);
+            drawTileHQ(img, tmp, p, context, proj);
             return;
         }
     }
@@ -128,7 +128,7 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
 }
 
 
-void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, projPJ pjsrc, projPJ pjtar)
+void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, const CProj &proj)
 {
     // the sub-tiles need a sensible size
     // if they get too small there will be too much
@@ -146,8 +146,7 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
 
     // transform the rad coordinates from l into the coord. system
     // of the map
-    pj_transform(pjtar, pjsrc, 4, 2, &l[0].rx(), &l[0].ry(), 0);
-
+    proj.transform(l, PJ_INV);
 
     // calculate nStepsX*nStepsY squares evenly distributed over the tile
     // in map coords
@@ -184,7 +183,7 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     }
 
     // transform the squares back to lon/lat coords in rad
-    pj_transform(pjsrc, pjtar, nStepsX * nStepsY * 4, 2, &quads[0].rx(), &quads[0].ry(), 0);
+    proj.transform(quads, PJ_FWD);
     // convert the lon/lat coords of the squares into pixel coords of the
     // canvas using the view's projection
     context.convertRad2Px(quads);

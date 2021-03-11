@@ -132,9 +132,9 @@ protected:
 
 
     // draw tiles with low quality re-projection but fast
-    void drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, projPJ pjsrc, projPJ pjtar);
+    void drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, const CProj &proj);
     // draw tiles with high quality re-projection but slow
-    void drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, projPJ pjsrc, projPJ pjtar);
+    void drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, const CProj &proj);
 
 private:
     /// the opacity level of a map

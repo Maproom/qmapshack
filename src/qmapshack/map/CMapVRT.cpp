@@ -130,10 +130,11 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
     char *proj4 = nullptr;
     oSRS.exportToProj4(&proj4);
-    pjsrc = pj_init_plus(proj4);
+
+    proj.init(proj4, "EPSG:4326");
     free(proj4);
 
-    if(pjsrc == 0)
+    if(!proj.isValid())
     {
         delete dataset;
         dataset = nullptr;
@@ -161,7 +162,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         trFwd.rotate(qAtan(adfGeoTransform[2] / adfGeoTransform[4]));
     }
 
-    if(pj_is_latlong(pjsrc))
+    if(proj.isSrcLatLong())
     {
         // convert to RAD to match internal notations
         trFwd = trFwd * DEG_TO_RAD;
@@ -299,10 +300,10 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     QPointF pt3 = ref3;
     QPointF pt4 = ref4;
 
-    pj_transform(pjsrc, pjtar, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-    pj_transform(pjsrc, pjtar, 1, 0, &pt2.rx(), &pt2.ry(), 0);
-    pj_transform(pjsrc, pjtar, 1, 0, &pt3.rx(), &pt3.ry(), 0);
-    pj_transform(pjsrc, pjtar, 1, 0, &pt4.rx(), &pt4.ry(), 0);
+    proj.transform(pt1, PJ_FWD);
+    proj.transform(pt2, PJ_FWD);
+    proj.transform(pt3, PJ_FWD);
+    proj.transform(pt4, PJ_FWD);
 
     QPolygonF boundingBox;
     boundingBox << pt1 << pt2 << pt3 << pt4;
@@ -318,10 +319,10 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     pt3 = buf.ref3;
     pt4 = buf.ref4;
 
-    pj_transform(pjtar, pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt3.rx(), &pt3.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt4.rx(), &pt4.ry(), 0);
+    proj.transform(pt1, PJ_INV);
+    proj.transform(pt2, PJ_INV);
+    proj.transform(pt3, PJ_INV);
+    proj.transform(pt4, PJ_INV);
 
     pt1 = trInv.map(pt1);
     pt2 = trInv.map(pt2);
@@ -525,10 +526,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
                 l << QPointF(x, y) << QPointF(x + dx_used, y) << QPointF(x + dx_used, y + dy_used) << QPointF(x, y + dy_used);
                 l = trFwd.map(l);
 
-                pj_transform(pjsrc, pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+                proj.transform(l, PJ_FWD);
 
                 drawTile(img, l, p);
             }

@@ -44,9 +44,9 @@ public:
         return isValid;
     }
 
-    const QString& getProjection() const override
+    QString getProjection() const override
     {
-        return proj4str;
+        return proj.getProjSrc();
     }
 
     const QTransform& getTrFwd() const override

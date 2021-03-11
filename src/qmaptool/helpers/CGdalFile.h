@@ -96,9 +96,7 @@ protected:
     QTransform trFwdProj;
     QTransform trInvProj;
 
-    QString proj4str;
-
-    projPJ pjsrc = nullptr;
+    CProj proj;
 };
 
 #endif //CGDALFILE_H

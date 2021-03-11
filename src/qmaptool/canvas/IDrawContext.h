@@ -42,7 +42,7 @@ public:
 
     virtual bool getNoData() const = 0;
 
-    virtual const QString& getProjection() const = 0;
+    virtual QString getProjection() const = 0;
 
     virtual const QTransform& getTrFwd() const = 0;
 

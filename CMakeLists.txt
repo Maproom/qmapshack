@@ -203,7 +203,7 @@ if(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
     add_subdirectory(3rdparty/alglib)
 endif(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
 
-add_definitions(-DACCEPT_USE_OF_DEPRECATED_PROJ_API_H -DHELPPATH=${HTML_INSTALL_DIR})
+add_definitions(-DHELPPATH=${HTML_INSTALL_DIR})
 
 ###############################################################################################
 # Create global config.h

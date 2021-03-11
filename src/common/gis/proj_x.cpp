@@ -21,46 +21,46 @@
 
 CProj::~CProj()
 {
-    if(nullptr != pj)
+    if(nullptr != _pj)
     {
-        proj_destroy(pj);
+        proj_destroy(_pj);
     }
 }
 
 
 void CProj::init(const char *crsSrc, const char *crsTar)
 {
-    strProjSrc = crsSrc;
-    strProjTar = crsTar;
+    _strProjSrc = crsSrc;
+    _strProjTar = crsTar;
 
-    if(!strProjSrc.contains("EPSG") && !strProjSrc.contains("+type=crs"))
+    if(!_strProjSrc.contains("EPSG") && !_strProjSrc.contains("+type=crs"))
     {
-        strProjSrc += " +type=crs";
+        _strProjSrc += " +type=crs";
     }
-    if(!strProjTar.contains("EPSG") && !strProjTar.contains("+type=crs"))
+    if(!_strProjTar.contains("EPSG") && !_strProjTar.contains("+type=crs"))
     {
-        strProjTar += " +type=crs";
-    }
-
-    if(nullptr != pj)
-    {
-        proj_destroy(pj);
+        _strProjTar += " +type=crs";
     }
 
-    pj = proj_create_crs_to_crs (PJ_DEFAULT_CTX, strProjSrc.toLatin1(), strProjTar.toLatin1(), NULL);
-    if (nullptr == pj)
+    if(nullptr != _pj)
+    {
+        proj_destroy(_pj);
+    }
+
+    _pj = proj_create_crs_to_crs(PJ_DEFAULT_CTX, _strProjSrc.toLatin1(), _strProjTar.toLatin1(), NULL);
+    if (nullptr == _pj)
     {
         return;
     }
-    PJ* P_for_GIS = proj_normalize_for_visualization(PJ_DEFAULT_CTX, pj);
-    proj_destroy(pj);
-    pj = P_for_GIS;
+    PJ* P_for_GIS = proj_normalize_for_visualization(PJ_DEFAULT_CTX, _pj);
+    proj_destroy(_pj);
+    _pj = P_for_GIS;
 
-    _isSrcLatLong = isLatLong(strProjSrc);
-    _isTarLatLong = isLatLong(strProjTar);
+    _isSrcLatLong = _isLatLong(_strProjSrc);
+    _isTarLatLong = _isLatLong(_strProjTar);
 }
 
-bool CProj::isLatLong(const QString &crs) const
+bool CProj::_isLatLong(const QString &crs) const
 {
     PJ * p = proj_create(PJ_DEFAULT_CTX, crs.toLatin1());
     PJ_TYPE type = proj_get_type(p);
@@ -76,13 +76,13 @@ void CProj::transform(QPolygonF& line, PJ_DIRECTION dir) const
         return;
     }
 
-    qreal factorPre = proj_degree_input(pj, dir) ? RAD_TO_DEG : 1.0;
-    qreal factorPost = proj_degree_output(pj, dir) ? DEG_TO_RAD : 1.0;
+    qreal factorPre = proj_degree_input(_pj, dir) ? RAD_TO_DEG : 1.0;
+    qreal factorPost = proj_degree_output(_pj, dir) ? DEG_TO_RAD : 1.0;
 
     for(QPointF& pt : line)
     {
         pt *= factorPre;
-        transform(pt.rx(), pt.ry(), dir);
+        _transform(pt.rx(), pt.ry(), dir);
         pt *= factorPost;
     }
 }
@@ -94,14 +94,14 @@ void CProj::transform(QPointF& pt, PJ_DIRECTION dir) const
         return;
     }
 
-    if(proj_degree_input(pj, dir))
+    if(proj_degree_input(_pj, dir))
     {
         pt *= RAD_TO_DEG;
     }
 
-    transform(pt.rx(), pt.ry(), dir);
+    _transform(pt.rx(), pt.ry(), dir);
 
-    if(proj_degree_output(pj, dir))
+    if(proj_degree_output(_pj, dir))
     {
         pt *= DEG_TO_RAD;
     }
@@ -109,8 +109,30 @@ void CProj::transform(QPointF& pt, PJ_DIRECTION dir) const
 
 void CProj::transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const
 {
+    if(!isValid())
+    {
+        return;
+    }
+
+    if(proj_degree_input(_pj, dir))
+    {
+        lon *= RAD_TO_DEG;
+        lat *= RAD_TO_DEG;
+    }
+
+    _transform(lon, lat, dir);
+
+    if(proj_degree_output(_pj, dir))
+    {
+        lon *= DEG_TO_RAD;
+        lat *= DEG_TO_RAD;
+    }
+}
+
+void CProj::_transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const
+{
     PJ_COORD c = proj_coord(lon, lat, 0, 0);
-    c = proj_trans(pj, dir, c);
+    c = proj_trans(_pj, dir, c);
     lon = c.uv.u;
     lat = c.uv.v;
 }

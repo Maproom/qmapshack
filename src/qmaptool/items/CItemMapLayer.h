@@ -43,7 +43,7 @@ public:
 
     void setupChanged() override {}
 
-    const QString& getProjection() const;
+    QString getProjection() const;
 
 protected:
     friend bool sortByScale(QTreeWidgetItem * item1, QTreeWidgetItem * item2);

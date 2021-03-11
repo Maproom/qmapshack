@@ -115,12 +115,7 @@ struct jnx_tile_t
 
 struct file_t
 {
-    file_t() : dataset(0), pj(0){memset(colortable, 0, sizeof(colortable));}
-    ~file_t()
-    {
-        //if(dataset) delete dataset;
-        if(pj) {pj_free(pj);}
-    }
+    file_t() : dataset(0){memset(colortable, 0, sizeof(colortable));}
 
     bool operator<(const file_t& other)  const
     {
@@ -128,9 +123,8 @@ struct file_t
     }
 
     std::string filename;
-    std::string projection;
-    GDALDataset *   dataset;
-    projPJ pj;
+    GDALDataset * dataset;
+    CProj proj;
     uint32_t width;
     uint32_t height;
     double xscale;
@@ -167,8 +161,6 @@ static int32_t nLevels;
 static level_t levels[5];
 /// information about all files
 static std::list<file_t> files;
-/// the target lon/lat WGS84 projection
-static projPJ wgs84;
 /// the JNX file header to be copied to the outfile
 static jnx_hdr_t jnx_hdr;
 /// the tile information table for all 5 levels
@@ -186,17 +178,16 @@ static void prinfFileinfo(const file_t& file)
 {
     printf("\n\n----------------------");
     printf("\n%s:", file.filename.c_str());
-    printf("\nprojection: %s", file.projection.c_str());
+    printf("\nprojection: %s", file.proj.getProjSrc().toLatin1().data());
     printf("\nwidth: %i pixel height: %i pixel", file.width, file.height);
 
-    if(pj_is_latlong(file.pj))
+    printf("\narea (top/left, bottom/right): %f %f, %f %f", file.lat1, file.lon1, file.lat2, file.lon2);
+    if(file.proj.isSrcLatLong())
     {
-        printf("\narea (top/left, bottom/right): %f %f, %f %f", file.lat1, file.lon1, file.lat2, file.lon2);
         printf("\nxscale: %f °/px, yscale: %f °/px", file.xscale, file.yscale);
     }
     else
     {
-        printf("\narea (top/left, bottom/right): %f %f, %f %f", file.lat1, file.lon1, file.lat2, file.lon2);
         printf("\nxscale: %f m/px, yscale: %f m/px", file.xscale, file.yscale);
     }
     printf("\nreal scale: %f m/px", file.scale);
@@ -589,7 +580,6 @@ int main(int argc, char ** argv)
     }
 
     GDALAllRegister();
-    wgs84 = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 
     // read geo information from input files
     //files.resize(argc - 2);
@@ -687,7 +677,6 @@ int main(int argc, char ** argv)
             exit(-1);
         }
 
-        projPJ pj;
         const char * wkt = projstr;
 
         if(dataset->GetProjectionRef())
@@ -699,12 +688,6 @@ int main(int argc, char ** argv)
         char *proj4 = nullptr;
         oSRS.exportToProj4(&proj4);
 
-        pj = pj_init_plus(proj4);
-        if(pj == 0)
-        {
-            fprintf(stderr, "\nUnknown projection in file %s\n", argv[i]);
-            exit(-1);
-        }
 
         double adfGeoTransform[6];
         dataset->GetGeoTransform( adfGeoTransform );
@@ -714,9 +697,8 @@ int main(int argc, char ** argv)
 
         file_t& file    = *f;
         file.filename   = argv[i];
-        file.projection = proj4;
         file.dataset    = dataset;
-        file.pj         = pj;
+        file.proj.init(proj4, "EPSG:4326");
         file.width      = dataset->GetRasterXSize();
         file.height     = dataset->GetRasterYSize();
         file.xscale     = adfGeoTransform[1];
@@ -726,7 +708,13 @@ int main(int argc, char ** argv)
         file.xref2      = file.xref1 + file.width  * file.xscale;
         file.yref2      = file.yref1 + file.height * file.yscale;
 
-        if(pj_is_latlong(file.pj))
+        if(!file.proj.isValid())
+        {
+            fprintf(stderr, "\nUnknown projection in file %s\n", argv[i]);
+            exit(-1);
+        }
+
+        if(file.proj.isSrcLatLong())
         {
             file.lon1 = file.xref1;
             file.lat1 = file.yref1;
@@ -740,8 +728,8 @@ int main(int argc, char ** argv)
             file.lon2 = file.xref2;
             file.lat2 = file.yref2;
 
-            pj_transform(pj, wgs84, 1, 0, &file.lon1, &file.lat1, 0);
-            pj_transform(pj, wgs84, 1, 0, &file.lon2, &file.lat2, 0);
+            file.proj.transform(file.lon1, file.lat1, PJ_FWD);
+            file.proj.transform(file.lon2, file.lat2, PJ_FWD);
 
             file.lon1 *= RAD_TO_DEG;
             file.lat1 *= RAD_TO_DEG;
@@ -982,7 +970,7 @@ int main(int argc, char ** argv)
                     }
 
                     jnx_tile_t& tile = tileTable[tileCnt++];
-                    if(pj_is_latlong(file.pj))
+                    if(file.proj.isSrcLatLong())
                     {
                         double u1 = file.lon1 + xoff * file.xscale;
                         double v1 = file.lat1 + yoff * file.yscale;
@@ -1002,8 +990,8 @@ int main(int argc, char ** argv)
                         double u2 = file.xref1 + (xoff + xsize) * file.xscale;
                         double v2 = file.yref1 + (yoff + ysize) * file.yscale;
 
-                        pj_transform(file.pj, wgs84, 1, 0, &u1, &v1, 0);
-                        pj_transform(file.pj, wgs84, 1, 0, &u2, &v2, 0);
+                        file.proj.transform(u1, v1, PJ_FWD);
+                        file.proj.transform(u2, v2, PJ_FWD);
 
                         tile.left    = (int32_t)((u1 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
                         tile.top     = (int32_t)((v1 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
@@ -1036,7 +1024,6 @@ int main(int argc, char ** argv)
     fclose(fid);
 
     // clean up
-    pj_free(wgs84);
     GDALDestroyDriverManager();
     if (copyright_buf)
     {

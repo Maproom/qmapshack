@@ -36,29 +36,30 @@ public:
 
     void init(const char *crsSrc, const char *crsTar);
 
+    void transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
     void transform(QPointF& pt, PJ_DIRECTION dir) const;
     void transform(QPolygonF& line, PJ_DIRECTION dir) const;
-    bool isValid()const {return nullptr != pj;}
+    bool isValid()const {return nullptr != _pj;}
     bool isSrcLatLong() const {return _isSrcLatLong;}
     bool isTarLatLong() const {return _isTarLatLong;}
 
-    QString getProjTar() const {return isValid() ? strProjTar : "";}
-    QString getProjSrc() const {return isValid() ? strProjSrc : "";}
+    QString getProjTar() const {return isValid() ? _strProjTar : "";}
+    QString getProjSrc() const {return isValid() ? _strProjSrc : "";}
 
     using fErrMessage = std::function<void (const QString&)>;
 
     static bool validProjStr(const QString projStr, bool allowLonLatToo, fErrMessage errMessage);
 
 private:
-    void transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
-    bool isLatLong(const QString& crs) const;
+    void _transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
+    bool _isLatLong(const QString& crs) const;
 
-    PJ * pj = nullptr;
+    PJ * _pj = nullptr;
     bool _isSrcLatLong = false;
     bool _isTarLatLong = false;
 
-    QString strProjSrc;
-    QString strProjTar;
+    QString _strProjSrc;
+    QString _strProjTar;
 };
 
 

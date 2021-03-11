@@ -251,16 +251,10 @@ void COverlayGridTool::slotCalculate()
     qDeleteAll(refPoints);
     refPoints.clear();
 
-    projPJ pjsrc = pj_init_plus(widgetSetRef->getProjection().toLatin1());
-    if(pjsrc == nullptr)
+    CProj proj;
+    proj.init(widgetSetRef->getProjection().toLatin1(), "EPSG:4326");
+    if(!proj.isValid())
     {
-        return;
-    }
-
-    projPJ pjtar = pj_init_plus("+proj=longlat +datum=WGS84 +no_defs");
-    if(pjtar == nullptr)
-    {
-        pj_free(pjsrc);
         return;
     }
 
@@ -313,7 +307,7 @@ void COverlayGridTool::slotCalculate()
     qreal dLon      = widgetSetRef->getHorizSpacing();
     qreal dLat      = widgetSetRef->getVertSpacing();
 
-    bool isLonLat = pj_is_latlong(pjsrc);
+    bool isLonLat = proj.isSrcLatLong();
 
     for(int y =  yMin; y < yMax; y++)
     {
@@ -334,7 +328,7 @@ void COverlayGridTool::slotCalculate()
                     lat *= DEG_TO_RAD;
                 }
 
-                pj_transform(pjsrc, pjtar, 1, 0, &lon, &lat, 0);
+                proj.transform(lon, lat, PJ_FWD);
                 lon *= RAD_TO_DEG;
                 lat *= RAD_TO_DEG;
 
@@ -342,7 +336,4 @@ void COverlayGridTool::slotCalculate()
             }
         }
     }
-
-    pj_free(pjsrc);
-    pj_free(pjtar);
 }

@@ -158,17 +158,11 @@ protected:
 
     CDemDraw * dem;
 
-    /// source projection of the current map file
     /**
-        Has to be set by subclass. Destruction has to be
-        handled by subclass.
+        target should always be "EPSG:4326"
+        source will be the map's projection
      */
-    projPJ pjsrc = nullptr;
-    /// target projection
-    /**
-        Is set by IMap() to WGS84. Will be freed by ~IMap()
-     */
-    projPJ pjtar = nullptr;
+    CProj proj;
 
     /// width in number of px
     quint32 xsize_px = 0;

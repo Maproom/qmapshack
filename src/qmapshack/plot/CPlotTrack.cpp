@@ -42,7 +42,7 @@ void CPlotTrack::setMouseFocus(qreal lon, qreal lat)
     pos.rx() = lon * DEG_TO_RAD;
     pos.ry() = lat * DEG_TO_RAD;
 
-    pj_transform(pjtar, pjsrc, 1, 0, &pos.rx(), &pos.ry(), 0);
+    proj.transform(pos, PJ_INV);
 
     update();
 }

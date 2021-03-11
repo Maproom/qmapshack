@@ -1852,7 +1852,8 @@ void CMainWindow::slotSanityTest()
 {
     try
     {
-        CProj proj("EPSG:4326", "EPSG:32661");
+        CProj proj;
+        proj.init("EPSG:4326", "EPSG:32661");
 
         if(!proj.isValid())
         {

@@ -80,18 +80,7 @@ private:
 
     struct tileset_t
     {
-        tileset_t() : pjsrc(0)
-        {
-        }
-        ~tileset_t()
-        {
-            if(pjsrc)
-            {
-                pj_free(pjsrc);
-            }
-        }
-
-        projPJ pjsrc;
+        CProj proj;
         QMap<QString, tilematrix_t> tilematrix;
     };
 

@@ -21,7 +21,6 @@
 #define CCANVAS_H
 
 #include "gis/IGisItem.h"
-#include "gis/proj_x.h"
 
 #include <QMap>
 #include <QPainter>
@@ -253,7 +252,7 @@ private:
     QList<IDrawContext*> allDrawContext;
 
     /// the current point of focus (usually the canvas center)
-    QPointF posFocus {12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD};
+    QPointF posFocus {0.209439510239, 0.855211333477};
 
     /// the mouse handler
     CMouseAdapter * mouse;

@@ -87,7 +87,7 @@ CMapJNX::CMapJNX(const QString &filename, CMapDraw *parent)
     qint32 productId = -1;
     readFile(filename, productId);
 
-    pjsrc = pj_init_plus("+proj=merc +ellps=WGS84 +datum=WGS84 +units=m +no_defs +towgs84=0,0,0");
+    proj.init("EPSG:3857", "EPSG:4326");
 
     isActivated = true;
 }

@@ -81,10 +81,10 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     char *proj4 = nullptr;
     oSRS.exportToProj4(&proj4);
-    pjsrc = pj_init_plus(proj4);
+    proj.init(proj4, "EPSG:4326");
     free(proj4);
 
-    if(pjsrc == 0)
+    if(!proj.isValid())
     {
         GDALClose(dataset);
         dataset = nullptr;
@@ -109,7 +109,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
         trFwd.rotate(qAtan(adfGeoTransform[2] / adfGeoTransform[4]));
     }
 
-    if(pj_is_latlong(pjsrc))
+    if(proj.isSrcLatLong())
     {
         xscale *= 111120;
         yscale *= 111120;
@@ -140,7 +140,7 @@ CDemVRT::~CDemVRT()
 
 qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
 {
-    if(pjsrc == 0 || (checkScale && outOfScale))
+    if(!proj.isValid() || (checkScale && outOfScale))
     {
         return NOFLOAT;
     }
@@ -148,7 +148,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
     qint16 e[4];
     QPointF pt = pos;
 
-    pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
+    proj.transform(pt, PJ_INV);
 
     if(!boundingBox.contains(pt))
     {
@@ -185,14 +185,14 @@ qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
 
 qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale)
 {
-    if(pjsrc == 0 || (checkScale && outOfScale))
+    if(!proj.isValid() || (checkScale && outOfScale))
     {
         return NOFLOAT;
     }
 
     QPointF pt = pos;
 
-    pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
+    proj.transform(pt, PJ_INV);
 
     if(!boundingBox.contains(pt))
     {
@@ -251,10 +251,10 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     QPointF pt3 = buf.ref3;
     QPointF pt4 = buf.ref4;
 
-    pj_transform(pjtar, pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt3.rx(), &pt3.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt4.rx(), &pt4.ry(), 0);
+    proj.transform(pt1, PJ_INV);
+    proj.transform(pt2, PJ_INV);
+    proj.transform(pt3, PJ_INV);
+    proj.transform(pt4, PJ_INV);
 
     pt1 = trInv.map(pt1);
     pt2 = trInv.map(pt2);
@@ -385,10 +385,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                 l[2] = QPointF(x + 1 + w_used, y + 1 + h_used);
                 l[3] = QPointF(x + 1, y + 1 + h_used);
                 l = trFwd.map(l);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+
+                proj.transform(l, PJ_FWD);
 
                 if(doHillshading())
                 {

@@ -43,10 +43,8 @@ public:
         /// @note: all coordinate values are long/lat WGS84 [rad]
 
         QImage image; //< the canvas buffer
-        projPJ pjsrc; //< the used projection
 
         int zoomLevels; //< the number of zoom levels
-
         QPointF zoomFactor {1.0, 1.0}; //< the zoomfactor used to draw the canvas
         QPointF scale {1.0, 1.0}; //< the scale of the global viewport
 
@@ -141,7 +139,7 @@ public:
 
        @param proj a Proj4 projection string
      */
-    virtual void setProjection(const QString& proj);
+    virtual void setProjection(const QString& projStr);
 
     virtual void setScales(const CCanvas::scales_type_e type);
 
@@ -196,8 +194,11 @@ protected:
 
     QPointF center; /// the center of the viewport
 
-    projPJ pjsrc; //< source projection should be the same for all maps
-    projPJ pjtar; //< target projection is always WGS84
+    /**
+        source projection should be the same for all maps
+        target projection is always EPSG:4326
+     */
+    CProj proj;
 
     /// index into scales table
     int zoomIndex = 0;

@@ -28,13 +28,10 @@ IMap::IMap(quint32 features, CMapDraw *parent)
     , map(parent)
     , flagsFeature(features)
 {
-    pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 }
 
 IMap::~IMap()
 {
-    pj_free(pjtar);
-    pj_free(pjsrc);
     delete setup;
 }
 
@@ -88,20 +85,12 @@ IMapProp *IMap::getSetup()
 
 void IMap::convertRad2M(QPointF &p) const
 {
-    if(pjsrc == nullptr)
-    {
-        return;
-    }
-    pj_transform(pjtar, pjsrc, 1, 0, &p.rx(), &p.ry(), 0);
+    proj.transform(p, PJ_INV);
 }
 
 void IMap::convertM2Rad(QPointF &p) const
 {
-    if(pjsrc == nullptr)
-    {
-        return;
-    }
-    pj_transform(pjsrc, pjtar, 1, 0, &p.rx(), &p.ry(), 0);
+    proj.transform(p, PJ_FWD);
 }
 
 
@@ -112,6 +101,6 @@ bool IMap::findPolylineCloseBy(const QPointF&, const QPointF&, qint32, QPolygonF
 
 void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
 {
-    drawTileLQ(img, l, p, *map, pjsrc, pjtar);
+    drawTileLQ(img, l, p, *map, proj);
 }
 

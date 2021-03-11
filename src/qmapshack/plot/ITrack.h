@@ -32,8 +32,8 @@ class CGisItemTrk;
 class ITrack
 {
 public:
-    ITrack();
-    virtual ~ITrack();
+    ITrack() = default;
+    virtual ~ITrack() = default;
 
     void setSize(int w, int h);
     void setTrack(CGisItemTrk * track);
@@ -47,8 +47,7 @@ protected:
     void draw(QPainter& p);
     void draw();
 
-    projPJ pjsrc = nullptr;
-    projPJ pjtar = nullptr;
+    CProj proj;
 
     bool needsRedraw = true;
     CGisItemTrk * trk = nullptr;

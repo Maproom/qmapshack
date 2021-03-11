@@ -52,7 +52,7 @@ private:
 
     CMapDraw * map;
 
-    CProj proj = { "EPSG:4326",  "EPSG:4326"};
+    CProj proj;
     QColor color = Qt::magenta;
 };
 

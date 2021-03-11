@@ -61,9 +61,6 @@ IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CC
     , maskRedraw(maskRedraw)
 {
     setObjectName(name);
-    // setup map parameters and connect to canvas
-    pjsrc = pj_init_plus("+proj=merc +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
-    pjtar = pj_init_plus("+proj=longlat +a=6378137.0000 +b=6356752.3142 +towgs84=0,0,0,0,0,0,0,0 +units=m  +no_defs");
 
     setScales(CCanvas::eScalesDefault);
 
@@ -76,8 +73,6 @@ IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CC
 
 IDrawContext::~IDrawContext()
 {
-    pj_free(pjtar);
-    pj_free(pjsrc);
 }
 
 void IDrawContext::emitSigCanvasUpdate()
@@ -121,26 +116,12 @@ bool IDrawContext::resize(const QSize& size)
 
 QString IDrawContext::getProjection() const
 {
-    if(pjsrc == nullptr)
-    {
-        return QString::Null();
-    }
-
-    char *p = pj_get_def(pjsrc, 0);
-    QString str(p);
-    free(p);
-
-    return str;
+    return proj.getProjSrc();
 }
 
-void IDrawContext::setProjection(const QString& proj)
+void IDrawContext::setProjection(const QString& projStr)
 {
-    if(pjsrc != nullptr)
-    {
-        pj_free(pjsrc);
-    }
-
-    pjsrc = pj_init_plus(proj.toLatin1());
+    proj.init(projStr.toLatin1(), "EPSG:4326");
 }
 
 void IDrawContext::setScales(const CCanvas::scales_type_e type)
@@ -174,7 +155,7 @@ bool IDrawContext::needsRedraw() const
 
 void IDrawContext::zoom(const QRectF& rect)
 {
-    if(pjsrc == nullptr)
+    if(!proj.isValid())
     {
         return;
     }
@@ -206,7 +187,7 @@ void IDrawContext::zoom(const QRectF& rect)
 
 void IDrawContext::zoom(bool in, CCanvas::redraw_e& needsRedraw)
 {
-    if(pjsrc == nullptr)
+    if(!proj.isValid())
     {
         return;
     }
@@ -234,7 +215,7 @@ void IDrawContext::zoom(int idx)
 
 void IDrawContext::convertRad2M(QPointF &p) const
 {
-    if(pjsrc == nullptr)
+    if(!proj.isValid())
     {
         return;
     }
@@ -249,7 +230,7 @@ void IDrawContext::convertRad2M(QPointF &p) const
     bool fixWest = p.x() < (-180 * DEG_TO_RAD);
     bool fixEast = p.x() > ( 180 * DEG_TO_RAD);
 
-    pj_transform(pjtar, pjsrc, 1, 0, &p.rx(), &p.ry(), 0);
+    proj.transform(p, PJ_INV);
 
     /*
         The idea of the fix is to calculate a point
@@ -273,12 +254,12 @@ void IDrawContext::convertRad2M(QPointF &p) const
 
 void IDrawContext::convertM2Rad(QPointF &p) const
 {
-    if(pjsrc == nullptr)
+    if(!proj.isValid())
     {
         return;
     }
 
-    pj_transform(pjsrc, pjtar, 1, 0, &p.rx(), &p.ry(), 0);
+    proj.transform(p, PJ_FWD);
 }
 
 void IDrawContext::convertPx2Rad(QPointF &p) const
@@ -311,7 +292,7 @@ void IDrawContext::convertRad2Px(QPointF &p) const
 
 void IDrawContext::convertRad2Px(QPolygonF& poly) const
 {
-    if(pjsrc == nullptr)
+    if(!proj.isValid())
     {
         return;
     }
@@ -352,8 +333,7 @@ void IDrawContext::convertRad2Px(QPolygonF& poly) const
         }
     }
 
-    pj_transform(pjtar, pjsrc, N, 2, &poly.data()->rx(), &poly.data()->ry(), 0);
-
+    proj.transform(poly, PJ_INV);
 
     QPointF * pPt = poly.data();
     pFix          = fixes.data();
@@ -386,7 +366,7 @@ void IDrawContext::convertRad2Px(QPolygonF& poly) const
 
 void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF& f)
 {
-    if(pjsrc == nullptr)
+    if(!proj.isValid())
     {
         return;
     }
@@ -482,7 +462,6 @@ void IDrawContext::run()
     {
         // copy all projection information need by the
         // map render objects to buffer structure
-        currentBuffer.pjsrc      = pjsrc;
         currentBuffer.zoomFactor = zoomFactor;
         currentBuffer.scale      = scale;
         currentBuffer.ref1       = ref1;

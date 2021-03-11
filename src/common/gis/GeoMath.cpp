@@ -19,7 +19,6 @@
 
 #include "canvas/IDrawContext.h"
 #include "gis/GeoMath.h"
-#include "gis/proj_x.h"
 #include "units/IUnit.h"
 #include <stdlib.h>
 

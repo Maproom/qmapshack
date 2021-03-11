@@ -17,11 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/proj_x.h"
-
-CProj::CProj(const char * crsSrc, const char * crsTar)
-{
-    init(crsSrc, crsTar);
-}
+#include <QPolygonF>
 
 CProj::~CProj()
 {
@@ -60,17 +56,44 @@ void CProj::init(const char *crsSrc, const char *crsTar)
     proj_destroy(pj);
     pj = P_for_GIS;
 
-    {
-        PJ * pj = proj_create(PJ_DEFAULT_CTX, strProjTar.toLatin1());
-        PJ_TYPE type = proj_get_type(pj);
-        proj_destroy(pj);
+    _isSrcLatLong = isLatLong(strProjSrc);
+    _isTarLatLong = isLatLong(strProjTar);
+}
 
-        _isLatLong = PJ_TYPE_GEOGRAPHIC_2D_CRS == type;
+bool CProj::isLatLong(const QString &crs) const
+{
+    PJ * p = proj_create(PJ_DEFAULT_CTX, crs.toLatin1());
+    PJ_TYPE type = proj_get_type(p);
+    proj_destroy(p);
+
+    return PJ_TYPE_GEOGRAPHIC_2D_CRS == type;
+}
+
+void CProj::transform(QPolygonF& line, PJ_DIRECTION dir) const
+{
+    if(!isValid())
+    {
+        return;
+    }
+
+    qreal factorPre = proj_degree_input(pj, dir) ? RAD_TO_DEG : 1.0;
+    qreal factorPost = proj_degree_output(pj, dir) ? DEG_TO_RAD : 1.0;
+
+    for(QPointF& pt : line)
+    {
+        pt *= factorPre;
+        transform(pt.rx(), pt.ry(), dir);
+        pt *= factorPost;
     }
 }
 
 void CProj::transform(QPointF& pt, PJ_DIRECTION dir) const
 {
+    if(!isValid())
+    {
+        return;
+    }
+
     if(proj_degree_input(pj, dir))
     {
         pt *= RAD_TO_DEG;
@@ -86,11 +109,6 @@ void CProj::transform(QPointF& pt, PJ_DIRECTION dir) const
 
 void CProj::transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const
 {
-    if(!isValid())
-    {
-        return;
-    }
-
     PJ_COORD c = proj_coord(lon, lat, 0, 0);
     c = proj_trans(pj, dir, c);
     lon = c.uv.u;

@@ -40,7 +40,7 @@ CAbout::CAbout(QWidget *parent)
 
     labelQtVersion->setText(qVersion());
     labelGDALVersion->setText(GDALVersionInfo("--version"));
-    labelProj4Version->setText(QString::number(PJ_VERSION));
+    labelProj4Version->setText(proj_info().release);
 }
 
 

@@ -267,55 +267,20 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
         yref2  =   90 * DEG_TO_RAD;
     }
 
-    if(c0.x() < xref1)
-    {
-        xref1 = c0.x();
-    }
-    if(c0.x() > xref2)
-    {
-        xref2 = c0.x();
-    }
-    if(c1.x() < xref1)
-    {
-        xref1 = c1.x();
-    }
-    if(c1.x() > xref2)
-    {
-        xref2 = c1.x();
-    }
-    if(c2.x() < xref1)
-    {
-        xref1 = c2.x();
-    }
-    if(c2.x() > xref2)
-    {
-        xref2 = c2.x();
-    }
 
-    if(c0.y() > yref1)
-    {
-        yref1 = c0.y();
-    }
-    if(c0.y() < yref2)
-    {
-        yref2 = c0.y();
-    }
-    if(c1.y() > yref1)
-    {
-        yref1 = c1.y();
-    }
-    if(c1.y() < yref2)
-    {
-        yref2 = c1.y();
-    }
-    if(c2.y() > yref1)
-    {
-        yref1 = c2.y();
-    }
-    if(c2.y() < yref2)
-    {
-        yref2 = c2.y();
-    }
+    xref1 = qMin(xref1, c0.x());
+    xref2 = qMax(xref2, c0.x());
+    xref1 = qMin(xref1, c1.x());
+    xref2 = qMax(xref2, c1.x());
+    xref1 = qMin(xref1, c2.x());
+    xref2 = qMax(xref2, c2.x());
+
+    yref1 = qMax(yref1, c0.y());
+    yref2 = qMin(yref2, c0.y());
+    yref1 = qMax(yref1, c1.y());
+    yref2 = qMin(yref2, c1.y());
+    yref1 = qMax(yref1, c2.y());
+    yref2 = qMin(yref2, c2.y());
 
     scale.rx() = (xref2 - xref1) / xsize_px;
     scale.ry() = (yref2 - yref1) / ysize_px;
@@ -453,39 +418,17 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
     int idxx2 =  qCeil((p2.x() - xref1) / (level.xscale * tileSizeX));
     int idxy2 =  qCeil((p2.y() - yref1) / (level.yscale * tileSizeY));
 
-    if(idxx1 < 0)
-    {
-        idxx1 = 0;
-    }
-    if(idxx1 >= level.xTiles)
-    {
-        idxx1 = level.xTiles;
-    }
-    if(idxx2 < 0)
-    {
-        idxx2 = 0;
-    }
-    if(idxx2 >= level.xTiles)
-    {
-        idxx2 = level.xTiles;
-    }
+    idxx1 = qMax(0, idxx1);
+    idxx1 = qMin(idxx1, level.xTiles);
 
-    if(idxy1 < 0)
-    {
-        idxy1 = 0;
-    }
-    if(idxy1 >= level.yTiles)
-    {
-        idxy1 = level.yTiles;
-    }
-    if(idxy2 < 0)
-    {
-        idxy2 = 0;
-    }
-    if(idxy2 >= level.yTiles)
-    {
-        idxy2 = level.yTiles;
-    }
+    idxx2 = qMax(0, idxx2);
+    idxx2 = qMin(idxx2, level.xTiles);
+
+    idxy1 = qMax(0, idxy1);
+    idxy1 = qMin(idxy1, level.yTiles);
+
+    idxy2 = qMax(0, idxy2);
+    idxy2 = qMin(idxy2, level.yTiles);
 
     // ----- start drawing -----
     QPainter p(&buf.image);

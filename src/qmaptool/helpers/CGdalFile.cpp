@@ -68,8 +68,8 @@ void CGdalFile::load(const QString& filename)
 
         char *proj4 = nullptr;
         oSRS.exportToProj4(&proj4);
-        proj4str = proj4;
-        pjsrc = pj_init_plus(proj4);
+
+        proj.init(proj4, "EPSG:4326");
         free(proj4);
     }
 
@@ -190,7 +190,7 @@ void CGdalFile::load(const QString& filename)
 
 QString CGdalFile::getProjection() const
 {
-    return proj4str;
+    return proj.getProjSrc();
 }
 
 QString CGdalFile::getInfo() const
@@ -198,14 +198,14 @@ QString CGdalFile::getInfo() const
     QString str;
     QTextStream out(&str);
 
-    if(proj4str.isEmpty())
+    if(!proj.isValid())
     {
         out << "no projection" << endl;
     }
     else
     {
         out << getProjection() << endl;
-        if(pj_is_latlong(pjsrc))
+        if(proj.isSrcLatLong())
         {
             out << "xscale: " << xscale << "px/rad\tyscale: " << yscale << "px/rad" << endl;
         }

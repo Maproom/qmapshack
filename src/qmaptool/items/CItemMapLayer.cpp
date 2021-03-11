@@ -40,7 +40,7 @@ CItemMapLayer::CItemMapLayer(QTreeWidget *parent)
 }
 
 
-const QString& CItemMapLayer::getProjection() const
+QString CItemMapLayer::getProjection() const
 {
     return drawContext->getProjection();
 }

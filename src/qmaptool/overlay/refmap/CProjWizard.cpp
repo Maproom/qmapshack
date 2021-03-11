@@ -164,11 +164,11 @@ void CProjWizard::slotChange()
     }
     else if(radioUPSNorth->isChecked())
     {
-        str += "+init=epsg:32661";
+        str += "EPSG:32661";
     }
     else if(radioUPSSouth->isChecked())
     {
-        str += "+init=epsg:32761";
+        str += "EPSG:32761";
     }
     else if(radioUTM->isChecked())
     {
@@ -215,23 +215,9 @@ void CProjWizard::accept()
 
 bool CProjWizard::validProjStr(const QString projStr)
 {
-    if(projStr.isEmpty())
-    {
-        return false;
-    }
-
-    projPJ projCheck = pj_init_plus(projStr.toUtf8().data());
-
-    if (!projCheck)
-    {   /* For some reason pj_errno does not work as expected in some versions of Visual Studio, so using pj_get_errno_ref instead */
-        QMessageBox::warning(&CMainWindow::self(), tr("Error..."), tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr).arg(pj_strerrno(*pj_get_errno_ref())), QMessageBox::Abort, QMessageBox::Abort);
-        return false;
-    }
-    else
-    {
-        pj_free(projCheck);
-        return true;
-    }
+    return CProj::validProjStr(projStr, true, [](const QString& msg){
+        QMessageBox::warning(&CMainWindow::self(), tr("Error..."), msg, QMessageBox::Abort, QMessageBox::Abort);
+    });
 }
 
 

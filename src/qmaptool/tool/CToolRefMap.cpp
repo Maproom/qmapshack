@@ -134,16 +134,10 @@ void CToolRefMap::buildCmd(QList<CShellCmd>& cmds, const IItem *iitem)
         return;
     }
 
-    projPJ pjsrc = pj_init_plus("+proj=longlat +datum=WGS84 +no_defs");
-    if(pjsrc == nullptr)
+    CProj proj;
+    proj.init("EPSG:4326", item->getMapProjection().toLatin1());
+    if(!proj.isValid())
     {
-        return;
-    }
-
-    projPJ pjtar = pj_init_plus(item->getMapProjection().toLatin1());
-    if(pjtar == nullptr)
-    {
-        pj_free(pjsrc);
         return;
     }
 
@@ -156,7 +150,7 @@ void CToolRefMap::buildCmd(QList<CShellCmd>& cmds, const IItem *iitem)
     {
         qreal lon = pt->getPtRef().x() * DEG_TO_RAD;
         qreal lat = pt->getPtRef().y() * DEG_TO_RAD;
-        pj_transform(pjsrc, pjtar, 1, 0, &lon, &lat, 0);
+        proj.transform(lon, lat, PJ_FWD);
 
         args << "-gcp";
         args << QString::number(pt->getPtPtx().x());
@@ -226,9 +220,6 @@ void CToolRefMap::buildCmd(QList<CShellCmd>& cmds, const IItem *iitem)
 
     // ---- command 5 ----------------------
     groupOverviews->buildCmd(cmds, lastOutFilname, context->is32BitRgb() ? "cubic" : "nearest");
-
-    pj_free(pjsrc);
-    pj_free(pjtar);
 }
 
 void CToolRefMap::slotStart()

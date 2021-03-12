@@ -583,6 +583,7 @@ set( HDRS
     helpers/CWptIconManager.h
     helpers/Platform.h
     helpers/Signals.h
+    helpers/Tristate.h
     map/CMapDraw.h
     map/CMapGEMF.h
     map/CMapIMG.h

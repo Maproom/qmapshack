@@ -458,13 +458,23 @@ void CPoiPOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
     while (query.next())
     {
         quint64 key = query.value(eSqlColumnPoiId).toUInt();
+        const QStringList& data = query.value(eSqlColumnPoiData).toString().split("\r");
+        QString garminIcon;
+        for(const QString& tag : data)
+        {
+            if(tagMap.contains(tag))
+            {
+                garminIcon = tagMap[tag].getGarminSym();
+                break;
+            }
+        }
         mutex.lock();
         loadedPoisByArea[categoryID][minLonM10][minLatM10].append(key);
         // TODO: this overwrites a POI if it already was loaded. The difference between those will be the category. Some better handling should be done
-        loadedPois[key] = CRawPoi(query.value(eSqlColumnPoiData).toString().split("\r"),
+        loadedPois[key] = CRawPoi(data,
                                   QPointF((query.value(eSqlColumnPoiMaxLon).toDouble() + query.value(eSqlColumnPoiMinLon).toDouble()) / 2 * DEG_TO_RAD,
                                           (query.value(eSqlColumnPoiMaxLat).toDouble() + query.value(eSqlColumnPoiMinLat).toDouble()) / 2 * DEG_TO_RAD),
-                                  key, categoryNames[categoryID]);
+                                  key, categoryNames[categoryID], garminIcon);
         mutex.unlock();
     }
 }

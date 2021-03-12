@@ -360,7 +360,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
 
 void CMouseNormal::slotAddPoi(const poi_t& poi) const
 {
-    CGisWorkspace::self().addWptByPos(poi.pos * RAD_TO_DEG, poi.name, poi.desc);
+    CGisWorkspace::self().addPoiAsWpt(poi);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 

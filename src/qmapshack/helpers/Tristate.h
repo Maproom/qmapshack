@@ -16,35 +16,14 @@
 
 **********************************************************************************************/
 
-#ifndef CRAWPOI_H
-#define CRAWPOI_H
+#ifndef TRISTATE_H
+#define TRISTATE_H
 
-#include <QPointF>
-#include <QString>
-#include <QStringList>
-
-struct poi_t;
-
-class CRawPoi
+enum tristate_e
 {
-public:
-    //Dummy constructor for the usage of QMap
-    CRawPoi(){}
-    CRawPoi(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString &category, const QString &garminIcon);
-    const QString& getCategory() const;
-    const QString& getName(bool replaceEmptyByCategory = true) const;
-    const QPointF &getCoordinates() const;
-    const quint64 &getKey() const;
-    const QStringList &getData() const;
-    poi_t toPoi() const;
-
-private:
-    QString category;
-    QPointF coordinates; // in radians
-    QStringList data;
-    QString garminIcon;
-    quint64 key;
-    QString name;
+    eTristateTrue,
+    eTristateFalse,
+    eTristateUndefined
 };
 
-#endif // CRAWPOI_H
+#endif // TRISTATE_H

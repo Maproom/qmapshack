@@ -8,6 +8,7 @@ V1.XX.X
 [QMS-299] CEnergyCycling is storing it's configuration in the `General` section instead of it's own.
 [QMS-301] Load POI file
 [QMS-303] Add POI icons
+[QMS-307] Optimization of POI query
 [QMS-311] Automatically save projects to device
 [QMS-314] Fix/Add POI categories
 [QMS-315] Make POI Icons User-Selectable

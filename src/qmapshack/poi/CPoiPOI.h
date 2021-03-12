@@ -95,6 +95,7 @@ private:
     QMap<quint64, QMap<int, QMap<int, QList<quint64> > > > loadedPoisByArea;
     QMap<quint64, CRawPoi> loadedPois;
     QList<poiGroup_t> displayedPois;
+    QRectF bbox;
 
 
     static QMap<QString, CPoiIconCategory> tagMap;

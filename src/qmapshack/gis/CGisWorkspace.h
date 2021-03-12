@@ -29,6 +29,7 @@
 #include "gis/IGisItem.h"
 #include "gis/rte/router/IRouter.h"
 #include "gis/search/CSearchLineEdit.h"
+#include "helpers/Tristate.h"
 
 
 class CGisDraw;
@@ -352,7 +353,10 @@ public:
        @param pt    the position in degrees
      */
     void addWptByPos(const QPointF& pt, const QString& name = QString::Null(), const QString& desc = QString::Null()) const;
+
     void addPoisAsWpt(const QSet<poi_t> &pois, IGisProject *project = nullptr) const;
+    void addPoiAsWpt(const poi_t &poi, IGisProject *project = nullptr) const;
+    void addPoiAsWpt(const poi_t &poi, tristate_e &openEditWindow, IGisProject *project = nullptr) const;
 
     void toggleWptBubble(const IGisItem::key_t &key);
 

@@ -21,8 +21,8 @@
 
 #include <QRegularExpression>
 
-CRawPoi::CRawPoi(const QStringList &data, const QPointF &coordinates, const quint64 &key, const QString& category)
-    : category(category), coordinates(coordinates), data(data), key(key)
+CRawPoi::CRawPoi(const QStringList &data, const QPointF &coordinates, const quint64 &key, const QString& category, const QString& garminIcon)
+    : category(category), coordinates(coordinates), data(data), garminIcon(garminIcon), key(key)
 {
     for(const QRegularExpression& regex : {QRegularExpression("name:" + QLocale::system().name() + "=(.+)", QRegularExpression::UseUnicodePropertiesOption),
                                            QRegularExpression("name:en=(.+)", QRegularExpression::UseUnicodePropertiesOption),
@@ -75,6 +75,7 @@ poi_t CRawPoi::toPoi() const
     poi.pos = coordinates;
     poi.name = getName();
     poi.desc = data.join("<br>\n");
+    poi.icon = garminIcon;
     return poi;
 }
 

@@ -925,6 +925,29 @@ void CGisWorkspace::addWptByPos(const QPointF& pt, const QString& name, const QS
 
 void CGisWorkspace::addPoisAsWpt(const QSet<poi_t> &pois, IGisProject * project) const
 {
+    if(nullptr == project)
+    {
+        project = CGisWorkspace::self().selectProject(false);
+    }
+    if(nullptr == project)
+    {
+        return;
+    }
+    tristate_e openEditWindow = eTristateUndefined;
+    for(const poi_t& poi: pois)
+    {
+        addPoiAsWpt(poi, openEditWindow, project);
+    }
+}
+
+void CGisWorkspace::addPoiAsWpt(const poi_t &poi, IGisProject *project) const
+{
+    tristate_e tmp = eTristateUndefined;
+    addPoiAsWpt(poi, tmp, project);
+}
+
+void CGisWorkspace::addPoiAsWpt(const poi_t &poi, tristate_e& openEditWindow, IGisProject *project) const
+{
     QMutexLocker lock(&IGisItem::mutexItems);
 
     if(nullptr == project)
@@ -935,10 +958,24 @@ void CGisWorkspace::addPoisAsWpt(const QSet<poi_t> &pois, IGisProject * project)
     {
         return;
     }
-    for(const poi_t& poi: pois)
+    if(openEditWindow == eTristateUndefined && poi.icon.isEmpty())
     {
-        CGisItemWpt::newWpt(poi.pos * RAD_TO_DEG, poi.name, poi.desc, project, false);
+        int answer = QMessageBox(QMessageBox::Icon::Question,
+                                 tr("Undefined Waypoint Symbol"),
+                                 tr("QMapShack couldn't automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.\n\n"
+                                    "Do you want to choose an icon for each new waypoint for which no icon could be found?\n"
+                                    "If you choose 'No' the respective last used waypoint icon is applied."),
+                                 QMessageBox::Yes | QMessageBox::No).exec();
+        if(answer == QMessageBox::Yes)
+        {
+            openEditWindow = eTristateTrue;
+        }
+        else
+        {
+            openEditWindow = eTristateFalse;
+        }
     }
+    CGisItemWpt::newWpt(poi.pos * RAD_TO_DEG, poi.name, poi.desc, project, poi.icon, openEditWindow == eTristateTrue && poi.icon.isEmpty());
 }
 
 void CGisWorkspace::focusTrkByKey(bool yes, const IGisItem::key_t& key)

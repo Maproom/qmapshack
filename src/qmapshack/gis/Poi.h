@@ -28,7 +28,9 @@ struct poi_t
     poi_t() : pos(NOPOINTF){}
     QString name;
     QString desc;
-    QPointF pos; // in radians!
+    /// in radians
+    QPointF pos;
+    QString icon;
 };
 
 inline bool operator==(const poi_t &poi1, const poi_t &poi2)

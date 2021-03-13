@@ -41,12 +41,16 @@ CProjWizard::CProjWizard(QLineEdit &line, QWidget * parent)
     setupUi(this);
     QList<mitab_entry_t> list;
     int idx = 0;
-    const MapInfoDatumInfo * di = asDatumInfoListQL;
+    const MapInfoDatumInfo * di = asDatumInfoList;
 
     while(di->nMapInfoDatumID != -1)
     {
         mitab_entry_t entry;
-        entry.name  = di->pszOGCDatumName;
+        entry.name  = di->pszOGCDatumName;        
+        if(!entry.name.isEmpty())
+        {
+            entry.name += tr(" (Spheroid: %1)").arg(asSpheroidInfoList[di->nEllipsoid].pszMapinfoName);
+        }
         entry.idx   = idx;
         list << entry;
         ++di;
@@ -115,7 +119,7 @@ void CProjWizard::findDatum(const QString& str)
 {
     QString cmp;
     int idx = 0;
-    const MapInfoDatumInfo * di   = asDatumInfoListQL;
+    const MapInfoDatumInfo * di   = asDatumInfoList;
 
     while(di->nMapInfoDatumID != -1)
     {
@@ -180,7 +184,7 @@ void CProjWizard::slotChange()
     }
 
     int idx = comboDatum->itemData(comboDatum->currentIndex()).toInt();
-    const MapInfoDatumInfo di = asDatumInfoListQL[idx];
+    const MapInfoDatumInfo di = asDatumInfoList[idx];
     if(di.pszOGCDatumName != QString())
     {
         const MapInfoSpheroidInfo * si = asSpheroidInfoList;

@@ -26,7 +26,7 @@ CPoiPropSetup::CPoiPropSetup(IPoi *poifile, CPoiDraw *poi)
     : IPoiProp(poifile, poi)
 {
     setupUi(this);
-    slotPropertiesChanged();
+    CPoiPropSetup::slotPropertiesChanged();
 
     connect(sliderOpacity,         &QSlider::valueChanged,      poifile, &IPoi::slotSetOpacity);
     connect(sliderOpacity,         &QSlider::valueChanged,      poi,     &CPoiDraw::emitSigCanvasUpdate);

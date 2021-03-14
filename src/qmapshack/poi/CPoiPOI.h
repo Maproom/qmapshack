@@ -24,11 +24,13 @@
 #include "poi/CRawPoi.h"
 #include "poi/IPoi.h"
 
+#include <QCoreApplication>
 #include <QMutex>
 #include <QTimer>
 
 class CPoiPOI : public IPoi
 {
+    Q_DECLARE_TR_FUNCTIONS(CPoiPOI)
 public:
     CPoiPOI(const QString& filename, CPoiDraw *parent);
     virtual ~CPoiPOI() = default;

@@ -24,6 +24,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/GeoMath.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/Poi.h"
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -273,10 +274,10 @@ bool CGisItemWpt::getIconAndName(QString& icon, QString& name)
     return true;
 }
 
-void CGisItemWpt::newWpt(const QPointF& pt, const QString &name, const QString &desc, IGisProject * project, const QString& icon, bool openEditWIndow)
+void CGisItemWpt::newWpt(const QPointF& pt, const QString &name, const QString &desc, IGisProject * project)
 {
     SETTINGS;
-    const QString& _icon = icon.isEmpty() ? cfg.value("Waypoint/lastIcon", "Waypoint").toString() : icon;
+    const QString& _icon = cfg.value("Waypoint/lastIcon", "Waypoint").toString();
     const QString& _name = name.isEmpty() ? getLastName("") : name;
 
     CGisItemWpt * wpt = new CGisItemWpt(pt, _name, _icon, project);
@@ -284,7 +285,32 @@ void CGisItemWpt::newWpt(const QPointF& pt, const QString &name, const QString &
     {
         wpt->setDescription(desc);
     }
+    wpt->editInitial();
 
+    cfg.setValue("Waypoint/lastName", wpt->getName());
+    cfg.setValue("Waypoint/lastIcon", wpt->getIconName());
+}
+
+void CGisItemWpt::newWpt(const poi_t &poi, IGisProject *project, bool openEditWIndow)
+{
+    SETTINGS;
+    const QString& _icon = poi.icon.isEmpty() ? cfg.value("Waypoint/lastIcon", "Waypoint").toString() : poi.icon;
+    const QString& _name = poi.name.isEmpty() ? getLastName("") : poi.name;
+
+    CGisItemWpt * wpt = new CGisItemWpt(poi.pos * RAD_TO_DEG, _name, _icon, project);
+    wpt->setReadOnlyMode(true);
+    if(!poi.desc.isEmpty())
+    {
+        wpt->setDescription(poi.desc);
+    }
+    if(!poi.links.isEmpty())
+    {
+        wpt->setLinks(poi.links);
+    }
+    if(poi.ele != NOINT)
+    {
+        wpt->setElevation(poi.ele);
+    }
     if(openEditWIndow)
     {
         wpt->editInitial();
@@ -692,7 +718,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw * g
 }
 
 
-void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &/*viewport*/, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw */*gis*/)
+void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF & /*viewport*/, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw */*gis*/)
 {
     if(flags & eFlagWptBubble)
     {

@@ -10,6 +10,7 @@ V1.XX.X
 [QMS-303] Add POI icons
 [QMS-307] Optimization of POI query
 [QMS-311] Automatically save projects to device
+[QMS-313] UX improvements for POIs
 [QMS-314] Fix/Add POI categories
 [QMS-315] Make POI Icons User-Selectable
 [QMS-317] Enable user to add POI to project via right-click

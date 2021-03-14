@@ -121,7 +121,7 @@ void CPoiDraw::setupPoiPath(const QStringList &paths)
 {
     poiPaths = paths;
 
-    for(CPoiDraw * poi : pois)
+    for(CPoiDraw * poi : qAsConst(pois))
     {
         QStringList keys;
         poi->saveActivePoisList(keys);
@@ -218,11 +218,12 @@ void CPoiDraw::buildPoiList()
     QMutexLocker lock(&CPoiItem::mutexActivePois);
     poiList->clear();
 
-    for(const QString &path : poiPaths)
+    for(const QString &path : qAsConst(poiPaths))
     {
         QDir dir(path);
         // find available maps
-        for(const QString &filename : dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name))
+        const QStringList& files = dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name);
+        for(const QString &filename : files)
         {
             QFileInfo fi(filename);
 

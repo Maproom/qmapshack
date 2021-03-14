@@ -125,8 +125,13 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     displayedPois.clear();
     QRectF freeSpaceRect (QPointF(), IPoi::iconSize() * 2);
     //Find POIs in view
-    for(quint64 categoryID : categoryActivated.keys(Qt::Checked))
+    const QList<quint64>& keys = categoryActivated.keys();
+    for(quint64 categoryID : keys)
     {
+        if(categoryActivated[categoryID] != Qt::Checked)
+        {
+            continue;
+        }
         for(int minLonM10 = qFloor(xMin * RAD_TO_DEG * 10); minLonM10 < qCeil(xMax * RAD_TO_DEG * 10); minLonM10++)
         {
             for(int minLatM10 = qFloor(yMin * RAD_TO_DEG * 10); minLatM10 < qCeil(yMax * RAD_TO_DEG * 10); minLatM10++)
@@ -144,7 +149,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                     mutex.unlock();
                     return;
                 }
-                for(quint64 poiToDrawID : loadedPoisByArea[categoryID][minLonM10][minLatM10])
+                for(quint64 poiToDrawID : qAsConst(loadedPoisByArea)[categoryID][minLonM10][minLatM10])
                 {
                     const CRawPoi& poiToDraw = loadedPois[poiToDrawID];
                     QPointF pt = poiToDraw.getCoordinates();
@@ -179,7 +184,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     }
 
     //Draw Icons
-    for(const poiGroup_t& poiGroup: displayedPois)
+    for(const poiGroup_t& poiGroup: qAsConst(displayedPois))
     {
         QFontMetricsF fm(CMainWindow::self().getMapFont());
 
@@ -248,7 +253,7 @@ bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPoi
     poiGroup_t poiGroup;
     if(getPoiGroupCloseBy(px, poiGroup))
     {
-        for(quint64 key : poiGroup.pois)
+        for(quint64 key : qAsConst(poiGroup.pois))
         {
             poiItems.insert(loadedPois[key].toPoi());
         }
@@ -264,8 +269,13 @@ void CPoiPOI::findPoisIn(const QRectF &degRect, QSet<poi_t> &pois, QList<QPointF
 
     //Find POIs
     QSet<quint64> copiedItems; //Some Items may appear in multiple categories. We only want to copy those once.
-    for(quint64 categoryID : categoryActivated.keys(Qt::Checked))
+    const QList<quint64>& keys = categoryActivated.keys();
+    for(quint64 categoryID : keys)
     {
+        if(categoryActivated[categoryID] != Qt::Checked)
+        {
+            continue;
+        }
         for(int minLonM10 = qFloor(degRect.left() * 10); minLonM10 <= qFloor(degRect.right() * 10); minLonM10++)
         {
             for(int minLatM10 = qFloor(degRect.bottom() * 10); minLatM10 <= qFloor(degRect.top() * 10); minLatM10++)
@@ -277,7 +287,7 @@ void CPoiPOI::findPoisIn(const QRectF &degRect, QSet<poi_t> &pois, QList<QPointF
                 {
                     loadPOIsFromFile(categoryID, minLonM10, minLatM10);
                 }
-                for(quint64 poiFoundID : loadedPoisByArea[categoryID][minLonM10][minLatM10])
+                for(quint64 poiFoundID : qAsConst(loadedPoisByArea)[categoryID][minLonM10][minLatM10])
                 {
                     const CRawPoi& poiItemFound = loadedPois[poiFoundID];
                     if(!copiedItems.contains(poiItemFound.getKey()))
@@ -295,7 +305,7 @@ void CPoiPOI::findPoisIn(const QRectF &degRect, QSet<poi_t> &pois, QList<QPointF
     }
 
     //Find Highlights
-    for(const poiGroup_t& poiGroup:displayedPois)
+    for(const poiGroup_t& poiGroup:qAsConst(displayedPois))
     {
         if(degRect.contains(poiGroup.iconCenter * RAD_TO_DEG))
         {
@@ -318,8 +328,27 @@ bool CPoiPOI::getToolTip(const QPoint &px, QString &str) const
             {
                 str += "<b>" + name + "</b><br>\n";
             }
-            str += tr("From category ") + "<b>" + poiFound.getCategory() + "</b><br>\n";
-            str += poiFound.getData().join("<br>\n");
+            str += tr("Category: ") + "<b>" + poiFound.getCategory() + "</b><br>\n";
+            str += poiFound.getDesc();
+            str += "<br>\n";
+            const QList<IGisItem::link_t>& links = poiFound.getLinks();
+            if(!links.isEmpty())
+            {
+                str += tr("Links: ");
+                bool isFirstLink = true;
+                for(const IGisItem::link_t& link: links)
+                {
+                    if(isFirstLink)
+                    {
+                        isFirstLink = false;
+                    }
+                    else
+                    {
+                        str += ", ";
+                    }
+                    str += link.text;
+                }
+            }
         }
         else
         {
@@ -327,7 +356,7 @@ bool CPoiPOI::getToolTip(const QPoint &px, QString &str) const
             if(poiGroup.pois.count() <= 10)
             {
                 str += "<br>\n" + tr("POIs at this point:");
-                for(quint64 poiID : poiGroup.pois)
+                for(quint64 poiID : qAsConst(poiGroup.pois))
                 {
                     str += "<br>\n<b>" + loadedPois[poiID].getName() + "</b>";
                 }
@@ -408,14 +437,14 @@ void CPoiPOI::getPoiIcon(QPixmap& icon, const CRawPoi &poi, const QString &defin
 {
     if(!definingTag.isEmpty() && tagMap.contains(definingTag))
     {
-        icon = tagMap[definingTag].getIcon(poi.getData());
+        icon = tagMap[definingTag].getIcon(poi.getRawData());
         return;
     }
-    for(const QString& tag : poi.getData())
+    for(const QString& tag : poi.getRawData())
     {
         if(tagMap.contains(tag))
         {
-            icon = tagMap[tag].getIcon(poi.getData());
+            icon = tagMap[tag].getIcon(poi.getRawData());
             return;
         }
     }

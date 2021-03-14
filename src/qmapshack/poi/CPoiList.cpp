@@ -91,7 +91,7 @@ void CPoiList::sort()
     qSort(items1.begin(), items1.end(), &sortByName<CPoiItem>);
 
     QList<QTreeWidgetItem*> items2;
-    for(CPoiItem * item : items1)
+    for(CPoiItem * item : qAsConst(items1))
     {
         items2 << item;
     }

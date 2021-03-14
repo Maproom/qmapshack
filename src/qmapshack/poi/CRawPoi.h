@@ -19,6 +19,11 @@
 #ifndef CRAWPOI_H
 #define CRAWPOI_H
 
+#include "gis/IGisItem.h"
+
+#include <QCoreApplication>
+#include <QList>
+#include <QMap>
 #include <QPointF>
 #include <QString>
 #include <QStringList>
@@ -27,6 +32,7 @@ struct poi_t;
 
 class CRawPoi
 {
+    Q_DECLARE_TR_FUNCTIONS(CRawPoi)
 public:
     //Dummy constructor for the usage of QMap
     CRawPoi(){}
@@ -35,13 +41,23 @@ public:
     const QString& getName(bool replaceEmptyByCategory = true) const;
     const QPointF &getCoordinates() const;
     const quint64 &getKey() const;
-    const QStringList &getData() const;
+    const QMap<QString, QString> &getData() const;
+    const QStringList& getRawData() const;
+    QString getDesc() const;
+    QList<IGisItem::link_t> getLinks() const;
+    quint32 getEle() const;
     poi_t toPoi() const;
+
 
 private:
     QString category;
     QPointF coordinates; // in radians
-    QStringList data;
+    /// <key, value>
+    QMap<QString, QString> data;
+    QStringList rawData;
+    QStringList wikipediaRelatedKeys;
+    QStringList wikidataRelatedKeys;
+    QStringList nameRelatedKeys;
     QString garminIcon;
     quint64 key;
     QString name;

@@ -19,6 +19,7 @@
 #ifndef POI_H
 #define POI_H
 
+#include "IGisItem.h"
 #include "units/IUnit.h"
 #include <QPointF>
 #include <QSize>
@@ -31,6 +32,8 @@ struct poi_t
     /// in radians
     QPointF pos;
     QString icon;
+    QList<IGisItem::link_t> links;
+    quint32 ele = NOINT;
 };
 
 inline bool operator==(const poi_t &poi1, const poi_t &poi2)

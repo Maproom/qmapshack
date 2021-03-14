@@ -27,6 +27,7 @@
 #include <QCoreApplication>
 #include <QPointer>
 
+struct poi_t;
 class IGisProject;
 class QDomNode;
 class CScrOptWpt;
@@ -348,7 +349,8 @@ public:
     const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
 
     static QString getLastName(const QString &name);
-    static void newWpt(const QPointF &pt, const QString& name, const QString& desc, IGisProject *project, const QString &icon = "", bool openEditWIndow = true);
+    static void newWpt(const QPointF &pt, const QString& name, const QString& desc, IGisProject *project);
+    static void newWpt(const poi_t &poi, IGisProject *project, bool openEditWIndow = true);
     static bool getIconAndName(QString& icon, QString& name);
 
     static void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool &avoid, const bool &selected);

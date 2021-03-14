@@ -21,7 +21,7 @@ QPixmap CPoiIconCategory::getIcon(const QStringList& additionalTags) const
 {
     for(const QString& tag : additionalTags)
     {
-        if(subCategories.keys().contains(tag))
+        if(subCategories.contains(tag))
         {
             return subCategories[tag];
         }

@@ -229,7 +229,7 @@ include_directories(
     SYSTEM # this prevents warnings from non-QMS headers
     ${CMAKE_BINARY_DIR}
     ${GDAL_INCLUDE_DIRS}
-    ${PROJ4_INCLUDE_DIRS}
+    ${PROJ_INCLUDE_DIRS}
 )
 
 if(APPLE)
@@ -256,7 +256,7 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Network
     Qt5::Help
     ${GDAL_LIBRARIES}
-    ${PROJ4_LIBRARIES}
+    ${PROJ_LIBRARIES}
 )
 
 if(APPLE)

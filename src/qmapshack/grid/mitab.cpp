@@ -19,13 +19,12 @@
 
 /*
     Tables are copied over from the GDAL project. See https://gdal.org/
-*/
+ */
 
 /* EPSG code, MapInfo datum ID (or 9999), OGC Name, datum parameters... */
-const MapInfoDatumInfo asDatumInfoList[] =
+const QVector<MapInfoDatumInfo> asDatumInfoList =
 {
     { 0,    0,  "",                            29, 0,   0,    0,   0, 0, 0, 0, 0},// Datum ignore
-    { 0,    104, "WGS_1984",                   28, 0, 0, 0, 0, 0, 0, 0, 0},
     { 6269, 74,  "North_American_Datum_1983",  0, 0, 0, 0, 0, 0, 0, 0, 0},
     { 6201, 1,  "Adindan",                     6, -162, -12,  206, 0, 0, 0, 0, 0},
     { 6205, 2,  "Afgooye",                     3, -43,  -163, 45,  0, 0, 0, 0, 0},
@@ -223,11 +222,9 @@ const MapInfoDatumInfo asDatumInfoList[] =
     { 0,    9999, "Bosnia-Herzegovina",         10, 472.8677, 187.8769, 544.7084, -5.76198422, -5.3222842, 12.80666941, 1.54517287, 0 },
     { 6181, 9999, "Luxembourg 1930 / Gauss",     4, -192.986, 13.673, -39.309, 0.4099, 2.9332, -2.6881, 0.43, 0 },
     { 1168, 9999, "Geocentric Datum of Australia 2020", 0, -0.06155, 0.01087, 0.04019, 0.0394924, 0.0327221, 0.0328979, 0.009994, 0 },
-
-    { -1,   -1, nullptr,                          0, 0, 0, 0, 0, 0, 0, 0, 0}
 };
 
-const MapInfoSpheroidInfo asSpheroidInfoList[] =
+const QVector<MapInfoSpheroidInfo> asSpheroidInfoList =
 {
     { 9, "Airy 1930",                                6377563.396,    299.3249646},
     {13, "Airy 1930 (modified for Ireland 1965",     6377340.189,    299.3249646},
@@ -283,5 +280,4 @@ const MapInfoSpheroidInfo asSpheroidInfoList[] =
     {28, "WGS 84",                                   6378137.0,      298.257223563},
     {29, "WGS 84 (MAPINFO Datum 0)",                 6378137.01,     298.257223563},
     {54, "WGS 84 (MAPINFO Datum 157)",               6378137.01,     298.257223563},
-    {-1, nullptr,                                       0.0,            0.0}
 };

@@ -18,6 +18,7 @@
 
 #include "gis/proj_x.h"
 #include <QPolygonF>
+#include <QDebug>
 
 CProj::~CProj()
 {
@@ -44,12 +45,14 @@ void CProj::init(const char *crsSrc, const char *crsTar)
 
     if(nullptr != _pj)
     {
+        qDebug() << "Failed to create projection:" << _strProjSrc << "->" << _strProjTar;
         proj_destroy(_pj);
     }
 
     _pj = proj_create_crs_to_crs(PJ_DEFAULT_CTX, _strProjSrc.toLatin1(), _strProjTar.toLatin1(), NULL);
     if (nullptr == _pj)
     {
+        qDebug() << "Failed to create projection:" << _strProjSrc << "->" << _strProjTar;
         return;
     }
     PJ* P_for_GIS = proj_normalize_for_visualization(PJ_DEFAULT_CTX, _pj);
@@ -58,6 +61,8 @@ void CProj::init(const char *crsSrc, const char *crsTar)
 
     _isSrcLatLong = _isLatLong(_strProjSrc);
     _isTarLatLong = _isLatLong(_strProjTar);
+
+    qDebug() << "Create projection:" << _strProjSrc << "->" << _strProjTar;
 }
 
 bool CProj::_isLatLong(const QString &crs) const

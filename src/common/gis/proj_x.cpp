@@ -34,6 +34,9 @@ void CProj::init(const char *crsSrc, const char *crsTar)
     _strProjSrc = crsSrc;
     _strProjTar = crsTar;
 
+    _strProjSrc = _strProjSrc.remove("+towgs84=0,0,0,0,0,0,0,0");
+    _strProjTar = _strProjTar.remove("+towgs84=0,0,0,0,0,0,0,0");
+
     if(!_strProjSrc.contains("EPSG") && !_strProjSrc.contains("+type=crs"))
     {
         _strProjSrc += " +type=crs";

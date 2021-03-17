@@ -18,6 +18,8 @@
 #ifndef MITAB_H
 #define MITAB_H
 
+#include <QVector>
+
 typedef struct {
     int         nDatumEPSGCode;
     int         nMapInfoDatumID;
@@ -42,6 +44,6 @@ struct MapInfoSpheroidInfo
     double dfInvFlattening;      /* Inverse flattening */
 };
 
-extern const MapInfoDatumInfo asDatumInfoList[];
-extern const MapInfoSpheroidInfo asSpheroidInfoList[];
+extern const QVector<MapInfoDatumInfo> asDatumInfoList;
+extern const QVector<MapInfoSpheroidInfo> asSpheroidInfoList;
 #endif                           //MITAB_H

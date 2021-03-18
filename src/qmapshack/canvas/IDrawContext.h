@@ -139,7 +139,7 @@ public:
 
        @param proj a Proj4 projection string
      */
-    virtual void setProjection(const QString& projStr);
+    virtual bool setProjection(const QString& projStr);
 
     virtual void setScales(const CCanvas::scales_type_e type);
 
@@ -198,7 +198,7 @@ protected:
         source projection should be the same for all maps
         target projection is always EPSG:4326
      */
-    CProj proj;
+    CProj proj {"EPSG:3857", "EPSG:4326"};
 
     /// index into scales table
     int zoomIndex = 0;

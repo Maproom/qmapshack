@@ -25,6 +25,7 @@
 #include "map/CMapDraw.h"
 
 #include <QtGui>
+#include <QtWidgets>
 
 CGrid::CGrid(CMapDraw *map)
     : QObject(map)
@@ -93,6 +94,17 @@ void CGrid::setProjAndColor(const QString& projStr, const QColor& c)
 {
     color   = c;
     proj.init("EPSG:4326", projStr.toLatin1());
+    if(!proj.isValid())
+    {
+        QMessageBox::warning(
+            CMainWindow::self().getBestWidgetForParent(),
+            tr("Grid Projection..."),
+            tr("Failed to setup grid projection. Please configure a valid projection."),
+            QMessageBox::Ok
+            );
+
+        QTimer::singleShot(1000, &CMainWindow::self(), SLOT(slotSetupGrid()));
+    }
 }
 
 void CGrid::findGridSpace(qreal min, qreal max, qreal& xSpace, qreal& ySpace)

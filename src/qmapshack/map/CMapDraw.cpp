@@ -58,17 +58,18 @@ CMapDraw::~CMapDraw()
     maps.removeOne(this);
 }
 
-void CMapDraw::setProjection(const QString& proj) /* override */
+bool CMapDraw::setProjection(const QString& proj) /* override */
 {
     // --- save the active maps
     QStringList keys;
     saveActiveMapsList(keys);
     // --- now set the new projection
-    IDrawContext::setProjection(proj);
+    bool res = IDrawContext::setProjection(proj);
     // --- now build the map list from scratch. This will deactivate -> activate all maps
     //     By that everything is restored with the new projection
     buildMapList();
     restoreActiveMapsList(keys);
+    return res;
 }
 
 void CMapDraw::setupMapPath()

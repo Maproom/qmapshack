@@ -53,17 +53,18 @@ CDemDraw::~CDemDraw()
     dems.removeOne(this);
 }
 
-void CDemDraw::setProjection(const QString& proj)
-{
+bool CDemDraw::setProjection(const QString& proj)
+{    
     // --- save the active maps
     QStringList keys;
     saveActiveMapsList(keys);
     // --- now set the new projection
-    IDrawContext::setProjection(proj);
+    bool res = IDrawContext::setProjection(proj);
     // --- now build the map list from scratch. This will deactivate -> activate all maps
     //     By that everything is restored with the new projection
     buildMapList();
     restoreActiveMapsList(keys);
+    return res;
 }
 
 void CDemDraw::setupDemPath()

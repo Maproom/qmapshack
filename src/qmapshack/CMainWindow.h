@@ -149,6 +149,8 @@ signals:
 public slots:
     void slotLinkActivated(const QString& link);
     void slotLinkActivated(const QUrl& url);
+    void slotSetupMapView();
+    void slotSetupGrid();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
@@ -173,10 +175,8 @@ private slots:
     void slotUpdateTabWidgets();
     void slotSetupMapFont();
     void slotSetupMapBackground();
-    void slotSetupGrid();
     void slotSetupMapPath();
     void slotSetupDemPath();
-    void slotSetupMapView();
     void slotSetupTimeZone();
     void slotSetupUnits();
     void slotSetupWorkspace();

@@ -32,6 +32,7 @@ class CProj
     Q_DECLARE_TR_FUNCTIONS(CProj)
 public:
     CProj() = default;
+    CProj(const QString& crsSrc, const QString& crsTar);
     virtual ~CProj();
 
     void init(const char *crsSrc, const char *crsTar);

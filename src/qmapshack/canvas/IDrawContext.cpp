@@ -119,9 +119,10 @@ QString IDrawContext::getProjection() const
     return proj.getProjSrc();
 }
 
-void IDrawContext::setProjection(const QString& projStr)
+bool IDrawContext::setProjection(const QString& projStr)
 {
     proj.init(projStr.toLatin1(), "EPSG:4326");
+    return proj.isValid();
 }
 
 void IDrawContext::setScales(const CCanvas::scales_type_e type)

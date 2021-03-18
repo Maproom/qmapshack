@@ -1118,7 +1118,18 @@ void CCanvas::setProjection(const QString& proj)
 {
     for(IDrawContext * context : allDrawContext)
     {
-        context->setProjection(proj);
+        if(!context->setProjection(proj))
+        {
+            QMessageBox::warning(
+                this,
+                tr("Map Projection..."),
+                tr("Failed to setup map projection. Please configure a valid projection."),
+                QMessageBox::Ok
+                );
+
+            QTimer::singleShot(1000, &CMainWindow::self(), SLOT(slotSetupMapView()));
+            return;
+        }
     }
 }
 

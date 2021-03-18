@@ -54,7 +54,7 @@ public:
     qreal getSlopeAt(const QPointF& pos, bool checkScale = false);
     void  getSlopeAt(const QPolygonF& pos, QPolygonF& slope);
 
-    void setProjection(const QString& proj) override;
+    bool setProjection(const QString& proj) override;
 
     static const QStringList& getDemPaths()
     {

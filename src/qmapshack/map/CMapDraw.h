@@ -75,7 +75,7 @@ public:
        @brief Set projection of this draw context
        @param proj      a proj4 string
      */
-    void setProjection(const QString& proj) override;
+    bool setProjection(const QString& proj) override;
 
     static const QStringList& getMapPaths()
     {

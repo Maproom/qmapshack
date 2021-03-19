@@ -55,6 +55,7 @@ private:
     void _transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
     bool _isLatLong(const QString& crs) const;
 
+    PJ_CONTEXT * _ctx = nullptr;
     PJ * _pj = nullptr;
     bool _isSrcLatLong = false;
     bool _isTarLatLong = false;

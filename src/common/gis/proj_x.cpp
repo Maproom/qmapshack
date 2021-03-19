@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "gis/proj_x.h"
-#include <QPolygonF>
 #include <QDebug>
+#include <QPolygonF>
 
 CProj::CProj(const QString& crsSrc, const QString& crsTar)
 {
@@ -30,6 +30,11 @@ CProj::~CProj()
     if(nullptr != _pj)
     {
         proj_destroy(_pj);
+    }
+
+    if(nullptr != _ctx)
+    {
+        proj_context_destroy(_ctx);
     }
 }
 
@@ -54,12 +59,26 @@ void CProj::init(const char *crsSrc, const char *crsTar)
     if(nullptr != _pj)
     {
         proj_destroy(_pj);
+        _pj = nullptr;
     }
 
-    _pj = proj_create_crs_to_crs(PJ_DEFAULT_CTX, _strProjSrc.toLatin1(), _strProjTar.toLatin1(), NULL);
+    if(nullptr != _ctx)
+    {
+        proj_context_destroy(_ctx);
+        _ctx = nullptr;
+    }
+
+
+    _ctx = proj_context_create();
+    if(nullptr == _ctx)
+    {
+        qWarning() << "Failed to create projection constex:";
+        return;
+    }
+    _pj = proj_create_crs_to_crs(_ctx, _strProjSrc.toLatin1(), _strProjTar.toLatin1(), NULL);
     if(nullptr != _pj)
     {
-        PJ* P_for_GIS = proj_normalize_for_visualization(PJ_DEFAULT_CTX, _pj);
+        PJ* P_for_GIS = proj_normalize_for_visualization(_ctx, _pj);
         proj_destroy(_pj);
         _pj = P_for_GIS;
     }
@@ -69,7 +88,7 @@ void CProj::init(const char *crsSrc, const char *crsTar)
 
     if (nullptr == _pj)
     {
-        qDebug() << "Failed to create projection:" << _strProjSrc << "->" << _strProjTar;
+        qWarning() << "Failed to create projection:" << _strProjSrc << "->" << _strProjTar;
         return;
     }
 
@@ -78,7 +97,7 @@ void CProj::init(const char *crsSrc, const char *crsTar)
 
 bool CProj::_isLatLong(const QString &crs) const
 {
-    PJ * p = proj_create(PJ_DEFAULT_CTX, crs.toLatin1());
+    PJ * p = proj_create(_ctx, crs.toLatin1());
     PJ_TYPE type = proj_get_type(p);
     proj_destroy(p);
 

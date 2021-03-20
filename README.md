@@ -23,7 +23,7 @@ Dependencies
 * [GDAL](http://www.gdal.org/) (at least GDAL 2.3)
 * [Proj4](https://proj.org/) (at least 7.2.1)
 * [Routino](http://www.routino.org/) (at least 3.1)
-* [QuaZip](http://quazip.sourceforge.net/index.html) (Qt5 version)
+* [QuaZip](http://quazip.sourceforge.net/index.html) (Qt5 V1.x)
 * CMake/Make
 * a C++ compiler (supporting C++11)
 

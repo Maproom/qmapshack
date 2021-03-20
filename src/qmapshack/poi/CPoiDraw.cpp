@@ -80,17 +80,19 @@ void CPoiDraw::loadConfig(QSettings& cfg)
     cfg.endGroup();
 }
 
-void CPoiDraw::setProjection(const QString& proj)
+bool CPoiDraw::setProjection(const QString& proj)
 {
     // --- save the active maps
     QStringList keys;
     saveActivePoisList(keys);
     // --- now set the new projection
-    IDrawContext::setProjection(proj);
+    bool success = IDrawContext::setProjection(proj);
     // --- now build the map list from scratch. This will deactivate -> activate all maps
     //     By that everything is restored with the new projection
     buildPoiList();
     restoreActivePoisList(keys);
+
+    return success;
 }
 
 void CPoiDraw::setupPoiPath()

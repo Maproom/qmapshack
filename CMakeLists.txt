@@ -152,7 +152,7 @@ find_package(GDAL                   REQUIRED)
 find_package(PROJ                   REQUIRED)
 find_package(JPEG                   REQUIRED)
 find_package(ROUTINO                REQUIRED)
-find_package(QuaZip5                REQUIRED)
+find_package(QuaZip-Qt5             REQUIRED)
 find_package(ALGLIB                         ) # optional as we can use our local version
 
 

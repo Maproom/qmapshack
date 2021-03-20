@@ -35,7 +35,7 @@ public:
 
     void loadConfigForPoiItem(CPoiItem * item);
 
-    void setProjection(const QString& proj) override;
+    bool setProjection(const QString& proj) override;
 
     static const QStringList& getPoiPaths()
     {

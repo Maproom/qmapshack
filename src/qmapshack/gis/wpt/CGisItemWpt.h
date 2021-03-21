@@ -240,6 +240,7 @@ public:
     }
 
     QString getInfo(quint32 feature) const override;
+    /// returns position in degrees
     QPointF getPosition() const
     {
         return QPointF(wpt.lon, wpt.lat);

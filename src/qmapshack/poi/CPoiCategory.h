@@ -25,15 +25,15 @@
 class CPoiCategory : public QTreeWidgetItem
 {
 public:
-    CPoiCategory(const QString& categoryName, quint64 categoryID, Qt::CheckState checkedState, CPoiCategory *parent);
-    CPoiCategory(const QString& categoryName, quint64 categoryID, QTreeWidget * parent);
+    CPoiCategory(const QString& categoryName, QVariant categoryID, Qt::CheckState checkedState, CPoiCategory *parent);
+    CPoiCategory(const QString& categoryName, QVariant categoryID, QTreeWidget * parent);
 
     const QString& getCategory() const
     {
         return categoryName;
     }
 
-    quint64 getId() const
+    QVariant getId() const
     {
         return categoryID;
     }
@@ -42,7 +42,7 @@ public:
 
 private:
     const QString categoryName;
-    const quint64 categoryID;
+    const QVariant categoryID;
 };
 
 #endif // CPOICATEGORY_H

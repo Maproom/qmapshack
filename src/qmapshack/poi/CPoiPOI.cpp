@@ -355,7 +355,7 @@ void CPoiPOI::slotCheckedStateChanged(QTreeWidgetItem * item)
         return;
     }
 
-    categoryActivated[categoryItem->getId()] = categoryItem->checkState();
+    categoryActivated[categoryItem->getId().toUInt()] = categoryItem->checkState();
 
     loadTimer->start();
 }

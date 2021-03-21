@@ -975,7 +975,14 @@ void CGisWorkspace::addPoiAsWpt(const poi_t &poi, tristate_e& openEditWindow, IG
             openEditWindow = eTristateFalse;
         }
     }
-    CGisItemWpt::newWpt(poi.pos * RAD_TO_DEG, poi.name, poi.desc, project, poi.icon, openEditWindow == eTristateTrue && poi.icon.isEmpty());
+    if(poi.gisItem != nullptr)
+    {
+        new CGisItemWpt(*poi.gisItem, project, NOIDX, false);
+    }
+    else
+    {
+        CGisItemWpt::newWpt(poi.pos * RAD_TO_DEG, poi.name, poi.desc, project, poi.icon, openEditWindow == eTristateTrue && poi.icon.isEmpty());
+    }
 }
 
 void CGisWorkspace::focusTrkByKey(bool yes, const IGisItem::key_t& key)

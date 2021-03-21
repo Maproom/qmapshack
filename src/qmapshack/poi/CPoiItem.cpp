@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "poi/CPoiDraw.h"
+#include "poi/CPoiGPX.h"
 #include "poi/CPoiItem.h"
 #include "poi/CPoiPOI.h"
 
@@ -88,6 +89,10 @@ void CPoiItem::updateIcon()
     {
         img = QPixmap("://icons/32x32/MimePoiPOI.png");
     }
+    if(fi.suffix().toLower() == "poi")
+    {
+        img = QPixmap("://icons/32x32/MimePoiPOI.png"); //TODO Change to own icon
+    }
 
     setIcon(0, QIcon(img));
 }
@@ -143,6 +148,10 @@ bool CPoiItem::activate()
     if(fi.suffix().toLower() == "poi")
     {
         poifile = new CPoiPOI(filename, poi);
+    }
+    if(fi.suffix().toLower() == "gpx")
+    {
+        poifile = new CPoiGPX(filename, poi);
     }
 
     updateIcon();

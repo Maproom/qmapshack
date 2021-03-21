@@ -19,7 +19,9 @@
 #ifndef POI_H
 #define POI_H
 
+#include "gis/wpt/CGisItemWpt.h"
 #include "units/IUnit.h"
+
 #include <QPointF>
 #include <QSize>
 
@@ -31,6 +33,7 @@ struct poi_t
     /// in radians
     QPointF pos;
     QString icon;
+    QSharedPointer<CGisItemWpt> gisItem = nullptr;
 };
 
 inline bool operator==(const poi_t &poi1, const poi_t &poi2)

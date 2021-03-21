@@ -131,7 +131,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
 
 /// used to create waypoint from GPX file
 CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
-    : IGisItem(project, eTypeWpt, project->childCount())
+    : IGisItem(project, eTypeWpt, project == nullptr ? NOIDX : project->childCount())
 {
     readGpx(xml);
     detBoundingRect();

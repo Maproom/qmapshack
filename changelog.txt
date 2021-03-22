@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-337] Upgrade to Proj 8 API
 [QMS-344] Better integration of new PROJ lib into cmake build system
 [QMS-349] Upgrade to Quazip Qt5 V1.x
+[QMS-353] "Select Items on Map" does not update when items are removed
 
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release

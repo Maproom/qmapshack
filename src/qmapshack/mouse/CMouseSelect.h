@@ -37,6 +37,7 @@ public:
     void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
 
 private slots:
+    void slotUpdate();
     void slotCopy() const;
     void slotRoute() const;
     void slotEditPrxWpt() const;

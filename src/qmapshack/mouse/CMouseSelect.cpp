@@ -35,6 +35,7 @@ CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     CScrOptSelect * scrOptSelect;
     scrOpt = scrOptSelect = new CScrOptSelect(this);
 
+    connect(&CGisWorkspace::self(), &CGisWorkspace::sigChanged, this, &CMouseSelect::slotUpdate);
     connect(scrOptSelect->toolCopy,         &QToolButton::clicked, this, &CMouseSelect::slotCopy);
     connect(scrOptSelect->toolRoute,        &QToolButton::clicked, this, &CMouseSelect::slotRoute);
     connect(scrOptSelect->toolEditPrxWpt,   &QToolButton::clicked, this, &CMouseSelect::slotEditPrxWpt);
@@ -155,7 +156,11 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     IMouseSelect::draw(p, needsRedraw, rect);
 }
 
-
+void CMouseSelect::slotUpdate()
+{
+    rectLastSel = {};
+    canvas->update();
+}
 
 void CMouseSelect::slotCopy() const
 {

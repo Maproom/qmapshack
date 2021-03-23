@@ -43,7 +43,8 @@ CSearch::CSearch(QString searchstring)
 
     //Detect which comparison keyword in order to later spilt the string at this word.
     QString searchTypeKeyword;
-    for(const QString& key:keywordSearchTypeMap.keys())
+    const QStringList& keys = keywordSearchTypeMap.keys();
+    for(const QString& key : keys)
     {
         //Make spaces around so for example with is not detected inside without
         if(searchstring.contains(" " + key + " ", Qt::CaseInsensitive))
@@ -73,8 +74,9 @@ CSearch::CSearch(QString searchstring)
         search.searchType = keywordSearchTypeMap.value(searchTypeKeyword);
         //Everything before the Search Type keyword is the property, i.e. "date after 2019" would result in "date"
         search.property = eSearchPropertyNoMatch;
-        QString propertyString = searchstring.section(searchTypeKeyword, 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
-        for(const QString& key:searchPropertyEnumMap.keys())
+        const QString& propertyString = searchstring.section(searchTypeKeyword, 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
+        const QStringList& keys = searchPropertyEnumMap.keys();
+        for(const QString& key : keys)
         {
             if(propertyString.compare(key, Qt::CaseInsensitive) == 0)
             {
@@ -85,9 +87,9 @@ CSearch::CSearch(QString searchstring)
         //Don't raise a syntax error yet, since the improve query might find the correct property
 
         //Everything after the Search Type keyword is the value, i.e. "date after 2019" would result in "2019"
-        QString filterValueString = searchstring.section(searchTypeKeyword, 1, -1, QString::SectionCaseInsensitiveSeps).simplified();
-        QString filterValueStringFirstPart = filterValueString.section(tr("and"), 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
-        QString filterValueStringSecondPart = filterValueString.section(tr("and"), 1, -1, QString::SectionCaseInsensitiveSeps).simplified();
+        const QString& filterValueString = searchstring.section(searchTypeKeyword, 1, -1, QString::SectionCaseInsensitiveSeps).simplified();
+        const QString& filterValueStringFirstPart = filterValueString.section(tr("and"), 0, 0, QString::SectionCaseInsensitiveSeps).simplified();
+        const QString& filterValueStringSecondPart = filterValueString.section(tr("and"), 1, -1, QString::SectionCaseInsensitiveSeps).simplified();
         searchValue_t filterValue;
 
         //Try if it is a time. Do so first, since this is the most exclusive
@@ -98,16 +100,16 @@ CSearch::CSearch(QString searchstring)
             QLocale::c().timeFormat(QLocale::ShortFormat)
         };
 
-        for(const QString& tf:timeFormats)
+        for(const QString& tf : timeFormats)
         {
-            QTime time1a = QLocale::system().toTime(filterValueStringFirstPart, tf);
+            const QTime& time1a = QLocale::system().toTime(filterValueStringFirstPart, tf);
             if(time1a.isValid())
             {
                 filterValue.value1 = time1a.msecsSinceStartOfDay() / 1000;
                 filterValue.str1 = "SsE";
             }
 
-            QTime time1b = QLocale::c().toTime(filterValueStringFirstPart, tf);
+            const QTime& time1b = QLocale::c().toTime(filterValueStringFirstPart, tf);
             if(time1b.isValid())
             {
                 filterValue.value1 = time1b.msecsSinceStartOfDay() / 1000;
@@ -116,14 +118,14 @@ CSearch::CSearch(QString searchstring)
 
             if(time1a.isValid() || time1b.isValid())
             {
-                QTime time2a = QLocale::system().toTime(filterValueStringSecondPart, tf);
+                const QTime& time2a = QLocale::system().toTime(filterValueStringSecondPart, tf);
                 if(time2a.isValid())
                 {
                     filterValue.value2 = time2a.msecsSinceStartOfDay() / 1000;
                     filterValue.str2 = "SsE";
                 }
 
-                QTime time2b = QLocale::c().toTime(filterValueStringSecondPart, tf);
+                const QTime& time2b = QLocale::c().toTime(filterValueStringSecondPart, tf);
                 if(time2b.isValid())
                 {
                     filterValue.value2 = time2b.msecsSinceStartOfDay() / 1000;
@@ -149,14 +151,14 @@ CSearch::CSearch(QString searchstring)
 
             for(const QString& df:dateFormats)
             {
-                QDateTime time1a = QLocale::system().toDateTime(filterValueStringFirstPart, df);
+                const QDateTime& time1a = QLocale::system().toDateTime(filterValueStringFirstPart, df);
                 if(time1a.isValid())
                 {
                     filterValue.value1 = time1a.toSecsSinceEpoch();
                     filterValue.str1 = "SsE";
                 }
 
-                QDateTime time1b = QLocale::c().toDateTime(filterValueStringFirstPart, df);
+                const QDateTime& time1b = QLocale::c().toDateTime(filterValueStringFirstPart, df);
                 if(time1b.isValid())
                 {
                     filterValue.value1 = time1b.toSecsSinceEpoch();
@@ -165,14 +167,14 @@ CSearch::CSearch(QString searchstring)
 
                 if(time1a.isValid() || time1b.isValid())
                 {
-                    QDateTime time2a = QLocale::system().toDateTime(filterValueStringSecondPart, df);
+                    const QDateTime& time2a = QLocale::system().toDateTime(filterValueStringSecondPart, df);
                     if(time2a.isValid())
                     {
                         filterValue.value2 = time2a.toSecsSinceEpoch();
                         filterValue.str2 = "SsE";
                     }
 
-                    QDateTime time2b = QLocale::c().toDateTime(filterValueStringSecondPart, df);
+                    const QDateTime& time2b = QLocale::c().toDateTime(filterValueStringSecondPart, df);
                     if(time2b.isValid())
                     {
                         filterValue.value2 = time2b.toSecsSinceEpoch();

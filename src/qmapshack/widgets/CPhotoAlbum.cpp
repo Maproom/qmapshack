@@ -70,7 +70,7 @@ void CPhotoAlbum::slotAddImage()
     QString filters       = "All Files (*);; All Images (*.png *.jpg);; PNG Image (*.png);; JPEG Image (*.jpg)";
     QString defaultFilter = "All Images (*.png *.jpg)";
 
-    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Select images..."), path, filters, &defaultFilter);
+    const QStringList& filenames = QFileDialog::getOpenFileNames(this, tr("Select images..."), path, filters, &defaultFilter);
     if(filenames.isEmpty())
     {
         return;

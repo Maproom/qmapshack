@@ -89,7 +89,7 @@ void CDetailsRte::setupGui()
 //            QTreeWidgetItem * item = new QTreeWidgetItem(treeWidget);
 
 //            IUnit::self().meter2distance(subpt.distance, val, unit);
-//            QString str = QString("Time: %1 Dist.: %2 %3").arg(subpt.time.toString()).arg(val).arg(unit);
+//            QString str = QString("Time: %1 Dist.: %2 %3").arg(subpt.time.toString()).arg(val, unit);
 //            str += "\n" + subpt.instruction;
 
 //            item->setText(0,str);

@@ -46,7 +46,7 @@ CScrOptWptRadius::CScrOptWptRadius(CGisItemWpt *wpt, const QPoint& point, IMouse
 
     QString val, unit;
     IUnit::self().meter2distance(proximity, val, unit);
-    label->setText(QString("%1%2").arg(val).arg(unit));
+    label->setText(QString("%1%2").arg(val, unit));
 
     adjustSize();
 

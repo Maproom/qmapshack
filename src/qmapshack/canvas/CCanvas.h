@@ -129,7 +129,7 @@ public:
     void setMousePrint();
     void setMouseSelect();
 
-    void showProfileAsWindow(bool yes);
+    void showProfileAsWindow();
     void showProfile(bool yes);
 
     void buildHelpText();
@@ -183,7 +183,7 @@ public:
 
     static qreal gisLayerOpacity;
 
-signals:
+signals:    
     void sigMousePosition(const QPointF& pos, qreal ele, qreal slope);
     void sigZoom();
     void sigMove();
@@ -241,7 +241,7 @@ private:
 
     bool showTrackOverlays = true;
 
-    QColor backColor = "#FFFFBF";       //< the background color used in case of missing map tiles
+    QColor backColor = 0x00FFFFBF;      //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
     CMapDraw * map;                     //< the map object attached to this canvas
     CDemDraw * dem;                     //< the elevation data layer attached to this canvas

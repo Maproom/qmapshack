@@ -49,7 +49,7 @@ void CTemplateWidget::listTemplates()
     if(!path.isEmpty())
     {
         QDir dir(path);
-        QStringList files = dir.entryList(QStringList("*.ui"), QDir::Files);
+        const QStringList& files = dir.entryList(QStringList("*.ui"), QDir::Files);
         for(const QString& file : files)
         {
             QString name = QFileInfo(file).completeBaseName().replace("_", " ");
@@ -76,7 +76,7 @@ QString CTemplateWidget::text()
     QList<QGroupBox*> groups = widget->findChildren<QGroupBox*>(QRegExp("group.*"), Qt::FindDirectChildrenOnly);
     qSort(groups.begin(), groups.end(), [](const QGroupBox * g1, const QGroupBox * g2){return g1->objectName() < g2->objectName(); });
 
-    for(const QGroupBox * group : groups)
+    for(const QGroupBox * group : qAsConst(groups))
     {
         str += QString("<p><b>%1</b>: ").arg(group->title());
         str += resolveGroup(group);
@@ -92,7 +92,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
     QList<QWidget *> widgets = group->findChildren<QWidget*>(QRegExp(".*"), Qt::FindDirectChildrenOnly);
     qSort(widgets.begin(), widgets.end(), [](const QWidget * w1, const QWidget * w2){return w1->property("order") < w2->property("order"); });
 
-    for(const QWidget * w : widgets)
+    for(const QWidget * w : qAsConst(widgets))
     {
         const QString pre(str.isEmpty() ? "" : ", ");
 
@@ -205,7 +205,7 @@ void CTemplateWidget::slotTemplateActivated(int idx)
         {
             widget = new QLabel(loader.errorString());
         }
-        else
+        else if(nextInFocusChain() != nullptr)
         {
             // convert focus chain into a sortable property.
             quint32 cnt     = 0;
@@ -225,7 +225,7 @@ void CTemplateWidget::slotTemplateActivated(int idx)
 
                 next = next->nextInFocusChain();
             }
-            while(next != first);
+            while(next && next != first);
 
             success = true;
         }

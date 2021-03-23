@@ -245,7 +245,7 @@ CMainWindow::CMainWindow()
     CDemDraw::loadDemPath(cfg);
 
     cfg.beginGroup("Views");
-    QStringList names = cfg.childGroups();
+    const QStringList& names = cfg.childGroups();
 
     for(const QString &name : names)
     {
@@ -313,7 +313,7 @@ CMainWindow::CMainWindow()
     if (cfg.contains("MainWindow/activedocks"))
     {
         const QStringList & dockNames = cfg.value("MainWindow/activedocks").toStringList();
-        for(QDockWidget * const & dock : docks)
+        for(QDockWidget * const & dock : qAsConst(docks))
         {
             if(dockNames.contains(dock->objectName()))
             {
@@ -322,7 +322,7 @@ CMainWindow::CMainWindow()
         }
     }
 
-    for (QDockWidget * const & dock : docks)
+    for (QDockWidget * const & dock : qAsConst(docks))
     {
         connect(dock, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
         connect(dock, &QDockWidget::topLevelChanged, this, &CMainWindow::slotDockFloating);
@@ -480,7 +480,7 @@ CMainWindow::CMainWindow()
     prepareMenuForMac();
 
     // make sure all actions that have a shortcut are available even when menu and toolbar are not visible
-    for (QAction * action : availableActions)
+    for (QAction * action : qAsConst(availableActions))
     {
         if (!action->shortcuts().isEmpty())
         {
@@ -514,7 +514,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("geometry", saveGeometry());
     cfg.setValue("units", IUnit::self().type);
     QStringList activeDockNames;
-    for (QDockWidget * const & dock : activeDocks)
+    for (QDockWidget * const & dock : qAsConst(activeDocks))
     {
         activeDockNames << dock->objectName();
     }
@@ -828,7 +828,8 @@ void CMainWindow::zoomCanvasTo(const QRectF rect)
 
 void CMainWindow::resetMouse()
 {
-    for(CCanvas * canvas : getCanvas())
+    const QList<CCanvas*>& allCanvas = getCanvas();
+    for(CCanvas * canvas : allCanvas)
     {
         canvas->resetMouse();
     }
@@ -1174,7 +1175,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
     {
         QString val, unit;
         IUnit::self().meter2elevation(ele, val, unit);
-        lblElevation->setText(tr("Ele.: %1%2").arg(val).arg(unit));
+        lblElevation->setText(tr("Ele.: %1%2").arg(val, unit));
         lblElevation->show();
     }
     else
@@ -1187,7 +1188,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
         QString val;
         QString unit;
         IUnit::self().slope2string(slope, val, unit);
-        lblSlope->setText(tr("Slope: %1%2", "terrain").arg(val).arg(unit));
+        lblSlope->setText(tr("Slope: %1%2", "terrain").arg(val, unit));
         lblSlope->show();
     }
     else
@@ -1218,6 +1219,10 @@ void CMainWindow::slotUpdateTabWidgets()
     for(int n = 0; n < N; n++)
     {
         QWidget * w = tabWidget->widget(n);
+        if(w == nullptr)
+        {
+            continue;
+        }
 
         CCanvas * canvas = dynamic_cast<CCanvas*>(w);
         if(canvas != nullptr)
@@ -1442,14 +1447,14 @@ void CMainWindow::slotLoadView()
     cfg.setValue("Paths/lastViewPath", path);
 }
 
-void CMainWindow::slotSetProfileMode(bool on)
+void CMainWindow::slotSetProfileMode(bool /*on*/)
 {
     for(int i = 0; i < tabWidget->count(); i++)
     {
         CCanvas * view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
         if(nullptr != view)
         {
-            view->showProfileAsWindow(on);
+            view->showProfileAsWindow();
         }
     }
 }
@@ -1630,7 +1635,7 @@ void CMainWindow::showDocks() const
 void CMainWindow::hideDocks()
 {
     activeDocks.clear();
-    for (QDockWidget * const & dock : docks)
+    for (QDockWidget * const & dock : qAsConst(docks))
     {
         if (!dock->isHidden())
         {
@@ -1661,7 +1666,7 @@ void CMainWindow::slotDockVisibilityChanged(bool visible)
     }
     else
     {
-        for (QDockWidget * const & dock : docks)
+        for (QDockWidget * const & dock : qAsConst(docks))
         {
             if (!dock->isHidden())
             {
@@ -1835,7 +1840,7 @@ void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
 
 void CMainWindow::dropEvent(QDropEvent *event)
 {
-    QList<QUrl> urls = event->mimeData()->urls();
+    const QList<QUrl>& urls = event->mimeData()->urls();
 
     QStringList filenames;
     for(const QUrl &url : urls)

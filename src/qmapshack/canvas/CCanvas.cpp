@@ -169,11 +169,11 @@ CCanvas::~CCanvas()
     saveSizeTrackProfile();
 
     /* stop running drawing-threads and don't destroy unless they have finished*/
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext * context : qAsConst(allDrawContext))
     {
         context->quit();
     }
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext * context : qAsConst(allDrawContext))
     {
         context->wait();
     }
@@ -188,12 +188,12 @@ CCanvas::~CCanvas()
 
 void addHtmlRow(QString& text, const QString& col1, const QString& col2, const QString& td1, const QString& td2)
 {
-    text += QString("<tr><td %3>%1</td><td %4>%2<div/></td></tr>").arg(col1).arg(col2).arg(td1).arg(td2);
+    text += QString("<tr><td %3>%1</td><td %4>%2<div/></td></tr>").arg(col1, col2, td1, td2);
 }
 
 void addHtmlRow(QString& text, const QString& col1, const QString& td1)
 {
-    text += QString("<tr><td %2>%1<div/></td></tr>").arg(col1).arg(td1);
+    text += QString("<tr><td %2>%1<div/></td></tr>").arg(col1, td1);
 }
 
 void CCanvas::buildHelpText()
@@ -351,19 +351,19 @@ void CCanvas::buildHelpText()
     labelHelp->ensureCursorVisible();
 }
 
-void CCanvas::setOverrideCursor(const QCursor &cursor, const QString& src)
+void CCanvas::setOverrideCursor(const QCursor &cursor, const QString& /*src*/)
 {
 //    qDebug() << "setOverrideCursor" << src;
     QApplication::setOverrideCursor(cursor);
 }
 
-void CCanvas::restoreOverrideCursor(const QString& src)
+void CCanvas::restoreOverrideCursor(const QString& /*src*/)
 {
 //    qDebug() << "restoreOverrideCursor" << src;
     QApplication::restoreOverrideCursor();
 }
 
-void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString &src)
+void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString & /*src*/)
 {
 //    qDebug() << "changeOverrideCursor" << src;
     QApplication::changeOverrideCursor(cursor);
@@ -402,7 +402,8 @@ void CCanvas::loadConfig(QSettings& cfg)
     dem->loadConfig(cfg);
     grid->loadConfig(cfg);
 
-    for(IDrawContext * context : allDrawContext.mid(1))
+    const QList<IDrawContext*>& allContext = allDrawContext.mid(1);
+    for(IDrawContext * context : allContext)
     {
         context->zoom(map->zoom());
     }
@@ -515,7 +516,7 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
     QString report;
     QStringList keys = statusMessages.keys();
     keys.sort();
-    for(const QString &key : keys)
+    for(const QString &key : qAsConst(keys))
     {
         report += statusMessages[key] + "\n";
     }
@@ -878,7 +879,7 @@ void CCanvas::drawScale(QPainter& p, QRectF drawRect)
 
     QString val, unit;
     IUnit::self().meter2distance(d, val, unit);
-    CDraw::text(QString("%1 %2").arg(val).arg(unit), p, pt3, Qt::black);
+    CDraw::text(QString("%1 %2").arg(val, unit), p, pt3, Qt::black);
 }
 
 void CCanvas::slotTriggerCompleteUpdate(CCanvas::redraw_e flags)
@@ -1044,7 +1045,8 @@ void CCanvas::zoomTo(const QRectF& rect)
 {
     posFocus = rect.center();
     map->zoom(rect);
-    for(IDrawContext * context : allDrawContext.mid(1))
+    const QList<IDrawContext*>& allContext = allDrawContext.mid(1);
+    for(IDrawContext * context : allContext)
     {
         context->zoom(map->zoom());
     }
@@ -1061,7 +1063,7 @@ void CCanvas::setupGrid()
 
 void CCanvas::setupBackgroundColor()
 {
-    QColorDialog::setCustomColor(0, "#FFFFBF");
+    QColorDialog::setCustomColor(0, 0x00FFFFBF);
     const QColor &selected = QColorDialog::getColor(backColor, this, tr("Setup Map Background"));
 
     if(selected.isValid())
@@ -1116,7 +1118,7 @@ QString CCanvas::getProjection()
 
 void CCanvas::setProjection(const QString& proj)
 {
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext * context : qAsConst(allDrawContext))
     {
         if(!context->setProjection(proj))
         {
@@ -1135,7 +1137,7 @@ void CCanvas::setProjection(const QString& proj)
 
 void CCanvas::setScales(const scales_type_e type)
 {
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext * context : qAsConst(allDrawContext))
     {
         context->setScales(type);
     }
@@ -1175,8 +1177,8 @@ void CCanvas::getElevationAt(SGisLine& line) const
 void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
 {
     map->zoom(in, needsRedraw);
-
-    for(IDrawContext * context : allDrawContext.mid(1))
+    const QList<IDrawContext*>& allContext = allDrawContext.mid(1);
+    for(IDrawContext * context : allContext)
     {
         context->zoom(map->zoom());
     }
@@ -1246,7 +1248,7 @@ void CCanvas::setSizeTrackProfile()
     }
 }
 
-void CCanvas::showProfileAsWindow(bool yes)
+void CCanvas::showProfileAsWindow()
 {
     if(plotTrackProfile)
     {
@@ -1270,7 +1272,7 @@ void CCanvas::showProfile(bool yes)
 bool CCanvas::setDrawContextSize(const QSize& s)
 {
     bool done = true;
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext * context : qAsConst(allDrawContext))
     {
         done &= context->resize(s);
     }
@@ -1290,17 +1292,17 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool 
 
     redraw_e redraw = eRedrawAll;
 
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext * context : qAsConst(allDrawContext))
     {
         context->draw(p, redraw, focus);
     }
 
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext * context : qAsConst(allDrawContext))
     {
         context->wait();
     }
 
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext * context : qAsConst(allDrawContext))
     {
         context->draw(p, redraw, focus);
     }

@@ -39,7 +39,7 @@ CSelectDBFolder::CSelectDBFolder(QList<quint64> &ids, QString &db, QString &host
 
     SETTINGS;
     cfg.beginGroup("Database");
-    QStringList names = cfg.value("names").toStringList();
+    const QStringList& names = cfg.value("names").toStringList();
     cfg.beginGroup("Entries");
     for(const QString &name : names)
     {
@@ -49,19 +49,19 @@ CSelectDBFolder::CSelectDBFolder(QList<quint64> &ids, QString &db, QString &host
         }
 
         cfg.beginGroup(name);
-        QString type = cfg.value("type", "SQLite").toString();
+        const QString& type = cfg.value("type", "SQLite").toString();
         if(type == "SQLite")
         {
-            QString filename = cfg.value("filename", "").toString();
+            const QString& filename = cfg.value("filename", "").toString();
             new CDBFolderSqlite(filename, name, treeWidget);
         }
 
         if(type == "MySQL")
         {
-            QString server  = cfg.value("server", "").toString();
-            QString port    = cfg.value("port", "").toString();
-            QString user    = cfg.value("user", "").toString();
-            QString passwd  = cfg.value("passwd", "").toString();
+            const QString& server  = cfg.value("server", "").toString();
+            const QString& port    = cfg.value("port", "").toString();
+            const QString& user    = cfg.value("user", "").toString();
+            const QString& passwd  = cfg.value("passwd", "").toString();
             bool noPasswd   = cfg.value("noPasswd", false).toBool();
             new CDBFolderMysql(server, port, user, passwd, noPasswd, name, treeWidget);
         }

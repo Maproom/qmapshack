@@ -416,7 +416,7 @@ QString CGarminPolygon::getLabelText() const
         QString unit;
         QString val = labels[0];
         IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
-        str = QString("%1 %2").arg(val).arg(unit);
+        str = QString("%1 %2").arg(val, unit);
     }
     break;
 

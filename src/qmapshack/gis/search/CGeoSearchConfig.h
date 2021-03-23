@@ -44,11 +44,11 @@ public:
     const QIcon getCurrentIcon() const;
 
 signals:
-    void sigConfigChanged() const;
+    void sigConfigChanged();
 
 private:
     CGeoSearchConfig(QObject* parent);
-    void emitChanged() const;
+    void emitChanged();
 
     static CGeoSearchConfig * pSelf;
 

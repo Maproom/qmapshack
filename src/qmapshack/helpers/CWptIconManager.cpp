@@ -42,7 +42,7 @@ CWptIconManager::~CWptIconManager()
 
 void CWptIconManager::removeNumberedBullets()
 {
-    for(const QString& filename : mapNumberedBullets)
+    for(const QString& filename : qAsConst(mapNumberedBullets))
     {
         QFile::remove(filename);
     }
@@ -141,7 +141,7 @@ void CWptIconManager::init()
     QDir dirIcon(cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString());
 
 
-    QStringList filenames = dirIcon.entryList(QString("*.bmp *.png").split(" "), QDir::Files);
+    const QStringList& filenames = dirIcon.entryList(QString("*.bmp *.png").split(" "), QDir::Files);
 
     for(const QString &filename : filenames)
     {
@@ -282,7 +282,7 @@ QMenu * CWptIconManager::getWptIconMenu(const QString& title, QObject * obj, con
 
     qSort(keys.begin(), keys.end(), sortByString);
 
-    for(const QString &key : keys)
+    for(const QString &key : qAsConst(keys))
     {
         const QString& icon = wptIcons[key].path;
         QPixmap pixmap      = loadIcon(icon);

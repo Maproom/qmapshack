@@ -51,7 +51,7 @@ void CWptIconDialog::setupList(QObject * obj)
 
     qSort(keys.begin(), keys.end(), sortByString);
 
-    for(const QString &key : keys)
+    for(const QString &key : qAsConst(keys))
     {
         const QString& icon = wptIcons[key].path;
         QPixmap pixmap      = CWptIconManager::self().loadIcon(icon);

@@ -71,13 +71,17 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
     explanation += "<p>" + IUnit::getUnits().join(", ") + "</p>";
     explanation += tr("<p>The regex search uses this syntax: https://perldoc.perl.org/perlre.html</p>");
     textBrowserExplanation->setText(explanation);
-    for(QString property : CSearch::getSearchTypeKeywords())
+
+    const QStringList& typeKeywords = CSearch::getSearchTypeKeywords();
+    for(const QString& property : typeKeywords)
     {
         QListWidgetItem* item = new QListWidgetItem(property);
         item->setToolTip(CSearch::getSearchTypeExample(property));
         listWidgetComparison->addItem(item);
     }
-    for(QString property : CSearch::getSearchPropertyKeywords())
+
+    const QStringList& propertyKeywords = CSearch::getSearchPropertyKeywords();
+    for(const QString& property : propertyKeywords)
     {
         QListWidgetItem* item = new QListWidgetItem(property);
         item->setToolTip(CSearch::getSearchPropertyMeaning(property));

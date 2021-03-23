@@ -87,7 +87,8 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     if(!geocache.attributes.isEmpty())
     {
-        for(auto& attribute:geocache.attributes.keys())
+        const QList<quint8>& keys = geocache.attributes.keys();
+        for(quint8 attribute : keys)
         {
             QString filepath = "://icons/geocaching/attributes/";
             if(!geocache.attributes[attribute])
@@ -283,7 +284,7 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
 
     bool watchOut       = false;
     QStringList lines   = asw.split("\n");
-    for(const QString &line : lines)
+    for(const QString &line : qAsConst(lines))
     {
         if(!watchOut && re1.exactMatch(line))
         {

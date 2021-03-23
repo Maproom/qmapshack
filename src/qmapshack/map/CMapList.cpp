@@ -112,7 +112,7 @@ void CMapList::sort()
     qSort(items1.begin(), items1.end(), &sortByName<CMapItem>);
 
     QList<QTreeWidgetItem*> items2;
-    for(CMapItem * item : items1)
+    for(CMapItem * item : qAsConst(items1))
     {
         items2 << item;
     }

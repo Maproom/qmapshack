@@ -215,7 +215,7 @@ void CMapIMG::setupTyp()
     polylineProperties[0x01].penBorderDay = QPen(Qt::black, 8, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x01].penBorderNight = QPen(Qt::lightGray, 8, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x01].hasBorder = true;
-    polylineProperties[0x02] = CGarminTyp::polyline_property(0x02, "#cc9900",   4, Qt::SolidLine );
+    polylineProperties[0x02] = CGarminTyp::polyline_property(0x02, 0xffcc9900,   4, Qt::SolidLine );
     polylineProperties[0x02].penBorderDay = QPen(Qt::black, 6, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x02].penBorderNight = QPen(Qt::lightGray, 6, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x02].hasBorder = true;
@@ -223,47 +223,47 @@ void CMapIMG::setupTyp()
     polylineProperties[0x03].penBorderDay = QPen(Qt::black, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x03].penBorderNight = QPen(Qt::lightGray, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x03].hasBorder = true;
-    polylineProperties[0x04] = CGarminTyp::polyline_property(0x04, "#ffff00",   3, Qt::SolidLine );
+    polylineProperties[0x04] = CGarminTyp::polyline_property(0x04, 0xffffff00,   3, Qt::SolidLine );
     polylineProperties[0x04].penBorderDay = QPen(Qt::black, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x04].penBorderNight = QPen(Qt::lightGray, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x04].hasBorder = true;
-    polylineProperties[0x05] = CGarminTyp::polyline_property(0x05, "#dc7c5a",   2, Qt::SolidLine );
+    polylineProperties[0x05] = CGarminTyp::polyline_property(0x05, 0xffdc7c5a,   2, Qt::SolidLine );
     polylineProperties[0x06] = CGarminTyp::polyline_property(0x06, Qt::gray,   2, Qt::SolidLine );
     polylineProperties[0x06].penBorderDay = QPen(Qt::black, 4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-    polylineProperties[0x06].penBorderNight = QPen(QColor("#f0f0f0"), 4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    polylineProperties[0x06].penBorderNight = QPen(QColor(0xfff0f0f0), 4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x06].hasBorder = true;
-    polylineProperties[0x07] = CGarminTyp::polyline_property(0x07, "#c46442",   1, Qt::SolidLine );
-    polylineProperties[0x08] = CGarminTyp::polyline_property(0x08, "#e88866",   2, Qt::SolidLine );
-    polylineProperties[0x09] = CGarminTyp::polyline_property(0x09, "#e88866",   2, Qt::SolidLine );
-    polylineProperties[0x0A] = CGarminTyp::polyline_property(0x0A, "#808080",   2, Qt::SolidLine );
-    polylineProperties[0x0B] = CGarminTyp::polyline_property(0x0B, "#c46442",   2, Qt::SolidLine );
-    polylineProperties[0x0C] = CGarminTyp::polyline_property(0x0C, "#000000",   2, Qt::SolidLine );
+    polylineProperties[0x07] = CGarminTyp::polyline_property(0x07, 0xffc46442,   1, Qt::SolidLine );
+    polylineProperties[0x08] = CGarminTyp::polyline_property(0x08, 0xffe88866,   2, Qt::SolidLine );
+    polylineProperties[0x09] = CGarminTyp::polyline_property(0x09, 0xffe88866,   2, Qt::SolidLine );
+    polylineProperties[0x0A] = CGarminTyp::polyline_property(0x0A, 0xff808080,   2, Qt::SolidLine );
+    polylineProperties[0x0B] = CGarminTyp::polyline_property(0x0B, 0xffc46442,   2, Qt::SolidLine );
+    polylineProperties[0x0C] = CGarminTyp::polyline_property(0x0C, 0xff000000,   2, Qt::SolidLine );
     polylineProperties[0x14] = CGarminTyp::polyline_property(0x14, Qt::white,   2, Qt::DotLine   );
     polylineProperties[0x14].penBorderDay = QPen(Qt::black, 4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x14].penBorderNight = QPen(Qt::lightGray, 4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     polylineProperties[0x14].hasBorder = true;
-    polylineProperties[0x15] = CGarminTyp::polyline_property(0x15, "#000080",   2, Qt::SolidLine );
-    polylineProperties[0x16] = CGarminTyp::polyline_property(0x16, "#E0E0E0",   1, Qt::SolidLine );
-    polylineProperties[0x18] = CGarminTyp::polyline_property(0x18, "#0000ff",   2, Qt::SolidLine );
-    polylineProperties[0x19] = CGarminTyp::polyline_property(0x19, "#00ff00",   2, Qt::SolidLine );
-    polylineProperties[0x1A] = CGarminTyp::polyline_property(0x1A, "#000000",   2, Qt::SolidLine );
-    polylineProperties[0x1B] = CGarminTyp::polyline_property(0x1B, "#000000",   2, Qt::SolidLine );
-    polylineProperties[0x1C] = CGarminTyp::polyline_property(0x1C, "#00c864",   2, Qt::DotLine   );
-    polylineProperties[0x1D] = CGarminTyp::polyline_property(0x1D, "#00c864",   2, Qt::DotLine   );
-    polylineProperties[0x1E] = CGarminTyp::polyline_property(0x1E, "#00c864",   2, Qt::DotLine   );
-    polylineProperties[0x1F] = CGarminTyp::polyline_property(0x1F, "#0000ff",   2, Qt::SolidLine );
-    polylineProperties[0x20] = CGarminTyp::polyline_property(0x20, "#b67824",   1, Qt::SolidLine );
-    polylineProperties[0x21] = CGarminTyp::polyline_property(0x21, "#b67824",   2, Qt::SolidLine );
-    polylineProperties[0x22] = CGarminTyp::polyline_property(0x22, "#b67824",   3, Qt::SolidLine );
-    polylineProperties[0x23] = CGarminTyp::polyline_property(0x23, "#b67824",   1, Qt::SolidLine );
-    polylineProperties[0x24] = CGarminTyp::polyline_property(0x24, "#b67824",   2, Qt::SolidLine );
-    polylineProperties[0x25] = CGarminTyp::polyline_property(0x25, "#b67824",   3, Qt::SolidLine );
-    polylineProperties[0x26] = CGarminTyp::polyline_property(0x26, "#0000ff",   2, Qt::DotLine   );
-    polylineProperties[0x27] = CGarminTyp::polyline_property(0x27, "#c46442",   4, Qt::SolidLine );
-    polylineProperties[0x28] = CGarminTyp::polyline_property(0x28, "#aa0000",   2, Qt::SolidLine );
-    polylineProperties[0x29] = CGarminTyp::polyline_property(0x29, "#ff0000",   2, Qt::SolidLine );
-    polylineProperties[0x2A] = CGarminTyp::polyline_property(0x2A, "#000000",   2, Qt::SolidLine );
-    polylineProperties[0x2B] = CGarminTyp::polyline_property(0x2B, "#000000",   2, Qt::SolidLine );
+    polylineProperties[0x15] = CGarminTyp::polyline_property(0x15, 0xff000080,   2, Qt::SolidLine );
+    polylineProperties[0x16] = CGarminTyp::polyline_property(0x16, 0xffE0E0E0,   1, Qt::SolidLine );
+    polylineProperties[0x18] = CGarminTyp::polyline_property(0x18, 0xff0000ff,   2, Qt::SolidLine );
+    polylineProperties[0x19] = CGarminTyp::polyline_property(0x19, 0xff00ff00,   2, Qt::SolidLine );
+    polylineProperties[0x1A] = CGarminTyp::polyline_property(0x1A, 0xff000000,   2, Qt::SolidLine );
+    polylineProperties[0x1B] = CGarminTyp::polyline_property(0x1B, 0xff000000,   2, Qt::SolidLine );
+    polylineProperties[0x1C] = CGarminTyp::polyline_property(0x1C, 0xff00c864,   2, Qt::DotLine   );
+    polylineProperties[0x1D] = CGarminTyp::polyline_property(0x1D, 0xff00c864,   2, Qt::DotLine   );
+    polylineProperties[0x1E] = CGarminTyp::polyline_property(0x1E, 0xff00c864,   2, Qt::DotLine   );
+    polylineProperties[0x1F] = CGarminTyp::polyline_property(0x1F, 0xff0000ff,   2, Qt::SolidLine );
+    polylineProperties[0x20] = CGarminTyp::polyline_property(0x20, 0xffb67824,   1, Qt::SolidLine );
+    polylineProperties[0x21] = CGarminTyp::polyline_property(0x21, 0xffb67824,   2, Qt::SolidLine );
+    polylineProperties[0x22] = CGarminTyp::polyline_property(0x22, 0xffb67824,   3, Qt::SolidLine );
+    polylineProperties[0x23] = CGarminTyp::polyline_property(0x23, 0xffb67824,   1, Qt::SolidLine );
+    polylineProperties[0x24] = CGarminTyp::polyline_property(0x24, 0xffb67824,   2, Qt::SolidLine );
+    polylineProperties[0x25] = CGarminTyp::polyline_property(0x25, 0xffb67824,   3, Qt::SolidLine );
+    polylineProperties[0x26] = CGarminTyp::polyline_property(0x26, 0xff0000ff,   2, Qt::DotLine   );
+    polylineProperties[0x27] = CGarminTyp::polyline_property(0x27, 0xffc46442,   4, Qt::SolidLine );
+    polylineProperties[0x28] = CGarminTyp::polyline_property(0x28, 0xffaa0000,   2, Qt::SolidLine );
+    polylineProperties[0x29] = CGarminTyp::polyline_property(0x29, 0xffff0000,   2, Qt::SolidLine );
+    polylineProperties[0x2A] = CGarminTyp::polyline_property(0x2A, 0xff000000,   2, Qt::SolidLine );
+    polylineProperties[0x2B] = CGarminTyp::polyline_property(0x2B, 0xff000000,   2, Qt::SolidLine );
 
     polylineProperties[0x01].strings[0x00] = tr("Major highway");
     polylineProperties[0x02].strings[0x00] = tr("Principal highway");
@@ -302,67 +302,67 @@ void CMapIMG::setupTyp()
     polylineProperties[0x2b].strings[0x00] = tr("Hazard boundary");
 
     polygonProperties.clear();
-    polygonProperties[0x01] = CGarminTyp::polygon_property(0x01, Qt::NoPen, "#d2c0c0", Qt::SolidPattern);
-    polygonProperties[0x02] = CGarminTyp::polygon_property(0x02, Qt::NoPen, "#fbeab7", Qt::SolidPattern);
-    polygonProperties[0x03] = CGarminTyp::polygon_property(0x03, Qt::NoPen, "#a4b094", Qt::SolidPattern);
-    polygonProperties[0x04] = CGarminTyp::polygon_property(0x04, Qt::NoPen, "#808080", Qt::SolidPattern);
-    polygonProperties[0x05] = CGarminTyp::polygon_property(0x05, Qt::NoPen, "#f0f0f0", Qt::SolidPattern);
-    polygonProperties[0x06] = CGarminTyp::polygon_property(0x06, Qt::NoPen, "#cacaca", Qt::SolidPattern);
-    polygonProperties[0x07] = CGarminTyp::polygon_property(0x07, Qt::NoPen, "#feebcf", Qt::SolidPattern);
-    polygonProperties[0x08] = CGarminTyp::polygon_property(0x08, Qt::NoPen, "#fde8d5", Qt::SolidPattern);
-    polygonProperties[0x09] = CGarminTyp::polygon_property(0x09, Qt::NoPen, "#fee8b8", Qt::SolidPattern);
-    polygonProperties[0x0a] = CGarminTyp::polygon_property(0x0a, Qt::NoPen, "#fdeac6", Qt::SolidPattern);
-    polygonProperties[0x0b] = CGarminTyp::polygon_property(0x0b, Qt::NoPen, "#fddfbd", Qt::SolidPattern);
-    polygonProperties[0x0c] = CGarminTyp::polygon_property(0x0c, Qt::NoPen, "#ebeada", Qt::SolidPattern);
-    polygonProperties[0x0d] = CGarminTyp::polygon_property(0x0d, Qt::NoPen, "#f8e3be", Qt::SolidPattern);
-    polygonProperties[0x0e] = CGarminTyp::polygon_property(0x0e, Qt::NoPen, "#e0e0e0", Qt::SolidPattern);
-    polygonProperties[0x13] = CGarminTyp::polygon_property(0x13, Qt::NoPen, "#cc9900", Qt::SolidPattern);
-    polygonProperties[0x14] = CGarminTyp::polygon_property(0x14, Qt::NoPen, "#b7e999", Qt::SolidPattern);
-    polygonProperties[0x15] = CGarminTyp::polygon_property(0x15, Qt::NoPen, "#b7e999", Qt::SolidPattern);
-    polygonProperties[0x16] = CGarminTyp::polygon_property(0x16, Qt::NoPen, "#b7e999", Qt::SolidPattern);
-    polygonProperties[0x17] = CGarminTyp::polygon_property(0x17, Qt::NoPen, "#90be00", Qt::SolidPattern);
-    polygonProperties[0x18] = CGarminTyp::polygon_property(0x18, Qt::NoPen, "#00ff00", Qt::SolidPattern);
-    polygonProperties[0x19] = CGarminTyp::polygon_property(0x19, Qt::NoPen, "#f8e3be", Qt::SolidPattern);
-    polygonProperties[0x1a] = CGarminTyp::polygon_property(0x1a, Qt::NoPen, "#d3f5a5", Qt::SolidPattern);
-    polygonProperties[0x1e] = CGarminTyp::polygon_property(0x1e, Qt::NoPen, "#b7e999", Qt::SolidPattern);
-    polygonProperties[0x1f] = CGarminTyp::polygon_property(0x1f, Qt::NoPen, "#b7e999", Qt::SolidPattern);
-    polygonProperties[0x20] = CGarminTyp::polygon_property(0x20, Qt::NoPen, "#b7e999", Qt::SolidPattern);
-    polygonProperties[0x28] = CGarminTyp::polygon_property(0x28, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x29] = CGarminTyp::polygon_property(0x29, Qt::NoPen, "#0000ff", Qt::SolidPattern);
-    polygonProperties[0x32] = CGarminTyp::polygon_property(0x32, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x3b] = CGarminTyp::polygon_property(0x3b, Qt::NoPen, "#0000ff", Qt::SolidPattern);
-    polygonProperties[0x3c] = CGarminTyp::polygon_property(0x3c, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x3d] = CGarminTyp::polygon_property(0x3d, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x3e] = CGarminTyp::polygon_property(0x3e, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x3f] = CGarminTyp::polygon_property(0x3f, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x40] = CGarminTyp::polygon_property(0x40, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x41] = CGarminTyp::polygon_property(0x41, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x42] = CGarminTyp::polygon_property(0x42, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x43] = CGarminTyp::polygon_property(0x43, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x44] = CGarminTyp::polygon_property(0x44, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x45] = CGarminTyp::polygon_property(0x45, Qt::NoPen, "#0000ff", Qt::SolidPattern);
-    polygonProperties[0x46] = CGarminTyp::polygon_property(0x46, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x47] = CGarminTyp::polygon_property(0x47, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x48] = CGarminTyp::polygon_property(0x48, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x49] = CGarminTyp::polygon_property(0x49, Qt::NoPen, "#0080ff", Qt::SolidPattern);
+    polygonProperties[0x01] = CGarminTyp::polygon_property(0x01, Qt::NoPen, 0xffd2c0c0, Qt::SolidPattern);
+    polygonProperties[0x02] = CGarminTyp::polygon_property(0x02, Qt::NoPen, 0xfffbeab7, Qt::SolidPattern);
+    polygonProperties[0x03] = CGarminTyp::polygon_property(0x03, Qt::NoPen, 0xffa4b094, Qt::SolidPattern);
+    polygonProperties[0x04] = CGarminTyp::polygon_property(0x04, Qt::NoPen, 0xff808080, Qt::SolidPattern);
+    polygonProperties[0x05] = CGarminTyp::polygon_property(0x05, Qt::NoPen, 0xfff0f0f0, Qt::SolidPattern);
+    polygonProperties[0x06] = CGarminTyp::polygon_property(0x06, Qt::NoPen, 0xffcacaca, Qt::SolidPattern);
+    polygonProperties[0x07] = CGarminTyp::polygon_property(0x07, Qt::NoPen, 0xfffeebcf, Qt::SolidPattern);
+    polygonProperties[0x08] = CGarminTyp::polygon_property(0x08, Qt::NoPen, 0xfffde8d5, Qt::SolidPattern);
+    polygonProperties[0x09] = CGarminTyp::polygon_property(0x09, Qt::NoPen, 0xfffee8b8, Qt::SolidPattern);
+    polygonProperties[0x0a] = CGarminTyp::polygon_property(0x0a, Qt::NoPen, 0xfffdeac6, Qt::SolidPattern);
+    polygonProperties[0x0b] = CGarminTyp::polygon_property(0x0b, Qt::NoPen, 0xfffddfbd, Qt::SolidPattern);
+    polygonProperties[0x0c] = CGarminTyp::polygon_property(0x0c, Qt::NoPen, 0xffebeada, Qt::SolidPattern);
+    polygonProperties[0x0d] = CGarminTyp::polygon_property(0x0d, Qt::NoPen, 0xfff8e3be, Qt::SolidPattern);
+    polygonProperties[0x0e] = CGarminTyp::polygon_property(0x0e, Qt::NoPen, 0xffe0e0e0, Qt::SolidPattern);
+    polygonProperties[0x13] = CGarminTyp::polygon_property(0x13, Qt::NoPen, 0xffcc9900, Qt::SolidPattern);
+    polygonProperties[0x14] = CGarminTyp::polygon_property(0x14, Qt::NoPen, 0xffb7e999, Qt::SolidPattern);
+    polygonProperties[0x15] = CGarminTyp::polygon_property(0x15, Qt::NoPen, 0xffb7e999, Qt::SolidPattern);
+    polygonProperties[0x16] = CGarminTyp::polygon_property(0x16, Qt::NoPen, 0xffb7e999, Qt::SolidPattern);
+    polygonProperties[0x17] = CGarminTyp::polygon_property(0x17, Qt::NoPen, 0xff90be00, Qt::SolidPattern);
+    polygonProperties[0x18] = CGarminTyp::polygon_property(0x18, Qt::NoPen, 0xff00ff00, Qt::SolidPattern);
+    polygonProperties[0x19] = CGarminTyp::polygon_property(0x19, Qt::NoPen, 0xfff8e3be, Qt::SolidPattern);
+    polygonProperties[0x1a] = CGarminTyp::polygon_property(0x1a, Qt::NoPen, 0xffd3f5a5, Qt::SolidPattern);
+    polygonProperties[0x1e] = CGarminTyp::polygon_property(0x1e, Qt::NoPen, 0xffb7e999, Qt::SolidPattern);
+    polygonProperties[0x1f] = CGarminTyp::polygon_property(0x1f, Qt::NoPen, 0xffb7e999, Qt::SolidPattern);
+    polygonProperties[0x20] = CGarminTyp::polygon_property(0x20, Qt::NoPen, 0xffb7e999, Qt::SolidPattern);
+    polygonProperties[0x28] = CGarminTyp::polygon_property(0x28, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x29] = CGarminTyp::polygon_property(0x29, Qt::NoPen, 0xff0000ff, Qt::SolidPattern);
+    polygonProperties[0x32] = CGarminTyp::polygon_property(0x32, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x3b] = CGarminTyp::polygon_property(0x3b, Qt::NoPen, 0xff0000ff, Qt::SolidPattern);
+    polygonProperties[0x3c] = CGarminTyp::polygon_property(0x3c, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x3d] = CGarminTyp::polygon_property(0x3d, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x3e] = CGarminTyp::polygon_property(0x3e, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x3f] = CGarminTyp::polygon_property(0x3f, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x40] = CGarminTyp::polygon_property(0x40, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x41] = CGarminTyp::polygon_property(0x41, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x42] = CGarminTyp::polygon_property(0x42, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x43] = CGarminTyp::polygon_property(0x43, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x44] = CGarminTyp::polygon_property(0x44, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x45] = CGarminTyp::polygon_property(0x45, Qt::NoPen, 0xff0000ff, Qt::SolidPattern);
+    polygonProperties[0x46] = CGarminTyp::polygon_property(0x46, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x47] = CGarminTyp::polygon_property(0x47, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x48] = CGarminTyp::polygon_property(0x48, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x49] = CGarminTyp::polygon_property(0x49, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
 #ifdef WIN32
-    polygonProperties[0x4a] = CGarminTyp::polygon_property(0x4a, "#000000", qRgba(255, 255, 255, 0), Qt::SolidPattern);
-    polygonProperties[0x4b] = CGarminTyp::polygon_property(0x4b, "#000000", qRgba(255, 255, 255, 0), Qt::SolidPattern);
+    polygonProperties[0x4a] = CGarminTyp::polygon_property(0x4a, 0xff000000, qRgba(255, 255, 255, 0), Qt::SolidPattern);
+    polygonProperties[0x4b] = CGarminTyp::polygon_property(0x4b, 0xff000000, qRgba(255, 255, 255, 0), Qt::SolidPattern);
 #else
-    polygonProperties[0x4a] = CGarminTyp::polygon_property(0x4a, "#000000", Qt::transparent, Qt::NoBrush);
-    polygonProperties[0x4b] = CGarminTyp::polygon_property(0x4b, "#000000", Qt::transparent, Qt::NoBrush);
+    polygonProperties[0x4a] = CGarminTyp::polygon_property(0x4a, 0xff000000, Qt::transparent, Qt::NoBrush);
+    polygonProperties[0x4b] = CGarminTyp::polygon_property(0x4b, 0xff000000, Qt::transparent, Qt::NoBrush);
 #endif
-    polygonProperties[0x4c] = CGarminTyp::polygon_property(0x4c, Qt::NoPen, "#f0e68c", Qt::SolidPattern);
-    polygonProperties[0x4d] = CGarminTyp::polygon_property(0x4d, Qt::NoPen, "#00ffff", Qt::SolidPattern);
-    polygonProperties[0x4e] = CGarminTyp::polygon_property(0x4e, Qt::NoPen, "#d3f5a5", Qt::SolidPattern);
-    polygonProperties[0x4f] = CGarminTyp::polygon_property(0x4f, Qt::NoPen, "#d3f5a5", Qt::SolidPattern);
-    polygonProperties[0x50] = CGarminTyp::polygon_property(0x50, Qt::NoPen, "#b7e999", Qt::SolidPattern);
-    polygonProperties[0x51] = CGarminTyp::polygon_property(0x51, Qt::NoPen, "#0000ff", Qt::DiagCrossPattern);
-    polygonProperties[0x52] = CGarminTyp::polygon_property(0x52, Qt::NoPen, "#4aca4a", Qt::SolidPattern);
-    polygonProperties[0x53] = CGarminTyp::polygon_property(0x53, Qt::NoPen, "#bcedfa", Qt::SolidPattern);
-    polygonProperties[0x54] = CGarminTyp::polygon_property(0x54, Qt::NoPen, "#fde8d5", Qt::SolidPattern);
-    polygonProperties[0x59] = CGarminTyp::polygon_property(0x59, Qt::NoPen, "#0080ff", Qt::SolidPattern);
-    polygonProperties[0x69] = CGarminTyp::polygon_property(0x69, Qt::NoPen, "#0080ff", Qt::SolidPattern);
+    polygonProperties[0x4c] = CGarminTyp::polygon_property(0x4c, Qt::NoPen, 0xfff0e68c, Qt::SolidPattern);
+    polygonProperties[0x4d] = CGarminTyp::polygon_property(0x4d, Qt::NoPen, 0xff00ffff, Qt::SolidPattern);
+    polygonProperties[0x4e] = CGarminTyp::polygon_property(0x4e, Qt::NoPen, 0xffd3f5a5, Qt::SolidPattern);
+    polygonProperties[0x4f] = CGarminTyp::polygon_property(0x4f, Qt::NoPen, 0xffd3f5a5, Qt::SolidPattern);
+    polygonProperties[0x50] = CGarminTyp::polygon_property(0x50, Qt::NoPen, 0xffb7e999, Qt::SolidPattern);
+    polygonProperties[0x51] = CGarminTyp::polygon_property(0x51, Qt::NoPen, 0xff0000ff, Qt::DiagCrossPattern);
+    polygonProperties[0x52] = CGarminTyp::polygon_property(0x52, Qt::NoPen, 0xff4aca4a, Qt::SolidPattern);
+    polygonProperties[0x53] = CGarminTyp::polygon_property(0x53, Qt::NoPen, 0xffbcedfa, Qt::SolidPattern);
+    polygonProperties[0x54] = CGarminTyp::polygon_property(0x54, Qt::NoPen, 0xfffde8d5, Qt::SolidPattern);
+    polygonProperties[0x59] = CGarminTyp::polygon_property(0x59, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
+    polygonProperties[0x69] = CGarminTyp::polygon_property(0x69, Qt::NoPen, 0xFF0080ff, Qt::SolidPattern);
 
     polygonProperties[0x01].strings[0x00] = tr("Large urban area (&gt;200K)");
     polygonProperties[0x02].strings[0x00] = tr("Small urban area (&lt;200K)");
@@ -643,10 +643,10 @@ void CMapIMG::readBasics()
     }
 
     // sometimes there are dummy blocks at the end of the FAT
-    if(gar_load(quint32, pImgHdr->dataoffset) != dataoffset)
-    {
-        dataoffset = gar_load(quint32, pImgHdr->dataoffset);
-    }
+//    if(gar_load(quint32, pImgHdr->dataoffset) != dataoffset)
+//    {
+//        dataoffset = gar_load(quint32, pImgHdr->dataoffset);
+//    }
 
 #ifdef DEBUG_SHOW_SECT_DESC
     {
@@ -687,7 +687,7 @@ void CMapIMG::readBasics()
 
     // combine copyright sections
     copyright.clear();
-    for(const QString &str : copyrights)
+    for(const QString &str : qAsConst(copyrights))
     {
         if(!copyright.isEmpty())
         {
@@ -1092,7 +1092,7 @@ void CMapIMG::processPrimaryMapData()
      * Query all subfiles for possible maplevels.
      * Exclude basemap to avoid pollution.
      */
-    for(const subfile_desc_t &subfile : subfiles)
+    for(const subfile_desc_t &subfile : qAsConst(subfiles))
     {
         for(const maplevel_t &maplevel : subfile.maplevels)
         {
@@ -1354,7 +1354,7 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
     }
 #endif
 
-    for(const subfile_desc_t &subfile : subfiles)
+    for(const subfile_desc_t &subfile : qAsConst(subfiles))
     {
 //        qDebug() << "-------";
 //        qDebug() << (viewport.topLeft() * RAD_TO_DEG) << (viewport.bottomRight() * RAD_TO_DEG);
@@ -2166,7 +2166,7 @@ void CMapIMG::drawText(QPainter& p)
 {
     p.setPen(Qt::black);
 
-    for(const textpath_t &textpath : textpaths)
+    for(const textpath_t &textpath : qAsConst(textpaths))
     {
         QPainterPath path;
         QFont font = textpath.font;
@@ -2295,7 +2295,8 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) const /* override 
     getInfoPoints(pois,   px, dict);
     getInfoPolylines(px, dict);
 
-    for(const QString &value : dict.values())
+    const QStringList& values = dict.values();
+    for(const QString &value : values)
     {
         if(value == "-")
         {
@@ -2313,7 +2314,8 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) const /* override 
     {
         dict.clear();
         getInfoPolygons(px, dict);
-        for(const QString &value : dict.values())
+        const QStringList& values = dict.values();
+        for(const QString &value : values)
         {
             if(value == "-")
             {
@@ -2565,7 +2567,7 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
 
 bool CMapIMG::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline) /* override */
 {
-    for(const CGarminPolygon &line : polylines)
+    for(const CGarminPolygon &line : qAsConst(polylines))
     {
         if(line.pixel.size() < 2)
         {

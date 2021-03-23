@@ -113,7 +113,7 @@ void CRouterBRouterTilesSelectArea::drawGrid()
     QPainter painter(this);
     painter.setPen(gridPen);
 
-    for(const QPoint &tile : gridTiles)
+    for(const QPoint &tile : qAsConst(gridTiles))
     {
         painter.drawPolyline(gridPolygon(tile));
     }

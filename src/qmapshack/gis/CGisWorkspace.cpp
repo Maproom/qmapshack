@@ -230,7 +230,8 @@ void CGisWorkspace::slotWksItemPressed(QTreeWidgetItem * i)
         if (project != nullptr && project->isVisible())
         {
             keyWksSelection = item->getKey();
-            for(CCanvas * canvas : CMainWindow::self().getCanvas())
+            const QList<CCanvas*>& allCanvas = CMainWindow::self().getCanvas();
+            for(CCanvas * canvas : allCanvas)
             {
                 canvas->reportStatus("WksSelection", tr("<b>Item Selection: </b>Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior."));
                 canvas->abortMouse();
@@ -246,7 +247,8 @@ void CGisWorkspace::slotWksItemPressed(QTreeWidgetItem * i)
 void CGisWorkspace::slotWksItemSelectionReset()
 {
     keyWksSelection.clear();
-    for(CCanvas * canvas : CMainWindow::self().getCanvas())
+    const QList<CCanvas*>& allCanvas = CMainWindow::self().getCanvas();
+    for(CCanvas * canvas : allCanvas)
     {
         canvas->reportStatus("WksSelection", "");
         canvas->abortMouse();
@@ -290,7 +292,7 @@ void CGisWorkspace::slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trk
             }
         }
 
-        for(IGisProject * project : projects)
+        for(IGisProject * project : qAsConst(projects))
         {
             project->blockUpdateItems(false);
         }
@@ -585,7 +587,7 @@ void CGisWorkspace::delItemsByKey(const QList<IGisItem::key_t> &keys)
     QSet<CDBProject*>   projects;
     QSet<IGisProject*>  projectsAll;
 
-    for(const IGisItem::key_t key : keys)
+    for(const IGisItem::key_t& key : keys)
     {
         IGisItem * gisItem = getItemByKey(key);
         if(nullptr != gisItem)
@@ -622,12 +624,12 @@ void CGisWorkspace::delItemsByKey(const QList<IGisItem::key_t> &keys)
 
     // make all database projects that are changed to post their new status
     // this will update the database view.
-    for(CDBProject * project : projects)
+    for(CDBProject * project : qAsConst(projects))
     {
         project->postStatus(true);
     }
     // unblock update for all projects seen
-    for(IGisProject * project : projectsAll)
+    for(IGisProject * project : qAsConst(projectsAll))
     {
         project->blockUpdateItems(false);
     }
@@ -744,7 +746,7 @@ void CGisWorkspace::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const 
         }
     }
 
-    for(IGisProject * project : projects)
+    for(IGisProject * project : qAsConst(projects))
     {
         project->blockUpdateItems(false);
     }
@@ -803,7 +805,7 @@ void CGisWorkspace::addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys)
         }
     }
 
-    for(IGisProject * project : projects)
+    for(IGisProject * project : qAsConst(projects))
     {
         project->blockUpdateItems(false);
     }
@@ -1082,7 +1084,7 @@ void CGisWorkspace::colorTrkByKey(const QList<IGisItem::key_t>& keys)
             }
         }
 
-        for(IGisProject * project : projects)
+        for(IGisProject * project : qAsConst(projects))
         {
             project->blockUpdateItems(false);
         }
@@ -1410,7 +1412,7 @@ void CGisWorkspace::tagItemsByKey(const QList<IGisItem::key_t>& keys)
 
     if(dlg.result() == QDialog::Accepted)
     {
-        for(IGisItem * gisItem : items)
+        for(IGisItem * gisItem : qAsConst(items))
         {
             if(dlg.getRatingChanged())
             {

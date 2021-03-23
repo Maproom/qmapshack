@@ -143,10 +143,10 @@ void IDBFolderSql::announceChange() const
     stream << getDBName();
     stream << getDBHost();
 
-    QList<QNetworkInterface> netdevices = QNetworkInterface::allInterfaces();
+    const QList<QNetworkInterface>& netdevices = QNetworkInterface::allInterfaces();
     for(const QNetworkInterface &netdevice : netdevices)
     {
-        QList<QNetworkAddressEntry> networks = netdevice.addressEntries();
+        const QList<QNetworkAddressEntry>& networks = netdevice.addressEntries();
         for(const QNetworkAddressEntry &network : networks)
         {
             socket->writeDatagram(msg, network.broadcast(), port);

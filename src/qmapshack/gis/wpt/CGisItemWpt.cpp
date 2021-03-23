@@ -314,7 +314,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
         }
         QString val, unit;
         IUnit::self().meter2elevation(wpt.ele, val, unit);
-        str += tr("Elevation: %1%2").arg(val).arg(unit);
+        str += tr("Elevation: %1%2").arg(val, unit);
     }
 
     if(proximity != NOFLOAT)
@@ -325,7 +325,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
         }
         QString val, unit;
         IUnit::self().meter2distance(proximity, val, unit);
-        str += tr("Proximity: %1%2").arg(val).arg(unit);
+        str += tr("Proximity: %1%2").arg(val, unit);
     }
 
     QString desc = removeHtml(wpt.desc).simplified();

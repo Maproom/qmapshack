@@ -180,7 +180,8 @@ void CRouterBRouter::updateDialog() const
     }
     comboProfile->clear();
     bool hasItems = false;
-    for(const QString& profile : setup->getProfiles())
+    const QStringList& profiles = setup->getProfiles();
+    for(const QString& profile : profiles)
     {
         comboProfile->addItem(profile, profile);
         hasItems = true;
@@ -265,7 +266,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
             QPolygonF polygon;
             line->getPolylineDegFromData(polygon);
             QString nogoPoints;
-            for (const QPointF point : polygon)
+            for (const QPointF point : qAsConst(polygon))
             {
                 if (!nogoPoints.isEmpty())
                 {

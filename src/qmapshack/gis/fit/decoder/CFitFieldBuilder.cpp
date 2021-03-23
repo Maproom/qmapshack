@@ -29,11 +29,12 @@
 
 void CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(CFitMessage& mesg)
 {
-    for (const CFitField & field : mesg.getFields())
+    const QList<CFitField>& fields = mesg.getFields();
+    for (const CFitField & field : fields)
     {
         CFitFieldBuilder::evaluateFieldProfile(mesg, field);
     }
-    for (const CFitField & field : mesg.getFields())
+    for (const CFitField & field : fields)
     {
         CFitFieldBuilder::expandComponents(mesg, field);
     }
@@ -45,7 +46,7 @@ CFitField CFitFieldBuilder::buildField(const CFitFieldDefinition& def, quint8* f
     return buildField(*fieldProfile, def, fieldData, message);
 }
 
-CFitField CFitFieldBuilder::buildField(const CFitFieldProfile &fieldProfile, const CFitFieldDefinition &def, quint8 *fieldData, const CFitMessage& message)
+CFitField CFitFieldBuilder::buildField(const CFitFieldProfile &fieldProfile, const CFitFieldDefinition &def, quint8 *fieldData, const CFitMessage& /*message*/)
 {
     CFitByteDataTransformer::swapFieldData(def, fieldData);
     const CFitBaseType& baseType = def.getBaseType();
@@ -111,7 +112,8 @@ void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg,  const CFitField 
         for (const CFitSubfieldProfile* subfieldProfile : fieldProfile.getSubfields())
         {
             // the referenced field is for all subfields the same
-            for (const CFitField & referencedField : mesg.getFields())
+            const QList<CFitField>& fields = mesg.getFields();
+            for (const CFitField & referencedField : fields)
             {
                 if (referencedField.getFieldDefNr() == subfieldProfile->getReferencedFieldDefNr() &&
                     referencedField.getValue().toUInt() == subfieldProfile->getReferencedFieldValue())
@@ -132,7 +134,8 @@ void CFitFieldBuilder::expandComponents(CFitMessage& mesg, const CFitField & fie
     if (fieldProfile.hasComponents())
     {
         int offset = 0;
-        for (const CFitComponentfieldProfile* compProfile : fieldProfile.getComponents())
+        const QList<CFitComponentfieldProfile*>& components = fieldProfile.getComponents();
+        for (const CFitComponentfieldProfile* compProfile : components)
         {
             if (field.getBaseType().isSignedInt())
             {

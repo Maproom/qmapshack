@@ -95,7 +95,7 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2distance(dist, val, unit);
-    changed(tr("Hide points by Douglas Peuker algorithm (%1%2)").arg(val).arg(unit), "://icons/48x48/PointHide.png");
+    changed(tr("Hide points by Douglas Peuker algorithm (%1%2)").arg(val, unit), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::filterRemoveInvalidPoints()
@@ -141,7 +141,7 @@ void CGisItemTrk::filterDelete()
     for(CTrackData::trkseg_t& seg : trk.segs)
     {
         QVector<CTrackData::trkpt_t> pts;
-        for(const CTrackData::trkpt_t &pt : seg.pts)
+        for(const CTrackData::trkpt_t &pt : qAsConst(seg.pts))
         {
             if(pt.isHidden())
             {
@@ -283,7 +283,7 @@ void CGisItemTrk::filterOffsetElevation(int offset)
     QString val, unit;
     IUnit::self().meter2elevation(offset, val, unit);
     deriveSecondaryData();
-    changed(tr("Offset elevation data by %1%2.").arg(val).arg(unit), "://icons/48x48/SetEle.png");
+    changed(tr("Offset elevation data by %1%2.").arg(val, unit), "://icons/48x48/SetEle.png");
 }
 
 void CGisItemTrk::filterNewDate(const QDateTime& date)
@@ -316,7 +316,7 @@ void CGisItemTrk::filterObscureDate(int delta)
         QDateTime timestamp = timeStart;
         if(!timestamp.isValid())
         {
-            timestamp = QDateTime::currentDateTime().toUTC();
+            timestamp = QDateTime::currentDateTimeUtc();
         }
 
         for(CTrackData::trkpt_t& pt : trk)
@@ -335,7 +335,7 @@ void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
     QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
     {
-        timestamp = QDateTime::currentDateTime().toUTC();
+        timestamp = QDateTime::currentDateTimeUtc();
     }
 
     for(CTrackData::trkpt_t& pt : trk)
@@ -352,7 +352,7 @@ void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2speed(speed, val, unit);
-    changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+    changed(tr("Changed speed to %1%2.").arg(val, unit), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType)
@@ -366,7 +366,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
     QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
     {
-        timestamp = QDateTime::currentDateTime().toUTC();
+        timestamp = QDateTime::currentDateTimeUtc();
     }
 
     qreal speed = 0;
@@ -414,7 +414,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
-    changed(tr("Changed average moving cycling speed with profile '%3' to %1%2.").arg(val).arg(unit).arg(cyclingType.name), "://icons/48x48/Time.png");
+    changed(tr("Changed average moving cycling speed with profile '%3' to %1%2.").arg(val, unit, cyclingType.name), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
@@ -427,7 +427,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
     QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
     {
-        timestamp = QDateTime::currentDateTime().toUTC();
+        timestamp = QDateTime::currentDateTimeUtc();
     }
 
     // Curve algorithm based on carloscoi curves
@@ -477,7 +477,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
-    changed(tr("Changed average moving hiking speed with profile '%3' to %1%2.").arg(val).arg(unit).arg(hikingType.name), "://icons/48x48/Time.png");
+    changed(tr("Changed average moving hiking speed with profile '%3' to %1%2.").arg(val, unit, hikingType.name), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const
@@ -496,7 +496,7 @@ void CGisItemTrk::filterSplitSegment()
     }
 
     int part = 0;
-    for(const CTrackData::trkseg_t &seg : trk.segs)
+    for(const CTrackData::trkseg_t &seg : qAsConst(trk.segs))
     {
         if(0 < seg.pts.count())
         {
@@ -608,7 +608,7 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
 
             bool firstCycle = true;
             CTrackData::trkpt_t prevScannedPt;
-            for (const CTrackData::trkpt_t& scannedPt : pts)
+            for (const CTrackData::trkpt_t& scannedPt : qAsConst(pts))
             {
                 if (scannedPt.idxTotal == pts[pts.size() - 2].idxTotal)
                 {
@@ -770,5 +770,5 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2distance(distance, val, unit);
-    changed(tr("Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)").arg(val).arg(unit).arg(ratio), "://icons/48x48/FilterZeroSpeedDriftCleaner.png");
+    changed(tr("Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)").arg(val, unit).arg(ratio), "://icons/48x48/FilterZeroSpeedDriftCleaner.png");
 }

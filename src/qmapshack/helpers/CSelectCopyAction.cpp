@@ -34,9 +34,9 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, Q
     labelIcon2->setPixmap(tar->getDisplayIcon());
     labelInfo2->setText(tar->getInfo(IGisItem::eFeatureShowName));
 
-    connect(pushCopy,  &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
-    connect(pushSkip,  &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
-    connect(pushClone, &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
+    connect(pushCopy,  &QPushButton::clicked, this, [this](){slotSelectResult(eResultCopy);});
+    connect(pushSkip,  &QPushButton::clicked, this, [this](){slotSelectResult(eResultSkip);});
+    connect(pushClone, &QPushButton::clicked, this, [this](){slotSelectResult(eResultClone);});
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
     CProgressDialog::setAllVisible(false);
@@ -57,8 +57,8 @@ CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject 
 
     adjustSize();
 
-    connect(pushCopy, &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
-    connect(pushSkip, &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
+    connect(pushCopy, &QPushButton::clicked, this, [this](){slotSelectResult(eResultCopy);});
+    connect(pushSkip, &QPushButton::clicked, this, [this](){slotSelectResult(eResultSkip);});
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
     CProgressDialog::setAllVisible(false);
@@ -75,20 +75,8 @@ bool CSelectCopyAction::allOthersToo()
     return checkAllOtherToo->isChecked();
 }
 
-void CSelectCopyAction::slotSelectResult()
+void CSelectCopyAction::slotSelectResult(result_e r)
 {
-    if(sender() == pushCopy)
-    {
-        result = eResultCopy;
-    }
-    else if(sender() == pushSkip)
-    {
-        result = eResultSkip;
-    }
-    else if(sender() == pushClone)
-    {
-        result = eResultClone;
-    }
-
+    result = r;
     accept();
 }

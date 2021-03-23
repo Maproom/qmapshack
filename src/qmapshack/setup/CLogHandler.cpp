@@ -51,7 +51,7 @@ void CLogHandler::printLoggerInfo()
 
 QString CLogHandler::logfileName()
 {
-    QStringList domainSplit = QCoreApplication::organizationDomain().split(".");
+    const QStringList& domainSplit = QCoreApplication::organizationDomain().split(".");
     QString fileName;
     for(const QString &part : domainSplit)
     {

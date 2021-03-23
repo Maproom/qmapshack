@@ -40,8 +40,8 @@ CDemDraw::CDemDraw(CCanvas *canvas)
 {
     demList = new CDemList(canvas);
     CMainWindow::self().addDemList(demList, canvas->objectName());
-    connect(canvas,  &CCanvas::destroyed,   demList, &CDemList::deleteLater);
-    connect(demList, &CDemList::sigChanged, this,    &CDemDraw::emitSigCanvasUpdate);
+    connect(canvas,  &CCanvas::destroyed, demList, &CDemList::deleteLater);
+    connect(demList, &CDemList::sigChanged, this, &CDemDraw::emitSigCanvasUpdate);
 
     buildMapList();
 
@@ -54,7 +54,7 @@ CDemDraw::~CDemDraw()
 }
 
 bool CDemDraw::setProjection(const QString& proj)
-{    
+{
     // --- save the active maps
     QStringList keys;
     saveActiveMapsList(keys);
@@ -94,7 +94,7 @@ void CDemDraw::setupDemPath(const QStringList &paths)
 {
     demPaths = paths;
 
-    for(CDemDraw * dem : dems)
+    for(CDemDraw * dem : qAsConst(dems))
     {
         QStringList keys;
         dem->saveActiveMapsList(keys);
@@ -150,11 +150,12 @@ void CDemDraw::buildMapList()
     QMutexLocker lock(&CDemItem::mutexActiveDems);
     demList->clear();
 
-    for(const QString &path : demPaths)
+    for(const QString &path : qAsConst(demPaths))
     {
         QDir dir(path);
         // find available maps
-        for(const QString &filename : dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name))
+        const QStringList& filenames = dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name);
+        for(const QString &filename : filenames)
         {
             QFileInfo fi(filename);
 

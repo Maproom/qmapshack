@@ -18,14 +18,13 @@
 
 #include "setup/CAppSetupMac.h"
 
-static QString relTranslationDir = "Resources/translations"; // app
-static QString relRoutinoDir     = "Resources/routino"; // app
-static QString relGdalDir        = "Resources/gdal"; // app
-static QString relProjDir        = "Resources/proj"; // app
-static QString relHelpDir        = "Resources/help"; // app
-static QString relBinDir         = "Tools"; // app
-
-static QString relLogDir         = "Library/Logs"; // home
+QString CAppSetupMac::relTranslationDir = "Resources/translations"; // app
+QString CAppSetupMac::relRoutinoDir     = "Resources/routino"; // app
+QString CAppSetupMac::relGdalDir        = "Resources/gdal"; // app
+QString CAppSetupMac::relProjDir        = "Resources/proj"; // app
+QString CAppSetupMac::relHelpDir        = "Resources/help"; // app
+QString CAppSetupMac::relBinDir         = "Tools"; // app
+QString CAppSetupMac::relLogDir         = "Library/Logs"; // home
 
 
 void CAppSetupMac::extendPath()
@@ -96,7 +95,8 @@ QString CAppSetupMac::routinoPath(QString xmlFile)
 
 QString CAppSetupMac::defaultCachePath()
 {
-    QString cachePath =  QStandardPaths::standardLocations(QStandardPaths::CacheLocation).first();
+    const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::CacheLocation);
+    const QString& cachePath =  standardLocations.first();
     return IAppSetup::path(cachePath, 0, false, 0);
 }
 
@@ -104,9 +104,11 @@ QString CAppSetupMac::defaultCachePath()
 QString CAppSetupMac::userDataPath(QString subdir)
 {
 #if QT_VERSION >= 0x050400
-    QString dataDir = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation).first();
+    const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
+    const QString& dataDir = standardLocations.first();
 #else
-    QString dataDir = QStandardPaths::standardLocations(QStandardPaths::DataLocation).first();
+    const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::DataLocation);
+    const QString& dataDir = standardLocations.first();
 #endif
     return IAppSetup::path(dataDir, subdir, false, 0);
 }
@@ -115,7 +117,8 @@ QString CAppSetupMac::userDataPath(QString subdir)
 QString CAppSetupMac::logDir()
 {
     // home location returns / (root) instead of user home...
-    QString home = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).first();
+    const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation);
+    const QString& home = standardLocations.first();
     QDir dir = QDir(home);
     dir.cdUp();
     return IAppSetup::path(dir.absolutePath(), relLogDir, false, 0);

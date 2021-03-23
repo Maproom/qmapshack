@@ -37,7 +37,7 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
     slopeSpins[3] = spinSlope3;
     slopeSpins[4] = spinSlope4;
 
-    slotPropertiesChanged();
+    CDemPropSetup::slotPropertiesChanged();
 
     connect(sliderOpacity,         &QSlider::valueChanged,      demfile, &IDem::slotSetOpacity);
     connect(sliderOpacity,         &QSlider::valueChanged,      dem,     &CDemDraw::emitSigCanvasUpdate);

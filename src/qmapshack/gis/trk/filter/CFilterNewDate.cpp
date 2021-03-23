@@ -36,8 +36,8 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
     {
     case IUnit::eTZUtc:
     {
-        labelTimeZone->setText(QTimeZone::utc().abbreviation(QDateTime::currentDateTime().toUTC()));
-        dateTimeEdit->setDateTime(QDateTime::currentDateTime().toUTC());
+        labelTimeZone->setText(QTimeZone::utc().abbreviation(QDateTime::currentDateTimeUtc()));
+        dateTimeEdit->setDateTime(QDateTime::currentDateTimeUtc());
         break;
     }
 
@@ -57,7 +57,7 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
 
     case IUnit::eTZSelected:
     {
-        QDateTime datetime = QDateTime::currentDateTimeUtc().toTimeZone(QTimeZone(zone));
+        const QDateTime& datetime = QDateTime::currentDateTimeUtc().toTimeZone(QTimeZone(zone));
         labelTimeZone->setText(datetime.timeZone().abbreviation(datetime));
         dateTimeEdit->setDateTime(datetime);
         break;

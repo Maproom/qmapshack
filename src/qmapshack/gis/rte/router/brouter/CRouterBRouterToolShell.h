@@ -36,12 +36,12 @@ public:
     void stop();
 
 signals:
-    void sigProcessStateChanged(const QProcess::ProcessState newState) const;
-    void sigProcessError(const QProcess::ProcessError error, const QString &errorString) const;
+    void sigProcessStateChanged(const QProcess::ProcessState newState);
+    void sigProcessError(const QProcess::ProcessError error, const QString &errorString);
 
 private slots:
-    void slotStateChanged(const QProcess::ProcessState newState) const;
-    void slotError(const QProcess::ProcessError error) const;
+    void slotStateChanged(const QProcess::ProcessState newState);
+    void slotError(const QProcess::ProcessError error);
     void slotStartupTimer();
 
 private:

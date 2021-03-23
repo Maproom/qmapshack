@@ -623,7 +623,7 @@ void IDBFolder::setChildIndicator()
 void IDBFolder::addItemsSorted(QList<CDBItem*>& items)
 {
     sortItems(items);
-    for(CDBItem * item : items)
+    for(CDBItem * item : qAsConst(items))
     {
         addChild(item);
     }

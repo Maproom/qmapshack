@@ -162,7 +162,7 @@ void CEnergyCyclingDialog::slotApply(bool)
 
     QString val, unit;
     IUnit::self().seconds2time(energyTmpSet.powerMovingTime, val, unit);
-    labelPowerMovingTime->setText(QString("<b>%L1%2</b>").arg(val).arg(unit));
+    labelPowerMovingTime->setText(QString("<b>%L1%2</b>").arg(val, unit));
     labelPowerMovingTimeRatio->setText(QString("<b>%L1%</b>").arg(energyTmpSet.powerMovingTimeRatio * 100, 0, 'f', 1));
 
     labelPower->setText(QString("<b>%L1W</b>").arg(energyTmpSet.power, 0, 'f', 1));

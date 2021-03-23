@@ -49,7 +49,7 @@ void CPropertyTrk::setupData()
     };
     properties << propNull;
 
-    QStringList keys = trk.getExistingDataSources();
+    const QStringList& keys = trk.getExistingDataSources();
     for(const QString &key : keys)
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
@@ -65,7 +65,7 @@ void CPropertyTrk::setupData()
             , property_t::eAxisDistance
             , [](const CTrackData::trkpt_t &p) { return p.distance; }
             , ext.unit
-            , ext.known ? QString("%1 [%2]").arg(nameShortText).arg(ext.unit) : nameShortText
+            , ext.known ? QString("%1 [%2]").arg(nameShortText, ext.unit) : nameShortText
             , ext.factor
             , ext.valueFunc
         };
@@ -94,7 +94,7 @@ void CPropertyTrk::setupData()
             QString unit;
             IUnit::self().slope2unit(0, val, unit);
             property.unit = unit;
-            property.yLabel = QString("%1 [%2]").arg(nameShortText).arg(unit);
+            property.yLabel = QString("%1 [%2]").arg(nameShortText, unit);
             property.getY = [](const CTrackData::trkpt_t &p) {qreal val; QString unit; IUnit::self().slope2unit(p.slope1, val, unit); return val; };
         }
 

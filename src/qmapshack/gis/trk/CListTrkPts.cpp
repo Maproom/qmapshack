@@ -84,7 +84,7 @@ void CListTrkPts::setMouseFocus(qint32 idx)
     QString info = trk->getInfoRange();
     if(!info.isEmpty())
     {
-        QString msg = QString("%1\n%2").arg(tr("Range Info:")).arg(info);
+        QString msg = QString("%1\n%2").arg(tr("Range Info:"), info);
         labelStats->setText(msg);
     }
     else

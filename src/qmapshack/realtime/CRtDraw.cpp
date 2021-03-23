@@ -39,17 +39,8 @@ void CRtDraw::drawt(buffer_t& currentBuffer)
     QPointF pt3 = currentBuffer.ref3;
     QPointF pt4 = currentBuffer.ref4;
 
-    qreal left, right, top, bottom;
-    left     = (pt1.x() < pt4.x() ? pt1.x() : pt4.x());
-    right    = (pt2.x() > pt3.x() ? pt2.x() : pt3.x());
-    top      = (pt1.y() < pt2.y() ? pt1.y() : pt2.y());
-    bottom   = (pt4.y() > pt3.y() ? pt4.y() : pt3.y());
-
     QPointF pp = currentBuffer.ref1;
     convertRad2Px(pp);
-
-
-    QRectF rect(QPointF(left, top), QPointF(right, bottom));
 
     QPolygonF viewport;
     viewport << pt1 << pt2 << pt3 << pt4;

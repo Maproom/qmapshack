@@ -50,9 +50,9 @@ private:
     QVector<QRgb> colortable;
 
     /// width in number of px
-    quint32 xsize_px = 0;
+    qint32 xsize_px = 0;
     /// height in number of px
-    quint32 ysize_px = 0;
+    qint32 ysize_px = 0;
 
     /// scale [px/m]
     qreal xscale = 0;

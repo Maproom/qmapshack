@@ -24,7 +24,7 @@
 #include <QtWidgets>
 
 
-static const QList<extension_t> extensions =
+const QList<extension_t> CLogProject::extensions =
 {
     {"Latitude",           0.0000001,      0.0,        ASSIGN_VALUE(lat, NIL)}   // unit [°]
     , {"Longitude",          0.0000001,      0.0,        ASSIGN_VALUE(lon, NIL)}  // unit [°]

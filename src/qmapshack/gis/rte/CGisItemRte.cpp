@@ -677,9 +677,9 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw * g
 
         QString str, val, unit;
         IUnit::self().seconds2time((mouseMoveFocus->time.toTime_t() - startTime.toTime_t()), val, unit);
-        str += tr("Time: %1%2").arg(val).arg(unit) + " ";
+        str += tr("Time: %1%2").arg(val, unit) + " ";
         IUnit::self().meter2distance(mouseMoveFocus->distance, val, unit);
-        str += tr("Distance: %1%2").arg(val).arg(unit);
+        str += tr("Distance: %1%2").arg(val, unit);
         str += "\n" + mouseMoveFocus->instruction;
 
         // calculate bounding box of text

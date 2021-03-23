@@ -31,7 +31,7 @@ CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
 {
     setupUi(this);
 
-    slotPropertiesChanged();
+    CMapPropSetup::slotPropertiesChanged();
 
     connect(sliderOpacity,       &QSlider::valueChanged,     mapfile, &IMap::slotSetOpacity);
     connect(sliderOpacity,       &QSlider::valueChanged,     map,     &CMapDraw::emitSigCanvasUpdate);

@@ -370,7 +370,7 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
         return CKnownExtension::get(k1).order < CKnownExtension::get(k2).order;
     });
 
-    for(const QString &key : keys)
+    for(const QString &key : qAsConst(keys))
     {
         QStringList tags = key.split('|', QString::SkipEmptyParts);
 
@@ -387,7 +387,7 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
 
             QString lastTag = tags.last();
             tags.pop_back();
-            for(const QString &tag : tags)
+            for(const QString &tag : qAsConst(tags))
             {
                 QDomNode child = node.firstChildElement(tag);
                 if(child.isNull())
@@ -719,7 +719,8 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
     writeXml(xmlCache, "groundspeak:container", geocache.container);
 
     QDomElement xmlAttributes = xmlCache.ownerDocument().createElement("groundspeak:attributes");
-    for(quint8& attribute : geocache.attributes.keys())
+    const QList<quint8>& attributes = geocache.attributes.keys();
+    for(quint8 attribute : attributes)
     {
         QDomElement xmlAttribute = xmlCache.ownerDocument().createElement("groundspeak:attribute");
         xmlAttribute.setAttribute("id", attribute);
@@ -763,7 +764,7 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
         QDomElement xmlLogs = xmlCache.ownerDocument().createElement("groundspeak:logs");
         xmlCache.appendChild(xmlLogs);
 
-        for(const geocachelog_t &log : geocache.logs)
+        for(const geocachelog_t &log : qAsConst(geocache.logs))
         {
             QDomElement xmlLog = xmlCache.ownerDocument().createElement("groundspeak:log");
             xmlLogs.appendChild(xmlLog);
@@ -871,7 +872,7 @@ void CGisItemTrk::save(QDomNode& gpx, bool strictGpx11)
         writeXml(gpxx, "gpxx:DisplayColor", trk.color);
     }
 
-    for(const CTrackData::trkseg_t &seg : trk.segs)
+    for(const CTrackData::trkseg_t &seg : qAsConst(trk.segs))
     {
         QDomElement xmlTrkseg = doc.createElement("trkseg");
         xmlTrk.appendChild(xmlTrkseg);
@@ -947,7 +948,7 @@ void CGisItemRte::save(QDomNode& gpx, bool strictGpx11)
         writeXml(xmlExt, "ql:key", key.item);
     }
 
-    for(const rtept_t &pt : rte.pts)
+    for(const rtept_t &pt : qAsConst(rte.pts))
     {
         QDomElement xmlRtept = doc.createElement("rtept");
         xmlRte.appendChild(xmlRtept);
@@ -1009,7 +1010,7 @@ void CGisItemOvlArea::save(QDomNode& gpx, bool strictGpx11)
     writeXml(xmlArea, "ql:flags",   flags);
     writeXml(xmlArea, history);
 
-    for(const pt_t &pt : area.pts)
+    for(const pt_t &pt : qAsConst(area.pts))
     {
         QDomElement xmlPt = doc.createElement("ql:point");
         xmlArea.appendChild(xmlPt);

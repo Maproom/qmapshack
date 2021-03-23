@@ -165,7 +165,7 @@ public:
        @param str       The string to search for
        @param query     The sql query item to use
      */
-    virtual bool search(const QString& str, QSqlQuery& query)
+    virtual bool search(const QString& /*str*/, QSqlQuery& /*query*/)
     {
         return false;
     }

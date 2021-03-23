@@ -46,14 +46,14 @@ CFitFieldDefinition::CFitFieldDefinition()
 QString CFitFieldDefinition::fieldInfo() const
 {
     QString fstr = QString("%1 %2 %3 (%4): %5, type %6, size %7, endian %8")
-                   .arg(profile().hasSubfields() ? "dynamic" : profile().hasComponents() ? "component" : "field")
-                   .arg(profile().getName())
-                   .arg(profile().getFieldType() == eFieldTypeDevelopment ? " DEV" : "")
+                   .arg(profile().hasSubfields() ? "dynamic" : profile().hasComponents() ? "component" : "field",
+                        profile().getName(),
+                        profile().getFieldType() == eFieldTypeDevelopment ? " DEV" : "")
                    .arg(getDefNr())
                    .arg(getBaseType().name())
-                   .arg(getType())
-                   .arg(getSize())
-                   .arg(getEndianAbilityFlag());
+                   .arg(getType(),
+                        getSize(),
+                        getEndianAbilityFlag());
     return fstr;
 }
 

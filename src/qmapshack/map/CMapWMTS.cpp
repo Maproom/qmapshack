@@ -69,7 +69,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
     if(!ServiceType.contains("WMTS", Qt::CaseInsensitive) || ServiceTypeVersion != "1.0.0")
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unexpected service. '* WMTS 1.0.0' is expected. '%1 %2' is read.").arg(ServiceType).arg(ServiceTypeVersion), QMessageBox::Abort, QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unexpected service. '* WMTS 1.0.0' is expected. '%1 %2' is read.").arg(ServiceType, ServiceTypeVersion), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
 
@@ -277,7 +277,7 @@ void CMapWMTS::getLayers(QListWidget& list)
     }
 
     int i = 0;
-    for(const layer_t &layer : layers)
+    for(const layer_t &layer : qAsConst(layers))
     {
         QListWidgetItem * item = new QListWidgetItem(layer.title, &list);
         item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
@@ -330,7 +330,7 @@ void CMapWMTS::loadConfig(QSettings& cfg) /* override */
 
     // enable layers stored in configuration
     enabled = cfg.value("enabledLayers", enabled).toStringList();
-    for(const QString &str : enabled)
+    for(const QString &str : qAsConst(enabled))
     {
         int idx = str.toInt();
         if(idx < layers.size())
@@ -418,7 +418,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
     QRectF viewport(QPointF(x1, y1) * RAD_TO_DEG, QPointF(x2, y2) * RAD_TO_DEG);
 
     // draw layers
-    for(const layer_t &layer : layers)
+    for(const layer_t &layer : qAsConst(layers))
     {
         if(!layer.boundingBox.intersects(viewport) || !layer.enabled)
         {
@@ -445,7 +445,8 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
         QString tileMatrixId;
         QPointF s1 = (pt2 - pt1) / QPointF(buf.image.width(), buf.image.height());
         qreal d = NOFLOAT;
-        for(const QString &key : tileset.tilematrix.keys())
+        const QStringList& keys = tileset.tilematrix.keys();
+        for(const QString &key : keys)
         {
             const tilematrix_t& tilematrix = tileset.tilematrix[key];
             qreal s2 = tilematrix.scale * 0.28e-3;

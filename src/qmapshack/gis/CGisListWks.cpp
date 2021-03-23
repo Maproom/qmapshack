@@ -503,7 +503,7 @@ void CGisListWks::dropEvent( QDropEvent  * e )
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-    QList<QTreeWidgetItem*> items   = selectedItems();
+    const QList<QTreeWidgetItem*>& items   = selectedItems();
     if(items.isEmpty())
     {
         return;
@@ -1166,7 +1166,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
     bool allUnchecked = true;
     bool allCantSave  = true;
 
-    for(QTreeWidgetItem *item : selectedItems())
+    const QList<QTreeWidgetItem*>& items   = selectedItems();
+    for(QTreeWidgetItem *item : items)
     {
         IGisProject *project = dynamic_cast<IGisProject*>(item);
         if(nullptr != project)
@@ -1222,7 +1223,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             QList<IGisItem::key_t> keysTrk;
             QList<IGisItem::key_t> keysWpt;
 
-            for(QTreeWidgetItem *item : selectedItems())
+            const QList<QTreeWidgetItem*>& items   = selectedItems();
+            for(QTreeWidgetItem *item : items)
             {
                 CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
                 if(trk != nullptr)
@@ -1324,6 +1326,11 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             case IGisItem::eTypeTrk:
             {
                 CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gisItem);
+                if(trk == nullptr)
+                {
+                    break;
+                }
+
                 if(project != nullptr)
                 {
                     actionCombineTrk->setEnabled(project->getItemCountByType(IGisItem::eTypeTrk) > 1);
@@ -1347,6 +1354,11 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             case IGisItem::eTypeWpt:
             {
                 CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(gisItem);
+                if(wpt == nullptr)
+                {
+                    break;
+                }
+
                 actionBubbleWpt->setChecked(wpt->hasBubble());
                 actionBubbleWpt->setEnabled(isProjectVisible);
                 actionEditRadiusWpt->setEnabled(isProjectVisible);
@@ -1363,6 +1375,11 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             case IGisItem::eTypeRte:
             {
                 CGisItemRte * rte = dynamic_cast<CGisItemRte*>(gisItem);
+                if(rte == nullptr)
+                {
+                    break;
+                }
+
                 actionFocusRte->setChecked(rte->hasUserFocus());
                 actionFocusRte->setEnabled(isProjectVisible && rte->isCalculated());
                 actionCalcRte->setEnabled(isProjectVisible);
@@ -1390,7 +1407,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 void CGisListWks::setVisibilityOnMap(bool visible)
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
-    QList<QTreeWidgetItem*> items = selectedItems();
+    const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem *item : items)
     {
         IGisProject *project = dynamic_cast<IGisProject*>(item);
@@ -1467,7 +1484,7 @@ void CGisListWks::slotDeleteProject()
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-    QList<QTreeWidgetItem*> items = selectedItems();
+   const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
@@ -1497,7 +1514,7 @@ void CGisListWks::slotSaveProject()
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-    QList<QTreeWidgetItem*> items = selectedItems();
+   const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
@@ -1519,7 +1536,7 @@ void CGisListWks::slotSaveAsProject()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
-    QList<QTreeWidgetItem*> items = selectedItems();
+   const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
@@ -1534,7 +1551,7 @@ void CGisListWks::slotSaveAsStrictGpx11Project()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
-    QList<QTreeWidgetItem*> items = selectedItems();
+   const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
@@ -1804,7 +1821,7 @@ void CGisListWks::slotActivityTrk(trkact_t act)
     if(CTrackData::trkpt_t::eAct20Bad != act)
     {
         CGisListWksEditLock lock(true, IGisItem::mutexItems);
-        QList<QTreeWidgetItem*> items = selectedItems();
+       const QList<QTreeWidgetItem*>& items = selectedItems();
         for(QTreeWidgetItem * item : items)
         {
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
@@ -1827,7 +1844,7 @@ void CGisListWks::slotColorTrk()
     }
 
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
-    QList<QTreeWidgetItem*> items = selectedItems();
+   const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
@@ -2195,6 +2212,7 @@ bool CGisListWks::event(QEvent * e)
                 if(!project->isValid())
                 {
                     delete project;
+                    break;
                 }
                 project->setWorkspaceFilter(CGisWorkspace::self().getCurrentSearch());
             }
@@ -2294,7 +2312,7 @@ bool CGisListWks::event(QEvent * e)
                 }
             }
 
-            for(CDBProject * project : projects)
+            for(CDBProject * project : qAsConst(projects))
             {
                 project->blockUpdateItems(false);
             }
@@ -2372,7 +2390,8 @@ void CGisListWks::slotSyncDB()
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-    for(QTreeWidgetItem * item : selectedItems())
+    const QList<QTreeWidgetItem*>& items = selectedItems();
+    for(QTreeWidgetItem * item : items)
     {
         CDBProject * project = dynamic_cast<CDBProject*>(item);
         if(project == nullptr)
@@ -2405,7 +2424,8 @@ void CGisListWks::slotCopyProject()
 
     QList<IGisItem::key_t>  keys;
 
-    for(QTreeWidgetItem * item : selectedItems())
+    const QList<QTreeWidgetItem*>& items = selectedItems();
+    for(QTreeWidgetItem * item : items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project == nullptr)

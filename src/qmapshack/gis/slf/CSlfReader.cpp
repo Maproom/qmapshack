@@ -202,8 +202,8 @@ QSet<QString> CSlfReader::findUsedAttributes(const QDomNodeList &xmlEntrs)
     for(int i = 0; i < xmlEntrs.count(); i++)
     {
         const QDomNamedNodeMap &attr = xmlEntrs.item(i).attributes();
-
-        for(const QString &key : attrToExt.keys())
+        const QStringList& keys = attrToExt.keys();
+        for(const QString &key : keys)
         {
             if(attr.contains(key) && ("0" != attr.namedItem(key).nodeValue()))
             {
@@ -219,7 +219,7 @@ void CSlfReader::readEntries(const QDomNode& xml)
 {
     const QDomNodeList& xmlEntrs = xml.childNodes();
 
-    QSet<QString> usedAttr = findUsedAttributes(xmlEntrs);
+    const QSet<QString>& usedAttr = findUsedAttributes(xmlEntrs);
 
     // Now generate the track / segments
     int lap = 0;

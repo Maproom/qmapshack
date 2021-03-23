@@ -128,7 +128,7 @@ void CQmsDb::addFolder(CQlgtFolder& folder)
         generate key and info text properly
      */
     CDBProject project(folder);
-    for(quint64 id : folder.items)
+    for(quint64 id : qAsConst(folder.items))
     {
         quint64 idChild = mapItemIDs[id];
         query.prepare("SELECT type FROM items WHERE id=:id");

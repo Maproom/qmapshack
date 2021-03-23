@@ -194,8 +194,7 @@ void CRouterBRouterTilesSelect::slotDeleteSelected()
                 if (!segment.remove())
                 {
                     error(tr("Error removing %1: %2")
-                          .arg(segment.fileName())
-                          .arg(segment.errorString()));
+                          .arg(segment.fileName(), segment.errorString()));
                     break;
                 }
                 status->isLocal = false;
@@ -509,7 +508,7 @@ void CRouterBRouterTilesSelect::slotDownload()
                 const QString tmpError = status->file->errorString();
                 delete status->file;
                 status->file = nullptr;
-                error(tr("error creating file %1: %2").arg(tmpName).arg(tmpError));
+                error(tr("error creating file %1: %2").arg(tmpName, tmpError));
                 break;
             }
 
@@ -540,7 +539,7 @@ void CRouterBRouterTilesSelect::slotDownload()
 
 void CRouterBRouterTilesSelect::slotDownloadReadReady()
 {
-    for (QNetworkReply * reply : tilesDownloadManagerReplies)
+    for (QNetworkReply * reply : qAsConst(tilesDownloadManagerReplies))
     {
         if (reply->bytesAvailable() > 0)
         {
@@ -565,7 +564,7 @@ void CRouterBRouterTilesSelect::slotDownloadReadReady()
                     status->file->remove();
                     delete status->file;
                     status->file = nullptr;
-                    throw tr("error writing to file %1: %2").arg(tmpName).arg(msg);
+                    throw tr("error writing to file %1: %2").arg(tmpName, msg);
                 }
             }
             catch (const QString &msg)
@@ -609,8 +608,7 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
             else if (status->file->write(reply->readAll()) < 0)
             {
                 error(tr("error writing to file %1: %2")
-                      .arg(status->file->fileName())
-                      .arg(status->file->errorString()));
+                      .arg(status->file->fileName(), status->file->errorString()));
                 status->file->close();
                 status->file->remove();
             }
@@ -635,9 +633,9 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
                 else
                 {
                     error(tr("error renaming file %1 to %2: %3")
-                          .arg(status->file->fileName())
-                          .arg(finalName)
-                          .arg(status->file->errorString()));
+                          .arg(status->file->fileName(),
+                               finalName,
+                               status->file->errorString()));
                     status->file->close();
                     status->file->remove();
                 }
@@ -732,7 +730,7 @@ void CRouterBRouterTilesSelect::error(const QString &error) const
 
 void CRouterBRouterTilesSelect::segmentsError(const QString &msg) const
 {
-    error(tr("Error retrieving available routing data from %1: %2").arg(setup->getSegmentsUrl()).arg(msg));
+    error(tr("Error retrieving available routing data from %1: %2").arg(setup->getSegmentsUrl(), msg));
 }
 
 void CRouterBRouterTilesSelect::clearError() const
@@ -812,28 +810,28 @@ void CRouterBRouterTilesSelect::slotTileToolTipChanged(const QPoint &tile) const
     if (status->file != nullptr)
     {
         selectArea->setTileToolTip(QString(tr("being downloaded: %1 of %2"))
-                                   .arg(formatSize(status->progressVal))
-                                   .arg(formatSize(status->progressMax)));
+                                   .arg(formatSize(status->progressVal),
+                                        formatSize(status->progressMax)));
     }
     else if (status->isOutdated)
     {
         selectArea->setTileToolTip(QString(tr("local data outdated (%1, %2 - remote %3, %4)"))
-                                   .arg(formatSize(status->localSize))
-                                   .arg(status->localDate.toString(Qt::DefaultLocaleShortDate))
-                                   .arg(formatSize(status->remoteSize))
-                                   .arg(status->remoteDate.toString(Qt::DefaultLocaleShortDate)));
+                                   .arg(formatSize(status->localSize),
+                                        status->localDate.toString(Qt::DefaultLocaleShortDate),
+                                        formatSize(status->remoteSize),
+                                        status->remoteDate.toString(Qt::DefaultLocaleShortDate)));
     }
     else if (status->isLocal)
     {
         selectArea->setTileToolTip(QString(tr("local data up to date (%1, %2)"))
-                                   .arg(formatSize(status->localSize))
-                                   .arg(status->localDate.toString(Qt::DefaultLocaleShortDate)));
+                                   .arg(formatSize(status->localSize),
+                                        status->localDate.toString(Qt::DefaultLocaleShortDate)));
     }
     else if (status->isRemote)
     {
         selectArea->setTileToolTip(QString(tr("no local data, online available: %1 (%2)"))
-                                   .arg(formatSize(status->remoteSize))
-                                   .arg(status->remoteDate.toString(Qt::DefaultLocaleShortDate)));
+                                   .arg(formatSize(status->remoteSize),
+                                        status->remoteDate.toString(Qt::DefaultLocaleShortDate)));
     }
     else
     {

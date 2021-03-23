@@ -138,7 +138,8 @@ void CTableTrkInfo::slotDelete()
     }
 
     QList<int> indices;
-    for(QTreeWidgetItem* item : selectedItems())
+    const QList<QTreeWidgetItem*>& items = selectedItems();
+    for(QTreeWidgetItem* item : items)
     {
         indices << item->data(eColDesc, Qt::UserRole).toInt();
     }

@@ -91,7 +91,7 @@ void CDetailsWpt::setupGui()
     if(wpt.getElevation() != NOINT)
     {
         IUnit::self().meter2elevation(wpt.getElevation(), val, unit);
-        elevationStr = QString("%1 %2").arg(val).arg(unit);
+        elevationStr = QString("%1 %2").arg(val, unit);
     }
     labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", elevationStr, ""));
 
@@ -100,7 +100,7 @@ void CDetailsWpt::setupGui()
     if(wpt.getProximity() != NOFLOAT)
     {
         IUnit::self().meter2elevation(wpt.getProximity(), val, unit);
-        proxStr = QString("%1 %2").arg(val).arg(unit);
+        proxStr = QString("%1 %2").arg(val, unit);
     }
     labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", proxStr, ""));
 

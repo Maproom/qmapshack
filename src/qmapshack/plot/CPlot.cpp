@@ -32,7 +32,7 @@ CPlot::CPlot(CGisItemTrk * trk,  CLimit& limit, CPlotData::axistype_e type, cons
     setXLabel(xLabel);
     setYLabel(yLabel);
 
-    updateData();
+    CPlot::updateData();
 }
 
 CPlot::CPlot(CGisItemTrk *trk,  CLimit& limit, IPlot::mode_e mode, QWidget *parent)

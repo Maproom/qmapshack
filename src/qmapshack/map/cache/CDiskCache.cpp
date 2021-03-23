@@ -41,7 +41,7 @@ CDiskCache::CDiskCache(const QString &path, qint32 maxSizeMB, qint32 expirationD
         }
     }
 
-    QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
+    const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
     for(const QFileInfo &fileinfo : files)
     {
         QString hash = fileinfo.baseName();
@@ -126,7 +126,7 @@ void CDiskCache::slotCleanup()
 {
     QMutexLocker lock(&mutex);
 
-    QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
+    const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
     QDateTime now       = QDateTime::currentDateTime();
     qint32 maxSizeBytes = maxSizeMB * 1024 * 1024;
     qint32 tmpSize      = 0;
@@ -146,7 +146,7 @@ void CDiskCache::slotCleanup()
 
     if(tmpSize > maxSizeBytes)
     {
-        files = dir.entryInfoList(QStringList("*.png"), QDir::Files, QDir::Time | QDir::Reversed);
+        const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files, QDir::Time | QDir::Reversed);
         // if cache is still too large remove oldest files
         for(const QFileInfo &fileinfo : files)
         {
@@ -178,7 +178,6 @@ void CDiskCache::cleanupRemovedMaps(const QSet<QString> &maps)
 
     for(const QString &dir : dirs)
     {
-        QDir qdir(cacheRoot + "/" + dir);
         if(!maps.contains(dir))
         {
             QDir qdir(cacheRoot + "/" + dir);
@@ -186,7 +185,8 @@ void CDiskCache::cleanupRemovedMaps(const QSet<QString> &maps)
             if(QFile(qdir.absoluteFilePath("QMS_cache")).exists())
             {
                 qDebug() << "remove cache directory" << dir << "(reason: map no longer exists)";
-                for(const QString &file : qdir.entryList(QDir::Files))
+                const QStringList& files = qdir.entryList(QDir::Files);
+                for(const QString &file : files)
                 {
                     qdir.remove(file);
                 }

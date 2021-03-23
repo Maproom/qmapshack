@@ -24,7 +24,7 @@
 #include <QtWidgets>
 
 
-static const QList<extension_t> extensions =
+const QList<extension_t> CSmlProject::extensions =
 {
     {"Latitude",           RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lat, NIL)}   // unit [°]
     , {"Longitude",          RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lon, NIL)}  // unit [°]

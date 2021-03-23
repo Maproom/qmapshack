@@ -59,8 +59,8 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
     description     = xmlModel.namedItem("Description").toElement().text().trimmed();
     partno          = xmlModel.namedItem("PartNumber").toElement().text().trimmed();
 
-    setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(description).arg(model));
-    setToolTip(CGisListWks::eColumnName, QString("%1 (%2, %3)").arg(description).arg(partno).arg(model));
+    setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(description, model));
+    setToolTip(CGisListWks::eColumnName, QString("%1 (%2, %3)").arg(description, partno, model));
 
     const QDomNode& xmlMassStorageMode  = xmlDevice.namedItem("MassStorageMode");
     const QDomNodeList& xmlDataTypes    = xmlMassStorageMode.toElement().elementsByTagName("DataType");
@@ -164,25 +164,25 @@ void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnd
 {
     QDir dirLoop(dir.absoluteFilePath(subdirecoty));
     qDebug() << "reading files from device: " << dirLoop.path();
-    QStringList entries = dirLoop.entryList(QStringList("*." + fileEnding));
+    const QStringList& entries = dirLoop.entryList(QStringList("*." + fileEnding));
     for(const QString &entry : entries)
     {
         const QString filename = dirLoop.absoluteFilePath(entry);
         IGisProject * project = nullptr;
-        if (fileEnding == "fit")
+        if(fileEnding == "fit")
         {
             project = new CFitProject(filename, this);
         }
-        if (fileEnding == "gpx")
+        else if(fileEnding == "gpx")
         {
             project = new CGpxProject(filename, this);
         }
-        if (fileEnding == "tcx")
+        else if(fileEnding == "tcx")
         {
             project = new CTcxProject(filename, this);
         }
 
-        if(!project->isValid())
+        if(project && !project->isValid())
         {
             delete project;
         }
@@ -195,7 +195,7 @@ CDeviceGarmin::~CDeviceGarmin()
 
 void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
 {
-    if(description.toUpper().startsWith("EDGE 5"))
+    if(description.startsWith("EDGE 5", Qt::CaseInsensitive))
     {
         insertCopyOfProjectAsTcx(project);
     }
@@ -366,7 +366,7 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
         const QDir dirCache(dirSpoilers.absoluteFilePath(path));
 
         QList<CGisItemWpt::image_t> images;
-        QStringList entries = dirCache.entryList(QStringList("*.jpg"), QDir::Files);
+        const QStringList& entries = dirCache.entryList(QStringList("*.jpg"), QDir::Files);
         for(const QString &file : entries)
         {
             CGisItemWpt::image_t image;
@@ -421,7 +421,7 @@ void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
     // remove images attached to project
     const QString& key = project->getKey();
     const QDir dirImages(dir.absoluteFilePath(pathPictures));
-    QStringList entries = dirImages.entryList(QStringList("*.jpg"), QDir::Files);
+    const QStringList& entries = dirImages.entryList(QStringList("*.jpg"), QDir::Files);
     for(const QString &entry : entries)
     {
         QString filename = dirImages.absoluteFilePath(entry);

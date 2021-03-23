@@ -116,7 +116,7 @@ QString CGarminPoint::getLabelText() const
             QString unit;
             QString val = labels[0];
             IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
-            str = QString("%1 %2").arg(val).arg(unit);
+            str = QString("%1 %2").arg(val, unit);
         }
 //        else if(type == 0x6616) //669 DAV
 //        {
@@ -126,7 +126,7 @@ QString CGarminPoint::getLabelText() const
 //                QString unit;
 //                QString val = labels[1];
 //                IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
-//                str = QString("%1 %2 %3").arg(labels[0]).arg(val).arg(unit);
+//                str = QString("%1 %2 %3").arg(labels[0]).arg(val, unit);
 //            }
 //            else
 //            {

@@ -37,7 +37,7 @@
 const QPen IPlot::pens[] =
 {
     QPen(Qt::darkBlue,      3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(QColor("#C00000"), 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(QColor(0xFFC00000), 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::yellow,        3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::green,         3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 };
@@ -883,7 +883,7 @@ QPolygonF IPlot::getVisiblePolygon(const QPolygonF &polyline, QPolygonF &line) c
             }
 
             // interpolate the value at `right`
-            pty = oldPty + ((pty - oldPty) * (right - oldPtx)) / (ptx - oldPtx);
+            pty = (ptx - oldPtx) == 0 ? NOINT : oldPty + ((pty - oldPty) * (right - oldPtx)) / (ptx - oldPtx);
             ptx = right;
             line << QPointF(ptx, pty);
         }
@@ -900,13 +900,11 @@ QPolygonF IPlot::getVisiblePolygon(const QPolygonF &polyline, QPolygonF &line) c
 void IPlot::drawData(QPainter& p)
 {
     int penIdx = 0;
-    QList<CPlotData::line_t> lines                = data->lines;
-    QList<CPlotData::line_t>::const_iterator line = lines.begin();
-
-    while(line != lines.end())
+    const QList<CPlotData::line_t>& lines = data->lines;
+    for(const CPlotData::line_t& line : lines)
     {
         QPolygonF poly;
-        getVisiblePolygon(line->points, poly);
+        getVisiblePolygon(line.points, poly);
 
         p.setPen(Qt::NoPen);
         p.setBrush(colors[penIdx]);
@@ -917,8 +915,6 @@ void IPlot::drawData(QPainter& p)
         poly.pop_front();
         poly.pop_back();
         p.drawPolyline(poly);
-
-        ++line;
     }
 }
 
@@ -1174,18 +1170,15 @@ void IPlot::drawLegend(QPainter& p)
     int x = rectGraphArea.left() + 10;
     int y = rectGraphArea.top()  + 2 + h;
 
-    QList<CPlotData::line_t> lines                  = data->lines;
-    QList<CPlotData::line_t>::const_iterator line   = lines.begin();
-
-    while(line != lines.end())
+    const QList<CPlotData::line_t>& lines = data->lines;
+    for(const CPlotData::line_t& line : lines)
     {
         p.setPen(Qt::black);
-        p.drawText(x + 30, y, line->label);
+        p.drawText(x + 30, y, line.label);
         p.setPen(pens[penIdx++]);
         p.drawLine(x, y, x + 20, y);
 
         y += fm.height();
-        ++line;
     }
 }
 
@@ -1203,7 +1196,7 @@ void IPlot::drawDecoration( QPainter &p )
             // check if the mouse is near a waypoint
             if(!showWptLabels)
             {
-                for(const CPlotData::point_t& tag : data->tags)
+                for(const CPlotData::point_t& tag : qAsConst(data->tags))
                 {
                     int ptx = left + data->x().val2pt( tag.point.x() );
 
@@ -1279,13 +1272,12 @@ void IPlot::drawTags(QPainter& p)
 
     QFont f = CMainWindow::self().getMapFont();
     f.setBold(true);
-    QFontMetrics fm(f);
     p.setFont(f);
 
     CPlotAxis& xaxis = data->x();
     CPlotAxis& yaxis = data->y();
 
-    for(const CPlotData::point_t& tag : data->tags)
+    for(const CPlotData::point_t& tag : qAsConst(data->tags))
     {
         int ptx = left   + xaxis.val2pt( tag.point.x() );
         int pty = bottom - yaxis.val2pt( tag.point.y() );
@@ -1335,7 +1327,7 @@ void IPlot::drawTagLabels(QPainter& p)
 
     CPlotAxis& xaxis = data->x();
 
-    for(const CPlotData::point_t& tag : data->tags)
+    for(const CPlotData::point_t& tag : qAsConst(data->tags))
     {
         int ptx = left   + xaxis.val2pt( tag.point.x() );
 

@@ -36,7 +36,7 @@ CRtOpenSky::CRtOpenSky(QTreeWidget *parent)
     setText(eColumnName, "OpenSky");
     setCheckState(eColumnCheckBox, Qt::Checked);
 
-    registerWithTreeWidget();
+    CRtOpenSky::registerWithTreeWidget();
 
     timer = new QTimer(this);
     timer->setInterval(10100);
@@ -147,7 +147,8 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
     QRect rectIcon = icon.rect();
     rectIcon.moveCenter(QPoint(0, 0));
 
-    for(const QString& key : aircrafts.keys())
+    const QStringList& keys = aircrafts.keys();
+    for(const QString& key : keys)
     {
         aircraft_t& aircraft = aircrafts[key];
 
@@ -246,7 +247,8 @@ void CRtOpenSky::mouseMove(const QPointF& pos)
     QMutexLocker lock(&IRtSource::mutex);
 
     keyFocus.clear();
-    for(const QString& key : aircrafts.keys())
+    const QStringList& keys = aircrafts.keys();
+    for(const QString& key : keys)
     {
         const aircraft_t& aircraft = aircrafts[key];
         if((aircraft.point - pos).manhattanLength() < 20)

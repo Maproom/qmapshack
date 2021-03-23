@@ -271,7 +271,7 @@ void CTcxProject::loadCourse(const QDomNode& courseRootNode)
             qreal ele = tcxCoursePts.item(i).toElement().elementsByTagName("AltitudeMeters").item(0).firstChild().nodeValue().toDouble();
             QString icon = tcxCoursePts.item(i).toElement().elementsByTagName("PointType").item(0).firstChild().nodeValue(); // there is no "icon" in course points ;  "PointType" is used instead (can be "turn left", "turn right", etc... See list in http://www8.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd)
 
-            new CGisItemWpt(QPointF(lon, lat), ele, QDateTime::currentDateTime().toUTC(), name, icon, this); // 1 TCX course point gives 1 GPX waypoint
+            new CGisItemWpt(QPointF(lon, lat), ele, QDateTime::currentDateTimeUtc(), name, icon, this); // 1 TCX course point gives 1 GPX waypoint
         }
     }
 }
@@ -450,7 +450,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     {
         tcx.appendChild(activitiesNode);
     }
-    for (CGisItemTrk *trkToBeSaved : activityTrks)
+    for (CGisItemTrk *trkToBeSaved : qAsConst(activityTrks))
     {
         trkToBeSaved->saveTCXactivity(activitiesNode);
     }
@@ -460,7 +460,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     {
         tcx.appendChild(coursesNode);
     }
-    for (CGisItemTrk *trkToBeSaved : courseTrks)
+    for (CGisItemTrk *trkToBeSaved : qAsConst(courseTrks))
     {
         trkToBeSaved->saveTCXcourse(coursesNode);
     }

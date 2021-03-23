@@ -48,7 +48,7 @@ public:
     bool allOthersToo();
 
 private slots:
-    void slotSelectResult();
+    void slotSelectResult(CSelectCopyAction::result_e r);
 
 private:
     result_e result = eResultNone;

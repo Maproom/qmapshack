@@ -104,7 +104,7 @@ void CScrOptOvlArea::draw(QPainter& p)
     IGisItem * item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
-        QWidget::deleteLater();
+        deleteLater();
         return;
     }
     item->drawHighlight(p);

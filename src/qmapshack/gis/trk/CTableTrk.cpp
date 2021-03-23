@@ -187,7 +187,7 @@ void CTableTrk::updateData()
         if(trkpt.ele != NOINT)
         {
             IUnit::self().meter2elevation(trkpt.ele, val, unit);
-            item->setText(eColEle, tr("%1%2").arg(val).arg(unit));
+            item->setText(eColEle, tr("%1%2").arg(val, unit));
         }
         else
         {
@@ -195,15 +195,15 @@ void CTableTrk::updateData()
         }
 
         IUnit::self().meter2distance(trkpt.deltaDistance, val, unit);
-        item->setText(eColDelta, tr("%1%2").arg(val).arg(unit));
+        item->setText(eColDelta, tr("%1%2").arg(val, unit));
 
         IUnit::self().meter2distance(trkpt.distance, val, unit);
-        item->setText(eColDist, tr("%1%2").arg(val).arg(unit));
+        item->setText(eColDist, tr("%1%2").arg(val, unit));
 
         if(trkpt.speed != NOFLOAT)
         {
             IUnit::self().meter2speed(trkpt.speed, val, unit);
-            item->setText(eColSpeed, tr("%1%2").arg(val).arg(unit));
+            item->setText(eColSpeed, tr("%1%2").arg(val, unit));
         }
         else
         {
@@ -212,14 +212,14 @@ void CTableTrk::updateData()
 
         IUnit::self().slope2string(trkpt.slope1, val, unit);
         item->setText(eColSlope, (trkpt.slope1 != NOFLOAT)
-                      ? QString("%1%2").arg(val).arg(unit)
+                      ? QString("%1%2").arg(val, unit)
                       : "-"
                       );
 
         IUnit::self().meter2elevation(trkpt.ascent, val, unit);
-        item->setText(eColAscent, tr("%1%2").arg(val).arg(unit));
+        item->setText(eColAscent, tr("%1%2").arg(val, unit));
         IUnit::self().meter2elevation(trkpt.descent, val, unit);
-        item->setText(eColDescent, tr("%1%2").arg(val).arg(unit));
+        item->setText(eColDescent, tr("%1%2").arg(val, unit));
 
         // position
         QString str;
@@ -260,7 +260,7 @@ void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
     if((column == eColEle) && (lon != NOFLOAT) && (lat != NOFLOAT))
     {
         QVariant var(ele);
-        CElevationDialog dlg(this, var, QVariant(ele), QPointF(lon, lat));
+        CElevationDialog dlg(this, var, ele, {lon, lat});
 
         if(dlg.exec() == QDialog::Accepted)
         {

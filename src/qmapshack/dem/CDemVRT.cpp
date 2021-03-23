@@ -261,7 +261,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     pt3 = trInv.map(pt3);
     pt4 = trInv.map(pt4);
 
-    qreal left, right, top, bottom;
+    qint32 left, right, top, bottom;
     left     = qRound(pt1.x() < pt4.x() ? pt1.x() : pt4.x());
     right    = qRound(pt2.x() > pt3.x() ? pt2.x() : pt3.x());
     top      = qRound(pt1.y() < pt2.y() ? pt1.y() : pt2.y());
@@ -303,10 +303,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
         bottom = 1;
     }
 
-    qreal imgw = TILESIZEX;
-    qreal imgh = TILESIZEY;
-    qreal w =  imgw;
-    qreal h =  imgh;
+    qint32 w =  TILESIZEX;
+    qint32 h =  TILESIZEY;
 
     /*
         As the 3x3 window will create a border of one pixel
@@ -327,14 +325,14 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     qreal nTiles = ((right - left) * (bottom - top) / (w * h));
     if(nTiles < TILELIMIT)
     {
-        for(qreal y = top - 1; y < bottom; y += h)
+        for(qint32 y = top - 1; y < bottom; y += h)
         {
             if(dem->needsRedraw())
             {
                 break;
             }
 
-            for(qreal x = left - 1; x < right; x += w)
+            for(qint32 x = left - 1; x < right; x += w)
             {
                 if(dem->needsRedraw())
                 {

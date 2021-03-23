@@ -28,7 +28,7 @@ CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem *parent
     : IDBFolder(true, db, eTypeLostFound, 0, parent)
 {
     setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
-    setupFromDB();
+    CDBFolderLostFound::setupFromDB();
 
     setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
     CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());

@@ -257,7 +257,7 @@ bool CMapVRT::testForOverviews(const QString& filename)
         return false;
     }
 
-    for(const QString& file : files)
+    for(const QString& file : qAsConst(files))
     {
         using pGDALDataset = QSharedPointer<GDALDataset>;
         pGDALDataset _dataset = pGDALDataset((GDALDataset*)GDALOpen(file.toUtf8(), GA_ReadOnly), GDALClose);
@@ -371,10 +371,10 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
         bottom = 0;
     }
 
-    qreal imgw = TILESIZEX;
-    qreal imgh = TILESIZEY;
-    qreal dx =  imgw;
-    qreal dy =  imgh;
+    qint32 imgw = TILESIZEX;
+    qint32 imgh = TILESIZEY;
+    qint32 dx =  imgw;
+    qint32 dy =  imgh;
 
 
     // estimate number of tiles and use it as a limit if no
@@ -408,14 +408,14 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     // limit number of tiles to keep performance
     if(!isOutOfScale(bufferScale) && (nTiles < TILELIMIT))
     {
-        for(qreal y = top; y < bottom; y += dy)
+        for(qint32 y = top; y < bottom; y += dy)
         {
             if(map->needsRedraw())
             {
                 break;
             }
 
-            for(qreal x = left; x < right; x += dx)
+            for(qint32 x = left; x < right; x += dx)
             {
                 if(map->needsRedraw())
                 {
@@ -442,8 +442,6 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
                     imgh_used   = imgh * dy_used / dy;
                 }
 
-                x           = qRound(x);
-                y           = qRound(y);
                 dx_used     = qFloor(dx_used);
                 dy_used     = qFloor(dy_used);
                 imgw_used   = qRound(imgw_used);

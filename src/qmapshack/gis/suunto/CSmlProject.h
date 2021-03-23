@@ -43,6 +43,7 @@ public:
 
 private:
     void loadSml(const QString& filename);
+    static const QList<extension_t> extensions;
 };
 #endif //CSMLPROJECT_H
 

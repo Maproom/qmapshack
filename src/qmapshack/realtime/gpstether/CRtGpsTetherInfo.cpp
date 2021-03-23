@@ -258,9 +258,9 @@ void CRtGpsTetherInfo::slotUpdate()
     IUnit::degToStr(lon, lat, val);
     labelPosition->setText(val);
     IUnit::self().meter2elevation(ele, val, unit);
-    labelElevation->setText(QString("%1%2").arg(val).arg(unit));
+    labelElevation->setText(QString("%1%2").arg(val, unit));
     IUnit::self().meter2speed(speed, val, unit);
-    labelSpeed->setText(QString("%1%2").arg(val).arg(unit));
+    labelSpeed->setText(QString("%1%2").arg(val, unit));
     labelHeading->setText(heading != NOFLOAT ? QString("%1°").arg(heading, 0, 'f', 0) : "-");
     labelTime->setText(timestamp.isValid() ? timestamp.toLocalTime().toString() : "-");
 
@@ -300,7 +300,7 @@ bool CRtGpsTetherInfo::verifyLine(const QString& line)
         cs ^= data[i];
     }
 
-    return line.right(2).toInt(0, 16) == cs;
+    return line.rightRef(2).toInt(0, 16) == cs;
 }
 
 void CRtGpsTetherInfo::nmeaGSV(const QStringList& /*tokens*/)

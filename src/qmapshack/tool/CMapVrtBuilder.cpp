@@ -79,7 +79,7 @@ void CMapVrtBuilder::slotSelectSourceFiles()
     SETTINGS;
     QString path = cfg.value("VrtBuilder/sourcePath", QDir::homePath()).toString();
 
-    QStringList files = QFileDialog::getOpenFileNames(this, tr("Select files..."), path);
+    const QStringList& files = QFileDialog::getOpenFileNames(this, tr("Select files..."), path);
     if(files.isEmpty())
     {
         return;

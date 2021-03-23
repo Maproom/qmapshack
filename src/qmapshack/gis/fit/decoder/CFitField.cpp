@@ -45,7 +45,7 @@ CFitField::CFitField(const CFitField & copy)
 
 CFitField::CFitField()
     : fieldProfile(CFitProfileLookup::getFieldForProfile(fitGlobalMesgNrInvalid, fitFieldDefNrInvalid)),
-    globalMesgNr(fitGlobalMesgNrInvalid), fieldDefNr(fitFieldDefNrInvalid), baseType(&fitInvalidType), valid(false), value(), rawValue()
+    globalMesgNr(fitGlobalMesgNrInvalid), fieldDefNr(fitFieldDefNrInvalid), baseType(&fit::InvalidType), valid(false), value(), rawValue()
 {
 }
 
@@ -78,21 +78,21 @@ void CFitField::setProfile(const CFitFieldProfile* profile)
 QString CFitField::fieldInfo() const
 {
     QString str = QString("%1 %2%3 (%4): %5 %6 %7 %8")
-                  .arg(profile().getTyp())
-                  .arg(profile().getName())
-                  .arg(profile().getFieldType()  == eFieldTypeDevelopment ? " DEV" : "")
+                  .arg(profile().getTyp(),
+                       profile().getName(),
+                       profile().getFieldType()  == eFieldTypeDevelopment ? " DEV" : "")
                   .arg(getFieldDefNr())
-                  .arg(value.toString())
-                  .arg(profile().getUnits())
-                  .arg(getBaseType().name())
-                  .arg(valid ? "" : "<invalid>");
+                  .arg(value.toString(),
+                       profile().getUnits(),
+                       getBaseType().name(),
+                       (valid ? "" : "<invalid>"));
 
     if(getBaseType().isNumber())
     {
         str += QString(" (%1/%2-%3)")
-               .arg(rawValue.toString())
-               .arg(profile().getScale())
-               .arg( profile().getOffset());
+               .arg(rawValue.toString(),
+                    profile().getScale(),
+                    profile().getOffset());
     }
     return str;
 }

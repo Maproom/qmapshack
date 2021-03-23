@@ -98,7 +98,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
         filename = dbName;
     }
 
-    setupName(name);
+    CDBProject::setupName(name);
     setToolTip(CGisListWks::eColumnName, getInfo());
     updateItems();
 
@@ -148,7 +148,7 @@ CDBProject::CDBProject(const QString& filename, IDBFolder * parentFolder, CGisLi
     addChildren(items);
 
     // set change indication else the item will not be saved
-    for(QTreeWidgetItem * item : items)
+    for(QTreeWidgetItem * item : qAsConst(items))
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem)
@@ -296,7 +296,7 @@ CDBProject::action_e CDBProject::checkForAction2(IGisItem * item, quint64 &itemI
             "The item %1 has been changed by %2 (%3). \n\n"
             "To solve this conflict you can create and save a clone, force your version or drop "
             "your version and take the one from the database"
-            ).arg(item->getNameEx()).arg(user).arg(date);
+            ).arg(item->getNameEx(), user, date);
 
         CResolveDatabaseConflict dialog (msg, item, action2ForAll, CMainWindow::self().getBestWidgetForParent());
         action = dialog.getAction();
@@ -691,7 +691,7 @@ void CDBProject::showItems(CEvtD2WShowItems * evt, action_e action2ForAll)
         qDeleteAll(takeChildren());
     }
 
-    for(const evt_item_t &item : evt->items)
+    for(const evt_item_t &item : qAsConst(evt->items))
     {
         IGisItem * gisItem = IGisItem::newGisItem(item.type, item.id, db, this);
 
@@ -739,7 +739,7 @@ void CDBProject::hideItems(CEvtD2WHideItems * evt)
 
     QMessageBox::StandardButtons last = QMessageBox::YesToAll;
 
-    for(const QString &k : evt->keys)
+    for(const QString &k : qAsConst(evt->keys))
     {
         key.item = k;
         delItemByKey(key, last);

@@ -40,7 +40,7 @@ CColorLegend::CColorLegend(QWidget *parent, CGisItemTrk *trk)
         trk->registerVisual(this);
 
         // read data from trk
-        updateData();
+        CColorLegend::updateData();
     }
 }
 
@@ -146,7 +146,7 @@ static qreal legendRound(qreal value, int powOffset)
     return ceil(value / div) * div;
 }
 
-void CColorLegend::paintEvent(QPaintEvent *event)
+void CColorLegend::paintEvent(QPaintEvent */*event*/)
 {
     const QFont &font = CMainWindow::self().getMapFont();
     if(isEnabled())
@@ -193,10 +193,10 @@ void CColorLegend::paintEvent(QPaintEvent *event)
 
         // draw values inbetween min/max
         const qreal delta = maximum - minimum;
-        qreal step           = legendRound(delta / 8, 0);
-        qreal roundedMinimum = legendRound(minimum, delta > 60 ? -1 : 0);
+        qint32 step           = legendRound(delta / 8, 0);
+        qint32 roundedMinimum = legendRound(minimum, delta > 60 ? -1 : 0);
 
-        for(qreal v = roundedMinimum; v < maximum; v += step)
+        for(qint32 v = roundedMinimum; v < maximum; v += step)
         {
             reqWidth = qMax(paintLabel(p, v), reqWidth);
         }

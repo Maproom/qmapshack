@@ -73,7 +73,7 @@ public:
     static sample_t mergeSamples(QList<sample_t> samples, QList<extension_t> extensions);
     static void deleteSamplesWithDuplicateTimestamps(QList<sample_t> &samples, QList<extension_t> extensions);
 
-    static void fillTrackPointsFromSamples(QList<sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, QList<extension_t> extensions);
+    static void fillTrackPointsFromSamples(QList<sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, const QList<extension_t> &extensions);
 };
 
 

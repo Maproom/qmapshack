@@ -181,7 +181,7 @@ bool CProj::validProjStr(const QString projStr, bool allowLonLatToo, fErrMessage
     {
         if(errMessage)
         {
-            errMessage(tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr).arg(proj_errno_string(proj_context_errno(PJ_DEFAULT_CTX))));
+            errMessage(tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr, proj_errno_string(proj_context_errno(PJ_DEFAULT_CTX))));
         }
     }
     else

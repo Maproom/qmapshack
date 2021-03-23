@@ -169,7 +169,7 @@ void CMouseRuler::slotToWpt()
 
     bool first = true;
     QMutexLocker lock(&IGisItem::mutexItems);
-    for(const QPointF& pt : ruler)
+    for(const QPointF& pt : qAsConst(ruler))
     {
         if(!first)
         {
@@ -358,16 +358,16 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
             if(delta >= 0)
             {
                 totalAscent += delta;
-                msg += QString("<td align=right>%1%2</td><td align=right></td>").arg(val).arg(unit);
+                msg += QString("<td align=right>%1%2</td><td align=right></td>").arg(val, unit);
             }
             else
             {
                 totalDescent -= delta;
-                msg += QString("<td align=right></td><td align=right>%1%2</td>").arg(val).arg(unit);
+                msg += QString("<td align=right></td><td align=right>%1%2</td>").arg(val, unit);
             }
             qreal slope = IUnit::slopeConvert(IUnit::eSlopePercent, delta / d * 100.0);
             IUnit::self().slope2string(slope, val, unit);
-            msg += QString("<td align=right>%1%2</td>").arg(val).arg(unit);
+            msg += QString("<td align=right>%1%2</td>").arg(val, unit);
         }
         else
         {
@@ -461,7 +461,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
                 int delta = qRound(ele2 - ele1);
 
                 IUnit::self().meter2elevation(qAbs(delta), val, unit);
-                str += QString(", %1 %2%3").arg(delta > 0 ? QChar(0x2197) : QChar(0x2198)).arg(val).arg(unit);
+                str += QString(", %1 %2%3").arg(delta > 0 ? QChar(0x2197) : QChar(0x2198)).arg(val, unit);
             }
 
 

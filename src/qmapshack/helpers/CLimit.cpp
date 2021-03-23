@@ -187,7 +187,7 @@ QString CLimit::getUnit() const
 
 void CLimit::updateSys()
 {
-    for(CLimit * limit : allLimits)
+    for(CLimit * limit : qAsConst(allLimits))
     {
         if(limit != this)
         {

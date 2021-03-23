@@ -115,7 +115,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     bool pointsAreLongLat = true;
     QString projection;
     QString datum;
-    QStringList lines = QString(charbuf).split("\r\n");
+    const QStringList& lines = QString(charbuf).split("\r\n");
 
     for(const QString &line : lines)
     {
@@ -234,7 +234,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     {
         if(!setProjection(projection, datum))
         {
-            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unknown projection and datum (%1%2).").arg(projection).arg(datum), QMessageBox::Abort, QMessageBox::Abort);
+            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unknown projection and datum (%1%2).").arg(projection, datum), QMessageBox::Abort, QMessageBox::Abort);
             return;
         }
     }

@@ -28,7 +28,7 @@ ISuuntoProject::ISuuntoProject(type_e type, const QString &filename, CGisListWks
 }
 
 
-void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, QList<extension_t> extensions)
+void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, const QList<extension_t>& extensions)
 {
     for (const extension_t& ext  : extensions)
     {
@@ -44,7 +44,7 @@ void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t> &samplesList, QL
     int lap = 0;
     CTrackData::trkseg_t *seg = &(trk.segs[lap]);
 
-    for(const sample_t& sample : samplesList)
+    for(const sample_t& sample : qAsConst(samplesList))
     {
         if (sample.time > lapsList[lap])
         {

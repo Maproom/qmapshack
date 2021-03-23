@@ -741,7 +741,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
         {
             if(last != QMessageBox::YesToAll)
             {
-                QString msg = tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(CGisListWks::eColumnName));
+                QString msg = tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName(), text(CGisListWks::eColumnName));
                 last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete..."), msg, QMessageBox::YesToAll | QMessageBox::Cancel | QMessageBox::Ok | QMessageBox::No, QMessageBox::Ok);
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {
@@ -1107,7 +1107,7 @@ void IGisProject::sortItems()
 
     QList<QTreeWidgetItem*> items = takeChildren();
     QList<QTreeWidgetItem*> others; //For example Search
-    for(QTreeWidgetItem* item : items)
+    for(QTreeWidgetItem* item : qAsConst(items))
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk != nullptr)
@@ -1147,19 +1147,19 @@ void IGisProject::sortItems()
 
     items.clear();
     items << others;
-    for(IGisItem * item : trks)
+    for(IGisItem * item : qAsConst(trks))
     {
         items << item;
     }
-    for(IGisItem * item : rtes)
+    for(IGisItem * item : qAsConst(rtes))
     {
         items << item;
     }
-    for(IGisItem * item : wpts)
+    for(IGisItem * item : qAsConst(wpts))
     {
         items << item;
     }
-    for(IGisItem * item : ovls)
+    for(IGisItem * item : qAsConst(ovls))
     {
         items << item;
     }

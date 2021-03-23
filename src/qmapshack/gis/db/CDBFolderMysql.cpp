@@ -59,7 +59,7 @@ QString CDBFolderMysql::getDBInfo() const
     str += tr("MySQL Database") + "<br />";
     if(!port.isEmpty())
     {
-        str += tr("Server: ") + QString("<i>%1:%2</i>").arg(server).arg(port);
+        str += tr("Server: ") + QString("<i>%1:%2</i>").arg(server, port);
     }
     else
     {

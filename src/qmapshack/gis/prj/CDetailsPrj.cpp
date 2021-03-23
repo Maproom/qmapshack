@@ -456,13 +456,15 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
     {
         str += QString::number(summary["Geocache"]) + tr(" x Geocache, consisting of: <br/>");
         str += "<ul>";
-        for(auto key:GCsummary.keys())
+        const QList<QString>& keys = GCsummary.keys();
+        for(const QString &key : keys)
         {
             str += "<li>" + QString::number(GCsummary[key]) + " x " + key + "</li>";
         }
         str += "</ul>";
     }
-    for(auto key: summary.keys())
+    const QList<QString>& keys = summary.keys();
+    for(const QString &key: keys)
     {
         if(key != "Geocache")
         {
@@ -664,7 +666,7 @@ QList<wpt_info_t> CDetailsPrj::getWptInfo(const CGisItemTrk& trk) const
             {
                 QString val, unit;
                 IUnit::self().meter2elevation(trkpt.ele, val, unit);
-                info.info += "<br/>" + tr("Elevation: %1%2").arg(val).arg(unit);
+                info.info += "<br/>" + tr("Elevation: %1%2").arg(val, unit);
             }
 
             if(!hasValidTime && trkpt.time.isValid())
@@ -731,41 +733,41 @@ QString CDetailsPrj::getStatistics(const wpt_info_t &info) const
     text += "<tr>";
     text += "<td>" + tr("Distance: ") + "</td>";
     IUnit::self().meter2distance(info.distance1, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "</td>";
     IUnit::self().meter2distance(info.distance2, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "</td>";
     IUnit::self().meter2distance(info.distance3, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "</td>";
     text += "</tr>";
 
     text += "<tr>";
     text += "<td>" + tr("Time: ") + "</td>";
     IUnit::self().seconds2time(info.elapsedSeconds1, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "&nbsp;</td>";
     IUnit::self().seconds2time(info.elapsedSeconds2, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "&nbsp;</td>";
     IUnit::self().seconds2time(info.elapsedSeconds3, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "&nbsp;</td>";
     text += "</tr>";
 
     text += "<tr>";
     text += "<td>" + tr("Ascent: ") + "</td>";
     IUnit::self().meter2elevation(info.ascent1, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "</td>";
     IUnit::self().meter2elevation(info.ascent2, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "</td>";
     IUnit::self().meter2elevation(info.ascent3, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "</td>";
     text += "</tr>";
 
     text += "<tr>";
     text += "<td>" + tr("Descent: ") + "</td>";
     IUnit::self().meter2elevation(info.descent1, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "</td>";
     IUnit::self().meter2elevation(info.descent2, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "</td>";
     IUnit::self().meter2elevation(info.descent3, val, unit);
-    text += "<td>" + QString("%1%2").arg(val).arg(unit) + "</td>";
+    text += "<td>" + QString("%1%2").arg(val, unit) + "</td>";
     text += "</tr>";
 
     text += "</table>";

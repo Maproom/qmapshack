@@ -48,7 +48,7 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem * item)
     CDeviceMountLock mountLock(*this);
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     qDebug() << "reading files from device: " << dir.path();
-    QStringList entries = dir.entryList(QStringList("*.gpx"));
+    const QStringList& entries = dir.entryList(QStringList("*.gpx"));
     for(const QString &entry : entries)
     {
         const QString filename = dir.absoluteFilePath(entry);

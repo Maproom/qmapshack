@@ -89,8 +89,6 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
         {
         case CQlgtTrack::eBase:
         {
-            QString key;
-
             QDataStream s1(&entry->data, QIODevice::ReadOnly);
             s1.setVersion(QDataStream::Qt_4_5);
 

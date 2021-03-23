@@ -102,7 +102,7 @@ void CMapDraw::setupMapPath(const QStringList& paths)
 {
     mapPaths = paths;
 
-    for(CMapDraw * map : maps)
+    for(CMapDraw * map : qAsConst(maps))
     {
         QStringList keys;
         map->saveActiveMapsList(keys);
@@ -316,12 +316,13 @@ void CMapDraw::buildMapList()
 
     QSet<QString> maps;
 
-    for(const QString &path : mapPaths)
+    for(const QString &path : qAsConst(mapPaths))
     {
         QDir dir(path);
 
         // find available maps
-        for(const QString &filename : dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name))
+        const QStringList& filenames = dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name);
+        for(const QString &filename : filenames)
         {
             createMapItem(dir.absoluteFilePath(filename), maps);
         }
@@ -457,7 +458,7 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
     if(seenActiveMap != hasActiveMap)
     {
         hasActiveMap = seenActiveMap;
-        sigActiveMapsChanged(!hasActiveMap);
+        emit sigActiveMapsChanged(!hasActiveMap);
     }
 }
 

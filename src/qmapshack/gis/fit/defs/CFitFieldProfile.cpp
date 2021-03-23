@@ -27,7 +27,7 @@ CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFit
 {
 }
 
-CFitFieldProfile::CFitFieldProfile() : CFitFieldProfile(nullptr, "unknown", fitInvalidType, fitFieldDefNrInvalid, 0, 0, "")
+CFitFieldProfile::CFitFieldProfile() : CFitFieldProfile(nullptr, "unknown", fit::InvalidType, fitFieldDefNrInvalid, 0, 0, "")
 {
 }
 
@@ -125,11 +125,11 @@ QList<CFitComponentfieldProfile*> CFitFieldProfile::getComponents() const
 QString CFitFieldProfile::fieldProfileInfo()
 {
     QString str = QString("%1 %2 (%3): %4 %5")
-                  .arg(QString("field profile"))
-                  .arg(getName())
+                  .arg(QString("field profile"),
+                       getName())
                   .arg(getFieldDefNum())
-                  .arg(getUnits())
-                  .arg(getBaseType().name());
+                  .arg(getUnits(),
+                       getBaseType().name());
 
     if(getBaseType().isNumber())
     {

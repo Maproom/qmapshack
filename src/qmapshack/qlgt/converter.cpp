@@ -129,7 +129,7 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1, IGisProject * project)
     }
     boundingRect = QRectF(QPointF(wpt.lon, wpt.lat) * DEG_TO_RAD, QPointF(wpt.lon, wpt.lat) * DEG_TO_RAD);
     setIcon();
-    genKey();
+    CGisItemWpt::genKey();
     setupHistory();
 }
 
@@ -294,7 +294,7 @@ CGisItemRte::CGisItemRte(const CQlgtRoute& rte1, IGisProject * project)
     }
 
     deriveSecondaryData();
-    setSymbol();
+    CGisItemRte::setSymbol();
     genKey();
     setupHistory();
 }

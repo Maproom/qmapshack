@@ -56,7 +56,7 @@ void CGisSummarySetup::setupSignals(CGisSummary::dropzone_e number, QLineEdit * 
     connect(toolDel, &QToolButton::clicked, this, [this, listWidget](){slotDel(listWidget);});
     connect(listWidget, &QListWidget::itemSelectionChanged, this, [this, listWidget, toolDel](){slotItemSelectionChanged(listWidget, toolDel);});
 
-    CGisSummary::dropzone_t& dropzone = summary.getDropZone(number);
+    const CGisSummary::dropzone_t& dropzone = summary.getDropZone(number);
     for(const CGisSummary::folder_t& folder : dropzone.folders)
     {
         addFolder(folder.id, folder.db, listWidget);

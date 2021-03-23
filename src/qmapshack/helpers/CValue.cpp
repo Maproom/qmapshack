@@ -83,7 +83,7 @@ const QVariant& CValue::operator=(const QVariant& v)
         SETTINGS;
         cfg.setValue(cfgTag, v);
 
-        for(CValue * value : allValues)
+        for(CValue * value : qAsConst(allValues))
         {
             if(value != this)
             {

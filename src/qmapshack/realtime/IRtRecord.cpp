@@ -125,7 +125,7 @@ void IRtRecord::reset()
 void IRtRecord::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
 {
     QPolygonF tmp;
-    for(const CTrackData::trkpt_t& trkpt : track)
+    for(const CTrackData::trkpt_t& trkpt : qAsConst(track))
     {
         tmp << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
     }

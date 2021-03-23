@@ -48,7 +48,7 @@ public:
 
     void free()
     {
-        for(uchar * p : mappedSections)
+        for(uchar * p : qAsConst(mappedSections))
         {
             unmap(p);
         }

@@ -67,7 +67,7 @@ public:
     static const QLocale localeDate;
 
 signals:
-    void sigCompleteChanged() const;
+    void sigCompleteChanged();
 
 private slots:
     void slotTileClicked(const QPoint & tile);

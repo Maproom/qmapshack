@@ -43,22 +43,16 @@ CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *canvas,
     scrOptRangeTool = new CScrOptRangeTool(trk, this, canvas);
 
     const QString& msg = QString("<b>%1</b><p>%2</p><p>%3</p><p>%4</p>")
-                         .arg(tr("Select Range"))
-                         .arg(tr(
-                                  "Select a first track point with left mouse button "
-                                  "and then a second one. Leave the range selection "
-                                  "with a click of the right mouse button."
-                                  ))
-                         .arg(tr(
-                                  "As an alternative you can use the buttons of the "
-                                  "range tool to move the start and end point of a "
-                                  "range. If you keep the buttons pressed the action "
-                                  "will be repeated."
-                                  ))
-                         .arg(tr(
-                                  "When you are done with the selection you can apply "
-                                  "one of the operations of the range tool. "
-                                  ));
+                         .arg(tr("Select Range"),
+                              tr("Select a first track point with left mouse button "
+                                 "and then a second one. Leave the range selection "
+                                 "with a click of the right mouse button."),
+                              tr("As an alternative you can use the buttons of the "
+                                 "range tool to move the start and end point of a "
+                                 "range. If you keep the buttons pressed the action "
+                                 "will be repeated."),
+                              tr("When you are done with the selection you can apply "
+                                 "one of the operations of the range tool. "));
 
     canvas->reportStatus(key.item, msg);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

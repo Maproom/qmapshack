@@ -98,7 +98,7 @@ const QIcon CGeoSearchConfig::getCurrentIcon() const
     }
 }
 
-void CGeoSearchConfig::emitChanged() const
+void CGeoSearchConfig::emitChanged()
 {
     emit sigConfigChanged();
 }

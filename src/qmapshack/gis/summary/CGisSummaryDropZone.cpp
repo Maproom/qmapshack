@@ -107,7 +107,7 @@ void CGisSummaryDropZone::dropEvent(QDropEvent  * e)
     }
 
     QList<IGisItem*> gisItems;
-    QList<QTreeWidgetItem*> items = wks->selectedItems();
+    const QList<QTreeWidgetItem*>& items = wks->selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
@@ -122,7 +122,7 @@ void CGisSummaryDropZone::dropEvent(QDropEvent  * e)
     for(const CGisSummary::folder_t& folder : folders)
     {
         CDBProject * project = new CDBProject(folder.db, folder.id, nullptr);
-        for(IGisItem * gisItem : gisItems)
+        for(IGisItem * gisItem : qAsConst(gisItems))
         {
             project->insertCopyOfItem(gisItem, -1, copyActionForAll);
         }

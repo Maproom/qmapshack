@@ -106,7 +106,7 @@ QMenu * CActivityTrk::getMenu(const QList<IGisItem::key_t> &keys, QWidget *paren
     auto func = [keys](){CGisWorkspace::self().slotActivityTrkByKey(keys, CTrackData::trkpt_t::eAct20None);};
     QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
 
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t &desc : qAsConst(actDescriptor))
     {
         act = menu->addAction(QIcon(desc.iconLarge), desc.name);
         auto func = [keys, desc](){CGisWorkspace::self().slotActivityTrkByKey(keys, desc.activity);};
@@ -185,7 +185,7 @@ void CActivityTrk::update()
         }
     }
 
-    if(lastTrkpt == nullptr)
+    if(lastTrkpt == nullptr || startTrkpt == nullptr)
     {
         return;
     }
@@ -233,7 +233,7 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
 
     // gather any used activities
     QVector<const desc_t*> descs;
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t &desc : qAsConst(actDescriptor))
     {
         if(acts.contains(desc.activity))
         {
@@ -255,12 +255,12 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     // ############### build header ###############
     str += "<tr>";
     str += "<th></th>";
-    for(const desc_t *desc : descs)
+    for(const desc_t *desc : qAsConst(descs))
     {
         str += QString("<th align='right'>"
                        "<img src='%1'/><br/>"
                        "<img src='%2'/>"
-                       "</th>").arg(desc->iconSmall).arg(desc->line);
+                       "</th>").arg(desc->iconSmall, desc->line);
     }
     if(printNoAct)
     {
@@ -276,23 +276,23 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     str += "<tr>";
     str += "<td>" + tr("Distance:") + "</td>";
     distance = 0;
-    for(const desc_t *desc : descs)
+    for(const desc_t *desc : qAsConst(descs))
     {
         const summary_t& s = summary[desc->activity];
         IUnit::self().meter2distance(s.distance, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val, unit);
         distance += s.distance;
     }
     if(printNoAct)
     {
         IUnit::self().meter2distance(sumActNone.distance, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val, unit);
         distance += sumActNone.distance;
     }
     if(printTotal)
     {
         IUnit::self().meter2distance(distance, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val, unit);
     }
     str += "</tr>";
 
@@ -300,23 +300,23 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     str += "<tr>";
     str += "<td>" + tr("Ascent:") + "</td>";
     total = 0;
-    for(const desc_t *desc : descs)
+    for(const desc_t *desc : qAsConst(descs))
     {
         const summary_t& s = summary[desc->activity];
         IUnit::self().meter2elevation(qMin(s.ascent, NOFLOAT), val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += s.ascent;
     }
     if(printNoAct)
     {
         IUnit::self().meter2elevation(qMin(sumActNone.ascent, NOFLOAT), val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += sumActNone.ascent;
     }
     if(printTotal)
     {
         IUnit::self().meter2elevation(qMin(total, NOFLOAT), val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
     }
     str += "</tr>";
 
@@ -324,23 +324,23 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     str += "<tr>";
     str += "<td>" + tr("Descent:") + "</td>";
     total = 0;
-    for(const desc_t *desc : descs)
+    for(const desc_t *desc : qAsConst(descs))
     {
         const summary_t& s = summary[desc->activity];
         IUnit::self().meter2elevation(qMin(s.descent, NOFLOAT), val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += s.descent;
     }
     if(printNoAct)
     {
         IUnit::self().meter2elevation(qMin(sumActNone.descent, NOFLOAT), val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += sumActNone.descent;
     }
     if(printTotal)
     {
         IUnit::self().meter2elevation(qMin(total, NOFLOAT), val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
     }
     str += "</tr>";
 
@@ -348,23 +348,23 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     str += "<tr>";
     str += "<td>" + tr("Speed Moving:") + "</td>";
     total = 0;
-    for(const desc_t *desc : descs)
+    for(const desc_t *desc : qAsConst(descs))
     {
         const summary_t& s = summary[desc->activity];
         IUnit::self().meter2speed(s.distance / s.ellapsedSecondsMoving, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += s.ellapsedSecondsMoving;
     }
     if(printNoAct)
     {
         IUnit::self().meter2speed(sumActNone.distance / sumActNone.ellapsedSecondsMoving, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += sumActNone.ellapsedSecondsMoving;
     }
     if(printTotal)
     {
         IUnit::self().meter2speed(distance / total, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
     }
     str += "</tr>";
 
@@ -372,23 +372,23 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     str += "<tr>";
     str += "<td>" + tr("Speed Total:") + "</td>";
     total = 0;
-    for(const desc_t *desc : descs)
+    for(const desc_t *desc : qAsConst(descs))
     {
         const summary_t& s = summary[desc->activity];
         IUnit::self().meter2speed(s.distance / s.ellapsedSeconds, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += s.ellapsedSeconds;
     }
     if(printNoAct)
     {
         IUnit::self().meter2speed(sumActNone.distance / sumActNone.ellapsedSeconds, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += sumActNone.ellapsedSeconds;
     }
     if(printTotal)
     {
         IUnit::self().meter2speed(distance / total, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
     }
     str += "</tr>";
 
@@ -396,23 +396,23 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     str += "<tr>";
     str += "<td>" + tr("Time Moving:") + "</td>";
     total = 0;
-    for(const desc_t *desc : descs)
+    for(const desc_t *desc : qAsConst(descs))
     {
         const summary_t& s = summary[desc->activity];
         IUnit::self().seconds2time(s.ellapsedSecondsMoving, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += s.ellapsedSecondsMoving;
     }
     if(printNoAct)
     {
         IUnit::self().seconds2time(sumActNone.ellapsedSecondsMoving, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += sumActNone.ellapsedSecondsMoving;
     }
     if(printTotal)
     {
         IUnit::self().seconds2time(total, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
     }
     str += "</tr>";
 
@@ -420,23 +420,23 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
     str += "<tr>";
     str += "<td>" + tr("Time Total:") + "</td>";
     total = 0;
-    for(const desc_t *desc : descs)
+    for(const desc_t *desc : qAsConst(descs))
     {
         const summary_t& s = summary[desc->activity];
         IUnit::self().seconds2time(s.ellapsedSeconds, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += s.ellapsedSeconds;
     }
     if(printNoAct)
     {
         IUnit::self().seconds2time(sumActNone.ellapsedSeconds, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
         total += sumActNone.ellapsedSeconds;
     }
     if(printTotal)
     {
         IUnit::self().seconds2time(total, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val, unit);
     }
     str += "</tr>";
 
@@ -445,7 +445,8 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
 
 void CActivityTrk::sumUp(QMap<trkact_t, summary_t> &summary) const
 {
-    for(trkact_t act : activitySummary.keys())
+    const QList<trkact_t>& acts = activitySummary.keys();
+    for(const trkact_t& act : acts)
     {
         const summary_t &src = activitySummary[act];
         summary_t       &dst = summary[act];
@@ -460,7 +461,7 @@ void CActivityTrk::sumUp(QMap<trkact_t, summary_t> &summary) const
 
 const CActivityTrk::desc_t& CActivityTrk::getDescriptor(trkact_t act)
 {
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t &desc : qAsConst(actDescriptor))
     {
         if(desc.activity == act)
         {
@@ -486,7 +487,7 @@ void CActivityTrk::setColor(trkact_t act, const IGisItem::color_t& color)
 
 void CActivityTrk::getActivityNames(QStringList& names) const
 {
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t &desc : qAsConst(actDescriptor))
     {
         if(allActivities.contains(desc.activity))
         {

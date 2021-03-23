@@ -62,7 +62,7 @@ void CRoutinoDatabaseBuilder::slotSelectSourceFiles()
     SETTINGS;
     QString path = cfg.value("RoutinoDatabaseBuilder/sourcePath", QDir::homePath()).toString();
 
-    QStringList files = QFileDialog::getOpenFileNames(this, tr("Select files..."), path, "OSM Database (*.pbf)");
+    const QStringList& files = QFileDialog::getOpenFileNames(this, tr("Select files..."), path, "OSM Database (*.pbf)");
     if(files.isEmpty())
     {
         return;

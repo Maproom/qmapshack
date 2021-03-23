@@ -164,12 +164,13 @@ private:
     QSet<QString> getAllDeviceKeys() const;
 
     template<typename T>
-    QList<IGisItem::key_t> selectedItems2Keys()
+    QList<IGisItem::key_t> selectedItems2Keys() const
     {
         QList<IGisItem::key_t> keys;
-        for(QTreeWidgetItem * item : selectedItems())
+        const QList<QTreeWidgetItem*>& items = selectedItems();
+        for(const QTreeWidgetItem * item : items)
         {
-            T * gisItem = dynamic_cast<T*>(item);
+            const T * gisItem = dynamic_cast<const T*>(item);
             if(nullptr != gisItem)
             {
                 keys << gisItem->getKey();

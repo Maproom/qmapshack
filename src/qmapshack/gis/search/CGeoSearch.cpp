@@ -479,7 +479,7 @@ void CGeoSearch::parseGeonamesSearch(const QByteArray& data)
                             address.append(", ");
                         }
                         address.append(xmlCountryName.text());
-                        isNotFirst = true;
+//                        isNotFirst = true;
                     }
 
                     qreal lon = xmlLng.text().toDouble();
@@ -629,7 +629,7 @@ void CGeoSearch::parseGeonamesAddress(const QByteArray& data)
                             address.append(", ");
                         }
                         address.append(xmlCountryCode.text());
-                        isNotFirst = true;
+//                        isNotFirst = true;
                     }
 
                     qreal lon = xmlLng.text().toDouble();
@@ -741,7 +741,7 @@ void CGeoSearch::parseNominatim(const QByteArray& data)
                     if (hasPostcode)
                     {
                         address.append(" ");
-                        hasPostcode = false;
+//                        hasPostcode = false;
                     }
                     else if (isNotFirst)
                     {
@@ -775,7 +775,7 @@ void CGeoSearch::parseNominatim(const QByteArray& data)
                         address.append(", ");
                     }
                     address.append(xmlCountryCode.text());
-                    isNotFirst = true;
+//                    isNotFirst = true;
                 }
 
                 new CGisItemWpt(QPointF(lon, lat), address, actSymbol->objectName(), this);

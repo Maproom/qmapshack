@@ -160,7 +160,8 @@ CFitFieldProfile CFitFieldDataState::buildDevFieldProfile(CFitMessage& mesg)
     quint8 natvieMesgNum = 0;
     quint8 nativeFieldNum = 0;
 
-    for (const CFitField field : mesg.getFields())
+    const QList<CFitField>& fields = mesg.getFields();
+    for (const CFitField& field : fields)
     {
         if (field.isValidValue())
         {

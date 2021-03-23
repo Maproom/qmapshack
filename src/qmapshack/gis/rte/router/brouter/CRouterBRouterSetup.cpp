@@ -280,7 +280,8 @@ void CRouterBRouterSetup::readLocalProfiles()
     QStringList installedProfiles;
     if (dir.exists())
     {
-        for(const QString &profile : dir.entryList())
+        const QStringList& profiles = dir.entryList();
+        for(const QString &profile : profiles)
         {
             if (profile.endsWith(".brf"))
             {
@@ -297,7 +298,7 @@ void CRouterBRouterSetup::readLocalProfiles()
             changed = true;
         }
     }
-    for (const QString &profile : installedProfiles)
+    for (const QString &profile : qAsConst(installedProfiles))
     {
         if (!localProfiles.contains(profile))
         {
@@ -446,7 +447,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
                    window.location.search.slice = function() {};\
                    URLSearchParams = function() {};\
                    BR = {};\
-                  })();").arg(configHost).arg(configScheme);
+                  })();").arg(configHost, configScheme);
 
     engine.evaluate(jsSetup);
     const QJSValue &val = engine.evaluate(jsConfig);
@@ -651,17 +652,17 @@ void CRouterBRouterSetup::mergeOnlineProfiles(const QStringList &onlineProfilesL
     }
 }
 
-void CRouterBRouterSetup::emitOnlineConfigScriptError(const QJSValue &error) const
+void CRouterBRouterSetup::emitOnlineConfigScriptError(const QJSValue &error)
 {
     emit sigError(tr("Error parsing online-config:"), error.toString());
 }
 
-void CRouterBRouterSetup::emitNetworkError(QString error) const
+void CRouterBRouterSetup::emitNetworkError(QString error)
 {
     emit sigError(tr("Network error:"), error);
 }
 
-void CRouterBRouterSetup::displayProfileAsync(const QString &profile) const
+void CRouterBRouterSetup::displayProfileAsync(const QString &profile)
 {
     if (installMode == eModeLocal)
     {

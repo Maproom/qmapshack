@@ -106,7 +106,7 @@ void ITrack::updateData()
     }
 
     line.clear();
-    for(const QPointF &trkpt : coords)
+    for(const QPointF &trkpt : qAsConst(coords))
     {
         QPointF pt(trkpt.x(), trkpt.y());
         proj.transform(pt, PJ_INV);

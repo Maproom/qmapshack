@@ -62,7 +62,7 @@ CProjWizard::CProjWizard(QLineEdit &line)
     }
     qSort(list.begin(), list.end(), mitabLessThan);
 
-    for(const mitab_entry_t &entry : list)
+    for(const mitab_entry_t &entry : qAsConst(list))
     {
         comboDatum->addItem(entry.name, entry.idx);
     }

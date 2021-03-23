@@ -44,9 +44,6 @@ void CGisDraw::drawt(buffer_t& currentBuffer)
     QPointF pp = currentBuffer.ref1;
     convertRad2Px(pp);
 
-
-    QRectF rect(QPointF(left, top), QPointF(right, bottom));
-
     QPolygonF viewport;
     viewport << pt1 << pt2 << pt3 << pt4;
 

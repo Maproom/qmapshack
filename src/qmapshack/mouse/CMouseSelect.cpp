@@ -30,7 +30,11 @@ CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
 {
     cursor = QCursor(QPixmap("://cursors/cursorSelectArea.png"), 0, 0);
 
-    canvas->reportStatus("IMouseSelect", tr("<b>Select Items On Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners."));
+    canvas->reportStatus("IMouseSelect",
+                         tr("<b>Select Items On Map</b><br/>Select a rectangular area on the map. "
+                            "Use the left mouse button and move the mouse. Abort with a right "
+                            "click. Adjust the selection by point-click-move on the corners.")
+                         );
 
     CScrOptSelect * scrOptSelect;
     scrOpt = scrOptSelect = new CScrOptSelect(this);
@@ -78,7 +82,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
         cntTrk = 0;
         cntRte = 0;
         cntOvl = 0;
-        for(IGisItem * item : items)
+        for(IGisItem * item : qAsConst(items))
         {
             itemKeys << item->getKey();
             switch(item->type())
@@ -148,7 +152,7 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     QList<IGisItem*> items;
     findItems(items);
 
-    for(IGisItem * item : items)
+    for(IGisItem * item : qAsConst(items))
     {
         item->drawHighlight(p);
     }

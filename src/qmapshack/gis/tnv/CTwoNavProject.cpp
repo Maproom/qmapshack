@@ -246,7 +246,7 @@ bool CTwoNavProject::load(const QString& filename)
 {
     QDir dir(filename);
 
-    QStringList entries = dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files);
+    const QStringList& entries = dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files);
     for(const QString &entry : entries)
     {
         QFileInfo fi(entry);

@@ -663,7 +663,7 @@ QString CGisItemTrk::getInfoRange() const
     const qreal distance = pt2->distance - pt1->distance;
 
     IUnit::self().meter2distance(distance, val, unit);
-    str += QString("%3 %1%2 ").arg(val).arg(unit).arg(QChar(0x21A6));
+    str += QString("%3 %1%2 ").arg(val, unit).arg(QChar(0x21A6));
     if(timeIsValid)
     {
         quint32 t  = pt2->time.toTime_t() - pt1->time.toTime_t();
@@ -674,7 +674,7 @@ QString CGisItemTrk::getInfoRange() const
         str += QString("%4 %1:%2:%3").arg(hh, 2, 10, QChar('0')).arg(mm, 2, 10, QChar('0')).arg(ss, 2, 10, QChar('0')).arg(QChar(0x231a));
 
         IUnit::self().meter2speed(distance / deltaTime, val, unit);
-        str += QString(", %3 %1%2").arg(val).arg(unit).arg(QChar(0x21A3));
+        str += QString(", %3 %1%2").arg(val, unit).arg(QChar(0x21A3));
     }
     str += "\n";
 
@@ -692,7 +692,7 @@ QString CGisItemTrk::getInfoRange() const
     if(timeIsValid)
     {
         IUnit::self().meter2speed(deltaAscent / deltaTime, val, unit);
-        str += QString(", %1%2").arg(val).arg(unit);
+        str += QString(", %1%2").arg(val, unit);
     }
     str += "\n";
 
@@ -705,7 +705,7 @@ QString CGisItemTrk::getInfoRange() const
     if(timeIsValid)
     {
         IUnit::self().meter2speed(deltaDescent / deltaTime, val, unit);
-        str += QString(", %1%2").arg(val).arg(unit);
+        str += QString(", %1%2").arg(val, unit);
     }
 
     return str + "\n";
@@ -787,25 +787,25 @@ QString CGisItemTrk::getInfoProgress(const CTrackData::trkpt_t& pt) const
     if(pt.ascent != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.ascent, val, unit);
-        asc = tr("Ascent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascent * 100 / totalAscent, 2, 'f', 0);
+        asc = tr("Ascent: %1%2 (%3%)").arg(val, unit).arg(pt.ascent * 100 / totalAscent, 2, 'f', 0);
     }
 
     if(pt.descent != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.descent, val, unit);
-        dsc = tr(", Descent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descent * 100 / totalDescent, 2, 'f', 0);
+        dsc = tr(", Descent: %1%2 (%3%)").arg(val, unit).arg(pt.descent * 100 / totalDescent, 2, 'f', 0);
     }
 
     if(pt.distance != NOFLOAT)
     {
         IUnit::self().meter2distance(pt.distance, val, unit);
-        dst = tr("Distance: %1%2 (%3%)").arg(val).arg(unit).arg(pt.distance * 100 / totalDistance, 2, 'f', 0);
+        dst = tr("Distance: %1%2 (%3%)").arg(val, unit).arg(pt.distance * 100 / totalDistance, 2, 'f', 0);
     }
 
     if(pt.elapsedSeconds != NOFLOAT)
     {
         IUnit::self().seconds2time(pt.elapsedSecondsMoving, val, unit);
-        mov = tr(", Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 2, 'f', 0);
+        mov = tr(", Moving: %1%2 (%3%)").arg(val, unit).arg(pt.elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 2, 'f', 0);
     }
 
     return QString("%1%2\n%3%4").arg(asc, dsc, dst, mov);
@@ -834,34 +834,34 @@ QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& trkpt1, const CTrac
     if((pt1.ascent != NOFLOAT) && (pt2.ascent != NOFLOAT))
     {
         IUnit::self().meter2elevation(pt2.ascent - pt1.ascent, val, unit);
-        asc = tr("Ascent: %1%2").arg(val).arg(unit);
+        asc = tr("Ascent: %1%2").arg(val, unit);
 
         if(dt != NOFLOAT)
         {
             IUnit::self().meter2speed((pt2.ascent - pt1.ascent) / dt, val, unit);
-            asc += tr(", %1%2").arg(val).arg(unit);
+            asc += tr(", %1%2").arg(val, unit);
         }
     }
 
     if((pt1.descent != NOFLOAT) && (pt2.descent != NOFLOAT))
     {
         IUnit::self().meter2elevation(pt2.descent - pt1.descent, val, unit);
-        dsc = tr(", Descent: %1%2").arg(val).arg(unit);
+        dsc = tr(", Descent: %1%2").arg(val, unit);
 
         if(dt != NOFLOAT)
         {
             IUnit::self().meter2speed((pt2.descent - pt1.descent) / dt, val, unit);
-            dsc += tr(", %1%2").arg(val).arg(unit);
+            dsc += tr(", %1%2").arg(val, unit);
         }
     }
 
     IUnit::self().meter2distance(pt2.distance - pt1.distance, val, unit);
-    QString dsttme = tr("Distance: %1%2").arg(val).arg(unit);
+    QString dsttme = tr("Distance: %1%2").arg(val, unit);
 
     if(dt != NOFLOAT)
     {
         IUnit::self().seconds2time(dt, val, unit);
-        dsttme += tr(", Time: %1%2").arg(val).arg(unit);
+        dsttme += tr(", Time: %1%2").arg(val, unit);
     }
 
     return QString("%1%2\n%3").arg(asc, dsc, dsttme);

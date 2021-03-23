@@ -233,10 +233,11 @@ void CRouterRoutino::buildDatabaseList()
 
     IAppSetup *setup = IAppSetup::getPlatformInstance();
 
-    for(const QString &path : dbPaths)
+    for(const QString &path : qAsConst(dbPaths))
     {
         QDir dir(path);
-        for(const QString &filename : dir.entryList(QStringList("*segments.mem"), QDir::Files | QDir::Readable, QDir::Name))
+        const QStringList& filenames = dir.entryList(QStringList("*segments.mem"), QDir::Files | QDir::Readable, QDir::Name);
+        for(const QString &filename : filenames)
         {
             QString prefix;
             if(re.exactMatch(filename))
@@ -309,7 +310,7 @@ void CRouterRoutino::buildDatabaseList()
                     "Error in '%2'\n"
                     "This needs to be fixed\n"
                     "The associated database '%3' is ignored"
-                    ).arg(xlateRoutinoError(Routino_errno)).arg(dmap["profilesPath"].toString()).arg(prefix);
+                    ).arg(xlateRoutinoError(Routino_errno), dmap["profilesPath"].toString(), prefix);
 
                 QMessageBox::warning(this, "Routino...", msg, QMessageBox::Ok);
             }
@@ -408,7 +409,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
         int idx = 0;
         QVector<Routino_Waypoint*> waypoints(line.size(), nullptr);
-        for(const IGisLine::point_t &pt : line)
+        for(const IGisLine::point_t &pt : qAsConst(line))
         {
             waypoints[idx] = Routino_FindWaypoint(data, profile, pt.coord.y() * RAD_TO_DEG, pt.coord.x() * RAD_TO_DEG);
             if(waypoints[idx] == nullptr)

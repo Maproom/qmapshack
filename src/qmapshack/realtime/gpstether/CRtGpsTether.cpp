@@ -36,7 +36,7 @@ CRtGpsTether::CRtGpsTether(QTreeWidget *parent)
     setText(eColumnName, "GPS TCP/IP");
     setCheckState(eColumnCheckBox, Qt::Checked);
 
-    registerWithTreeWidget();
+    CRtGpsTether::registerWithTreeWidget();
 }
 
 

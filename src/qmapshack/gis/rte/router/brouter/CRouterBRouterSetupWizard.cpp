@@ -358,7 +358,8 @@ void CRouterBRouterSetupWizard::slotLocalToolSelectJava()
     dialog.setFileMode(QFileDialog::ExistingFile);
     if (dialog.exec())
     {
-        setup->localJavaExecutable = dialog.selectedFiles().first();
+        const QStringList& files = dialog.selectedFiles();
+        setup->localJavaExecutable = files.isEmpty() ? "" : files.first();
         updateLocalDirectory();
     }
 }
@@ -573,7 +574,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
             textLocalInstall->append(tr("download %1 finished").arg(outfile.fileName()));
             const QStringList &unzippedNames = JlCompress::extractDir(outfile.fileName(), setup->localDir);
             textLocalInstall->append(tr("unzipping:"));
-            for (const QString unzipped : unzippedNames)
+            for (const QString& unzipped : unzippedNames)
             {
                 textLocalInstall->append(unzipped);
             }
@@ -646,7 +647,8 @@ void CRouterBRouterSetupWizard::slotDisplayProfile(const QString &profile, const
 
 void CRouterBRouterSetupWizard::slotAddProfileClicked() const
 {
-    for (const QString &profile : selectedProfiles(listAvailableProfiles))
+    const QStringList& profiles = selectedProfiles(listAvailableProfiles);
+    for (const QString &profile : profiles)
     {
         setup->addProfile(profile);
     }
@@ -654,7 +656,8 @@ void CRouterBRouterSetupWizard::slotAddProfileClicked() const
 
 void CRouterBRouterSetupWizard::slotDelProfileClicked() const
 {
-    for (const QString &profile : selectedProfiles(listProfiles))
+    const QStringList& profiles = selectedProfiles(listProfiles);
+    for (const QString &profile : profiles)
     {
         setup->deleteProfile(profile);
     }
@@ -662,7 +665,8 @@ void CRouterBRouterSetupWizard::slotDelProfileClicked() const
 
 void CRouterBRouterSetupWizard::slotProfileUpClicked() const
 {
-    for (const QString &profile : selectedProfiles(listProfiles))
+    const QStringList& profiles = selectedProfiles(listProfiles);
+    for (const QString &profile : profiles)
     {
         setup->profileUp(profile);
     }
@@ -670,7 +674,8 @@ void CRouterBRouterSetupWizard::slotProfileUpClicked() const
 
 void CRouterBRouterSetupWizard::slotProfileDownClicked() const
 {
-    for (const QString &profile : selectedProfiles(listProfiles))
+    const QStringList& profiles = selectedProfiles(listProfiles);
+    for (const QString &profile : profiles)
     {
         setup->profileDown(profile);
     }
@@ -680,7 +685,7 @@ void CRouterBRouterSetupWizard::updateProfiles() const
 {
     const QStringList &profiles = setup->getProfiles();
     QStringList available;
-    for(const QString &profile:setup->onlineProfilesAvailable)
+    for(const QString &profile : qAsConst(setup->onlineProfilesAvailable))
     {
         if (!profiles.contains(profile))
         {

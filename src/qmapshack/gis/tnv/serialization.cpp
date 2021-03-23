@@ -240,7 +240,7 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
     out << "y " << getKey().item << endl;
 
 
-    for(const CTrackData::trkseg_t& seg : trk.segs)
+    for(const CTrackData::trkseg_t& seg : qAsConst(trk.segs))
     {
         for(const CTrackData::trkpt_t& trkpt : seg.pts)
         {
@@ -553,7 +553,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     }
 
 
-    for(const image_t &img : images)
+    for(const image_t &img : qAsConst(images))
     {
         QString fn = img.info;
         if(fn.isEmpty())

@@ -71,7 +71,7 @@ public:
     void loadExpertBinariesPage() const;
     void loadExpertSegmentsPage() const;
     void loadLocalOnlineProfiles(bool update) const;
-    void displayProfileAsync(const QString &profile) const;
+    void displayProfileAsync(const QString &profile);
     void displayOnlineProfileAsync(const QString &profile) const;
 
     QString findJava() const;
@@ -88,13 +88,13 @@ public:
     void onInvalidSetup();
 
 signals:
-    void sigOnlineConfigLoaded() const;
-    void sigVersionChanged() const;
-    void sigBinariesPageLoaded() const;
-    void sigSegmentsPageLoaded() const;
-    void sigProfilesChanged() const;
-    void sigDisplayOnlineProfileFinished(const QString profile, const QString content) const;
-    void sigError(const QString error, const QString details) const;
+    void sigOnlineConfigLoaded();
+    void sigVersionChanged();
+    void sigBinariesPageLoaded();
+    void sigSegmentsPageLoaded();
+    void sigProfilesChanged();
+    void sigDisplayOnlineProfileFinished(const QString profile, const QString content);
+    void sigError(const QString error, const QString details);
 
 private slots:
     void slotOnlineRequestFinished(QNetworkReply *reply);
@@ -111,8 +111,8 @@ private:
     void loadOnlineProfileFinished(QNetworkReply * reply);
     void afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant &v);
     void mergeOnlineProfiles(const QStringList &profilesLoaded);
-    void emitOnlineConfigScriptError(const QJSValue &error) const;
-    void emitNetworkError(QString error) const;
+    void emitOnlineConfigScriptError(const QJSValue &error);
+    void emitNetworkError(QString error);
     mode_e modeFromString(const QString &mode) const;
     QString stringFromMode(const mode_e mode) const;
 

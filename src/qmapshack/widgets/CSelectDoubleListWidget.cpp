@@ -135,7 +135,8 @@ void CSelectDoubleListWidget::slotAvailableClicked(const QModelIndex & index) co
 
 void CSelectDoubleListWidget::slotAdd() const
 {
-    for (QListWidgetItem * const & item : listAvailable->selectedItems())
+    const QList<QListWidgetItem*>& items = listAvailable->selectedItems();
+    for (QListWidgetItem * const & item : items)
     {
         if (filter == nullptr || filter->shouldBeMoved(item))
         {
@@ -152,7 +153,8 @@ void CSelectDoubleListWidget::slotAdd() const
 
 void CSelectDoubleListWidget::slotRemove() const
 {
-    for (QListWidgetItem * const & item : listSelected->selectedItems())
+    const QList<QListWidgetItem*>& items = listSelected->selectedItems();
+    for (QListWidgetItem * const & item : items)
     {
         if (filter == nullptr || filter->shouldBeMoved(item))
         {
@@ -180,14 +182,15 @@ void CSelectDoubleListWidget::slotRemove() const
 void CSelectDoubleListWidget::slotUp() const
 {
     QList<int> indices;
-    for (const QModelIndex & modelIndex : listSelected->selectionModel()->selectedIndexes())
+    const QModelIndexList& indexes = listSelected->selectionModel()->selectedIndexes();
+    for (const QModelIndex & modelIndex : indexes)
     {
         indices << modelIndex.row();
     }
     std::sort(indices.begin(), indices.end());
 
     int i = 0;
-    for (int index : indices)
+    for (int index : qAsConst(indices))
     {
         if (index > i)
         {
@@ -202,14 +205,15 @@ void CSelectDoubleListWidget::slotUp() const
 void CSelectDoubleListWidget::slotDown() const
 {
     QList<int> indices;
-    for (const QModelIndex & modelIndex : listSelected->selectionModel()->selectedIndexes())
+    const QModelIndexList& indexes = listSelected->selectionModel()->selectedIndexes();
+    for (const QModelIndex & modelIndex : indexes)
     {
         indices << modelIndex.row();
     }
     std::sort(indices.begin(), indices.end(), [] (int a, int b) { return a > b; });
 
     int i = listSelected->count() - 1;
-    for (int index : indices)
+    for (int index : qAsConst(indices))
     {
         if (index < i)
         {

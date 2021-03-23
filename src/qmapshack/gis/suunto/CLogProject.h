@@ -43,6 +43,8 @@ public:
 
 private:
     void loadLog(const QString& filename);
+
+    static const QList<extension_t> extensions;
 };
 #endif //CLOGPROJECT_H
 

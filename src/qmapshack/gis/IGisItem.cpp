@@ -810,11 +810,11 @@ QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& st
     }
     if(key.isEmpty())
     {
-        return QString("<a href='%1'>%2</a>").arg(href).arg(str);
+        return QString("<a href='%1'>%2</a>").arg(href, str);
     }
     else
     {
-        return QString("<a href='%1?key=%3'>%2</a>").arg(href).arg(str).arg(key);
+        return QString("<a href='%1?key=%3'>%2</a>").arg(href, str, key);
     }
 }
 
@@ -851,8 +851,11 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
         {
             for(const link_t &link : links)
             {
-                str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString())
-                       .arg(link.text.isEmpty() ? link.uri.toString() : link.text);
+                str += QString("<p><a href='%1'>%2</a></p>")
+                       .arg(
+                    link.uri.toString(),
+                    link.text.isEmpty() ? link.uri.toString() : link.text
+                    );
             }
         }
     }
@@ -890,8 +893,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
         {
             for(const link_t &link : links)
             {
-                str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString())
-                       .arg(link.text.isEmpty() ? link.uri.toString() : link.text);
+                str += QString("<p><a href='%1'>%2</a></p>")
+                       .arg(link.uri.toString(),
+                            link.text.isEmpty() ? link.uri.toString() : link.text
+                            );
             }
         }
     }

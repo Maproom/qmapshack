@@ -70,7 +70,6 @@ QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
         case CQlgtWpt::eBase:
         {
             QString icon;
-            QString key;
 
             QDataStream s1(&entry->data, QIODevice::ReadOnly);
             s1.setVersion(QDataStream::Qt_4_5);
@@ -299,7 +298,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
 
         s3 << cache.logs.count();
 
-        for(const CQlgtWpt::geocachelog_t& log : cache.logs)
+        for(const CQlgtWpt::geocachelog_t& log : qAsConst(cache.logs))
         {
             s3 << log.id;
             s3 << log.date;

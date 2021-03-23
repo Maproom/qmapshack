@@ -66,7 +66,6 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
         {
         case CQlgtDiary::eBase:
         {
-            QString comment, name, key;
             QDataStream s1(&entry->data, QIODevice::ReadOnly);
             s1.setVersion(QDataStream::Qt_4_5);
 
@@ -78,55 +77,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
 
             break;
         }
-//            case CQlgtDiary::eWpt:
-//            {
-//                int cnt;
-//                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-//                s1.setVersion(QDataStream::Qt_4_5);
 
-//                s1 >> cnt;
-//                for(int i=0; i < cnt; i++)
-//                {
-//                    CWpt * wpt = new CWpt(&diary);
-//                    s1 >> *wpt;
-//                    diary.wpts << wpt;
-//                }
-//                break;
-
-//            }
-//            case CQlgtDiary::eTrk:
-//            {
-//                int cnt;
-//                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-//                s1.setVersion(QDataStream::Qt_4_5);
-
-//                s1 >> cnt;
-//                for(int i=0; i < cnt; i++)
-//                {
-//                    CTrack * trk = new CTrack(&diary);
-//                    s1 >> *trk;
-//                    trk->rebuild(true);
-//                    diary.trks << trk;
-//                }
-//                break;
-
-//            }
-//            case CQlgtDiary::eRte:
-//            {
-//                int cnt;
-//                QDataStream s1(&entry->data, QIODevice::ReadOnly);
-//                s1.setVersion(QDataStream::Qt_4_5);
-
-//                s1 >> cnt;
-//                for(int i=0; i < cnt; i++)
-//                {
-//                    CRoute * rte = new CRoute(&diary);
-//                    s1 >> *rte;
-//                    diary.rtes << rte;
-//                }
-//                break;
-
-//            }
         default:
             ;
         }

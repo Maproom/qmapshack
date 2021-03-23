@@ -391,7 +391,7 @@ QString CGisItemOvlArea::getInfo(quint32 feature) const
 
 
     IUnit::self().meter2area(area.area, val, unit);
-    str += "<br/>\n" + tr("Area: %1%2").arg(val).arg(unit);
+    str += "<br/>\n" + tr("Area: %1%2").arg(val, unit);
 
     QString desc = removeHtml(area.desc).simplified();
     if(desc.count())

@@ -174,7 +174,7 @@ void CMapTMS::getLayers(QListWidget& list) /* override */
     }
 
     int i = 0;
-    for(const layer_t &layer : layers)
+    for(const layer_t &layer : qAsConst(layers))
     {
         QListWidgetItem * item = new QListWidgetItem(layer.title, &list);
         item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
@@ -227,7 +227,7 @@ void CMapTMS::loadConfig(QSettings& cfg)
 
     // enable layers stored in configuration
     enabled = cfg.value("enabledLayers", enabled).toStringList();
-    for(const QString &str : enabled)
+    for(const QString &str : qAsConst(enabled))
     {
         int idx = str.toInt();
         if(idx < layers.size())
@@ -358,7 +358,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
     }
 
     // draw layers
-    for(const layer_t &layer : layers)
+    for(const layer_t &layer : qAsConst(layers))
     {
         if(!layer.enabled)
         {

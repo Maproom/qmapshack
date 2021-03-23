@@ -188,7 +188,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
         pixelPts.clear();
         pixelSubs.clear();
 
-        for(const IGisLine::point_t &pt : points)
+        for(const IGisLine::point_t &pt : qAsConst(points))
         {
             pixelLine << pt.pixel;
             pixelPts << pt.pixel;
@@ -217,7 +217,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::white);
     QRect r1(0, 0, 9, 9);
-    for(const QPointF &pt : pixelPts)
+    for(const QPointF &pt : qAsConst(pixelPts))
     {
         r1.moveCenter(pt.toPoint());
         p.drawRect(r1);
@@ -228,13 +228,13 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::black);
     QRect r2(0, 0, 7, 7);
-    for(const QPointF &pt : pixelPts)
+    for(const QPointF &pt : qAsConst(pixelPts))
     {
         r2.moveCenter(pt.toPoint());
         p.drawRect(r2);
     }
 
-    for(const QPointF &pt : pixelSubs)
+    for(const QPointF &pt : qAsConst(pixelSubs))
     {
         p.drawEllipse(pt, 2, 2);
     }
@@ -372,9 +372,9 @@ void IMouseEditLine::slotOptimize()
     if(response == -1)
     {
         canvas->reportStatus("Optimization", QString("<b>%1</b><br/><b>%2</b> %3<br/>")
-                             .arg(tr("Optimization failed."))
-                             .arg(tr("Note:"))
-                             .arg(tr("The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can't.")));
+                             .arg(tr("Optimization failed."),
+                                  tr("Note:"),
+                                  tr("The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can't.")));
     }
     else
     {
@@ -515,7 +515,7 @@ void IMouseEditLine::updateStatus()
     qreal lastEle = points[0].ele;
     QPointF lastPos = points[0].coord;
 
-    for(const IGisLine::point_t &pt1 : points)
+    for(const IGisLine::point_t &pt1 : qAsConst(points))
     {
         qreal delta = pt1.ele - lastEle;
         if(qAbs(delta) > ASCENT_THRESHOLD)
@@ -560,11 +560,11 @@ void IMouseEditLine::updateStatus()
     msg += tr("<b>%1 Metrics</b>").arg(type);
     msg += "<table>";
     IUnit::self().meter2distance(dist, val, unit);
-    msg += "<tr><td>" + tr("Distance:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
+    msg += "<tr><td>" + tr("Distance:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val, unit) + "</td></tr>";
     IUnit::self().meter2elevation(asc, val, unit);
-    msg += "<tr><td>" + tr("Ascent:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
+    msg += "<tr><td>" + tr("Ascent:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val, unit) + "</td></tr>";
     IUnit::self().meter2elevation(dsc, val, unit);
-    msg += "<tr><td>" + tr("Descent:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
+    msg += "<tr><td>" + tr("Descent:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val, unit) + "</td></tr>";
     msg += "</table>";
 
     canvas->reportStatus("IMouseEditLine", msg);

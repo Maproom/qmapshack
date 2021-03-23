@@ -45,7 +45,7 @@ public:
 
     const CFitProfile& profile() const { return *messageProfile; }
     QStringList messageInfo() const;
-    const QList<CFitField> getFields() const { return fields.values(); }
+    QList<CFitField> getFields() const { return fields.values(); }
     void updateFieldProfile(quint8 fieldDefNr, const CFitFieldProfile* fieldProfile);
 
 private:

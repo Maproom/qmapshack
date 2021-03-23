@@ -62,7 +62,7 @@ void CRouterBRouterToolShell::stop()
     }
 }
 
-void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState) const
+void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState)
 {
     if (newState == QProcess::NotRunning && isStarting)
     {
@@ -72,7 +72,7 @@ void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newS
     emit sigProcessStateChanged(newState);
 }
 
-void CRouterBRouterToolShell::slotError(const QProcess::ProcessError error) const
+void CRouterBRouterToolShell::slotError(const QProcess::ProcessError error)
 {
     if (isBeingKilled)
     {

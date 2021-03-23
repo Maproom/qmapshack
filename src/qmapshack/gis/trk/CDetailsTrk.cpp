@@ -199,7 +199,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
 
     slotShowPlots();
-    updateData();
 }
 
 CDetailsTrk::~CDetailsTrk()
@@ -320,9 +319,9 @@ void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QT
     connect(toolLimitAuto, &QToolButton::toggled, spinMax, &QDoubleSpinBox::setDisabled);
     connect(toolLimitAuto, &QToolButton::toggled, spinMin, &QDoubleSpinBox::setDisabled);
 
-    connect(toolLimitAuto, &QToolButton::toggled, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeAuto, checked);});
-    connect(toolLimitUsr,  &QToolButton::toggled, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeUser, checked);});
-    connect(toolLimitSys,  &QToolButton::toggled, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeSys, checked);});
+    connect(toolLimitAuto, &QToolButton::toggled, this, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeAuto, checked);});
+    connect(toolLimitUsr,  &QToolButton::toggled, this, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeUser, checked);});
+    connect(toolLimitSys,  &QToolButton::toggled, this, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeSys, checked);});
 
     connect(spinMax,       &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitHighChanged);
     connect(spinMax,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitHighChanged);
@@ -411,14 +410,14 @@ void CDetailsTrk::updateData()
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);
 
-    QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
-    if(nullptr != tabWidget)
+    QTabWidget * tabWidget_ = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
+    if(nullptr != tabWidget_)
     {
-        int idx = tabWidget->indexOf(this);
+        int idx = tabWidget_->indexOf(this);
         if(idx != NOIDX)
         {
             setObjectName(trk.getName());
-            tabWidget->setTabText(idx, trk.getName());
+            tabWidget_->setTabText(idx, trk.getName());
         }
     }
 
@@ -441,7 +440,8 @@ void CDetailsTrk::updateData()
     // the first entry `solid color`, it is always available
     comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), tr("Color"));
     comboColorSource->addItem(QIcon("://icons/32x32/Activity.png"), tr("Activity"), "activity");
-    for(const QString &key : trk.getExistingDataSources())
+    const QList<QString>& keys = trk.getExistingDataSources();
+    for(const QString &key : keys)
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
         QIcon icon(ext.icon);
@@ -518,6 +518,7 @@ void CDetailsTrk::updateData()
     {
         filterChangeStartPoint->updateUi();
     }
+
 
     QString tooltip = tr("Set parameters to compute \"Energy Use Cycling\" for a cycling tour");
     if(trk.getEnergyCycling().isValid())
@@ -597,15 +598,15 @@ void CDetailsTrk::slotMouseClickState(int s)
 
 void CDetailsTrk::slotNameChanged(const QString &name)
 {
-    QTabWidget *tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
-    if(nullptr != tabWidget)
+    QTabWidget *tabWidget_ = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
+    if(nullptr != tabWidget_)
     {
-        int idx = tabWidget->indexOf(this);
+        int idx = tabWidget_->indexOf(this);
         if(idx != NOIDX)
         {
             const QString shownName = name.isEmpty() ? CGisItemTrk::noName : QString(name).replace('&', "&&");
             setObjectName(shownName);
-            tabWidget->setTabText(idx, shownName);
+            tabWidget_->setTabText(idx, shownName);
         }
     }
 }
@@ -630,7 +631,7 @@ void CDetailsTrk::slotShowPlots()
     plot1->setVisible(checkGraph1->isChecked());
     plot2->setVisible(checkGraph2->isChecked());
     plot3->setVisible(checkGraph3->isChecked());
-    updateData();
+    CDetailsTrk::updateData();
 }
 
 void CDetailsTrk::slotColorChanged(int idx)

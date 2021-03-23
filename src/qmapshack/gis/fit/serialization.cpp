@@ -24,7 +24,7 @@
 
 static const qreal degrees = 180.0;
 static const qreal twoPow31 = qPow(2, 31);
-static const uint sec1970to1990 = QDateTime(QDate(1989, 12, 31), QTime(0, 0, 0), Qt::UTC).toTime_t();
+static const uint sec1970to1990 = 631065600;
 
 /**
  * converts the semicircle to the WGS-84 geoids (Degrees Decimal Minutes (DDD MM.MMM)).

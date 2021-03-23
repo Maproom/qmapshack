@@ -62,7 +62,7 @@ IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CC
 {
     setObjectName(name);
 
-    setScales(CCanvas::eScalesDefault);
+    IDrawContext::setScales(CCanvas::eScalesDefault);
 
     zoom(5);
 

@@ -42,7 +42,7 @@ CPlotProfile::CPlotProfile(CGisItemTrk *trk, CLimit& lim, mode_e mode, QWidget *
     init();
     connect(limit, &CLimit::sigChanged, this, &CPlotProfile::setLimits);
     setWindowTitle(trk->getNameEx());
-    updateData();
+    CPlotProfile::updateData();
 }
 
 CPlotProfile::~CPlotProfile()
@@ -176,7 +176,7 @@ void CPlotProfile::updateData()
     if(trk->isInterpolationEnabled())
     {
         QPolygonF spline;
-        for(const QPointF& pt : lineEle)
+        for(const QPointF& pt : qAsConst(lineEle))
         {
             spline << QPointF(pt.x(), trk->getElevationInterpolated(pt.x()) * elevationFactor);
         }

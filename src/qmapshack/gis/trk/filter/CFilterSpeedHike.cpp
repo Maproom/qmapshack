@@ -76,10 +76,10 @@ CFilterSpeedHike::CFilterSpeedHike(QWidget *parent)
         hikingTypes << hikingType;
     }
 
-    connect(comboHikingType, SIGNAL(activated(int)), this, SLOT(slotSetHikingType(int)));
-    connect(spinPlainSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetPlainSpeed(double)));
-    connect(spinAscending, SIGNAL(valueChanged(double)), this, SLOT(slotSetAscending(double)));
-    connect(spinDescending, SIGNAL(valueChanged(double)), this, SLOT(slotSetDescending(double)));
+    connect(comboHikingType, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &CFilterSpeedHike::slotSetHikingType);
+    connect(spinPlainSpeed, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CFilterSpeedHike::slotSetPlainSpeed);
+    connect(spinAscending, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CFilterSpeedHike::slotSetAscending);
+    connect(spinDescending, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CFilterSpeedHike::slotSetDescending);
 }
 
 void CFilterSpeedHike::loadSettings(QSettings& cfg)

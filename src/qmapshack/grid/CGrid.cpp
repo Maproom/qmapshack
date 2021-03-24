@@ -103,7 +103,7 @@ void CGrid::setProjAndColor(const QString& projStr, const QColor& c)
             QMessageBox::Ok
             );
 
-        QTimer::singleShot(1000, &CMainWindow::self(), SLOT(slotSetupGrid()));
+        QTimer::singleShot(1000, &CMainWindow::self(), &CMainWindow::slotSetupGrid);
     }
 }
 

@@ -45,7 +45,7 @@ CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::connected, this, &CRtGpsTetherInfo::slotConnected);
     connect(socket, &QTcpSocket::disconnected, this, &CRtGpsTetherInfo::slotDisconnected);
-    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(slotError(QAbstractSocket::SocketError)));
+    connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this, &CRtGpsTetherInfo::slotError);
     connect(socket, &QTcpSocket::readyRead, this, &CRtGpsTetherInfo::slotReadyRead);
 
     timer = new QTimer(this);
@@ -200,7 +200,7 @@ void CRtGpsTetherInfo::slotDisconnected()
     autoConnect(5000);
 }
 
-void CRtGpsTetherInfo::slotError(QAbstractSocket::SocketError socketError)
+void CRtGpsTetherInfo::slotError(QAbstractSocket::SocketError /*socketError*/)
 {
     slotDisconnected();
     labelStatus->setText("<b style='color: red;'>" + socket->errorString() + "</b>");
@@ -303,7 +303,7 @@ bool CRtGpsTetherInfo::verifyLine(const QString& line)
     return line.right(2).toInt(0, 16) == cs;
 }
 
-void CRtGpsTetherInfo::nmeaGSV(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaGSV(const QStringList& /*tokens*/)
 {
 }
 

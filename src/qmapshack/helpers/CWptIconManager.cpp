@@ -248,6 +248,30 @@ QString CWptIconManager::selectWptIcon(QWidget * parent)
 }
 
 
+
+QString CWptIconManager::getNumberedBullet(qint32 n)
+{
+    const QFont& font = CMainWindow::self().getMapFont();
+    if(mapNumberedBullets.contains(n) && (lastFont == font))
+    {
+        return mapNumberedBullets[n];
+    }
+
+    if(lastFont != font)
+    {
+        removeNumberedBullets();
+        lastFont = font;
+    }
+
+    const QString& filename = QDir::temp().absoluteFilePath(QString("Bullet%1.png").arg(n));
+    mapNumberedBullets[n] = filename;
+
+    const QPixmap& pixmap = CDraw::number(n, Qt::black);
+    pixmap.save(filename);
+
+    return filename;
+}
+
 QMenu * CWptIconManager::getWptIconMenu(const QString& title, QObject * obj, const char * slot, QWidget * parent)
 {
     QMenu * menu = new QMenu(title, parent);
@@ -274,25 +298,3 @@ QMenu * CWptIconManager::getWptIconMenu(const QString& title, QObject * obj, con
     return menu;
 }
 
-QString CWptIconManager::getNumberedBullet(qint32 n)
-{
-    const QFont& font = CMainWindow::self().getMapFont();
-    if(mapNumberedBullets.contains(n) && (lastFont == font))
-    {
-        return mapNumberedBullets[n];
-    }
-
-    if(lastFont != font)
-    {
-        removeNumberedBullets();
-        lastFont = font;
-    }
-
-    const QString& filename = QDir::temp().absoluteFilePath(QString("Bullet%1.png").arg(n));
-    mapNumberedBullets[n] = filename;
-
-    const QPixmap& pixmap = CDraw::number(n, Qt::black);
-    pixmap.save(filename);
-
-    return filename;
-}

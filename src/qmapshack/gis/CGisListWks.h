@@ -142,7 +142,14 @@ private:
     void migrateDB3to4();
     void setVisibilityOnMap(bool visible);
     QAction * addSortAction(QObject *parent, QActionGroup *actionGroup, const QString& icon, const QString& text, IGisProject::sorting_folder_e mode);
-    QAction * addAction(const QIcon& icon, const QString& name, QObject * parent, const char * slot);
+
+    template<typename Func>
+    QAction * addAction(const QIcon& icon, const QString& name, QObject * parent, Func slot)
+    {
+        QAction * action = new QAction(icon, name, parent);
+        connect(action, &QAction::triggered, this, slot);
+        return action;
+    }
 
     void showMenuProjectWks(const QPoint &p);
     void showMenuProjectDev(const QPoint &p);

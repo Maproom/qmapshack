@@ -110,7 +110,7 @@ void CGisWorkspace::slotLateInit()
 {
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
     //              is up and running.
-    QTimer::singleShot(1000, treeWks, SLOT(slotLoadWorkspace()));
+    QTimer::singleShot(1000, treeWks, &CGisListWks::slotLoadWorkspace);
 }
 
 void CGisWorkspace::setOpacity(qreal val)

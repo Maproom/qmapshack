@@ -96,13 +96,13 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     }
 
     menu = new QMenu(this);
-    actionResetZoom     = menu->addAction(QIcon("://icons/32x32/Zoom.png"),        tr("Reset Zoom"), this, SLOT(slotResetZoom()));
-    actionStopRange     = menu->addAction(QIcon("://icons/32x32/SelectReset.png"), tr("Reset Range"), this, SLOT(slotStopRange()));
-    actionPrint         = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
+    actionResetZoom     = menu->addAction(QIcon("://icons/32x32/Zoom.png"),        tr("Reset Zoom"), this, &IPlot::slotResetZoom);
+    actionStopRange     = menu->addAction(QIcon("://icons/32x32/SelectReset.png"), tr("Reset Range"), this, &IPlot::slotStopRange);
+    actionPrint         = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, &IPlot::slotSave);
     menu->addSeparator();
-    actionAddWpt        = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, SLOT(slotAddWpt()));
-    actionAddTrkPtInfo  = menu->addAction(QIcon("://icons/32x32/AddPointInfo.png"), tr("Add Trackpoint Info"), this, SLOT(slotAddTrkPtInfo()));
-    actionCutTrk        = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),      tr("Cut Track..."),    this, SLOT(slotCutTrk()));
+    actionAddWpt        = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, &IPlot::slotAddWpt);
+    actionAddTrkPtInfo  = menu->addAction(QIcon("://icons/32x32/AddPointInfo.png"), tr("Add Trackpoint Info"), this, &IPlot::slotAddTrkPtInfo);
+    actionCutTrk        = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),      tr("Cut Track..."),    this, &IPlot::slotCutTrk);
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
@@ -240,7 +240,7 @@ void IPlot::resetZoom()
 }
 
 
-void IPlot::paintEvent(QPaintEvent * e)
+void IPlot::paintEvent(QPaintEvent * /*e*/)
 {
     QPainter p(this);
     draw(p);
@@ -256,7 +256,7 @@ void IPlot::resizeEvent(QResizeEvent * e)
     update();
 }
 
-void IPlot::leaveEvent(QEvent * e)
+void IPlot::leaveEvent(QEvent * /*e*/)
 {
     needsRedraw = true;
     posMouse1    = NOPOINT;
@@ -266,7 +266,7 @@ void IPlot::leaveEvent(QEvent * e)
 }
 
 
-void IPlot::enterEvent(QEvent * e)
+void IPlot::enterEvent(QEvent * /*e*/)
 {
     needsRedraw = true;
     QCursor cursor = QCursor(QPixmap(":/cursors/cursorArrow.png"), 0, 0);

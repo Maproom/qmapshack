@@ -32,7 +32,7 @@ CGisSummary::CGisSummary(QWidget *parent)
     connect(toolSetup, &QToolButton::clicked, this, &CGisSummary::slotSetup);
     // As it is not guaranteed that at this point the databases are up
     // and running the setup of the drop zones at startup is delayed.
-    QTimer::singleShot(500, this, SLOT(slotStartup()));
+    QTimer::singleShot(500, this, &CGisSummary::slotStartup);
 }
 
 CGisSummary::~CGisSummary()

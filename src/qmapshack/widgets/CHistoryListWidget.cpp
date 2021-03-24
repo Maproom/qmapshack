@@ -34,8 +34,16 @@ CHistoryListWidget::CHistoryListWidget(QWidget *parent)
 
     menu = new QMenu(this);
 
-    actionCutHistoryBefore = menu->addAction(QIcon("://icons/32x32/CutHistoryBefore.png"), tr("Cut history before"), this, SLOT(slotCutHistoryBefore()));
-    actionCutHistoryAfter = menu->addAction(QIcon("://icons/32x32/CutHistoryAfter.png"), tr("Cut history after"), this, SLOT(slotCutHistoryAfter()));
+    actionCutHistoryBefore = menu->addAction(
+        QIcon("://icons/32x32/CutHistoryBefore.png"),
+        tr("Cut history before"),
+        this,
+        &CHistoryListWidget::slotCutHistoryBefore);
+    actionCutHistoryAfter = menu->addAction(
+        QIcon("://icons/32x32/CutHistoryAfter.png"),
+        tr("Cut history after"),
+        this,
+        &CHistoryListWidget::slotCutHistoryAfter);
 }
 
 CHistoryListWidget::~CHistoryListWidget()

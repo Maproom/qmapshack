@@ -150,7 +150,7 @@ CMainWindow::CMainWindow()
     }
     else
     {
-        QTimer::singleShot(500, this, SLOT(showMaximized()));
+        QTimer::singleShot(500, this, &CMainWindow::showMaximized);
     }
 
     if ( cfg.contains("state"))
@@ -488,9 +488,9 @@ CMainWindow::CMainWindow()
         }
     }
 
-    QTimer::singleShot(100, widgetGisWorkspace, SLOT(slotLateInit()));
+    QTimer::singleShot(100, widgetGisWorkspace, &CGisWorkspace::slotLateInit);
 
-    QTimer::singleShot(100, this, SLOT(slotSanityTest()));
+    QTimer::singleShot(100, this, &CMainWindow::slotSanityTest);
 }
 
 void CMainWindow::prepareMenuForMac()

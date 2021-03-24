@@ -32,7 +32,7 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const
     , name(name)
 {
     setText(CGisListDB::eColumnName, name);
-    QTimer::singleShot(200, this, SLOT(slotDelayedSetup()));
+    QTimer::singleShot(200, this, &CDBFolderMysql::slotDelayedSetup);
 }
 
 void CDBFolderMysql::slotDelayedSetup()

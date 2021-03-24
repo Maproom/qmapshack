@@ -136,7 +136,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     readGpx(xml);
     detBoundingRect();
 
-    genKey();
+    CGisItemWpt::genKey();
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 }
@@ -166,7 +166,7 @@ CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * proj
     readTwoNav(tnvWpt);
     detBoundingRect();
 
-    genKey();
+    CGisItemWpt::genKey();
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 }
@@ -179,7 +179,7 @@ CGisItemWpt::CGisItemWpt(CFitStream& stream, IGisProject * project)
     readWptFromFit(stream);
     detBoundingRect();
 
-    genKey();
+    CGisItemWpt::genKey();
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 }
@@ -242,7 +242,7 @@ QString CGisItemWpt::getLastName(const QString& name)
         }
         else if(idx < s)
         {
-            lastName = lastName.left(idx) + QString::number(lastName.mid(idx).toInt() + 1);
+            lastName = lastName.left(idx) + QString::number(lastName.midRef(idx).toInt() + 1);
         }
     }
 
@@ -416,7 +416,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
             if(link.type.isEmpty() || (link.type == "text/html"))
             {
                 str += "<br/>\n";
-                str += QString("<a href='%1'>%2</a>").arg(link.uri.toString()).arg(link.text);
+                str += QString("<a href='%1'>%2</a>").arg(link.uri.toString(), link.text);
             }
         }
         //Add logging link separately, since the link to the geocache site is extracted from the gpx file.
@@ -663,7 +663,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     blockedAreas << QRectF(posScreen - focus, icon.size());
 }
 
-void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+void CGisItemWpt::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw * gis)
 {
     if(mouseIsOverBubble && !doBubbleMove && !doBubbleSize && rectBubble.isValid() && !isReadOnly())
     {
@@ -694,7 +694,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 }
 
 
-void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
+void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &/*viewport*/, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw */*gis*/)
 {
     if(flags & eFlagWptBubble)
     {
@@ -935,7 +935,7 @@ void CGisItemWpt::mouseMove(const QPointF& pos)
     }
 }
 
-void CGisItemWpt::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& pos)
+void CGisItemWpt::mouseDragged(const QPoint& /*start*/, const QPoint& /*last*/, const QPoint& pos)
 {
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(!canvas)
@@ -976,7 +976,7 @@ void CGisItemWpt::mouseDragged(const QPoint& start, const QPoint& last, const QP
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CGisItemWpt::dragFinished(const QPoint& pos)
+void CGisItemWpt::dragFinished(const QPoint& /*pos*/)
 {
     updateHistory();
     doBubbleMove = doBubbleSize = false;
@@ -1289,7 +1289,7 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
         searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralType, [](CGisItemWpt* item){
+    map.insert(eSearchPropertyGeneralType, [](CGisItemWpt* /*item*/){
         searchValue_t searchValue;
         searchValue.str1 = tr("waypoint");
         return searchValue;
@@ -1307,7 +1307,8 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeocachePositiveAttributes, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        for(quint8 attr : item->geocache.attributes.keys())
+        const QList<quint8>& keys = item->geocache.attributes.keys();
+        for(quint8 attr : keys)
         {
             if(attr >= item->geocache.attributeMeaningsTranslated.length())
             {
@@ -1323,7 +1324,8 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeocacheNegatedAttributes, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        for(quint8 attr : item->geocache.attributes.keys())
+        const QList<quint8>& keys = item->geocache.attributes.keys();
+        for(quint8 attr : keys)
         {
             if(attr >= item->geocache.attributeMeaningsTranslated.length())
             {
@@ -1381,7 +1383,7 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeocacheLoggedBy, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        for(geocachelog_t log : item->geocache.logs)
+        for(const geocachelog_t &log : qAsConst(item->geocache.logs))
         {
             searchValue.str1 += log.finder + ", ";
         }

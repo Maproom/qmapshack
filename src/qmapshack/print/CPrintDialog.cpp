@@ -69,7 +69,7 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
         setWindowTitle(tr("Print Map..."));
         frameImage->hide();
         // update zoom info and print metrics
-        QTimer::singleShot(100, this, SLOT(slotGetPrinter()));
+        QTimer::singleShot(100, this, &CPrintDialog::slotGetPrinter);
     }
     else
     {

@@ -53,22 +53,22 @@ CEnergyCyclingDialog::CEnergyCyclingDialog(CEnergyCycling &energyCycling, QWidge
     buttonBox->button(QDialogButtonBox::RestoreDefaults)->setToolTip(tr("Load the previous saved parameter set."));
     buttonBox->button(QDialogButtonBox::Reset)->setToolTip(tr("Remove the \"Energy Use Cycling\" value from the track."));
 
-    connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(slotOk(bool)));
-    connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(slotApply(bool)));
-    connect(buttonBox->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked(bool)), this, SLOT(slotLoadFromSettings(bool)));
-    connect(buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked(bool)), this, SLOT(slotRemove(bool)));
-    connect(spinDriverWeight, SIGNAL(valueChanged(double)), this, SLOT(slotSetDriverWeight(double)));
-    connect(spinBikeWeight, SIGNAL(valueChanged(double)), this, SLOT(slotSetBikeWeight(double)));
-    connect(comboWindSpeed, SIGNAL(activated(int)), this, SLOT(slotSetComboWindSpeed(int)));
-    connect(spinWindSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetWindSpeed(double)));
-    connect(spinAirDensity, SIGNAL(valueChanged(double)), this, SLOT(slotSetAirDensity(double)));
-    connect(comboWindPosition, SIGNAL(activated(int)), this, SLOT(slotSetComboWindPosition(int)));
-    connect(spinFrontalArea, SIGNAL(valueChanged(double)), this, SLOT(slotSetFrontalAreaSpin(double)));
-    connect(spinWindDragCoeff, SIGNAL(valueChanged(double)), this, SLOT(slotSetWindDragCoeffSpin(double)));
-    connect(comboGround, SIGNAL(activated(int)), this, SLOT(slotSetComboGround(int)));
-    connect(spinRollingCoeff, SIGNAL(valueChanged(double)), this, SLOT(slotSetRollingCoeff(double)));
-    connect(spinPedalCadence, SIGNAL(valueChanged(double)), this, SLOT(slotSetPedalCadence(double)));
-    connect(pushHelp, SIGNAL(clicked(bool)), this, SLOT(slotShowHelp()));
+    connect(buttonBox->button(QDialogButtonBox::Ok), &QPushButton::clicked, this, &CEnergyCyclingDialog::slotOk);
+    connect(buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this, &CEnergyCyclingDialog::slotApply);
+    connect(buttonBox->button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this, &CEnergyCyclingDialog::slotLoadFromSettings);
+    connect(buttonBox->button(QDialogButtonBox::Reset), &QPushButton::clicked, this, &CEnergyCyclingDialog::slotRemove);
+    connect(spinDriverWeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CEnergyCyclingDialog::slotSetDriverWeight);
+    connect(spinBikeWeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CEnergyCyclingDialog::slotSetBikeWeight);
+    connect(comboWindSpeed, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &CEnergyCyclingDialog::slotSetComboWindSpeed);
+    connect(spinWindSpeed, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CEnergyCyclingDialog::slotSetWindSpeed);
+    connect(spinAirDensity, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CEnergyCyclingDialog::slotSetAirDensity);
+    connect(comboWindPosition, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &CEnergyCyclingDialog::slotSetComboWindPosition);
+    connect(spinFrontalArea, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CEnergyCyclingDialog::slotSetFrontalAreaSpin);
+    connect(spinWindDragCoeff, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CEnergyCyclingDialog::slotSetWindDragCoeffSpin);
+    connect(comboGround, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &CEnergyCyclingDialog::slotSetComboGround);
+    connect(spinRollingCoeff, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CEnergyCyclingDialog::slotSetRollingCoeff);
+    connect(spinPedalCadence, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CEnergyCyclingDialog::slotSetPedalCadence);
+    connect(pushHelp, &QPushButton::clicked, this, &CEnergyCyclingDialog::slotShowHelp);
 
     energyTmpSet = energyCycling.getEnergyTrkSet(); // put the track parameter set in a temporarily one, used by the dialog
     updateUi();

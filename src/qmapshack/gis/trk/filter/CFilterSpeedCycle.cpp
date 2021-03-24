@@ -80,13 +80,13 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
         cyclingTypes << cyclingType;
     }
 
-    connect(comboCyclingType, SIGNAL(activated(int)), this, SLOT(slotSetCyclingType(int)));
-    connect(spinPlainSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetPlainSpeed(double)));
-    connect(spinMinSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMinSpeed(double)));
-    connect(spinSlopeAtMinSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetSlopeAtMinSpeed(double)));
-    connect(spinMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMaxSpeed(double)));
-    connect(spinSlopeAtMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetSlopeAtMaxSpeed(double)));
-    connect(pushSetMinMaxSlope, SIGNAL(clicked(bool)), this, SLOT(slotSetMinMaxSlopes(bool)));
+    connect(comboCyclingType, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &CFilterSpeedCycle::slotSetCyclingType);
+    connect(spinPlainSpeed, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CFilterSpeedCycle::slotSetPlainSpeed);
+    connect(spinMinSpeed, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CFilterSpeedCycle::slotSetMinSpeed);
+    connect(spinSlopeAtMinSpeed, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CFilterSpeedCycle::slotSetSlopeAtMinSpeed);
+    connect(spinMaxSpeed, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CFilterSpeedCycle::slotSetMaxSpeed);
+    connect(spinSlopeAtMaxSpeed, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CFilterSpeedCycle::slotSetSlopeAtMaxSpeed);
+    connect(pushSetMinMaxSlope, &QPushButton::clicked, this, &CFilterSpeedCycle::slotSetMinMaxSlopes);
 }
 
 void CFilterSpeedCycle::loadSettings(QSettings& cfg)

@@ -169,7 +169,7 @@ IGisItem * CGisItemRte::createClone()
 bool CGisItemRte::isCalculated()
 {
     bool yes = true;
-    for(const rtept_t &pt : rte.pts)
+    for(const rtept_t &pt : qAsConst(rte.pts))
     {
         if((pt.fakeSubpt.lat == NOFLOAT) || (pt.fakeSubpt.lon == NOFLOAT))
         {
@@ -399,7 +399,7 @@ QString CGisItemRte::getInfo(quint32 feature) const
     if(rte.totalDistance != NOFLOAT)
     {
         IUnit::self().meter2distance(rte.totalDistance, val1, unit1);
-        str += tr("Length: %1%2").arg(val1).arg(unit1);
+        str += tr("Length: %1%2").arg(val1, unit1);
     }
     else
     {
@@ -410,7 +410,7 @@ QString CGisItemRte::getInfo(quint32 feature) const
     if(rte.totalTime != 0)
     {
         IUnit::self().seconds2time(rte.totalTime, val1, unit1);
-        str += tr("Time: %1%2").arg(val1).arg(unit1);
+        str += tr("Time: %1%2").arg(val1, unit1);
     }
     else
     {
@@ -424,7 +424,7 @@ QString CGisItemRte::getInfo(quint32 feature) const
         IUnit::self().meter2elevation(rte.ascent,  val1, unit1);
         IUnit::self().meter2elevation(rte.descent, val2, unit2);
 
-        str += tr("%1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
+        str += tr("%1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1, unit1).arg(QChar(0x2198)).arg(val2, unit2);
     }
 
     if(!rte.lastRoutedWith.isEmpty())
@@ -478,7 +478,7 @@ QString CGisItemRte::getInfo(quint32 feature) const
             if(link.type.isEmpty() || (link.type == "text/html"))
             {
                 str += "<br/>\n";
-                str += QString("<a href='%1'>%2</a>").arg(link.uri.toString()).arg(link.text);
+                str += QString("<a href='%1'>%2</a>").arg(link.uri.toString(), link.text);
             }
         }
     }
@@ -504,7 +504,7 @@ QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
 
     qint32 d    = NOINT;
     QPointF pt  = NOPOINTF;
-    for(const QPointF &point : line)
+    for(const QPointF &point : qAsConst(line))
     {
         int tmp = (screenPos - point).manhattanLength();
         if(tmp < d)
@@ -571,7 +571,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     QVector<QPixmap> icons;
     QVector<QPointF> focus;
 
-    for(const rtept_t &rtept : rte.pts)
+    for(const rtept_t &rtept : qAsConst(rte.pts))
     {
         QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
 
@@ -654,7 +654,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
 }
 
-void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+void CGisItemRte::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw * gis)
 {
     QMutexLocker lock(&mutexItems);
     if(rte.pts.isEmpty())
@@ -710,7 +710,7 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
     }
 
 
-    for(const rtept_t &rtept : rte.pts)
+    for(const rtept_t &rtept : qAsConst(rte.pts))
     {
         QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
 
@@ -885,7 +885,7 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
         quint32 i = 0;
         qint32 d1 = NOINT;
 
-        for(const QPointF &point : line)
+        for(const QPointF &point : qAsConst(line))
         {
             int tmp = (pt - point).manhattanLength();
             if(tmp <= d1)
@@ -913,7 +913,7 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
 {
     quint32 cnt = 0;
-    for(const rtept_t &rtept : rte.pts)
+    for(const rtept_t &rtept : qAsConst(rte.pts))
     {
         if(cnt == idx)
         {
@@ -1307,7 +1307,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
             if (pos > -1)
             {
                 rte.totalDistance = rxAscDes.cap(2).toFloat();
-                rte.cmt = QString("%1, %2, %3").arg(rxAscDes.cap(4)).arg(rxAscDes.cap(6)).arg(rxAscDes.cap(8));
+                rte.cmt = QString("%1, %2, %3").arg(rxAscDes.cap(4), rxAscDes.cap(6), rxAscDes.cap(8));
             }
             break;
         }

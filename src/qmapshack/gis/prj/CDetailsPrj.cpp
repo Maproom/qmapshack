@@ -372,7 +372,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
     drawArea(cursor, areas, progress, n, isReadOnly);
 
-    QTimer::singleShot(1, this, SLOT(slotSetScrollbar()));
+    QTimer::singleShot(1, this, &CDetailsPrj::slotSetScrollbar);
 }
 
 void CDetailsPrj::slotSetScrollbar()

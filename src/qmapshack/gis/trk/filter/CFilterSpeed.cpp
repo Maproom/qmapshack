@@ -44,7 +44,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     comboActivityType->setCurrentIndex(cfg.value("activityType", 0).toInt());
     slotSetActivityType(comboActivityType->currentIndex());
 
-    connect(comboActivityType, SIGNAL(activated(int)), this, SLOT(slotSetActivityType(int)));
+    connect(comboActivityType, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &CFilterSpeed::slotSetActivityType);
     connect(toolApply, &QToolButton::clicked, this, &CFilterSpeed::slotApply);
 
     cfg.beginGroup("Const");

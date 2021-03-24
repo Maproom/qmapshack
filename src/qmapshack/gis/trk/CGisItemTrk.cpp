@@ -435,7 +435,7 @@ QString CGisItemTrk::getInfoLimits() const
     QStringList keys = extrema.keys();
     qSort(keys.begin(), keys.end(), sortByString);
 
-    for(const QString& key : keys)
+    for(const QString& key : qAsConst(keys))
     {
         if(key == CKnownExtension::internalSpeedTime)  // Output of "Speed*" will already be covered by internalSpeedDist
         {                                              // No need to show it twice
@@ -474,13 +474,13 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     QString str = "<div>";
 
     qint32 actCnt               = activities.getActivityCount();
-    const QSet<trkact_t>& acts  = activities.getAllActivities();
+    const QList<trkact_t>& acts  = activities.getAllActivities().toList();
 
     if(feature & eFeatureShowName)
     {
-        if((actCnt == 1) && (acts.toList().first() != CTrackData::trkpt_t::eAct20None))
+        if((actCnt == 1) && (acts.first() != CTrackData::trkpt_t::eAct20None))
         {
-            const CActivityTrk::desc_t& desc = activities.getDescriptor(acts.toList().first());
+            const CActivityTrk::desc_t& desc = activities.getDescriptor(acts.first());
             str += QString("<img src='%1'/>&nbsp;").arg(desc.iconSmall);
         }
         str += "<b>" + getName() + "</b>";
@@ -496,14 +496,14 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     {
         str += "<br/>";
         IUnit::self().meter2distance(totalDistance, val1, unit1);
-        str += tr("Length: %1%2").arg(val1).arg(unit1);
+        str += tr("Length: %1%2").arg(val1, unit1);
 
         if(eleIsValid && totalAscent != NOFLOAT && totalDescent != NOFLOAT)
         {
             IUnit::self().meter2elevation(totalAscent,  val1, unit1);
             IUnit::self().meter2elevation(totalDescent, val2, unit2);
 
-            str += tr(", %1%2%3, %4%5%6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
+            str += tr(", %1%2%3, %4%5%6").arg(QChar(0x2197)).arg(val1, unit1).arg(QChar(0x2198)).arg(val2, unit2);
         }
         else
         {
@@ -515,7 +515,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
         {
             IUnit::self().seconds2time(totalElapsedSeconds, val1, unit1);
             IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val2, unit2);
-            str += tr("Time: %1%2, Speed: %3%4").arg(val1).arg(unit1).arg(val2).arg(unit2);
+            str += tr("Time: %1%2, Speed: %3%4").arg(val1, unit1, val2, unit2);
         }
         else
         {
@@ -527,7 +527,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
         {
             IUnit::self().seconds2time(totalElapsedSecondsMoving, val1, unit1);
             IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val2, unit2);
-            str += tr("Moving: %1%2, Speed: %3%4").arg(val1).arg(unit1).arg(val2).arg(unit2);
+            str += tr("Moving: %1%2, Speed: %3%4").arg(val1, unit1, val2, unit2);
         }
         else
         {
@@ -623,7 +623,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
             if(link.type.isEmpty() || (link.type == "text/html"))
             {
                 str += "<br/>\n";
-                str += QString("<a href='%1'>%2</a>").arg(link.uri.toString()).arg(link.text);
+                str += QString("<a href='%1'>%2</a>").arg(link.uri.toString(), link.text);
             }
         }
     }
@@ -688,7 +688,7 @@ QString CGisItemTrk::getInfoRange() const
 
 
     IUnit::self().meter2elevation(deltaAscent, val, unit);
-    str += QString("%3 %1%2 (%4%5)").arg(val).arg(unit).arg(QChar(0x2197)).arg(val2).arg(unit2);
+    str += QString("%3 %1%2 (%4%5)").arg(val, unit).arg(QChar(0x2197)).arg(val2, unit2);
     if(timeIsValid)
     {
         IUnit::self().meter2speed(deltaAscent / deltaTime, val, unit);
@@ -701,7 +701,7 @@ QString CGisItemTrk::getInfoRange() const
     IUnit::self().slope2string(slope1, val2, unit2);
 
     IUnit::self().meter2elevation(deltaDescent, val, unit);
-    str += QString("%3 %1%2 (%4%5)").arg(val).arg(unit).arg(QChar(0x2198)).arg(val2).arg(unit2);
+    str += QString("%3 %1%2 (%4%5)").arg(val, unit).arg(QChar(0x2198)).arg(val2, unit2);
     if(timeIsValid)
     {
         IUnit::self().meter2speed(deltaDescent / deltaTime, val, unit);
@@ -732,16 +732,16 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
     }
 
     IUnit::self().meter2elevation(pt.ele, val1, unit1);
-    str += tr("Ele.: %1%2").arg(val1).arg(unit1);
+    str += tr("Ele.: %1%2").arg(val1, unit1);
     if(pt.slope1 != NOFLOAT)
     {
         IUnit::self().slope2string(pt.slope1, val1, unit1);
-        str += tr(", Slope: %1%2").arg(val1).arg(unit1);
+        str += tr(", Slope: %1%2").arg(val1, unit1);
     }
     if(pt.speed != NOFLOAT)
     {
         IUnit::self().meter2speed(pt.speed, val1, unit1);
-        str += tr(", Speed: %1%2").arg(val1).arg(unit1);
+        str += tr(", Speed: %1%2").arg(val1, unit1);
     }
 
     QStringList keys = pt.extensions.keys();
@@ -753,7 +753,7 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
         keys = keys.mid(0, 10);
     }
 
-    for(const QString &key : keys)
+    for(const QString &key : qAsConst(keys))
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
         if(ext.known)
@@ -808,7 +808,7 @@ QString CGisItemTrk::getInfoProgress(const CTrackData::trkpt_t& pt) const
         mov = tr(", Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 2, 'f', 0);
     }
 
-    return QString("%1%2\n%3%4").arg(asc).arg(dsc).arg(dst).arg(mov);
+    return QString("%1%2\n%3%4").arg(asc, dsc, dst, mov);
 }
 
 QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& trkpt1, const CTrackData::trkpt_t& trkpt2) const
@@ -864,7 +864,7 @@ QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& trkpt1, const CTrac
         dsttme += tr(", Time: %1%2").arg(val).arg(unit);
     }
 
-    return QString("%1%2\n%3").arg(asc).arg(dsc).arg(dsttme);
+    return QString("%1%2\n%3").arg(asc, dsc, dsttme);
 }
 
 qint32 CGisItemTrk::getElevation(qint32 idx) const
@@ -945,10 +945,11 @@ void CGisItemTrk::updateExtremaAndExtensions()
             continue;
         }
 
-        existingExtensions.unite(pt.extensions.keys().toSet());
+        const QStringList& keys = pt.extensions.keys();
+        existingExtensions.unite(keys.toSet());
 
         const QPointF& pos = {pt.lon, pt.lat};
-        for(const QString &key : pt.extensions.keys())
+        for(const QString &key : keys)
         {
             bool isReal = false;
             qreal val = pt.extensions.value(key).toReal(&isReal);
@@ -1367,12 +1368,12 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
     bool doDeriveData = false;
     numberOfAttachedWpt = 0;
-    for(const trkwpt_t &trkwpt : trkwpts)
+    for(const trkwpt_t &trkwpt : qAsConst(trkwpts))
     {
         qreal minD   = WPT_FOCUS_DIST_IN;
         qint32 index = NOIDX;
 
-        for(const pointDP &pt : line)
+        for(const pointDP &pt : qAsConst(line))
         {
             ++current;
             qreal d = (trkwpt.x - pt.x) * (trkwpt.x - pt.x) + (trkwpt.y - pt.y) * (trkwpt.y - pt.y);
@@ -1559,7 +1560,7 @@ bool CGisItemTrk::cut()
             {
                 QVector<CTrackData::trkpt_t> pts;
 
-                for(const CTrackData::trkpt_t& pt : seg.pts)
+                for(const CTrackData::trkpt_t& pt : qAsConst(seg.pts))
                 {
                     if(!(removeStart <= pt.idxTotal && pt.idxTotal <= removeEnd) )
                     {
@@ -1642,7 +1643,7 @@ void CGisItemTrk::reverse()
     trk1->key.clear();
     trk1->history.events.clear();
 
-    for(const CTrackData::trkseg_t &seg : trk.segs)
+    for(const CTrackData::trkseg_t &seg : qAsConst(trk.segs))
     {
         CTrackData::trkseg_t seg1;
         for(const CTrackData::trkpt_t &pt : seg.pts)
@@ -1795,7 +1796,7 @@ void CGisItemTrk::deleteSelectedPoints()
     for(CTrackData::trkseg_t& seg : trk.segs)
     {
         QVector<CTrackData::trkpt_t> pts;
-        for(const CTrackData::trkpt_t &pt : seg.pts)
+        for(const CTrackData::trkpt_t &pt : qAsConst(seg.pts))
         {
             if(idx1 < pt.idxTotal && pt.idxTotal < idx2)
             {
@@ -1942,13 +1943,13 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
         p.setPen(QPen(Qt::lightGray, penWidthBg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
-        for(const QPolygonF &l : lines)
+        for(const QPolygonF &l : qAsConst(lines))
         {
             p.drawPolyline(l);
         }
 
         QPixmap bullet("://icons/8x8/bullet_dark_gray.png");
-        for(const QPolygonF &l : lines)
+        for(const QPolygonF &l : qAsConst(lines))
         {
             for(const QPointF &pt : l)
             {
@@ -1966,7 +1967,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     if(key == keyUserFocus && w.isShowTrackHighlight())
     {
         p.setPen(QPen(Qt::red, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        for(const QPolygonF &l : lines)
+        for(const QPolygonF &l : qAsConst(lines))
         {
             p.drawPolyline(l);
         }
@@ -1974,7 +1975,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     p.setBrush(color);
     p.setPen(penBackground);
-    for(const QPolygonF &l : lines)
+    for(const QPolygonF &l : qAsConst(lines))
     {
         p.drawPolyline(l);
         const QRectF& bounding = l.boundingRect();
@@ -1990,7 +1991,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         // use the track's ordinary color
         penForeground.setColor(color);
         p.setPen(penForeground);
-        for(const QPolygonF &l : lines)
+        for(const QPolygonF &l : qAsConst(lines))
         {
             p.drawPolyline(l);
         }
@@ -2006,7 +2007,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     if (isNogo())
     {
-        for(const QPolygonF &l : lines)
+        for(const QPolygonF &l : qAsConst(lines))
         {
             CDraw::nogos(l, extViewport, p, 80);
         }
@@ -2017,7 +2018,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     // draw min/max labels
     if(w.isShowMinMaxTrackLabels() && !skipDecorations)
     {
-        for(const QString& key : extrema.keys())
+        const QStringList& keys = extrema.keys();
+        for(const QString& key : keys)
         {
             if(key == CKnownExtension::internalProgress)
             {
@@ -2383,9 +2385,9 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         IUnit::self().meter2distance(mouseMoveFocus->distance, val1, unit1);
         IUnit::self().meter2distance(totalDistance - mouseMoveFocus->distance, val2, unit2);
         p.setPen(Qt::darkBlue);
-        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
+        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignLeft, QString("%1%2").arg(val1, unit1));
         p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->distance * 100 / totalDistance, 0, 'f', 0));
-        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignRight, QString("%1%2").arg(val2, unit2));
 
         // draw progress bar time
         if(totalElapsedSeconds != 0)
@@ -2403,9 +2405,9 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
             IUnit::self().seconds2time(mouseMoveFocus->elapsedSecondsMoving, val1, unit1);
             IUnit::self().seconds2time(totalElapsedSecondsMoving - mouseMoveFocus->elapsedSecondsMoving, val2, unit2);
             p.setPen(Qt::darkBlue);
-            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
+            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignLeft, QString("%1%2").arg(val1, unit1));
             p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
-            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter | Qt::AlignRight, QString("%1%2").arg(val2, unit2));
         }
 
         // draw text
@@ -2438,7 +2440,8 @@ void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF&, QList<QRectF>& blocke
     const CMainWindow& w = CMainWindow::self();
     if(w.isShowMinMaxTrackLabels())
     {
-        for(const QString& key : extrema.keys())
+        const QStringList& keys = extrema.keys();
+        for(const QString& key : keys)
         {
             if(key == CKnownExtension::internalSpeedTime)
             {
@@ -2487,7 +2490,7 @@ void CGisItemTrk::drawHighlight(QPainter& p)
 
     p.setPen(QPen(QColor(255, 0, 0, 100), penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
-    for(const QPolygonF &line : lines)
+    for(const QPolygonF &line : qAsConst(lines))
     {
         p.drawPolyline(line);
     }
@@ -3079,7 +3082,7 @@ void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
         dlgDetails->updateData();
     }
 
-    for(INotifyTrk * visual : registeredVisuals)
+    for(INotifyTrk * visual : qAsConst(registeredVisuals))
     {
         if(visuals & visual->mask)
         {
@@ -3102,7 +3105,7 @@ void CGisItemTrk::setMouseFocusVisuals(const CTrackData::trkpt_t * pt)
         dlgDetails->setMouseFocus(pt);
     }
 
-    for(INotifyTrk * visual : registeredVisuals)
+    for(INotifyTrk * visual : qAsConst(registeredVisuals))
     {
         visual->setMouseFocus(pt);
     }
@@ -3115,7 +3118,7 @@ void CGisItemTrk::setMouseRangeFocusVisuals(const CTrackData::trkpt_t * pt1, con
         dlgDetails->setMouseRangeFocus(pt1, pt2);
     }
 
-    for(INotifyTrk * visual : registeredVisuals)
+    for(INotifyTrk * visual : qAsConst(registeredVisuals))
     {
         visual->setMouseRangeFocus(pt1, pt2);
     }
@@ -3128,7 +3131,7 @@ void CGisItemTrk::setMouseClickFocusVisuals(const CTrackData::trkpt_t * pt)
         dlgDetails->setMouseClickFocus(pt);
     }
 
-    for(INotifyTrk * visual : registeredVisuals)
+    for(INotifyTrk * visual : qAsConst(registeredVisuals))
     {
         visual->setMouseClickFocus(pt);
     }

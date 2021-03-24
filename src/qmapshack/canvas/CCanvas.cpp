@@ -1127,7 +1127,7 @@ void CCanvas::setProjection(const QString& proj)
                 QMessageBox::Ok
                 );
 
-            QTimer::singleShot(1000, &CMainWindow::self(), SLOT(slotSetupMapView()));
+            QTimer::singleShot(1000, &CMainWindow::self(), &CMainWindow::slotSetupMapView);
             return;
         }
     }

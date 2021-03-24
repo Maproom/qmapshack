@@ -83,7 +83,7 @@ void CTinySpinBox::focusInEvent(QFocusEvent *event)
     updateStyle();
     if(!isReadOnly())
     {
-        QTimer::singleShot(0, this, SLOT(slotSelectAll()));
+        QTimer::singleShot(0, this, &CTinySpinBox::slotSelectAll);
     }
 
     QSpinBox::focusInEvent(event);

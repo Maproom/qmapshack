@@ -443,23 +443,23 @@ void CMouseNormal::showContextMenu(const QPoint &point)
     QMenu menu(canvas);
     if(curPOI.pos != NOPOINTF)
     {
-        menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI as Waypoint"), this, SLOT(slotAddPoi()));
+        menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI as Waypoint"), this, &CMouseNormal::slotAddPoi);
     }
     QPointF pt = mouse->getPoint();
     gis->convertPx2Rad(pt);
 
-    menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add Waypoint"), this, SLOT(slotAddWpt()));
-    menu.addAction(QIcon("://icons/32x32/AddTrk.png"),  tr("Add Track"),    this, SLOT(slotAddTrk()));
-    menu.addAction(QIcon("://icons/32x32/AddRte.png"),  tr("Add Route"),    this, SLOT(slotAddRte()));
-    menu.addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"),     this, SLOT(slotAddArea()));
+    menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add Waypoint"), this, &CMouseNormal::slotAddWpt);
+    menu.addAction(QIcon("://icons/32x32/AddTrk.png"),  tr("Add Track"),    this, &CMouseNormal::slotAddTrk);
+    menu.addAction(QIcon("://icons/32x32/AddRte.png"),  tr("Add Route"),    this, &CMouseNormal::slotAddRte);
+    menu.addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"),     this, &CMouseNormal::slotAddArea);
     menu.addSeparator();
-    menu.addAction(QIcon("://icons/32x32/CSrcDistance.png"), tr("Ruler"),   this, SLOT(slotRuler()));
+    menu.addAction(QIcon("://icons/32x32/CSrcDistance.png"), tr("Ruler"),   this, &CMouseNormal::slotRuler);
     menu.addSeparator();
-    menu.addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, SLOT(slotSelectArea()));
+    menu.addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, &CMouseNormal::slotSelectArea);
     menu.addSeparator();
     menu.addMenu(CGeoSearchWeb::self().getMenu(pt * RAD_TO_DEG, &menu));
-    menu.addAction(QIcon("://icons/32x32/CopyPosition.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
-    menu.addAction(QIcon("://icons/32x32/CopyGrid.png"), tr("Copy position (Grid)"), this, SLOT(slotCopyPositionGrid()));
+    menu.addAction(QIcon("://icons/32x32/CopyPosition.png"), tr("Copy position"), this, &CMouseNormal::slotCopyPosition);
+    menu.addAction(QIcon("://icons/32x32/CopyGrid.png"), tr("Copy position (Grid)"), this, &CMouseNormal::slotCopyPositionGrid);
 
     QPoint p = canvas->mapToGlobal(point);
     menu.exec(p);

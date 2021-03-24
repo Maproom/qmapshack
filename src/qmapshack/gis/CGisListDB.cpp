@@ -73,8 +73,8 @@ CGisListDB::CGisListDB(QWidget *parent)
 
     SETTINGS;
     cfg.beginGroup("Database");
-    QString path = cfg.value("lastDatabasePath", QDir::homePath()).toString();
-    QStringList names = cfg.value("names").toStringList();
+    const QString& path = cfg.value("lastDatabasePath", QDir::homePath()).toString();
+    const QStringList& names = cfg.value("names").toStringList();
     cfg.beginGroup("Entries");
     for(const QString &name : names)
     {
@@ -117,36 +117,36 @@ CGisListDB::CGisListDB(QWidget *parent)
 
 
     menuNone            = new QMenu(this);
-    actionAddDatabase   = menuNone->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Database"), this, SLOT(slotAddDatabase()));
+    actionAddDatabase   = menuNone->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Database"), this, &CGisListDB::slotAddDatabase);
 
     menuFolder          = new QMenu(this);
-    actionAddFolder     = menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
-    actionRenameFolder  = menuFolder->addAction(QIcon("://icons/32x32/A.png"), tr("Rename Folder"), this, SLOT(slotRenameFolder()));
-    actionCopyFolder    = menuFolder->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy Folder"), this, SLOT(slotCopyFolder()));
-    actionMoveFolder    = menuFolder->addAction(QIcon("://icons/32x32/Move.png"), tr("Move Folder"), this, SLOT(slotMoveFolder()));
-    actionDelFolder     = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this, SLOT(slotDelFolder()));
+    actionAddFolder     = menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, &CGisListDB::slotAddFolder);
+    actionRenameFolder  = menuFolder->addAction(QIcon("://icons/32x32/A.png"), tr("Rename Folder"), this, &CGisListDB::slotRenameFolder);
+    actionCopyFolder    = menuFolder->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy Folder"), this, &CGisListDB::slotCopyFolder);
+    actionMoveFolder    = menuFolder->addAction(QIcon("://icons/32x32/Move.png"), tr("Move Folder"), this, &CGisListDB::slotMoveFolder);
+    actionDelFolder     = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this, &CGisListDB::slotDelFolder);
     menuFolder->addSeparator();
-    actionImport        = menuFolder->addAction(QIcon("://icons/32x32/LoadGIS.png"), tr("Import from Files..."), this, SLOT(slotImport()));
-    actionExportToGpx   = menuFolder->addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Export to GPX..."), this, SLOT(slotExportToGpx()));
+    actionImport        = menuFolder->addAction(QIcon("://icons/32x32/LoadGIS.png"), tr("Import from Files..."), this, &CGisListDB::slotImport);
+    actionExportToGpx   = menuFolder->addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Export to GPX..."), this, &CGisListDB::slotExportToGpx);
 
     menuItem            = new QMenu(this);
-    actionDelItem       = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, SLOT(slotDelItem()));
+    actionDelItem       = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, &CGisListDB::slotDelItem);
 
     menuDatabase        = new QMenu(this);
     menuDatabase->addAction(actionAddFolder);
-    actionSearch        = menuDatabase->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Search Database"), this, SLOT(slotSearchDatabase()));
-    actionUpdate        = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, SLOT(slotUpdateDatabase()));
-    actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
+    actionSearch        = menuDatabase->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Search Database"), this, &CGisListDB::slotSearchDatabase);
+    actionUpdate        = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, &CGisListDB::slotUpdateDatabase);
+    actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, &CGisListDB::slotDelDatabase);
     menuDatabase->addSeparator();
     menuDatabase->addAction(actionImport);
     menuDatabase->addAction(actionExportToGpx);
 
 
     menuLostFound       = new QMenu(this);
-    actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
+    actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, &CGisListDB::slotDelLostFound);
 
     menuLostFoundItem       = new QMenu(this);
-    actionDelLostFoundItem  = menuLostFoundItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, SLOT(slotDelLostFoundItem()));
+    actionDelLostFoundItem  = menuLostFoundItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, &CGisListDB::slotDelLostFoundItem);
 
     connect(this, &CGisListDB::customContextMenuRequested, this, &CGisListDB::slotContextMenu);
     connect(this, &CGisListDB::itemExpanded,               this, &CGisListDB::slotItemExpanded);
@@ -530,7 +530,7 @@ void CGisListDB::slotDelFolder()
     }
 
     QList<QTreeWidgetItem*> itemsToDelete;
-    QList<QTreeWidgetItem*> items = selectedItems();
+    const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         // only pick the project/other folders to copy
@@ -548,7 +548,7 @@ void CGisListDB::slotDelFolder()
     }
 
     // iterate over all items to be deleted.
-    for(QTreeWidgetItem * item : itemsToDelete)
+    for(QTreeWidgetItem * item : qAsConst(itemsToDelete))
     {
         // Test if the item's parent is also in the list.
         // If it is skip it because it will be deleted together with its parent.
@@ -600,7 +600,7 @@ void CGisListDB::slotCopyFolder()
     // --- at this point we should have all data to perform the copy without interruption ---
 
     // now iterate over all selected items
-    QList<QTreeWidgetItem*> items = selectedItems();
+    const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         // only pick the project/other folders to copy
@@ -669,7 +669,7 @@ void CGisListDB::slotMoveFolder()
 
     // now iterate over all selected items
     QList<IDBFolder*> foldersToDelete;
-    QList<QTreeWidgetItem*> items = selectedItems();
+    const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         // only pick the project/other folders to copy
@@ -701,7 +701,7 @@ void CGisListDB::slotMoveFolder()
     }
 
     // iterate over all items to be deleted.
-    for(IDBFolder * folder : foldersToDelete)
+    for(IDBFolder * folder : qAsConst(foldersToDelete))
     {
         // Test if the item's parent is also in the list.
         // If it is skip it because it will be deleted together with it's parent.
@@ -741,7 +741,7 @@ void CGisListDB::slotRenameFolder()
         return;
     }
 
-    QList<QTreeWidgetItem*> items = selectedItems();
+    const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         folder = dynamic_cast<IDBFolder*>(item);
@@ -802,7 +802,7 @@ void CGisListDB::slotDelLostFoundItem()
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     QSet<CDBFolderLostFound*> folders;
     QList<QTreeWidgetItem*> delItems;
-    QList<QTreeWidgetItem*> items = selectedItems();
+    const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         CDBItem * dbItem            = dynamic_cast<CDBItem*>(item);
@@ -825,7 +825,7 @@ void CGisListDB::slotDelLostFoundItem()
     }
 
     qDeleteAll(delItems);
-    for(CDBFolderLostFound* folder : folders)
+    for(CDBFolderLostFound* folder : qAsConst(folders))
     {
         folder->update();
 
@@ -862,7 +862,7 @@ void CGisListDB::slotDelItem()
     QSet<IDBFolderSql*>     dbFolders;
 
 
-    QList<QTreeWidgetItem*> items = selectedItems();
+    const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
         CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
@@ -879,7 +879,7 @@ void CGisListDB::slotDelItem()
 
         if(last != QMessageBox::YesToAll)
         {
-            QString msg = tr("Are you sure you want to delete '%1' from folder '%2'?").arg(dbItem->text(CGisListDB::eColumnName)).arg(folder->text(CGisListDB::eColumnName));
+            QString msg = tr("Are you sure you want to delete '%1' from folder '%2'?").arg(dbItem->text(CGisListDB::eColumnName), folder->text(CGisListDB::eColumnName));
             last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete..."), msg, QMessageBox::YesToAll | QMessageBox::Cancel | QMessageBox::Ok | QMessageBox::No, QMessageBox::Ok);
         }
         if(last == QMessageBox::No)
@@ -899,14 +899,14 @@ void CGisListDB::slotDelItem()
     }
 
     qDeleteAll(dbItems);
-    for(IDBFolderSql * dbFolder : dbFolders)
+    for(IDBFolderSql * dbFolder : qAsConst(dbFolders))
     {
         dbFolder->updateLostFound();
         dbFolder->announceChange();
     }
 
     // tell all folders to update their statistics and waypoint/track correlations
-    for(IDBFolder * folder : folders)
+    for(IDBFolder * folder : qAsConst(folders))
     {
         folder->updateItemsOnWks();
     }
@@ -952,7 +952,7 @@ void CGisListDB::slotUpdateDatabase()
 {
     CGisListDBEditLock lock(true, this, "slotUpdateDatabase");
 
-    QList<QTreeWidgetItem*> items = selectedItems();
+    const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem* item : items)
     {
         IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
@@ -1070,7 +1070,7 @@ void CGisListDB::slotImport()
     QString path   = cfg.value("Paths/lastGisPath",   QDir::homePath()).toString();
     QString filter = cfg.value("Paths/lastGisFilter", IGisProject::filedialogAllSupported).toString();
 
-    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Import GIS Data..."), path, IGisProject::filedialogLoadFilters, &filter);
+    const QStringList& filenames = QFileDialog::getOpenFileNames(this, tr("Import GIS Data..."), path, IGisProject::filedialogLoadFilters, &filter);
 
     if(filenames.isEmpty())
     {

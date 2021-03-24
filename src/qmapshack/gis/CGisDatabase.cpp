@@ -42,7 +42,7 @@ CGisDatabase::CGisDatabase(QWidget *parent)
 
     actionShowSummaryDropZones->setChecked(cfg.value("Database/isSummaryVisible", true).toBool());
 
-    QTimer::singleShot(1, this, SLOT(slotHelpText()));
+    QTimer::singleShot(1, this, &CGisDatabase::slotHelpText);
 }
 
 CGisDatabase::~CGisDatabase()

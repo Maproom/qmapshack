@@ -35,7 +35,7 @@ void CDoubleSpinBox::focusInEvent(QFocusEvent *event)
 {
     if(!isReadOnly())
     {
-        QTimer::singleShot(0, this, SLOT(slotSelectAll()));
+        QTimer::singleShot(0, this, &CDoubleSpinBox::slotSelectAll);
     }
 
     QDoubleSpinBox::focusInEvent(event);

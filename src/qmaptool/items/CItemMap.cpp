@@ -32,7 +32,7 @@ CItemMap::CItemMap(const QString &filename)
     setText(CItemTreeWidget::eColumnName, QFileInfo(filename).completeBaseName());
     setIcon(CItemTreeWidget::eColumnName, QIcon("://icons/32x32/FolderMap.png"));
 
-    reload();
+    CItemMap::reload();
 }
 
 CItemMap::~CItemMap()

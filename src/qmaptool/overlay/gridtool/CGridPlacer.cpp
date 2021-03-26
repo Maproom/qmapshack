@@ -246,14 +246,14 @@ void CGridPlacer::updateStatus()
 }
 
 
-void CGridPlacer::slotSetArea() const
+void CGridPlacer::slotSetArea()
 {
     qreal bottom    = -NOFLOAT;
     qreal top       =  NOFLOAT;
     qreal left      =  NOFLOAT;
     qreal right     = -NOFLOAT;
 
-    for(const CGridPoint& point : points)
+    for(const CGridPoint& point : qAsConst(points))
     {
         const QPointF& pt = point.getPoint();
 

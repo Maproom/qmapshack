@@ -64,13 +64,13 @@ bool CGridPoint::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
 
         if(state == eStateHighlight)
         {
-            p.setPen(QPen(QColor("#ffaa00"), 2));
-            p.setBrush(QColor("#ffaa00"));
+            p.setPen(QPen(QColor(0xffffaa00), 2));
+            p.setBrush(QColor(0xffffaa00));
         }
         else
         {
             p.setPen(QPen(Qt::white, 1));
-            p.setBrush(QColor("#ffaa00"));
+            p.setBrush(QColor(0xffffaa00));
         }
 
         p.drawRect(dot1);

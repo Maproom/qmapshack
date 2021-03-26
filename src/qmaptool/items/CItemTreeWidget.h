@@ -55,7 +55,7 @@ public:
 
         qSort(items.begin(), items.end(), lessThan);
 
-        for(QTreeWidgetItem* item : items)
+        for(QTreeWidgetItem* item : qAsConst(items))
         {
             treeFiles->addTopLevelItem(item);
         }

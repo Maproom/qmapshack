@@ -160,7 +160,7 @@ void CItemTreeWidget::addFiles(const QStringList& files)
                                    "All map files need to have the same projection.</p>"
                                    "<p><b>This file</b>: %2</p>"
                                    "<p><b>Expected</b>: %3</p>"
-                                   ).arg(file).arg(map->getProjection()).arg(projstr);
+                                   ).arg(file).arg(map->getProjection(), projstr);
             QMessageBox::warning(this, tr("Error..."), msg, QMessageBox::Abort);
             delete map;
             continue;

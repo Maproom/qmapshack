@@ -55,7 +55,7 @@ public:
 
         qSort(items.begin(), items.end(), lessThan);
 
-        for(QListWidgetItem* item : items)
+        for(QListWidgetItem* item : qAsConst(items))
         {
             listFiles->addItem(item);
         }

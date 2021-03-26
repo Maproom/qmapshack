@@ -50,7 +50,7 @@ CToolRefMap::CToolRefMap(QWidget *parent)
     connect(pushCancel, &QPushButton::clicked, &CShell::self(), &CShell::slotCancel);
     connect(&CShell::self(), &CShell::sigFinishedJob, this, &CToolRefMap::slotFinished);
 
-    setupChanged();
+    CToolRefMap::setupChanged();
 
     SETTINGS;
     cfg.beginGroup("ToolRefMap");

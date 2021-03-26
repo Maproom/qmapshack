@@ -55,7 +55,7 @@ CToolExport::CToolExport(QWidget *parent)
     connect(&CShell::self(), &CShell::sigFinishedJob, this, &CToolExport::slotFinished);
 
 
-    setupChanged();
+    CToolExport::setupChanged();
 
     SETTINGS;
     cfg.beginGroup("ToolExport");

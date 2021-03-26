@@ -77,7 +77,7 @@ protected:
 private:
     mutable QMutex mutex {QMutex::Recursive};
 
-    QColor backColor = "#FFFFBF";       //< the background color used in case of missing map tiles
+    QColor backColor = 0xFFFFFFBF;       //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
 
     /// load indicator for maps

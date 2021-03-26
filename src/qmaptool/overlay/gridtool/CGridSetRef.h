@@ -76,7 +76,7 @@ private:
         QPalette pal = T(this).palette();
         if(!isOk)
         {
-            pal.setColor(QPalette::Base, "#ffaa7f");
+            pal.setColor(QPalette::Base, 0xffffaa7f);
         }
         w->setPalette(pal);
     }

@@ -45,6 +45,14 @@ private:
     QDir getApplicationDir(QString subdir);
     void migrateDirContent(QString dest);
     void extendPath();
+
+    static const QString relTranslationDir;
+    static const QString relGdalDir;
+    static const QString relProjDir;
+    static const QString relHelpDir;
+    static const QString relBinDir;
+    static const QString relLogDir;
+
 };
 
 #endif // CAPPSETUPMAC_H

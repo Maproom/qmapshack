@@ -67,7 +67,7 @@ CToolPalettize::CToolPalettize(QWidget *parent)
     connect(pushCancel, &QPushButton::clicked, &CShell::self(), &CShell::slotCancel);
     connect(&CShell::self(), &CShell::sigFinishedJob, this, &CToolPalettize::slotFinished);
 
-    setupChanged();
+    CToolPalettize::setupChanged();
 
     SETTINGS;
     cfg.beginGroup("ToolPalettize");
@@ -113,7 +113,7 @@ void CToolPalettize::slotSelectFilename()
     }
     cfg.setValue("Path/mapInput", QFileInfo(filename).absolutePath());
 
-    if(!filename.toUpper().endsWith(".TIF"))
+    if(!filename.endsWith(".TIF", Qt::CaseInsensitive))
     {
         filename += ".tif";
     }
@@ -225,7 +225,7 @@ void CToolPalettize::buildCmdFinal(QList<CShellCmd>& cmds)
 
         // ---- command 2 + N + 2 ----------------------
         QString outFilename = lineFilename->text();
-        if(!outFilename.toUpper().endsWith(".TIF"))
+        if(!outFilename.endsWith(".TIF", Qt::CaseInsensitive))
         {
             outFilename += ".tif";
         }

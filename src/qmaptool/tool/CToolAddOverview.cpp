@@ -55,7 +55,7 @@ CToolAddOverview::CToolAddOverview(QWidget *parent)
     connect(&CShell::self(), &CShell::sigFinishedJob, this, &CToolAddOverview::slotFinished);
 
 
-    setupChanged();
+    CToolAddOverview::setupChanged();
 
     SETTINGS;
     cfg.beginGroup("ToolAddOverview");

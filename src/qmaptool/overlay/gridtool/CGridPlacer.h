@@ -61,14 +61,14 @@ public:
 
 signals:
     void sigChanged();
-    void sigSetArea(const QRectF& area) const;
+    void sigSetArea(const QRectF& area);
 
 public slots:
     void slotReset();
 
 private slots:
     void slotSetPoint(qint32 i, bool on);
-    void slotSetArea() const;
+    void slotSetArea();
 
 private:
     void updateStatus();

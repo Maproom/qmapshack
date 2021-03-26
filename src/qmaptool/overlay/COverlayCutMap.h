@@ -63,7 +63,7 @@ public:
     }
 
 private slots:
-    void slotSetMode(mode_e m, bool on);
+    void slotSetMode(COverlayCutMap::mode_e m, bool on);
     void slotResetMask();
     void slotSaveShape();
     void slotLoadShape();

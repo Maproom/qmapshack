@@ -63,7 +63,7 @@ public:
     bool isOk() const;
 
 private slots:
-    void slotSetMode(mode_e m, bool on);
+    void slotSetMode(COverlayRefMap::mode_e m, bool on);
     void slotSaveGcp();
     void slotLoadGcp();
     void slotResetRef();

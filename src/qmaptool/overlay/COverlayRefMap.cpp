@@ -663,8 +663,6 @@ void COverlayRefMap::slotLoadGcp()
     if(line.trimmed() == "#V1.0")
     {
         QRegExp re1("^-gcp\\s(-{0,1}[0-9]+)\\s(-{0,1}[0-9]+)\\s(-{0,1}[0-9\\.]+)\\s(-{0,1}[0-9\\.]+).*$");
-        QRegExp re2("^-a_srs\\s(.*)$");
-        QRegExp re3("^#gcpproj:\\s(.*)$");
 
         qint32 cnt = 1;
         while(1)

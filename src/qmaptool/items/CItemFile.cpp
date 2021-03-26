@@ -26,7 +26,7 @@ CItemFile::CItemFile(const QString &filename, QListWidget *parent)
 {
     setText(QFileInfo(filename).completeBaseName());
     drawContext = new CDrawContextPixel(CMainWindow::self().getCanvas(), this);
-    reload();
+    CItemFile::reload();
 }
 
 

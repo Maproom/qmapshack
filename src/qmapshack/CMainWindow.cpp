@@ -65,14 +65,14 @@
 #include <QtSql>
 #include <QtWidgets>
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
 #include "device/CDeviceWatcherWindows.h"
 #include <dbt.h>
 #include <guiddef.h>
 #include <initguid.h>
 #include <usbiodef.h>
 #include <windows.h>
-#endif // WIN32
+#endif // Q_OS_WIN64
 
 CMainWindow * CMainWindow::pSelf = nullptr;
 
@@ -1759,7 +1759,7 @@ void CMainWindow::displayFullscreen()
     actionFullScreen->setIcon(QIcon(":/icons/32x32/RegularScreen.png"));
 }
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
 
 static void sendDeviceEvent(DWORD unitmask, bool add)
 {
@@ -1820,7 +1820,7 @@ bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long
 
     return QWidget::nativeEvent(eventType, message, result);
 }
-#endif // WIN32
+#endif // Q_OS_WIN64
 
 void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
 {

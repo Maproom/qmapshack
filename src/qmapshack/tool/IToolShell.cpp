@@ -74,13 +74,13 @@ void IToolShell::slotStderr()
 
     if(str[0] == '\r')
     {
-#ifdef WIN32
+#ifdef Q_OS_WIN64
         if(str.contains("\n"))
         {
             text->insertPlainText("\n");
         }
         else
-#endif // WIN32
+#endif // Q_OS_WIN64
         {
             text->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
             text->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
@@ -89,7 +89,7 @@ void IToolShell::slotStderr()
         }
 
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
         str = str.split("\r").last().remove("\r").remove("\n");
 #else
         str = str.split("\r").last();
@@ -113,13 +113,13 @@ void IToolShell::slotStdout()
 
     if(str[0] == '\r')
     {
-#ifdef WIN32
+#ifdef Q_OS_WIN64
         if(str.contains("\n"))
         {
             text->insertPlainText("\n");
         }
         else
-#endif // WIN32
+#endif // Q_OS_WIN64
         {
             text->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
             text->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
@@ -127,7 +127,7 @@ void IToolShell::slotStdout()
             text->textCursor().removeSelectedText();
         }
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
         str = str.split("\r").last().remove("\r").remove("\n");
 #else
         str = str.split("\r").last();

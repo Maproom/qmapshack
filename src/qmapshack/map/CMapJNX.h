@@ -52,7 +52,7 @@ private:
         qint32 zorder;       // byte 00000030..00000033
     };
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
 #pragma pack()
 #else
 #pragma pack(0)

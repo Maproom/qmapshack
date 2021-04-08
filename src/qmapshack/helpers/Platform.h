@@ -99,7 +99,7 @@
 #  include <inttypes.h>
 #elif HAVE_STDINT_H
 #  include <stdint.h>
-#elif WIN32
+#elif Q_OS_WIN64
 #include <windows.h>
 
 typedef __int8 int8_t;

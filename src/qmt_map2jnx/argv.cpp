@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
 #include <windows.h>
 #endif
 
@@ -25,7 +25,7 @@ char* get_argv(const int index, char** argv)
     char* result = NULL;
     int len;
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
     int numargs;
     wchar_t** argw = CommandLineToArgvW(GetCommandLineW(), &numargs);
 

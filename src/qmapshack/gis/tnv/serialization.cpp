@@ -759,7 +759,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
             QString fn = values[0].simplified();
 
-#ifndef WIN32
+#ifndef Q_OS_WIN64
             fn = fn.replace("\\", "/");
 #endif
             QFileInfo fi(dir.absoluteFilePath(fn));

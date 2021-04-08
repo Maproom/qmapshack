@@ -107,7 +107,7 @@ struct jnx_tile_t
 };
 
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
 #pragma pack()
 #else
 #pragma pack(0)

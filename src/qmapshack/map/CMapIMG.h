@@ -437,7 +437,7 @@ private:
         quint8 btObjects;
     };
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
 #pragma pack()
 #else
 #pragma pack(0)

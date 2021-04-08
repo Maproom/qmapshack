@@ -154,9 +154,9 @@ public slots:
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
-#ifdef WIN32
+#ifdef Q_OS_WIN64
     bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);
-#endif // WIN32
+#endif // Q_OS_WIN64
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dropEvent(QDropEvent *event) override;
 

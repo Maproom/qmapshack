@@ -345,7 +345,7 @@ void CMapIMG::setupTyp()
     polygonProperties[0x47] = CGarminTyp::polygon_property(0x47, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
     polygonProperties[0x48] = CGarminTyp::polygon_property(0x48, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
     polygonProperties[0x49] = CGarminTyp::polygon_property(0x49, Qt::NoPen, 0xff0080ff, Qt::SolidPattern);
-#ifdef WIN32
+#ifdef Q_OS_WIN64
     polygonProperties[0x4a] = CGarminTyp::polygon_property(0x4a, 0xff000000, qRgba(255, 255, 255, 0), Qt::SolidPattern);
     polygonProperties[0x4b] = CGarminTyp::polygon_property(0x4b, 0xff000000, qRgba(255, 255, 255, 0), Qt::SolidPattern);
 #else

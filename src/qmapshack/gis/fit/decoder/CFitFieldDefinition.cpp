@@ -26,14 +26,15 @@
 static const quint8 fitEndianFlagMask = 0x80;
 
 
-CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, CFitFieldProfile* fieldProfile, quint8 defNr, quint8 size, quint8 type)
-    : defNr(defNr), size(size), type(type), baseType(CFitBaseTypeMap::get(type)), parentDefintion(parent), fieldProfile(fieldProfile)
+CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, CFitFieldProfile* fieldProfile, quint8 defNr, quint8 devDataIdx,
+                                         quint8 size, quint8 type)
+    : defNr(defNr), devDataIdx(devDataIdx), size(size), type(type), baseType(CFitBaseTypeMap::get(type)),
+      parentDefintion(parent), fieldProfile(fieldProfile)
 {
 }
 
 CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, quint8 defNr, quint8 size, quint8 type)
-    : CFitFieldDefinition(parent, nullptr, defNr, size, type)
-
+    : CFitFieldDefinition(parent, nullptr, defNr, fitDevDataIndexInvalid, size, type)
 {
     fieldProfile = CFitProfileLookup::getFieldForProfile(parentDefintion ? parentDefintion->getGlobalMesgNr() : fitGlobalMesgNrInvalid, defNr);
 }
@@ -45,10 +46,11 @@ CFitFieldDefinition::CFitFieldDefinition()
 
 QString CFitFieldDefinition::fieldInfo() const
 {
-    QString fstr = QString("%1 %2 %3 (%4): %5, type %6, size %7, endian %8")
+    QString fstr = QString("%1 %2 %3 (%4): %5 %6, type %7, size %8, endian %9")
                    .arg(profile().hasSubfields() ? "dynamic" : profile().hasComponents() ? "component" : "field",
                         profile().getName(),
                         profile().getFieldType() == eFieldTypeDevelopment ? " DEV" : "")
+                   .arg(getDevDataIdx())
                    .arg(getDefNr())
                    .arg(getBaseType().name())
                    .arg(getType(),
@@ -60,6 +62,16 @@ QString CFitFieldDefinition::fieldInfo() const
 quint8 CFitFieldDefinition::getDefNr() const
 {
     return defNr;
+}
+
+quint8 CFitFieldDefinition::getDevDataIdx() const
+{
+    return devDataIdx;
+}
+
+QPair<quint8,quint8> CFitFieldDefinition::getDevProfileId() const
+{
+    return qMakePair<quint8,quint8>(devDataIdx,defNr);
 }
 
 quint8 CFitFieldDefinition::getSize() const

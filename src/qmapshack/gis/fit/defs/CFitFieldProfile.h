@@ -37,7 +37,10 @@ class CFitFieldProfile
 public:
     CFitFieldProfile();
     CFitFieldProfile(const CFitFieldProfile& copy);
-    CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16 offset, QString units, field_type_e fieldType = eFieldTypeFit);
+    CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr,
+                     qreal scale, qint16 offset, QString units, field_type_e fieldType = eFieldTypeFit);
+    CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, quint8 devDataIdx,
+                     qreal scale, qint16 offset, QString units, field_type_e fieldType = eFieldTypeFit);
     virtual ~CFitFieldProfile();
 
     void addSubfield(CFitSubfieldProfile* subfield);
@@ -49,6 +52,9 @@ public:
 
     virtual QString getName() const;
     virtual quint8 getFieldDefNum() const;
+    virtual quint8 getDevDataIdx() const;
+    /// First element in the pair is the devDataIdx, second is the fieldDefNr
+    virtual QPair<quint8,quint8> getDevProfileId() const;
     virtual qreal getScale() const;
     virtual qint16 getOffset() const;
     virtual bool hasScaleAndOffset() const;
@@ -65,6 +71,7 @@ public:
 private:
     QString name;
     quint8 fieldDefNr;
+    quint8 devDataIdx;
     qreal scale;
     qint16 offset;
     QString units;

@@ -51,10 +51,10 @@ decode_state_e CFitDevFieldDefinitionState::process(quint8 &dataByte)
         devDataIndex = dataByte;
         // get the previously (in RecordHeaderState) added definition message
         CFitDefinitionMessage* def = latestDefinition();
-        CFitFieldProfile* profile = devFieldProfile(fieldNr);
+        CFitFieldProfile* profile = devFieldProfile(qMakePair(devDataIndex,fieldNr));
 
         // add the new field definition
-        def->addDevField(CFitFieldDefinition(def, profile, fieldNr, size, profile->getBaseType().baseTypeField()));
+        def->addDevField(CFitFieldDefinition(def, profile, fieldNr, devDataIndex, size, profile->getBaseType().baseTypeField()));
         reset();
         if (def->getDevFields().size() >= def->getNrOfDevFields())
         {

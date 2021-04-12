@@ -84,8 +84,9 @@ protected:
     quint32 getTimestamp() const { return data.timestamp; }
     quint16 getCrc() const { return data.crc; }
     void addDevFieldProfile(const CFitFieldProfile &fieldProfile);
-    CFitFieldProfile* devFieldProfile(quint32 fieldNr);
-    void clearDevFieldProfiles();
+    CFitFieldProfile* devFieldProfile(const QPair<quint8,quint8> &devProfileId);
+    /// Delete local developer profiles with the developer data index devDataIdx
+    void clearDevFieldProfiles(quint8 devDataIdx);
 
 
 private:

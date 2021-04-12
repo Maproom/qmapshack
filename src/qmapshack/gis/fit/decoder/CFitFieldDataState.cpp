@@ -109,7 +109,7 @@ bool CFitFieldDataState::handleDevField()
         {
             // handling developer data for mapping the field data to its definitions:
             // part 2, reading field data and attach dynamic profile
-            CFitFieldProfile* fieldProfile = devFieldProfile(fieldDef.getDefNr());
+            CFitFieldProfile* fieldProfile = devFieldProfile(fieldDef.getDevProfileId());
             if (fieldProfile->getBaseType().nr() == eBaseTypeNrInvalid)
             {
                 // test if profile exists
@@ -133,7 +133,21 @@ void CFitFieldDataState::devProfile(CFitMessage& mesg)
     // part 1, dynamic profiles creation
     if (mesg.getGlobalMesgNr() == eMesgNumDeveloperDataId)
     {
-        clearDevFieldProfiles();
+        // Get developer ID
+        quint8 devDataIdx = fitDevDataIndexInvalid;
+        const QList<CFitField>& fields = mesg.getFields();
+        for (const CFitField &field : fields)
+        {
+            if (field.isValidValue() && field.getFieldDefNr() == eDeveloperDataIdDeveloperDataIndex) {
+                devDataIdx = (quint8) field.getValue().toUInt();
+                break;
+            }
+        }
+        // Delete all developer field profiles for this ID
+        if ( devDataIdx != fitDevDataIndexInvalid )
+        {
+            clearDevFieldProfiles(devDataIdx);
+        }
     }
     if (mesg.getGlobalMesgNr() == eMesgNumFieldDescription)
     {
@@ -231,7 +245,6 @@ CFitFieldProfile CFitFieldDataState::buildDevFieldProfile(CFitMessage& mesg)
         }
     }
 
-    Q_UNUSED(devDataIdx)
     Q_UNUSED(array)
     Q_UNUSED(baseUnitId)
 
@@ -251,7 +264,7 @@ CFitFieldProfile CFitFieldDataState::buildDevFieldProfile(CFitMessage& mesg)
         offset = 0;
     }
 
-    CFitFieldProfile devFieldProfile = CFitFieldProfile(nullptr, fieldName, *CFitBaseTypeMap::get(baseType), fieldDefNr,
+    CFitFieldProfile devFieldProfile = CFitFieldProfile(nullptr, fieldName, *CFitBaseTypeMap::get(baseType), fieldDefNr, devDataIdx,
                                                         scale, offset, units, eFieldTypeDevelopment);
     // for documentation: the development field profile may contain more fields in the future as can be adumbrated by
     // the description field enumeration. According to the FIT specification Rev 2.3  table 4-9 - Field Description Messages

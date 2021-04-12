@@ -117,23 +117,22 @@ void IFitDecoderState::incFileBytesRead()
 
 void IFitDecoderState::addDevFieldProfile(const CFitFieldProfile &fieldProfile)
 {
-    // for documentation: a development field definition is linked to an developer data ID. Only the tuple developer data index
-    // and field definition number must be unique. So far no fit file with more than one developer data ID has been created.
-    if(devFieldProfile(fieldProfile.getFieldDefNum())->getFieldDefNum() ==  fieldProfile.getFieldDefNum())
-    {
+    // for documentation: a development field definition is linked to an developer data ID. The tuple developer data index
+    // and field definition number must be unique.
+    if(devFieldProfile(fieldProfile.getDevProfileId())->getDevProfileId() ==  fieldProfile.getDevProfileId())    {
         throw tr("FIT decoding error: a development field with the field_definition_number %1 already exists.")
               .arg(fieldProfile.getFieldDefNum());
     }
     data.devFieldProfiles.append(fieldProfile);
 }
 
-CFitFieldProfile* IFitDecoderState::devFieldProfile(quint32 fieldNr)
+CFitFieldProfile* IFitDecoderState::devFieldProfile(const QPair<quint8,quint8> &devProfileId)
 {
-    for (int i = 0; i < data.devFieldProfiles.size(); i++)
+    for(CFitFieldProfile &devFieldPro : data.devFieldProfiles)
     {
-        if (fieldNr == data.devFieldProfiles[i].getFieldDefNum())
+        if (devProfileId == devFieldPro.getDevProfileId())
         {
-            return &data.devFieldProfiles[i];
+            return &devFieldPro;
         }
     }
     // dummy field for unknown field nr.
@@ -143,7 +142,17 @@ CFitFieldProfile* IFitDecoderState::devFieldProfile(quint32 fieldNr)
     //return data.devFieldProfiles[fieldNr];
 }
 
-void IFitDecoderState::clearDevFieldProfiles()
+void IFitDecoderState::clearDevFieldProfiles(quint8 devDataIdx)
 {
-    data.devFieldProfiles.clear();
+    for (QList<CFitFieldProfile>::iterator it = data.devFieldProfiles.begin(); it != data.devFieldProfiles.end();)
+    {
+        if (it->getDevDataIdx() == devDataIdx)
+        {
+            it = data.devFieldProfiles.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
 }

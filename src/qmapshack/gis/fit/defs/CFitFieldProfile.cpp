@@ -21,9 +21,16 @@
 #include "gis/fit/defs/CFitProfile.h"
 #include "gis/fit/defs/fit_const.h"
 
-CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16 offset, QString units, field_type_e fieldType )
-    : name(name), fieldDefNr(fieldDefNr), scale(scale), offset(offset), units(units), fieldType(fieldType),
-    baseType(&baseType), profile(parent), subfields(), components()
+CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, quint8 devDataIdx,
+                                   qreal scale, qint16 offset, QString units, field_type_e fieldType )
+    : name(name), fieldDefNr(fieldDefNr), devDataIdx(devDataIdx), scale(scale), offset(offset), units(units), fieldType(fieldType),
+      baseType(&baseType), profile(parent), subfields(), components()
+{
+}
+
+CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr,
+                                   qreal scale, qint16 offset, QString units, field_type_e fieldType )
+    :  CFitFieldProfile(parent, name, baseType, fieldDefNr, fitDevDataIndexInvalid, scale, offset, units, fieldType)
 {
 }
 
@@ -32,8 +39,9 @@ CFitFieldProfile::CFitFieldProfile() : CFitFieldProfile(nullptr, "unknown", fit:
 }
 
 CFitFieldProfile::CFitFieldProfile(const CFitFieldProfile& copy)
-    : name(copy.name), fieldDefNr(copy.fieldDefNr), scale(copy.scale), offset(copy.offset), units(copy.units), fieldType(copy.fieldType),
-    baseType(copy.baseType), profile(copy.profile), subfields(copy.subfields), components(copy.components)
+    : name(copy.name), fieldDefNr(copy.fieldDefNr), devDataIdx(copy.devDataIdx),scale(copy.scale), offset(copy.offset),
+      units(copy.units), fieldType(copy.fieldType), baseType(copy.baseType), profile(copy.profile), subfields(copy.subfields),
+      components(copy.components)
 {
 }
 
@@ -76,6 +84,16 @@ QString CFitFieldProfile::getName() const
 quint8 CFitFieldProfile::getFieldDefNum() const
 {
     return fieldDefNr;
+}
+
+quint8 CFitFieldProfile::getDevDataIdx() const
+{
+    return devDataIdx;
+}
+
+QPair<quint8,quint8> CFitFieldProfile::getDevProfileId() const
+{
+    return qMakePair(devDataIdx,fieldDefNr);
 }
 
 qreal CFitFieldProfile::getScale() const
@@ -124,9 +142,10 @@ QList<CFitComponentfieldProfile*> CFitFieldProfile::getComponents() const
 
 QString CFitFieldProfile::fieldProfileInfo()
 {
-    QString str = QString("%1 %2 (%3): %4 %5")
+    QString str = QString("%1 %2 (%3 %4): %5 %6")
                   .arg(QString("field profile"),
                        getName())
+                  .arg(getDevDataIdx())
                   .arg(getFieldDefNum())
                   .arg(getUnits(),
                        getBaseType().name());

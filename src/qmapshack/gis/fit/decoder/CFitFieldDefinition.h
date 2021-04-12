@@ -29,13 +29,16 @@ class CFitFieldProfile;
 class CFitFieldDefinition final
 {
 public:
-    CFitFieldDefinition(CFitDefinitionMessage* parent, CFitFieldProfile* fieldProfile, quint8 defNr, quint8 size, quint8 type);
+    CFitFieldDefinition(CFitDefinitionMessage* parent, CFitFieldProfile* fieldProfile, quint8 defNr, quint8 devDataIdx, quint8 size, quint8 type);
     CFitFieldDefinition(CFitDefinitionMessage* parent, quint8 defNr, quint8 size, quint8 type);
     CFitFieldDefinition();
 
     QString fieldInfo() const;
 
     quint8 getDefNr() const;
+    quint8 getDevDataIdx() const;
+    /// First element in the pair is the devDataIdx, second is the DefNr
+    QPair<quint8,quint8> getDevProfileId() const;
     quint8 getSize() const;
     quint8 getType() const;
     const CFitBaseType& getBaseType() const;
@@ -48,6 +51,7 @@ public:
 
 private:
     quint8 defNr;
+    quint8 devDataIdx;
     quint8 size;
     quint8 type;
     CFitBaseType* baseType;

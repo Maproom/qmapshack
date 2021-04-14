@@ -7,6 +7,7 @@ V1.XX.X
 [QMS-299] CEnergyCycling is storing it's configuration in the `General` section instead of it's own.
 [QMS-311] Automatically save projects to device
 [QMS-337] Upgrade to Proj 8 API
+[QMS-343] .fit files from Suunto app have many trackpoints with elevation = 0
 [QMS-344] Better integration of new PROJ lib into cmake build system
 [QMS-349] Upgrade to Quazip Qt5 V1.x
 [QMS-353] "Select Items on Map" does not update when items are removed

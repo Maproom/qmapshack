@@ -83,8 +83,10 @@ static bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
     {
         pt.lon = toDegree(mesg.getFieldValue(eRecordPositionLong).toInt());
         pt.lat = toDegree(mesg.getFieldValue(eRecordPositionLat).toInt());
-        // QVariant.toInt() does not convert double to int but return 0.
-        pt.ele = (int) mesg.getFieldValue(eRecordEnhancedAltitude).toDouble();
+        if(mesg.isFieldValueValid(eRecordEnhancedAltitude))
+        {
+            pt.ele = mesg.getFieldValue(eRecordEnhancedAltitude).toInt();
+        }
         pt.time = toDateTime(mesg.getFieldValue(eRecordTimestamp).toUInt());
 
         readKnownExtensions(pt.extensions, mesg);
@@ -172,7 +174,10 @@ static bool readFitSegmentPoint(const CFitMessage &mesg, CTrackData::trkpt_t &pt
     {
         pt.lon = toDegree(mesg.getFieldValue(eSegmentPointPositionLong).toInt());
         pt.lat = toDegree(mesg.getFieldValue(eSegmentPointPositionLat).toInt());
-        pt.ele = (int) mesg.getFieldValue(eSegmentPointAltitude).toDouble();
+        if(mesg.isFieldValueValid(eSegmentPointAltitude))
+        {
+            pt.ele = mesg.getFieldValue(eSegmentPointAltitude).toInt();
+        }
         // sum with file_id time_created
         pt.time = toDateTime(timeCreated + mesg.getFieldValue(eSegmentPointLeaderTime).toUInt());
         return true;

@@ -135,8 +135,8 @@ public:
 
     struct search_t
     {
-        searchProperty_e property;
-        search_type_e searchType;
+        searchProperty_e property = eSearchPropertyNoMatch;
+        search_type_e searchType = eSearchTypeNone;
         searchValue_t searchValue;
     };
 

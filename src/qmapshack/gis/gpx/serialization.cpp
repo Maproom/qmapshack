@@ -623,21 +623,28 @@ void CGisItemWpt::save(QDomNode& gpx, bool strictGpx11)
 void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
 {
     //Geocaches only have one link
-    if(wpt.links.first().uri.url(QUrl::RemovePath).contains("geocaching.com"))
+    if(wpt.links.isEmpty())
     {
-        geocache.service = eGcCom;
-    }
-    else if(wpt.links.first().uri.url(QUrl::RemovePath).contains("opencaching"))
-    {
-        geocache.service = eOc;
-    }
-    else if(wpt.links.first().uri.url(QUrl::RemovePath).contains("geocaching.su"))
-    {
-        geocache.service = eGcSu;
+        geocache.service = eUnknown;
     }
     else
     {
-        geocache.service = eUnknown;
+        if(wpt.links.first().uri.url(QUrl::RemovePath).contains("geocaching.com"))
+        {
+            geocache.service = eGcCom;
+        }
+        else if(wpt.links.first().uri.url(QUrl::RemovePath).contains("opencaching"))
+        {
+            geocache.service = eOc;
+        }
+        else if(wpt.links.first().uri.url(QUrl::RemovePath).contains("geocaching.su"))
+        {
+            geocache.service = eGcSu;
+        }
+        else
+        {
+            geocache.service = eUnknown;
+        }
     }
 
     const QDomNamedNodeMap& attr = xmlCache.attributes();

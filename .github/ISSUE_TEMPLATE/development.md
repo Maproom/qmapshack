@@ -7,22 +7,25 @@ assignees: ''
 
 ---
 
-**Important Notice:**
+<!---
+Important Notice:
 
 This is for developers only. As a user use the `bug report` or `Everything that's not a bug` template.
+-->
 
-**The parent ticket**
-
-_add ticketnumber behind the #_
+### The parent ticket
+[comment]: # (Add ticketnumber behind QMS-# )
 
 QMS-#
 
-**What do you plan to do**
+### What do you plan to do
+[comment]: # (Describe roughly what you want to do.)
 
-Describe roughly what you want to do
 
-**The result will be**
 
-A list of goals that have to be achieved to consider the ticket as done.
+### The result will be
+[comment]: # (A list of goals that have to be achieved to consider the ticket as done.)
+
+
 
 

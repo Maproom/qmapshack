@@ -6,64 +6,68 @@ labels: bug
 assignees: ''
 
 ---
+<!---Important Notice
 
-**Important Notice:**
+This is a  pre-formatted template:
 
-**Do not delete any of the sections. Read what is requested. _Replace(!)_ the instructions by your _answer(!)_. Bug reports that are not properly filed might be closed without further notice.**
+- Lines starting with ### are section headers. Do not delete any of the sections.
 
-**Choose a good title**
+- Lines starting with the label  [comment]: are instructions on how to fill in the section and will not be shown in your request. Just read what is required and add your answer below.
 
-What is a good title?
-The title will be listed in the changelog when the issue is fixed. Do you think someone else would understand what's fixed or done from your title? Does it really name the real topic of the issue?
+Choose a good title: The title will be listed in the changelog when the issue is fixed. Do you think someone else would understand what's fixed or done from your title? Does it really name the real topic of the issue?
 
-**Describe the bug**
+Bug reports that are not properly filed might be closed without further notice.
+-->
 
-A clear and concise description of what the bug is.
+### Describe the bug
+[comment]: # (A clear and concise description of what the bug is)
 
-**What have you done to circle down the problem?**
 
-Did you compare to previous versions? What versions? Did you check
-if others have the same problem?
 
-**To Reproduce**
+### What have you done to circle down the problem?
+[comment]: # (Did you compare to previous versions? What versions? Did you check if others have the same problem?)
 
-Steps to reproduce the behavior:
+
+
+### To Reproduce
+[comment]: # (List the steps to reproduce the behavior)
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
 
-A clear and concise description of what you expected to happen.
+### Expected behavior
+[comment]: # (A clear and concise description of what you expected to happen)
 
-**Screenshots**
 
-If applicable, add screenshots to help explain your problem.
 
-**Attachments**
+### Screenshots
+[comment]: # (If applicable, add screenshots to help explain your problem)
 
-Can you provide an example file to trigger the problem?
 
-**Tracebacks**
 
-If QMapshack crashes the fastest way to get help is a backtrace. We are
-aware that it's not that easy to record one. However if you provide one
-chances are good to have it solved very fast. If the problem can't be
-reproduced on the developer's environment we will sooner or later request
-a traceback.
+### Attachments
+[comment]: # (Can you provide an example file to trigger the problem?)
 
-For Linux see:
-https://github.com/Maproom/qmapshack/wiki/TroubleShooting#create-a-backtrace-of-a-crash-on-linux
 
-For Windows it would need a debug build and running QMapshack in Visual Studio.
 
-**Desktop (please complete the following information):**
+### Tracebacks
+[comment]: # (Add your backtrace below if you have one. If QMapshack crashes the fastest way to get help is a backtrace.
+For Linux see: https://github.com/Maproom/qmapshack/wiki/TroubleShooting#create-a-backtrace-of-a-crash-on-linux.
+For Windows it would need a debug build and running QMapshack in Visual Studio.)
+
+
+
+### Desktop
+[comment]: # (please complete the following information)
 
  - OS: [e.g. OS X, Debian, Suse, Windows]
- - QMapShack Version [e.g. 1.13.1]
- - Window Manager [e.g. KDE, GNOME]
+ - QMapShack Version:   [e.g. 1.13.1]
+ - Window Manager:  [e.g. KDE, GNOME]
 
-**Additional context**
 
-Add any other context about the problem here.
+### Additional context
+[comment]: # (Add any other context about the problem here)
+

@@ -16,6 +16,7 @@ V1.XX.X
 [QMS-362] Fit files containing more than one developer data ID cannot be opened. e.g. from a Garmin FR 935 and a connected Stryd footpod
 [QMS-363] GIS items missing in projects loaded from file or database
 [QMS-371] Crash while loading geocache from TwoNav device
+[QMS-373] Refine templates to hide comments
 
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release

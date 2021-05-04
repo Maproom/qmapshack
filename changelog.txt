@@ -17,6 +17,7 @@ V1.XX.X
 [QMS-363] GIS items missing in projects loaded from file or database
 [QMS-371] Crash while loading geocache from TwoNav device
 [QMS-373] Refine templates to hide comments
+[QMS-375] On-screen profile window has no close button
 
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release

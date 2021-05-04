@@ -88,7 +88,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
 
     if(mode == eModeWindow)
     {
-        overrideWindowFlags(Qt::Tool);
+        setWindowFlags(Qt::Tool);
         setAttribute(Qt::WA_DeleteOnClose, true);
         QPalette pal = palette();
         pal.setColor(QPalette::Background, Qt::white);

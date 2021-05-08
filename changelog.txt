@@ -18,6 +18,7 @@ V1.XX.X
 [QMS-371] Crash while loading geocache from TwoNav device
 [QMS-373] Refine templates to hide comments
 [QMS-375] On-screen profile window has no close button
+[QMS-378] Add option to link map views
 [QMS-380] Toggle fullscreen does not work
 
 V1.15.2

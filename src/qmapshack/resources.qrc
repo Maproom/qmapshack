@@ -147,6 +147,7 @@
         <file>../icons/32x32/LineWidthDef.png</file>
         <file>../icons/32x32/LineWidthUser.png</file>
         <file>../icons/32x32/Link.png</file>
+        <file>../icons/32x32/LinkMap.png</file>
         <file>../icons/32x32/LoadGIS.png</file>
         <file>../icons/32x32/LoadView.png</file>
         <file>../icons/32x32/Lock.png</file>
@@ -427,6 +428,7 @@
         <file>../icons/48x48/LineWidthDef.png</file>
         <file>../icons/48x48/LineWidthUser.png</file>
         <file>../icons/48x48/Link.png</file>
+        <file>../icons/48x48/LinkMap.png</file>
         <file>../icons/48x48/LoadGIS.png</file>
         <file>../icons/48x48/LoadView.png</file>
         <file>../icons/48x48/Lock.png</file>

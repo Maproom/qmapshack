@@ -56,12 +56,12 @@ class CCanvas : public QWidget
 {
     Q_OBJECT
 public:
-    CCanvas(QWidget * parent, const QString& name);
+    CCanvas(QWidget* parent, const QString& name);
     virtual ~CCanvas();
 
-    static void setOverrideCursor(const QCursor &cursor, const QString&src);
-    static void restoreOverrideCursor(const QString &src);
-    static void changeOverrideCursor(const QCursor& cursor, const QString &src);
+    static void setOverrideCursor(const QCursor& cursor, const QString& src);
+    static void restoreOverrideCursor(const QString& src);
+    static void changeOverrideCursor(const QCursor& cursor, const QString& src);
 
 
     void saveConfig(QSettings& cfg);
@@ -69,7 +69,7 @@ public:
 
     void setupGrid();
     void convertGridPos2Str(const QPointF& pos, QString& str, bool simple);
-    void convertRad2Px(QPointF &pos) const;
+    void convertRad2Px(QPointF& pos) const;
     void convertPx2Rad(QPointF& pos) const;
 
     void setupBackgroundColor();
@@ -87,15 +87,17 @@ public:
     void  setScales(const scales_type_e type);
     scales_type_e getScalesType();
 
-    qreal getElevationAt(const QPointF &pos) const;
-    void  getElevationAt(const QPolygonF& pos, QPolygonF &ele) const;
-    void  getElevationAt(SGisLine &line) const;
+    qreal getElevationAt(const QPointF& pos) const;
+    void  getElevationAt(const QPolygonF& pos, QPolygonF& ele) const;
+    void  getElevationAt(SGisLine& line) const;
 
-    qreal getSlopeAt(const QPointF &pos) const;
+    qreal getSlopeAt(const QPointF& pos) const;
     void getSlopeAt(const QPolygonF& pos, QPolygonF& slope) const;
 
-    void moveMap(const QPointF &delta);
+    void moveTo(const QPointF& newFocus);
+    void moveMap(const QPointF& delta);
     void zoomTo(const QRectF& rect);
+    void zoom(int index);
     void displayInfo(const QPoint& px);
     poi_t findPOICloseBy(const QPoint& px) const;
 
@@ -161,7 +163,7 @@ public:
      */
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
-    void print(QPainter &p, const QRectF& area, const QPointF &focus, bool printScale = true);
+    void print(QPainter& p, const QRectF& area, const QPointF& focus, bool printScale = true);
 
     /**
        @brief Set a single map file to be shown on the canvas
@@ -183,8 +185,11 @@ public:
 
     static qreal gisLayerOpacity;
 
-signals:    
+    void linkMapViewEnabled();
+
+signals:
     void sigMousePosition(const QPointF& pos, qreal ele, qreal slope);
+    void sigMoveAndZoom(int index, const QPointF& focus);
     void sigZoom();
     void sigMove();
     void sigResize(const QSize& size);
@@ -195,18 +200,18 @@ public slots:
     void slotCheckTrackOnFocus();
 
 protected:
-    bool event(QEvent *) override;
-    bool gestureEvent(QGestureEvent *e);
-    void resizeEvent(QResizeEvent *e) override;
-    void paintEvent(QPaintEvent  *e) override;
-    void mousePressEvent(QMouseEvent  *e) override;
-    void mouseMoveEvent(QMouseEvent  *e) override;
-    void mouseReleaseEvent(QMouseEvent  *e) override;
-    void mouseDoubleClickEvent(QMouseEvent  *e) override;
-    void wheelEvent(QWheelEvent  *e) override;
-    void enterEvent(QEvent       *e) override;
-    void leaveEvent(QEvent       *e) override;
-    void keyPressEvent(QKeyEvent    *e) override;
+    bool event(QEvent*) override;
+    bool gestureEvent(QGestureEvent* e);
+    void resizeEvent(QResizeEvent* e) override;
+    void paintEvent(QPaintEvent* e) override;
+    void mousePressEvent(QMouseEvent* e) override;
+    void mouseMoveEvent(QMouseEvent* e) override;
+    void mouseReleaseEvent(QMouseEvent* e) override;
+    void mouseDoubleClickEvent(QMouseEvent* e) override;
+    void wheelEvent(QWheelEvent* e) override;
+    void enterEvent(QEvent* e) override;
+    void leaveEvent(QEvent* e) override;
+    void keyPressEvent(QKeyEvent* e) override;
 
 
 private slots:
@@ -220,7 +225,7 @@ private:
     {
         drawScale(p, rect());
     }
-    void setZoom(bool in, redraw_e & needsRedraw);
+    void setZoom(bool in, redraw_e& needsRedraw);
     void setSizeTrackProfile();
     /**
        @brief Resize all registered drwa context objects
@@ -243,11 +248,11 @@ private:
 
     QColor backColor = 0x00FFFFBF;      //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
-    CMapDraw * map;                     //< the map object attached to this canvas
-    CDemDraw * dem;                     //< the elevation data layer attached to this canvas
-    CGisDraw * gis;                     //< the GIS data layer attached to this canvas
-    CRtDraw * rt;                       //< the real time data layer attached to this canvas
-    CGrid * grid;                       //< the grid attached to this canvas
+    CMapDraw* map;                      //< the map object attached to this canvas
+    CDemDraw* dem;                      //< the elevation data layer attached to this canvas
+    CGisDraw* gis;                      //< the GIS data layer attached to this canvas
+    CRtDraw* rt;                        //< the real time data layer attached to this canvas
+    CGrid* grid;                        //< the grid attached to this canvas
 
     QList<IDrawContext*> allDrawContext;
 
@@ -255,20 +260,20 @@ private:
     QPointF posFocus {0.209439510239, 0.855211333477};
 
     /// the mouse handler
-    CMouseAdapter * mouse;
+    CMouseAdapter* mouse;
 
     /// tool tip timer for vector map tool tips
-    QTimer * timerToolTip;
+    QTimer* timerToolTip;
     /// the position of the tool tip
     QPoint posToolTip;
 
     /// load indicator for maps
-    QMovie * loadIndicator1;
-    QLabel * mapLoadIndicator;
+    QMovie* loadIndicator1;
+    QLabel* mapLoadIndicator;
 
     /// load indicator for DEM
-    QMovie * loadIndicator2;
-    QLabel * demLoadIndicator;
+    QMovie* loadIndicator2;
+    QLabel* demLoadIndicator;
 
     QPointer<CColorLegend> colorLegend;
 
@@ -276,29 +281,29 @@ private:
     int zoomAngleDelta = 0;
 
     /// timer to poll for track gaining/loosing focus
-    QTimer * timerTrackOnFocus;
+    QTimer* timerTrackOnFocus;
     /// the key of the currently focused track
     IGisItem::key_t keyTrackOnFocus;
     /// the track profile plot
     QPointer<IPlot>  plotTrackProfile;
     /// a label with a track
-    QLabel * labelTrackStatistic;
+    QLabel* labelTrackStatistic;
 
-    QLabel * labelTrackInfo;
+    QLabel* labelTrackInfo;
 
-    QTextBrowser * textStatusMessages;
+    QTextBrowser* textStatusMessages;
     QMap<QString, QString> statusMessages;
 
     QMutex mousePressMutex;
     bool mouseLost = false;
 
-    QTextBrowser * labelHelp = nullptr;
+    QTextBrowser* labelHelp = nullptr;
 };
 
 class CCanvasCursorLock
 {
 public:
-    CCanvasCursorLock(const QCursor &cursor, const QString& src)
+    CCanvasCursorLock(const QCursor& cursor, const QString& src)
         : src(src)
     {
         CCanvas::setOverrideCursor(cursor, src);

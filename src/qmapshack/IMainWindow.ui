@@ -83,6 +83,7 @@
     <addaction name="actionAddMapView"/>
     <addaction name="actionCloneMapView"/>
     <addaction name="actionRenameView"/>
+    <addaction name="actionLinkMapViews"/>
     <addaction name="separator"/>
     <addaction name="actionShowScale"/>
     <addaction name="actionShowGrid"/>
@@ -1010,6 +1011,21 @@
    </property>
    <property name="shortcut">
     <string>F1</string>
+   </property>
+  </action>
+  <action name="actionLinkMapViews">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/LinkMap.png</normaloff>:/icons/32x32/LinkMap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Link Map Views</string>
+   </property>
+   <property name="toolTip">
+    <string>All map views move and zoom to the same point.</string>
    </property>
   </action>
  </widget>

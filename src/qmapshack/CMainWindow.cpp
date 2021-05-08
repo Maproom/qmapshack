@@ -74,7 +74,7 @@
 #include <windows.h>
 #endif // Q_OS_WIN64
 
-CMainWindow * CMainWindow::pSelf = nullptr;
+CMainWindow* CMainWindow::pSelf = nullptr;
 
 QDir CMainWindow::homeDir;
 const QString CMainWindow::mapsPath = "Maps";
@@ -173,58 +173,59 @@ CMainWindow::CMainWindow()
     cfg.endGroup();
     // end ---- restore window geometry -----
 
-    connect(actionAbout,                 &QAction::triggered,            this,      &CMainWindow::slotAbout);
-    connect(actionWiki,                  &QAction::triggered,            this,      &CMainWindow::slotWiki);
-    connect(actionHelp,                  &QAction::triggered,            this,      &CMainWindow::slotHelp);
-    connect(actionQuickstart,            &QAction::triggered,            this,      &CMainWindow::slotQuickstart);
-    connect(actionAddMapView,            &QAction::triggered,            this,      &CMainWindow::slotAddCanvas);
-    connect(actionCloneMapView,          &QAction::triggered,            this,      &CMainWindow::slotCloneCanvas);
-    connect(actionShowGrid,              &QAction::changed,              this,      [this](){this->update();});
-    connect(actionShowScale,             &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionPOIText,               &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionMapToolTip,            &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionShowMinMaxTrackLabels, &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionShowMinMaxSummary,     &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionShowTrackInfoTable,    &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionShowTrackInfoPoints,   &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionShowTrackSummary,      &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionShowTrackProfile,      &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionShowTrackHighlight,    &QAction::changed,              this,      &CMainWindow::slotUpdateTabWidgets);
-    connect(actionShowTrackInfoPoints,   &QAction::triggered, actionShowTrackInfoTable, &QAction::setEnabled);
-    connect(actionShowTrackProfile,      &QAction::triggered, actionProfileIsWindow,    &QAction::setEnabled);
-    connect(actionProfileIsWindow,       &QAction::triggered,            this,      &CMainWindow::slotSetProfileMode);
-    connect(actionSetupMapFont,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapFont);
-    connect(actionSetupMapBackground,    &QAction::triggered,            this,      &CMainWindow::slotSetupMapBackground);
-    connect(actionSetupGrid,             &QAction::triggered,            this,      &CMainWindow::slotSetupGrid);
-    connect(actionSetupMapPaths,         &QAction::triggered,            this,      &CMainWindow::slotSetupMapPath);
-    connect(actionSetupDEMPaths,         &QAction::triggered,            this,      &CMainWindow::slotSetupDemPath);
-    connect(actionSetupMapView,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapView);
-    connect(actionSetupTimeZone,         &QAction::triggered,            this,      &CMainWindow::slotSetupTimeZone);
-    connect(actionSetupUnits,            &QAction::triggered,            this,      &CMainWindow::slotSetupUnits);
-    connect(actionSetupWorkspace,        &QAction::triggered,            this,      &CMainWindow::slotSetupWorkspace);
-    connect(actionSetupCoordFormat,      &QAction::triggered,            this,      &CMainWindow::slotSetupCoordFormat);
-    connect(actionSetupToolbar,          &QAction::triggered,            this,      &CMainWindow::slotSetupToolbar);
-    connect(actionImportDatabase,        &QAction::triggered,            this,      &CMainWindow::slotImportDatabase);
-    connect(actionSaveGISData,           &QAction::triggered,            widgetGisWorkspace, &CGisWorkspace::slotSaveAll);
-    connect(actionLoadGISData,           &QAction::triggered,            this,      &CMainWindow::slotLoadGISData);
-    connect(actionVrtBuilder,            &QAction::triggered,            this,      &CMainWindow::slotBuildVrt);
-    connect(actionStoreView,             &QAction::triggered,            this,      &CMainWindow::slotStoreView);
-    connect(actionLoadView,              &QAction::triggered,            this,      &CMainWindow::slotLoadView);
-    connect(actionClose,                 &QAction::triggered,            this,      &CMainWindow::close);
-    connect(actionCreateRoutinoDatabase, &QAction::triggered,            this,      &CMainWindow::slotCreateRoutinoDatabase);
-    connect(actionPrintMap,              &QAction::triggered,            this,      &CMainWindow::slotPrintMap);
-    connect(actionTakeScreenshot,        &QAction::triggered,            this,      &CMainWindow::slotTakeScreenshot);
-    connect(actionSetupWaypointIcons,    &QAction::triggered,            this,      &CMainWindow::slotSetupWptIcons);
-    connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
-    connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
-    connect(actionFullScreen,            &QAction::triggered,            this,      &CMainWindow::slotFullScreen);
-    connect(actionStartQMapTool,         &QAction::triggered,            this,      &CMainWindow::slotStartQMapTool);
-    connect(actionRenameView,            &QAction::triggered,            this,      &CMainWindow::slotRenameView);
-    connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
-    connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
-    connect(tabMaps,                     &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabMaps);
-    connect(tabDem,                      &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabDem);
+    connect(actionAbout, &QAction::triggered, this, &CMainWindow::slotAbout);
+    connect(actionWiki, &QAction::triggered, this, &CMainWindow::slotWiki);
+    connect(actionHelp, &QAction::triggered, this, &CMainWindow::slotHelp);
+    connect(actionQuickstart, &QAction::triggered, this, &CMainWindow::slotQuickstart);
+    connect(actionAddMapView, &QAction::triggered, this, &CMainWindow::slotAddCanvas);
+    connect(actionCloneMapView, &QAction::triggered, this, &CMainWindow::slotCloneCanvas);
+    connect(actionShowGrid, &QAction::changed, this, [this](){this->update();});
+    connect(actionShowScale, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionPOIText, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionMapToolTip, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionNightDay, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowMinMaxTrackLabels, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowMinMaxSummary, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackInfoTable, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackInfoPoints, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackSummary, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackProfile, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackHighlight, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
+    connect(actionShowTrackInfoPoints, &QAction::triggered, actionShowTrackInfoTable, &QAction::setEnabled);
+    connect(actionShowTrackProfile, &QAction::triggered, actionProfileIsWindow, &QAction::setEnabled);
+    connect(actionProfileIsWindow, &QAction::triggered, this, &CMainWindow::slotSetProfileMode);
+    connect(actionSetupMapFont, &QAction::triggered, this, &CMainWindow::slotSetupMapFont);
+    connect(actionSetupMapBackground, &QAction::triggered, this, &CMainWindow::slotSetupMapBackground);
+    connect(actionSetupGrid, &QAction::triggered, this, &CMainWindow::slotSetupGrid);
+    connect(actionSetupMapPaths, &QAction::triggered, this, &CMainWindow::slotSetupMapPath);
+    connect(actionSetupDEMPaths, &QAction::triggered, this, &CMainWindow::slotSetupDemPath);
+    connect(actionSetupMapView, &QAction::triggered, this, &CMainWindow::slotSetupMapView);
+    connect(actionSetupTimeZone, &QAction::triggered, this, &CMainWindow::slotSetupTimeZone);
+    connect(actionSetupUnits, &QAction::triggered, this, &CMainWindow::slotSetupUnits);
+    connect(actionSetupWorkspace, &QAction::triggered, this, &CMainWindow::slotSetupWorkspace);
+    connect(actionSetupCoordFormat, &QAction::triggered, this, &CMainWindow::slotSetupCoordFormat);
+    connect(actionSetupToolbar, &QAction::triggered, this, &CMainWindow::slotSetupToolbar);
+    connect(actionImportDatabase, &QAction::triggered, this, &CMainWindow::slotImportDatabase);
+    connect(actionSaveGISData, &QAction::triggered, widgetGisWorkspace, &CGisWorkspace::slotSaveAll);
+    connect(actionLoadGISData, &QAction::triggered, this, &CMainWindow::slotLoadGISData);
+    connect(actionVrtBuilder, &QAction::triggered, this, &CMainWindow::slotBuildVrt);
+    connect(actionStoreView, &QAction::triggered, this, &CMainWindow::slotStoreView);
+    connect(actionLoadView, &QAction::triggered, this, &CMainWindow::slotLoadView);
+    connect(actionClose, &QAction::triggered, this, &CMainWindow::close);
+    connect(actionCreateRoutinoDatabase, &QAction::triggered, this, &CMainWindow::slotCreateRoutinoDatabase);
+    connect(actionPrintMap, &QAction::triggered, this, &CMainWindow::slotPrintMap);
+    connect(actionTakeScreenshot, &QAction::triggered, this, &CMainWindow::slotTakeScreenshot);
+    connect(actionSetupWaypointIcons, &QAction::triggered, this, &CMainWindow::slotSetupWptIcons);
+    connect(actionCloseTab, &QAction::triggered, this, &CMainWindow::slotCloseTab);
+    connect(actionToggleDocks, &QAction::triggered, this, &CMainWindow::slotToggleDocks);
+    connect(actionFullScreen, &QAction::triggered, this, &CMainWindow::slotFullScreen);
+    connect(actionStartQMapTool, &QAction::triggered, this, &CMainWindow::slotStartQMapTool);
+    connect(actionRenameView, &QAction::triggered, this, &CMainWindow::slotRenameView);
+    connect(actionLinkMapViews, &QAction::toggled, this, &CMainWindow::slotLinkMapViews);
+    connect(tabWidget, &QTabWidget::tabCloseRequested, this, &CMainWindow::slotTabCloseRequest);
+    connect(tabWidget, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabCanvas);
+    connect(tabMaps, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabMaps);
+    connect(tabDem, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabDem);
 
     if(IAppSetup::getPlatformInstance()->findExecutable("qmaptool").isEmpty())
     {
@@ -238,9 +239,9 @@ CMainWindow::CMainWindow()
     cfg.beginGroup("Views");
     const QStringList& names = cfg.childGroups();
 
-    for(const QString &name : names)
+    for(const QString& name : names)
     {
-        CCanvas * view = addView(name);
+        CCanvas* view = addView(name);
 
         cfg.beginGroup(name);
         view->loadConfig(cfg);
@@ -248,7 +249,7 @@ CMainWindow::CMainWindow()
     }
     if(names.isEmpty())
     {
-        CCanvas * view = addView(QString());
+        CCanvas* view = addView(QString());
         // call just to setup default values
         view->loadConfig(cfg);
     }
@@ -273,13 +274,14 @@ CMainWindow::CMainWindow()
     actionShowTrackHighlight->setChecked(cfg.value("ShowTrackHighlight", true).toBool());
     actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
     actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
+    actionLinkMapViews->setChecked(cfg.value("linkMapViews", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
     tabWidget->setCurrentIndex(cfg.value("visibleCanvas", 0).toInt());
     cfg.endGroup(); // Canvas
 
 
 
-    QStatusBar * status = statusBar();
+    QStatusBar* status = statusBar();
     lblPosWGS84 = new QLabel(status);
     status->addPermanentWidget(lblPosWGS84);
 
@@ -293,18 +295,18 @@ CMainWindow::CMainWindow()
     status->addPermanentWidget(lblPosGrid);
 
 
-    docks << dockMaps
-          << dockDem
-          << dockWorkspace
-          << dockDatabase
-          << dockRte
-          << dockRealtime;
+    docks = { dockMaps
+              , dockDem
+              , dockWorkspace
+              , dockDatabase
+              , dockRte
+              , dockRealtime};
 
 
     if (cfg.contains("MainWindow/activedocks"))
     {
-        const QStringList & dockNames = cfg.value("MainWindow/activedocks").toStringList();
-        for(QDockWidget * const & dock : qAsConst(docks))
+        const QStringList& dockNames = cfg.value("MainWindow/activedocks").toStringList();
+        for(QDockWidget* const& dock : qAsConst(docks))
         {
             if(dockNames.contains(dock->objectName()))
             {
@@ -313,51 +315,51 @@ CMainWindow::CMainWindow()
         }
     }
 
-    for (QDockWidget * const & dock : qAsConst(docks))
+    for (QDockWidget* const& dock : qAsConst(docks))
     {
         connect(dock, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
         connect(dock, &QDockWidget::topLevelChanged, this, &CMainWindow::slotDockFloating);
     }
 
 
-    QAction * actionToggleToolBar = toolBar->toggleViewAction();
+    QAction* actionToggleToolBar = toolBar->toggleViewAction();
     actionToggleToolBar->setObjectName("actionToggleToolBar");
     actionToggleToolBar->setIcon(QIcon(":/icons/32x32/ToolBar.png"));
     menuWindow->insertAction(actionSetupToolbar, actionToggleToolBar);
 
-    QAction * actionToggleMaps = dockMaps->toggleViewAction();
+    QAction* actionToggleMaps = dockMaps->toggleViewAction();
     actionToggleMaps->setObjectName("actionToggleMaps");
     actionToggleMaps->setIcon(QIcon(":/icons/32x32/ToggleMaps.png"));
     menuWindow->insertAction(actionSetupToolbar, actionToggleMaps);
 
-    QAction * actionToggleDem = dockDem->toggleViewAction();
+    QAction* actionToggleDem = dockDem->toggleViewAction();
     actionToggleDem->setObjectName("actionToggleDem");
     actionToggleDem->setIcon(QIcon(":/icons/32x32/ToggleDem.png"));
     menuWindow->insertAction(actionSetupToolbar, actionToggleDem);
 
-    QAction * actionToggleWorkspace = dockWorkspace->toggleViewAction();
+    QAction* actionToggleWorkspace = dockWorkspace->toggleViewAction();
     actionToggleWorkspace->setObjectName("actionToggleWorkspace");
     actionToggleWorkspace->setIcon(QIcon(":/icons/32x32/ToggleGis.png"));
     menuWindow->insertAction(actionSetupToolbar, actionToggleWorkspace);
 
-    QAction * actionToggleRealtime = dockRealtime->toggleViewAction();
+    QAction* actionToggleRealtime = dockRealtime->toggleViewAction();
     actionToggleRealtime->setObjectName("actionToggleRealtime");
     actionToggleRealtime->setIcon(QIcon(":/icons/32x32/ToggleRealTime.png"));
     menuWindow->insertAction(actionSetupToolbar, actionToggleRealtime);
 
-    QAction * actionToggleDatabase = dockDatabase->toggleViewAction();
+    QAction* actionToggleDatabase = dockDatabase->toggleViewAction();
     actionToggleDatabase->setObjectName("actionToggleDatabase");
     actionToggleDatabase->setIcon(QIcon(":/icons/32x32/ToggleDatabase.png"));
     menuWindow->insertAction(actionSetupToolbar, actionToggleDatabase);
 
-    QAction * actionToggleRte = dockRte->toggleViewAction();
+    QAction* actionToggleRte = dockRte->toggleViewAction();
     actionToggleRte->setObjectName("actionToggleRte");
     actionToggleRte->setIcon(QIcon(":/icons/32x32/ToggleRouter.png"));
     menuWindow->insertAction(actionSetupToolbar, actionToggleRte);
 
     menuWindow->insertSeparator(actionSetupToolbar);
 
-    QMenu * menu = new QMenu(this);
+    QMenu* menu = new QMenu(this);
     menu->addAction(actionShowTrackHighlight);
     menu->addAction(actionShowMinMaxTrackLabels);
     menu->addAction(actionShowMinMaxSummary);
@@ -369,97 +371,98 @@ CMainWindow::CMainWindow()
     actionTrackInfo->setMenu(menu);
 
 
-    QAction * separator = new QAction("---------------", this);
+    QAction* separator = new QAction("---------------", this);
     separator->setSeparator(true);
     separator->setObjectName("separator");
 
-    QList<QAction *> availableActions;
-    availableActions << separator
-                     << actionAddMapView
-                     << actionShowScale
-                     << actionSetupMapFont
-                     << actionShowGrid
-                     << actionSetupGrid
-                     << actionFlipMouseWheel
-                     << actionSetupMapPaths
-                     << actionPOIText
-                     << actionNightDay
-                     << actionMapToolTip
-                     << actionTrackInfo
-                     << actionShowTrackHighlight
-                     << actionShowMinMaxSummary
-                     << actionShowMinMaxTrackLabels
-                     << actionShowTrackInfoPoints
-                     << actionShowTrackInfoTable
-                     << actionShowTrackSummary
-                     << actionShowTrackProfile
-                     << actionProfileIsWindow
-                     << actionSetupDEMPaths
-                     << actionAbout
-                     << actionHelp
-                     << actionWiki
-                     << actionSetupMapView
-                     << actionLoadGISData
-                     << actionSaveGISData
-                     << actionSetupTimeZone
-                     << actionAddEmptyProject
-                     << actionGeoSearch
-                     << actionCloseAllProjects
-                     << actionSetupUnits
-                     << actionSetupWorkspace
-                     << actionImportDatabase
-                     << actionVrtBuilder
-                     << actionStoreView
-                     << actionLoadView
-                     << actionClose
-                     << actionCloneMapView
-                     << actionCreateRoutinoDatabase
-                     << actionPrintMap
-                     << actionTakeScreenshot
-                     << actionSetupCoordFormat
-                     << actionSetupMapBackground
-                     << actionSetupWaypointIcons
-                     << actionCloseTab
-                     << actionQuickstart
-                     << actionSetupToolbar
-                     << actionToggleMaps
-                     << actionToggleDem
-                     << actionToggleWorkspace
-                     << actionToggleRealtime
-                     << actionToggleDatabase
-                     << actionToggleRte
-                     << actionToggleDocks
-                     << actionToggleToolBar
-                     << actionFullScreen
-                     << actionStartQMapTool
-                     << actionRenameView;
+    QList<QAction*> availableActions;
+    availableActions = {separator
+                        , actionAddMapView
+                        , actionShowScale
+                        , actionSetupMapFont
+                        , actionShowGrid
+                        , actionSetupGrid
+                        , actionFlipMouseWheel
+                        , actionSetupMapPaths
+                        , actionPOIText
+                        , actionNightDay
+                        , actionMapToolTip
+                        , actionTrackInfo
+                        , actionShowTrackHighlight
+                        , actionShowMinMaxSummary
+                        , actionShowMinMaxTrackLabels
+                        , actionShowTrackInfoPoints
+                        , actionShowTrackInfoTable
+                        , actionShowTrackSummary
+                        , actionShowTrackProfile
+                        , actionProfileIsWindow
+                        , actionSetupDEMPaths
+                        , actionAbout
+                        , actionHelp
+                        , actionWiki
+                        , actionSetupMapView
+                        , actionLoadGISData
+                        , actionSaveGISData
+                        , actionSetupTimeZone
+                        , actionAddEmptyProject
+                        , actionGeoSearch
+                        , actionCloseAllProjects
+                        , actionSetupUnits
+                        , actionSetupWorkspace
+                        , actionImportDatabase
+                        , actionVrtBuilder
+                        , actionStoreView
+                        , actionLoadView
+                        , actionClose
+                        , actionCloneMapView
+                        , actionCreateRoutinoDatabase
+                        , actionPrintMap
+                        , actionTakeScreenshot
+                        , actionSetupCoordFormat
+                        , actionSetupMapBackground
+                        , actionSetupWaypointIcons
+                        , actionCloseTab
+                        , actionQuickstart
+                        , actionSetupToolbar
+                        , actionToggleMaps
+                        , actionToggleDem
+                        , actionToggleWorkspace
+                        , actionToggleRealtime
+                        , actionToggleDatabase
+                        , actionToggleRte
+                        , actionToggleDocks
+                        , actionToggleToolBar
+                        , actionFullScreen
+                        , actionStartQMapTool
+                        , actionRenameView
+                        , actionLinkMapViews};
 
-    QAction * separator1 = new QAction("---------------", this);
+    QAction* separator1 = new QAction("---------------", this);
     separator1->setSeparator(true);
     separator1->setObjectName("separator");
 
-    QList<QAction *> defaultActions;
-    defaultActions << actionGeoSearch
-                   << actionAddEmptyProject
-                   << actionLoadGISData
-                   << actionSaveGISData
-                   << separator
-                   << actionShowScale
-                   << actionShowGrid
-                   << actionPOIText
-                   << actionNightDay
-                   << actionMapToolTip
-                   << actionTrackInfo
-                   << separator1
-                   << actionSetupToolbar
-                   << actionToggleMaps
-                   << actionToggleDem
-                   << actionToggleWorkspace
-                   << actionToggleRealtime
-                   << actionToggleDatabase
-                   << actionToggleRte
-                   << actionToggleDocks
-                   << actionFullScreen;
+    QList<QAction*> defaultActions;
+    defaultActions = { actionGeoSearch
+                       , actionAddEmptyProject
+                       , actionLoadGISData
+                       , actionSaveGISData
+                       , separator
+                       , actionShowScale
+                       , actionShowGrid
+                       , actionPOIText
+                       , actionNightDay
+                       , actionMapToolTip
+                       , actionTrackInfo
+                       , separator1
+                       , actionSetupToolbar
+                       , actionToggleMaps
+                       , actionToggleDem
+                       , actionToggleWorkspace
+                       , actionToggleRealtime
+                       , actionToggleDatabase
+                       , actionToggleRte
+                       , actionToggleDocks
+                       , actionFullScreen};
 
     toolBarConfig = new CToolBarConfig(this, toolBar, availableActions, defaultActions);
     toolBarConfig->loadSettings();
@@ -471,7 +474,7 @@ CMainWindow::CMainWindow()
     prepareMenuForMac();
 
     // make sure all actions that have a shortcut are available even when menu and toolbar are not visible
-    for (QAction * action : qAsConst(availableActions))
+    for (QAction* action : qAsConst(availableActions))
     {
         if (!action->shortcuts().isEmpty())
         {
@@ -505,7 +508,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("geometry", saveGeometry());
     cfg.setValue("units", IUnit::self().type);
     QStringList activeDockNames;
-    for (QDockWidget * const & dock : qAsConst(activeDocks))
+    for (QDockWidget* const& dock : qAsConst(activeDocks))
     {
         activeDockNames << dock->objectName();
     }
@@ -530,7 +533,7 @@ CMainWindow::~CMainWindow()
 
     for(int i = 0; i < tabWidget->count(); i++)
     {
-        CCanvas * view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+        CCanvas* view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
         if(nullptr == view)
         {
             allOtherTabs << tabWidget->widget(i);
@@ -563,6 +566,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("ShowTrackHighlight", actionShowTrackHighlight->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("profileIsWindow", actionProfileIsWindow->isChecked());
+    cfg.setValue("linkMapViews", actionLinkMapViews->isChecked());
     cfg.setValue("mapFont", mapFont);
     CMapDraw::saveMapPath(cfg);
     CDemDraw::saveDemPath(cfg);
@@ -633,28 +637,28 @@ void CMainWindow::setupHomePath()
     CRouterBRouter::self().setupLocalDir(homeDir.absoluteFilePath(brouterPath));
     cfg.setValue("Database/lastDatabasePath", homeDir.absoluteFilePath(databasePath));
     cfg.setValue("Paths/lastGisPath", homeDir.absoluteFilePath(gpxPath));
-
     cfg.setValue("Paths/homePath", homeDir.absolutePath());
 }
 
-CCanvas *CMainWindow::addView(const QString& name)
+CCanvas* CMainWindow::addView(const QString& name)
 {
-    CCanvas * view = new CCanvas(tabWidget, name);
+    CCanvas* view = new CCanvas(tabWidget, name);
     tabWidget->addTab(view, view->objectName());
     connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
-    connect(actionShowTrackHighlight, &QAction::changed,    view, [view] {view->slotUpdateTrackInfo(false);});
-    connect(actionShowMinMaxSummary, &QAction::changed,     view, [view] {view->slotUpdateTrackInfo(false);});
-    connect(actionShowTrackInfoTable, &QAction::changed,    view, [view] {view->slotUpdateTrackInfo(false);});
-    connect(actionShowTrackInfoPoints, &QAction::changed,   view, [view] {view->slotUpdateTrackInfo(true);});
-    connect(actionShowTrackSummary, &QAction::changed,      view, [view] {view->slotUpdateTrackInfo(false);});
-    connect(actionShowTrackProfile, &QAction::changed,      view, [view] {view->slotUpdateTrackInfo(false);});
+    connect(view, &CCanvas::sigMoveAndZoom, this, &CMainWindow::slotMapMoveAndZoom);
+    connect(actionShowTrackHighlight, &QAction::changed, view, [view] {view->slotUpdateTrackInfo(false);});
+    connect(actionShowMinMaxSummary, &QAction::changed, view, [view] {view->slotUpdateTrackInfo(false);});
+    connect(actionShowTrackInfoTable, &QAction::changed, view, [view] {view->slotUpdateTrackInfo(false);});
+    connect(actionShowTrackInfoPoints, &QAction::changed, view, [view] {view->slotUpdateTrackInfo(true);});
+    connect(actionShowTrackSummary, &QAction::changed, view, [view] {view->slotUpdateTrackInfo(false);});
+    connect(actionShowTrackProfile, &QAction::changed, view, [view] {view->slotUpdateTrackInfo(false);});
 
     return view;
 }
 
-QWidget * CMainWindow::getBestWidgetForParent()
+QWidget* CMainWindow::getBestWidgetForParent()
 {
-    QWidget * w = CProgressDialog::self();
+    QWidget* w = CProgressDialog::self();
     if(w)
     {
         return w;
@@ -761,17 +765,17 @@ bool CMainWindow::profileIsWindow() const
     return actionProfileIsWindow->isChecked();
 }
 
-void CMainWindow::addMapList(CMapList * list, const QString &name)
+void CMainWindow::addMapList(CMapList* list, const QString& name)
 {
     tabMaps->addTab(list, name);
 }
 
-void CMainWindow::addDemList(CDemList * list, const QString &name)
+void CMainWindow::addDemList(CDemList* list, const QString& name)
 {
     tabDem->addTab(list, name);
 }
 
-void CMainWindow::addWidgetToTab(QWidget * w)
+void CMainWindow::addWidgetToTab(QWidget* w)
 {
     if(tabWidget->indexOf(w) == NOIDX)
     {
@@ -779,7 +783,7 @@ void CMainWindow::addWidgetToTab(QWidget * w)
     }
     tabWidget->setCurrentWidget(w);
 
-    CDetailsTrk * detailsTrk = dynamic_cast<CDetailsTrk*>(w);
+    CDetailsTrk* detailsTrk = dynamic_cast<CDetailsTrk*>(w);
     if(detailsTrk != nullptr)
     {
         connect(this, &CMainWindow::sigCanvasChange, detailsTrk, &CDetailsTrk::updateData);
@@ -797,7 +801,7 @@ QList<CCanvas*> CMainWindow::getCanvas() const
     const int N = tabWidget->count();
     for(int n = 0; n < N; n++)
     {
-        CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
+        CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
         if(canvas != nullptr)
         {
             result << canvas;
@@ -809,7 +813,7 @@ QList<CCanvas*> CMainWindow::getCanvas() const
 
 void CMainWindow::zoomCanvasTo(const QRectF rect)
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(canvas)
     {
         canvas->zoomTo(rect);
@@ -819,7 +823,7 @@ void CMainWindow::zoomCanvasTo(const QRectF rect)
 void CMainWindow::resetMouse()
 {
     const QList<CCanvas*>& allCanvas = getCanvas();
-    for(CCanvas * canvas : allCanvas)
+    for(CCanvas* canvas : allCanvas)
     {
         canvas->resetMouse();
     }
@@ -827,7 +831,7 @@ void CMainWindow::resetMouse()
 
 qreal CMainWindow::getElevationAt(const QPointF& pos) const
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(canvas)
     {
         return canvas->getElevationAt(pos);
@@ -847,9 +851,9 @@ qreal CMainWindow::getElevationAt(const QPointF& pos) const
 }
 
 
-void CMainWindow::getElevationAt(SGisLine &line) const
+void CMainWindow::getElevationAt(SGisLine& line) const
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(canvas)
     {
         canvas->getElevationAt(line);
@@ -873,9 +877,9 @@ void CMainWindow::getElevationAt(SGisLine &line) const
     }
 }
 
-void CMainWindow::getElevationAt(const QPolygonF &pos, QPolygonF& ele) const
+void CMainWindow::getElevationAt(const QPolygonF& pos, QPolygonF& ele) const
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(canvas)
     {
         canvas->getElevationAt(pos, ele);
@@ -897,7 +901,7 @@ void CMainWindow::getElevationAt(const QPolygonF &pos, QPolygonF& ele) const
 
 qreal CMainWindow::getSlopeAt(const QPointF& pos) const
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(canvas)
     {
         return canvas->getSlopeAt(pos);
@@ -916,9 +920,9 @@ qreal CMainWindow::getSlopeAt(const QPointF& pos) const
     return NOFLOAT;
 }
 
-void CMainWindow::getSlopeAt(const QPolygonF &pos, QPolygonF& slope) const
+void CMainWindow::getSlopeAt(const QPolygonF& pos, QPolygonF& slope) const
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(canvas)
     {
         canvas->getSlopeAt(pos, slope);
@@ -982,7 +986,7 @@ void CMainWindow::slotQuickstart()
 
 void CMainWindow::slotAddCanvas()
 {
-    CCanvas * view = addView(QString());
+    CCanvas* view = addView(QString());
     tabWidget->setCurrentWidget(view);
 
     testForNoView();
@@ -991,7 +995,7 @@ void CMainWindow::slotAddCanvas()
 
 void CMainWindow::slotCloneCanvas()
 {
-    CCanvas * source = getVisibleCanvas();
+    CCanvas* source = getVisibleCanvas();
     if(nullptr == source)
     {
         return;
@@ -1008,7 +1012,7 @@ void CMainWindow::slotCloneCanvas()
 
     slotAddCanvas();
 
-    CCanvas * target = getVisibleCanvas();
+    CCanvas* target = getVisibleCanvas();
     if(nullptr == target)
     {
         return;
@@ -1033,7 +1037,7 @@ void CMainWindow::testForNoView()
 {
     if(tabWidget->count() == 0)
     {
-        QLabel * label = new QLabel(tabWidget);
+        QLabel* label = new QLabel(tabWidget);
         label->setAlignment(Qt::AlignCenter);
         label->setWordWrap(true);
         label->setText(tr("Use <b>Menu->View->Add Map View</b> to open a new view. Or <b>Menu->File->Load Map View</b> to restore a saved one. Or click <a href='NewView'>here</a>."));
@@ -1043,7 +1047,7 @@ void CMainWindow::testForNoView()
         return;
     }
 
-    QLabel * label = tabWidget->findChild<QLabel*>("NoViewInfo");
+    QLabel* label = tabWidget->findChild<QLabel*>("NoViewInfo");
 
     if(label && tabWidget->count() > 1)
     {
@@ -1095,7 +1099,7 @@ void CMainWindow::slotCurrentTabCanvas(int i)
 
     for(int n = 0; n < tabWidget->count(); n++)
     {
-        CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
+        CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
         if(canvas)
         {
             if(n == i)
@@ -1188,7 +1192,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
 
     if(actionShowGrid->isChecked())
     {
-        CCanvas * canvas = getVisibleCanvas();
+        CCanvas* canvas = getVisibleCanvas();
         if(canvas)
         {
             QString str;
@@ -1208,20 +1212,20 @@ void CMainWindow::slotUpdateTabWidgets()
     const int N = tabWidget->count();
     for(int n = 0; n < N; n++)
     {
-        QWidget * w = tabWidget->widget(n);
+        QWidget* w = tabWidget->widget(n);
         if(w == nullptr)
         {
             continue;
         }
 
-        CCanvas * canvas = dynamic_cast<CCanvas*>(w);
+        CCanvas* canvas = dynamic_cast<CCanvas*>(w);
         if(canvas != nullptr)
         {
             canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
             continue;
         }
 
-        CDetailsTrk * trkDetails = dynamic_cast<CDetailsTrk*>(w);
+        CDetailsTrk* trkDetails = dynamic_cast<CDetailsTrk*>(w);
         if(trkDetails != nullptr)
         {
             trkDetails->updateData();
@@ -1239,7 +1243,7 @@ void CMainWindow::slotSetupMapFont()
     if(ok)
     {
         mapFont = f;
-        QWidget * w = tabWidget->currentWidget();
+        QWidget* w = tabWidget->currentWidget();
         if(w)
         {
             w->update();
@@ -1249,7 +1253,7 @@ void CMainWindow::slotSetupMapFont()
 
 void CMainWindow::slotSetupMapBackground()
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(nullptr == canvas)
     {
         return;
@@ -1259,7 +1263,7 @@ void CMainWindow::slotSetupMapBackground()
 
 void CMainWindow::slotSetupGrid()
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(nullptr == canvas)
     {
         return;
@@ -1279,12 +1283,14 @@ void CMainWindow::slotSetupDemPath()
 
 void CMainWindow::slotSetupMapView()
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(nullptr == canvas)
     {
         return;
     }
     canvas->setup();
+
+    slotLinkMapViews(actionLinkMapViews->isChecked());
 }
 
 void CMainWindow::slotSetupTimeZone()
@@ -1324,26 +1330,26 @@ void CMainWindow::slotSetupToolbar()
 
 void CMainWindow::slotImportDatabase()
 {
-    CImportDatabase * widget = new CImportDatabase(this);
+    CImportDatabase* widget = new CImportDatabase(this);
     addWidgetToTab(widget);
 }
 
 void CMainWindow::slotBuildVrt()
 {
-    CMapVrtBuilder * widget = new CMapVrtBuilder(this);
+    CMapVrtBuilder* widget = new CMapVrtBuilder(this);
     addWidgetToTab(widget);
 }
 
 void CMainWindow::slotCreateRoutinoDatabase()
 {
-    CRoutinoDatabaseBuilder * widget = new CRoutinoDatabaseBuilder(this);
+    CRoutinoDatabaseBuilder* widget = new CRoutinoDatabaseBuilder(this);
     addWidgetToTab(widget);
 }
 
 void CMainWindow::slotLoadGISData()
 {
     SETTINGS;
-    QString path   = cfg.value("Paths/lastGisPath",   QDir::homePath()).toString();
+    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
     QString filter = cfg.value("Paths/lastGisFilter", IGisProject::filedialogAllSupported).toString();
 
     QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Load GIS Data..."), path, IGisProject::filedialogLoadFilters, &filter);
@@ -1356,14 +1362,14 @@ void CMainWindow::slotLoadGISData()
     loadGISData(filenames);
 
     path = QFileInfo(filenames.first()).absolutePath();
-    cfg.setValue("Paths/lastGisPath",   path);
+    cfg.setValue("Paths/lastGisPath", path);
     cfg.setValue("Paths/lastGisFilter", filter);
 }
 
 
 void CMainWindow::loadGISData(const QStringList& filenames)
 {
-    for(const QString &filename : filenames)
+    for(const QString& filename : filenames)
     {
         widgetGisWorkspace->loadGisProject(filename);
     }
@@ -1372,7 +1378,7 @@ void CMainWindow::loadGISData(const QStringList& filenames)
 
 void CMainWindow::slotStoreView()
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(nullptr == canvas)
     {
         return;
@@ -1415,7 +1421,7 @@ void CMainWindow::slotLoadView()
 
     slotAddCanvas();
 
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(nullptr == canvas)
     {
         return;
@@ -1441,7 +1447,7 @@ void CMainWindow::slotSetProfileMode(bool /*on*/)
 {
     for(int i = 0; i < tabWidget->count(); i++)
     {
-        CCanvas * view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+        CCanvas* view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
         if(nullptr != view)
         {
             view->showProfileAsWindow();
@@ -1451,7 +1457,7 @@ void CMainWindow::slotSetProfileMode(bool /*on*/)
 
 void CMainWindow::slotPrintMap()
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(nullptr != canvas)
     {
         canvas->setMousePrint();
@@ -1460,7 +1466,7 @@ void CMainWindow::slotPrintMap()
 
 void CMainWindow::slotTakeScreenshot()
 {
-    CCanvas * canvas = getVisibleCanvas();
+    CCanvas* canvas = getVisibleCanvas();
     if(nullptr != canvas)
     {
         CScreenshotDialog dlg(*canvas, this);
@@ -1488,7 +1494,7 @@ void CMainWindow::slotLinkActivated(const QString& link)
         const int N = tabMaps->count();
         for(int n = 0; n < N; n++)
         {
-            CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
+            CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
             if(canvas != nullptr)
             {
                 canvas->buildHelpText();
@@ -1497,7 +1503,7 @@ void CMainWindow::slotLinkActivated(const QString& link)
     }
     else if(link == "GetMaps")
     {
-        CMapList * list = dynamic_cast<CMapList*>(tabMaps->currentWidget());
+        CMapList* list = dynamic_cast<CMapList*>(tabMaps->currentWidget());
         if(list == nullptr)
         {
             return;
@@ -1506,7 +1512,7 @@ void CMainWindow::slotLinkActivated(const QString& link)
     }
     else if(link == "GetDems")
     {
-        CDemList * list = dynamic_cast<CDemList*>(tabDem->currentWidget());
+        CDemList* list = dynamic_cast<CDemList*>(tabDem->currentWidget());
         if(list == nullptr)
         {
             return;
@@ -1563,10 +1569,10 @@ void CMainWindow::slotSetupWptIcons()
 
 void CMainWindow::slotCloseTab()
 {
-    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
     if(canvas == nullptr)
     {
-        QWidget * widget = tabWidget->currentWidget();
+        QWidget* widget = tabWidget->currentWidget();
         if(widget != nullptr)
         {
             widget->deleteLater();
@@ -1593,7 +1599,7 @@ void CMainWindow::slotToggleDocks()
 
 bool CMainWindow::docksVisible() const
 {
-    for (QDockWidget * const & dock : docks)
+    for (QDockWidget* const& dock : docks)
     {
         if (!dock->isHidden())
         {
@@ -1607,15 +1613,15 @@ void CMainWindow::showDocks() const
 {
     if (activeDocks.isEmpty())
     {
-        for (QDockWidget * const & dock : docks)
+        for (QDockWidget* const& dock : docks)
         {
             dock->show();
         }
     }
     else
     {
-        const QList<QDockWidget *> docksToShow(activeDocks);
-        for (QDockWidget * const & dock : docksToShow)
+        const QList<QDockWidget*> docksToShow(activeDocks);
+        for (QDockWidget* const& dock : docksToShow)
         {
             dock->show();
         }
@@ -1625,7 +1631,7 @@ void CMainWindow::showDocks() const
 void CMainWindow::hideDocks()
 {
     activeDocks.clear();
-    for (QDockWidget * const & dock : qAsConst(docks))
+    for (QDockWidget* const& dock : qAsConst(docks))
     {
         if (!dock->isHidden())
         {
@@ -1656,7 +1662,7 @@ void CMainWindow::slotDockVisibilityChanged(bool visible)
     }
     else
     {
-        for (QDockWidget * const & dock : qAsConst(docks))
+        for (QDockWidget* const& dock : qAsConst(docks))
         {
             if (!dock->isHidden())
             {
@@ -1757,7 +1763,7 @@ static void sendDeviceEvent(DWORD unitmask, bool add)
         {
             QString path = QString(i + 'A') + ":/";
             qDebug() << "sendDeviceEvent" << path << add;
-            CEventDevice * event = new CEventDevice(path, add);
+            CEventDevice* event = new CEventDevice(path, add);
             QCoreApplication::postEvent(CDeviceWatcherWindows::self(), event);
             //qDebug() << "postEvent";
         }
@@ -1766,7 +1772,7 @@ static void sendDeviceEvent(DWORD unitmask, bool add)
 }
 
 
-bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result)
+bool CMainWindow::nativeEvent(const QByteArray& eventType, void* message, long* result)
 {
     MSG* msg = (MSG*)message;
     //qDebug() << "nativeEvent" << eventType << msg->message << msg->lParam << msg->wParam;
@@ -1810,7 +1816,7 @@ bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long
 }
 #endif // Q_OS_WIN64
 
-void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
+void CMainWindow::dragEnterEvent(QDragEnterEvent* event)
 {
     if(event->mimeData()->hasUrls())
     {
@@ -1826,12 +1832,12 @@ void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
 }
 
 
-void CMainWindow::dropEvent(QDropEvent *event)
+void CMainWindow::dropEvent(QDropEvent* event)
 {
     const QList<QUrl>& urls = event->mimeData()->urls();
 
     QStringList filenames;
-    for(const QUrl &url : urls)
+    for(const QUrl& url : urls)
     {
         filenames << url.toLocalFile();
     }
@@ -1892,12 +1898,97 @@ void CMainWindow::slotHelp()
     help->setVisible(true);
 }
 
+void CMainWindow::slotMapMoveAndZoom(int idx, const QPointF& focus)
+{
+    if(!actionLinkMapViews->isChecked())
+    {
+        return;
+    }
 
-bool CMainWindow::eventFilter(QObject *obj, QEvent *event)
+    CCanvas* canvasSrc = qobject_cast<CCanvas*>(sender());
+    if(nullptr == canvasSrc)
+    {
+        return;
+    }
+
+    const int N = tabWidget->count();
+    for(int n = 0; n < N; n++)
+    {
+        CCanvas* canvasTar = qobject_cast<CCanvas*>(tabWidget->widget(n));
+        if((nullptr == canvasTar) || (canvasSrc == canvasTar))
+        {
+            continue;
+        }
+
+        canvasTar->zoom(idx);
+        canvasTar->moveTo(focus);
+    }
+}
+
+void CMainWindow::slotLinkMapViews(bool on)
+{
+    if(!on)
+    {
+        return;
+    }
+
+    const int N = tabWidget->count();
+    int n = 0;
+    CCanvas* canvas = nullptr;
+    for(; n < N; n++)
+    {
+        canvas = qobject_cast<CCanvas*>(tabWidget->widget(n));
+        if(nullptr != canvas)
+        {
+            break;
+        }
+    }
+
+    if(nullptr == canvas)
+    {
+        return;
+    }
+
+    const QString& projection = canvas->getProjection();
+    CCanvas::scales_type_e scaletype = canvas->getScalesType();
+
+    for(; n < N; n++)
+    {
+        canvas = qobject_cast<CCanvas*>(tabWidget->widget(n));
+        if(nullptr == canvas)
+        {
+            break;
+        }
+
+        if(canvas->getProjection() != projection || canvas->getScalesType() != scaletype)
+        {
+            const QString& msg = tr(
+                "To link map views all map views must have "
+                "the same projection and scale type. The function "
+                "'Link Map Views' will be switched off, now."
+                );
+            QMessageBox::warning(this, tr("Link Map Views..."), msg, QMessageBox::Ok);
+            actionLinkMapViews->setChecked(false);
+            return;
+        }
+    }
+
+    CCanvas * current = getVisibleCanvas();
+    if(nullptr == current)
+    {
+        canvas->linkMapViewEnabled();
+    }
+    else
+    {
+        current->linkMapViewEnabled();
+    }
+}
+
+bool CMainWindow::eventFilter(QObject* obj, QEvent* event)
 {
     if(event->type() == QEvent::FileOpen)
     {
-        QFileOpenEvent *openEvent = static_cast<QFileOpenEvent *>(event);
+        QFileOpenEvent* openEvent = static_cast<QFileOpenEvent*>(event);
         qDebug() << "load GIS file:" << openEvent->file();
         widgetGisWorkspace->loadGisProject(openEvent->file());
     }

@@ -158,15 +158,6 @@ CMainWindow::CMainWindow()
         restoreState(cfg.value("state").toByteArray());
     }
 
-    if (cfg.contains("displaymode"))
-    {
-        displayMode = static_cast<Qt::WindowStates>(cfg.value("displaymode").toInt());
-        if (displayMode == Qt::WindowFullScreen)
-        {
-            displayMode = Qt::WindowMaximized;
-        }
-    }
-
     if (cfg.contains("dockstate"))
     {
         dockStates = cfg.value("dockstate").toByteArray();
@@ -174,12 +165,12 @@ CMainWindow::CMainWindow()
 
     menuVisible = cfg.value("menuvisible", false).toBool();
 
-    if(windowState() == Qt::WindowFullScreen)
+    if(windowState() & Qt::WindowFullScreen)
     {
+        setWindowState(windowState() | Qt::WindowMaximized);
         displayRegular();
     }
     cfg.endGroup();
-
     // end ---- restore window geometry -----
 
     connect(actionAbout,                 &QAction::triggered,            this,      &CMainWindow::slotAbout);
@@ -520,7 +511,6 @@ CMainWindow::~CMainWindow()
     }
     cfg.setValue("activedocks", activeDockNames);
 
-    cfg.setValue("displaymode", static_cast<int>(displayMode));
     cfg.setValue("dockstate", dockStates);
     cfg.setValue("menuvisible", menuVisible);
     cfg.endGroup();
@@ -1682,14 +1672,12 @@ void CMainWindow::slotFullScreen()
 {
     QMutexLocker lock(&CMainWindow::mutex);
 
-    Qt::WindowStates state = windowState();
-    if(state == Qt::WindowFullScreen)
+    if(windowState() & Qt::WindowFullScreen)
     {
         displayRegular();
     }
     else
     {
-        displayMode = state;
         displayFullscreen();
     }
 }
@@ -1732,13 +1720,13 @@ void CMainWindow::displayRegular()
         menuBar()->setVisible(true);
     }
     actionFullScreen->setIcon(QIcon(":/icons/32x32/FullScreen.png"));
-    setWindowState(displayMode);
+    setWindowState(windowState() ^ Qt::WindowFullScreen);
 }
 
 void CMainWindow::displayFullscreen()
 {
     dockStates = saveState();
-    setWindowState(Qt::WindowFullScreen);
+    setWindowState(windowState() | Qt::WindowFullScreen);
     statusBar()->setVisible(false);
     menuVisible = menuBar()->isVisible();
     // menu is handled dynamically as on some platforms (e.g. ubuntu with unity)

@@ -247,7 +247,6 @@ private:
 
     QList<QDockWidget *> docks;
     QList<QDockWidget *> activeDocks;
-    Qt::WindowStates displayMode = Qt::WindowMaximized;
     QByteArray dockStates;
     bool menuVisible = false;
 

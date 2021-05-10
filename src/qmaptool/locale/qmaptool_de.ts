@@ -84,7 +84,7 @@
         <translation type="vanished">(unbekannt)</translation>
     </message>
     <message>
-        <location filename="../canvas/CDrawContextPixel.cpp" line="74"/>
+        <location filename="../canvas/CDrawContextPixel.cpp" line="84"/>
         <source>Failed to load</source>
         <translation>Datei laden fehlgeschlagen</translation>
     </message>
@@ -92,7 +92,7 @@
 <context>
     <name>CDrawContextProj</name>
     <message>
-        <location filename="../canvas/CDrawContextProj.cpp" line="72"/>
+        <location filename="../canvas/CDrawContextProj.cpp" line="73"/>
         <source>Failed to load</source>
         <translation>Datei laden fehlgeschlagen</translation>
     </message>
@@ -100,40 +100,40 @@
 <context>
     <name>CGdalFile</name>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="53"/>
-        <location filename="../helpers/CGdalFile.cpp" line="81"/>
-        <location filename="../helpers/CGdalFile.cpp" line="111"/>
+        <location filename="../helpers/CGdalFile.cpp" line="54"/>
+        <location filename="../helpers/CGdalFile.cpp" line="82"/>
+        <location filename="../helpers/CGdalFile.cpp" line="112"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="53"/>
-        <location filename="../helpers/CGdalFile.cpp" line="81"/>
+        <location filename="../helpers/CGdalFile.cpp" line="54"/>
+        <location filename="../helpers/CGdalFile.cpp" line="82"/>
         <source>Failed to load file: %1</source>
         <translation>Datei laden fehlgeschlagen: %1</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="111"/>
+        <location filename="../helpers/CGdalFile.cpp" line="112"/>
         <source>File must be 8 bit palette or gray indexed.</source>
         <translation>Die Datei muss eine 8 Bit Farbpalette haben oder einen Graustufenindex.</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="196"/>
+        <location filename="../helpers/CGdalFile.cpp" line="222"/>
         <source>(color table)</source>
         <translation>(Farbtabelle)</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="200"/>
+        <location filename="../helpers/CGdalFile.cpp" line="226"/>
         <source>(RGB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="204"/>
+        <location filename="../helpers/CGdalFile.cpp" line="230"/>
         <source>(RGBA)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="208"/>
+        <location filename="../helpers/CGdalFile.cpp" line="234"/>
         <source>(unknown)</source>
         <translation>(unbekannt)</translation>
     </message>
@@ -369,22 +369,22 @@ Es gibt außerdem die Option, die Referenzpunkte im Automode zu justieren. In di
         <translation>Referenzpunkte laden...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="694"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="692"/>
         <source>Delete all reference points...</source>
         <translation>Alle Referenzpunkte löschen...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="694"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="692"/>
         <source>Are you sure to delete all reference points in the list?</source>
         <translation>Sind Sie sicher, dass Sie alle Referenzpunkte aus der Liste löschen wollen?</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="729"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="727"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="729"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="727"/>
         <source>Delete all selected reference points?</source>
         <translation>Alle ausgewählten Referenzpunkte löschen?</translation>
     </message>
@@ -398,29 +398,52 @@ Es gibt außerdem die Option, die Referenzpunkte im Automode zu justieren. In di
     </message>
 </context>
 <context>
-    <name>CProjWizard</name>
+    <name>CProj</name>
     <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="62"/>
-        <source>north</source>
-        <translation>Nord</translation>
-    </message>
-    <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="63"/>
-        <source>south</source>
-        <translation>Süd</translation>
-    </message>
-    <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="227"/>
-        <source>Error...</source>
-        <translation>Fehler...</translation>
-    </message>
-    <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="227"/>
+        <location filename="../../common/gis/proj_x.cpp" line="184"/>
         <source>The value
 &apos;%1&apos;
 is not a valid coordinate system definition:
 %2</source>
-        <translation>Die Eingabe
+        <translation type="unfinished">Die Eingabe
+&apos;%1&apos;
+ist keine gültige Koordinatensystemdefinition:
+%2</translation>
+    </message>
+    <message>
+        <location filename="../../common/gis/proj_x.cpp" line="196"/>
+        <source>Lat/Lon projection is not allowed in this case.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CProjWizard</name>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="55"/>
+        <source> (Spheroid: %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="70"/>
+        <source>north</source>
+        <translation>Nord</translation>
+    </message>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="71"/>
+        <source>south</source>
+        <translation>Süd</translation>
+    </message>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="215"/>
+        <source>Error...</source>
+        <translation>Fehler...</translation>
+    </message>
+    <message>
+        <source>The value
+&apos;%1&apos;
+is not a valid coordinate system definition:
+%2</source>
+        <translation type="vanished">Die Eingabe
 &apos;%1&apos;
 ist keine gültige Koordinatensystemdefinition:
 %2</translation>
@@ -579,12 +602,12 @@ Durch den Benutzer abgebrochen.</translation>
 <context>
     <name>CToolRefMap</name>
     <message>
-        <location filename="../tool/CToolRefMap.cpp" line="34"/>
+        <location filename="../tool/CToolRefMap.cpp" line="33"/>
         <source>Reference Map</source>
         <translation>Karte referenzieren</translation>
     </message>
     <message>
-        <location filename="../tool/CToolRefMap.cpp" line="36"/>
+        <location filename="../tool/CToolRefMap.cpp" line="35"/>
         <source>A scan of a paper map can be converted to a referenced raster map if you place at least three reference points on the map. The more points the better the result. If your map has a grid you can place points on that grid with the grid tool.</source>
         <translation>Eine gescannte Papierkarte kann in eine referenzierte Rasterkarte umgewandelt werden, indem Sie mindestens 3 Referenzpunkte auf der Karte angeben. Je mehr Punkte Sie setzen, desto besser. Wenn ihre Karte eine Gitter besitzt, können Sie Punkte auf dem Gitter mit dem Gitterwerkzeug setzen.</translation>
     </message>
@@ -1097,8 +1120,12 @@ oder
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="316"/>
+        <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;EPSG:...&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;+init=epsg:...&quot;.</source>
-        <translation>Geben Sie einen gültigen Projektionstext ein. Gültige Formen sind &quot;+proj=...&quot; oder &quot;+init=...&quot;.</translation>
+        <translation type="vanished">Geben Sie einen gültigen Projektionstext ein. Gültige Formen sind &quot;+proj=...&quot; oder &quot;+init=...&quot;.</translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="323"/>

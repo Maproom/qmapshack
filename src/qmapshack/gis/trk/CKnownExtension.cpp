@@ -83,6 +83,10 @@ void CKnownExtension::initGarminTPXv1(const IUnit &units, const QString &ns)
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":cad",
                            { tr("Cadence", "extShortName"), tr("Cadence", "extLongName"), 4, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
                              getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":cad")});
+
+    knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":power",
+                           { tr("Power", "extShortName"), tr("Power", "extLongName"), 5, 0., 1500., 1., "Watt", "://icons/32x32/CSrcPower.png", true, false,
+                             getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":power")});
 }
 
 void CKnownExtension::initMioTPX(const IUnit &units)

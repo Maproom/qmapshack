@@ -70,6 +70,10 @@ static void readKnownExtensions(T &exts, const CFitMessage &mesg)
     {
         exts["gpxtpx:TrackPointExtension|gpxtpx:cad"] = mesg.getFieldValue(eRecordCadence);
     }
+    if(mesg.isFieldValueValid(eRecordPower))
+    {
+        exts["gpxtpx:TrackPointExtension|gpxtpx:power"] = mesg.getFieldValue(eRecordPower);
+    }
     if(mesg.isFieldValueValid(eRecordSpeed))
     {
         const QVariant &speed = mesg.getFieldValue(eRecordSpeed);

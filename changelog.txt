@@ -20,6 +20,7 @@ V1.XX.X
 [QMS-375] On-screen profile window has no close button
 [QMS-378] Add option to link map views
 [QMS-380] Toggle fullscreen does not work
+[QMS-382] QMapTool: Allow customized GDAL parameters
 
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release

@@ -57,6 +57,7 @@ CToolRefMap::CToolRefMap(QWidget *parent)
     itemList->loadSettings(cfg);
     checkCreateVrt->setChecked(cfg.value("createVrt", false).toBool());
     groupOverviews->loadSettings(cfg);
+    groupGDALParameters->loadSettings(cfg);
     checkAllFiles->setChecked(cfg.value("allFiles", false).toBool());
     lineSuffix->setText(cfg.value("suffix", "_ref").toString());
     cfg.endGroup();
@@ -74,6 +75,7 @@ CToolRefMap::~CToolRefMap()
     itemList->saveSettings(cfg);
     cfg.setValue("createVrt", checkCreateVrt->isChecked());
     groupOverviews->saveSettings(cfg);
+    groupGDALParameters->saveSettings(cfg);
     cfg.setValue("allFiles", checkAllFiles->isChecked());
     cfg.setValue("suffix", lineSuffix->text());
     cfg.endGroup();
@@ -168,10 +170,9 @@ void CToolRefMap::buildCmd(QList<CShellCmd>& cmds, const IItem *iitem)
 
     // ---- command 2 ----------------------
     IDrawContext * context = item->getDrawContext();
-    args.clear();
+
     // --- set re-sampling method ---
-    args << "-r";
-    args << (context->is32BitRgb() ? "cubic" : "near");
+    args = groupGDALParameters->getArgsResampling({"-r", context->is32BitRgb() ? "cubic" : "near"});
     // --- overwrite last output file ---
     args << "-overwrite";
     // --- use all CPU cores when possible ---
@@ -201,8 +202,11 @@ void CToolRefMap::buildCmd(QList<CShellCmd>& cmds, const IItem *iitem)
     QFileInfo fi(inFilename);
     QString outFilename = fi.absoluteDir().absoluteFilePath(fi.completeBaseName() + lineSuffix->text() + "." + fi.suffix());
 
-    args.clear();
-    args << "-co" << "tiled=yes" << "-co" << "compress=deflate";
+    args = groupGDALParameters->getArgs();
+    if(args.isEmpty())
+    {
+        args << "-co" << "tiled=yes" << "-co" << "compress=deflate";
+    }
     args << tmpname2 << outFilename;
     cmds << CShellCmd(IAppSetup::self().getGdaltranslate(), args);
 

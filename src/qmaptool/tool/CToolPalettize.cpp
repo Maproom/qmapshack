@@ -23,11 +23,13 @@
 
 #include <QtWidgets>
 
-CToolPalettize::CToolPalettize(QWidget *parent)
+CToolPalettize::CToolPalettize(QWidget* parent)
     : IToolGui(parent)
 {
     setupUi(this);
     setObjectName(tr("Add Color Palette"));
+
+    groupGDALParameters->enableParts(CToolGDALGroupBox::ePartCompress | CToolGDALGroupBox::ePartTiled);
 
     lineFilename->addAction(actionFilename, QLineEdit::TrailingPosition);
 
@@ -58,6 +60,9 @@ CToolPalettize::CToolPalettize(QWidget *parent)
     connect(radioSingle, &QRadioButton::toggled, this, &CToolPalettize::slotSomethingChanged);
     connect(radioCombined, &QRadioButton::toggled, lineFilename, &QLineEdit::setEnabled);
     connect(radioCombined, &QRadioButton::toggled, this, &CToolPalettize::slotSomethingChanged);
+    connect(radioCombined, &QRadioButton::toggled, groupGDALParameters, &CToolGDALGroupBox::setEnabled);
+
+    groupGDALParameters->setEnabled(radioCombined->isChecked());
 
     connect(actionFilename, &QAction::triggered, this, &CToolPalettize::slotSelectFilename);
     connect(lineSuffix, &QLineEdit::textChanged, this, &CToolPalettize::slotSomethingChanged);
@@ -74,6 +79,7 @@ CToolPalettize::CToolPalettize(QWidget *parent)
     itemList->loadSettings(cfg);
     checkCreateVrt->setChecked(cfg.value("createVrt", false).toBool());
     groupOverviews->loadSettings(cfg);
+    groupGDALParameters->loadSettings(cfg);
     radioSingle->setChecked(cfg.value("singleFiles", true).toBool());
     radioCombined->setChecked(cfg.value("combinedFile", false).toBool());
     lineFilename->setText(cfg.value("filename", "").toString());
@@ -95,6 +101,7 @@ CToolPalettize::~CToolPalettize()
     itemList->saveSettings(cfg);
     cfg.setValue("createVrt", checkCreateVrt->isChecked());
     groupOverviews->saveSettings(cfg);
+    groupGDALParameters->saveSettings(cfg);
     cfg.setValue("singleFiles", radioSingle->isChecked());
     cfg.setValue("combinedFile", radioCombined->isChecked());
     cfg.setValue("filename", lineFilename->text());
@@ -135,9 +142,9 @@ void CToolPalettize::setupChanged()
     frame->setVisible(hasGdaladdo && hasQmtrgb2pct && hasGdaltranslate);
 }
 
-void CToolPalettize::slotAddItem(const QString& filename, QListWidget * list)
+void CToolPalettize::slotAddItem(const QString& filename, QListWidget* list)
 {
-    CItemFile * item = new CItemFile(filename, list);
+    CItemFile* item = new CItemFile(filename, list);
     connect(item, &CItemFile::sigChanged, itemList, &CItemListWidget::sigChanged);
 }
 
@@ -162,7 +169,7 @@ void CToolPalettize::slotSomethingChanged()
     pushStart->setEnabled(ok);
 }
 
-void CToolPalettize::buildCmd(QList<CShellCmd>& cmds, const IItem * iitem)
+void CToolPalettize::buildCmd(QList<CShellCmd>& cmds, const IItem* iitem)
 {
     inputFileList1->open();
     QTextStream stream(inputFileList1);
@@ -197,7 +204,7 @@ void CToolPalettize::buildCmdFinal(QList<CShellCmd>& cmds)
         const int N = itemList->count();
         for(int n = 0; n < N; n++)
         {
-            const IItem * item = dynamic_cast<const IItem*>(itemList->item(n));
+            const IItem* item = dynamic_cast<const IItem*>(itemList->item(n));
             if(nullptr == item)
             {
                 continue;
@@ -231,8 +238,9 @@ void CToolPalettize::buildCmdFinal(QList<CShellCmd>& cmds)
         }
 
         args.clear();
-        args << "-co" << "TILED=YES";
-        args << "-co" << "COMPRESS=LZW";
+        args.append(groupGDALParameters->getArgsTiled({"-co", "TILED=YES"}));
+        args.append(groupGDALParameters->getArgsCompression({"-co", "COMPRESS=LZW"}));
+
         args << vrtFilename;
         args << outFilename;
         cmds << CShellCmd(IAppSetup::self().getGdaltranslate(), args);
@@ -258,7 +266,7 @@ void CToolPalettize::buildCmdFinal(QList<CShellCmd>& cmds)
         const int N = itemList->count();
         for(int n = 0; n < N; n++)
         {
-            const IItem * item = dynamic_cast<const IItem*>(itemList->item(n));
+            const IItem* item = dynamic_cast<const IItem*>(itemList->item(n));
             if(nullptr == item)
             {
                 continue;

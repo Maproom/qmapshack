@@ -153,6 +153,13 @@
        </widget>
       </item>
       <item>
+       <widget class="CToolGDALGroupBox" name="groupGDALParameters">
+        <property name="title">
+         <string>GDAL Parameters</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -266,6 +273,12 @@
    <class>CToolOverviewGroupBox</class>
    <extends>QGroupBox</extends>
    <header>tool/CToolOverviewGroupBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CToolGDALGroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>tool/CToolGDALGroupBox.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -23,7 +23,7 @@
 #include "setup/IAppSetup.h"
 #include "tool/CToolCutMap.h"
 
-CToolCutMap::CToolCutMap(QWidget *parent)
+CToolCutMap::CToolCutMap(QWidget* parent)
     : IToolGui(parent)
 {
     setupUi(this);
@@ -53,6 +53,7 @@ CToolCutMap::CToolCutMap(QWidget *parent)
     cfg.beginGroup("ToolCutMap");
     itemList->loadSettings(cfg);
     groupOverviews->loadSettings(cfg);
+    groupGDALParameters->loadSettings(cfg);
     checkAllFiles->setChecked(cfg.value("allFiles", false).toBool());
     lineSuffix->setText(cfg.value("suffix", "_cut").toString());
     cfg.endGroup();
@@ -67,6 +68,7 @@ CToolCutMap::~CToolCutMap()
     cfg.remove("");
     itemList->saveSettings(cfg);
     groupOverviews->saveSettings(cfg);
+    groupGDALParameters->saveSettings(cfg);
     cfg.setValue("allFiles", checkAllFiles->isChecked());
     cfg.setValue("suffix", lineSuffix->text());
     cfg.endGroup();
@@ -83,9 +85,9 @@ void CToolCutMap::setupChanged()
     frame->setVisible(hasGdalwarp && hasGdaladdo);
 }
 
-void CToolCutMap::slotAddItem(const QString& filename, QListWidget * list)
+void CToolCutMap::slotAddItem(const QString& filename, QListWidget* list)
 {
-    CItemCutMap * item = new CItemCutMap(filename, stackedWidget, list);
+    CItemCutMap* item = new CItemCutMap(filename, stackedWidget, list);
     connect(item, &CItemFile::sigChanged, itemList, &CItemListWidget::sigChanged);
 }
 
@@ -97,7 +99,7 @@ void CToolCutMap::slotMapSelectionChanged()
 
 void CToolCutMap::slotSomethingChanged()
 {
-    IItem * item = itemList->currentItem();
+    IItem* item = itemList->currentItem();
     if(item != nullptr)
     {
         bool ok = item->isOk();
@@ -114,16 +116,16 @@ void CToolCutMap::slotSomethingChanged()
 }
 
 
-void CToolCutMap::buildCmd(QList<CShellCmd>& cmds, const IItem *iitem)
+void CToolCutMap::buildCmd(QList<CShellCmd>& cmds, const IItem* iitem)
 {
-    const CItemCutMap * item = dynamic_cast<const CItemCutMap*>(iitem);
+    const CItemCutMap* item = dynamic_cast<const CItemCutMap*>(iitem);
     if(nullptr == item)
     {
         return;
     }
 
     // ---- command 1 ----------------------
-    const IDrawContext * context = item->getDrawContext();
+    const IDrawContext* context = item->getDrawContext();
     QStringList args;
     // --- overwrite last output file ---
     args << "-overwrite";
@@ -160,6 +162,8 @@ void CToolCutMap::buildCmd(QList<CShellCmd>& cmds, const IItem *iitem)
         // --- add alpha channel to files with just RGB ---
         args << "-dstalpha";
     }
+
+    args.append(groupGDALParameters->getArgs());
 
     QString wktFilename = createTempFile("csv");
     item->saveShape(wktFilename);

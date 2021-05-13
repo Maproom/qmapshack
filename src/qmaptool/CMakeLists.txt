@@ -61,7 +61,8 @@ set( SRCS
     tool/CToolAddOverview.cpp
     tool/CToolBox.cpp
     tool/CToolCutMap.cpp
-    tool/CToolExport.cpp    
+    tool/CToolExport.cpp
+    tool/CToolGDALGroupBox.cpp
     tool/CToolGrid.cpp
     tool/CToolOverviewGroupBox.cpp
     tool/CToolPalettize.cpp
@@ -130,7 +131,8 @@ set( HDRS
     tool/CToolAddOverview.h
     tool/CToolBox.h
     tool/CToolCutMap.h
-    tool/CToolExport.h    
+    tool/CToolExport.h
+    tool/CToolGDALGroupBox.h
     tool/CToolGrid.h
     tool/CToolOverviewGroupBox.h
     tool/CToolPalettize.h
@@ -171,7 +173,8 @@ set( UIS
     tool/export/IToolExportJnx.ui
     tool/IToolAddOverview.ui
     tool/IToolCutMap.ui
-    tool/IToolExport.ui    
+    tool/IToolExport.ui
+    tool/IToolGDALGroupBox.ui
     tool/IToolGrid.ui
     tool/IToolOverviewGroupBox.ui
     tool/IToolPalettize.ui

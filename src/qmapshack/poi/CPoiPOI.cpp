@@ -544,4 +544,6 @@ void CPoiPOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
                                   key, categoryNames[categoryID], garminIcon);
         mutex.unlock();
     }
+    // Close database, as this method is called from mutiple threads.
+    QSqlDatabase::removeDatabase(filename);
 }

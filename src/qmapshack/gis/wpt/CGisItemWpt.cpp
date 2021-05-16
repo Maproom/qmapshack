@@ -298,7 +298,6 @@ void CGisItemWpt::newWpt(const poi_t &poi, IGisProject *project, bool openEditWI
     const QString& _name = poi.name.isEmpty() ? getLastName("") : poi.name;
 
     CGisItemWpt * wpt = new CGisItemWpt(poi.pos * RAD_TO_DEG, _name, _icon, project);
-    wpt->setReadOnlyMode(true);
     if(!poi.desc.isEmpty())
     {
         wpt->setDescription(poi.desc);
@@ -316,6 +315,7 @@ void CGisItemWpt::newWpt(const poi_t &poi, IGisProject *project, bool openEditWI
         wpt->editInitial();
     }
 
+    wpt->setReadOnlyMode(true);
     cfg.setValue("Waypoint/lastName", wpt->getName());
     cfg.setValue("Waypoint/lastIcon", wpt->getIconName());
 }

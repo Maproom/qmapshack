@@ -26,6 +26,8 @@
 #include "mouse/CScrOptSelect.h"
 #include <QtWidgets>
 
+QMutex CMouseSelect::mutexPoisFound(QMutex::NonRecursive);
+
 CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     : IMouseSelect(gis, canvas, mouse)
 {
@@ -167,6 +169,10 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         return;
     }
 
+    if(!mutexPoisFound.tryLock())
+    {
+        return;
+    }
     QList<IGisItem*> items;
     findItems(items);
 
@@ -175,7 +181,7 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         item->drawHighlight(p);
     }
 
-    for(QPointF pos : posPoiHighlight)
+    for(QPointF pos : qAsConst(posPoiHighlight))
     {
         if(pos != NOPOINTF)
         {
@@ -187,6 +193,7 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     }
 
     IMouseSelect::draw(p, needsRedraw, rect);
+    mutexPoisFound.unlock();
 }
 
 void CMouseSelect::slotUpdate()
@@ -201,6 +208,7 @@ void CMouseSelect::slotCopy() const
     IGisProject* project = CGisWorkspace::self().copyItemsByKey(itemKeys);
     if(project != nullptr)
     {
+        QMutexLocker lock(&mutexPoisFound);
         CGisWorkspace::self().addPoisAsWpt(poisFound, project);
     }
     canvas->resetMouse();

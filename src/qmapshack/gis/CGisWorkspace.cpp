@@ -948,7 +948,7 @@ void CGisWorkspace::addPoiAsWpt(const poi_t &poi, IGisProject *project) const
     addPoiAsWpt(poi, tmp, project);
 }
 
-void CGisWorkspace::addPoiAsWpt(const poi_t &poi, tristate_e& openEditWindow, IGisProject *project) const
+void CGisWorkspace::addPoiAsWpt(const poi_t& poi, tristate_e& openEditWindow, IGisProject *project) const
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -968,6 +968,7 @@ void CGisWorkspace::addPoiAsWpt(const poi_t &poi, tristate_e& openEditWindow, IG
                                     "Do you want to choose an icon for each new waypoint for which no icon could be found?\n"
                                     "If you choose 'No' the respective last used waypoint icon is applied."),
                                  QMessageBox::Yes | QMessageBox::No).exec();
+
         if(answer == QMessageBox::Yes)
         {
             openEditWindow = eTristateTrue;

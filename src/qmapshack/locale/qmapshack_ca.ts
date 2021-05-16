@@ -182,12 +182,12 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="1138"/>
         <source>Map Projection...</source>
-        <translation type="unfinished"></translation>
+        <translation>Projecció Mapa...</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="1139"/>
         <source>Failed to setup map projection. Please configure a valid projection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en la configuració de la projecció mapa. Si us plau, configureu una projecció vàlida.</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="278"/>
@@ -454,7 +454,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="45"/>
         <source>Failed to load file: %1</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="53"/>
@@ -509,7 +509,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="322"/>
         <source>No images found</source>
-        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
+        <translation>  No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -1115,7 +1115,7 @@ L&apos;únic paràmetre d&apos;entrada és la longitud del bucle mínim: així s
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="59"/>
         <source>Hide knots in the track:
 
-During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That&apos;s why you might want to remove them.
+During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That's why you might want to remove them.
 
 Typically a knot fulfills two conditions:
 - A series of points very close to each other.
@@ -1196,7 +1196,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
@@ -1291,7 +1291,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="177"/>
         <source>no service configured - please click setup-icon in search-field</source>
-        <translation>No hi ha cap servei configurat - is us plau, feu clic a la icona de configuració en el camp de cerca</translation>
+        <translation>No hi ha cap servei configurat - si us plau, feu clic a la icona de configuració en el camp de cerca</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="267"/>
@@ -2691,7 +2691,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/CGisListWks.cpp" line="123"/>
         <source>Autom. Sync. w. Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Autom. Sinc. amb Dispositiu</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="127"/>
@@ -3053,12 +3053,12 @@ línia %2, columna %3:
     <message>
         <location filename="../grid/CGrid.cpp" line="101"/>
         <source>Grid Projection...</source>
-        <translation type="unfinished"></translation>
+        <translation>Projecció Quadrícula...</translation>
     </message>
     <message>
         <location filename="../grid/CGrid.cpp" line="102"/>
         <source>Failed to setup grid projection. Please configure a valid projection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en la configuració de la projecció quadrícula. Si us plau, configureu una projecció vàlida.</translation>
     </message>
 </context>
 <context>
@@ -3548,7 +3548,7 @@ línia %2, columna %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1201"/>
         <source>[Grid: %1]</source>
-        <translation>[Graella: %1]</translation>
+        <translation>[Quadrícula: %1]</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1355"/>
@@ -3589,21 +3589,17 @@ línia %2, columna %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1880"/>
         <source>QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.</source>
-        <translation type="unfinished"></translation>
+        <translation>QMapShack ha detectat una biblioteca Proj mal instal·lada. Si us plau, per solucionar-ho poseu-vos en contacte amb el gestor de paquets de la vostra distribució.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1965"/>
         <source>To link map views all map views must have the same projection and scale type. The function &apos;Link Map Views&apos; will be switched off, now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per a enllaçar vistes de mapes, tots els mapes han de tenir el mateix tipus de projecció i la mateixa escala. La funció &apos;Enllaç a la Vista Mapa&apos; ara es pot desactivar.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1970"/>
         <source>Link Map Views...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
-        <translation type="vanished">QMapShack ha detectat que la llibreria Proj4 no està instal·lada de forma correcta. Manquen les taules de conversió de les projeccions EPSG, emmagatzemades de normal a /usr/share/proj. Per a solucionar-ho contacteu el mantenidor del paquet de la distribució.</translation>
+        <translation>Enllaç a la Vista Mapa...</translation>
     </message>
 </context>
 <context>
@@ -4593,7 +4589,7 @@ Estructura desconeguda.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="462"/>
         <source>Copy position (Grid)</source>
-        <translation>Còpia la posició (Graella)</translation>
+        <translation>Còpia la posició (Quadrícula)</translation>
     </message>
 </context>
 <context>
@@ -4829,18 +4825,18 @@ y: %4 m/px</translation>
     <message>
         <location filename="../../common/gis/proj_x.cpp" line="184"/>
         <source>The value
-&apos;%1&apos;
+'%1'
 is not a valid coordinate system definition:
 %2</source>
-        <translation type="unfinished">El valor
+        <translation>El valor
 &apos;%1&apos;
-no és una coordenada vàlida en la configuració activa:
+no és una definició de coordenada vàlida en el sistema:
 %2</translation>
     </message>
     <message>
         <location filename="../../common/gis/proj_x.cpp" line="196"/>
         <source>Lat/Lon projection is not allowed in this case.</source>
-        <translation type="unfinished">En aquest cas no és permesa la projecció Lat/Lon.</translation>
+        <translation>En aquest cas no es permet la projecció Lat/Lon.</translation>
     </message>
 </context>
 <context>
@@ -4848,7 +4844,7 @@ no és una coordenada vàlida en la configuració activa:
     <message>
         <location filename="../grid/CProjWizard.cpp" line="55"/>
         <source> (Spheroid: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Esferoide: %1)</translation>
     </message>
     <message>
         <location filename="../grid/CProjWizard.cpp" line="70"/>
@@ -4864,20 +4860,6 @@ no és una coordenada vàlida en la configuració activa:
         <location filename="../grid/CProjWizard.cpp" line="215"/>
         <source>Error...</source>
         <translation>Error...</translation>
-    </message>
-    <message>
-        <source>The value
-&apos;%1&apos;
-is not a valid coordinate system definition:
-%2</source>
-        <translation type="vanished">El valor
-&apos;%1&apos;
-no és una coordenada vàlida en la configuració activa:
-%2</translation>
-    </message>
-    <message>
-        <source>Lat/Lon projection is not allowed in this case.</source>
-        <translation type="vanished">En aquest cas no és permesa la projecció Lat/Lon.</translation>
     </message>
 </context>
 <context>
@@ -5823,12 +5805,12 @@ no és una coordenada vàlida en la configuració activa:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="92"/>
         <source>Czech</source>
-        <translation type="unfinished">Txec</translation>
+        <translation>Txec</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="93"/>
         <source>Spanish</source>
-        <translation type="unfinished">Espanyol</translation>
+        <translation>Espanyol</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="128"/>
@@ -5948,7 +5930,7 @@ no és una coordenada vàlida en la configuració activa:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="308"/>
         <source>%1
-Error in &apos;%2&apos;
+Error in '%2'
 This needs to be fixed
 The associated database &apos;%3&apos; is ignored</source>
         <translation>%1
@@ -10375,7 +10357,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="150"/>
-        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
+        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable 'Free Webservices' in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;per a utilitzar geonames creeu, si us plau, un &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;nom d&apos;usuari&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;un cop fet activeu &apos;Free Webservices&apos; en el vostre &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Compte&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;introduir aquí el vostre nom d&apos;usuari Geonames:&lt;/p&gt;
 </translation>
@@ -10859,7 +10841,7 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../grid/IGridSetup.ui" line="14"/>
         <source>Setup Grid...</source>
-        <translation>Configurar Graella...</translation>
+        <translation>Configurar Quadrícula...</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="22"/>
@@ -10892,12 +10874,12 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../grid/IGridSetup.ui" line="130"/>
         <source>Grid color</source>
-        <translation>Color de la Graella</translation>
+        <translation>Color de la quadrícula</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="143"/>
         <source>setup grid color</source>
-        <translation>configurar el color de la graella</translation>
+        <translation>configurar el color de la quadrícula</translation>
     </message>
 </context>
 <context>
@@ -11141,12 +11123,12 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="340"/>
         <source>Show Grid</source>
-        <translation>Mostra la Graella</translation>
+        <translation>Mostra la Quadrícula</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="355"/>
         <source>Setup Grid</source>
-        <translation>Configurar Graella</translation>
+        <translation>Configurar Quadrícula</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="373"/>
@@ -11407,12 +11389,12 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="1025"/>
         <source>Link Map Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Enllaç a la Vista Mapa</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1028"/>
         <source>All map views move and zoom to the same point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Totes les vistes de mapa es mouen i fan zoom al mateix punt.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="685"/>
@@ -12803,7 +12785,7 @@ o
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="133"/>
-        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it&apos;s recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can&apos;t route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
+        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href='http://download.geofabrik.de/'&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it's recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can't route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Select one or multiple source *.pbf files.&lt;/li&gt;
@@ -13880,7 +13862,11 @@ d&apos;un track gravat amb un GPS. Utilitzar l&apos;eina interval. </translation
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
         <source>Add a description to the selected track point. The track point will be marked with an auto-numbered bullet. A table with all descriptions will be shown in the track details dialog and for highlighted tracks in the map view.</source>
-        <translation>Afegir una descripció al punt del track seleccionat. Al punt del track s&apos;hi incorporarà un globus auto numerat. A la pantalla de detalls del track i a tots els tracks ressaltats en la vista de mapa es mostrarà una taula amb totes les descripcions.</translation>
+        <translation>Afegir una descripció al punt del track seleccionat.
+Al punt del track s&apos;hi incorporarà un globus auto numerat.
+A la pantalla de detalls del track i a tots els tracks ressaltats 
+en la vista de mapa es mostrarà una taula amb 
+totes les descripcions.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="236"/>
@@ -14914,7 +14900,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>

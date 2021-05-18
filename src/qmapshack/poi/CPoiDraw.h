@@ -27,13 +27,13 @@ class CPoiItem;
 class CPoiDraw : public IDrawContext
 {
 public:
-    CPoiDraw(CCanvas * canvas);
+    CPoiDraw(CCanvas* canvas);
     virtual ~CPoiDraw();
 
     void saveConfig(QSettings& cfg);
     void loadConfig(QSettings& cfg);
 
-    void loadConfigForPoiItem(CPoiItem * item);
+    void loadConfigForPoiItem(CPoiItem* item);
 
     bool setProjection(const QString& proj) override;
 
@@ -43,17 +43,17 @@ public:
     }
 
     static void setupPoiPath();
-    static void setupPoiPath(const QString &path);
-    static void setupPoiPath(const QStringList &paths);
-    static void savePoiPath(QSettings &cfg);
-    static void loadPoiPath(QSettings &cfg);
+    static void setupPoiPath(const QString& path);
+    static void setupPoiPath(const QStringList& paths);
+    static void savePoiPath(QSettings& cfg);
+    static void loadPoiPath(QSettings& cfg);
     static const QStringList& getSupportedFormats()
     {
         return supportedFormats;
     }
 
-    void findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF> &posPoiHighlight) const;
-    void findPoisIn(const QRectF &degRect, QSet<poi_t>& poiItems, QList<QPointF> &posPoiHighlight) const;
+    void findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const;
+    void findPoisIn(const QRectF& degRect, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const;
     bool getToolTip(const QPoint& px, QString& str);
 protected:
     void drawt(buffer_t& currentBuffer) override;
@@ -68,15 +68,15 @@ private:
     /**
        @brief Save list of active maps to configuration file
      */
-    void saveActivePoisList(QStringList &keys, QSettings &cfg);
-    void saveActivePoisList(QStringList &keys);
+    void saveActivePoisList(QStringList& keys, QSettings& cfg);
+    void saveActivePoisList(QStringList& keys);
     /**
        @brief Restore list of active maps from configuration file
      */
-    void restoreActivePoisList(const QStringList &keys);
-    void restoreActivePoisList(const QStringList& keys, QSettings &cfg);
+    void restoreActivePoisList(const QStringList& keys);
+    void restoreActivePoisList(const QStringList& keys, QSettings& cfg);
 
-    CPoiList * poiList;
+    CPoiList* poiList;
 
     /// the group label used in QSettings
     QString cfgGroup;

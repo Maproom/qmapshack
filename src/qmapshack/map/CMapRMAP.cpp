@@ -25,7 +25,7 @@
 #include <QtGui>
 #include <QtWidgets>
 
-CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
+CMapRMAP::CMapRMAP(const QString& filename, CMapDraw* parent)
     : IMap(eFeatVisibility, parent)
     , filename(filename)
 {
@@ -117,7 +117,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     QString datum;
     const QStringList& lines = QString(charbuf).split("\r\n");
 
-    for(const QString &line : lines)
+    for(const QString& line : lines)
     {
 //        qDebug() << line;
         if(line.startsWith("Version="))
@@ -254,17 +254,17 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
 //        qDebug() << c2.x() << c2.ry();
 //        qDebug() << c3.x() << c3.ry();
 
-        xref1  =  NOFLOAT;
-        yref1  = -NOFLOAT;
-        xref2  = -NOFLOAT;
-        yref2  =  NOFLOAT;
+        xref1 = NOFLOAT;
+        yref1 = -NOFLOAT;
+        xref2 = -NOFLOAT;
+        yref2 = NOFLOAT;
     }
     else
     {
-        xref1  =  180 * DEG_TO_RAD;
-        yref1  =  -90 * DEG_TO_RAD;
-        xref2  = -180 * DEG_TO_RAD;
-        yref2  =   90 * DEG_TO_RAD;
+        xref1 = 180 * DEG_TO_RAD;
+        yref1 = -90 * DEG_TO_RAD;
+        xref2 = -180 * DEG_TO_RAD;
+        yref2 = 90 * DEG_TO_RAD;
     }
 
 
@@ -285,14 +285,14 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     scale.rx() = (xref2 - xref1) / xsize_px;
     scale.ry() = (yref2 - yref1) / ysize_px;
 
-    qreal widthL0  = levels[0].width;
+    qreal widthL0 = levels[0].width;
     qreal heightL0 = levels[0].height;
 
     for(int i = 0; i < levels.size(); i++)
     {
         level_t& level = levels[i];
 
-        level.xscale = scale.x() * widthL0  / level.width;
+        level.xscale = scale.x() * widthL0 / level.width;
         level.yscale = scale.y() * heightL0 / level.height;
 
         //qDebug() << i << level.xscale << level.yscale;
@@ -312,9 +312,9 @@ bool CMapRMAP::setProjection(const QString& projection, const QString& datum)
     QString projstr;
     if(projection.startsWith("0,UTM"))
     {
-        QStringList vals    = projection.split(",");
-        int zone           = vals[2].toInt();
-        bool isSouth        = vals[3] != "N";
+        QStringList vals = projection.split(",");
+        int zone = vals[2].toInt();
+        bool isSouth = vals[3] != "N";
 
         projstr += QString("+proj=utm +zone=%1 %2").arg(zone).arg(isSouth ? "+south" : "");
     }
@@ -339,7 +339,7 @@ bool CMapRMAP::setProjection(const QString& projection, const QString& datum)
     {
         projstr += " +datum=WGS84 +units=m +no_defs";
     }
-    else if(datum  == "Potsdam Rauenberg DHDN")
+    else if(datum == "Potsdam Rauenberg DHDN")
     {
         projstr += " +ellps=bessel +towgs84=606,23,413,0,0,0,0 +units=m +no_defs";
     }
@@ -403,7 +403,7 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
         return;
     }
 
-    level_t& level      = findBestLevel(bufferScale);
+    level_t& level = findBestLevel(bufferScale);
 
     // convert top left and bottom right point of buffer to local coord. system
     QPointF p1 = buf.ref1;
@@ -415,8 +415,8 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
     // find indices into tile buffer
     int idxx1 = qFloor((p1.x() - xref1) / (level.xscale * tileSizeX));
     int idxy1 = qFloor((p1.y() - yref1) / (level.yscale * tileSizeY));
-    int idxx2 =  qCeil((p2.x() - xref1) / (level.xscale * tileSizeX));
-    int idxy2 =  qCeil((p2.y() - yref1) / (level.yscale * tileSizeY));
+    int idxx2 = qCeil((p2.x() - xref1) / (level.xscale * tileSizeX));
+    int idxy2 = qCeil((p2.y() - yref1) / (level.yscale * tileSizeY));
 
     idxx1 = qMax(0, idxx1);
     idxx1 = qMin(idxx1, level.xTiles);
@@ -478,10 +478,10 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
             l[0].rx() = xref1 + idxx * tileSizeX * level.xscale;
             l[0].ry() = yref1 + idxy * tileSizeY * level.yscale;
             l[1].rx() = xref1 + (idxx * tileSizeX + imgw) * level.xscale;
-            l[1].ry() = yref1 +  idxy * tileSizeY * level.yscale;
+            l[1].ry() = yref1 + idxy * tileSizeY * level.yscale;
             l[2].rx() = xref1 + (idxx * tileSizeX + imgw) * level.xscale;
             l[2].ry() = yref1 + (idxy * tileSizeY + imgh) * level.yscale;
-            l[3].rx() = xref1 +  idxx * tileSizeX * level.xscale;
+            l[3].rx() = xref1 + idxx * tileSizeX * level.xscale;
             l[3].ry() = yref1 + (idxy * tileSizeY + imgh) * level.yscale;
 
             proj.transform(l, PJ_FWD);

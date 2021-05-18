@@ -27,8 +27,8 @@
 #define N_DEFAULT_ZOOM_LEVELS 31
 const qreal IDrawContext::scalesDefault[N_DEFAULT_ZOOM_LEVELS] =
 {
-    0.10,  0.15,  0.20,  0.30,   0.50,   0.70,   1.0,    1.5,    2.0,    3.0,
-    5.0,   7.0,  10.0,  15.0,   20.0,   30.0,   50.0,   70.0,  100.0,  150.0,
+    0.10, 0.15, 0.20, 0.30, 0.50, 0.70, 1.0, 1.5, 2.0, 3.0,
+    5.0, 7.0, 10.0, 15.0, 20.0, 30.0, 50.0, 70.0, 100.0, 150.0,
     200.0, 300.0, 500.0, 700.0, 1000.0, 1500.0, 2000.0, 3000.0, 5000.0, 7000.0,
     10000.0
     //, 15000.0, 20000.0, 30000.0, 50000.0, 70000.0
@@ -37,9 +37,9 @@ const qreal IDrawContext::scalesDefault[N_DEFAULT_ZOOM_LEVELS] =
 #define N_SQUARE_ZOOM_LEVELS 17
 const qreal IDrawContext::scalesSquare[N_SQUARE_ZOOM_LEVELS] =
 {
-    0.1492910709,    0.2985821417,    0.5971642834,    1.1943285668,
-    2.3886571336,    4.7773142672,    9.5546285344,   19.1092570688,
-    38.2185141376,   76.4370282752,  152.8740565504,  305.7481131008,
+    0.1492910709, 0.2985821417, 0.5971642834, 1.1943285668,
+    2.3886571336, 4.7773142672, 9.5546285344, 19.1092570688,
+    38.2185141376, 76.4370282752, 152.8740565504, 305.7481131008,
     611.4962262016, 1222.9924524032, 2445.9849048064, 4891.9698096128,
     9783.9396192256
 };
@@ -55,7 +55,7 @@ QPointF operator/(const QPointF& p1, const QPointF& p2)
 }
 
 
-IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CCanvas *parent)
+IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CCanvas* parent)
     : QThread(parent)
     , canvas(parent)
     , maskRedraw(maskRedraw)
@@ -68,7 +68,7 @@ IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CC
 
     resize(canvas->size());
     connect(this, &IDrawContext::finished, canvas, static_cast<void (CCanvas::*)()>(&CCanvas::update));
-    connect(this, &IDrawContext::finished, this,   &IDrawContext::sigStopThread);
+    connect(this, &IDrawContext::finished, this, &IDrawContext::sigStopThread);
 }
 
 IDrawContext::~IDrawContext()
@@ -97,13 +97,13 @@ bool IDrawContext::resize(const QSize& size)
 
     QMutexLocker lock(&mutex);
 
-    lastSize   = size;
-    viewWidth  = size.width();
+    lastSize = size;
+    viewWidth = size.width();
     viewHeight = size.height();
 
-    center     = QPointF(viewWidth / 2.0, viewHeight / 2.0);
-    bufWidth   = viewWidth  + 2 * BUFFER_BORDER;
-    bufHeight  = viewHeight + 2 * BUFFER_BORDER;
+    center = QPointF(viewWidth / 2.0, viewHeight / 2.0);
+    bufWidth = viewWidth + 2 * BUFFER_BORDER;
+    bufHeight = viewHeight + 2 * BUFFER_BORDER;
 
     buffer[0].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
     buffer[0].image.fill(Qt::transparent);
@@ -204,17 +204,17 @@ void IDrawContext::zoom(int idx)
     mutex.lock(); // --------- start serialize with thread
     if((zoomIndex != idx) || (zoomFactor.x() != scales[idx]))
     {
-        zoomIndex       = idx;
+        zoomIndex = idx;
         zoomFactor.rx() = scales[idx];
         zoomFactor.ry() = scales[idx];
-        intNeedsRedraw  = true;
+        intNeedsRedraw = true;
 
-        emit sigScaleChanged(scale*zoomFactor);
+        emit sigScaleChanged(scale* zoomFactor);
     }
     mutex.unlock(); // --------- stop serialize with thread
 }
 
-void IDrawContext::convertRad2M(QPointF &p) const
+void IDrawContext::convertRad2M(QPointF& p) const
 {
     if(!proj.isValid())
     {
@@ -253,7 +253,7 @@ void IDrawContext::convertRad2M(QPointF &p) const
     }
 }
 
-void IDrawContext::convertM2Rad(QPointF &p) const
+void IDrawContext::convertM2Rad(QPointF& p) const
 {
     if(!proj.isValid())
     {
@@ -263,7 +263,7 @@ void IDrawContext::convertM2Rad(QPointF &p) const
     proj.transform(p, PJ_FWD);
 }
 
-void IDrawContext::convertPx2Rad(QPointF &p) const
+void IDrawContext::convertPx2Rad(QPointF& p) const
 {
     mutex.lock(); // --------- start serialize with thread
 
@@ -277,7 +277,7 @@ void IDrawContext::convertPx2Rad(QPointF &p) const
     mutex.unlock(); // --------- stop serialize with thread
 }
 
-void IDrawContext::convertRad2Px(QPointF &p) const
+void IDrawContext::convertRad2Px(QPointF& p) const
 {
     mutex.lock(); // --------- start serialize with thread
 
@@ -313,8 +313,8 @@ void IDrawContext::convertRad2Px(QPolygonF& poly) const
 
     QVector<p_t> fixes(N, {NOFLOAT, NOFLOAT});
 
-    qreal * pY  = &poly.data()->ry();
-    p_t * pFix  = fixes.data();
+    qreal* pY = &poly.data()->ry();
+    p_t* pFix = fixes.data();
 
     /*
         Proj4 makes a wrap around for values outside the
@@ -336,8 +336,8 @@ void IDrawContext::convertRad2Px(QPolygonF& poly) const
 
     proj.transform(poly, PJ_INV);
 
-    QPointF * pPt = poly.data();
-    pFix          = fixes.data();
+    QPointF* pPt = poly.data();
+    pFix = fixes.data();
     for(int i = 0; i < N; ++i, ++pFix, ++pPt)
     {
         /*
@@ -385,8 +385,8 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
     // derive references for all corners coordinate of map buffer
     ref1 = f1 + QPointF(-bufWidth / 2, -bufHeight / 2) * bufferScale;
     ref2 = f1 + QPointF( bufWidth / 2, -bufHeight / 2) * bufferScale;
-    ref3 = f1 + QPointF( bufWidth / 2,  bufHeight / 2) * bufferScale;
-    ref4 = f1 + QPointF(-bufWidth / 2,  bufHeight / 2) * bufferScale;
+    ref3 = f1 + QPointF( bufWidth / 2, bufHeight / 2) * bufferScale;
+    ref4 = f1 + QPointF(-bufWidth / 2, bufHeight / 2) * bufferScale;
     convertM2Rad(ref1);
     convertM2Rad(ref2);
     convertM2Rad(ref3);
@@ -464,13 +464,13 @@ void IDrawContext::run()
         // copy all projection information need by the
         // map render objects to buffer structure
         currentBuffer.zoomFactor = zoomFactor;
-        currentBuffer.scale      = scale;
-        currentBuffer.ref1       = ref1;
-        currentBuffer.ref2       = ref2;
-        currentBuffer.ref3       = ref3;
-        currentBuffer.ref4       = ref4;
-        currentBuffer.focus      = focus;
-        intNeedsRedraw           = false;
+        currentBuffer.scale = scale;
+        currentBuffer.ref1 = ref1;
+        currentBuffer.ref2 = ref2;
+        currentBuffer.ref3 = ref3;
+        currentBuffer.ref4 = ref4;
+        currentBuffer.focus = focus;
+        intNeedsRedraw = false;
 
         mutex.unlock();
 

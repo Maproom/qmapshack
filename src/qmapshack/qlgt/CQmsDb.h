@@ -35,16 +35,16 @@ class CQmsDb : public QObject, private IDBSqlite
 {
     Q_DECLARE_TR_FUNCTIONS(CQmsDb)
 public:
-    CQmsDb(const QString& filename, CImportDatabase * parent);
+    CQmsDb(const QString& filename, CImportDatabase* parent);
     virtual ~CQmsDb();
 
     void addFolder2FolderRelation(quint64 parent, quint64 child);
     void addFolder2ItemRelation(quint64 parent, quint64 child);
 
-    void addFolder(CQlgtFolder &folder);
-    void addWpt(CQlgtWpt &wpt1);
-    void addTrk(CQlgtTrack &trk1);
-    void addTrk(IQlgtOverlay &trk1);
+    void addFolder(CQlgtFolder& folder);
+    void addWpt(CQlgtWpt& wpt1);
+    void addTrk(CQlgtTrack& trk1);
+    void addTrk(IQlgtOverlay& trk1);
     void addRte(CQlgtRoute& rte1);
     void addArea(IQlgtOverlay& ovl1);
 
@@ -55,9 +55,9 @@ public:
 private:
     bool valid;
 
-    quint64 store(IGisItem &item);
+    quint64 store(IGisItem& item);
 
-    CImportDatabase * gui;
+    CImportDatabase* gui;
 
     QMap<int, int> mapFolderTypes;
 

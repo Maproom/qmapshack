@@ -30,7 +30,7 @@ class CTemplateWidget : public QDialog, private Ui::ITemplateWidget
 {
     Q_OBJECT
 public:
-    CTemplateWidget(QWidget * parent);
+    CTemplateWidget(QWidget* parent);
     virtual ~CTemplateWidget() = default;
 
     QString text();
@@ -42,7 +42,7 @@ private slots:
 
 private:
     void listTemplates();
-    QString resolveGroup(const QGroupBox * group);
+    QString resolveGroup(const QGroupBox* group);
 
 
     QPointer<QWidget> widget;

@@ -44,9 +44,9 @@ int ProgressFunc(double complete)
     return !CRouterRoutino::progress->wasCanceled();
 }
 
-CRouterRoutino * CRouterRoutino::pSelf = nullptr;
+CRouterRoutino* CRouterRoutino::pSelf = nullptr;
 
-CRouterRoutino::CRouterRoutino(QWidget *parent)
+CRouterRoutino::CRouterRoutino(QWidget* parent)
     : IRouter(true, parent)
 {
     pSelf = this;
@@ -65,7 +65,7 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
 
 
     int res = 0;
-    IAppSetup *setup = IAppSetup::getPlatformInstance();
+    IAppSetup* setup = IAppSetup::getPlatformInstance();
     res = Routino_ParseXMLTranslations(setup->routinoPath("translations.xml").toUtf8());
     if(res)
     {
@@ -73,24 +73,24 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
         return;
     }
 
-    comboProfile->addItem(tr("Foot"),       "foot");
-    comboProfile->addItem(tr("Horse"),      "horse");
+    comboProfile->addItem(tr("Foot"), "foot");
+    comboProfile->addItem(tr("Horse"), "horse");
     comboProfile->addItem(tr("Wheelchair"), "wheelchair");
-    comboProfile->addItem(tr("Bicycle"),    "bicycle");
-    comboProfile->addItem(tr("Moped"),      "moped");
+    comboProfile->addItem(tr("Bicycle"), "bicycle");
+    comboProfile->addItem(tr("Moped"), "moped");
     comboProfile->addItem(tr("Motorcycle"), "motorcycle");
-    comboProfile->addItem(tr("Motorcar"),   "motorcar");
-    comboProfile->addItem(tr("Goods"),      "goods");
+    comboProfile->addItem(tr("Motorcar"), "motorcar");
+    comboProfile->addItem(tr("Goods"), "goods");
 
-    comboLanguage->addItem(tr("English"),   "en");
-    comboLanguage->addItem(tr("German"),    "de");
-    comboLanguage->addItem(tr("French"),    "fr");
+    comboLanguage->addItem(tr("English"), "en");
+    comboLanguage->addItem(tr("German"), "de");
+    comboLanguage->addItem(tr("French"), "fr");
     comboLanguage->addItem(tr("Hungarian"), "hu");
-    comboLanguage->addItem(tr("Dutch"),     "nl");
-    comboLanguage->addItem(tr("Russian"),   "ru");
-    comboLanguage->addItem(tr("Polish"),    "pl");
-    comboLanguage->addItem(tr("Czech"),     "cs");
-    comboLanguage->addItem(tr("Spanish"),   "es");
+    comboLanguage->addItem(tr("Dutch"), "nl");
+    comboLanguage->addItem(tr("Russian"), "ru");
+    comboLanguage->addItem(tr("Polish"), "pl");
+    comboLanguage->addItem(tr("Czech"), "cs");
+    comboLanguage->addItem(tr("Spanish"), "es");
 
     connect(toolSetupPaths, &QToolButton::clicked, this, &CRouterRoutino::slotSetupPaths);
 
@@ -197,7 +197,7 @@ QString CRouterRoutino::getOptions()
 {
     QString str;
 
-    str  = tr("profile \"%1\"").arg(comboProfile->currentText());
+    str = tr("profile \"%1\"").arg(comboProfile->currentText());
     str += tr(", mode \"%1\"").arg(comboMode->currentText());
     return str;
 }
@@ -231,13 +231,13 @@ void CRouterRoutino::buildDatabaseList()
     // initialise
     currentProfilesPath = "";
 
-    IAppSetup *setup = IAppSetup::getPlatformInstance();
+    IAppSetup* setup = IAppSetup::getPlatformInstance();
 
-    for(const QString &path : qAsConst(dbPaths))
+    for(const QString& path : qAsConst(dbPaths))
     {
         QDir dir(path);
         const QStringList& filenames = dir.entryList(QStringList("*segments.mem"), QDir::Files | QDir::Readable, QDir::Name);
-        for(const QString &filename : filenames)
+        for(const QString& filename : filenames)
         {
             QString prefix;
             if(re.exactMatch(filename))
@@ -252,9 +252,9 @@ void CRouterRoutino::buildDatabaseList()
             // qDebug() << "buildDatabase Prefix" << prefix;
 
 #ifdef Q_OS_WIN
-            Routino_Database * data = Routino_LoadDatabase(dir.absolutePath().toLocal8Bit(), prefix.toLocal8Bit());
+            Routino_Database* data = Routino_LoadDatabase(dir.absolutePath().toLocal8Bit(), prefix.toLocal8Bit());
 #else
-            Routino_Database * data = Routino_LoadDatabase(dir.absolutePath().toUtf8(), prefix.toUtf8());
+            Routino_Database* data = Routino_LoadDatabase(dir.absolutePath().toUtf8(), prefix.toUtf8());
 #endif
             qDebug() << "Loaded Routino DB" << dir.absolutePath().toUtf8().data() << "  " << prefix.toUtf8().data();
 
@@ -324,7 +324,7 @@ void CRouterRoutino::freeDatabaseList()
     for(int i = 0; i < comboDatabase->count(); i++)
     {
         QVariantMap map = comboDatabase->itemData(i, Qt::UserRole).toMap();
-        Routino_Database * data = (Routino_Database*)(map["db"].toULongLong());
+        Routino_Database* data = (Routino_Database*)(map["db"].toULongLong());
         Routino_UnloadDatabase(data);
     }
     comboDatabase->clear();
@@ -361,14 +361,14 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         QTime time;
         time.start();
 
-        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
+        CGisItemRte* rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
         if(nullptr == rte)
         {
             throw QString();
         }
 
         QVariantMap map = comboDatabase->currentData(Qt::UserRole).toMap();
-        Routino_Database * data = (Routino_Database*)(map["db"].toULongLong());
+        Routino_Database* data = (Routino_Database*)(map["db"].toULongLong());
         if(nullptr == data)
         {
             throw QString();
@@ -378,15 +378,15 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
         rte->reset();
 
-        QString strProfile  = comboProfile->currentData(Qt::UserRole).toString();
+        QString strProfile = comboProfile->currentData(Qt::UserRole).toString();
         QString strLanguage = comboLanguage->currentData(Qt::UserRole).toString();
 
-        Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
+        Routino_Profile* profile = Routino_GetProfile(strProfile.toUtf8());
         if( profile == NULL )
         {
             throw tr("Required profile '%1' is not in the current profiles file.").arg(strProfile);
         }
-        Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
+        Routino_Translation* translation = Routino_GetTranslation(strLanguage.toUtf8());
 
         int res = Routino_ValidateProfile(data, profile);
         if(res != 0)
@@ -409,7 +409,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
         int idx = 0;
         QVector<Routino_Waypoint*> waypoints(line.size(), nullptr);
-        for(const IGisLine::point_t &pt : qAsConst(line))
+        for(const IGisLine::point_t& pt : qAsConst(line))
         {
             waypoints[idx] = Routino_FindWaypoint(data, profile, pt.coord.y() * RAD_TO_DEG, pt.coord.x() * RAD_TO_DEG);
             if(waypoints[idx] == nullptr)
@@ -421,7 +421,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
         progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
 
-        Routino_Output * route = Routino_CalculateRoute(data, profile, translation, waypoints.data(), waypoints.size(), options, ProgressFunc);
+        Routino_Output* route = Routino_CalculateRoute(data, profile, translation, waypoints.data(), waypoints.size(), options, ProgressFunc);
 
         delete progress;
 
@@ -462,7 +462,7 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     try
     {
         QVariantMap map = comboDatabase->currentData(Qt::UserRole).toMap();
-        Routino_Database * data = (Routino_Database*)(map["db"].toULongLong());
+        Routino_Database* data = (Routino_Database*)(map["db"].toULongLong());
         if(nullptr == data)
         {
             throw QString();
@@ -470,15 +470,15 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
         loadProfiles(map["profilesPath"].toString());
 
-        QString strProfile      = comboProfile->currentData(Qt::UserRole).toString();
-        QString strLanguage     = comboLanguage->currentData(Qt::UserRole).toString();
+        QString strProfile = comboProfile->currentData(Qt::UserRole).toString();
+        QString strLanguage = comboLanguage->currentData(Qt::UserRole).toString();
 
-        Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
+        Routino_Profile* profile = Routino_GetProfile(strProfile.toUtf8());
         if( profile == NULL )
         {
             throw tr("Required profile '%1' is not in the current profiles file.").arg(strProfile);
         }
-        Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
+        Routino_Translation* translation = Routino_GetTranslation(strLanguage.toUtf8());
 
 
         int res = Routino_ValidateProfile(data, profile);
@@ -512,13 +512,13 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
         progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
 
-        Routino_Output * route = Routino_CalculateRoute(data, profile, translation, waypoints, 2, options, ProgressFunc);
+        Routino_Output* route = Routino_CalculateRoute(data, profile, translation, waypoints, 2, options, ProgressFunc);
 
         delete progress;
 
         if(route != nullptr)
         {
-            Routino_Output * next = route;
+            Routino_Output* next = route;
             while(next)
             {
                 if(next->type != ROUTINO_POINT_WAYPOINT)

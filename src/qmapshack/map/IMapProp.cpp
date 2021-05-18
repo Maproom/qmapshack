@@ -20,7 +20,7 @@
 #include "IMap.h"
 #include "IMapProp.h"
 
-IMapProp::IMapProp(IMap *mapfile, CMapDraw *map)
+IMapProp::IMapProp(IMap* mapfile, CMapDraw* map)
     : mapfile(mapfile)
     , map(map)
 {

@@ -44,8 +44,8 @@ public:
         , eTypeOther    = 5
     };
 
-    IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);
-    IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent);
+    IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem* parent);
+    IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget* parent);
     virtual ~IDBFolder();
 
     /**
@@ -69,14 +69,14 @@ public:
      *
      * @return On success a pointer to the item holding the database is returned.
      */
-    IDBFolderSql * getDBFolder();
+    IDBFolderSql* getDBFolder();
 
     /**
      * @brief Search and get access to a subfolder
      * @param idFolder  the database key of the folder
      * @return On success a pointer to the item is returned. Else 0.
      */
-    IDBFolder * getFolder(quint64 idFolder);
+    IDBFolder* getFolder(quint64 idFolder);
 
     /**
      * @brief Add a new folder to the database and the treewidget.
@@ -87,7 +87,7 @@ public:
      * @param name      the name of the new folder
      * @return The 64bit database key of the new folder. 0 on failure.
      */
-    virtual quint64 addFolder(type_e type, const QString &name);
+    virtual quint64 addFolder(type_e type, const QString& name);
     /**
      * @brief Add children from database
      */
@@ -100,7 +100,7 @@ public:
      *
      * @param info  The event object posted by the workspace
      */
-    virtual void update(CEvtW2DAckInfo * info);
+    virtual void update(CEvtW2DAckInfo* info);
 
     /**
      * @brief Update from database
@@ -141,7 +141,7 @@ public:
      * @param parent    the items parent item
      * @return A pointer to the new treewidgetitem.
      */
-    static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
+    static IDBFolder* createFolderByType(QSqlDatabase& db, int type, quint64 id, QTreeWidgetItem* parent);
 
     /**
        @brief Get name extended by parent folders and database name
@@ -152,7 +152,7 @@ public:
      */
     static QString getNameEx(const QString& dbName, quint64 id);
 
-    bool operator<(const QTreeWidgetItem &other) const override;
+    bool operator<(const QTreeWidgetItem& other) const override;
 
     void updateItemsOnWks();
 
@@ -170,7 +170,7 @@ public:
         return false;
     }
 
-    bool isSiblingFrom(IDBFolder * folder) const;
+    bool isSiblingFrom(IDBFolder* folder) const;
 
     void exportToGpx();
 
@@ -195,7 +195,7 @@ protected:
        @param showFolders       true to add child folders to folder
        @param showItems         true to add child items to folder
      */
-    virtual void addChildren(const QSet<QString> &activeChildren, bool showFolders, bool showItems);
+    virtual void addChildren(const QSet<QString>& activeChildren, bool showFolders, bool showItems);
 
     /**
        @brief Remove a folder to folder relation
@@ -209,14 +209,14 @@ protected:
 
     void setChildIndicator();
 
-    void addItemsSorted(QList<CDBItem *> &items);
-    void sortItems(QList<CDBItem *> &items) const;
+    void addItemsSorted(QList<CDBItem*>& items);
+    void sortItems(QList<CDBItem*>& items) const;
 
     bool showItems() const;
     bool showCheckBoxes() const;
     bool showLostFound() const;
 
-    bool getBoolProperty(const char * name, bool defaultValue) const;
+    bool getBoolProperty(const char* name, bool defaultValue) const;
 
     static QString getNameEx(QSqlDatabase& db, quint64 id, const QString& name);
 
@@ -224,7 +224,7 @@ protected:
 
     quint64 id;
     QString key;
-    quint32 sortMode =  IGisProject::eSortFolderTime;
+    quint32 sortMode = IGisProject::eSortFolderTime;
     bool isLoadable;
 };
 

@@ -37,25 +37,25 @@ class CMouseAdapter : public QObject
 {
     Q_OBJECT
 public:
-    explicit CMouseAdapter(CCanvas *canvas);
+    explicit CMouseAdapter(CCanvas* canvas);
     virtual ~CMouseAdapter();
 
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect);
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect);
 
     void unfocus();
 
-    void mousePressEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
-    void mouseDoubleClickEvent(QMouseEvent *e);
-    void wheelEvent(QWheelEvent *e);
-    void keyPressEvent(QKeyEvent *e);
-    void pinchGestureEvent(QPinchGesture *e);
-    void afterMouseLostEvent(QMouseEvent *e);
+    void mousePressEvent(QMouseEvent* e);
+    void mouseMoveEvent(QMouseEvent* e);
+    void mouseReleaseEvent(QMouseEvent* e);
+    void mouseDoubleClickEvent(QMouseEvent* e);
+    void wheelEvent(QWheelEvent* e);
+    void keyPressEvent(QKeyEvent* e);
+    void pinchGestureEvent(QPinchGesture* e);
+    void afterMouseLostEvent(QMouseEvent* e);
 
     void startMouseMove(const QPoint& pos);
 
-    void setDelegate(IMouse * delegate);
+    void setDelegate(IMouse* delegate);
 
     QPoint getPoint() { return lastPos; }
 
@@ -70,11 +70,11 @@ private slots:
 
 private:
 
-    CCanvas * canvas { nullptr };
-    IMouse * delegate { nullptr };
+    CCanvas* canvas { nullptr };
+    IMouse* delegate { nullptr };
 
     QTime buttonPressTime;
-    QTimer * longPressTimer;
+    QTimer* longPressTimer;
 
     QPoint lastPos;
     QPoint firstPos;

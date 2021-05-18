@@ -36,18 +36,18 @@
 
 const QPen IPlot::pens[] =
 {
-    QPen(Qt::darkBlue,      3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    QPen(Qt::darkBlue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(QColor(0xFFC00000), 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::yellow,        3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::green,         3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::yellow, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 };
 
 const QPen IPlot::pensThin[] =
 {
-    QPen(Qt::darkBlue,   2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::darkRed,    2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    QPen(Qt::darkBlue, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkRed, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     , QPen(Qt::darkYellow, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
-    , QPen(Qt::darkGreen,  2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    , QPen(Qt::darkGreen, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 };
 
 const QColor IPlot::colors[] =
@@ -60,7 +60,7 @@ const QColor IPlot::colors[] =
 
 int IPlot::cnt = 0;
 
-IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget *parent)
+IPlot::IPlot(CGisItemTrk* trk, CPlotData::axistype_e type, mode_e mode, QWidget* parent)
     : QWidget(parent)
     , INotifyTrk(CGisItemTrk::eVisualPlot)
     , mode(mode)
@@ -96,13 +96,13 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     }
 
     menu = new QMenu(this);
-    actionResetZoom     = menu->addAction(QIcon("://icons/32x32/Zoom.png"),        tr("Reset Zoom"), this, &IPlot::slotResetZoom);
-    actionStopRange     = menu->addAction(QIcon("://icons/32x32/SelectReset.png"), tr("Reset Range"), this, &IPlot::slotStopRange);
-    actionPrint         = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, &IPlot::slotSave);
+    actionResetZoom = menu->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Reset Zoom"), this, &IPlot::slotResetZoom);
+    actionStopRange = menu->addAction(QIcon("://icons/32x32/SelectReset.png"), tr("Reset Range"), this, &IPlot::slotStopRange);
+    actionPrint = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, &IPlot::slotSave);
     menu->addSeparator();
-    actionAddWpt        = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, &IPlot::slotAddWpt);
-    actionAddTrkPtInfo  = menu->addAction(QIcon("://icons/32x32/AddPointInfo.png"), tr("Add Trackpoint Info"), this, &IPlot::slotAddTrkPtInfo);
-    actionCutTrk        = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),      tr("Cut Track..."),    this, &IPlot::slotCutTrk);
+    actionAddWpt = menu->addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add Waypoint"), this, &IPlot::slotAddWpt);
+    actionAddTrkPtInfo = menu->addAction(QIcon("://icons/32x32/AddPointInfo.png"), tr("Add Trackpoint Info"), this, &IPlot::slotAddTrkPtInfo);
+    actionCutTrk = menu->addAction(QIcon("://icons/32x32/TrkCut.png"), tr("Cut Track..."), this, &IPlot::slotCutTrk);
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
@@ -127,7 +127,7 @@ IPlot::~IPlot()
         if(mode == eModeWindow)
         {
             trk->looseUserFocus();
-            CCanvas * canvas = dynamic_cast<CCanvas*>(parent());
+            CCanvas* canvas = dynamic_cast<CCanvas*>(parent());
             if(canvas)
             {
                 canvas->saveSizeTrackProfile();
@@ -189,8 +189,8 @@ void IPlot::newLine(const QPolygonF& line, const QString& label)
     }
 
     CPlotData::line_t l;
-    l.points    = line;
-    l.label     = label;
+    l.points = line;
+    l.label = label;
 
     data->badData = false;
     data->lines << l;
@@ -211,8 +211,8 @@ void IPlot::addLine(const QPolygonF& line, const QString& label)
     }
 
     CPlotData::line_t l;
-    l.points    = line;
-    l.label     = label;
+    l.points = line;
+    l.label = label;
 
     data->lines << l;
     setSizes();
@@ -240,13 +240,13 @@ void IPlot::resetZoom()
 }
 
 
-void IPlot::paintEvent(QPaintEvent * /*e*/)
+void IPlot::paintEvent(QPaintEvent* /*e*/)
 {
     QPainter p(this);
     draw(p);
 }
 
-void IPlot::resizeEvent(QResizeEvent * e)
+void IPlot::resizeEvent(QResizeEvent* e)
 {
     setSizes();
 
@@ -256,17 +256,17 @@ void IPlot::resizeEvent(QResizeEvent * e)
     update();
 }
 
-void IPlot::leaveEvent(QEvent * /*e*/)
+void IPlot::leaveEvent(QEvent* /*e*/)
 {
     needsRedraw = true;
-    posMouse1    = NOPOINT;
+    posMouse1 = NOPOINT;
 
     CCanvas::restoreOverrideCursor("IPlot::leaveEvent");
     update();
 }
 
 
-void IPlot::enterEvent(QEvent * /*e*/)
+void IPlot::enterEvent(QEvent* /*e*/)
 {
     needsRedraw = true;
     QCursor cursor = QCursor(QPixmap(":/cursors/cursorArrow.png"), 0, 0);
@@ -286,7 +286,7 @@ void IPlot::draw(QPainter& p)
     drawDecoration(p);
 }
 
-void IPlot::keyPressEvent(QKeyEvent *e)
+void IPlot::keyPressEvent(QKeyEvent* e)
 {
     // close the current window if `Esc` was pressed
     if(Qt::Key_Escape == e->key())
@@ -325,7 +325,7 @@ bool IPlot::graphAreaContainsMousePos(QPoint& pos)
     return false;
 }
 
-void IPlot::mouseMoveEvent(QMouseEvent * e)
+void IPlot::mouseMoveEvent(QMouseEvent* e)
 {
     if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())
     {
@@ -357,7 +357,7 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         return;
     }
 
-    posMouse1    = NOPOINT;
+    posMouse1 = NOPOINT;
     if(graphAreaContainsMousePos(pos))
     {
         posMouse1 = pos;
@@ -367,7 +367,7 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         setMouseFocus(x, CGisItemTrk::eFocusMouseMove);
 
         // update canvas if visible
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas)
         {
             canvas->update();
@@ -409,18 +409,18 @@ bool IPlot::setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm)
     return false;
 }
 
-void IPlot::mousePressEvent(QMouseEvent * e)
+void IPlot::mousePressEvent(QMouseEvent* e)
 {
     if((e->button() == Qt::LeftButton) && (mode == eModeIcon))
     {
         trk->edit();
     }
 
-    mouseDidMove    = false;
-    posLast         = e->pos();
+    mouseDidMove = false;
+    posLast = e->pos();
 }
 
-void IPlot::mouseReleaseEvent(QMouseEvent * e)
+void IPlot::mouseReleaseEvent(QMouseEvent* e)
 {
     bool wasProcessed = false;
 
@@ -448,7 +448,7 @@ void IPlot::mouseReleaseEvent(QMouseEvent * e)
         emit sigMouseClickState(mouseClickState);
 
         // update canvas if visible
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas)
         {
             canvas->update();
@@ -458,10 +458,10 @@ void IPlot::mouseReleaseEvent(QMouseEvent * e)
     update();
 }
 
-bool IPlot::mouseReleaseEventSimple(QMouseEvent * e)
+bool IPlot::mouseReleaseEventSimple(QMouseEvent* e)
 {
     QPoint pos = e->pos();
-    posMouse1  = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
+    posMouse1 = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
 
     // set point of focus at track object
     qreal x = data->x().pt2val(posMouse1.x() - left);
@@ -475,12 +475,12 @@ bool IPlot::mouseReleaseEventSimple(QMouseEvent * e)
     return wasProcessed;
 }
 
-bool IPlot::mouseReleaseEventNormal(QMouseEvent * e)
+bool IPlot::mouseReleaseEventNormal(QMouseEvent* e)
 {
     bool wasProcessed = true;
 
     QPoint pos = e->pos();
-    posMouse1  = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
+    posMouse1 = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
 
     // set point of focus at track object
     qreal x = data->x().pt2val(posMouse1.x() - left);
@@ -519,8 +519,8 @@ bool IPlot::mouseReleaseEventNormal(QMouseEvent * e)
         scrOptRange = new CScrOptRangeTrk(pos, trk, nullptr, this);
         connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &IPlot::slotHidePoints);
         connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &IPlot::slotShowPoints);
-        connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &IPlot::slotCopy);
-        connect(scrOptRange->toolActivity,   &QToolButton::clicked, this, &IPlot::slotActivity);
+        connect(scrOptRange->toolCopy, &QToolButton::clicked, this, &IPlot::slotCopy);
+        connect(scrOptRange->toolActivity, &QToolButton::clicked, this, &IPlot::slotActivity);
 
         /* Adjust position of screen option widget if the widget is out of the visible area*/
         QRect r1 = scrOptRange->geometry();
@@ -566,26 +566,26 @@ bool IPlot::mouseReleaseEventNormal(QMouseEvent * e)
     return wasProcessed;
 }
 
-void IPlot::wheelEvent(QWheelEvent * e)
+void IPlot::wheelEvent(QWheelEvent* e)
 {
     bool in = CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0);
 
-    bool doHorizontalZoom   = false;
-    bool doVerticalZoom     = false;
+    bool doHorizontalZoom = false;
+    bool doVerticalZoom = false;
 
     switch(QApplication::keyboardModifiers())
     {
     case Qt::AltModifier:
-        doHorizontalZoom    = true;
+        doHorizontalZoom = true;
         break;
 
     case Qt::ControlModifier:
-        doVerticalZoom      = true;
+        doVerticalZoom = true;
         break;
 
     case Qt::NoModifier:
-        doHorizontalZoom    = true;
-        doVerticalZoom      = true;
+        doHorizontalZoom = true;
+        doVerticalZoom = true;
         break;
     }
 
@@ -622,8 +622,8 @@ void IPlot::setSizes()
 
     scaleWidthY1 = (scaleWidthX1 / 2) > scaleWidthY1 ? scaleWidthX1 / 2 : scaleWidthY1;
 
-    fontWidth    = fm.maxWidth();
-    fontHeight   = fm.height();
+    fontWidth = fm.maxWidth();
+    fontHeight = fm.height();
 
     if(mode == eModeSimple)
     {
@@ -833,19 +833,19 @@ QPointF IPlot::getBasePoint(int ptx) const
     return QPointF(ptx, bottom);
 }
 
-QPolygonF IPlot::getVisiblePolygon(const QPolygonF &polyline, QPolygonF &line) const
+QPolygonF IPlot::getVisiblePolygon(const QPolygonF& polyline, QPolygonF& line) const
 {
-    const CPlotAxis &xaxis = data->x();
-    const CPlotAxis &yaxis = data->y();
+    const CPlotAxis& xaxis = data->x();
+    const CPlotAxis& yaxis = data->y();
 
     int ptx = NOINT;
     int pty = NOINT;
 
-    for(const QPointF &pt : polyline)
+    for(const QPointF& pt : polyline)
     {
         int oldPtx = ptx;
         int oldPty = pty;
-        ptx = left   + xaxis.val2pt( pt.x() );
+        ptx = left + xaxis.val2pt( pt.x() );
         pty = bottom - yaxis.val2pt( pt.y() );
 
         if(ptx >= left && ptx <= right)
@@ -918,7 +918,7 @@ void IPlot::drawData(QPainter& p)
     }
 }
 
-void IPlot::drawLabels( QPainter &p )
+void IPlot::drawLabels( QPainter& p )
 {
     if(mode == IPlot::eModeSimple)
     {
@@ -945,7 +945,7 @@ void IPlot::drawLabels( QPainter &p )
     p.restore();
 }
 
-void IPlot::drawXScale( QPainter &p )
+void IPlot::drawXScale( QPainter& p )
 {
     QRect recText;
 
@@ -961,7 +961,7 @@ void IPlot::drawXScale( QPainter &p )
     int ix_ = -1;
 
     const int iy = bottom + deadAreaY;
-    const CPlotAxis::tic_t * t = data->x().ticmark();
+    const CPlotAxis::tic_t* t = data->x().ticmark();
     while ( t )
     {
         int ix = left + data->x().val2pt( t->val ) - ( scaleWidthX1 + 1 ) / 2;
@@ -993,7 +993,7 @@ void IPlot::drawXScale( QPainter &p )
 }
 
 
-void IPlot::drawYScale( QPainter &p )
+void IPlot::drawYScale( QPainter& p )
 {
     QString format_single_prec;
     QRect recText;
@@ -1034,7 +1034,7 @@ void IPlot::drawYScale( QPainter &p )
     }
 
     // draw tic marks
-    const CPlotAxis::tic_t * t = data->y().ticmark();
+    const CPlotAxis::tic_t* t = data->y().ticmark();
     while ( t )
     {
         iy = bottom - data->y().val2pt( t->val ) - fontHeight / 2;
@@ -1065,12 +1065,12 @@ void IPlot::drawYScale( QPainter &p )
 }
 
 
-void IPlot::drawGridX( QPainter &p )
+void IPlot::drawGridX( QPainter& p )
 {
     CPlotAxis::tictype_e oldtic = data->x().setTicType( CPlotAxis::eTicNorm );
 
     const int dy = rectGraphArea.height();
-    const CPlotAxis::tic_t * t = data->x().ticmark();
+    const CPlotAxis::tic_t* t = data->x().ticmark();
 
     QPen oldpen = p.pen();
     p.setPen( QPen( QColor(0, 150, 0, 128), 1, Qt::DotLine ) );
@@ -1087,11 +1087,11 @@ void IPlot::drawGridX( QPainter &p )
 }
 
 
-void IPlot::drawGridY( QPainter &p )
+void IPlot::drawGridY( QPainter& p )
 {
     CPlotAxis::tictype_e oldtic = data->y().setTicType( CPlotAxis::eTicNorm );
     const int dx = rectGraphArea.width();
-    const CPlotAxis::tic_t * t = data->y().ticmark();
+    const CPlotAxis::tic_t* t = data->y().ticmark();
 
     QPen oldpen = p.pen();
     p.setPen( QPen( QColor(0, 150, 0, 128), 1, Qt::DotLine ) );
@@ -1123,9 +1123,9 @@ void IPlot::drawGridY( QPainter &p )
     data->y().setTicType( oldtic );
 }
 
-void IPlot::drawXTic( QPainter & p )
+void IPlot::drawXTic( QPainter& p )
 {
-    const CPlotAxis::tic_t * t = data->x().ticmark();
+    const CPlotAxis::tic_t* t = data->x().ticmark();
 
     p.setPen(QPen(Qt::black, 2));
     const int iyb = rectGraphArea.bottom();
@@ -1140,9 +1140,9 @@ void IPlot::drawXTic( QPainter & p )
 }
 
 
-void IPlot::drawYTic( QPainter &p )
+void IPlot::drawYTic( QPainter& p )
 {
-    const CPlotAxis::tic_t * t = data->y().ticmark();
+    const CPlotAxis::tic_t* t = data->y().ticmark();
 
     p.setPen(QPen(Qt::black, 2));
     const int ixl = rectGraphArea.left();
@@ -1168,7 +1168,7 @@ void IPlot::drawLegend(QPainter& p)
     int h = fm.height();
 
     int x = rectGraphArea.left() + 10;
-    int y = rectGraphArea.top()  + 2 + h;
+    int y = rectGraphArea.top() + 2 + h;
 
     const QList<CPlotData::line_t>& lines = data->lines;
     for(const CPlotData::line_t& line : lines)
@@ -1182,7 +1182,7 @@ void IPlot::drawLegend(QPainter& p)
     }
 }
 
-void IPlot::drawDecoration( QPainter &p )
+void IPlot::drawDecoration( QPainter& p )
 {
     if(posMouse1 != NOPOINT)
     {
@@ -1252,7 +1252,7 @@ void IPlot::drawDecoration( QPainter &p )
 
             p.setPen(QPen(Qt::darkBlue, 2));
             p.drawLine(line.first().x(), top, line.first().x(), bottom);
-            p.drawLine(line.last().x(),  top, line.last().x(),  bottom);
+            p.drawLine(line.last().x(), top, line.last().x(), bottom);
         }
         p.setClipping(false);
     }
@@ -1279,10 +1279,10 @@ void IPlot::drawTags(QPainter& p)
 
     for(const CPlotData::point_t& tag : qAsConst(data->tags))
     {
-        int ptx = left   + xaxis.val2pt( tag.point.x() );
+        int ptx = left + xaxis.val2pt( tag.point.x() );
         int pty = bottom - yaxis.val2pt( tag.point.y() );
 
-        if (!((left < ptx) &&  (ptx < right)))
+        if (!((left < ptx) && (ptx < right)))
         {
             continue;
         }
@@ -1329,9 +1329,9 @@ void IPlot::drawTagLabels(QPainter& p)
 
     for(const CPlotData::point_t& tag : qAsConst(data->tags))
     {
-        int ptx = left   + xaxis.val2pt( tag.point.x() );
+        int ptx = left + xaxis.val2pt( tag.point.x() );
 
-        if (!((left < ptx) &&  (ptx < right)))
+        if (!((left < ptx) && (ptx < right)))
         {
             continue;
         }
@@ -1360,10 +1360,10 @@ void IPlot::drawActivities(QPainter& p)
 
     const QList<CActivityTrk::range_t>& ranges = trk->getActivities().getActivityRanges();
 
-    int bar_height    = (mode == eModeSimple) ? 18 : 26;
-    int color_width   = (mode == eModeSimple) ? 3 : 3;
-    int icon_frame    = (mode == eModeSimple) ? 12 : 20;
-    int icon_size     = (mode == eModeSimple) ? 8 : 16;
+    int bar_height = (mode == eModeSimple) ? 18 : 26;
+    int color_width = (mode == eModeSimple) ? 3 : 3;
+    int icon_frame = (mode == eModeSimple) ? 12 : 20;
+    int icon_size = (mode == eModeSimple) ? 8 : 16;
 
     QRect rectClipping = QRect(0, 0, right - left, 27);
     p.save();
@@ -1381,8 +1381,8 @@ void IPlot::drawActivities(QPainter& p)
         int x1, x2, y1 = 0;
         const CTrackData& trkData = trk->getTrackData();
 
-        const CTrackData::trkpt_t * trkptBeg = trkData.getTrkPtByTotalIndex(range.idxTotalBeg);
-        const CTrackData::trkpt_t * trkptEnd = trkData.getTrkPtByTotalIndex(range.idxTotalEnd);
+        const CTrackData::trkpt_t* trkptBeg = trkData.getTrkPtByTotalIndex(range.idxTotalBeg);
+        const CTrackData::trkpt_t* trkptEnd = trkData.getTrkPtByTotalIndex(range.idxTotalEnd);
 
         if(data->axisType == CPlotData::eAxisTime)
         {
@@ -1427,7 +1427,7 @@ void IPlot::drawActivities(QPainter& p)
     p.restore();
 }
 
-void IPlot::save(QImage& image, const CTrackData::trkpt_t * pTrkpt)
+void IPlot::save(QImage& image, const CTrackData::trkpt_t* pTrkpt)
 {
     resize(image.size());
     setSizes();
@@ -1436,7 +1436,7 @@ void IPlot::save(QImage& image, const CTrackData::trkpt_t * pTrkpt)
     if(pTrkpt != nullptr)
     {
         posMouse1.rx() = left + data->x().val2pt(pTrkpt->distance);
-        posMouse1.ry() = top  + data->y().val2pt(pTrkpt->ele);
+        posMouse1.ry() = top + data->y().val2pt(pTrkpt->ele);
 
         QPainter p(&buffer);
         drawDecoration(p);
@@ -1444,7 +1444,7 @@ void IPlot::save(QImage& image, const CTrackData::trkpt_t * pTrkpt)
     image = buffer;
 }
 
-void IPlot::slotContextMenu(const QPoint & point)
+void IPlot::slotContextMenu(const QPoint& point)
 {
     QPoint p = mapToGlobal(point);
 
@@ -1537,7 +1537,7 @@ void IPlot::slotStopRange()
     emit sigMouseClickState(mouseClickState);
 
     // update canvas if visible
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
     {
         canvas->update();
@@ -1562,7 +1562,7 @@ void IPlot::slotAddWpt()
         return;
     }
 
-    const CTrackData::trkpt_t * trkpt = trk->getMouseMoveFocusPoint();
+    const CTrackData::trkpt_t* trkpt = trk->getMouseMoveFocusPoint();
     if(trkpt == nullptr)
     {
         return;
@@ -1579,7 +1579,7 @@ void IPlot::slotAddTrkPtInfo()
         return;
     }
 
-    const CTrackData::trkpt_t * trkpt = trk->getMouseMoveFocusPoint();
+    const CTrackData::trkpt_t* trkpt = trk->getMouseMoveFocusPoint();
     if(trkpt == nullptr)
     {
         return;
@@ -1606,7 +1606,7 @@ void IPlot::slotCutTrk()
     CGisWorkspace::self().postEventForWks(new CEvtA2WCutTrk(trk->getKey()));
 }
 
-void IPlot::setMouseRangeFocus(const CTrackData::trkpt_t * ptRange1, const CTrackData::trkpt_t *ptRange2)
+void IPlot::setMouseRangeFocus(const CTrackData::trkpt_t* ptRange1, const CTrackData::trkpt_t* ptRange2)
 {
     if(nullptr == ptRange1 || nullptr == ptRange2)
     {

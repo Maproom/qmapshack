@@ -20,7 +20,7 @@
 #include "realtime/CRtDraw.h"
 #include "realtime/CRtWorkspace.h"
 
-CRtDraw::CRtDraw(CCanvas *parent)
+CRtDraw::CRtDraw(CCanvas* parent)
     : IDrawContext("rt", CCanvas::eRedrawRt, parent)
 {
     connect(&CRtWorkspace::self(), &CRtWorkspace::sigChanged, this, &CRtDraw::emitSigCanvasUpdate);

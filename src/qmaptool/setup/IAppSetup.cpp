@@ -48,7 +48,7 @@ IAppSetup::~IAppSetup()
     cfg.setValue("ExtTools/pathQmtmap2jnxOverride", pathQmtmap2jnxOverride);
 }
 
-IAppSetup& IAppSetup::createInstance(QObject * parent)
+IAppSetup& IAppSetup::createInstance(QObject* parent)
 {
     if(pSelf != nullptr)
     {
@@ -68,20 +68,20 @@ IAppSetup& IAppSetup::createInstance(QObject * parent)
 
 void IAppSetup::prepareToolPaths()
 {
-    pathGdaladdo        = this->findExecutable("gdaladdo");
-    pathGdaltranslate   = this->findExecutable("gdal_translate");
-    pathGdalwarp        = this->findExecutable("gdalwarp");
-    pathGdalbuildvrt    = this->findExecutable("gdalbuildvrt");
-    pathQmtrgb2pct      = this->findExecutable("qmt_rgb2pct");
-    pathQmtmap2jnx      = this->findExecutable("qmt_map2jnx");
+    pathGdaladdo = this->findExecutable("gdaladdo");
+    pathGdaltranslate = this->findExecutable("gdal_translate");
+    pathGdalwarp = this->findExecutable("gdalwarp");
+    pathGdalbuildvrt = this->findExecutable("gdalbuildvrt");
+    pathQmtrgb2pct = this->findExecutable("qmt_rgb2pct");
+    pathQmtmap2jnx = this->findExecutable("qmt_map2jnx");
 
     SETTINGS;
-    pathGdaladdoOverride        = cfg.value("ExtTools/pathGdaladdoOverride", pathGdaladdoOverride).toString();
-    pathGdaltranslateOverride   = cfg.value("ExtTools/pathGdaltranslateOverride", pathGdaltranslateOverride).toString();
-    pathGdalwarpOverride        = cfg.value("ExtTools/pathGdalwarpOverride", pathGdalwarpOverride).toString();
-    pathGdalbuildvrtOverride    = cfg.value("ExtTools/pathGdalbuildvrtOverride", pathGdalbuildvrtOverride).toString();
-    pathQmtrgb2pctOverride      = cfg.value("ExtTools/pathQmtrgb2pctOverride", pathQmtrgb2pctOverride).toString();
-    pathQmtmap2jnxOverride      = cfg.value("ExtTools/pathQmtmap2jnxOverride", pathQmtmap2jnxOverride).toString();
+    pathGdaladdoOverride = cfg.value("ExtTools/pathGdaladdoOverride", pathGdaladdoOverride).toString();
+    pathGdaltranslateOverride = cfg.value("ExtTools/pathGdaltranslateOverride", pathGdaltranslateOverride).toString();
+    pathGdalwarpOverride = cfg.value("ExtTools/pathGdalwarpOverride", pathGdalwarpOverride).toString();
+    pathGdalbuildvrtOverride = cfg.value("ExtTools/pathGdalbuildvrtOverride", pathGdalbuildvrtOverride).toString();
+    pathQmtrgb2pctOverride = cfg.value("ExtTools/pathQmtrgb2pctOverride", pathQmtrgb2pctOverride).toString();
+    pathQmtmap2jnxOverride = cfg.value("ExtTools/pathQmtmap2jnxOverride", pathQmtmap2jnxOverride).toString();
 }
 
 void IAppSetup::prepareGdal(QString gdalDir, QString projDir)
@@ -133,8 +133,8 @@ void IAppSetup::prepareTranslator(QString translationPath, QString translationPr
     }
     qDebug() << "locale" << locale;
 
-    QApplication* app =  (QApplication*) QCoreApplication::instance();
-    QTranslator *qtTranslator = new QTranslator(app);
+    QApplication* app = (QApplication*) QCoreApplication::instance();
+    QTranslator* qtTranslator = new QTranslator(app);
     if (qtTranslator->load(translationPrefix + locale, translationPath))
     {
         app->installTranslator(qtTranslator);
@@ -152,7 +152,7 @@ void IAppSetup::initLogHandler()
     CLogHandler::initLogHandler(logDir(), qlOpts->logfile, qlOpts->debug);
 }
 
-CAppOpts *qlOpts = nullptr;
+CAppOpts* qlOpts = nullptr;
 
 void IAppSetup::processArguments()
 {

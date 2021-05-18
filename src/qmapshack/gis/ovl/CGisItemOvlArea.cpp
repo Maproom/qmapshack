@@ -35,20 +35,20 @@
 
 IGisItem::key_t CGisItemOvlArea::keyUserFocus;
 
-CGisItemOvlArea::CGisItemOvlArea(const SGisLine &line, const QString &name, IGisProject * project, int idx)
+CGisItemOvlArea::CGisItemOvlArea(const SGisLine& line, const QString& name, IGisProject* project, int idx)
     : IGisItem(project, eTypeOvl, idx)
 {
     area.name = name;
     readAreaDataFromGisLine(line);
 
-    flags |=  eFlagCreatedInQms | eFlagWriteAllowed;
+    flags |= eFlagCreatedInQms | eFlagWriteAllowed;
 
     setColor(str2color(""));
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
-CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject * project, int idx, bool clone)
+CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject* project, int idx, bool clone)
     : IGisItem(project, eTypeOvl, idx)
 {
     history = parentArea.history;
@@ -77,7 +77,7 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
-CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
+CGisItemOvlArea::CGisItemOvlArea(const QDomNode& xml, IGisProject* project)
     : IGisItem(project, eTypeOvl, project->childCount())
 {
     // --- start read and process data ----
@@ -89,7 +89,7 @@ CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, const QString &dbHash, IGisProject * project)
+CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, const QString& dbHash, IGisProject* project)
     : IGisItem(project, eTypeOvl, project->childCount())
 {
     history = hist;
@@ -100,7 +100,7 @@ CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, const QString &dbHash, I
     }
 }
 
-CGisItemOvlArea::CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project)
+CGisItemOvlArea::CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject* project)
     : IGisItem(project, eTypeOvl, NOIDX)
 {
     loadFromDb(id, db);
@@ -115,10 +115,10 @@ CGisItemOvlArea::~CGisItemOvlArea()
     }
 }
 
-IGisItem * CGisItemOvlArea::createClone()
+IGisItem* CGisItemOvlArea::createClone()
 {
     int idx = -1;
-    IGisProject * project = getParentProject();
+    IGisProject* project = getParentProject();
     if(project)
     {
         idx = project->indexOfChild(this);
@@ -150,16 +150,16 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
 {
     QMutexLocker lock(&mutexItems);
 
-    qint32 i    = 0;
-    qint32 idx  = NOIDX;
-    qint32 d    = NOINT;
-    for(const QPointF &point : qAsConst(polygonArea))
+    qint32 i = 0;
+    qint32 idx = NOIDX;
+    qint32 d = NOINT;
+    for(const QPointF& point : qAsConst(polygonArea))
     {
         int tmp = (screenPos - point).manhattanLength();
         if(tmp < d)
         {
             idx = i;
-            d   = tmp;
+            d = tmp;
         }
         i++;
     }
@@ -167,7 +167,7 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
     return (idx < 0) ? NOPOINTF : polygonArea[idx];
 }
 
-void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
+void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine& l)
 {
     QMutexLocker lock(&mutexItems);
 
@@ -177,7 +177,7 @@ void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
     {
         area.pts << pt_t();
 
-        pt_t& areapt      = area.pts.last();
+        pt_t& areapt = area.pts.last();
         const point_t& pt = l[i];
 
         areapt.lon = pt.coord.x() * RAD_TO_DEG;
@@ -186,7 +186,7 @@ void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
         for(int n = 0; n < pt.subpts.size(); n++)
         {
             area.pts << pt_t();
-            pt_t& areapt       = area.pts.last();
+            pt_t& areapt = area.pts.last();
             const subpt_t& sub = pt.subpts[n];
 
             areapt.lon = sub.coord.x() * RAD_TO_DEG;
@@ -209,19 +209,19 @@ void CGisItemOvlArea::edit()
 void CGisItemOvlArea::deriveSecondaryData()
 {
     qreal north = -90;
-    qreal east  = -180;
-    qreal south =  90;
-    qreal west  =  180;
+    qreal east = -180;
+    qreal south = 90;
+    qreal west = 180;
 
-    for(const pt_t &pt : qAsConst(area.pts))
+    for(const pt_t& pt : qAsConst(area.pts))
     {
         if(pt.lon < west)
         {
-            west  = pt.lon;
+            west = pt.lon;
         }
         if(pt.lon > east)
         {
-            east  = pt.lon;
+            east = pt.lon;
         }
         if(pt.lat < south)
         {
@@ -242,8 +242,8 @@ void CGisItemOvlArea::deriveSecondaryData()
         const pt_t& pt11 = area.pts[i - 1];
         const pt_t& pt12 = area.pts[i];
 
-        QPointF& pt21    = line[i - 1];
-        QPointF& pt22    = line[i];
+        QPointF& pt21 = line[i - 1];
+        QPointF& pt22 = line[i];
 
         d = GPS_Math_Distance(pt11.lon * DEG_TO_RAD, pt11.lat * DEG_TO_RAD, pt12.lon * DEG_TO_RAD, pt12.lat * DEG_TO_RAD, a1, a2);
 
@@ -262,7 +262,7 @@ void CGisItemOvlArea::deriveSecondaryData()
     area.area = qAbs(area.area / 2);
 }
 
-void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& /*blockedAreas*/, CGisDraw * gis)
+void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& /*blockedAreas*/, CGisDraw* gis)
 {
     QMutexLocker lock(&mutexItems);
 
@@ -274,7 +274,7 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
 
     QPointF pt1;
 
-    for(const pt_t &pt : qAsConst(area.pts))
+    for(const pt_t& pt : qAsConst(area.pts))
     {
         pt1.setX(pt.lon);
         pt1.setY(pt.lat);
@@ -299,7 +299,7 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
     p.drawPolygon(polygonArea);
 
     //close polygon (required by isCloseTo)
-    const pt_t &pt = area.pts.first();
+    const pt_t& pt = area.pts.first();
     pt1.setX(pt.lon);
     pt1.setY(pt.lat);
     pt1 *= DEG_TO_RAD;
@@ -309,7 +309,7 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
     p.restore();
 }
 
-void CGisItemOvlArea::drawLabel(QPainter& p, const QPolygonF &/*viewport*/, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * /*gis*/)
+void CGisItemOvlArea::drawLabel(QPainter& p, const QPolygonF& /*viewport*/, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* /*gis*/)
 {
     QMutexLocker lock(&mutexItems);
 
@@ -317,7 +317,7 @@ void CGisItemOvlArea::drawLabel(QPainter& p, const QPolygonF &/*viewport*/, QLis
     {
         return;
     }
-    QPointF pt  = getPolygonCentroid(polygonArea);
+    QPointF pt = getPolygonCentroid(polygonArea);
     QRectF rect = fm.boundingRect(area.name);
     rect.adjust(-2, -2, 2, 2);
     rect.moveCenter(pt);
@@ -370,7 +370,7 @@ QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)
     return QPointF(x, y);
 }
 
-IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse)
+IScrOpt* CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse* mouse)
 {
     if(scrOpt.isNull())
     {
@@ -446,23 +446,23 @@ QString CGisItemOvlArea::getInfo(quint32 feature) const
     return str + "</div>";
 }
 
-void CGisItemOvlArea::getPolylineFromData(SGisLine &l) const
+void CGisItemOvlArea::getPolylineFromData(SGisLine& l) const
 {
     QMutexLocker lock(&mutexItems);
 
     l.clear();
-    for(const pt_t &pt : area.pts)
+    for(const pt_t& pt : area.pts)
     {
         l << point_t(QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD));
     }
 }
 
-void CGisItemOvlArea::getPolylineDegFromData(QPolygonF &polygon) const
+void CGisItemOvlArea::getPolylineDegFromData(QPolygonF& polygon) const
 {
     QMutexLocker lock(&mutexItems);
 
     polygon.clear();
-    for(const pt_t &pt : area.pts)
+    for(const pt_t& pt : area.pts)
     {
         polygon << QPointF(pt.lon, pt.lat);
     }
@@ -542,18 +542,18 @@ void CGisItemOvlArea::setColor(const QColor& c)
     {
         if(colorMap[n].color == c)
         {
-            colorIdx    = n;
-            color       = colorMap[n].color;
-            bullet      = QPixmap(colorMap[n].bullet);
+            colorIdx = n;
+            color = colorMap[n].color;
+            bullet = QPixmap(colorMap[n].bullet);
             break;
         }
     }
 
     if(n == colorMap.size())
     {
-        colorIdx    = DEFAULT_COLOR;
-        color       = colorMap[DEFAULT_COLOR].color;
-        bullet      = QPixmap(colorMap[DEFAULT_COLOR].bullet);
+        colorIdx = DEFAULT_COLOR;
+        color = colorMap[DEFAULT_COLOR].color;
+        bullet = QPixmap(colorMap[DEFAULT_COLOR].bullet);
     }
 
     setIcon(color.name());
@@ -561,7 +561,7 @@ void CGisItemOvlArea::setColor(const QColor& c)
 
 void CGisItemOvlArea::setIcon(const QString& c)
 {
-    area.color  = c;
+    area.color = c;
     QPixmap icon = QPixmap("://icons/48x48/Area.png");
 
     QPixmap mask( icon.size() );

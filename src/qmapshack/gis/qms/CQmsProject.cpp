@@ -25,7 +25,7 @@
 #include <QtWidgets>
 
 
-CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
+CQmsProject::CQmsProject(const QString& filename, CGisListWks* parent)
     : IGisProject(eTypeQms, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/QmsProject.png"));

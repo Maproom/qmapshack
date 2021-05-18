@@ -31,7 +31,7 @@ public:
     //Convenience constructor to be able to omit garminSym when specifying child categories
     CPoiIconCategory(const QPixmap& baseIcon, const QMap<QString, QPixmap>& subCategories)
         : baseIcon(baseIcon), garminSym(""), subCategories(subCategories){}
-    QPixmap getIcon(const QStringList &additionalTags) const;
+    QPixmap getIcon(const QStringList& additionalTags) const;
     const QString& getGarminSym() const
     {
         return garminSym;

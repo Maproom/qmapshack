@@ -21,7 +21,7 @@
 #include "plot/CPlotData.h"
 #include "units/IUnit.h"
 
-CPlotData::CPlotData(axistype_e type, QObject * parent)
+CPlotData::CPlotData(axistype_e type, QObject* parent)
     : QObject(parent)
     , axisType(type)
 {

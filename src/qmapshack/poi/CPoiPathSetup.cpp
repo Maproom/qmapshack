@@ -22,20 +22,20 @@
 
 #include <QtWidgets>
 
-CPoiPathSetup::CPoiPathSetup(QStringList &paths)
+CPoiPathSetup::CPoiPathSetup(QStringList& paths)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , paths(paths)
 
 {
     setupUi(this);
 
-    connect(toolAdd,    &QToolButton::clicked,              this, &CPoiPathSetup::slotAddPath);
-    connect(toolDelete, &QToolButton::clicked,              this, &CPoiPathSetup::slotDelPath);
+    connect(toolAdd, &QToolButton::clicked, this, &CPoiPathSetup::slotAddPath);
+    connect(toolDelete, &QToolButton::clicked, this, &CPoiPathSetup::slotDelPath);
     connect(listWidget, &QListWidget::itemSelectionChanged, this, &CPoiPathSetup::slotItemSelectionChanged);
 
-    for(const QString &path : paths)
+    for(const QString& path : paths)
     {
-        QListWidgetItem * item = new QListWidgetItem(listWidget);
+        QListWidgetItem* item = new QListWidgetItem(listWidget);
         item->setText(path);
     }
 
@@ -53,7 +53,7 @@ void CPoiPathSetup::accept()
     paths.clear();
     for(int i = 0; i < listWidget->count(); i++)
     {
-        QListWidgetItem *item = listWidget->item(i);
+        QListWidgetItem* item = listWidget->item(i);
         paths << item->text();
     }
 
@@ -67,7 +67,7 @@ void CPoiPathSetup::slotAddPath()
     {
         if(!paths.contains(path))
         {
-            QListWidgetItem * item = new QListWidgetItem(listWidget);
+            QListWidgetItem* item = new QListWidgetItem(listWidget);
             item->setText(path);
         }
     }
@@ -75,7 +75,7 @@ void CPoiPathSetup::slotAddPath()
 
 void CPoiPathSetup::slotDelPath()
 {
-    QList<QListWidgetItem *> items = listWidget->selectedItems();
+    QList<QListWidgetItem*> items = listWidget->selectedItems();
     qDeleteAll(items);
 }
 

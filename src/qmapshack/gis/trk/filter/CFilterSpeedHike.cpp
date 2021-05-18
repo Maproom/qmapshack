@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CFilterSpeedHike::CFilterSpeedHike(QWidget *parent)
+CFilterSpeedHike::CFilterSpeedHike(QWidget* parent)
     : QWidget(parent), noOfFixTypes(4), noOfCustomTypes(3)
     // 4 fix and 3 custom hiking types has be defined as default
     // Based on carloscoi analysis
@@ -66,7 +66,7 @@ CFilterSpeedHike::CFilterSpeedHike(QWidget *parent)
     hiking_type_t hikingType;
     for (int i = 0; i < noOfFixTypes; ++i)
     {
-        const hiking_type_t &hikingTypeDefault = hikingTypeDefaults[i];
+        const hiking_type_t& hikingTypeDefault = hikingTypeDefaults[i];
         hikingType.name = hikingTypeDefault.name;
         hikingType.plainSpeed = hikingTypeDefault.plainSpeed;
         hikingType.ascending = hikingTypeDefault.ascending;
@@ -88,7 +88,7 @@ void CFilterSpeedHike::loadSettings(QSettings& cfg)
     cfg.beginReadArray("CustomHikingTypes");
     for (int i = 0; i < noOfCustomTypes; ++i)
     {
-        const hiking_type_t &hikingTypeDefault = hikingTypeDefaults[noOfFixTypes + i];
+        const hiking_type_t& hikingTypeDefault = hikingTypeDefaults[noOfFixTypes + i];
         cfg.setArrayIndex(i);
         hikingType.name = hikingTypeDefault.name;
         hikingType.plainSpeed = cfg.value("plainSpeed", hikingTypeDefault.plainSpeed).toDouble();
@@ -110,7 +110,7 @@ void CFilterSpeedHike::saveSettings(QSettings& cfg)
     cfg.beginWriteArray("CustomHikingTypes");
     for (int i = 0; i < noOfCustomTypes; ++i)
     {
-        const hiking_type_t &hikingType = hikingTypes[noOfFixTypes + i];
+        const hiking_type_t& hikingType = hikingTypes[noOfFixTypes + i];
         cfg.setArrayIndex(i);
         cfg.setValue("name", hikingType.name);
         cfg.setValue("plainSpeed", hikingType.plainSpeed);
@@ -127,7 +127,7 @@ void CFilterSpeedHike::apply(CGisItemTrk& trk)
 
 void CFilterSpeedHike::slotSetHikingType(int type)
 {
-    const hiking_type_t &hikingType = hikingTypes[type];
+    const hiking_type_t& hikingType = hikingTypes[type];
 
     spinPlainSpeed->setValue(hikingType.plainSpeed);
     spinAscending->setValue(hikingType.ascending);

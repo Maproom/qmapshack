@@ -20,7 +20,7 @@
 
 #include <QtWidgets>
 
-CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::service_t> &services, QWidget *parent)
+CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::service_t>& services, QWidget* parent)
     : QDialog(parent)
     , services(services)
 {
@@ -59,7 +59,7 @@ void CGeoSearchWebConfigDialog::setupTreeWidget()
 
     for(const CGeoSearchWeb::service_t& service : qAsConst(services))
     {
-        QTreeWidgetItem * item = new QTreeWidgetItem(treeServices);
+        QTreeWidgetItem* item = new QTreeWidgetItem(treeServices);
         item->setText(0, service.name);
         item->setIcon(0, QIcon(service.icon));
         item->setData(0, Qt::UserRole, service.icon);
@@ -77,9 +77,9 @@ void CGeoSearchWebConfigDialog::accept()
     const qint32 N = treeServices->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        QTreeWidgetItem * item = treeServices->topLevelItem(n);
+        QTreeWidgetItem* item = treeServices->topLevelItem(n);
         const QString& name = item->text(0);
-        const QString& url  = item->text(1);
+        const QString& url = item->text(1);
         const QString& icon = item->data(0, Qt::UserRole).toString();
         if(name.isEmpty() || url.isEmpty() || !url.startsWith("http"))
         {
@@ -99,7 +99,7 @@ void CGeoSearchWebConfigDialog::slotSelectionChanged()
 
 void CGeoSearchWebConfigDialog::slotAddNew()
 {
-    QTreeWidgetItem * item = new QTreeWidgetItem(treeServices);
+    QTreeWidgetItem* item = new QTreeWidgetItem(treeServices);
     item->setText(0, tr("enter name and URL"));
     item->setIcon(0, QIcon(CGeoSearchWeb::defaultIcon));
     item->setData(0, Qt::UserRole, CGeoSearchWeb::defaultIcon);

@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CScrOptSelect::CScrOptSelect(IMouse *mouse)
+CScrOptSelect::CScrOptSelect(IMouse* mouse)
     : IScrOpt(mouse)
 {
     setupUi(this);
@@ -49,13 +49,13 @@ CScrOptSelect::CScrOptSelect(IMouse *mouse)
     modeSelection |= toolItemOvl->isChecked() ? IGisItem::eSelectionOvl : 0;
     modeSelection |= toolItemPoi->isChecked() ? IGisItem::eSelectionPoi : 0;
 
-    connect(toolModeExact,     &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionExact, checked);});
+    connect(toolModeExact, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionExact, checked);});
     connect(toolModeIntersect, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionIntersect, checked);});
-    connect(toolItemTrk,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionTrk, checked);});
-    connect(toolItemWpt,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionWpt, checked);});
-    connect(toolItemRte,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionRte, checked);});
-    connect(toolItemOvl,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionOvl, checked);});
-    connect(toolItemPoi,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionPoi, checked);});
+    connect(toolItemTrk, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionTrk, checked);});
+    connect(toolItemWpt, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionWpt, checked);});
+    connect(toolItemRte, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionRte, checked);});
+    connect(toolItemOvl, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionOvl, checked);});
+    connect(toolItemPoi, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionPoi, checked);});
 }
 
 CScrOptSelect::~CScrOptSelect()
@@ -76,7 +76,7 @@ CScrOptSelect::~CScrOptSelect()
 
 void CScrOptSelect::slotModeSwitch(IGisItem::selection_e mode, bool checked)
 {
-    CCanvas * canvas = mouse->getCanvas();
+    CCanvas* canvas = mouse->getCanvas();
 
     if(checked)
     {

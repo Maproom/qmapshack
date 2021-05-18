@@ -25,7 +25,7 @@
 #include "mouse/CScrOptSemaphoreLocker.h"
 #include "mouse/IMouse.h"
 
-CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
+CScrOptTrk::CScrOptTrk(CGisItemTrk* trk, const QPoint& point, IMouse* parent)
     : IScrOpt(parent)
     , key(trk->getKey())
 {
@@ -45,7 +45,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     toolCopyWithWpt->setEnabled(trk->getNumberOfAttachedWpt() != 0);
     toolNogo->setChecked(trk->isNogo());
 
-    IGisProject * project = trk->getParentProject();
+    IGisProject* project = trk->getParentProject();
     if(project != nullptr)
     {
         toolCombine->setEnabled(project->getItemCountByType(IGisItem::eTypeTrk) > 1);
@@ -62,21 +62,21 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     show();
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptTrk::slotEditDetails);
-    connect(toolTags,        &QToolButton::clicked, this, &CScrOptTrk::slotTags);
-    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptTrk::slotDelete);
-    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptTrk::slotCopy);
-    connect(toolProfile,     &QToolButton::toggled, this, &CScrOptTrk::slotProfile);
-    connect(toolCut,         &QToolButton::clicked, this, &CScrOptTrk::slotCut);
-    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptTrk::slotEdit);
-    connect(toolReverse,     &QToolButton::clicked, this, &CScrOptTrk::slotReverse);
-    connect(toolCombine,     &QToolButton::clicked, this, &CScrOptTrk::slotCombine);
-    connect(toolRange,       &QToolButton::clicked, this, &CScrOptTrk::slotRange);
-    connect(toolActivity,    &QToolButton::clicked, this, &CScrOptTrk::slotActivity);
-    connect(toolColor,       &QToolButton::clicked, this, &CScrOptTrk::slotColor);
+    connect(toolTags, &QToolButton::clicked, this, &CScrOptTrk::slotTags);
+    connect(toolDelete, &QToolButton::clicked, this, &CScrOptTrk::slotDelete);
+    connect(toolCopy, &QToolButton::clicked, this, &CScrOptTrk::slotCopy);
+    connect(toolProfile, &QToolButton::toggled, this, &CScrOptTrk::slotProfile);
+    connect(toolCut, &QToolButton::clicked, this, &CScrOptTrk::slotCut);
+    connect(toolEdit, &QToolButton::clicked, this, &CScrOptTrk::slotEdit);
+    connect(toolReverse, &QToolButton::clicked, this, &CScrOptTrk::slotReverse);
+    connect(toolCombine, &QToolButton::clicked, this, &CScrOptTrk::slotCombine);
+    connect(toolRange, &QToolButton::clicked, this, &CScrOptTrk::slotRange);
+    connect(toolActivity, &QToolButton::clicked, this, &CScrOptTrk::slotActivity);
+    connect(toolColor, &QToolButton::clicked, this, &CScrOptTrk::slotColor);
     connect(toolCopyWithWpt, &QToolButton::clicked, this, &CScrOptTrk::slotCopyWithWpt);
-    connect(toolNogo,        &QToolButton::clicked, this, &CScrOptTrk::slotNogo);
+    connect(toolNogo, &QToolButton::clicked, this, &CScrOptTrk::slotNogo);
     connect(toolAddElevation, &QToolButton::clicked, this, &CScrOptTrk::slotAddElevation);
-    connect(toolAddInfo,     &QToolButton::clicked, this, &CScrOptTrk::slotAddInfo);
+    connect(toolAddInfo, &QToolButton::clicked, this, &CScrOptTrk::slotAddInfo);
 
     connect(label, &QLabel::linkActivated, this, &CScrOptTrk::slotLinkActivated);
 
@@ -206,7 +206,7 @@ void CScrOptTrk::slotTags()
 
 void CScrOptTrk::draw(QPainter& p)
 {
-    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
+    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         close();

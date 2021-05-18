@@ -32,7 +32,7 @@ public:
     QString defaultCachePath() override;
     QString userDataPath(QString subdir = 0) override;
     QString logDir() override;
-    QString findExecutable(const QString &name) override { return QStandardPaths::findExecutable(name); }
+    QString findExecutable(const QString& name) override { return QStandardPaths::findExecutable(name); }
     QString helpFile() override;
 
 private:
@@ -47,7 +47,6 @@ private:
     static QString relHelpDir;
     static QString relBinDir;
     static QString relLogDir;
-
 };
 
 #endif // CAPPSETUPMAC_H

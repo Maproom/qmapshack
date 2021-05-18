@@ -92,18 +92,18 @@ public:
 
        @return  A pointer to the menu. Will be nullptr if (execute == true).
      */
-    static QMenu * getMenu(const QList<IGisItem::key_t>& keys, QWidget *parent, bool execute = false);
+    static QMenu* getMenu(const QList<IGisItem::key_t>& keys, QWidget* parent, bool execute = false);
     /**
        @brief Convenience wrapper to getMenu(const QList<IGisItem::key_t>& keys,...)
      */
-    static QMenu * getMenu(const IGisItem::key_t &key, QWidget *parent, bool execute = false);
+    static QMenu* getMenu(const IGisItem::key_t& key, QWidget* parent, bool execute = false);
     /**
        @brief Convert array of summaries to HTML table
        @param summary   The map of summaries
        @param acts      Set of all activities in the summary
        @param str       string to receive HTML
      */
-    static void printSummary(const QMap<trkact_t, summary_t> &summary, const QSet<trkact_t> &acts, QString& str);
+    static void printSummary(const QMap<trkact_t, summary_t>& summary, const QSet<trkact_t>& acts, QString& str);
     /**
        @brief Get constant reference to activity descriptor table
        @return The constant reference to the descriptor table.
@@ -129,7 +129,7 @@ public:
        @param act   the activity to select
        @param color the color as IGisItem::color_t
      */
-    static void setColor(trkact_t act, const IGisItem::color_t &color);
+    static void setColor(trkact_t act, const IGisItem::color_t& color);
 
     /**
        @brief Update internal summary array
@@ -181,7 +181,7 @@ public:
        @brief Add internal summary to given array of summaries
        @param summary  an map of summaries to hold the sum
      */
-    void sumUp(QMap<trkact_t, summary_t> &summary) const;
+    void sumUp(QMap<trkact_t, summary_t>& summary) const;
 
 
     const QList<range_t>& getActivityRanges() const
@@ -192,12 +192,12 @@ public:
 
 private:
     friend class CGisItemTrk;
-    CActivityTrk(CGisItemTrk * trk);
+    CActivityTrk(CGisItemTrk* trk);
 
     static desc_t dummyDesc;
     static QVector<desc_t> actDescriptor;
 
-    CGisItemTrk * trk;
+    CGisItemTrk* trk;
     QSet<trkact_t> allActivities;
     QList<range_t> activityRanges;
     QMap<trkact_t, summary_t> activitySummary;

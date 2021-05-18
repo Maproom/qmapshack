@@ -26,21 +26,21 @@
 
 const QList<extension_t> CSmlProject::extensions =
 {
-    {"Latitude",           RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lat, NIL)}   // unit [°]
-    , {"Longitude",          RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lon, NIL)}  // unit [°]
-    , {"Altitude",           1.0,            0.0,        ASSIGN_VALUE(ele, NIL)}  // unit [m]
-    , {"VerticalSpeed",      1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"], NIL)}                  // unit [m/h]
-    , {"HR",                 60.0,           0.0,        ASSIGN_VALUE(extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"], qRound)}   // unit [bpm]
-    , {"Cadence",            60.0,           0.0,        ASSIGN_VALUE(extensions["gpxdata:cadence"], NIL)}                        // unit [bpm]
-    , {"Temperature",        1.0,            -273.15,    ASSIGN_VALUE(extensions["gpxdata:temp"], NIL)}                           // unit [°C]
-    , {"SeaLevelPressure",   0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:seaLevelPressure"], NIL)}               // unit [hPa]
-    , {"Speed",              1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:speed"], NIL)}                          // unit [m/s]
-    , {"EnergyConsumption",  60.0 / 4184.0,  0.0,        ASSIGN_VALUE(extensions["gpxdata:energy"], NIL)}                         // unit [kCal/min]
+    {"Latitude", RAD_TO_DEG, 0.0, ASSIGN_VALUE(lat, NIL)}                        // unit [°]
+    , {"Longitude", RAD_TO_DEG, 0.0, ASSIGN_VALUE(lon, NIL)}                      // unit [°]
+    , {"Altitude", 1.0, 0.0, ASSIGN_VALUE(ele, NIL)}                              // unit [m]
+    , {"VerticalSpeed", 1.0, 0.0, ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"], NIL)}                                         // unit [m/h]
+    , {"HR", 60.0, 0.0, ASSIGN_VALUE(extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"], qRound)}                                    // unit [bpm]
+    , {"Cadence", 60.0, 0.0, ASSIGN_VALUE(extensions["gpxdata:cadence"], NIL)}                                                    // unit [bpm]
+    , {"Temperature", 1.0, -273.15, ASSIGN_VALUE(extensions["gpxdata:temp"], NIL)}                                                // unit [°C]
+    , {"SeaLevelPressure", 0.01, 0.0, ASSIGN_VALUE(extensions["gpxdata:seaLevelPressure"], NIL)}                                  // unit [hPa]
+    , {"Speed", 1.0, 0.0, ASSIGN_VALUE(extensions["gpxdata:speed"], NIL)}                                                         // unit [m/s]
+    , {"EnergyConsumption", 60.0 / 4184.0, 0.0, ASSIGN_VALUE(extensions["gpxdata:energy"], NIL)}                                  // unit [kCal/min]
 };
 
 
 
-CSmlProject::CSmlProject(const QString &filename, CGisListWks * parent)
+CSmlProject::CSmlProject(const QString& filename, CGisListWks* parent)
     : ISuuntoProject(eTypeSml, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/SmlProject.png"));
@@ -57,7 +57,7 @@ void CSmlProject::loadSml(const QString& filename)
     {
         loadSml(filename, this);
     }
-    catch(QString &errormsg)
+    catch(QString& errormsg)
     {
         QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
                               tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
@@ -66,7 +66,7 @@ void CSmlProject::loadSml(const QString& filename)
 }
 
 
-void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
+void CSmlProject::loadSml(const QString& filename, CSmlProject* project)
 {
     QFile file(filename);
 
@@ -157,7 +157,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
             const QDomNode& xmlDevice = xmlDeviceLog.namedItem("Device");
             if(xmlDevice.namedItem("Name").isElement())
             {
-                trk.cmt =  tr("Device: %1<br/>").arg(xmlDevice.namedItem("Name").toElement().text()) + trk.cmt;
+                trk.cmt = tr("Device: %1<br/>").arg(xmlDevice.namedItem("Name").toElement().text()) + trk.cmt;
             }
         }
 

@@ -31,15 +31,15 @@ class CDeviceGarminArchive : public QObject, public IDevice
 {
     Q_OBJECT
 public:
-    CDeviceGarminArchive(const QString& path, CDeviceGarmin * parent);
+    CDeviceGarminArchive(const QString& path, CDeviceGarmin* parent);
     virtual ~CDeviceGarminArchive() = default;
 
 protected:
-    void insertCopyOfProject(IGisProject * project) override {}
+    void insertCopyOfProject(IGisProject* project) override {}
 
 private slots:
-    void slotExpanded(QTreeWidgetItem * item);
-    void slotCollapsed(QTreeWidgetItem * item);
+    void slotExpanded(QTreeWidgetItem* item);
+    void slotCollapsed(QTreeWidgetItem* item);
 };
 
 #endif //CDEVICEGARMINARCHIVE_H

@@ -26,7 +26,7 @@ CRouterOptimization::CRouterOptimization()
     routerOptions = CRouterSetup::self().getOptions();
 }
 
-int CRouterOptimization::optimize(SGisLine &line)
+int CRouterOptimization::optimize(SGisLine& line)
 {
     checkRouter();
     if(!CRouterSetup::self().hasFastRouting())
@@ -128,7 +128,7 @@ int CRouterOptimization::optimize(SGisLine &line)
     return fillSubPts(line);
 }
 
-qreal CRouterOptimization::createNextBestOrder(const SGisLine &oldOrder, SGisLine &newOrder)
+qreal CRouterOptimization::createNextBestOrder(const SGisLine& oldOrder, SGisLine& newOrder)
 {
     qreal bestInsertionGain = 0;
     int bestBaseIndex = -1;
@@ -178,7 +178,7 @@ qreal CRouterOptimization::createNextBestOrder(const SGisLine &oldOrder, SGisLin
     return bestInsertionGain;
 }
 
-qreal CRouterOptimization::twoOptStep(const SGisLine &oldOrder, SGisLine &newOrder)
+qreal CRouterOptimization::twoOptStep(const SGisLine& oldOrder, SGisLine& newOrder)
 {
     //NOINT and not 0, since we also want to take orders that don't seem to be improving the situation
     qreal bestTwoOptGain = NOINT;
@@ -219,7 +219,7 @@ qreal CRouterOptimization::twoOptStep(const SGisLine &oldOrder, SGisLine &newOrd
     return bestTwoOptGain;
 }
 
-qreal CRouterOptimization::getRealRouteCosts(const SGisLine &line, qreal costCutoff)
+qreal CRouterOptimization::getRealRouteCosts(const SGisLine& line, qreal costCutoff)
 {
     qreal costs = 0;
     for(int i = 0; i < line.length() - 1; i++)
@@ -303,7 +303,7 @@ const CRouterOptimization::routing_cache_item_t* CRouterOptimization::getRoute(c
     return &routingCache[start_key][end_key];
 }
 
-int CRouterOptimization::fillSubPts(SGisLine &line)
+int CRouterOptimization::fillSubPts(SGisLine& line)
 {
     for(int i = 0; i < line.length() - 1; i++)
     {

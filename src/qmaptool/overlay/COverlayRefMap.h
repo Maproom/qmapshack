@@ -33,7 +33,7 @@ class COverlayRefMap : public IOverlay, private Ui::IOverlayRefMap
 {
     Q_OBJECT
 public:
-    COverlayRefMap(CItemRefMap *item, QStackedWidget * stackedWidget);
+    COverlayRefMap(CItemRefMap* item, QStackedWidget* stackedWidget);
     virtual ~COverlayRefMap() = default;
 
     void saveSettings(QSettings& cfg);
@@ -41,12 +41,12 @@ public:
 
     void addRefPoints(QList<COverlayRefMapPoint*>& points);
     QString getMapProjection() const;
-    const QList<COverlayRefMapPoint *> getRefPoints() const;
+    const QList<COverlayRefMapPoint*> getRefPoints() const;
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent *e);
-    void mouseReleaseEventFx(QMouseEvent *e);
-    bool keyPressEventFx(QKeyEvent *e);
+    void mouseMoveEventFx(QMouseEvent* e);
+    void mouseReleaseEventFx(QMouseEvent* e);
+    bool keyPressEventFx(QKeyEvent* e);
     QCursor getCursorFx();
 
     void abortStep();
@@ -78,22 +78,22 @@ private:
     void updateGui();
     QPointF isCloseTo(QPointF pt);
 
-    void mouseMovePointAdd(const QPointF &pt);
-    void mouseMovePointDel(const QPointF &pt);
-    void mouseMovePointMove(const QPointF &pt);
+    void mouseMovePointAdd(const QPointF& pt);
+    void mouseMovePointDel(const QPointF& pt);
+    void mouseMovePointMove(const QPointF& pt);
 
-    void mouseReleasePointAdd(const QPointF &pt, Qt::MouseButton button);
-    void mouseReleasePointDel(const QPointF &pt, Qt::MouseButton button);
-    void mouseReleasePointMove(const QPointF &pt, Qt::MouseButton button);
+    void mouseReleasePointAdd(const QPointF& pt, Qt::MouseButton button);
+    void mouseReleasePointDel(const QPointF& pt, Qt::MouseButton button);
+    void mouseReleasePointMove(const QPointF& pt, Qt::MouseButton button);
 
     IDrawContext* context;
-    CItemRefMap * item;
+    CItemRefMap* item;
 
     mode_e mode = eModeNone;
 
     QPointF ptFocus1 = NOPOINTF;
     QPointF ptFocus2 = NOPOINTF;
-    bool movePoint   = false;
+    bool movePoint = false;
 
     QString gcpFilename;
 };

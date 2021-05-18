@@ -29,7 +29,7 @@ class CCreateRouteFromWpt : public QDialog, private Ui::ICreateRouteFromWpt
 {
     Q_OBJECT
 public:
-    CCreateRouteFromWpt(const QList<IGisItem::key_t>& keys, QWidget * parent);
+    CCreateRouteFromWpt(const QList<IGisItem::key_t>& keys, QWidget* parent);
     virtual ~CCreateRouteFromWpt();
 
 public slots:

@@ -27,10 +27,10 @@ class CFitFieldDataState final : public IFitDecoderState
 {
     Q_DECLARE_TR_FUNCTIONS(CFitFieldDataState)
 public:
-    CFitFieldDataState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
+    CFitFieldDataState(shared_state_data_t& data) : IFitDecoderState(data) { reset(); }
     virtual ~CFitFieldDataState() {}
     void reset() override;
-    decode_state_e process(quint8 &dataByte) override;
+    decode_state_e process(quint8& dataByte) override;
 
 private:
     bool handleFitField();

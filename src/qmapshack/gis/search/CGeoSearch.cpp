@@ -33,7 +33,7 @@
 #include <QtWidgets>
 #include <QtXml>
 
-CGeoSearch::CGeoSearch(CGisListWks * parent)
+CGeoSearch::CGeoSearch(CGisListWks* parent)
     : IGisProject(eTypeGeoSearch, "", parent)
     , searchConfig(&CGeoSearchConfig::self())
 {
@@ -100,7 +100,7 @@ void CGeoSearch::slotChangeSymbol()
 
 void CGeoSearch::slotSelectService()
 {
-    QMenu * menu = new QMenu(edit);
+    QMenu* menu = new QMenu(edit);
 
     menu->addSection(tr("Select Service"));
 
@@ -112,12 +112,12 @@ void CGeoSearch::slotSelectService()
     actionGroup->addAction(addService(CGeoSearchConfig::eServiceGoogle, tr("Google"), menu));
 
     menu->addSeparator();
-    QAction * actAccu = menu->addAction(QIcon("://icons/32x32/AddGreen.png"), tr("Accumulative Results"));
+    QAction* actAccu = menu->addAction(QIcon("://icons/32x32/AddGreen.png"), tr("Accumulative Results"));
     actAccu->setCheckable(true);
     actAccu->setChecked(searchConfig->accumulativeResults);
     connect(actAccu, &QAction::triggered, this, &CGeoSearch::slotAccuResults);
 
-    QAction * actReset = menu->addAction(QIcon("://icons/32x32/Reset.png"), tr("Reset Results"));
+    QAction* actReset = menu->addAction(QIcon("://icons/32x32/Reset.png"), tr("Reset Results"));
     actReset->setEnabled(childCount() != 0);
     connect(actReset, &QAction::triggered, this, &CGeoSearch::slotResetResults);
 
@@ -132,12 +132,12 @@ void CGeoSearch::slotSelectService()
     menu->exec();
 }
 
-QAction * CGeoSearch::addService(CGeoSearchConfig::service_e service, const QString& name, QMenu * menu)
+QAction* CGeoSearch::addService(CGeoSearchConfig::service_e service, const QString& name, QMenu* menu)
 {
-    QAction* action  = menu->addAction(name);
+    QAction* action = menu->addAction(name);
     action->setCheckable(true);
 
-    connect(action,  &QAction::triggered, this, [this, service](bool checked){slotServiceSelected(service, checked);});
+    connect(action, &QAction::triggered, this, [this, service](bool checked){slotServiceSelected(service, checked);});
     action->setChecked(searchConfig->currentService == service);
 
     return action;
@@ -379,7 +379,7 @@ void CGeoSearch::parseGoogle(const QByteArray& data)
     status = root.namedItem("status").toElement().text();
     if(status != "OK")
     {
-        status  = tr("Error: ");
+        status = tr("Error: ");
         status += root.namedItem("error_message").toElement().text();
         createErrorItem(status);
         return;
@@ -393,7 +393,7 @@ void CGeoSearch::parseGoogle(const QByteArray& data)
             for(int i = 0; i < N; i++)
             {
                 QString address;
-                QDomElement xmlEntry   = xmlEntries.item(i).toElement();
+                QDomElement xmlEntry = xmlEntries.item(i).toElement();
                 QDomElement xmlAddress = xmlEntry.namedItem("formatted_address").toElement();
                 if(xmlAddress.isElement())
                 {
@@ -431,7 +431,7 @@ void CGeoSearch::parseGeonamesSearch(const QByteArray& data)
     QDomElement xmlStatus = root.namedItem("status").toElement();
     if (xmlStatus.isElement())
     {
-        status  = tr("Error: ");
+        status = tr("Error: ");
         status.append(xmlStatus.attribute("message"));
         createErrorItem(status);
         return;
@@ -445,7 +445,7 @@ void CGeoSearch::parseGeonamesSearch(const QByteArray& data)
         {
             QString address;
             bool isNotFirst = false;
-            QDomElement xmlEntry   = xmlEntries.item(i).toElement();
+            QDomElement xmlEntry = xmlEntries.item(i).toElement();
 
             if (xmlEntry.isElement())
             {
@@ -511,7 +511,7 @@ void CGeoSearch::parseGeonamesAddress(const QByteArray& data)
     QDomElement xmlStatus = root.namedItem("status").toElement();
     if (xmlStatus.isElement())
     {
-        status  = tr("Error: ");
+        status = tr("Error: ");
         status.append(xmlStatus.attribute("message"));
         createErrorItem(status);
         return;
@@ -525,7 +525,7 @@ void CGeoSearch::parseGeonamesAddress(const QByteArray& data)
         {
             QString address;
             bool isNotFirst = false;
-            QDomElement xmlEntry   = xmlEntries.item(i).toElement();
+            QDomElement xmlEntry = xmlEntries.item(i).toElement();
 
             if (xmlEntry.isElement())
             {
@@ -667,7 +667,7 @@ void CGeoSearch::parseNominatim(const QByteArray& data)
             QString address;
             bool isNotFirst = false;
             bool hasPostcode = false;
-            QDomElement xmlEntry   = xmlEntries.item(i).toElement();
+            QDomElement xmlEntry = xmlEntries.item(i).toElement();
 
             if (xmlEntry.isElement())
             {

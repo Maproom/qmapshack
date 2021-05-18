@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CGridSelArea::CGridSelArea(QWidget *parent)
+CGridSelArea::CGridSelArea(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
@@ -33,7 +33,7 @@ CGridSelArea::CGridSelArea(QWidget *parent)
 }
 
 
-void CGridSelArea::registerItem(CItemRefMap * item)
+void CGridSelArea::registerItem(CItemRefMap* item)
 {
     this->item = item;
 
@@ -107,7 +107,7 @@ bool CGridSelArea::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     return true;
 }
 
-void CGridSelArea::mouseMoveEventFx(QMouseEvent *e)
+void CGridSelArea::mouseMoveEventFx(QMouseEvent* e)
 {
     switch(state)
     {
@@ -179,7 +179,7 @@ void CGridSelArea::mouseMoveEventFx(QMouseEvent *e)
     }
 }
 
-void CGridSelArea::mouseReleaseEventFx(QMouseEvent *e)
+void CGridSelArea::mouseReleaseEventFx(QMouseEvent* e)
 {
     if(e->button() == Qt::LeftButton)
     {
@@ -190,7 +190,7 @@ void CGridSelArea::mouseReleaseEventFx(QMouseEvent *e)
             if(corner != eCornerNone)
             {
                 areaSave = area;
-                state    = eStateMove;
+                state = eStateMove;
             }
             break;
         }
@@ -198,22 +198,22 @@ void CGridSelArea::mouseReleaseEventFx(QMouseEvent *e)
         case eStateMove:
         {
             corner = eCornerNone;
-            state  = eStateIdle;
+            state = eStateIdle;
             break;
         }
         }
     }
     else
     {
-        area   = areaSave;
-        state  = eStateIdle;
+        area = areaSave;
+        state = eStateIdle;
         corner = eCornerNone;
     }
     context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
     emit sigChanged();
 }
 
-void CGridSelArea::leaveEventFx(QEvent *e)
+void CGridSelArea::leaveEventFx(QEvent* e)
 {
 }
 
@@ -232,9 +232,9 @@ void CGridSelArea::slotSetArea(const QRectF& rect)
 
 void CGridSelArea::slotReset()
 {
-    area    = QRectF();
-    state   = eStateIdle;
-    corner  = eCornerNone;
+    area = QRectF();
+    state = eStateIdle;
+    corner = eCornerNone;
     context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
     emit sigChanged();
 }

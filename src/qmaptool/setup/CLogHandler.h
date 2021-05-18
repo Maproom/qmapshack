@@ -26,7 +26,7 @@ class CLogHandler
 public:
     static void initLogHandler(QString logDirectory, bool writeToFile, bool debugOutput);
 
-    void log(QtMsgType type, const QMessageLogContext &context, const QString &msg);
+    void log(QtMsgType type, const QMessageLogContext& context, const QString& msg);
 
 private:
     CLogHandler(QString logDirectory, bool writeToFile, bool debugOutput);

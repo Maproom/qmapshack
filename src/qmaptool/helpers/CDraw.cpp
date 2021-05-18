@@ -33,7 +33,7 @@ QBrush CDraw::brushBackWhite(QColor(255, 255, 255, 255));
 QBrush CDraw::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 
 
-QImage CDraw::createBasicArrow(const QBrush &brush, qreal scale)
+QImage CDraw::createBasicArrow(const QBrush& brush, qreal scale)
 {
     QImage arrow(21 * scale, 16 * scale, QImage::Format_ARGB32);
     arrow.fill(qRgba(0, 0, 0, 0));
@@ -47,9 +47,9 @@ QImage CDraw::createBasicArrow(const QBrush &brush, qreal scale)
 
     QPointF arrowPoints[4] =
     {
-        QPointF(20.0 * scale,  7.0 * scale), // front
-        QPointF( 0.0 * scale,  0.0 * scale), // upper tail
-        QPointF( 5.0 * scale,  7.0 * scale), // mid   tail
+        QPointF(20.0 * scale, 7.0 * scale),  // front
+        QPointF( 0.0 * scale, 0.0 * scale),  // upper tail
+        QPointF( 5.0 * scale, 7.0 * scale),  // mid   tail
         QPointF( 0.0 * scale, 15.0 * scale)  // lower tail
     };
     painter.drawPolygon(arrowPoints, 4);
@@ -63,12 +63,12 @@ QImage CDraw::createBasicArrow(const QBrush &brush, qreal scale)
    @return  (int) ( (x2 - x1)^2 + (y2 - y1)^2 )
  */
 
-static inline int pointDistanceSquare(const QPointF &p1, const QPointF &p2)
+static inline int pointDistanceSquare(const QPointF& p1, const QPointF& p2)
 {
     return (p2.x() - p1.x()) * (p2.x() - p1.x()) + (p2.y() - p1.y()) * (p2.y() - p1.y());
 }
 
-void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist, qreal scale)
+void CDraw::arrows(const QPolygonF& line, const QRectF& viewport, QPainter& p, int minPointDist, int minArrowDist, qreal scale)
 {
     QImage arrow = createBasicArrow(p.brush(), scale);
     qreal xoff = qCeil(arrow.width() / 2.0);
@@ -81,8 +81,8 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
     bool firstArrow = true;
     for(int i = 1; i < line.size(); i++)
     {
-        const QPointF &pt     = line[i    ];
-        const QPointF &prevPt = line[i - 1];
+        const QPointF& pt = line[i    ];
+        const QPointF& prevPt = line[i - 1];
 
         // ensure there is enough space between two line points
         if( pointDistanceSquare(pt, prevPt) >= minPointDistSquare )
@@ -102,14 +102,14 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
 
                 p.restore();
 
-                prevArrow  = arrowPos;
+                prevArrow = arrowPos;
                 firstArrow = false;
             }
         }
     }
 }
 
-void CDraw::text(const QString &str, QPainter &p, const QPoint &center, const QColor &color, const QFont &font)
+void CDraw::text(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font)
 {
     QFontMetrics fm(font);
     QRect r = fm.boundingRect(str);
@@ -123,8 +123,8 @@ void CDraw::text(const QString &str, QPainter &p, const QPoint &center, const QC
     p.drawText(r.topLeft() - QPoint( 0, -1), str);
     p.drawText(r.topLeft() - QPoint(+1, -1), str);
 
-    p.drawText(r.topLeft() - QPoint(-1,  0), str);
-    p.drawText(r.topLeft() - QPoint(+1,  0), str);
+    p.drawText(r.topLeft() - QPoint(-1, 0), str);
+    p.drawText(r.topLeft() - QPoint(+1, 0), str);
 
     p.drawText(r.topLeft() - QPoint(-1, +1), str);
     p.drawText(r.topLeft() - QPoint( 0, +1), str);
@@ -134,28 +134,28 @@ void CDraw::text(const QString &str, QPainter &p, const QPoint &center, const QC
     p.drawText(r.topLeft(), str);
 }
 
-void CDraw::text(const QString &str, QPainter &p, const QRect &r, const QColor &color)
+void CDraw::text(const QString& str, QPainter& p, const QRect& r, const QColor& color)
 {
     p.setPen(Qt::white);
     p.setFont(CMainWindow::self().getMapFont());
 
     // draw the white `shadow`
     p.drawText(r.adjusted(-1, -1, -1, -1), Qt::AlignCenter, str);
-    p.drawText(r.adjusted( 0, -1,  0, -1), Qt::AlignCenter, str);
+    p.drawText(r.adjusted( 0, -1, 0, -1), Qt::AlignCenter, str);
     p.drawText(r.adjusted(+1, -1, +1, -1), Qt::AlignCenter, str);
 
-    p.drawText(r.adjusted(-1,  0, -1,  0), Qt::AlignCenter, str);
-    p.drawText(r.adjusted(+1,  0, +1,  0), Qt::AlignCenter, str);
+    p.drawText(r.adjusted(-1, 0, -1, 0), Qt::AlignCenter, str);
+    p.drawText(r.adjusted(+1, 0, +1, 0), Qt::AlignCenter, str);
 
     p.drawText(r.adjusted(-1, +1, -1, +1), Qt::AlignCenter, str);
-    p.drawText(r.adjusted( 0, +1,  0, +1), Qt::AlignCenter, str);
+    p.drawText(r.adjusted( 0, +1, 0, +1), Qt::AlignCenter, str);
     p.drawText(r.adjusted(+1, +1, +1, +1), Qt::AlignCenter, str);
 
     p.setPen(color);
     p.drawText(r, Qt::AlignCenter, str);
 }
 
-QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth, float pointerBasePos)
+QPoint CDraw::bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, int pointerBaseWidth, float pointerBasePos)
 {
     QPainterPath bubblePath;
     bubblePath.addRoundedRect(contentRect, RECT_RADIUS, RECT_RADIUS);

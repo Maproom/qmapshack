@@ -31,7 +31,7 @@
 #define TILESIZEY 64
 
 
-CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
+CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent)
     : IMap(eFeatVisibility, parent)
     , filename(filename)
 {
@@ -50,7 +50,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     rasterBandCount = dataset->GetRasterCount();
     if(rasterBandCount == 1)
     {
-        GDALRasterBand *pBand = dataset->GetRasterBand(1);
+        GDALRasterBand* pBand = dataset->GetRasterBand(1);
 
         if(nullptr == pBand)
         {
@@ -60,16 +60,16 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
             return;
         }
 
-        if(pBand->GetColorInterpretation() ==  GCI_PaletteIndex )
+        if(pBand->GetColorInterpretation() == GCI_PaletteIndex )
         {
-            GDALColorTable * pct = pBand->GetColorTable();
+            GDALColorTable* pct = pBand->GetColorTable();
             for(int i = 0; i < pct->GetColorEntryCount(); ++i)
             {
                 const GDALColorEntry& e = *pct->GetColorEntry(i);
                 colortable << qRgba(e.c1, e.c2, e.c3, e.c4);
             }
         }
-        else if(pBand->GetColorInterpretation() ==  GCI_GrayIndex )
+        else if(pBand->GetColorInterpretation() == GCI_GrayIndex )
         {
             for(int i = 0; i < 256; ++i)
             {
@@ -125,10 +125,10 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     }
 
     OGRSpatialReference oSRS;
-    const char *wkt = str;
+    const char* wkt = str;
     oSRS.importFromWkt(&wkt);
 
-    char *proj4 = nullptr;
+    char* proj4 = nullptr;
     oSRS.exportToProj4(&proj4);
 
     proj.init(proj4, "EPSG:4326");
@@ -149,10 +149,10 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     qreal adfGeoTransform[6];
     dataset->GetGeoTransform( adfGeoTransform );
 
-    xscale  = adfGeoTransform[1];
-    yscale  = adfGeoTransform[5];
-    xrot    = adfGeoTransform[4];
-    yrot    = adfGeoTransform[2];
+    xscale = adfGeoTransform[1];
+    yscale = adfGeoTransform[5];
+    xrot = adfGeoTransform[4];
+    yrot = adfGeoTransform[2];
 
     trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
     trFwd.scale(adfGeoTransform[1], adfGeoTransform[5]);
@@ -330,10 +330,10 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     pt4 = trInv.map(pt4);
 
     qreal left, right, top, bottom;
-    left     = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
-    right    = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
-    top      = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
-    bottom   = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
+    left = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
+    right = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
+    top = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
+    bottom = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
 
     if(left < 0)
     {
@@ -346,11 +346,11 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
 
     if(top < 0)
     {
-        top  = 0;
+        top = 0;
     }
     if(top > ysize_px)
     {
-        top  = ysize_px;
+        top = ysize_px;
     }
 
     if(right > xsize_px)
@@ -373,8 +373,8 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
 
     qint32 imgw = TILESIZEX;
     qint32 imgh = TILESIZEY;
-    qint32 dx =  imgw;
-    qint32 dy =  imgh;
+    qint32 dx = imgw;
+    qint32 dy = imgh;
 
 
     // estimate number of tiles and use it as a limit if no
@@ -426,26 +426,26 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
                 CPLErr err = CE_Failure;
 
                 // reduce tile size at the border of the file
-                qreal dx_used   = dx;
-                qreal dy_used   = dy;
+                qreal dx_used = dx;
+                qreal dy_used = dy;
                 qreal imgw_used = imgw;
                 qreal imgh_used = imgh;
 
                 if((x + dx) > xsize_px)
                 {
-                    dx_used     = xsize_px - x;
-                    imgw_used   = qRound(imgw * dx_used / dx) & 0xFFFFFFFC;
+                    dx_used = xsize_px - x;
+                    imgw_used = qRound(imgw * dx_used / dx) & 0xFFFFFFFC;
                 }
                 if((y + dy) > ysize_px)
                 {
-                    dy_used     = ysize_px - y;
-                    imgh_used   = imgh * dy_used / dy;
+                    dy_used = ysize_px - y;
+                    imgh_used = imgh * dy_used / dy;
                 }
 
-                dx_used     = qFloor(dx_used);
-                dy_used     = qFloor(dy_used);
-                imgw_used   = qRound(imgw_used);
-                imgh_used   = qRound(imgh_used);
+                dx_used = qFloor(dx_used);
+                dy_used = qFloor(dy_used);
+                imgw_used = qRound(imgw_used);
+                imgh_used = qRound(imgh_used);
 
                 if(imgw_used < 1 || imgh_used < 1)
                 {
@@ -455,7 +455,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
                 QImage img;
                 if(rasterBandCount == 1)
                 {
-                    GDALRasterBand * pBand;
+                    GDALRasterBand* pBand;
                     pBand = dataset->GetRasterBand(1);
 
                     img = QImage(QSize(imgw_used, imgh_used), QImage::Format_Indexed8);
@@ -473,13 +473,13 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
                     img = QImage(imgw_used, imgh_used, QImage::Format_ARGB32);
                     img.fill(qRgba(255, 255, 255, 255));
 
-                    QVector<quint8> buffer(imgw_used * imgh_used);
+                    QVector<quint8> buffer(imgw_used* imgh_used);
 
                     QRgb testPix = qRgba(GCI_RedBand, GCI_GreenBand, GCI_BlueBand, GCI_AlphaBand);
 
                     for(int b = 1; b <= rasterBandCount; ++b)
                     {
-                        GDALRasterBand * pBand;
+                        GDALRasterBand* pBand;
                         pBand = dataset->GetRasterBand(b);
 
                         err = pBand->RasterIO(GF_Read
@@ -494,14 +494,14 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
                             int pbandColour = pBand->GetColorInterpretation();
                             unsigned int offset;
 
-                            for (offset = 0; offset < sizeof(testPix) && *(((quint8 *)&testPix) + offset) != pbandColour; offset++)
+                            for (offset = 0; offset < sizeof(testPix) && *(((quint8*)&testPix) + offset) != pbandColour; offset++)
                             {
                             }
                             if(offset < sizeof(testPix))
                             {
-                                quint8 * pTar   = img.bits() + offset;
-                                quint8 * pSrc   = buffer.data();
-                                const int size  = buffer.size();
+                                quint8* pTar = img.bits() + offset;
+                                quint8* pSrc = buffer.data();
+                                const int size = buffer.size();
 
                                 for(int i = 0; i < size; ++i)
                                 {

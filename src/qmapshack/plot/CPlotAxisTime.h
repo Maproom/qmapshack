@@ -25,7 +25,7 @@ class CPlotAxisTime : public CPlotAxis
 {
     Q_OBJECT
 public:
-    CPlotAxisTime(QObject * parent) : CPlotAxis(parent)
+    CPlotAxisTime(QObject* parent) : CPlotAxis(parent)
     {
     }
 
@@ -44,7 +44,7 @@ public:
         return strFormat;
     }
 
-    const tic_t* ticmark( const tic_t * t ) override;
+    const tic_t* ticmark( const tic_t* t ) override;
 protected:
     void calc() override;
 

@@ -30,19 +30,19 @@ class CRouterBRouterTilesSelectArea : public QWidget
 {
     Q_OBJECT
 public:
-    CRouterBRouterTilesSelectArea(QWidget * parent, CCanvas * canvas);
+    CRouterBRouterTilesSelectArea(QWidget* parent, CCanvas* canvas);
     virtual ~CRouterBRouterTilesSelectArea();
 
-    void paintEvent(QPaintEvent *event) override;
+    void paintEvent(QPaintEvent* event) override;
 
-    void setGridTiles(const QVector<QPoint> & tiles) { gridTiles = tiles; }
-    void setInvalidTiles(const QVector<QPoint> & tiles) { invalidTiles = tiles; }
-    void setOutdatedTiles(const QVector<QPoint> & tiles) { outdatedTiles = tiles; }
-    void setCurrentTiles(const QVector<QPoint> & tiles) { currentTiles = tiles; }
-    void setOutstandingTiles(const QVector<QPoint> & tiles) { outstandingTiles = tiles; }
-    void setSelectedTiles(const QVector<QPoint> & tiles) { selectedTiles = tiles; }
+    void setGridTiles(const QVector<QPoint>& tiles) { gridTiles = tiles; }
+    void setInvalidTiles(const QVector<QPoint>& tiles) { invalidTiles = tiles; }
+    void setOutdatedTiles(const QVector<QPoint>& tiles) { outdatedTiles = tiles; }
+    void setCurrentTiles(const QVector<QPoint>& tiles) { currentTiles = tiles; }
+    void setOutstandingTiles(const QVector<QPoint>& tiles) { outstandingTiles = tiles; }
+    void setSelectedTiles(const QVector<QPoint>& tiles) { selectedTiles = tiles; }
 
-    void setTileToolTip(const QString &toolTip) { tileToolTip = toolTip; }
+    void setTileToolTip(const QString& toolTip) { tileToolTip = toolTip; }
 
     static const QPen gridPen;
     static const QPen currentTilesPen;
@@ -57,25 +57,25 @@ public:
     static const QBrush invalidTilesBrush;
 
 signals:
-    void sigTileClicked(const QPoint & tile);
-    void sigTileToolTipChanged(const QPoint & tile);
+    void sigTileClicked(const QPoint& tile);
+    void sigTileToolTipChanged(const QPoint& tile);
 
 protected:
-    void mouseMoveEvent(QMouseEvent * event) override;
-    void mousePressEvent(QMouseEvent * event) override;
-    void mouseReleaseEvent(QMouseEvent * event) override;
-    bool event(QEvent * event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
+    bool event(QEvent* event) override;
 
 private slots:
 
 private:
     void drawGrid();
-    void drawTiles(const QPen &pen, const QBrush &brush, const QVector<QPoint> & tiles);
-    QPoint tileUnderMouse(const QPointF & mousePos) const;
-    QPolygonF gridPolygon(const QPoint & tile) const;
-    QPolygonF tilePolygon(const QPoint & tile) const;
+    void drawTiles(const QPen& pen, const QBrush& brush, const QVector<QPoint>& tiles);
+    QPoint tileUnderMouse(const QPointF& mousePos) const;
+    QPolygonF gridPolygon(const QPoint& tile) const;
+    QPolygonF tilePolygon(const QPoint& tile) const;
 
-    CCanvas * canvas;
+    CCanvas* canvas;
     QPoint mousePos;
     QPoint startPos;
     Qt::MouseButtons button;

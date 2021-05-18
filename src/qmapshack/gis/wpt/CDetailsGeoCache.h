@@ -30,7 +30,7 @@ class CDetailsGeoCache : public QDialog, private Ui::IDetailsGeoCache
 {
     Q_OBJECT
 public:
-    CDetailsGeoCache(CGisItemWpt& wpt, QWidget * parent);
+    CDetailsGeoCache(CGisItemWpt& wpt, QWidget* parent);
     virtual ~CDetailsGeoCache();
 
 private slots:
@@ -38,14 +38,14 @@ private slots:
     void slotHintChanged(bool on);
     void slotLinkClicked(const QUrl& url);
     void slotCollectSpoiler();
-    void slotRequestFinished(QNetworkReply * reply);
+    void slotRequestFinished(QNetworkReply* reply);
     void slotDownloadDone();
 
 private:
     CGisItemWpt& wpt;
-    QNetworkAccessManager * networkManager;
+    QNetworkAccessManager* networkManager;
     int cntSpoiler = 0;
-    QTimer * timerDownload;
+    QTimer* timerDownload;
 };
 
 #endif //CDETAILSGEOCACHE_H

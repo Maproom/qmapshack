@@ -26,7 +26,7 @@ class CSmlProject : public ISuuntoProject
 {
     Q_DECLARE_TR_FUNCTIONS(CSmlProject)
 public:
-    CSmlProject(const QString &filename, CGisListWks * parent);
+    CSmlProject(const QString& filename, CGisListWks* parent);
     virtual ~CSmlProject() = default;
 
     const QString getFileDialogFilter() const override
@@ -39,7 +39,7 @@ public:
         return "sml";
     }
 
-    static void loadSml(const QString &filename, CSmlProject *project);
+    static void loadSml(const QString& filename, CSmlProject* project);
 
 private:
     void loadSml(const QString& filename);

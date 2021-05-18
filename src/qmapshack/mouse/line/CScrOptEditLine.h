@@ -26,7 +26,7 @@ class CScrOptEditLine : public IScrOpt, public Ui::IScrOptEditLine
 {
     Q_OBJECT
 public:
-    CScrOptEditLine(IMouse *mouse);
+    CScrOptEditLine(IMouse* mouse);
     virtual ~CScrOptEditLine();
 
     void draw(QPainter& p) override

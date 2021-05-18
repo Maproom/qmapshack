@@ -32,7 +32,7 @@ CLogHandler::CLogHandler(QString logDirectory, bool writeToFile, bool debugOutpu
     qSetMessagePattern("%{time yyyy-MM-dd h:mm:ss.zzz} [%{type}] %{message}");
 }
 
-void CLogHandler::log(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+void CLogHandler::log(QtMsgType type, const QMessageLogContext& context, const QString& msg)
 {
 #if QT_VERSION >= 0x050400
     QString txt = qFormatLogMessage(type, context, msg);
@@ -53,7 +53,7 @@ QString CLogHandler::logfileName()
 {
     const QStringList& domainSplit = QCoreApplication::organizationDomain().split(".");
     QString fileName;
-    for(const QString &part : domainSplit)
+    for(const QString& part : domainSplit)
     {
         fileName = fileName.insert(0, part + ".");
     }
@@ -106,7 +106,7 @@ void CLogHandler::printToConsole(QtMsgType type, QString formatedMsg)
 
 static CLogHandler* logHandler = nullptr;
 
-static void logCallback(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+static void logCallback(QtMsgType type, const QMessageLogContext& context, const QString& msg)
 {
     logHandler->log(type, context, msg);
 }

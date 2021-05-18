@@ -22,7 +22,7 @@
 
 #include <QtWidgets>
 
-CItemRefMap::CItemRefMap(const QString &filename, QStackedWidget *stackedWidget, QListWidget *parent)
+CItemRefMap::CItemRefMap(const QString& filename, QStackedWidget* stackedWidget, QListWidget* parent)
     : CItemFile(filename, parent)
 {
     overlay = new COverlayRefMap(this, stackedWidget);
@@ -56,7 +56,7 @@ QString CItemRefMap::getMapProjection() const
     return overlay->getMapProjection();
 }
 
-const QList<COverlayRefMapPoint *> CItemRefMap::getRefPoints() const
+const QList<COverlayRefMapPoint*> CItemRefMap::getRefPoints() const
 {
     return overlay->getRefPoints();
 }
@@ -74,7 +74,7 @@ bool CItemRefMap::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     return true;
 }
 
-void CItemRefMap::mouseMoveEventFx(QMouseEvent *e)
+void CItemRefMap::mouseMoveEventFx(QMouseEvent* e)
 {
     CItemFile::mouseMoveEventFx(e);
     if(!mapIsMoving)
@@ -83,7 +83,7 @@ void CItemRefMap::mouseMoveEventFx(QMouseEvent *e)
     }
 }
 
-void CItemRefMap::mouseReleaseEventFx(QMouseEvent *e)
+void CItemRefMap::mouseReleaseEventFx(QMouseEvent* e)
 {
     if(!mapDidMove)
     {
@@ -92,12 +92,12 @@ void CItemRefMap::mouseReleaseEventFx(QMouseEvent *e)
     CItemFile::mouseReleaseEventFx(e);
 }
 
-bool CItemRefMap::keyPressEventFx(QKeyEvent *e)
+bool CItemRefMap::keyPressEventFx(QKeyEvent* e)
 {
     return overlay->keyPressEventFx(e);
 }
 
-void CItemRefMap::leaveEventFx(QEvent *e)
+void CItemRefMap::leaveEventFx(QEvent* e)
 {
     CItemFile::leaveEventFx(e);
     overlay->abortStep();

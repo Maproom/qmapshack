@@ -33,7 +33,7 @@ IDBSqlite::IDBSqlite()
 }
 
 
-bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName, QString &error)
+bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName, QString& error)
 {
     // this is important!
     IDB::setup(connectionName);
@@ -54,11 +54,11 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName, 
 
     QSqlQuery query(db);
 
-    QUERY_RUN("PRAGMA locking_mode=NORMAL",    return false)
-    QUERY_RUN("PRAGMA temp_store=MEMORY",      return false)
-    QUERY_RUN("PRAGMA default_cache_size=50",  return false)
-    QUERY_RUN("PRAGMA page_size=8192",         return false)
-    QUERY_RUN("PRAGMA synchronous=off",        return false)
+    QUERY_RUN("PRAGMA locking_mode=NORMAL", return false)
+    QUERY_RUN("PRAGMA temp_store=MEMORY", return false)
+    QUERY_RUN("PRAGMA default_cache_size=50", return false)
+    QUERY_RUN("PRAGMA page_size=8192", return false)
+    QUERY_RUN("PRAGMA synchronous=off", return false)
 
     // When migrating the database these tables are used.
     // Due to caching they can't be dropped right after the
@@ -288,7 +288,7 @@ bool IDBSqlite::migrateDB2to3()
 {
     QSqlQuery query(db);
 
-    QUERY_RUN("ALTER TABLE items ADD COLUMN hash TEXT NOT NULL DEFAULT '-'",            return false);
+    QUERY_RUN("ALTER TABLE items ADD COLUMN hash TEXT NOT NULL DEFAULT '-'", return false);
     QUERY_RUN("ALTER TABLE items ADD COLUMN last_user TEXT NOT NULL DEFAULT 'QMapShack'", return false);
     QUERY_RUN("ALTER TABLE items ADD COLUMN last_change DATETIME NOT NULL DEFAULT '-'", return false);
 
@@ -311,10 +311,10 @@ bool IDBSqlite::migrateDB2to3()
         PROGRESS(cnt++,;
                  );
 
-        quint64 idItem      = query.value(0).toULongLong();
-        quint32 typeItem    = query.value(1).toUInt();
+        quint64 idItem = query.value(0).toULongLong();
+        quint32 typeItem = query.value(1).toUInt();
 
-        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);
+        IGisItem* item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);
 
         if(nullptr == item)
         {
@@ -380,10 +380,10 @@ bool IDBSqlite::migrateDB4to5()
         PROGRESS(cnt++,;
                  );
 
-        quint64 idItem      = query.value(0).toULongLong();
-        quint32 typeItem    = query.value(1).toUInt();
+        quint64 idItem = query.value(0).toULongLong();
+        quint32 typeItem = query.value(1).toUInt();
 
-        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);
+        IGisItem* item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);
 
 
         if(nullptr == item)
@@ -454,10 +454,10 @@ bool IDBSqlite::migrateDB5to6()
         PROGRESS(cnt++,;
                  );
 
-        quint64 idItem      = query.value(0).toULongLong();
-        quint32 typeItem    = query.value(1).toUInt();
+        quint64 idItem = query.value(0).toULongLong();
+        quint32 typeItem = query.value(1).toUInt();
 
-        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);
+        IGisItem* item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);
 
         if(nullptr == item)
         {
@@ -466,7 +466,7 @@ bool IDBSqlite::migrateDB5to6()
 
         // get full size info text
         QString comment = item->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowFullText);
-        QDateTime date  = item->getTimestamp();
+        QDateTime date = item->getTimestamp();
 
         // replace comment with full size info text in items table
         QSqlQuery query2(db);

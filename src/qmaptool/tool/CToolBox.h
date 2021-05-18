@@ -25,7 +25,7 @@
 class CToolBox : public ITool, public QToolBox
 {
 public:
-    CToolBox(QWidget * parent);
+    CToolBox(QWidget* parent);
     virtual ~CToolBox() = default;
 
     void setupChanged() override;

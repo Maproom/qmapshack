@@ -47,7 +47,7 @@ void CGisItemRte::rtept_t::updateIcon()
 {
     if(sym.isEmpty())
     {
-        icon  = QPixmap();
+        icon = QPixmap();
         focus = NOPOINTF;
     }
     else
@@ -56,7 +56,7 @@ void CGisItemRte::rtept_t::updateIcon()
     }
 }
 /// used to create a copy of route with new parent
-CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, int idx, bool clone)
+CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject* project, int idx, bool clone)
     : IGisItem(project, eTypeRte, idx)
 {
     history = parentRte.history;
@@ -91,7 +91,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 }
 
 /// used to create route from GPX file
-CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
+CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject* parent)
     : IGisItem(parent, eTypeRte, parent->childCount())
 {
     // --- start read and process data ----
@@ -103,7 +103,7 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemRte::CGisItemRte(const history_t& hist, const QString &dbHash, IGisProject * project)
+CGisItemRte::CGisItemRte(const history_t& hist, const QString& dbHash, IGisProject* project)
     : IGisItem(project, eTypeRte, project->childCount())
 {
     history = hist;
@@ -115,25 +115,25 @@ CGisItemRte::CGisItemRte(const history_t& hist, const QString &dbHash, IGisProje
     }
 }
 
-CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
+CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject* project)
     : IGisItem(project, eTypeRte, NOIDX)
 {
     loadFromDb(id, db);
 }
 
-CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *project, int idx)
+CGisItemRte::CGisItemRte(const SGisLine& l, const QString& name, IGisProject* project, int idx)
     : IGisItem(project, eTypeRte, idx)
 {
     rte.name = name;
     readRouteDataFromGisLine(l);
 
-    flags |=  eFlagCreatedInQms | eFlagWriteAllowed;
+    flags |= eFlagCreatedInQms | eFlagWriteAllowed;
 
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
-CGisItemRte::CGisItemRte(CFitStream& stream, IGisProject * project)
+CGisItemRte::CGisItemRte(CFitStream& stream, IGisProject* project)
     : IGisItem(project, eTypeRte, project->childCount())
 {
     // --- start read and process data ----
@@ -154,10 +154,10 @@ CGisItemRte::~CGisItemRte()
     }
 }
 
-IGisItem * CGisItemRte::createClone()
+IGisItem* CGisItemRte::createClone()
 {
     int idx = -1;
-    IGisProject * project = getParentProject();
+    IGisProject* project = getParentProject();
     if(project)
     {
         idx = project->indexOfChild(this);
@@ -169,7 +169,7 @@ IGisItem * CGisItemRte::createClone()
 bool CGisItemRte::isCalculated()
 {
     bool yes = true;
-    for(const rtept_t &pt : qAsConst(rte.pts))
+    for(const rtept_t& pt : qAsConst(rte.pts))
     {
         if((pt.fakeSubpt.lat == NOFLOAT) || (pt.fakeSubpt.lon == NOFLOAT))
         {
@@ -205,13 +205,13 @@ void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
 
     if(lastEle != NOFLOAT)
     {
-        qreal delta   = subpt.ele - lastEle;
+        qreal delta = subpt.ele - lastEle;
 
         if(qAbs(delta) > ASCENT_THRESHOLD)
         {
             if(delta > 0)
             {
-                rte.ascent  += delta;
+                rte.ascent += delta;
             }
             else
             {
@@ -231,14 +231,14 @@ void CGisItemRte::deriveSecondaryData()
     QPolygonF pos;
     QPolygonF ele;
     qreal north = -90;
-    qreal east  = -180;
-    qreal south =  90;
-    qreal west  =  180;
+    qreal east = -180;
+    qreal south = 90;
+    qreal west = 180;
 
-    for(rtept_t &rtept : rte.pts)
+    for(rtept_t& rtept : rte.pts)
     {
-        west  = qMin(west,  rtept.lon);
-        east  = qMax(east,  rtept.lon);
+        west = qMin(west, rtept.lon);
+        east = qMax(east, rtept.lon);
         south = qMin(south, rtept.lat);
         north = qMax(north, rtept.lat);
 
@@ -246,10 +246,10 @@ void CGisItemRte::deriveSecondaryData()
         rtept.ele = NOINT;
         rtept.fakeSubpt.ele = NOINT;
 
-        for(subpt_t &subpt : rtept.subpts)
+        for(subpt_t& subpt : rtept.subpts)
         {
-            west  = qMin(west,  subpt.lon);
-            east  = qMax(east,  subpt.lon);
+            west = qMin(west, subpt.lon);
+            east = qMax(east, subpt.lon);
             south = qMin(south, subpt.lat);
             north = qMax(north, subpt.lat);
 
@@ -270,12 +270,12 @@ void CGisItemRte::deriveSecondaryData()
         rte.descent = 0;
         rte.ascent = 0;
 
-        for(rtept_t &rtept : rte.pts)
+        for(rtept_t& rtept : rte.pts)
         {
             setElevation(ele[i++].y(), rtept.fakeSubpt, lastEle);
             rtept.ele = rtept.fakeSubpt.ele;
 
-            for(subpt_t &subpt : rtept.subpts)
+            for(subpt_t& subpt : rtept.subpts)
             {
                 setElevation(ele[i++].y(), subpt, lastEle);
             }
@@ -294,20 +294,20 @@ void CGisItemRte::edit()
 void CGisItemRte::reverse()
 {
     QString name = getName() + "_rev";
-    IGisProject *project = nullptr;
+    IGisProject* project = nullptr;
     if(!getNameAndProject(name, project, tr("route")))
     {
         return;
     }
 
     // start with a 1:1 copy of the first route
-    CGisItemRte * rte1 = new CGisItemRte(*this, project, NOIDX, false);
+    CGisItemRte* rte1 = new CGisItemRte(*this, project, NOIDX, false);
     rte1->rte.name = name;
     rte1->rte.pts.clear();
     rte1->key.clear();
     rte1->history.events.clear();
 
-    for(rtept_t &rtept : rte.pts)
+    for(rtept_t& rtept : rte.pts)
     {
         rtept_t rtept1 = rtept;
         rtept1.subpts.clear();
@@ -315,7 +315,7 @@ void CGisItemRte::reverse()
         rte1->rte.pts.push_front(rtept1);
     }
 
-    rte1->mouseMoveFocus  = nullptr;
+    rte1->mouseMoveFocus = nullptr;
 
     rte1->setupHistory();
 
@@ -325,10 +325,10 @@ void CGisItemRte::reverse()
     }
     else
     {
-        rte1->rte.totalDistance   = NOFLOAT;
-        rte1->rte.totalTime       = 0;
-        rte1->rte.lastRoutedTime  = QDateTime();
-        rte1->rte.lastRoutedWith  = "";
+        rte1->rte.totalDistance = NOFLOAT;
+        rte1->rte.totalTime = 0;
+        rte1->rte.lastRoutedTime = QDateTime();
+        rte1->rte.lastRoutedWith = "";
         rte1->deriveSecondaryData();
     }
     rte1->updateDecoration(eMarkChanged, eMarkNone);
@@ -337,7 +337,7 @@ void CGisItemRte::reverse()
 void CGisItemRte::toTrack()
 {
     QString name;
-    IGisProject * project;
+    IGisProject* project;
 
     if(!getNameAndProject(name, project, tr("track")))
     {
@@ -347,7 +347,7 @@ void CGisItemRte::toTrack()
     SGisLine line;
     getPolylineFromData(line);
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
     {
         canvas->getElevationAt(line);
@@ -421,7 +421,7 @@ QString CGisItemRte::getInfo(quint32 feature) const
     {
         str += "<br/>\n";
         QString val1, val2, unit1, unit2;
-        IUnit::self().meter2elevation(rte.ascent,  val1, unit1);
+        IUnit::self().meter2elevation(rte.ascent, val1, unit1);
         IUnit::self().meter2elevation(rte.descent, val2, unit2);
 
         str += tr("%1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1, unit1).arg(QChar(0x2198)).arg(val2, unit2);
@@ -489,7 +489,7 @@ QString CGisItemRte::getInfo(quint32 feature) const
     return str + "</div>";
 }
 
-IScrOpt * CGisItemRte::getScreenOptions(const QPoint& origin, IMouse * mouse)
+IScrOpt* CGisItemRte::getScreenOptions(const QPoint& origin, IMouse* mouse)
 {
     if(scrOpt.isNull())
     {
@@ -502,15 +502,15 @@ QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
 {
     QMutexLocker lock(&mutexItems);
 
-    qint32 d    = NOINT;
-    QPointF pt  = NOPOINTF;
-    for(const QPointF &point : qAsConst(line))
+    qint32 d = NOINT;
+    QPointF pt = NOPOINTF;
+    for(const QPointF& point : qAsConst(line))
     {
         int tmp = (screenPos - point).manhattanLength();
         if(tmp < d)
         {
-            pt  = point;
-            d   = tmp;
+            pt = point;
+            d = tmp;
         }
     }
 
@@ -551,7 +551,7 @@ void CGisItemRte::looseUserFocus()
 
 
 
-void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
+void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis)
 {
     QMutexLocker lock(&mutexItems);
 
@@ -571,9 +571,9 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     QVector<QPixmap> icons;
     QVector<QPointF> focus;
 
-    for(const rtept_t &rtept : qAsConst(rte.pts))
+    for(const rtept_t& rtept : qAsConst(rte.pts))
     {
-        QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
+        QPointF pt(rtept.lon* DEG_TO_RAD, rtept.lat* DEG_TO_RAD);
 
         gis->convertRad2Px(pt);
 
@@ -583,9 +583,9 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         focus << rtept.focus;
 
         blockedAreas << QRectF(pt - rtept.focus, rtept.icon.size());
-        for(const subpt_t &subpt : rtept.subpts)
+        for(const subpt_t& subpt : rtept.subpts)
         {
-            QPointF pt(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD);
+            QPointF pt(subpt.lon* DEG_TO_RAD, subpt.lat* DEG_TO_RAD);
             gis->convertRad2Px(pt);
             line << pt;
             if(subpt.type != subpt_t::eTypeNone)
@@ -654,7 +654,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
 }
 
-void CGisItemRte::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw * gis)
+void CGisItemRte::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw* gis)
 {
     QMutexLocker lock(&mutexItems);
     if(rte.pts.isEmpty())
@@ -701,7 +701,7 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw * g
     }
 }
 
-void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
+void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis)
 {
     QMutexLocker lock(&mutexItems);
     if(!isVisible(boundingRect, viewport, gis))
@@ -710,9 +710,9 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
     }
 
 
-    for(const rtept_t &rtept : qAsConst(rte.pts))
+    for(const rtept_t& rtept : qAsConst(rte.pts))
     {
-        QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
+        QPointF pt(rtept.lon* DEG_TO_RAD, rtept.lat* DEG_TO_RAD);
 
         gis->convertRad2Px(pt);
         //pt = pt - rtept.focus;
@@ -763,7 +763,7 @@ void CGisItemRte::drawHighlight(QPainter& p)
     p.drawPolyline(line);
 }
 
-void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
+void CGisItemRte::readRouteDataFromGisLine(const SGisLine& l)
 {
     bool doAutoRouting = !l.first().subpts.isEmpty();
     rte.pts.clear();
@@ -772,8 +772,8 @@ void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
     {
         rte.pts << rtept_t();
 
-        rtept_t& rtept      = rte.pts.last();
-        const point_t& pt   = l[i];
+        rtept_t& rtept = rte.pts.last();
+        const point_t& pt = l[i];
 
         rtept.lon = pt.coord.x() * RAD_TO_DEG;
         rtept.lat = pt.coord.y() * RAD_TO_DEG;
@@ -788,7 +788,7 @@ void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
     deriveSecondaryData();
 }
 
-void CGisItemRte::setDataFromPolyline(const SGisLine &l)
+void CGisItemRte::setDataFromPolyline(const SGisLine& l)
 {
     QMutexLocker lock(&mutexItems);
     mouseMoveFocus = nullptr;
@@ -807,29 +807,29 @@ void CGisItemRte::getPolylineFromData(SGisLine& l) const
 {
     QMutexLocker lock(&mutexItems);
     l.clear();
-    for(const rtept_t &rtept : rte.pts)
+    for(const rtept_t& rtept : rte.pts)
     {
         l << point_t(QPointF(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD));
 
         point_t& pt = l.last();
 
         pt.subpts.clear();
-        for(const subpt_t &subpt : rtept.subpts)
+        for(const subpt_t& subpt : rtept.subpts)
         {
             pt.subpts << IGisLine::subpt_t(QPointF(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD));
         }
     }
 }
 
-void CGisItemRte::getPolylineDegFromData(QPolygonF &polygon) const
+void CGisItemRte::getPolylineDegFromData(QPolygonF& polygon) const
 {
     QMutexLocker lock(&mutexItems);
     polygon.clear();
-    for(const rtept_t &rtept : rte.pts)
+    for(const rtept_t& rtept : rte.pts)
     {
         polygon << QPointF(rtept.lon, rtept.lat);
 
-        for(const subpt_t &subpt : rtept.subpts)
+        for(const subpt_t& subpt : rtept.subpts)
         {
             polygon << QPointF(subpt.lon, subpt.lat);
         }
@@ -857,11 +857,11 @@ void CGisItemRte::reset()
         pt.fakeSubpt = subpt_t();
     }
 
-    mouseMoveFocus  = nullptr;
-    rte.totalDistance   = NOFLOAT;
-    rte.totalTime       = 0;
-    rte.lastRoutedTime  = QDateTime();
-    rte.lastRoutedWith  = "";
+    mouseMoveFocus = nullptr;
+    rte.totalDistance = NOFLOAT;
+    rte.totalTime = 0;
+    rte.lastRoutedTime = QDateTime();
+    rte.lastRoutedWith = "";
 
     deriveSecondaryData();
     updateHistory();
@@ -873,11 +873,11 @@ void CGisItemRte::reset()
 }
 
 
-QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner)
+QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString& owner)
 {
     QMutexLocker lock(&mutexItems);
 
-    const subpt_t * newPointOfFocus = nullptr;
+    const subpt_t* newPointOfFocus = nullptr;
     quint32 idx = 0;
 
     if(pt != NOPOINT && GPS_Math_DistPointPolyline(line, pt) < MIN_DIST_FOCUS)
@@ -885,13 +885,13 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
         quint32 i = 0;
         qint32 d1 = NOINT;
 
-        for(const QPointF &point : qAsConst(line))
+        for(const QPointF& point : qAsConst(line))
         {
             int tmp = (pt - point).manhattanLength();
             if(tmp <= d1)
             {
                 idx = i;
-                d1  = tmp;
+                d1 = tmp;
             }
             i++;
         }
@@ -910,17 +910,17 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
     return newPointOfFocus ? ((int)idx < line.size() ? line[idx] : NOPOINTF) : NOPOINTF;
 }
 
-const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
+const CGisItemRte::subpt_t* CGisItemRte::getSubPtByIndex(quint32 idx)
 {
     quint32 cnt = 0;
-    for(const rtept_t &rtept : qAsConst(rte.pts))
+    for(const rtept_t& rtept : qAsConst(rte.pts))
     {
         if(cnt == idx)
         {
             return &rtept.fakeSubpt;
         }
 
-        for(const subpt_t &subpt : rtept.subpts)
+        for(const subpt_t& subpt : rtept.subpts)
         {
             cnt++;
             if(cnt == idx)
@@ -934,16 +934,16 @@ const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
     return nullptr;
 }
 
-void CGisItemRte::setResult(Routino_Output * route, const QString& options)
+void CGisItemRte::setResult(Routino_Output* route, const QString& options)
 {
     QMutexLocker lock(&mutexItems);
 
     qint32 idxRtept = -1;
-    rtept_t * rtept = nullptr;
+    rtept_t* rtept = nullptr;
 
     QDateTime time = QDateTime::currentDateTimeUtc();
 
-    Routino_Output * next = route;
+    Routino_Output* next = route;
     while(next)
     {
         if(next->type == ROUTINO_POINT_WAYPOINT)
@@ -951,31 +951,31 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             idxRtept++;
             rtept = &rte.pts[idxRtept];
             rtept->subpts.clear();
-            rtept->fakeSubpt.lon       = next->lon * RAD_TO_DEG;
-            rtept->fakeSubpt.lat       = next->lat * RAD_TO_DEG;
+            rtept->fakeSubpt.lon = next->lon * RAD_TO_DEG;
+            rtept->fakeSubpt.lat = next->lat * RAD_TO_DEG;
 
-            rtept->fakeSubpt.turn      = next->turn;
-            rtept->fakeSubpt.bearing   = next->bearing;
-            rtept->fakeSubpt.distance  = next->dist * 1000;
-            rtept->fakeSubpt.time      = time.addSecs(next->time * 60);
+            rtept->fakeSubpt.turn = next->turn;
+            rtept->fakeSubpt.bearing = next->bearing;
+            rtept->fakeSubpt.distance = next->dist * 1000;
+            rtept->fakeSubpt.time = time.addSecs(next->time * 60);
 
-            rtept->fakeSubpt.type      = subpt_t::eTypeWpt;
+            rtept->fakeSubpt.type = subpt_t::eTypeWpt;
             rtept->fakeSubpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
 
             rte.totalDistance = rtept->fakeSubpt.distance;
-            rte.totalTime     = rtept->fakeSubpt.time.toTime_t() - time.toTime_t();
+            rte.totalTime = rtept->fakeSubpt.time.toTime_t() - time.toTime_t();
         }
         else if(rtept != nullptr)
         {
             rtept->subpts << subpt_t();
-            subpt_t& subpt  = rtept->subpts.last();
-            subpt.lon       = next->lon * RAD_TO_DEG;
-            subpt.lat       = next->lat * RAD_TO_DEG;
+            subpt_t& subpt = rtept->subpts.last();
+            subpt.lon = next->lon * RAD_TO_DEG;
+            subpt.lat = next->lat * RAD_TO_DEG;
 
-            subpt.turn      = next->turn;
-            subpt.bearing   = next->bearing;
-            subpt.distance  = next->dist * 1000;
-            subpt.time      = time.addSecs(next->time * 60);
+            subpt.turn = next->turn;
+            subpt.bearing = next->bearing;
+            subpt.distance = next->dist * 1000;
+            subpt.time = time.addSecs(next->time * 60);
 
             if(next->name != 0)
             {
@@ -992,7 +992,7 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             }
 
             rte.totalDistance = subpt.distance;
-            rte.totalTime     = subpt.time.toTime_t() - time.toTime_t();
+            rte.totalTime = subpt.time.toTime_t() - time.toTime_t();
             subpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
         }
 
@@ -1030,22 +1030,22 @@ static const qint32 idx2bearing[] =
 };
 
 
-void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
+void CGisItemRte::setResult(const QDomDocument& xml, const QString& options)
 {
     QMutexLocker lock(&mutexItems);
 
     QDateTime localtime = QDateTime::currentDateTimeUtc();
 
-    QDomElement response    = xml.firstChildElement("response");
-    QDomElement route       = response.firstChildElement("route");
+    QDomElement response = xml.firstChildElement("response");
+    QDomElement route = response.firstChildElement("route");
 
     // get time of travel
-    QDomElement xmlTime     = route.firstChildElement("time");
+    QDomElement xmlTime = route.firstChildElement("time");
     rte.totalTime = xmlTime.text().toUInt();
 
 
     // build list of maneuvers
-    QDomNodeList xmlLegs       = route.firstChildElement("legs").elementsByTagName("leg");
+    QDomNodeList xmlLegs = route.firstChildElement("legs").elementsByTagName("leg");
     const qint32 L = xmlLegs.size();
 
     QList<maneuver_t> maneuvers;
@@ -1058,14 +1058,14 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
         for(int m = 0; m < M; m++)
         {
             maneuvers << maneuver_t();
-            maneuver_t& maneuver    = maneuvers.last();
-            QDomNode xmlManeuver    = xmlManeuvers.item(m);
-            maneuver.instruction    = xmlManeuver.firstChildElement("narrative").text();
-            maneuver.time           = xmlManeuver.firstChildElement("time").text().toUInt();
-            maneuver.dist           = xmlManeuver.firstChildElement("distance").text().toFloat();
+            maneuver_t& maneuver = maneuvers.last();
+            QDomNode xmlManeuver = xmlManeuvers.item(m);
+            maneuver.instruction = xmlManeuver.firstChildElement("narrative").text();
+            maneuver.time = xmlManeuver.firstChildElement("time").text().toUInt();
+            maneuver.dist = xmlManeuver.firstChildElement("distance").text().toFloat();
 
-            maneuver.bearing        = idx2bearing[xmlManeuver.firstChildElement("direction").text().toUInt()];
-            maneuver.turn           = xmlManeuver.firstChildElement("turnType").text().toInt();
+            maneuver.bearing = idx2bearing[xmlManeuver.firstChildElement("direction").text().toUInt()];
+            maneuver.turn = xmlManeuver.firstChildElement("turnType").text().toInt();
 
             QDomNodeList xmlStreets = xmlManeuver.toElement().elementsByTagName("streets");
             const int S = xmlStreets.size();
@@ -1080,13 +1080,13 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     QVector<subpt_t> shape;
 
     // read the shape
-    QDomElement xmlShape        = route.firstChildElement("shape");
-    QDomElement xmlShapePoints  = xmlShape.firstChildElement("shapePoints");
-    QDomNodeList xmlLatLng      = xmlShapePoints.elementsByTagName("latLng");
+    QDomElement xmlShape = route.firstChildElement("shape");
+    QDomElement xmlShapePoints = xmlShape.firstChildElement("shapePoints");
+    QDomNodeList xmlLatLng = xmlShapePoints.elementsByTagName("latLng");
     const qint32 N = xmlLatLng.size();
     for(int n = 0; n < N; n++)
     {
-        QDomNode elem   = xmlLatLng.item(n);
+        QDomNode elem = xmlLatLng.item(n);
         QDomElement lat = elem.firstChildElement("lat");
         QDomElement lng = elem.firstChildElement("lng");
 
@@ -1099,7 +1099,7 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
 
     QVector<quint32> idxLegs;
     QDomElement xmlLegIndexes = xmlShape.firstChildElement("legIndexes");
-    QDomNodeList xmlIndex     = xmlLegIndexes.elementsByTagName("index");
+    QDomNodeList xmlIndex = xmlLegIndexes.elementsByTagName("index");
     const qint32 I = xmlIndex.size();
     for(int i = 0; i < I; i++)
     {
@@ -1110,27 +1110,27 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     quint32 time = 0;
     quint32 dist = 0;
     QDomElement xmlManeuverIndexes = xmlShape.firstChildElement("maneuverIndexes");
-    xmlIndex                       = xmlManeuverIndexes.elementsByTagName("index");
+    xmlIndex = xmlManeuverIndexes.elementsByTagName("index");
     qint32 M = xmlIndex.size();
     for(int m = 0; m < M; m++)
     {
-        QDomNode elem           = xmlIndex.item(m);
-        quint32 idx             = elem.toElement().text().toUInt();
-        subpt_t& subpt          = shape[idx];
-        maneuver_t& maneuver    = maneuvers[m];
-        subpt.type              = subpt_t::eTypeJunct;
-        subpt.instruction       = maneuver.instruction;
+        QDomNode elem = xmlIndex.item(m);
+        quint32 idx = elem.toElement().text().toUInt();
+        subpt_t& subpt = shape[idx];
+        maneuver_t& maneuver = maneuvers[m];
+        subpt.type = subpt_t::eTypeJunct;
+        subpt.instruction = maneuver.instruction;
 
-        subpt.time              = localtime.addSecs(time);
+        subpt.time = localtime.addSecs(time);
         time += maneuver.time;
 
-        subpt.distance          = dist;
+        subpt.distance = dist;
         dist += maneuver.dist * 1000;
 
-        subpt.bearing           = maneuver.bearing;
-        subpt.turn              = maneuver.turn;
+        subpt.bearing = maneuver.bearing;
+        subpt.turn = maneuver.turn;
 
-        subpt.streets           = maneuver.streets;
+        subpt.streets = maneuver.streets;
     }
 
     for(int i = 0; i < rte.pts.size() - 1; i++ )
@@ -1138,8 +1138,8 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
         quint32 idx1 = idxLegs[i];
         quint32 idx2 = idxLegs[i + 1];
 
-        rtept_t& rtept      = rte.pts[i];
-        rtept.subpts        = shape.mid(idx1, idx2 - idx1 + 1);
+        rtept_t& rtept = rte.pts[i];
+        rtept.subpts = shape.mid(idx1, idx2 - idx1 + 1);
         rtept.fakeSubpt.lon = rtept.lon;
         rtept.fakeSubpt.lat = rtept.lat;
     }
@@ -1148,7 +1148,7 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     rtept.fakeSubpt.lon = rtept.lon;
     rtept.fakeSubpt.lat = rtept.lat;
 
-    rte.totalDistance  = dist;
+    rte.totalDistance = dist;
     rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
     rte.lastRoutedWith = "MapQuest" + options;
 
@@ -1156,21 +1156,21 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     updateHistory();
 }
 
-void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &options)
+void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& options)
 {
     QMutexLocker lock(&mutexItems);
 
     QVector<subpt_t> shape;
 
-    const QDomElement &gpx = xml.documentElement();
+    const QDomElement& gpx = xml.documentElement();
     // read the shape
-    const QDomElement &xmlShape        = gpx.firstChildElement("trk");
-    const QDomElement &xmlShapePoints  = xmlShape.firstChildElement("trkseg");
-    const QDomNodeList &xmlLatLng      = xmlShapePoints.elementsByTagName("trkpt");
+    const QDomElement& xmlShape = gpx.firstChildElement("trk");
+    const QDomElement& xmlShapePoints = xmlShape.firstChildElement("trkseg");
+    const QDomNodeList& xmlLatLng = xmlShapePoints.elementsByTagName("trkpt");
     const qint32 N = xmlLatLng.size();
     for(int n = 0; n < N; n++)
     {
-        const QDomElement &elem   = xmlLatLng.item(n).toElement();
+        const QDomElement& elem = xmlLatLng.item(n).toElement();
         shape << subpt_t();
         subpt_t& subpt = shape.last();
         subpt.lon = elem.attribute("lon").toFloat();
@@ -1179,14 +1179,14 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
     }
 
     // build list of maneuvers
-    const QDomElement &xmlLeg = gpx.firstChildElement("rte");
+    const QDomElement& xmlLeg = gpx.firstChildElement("rte");
     if (!xmlLeg.isNull())
     {
-        const QDomNodeList &xmlManeuvers = xmlLeg.elementsByTagName("rtept");
+        const QDomNodeList& xmlManeuvers = xmlLeg.elementsByTagName("rtept");
         const qint32 M = xmlManeuvers.size();
         for(int m = 0; m < M; m++)
         {
-            const QDomNode &xmlManeuver    = xmlManeuvers.item(m);
+            const QDomNode& xmlManeuver = xmlManeuvers.item(m);
             /* <rtept lat="48.322380" lon="11.601220">
                 <desc>right</desc>
                 <extensions>
@@ -1196,10 +1196,10 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
                 </extensions>
                </rtept> */
             quint32 idx = xmlManeuver.firstChildElement("extensions").firstChildElement("offset").text().toUInt();
-            subpt_t& subpt          = shape[idx];
-            subpt.type              = subpt_t::eTypeJunct;
-            subpt.instruction       = xmlManeuver.firstChildElement("desc").text();
-            const QString &command = xmlManeuver.firstChildElement("extensions").firstChildElement("turn").text(); // command
+            subpt_t& subpt = shape[idx];
+            subpt.type = subpt_t::eTypeJunct;
+            subpt.instruction = xmlManeuver.firstChildElement("desc").text();
+            const QString& command = xmlManeuver.firstChildElement("extensions").firstChildElement("turn").text(); // command
             if(command == "TU")        // u-turn
             {
                 subpt.bearing = 180;
@@ -1263,8 +1263,8 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
 
     for(qint32 rtIdx = 0; rtIdx < rte.pts.size() - 1; rtIdx++)
     {
-        rtept_t &routePoint = rte.pts[rtIdx];
-        const rtept_t &nextRoutePoint = rte.pts[rtIdx + 1];
+        rtept_t& routePoint = rte.pts[rtIdx];
+        const rtept_t& nextRoutePoint = rte.pts[rtIdx + 1];
 
         qreal minDist = std::pow(nextRoutePoint.lon - shape[minDistIdx].lon, 2) + std::pow(nextRoutePoint.lat - shape[minDistIdx].lat, 2);
         for (qint32 idx = startIdx + 1; idx < shape.size(); idx++)
@@ -1284,7 +1284,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
         startIdx = minDistIdx;
     }
 
-    rtept_t &rtept = rte.pts.last();
+    rtept_t& rtept = rte.pts.last();
     rtept.ele = shape[minDistIdx].ele;
     rtept.fakeSubpt.lon = rtept.lon;
     rtept.fakeSubpt.lat = rtept.lat;
@@ -1294,13 +1294,13 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
     rte.lastRoutedWith = QString("BRouter %1").arg(options);
 
 //    <!-- track-length = 9624 filtered ascend = 59 plain-ascend = -8 cost=19415 -->
-    const QDomNodeList &nodes = xml.childNodes();
+    const QDomNodeList& nodes = xml.childNodes();
     for (int i = 0; i < nodes.count(); i++)
     {
-        const QDomNode &node = nodes.at(i);
+        const QDomNode& node = nodes.at(i);
         if (node.isComment())
         {
-            const QString &commentTxt = node.toComment().data();
+            const QString& commentTxt = node.toComment().data();
             // ' track-length = 180864 filtered ascend = 428 plain-ascend = -172 cost=270249 '
             const QRegExp rxAscDes("(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*)(filtered ascend\\s*=\\s*-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*-?\\d+)(\\s*)");
             int pos = rxAscDes.indexIn(commentTxt);

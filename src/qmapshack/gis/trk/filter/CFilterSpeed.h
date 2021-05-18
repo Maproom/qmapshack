@@ -31,7 +31,7 @@ class CFilterSpeed : public QWidget, private Ui::IFilterSpeed
 {
     Q_OBJECT
 public:
-    CFilterSpeed(CGisItemTrk& trk, QWidget * parent);
+    CFilterSpeed(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterSpeed();
 
     void updateUi();
@@ -42,9 +42,9 @@ private slots:
 
 private:
     CGisItemTrk& trk;
-    CFilterSpeedConst *filterConst;
-    CFilterSpeedCycle *filterCycle;
-    CFilterSpeedHike  *filterHike;
+    CFilterSpeedConst* filterConst;
+    CFilterSpeedCycle* filterCycle;
+    CFilterSpeedHike* filterHike;
 };
 
 #endif //CFILTERSPEED_H

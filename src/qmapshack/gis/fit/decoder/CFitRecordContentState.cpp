@@ -37,7 +37,7 @@ void CFitRecordContentState::reset()
     offset = 0;
 }
 
-decode_state_e CFitRecordContentState::process(quint8 &dataByte)
+decode_state_e CFitRecordContentState::process(quint8& dataByte)
 {
     CFitDefinitionMessage* def = latestDefinition();
     switch (offset++)

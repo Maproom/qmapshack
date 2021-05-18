@@ -22,8 +22,8 @@
 
 void CPlotAxisTime::calc() /* override */
 {
-    int dSec  = usedMax - usedMin;
-    ticStart  = usedMin;
+    int dSec = usedMax - usedMin;
+    ticStart = usedMin;
 
     // abort if the xRange has a length of 0
     if(0 == dSec)
@@ -112,9 +112,9 @@ void CPlotAxisTime::calc() /* override */
 }
 
 
-const CPlotAxis::tic_t* CPlotAxisTime::ticmark( const tic_t * t ) /* override */
+const CPlotAxis::tic_t* CPlotAxisTime::ticmark( const tic_t* t )  /* override */
 {
-    const tic_t * _tic_ = CPlotAxis::ticmark(t);
+    const tic_t* _tic_ = CPlotAxis::ticmark(t);
     if(_tic_)
     {
         QDateTime time = QDateTime::fromTime_t(tic.val);

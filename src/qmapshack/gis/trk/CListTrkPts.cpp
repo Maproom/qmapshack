@@ -19,7 +19,7 @@
 #include "CMainWindow.h"
 #include "gis/trk/CListTrkPts.h"
 
-CListTrkPts::CListTrkPts(QWidget *parent)
+CListTrkPts::CListTrkPts(QWidget* parent)
     : QWidget(parent)
     , INotifyTrk(CGisItemTrk::eVisualTrkTable)
 {
@@ -40,7 +40,7 @@ CListTrkPts::~CListTrkPts()
     }
 }
 
-void CListTrkPts::setTrack(CGisItemTrk * track)
+void CListTrkPts::setTrack(CGisItemTrk* track)
 {
     if(trk != nullptr)
     {
@@ -61,7 +61,7 @@ void CListTrkPts::updateData()
     setMouseFocus(idxFocus);
 }
 
-void CListTrkPts::setMouseFocus(const CTrackData::trkpt_t * pt)
+void CListTrkPts::setMouseFocus(const CTrackData::trkpt_t* pt)
 {
     if(trk == nullptr || pt == nullptr)
     {
@@ -150,7 +150,7 @@ void CListTrkPts::setMouseFocus(qint32 idx)
     labelTable->setText(table);
 }
 
-void CListTrkPts::setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2)
+void CListTrkPts::setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2)
 {
     if(pt1 == pt2 && pt1 == nullptr)
     {

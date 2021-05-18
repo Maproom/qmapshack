@@ -20,7 +20,7 @@
 #include "plot/CPlot.h"
 #include "plot/CPlotAxis.h"
 
-CPlot::CPlot(CGisItemTrk * trk,  CLimit& limit, CPlotData::axistype_e type, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget * parent)
+CPlot::CPlot(CGisItemTrk* trk, CLimit& limit, CPlotData::axistype_e type, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget* parent)
     : IPlot(trk, type, eModeNormal, parent)
     , limit(limit)
     , factor(factor)
@@ -35,7 +35,7 @@ CPlot::CPlot(CGisItemTrk * trk,  CLimit& limit, CPlotData::axistype_e type, cons
     CPlot::updateData();
 }
 
-CPlot::CPlot(CGisItemTrk *trk,  CLimit& limit, IPlot::mode_e mode, QWidget *parent)
+CPlot::CPlot(CGisItemTrk* trk, CLimit& limit, IPlot::mode_e mode, QWidget* parent)
     : IPlot(trk, CPlotData::eAxisLinear, mode, parent)
     , limit(limit)
 {
@@ -61,9 +61,9 @@ void CPlot::setup(const CPropertyTrk::property_t& p)
     }
 
     setYLabel(p.yLabel);
-    factor  = p.factor;
-    getX    = p.getX;
-    getY    = p.getY;
+    factor = p.factor;
+    getX = p.getX;
+    getY = p.getY;
     limit.setSource(p.key);
     updateData();
 }
@@ -95,9 +95,9 @@ void CPlot::updateData()
     setLimits();
 }
 
-void CPlot::setMouseFocus(const CTrackData::trkpt_t * ptMouseMove)
+void CPlot::setMouseFocus(const CTrackData::trkpt_t* ptMouseMove)
 {
-    if(nullptr == ptMouseMove ||  getX == nullptr || getY == nullptr)
+    if(nullptr == ptMouseMove || getX == nullptr || getY == nullptr)
     {
         if(posMouse1 != NOPOINT)
         {
@@ -112,8 +112,8 @@ void CPlot::setMouseFocus(const CTrackData::trkpt_t * ptMouseMove)
             needsRedraw = true;
         }
 
-        posMouse1.rx() = left  + data->x().val2pt(getX(*ptMouseMove));
-        posMouse1.ry() = top  +  data->y().val2pt(getY(*ptMouseMove));
+        posMouse1.rx() = left + data->x().val2pt(getX(*ptMouseMove));
+        posMouse1.ry() = top + data->y().val2pt(getY(*ptMouseMove));
     }
     update();
 }

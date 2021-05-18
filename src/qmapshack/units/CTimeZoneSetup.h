@@ -25,7 +25,7 @@
 class CTimeZoneSetup : public QDialog, private Ui::ITimeZoneSetup
 {
 public:
-    CTimeZoneSetup(QWidget * parent);
+    CTimeZoneSetup(QWidget* parent);
     virtual ~CTimeZoneSetup();
 
 public slots:

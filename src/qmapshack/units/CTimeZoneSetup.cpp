@@ -19,7 +19,7 @@
 #include "units/CTimeZoneSetup.h"
 #include "units/IUnit.h"
 
-CTimeZoneSetup::CTimeZoneSetup(QWidget *parent)
+CTimeZoneSetup::CTimeZoneSetup(QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -49,7 +49,7 @@ CTimeZoneSetup::CTimeZoneSetup(QWidget *parent)
         break;
     }
 
-    const char ** tz = IUnit::tblTimezone;
+    const char** tz = IUnit::tblTimezone;
     while(*tz)
     {
         comboTimeZone->addItem(*tz);

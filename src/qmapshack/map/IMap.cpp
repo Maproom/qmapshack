@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-IMap::IMap(quint32 features, CMapDraw *parent)
+IMap::IMap(quint32 features, CMapDraw* parent)
     : IDrawObject(parent)
     , map(parent)
     , flagsFeature(features)
@@ -41,15 +41,15 @@ void IMap::saveConfig(QSettings& cfg) /* override */
 
     if(hasFeatureVectorItems())
     {
-        cfg.setValue("showPolygons",  getShowPolygons());
+        cfg.setValue("showPolygons", getShowPolygons());
         cfg.setValue("showPolylines", getShowPolylines());
-        cfg.setValue("showPOIs",      getShowPOIs());
+        cfg.setValue("showPOIs", getShowPOIs());
         cfg.setValue("adjustDetailLevel", getAdjustDetailLevel());
     }
 
     if(hasFeatureTileCache())
     {
-        cfg.setValue("cacheSizeMB",     cacheSizeMB);
+        cfg.setValue("cacheSizeMB", cacheSizeMB);
         cfg.setValue("cacheExpiration", cacheExpiration);
     }
 
@@ -72,7 +72,7 @@ void IMap::loadConfig(QSettings& cfg) /* override */
     slotSetTypeFile(cfg.value("typeFile", getTypeFile()).toString());
 }
 
-IMapProp *IMap::getSetup()
+IMapProp* IMap::getSetup()
 {
     if(setup.isNull())
     {
@@ -83,12 +83,12 @@ IMapProp *IMap::getSetup()
 }
 
 
-void IMap::convertRad2M(QPointF &p) const
+void IMap::convertRad2M(QPointF& p) const
 {
     proj.transform(p, PJ_INV);
 }
 
-void IMap::convertM2Rad(QPointF &p) const
+void IMap::convertM2Rad(QPointF& p) const
 {
     proj.transform(p, PJ_FWD);
 }

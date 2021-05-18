@@ -26,7 +26,7 @@
 #include <QtNetwork>
 #include <QtSql>
 
-IDBFolderSql::IDBFolderSql(QSqlDatabase &db, QTreeWidget *parent)
+IDBFolderSql::IDBFolderSql(QSqlDatabase& db, QTreeWidget* parent)
     : IDBFolder(false, db, eTypeDatabase, 1, parent)
 {
     socket = new QUdpSocket(this);
@@ -38,7 +38,7 @@ void IDBFolderSql::expanding()
 
     if(showLostFound())
     {
-        folderLostFound  = new CDBFolderLostFound(db, nullptr);
+        folderLostFound = new CDBFolderLostFound(db, nullptr);
         insertChild(0, folderLostFound);
     }
 }
@@ -83,7 +83,7 @@ bool IDBFolderSql::update()
     const int N = childCount();
     for(int i = 1; i < N; i++)
     {
-        IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
+        IDBFolder* folder = dynamic_cast<IDBFolder*>(child(i));
         if(folder)
         {
             dbFoldersAdd.removeAll(folder->getId());
@@ -102,8 +102,8 @@ bool IDBFolderSql::update()
     QUERY_EXEC(return false);
     while(query.next())
     {
-        quint64 idChild     = query.value(0).toULongLong();
-        quint32 typeChild   = query.value(1).toInt();
+        quint64 idChild = query.value(0).toULongLong();
+        quint32 typeChild = query.value(1).toInt();
         if(dbFoldersAdd.contains(idChild))
         {
             createFolderByType(db, typeChild, idChild, this);
@@ -144,10 +144,10 @@ void IDBFolderSql::announceChange() const
     stream << getDBHost();
 
     const QList<QNetworkInterface>& netdevices = QNetworkInterface::allInterfaces();
-    for(const QNetworkInterface &netdevice : netdevices)
+    for(const QNetworkInterface& netdevice : netdevices)
     {
         const QList<QNetworkAddressEntry>& networks = netdevice.addressEntries();
-        for(const QNetworkAddressEntry &network : networks)
+        for(const QNetworkAddressEntry& network : networks)
         {
             socket->writeDatagram(msg, network.broadcast(), port);
             socket->writeDatagram(msg, network.broadcast(), port);

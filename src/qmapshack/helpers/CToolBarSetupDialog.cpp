@@ -22,9 +22,9 @@
 
 #include <QAction>
 
-bool CToolBarSetupDialog::CItemFilter::shouldBeMoved(QListWidgetItem *item)
+bool CToolBarSetupDialog::CItemFilter::shouldBeMoved(QListWidgetItem* item)
 {
-    CDialogItem * dialogItem = dynamic_cast<CDialogItem *>(item);
+    CDialogItem* dialogItem = dynamic_cast<CDialogItem*>(item);
     if (dialogItem != nullptr)
     {
         return dialogItem->actionName != "separator";
@@ -32,7 +32,7 @@ bool CToolBarSetupDialog::CItemFilter::shouldBeMoved(QListWidgetItem *item)
     return true;
 }
 
-CToolBarSetupDialog::CToolBarSetupDialog(QWidget * const & parent, CToolBarConfig * const & config) : QDialog(parent), config(config)
+CToolBarSetupDialog::CToolBarSetupDialog(QWidget* const& parent, CToolBarConfig* const& config) : QDialog(parent), config(config)
 {
     setupUi(this);
 
@@ -54,9 +54,9 @@ CToolBarSetupDialog::~CToolBarSetupDialog()
 void CToolBarSetupDialog::accept()
 {
     QStringList actionNames;
-    for (const QListWidgetItem * const selectedItem : selectActionsWidget->selected())
+    for (const QListWidgetItem* const selectedItem : selectActionsWidget->selected())
     {
-        const CDialogItem * const setupDialogItem = dynamic_cast<const CDialogItem * const>(selectedItem);
+        const CDialogItem* const setupDialogItem = dynamic_cast<const CDialogItem* const>(selectedItem);
         if (setupDialogItem != nullptr)
         {
             actionNames << setupDialogItem->actionName;
@@ -67,7 +67,7 @@ void CToolBarSetupDialog::accept()
     QDialog::accept();
 }
 
-void CToolBarSetupDialog::slotButtonClicked(QAbstractButton *button) const
+void CToolBarSetupDialog::slotButtonClicked(QAbstractButton* button) const
 {
     if(buttonBox->buttonRole(button) == QDialogButtonBox::ResetRole)
     {
@@ -78,14 +78,14 @@ void CToolBarSetupDialog::slotButtonClicked(QAbstractButton *button) const
 
 void CToolBarSetupDialog::configure() const
 {
-    QList<QListWidgetItem *> availableItems;
-    QList<QListWidgetItem *> selectedItems;
+    QList<QListWidgetItem*> availableItems;
+    QList<QListWidgetItem*> selectedItems;
 
-    for(QAction * const & action : config->availableActions())
+    for(QAction* const& action : config->availableActions())
     {
         availableItems << new CDialogItem(action->icon(), action->iconText(), action->objectName());
     }
-    for(QAction * const & action : config->configuredActions())
+    for(QAction* const& action : config->configuredActions())
     {
         if (action->isSeparator())
         {
@@ -94,9 +94,9 @@ void CToolBarSetupDialog::configure() const
         else
         {
             QString configuredName = action->objectName();
-            for(QListWidgetItem * const & item : qAsConst(availableItems))
+            for(QListWidgetItem* const& item : qAsConst(availableItems))
             {
-                if(configuredName == dynamic_cast<CDialogItem * const>(item)->actionName)
+                if(configuredName == dynamic_cast<CDialogItem* const>(item)->actionName)
                 {
                     selectedItems << item;
                     break;

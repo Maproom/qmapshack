@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CLineOpSelectRange::CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
+CLineOpSelectRange::CLineOpSelectRange(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent)
     : ILineOp(points, gis, canvas, parent)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorSelectRange.png"), 0, 0);
@@ -35,7 +35,7 @@ CLineOpSelectRange::~CLineOpSelectRange()
     delete scrOptRangeLine;
 }
 
-void CLineOpSelectRange::leftClick(const QPoint &pos)
+void CLineOpSelectRange::leftClick(const QPoint& pos)
 {
     switch(state)
     {
@@ -63,9 +63,9 @@ void CLineOpSelectRange::leftClick(const QPoint &pos)
         }
 
         scrOptRangeLine = new CScrOptRangeLine(points[idx2nd].pixel, parentHandler, canvas);
-        connect(scrOptRangeLine->toolDelete,    &QToolButton::clicked, this,            &CLineOpSelectRange::slotDelete);
-        connect(scrOptRangeLine->toolCalcRoute, &QToolButton::clicked, this,            &CLineOpSelectRange::slotCalc);
-        connect(scrOptRangeLine->toolDelete,    &QToolButton::clicked, scrOptRangeLine.data(), &CScrOptRangeLine::hide);
+        connect(scrOptRangeLine->toolDelete, &QToolButton::clicked, this, &CLineOpSelectRange::slotDelete);
+        connect(scrOptRangeLine->toolCalcRoute, &QToolButton::clicked, this, &CLineOpSelectRange::slotCalc);
+        connect(scrOptRangeLine->toolDelete, &QToolButton::clicked, scrOptRangeLine.data(), &CScrOptRangeLine::hide);
         connect(scrOptRangeLine->toolCalcRoute, &QToolButton::clicked, scrOptRangeLine.data(), &CScrOptRangeLine::hide);
 
         if(d < 2)
@@ -81,7 +81,7 @@ void CLineOpSelectRange::leftClick(const QPoint &pos)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpSelectRange::rightButtonDown(const QPoint &pos)
+void CLineOpSelectRange::rightButtonDown(const QPoint& pos)
 {
     resetState();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
@@ -98,7 +98,7 @@ bool CLineOpSelectRange::abortStep()
     return false;
 }
 
-void CLineOpSelectRange::mouseMove(const QPoint &pos)
+void CLineOpSelectRange::mouseMove(const QPoint& pos)
 {
     ILineOp::mouseMove(pos);
 
@@ -213,14 +213,14 @@ void CLineOpSelectRange::resetState()
         scrOptRangeLine->deleteLater();
     }
     idxFocus = NOIDX;
-    idx2nd   = NOIDX;
-    state    = eStateIdle;
+    idx2nd = NOIDX;
+    state = eStateIdle;
 }
 
 void CLineOpSelectRange::slotDelete()
 {
     qint32 idx = qMin(idxFocus, idx2nd);
-    qint32 N   = qAbs(idxFocus - idx2nd) - 1;
+    qint32 N = qAbs(idxFocus - idx2nd) - 1;
 
     points[idx].subpts.clear();
     points.remove(idx + 1, N);
@@ -234,7 +234,7 @@ void CLineOpSelectRange::slotDelete()
 void CLineOpSelectRange::slotCalc()
 {
     qint32 idx = qMin(idxFocus, idx2nd);
-    qint32 N   = qAbs(idxFocus - idx2nd) - 1;
+    qint32 N = qAbs(idxFocus - idx2nd) - 1;
 
     points.remove(idx + 1, N);
 

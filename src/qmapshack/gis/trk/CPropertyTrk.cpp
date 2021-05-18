@@ -50,9 +50,9 @@ void CPropertyTrk::setupData()
     properties << propNull;
 
     const QStringList& keys = trk.getExistingDataSources();
-    for(const QString &key : keys)
+    for(const QString& key : keys)
     {
-        const CKnownExtension &ext = CKnownExtension::get(key);
+        const CKnownExtension& ext = CKnownExtension::get(key);
         QString nameShortText = (ext.known ? ext.nameShortText : key);
         QString nameLongText = (ext.known ? ext.nameLongText : key);
 
@@ -63,7 +63,7 @@ void CPropertyTrk::setupData()
             , nameLongText
             , QIcon(ext.icon)
             , property_t::eAxisDistance
-            , [](const CTrackData::trkpt_t &p) { return p.distance; }
+            , [](const CTrackData::trkpt_t& p) { return p.distance; }
             , ext.unit
             , ext.known ? QString("%1 [%2]").arg(nameShortText, ext.unit) : nameShortText
             , ext.factor
@@ -73,19 +73,19 @@ void CPropertyTrk::setupData()
         // lame hack for properties off the usual scheme
         if((key == CKnownExtension::internalProgress) || (key == CKnownExtension::internalSpeedTime))
         {
-            property.min        = 0;
-            property.axisType   = property_t::eAxisTime;
-            property.getX       = [](const CTrackData::trkpt_t &p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; };
+            property.min = 0;
+            property.axisType = property_t::eAxisTime;
+            property.getX = [](const CTrackData::trkpt_t& p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; };
         }
 
         if(key == CKnownExtension::internalSpeedDist)
         {
-            property.min        = 0;
+            property.min = 0;
         }
 
         if(key == CKnownExtension::internalSpeedTime)
         {
-            property.min        = 0;
+            property.min = 0;
         }
 
         if(key == CKnownExtension::internalSlope)
@@ -95,7 +95,7 @@ void CPropertyTrk::setupData()
             IUnit::self().slope2unit(0, val, unit);
             property.unit = unit;
             property.yLabel = QString("%1 [%2]").arg(nameShortText, unit);
-            property.getY = [](const CTrackData::trkpt_t &p) {qreal val; QString unit; IUnit::self().slope2unit(p.slope1, val, unit); return val; };
+            property.getY = [](const CTrackData::trkpt_t& p) {qreal val; QString unit; IUnit::self().slope2unit(p.slope1, val, unit); return val; };
         }
 
         properties << property;
@@ -104,7 +104,7 @@ void CPropertyTrk::setupData()
 
 const CPropertyTrk::property_t& CPropertyTrk::propBySource(const QString& source) const
 {
-    for(const property_t &prop : properties)
+    for(const property_t& prop : properties)
     {
         if(prop.key == source)
         {
@@ -115,11 +115,11 @@ const CPropertyTrk::property_t& CPropertyTrk::propBySource(const QString& source
     return properties[0];
 }
 
-void CPropertyTrk::fillComboBox(QComboBox * box) const
+void CPropertyTrk::fillComboBox(QComboBox* box) const
 {
     box->clear();
 
-    for(const property_t &p : properties)
+    for(const property_t& p : properties)
     {
         if(p.key == CKnownExtension::internalEle)
         {
@@ -130,7 +130,7 @@ void CPropertyTrk::fillComboBox(QComboBox * box) const
     }
 }
 
-void CPropertyTrk::setupPlot(CPlot * plot, const QString& source) const
+void CPropertyTrk::setupPlot(CPlot* plot, const QString& source) const
 {
     const property_t& p = propBySource(source);
     if(p.nameLongText.isEmpty())

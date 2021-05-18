@@ -27,7 +27,7 @@ QStack<CProgressDialog*> CProgressDialog::stackSelf;
 
 #define DELAY 1000
 
-CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *parent)
+CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget* parent)
     : QDialog(parent)
 {
     stackSelf.push(this);
@@ -48,7 +48,7 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *
     {
         progressBar->hide();
         // add a timer to update the elapsed time
-        QTimer * t = new QTimer(this);
+        QTimer* t = new QTimer(this);
         t->start(DELAY);
         connect(t, &QTimer::timeout, this, [this] {
             setValue(0);
@@ -68,7 +68,7 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *
     timer->start(DELAY);
 }
 
-CProgressDialog * CProgressDialog::self()
+CProgressDialog* CProgressDialog::self()
 {
     if(stackSelf.isEmpty())
     {
@@ -148,10 +148,10 @@ bool CProgressDialog::wasCanceled()
     return result() == QMessageBox::Abort;
 }
 
-void CProgressDialog::showEvent(QShowEvent *)
+void CProgressDialog::showEvent(QShowEvent*)
 {
     // that is a workaround for canvas loosing mousetracking caused by CProgressDialog being modal:
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if (canvas != nullptr)
     {
         canvas->mouseTrackingLost();

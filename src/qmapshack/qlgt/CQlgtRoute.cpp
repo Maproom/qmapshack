@@ -32,7 +32,7 @@ struct rte_head_entry_t
 QDataStream& operator >>(QDataStream& s, CQlgtRoute& route)
 {
     quint32 nRtePts = 0;
-    QIODevice * dev = s.device();
+    QIODevice* dev = s.device();
     qint64 pos = dev->pos();
 
     char magic[9];
@@ -174,8 +174,8 @@ QDataStream& operator <<(QDataStream& s, CQlgtRoute& route)
     s2.setVersion(QDataStream::Qt_4_5);
 
     {
-        QVector<CQlgtRoute::pt_t>& rtepts           = route.priRoute;
-        QVector<CQlgtRoute::pt_t>::iterator rtept   = rtepts.begin();
+        QVector<CQlgtRoute::pt_t>& rtepts = route.priRoute;
+        QVector<CQlgtRoute::pt_t>::iterator rtept = rtepts.begin();
 
         s2 << (quint32)rtepts.size();
         while(rtept != rtepts.end())
@@ -261,7 +261,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtRoute& route)
     return s;
 }
 
-CQlgtRoute::CQlgtRoute(quint64 id, QObject *parent)
+CQlgtRoute::CQlgtRoute(quint64 id, QObject* parent)
     : QObject(parent)
     , IItem(id)
 {

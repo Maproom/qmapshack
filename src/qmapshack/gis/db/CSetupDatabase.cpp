@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CSetupDatabase::CSetupDatabase(CGisListDB &parent)
+CSetupDatabase::CSetupDatabase(CGisListDB& parent)
     : QDialog(&parent)
     , list(parent)
 {
@@ -31,13 +31,13 @@ CSetupDatabase::CSetupDatabase(CGisListDB &parent)
 
     lineUser->setText(CMainWindow::getUser());
 
-    connect(toolNewDB,   &QToolButton::clicked,   this, &CSetupDatabase::slotNewDB);
-    connect(toolAddDB,   &QToolButton::clicked,   this, &CSetupDatabase::slotOpenDB);
-    connect(lineName,    &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
-    connect(lineServer,  &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
-    connect(lineUser,    &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
-    connect(radioSqlite, &QRadioButton::clicked,  this, &CSetupDatabase::slotUpdateButtonBox);
-    connect(radioMysql,  &QRadioButton::clicked,  this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(toolNewDB, &QToolButton::clicked, this, &CSetupDatabase::slotNewDB);
+    connect(toolAddDB, &QToolButton::clicked, this, &CSetupDatabase::slotOpenDB);
+    connect(lineName, &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(lineServer, &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(lineUser, &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(radioSqlite, &QRadioButton::clicked, this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(radioMysql, &QRadioButton::clicked, this, &CSetupDatabase::slotUpdateButtonBox);
     connect(checkMySQLNoPasswd, &QCheckBox::clicked, linePasswd, &QLineEdit::setDisabled);
 
     if(!QSqlDatabase::isDriverAvailable("QMYSQL"))
@@ -45,9 +45,9 @@ CSetupDatabase::CSetupDatabase(CGisListDB &parent)
         gridLayout->removeWidget(frameMysql);
 
         QString errorTitle = tr("Missing Requirement");
-        QString errorText  = tr("MySQL cannot be used at this point, because the corresponding driver (QMYSQL) is not available.<br />Please make sure you have installed the corresponding package.<br />If you don't know what to do now you should have <a href=\"%1\">a look at the wiki</a>.").arg("https://github.com/Maproom/qmapshack/wiki/DocGisDatabaseAddRemove#mysql--565");
+        QString errorText = tr("MySQL cannot be used at this point, because the corresponding driver (QMYSQL) is not available.<br />Please make sure you have installed the corresponding package.<br />If you don't know what to do now you should have <a href=\"%1\">a look at the wiki</a>.").arg("https://github.com/Maproom/qmapshack/wiki/DocGisDatabaseAddRemove#mysql--565");
 
-        QLabel *errorMissingMySQL = new QLabel(QString("<b>%1</b><br /><br />%2").arg(errorTitle, errorText));
+        QLabel* errorMissingMySQL = new QLabel(QString("<b>%1</b><br /><br />%2").arg(errorTitle, errorText));
         errorMissingMySQL->setOpenExternalLinks(true);
         errorMissingMySQL->setWordWrap(true);
         gridLayout->addWidget(errorMissingMySQL, 4, 1, Qt::AlignTop);

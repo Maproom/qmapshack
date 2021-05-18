@@ -40,13 +40,13 @@ QStringList CMapDraw::mapPaths;
 QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap|*.wmts|*.tms|*.gemf").split('|');
 
 
-CMapDraw::CMapDraw(CCanvas *parent)
+CMapDraw::CMapDraw(CCanvas* parent)
     : IDrawContext("map", CCanvas::eRedrawMap, parent)
 {
     mapList = new CMapList(canvas);
     CMainWindow::self().addMapList(mapList, canvas->objectName());
-    connect(canvas,  &CCanvas::destroyed,   mapList, &CMapList::deleteLater);
-    connect(mapList, &CMapList::sigChanged, this,    &CMapDraw::emitSigCanvasUpdate);
+    connect(canvas, &CCanvas::destroyed, mapList, &CMapList::deleteLater);
+    connect(mapList, &CMapList::sigChanged, this, &CMapDraw::emitSigCanvasUpdate);
 
     buildMapList();
 
@@ -77,7 +77,7 @@ void CMapDraw::setupMapPath()
     QStringList paths = mapPaths;
     if(cachePath.isEmpty())
     {
-        cachePath =  IAppSetup::getPlatformInstance()->defaultCachePath();
+        cachePath = IAppSetup::getPlatformInstance()->defaultCachePath();
     }
     CMapPathSetup dlg(paths, cachePath);
     if(dlg.exec() != QDialog::Accepted)
@@ -88,7 +88,7 @@ void CMapDraw::setupMapPath()
     setupMapPath(paths);
 }
 
-void CMapDraw::setupMapPath(const QString &path)
+void CMapDraw::setupMapPath(const QString& path)
 {
     QStringList paths(mapPaths);
     if(!mapPaths.contains(path))
@@ -102,7 +102,7 @@ void CMapDraw::setupMapPath(const QStringList& paths)
 {
     mapPaths = paths;
 
-    for(CMapDraw * map : qAsConst(maps))
+    for(CMapDraw* map : qAsConst(maps))
     {
         QStringList keys;
         map->saveActiveMapsList(keys);
@@ -119,7 +119,7 @@ void CMapDraw::saveMapPath(QSettings& cfg)
 
 void CMapDraw::loadMapPath(QSettings& cfg)
 {
-    mapPaths  = cfg.value("mapPath", mapPaths).toStringList();
+    mapPaths = cfg.value("mapPath", mapPaths).toStringList();
     cachePath = cfg.value("cachePath", cachePath).toString();
 
     if(cachePath.isEmpty())
@@ -141,7 +141,7 @@ void CMapDraw::getInfo(const QPoint& px, QString& str)
     {
         for(int i = 0; i < mapList->count(); i++)
         {
-            CMapItem * item = mapList->item(i);
+            CMapItem* item = mapList->item(i);
 
             if(!item || item->getMapfile().isNull())
             {
@@ -168,7 +168,7 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
     {
         for(int i = 0; i < mapList->count(); i++)
         {
-            CMapItem * item = mapList->item(i);
+            CMapItem* item = mapList->item(i);
 
             if(!item || item->getMapfile().isNull())
             {
@@ -197,7 +197,7 @@ poi_t CMapDraw::findPOICloseBy(const QPoint& px) const
     {
         for(int i = 0; i < mapList->count(); i++)
         {
-            CMapItem * item = mapList->item(i);
+            CMapItem* item = mapList->item(i);
 
             if(!item || item->getMapfile().isNull())
             {
@@ -232,7 +232,7 @@ bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint3
     {
         for(int i = 0; i < mapList->count(); i++)
         {
-            CMapItem * item = mapList->item(i);
+            CMapItem* item = mapList->item(i);
 
             if(!item || item->getMapfile().isNull())
             {
@@ -286,9 +286,9 @@ void CMapDraw::loadConfig(QSettings& cfg) /* override */
     zoom(idx);
 }
 
-CMapItem * CMapDraw::createMapItem(const QString& filename, QSet<QString>& maps)
+CMapItem* CMapDraw::createMapItem(const QString& filename, QSet<QString>& maps)
 {
-    CMapItem * item = new CMapItem(*mapList, this);
+    CMapItem* item = new CMapItem(*mapList, this);
 
     QFileInfo fi(filename);
     maps.insert(fi.completeBaseName());
@@ -305,7 +305,7 @@ void CMapDraw::buildMapList(const QString& filename)
     mapList->clear();
 
     QSet<QString> maps;
-    CMapItem * item = createMapItem(filename, maps);
+    CMapItem* item = createMapItem(filename, maps);
     item->activate();
 }
 
@@ -316,13 +316,13 @@ void CMapDraw::buildMapList()
 
     QSet<QString> maps;
 
-    for(const QString &path : qAsConst(mapPaths))
+    for(const QString& path : qAsConst(mapPaths))
     {
         QDir dir(path);
 
         // find available maps
         const QStringList& filenames = dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name);
-        for(const QString &filename : filenames)
+        for(const QString& filename : filenames)
         {
             createMapItem(dir.absoluteFilePath(filename), maps);
         }
@@ -351,7 +351,7 @@ void CMapDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
 
     for(int i = 0; i < mapList->count(); i++)
     {
-        CMapItem * item = mapList->item(i);
+        CMapItem* item = mapList->item(i);
         if(item && !item->getMapfile().isNull())
         {
             item->saveConfig(cfg);
@@ -360,7 +360,7 @@ void CMapDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
     }
 }
 
-void CMapDraw::loadConfigForMapItem(CMapItem * item)
+void CMapDraw::loadConfigForMapItem(CMapItem* item)
 {
     if(cfgGroup.isEmpty())
     {
@@ -379,11 +379,11 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
-    for(const QString &key : keys)
+    for(const QString& key : keys)
     {
         for(int i = 0; i < mapList->count(); i++)
         {
-            CMapItem * item = mapList->item(i);
+            CMapItem* item = mapList->item(i);
 
             if(item && item->getKey() == key)
             {
@@ -404,11 +404,11 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
-    for(const QString &key : keys)
+    for(const QString& key : keys)
     {
         for(int i = 0; i < mapList->count(); i++)
         {
-            CMapItem * item = mapList->item(i);
+            CMapItem* item = mapList->item(i);
 
             if(item && item->getKey() == key)
             {
@@ -439,7 +439,7 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
     {
         for(int i = 0; i < mapList->count(); i++)
         {
-            CMapItem * item = mapList->item(i);
+            CMapItem* item = mapList->item(i);
 
             if(!item || item->getMapfile().isNull())
             {

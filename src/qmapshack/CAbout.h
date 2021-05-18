@@ -26,7 +26,7 @@ class CAbout : public QDialog, private Ui::IAbout
 {
     Q_DECLARE_TR_FUNCTIONS(CAbout)
 public:
-    CAbout(QWidget * parent);
+    CAbout(QWidget* parent);
     virtual ~CAbout();
 };
 

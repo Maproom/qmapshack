@@ -29,7 +29,7 @@ static const quint8 fitEndianFlagMask = 0x80;
 CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, CFitFieldProfile* fieldProfile, quint8 defNr, quint8 devDataIdx,
                                          quint8 size, quint8 type)
     : defNr(defNr), devDataIdx(devDataIdx), size(size), type(type), baseType(CFitBaseTypeMap::get(type)),
-      parentDefintion(parent), fieldProfile(fieldProfile)
+    parentDefintion(parent), fieldProfile(fieldProfile)
 {
 }
 
@@ -69,9 +69,9 @@ quint8 CFitFieldDefinition::getDevDataIdx() const
     return devDataIdx;
 }
 
-QPair<quint8,quint8> CFitFieldDefinition::getDevProfileId() const
+QPair<quint8, quint8> CFitFieldDefinition::getDevProfileId() const
 {
-    return qMakePair<quint8,quint8>(devDataIdx,defNr);
+    return qMakePair<quint8, quint8>(devDataIdx, defNr);
 }
 
 quint8 CFitFieldDefinition::getSize() const

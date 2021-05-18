@@ -25,7 +25,7 @@
 #include <QPainterPath>
 #include <QtWidgets>
 
-IMouseSelect::IMouseSelect(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+IMouseSelect::IMouseSelect(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse)
 {
 }
@@ -79,7 +79,7 @@ void IMouseSelect::placeScrOpt()
 }
 
 
-void IMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
+void IMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect)
 {
     if(rectSelection.isNull())
     {
@@ -140,7 +140,7 @@ void IMouseSelect::leftButtonDown(const QPoint& point)
     canvas->update();
 }
 
-void IMouseSelect::mouseDragged(const QPoint& start, const QPoint& last, const QPoint &end)
+void IMouseSelect::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end)
 {
     switch(state)
     {
@@ -235,7 +235,7 @@ void IMouseSelect::mouseDragged(const QPoint& start, const QPoint& last, const Q
     }
 }
 
-void IMouseSelect::mouseMoved(const QPoint &pos)
+void IMouseSelect::mouseMoved(const QPoint& pos)
 {
     switch(state)
     {

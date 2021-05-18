@@ -35,7 +35,7 @@ class IDrawContext : public QThread
 {
     Q_OBJECT
 public:
-    IDrawContext(const QString &name, CCanvas::redraw_e maskRedraw, CCanvas *parent);
+    IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CCanvas* parent);
     virtual ~IDrawContext();
 
     struct buffer_t
@@ -66,7 +66,7 @@ public:
        @param in            set true to zoom in, and false to zoom out
        @param needsRedraw   if the zoom action makes a redraw necessary needsRedraw is set true
      */
-    void zoom(bool in, CCanvas::redraw_e &needsRedraw);
+    void zoom(bool in, CCanvas::redraw_e& needsRedraw);
     void zoom(int idx);
     void zoom(const QRectF& rect);
     int  zoom() const
@@ -79,13 +79,13 @@ public:
        @note  The unit is dependent on the currently used projection and must not necessarily be meter
        @param p             the point to convert
      */
-    void convertRad2M(QPointF &p) const;
+    void convertRad2M(QPointF& p) const;
     /**
        @brief Convert a geo coordinate of the currently used projection/datum to lon/lat WGS84
        @note  The unit is dependent on the currently used projection and must not necessarily be meter
        @param p             the point to convert
      */
-    void convertM2Rad(QPointF &p) const;
+    void convertM2Rad(QPointF& p) const;
     /**
        @brief Convert a pixel coordinate from the viewport to a geo coordinate in [rad]
        @param p             the point to convert
@@ -110,7 +110,7 @@ public:
         @param needsRedraw  set true to trigger a redraw in the background thread
         @param f            the point of focus in [°] that is drawn in the middle of the viewport.
      */
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF &f);
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF& f);
 
     /**
        @brief Get the projection string of this map object
@@ -177,7 +177,7 @@ protected:
     bool intNeedsRedraw;
 
     /// the canvas this map object is attached to
-    CCanvas * canvas;
+    CCanvas* canvas;
 
     const CCanvas::redraw_e maskRedraw;
     /// map canvas twin buffer
@@ -185,9 +185,9 @@ protected:
     /// the main threads currently used map canvas buffer
     bool bufIndex = false;
 
-    int bufWidth   = 100; //< buffer width [px]
-    int bufHeight  = 100; //< buffer height [px]
-    int viewWidth  = 100; //< the viewports width [px]
+    int bufWidth = 100;   //< buffer width [px]
+    int bufHeight = 100;  //< buffer height [px]
+    int viewWidth = 100;  //< the viewports width [px]
     int viewHeight = 100; //< the viewports height [px]
 
     QSize lastSize;
@@ -205,7 +205,7 @@ protected:
 
 private:
     /// the used scales and the type of scale levels
-    const qreal *scales = nullptr;
+    const qreal* scales = nullptr;
     CCanvas::scales_type_e scalesType;
     /// the number of zoom levels
     int zoomLevels = 0;

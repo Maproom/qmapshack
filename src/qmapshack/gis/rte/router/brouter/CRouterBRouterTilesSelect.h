@@ -36,15 +36,15 @@ class CRouterBRouterTilesSelect : public QWidget
 {
     Q_OBJECT
 public:
-    CRouterBRouterTilesSelect(QWidget * parent);
+    CRouterBRouterTilesSelect(QWidget* parent);
     virtual ~CRouterBRouterTilesSelect();
 
-    void setSetup(CRouterBRouterSetup * setup);
+    void setSetup(CRouterBRouterSetup* setup);
     void initialize();
     void cancelDownload() const;
 
     static QString formatSize(const qint64 size);
-    static QPoint tileFromFileName(const QString &fileName);
+    static QPoint tileFromFileName(const QString& fileName);
     static QString fileNameFromTile(const QPoint tile);
 
     bool isInitialized() const { return initialized; }
@@ -70,8 +70,8 @@ signals:
     void sigCompleteChanged();
 
 private slots:
-    void slotTileClicked(const QPoint & tile);
-    void slotTileToolTipChanged(const QPoint & tile) const;
+    void slotTileClicked(const QPoint& tile);
+    void slotTileToolTipChanged(const QPoint& tile) const;
     void slotClearSelection();
     void slotDeleteSelected();
     void slotSelectOutdated();
@@ -86,31 +86,31 @@ private:
     void updateStatus();
     void updateButtons() const;
     void updateTiles() const;
-    void afterSlotLoadOnlineTilesRequestFinishedRunJavascript(const QVariant &v);
-    void error(const QString &error) const;
-    void segmentsError(const QString &msg) const;
+    void afterSlotLoadOnlineTilesRequestFinishedRunJavascript(const QVariant& v);
+    void error(const QString& error) const;
+    void segmentsError(const QString& msg) const;
     void clearError() const;
 
-    CRouterBRouterTilesStatus * getTileStatus(QPoint tile) const;
+    CRouterBRouterTilesStatus* getTileStatus(QPoint tile) const;
 
-    CRouterBRouterSetup * setup;
+    CRouterBRouterSetup* setup;
 
-    QVBoxLayout * outerLayout;
-    QWidget * widgetSelect;
-    QLabel * statusLabel;
-    QProgressBar * statusProgress;
-    QLabel * errorLabel;
+    QVBoxLayout* outerLayout;
+    QWidget* widgetSelect;
+    QLabel* statusLabel;
+    QProgressBar* statusProgress;
+    QLabel* errorLabel;
 
-    QPushButton * pushSelectOutdated;
-    QPushButton * pushClearSelection;
-    QPushButton * pushDeleteSelection;
-    QPushButton * pushDownload;
+    QPushButton* pushSelectOutdated;
+    QPushButton* pushClearSelection;
+    QPushButton* pushDeleteSelection;
+    QPushButton* pushDownload;
 
-    CRouterBRouterTilesSelectArea * selectArea;
+    CRouterBRouterTilesSelectArea* selectArea;
 
-    QWebEnginePage * tilesWebPage;
+    QWebEnginePage* tilesWebPage;
 
-    QNetworkAccessManager * tilesDownloadManager;
+    QNetworkAccessManager* tilesDownloadManager;
     QVector<QNetworkReply*> tilesDownloadManagerReplies;
 
     QHash<QString, CRouterBRouterTilesStatus*> tilesDownloadStatus;

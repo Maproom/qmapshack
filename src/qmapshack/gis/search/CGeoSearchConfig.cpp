@@ -21,9 +21,9 @@
 #include "helpers/CWptIconManager.h"
 #include <QIcon>
 
-CGeoSearchConfig * CGeoSearchConfig::pSelf = nullptr;
+CGeoSearchConfig* CGeoSearchConfig::pSelf = nullptr;
 
-CGeoSearchConfig::CGeoSearchConfig(QObject *parent) : QObject(parent)
+CGeoSearchConfig::CGeoSearchConfig(QObject* parent) : QObject(parent)
 {
     pSelf = this;
 }

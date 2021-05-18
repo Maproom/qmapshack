@@ -39,12 +39,12 @@ IDB::~IDB()
     }
 }
 
-void IDB::setup(const QString &connectionName)
+void IDB::setup(const QString& connectionName)
 {
     references[connectionName]++;
 }
 
-bool IDB::setupDB(QString &error)
+bool IDB::setupDB(QString& error)
 {
     QSqlQuery query(db);
 

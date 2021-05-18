@@ -26,7 +26,7 @@
 #include <QtWidgets>
 QPointF CDemPropSetup::scale;
 
-CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
+CDemPropSetup::CDemPropSetup(IDem* demfile, CDemDraw* dem)
     : IDemProp(demfile, dem)
 {
     setupUi(this);
@@ -39,30 +39,30 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
 
     CDemPropSetup::slotPropertiesChanged();
 
-    connect(sliderOpacity,         &QSlider::valueChanged,      demfile, &IDem::slotSetOpacity);
-    connect(sliderOpacity,         &QSlider::valueChanged,      dem,     &CDemDraw::emitSigCanvasUpdate);
-    connect(dem,                   &CDemDraw::sigScaleChanged,  this,    &CDemPropSetup::slotScaleChanged);
-    connect(toolSetMinScale,       &QToolButton::toggled,       this,    &CDemPropSetup::slotSetMinScale);
-    connect(toolSetMaxScale,       &QToolButton::toggled,       this,    &CDemPropSetup::slotSetMaxScale);
+    connect(sliderOpacity, &QSlider::valueChanged, demfile, &IDem::slotSetOpacity);
+    connect(sliderOpacity, &QSlider::valueChanged, dem, &CDemDraw::emitSigCanvasUpdate);
+    connect(dem, &CDemDraw::sigScaleChanged, this, &CDemPropSetup::slotScaleChanged);
+    connect(toolSetMinScale, &QToolButton::toggled, this, &CDemPropSetup::slotSetMinScale);
+    connect(toolSetMaxScale, &QToolButton::toggled, this, &CDemPropSetup::slotSetMaxScale);
 
-    connect(checkHillshading,      &QCheckBox::toggled,         demfile, &IDem::slotSetHillshading);
-    connect(checkHillshading,      &QCheckBox::clicked,         dem,     &CDemDraw::emitSigCanvasUpdate);
-    connect(sliderHillshading,     &QSlider::valueChanged,      demfile, &IDem::slotSetFactorHillshade);
-    connect(sliderHillshading,     &QSlider::valueChanged,      dem,     &CDemDraw::emitSigCanvasUpdate);
+    connect(checkHillshading, &QCheckBox::toggled, demfile, &IDem::slotSetHillshading);
+    connect(checkHillshading, &QCheckBox::clicked, dem, &CDemDraw::emitSigCanvasUpdate);
+    connect(sliderHillshading, &QSlider::valueChanged, demfile, &IDem::slotSetFactorHillshade);
+    connect(sliderHillshading, &QSlider::valueChanged, dem, &CDemDraw::emitSigCanvasUpdate);
 
-    connect(checkSlopeColor,       &QCheckBox::toggled,         demfile, &IDem::slotSetSlopeColor);
-    connect(checkSlopeColor,       &QCheckBox::clicked,         dem,     &CDemDraw::emitSigCanvasUpdate);
+    connect(checkSlopeColor, &QCheckBox::toggled, demfile, &IDem::slotSetSlopeColor);
+    connect(checkSlopeColor, &QCheckBox::clicked, dem, &CDemDraw::emitSigCanvasUpdate);
 
     // elevation color
     //
-    connect(checkElevationLimit,   &QCheckBox::toggled,         demfile, &IDem::slotSetElevationLimit);
-    connect(checkElevationLimit,   &QCheckBox::clicked,         dem,     &CDemDraw::emitSigCanvasUpdate);
+    connect(checkElevationLimit, &QCheckBox::toggled, demfile, &IDem::slotSetElevationLimit);
+    connect(checkElevationLimit, &QCheckBox::clicked, dem, &CDemDraw::emitSigCanvasUpdate);
     connect(spinBoxElevationLimit, QOverload<int>::of(&QSpinBox::valueChanged), this, &CDemPropSetup::slotElevationAfterEdit);
 
     for(size_t i = 0; i < SLOPE_LEVELS; i++)
     {
         slopeSpins[i]->setProperty("level", (uint) i);
-        connect(slopeSpins[i], &CTinySpinBox::editingFinished,    this, &CDemPropSetup::slotSlopeValiddateAfterEdit);
+        connect(slopeSpins[i], &CTinySpinBox::editingFinished, this, &CDemPropSetup::slotSlopeValiddateAfterEdit);
         connect(slopeSpins[i], &CTinySpinBox::valueChangedByStep, this, &CDemPropSetup::slotSlopeValiddateAfterEdit);
     }
 

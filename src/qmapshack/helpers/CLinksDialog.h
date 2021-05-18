@@ -27,7 +27,7 @@ class CLinksDialog : public QDialog, private Ui::ILinksDialog
 {
     Q_OBJECT
 public:
-    CLinksDialog(QList<IGisItem::link_t> &links, QWidget * parent);
+    CLinksDialog(QList<IGisItem::link_t>& links, QWidget* parent);
     virtual ~CLinksDialog();
 
 public slots:

@@ -23,13 +23,13 @@
 
 #include <QtWidgets>
 
-void ITrack::save(QImage& image, const CTrackData::trkpt_t * pTrkpt)
+void ITrack::save(QImage& image, const CTrackData::trkpt_t* pTrkpt)
 {
     setSize(image.width(), image.height());
     draw();
     if(pTrkpt != nullptr)
     {
-        QPointF pos(pTrkpt->lon * DEG_TO_RAD, pTrkpt->lat * DEG_TO_RAD);
+        QPointF pos(pTrkpt->lon* DEG_TO_RAD, pTrkpt->lat* DEG_TO_RAD);
         proj.transform(pos, PJ_INV);
 
         QPainter p(&buffer);
@@ -65,7 +65,7 @@ void ITrack::setupProjection(const QRectF& boundingBox)
     }
 }
 
-void ITrack::setTrack(CGisItemTrk * track)
+void ITrack::setTrack(CGisItemTrk* track)
 {
     trk = track;
 
@@ -106,7 +106,7 @@ void ITrack::updateData()
     }
 
     line.clear();
-    for(const QPointF &trkpt : qAsConst(coords))
+    for(const QPointF& trkpt : qAsConst(coords))
     {
         QPointF pt(trkpt.x(), trkpt.y());
         proj.transform(pt, PJ_INV);
@@ -136,7 +136,7 @@ void ITrack::updateData()
         yoff = 0;
     }
 
-    xoff += r1.left()   - 5 / scale.x();
+    xoff += r1.left() - 5 / scale.x();
     yoff += r1.bottom() - 5 / scale.y();
 
     needsRedraw = true;

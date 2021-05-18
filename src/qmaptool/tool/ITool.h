@@ -215,14 +215,14 @@ public:
     virtual bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) = 0;
     virtual void setupChanged() = 0;
 
-    virtual void mousePressEventFx(QMouseEvent *e) {}
-    virtual void mouseMoveEventFx(QMouseEvent *e){}
-    virtual void mouseReleaseEventFx(QMouseEvent *e){}
-    virtual void mouseDoubleClickEventFx(QMouseEvent *e){}
-    virtual void wheelEventFx(QWheelEvent *e){}
-    virtual void enterEventFx(QEvent *e){}
-    virtual void leaveEventFx(QEvent *e){}
-    virtual bool keyPressEventFx(QKeyEvent *e){return false; }
+    virtual void mousePressEventFx(QMouseEvent* e) {}
+    virtual void mouseMoveEventFx(QMouseEvent* e){}
+    virtual void mouseReleaseEventFx(QMouseEvent* e){}
+    virtual void mouseDoubleClickEventFx(QMouseEvent* e){}
+    virtual void wheelEventFx(QWheelEvent* e){}
+    virtual void enterEventFx(QEvent* e){}
+    virtual void leaveEventFx(QEvent* e){}
+    virtual bool keyPressEventFx(QKeyEvent* e){return false; }
 
     virtual QCursor getCursorFx()
     {

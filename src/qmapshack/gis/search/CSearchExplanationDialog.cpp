@@ -18,7 +18,7 @@
 
 #include "CSearchExplanationDialog.h"
 
-CSearchExplanationDialog::CSearchExplanationDialog(QWidget *parent)
+CSearchExplanationDialog::CSearchExplanationDialog(QWidget* parent)
 {
     setupUi(this);
     setWindowFlag(Qt::Tool, true);

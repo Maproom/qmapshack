@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CColorLegend::CColorLegend(QWidget *parent, CGisItemTrk *trk)
+CColorLegend::CColorLegend(QWidget* parent, CGisItemTrk* trk)
     : QWidget(parent)
     , INotifyTrk(CGisItemTrk::eVisualColorLegend)
     , trk(trk)
@@ -52,7 +52,7 @@ CColorLegend::~CColorLegend()
     }
 }
 
-void CColorLegend::setMouseFocus(const CTrackData::trkpt_t * pt)
+void CColorLegend::setMouseFocus(const CTrackData::trkpt_t* pt)
 {
     if(nullptr == pt)
     {
@@ -61,8 +61,8 @@ void CColorLegend::setMouseFocus(const CTrackData::trkpt_t * pt)
     }
 
     QString colorSource = trk->getColorizeSource();
-    auto valueFunc      = CKnownExtension::get(colorSource).valueFunc;
-    const qreal factor  = CKnownExtension::get(colorSource).factor;
+    auto valueFunc = CKnownExtension::get(colorSource).valueFunc;
+    const qreal factor = CKnownExtension::get(colorSource).factor;
 
     val = factor * valueFunc(*pt);
     val = qMin(val, maximum);
@@ -73,7 +73,7 @@ void CColorLegend::updateData()
 {
     if(!trk->getColorizeSource().isEmpty() && (trk->getColorizeSource() != "activity"))
     {
-        unit    = trk->getColorizeUnit();
+        unit = trk->getColorizeUnit();
         minimum = trk->getColorizeLimitLow();
         maximum = trk->getColorizeLimitHigh();
 
@@ -98,13 +98,13 @@ void CColorLegend::setMaximum(qreal max)
     update();
 }
 
-void CColorLegend::setUnit(const QString &unit)
+void CColorLegend::setUnit(const QString& unit)
 {
     this->unit = unit;
     update();
 }
 
-int CColorLegend::paintLabel(QPainter &p, qreal value)
+int CColorLegend::paintLabel(QPainter& p, qreal value)
 {
     const int fontHeight = QFontMetrics(p.font()).ascent() + 1;
     const qreal relativePos = (value - minimum) / (maximum - minimum);
@@ -120,7 +120,7 @@ int CColorLegend::paintLabel(QPainter &p, qreal value)
     {
         posX += 5;
         int precision = !((int)value == value);     // returns 0 or 1
-        const QString &labelText = QString("%1%2").arg(value, 0, 'f', precision).arg(unit);
+        const QString& labelText = QString("%1%2").arg(value, 0, 'f', precision).arg(unit);
 
         p.drawText(posX, posY, labelText);
         posX += QFontMetrics(p.font()).width(labelText);
@@ -129,7 +129,7 @@ int CColorLegend::paintLabel(QPainter &p, qreal value)
     return posX;
 }
 
-void CColorLegend::resizeEvent(QResizeEvent *event)
+void CColorLegend::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
 
@@ -146,9 +146,9 @@ static qreal legendRound(qreal value, int powOffset)
     return ceil(value / div) * div;
 }
 
-void CColorLegend::paintEvent(QPaintEvent */*event*/)
+void CColorLegend::paintEvent(QPaintEvent*/*event*/)
 {
-    const QFont &font = CMainWindow::self().getMapFont();
+    const QFont& font = CMainWindow::self().getMapFont();
     if(isEnabled())
     {
         QPainter p(this);
@@ -182,18 +182,18 @@ void CColorLegend::paintEvent(QPaintEvent */*event*/)
 
         // draw the gradient
         QLinearGradient grad(colorRect.topLeft(), colorRect.bottomLeft());
-        grad.setColorAt(1.00, QColor(  0,   0, 255)); // blue
-        grad.setColorAt(0.60, QColor(  0, 255,   0)); // green
-        grad.setColorAt(0.40, QColor(255, 255,   0)); // yellow
-        grad.setColorAt(0.00, QColor(255,   0,   0)); // red
+        grad.setColorAt(1.00, QColor(  0, 0, 255));   // blue
+        grad.setColorAt(0.60, QColor(  0, 255, 0));   // green
+        grad.setColorAt(0.40, QColor(255, 255, 0));   // yellow
+        grad.setColorAt(0.00, QColor(255, 0, 0));     // red
         p.fillRect(colorRect, grad);
 
-        int reqWidth =  paintLabel(p, minimum);
+        int reqWidth = paintLabel(p, minimum);
         reqWidth = qMax(paintLabel(p, maximum), reqWidth);
 
         // draw values inbetween min/max
         const qreal delta = maximum - minimum;
-        qint32 step           = legendRound(delta / 8, 0);
+        qint32 step = legendRound(delta / 8, 0);
         qint32 roundedMinimum = legendRound(minimum, delta > 60 ? -1 : 0);
 
         for(qint32 v = roundedMinimum; v < maximum; v += step)

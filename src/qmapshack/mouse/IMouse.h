@@ -32,7 +32,7 @@ class IMouse : public QObject
 {
     Q_OBJECT
 public:
-    explicit IMouse(CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse);
+    explicit IMouse(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
     virtual ~IMouse();
 
     virtual void leftClicked(const QPoint& pos) {}
@@ -47,12 +47,12 @@ public:
     virtual void abortStep() {}
     virtual void unfocus(){}
 
-    virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) = 0;
+    virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) = 0;
 
 protected:
-    CCanvas * canvas;
-    CGisDraw * gis;
-    CMouseAdapter * mouse;
+    CCanvas* canvas;
+    CGisDraw* gis;
+    CMouseAdapter* mouse;
 
 public:
     /// the current mouse cursor
@@ -65,7 +65,7 @@ public:
         return cursor;
     }
 
-    CCanvas * getCanvas() const
+    CCanvas* getCanvas() const
     {
         return canvas;
     }

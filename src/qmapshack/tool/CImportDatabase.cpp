@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CImportDatabase::CImportDatabase(QWidget *parent)
+CImportDatabase::CImportDatabase(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
@@ -38,7 +38,7 @@ CImportDatabase::CImportDatabase(QWidget *parent)
 
     connect(toolSelectSource, &QToolButton::clicked, this, &CImportDatabase::slotSelectSource);
     connect(toolSelectTarget, &QToolButton::clicked, this, &CImportDatabase::slotSelectTarget);
-    connect(pushStart,        &QPushButton::clicked, this, &CImportDatabase::slotStart);
+    connect(pushStart, &QPushButton::clicked, this, &CImportDatabase::slotStart);
 
     pushStart->setEnabled(false);
     if(QFile::exists(labelSource->text()))

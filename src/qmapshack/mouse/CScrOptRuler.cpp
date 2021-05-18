@@ -24,7 +24,7 @@
 #include <functional>
 #include <QtWidgets>
 
-CScrOptRuler::CScrOptRuler(IMouse *mouse, CCanvas *canvas)
+CScrOptRuler::CScrOptRuler(IMouse* mouse, CCanvas* canvas)
     : IScrOpt(mouse)
 {
     setupUi(this);

@@ -38,7 +38,7 @@ inline bool sortByString(const QString& str1, const QString& str2)
 }
 
 template<typename T>
-bool sortByName(T * item1, T * item2)
+bool sortByName(T* item1, T* item2)
 {
     return sortByString(item1->getName(), item2->getName());
 }

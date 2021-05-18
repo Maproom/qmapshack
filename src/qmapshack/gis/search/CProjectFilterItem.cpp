@@ -19,7 +19,7 @@
 #include <gis/CGisListWks.h>
 #include <gis/search/CSearchLineEdit.h>
 
-CProjectFilterItem::CProjectFilterItem(IGisProject *parent) : QTreeWidgetItem ((QTreeWidgetItem*)parent)
+CProjectFilterItem::CProjectFilterItem(IGisProject* parent) : QTreeWidgetItem ((QTreeWidgetItem*)parent)
 {
     this->parent = parent;
 }
@@ -28,7 +28,7 @@ CProjectFilterItem::~CProjectFilterItem()
 {
 }
 
-void CProjectFilterItem::showLineEdit(CSearch *search)
+void CProjectFilterItem::showLineEdit(CSearch* search)
 {
     if(treeWidget() != nullptr)
     {

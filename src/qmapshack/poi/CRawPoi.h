@@ -36,12 +36,12 @@ class CRawPoi
 public:
     //Dummy constructor for the usage of QMap
     CRawPoi(){}
-    CRawPoi(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString &category, const QString &garminIcon);
+    CRawPoi(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon);
     const QString& getCategory() const;
     const QString& getName(bool replaceEmptyByCategory = true) const;
-    const QPointF &getCoordinates() const;
-    const quint64 &getKey() const;
-    const QMap<QString, QString> &getData() const;
+    const QPointF& getCoordinates() const;
+    const quint64& getKey() const;
+    const QMap<QString, QString>& getData() const;
     const QStringList& getRawData() const;
     QString getDesc() const;
     QList<IGisItem::link_t> getLinks() const;

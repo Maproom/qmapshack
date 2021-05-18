@@ -31,10 +31,10 @@ class IRtInfo : public QWidget
 {
     Q_OBJECT
 public:
-    IRtInfo(IRtSource* source, QWidget * parent);
+    IRtInfo(IRtSource* source, QWidget* parent);
     virtual ~IRtInfo() = default;
 
-    virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt);
+    virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt);
 
 protected slots:
     void slotSetFilename();

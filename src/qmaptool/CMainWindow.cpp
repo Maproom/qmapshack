@@ -34,7 +34,7 @@
 #include "units/IUnit.h"
 #include "version.h"
 
-CMainWindow * CMainWindow::pSelf = nullptr;
+CMainWindow* CMainWindow::pSelf = nullptr;
 
 CMainWindow::CMainWindow()
 {
@@ -144,7 +144,7 @@ void CMainWindow::makeShellVisible()
     dockShell->show();
 }
 
-void CMainWindow::startGridTool(CItemRefMap *item)
+void CMainWindow::startGridTool(CItemRefMap* item)
 {
     toolGrid->registerItem(item);
     toolStack->setCurrentWidget(toolGrid);

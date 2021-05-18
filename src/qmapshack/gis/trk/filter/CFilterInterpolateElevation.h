@@ -28,7 +28,7 @@ class CFilterInterpolateElevation : public QWidget, private Ui::IFilterInterpola
 {
     Q_OBJECT
 public:
-    CFilterInterpolateElevation(CGisItemTrk& trk, QWidget * parent);
+    CFilterInterpolateElevation(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterInterpolateElevation();
 
 private slots:

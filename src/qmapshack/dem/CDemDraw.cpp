@@ -35,12 +35,12 @@ QStringList CDemDraw::demPaths;
 QStringList CDemDraw::supportedFormats = QString("*.vrt|*.wcs").split('|');
 
 
-CDemDraw::CDemDraw(CCanvas *canvas)
+CDemDraw::CDemDraw(CCanvas* canvas)
     : IDrawContext("dem", CCanvas::eRedrawDem, canvas)
 {
     demList = new CDemList(canvas);
     CMainWindow::self().addDemList(demList, canvas->objectName());
-    connect(canvas,  &CCanvas::destroyed, demList, &CDemList::deleteLater);
+    connect(canvas, &CCanvas::destroyed, demList, &CDemList::deleteLater);
     connect(demList, &CDemList::sigChanged, this, &CDemDraw::emitSigCanvasUpdate);
 
     buildMapList();
@@ -79,7 +79,7 @@ void CDemDraw::setupDemPath()
     setupDemPath(paths);
 }
 
-void CDemDraw::setupDemPath(const QString &path)
+void CDemDraw::setupDemPath(const QString& path)
 {
     QStringList paths(demPaths);
     if(!demPaths.contains(path))
@@ -90,11 +90,11 @@ void CDemDraw::setupDemPath(const QString &path)
 }
 
 
-void CDemDraw::setupDemPath(const QStringList &paths)
+void CDemDraw::setupDemPath(const QStringList& paths)
 {
     demPaths = paths;
 
-    for(CDemDraw * dem : qAsConst(dems))
+    for(CDemDraw* dem : qAsConst(dems))
     {
         QStringList keys;
         dem->saveActiveMapsList(keys);
@@ -150,16 +150,16 @@ void CDemDraw::buildMapList()
     QMutexLocker lock(&CDemItem::mutexActiveDems);
     demList->clear();
 
-    for(const QString &path : qAsConst(demPaths))
+    for(const QString& path : qAsConst(demPaths))
     {
         QDir dir(path);
         // find available maps
         const QStringList& filenames = dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name);
-        for(const QString &filename : filenames)
+        for(const QString& filename : filenames)
         {
             QFileInfo fi(filename);
 
-            CDemItem * item = new CDemItem(*demList, this);
+            CDemItem* item = new CDemItem(*demList, this);
 
             item->setText(0, fi.completeBaseName().replace("_", " "));
             item->filename = dir.absoluteFilePath(filename);
@@ -196,7 +196,7 @@ void CDemDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
 
     for(int i = 0; i < demList->count(); i++)
     {
-        CDemItem * item = demList->item(i);
+        CDemItem* item = demList->item(i);
         if(item && !item->demfile.isNull())
         {
             item->saveConfig(cfg);
@@ -205,7 +205,7 @@ void CDemDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg)
     }
 }
 
-void CDemDraw::loadConfigForDemItem(CDemItem * item)
+void CDemDraw::loadConfigForDemItem(CDemItem* item)
 {
     if(cfgGroup.isEmpty())
     {
@@ -224,11 +224,11 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys)
 {
     QMutexLocker lock(&CDemItem::mutexActiveDems);
 
-    for(const QString &key : keys)
+    for(const QString& key : keys)
     {
         for(int i = 0; i < demList->count(); i++)
         {
-            CDemItem * item = demList->item(i);
+            CDemItem* item = demList->item(i);
 
             if(item && item->key == key)
             {
@@ -249,11 +249,11 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg)
 {
     QMutexLocker lock(&CDemItem::mutexActiveDems);
 
-    for(const QString &key : keys)
+    for(const QString& key : keys)
     {
         for(int i = 0; i < demList->count(); i++)
         {
-            CDemItem * item = demList->item(i);
+            CDemItem* item = demList->item(i);
 
             if(item && item->key == key)
             {
@@ -279,7 +279,7 @@ qreal CDemDraw::getElevationAt(const QPointF& pos, bool checkScale)
         {
             for(int i = 0; i < demList->count(); i++)
             {
-                CDemItem * item = demList->item(i);
+                CDemItem* item = demList->item(i);
 
                 if(!item || item->demfile.isNull())
                 {
@@ -310,7 +310,7 @@ qreal CDemDraw::getSlopeAt(const QPointF& pos, bool checkScale)
         {
             for(int i = 0; i < demList->count(); i++)
             {
-                CDemItem * item = demList->item(i);
+                CDemItem* item = demList->item(i);
 
                 if(!item || item->demfile.isNull())
                 {
@@ -363,7 +363,7 @@ void CDemDraw::drawt(buffer_t& currentBuffer)
     {
         for(int i = 0; i < demList->count(); i++)
         {
-            CDemItem * item = demList->item(i);
+            CDemItem* item = demList->item(i);
 
             if(!item || item->demfile.isNull())
             {

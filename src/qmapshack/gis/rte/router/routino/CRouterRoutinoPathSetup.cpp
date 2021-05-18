@@ -21,19 +21,19 @@
 
 #include <QtWidgets>
 
-CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList &paths)
+CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList& paths)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , paths(paths)
 {
     setupUi(this);
 
-    connect(toolAdd,    &QToolButton::clicked,              this, &CRouterRoutinoPathSetup::slotAddPath);
-    connect(toolDelete, &QToolButton::clicked,              this, &CRouterRoutinoPathSetup::slotDelPath);
+    connect(toolAdd, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotAddPath);
+    connect(toolDelete, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotDelPath);
     connect(listWidget, &QListWidget::itemSelectionChanged, this, &CRouterRoutinoPathSetup::slotItemSelectionChanged);
 
-    for(const QString &path : paths)
+    for(const QString& path : paths)
     {
-        QListWidgetItem * item = new QListWidgetItem(listWidget);
+        QListWidgetItem* item = new QListWidgetItem(listWidget);
         item->setText(path);
     }
 
@@ -55,14 +55,14 @@ void CRouterRoutinoPathSetup::slotAddPath()
     QString path = QFileDialog::getExistingDirectory(this, tr("Select routing data file path..."), QDir::homePath(), 0);
     if(!path.isEmpty())
     {
-        QListWidgetItem * item = new QListWidgetItem(listWidget);
+        QListWidgetItem* item = new QListWidgetItem(listWidget);
         item->setText(path);
     }
 }
 
 void CRouterRoutinoPathSetup::slotDelPath()
 {
-    QList<QListWidgetItem *> items = listWidget->selectedItems();
+    QList<QListWidgetItem*> items = listWidget->selectedItems();
     qDeleteAll(items);
 }
 
@@ -71,7 +71,7 @@ void CRouterRoutinoPathSetup::accept()
     paths.clear();
     for(int i = 0; i < listWidget->count(); i++)
     {
-        QListWidgetItem *item = listWidget->item(i);
+        QListWidgetItem* item = listWidget->item(i);
         paths << item->text();
     }
 

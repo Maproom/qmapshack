@@ -26,9 +26,9 @@ class CTcxProject : public IGisProject
 {
     Q_DECLARE_TR_FUNCTIONS(CTcxProject)
 public:
-    CTcxProject(const QString &filename, CGisListWks * parent);
-    CTcxProject(const QString &filename, IDevice * parent);
-    CTcxProject(const QString &filename, const IGisProject * project, IDevice * parent);
+    CTcxProject(const QString& filename, CGisListWks* parent);
+    CTcxProject(const QString& filename, IDevice* parent);
+    CTcxProject(const QString& filename, const IGisProject* project, IDevice* parent);
     virtual ~CTcxProject() = default;
 
     const QString getFileDialogFilter() const override
@@ -48,7 +48,7 @@ public:
 
     static bool saveAs(const QString& fn, IGisProject& project);
 
-    static void loadTcx(const QString &filename, CTcxProject *project);
+    static void loadTcx(const QString& filename, CTcxProject* project);
 
 private:
     void setup();

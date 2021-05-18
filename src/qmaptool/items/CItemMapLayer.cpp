@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CItemMapLayer::CItemMapLayer(QTreeWidget *parent)
+CItemMapLayer::CItemMapLayer(QTreeWidget* parent)
     : IItem("")
     , QTreeWidgetItem(parent)
     , vrt(QDir::temp().absoluteFilePath("QMapTool_XXXXXX.vrt"))
@@ -45,7 +45,7 @@ QString CItemMapLayer::getProjection() const
     return drawContext->getProjection();
 }
 
-bool CItemMapLayer::addMap(CItemMap *map)
+bool CItemMapLayer::addMap(CItemMap* map)
 {
     const QPointF& mapScale = map->getScale();
 
@@ -81,7 +81,7 @@ void CItemMapLayer::updateLayer()
 
     for(int n = 0; n < N; n++)
     {
-        CItemMap * map = dynamic_cast<CItemMap*>(child(n));
+        CItemMap* map = dynamic_cast<CItemMap*>(child(n));
         if(map != nullptr)
         {
             args << map->getFilename();
@@ -103,12 +103,12 @@ bool CItemMapLayer::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     return true;
 }
 
-void CItemMapLayer::drawBoundingBoxes(QPainter& p, IDrawContext * dc)
+void CItemMapLayer::drawBoundingBoxes(QPainter& p, IDrawContext* dc)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        CItemMap * map = dynamic_cast<CItemMap*>(child(n));
+        CItemMap* map = dynamic_cast<CItemMap*>(child(n));
         if(map == nullptr)
         {
             continue;

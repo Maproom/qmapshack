@@ -31,7 +31,7 @@ class CRouterBRouterSetup : public QObject
 {
     Q_OBJECT
 public:
-    CRouterBRouterSetup(QObject * parent);
+    CRouterBRouterSetup(QObject* parent);
     ~CRouterBRouterSetup();
 
     enum mode_e { eModeLocal, eModeOnline, eModeIllegal };
@@ -59,10 +59,10 @@ public:
 
     QStringList getProfiles() const;
 
-    void addProfile(const QString &profile);
-    void deleteProfile(const QString &profile);
-    void profileUp(const QString &profile);
-    void profileDown(const QString &profile);
+    void addProfile(const QString& profile);
+    void deleteProfile(const QString& profile);
+    void profileUp(const QString& profile);
+    void profileDown(const QString& profile);
 
     void readLocalProfiles();
 
@@ -71,8 +71,8 @@ public:
     void loadExpertBinariesPage() const;
     void loadExpertSegmentsPage() const;
     void loadLocalOnlineProfiles(bool update) const;
-    void displayProfileAsync(const QString &profile);
-    void displayOnlineProfileAsync(const QString &profile) const;
+    void displayProfileAsync(const QString& profile);
+    void displayOnlineProfileAsync(const QString& profile) const;
 
     QString findJava() const;
     bool isLocalBRouterInstalled() const;
@@ -83,7 +83,7 @@ public:
     QString getBinariesUrl() const;
     QString getConfigUrl() const;
 
-    void parseBRouterVersion(const QString &text);
+    void parseBRouterVersion(const QString& text);
 
     void onInvalidSetup();
 
@@ -97,7 +97,7 @@ signals:
     void sigError(const QString error, const QString details);
 
 private slots:
-    void slotOnlineRequestFinished(QNetworkReply *reply);
+    void slotOnlineRequestFinished(QNetworkReply* reply);
     void slotLoadOnlineProfilesRequestFinished(bool ok);
 
 private:
@@ -105,22 +105,22 @@ private:
     enum profileRequest_e { eProfileInstall, eProfileDisplay };
 
     QDir getProfileDir(const mode_e mode) const;
-    void loadOnlineProfileAsync(const QString &profile, const profileRequest_e mode) const;
+    void loadOnlineProfileAsync(const QString& profile, const profileRequest_e mode) const;
     void loadOnlineConfigFinished(QNetworkReply* reply);
     void loadOnlineVersionFinished(QNetworkReply* reply);
-    void loadOnlineProfileFinished(QNetworkReply * reply);
-    void afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant &v);
-    void mergeOnlineProfiles(const QStringList &profilesLoaded);
-    void emitOnlineConfigScriptError(const QJSValue &error);
+    void loadOnlineProfileFinished(QNetworkReply* reply);
+    void afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant& v);
+    void mergeOnlineProfiles(const QStringList& profilesLoaded);
+    void emitOnlineConfigScriptError(const QJSValue& error);
     void emitNetworkError(QString error);
-    mode_e modeFromString(const QString &mode) const;
+    mode_e modeFromString(const QString& mode) const;
     QString stringFromMode(const mode_e mode) const;
 
     QStringList onlineProfiles;
     QStringList localProfiles;
 
-    QNetworkAccessManager * networkAccessManager;
-    QWebEnginePage * profilesWebPage;
+    QNetworkAccessManager* networkAccessManager;
+    QWebEnginePage* profilesWebPage;
 
     bool expertMode;
     mode_e installMode;

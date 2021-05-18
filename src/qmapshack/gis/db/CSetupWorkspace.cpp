@@ -24,7 +24,7 @@
 #include "helpers/CSettings.h"
 #include <QtWidgets>
 
-CSetupWorkspace::CSetupWorkspace(CGisWorkspace * workspace, QWidget *parent)
+CSetupWorkspace::CSetupWorkspace(CGisWorkspace* workspace, QWidget* parent)
     : QDialog(parent), workspace(workspace)
 {
     setupUi(this);

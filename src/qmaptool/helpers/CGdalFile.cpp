@@ -45,7 +45,7 @@ void CGdalFile::unload()
 void CGdalFile::load(const QString& filename)
 {
     qDebug() << filename;
-    CCanvas * canvas = CMainWindow::self().getCanvas();
+    CCanvas* canvas = CMainWindow::self().getCanvas();
 
     dataset = (GDALDataset*)GDALOpenShared(filename.toUtf8(), GA_ReadOnly);
 
@@ -63,17 +63,17 @@ void CGdalFile::load(const QString& filename)
 
     {
         OGRSpatialReference oSRS;
-        const char *wkt = str;
+        const char* wkt = str;
         oSRS.importFromWkt(&wkt);
 
-        char *proj4 = nullptr;
+        char* proj4 = nullptr;
         oSRS.exportToProj4(&proj4);
 
         proj.init(proj4, "EPSG:4326");
         free(proj4);
     }
 
-    GDALRasterBand *pBand = dataset->GetRasterBand(1);
+    GDALRasterBand* pBand = dataset->GetRasterBand(1);
 
     if(nullptr == pBand)
     {
@@ -89,16 +89,16 @@ void CGdalFile::load(const QString& filename)
     rasterBandCount = dataset->GetRasterCount();
     if(rasterBandCount == 1)
     {
-        if(pBand->GetColorInterpretation() ==  GCI_PaletteIndex )
+        if(pBand->GetColorInterpretation() == GCI_PaletteIndex )
         {
-            GDALColorTable * pct = pBand->GetColorTable();
+            GDALColorTable* pct = pBand->GetColorTable();
             for(int i = 0; i < pct->GetColorEntryCount(); ++i)
             {
                 const GDALColorEntry& e = *pct->GetColorEntry(i);
                 colortable << qRgba(e.c1, e.c2, e.c3, e.c4);
             }
         }
-        else if(pBand->GetColorInterpretation() ==  GCI_GrayIndex )
+        else if(pBand->GetColorInterpretation() == GCI_GrayIndex )
         {
             for(int i = 0; i < 256; ++i)
             {
@@ -142,10 +142,10 @@ void CGdalFile::load(const QString& filename)
         dataset->GetGeoTransform( adfGeoTransform );
     }
 
-    xscale  = adfGeoTransform[1];
-    yscale  = adfGeoTransform[5];
-    xrot    = adfGeoTransform[4];
-    yrot    = adfGeoTransform[2];
+    xscale = adfGeoTransform[1];
+    yscale = adfGeoTransform[5];
+    xrot = adfGeoTransform[4];
+    yrot = adfGeoTransform[2];
 
     // Setup the basic transformation. Depending on the type this
     // can be the transformation into pixel coordinates or into

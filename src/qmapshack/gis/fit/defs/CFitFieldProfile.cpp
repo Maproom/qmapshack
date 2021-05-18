@@ -24,7 +24,7 @@
 CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, quint8 devDataIdx,
                                    qreal scale, qint16 offset, QString units, field_type_e fieldType )
     : name(name), fieldDefNr(fieldDefNr), devDataIdx(devDataIdx), scale(scale), offset(offset), units(units), fieldType(fieldType),
-      baseType(&baseType), profile(parent), subfields(), components()
+    baseType(&baseType), profile(parent), subfields(), components()
 {
 }
 
@@ -39,9 +39,9 @@ CFitFieldProfile::CFitFieldProfile() : CFitFieldProfile(nullptr, "unknown", fit:
 }
 
 CFitFieldProfile::CFitFieldProfile(const CFitFieldProfile& copy)
-    : name(copy.name), fieldDefNr(copy.fieldDefNr), devDataIdx(copy.devDataIdx),scale(copy.scale), offset(copy.offset),
-      units(copy.units), fieldType(copy.fieldType), baseType(copy.baseType), profile(copy.profile), subfields(copy.subfields),
-      components(copy.components)
+    : name(copy.name), fieldDefNr(copy.fieldDefNr), devDataIdx(copy.devDataIdx), scale(copy.scale), offset(copy.offset),
+    units(copy.units), fieldType(copy.fieldType), baseType(copy.baseType), profile(copy.profile), subfields(copy.subfields),
+    components(copy.components)
 {
 }
 
@@ -91,9 +91,9 @@ quint8 CFitFieldProfile::getDevDataIdx() const
     return devDataIdx;
 }
 
-QPair<quint8,quint8> CFitFieldProfile::getDevProfileId() const
+QPair<quint8, quint8> CFitFieldProfile::getDevProfileId() const
 {
-    return qMakePair(devDataIdx,fieldDefNr);
+    return qMakePair(devDataIdx, fieldDefNr);
 }
 
 qreal CFitFieldProfile::getScale() const

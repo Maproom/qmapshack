@@ -26,7 +26,7 @@
 class CAppSetupWin : public IAppSetup
 {
 public:
-    CAppSetupWin(QObject * parent)
+    CAppSetupWin(QObject* parent)
         : IAppSetup(parent)
     {
     }
@@ -37,7 +37,7 @@ public:
     QString defaultCachePath() override;
     QString userDataPath(QString subdir = 0) override;
     QString logDir() override;
-    QString findExecutable(const QString &name) override;
+    QString findExecutable(const QString& name) override;
     QString helpFile() override;
 
     QByteArray path;

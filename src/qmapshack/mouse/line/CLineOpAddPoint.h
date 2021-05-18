@@ -25,12 +25,12 @@
 class CLineOpAddPoint : public ILineOp
 {
 public:
-    CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
+    CLineOpAddPoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
     virtual ~CLineOpAddPoint();
 
     void leftClick(const QPoint& pos) override;
     void mouseMove(const QPoint& pos) override;
-    void rightButtonDown(const QPoint &pos) override;
+    void rightButtonDown(const QPoint& pos) override;
 
     void drawFg(QPainter& p) override;
 

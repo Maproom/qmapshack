@@ -26,14 +26,14 @@ class CActionSelect : public QWidget, private Ui::IActionSelect
 {
     Q_OBJECT
 public:
-    CActionSelect(QWidget * parent);
+    CActionSelect(QWidget* parent);
     virtual ~CActionSelect() = default;
 
     void setAction(CScrOptRangeTool::eAction action);
     CScrOptRangeTool::eAction getAction() const;
 
 private:
-    QVector<QRadioButton *> buttons;
+    QVector<QRadioButton*> buttons;
 };
 
 #endif //CACTIONSELECT_H

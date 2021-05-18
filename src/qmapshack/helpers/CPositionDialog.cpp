@@ -22,7 +22,7 @@
 #include <QtWidgets>
 
 
-CPositionDialog::CPositionDialog(QWidget * parent, QPointF &pos)
+CPositionDialog::CPositionDialog(QWidget* parent, QPointF& pos)
     : QDialog(parent)
     , pos(pos)
 {

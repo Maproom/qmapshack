@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CTableTrk::CTableTrk(QWidget *parent)
+CTableTrk::CTableTrk(QWidget* parent)
     : QTreeWidget(parent)
     , INotifyTrk(CGisItemTrk::eVisualTrkTable)
 {
@@ -59,7 +59,7 @@ void CTableTrk::showTopItem()
 void CTableTrk::showNextInvalid()
 {
     qint32 index = 0;
-    QTreeWidgetItem * item = currentItem();
+    QTreeWidgetItem* item = currentItem();
     if(item != nullptr)
     {
         index = indexOfTopLevelItem(item) + 1;
@@ -68,7 +68,7 @@ void CTableTrk::showNextInvalid()
     const qint32 N = topLevelItemCount();
     for(; index < N; index++)
     {
-        QTreeWidgetItem * item = topLevelItem(index);
+        QTreeWidgetItem* item = topLevelItem(index);
         if(item->data(eColNum, Qt::UserRole).toUInt() != 0)
         {
             scrollTo(indexFromItem(item, QAbstractItemView::PositionAtCenter));
@@ -80,7 +80,7 @@ void CTableTrk::showNextInvalid()
 void CTableTrk::showPrevInvalid()
 {
     qint32 index = 0;
-    QTreeWidgetItem * item = currentItem();
+    QTreeWidgetItem* item = currentItem();
     if(item != nullptr)
     {
         index = indexOfTopLevelItem(item) - 1;
@@ -88,7 +88,7 @@ void CTableTrk::showPrevInvalid()
 
     for(; index >= 0; index--)
     {
-        QTreeWidgetItem * item = topLevelItem(index);
+        QTreeWidgetItem* item = topLevelItem(index);
         if(item->data(eColNum, Qt::UserRole).toUInt() != 0)
         {
             scrollTo(indexFromItem(item, QAbstractItemView::PositionAtCenter));
@@ -98,7 +98,7 @@ void CTableTrk::showPrevInvalid()
 }
 
 
-void CTableTrk::setTrack(CGisItemTrk * track)
+void CTableTrk::setTrack(CGisItemTrk* track)
 {
     setColumnCount(eColMax);
 
@@ -149,14 +149,14 @@ void CTableTrk::updateData()
     {
         QString val, unit;
 
-        QTreeWidgetItem * item = new QTreeWidgetItem();
-        item->setTextAlignment(eColNum,     Qt::AlignLeft);
-        item->setTextAlignment(eColEle,     Qt::AlignRight);
-        item->setTextAlignment(eColDelta,   Qt::AlignRight);
-        item->setTextAlignment(eColDist,    Qt::AlignRight);
-        item->setTextAlignment(eColAscent,  Qt::AlignRight);
+        QTreeWidgetItem* item = new QTreeWidgetItem();
+        item->setTextAlignment(eColNum, Qt::AlignLeft);
+        item->setTextAlignment(eColEle, Qt::AlignRight);
+        item->setTextAlignment(eColDelta, Qt::AlignRight);
+        item->setTextAlignment(eColDist, Qt::AlignRight);
+        item->setTextAlignment(eColAscent, Qt::AlignRight);
         item->setTextAlignment(eColDescent, Qt::AlignRight);
-        item->setTextAlignment(eColSpeed,   Qt::AlignRight);
+        item->setTextAlignment(eColSpeed, Qt::AlignRight);
 
         if(!trk->isReadOnly())
         {
@@ -237,7 +237,7 @@ void CTableTrk::updateData()
 
 void CTableTrk::slotItemSelectionChanged()
 {
-    QTreeWidgetItem * item = currentItem();
+    QTreeWidgetItem* item = currentItem();
     if(nullptr != item)
     {
         quint32 idx = item->text(eColNum).toUInt();
@@ -245,7 +245,7 @@ void CTableTrk::slotItemSelectionChanged()
     }
 }
 
-void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
+void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem* item, int column)
 {
     if(trk->isReadOnly())
     {

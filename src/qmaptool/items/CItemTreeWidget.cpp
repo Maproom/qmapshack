@@ -25,7 +25,7 @@
 
 #include <QtWidgets>
 
-CItemTreeWidget::CItemTreeWidget(QWidget *parent)
+CItemTreeWidget::CItemTreeWidget(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
@@ -42,7 +42,7 @@ void CItemTreeWidget::saveSettings(QSettings& cfg)
     const int N = treeFiles->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        CItemMapLayer * layer = dynamic_cast<CItemMapLayer*>(treeFiles->topLevelItem(n));
+        CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(treeFiles->topLevelItem(n));
         if(layer == nullptr)
         {
             continue;
@@ -51,7 +51,7 @@ void CItemTreeWidget::saveSettings(QSettings& cfg)
         const int M = layer->childCount();
         for(int m = 0; m < M; m++)
         {
-            CItemMap * map = dynamic_cast<CItemMap*>(layer->child(m));
+            CItemMap* map = dynamic_cast<CItemMap*>(layer->child(m));
             if(map != nullptr)
             {
                 files << map->getFilename();
@@ -73,7 +73,7 @@ void CItemTreeWidget::loadSettings(QSettings& cfg)
     const int N = treeFiles->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        CItemMapLayer * layer = dynamic_cast<CItemMapLayer*>(treeFiles->topLevelItem(n));
+        CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(treeFiles->topLevelItem(n));
         if(layer == nullptr)
         {
             continue;
@@ -82,7 +82,7 @@ void CItemTreeWidget::loadSettings(QSettings& cfg)
         const int M = layer->childCount();
         for(int m = 0; m < M; m++)
         {
-            CItemMap * map = dynamic_cast<CItemMap*>(layer->child(m));
+            CItemMap* map = dynamic_cast<CItemMap*>(layer->child(m));
             if(map != nullptr)
             {
                 cfg.beginGroup(QString("%1_%2").arg(n).arg(m));
@@ -93,15 +93,15 @@ void CItemTreeWidget::loadSettings(QSettings& cfg)
     }
 }
 
-ITool * CItemTreeWidget::currentItem()
+ITool* CItemTreeWidget::currentItem()
 {
-    CItemMapLayer * layer = dynamic_cast<CItemMapLayer*>(treeFiles->currentItem());
+    CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(treeFiles->currentItem());
     if(layer != nullptr)
     {
         return layer;
     }
 
-    CItemMap * map = dynamic_cast<CItemMap*>(treeFiles->currentItem());
+    CItemMap* map = dynamic_cast<CItemMap*>(treeFiles->currentItem());
     if(map != nullptr)
     {
         return dynamic_cast<CItemMapLayer*>(map->QTreeWidgetItem::parent());
@@ -110,10 +110,10 @@ ITool * CItemTreeWidget::currentItem()
     return nullptr;
 }
 
-bool sortByScale(QTreeWidgetItem * item1, QTreeWidgetItem * item2)
+bool sortByScale(QTreeWidgetItem* item1, QTreeWidgetItem* item2)
 {
-    CItemMapLayer * layer1 = dynamic_cast<CItemMapLayer*>(item1);
-    CItemMapLayer * layer2 = dynamic_cast<CItemMapLayer*>(item2);
+    CItemMapLayer* layer1 = dynamic_cast<CItemMapLayer*>(item1);
+    CItemMapLayer* layer2 = dynamic_cast<CItemMapLayer*>(item2);
     if(layer1 == nullptr || layer2 == nullptr)
     {
         return false;
@@ -130,7 +130,7 @@ void CItemTreeWidget::addFiles(const QStringList& files)
     // preset projstr if there is already a layer with a projection.
     if(treeFiles->topLevelItemCount() != 0)
     {
-        CItemMapLayer * layer = dynamic_cast<CItemMapLayer*>(treeFiles->topLevelItem(0));
+        CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(treeFiles->topLevelItem(0));
         if(layer != nullptr)
         {
             projstr = layer->getProjection();
@@ -140,7 +140,7 @@ void CItemTreeWidget::addFiles(const QStringList& files)
 
     for(const QString& file : files)
     {
-        CItemMap * map = new CItemMap(file);
+        CItemMap* map = new CItemMap(file);
 
         // if something failed simply go on.
         if(!map->getIsValid())
@@ -173,7 +173,7 @@ void CItemTreeWidget::addFiles(const QStringList& files)
             continue;
         }
 
-        CItemMapLayer * layer = nullptr;
+        CItemMapLayer* layer = nullptr;
         const int N = treeFiles->topLevelItemCount();
         for(int n = 0; n < N; n++)
         {
@@ -202,12 +202,12 @@ void CItemTreeWidget::addFiles(const QStringList& files)
     slotSelectionChanged();
 }
 
-CItemMap * CItemTreeWidget::findMapByHash(const QString& hash)
+CItemMap* CItemTreeWidget::findMapByHash(const QString& hash)
 {
     const int N = treeFiles->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        CItemMapLayer * layer = dynamic_cast<CItemMapLayer*>(treeFiles->topLevelItem(n));
+        CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(treeFiles->topLevelItem(n));
         if(layer == nullptr)
         {
             continue;
@@ -216,7 +216,7 @@ CItemMap * CItemTreeWidget::findMapByHash(const QString& hash)
         const int M = layer->childCount();
         for(int m = 0; m < M; m++)
         {
-            CItemMap * map = dynamic_cast<CItemMap*>(layer->child(m));
+            CItemMap* map = dynamic_cast<CItemMap*>(layer->child(m));
             if((map != nullptr) && (map->getHash() == hash))
             {
                 return map;
@@ -250,10 +250,10 @@ void CItemTreeWidget::slotDeleteFiles()
 
 void CItemTreeWidget::slotDeleteFile()
 {
-    CItemMap * map = dynamic_cast<CItemMap*>(treeFiles->currentItem());
+    CItemMap* map = dynamic_cast<CItemMap*>(treeFiles->currentItem());
     if(map != nullptr)
     {
-        QTreeWidgetItem * layer = map->QTreeWidgetItem::parent();
+        QTreeWidgetItem* layer = map->QTreeWidgetItem::parent();
         delete map;
         if(layer->childCount() == 0)
         {
@@ -263,7 +263,7 @@ void CItemTreeWidget::slotDeleteFile()
         return;
     }
 
-    CItemMapLayer * layer = dynamic_cast<CItemMapLayer*>(treeFiles->currentItem());
+    CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(treeFiles->currentItem());
     if(layer != nullptr)
     {
         delete layer;
@@ -274,7 +274,7 @@ void CItemTreeWidget::slotDeleteFile()
 
 void CItemTreeWidget::slotSelectionChanged()
 {
-    bool isNotEmpty =  treeFiles->topLevelItemCount() != 0;
+    bool isNotEmpty = treeFiles->topLevelItemCount() != 0;
     bool isSelected = !treeFiles->selectedItems().isEmpty();
 
     toolDelFile->setEnabled(isSelected);
@@ -288,12 +288,12 @@ bool CItemTreeWidget::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
 {
     bool res = false;
 
-    CItemMapLayer * layer = dynamic_cast<CItemMapLayer*>(currentItem());
+    CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(currentItem());
     if(layer != nullptr)
     {
         res = layer->drawFx(p, needsRedraw);
 
-        IDrawContext * dc = layer->getDrawContext();
+        IDrawContext* dc = layer->getDrawContext();
 
         if(dc == nullptr)
         {
@@ -303,7 +303,7 @@ bool CItemTreeWidget::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
         const int N = treeFiles->topLevelItemCount();
         for(int n = 0; n < N; n++)
         {
-            CItemMapLayer * layer = dynamic_cast<CItemMapLayer*>(treeFiles->topLevelItem(n));
+            CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(treeFiles->topLevelItem(n));
             if(layer == nullptr)
             {
                 continue;

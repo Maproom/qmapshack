@@ -157,7 +157,7 @@ CCanvas::CCanvas(QWidget* parent, const QString& name)
     connect(map, &CMapDraw::sigStopThread, mapLoadIndicator, &QLabel::hide);
 
     connect(poi, &CPoiDraw::sigStartThread, poiLoadIndicator, &QLabel::show);
-    connect(poi, &CPoiDraw::sigStopThread,  poiLoadIndicator, &QLabel::hide);
+    connect(poi, &CPoiDraw::sigStopThread, poiLoadIndicator, &QLabel::hide);
 
     connect(dem, &CDemDraw::sigStartThread, demLoadIndicator, &QLabel::show);
     connect(dem, &CDemDraw::sigStopThread, demLoadIndicator, &QLabel::hide);
@@ -1010,7 +1010,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
         QString text;
 
         text += "<table>";
-        for(const CTrackData::trkpt_t& trkpt: trk->getTrackData())
+        for(const CTrackData::trkpt_t& trkpt : trk->getTrackData())
         {
             if(trkpt.isHidden() || trkpt.desc.isEmpty())
             {
@@ -1133,7 +1133,7 @@ void CCanvas::displayInfo(const QPoint& px)
     QToolTip::hideText();
 }
 
-void CCanvas::findPoiCloseBy(const QPoint& px, QSet<poi_t> &poiItems, QList<QPointF> &posPoiHighlight)  const
+void CCanvas::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight)  const
 {
     poi->findPoiCloseBy(px, poiItems, posPoiHighlight);
 
@@ -1145,7 +1145,7 @@ void CCanvas::findPoiCloseBy(const QPoint& px, QSet<poi_t> &poiItems, QList<QPoi
     }
 }
 
-void CCanvas::findPoisIn(const QRectF &degRect, QSet<poi_t> &poiItems, QList<QPointF> &posPoiHighlight) const
+void CCanvas::findPoisIn(const QRectF& degRect, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     return poi->findPoisIn(degRect, poiItems, posPoiHighlight);
 }

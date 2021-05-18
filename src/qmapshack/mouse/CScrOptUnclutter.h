@@ -26,7 +26,7 @@
 class CScrOptUnclutter : public IScrOpt
 {
 public:
-    CScrOptUnclutter(IMouse *mouse);
+    CScrOptUnclutter(IMouse* mouse);
     virtual ~CScrOptUnclutter();
 
     struct item_t
@@ -46,9 +46,9 @@ public:
         return items.size();
     }
 
-    void addItem(IGisItem * gisItem);
+    void addItem(IGisItem* gisItem);
     IGisItem::key_t getItemKey(int index = 0);
-    const item_t *selectItem(const QPoint& point);
+    const item_t* selectItem(const QPoint& point);
 
     void draw(QPainter& p) override;
     void mouseMove(const QPoint& pos) override;

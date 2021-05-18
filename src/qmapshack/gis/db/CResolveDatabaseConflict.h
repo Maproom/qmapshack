@@ -26,7 +26,7 @@
 class CResolveDatabaseConflict : public QDialog, private Ui::IResolveDatabaseConflict
 {
 public:
-    CResolveDatabaseConflict(QString msg, IGisItem *item, CDBProject::action_e &actionForAll, QWidget *parent = nullptr);
+    CResolveDatabaseConflict(QString msg, IGisItem* item, CDBProject::action_e& actionForAll, QWidget* parent = nullptr);
 
     CDBProject::action_e getAction();
 

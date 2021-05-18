@@ -22,15 +22,15 @@
 
 void CTinySpinBox::initialize()
 {
-    initialized  = true;
+    initialized = true;
 
     paletteEdit = QPalette(palette());
-    paletteRO   = QPalette(palette());
-    paletteRW   = QPalette(palette());
+    paletteRO = QPalette(palette());
+    paletteRW = QPalette(palette());
     paletteRW.setColor(QPalette::Text, QColor(0, 0, 255));
 
     fontNoUnderline = QFont(font());
-    fontUnderline   = QFont(font());
+    fontUnderline = QFont(font());
     fontUnderline.setUnderline(true);
 }
 
@@ -58,7 +58,7 @@ void CTinySpinBox::updateStyle()
     }
 }
 
-CTinySpinBox::CTinySpinBox(QWidget * parent)
+CTinySpinBox::CTinySpinBox(QWidget* parent)
     : QSpinBox(parent)
 {
     // initialization has to be done deferred,
@@ -78,7 +78,7 @@ void CTinySpinBox::setReadOnly(bool r)
     updateStyle();
 }
 
-void CTinySpinBox::focusInEvent(QFocusEvent *event)
+void CTinySpinBox::focusInEvent(QFocusEvent* event)
 {
     updateStyle();
     if(!isReadOnly())
@@ -89,7 +89,7 @@ void CTinySpinBox::focusInEvent(QFocusEvent *event)
     QSpinBox::focusInEvent(event);
 }
 
-void CTinySpinBox::focusOutEvent(QFocusEvent *event)
+void CTinySpinBox::focusOutEvent(QFocusEvent* event)
 {
     updateStyle();
     QSpinBox::focusOutEvent(event);

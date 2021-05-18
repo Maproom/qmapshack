@@ -26,7 +26,7 @@ class CCoordFormatSetup : public QDialog, private Ui::ICoordFormatSetup
 {
     Q_OBJECT
 public:
-    CCoordFormatSetup(QWidget * parent);
+    CCoordFormatSetup(QWidget* parent);
     virtual ~CCoordFormatSetup();
 
 public slots:

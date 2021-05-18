@@ -50,7 +50,7 @@ public:
     struct subfile_part_t
     {
         quint32 offset = 0; //< file offset of subfile part
-        quint32 size   = 0; //< size of the subfile part
+        quint32 size = 0;   //< size of the subfile part
     };
 
     /// subdivision  information
@@ -101,9 +101,9 @@ public:
         QMap<QString, subfile_part_t> parts;
 
         qreal north = 0.0; //< north boundary of area covered by this subfile [rad]
-        qreal east  = 0.0; //< east  boundary of area covered by this subfile [rad]
+        qreal east = 0.0;  //< east  boundary of area covered by this subfile [rad]
         qreal south = 0.0; //< south boundary of area covered by this subfile [rad]
-        qreal west  = 0.0; //< west  boundary of area covered by this subfile [rad]
+        qreal west = 0.0;  //< west  boundary of area covered by this subfile [rad]
 
         /// area in [] covered by this subfile
         QRectF area;
@@ -115,10 +115,10 @@ public:
         /// bit 1 of POI_flags (TRE header @ 0x3F)
         bool isTransparent = false;
         /// object to manage the string tables
-        IGarminStrTbl * strtbl = nullptr;
+        IGarminStrTbl* strtbl = nullptr;
     };
 
-    CMapIMG(const QString &filename, CMapDraw *parent);
+    CMapIMG(const QString& filename, CMapDraw* parent);
     virtual ~CMapIMG() = default;
 
     void loadConfig(QSettings& cfg) override;
@@ -141,7 +141,7 @@ public:
        @param polyline      the resulting polyline, if any, in [rad]
        @return              Return true if a line has been found.
      */
-    bool findPolylineCloseBy(const QPointF &pt1, const QPointF &pt2, qint32 threshold, QPolygonF& polyline) override;
+    bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline) override;
 
 public slots:
     void slotSetTypeFile(const QString& filename) override;
@@ -165,21 +165,21 @@ private:
     };
 
 
-    quint8 scale2bits(const QPointF &scale);
+    quint8 scale2bits(const QPointF& scale);
     void setupTyp();
     void readBasics();
-    void readSubfileBasics(subfile_desc_t& subfile, CFileExt &file);
+    void readSubfileBasics(subfile_desc_t& subfile, CFileExt& file);
     void processPrimaryMapData();
     void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data);
     void loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polylines, pointtype_t& points, pointtype_t& pois, unsigned level, const QRectF& viewport, QPainter& p);
-    void loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStrTbl * strtbl, const QByteArray& rgndata, bool fast, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons, pointtype_t& points, pointtype_t& pois);
-    bool intersectsWithExistingLabel(const QRect &rect) const;
-    void addLabel(const CGarminPoint &pt, const QRect &rect, CGarminTyp::label_type_e type);
+    void loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStrTbl* strtbl, const QByteArray& rgndata, bool fast, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons, pointtype_t& points, pointtype_t& pois);
+    bool intersectsWithExistingLabel(const QRect& rect) const;
+    void addLabel(const CGarminPoint& pt, const QRect& rect, CGarminTyp::label_type_e type);
     void drawPolygons(QPainter& p, polytype_t& lines);
-    void drawPolylines(QPainter& p, polytype_t& lines, const QPointF &scale);
-    void drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois);
+    void drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale);
+    void drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPois);
     void drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPois);
-    void drawLabels(QPainter& p, const QVector<strlbl_t> &lbls);
+    void drawLabels(QPainter& p, const QVector<strlbl_t>& lbls);
     void drawText(QPainter& p);
 
     void drawLine(QPainter& p, CGarminPolygon& l, const CGarminTyp::polyline_property& property, const QFontMetricsF& metrics, const QFont& font, const QPointF& scale);
@@ -187,7 +187,7 @@ private:
 
     void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QFontMetricsF& metrics, qint32 lineWidth);
 
-    void getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiMap<QString, QString>& dict) const;
+    void getInfoPoints(const pointtype_t& points, const QPoint& pt, QMultiMap<QString, QString>& dict) const;
     void getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& dict) const;
     void getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict) const;
 
@@ -448,7 +448,7 @@ private:
         quint8 level;
         bool useBaseMap;
 
-        bool operator==(const map_level_t &ml)  const
+        bool operator==(const map_level_t& ml)  const
         {
             if (ml.bits != bits || ml.level != level || ml.useBaseMap != useBaseMap)
             {
@@ -460,7 +460,7 @@ private:
             }
         }
 
-        static bool GreaterThan(const map_level_t &ml1, const map_level_t &ml2)
+        static bool GreaterThan(const map_level_t& ml1, const map_level_t& ml2)
         {
             return ml1.bits < ml2.bits;
         }

@@ -36,14 +36,14 @@ struct poi_t
     quint32 ele = NOINT;
 };
 
-inline bool operator==(const poi_t &poi1, const poi_t &poi2)
+inline bool operator==(const poi_t& poi1, const poi_t& poi2)
 {
     return poi1.name == poi2.name
            && poi1.desc == poi2.desc
            && poi1.pos == poi2.pos;
 }
 
-inline uint qHash(const poi_t &poi, uint seed)
+inline uint qHash(const poi_t& poi, uint seed)
 {
     return qHash(poi.name, seed) ^ qHash(poi.desc, seed) ^ qHash(poi.pos.x(), seed) ^ qHash(poi.pos.y(), seed);
 }

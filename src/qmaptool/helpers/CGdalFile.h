@@ -57,7 +57,7 @@ protected:
 
     type_e type;
 
-    GDALDataset * dataset = nullptr;
+    GDALDataset* dataset = nullptr;
 
     /// number of color bands used by the *vrt
     int rasterBandCount = 0;
@@ -66,7 +66,7 @@ protected:
 
     // true if the map file has overviews
     qint32 hasOverviews = -1;
-    qint32 hasNoData    = -1;
+    qint32 hasNoData = -1;
 
 
     /// true if the map file could be loaded

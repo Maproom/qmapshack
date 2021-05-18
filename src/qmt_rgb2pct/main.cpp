@@ -38,8 +38,8 @@ static void prepareTranslator(QString translationPath, QString translationPrefix
         locale = locale.left(2);
     }
 
-    QCoreApplication* app =  (QCoreApplication*) QCoreApplication::instance();
-    QTranslator *qtTranslator = new QTranslator(app);
+    QCoreApplication* app = (QCoreApplication*) QCoreApplication::instance();
+    QTranslator* qtTranslator = new QTranslator(app);
 
     if (qtTranslator->load(translationPrefix + locale, translationPath))
     {
@@ -50,7 +50,7 @@ static void prepareTranslator(QString translationPath, QString translationPrefix
 static void loadTranslations()
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(__FreeBSD_kernel__) || defined(__GNU__) || defined(Q_OS_CYGWIN)
-    QString resourceDir     = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+    QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
     QString translationPath = QCoreApplication::applicationDirPath();
     translationPath.replace(QRegExp("bin$"), "share/" APP_STR "/translations");
     prepareTranslator(resourceDir, "qt_");
@@ -72,10 +72,9 @@ static void loadTranslations()
     prepareTranslator(appResourceDir, "qtbase_");
     prepareTranslator(appResourceDir, APP_STR "_");
 #endif
-
 }
 
-int main(int argc, char ** argv)
+int main(int argc, char** argv)
 {
     QCoreApplication app(argc, argv);
     QCoreApplication::setApplicationName(APP_STR);
@@ -101,13 +100,13 @@ int main(int argc, char ** argv)
 
     parser.addOptions({
         {
-            {"n","ncolors"}, QCoreApplication::translate("main", "Number of colors. (default: 255)"), "number", "255"
+            {"n", "ncolors"}, QCoreApplication::translate("main", "Number of colors. (default: 255)"), "number", "255"
         },
         {
-            {"p","pct"},  QCoreApplication::translate("main", "Input palette file for color table (*.vrt)"), "filename", ""
+            {"p", "pct"}, QCoreApplication::translate("main", "Input palette file for color table (*.vrt)"), "filename", ""
         },
         {
-            {"s","sct"},  QCoreApplication::translate("main", "Save color table to palette file (*.vrt)"), "filename", ""
+            {"s", "sct"}, QCoreApplication::translate("main", "Save color table to palette file (*.vrt)"), "filename", ""
         },
     });
 
@@ -117,7 +116,7 @@ int main(int argc, char ** argv)
     if(parser.positionalArguments().count() == 1 && parser.value("sct").isEmpty())
     {
         printStderrQString("");
-        printStderrQString(QCoreApplication::translate("main","There must be a source and destination file."));
+        printStderrQString(QCoreApplication::translate("main", "There must be a source and destination file."));
         printStderrQString("");
         parser.showHelp(-1);
     }
@@ -140,7 +139,7 @@ int main(int argc, char ** argv)
     if(!ok || ncolors > 255)
     {
         printStderrQString("");
-        printStderrQString(QCoreApplication::translate("main","--ncolors must be an integer value less than 256"));
+        printStderrQString(QCoreApplication::translate("main", "--ncolors must be an integer value less than 256"));
         printStderrQString("");
         parser.showHelp(-1);
     }

@@ -27,7 +27,7 @@ class CGisSummary : public QWidget, private Ui::IGisSummary
 {
     Q_OBJECT
 public:
-    CGisSummary(QWidget * parent);
+    CGisSummary(QWidget* parent);
     virtual ~CGisSummary();
 
     enum dropzone_e
@@ -50,7 +50,7 @@ public:
     {
         QString name;
         QList<folder_t> folders;
-        CGisSummaryDropZone * zone = nullptr;
+        CGisSummaryDropZone* zone = nullptr;
     };
 
     dropzone_t& getDropZone(dropzone_e dropzone)

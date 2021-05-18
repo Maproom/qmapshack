@@ -22,7 +22,7 @@
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
-CFilterOffsetElevation::CFilterOffsetElevation(CGisItemTrk &trk, QWidget *parent)
+CFilterOffsetElevation::CFilterOffsetElevation(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {

@@ -32,7 +32,7 @@ void CFitDevFieldDefinitionState::reset()
     offset = 0;
 }
 
-decode_state_e CFitDevFieldDefinitionState::process(quint8 &dataByte)
+decode_state_e CFitDevFieldDefinitionState::process(quint8& dataByte)
 {
     switch (offset++)
     {
@@ -51,7 +51,7 @@ decode_state_e CFitDevFieldDefinitionState::process(quint8 &dataByte)
         devDataIndex = dataByte;
         // get the previously (in RecordHeaderState) added definition message
         CFitDefinitionMessage* def = latestDefinition();
-        CFitFieldProfile* profile = devFieldProfile(qMakePair(devDataIndex,fieldNr));
+        CFitFieldProfile* profile = devFieldProfile(qMakePair(devDataIndex, fieldNr));
 
         // add the new field definition
         def->addDevField(CFitFieldDefinition(def, profile, fieldNr, devDataIndex, size, profile->getBaseType().baseTypeField()));

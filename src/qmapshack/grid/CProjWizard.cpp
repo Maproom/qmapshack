@@ -29,12 +29,12 @@ struct mitab_entry_t
     int idx;
 };
 
-static bool mitabLessThan(const mitab_entry_t &s1, const mitab_entry_t &s2)
+static bool mitabLessThan(const mitab_entry_t& s1, const mitab_entry_t& s2)
 {
     return s1.name < s2.name;
 }
 
-CProjWizard::CProjWizard(QLineEdit &line)
+CProjWizard::CProjWizard(QLineEdit& line)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , line(line)
 {
@@ -56,13 +56,13 @@ CProjWizard::CProjWizard(QLineEdit &line)
                 }
             }
         }
-        entry.idx   = idx;
+        entry.idx = idx;
         list << entry;
         ++idx;
     }
     qSort(list.begin(), list.end(), mitabLessThan);
 
-    for(const mitab_entry_t &entry : qAsConst(list))
+    for(const mitab_entry_t& entry : qAsConst(list))
     {
         comboDatum->addItem(entry.name, entry.idx);
     }
@@ -70,17 +70,17 @@ CProjWizard::CProjWizard(QLineEdit &line)
     comboHemisphere->addItem(tr("north"), "");
     comboHemisphere->addItem(tr("south"), "+south");
 
-    connect(radioMercator,      &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(radioWorldMercator, &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(radioUPSNorth,      &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(radioUPSSouth,      &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(radioUTM,           &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(radioUserDef,       &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(lineUserDef,        &QLineEdit::textChanged, this, &CProjWizard::slotChange);
+    connect(radioMercator, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(radioWorldMercator, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(radioUPSNorth, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(radioUPSSouth, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(radioUTM, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(radioUserDef, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(lineUserDef, &QLineEdit::textChanged, this, &CProjWizard::slotChange);
 
-    connect(spinUTMZone,        static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged),         this, &CProjWizard::slotChange);
-    connect(comboDatum,         static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CProjWizard::slotChange);
-    connect(comboHemisphere,    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CProjWizard::slotChange);
+    connect(spinUTMZone, static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), this, &CProjWizard::slotChange);
+    connect(comboDatum, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CProjWizard::slotChange);
+    connect(comboHemisphere, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CProjWizard::slotChange);
 
     QString projstr = line.text();
     QRegExp re2("\\s*\\+proj=merc \\+a=6378137 \\+b=6378137 \\+lat_ts=0.001 \\+lon_0=0.0 \\+x_0=0.0 \\+y_0=0 \\+k=1.0 \\+units=m \\+nadgrids=@null \\+no_defs");

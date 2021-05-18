@@ -26,12 +26,12 @@
 #include <QtNetwork>
 #include <QtWidgets>
 
-CRouterBRouterLocal::CRouterBRouterLocal(CRouterBRouter &parent) : QObject(&parent), brouter(parent)
+CRouterBRouterLocal::CRouterBRouterLocal(CRouterBRouter& parent) : QObject(&parent), brouter(parent)
 {
     //set textBRouterOutput as parent of ToolShell to ensure Toolshell is destroyed before text
     brouterShell = new CRouterBRouterToolShell(brouter.textBRouterOutput, brouter.textBRouterOutput);
     connect(brouterShell, &CRouterBRouterToolShell::sigProcessStateChanged, this, &CRouterBRouterLocal::slotBRouterStateChanged);
-    connect(brouterShell, &CRouterBRouterToolShell::sigProcessError,        this, &CRouterBRouterLocal::slotBRouterError);
+    connect(brouterShell, &CRouterBRouterToolShell::sigProcessError, this, &CRouterBRouterLocal::slotBRouterError);
 }
 
 void CRouterBRouterLocal::slotBRouterSocketConnected()
@@ -186,7 +186,7 @@ void CRouterBRouterLocal::slotBRouterStateChanged(const QProcess::ProcessState n
     brouter.updateBRouterStatus();
 }
 
-void CRouterBRouterLocal::slotBRouterError(const QProcess::ProcessError error, const QString &errorString)
+void CRouterBRouterLocal::slotBRouterError(const QProcess::ProcessError error, const QString& errorString)
 {
     brouterError = error;
     brouter.slotDisplayError(tr("Error:"), errorString);
@@ -221,7 +221,7 @@ void CRouterBRouterLocal::updateLocalBRouterStatus() const
                 mbox.setStandardButtons(QMessageBox::Ok);
                 mbox.setText(msgBRouterWarning);
 
-                QCheckBox * checkAgree = new QCheckBox(tr("I understand the risk. Don't tell me again."), &mbox);
+                QCheckBox* checkAgree = new QCheckBox(tr("I understand the risk. Don't tell me again."), &mbox);
                 mbox.setCheckBox(checkAgree);
                 mbox.exec();
                 cfg.setValue("Route/brouter/local/showWarning", !checkAgree->isChecked());

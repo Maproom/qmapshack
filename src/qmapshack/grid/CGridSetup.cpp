@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CGridSetup::CGridSetup(CGrid *grid, CMapDraw * map)
+CGridSetup::CGridSetup(CGrid* grid, CMapDraw* map)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , grid(grid)
     , map(map)
@@ -39,9 +39,9 @@ CGridSetup::CGridSetup(CGrid *grid, CMapDraw * map)
     labelGridColor->setPalette(palette);
 
     connect(toolRestoreDefault, &QToolButton::clicked, this, &CGridSetup::slotRestoreDefault);
-    connect(toolFromMap,        &QToolButton::clicked, this, &CGridSetup::slotProjFromMap);
-    connect(toolProjWizard,    &QToolButton::clicked, this, &CGridSetup::slotProjWizard);
-    connect(toolGridColor,      &QToolButton::clicked, this, &CGridSetup::slotSelectGridColor);
+    connect(toolFromMap, &QToolButton::clicked, this, &CGridSetup::slotProjFromMap);
+    connect(toolProjWizard, &QToolButton::clicked, this, &CGridSetup::slotProjWizard);
+    connect(toolGridColor, &QToolButton::clicked, this, &CGridSetup::slotSelectGridColor);
 }
 
 CGridSetup::~CGridSetup()

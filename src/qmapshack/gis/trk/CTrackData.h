@@ -24,17 +24,17 @@ public:
 
         void reset()
         {
-            deltaDistance   = NOFLOAT;
-            distance        = NOFLOAT;
-            ascent          = NOFLOAT;
-            descent         = NOFLOAT;
-            elapsedSeconds  = NOFLOAT;
+            deltaDistance = NOFLOAT;
+            distance = NOFLOAT;
+            ascent = NOFLOAT;
+            descent = NOFLOAT;
+            elapsedSeconds = NOFLOAT;
             elapsedSecondsMoving = NOFLOAT;
-            slope1          = NOFLOAT;
-            slope2          = NOFLOAT;
-            speed           = NOFLOAT;
-            idxVisible      = NOIDX;
-            valid           = 0;
+            slope1 = NOFLOAT;
+            slope2 = NOFLOAT;
+            speed = NOFLOAT;
+            idxVisible = NOIDX;
+            valid = 0;
         }
 
         enum flag_e
@@ -102,9 +102,9 @@ public:
 
         enum invalid_e
         {
-            eInvalidTime  = eValidTime  << 16
-            , eInvalidEle  = eValidEle   << 16
-            , eInvalidPos  = eValidPos   << 16
+            eInvalidTime  = eValidTime << 16
+            , eInvalidEle  = eValidEle << 16
+            , eInvalidPos  = eValidPos << 16
             , eInvalidSlope= eValidSlope << 16
             , eInvalidMask = 0xFFFF0000
         };
@@ -172,7 +172,7 @@ public:
             return QPointF(lon * DEG_TO_RAD, lat * DEG_TO_RAD);
         }
 
-        inline qreal distanceTo(const trkpt_t &other)
+        inline qreal distanceTo(const trkpt_t& other)
         {
             return GPS_Math_Distance(lon * DEG_TO_RAD, lat * DEG_TO_RAD, other.lon * DEG_TO_RAD, other.lat * DEG_TO_RAD);
         }
@@ -223,7 +223,7 @@ public:
 
     CTrackData() {}
 
-    CTrackData(const QString &name, const CTrackData &other, qint32 rangeStart, qint32 rangeEnd);
+    CTrackData(const QString& name, const CTrackData& other, qint32 rangeStart, qint32 rangeEnd);
 
     // -- all gpx tags - start
     QString name;
@@ -239,11 +239,11 @@ public:
 
     void removeEmptySegments();
 
-    void readFrom(const SGisLine &l);
-    void readFrom(const QVector<trkpt_t> &pts);
-    void getPolyline(SGisLine  &l) const;
-    void getPolyline(QPolygonF &l) const;
-    void getPolylineDeg(QPolygonF &l) const;
+    void readFrom(const SGisLine& l);
+    void readFrom(const QVector<trkpt_t>& pts);
+    void getPolyline(SGisLine& l) const;
+    void getPolyline(QPolygonF& l) const;
+    void getPolylineDeg(QPolygonF& l) const;
 
     bool isEmpty() const
     {
@@ -270,7 +270,7 @@ public:
        @param idx The index into all visible points
        @return A null pointer of no point is found.
      */
-    const trkpt_t *getTrkPtByVisibleIndex(qint32 idx) const;
+    const trkpt_t* getTrkPtByVisibleIndex(qint32 idx) const;
     /**
        @brief Try to get access Nth point
 
@@ -280,8 +280,8 @@ public:
        @param idx The index into all points
        @return A null pointer of no point is found.
      */
-    const trkpt_t *getTrkPtByTotalIndex(qint32 idx) const;
-    trkpt_t *getTrkPtByTotalIndex(qint32 idx);
+    const trkpt_t* getTrkPtByTotalIndex(qint32 idx) const;
+    trkpt_t* getTrkPtByTotalIndex(qint32 idx);
 
     /**
        @brief Check if the track point at index it the last one visible
@@ -294,7 +294,7 @@ public:
 
     bool delTrkPtDesc(const QList<int>& idxTotal);
 
-    const trkpt_t * last() const
+    const trkpt_t* last() const
     {
         if(segs.isEmpty() || segs.last().isEmpty())
         {
@@ -306,11 +306,11 @@ public:
     template<typename T1, typename T2>
     class iterator : public std::iterator<std::forward_iterator_tag, T2>
     {
-        T1 &trk;
+        T1& trk;
         int seg = 0;
-        int pt  = 0;
+        int pt = 0;
 public:
-        explicit iterator(T1 &trk, int seg, int pt) : trk(trk), seg(seg), pt(pt) {}
+        explicit iterator(T1& trk, int seg, int pt) : trk(trk), seg(seg), pt(pt) {}
 
         iterator& operator++()
         {
@@ -349,10 +349,10 @@ public:
         }
     };
 
-    iterator<CTrackData, trkpt_t> begin() { return iterator<CTrackData, trkpt_t>(*this,            0, 0); }
+    iterator<CTrackData, trkpt_t> begin() { return iterator<CTrackData, trkpt_t>(*this, 0, 0); }
     iterator<CTrackData, trkpt_t> end()   { return iterator<CTrackData, trkpt_t>(*this, segs.count(), 0); }
 
-    iterator<const CTrackData, const trkpt_t> begin() const { return iterator<const CTrackData, const trkpt_t>(*this,            0, 0); }
+    iterator<const CTrackData, const trkpt_t> begin() const { return iterator<const CTrackData, const trkpt_t>(*this, 0, 0); }
     iterator<const CTrackData, const trkpt_t> end()   const { return iterator<const CTrackData, const trkpt_t>(*this, segs.count(), 0); }
 };
 

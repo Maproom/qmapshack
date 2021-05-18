@@ -33,7 +33,7 @@
 
 #include <QtSql>
 
-IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem *parent)
+IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem* parent)
     : QTreeWidgetItem(parent, type)
     , db(db)
     , id(id)
@@ -41,7 +41,7 @@ IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id,
 {
 }
 
-IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget * parent)
+IDBFolder::IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget* parent)
     : QTreeWidgetItem(parent, type)
     , db(db)
     , id(id)
@@ -53,9 +53,9 @@ IDBFolder::~IDBFolder()
 {
 }
 
-bool IDBFolder::operator<(const QTreeWidgetItem &other) const
+bool IDBFolder::operator<(const QTreeWidgetItem& other) const
 {
-    const IDBFolder * folder = dynamic_cast<const IDBFolder*>(&other);
+    const IDBFolder* folder = dynamic_cast<const IDBFolder*>(&other);
     if(nullptr == folder)
     {
         return false;
@@ -65,7 +65,7 @@ bool IDBFolder::operator<(const QTreeWidgetItem &other) const
     return text(CGisListDB::eColumnName) < folder->text(CGisListDB::eColumnName);
 }
 
-IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id, QTreeWidgetItem * parent)
+IDBFolder* IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id, QTreeWidgetItem* parent)
 {
     switch(type)
     {
@@ -139,14 +139,14 @@ void IDBFolder::setName(const QString& name)
     setupFromDB();
 }
 
-IDBFolderSql *IDBFolder::getDBFolder()
+IDBFolderSql* IDBFolder::getDBFolder()
 {
     if(type() == eTypeDatabase)
     {
         return dynamic_cast<IDBFolderSql*>(this);
     }
 
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(parent());
     if(nullptr != folder)
     {
         return folder->getDBFolder();
@@ -154,7 +154,7 @@ IDBFolderSql *IDBFolder::getDBFolder()
     return nullptr;
 }
 
-IDBFolder * IDBFolder::getFolder(quint64 idFolder)
+IDBFolder* IDBFolder::getFolder(quint64 idFolder)
 {
     QString tmp = text(CGisListDB::eColumnName);
     qDebug() << tmp;
@@ -166,13 +166,13 @@ IDBFolder * IDBFolder::getFolder(quint64 idFolder)
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IDBFolder * folder1 = dynamic_cast<IDBFolder*>(child(n));
+        IDBFolder* folder1 = dynamic_cast<IDBFolder*>(child(n));
         if(nullptr == folder1)
         {
             return nullptr;
         }
 
-        IDBFolder * folder2 = folder1->getFolder(idFolder);
+        IDBFolder* folder2 = folder1->getFolder(idFolder);
         if(nullptr != folder2)
         {
             return folder2;
@@ -221,18 +221,18 @@ void IDBFolder::expanding()
     qDeleteAll(takeChildren());
     addChildren(QSet<QString>(), true, showItems());
 
-    CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
+    CEvtD2WReqInfo* evt = new CEvtD2WReqInfo(getId(), getDBName());
     CGisWorkspace::self().postEventForWks(evt);
 }
 
-void IDBFolder::update(CEvtW2DAckInfo * info)
+void IDBFolder::update(CEvtW2DAckInfo* info)
 {
     if(info->id != id)
     {
         // forward call if not for local ID
         for(int i = 0; i < childCount(); i++)
         {
-            IDBFolder * folder = dynamic_cast<IDBFolder*>(child(i));
+            IDBFolder* folder = dynamic_cast<IDBFolder*>(child(i));
             if(folder)
             {
                 folder->update(info);
@@ -330,12 +330,12 @@ bool IDBFolder::update()
     const int N = childCount();
     for(int i = 0; i < N; i++)
     {
-        QTreeWidgetItem * item = child(i);
+        QTreeWidgetItem* item = child(i);
 
         // test for folder and update folder
         // remove the folder from the add list as it is already known
         // if the update returns false register it for removal
-        IDBFolder * dbFolder = dynamic_cast<IDBFolder*>(item);
+        IDBFolder* dbFolder = dynamic_cast<IDBFolder*>(item);
         if(dbFolder != nullptr)
         {
             dbFoldersAdd.removeAll(dbFolder->getId());
@@ -346,7 +346,7 @@ bool IDBFolder::update()
             continue;
         }
 
-        CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
+        CDBItem* dbItem = dynamic_cast<CDBItem*>(item);
         if(dbItem != nullptr)
         {
             if(dbItem->checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
@@ -368,8 +368,8 @@ bool IDBFolder::update()
     QUERY_EXEC(return false);
     while(query.next())
     {
-        quint64 idChild     = query.value(0).toULongLong();
-        quint32 typeChild   = query.value(1).toInt();
+        quint64 idChild = query.value(0).toULongLong();
+        quint32 typeChild = query.value(1).toInt();
         if(dbFoldersAdd.contains(idChild))
         {
             createFolderByType(db, typeChild, idChild, this);
@@ -386,7 +386,7 @@ void IDBFolder::toggle()
 {
     if(checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
     {
-        CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(getId(), getDBName());
+        CEvtD2WShowFolder* evt1 = new CEvtD2WShowFolder(getId(), getDBName());
         CGisWorkspace::self().postEventForWks(evt1);
 
         QSqlQuery query(db);
@@ -401,7 +401,7 @@ void IDBFolder::toggle()
         }
         QUERY_EXEC(return );
 
-        CEvtD2WShowItems * evt2 = new CEvtD2WShowItems(getId(), getDBName());
+        CEvtD2WShowItems* evt2 = new CEvtD2WShowItems(getId(), getDBName());
         evt2->addItemsExclusively = true;
 
         while(query.next())
@@ -412,21 +412,21 @@ void IDBFolder::toggle()
     }
     else
     {
-        CEvtD2WHideFolder * evt1 = new CEvtD2WHideFolder(getId(), getDBName());
+        CEvtD2WHideFolder* evt1 = new CEvtD2WHideFolder(getId(), getDBName());
         CGisWorkspace::self().postEventForWks(evt1);
     }
 }
 
 void IDBFolder::remove()
 {
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(parent());
     if(nullptr == folder)
     {
         return;
     }
     remove(folder->getId(), getId());
 
-    CEvtD2WHideFolder * evt1 = new CEvtD2WHideFolder(getId(), getDBName());
+    CEvtD2WHideFolder* evt1 = new CEvtD2WHideFolder(getId(), getDBName());
     CGisWorkspace::self().postEventForWks(evt1);
 }
 
@@ -459,7 +459,7 @@ void IDBFolder::setupFromDB()
     if(isLoadable && showCheckBoxes())
     {
         setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
-        CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
+        CEvtD2WReqInfo* evt = new CEvtD2WReqInfo(getId(), getDBName());
         CGisWorkspace::self().postEventForWks(evt);
     }
 }
@@ -476,8 +476,8 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
         QUERY_EXEC(return );
         while(query.next())
         {
-            quint64 idChild     = query.value(0).toULongLong();
-            quint32 typeChild   = query.value(1).toInt();
+            quint64 idChild = query.value(0).toULongLong();
+            quint32 typeChild = query.value(1).toInt();
             createFolderByType(db, typeChild, idChild, this);
         }
 
@@ -495,7 +495,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
         while(query.next())
         {
             quint64 idChild = query.value(0).toULongLong();
-            CDBItem * item = new CDBItem(db, idChild, nullptr);
+            CDBItem* item = new CDBItem(db, idChild, nullptr);
             item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
             items << item;
         }
@@ -509,7 +509,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
         while(query.next())
         {
             quint64 idChild = query.value(0).toULongLong();
-            CDBItem * item = new CDBItem(db, idChild, nullptr);
+            CDBItem* item = new CDBItem(db, idChild, nullptr);
             item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
             items << item;
         }
@@ -523,7 +523,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
         while(query.next())
         {
             quint64 idChild = query.value(0).toULongLong();
-            CDBItem * item = new CDBItem(db, idChild, nullptr);
+            CDBItem* item = new CDBItem(db, idChild, nullptr);
             item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
             items << item;
         }
@@ -537,7 +537,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
         while(query.next())
         {
             quint64 idChild = query.value(0).toULongLong();
-            CDBItem * item = new CDBItem(db, idChild, nullptr);
+            CDBItem* item = new CDBItem(db, idChild, nullptr);
             item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
             items << item;
         }
@@ -582,7 +582,7 @@ void IDBFolder::remove(quint64 idParent, quint64 idFolder)
 
 void IDBFolder::updateItemsOnWks()
 {
-    CEvtD2WUpdateItems * evt = new CEvtD2WUpdateItems(getId(), getDBName());
+    CEvtD2WUpdateItems* evt = new CEvtD2WUpdateItems(getId(), getDBName());
     CGisWorkspace::self().postEventForWks(evt);
 }
 
@@ -623,7 +623,7 @@ void IDBFolder::setChildIndicator()
 void IDBFolder::addItemsSorted(QList<CDBItem*>& items)
 {
     sortItems(items);
-    for(CDBItem * item : qAsConst(items))
+    for(CDBItem* item : qAsConst(items))
     {
         addChild(item);
     }
@@ -631,7 +631,7 @@ void IDBFolder::addItemsSorted(QList<CDBItem*>& items)
 }
 
 
-bool sortByTime(CDBItem * item1, CDBItem * item2)
+bool sortByTime(CDBItem* item1, CDBItem* item2)
 {
     return item1->date < item2->date;
 }
@@ -651,14 +651,14 @@ void IDBFolder::sortItems(QList<CDBItem*>& items) const
 }
 
 
-bool IDBFolder::isSiblingFrom(IDBFolder * folder) const
+bool IDBFolder::isSiblingFrom(IDBFolder* folder) const
 {
     if(folder->getId() == getId())
     {
         return true;
     }
 
-    IDBFolder * parentFolder = dynamic_cast<IDBFolder*>(parent());
+    IDBFolder* parentFolder = dynamic_cast<IDBFolder*>(parent());
     if(parentFolder != nullptr)
     {
         return parentFolder->isSiblingFrom(folder);
@@ -689,9 +689,9 @@ bool IDBFolder::showLostFound() const
     return getBoolProperty("showLostFound", true);
 }
 
-bool IDBFolder::getBoolProperty(const char * name, bool defaultValue) const
+bool IDBFolder::getBoolProperty(const char* name, bool defaultValue) const
 {
-    QTreeWidget * tree = treeWidget();
+    QTreeWidget* tree = treeWidget();
     if(tree == nullptr)
     {
         return defaultValue;

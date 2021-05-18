@@ -20,14 +20,14 @@
 
 #include <QtWidgets>
 
-IToolShell::IToolShell(QWidget * parent)
+IToolShell::IToolShell(QWidget* parent)
     : QWidget(parent)
 {
-    connect(&cmd, &QProcess::readyReadStandardError,  this, &IToolShell::slotStderr);
+    connect(&cmd, &QProcess::readyReadStandardError, this, &IToolShell::slotStderr);
     connect(&cmd, &QProcess::readyReadStandardOutput, this, &IToolShell::slotStdout);
 
     connect(&cmd, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &IToolShell::slotFinished);
-    connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)   >(&QProcess::error),    this, &IToolShell::slotError);
+    connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)   >(&QProcess::error), this, &IToolShell::slotError);
 }
 
 IToolShell::~IToolShell()

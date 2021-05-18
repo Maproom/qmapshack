@@ -22,7 +22,7 @@
 
 QSet<CLimit*> CLimit::allLimits;
 
-CLimit::CLimit(const QString &cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto, fGetUnit getUnit, fMarkChanged markChanged)
+CLimit::CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto, fGetUnit getUnit, fMarkChanged markChanged)
     : cfgPath(cfgPath)
     , funcGetMin(getMin)
     , funcGetMax(getMax)
@@ -58,7 +58,7 @@ void CLimit::setSource(const QString& src)
     bool isInitial = source.isEmpty();
     if(source != src)
     {
-        source  = src;
+        source = src;
         minUser = funcGetMin(source);
         maxUser = funcGetMax(source);
         if(!isInitial)
@@ -118,7 +118,7 @@ qreal CLimit::getMax() const
     return val;
 }
 
-void CLimit::setMin(const qreal &val)
+void CLimit::setMin(const qreal& val)
 {
     SETTINGS;
 
@@ -149,7 +149,7 @@ void CLimit::setMin(const qreal &val)
     emit sigChanged();
 }
 
-void CLimit::setMax(const qreal &val)
+void CLimit::setMax(const qreal& val)
 {
     SETTINGS;
 
@@ -187,7 +187,7 @@ QString CLimit::getUnit() const
 
 void CLimit::updateSys()
 {
-    for(CLimit * limit : qAsConst(allLimits))
+    for(CLimit* limit : qAsConst(allLimits))
     {
         if(limit != this)
         {

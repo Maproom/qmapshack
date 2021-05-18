@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CItemCutMap::CItemCutMap(const QString &filename, QStackedWidget *stackedWidget, QListWidget *parent)
+CItemCutMap::CItemCutMap(const QString& filename, QStackedWidget* stackedWidget, QListWidget* parent)
     : CItemFile(filename, parent)
 {
     overlay = new COverlayCutMap(this, stackedWidget);
@@ -57,7 +57,7 @@ bool CItemCutMap::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     return true;
 }
 
-void CItemCutMap::mouseMoveEventFx(QMouseEvent *e)
+void CItemCutMap::mouseMoveEventFx(QMouseEvent* e)
 {
     CItemFile::mouseMoveEventFx(e);
     if(!mapIsMoving)
@@ -66,7 +66,7 @@ void CItemCutMap::mouseMoveEventFx(QMouseEvent *e)
     }
 }
 
-void CItemCutMap::mouseReleaseEventFx(QMouseEvent *e)
+void CItemCutMap::mouseReleaseEventFx(QMouseEvent* e)
 {
     if(!mapDidMove)
     {
@@ -75,7 +75,7 @@ void CItemCutMap::mouseReleaseEventFx(QMouseEvent *e)
     CItemFile::mouseReleaseEventFx(e);
 }
 
-void CItemCutMap::leaveEventFx(QEvent *e)
+void CItemCutMap::leaveEventFx(QEvent* e)
 {
     CItemFile::leaveEventFx(e);
     overlay->abortStep();

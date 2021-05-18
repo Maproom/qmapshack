@@ -21,7 +21,7 @@
 #include "gis/trk/filter/CFilterObscureDate.h"
 #include "helpers/CSettings.h"
 
-CFilterObscureDate::CFilterObscureDate(CGisItemTrk &trk, QWidget *parent)
+CFilterObscureDate::CFilterObscureDate(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {

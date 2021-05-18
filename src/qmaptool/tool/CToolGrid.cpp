@@ -30,7 +30,7 @@
     } \
 
 
-CToolGrid::CToolGrid(QWidget *parent)
+CToolGrid::CToolGrid(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
@@ -48,7 +48,7 @@ CToolGrid::CToolGrid(QWidget *parent)
     connect(pushReset, &QPushButton::clicked, overlay, &COverlayGridTool::slotReset);
 }
 
-void CToolGrid::registerItem(CItemRefMap * item)
+void CToolGrid::registerItem(CItemRefMap* item)
 {
     this->item = item;
     overlay->registerItem(item);
@@ -63,13 +63,13 @@ bool CToolGrid::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     return true;
 }
 
-void CToolGrid::mousePressEventFx(QMouseEvent *e)
+void CToolGrid::mousePressEventFx(QMouseEvent* e)
 {
     TESTITEM()
     item->CItemFile::mousePressEventFx(e);
 }
 
-void CToolGrid::mouseMoveEventFx(QMouseEvent *e)
+void CToolGrid::mouseMoveEventFx(QMouseEvent* e)
 {
     TESTITEM()
     item->CItemFile::mouseMoveEventFx(e);
@@ -79,7 +79,7 @@ void CToolGrid::mouseMoveEventFx(QMouseEvent *e)
     }
 }
 
-void CToolGrid::mouseReleaseEventFx(QMouseEvent *e)
+void CToolGrid::mouseReleaseEventFx(QMouseEvent* e)
 {
     TESTITEM()
     if(!item->getMapDidMove())
@@ -89,13 +89,13 @@ void CToolGrid::mouseReleaseEventFx(QMouseEvent *e)
     item->CItemFile::mouseReleaseEventFx(e);
 }
 
-void CToolGrid::wheelEventFx(QWheelEvent *e)
+void CToolGrid::wheelEventFx(QWheelEvent* e)
 {
     TESTITEM()
     item->CItemFile::wheelEventFx(e);
 }
 
-void CToolGrid::leaveEventFx(QEvent *e)
+void CToolGrid::leaveEventFx(QEvent* e)
 {
     TESTITEM()
     item->CItemFile::leaveEventFx(e);

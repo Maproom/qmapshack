@@ -26,7 +26,7 @@ class CCommandProcessor
 {
     Q_DECLARE_TR_FUNCTIONS(CCommandProcessor)
 public:
-    CAppOpts* processOptions(const QStringList &arguments);
+    CAppOpts* processOptions(const QStringList& arguments);
 };
 
 

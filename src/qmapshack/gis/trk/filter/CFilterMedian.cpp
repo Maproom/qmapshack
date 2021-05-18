@@ -22,7 +22,7 @@
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
-CFilterMedian::CFilterMedian(CGisItemTrk &trk, QWidget *parent)
+CFilterMedian::CFilterMedian(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {

@@ -31,7 +31,7 @@ class QSettings;
 class CDemItem : public QTreeWidgetItem
 {
 public:
-    CDemItem(QTreeWidget *parent, CDemDraw *dem);
+    CDemItem(QTreeWidget* parent, CDemDraw* dem);
     virtual ~CDemItem();
 
     void saveConfig(QSettings& cfg);
@@ -83,7 +83,7 @@ public:
 
 private:
     friend class CDemDraw;
-    CDemDraw * dem;
+    CDemDraw* dem;
     /**
        @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
      */

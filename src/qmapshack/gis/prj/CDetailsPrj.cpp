@@ -36,7 +36,7 @@
 #include <QtPrintSupport>
 #include <QtWidgets>
 
-CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
+CDetailsPrj::CDetailsPrj(IGisProject& prj, QWidget* parent)
     : QWidget(parent)
     , INotifyTrk(CGisItemTrk::eVisualProject)
     , prj(prj)
@@ -46,20 +46,20 @@ CDetailsPrj::CDetailsPrj(IGisProject &prj, QWidget *parent)
     const int N = prj.childCount();
     for(int i = 0; i < N; i++)
     {
-        CGisItemTrk *trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
+        CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
         if(nullptr != trk)
         {
             trk->registerVisual(this);
         }
     }
 
-    connect(labelKeywords, &QLabel::linkActivated,          this, static_cast<void (CDetailsPrj::*)(const QString&)>(&CDetailsPrj::slotLinkActivated));
-    connect(textDesc,      &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsPrj::*)(const QUrl&)   >(&CDetailsPrj::slotLinkActivated));
-    connect(toolPrint,     &QToolButton::clicked,           this, &CDetailsPrj::slotPrint);
-    connect(toolReload,    &QToolButton::clicked,           this, &CDetailsPrj::slotSetupGui);
-    connect(toolLock,      &QToolButton::clicked,           this, &CDetailsPrj::slotLock);
+    connect(labelKeywords, &QLabel::linkActivated, this, static_cast<void (CDetailsPrj::*)(const QString&)>(&CDetailsPrj::slotLinkActivated));
+    connect(textDesc, &QTextBrowser::anchorClicked, this, static_cast<void (CDetailsPrj::*)(const QUrl&)   >(&CDetailsPrj::slotLinkActivated));
+    connect(toolPrint, &QToolButton::clicked, this, &CDetailsPrj::slotPrint);
+    connect(toolReload, &QToolButton::clicked, this, &CDetailsPrj::slotSetupGui);
+    connect(toolLock, &QToolButton::clicked, this, &CDetailsPrj::slotLock);
 
-    connect(comboSort,     static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsPrj::slotSortMode);
+    connect(comboSort, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsPrj::slotSortMode);
 
     timerUpdateTime = new QTimer(this);
     timerUpdateTime->setSingleShot(true);
@@ -74,7 +74,7 @@ CDetailsPrj::~CDetailsPrj()
     const int N = prj.childCount();
     for(int i = 0; i < N; i++)
     {
-        CGisItemTrk *trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
+        CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
         if(nullptr != trk)
         {
             trk->unregisterVisual(this);
@@ -82,14 +82,14 @@ CDetailsPrj::~CDetailsPrj()
     }
 }
 
-void CDetailsPrj::resizeEvent(QResizeEvent * e)
+void CDetailsPrj::resizeEvent(QResizeEvent* e)
 {
     QWidget::resizeEvent(e);
     timerUpdateTime->start();
 }
 
-void CDetailsPrj::getTrackProfile(CGisItemTrk * trk,
-                                  const CTrackData::trkpt_t * pTrkpt,
+void CDetailsPrj::getTrackProfile(CGisItemTrk* trk,
+                                  const CTrackData::trkpt_t* pTrkpt,
                                   QImage& image)
 {
     CPlotProfile plot(trk, trk->limitsGraph1, IPlot::eModeIcon, this);
@@ -97,8 +97,8 @@ void CDetailsPrj::getTrackProfile(CGisItemTrk * trk,
     plot.save(image, pTrkpt);
 }
 
-void CDetailsPrj::getTrackOverview(CGisItemTrk * trk,
-                                   const CTrackData::trkpt_t * pTrkpt,
+void CDetailsPrj::getTrackOverview(CGisItemTrk* trk,
+                                   const CTrackData::trkpt_t* pTrkpt,
                                    QImage& image)
 {
     CPlotTrack plot(trk, this);
@@ -157,7 +157,7 @@ void CDetailsPrj::slotSetupGui()
         toolLock->setEnabled(true);
         for(int n = 0; n < N; n++)
         {
-            IGisItem * item = dynamic_cast<IGisItem*>(prj.child(n));
+            IGisItem* item = dynamic_cast<IGisItem*>(prj.child(n));
             if(item && !item->isReadOnly())
             {
                 toolLock->setChecked(false);
@@ -173,13 +173,13 @@ void CDetailsPrj::slotSetupGui()
         // This is much faster than to use the current one of the text browser.
         // According to the docs, the text browser's current document should be
         // deleted because the text browser is it's parent.
-        QTextDocument * doc = new QTextDocument();
+        QTextDocument* doc = new QTextDocument();
         doc->setTextWidth(textDesc->size().width() - 20);
         draw(*doc, false);
         doc->setParent(textDesc);
         textDesc->setDocument(doc);
 
-        QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
+        QTabWidget* tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
         if(tabWidget)
         {
             int idx = tabWidget->indexOf(this);
@@ -202,7 +202,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     int nItems = 0;
 
     QFontMetrics fm(QFont(font().family(), 12));
-    int pointSize = ((10 * (w - 2 * ROOT_FRAME_MARGIN)) / (CHAR_PER_LINE *  fm.width("X")));
+    int pointSize = ((10 * (w - 2 * ROOT_FRAME_MARGIN)) / (CHAR_PER_LINE * fm.width("X")));
     pointSize = qMax(pointSize, CMainWindow::self().getMapFont().pointSize());
 
     QFont f = textDesc->font();
@@ -290,7 +290,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     const int N = prj.childCount();
     for(int i = 0; i < N; i++)
     {
-        CGisItemTrk *trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
+        CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
         if(nullptr != trk && !trk->isHidden())
         {
             trks << trk;
@@ -298,7 +298,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
             continue;
         }
 
-        CGisItemRte *rte = dynamic_cast<CGisItemRte*>(prj.child(i));
+        CGisItemRte* rte = dynamic_cast<CGisItemRte*>(prj.child(i));
         if(nullptr != rte && !rte->isHidden())
         {
             rtes << rte;
@@ -306,7 +306,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
             continue;
         }
 
-        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(prj.child(i));
+        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(prj.child(i));
         if(nullptr != wpt && !wpt->isHidden())
         {
             wpts << wpt;
@@ -314,7 +314,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
             continue;
         }
 
-        CGisItemOvlArea *area = dynamic_cast<CGisItemOvlArea*>(prj.child(i));
+        CGisItemOvlArea* area = dynamic_cast<CGisItemOvlArea*>(prj.child(i));
         if(nullptr != area && !area->isHidden())
         {
             areas << area;
@@ -323,13 +323,13 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         }
     }
 
-    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
+    QTextFrame* diaryFrame = cursor.insertFrame(fmtFrameStandard);
     {
         QTextCursor cursor1(diaryFrame);
         cursor1.setCharFormat(fmtCharStandard);
         cursor1.setBlockFormat(fmtBlockStandard);
 
-        QTextTable * table = cursor1.insertTable(2, 2, fmtTableHidden);
+        QTextTable* table = cursor1.insertTable(2, 2, fmtTableHidden);
 
         QTextCursor cursor2 = table->cellAt(0, 0).firstCursorPosition();
         drawInfo(cursor2, isReadOnly);
@@ -383,7 +383,7 @@ void CDetailsPrj::slotSetScrollbar()
 
 void CDetailsPrj::drawInfo(QTextCursor& cursor, bool isReadOnly)
 {
-    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameStandard);
+    QTextFrame* diaryFrame = cursor.insertFrame(fmtFrameStandard);
 
     QTextCursor cursor1(diaryFrame);
 
@@ -404,7 +404,7 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*
     }
 
 
-    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameTrackSummary);
+    QTextFrame* diaryFrame = cursor.insertFrame(fmtFrameTrackSummary);
 
     QTextCursor cursor1(diaryFrame);
 
@@ -442,7 +442,7 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
         }
     }
 
-    QTextFrame * diaryFrame = cursor.insertFrame(fmtFrameTrackSummary);
+    QTextFrame* diaryFrame = cursor.insertFrame(fmtFrameTrackSummary);
 
     QTextCursor cursor1(diaryFrame);
 
@@ -457,14 +457,14 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
         str += QString::number(summary["Geocache"]) + tr(" x Geocache, consisting of: <br/>");
         str += "<ul>";
         const QList<QString>& keys = GCsummary.keys();
-        for(const QString &key : keys)
+        for(const QString& key : keys)
         {
             str += "<li>" + QString::number(GCsummary[key]) + " x " + key + "</li>";
         }
         str += "</ul>";
     }
     const QList<QString>& keys = summary.keys();
-    for(const QString &key: keys)
+    for(const QString& key : keys)
     {
         if(key != "Geocache")
         {
@@ -475,7 +475,7 @@ void CDetailsPrj::drawWaypointSummary(QTextCursor& cursor, const QList<CGisItemW
     cursor1.insertHtml(str);
 }
 
-void CDetailsPrj::addIcon(QTextTable * table, int col, int row, const QPixmap& icon, const QString& key, bool isReadOnly, bool printable)
+void CDetailsPrj::addIcon(QTextTable* table, int col, int row, const QPixmap& icon, const QString& key, bool isReadOnly, bool printable)
 {
     table->cellAt(row, col).firstCursorPosition().insertImage(icon.toImage().scaledToWidth(16, Qt::SmoothTransformation));
 
@@ -486,7 +486,7 @@ void CDetailsPrj::addIcon(QTextTable * table, int col, int row, const QPixmap& i
 }
 
 
-void CDetailsPrj::drawByGroup(QTextCursor &cursor,
+void CDetailsPrj::drawByGroup(QTextCursor& cursor,
                               QList<CGisItemTrk*>& trks,
                               QList<CGisItemWpt*>& wpts,
                               CProgressDialog& progress,
@@ -497,7 +497,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor,
     if(!wpts.isEmpty())
     {
         cursor.insertHtml(tr("<h2>Waypoints</h2>"));
-        QTextTable * table = cursor.insertTable(wpts.count() + 1, eMax1, fmtTableStandard);
+        QTextTable* table = cursor.insertTable(wpts.count() + 1, eMax1, fmtTableStandard);
 
         table->cellAt(0, eSym1).setFormat(fmtCharHeader);
         table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
@@ -507,7 +507,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor,
         table->cellAt(0, eComment1).firstCursorPosition().insertText(tr("Comment"));
 
         cnt = 1;
-        for(CGisItemWpt * wpt : wpts)
+        for(CGisItemWpt* wpt : wpts)
         {
             PROGRESS(n++, return );
 
@@ -523,7 +523,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor,
     if(!trks.isEmpty())
     {
         cursor.insertHtml(tr("<h2>Tracks</h2>"));
-        QTextTable * table = cursor.insertTable(trks.count() + 1, eMax1, fmtTableStandard);
+        QTextTable* table = cursor.insertTable(trks.count() + 1, eMax1, fmtTableStandard);
 
         table->cellAt(0, eSym1).setFormat(fmtCharHeader);
         table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
@@ -534,7 +534,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor,
 
         cnt = 1;
 
-        for(CGisItemTrk * trk : trks)
+        for(CGisItemTrk* trk : trks)
         {
             PROGRESS(n++, return );
 
@@ -547,7 +547,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor,
             {
                 table->cellAt(cnt, eInfo1).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
 
-                QTextTable * table1 = table->cellAt(cnt, eInfo1).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+                QTextTable* table1 = table->cellAt(cnt, eInfo1).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
                 QImage profile(w1, h1, QImage::Format_ARGB32);
                 getTrackProfile(trk, nullptr, profile);
@@ -559,7 +559,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor,
             }
             else
             {
-                QTextTable * table1 = table->cellAt(cnt, eInfo1).firstCursorPosition().insertTable(1, 3, fmtTableInfo);
+                QTextTable* table1 = table->cellAt(cnt, eInfo1).firstCursorPosition().insertTable(1, 3, fmtTableInfo);
 
                 table1->cellAt(0, 0).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
 
@@ -609,7 +609,7 @@ struct wpt_info_t
     qreal ascent3 = NOFLOAT;
     qreal descent3 = NOFLOAT;
 
-    const CTrackData::trkpt_t * pTrkpt = nullptr;
+    const CTrackData::trkpt_t* pTrkpt = nullptr;
 };
 
 
@@ -618,7 +618,7 @@ QList<wpt_info_t> CDetailsPrj::getWptInfo(const CGisItemTrk& trk) const
     int cnt = 1;
     const CTrackData::trkpt_t* lastTrkpt = nullptr;
     QList<wpt_info_t> wptInfo;
-    wpt_info_t * lastWptInfo = nullptr;
+    wpt_info_t* lastWptInfo = nullptr;
     bool hasValidTime = trk.getTimeStart().isValid();
 
     const CTrackData& t = trk.getTrackData();
@@ -634,16 +634,16 @@ QList<wpt_info_t> CDetailsPrj::getWptInfo(const CGisItemTrk& trk) const
         info.pTrkpt = &trkpt;
         if(!trkpt.keyWpt.item.isEmpty())
         {
-            CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(prj.getItemByKey(trkpt.keyWpt));
+            CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(prj.getItemByKey(trkpt.keyWpt));
             if(wpt != nullptr)
             {
-                info.key        = wpt->getKey();
+                info.key = wpt->getKey();
                 info.isReadOnly = wpt->isReadOnly();
-                info.icon       = wpt->getDisplayIcon();
-                info.desc       = wpt->getDescription();
-                info.cmt        = wpt->getComment();
-                info.links      = wpt->getLinks();
-                info.images     = wpt->getImages();
+                info.icon = wpt->getDisplayIcon();
+                info.desc = wpt->getDescription();
+                info.cmt = wpt->getComment();
+                info.links = wpt->getLinks();
+                info.images = wpt->getImages();
                 if(hasValidTime)
                 {
                     info.info = wpt->getInfo(IGisItem::eFeatureShowName);
@@ -682,32 +682,32 @@ QList<wpt_info_t> CDetailsPrj::getWptInfo(const CGisItemTrk& trk) const
             wptInfo.pop_back();
             continue;
         }
-        info.distance1  = trkpt.distance;
+        info.distance1 = trkpt.distance;
         info.elapsedSeconds1 = trkpt.elapsedSeconds;
-        info.ascent1    = trkpt.ascent;
-        info.descent1   = trkpt.descent;
+        info.ascent1 = trkpt.ascent;
+        info.descent1 = trkpt.descent;
 
         if(lastWptInfo != nullptr)
         {
-            lastWptInfo->distance2  = trkpt.distance - lastTrkpt->distance;
-            lastWptInfo->elapsedSeconds2  = trkpt.elapsedSeconds - lastTrkpt->elapsedSeconds;
-            lastWptInfo->ascent2    = trkpt.ascent   - lastTrkpt->ascent;
-            lastWptInfo->descent2   = trkpt.descent  - lastTrkpt->descent;
+            lastWptInfo->distance2 = trkpt.distance - lastTrkpt->distance;
+            lastWptInfo->elapsedSeconds2 = trkpt.elapsedSeconds - lastTrkpt->elapsedSeconds;
+            lastWptInfo->ascent2 = trkpt.ascent - lastTrkpt->ascent;
+            lastWptInfo->descent2 = trkpt.descent - lastTrkpt->descent;
         }
 
-        info.distance3  = trk.getTotalDistance() - trkpt.distance;
-        info.elapsedSeconds3  = trk.getTotalElapsedSeconds() - trkpt.elapsedSeconds;
-        info.ascent3    = trk.getTotalAscent() - trkpt.ascent;
-        info.descent3   = trk.getTotalDescent() - trkpt.descent;
+        info.distance3 = trk.getTotalDistance() - trkpt.distance;
+        info.elapsedSeconds3 = trk.getTotalElapsedSeconds() - trkpt.elapsedSeconds;
+        info.ascent3 = trk.getTotalAscent() - trkpt.ascent;
+        info.descent3 = trk.getTotalDescent() - trkpt.descent;
 
-        lastTrkpt       = &trkpt;
-        lastWptInfo     = &wptInfo.last();
+        lastTrkpt = &trkpt;
+        lastWptInfo = &wptInfo.last();
     }
 
     return wptInfo;
 }
 
-QString CDetailsPrj::getNameAndTime(const wpt_info_t &info, const CGisItemTrk& trk) const
+QString CDetailsPrj::getNameAndTime(const wpt_info_t& info, const CGisItemTrk& trk) const
 {
     QString str;
     QDateTime arrivalTime = trk.getTimeStart();
@@ -724,11 +724,11 @@ QString CDetailsPrj::getNameAndTime(const wpt_info_t &info, const CGisItemTrk& t
     return str;
 }
 
-QString CDetailsPrj::getStatistics(const wpt_info_t &info) const
+QString CDetailsPrj::getStatistics(const wpt_info_t& info) const
 {
     QString text, val, unit;
     text += "<table sytle='border=1px;'>";
-    text += "<tr><td></td><td><nobr>&nbsp;" + tr("From Start") + "&nbsp;</nobr></td><td><nobr>&nbsp;" + tr("To Next") + "&nbsp;</nobr></td><td><nobr>&nbsp;" + tr("To End")  + "&nbsp;</nobr></td></tr>";
+    text += "<tr><td></td><td><nobr>&nbsp;" + tr("From Start") + "&nbsp;</nobr></td><td><nobr>&nbsp;" + tr("To Next") + "&nbsp;</nobr></td><td><nobr>&nbsp;" + tr("To End") + "&nbsp;</nobr></td></tr>";
 
     text += "<tr>";
     text += "<td>" + tr("Distance: ") + "</td>";
@@ -775,7 +775,7 @@ QString CDetailsPrj::getStatistics(const wpt_info_t &info) const
     return text;
 }
 
-QImage CDetailsPrj::getImage(const wpt_info_t &info) const
+QImage CDetailsPrj::getImage(const wpt_info_t& info) const
 {
     QImage image(info.images.first().pixmap);
 
@@ -785,34 +785,34 @@ QImage CDetailsPrj::getImage(const wpt_info_t &info) const
     if(w < h)
     {
         h *= 100.0 / w;
-        w  = 100;
+        w = 100;
     }
     else
     {
         h *= 200.0 / w;
-        w  = 200;
+        w = 200;
     }
     qDebug() << w << h;
     return image.scaled(w, h, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
 void CDetailsPrj::drawByTrack(QTextCursor& cursor,
-                              QList<CGisItemTrk *> &trks,
-                              QList<CGisItemWpt *> &wpts,
-                              CProgressDialog &progress,
-                              int &n, bool printable)
+                              QList<CGisItemTrk*>& trks,
+                              QList<CGisItemWpt*>& wpts,
+                              CProgressDialog& progress,
+                              int& n, bool printable)
 {
     int w = cursor.document()->textWidth();
 
     const qreal w1 = qRound(w / 3.5 > 300 ? 300 : w / 3.5);
     const qreal h1 = qRound(w1 / 2.0);
 
-    for(CGisItemTrk * trk : trks)
+    for(CGisItemTrk* trk : trks)
     {
         const QList<wpt_info_t>& wptInfo = getWptInfo(*trk);
 
         cursor.insertHtml(QString("<h2>%1</h2>").arg(trk->getName()));
-        QTextTable * table = cursor.insertTable(wptInfo.count() + 2, eMax2, fmtTableStandard);
+        QTextTable* table = cursor.insertTable(wptInfo.count() + 2, eMax2, fmtTableStandard);
 
         table->cellAt(0, eSym2).setFormat(fmtCharHeader);
         table->cellAt(0, eInfo2).setFormat(fmtCharHeader);
@@ -824,14 +824,14 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor,
         table->cellAt(0, eComment2).firstCursorPosition().insertText(tr("Comment"));
 
         int cnt = 1;
-        for(const wpt_info_t &info : wptInfo)
+        for(const wpt_info_t& info : wptInfo)
         {
             PROGRESS(n++, return );
 
             addIcon(table, eSym2, cnt, info.icon, info.key.item, info.isReadOnly, printable);
             table->cellAt(cnt, eInfo2).firstCursorPosition().insertHtml(getNameAndTime(info, *trk));
 
-            QTextTable * table1 = table->cellAt(cnt, eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+            QTextTable* table1 = table->cellAt(cnt, eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
             table1->cellAt(0, 0).firstCursorPosition().insertHtml(getStatistics(info));
 
             if(!info.images.isEmpty())
@@ -847,7 +847,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor,
         addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item, trk->isReadOnly(), printable);
         table->cellAt(cnt, eInfo2).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
 
-        QTextTable * table1 = table->cellAt(cnt, eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+        QTextTable* table1 = table->cellAt(cnt, eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
         QImage profile(w1, h1, QImage::Format_ARGB32);
         getTrackProfile(trk, nullptr, profile);
@@ -864,22 +864,22 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor,
 }
 
 void CDetailsPrj::drawByDetails(QTextCursor& cursor,
-                                QList<CGisItemTrk *> &trks,
-                                QList<CGisItemWpt *> &wpts,
-                                CProgressDialog &progress,
-                                int &n, bool printable)
+                                QList<CGisItemTrk*>& trks,
+                                QList<CGisItemWpt*>& wpts,
+                                CProgressDialog& progress,
+                                int& n, bool printable)
 {
     int w = cursor.document()->textWidth();
 
     const qreal w1 = qRound(w / 3.5 > 300 ? 300 : w / 3.5);
     const qreal h1 = qRound(w1 / 2.0);
 
-    for(CGisItemTrk * trk : trks)
+    for(CGisItemTrk* trk : trks)
     {
         const QList<wpt_info_t>& wptInfo = getWptInfo(*trk);
 
         cursor.insertHtml(QString("<h2>%1</h2>").arg(trk->getName()));
-        QTextTable * table = cursor.insertTable(wptInfo.count() + 2, eMax2, fmtTableStandard);
+        QTextTable* table = cursor.insertTable(wptInfo.count() + 2, eMax2, fmtTableStandard);
 
         table->cellAt(0, eSym2).setFormat(fmtCharHeader);
         table->cellAt(0, eInfo2).setFormat(fmtCharHeader);
@@ -890,7 +890,7 @@ void CDetailsPrj::drawByDetails(QTextCursor& cursor,
         table->cellAt(0, eData2).firstCursorPosition().insertText(tr("Statistics"));
 
         int cnt = 1;
-        for(const wpt_info_t &info : wptInfo)
+        for(const wpt_info_t& info : wptInfo)
         {
             PROGRESS(n++, return );
 
@@ -898,7 +898,7 @@ void CDetailsPrj::drawByDetails(QTextCursor& cursor,
             addIcon(table, eSym2, cnt, info.icon, info.key.item, info.isReadOnly, printable);
 
             // 2nd column
-            QTextTable * table1 = table->cellAt(cnt, eInfo2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+            QTextTable* table1 = table->cellAt(cnt, eInfo2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
             table1->cellAt(0, 0).firstCursorPosition().insertHtml(getNameAndTime(info, *trk));
             if(!info.images.isEmpty())
             {
@@ -909,7 +909,7 @@ void CDetailsPrj::drawByDetails(QTextCursor& cursor,
             table->cellAt(cnt, eData2).firstCursorPosition().insertHtml(getStatistics(info));
 
             // 4th column
-            QTextTable * table2 = table->cellAt(cnt, eComment2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
+            QTextTable* table2 = table->cellAt(cnt, eComment2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
             QImage profile(w1, h1, QImage::Format_ARGB32);
             getTrackProfile(trk, info.pTrkpt, profile);
             table2->cellAt(0, 0).firstCursorPosition().insertImage(profile);
@@ -931,14 +931,14 @@ void CDetailsPrj::drawByDetails(QTextCursor& cursor,
     }
 }
 
-void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas, CProgressDialog &progress, int &n, bool printable)
+void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea*>& areas, CProgressDialog& progress, int& n, bool printable)
 {
     if(areas.isEmpty())
     {
         return;
     }
     cursor.insertHtml(tr("<h2>Areas</h2>"));
-    QTextTable * table = cursor.insertTable(areas.count() + 1, eMax1, fmtTableStandard);
+    QTextTable* table = cursor.insertTable(areas.count() + 1, eMax1, fmtTableStandard);
 
     table->cellAt(0, eSym1).setFormat(fmtCharHeader);
     table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
@@ -948,7 +948,7 @@ void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas,
     table->cellAt(0, eComment1).firstCursorPosition().insertText(tr("Comment"));
 
     int cnt = 1;
-    for(CGisItemOvlArea * area : areas)
+    for(CGisItemOvlArea* area : areas)
     {
         PROGRESS(n++, return );
 
@@ -961,14 +961,14 @@ void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas,
     cursor.setPosition(table->lastPosition() + 1);
 }
 
-void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte *> &rtes, CProgressDialog &progress, int &n, bool printable)
+void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte*>& rtes, CProgressDialog& progress, int& n, bool printable)
 {
     if(rtes.isEmpty())
     {
         return;
     }
     cursor.insertHtml(tr("<h2>Routes</h2>"));
-    QTextTable * table = cursor.insertTable(rtes.count() + 1, eMax1, fmtTableStandard);
+    QTextTable* table = cursor.insertTable(rtes.count() + 1, eMax1, fmtTableStandard);
 
     table->cellAt(0, eSym1).setFormat(fmtCharHeader);
     table->cellAt(0, eInfo1).setFormat(fmtCharHeader);
@@ -978,7 +978,7 @@ void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte *> &rtes, CPr
     table->cellAt(0, eComment1).firstCursorPosition().insertText(tr("Comment"));
 
     int cnt = 1;
-    for(CGisItemRte * rte : rtes)
+    for(CGisItemRte* rte : rtes)
     {
         PROGRESS(n++, return );
 
@@ -1041,7 +1041,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
                 key.item = query.mid(4);
             }
 
-            IGisItem * item = prj.getItemByKey(key);
+            IGisItem* item = prj.getItemByKey(key);
             if(item)
             {
                 CTextEditWidget dlg(item->getDescription(), this);
@@ -1073,7 +1073,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
                 key.item = query.mid(4);
             }
 
-            IGisItem * item = prj.getItemByKey(key);
+            IGisItem* item = prj.getItemByKey(key);
             if(item)
             {
                 CTextEditWidget dlg(item->getComment(), this);
@@ -1097,7 +1097,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
                 key.item = query.mid(4);
             }
 
-            IGisItem * item = prj.getItemByKey(key);
+            IGisItem* item = prj.getItemByKey(key);
             if(item)
             {
                 QList<IGisItem::link_t> links = item->getLinks();
@@ -1129,7 +1129,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
             key.item = query.mid(4);
         }
 
-        IGisItem * item = prj.getItemByKey(key);
+        IGisItem* item = prj.getItemByKey(key);
         if(item)
         {
             item->edit();
@@ -1171,7 +1171,7 @@ void CDetailsPrj::slotLock(bool on)
     const int N = prj.childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(prj.child(n));
+        IGisItem* item = dynamic_cast<IGisItem*>(prj.child(n));
         if(item && (item->isReadOnly() != on))
         {
             item->setReadOnlyMode(on);

@@ -27,7 +27,7 @@
 #include <QtGui>
 #include <QtWidgets>
 
-CGrid::CGrid(CMapDraw *map)
+CGrid::CGrid(CMapDraw* map)
     : QObject(map)
     , map(map)
 {
@@ -85,14 +85,14 @@ void CGrid::saveConfig(QSettings& cfg)
 
 void CGrid::loadConfig(QSettings& cfg)
 {
-    color   = QColor(cfg.value("grid/color", color.name()).toString());
+    color = QColor(cfg.value("grid/color", color.name()).toString());
     setProjAndColor(cfg.value("grid/proj", "EPSG:4326").toString(), color);
 }
 
 
 void CGrid::setProjAndColor(const QString& projStr, const QColor& c)
 {
-    color   = c;
+    color = c;
     proj.init("EPSG:4326", projStr.toLatin1());
     if(!proj.isValid())
     {
@@ -202,11 +202,11 @@ bool CGrid::calcIntersection(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, q
     y = y1 + ua * (y2 - y1);
 
     qreal d12 = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
-    qreal d1x = (x1 - x)  * (x1 - x)  + (y1 - y)  * (y1 - y);
-    qreal d2x = (x2 - x)  * (x2 - x)  + (y2 - y)  * (y2 - y);
+    qreal d1x = (x1 - x) * (x1 - x) + (y1 - y) * (y1 - y);
+    qreal d2x = (x2 - x) * (x2 - x) + (y2 - y) * (y2 - y);
     qreal d34 = (x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3);
-    qreal d3x = (x3 - x)  * (x3 - x)  + (y3 - y)  * (y3 - y);
-    qreal d4x = (x4 - x)  * (x4 - x)  + (y4 - y)  * (y4 - y);
+    qreal d3x = (x3 - x) * (x3 - x) + (y3 - y) * (y3 - y);
+    qreal d4x = (x4 - x) * (x4 - x) + (y4 - y) * (y4 - y);
 
     return (d12 >= d1x) && (d12 >= d2x) && (d34 >= d3x) && (d34 >= d4x);
 }
@@ -228,9 +228,9 @@ void CGrid::draw(QPainter& p, const QRect& rect)
         return;
     }
 
-    QPointF topLeft  = rect.topLeft();
+    QPointF topLeft = rect.topLeft();
     QPointF topRight = rect.topRight();
-    QPointF btmLeft  = rect.bottomLeft();
+    QPointF btmLeft = rect.bottomLeft();
     QPointF btmRight = rect.bottomRight();
 
     map->convertPx2Rad(topLeft);
@@ -255,9 +255,9 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     //    qDebug() << topLeft.v  - btmLeft.v;
     //    qDebug() << topRight.v - btmRight.v;
 
-    qreal topMax   = qMax(topLeft.y(),  topRight.y());
-    qreal btmMin   = qMin(btmLeft.y(),  btmRight.y());
-    qreal leftMin  = qMin(topLeft.x(),  btmLeft.x());
+    qreal topMax = qMax(topLeft.y(), topRight.y());
+    qreal btmMin = qMin(btmLeft.y(), btmRight.y());
+    qreal leftMin = qMin(topLeft.x(), btmLeft.x());
     qreal rightMax = qMax(topRight.x(), btmRight.x());
 
     qreal xGridSpace = 1000;
@@ -357,7 +357,7 @@ void CGrid::draw(QPainter& p, const QRect& rect)
 
             x += xGridSpace;
         }
-        x  = xStart;
+        x = xStart;
         y -= yGridSpace;
     }
     USE_ANTI_ALIASING(p, true);
@@ -369,25 +369,25 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     if(proj.isTarLatLong())
     {
         QFontMetrics fm(CMainWindow::self().getMapFont());
-        int yoff  = fm.height() + fm.ascent();
-        int xoff  = fm.width("XX.XXXX") >> 1;
+        int yoff = fm.height() + fm.ascent();
+        int xoff = fm.width("XX.XXXX") >> 1;
 
-        for(const val_t &val : qAsConst(horzTopTicks))
+        for(const val_t& val : qAsConst(horzTopTicks))
         {
             CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, yoff), textColor);
         }
 
-        for(const val_t &val : qAsConst(horzBtmTicks))
+        for(const val_t& val : qAsConst(horzBtmTicks))
         {
             CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, h), textColor);
         }
 
-        for(const val_t &val : qAsConst(vertLftTicks))
+        for(const val_t& val : qAsConst(vertLftTicks))
         {
             CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(xoff, val.pos), textColor);
         }
 
-        for(const val_t &val : qAsConst(vertRgtTicks))
+        for(const val_t& val : qAsConst(vertRgtTicks))
         {
             CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(w - xoff, val.pos), textColor);
         }
@@ -395,25 +395,25 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     else
     {
         QFontMetrics fm(CMainWindow::self().getMapFont());
-        int yoff  = fm.height() + fm.ascent();
-        int xoff  = fm.width("XXXX") >> 1;
+        int yoff = fm.height() + fm.ascent();
+        int xoff = fm.width("XXXX") >> 1;
 
-        for(const val_t &val : qAsConst(horzTopTicks))
+        for(const val_t& val : qAsConst(horzTopTicks))
         {
             CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(val.pos, yoff), textColor);
         }
 
-        for(const val_t &val : qAsConst(horzBtmTicks))
+        for(const val_t& val : qAsConst(horzBtmTicks))
         {
             CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(val.pos, h), textColor);
         }
 
-        for(const val_t &val : qAsConst(vertLftTicks))
+        for(const val_t& val : qAsConst(vertLftTicks))
         {
             CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(xoff, val.pos), textColor);
         }
 
-        for(const val_t &val : qAsConst(vertRgtTicks))
+        for(const val_t& val : qAsConst(vertRgtTicks))
         {
             CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(w - xoff, val.pos), textColor);
         }

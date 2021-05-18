@@ -19,7 +19,7 @@
 
 #include "realtime/opensky/CRtOpenSkyRecord.h"
 
-CRtOpenSkyRecord::CRtOpenSkyRecord(QObject *parent)
+CRtOpenSkyRecord::CRtOpenSkyRecord(QObject* parent)
     : IRtRecord(parent)
 {
 }
@@ -35,10 +35,10 @@ bool CRtOpenSkyRecord::writeEntry(const CRtOpenSky::aircraft_t& aircraft)
     stream << quint8(1);
 
     CTrackData::trkpt_t trkpt;
-    trkpt.lon   = aircraft.longitude;
-    trkpt.lat   = aircraft.latitude;
-    trkpt.ele   = aircraft.geoAltitude;
-    trkpt.time  = QDateTime::fromTime_t(aircraft.timePosition);
+    trkpt.lon = aircraft.longitude;
+    trkpt.lat = aircraft.latitude;
+    trkpt.ele = aircraft.geoAltitude;
+    trkpt.time = QDateTime::fromTime_t(aircraft.timePosition);
 
     stream << trkpt;
     track << trkpt;

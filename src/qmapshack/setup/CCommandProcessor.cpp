@@ -23,7 +23,7 @@
 #include <QCommandLineParser>
 
 
-CAppOpts* CCommandProcessor::processOptions(const QStringList &arguments)
+CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments)
 {
     QCommandLineParser parser;
     QCommandLineOption helpOption = parser.addHelpOption(); // h help

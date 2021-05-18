@@ -25,10 +25,10 @@
 #include <QtWidgets>
 
 
-CGeoSearchWeb * CGeoSearchWeb::pSelf = nullptr;
+CGeoSearchWeb* CGeoSearchWeb::pSelf = nullptr;
 const QString CGeoSearchWeb::defaultIcon = "://icons/32x32/SearchWebDefault.png";
 
-CGeoSearchWeb::CGeoSearchWeb(QObject * parent)
+CGeoSearchWeb::CGeoSearchWeb(QObject* parent)
     : QObject(parent)
 {
     pSelf = this;
@@ -47,7 +47,7 @@ CGeoSearchWeb::CGeoSearchWeb(QObject * parent)
         {
             cfg.setArrayIndex(n);
             const QString& name = cfg.value("name").toString();
-            const QString& url  = cfg.value("url").toString();
+            const QString& url = cfg.value("url").toString();
             const QString& icon = cfg.value("icon").toString();
             services << service_t(name, url, icon);
         }
@@ -95,12 +95,12 @@ CGeoSearchWeb::~CGeoSearchWeb()
     cfg.endGroup(); // Search
 }
 
-QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute) const
+QMenu* CGeoSearchWeb::getMenu(const QPointF& pt, QWidget* parent, bool execute) const
 {
-    QMenu * menu = new QMenu(tr("Search Web for Position"), parent);
+    QMenu* menu = new QMenu(tr("Search Web for Position"), parent);
     menu->setIcon(QIcon("://icons/32x32/SearchWeb.png"));
 
-    QAction * action;
+    QAction* action;
     int serviceId = 0;
     for(const service_t& service : services)
     {
@@ -125,7 +125,7 @@ QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute)
 
 void CGeoSearchWeb::search(const QPointF& pt)
 {
-    QMenu * menu = getMenu(pt, CMainWindow::self().getBestWidgetForParent());
+    QMenu* menu = getMenu(pt, CMainWindow::self().getBestWidgetForParent());
     menu->exec(QCursor::pos());
     delete menu;
 }

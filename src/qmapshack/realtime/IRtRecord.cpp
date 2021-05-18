@@ -21,7 +21,7 @@
 
 #include <QtCore>
 
-IRtRecord::IRtRecord(QObject *parent)
+IRtRecord::IRtRecord(QObject* parent)
     : QObject(parent)
 {
 }
@@ -111,7 +111,7 @@ bool IRtRecord::readEntry(QByteArray& data)
     stream >> version;
 
     CTrackData::trkpt_t trkpt;
-    stream  >> trkpt;
+    stream >> trkpt;
     track << trkpt;
     return true;
 }
@@ -122,7 +122,7 @@ void IRtRecord::reset()
     QFile::resize(filename, 0);
 }
 
-void IRtRecord::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+void IRtRecord::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt)
 {
     QPolygonF tmp;
     for(const CTrackData::trkpt_t& trkpt : qAsConst(track))

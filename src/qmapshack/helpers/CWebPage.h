@@ -32,7 +32,7 @@ public:
 
     virtual ~CWebPage() = default;
 
-    bool acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool) override
+    bool acceptNavigationRequest(const QUrl& url, QWebEnginePage::NavigationType type, bool) override
     {
         if (type == QWebEnginePage::NavigationTypeLinkClicked)
         {

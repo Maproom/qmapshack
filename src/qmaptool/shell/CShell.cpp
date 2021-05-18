@@ -21,18 +21,18 @@
 
 #include <QtWidgets>
 
-CShell * CShell::pSelf = nullptr;
+CShell* CShell::pSelf = nullptr;
 
-CShell::CShell(QWidget *parent)
+CShell::CShell(QWidget* parent)
     : QTextBrowser(parent)
 {
     pSelf = this;
 
-    connect(&cmd, &QProcess::readyReadStandardError,  this, &CShell::slotStderr);
+    connect(&cmd, &QProcess::readyReadStandardError, this, &CShell::slotStderr);
     connect(&cmd, &QProcess::readyReadStandardOutput, this, &CShell::slotStdout);
 
     connect(&cmd, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &CShell::slotFinished);
-    connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)   >(&QProcess::error),    this, &CShell::slotError);
+    connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)   >(&QProcess::error), this, &CShell::slotError);
 }
 
 void CShell::slotError(QProcess::ProcessError error)
@@ -174,8 +174,8 @@ int CShell::execute(QList<CShellCmd> cmds)
 
     clear();
 
-    idxCommand  = 0;
-    commands    = cmds;
+    idxCommand = 0;
+    commands = cmds;
 
     nextCommand();
     return ++jobId;

@@ -31,7 +31,7 @@ class CScrOptOvlArea : public IScrOpt, private Ui::IScrOptOvlArea
 {
     Q_OBJECT
 public:
-    CScrOptOvlArea(CGisItemOvlArea * area, const QPoint &point, IMouse *parent);
+    CScrOptOvlArea(CGisItemOvlArea* area, const QPoint& point, IMouse* parent);
     virtual ~CScrOptOvlArea();
 
     void draw(QPainter& p) override;

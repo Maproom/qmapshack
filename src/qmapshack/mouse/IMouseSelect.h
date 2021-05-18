@@ -29,14 +29,14 @@ class IMouseSelect : public IMouse
 {
     Q_OBJECT
 public:
-    IMouseSelect(CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
+    IMouseSelect(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
     virtual ~IMouseSelect();
 
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
     void mouseMoved(const QPoint& pos) override;
     void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
-    void leftButtonDown(const QPoint &pos) override;
+    void leftButtonDown(const QPoint& pos) override;
     void dragFinished(const QPoint& pos) override;
 
 protected:

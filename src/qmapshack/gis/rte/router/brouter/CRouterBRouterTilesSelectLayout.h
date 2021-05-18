@@ -30,24 +30,24 @@
 class CRouterBRouterTilesSelectLayout : public QLayout
 {
 public:
-    CRouterBRouterTilesSelectLayout(QWidget * parent) : QLayout(parent) {}
+    CRouterBRouterTilesSelectLayout(QWidget* parent) : QLayout(parent) {}
 
     virtual ~CRouterBRouterTilesSelectLayout() {}
 
-    void addItem(QLayoutItem * item) override { items.append(item); }
+    void addItem(QLayoutItem* item) override { items.append(item); }
 
     QSize sizeHint() const override { return QSize(200, 200); }
 
-    void setGeometry(const QRect & r) override { for (QLayoutItem *item : qAsConst(items)) { item->setGeometry(r); }}
+    void setGeometry(const QRect& r) override { for (QLayoutItem* item : qAsConst(items)) { item->setGeometry(r); }}
 
-    QLayoutItem * itemAt(int index) const override { return index < items.size() ? items.at(index) : nullptr; }
+    QLayoutItem* itemAt(int index) const override { return index < items.size() ? items.at(index) : nullptr; }
 
-    QLayoutItem * takeAt(int index) override { return index < items.size() ? items.takeAt(index) : nullptr; }
+    QLayoutItem* takeAt(int index) override { return index < items.size() ? items.takeAt(index) : nullptr; }
 
     int count() const override { return items.size(); }
 
 private:
-    QList<QLayoutItem *> items;
+    QList<QLayoutItem*> items;
 };
 
 #endif //CROUTERBROUTERTILESSELECTLAYOUT_H

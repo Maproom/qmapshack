@@ -33,12 +33,12 @@ class CCanvas : public QWidget
 {
     Q_OBJECT
 public:
-    CCanvas(QWidget *parent);
+    CCanvas(QWidget* parent);
     virtual ~CCanvas() = default;
 
-    static void setOverrideCursor(const QCursor &cursor, const QString&);
-    static void restoreOverrideCursor(const QString &src);
-    static void changeOverrideCursor(const QCursor& cursor, const QString &src);
+    static void setOverrideCursor(const QCursor& cursor, const QString&);
+    static void restoreOverrideCursor(const QString& src);
+    static void changeOverrideCursor(const QCursor& cursor, const QString& src);
 
     enum redraw_e
     {
@@ -48,7 +48,7 @@ public:
         , eRedrawAll = 0xFFFFFFFF
     };
 
-    void setToolInterface(ITool * t)
+    void setToolInterface(ITool* t)
     {
         tool = t;
     }
@@ -63,16 +63,16 @@ public slots:
     void slotHideLoadIndicator();
 
 protected:
-    void resizeEvent(QResizeEvent *e) override;
-    void paintEvent(QPaintEvent *e) override;
-    void mousePressEvent(QMouseEvent *e) override;
-    void mouseMoveEvent(QMouseEvent *e) override;
-    void mouseReleaseEvent(QMouseEvent *e) override;
-    void mouseDoubleClickEvent(QMouseEvent *e) override;
-    void wheelEvent(QWheelEvent *e) override;
-    void enterEvent(QEvent *e) override;
-    void leaveEvent(QEvent *e) override;
-    void keyPressEvent(QKeyEvent *e) override;
+    void resizeEvent(QResizeEvent* e) override;
+    void paintEvent(QPaintEvent* e) override;
+    void mousePressEvent(QMouseEvent* e) override;
+    void mouseMoveEvent(QMouseEvent* e) override;
+    void mouseReleaseEvent(QMouseEvent* e) override;
+    void mouseDoubleClickEvent(QMouseEvent* e) override;
+    void wheelEvent(QWheelEvent* e) override;
+    void enterEvent(QEvent* e) override;
+    void leaveEvent(QEvent* e) override;
+    void keyPressEvent(QKeyEvent* e) override;
 
 private:
     mutable QMutex mutex {QMutex::Recursive};
@@ -81,11 +81,11 @@ private:
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
 
     /// load indicator for maps
-    QMovie * loadIndicator1;
-    QLabel * mapLoadIndicator;
+    QMovie* loadIndicator1;
+    QLabel* mapLoadIndicator;
     qint32 mapLoadIndicatorCount = 0;
 
-    ITool * tool = nullptr;
+    ITool* tool = nullptr;
 };
 
 #endif //CCANVAS_H

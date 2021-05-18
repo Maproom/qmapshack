@@ -25,7 +25,7 @@
 #include <QApplication>
 #include <QtCore>
 
-IDeviceWatcher::IDeviceWatcher(CGisListWks *parent)
+IDeviceWatcher::IDeviceWatcher(CGisListWks* parent)
     : QObject(parent)
     , listWks(parent)
 {

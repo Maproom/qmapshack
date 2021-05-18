@@ -77,7 +77,7 @@ static quint32 scale2jnx(qreal scale)
 
 
 
-CMapJNX::CMapJNX(const QString &filename, CMapDraw *parent)
+CMapJNX::CMapJNX(const QString& filename, CMapDraw* parent)
     : IMap(eFeatVisibility, parent)
     , filename(filename)
 {
@@ -147,11 +147,11 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
     mapFile.bbox = QRectF(QPointF(mapFile.lon1, mapFile.lat1), QPointF(mapFile.lon2, mapFile.lat2));
 
 
-    qDebug() << hex << "Version:" << hdr.version << "DevId" <<  hdr.devid;
+    qDebug() << hex << "Version:" << hdr.version << "DevId" << hdr.devid;
     qDebug() << mapFile.lon1 << mapFile.lat1 << mapFile.lon2 << mapFile.lat2;
-    qDebug() << hex <<  hdr.lon1 <<  hdr.lat1 <<  hdr.lon2 <<  hdr.lat2;
-    qDebug() << hex << "Details:" <<  hdr.details << "Expire:" <<  hdr.expire << "CRC:" <<  hdr.crc;
-    qDebug() << hex << "Signature:" <<  hdr.signature << "Offset:" <<  hdr.signature_offset;
+    qDebug() << hex << hdr.lon1 << hdr.lat1 << hdr.lon2 << hdr.lat2;
+    qDebug() << hex << "Details:" << hdr.details << "Expire:" << hdr.expire << "CRC:" << hdr.crc;
+    qDebug() << hex << "Signature:" << hdr.signature << "Offset:" << hdr.signature_offset;
 
     QString strTopLeft, strBottomRight;
     IUnit::degToStr(mapFile.lon1, mapFile.lat1, strTopLeft);
@@ -167,7 +167,7 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
         if(hdr.version > 3)
         {
             quint32 dummy;
-            QTextCodec * codec = QTextCodec::codecForName("utf-8");
+            QTextCodec* codec = QTextCodec::codecForName("utf-8");
             QByteArray ba;
 
             stream >> dummy;
@@ -182,7 +182,7 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
     stream >> infoBlockVersion;
     if(infoBlockVersion == 0x9)
     {
-        QTextCodec * codec = QTextCodec::codecForName("utf-8");
+        QTextCodec* codec = QTextCodec::codecForName("utf-8");
         QByteArray ba;
         quint8 dummy;
         QString groupId;
@@ -257,7 +257,7 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
 
 qint32 CMapJNX::scale2level(qreal s, const file_t& file)
 {
-    qint32 idxLvl    = NOIDX;
+    qint32 idxLvl = NOIDX;
     quint32 actScale = scale2jnx(s);
 
     for(int i = 0; i < file.levels.size(); i++)
@@ -306,7 +306,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
     p.setOpacity(getOpacity() / 100.0);
     p.translate(-pp);
 
-    for(const file_t &mapFile : qAsConst(files))
+    for(const file_t& mapFile : qAsConst(files))
     {
         if(!viewport.intersects(mapFile.bbox))
         {
@@ -356,7 +356,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
         //Maybe the QByteArray declaration should be fixed ;-)
         data[0] = (char) 0xFF;
         data[1] = (char) 0xD8;
-        char * pData = data.data() + 2;
+        char* pData = data.data() + 2;
 
         QFile file(mapFile.filename);
         file.open(QIODevice::ReadOnly);
@@ -380,13 +380,13 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
                 img.loadFromData(data);
 
                 QPolygonF l(4);
-                l[0].rx() = tile.area.left()   * DEG_TO_RAD;
-                l[0].ry() = tile.area.top()    * DEG_TO_RAD;
-                l[1].rx() = tile.area.right()  * DEG_TO_RAD;
-                l[1].ry() = tile.area.top()    * DEG_TO_RAD;
-                l[2].rx() = tile.area.right()  * DEG_TO_RAD;
+                l[0].rx() = tile.area.left() * DEG_TO_RAD;
+                l[0].ry() = tile.area.top() * DEG_TO_RAD;
+                l[1].rx() = tile.area.right() * DEG_TO_RAD;
+                l[1].ry() = tile.area.top() * DEG_TO_RAD;
+                l[2].rx() = tile.area.right() * DEG_TO_RAD;
                 l[2].ry() = tile.area.bottom() * DEG_TO_RAD;
-                l[3].rx() = tile.area.left()   * DEG_TO_RAD;
+                l[3].rx() = tile.area.left() * DEG_TO_RAD;
                 l[3].ry() = tile.area.bottom() * DEG_TO_RAD;
 
                 drawTile(img, l, p);

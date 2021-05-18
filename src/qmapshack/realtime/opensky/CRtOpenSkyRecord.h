@@ -26,10 +26,10 @@ class CRtOpenSkyRecord : public IRtRecord
 {
     Q_OBJECT
 public:
-    CRtOpenSkyRecord(QObject * parent);
+    CRtOpenSkyRecord(QObject* parent);
     virtual ~CRtOpenSkyRecord() = default;
 
-    bool writeEntry(const CRtOpenSky::aircraft_t &aircraft);
+    bool writeEntry(const CRtOpenSky::aircraft_t& aircraft);
 
 protected:
     using IRtRecord::writeEntry;

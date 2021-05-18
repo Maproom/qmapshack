@@ -19,12 +19,12 @@
 #include "setup/CAppSetupMac.h"
 
 QString CAppSetupMac::relTranslationDir = "Resources/translations"; // app
-QString CAppSetupMac::relRoutinoDir     = "Resources/routino"; // app
-QString CAppSetupMac::relGdalDir        = "Resources/gdal"; // app
-QString CAppSetupMac::relProjDir        = "Resources/proj"; // app
-QString CAppSetupMac::relHelpDir        = "Resources/help"; // app
-QString CAppSetupMac::relBinDir         = "Tools"; // app
-QString CAppSetupMac::relLogDir         = "Library/Logs"; // home
+QString CAppSetupMac::relRoutinoDir = "Resources/routino";     // app
+QString CAppSetupMac::relGdalDir = "Resources/gdal";        // app
+QString CAppSetupMac::relProjDir = "Resources/proj";        // app
+QString CAppSetupMac::relHelpDir = "Resources/help";        // app
+QString CAppSetupMac::relBinDir = "Tools";         // app
+QString CAppSetupMac::relLogDir = "Library/Logs";         // home
 
 
 void CAppSetupMac::extendPath()
@@ -67,7 +67,7 @@ void CAppSetupMac::initQMapShack()
     prepareTranslator(translationPath, "qmapshack_");
 
     // load and apply style sheet
-    QApplication* app =  (QApplication*) QCoreApplication::instance();
+    QApplication* app = (QApplication*) QCoreApplication::instance();
 
     QString fileName = QDir(getApplicationDir("Resources")).absoluteFilePath("qms-style.qss");
     qDebug() << "Stylesheet" << fileName;
@@ -96,7 +96,7 @@ QString CAppSetupMac::routinoPath(QString xmlFile)
 QString CAppSetupMac::defaultCachePath()
 {
     const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::CacheLocation);
-    const QString& cachePath =  standardLocations.first();
+    const QString& cachePath = standardLocations.first();
     return IAppSetup::path(cachePath, 0, false, 0);
 }
 

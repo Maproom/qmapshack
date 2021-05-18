@@ -18,7 +18,7 @@
 
 #include "CRtGpsTetherRecord.h"
 
-CRtGpsTetherRecord::CRtGpsTetherRecord(QObject *parent)
+CRtGpsTetherRecord::CRtGpsTetherRecord(QObject* parent)
     : IRtRecord(parent)
 {
 }
@@ -34,10 +34,10 @@ bool CRtGpsTetherRecord::writeEntry(qreal lon, qreal lat, qreal ele, qreal speed
     stream << quint8(1);
 
     CTrackData::trkpt_t trkpt;
-    trkpt.lon   = lon;
-    trkpt.lat   = lat;
-    trkpt.ele   = ele;
-    trkpt.time  = timestamp;
+    trkpt.lon = lon;
+    trkpt.lat = lat;
+    trkpt.ele = ele;
+    trkpt.time = timestamp;
 
     if(speed != NOFLOAT)
     {

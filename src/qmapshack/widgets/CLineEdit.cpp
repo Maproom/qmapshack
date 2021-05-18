@@ -22,7 +22,7 @@
 
 void CLineEdit::initialize()
 {
-    initialized  = true;
+    initialized = true;
 
     QFont f = font();
     f.setBold(true);
@@ -30,12 +30,12 @@ void CLineEdit::initialize()
     setFont(f);
 
     paletteEdit = QPalette(palette());
-    paletteRO   = QPalette(palette());
-    paletteRW   = QPalette(palette());
+    paletteRO = QPalette(palette());
+    paletteRW = QPalette(palette());
     paletteRW.setColor(QPalette::Text, QColor(0, 0, 255));
 
     fontNoUnderline = QFont(font());
-    fontUnderline   = QFont(font());
+    fontUnderline = QFont(font());
     fontUnderline.setUnderline(true);
 }
 
@@ -63,7 +63,7 @@ void CLineEdit::updateStyle()
     }
 }
 
-CLineEdit::CLineEdit(QWidget *parent)
+CLineEdit::CLineEdit(QWidget* parent)
     : QLineEdit(parent)
 {
     // initialization has to be done deferred,
@@ -77,7 +77,7 @@ void CLineEdit::setReadOnly(bool r)
     updateStyle();
 }
 
-void CLineEdit::focusInEvent(QFocusEvent *event)
+void CLineEdit::focusInEvent(QFocusEvent* event)
 {
     QLineEdit::focusInEvent(event);
 
@@ -88,7 +88,7 @@ void CLineEdit::focusInEvent(QFocusEvent *event)
     }
 }
 
-void CLineEdit::focusOutEvent(QFocusEvent *event)
+void CLineEdit::focusOutEvent(QFocusEvent* event)
 {
     QLineEdit::focusOutEvent(event);
     updateStyle();

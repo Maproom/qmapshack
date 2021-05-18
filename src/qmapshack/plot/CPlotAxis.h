@@ -27,7 +27,7 @@ class CPlotAxis : public QObject
 {
     Q_OBJECT
 public:
-    CPlotAxis(QObject * parent) : QObject(parent)
+    CPlotAxis(QObject* parent) : QObject(parent)
     {
     }
 
@@ -73,7 +73,7 @@ public:
     ///get the maximum width of a scale with provided fontmetrics
     virtual int getScaleWidth(const QFontMetrics& m);
     ///get a new ticmark object
-    virtual const tic_t* ticmark(const tic_t *t = nullptr);
+    virtual const tic_t* ticmark(const tic_t* t = nullptr);
     /// get the total limits and the used ones
     virtual void getLimits(qreal& limMin, qreal& limMax, qreal& useMin, qreal& useMax);
 
@@ -144,8 +144,8 @@ protected:
     ///scalefactor
     qreal scale = 1.0;
 
-    qreal usedMin  = 0.0; ///< the actual applied min value
-    qreal usedMax  = 0.0; ///< the actual applied max value
+    qreal usedMin = 0.0;  ///< the actual applied min value
+    qreal usedMax = 0.0;  ///< the actual applied max value
     qreal limitMin = 0.0;
     qreal limitMax = 0.0;
 
@@ -170,7 +170,7 @@ protected:
 
 private:
     bool firstTic = false; ///< used by ticmark()
-    bool lastTic  = false; ///< used by ticmark()
+    bool lastTic = false;  ///< used by ticmark()
 };
 
 #endif //CPLOTAXIS_H

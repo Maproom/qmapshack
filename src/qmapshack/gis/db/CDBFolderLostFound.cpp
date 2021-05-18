@@ -24,14 +24,14 @@
 
 #include <QtSql>
 
-CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem *parent)
+CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem* parent)
     : IDBFolder(true, db, eTypeLostFound, 0, parent)
 {
     setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
     CDBFolderLostFound::setupFromDB();
 
     setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
-    CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
+    CEvtD2WReqInfo* evt = new CEvtD2WReqInfo(getId(), getDBName());
     CGisWorkspace::self().postEventForWks(evt);
 }
 
@@ -65,11 +65,11 @@ void CDBFolderLostFound::setupFromDB()
         setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/Empty.png"));
     }
 
-    CEvtD2WUpdateLnF * evt = new CEvtD2WUpdateLnF(getId(), getDBName());
+    CEvtD2WUpdateLnF* evt = new CEvtD2WUpdateLnF(getId(), getDBName());
     CGisWorkspace::self().postEventForWks(evt);
 }
 
-void CDBFolderLostFound::update(CEvtW2DAckInfo * info)
+void CDBFolderLostFound::update(CEvtW2DAckInfo* info)
 {
     if(info->id != 0)
     {
@@ -89,7 +89,7 @@ void CDBFolderLostFound::expanding()
     const int N = childCount();
     for(int i = 0; i < N; i++)
     {
-        CDBItem * item = dynamic_cast<CDBItem*>(child(i));
+        CDBItem* item = dynamic_cast<CDBItem*>(child(i));
         if(item)
         {
             item->updateAge();
@@ -106,13 +106,13 @@ void CDBFolderLostFound::clear()
     setupFromDB();
 }
 
-bool CDBFolderLostFound::delItem(CDBItem * item)
+bool CDBFolderLostFound::delItem(CDBItem* item)
 {
     QSqlQuery query(db);
 
     if(checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
     {
-        CEvtD2WHideItems * evt = new CEvtD2WHideItems(getId(), getDBName());
+        CEvtD2WHideItems* evt = new CEvtD2WHideItems(getId(), getDBName());
         evt->keys << item->getKey();
         CGisWorkspace::self().postEventForWks(evt);
     }

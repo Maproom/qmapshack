@@ -32,7 +32,7 @@ public:
         eTreeColumnDisplayName,
     };
 
-    CPoiPropSetup(IPoi *poifile, CPoiDraw *poi);
+    CPoiPropSetup(IPoi* poifile, CPoiDraw* poi);
     virtual ~CPoiPropSetup() = default;
 
 protected slots:

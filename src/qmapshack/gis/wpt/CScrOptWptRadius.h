@@ -33,7 +33,7 @@ class CScrOptWptRadius : public IScrOpt, private Ui::IScrOptWptRadius
 {
     Q_OBJECT
 public:
-    CScrOptWptRadius(CGisItemWpt * wpt, const QPoint &point, IMouse *parent);
+    CScrOptWptRadius(CGisItemWpt* wpt, const QPoint& point, IMouse* parent);
     virtual ~CScrOptWptRadius();
 
     void draw(QPainter& p) override;

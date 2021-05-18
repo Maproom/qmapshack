@@ -37,7 +37,7 @@ CFitField::CFitField(quint16 globalMesgNr, quint8 fieldDefNr, const CFitFieldPro
     applyScaleAndOffset();
 }
 
-CFitField::CFitField(const CFitField & copy)
+CFitField::CFitField(const CFitField& copy)
     : fieldProfile(copy.fieldProfile), globalMesgNr(copy.globalMesgNr), fieldDefNr(copy.fieldDefNr),
     baseType(copy.baseType), valid(copy.valid), value(copy.value), rawValue(copy.rawValue)
 {
@@ -80,7 +80,7 @@ QString CFitField::fieldInfo() const
     QString str = QString("%1 %2%3 (%4): %5 %6 %7 %8")
                   .arg(profile().getTyp(),
                        profile().getName(),
-                       profile().getFieldType()  == eFieldTypeDevelopment ? " DEV" : "")
+                       profile().getFieldType() == eFieldTypeDevelopment ? " DEV" : "")
                   .arg(getFieldDefNr())
                   .arg(value.toString(),
                        profile().getUnits(),

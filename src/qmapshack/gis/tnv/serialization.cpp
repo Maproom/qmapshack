@@ -25,8 +25,8 @@
 
 struct twonav_icon_t
 {
-    const char * twonav;
-    const char * qlgt;
+    const char* twonav;
+    const char* qlgt;
 };
 
 static const twonav_icon_t TwoNavIcons[] =
@@ -84,7 +84,7 @@ static QStringList writeCompeTime( const QDateTime& t, bool isTrack)
     QDateTime timestamp = t.toTimeSpec(Qt::UTC);
 
     QString monthStrs[] = { "", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-    QString monthStr    = monthStrs[timestamp.date().month()];
+    QString monthStr = monthStrs[timestamp.date().month()];
 
     if(isTrack)
     {
@@ -203,7 +203,7 @@ static QString makeUniqueName(const QString& name, const QDir& dir)
 
 
 
-bool CGisItemTrk::saveTwoNav(const QString &filename)
+bool CGisItemTrk::saveTwoNav(const QString& filename)
 {
     QFile file(filename);
     if(!file.open(QIODevice::WriteOnly))
@@ -213,7 +213,7 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
     }
 
     QDir dir(QFileInfo(filename).absoluteDir());
-    IGisProject * project = getParentProject();
+    IGisProject* project = getParentProject();
 
     QTextStream out(&file);
     out.setCodec(QTextCodec::codecForName("UTF-8"));
@@ -270,14 +270,14 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
 
             if(!trkpt.keyWpt.item.isEmpty() && project)
             {
-                CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
+                CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
                 if(wpt)
                 {
-                    QString iconName    = wpt->getIconName();
-                    QPixmap icon        = wpt->getIcon();
-                    icon                = icon.scaledToWidth(15, Qt::SmoothTransformation);
-                    iconName            = iconQlGt2TwoNav(iconName);
-                    iconName            = iconName.replace(" ", "_");
+                    QString iconName = wpt->getIconName();
+                    QPixmap icon = wpt->getIcon();
+                    icon = icon.scaledToWidth(15, Qt::SmoothTransformation);
+                    iconName = iconQlGt2TwoNav(iconName);
+                    iconName = iconName.replace(" ", "_");
 
                     icon.save(dir.absoluteFilePath(iconName + ".png"));
 
@@ -359,8 +359,8 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
         {
         case 'B':
         {
-            QString name        = line.mid(1).simplified();
-            QTextCodec * codec  = QTextCodec::codecForName(name.toLatin1());
+            QString name = line.mid(1).simplified();
+            QTextCodec* codec = QTextCodec::codecForName(name.toLatin1());
             if(codec)
             {
                 in.setCodec(codec);
@@ -370,7 +370,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
 
         case 'G':
         {
-            QString name  = line.mid(1).simplified();
+            QString name = line.mid(1).simplified();
             if(name != "WGS 84")
             {
                 QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Only support lon/lat WGS 84 format."), QMessageBox::Abort, QMessageBox::Abort);
@@ -381,7 +381,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
 
         case 'U':
         {
-            QString name  = line.mid(1).simplified();
+            QString name = line.mid(1).simplified();
             if(name != "1")
             {
                 QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Only support lon/lat WGS 84 format."), QMessageBox::Abort, QMessageBox::Abort);
@@ -553,7 +553,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     }
 
 
-    for(const image_t &img : qAsConst(images))
+    for(const image_t& img : qAsConst(images))
     {
         QString fn = img.info;
         if(fn.isEmpty())
@@ -608,8 +608,8 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
         {
         case 'B':
         {
-            QString name        = line.mid(1).simplified();
-            QTextCodec * codec  = QTextCodec::codecForName(name.toLatin1());
+            QString name = line.mid(1).simplified();
+            QTextCodec* codec = QTextCodec::codecForName(name.toLatin1());
             if(codec)
             {
                 in.setCodec(codec);
@@ -619,7 +619,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
         case 'G':
         {
-            QString name  = line.mid(1).simplified();
+            QString name = line.mid(1).simplified();
             if(name != "WGS 84")
             {
                 QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Only support lon/lat WGS 84 format."), QMessageBox::Abort, QMessageBox::Abort);
@@ -630,7 +630,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
         case 'U':
         {
-            QString name  = line.mid(1).simplified();
+            QString name = line.mid(1).simplified();
             if(name != "1")
             {
                 QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Only support lon/lat WGS 84 format."), QMessageBox::Abort, QMessageBox::Abort);
@@ -662,7 +662,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             IUnit::strToDeg(lat + " " + lon, wpt.lon, wpt.lat);
 
             wpt.time = readCompeTime(values[5] + " " + values[6], false);
-            wpt.ele  = values[7].toFloat();
+            wpt.ele = values[7].toFloat();
 
             if(values.size() > 7)
             {
@@ -684,11 +684,11 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             }
 
 
-            wpt.symbol  = iconTwoNav2QlGt(values[0]);
+            wpt.symbol = iconTwoNav2QlGt(values[0]);
 
-            wpt.url     = values[7];
-            wpt.prox    = values[8].toFloat();
-            wpt.key     = values[9];
+            wpt.url = values[7];
+            wpt.prox = values[8].toFloat();
+            wpt.key = values[9];
 
             if(wpt.prox == 0)
             {
@@ -766,8 +766,8 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             img.image.load(dir.absoluteFilePath(fn));
             if(!img.image.isNull())
             {
-                img.filename    = fi.fileName();
-                img.info        = fi.baseName();
+                img.filename = fi.fileName();
+                img.info = fi.baseName();
                 wpt.images << img;
             }
 
@@ -784,25 +784,25 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
     return true;
 }
 
-void CGisItemWpt::readTwoNav(const CTwoNavProject::wpt_t &tnvWpt)
+void CGisItemWpt::readTwoNav(const CTwoNavProject::wpt_t& tnvWpt)
 {
-    wpt.lon     = tnvWpt.lon;
-    wpt.lat     = tnvWpt.lat;
-    wpt.ele     = tnvWpt.ele;
-    proximity   = tnvWpt.prox;
-    wpt.time    = tnvWpt.time;
-    wpt.name    = tnvWpt.name;
-    wpt.cmt     = tnvWpt.comment;
-    wpt.desc    = tnvWpt.description;
-    wpt.sym     = tnvWpt.symbol;
-    key.item    = tnvWpt.key;
+    wpt.lon = tnvWpt.lon;
+    wpt.lat = tnvWpt.lat;
+    wpt.ele = tnvWpt.ele;
+    proximity = tnvWpt.prox;
+    wpt.time = tnvWpt.time;
+    wpt.name = tnvWpt.name;
+    wpt.cmt = tnvWpt.comment;
+    wpt.desc = tnvWpt.description;
+    wpt.sym = tnvWpt.symbol;
+    key.item = tnvWpt.key;
 
     for(const CTwoNavProject::img_t& img : tnvWpt.images)
     {
         CGisItemWpt::image_t image;
-        image.fileName  = img.filename;
-        image.info      = img.info;
-        image.pixmap    = img.image;
+        image.fileName = img.filename;
+        image.info = img.info;
+        image.pixmap = img.image;
         images << image;
     }
 

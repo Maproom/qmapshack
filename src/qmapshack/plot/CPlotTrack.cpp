@@ -21,12 +21,12 @@
 
 #include <QtWidgets>
 
-CPlotTrack::CPlotTrack(QWidget *parent)
+CPlotTrack::CPlotTrack(QWidget* parent)
     : QWidget(parent)
 {
 }
 
-CPlotTrack::CPlotTrack(CGisItemTrk * trk, QWidget * parent)
+CPlotTrack::CPlotTrack(CGisItemTrk* trk, QWidget* parent)
     : QWidget(parent)
     , pos(NOPOINTF)
 {
@@ -47,14 +47,14 @@ void CPlotTrack::setMouseFocus(qreal lon, qreal lat)
     update();
 }
 
-void CPlotTrack::resizeEvent(QResizeEvent * e)
+void CPlotTrack::resizeEvent(QResizeEvent* e)
 {
     QSize s = e->size();
     setMinimumWidth(s.height());
     setSize(s.height(), s.height());
 }
 
-void CPlotTrack::paintEvent(QPaintEvent * e)
+void CPlotTrack::paintEvent(QPaintEvent* e)
 {
     QPainter p(this);
     USE_ANTI_ALIASING(p, true);

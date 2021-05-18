@@ -31,7 +31,7 @@ class QSettings;
 class CPoiItem : public QTreeWidgetItem
 {
 public:
-    CPoiItem(QTreeWidget *parent, CPoiDraw *poi);
+    CPoiItem(QTreeWidget* parent, CPoiDraw* poi);
     virtual ~CPoiItem() = default;
 
     void saveConfig(QSettings& cfg);
@@ -91,7 +91,7 @@ public:
     }
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    void findPoisIn(const QRectF& degRect, QSet<poi_t>&pois, QList<QPointF>& posPoiHighlight)
+    void findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF>& posPoiHighlight)
     {
         getPoifile()->findPoisIn(degRect, pois, posPoiHighlight);
     }
@@ -101,7 +101,7 @@ public:
     }
 private:
     friend class CPoiDraw;
-    CPoiDraw * poi;
+    CPoiDraw* poi;
     /**
        @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
      */

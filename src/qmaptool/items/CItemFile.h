@@ -26,7 +26,7 @@
 class CItemFile : public IItem, public QListWidgetItem
 {
 public:
-    CItemFile(const QString& filename, QListWidget *parent);
+    CItemFile(const QString& filename, QListWidget* parent);
     virtual ~CItemFile() = default;
 
     void setupChanged() override {}

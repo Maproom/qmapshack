@@ -23,7 +23,7 @@
 #include <ogr_spatialref.h>
 #include <QtWidgets>
 
-CDrawContextPixel::CDrawContextPixel(CCanvas *canvas, QObject * parent)
+CDrawContextPixel::CDrawContextPixel(CCanvas* canvas, QObject* parent)
     : IDrawContext(canvas, parent)
     , CGdalFile(CGdalFile::eTypePixel)
 {
@@ -35,22 +35,22 @@ CDrawContextPixel::~CDrawContextPixel()
     CDrawContextPixel::unload();
 }
 
-void CDrawContextPixel::convertMap2Coord(QPointF &pt) const
+void CDrawContextPixel::convertMap2Coord(QPointF& pt) const
 {
     pt = trFwd.map(pt);
 }
 
-void CDrawContextPixel::convertCoord2Map(QPointF &pt) const
+void CDrawContextPixel::convertCoord2Map(QPointF& pt) const
 {
     pt = trInv.map(pt);
 }
 
-void CDrawContextPixel::convertMap2Proj(QPointF &pt) const
+void CDrawContextPixel::convertMap2Proj(QPointF& pt) const
 {
     pt = trFwdProj.map(pt);
 }
 
-void CDrawContextPixel::convertProj2Map(QPointF &pt) const
+void CDrawContextPixel::convertProj2Map(QPointF& pt) const
 {
     pt = trInvProj.map(pt);
 }
@@ -102,28 +102,28 @@ void CDrawContextPixel::drawt(buffer_t& buf)
     pt4.ry() = qMax(pt4.y(), 0.0);
     pt4.ry() = qMin(pt4.y(), ysize_px);
 
-    qint32 mapWidth  = qRound(pt2.x() - pt1.x());
+    qint32 mapWidth = qRound(pt2.x() - pt1.x());
     qint32 mapHeight = qRound(pt4.y() - pt1.y());
-    QPointF mapOff   = pt1;
+    QPointF mapOff = pt1;
 
     convertMap2Screen(pt1);
     convertMap2Screen(pt2);
     convertMap2Screen(pt4);
 
-    qint32 screenWidth  = qRound(pt2.x() - pt1.x()) & 0xFFFFFFFC;
+    qint32 screenWidth = qRound(pt2.x() - pt1.x()) & 0xFFFFFFFC;
     qint32 screenHeight = qRound(pt4.y() - pt1.y());
-    QPointF screenOff   = pt1;
+    QPointF screenOff = pt1;
 
 
     // start to draw the map
     QImage img;
-    QVector<quint8> buffer(screenWidth * screenHeight, 0);
+    QVector<quint8> buffer(screenWidth* screenHeight, 0);
 
     CPLErr err = CE_Failure;
 
     if(rasterBandCount == 1)
     {
-        GDALRasterBand * pBand;
+        GDALRasterBand* pBand;
         pBand = dataset->GetRasterBand(1);
 
         img = QImage(screenWidth, screenHeight, QImage::Format_Indexed8);
@@ -143,7 +143,7 @@ void CDrawContextPixel::drawt(buffer_t& buf)
         // read map band by band and copy color values into the image buffer
         for(int b = 1; b <= rasterBandCount; ++b)
         {
-            GDALRasterBand * pBand;
+            GDALRasterBand* pBand;
             pBand = dataset->GetRasterBand(b);
 
             mutex.lock();
@@ -154,14 +154,14 @@ void CDrawContextPixel::drawt(buffer_t& buf)
                 int pbandColour = pBand->GetColorInterpretation();
                 unsigned int offset;
 
-                for (offset = 0; offset < sizeof(testPix) && *(((quint8 *)&testPix) + offset) != pbandColour; offset++)
+                for (offset = 0; offset < sizeof(testPix) && *(((quint8*)&testPix) + offset) != pbandColour; offset++)
                 {
                 }
                 if(offset < sizeof(testPix))
                 {
-                    quint8 * pTar   = img.bits() + offset;
-                    quint8 * pSrc   = buffer.data();
-                    const int size  = buffer.size();
+                    quint8* pTar = img.bits() + offset;
+                    quint8* pSrc = buffer.data();
+                    const int size = buffer.size();
 
                     for(int i = 0; i < size; ++i)
                     {

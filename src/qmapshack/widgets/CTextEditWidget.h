@@ -31,14 +31,14 @@ class CTextEditWidget : public QDialog, private Ui::ITextEditWidget
 {
     Q_OBJECT
 public:
-    CTextEditWidget(const QString &html, QWidget * parent);
+    CTextEditWidget(const QString& html, QWidget* parent);
     virtual ~CTextEditWidget();
 
     QString getHtml();
 
 protected:
-    void moveEvent(QMoveEvent *event) override;
-    bool event(QEvent *event) override;
+    void moveEvent(QMoveEvent* event) override;
+    bool event(QEvent* event) override;
 
 private slots:
     void textBold();
@@ -46,33 +46,33 @@ private slots:
     void textItalic();
     void textStyle(int styleIndex);
     void textColor();
-    void textAlign(QAction *a);
+    void textAlign(QAction* a);
     void resetFont();
     void resetLayout();
 
-    void currentCharFormatChanged(const QTextCharFormat &format);
+    void currentCharFormatChanged(const QTextCharFormat& format);
     void cursorPositionChanged();
     void selectionChanged();
     void clipboardDataChanged();
 
     void customContextMenuRequested();
-    void pasteMode(QAction *action);
+    void pasteMode(QAction* action);
     void deleteSelected();
 
     void textEditScrolled();
 
     void insertFromTemplate();
 private:
-    void mergeFormatOnWordOrSelection(const QTextCharFormat &format);
-    void fontChanged(const QFont &f);
-    void colorChanged(const QColor &c);
+    void mergeFormatOnWordOrSelection(const QTextCharFormat& format);
+    void fontChanged(const QFont& f);
+    void colorChanged(const QColor& c);
     void alignmentChanged(Qt::Alignment a);
     void updateSelectionWindow();
 
-    QAction *actionTextColor;
-    QMenu   *menuTextEdit;
-    QWidget *selectionWindow;
-    QMenu   *removeFormat;
+    QAction* actionTextColor;
+    QMenu* menuTextEdit;
+    QWidget* selectionWindow;
+    QMenu* removeFormat;
 
     QFont defaultFont;
 };

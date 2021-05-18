@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CToolExport::CToolExport(QWidget *parent)
+CToolExport::CToolExport(QWidget* parent)
     : IToolGui(parent)
 {
     setupUi(this);
@@ -122,7 +122,7 @@ void CToolExport::slotSelectFilename()
 }
 
 
-void CToolExport::buildCmd(QList<CShellCmd>& cmds, const IItem * iitem)
+void CToolExport::buildCmd(QList<CShellCmd>& cmds, const IItem* iitem)
 {
     inputFiles << iitem->getFilename();
 }

@@ -42,8 +42,8 @@ public:
     CGarminPolygon() = default;
     virtual ~CGarminPolygon() = default;
 
-    quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8 * pData, const quint8 * pEnd);
-    quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8 * pData, const quint8 * pEnd);
+    quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8* pData, const quint8* pEnd);
+    quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8* pData, const quint8* pEnd);
 
     QString getLabelText() const;
 
@@ -95,7 +95,7 @@ private:
     /// the register to work on
     quint64 reg;
     /// the data stream to get data from
-    const quint8 * pData;
+    const quint8* pData;
 
     quint32 bytes;         //< bytes left in stream
     quint32 xmask;         //< bitmask x coord.

@@ -29,7 +29,7 @@
 
 class CRtGpsTether;
 
-CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
+CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether& source, QWidget* parent)
     : IRtInfo(&source, parent)
 {
     setupUi(this);
@@ -266,7 +266,7 @@ void CRtGpsTetherInfo::slotUpdate()
 
     if(lastTimestamp != timestamp)
     {
-        CRtGpsTetherRecord * _record = dynamic_cast<CRtGpsTetherRecord*>(record.data());
+        CRtGpsTetherRecord* _record = dynamic_cast<CRtGpsTetherRecord*>(record.data());
         if(toolRecord->isChecked() && _record != nullptr && lon != NOFLOAT && lat != NOFLOAT)
         {
             _record->writeEntry(lon, lat, ele, speed, timestamp);
@@ -274,7 +274,7 @@ void CRtGpsTetherInfo::slotUpdate()
 
         if(checkCenterPosition->isChecked())
         {
-            CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+            CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
             if(canvas != nullptr)
             {
                 const QPointF& pos = getPosition();

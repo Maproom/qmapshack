@@ -258,7 +258,7 @@ public:
        @param viewport  the viewport in units of rad
        @param gis       the draw context to be used
      */
-    void draw(QPainter& p, const QPolygonF &viewport, CGisDraw *gis);
+    void draw(QPainter& p, const QPolygonF& viewport, CGisDraw* gis);
 
     /**
        @brief Receive the current mouse position
@@ -277,7 +277,7 @@ public:
        @param viewport  the viewport in units of rad
        @param gis       the draw context to be used
      */
-    void fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis);
+    void fastDraw(QPainter& p, const QRectF& viewport, CGisDraw* gis);
 
     /**
        @brief Get items close to the given point
@@ -288,7 +288,7 @@ public:
        @param pos       the position in pixel
        @param items     an empty item list that will get filled with temporary pointers
      */
-    void getItemsByPos(const QPointF& pos, QList<IGisItem *> &items);
+    void getItemsByPos(const QPointF& pos, QList<IGisItem*>& items);
 
     /**
        @brief Get items matching the given area
@@ -297,56 +297,56 @@ public:
        @param flags     flag field with IGisItem::selection_e flags set
        @param items     a list to receive the temporary pointers to the found items
      */
-    void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
+    void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem*>& items);
 
     /**
        @brief Find first item with matching key
        @param key       the item's key as it is returned from IGisItem::getKey()
        @return If no item is found 0 is returned.
      */
-    IGisItem * getItemByKey(const IGisItem::key_t &key);
+    IGisItem* getItemByKey(const IGisItem::key_t& key);
 
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
 
-    void getNogoAreas(QList<IGisItem *> &nogos);
+    void getNogoAreas(QList<IGisItem*>& nogos);
     /**
        @brief Delete all items with matching key from workspace
 
        @param key       the item's key as it is returned from IGisItem::getKey()
      */
-    void delItemByKey(const IGisItem::key_t &key);
+    void delItemByKey(const IGisItem::key_t& key);
 
-    void delItemsByKey(const QList<IGisItem::key_t> &keys);
+    void delItemsByKey(const QList<IGisItem::key_t>& keys);
 
     /**
        @brief Edit / view item details
        @param key       the item's key as it is returned from IGisItem::getKey()
      */
-    void editItemByKey(const IGisItem::key_t &key);
+    void editItemByKey(const IGisItem::key_t& key);
 
     /**
        @brief Select a project and add a copy of the item to the project
        @param key       the item's key as it is returned from IGisItem::getKey()
      */
-    void copyItemByKey(const IGisItem::key_t &key);
+    void copyItemByKey(const IGisItem::key_t& key);
 
     /**
        @brief Select a project and add a copy of all items in the list
        @param keys      a list of item keys to copy
      */
-    IGisProject *copyItemsByKey(const QList<IGisItem::key_t> &keys);
+    IGisProject* copyItemsByKey(const QList<IGisItem::key_t>& keys);
 
     /**
        @brief Clone waypoint and move clone
        @param key       the item's key as it is returned from IGisItem::getKey()
      */
-    void projWptByKey(const IGisItem::key_t &key);
+    void projWptByKey(const IGisItem::key_t& key);
 
     /**
        @brief Move waypoint via mouse
        @param key       the item's key as it is returned from IGisItem::getKey()
      */
-    void moveWptByKey(const IGisItem::key_t &key);
+    void moveWptByKey(const IGisItem::key_t& key);
 
     /**
        @brief Add a new waypoint by Position
@@ -354,39 +354,39 @@ public:
      */
     void addWptByPos(const QPointF& pt, const QString& name = QString::Null(), const QString& desc = QString::Null()) const;
 
-    void addPoisAsWpt(const QSet<poi_t> &pois, IGisProject *project = nullptr) const;
-    void addPoiAsWpt(const poi_t &poi, IGisProject *project = nullptr) const;
-    void addPoiAsWpt(const poi_t &poi, tristate_e &openEditWindow, IGisProject *project = nullptr) const;
+    void addPoisAsWpt(const QSet<poi_t>& pois, IGisProject* project = nullptr) const;
+    void addPoiAsWpt(const poi_t& poi, IGisProject* project = nullptr) const;
+    void addPoiAsWpt(const poi_t& poi, tristate_e& openEditWindow, IGisProject* project = nullptr) const;
 
-    void toggleWptBubble(const IGisItem::key_t &key);
+    void toggleWptBubble(const IGisItem::key_t& key);
 
-    void deleteWptRadius(const IGisItem::key_t &key);
+    void deleteWptRadius(const IGisItem::key_t& key);
 
-    void toggleNogoItem(const IGisItem::key_t &key);
+    void toggleNogoItem(const IGisItem::key_t& key);
 
-    void editWptRadius(const IGisItem::key_t &key);
+    void editWptRadius(const IGisItem::key_t& key);
 
-    void copyWptCoordByKey(const IGisItem::key_t &key);
+    void copyWptCoordByKey(const IGisItem::key_t& key);
 
     /**
        @brief Set user focus to track
        @param yes       true if focus is set
        @param key       the item's key as it is returned from IGisItem::getKey()
      */
-    void focusTrkByKey(bool yes, const IGisItem::key_t &key);
+    void focusTrkByKey(bool yes, const IGisItem::key_t& key);
 
-    void focusRteByKey(bool yes, const IGisItem::key_t &key);
+    void focusRteByKey(bool yes, const IGisItem::key_t& key);
 
-    void convertRouteToTrack(const IGisItem::key_t &key);
+    void convertRouteToTrack(const IGisItem::key_t& key);
 
 
-    void cutTrkByKey(const IGisItem::key_t &key);
+    void cutTrkByKey(const IGisItem::key_t& key);
 
     void addTrkInfoByKey(const IGisItem::key_t& key);
 
-    void editTrkByKey(const IGisItem::key_t &key);
+    void editTrkByKey(const IGisItem::key_t& key);
 
-    void reverseTrkByKey(const IGisItem::key_t &key);
+    void reverseTrkByKey(const IGisItem::key_t& key);
 
     /**
        @brief Combine all tracks in a given track's project
@@ -396,20 +396,20 @@ public:
 
        @param keyTrk    the key of the first track
      */
-    void combineTrkByKey(const IGisItem::key_t &keyTrk);
+    void combineTrkByKey(const IGisItem::key_t& keyTrk);
 
     /**
        @brief Combine al tracks in the given list of keys.
 
        @param keys  a list of GIS item keys
      */
-    void combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t> &keysPreSel);
+    void combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t>& keysPreSel);
 
     void colorTrkByKey(const QList<IGisItem::key_t>& keys);
 
-    void rangeTrkByKey(const IGisItem::key_t &key);
+    void rangeTrkByKey(const IGisItem::key_t& key);
 
-    void copyTrkWithWptByKey(const IGisItem::key_t &key);
+    void copyTrkWithWptByKey(const IGisItem::key_t& key);
 
     void editRteByKey(const IGisItem::key_t& key);
 
@@ -419,7 +419,7 @@ public:
 
     void resetRteByKey(const IGisItem::key_t& key);
 
-    void editAreaByKey(const IGisItem::key_t &key);
+    void editAreaByKey(const IGisItem::key_t& key);
 
     void makeRteFromWpt(const QList<IGisItem::key_t>& keys);
 
@@ -429,7 +429,7 @@ public:
 
     void addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys);
 
-    void searchWebByKey(const IGisItem::key_t &key);
+    void searchWebByKey(const IGisItem::key_t& key);
 
     /**
        @brief Select a project via dialog
@@ -439,9 +439,9 @@ public:
 
        @return 0 if no project was selected.
      */
-    IGisProject * selectProject(bool forceSelect);
+    IGisProject* selectProject(bool forceSelect);
 
-    void postEventForWks(QEvent * event);
+    void postEventForWks(QEvent* event);
 
     void setOpacity(qreal val);
 
@@ -471,13 +471,13 @@ private slots:
     void slotSearch(const CSearch& currentSearch);
 
     void slotWksItemSelectionChanged();
-    void slotWksItemPressed(QTreeWidgetItem * item);
+    void slotWksItemPressed(QTreeWidgetItem* item);
 
 private:
     friend class CMainWindow;
-    CGisWorkspace(QMenu * menuProject, QWidget * parent);
+    CGisWorkspace(QMenu* menuProject, QWidget* parent);
 
-    static CGisWorkspace * pSelf;
+    static CGisWorkspace* pSelf;
 
     /**
         The item key of last item pressed in the workspace list.

@@ -23,7 +23,7 @@
 #include <QMessageBox>
 #include <QtWidgets>
 
-CInvalidTrk::CInvalidTrk(CGisItemTrk &trk, QWidget *parent)
+CInvalidTrk::CInvalidTrk(CGisItemTrk& trk, QWidget* parent)
     : QDialog(parent)
     , trk(trk)
 {
@@ -35,7 +35,7 @@ CInvalidTrk::CInvalidTrk(CGisItemTrk &trk, QWidget *parent)
     int s = QApplication::style()->pixelMetric(QStyle::PM_MessageBoxIconSize);
     labelIcon->setPixmap( QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(s, s));
 
-    IGisProject * p = trk.getParentProject();
+    IGisProject* p = trk.getParentProject();
     if(p != nullptr && !p->getName().isEmpty())
     {
         labelName->setText("<b>" + p->getName() + ":</b>");
@@ -80,7 +80,7 @@ void CInvalidTrk::slotShowDetails()
 
 void CInvalidTrk::slotDoNotAskAgain(bool checked)
 {
-    IGisProject * project = trk.getParentProject();
+    IGisProject* project = trk.getParentProject();
     if(project != nullptr)
     {
         project->setInvalidDataOk(checked);

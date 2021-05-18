@@ -33,14 +33,14 @@ void IPoi::init()
     _iconHighlight = QImage("://cursors/poiHighlightRed.png").scaled(sx, sy, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
-IPoi::IPoi(CPoiDraw *parent)
+IPoi::IPoi(CPoiDraw* parent)
     : IDrawObject(parent)
     , poi(parent)
 
 {
 }
 
-IPoiProp * IPoi::getSetup()
+IPoiProp* IPoi::getSetup()
 {
     if(setup.isNull())
     {

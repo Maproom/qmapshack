@@ -28,10 +28,10 @@ class CPositionDialog : public QDialog, private Ui::IPositionDialog
 {
     Q_OBJECT
 public:
-    CPositionDialog(QWidget * parent, QPointF &pos);
+    CPositionDialog(QWidget* parent, QPointF& pos);
     virtual ~CPositionDialog();
 
-    static bool getPosition(QPointF& pt, const QString &str);
+    static bool getPosition(QPointF& pt, const QString& str);
 
 public slots:
     void accept() override;

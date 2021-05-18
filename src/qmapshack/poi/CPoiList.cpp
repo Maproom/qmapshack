@@ -22,15 +22,15 @@
 #include "poi/CPoiItem.h"
 #include "poi/CPoiList.h"
 
-CPoiList::CPoiList(QWidget *parent)
+CPoiList::CPoiList(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
 
-    connect(treeWidget,     &CPoiTreeWidget::customContextMenuRequested, this, &CPoiList::slotContextMenu);
-    connect(actionActivate, &QAction::triggered,                         this, &CPoiList::slotActivate);
-    connect(actionReloadPoi, &QAction::triggered,                        this, &CPoiList::slotReloadPoi);
-    connect(treeWidget,     &CPoiTreeWidget::sigChanged,                 this, &CPoiList::sigChanged);
+    connect(treeWidget, &CPoiTreeWidget::customContextMenuRequested, this, &CPoiList::slotContextMenu);
+    connect(actionActivate, &QAction::triggered, this, &CPoiList::slotActivate);
+    connect(actionReloadPoi, &QAction::triggered, this, &CPoiList::slotReloadPoi);
+    connect(treeWidget, &CPoiTreeWidget::sigChanged, this, &CPoiList::sigChanged);
     connect(labelHelpFillPoiList, &QLabel::linkActivated, &CMainWindow::self(), static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
 
     menu = new QMenu(this);
@@ -51,9 +51,9 @@ int CPoiList::count()
     return treeWidget->topLevelItemCount();
 }
 
-CPoiItem * CPoiList::item(int i)
+CPoiItem* CPoiList::item(int i)
 {
-    return dynamic_cast<CPoiItem *>(treeWidget->topLevelItem(i));
+    return dynamic_cast<CPoiItem*>(treeWidget->topLevelItem(i));
 }
 
 void CPoiList::updateHelpText()
@@ -68,7 +68,7 @@ void CPoiList::updateHelpText()
     {
         labelHelpFillPoiList->hide();
 
-        CPoiItem * item = dynamic_cast<CPoiItem*>(treeWidget->topLevelItem(0));
+        CPoiItem* item = dynamic_cast<CPoiItem*>(treeWidget->topLevelItem(0));
         bool haveActive = item && item->isActivated();
         labelIcon->setVisible(!haveActive);
         labelHelpActivatePoi->setVisible(!haveActive);
@@ -81,7 +81,7 @@ void CPoiList::sort()
     QList<CPoiItem*> items1;
     while(treeWidget->topLevelItemCount())
     {
-        CPoiItem * item = dynamic_cast<CPoiItem*>(treeWidget->takeTopLevelItem(0));
+        CPoiItem* item = dynamic_cast<CPoiItem*>(treeWidget->takeTopLevelItem(0));
         if(item != nullptr)
         {
             items1 << item;
@@ -91,7 +91,7 @@ void CPoiList::sort()
     qSort(items1.begin(), items1.end(), &sortByName<CPoiItem>);
 
     QList<QTreeWidgetItem*> items2;
-    for(CPoiItem * item : qAsConst(items1))
+    for(CPoiItem* item : qAsConst(items1))
     {
         items2 << item;
     }
@@ -100,7 +100,7 @@ void CPoiList::sort()
 
 void CPoiList::slotActivate()
 {
-    CPoiItem * item = dynamic_cast<CPoiItem*>(treeWidget->currentItem());
+    CPoiItem* item = dynamic_cast<CPoiItem*>(treeWidget->currentItem());
     if(nullptr == item)
     {
         return;
@@ -120,11 +120,11 @@ void CPoiList::slotReloadPoi()
     CPoiDraw::setupPoiPath(CPoiDraw::getPoiPaths());
 }
 
-void CPoiList::slotContextMenu(const QPoint &point)
+void CPoiList::slotContextMenu(const QPoint& point)
 {
-    CPoiItem * item = dynamic_cast<CPoiItem*>(treeWidget->currentItem());
+    CPoiItem* item = dynamic_cast<CPoiItem*>(treeWidget->currentItem());
 
-    bool itemIsSelected  = nullptr != item;
+    bool itemIsSelected = nullptr != item;
     bool itemIsActivated = item ? item->isActivated() : false;
 
     actionActivate->setEnabled(itemIsSelected);

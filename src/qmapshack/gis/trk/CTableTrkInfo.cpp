@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CTableTrkInfo::CTableTrkInfo(QWidget *parent)
+CTableTrkInfo::CTableTrkInfo(QWidget* parent)
     : QTreeWidget(parent)
     , INotifyTrk(CGisItemTrk::eVisualTrkTable)
 {
@@ -48,7 +48,7 @@ CTableTrkInfo::~CTableTrkInfo()
     }
 }
 
-void CTableTrkInfo::setTrack(CGisItemTrk * track)
+void CTableTrkInfo::setTrack(CGisItemTrk* track)
 {
     setColumnCount(eColMax);
 
@@ -90,7 +90,7 @@ void CTableTrkInfo::updateData()
             continue;
         }
 
-        QTreeWidgetItem * item = new QTreeWidgetItem();
+        QTreeWidgetItem* item = new QTreeWidgetItem();
         item->setIcon(eColNum, CDraw::number(cnt++, Qt::black));
         item->setText(eColDesc, trkpt.desc);
         item->setFlags(item->flags() | Qt::ItemIsEditable);
@@ -126,7 +126,7 @@ void CTableTrkInfo::slotEdit()
         return;
     }
 
-    QTreeWidgetItem * item = currentItem();
+    QTreeWidgetItem* item = currentItem();
     editItem(item, eColDesc);
 }
 
@@ -148,7 +148,7 @@ void CTableTrkInfo::slotDelete()
 }
 
 
-void CTableTrkInfo::slotItemChanged(QTreeWidgetItem * item, int column)
+void CTableTrkInfo::slotItemChanged(QTreeWidgetItem* item, int column)
 {
     if((trk == nullptr) || (column != eColDesc))
     {
@@ -165,7 +165,7 @@ void CTableTrkInfo::slotItemSelectionChanged()
         return;
     }
 
-    QTreeWidgetItem * item = currentItem();
+    QTreeWidgetItem* item = currentItem();
     if(nullptr != item)
     {
         trk->setMouseFocusByTotalIndex(item->data(eColDesc, Qt::UserRole).toInt(), CGisItemTrk::eFocusMouseMove, "CTableTrk");

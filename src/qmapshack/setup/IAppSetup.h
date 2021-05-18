@@ -27,7 +27,7 @@
 class IAppSetup
 {
 public:
-    static IAppSetup *getPlatformInstance();
+    static IAppSetup* getPlatformInstance();
     virtual void initQMapShack() = 0;
     void initLogHandler();
     void processArguments();
@@ -36,7 +36,7 @@ public:
     virtual QString defaultCachePath() = 0;
     virtual QString userDataPath(QString subdir = 0) = 0;
     virtual QString logDir() = 0;
-    virtual QString findExecutable(const QString &name) = 0;
+    virtual QString findExecutable(const QString& name) = 0;
     virtual QString helpFile() = 0;
 
 protected:

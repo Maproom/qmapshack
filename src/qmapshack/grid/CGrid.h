@@ -31,13 +31,13 @@ class CGrid : public QObject
 {
     Q_OBJECT
 public:
-    CGrid(CMapDraw * map);
+    CGrid(CMapDraw* map);
     virtual ~CGrid();
 
     void saveConfig(QSettings& cfg);
     void loadConfig(QSettings& cfg);
 
-    void draw(QPainter& p, const QRect &rect);
+    void draw(QPainter& p, const QRect& rect);
 
     void setProjAndColor(const QString& projStr, const QColor& c);
 
@@ -50,7 +50,7 @@ private:
     void findGridSpace(qreal min, qreal max, qreal& xSpace, qreal& ySpace);
     bool calcIntersection(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4, qreal& x, qreal& y);
 
-    CMapDraw * map;
+    CMapDraw* map;
 
     CProj proj {"EPSG:4326", "EPSG:4326"};
     QColor color = Qt::magenta;

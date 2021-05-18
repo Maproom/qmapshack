@@ -20,13 +20,13 @@
 
 #include <QtWidgets>
 
-CInputDialog::CInputDialog(QWidget *parent, const QString& text, QVariant& val, const QVariant& reset, const QString &suffix)
+CInputDialog::CInputDialog(QWidget* parent, const QString& text, QVariant& val, const QVariant& reset, const QString& suffix)
     : QDialog(parent)
     , val(val)
     , reset(reset)
 {
     setupUi(this);
-    QPushButton * pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
+    QPushButton* pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
     connect(pushReset, &QPushButton::clicked, this, &CInputDialog::slotReset);
 
     labelSuffix->setText(suffix);

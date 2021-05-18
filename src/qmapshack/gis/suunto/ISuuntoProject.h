@@ -27,7 +27,7 @@ using fTrkPtSetVal = std::function<void(CTrackData::trkpt_t&, qreal)>;
 
 #define NIL ///< this is to silence the MSVC compiler
 #define ASSIGN_VALUE(var, op) \
-    [](CTrackData::trkpt_t &pt, qreal val) \
+    [](CTrackData::trkpt_t& pt, qreal val) \
     { \
         if(val != NOFLOAT) \
         { \
@@ -50,7 +50,7 @@ struct extension_t
 class ISuuntoProject : public IGisProject
 {
 public:
-    ISuuntoProject(type_e type, const QString &filename, CGisListWks *parent);
+    ISuuntoProject(type_e type, const QString& filename, CGisListWks* parent);
 
     struct sample_t
     {
@@ -68,12 +68,12 @@ public:
         }
     };
 
-    static void fillMissingData(const QString &dataField, QList<sample_t> &samplesList);
+    static void fillMissingData(const QString& dataField, QList<sample_t>& samplesList);
 
     static sample_t mergeSamples(QList<sample_t> samples, QList<extension_t> extensions);
-    static void deleteSamplesWithDuplicateTimestamps(QList<sample_t> &samples, QList<extension_t> extensions);
+    static void deleteSamplesWithDuplicateTimestamps(QList<sample_t>& samples, QList<extension_t> extensions);
 
-    static void fillTrackPointsFromSamples(QList<sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, const QList<extension_t> &extensions);
+    static void fillTrackPointsFromSamples(QList<sample_t>& samplesList, QList<QDateTime>& lapsList, CTrackData& trk, const QList<extension_t>& extensions);
 };
 
 

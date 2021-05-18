@@ -21,7 +21,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 
-CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk &trk, QWidget *parent)
+CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {
@@ -36,7 +36,7 @@ void CFilterReplaceElevation::slotApply()
 {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
 
-    CCanvas * canvas = comboView->currentData().value<CCanvas*>();
+    CCanvas* canvas = comboView->currentData().value<CCanvas*>();
     if(canvas != nullptr)
     {
         trk.filterReplaceElevation(canvas);
@@ -51,7 +51,7 @@ void CFilterReplaceElevation::updateUi()
     comboView->clear();
 
     const QList<CCanvas*>& list = CMainWindow::self().getCanvas();
-    for(CCanvas * canvas : list)
+    for(CCanvas* canvas : list)
     {
         comboView->addItem(canvas->objectName(), QVariant::fromValue<CCanvas*>(canvas));
     }

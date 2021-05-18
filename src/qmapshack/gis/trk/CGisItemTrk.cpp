@@ -72,7 +72,7 @@ public:
         clusters.append({number, r});
     }
 
-    static void draw(const QList<cluster>&clusters, QPainter& p, int size)
+    static void draw(const QList<cluster>& clusters, QPainter& p, int size)
     {
         for(const cluster& cluster : clusters)
         {
@@ -105,7 +105,7 @@ private:
     static const QPointF point9[];
 
     static constexpr int MAX_CONST_SIZE = 9;
-    static const QPointF * constellations[MAX_CONST_SIZE];
+    static const QPointF* constellations[MAX_CONST_SIZE];
 };
 
 const QPointF cluster::point1[] = {
@@ -153,7 +153,7 @@ const QPointF cluster::point9[] = {
     {-1, 1}, {0, 1}, {1, 1}
 };
 
-const QPointF * cluster::constellations[MAX_CONST_SIZE] =
+const QPointF* cluster::constellations[MAX_CONST_SIZE] =
 {
     point1, point2, point3, point4, point5, point6, point7, point8, point9
 };
@@ -171,7 +171,7 @@ struct trkwpt_t
 IGisItem::key_t CGisItemTrk::keyUserFocus;
 
 
-CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const CTrackData& srctrk, IGisProject * project)
+CGisItemTrk::CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const CTrackData& srctrk, IGisProject* project)
     : IGisItem(project, eTypeTrk, NOIDX), trk(name, srctrk, idx1, idx2)
 {
     flags = eFlagCreatedInQms;
@@ -181,7 +181,7 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const CT
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
-CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int idx, bool clone)
+CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject* project, int idx, bool clone)
     : IGisItem(project, eTypeTrk, idx)
 {
     // copy track via history
@@ -214,7 +214,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
 }
 
 
-CGisItemTrk::CGisItemTrk(const SGisLine& l, const QString& name, IGisProject * project, int idx)
+CGisItemTrk::CGisItemTrk(const SGisLine& l, const QString& name, IGisProject* project, int idx)
     : IGisItem(project, eTypeTrk, idx)
 {
     trk.name = name;
@@ -227,7 +227,7 @@ CGisItemTrk::CGisItemTrk(const SGisLine& l, const QString& name, IGisProject * p
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
-CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
+CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject* project)
     : IGisItem(project, eTypeTrk, project->childCount())
 {
     // --- start read and process data ----
@@ -241,7 +241,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     checkForInvalidPoints();
 }
 
-CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
+CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject* project)
     : IGisItem(project, eTypeTrk, project->childCount())
 {
     // --- start read and process data ----
@@ -258,7 +258,7 @@ CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
     checkForInvalidPoints();
 }
 
-CGisItemTrk::CGisItemTrk(const history_t& hist, const QString &dbHash, IGisProject * project)
+CGisItemTrk::CGisItemTrk(const history_t& hist, const QString& dbHash, IGisProject* project)
     : IGisItem(project, eTypeTrk, project->childCount())
 {
     history = hist;
@@ -269,13 +269,13 @@ CGisItemTrk::CGisItemTrk(const history_t& hist, const QString &dbHash, IGisProje
     }
 }
 
-CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
+CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject* project)
     : IGisItem(project, eTypeTrk, NOIDX)
 {
     loadFromDb(id, db);
 }
 
-CGisItemTrk::CGisItemTrk(CTrackData& trkdata, IGisProject *project)
+CGisItemTrk::CGisItemTrk(CTrackData& trkdata, IGisProject* project)
     : IGisItem(project, eTypeTrk, NOIDX)
     , trk(std::move(trkdata))
 {
@@ -286,7 +286,7 @@ CGisItemTrk::CGisItemTrk(CTrackData& trkdata, IGisProject *project)
     checkForInvalidPoints();
 }
 
-CGisItemTrk::CGisItemTrk(CFitStream& stream, IGisProject * project)
+CGisItemTrk::CGisItemTrk(CFitStream& stream, IGisProject* project)
     : IGisItem(project, eTypeTrk, project->childCount())
 {
     // --- start read and process data ----
@@ -331,15 +331,15 @@ CGisItemTrk::~CGisItemTrk()
 }
 
 template<typename T>
-static inline bool isInRange(const T &val, const T &rangeStart, const T &rangeEnd)
+static inline bool isInRange(const T& val, const T& rangeStart, const T& rangeEnd)
 {
     return (rangeStart <= val) && (val <= rangeEnd);
 }
 
-IGisItem * CGisItemTrk::createClone()
+IGisItem* CGisItemTrk::createClone()
 {
     int idx = -1;
-    IGisProject * project = getParentProject();
+    IGisProject* project = getParentProject();
     if(project)
     {
         idx = project->indexOfChild(this);
@@ -365,7 +365,7 @@ void CGisItemTrk::setSymbol()
 }
 
 
-void CGisItemTrk::setDataFromPolyline(const SGisLine &l)
+void CGisItemTrk::setDataFromPolyline(const SGisLine& l)
 {
     QMutexLocker lock(&mutexItems);
 
@@ -381,37 +381,37 @@ void CGisItemTrk::setDataFromPolyline(const SGisLine &l)
     changed(tr("Changed trackpoints, sacrificed all previous data."), "://icons/48x48/LineMove.png");
 }
 
-void CGisItemTrk::getPolylineFromData(QPolygonF &l) const
+void CGisItemTrk::getPolylineFromData(QPolygonF& l) const
 {
     QMutexLocker lock(&mutexItems);
     trk.getPolyline(l);
 }
 
-void CGisItemTrk::getPolylineFromData(SGisLine &l) const
+void CGisItemTrk::getPolylineFromData(SGisLine& l) const
 {
     QMutexLocker lock(&mutexItems);
     trk.getPolyline(l);
 }
 
-void CGisItemTrk::getPolylineDegFromData(QPolygonF &l) const
+void CGisItemTrk::getPolylineDegFromData(QPolygonF& l) const
 {
     QMutexLocker lock(&mutexItems);
     trk.getPolylineDeg(l);
 }
 
-void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
+void CGisItemTrk::readTrackDataFromGisLine(const SGisLine& l)
 {
     QMutexLocker lock(&mutexItems);
     trk.readFrom(l);
     deriveSecondaryData();
 }
 
-void CGisItemTrk::registerVisual(INotifyTrk * visual)
+void CGisItemTrk::registerVisual(INotifyTrk* visual)
 {
     registeredVisuals << visual;
 }
 
-void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
+void CGisItemTrk::unregisterVisual(INotifyTrk* visual)
 {
     registeredVisuals.remove(visual);
 }
@@ -467,14 +467,14 @@ QString CGisItemTrk::getInfo(quint32 feature) const
         return feature ? QString("<div><b>%1</b></div>").arg(getName()) : QString("<div></div>");
     }
 
-    bool timeIsValid = (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;
-    bool eleIsValid  = (allValidFlags & CTrackData::trkpt_t::eInvalidEle) == 0;
+    bool timeIsValid = (allValidFlags& CTrackData::trkpt_t::eInvalidTime) == 0;
+    bool eleIsValid = (allValidFlags& CTrackData::trkpt_t::eInvalidEle) == 0;
 
 
     QString str = "<div>";
 
-    qint32 actCnt               = activities.getActivityCount();
-    const QList<trkact_t>& acts  = activities.getAllActivities().toList();
+    qint32 actCnt = activities.getActivityCount();
+    const QList<trkact_t>& acts = activities.getAllActivities().toList();
 
     if(feature & eFeatureShowName)
     {
@@ -500,7 +500,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 
         if(eleIsValid && totalAscent != NOFLOAT && totalDescent != NOFLOAT)
         {
-            IUnit::self().meter2elevation(totalAscent,  val1, unit1);
+            IUnit::self().meter2elevation(totalAscent, val1, unit1);
             IUnit::self().meter2elevation(totalDescent, val2, unit2);
 
             str += tr(", %1%2%3, %4%5%6").arg(QChar(0x2197)).arg(val1, unit1).arg(QChar(0x2198)).arg(val2, unit2);
@@ -642,8 +642,8 @@ QString CGisItemTrk::getInfoRange() const
         return str;
     }
 
-    const CTrackData::trkpt_t *pt1 = mouseRange1;
-    const CTrackData::trkpt_t *pt2 = mouseRange2;
+    const CTrackData::trkpt_t* pt1 = mouseRange1;
+    const CTrackData::trkpt_t* pt2 = mouseRange2;
     if(mouseRange1->idxTotal >= mouseRange2->idxTotal)
     {
         pt1 = mouseRange2;
@@ -658,7 +658,7 @@ QString CGisItemTrk::getInfoRange() const
     }
 
     bool timeIsValid = pt1->time.isValid() && pt2->time.isValid();
-    qreal deltaTime  = pt2->time.toTime_t() - pt1->time.toTime_t();
+    qreal deltaTime = pt2->time.toTime_t() - pt1->time.toTime_t();
 
     const qreal distance = pt2->distance - pt1->distance;
 
@@ -666,10 +666,10 @@ QString CGisItemTrk::getInfoRange() const
     str += QString("%3 %1%2 ").arg(val, unit).arg(QChar(0x21A6));
     if(timeIsValid)
     {
-        quint32 t  = pt2->time.toTime_t() - pt1->time.toTime_t();
-        quint32 hh =  t / 3600;
+        quint32 t = pt2->time.toTime_t() - pt1->time.toTime_t();
+        quint32 hh = t / 3600;
         quint32 mm = (t % 3600) / 60;
-        quint32 ss =  t % 60;
+        quint32 ss = t % 60;
 
         str += QString("%4 %1:%2:%3").arg(hh, 2, 10, QChar('0')).arg(mm, 2, 10, QChar('0')).arg(ss, 2, 10, QChar('0')).arg(QChar(0x231a));
 
@@ -678,10 +678,10 @@ QString CGisItemTrk::getInfoRange() const
     }
     str += "\n";
 
-    qreal deltaAscent  = pt2->ascent  - pt1->ascent;
+    qreal deltaAscent = pt2->ascent - pt1->ascent;
     qreal deltaDescent = pt2->descent - pt1->descent;
 
-    tmp    = qAtan(deltaAscent / distance);
+    tmp = qAtan(deltaAscent / distance);
     slope1 = qAbs(tmp * 360.0 / (2 * M_PI));
     QString val2, unit2;
     IUnit::self().slope2string(slope1, val2, unit2);
@@ -696,7 +696,7 @@ QString CGisItemTrk::getInfoRange() const
     }
     str += "\n";
 
-    tmp    = qAtan(deltaDescent / distance);
+    tmp = qAtan(deltaDescent / distance);
     slope1 = qAbs(tmp * 360.0 / (2 * M_PI));
     IUnit::self().slope2string(slope1, val2, unit2);
 
@@ -753,9 +753,9 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
         keys = keys.mid(0, 10);
     }
 
-    for(const QString &key : qAsConst(keys))
+    for(const QString& key : qAsConst(keys))
     {
-        const CKnownExtension &ext = CKnownExtension::get(key);
+        const CKnownExtension& ext = CKnownExtension::get(key);
         if(ext.known)
         {
             str += "\n" + ext.nameLongText + ": " + QString("%1%2").arg(ext.valueFunc(pt) * ext.factor, 0, 'f', 1).arg(ext.unit);
@@ -869,11 +869,11 @@ QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& trkpt1, const CTrac
 
 qint32 CGisItemTrk::getElevation(qint32 idx) const
 {
-    const CTrackData::trkpt_t *trkpt = trk.getTrkPtByTotalIndex(idx);
+    const CTrackData::trkpt_t* trkpt = trk.getTrkPtByTotalIndex(idx);
     return trkpt != nullptr ? trkpt->ele : NOINT;
 }
 
-IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
+IScrOpt* CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse* mouse)
 {
     if(scrOpt.isNull())
     {
@@ -882,12 +882,12 @@ IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
     return scrOpt;
 }
 
-static qint32 getIdxPointCloseBy(const QPoint &pos, const QPolygonF &line)
+static qint32 getIdxPointCloseBy(const QPoint& pos, const QPolygonF& line)
 {
-    qint32 idx     = 0;
+    qint32 idx = 0;
     qint32 bestIdx = NOIDX;
     qint32 bestDst = NOINT;
-    for(const QPointF &pt : line)
+    for(const QPointF& pt : line)
     {
         int dst = (pos - pt).manhattanLength();
         if(dst < bestDst)
@@ -917,7 +917,7 @@ bool CGisItemTrk::isRangeSelected() const
     return mouseRange1 != mouseRange2;
 }
 
-static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val, const QPointF& pos)
+static inline void updateExtrema(CGisItemTrk::limits_t& extrema, qreal val, const QPointF& pos)
 {
     if(NOFLOAT != val)
     {
@@ -938,7 +938,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
     existingExtensions = QSet<QString>();
     QSet<QString> nonRealExtensions;
 
-    for(const CTrackData::trkpt_t &pt : trk)
+    for(const CTrackData::trkpt_t& pt : trk)
     {
         if(pt.isHidden())
         {
@@ -949,7 +949,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
         existingExtensions.unite(keys.toSet());
 
         const QPointF& pos = {pt.lon, pt.lat};
-        for(const QString &key : keys)
+        for(const QString& key : keys)
         {
             bool isReal = false;
             qreal val = pt.extensions.value(key).toReal(&isReal);
@@ -969,9 +969,9 @@ void CGisItemTrk::updateExtremaAndExtensions()
             }
         }
 
-        updateExtrema(extremaSpeed,    pt.speed, pos);
-        updateExtrema(extremaEle,      pt.ele, pos);
-        updateExtrema(extremaSlope,    pt.slope1, pos);
+        updateExtrema(extremaSpeed, pt.speed, pos);
+        updateExtrema(extremaEle, pt.ele, pos);
+        updateExtrema(extremaSlope, pt.slope1, pos);
         updateExtrema(extremaProgress, pt.distance, pos);
     }
 
@@ -1007,7 +1007,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
 void CGisItemTrk::resetInternalData()
 {
     mouseClickFocus = nullptr;
-    mouseMoveFocus  = nullptr;
+    mouseMoveFocus = nullptr;
     resetMouseRange();
 
     delete dlgDetails;
@@ -1041,7 +1041,7 @@ void CGisItemTrk::verifyTrkPt(CTrackData::trkpt_t*& last, CTrackData::trkpt_t& t
 
 void CGisItemTrk::consolidatePoints()
 {
-    for(CTrackData::trkseg_t &seg : trk.segs)
+    for(CTrackData::trkseg_t& seg : trk.segs)
     {
         if(seg.pts.empty())
         {
@@ -1058,21 +1058,21 @@ void CGisItemTrk::deriveSecondaryData()
     consolidatePoints();
 
     qreal north = -90;
-    qreal east  = -180;
-    qreal south =  90;
-    qreal west  =  180;
+    qreal east = -180;
+    qreal south = 90;
+    qreal west = 180;
 
     // reset all secondary data
-    allValidFlags             = 0;
-    cntInvalidPoints          = 0;
-    cntTotalPoints            = 0;
-    cntVisiblePoints          = 0;
-    timeStart                 = QDateTime();
-    timeEnd                   = QDateTime();
-    totalDistance             = NOFLOAT;
-    totalAscent               = NOFLOAT;
-    totalDescent              = NOFLOAT;
-    totalElapsedSeconds       = NOTIME;
+    allValidFlags = 0;
+    cntInvalidPoints = 0;
+    cntTotalPoints = 0;
+    cntVisiblePoints = 0;
+    timeStart = QDateTime();
+    timeEnd = QDateTime();
+    totalDistance = NOFLOAT;
+    totalAscent = NOFLOAT;
+    totalDescent = NOFLOAT;
+    totalElapsedSeconds = NOTIME;
     totalElapsedSecondsMoving = NOTIME;
 
     trk.removeEmptySegments();
@@ -1085,10 +1085,10 @@ void CGisItemTrk::deriveSecondaryData()
 
     activities.updateFlags();
 
-    CTrackData::trkpt_t * lastValid  = nullptr;
-    CTrackData::trkpt_t * lastTrkpt  = nullptr;
+    CTrackData::trkpt_t* lastValid = nullptr;
+    CTrackData::trkpt_t* lastTrkpt = nullptr;
     qreal timestampStart = NOFLOAT;
-    qint32 lastEle       = NOINT;
+    qint32 lastEle = NOINT;
 
 
     // linear list of pointers to visible track points
@@ -1108,23 +1108,23 @@ void CGisItemTrk::deriveSecondaryData()
         trkpt.idxVisible = cntVisiblePoints++;
         lintrk << &trkpt;
 
-        west  = qMin(west,  trkpt.lon);
-        east  = qMax(east,  trkpt.lon);
+        west = qMin(west, trkpt.lon);
+        east = qMax(east, trkpt.lon);
         south = qMin(south, trkpt.lat);
         north = qMax(north, trkpt.lat);
 
         if(lastTrkpt != nullptr)
         {
-            trkpt.deltaDistance  = lastTrkpt->distanceTo(trkpt);
-            trkpt.distance       = lastTrkpt->distance + trkpt.deltaDistance;
+            trkpt.deltaDistance = lastTrkpt->distanceTo(trkpt);
+            trkpt.distance = lastTrkpt->distance + trkpt.deltaDistance;
             trkpt.elapsedSeconds = trkpt.time.toMSecsSinceEpoch() / 1000.0 - timestampStart;
 
             // ascent descent
             if(lastEle != NOINT)
             {
-                qint32 delta  = trkpt.ele - lastEle;
+                qint32 delta = trkpt.ele - lastEle;
 
-                trkpt.ascent  = lastTrkpt->ascent;
+                trkpt.ascent = lastTrkpt->ascent;
                 trkpt.descent = lastTrkpt->descent;
 
                 if(qAbs(delta) >= ASCENT_THRESHOLD)
@@ -1133,7 +1133,7 @@ void CGisItemTrk::deriveSecondaryData()
 
                     if(delta > 0)
                     {
-                        trkpt.ascent  += step;
+                        trkpt.ascent += step;
                     }
                     else
                     {
@@ -1153,15 +1153,15 @@ void CGisItemTrk::deriveSecondaryData()
         }
         else
         {
-            timeStart      = trkpt.time;
+            timeStart = trkpt.time;
             timestampStart = timeStart.toMSecsSinceEpoch() / 1000.0;
-            lastEle        = trkpt.ele;
+            lastEle = trkpt.ele;
 
-            trkpt.deltaDistance        = 0;
-            trkpt.distance             = 0;
-            trkpt.ascent               = 0;
-            trkpt.descent              = 0;
-            trkpt.elapsedSeconds       = 0;
+            trkpt.deltaDistance = 0;
+            trkpt.distance = 0;
+            trkpt.ascent = 0;
+            trkpt.descent = 0;
+            trkpt.elapsedSeconds = 0;
             trkpt.elapsedSecondsMoving = 0;
         }
 
@@ -1179,7 +1179,7 @@ void CGisItemTrk::deriveSecondaryData()
         qreal t1 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
         for(int n = p; n > 0; --n)
         {
-            CTrackData::trkpt_t & trkpt2 = *lintrk[n];
+            CTrackData::trkpt_t& trkpt2 = *lintrk[n];
             if(trkpt2.ele == NOINT)
             {
                 continue;
@@ -1199,7 +1199,7 @@ void CGisItemTrk::deriveSecondaryData()
         qreal t2 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
         for(int n = p; n < lintrk.size(); ++n)
         {
-            CTrackData::trkpt_t & trkpt2 = *lintrk[n];
+            CTrackData::trkpt_t& trkpt2 = *lintrk[n];
             if(trkpt2.ele == NOINT)
             {
                 continue;
@@ -1216,7 +1216,7 @@ void CGisItemTrk::deriveSecondaryData()
 
         if(d1 < d2)
         {
-            qreal a      = qAtan((e2 - e1) / (d2 - d1));
+            qreal a = qAtan((e2 - e1) / (d2 - d1));
             trkpt.slope1 = a * 360.0 / (2 * M_PI);
             trkpt.slope2 = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
         }
@@ -1247,11 +1247,11 @@ void CGisItemTrk::deriveSecondaryData()
 
     if(nullptr != lastTrkpt)
     {
-        timeEnd                   = lastTrkpt->time;
-        totalDistance             = lastTrkpt->distance;
-        totalAscent               = lastTrkpt->ascent;
-        totalDescent              = lastTrkpt->descent;
-        totalElapsedSeconds       = lastTrkpt->elapsedSeconds;
+        timeEnd = lastTrkpt->time;
+        totalDistance = lastTrkpt->distance;
+        totalAscent = lastTrkpt->ascent;
+        totalDescent = lastTrkpt->descent;
+        totalElapsedSeconds = lastTrkpt->elapsedSeconds;
         totalElapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
     }
 
@@ -1287,7 +1287,7 @@ void CGisItemTrk::deriveSecondaryData()
 
 void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& current)
 {
-    IGisProject * project = getParentProject();
+    IGisProject* project = getParentProject();
     if(nullptr == project)
     {
         return;
@@ -1307,7 +1307,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
     for(CTrackData::trkpt_t& pt : trk)
     {
         pt.keyWpt.clear();
-        pointDP dp(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD, 0);
+        pointDP dp(pt.lon* DEG_TO_RAD, pt.lat* DEG_TO_RAD, 0);
         dp.idx = pt.idxTotal;
 
         north = qMax(north, dp.y);
@@ -1331,7 +1331,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
     QList<trkwpt_t> trkwpts;
     for(int i = 0; i < project->childCount(); i++)
     {
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->child(i));
+        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(project->child(i));
         if(wpt == nullptr)
         {
             continue;
@@ -1348,10 +1348,10 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         qreal d = GPS_Math_Distance(pt0.x, pt0.y, pos.x() * DEG_TO_RAD, pos.y() * DEG_TO_RAD, a1, a2);
 
         trkwpt_t trkwpt;
-        trkwpt.x    = qCos(a1 * DEG_TO_RAD) * d;
-        trkwpt.y    = qSin(a1 * DEG_TO_RAD) * d;
+        trkwpt.x = qCos(a1 * DEG_TO_RAD) * d;
+        trkwpt.y = qSin(a1 * DEG_TO_RAD) * d;
         trkwpt.name = wpt->getName();
-        trkwpt.key  = wpt->getKey();
+        trkwpt.key = wpt->getKey();
 
         trkwpts << trkwpt;
     }
@@ -1368,12 +1368,12 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
     bool doDeriveData = false;
     numberOfAttachedWpt = 0;
-    for(const trkwpt_t &trkwpt : qAsConst(trkwpts))
+    for(const trkwpt_t& trkwpt : qAsConst(trkwpts))
     {
-        qreal minD   = WPT_FOCUS_DIST_IN;
+        qreal minD = WPT_FOCUS_DIST_IN;
         qint32 index = NOIDX;
 
-        for(const pointDP &pt : qAsConst(line))
+        for(const pointDP& pt : qAsConst(line))
         {
             ++current;
             qreal d = (trkwpt.x - pt.x) * (trkwpt.x - pt.x) + (trkwpt.y - pt.y) * (trkwpt.y - pt.y);
@@ -1383,12 +1383,12 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
                 if(d < minD)
                 {
                     index = pt.idx;
-                    minD  = d;
+                    minD = d;
                 }
             }
             else if(withDoubles && (d > WPT_FOCUS_DIST_OUT))
             {
-                CTrackData::trkpt_t * trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByTotalIndex(index));
+                CTrackData::trkpt_t* trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByTotalIndex(index));
                 if(trkpt)
                 {
                     ++numberOfAttachedWpt;
@@ -1401,7 +1401,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
                 }
 
                 index = NOIDX;
-                minD  = WPT_FOCUS_DIST_IN;
+                minD = WPT_FOCUS_DIST_IN;
             }
 
             if(current - lastCurrent > 100)
@@ -1413,7 +1413,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
         if(index != NOIDX)
         {
-            CTrackData::trkpt_t * trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByTotalIndex(index));
+            CTrackData::trkpt_t* trkpt = const_cast<CTrackData::trkpt_t*>(trk.getTrkPtByTotalIndex(index));
             if(trkpt)
             {
                 ++numberOfAttachedWpt;
@@ -1491,9 +1491,9 @@ bool CGisItemTrk::cut()
 
     mouseMoveFocus = nullptr;
 
-    qint32 idxMouse             = mouseClickFocus->idxTotal;
-    CCutTrk::mode_e mode        = dlg.getMode();
-    CCutTrk::cutmode_e cutMode  = dlg.getCutMode();
+    qint32 idxMouse = mouseClickFocus->idxTotal;
+    CCutTrk::mode_e mode = dlg.getMode();
+    CCutTrk::cutmode_e cutMode = dlg.getCutMode();
 
     // if the cut action results into cloning a track, the calling method should
     // ask if the original track should be removed. As a track can't delete itself
@@ -1506,14 +1506,14 @@ bool CGisItemTrk::cut()
         // clone first part?
         if((mode & (CCutTrk::eModeKeepBoth | CCutTrk::eModeKeepFirst)) != 0)
         {
-            int idx = cutMode == CCutTrk::eCutMode1 ? idxMouse  - 1 : idxMouse;
+            int idx = cutMode == CCutTrk::eCutMode1 ? idxMouse - 1 : idxMouse;
             if(idx < 0)
             {
                 idx = 0;
             }
 
             QString name = getName() + QString(" (%1 - %2)").arg(0).arg(idx);
-            IGisProject *project = nullptr;
+            IGisProject* project = nullptr;
             if(!getNameAndProject(name, project, tr("track")))
             {
                 return false;
@@ -1526,7 +1526,7 @@ bool CGisItemTrk::cut()
         if((mode & (CCutTrk::eModeKeepBoth | CCutTrk::eModeKeepSecond)) != 0)
         {
             QString name = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints - 1);
-            IGisProject *project = nullptr;
+            IGisProject* project = nullptr;
             if(!getNameAndProject(name, project, tr("track")))
             {
                 return false;
@@ -1540,8 +1540,8 @@ bool CGisItemTrk::cut()
         // if the result is not a clone, the track's list of segments and trackpoints
         // has to be reduced. This is done by copying points into a new trackpoint list
         // that replaces the original one.
-        int removeStart = ((mode & CCutTrk::eModeKeepFirst) != 0) ? idxMouse + 1   : 0;
-        int removeEnd   = ((mode & CCutTrk::eModeKeepFirst) != 0) ? cntTotalPoints : idxMouse - 1;
+        int removeStart = ((mode& CCutTrk::eModeKeepFirst) != 0) ? idxMouse + 1   : 0;
+        int removeEnd = ((mode& CCutTrk::eModeKeepFirst) != 0) ? cntTotalPoints : idxMouse - 1;
 
         for(CTrackData::trkseg_t& seg : trk.segs)
         {
@@ -1556,7 +1556,7 @@ bool CGisItemTrk::cut()
                 seg.pts.clear();
             }
             else if( isInRange(removeStart, seg.pts.first().idxTotal, seg.pts.last().idxTotal)
-                     || isInRange(removeEnd,   seg.pts.first().idxTotal, seg.pts.last().idxTotal) )
+                     || isInRange(removeEnd, seg.pts.first().idxTotal, seg.pts.last().idxTotal) )
             {
                 QVector<CTrackData::trkpt_t> pts;
 
@@ -1625,14 +1625,14 @@ bool CGisItemTrk::delTrkPtDesc(const QList<int>& idxTotal)
 void CGisItemTrk::reverse()
 {
     QString name = getName() + "_rev";
-    IGisProject *project = nullptr;
+    IGisProject* project = nullptr;
     if(!getNameAndProject(name, project, tr("track")))
     {
         return;
     }
 
     // start with a 1:1 copy of the first track
-    CGisItemTrk * trk1 = new CGisItemTrk(*this, project, NOIDX, false);
+    CGisItemTrk* trk1 = new CGisItemTrk(*this, project, NOIDX, false);
     trk1->trk.name = name;
     /*
         clear track data, item key and history. To clear the history is important as
@@ -1643,13 +1643,13 @@ void CGisItemTrk::reverse()
     trk1->key.clear();
     trk1->history.events.clear();
 
-    for(const CTrackData::trkseg_t &seg : qAsConst(trk.segs))
+    for(const CTrackData::trkseg_t& seg : qAsConst(trk.segs))
     {
         CTrackData::trkseg_t seg1;
-        for(const CTrackData::trkpt_t &pt : seg.pts)
+        for(const CTrackData::trkpt_t& pt : seg.pts)
         {
             CTrackData::trkpt_t pt1 = pt;
-            pt1.time    = QDateTime();
+            pt1.time = QDateTime();
 
             seg1.pts.push_front(pt1);
         }
@@ -1669,14 +1669,14 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keys)
     }
 
     QString name = getName() + " & other";
-    IGisProject *projectNew = nullptr;
+    IGisProject* projectNew = nullptr;
     if(!getNameAndProject(name, projectNew, tr("track")))
     {
         return;
     }
 
     // start with a 1:1 copy of the first track
-    CGisItemTrk * trk1 = new CGisItemTrk(*this, projectNew, NOIDX, false);
+    CGisItemTrk* trk1 = new CGisItemTrk(*this, projectNew, NOIDX, false);
     // replace name
     trk1->trk.name = name;
 
@@ -1691,9 +1691,9 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keys)
 
     // copy the segments of all tracks to new track
     CGisWorkspace& gis = CGisWorkspace::self();
-    for(const IGisItem::key_t &key : keys)
+    for(const IGisItem::key_t& key : keys)
     {
-        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
+        CGisItemTrk* trk2 = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
         if(nullptr == trk2)
         {
             continue;
@@ -1796,7 +1796,7 @@ void CGisItemTrk::deleteSelectedPoints()
     for(CTrackData::trkseg_t& seg : trk.segs)
     {
         QVector<CTrackData::trkpt_t> pts;
-        for(const CTrackData::trkpt_t &pt : qAsConst(seg.pts))
+        for(const CTrackData::trkpt_t& pt : qAsConst(seg.pts))
         {
             if(idx1 < pt.idxTotal && pt.idxTotal < idx2)
             {
@@ -1862,7 +1862,7 @@ void CGisItemTrk::copySelectedPoints() const
     }
 
     QString name = getName() + QString(" (%1 - %2)").arg(idx1).arg(idx2);
-    IGisProject *project = nullptr;
+    IGisProject* project = nullptr;
     if(!getNameAndProject(name, project, tr("track")))
     {
         return;
@@ -1871,7 +1871,7 @@ void CGisItemTrk::copySelectedPoints() const
     new CGisItemTrk(name, idx1, idx2, trk, project);
 }
 
-void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
+void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis)
 {
     QMutexLocker lock(&mutexItems);
 
@@ -1898,7 +1898,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     if(mode == eModeNormal)
     {
         // in normal mode the trackline without points marked as deleted is drawn
-        for(const CTrackData::trkpt_t &pt : trk)
+        for(const CTrackData::trkpt_t& pt : trk)
         {
             if(pt.isHidden())
             {
@@ -1916,7 +1916,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         // in full mode the complete track including points marked as deleted
         // is drawn as gray line first. Then the track without points marked as
         // deleted is drawn with it's configured color
-        for(const CTrackData::trkpt_t &pt : trk)
+        for(const CTrackData::trkpt_t& pt : trk)
         {
             pt1.setX(pt.lon);
             pt1.setY(pt.lat);
@@ -1943,15 +1943,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
         p.setPen(QPen(Qt::lightGray, penWidthBg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
-        for(const QPolygonF &l : qAsConst(lines))
+        for(const QPolygonF& l : qAsConst(lines))
         {
             p.drawPolyline(l);
         }
 
         QPixmap bullet("://icons/8x8/bullet_dark_gray.png");
-        for(const QPolygonF &l : qAsConst(lines))
+        for(const QPolygonF& l : qAsConst(lines))
         {
-            for(const QPointF &pt : l)
+            for(const QPointF& pt : l)
             {
                 p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
             }
@@ -1967,7 +1967,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     if(key == keyUserFocus && w.isShowTrackHighlight())
     {
         p.setPen(QPen(Qt::red, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        for(const QPolygonF &l : qAsConst(lines))
+        for(const QPolygonF& l : qAsConst(lines))
         {
             p.drawPolyline(l);
         }
@@ -1975,7 +1975,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     p.setBrush(color);
     p.setPen(penBackground);
-    for(const QPolygonF &l : qAsConst(lines))
+    for(const QPolygonF& l : qAsConst(lines))
     {
         p.drawPolyline(l);
         const QRectF& bounding = l.boundingRect();
@@ -1991,7 +1991,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         // use the track's ordinary color
         penForeground.setColor(color);
         p.setPen(penForeground);
-        for(const QPolygonF &l : qAsConst(lines))
+        for(const QPolygonF& l : qAsConst(lines))
         {
             p.drawPolyline(l);
         }
@@ -2007,7 +2007,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     if (isNogo())
     {
-        for(const QPolygonF &l : qAsConst(lines))
+        for(const QPolygonF& l : qAsConst(lines))
         {
             CDraw::nogos(l, extViewport, p, 80);
         }
@@ -2044,14 +2044,14 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     // draw info points
     if(w.isShowTrackInfoPoints() && !skipDecorations)
     {
-        const QFont& f  = w.getMapFont();
+        const QFont& f = w.getMapFont();
         const int pointSize = f.pointSize();
         const int size = (pointSize + (f.bold() ? 3 : 2)) * 2;
         p.setFont(f);
 
         quint32 cnt = 1;
         QList<cluster> clusters;
-        for(const CTrackData::trkpt_t &trkpt : trk)
+        for(const CTrackData::trkpt_t& trkpt : trk)
         {
             if(trkpt.desc.isEmpty() || trkpt.isHidden())
             {
@@ -2079,8 +2079,8 @@ void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const
     rect.moveBottomLeft(pos.toPoint() + QPoint(10, -10));
     rect.adjust(-4, -2, 4, 2);
 
-    qint32 baseWidth    = 10;
-    qint32 basePos      = 10;
+    qint32 baseWidth = 10;
+    qint32 basePos = 10;
 
 
     if(CDraw::doesOverlap(blockedAreas, rect))
@@ -2123,11 +2123,11 @@ void CGisItemTrk::drawColorizedByActivity(QPainter& p) const
     pen.setWidth(penWidthFg);
     pen.setCapStyle(Qt::RoundCap);
 
-    for(const CTrackData::trkseg_t &segment : trk.segs)
+    for(const CTrackData::trkseg_t& segment : trk.segs)
     {
-        const CTrackData::trkpt_t *ptPrev = nullptr;
+        const CTrackData::trkpt_t* ptPrev = nullptr;
 
-        for(const CTrackData::trkpt_t &pt : segment.pts)
+        for(const CTrackData::trkpt_t& pt : segment.pts)
         {
             if(pt.isHidden())
             {
@@ -2152,7 +2152,7 @@ void CGisItemTrk::drawColorizedByActivity(QPainter& p) const
     }
 }
 
-void CGisItemTrk::drawColorized(QPainter &p) const
+void CGisItemTrk::drawColorized(QPainter& p) const
 {
     auto valueFunc = CKnownExtension::get(getColorizeSource()).valueFunc;
 
@@ -2160,20 +2160,20 @@ void CGisItemTrk::drawColorized(QPainter &p) const
     QPainter colorsPainter(&colors);
 
     QLinearGradient colorsGradient(colors.rect().topLeft(), colors.rect().bottomLeft());
-    colorsGradient.setColorAt(1.0, QColor(  0,   0, 255)); // blue
-    colorsGradient.setColorAt(0.6, QColor(  0, 255,   0)); // green
-    colorsGradient.setColorAt(0.4, QColor(255, 255,   0)); // yellow
-    colorsGradient.setColorAt(0.0, QColor(255,   0,   0)); // red
+    colorsGradient.setColorAt(1.0, QColor(  0, 0, 255));   // blue
+    colorsGradient.setColorAt(0.6, QColor(  0, 255, 0));   // green
+    colorsGradient.setColorAt(0.4, QColor(255, 255, 0));   // yellow
+    colorsGradient.setColorAt(0.0, QColor(255, 0, 0));     // red
     colorsPainter.fillRect(colors.rect(), colorsGradient);
 
     const qreal factor = CKnownExtension::get(getColorizeSource()).factor;
 
-    for(const CTrackData::trkseg_t &segment : trk.segs)
+    for(const CTrackData::trkseg_t& segment : trk.segs)
     {
-        const CTrackData::trkpt_t *ptPrev = nullptr;
+        const CTrackData::trkpt_t* ptPrev = nullptr;
         QColor colorStart;
 
-        for(const CTrackData::trkpt_t &pt : segment.pts)
+        for(const CTrackData::trkpt_t& pt : segment.pts)
         {
             if(pt.isHidden())
             {
@@ -2188,7 +2188,7 @@ void CGisItemTrk::drawColorized(QPainter &p) const
             float colorAt = ( factor * valueFunc(pt) - getColorizeLimitLow() ) / (getColorizeLimitHigh() - getColorizeLimitLow());
             colorAt = qMin(qMax(colorAt, 0.f), 1.f);
 
-            const QColor &colorEnd = colors.pixel(0, ((1.f - colorAt) * 255.f));
+            const QColor& colorEnd = colors.pixel(0, ((1.f - colorAt) * 255.f));
             if(!colorStart.isValid())
             {
                 colorStart = colorEnd;
@@ -2245,7 +2245,7 @@ QStringList CGisItemTrk::getExistingDataSources() const
     QStringList known;
     QStringList unknown;
 
-    for(const QString &key : existingExtensions)
+    for(const QString& key : existingExtensions)
     {
         if(CKnownExtension::isKnown(key))
         {
@@ -2257,12 +2257,12 @@ QStringList CGisItemTrk::getExistingDataSources() const
         }
     }
 
-    auto stringSort = [] (const QString &s1, const QString &s2)
+    auto stringSort = [] (const QString& s1, const QString& s2)
                       {
                           return s1.toLower() < s2.toLower();
                       };
 
-    qSort(known.begin(),   known.end(),   stringSort);
+    qSort(known.begin(), known.end(), stringSort);
     qSort(unknown.begin(), unknown.end(), stringSort);
 
     return known + unknown;
@@ -2295,7 +2295,7 @@ QString CGisItemTrk::getColorizeUnit() const
 }
 
 
-void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis)
 {
     QMutexLocker lock(&mutexItems);
 
@@ -2345,7 +2345,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         }
 
         // create info box
-        int w = rectText.width()  + 5 + 5;
+        int w = rectText.width() + 5 + 5;
         int h = rectText.height() + 5 + (fm.height() + 8);
         if(totalElapsedSeconds != 0)
         {
@@ -2490,7 +2490,7 @@ void CGisItemTrk::drawHighlight(QPainter& p)
 
     p.setPen(QPen(QColor(255, 0, 0, 100), penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
-    for(const QPolygonF &line : qAsConst(lines))
+    for(const QPolygonF& line : qAsConst(lines))
     {
         p.drawPolyline(line);
     }
@@ -2598,7 +2598,7 @@ void CGisItemTrk::setLinks(const QList<link_t>& links)
 
 void CGisItemTrk::setElevation(qint32 idx, qint32 ele)
 {
-    CTrackData::trkpt_t * trkpt = trk.getTrkPtByTotalIndex(idx);
+    CTrackData::trkpt_t* trkpt = trk.getTrkPtByTotalIndex(idx);
     if((trkpt != nullptr) && (trkpt->ele != ele))
     {
         trkpt->ele = ele;
@@ -2625,7 +2625,7 @@ void CGisItemTrk::setActivity(trkact_t act)
 
     deriveSecondaryData();
 
-    const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(act);
+    const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(act);
     changed(tr("Changed activity to '%1' for complete track.").arg(desc.name), desc.iconLarge);
 }
 
@@ -2636,7 +2636,7 @@ void CGisItemTrk::setActivityRange(trkact_t act)
         return;
     }
 
-    const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(act);
+    const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(act);
 
     // read start/stop indices
     qint32 idx1, idx2;
@@ -2675,7 +2675,7 @@ void CGisItemTrk::setColor(const QColor& c)
         }
     }
 
-    color  = colorMap[colorIdx].color;
+    color = colorMap[colorIdx].color;
     bullet = QPixmap(colorMap[colorIdx].bullet);
 
     setIcon(color2str(color));
@@ -2692,9 +2692,9 @@ void CGisItemTrk::setIcon(const QString& iconColor)
     IGisItem::setIcon(mask.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
-bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString &owner)
+bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString& owner)
 {
-    const CTrackData::trkpt_t * newPointOfFocus = nullptr;
+    const CTrackData::trkpt_t* newPointOfFocus = nullptr;
 
     if(dist != NOFLOAT)
     {
@@ -2702,7 +2702,7 @@ bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const Q
 
         /// @todo: optimize search by single out segment and then do a binary search
 
-        for(const CTrackData::trkpt_t &pt : trk)
+        for(const CTrackData::trkpt_t& pt : trk)
         {
             if(pt.isHidden())
             {
@@ -2725,9 +2725,9 @@ bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const Q
     return publishMouseFocus(newPointOfFocus, fmode, owner);
 }
 
-bool CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, const QString &owner)
+bool CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, const QString& owner)
 {
-    const CTrackData::trkpt_t * newPointOfFocus = nullptr;
+    const CTrackData::trkpt_t* newPointOfFocus = nullptr;
 
     if(time != NOTIME)
     {
@@ -2735,7 +2735,7 @@ bool CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, const QSt
 
         qreal delta = totalElapsedSeconds;
 
-        for(const CTrackData::trkpt_t &pt : trk)
+        for(const CTrackData::trkpt_t& pt : trk)
         {
             if(pt.isHidden())
             {
@@ -2758,11 +2758,11 @@ bool CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, const QSt
     return publishMouseFocus(newPointOfFocus, fmode, owner);
 }
 
-QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner)
+QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString& owner)
 {
     QMutexLocker lock(&mutexItems);
 
-    const CTrackData::trkpt_t * newPointOfFocus = nullptr;
+    const CTrackData::trkpt_t* newPointOfFocus = nullptr;
     quint32 idx = 0;
 
     const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
@@ -2795,9 +2795,9 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 }
 
 
-bool CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const QString &owner)
+bool CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const QString& owner)
 {
-    const CTrackData::trkpt_t *newPointOfFocus = trk.getTrkPtByTotalIndex(idx);
+    const CTrackData::trkpt_t* newPointOfFocus = trk.getTrkPtByTotalIndex(idx);
     if(nullptr != newPointOfFocus)
     {
         return publishMouseFocus(newPointOfFocus, fmode, owner);
@@ -2826,7 +2826,7 @@ bool CGisItemTrk::incMouseRangeBegin(qint32 i, const QString& owner)
     {
         return false;
     }
-    const CTrackData::trkpt_t * &pt = mouseRange1->idxTotal < mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    const CTrackData::trkpt_t*& pt = mouseRange1->idxTotal < mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
     return moveMouseFocus(pt, qMin(cntTotalPoints - 1, pt->idxTotal + i), owner);
 }
 
@@ -2836,7 +2836,7 @@ bool CGisItemTrk::decMouseRangeBegin(qint32 i, const QString& owner)
     {
         return false;
     }
-    const CTrackData::trkpt_t * &pt = mouseRange1->idxTotal < mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    const CTrackData::trkpt_t*& pt = mouseRange1->idxTotal < mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
     return moveMouseFocus(pt, qMax(0, pt->idxTotal - i), owner);
 }
 
@@ -2847,7 +2847,7 @@ bool CGisItemTrk::incMouseRangeEnd(qint32 i, const QString& owner)
         return false;
     }
 
-    const CTrackData::trkpt_t * &pt = mouseRange1->idxTotal > mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    const CTrackData::trkpt_t*& pt = mouseRange1->idxTotal > mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
     return moveMouseFocus(pt, qMin(cntTotalPoints - 1, pt->idxTotal + i), owner);
 }
 
@@ -2857,11 +2857,11 @@ bool CGisItemTrk::decMouseRangeEnd(qint32 i, const QString& owner)
     {
         return false;
     }
-    const CTrackData::trkpt_t * &pt = mouseRange1->idxTotal > mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    const CTrackData::trkpt_t*& pt = mouseRange1->idxTotal > mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
     return moveMouseFocus(pt, qMax(0, pt->idxTotal - i), owner);
 }
 
-bool CGisItemTrk::moveMouseFocus(const CTrackData::trkpt_t * &pt, qint32 idxNext, const QString& owner)
+bool CGisItemTrk::moveMouseFocus(const CTrackData::trkpt_t*& pt, qint32 idxNext, const QString& owner)
 {
     if(mode != eModeRange || mouseFocusOwner != owner)
     {
@@ -2885,7 +2885,7 @@ bool CGisItemTrk::newMouseRangeBegin(const QString& owner)
         return false;
     }
 
-    const CTrackData::trkpt_t * pt = mouseRange1->idxTotal < mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    const CTrackData::trkpt_t* pt = mouseRange1->idxTotal < mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
     mouseRange1 = pt;
     mouseRange2 = pt;
     rangeState = eRangeStateClicked2nd;
@@ -2901,7 +2901,7 @@ bool CGisItemTrk::newMouseRangeEnd(const QString& owner)
         return false;
     }
 
-    const CTrackData::trkpt_t * pt = mouseRange1->idxTotal > mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
+    const CTrackData::trkpt_t* pt = mouseRange1->idxTotal > mouseRange2->idxTotal ? mouseRange1 : mouseRange2;
     mouseRange1 = pt;
     mouseRange2 = pt;
     rangeState = eRangeStateClicked2nd;
@@ -2916,12 +2916,12 @@ void CGisItemTrk::resetMouseRange()
     mouseMoveFocus = nullptr;
     mouseRange1 = nullptr;
     mouseRange2 = nullptr;
-    rangeState  = eRangeStateIdle;
+    rangeState = eRangeStateIdle;
     setMouseFocusVisuals(nullptr);
     setMouseRangeFocusVisuals(nullptr, nullptr);
 }
 
-bool CGisItemTrk::publishMouseFocus(const CTrackData::trkpt_t * pt, focusmode_e fmode, const QString& owner)
+bool CGisItemTrk::publishMouseFocus(const CTrackData::trkpt_t* pt, focusmode_e fmode, const QString& owner)
 {
     if(mode == eModeRange)
     {
@@ -2940,7 +2940,7 @@ bool CGisItemTrk::publishMouseFocus(const CTrackData::trkpt_t * pt, focusmode_e 
     return true;
 }
 
-void CGisItemTrk::publishMouseFocusRangeMode(const CTrackData::trkpt_t * pt, focusmode_e fmode)
+void CGisItemTrk::publishMouseFocusRangeMode(const CTrackData::trkpt_t* pt, focusmode_e fmode)
 {
     switch(rangeState)
     {
@@ -2957,7 +2957,7 @@ void CGisItemTrk::publishMouseFocusRangeMode(const CTrackData::trkpt_t * pt, foc
 
         if(fmode == eFocusMouseClick)
         {
-            rangeState  = eRangeStateClicked1st;
+            rangeState = eRangeStateClicked1st;
         }
         break;
     }
@@ -3038,7 +3038,7 @@ void CGisItemTrk::publishMouseFocusRangeMode(const CTrackData::trkpt_t * pt, foc
     setMouseFocusVisuals(pt);
     setMouseRangeFocusVisuals(mouseRange1, mouseRange2);
 }
-void CGisItemTrk::publishMouseFocusNormalMode(const CTrackData::trkpt_t * pt, focusmode_e fmode)
+void CGisItemTrk::publishMouseFocusNormalMode(const CTrackData::trkpt_t* pt, focusmode_e fmode)
 {
     switch(fmode)
     {
@@ -3082,7 +3082,7 @@ void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
         dlgDetails->updateData();
     }
 
-    for(INotifyTrk * visual : qAsConst(registeredVisuals))
+    for(INotifyTrk* visual : qAsConst(registeredVisuals))
     {
         if(visuals & visual->mask)
         {
@@ -3092,46 +3092,46 @@ void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
 
     const CMainWindow& main = CMainWindow::self();
     const QList<CCanvas*>& allCanvas = main.getCanvas();
-    for(CCanvas * canvas : allCanvas)
+    for(CCanvas* canvas : allCanvas)
     {
         canvas->slotUpdateTrackInfo(false);
     }
 }
 
-void CGisItemTrk::setMouseFocusVisuals(const CTrackData::trkpt_t * pt)
+void CGisItemTrk::setMouseFocusVisuals(const CTrackData::trkpt_t* pt)
 {
     if(!dlgDetails.isNull())
     {
         dlgDetails->setMouseFocus(pt);
     }
 
-    for(INotifyTrk * visual : qAsConst(registeredVisuals))
+    for(INotifyTrk* visual : qAsConst(registeredVisuals))
     {
         visual->setMouseFocus(pt);
     }
 }
 
-void CGisItemTrk::setMouseRangeFocusVisuals(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2)
+void CGisItemTrk::setMouseRangeFocusVisuals(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2)
 {
     if(!dlgDetails.isNull())
     {
         dlgDetails->setMouseRangeFocus(pt1, pt2);
     }
 
-    for(INotifyTrk * visual : qAsConst(registeredVisuals))
+    for(INotifyTrk* visual : qAsConst(registeredVisuals))
     {
         visual->setMouseRangeFocus(pt1, pt2);
     }
 }
 
-void CGisItemTrk::setMouseClickFocusVisuals(const CTrackData::trkpt_t * pt)
+void CGisItemTrk::setMouseClickFocusVisuals(const CTrackData::trkpt_t* pt)
 {
     if(!dlgDetails.isNull())
     {
         dlgDetails->setMouseClickFocus(pt);
     }
 
-    for(INotifyTrk * visual : qAsConst(registeredVisuals))
+    for(INotifyTrk* visual : qAsConst(registeredVisuals))
     {
         visual->setMouseClickFocus(pt);
     }
@@ -3140,7 +3140,7 @@ void CGisItemTrk::setMouseClickFocusVisuals(const CTrackData::trkpt_t * pt)
 void CGisItemTrk::setupInterpolation(bool on, qint32 q)
 {
     interp.valid = on;
-    interp.Q     = (quality_e)q;
+    interp.Q = (quality_e)q;
 
     if(!on)
     {
@@ -3208,7 +3208,7 @@ qreal CGisItemTrk::getElevationInterpolated(qreal d)
 }
 
 
-void CGisItemTrk::getMouseRange(int &idx1, int &idx2, bool total) const
+void CGisItemTrk::getMouseRange(int& idx1, int& idx2, bool total) const
 {
     if(nullptr == mouseRange1 || nullptr == mouseRange2)
     {
@@ -3227,7 +3227,7 @@ void CGisItemTrk::getMouseRange(int &idx1, int &idx2, bool total) const
     }
 }
 
-void CGisItemTrk::getMouseRange(const CTrackData::trkpt_t * &mr1, const CTrackData::trkpt_t * &mr2) const
+void CGisItemTrk::getMouseRange(const CTrackData::trkpt_t*& mr1, const CTrackData::trkpt_t*& mr2) const
 {
     mr1 = mouseRange1;
     mr2 = mouseRange2;
@@ -3258,7 +3258,7 @@ bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qi
 
 void CGisItemTrk::checkForInvalidPoints()
 {
-    IGisProject * project = getParentProject();
+    IGisProject* project = getParentProject();
     if(project && project->getInvalidDataOk())
     {
         return;

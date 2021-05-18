@@ -20,7 +20,7 @@
 #include "gis/trk/filter/CFilterChangeStartPoint.h"
 #include "gis/wpt/CGisItemWpt.h"
 
-CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *parent) :
+CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk& trk, QWidget* parent) :
     QWidget(parent)
     , trk(trk)
 {
@@ -40,7 +40,7 @@ void CFilterChangeStartPoint::slotApply()
 
 void CFilterChangeStartPoint::updateUi()
 {
-    IGisProject *project = trk.getParentProject();
+    IGisProject* project = trk.getParentProject();
     if(nullptr == project)
     {
         return;
@@ -57,7 +57,7 @@ void CFilterChangeStartPoint::updateUi()
         {
             continue;
         }
-        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(pt.keyWpt));
+        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(pt.keyWpt));
         if(nullptr == wpt)
         {
             continue;

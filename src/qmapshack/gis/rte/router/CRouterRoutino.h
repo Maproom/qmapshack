@@ -31,7 +31,7 @@ class CRouterRoutino : public IRouter, private Ui::IRouterRoutino
 {
     Q_OBJECT
 public:
-    CRouterRoutino(QWidget * parent);
+    CRouterRoutino(QWidget* parent);
     static CRouterRoutino& self()
     {
         return *pSelf;
@@ -39,7 +39,7 @@ public:
 
 
     void calcRoute(const IGisItem::key_t& key) override;
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal *costs) override;
+    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs) override;
 
     bool hasFastRouting() override;
 
@@ -60,7 +60,7 @@ private:
     int loadProfiles(const QString& profilesPath);
     void updateHelpText();
     QString xlateRoutinoError(int err);
-    static CRouterRoutino * pSelf;
+    static CRouterRoutino* pSelf;
 
     QStringList dbPaths;
     QString currentProfilesPath;

@@ -29,7 +29,7 @@ class CFilterZeroSpeedDriftCleaner : public QWidget, private Ui::IFilterZeroSpee
 {
     Q_OBJECT
 public:
-    CFilterZeroSpeedDriftCleaner(CGisItemTrk& trk, QWidget *parent);
+    CFilterZeroSpeedDriftCleaner(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterZeroSpeedDriftCleaner();
 
 private slots:

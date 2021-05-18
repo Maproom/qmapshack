@@ -22,10 +22,10 @@
 #include <QDebug>
 #include <QRegularExpression>
 
-CRawPoi::CRawPoi(const QStringList &data, const QPointF &coordinates, const quint64 &key, const QString& category, const QString& garminIcon)
+CRawPoi::CRawPoi(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon)
     : category(category), coordinates(coordinates), rawData(data), garminIcon(garminIcon), key(key)
 {
-    for(const QString& line:data)
+    for(const QString& line : data)
     {
         const QStringList& keyValue = line.split("=");
         if(keyValue[0].contains("wikipedia", Qt::CaseInsensitive))
@@ -67,12 +67,12 @@ CRawPoi::CRawPoi(const QStringList &data, const QPointF &coordinates, const quin
     }
 }
 
-const QString &CRawPoi::getCategory() const
+const QString& CRawPoi::getCategory() const
 {
     return category;
 }
 
-const QString &CRawPoi::getName(bool replaceEmptyByCategory) const
+const QString& CRawPoi::getName(bool replaceEmptyByCategory) const
 {
     if(replaceEmptyByCategory && name.isEmpty())
     {
@@ -81,22 +81,22 @@ const QString &CRawPoi::getName(bool replaceEmptyByCategory) const
     return name;
 }
 
-const QPointF &CRawPoi::getCoordinates() const
+const QPointF& CRawPoi::getCoordinates() const
 {
     return coordinates;
 }
 
-const quint64 &CRawPoi::getKey() const
+const quint64& CRawPoi::getKey() const
 {
     return key;
 }
 
-const QMap<QString, QString> &CRawPoi::getData() const
+const QMap<QString, QString>& CRawPoi::getData() const
 {
     return data;
 }
 
-const QStringList &CRawPoi::getRawData() const
+const QStringList& CRawPoi::getRawData() const
 {
     return rawData;
 }
@@ -302,7 +302,7 @@ QList<IGisItem::link_t> CRawPoi::getLinks() const
     }
 
     static const QRegularExpression wikipediaRegex ("(.*:)?(wikipedia)(:[A-z]{2})?", QRegularExpression::UseUnicodePropertiesOption);
-    for(const QString& key:wikipediaRelatedKeys)
+    for(const QString& key : wikipediaRelatedKeys)
     {
         const QRegularExpressionMatch& match = wikipediaRegex.match(key);
         if (match.hasMatch())
@@ -341,7 +341,7 @@ QList<IGisItem::link_t> CRawPoi::getLinks() const
     }
 
     static const QRegularExpression wikidataRegex ("(.*:)?(wikidata)=(.+)", QRegularExpression::UseUnicodePropertiesOption);
-    for(const QString& key:wikidataRelatedKeys)
+    for(const QString& key : wikidataRelatedKeys)
     {
         const QRegularExpressionMatch& match = wikidataRegex.match(key);
         if(match.hasMatch())

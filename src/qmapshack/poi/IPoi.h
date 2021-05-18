@@ -31,7 +31,7 @@ class IPoi : public IDrawObject
 {
     Q_OBJECT
 public:
-    IPoi(CPoiDraw * parent);
+    IPoi(CPoiDraw* parent);
     virtual ~IPoi() = default;
 
     virtual void draw(IDrawContext::buffer_t& buf) = 0;
@@ -44,7 +44,7 @@ public:
 
        @return A pointer to the widget. Use a smart pointer to store as the widget can be destroyed at any time
      */
-    virtual IPoiProp * getSetup();
+    virtual IPoiProp* getSetup();
 
     bool activated() const {return isActivated;}
 
@@ -55,7 +55,7 @@ public:
     virtual bool findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const = 0;
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    virtual void findPoisIn(const QRectF& degRect, QSet<poi_t>&pois, QList<QPointF>& posPoiHighlight) = 0;
+    virtual void findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF>& posPoiHighlight) = 0;
     virtual bool getToolTip(const QPoint& px, QString& str) const = 0;
 
     static void init();
@@ -63,10 +63,10 @@ public:
     static const QImage& iconHighlight(){return _iconHighlight;}
 
 public slots:
-    virtual void slotCheckedStateChanged(QTreeWidgetItem*item) = 0;
+    virtual void slotCheckedStateChanged(QTreeWidgetItem* item) = 0;
 
 protected:
-    CPoiDraw * poi;
+    CPoiDraw* poi;
 
     /**
        @brief True if POI collection was loaded successfully

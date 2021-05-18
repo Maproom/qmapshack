@@ -92,7 +92,7 @@ const QPoint CScrOptUnclutter::positions[9][8] =
 };
 
 
-CScrOptUnclutter::CScrOptUnclutter(IMouse *mouse)
+CScrOptUnclutter::CScrOptUnclutter(IMouse* mouse)
     : IScrOpt(mouse)
 {
     hide();
@@ -116,7 +116,7 @@ void CScrOptUnclutter::mouseMove(const QPoint& pos)
 {
     IScrOpt::mouseMove(pos);
 
-    for(const item_t &item : qAsConst(items))
+    for(const item_t& item : qAsConst(items))
     {
         if(item.active.contains(mousePos) || item.text.contains(mousePos))
         {
@@ -137,16 +137,16 @@ void CScrOptUnclutter::mouseMove(const QPoint& pos)
     }
 }
 
-void CScrOptUnclutter::addItem(IGisItem * gisItem)
+void CScrOptUnclutter::addItem(IGisItem* gisItem)
 {
     items << item_t();
-    item_t& item        = items.last();
-    item.hasUserFocus   = gisItem->hasUserFocus();
-    item.name           = gisItem->getNameEx();
-    item.key            = gisItem->getKey();
-    item.icon           = gisItem->getDisplayIcon();
-    item.area           = item.icon.rect();
-    item.active         = item.area.adjusted(-10, -10, 10, 10);
+    item_t& item = items.last();
+    item.hasUserFocus = gisItem->hasUserFocus();
+    item.name = gisItem->getNameEx();
+    item.key = gisItem->getKey();
+    item.icon = gisItem->getDisplayIcon();
+    item.area = item.icon.rect();
+    item.active = item.area.adjusted(-10, -10, 10, 10);
 }
 
 IGisItem::key_t CScrOptUnclutter::getItemKey(int index)
@@ -159,9 +159,9 @@ IGisItem::key_t CScrOptUnclutter::getItemKey(int index)
 }
 
 
-const CScrOptUnclutter::item_t * CScrOptUnclutter::selectItem(const QPoint& point)
+const CScrOptUnclutter::item_t* CScrOptUnclutter::selectItem(const QPoint& point)
 {
-    for(const item_t &item : qAsConst(items))
+    for(const item_t& item : qAsConst(items))
     {
         if(item.active.contains(point) || item.text.contains(point))
         {
@@ -196,7 +196,7 @@ void CScrOptUnclutter::draw(QPainter& p)
         }
     }
 
-    for(const item_t &item : qAsConst(items))
+    for(const item_t& item : qAsConst(items))
     {
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(255, 255, 255, 255));

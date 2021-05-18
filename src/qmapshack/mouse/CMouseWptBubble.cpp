@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CMouseWptBubble::CMouseWptBubble(const IGisItem::key_t &key, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
+CMouseWptBubble::CMouseWptBubble(const IGisItem::key_t& key, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse)
     , key(key)
 {
@@ -39,11 +39,11 @@ void CMouseWptBubble::draw(QPainter&, CCanvas::redraw_e, const QRect&)
 {
 }
 
-void CMouseWptBubble::leftClicked(const QPoint &pos)
+void CMouseWptBubble::leftClicked(const QPoint& pos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
     {
         wpt->leftClicked(pos);
@@ -54,11 +54,11 @@ void CMouseWptBubble::leftClicked(const QPoint &pos)
     }
 }
 
-void CMouseWptBubble::mouseMoved(const QPoint &pos)
+void CMouseWptBubble::mouseMoved(const QPoint& pos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
     {
         wpt->mouseMove(pos);
@@ -69,11 +69,11 @@ void CMouseWptBubble::mouseMoved(const QPoint &pos)
     }
 }
 
-void CMouseWptBubble::mouseDragged(const QPoint& start, const QPoint &last, const QPoint&end)
+void CMouseWptBubble::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
     {
         wpt->mouseDragged(start, last, end);
@@ -88,7 +88,7 @@ void CMouseWptBubble::dragFinished(const QPoint& pos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
     {
         wpt->dragFinished(pos);

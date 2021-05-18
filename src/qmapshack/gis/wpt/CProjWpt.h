@@ -28,7 +28,7 @@ class CProjWpt : public QDialog, private Ui::IProjWpt
 {
     Q_OBJECT
 public:
-    CProjWpt(CGisItemWpt &wpt, QWidget * parent);
+    CProjWpt(CGisItemWpt& wpt, QWidget* parent);
     virtual ~CProjWpt();
 
 public slots:

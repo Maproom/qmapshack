@@ -1666,7 +1666,7 @@ void initProfiles(QMap<quint16, CFitProfile*>& allProfiles)
     allProfiles.insert(fitGlobalMesgNrInvalid, new CFitProfile());
 }
 
-CFitProfileLookup * fitLookupInstance = nullptr;
+CFitProfileLookup* fitLookupInstance = nullptr;
 
 CFitProfileLookup::CFitProfileLookup()
 {
@@ -1686,7 +1686,7 @@ void CFitProfileLookup::slotCleanup()
     delete this;
 }
 
-const CFitProfile*CFitProfileLookup::getProfile(quint16 globalMesgNr)
+const CFitProfile* CFitProfileLookup::getProfile(quint16 globalMesgNr)
 {
     if(fitLookupInstance == nullptr)
     {
@@ -1700,7 +1700,7 @@ const CFitProfile*CFitProfileLookup::getProfile(quint16 globalMesgNr)
     return fitLookupInstance->allProfiles[fitGlobalMesgNrInvalid];
 }
 
-const CFitFieldProfile*CFitProfileLookup::getFieldForProfile(quint16 globalMesgNr, quint8 fieldDefNr)
+const CFitFieldProfile* CFitProfileLookup::getFieldForProfile(quint16 globalMesgNr, quint8 fieldDefNr)
 {
     if(fitLookupInstance == nullptr)
     {

@@ -64,7 +64,7 @@ QString CAppSetupWin::logDir()
     return QDir::temp().absolutePath();
 }
 
-QString CAppSetupWin::findExecutable(const QString &name)
+QString CAppSetupWin::findExecutable(const QString& name)
 {
     return QStandardPaths::findExecutable(name);
 }

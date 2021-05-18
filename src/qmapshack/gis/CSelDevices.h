@@ -29,7 +29,7 @@ class CSelDevices : public QDialog, private Ui::ISelDevices
 {
     Q_OBJECT
 public:
-    CSelDevices(IGisProject *project, QTreeWidget * wks);
+    CSelDevices(IGisProject* project, QTreeWidget* wks);
     virtual ~CSelDevices();
 
     void getSlectedDevices(QSet<QString>& keys);

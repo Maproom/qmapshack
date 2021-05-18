@@ -21,13 +21,13 @@
 
 #include <QtWidgets>
 
-CCutTrk::CCutTrk(QWidget *parent)
+CCutTrk::CCutTrk(QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);
 
-    connect(radioKeepFirst,  &QRadioButton::toggled, this, &CCutTrk::slotClicked);
-    connect(radioKeepBoth,   &QRadioButton::toggled, this, &CCutTrk::slotClicked);
+    connect(radioKeepFirst, &QRadioButton::toggled, this, &CCutTrk::slotClicked);
+    connect(radioKeepBoth, &QRadioButton::toggled, this, &CCutTrk::slotClicked);
     connect(radioKeepSecond, &QRadioButton::toggled, this, &CCutTrk::slotClicked);
 
     SETTINGS;

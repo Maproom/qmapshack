@@ -570,17 +570,17 @@ Annullato su richiesta dell&apos;utente.
         <translation>Aggiungi tavolozza colori</translation>
     </message>
     <message>
-        <location filename="../tool/CToolPalettize.cpp" line="34"/>
+        <location filename="../tool/CToolPalettize.cpp" line="36"/>
         <source>Usually you use RGBA color while referencing a map because the large color space allows you to scale and rotate the map without any loss of quality. But it results into rather large files. The file size can be optimized by using a color palette instead of the RGBA color space. The impact on quality is low as long as you do not want to scale or rotate the map. If you want to combine files with a color palette all files need to have the same palette.</source>
         <translation>Di solito si utilizza il colore RGBA mentre si fa riferimento a una mappa perché l&apos;ampio spazio colore consente di ridimensionare e ruotare la mappa senza perdita di qualità. Ma ilrisultato è un file piuttosto grande. La dimensione del file può essere ottimizzata utilizzando una tavolozza di colori anziché lo spazio colore RGBA. L&apos;impatto sulla qualità è basso finché non si desidera ridimensionare o ruotare la mappa. Se si desidera combinare i file con una tavolozza di colori, tutti i file devono avere la stessa tavolozza.</translation>
     </message>
     <message>
-        <location filename="../tool/CToolPalettize.cpp" line="46"/>
+        <location filename="../tool/CToolPalettize.cpp" line="48"/>
         <source>Note: This tool will use all files in the list as a combined input to derive an optimal palette. This will only work if all files have the same projection and scale.</source>
         <translation>Nota: questo strumento utilizzerà tutti i file nell&apos;elenco come input combinato per derivare una tavolozza ottimale. Funzionerà solo se tutti i file hanno la stessa proiezione e scala.</translation>
     </message>
     <message>
-        <location filename="../tool/CToolPalettize.cpp" line="109"/>
+        <location filename="../tool/CToolPalettize.cpp" line="116"/>
         <source>Select filename...</source>
         <translation>Scegli un nome per il file...</translation>
     </message>
@@ -1422,27 +1422,32 @@ o
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="176"/>
+        <location filename="../tool/IToolCutMap.ui" line="155"/>
+        <source>GDAL Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolCutMap.ui" line="183"/>
         <source>Start</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="190"/>
+        <location filename="../tool/IToolCutMap.ui" line="197"/>
         <source>Cancel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="201"/>
+        <location filename="../tool/IToolCutMap.ui" line="208"/>
         <source>For all files</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="226"/>
+        <location filename="../tool/IToolCutMap.ui" line="233"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="236"/>
+        <location filename="../tool/IToolCutMap.ui" line="243"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation></translation>
     </message>
@@ -1582,6 +1587,44 @@ o
     </message>
 </context>
 <context>
+    <name>IToolGDALGroupBox</name>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="14"/>
+        <source>GroupBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="17"/>
+        <source>GDAL Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="50"/>
+        <source>Resampling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="84"/>
+        <source>Compression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="118"/>
+        <source>Tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="144"/>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="188"/>
+        <source>Other:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IToolGrid</name>
     <message>
         <location filename="../tool/IToolGrid.ui" line="14"/>
@@ -1701,32 +1744,37 @@ o
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="170"/>
+        <location filename="../tool/IToolPalettize.ui" line="149"/>
+        <source>GDAL Parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolPalettize.ui" line="177"/>
         <source>Start</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="184"/>
+        <location filename="../tool/IToolPalettize.ui" line="191"/>
         <source>Cancel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="213"/>
+        <location filename="../tool/IToolPalettize.ui" line="220"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="223"/>
+        <location filename="../tool/IToolPalettize.ui" line="230"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="233"/>
+        <location filename="../tool/IToolPalettize.ui" line="240"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_rgb2pct&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="247"/>
+        <location filename="../tool/IToolPalettize.ui" line="254"/>
         <source>Select filename</source>
         <translation></translation>
     </message>
@@ -1764,32 +1812,37 @@ o
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="179"/>
+        <location filename="../tool/IToolRefMap.ui" line="158"/>
+        <source>GDAL Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolRefMap.ui" line="186"/>
         <source>Start</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="193"/>
+        <location filename="../tool/IToolRefMap.ui" line="200"/>
         <source>Cancel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="204"/>
+        <location filename="../tool/IToolRefMap.ui" line="211"/>
         <source>For all files</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="229"/>
+        <location filename="../tool/IToolRefMap.ui" line="236"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="239"/>
+        <location filename="../tool/IToolRefMap.ui" line="246"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="249"/>
+        <location filename="../tool/IToolRefMap.ui" line="256"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation></translation>
     </message>

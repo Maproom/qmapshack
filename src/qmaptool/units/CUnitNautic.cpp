@@ -19,7 +19,7 @@
 
 #include "units/CUnitNautic.h"
 
-CUnitNautic::CUnitNautic(QObject * parent)
+CUnitNautic::CUnitNautic(QObject* parent)
     : IUnit(eTypeNautic, "nm", 0.00053989, "nm/h", 1.94361780, parent)
 {
 }
@@ -29,7 +29,7 @@ void CUnitNautic::meter2elevation(qreal meter, QString& val, QString& unit) cons
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit = "";
     }
     else
@@ -44,7 +44,7 @@ void CUnitNautic::meter2distance(qreal meter, QString& val, QString& unit) const
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit = "";
     }
     else
@@ -59,7 +59,7 @@ void CUnitNautic::meter2speed(qreal meter, QString& val, QString& unit) const /*
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit = "";
     }
     else
@@ -73,7 +73,7 @@ void CUnitNautic::meter2area(qreal meter, QString& val, QString& unit) const /* 
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit = "";
     }
     else
@@ -89,8 +89,8 @@ qreal CUnitNautic::elevation2meter(const QString& val) const /* override */
     return val.toDouble();
 }
 
-void CUnitNautic::meter2unit(qreal meter, qreal& scale, QString&  unit) const
+void CUnitNautic::meter2unit(qreal meter, qreal& scale, QString& unit) const
 {
     scale = basefactor;
-    unit  = "nm";
+    unit = "nm";
 }

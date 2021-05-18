@@ -19,13 +19,13 @@
 #include "CFadingIcon.h"
 #include <QtWidgets>
 
-CFadingIcon::CFadingIcon(const QPoint& pt, const QString &resource, QWidget *parent)
+CFadingIcon::CFadingIcon(const QPoint& pt, const QString& resource, QWidget* parent)
     : QLabel(parent)
     , icon(resource)
 {
     setPixmap(icon);
 
-    QTimer * timer = new QTimer(this);
+    QTimer* timer = new QTimer(this);
     timer->setSingleShot(false);
     timer->setInterval(100);
     timer->start();

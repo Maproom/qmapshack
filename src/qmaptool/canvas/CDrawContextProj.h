@@ -27,7 +27,7 @@ class CDrawContextProj : public IDrawContext, public CGdalFile
 {
     Q_OBJECT
 public:
-    CDrawContextProj(CCanvas *canvas, QObject *parent);
+    CDrawContextProj(CCanvas* canvas, QObject* parent);
     virtual ~CDrawContextProj() = default;
 
     void setSourceFile(const QString& filename, bool resetContext) override;
@@ -78,8 +78,8 @@ public:
         return QRectF(0, 0, xsize_px, ysize_px);
     }
 
-    void convertMap2Coord(QPointF &pt) const override;
-    void convertCoord2Map(QPointF &pt) const override;
+    void convertMap2Coord(QPointF& pt) const override;
+    void convertCoord2Map(QPointF& pt) const override;
 
     void drawt(buffer_t& buf) override;
 };

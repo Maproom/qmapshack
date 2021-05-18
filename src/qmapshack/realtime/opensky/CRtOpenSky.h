@@ -34,31 +34,31 @@ class CRtOpenSky : public IRtSource
 {
     Q_OBJECT
 public:
-    CRtOpenSky(QTreeWidget * parent);
+    CRtOpenSky(QTreeWidget* parent);
     virtual ~CRtOpenSky() = default;
 
     struct aircraft_t
     {
-        QPointF pos     = NOPOINTF;
-        QPointF point   = NOPOINTF;
+        QPointF pos = NOPOINTF;
+        QPointF point = NOPOINTF;
 
         QString key;
         QString callsign;
         QString originCountry;
-        qint32 timePosition     = NOINT;
-        qint32 lastContact      = NOINT;
-        qreal longitude         = NOFLOAT;
-        qreal latitude          = NOFLOAT;
-        qreal geoAltitude       = NOFLOAT;
-        bool onGround           = false;
-        qreal velocity          = NOFLOAT;
-        qreal heading           = NOFLOAT;
-        qreal verticalRate     = NOFLOAT;
+        qint32 timePosition = NOINT;
+        qint32 lastContact = NOINT;
+        qreal longitude = NOFLOAT;
+        qreal latitude = NOFLOAT;
+        qreal geoAltitude = NOFLOAT;
+        bool onGround = false;
+        qreal velocity = NOFLOAT;
+        qreal heading = NOFLOAT;
+        qreal verticalRate = NOFLOAT;
 
-        qreal baroAltitude      = NOFLOAT;
+        qreal baroAltitude = NOFLOAT;
         QString squawk;
-        bool spi                = false;
-        qint32 positionSource   = NOINT;
+        bool spi = false;
+        qint32 positionSource = NOINT;
     };
 
     /**
@@ -94,8 +94,8 @@ public:
 
     aircraft_t getAircraftByKey(const QString& key, bool& ok) const;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
-    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)  override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) override;
+    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt)  override;
     void mouseMove(const QPointF& pos) override;
     static const QString strIcon;
 public slots:
@@ -119,8 +119,8 @@ private slots:
 
 private:
     QPointer<CRtOpenSkyInfo> info;
-    QTimer * timer;
-    QNetworkAccessManager * networkAccessManager;
+    QTimer* timer;
+    QNetworkAccessManager* networkAccessManager;
 
     QDateTime timestamp;
     QMap<QString, aircraft_t> aircrafts;

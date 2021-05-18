@@ -31,18 +31,18 @@ class CGridSelArea : public QWidget, private Ui::IGridSelArea
 {
     Q_OBJECT
 public:
-    CGridSelArea(QWidget * parent);
+    CGridSelArea(QWidget* parent);
     virtual ~CGridSelArea() = default;
 
-    void registerItem(CItemRefMap * item);
+    void registerItem(CItemRefMap* item);
 
     void saveSettings(QSettings& cfg);
     void loadSettings(QSettings& cfg);
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent *e);
-    void mouseReleaseEventFx(QMouseEvent *e);
-    void leaveEventFx(QEvent *e);
+    void mouseMoveEventFx(QMouseEvent* e);
+    void mouseReleaseEventFx(QMouseEvent* e);
+    void leaveEventFx(QEvent* e);
     QCursor getCursorFx();
 
     const QRectF& getArea() const
@@ -59,8 +59,8 @@ signals:
     void sigChanged();
 
 private:
-    CItemRefMap * item = nullptr;
-    const IDrawContext * context   = nullptr;
+    CItemRefMap* item = nullptr;
+    const IDrawContext* context = nullptr;
 
     QRectF area;
     QRectF areaSave;

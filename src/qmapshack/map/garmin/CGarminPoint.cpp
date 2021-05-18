@@ -30,16 +30,16 @@
 #include <QtCore>
 
 
-quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData)
+quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData)
 {
-    type       = (quint16)(*pData) << 8;
+    type = (quint16)(*pData) << 8;
 
     ++pData;
 
-    lbl_ptr    = gar_ptr_load(uint24_t, pData);
+    lbl_ptr = gar_ptr_load(uint24_t, pData);
     hasSubType = lbl_ptr & 0x00800000;
-    isLbl6     = lbl_ptr & 0x00400000;
-    lbl_ptr    = lbl_ptr & 0x003FFFFF;
+    isLbl6 = lbl_ptr & 0x00400000;
+    lbl_ptr = lbl_ptr & 0x003FFFFF;
 
     pData += 3;
 
@@ -66,17 +66,17 @@ quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift
 }
 
 
-quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData, const quint8 * pEnd)
+quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData, const quint8* pEnd)
 {
     quint32 byte_size = 6;
     quint8 subtype;
 
-    type        = (quint16)(*pData) << 8;
+    type = (quint16)(*pData) << 8;
     ++pData;
-    subtype     = (quint16)(*pData);
+    subtype = (quint16)(*pData);
     ++pData;
 
-    type        = 0x10000 + type + (subtype & 0x1F);
+    type = 0x10000 + type + (subtype & 0x1F);
 
     if(subtype & 0x80)
     {
@@ -97,9 +97,9 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
     if(subtype & 0x20)
     {
         byte_size += 3;
-        lbl_ptr     = gar_ptr_load(uint24_t, pData);
-        isLbl6      = lbl_ptr & 0x00400000;
-        lbl_ptr    &= 0x003FFFFF;
+        lbl_ptr = gar_ptr_load(uint24_t, pData);
+        isLbl6 = lbl_ptr & 0x00400000;
+        lbl_ptr &= 0x003FFFFF;
     }
 
     return byte_size;
@@ -112,7 +112,7 @@ QString CGarminPoint::getLabelText() const
     {
         if((type == 0x6200) || (type == 0x6300))
         {
-            qDebug() << "1" <<  labels;
+            qDebug() << "1" << labels;
             QString unit;
             QString val = labels[0];
             IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);

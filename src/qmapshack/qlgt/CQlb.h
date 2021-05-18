@@ -42,7 +42,7 @@ class CQlb : public QObject
 {
     Q_OBJECT
 public:
-    CQlb(QObject * parent);
+    CQlb(QObject* parent);
     virtual ~CQlb();
 
     enum type_e {eEnd, eWpt, eTrack, eDiary, eOverlay, eRoute, eMapSel};
@@ -51,15 +51,15 @@ public:
     /**
         This will serialize the waypoint object to wpts
      */
-    CQlb& operator <<(CQlgtWpt &wpt);
+    CQlb& operator <<(CQlgtWpt& wpt);
 
-    CQlb& operator <<(CQlgtTrack &trk);
+    CQlb& operator <<(CQlgtTrack& trk);
 
-    CQlb& operator <<(CQlgtDiary &dry);
+    CQlb& operator <<(CQlgtDiary& dry);
 
-    CQlb& operator <<(IQlgtOverlay &ovl);
+    CQlb& operator <<(IQlgtOverlay& ovl);
 
-    CQlb& operator <<(CQlgtRoute &rte);
+    CQlb& operator <<(CQlgtRoute& rte);
 
 
     /// get access to stored waypoint data
@@ -94,10 +94,10 @@ public:
     }
     /// write collected data to file
     void save(const QString& filename);
-    void save(QIODevice *ioDevice);
+    void save(QIODevice* ioDevice);
     /// read file and store elements in their designated byte arrays
     void load(const QString& filename);
-    void load(QIODevice *ioDevice);
+    void load(QIODevice* ioDevice);
 
 private:
     /// byte array to hold all waypoints

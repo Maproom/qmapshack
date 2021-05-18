@@ -29,7 +29,7 @@ class CDBItem : public QTreeWidgetItem
 {
     Q_DECLARE_TR_FUNCTIONS(CDBItem)
 public:
-    CDBItem(QSqlDatabase& db, quint64 id, IDBFolder * parent);
+    CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent);
     virtual ~CDBItem() = default;
 
     /**
@@ -72,7 +72,7 @@ public:
     void updateAge();
 
 private:
-    friend bool sortByTime(CDBItem * item1, CDBItem * item2);
+    friend bool sortByTime(CDBItem* item1, CDBItem* item2);
     QSqlDatabase& db;
     quint64 id;
 

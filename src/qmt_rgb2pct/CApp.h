@@ -19,8 +19,8 @@
 #ifndef CAPP_H
 #define CAPP_H
 
-#include <QtCore>
 #include <gdal.h>
+#include <QtCore>
 
 class GDALColorTable;
 class GDALDataset;
@@ -35,9 +35,9 @@ public:
     qint32 exec();
 
 private:
-    static GDALColorTable * createColorTable(qint32 ncolors, const QString& pctFilename, GDALDataset *dataset);
-    static void saveColorTable(GDALColorTable *ct, QString &sctFilename);
-    static void ditherMap(GDALDataset * dsSrc, const QString& tarFilename, GDALColorTable *ct);
+    static GDALColorTable* createColorTable(qint32 ncolors, const QString& pctFilename, GDALDataset* dataset);
+    static void saveColorTable(GDALColorTable* ct, QString& sctFilename);
+    static void ditherMap(GDALDataset* dsSrc, const QString& tarFilename, GDALColorTable* ct);
 
     qint32 ncolors = 0;
     QString pctFilename;

@@ -21,7 +21,7 @@
 #include "gis/trk/filter/CFilterNewDate.h"
 #include "units/IUnit.h"
 
-CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
+CFilterNewDate::CFilterNewDate(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {

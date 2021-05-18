@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse *mouse, QWidget *parent)
+CScrOptRangeTrk::CScrOptRangeTrk(const QPointF& point, CGisItemTrk* trk, IMouse* mouse, QWidget* parent)
     : IScrOpt(mouse)
 {
     if(parent != nullptr)

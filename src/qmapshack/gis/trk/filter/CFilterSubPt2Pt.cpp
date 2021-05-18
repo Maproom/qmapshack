@@ -20,7 +20,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSubPt2Pt.h"
 
-CFilterSubPt2Pt::CFilterSubPt2Pt(CGisItemTrk &trk, QWidget *parent)
+CFilterSubPt2Pt::CFilterSubPt2Pt(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 

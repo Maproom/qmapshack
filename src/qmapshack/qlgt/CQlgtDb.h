@@ -49,7 +49,7 @@ public:
         eFolderN    = QTreeWidgetItem::UserType + 104
     };
 
-    CQlgtDb(const QString& filename, CImportDatabase * parent);
+    CQlgtDb(const QString& filename, CImportDatabase* parent);
     virtual ~CQlgtDb();
 
     void start(const QString& filename);
@@ -65,7 +65,7 @@ private:
     QDir path;
     QString name;
 
-    CImportDatabase * gui;
+    CImportDatabase* gui;
 
     QPointer<CQmsDb> dbQms;
 

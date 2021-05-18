@@ -20,7 +20,7 @@
 #include "dem/IDem.h"
 #include "dem/IDemProp.h"
 
-IDemProp::IDemProp(IDem *demfile, CDemDraw *dem)
+IDemProp::IDemProp(IDem* demfile, CDemDraw* dem)
     : demfile(demfile)
     , dem(dem)
 {

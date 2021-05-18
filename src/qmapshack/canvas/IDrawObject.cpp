@@ -22,7 +22,7 @@
 
 #include <QtWidgets>
 
-IDrawObject::IDrawObject(QObject *parent)
+IDrawObject::IDrawObject(QObject* parent)
     : QObject(parent)
 {
 }
@@ -33,14 +33,14 @@ IDrawObject::~IDrawObject()
 
 void IDrawObject::saveConfig(QSettings& cfg)
 {
-    cfg.setValue("opacity",  getOpacity());
+    cfg.setValue("opacity", getOpacity());
     cfg.setValue("minScale", getMinScale());
     cfg.setValue("maxScale", getMaxScale());
 }
 
 void IDrawObject::loadConfig(QSettings& cfg)
 {
-    slotSetOpacity(cfg.value("opacity",  getOpacity() ).toDouble());
+    slotSetOpacity(cfg.value("opacity", getOpacity() ).toDouble());
     setMinScale(   cfg.value("minScale", getMinScale()).toDouble());
     setMaxScale(   cfg.value("maxScale", getMaxScale()).toDouble());
 
@@ -101,8 +101,8 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     qreal dy1 = l[0].y() - l[1].y();
     qreal dx2 = l[0].x() - l[3].x();
     qreal dy2 = l[0].y() - l[3].y();
-    qreal w   = qCeil( qSqrt(dx1 * dx1 + dy1 * dy1));
-    qreal h   = qCeil( qSqrt(dx2 * dx2 + dy2 * dy2));
+    qreal w = qCeil( qSqrt(dx1 * dx1 + dy1 * dy1));
+    qreal h = qCeil( qSqrt(dx2 * dx2 + dy2 * dy2));
 
 
     // switch to HQ if the gaps get visible
@@ -128,7 +128,7 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
 }
 
 
-void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, const CProj &proj)
+void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, const CProj& proj)
 {
     // the sub-tiles need a sensible size
     // if they get too small there will be too much
@@ -152,10 +152,10 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     // in map coords
     qreal subStepX = (l[1].x() - l[0].x()) / nStepsX;
     qreal subStepY = (l[3].y() - l[0].y()) / nStepsY;
-    qreal offsetX  = l[0].x();
-    qreal offsetY  = l[0].y();
+    qreal offsetX = l[0].x();
+    qreal offsetY = l[0].y();
 
-    QPolygonF quads(nStepsX * nStepsY * 4);
+    QPolygonF quads(nStepsX* nStepsY * 4);
     QPointF* pPt = quads.data();
 
     for(int y = 0; y < nStepsY; ++y)
@@ -178,7 +178,7 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
             offsetX += subStepX;
         }
 
-        offsetX  = l[0].x();
+        offsetX = l[0].x();
         offsetY += subStepY;
     }
 
@@ -205,8 +205,8 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
             qreal dy1 = pPt[0].y() - pPt[1].y();
             qreal dx2 = pPt[0].x() - pPt[3].x();
             qreal dy2 = pPt[0].y() - pPt[3].y();
-            qreal w   = /*qRound*/ ( qSqrt(dx1 * dx1 + dy1 * dy1));
-            qreal h   = /*qRound*/ ( qSqrt(dx2 * dx2 + dy2 * dy2));
+            qreal w = /*qRound*/ ( qSqrt(dx1 * dx1 + dy1 * dy1));
+            qreal h = /*qRound*/ ( qSqrt(dx2 * dx2 + dy2 * dy2));
 
             // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
             qreal a = qAtan(dy1 / dx1) * RAD_TO_DEG;

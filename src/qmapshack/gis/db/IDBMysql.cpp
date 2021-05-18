@@ -233,9 +233,9 @@ bool IDBMysql::migrateDB4to5()
         PROGRESS(cnt++,;
                  );
 
-        quint64 itemId      = query.value(0).toULongLong();
-        quint32 itemType    = query.value(1).toUInt();
-        IGisItem *item      = IGisItem::newGisItem(itemType, itemId, db, nullptr);
+        quint64 itemId = query.value(0).toULongLong();
+        quint32 itemType = query.value(1).toUInt();
+        IGisItem* item = IGisItem::newGisItem(itemType, itemId, db, nullptr);
 
         if(nullptr == item)
         {
@@ -283,9 +283,9 @@ bool IDBMysql::migrateDB5to6()
         PROGRESS(cnt++,;
                  );
 
-        quint64 itemId      = query.value(0).toULongLong();
-        quint32 itemType    = query.value(1).toUInt();
-        IGisItem *item      = IGisItem::newGisItem(itemType, itemId, db, nullptr);
+        quint64 itemId = query.value(0).toULongLong();
+        quint32 itemType = query.value(1).toUInt();
+        IGisItem* item = IGisItem::newGisItem(itemType, itemId, db, nullptr);
 
 
         if(nullptr == item)
@@ -295,7 +295,7 @@ bool IDBMysql::migrateDB5to6()
 
         // get full size info text
         QString comment = item->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowFullText);
-        QDateTime date  = item->getTimestamp();
+        QDateTime date = item->getTimestamp();
 
         // replace comment with full size info text in items table
         QSqlQuery query2(db);

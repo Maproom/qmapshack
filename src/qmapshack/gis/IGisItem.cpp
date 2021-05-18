@@ -49,7 +49,7 @@ const QString IGisItem::noName = IGisItem::tr("[no name]");
 QVector<IGisItem::color_t> IGisItem::colorMap;
 
 
-IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
+IGisItem::IGisItem(IGisProject* parent, type_e typ, int idx)
     : QTreeWidgetItem(parent, typ)
 {
     int n = -1;
@@ -61,7 +61,7 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     }
 
     key.project = parent->getKey();
-    key.device  = parent->getDeviceKey();
+    key.device = parent->getDeviceKey();
 
     if(idx >= 0)
     {
@@ -152,31 +152,31 @@ void IGisItem::init()
 {
     colorMap =
     {
-        {"Black",       tr("Black"),      QColor(Qt::black),        QString("://icons/8x8/bullet_black.png"),       QString("://icons/lines/line_black.png")}
-        , {"DarkRed",     tr("Dark Red"),    QColor(Qt::darkRed),     QString("://icons/8x8/bullet_dark_red.png"),    QString("://icons/lines/line_dark_red.png")}
-        , {"DarkGreen",   tr("Dark Green"),  QColor(Qt::darkGreen),   QString("://icons/8x8/bullet_dark_green.png"),  QString("://icons/lines/line_dark_green.png")}
-        , {"DarkYellow",  tr("Dark Yellow"), QColor(Qt::darkYellow),  QString("://icons/8x8/bullet_dark_yellow.png"), QString("://icons/lines/line_dark_yellow.png")}
-        , {"DarkBlue",    tr("Dark Blue"),   QColor(Qt::darkBlue),    QString("://icons/8x8/bullet_dark_blue.png"),   QString("://icons/lines/line_dark_blue.png")}
+        {"Black", tr("Black"), QColor(Qt::black), QString("://icons/8x8/bullet_black.png"), QString("://icons/lines/line_black.png")}
+        , {"DarkRed", tr("Dark Red"), QColor(Qt::darkRed), QString("://icons/8x8/bullet_dark_red.png"), QString("://icons/lines/line_dark_red.png")}
+        , {"DarkGreen", tr("Dark Green"), QColor(Qt::darkGreen), QString("://icons/8x8/bullet_dark_green.png"), QString("://icons/lines/line_dark_green.png")}
+        , {"DarkYellow", tr("Dark Yellow"), QColor(Qt::darkYellow), QString("://icons/8x8/bullet_dark_yellow.png"), QString("://icons/lines/line_dark_yellow.png")}
+        , {"DarkBlue", tr("Dark Blue"), QColor(Qt::darkBlue), QString("://icons/8x8/bullet_dark_blue.png"), QString("://icons/lines/line_dark_blue.png")}
         , {"DarkMagenta", tr("Dark Magenta"), QColor(Qt::darkMagenta), QString("://icons/8x8/bullet_dark_magenta.png"), QString("://icons/lines/line_dark_magenta.png")}
-        , {"DarkCyan",    tr("Dark Cyan"),   QColor(Qt::darkCyan),    QString("://icons/8x8/bullet_dark_cyan.png"),   QString("://icons/lines/line_dark_cyan.png")}
-        , {"LightGray",   tr("Light Gray"),  QColor(Qt::lightGray),   QString("://icons/8x8/bullet_gray.png"),        QString("://icons/lines/line_gray.png")}
-        , {"DarkGray",    tr("Dark Gray"),   QColor(Qt::darkGray),    QString("://icons/8x8/bullet_dark_gray.png"),   QString("://icons/lines/line_dark_gray.png")}
-        , {"Red",         tr("Red"),        QColor(Qt::red),         QString("://icons/8x8/bullet_red.png"),          QString("://icons/lines/line_red.png")}
-        , {"Green",       tr("Green"),      QColor(Qt::green),       QString("://icons/8x8/bullet_green.png"),        QString("://icons/lines/line_green.png")}
-        , {"Yellow",      tr("Yellow"),     QColor(Qt::yellow),      QString("://icons/8x8/bullet_yellow.png"),       QString("://icons/lines/line_yellow.png")}
-        , {"Blue",        tr("Blue"),       QColor(Qt::blue),        QString("://icons/8x8/bullet_blue.png"),         QString("://icons/lines/line_blue.png")}
-        , {"Magenta",     tr("Magenta"),    QColor(Qt::magenta),     QString("://icons/8x8/bullet_magenta.png"),      QString("://icons/lines/line_magenta.png")}
-        , {"Cyan",        tr("Cyan"),       QColor(Qt::cyan),        QString("://icons/8x8/bullet_cyan.png"),         QString("://icons/lines/line_cyan.png")}
-        , {"White",       tr("White"),      QColor(Qt::white),       QString("://icons/8x8/bullet_white.png"),        QString("://icons/lines/line_white.png")}
-        , {"Transparent", tr("Transparent"), QColor(Qt::transparent), QString(),                                       QString("://icons/lines/line_transparent.png")}
+        , {"DarkCyan", tr("Dark Cyan"), QColor(Qt::darkCyan), QString("://icons/8x8/bullet_dark_cyan.png"), QString("://icons/lines/line_dark_cyan.png")}
+        , {"LightGray", tr("Light Gray"), QColor(Qt::lightGray), QString("://icons/8x8/bullet_gray.png"), QString("://icons/lines/line_gray.png")}
+        , {"DarkGray", tr("Dark Gray"), QColor(Qt::darkGray), QString("://icons/8x8/bullet_dark_gray.png"), QString("://icons/lines/line_dark_gray.png")}
+        , {"Red", tr("Red"), QColor(Qt::red), QString("://icons/8x8/bullet_red.png"), QString("://icons/lines/line_red.png")}
+        , {"Green", tr("Green"), QColor(Qt::green), QString("://icons/8x8/bullet_green.png"), QString("://icons/lines/line_green.png")}
+        , {"Yellow", tr("Yellow"), QColor(Qt::yellow), QString("://icons/8x8/bullet_yellow.png"), QString("://icons/lines/line_yellow.png")}
+        , {"Blue", tr("Blue"), QColor(Qt::blue), QString("://icons/8x8/bullet_blue.png"), QString("://icons/lines/line_blue.png")}
+        , {"Magenta", tr("Magenta"), QColor(Qt::magenta), QString("://icons/8x8/bullet_magenta.png"), QString("://icons/lines/line_magenta.png")}
+        , {"Cyan", tr("Cyan"), QColor(Qt::cyan), QString("://icons/8x8/bullet_cyan.png"), QString("://icons/lines/line_cyan.png")}
+        , {"White", tr("White"), QColor(Qt::white), QString("://icons/8x8/bullet_white.png"), QString("://icons/lines/line_white.png")}
+        , {"Transparent", tr("Transparent"), QColor(Qt::transparent), QString(), QString("://icons/lines/line_transparent.png")}
     };
 }
 
-qint32 IGisItem::selectColor(QWidget * parent)
+qint32 IGisItem::selectColor(QWidget* parent)
 {
-    qint32 colorIdx     = NOIDX;
-    QMenu * menu        = getColorMenu("", nullptr, "", parent);
-    QAction * action    = menu->exec(QCursor::pos());
+    qint32 colorIdx = NOIDX;
+    QMenu* menu = getColorMenu("", nullptr, "", parent);
+    QAction* action = menu->exec(QCursor::pos());
 
     if(action != nullptr)
     {
@@ -192,12 +192,12 @@ qint32 IGisItem::selectColor(QWidget * parent)
     return colorIdx;
 }
 
-QMenu * IGisItem::getColorMenu(const QString& title, QObject * obj, const char * slot, QWidget * parent)
+QMenu* IGisItem::getColorMenu(const QString& title, QObject* obj, const char* slot, QWidget* parent)
 {
-    QMenu * menu = new QMenu(title, parent);
+    QMenu* menu = new QMenu(title, parent);
     menu->setIcon(QIcon("://icons/32x32/SelectColor.png"));
 
-    QAction * action;
+    QAction* action;
     for(qint32 i = 0; i < IGisItem::colorMap.size(); i++)
     {
         QPixmap pixmap(16, 16);
@@ -213,7 +213,7 @@ QMenu * IGisItem::getColorMenu(const QString& title, QObject * obj, const char *
     return menu;
 }
 
-IGisProject * IGisItem::getParentProject() const
+IGisProject* IGisItem::getParentProject() const
 {
     return dynamic_cast<IGisProject*>(parent());
 }
@@ -235,7 +235,7 @@ void IGisItem::genKey() const
     }
     if(key.project.isEmpty())
     {
-        IGisProject * project = getParentProject();
+        IGisProject* project = getParentProject();
         if(project)
         {
             key.project = project->getKey();
@@ -314,12 +314,12 @@ void IGisItem::updateFromDB(quint64 id, QSqlDatabase& db)
 QString IGisItem::getNameEx() const
 {
     QString str = getName();
-    IGisProject * project = getParentProject();
+    IGisProject* project = getParentProject();
     if(project)
     {
         str += " @ " + project->getName();
     }
-    IDevice * device = dynamic_cast<IDevice*>(parent()->parent());
+    IDevice* device = dynamic_cast<IDevice*>(parent()->parent());
     if(device)
     {
         str += " @ " + device->getName();
@@ -337,7 +337,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     setSymbol();
 
     // update project if necessary
-    IGisProject * project = getParentProject();
+    IGisProject* project = getParentProject();
     if(project && (enable & (eMarkChanged | eMarkNotPart | eMarkNotInDB)))
     {
         project->setChanged();
@@ -353,7 +353,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
 
     // set marks in column 1
     quint32 mask = data(1, Qt::UserRole).toUInt();
-    mask |=  enable;
+    mask |= enable;
     mask &= ~disable;
     setData(1, Qt::UserRole, mask);
 
@@ -361,21 +361,21 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     QString str;
     if(mask & eMarkNotPart)
     {
-        tt  += tt.isEmpty() ? "" : "\n";
-        tt  += tr("The item is not part of the project in the database.");
-        tt  += tr("\nIt is either a new item or it has been deleted in the database by someone else.");
+        tt += tt.isEmpty() ? "" : "\n";
+        tt += tr("The item is not part of the project in the database.");
+        tt += tr("\nIt is either a new item or it has been deleted in the database by someone else.");
         str += "?";
     }
     if(mask & eMarkNotInDB)
     {
-        tt  += tt.isEmpty() ? "" : "\n";
-        tt  += tr("The item is not in the database.");
+        tt += tt.isEmpty() ? "" : "\n";
+        tt += tr("The item is not in the database.");
         str += "X";
     }
     if(mask & eMarkChanged)
     {
-        tt  += tt.isEmpty() ? "" : "\n";
-        tt  += tr("The item might need to be saved");
+        tt += tt.isEmpty() ? "" : "\n";
+        tt += tr("The item might need to be saved");
         str += "*";
     }
     setText(CGisListWks::eColumnDecoration, str);
@@ -402,7 +402,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
 }
 
 
-void IGisItem::changed(const QString &what, const QString &icon)
+void IGisItem::changed(const QString& what, const QString& icon)
 {
     /*
         If item gets changed but if it's origin is not QMapShack
@@ -423,10 +423,10 @@ void IGisItem::changed(const QString &what, const QString &icon)
     // append history by new entry
     history.events << history_event_t();
     history_event_t& event = history.events.last();
-    event.time      = QDateTime::currentDateTimeUtc();
-    event.comment   = what;
-    event.icon      = icon;
-    event.who       = CMainWindow::getUser();
+    event.time = QDateTime::currentDateTimeUtc();
+    event.comment = what;
+    event.icon = icon;
+    event.who = CMainWindow::getUser();
 
     QDataStream stream(&event.data, QIODevice::WriteOnly);
     stream.setByteOrder(QDataStream::LittleEndian);
@@ -477,9 +477,9 @@ void IGisItem::setupHistory()
     {
         history.events << history_event_t();
         history_event_t& event = history.events.last();
-        event.time      = QDateTime::currentDateTimeUtc();
-        event.comment   = tr("Initial version.");
-        event.icon      = "://icons/48x48/Start.png";
+        event.time = QDateTime::currentDateTimeUtc();
+        event.comment = tr("Initial version.");
+        event.icon = "://icons/48x48/Start.png";
     }
 
     // search for the first item with data
@@ -564,9 +564,9 @@ void IGisItem::squashHistory()
     history_event_t& first = history.events.first();
     history_event_t& last = history.events.last();
 
-    last.time    = first.time;
-    last.who     = first.who;
-    last.icon    = first.icon;
+    last.time = first.time;
+    last.who = first.who;
+    last.icon = first.icon;
     last.comment = first.comment;
 
     history.histIdxCurrent = 0;
@@ -590,7 +590,7 @@ bool IGisItem::isTainted() const
 
 qint32 IGisItem::isOnDevice() const
 {
-    IGisProject * project = getParentProject();
+    IGisProject* project = getParentProject();
     if(nullptr == project)
     {
         return false;
@@ -622,7 +622,7 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
         {
             CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
 
-            QCheckBox * checkBox = new QCheckBox(tr("Never ask again."), 0);
+            QCheckBox* checkBox = new QCheckBox(tr("Never ask again."), 0);
             QString msg = tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press 'Ok'.").arg(getName());
             QMessageBox box(QMessageBox::Warning, tr("Read Only Mode..."), msg, QMessageBox::Ok | QMessageBox::Abort, CMainWindow::getBestWidgetForParent());
             box.setDefaultButton(QMessageBox::Ok);
@@ -654,7 +654,7 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
 }
 
 
-const IGisItem::key_t &IGisItem::getKey() const
+const IGisItem::key_t& IGisItem::getKey() const
 {
     if(key.item.isEmpty() || key.project.isEmpty())
     {
@@ -688,7 +688,7 @@ void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db)
     lastDatabaseHash = getHash();
 }
 
-void IGisItem::setIcon(const QPixmap &icon)
+void IGisItem::setIcon(const QPixmap& icon)
 {
     this->icon = icon;
     showIcon();
@@ -698,8 +698,8 @@ void IGisItem::showIcon()
 {
     if (isNogo())
     {
-        const int & width = icon.width();
-        const int & height = icon.height();
+        const int& width = icon.width();
+        const int& height = icon.height();
         displayIcon = QPixmap(width, height);
         displayIcon.fill(Qt::transparent);
         QPainter painter(&displayIcon);
@@ -784,7 +784,7 @@ void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewp
     }
 }
 
-QString IGisItem::removeHtml(const QString &str)
+QString IGisItem::removeHtml(const QString& str)
 {
     QTextDocument html;
     html.setHtml(str);
@@ -802,7 +802,7 @@ QString IGisItem::html2Dev(const QString& str, bool strictGpx11)
     return (isOnDevice() == IDevice::eTypeGarmin) || strictGpx11 ? removeHtml(str) : str;
 }
 
-QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str, const QString &key)
+QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str, const QString& key)
 {
     if(isReadOnly)
     {
@@ -818,7 +818,7 @@ QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& st
     }
 }
 
-QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links, const QString &key)
+QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links, const QString& key)
 {
     QString str;
     bool isEmpty;
@@ -849,7 +849,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
         str += toLink(isReadOnly, "links", tr("<h4>Links:</h4>"), key);
         if(!isEmpty)
         {
-            for(const link_t &link : links)
+            for(const link_t& link : links)
             {
                 str += QString("<p><a href='%1'>%2</a></p>")
                        .arg(
@@ -891,7 +891,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
         }
         else
         {
-            for(const link_t &link : links)
+            for(const link_t& link : links)
             {
                 str += QString("<p><a href='%1'>%2</a></p>")
                        .arg(link.uri.toString(),
@@ -903,7 +903,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
     return str;
 }
 
-bool IGisItem::isVisible(const QRectF &rect, const QPolygonF& viewport, CGisDraw *gis)
+bool IGisItem::isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw* gis)
 {
     QPolygonF tmp1;
     tmp1 << rect.topLeft();
@@ -919,7 +919,7 @@ bool IGisItem::isVisible(const QRectF &rect, const QPolygonF& viewport, CGisDraw
     return tmp2.boundingRect().intersects(tmp1.boundingRect());
 }
 
-bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis)
+bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw* gis)
 {
     QPolygonF tmp2 = viewport;
     gis->convertRad2Px(tmp2);
@@ -944,7 +944,7 @@ bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& p
 
     if(flags & eSelectionExact)
     {
-        for(const QPointF &point : points)
+        for(const QPointF& point : points)
         {
             if(!area.contains(point))
             {
@@ -955,7 +955,7 @@ bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& p
     }
     else if(flags & eSelectionIntersect)
     {
-        for(const QPointF &point : points)
+        for(const QPointF& point : points)
         {
             if(area.contains(point))
             {
@@ -1022,7 +1022,7 @@ const QBrush& IGisItem::getNogoTextureBrush()
     return texture;
 }
 
-bool IGisItem::getNameAndProject(QString &name, IGisProject *&project, const QString& itemtype)
+bool IGisItem::getNameAndProject(QString& name, IGisProject*& project, const QString& itemtype)
 {
     name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new %1 name.").arg(itemtype), QLineEdit::Normal, name);
     if(name.isEmpty())
@@ -1034,9 +1034,9 @@ bool IGisItem::getNameAndProject(QString &name, IGisProject *&project, const QSt
     return nullptr != project;
 }
 
-IGisItem * IGisItem::newGisItem(quint32 type, quint64 id, QSqlDatabase& db, IGisProject * project)
+IGisItem* IGisItem::newGisItem(quint32 type, quint64 id, QSqlDatabase& db, IGisProject* project)
 {
-    IGisItem *item = nullptr;
+    IGisItem* item = nullptr;
 
     // load item from database
     switch(type)
@@ -1075,7 +1075,7 @@ void IGisItem::setRating(qreal rating)
     updateHistory();
 }
 
-const QSet<QString> &IGisItem::getKeywords() const
+const QSet<QString>& IGisItem::getKeywords() const
 {
     return keywords;
 }
@@ -1087,13 +1087,13 @@ QList<QString> IGisItem::getKeywordsSorted() const
     return sortedKeywords;
 }
 
-void IGisItem::addKeywords(const QSet<QString> &otherKeywords)
+void IGisItem::addKeywords(const QSet<QString>& otherKeywords)
 {
     keywords.unite(otherKeywords);
     updateHistory();
 }
 
-void IGisItem::removeKeywords(const QSet<QString> &otherKeywords)
+void IGisItem::removeKeywords(const QSet<QString>& otherKeywords)
 {
     keywords.subtract(otherKeywords);
     updateHistory();

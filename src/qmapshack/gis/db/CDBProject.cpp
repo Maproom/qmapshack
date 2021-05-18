@@ -38,14 +38,14 @@
 
 #include <QtSql>
 #include <QtWidgets>
-CDBProject::CDBProject(CGisListWks * parent)
+CDBProject::CDBProject(CGisListWks* parent)
     : IGisProject(eTypeDb, "", parent)
     , id(0)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/DBProject.png"));
 }
 
-CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
+CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks* parent)
     : IGisProject(eTypeDb, dbName, parent)
     , id(id)
 {
@@ -58,8 +58,8 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     QUERY_EXEC(return );
     query.next();
 
-    QString date    = query.value(0).toString();
-    QString name    = query.value(1).toString();
+    QString date = query.value(0).toString();
+    QString name = query.value(1).toString();
     QByteArray data = query.value(2).toByteArray();
 
     if(data.isEmpty())
@@ -105,11 +105,11 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     valid = true;
 }
 
-CDBProject::CDBProject(const QString& filename, IDBFolder * parentFolder, CGisListWks *parent)
+CDBProject::CDBProject(const QString& filename, IDBFolder* parentFolder, CGisListWks* parent)
     : IGisProject(eTypeDb, parentFolder->getDBName(), parent)
     , db(parentFolder->getDb())
 {
-    IGisProject * prjIn = IGisProject::create(filename, nullptr);
+    IGisProject* prjIn = IGisProject::create(filename, nullptr);
     if(prjIn == nullptr)
     {
         QMessageBox::information(CMainWindow::self().getBestWidgetForParent(), tr("Failed to load..."),
@@ -141,16 +141,16 @@ CDBProject::CDBProject(const QString& filename, IDBFolder * parentFolder, CGisLi
 
 
     // copy data
-    key         = prjIn->getKey();
-    metadata    = prjIn->getMetadata();
+    key = prjIn->getKey();
+    metadata = prjIn->getMetadata();
 
     QList<QTreeWidgetItem*> items = prjIn->takeChildren();
     addChildren(items);
 
     // set change indication else the item will not be saved
-    for(QTreeWidgetItem * item : qAsConst(items))
+    for(QTreeWidgetItem* item : qAsConst(items))
     {
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
+        IGisItem* gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem)
         {
             gisItem->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
@@ -162,7 +162,7 @@ CDBProject::CDBProject(const QString& filename, IDBFolder * parentFolder, CGisLi
 
 CDBProject::~CDBProject()
 {
-    CEvtW2DAckInfo * evt = new CEvtW2DAckInfo(Qt::Unchecked, getId(), getDBName(), getDBHost());
+    CEvtW2DAckInfo* evt = new CEvtW2DAckInfo(Qt::Unchecked, getId(), getDBName(), getDBHost());
     CGisDatabase::self().postEventForDb(evt);
 
     /*
@@ -175,7 +175,7 @@ CDBProject::~CDBProject()
      */
     if(treeWidget() == nullptr)
     {
-        CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
+        CEvtD2WReqInfo* evt = new CEvtD2WReqInfo(getId(), getDBName());
         CGisWorkspace::self().postEventForWks(evt);
     }
 }
@@ -196,7 +196,7 @@ void CDBProject::restoreDBLink()
     }
 }
 
-void CDBProject::setupName(const QString &defaultName)
+void CDBProject::setupName(const QString& defaultName)
 {
     IGisProject::setupName(defaultName);
 
@@ -209,7 +209,7 @@ void CDBProject::setupName(const QString &defaultName)
     QUERY_EXEC();
     if(query.next())
     {
-        nameSuffix   = query.value(0).toString();
+        nameSuffix = query.value(0).toString();
     }
     setText(CGisListWks::eColumnName, getNameEx());
 }
@@ -218,13 +218,13 @@ void CDBProject::setupName(const QString &defaultName)
 void CDBProject::postStatus(bool updateLostFound)
 {
     // collect the keys of all child items and post them to the database view
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(getId(), getDBName(), getDBHost());
+    CEvtW2DAckInfo* info = new CEvtW2DAckInfo(getId(), getDBName(), getDBHost());
 
-    bool changedItems   = false;
-    const int N         = childCount();
+    bool changedItems = false;
+    const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(n));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(n));
         if(item)
         {
             info->keysChildren << item->getKey().item;
@@ -256,8 +256,8 @@ void CDBProject::postStatus(bool updateLostFound)
     {
         checkState = Qt::Checked;
     }
-    info->checkState        = checkState;
-    info->updateLostFound   = updateLostFound;
+    info->checkState = checkState;
+    info->updateLostFound = updateLostFound;
 
     // update item counters and track/waypoint correlation
     // updateItems(); <--- don't! this is causing a crash
@@ -270,7 +270,7 @@ void CDBProject::postStatus(bool updateLostFound)
 }
 
 
-CDBProject::action_e CDBProject::checkForAction2(IGisItem * item, quint64 &itemId, QString& hashItem, action_e& action2ForAll, QSqlQuery &query)
+CDBProject::action_e CDBProject::checkForAction2(IGisItem* item, quint64& itemId, QString& hashItem, action_e& action2ForAll, QSqlQuery& query)
 {
     action_e action = eActionNone;
 
@@ -280,9 +280,9 @@ CDBProject::action_e CDBProject::checkForAction2(IGisItem * item, quint64 &itemI
 
     if(query.next())
     {
-        QString hash    = query.value(0).toString();
-        QString user    = query.value(1).toString();
-        QString date    = query.value(2).toString();
+        QString hash = query.value(0).toString();
+        QString user = query.value(1).toString();
+        QString date = query.value(2).toString();
 
         if(hash == hashItem)
         {
@@ -313,7 +313,7 @@ CDBProject::action_e CDBProject::checkForAction2(IGisItem * item, quint64 &itemI
     return action;
 }
 
-void CDBProject::updateItem(IGisItem *&item, quint64 idItem, action_e& action2ForAll, QSqlQuery &query)
+void CDBProject::updateItem(IGisItem*& item, quint64 idItem, action_e& action2ForAll, QSqlQuery& query)
 {
     // serialize complete history of item
     QByteArray data;
@@ -332,15 +332,15 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, action_e& action2Fo
     QString hashInDb = item->getLastDatabaseHash();
 
     query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, date=:date, comment=:comment, data=:data, hash=:hash WHERE id=:id AND hash=:oldhash");
-    query.bindValue(":type",    item->type());
-    query.bindValue(":keyqms",  item->getKey().item);
-    query.bindValue(":icon",    buffer.data());
-    query.bindValue(":name",    item->getName());
-    query.bindValue(":date",    item->getTimestamp());
+    query.bindValue(":type", item->type());
+    query.bindValue(":keyqms", item->getKey().item);
+    query.bindValue(":icon", buffer.data());
+    query.bindValue(":name", item->getName());
+    query.bindValue(":date", item->getTimestamp());
     query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowFullText));
-    query.bindValue(":data",    data);
-    query.bindValue(":hash",    item->getHash());
-    query.bindValue(":id",      idItem);
+    query.bindValue(":data", data);
+    query.bindValue(":hash", item->getHash());
+    query.bindValue(":id", idItem);
     query.bindValue(":oldhash", hashInDb);
     QUERY_EXEC(throw eReasonQueryFail);
 
@@ -362,8 +362,8 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, action_e& action2Fo
         {
         case eActionClone:
         {
-            IGisItem * item2    = item->createClone();
-            quint64 idItem      = insertItem(item2, query);
+            IGisItem* item2 = item->createClone();
+            quint64 idItem = insertItem(item2, query);
 
             delete item;
             item = item2;
@@ -380,15 +380,15 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, action_e& action2Fo
             // hashInDb has been updated by checkForAction2() by the one stored in the database
             // therefore the update should succeed now.
             query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, date=:date, comment=:comment, data=:data, hash=:hash WHERE id=:id AND hash=:oldhash");
-            query.bindValue(":type",    item->type());
-            query.bindValue(":keyqms",  item->getKey().item);
-            query.bindValue(":icon",    buffer.data());
-            query.bindValue(":name",    item->getName());
-            query.bindValue(":date",    item->getTimestamp());
+            query.bindValue(":type", item->type());
+            query.bindValue(":keyqms", item->getKey().item);
+            query.bindValue(":icon", buffer.data());
+            query.bindValue(":name", item->getName());
+            query.bindValue(":date", item->getTimestamp());
             query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowFullText));
-            query.bindValue(":data",    data);
-            query.bindValue(":hash",    item->getHash());
-            query.bindValue(":id",      idItem);
+            query.bindValue(":data", data);
+            query.bindValue(":hash", item->getHash());
+            query.bindValue(":id", idItem);
             query.bindValue(":oldhash", hashInDb);
             QUERY_EXEC(throw eReasonQueryFail);
 
@@ -414,7 +414,7 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, action_e& action2Fo
     }
 }
 
-quint64 CDBProject::insertItem(IGisItem * item, QSqlQuery &query)
+quint64 CDBProject::insertItem(IGisItem* item, QSqlQuery& query)
 {
     quint64 idItem = 0;
 
@@ -433,14 +433,14 @@ quint64 CDBProject::insertItem(IGisItem * item, QSqlQuery &query)
     buffer.seek(0);
 
     query.prepare("INSERT INTO items (type, keyqms, icon, name, date, comment, data, hash) VALUES (:type, :keyqms, :icon, :name, :date, :comment, :data, :hash)");
-    query.bindValue(":type",    item->type());
-    query.bindValue(":keyqms",  item->getKey().item);
-    query.bindValue(":icon",    buffer.data());
-    query.bindValue(":name",    item->getName());
-    query.bindValue(":date",    item->getTimestamp());
+    query.bindValue(":type", item->type());
+    query.bindValue(":keyqms", item->getKey().item);
+    query.bindValue(":icon", buffer.data());
+    query.bindValue(":name", item->getName());
+    query.bindValue(":date", item->getTimestamp());
     query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowFullText));
-    query.bindValue(":data",    data);
-    query.bindValue(":hash",    item->getHash());
+    query.bindValue(":data", data);
+    query.bindValue(":hash", item->getHash());
     QUERY_EXEC(throw eReasonQueryFail);
 
     if(query.numRowsAffected())
@@ -461,7 +461,7 @@ quint64 CDBProject::insertItem(IGisItem * item, QSqlQuery &query)
     return idItem;
 }
 
-CDBProject::action_e CDBProject::checkForAction1(IGisItem * item, quint64& itemId, CSelectSaveAction::result_e& action1ForAll, QSqlQuery &query)
+CDBProject::action_e CDBProject::checkForAction1(IGisItem* item, quint64& itemId, CSelectSaveAction::result_e& action1ForAll, QSqlQuery& query)
 {
     int action = eActionNone;
 
@@ -474,8 +474,8 @@ CDBProject::action_e CDBProject::checkForAction1(IGisItem * item, quint64& itemI
 
     if(query.next())
     {
-        itemId      = query.value(0).toULongLong();
-        itemType    = query.value(1).toUInt();
+        itemId = query.value(0).toULongLong();
+        itemType = query.value(1).toUInt();
 
         // check if relation already exists.
         query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
@@ -486,12 +486,12 @@ CDBProject::action_e CDBProject::checkForAction1(IGisItem * item, quint64& itemI
         if(!query.next())
         {
             // item is already in database but folder relation does not exit
-            CSelectSaveAction::result_e result  = action1ForAll;
+            CSelectSaveAction::result_e result = action1ForAll;
 
             if(action1ForAll == CSelectSaveAction::eResultNone)
             {
                 // Build the dialog to ask for user action
-                IGisItem * item1 = IGisItem::newGisItem(itemType, itemId, db, nullptr);
+                IGisItem* item1 = IGisItem::newGisItem(itemType, itemId, db, nullptr);
 
                 if(nullptr == item1)
                 {
@@ -558,8 +558,8 @@ bool CDBProject::save()
 bool CDBProject::save(CSelectSaveAction::result_e action1ForAll, action_e action2ForAll)
 {
     QSqlQuery query(db);
-    bool stop       = false;
-    bool success    = true;
+    bool stop = false;
+    bool success = true;
 
     // check if project is still part of the database
     query.prepare("SELECT keyqms FROM folders WHERE id=:id");
@@ -584,7 +584,7 @@ bool CDBProject::save(CSelectSaveAction::result_e action1ForAll, action_e action
         {
             PROGRESS(i, throw eReasonCancel);
 
-            IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+            IGisItem* item = dynamic_cast<IGisItem*>(child(i));
             if(nullptr == item)
             {
                 continue;
@@ -618,7 +618,7 @@ bool CDBProject::save(CSelectSaveAction::result_e action1ForAll, action_e action
 
             if(action & eActionClone)
             {
-                IGisItem * item2 = item->createClone();
+                IGisItem* item2 = item->createClone();
                 idItem = insertItem(item2, query);
 
                 delete item;
@@ -644,7 +644,7 @@ bool CDBProject::save(CSelectSaveAction::result_e action1ForAll, action_e action
 
             case eReasonCancel:
             case eReasonUnexpected:
-                stop    = true;
+                stop = true;
                 success = false;
                 break;
 
@@ -680,7 +680,7 @@ bool CDBProject::save(CSelectSaveAction::result_e action1ForAll, action_e action
 }
 
 
-void CDBProject::showItems(CEvtD2WShowItems * evt, action_e action2ForAll)
+void CDBProject::showItems(CEvtD2WShowItems* evt, action_e action2ForAll)
 {
     bool restoreDlgDetails = false;
     if(evt->addItemsExclusively)
@@ -691,9 +691,9 @@ void CDBProject::showItems(CEvtD2WShowItems * evt, action_e action2ForAll)
         qDeleteAll(takeChildren());
     }
 
-    for(const evt_item_t &item : qAsConst(evt->items))
+    for(const evt_item_t& item : qAsConst(evt->items))
     {
-        IGisItem * gisItem = IGisItem::newGisItem(item.type, item.id, db, this);
+        IGisItem* gisItem = IGisItem::newGisItem(item.type, item.id, db, this);
 
         /* [Issue #72] Database/Workspace inconsistency in QMS 1.4.0
 
@@ -732,14 +732,14 @@ void CDBProject::showItems(CEvtD2WShowItems * evt, action_e action2ForAll)
     }
 }
 
-void CDBProject::hideItems(CEvtD2WHideItems * evt)
+void CDBProject::hideItems(CEvtD2WHideItems* evt)
 {
     IGisItem::key_t key;
     key.project = getKey();
 
     QMessageBox::StandardButtons last = QMessageBox::YesToAll;
 
-    for(const QString &k : qAsConst(evt->keys))
+    for(const QString& k : qAsConst(evt->keys))
     {
         key.item = k;
         delItemByKey(key, last);
@@ -779,7 +779,7 @@ void CDBProject::update()
     QUERY_EXEC(return );
     query.next();
 
-    QString name    = query.value(1).toString();
+    QString name = query.value(1).toString();
     QByteArray data = query.value(2).toByteArray();
 
     if(!data.isEmpty())
@@ -807,7 +807,7 @@ void CDBProject::update()
         query.bindValue(":parent", getId());
         QUERY_EXEC(return );
 
-        CEvtD2WShowItems * evt = new CEvtD2WShowItems(getId(), getDBName());
+        CEvtD2WShowItems* evt = new CEvtD2WShowItems(getId(), getDBName());
         evt->addItemsExclusively = true;
 
         while(query.next())
@@ -823,7 +823,7 @@ void CDBProject::update()
         const int N = childCount();
         for(int i = 0; i < N; i++)
         {
-            IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+            IGisItem* item = dynamic_cast<IGisItem*>(child(i));
             if(item == nullptr)
             {
                 continue;

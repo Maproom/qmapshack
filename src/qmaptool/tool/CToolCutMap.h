@@ -28,7 +28,7 @@ class CToolCutMap : public IToolGui, public ITool, private Ui::IToolCutMap
 {
     Q_OBJECT
 public:
-    CToolCutMap(QWidget * parent);
+    CToolCutMap(QWidget* parent);
     virtual ~CToolCutMap();
 
     void setupChanged() override;
@@ -37,14 +37,14 @@ public:
 
 
 private slots:
-    void slotAddItem(const QString& filename, QListWidget * list);
+    void slotAddItem(const QString& filename, QListWidget* list);
     void slotMapSelectionChanged();
     void slotSomethingChanged();
     void slotStart();
     void slotFinished(qint32 id);
 
 private:
-    void buildCmd(QList<CShellCmd>& cmds, const IItem *iitem) override;
+    void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
 };
 
 #endif //CTOOLCUTMAP_H

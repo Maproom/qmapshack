@@ -40,13 +40,13 @@ public:
         , eTypeTwoNav    = 2
     };
 
-    IDevice(const QString& path, type_e type, const QString& key, QTreeWidget * parent);
-    IDevice(const QString &path, type_e type, const QString &key, CDeviceGarmin *parent);
+    IDevice(const QString& path, type_e type, const QString& key, QTreeWidget* parent);
+    IDevice(const QString& path, type_e type, const QString& key, CDeviceGarmin* parent);
     virtual ~IDevice();
 
 
     static void mount(const QString& path);
-    static void umount(const QString &path);
+    static void umount(const QString& path);
     static int count()
     {
         return cnt;
@@ -68,21 +68,21 @@ public:
 
     QString getName() const;
 
-    void getItemsByPos(const QPointF& pos, QList<IGisItem *> &items);
-    void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
-    void getNogoAreas(QList<IGisItem *> &nogos);
-    IGisItem * getItemByKey(const IGisItem::key_t& key);
+    void getItemsByPos(const QPointF& pos, QList<IGisItem*>& items);
+    void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem*>& items);
+    void getNogoAreas(QList<IGisItem*>& nogos);
+    IGisItem* getItemByKey(const IGisItem::key_t& key);
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
     void editItemByKey(const IGisItem::key_t& key);
 
-    void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-    void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis);
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis);
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis);
 
-    void insertCopyOfProject(IGisProject * project, int& lastResult);
-    void updateProject(IGisProject * project);
+    void insertCopyOfProject(IGisProject* project, int& lastResult);
+    void updateProject(IGisProject* project);
 
-    virtual void startSavingProject(IGisProject * project)
+    virtual void startSavingProject(IGisProject* project)
     {
     }
     virtual void saveImages(CGisItemWpt& wpt)
@@ -91,14 +91,14 @@ public:
     virtual void loadImages(CGisItemWpt& wpt)
     {
     }
-    virtual void aboutToRemoveProject(IGisProject * project)
+    virtual void aboutToRemoveProject(IGisProject* project)
     {
     }
 
-    IGisProject * getProjectByKey(const QString& key);
+    IGisProject* getProjectByKey(const QString& key);
 
 protected:
-    virtual void insertCopyOfProject(IGisProject * project) = 0;
+    virtual void insertCopyOfProject(IGisProject* project) = 0;
     /**
        @brief Test if a project's filename/path is already used
 

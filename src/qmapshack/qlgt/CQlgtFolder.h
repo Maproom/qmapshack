@@ -36,7 +36,7 @@ public:
     QString comment;
     bool locked;
 
-    CQlgtDiary * diary;
+    CQlgtDiary* diary;
 
     quint64 id;
     QSet<quint64> items;

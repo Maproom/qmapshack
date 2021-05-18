@@ -29,7 +29,7 @@
 #include <QtWidgets>
 using std::bind;
 
-COverlayRefMap::COverlayRefMap(CItemRefMap *item, QStackedWidget *stackedWidget)
+COverlayRefMap::COverlayRefMap(CItemRefMap* item, QStackedWidget* stackedWidget)
     : IOverlay(stackedWidget)
     , context(item->getDrawContext())
     , item(item)
@@ -79,7 +79,7 @@ void COverlayRefMap::saveSettings(QSettings& cfg)
     stream << N;
     for(int n = 0; n < N; n++)
     {
-        COverlayRefMapPoint * item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
+        COverlayRefMapPoint* item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
         if(item != nullptr)
         {
             stream << item->getPtPtx() << item->getPtRef();
@@ -127,7 +127,7 @@ void COverlayRefMap::slotSortRefPoints()
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        COverlayRefMapPoint * point = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
+        COverlayRefMapPoint* point = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
         if(point == nullptr)
         {
             continue;
@@ -143,7 +143,7 @@ void COverlayRefMap::addRefPoints(QList<COverlayRefMapPoint*>& points)
 {
     // it's faster to use a bulk add
     QList<QTreeWidgetItem*> items;
-    for(QTreeWidgetItem * item : points)
+    for(QTreeWidgetItem* item : points)
     {
         items << item;
     }
@@ -169,7 +169,7 @@ const QList<COverlayRefMapPoint*> COverlayRefMap::getRefPoints() const
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        COverlayRefMapPoint * item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
+        COverlayRefMapPoint* item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
         if(item != nullptr)
         {
             points << item;
@@ -185,7 +185,7 @@ bool COverlayRefMap::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        COverlayRefMapPoint * item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
+        COverlayRefMapPoint* item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
         if(item != nullptr)
         {
             if(item->isSelected())
@@ -245,15 +245,15 @@ bool COverlayRefMap::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
 
 QPointF COverlayRefMap::isCloseTo(QPointF pt)
 {
-    qint32 min              = 30;
-    COverlayRefMapPoint * selItem  = nullptr;
+    qint32 min = 30;
+    COverlayRefMapPoint* selItem = nullptr;
 
     context->convertMap2Screen(pt);
 
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        COverlayRefMapPoint * item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
+        COverlayRefMapPoint* item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
         if(item == nullptr)
         {
             continue;
@@ -282,7 +282,7 @@ QPointF COverlayRefMap::isCloseTo(QPointF pt)
 }
 
 
-void COverlayRefMap::mouseMoveEventFx(QMouseEvent *e)
+void COverlayRefMap::mouseMoveEventFx(QMouseEvent* e)
 {
     QPointF pt = e->pos();
     context->convertScreen2Map(pt);
@@ -307,7 +307,7 @@ void COverlayRefMap::mouseMoveEventFx(QMouseEvent *e)
     context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
 }
 
-void COverlayRefMap::mouseReleaseEventFx(QMouseEvent *e)
+void COverlayRefMap::mouseReleaseEventFx(QMouseEvent* e)
 {
     QPointF pt = e->pos();
     context->convertScreen2Map(pt);
@@ -334,17 +334,17 @@ void COverlayRefMap::mouseReleaseEventFx(QMouseEvent *e)
     context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
 }
 
-void COverlayRefMap::mouseMovePointAdd(const QPointF &pt)
+void COverlayRefMap::mouseMovePointAdd(const QPointF& pt)
 {
     ptFocus1 = pt;
 }
 
-void COverlayRefMap::mouseMovePointDel(const QPointF &pt)
+void COverlayRefMap::mouseMovePointDel(const QPointF& pt)
 {
     ptFocus1 = isCloseTo(pt);
 }
 
-void COverlayRefMap::mouseMovePointMove(const QPointF &pt)
+void COverlayRefMap::mouseMovePointMove(const QPointF& pt)
 {
     if(movePoint)
     {
@@ -356,7 +356,7 @@ void COverlayRefMap::mouseMovePointMove(const QPointF &pt)
     }
 }
 
-void COverlayRefMap::mouseReleasePointAdd(const QPointF &pt, Qt::MouseButton button)
+void COverlayRefMap::mouseReleasePointAdd(const QPointF& pt, Qt::MouseButton button)
 {
     if(button == Qt::LeftButton)
     {
@@ -379,7 +379,7 @@ void COverlayRefMap::mouseReleasePointAdd(const QPointF &pt, Qt::MouseButton but
     }
 }
 
-void COverlayRefMap::mouseReleasePointDel(const QPointF &pt, Qt::MouseButton button)
+void COverlayRefMap::mouseReleasePointDel(const QPointF& pt, Qt::MouseButton button)
 {
     if(button == Qt::LeftButton)
     {
@@ -391,7 +391,7 @@ void COverlayRefMap::mouseReleasePointDel(const QPointF &pt, Qt::MouseButton but
         const int N = treeWidget->topLevelItemCount();
         for(int n = 0; n < N; n++)
         {
-            COverlayRefMapPoint * item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
+            COverlayRefMapPoint* item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
             if(item == nullptr)
             {
                 continue;
@@ -414,7 +414,7 @@ void COverlayRefMap::mouseReleasePointDel(const QPointF &pt, Qt::MouseButton but
     }
 }
 
-void COverlayRefMap::mouseReleasePointMove(const QPointF &pt, Qt::MouseButton button)
+void COverlayRefMap::mouseReleasePointMove(const QPointF& pt, Qt::MouseButton button)
 {
     if(button == Qt::LeftButton)
     {
@@ -423,7 +423,7 @@ void COverlayRefMap::mouseReleasePointMove(const QPointF &pt, Qt::MouseButton bu
             const int N = treeWidget->topLevelItemCount();
             for(int n = 0; n < N; n++)
             {
-                COverlayRefMapPoint * item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
+                COverlayRefMapPoint* item = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
                 if(item == nullptr)
                 {
                     continue;
@@ -455,7 +455,7 @@ void COverlayRefMap::mouseReleasePointMove(const QPointF &pt, Qt::MouseButton bu
                 }
                 else
                 {
-                    COverlayRefMapPoint * point = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(idx));
+                    COverlayRefMapPoint* point = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(idx));
                     if(point == nullptr)
                     {
                         return;
@@ -464,8 +464,8 @@ void COverlayRefMap::mouseReleasePointMove(const QPointF &pt, Qt::MouseButton bu
                     treeWidget->scrollToItem(point);
 
                     QPointF pt1 = point->getPtPtx();
-                    ptFocus1    = pt1;
-                    ptFocus2    = pt;
+                    ptFocus1 = pt1;
+                    ptFocus2 = pt;
                     context->convertMap2Screen(pt1);
 
                     QPointF pt2 = context->getCanvas()->rect().center();
@@ -480,8 +480,8 @@ void COverlayRefMap::mouseReleasePointMove(const QPointF &pt, Qt::MouseButton bu
         {
             if(ptFocus1 != NOPOINTF)
             {
-                ptFocus2    = pt;
-                movePoint   = true;
+                ptFocus2 = pt;
+                movePoint = true;
                 CCanvas::setOverrideCursor(Qt::BlankCursor, "CRefMapGrid::mouseReleasePointMove");
             }
         }
@@ -498,9 +498,9 @@ void COverlayRefMap::mouseReleasePointMove(const QPointF &pt, Qt::MouseButton bu
 }
 
 
-bool COverlayRefMap::keyPressEventFx(QKeyEvent *e)
+bool COverlayRefMap::keyPressEventFx(QKeyEvent* e)
 {
-    QTreeWidgetItem * item = treeWidget->currentItem();
+    QTreeWidgetItem* item = treeWidget->currentItem();
     if(item == nullptr)
     {
         return false;
@@ -543,7 +543,7 @@ bool COverlayRefMap::keyPressEventFx(QKeyEvent *e)
         }
     }
 
-    COverlayRefMapPoint * point = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(idx));
+    COverlayRefMapPoint* point = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(idx));
     if(point == nullptr)
     {
         return false;
@@ -591,9 +591,9 @@ void COverlayRefMap::updateGui()
 
 void COverlayRefMap::abortStep()
 {
-    movePoint   = false;
-    ptFocus1    = NOPOINTF;
-    ptFocus2    = NOPOINTF;
+    movePoint = false;
+    ptFocus1 = NOPOINTF;
+    ptFocus2 = NOPOINTF;
 
     context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
 }
@@ -631,7 +631,7 @@ void COverlayRefMap::slotSaveGcp()
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        COverlayRefMapPoint * pt = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
+        COverlayRefMapPoint* pt = dynamic_cast<COverlayRefMapPoint*>(treeWidget->topLevelItem(n));
         if(pt == nullptr)
         {
             continue;

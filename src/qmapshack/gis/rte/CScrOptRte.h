@@ -32,7 +32,7 @@ class CScrOptRte : public IScrOpt, private Ui::IScrOptRte
 {
     Q_OBJECT
 public:
-    CScrOptRte(CGisItemRte * rte, const QPoint &point, IMouse *parent);
+    CScrOptRte(CGisItemRte* rte, const QPoint& point, IMouse* parent);
     virtual ~CScrOptRte();
 
     void draw(QPainter& p) override;

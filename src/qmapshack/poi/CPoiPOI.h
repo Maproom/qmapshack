@@ -32,10 +32,10 @@ class CPoiPOI : public IPoi
 {
     Q_DECLARE_TR_FUNCTIONS(CPoiPOI)
 public:
-    CPoiPOI(const QString& filename, CPoiDraw *parent);
+    CPoiPOI(const QString& filename, CPoiDraw* parent);
     virtual ~CPoiPOI() = default;
 
-    void addTreeWidgetItems(QTreeWidget *widget) override;
+    void addTreeWidgetItems(QTreeWidget* widget) override;
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
     void loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10);
 
@@ -43,10 +43,10 @@ public:
 
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    bool findPoiCloseBy(const QPoint& px, QSet<poi_t> &poiItems, QList<QPointF>& posPoiHighlight) const override;
+    bool findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const override;
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    void findPoisIn(const QRectF& degRect, QSet<poi_t>&pois, QList<QPointF>& posPoiHighlight) override;
+    void findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF>& posPoiHighlight) override;
     bool getToolTip(const QPoint& px, QString& str) const override;
 
     static void init()
@@ -55,7 +55,7 @@ public:
     }
 
 public slots:
-    void slotCheckedStateChanged(QTreeWidgetItem*item) override;
+    void slotCheckedStateChanged(QTreeWidgetItem* item) override;
 
 private:
     struct poiGroup_t
@@ -83,8 +83,8 @@ private:
         eSqlColumnCategoryParent
     };
 
-    void getPoiIcon(QPixmap &icon, const poiGroup_t& poiGroup);
-    void getPoiIcon(QPixmap &icon, const CRawPoi& poi, const QString& definingTag = "");
+    void getPoiIcon(QPixmap& icon, const poiGroup_t& poiGroup);
+    void getPoiIcon(QPixmap& icon, const CRawPoi& poi, const QString& definingTag = "");
     bool overlapsWithIcon(const QRectF& rect) const;
     bool getPoiGroupCloseBy(const QPoint& px, poiGroup_t& poiItem) const;
 

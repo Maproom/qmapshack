@@ -24,7 +24,7 @@
 
    @param trk The track for which the "Energy Use Cycling" value should computed
  */
-CEnergyCycling::CEnergyCycling(CGisItemTrk &trk) :
+CEnergyCycling::CEnergyCycling(CGisItemTrk& trk) :
     trk(trk)
 {
     loadSettings(energyTrkSet);
@@ -56,7 +56,7 @@ CEnergyCycling::CEnergyCycling(CGisItemTrk &trk) :
 
    @param energySet The parameter set in which the SETTINGS parameter will be load
  */
-void CEnergyCycling::loadSettings(CEnergyCycling::energy_set_t &energySet)
+void CEnergyCycling::loadSettings(CEnergyCycling::energy_set_t& energySet)
 {
     SETTINGS;
     cfg.beginGroup("EnergyCycling");
@@ -132,7 +132,7 @@ void CEnergyCycling::compute()
 
    @param energySet The parameter set used for the computation algorithm (input and output values)
  */
-void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
+void CEnergyCycling::compute(CEnergyCycling::energy_set_t& energySet)
 {
     if(!isValid())
     {
@@ -171,9 +171,9 @@ void CEnergyCycling::compute(CEnergyCycling::energy_set_t &energySet)
 
     qreal pedalSpeed = crankLength * pedalCadence * 2 * M_PI / 60 / 1000;
 
-    const CTrackData::trkpt_t *lastTrkpt  = nullptr;
+    const CTrackData::trkpt_t* lastTrkpt = nullptr;
 
-    for(const CTrackData::trkpt_t &pt : trk.getTrackData())
+    for(const CTrackData::trkpt_t& pt : trk.getTrackData())
     {
         if(pt.isHidden())
         {
@@ -275,7 +275,7 @@ bool CEnergyCycling::isValid() const
    @param energyTrkSet The parameter set which will be set to the track
    @param updateHistory Set to true to trigger an update of history and info panel
  */
-void CEnergyCycling::setEnergyTrkSet(const energy_set_t &energyTrkSet, bool updateHistory)
+void CEnergyCycling::setEnergyTrkSet(const energy_set_t& energyTrkSet, bool updateHistory)
 {
     this->energyTrkSet = energyTrkSet;
     if (updateHistory)

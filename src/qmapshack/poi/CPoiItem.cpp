@@ -24,7 +24,7 @@
 
 QMutex CPoiItem::mutexActivePois(QMutex::Recursive);
 
-CPoiItem::CPoiItem(QTreeWidget * parent, CPoiDraw *poi)
+CPoiItem::CPoiItem(QTreeWidget* parent, CPoiDraw* poi)
     : QTreeWidgetItem(parent)
     , poi(poi)
 {
@@ -60,9 +60,9 @@ void CPoiItem::showChildren(bool yes)
 {
     if(yes && !poifile.isNull())
     {
-        QTreeWidget * tw = treeWidget();
+        QTreeWidget* tw = treeWidget();
 
-        QTreeWidgetItem * item = new QTreeWidgetItem(this);
+        QTreeWidgetItem* item = new QTreeWidgetItem(this);
         item->setFlags(Qt::ItemIsEnabled);
         tw->setItemWidget(item, 0, poifile->getSetup());
     }
@@ -180,7 +180,7 @@ bool CPoiItem::activate()
 
 void CPoiItem::moveToTop()
 {
-    QTreeWidget * w = treeWidget();
+    QTreeWidget* w = treeWidget();
     QMutexLocker lock(&mutexActivePois);
 
     w->takeTopLevelItem(w->indexOfTopLevelItem(this));
@@ -193,13 +193,13 @@ void CPoiItem::moveToTop()
 void CPoiItem::moveToBottom()
 {
     int row;
-    QTreeWidget * w = treeWidget();
+    QTreeWidget* w = treeWidget();
     QMutexLocker lock(&mutexActivePois);
 
     w->takeTopLevelItem(w->indexOfTopLevelItem(this));
     for(row = 0; row < w->topLevelItemCount(); row++)
     {
-        CPoiItem * item = dynamic_cast<CPoiItem*>(w->topLevelItem(row));
+        CPoiItem* item = dynamic_cast<CPoiItem*>(w->topLevelItem(row));
         if(item && item->poifile.isNull())
         {
             break;

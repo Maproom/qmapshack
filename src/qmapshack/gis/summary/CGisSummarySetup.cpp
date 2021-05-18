@@ -25,7 +25,7 @@
 #include <functional>
 #include <QtWidgets>
 
-CGisSummarySetup::CGisSummarySetup(CGisSummary &parent)
+CGisSummarySetup::CGisSummarySetup(CGisSummary& parent)
     : QDialog(&parent)
     , summary(parent)
 {
@@ -50,7 +50,7 @@ CGisSummarySetup::CGisSummarySetup(CGisSummary &parent)
     adjustSize();
 }
 
-void CGisSummarySetup::setupSignals(CGisSummary::dropzone_e number, QLineEdit * lineName, QListWidget * listWidget, QToolButton * toolAdd, QToolButton * toolDel)
+void CGisSummarySetup::setupSignals(CGisSummary::dropzone_e number, QLineEdit* lineName, QListWidget* listWidget, QToolButton* toolAdd, QToolButton* toolDel)
 {
     connect(toolAdd, &QToolButton::clicked, this, [this, listWidget](){slotAdd(listWidget);});
     connect(toolDel, &QToolButton::clicked, this, [this, listWidget](){slotDel(listWidget);});
@@ -74,7 +74,7 @@ void CGisSummarySetup::accept()
     QDialog::accept();
 }
 
-void CGisSummarySetup::writeResults(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget) const
+void CGisSummarySetup::writeResults(CGisSummary::dropzone_e number, QLineEdit* lineName, QListWidget* listWidget) const
 {
     CGisSummary::dropzone_t& dropzone = summary.getDropZone(number);
 
@@ -83,18 +83,18 @@ void CGisSummarySetup::writeResults(CGisSummary::dropzone_e number, QLineEdit *l
     const int N = listWidget->count();
     for(int n = 0; n < N; n++)
     {
-        QListWidgetItem * item = listWidget->item(n);
+        QListWidgetItem* item = listWidget->item(n);
 
         CGisSummary::folder_t folder;
         folder.name = item->text();
-        folder.id   = item->data(eDataId).toULongLong();
-        folder.db   = item->data(eDataDb).toString();
+        folder.id = item->data(eDataId).toULongLong();
+        folder.db = item->data(eDataDb).toString();
 
         dropzone.folders << folder;
     }
 }
 
-void CGisSummarySetup::slotAdd(QListWidget * listWidget)
+void CGisSummarySetup::slotAdd(QListWidget* listWidget)
 {
     QList<quint64> ids;
     QString db;
@@ -112,23 +112,23 @@ void CGisSummarySetup::slotAdd(QListWidget * listWidget)
     addFolder(ids[0], db, listWidget);
 }
 
-void CGisSummarySetup::slotDel(QListWidget * listWidget)
+void CGisSummarySetup::slotDel(QListWidget* listWidget)
 {
     QList<QListWidgetItem*> items = listWidget->selectedItems();
     qDeleteAll(items);
 }
 
-void CGisSummarySetup::slotItemSelectionChanged(QListWidget * listWidget, QToolButton * toolDel)
+void CGisSummarySetup::slotItemSelectionChanged(QListWidget* listWidget, QToolButton* toolDel)
 {
     bool items = !listWidget->selectedItems().isEmpty();
     toolDel->setEnabled(items);
 }
 
-void CGisSummarySetup::addFolder(quint64 id, const QString& db, QListWidget * listWidget)
+void CGisSummarySetup::addFolder(quint64 id, const QString& db, QListWidget* listWidget)
 {
     const QString& name = IDBFolder::getNameEx(db, id);
 
-    QListWidgetItem * item = new QListWidgetItem(name, listWidget);
+    QListWidgetItem* item = new QListWidgetItem(name, listWidget);
     item->setData(eDataId, id);
     item->setData(eDataDb, db);
 }

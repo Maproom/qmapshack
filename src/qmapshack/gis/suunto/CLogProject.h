@@ -26,7 +26,7 @@ class CLogProject : public ISuuntoProject
 {
     Q_DECLARE_TR_FUNCTIONS(CLogProject)
 public:
-    CLogProject(const QString &filename, CGisListWks * parent);
+    CLogProject(const QString& filename, CGisListWks* parent);
     virtual ~CLogProject() = default;
 
     const QString getFileDialogFilter() const override
@@ -39,7 +39,7 @@ public:
         return "log";
     }
 
-    static void loadLog(const QString &filename, CLogProject *project);
+    static void loadLog(const QString& filename, CLogProject* project);
 
 private:
     void loadLog(const QString& filename);

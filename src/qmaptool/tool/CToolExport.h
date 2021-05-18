@@ -28,7 +28,7 @@ class CToolExport : public IToolGui, public ITool, private Ui::IToolExport
 {
     Q_OBJECT
 public:
-    CToolExport(QWidget * parent);
+    CToolExport(QWidget* parent);
     virtual ~CToolExport();
 
     void setupChanged() override;
@@ -44,7 +44,7 @@ private slots:
     void slotSelectFilename();
 
 private:
-    void buildCmd(QList<CShellCmd>& cmds, const IItem * iitem) override;
+    void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
     void buildCmdFinal(QList<CShellCmd>& cmds) override;
 
     void buildCmdFinalJnx(QList<CShellCmd>& cmds);

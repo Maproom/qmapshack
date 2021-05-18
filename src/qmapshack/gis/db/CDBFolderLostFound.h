@@ -28,14 +28,14 @@ class CDBFolderLostFound : public IDBFolder
 {
     Q_DECLARE_TR_FUNCTIONS(CDBFolderLostFound)
 public:
-    CDBFolderLostFound(QSqlDatabase &db, QTreeWidgetItem *parent);
+    CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem* parent);
     virtual ~CDBFolderLostFound();
 
-    void update(CEvtW2DAckInfo * info) override;
+    void update(CEvtW2DAckInfo* info) override;
     bool update() override;
     void expanding() override;
     void clear();
-    bool delItem(CDBItem * item);
+    bool delItem(CDBItem* item);
 
 
 protected:

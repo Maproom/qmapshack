@@ -22,7 +22,7 @@
 
 #include <QtWidgets>
 
-IItem::IItem(const QString &filename)
+IItem::IItem(const QString& filename)
     : filename(filename)
 {
 }
@@ -63,7 +63,7 @@ bool IItem::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     return true;
 }
 
-void IItem::mousePressEventFx(QMouseEvent *e)
+void IItem::mousePressEventFx(QMouseEvent* e)
 {
     if(nullptr == drawContext)
     {
@@ -72,14 +72,14 @@ void IItem::mousePressEventFx(QMouseEvent *e)
 
     if(e->button() == Qt::LeftButton)
     {
-        lastPos     = e->pos();
-        firstPos    = lastPos;
+        lastPos = e->pos();
+        firstPos = lastPos;
         mapIsMoving = true;
-        mapDidMove  = false;
+        mapDidMove = false;
     }
 }
 
-void IItem::mouseMoveEventFx(QMouseEvent *e)
+void IItem::mouseMoveEventFx(QMouseEvent* e)
 {
     if(nullptr == drawContext)
     {
@@ -93,7 +93,7 @@ void IItem::mouseMoveEventFx(QMouseEvent *e)
         {
             drawContext->move(point - lastPos);
 
-            lastPos    = point;
+            lastPos = point;
             mapDidMove = true;
 
             drawContext->triggerCompleteUpdate(CCanvas::eRedrawMap);
@@ -101,7 +101,7 @@ void IItem::mouseMoveEventFx(QMouseEvent *e)
     }
 }
 
-void IItem::mouseReleaseEventFx(QMouseEvent *e)
+void IItem::mouseReleaseEventFx(QMouseEvent* e)
 {
     if(nullptr == drawContext)
     {
@@ -110,13 +110,13 @@ void IItem::mouseReleaseEventFx(QMouseEvent *e)
 
     if(e->button() == Qt::LeftButton)
     {
-        lastPos     = e->pos();
+        lastPos = e->pos();
         mapIsMoving = false;
-        mapDidMove  = false;
+        mapDidMove = false;
     }
 }
 
-void IItem::wheelEventFx(QWheelEvent *e)
+void IItem::wheelEventFx(QWheelEvent* e)
 {
     if(nullptr == drawContext)
     {

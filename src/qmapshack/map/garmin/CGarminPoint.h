@@ -37,8 +37,8 @@ public:
     CGarminPoint() = default;
     virtual ~CGarminPoint() = default;
 
-    quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData);
-    quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData, const quint8 * pEnd);
+    quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData);
+    quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData, const quint8* pEnd);
 
     QString getLabelText() const;
 

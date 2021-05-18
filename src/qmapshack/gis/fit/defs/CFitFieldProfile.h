@@ -54,7 +54,7 @@ public:
     virtual quint8 getFieldDefNum() const;
     virtual quint8 getDevDataIdx() const;
     /// First element in the pair is the devDataIdx, second is the fieldDefNr
-    virtual QPair<quint8,quint8> getDevProfileId() const;
+    virtual QPair<quint8, quint8> getDevProfileId() const;
     virtual qreal getScale() const;
     virtual qint16 getOffset() const;
     virtual bool hasScaleAndOffset() const;

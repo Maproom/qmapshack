@@ -38,7 +38,7 @@ public:
     quint8 getDefNr() const;
     quint8 getDevDataIdx() const;
     /// First element in the pair is the devDataIdx, second is the DefNr
-    QPair<quint8,quint8> getDevProfileId() const;
+    QPair<quint8, quint8> getDevProfileId() const;
     quint8 getSize() const;
     quint8 getType() const;
     const CFitBaseType& getBaseType() const;

@@ -51,24 +51,24 @@
 
 /* base case: add the filter specified in template parameter */
 template<typename filter>
-static void addFilters(QTreeWidgetItem *itemGroup, CGisItemTrk& trk, qint32& minWidth)
+static void addFilters(QTreeWidgetItem* itemGroup, CGisItemTrk& trk, qint32& minWidth)
 {
-    QTreeWidgetItem *item = new QTreeWidgetItem(itemGroup);
+    QTreeWidgetItem* item = new QTreeWidgetItem(itemGroup);
     itemGroup->treeWidget()->setItemWidget(item, /* column = */ 0, new filter(trk, itemGroup->treeWidget()));
     minWidth = qMax(minWidth, itemGroup->treeWidget()->itemWidget(item, 0)->sizeHint().width());
 }
 
 template<typename filter1, typename filter2, typename ... remainingFilters>
-static void addFilters(QTreeWidgetItem *itemGroup, CGisItemTrk& trk, qint32& minWidth)
+static void addFilters(QTreeWidgetItem* itemGroup, CGisItemTrk& trk, qint32& minWidth)
 {
     addFilters<filter1>(itemGroup, trk, minWidth);
     addFilters<filter2, remainingFilters ...>(itemGroup, trk, minWidth);
 }
 
 template<typename ... filters>
-static void addFilterGroup(QTreeWidget *widget, CGisItemTrk& trk, const QString &groupText, const QString &groupIcon, qint32& minWidth)
+static void addFilterGroup(QTreeWidget* widget, CGisItemTrk& trk, const QString& groupText, const QString& groupIcon, qint32& minWidth)
 {
-    QTreeWidgetItem *itemGroup = new QTreeWidgetItem(widget);
+    QTreeWidgetItem* itemGroup = new QTreeWidgetItem(widget);
     itemGroup->setIcon(/* column = */ 0, QIcon(groupIcon));
     itemGroup->setText(/* column = */ 0, groupText);
 
@@ -111,14 +111,14 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     plot2 = new CPlot(&trk, trk.limitsGraph2, IPlot::eModeNormal, this);
     plot3 = new CPlot(&trk, trk.limitsGraph3, IPlot::eModeNormal, this);
 
-    for(IPlot *plot : { static_cast<IPlot*>(plot1), static_cast<IPlot*>(plot2), static_cast<IPlot*>(plot3) })
+    for(IPlot* plot : { static_cast<IPlot*>(plot1), static_cast<IPlot*>(plot2), static_cast<IPlot*>(plot3) })
     {
         plot->setMinimumSize(QSize(0, 100));
         plot->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
         plot->show();
         framePlot->layout()->addWidget(plot);
 
-        const CTrackData::trkpt_t *ptRange1 = nullptr, *ptRange2 = nullptr;
+        const CTrackData::trkpt_t* ptRange1 = nullptr, * ptRange2 = nullptr;
         trk.getMouseRange(ptRange1, ptRange2);
         plot->setMouseRangeFocus(ptRange1, ptRange2);
     }
@@ -139,37 +139,37 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     tabWidget->setCurrentIndex(cfg.value("visibleTab", 0).toInt());
     cfg.endGroup();
 
-    connect(checkGraph1,      &QCheckBox::clicked,                 this, &CDetailsTrk::slotShowPlots);
-    connect(checkGraph2,      &QCheckBox::clicked,                 this, &CDetailsTrk::slotShowPlots);
-    connect(checkGraph3,      &QCheckBox::clicked,                 this, &CDetailsTrk::slotShowPlots);
+    connect(checkGraph1, &QCheckBox::clicked, this, &CDetailsTrk::slotShowPlots);
+    connect(checkGraph2, &QCheckBox::clicked, this, &CDetailsTrk::slotShowPlots);
+    connect(checkGraph3, &QCheckBox::clicked, this, &CDetailsTrk::slotShowPlots);
 
-    connect(toolLock,         &QToolButton::toggled,               this, &CDetailsTrk::slotChangeReadOnlyMode);
-    connect(textCmtDesc,      &QTextBrowser::anchorClicked,        this, &CDetailsTrk::slotLinkActivated);
+    connect(toolLock, &QToolButton::toggled, this, &CDetailsTrk::slotChangeReadOnlyMode);
+    connect(textCmtDesc, &QTextBrowser::anchorClicked, this, &CDetailsTrk::slotLinkActivated);
 
-    connect(pushSetActivities,    &QPushButton::clicked, this, &CDetailsTrk::slotSetActivities);
+    connect(pushSetActivities, &QPushButton::clicked, this, &CDetailsTrk::slotSetActivities);
     connect(toolSetEnergyCycling, &QPushButton::clicked, this, &CDetailsTrk::slotSetEnergyCycling);
 
-    connect(lineName,         &QLineEdit::textEdited,              this, &CDetailsTrk::slotNameChanged);
-    connect(lineName,         &QLineEdit::editingFinished,         this, &CDetailsTrk::slotNameChangeFinished);
+    connect(lineName, &QLineEdit::textEdited, this, &CDetailsTrk::slotNameChanged);
+    connect(lineName, &QLineEdit::editingFinished, this, &CDetailsTrk::slotNameChangeFinished);
 
-    connect(plot1,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
-    connect(plot2,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
-    connect(plot3,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
+    connect(plot1, &CPlot::sigMouseClickState, this, &CDetailsTrk::slotMouseClickState);
+    connect(plot2, &CPlot::sigMouseClickState, this, &CDetailsTrk::slotMouseClickState);
+    connect(plot3, &CPlot::sigMouseClickState, this, &CDetailsTrk::slotMouseClickState);
 
-    connect(spinLineWidth,    static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &CDetailsTrk::slotLineWidth);
-    connect(checkWithArrows,  &QCheckBox::toggled, this, &CDetailsTrk::slotWithArrows);
+    connect(spinLineWidth, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &CDetailsTrk::slotLineWidth);
+    connect(checkWithArrows, &QCheckBox::toggled, this, &CDetailsTrk::slotWithArrows);
 
     setupStyleLimits(trk.colorSourceLimit, toolLimitAutoStyle, toolLimitUsrStyle, toolLimitSysStyle, spinLimitLow, spinLimitHigh);
 
     connect(toolUserLineWith, &QToolButton::toggled, this, &CDetailsTrk::slotLineWidthMode);
-    connect(toolUserArrow,    &QToolButton::toggled, this, &CDetailsTrk::slotWithArrowsMode);
+    connect(toolUserArrow, &QToolButton::toggled, this, &CDetailsTrk::slotWithArrowsMode);
 
-    connect(listHistory,      &CHistoryListWidget::sigChanged, this, &CDetailsTrk::updateData);
+    connect(listHistory, &CHistoryListWidget::sigChanged, this, &CDetailsTrk::updateData);
 
-    connect(comboColor,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotColorChanged);
+    connect(comboColor, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotColorChanged);
     connect(comboColorSource, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotColorSourceChanged);
-    connect(comboGraph2,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
-    connect(comboGraph3,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
+    connect(comboGraph2, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
+    connect(comboGraph3, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
 
     setupGraphLimits(trk.limitsGraph1, toolLimitAutoGraph1, toolLimitUsrGraph1, toolLimitSysGraph1, spinMinGraph1, spinMaxGraph1);
     setupGraphLimits(trk.limitsGraph2, toolLimitAutoGraph2, toolLimitUsrGraph2, toolLimitSysGraph2, spinMinGraph2, spinMaxGraph2);
@@ -205,13 +205,13 @@ CDetailsTrk::~CDetailsTrk()
 {
     SETTINGS;
     cfg.beginGroup("TrackDetails");
-    cfg.setValue("showGraph1",    checkGraph1->isChecked());
-    cfg.setValue("showGraph2",    checkGraph2->isChecked());
-    cfg.setValue("showGraph3",    checkGraph3->isChecked());
+    cfg.setValue("showGraph1", checkGraph1->isChecked());
+    cfg.setValue("showGraph2", checkGraph2->isChecked());
+    cfg.setValue("showGraph3", checkGraph3->isChecked());
     cfg.setValue("splitterSizes1", splitter1->saveState());
     cfg.setValue("splitterSizes2", splitter2->saveState());
     cfg.setValue("splitterSizes3", splitter3->saveState());
-    cfg.setValue("visibleTab",    tabWidget->currentIndex());
+    cfg.setValue("visibleTab", tabWidget->currentIndex());
     cfg.endGroup();
 
     saveGraphSource(comboGraph2, 2);
@@ -235,7 +235,7 @@ void CDetailsTrk::slotSetLimitModeStyle(CLimit::mode_e mode, bool on)
         return;
     }
 
-    CLimit &limit = trk.colorSourceLimit;
+    CLimit& limit = trk.colorSourceLimit;
     limit.setMode(mode);
 
     widgetColorLabel->setMinimum(limit.getMin());
@@ -244,7 +244,7 @@ void CDetailsTrk::slotSetLimitModeStyle(CLimit::mode_e mode, bool on)
     trk.updateHistory(CGisItemTrk::eVisualColorLegend | CGisItemTrk::eVisualDetails);
 }
 
-void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGraph, QToolButton * toolLimitUsrGraph, QToolButton * toolLimitSysGraph, QDoubleSpinBox * spinMinGraph, QDoubleSpinBox * spinMaxGraph)
+void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton* toolLimitAutoGraph, QToolButton* toolLimitUsrGraph, QToolButton* toolLimitSysGraph, QDoubleSpinBox* spinMinGraph, QDoubleSpinBox* spinMaxGraph)
 {
     bool isAutoMode = (limit.getMode() == CLimit::eModeAuto);
 
@@ -279,8 +279,8 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     auto limitSysFunc = [this, &limit, spinMinGraph, spinMaxGraph](bool checked){slotSetLimitModeGraph(CLimit::eModeSys, &limit, spinMinGraph, spinMaxGraph, checked);};
 
     connect(toolLimitAutoGraph, &QToolButton::toggled, this, limitAutoFunc);
-    connect(toolLimitUsrGraph,  &QToolButton::toggled, this, limitUserFunc);
-    connect(toolLimitSysGraph,  &QToolButton::toggled, this, limitSysFunc);
+    connect(toolLimitUsrGraph, &QToolButton::toggled, this, limitUserFunc);
+    connect(toolLimitSysGraph, &QToolButton::toggled, this, limitSysFunc);
 
     connect(spinMinGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMin);
     connect(spinMaxGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMax);
@@ -289,7 +289,7 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     connect(&limit, &CLimit::sigChanged, this, limitChangedFunc);
 }
 
-void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QToolButton *toolLimitUsr, QToolButton *toolLimitSys, CDoubleSpinBox *spinMin, CDoubleSpinBox *spinMax)
+void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton* toolLimitAuto, QToolButton* toolLimitUsr, QToolButton* toolLimitSys, CDoubleSpinBox* spinMin, CDoubleSpinBox* spinMax)
 {
     bool isAutoMode = (limit.getMode() == CLimit::eModeAuto);
 
@@ -320,20 +320,20 @@ void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QT
     connect(toolLimitAuto, &QToolButton::toggled, spinMin, &QDoubleSpinBox::setDisabled);
 
     connect(toolLimitAuto, &QToolButton::toggled, this, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeAuto, checked);});
-    connect(toolLimitUsr,  &QToolButton::toggled, this, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeUser, checked);});
-    connect(toolLimitSys,  &QToolButton::toggled, this, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeSys, checked);});
+    connect(toolLimitUsr, &QToolButton::toggled, this, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeUser, checked);});
+    connect(toolLimitSys, &QToolButton::toggled, this, [this](bool checked){slotSetLimitModeStyle(CLimit::eModeSys, checked);});
 
-    connect(spinMax,       &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitHighChanged);
-    connect(spinMax,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitHighChanged);
-    connect(spinMin,       &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
-    connect(spinMin,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
+    connect(spinMax, &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitHighChanged);
+    connect(spinMax, &CDoubleSpinBox::editingFinished, this, &CDetailsTrk::slotColorLimitHighChanged);
+    connect(spinMin, &CDoubleSpinBox::valueChangedByStep, this, &CDetailsTrk::slotColorLimitLowChanged);
+    connect(spinMin, &CDoubleSpinBox::editingFinished, this, &CDetailsTrk::slotColorLimitLowChanged);
 
     connect(&limit, &CLimit::sigChanged, this, [this, &limit, spinMin, spinMax] {setupLimits(&limit, spinMin, spinMax);});
 }
 
-void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault)
+void CDetailsTrk::loadGraphSource(QComboBox* comboBox, qint32 n, const QString cfgDefault)
 {
-    const CPropertyTrk * p = trk.getPropertyHandler();
+    const CPropertyTrk* p = trk.getPropertyHandler();
     if(p == nullptr)
     {
         return;
@@ -355,7 +355,7 @@ void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString 
     cfg.endGroup();
 }
 
-void CDetailsTrk::saveGraphSource(QComboBox * comboBox, qint32 n)
+void CDetailsTrk::saveGraphSource(QComboBox* comboBox, qint32 n)
 {
     SETTINGS;
     cfg.beginGroup("TrackDetails");
@@ -410,7 +410,7 @@ void CDetailsTrk::updateData()
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);
 
-    QTabWidget * tabWidget_ = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
+    QTabWidget* tabWidget_ = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
     if(nullptr != tabWidget_)
     {
         int idx = tabWidget_->indexOf(this);
@@ -441,9 +441,9 @@ void CDetailsTrk::updateData()
     comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), tr("Color"));
     comboColorSource->addItem(QIcon("://icons/32x32/Activity.png"), tr("Activity"), "activity");
     const QList<QString>& keys = trk.getExistingDataSources();
-    for(const QString &key : keys)
+    for(const QString& key : keys)
     {
-        const CKnownExtension &ext = CKnownExtension::get(key);
+        const CKnownExtension& ext = CKnownExtension::get(key);
         QIcon icon(ext.icon);
         comboColorSource->addItem(icon, ext.known ? ext.nameLongText : key, key);
     }
@@ -468,7 +468,7 @@ void CDetailsTrk::updateData()
 
     if(enabledColorize)
     {
-        const CKnownExtension &ext = CKnownExtension::get(comboColorSource->itemData(currentIdx).toString());
+        const CKnownExtension& ext = CKnownExtension::get(comboColorSource->itemData(currentIdx).toString());
 
         spinLimitLow->setMinimum(ext.minimum);
         spinLimitLow->setMaximum(ext.maximum);
@@ -495,25 +495,25 @@ void CDetailsTrk::updateData()
     loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeedDist);
     loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
 
-    CFilterDeleteExtension *filterDeleteExtension = treeFilter->findChild<CFilterDeleteExtension*>();
+    CFilterDeleteExtension* filterDeleteExtension = treeFilter->findChild<CFilterDeleteExtension*>();
     if(nullptr != filterDeleteExtension)
     {
         filterDeleteExtension->updateUi();
     }
 
-    CFilterReplaceElevation *filterReplaceElevation = treeFilter->findChild<CFilterReplaceElevation*>();
+    CFilterReplaceElevation* filterReplaceElevation = treeFilter->findChild<CFilterReplaceElevation*>();
     if(nullptr != filterReplaceElevation)
     {
         filterReplaceElevation->updateUi();
     }
 
-    CFilterSpeed *filterSpeed = tabWidget->findChild<CFilterSpeed *>("IFilterSpeed");
+    CFilterSpeed* filterSpeed = tabWidget->findChild<CFilterSpeed*>("IFilterSpeed");
     if(nullptr != filterSpeed)
     {
         filterSpeed->updateUi();
     }
 
-    CFilterChangeStartPoint *filterChangeStartPoint = tabWidget->findChild<CFilterChangeStartPoint *>("IFilterChangeStartPoint");
+    CFilterChangeStartPoint* filterChangeStartPoint = tabWidget->findChild<CFilterChangeStartPoint*>("IFilterChangeStartPoint");
     if(nullptr != filterChangeStartPoint)
     {
         filterChangeStartPoint->updateUi();
@@ -536,7 +536,7 @@ void CDetailsTrk::updateData()
     originator = false;
 }
 
-void CDetailsTrk::setMouseFocus(const CTrackData::trkpt_t * pt)
+void CDetailsTrk::setMouseFocus(const CTrackData::trkpt_t* pt)
 {
     if(nullptr != pt)
     {
@@ -551,7 +551,7 @@ void CDetailsTrk::setMouseFocus(const CTrackData::trkpt_t * pt)
     }
 }
 
-void CDetailsTrk::setMouseRangeFocus(const CTrackData::trkpt_t *pt1, const CTrackData::trkpt_t *pt2)
+void CDetailsTrk::setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2)
 {
     labelInfoRange->setText( (pt1 && pt2) ? trk.getInfoRange(*pt1, *pt2) : "-\n-" );
 }
@@ -575,7 +575,7 @@ void CDetailsTrk::enableTabFilter()
     }
 }
 
-void CDetailsTrk::setMouseClickFocus(const CTrackData::trkpt_t *pt)
+void CDetailsTrk::setMouseClickFocus(const CTrackData::trkpt_t* pt)
 {
     if(nullptr != pt)
     {
@@ -596,9 +596,9 @@ void CDetailsTrk::slotMouseClickState(int s)
     }
 }
 
-void CDetailsTrk::slotNameChanged(const QString &name)
+void CDetailsTrk::slotNameChanged(const QString& name)
 {
-    QTabWidget *tabWidget_ = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
+    QTabWidget* tabWidget_ = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
     if(nullptr != tabWidget_)
     {
         int idx = tabWidget_->indexOf(this);
@@ -729,7 +729,7 @@ void CDetailsTrk::slotSetEnergyCycling()
     }
 }
 
-void CDetailsTrk::setupGraph(CPlot * plot, const CLimit& limit, const QString& source, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax)
+void CDetailsTrk::setupGraph(CPlot* plot, const CLimit& limit, const QString& source, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax)
 {
     trk.getPropertyHandler()->setupPlot(plot, source);
     spinMin->setSuffix(limit.getUnit());
@@ -740,7 +740,7 @@ void CDetailsTrk::setupGraph(CPlot * plot, const CLimit& limit, const QString& s
 
 void CDetailsTrk::slotSetupGraph(int idx)
 {
-    QObject *s = sender();
+    QObject* s = sender();
     if(s == comboGraph2)
     {
         saveGraphSource(comboGraph2, 2);
@@ -753,7 +753,7 @@ void CDetailsTrk::slotSetupGraph(int idx)
     }
 }
 
-void CDetailsTrk::slotSetLimitModeGraph(CLimit::mode_e mode, CLimit *limit, QDoubleSpinBox *spinMin, QDoubleSpinBox *spinMax, bool on)
+void CDetailsTrk::slotSetLimitModeGraph(CLimit::mode_e mode, CLimit* limit, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax, bool on)
 {
     if(!on)
     {
@@ -765,7 +765,7 @@ void CDetailsTrk::slotSetLimitModeGraph(CLimit::mode_e mode, CLimit *limit, QDou
     spinMax->setValue(limit->getMax());
 }
 
-void CDetailsTrk::setupLimits(CLimit *limit, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax)
+void CDetailsTrk::setupLimits(CLimit* limit, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax)
 {
     spinMin->setValue(limit->getMin());
     spinMax->setValue(limit->getMax());

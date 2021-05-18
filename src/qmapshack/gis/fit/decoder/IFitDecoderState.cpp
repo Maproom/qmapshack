@@ -18,7 +18,7 @@
 
 #include "gis/fit/decoder/IFitDecoderState.h"
 
-decode_state_e IFitDecoderState::processByte(quint8 &dataByte)
+decode_state_e IFitDecoderState::processByte(quint8& dataByte)
 {
     incFileBytesRead();
     buildCrc(dataByte);
@@ -78,7 +78,7 @@ void IFitDecoderState::addMessage(const CFitDefinitionMessage& definition)
     data.lastMessage = &data.messages.last();
 }
 
-void IFitDecoderState::addDefinition(const CFitDefinitionMessage &definition)
+void IFitDecoderState::addDefinition(const CFitDefinitionMessage& definition)
 {
     data.definitions[definition.getLocalMesgNr()] = definition;
     data.lastDefinition = &data.definitions[definition.getLocalMesgNr()];
@@ -89,7 +89,7 @@ void IFitDecoderState::endDefinition()
     data.definitionHistory.append(*data.lastDefinition);
 }
 
-CFitDefinitionMessage*IFitDecoderState::definition(quint32 localMessageType)
+CFitDefinitionMessage* IFitDecoderState::definition(quint32 localMessageType)
 {
     return &(data.definitions[localMessageType]);
 }
@@ -115,20 +115,21 @@ void IFitDecoderState::incFileBytesRead()
     data.fileBytesRead++;
 }
 
-void IFitDecoderState::addDevFieldProfile(const CFitFieldProfile &fieldProfile)
+void IFitDecoderState::addDevFieldProfile(const CFitFieldProfile& fieldProfile)
 {
     // for documentation: a development field definition is linked to an developer data ID. The tuple developer data index
     // and field definition number must be unique.
-    if(devFieldProfile(fieldProfile.getDevProfileId())->getDevProfileId() ==  fieldProfile.getDevProfileId())    {
+    if(devFieldProfile(fieldProfile.getDevProfileId())->getDevProfileId() == fieldProfile.getDevProfileId())
+    {
         throw tr("FIT decoding error: a development field with the field_definition_number %1 already exists.")
               .arg(fieldProfile.getFieldDefNum());
     }
     data.devFieldProfiles.append(fieldProfile);
 }
 
-CFitFieldProfile* IFitDecoderState::devFieldProfile(const QPair<quint8,quint8> &devProfileId)
+CFitFieldProfile* IFitDecoderState::devFieldProfile(const QPair<quint8, quint8>& devProfileId)
 {
-    for(CFitFieldProfile &devFieldPro : data.devFieldProfiles)
+    for(CFitFieldProfile& devFieldPro : data.devFieldProfiles)
     {
         if (devProfileId == devFieldPro.getDevProfileId())
         {

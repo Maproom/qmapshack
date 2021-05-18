@@ -32,7 +32,7 @@
 #define TILESIZEX 64
 #define TILESIZEY 64
 
-CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
+CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent)
     : IDem(parent)
     , filename(filename)
 {
@@ -54,7 +54,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
         return;
     }
 
-    GDALRasterBand *pBand = dataset->GetRasterBand(1);
+    GDALRasterBand* pBand = dataset->GetRasterBand(1);
     if(nullptr == pBand)
     {
         GDALClose(dataset);
@@ -76,10 +76,10 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
         strncpy(str, dataset->GetProjectionRef(), sizeof(str) - 1);
     }
     OGRSpatialReference oSRS;
-    const char *wkt = str;
+    const char* wkt = str;
     oSRS.importFromWkt(&wkt);
 
-    char *proj4 = nullptr;
+    char* proj4 = nullptr;
     oSRS.exportToProj4(&proj4);
     proj.init(proj4, "EPSG:4326");
     free(proj4);
@@ -98,8 +98,8 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     qreal adfGeoTransform[6];
     dataset->GetGeoTransform( adfGeoTransform );
 
-    xscale  = adfGeoTransform[1];
-    yscale  = adfGeoTransform[5];
+    xscale = adfGeoTransform[1];
+    yscale = adfGeoTransform[5];
 
     trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
     trFwd.scale(adfGeoTransform[1], adfGeoTransform[5]);
@@ -157,8 +157,8 @@ qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
 
     pt = trInv.map(pt);
 
-    qreal x    = pt.x() - qFloor(pt.x());
-    qreal y    = pt.y() - qFloor(pt.y());
+    qreal x = pt.x() - qFloor(pt.x());
+    qreal y = pt.y() - qFloor(pt.y());
 
     mutex.lock();
     CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()), qFloor(pt.y()), 2, 2, &e, 2, 2, GDT_Int16, 1, 0, 0, 0, 0);
@@ -201,8 +201,8 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale)
 
     pt = trInv.map(pt);
 
-    qreal x    = pt.x() - qFloor(pt.x());
-    qreal y    = pt.y() - qFloor(pt.y());
+    qreal x = pt.x() - qFloor(pt.x());
+    qreal y = pt.y() - qFloor(pt.y());
 
     qint16 win[eWinsize4x4];
     mutex.lock();
@@ -262,10 +262,10 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     pt4 = trInv.map(pt4);
 
     qint32 left, right, top, bottom;
-    left     = qRound(pt1.x() < pt4.x() ? pt1.x() : pt4.x());
-    right    = qRound(pt2.x() > pt3.x() ? pt2.x() : pt3.x());
-    top      = qRound(pt1.y() < pt2.y() ? pt1.y() : pt2.y());
-    bottom   = qRound(pt4.y() > pt3.y() ? pt4.y() : pt3.y());
+    left = qRound(pt1.x() < pt4.x() ? pt1.x() : pt4.x());
+    right = qRound(pt2.x() > pt3.x() ? pt2.x() : pt3.x());
+    top = qRound(pt1.y() < pt2.y() ? pt1.y() : pt2.y());
+    bottom = qRound(pt4.y() > pt3.y() ? pt4.y() : pt3.y());
 
     if(left <= 0)
     {
@@ -278,7 +278,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
     if(top <= 0)
     {
-        top  = 1;
+        top = 1;
     }
     if(top >= ysize_px)
     {
@@ -303,8 +303,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
         bottom = 1;
     }
 
-    qint32 w =  TILESIZEX;
-    qint32 h =  TILESIZEY;
+    qint32 w = TILESIZEX;
+    qint32 h = TILESIZEY;
 
     /*
         As the 3x3 window will create a border of one pixel
@@ -343,13 +343,13 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                 qreal wp2_used = wp2;
                 qreal hp2_used = hp2;
-                qreal w_used   = w;
-                qreal h_used   = h;
+                qreal w_used = w;
+                qreal h_used = h;
 
                 if((x + wp2) > xsize_px)
                 {
                     wp2_used = xsize_px - x;
-                    w_used   = wp2_used - 2;
+                    w_used = wp2_used - 2;
                     if(w_used < 2)
                     {
                         continue;
@@ -359,14 +359,14 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                 if((y + hp2) > ysize_px)
                 {
                     hp2_used = ysize_px - y;
-                    h_used   = hp2_used - 2;
+                    h_used = hp2_used - 2;
                     if(h_used < 2)
                     {
                         continue;
                     }
                 }
 
-                QVector<qint16> data(wp2_used * hp2_used);
+                QVector<qint16> data(wp2_used* hp2_used);
                 mutex.lock();
                 err = dataset->RasterIO(GF_Read, x, y, wp2_used, hp2_used, data.data(), wp2_used, hp2_used, GDT_Int16, 1, 0, 0, 0, 0);
                 mutex.unlock();

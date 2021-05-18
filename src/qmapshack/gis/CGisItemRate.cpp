@@ -23,7 +23,7 @@
 #include <QtGui>
 
 
-CGisItemRate::CGisItemRate(QWidget *parent, const QSet<QString>& commonKeywords, qreal rating) :
+CGisItemRate::CGisItemRate(QWidget* parent, const QSet<QString>& commonKeywords, qreal rating) :
     QDialog(parent),
     commonKeywords(commonKeywords),
     rating(rating)

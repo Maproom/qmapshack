@@ -34,15 +34,15 @@ class COverlayCutMap : public IOverlay, private Ui::IOverlayCutMap
 {
     Q_OBJECT
 public:
-    COverlayCutMap(CItemCutMap *item, QStackedWidget * stackedWidget);
+    COverlayCutMap(CItemCutMap* item, QStackedWidget* stackedWidget);
     virtual ~COverlayCutMap() = default;
 
     void saveSettings(QSettings& cfg);
     void loadSettings(QSettings& cfg);
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent *e);
-    void mouseReleaseEventFx(QMouseEvent *e);
+    void mouseMoveEventFx(QMouseEvent* e);
+    void mouseReleaseEventFx(QMouseEvent* e);
     QCursor getCursorFx();
 
     void abortStep();
@@ -72,16 +72,16 @@ private:
     void restoreFromHistory(QPolygonF& line);
     void storeToHistory(const QPolygonF& line);
     void isCloseTo(QPointF pt, QPolygonF line, qint32& idx) const;
-    void isCloseToLine(QPointF pt, QPolygonF line, qint32 &idx1, qint32 &idx2) const;
+    void isCloseToLine(QPointF pt, QPolygonF line, qint32& idx1, qint32& idx2) const;
     void mouseReset();
 
-    void mouseMovePointAdd(const QPointF &pt);
-    void mouseMovePointDel(const QPointF &pt);
-    void mouseMovePointMove(const QPointF &pt);
+    void mouseMovePointAdd(const QPointF& pt);
+    void mouseMovePointDel(const QPointF& pt);
+    void mouseMovePointMove(const QPointF& pt);
 
-    void mouseReleasePointAdd(const QPointF &pt, Qt::MouseButton button);
-    void mouseReleasePointDel(const QPointF &pt, Qt::MouseButton button);
-    void mouseReleasePointMove(const QPointF &pt, Qt::MouseButton button);
+    void mouseReleasePointAdd(const QPointF& pt, Qt::MouseButton button);
+    void mouseReleasePointDel(const QPointF& pt, Qt::MouseButton button);
+    void mouseReleasePointMove(const QPointF& pt, Qt::MouseButton button);
 
     void updateGui();
 
@@ -92,8 +92,8 @@ private:
 
     qint32 idxFocus1 = NOIDX;
     qint32 idxFocus2 = NOIDX;
-    bool addPoint   = false;
-    bool movePoint  = false;
+    bool addPoint = false;
+    bool movePoint = false;
 
     QList<QPolygonF> history;
     qint32 idxHistory = NOIDX;

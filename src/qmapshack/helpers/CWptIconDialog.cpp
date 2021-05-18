@@ -26,7 +26,7 @@
 #include <QtWidgets>
 
 
-CWptIconDialog::CWptIconDialog(CMainWindow * parent)
+CWptIconDialog::CWptIconDialog(CMainWindow* parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -39,24 +39,24 @@ void CWptIconDialog::setupSignals()
     connect(toolPath, &QToolButton::clicked, this, &CWptIconDialog::slotSetupPath);
 }
 
-void CWptIconDialog::setupList(QObject * obj)
+void CWptIconDialog::setupList(QObject* obj)
 {
     listWidget->clear();
 
     QString currentIcon = obj == nullptr ? QString() : obj->objectName();
-    QListWidgetItem * currentItem = nullptr;
+    QListWidgetItem* currentItem = nullptr;
 
     const QMap<QString, CWptIconManager::icon_t>& wptIcons = CWptIconManager::self().getWptIcons();
     QStringList keys = wptIcons.keys();
 
     qSort(keys.begin(), keys.end(), sortByString);
 
-    for(const QString &key : qAsConst(keys))
+    for(const QString& key : qAsConst(keys))
     {
         const QString& icon = wptIcons[key].path;
-        QPixmap pixmap      = CWptIconManager::self().loadIcon(icon);
+        QPixmap pixmap = CWptIconManager::self().loadIcon(icon);
 
-        QListWidgetItem * item = new QListWidgetItem(pixmap, key, listWidget);
+        QListWidgetItem* item = new QListWidgetItem(pixmap, key, listWidget);
         if(currentIcon == key)
         {
             currentItem = item;

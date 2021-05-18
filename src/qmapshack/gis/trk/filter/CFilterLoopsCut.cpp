@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CFilterLoopsCut::CFilterLoopsCut(CGisItemTrk &trk, QWidget * parent)
+CFilterLoopsCut::CFilterLoopsCut(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {

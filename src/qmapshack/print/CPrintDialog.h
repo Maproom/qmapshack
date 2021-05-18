@@ -35,12 +35,12 @@ public:
         , eTypeImage
     };
 
-    CPrintDialog(type_e type, const QRectF &area, CCanvas * source);
+    CPrintDialog(type_e type, const QRectF& area, CCanvas* source);
     virtual ~CPrintDialog();
 
 
 protected:
-    void resizeEvent(QResizeEvent *e) override;
+    void resizeEvent(QResizeEvent* e) override;
 
 private slots:
     void slotGetPrinter();
@@ -54,7 +54,7 @@ private:
 
     type_e type;
 
-    CCanvas * canvas;
+    CCanvas* canvas;
 
     QRectF rectSelArea;      //< the selected area in coordinated of lon/lat
     QRectF rectSelAreaPixel; //< the selected area in coordinated of pixel

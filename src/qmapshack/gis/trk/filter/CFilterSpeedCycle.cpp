@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
+CFilterSpeedCycle::CFilterSpeedCycle(QWidget* parent, CGisItemTrk& trk)
     : QWidget(parent), trk(trk), noOfFixTypes(4), noOfCustomTypes(3)
     // 4 fix and 3 custom cycling types has be defined as default
     , cyclingTypeDefaults
@@ -68,7 +68,7 @@ CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     cycling_type_t cyclingType;
     for (int i = 0; i < noOfFixTypes; ++i)
     {
-        const cycling_type_t &cyclingTypeDefault = cyclingTypeDefaults[i];
+        const cycling_type_t& cyclingTypeDefault = cyclingTypeDefaults[i];
         cyclingType.name = cyclingTypeDefault.name;
         cyclingType.plainSpeed = cyclingTypeDefault.plainSpeed;
         cyclingType.minSpeed = cyclingTypeDefault.minSpeed;
@@ -95,7 +95,7 @@ void CFilterSpeedCycle::loadSettings(QSettings& cfg)
     cfg.beginReadArray("CustomCyclingTypes");
     for (int i = 0; i < noOfCustomTypes; ++i)
     {
-        const cycling_type_t &cyclingTypeDefault = cyclingTypeDefaults[noOfFixTypes + i];
+        const cycling_type_t& cyclingTypeDefault = cyclingTypeDefaults[noOfFixTypes + i];
         cfg.setArrayIndex(i);
         cyclingType.name = cyclingTypeDefault.name;
         cyclingType.plainSpeed = cfg.value("plainSpeed", cyclingTypeDefault.plainSpeed).toDouble();
@@ -119,7 +119,7 @@ void CFilterSpeedCycle::saveSettings(QSettings& cfg)
     cfg.beginWriteArray("CustomCyclingTypes");
     for (int i = 0; i < noOfCustomTypes; ++i)
     {
-        const cycling_type_t &cyclingType = cyclingTypes[noOfFixTypes + i];
+        const cycling_type_t& cyclingType = cyclingTypes[noOfFixTypes + i];
         cfg.setArrayIndex(i);
         cfg.setValue("name", cyclingType.name);
         cfg.setValue("plainSpeed", cyclingType.plainSpeed);
@@ -138,7 +138,7 @@ void CFilterSpeedCycle::apply(CGisItemTrk& trk)
 
 void CFilterSpeedCycle::slotSetCyclingType(int type)
 {
-    const cycling_type_t &cyclingType = cyclingTypes[type];
+    const cycling_type_t& cyclingType = cyclingTypes[type];
 
     spinPlainSpeed->setValue(cyclingType.plainSpeed);
     spinMinSpeed->setValue(cyclingType.minSpeed);

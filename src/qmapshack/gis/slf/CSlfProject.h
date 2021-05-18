@@ -25,7 +25,7 @@ class CSlfProject : public IGisProject
 {
     Q_DECLARE_TR_FUNCTIONS(CSlfProject)
 public:
-    CSlfProject(const QString &filename, bool readFile = true);
+    CSlfProject(const QString& filename, bool readFile = true);
     virtual ~CSlfProject() = default;
 
     const QString getFileDialogFilter() const override
@@ -39,7 +39,7 @@ public:
     }
 
 private:
-    void loadSlf(const QString &filename);
+    void loadSlf(const QString& filename);
 
     friend class CSlfReader;
 };

@@ -27,7 +27,7 @@
 QString CSelectProjectDialog::lastkey;
 
 
-CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, IGisProject::type_e &type, QTreeWidget * parent)
+CSelectProjectDialog::CSelectProjectDialog(QString& key, QString& name, IGisProject::type_e& type, QTreeWidget* parent)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , key(key)
     , name(name)
@@ -35,19 +35,19 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, IGisProj
 {
     setupUi(this);
 
-    QListWidgetItem *lastSelectedItem = nullptr;
+    QListWidgetItem* lastSelectedItem = nullptr;
 
     if(parent)
     {
         for(int i = 0; i < parent->topLevelItemCount(); i++)
         {
-            IGisProject * project = dynamic_cast<IGisProject*>(parent->topLevelItem(i));
+            IGisProject* project = dynamic_cast<IGisProject*>(parent->topLevelItem(i));
             if(nullptr == project)
             {
                 continue;
             }
 
-            QListWidgetItem * item = new QListWidgetItem(project->icon(CGisListWks::eColumnIcon), project->text(CGisListWks::eColumnName), listWidget);
+            QListWidgetItem* item = new QListWidgetItem(project->icon(CGisListWks::eColumnIcon), project->text(CGisListWks::eColumnName), listWidget);
             item->setData(Qt::UserRole + 0, project->getKey());
             item->setData(Qt::UserRole + 1, project->getType());
             item->setData(Qt::UserRole + 2, project->getName());
@@ -90,13 +90,13 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, IGisProj
 
     setType(type);
 
-    connect(listWidget,    &QListWidget::itemClicked,       this, &CSelectProjectDialog::slotItemClicked);
-    connect(listWidget,    &QListWidget::itemDoubleClicked, this, &CSelectProjectDialog::slotItemDoubleClicked);
-    connect(lineEdit,      &QLineEdit::textChanged,         this, &CSelectProjectDialog::slotProjectChanged);
-    connect(lineEdit,      &QLineEdit::textEdited,          this, &CSelectProjectDialog::slotProjectEdited);
-    connect(radioQms,      &QRadioButton::clicked,          this, &CSelectProjectDialog::slotTypeChanged);
-    connect(radioGpx,      &QRadioButton::clicked,          this, &CSelectProjectDialog::slotTypeChanged);
-    connect(radioDatabase, &QRadioButton::toggled,          this, &CSelectProjectDialog::slotTypeChanged);
+    connect(listWidget, &QListWidget::itemClicked, this, &CSelectProjectDialog::slotItemClicked);
+    connect(listWidget, &QListWidget::itemDoubleClicked, this, &CSelectProjectDialog::slotItemDoubleClicked);
+    connect(lineEdit, &QLineEdit::textChanged, this, &CSelectProjectDialog::slotProjectChanged);
+    connect(lineEdit, &QLineEdit::textEdited, this, &CSelectProjectDialog::slotProjectEdited);
+    connect(radioQms, &QRadioButton::clicked, this, &CSelectProjectDialog::slotTypeChanged);
+    connect(radioGpx, &QRadioButton::clicked, this, &CSelectProjectDialog::slotTypeChanged);
+    connect(radioDatabase, &QRadioButton::toggled, this, &CSelectProjectDialog::slotTypeChanged);
 
     lineEdit->setFocus();
     adjustSize();
@@ -124,21 +124,21 @@ void CSelectProjectDialog::reject()
 }
 
 
-void CSelectProjectDialog::slotItemClicked(QListWidgetItem * item)
+void CSelectProjectDialog::slotItemClicked(QListWidgetItem* item)
 {
     lineEdit->setText(item->data(Qt::UserRole + 2).toString());
-    key     = item->data(Qt::UserRole).toString();
-    type    = IGisProject::type_e(item->data(Qt::UserRole + 1).toInt());
+    key = item->data(Qt::UserRole).toString();
+    type = IGisProject::type_e(item->data(Qt::UserRole + 1).toInt());
     setType(type);
 
     frameType->setEnabled(false);
 }
 
-void CSelectProjectDialog::slotItemDoubleClicked(QListWidgetItem * item)
+void CSelectProjectDialog::slotItemDoubleClicked(QListWidgetItem* item)
 {
     lineEdit->setText(item->data(Qt::UserRole + 2).toString());
-    key     = item->data(Qt::UserRole).toString();
-    type    = IGisProject::type_e(item->data(Qt::UserRole + 1).toInt());
+    key = item->data(Qt::UserRole).toString();
+    type = IGisProject::type_e(item->data(Qt::UserRole + 1).toInt());
 
     QDialog::accept();
 }

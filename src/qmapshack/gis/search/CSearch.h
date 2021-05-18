@@ -182,13 +182,13 @@ public:
         return searchPropertyMeaningMap.value(searchPropertyEnumMap.value(property), tr("No information available"));
     }
 
-    bool getSearchResult(IGisItem * item);
+    bool getSearchResult(IGisItem* item);
 
     static Qt::CaseSensitivity getCaseSensitivity()
     {
         return caseSensitivity;
     }
-    static void setCaseSensitivity(const Qt::CaseSensitivity &value)
+    static void setCaseSensitivity(const Qt::CaseSensitivity& value)
     {
         caseSensitivity = value;
     }
@@ -197,7 +197,7 @@ public:
     {
         return searchMode;
     }
-    static void setSearchMode(const search_mode_e &value)
+    static void setSearchMode(const search_mode_e& value)
     {
         searchMode = value;
     }
@@ -215,7 +215,7 @@ private:
     static Qt::CaseSensitivity caseSensitivity;
     static search_mode_e searchMode;
 
-    bool adjustUnits(const searchValue_t &itemValue, searchValue_t &searchValue);
+    bool adjustUnits(const searchValue_t& itemValue, searchValue_t& searchValue);
     void improveQuery();
 
     search_t search;

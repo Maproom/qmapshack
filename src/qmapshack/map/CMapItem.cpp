@@ -31,7 +31,7 @@
 
 QMutex CMapItem::mutexActiveMaps(QMutex::Recursive);
 
-CMapItem::CMapItem(QTreeWidget *parent, CMapDraw * map)
+CMapItem::CMapItem(QTreeWidget* parent, CMapDraw* map)
     : QTreeWidgetItem(parent)
     , map(map)
 {
@@ -84,9 +84,9 @@ void CMapItem::showChildren(bool yes)
 {
     if(yes && !mapfile.isNull())
     {
-        QTreeWidget * tw = treeWidget();
+        QTreeWidget* tw = treeWidget();
 
-        QTreeWidgetItem * item = new QTreeWidgetItem(this);
+        QTreeWidgetItem* item = new QTreeWidgetItem(this);
         item->setFlags(Qt::ItemIsEnabled);
         tw->setItemWidget(item, 0, mapfile->getSetup());
     }
@@ -106,17 +106,17 @@ void CMapItem::updateIcon()
     }
 
     static QHash<QString, QString> icons {
-        {"rmap",   "://icons/32x32/MimeRMAP.png"}
-        , {"jnx",  "://icons/32x32/MimeJNX.png"}
-        , {"vrt",  "://icons/32x32/MimeVRT.png"}
-        , {"img",  "://icons/32x32/MimeIMG.png"}
-        , {"map",  "://icons/32x32/MimeMAP.png"}
+        {"rmap", "://icons/32x32/MimeRMAP.png"}
+        , {"jnx", "://icons/32x32/MimeJNX.png"}
+        , {"vrt", "://icons/32x32/MimeVRT.png"}
+        , {"img", "://icons/32x32/MimeIMG.png"}
+        , {"map", "://icons/32x32/MimeMAP.png"}
         , {"wmts", "://icons/32x32/MimeWMTS.png"}
-        , {"tms",  "://icons/32x32/MimeTMS.png"}
+        , {"tms", "://icons/32x32/MimeTMS.png"}
         , {"gemf", "://icons/32x32/MimeGEMF.png"}
     };
 
-    const QString &suffix = QFileInfo(filename).suffix().toLower();
+    const QString& suffix = QFileInfo(filename).suffix().toLower();
     QPixmap img( icons.contains(suffix) ? icons[suffix] : "://icons/32x32/Map.png" );
 
     setIcon(/* col */ 0, QIcon(img));
@@ -244,7 +244,7 @@ bool CMapItem::activate()
 
 void CMapItem::moveToTop()
 {
-    QTreeWidget * w = treeWidget();
+    QTreeWidget* w = treeWidget();
     QMutexLocker lock(&mutexActiveMaps);
 
     w->takeTopLevelItem(w->indexOfTopLevelItem(this));
@@ -257,13 +257,13 @@ void CMapItem::moveToTop()
 void CMapItem::moveToBottom()
 {
     int row;
-    QTreeWidget * w = treeWidget();
+    QTreeWidget* w = treeWidget();
     QMutexLocker lock(&mutexActiveMaps);
 
     w->takeTopLevelItem(w->indexOfTopLevelItem(this));
     for(row = 0; row < w->topLevelItemCount(); row++)
     {
-        CMapItem * item = dynamic_cast<CMapItem*>(w->topLevelItem(row));
+        CMapItem* item = dynamic_cast<CMapItem*>(w->topLevelItem(row));
         if(item && item->mapfile.isNull())
         {
             break;

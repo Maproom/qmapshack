@@ -31,19 +31,19 @@
 
 
 
-CTcxProject::CTcxProject(const QString &filename, CGisListWks * parent)
+CTcxProject::CTcxProject(const QString& filename, CGisListWks* parent)
     : IGisProject(eTypeTcx, filename, parent)
 {
     setup();
 }
 
-CTcxProject::CTcxProject(const QString &filename, IDevice * parent)
+CTcxProject::CTcxProject(const QString& filename, IDevice* parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
     setup();
 }
 
-CTcxProject::CTcxProject(const QString &filename, const IGisProject * project, IDevice * parent)
+CTcxProject::CTcxProject(const QString& filename, const IGisProject* project, IDevice* parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/TcxProject.png"));
@@ -54,7 +54,7 @@ CTcxProject::CTcxProject(const QString &filename, const IGisProject * project, I
     const int N = project->childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
+        IGisItem* item = dynamic_cast<IGisItem*>(project->child(n));
         if(item)
         {
             insertCopyOfItem(item, NOIDX, res);
@@ -82,7 +82,7 @@ void CTcxProject::loadTcx(const QString& filename)
     {
         loadTcx(filename, this);
     }
-    catch(QString &errormsg)
+    catch(QString& errormsg)
     {
         QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
                               tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
@@ -91,7 +91,7 @@ void CTcxProject::loadTcx(const QString& filename)
 }
 
 
-void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
+void CTcxProject::loadTcx(const QString& filename, CTcxProject* project)
 {
     QFile file(filename);
 
@@ -176,13 +176,13 @@ void CTcxProject::loadActivity(const QDomNode& activityRootNode)
         trk.segs.resize(tcxLaps.count());
         for (int i = 0; i < tcxLaps.count(); i++)    // browse laps
         {
-            CTrackData::trkseg_t *seg = &(trk.segs[i]);
+            CTrackData::trkseg_t* seg = &(trk.segs[i]);
 
             const QDomNodeList& tcxLapTrackpts = tcxLaps.item(i).toElement().elementsByTagName("Trackpoint");
 
             for (int j = 0; j < tcxLapTrackpts.count(); j++) // browse trackpoints
             {
-                const QDomElement &positionElement = tcxLapTrackpts.item(j).toElement().elementsByTagName("Position").item(0).toElement();
+                const QDomElement& positionElement = tcxLapTrackpts.item(j).toElement().elementsByTagName("Position").item(0).toElement();
 
                 if (positionElement.isElement()) // if this trackpoint contains position, i.e. GPSr was able to capture position
                 {
@@ -194,13 +194,13 @@ void CTcxProject::loadActivity(const QDomNode& activityRootNode)
                     trkpt.lon = positionElement.elementsByTagName("LongitudeDegrees").item(0).firstChild().nodeValue().toDouble();
                     trkpt.ele = tcxLapTrackpts.item(j).toElement().elementsByTagName("AltitudeMeters").item(0).firstChild().nodeValue().toDouble();
 
-                    const QDomElement &HRElement = tcxLapTrackpts.item(j).toElement().elementsByTagName("HeartRateBpm").item(0).toElement();
+                    const QDomElement& HRElement = tcxLapTrackpts.item(j).toElement().elementsByTagName("HeartRateBpm").item(0).toElement();
                     if (HRElement.isElement()) // if this trackpoint contains heartrate data, i.e. heartrate sensor data has been captured
                     {
                         trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = HRElement.elementsByTagName("Value").item(0).firstChild().nodeValue().toDouble();
                     }
 
-                    const QDomElement &CADElement = tcxLapTrackpts.item(j).toElement().elementsByTagName("Cadence").item(0).toElement();
+                    const QDomElement& CADElement = tcxLapTrackpts.item(j).toElement().elementsByTagName("Cadence").item(0).toElement();
                     if (CADElement.isElement()) // if this trackpoint contains cadence data, i.e. cadence sensor data has been captured
                     {
                         trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"] = CADElement.firstChild().nodeValue().toDouble();
@@ -211,7 +211,7 @@ void CTcxProject::loadActivity(const QDomNode& activityRootNode)
             }
         }
 
-        CGisItemTrk *trkItem = new CGisItemTrk(trk, this);
+        CGisItemTrk* trkItem = new CGisItemTrk(trk, this);
         trackTypes.insert(trkItem->getKey().item, eActivity); // store the track type according to its key
     }
 }
@@ -225,13 +225,13 @@ void CTcxProject::loadCourse(const QDomNode& courseRootNode)
 
         trk.name = courseRootNode.toElement().elementsByTagName("Name").item(0).firstChild().nodeValue();
         trk.segs.resize(1);
-        CTrackData::trkseg_t *seg = &(trk.segs[0]);
+        CTrackData::trkseg_t* seg = &(trk.segs[0]);
 
         const QDomNodeList& tcxTrackpts = courseRootNode.toElement().elementsByTagName("Trackpoint");
 
         for (int i = 0; i < tcxTrackpts.count(); i++) // browse trackpoints
         {
-            const QDomElement &positionElement = tcxTrackpts.item(i).toElement().elementsByTagName("Position").item(0).toElement();
+            const QDomElement& positionElement = tcxTrackpts.item(i).toElement().elementsByTagName("Position").item(0).toElement();
 
             if (positionElement.isElement()) // if this trackpoint contains position, i.e. GPSr was able to capture position
             {
@@ -243,13 +243,13 @@ void CTcxProject::loadCourse(const QDomNode& courseRootNode)
                 trkpt.lon = positionElement.elementsByTagName("LongitudeDegrees").item(0).firstChild().nodeValue().toDouble();
                 trkpt.ele = tcxTrackpts.item(i).toElement().elementsByTagName("AltitudeMeters").item(0).firstChild().nodeValue().toDouble();
 
-                const QDomElement &HRElement = tcxTrackpts.item(i).toElement().elementsByTagName("HeartRateBpm").item(0).toElement();
+                const QDomElement& HRElement = tcxTrackpts.item(i).toElement().elementsByTagName("HeartRateBpm").item(0).toElement();
                 if (HRElement.isElement()) // if this trackpoint contains heartrate data, i.e. heartrate sensor data has been captured
                 {
                     trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = HRElement.elementsByTagName("Value").item(0).firstChild().nodeValue().toDouble();
                 }
 
-                const QDomElement &CADElement = tcxTrackpts.item(i).toElement().elementsByTagName("Cadence").item(0).toElement();
+                const QDomElement& CADElement = tcxTrackpts.item(i).toElement().elementsByTagName("Cadence").item(0).toElement();
                 if (CADElement.isElement()) // if this trackpoint contains cadence data, i.e. cadence sensor data has been captured
                 {
                     trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"] = CADElement.firstChild().nodeValue().toDouble();
@@ -259,7 +259,7 @@ void CTcxProject::loadCourse(const QDomNode& courseRootNode)
             }
         }
 
-        CGisItemTrk *trkItem = new CGisItemTrk(trk, this);
+        CGisItemTrk* trkItem = new CGisItemTrk(trk, this);
         trackTypes.insert(trkItem->getKey().item, eCourse); // store the track type according to its key
 
         const QDomNodeList& tcxCoursePts = courseRootNode.toElement().elementsByTagName("CoursePoint");
@@ -337,10 +337,10 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     tcx.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
     tcx.setAttribute("xsi:schemaLocation", "http://www.garmin.com/xmlschemas/ProfileExtension/v1 http://www.garmin.com/xmlschemas/UserProfilePowerExtensionv1.xsd http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd http://www.garmin.com/xmlschemas/UserProfile/v2 http://www.garmin.com/xmlschemas/UserProfileExtensionv2.xsd");
 
-    QList<CGisItemTrk *> courseTrks, activityTrks;
+    QList<CGisItemTrk*> courseTrks, activityTrks;
     for (int i = 0; i < project.childCount(); i++) // browse tracks in selected project
     {
-        CGisItemTrk *trkItem = dynamic_cast<CGisItemTrk*>(project.child(i));
+        CGisItemTrk* trkItem = dynamic_cast<CGisItemTrk*>(project.child(i));
         if (nullptr == trkItem)
         {
             continue; // not a track
@@ -379,7 +379,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
             QAbstractButton* pButtonActivity = courseOrActivityMsgBox.addButton(tr("Activity"), QMessageBox::AcceptRole);
             QAbstractButton* pButtonCancel = courseOrActivityMsgBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
 
-            CTcxProject *tcx = dynamic_cast<CTcxProject*>(&project);
+            CTcxProject* tcx = dynamic_cast<CTcxProject*>(&project);
             if (nullptr != tcx) // if a TCX project
             {
                 if(dynamic_cast<IDevice*>(tcx->parent()) != nullptr)
@@ -450,7 +450,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     {
         tcx.appendChild(activitiesNode);
     }
-    for (CGisItemTrk *trkToBeSaved : qAsConst(activityTrks))
+    for (CGisItemTrk* trkToBeSaved : qAsConst(activityTrks))
     {
         trkToBeSaved->saveTCXactivity(activitiesNode);
     }
@@ -460,7 +460,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     {
         tcx.appendChild(coursesNode);
     }
-    for (CGisItemTrk *trkToBeSaved : qAsConst(courseTrks))
+    for (CGisItemTrk* trkToBeSaved : qAsConst(courseTrks))
     {
         trkToBeSaved->saveTCXcourse(coursesNode);
     }

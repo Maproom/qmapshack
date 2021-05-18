@@ -27,7 +27,7 @@
 class IQlgtOverlay : public QObject, public IItem
 {
 public:
-    IQlgtOverlay(quint64 id, QObject * parent);
+    IQlgtOverlay(quint64 id, QObject* parent);
     virtual ~IQlgtOverlay();
 
     enum type_e {eEnd, eBase};

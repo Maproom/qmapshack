@@ -31,19 +31,19 @@ class CDetailsTrk : public QWidget, public INotifyTrk, private Ui::IDetailsTrk
 {
     Q_OBJECT
 public:
-    CDetailsTrk(CGisItemTrk &trk);
+    CDetailsTrk(CGisItemTrk& trk);
     virtual ~CDetailsTrk();
 
-    void setMouseFocus(const CTrackData::trkpt_t *pt) override;
-    void setMouseRangeFocus(const CTrackData::trkpt_t *pt1, const CTrackData::trkpt_t *pt2) override;
+    void setMouseFocus(const CTrackData::trkpt_t* pt) override;
+    void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override;
     void enableTabFilter();
-    void setMouseClickFocus(const CTrackData::trkpt_t *pt) override;
+    void setMouseClickFocus(const CTrackData::trkpt_t* pt) override;
 
 public slots:
     void updateData() override;
 
 private slots:
-    void slotNameChanged(const QString &name);
+    void slotNameChanged(const QString& name);
     void slotNameChangeFinished();
     void slotShowPlots();
     void slotColorChanged(int idx);
@@ -58,7 +58,7 @@ private slots:
     void slotColorLimitLowChanged();
 
     void slotSetupGraph(int idx);
-    void slotSetLimitModeGraph(CLimit::mode_e mode, CLimit *limit, QDoubleSpinBox *spinMin, QDoubleSpinBox *spinMax, bool on);
+    void slotSetLimitModeGraph(CLimit::mode_e mode, CLimit* limit, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax, bool on);
     void slotSetLimitModeStyle(CLimit::mode_e mode, bool on);
 
     void slotLineWidthMode(bool isUser);
@@ -69,12 +69,12 @@ private slots:
     void slotHasTrkPtInfo(bool yes);
 
 private:
-    void loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault);
-    void saveGraphSource(QComboBox * comboBox, qint32 n);
-    void setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGraph, QToolButton * toolLimitUsrGraph, QToolButton * toolLimitSysGraph, QDoubleSpinBox * spinMinGraph, QDoubleSpinBox * spinMaxGraph);
-    void setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QToolButton *toolLimitUsr, QToolButton *toolLimitSys, CDoubleSpinBox *spinMin, CDoubleSpinBox *spinMax);
-    void setupGraph(CPlot * plot, const CLimit &limit, const QString& source, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax);
-    void setupLimits(CLimit *limit, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax);
+    void loadGraphSource(QComboBox* comboBox, qint32 n, const QString cfgDefault);
+    void saveGraphSource(QComboBox* comboBox, qint32 n);
+    void setupGraphLimits(CLimit& limit, QToolButton* toolLimitAutoGraph, QToolButton* toolLimitUsrGraph, QToolButton* toolLimitSysGraph, QDoubleSpinBox* spinMinGraph, QDoubleSpinBox* spinMaxGraph);
+    void setupStyleLimits(CLimit& limit, QToolButton* toolLimitAuto, QToolButton* toolLimitUsr, QToolButton* toolLimitSys, CDoubleSpinBox* spinMin, CDoubleSpinBox* spinMax);
+    void setupGraph(CPlot* plot, const CLimit& limit, const QString& source, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax);
+    void setupLimits(CLimit* limit, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax);
 
 
     enum tabs_t
@@ -98,9 +98,9 @@ private:
 
     bool originator = false;
 
-    CPlotProfile * plot1;
-    CPlot * plot2;
-    CPlot * plot3;
+    CPlotProfile* plot1;
+    CPlot* plot2;
+    CPlot* plot3;
 };
 
 #endif //CDETAILSTRK_H

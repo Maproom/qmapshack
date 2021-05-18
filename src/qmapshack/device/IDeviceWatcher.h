@@ -28,7 +28,7 @@ class IDeviceWatcher : public QObject
 {
     Q_OBJECT
 public:
-    IDeviceWatcher(CGisListWks *parent);
+    IDeviceWatcher(CGisListWks* parent);
     virtual ~IDeviceWatcher();
 
 
@@ -53,9 +53,9 @@ protected:
        @param path          This is the device path in a Linux sense (e.g. "/org/freedesktop/UDisks2/block_devices/sdc1") For Windows this will be the drive letter, too (e.g. "d:\")
        @param label         A name for the device. In Linux the last part of the mount point is used. In Windows it should be the name of the drive.
      */
-    void probeForDevice(const QString &mountPoint, const QString& path, const QString &label);
+    void probeForDevice(const QString& mountPoint, const QString& path, const QString& label);
 
-    CGisListWks * listWks;
+    CGisListWks* listWks;
 };
 
 #endif //IDEVICEWATCHER_H

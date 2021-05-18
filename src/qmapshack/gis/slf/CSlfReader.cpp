@@ -34,17 +34,17 @@
 const QHash<QString, QString> CSlfReader::attrToExt =
 {
     {"temperature", "gpxtpx:TrackPointExtension|gpxtpx:atemp"},
-    {"heartrate",   "gpxtpx:TrackPointExtension|gpxtpx:hr"   },
-    {"cadence",     "gpxtpx:TrackPointExtension|gpxtpx:cad"  },
-    {"speed",       "speed"}
+    {"heartrate", "gpxtpx:TrackPointExtension|gpxtpx:hr"   },
+    {"cadence", "gpxtpx:TrackPointExtension|gpxtpx:cad"  },
+    {"speed", "speed"}
 };
 
-void CSlfReader::readFile(const QString &file, CSlfProject *proj)
+void CSlfReader::readFile(const QString& file, CSlfProject* proj)
 {
     CSlfReader reader(file, proj);
 }
 
-QDateTime CSlfReader::parseTimestamp(const QString &ts)
+QDateTime CSlfReader::parseTimestamp(const QString& ts)
 {
     int posOfGMT = ts.indexOf("GMT");
     int deltaGMT = 0;
@@ -57,7 +57,7 @@ QDateTime CSlfReader::parseTimestamp(const QString &ts)
     QString pts = ts.left(posOfGMT - 1) + ts.mid(posOfGMT + 8);
 
     QLocale locale(QLocale::C);
-    const QDateTime &baseTime = locale.toDateTime(pts, "ddd MMM d HH:mm:ss yyyy");
+    const QDateTime& baseTime = locale.toDateTime(pts, "ddd MMM d HH:mm:ss yyyy");
     if(!baseTime.isValid())
     {
         throw tr("Failed to parse timestamp `%1`").arg(ts);
@@ -66,7 +66,7 @@ QDateTime CSlfReader::parseTimestamp(const QString &ts)
     return baseTime.addSecs( (deltaGMT / 100) * 60 * 60 );
 }
 
-CSlfReader::CSlfReader(const QString &filename, CSlfProject *proj) : proj(proj)
+CSlfReader::CSlfReader(const QString& filename, CSlfProject* proj) : proj(proj)
 {
     QFile file(filename);
 
@@ -108,7 +108,7 @@ CSlfReader::CSlfReader(const QString &filename, CSlfProject *proj) : proj(proj)
 
     // Parse the file's dateCode
     // This is a crucial step, as all the other timestamps are relative to this one
-    const QString &dateCode = xmlAct.namedItem("Computer").attributes().namedItem("dateCode").nodeValue();
+    const QString& dateCode = xmlAct.namedItem("Computer").attributes().namedItem("dateCode").nodeValue();
     baseTime = parseTimestamp(dateCode);
 
     const QDomNode& xmlGI = xmlAct.namedItem("GeneralInformation");
@@ -136,7 +136,7 @@ void CSlfReader::readMarkers(const QDomNode& xml)
     QMap<long, QDomNode> markers;
     for(int i = 0; i < xmlMrks.count(); i++)
     {
-        const QDomNode &marker = xmlMrks.item(i);
+        const QDomNode& marker = xmlMrks.item(i);
         const QDomNamedNodeMap& attr = marker.attributes();
 
         long time = attr.namedItem("timeAbsolute").nodeValue().toLong();
@@ -145,7 +145,7 @@ void CSlfReader::readMarkers(const QDomNode& xml)
     }
 
     offsetsTime.append(0);
-    for(const QDomNode &marker : markers)
+    for(const QDomNode& marker : markers)
     {
         const QDomNamedNodeMap& attr = marker.attributes();
 
@@ -157,7 +157,7 @@ void CSlfReader::readMarkers(const QDomNode& xml)
         }
 
         // type="l" indicates a marker, which is used to separate two laps
-        const QString &type = attr.namedItem("type").nodeValue();
+        const QString& type = attr.namedItem("type").nodeValue();
         if("l" == type || "p" == type)
         {
             // filter out duplicate (and invalid) laps
@@ -186,8 +186,8 @@ void CSlfReader::readMarkers(const QDomNode& xml)
                 }
             }
 
-            qreal ele             = attr.namedItem("altitude").nodeValue().toDouble() / 1000.;
-            const QDateTime &time = baseTime.addSecs(attr.namedItem("timeAbsolute").nodeValue().toDouble() / 100.);
+            qreal ele = attr.namedItem("altitude").nodeValue().toDouble() / 1000.;
+            const QDateTime& time = baseTime.addSecs(attr.namedItem("timeAbsolute").nodeValue().toDouble() / 100.);
             new CGisItemWpt(QPointF(lon, lat), ele, time, name, "", proj);
         }
     }
@@ -196,14 +196,14 @@ void CSlfReader::readMarkers(const QDomNode& xml)
     laps.append(std::numeric_limits<long>::max());
 }
 
-QSet<QString> CSlfReader::findUsedAttributes(const QDomNodeList &xmlEntrs)
+QSet<QString> CSlfReader::findUsedAttributes(const QDomNodeList& xmlEntrs)
 {
     QSet<QString> usedAttr;
     for(int i = 0; i < xmlEntrs.count(); i++)
     {
-        const QDomNamedNodeMap &attr = xmlEntrs.item(i).attributes();
+        const QDomNamedNodeMap& attr = xmlEntrs.item(i).attributes();
         const QStringList& keys = attrToExt.keys();
-        for(const QString &key : keys)
+        for(const QString& key : keys)
         {
             if(attr.contains(key) && ("0" != attr.namedItem(key).nodeValue()))
             {
@@ -227,7 +227,7 @@ void CSlfReader::readEntries(const QDomNode& xml)
     CTrackData trk;
     trk.segs.resize(laps.count() + 1);
 
-    CTrackData::trkseg_t *seg = &(trk.segs[0]);
+    CTrackData::trkseg_t* seg = &(trk.segs[0]);
     long breakTime = offsetsTime[0];
 
     qreal prevLon = NOFLOAT;
@@ -247,9 +247,9 @@ void CSlfReader::readEntries(const QDomNode& xml)
         prevLat = trkpt.lat;
         prevLon = trkpt.lon;
 
-        trkpt.ele  = attr.namedItem("altitude" ).nodeValue().toDouble() / 1000.;
+        trkpt.ele = attr.namedItem("altitude" ).nodeValue().toDouble() / 1000.;
 
-        for(const QString &key : usedAttr)
+        for(const QString& key : usedAttr)
         {
             if(attr.contains(key) && attrToExt.contains(key))
             {
@@ -261,7 +261,7 @@ void CSlfReader::readEntries(const QDomNode& xml)
         while(trainingTime > laps[lap])
         {
             lap++;
-            seg       = &(trk.segs[lap]);
+            seg = &(trk.segs[lap]);
             breakTime = offsetsTime[lap];
         }
 
@@ -277,8 +277,8 @@ void CSlfReader::readEntries(const QDomNode& xml)
 
 void CSlfReader::readMetadata(const QDomNode& xml, IGisProject::metadata_t& metadata)
 {
-    metadata.name     = xml.namedItem("name"       ).firstChild().nodeValue();
-    metadata.desc     = xml.namedItem("description").firstChild().nodeValue();
+    metadata.name = xml.namedItem("name"       ).firstChild().nodeValue();
+    metadata.desc = xml.namedItem("description").firstChild().nodeValue();
     metadata.keywords = xml.namedItem("sport"      ).firstChild().nodeValue();
 }
 

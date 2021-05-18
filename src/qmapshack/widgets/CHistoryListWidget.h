@@ -26,10 +26,10 @@ class CHistoryListWidget : public QListWidget
 {
     Q_OBJECT
 public:
-    CHistoryListWidget(QWidget * parent);
+    CHistoryListWidget(QWidget* parent);
     virtual ~CHistoryListWidget();
 
-    void setupHistory(IGisItem &gisItem);
+    void setupHistory(IGisItem& gisItem);
 
 signals:
     void sigChanged();
@@ -42,9 +42,9 @@ private slots:
 
 private:
     IGisItem::key_t key;
-    QMenu * menu;
-    QAction * actionCutHistoryAfter;
-    QAction * actionCutHistoryBefore;
+    QMenu* menu;
+    QAction* actionCutHistoryAfter;
+    QAction* actionCutHistoryBefore;
 };
 
 #endif //CHISTORYLISTWIDGET_H

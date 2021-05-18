@@ -70,11 +70,11 @@ public:
     /// convert an elevation string to a float
     virtual qreal elevation2meter(const QString& val) const = 0;
     /// convert a range in meter into a scale and a matching unit
-    virtual void meter2unit(qreal meter, qreal& scale, QString&  unit) const  = 0;
+    virtual void meter2unit(qreal meter, qreal& scale, QString& unit) const = 0;
     /// convert meter into the base unit (ft, m)
     virtual void meter2base(qreal meter, QString& val, QString& unit) const;
 
-    static bool convert(qreal &value, QString &unit, const QString& targetUnit);
+    static bool convert(qreal& value, QString& unit, const QString& targetUnit);
     static QStringList getUnits()
     {
         QStringList list;
@@ -87,7 +87,7 @@ public:
 
     enum type_e {eTypeMetric, eTypeImperial, eTypeNautic, eTypeAviation};
     /// instantiate the correct unit object
-    static void setUnitType(type_e t, QObject * parent);
+    static void setUnitType(type_e t, QObject* parent);
 
     enum slope_mode_e {eSlopePercent, eSlopeDegrees};
     static void setSlopeMode(slope_mode_e mode)
@@ -103,7 +103,7 @@ public:
     static qreal slopeConvert(slope_mode_e fromMode, qreal fromSlope);
 
     /// parse a string for a timestamp
-    static bool parseTimestamp(const QString &time, QDateTime &datetime);
+    static bool parseTimestamp(const QString& time, QDateTime& datetime);
 
     /**
        @brief Convert date time object to string using the current timezone configuration
@@ -126,7 +126,7 @@ public:
     const qreal speedFactor;
     const QString elevationUnit;
     const qreal elevationFactor;
-    static const char *tblTimezone[];
+    static const char* tblTimezone[];
 
     enum tz_mode_e
     {
@@ -138,15 +138,15 @@ public:
 
     static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone, bool& format)
     {
-        mode   = timeZoneMode;
-        zone   = timeZone;
+        mode = timeZoneMode;
+        zone = timeZone;
         format = useShortFormat;
     }
 
     static void setTimeZoneSetup(tz_mode_e mode, const QByteArray& zone, bool format)
     {
-        timeZoneMode   = mode;
-        timeZone       = zone;
+        timeZoneMode = mode;
+        timeZone = zone;
         useShortFormat = format;
     }
 
@@ -181,11 +181,11 @@ protected:
           const qreal speedFactor,
           const QString& elevationUnit,
           const qreal elevationFactor,
-          QObject *parent);
+          QObject* parent);
 
     static slope_mode_e slopeMode;
 
-    static QDateTime parseTimestamp(const QString &timetext, int& tzoffset);
+    static QDateTime parseTimestamp(const QString& timetext, int& tzoffset);
 
     static tz_mode_e timeZoneMode;
     static QByteArray timeZone;
@@ -194,7 +194,7 @@ protected:
     static coord_format_e coordFormat;
 
 private:
-    static const IUnit * m_self;
+    static const IUnit* m_self;
 
     static const QRegExp reCoord1;
     static const QRegExp reCoord2;

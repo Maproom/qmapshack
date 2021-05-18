@@ -27,7 +27,7 @@ class CDBFolderSqlite : public IDBFolderSql, public IDBSqlite
 {
     Q_OBJECT
 public:
-    CDBFolderSqlite(const QString &filename, const QString &name, QTreeWidget *parent);
+    CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget* parent);
     virtual ~CDBFolderSqlite() {}
 
     const QString& getFilename()
@@ -37,7 +37,7 @@ public:
 
     QString getDBInfo() const;
 
-    bool search(const QString& str, QSqlQuery &query) override;
+    bool search(const QString& str, QSqlQuery& query) override;
 
     void copyFolder(quint64 child, quint64 parent) override;
 private:

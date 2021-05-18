@@ -41,7 +41,7 @@
 
 #define DB_QLGT_VERSION 9
 
-CQlgtDb::CQlgtDb(const QString &filename, CImportDatabase *parent)
+CQlgtDb::CQlgtDb(const QString& filename, CImportDatabase* parent)
     : gui(parent)
     , nItems(0)
     , nFolders(0)
@@ -615,8 +615,8 @@ void CQlgtDb::start(const QString& filename)
     QUERY_EXEC(return );
     while(query.next())
     {
-        quint64 idParent    = query.value(0).toULongLong();
-        quint64 idChild     = query.value(1).toULongLong();
+        quint64 idParent = query.value(0).toULongLong();
+        quint64 idChild = query.value(1).toULongLong();
         dbQms->addFolder2FolderRelation(idParent, idChild);
     }
 
@@ -624,8 +624,8 @@ void CQlgtDb::start(const QString& filename)
     QUERY_EXEC(return );
     while(query.next())
     {
-        quint64 idParent    = query.value(0).toULongLong();
-        quint64 idChild     = query.value(1).toULongLong();
+        quint64 idParent = query.value(0).toULongLong();
+        quint64 idChild = query.value(1).toULongLong();
         dbQms->addFolder2ItemRelation(idParent, idChild);
     }
 

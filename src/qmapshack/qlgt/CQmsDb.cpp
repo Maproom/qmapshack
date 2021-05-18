@@ -36,7 +36,7 @@
 #include <QtSql>
 #include <QtWidgets>
 
-CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
+CQmsDb::CQmsDb(const QString& filename, CImportDatabase* parent)
     : QObject(parent)
     , valid(false)
     , gui(parent)
@@ -173,12 +173,12 @@ void CQmsDb::addFolder(CQlgtFolder& folder)
     project >> in;
 
     query.prepare("INSERT INTO folders (type, keyqms, name, comment, locked, data) VALUES (:type, :keyqms, :name, :comment, :locked, :data)");
-    query.bindValue(":type",    mapFolderTypes[folder.type]);
-    query.bindValue(":keyqms",     project.getKey());
-    query.bindValue(":name",    project.getName());
+    query.bindValue(":type", mapFolderTypes[folder.type]);
+    query.bindValue(":keyqms", project.getKey());
+    query.bindValue(":name", project.getName());
     query.bindValue(":comment", project.getInfo());
-    query.bindValue(":locked",  folder.locked);
-    query.bindValue(":data",    data);
+    query.bindValue(":locked", folder.locked);
+    query.bindValue(":data", data);
     QUERY_EXEC(return );
 
     query.prepare("SELECT last_insert_rowid() from folders");
@@ -203,7 +203,7 @@ void CQmsDb::addWpt(CQlgtWpt& wpt1)
     }
 }
 
-void CQmsDb::addTrk(CQlgtTrack &trk1)
+void CQmsDb::addTrk(CQlgtTrack& trk1)
 {
     CGisItemTrk trk(trk1);
     quint64 id = store(trk);
@@ -213,7 +213,7 @@ void CQmsDb::addTrk(CQlgtTrack &trk1)
     }
 }
 
-void CQmsDb::addTrk(IQlgtOverlay &trk1)
+void CQmsDb::addTrk(IQlgtOverlay& trk1)
 {
     CGisItemTrk trk(trk1);
     quint64 id = store(trk);
@@ -261,11 +261,11 @@ quint64 CQmsDb::store(IGisItem& item)
     QSqlQuery query(db);
     // item is unknown to database -> create item in database
     query.prepare("INSERT INTO items (type, keyqms, icon, name, date, comment, data, hash) VALUES (:type, :keyqms, :icon, :name, :date, :comment, :data, :hash)");
-    query.bindValue(":type",    item.type());
-    query.bindValue(":keyqms",     item.getKey().item);
-    query.bindValue(":icon",    buffer.data());
-    query.bindValue(":name",    item.getName());
-    query.bindValue(":date",    item.getTimestamp());
+    query.bindValue(":type", item.type());
+    query.bindValue(":keyqms", item.getKey().item);
+    query.bindValue(":icon", buffer.data());
+    query.bindValue(":name", item.getName());
+    query.bindValue(":date", item.getTimestamp());
     query.bindValue(":comment", item.getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowFullText));
     query.bindValue(":data", data);
     query.bindValue(":hash", item.getHash());

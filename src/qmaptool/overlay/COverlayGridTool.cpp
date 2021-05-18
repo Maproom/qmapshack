@@ -27,7 +27,7 @@
 
 #include <QtWidgets>
 
-COverlayGridTool::COverlayGridTool(QWidget *parent)
+COverlayGridTool::COverlayGridTool(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
@@ -43,7 +43,7 @@ COverlayGridTool::COverlayGridTool(QWidget *parent)
 
     connect(CMainWindow::self().showToolHelp(), &QAction::toggled, labelFinal, &QLabel::setVisible);
 
-    QButtonGroup * group = new QButtonGroup(this);
+    QButtonGroup* group = new QButtonGroup(this);
     group->addButton(radioSetRef);
     group->addButton(radioGridPlacer);
     group->addButton(radioSelectArea);
@@ -80,7 +80,7 @@ void COverlayGridTool::slotReset()
     cfg.sync();
 }
 
-void COverlayGridTool::registerItem(CItemRefMap * item)
+void COverlayGridTool::registerItem(CItemRefMap* item)
 {
     this->item = item;
     if(item != nullptr)
@@ -162,7 +162,7 @@ bool COverlayGridTool::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
         p.setPen(QPen(Qt::white, 1));
         p.setBrush(Qt::darkGreen);
 
-        for(COverlayRefMapPoint * point : qAsConst(refPoints))
+        for(COverlayRefMapPoint* point : qAsConst(refPoints))
         {
             QPointF pt = point->getPtPtx();
             context->convertMap2Screen(pt);
@@ -175,7 +175,7 @@ bool COverlayGridTool::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     return false;
 }
 
-void COverlayGridTool::mouseMoveEventFx(QMouseEvent *e)
+void COverlayGridTool::mouseMoveEventFx(QMouseEvent* e)
 {
     if(radioGridPlacer->isChecked())
     {
@@ -187,7 +187,7 @@ void COverlayGridTool::mouseMoveEventFx(QMouseEvent *e)
     }
 }
 
-void COverlayGridTool::mouseReleaseEventFx(QMouseEvent *e)
+void COverlayGridTool::mouseReleaseEventFx(QMouseEvent* e)
 {
     if(radioGridPlacer->isChecked())
     {
@@ -199,7 +199,7 @@ void COverlayGridTool::mouseReleaseEventFx(QMouseEvent *e)
     }
 }
 
-void COverlayGridTool::leaveEventFx(QEvent *e)
+void COverlayGridTool::leaveEventFx(QEvent* e)
 {
     if(radioGridPlacer->isChecked())
     {
@@ -230,12 +230,12 @@ QCursor COverlayGridTool::getCursorFx()
 
 void COverlayGridTool::slotSetArea(const QRectF& rect)
 {
-    qreal hspace    = rect.width() / 2;
-    qreal vspace    = rect.height() / 2;
-    QRectF area     = rect;
+    qreal hspace = rect.width() / 2;
+    qreal vspace = rect.height() / 2;
+    QRectF area = rect;
 
-    area.setTopLeft(rect.topLeft()          - QPointF(hspace, vspace));
-    area.setBottomRight(rect.bottomRight()  + QPointF(hspace, vspace));
+    area.setTopLeft(rect.topLeft() - QPointF(hspace, vspace));
+    area.setBottomRight(rect.bottomRight() + QPointF(hspace, vspace));
 
     widgetSelectArea->slotSetArea(area);
     radioSelectArea->setChecked(true);
@@ -260,58 +260,58 @@ void COverlayGridTool::slotCalculate()
 
     const QRectF& area = widgetSelectArea->getArea();
 
-    const QPointF& ptTopLeft        = widgetGridPlacer->getPoint(0);
-    const QPointF& ptTopRight       = widgetGridPlacer->getPoint(1);
-    const QPointF& ptBottomRight    = widgetGridPlacer->getPoint(2);
-    const QPointF& ptBottomLeft     = widgetGridPlacer->getPoint(3);
+    const QPointF& ptTopLeft = widgetGridPlacer->getPoint(0);
+    const QPointF& ptTopRight = widgetGridPlacer->getPoint(1);
+    const QPointF& ptBottomRight = widgetGridPlacer->getPoint(2);
+    const QPointF& ptBottomLeft = widgetGridPlacer->getPoint(3);
 
-    qreal dx11      = ptTopRight.x() - ptTopLeft.x();
-    qreal dy11      = ptTopRight.y() - ptTopLeft.y();
-    qreal dx12      = ptBottomRight.x() - ptBottomLeft.x();
-    qreal dy12      = ptBottomRight.y() - ptBottomLeft.y();
-    qreal dx1       = (dx11 + dx12) / 2;
-    qreal dy1       = (dy11 + dy12) / 2;
+    qreal dx11 = ptTopRight.x() - ptTopLeft.x();
+    qreal dy11 = ptTopRight.y() - ptTopLeft.y();
+    qreal dx12 = ptBottomRight.x() - ptBottomLeft.x();
+    qreal dy12 = ptBottomRight.y() - ptBottomLeft.y();
+    qreal dx1 = (dx11 + dx12) / 2;
+    qreal dy1 = (dy11 + dy12) / 2;
 
-    qreal alpha     = qAtan(dy1 / dx1);
-    qreal distx     = qSqrt(dx1 * dx1 + dy1 * dy1);
+    qreal alpha = qAtan(dy1 / dx1);
+    qreal distx = qSqrt(dx1 * dx1 + dy1 * dy1);
 
-    qreal dx21      = ptBottomLeft.x() - ptTopLeft.x();
-    qreal dy21      = ptBottomLeft.y() - ptTopLeft.y();
-    qreal dx22      = ptBottomRight.x() - ptTopRight.x();
-    qreal dy22      = ptBottomRight.y() - ptTopRight.y();
-    qreal dx2       = (dx21 + dx22) / 2;
-    qreal dy2       = (dy21 + dy22) / 2;
+    qreal dx21 = ptBottomLeft.x() - ptTopLeft.x();
+    qreal dy21 = ptBottomLeft.y() - ptTopLeft.y();
+    qreal dx22 = ptBottomRight.x() - ptTopRight.x();
+    qreal dy22 = ptBottomRight.y() - ptTopRight.y();
+    qreal dx2 = (dx21 + dx22) / 2;
+    qreal dy2 = (dy21 + dy22) / 2;
 
-    qreal disty     = qSqrt(dx2 * dx2 + dy2 * dy2);
+    qreal disty = qSqrt(dx2 * dx2 + dy2 * dy2);
 
     QMatrix translationMatrix(1, 0, 0, 1, ptTopLeft.x(), ptTopLeft.y());
     QMatrix rotationMatrix(qCos(alpha), qSin(alpha), -qSin(alpha), qCos(alpha), 0, 0);
     QMatrix scalingMatrix(distx, 0, 0, disty, 0, 0);
 
     // forward matrix index -> map pixel coord
-    QMatrix mxFwd   = scalingMatrix * rotationMatrix * translationMatrix;
+    QMatrix mxFwd = scalingMatrix * rotationMatrix * translationMatrix;
     // backward matrix map pixel coord -> index
-    QMatrix mxBwd   = mxFwd.inverted();
+    QMatrix mxBwd = mxFwd.inverted();
 
-    QPointF tl      = mxBwd.map(area.topLeft());
-    QPointF br      = mxBwd.map(area.bottomRight());
+    QPointF tl = mxBwd.map(area.topLeft());
+    QPointF br = mxBwd.map(area.bottomRight());
 
-    int xMin        = qCeil(tl.x()) - 1;
-    int yMin        = qCeil(tl.y()) - 1;
+    int xMin = qCeil(tl.x()) - 1;
+    int yMin = qCeil(tl.y()) - 1;
 
-    int xMax        = qCeil(br.x()) + 1;
-    int yMax        = qCeil(br.y()) + 1;
+    int xMax = qCeil(br.x()) + 1;
+    int yMax = qCeil(br.y()) + 1;
 
-    qreal lonRef    = widgetSetRef->getEasting();
-    qreal latRef    = widgetSetRef->getNorthing();
-    qreal dLon      = widgetSetRef->getHorizSpacing();
-    qreal dLat      = widgetSetRef->getVertSpacing();
+    qreal lonRef = widgetSetRef->getEasting();
+    qreal latRef = widgetSetRef->getNorthing();
+    qreal dLon = widgetSetRef->getHorizSpacing();
+    qreal dLat = widgetSetRef->getVertSpacing();
 
     bool isLonLat = proj.isSrcLatLong();
 
-    for(int y =  yMin; y < yMax; y++)
+    for(int y = yMin; y < yMax; y++)
     {
-        for(int x =  xMin; x < xMax; x++)
+        for(int x = xMin; x < xMax; x++)
         {
             QPointF ptPtx = mxFwd.map(QPointF(x, y));
             if(area.contains(ptPtx))

@@ -147,12 +147,12 @@ QStringList CFitDefinitionMessage::messageInfo() const
         .arg(getNrOfFields())
         .arg(getNrOfDevFields());
 
-    for(const CFitFieldDefinition& field: fields)
+    for(const CFitFieldDefinition& field : fields)
     {
         list << field.fieldInfo();
     }
 
-    for(const CFitFieldDefinition& devField: devFields)
+    for(const CFitFieldDefinition& devField : devFields)
     {
         list << devField.fieldInfo();
     }

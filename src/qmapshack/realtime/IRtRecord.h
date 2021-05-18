@@ -32,7 +32,7 @@ class IRtRecord : public QObject
 {
     Q_OBJECT
 public:
-    IRtRecord(QObject * parent);
+    IRtRecord(QObject* parent);
     virtual ~IRtRecord() = default;
 
     /**
@@ -65,7 +65,7 @@ public:
        @param blockedAreas  a list of blocked areas
        @param rt            the draw context
      */
-    virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt);
+    virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt);
 
     virtual const QVector<CTrackData::trkpt_t>& getTrack() const
     {

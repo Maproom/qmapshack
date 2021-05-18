@@ -45,7 +45,7 @@ public:
     }
 
 private:
-    QSettings  * cfg;
+    QSettings* cfg;
 };
 
 #define SETTINGS \

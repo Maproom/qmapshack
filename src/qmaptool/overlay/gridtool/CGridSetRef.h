@@ -27,7 +27,7 @@ class CGridSetRef : public QWidget, private Ui::IGridSetRef
 {
     Q_OBJECT
 public:
-    CGridSetRef(QWidget * parent);
+    CGridSetRef(QWidget* parent);
     virtual ~CGridSetRef() = default;
 
     void saveSettings(QSettings& cfg);
@@ -71,7 +71,7 @@ private slots:
 
 private:
     template<typename T>
-    void markWidget(T * w, bool isOk)
+    void markWidget(T* w, bool isOk)
     {
         QPalette pal = T(this).palette();
         if(!isOk)

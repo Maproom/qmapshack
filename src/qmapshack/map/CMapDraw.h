@@ -33,7 +33,7 @@ class CMapDraw : public IDrawContext
 {
     Q_OBJECT
 public:
-    CMapDraw(CCanvas * parent);
+    CMapDraw(CCanvas* parent);
     virtual ~CMapDraw();
 
     void saveConfig(QSettings& cfg);
@@ -48,7 +48,7 @@ public:
 
        @param item the item to call it's loadConfig() method
      */
-    void loadConfigForMapItem(CMapItem * item);
+    void loadConfigForMapItem(CMapItem* item);
 
     /**
        @brief Get a full detailed info text about objects close to the given point
@@ -83,10 +83,10 @@ public:
     }
 
     static void setupMapPath();
-    static void setupMapPath(const QString &path);
-    static void setupMapPath(const QStringList &paths);
-    static void saveMapPath(QSettings &cfg);
-    static void loadMapPath(QSettings &cfg);
+    static void setupMapPath(const QString& path);
+    static void setupMapPath(const QStringList& paths);
+    static void saveMapPath(QSettings& cfg);
+    static void loadMapPath(QSettings& cfg);
     static const QStringList& getSupportedFormats()
     {
         return supportedFormats;
@@ -148,7 +148,7 @@ private:
 
        @return The created map item.
      */
-    CMapItem *createMapItem(const QString& filename, QSet<QString> &maps);
+    CMapItem* createMapItem(const QString& filename, QSet<QString>& maps);
     /**
        @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
 
@@ -162,23 +162,23 @@ private:
        @param keys the stored map's MD5 keys will be written to keys
        @param cfg  configuration file with correct group context set.
      */
-    void saveActiveMapsList(QStringList &keys, QSettings &cfg);
+    void saveActiveMapsList(QStringList& keys, QSettings& cfg);
 
     /**
        @brief Open configuration before saving list
        @param keys the stored map's MD5 keys will be written to keys
      */
-    void saveActiveMapsList(QStringList &keys);
+    void saveActiveMapsList(QStringList& keys);
     /**
        @brief Restore list of active maps from configuration file
        @param keys MD5 hash keys to identify the maps
      */
-    void restoreActiveMapsList(const QStringList &keys);
+    void restoreActiveMapsList(const QStringList& keys);
 
     void restoreActiveMapsList(const QStringList& keys, QSettings& cfg);
 
     /// the treewidget holding all active and inactive map items
-    CMapList * mapList;
+    CMapList* mapList;
 
     /// the group label used in QSettings
     QString cfgGroup;

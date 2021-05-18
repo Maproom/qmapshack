@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CItemListWidget::CItemListWidget(QWidget *parent)
+CItemListWidget::CItemListWidget(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
@@ -41,7 +41,7 @@ void CItemListWidget::saveSettings(QSettings& cfg)
     const int N = listFiles->count();
     for(int n = 0; n < N; n++)
     {
-        IItem * item = dynamic_cast<IItem*>(listFiles->item(n));
+        IItem* item = dynamic_cast<IItem*>(listFiles->item(n));
         if(item != nullptr)
         {
             files << item->getFilename();
@@ -62,7 +62,7 @@ void CItemListWidget::loadSettings(QSettings& cfg)
     const int N = listFiles->count();
     for(int n = 0; n < N; n++)
     {
-        IItem * item = dynamic_cast<IItem*>(listFiles->item(n));
+        IItem* item = dynamic_cast<IItem*>(listFiles->item(n));
         if(item != nullptr)
         {
             cfg.beginGroup(QString("%1").arg(n));
@@ -74,12 +74,12 @@ void CItemListWidget::loadSettings(QSettings& cfg)
     listFiles->setCurrentRow(cfg.value("lastFile", 0).toInt());
 }
 
-IItem * CItemListWidget::currentItem()
+IItem* CItemListWidget::currentItem()
 {
     return dynamic_cast<IItem*>(listFiles->currentItem());
 }
 
-IItem * CItemListWidget::item(int n)
+IItem* CItemListWidget::item(int n)
 {
     return dynamic_cast<IItem*>(listFiles->item(n));
 }
@@ -117,7 +117,7 @@ void CItemListWidget::slotFiles()
 
 void CItemListWidget::slotLoadCurrentMap()
 {
-    IItem * item = dynamic_cast<IItem*>(listFiles->currentItem());
+    IItem* item = dynamic_cast<IItem*>(listFiles->currentItem());
     if(item != nullptr)
     {
         item->reload();
@@ -132,21 +132,21 @@ void CItemListWidget::slotDeleteFiles()
 
 void CItemListWidget::slotDeleteFile()
 {
-    QListWidgetItem * item = listFiles->takeItem(listFiles->currentRow());
+    QListWidgetItem* item = listFiles->takeItem(listFiles->currentRow());
     delete item;
     slotSelectionChanged();
 }
 
 void CItemListWidget::slotSelectionChanged()
 {
-    IItem * item = dynamic_cast<IItem*>(listFiles->currentItem());
+    IItem* item = dynamic_cast<IItem*>(listFiles->currentItem());
     if(item != nullptr)
     {
         item->toFront();
     }
 
     bool isNotEmpty = listFiles->count() != 0;
-    int row        = listFiles->currentRow();
+    int row = listFiles->currentRow();
 
     toolDelFile->setEnabled(row != -1);
     toolDelFiles->setEnabled(isNotEmpty);

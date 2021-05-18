@@ -27,9 +27,9 @@
 
 #include <QtWidgets>
 
-CRouterSetup * CRouterSetup::pSelf = nullptr;
+CRouterSetup* CRouterSetup::pSelf = nullptr;
 
-CRouterSetup::CRouterSetup(QWidget * parent)
+CRouterSetup::CRouterSetup(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
@@ -57,7 +57,7 @@ CRouterSetup::~CRouterSetup()
 
 bool CRouterSetup::hasFastRouting()
 {
-    IRouter * router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+    IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
     if(router)
     {
         return router->hasFastRouting();
@@ -68,7 +68,7 @@ bool CRouterSetup::hasFastRouting()
 void CRouterSetup::slotSelectRouter(int i)
 {
     stackedWidget->setCurrentIndex(i);
-    IRouter * router = dynamic_cast<IRouter *>(stackedWidget->currentWidget());
+    IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
     if (router != nullptr)
     {
         router->routerSelected();
@@ -77,7 +77,7 @@ void CRouterSetup::slotSelectRouter(int i)
 
 void CRouterSetup::calcRoute(const IGisItem::key_t& key)
 {
-    IRouter * router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+    IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
     if(router)
     {
         router->calcRoute(key);
@@ -86,7 +86,7 @@ void CRouterSetup::calcRoute(const IGisItem::key_t& key)
 
 int CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs)
 {
-    IRouter * router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+    IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
     if(router)
     {
         return router->calcRoute(p1, p2, coords, costs);
@@ -97,7 +97,7 @@ int CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coo
 
 QString CRouterSetup::getOptions()
 {
-    IRouter * router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+    IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
     if(router)
     {
         return router->getOptions();

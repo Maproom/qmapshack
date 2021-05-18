@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser *textBrowser, QWidget * parent)
+CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser* textBrowser, QWidget* parent)
     : IToolShell(parent)
 {
     setTextBrowser(textBrowser);
@@ -36,7 +36,7 @@ CRouterBRouterToolShell::~CRouterBRouterToolShell()
 {
 }
 
-void CRouterBRouterToolShell::start(const QString &dir, const QString &command, const QStringList &args)
+void CRouterBRouterToolShell::start(const QString& dir, const QString& command, const QStringList& args)
 {
     isBeingKilled = false;
     isStarting = true;

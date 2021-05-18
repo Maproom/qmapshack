@@ -32,7 +32,7 @@
 
 #include <QtWidgets>
 
-CQlbProject::CQlbProject(const QString &filename, CGisListWks *parent)
+CQlbProject::CQlbProject(const QString& filename, CGisListWks* parent)
     : IGisProject(eTypeQlb, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/QlbProject.png"));
@@ -89,7 +89,7 @@ void CQlbProject::loadWpts(QByteArray& array)
     }
 }
 
-void CQlbProject::loadTrks(QByteArray &array)
+void CQlbProject::loadTrks(QByteArray& array)
 {
     QDataStream stream(&array, QIODevice::ReadOnly);
     stream.setVersion(QDataStream::Qt_4_5);
@@ -102,7 +102,7 @@ void CQlbProject::loadTrks(QByteArray &array)
     }
 }
 
-void CQlbProject::loadRtes(QByteArray &array)
+void CQlbProject::loadRtes(QByteArray& array)
 {
     QDataStream stream(&array, QIODevice::ReadOnly);
     stream.setVersion(QDataStream::Qt_4_5);
@@ -115,7 +115,7 @@ void CQlbProject::loadRtes(QByteArray &array)
     }
 }
 
-void CQlbProject::loadOvls(QByteArray &array)
+void CQlbProject::loadOvls(QByteArray& array)
 {
     QDataStream stream(&array, QIODevice::ReadOnly);
     stream.setVersion(QDataStream::Qt_4_5);

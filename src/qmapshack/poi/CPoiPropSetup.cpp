@@ -22,14 +22,14 @@
 #include "poi/CPoiPropSetup.h"
 #include "poi/IPoi.h"
 
-CPoiPropSetup::CPoiPropSetup(IPoi *poifile, CPoiDraw *poi)
+CPoiPropSetup::CPoiPropSetup(IPoi* poifile, CPoiDraw* poi)
     : IPoiProp(poifile, poi)
 {
     setupUi(this);
     CPoiPropSetup::slotPropertiesChanged();
 
-    connect(sliderOpacity,         &QSlider::valueChanged,      poifile, &IPoi::slotSetOpacity);
-    connect(sliderOpacity,         &QSlider::valueChanged,      poi,     &CPoiDraw::emitSigCanvasUpdate);
+    connect(sliderOpacity, &QSlider::valueChanged, poifile, &IPoi::slotSetOpacity);
+    connect(sliderOpacity, &QSlider::valueChanged, poi, &CPoiDraw::emitSigCanvasUpdate);
 
     poifile->addTreeWidgetItems(treeWidgetCategories);
     treeWidgetCategories->sortItems(eTreeColumnDisplayName, Qt::SortOrder::AscendingOrder);

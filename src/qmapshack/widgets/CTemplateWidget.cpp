@@ -23,7 +23,7 @@
 #include <QtUiTools>
 #include <QtWidgets>
 
-CTemplateWidget::CTemplateWidget(QWidget *parent)
+CTemplateWidget::CTemplateWidget(QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -74,9 +74,9 @@ QString CTemplateWidget::text()
     QString str;
 
     QList<QGroupBox*> groups = widget->findChildren<QGroupBox*>(QRegExp("group.*"), Qt::FindDirectChildrenOnly);
-    qSort(groups.begin(), groups.end(), [](const QGroupBox * g1, const QGroupBox * g2){return g1->objectName() < g2->objectName(); });
+    qSort(groups.begin(), groups.end(), [](const QGroupBox* g1, const QGroupBox* g2){return g1->objectName() < g2->objectName(); });
 
-    for(const QGroupBox * group : qAsConst(groups))
+    for(const QGroupBox* group : qAsConst(groups))
     {
         str += QString("<p><b>%1</b>: ").arg(group->title());
         str += resolveGroup(group);
@@ -86,18 +86,18 @@ QString CTemplateWidget::text()
     return str;
 }
 
-QString CTemplateWidget::resolveGroup(const QGroupBox * group)
+QString CTemplateWidget::resolveGroup(const QGroupBox* group)
 {
     QString str;
-    QList<QWidget *> widgets = group->findChildren<QWidget*>(QRegExp(".*"), Qt::FindDirectChildrenOnly);
-    qSort(widgets.begin(), widgets.end(), [](const QWidget * w1, const QWidget * w2){return w1->property("order") < w2->property("order"); });
+    QList<QWidget*> widgets = group->findChildren<QWidget*>(QRegExp(".*"), Qt::FindDirectChildrenOnly);
+    qSort(widgets.begin(), widgets.end(), [](const QWidget* w1, const QWidget* w2){return w1->property("order") < w2->property("order"); });
 
-    for(const QWidget * w : qAsConst(widgets))
+    for(const QWidget* w : qAsConst(widgets))
     {
         const QString pre(str.isEmpty() ? "" : ", ");
 
         {
-            const QCheckBox * obj = dynamic_cast<const QCheckBox*>(w);
+            const QCheckBox* obj = dynamic_cast<const QCheckBox*>(w);
             if(obj != nullptr)
             {
                 if(obj->isChecked())
@@ -109,7 +109,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
         }
 
         {
-            const QRadioButton * obj = dynamic_cast<const QRadioButton*>(w);
+            const QRadioButton* obj = dynamic_cast<const QRadioButton*>(w);
             if(obj != nullptr)
             {
                 if(obj->isChecked())
@@ -121,7 +121,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
         }
 
         {
-            const QComboBox * obj = dynamic_cast<const QComboBox*>(w);
+            const QComboBox* obj = dynamic_cast<const QComboBox*>(w);
             if(obj != nullptr)
             {
                 if(!obj->currentText().isEmpty())
@@ -133,7 +133,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
         }
 
         {
-            const QLineEdit * obj = dynamic_cast<const QLineEdit*>(w);
+            const QLineEdit* obj = dynamic_cast<const QLineEdit*>(w);
             if(obj != nullptr)
             {
                 if(!obj->text().simplified().isEmpty())
@@ -145,7 +145,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
         }
 
         {
-            const QTextEdit * obj = dynamic_cast<const QTextEdit*>(w);
+            const QTextEdit* obj = dynamic_cast<const QTextEdit*>(w);
             if(obj != nullptr)
             {
                 if(!obj->toPlainText().simplified().isEmpty())
@@ -208,9 +208,9 @@ void CTemplateWidget::slotTemplateActivated(int idx)
         else if(nextInFocusChain() != nullptr)
         {
             // convert focus chain into a sortable property.
-            quint32 cnt     = 0;
-            QWidget * first = nextInFocusChain();
-            QWidget * next  = first;
+            quint32 cnt = 0;
+            QWidget* first = nextInFocusChain();
+            QWidget* next = first;
             do
             {
                 if(  (dynamic_cast<QCheckBox*>(next) != nullptr)
@@ -243,7 +243,7 @@ void CTemplateWidget::slotTemplateActivated(int idx)
 
 void CTemplateWidget::slotPreview()
 {
-    QTextBrowser * preview = new QTextBrowser();
+    QTextBrowser* preview = new QTextBrowser();
 
     preview->setAttribute(Qt::WA_DeleteOnClose, true);
     preview->setWindowModality(Qt::ApplicationModal);
@@ -256,7 +256,7 @@ void CTemplateWidget::slotPreview()
     preview->show();
     preview->raise();
 
-    QAction * action = new QAction(preview);
+    QAction* action = new QAction(preview);
     action->setShortcut(Qt::Key_Escape);
 
     preview->addAction(action);

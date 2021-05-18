@@ -25,11 +25,11 @@ class CFitHeaderState final : public IFitDecoderState
 {
     Q_DECLARE_TR_FUNCTIONS(CFitHeaderState)
 public:
-    CFitHeaderState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
+    CFitHeaderState(shared_state_data_t& data) : IFitDecoderState(data) { reset(); }
     virtual ~CFitHeaderState() {}
 
     void reset() override;
-    decode_state_e process(quint8 &dataByte) override;
+    decode_state_e process(quint8& dataByte) override;
 
 private:
     quint8 offset;

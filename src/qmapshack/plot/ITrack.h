@@ -36,13 +36,13 @@ public:
     virtual ~ITrack() = default;
 
     void setSize(int w, int h);
-    void setTrack(CGisItemTrk * track);
-    void setTrack(const QPolygonF &track);
+    void setTrack(CGisItemTrk* track);
+    void setTrack(const QPolygonF& track);
 
-    void save(QImage& image, const CTrackData::trkpt_t *pTrkpt);
+    void save(QImage& image, const CTrackData::trkpt_t* pTrkpt);
 
 protected:
-    void setupProjection(const QRectF &boundingBox);
+    void setupProjection(const QRectF& boundingBox);
     void updateData();
     void draw(QPainter& p);
     void draw();
@@ -50,7 +50,7 @@ protected:
     CProj proj;
 
     bool needsRedraw = true;
-    CGisItemTrk * trk = nullptr;
+    CGisItemTrk* trk = nullptr;
     QPolygonF coords;
     QPolygonF line;
 

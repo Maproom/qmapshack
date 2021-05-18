@@ -24,12 +24,12 @@
 
 #include <QtWidgets>
 
-CHistoryListWidget::CHistoryListWidget(QWidget *parent)
+CHistoryListWidget::CHistoryListWidget(QWidget* parent)
     : QListWidget(parent)
 {
     setIconSize(QSize(32, 32));
     setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(this, &CHistoryListWidget::itemSelectionChanged,       this, &CHistoryListWidget::slotSelectionChanged);
+    connect(this, &CHistoryListWidget::itemSelectionChanged, this, &CHistoryListWidget::slotSelectionChanged);
     connect(this, &CHistoryListWidget::customContextMenuRequested, this, &CHistoryListWidget::slotContextMenu);
 
     menu = new QMenu(this);
@@ -65,9 +65,9 @@ void CHistoryListWidget::setupHistory(IGisItem& gisItem)
         const IGisItem::history_event_t& event = history.events[i];
 
         QString str;
-        QListWidgetItem * item = new QListWidgetItem(this);
+        QListWidgetItem* item = new QListWidgetItem(this);
 
-        str  = event.time.toString();
+        str = event.time.toString();
         if(!event.who.isEmpty())
         {
             str += tr(" by %1").arg(event.who);
@@ -93,7 +93,7 @@ void CHistoryListWidget::setupHistory(IGisItem& gisItem)
 
 void CHistoryListWidget::slotSelectionChanged()
 {
-    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
+    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         return;
@@ -127,7 +127,7 @@ void CHistoryListWidget::slotCutHistoryAfter()
         return;
     }
 
-    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
+    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         return;
@@ -136,7 +136,7 @@ void CHistoryListWidget::slotCutHistoryAfter()
     item->cutHistoryAfter();
     item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
 
-    IGisProject * project = dynamic_cast<IGisProject*>(item->parent());
+    IGisProject* project = dynamic_cast<IGisProject*>(item->parent());
     if(project)
     {
         project->setChanged();
@@ -154,7 +154,7 @@ void CHistoryListWidget::slotCutHistoryBefore()
         return;
     }
 
-    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
+    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
     if (nullptr == item)
     {
         return;
@@ -172,7 +172,7 @@ void CHistoryListWidget::slotCutHistoryBefore()
     item->cutHistoryBefore();
     item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
 
-    IGisProject * project = dynamic_cast<IGisProject*>(item->parent());
+    IGisProject* project = dynamic_cast<IGisProject*>(item->parent());
     if (project)
     {
         project->setChanged();

@@ -32,21 +32,21 @@ class CItemMapLayer : public IItem, public QTreeWidgetItem
 {
     Q_OBJECT
 public:
-    CItemMapLayer(QTreeWidget * parent);
+    CItemMapLayer(QTreeWidget* parent);
     virtual ~CItemMapLayer() = default;
 
-    bool addMap(CItemMap * map);
+    bool addMap(CItemMap* map);
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
 
-    void drawBoundingBoxes(QPainter& p, IDrawContext *dc);
+    void drawBoundingBoxes(QPainter& p, IDrawContext* dc);
 
     void setupChanged() override {}
 
     QString getProjection() const;
 
 protected:
-    friend bool sortByScale(QTreeWidgetItem * item1, QTreeWidgetItem * item2);
+    friend bool sortByScale(QTreeWidgetItem* item1, QTreeWidgetItem* item2);
 
     void updateLayer();
 

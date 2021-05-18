@@ -49,20 +49,20 @@
 
 
 const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.tcx *.TCX *.sml *.log *.qms *.qlb *.slf *.fit)";
-const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx *.GPX)";
-const QString IGisProject::filedialogFilterTCX    = "TCX Garmin Proprietary (*.tcx *.TCX)";
-const QString IGisProject::filedialogFilterSML    = "Suunto XML format (*.sml)";
-const QString IGisProject::filedialogFilterLOG    = "Openambit XML format (*.log)";
-const QString IGisProject::filedialogFilterQLB    = "QLandkarte Binary (*.qlb)";
-const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
-const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
-const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
+const QString IGisProject::filedialogFilterGPX = "GPS Exchange Format (*.gpx *.GPX)";
+const QString IGisProject::filedialogFilterTCX = "TCX Garmin Proprietary (*.tcx *.TCX)";
+const QString IGisProject::filedialogFilterSML = "Suunto XML format (*.sml)";
+const QString IGisProject::filedialogFilterLOG = "Openambit XML format (*.log)";
+const QString IGisProject::filedialogFilterQLB = "QLandkarte Binary (*.qlb)";
+const QString IGisProject::filedialogFilterQMS = "QMapShack Binary (*.qms)";
+const QString IGisProject::filedialogFilterSLF = "Sigma Log Format (*.slf)";
+const QString IGisProject::filedialogFilterFIT = "Garmin FIT Format (*.fit)";
 const QString IGisProject::filedialogSaveFilters = filedialogFilterGPX + ";; " + filedialogFilterQLB + ";; " + filedialogFilterQMS + ";; " + filedialogFilterTCX;
 const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterSML + ";; " + filedialogFilterLOG + ";; " + filedialogFilterQLB + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";; " + filedialogFilterFIT;
 
 QString IGisProject::keyUserFocus;
 
-IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
+IGisProject::IGisProject(type_e type, const QString& filename, CGisListWks* parent)
     : QTreeWidgetItem(parent)
     , type(type)
     , filename(filename)
@@ -73,11 +73,11 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     if(parent)
     {
         // move project up the list until there a re only projects, no devices
-        int newIdx      = NOIDX;
+        int newIdx = NOIDX;
         const int myIdx = parent->topLevelItemCount() - 1;
         for(int i = myIdx - 1; i >= 0; i--)
         {
-            IDevice * device = dynamic_cast<IDevice*>(parent->topLevelItem(i));
+            IDevice* device = dynamic_cast<IDevice*>(parent->topLevelItem(i));
             if(device != nullptr)
             {
                 newIdx = i;
@@ -94,7 +94,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     }
 }
 
-IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
+IGisProject::IGisProject(type_e type, const QString& filename, IDevice* parent)
     : QTreeWidgetItem(parent)
     , type(type)
     , filename(filename)
@@ -113,9 +113,9 @@ IGisProject::~IGisProject()
     }
 }
 
-IGisProject * IGisProject::create(const QString filename, CGisListWks * parent)
+IGisProject* IGisProject::create(const QString filename, CGisListWks* parent)
 {
-    IGisProject *item = nullptr;
+    IGisProject* item = nullptr;
     QString suffix = QFileInfo(filename).suffix().toLower();
     if(suffix == "gpx")
     {
@@ -224,7 +224,7 @@ void IGisProject::genKey() const
 
 QString IGisProject::getDeviceKey() const
 {
-    IDevice * device = dynamic_cast<IDevice*>(parent());
+    IDevice* device = dynamic_cast<IDevice*>(parent());
     if(device)
     {
         return device->getKey();
@@ -240,7 +240,7 @@ QPixmap IGisProject::getIcon() const
 
 qint32 IGisProject::isOnDevice() const
 {
-    IDevice * device = dynamic_cast<IDevice*>(parent());
+    IDevice* device = dynamic_cast<IDevice*>(parent());
     return device != nullptr ? device->type() : IDevice::eTypeNone;
 }
 
@@ -385,14 +385,14 @@ void IGisProject::updateItems()
     changedRoadbookMode = false;
 
 
-    quint32 total   = cntTrkPts * cntWpts;
+    quint32 total = cntTrkPts * cntWpts;
     quint32 current = 0;
 
     PROGRESS_SETUP(tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total, CMainWindow::getBestWidgetForParent());
 
     for(int i = 0; i < childCount(); i++)
     {
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(child(i));
+        CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(child(i));
         if(trk)
         {
             trk->findWaypointsCloseBy(progress, current);
@@ -438,7 +438,7 @@ bool IGisProject::saveAs(QString fn, QString filter)
         filter = getFileDialogFilter();
         if(ext.isEmpty() || !canSave())
         {
-            ext    = "gpx";
+            ext = "gpx";
             filter = IGisProject::filedialogFilterGPX;
         }
         path += "/" + getName() + "." + ext;
@@ -497,7 +497,7 @@ bool IGisProject::saveAsStrictGpx11()
     // guess the correct extension:
     // by default use the extension provided by the current format,
     // otherwise use gpx
-    QString ext    = "gpx";
+    QString ext = "gpx";
     QString filter = IGisProject::filedialogFilterGPX;
     path += "/" + getName() + "." + ext;
 
@@ -516,7 +516,7 @@ bool IGisProject::saveAsStrictGpx11()
     return res;
 }
 
-void IGisProject::setupName(const QString &defaultName)
+void IGisProject::setupName(const QString& defaultName)
 {
     if(metadata.name.isEmpty())
     {
@@ -530,7 +530,7 @@ void IGisProject::markAsSaved()
     updateDecoration(true);
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item)
         {
             continue;
@@ -610,11 +610,11 @@ QString IGisProject::getInfo() const
 }
 
 
-IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
+IGisItem* IGisProject::getItemByKey(const IGisItem::key_t& key)
 {
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem *item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item)
         {
             continue;
@@ -632,7 +632,7 @@ void IGisProject::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisI
 {
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem *item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item)
         {
             continue;
@@ -645,7 +645,7 @@ void IGisProject::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisI
     }
 }
 
-void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
+void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
 {
     if(!isVisible())
     {
@@ -654,7 +654,7 @@ void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
 
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item || item->isHidden())
         {
             continue;
@@ -667,7 +667,7 @@ void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
     }
 }
 
-void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items)
+void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem*>& items)
 {
     if(!isVisible())
     {
@@ -676,7 +676,7 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
 
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item || item->isHidden())
         {
             continue;
@@ -689,7 +689,7 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
     }
 }
 
-void IGisProject::getNogoAreas(QList<IGisItem*> &nogos) const
+void IGisProject::getNogoAreas(QList<IGisItem*>& nogos) const
 {
     if(!isVisible())
     {
@@ -698,7 +698,7 @@ void IGisProject::getNogoAreas(QList<IGisItem*> &nogos) const
 
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if (item != nullptr && !item->isHidden() && item->isNogo())
         {
             nogos << item;
@@ -716,7 +716,7 @@ void IGisProject::mouseMove(const QPointF& pos)
 
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item || item->isHidden())
         {
             continue;
@@ -731,7 +731,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
 {
     for(int i = childCount(); i > 0; i--)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i - 1));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i - 1));
         if(nullptr == item )
         {
             continue;
@@ -771,7 +771,7 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
 {
     for(int i = childCount(); i > 0; i--)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i - 1));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i - 1));
         if(nullptr == item)
         {
             continue;
@@ -785,14 +785,14 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
 }
 
 
-void IGisProject::insertCopyOfItem(IGisItem * item, int off, CSelectCopyAction::result_e& lastResult)
+void IGisProject::insertCopyOfItem(IGisItem* item, int off, CSelectCopyAction::result_e& lastResult)
 {
     bool clone = false;
     IGisItem::key_t key = item->getKey();
     key.project = getKey();
-    key.device  = getDeviceKey();
+    key.device = getDeviceKey();
 
-    IGisItem * item2 = getItemByKey(key);
+    IGisItem* item2 = getItemByKey(key);
     if(item2 != nullptr)
     {
         CSelectCopyAction::result_e result = lastResult;
@@ -838,10 +838,10 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, CSelectCopyAction::
     {
     case IGisItem::eTypeTrk:
     {
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+        CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk != nullptr)
         {
-            CGisItemTrk * newTrk = new CGisItemTrk(*trk, this, off, clone);
+            CGisItemTrk* newTrk = new CGisItemTrk(*trk, this, off, clone);
             // if the track is on a device, remove hidden trackpoints
             if(isOnDevice())
             {
@@ -853,7 +853,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, CSelectCopyAction::
 
     case IGisItem::eTypeWpt:
     {
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(item);
         if(wpt != nullptr)
         {
             new CGisItemWpt(*wpt, this, off, clone);
@@ -863,7 +863,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, CSelectCopyAction::
 
     case IGisItem::eTypeRte:
     {
-        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(item);
+        CGisItemRte* rte = dynamic_cast<CGisItemRte*>(item);
         if(rte != nullptr)
         {
             new CGisItemRte(*rte, this, off, clone);
@@ -873,7 +873,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, CSelectCopyAction::
 
     case IGisItem::eTypeOvl:
     {
-        CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(item);
+        CGisItemOvlArea* area = dynamic_cast<CGisItemOvlArea*>(item);
         if(area != nullptr)
         {
             new CGisItemOvlArea(*area, this, off, clone);
@@ -883,7 +883,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, CSelectCopyAction::
     }
 }
 
-void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
+void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis)
 {
     if(!isVisible())
     {
@@ -897,7 +897,7 @@ void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
             break;
         }
 
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item || item->isHidden())
         {
             continue;
@@ -907,7 +907,7 @@ void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
 }
 
-void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis)
 {
     if(!isVisible())
     {
@@ -916,7 +916,7 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item || item->isHidden())
         {
             continue;
@@ -927,7 +927,7 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     }
 }
 
-void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
+void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis)
 {
     if(!isVisible())
     {
@@ -941,7 +941,7 @@ void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
             break;
         }
 
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item || item->isHidden())
         {
             continue;
@@ -957,7 +957,7 @@ void IGisProject::mount()
     {
         return;
     }
-    IDevice * device = dynamic_cast<IDevice*>(parent());
+    IDevice* device = dynamic_cast<IDevice*>(parent());
     if(device)
     {
         device->mount();
@@ -970,7 +970,7 @@ void IGisProject::umount()
     {
         return;
     }
-    IDevice * device = dynamic_cast<IDevice*>(parent());
+    IDevice* device = dynamic_cast<IDevice*>(parent());
     if(device)
     {
         device->umount();
@@ -986,7 +986,7 @@ bool IGisProject::remove()
 
        e.g. Garmin devices remove images attached to the project.
      */
-    IDevice * device = dynamic_cast<IDevice*>(parent());
+    IDevice* device = dynamic_cast<IDevice*>(parent());
     if(device)
     {
         device->aboutToRemoveProject(this);
@@ -1024,7 +1024,7 @@ void IGisProject::updateItemCounters()
 
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item)
         {
             continue;
@@ -1032,19 +1032,19 @@ void IGisProject::updateItemCounters()
 
         cntItemsByType[item->type()]++;
 
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+        CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk)
         {
-            cntTrkPts       += trk->getNumberOfVisiblePoints();
-            totalDistance   += trk->getTotalDistance();
-            totalAscent     += trk->getTotalAscent();
-            totalDescent    += trk->getTotalDescent();
+            cntTrkPts += trk->getNumberOfVisiblePoints();
+            totalDistance += trk->getTotalDistance();
+            totalAscent += trk->getTotalAscent();
+            totalDescent += trk->getTotalDescent();
             totalElapsedSeconds += trk->getTotalElapsedSeconds();
             totalElapsedSecondsMoving += trk->getTotalElapsedSecondsMoving();
             stream << trk->getHash();
         }
 
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(item);
         if(wpt)
         {
             cntWpts++;
@@ -1069,12 +1069,12 @@ void IGisProject::blockUpdateItems(bool yes)
 
 void IGisProject::updateDecoration()
 {
-    int N       = childCount();
-    bool saved  = true;
+    int N = childCount();
+    bool saved = true;
 
     for(int i = 0; i < N; i++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(i));
         if(nullptr == item)
         {
             continue;
@@ -1109,28 +1109,28 @@ void IGisProject::sortItems()
     QList<QTreeWidgetItem*> others; //For example Search
     for(QTreeWidgetItem* item : qAsConst(items))
     {
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+        CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(item);
         if(trk != nullptr)
         {
             trks << trk;
             continue;
         }
 
-        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(item);
+        CGisItemRte* rte = dynamic_cast<CGisItemRte*>(item);
         if(rte != nullptr)
         {
             rtes << rte;
             continue;
         }
 
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(item);
         if(wpt != nullptr)
         {
             wpts << wpt;
             continue;
         }
 
-        CGisItemOvlArea * ovl = dynamic_cast<CGisItemOvlArea*>(item);
+        CGisItemOvlArea* ovl = dynamic_cast<CGisItemOvlArea*>(item);
         if(ovl != nullptr)
         {
             ovls << ovl;
@@ -1147,19 +1147,19 @@ void IGisProject::sortItems()
 
     items.clear();
     items << others;
-    for(IGisItem * item : qAsConst(trks))
+    for(IGisItem* item : qAsConst(trks))
     {
         items << item;
     }
-    for(IGisItem * item : qAsConst(rtes))
+    for(IGisItem* item : qAsConst(rtes))
     {
         items << item;
     }
-    for(IGisItem * item : qAsConst(wpts))
+    for(IGisItem* item : qAsConst(wpts))
     {
         items << item;
     }
-    for(IGisItem * item : qAsConst(ovls))
+    for(IGisItem* item : qAsConst(ovls))
     {
         items << item;
     }
@@ -1173,7 +1173,7 @@ void IGisProject::sortItems()
 }
 
 
-static bool sortByTime(IGisItem * item1, IGisItem * item2)
+static bool sortByTime(IGisItem* item1, IGisItem* item2)
 {
     const QDateTime& t1 = item1->getTimestamp();
     const QDateTime& t2 = item2->getTimestamp();
@@ -1187,7 +1187,7 @@ static bool sortByTime(IGisItem * item1, IGisItem * item2)
     return t1 < t2;
 }
 
-void IGisProject::sortItems(QList<IGisItem *> &items) const
+void IGisProject::sortItems(QList<IGisItem*>& items) const
 {
     switch(sortingFolder)
     {
@@ -1223,7 +1223,7 @@ void IGisProject::applyFilters()
 
     for(int n = 0; n < N; n++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(n));
+        IGisItem* item = dynamic_cast<IGisItem*>(child(n));
         if(item == nullptr)
         {
             continue;
@@ -1241,7 +1241,7 @@ bool IGisProject::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qi
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(child(n));
+        CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(child(n));
         if(trk != nullptr)
         {
             trk->findPolylineCloseBy(pt1, pt2, threshold, polyline);

@@ -24,15 +24,15 @@
 
 #include <QtWidgets>
 
-void CMapTreeWidget::dragEnterEvent(QDragEnterEvent * e)
+void CMapTreeWidget::dragEnterEvent(QDragEnterEvent* e)
 {
     collapseAll();
     QTreeWidget::dragEnterEvent(e);
 }
 
-void CMapTreeWidget::dragMoveEvent(QDragMoveEvent  * e)
+void CMapTreeWidget::dragMoveEvent(QDragMoveEvent* e)
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(itemAt(e->pos()));
+    CMapItem* item = dynamic_cast<CMapItem*>(itemAt(e->pos()));
 
     if(item && item->isActivated())
     {
@@ -45,9 +45,9 @@ void CMapTreeWidget::dragMoveEvent(QDragMoveEvent  * e)
     }
 }
 
-void CMapTreeWidget::dropEvent(QDropEvent  * e)
+void CMapTreeWidget::dropEvent(QDropEvent* e)
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(currentItem());
+    CMapItem* item = dynamic_cast<CMapItem*>(currentItem());
     if(item)
     {
         item->showChildren(false);
@@ -63,18 +63,18 @@ void CMapTreeWidget::dropEvent(QDropEvent  * e)
     emit sigChanged();
 }
 
-CMapList::CMapList(QWidget *parent)
+CMapList::CMapList(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
     lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
-    connect(treeWidget,     &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);
-    connect(treeWidget,     &CMapTreeWidget::sigChanged,                 this, &CMapList::sigChanged);
-    connect(actionActivate, &QAction::triggered,                         this, &CMapList::slotActivate);
-    connect(actionMoveUp,   &QAction::triggered,                         this, &CMapList::slotMoveUp);
-    connect(actionMoveDown, &QAction::triggered,                         this, &CMapList::slotMoveDown);
-    connect(actionReloadMaps, &QAction::triggered,                       this, &CMapList::slotReloadMaps);
+    connect(treeWidget, &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);
+    connect(treeWidget, &CMapTreeWidget::sigChanged, this, &CMapList::sigChanged);
+    connect(actionActivate, &QAction::triggered, this, &CMapList::slotActivate);
+    connect(actionMoveUp, &QAction::triggered, this, &CMapList::slotMoveUp);
+    connect(actionMoveDown, &QAction::triggered, this, &CMapList::slotMoveDown);
+    connect(actionReloadMaps, &QAction::triggered, this, &CMapList::slotReloadMaps);
     connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(), static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
     connect(lineFilter, &QLineEdit::textChanged, this, &CMapList::slotFilter);
 
@@ -102,7 +102,7 @@ void CMapList::sort()
     QList<CMapItem*> items1;
     while(treeWidget->topLevelItemCount())
     {
-        CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->takeTopLevelItem(0));
+        CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->takeTopLevelItem(0));
         if(item != nullptr)
         {
             items1 << item;
@@ -112,7 +112,7 @@ void CMapList::sort()
     qSort(items1.begin(), items1.end(), &sortByName<CMapItem>);
 
     QList<QTreeWidgetItem*> items2;
-    for(CMapItem * item : qAsConst(items1))
+    for(CMapItem* item : qAsConst(items1))
     {
         items2 << item;
     }
@@ -124,9 +124,9 @@ int CMapList::count()
     return treeWidget->topLevelItemCount();
 }
 
-CMapItem * CMapList::item(int i)
+CMapItem* CMapList::item(int i)
 {
-    return dynamic_cast<CMapItem *>(treeWidget->topLevelItem(i));
+    return dynamic_cast<CMapItem*>(treeWidget->topLevelItem(i));
 }
 
 void CMapList::updateHelpText()
@@ -142,7 +142,7 @@ void CMapList::updateHelpText()
     }
     else
     {
-        CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(0));
+        CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(0));
 
         bool showHelp = !(item && item->isActivated());
         labelIcon->setVisible(showHelp);
@@ -152,7 +152,7 @@ void CMapList::updateHelpText()
 
 void CMapList::slotActivate()
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
+    CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
     if(nullptr == item)
     {
         return;
@@ -169,7 +169,7 @@ void CMapList::slotActivate()
 
 void CMapList::slotMoveUp()
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
+    CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
     if(item == nullptr)
     {
         return;
@@ -191,7 +191,7 @@ void CMapList::slotMoveUp()
 
 void CMapList::slotMoveDown()
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
+    CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
     if(item == nullptr)
     {
         return;
@@ -213,9 +213,9 @@ void CMapList::slotMoveDown()
 
 void CMapList::slotContextMenu(const QPoint& point)
 {
-    CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
+    CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
 
-    bool itemIsSelected  = nullptr != item;
+    bool itemIsSelected = nullptr != item;
     bool itemIsActivated = item ? item->isActivated() : false;
 
     actionActivate->setEnabled(itemIsSelected);
@@ -227,7 +227,7 @@ void CMapList::slotContextMenu(const QPoint& point)
 
     if(itemIsSelected)
     {
-        CMapItem * item1 = dynamic_cast<CMapItem*>(treeWidget->itemBelow(item));
+        CMapItem* item1 = dynamic_cast<CMapItem*>(treeWidget->itemBelow(item));
         actionMoveUp->setEnabled(itemIsActivated && (treeWidget->itemAbove(item) != 0));
         actionMoveDown->setEnabled(itemIsActivated && item1 && item1->isActivated());
     }
@@ -270,7 +270,7 @@ void CMapList::slotMapHonk()
 
     CMapDraw::setupMapPath(mapPath);
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
     {
         canvas->setScales(CCanvas::eScalesSquare);
@@ -293,7 +293,7 @@ void CMapList::slotFilter(const QString& str)
     {
         for(int n = 0; n < N; n++)
         {
-            CMapItem * map = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(n));
+            CMapItem* map = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(n));
             if(map == nullptr)
             {
                 continue;
@@ -306,7 +306,7 @@ void CMapList::slotFilter(const QString& str)
         const QString& tmp = str.toUpper();
         for(int n = 0; n < N; n++)
         {
-            CMapItem * map = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(n));
+            CMapItem* map = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(n));
             if(map == nullptr)
             {
                 continue;

@@ -28,7 +28,7 @@ class CMousePrint : public IMouseSelect
 {
     Q_OBJECT
 public:
-    CMousePrint(CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
+    CMousePrint(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
     virtual ~CMousePrint();
 
 private slots:

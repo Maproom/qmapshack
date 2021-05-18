@@ -26,7 +26,7 @@
 using std::bind;
 
 
-CGridPlacer::CGridPlacer(QWidget *parent)
+CGridPlacer::CGridPlacer(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
@@ -35,7 +35,7 @@ CGridPlacer::CGridPlacer(QWidget *parent)
                           "the corresponding grid crossing on the map. All "
                           "4 corners have to be placed."));
 
-    QButtonGroup * group = new QButtonGroup(this);
+    QButtonGroup* group = new QButtonGroup(this);
     group->addButton(radioPoint1);
     group->addButton(radioPoint2);
     group->addButton(radioPoint3);
@@ -49,7 +49,7 @@ CGridPlacer::CGridPlacer(QWidget *parent)
     connect(pushSetArea, &QPushButton::clicked, this, &CGridPlacer::slotSetArea);
 }
 
-void CGridPlacer::registerItem(CItemRefMap * item)
+void CGridPlacer::registerItem(CItemRefMap* item)
 {
     this->item = item;
 
@@ -102,18 +102,18 @@ bool CGridPlacer::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     return true;
 }
 
-void CGridPlacer::mouseMoveEventFx(QMouseEvent *e)
+void CGridPlacer::mouseMoveEventFx(QMouseEvent* e)
 {
     points[idx].mouseMoveEventFx(e);
 }
 
-void CGridPlacer::mouseReleaseEventFx(QMouseEvent *e)
+void CGridPlacer::mouseReleaseEventFx(QMouseEvent* e)
 {
     points[idx].mouseReleaseEventFx(e);
     updateStatus();
 }
 
-void CGridPlacer::leaveEventFx(QEvent *e)
+void CGridPlacer::leaveEventFx(QEvent* e)
 {
     points[idx].leaveEventFx(e);
 }
@@ -248,19 +248,19 @@ void CGridPlacer::updateStatus()
 
 void CGridPlacer::slotSetArea()
 {
-    qreal bottom    = -NOFLOAT;
-    qreal top       =  NOFLOAT;
-    qreal left      =  NOFLOAT;
-    qreal right     = -NOFLOAT;
+    qreal bottom = -NOFLOAT;
+    qreal top = NOFLOAT;
+    qreal left = NOFLOAT;
+    qreal right = -NOFLOAT;
 
     for(const CGridPoint& point : qAsConst(points))
     {
         const QPointF& pt = point.getPoint();
 
-        top     = qMin(pt.y(), top);
-        bottom  = qMax(pt.y(), bottom);
-        left    = qMin(pt.x(), left);
-        right   = qMax(pt.x(), right);
+        top = qMin(pt.y(), top);
+        bottom = qMax(pt.y(), bottom);
+        left = qMin(pt.x(), left);
+        right = qMax(pt.x(), right);
     }
 
     QRectF r(0, 0, 1, 1);

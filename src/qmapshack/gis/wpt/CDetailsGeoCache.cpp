@@ -28,7 +28,7 @@
 #define HTTP_ATTR_INFO      QNetworkRequest::Attribute(QNetworkRequest::User + 2)
 
 
-CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
+CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt& wpt, QWidget* parent)
     : QDialog(parent)
     , wpt(wpt)
 {
@@ -127,24 +127,24 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
         desc += "<p>" + str.replace("\n", "<br/>") + "</p>";
     }
 
-    CWebPage * webDescPage = new CWebPage(webDesc);
+    CWebPage* webDescPage = new CWebPage(webDesc);
     webDesc->setPage(webDescPage);
     webDesc->setHtml(desc);
 
     const QDateTime& lastFound = geocache.getLastFound();
     labelLastFound->setText(lastFound.date().toString(Qt::SystemLocaleShortDate));
 
-    CWebPage * webLogPage = new CWebPage(webLogs);
+    CWebPage* webLogPage = new CWebPage(webLogs);
     webLogs->setPage(webLogPage);
     webLogs->setHtml(geocache.getLogs());
 
     timerDownload = new QTimer(this);
     timerDownload->setSingleShot(true);
-    connect(timerDownload,     &QTimer::timeout,       this, &CDetailsGeoCache::slotDownloadDone);
-    connect(buttonVisitWebsite, &QPushButton::clicked,  this, &CDetailsGeoCache::slotVisitWebsite);
-    connect(checkHint,         &QCheckBox::toggled,    this, &CDetailsGeoCache::slotHintChanged);
-    connect(webDescPage,       &CWebPage::linkClicked, this, &CDetailsGeoCache::slotLinkClicked);
-    connect(toolUpdateSpoiler, &QToolButton::clicked,  this, &CDetailsGeoCache::slotCollectSpoiler);
+    connect(timerDownload, &QTimer::timeout, this, &CDetailsGeoCache::slotDownloadDone);
+    connect(buttonVisitWebsite, &QPushButton::clicked, this, &CDetailsGeoCache::slotVisitWebsite);
+    connect(checkHint, &QCheckBox::toggled, this, &CDetailsGeoCache::slotHintChanged);
+    connect(webDescPage, &CWebPage::linkClicked, this, &CDetailsGeoCache::slotLinkClicked);
+    connect(toolUpdateSpoiler, &QToolButton::clicked, this, &CDetailsGeoCache::slotCollectSpoiler);
 
     networkManager = new QNetworkAccessManager(this);
     connect(networkManager, &QNetworkAccessManager::finished, this, &CDetailsGeoCache::slotRequestFinished);
@@ -216,7 +216,7 @@ void CDetailsGeoCache::slotCollectSpoiler()
     labelStatus->setText(tr("Searching for images..."));
 }
 
-void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
+void CDetailsGeoCache::slotRequestFinished(QNetworkReply* reply)
 {
     if(reply->error() != QNetworkReply::NoError)
     {
@@ -238,7 +238,7 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
         {
             QNetworkRequest request;
             request.setUrl(reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());
-            QNetworkReply * reply = networkManager->get(request);
+            QNetworkReply* reply = networkManager->get(request);
             reply->setProperty("whatfor", "image");
             reply->setProperty("info", info);
         }
@@ -282,9 +282,9 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
     QRegExp re2("(https://.*\\.jpg).*>(.*)</a>");
     re2.setMinimal(true);
 
-    bool watchOut       = false;
-    QStringList lines   = asw.split("\n");
-    for(const QString &line : qAsConst(lines))
+    bool watchOut = false;
+    QStringList lines = asw.split("\n");
+    for(const QString& line : qAsConst(lines))
     {
         if(!watchOut && re1.exactMatch(line))
         {
@@ -295,12 +295,12 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
             int pos = 0;
             while ((pos = re2.indexIn(line, pos)) != NOIDX)
             {
-                QString url  = re2.cap(1);
+                QString url = re2.cap(1);
                 QString info = re2.cap(2);
 
                 QNetworkRequest request;
                 request.setUrl(url);
-                QNetworkReply * reply = networkManager->get(request);
+                QNetworkReply* reply = networkManager->get(request);
                 reply->setProperty("whatfor", "image");
                 reply->setProperty("info", info);
                 cntSpoiler++;

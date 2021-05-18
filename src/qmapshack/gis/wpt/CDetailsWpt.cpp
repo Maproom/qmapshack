@@ -29,7 +29,7 @@
 
 #include <QtWidgets>
 
-CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
+CDetailsWpt::CDetailsWpt(CGisItemWpt& wpt, QWidget* parent)
     : QDialog(parent)
     , wpt(wpt)
 {
@@ -40,21 +40,21 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
 
     toolLock->setDisabled(wpt.isOnDevice());
 
-    connect(labelPosition,  &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
-    connect(labelElevation, &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
-    connect(labelProximity, &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
-    connect(textCmtDesc,    &QTextBrowser::anchorClicked,    this,       static_cast<void (CDetailsWpt::*)(const QUrl&)   >(&CDetailsWpt::slotLinkActivated));
+    connect(labelPosition, &QLabel::linkActivated, this, static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(labelElevation, &QLabel::linkActivated, this, static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(labelProximity, &QLabel::linkActivated, this, static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(textCmtDesc, &QTextBrowser::anchorClicked, this, static_cast<void (CDetailsWpt::*)(const QUrl&)   >(&CDetailsWpt::slotLinkActivated));
 
-    connect(lineName,       &CLineEdit::textEdited,          this,       &CDetailsWpt::slotNameChanged);
-    connect(lineName,       &CLineEdit::editingFinished,     this,       &CDetailsWpt::slotNameChangeFinished);
-    connect(toolIcon,       &QToolButton::clicked,           this,       &CDetailsWpt::slotChangeIcon);
-    connect(toolLock,       &QToolButton::toggled,           this,       &CDetailsWpt::slotChangeReadOnlyMode);
+    connect(lineName, &CLineEdit::textEdited, this, &CDetailsWpt::slotNameChanged);
+    connect(lineName, &CLineEdit::editingFinished, this, &CDetailsWpt::slotNameChangeFinished);
+    connect(toolIcon, &QToolButton::clicked, this, &CDetailsWpt::slotChangeIcon);
+    connect(toolLock, &QToolButton::toggled, this, &CDetailsWpt::slotChangeReadOnlyMode);
 
-    connect(listHistory,    &CHistoryListWidget::sigChanged, this,       &CDetailsWpt::setupGui);
+    connect(listHistory, &CHistoryListWidget::sigChanged, this, &CDetailsWpt::setupGui);
 
-    connect(toolAddImage,   &QToolButton::clicked,           photoAlbum, &CPhotoAlbum::slotAddImage);
-    connect(toolDelImage,   &QToolButton::clicked,           photoAlbum, &CPhotoAlbum::slotDelImage);
-    connect(photoAlbum,     &CPhotoAlbum::sigChanged,        this,       &CDetailsWpt::slotChangedImages);
+    connect(toolAddImage, &QToolButton::clicked, photoAlbum, &CPhotoAlbum::slotAddImage);
+    connect(toolDelImage, &QToolButton::clicked, photoAlbum, &CPhotoAlbum::slotDelImage);
+    connect(photoAlbum, &CPhotoAlbum::sigChanged, this, &CDetailsWpt::slotChangedImages);
 }
 
 CDetailsWpt::~CDetailsWpt()
@@ -129,7 +129,7 @@ void CDetailsWpt::setupGui()
     originator = false;
 }
 
-void CDetailsWpt::slotNameChanged(const QString &name)
+void CDetailsWpt::slotNameChanged(const QString& name)
 {
     setWindowTitle(name);
 }

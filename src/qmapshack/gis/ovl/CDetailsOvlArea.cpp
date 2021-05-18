@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
+CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea& area, QWidget* parent)
     : QDialog(parent)
     , area(area)
 {
@@ -61,16 +61,16 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     }
 
 
-    connect(comboColor,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetColor);
+    connect(comboColor, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetColor);
     connect(comboBorderWidth, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetWidth);
-    connect(comboStyle,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetStyle);
+    connect(comboStyle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetStyle);
 
-    connect(checkOpacity,     &QCheckBox::toggled,             this, &CDetailsOvlArea::slotOpacity);
-    connect(toolLock,         &QToolButton::toggled,           this, &CDetailsOvlArea::slotChangeReadOnlyMode);
-    connect(textCmtDesc,      &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsOvlArea::*)(const QUrl&)>(&CDetailsOvlArea::slotLinkActivated));
-    connect(lineName,         &CLineEdit::textEdited,          this, &CDetailsOvlArea::slotNameChanged);
-    connect(lineName,         &CLineEdit::editingFinished,     this, &CDetailsOvlArea::slotNameChangeFinished);
-    connect(listHistory,      &CHistoryListWidget::sigChanged, this, &CDetailsOvlArea::setupGui);
+    connect(checkOpacity, &QCheckBox::toggled, this, &CDetailsOvlArea::slotOpacity);
+    connect(toolLock, &QToolButton::toggled, this, &CDetailsOvlArea::slotChangeReadOnlyMode);
+    connect(textCmtDesc, &QTextBrowser::anchorClicked, this, static_cast<void (CDetailsOvlArea::*)(const QUrl&)>(&CDetailsOvlArea::slotLinkActivated));
+    connect(lineName, &CLineEdit::textEdited, this, &CDetailsOvlArea::slotNameChanged);
+    connect(lineName, &CLineEdit::editingFinished, this, &CDetailsOvlArea::slotNameChangeFinished);
+    connect(listHistory, &CHistoryListWidget::sigChanged, this, &CDetailsOvlArea::setupGui);
 }
 
 CDetailsOvlArea::~CDetailsOvlArea()
@@ -127,7 +127,7 @@ void CDetailsOvlArea::slotChangeReadOnlyMode(bool on)
     setupGui();
 }
 
-void CDetailsOvlArea::slotNameChanged(const QString &name)
+void CDetailsOvlArea::slotNameChanged(const QString& name)
 {
     const QString shownName = name.isEmpty() ? IGisItem::noName : QString(name).replace('&', "&&");
     setWindowTitle(shownName);
@@ -224,7 +224,7 @@ void CDetailsOvlArea::setupGui()
     const CGisItemOvlArea::area_t& a = area.getAreaData();
     for(const CGisItemOvlArea::pt_t& pt : a.pts)
     {
-        QTreeWidgetItem * item = new QTreeWidgetItem();
+        QTreeWidgetItem* item = new QTreeWidgetItem();
 
         item->setText(eColNum, QString::number(idx++));
 

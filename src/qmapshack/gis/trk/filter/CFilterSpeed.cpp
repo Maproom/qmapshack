@@ -24,14 +24,14 @@
 #include "gis/trk/filter/CFilterSpeedHike.h"
 #include "helpers/CSettings.h"
 
-CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
+CFilterSpeed::CFilterSpeed(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent), trk(trk)
 {
     setupUi(this);
 
     filterConst = new CFilterSpeedConst(this);
     filterCycle = new CFilterSpeedCycle(this, trk);
-    filterHike  = new CFilterSpeedHike(this);
+    filterHike = new CFilterSpeedHike(this);
 
     stackedWidget->addWidget(filterConst);
     stackedWidget->addWidget(filterCycle);

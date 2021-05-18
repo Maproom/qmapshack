@@ -32,7 +32,7 @@ struct segment_t
 {
     segment_t() : idx11(NOIDX), idx12(NOIDX), idx21(NOIDX){}
 
-    void apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel, IDrawContext * context)
+    void apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel, IDrawContext* context)
     {
         QPointF pt1 = px1;
         QPointF pt2 = px2;
@@ -75,14 +75,14 @@ struct segment_t
     QPointF px2;
 };
 
-static inline qreal distance(const QPointF &pa, const QPointF &pb)
+static inline qreal distance(const QPointF& pa, const QPointF& pb)
 {
-    const qreal &dx = pa.x() - pb.x();
-    const qreal &dy = pa.y() - pb.y();
+    const qreal& dx = pa.x() - pb.x();
+    const qreal& dy = pa.y() - pb.y();
     return qSqrt(dx * dx + dy * dy);
 }
 
-void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel, segment_t &result)
+void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel, segment_t& result)
 {
     PJ_UV p1, p2;
     qreal dx, dy;                // delta x and y defined by p1 and p2
@@ -202,12 +202,12 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     result.idx11 = idx11;
     result.idx12 = idx12;
     result.idx21 = idx21;
-    result.px1   = pt11;
-    result.px2   = pt21;
+    result.px1 = pt11;
+    result.px2 = pt21;
 }
 
 
-ILineOp::ILineOp(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent)
+ILineOp::ILineOp(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent)
     : QObject(parent)
     , parentHandler(parent)
     , points(points)
@@ -270,7 +270,7 @@ void ILineOp::drawSinglePointSmall(const QPointF& pt, QPainter& p)
     p.drawRect(r);
 }
 
-void ILineOp::drawSinglePointLarge(const QPointF &pt, QPainter& p)
+void ILineOp::drawSinglePointLarge(const QPointF& pt, QPainter& p)
 {
     rectPoint.moveCenter(pt.toPoint());
 
@@ -368,7 +368,7 @@ void ILineOp::updateLeadLines(qint32 idx)
     }
 }
 
-void ILineOp::showRoutingErrorMessage(const QString &msg) const
+void ILineOp::showRoutingErrorMessage(const QString& msg) const
 {
     if(msg.isEmpty())
     {
@@ -389,14 +389,14 @@ void ILineOp::tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const
         if(CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs) >= 0)
         {
             pt1.subpts.clear();
-            for(const QPointF &sub : qAsConst(subs))
+            for(const QPointF& sub : qAsConst(subs))
             {
                 pt1.subpts << IGisLine::subpt_t(sub);
             }
         }
         showRoutingErrorMessage(QString());
     }
-    catch(const QString &msg)
+    catch(const QString& msg)
     {
         showRoutingErrorMessage(msg);
     }
@@ -429,7 +429,7 @@ void ILineOp::finalizeOperation(qint32 idx)
         {
             IGisLine::point_t& pt1 = points[idx - 1];
             pt1.subpts.clear();
-            for(const QPointF &pt : qAsConst(subLineCoord1))
+            for(const QPointF& pt : qAsConst(subLineCoord1))
             {
                 pt1.subpts << IGisLine::subpt_t(pt);
             }
@@ -439,7 +439,7 @@ void ILineOp::finalizeOperation(qint32 idx)
         {
             IGisLine::point_t& pt1 = points[idx];
             pt1.subpts.clear();
-            for(const QPointF &pt : qAsConst(subLineCoord2))
+            for(const QPointF& pt : qAsConst(subLineCoord2))
             {
                 pt1.subpts << IGisLine::subpt_t(pt);
             }
@@ -502,7 +502,7 @@ qint32 ILineOp::isCloseToLine(const QPoint& pos) const
         if(d < dist)
         {
             dist = d;
-            idx  = i;
+            idx = i;
         }
     }
 

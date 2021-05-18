@@ -61,12 +61,12 @@ public:
        @param minPointDist  The minimum distance of two points (in px)
        @param minArrowDist  The minimum distance of two consecutive arrows (in px)
      */
-    static void arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist, qreal scale);
-    static void nogos(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minNogoDist);
+    static void arrows(const QPolygonF& line, const QRectF& viewport, QPainter& p, int minPointDist, int minArrowDist, qreal scale);
+    static void nogos(const QPolygonF& line, const QRectF& viewport, QPainter& p, int minNogoDist);
 
-    static void text(const QString &str, QPainter &p, const QPointF &center, const QColor &color, const QFont &font = CMainWindow::self().getMapFont());
-    static void text(const QString& str, QPainter &p, const QPoint &center,  const QColor &color, const QFont &font = CMainWindow::self().getMapFont());
-    static void text(const QString& str, QPainter &p, const QRect  &r,       const QColor &color);
+    static void text(const QString& str, QPainter& p, const QPointF& center, const QColor& color, const QFont& font = CMainWindow::self().getMapFont());
+    static void text(const QString& str, QPainter& p, const QPoint& center, const QColor& color, const QFont& font = CMainWindow::self().getMapFont());
+    static void text(const QString& str, QPainter& p, const QRect& r, const QColor& color);
 
     /**
        @brief Draw a cartoon bubble
@@ -86,7 +86,7 @@ public:
 
        @return Top left corner of content rectangle.
      */
-    static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, const QColor &background,
+    static QPoint bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, const QColor& background,
                          int pointerBaseWidth, float pointerBasePos, const QPen& pen = penBorderGray);
 
     /**
@@ -101,7 +101,7 @@ public:
 
        @return Top left corner of content rectangle.
      */
-    static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, const QColor &background);
+    static QPoint bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, const QColor& background);
 
 
     static bool doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect);
@@ -110,11 +110,11 @@ public:
        @brief   Creates a new arrow using the brush specified
        @return  A QImage containing the arrow
      */
-    static QImage createBasicArrow(const QBrush &brush, qreal scale);
+    static QImage createBasicArrow(const QBrush& brush, qreal scale);
 
-    static void number(int num, int size, QPainter& p, const QPointF& center, const QColor &color);
+    static void number(int num, int size, QPainter& p, const QPointF& center, const QColor& color);
 
-    static QPixmap number(int num, const QColor &color);
+    static QPixmap number(int num, const QColor& color);
 };
 
 #endif // CPAINTER_H

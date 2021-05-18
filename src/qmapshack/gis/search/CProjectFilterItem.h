@@ -27,7 +27,7 @@ class CSearch;
 class CProjectFilterItem : public QTreeWidgetItem
 {
 public:
-    CProjectFilterItem(IGisProject *parent);
+    CProjectFilterItem(IGisProject* parent);
     virtual ~CProjectFilterItem();
     void showLineEdit(CSearch* search = nullptr);
     const CSearchLineEdit* getLineEdit()

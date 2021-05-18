@@ -126,11 +126,11 @@ public:
     static const QString filedialogSaveFilters;
     static const QString filedialogLoadFilters;
 
-    IGisProject(type_e type, const QString &filename, CGisListWks *parent);
-    IGisProject(type_e type, const QString &filename, IDevice     *parent);
+    IGisProject(type_e type, const QString& filename, CGisListWks* parent);
+    IGisProject(type_e type, const QString& filename, IDevice* parent);
     virtual ~IGisProject();
 
-    static IGisProject * create(const QString filename, CGisListWks * parent);
+    static IGisProject* create(const QString filename, CGisListWks* parent);
 
     /**
        @brief Ask to save the project before it is closed.
@@ -143,7 +143,7 @@ public:
 
     IGisProject& operator=(const IGisProject& p)
     {
-        key      = p.key;
+        key = p.key;
         metadata = p.metadata;
         return *this;
     }
@@ -321,7 +321,7 @@ public:
        @param key
        @return If no item is found 0 is returned.
      */
-    IGisItem * getItemByKey(const IGisItem::key_t &key);
+    IGisItem* getItemByKey(const IGisItem::key_t& key);
 
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
     /**
@@ -334,9 +334,9 @@ public:
      */
     void getItemsByPos(const QPointF& pos, QList<IGisItem*>& items);
 
-    void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
+    void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem*>& items);
 
-    void getNogoAreas(QList<IGisItem *> &nogos) const;
+    void getNogoAreas(QList<IGisItem*>& nogos) const;
 
     int getItemCountByType(IGisItem::type_e type) const
     {
@@ -397,14 +397,14 @@ public:
        @brief Delete items with matching key
        @param key
      */
-    bool delItemByKey(const IGisItem::key_t &key, QMessageBox::StandardButtons &last);
+    bool delItemByKey(const IGisItem::key_t& key, QMessageBox::StandardButtons& last);
 
     /**
        @brief Call IGisItem::edit() method for items with given key
 
        @param key   a MD5 hash key
      */
-    void editItemByKey(const IGisItem::key_t &key);
+    void editItemByKey(const IGisItem::key_t& key);
 
     /**
        @brief Add a copy if the given item to the project
@@ -418,7 +418,7 @@ public:
        @param off           the offset into the tree widget, -1 for none
        @param lastResult    a reference to hold the last result of the copy option dialog
      */
-    void insertCopyOfItem(IGisItem *item, int off, CSelectCopyAction::result_e &lastResult);
+    void insertCopyOfItem(IGisItem* item, int off, CSelectCopyAction::result_e& lastResult);
 
     /**
        @brief Check if the project was initialized correctly.
@@ -455,9 +455,9 @@ public:
      */
     bool isChanged() const;
 
-    void drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-    void drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis);
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis);
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis);
 
     /**
        @brief Serialize object out of a QDataStream
@@ -609,31 +609,31 @@ protected:
     type_e type;
     mutable QString key;
     QString filename;
-    bool valid                  = false;
-    bool noUpdate               = false;
-    bool noCorrelation          = false;
-    bool changedRoadbookMode    = false;
-    bool autoSave               = false; ///< flag to show if auto save is on or off
-    bool autoSavePending        = false; ///< flag to show if auto save event has been sent. will be reset by save()
-    bool invalidDataOk          = false; ///< if set invalid data in GIS items will not raise any dialog
-    bool autoSyncToDev          = false; ///< if set true sync the project with every device connected
-    bool autoSyncToDevPending   = false; ///< flag to show that a sync to device is already pending
+    bool valid = false;
+    bool noUpdate = false;
+    bool noCorrelation = false;
+    bool changedRoadbookMode = false;
+    bool autoSave = false;               ///< flag to show if auto save is on or off
+    bool autoSavePending = false;        ///< flag to show if auto save event has been sent. will be reset by save()
+    bool invalidDataOk = false;          ///< if set invalid data in GIS items will not raise any dialog
+    bool autoSyncToDev = false;          ///< if set true sync the project with every device connected
+    bool autoSyncToDevPending = false;   ///< flag to show that a sync to device is already pending
 
     metadata_t metadata;
     QString nameSuffix;
 
-    sorting_roadbook_e sortingRoadbook  = eSortRoadbookNone;
-    sorting_folder_e sortingFolder    = eSortFolderTime;
+    sorting_roadbook_e sortingRoadbook = eSortRoadbookNone;
+    sorting_folder_e sortingFolder = eSortFolderTime;
 
     qint32 cntItemsByType[IGisItem::eTypeMax];
 
-    qint32 cntTrkPts                 = 0;
-    qint32 cntWpts                   = 0;
+    qint32 cntTrkPts = 0;
+    qint32 cntWpts = 0;
 
-    qreal totalDistance             = 0;
-    qreal totalAscent               = 0;
-    qreal totalDescent              = 0;
-    quint32 totalElapsedSeconds       = 0;
+    qreal totalDistance = 0;
+    qreal totalAscent = 0;
+    qreal totalDescent = 0;
+    quint32 totalElapsedSeconds = 0;
     quint32 totalElapsedSecondsMoving = 0;
 
     QString hashTrkWpt[2];

@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CGisSummaryDropZone::CGisSummaryDropZone(const CGisSummary::dropzone_t &dropZone, QWidget *parent)
+CGisSummaryDropZone::CGisSummaryDropZone(const CGisSummary::dropzone_t& dropZone, QWidget* parent)
     : QLabel(parent)
     , folders(dropZone.folders)
 {
@@ -48,9 +48,9 @@ void CGisSummaryDropZone::setHighlighted(bool yes)
     setBackgroundRole(yes ? QPalette::Dark : QPalette::Mid);
 }
 
-void CGisSummaryDropZone::dragEnterEvent(QDragEnterEvent  * e)
+void CGisSummaryDropZone::dragEnterEvent(QDragEnterEvent* e)
 {
-    QObject * source = e->source();
+    QObject* source = e->source();
     if(source == nullptr || source->objectName() != "treeWks")
     {
         return QLabel::dragEnterEvent(e);
@@ -64,9 +64,9 @@ void CGisSummaryDropZone::dragEnterEvent(QDragEnterEvent  * e)
     }
 }
 
-void CGisSummaryDropZone::dragMoveEvent(QDragMoveEvent  * e)
+void CGisSummaryDropZone::dragMoveEvent(QDragMoveEvent* e)
 {
-    QObject * source = e->source();
+    QObject* source = e->source();
     if(source == nullptr || source->objectName() != "treeWks")
     {
         return QLabel::dragMoveEvent(e);
@@ -80,13 +80,13 @@ void CGisSummaryDropZone::dragMoveEvent(QDragMoveEvent  * e)
     }
 }
 
-void CGisSummaryDropZone::dragLeaveEvent(QDragLeaveEvent *e)
+void CGisSummaryDropZone::dragLeaveEvent(QDragLeaveEvent* e)
 {
     setHighlighted(false);
     e->accept();
 }
 
-void CGisSummaryDropZone::dropEvent(QDropEvent  * e)
+void CGisSummaryDropZone::dropEvent(QDropEvent* e)
 {
     e->setDropAction(Qt::CopyAction);
     if(e->proposedAction() == Qt::CopyAction)
@@ -100,7 +100,7 @@ void CGisSummaryDropZone::dropEvent(QDropEvent  * e)
     }
 
 
-    CGisListWks * wks = dynamic_cast<CGisListWks*>(e->source());
+    CGisListWks* wks = dynamic_cast<CGisListWks*>(e->source());
     if(wks == nullptr)
     {
         return QLabel::dropEvent(e);
@@ -108,9 +108,9 @@ void CGisSummaryDropZone::dropEvent(QDropEvent  * e)
 
     QList<IGisItem*> gisItems;
     const QList<QTreeWidgetItem*>& items = wks->selectedItems();
-    for(QTreeWidgetItem * item : items)
+    for(QTreeWidgetItem* item : items)
     {
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
+        IGisItem* gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem != nullptr)
         {
             gisItems << gisItem;
@@ -121,8 +121,8 @@ void CGisSummaryDropZone::dropEvent(QDropEvent  * e)
     CSelectCopyAction::result_e copyActionForAll = CSelectCopyAction::eResultSkip;
     for(const CGisSummary::folder_t& folder : folders)
     {
-        CDBProject * project = new CDBProject(folder.db, folder.id, nullptr);
-        for(IGisItem * gisItem : qAsConst(gisItems))
+        CDBProject* project = new CDBProject(folder.db, folder.id, nullptr);
+        for(IGisItem* gisItem : qAsConst(gisItems))
         {
             project->insertCopyOfItem(gisItem, -1, copyActionForAll);
         }

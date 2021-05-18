@@ -21,10 +21,10 @@
 #include "units/IUnit.h"
 #include <QStringBuilder>
 
-const QString CKnownExtension::internalSlope    = "ql:slope";
-const QString CKnownExtension::internalSpeedDist    = "ql:speeddist";
-const QString CKnownExtension::internalSpeedTime    = "ql:speedtime";
-const QString CKnownExtension::internalEle      = "ql:ele";
+const QString CKnownExtension::internalSlope = "ql:slope";
+const QString CKnownExtension::internalSpeedDist = "ql:speeddist";
+const QString CKnownExtension::internalSpeedTime = "ql:speedtime";
+const QString CKnownExtension::internalEle = "ql:ele";
 const QString CKnownExtension::internalProgress = "ql:progress";
 const QString CKnownExtension::internalTerrainSlope = "ql:terrainslope";
 
@@ -35,7 +35,7 @@ static const int NOORDER = std::numeric_limits<int>::max();
 
 static fTrkPtGetVal getExtensionValueFunc(const QString ext)
 {
-    return [ext](const CTrackData::trkpt_t &p)
+    return [ext](const CTrackData::trkpt_t& p)
            {
                bool ok;
                qreal val = p.extensions.value(ext).toReal(&ok);
@@ -43,7 +43,7 @@ static fTrkPtGetVal getExtensionValueFunc(const QString ext)
            };
 }
 
-bool CKnownExtension::registerNS(const QString &ns)
+bool CKnownExtension::registerNS(const QString& ns)
 {
     if(!registeredNS.contains(ns))
     {
@@ -55,7 +55,7 @@ bool CKnownExtension::registerNS(const QString &ns)
 }
 
 
-void CKnownExtension::initGarminTPXv1(const IUnit &units, const QString &ns)
+void CKnownExtension::initGarminTPXv1(const IUnit& units, const QString& ns)
 {
     if(!registerNS(ns))
     {
@@ -89,7 +89,7 @@ void CKnownExtension::initGarminTPXv1(const IUnit &units, const QString &ns)
                              getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":power")});
 }
 
-void CKnownExtension::initMioTPX(const IUnit &units)
+void CKnownExtension::initMioTPX(const IUnit& units)
 {
     // support for extensions used by MIO Cyclo ver. 4.2 (who needs xml namespaces?!)
     knownExtensions.insert("heartrate",
@@ -113,7 +113,7 @@ void CKnownExtension::initMioTPX(const IUnit &units)
                              getExtensionValueFunc("course")});
 }
 
-void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
+void CKnownExtension::initClueTrustTPXv1(const IUnit& units, const QString& ns)
 {
     knownExtensions.insert(ns % ":cadence",
                            { tr("Cadence", "extShortName"), tr("Cadence", "extLongName"), 0, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
@@ -149,34 +149,34 @@ void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
                              getExtensionValueFunc(ns % ":verticalSpeed")});
 }
 
-void CKnownExtension::init(const IUnit &units)
+void CKnownExtension::init(const IUnit& units)
 {
     knownExtensions =
     {
         {internalSlope,
          { tr("Slope", "extShortName"), tr("Slope*"), -1, -90., 90., 1., (IUnit::getSlopeMode() == IUnit::eSlopePercent) ? "%" : "°",
            "://icons/32x32/CSrcSlope.png", true, true,
-           [](const CTrackData::trkpt_t &p) { return (IUnit::getSlopeMode() == IUnit::eSlopePercent) ? p.slope2 : p.slope1; }}
+           [](const CTrackData::trkpt_t& p) { return (IUnit::getSlopeMode() == IUnit::eSlopePercent) ? p.slope2 : p.slope1; }}
         },
 
         {internalSpeedDist,
          { tr("Speed", "extShortName"), tr("Speed over Distance*", "extLongName"), -1, 0., 600., units.speedFactor, units.speedUnit, "://icons/32x32/CSrcSpeed.png", true, true,
-           [](const CTrackData::trkpt_t &p) { return p.speed; }}
+           [](const CTrackData::trkpt_t& p) { return p.speed; }}
         },
 
         {internalSpeedTime,
          { tr("Speed", "extShortName"), tr("Speed over Time*", "extLongName"), -1, 0., NOFLOAT, units.speedFactor, units.speedUnit, "://icons/32x32/CSrcSpeed.png", true, true,
-           [](const CTrackData::trkpt_t &p) { return p.speed; }}
+           [](const CTrackData::trkpt_t& p) { return p.speed; }}
         },
 
         {internalEle,
          { tr("Ele.", "extShortName"), tr("Elevation*", "extLongName"), -1, 0., 100000., units.elevationFactor, units.elevationUnit, "://icons/32x32/CSrcElevation.png", true, true,
-           [](const CTrackData::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
+           [](const CTrackData::trkpt_t& p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
 
         {internalProgress,
          { tr("Progress", "extShortName"), tr("Progress*", "extLongName"), -1, 0., NOFLOAT, units.baseFactor, units.baseUnit, "://icons/32x32/Progress.png", true, true,
-           [](const CTrackData::trkpt_t &p) { return p.distance; }}
+           [](const CTrackData::trkpt_t& p) { return p.distance; }}
         },
 
         {internalTerrainSlope,
@@ -192,7 +192,7 @@ void CKnownExtension::init(const IUnit &units)
     initClueTrustTPXv1(units, "gpxdata");
 }
 
-const CKnownExtension CKnownExtension::get(const QString &key)
+const CKnownExtension CKnownExtension::get(const QString& key)
 {
     CKnownExtension def("", "", NOORDER, -100000., 100000., 1., "", "://icons/32x32/CSrcUnknown.png", false, true,
                         getExtensionValueFunc(key)
@@ -200,15 +200,15 @@ const CKnownExtension CKnownExtension::get(const QString &key)
     return knownExtensions.value(key, def);
 }
 
-bool CKnownExtension::isKnown(const QString &key)
+bool CKnownExtension::isKnown(const QString& key)
 {
     return knownExtensions.contains(key);
 }
 
 QString CKnownExtension::getName(const QString& altName) const
 {
-    bool hasNoName  = nameShortText.isEmpty();
-    QString name    = hasNoName ? altName : nameShortText;
+    bool hasNoName = nameShortText.isEmpty();
+    QString name = hasNoName ? altName : nameShortText;
 
     if(derivedQMS && !hasNoName)
     {
@@ -218,7 +218,7 @@ QString CKnownExtension::getName(const QString& altName) const
     return name;
 }
 
-QString CKnownExtension::toString(qreal value, bool withName, const QString &key) const
+QString CKnownExtension::toString(qreal value, bool withName, const QString& key) const
 {
     QString str;
     if(key == CKnownExtension::internalProgress)

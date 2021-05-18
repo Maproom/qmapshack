@@ -28,7 +28,7 @@
 #include <QtWidgets>
 const QByteArray CRouterMapQuest::keyMapQuest = "Fmjtd%7Cluu2n16t2h%2Crw%3Do5-haya0";
 
-CRouterMapQuest::CRouterMapQuest(QWidget *parent)
+CRouterMapQuest::CRouterMapQuest(QWidget* parent)
     : IRouter(false, parent)
 {
     setupUi(this);
@@ -92,7 +92,7 @@ CRouterMapQuest::~CRouterMapQuest()
 void CRouterMapQuest::slotCloseStatusMsg()
 {
     timerCloseStatusMsg->stop();
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -171,12 +171,12 @@ QString CRouterMapQuest::getOptions()
     return str;
 }
 
-void CRouterMapQuest::addMapQuestLocations(QDomDocument& xml, QDomElement& locations, CGisItemRte &rte)
+void CRouterMapQuest::addMapQuestLocations(QDomDocument& xml, QDomElement& locations, CGisItemRte& rte)
 {
     SGisLine line;
     rte.getPolylineFromData(line);
 
-    for(const IGisLine::point_t &pt : qAsConst(line))
+    for(const IGisLine::point_t& pt : qAsConst(line))
     {
         QDomElement location = xml.createElement("location");
         location.appendChild(xml.createTextNode(QString("%1,%2").arg(pt.coord.y() * RAD_TO_DEG).arg(pt.coord.x() * RAD_TO_DEG)));
@@ -186,7 +186,7 @@ void CRouterMapQuest::addMapQuestLocations(QDomDocument& xml, QDomElement& locat
 
 void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
 {
-    CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemRte* rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
     if(nullptr == rte)
     {
         return;
@@ -293,7 +293,7 @@ void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
     reply->setProperty("options", getOptions());
     reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -305,7 +305,7 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
 {
     if(reply->error() != QNetworkReply::NoError)
     {
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas)
         {
             canvas->reportStatus("MapQuest", tr("<b>MapQuest</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
@@ -331,17 +331,17 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
 //    f.write(xml.toString().toUtf8());
 //    f.close();
 
-    QDomElement response    = xml.firstChildElement("response");
-    QDomElement info        = response.firstChildElement("info");
-    QDomElement statusCode  = info.firstChildElement("statusCode");
+    QDomElement response = xml.firstChildElement("response");
+    QDomElement info = response.firstChildElement("info");
+    QDomElement statusCode = info.firstChildElement("statusCode");
 
     if(statusCode.isNull() || statusCode.text().toInt() != 0)
     {
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas)
         {
-            QDomElement messages  = info.firstChildElement("messages");
-            QDomElement message   = messages.firstChildElement("message");
+            QDomElement messages = info.firstChildElement("messages");
+            QDomElement message = messages.firstChildElement("message");
             canvas->reportStatus("MapQuest", tr("<b>MapQuest</b><br/>Bad response from server:<br/>%1").arg(message.text()));
             timerCloseStatusMsg->start();
         }
@@ -349,14 +349,14 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
     }
 
     IGisItem::key_t key;
-    key.item    = reply->property("key.item").toString();
+    key.item = reply->property("key.item").toString();
     key.project = reply->property("key.project").toString();
-    key.device  = reply->property("key.device").toString();
+    key.device = reply->property("key.device").toString();
     qint64 time = reply->property("time").toLongLong();
 
     time = QDateTime::currentDateTimeUtc().toMSecsSinceEpoch() - time;
 
-    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemRte* rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
     if(rte != nullptr)
     {
         rte->setResult(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time / 1000.0, 0, 'f', 2));

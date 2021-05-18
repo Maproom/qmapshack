@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, QWidget *parent)
+CSelectCopyAction::CSelectCopyAction(const IGisItem* src, const IGisItem* tar, QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -34,15 +34,15 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, Q
     labelIcon2->setPixmap(tar->getDisplayIcon());
     labelInfo2->setText(tar->getInfo(IGisItem::eFeatureShowName));
 
-    connect(pushCopy,  &QPushButton::clicked, this, [this](){slotSelectResult(eResultCopy);});
-    connect(pushSkip,  &QPushButton::clicked, this, [this](){slotSelectResult(eResultSkip);});
+    connect(pushCopy, &QPushButton::clicked, this, [this](){slotSelectResult(eResultCopy);});
+    connect(pushSkip, &QPushButton::clicked, this, [this](){slotSelectResult(eResultSkip);});
     connect(pushClone, &QPushButton::clicked, this, [this](){slotSelectResult(eResultClone);});
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
     CProgressDialog::setAllVisible(false);
 }
 
-CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject * tar, QWidget * parent)
+CSelectCopyAction::CSelectCopyAction(const IGisProject* src, const IGisProject* tar, QWidget* parent)
     : QDialog(parent)
     , result(eResultNone)
 {

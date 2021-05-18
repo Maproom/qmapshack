@@ -63,17 +63,17 @@ private slots:
     void slotBinariesUrlCursorEdited();
     void slotSegmentsUrlEdited();
     void slotWebLocalBRouterVersionsLoadFinished(bool ok);
-    void slotLocalDownloadLinkClicked(const QUrl & url);
+    void slotLocalDownloadLinkClicked(const QUrl& url);
     void slotLocalDownloadButtonClicked();
-    void slotLocalDownloadButtonFinished(QNetworkReply * reply);
-    void slotProfileClicked(const QModelIndex & index) const;
-    void slotAvailableProfileClicked(const QModelIndex & index) const;
-    void slotDisplayProfile(const QString &profile, const QString content);
+    void slotLocalDownloadButtonFinished(QNetworkReply* reply);
+    void slotProfileClicked(const QModelIndex& index) const;
+    void slotAvailableProfileClicked(const QModelIndex& index) const;
+    void slotDisplayProfile(const QString& profile, const QString content);
     void slotAddProfileClicked() const;
     void slotDelProfileClicked() const;
     void slotProfileUpClicked() const;
     void slotProfileDownClicked() const;
-    void slotSetupError(const QString &error, const QString &details);
+    void slotSetupError(const QString& error, const QString& details);
     void slotUpdateCurrentPage();
 
 private:
@@ -88,8 +88,8 @@ private:
 
     void beginProfiles();
     void updateProfiles() const;
-    QStringList selectedProfiles(const QListView * listView) const;
-    QList<int> updateProfileView(QListView * listView, const QStringList &values) const;
+    QStringList selectedProfiles(const QListView* listView) const;
+    QList<int> updateProfileView(QListView* listView, const QStringList& values) const;
 
     void initLocalTiles() const;
     void beginLocalTiles();
@@ -108,14 +108,14 @@ private:
     void updateOnlineUrl();
     void resetOnlineUrl();
 
-    CRouterBRouterSetup * setup;
+    CRouterBRouterSetup* setup;
 
     bool doLocalInstall;
     bool localInstallLoaded;
     QUrl downloadUrl;
 
-    CWebPage * localVersionsPage;
-    QNetworkAccessManager * networkAccessManager;
+    CWebPage* localVersionsPage;
+    QNetworkAccessManager* networkAccessManager;
 
     bool isError { false };
     QString error;

@@ -24,7 +24,7 @@
 #include <QtWidgets>
 
 
-CAbout::CAbout(QWidget *parent)
+CAbout::CAbout(QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);

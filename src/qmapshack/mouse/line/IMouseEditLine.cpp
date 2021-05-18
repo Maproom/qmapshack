@@ -37,7 +37,7 @@
 
 #include <QtWidgets>
 
-IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point, bool enableStatus, const QString &type, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
+IMouseEditLine::IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus, const QString& type, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse)
     , key(key)
     , enableStatus(enableStatus)
@@ -52,7 +52,7 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point,
     storeToHistory(points);
 }
 
-IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString &type, CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+IMouseEditLine::IMouseEditLine(const IGisItem::key_t& key, IGisLine& src, bool enableStatus, const QString& type, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse)
     , key(key)
     , enableStatus(enableStatus)
@@ -103,23 +103,23 @@ void IMouseEditLine::commonSetup()
 {
     // create permanent line edit on screen options
     scrOptEditLine = new CScrOptEditLine(this);
-    connect(scrOptEditLine->pushSaveOrig,    &QPushButton::clicked, this, &IMouseEditLine::slotCopyToOrig   );
-    connect(scrOptEditLine->pushSaveNew,     &QPushButton::clicked, this, &IMouseEditLine::slotCopyToNew    );
-    connect(scrOptEditLine->pushAbort,       &QPushButton::clicked, this, &IMouseEditLine::slotAbort        );
+    connect(scrOptEditLine->pushSaveOrig, &QPushButton::clicked, this, &IMouseEditLine::slotCopyToOrig   );
+    connect(scrOptEditLine->pushSaveNew, &QPushButton::clicked, this, &IMouseEditLine::slotCopyToNew    );
+    connect(scrOptEditLine->pushAbort, &QPushButton::clicked, this, &IMouseEditLine::slotAbort        );
 
-    connect(scrOptEditLine->toolMovePoint,   &QPushButton::clicked, this, &IMouseEditLine::slotMovePoint    );
+    connect(scrOptEditLine->toolMovePoint, &QPushButton::clicked, this, &IMouseEditLine::slotMovePoint    );
     connect(scrOptEditLine->toolSelectRange, &QPushButton::clicked, this, &IMouseEditLine::slotSelectRange  );
-    connect(scrOptEditLine->toolAddPoint,    &QPushButton::clicked, this, &IMouseEditLine::slotAddPoint     );
+    connect(scrOptEditLine->toolAddPoint, &QPushButton::clicked, this, &IMouseEditLine::slotAddPoint     );
     connect(scrOptEditLine->toolDeletePoint, &QPushButton::clicked, this, &IMouseEditLine::slotDeletePoint  );
 
-    connect(scrOptEditLine->toolNoRoute,     &QPushButton::clicked, this, &IMouseEditLine::slotNoRouting    );
-    connect(scrOptEditLine->toolAutoRoute,   &QPushButton::clicked, this, &IMouseEditLine::slotAutoRouting  );
+    connect(scrOptEditLine->toolNoRoute, &QPushButton::clicked, this, &IMouseEditLine::slotNoRouting    );
+    connect(scrOptEditLine->toolAutoRoute, &QPushButton::clicked, this, &IMouseEditLine::slotAutoRouting  );
     connect(scrOptEditLine->toolVectorRoute, &QPushButton::clicked, this, &IMouseEditLine::slotVectorRouting);
-    connect(scrOptEditLine->toolTrackRoute,  &QPushButton::clicked, this, &IMouseEditLine::slotTrackRouting );
-    connect(scrOptEditLine->pushOptimize,    &QPushButton::clicked, this, &IMouseEditLine::slotOptimize     );
+    connect(scrOptEditLine->toolTrackRoute, &QPushButton::clicked, this, &IMouseEditLine::slotTrackRouting );
+    connect(scrOptEditLine->pushOptimize, &QPushButton::clicked, this, &IMouseEditLine::slotOptimize     );
 
-    connect(scrOptEditLine->toolUndo,        &QPushButton::clicked, this, &IMouseEditLine::slotUndo         );
-    connect(scrOptEditLine->toolRedo,        &QPushButton::clicked, this, &IMouseEditLine::slotRedo         );
+    connect(scrOptEditLine->toolUndo, &QPushButton::clicked, this, &IMouseEditLine::slotUndo         );
+    connect(scrOptEditLine->toolRedo, &QPushButton::clicked, this, &IMouseEditLine::slotRedo         );
 
     SETTINGS;
     int mode = cfg.value("Route/drawMode", 0).toInt();
@@ -171,14 +171,14 @@ bool IMouseEditLine::useTrackRouting() const
     return scrOptEditLine->toolTrackRoute->isChecked();
 }
 
-void IMouseEditLine::drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p)
+void IMouseEditLine::drawLine(const QPolygonF& l, const QColor color, int width, QPainter& p)
 {
     p.setPen(QPen(color, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(l);
 }
 
 
-void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
+void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect)
 {
     if(needsRedraw & (CCanvas::eRedrawMouse | CCanvas::eRedrawGis))
     {
@@ -188,12 +188,12 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
         pixelPts.clear();
         pixelSubs.clear();
 
-        for(const IGisLine::point_t &pt : qAsConst(points))
+        for(const IGisLine::point_t& pt : qAsConst(points))
         {
             pixelLine << pt.pixel;
             pixelPts << pt.pixel;
 
-            for(const IGisLine::subpt_t &sub : pt.subpts)
+            for(const IGisLine::subpt_t& sub : pt.subpts)
             {
                 pixelLine << sub.pixel;
                 pixelSubs << sub.pixel;
@@ -217,7 +217,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::white);
     QRect r1(0, 0, 9, 9);
-    for(const QPointF &pt : qAsConst(pixelPts))
+    for(const QPointF& pt : qAsConst(pixelPts))
     {
         r1.moveCenter(pt.toPoint());
         p.drawRect(r1);
@@ -228,13 +228,13 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::black);
     QRect r2(0, 0, 7, 7);
-    for(const QPointF &pt : qAsConst(pixelPts))
+    for(const QPointF& pt : qAsConst(pixelPts))
     {
         r2.moveCenter(pt.toPoint());
         p.drawRect(r2);
     }
 
-    for(const QPointF &pt : qAsConst(pixelSubs))
+    for(const QPointF& pt : qAsConst(pixelSubs))
     {
         p.drawEllipse(pt, 2, 2);
     }
@@ -259,7 +259,7 @@ void IMouseEditLine::startNewLine(const QPointF& point)
     scrOptEditLine->toolAddPoint->setChecked(true);
     slotAddPoint();
 
-    CLineOpAddPoint * lineOpAddPoint = dynamic_cast<CLineOpAddPoint*>(lineOp);
+    CLineOpAddPoint* lineOpAddPoint = dynamic_cast<CLineOpAddPoint*>(lineOp);
     if(lineOpAddPoint)
     {
         lineOpAddPoint->append();
@@ -280,7 +280,7 @@ void IMouseEditLine::rightButtonDown(const QPoint& pos)
     lineOp->rightButtonDown(pos);
 }
 
-void IMouseEditLine::mouseMoved(const QPoint &pos)
+void IMouseEditLine::mouseMoved(const QPoint& pos)
 {
     lineOp->mouseMove(pos);
 
@@ -363,7 +363,7 @@ void IMouseEditLine::slotOptimize()
     {
         response = optimizer.optimize(points);
     }
-    catch(const QString &msg)
+    catch(const QString& msg)
     {
         response = -1;
         lineOp->showRoutingErrorMessage(msg);
@@ -417,7 +417,7 @@ void IMouseEditLine::slotCopyToOrig()
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    IGisLine * line = getGisLine();
+    IGisLine* line = getGisLine();
     if(line != nullptr)
     {
         CMainWindow::self().getElevationAt(points);
@@ -508,14 +508,14 @@ void IMouseEditLine::updateStatus()
 
     canvas->getElevationAt(points);
 
-    qreal asc   = 0;
-    qreal dsc   = 0;
-    qreal dist  = 0;
+    qreal asc = 0;
+    qreal dsc = 0;
+    qreal dist = 0;
 
     qreal lastEle = points[0].ele;
     QPointF lastPos = points[0].coord;
 
-    for(const IGisLine::point_t &pt1 : qAsConst(points))
+    for(const IGisLine::point_t& pt1 : qAsConst(points))
     {
         qreal delta = pt1.ele - lastEle;
         if(qAbs(delta) > ASCENT_THRESHOLD)

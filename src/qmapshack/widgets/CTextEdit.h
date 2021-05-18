@@ -29,12 +29,12 @@ public slots:
     void paste();
 
 public:
-    CTextEdit(QWidget *parent = nullptr);
+    CTextEdit(QWidget* parent = nullptr);
 
     void setPastePlain(bool plain);
 
 protected:
-    void keyPressEvent(QKeyEvent *event) override;
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     bool pastePlain;

@@ -22,7 +22,7 @@
 
 #include <QtWidgets>
 
-CGridSetRef::CGridSetRef(QWidget *parent)
+CGridSetRef::CGridSetRef(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);

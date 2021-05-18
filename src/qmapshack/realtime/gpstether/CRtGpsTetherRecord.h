@@ -26,7 +26,7 @@ class CRtGpsTetherRecord : public IRtRecord
 {
     Q_OBJECT
 public:
-    CRtGpsTetherRecord(QObject * parent);
+    CRtGpsTetherRecord(QObject* parent);
     virtual ~CRtGpsTetherRecord() = default;
 
     bool writeEntry(qreal lon, qreal lat, qreal ele, qreal speed, const QDateTime& timestamp);

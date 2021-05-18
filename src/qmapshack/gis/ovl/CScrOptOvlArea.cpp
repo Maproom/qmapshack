@@ -24,7 +24,7 @@
 #include "mouse/CScrOptSemaphoreLocker.h"
 #include "mouse/IMouse.h"
 
-CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMouse *parent)
+CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea* area, const QPoint& point, IMouse* parent)
     : IScrOpt(parent)
     , key(area->getKey())
 {
@@ -44,11 +44,11 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     show();
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptOvlArea::slotEditDetails);
-    connect(toolTags,        &QToolButton::clicked, this, &CScrOptOvlArea::slotTags);
-    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptOvlArea::slotDelete);
-    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptOvlArea::slotCopy);
-    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptOvlArea::slotEdit);
-    connect(toolNogo,        &QToolButton::clicked, this, &CScrOptOvlArea::slotNogo);
+    connect(toolTags, &QToolButton::clicked, this, &CScrOptOvlArea::slotTags);
+    connect(toolDelete, &QToolButton::clicked, this, &CScrOptOvlArea::slotDelete);
+    connect(toolCopy, &QToolButton::clicked, this, &CScrOptOvlArea::slotCopy);
+    connect(toolEdit, &QToolButton::clicked, this, &CScrOptOvlArea::slotEdit);
+    connect(toolNogo, &QToolButton::clicked, this, &CScrOptOvlArea::slotNogo);
 
     connect(label, &QLabel::linkActivated, this, &CScrOptOvlArea::slotLinkActivated);
 }
@@ -101,7 +101,7 @@ void CScrOptOvlArea::slotTags()
 
 void CScrOptOvlArea::draw(QPainter& p)
 {
-    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
+    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         deleteLater();

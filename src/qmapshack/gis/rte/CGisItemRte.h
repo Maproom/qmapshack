@@ -103,22 +103,22 @@ public:
 
         qreal totalDistance = NOFLOAT;
         quint32 totalTime = 0;
-        qreal ascent  = NOFLOAT;
+        qreal ascent = NOFLOAT;
         qreal descent = NOFLOAT;
         qint32 minElevation = NOINT;
         qint32 maxElevation = -NOINT;
     };
 
-    CGisItemRte(const QDomNode &xml, IGisProject *parent);
-    CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx, bool clone);
-    CGisItemRte(const history_t& hist, const QString& dbHash, IGisProject * project);
-    CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
-    CGisItemRte(const CQlgtRoute& rte1, IGisProject *project = nullptr);
-    CGisItemRte(const SGisLine& l, const QString &name, IGisProject *project, int idx);
-    CGisItemRte(CFitStream& stream, IGisProject * project);
+    CGisItemRte(const QDomNode& xml, IGisProject* parent);
+    CGisItemRte(const CGisItemRte& parentRte, IGisProject* project, int idx, bool clone);
+    CGisItemRte(const history_t& hist, const QString& dbHash, IGisProject* project);
+    CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject* project);
+    CGisItemRte(const CQlgtRoute& rte1, IGisProject* project = nullptr);
+    CGisItemRte(const SGisLine& l, const QString& name, IGisProject* project, int idx);
+    CGisItemRte(CFitStream& stream, IGisProject* project);
     virtual ~CGisItemRte();
 
-    IGisItem * createClone() override;
+    IGisItem* createClone() override;
 
     QDataStream& operator<<(QDataStream& stream) override;
     QDataStream& operator>>(QDataStream& stream) const override;
@@ -129,11 +129,11 @@ public:
     }
 
     QString getInfo(quint32 feature) const override;
-    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+    IScrOpt* getScreenOptions(const QPoint& origin, IMouse* mouse) override;
     QPointF getPointCloseBy(const QPoint& screenPos) override;
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
-    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
-    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis) override;
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis) override;
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis) override;
     void drawHighlight(QPainter& p) override;
     void save(QDomNode& gpx, bool strictGpx11) override;
     bool isCloseTo(const QPointF& pos) override;
@@ -175,8 +175,8 @@ public:
 
     void setDataFromPolyline(const SGisLine& l) override;
 
-    void getPolylineFromData(SGisLine &l) const override;
-    void getPolylineDegFromData(QPolygonF &polygon) const override;
+    void getPolylineFromData(SGisLine& l) const override;
+    void getPolylineDegFromData(QPolygonF& polygon) const override;
 
     const QString& getComment() const override
     {
@@ -214,11 +214,11 @@ public:
     void toTrack();
 
 
-    QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner);
+    QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString& owner);
 
-    void setResult(Routino_Output * route, const QString &options);
-    void setResult(const QDomDocument& xml, const QString &options);
-    void setResultFromBRouter(const QDomDocument& xml, const QString &options);
+    void setResult(Routino_Output* route, const QString& options);
+    void setResult(const QDomDocument& xml, const QString& options);
+    void setResultFromBRouter(const QDomDocument& xml, const QString& options);
 
     bool isCalculated();
 
@@ -226,12 +226,12 @@ public:
 
 private:
     void deriveSecondaryData();
-    void setElevation(qreal ele, subpt_t &subpt, qreal &lastEle);
+    void setElevation(qreal ele, subpt_t& subpt, qreal& lastEle);
     void setSymbol() override;
     void readRte(const QDomNode& xml, rte_t& rte);
-    void readRteFromFit(CFitStream &stream);
-    void readRouteDataFromGisLine(const SGisLine &l);
-    const subpt_t * getSubPtByIndex(quint32 idx);
+    void readRteFromFit(CFitStream& stream);
+    void readRouteDataFromGisLine(const SGisLine& l);
+    const subpt_t* getSubPtByIndex(quint32 idx);
 
     static key_t keyUserFocus;
 
@@ -243,7 +243,7 @@ private:
     QPolygonF line;
 
 
-    const subpt_t * mouseMoveFocus = nullptr;
+    const subpt_t* mouseMoveFocus = nullptr;
 
     QPointer<CScrOptRte>  scrOpt;
 

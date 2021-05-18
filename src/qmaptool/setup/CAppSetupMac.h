@@ -27,7 +27,7 @@
 class CAppSetupMac : public IAppSetup
 {
 public:
-    CAppSetupMac(QObject * parent)
+    CAppSetupMac(QObject* parent)
         : IAppSetup(parent)
     {
     }
@@ -38,7 +38,7 @@ public:
     QString defaultCachePath() override;
     QString userDataPath(QString subdir = 0) override;
     QString logDir() override;
-    QString findExecutable(const QString &name) override { return QStandardPaths::findExecutable(name); }
+    QString findExecutable(const QString& name) override { return QStandardPaths::findExecutable(name); }
     QString helpFile() override;
 
 private:
@@ -52,7 +52,6 @@ private:
     static const QString relHelpDir;
     static const QString relBinDir;
     static const QString relLogDir;
-
 };
 
 #endif // CAPPSETUPMAC_H

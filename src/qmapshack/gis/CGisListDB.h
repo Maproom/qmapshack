@@ -33,7 +33,7 @@ class CGisListDB : public QTreeWidget
 {
     Q_OBJECT
 public:
-    CGisListDB(QWidget * parent);
+    CGisListDB(QWidget* parent);
     virtual ~CGisListDB();
 
     enum column_e
@@ -44,7 +44,7 @@ public:
     };
 
     bool hasDatabase(const QString& name);
-    bool event(QEvent * e) override;
+    bool event(QEvent* e) override;
 
     void addGlobalActions(const QList<QAction*> actions);
 
@@ -60,8 +60,8 @@ private slots:
     void slotDelFolder();
     void slotDelLostFound();
     void slotDelLostFoundItem();
-    void slotItemExpanded(QTreeWidgetItem * item);
-    void slotItemChanged(QTreeWidgetItem * item, int column);
+    void slotItemExpanded(QTreeWidgetItem* item);
+    void slotItemChanged(QTreeWidgetItem* item, int column);
     void slotDelDatabase();
     void slotDelItem();
     void slotUpdateDatabase();
@@ -76,39 +76,39 @@ private slots:
 private:
     friend class CGisListDBEditLock;
 
-    IDBFolderSql *getDataBase(const QString& name, const QString& host);
+    IDBFolderSql* getDataBase(const QString& name, const QString& host);
     void saveDatabaseConfiguration();
 
     int isInternalEdit = 0;
 
-    QMenu * menuNone;
-    QAction * actionAddDatabase;
+    QMenu* menuNone;
+    QAction* actionAddDatabase;
 
-    QMenu * menuFolder;
-    QAction * actionAddFolder;
-    QAction * actionRenameFolder;
-    QAction * actionCopyFolder;
-    QAction * actionMoveFolder;
-    QAction * actionDelFolder;
-    QAction * actionExportToGpx;
-    QAction * actionImport;
+    QMenu* menuFolder;
+    QAction* actionAddFolder;
+    QAction* actionRenameFolder;
+    QAction* actionCopyFolder;
+    QAction* actionMoveFolder;
+    QAction* actionDelFolder;
+    QAction* actionExportToGpx;
+    QAction* actionImport;
 
-    QMenu * menuDatabase;
-    QAction * actionDelDatabase;
-    QAction * actionUpdate;
-    QAction * actionSearch;
+    QMenu* menuDatabase;
+    QAction* actionDelDatabase;
+    QAction* actionUpdate;
+    QAction* actionSearch;
 
 
-    QMenu * menuItem;
-    QAction * actionDelItem;
+    QMenu* menuItem;
+    QAction* actionDelItem;
 
-    QMenu * menuLostFound;
-    QAction * actionDelLostFound;
+    QMenu* menuLostFound;
+    QAction* actionDelLostFound;
 
-    QMenu * menuLostFoundItem;
-    QAction * actionDelLostFoundItem;
+    QMenu* menuLostFoundItem;
+    QAction* actionDelLostFoundItem;
 
-    QUdpSocket * socket;
+    QUdpSocket* socket;
 
     quint32 lastTan;
 

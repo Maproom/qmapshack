@@ -27,7 +27,7 @@
 #include <QtPrintSupport>
 #include <QtWidgets>
 
-CScreenshotDialog::CScreenshotDialog(CCanvas &canvas, QWidget *parent)
+CScreenshotDialog::CScreenshotDialog(CCanvas& canvas, QWidget* parent)
     : QDialog(parent)
     , canvas(canvas)
 {
@@ -55,7 +55,7 @@ void CScreenshotDialog::slotSave()
     QString path = cfg.value("Paths/lastScreenshotPath", "./").toString();
     QString filterPNG = "PNG Image (*.png)";
     QString filterJPG = "JPEG Image (*.jpg)";
-    QString filter    = filterPNG;
+    QString filter = filterPNG;
     QString filename = QFileDialog::getSaveFileName(this, tr("Save screenshot..."), path, filterPNG + ";; " + filterJPG, &filter);
     if(filename.isEmpty())
     {
@@ -85,22 +85,22 @@ void CScreenshotDialog::slotSave()
     QDialog::accept();
 }
 
-CGisItemTrk * CScreenshotDialog::getTrackForProfile()
+CGisItemTrk* CScreenshotDialog::getTrackForProfile()
 {
-    const CMainWindow& w  = CMainWindow::self();
+    const CMainWindow& w = CMainWindow::self();
     if(!(w.isShowTrackProfile() && w.profileIsWindow()))
     {
         return nullptr;
     }
 
-    const IGisItem::key_t& key  = CGisItemTrk::getKeyUserFocus();
+    const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();
     return dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
 }
 
 void CScreenshotDialog::slotPrint()
 {
-    const QPixmap& pixmap       = getScreenshot(nullptr);
-    const QSize& sizePixmap     = pixmap.size();
+    const QPixmap& pixmap = getScreenshot(nullptr);
+    const QSize& sizePixmap = pixmap.size();
 
     QPrinter printer;
     printer.setOrientation(sizePixmap.width() > sizePixmap.height() ? QPrinter::Landscape : QPrinter::Portrait);
@@ -121,7 +121,7 @@ void CScreenshotDialog::slotPrint()
     QPainter p(&printer);
     p.drawPixmap(0, 0, canvasScaled);
 
-    CGisItemTrk * trk = getTrackForProfile();
+    CGisItemTrk* trk = getTrackForProfile();
     if(trk != nullptr)
     {
         CPlotProfile plot(trk, trk->limitsGraph1, IPlot::eModeNormal, CMainWindow::self().getBestWidgetForParent());
@@ -148,7 +148,7 @@ void CScreenshotDialog::slotPrint()
 }
 
 
-QPixmap CScreenshotDialog::getScreenshot(CGisItemTrk * trk)
+QPixmap CScreenshotDialog::getScreenshot(CGisItemTrk* trk)
 {
     QSize s = canvas.size();
 

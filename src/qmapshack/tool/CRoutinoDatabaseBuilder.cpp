@@ -24,7 +24,7 @@
 #include <QtWidgets>
 
 
-CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
+CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget* parent)
     : IToolShell(parent)
 {
     setupUi(this);
@@ -32,11 +32,11 @@ CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
 
     setObjectName(tr("Create Routino Database"));
 
-    connect(toolSourceFiles,  &QToolButton::clicked,   this, &CRoutinoDatabaseBuilder::slotSelectSourceFiles);
-    connect(toolTargetPath,   &QToolButton::clicked,   this, &CRoutinoDatabaseBuilder::slotSelectTargetPath);
-    connect(pushStart,        &QPushButton::clicked,   this, &CRoutinoDatabaseBuilder::slotStart);
+    connect(toolSourceFiles, &QToolButton::clicked, this, &CRoutinoDatabaseBuilder::slotSelectSourceFiles);
+    connect(toolTargetPath, &QToolButton::clicked, this, &CRoutinoDatabaseBuilder::slotSelectTargetPath);
+    connect(pushStart, &QPushButton::clicked, this, &CRoutinoDatabaseBuilder::slotStart);
     connect(lineTargetPrefix, &QLineEdit::textChanged, this, &CRoutinoDatabaseBuilder::enabelStartButton);
-    connect(labelHelp,        &QLabel::linkActivated,  this, &CRoutinoDatabaseBuilder::slotLinkActivated);
+    connect(labelHelp, &QLabel::linkActivated, this, &CRoutinoDatabaseBuilder::slotLinkActivated);
 
     pushStart->setDisabled(true);
 
@@ -73,7 +73,7 @@ void CRoutinoDatabaseBuilder::slotSelectSourceFiles()
     cfg.setValue("RoutinoDatabaseBuilder/sourcePath", path);
 
     listWidget->clear();
-    for(const QString &file : files)
+    for(const QString& file : files)
     {
         new QListWidgetItem(QIcon("://icons/32x32/Map.png"), file, listWidget);
     }
@@ -146,10 +146,10 @@ void CRoutinoDatabaseBuilder::slotStart()
         sourceFiles << listWidget->item(n)->text();
     }
 
-    targetPrefix    = lineTargetPrefix->text();
-    targetPath      = labelTargetPath->text();
-    first           = true;
-    last            = false;
+    targetPrefix = lineTargetPrefix->text();
+    targetPath = labelTargetPath->text();
+    first = true;
+    last = false;
 
     textBrowser->clear();
 
@@ -175,7 +175,7 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
         args << QString("--tagging=%1").arg(instance->routinoPath("tagging.xml"));
         args << "--process-only";
 
-        stdOut(planetsplitter + " " +  args.join(" ") + "\n");
+        stdOut(planetsplitter + " " + args.join(" ") + "\n");
         cmd.start(planetsplitter, args);
 
         last = true;
@@ -201,7 +201,7 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
         sourceFiles.pop_front();
 
 
-        stdOut(planetsplitter + " " +  args.join(" ") + "\n");
+        stdOut(planetsplitter + " " + args.join(" ") + "\n");
         cmd.start(planetsplitter, args);
     }
 }

@@ -24,7 +24,7 @@
 #include <QApplication>
 #include <QtWidgets>
 
-int main(int argc, char ** argv)
+int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
@@ -40,7 +40,7 @@ int main(int argc, char ** argv)
     // make sure this is the one and only instance on the system
     CSingleInstanceProxy s(qlOpts->arguments);
 
-    QSplashScreen *splash = nullptr;
+    QSplashScreen* splash = nullptr;
     if (!qlOpts->nosplash)
     {
         QPixmap pic(":/pic/splash.png");

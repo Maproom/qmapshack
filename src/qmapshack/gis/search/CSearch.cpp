@@ -149,7 +149,7 @@ CSearch::CSearch(QString searchstring)
                 QLocale::c().dateFormat(QLocale::ShortFormat)
             };
 
-            for(const QString& df:dateFormats)
+            for(const QString& df : dateFormats)
             {
                 const QDateTime& time1a = QLocale::system().toDateTime(filterValueStringFirstPart, df);
                 if(time1a.isValid())
@@ -193,10 +193,10 @@ CSearch::CSearch(QString searchstring)
             const static QString capIgnWS = "(?:\\s*)";     //Ignore Whitespaces
             //Capture distances, speeds and simple Times that don't get caught by QDateTime.
             const static QString capUnit = "(m|km|mi|ft|mi|m\\/h|km\\/h|mi\\/h|ft\\/h|mi\\/h|h|min|s|м|км|м\\/ч|км\\/ч|ч|мин|с)?";
-            const static QString capIgnAnd =  "(?:" + tr("and") + ")?";
+            const static QString capIgnAnd = "(?:" + tr("and") + ")?";
             //The second number, the units and the "and" are optional
             //The String has to be matched completely in order to avoid false positives thus the ^ and the $
-            QRegExp numericArguments("^" + capNum + capIgnWS + capUnit  + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit + "$", Qt::CaseInsensitive);
+            QRegExp numericArguments("^" + capNum + capIgnWS + capUnit + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit + "$", Qt::CaseInsensitive);
             numericArguments.indexIn(filterValueString);
             if(numericArguments.cap(0).simplified() != "")
             {
@@ -228,7 +228,7 @@ CSearch::CSearch(QString searchstring)
     }
 }
 
-bool CSearch::getSearchResult(IGisItem *item)
+bool CSearch::getSearchResult(IGisItem* item)
 {
     bool passed = true;
     if(searchTypeLambdaMap.contains(search.searchType))
@@ -350,7 +350,7 @@ void CSearch::improveQuery()
                 search.searchValue.str1 = "SsE";
             }
             //Assume you want 2012 and not 1912 (qt defaults to 19xx)
-            else if(QDateTime::fromSecsSinceEpoch(search.searchValue.value1).addYears(100) <=  QDateTime::currentDateTime())
+            else if(QDateTime::fromSecsSinceEpoch(search.searchValue.value1).addYears(100) <= QDateTime::currentDateTime())
             {
                 search.searchValue.value1 = QDateTime::fromSecsSinceEpoch(search.searchValue.value1).addYears(100).toSecsSinceEpoch();
                 search.searchValue.str1 = "SsE";
@@ -365,7 +365,7 @@ void CSearch::improveQuery()
                 search.searchValue.str2 = "SsE";
             }
             //Assume you want 2012 and not 1912 (qt defaults to 19xx)
-            else if(QDateTime::fromSecsSinceEpoch(search.searchValue.value2).addYears(100) <=  QDateTime::currentDateTime())
+            else if(QDateTime::fromSecsSinceEpoch(search.searchValue.value2).addYears(100) <= QDateTime::currentDateTime())
             {
                 search.searchValue.value2 = QDateTime::fromSecsSinceEpoch(search.searchValue.value2).addYears(100).toSecsSinceEpoch();
                 search.searchValue.str2 = "SsE";

@@ -32,7 +32,7 @@ private slots:
     void slotNewConnection();
 
 private:
-    QLocalServer * server = nullptr;
+    QLocalServer* server = nullptr;
 
     QString serverName;
 };

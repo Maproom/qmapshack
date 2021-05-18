@@ -30,7 +30,7 @@
 
 
 
-CMapMAP::CMapMAP(const QString &filename, CMapDraw *parent)
+CMapMAP::CMapMAP(const QString& filename, CMapDraw* parent)
     : IMap(eFeatVisibility | eFeatVectorItems, parent)
     , filename(filename)
 {

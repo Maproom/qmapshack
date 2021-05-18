@@ -20,7 +20,7 @@
 
 #include <QtWidgets>
 
-IOverlay::IOverlay(QStackedWidget *parent)
+IOverlay::IOverlay(QStackedWidget* parent)
     : QWidget(parent)
     , stackedWidget(parent)
 {

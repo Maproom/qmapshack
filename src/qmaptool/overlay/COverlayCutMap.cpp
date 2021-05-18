@@ -33,13 +33,13 @@ static inline qreal sqr(qreal a)
     return a * a;
 }
 
-static inline qreal sqrlen(const QPointF &a)
+static inline qreal sqrlen(const QPointF& a)
 {
     return sqr(a.x()) + sqr(a.y());
 }
 
 
-COverlayCutMap::COverlayCutMap(CItemCutMap *item, QStackedWidget *stackedWidget)
+COverlayCutMap::COverlayCutMap(CItemCutMap* item, QStackedWidget* stackedWidget)
     : IOverlay(stackedWidget)
     , context(item->getDrawContext())
 {
@@ -138,7 +138,7 @@ bool COverlayCutMap::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     return true;
 }
 
-void COverlayCutMap::mouseMoveEventFx(QMouseEvent *e)
+void COverlayCutMap::mouseMoveEventFx(QMouseEvent* e)
 {
     QPointF pt = e->pos();
     context->convertScreen2Map(pt);
@@ -165,7 +165,7 @@ void COverlayCutMap::mouseMoveEventFx(QMouseEvent *e)
     context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
 }
 
-void COverlayCutMap::mouseReleaseEventFx(QMouseEvent *e)
+void COverlayCutMap::mouseReleaseEventFx(QMouseEvent* e)
 {
     QPointF pt = e->pos();
     context->convertScreen2Map(pt);
@@ -274,7 +274,7 @@ void COverlayCutMap::saveShape(const QString& filename)
         {
             out << ", ";
         }
-        first =  false;
+        first = false;
 
         out << qRound(pt1.x()) << " " << qRound(pt1.y());
     }
@@ -341,10 +341,10 @@ void COverlayCutMap::slotLoadShape()
 
 void COverlayCutMap::mouseReset()
 {
-    addPoint    = false;
-    movePoint   = false;
-    idxFocus1   = NOIDX;
-    idxFocus1   = NOIDX;
+    addPoint = false;
+    movePoint = false;
+    idxFocus1 = NOIDX;
+    idxFocus1 = NOIDX;
 }
 
 void COverlayCutMap::abortStep()
@@ -352,15 +352,15 @@ void COverlayCutMap::abortStep()
     if(addPoint)
     {
         restoreFromHistory(region);
-        addPoint    = false;
-        idxFocus1   = NOIDX;
-        idxFocus2   = NOIDX;
+        addPoint = false;
+        idxFocus1 = NOIDX;
+        idxFocus2 = NOIDX;
     }
     else if(movePoint)
     {
         restoreFromHistory(region);
-        movePoint   = false;
-        idxFocus1   = NOIDX;
+        movePoint = false;
+        idxFocus1 = NOIDX;
     }
 
     context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
@@ -428,13 +428,13 @@ void COverlayCutMap::isCloseToLine(QPointF pt, QPolygonF line, qint32& idx1, qin
         return;
     }
 
-    QPointF b   = line[0];
+    QPointF b = line[0];
     QPointF dbq = b - pt;
-    qreal dist  = 30 * 30;
+    qreal dist = 30 * 30;
 
     for (qint32 i = 1; i < count; ++i)
     {
-        const QPointF a   = b;
+        const QPointF a = b;
         const QPointF daq = dbq;
         b = line[i];
         dbq = b - pt;
@@ -467,7 +467,7 @@ void COverlayCutMap::isCloseToLine(QPointF pt, QPolygonF line, qint32& idx1, qin
 }
 
 
-void COverlayCutMap::mouseMovePointAdd(const QPointF &pt)
+void COverlayCutMap::mouseMovePointAdd(const QPointF& pt)
 {
     if(region.isEmpty())
     {
@@ -485,7 +485,7 @@ void COverlayCutMap::mouseMovePointAdd(const QPointF &pt)
     }
 }
 
-void COverlayCutMap::mouseReleasePointAdd(const QPointF &pt, Qt::MouseButton button)
+void COverlayCutMap::mouseReleasePointAdd(const QPointF& pt, Qt::MouseButton button)
 {
     if(button == Qt::LeftButton)
     {
@@ -532,12 +532,12 @@ void COverlayCutMap::mouseReleasePointAdd(const QPointF &pt, Qt::MouseButton but
     }
 }
 
-void COverlayCutMap::mouseMovePointDel(const QPointF &pt)
+void COverlayCutMap::mouseMovePointDel(const QPointF& pt)
 {
     isCloseTo(pt, region, idxFocus1);
 }
 
-void COverlayCutMap::mouseReleasePointDel(const QPointF &pt, Qt::MouseButton button)
+void COverlayCutMap::mouseReleasePointDel(const QPointF& pt, Qt::MouseButton button)
 {
     if((idxFocus1 != NOIDX) && (button == Qt::LeftButton))
     {
@@ -576,7 +576,7 @@ void COverlayCutMap::mouseReleasePointDel(const QPointF &pt, Qt::MouseButton but
     idxFocus1 = NOIDX;
 }
 
-void COverlayCutMap::mouseMovePointMove(const QPointF &pt)
+void COverlayCutMap::mouseMovePointMove(const QPointF& pt)
 {
     if(movePoint)
     {
@@ -597,7 +597,7 @@ void COverlayCutMap::mouseMovePointMove(const QPointF &pt)
     }
 }
 
-void COverlayCutMap::mouseReleasePointMove(const QPointF &pt, Qt::MouseButton button)
+void COverlayCutMap::mouseReleasePointMove(const QPointF& pt, Qt::MouseButton button)
 {
     if(button == Qt::LeftButton)
     {

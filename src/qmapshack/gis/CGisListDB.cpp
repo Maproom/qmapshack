@@ -40,7 +40,7 @@
 class CGisListDBEditLock
 {
 public:
-    CGisListDBEditLock(bool waitCursor, CGisListDB * widget, const QString& src) : widget(widget), waitCursor(waitCursor), src(src)
+    CGisListDBEditLock(bool waitCursor, CGisListDB* widget, const QString& src) : widget(widget), waitCursor(waitCursor), src(src)
     {
         if(waitCursor)
         {
@@ -57,13 +57,13 @@ public:
         widget->isInternalEdit--;
     }
 private:
-    CGisListDB * widget;
+    CGisListDB* widget;
     bool waitCursor;
     QString src;
 };
 
 
-CGisListDB::CGisListDB(QWidget *parent)
+CGisListDB::CGisListDB(QWidget* parent)
     : QTreeWidget(parent)
     , socket(nullptr)
 {
@@ -76,7 +76,7 @@ CGisListDB::CGisListDB(QWidget *parent)
     const QString& path = cfg.value("lastDatabasePath", QDir::homePath()).toString();
     const QStringList& names = cfg.value("names").toStringList();
     cfg.beginGroup("Entries");
-    for(const QString &name : names)
+    for(const QString& name : names)
     {
         cfg.beginGroup(name);
         QString type = cfg.value("type", "SQLite").toString();
@@ -97,11 +97,11 @@ CGisListDB::CGisListDB(QWidget *parent)
         }
         if(type == "MySQL")
         {
-            QString server  = cfg.value("server",   "").toString();
-            QString port    = cfg.value("port",     "").toString();
-            QString user    = cfg.value("user",     "").toString();
-            QString passwd  = cfg.value("passwd",   "").toString();
-            bool noPasswd   = cfg.value("noPasswd", false).toBool();
+            QString server = cfg.value("server", "").toString();
+            QString port = cfg.value("port", "").toString();
+            QString user = cfg.value("user", "").toString();
+            QString passwd = cfg.value("passwd", "").toString();
+            bool noPasswd = cfg.value("noPasswd", false).toBool();
 
             if(server.isEmpty() || user.isEmpty())
             {
@@ -116,41 +116,41 @@ CGisListDB::CGisListDB(QWidget *parent)
     cfg.endGroup(); // Database
 
 
-    menuNone            = new QMenu(this);
-    actionAddDatabase   = menuNone->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Database"), this, &CGisListDB::slotAddDatabase);
+    menuNone = new QMenu(this);
+    actionAddDatabase = menuNone->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Database"), this, &CGisListDB::slotAddDatabase);
 
-    menuFolder          = new QMenu(this);
-    actionAddFolder     = menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, &CGisListDB::slotAddFolder);
-    actionRenameFolder  = menuFolder->addAction(QIcon("://icons/32x32/A.png"), tr("Rename Folder"), this, &CGisListDB::slotRenameFolder);
-    actionCopyFolder    = menuFolder->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy Folder"), this, &CGisListDB::slotCopyFolder);
-    actionMoveFolder    = menuFolder->addAction(QIcon("://icons/32x32/Move.png"), tr("Move Folder"), this, &CGisListDB::slotMoveFolder);
-    actionDelFolder     = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this, &CGisListDB::slotDelFolder);
+    menuFolder = new QMenu(this);
+    actionAddFolder = menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, &CGisListDB::slotAddFolder);
+    actionRenameFolder = menuFolder->addAction(QIcon("://icons/32x32/A.png"), tr("Rename Folder"), this, &CGisListDB::slotRenameFolder);
+    actionCopyFolder = menuFolder->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy Folder"), this, &CGisListDB::slotCopyFolder);
+    actionMoveFolder = menuFolder->addAction(QIcon("://icons/32x32/Move.png"), tr("Move Folder"), this, &CGisListDB::slotMoveFolder);
+    actionDelFolder = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this, &CGisListDB::slotDelFolder);
     menuFolder->addSeparator();
-    actionImport        = menuFolder->addAction(QIcon("://icons/32x32/LoadGIS.png"), tr("Import from Files..."), this, &CGisListDB::slotImport);
-    actionExportToGpx   = menuFolder->addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Export to GPX..."), this, &CGisListDB::slotExportToGpx);
+    actionImport = menuFolder->addAction(QIcon("://icons/32x32/LoadGIS.png"), tr("Import from Files..."), this, &CGisListDB::slotImport);
+    actionExportToGpx = menuFolder->addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Export to GPX..."), this, &CGisListDB::slotExportToGpx);
 
-    menuItem            = new QMenu(this);
-    actionDelItem       = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, &CGisListDB::slotDelItem);
+    menuItem = new QMenu(this);
+    actionDelItem = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, &CGisListDB::slotDelItem);
 
-    menuDatabase        = new QMenu(this);
+    menuDatabase = new QMenu(this);
     menuDatabase->addAction(actionAddFolder);
-    actionSearch        = menuDatabase->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Search Database"), this, &CGisListDB::slotSearchDatabase);
-    actionUpdate        = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, &CGisListDB::slotUpdateDatabase);
-    actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, &CGisListDB::slotDelDatabase);
+    actionSearch = menuDatabase->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Search Database"), this, &CGisListDB::slotSearchDatabase);
+    actionUpdate = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, &CGisListDB::slotUpdateDatabase);
+    actionDelDatabase = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, &CGisListDB::slotDelDatabase);
     menuDatabase->addSeparator();
     menuDatabase->addAction(actionImport);
     menuDatabase->addAction(actionExportToGpx);
 
 
-    menuLostFound       = new QMenu(this);
-    actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, &CGisListDB::slotDelLostFound);
+    menuLostFound = new QMenu(this);
+    actionDelLostFound = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, &CGisListDB::slotDelLostFound);
 
-    menuLostFoundItem       = new QMenu(this);
-    actionDelLostFoundItem  = menuLostFoundItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, &CGisListDB::slotDelLostFoundItem);
+    menuLostFoundItem = new QMenu(this);
+    actionDelLostFoundItem = menuLostFoundItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, &CGisListDB::slotDelLostFoundItem);
 
     connect(this, &CGisListDB::customContextMenuRequested, this, &CGisListDB::slotContextMenu);
-    connect(this, &CGisListDB::itemExpanded,               this, &CGisListDB::slotItemExpanded);
-    connect(this, &CGisListDB::itemChanged,                this, &CGisListDB::slotItemChanged);
+    connect(this, &CGisListDB::itemExpanded, this, &CGisListDB::slotItemExpanded);
+    connect(this, &CGisListDB::itemChanged, this, &CGisListDB::slotItemChanged);
 
     bool enabled = cfg.value("Database/listenUpdate", false).toBool();
     if(enabled)
@@ -200,7 +200,7 @@ void CGisListDB::saveDatabaseConfiguration()
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        CDBFolderSqlite * sqlite = dynamic_cast<CDBFolderSqlite*>(topLevelItem(n));
+        CDBFolderSqlite* sqlite = dynamic_cast<CDBFolderSqlite*>(topLevelItem(n));
         if(sqlite)
         {
             QString name = sqlite->text(CGisListDB::eColumnName);
@@ -211,7 +211,7 @@ void CGisListDB::saveDatabaseConfiguration()
             cfg.setValue("filename", sqlite->getFilename());
             cfg.endGroup(); // name
         }
-        CDBFolderMysql * mysql = dynamic_cast<CDBFolderMysql*>(topLevelItem(n));
+        CDBFolderMysql* mysql = dynamic_cast<CDBFolderMysql*>(topLevelItem(n));
         if(mysql)
         {
             QString name = mysql->text(CGisListDB::eColumnName);
@@ -233,13 +233,13 @@ void CGisListDB::saveDatabaseConfiguration()
     cfg.endGroup(); // Database
 }
 
-IDBFolderSql * CGisListDB::getDataBase(const QString& name, const QString &host)
+IDBFolderSql* CGisListDB::getDataBase(const QString& name, const QString& host)
 {
     CGisListDBEditLock lock(true, this, "getDataBase");
     const int N = topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        IDBFolderSql * database = dynamic_cast<IDBFolderSql*>(topLevelItem(n));
+        IDBFolderSql* database = dynamic_cast<IDBFolderSql*>(topLevelItem(n));
         if(database && (database->getDBName() == name))
         {
             if(!host.isEmpty())
@@ -262,7 +262,7 @@ bool CGisListDB::hasDatabase(const QString& name)
     const int N = topLevelItemCount();
     for(int i = 0; i < N; i++)
     {
-        IDBFolderSql * folder = dynamic_cast<IDBFolderSql*>(topLevelItem(i));
+        IDBFolderSql* folder = dynamic_cast<IDBFolderSql*>(topLevelItem(i));
         if(folder && (folder->text(CGisListDB::eColumnName) == name))
         {
             return true;
@@ -272,7 +272,7 @@ bool CGisListDB::hasDatabase(const QString& name)
 }
 
 
-bool CGisListDB::event(QEvent * e)
+bool CGisListDB::event(QEvent* e)
 {
     if(!dlgSearch.isNull())
     {
@@ -284,8 +284,8 @@ bool CGisListDB::event(QEvent * e)
     case eEvtW2DAckInfo:
     {
         CGisListDBEditLock lock(true, this, "event");
-        CEvtW2DAckInfo * evt    = (CEvtW2DAckInfo*)e;
-        IDBFolderSql * folder   = getDataBase(evt->db, evt->host);
+        CEvtW2DAckInfo* evt = (CEvtW2DAckInfo*)e;
+        IDBFolderSql* folder = getDataBase(evt->db, evt->host);
         if(folder)
         {
             folder->update(evt);
@@ -302,12 +302,12 @@ bool CGisListDB::event(QEvent * e)
     case eEvtW2DCreate:
     {
         CGisListDBEditLock lock(true, this, "event");
-        CEvtW2DCreate * evt = (CEvtW2DCreate*)e;
-        IDBFolderSql * db   = getDataBase(evt->db, evt->host);
+        CEvtW2DCreate* evt = (CEvtW2DCreate*)e;
+        IDBFolderSql* db = getDataBase(evt->db, evt->host);
         if(db)
         {
             quint64 idChild = 0;
-            IDBFolder * folder = db->getFolder(evt->idParent);
+            IDBFolder* folder = db->getFolder(evt->idParent);
             if(folder)
             {
                 idChild = folder->addFolder(evt->type, evt->name);
@@ -325,7 +325,7 @@ bool CGisListDB::event(QEvent * e)
                 }
 
                 evt->idChild = idChild;
-                CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(idChild, evt->db);
+                CEvtD2WShowFolder* evt1 = new CEvtD2WShowFolder(idChild, evt->db);
                 CGisWorkspace::self().postEventForWks(evt1);
             }
 
@@ -349,14 +349,14 @@ void CGisListDB::slotContextMenu(const QPoint& point)
         return;
     }
 
-    bool isSingleSelection  = selectedItems().count() == 1;
+    bool isSingleSelection = selectedItems().count() == 1;
 
     actionUpdate->setEnabled(true);
     actionAddFolder->setEnabled(isSingleSelection);
     actionExportToGpx->setEnabled(isSingleSelection);
     actionImport->setEnabled(isSingleSelection);
 
-    IDBFolderSql * database = dynamic_cast<IDBFolderSql*>(currentItem());
+    IDBFolderSql* database = dynamic_cast<IDBFolderSql*>(currentItem());
     if(database)
     {
         bool enabled = database->getDb().isOpen();
@@ -369,26 +369,26 @@ void CGisListDB::slotContextMenu(const QPoint& point)
         return;
     }
 
-    CDBFolderLostFound * lostFound = dynamic_cast<CDBFolderLostFound*>(currentItem());
+    CDBFolderLostFound* lostFound = dynamic_cast<CDBFolderLostFound*>(currentItem());
     if(lostFound)
     {
         menuLostFound->exec(p);
         return;
     }
 
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder)
     {
-        bool isGroupFolder      = folder->type() == IDBFolder::eTypeGroup;
+        bool isGroupFolder = folder->type() == IDBFolder::eTypeGroup;
         actionRenameFolder->setVisible(isGroupFolder);
         menuFolder->exec(p);
         return;
     }
 
-    CDBItem * item = dynamic_cast<CDBItem*>(currentItem());
+    CDBItem* item = dynamic_cast<CDBItem*>(currentItem());
     if(item)
     {
-        CDBFolderLostFound * lostFound = dynamic_cast<CDBFolderLostFound*>(item->parent());
+        CDBFolderLostFound* lostFound = dynamic_cast<CDBFolderLostFound*>(item->parent());
         if(lostFound)
         {
             menuLostFoundItem->exec(p);
@@ -412,26 +412,26 @@ void CGisListDB::slotAddDatabase()
 
     QString name = dlg.getName();
 
-    IDBFolder * folder = nullptr;
+    IDBFolder* folder = nullptr;
     bool isUsable = true;
 
     if(dlg.isSqlite())
     {
         QString filename = dlg.getFilename();
-        CDBFolderSqlite *sfolder = new CDBFolderSqlite(filename, name, this);
+        CDBFolderSqlite* sfolder = new CDBFolderSqlite(filename, name, this);
         sfolder->setToolTip(eColumnName, sfolder->getDBInfo());
         isUsable = sfolder->isUsable();
         folder = sfolder;
     }
     else if(dlg.isMysql())
     {
-        QString server  = dlg.getServer();
-        QString port    = dlg.getPort();
-        QString user    = dlg.getUser();
-        QString passwd  = dlg.getPasswd();
-        bool noPasswd   = dlg.noPasswd();
+        QString server = dlg.getServer();
+        QString port = dlg.getPort();
+        QString user = dlg.getUser();
+        QString passwd = dlg.getPasswd();
+        bool noPasswd = dlg.noPasswd();
 
-        CDBFolderMysql *mfolder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
+        CDBFolderMysql* mfolder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
         mfolder->setToolTip(eColumnName, mfolder->getDBInfo());
         isUsable = mfolder->isUsable();
         folder = mfolder;
@@ -453,7 +453,7 @@ void CGisListDB::slotAddDatabase()
 
 void CGisListDB::slotDelDatabase()
 {
-    IDBFolderSql *folder = dynamic_cast<IDBFolderSql*>(currentItem());
+    IDBFolderSql* folder = dynamic_cast<IDBFolderSql*>(currentItem());
     if(nullptr == folder)
     {
         return;
@@ -476,7 +476,7 @@ void CGisListDB::slotAddFolder()
 {
     CGisListDBEditLock lock(false, this, "slotAddFolder");
 
-    IDBFolder *folder = dynamic_cast<IDBFolder*>(currentItem());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(currentItem());
     if(nullptr == folder)
     {
         return;
@@ -501,7 +501,7 @@ void CGisListDB::slotAddFolder()
         folder->setExpanded(true);
     }
 
-    IDBFolderSql * dbfolder = folder->getDBFolder();
+    IDBFolderSql* dbfolder = folder->getDBFolder();
     if(dbfolder)
     {
         dbfolder->announceChange();
@@ -511,13 +511,13 @@ void CGisListDB::slotAddFolder()
 void CGisListDB::slotDelFolder()
 {
     CGisListDBEditLock lock(false, this, "slotDelFolder");
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder == nullptr)
     {
         return;
     }
 
-    IDBFolderSql * dbfolder = folder->getDBFolder();
+    IDBFolderSql* dbfolder = folder->getDBFolder();
     if(dbfolder == nullptr)
     {
         return;
@@ -531,7 +531,7 @@ void CGisListDB::slotDelFolder()
 
     QList<QTreeWidgetItem*> itemsToDelete;
     const QList<QTreeWidgetItem*>& items = selectedItems();
-    for(QTreeWidgetItem * item : items)
+    for(QTreeWidgetItem* item : items)
     {
         // only pick the project/other folders to copy
         folder = dynamic_cast<IDBFolder*>(item);
@@ -548,7 +548,7 @@ void CGisListDB::slotDelFolder()
     }
 
     // iterate over all items to be deleted.
-    for(QTreeWidgetItem * item : qAsConst(itemsToDelete))
+    for(QTreeWidgetItem* item : qAsConst(itemsToDelete))
     {
         // Test if the item's parent is also in the list.
         // If it is skip it because it will be deleted together with its parent.
@@ -569,14 +569,14 @@ void CGisListDB::slotCopyFolder()
     CGisListDBEditLock lock(false, this, "slotCopyFolder");
 
     // no way to continue if the current item is not a folder (we need the database it is attached to)
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder == nullptr)
     {
         return;
     }
 
     // get the database the folder is attached to
-    IDBFolderSql * dbfolder = folder->getDBFolder();
+    IDBFolderSql* dbfolder = folder->getDBFolder();
     if(dbfolder == nullptr)
     {
         return;
@@ -585,8 +585,8 @@ void CGisListDB::slotCopyFolder()
     // next we need to get the target folder
     // NOTE: By pre-setting db and host, we limit the selection to the current database
     QList<quint64> ids;
-    QString db          = folder->getDBName();
-    QString host        = folder->getDBHost();
+    QString db = folder->getDBName();
+    QString host = folder->getDBHost();
 
 
     CSelectDBFolder dlg(ids, db, host, this);
@@ -601,7 +601,7 @@ void CGisListDB::slotCopyFolder()
 
     // now iterate over all selected items
     const QList<QTreeWidgetItem*>& items = selectedItems();
-    for(QTreeWidgetItem * item : items)
+    for(QTreeWidgetItem* item : items)
     {
         // only pick the project/other folders to copy
         folder = dynamic_cast<IDBFolder*>(item);
@@ -610,7 +610,7 @@ void CGisListDB::slotCopyFolder()
             continue;
         }
 
-        IDBFolder * parent = dynamic_cast<IDBFolder*>(folder->parent());
+        IDBFolder* parent = dynamic_cast<IDBFolder*>(folder->parent());
         if((parent == nullptr) || (parent->getId() == idTarget) || (folder->getId() == idTarget))
         {
             // skip operation if the current parent is the same as the traget parent
@@ -622,7 +622,7 @@ void CGisListDB::slotCopyFolder()
     }
 
     // tell the parent folder to show all changes
-    IDBFolder * target = dbfolder->getFolder(idTarget);
+    IDBFolder* target = dbfolder->getFolder(idTarget);
     if(target != nullptr)
     {
         target->update();
@@ -637,14 +637,14 @@ void CGisListDB::slotMoveFolder()
     CGisListDBEditLock lock(false, this, "slotMoveFolder");
 
     // no way to continue if the current item is not a folder (we need the database it is attached to)
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder == nullptr)
     {
         return;
     }
 
     // get the database the folder is attached to
-    IDBFolderSql * dbfolder = folder->getDBFolder();
+    IDBFolderSql* dbfolder = folder->getDBFolder();
     if(dbfolder == nullptr)
     {
         return;
@@ -653,8 +653,8 @@ void CGisListDB::slotMoveFolder()
     // next we need to get the target folder
     // NOTE: By pre-setting db and host, we limit the selection to the current database
     QList<quint64> ids;
-    QString db          = folder->getDBName();
-    QString host        = folder->getDBHost();
+    QString db = folder->getDBName();
+    QString host = folder->getDBHost();
 
 
     CSelectDBFolder dlg(ids, db, host, this);
@@ -670,7 +670,7 @@ void CGisListDB::slotMoveFolder()
     // now iterate over all selected items
     QList<IDBFolder*> foldersToDelete;
     const QList<QTreeWidgetItem*>& items = selectedItems();
-    for(QTreeWidgetItem * item : items)
+    for(QTreeWidgetItem* item : items)
     {
         // only pick the project/other folders to copy
         folder = dynamic_cast<IDBFolder*>(item);
@@ -679,7 +679,7 @@ void CGisListDB::slotMoveFolder()
             continue;
         }
 
-        IDBFolder * parent = dynamic_cast<IDBFolder*>(folder->parent());
+        IDBFolder* parent = dynamic_cast<IDBFolder*>(folder->parent());
         if((parent == nullptr) || (parent->getId() == idTarget))
         {
             // skip operation if the current parent is the same as the target parent
@@ -701,7 +701,7 @@ void CGisListDB::slotMoveFolder()
     }
 
     // iterate over all items to be deleted.
-    for(IDBFolder * folder : qAsConst(foldersToDelete))
+    for(IDBFolder* folder : qAsConst(foldersToDelete))
     {
         // Test if the item's parent is also in the list.
         // If it is skip it because it will be deleted together with it's parent.
@@ -715,7 +715,7 @@ void CGisListDB::slotMoveFolder()
     }
 
     // tell the parent folder to show all changes
-    IDBFolder * target = dbfolder->getFolder(idTarget);
+    IDBFolder* target = dbfolder->getFolder(idTarget);
     if(target != nullptr)
     {
         target->update();
@@ -728,21 +728,21 @@ void CGisListDB::slotRenameFolder()
 {
     CGisListDBEditLock lock(false, this, "slotRenameFolder");
 
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder == nullptr)
     {
         return;
     }
 
     // get the database the folder is attached to
-    IDBFolderSql * dbfolder = folder->getDBFolder();
+    IDBFolderSql* dbfolder = folder->getDBFolder();
     if(dbfolder == nullptr)
     {
         return;
     }
 
     const QList<QTreeWidgetItem*>& items = selectedItems();
-    for(QTreeWidgetItem * item : items)
+    for(QTreeWidgetItem* item : items)
     {
         folder = dynamic_cast<IDBFolder*>(item);
         if((folder == nullptr) || (folder->type() != IDBFolder::eTypeGroup))
@@ -767,7 +767,7 @@ void CGisListDB::slotRenameFolder()
 void CGisListDB::slotDelLostFound()
 {
     CGisListDBEditLock lock(false, this, "slotDelLostFound");
-    CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(currentItem());
+    CDBFolderLostFound* folder = dynamic_cast<CDBFolderLostFound*>(currentItem());
     if(folder == nullptr)
     {
         return;
@@ -782,7 +782,7 @@ void CGisListDB::slotDelLostFound()
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     folder->clear();
 
-    IDBFolderSql * dbfolder = folder->getDBFolder();
+    IDBFolderSql* dbfolder = folder->getDBFolder();
     if(dbfolder)
     {
         dbfolder->announceChange();
@@ -803,15 +803,15 @@ void CGisListDB::slotDelLostFoundItem()
     QSet<CDBFolderLostFound*> folders;
     QList<QTreeWidgetItem*> delItems;
     const QList<QTreeWidgetItem*>& items = selectedItems();
-    for(QTreeWidgetItem * item : items)
+    for(QTreeWidgetItem* item : items)
     {
-        CDBItem * dbItem            = dynamic_cast<CDBItem*>(item);
+        CDBItem* dbItem = dynamic_cast<CDBItem*>(item);
         if(dbItem == nullptr)
         {
             continue;
         }
 
-        CDBFolderLostFound * folder = dynamic_cast<CDBFolderLostFound*>(dbItem->parent());
+        CDBFolderLostFound* folder = dynamic_cast<CDBFolderLostFound*>(dbItem->parent());
         if(folder == nullptr)
         {
             continue;
@@ -829,7 +829,7 @@ void CGisListDB::slotDelLostFoundItem()
     {
         folder->update();
 
-        IDBFolderSql * dbfolder = folder->getDBFolder();
+        IDBFolderSql* dbfolder = folder->getDBFolder();
         if(dbfolder)
         {
             dbfolder->announceChange();
@@ -838,11 +838,11 @@ void CGisListDB::slotDelLostFoundItem()
 }
 
 
-void CGisListDB::slotItemExpanded(QTreeWidgetItem * item)
+void CGisListDB::slotItemExpanded(QTreeWidgetItem* item)
 {
     CGisListDBEditLock lock(true, this, "slotItemExpanded");
 
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(item);
     if(folder == nullptr)
     {
         return;
@@ -863,15 +863,15 @@ void CGisListDB::slotDelItem()
 
 
     const QList<QTreeWidgetItem*>& items = selectedItems();
-    for(QTreeWidgetItem * item : items)
+    for(QTreeWidgetItem* item : items)
     {
-        CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
+        CDBItem* dbItem = dynamic_cast<CDBItem*>(item);
         if(dbItem == nullptr)
         {
             continue;
         }
 
-        IDBFolder * folder = dynamic_cast<IDBFolder*>(dbItem->parent());
+        IDBFolder* folder = dynamic_cast<IDBFolder*>(dbItem->parent());
         if(folder == nullptr)
         {
             continue;
@@ -899,20 +899,20 @@ void CGisListDB::slotDelItem()
     }
 
     qDeleteAll(dbItems);
-    for(IDBFolderSql * dbFolder : qAsConst(dbFolders))
+    for(IDBFolderSql* dbFolder : qAsConst(dbFolders))
     {
         dbFolder->updateLostFound();
         dbFolder->announceChange();
     }
 
     // tell all folders to update their statistics and waypoint/track correlations
-    for(IDBFolder * folder : qAsConst(folders))
+    for(IDBFolder* folder : qAsConst(folders))
     {
         folder->updateItemsOnWks();
     }
 }
 
-void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
+void CGisListDB::slotItemChanged(QTreeWidgetItem* item, int column)
 {
     if(isInternalEdit)
     {
@@ -922,7 +922,7 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
 
     if(column == CGisListDB::eColumnCheckbox)
     {
-        IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+        IDBFolder* folder = dynamic_cast<IDBFolder*>(item);
         if(folder != nullptr)
         {
             folder->toggle();
@@ -932,7 +932,7 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem * item, int column)
             return;
         }
 
-        CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
+        CDBItem* dbItem = dynamic_cast<CDBItem*>(item);
         if(dbItem != nullptr)
         {
             dbItem->toggle();
@@ -955,7 +955,7 @@ void CGisListDB::slotUpdateDatabase()
     const QList<QTreeWidgetItem*>& items = selectedItems();
     for(QTreeWidgetItem* item : items)
     {
-        IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+        IDBFolder* folder = dynamic_cast<IDBFolder*>(item);
         if(folder == nullptr)
         {
             continue;
@@ -965,7 +965,7 @@ void CGisListDB::slotUpdateDatabase()
         {
             folder->update();
 
-            CEvtD2WReload * evt = new CEvtD2WReload(folder->getDBName());
+            CEvtD2WReload* evt = new CEvtD2WReload(folder->getDBName());
             CGisWorkspace::self().postEventForWks(evt);
         }
     }
@@ -975,7 +975,7 @@ void CGisListDB::slotSearchDatabase()
 {
     CGisListDBEditLock lock(false, this, "slotSearchDatabase");
 
-    IDBFolder * db = dynamic_cast<IDBFolder*>(currentItem());
+    IDBFolder* db = dynamic_cast<IDBFolder*>(currentItem());
     if(db == nullptr)
     {
         return;
@@ -1032,12 +1032,12 @@ void CGisListDB::slotReadyRead()
         qDebug() << "Receive database update from:" << sender << senderPort;
         qDebug() << "with" << "tan:" << lastTan << "app ID:" << id << "driver:" << driver << "DB name:" << dbName << "DB host:" << dbHost;
 
-        IDBFolderSql * folder = getDataBase(dbName, dbHost);
+        IDBFolderSql* folder = getDataBase(dbName, dbHost);
         if(folder)
         {
             folder->update();
 
-            CEvtD2WReload * evt = new CEvtD2WReload(folder->getDBName());
+            CEvtD2WReload* evt = new CEvtD2WReload(folder->getDBName());
             CGisWorkspace::self().postEventForWks(evt);
         }
     }
@@ -1047,7 +1047,7 @@ void CGisListDB::slotExportToGpx()
 {
     CGisListDBEditLock lock(false, this, "slotExportToGpx");
 
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder == nullptr)
     {
         return;
@@ -1060,14 +1060,14 @@ void CGisListDB::slotImport()
 {
     CGisListDBEditLock lock(false, this, "slotImport");
 
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder == nullptr)
     {
         return;
     }
 
     SETTINGS;
-    QString path   = cfg.value("Paths/lastGisPath",   QDir::homePath()).toString();
+    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
     QString filter = cfg.value("Paths/lastGisFilter", IGisProject::filedialogAllSupported).toString();
 
     const QStringList& filenames = QFileDialog::getOpenFileNames(this, tr("Import GIS Data..."), path, IGisProject::filedialogLoadFilters, &filter);
@@ -1079,7 +1079,7 @@ void CGisListDB::slotImport()
 
     for(const QString& filename : filenames)
     {
-        CDBProject * prjDb = new CDBProject(filename, folder, nullptr);
+        CDBProject* prjDb = new CDBProject(filename, folder, nullptr);
         if(prjDb->isValid())
         {
             prjDb->save();
@@ -1088,7 +1088,7 @@ void CGisListDB::slotImport()
         delete prjDb;
     }
 
-    IDBFolderSql * dbfolder = folder->getDBFolder();
+    IDBFolderSql* dbfolder = folder->getDBFolder();
     if(dbfolder)
     {
         dbfolder->update();
@@ -1096,6 +1096,6 @@ void CGisListDB::slotImport()
     }
 
     path = QFileInfo(filenames.first()).absolutePath();
-    cfg.setValue("Paths/lastGisPath",   path);
+    cfg.setValue("Paths/lastGisPath", path);
     cfg.setValue("Paths/lastGisFilter", filter);
 }

@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CGisSummary::CGisSummary(QWidget *parent)
+CGisSummary::CGisSummary(QWidget* parent)
     : QWidget(parent)
     , dropZones(eDropZoneMax)
 {
@@ -82,8 +82,8 @@ void CGisSummary::slotStartup()
         {
             cfg.beginGroup(QString("Folder%1").arg(n));
             folder_t folder;
-            folder.id   = cfg.value("id", 0).toULongLong();
-            folder.db   = cfg.value("db", "").toString();
+            folder.id = cfg.value("id", 0).toULongLong();
+            folder.db = cfg.value("db", "").toString();
             folder.name = IDBFolder::getNameEx(folder.db, folder.id);
             if(!folder.name.isEmpty())
             {
@@ -121,7 +121,7 @@ void CGisSummary::slotSetup()
 
 void CGisSummary::setupDropZones()
 {
-    QLayout * theLayout = layout();
+    QLayout* theLayout = layout();
 
     bool isEmpty = true;
     for(dropzone_t& dropZone : dropZones)

@@ -54,7 +54,7 @@ inline double tile2lat(int y, int z)
 }
 
 
-CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
+CMapGEMF::CMapGEMF(const QString& filename, CMapDraw* parent)
     : IMap(eFeatVisibility, parent)
     , filename(filename)
 {
@@ -116,7 +116,7 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
     for(quint32 i = 0; i <= MAX_ZOOM_LEVEL; i++)
     {
         QList<range_t> rangeZoom;
-        for(const range_t &range : qAsConst(ranges))
+        for(const range_t& range : qAsConst(ranges))
         {
             if(range.zoomlevel == i)
             {
@@ -150,7 +150,7 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
     isActivated = true;
 }
 
-void CMapGEMF::draw(IDrawContext::buffer_t &buf)
+void CMapGEMF::draw(IDrawContext::buffer_t& buf)
 {
     if(map->needsRedraw())
     {
@@ -187,8 +187,8 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
 
 
     QPointF s1 = buf.scale * buf.zoomFactor;
-    qreal d    = NOFLOAT;
-    quint32 z  = MAX_ZOOM_LEVEL;
+    qreal d = NOFLOAT;
+    quint32 z = MAX_ZOOM_LEVEL;
 
     for(quint32 i = 0; i < MAX_ZOOM_LEVEL; i++)
     {
@@ -218,17 +218,17 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
             QPolygonF l;
             l << QPointF(xx1, yy1) << QPointF(xx2, yy1) << QPointF(xx2, yy2) << QPointF(xx1, yy2);
 
-            const QImage &img = getTile(col, row, z);
+            const QImage& img = getTile(col, row, z);
             drawTile(img, l, p);
         }
     }
 }
 
-quint64 CMapGEMF::getFilenameFromAddress(const quint64 offset, QString &filename)
+quint64 CMapGEMF::getFilenameFromAddress(const quint64 offset, QString& filename)
 {
     quint64 temp = offset;
 
-    for(const gemffile_t &gf : qAsConst(files))
+    for(const gemffile_t& gf : qAsConst(files))
     {
         if(temp < gf.size)
         {
@@ -252,7 +252,7 @@ QImage CMapGEMF::getTile(const quint32 row, const quint32 col, const quint32 z)
     }
     QList<range_t> ranges = rangesByZoom[z];
 
-    for(const range_t &range : ranges)
+    for(const range_t& range : ranges)
     {
         if(row >= range.minX
            && row <= range.maxX
@@ -289,7 +289,7 @@ QImage CMapGEMF::getTile(const quint32 row, const quint32 col, const quint32 z)
             imageFile.seek(imageDataOffset);
             QByteArray imageData(size, 0);
             imageFile.read(imageData.data(), size);
-            return QImage::fromData((uchar *)imageData.data(), size, 0);
+            return QImage::fromData((uchar*)imageData.data(), size, 0);
         }
     }
 

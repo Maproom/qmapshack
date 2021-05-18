@@ -31,7 +31,7 @@
 
 
 
-CTwoNavProject::CTwoNavProject(const QString &filename, IDevice * parent)
+CTwoNavProject::CTwoNavProject(const QString& filename, IDevice* parent)
     : IGisProject(eTypeTwoNav, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/2NavProject.png"));
@@ -45,7 +45,7 @@ CTwoNavProject::CTwoNavProject(const QString &filename, IDevice * parent)
     valid = true;
 }
 
-CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * project, IDevice * parent)
+CTwoNavProject::CTwoNavProject(const QString& filename, const IGisProject* project, IDevice* parent)
     : IGisProject(eTypeTwoNav, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/2NavProject.png"));
@@ -55,7 +55,7 @@ CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * proj
     const int N = project->childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
+        IGisItem* item = dynamic_cast<IGisItem*>(project->child(n));
         if(item)
         {
             insertCopyOfItem(item, NOIDX, res);
@@ -95,8 +95,8 @@ bool CTwoNavProject::save()
         const int N = childCount();
         for(int n = 0; n < N; n++)
         {
-            QTreeWidgetItem * item = child(n);
-            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+            QTreeWidgetItem* item = child(n);
+            CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(item);
             if(trk)
             {
                 QString fn = trk->getName();
@@ -108,7 +108,7 @@ bool CTwoNavProject::save()
                     throw -1;
                 }
             }
-            CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+            CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(item);
             if(wpt)
             {
                 if(wpt->isGeocache())
@@ -202,7 +202,7 @@ bool CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename
     qreal west = 180.0;
     qreal east = -180.0;
 
-    for(CGisItemWpt * wpt : wpts)
+    for(CGisItemWpt* wpt : wpts)
     {
         QPointF pt = wpt->getPosition();
 
@@ -214,13 +214,13 @@ bool CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename
         {
             south = pt.y();
         }
-        if(west >  pt.x())
+        if(west > pt.x())
         {
-            west  = pt.x();
+            west = pt.x();
         }
-        if(east <  pt.x())
+        if(east < pt.x())
         {
-            east  = pt.x();
+            east = pt.x();
         }
     }
 
@@ -230,7 +230,7 @@ bool CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename
     out << "U  1" << endl;
     out << "z " << west << ", " << south << ", " << east << ", " << north << endl;
 
-    for(CGisItemWpt * wpt : wpts)
+    for(CGisItemWpt* wpt : wpts)
     {
         wpt->saveTwoNav(out, dir);
     }
@@ -247,7 +247,7 @@ bool CTwoNavProject::load(const QString& filename)
     QDir dir(filename);
 
     const QStringList& entries = dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files);
-    for(const QString &entry : entries)
+    for(const QString& entry : entries)
     {
         QFileInfo fi(entry);
 
@@ -258,7 +258,7 @@ bool CTwoNavProject::load(const QString& filename)
         }
     }
 
-    for(const QString &entry : entries)
+    for(const QString& entry : entries)
     {
         QFileInfo fi(entry);
 

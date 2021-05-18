@@ -31,16 +31,16 @@
 
 #include <QtWidgets>
 
-CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *canvas, CMouseAdapter *mouse)
+CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse),
     key(wpt.getKey()),
     origPos(wpt.getPosition() * DEG_TO_RAD),
     radius(wpt.getProximity()),
     avoid(wpt.isNogo())
 {
-    cursor  = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"), 0, 0);
-    icon    = CWptIconManager::self().getWptIconByName(wpt.getIconName(), focus);
-    newPos  = origPos;
+    cursor = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"), 0, 0);
+    icon = CWptIconManager::self().getWptIconByName(wpt.getIconName(), focus);
+    newPos = origPos;
     wpt.setHideArea(true);
     canvas->triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
@@ -58,7 +58,7 @@ void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
 
     qreal d = GPS_Math_Distance(p1.x(), p1.y(), p2.x(), p2.y(), a1, a2);
     IUnit::self().meter2distance(d, val, unit);
-    const QString &str = QString("%1 %2, %3%4").arg(val, unit).arg(a2, 0, 'f', 1).arg(QChar(0260));
+    const QString& str = QString("%1 %2, %3%4").arg(val, unit).arg(a2, 0, 'f', 1).arg(QChar(0260));
 
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);
@@ -96,7 +96,7 @@ void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
 
 void CMouseMoveWpt::rightButtonDown(const QPoint& point)
 {
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt != nullptr)
     {
         wpt->setHideArea(false);
@@ -118,7 +118,7 @@ void CMouseMoveWpt::leftClicked(const QPoint& point)
 
     QPointF pos(point);
     gis->convertPx2Rad(pos);
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt != nullptr)
     {
         wpt->setPosition(pos * RAD_TO_DEG);

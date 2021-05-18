@@ -53,7 +53,7 @@ struct trk_head_entry_t
 QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
 {
     quint32 nTrkPts = 0;
-    QIODevice * dev = s.device();
+    QIODevice* dev = s.device();
     qint64 pos = dev->pos();
 
     char magic[9];
@@ -321,7 +321,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtTrack& trk)
     return s;
 }
 
-CQlgtTrack::CQlgtTrack(quint64 id, QObject *parent)
+CQlgtTrack::CQlgtTrack(quint64 id, QObject* parent)
     : QObject(parent)
     , IItem(id)
     , ext1Data(false)
@@ -337,10 +337,10 @@ CQlgtTrack::~CQlgtTrack()
 CQlgtTrack& CQlgtTrack::operator<<(const pt_t& pt)
 {
     track.push_back(pt);
-    track.last().idx     = track.size() - 1;
-    track.last().flags  &= ~pt_t::eCursor;
-    track.last().flags  &= ~pt_t::eFocus;
-    track.last().flags  &= ~pt_t::eSelected;
+    track.last().idx = track.size() - 1;
+    track.last().flags &= ~pt_t::eCursor;
+    track.last().flags &= ~pt_t::eFocus;
+    track.last().flags &= ~pt_t::eSelected;
 
     return *this;
 }

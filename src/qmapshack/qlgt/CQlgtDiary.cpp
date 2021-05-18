@@ -31,7 +31,7 @@ struct diary_head_entry_t
 
 QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary)
 {
-    QIODevice * dev = s.device();
+    QIODevice* dev = s.device();
     qint64 pos = dev->pos();
 
     char magic[9];
@@ -201,7 +201,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary)
     return s;
 }
 
-CQlgtDiary::CQlgtDiary(quint64 id, QObject *parent)
+CQlgtDiary::CQlgtDiary(quint64 id, QObject* parent)
     : QObject(parent)
     , IItem(id)
 {

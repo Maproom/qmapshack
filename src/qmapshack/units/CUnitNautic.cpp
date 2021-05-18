@@ -19,7 +19,7 @@
 
 #include "units/CUnitNautic.h"
 
-CUnitNautic::CUnitNautic(QObject * parent)
+CUnitNautic::CUnitNautic(QObject* parent)
     : IUnit(eTypeNautic, "nm", 0.00053989, "nm/h", 1.94361780, "m", 1.0, parent)
 {
 }
@@ -28,7 +28,7 @@ void CUnitNautic::meter2distance(qreal meter, QString& val, QString& unit) const
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit.clear();
     }
     else
@@ -42,7 +42,7 @@ void CUnitNautic::meter2distance(qreal meter, qreal& val, QString& unit) const /
 {
     if(meter == NOFLOAT)
     {
-        val  = NOFLOAT;
+        val = NOFLOAT;
         unit.clear();
     }
     else
@@ -56,7 +56,7 @@ void CUnitNautic::meter2speed(qreal meter, QString& val, QString& unit) const /*
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit.clear();
     }
     else
@@ -70,7 +70,7 @@ void CUnitNautic::meter2speed(qreal meter, qreal& val, QString& unit) const /* o
 {
     if(meter == NOFLOAT)
     {
-        val  = NOFLOAT;
+        val = NOFLOAT;
         unit.clear();
     }
     else
@@ -84,7 +84,7 @@ void CUnitNautic::meter2area(qreal meter, QString& val, QString& unit) const /* 
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit.clear();
     }
     else
@@ -98,7 +98,7 @@ void CUnitNautic::meter2area(qreal meter, qreal& val, QString& unit) const /* ov
 {
     if(meter == NOFLOAT)
     {
-        val  = NOFLOAT;
+        val = NOFLOAT;
         unit.clear();
     }
     else
@@ -113,8 +113,8 @@ qreal CUnitNautic::elevation2meter(const QString& val) const /* override */
     return val.toDouble();
 }
 
-void CUnitNautic::meter2unit(qreal meter, qreal& scale, QString&  unit) const
+void CUnitNautic::meter2unit(qreal meter, qreal& scale, QString& unit) const
 {
     scale = baseFactor;
-    unit  = "nm";
+    unit = "nm";
 }

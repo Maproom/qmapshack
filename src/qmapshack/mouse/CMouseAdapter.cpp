@@ -32,7 +32,7 @@
 #include <QPinchGesture>
 #include <QTimer>
 
-CMouseAdapter::CMouseAdapter(CCanvas *canvas) : QObject(canvas),
+CMouseAdapter::CMouseAdapter(CCanvas* canvas) : QObject(canvas),
     canvas(canvas)
 {
     longPressTimer = new QTimer(this);
@@ -44,7 +44,7 @@ CMouseAdapter::~CMouseAdapter()
 {
 }
 
-void CMouseAdapter::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
+void CMouseAdapter::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect)
 {
     delegate->draw(p, needsRedraw, rect);
 }
@@ -54,14 +54,14 @@ void CMouseAdapter::unfocus()
     delegate->unfocus();
 }
 
-void CMouseAdapter::mousePressEvent(QMouseEvent *e)
+void CMouseAdapter::mousePressEvent(QMouseEvent* e)
 {
     // set firstPos and mouseDidMove to suppress small movements when clicking
     startMouseMove(e->pos());
     buttonPressTime.start();
     if(e->button() == Qt::LeftButton)
     {
-        lastPos    = firstPos;
+        lastPos = firstPos;
         longPressTimer->start(longButtonPressTimeout);
         delegate->leftButtonDown(firstPos);
     }
@@ -73,7 +73,7 @@ void CMouseAdapter::mousePressEvent(QMouseEvent *e)
     ignoreClick = false;
 }
 
-void CMouseAdapter::mouseMoveEvent(QMouseEvent *e)
+void CMouseAdapter::mouseMoveEvent(QMouseEvent* e)
 {
     const QPoint& pos = e->pos();
 
@@ -102,7 +102,7 @@ void CMouseAdapter::mouseMoveEvent(QMouseEvent *e)
     lastPos = pos;
 }
 
-void CMouseAdapter::mouseReleaseEvent(QMouseEvent *e)
+void CMouseAdapter::mouseReleaseEvent(QMouseEvent* e)
 {
     longPressTimer->stop();
     if (e->button() == Qt::LeftButton)
@@ -122,12 +122,12 @@ void CMouseAdapter::mouseReleaseEvent(QMouseEvent *e)
     mouseDidMove = false;
 }
 
-void CMouseAdapter::mouseDoubleClickEvent(QMouseEvent *e)
+void CMouseAdapter::mouseDoubleClickEvent(QMouseEvent* e)
 {
     delegate->doubleClicked(e->pos());
 }
 
-void CMouseAdapter::wheelEvent(QWheelEvent *e)
+void CMouseAdapter::wheelEvent(QWheelEvent* e)
 {
     // suppress little mouse-movements that are likely to happen when scrolling the mousewheel.
     startMouseMove(e->pos());
@@ -138,7 +138,7 @@ void CMouseAdapter::wheelEvent(QWheelEvent *e)
     }
 }
 
-void CMouseAdapter::keyPressEvent(QKeyEvent *e)
+void CMouseAdapter::keyPressEvent(QKeyEvent* e)
 {
     switch (e->key())
     {
@@ -155,7 +155,7 @@ void CMouseAdapter::keyPressEvent(QKeyEvent *e)
     }
 }
 
-void CMouseAdapter::pinchGestureEvent(QPinchGesture *e)
+void CMouseAdapter::pinchGestureEvent(QPinchGesture* e)
 {
     // ensure first press of pinch doesn't result in longPress
     longPressTimer->stop();
@@ -165,14 +165,14 @@ void CMouseAdapter::pinchGestureEvent(QPinchGesture *e)
     delegate->scaleChanged();
 }
 
-void CMouseAdapter::afterMouseLostEvent(QMouseEvent *e)
+void CMouseAdapter::afterMouseLostEvent(QMouseEvent* e)
 {
     // pinch or modal dialog interrupt tracking of mouse. As result the mouse
     // is at an arbitrary position.
     if (e->type() == QEvent::MouseMove)
     {
         // suppress jump of map when touching screen right afterwards
-        lastPos    = e->pos();
+        lastPos = e->pos();
         // consider the move starting at this position
         startMouseMove(e->pos());
     }
@@ -187,7 +187,7 @@ void CMouseAdapter::startMouseMove(const QPoint& pos)
     mouseDidMove = false;
 }
 
-void CMouseAdapter::setDelegate(IMouse *delegate)
+void CMouseAdapter::setDelegate(IMouse* delegate)
 {
     if (this->delegate != nullptr)
     {

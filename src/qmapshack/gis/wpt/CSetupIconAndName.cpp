@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CSetupIconAndName::CSetupIconAndName(QString &icon, QString &name, QWidget *parent)
+CSetupIconAndName::CSetupIconAndName(QString& icon, QString& name, QWidget* parent)
     : QDialog(parent)
     , icon(icon)
     , name(name)
@@ -34,7 +34,7 @@ CSetupIconAndName::CSetupIconAndName(QString &icon, QString &name, QWidget *pare
     lineName->setText(name);
 
     connect(lineName, &QLineEdit::textEdited, this, &CSetupIconAndName::slotEditName);
-    connect(toolIcon, &QToolButton::clicked,  this, &CSetupIconAndName::slotChangeIcon);
+    connect(toolIcon, &QToolButton::clicked, this, &CSetupIconAndName::slotChangeIcon);
 
     checkInput();
 }

@@ -31,10 +31,10 @@ class CSlfReader
 {
     Q_DECLARE_TR_FUNCTIONS(CSlfReader)
 public:
-    static void readFile(const QString &file, CSlfProject *proj);
+    static void readFile(const QString& file, CSlfProject* proj);
 
 private:
-    CSlfReader(const QString &filename, CSlfProject *proj);
+    CSlfReader(const QString& filename, CSlfProject* proj);
 
     void readMarkers(const QDomNode& xml);
     void readEntries(const QDomNode& xml);
@@ -50,11 +50,11 @@ private:
        @param xmlEntrs  List of nodes
        @return  Set of used attributes
      */
-    QSet<QString> findUsedAttributes(const QDomNodeList &xmlEntrs);
+    QSet<QString> findUsedAttributes(const QDomNodeList& xmlEntrs);
 
-    static QDateTime parseTimestamp(const QString &ts);
+    static QDateTime parseTimestamp(const QString& ts);
 
-    CSlfProject   *proj = nullptr; //< the resulting project after construction
+    CSlfProject* proj = nullptr;   //< the resulting project after construction
     QDateTime baseTime;            //< the time all entries refer to
     QList<long>    offsetsTime;    //< an additional offset, required to take breaks into account
     QList<long>    laps;           //< the distances a new lap starts at (a lap is a .slf segment)

@@ -23,7 +23,7 @@
 #include "setup/IAppSetup.h"
 #include "tool/CToolAddOverview.h"
 
-CToolAddOverview::CToolAddOverview(QWidget *parent)
+CToolAddOverview::CToolAddOverview(QWidget* parent)
     : IToolGui(parent)
 {
     setupUi(this);
@@ -96,9 +96,9 @@ void CToolAddOverview::setupChanged()
     frame->setVisible(hasGdaladdo);
 }
 
-void CToolAddOverview::slotAddItem(const QString& filename, QListWidget * list)
+void CToolAddOverview::slotAddItem(const QString& filename, QListWidget* list)
 {
-    CItemFile * item = new CItemFile(filename, list);
+    CItemFile* item = new CItemFile(filename, list);
     connect(item, &CItemFile::sigChanged, itemList, &CItemListWidget::sigChanged);
 }
 
@@ -118,9 +118,9 @@ void CToolAddOverview::slotSelectionChanged()
     checkExternal->setDisabled(isRemove);
 }
 
-void CToolAddOverview::buildCmd(QList<CShellCmd>& cmds, const IItem *iitem)
+void CToolAddOverview::buildCmd(QList<CShellCmd>& cmds, const IItem* iitem)
 {
-    const CItemFile * item = dynamic_cast<const CItemFile*>(iitem);
+    const CItemFile* item = dynamic_cast<const CItemFile*>(iitem);
     if(nullptr == item)
     {
         return;
@@ -138,7 +138,7 @@ void CToolAddOverview::buildCmd(QList<CShellCmd>& cmds, const IItem *iitem)
     }
     else
     {
-        IDrawContext * context = item->getDrawContext();
+        IDrawContext* context = item->getDrawContext();
 
         // add new ones
         args.clear();
@@ -207,7 +207,7 @@ void CToolAddOverview::slotFinished(qint32 id)
         const int N = itemList->count();
         for(int n = 0; n < N; n++)
         {
-            IItem * item = itemList->item(n);
+            IItem* item = itemList->item(n);
             if(nullptr != item)
             {
                 item->reload();
@@ -216,7 +216,7 @@ void CToolAddOverview::slotFinished(qint32 id)
     }
     else
     {
-        IItem * item = itemList->currentItem();
+        IItem* item = itemList->currentItem();
         if(nullptr != item)
         {
             item->reload();

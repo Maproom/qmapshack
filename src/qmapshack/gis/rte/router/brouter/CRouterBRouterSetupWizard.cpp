@@ -41,9 +41,9 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(this, &CRouterBRouterSetupWizard::currentIdChanged, this, &CRouterBRouterSetupWizard::slotCurrentIdChanged);
     connect(this, &CRouterBRouterSetupWizard::customButtonClicked, this, &CRouterBRouterSetupWizard::slotCustomButtonClicked);
 
-    connect(radioLocal,  &QRadioButton::clicked, this, &CRouterBRouterSetupWizard::slotRadioLocalClicked);
+    connect(radioLocal, &QRadioButton::clicked, this, &CRouterBRouterSetupWizard::slotRadioLocalClicked);
     connect(radioOnline, &QRadioButton::clicked, this, &CRouterBRouterSetupWizard::slotRadioOnlineClicked);
-    connect(checkExpert, &QCheckBox::clicked,    this, &CRouterBRouterSetupWizard::slotCheckExpertClicked);
+    connect(checkExpert, &QCheckBox::clicked, this, &CRouterBRouterSetupWizard::slotCheckExpertClicked);
 
     connect(lineLocalProfilesUrl, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotProfilesUrlEdited);
     connect(lineLocalSegmentsUrl, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotSegmentsUrlEdited);
@@ -84,10 +84,10 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(setup, &CRouterBRouterSetup::sigVersionChanged, this, &CRouterBRouterSetupWizard::slotUpdateCurrentPage);
     connect(setup, &CRouterBRouterSetup::sigError, this, &CRouterBRouterSetupWizard::slotSetupError);
 
-    QStringListModel *profilesModel = new QStringListModel();
+    QStringListModel* profilesModel = new QStringListModel();
     listProfiles->setModel(profilesModel);
 
-    QStringListModel *availableProfiles = new QStringListModel();
+    QStringListModel* availableProfiles = new QStringListModel();
     listAvailableProfiles->setModel(availableProfiles);
 
     networkAccessManager = new QNetworkAccessManager(this);
@@ -453,7 +453,7 @@ void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked()
         doLocalInstall = true;
         next();
     }
-    catch (const QString &msg)
+    catch (const QString& msg)
     {
         textLocalDirectory->setVisible(true);
         textLocalDirectory->setTextColor(Qt::red);
@@ -495,7 +495,7 @@ void CRouterBRouterSetupWizard::beginLocalInstall()
     setOption(QWizard::HaveCustomButton1, false);
 }
 
-void CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked(const QUrl &url)
+void CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked(const QUrl& url)
 {
     downloadUrl = url;
     labelLocalInstallLink->setText(QString(tr("selected %1 for download and installation")).arg(url.fileName()));
@@ -526,7 +526,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
 
         mbox.setText(msg);
 
-        QCheckBox * checkAgree = new QCheckBox(tr("I understand the risk and wish to proceed."), &mbox);
+        QCheckBox* checkAgree = new QCheckBox(tr("I understand the risk and wish to proceed."), &mbox);
         mbox.setCheckBox(checkAgree);
         connect(checkAgree, &QCheckBox::clicked, mbox.button(QMessageBox::Ok), &QPushButton::setEnabled);
         mbox.button(QMessageBox::Ok)->setDisabled(true);
@@ -539,11 +539,11 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
     textLocalInstall->setVisible(true);
     textLocalInstall->setTextColor(Qt::darkGreen);
     textLocalInstall->append(tr("download %1 started").arg(downloadUrl.toString()));
-    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(downloadUrl));
+    QNetworkReply* reply = networkAccessManager->get(QNetworkRequest(downloadUrl));
     reply->setProperty("fileName", downloadUrl.fileName());
 }
 
-void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * reply)
+void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply* reply)
 {
     reply->deleteLater();
     try
@@ -552,7 +552,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
         {
             throw tr("Network Error: %1").arg(reply->errorString());
         }
-        const QString &fileName = reply->property("fileName").toString();
+        const QString& fileName = reply->property("fileName").toString();
         QDir outDir(setup->localDir);
         if (!outDir.exists())
         {
@@ -572,7 +572,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
             outfile.close();
             textLocalInstall->setTextColor(Qt::darkGreen);
             textLocalInstall->append(tr("download %1 finished").arg(outfile.fileName()));
-            const QStringList &unzippedNames = JlCompress::extractDir(outfile.fileName(), setup->localDir);
+            const QStringList& unzippedNames = JlCompress::extractDir(outfile.fileName(), setup->localDir);
             textLocalInstall->append(tr("unzipping:"));
             for (const QString& unzipped : unzippedNames)
             {
@@ -582,7 +582,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
             pageLocalInstallation->emitCompleteChanged();
             setup->readLocalProfiles();
         }
-        catch (const QString &msg)
+        catch (const QString& msg)
         {
             if (outfile.isOpen())
             {
@@ -595,7 +595,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
             throw msg;
         }
     }
-    catch (const QString &msg)
+    catch (const QString& msg)
     {
         textLocalInstall->setTextColor(Qt::red);
         textLocalInstall->append(tr("download of brouter failed: %1").arg(msg));
@@ -623,23 +623,23 @@ void CRouterBRouterSetupWizard::beginProfiles()
     setOption(QWizard::HaveCustomButton1, false);
 }
 
-void CRouterBRouterSetupWizard::slotProfileClicked(const QModelIndex & index) const
+void CRouterBRouterSetupWizard::slotProfileClicked(const QModelIndex& index) const
 {
-    const QString &profile = listProfiles->model()->data(index).toString();
+    const QString& profile = listProfiles->model()->data(index).toString();
     listAvailableProfiles->clearSelection();
     updateProfiles();
     setup->displayProfileAsync(profile);
 }
 
-void CRouterBRouterSetupWizard::slotAvailableProfileClicked(const QModelIndex & index) const
+void CRouterBRouterSetupWizard::slotAvailableProfileClicked(const QModelIndex& index) const
 {
-    const QString &profile = listAvailableProfiles->model()->data(index).toString();
+    const QString& profile = listAvailableProfiles->model()->data(index).toString();
     listProfiles->clearSelection();
     updateProfiles();
     setup->displayOnlineProfileAsync(profile);
 }
 
-void CRouterBRouterSetupWizard::slotDisplayProfile(const QString &profile, const QString content)
+void CRouterBRouterSetupWizard::slotDisplayProfile(const QString& profile, const QString content)
 {
     labelProfileContent->setText(tr("content of profile"));
     textProfileContent->setText(content);
@@ -648,7 +648,7 @@ void CRouterBRouterSetupWizard::slotDisplayProfile(const QString &profile, const
 void CRouterBRouterSetupWizard::slotAddProfileClicked() const
 {
     const QStringList& profiles = selectedProfiles(listAvailableProfiles);
-    for (const QString &profile : profiles)
+    for (const QString& profile : profiles)
     {
         setup->addProfile(profile);
     }
@@ -657,7 +657,7 @@ void CRouterBRouterSetupWizard::slotAddProfileClicked() const
 void CRouterBRouterSetupWizard::slotDelProfileClicked() const
 {
     const QStringList& profiles = selectedProfiles(listProfiles);
-    for (const QString &profile : profiles)
+    for (const QString& profile : profiles)
     {
         setup->deleteProfile(profile);
     }
@@ -666,7 +666,7 @@ void CRouterBRouterSetupWizard::slotDelProfileClicked() const
 void CRouterBRouterSetupWizard::slotProfileUpClicked() const
 {
     const QStringList& profiles = selectedProfiles(listProfiles);
-    for (const QString &profile : profiles)
+    for (const QString& profile : profiles)
     {
         setup->profileUp(profile);
     }
@@ -675,7 +675,7 @@ void CRouterBRouterSetupWizard::slotProfileUpClicked() const
 void CRouterBRouterSetupWizard::slotProfileDownClicked() const
 {
     const QStringList& profiles = selectedProfiles(listProfiles);
-    for (const QString &profile : profiles)
+    for (const QString& profile : profiles)
     {
         setup->profileDown(profile);
     }
@@ -683,9 +683,9 @@ void CRouterBRouterSetupWizard::slotProfileDownClicked() const
 
 void CRouterBRouterSetupWizard::updateProfiles() const
 {
-    const QStringList &profiles = setup->getProfiles();
+    const QStringList& profiles = setup->getProfiles();
     QStringList available;
-    for(const QString &profile : qAsConst(setup->onlineProfilesAvailable))
+    for(const QString& profile : qAsConst(setup->onlineProfilesAvailable))
     {
         if (!profiles.contains(profile))
         {
@@ -714,11 +714,11 @@ void CRouterBRouterSetupWizard::updateProfiles() const
     pageProfiles->emitCompleteChanged();
 }
 
-QStringList CRouterBRouterSetupWizard::selectedProfiles(const QListView * listView) const
+QStringList CRouterBRouterSetupWizard::selectedProfiles(const QListView* listView) const
 {
-    const QItemSelectionModel * selectModel = listView->selectionModel();
-    const QModelIndexList &selected = selectModel->selectedIndexes();
-    const QAbstractItemModel * model = listView->model();
+    const QItemSelectionModel* selectModel = listView->selectionModel();
+    const QModelIndexList& selected = selectModel->selectedIndexes();
+    const QAbstractItemModel* model = listView->model();
     QStringList selectedList;
     for (int i = 0; i < selected.size(); i++)
     {
@@ -727,14 +727,14 @@ QStringList CRouterBRouterSetupWizard::selectedProfiles(const QListView * listVi
     return selectedList;
 }
 
-QList<int> CRouterBRouterSetupWizard::updateProfileView(QListView * listView, const QStringList &values) const
+QList<int> CRouterBRouterSetupWizard::updateProfileView(QListView* listView, const QStringList& values) const
 {
     QList<int> selected;
-    const QStringList &selectedValues = selectedProfiles(listView);
-    QStringListModel * listModel = (dynamic_cast<QStringListModel*>(listView->model()));
-    QItemSelectionModel * selectModel = listView->selectionModel();
+    const QStringList& selectedValues = selectedProfiles(listView);
+    QStringListModel* listModel = (dynamic_cast<QStringListModel*>(listView->model()));
+    QItemSelectionModel* selectModel = listView->selectionModel();
     listModel->setStringList(values);
-    for (const QString &value : selectedValues)
+    for (const QString& value : selectedValues)
     {
         if (values.contains(value))
         {
@@ -966,7 +966,7 @@ void CRouterBRouterSetupWizard::slotUpdateCurrentPage()
     }
 }
 
-void CRouterBRouterSetupWizard::slotSetupError(const QString &error, const QString &details)
+void CRouterBRouterSetupWizard::slotSetupError(const QString& error, const QString& details)
 {
     isError = true;
     this->error = error;

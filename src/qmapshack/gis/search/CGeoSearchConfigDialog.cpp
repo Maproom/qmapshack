@@ -19,12 +19,12 @@
 #include "gis/search/CGeoSearchConfig.h"
 #include "gis/search/CGeoSearchConfigDialog.h"
 
-CGeoSearchConfigDialog::CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig *searchConfig) : QDialog(parent)
+CGeoSearchConfigDialog::CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig* searchConfig) : QDialog(parent)
 {
     setupUi(this);
 
-    connect(buttonBox,       &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
-    connect(buttonBox,       &QDialogButtonBox::rejected, this, &QDialog::reject);
+    connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     this->searchConfig = searchConfig;
 

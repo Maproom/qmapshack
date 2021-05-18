@@ -31,18 +31,18 @@ class CGridPlacer : public QWidget, private Ui::IGridPlacer
 {
     Q_OBJECT
 public:
-    CGridPlacer(QWidget * parent);
+    CGridPlacer(QWidget* parent);
     virtual ~CGridPlacer() = default;
 
-    void registerItem(CItemRefMap * item);
+    void registerItem(CItemRefMap* item);
 
     void saveSettings(QSettings& cfg);
     void loadSettings(QSettings& cfg);
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent *e);
-    void mouseReleaseEventFx(QMouseEvent *e);
-    void leaveEventFx(QEvent *e);
+    void mouseMoveEventFx(QMouseEvent* e);
+    void mouseReleaseEventFx(QMouseEvent* e);
+    void leaveEventFx(QEvent* e);
     QCursor getCursorFx();
 
     bool isOk() const
@@ -72,7 +72,7 @@ private slots:
 
 private:
     void updateStatus();
-    CItemRefMap * item = nullptr;
+    CItemRefMap* item = nullptr;
 
     qint32 idx = 0;
 

@@ -30,7 +30,7 @@
 #include <QtPrintSupport>
 #include <QtWidgets>
 
-CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
+CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas* source)
     : QDialog(&CMainWindow::self())
     , type(type)
     , rectSelArea(area)
@@ -53,16 +53,16 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas *source)
     canvas->allowShowTrackOverlays(false);
 
     // add canvas canvas to dialog
-    QLayout * layout = new QVBoxLayout(frameCanvas);
+    QLayout* layout = new QVBoxLayout(frameCanvas);
     layout->addWidget(canvas);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
 
-    connect(canvas,         &CCanvas::sigZoom,     this, &CPrintDialog::slotUpdateMetrics);
-    connect(canvas,         &CCanvas::sigMove,     this, &CPrintDialog::slotUpdateMetrics);
-    connect(pushPrint,      &QPushButton::pressed, this, &CPrintDialog::slotPrint);
-    connect(pushSave,       &QPushButton::pressed, this, &CPrintDialog::slotSave);
-    connect(checkScaleOnAll, &QCheckBox::toggled,   this, &CPrintDialog::slotScaleOnAllChanged);
+    connect(canvas, &CCanvas::sigZoom, this, &CPrintDialog::slotUpdateMetrics);
+    connect(canvas, &CCanvas::sigMove, this, &CPrintDialog::slotUpdateMetrics);
+    connect(pushPrint, &QPushButton::pressed, this, &CPrintDialog::slotPrint);
+    connect(pushSave, &QPushButton::pressed, this, &CPrintDialog::slotSave);
+    connect(checkScaleOnAll, &QCheckBox::toggled, this, &CPrintDialog::slotScaleOnAllChanged);
 
     if(type == eTypePrint)
     {
@@ -82,7 +82,7 @@ CPrintDialog::~CPrintDialog()
 {
 }
 
-void CPrintDialog::resizeEvent(QResizeEvent * e)
+void CPrintDialog::resizeEvent(QResizeEvent* e)
 {
     QDialog::resizeEvent(e);
     slotUpdateMetrics();
@@ -106,8 +106,8 @@ void CPrintDialog::slotUpdateMetrics()
     QPointF pt2 = rectSelArea.bottomRight();
 
     // calculate real meter dimensions from corner points
-    qreal mWidth    = GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt1.y());
-    qreal mHeight   = GPS_Math_Distance(pt1.x(), pt1.y(), pt1.x(), pt2.y());
+    qreal mWidth = GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt1.y());
+    qreal mHeight = GPS_Math_Distance(pt1.x(), pt1.y(), pt1.x(), pt2.y());
 
     // get pixel coordinates of corner points
     canvas->convertRad2Px(pt1);
@@ -116,16 +116,16 @@ void CPrintDialog::slotUpdateMetrics()
     // the map area in [pixel]
     rectSelAreaPixel = QRectF(pt1, pt2);
     // the printer page in [pixel]
-    rectPrinterPage  = printer.pageRect(QPrinter::DevicePixel);
+    rectPrinterPage = printer.pageRect(QPrinter::DevicePixel);
     // the label to show the page matrix in [pixel]
     QRectF rectLabel = labelPages->rect();
 
     // calculate number of pages
-    xPages = rectSelAreaPixel.width()  / rectPrinterPage.width();
+    xPages = rectSelAreaPixel.width() / rectPrinterPage.width();
     yPages = rectSelAreaPixel.height() / rectPrinterPage.height();
 
     // width and hight of page matrix for full pages
-    qreal wPages = rectPrinterPage.width()  * qCeil(xPages);
+    qreal wPages = rectPrinterPage.width() * qCeil(xPages);
     qreal hPages = rectPrinterPage.height() * qCeil(yPages);
 
     // derive scale for map area to page canvas either from x axis or
@@ -137,7 +137,7 @@ void CPrintDialog::slotUpdateMetrics()
     }
 
     // create the canvas image
-    QPixmap img(wPages * scale, hPages * scale);
+    QPixmap img(wPages* scale, hPages* scale);
     img.fill(Qt::lightGray);
 
     // scaled page canvas width and height
@@ -152,7 +152,7 @@ void CPrintDialog::slotUpdateMetrics()
     p.setPen(Qt::black);
     p.setBrush(Qt::white);
 
-    for(int y  = 0; y < qCeil(yPages); y++)
+    for(int y = 0; y < qCeil(yPages); y++)
     {
         for(int x = 0; x < qCeil(xPages); x++)
         {
@@ -221,7 +221,7 @@ void CPrintDialog::slotPrint()
     int n = 0;
     PROGRESS_SETUP(tr("Printing pages."), 0, N, this);
 
-    for(const QPointF &pt : qAsConst(centers))
+    for(const QPointF& pt : qAsConst(centers))
     {
         if(!first)
         {
@@ -268,7 +268,7 @@ void CPrintDialog::slotSave()
 
     QString filterPNG = "PNG Image (*.png)";
     QString filterJPG = "JPEG Image (*.jpg)";
-    QString filter    = filterPNG;
+    QString filter = filterPNG;
     QString filename = QFileDialog::getSaveFileName(this, tr("Save map..."), path, filterPNG + ";; " + filterJPG, &filter);
     if(filename.isEmpty())
     {

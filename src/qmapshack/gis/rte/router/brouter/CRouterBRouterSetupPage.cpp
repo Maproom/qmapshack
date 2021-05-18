@@ -49,7 +49,7 @@ bool CRouterBRouterSetupPage::isComplete() const
 
     case CRouterBRouterSetupWizard::ePageProfiles:
     {
-        const QListView *profilesListView = findChild<QListView*>("listProfiles");
+        const QListView* profilesListView = findChild<QListView*>("listProfiles");
         Q_ASSERT(profilesListView != nullptr);
         return profilesListView->model()->rowCount() > 0;
     }

@@ -29,7 +29,7 @@ class CDemPropSetup : public IDemProp, private Ui::IDemPropSetup
 {
     Q_OBJECT
 public:
-    CDemPropSetup(IDem *demfile, CDemDraw *dem);
+    CDemPropSetup(IDem* demfile, CDemDraw* dem);
     virtual ~CDemPropSetup();
 
 protected slots:

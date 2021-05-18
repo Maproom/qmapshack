@@ -20,7 +20,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterInvalid.h"
 
-CFilterInvalid::CFilterInvalid(CGisItemTrk &trk, QWidget *parent)
+CFilterInvalid::CFilterInvalid(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 

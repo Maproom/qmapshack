@@ -26,7 +26,7 @@
 
 #include <QtCore>
 
-CQlb::CQlb(QObject * parent)
+CQlb::CQlb(QObject* parent)
     : QObject(parent)
 {
 }

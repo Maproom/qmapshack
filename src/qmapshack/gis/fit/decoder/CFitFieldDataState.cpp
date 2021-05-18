@@ -32,7 +32,7 @@ void CFitFieldDataState::reset()
 }
 
 
-decode_state_e CFitFieldDataState::process(quint8 &dataByte)
+decode_state_e CFitFieldDataState::process(quint8& dataByte)
 {
     CFitMessage& mesg = *latestMessage();
     CFitDefinitionMessage* defMesg = definition(mesg.getLocalMesgNr());
@@ -41,7 +41,7 @@ decode_state_e CFitFieldDataState::process(quint8 &dataByte)
     fieldData[fieldDataIndex++] = dataByte;
 
     handleFitField();
-    bool allFieldRead =  fieldIndex >= defMesg->getNrOfFields();
+    bool allFieldRead = fieldIndex >= defMesg->getNrOfFields();
     if(allFieldRead)
     {
         handleDevField();
@@ -136,9 +136,10 @@ void CFitFieldDataState::devProfile(CFitMessage& mesg)
         // Get developer ID
         quint8 devDataIdx = fitDevDataIndexInvalid;
         const QList<CFitField>& fields = mesg.getFields();
-        for (const CFitField &field : fields)
+        for (const CFitField& field : fields)
         {
-            if (field.isValidValue() && field.getFieldDefNr() == eDeveloperDataIdDeveloperDataIndex) {
+            if (field.isValidValue() && field.getFieldDefNr() == eDeveloperDataIdDeveloperDataIndex)
+            {
                 devDataIdx = (quint8) field.getValue().toUInt();
                 break;
             }

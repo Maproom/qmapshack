@@ -65,13 +65,13 @@ void CPlotAxis::setMinMax( qreal givenMin, qreal givenMax )
 void CPlotAxis::calc()
 {
     qreal tmpAbs = qFabs(usedMax - usedMin) * ticScale;
-    qreal tmp    = qLog10( tmpAbs / 10.0 );
+    qreal tmp = qLog10( tmpAbs / 10.0 );
 
     qreal exponent = (int) tmp;
-    qreal residue  = tmp - exponent;
+    qreal residue = tmp - exponent;
 
     qreal resSteps[] = {qLog10(0.1), qLog10(0.2), qLog10(0.5), qLog10(1.0), qLog10(2.0), qLog10(5.0), qLog10(10.0)};
-    for(const qreal &step : resSteps)
+    for(const qreal& step : resSteps)
     {
         if(residue <= step)
         {
@@ -144,14 +144,14 @@ const QString CPlotAxis::fmtdbl( qreal val )
 {
     int exponent = 0;
 
-    qreal residue  = 0;
+    qreal residue = 0;
     val *= ticScale;
 
     if ( val != 0 )
     {
         qreal tmp = qLog10( qFabs(val) );
-        exponent  = (int) tmp;
-        residue   = tmp - exponent;
+        exponent = (int) tmp;
+        residue = tmp - exponent;
     }
 
     QString f;
@@ -187,7 +187,7 @@ int CPlotAxis::getScaleWidth( const QFontMetrics& m )
     int width = 6 * m.width( "X" );
     QString format_single_prec = ((interval * ticScale) < 1) ? fmtdbl(interval) : fmtsgl(interval);
 
-    const tic_t * t = ticmark();
+    const tic_t* t = ticmark();
     while (nullptr != t)
     {
         int tmp = m.width( QString().sprintf( format_single_prec.toLatin1().data(), t->val * ticScale) );
@@ -208,7 +208,7 @@ void CPlotAxis::getLimits(qreal& limMin, qreal& limMax, qreal& useMin, qreal& us
 }
 
 
-const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
+const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t* t )
 {
     QString format_single_prec = ((interval * ticScale) < 1) ? fmtdbl(interval) : fmtsgl(interval);
 
@@ -294,7 +294,7 @@ void CPlotAxis::setScale( const unsigned int pts )
     //if ( !initialized )
     //qWarning( "you try to set the scale before defining the min & max value. not very sensible." );
     points = pts;
-    scale  = pts / ( usedMax - usedMin );
+    scale = pts / ( usedMax - usedMin );
 }
 
 
@@ -308,9 +308,9 @@ void CPlotAxis::zoom(bool in, int point)
 {
     qreal factor = in ? (1 / 1.1) : 1.1;
 
-    qreal p   = pt2val(point);
+    qreal p = pt2val(point);
     qreal min = (p - usedMin) * (1 - factor) + usedMin;
-    qreal d   = min - usedMin * factor;
+    qreal d = min - usedMin * factor;
     qreal max = usedMax * factor + d;
 
     if(qRound(max - min) <= qRound(limitMax - limitMin))

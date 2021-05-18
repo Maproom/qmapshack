@@ -28,7 +28,7 @@ class CFilterMedian : public QWidget, private Ui::IFilterMedian
 {
     Q_OBJECT
 public:
-    CFilterMedian(CGisItemTrk& trk, QWidget * parent);
+    CFilterMedian(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterMedian();
 
 private slots:

@@ -28,7 +28,7 @@ class CFilterChangeStartPoint : public QWidget, private Ui::IFilterChangeStartPo
     Q_OBJECT
 
 public:
-    CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *parent = 0);
+    CFilterChangeStartPoint(CGisItemTrk& trk, QWidget* parent = 0);
     virtual ~CFilterChangeStartPoint() = default;
 
     void updateUi();

@@ -20,7 +20,7 @@
 #include "poi/IPoi.h"
 #include "poi/IPoiProp.h"
 
-IPoiProp::IPoiProp(IPoi *poifile, CPoiDraw *poi)
+IPoiProp::IPoiProp(IPoi* poifile, CPoiDraw* poi)
     : poifile(poifile)
     , poi(poi)
 {

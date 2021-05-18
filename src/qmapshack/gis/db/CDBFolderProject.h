@@ -24,7 +24,7 @@
 class CDBFolderProject : public IDBFolder
 {
 public:
-    CDBFolderProject(QSqlDatabase &db, quint64 key, QTreeWidgetItem *parent);
+    CDBFolderProject(QSqlDatabase& db, quint64 key, QTreeWidgetItem* parent);
     virtual ~CDBFolderProject();
 };
 

@@ -24,7 +24,7 @@
 
 QMutex IRtSource::mutex(QMutex::Recursive);
 
-IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget *parent)
+IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget* parent)
     : QObject(parent)
     , QTreeWidgetItem(parent)
     , type(type)
@@ -43,7 +43,7 @@ void IRtSource::saveSettings(QSettings& cfg) const
 }
 
 
-IRtSource* IRtSource::create(int type, QTreeWidget * parent)
+IRtSource* IRtSource::create(int type, QTreeWidget* parent)
 {
     switch(type)
     {

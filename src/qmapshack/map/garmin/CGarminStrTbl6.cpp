@@ -44,7 +44,7 @@ const char CGarminStrTbl6::str6tbl3[] =
     '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 };
 
-CGarminStrTbl6::CGarminStrTbl6(const quint16 codepage, const quint8 mask, QObject * parent)
+CGarminStrTbl6::CGarminStrTbl6(const quint16 codepage, const quint8 mask, QObject* parent)
     : IGarminStrTbl(codepage, mask, parent)
 {
 }
@@ -84,11 +84,11 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
         return;
     }
 
-    quint8 c1  = 0;
-    quint8 c2  = 0;
+    quint8 c1 = 0;
+    quint8 c2 = 0;
     quint32 idx = 0;
-    reg         = 0;
-    bits        = 0;
+    reg = 0;
+    bits = 0;
 
     QByteArray data;
     quint32 size = (sizeLBL1 - offset) < 200 ? (sizeLBL1 - offset) : 200;

@@ -22,15 +22,15 @@
 #include "gis/trk/CGisItemTrk.h"
 
 
-ISuuntoProject::ISuuntoProject(type_e type, const QString &filename, CGisListWks *parent)
+ISuuntoProject::ISuuntoProject(type_e type, const QString& filename, CGisListWks* parent)
     : IGisProject(type, filename, parent)
 {
 }
 
 
-void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, const QList<extension_t>& extensions)
+void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t>& samplesList, QList<QDateTime>& lapsList, CTrackData& trk, const QList<extension_t>& extensions)
 {
-    for (const extension_t& ext  : extensions)
+    for (const extension_t& ext : extensions)
     {
         fillMissingData(ext.tag, samplesList);
     }
@@ -42,7 +42,7 @@ void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t> &samplesList, QL
     trk.segs.resize(lapsList.size() ); // segments are created and each of them contains 1 lap
 
     int lap = 0;
-    CTrackData::trkseg_t *seg = &(trk.segs[lap]);
+    CTrackData::trkseg_t* seg = &(trk.segs[lap]);
 
     for(const sample_t& sample : qAsConst(samplesList))
     {
@@ -68,7 +68,7 @@ void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t> &samplesList, QL
 }
 
 
-void ISuuntoProject::fillMissingData(const QString &dataField, QList<sample_t> &samplesList)
+void ISuuntoProject::fillMissingData(const QString& dataField, QList<sample_t>& samplesList)
 {   // Suunto samples contain lat/lon OR heart rate, elevation, etc.., each one with its own timestamp.
     // The purpose of the code below is to "spread" data among samples.
     // At the end each sample contains data, linearly interpolated from its neighbors according to timestamps.
@@ -123,7 +123,7 @@ void ISuuntoProject::fillMissingData(const QString &dataField, QList<sample_t> &
 }
 
 
-void ISuuntoProject::deleteSamplesWithDuplicateTimestamps(QList<sample_t> &samples, QList<extension_t> extensions)
+void ISuuntoProject::deleteSamplesWithDuplicateTimestamps(QList<sample_t>& samples, QList<extension_t> extensions)
 {
     QList<sample_t> result;
     QList<sample_t> collect;
@@ -158,7 +158,7 @@ ISuuntoProject::sample_t ISuuntoProject::mergeSamples(QList<sample_t> samples, Q
 
     result.time = samples.first().time;
 
-    for (const extension_t& ext  : extensions)
+    for (const extension_t& ext : extensions)
     {
         qreal sum = 0;
         qint32 cnt = 0;

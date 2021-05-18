@@ -31,7 +31,7 @@ class CRtGpsTether : public IRtSource
 {
     Q_OBJECT
 public:
-    CRtGpsTether(QTreeWidget * parent);
+    CRtGpsTether(QTreeWidget* parent);
     virtual ~CRtGpsTether() = default;
 
     void registerWithTreeWidget() override;
@@ -40,9 +40,9 @@ public:
     void loadSettings(QSettings& cfg) override;
     void saveSettings(QSettings& cfg) const override;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) override;
 
-    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) override;
+    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) override;
 
     static const QString strIcon;
 

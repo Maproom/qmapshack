@@ -30,7 +30,7 @@
 #include <QSqlQuery>
 #include <QtWidgets>
 
-CPoiPOI::CPoiPOI(const QString &filename, CPoiDraw *parent)
+CPoiPOI::CPoiPOI(const QString& filename, CPoiDraw* parent)
     : IPoi(parent)
     , filename(filename)
     , loadTimer(new QTimer(this))
@@ -115,9 +115,9 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     {
         xMin = -180 * DEG_TO_RAD;
     }
-    if(xMax >  180.0 * DEG_TO_RAD)
+    if(xMax > 180.0 * DEG_TO_RAD)
     {
-        xMax =  180 * DEG_TO_RAD;
+        xMax = 180 * DEG_TO_RAD;
     }
 
     // draw POI
@@ -158,7 +158,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                     freeSpaceRect.moveCenter(pt);
 
                     bool foundIntersection = false;
-                    for(poiGroup_t& poiGroup: displayedPois)
+                    for(poiGroup_t& poiGroup : displayedPois)
                     {
                         if(poiGroup.iconLocation.intersects(freeSpaceRect))
                         {
@@ -184,7 +184,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     }
 
     //Draw Icons
-    for(const poiGroup_t& poiGroup: qAsConst(displayedPois))
+    for(const poiGroup_t& poiGroup : qAsConst(displayedPois))
     {
         QFontMetricsF fm(CMainWindow::self().getMapFont());
 
@@ -263,7 +263,7 @@ bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPoi
     return false;
 }
 
-void CPoiPOI::findPoisIn(const QRectF &degRect, QSet<poi_t> &pois, QList<QPointF> &posPoiHighlight)
+void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF>& posPoiHighlight)
 {
     //Treat highlighting and POIs seperately, as highlighting only applies to items in the current view
 
@@ -305,7 +305,7 @@ void CPoiPOI::findPoisIn(const QRectF &degRect, QSet<poi_t> &pois, QList<QPointF
     }
 
     //Find Highlights
-    for(const poiGroup_t& poiGroup:qAsConst(displayedPois))
+    for(const poiGroup_t& poiGroup : qAsConst(displayedPois))
     {
         if(degRect.contains(poiGroup.iconCenter * RAD_TO_DEG))
         {
@@ -314,7 +314,7 @@ void CPoiPOI::findPoisIn(const QRectF &degRect, QSet<poi_t> &pois, QList<QPointF
     }
 }
 
-bool CPoiPOI::getToolTip(const QPoint &px, QString &str) const
+bool CPoiPOI::getToolTip(const QPoint& px, QString& str) const
 {
     poiGroup_t poiGroup;
     bool success = getPoiGroupCloseBy(px, poiGroup);
@@ -336,7 +336,7 @@ bool CPoiPOI::getToolTip(const QPoint &px, QString &str) const
             {
                 str += tr("Links: ");
                 bool isFirstLink = true;
-                for(const IGisItem::link_t& link: links)
+                for(const IGisItem::link_t& link : links)
                 {
                     if(isFirstLink)
                     {
@@ -408,7 +408,7 @@ void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
     }
 }
 
-void CPoiPOI::slotCheckedStateChanged(QTreeWidgetItem * item)
+void CPoiPOI::slotCheckedStateChanged(QTreeWidgetItem* item)
 {
     CPoiCategory* categoryItem = static_cast<CPoiCategory*>(item);
     if(categoryItem == nullptr)
@@ -421,7 +421,7 @@ void CPoiPOI::slotCheckedStateChanged(QTreeWidgetItem * item)
     loadTimer->start();
 }
 
-void CPoiPOI::getPoiIcon(QPixmap &icon, const CPoiPOI::poiGroup_t &poiGroup)
+void CPoiPOI::getPoiIcon(QPixmap& icon, const CPoiPOI::poiGroup_t& poiGroup)
 {
     if(poiGroup.pois.count() > 1)
     {
@@ -433,7 +433,7 @@ void CPoiPOI::getPoiIcon(QPixmap &icon, const CPoiPOI::poiGroup_t &poiGroup)
     }
 }
 
-void CPoiPOI::getPoiIcon(QPixmap& icon, const CRawPoi &poi, const QString &definingTag)
+void CPoiPOI::getPoiIcon(QPixmap& icon, const CRawPoi& poi, const QString& definingTag)
 {
     if(!definingTag.isEmpty() && tagMap.contains(definingTag))
     {
@@ -451,9 +451,9 @@ void CPoiPOI::getPoiIcon(QPixmap& icon, const CRawPoi &poi, const QString &defin
     icon = QPixmap("://icons/poi/SJJB/png/poi_point_of_interest.n.32.png");
 }
 
-bool CPoiPOI::overlapsWithIcon(const QRectF &rect) const
+bool CPoiPOI::overlapsWithIcon(const QRectF& rect) const
 {
-    for(const poiGroup_t& poiGroup: displayedPois)
+    for(const poiGroup_t& poiGroup : displayedPois)
     {
         if(poiGroup.iconLocation.intersects(rect))
         {
@@ -463,7 +463,7 @@ bool CPoiPOI::overlapsWithIcon(const QRectF &rect) const
     return false;
 }
 
-bool CPoiPOI::getPoiGroupCloseBy(const QPoint &px, CPoiPOI::poiGroup_t &poiItem) const
+bool CPoiPOI::getPoiGroupCloseBy(const QPoint& px, CPoiPOI::poiGroup_t& poiItem) const
 {
     for(const poiGroup_t& poiGroup : displayedPois)
     {
@@ -516,10 +516,10 @@ void CPoiPOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
                   "    AND main.poi_category_map.category=:categoryID "
                   ") "
                   "AND main.poi_data.id = main.poi_index.id");
-    query.bindValue(":maxLat",  QString::number((minLatM10 + 1) / 10., 'f'));
-    query.bindValue(":minLat",  QString::number(minLatM10 / 10., 'f'));
-    query.bindValue(":maxLon",  QString::number((minLonM10 + 1) / 10., 'f'));
-    query.bindValue(":minLon",  QString::number(minLonM10 / 10., 'f'));
+    query.bindValue(":maxLat", QString::number((minLatM10 + 1) / 10., 'f'));
+    query.bindValue(":minLat", QString::number(minLatM10 / 10., 'f'));
+    query.bindValue(":maxLon", QString::number((minLonM10 + 1) / 10., 'f'));
+    query.bindValue(":minLon", QString::number(minLonM10 / 10., 'f'));
     query.bindValue(":categoryID", categoryID);
     query.exec();
     while (query.next())

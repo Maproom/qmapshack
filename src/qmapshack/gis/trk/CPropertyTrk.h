@@ -93,15 +93,15 @@ public:
         qreal max = NOFLOAT;
     };
 
-    void fillComboBox(QComboBox * box) const;
+    void fillComboBox(QComboBox* box) const;
 
     void setupData();
-    void setupPlot(CPlot * plot, const QString &source) const;
-    const property_t &propBySource(const QString& source) const;
+    void setupPlot(CPlot* plot, const QString& source) const;
+    const property_t& propBySource(const QString& source) const;
 
 private:
     friend class CGisItemTrk;
-    CPropertyTrk(CGisItemTrk &trk);
+    CPropertyTrk(CGisItemTrk& trk);
 
     CGisItemTrk& trk;
 

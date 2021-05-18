@@ -31,7 +31,7 @@
 
 #include <QtWidgets>
 
-CMouseRadiusWpt::CMouseRadiusWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
+CMouseRadiusWpt::CMouseRadiusWpt(CGisItemWpt& wpt, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse),
     key(wpt.getKey()),
     wptPosition(wpt.getPosition() * DEG_TO_RAD),
@@ -40,7 +40,7 @@ CMouseRadiusWpt::CMouseRadiusWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas * can
 {
     startPos = GPS_Math_Wpt_Projection(wptPosition, wpt.getProximity(), 90 * DEG_TO_RAD);
     gis->convertRad2Px(startPos);
-    cursor  = QCursor(QPixmap(":/cursors/cursorRadiusWpt.png"), 0, 0);
+    cursor = QCursor(QPixmap(":/cursors/cursorRadiusWpt.png"), 0, 0);
     wpt.setHideArea(true);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
@@ -65,7 +65,7 @@ void CMouseRadiusWpt::rightButtonDown(const QPoint& point)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt != nullptr)
     {
         wpt->setHideArea(false);
@@ -75,13 +75,13 @@ void CMouseRadiusWpt::rightButtonDown(const QPoint& point)
     initial = false;
 }
 
-void CMouseRadiusWpt::mouseMoved(const QPoint &pos)
+void CMouseRadiusWpt::mouseMoved(const QPoint& pos)
 {
     canvas->update();
     initial = false;
 }
 
-void CMouseRadiusWpt::mouseDragged(const QPoint &start, const QPoint &last, const QPoint &end)
+void CMouseRadiusWpt::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end)
 {
     IMouse::mouseDragged(start, last, end);
     initial = false;
@@ -91,7 +91,7 @@ void CMouseRadiusWpt::leftClicked(const QPoint& point)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt != nullptr)
     {
         wpt->setProximity(dist);

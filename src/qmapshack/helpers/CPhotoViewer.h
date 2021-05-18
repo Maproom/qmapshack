@@ -27,14 +27,14 @@ class CPhotoViewer : public QDialog
 {
     Q_OBJECT
 public:
-    CPhotoViewer(QList<CGisItemWpt::image_t> &images, int idx, QWidget *parent);
+    CPhotoViewer(QList<CGisItemWpt::image_t>& images, int idx, QWidget* parent);
     virtual ~CPhotoViewer();
 
 protected:
-    void paintEvent(QPaintEvent  *e) override;
-    void resizeEvent(QResizeEvent *e) override;
-    void mousePressEvent(QMouseEvent  *e) override;
-    void keyPressEvent(QKeyEvent    *e) override;
+    void paintEvent(QPaintEvent* e) override;
+    void resizeEvent(QResizeEvent* e) override;
+    void mousePressEvent(QMouseEvent* e) override;
+    void keyPressEvent(QKeyEvent* e) override;
 
 private:
     void tryIdxStep(int delta);

@@ -28,7 +28,7 @@ class CSelectSaveAction : public QDialog, private Ui::ISelectSaveAction
 {
     Q_OBJECT
 public:
-    CSelectSaveAction(const IGisItem * src, const IGisItem * tar, QWidget * parent);
+    CSelectSaveAction(const IGisItem* src, const IGisItem* tar, QWidget* parent);
     virtual ~CSelectSaveAction();
 
     enum result_e

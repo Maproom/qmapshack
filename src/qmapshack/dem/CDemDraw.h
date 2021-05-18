@@ -30,7 +30,7 @@ class CDemItem;
 class CDemDraw : public IDrawContext
 {
 public:
-    CDemDraw(CCanvas * canvas);
+    CDemDraw(CCanvas* canvas);
     virtual ~CDemDraw();
 
     void saveConfig(QSettings& cfg);
@@ -45,7 +45,7 @@ public:
 
        @param item the item to call it's loadConfig() method
      */
-    void loadConfigForDemItem(CDemItem * item);
+    void loadConfigForDemItem(CDemItem* item);
 
     qreal getElevationAt(const QPointF& pos, bool checkScale = false);
     void  getElevationAt(const QPolygonF& pos, QPolygonF& ele);
@@ -62,10 +62,10 @@ public:
     }
 
     static void setupDemPath();
-    static void setupDemPath(const QString &path);
-    static void setupDemPath(const QStringList &paths);
-    static void saveDemPath(QSettings &cfg);
-    static void loadDemPath(QSettings &cfg);
+    static void setupDemPath(const QString& path);
+    static void setupDemPath(const QStringList& paths);
+    static void saveDemPath(QSettings& cfg);
+    static void loadDemPath(QSettings& cfg);
     static const QStringList& getSupportedFormats()
     {
         return supportedFormats;
@@ -84,15 +84,15 @@ private:
     /**
        @brief Save list of active maps to configuration file
      */
-    void saveActiveMapsList(QStringList &keys, QSettings &cfg);
-    void saveActiveMapsList(QStringList &keys);
+    void saveActiveMapsList(QStringList& keys, QSettings& cfg);
+    void saveActiveMapsList(QStringList& keys);
     /**
        @brief Restore list of active maps from configuration file
      */
-    void restoreActiveMapsList(const QStringList &keys);
-    void restoreActiveMapsList(const QStringList& keys, QSettings &cfg);
+    void restoreActiveMapsList(const QStringList& keys);
+    void restoreActiveMapsList(const QStringList& keys, QSettings& cfg);
 
-    CDemList * demList;
+    CDemList* demList;
 
     /// the group label used in QSettings
     QString cfgGroup;

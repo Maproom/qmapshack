@@ -28,7 +28,7 @@
 #include <QtWidgets>
 #include <QtXml>
 
-CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QString &model, const QString& garminDeviceXml, QTreeWidget *parent)
+CDeviceGarmin::CDeviceGarmin(const QString& path, const QString& key, const QString& model, const QString& garminDeviceXml, QTreeWidget* parent)
     : IDevice(path, eTypeGarmin, key, parent)
     , cntImages(0)
 {
@@ -52,27 +52,27 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
 
     file.close();
 
-    const QDomElement& xmlDevice    = dom.documentElement();
-    const QDomNode& xmlModel        = xmlDevice.namedItem("Model");
+    const QDomElement& xmlDevice = dom.documentElement();
+    const QDomNode& xmlModel = xmlDevice.namedItem("Model");
 
-    id              = xmlDevice.namedItem("Id").toElement().text().trimmed();
-    description     = xmlModel.namedItem("Description").toElement().text().trimmed();
-    partno          = xmlModel.namedItem("PartNumber").toElement().text().trimmed();
+    id = xmlDevice.namedItem("Id").toElement().text().trimmed();
+    description = xmlModel.namedItem("Description").toElement().text().trimmed();
+    partno = xmlModel.namedItem("PartNumber").toElement().text().trimmed();
 
     setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(description, model));
     setToolTip(CGisListWks::eColumnName, QString("%1 (%2, %3)").arg(description, partno, model));
 
-    const QDomNode& xmlMassStorageMode  = xmlDevice.namedItem("MassStorageMode");
-    const QDomNodeList& xmlDataTypes    = xmlMassStorageMode.toElement().elementsByTagName("DataType");
+    const QDomNode& xmlMassStorageMode = xmlDevice.namedItem("MassStorageMode");
+    const QDomNodeList& xmlDataTypes = xmlMassStorageMode.toElement().elementsByTagName("DataType");
 
     const int N = xmlDataTypes.count();
     for(int n = 0; n < N; n++)
     {
         const QDomNode& xmlDataType = xmlDataTypes.item(n);
-        const QDomNode& xmlName     = xmlDataType.namedItem("Name");
-        const QDomNode& xmlFile     = xmlDataType.namedItem("File");
+        const QDomNode& xmlName = xmlDataType.namedItem("Name");
+        const QDomNode& xmlFile = xmlDataType.namedItem("File");
         const QDomNode& xmlLocation = xmlFile.namedItem("Location");
-        const QDomNode& xmlPath     = xmlLocation.namedItem("Path");
+        const QDomNode& xmlPath = xmlLocation.namedItem("Path");
 
         QString name = xmlName.toElement().text().trimmed();
 
@@ -165,10 +165,10 @@ void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnd
     QDir dirLoop(dir.absoluteFilePath(subdirecoty));
     qDebug() << "reading files from device: " << dirLoop.path();
     const QStringList& entries = dirLoop.entryList(QStringList("*." + fileEnding));
-    for(const QString &entry : entries)
+    for(const QString& entry : entries)
     {
         const QString filename = dirLoop.absoluteFilePath(entry);
-        IGisProject * project = nullptr;
+        IGisProject* project = nullptr;
         if(fileEnding == "fit")
         {
             project = new CFitProject(filename, this);
@@ -193,7 +193,7 @@ CDeviceGarmin::~CDeviceGarmin()
 {
 }
 
-void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
+void CDeviceGarmin::insertCopyOfProject(IGisProject* project)
 {
     if(description.startsWith("EDGE 5", Qt::CaseInsensitive))
     {
@@ -205,14 +205,14 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
     }
 }
 
-void CDeviceGarmin::reorderProjects(IGisProject *project)
+void CDeviceGarmin::reorderProjects(IGisProject* project)
 {
     // move new project to top of any sub-folder/sub-device item
-    int newIdx      = NOIDX;
+    int newIdx = NOIDX;
     const int myIdx = childCount() - 1;
     for(int i = myIdx - 1; i >= 0; i--)
     {
-        IDevice * device = dynamic_cast<IDevice*>(child(i));
+        IDevice* device = dynamic_cast<IDevice*>(child(i));
         if(0 == device)
         {
             break;
@@ -228,19 +228,19 @@ void CDeviceGarmin::reorderProjects(IGisProject *project)
     }
 }
 
-QString CDeviceGarmin::simplifiedName(IGisProject * project)
+QString CDeviceGarmin::simplifiedName(IGisProject* project)
 {
     QString name = project->getName();
     return name.remove(QRegExp("[^A-Za-z0-9_]"));
 }
 
-QString CDeviceGarmin::createFileName(IGisProject * project, const QString& path, const QString& suffix)
+QString CDeviceGarmin::createFileName(IGisProject* project, const QString& path, const QString& suffix)
 {
     QDir dirTarget = dir.absoluteFilePath(path);
     return dirTarget.absoluteFilePath(simplifiedName(project) + suffix);
 }
 
-void CDeviceGarmin::insertCopyOfProjectAsTcx(IGisProject * project)
+void CDeviceGarmin::insertCopyOfProjectAsTcx(IGisProject* project)
 {
     QString filename = createFileName(project, pathTcx, ".tcx");
 
@@ -249,7 +249,7 @@ void CDeviceGarmin::insertCopyOfProjectAsTcx(IGisProject * project)
         return;
     }
 
-    CTcxProject * tcx = new CTcxProject(filename, project, this);
+    CTcxProject* tcx = new CTcxProject(filename, project, this);
     if(!tcx->isValid())
     {
         delete tcx;
@@ -269,7 +269,7 @@ void CDeviceGarmin::insertCopyOfProjectAsTcx(IGisProject * project)
     reorderProjects(tcx);
 }
 
-void CDeviceGarmin::insertCopyOfProjectAsGpx(IGisProject * project)
+void CDeviceGarmin::insertCopyOfProjectAsGpx(IGisProject* project)
 {
     QString filename = createFileName(project, pathGpx, ".gpx");
 
@@ -278,7 +278,7 @@ void CDeviceGarmin::insertCopyOfProjectAsGpx(IGisProject * project)
         return;
     }
 
-    CGpxProject * gpx = new CGpxProject(filename, project, this);
+    CGpxProject* gpx = new CGpxProject(filename, project, this);
     if(!gpx->isValid())
     {
         delete gpx;
@@ -341,7 +341,7 @@ void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
             image.pixmap.save(dirImages.absoluteFilePath(filename));
 
             IGisItem::link_t link;
-            link.uri  = pathPictures + "/" + filename;
+            link.uri = pathPictures + "/" + filename;
             link.text = tr("Picture%1").arg(cntImages);
             link.type = "Garmin";
 
@@ -367,15 +367,15 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
 
         QList<CGisItemWpt::image_t> images;
         const QStringList& entries = dirCache.entryList(QStringList("*.jpg"), QDir::Files);
-        for(const QString &file : entries)
+        for(const QString& file : entries)
         {
             CGisItemWpt::image_t image;
             image.pixmap.load(dirCache.absoluteFilePath(file));
 
             if(!image.pixmap.isNull())
             {
-                image.fileName  = file;
-                image.info      = QFileInfo(file).completeBaseName();
+                image.fileName = file;
+                image.info = QFileInfo(file).completeBaseName();
                 images << image;
             }
         }
@@ -411,18 +411,18 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
     }
 }
 
-void CDeviceGarmin::startSavingProject(IGisProject * project)
+void CDeviceGarmin::startSavingProject(IGisProject* project)
 {
     cntImages = 0;
 }
 
-void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
+void CDeviceGarmin::aboutToRemoveProject(IGisProject* project)
 {
     // remove images attached to project
     const QString& key = project->getKey();
     const QDir dirImages(dir.absoluteFilePath(pathPictures));
     const QStringList& entries = dirImages.entryList(QStringList("*.jpg"), QDir::Files);
-    for(const QString &entry : entries)
+    for(const QString& entry : entries)
     {
         QString filename = dirImages.absoluteFilePath(entry);
         QFileInfo fi(filename);
@@ -437,7 +437,7 @@ void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
     const int N = project->childCount();
     for(int n = 0; n < N; n++)
     {
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->child(n));
+        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(project->child(n));
         if(wpt && wpt->isGeocache())
         {
             QString name = wpt->getName();

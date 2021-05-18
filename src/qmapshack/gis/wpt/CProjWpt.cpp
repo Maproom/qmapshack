@@ -27,7 +27,7 @@
 
 #include <QtWidgets>
 
-CProjWpt::CProjWpt(CGisItemWpt& wpt, QWidget *parent)
+CProjWpt::CProjWpt(CGisItemWpt& wpt, QWidget* parent)
     : QDialog(parent)
     , wpt(wpt)
 {
@@ -44,7 +44,7 @@ CProjWpt::CProjWpt(CGisItemWpt& wpt, QWidget *parent)
     labelDistUnit->setText(unit);
 
     connect(labelName, &QLabel::linkActivated, this, &CProjWpt::slotChangeName);
-    connect(toolIcon,  &QToolButton::clicked,  this, &CProjWpt::slotChangeIcon);
+    connect(toolIcon, &QToolButton::clicked, this, &CProjWpt::slotChangeIcon);
 }
 
 CProjWpt::~CProjWpt()
@@ -84,7 +84,7 @@ void CProjWpt::accept()
         return;
     }
 
-    IGisProject *project = dynamic_cast<IGisProject*>(wpt.parent());
+    IGisProject* project = dynamic_cast<IGisProject*>(wpt.parent());
     if(nullptr == project)
     {
         return;
@@ -93,7 +93,7 @@ void CProjWpt::accept()
     QPointF pos = wpt.getPosition() * DEG_TO_RAD;
     pos = GPS_Math_Wpt_Projection(pos, dist, bearing * DEG_TO_RAD) * RAD_TO_DEG;
 
-    CGisItemWpt * newWpt = new CGisItemWpt(pos, wpt, project);
+    CGisItemWpt* newWpt = new CGisItemWpt(pos, wpt, project);
 
     if(name != newWpt->getName())
     {

@@ -49,9 +49,9 @@ protected:
     /// a queue with all tile urls to request
     QQueue<QString> urlQueue;
     /// the tile cache
-    CDiskCache * diskCache = nullptr;
+    CDiskCache* diskCache = nullptr;
     /// access manager to request tiles
-    QNetworkAccessManager * accessManager = nullptr;
+    QNetworkAccessManager* accessManager = nullptr;
     QList<QString> urlPending;
 
 
@@ -59,12 +59,12 @@ protected:
     QTime timeLastUpdate;
     QString name;
 
-    static bool httpsCheck(const QString &url);
+    static bool httpsCheck(const QString& url);
 
-    void registerHeaderItem(const QString &name, const QString &value)
+    void registerHeaderItem(const QString& name, const QString& value)
     {
         struct rawHeaderItem_t item;
-        item.name  = name;
+        item.name = name;
         item.value = value;
         rawHeaderItems << item;
     }
@@ -76,7 +76,7 @@ public:
     void slotRequestFinished(QNetworkReply* reply);
 
 
-    IMapOnline(CMapDraw * parent);
+    IMapOnline(CMapDraw* parent);
     virtual ~IMapOnline() {}
 };
 

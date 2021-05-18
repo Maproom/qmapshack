@@ -87,7 +87,7 @@ public:
 
     void addMapList(CMapList* list, const QString& name);
     void addDemList(CDemList* list, const QString& name);
-    void addPoiList(CPoiList * list, const QString &name);
+    void addPoiList(CPoiList* list, const QString& name);
     void addWidgetToTab(QWidget* w);
 
     bool isScaleVisible()  const;
@@ -141,7 +141,7 @@ public:
         return actionSetupDEMPaths;
     }
 
-    QAction * getPoiSetupAction()
+    QAction* getPoiSetupAction()
     {
         return actionSetupPOIPaths;
     }

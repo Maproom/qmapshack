@@ -31,16 +31,16 @@ public:
     virtual ~CToolGrid() = default;
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
-    void mousePressEventFx(QMouseEvent *e) override;
-    void mouseMoveEventFx(QMouseEvent *e) override;
-    void mouseReleaseEventFx(QMouseEvent *e) override;
-    void wheelEventFx(QWheelEvent *e) override;
-    void leaveEventFx(QEvent *e) override;
+    void mousePressEventFx(QMouseEvent* e) override;
+    void mouseMoveEventFx(QMouseEvent* e) override;
+    void mouseReleaseEventFx(QMouseEvent* e) override;
+    void wheelEventFx(QWheelEvent* e) override;
+    void leaveEventFx(QEvent* e) override;
     QCursor getCursorFx() override;
 
     void setupChanged() override {}
 
-    void registerItem(CItemRefMap * item);
+    void registerItem(CItemRefMap* item);
 
 private slots:
     void slotOk();
@@ -48,9 +48,9 @@ private slots:
 
 private:
     friend class CMainWindow;
-    CToolGrid(QWidget * parent);
+    CToolGrid(QWidget* parent);
 
-    CItemRefMap * item = nullptr;
+    CItemRefMap* item = nullptr;
 };
 
 #endif //CTOOLGRID_H

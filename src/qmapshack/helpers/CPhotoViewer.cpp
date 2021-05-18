@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CPhotoViewer::CPhotoViewer(QList<CGisItemWpt::image_t> &images, int idx, QWidget *parent)
+CPhotoViewer::CPhotoViewer(QList<CGisItemWpt::image_t>& images, int idx, QWidget* parent)
     : QDialog(parent)
     , images(images)
     , idx(idx)
@@ -36,7 +36,7 @@ CPhotoViewer::CPhotoViewer(QList<CGisItemWpt::image_t> &images, int idx, QWidget
     // check if showMaximized() worked correctly by comparing our size with the MainWindow's size
     // if showMaximized() failed we change our size (manually) to match the MainWindow's size
     // this is hack, but does its job on px i3-wm
-    QMainWindow &main = CMainWindow::self();
+    QMainWindow& main = CMainWindow::self();
     if(width() < main.width() && height() < main.height())
     {
         qDebug() << "showMaximized() failed, using MainWindow.frameGeometry()";
@@ -54,7 +54,7 @@ CPhotoViewer::~CPhotoViewer()
 }
 
 
-void CPhotoViewer::resizeEvent(QResizeEvent * e)
+void CPhotoViewer::resizeEvent(QResizeEvent* e)
 {
     QDialog::resizeEvent(e);
     setImageAtIdx(idx);
@@ -64,15 +64,15 @@ void CPhotoViewer::resizeEvent(QResizeEvent * e)
 void CPhotoViewer::setImageAtIdx(int i)
 {
     const QRect& rectScreen = rect();
-    const QPoint& center    = rectScreen.center();
-    QImage& pixmap          = images[i].pixmap;
+    const QPoint& center = rectScreen.center();
+    QImage& pixmap = images[i].pixmap;
 
     if(!images[i].filePath.isEmpty())
     {
         pixmap = QImage(images[i].filePath);
     }
 
-    double width  = rectScreen.width() - 64;
+    double width = rectScreen.width() - 64;
     double height = rectScreen.height() - 64;
 
     if(pixmap.width() > width || pixmap.height() > height)
@@ -109,7 +109,7 @@ void CPhotoViewer::setImageAtIdx(int i)
 }
 
 
-void CPhotoViewer::paintEvent(QPaintEvent * e)
+void CPhotoViewer::paintEvent(QPaintEvent* e)
 {
     QDialog::paintEvent(e);
 
@@ -158,9 +158,9 @@ void CPhotoViewer::tryIdxStep(int delta)
 }
 
 
-void CPhotoViewer::mousePressEvent(QMouseEvent * e)
+void CPhotoViewer::mousePressEvent(QMouseEvent* e)
 {
-    QPoint pos  = e->pos();
+    QPoint pos = e->pos();
 
     if(rectClose.contains(pos))
     {
@@ -182,7 +182,7 @@ void CPhotoViewer::mousePressEvent(QMouseEvent * e)
     e->accept();
 }
 
-void CPhotoViewer::keyPressEvent(QKeyEvent *e)
+void CPhotoViewer::keyPressEvent(QKeyEvent* e)
 {
     switch(e->key())
     {

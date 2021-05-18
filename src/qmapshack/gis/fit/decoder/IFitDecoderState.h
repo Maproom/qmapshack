@@ -57,14 +57,14 @@ public:
         QList<CFitFieldProfile> devFieldProfiles;
     };
 
-    IFitDecoderState(shared_state_data_t &data) : data(data) { }
+    IFitDecoderState(shared_state_data_t& data) : data(data) { }
     virtual ~IFitDecoderState() {}
 
     virtual void reset() = 0;
-    decode_state_e processByte(quint8 &dataByte);
+    decode_state_e processByte(quint8& dataByte);
 
 protected:
-    virtual decode_state_e process(quint8 &dataByte) = 0;
+    virtual decode_state_e process(quint8& dataByte) = 0;
 
     CFitMessage* latestMessage() const { return data.lastMessage; }
     void addMessage(const CFitDefinitionMessage& definition);
@@ -76,15 +76,15 @@ protected:
 
     CFitDefinitionMessage* latestDefinition() const { return data.lastDefinition; }
     CFitDefinitionMessage* definition(quint32 localMessageType);
-    void addDefinition(const CFitDefinitionMessage &definition);
+    void addDefinition(const CFitDefinitionMessage& definition);
     void endDefinition();
 
     void setTimestamp(quint32 fullTimestamp);
     void setTimestampOffset(quint32 offsetTimestamp);
     quint32 getTimestamp() const { return data.timestamp; }
     quint16 getCrc() const { return data.crc; }
-    void addDevFieldProfile(const CFitFieldProfile &fieldProfile);
-    CFitFieldProfile* devFieldProfile(const QPair<quint8,quint8> &devProfileId);
+    void addDevFieldProfile(const CFitFieldProfile& fieldProfile);
+    CFitFieldProfile* devFieldProfile(const QPair<quint8, quint8>& devProfileId);
     /// Delete local developer profiles with the developer data index devDataIdx
     void clearDevFieldProfiles(quint8 devDataIdx);
 
@@ -92,7 +92,7 @@ protected:
 private:
     void buildCrc(quint8 byte);
 
-    shared_state_data_t &data;
+    shared_state_data_t& data;
 };
 
 #endif // CFITSTATE_H

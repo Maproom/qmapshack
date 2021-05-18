@@ -35,7 +35,7 @@ class CGeoSearch : public QObject, public IGisProject
 {
     Q_OBJECT
 public:
-    CGeoSearch(CGisListWks * parent);
+    CGeoSearch(CGisListWks* parent);
     virtual ~CGeoSearch();
 
     bool skipSave() const override
@@ -55,7 +55,7 @@ private slots:
     void slotResetResults();
 
 private:
-    QAction *addService(CGeoSearchConfig::service_e service, const QString &name, QMenu *menu);
+    QAction* addService(CGeoSearchConfig::service_e service, const QString& name, QMenu* menu);
     void requestNominatim(QString& addr) const;
     void requestGeonamesSearch(QString& addr) const;
     void requestGeonamesAddress(QString& addr) const;
@@ -70,11 +70,11 @@ private:
 
     void setIcon();
 
-    QLineEdit * edit;
-    QAction * actSymbol;
+    QLineEdit* edit;
+    QAction* actSymbol;
     QNetworkAccessManager* networkAccessManager;
     CGeoSearchConfig* searchConfig;
-    QTreeWidgetItem * itemStatus = nullptr;
+    QTreeWidgetItem* itemStatus = nullptr;
 };
 
 #endif //CSEARCHGOOGLE_H

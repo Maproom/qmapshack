@@ -28,18 +28,18 @@ class IToolGui : public QWidget
 {
     Q_OBJECT
 public:
-    IToolGui(QWidget * parent);
+    IToolGui(QWidget* parent);
     virtual ~IToolGui() = default;
 
 
 protected:
-    virtual void start(CItemListWidget * itemList, bool allFiles);
-    virtual void start(CItemTreeWidget * itemTree);
+    virtual void start(CItemListWidget* itemList, bool allFiles);
+    virtual void start(CItemTreeWidget* itemTree);
     virtual bool finished(qint32 id);
-    virtual void buildCmd(QList<CShellCmd>& cmds, const IItem * iitem) = 0;
+    virtual void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) = 0;
     virtual void buildCmdFinal(QList<CShellCmd>& cmds){}
 
-    QString createTempFile(const QString &ext);
+    QString createTempFile(const QString& ext);
     qint32 jobId = 0;
     QList<QTemporaryFile*> tmpFiles;
 };

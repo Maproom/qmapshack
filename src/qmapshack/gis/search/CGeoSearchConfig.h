@@ -50,7 +50,7 @@ private:
     CGeoSearchConfig(QObject* parent);
     void emitChanged();
 
-    static CGeoSearchConfig * pSelf;
+    static CGeoSearchConfig* pSelf;
 
     service_e currentService;
     QString googleApiKey;

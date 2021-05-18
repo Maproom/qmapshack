@@ -26,7 +26,7 @@ class CFadingIcon : public QLabel
 {
     Q_OBJECT
 public:
-    CFadingIcon(const QPoint &pt, const QString& resource, QWidget * parent);
+    CFadingIcon(const QPoint& pt, const QString& resource, QWidget* parent);
     virtual ~CFadingIcon();
 
 private slots:

@@ -32,7 +32,7 @@ struct wpt_head_entry_t
 
 QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
 {
-    QIODevice * dev = s.device();
+    QIODevice* dev = s.device();
     qint64 pos = dev->pos();
 
     char magic[9];
@@ -358,7 +358,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
 }
 
 
-CQlgtWpt::CQlgtWpt(quint64 id, QObject *parent)
+CQlgtWpt::CQlgtWpt(quint64 id, QObject* parent)
     : QObject(parent)
     , IItem(id)
 {

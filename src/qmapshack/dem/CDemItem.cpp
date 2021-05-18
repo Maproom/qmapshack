@@ -26,7 +26,7 @@
 
 QMutex CDemItem::mutexActiveDems(QMutex::Recursive);
 
-CDemItem::CDemItem(QTreeWidget * parent, CDemDraw *dem)
+CDemItem::CDemItem(QTreeWidget* parent, CDemDraw* dem)
     : QTreeWidgetItem(parent)
     , dem(dem)
 {
@@ -65,9 +65,9 @@ void CDemItem::showChildren(bool yes)
 {
     if(yes && !demfile.isNull())
     {
-        QTreeWidget * tw = treeWidget();
+        QTreeWidget* tw = treeWidget();
 
-        QTreeWidgetItem * item = new QTreeWidgetItem(this);
+        QTreeWidgetItem* item = new QTreeWidgetItem(this);
         item->setFlags(Qt::ItemIsEnabled);
         tw->setItemWidget(item, 0, demfile->getSetup());
     }
@@ -193,7 +193,7 @@ bool CDemItem::activate()
 
 void CDemItem::moveToTop()
 {
-    QTreeWidget * w = treeWidget();
+    QTreeWidget* w = treeWidget();
     QMutexLocker lock(&mutexActiveDems);
 
     w->takeTopLevelItem(w->indexOfTopLevelItem(this));
@@ -206,13 +206,13 @@ void CDemItem::moveToTop()
 void CDemItem::moveToBottom()
 {
     int row;
-    QTreeWidget * w = treeWidget();
+    QTreeWidget* w = treeWidget();
     QMutexLocker lock(&mutexActiveDems);
 
     w->takeTopLevelItem(w->indexOfTopLevelItem(this));
     for(row = 0; row < w->topLevelItemCount(); row++)
     {
-        CDemItem * item = dynamic_cast<CDemItem*>(w->topLevelItem(row));
+        CDemItem* item = dynamic_cast<CDemItem*>(w->topLevelItem(row));
         if(item && item->demfile.isNull())
         {
             break;

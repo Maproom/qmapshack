@@ -28,12 +28,12 @@ class CDetailsOvlArea : public QDialog, private Ui::IDetailsOvlArea
 {
     Q_OBJECT
 public:
-    CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent);
+    CDetailsOvlArea(CGisItemOvlArea& area, QWidget* parent);
     virtual ~CDetailsOvlArea();
 
 private slots:
     void slotSetColor(int idx);
-    void slotNameChanged(const QString &name);
+    void slotNameChanged(const QString& name);
     void slotNameChangeFinished();
     void slotSetWidth(int idx);
     void slotSetStyle(int idx);

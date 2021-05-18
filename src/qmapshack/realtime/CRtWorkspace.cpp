@@ -24,9 +24,9 @@
 
 #include <QtWidgets>
 
-CRtWorkspace * CRtWorkspace::pSelf = nullptr;
+CRtWorkspace* CRtWorkspace::pSelf = nullptr;
 
-CRtWorkspace::CRtWorkspace(QWidget *parent)
+CRtWorkspace::CRtWorkspace(QWidget* parent)
     : QWidget(parent)
 {
     pSelf = this;
@@ -50,7 +50,7 @@ CRtWorkspace::CRtWorkspace(QWidget *parent)
     for(int n = 0; n < N; n++)
     {
         cfg.beginGroup(QString("source%1").arg(n));
-        IRtSource * source = IRtSource::create(cfg.value("type", IRtSource::eTypeNone).toInt(), treeWidget);
+        IRtSource* source = IRtSource::create(cfg.value("type", IRtSource::eTypeNone).toInt(), treeWidget);
         if(source != nullptr)
         {
             connect(source, &IRtSource::sigChanged, this, &CRtWorkspace::sigChanged);
@@ -79,7 +79,7 @@ CRtWorkspace::~CRtWorkspace()
     cfg.setValue("numberOfSources", N);
     for(int n = 0; n < N; n++)
     {
-        IRtSource * source = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
+        IRtSource* source = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
         if(source == nullptr)
         {
             continue;
@@ -93,7 +93,7 @@ CRtWorkspace::~CRtWorkspace()
     cfg.endGroup();
 }
 
-void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt) const
+void CRtWorkspace::draw(QPainter& p, const QPolygonF& viewport, CRtDraw* rt) const
 {
     QMutexLocker lock(&IRtSource::mutex);
     QList<QRectF> blockedAreas;
@@ -101,7 +101,7 @@ void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt) con
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        IRtSource * item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
+        IRtSource* item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
         if(item == nullptr)
         {
             continue;
@@ -111,13 +111,13 @@ void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt) con
     }
 }
 
-void CRtWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) const
+void CRtWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) const
 {
     QMutexLocker lock(&IRtSource::mutex);
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        IRtSource * item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
+        IRtSource* item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
         if(item == nullptr)
         {
             continue;
@@ -127,7 +127,7 @@ void CRtWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) co
     }
 }
 
-void CRtWorkspace::addSource(IRtSource * source)
+void CRtWorkspace::addSource(IRtSource* source)
 {
     QMutexLocker lock(&IRtSource::mutex);
     treeWidget->insertTopLevelItem(treeWidget->topLevelItemCount(), source);
@@ -143,7 +143,7 @@ bool CRtWorkspace::hasSourceOfType(int type) const
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        IRtSource * item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
+        IRtSource* item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
         if(item == nullptr)
         {
             continue;
@@ -164,7 +164,7 @@ void CRtWorkspace::mouseMove(const QPointF& pos)
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        IRtSource * item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
+        IRtSource* item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
         if(item == nullptr)
         {
             continue;
@@ -173,13 +173,13 @@ void CRtWorkspace::mouseMove(const QPointF& pos)
     }
 }
 
-void CRtWorkspace::slotItemChanged(QTreeWidgetItem * item, int column)
+void CRtWorkspace::slotItemChanged(QTreeWidgetItem* item, int column)
 {
     QMutexLocker lock(&IRtSource::mutex);
 
     if(column == IRtSource::eColumnCheckBox)
     {
-        IRtSource * source = dynamic_cast<IRtSource*>(item);
+        IRtSource* source = dynamic_cast<IRtSource*>(item);
         if(source != nullptr)
         {
             source->blockSignals(source->checkState(IRtSource::eColumnCheckBox) == Qt::Unchecked);
@@ -192,11 +192,11 @@ void CRtWorkspace::slotItemChanged(QTreeWidgetItem * item, int column)
 void CRtWorkspace::slotContextMenu(const QPoint& point)
 {
     actionDeleteSource->setEnabled(false);
-    QTreeWidgetItem * item = treeWidget->currentItem();
+    QTreeWidgetItem* item = treeWidget->currentItem();
 
     if(item != nullptr)
     {
-        IRtSource * source = dynamic_cast<IRtSource*>(item);
+        IRtSource* source = dynamic_cast<IRtSource*>(item);
         if(source != nullptr)
         {
             actionDeleteSource->setEnabled(true);
@@ -204,11 +204,11 @@ void CRtWorkspace::slotContextMenu(const QPoint& point)
         }
         else
         {
-            QTreeWidgetItem * child = item;
+            QTreeWidgetItem* child = item;
             item = item->parent();
             while(item != nullptr)
             {
-                IRtSource * source = dynamic_cast<IRtSource*>(item);
+                IRtSource* source = dynamic_cast<IRtSource*>(item);
                 if(source != nullptr)
                 {
                     source->contextMenuChild(child, menu);
@@ -223,24 +223,24 @@ void CRtWorkspace::slotContextMenu(const QPoint& point)
     menu->exec(p);
 }
 
-void CRtWorkspace::slotItemClicked(QTreeWidgetItem * item, int column)
+void CRtWorkspace::slotItemClicked(QTreeWidgetItem* item, int column)
 {
     if(item == nullptr)
     {
         return;
     }
-    IRtSource * source = dynamic_cast<IRtSource*>(item);
+    IRtSource* source = dynamic_cast<IRtSource*>(item);
     if(source != nullptr)
     {
         source->itemClicked(column);
     }
     else
     {
-        QTreeWidgetItem * child = item;
+        QTreeWidgetItem* child = item;
         item = item->parent();
         while(item != nullptr)
         {
-            IRtSource * source = dynamic_cast<IRtSource*>(item);
+            IRtSource* source = dynamic_cast<IRtSource*>(item);
             if(source != nullptr)
             {
                 source->itemClicked(child, column);
@@ -267,7 +267,7 @@ void CRtWorkspace::slotDeleteSource()
 
     QMutexLocker lock(&IRtSource::mutex);
 
-    IRtSource * source = dynamic_cast<IRtSource*>(treeWidget->currentItem());
+    IRtSource* source = dynamic_cast<IRtSource*>(treeWidget->currentItem());
     if(source == nullptr)
     {
         return;

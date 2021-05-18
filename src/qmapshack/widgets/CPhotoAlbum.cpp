@@ -22,12 +22,12 @@
 
 #include <QtWidgets>
 
-CPhotoAlbum::CPhotoAlbum(QWidget *parent)
+CPhotoAlbum::CPhotoAlbum(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
     setFocusPolicy(Qt::WheelFocus);
-    connect(toolLeft,  &QToolButton::clicked, this, &CPhotoAlbum::slotLeft);
+    connect(toolLeft, &QToolButton::clicked, this, &CPhotoAlbum::slotLeft);
     connect(toolRight, &QToolButton::clicked, this, &CPhotoAlbum::slotRight);
 }
 
@@ -35,14 +35,14 @@ CPhotoAlbum::~CPhotoAlbum()
 {
 }
 
-void CPhotoAlbum::resizeEvent(QResizeEvent * e)
+void CPhotoAlbum::resizeEvent(QResizeEvent* e)
 {
     QWidget::resizeEvent(e);
     updateView();
 }
 
 
-void CPhotoAlbum::mouseReleaseEvent(QMouseEvent * e)
+void CPhotoAlbum::mouseReleaseEvent(QMouseEvent* e)
 {
     CPhotoViewer dlg(images, 0, this);
     dlg.exec();
@@ -56,8 +56,8 @@ void CPhotoAlbum::reload(const QList<CGisItemWpt::image_t>& imgs)
 
     if(idxSelected >= images.size())
     {
-        idx1stVisible   = 0;
-        idxSelected     = 0;
+        idx1stVisible = 0;
+        idxSelected = 0;
     }
 
     updateView();
@@ -66,8 +66,8 @@ void CPhotoAlbum::reload(const QList<CGisItemWpt::image_t>& imgs)
 void CPhotoAlbum::slotAddImage()
 {
     SETTINGS;
-    QString path          = cfg.value("Paths/lastWptImagePath", QDir::homePath()).toString();
-    QString filters       = "All Files (*);; All Images (*.png *.jpg);; PNG Image (*.png);; JPEG Image (*.jpg)";
+    QString path = cfg.value("Paths/lastWptImagePath", QDir::homePath()).toString();
+    QString filters = "All Files (*);; All Images (*.png *.jpg);; PNG Image (*.png);; JPEG Image (*.jpg)";
     QString defaultFilter = "All Images (*.png *.jpg)";
 
     const QStringList& filenames = QFileDialog::getOpenFileNames(this, tr("Select images..."), path, filters, &defaultFilter);
@@ -75,7 +75,7 @@ void CPhotoAlbum::slotAddImage()
     {
         return;
     }
-    for(const QString &filename : filenames)
+    for(const QString& filename : filenames)
     {
         CGisItemWpt::image_t image;
         image.fileName = filename;
@@ -87,12 +87,12 @@ void CPhotoAlbum::slotAddImage()
             if(w < h)
             {
                 h *= 400.0 / w;
-                w  = 400;
+                w = 400;
             }
             else
             {
                 h *= 600.0 / w;
-                w  = 600;
+                w = 600;
             }
             image.pixmap = image.pixmap.scaled(w, h, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
@@ -179,14 +179,14 @@ void CPhotoAlbum::updateView()
     {
         CGisItemWpt::image_t& image = images[i];
 
-        QImage tmp  = image.pixmap.scaledToHeight(label->height(), Qt::SmoothTransformation);
+        QImage tmp = image.pixmap.scaledToHeight(label->height(), Qt::SmoothTransformation);
 
         if(tmp.width() > label->width())
         {
-            tmp  = image.pixmap.scaledToWidth(label->width(), Qt::SmoothTransformation);
+            tmp = image.pixmap.scaledToWidth(label->width(), Qt::SmoothTransformation);
         }
 
-        QRect r     = tmp.rect();
+        QRect r = tmp.rect();
 
         int yoff = (height() - r.height()) / 2;
 

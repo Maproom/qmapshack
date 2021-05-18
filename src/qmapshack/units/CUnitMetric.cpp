@@ -18,7 +18,7 @@
 **********************************************************************************************/
 #include "units/CUnitMetric.h"
 
-CUnitMetric::CUnitMetric(QObject * parent)
+CUnitMetric::CUnitMetric(QObject* parent)
     : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, "m", 1.0, parent)
 {
 }
@@ -28,7 +28,7 @@ void CUnitMetric::meter2distance(qreal meter, QString& val, QString& unit) const
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit.clear();
     }
     else if(meter < 10)
@@ -62,7 +62,7 @@ void CUnitMetric::meter2distance(qreal meter, qreal& val, QString& unit) const /
 {
     if(meter == NOFLOAT)
     {
-        val  = NOFLOAT;
+        val = NOFLOAT;
         unit.clear();
     }
     else if(meter < 1000)
@@ -81,7 +81,7 @@ void CUnitMetric::meter2speed(qreal meter, QString& val, QString& unit) const /*
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit.clear();
     }
     else if (meter < 0.27)
@@ -105,7 +105,7 @@ void CUnitMetric::meter2speed(qreal meter, qreal& val, QString& unit) const /* o
 {
     if(meter == NOFLOAT)
     {
-        val  = NOFLOAT;
+        val = NOFLOAT;
         unit.clear();
     }
     else if (meter < 0.27)
@@ -124,7 +124,7 @@ void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit) const /* 
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit.clear();
     }
     else if(meter < 100000)
@@ -143,7 +143,7 @@ void CUnitMetric::meter2area(qreal meter, qreal& val, QString& unit) const /* ov
 {
     if(meter == NOFLOAT)
     {
-        val  = NOFLOAT;
+        val = NOFLOAT;
         unit.clear();
     }
     else if(meter < 100000)
@@ -163,16 +163,16 @@ qreal CUnitMetric::elevation2meter(const QString& val) const /* override */
     return val.toDouble();
 }
 
-void CUnitMetric::meter2unit(qreal meter, qreal& scale, QString&  unit) const
+void CUnitMetric::meter2unit(qreal meter, qreal& scale, QString& unit) const
 {
     if(meter > 1000)
     {
         scale = 0.001;
-        unit  = "km";
+        unit = "km";
     }
     else
     {
         scale = 1.0;
-        unit  = "m";
+        unit = "m";
     }
 }

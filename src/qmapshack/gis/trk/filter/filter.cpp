@@ -34,9 +34,9 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     QVector<pointDP> line;
     bool nothingDone = true;
 
-    for(const CTrackData::trkpt_t &pt : trk)
+    for(const CTrackData::trkpt_t& pt : trk)
     {
-        pointDP dp(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD, pt.ele);
+        pointDP dp(pt.lon* DEG_TO_RAD, pt.lat* DEG_TO_RAD, pt.ele);
         dp.used = !pt.isHidden();
 
         line << dp;
@@ -141,7 +141,7 @@ void CGisItemTrk::filterDelete()
     for(CTrackData::trkseg_t& seg : trk.segs)
     {
         QVector<CTrackData::trkpt_t> pts;
-        for(const CTrackData::trkpt_t &pt : qAsConst(seg.pts))
+        for(const CTrackData::trkpt_t& pt : qAsConst(seg.pts))
         {
             if(pt.isHidden())
             {
@@ -169,7 +169,7 @@ void CGisItemTrk::filterSmoothProfile(int points)
     QVector<int> window(points, 0);
     QVector<int> ele1, ele2;
 
-    for(const CTrackData::trkpt_t &pt : trk)
+    for(const CTrackData::trkpt_t& pt : trk)
     {
         ele1 << pt.ele;
         ele2 << pt.ele;
@@ -204,7 +204,7 @@ void CGisItemTrk::filterSmoothProfile(int points)
 void CGisItemTrk::filterTerrainSlope()
 {
     QPolygonF line;
-    for(const CTrackData::trkpt_t &pt : trk)
+    for(const CTrackData::trkpt_t& pt : trk)
     {
         line << pt.radPoint();
     }
@@ -223,10 +223,10 @@ void CGisItemTrk::filterTerrainSlope()
     changed(tr("Added terrain slope from DEM file."), "://icons/48x48/CSrcSlope.png");
 }
 
-void CGisItemTrk::filterReplaceElevation(CCanvas * canvas)
+void CGisItemTrk::filterReplaceElevation(CCanvas* canvas)
 {
     QPolygonF line;
-    for(const CTrackData::trkpt_t &pt : trk)
+    for(const CTrackData::trkpt_t& pt : trk)
     {
         line << pt.radPoint();
     }
@@ -346,7 +346,7 @@ void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
         }
 
         timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
-        pt.time   = timestamp;
+        pt.time = timestamp;
     }
 
     deriveSecondaryData();
@@ -355,7 +355,7 @@ void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
     changed(tr("Changed speed to %1%2.").arg(val, unit), "://icons/48x48/Time.png");
 }
 
-void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType)
+void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t& cyclingType)
 {
     qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedFactor;
     qreal minSpeed = cyclingType.minSpeed / IUnit::self().speedFactor;
@@ -408,7 +408,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
         }
 
         timestamp = speed == 0 ? timestamp : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
-        pt.time   = timestamp;
+        pt.time = timestamp;
     }
 
     deriveSecondaryData();
@@ -417,7 +417,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
     changed(tr("Changed average moving cycling speed with profile '%3' to %1%2.").arg(val, unit, cyclingType.name), "://icons/48x48/Time.png");
 }
 
-void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
+void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t& hikingType)
 {
     if (!hikingType.isValid())
     {
@@ -471,7 +471,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
         qreal speed = 1 / formulaTerms[0] / 60 * 1000; // Transform from min/km to m/s
 
         timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
-        pt.time   = timestamp;
+        pt.time = timestamp;
     }
 
     deriveSecondaryData();
@@ -480,7 +480,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
     changed(tr("Changed average moving hiking speed with profile '%3' to %1%2.").arg(val, unit, hikingType.name), "://icons/48x48/Time.png");
 }
 
-void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const
+void CGisItemTrk::filterGetSlopeLimits(qreal& minSlope, qreal& maxSlope) const
 {
     const limits_t& limit = extrema["ql:slope"];
     minSlope = limit.min;
@@ -489,14 +489,14 @@ void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const
 
 void CGisItemTrk::filterSplitSegment()
 {
-    IGisProject * project = CGisWorkspace::self().selectProject(false);
+    IGisProject* project = CGisWorkspace::self().selectProject(false);
     if(nullptr == project)
     {
         return;
     }
 
     int part = 0;
-    for(const CTrackData::trkseg_t &seg : qAsConst(trk.segs))
+    for(const CTrackData::trkseg_t& seg : qAsConst(trk.segs))
     {
         if(0 < seg.pts.count())
         {
@@ -509,7 +509,7 @@ void CGisItemTrk::filterSplitSegment()
     }
 }
 
-void CGisItemTrk::filterDeleteExtension(const QString &extStr)
+void CGisItemTrk::filterDeleteExtension(const QString& extStr)
 {
     for(CTrackData::trkpt_t& pt : trk)
     {
@@ -520,7 +520,7 @@ void CGisItemTrk::filterDeleteExtension(const QString &extStr)
     existingExtensions.remove(extStr);
     propHandler->setupData();
 
-    const CKnownExtension &ext = CKnownExtension::get(extStr);
+    const CKnownExtension& ext = CKnownExtension::get(extStr);
     changed(tr("Removed extension %1 from all Track Points").arg(ext.nameLongText), "://icons/48x48/FilterModifyExtension.png");
 }
 
@@ -535,7 +535,7 @@ void CGisItemTrk::filterSubPt2Pt()
     changed(tr("Converted subpoints from routing to track points"), "://icons/48x48/FilterSubPt2Pt.png");
 }
 
-void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName)
+void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString& wptName)
 {
     if((idxNewStartPoint == 0) || (idxNewStartPoint >= cntVisiblePoints))
     {
@@ -584,7 +584,7 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
 
 void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
 {
-    IGisProject * project = CGisWorkspace::self().selectProject(false);
+    IGisProject* project = CGisWorkspace::self().selectProject(false);
     if(nullptr == project)
     {
         return;
@@ -670,7 +670,7 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
         }
         else
         {
-            const CTrackData::trkpt_t *prevVisiblePt = trk.getTrkPtByVisibleIndex(pt.idxVisible - 1);
+            const CTrackData::trkpt_t* prevVisiblePt = trk.getTrkPtByVisibleIndex(pt.idxVisible - 1);
             qreal d = pt.distance - prevVisiblePt->distance; // "distance" field of trackpoints includes visible points only
 
             if (d < distance) // "distance" defines the threshold at which knots are detected: knot starts when

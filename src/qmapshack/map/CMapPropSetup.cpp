@@ -26,33 +26,33 @@
 #include <QtWidgets>
 QPointF CMapPropSetup::scale;
 
-CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
+CMapPropSetup::CMapPropSetup(IMap* mapfile, CMapDraw* map)
     : IMapProp(mapfile, map)
 {
     setupUi(this);
 
     CMapPropSetup::slotPropertiesChanged();
 
-    connect(sliderOpacity,       &QSlider::valueChanged,     mapfile, &IMap::slotSetOpacity);
-    connect(sliderOpacity,       &QSlider::valueChanged,     map,     &CMapDraw::emitSigCanvasUpdate);
-    connect(map,                 &CMapDraw::sigScaleChanged, this,    &CMapPropSetup::slotScaleChanged);
-    connect(toolSetMinScale,     &QToolButton::toggled,      this,    &CMapPropSetup::slotSetMinScale);
-    connect(toolSetMaxScale,     &QToolButton::toggled,      this,    &CMapPropSetup::slotSetMaxScale);
+    connect(sliderOpacity, &QSlider::valueChanged, mapfile, &IMap::slotSetOpacity);
+    connect(sliderOpacity, &QSlider::valueChanged, map, &CMapDraw::emitSigCanvasUpdate);
+    connect(map, &CMapDraw::sigScaleChanged, this, &CMapPropSetup::slotScaleChanged);
+    connect(toolSetMinScale, &QToolButton::toggled, this, &CMapPropSetup::slotSetMinScale);
+    connect(toolSetMaxScale, &QToolButton::toggled, this, &CMapPropSetup::slotSetMaxScale);
 
-    connect(checkPolygons,       &QCheckBox::toggled,        mapfile, &IMap::slotSetShowPolygons);
-    connect(checkPolylines,      &QCheckBox::toggled,        mapfile, &IMap::slotSetShowPolylines);
-    connect(checkPoints,         &QCheckBox::toggled,        mapfile, &IMap::slotSetShowPOIs);
-    connect(spinAdjustDetails,   static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), mapfile, &IMap::slotSetAdjustDetailLevel);
-    connect(checkPolygons,       &QCheckBox::clicked,        map,     &CMapDraw::emitSigCanvasUpdate);
-    connect(checkPolylines,      &QCheckBox::clicked,        map,     &CMapDraw::emitSigCanvasUpdate);
-    connect(checkPoints,         &QCheckBox::clicked,        map,     &CMapDraw::emitSigCanvasUpdate);
-    connect(spinAdjustDetails,   static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), map, &CMapDraw::emitSigCanvasUpdate);
+    connect(checkPolygons, &QCheckBox::toggled, mapfile, &IMap::slotSetShowPolygons);
+    connect(checkPolylines, &QCheckBox::toggled, mapfile, &IMap::slotSetShowPolylines);
+    connect(checkPoints, &QCheckBox::toggled, mapfile, &IMap::slotSetShowPOIs);
+    connect(spinAdjustDetails, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), mapfile, &IMap::slotSetAdjustDetailLevel);
+    connect(checkPolygons, &QCheckBox::clicked, map, &CMapDraw::emitSigCanvasUpdate);
+    connect(checkPolylines, &QCheckBox::clicked, map, &CMapDraw::emitSigCanvasUpdate);
+    connect(checkPoints, &QCheckBox::clicked, map, &CMapDraw::emitSigCanvasUpdate);
+    connect(spinAdjustDetails, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), map, &CMapDraw::emitSigCanvasUpdate);
 
-    connect(spinCacheSize,       static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheSize);
+    connect(spinCacheSize, static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheSize);
     connect(spinCacheExpiration, static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheExpiration);
 
-    connect(toolOpenTypFile,    &QToolButton::pressed,      this,      &CMapPropSetup::slotLoadTypeFile);
-    connect(toolClearTypFile,   &QToolButton::pressed,      this,      &CMapPropSetup::slotClearTypeFile);
+    connect(toolOpenTypFile, &QToolButton::pressed, this, &CMapPropSetup::slotLoadTypeFile);
+    connect(toolClearTypFile, &QToolButton::pressed, this, &CMapPropSetup::slotClearTypeFile);
 
     frameVectorItems->setVisible( mapfile->hasFeatureVectorItems() );
     frameTileCache->setVisible( mapfile->hasFeatureTileCache() );

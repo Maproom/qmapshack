@@ -21,7 +21,7 @@
 
 QSet<CValue*> CValue::allValues;
 
-CValue::CValue(const QString& cfgTag, const QVariant &initDefault, fMarkChanged markChanged, fValueOnChange onChange)
+CValue::CValue(const QString& cfgTag, const QVariant& initDefault, fMarkChanged markChanged, fValueOnChange onChange)
     : cfgTag(cfgTag)
     , initDefault(initDefault)
     , valUser(initDefault)
@@ -83,7 +83,7 @@ const QVariant& CValue::operator=(const QVariant& v)
         SETTINGS;
         cfg.setValue(cfgTag, v);
 
-        for(CValue * value : qAsConst(allValues))
+        for(CValue* value : qAsConst(allValues))
         {
             if(value != this)
             {
@@ -105,7 +105,7 @@ const QVariant& CValue::operator=(const QVariant& v)
 }
 
 
-void CValue::updateSys(const QString& tag, const QVariant &val)
+void CValue::updateSys(const QString& tag, const QVariant& val)
 {
     if((mode == eModeSys) && (tag == cfgTag) && (funcOnChange != nullptr))
     {

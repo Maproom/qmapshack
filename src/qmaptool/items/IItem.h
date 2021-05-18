@@ -62,10 +62,10 @@ public:
     virtual void toFront(){}
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
-    void mousePressEventFx(QMouseEvent *e) override;
-    void mouseMoveEventFx(QMouseEvent *e) override;
-    void mouseReleaseEventFx(QMouseEvent *e) override;
-    void wheelEventFx(QWheelEvent *e) override;
+    void mousePressEventFx(QMouseEvent* e) override;
+    void mouseMoveEventFx(QMouseEvent* e) override;
+    void mouseReleaseEventFx(QMouseEvent* e) override;
+    void wheelEventFx(QWheelEvent* e) override;
 
     virtual bool isOk() const
     {
@@ -77,12 +77,12 @@ signals:
 
 protected:
     QString filename;
-    IDrawContext * drawContext = nullptr;
+    IDrawContext* drawContext = nullptr;
 
     /// true while left mouse button is pressed down
     bool mapIsMoving = false;
     /// true if map actually moved, if not it's a single click
-    bool mapDidMove  = false;
+    bool mapDidMove = false;
 
     /// last mouse position
     QPoint lastPos;

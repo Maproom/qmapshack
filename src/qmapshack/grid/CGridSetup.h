@@ -29,7 +29,7 @@ class CGridSetup : public QDialog, private Ui::IGridSetup
 {
     Q_OBJECT
 public:
-    CGridSetup(CGrid * grid, CMapDraw *map);
+    CGridSetup(CGrid* grid, CMapDraw* map);
     virtual ~CGridSetup();
 
 public slots:
@@ -42,8 +42,8 @@ private slots:
     void slotProjFromMap();
 
 private:
-    CGrid * grid;
-    CMapDraw * map;
+    CGrid* grid;
+    CMapDraw* map;
 };
 
 #endif //CGRIDSETUP_H

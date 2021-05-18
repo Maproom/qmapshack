@@ -26,7 +26,7 @@ class CScrOptRangeLine : public IScrOpt, public Ui::IScrOptRangeLine
 {
     Q_OBJECT
 public:
-    CScrOptRangeLine(const QPointF &point, IMouse *mouse, QWidget *parent);
+    CScrOptRangeLine(const QPointF& point, IMouse* mouse, QWidget* parent);
     virtual ~CScrOptRangeLine();
 
     void draw(QPainter& p) override;

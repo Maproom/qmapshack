@@ -34,8 +34,8 @@ public:
 
     virtual ~CGisDatabase();
 
-    void postEventForDb(QEvent * event);
-    void sendEventForDb(QEvent * event);
+    void postEventForDb(QEvent* event);
+    void sendEventForDb(QEvent* event);
 
     void createDatabase();
 
@@ -44,9 +44,9 @@ private slots:
 
 private:
     friend class CMainWindow;
-    CGisDatabase(QWidget * parent);
+    CGisDatabase(QWidget* parent);
 
-    static CGisDatabase * pSelf;
+    static CGisDatabase* pSelf;
 };
 
 #endif //CGISDATABASE_H

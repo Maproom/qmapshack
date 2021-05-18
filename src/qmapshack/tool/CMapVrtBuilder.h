@@ -29,7 +29,7 @@ class CMapVrtBuilder : public IToolShell, private Ui::IMapVrtBuilder
 {
     Q_OBJECT
 public:
-    CMapVrtBuilder(QWidget * parent);
+    CMapVrtBuilder(QWidget* parent);
     virtual ~CMapVrtBuilder();
 
 private slots:
@@ -43,7 +43,7 @@ private:
     void enableStartButton();
 
     bool last = false;
-    QTemporaryFile * tempFile;
+    QTemporaryFile* tempFile;
 };
 
 #endif //CMAPVRTBUILDER_H

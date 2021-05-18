@@ -28,7 +28,7 @@ class CDemTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 public:
-    CDemTreeWidget(QWidget * parent) : QTreeWidget(parent)
+    CDemTreeWidget(QWidget* parent) : QTreeWidget(parent)
     {
     }
 
@@ -36,8 +36,8 @@ signals:
     void sigChanged();
 
 protected:
-    void dragMoveEvent(QDragMoveEvent *event) override;
-    void dropEvent(QDropEvent     *event) override;
+    void dragMoveEvent(QDragMoveEvent* event) override;
+    void dropEvent(QDropEvent* event) override;
 };
 
 
@@ -47,12 +47,12 @@ class CDemList : public QWidget, private Ui::IDemsList
 {
     Q_OBJECT
 public:
-    CDemList(QWidget * parent);
+    CDemList(QWidget* parent);
     virtual ~CDemList();
 
     void clear();
     int count();
-    CDemItem * item(int i);
+    CDemItem* item(int i);
     operator QTreeWidget*()
     {
         return treeWidget;
@@ -73,11 +73,11 @@ private slots:
     void slotMoveUp();
     void slotMoveDown();
     void slotReloadDem();
-    void slotContextMenu(const QPoint &point);
+    void slotContextMenu(const QPoint& point);
     void slotFilter(const QString& str);
 
 private:
-    QMenu * menu;
+    QMenu* menu;
 };
 
 #endif //CDEMLIST_H

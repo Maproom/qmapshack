@@ -20,7 +20,7 @@
 #include "CMainWindow.h"
 #include "items/CItemFile.h"
 
-CItemFile::CItemFile(const QString &filename, QListWidget *parent)
+CItemFile::CItemFile(const QString& filename, QListWidget* parent)
     : IItem(filename)
     , QListWidgetItem(parent)
 {
@@ -33,5 +33,5 @@ CItemFile::CItemFile(const QString &filename, QListWidget *parent)
 void CItemFile::reload()
 {
     IItem::reload();
-    setToolTip(filename + "\n"  + drawContext->getInfo());
+    setToolTip(filename + "\n" + drawContext->getInfo());
 }

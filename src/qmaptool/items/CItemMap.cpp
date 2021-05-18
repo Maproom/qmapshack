@@ -25,7 +25,7 @@
 
 #include <QtWidgets>
 
-CItemMap::CItemMap(const QString &filename)
+CItemMap::CItemMap(const QString& filename)
     : CGdalFile(CGdalFile::eTypeProj)
     , IItem(filename)
 {
@@ -48,7 +48,7 @@ QPointF CItemMap::getScale() const
 void CItemMap::reload()
 {
     load(filename);
-    setToolTip(CItemTreeWidget::eColumnName, filename + "\n"  + getInfo());
+    setToolTip(CItemTreeWidget::eColumnName, filename + "\n" + getInfo());
 
     QFile f(filename);
     f.open(QIODevice::ReadOnly);
@@ -58,12 +58,12 @@ void CItemMap::reload()
     f.close();
 }
 
-void CItemMap::drawBoundingBox(QPainter& p, IDrawContext * dc)
+void CItemMap::drawBoundingBox(QPainter& p, IDrawContext* dc)
 {
-    QPointF pt1  = ref1;
-    QPointF pt2  = ref2;
-    QPointF pt3  = ref3;
-    QPointF pt4  = ref4;
+    QPointF pt1 = ref1;
+    QPointF pt2 = ref2;
+    QPointF pt3 = ref3;
+    QPointF pt4 = ref4;
 
     dc->convertCoord2Map(pt1);
     dc->convertCoord2Map(pt2);

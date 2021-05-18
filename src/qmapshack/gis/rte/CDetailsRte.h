@@ -28,11 +28,11 @@ class CDetailsRte : public QDialog, private Ui::IDetailsRte
 {
     Q_OBJECT
 public:
-    CDetailsRte(CGisItemRte& rte, QWidget * parent);
+    CDetailsRte(CGisItemRte& rte, QWidget* parent);
     virtual ~CDetailsRte();
 
 private slots:
-    void slotNameChanged(const QString &name);
+    void slotNameChanged(const QString& name);
     void slotNameChangeFinished();
     void slotChangeReadOnlyMode(bool on);
     void slotLinkActivated(const QUrl& url);

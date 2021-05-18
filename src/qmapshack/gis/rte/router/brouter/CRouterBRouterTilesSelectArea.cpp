@@ -25,19 +25,19 @@
 #include <QToolTip>
 
 
-const QPen CRouterBRouterTilesSelectArea::gridPen             = QPen(Qt::magenta);
-const QPen CRouterBRouterTilesSelectArea::outdatedTilesPen    = QPen(Qt::gray);
-const QPen CRouterBRouterTilesSelectArea::currentTilesPen     = QPen(Qt::darkGreen);
-const QPen CRouterBRouterTilesSelectArea::selectedTilesPen    = QPen(Qt::blue);
+const QPen CRouterBRouterTilesSelectArea::gridPen = QPen(Qt::magenta);
+const QPen CRouterBRouterTilesSelectArea::outdatedTilesPen = QPen(Qt::gray);
+const QPen CRouterBRouterTilesSelectArea::currentTilesPen = QPen(Qt::darkGreen);
+const QPen CRouterBRouterTilesSelectArea::selectedTilesPen = QPen(Qt::blue);
 const QPen CRouterBRouterTilesSelectArea::outstandingTilesPen = QPen(Qt::yellow);
-const QPen CRouterBRouterTilesSelectArea::invalidTilesPen     = QPen(Qt::gray);
-const QBrush CRouterBRouterTilesSelectArea::outdatedTilesBrush    = QBrush(Qt::gray,     Qt::Dense5Pattern);
-const QBrush CRouterBRouterTilesSelectArea::currentTilesBrush     = QBrush(Qt::darkGreen, Qt::Dense3Pattern);
-const QBrush CRouterBRouterTilesSelectArea::selectedTilesBrush    = QBrush(Qt::blue,     Qt::Dense3Pattern);
-const QBrush CRouterBRouterTilesSelectArea::outstandingTilesBrush = QBrush(Qt::yellow,   Qt::Dense3Pattern);
-const QBrush CRouterBRouterTilesSelectArea::invalidTilesBrush     = QBrush(Qt::gray,     Qt::DiagCrossPattern);
+const QPen CRouterBRouterTilesSelectArea::invalidTilesPen = QPen(Qt::gray);
+const QBrush CRouterBRouterTilesSelectArea::outdatedTilesBrush = QBrush(Qt::gray, Qt::Dense5Pattern);
+const QBrush CRouterBRouterTilesSelectArea::currentTilesBrush = QBrush(Qt::darkGreen, Qt::Dense3Pattern);
+const QBrush CRouterBRouterTilesSelectArea::selectedTilesBrush = QBrush(Qt::blue, Qt::Dense3Pattern);
+const QBrush CRouterBRouterTilesSelectArea::outstandingTilesBrush = QBrush(Qt::yellow, Qt::Dense3Pattern);
+const QBrush CRouterBRouterTilesSelectArea::invalidTilesBrush = QBrush(Qt::gray, Qt::DiagCrossPattern);
 
-CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(QWidget * parent, CCanvas * canvas)
+CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(QWidget* parent, CCanvas* canvas)
     : QWidget(parent)
 {
     this->canvas = canvas;
@@ -49,12 +49,12 @@ CRouterBRouterTilesSelectArea::~CRouterBRouterTilesSelectArea()
 {
 }
 
-bool CRouterBRouterTilesSelectArea::event(QEvent * event)
+bool CRouterBRouterTilesSelectArea::event(QEvent* event)
 {
     if (event->type() == QEvent::ToolTip)
     {
-        QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
-        const QPoint &tile = tileUnderMouse(helpEvent->pos());
+        QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
+        const QPoint& tile = tileUnderMouse(helpEvent->pos());
         if (currentTile != tile)
         {
             emit sigTileToolTipChanged(tile);
@@ -67,17 +67,17 @@ bool CRouterBRouterTilesSelectArea::event(QEvent * event)
     return QWidget::event(event);
 }
 
-void CRouterBRouterTilesSelectArea::paintEvent(QPaintEvent *event)
+void CRouterBRouterTilesSelectArea::paintEvent(QPaintEvent* event)
 {
     drawGrid();
-    drawTiles(invalidTilesPen,     invalidTilesBrush,     invalidTiles);
-    drawTiles(outdatedTilesPen,    outdatedTilesBrush,    outdatedTiles);
-    drawTiles(currentTilesPen,     currentTilesBrush,     currentTiles);
-    drawTiles(selectedTilesPen,    selectedTilesBrush,    selectedTiles);
+    drawTiles(invalidTilesPen, invalidTilesBrush, invalidTiles);
+    drawTiles(outdatedTilesPen, outdatedTilesBrush, outdatedTiles);
+    drawTiles(currentTilesPen, currentTilesBrush, currentTiles);
+    drawTiles(selectedTilesPen, selectedTilesBrush, selectedTiles);
     drawTiles(outstandingTilesPen, outstandingTilesBrush, outstandingTiles);
 }
 
-void CRouterBRouterTilesSelectArea::mouseMoveEvent(QMouseEvent * event)
+void CRouterBRouterTilesSelectArea::mouseMoveEvent(QMouseEvent* event)
 {
     if (event->buttons() == Qt::LeftButton)
     {
@@ -86,7 +86,7 @@ void CRouterBRouterTilesSelectArea::mouseMoveEvent(QMouseEvent * event)
     }
 }
 
-void CRouterBRouterTilesSelectArea::mousePressEvent(QMouseEvent * event)
+void CRouterBRouterTilesSelectArea::mousePressEvent(QMouseEvent* event)
 {
     if (event->buttons() == Qt::LeftButton)
     {
@@ -95,11 +95,11 @@ void CRouterBRouterTilesSelectArea::mousePressEvent(QMouseEvent * event)
     button = event->buttons();
 }
 
-void CRouterBRouterTilesSelectArea::mouseReleaseEvent(QMouseEvent * event)
+void CRouterBRouterTilesSelectArea::mouseReleaseEvent(QMouseEvent* event)
 {
     if (button == Qt::LeftButton)
     {
-        const QPoint &pos = event->pos();
+        const QPoint& pos = event->pos();
         canvas->moveMap(QPointF(pos - mousePos));
         if (pos == startPos)
         {
@@ -113,25 +113,25 @@ void CRouterBRouterTilesSelectArea::drawGrid()
     QPainter painter(this);
     painter.setPen(gridPen);
 
-    for(const QPoint &tile : qAsConst(gridTiles))
+    for(const QPoint& tile : qAsConst(gridTiles))
     {
         painter.drawPolyline(gridPolygon(tile));
     }
 }
 
-void CRouterBRouterTilesSelectArea::drawTiles(const QPen &pen, const QBrush & brush, const QVector<QPoint> & tiles)
+void CRouterBRouterTilesSelectArea::drawTiles(const QPen& pen, const QBrush& brush, const QVector<QPoint>& tiles)
 {
     QPainter painter(this);
     painter.setPen(pen);
     painter.setBrush(brush);
 
-    for(const QPoint &tile : tiles)
+    for(const QPoint& tile : tiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
 }
 
-QPoint CRouterBRouterTilesSelectArea::tileUnderMouse(const QPointF & mousePos) const
+QPoint CRouterBRouterTilesSelectArea::tileUnderMouse(const QPointF& mousePos) const
 {
     QPointF pos(mousePos);
     canvas->convertPx2Rad(pos);
@@ -141,7 +141,7 @@ QPoint CRouterBRouterTilesSelectArea::tileUnderMouse(const QPointF & mousePos) c
     return tile * CRouterBRouterTilesSelect::tileSize;
 }
 
-QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile) const
+QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint& tile) const
 {
     QPointF p0(tile.x(), tile.y());
     QPointF p1(tile.x() + CRouterBRouterTilesSelect::tileSize, tile.y());
@@ -167,7 +167,7 @@ QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile) const
     return polygon;
 }
 
-QPolygonF CRouterBRouterTilesSelectArea::gridPolygon(const QPoint & tile) const
+QPolygonF CRouterBRouterTilesSelectArea::gridPolygon(const QPoint& tile) const
 {
     QPointF p0(tile.x(), tile.y());
     QPointF p1(tile.x() + CRouterBRouterTilesSelect::tileSize, tile.y());

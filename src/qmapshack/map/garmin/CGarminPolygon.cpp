@@ -48,7 +48,7 @@ qint32 CGarminPolygon::maxVecSize = 0;
 
 
 
-quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8 * pData, const quint8 * pEnd)
+quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8* pData, const quint8* pEnd)
 {
     quint32 bytes_total = 10;
     // bitstream has a two byte length
@@ -64,7 +64,7 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
     // bits per y coord.
     quint32 by;
 
-    const quint8 * const pStart = pData;
+    const quint8* const pStart = pData;
 
     labels.clear();
     coords.resize(0);
@@ -98,10 +98,10 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
         bit 22      use extra bit for coordinates
         bit 23      use label data of NET section
      */
-    lbl_info   = gar_ptr_load(uint24_t, pData);
+    lbl_info = gar_ptr_load(uint24_t, pData);
     lbl_in_NET = lbl_info & 0x800000;
-    extra_bit  = lbl_info & 0x400000;
-    lbl_info   = lbl_info & 0x3FFFFF;
+    extra_bit = lbl_info & 0x400000;
+    lbl_info = lbl_info & 0x3FFFFF;
 
     pData += 3;
 
@@ -205,7 +205,7 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
 }
 
 
-quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8 * pData, const quint8 * pEnd)
+quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8* pData, const quint8* pEnd)
 {
     quint32 bytes_total = 6;
     // bitstream length
@@ -219,17 +219,17 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     // bits per y coord.
     quint32 by;
 
-    const quint8 * const pStart = pData;
+    const quint8* const pStart = pData;
 
     labels.clear();
     coords.resize(0);
     coords.reserve(maxVecSize);
 
-    type        = *pData++;
-    subtype     = *pData++;
+    type = *pData++;
+    subtype = *pData++;
 
-    type        = 0x10000 + (quint16(type) << 8) + (subtype & 0x1f);
-    hasV2Label  = subtype & 0x20;
+    type = 0x10000 + (quint16(type) << 8) + (subtype & 0x1f);
+    hasV2Label = subtype & 0x20;
     // delta longitude and latitude
     dLng = gar_ptr_load(uint16_t, pData);
     pData += 2;
@@ -238,19 +238,19 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
 
     if((*pData & 0x1) == 0)
     {
-        bs_len       = gar_ptr_load(uint16_t, pData);
-        bs_len       = (bs_len >> 2) - 1;
-        pData       += 2;
+        bs_len = gar_ptr_load(uint16_t, pData);
+        bs_len = (bs_len >> 2) - 1;
+        pData += 2;
         bytes_total += 2;
     }
     else
     {
         bs_len = ((*pData) >> 1) - 1;
-        pData       += 1;
+        pData += 1;
         bytes_total += 1;
     }
 
-    bs_info      = *pData++;
+    bs_info = *pData++;
     bytes_total += bs_len + 1;
 
 #ifdef DEBUG_SHOW_POLY2_DATA
@@ -358,7 +358,7 @@ void CGarminPolygon::bits_per_coord(quint8 base, quint8 bfirst, quint32& bx, qui
     {
         signinfo.x_has_sign = false;
         //         signinfo.nx         = bfirst & 0x2;
-        signinfo.nx         = bfirst & mask;
+        signinfo.nx = bfirst & mask;
         mask <<= 1;
         ++signinfo.sign_info_bits;
     }
@@ -376,7 +376,7 @@ void CGarminPolygon::bits_per_coord(quint8 base, quint8 bfirst, quint32& bx, qui
     {
         signinfo.y_has_sign = false;
         //         signinfo.ny         = x_sign_same ? bfirst & 0x08 : bfirst & 0x04;
-        signinfo.ny         = bfirst & mask;
+        signinfo.ny = bfirst & mask;
         mask <<= 1;
         ++signinfo.sign_info_bits;
     }
@@ -470,10 +470,10 @@ CShiftReg::CShiftReg(const quint8* pData, quint32 n, quint32 bx, quint32 by, boo
     xmask = (xmask << (32 - bx)) >> (32 - bx);
     ymask = (ymask << (32 - by)) >> (32 - by);
 
-    xsign   <<= (bits_per_x - 1);
-    ysign   <<= (bits_per_y - 1);
-    xsign2  = xsign << 1;
-    ysign2  = ysign << 1;
+    xsign <<= (bits_per_x - 1);
+    ysign <<= (bits_per_y - 1);
+    xsign2 = xsign << 1;
+    ysign2 = ysign << 1;
 
     // add sufficient bytes for the first coord. pair
     fill(bits_per_coord + si.sign_info_bits);

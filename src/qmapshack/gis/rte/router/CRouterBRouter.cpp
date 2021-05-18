@@ -34,7 +34,7 @@
 
 CRouterBRouter* CRouterBRouter::pSelf;
 
-CRouterBRouter::CRouterBRouter(QWidget *parent)
+CRouterBRouter::CRouterBRouter(QWidget* parent)
     : IRouter(false, parent)
 {
     pSelf = this;
@@ -66,9 +66,9 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     routerSetup = dynamic_cast<CRouterSetup*>(parent);
 
-    connect(toolConsole,       &QToolButton::clicked, this, &CRouterBRouter::slotToggleConsole);
+    connect(toolConsole, &QToolButton::clicked, this, &CRouterBRouter::slotToggleConsole);
     connect(toolToggleBRouter, &QToolButton::clicked, this, &CRouterBRouter::slotToggleBRouter);
-    connect(pushBRouterError,  &QPushButton::clicked, this, &CRouterBRouter::slotClearError);
+    connect(pushBRouterError, &QPushButton::clicked, this, &CRouterBRouter::slotClearError);
 
     textBRouterOutput->setVisible(false);
     textBRouterError->setVisible(false);
@@ -122,7 +122,7 @@ void CRouterBRouter::slotToolProfileInfoClicked() const
     }
 }
 
-void CRouterBRouter::slotDisplayError(const QString &error, const QString &details) const
+void CRouterBRouter::slotDisplayError(const QString& error, const QString& details) const
 {
     textBRouterError->setText(error);
     if (!details.isEmpty())
@@ -145,7 +145,7 @@ void CRouterBRouter::slotClearError()
     localBRouter->clearBRouterError();
 }
 
-void CRouterBRouter::slotDisplayProfileInfo(const QString &profile, const QString &content)
+void CRouterBRouter::slotDisplayProfileInfo(const QString& profile, const QString& content)
 {
     slotClearError();
     CRouterBRouterInfo info;
@@ -195,7 +195,7 @@ void CRouterBRouter::updateDialog() const
 void CRouterBRouter::slotCloseStatusMsg() const
 {
     timerCloseStatusMsg->stop();
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -220,11 +220,11 @@ bool CRouterBRouter::hasFastRouting()
     return setup->installMode == CRouterBRouterSetup::eModeLocal && checkFastRecalc->isChecked();
 }
 
-QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, const QList<IGisItem*> &nogos) const
+QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem*>& nogos) const
 {
     QString lonLats;
 
-    for(const QPointF &pt : routePoints)
+    for(const QPointF& pt : routePoints)
     {
         if (!lonLats.isEmpty())
         {
@@ -237,13 +237,13 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
     QString nogoPolygons;
     QString nogoPolylines;
 
-    for(IGisItem* const & item : nogos)
+    for(IGisItem* const& item : nogos)
     {
         switch(item->type())
         {
         case IGisItem::eTypeWpt:
         {
-            CGisItemWpt * wpt = static_cast<CGisItemWpt*>(item);
+            CGisItemWpt* wpt = static_cast<CGisItemWpt*>(item);
             const qreal& rad = wpt->getProximity();
             if (rad != NOFLOAT && rad > 0.)
             {
@@ -324,14 +324,14 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
     return QNetworkRequest(url);
 }
 
-int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal *costs)
+int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs)
 {
     if(!hasFastRouting())
     {
         return -1;
     }
 
-    const QVector<QPointF> points = {p1*RAD_TO_DEG, p2 * RAD_TO_DEG};
+    const QVector<QPointF> points = {p1* RAD_TO_DEG, p2 * RAD_TO_DEG};
 
     QList<IGisItem*> nogos;
     CGisWorkspace::self().getNogoAreas(nogos);
@@ -339,7 +339,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     return synchronousRequest(points, nogos, coords, costs);
 }
 
-int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QList<IGisItem *> &nogos, QPolygonF &coords, qreal* costs = nullptr)
+int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem*>& nogos, QPolygonF& coords, qreal* costs = nullptr)
 {
     if (!mutex.tryLock())
     {
@@ -354,7 +354,7 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
 
     synchronous = true;
 
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points, nogos));
+    QNetworkReply* reply = networkAccessManager->get(getRequest(points, nogos));
 
     try
     {
@@ -380,7 +380,7 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
         }
         slotClearError();
 
-        const QByteArray &res = reply->readAll();
+        const QByteArray& res = reply->readAll();
 
         if(res.isEmpty())
         {
@@ -389,7 +389,7 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
 
         QDomDocument xml;
         xml.setContent(res);
-        const QDomElement &xmlGpx = xml.documentElement();
+        const QDomElement& xmlGpx = xml.documentElement();
 
         if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
         {
@@ -398,14 +398,14 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
         setup->parseBRouterVersion(xmlGpx.attribute("creator"));
 
         // read the shape
-        const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
+        const QDomNodeList& xmlLatLng = xmlGpx.firstChildElement("trk")
                                         .firstChildElement("trkseg")
                                         .elementsByTagName("trkpt");
         for(int n = 0; n < xmlLatLng.size(); n++)
         {
-            const QDomElement &elem   = xmlLatLng.item(n).toElement();
+            const QDomElement& elem = xmlLatLng.item(n).toElement();
             coords << QPointF();
-            QPointF &point = coords.last();
+            QPointF& point = coords.last();
             point.setX(elem.attribute("lon").toFloat() * DEG_TO_RAD);
             point.setY(elem.attribute("lat").toFloat() * DEG_TO_RAD);
         }
@@ -413,15 +413,15 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
         //find costs of route (copied and adapted from CGisItemRte::setResultFromBrouter)
         if(costs != nullptr)
         {
-            const QDomNodeList &nodes = xml.childNodes();
+            const QDomNodeList& nodes = xml.childNodes();
             for (int i = 0; i < nodes.count(); i++)
             {
-                const QDomNode &node = nodes.at(i);
+                const QDomNode& node = nodes.at(i);
                 if (!node.isComment())
                 {
                     continue;
                 }
-                const QString &commentTxt = node.toComment().data();
+                const QString& commentTxt = node.toComment().data();
                 // ' track-length = 180864 filtered ascend = 428 plain-ascend = -172 cost=270249 '
                 const QRegExp rxAscDes("(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*)(filtered ascend\\s*=\\s*-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*)(-?\\d+)(\\s*)");
                 int pos = rxAscDes.indexIn(commentTxt);
@@ -462,7 +462,7 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     {
         localBRouter->startBRouter();
     }
-    CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemRte* rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
     if(nullptr == rte)
     {
         mutex.unlock();
@@ -477,14 +477,14 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     slotCloseStatusMsg();
 
     QVector<QPointF> points;
-    for(const CGisItemRte::rtept_t &pt : rte->getRoute().pts)
+    for(const CGisItemRte::rtept_t& pt : rte->getRoute().pts)
     {
         points << QPointF(pt.lon, pt.lat);
     }
 
     synchronous = false;
 
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points, nogos));
+    QNetworkReply* reply = networkAccessManager->get(getRequest(points, nogos));
 
     reply->setProperty("key.item", key.item);
     reply->setProperty("key.project", key.project);
@@ -492,7 +492,7 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     reply->setProperty("options", getOptions());
     reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -525,7 +525,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
             throw reply->errorString();
         }
 
-        const QByteArray &res = reply->readAll();
+        const QByteArray& res = reply->readAll();
         reply->deleteLater();
 
         if(res.isEmpty())
@@ -538,20 +538,20 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
         QDomDocument xml;
         xml.setContent(res);
 
-        const QDomElement &xmlGpx = xml.documentElement();
+        const QDomElement& xmlGpx = xml.documentElement();
         if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
         {
             throw QString(res);
         }
 
         IGisItem::key_t key;
-        key.item    = reply->property("key.item").toString();
+        key.item = reply->property("key.item").toString();
         key.project = reply->property("key.project").toString();
-        key.device  = reply->property("key.device").toString();
+        key.device = reply->property("key.device").toString();
         qint64 time = reply->property("time").toLongLong();
         time = QDateTime::currentDateTimeUtc().toMSecsSinceEpoch() - time;
 
-        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
+        CGisItemRte* rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
         if(rte != nullptr)
         {
             rte->setResultFromBRouter(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time / 1000.0, 0, 'f', 2));
@@ -561,7 +561,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     {
         if(!msg.isEmpty())
         {
-            CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+            CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
             if(canvas)
             {
                 canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(msg));

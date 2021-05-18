@@ -22,7 +22,7 @@
 
 #include <QtWidgets>
 
-CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
+CMapVrtBuilder::CMapVrtBuilder(QWidget* parent)
     : IToolShell(parent)
 {
     setupUi(this);
@@ -30,9 +30,9 @@ CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
     setObjectName(tr("Build GDAL VRT"));
 
     connect(toolSourceFiles, &QToolButton::clicked, this, &CMapVrtBuilder::slotSelectSourceFiles);
-    connect(toolTargetFile,  &QToolButton::clicked, this, &CMapVrtBuilder::slotSelectTargetFile);
-    connect(pushStart,       &QPushButton::clicked, this, &CMapVrtBuilder::slotStart);
-    connect(labelHelpGDAL,   &QLabel::linkActivated, this, &CMapVrtBuilder::slotLinkActivated);
+    connect(toolTargetFile, &QToolButton::clicked, this, &CMapVrtBuilder::slotSelectTargetFile);
+    connect(pushStart, &QPushButton::clicked, this, &CMapVrtBuilder::slotStart);
+    connect(labelHelpGDAL, &QLabel::linkActivated, this, &CMapVrtBuilder::slotLinkActivated);
 
     pushStart->setDisabled(true);
 
@@ -90,7 +90,7 @@ void CMapVrtBuilder::slotSelectSourceFiles()
     cfg.setValue("VrtBuilder/sourcePath", path);
 
     listWidget->clear();
-    for(const QString &file : files)
+    for(const QString& file : files)
     {
         new QListWidgetItem(QIcon("://icons/32x32/Map.png"), file, listWidget);
     }
@@ -181,7 +181,7 @@ void CMapVrtBuilder::slotStart()
     tempFile->close();
     args << "-input_file_list" << tempFile->fileName();
 
-    stdOut("gdalbuildvrt " +  args.join(" ") + "\n");
+    stdOut("gdalbuildvrt " + args.join(" ") + "\n");
     cmd.start("gdalbuildvrt", args);
 }
 
@@ -215,7 +215,7 @@ void CMapVrtBuilder::finished(int exitCode, QProcess::ExitStatus status)
         {
             args << "64";
         }
-        stdOut("gdaladdo " +  args.join(" ") + "\n");
+        stdOut("gdaladdo " + args.join(" ") + "\n");
         cmd.start("gdaladdo", args);
 
         last = true;

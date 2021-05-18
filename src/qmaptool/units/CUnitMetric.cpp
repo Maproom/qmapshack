@@ -18,7 +18,7 @@
 **********************************************************************************************/
 #include "units/CUnitMetric.h"
 
-CUnitMetric::CUnitMetric(QObject * parent)
+CUnitMetric::CUnitMetric(QObject* parent)
     : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, parent)
 {
 }
@@ -28,7 +28,7 @@ void CUnitMetric::meter2elevation(qreal meter, QString& val, QString& unit) cons
 {
     if(meter == NOFLOAT || meter == NOINT)
     {
-        val  = "-";
+        val = "-";
         unit = "";
     }
     else
@@ -43,7 +43,7 @@ void CUnitMetric::meter2distance(qreal meter, QString& val, QString& unit) const
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit = "";
     }
     else if(meter < 10)
@@ -78,7 +78,7 @@ void CUnitMetric::meter2speed(qreal meter, QString& val, QString& unit) const /*
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit = "";
     }
     else if (meter < 0.27)
@@ -102,7 +102,7 @@ void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit) const /* 
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit = "";
     }
     else
@@ -117,16 +117,16 @@ qreal CUnitMetric::elevation2meter(const QString& val) const /* override */
     return val.toDouble();
 }
 
-void CUnitMetric::meter2unit(qreal meter, qreal& scale, QString&  unit) const
+void CUnitMetric::meter2unit(qreal meter, qreal& scale, QString& unit) const
 {
     if(meter > 1000)
     {
         scale = 0.001;
-        unit  = "km";
+        unit = "km";
     }
     else
     {
         scale = 1.0;
-        unit  = "m";
+        unit = "m";
     }
 }

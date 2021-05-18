@@ -22,9 +22,9 @@
 
 #include <QtWidgets>
 
-CGisDatabase * CGisDatabase::pSelf = nullptr;
+CGisDatabase* CGisDatabase::pSelf = nullptr;
 
-CGisDatabase::CGisDatabase(QWidget *parent)
+CGisDatabase::CGisDatabase(QWidget* parent)
     : QWidget(parent)
 {
     pSelf = this;
@@ -33,7 +33,7 @@ CGisDatabase::CGisDatabase(QWidget *parent)
     SETTINGS;
     treeDB->header()->restoreState(cfg.value("Database/treeDB/state", treeDB->header()->saveState()).toByteArray());
 
-    connect(treeDB,  &CGisListDB::sigChanged,  this, &CGisDatabase::slotHelpText);
+    connect(treeDB, &CGisListDB::sigChanged, this, &CGisDatabase::slotHelpText);
     connect(actionShowSummaryDropZones, &QAction::toggled, widgetSummary, &CGisSummary::setVisible);
 
     QList<QAction*> actions;
@@ -59,12 +59,12 @@ void CGisDatabase::slotHelpText()
     widgetSummary->setVisible(actionShowSummaryDropZones->isChecked());
 }
 
-void CGisDatabase::postEventForDb(QEvent * event)
+void CGisDatabase::postEventForDb(QEvent* event)
 {
     QCoreApplication::postEvent(treeDB, event);
 }
 
-void CGisDatabase::sendEventForDb(QEvent * event)
+void CGisDatabase::sendEventForDb(QEvent* event)
 {
     QCoreApplication::sendEvent(treeDB, event);
 }

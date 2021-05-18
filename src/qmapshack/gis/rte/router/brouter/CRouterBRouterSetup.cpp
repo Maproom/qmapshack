@@ -25,7 +25,7 @@
 #include <QNetworkReply>
 #include <QWebEnginePage>
 
-CRouterBRouterSetup::CRouterBRouterSetup(QObject *parent)
+CRouterBRouterSetup::CRouterBRouterSetup(QObject* parent)
     : QObject(parent)
 {
     networkAccessManager = new QNetworkAccessManager(this);
@@ -182,7 +182,7 @@ QString CRouterBRouterSetup::stringFromMode(const mode_e mode) const
     }
 }
 
-void CRouterBRouterSetup::addProfile(const QString &profile)
+void CRouterBRouterSetup::addProfile(const QString& profile)
 {
     if (installMode == eModeLocal)
     {
@@ -199,11 +199,11 @@ void CRouterBRouterSetup::addProfile(const QString &profile)
     }
 }
 
-void CRouterBRouterSetup::deleteProfile(const QString &profile)
+void CRouterBRouterSetup::deleteProfile(const QString& profile)
 {
     if (installMode == eModeLocal)
     {
-        const QString &filename = getProfileDir(eModeLocal).absoluteFilePath(profile + ".brf");
+        const QString& filename = getProfileDir(eModeLocal).absoluteFilePath(profile + ".brf");
         QFile file(filename);
         if (file.exists())
         {
@@ -223,7 +223,7 @@ void CRouterBRouterSetup::deleteProfile(const QString &profile)
     }
 }
 
-void CRouterBRouterSetup::profileUp(const QString &profile)
+void CRouterBRouterSetup::profileUp(const QString& profile)
 {
     if (installMode == eModeLocal)
     {
@@ -248,7 +248,7 @@ void CRouterBRouterSetup::profileUp(const QString &profile)
     }
 }
 
-void CRouterBRouterSetup::profileDown(const QString &profile)
+void CRouterBRouterSetup::profileDown(const QString& profile)
 {
     if (installMode == eModeLocal)
     {
@@ -281,7 +281,7 @@ void CRouterBRouterSetup::readLocalProfiles()
     if (dir.exists())
     {
         const QStringList& profiles = dir.entryList();
-        for(const QString &profile : profiles)
+        for(const QString& profile : profiles)
         {
             if (profile.endsWith(".brf"))
             {
@@ -290,7 +290,7 @@ void CRouterBRouterSetup::readLocalProfiles()
         }
     }
     const QStringList localProfilesTmp(localProfiles);
-    for (const QString &profile : localProfilesTmp)
+    for (const QString& profile : localProfilesTmp)
     {
         if (!installedProfiles.contains(profile))
         {
@@ -298,7 +298,7 @@ void CRouterBRouterSetup::readLocalProfiles()
             changed = true;
         }
     }
-    for (const QString &profile : qAsConst(installedProfiles))
+    for (const QString& profile : qAsConst(installedProfiles))
     {
         if (!localProfiles.contains(profile))
         {
@@ -352,10 +352,10 @@ void CRouterBRouterSetup::loadLocalOnlineProfiles(bool update) const
 void CRouterBRouterSetup::loadOnlineConfig(bool update) const
 {
     const QUrl configUrl(getConfigUrl());
-    const QString &configHost = configUrl.host();
-    const QString &configScheme = configUrl.scheme();
+    const QString& configHost = configUrl.host();
+    const QString& configScheme = configUrl.scheme();
 
-    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(configUrl));
+    QNetworkReply* reply = networkAccessManager->get(QNetworkRequest(configUrl));
     reply->setProperty("configHost", configHost);
     reply->setProperty("configScheme", configScheme);
     reply->setProperty("type", eTypeConfig);
@@ -366,23 +366,23 @@ void CRouterBRouterSetup::loadOnlineVersion() const
 {
     QUrl serviceUrl = getServiceUrl();
     serviceUrl.setQuery(QUrlQuery("lonlats=11.138570,48.676961|11.138570,48.676961&profile=shortest&alternativeidx=0&format=gpx"));
-    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(serviceUrl));
+    QNetworkReply* reply = networkAccessManager->get(QNetworkRequest(serviceUrl));
     reply->setProperty("type", eTypeVersion);
 }
 
 void CRouterBRouterSetup::loadExpertBinariesPage() const
 {
-    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(expertBinariesUrl));
+    QNetworkReply* reply = networkAccessManager->get(QNetworkRequest(expertBinariesUrl));
     reply->setProperty("type", eTypeBinariesPage);
 }
 
 void CRouterBRouterSetup::loadExpertSegmentsPage() const
 {
-    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(expertSegmentsUrl));
+    QNetworkReply* reply = networkAccessManager->get(QNetworkRequest(expertSegmentsUrl));
     reply->setProperty("type", eTypeSegmentsPage);
 }
 
-void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
+void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply* reply)
 {
     reply->deleteLater();
     const request_e type = request_e(reply->property("type").toInt());
@@ -427,17 +427,17 @@ void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
     }
 }
 
-void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
+void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply* reply)
 {
-    const QString &configHost = reply->property("configHost").toString();
-    const QString &configScheme = reply->property("configScheme").toString();
+    const QString& configHost = reply->property("configHost").toString();
+    const QString& configScheme = reply->property("configScheme").toString();
     const bool update = reply->property("update").toBool();
 
     const QString jsConfig(reply->readAll());
 
     QJSEngine engine;
 
-    const QString &jsSetup = QString( \
+    const QString& jsSetup = QString( \
         "(function(){\
                    window = {};\
                    window.location = {};\
@@ -450,27 +450,27 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
                   })();").arg(configHost, configScheme);
 
     engine.evaluate(jsSetup);
-    const QJSValue &val = engine.evaluate(jsConfig);
+    const QJSValue& val = engine.evaluate(jsConfig);
     if (val.isError())
     {
         emitOnlineConfigScriptError(val);
         return;
     }
 
-    const QJSValue &br = engine.globalObject().property("BR");
+    const QJSValue& br = engine.globalObject().property("BR");
     if (!br.isObject() || br.isError())
     {
         emitOnlineConfigScriptError(br);
         return;
     }
-    const QJSValue &conf = br.property("conf");
+    const QJSValue& conf = br.property("conf");
     if (!conf.isObject() || conf.isError())
     {
         emitOnlineConfigScriptError(conf);
         return;
     }
 
-    const QJSValue &host = conf.property("host");
+    const QJSValue& host = conf.property("host");
     if (!host.isString() || host.isError())
     {
         emitOnlineConfigScriptError(host);
@@ -480,7 +480,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
     {
         onlineServiceUrl = host.toString();
     }
-    const QJSValue &url = conf.property("profilesUrl");
+    const QJSValue& url = conf.property("profilesUrl");
     if (!url.isString() || url.isError())
     {
         emitOnlineConfigScriptError(url);
@@ -495,7 +495,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
     {
         if  (installMode == eModeOnline)
         {
-            const QJSValue &profiles = conf.property("profiles");
+            const QJSValue& profiles = conf.property("profiles");
             if (!profiles.isArray() || profiles.isError())
             {
                 emitOnlineConfigScriptError(profiles);
@@ -506,7 +506,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
             QStringList onlineProfilesLoaded;
             for(qint32 i = 0; i < len; i++)
             {
-                const QJSValue &profile = profiles.property(i);
+                const QJSValue& profile = profiles.property(i);
                 if (!profile.isString() || profile.isError())
                 {
                     emitOnlineConfigScriptError(profile);
@@ -518,7 +518,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
             mergeOnlineProfiles(onlineProfilesLoaded);
 
             const QStringList onlineProfilesTmp(onlineProfiles);
-            for (const QString &profile : onlineProfilesTmp)
+            for (const QString& profile : onlineProfilesTmp)
             {
                 if (!onlineProfilesAvailable.contains(profile))
                 {
@@ -536,7 +536,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
     emit sigOnlineConfigLoaded();
 }
 
-void CRouterBRouterSetup::loadOnlineVersionFinished(QNetworkReply *reply)
+void CRouterBRouterSetup::loadOnlineVersionFinished(QNetworkReply* reply)
 {
     versionMajor = NOINT;
     versionMinor = NOINT;
@@ -558,7 +558,7 @@ void CRouterBRouterSetup::loadOnlineVersionFinished(QNetworkReply *reply)
     emit sigError("invalid reply", "response is not brouter-gpx");
 }
 
-void CRouterBRouterSetup::parseBRouterVersion(const QString &text)
+void CRouterBRouterSetup::parseBRouterVersion(const QString& text)
 {
     // version string is either like "BRouter 1.4.9 / 24092017"
     // or (without the date) like "BRouter-1.4.9"
@@ -615,7 +615,7 @@ void CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished(bool ok)
     }
 }
 
-void CRouterBRouterSetup::afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant &v)
+void CRouterBRouterSetup::afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant& v)
 {
     QStringList onlineProfilesLoaded = v.toStringList();
 
@@ -633,17 +633,17 @@ void CRouterBRouterSetup::afterSlotLoadOnlineProfilesRequestFinishedRunJavascrip
     }
 }
 
-void CRouterBRouterSetup::mergeOnlineProfiles(const QStringList &onlineProfilesLoaded)
+void CRouterBRouterSetup::mergeOnlineProfiles(const QStringList& onlineProfilesLoaded)
 {
     const QStringList onlineProfilesAvailableTmp(onlineProfilesAvailable);
-    for (const QString &profile : onlineProfilesAvailableTmp)
+    for (const QString& profile : onlineProfilesAvailableTmp)
     {
         if (!onlineProfilesLoaded.contains(profile))
         {
             onlineProfilesAvailable.removeAt(onlineProfilesAvailable.indexOf(profile));
         }
     }
-    for (const QString &profile : onlineProfilesLoaded)
+    for (const QString& profile : onlineProfilesLoaded)
     {
         if (!onlineProfilesAvailable.contains(profile))
         {
@@ -652,7 +652,7 @@ void CRouterBRouterSetup::mergeOnlineProfiles(const QStringList &onlineProfilesL
     }
 }
 
-void CRouterBRouterSetup::emitOnlineConfigScriptError(const QJSValue &error)
+void CRouterBRouterSetup::emitOnlineConfigScriptError(const QJSValue& error)
 {
     emit sigError(tr("Error parsing online-config:"), error.toString());
 }
@@ -662,7 +662,7 @@ void CRouterBRouterSetup::emitNetworkError(QString error)
     emit sigError(tr("Network error:"), error);
 }
 
-void CRouterBRouterSetup::displayProfileAsync(const QString &profile)
+void CRouterBRouterSetup::displayProfileAsync(const QString& profile)
 {
     if (installMode == eModeLocal)
     {
@@ -670,7 +670,7 @@ void CRouterBRouterSetup::displayProfileAsync(const QString &profile)
         if (file.exists())
         {
             file.open(QIODevice::ReadOnly);
-            const QByteArray &content = file.readAll();
+            const QByteArray& content = file.readAll();
             file.close();
             emit sigDisplayOnlineProfileFinished(profile, QString(content));
         }
@@ -682,12 +682,12 @@ void CRouterBRouterSetup::displayProfileAsync(const QString &profile)
     }
 }
 
-void CRouterBRouterSetup::displayOnlineProfileAsync(const QString &profile) const
+void CRouterBRouterSetup::displayOnlineProfileAsync(const QString& profile) const
 {
     loadOnlineProfileAsync(profile, eProfileDisplay);
 }
 
-void CRouterBRouterSetup::loadOnlineProfileAsync(const QString &profile, const profileRequest_e mode) const
+void CRouterBRouterSetup::loadOnlineProfileAsync(const QString& profile, const profileRequest_e mode) const
 {
     QUrl url(onlineProfilesUrl);
     QString path = url.path();
@@ -697,18 +697,18 @@ void CRouterBRouterSetup::loadOnlineProfileAsync(const QString &profile, const p
     }
     path.append(profile).append(".brf");
     url.setPath(path);
-    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(url));
+    QNetworkReply* reply = networkAccessManager->get(QNetworkRequest(url));
     reply->setProperty("type", eTypeProfile);
     reply->setProperty("profile", profile);
     reply->setProperty("request", mode);
 }
 
-void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply * reply)
+void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply* reply)
 {
-    const QString &profile = reply->property("profile").toString();
+    const QString& profile = reply->property("profile").toString();
     const profileRequest_e mode = profileRequest_e(reply->property("request").toInt());
 
-    const QByteArray &content = reply->readAll();
+    const QByteArray& content = reply->readAll();
     if (mode == eProfileInstall)
     {
         const QDir dir = getProfileDir(eModeLocal);

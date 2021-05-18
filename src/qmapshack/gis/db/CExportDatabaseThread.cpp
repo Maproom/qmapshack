@@ -26,7 +26,7 @@
 
 #include <QtSql>
 
-CExportDatabaseThread::CExportDatabaseThread(quint64 id, QSqlDatabase &db, QObject *parent)
+CExportDatabaseThread::CExportDatabaseThread(quint64 id, QSqlDatabase& db, QObject* parent)
     : QThread(parent)
     , parentFolderId(id)
     , dbParent(db)
@@ -106,7 +106,7 @@ void CExportDatabaseThread::run()
     QSqlDatabase::removeDatabase("tmp_export");
 }
 
-void CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, const QString& path, QSqlDatabase &db)
+void CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, const QString& path, QSqlDatabase& db)
 {
     if(!getKeepGoing())
     {
@@ -153,8 +153,8 @@ void CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, co
         QUERY_EXEC(throw tr("Database Error: %1").arg(query.lastError().text()));
         while(query.next())
         {
-            quint64 itemId      = query.value(0).toULongLong();
-            quint32 itemType    = query.value(1).toUInt();
+            quint64 itemId = query.value(0).toULongLong();
+            quint32 itemType = query.value(1).toUInt();
             evt.items << evt_item_t(itemId, itemType);
         }
         prj.showItems(&evt);
@@ -165,7 +165,7 @@ void CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, co
         QString filename = dir.absoluteFilePath((!parentName.isEmpty() && (type == IDBFolder::eTypeOther)) ?  parentName + "_" + simplifiedProjName : simplifiedProjName) + ".gpx";
         emit sigOut(tr("Save project as %1").arg(filename));
 
-        if(!CGpxProject::saveAs(filename,  prj, asGpx11))
+        if(!CGpxProject::saveAs(filename, prj, asGpx11))
         {
             throw tr("Failed!");
         }

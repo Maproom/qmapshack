@@ -24,11 +24,11 @@
 class CFitDevFieldDefinitionState final : public IFitDecoderState
 {
 public:
-    CFitDevFieldDefinitionState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
+    CFitDevFieldDefinitionState(shared_state_data_t& data) : IFitDecoderState(data) { reset(); }
     virtual ~CFitDevFieldDefinitionState() {}
 
     void reset() override;
-    decode_state_e process(quint8 &dataByte) override;
+    decode_state_e process(quint8& dataByte) override;
 
 private:
     quint8 offset = 0;

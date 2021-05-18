@@ -22,7 +22,7 @@
 #include <gdal_priv.h>
 #include <QtWidgets>
 
-CDrawContextProj::CDrawContextProj(CCanvas *canvas, QObject *parent)
+CDrawContextProj::CDrawContextProj(CCanvas* canvas, QObject* parent)
     : IDrawContext(canvas, parent)
     , CGdalFile(CGdalFile::eTypeProj)
 {
@@ -53,12 +53,12 @@ void CDrawContextProj::setSourceFile(const QString& filename, bool resetContext)
     intNeedsRedraw = true;
 }
 
-void CDrawContextProj::convertMap2Coord(QPointF &pt) const
+void CDrawContextProj::convertMap2Coord(QPointF& pt) const
 {
     pt = trFwd.map(pt);
 }
 
-void CDrawContextProj::convertCoord2Map(QPointF &pt) const
+void CDrawContextProj::convertCoord2Map(QPointF& pt) const
 {
     pt = trInv.map(pt);
 }
@@ -93,26 +93,26 @@ void CDrawContextProj::drawt(buffer_t& buf)
     convertCoord2Map(pt1);
     convertCoord2Map(pt3);
 
-    qint32 mapWidth  = qRound(pt3.x() - pt1.x());
+    qint32 mapWidth = qRound(pt3.x() - pt1.x());
     qint32 mapHeight = qRound(pt3.y() - pt1.y());
-    QPointF mapOff   = pt1;
+    QPointF mapOff = pt1;
 
     convertMap2Screen(pt1);
     convertMap2Screen(pt3);
 
-    qint32 screenWidth  = qRound(pt3.x() - pt1.x()) & 0xFFFFFFFC;
+    qint32 screenWidth = qRound(pt3.x() - pt1.x()) & 0xFFFFFFFC;
     qint32 screenHeight = qRound(pt3.y() - pt1.y());
-    QPointF screenOff   = pt1;
+    QPointF screenOff = pt1;
 
     // start to draw the map
     QImage img;
-    QVector<quint8> buffer(screenWidth * screenHeight, 0);
+    QVector<quint8> buffer(screenWidth* screenHeight, 0);
 
     CPLErr err = CE_Failure;
 
     if(rasterBandCount == 1)
     {
-        GDALRasterBand * pBand;
+        GDALRasterBand* pBand;
         pBand = dataset->GetRasterBand(1);
 
         img = QImage(screenWidth, screenHeight, QImage::Format_Indexed8);
@@ -132,7 +132,7 @@ void CDrawContextProj::drawt(buffer_t& buf)
         // read map band by band and copy color values into the image buffer
         for(int b = 1; b <= rasterBandCount; ++b)
         {
-            GDALRasterBand * pBand;
+            GDALRasterBand* pBand;
             pBand = dataset->GetRasterBand(b);
 
             mutex.lock();
@@ -143,14 +143,14 @@ void CDrawContextProj::drawt(buffer_t& buf)
                 int pbandColour = pBand->GetColorInterpretation();
                 unsigned int offset;
 
-                for (offset = 0; offset < sizeof(testPix) && *(((quint8 *)&testPix) + offset) != pbandColour; offset++)
+                for (offset = 0; offset < sizeof(testPix) && *(((quint8*)&testPix) + offset) != pbandColour; offset++)
                 {
                 }
                 if(offset < sizeof(testPix))
                 {
-                    quint8 * pTar   = img.bits() + offset;
-                    quint8 * pSrc   = buffer.data();
-                    const int size  = buffer.size();
+                    quint8* pTar = img.bits() + offset;
+                    quint8* pSrc = buffer.data();
+                    const int size = buffer.size();
 
                     for(int i = 0; i < size; ++i)
                     {

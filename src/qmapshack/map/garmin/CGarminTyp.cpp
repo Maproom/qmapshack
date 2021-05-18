@@ -71,9 +71,9 @@ bool CGarminTyp::decode(const QByteArray& array, QMap<quint32, polygon_property>
     return true;
 }
 
-QTextCodec * CGarminTyp::getCodec(quint16 codepage)
+QTextCodec* CGarminTyp::getCodec(quint16 codepage)
 {
-    QTextCodec * codec = QTextCodec::codecForName(QString("CP%1").arg(codepage).toLatin1());
+    QTextCodec* codec = QTextCodec::codecForName(QString("CP%1").arg(codepage).toLatin1());
     if(codepage == 65001)
     {
         codec = QTextCodec::codecForName("UTF-8");
@@ -117,7 +117,7 @@ bool CGarminTyp::parseHeader(QDataStream& in)
 
     /* Read Array datas */
     in >> sectPoints.arrayOffset >> sectPoints.arrayModulo >> sectPoints.arraySize;
-    in >> sectPolylines.arrayOffset  >> sectPolylines.arrayModulo  >> sectPolylines.arraySize;
+    in >> sectPolylines.arrayOffset >> sectPolylines.arrayModulo >> sectPolylines.arraySize;
     in >> sectPolygons.arrayOffset >> sectPolygons.arrayModulo >> sectPolygons.arraySize;
     in >> sectOrder.arrayOffset >> sectOrder.arrayModulo >> sectOrder.arraySize;
 
@@ -163,7 +163,7 @@ bool CGarminTyp::parseDrawOrder(QDataStream& in, QList<quint32>& drawOrder)
 
     for (i = 0; i < N; i++)
     {
-        in >> typ >>  subtyp;
+        in >> typ >> subtyp;
         //         qDebug() << hex << typ << subtyp;
         if (typ == 0)
         {
@@ -232,7 +232,7 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
         return true;
     }
 
-    QTextCodec * codec = getCodec(codepage);
+    QTextCodec* codec = getCodec(codepage);
 
     const int N = sectPolygons.arraySize / sectPolygons.arrayModulo;
     for (int element = 0; element < N; element++)
@@ -266,9 +266,9 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
             offset = t8;
         }
 
-        t16_2   = (t16_1 >> 5) | (( t16_1 & 0x1f) << 11);
-        typ     = t16_2 & 0x7F;
-        subtyp  = t16_1 & 0x1F;
+        t16_2 = (t16_1 >> 5) | (( t16_1 & 0x1f) << 11);
+        typ = t16_2 & 0x7F;
+        subtyp = t16_1 & 0x1F;
 
         if(t16_1 & 0x2000)
         {
@@ -278,8 +278,8 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
         in.device()->seek(sectPolygons.dataOffset + offset);
         in >> t8;
         hasLocalization = t8 & 0x10;
-        hasTextColor    = t8 & 0x20;
-        ctyp            = t8 & 0x0F;
+        hasTextColor = t8 & 0x20;
+        ctyp = t8 & 0x0F;
 
 #ifdef DBG
         qDebug() << "Polygon typ:" << hex << typ << "ctype:" << ctyp << "offset:" << (sectPolygons.dataOffset + offset) << "orig data:" << t16_1;
@@ -293,15 +293,15 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
         {
             // day & night single color
             in >> b >> g >> r;
-            property.brushDay      = QBrush(qRgb(r, g, b));
+            property.brushDay = QBrush(qRgb(r, g, b));
             in >> b >> g >> r;
-            property.brushNight    = QBrush(qRgb(r, g, b));
+            property.brushNight = QBrush(qRgb(r, g, b));
 
             // night and day color for line?
             in >> b >> g >> r;
-            property.pen           = QPen(QBrush(qRgb(r, g, b)), 2);
+            property.pen = QPen(QBrush(qRgb(r, g, b)), 2);
             in >> b >> g >> r;
-            property.known         = true;
+            property.known = true;
 
             break;
         }
@@ -310,10 +310,10 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
         {
             // day & night single color
             in >> b >> g >> r;
-            property.brushDay      = QBrush(qRgb(r, g, b));
-            property.brushNight    = QBrush(qRgb(r, g, b));
-            property.pen           = Qt::NoPen;
-            property.known         = true;
+            property.brushDay = QBrush(qRgb(r, g, b));
+            property.brushNight = QBrush(qRgb(r, g, b));
+            property.pen = Qt::NoPen;
+            property.known = true;
 
             break;
         }
@@ -322,11 +322,11 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
         {
             // day single color & night single color
             in >> b >> g >> r;
-            property.brushDay      = QBrush(qRgb(r, g, b));
+            property.brushDay = QBrush(qRgb(r, g, b));
             in >> b >> g >> r;
-            property.brushNight    = QBrush(qRgb(r, g, b));
-            property.pen           = Qt::NoPen;
-            property.known         = true;
+            property.brushNight = QBrush(qRgb(r, g, b));
+            property.pen = Qt::NoPen;
+            property.known = true;
 
             break;
         }
@@ -344,8 +344,8 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
             decodeBitmap(in, xpmDay, 32, 32, 1);
             property.brushDay.setTextureImage(xpmDay);
             property.brushNight.setTextureImage(xpmDay);
-            property.pen      = Qt::NoPen;
-            property.known    = true;
+            property.pen = Qt::NoPen;
+            property.known = true;
             break;
         }
 
@@ -367,8 +367,8 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
             memcpy(xpmNight.bits(), xpmDay.bits(), (32 * 32));
             property.brushDay.setTextureImage(xpmDay);
             property.brushNight.setTextureImage(xpmNight);
-            property.pen      = Qt::NoPen;
-            property.known    = true;
+            property.pen = Qt::NoPen;
+            property.known = true;
 
             break;
         }
@@ -391,8 +391,8 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
             memcpy(xpmNight.bits(), xpmDay.bits(), (32 * 32));
             property.brushDay.setTextureImage(xpmDay);
             property.brushNight.setTextureImage(xpmNight);
-            property.pen      = Qt::NoPen;
-            property.known    = true;
+            property.pen = Qt::NoPen;
+            property.known = true;
             break;
         }
 
@@ -415,8 +415,8 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
             memcpy(xpmNight.bits(), xpmDay.bits(), (32 * 32));
             property.brushDay.setTextureImage(xpmDay);
             property.brushNight.setTextureImage(xpmNight);
-            property.pen      = Qt::NoPen;
-            property.known    = true;
+            property.pen = Qt::NoPen;
+            property.known = true;
 
             break;
         }
@@ -432,8 +432,8 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
             decodeBitmap(in, xpmDay, 32, 32, 1);
             property.brushDay.setTextureImage(xpmDay);
             property.brushNight.setTextureImage(xpmDay);
-            property.pen      = Qt::NoPen;
-            property.known    = true;
+            property.pen = Qt::NoPen;
+            property.known = true;
 
             break;
         }
@@ -455,8 +455,8 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
             memcpy(xpmNight.bits(), xpmDay.bits(), (32 * 32));
             property.brushDay.setTextureImage(xpmDay);
             property.brushNight.setTextureImage(xpmNight);
-            property.pen      = Qt::NoPen;
-            property.known    = true;
+            property.pen = Qt::NoPen;
+            property.known = true;
 
             break;
         }
@@ -554,7 +554,7 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
         return true;
     }
 
-    QTextCodec * codec = getCodec(codepage);
+    QTextCodec* codec = getCodec(codepage);
 
     const int N = sectPolylines.arraySize / sectPolylines.arrayModulo;
     for (int element = 0; element < N; element++)
@@ -587,9 +587,9 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
             offset = t8_1;
         }
 
-        t16_2   = (t16_1 >> 5) | (( t16_1 & 0x1f) << 11);
-        typ     = t16_2 & 0x7F;
-        subtyp  = t16_1 & 0x1F;
+        t16_2 = (t16_1 >> 5) | (( t16_1 & 0x1f) << 11);
+        typ = t16_2 & 0x7F;
+        subtyp = t16_1 & 0x1F;
 
         if(t16_1 & 0x2000)
         {
@@ -603,7 +603,7 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
 
         hasLocalization = t8_2 & 0x01;
         //renderMode      = t8_2 & 0x02;
-        hasTextColor    = t8_2 & 0x04;
+        hasTextColor = t8_2 & 0x04;
 
 #ifdef DBG
         qDebug() << "Polyline typ:" << hex << typ << "ctyp:" << ctyp << "offset:" << (sectPolylines.dataOffset + offset) << "orig data:" << t16_1;
@@ -626,28 +626,28 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
                 in >> b >> g >> r;
                 xpm.setColor(0, qRgb(r, g, b) );
                 decodeBitmap(in, xpm, 32, rows, 1);
-                property.imgDay     = xpm;
-                property.imgNight   = xpm;
-                property.hasPixmap  = true;
-                property.known      = true;
+                property.imgDay = xpm;
+                property.imgNight = xpm;
+                property.hasPixmap = true;
+                property.known = true;
             }
             else
             {
                 quint8 w1, w2;
                 in >> b >> g >> r;
-                property.penLineDay     = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-                property.penLineNight   = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penLineDay = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penLineNight = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 in >> b >> g >> r;
-                property.penBorderDay   = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penBorderDay = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 property.penBorderNight = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 in >> w1 >> w2;
                 property.penLineDay.setWidth(w1);
                 property.penLineNight.setWidth(w1);
                 property.penBorderDay.setWidth(w2);
                 property.penBorderNight.setWidth(w2);
-                property.hasBorder  = w2 > w1;
-                property.hasPixmap  = false;
-                property.known      = true;
+                property.hasBorder = w2 > w1;
+                property.hasPixmap = false;
+                property.known = true;
             }
 
             break;
@@ -669,20 +669,20 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
                 xpm2.setColor(0, qRgb(r, g, b) );
                 decodeBitmap(in, xpm1, 32, rows, 1);
                 memcpy(xpm2.bits(), xpm1.bits(), (32 * rows));
-                property.imgDay     = xpm1;
-                property.imgNight   = xpm2;
-                property.hasPixmap  = true;
-                property.known      = true;
+                property.imgDay = xpm1;
+                property.imgNight = xpm2;
+                property.hasPixmap = true;
+                property.known = true;
             }
             else
             {
                 quint8 w1, w2;
                 in >> b >> g >> r;
-                property.penLineDay     = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penLineDay = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 in >> b >> g >> r;
-                property.penBorderDay   = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penBorderDay = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 in >> b >> g >> r;
-                property.penLineNight   = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penLineNight = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 in >> b >> g >> r;
                 property.penBorderNight = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 in >> w1 >> w2;
@@ -690,9 +690,9 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
                 property.penLineNight.setWidth(w1);
                 property.penBorderDay.setWidth(w2);
                 property.penBorderNight.setWidth(w2);
-                property.hasBorder  = w2 > w1;
-                property.hasPixmap  = false;
-                property.known      = true;
+                property.hasBorder = w2 > w1;
+                property.hasPixmap = false;
+                property.known = true;
             }
             break;
         }
@@ -712,19 +712,19 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
                 xpm2.setColor(0, qRgb(r, g, b) );
                 decodeBitmap(in, xpm1, 32, rows, 1);
                 memcpy(xpm2.bits(), xpm1.bits(), (32 * rows));
-                property.imgDay     = xpm1;
-                property.imgNight   = xpm2;
-                property.hasPixmap  = true;
-                property.known      = true;
+                property.imgDay = xpm1;
+                property.imgNight = xpm2;
+                property.hasPixmap = true;
+                property.known = true;
             }
             else
             {
                 quint8 w1, w2;
                 in >> b >> g >> r;
-                property.penLineDay     = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-                property.penBorderDay   = QPen(Qt::NoPen);
+                property.penLineDay = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penBorderDay = QPen(Qt::NoPen);
                 in >> b >> g >> r;
-                property.penLineNight   = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penLineNight = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 in >> b >> g >> r;
                 property.penBorderNight = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 in >> w1 >> w2;
@@ -732,9 +732,9 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
                 property.penLineNight.setWidth(w1);
                 property.penBorderDay.setWidth(w2);
                 property.penBorderNight.setWidth(w2);
-                property.hasBorder  = w2 > w1;
-                property.hasPixmap  = false;
-                property.known      = true;
+                property.hasBorder = w2 > w1;
+                property.hasPixmap = false;
+                property.known = true;
             }
 
             break;
@@ -755,27 +755,27 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
                 xpm2.setColor(0, qRgba(255, 255, 255, 0) );
                 decodeBitmap(in, xpm1, 32, rows, 1);
                 memcpy(xpm2.bits(), xpm1.bits(), (32 * rows));
-                property.imgDay     = xpm1;
-                property.imgNight   = xpm2;
-                property.hasPixmap  = true;
-                property.known      = true;
+                property.imgDay = xpm1;
+                property.imgNight = xpm2;
+                property.hasPixmap = true;
+                property.known = true;
             }
             else
             {
                 quint8 w1;
                 in >> b >> g >> r;
-                property.penLineDay     = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penLineDay = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 in >> b >> g >> r;
-                property.penBorderDay   = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penBorderDay = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 in >> b >> g >> r;
-                property.penLineNight   = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penLineNight = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 property.penBorderNight = QPen(Qt::NoPen);
                 in >> w1;
                 property.penLineDay.setWidth(w1);
                 property.penLineNight.setWidth(w1);
-                property.hasBorder  = false;
-                property.hasPixmap  = false;
-                property.known      = true;
+                property.hasBorder = false;
+                property.hasPixmap = false;
+                property.known = true;
             }
             break;
         }
@@ -789,25 +789,25 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
                 xpm.setColor(1, qRgb(r, g, b) );
                 xpm.setColor(0, qRgba(255, 255, 255, 0) );
                 decodeBitmap(in, xpm, 32, rows, 1);
-                property.imgDay     = xpm;
-                property.imgNight   = xpm;
-                property.hasPixmap  = true;
-                property.known      = true;
+                property.imgDay = xpm;
+                property.imgNight = xpm;
+                property.hasPixmap = true;
+                property.known = true;
             }
             else
             {
                 quint8 w1;
                 in >> b >> g >> r;
-                property.penLineDay     = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-                property.penBorderDay   = QPen(Qt::NoPen);
-                property.penLineNight   = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penLineDay = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penBorderDay = QPen(Qt::NoPen);
+                property.penLineNight = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 property.penBorderNight = QPen(Qt::NoPen);
                 in >> w1;
                 property.penLineDay.setWidth(w1);
                 property.penLineNight.setWidth(w1);
-                property.hasBorder  = false;
-                property.hasPixmap  = false;
-                property.known      = true;
+                property.hasBorder = false;
+                property.hasPixmap = false;
+                property.known = true;
             }
             break;
         }
@@ -826,26 +826,26 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
                 xpm2.setColor(0, qRgba(255, 255, 255, 0) );
                 decodeBitmap(in, xpm1, 32, rows, 1);
                 memcpy(xpm2.bits(), xpm1.bits(), (32 * rows));
-                property.imgDay     = xpm1;
-                property.imgNight   = xpm2;
-                property.hasPixmap  = true;
-                property.known      = true;
+                property.imgDay = xpm1;
+                property.imgNight = xpm2;
+                property.hasPixmap = true;
+                property.known = true;
             }
             else
             {
                 quint8 w1;
                 in >> b >> g >> r;
-                property.penLineDay     = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-                property.penBorderDay   = QPen(Qt::NoPen);
+                property.penLineDay = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penBorderDay = QPen(Qt::NoPen);
                 in >> b >> g >> r;
-                property.penLineNight   = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+                property.penLineNight = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
                 property.penBorderNight = QPen(Qt::NoPen);
                 in >> w1;
                 property.penLineDay.setWidth(w1);
                 property.penLineNight.setWidth(w1);
-                property.hasBorder  = false;
-                property.hasPixmap  = false;
-                property.known      = true;
+                property.hasBorder = false;
+                property.hasPixmap = false;
+                property.known = true;
             }
             break;
         }
@@ -857,12 +857,12 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
                 tainted = true;
             }
 
-            qDebug() << "Failed polyline" <<  hex << ":" << typ <<  ctyp << rows;
+            qDebug() << "Failed polyline" << hex << ":" << typ << ctyp << rows;
             continue;
         }
 
-        property.imgDay     = property.imgDay.convertToFormat(QImage::Format_ARGB32_Premultiplied);
-        property.imgNight   = property.imgNight.convertToFormat(QImage::Format_ARGB32_Premultiplied);
+        property.imgDay = property.imgDay.convertToFormat(QImage::Format_ARGB32_Premultiplied);
+        property.imgNight = property.imgNight.convertToFormat(QImage::Format_ARGB32_Premultiplied);
         if(hasLocalization)
         {
             qint16 len;
@@ -930,8 +930,8 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
 
         if(property.hasPixmap)
         {
-            property.imgDay     = property.imgDay.mirrored(false, true);
-            property.imgNight   = property.imgNight.mirrored(false, true);
+            property.imgDay = property.imgDay.mirrored(false, true);
+            property.imgNight = property.imgNight.mirrored(false, true);
         }
     }
     return true;
@@ -1044,7 +1044,7 @@ bool CGarminTyp::decodeColorTable(QDataStream& in, QImage& img, int ncolors, int
         int i;
         quint8 byte;
         quint32 bits = 0;
-        quint32 reg  = 0;
+        quint32 reg = 0;
         quint32 mask = 0x000000FF;
 
         for (i = 0; i < ncolors; i++)
@@ -1053,14 +1053,14 @@ bool CGarminTyp::decodeColorTable(QDataStream& in, QImage& img, int ncolors, int
             {
                 in >> byte;
                 mask = 0x000000FF << bits;
-                reg  = reg  & (~mask);
-                reg  = reg  | (byte << bits);
+                reg = reg & (~mask);
+                reg = reg | (byte << bits);
                 bits += 8;
             }
 
             img.setColor(i, qRgba((reg >> 16) & 0x0FF, (reg >> 8) & 0x0FF, reg & 0x0FF, ~((reg >> 24) & 0x0F) << 4));
 
-            reg   = reg >> 28;
+            reg = reg >> 28;
             bits -= 28;
         }
         for(; i < maxcolor; ++i)
@@ -1086,7 +1086,7 @@ bool CGarminTyp::decodeColorTable(QDataStream& in, QImage& img, int ncolors, int
 }
 
 
-void CGarminTyp::decodeBitmap(QDataStream &in, QImage &img, int w, int h, int bpp)
+void CGarminTyp::decodeBitmap(QDataStream& in, QImage& img, int w, int h, int bpp)
 {
     int x = 0, j = 0;
     quint8 color;
@@ -1145,7 +1145,7 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
         return true;
     }
 
-    QTextCodec * codec = getCodec(codepage);
+    QTextCodec* codec = getCodec(codepage);
 
     const int N = sectPoints.arraySize / sectPoints.arrayModulo;
     for (int element = 0; element < N; element++)
@@ -1176,9 +1176,9 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
             offset = t8_1;
         }
 
-        t16_2   = (t16_1 >> 5) | (( t16_1 & 0x1f) << 11);
-        typ     = t16_2 & 0x7FF;
-        subtyp  = t16_1 & 0x01F;
+        t16_2 = (t16_1 >> 5) | (( t16_1 & 0x1f) << 11);
+        typ = t16_2 & 0x7FF;
+        subtyp = t16_1 & 0x01F;
 
         if(t16_1 & 0x2000)
         {
@@ -1196,8 +1196,8 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
         in >> t8_1 >> w >> h >> ncolors >> ctyp;
 
         hasLocalization = t8_1 & 0x04;
-        hasTextColor    = t8_1 & 0x08;
-        t8_1            = t8_1 & 0x03;
+        hasTextColor = t8_1 & 0x08;
+        t8_1 = t8_1 & 0x03;
 #ifdef DBG
         qDebug() << "Point typ:" << hex << typ << "ctyp:" << ctyp << "offset:" << (sectPoints.dataOffset + offset) << "orig data:" << t16_1;
 #endif

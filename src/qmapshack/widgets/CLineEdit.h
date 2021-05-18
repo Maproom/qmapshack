@@ -55,12 +55,12 @@ public slots:
     }
 
 public:
-    CLineEdit(QWidget *parent = nullptr);
+    CLineEdit(QWidget* parent = nullptr);
 
     void setReadOnly(bool r);
 
 protected:
-    void focusInEvent(QFocusEvent *event) override;
-    void focusOutEvent(QFocusEvent *event) override;
+    void focusInEvent(QFocusEvent* event) override;
+    void focusOutEvent(QFocusEvent* event) override;
 };
 #endif // CLINEEDIT_H

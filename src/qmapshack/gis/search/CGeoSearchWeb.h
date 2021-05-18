@@ -51,7 +51,7 @@ public:
     static const QString defaultIcon;
     QList<service_t> defaultServices();
 
-    QMenu * getMenu(const QPointF& pt, QWidget * parent, bool execute = false) const;
+    QMenu* getMenu(const QPointF& pt, QWidget* parent, bool execute = false) const;
     void search(const QPointF& pt);
 
 private slots:
@@ -59,10 +59,10 @@ private slots:
     void slotSearchWeb(int serviceId, const QPointF pt) const;
 
 private:
-    CGeoSearchWeb(QObject *parent);
+    CGeoSearchWeb(QObject* parent);
     friend class CMainWindow;
 
-    static CGeoSearchWeb * pSelf;
+    static CGeoSearchWeb* pSelf;
 
     QList<service_t> services;
 };

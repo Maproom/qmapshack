@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CCanvas::CCanvas(QWidget *parent)
+CCanvas::CCanvas(QWidget* parent)
     : QWidget(parent)
 {
     setFocusPolicy(Qt::WheelFocus);
@@ -36,7 +36,7 @@ CCanvas::CCanvas(QWidget *parent)
     mapLoadIndicator->show();
 }
 
-void CCanvas::setOverrideCursor(const QCursor &cursor, const QString&)
+void CCanvas::setOverrideCursor(const QCursor& cursor, const QString&)
 {
 //    qDebug() << "setOverrideCursor" << src;
     QApplication::setOverrideCursor(cursor);
@@ -48,14 +48,14 @@ void CCanvas::restoreOverrideCursor(const QString& src)
     QApplication::restoreOverrideCursor();
 }
 
-void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString &src)
+void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString& src)
 {
 //    qDebug() << "changeOverrideCursor" << src;
     QApplication::changeOverrideCursor(cursor);
 }
 
 
-void CCanvas::resizeEvent(QResizeEvent *e)
+void CCanvas::resizeEvent(QResizeEvent* e)
 {
     QMutexLocker lock(&mutex);
 
@@ -70,7 +70,7 @@ void CCanvas::resizeEvent(QResizeEvent *e)
     QWidget::resizeEvent(e);
 }
 
-void CCanvas::paintEvent(QPaintEvent  *e)
+void CCanvas::paintEvent(QPaintEvent* e)
 {
     QPainter p;
     p.begin(this);
@@ -95,41 +95,41 @@ void CCanvas::paintEvent(QPaintEvent  *e)
     needsRedraw = eRedrawNone;
 }
 
-void CCanvas::mousePressEvent(QMouseEvent  *e)
+void CCanvas::mousePressEvent(QMouseEvent* e)
 {
     QMutexLocker lock(&mutex);
     tool->mousePressEventFx(e);
     e->accept();
 }
 
-void CCanvas::mouseMoveEvent(QMouseEvent  *e)
+void CCanvas::mouseMoveEvent(QMouseEvent* e)
 {
     QMutexLocker lock(&mutex);
     tool->mouseMoveEventFx(e);
     e->accept();
 }
 
-void CCanvas::mouseReleaseEvent(QMouseEvent  *e)
+void CCanvas::mouseReleaseEvent(QMouseEvent* e)
 {
     QMutexLocker lock(&mutex);
     tool->mouseReleaseEventFx(e);
     e->accept();
 }
 
-void CCanvas::mouseDoubleClickEvent(QMouseEvent *e)
+void CCanvas::mouseDoubleClickEvent(QMouseEvent* e)
 {
     QMutexLocker lock(&mutex);
     tool->mouseDoubleClickEventFx(e);
     e->accept();
 }
 
-void CCanvas::wheelEvent(QWheelEvent *e)
+void CCanvas::wheelEvent(QWheelEvent* e)
 {
     QMutexLocker lock(&mutex);
     tool->wheelEventFx(e);
 }
 
-void CCanvas::enterEvent(QEvent *e)
+void CCanvas::enterEvent(QEvent* e)
 {
     QMutexLocker lock(&mutex);
 
@@ -139,7 +139,7 @@ void CCanvas::enterEvent(QEvent *e)
     setMouseTracking(true);
 }
 
-void CCanvas::leaveEvent(QEvent *e)
+void CCanvas::leaveEvent(QEvent* e)
 {
     QMutexLocker lock(&mutex);
 
@@ -155,7 +155,7 @@ void CCanvas::leaveEvent(QEvent *e)
     setMouseTracking(false);
 }
 
-void CCanvas::keyPressEvent(QKeyEvent *e)
+void CCanvas::keyPressEvent(QKeyEvent* e)
 {
     QMutexLocker lock(&mutex);
     if(!tool->keyPressEventFx(e))

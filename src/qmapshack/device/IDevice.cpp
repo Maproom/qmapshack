@@ -31,7 +31,7 @@
 
 int IDevice::cnt = 0;
 
-IDevice::IDevice(const QString &path, type_e type, const QString &key, QTreeWidget *parent)
+IDevice::IDevice(const QString& path, type_e type, const QString& key, QTreeWidget* parent)
     : QTreeWidgetItem(parent, type)
     , dir(path)
     , key(key)
@@ -40,7 +40,7 @@ IDevice::IDevice(const QString &path, type_e type, const QString &key, QTreeWidg
     cnt++;
 }
 
-IDevice::IDevice(const QString &path, type_e type, const QString &key, CDeviceGarmin *parent)
+IDevice::IDevice(const QString& path, type_e type, const QString& key, CDeviceGarmin* parent)
     : QTreeWidgetItem(parent, type)
     , dir(path)
     , key(key)
@@ -69,7 +69,7 @@ void IDevice::mount(const QString& path)
 #endif
 }
 
-void IDevice::umount(const QString &path)
+void IDevice::umount(const QString& path)
 {
 #ifdef HAVE_DBUS
     QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path, "org.freedesktop.UDisks2.Filesystem", "Unmount");
@@ -85,19 +85,19 @@ QString IDevice::getName() const
     return text(CGisListWks::eColumnName);
 }
 
-void IDevice::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
+void IDevice::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        IGisProject* project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
             project->getItemsByPos(pos, items);
             continue;
         }
 
-        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        IDevice* device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
             device->getItemsByPos(pos, items);
@@ -105,19 +105,19 @@ void IDevice::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
     }
 }
 
-void IDevice::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items)
+void IDevice::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem*>& items)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        IGisProject* project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
             project->getItemsByArea(area, flags, items);
             continue;
         }
 
-        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        IDevice* device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
             device->getItemsByArea(area, flags, items);
@@ -125,19 +125,19 @@ void IDevice::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QLi
     }
 }
 
-void IDevice::getNogoAreas(QList<IGisItem*> &nogos)
+void IDevice::getNogoAreas(QList<IGisItem*>& nogos)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        IGisProject* project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
             project->getNogoAreas(nogos);
             continue;
         }
 
-        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        IDevice* device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
             device->getNogoAreas(nogos);
@@ -145,13 +145,13 @@ void IDevice::getNogoAreas(QList<IGisItem*> &nogos)
     }
 }
 
-IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
+IGisItem* IDevice::getItemByKey(const IGisItem::key_t& key)
 {
-    IGisItem * item = nullptr;
+    IGisItem* item = nullptr;
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        IGisProject* project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
             if(project->getKey() != key.project)
@@ -166,7 +166,7 @@ IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
             }
         }
 
-        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        IDevice* device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
             item = device->getItemByKey(key);
@@ -184,14 +184,14 @@ void IDevice::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        IGisProject* project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
             project->getItemsByKeys(keys, items);
             continue;
         }
 
-        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        IDevice* device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
             device->getItemsByKeys(keys, items);
@@ -199,12 +199,12 @@ void IDevice::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*
     }
 }
 
-IGisProject * IDevice::getProjectByKey(const QString& key)
+IGisProject* IDevice::getProjectByKey(const QString& key)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        IGisProject* project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
             if(project->getKey() != key)
@@ -215,7 +215,7 @@ IGisProject * IDevice::getProjectByKey(const QString& key)
             return project;
         }
 
-        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        IDevice* device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
             project = device->getProjectByKey(key);
@@ -233,14 +233,14 @@ void IDevice::editItemByKey(const IGisItem::key_t& key)
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        IGisProject* project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
             project->editItemByKey(key);
             continue;
         }
 
-        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        IDevice* device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
             device->editItemByKey(key);
@@ -249,9 +249,9 @@ void IDevice::editItemByKey(const IGisItem::key_t& key)
 }
 
 
-void IDevice::insertCopyOfProject(IGisProject * project, int& lastResult)
+void IDevice::insertCopyOfProject(IGisProject* project, int& lastResult)
 {
-    IGisProject * project2 = getProjectByKey(project->getKey());
+    IGisProject* project2 = getProjectByKey(project->getKey());
     if(project2)
     {
         int result = lastResult;
@@ -288,9 +288,9 @@ void IDevice::insertCopyOfProject(IGisProject * project, int& lastResult)
     insertCopyOfProject(project);
 }
 
-void IDevice::updateProject(IGisProject * project)
+void IDevice::updateProject(IGisProject* project)
 {
-    IGisProject * project2 = getProjectByKey(project->getKey());
+    IGisProject* project2 = getProjectByKey(project->getKey());
     if(project2)
     {
         if(project2->remove())
@@ -336,7 +336,7 @@ bool IDevice::testForExternalProject(const QString& filename)
         const int N = childCount();
         for(int n = 0; n < N; n++)
         {
-            QTreeWidgetItem * item = child(n);
+            QTreeWidgetItem* item = child(n);
             if(item->text(CGisListWks::eColumnName) == fi.baseName())
             {
                 delete item;
@@ -347,19 +347,19 @@ bool IDevice::testForExternalProject(const QString& filename)
     return false;
 }
 
-void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, CGisDraw * gis)
+void IDevice::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        IGisProject* project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
             project->drawItem(p, viewport, blockedAreas, gis);
             continue;
         }
 
-        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        IDevice* device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
             device->drawItem(p, viewport, blockedAreas, gis);
@@ -367,19 +367,19 @@ void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& bl
     }
 }
 
-void IDevice::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis)
+void IDevice::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        IGisProject* project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
             project->drawLabel(p, viewport, blockedAreas, fm, gis);
             continue;
         }
 
-        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        IDevice* device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
             device->drawLabel(p, viewport, blockedAreas, fm, gis);
@@ -387,19 +387,19 @@ void IDevice::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& b
     }
 }
 
-void IDevice::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+void IDevice::drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        IGisProject* project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
             project->drawItem(p, viewport, gis);
             continue;
         }
 
-        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        IDevice* device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
             device->drawItem(p, viewport, gis);

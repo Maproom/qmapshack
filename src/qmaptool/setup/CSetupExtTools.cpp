@@ -29,7 +29,7 @@ using std::bind;
 #define slot2(method) \
     std::bind(&CSetupExtTools::slotResetPathXOverride, this, [](){IAppSetup::self().method(); })
 
-CSetupExtTools::CSetupExtTools(QWidget *parent)
+CSetupExtTools::CSetupExtTools(QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -52,13 +52,13 @@ CSetupExtTools::CSetupExtTools(QWidget *parent)
 
 void CSetupExtTools::setupGui()
 {
-    const IAppSetup& setup          = IAppSetup::self();
-    const QString& gdaladdo         = setup.getGdaladdo();
-    const QString& gdaltranslate    = setup.getGdaltranslate();
-    const QString& gdalwarp         = setup.getGdalwarp();
-    const QString& gdalbuildvrt     = setup.getGdalbuildvrt();
-    const QString& qmtrgb2pct       = setup.getQmtrgb2pct();
-    const QString& qmtmap2jnx       = setup.getQmtmap2jnx();
+    const IAppSetup& setup = IAppSetup::self();
+    const QString& gdaladdo = setup.getGdaladdo();
+    const QString& gdaltranslate = setup.getGdaltranslate();
+    const QString& gdalwarp = setup.getGdalwarp();
+    const QString& gdalbuildvrt = setup.getGdalbuildvrt();
+    const QString& qmtrgb2pct = setup.getQmtrgb2pct();
+    const QString& qmtmap2jnx = setup.getQmtmap2jnx();
 
     labelPathGdaladdo->setText(gdaladdo.isEmpty() ? tr("<b style='color: red;'>not found</b>") : gdaladdo);
     labelPathGdaltranslate->setText(gdaltranslate.isEmpty() ? tr("<b style='color: red;'>not found</b>") : gdaltranslate);

@@ -26,7 +26,7 @@ class CCanvas;
 class CGisDraw : public IDrawContext
 {
 public:
-    CGisDraw(CCanvas *parent);
+    CGisDraw(CCanvas* parent);
     virtual ~CGisDraw() = default;
 
     using IDrawContext::draw;

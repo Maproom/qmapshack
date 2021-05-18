@@ -27,7 +27,7 @@ class CPoiTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 public:
-    CPoiTreeWidget(QWidget * parent) : QTreeWidget(parent)
+    CPoiTreeWidget(QWidget* parent) : QTreeWidget(parent)
     {
     }
 
@@ -41,12 +41,12 @@ class CPoiList : public QWidget, private Ui::IPoiList
 {
     Q_OBJECT
 public:
-    CPoiList(QWidget * parent);
+    CPoiList(QWidget* parent);
     virtual ~CPoiList() = default;
 
     void clear();
     int count();
-    CPoiItem * item(int i);
+    CPoiItem* item(int i);
     operator QTreeWidget*(){return treeWidget;}
 
     void updateHelpText();
@@ -58,10 +58,10 @@ signals:
 private slots:
     void slotActivate();
     void slotReloadPoi();
-    void slotContextMenu(const QPoint &point);
+    void slotContextMenu(const QPoint& point);
 
 private:
-    QMenu * menu;
+    QMenu* menu;
 };
 
 #endif //CPOILIST_H

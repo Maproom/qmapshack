@@ -23,8 +23,8 @@
 #define N_DEFAULT_ZOOM_LEVELS 31
 const qreal IDrawContext::scales[N_DEFAULT_ZOOM_LEVELS] =
 {
-    0.10,  0.15,  0.20,  0.30,   0.50,   0.70,   1.0,    1.5,    2.0,    3.0,
-    5.0,   7.0,  10.0,  15.0,   20.0,   30.0,   50.0,   70.0,  100.0,  150.0,
+    0.10, 0.15, 0.20, 0.30, 0.50, 0.70, 1.0, 1.5, 2.0, 3.0,
+    5.0, 7.0, 10.0, 15.0, 20.0, 30.0, 50.0, 70.0, 100.0, 150.0,
     200.0, 300.0, 500.0, 700.0, 1000.0, 1500.0, 2000.0, 3000.0, 5000.0, 7000.0,
     10000.0
     //, 15000.0, 20000.0, 30000.0, 50000.0, 70000.0
@@ -43,7 +43,7 @@ QPointF operator/(const QPointF& p1, const QPointF& p2)
 QMutex IDrawContext::mutex(QMutex::Recursive);
 
 
-IDrawContext::IDrawContext(CCanvas * canvas, QObject * parent)
+IDrawContext::IDrawContext(CCanvas* canvas, QObject* parent)
     : QThread(parent)
     , canvas(canvas)
 {
@@ -92,11 +92,11 @@ void IDrawContext::slotResize(const QSize& size)
     }
 
     QMutexLocker lock(&mutex);
-    viewWidth  = size.width();
+    viewWidth = size.width();
     viewHeight = size.height();
 
-    bufWidth   = viewWidth;
-    bufHeight  = viewHeight;
+    bufWidth = viewWidth;
+    bufHeight = viewHeight;
 
     buffer[0].image = QImage(qRound(bufWidth), qRound(bufHeight), QImage::Format_ARGB32);
     buffer[1].image = QImage(qRound(bufWidth), qRound(bufHeight), QImage::Format_ARGB32);
@@ -201,10 +201,10 @@ void IDrawContext::zoom(int idx)
     mutex.lock(); // --------- start serialize with thread
     if((zoomFactorIdx != idx) || (zoomFactor.x() != scales[idx]))
     {
-        zoomFactorIdx   = idx;
+        zoomFactorIdx = idx;
         zoomFactor.rx() = scales[idx];
         zoomFactor.ry() = scales[idx];
-        intNeedsRedraw  = true;
+        intNeedsRedraw = true;
     }
     mutex.unlock(); // --------- stop serialize with thread
 }
@@ -213,10 +213,10 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw)
 {
     mutex.lock(); // --------- start serialize with thread
     // derive map reference points for all corners coordinate of map buffer
-    ref1 = QPointF( 0,         0);
-    ref2 = QPointF( bufWidth,  0);
-    ref3 = QPointF( bufWidth,  bufHeight);
-    ref4 = QPointF( 0,         bufHeight);
+    ref1 = QPointF( 0, 0);
+    ref2 = QPointF( bufWidth, 0);
+    ref3 = QPointF( bufWidth, bufHeight);
+    ref4 = QPointF( 0, bufHeight);
 
     convertScreen2Map(ref1);
     convertScreen2Map(ref2);
@@ -229,7 +229,7 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw)
     convertMap2Coord(ref4);
 
     // get current active buffer
-    const buffer_t& currentBuffer   = buffer[bufIndex];
+    const buffer_t& currentBuffer = buffer[bufIndex];
 
     // calculate screen offset of current buffer
     QPointF offset = currentBuffer.ref1;
@@ -275,13 +275,13 @@ void IDrawContext::run()
         // copy all projection information need by the
         // map render objects to buffer structure
         currentBuffer.zoomFactor = zoomFactor;
-        currentBuffer.scale      = scale;
-        currentBuffer.ref1       = ref1;
-        currentBuffer.ref2       = ref2;
-        currentBuffer.ref3       = ref3;
-        currentBuffer.ref4       = ref4;
-        currentBuffer.focus      = focus;
-        intNeedsRedraw           = false;
+        currentBuffer.scale = scale;
+        currentBuffer.ref1 = ref1;
+        currentBuffer.ref2 = ref2;
+        currentBuffer.ref3 = ref3;
+        currentBuffer.ref4 = ref4;
+        currentBuffer.focus = focus;
+        intNeedsRedraw = false;
 
         mutex.unlock();
         // ----- reset buffer -----

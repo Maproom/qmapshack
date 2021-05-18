@@ -31,13 +31,13 @@ QStringList CPoiDraw::poiPaths;
 QStringList CPoiDraw::supportedFormats = QString("*.poi").split('|');
 
 
-CPoiDraw::CPoiDraw(CCanvas *canvas)
+CPoiDraw::CPoiDraw(CCanvas* canvas)
     : IDrawContext("poi", CCanvas::eRedrawPoi, canvas)
 {
     poiList = new CPoiList(canvas);
     CMainWindow::self().addPoiList(poiList, canvas->objectName());
-    connect(canvas,  &CCanvas::destroyed,   poiList, &CPoiList::deleteLater);
-    connect(poiList, &CPoiList::sigChanged, this,    &CPoiDraw::emitSigCanvasUpdate);
+    connect(canvas, &CCanvas::destroyed, poiList, &CPoiList::deleteLater);
+    connect(poiList, &CPoiList::sigChanged, this, &CPoiDraw::emitSigCanvasUpdate);
 
     buildPoiList();
 
@@ -107,7 +107,7 @@ void CPoiDraw::setupPoiPath()
     setupPoiPath(paths);
 }
 
-void CPoiDraw::setupPoiPath(const QString &path)
+void CPoiDraw::setupPoiPath(const QString& path)
 {
     QStringList paths(poiPaths);
     if(!poiPaths.contains(path))
@@ -117,11 +117,11 @@ void CPoiDraw::setupPoiPath(const QString &path)
     setupPoiPath(paths);
 }
 
-void CPoiDraw::setupPoiPath(const QStringList &paths)
+void CPoiDraw::setupPoiPath(const QStringList& paths)
 {
     poiPaths = paths;
 
-    for(CPoiDraw * poi : qAsConst(pois))
+    for(CPoiDraw* poi : qAsConst(pois))
     {
         QStringList keys;
         poi->saveActivePoisList(keys);
@@ -130,17 +130,17 @@ void CPoiDraw::setupPoiPath(const QStringList &paths)
     }
 }
 
-void CPoiDraw::savePoiPath(QSettings &cfg)
+void CPoiDraw::savePoiPath(QSettings& cfg)
 {
     cfg.setValue("poiPaths", poiPaths);
 }
 
-void CPoiDraw::loadPoiPath(QSettings &cfg)
+void CPoiDraw::loadPoiPath(QSettings& cfg)
 {
     poiPaths = cfg.value("poiPaths", poiPaths).toStringList();
 }
 
-void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<poi_t> &poiItems, QList<QPointF> &posPoiHighlight) const
+void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     if(poiList && CPoiItem::mutexActivePois.tryLock())
     {
@@ -162,7 +162,7 @@ void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<poi_t> &poiItems, QList<QPo
     }
 }
 
-void CPoiDraw::findPoisIn(const QRectF &degRect, QSet<poi_t> &poiItems, QList<QPointF> &posPoiHighlight) const
+void CPoiDraw::findPoisIn(const QRectF& degRect, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     if(poiList && CPoiItem::mutexActivePois.tryLock())
     {
@@ -184,7 +184,7 @@ void CPoiDraw::findPoisIn(const QRectF &degRect, QSet<poi_t> &poiItems, QList<QP
     }
 }
 
-bool CPoiDraw::getToolTip(const QPoint &px, QString &str)
+bool CPoiDraw::getToolTip(const QPoint& px, QString& str)
 {
     if(poiList && CPoiItem::mutexActivePois.tryLock())
     {
@@ -218,16 +218,16 @@ void CPoiDraw::buildPoiList()
     QMutexLocker lock(&CPoiItem::mutexActivePois);
     poiList->clear();
 
-    for(const QString &path : qAsConst(poiPaths))
+    for(const QString& path : qAsConst(poiPaths))
     {
         QDir dir(path);
         // find available maps
         const QStringList& files = dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name);
-        for(const QString &filename : files)
+        for(const QString& filename : files)
         {
             QFileInfo fi(filename);
 
-            CPoiItem * item = new CPoiItem(*poiList, this);
+            CPoiItem* item = new CPoiItem(*poiList, this);
 
             item->setText(0, fi.completeBaseName().replace("_", " "));
             item->filename = dir.absoluteFilePath(filename);
@@ -247,13 +247,13 @@ void CPoiDraw::buildPoiList()
     poiList->updateHelpText();
 }
 
-void CPoiDraw::saveActivePoisList(QStringList &keys, QSettings &cfg)
+void CPoiDraw::saveActivePoisList(QStringList& keys, QSettings& cfg)
 {
     QMutexLocker lock(&CPoiItem::mutexActivePois);
 
     for(int i = 0; i < poiList->count(); i++)
     {
-        CPoiItem * item = poiList->item(i);
+        CPoiItem* item = poiList->item(i);
         if(item && !item->poifile.isNull())
         {
             item->saveConfig(cfg);
@@ -263,7 +263,7 @@ void CPoiDraw::saveActivePoisList(QStringList &keys, QSettings &cfg)
 }
 
 
-void CPoiDraw::saveActivePoisList(QStringList &keys)
+void CPoiDraw::saveActivePoisList(QStringList& keys)
 {
     SETTINGS;
     cfg.beginGroup(cfgGroup);
@@ -273,7 +273,7 @@ void CPoiDraw::saveActivePoisList(QStringList &keys)
     cfg.endGroup();
 }
 
-void CPoiDraw::loadConfigForPoiItem(CPoiItem * item)
+void CPoiDraw::loadConfigForPoiItem(CPoiItem* item)
 {
     if(cfgGroup.isEmpty())
     {
@@ -288,15 +288,15 @@ void CPoiDraw::loadConfigForPoiItem(CPoiItem * item)
     cfg.endGroup();
 }
 
-void CPoiDraw::restoreActivePoisList(const QStringList &keys)
+void CPoiDraw::restoreActivePoisList(const QStringList& keys)
 {
     QMutexLocker lock(&CPoiItem::mutexActivePois);
 
-    for(const QString &key : keys)
+    for(const QString& key : keys)
     {
         for(int i = 0; i < poiList->count(); i++)
         {
-            CPoiItem * item = poiList->item(i);
+            CPoiItem* item = poiList->item(i);
 
             if(item && item->key == key)
             {
@@ -313,15 +313,15 @@ void CPoiDraw::restoreActivePoisList(const QStringList &keys)
     poiList->updateHelpText();
 }
 
-void CPoiDraw::restoreActivePoisList(const QStringList& keys, QSettings &cfg)
+void CPoiDraw::restoreActivePoisList(const QStringList& keys, QSettings& cfg)
 {
     QMutexLocker lock(&CPoiItem::mutexActivePois);
 
-    for(const QString &key : keys)
+    for(const QString& key : keys)
     {
         for(int i = 0; i < poiList->count(); i++)
         {
-            CPoiItem * item = poiList->item(i);
+            CPoiItem* item = poiList->item(i);
 
             if(item && item->key == key)
             {
@@ -346,7 +346,7 @@ void CPoiDraw::drawt(buffer_t& currentBuffer)
     {
         for(int i = 0; i < poiList->count(); i++)
         {
-            CPoiItem * item = poiList->item(i);
+            CPoiItem* item = poiList->item(i);
 
             if(!item || item->poifile.isNull())
             {

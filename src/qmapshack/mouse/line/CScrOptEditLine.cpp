@@ -20,7 +20,7 @@
 
 #include <QtWidgets>
 
-CScrOptEditLine::CScrOptEditLine(IMouse *mouse)
+CScrOptEditLine::CScrOptEditLine(IMouse* mouse)
     : IScrOpt(mouse)
 {
     setupUi(this);

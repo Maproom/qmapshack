@@ -26,21 +26,21 @@
    @param energyCycling Reference to the track's CEnergyCycling object
    @param parent Pointer to the parent widget
  */
-CEnergyCyclingDialog::CEnergyCyclingDialog(CEnergyCycling &energyCycling, QWidget *parent) :
+CEnergyCyclingDialog::CEnergyCyclingDialog(CEnergyCycling& energyCycling, QWidget* parent) :
     QDialog(parent)
     , energyCycling(energyCycling)
 {
     setupUi(this);
 
-    for(const wind_speed_t &windSpeed : windSpeeds)
+    for(const wind_speed_t& windSpeed : windSpeeds)
     {
         comboWindSpeed->addItem(windSpeed.name);
     }
-    for(const wind_position_t &windPosition : windPositions)
+    for(const wind_position_t& windPosition : windPositions)
     {
         comboWindPosition->addItem(windPosition.name);
     }
-    for(const ground_condition_t &ground : grounds)
+    for(const ground_condition_t& ground : grounds)
     {
         comboGround->addItem(ground.name);
     }

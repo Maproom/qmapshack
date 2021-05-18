@@ -29,7 +29,7 @@
 
 #include <QtWidgets>
 
-CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
+CScrOptWpt::CScrOptWpt(CGisItemWpt* wpt, const QPoint& point, IMouse* parent)
     : IScrOpt(parent)
     , key(wpt->getKey())
 {
@@ -52,19 +52,19 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     moveTo(anchor.toPoint());
     show();
 
-    connect(toolDelete,           &QToolButton::clicked, this, &CScrOptWpt::slotDelete);
-    connect(toolTags,             &QToolButton::clicked, this, &CScrOptWpt::slotTags);
-    connect(toolEdit,             &QToolButton::clicked, this, &CScrOptWpt::slotEdit);
-    connect(toolCopy,             &QToolButton::clicked, this, &CScrOptWpt::slotCopy);
+    connect(toolDelete, &QToolButton::clicked, this, &CScrOptWpt::slotDelete);
+    connect(toolTags, &QToolButton::clicked, this, &CScrOptWpt::slotTags);
+    connect(toolEdit, &QToolButton::clicked, this, &CScrOptWpt::slotEdit);
+    connect(toolCopy, &QToolButton::clicked, this, &CScrOptWpt::slotCopy);
     connect(toolCoordToClipboard, &QToolButton::clicked, this, &CScrOptWpt::slotCoordToClipboard);
-    connect(toolMove,             &QToolButton::clicked, this, &CScrOptWpt::slotMove);
-    connect(toolProj,             &QToolButton::clicked, this, &CScrOptWpt::slotProj);
-    connect(toolAddElevation,     &QToolButton::clicked, this, &CScrOptWpt::slotAddElevation);
-    connect(toolBubble,           &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
-    connect(toolDelRadius,        &QToolButton::clicked, this, &CScrOptWpt::slotDeleteRadius);
-    connect(toolNogoArea,         &QToolButton::clicked, this, &CScrOptWpt::slotNogoArea);
-    connect(toolEditRadius,       &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
-    connect(toolSearchWeb,        &QToolButton::clicked, this, &CScrOptWpt::slotSearchWeb);
+    connect(toolMove, &QToolButton::clicked, this, &CScrOptWpt::slotMove);
+    connect(toolProj, &QToolButton::clicked, this, &CScrOptWpt::slotProj);
+    connect(toolAddElevation, &QToolButton::clicked, this, &CScrOptWpt::slotAddElevation);
+    connect(toolBubble, &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
+    connect(toolDelRadius, &QToolButton::clicked, this, &CScrOptWpt::slotDeleteRadius);
+    connect(toolNogoArea, &QToolButton::clicked, this, &CScrOptWpt::slotNogoArea);
+    connect(toolEditRadius, &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
+    connect(toolSearchWeb, &QToolButton::clicked, this, &CScrOptWpt::slotSearchWeb);
 
     connect(label, &QLabel::linkActivated, this, &CScrOptWpt::slotLinkActivated);
 
@@ -168,7 +168,7 @@ void CScrOptWpt::slotTags()
 
 void CScrOptWpt::draw(QPainter& p)
 {
-    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
+    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         close();

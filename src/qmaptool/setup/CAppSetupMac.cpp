@@ -19,11 +19,11 @@
 #include "setup/CAppSetupMac.h"
 
 const QString CAppSetupMac::relTranslationDir = "Resources/translations"; // app
-const QString CAppSetupMac::relGdalDir        = "Resources/gdal"; // app
-const QString CAppSetupMac::relProjDir        = "Resources/proj"; // app
-const QString CAppSetupMac::relHelpDir        = "Resources/help"; // app
-const QString CAppSetupMac::relBinDir         = "Tools"; // app
-const QString CAppSetupMac::relLogDir         = "Library/Logs"; // home
+const QString CAppSetupMac::relGdalDir = "Resources/gdal";        // app
+const QString CAppSetupMac::relProjDir = "Resources/proj";        // app
+const QString CAppSetupMac::relHelpDir = "Resources/help";        // app
+const QString CAppSetupMac::relBinDir = "Tools";         // app
+const QString CAppSetupMac::relLogDir = "Library/Logs";         // home
 
 
 void CAppSetupMac::extendPath()
@@ -77,7 +77,7 @@ void CAppSetupMac::initQMapTool()
 
 QString CAppSetupMac::defaultCachePath()
 {
-    const QString& cachePath =  QStandardPaths::standardLocations(QStandardPaths::CacheLocation).at(0);
+    const QString& cachePath = QStandardPaths::standardLocations(QStandardPaths::CacheLocation).at(0);
     return IAppSetup::path(cachePath, 0, false, 0);
 }
 

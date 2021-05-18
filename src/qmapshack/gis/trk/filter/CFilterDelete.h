@@ -28,7 +28,7 @@ class CFilterDelete : public QWidget, private Ui::IFilterDelete
 {
     Q_OBJECT
 public:
-    CFilterDelete(CGisItemTrk& trk, QWidget * parent);
+    CFilterDelete(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterDelete() = default;
 
 private slots:

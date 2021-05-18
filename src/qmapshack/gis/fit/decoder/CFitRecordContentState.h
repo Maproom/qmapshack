@@ -25,11 +25,11 @@ class CFitRecordContentState final : public IFitDecoderState
 {
     Q_DECLARE_TR_FUNCTIONS(CFitRecordContentState)
 public:
-    CFitRecordContentState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
+    CFitRecordContentState(shared_state_data_t& data) : IFitDecoderState(data) { reset(); }
     virtual ~CFitRecordContentState() {}
 
     void reset() override;
-    decode_state_e process(quint8 &dataByte) override;
+    decode_state_e process(quint8& dataByte) override;
 
 private:
     quint8 offset;

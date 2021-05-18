@@ -20,7 +20,7 @@
 
 #include <QtCore>
 
-CGarminStrTbl8::CGarminStrTbl8(const quint16 codepage, const quint8 mask, QObject * parent)
+CGarminStrTbl8::CGarminStrTbl8(const quint16 codepage, const quint8 mask, QObject* parent)
     : IGarminStrTbl(codepage, mask, parent)
 {
 }
@@ -50,11 +50,11 @@ void CGarminStrTbl8::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
     QByteArray data;
     quint32 size = (sizeLBL1 - offset) < 200 ? (sizeLBL1 - offset) : 200;
     readFile(file, offsetLBL1 + offset, size, data);
-    char * lbl = data.data();
+    char* lbl = data.data();
 
     unsigned lastSeperator = 0;
 
-    char * pBuffer = buffer;
+    char* pBuffer = buffer;
     *pBuffer = 0;
     while(*lbl != 0)
     {

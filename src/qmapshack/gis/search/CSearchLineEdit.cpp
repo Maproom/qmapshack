@@ -25,7 +25,7 @@
 
 CSearchExplanationDialog* CSearchLineEdit::explanationDlg = nullptr;
 
-CSearchLineEdit::CSearchLineEdit(QWidget *parent)
+CSearchLineEdit::CSearchLineEdit(QWidget* parent)
     : QLineEdit (parent)
 {
     searchCreationTimer = new QTimer(this);
@@ -68,7 +68,7 @@ CSearchLineEdit::CSearchLineEdit(QWidget *parent)
     setToolTip(tr("Filter: Start to type and the list will be reduced to matching items. An example would be \"date between 2010 and 2012\""));
 }
 
-CSearchLineEdit::CSearchLineEdit(QWidget *parent, IGisProject* project, CSearch* search) : CSearchLineEdit(parent)
+CSearchLineEdit::CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch* search) : CSearchLineEdit(parent)
 {
     connectedProject = project;
     if(search != nullptr)
@@ -78,7 +78,7 @@ CSearchLineEdit::CSearchLineEdit(QWidget *parent, IGisProject* project, CSearch*
 }
 void CSearchLineEdit::slotSetupSearch()
 {
-    QMenu * menu = new QMenu(this);
+    QMenu* menu = new QMenu(this);
     menu->addSection(tr("Apply filter to"));
     menu->addAction(actionNameOnly);
     menu->addAction(actionCompleteText);

@@ -123,7 +123,7 @@ struct file_t
     }
 
     std::string filename;
-    GDALDataset * dataset;
+    GDALDataset* dataset;
     CProj proj;
     uint32_t width;
     uint32_t height;
@@ -145,7 +145,7 @@ struct file_t
 
 struct level_t : public jnx_level_t
 {
-    std::list<file_t *> files;
+    std::list<file_t*> files;
     uint32_t tileSize;
 };
 
@@ -193,16 +193,16 @@ static void prinfFileinfo(const file_t& file)
     printf("\nreal scale: %f m/px", file.scale);
 }
 
-bool readTile(uint32_t xoff, uint32_t yoff, uint32_t xsize, uint32_t ysize, file_t& file, uint32_t * output)
+bool readTile(uint32_t xoff, uint32_t yoff, uint32_t xsize, uint32_t ysize, file_t& file, uint32_t* output)
 {
-    GDALDataset * dataset = file.dataset;
+    GDALDataset* dataset = file.dataset;
     int32_t rasterBandCount = dataset->GetRasterCount();
 
     memset(output, -1, sizeof(uint32_t) * xsize * ysize);
 
     if(rasterBandCount == 1)
     {
-        GDALRasterBand * pBand;
+        GDALRasterBand* pBand;
         pBand = dataset->GetRasterBand(1);
         if(pBand->RasterIO(GF_Read, (int)xoff, (int)yoff, xsize, ysize, tileBuf8Bit, xsize, ysize, GDT_Byte, 0, 0) == CE_Failure)
         {
@@ -218,7 +218,7 @@ bool readTile(uint32_t xoff, uint32_t yoff, uint32_t xsize, uint32_t ysize, file
     {
         for(int b = 1; b <= rasterBandCount; ++b)
         {
-            GDALRasterBand * pBand;
+            GDALRasterBand* pBand;
             pBand = dataset->GetRasterBand(b);
 
             uint32_t mask = ~(0x000000FF << (8 * (b - 1)));
@@ -247,16 +247,16 @@ bool readTile(uint32_t xoff, uint32_t yoff, uint32_t xsize, uint32_t ysize, file
 static void init_destination(j_compress_ptr cinfo)
 {
     jpgbuf.resize(JPG_BLOCK_SIZE);
-    cinfo->dest->next_output_byte   = &jpgbuf[0];
-    cinfo->dest->free_in_buffer     = jpgbuf.size();
+    cinfo->dest->next_output_byte = &jpgbuf[0];
+    cinfo->dest->free_in_buffer = jpgbuf.size();
 }
 
 static boolean empty_output_buffer(j_compress_ptr cinfo)
 {
     size_t oldsize = jpgbuf.size();
     jpgbuf.resize(oldsize + JPG_BLOCK_SIZE);
-    cinfo->dest->next_output_byte   = &jpgbuf[oldsize];
-    cinfo->dest->free_in_buffer     = jpgbuf.size() - oldsize;
+    cinfo->dest->next_output_byte = &jpgbuf[oldsize];
+    cinfo->dest->free_in_buffer = jpgbuf.size() - oldsize;
     return true;
 }
 
@@ -266,17 +266,17 @@ static void term_destination(j_compress_ptr cinfo)
 }
 
 
-static uint32_t writeTile(uint32_t xsize, uint32_t ysize, uint32_t * raw_image, FILE * fid, int quality, int subsampling)
+static uint32_t writeTile(uint32_t xsize, uint32_t ysize, uint32_t* raw_image, FILE* fid, int quality, int subsampling)
 {
     uint32_t size = 0;
     struct jpeg_compress_struct cinfo;
     struct jpeg_error_mgr jerr;
     JSAMPROW row_pointer[1];
 
-    jpeg_destination_mgr destmgr    = {0};
-    destmgr.init_destination        = init_destination;
-    destmgr.empty_output_buffer     = empty_output_buffer;
-    destmgr.term_destination        = term_destination;
+    jpeg_destination_mgr destmgr = {0};
+    destmgr.init_destination = init_destination;
+    destmgr.empty_output_buffer = empty_output_buffer;
+    destmgr.term_destination = term_destination;
 
     // convert from RGBA to RGB
     for(uint32_t r = 0; r < ysize; r++)
@@ -284,8 +284,8 @@ static uint32_t writeTile(uint32_t xsize, uint32_t ysize, uint32_t * raw_image, 
         for(uint32_t c = 0; c < xsize; c++)
         {
             uint32_t pixel = raw_image[r * xsize + c];
-            tileBuf24Bit[r * xsize * 3 + c * 3]     =  pixel        & 0x0FF;
-            tileBuf24Bit[r * xsize * 3 + c * 3 + 1] = (pixel >>  8) & 0x0FF;
+            tileBuf24Bit[r * xsize * 3 + c * 3] = pixel & 0x0FF;
+            tileBuf24Bit[r * xsize * 3 + c * 3 + 1] = (pixel >> 8) & 0x0FF;
             tileBuf24Bit[r * xsize * 3 + c * 3 + 2] = (pixel >> 16) & 0x0FF;
         }
     }
@@ -293,11 +293,11 @@ static uint32_t writeTile(uint32_t xsize, uint32_t ysize, uint32_t * raw_image, 
     cinfo.err = jpeg_std_error( &jerr );
     jpeg_create_compress(&cinfo);
 
-    cinfo.dest              = &destmgr;
-    cinfo.image_width       = xsize;
-    cinfo.image_height      = ysize;
-    cinfo.input_components  = 3;
-    cinfo.in_color_space    = JCS_RGB;
+    cinfo.dest = &destmgr;
+    cinfo.image_width = xsize;
+    cinfo.image_height = ysize;
+    cinfo.input_components = 3;
+    cinfo.in_color_space = JCS_RGB;
 
     jpeg_set_defaults( &cinfo );
 
@@ -349,7 +349,7 @@ static uint32_t writeTile(uint32_t xsize, uint32_t ysize, uint32_t * raw_image, 
 
     while( cinfo.next_scanline < cinfo.image_height )
     {
-        row_pointer[0] = (JSAMPLE*)&tileBuf24Bit[ cinfo.next_scanline * cinfo.image_width *  cinfo.input_components];
+        row_pointer[0] = (JSAMPLE*)&tileBuf24Bit[ cinfo.next_scanline * cinfo.image_width * cinfo.input_components];
         jpeg_write_scanlines( &cinfo, row_pointer, 1 );
     }
     /* similar to read file, clean up after we're done compressing */
@@ -422,49 +422,49 @@ static char randChar()
     return buf[0];
 }
 
-static void createGUID(char * guid)
+static void createGUID(char* guid)
 {
 #if !defined(HAVE_ARC4RANDOM)
     srand((unsigned int)time(0));
 #endif
 
-    guid[0]     = randChar();
-    guid[1]     = randChar();
-    guid[2]     = randChar();
-    guid[3]     = randChar();
-    guid[4]     = randChar();
-    guid[5]     = randChar();
-    guid[6]     = randChar();
-    guid[7]     = randChar();
-    guid[8]     = '-';
-    guid[9]     = randChar();
-    guid[10]    = randChar();
-    guid[11]    = randChar();
-    guid[12]    = randChar();
-    guid[13]    = '-';
-    guid[14]    = randChar();
-    guid[15]    = randChar();
-    guid[16]    = randChar();
-    guid[17]    = randChar();
-    guid[18]    = '-';
-    guid[19]    = randChar();
-    guid[20]    = randChar();
-    guid[21]    = randChar();
-    guid[22]    = randChar();
-    guid[23]    = '-';
-    guid[24]    = randChar();
-    guid[25]    = randChar();
-    guid[26]    = randChar();
-    guid[27]    = randChar();
-    guid[28]    = randChar();
-    guid[29]    = randChar();
-    guid[30]    = randChar();
-    guid[31]    = randChar();
-    guid[32]    = randChar();
-    guid[33]    = randChar();
-    guid[34]    = randChar();
-    guid[35]    = randChar();
-    guid[36]    = 0;
+    guid[0] = randChar();
+    guid[1] = randChar();
+    guid[2] = randChar();
+    guid[3] = randChar();
+    guid[4] = randChar();
+    guid[5] = randChar();
+    guid[6] = randChar();
+    guid[7] = randChar();
+    guid[8] = '-';
+    guid[9] = randChar();
+    guid[10] = randChar();
+    guid[11] = randChar();
+    guid[12] = randChar();
+    guid[13] = '-';
+    guid[14] = randChar();
+    guid[15] = randChar();
+    guid[16] = randChar();
+    guid[17] = randChar();
+    guid[18] = '-';
+    guid[19] = randChar();
+    guid[20] = randChar();
+    guid[21] = randChar();
+    guid[22] = randChar();
+    guid[23] = '-';
+    guid[24] = randChar();
+    guid[25] = randChar();
+    guid[26] = randChar();
+    guid[27] = randChar();
+    guid[28] = randChar();
+    guid[29] = randChar();
+    guid[30] = randChar();
+    guid[31] = randChar();
+    guid[32] = randChar();
+    guid[33] = randChar();
+    guid[34] = randChar();
+    guid[35] = randChar();
+    guid[36] = 0;
 }
 
 /// this code is from the GDAL project
@@ -512,25 +512,25 @@ static void printProgress(int current, int total)
 }
 
 
-int main(int argc, char ** argv)
+int main(int argc, char** argv)
 {
     uint16_t tmp16;
     const uint8_t dummy = 0;
     uint32_t tileTableStart = 0;
-    uint32_t tileCnt    = 0;
+    uint32_t tileCnt = 0;
     uint32_t tilesTotal = 0;
     char projstr[1024];
     OGRSpatialReference oSRS;
-    int quality         = -1;
-    int subsampling     = -1;
+    int quality = -1;
+    int subsampling = -1;
 
-    const char *copyright = "Unknown";
-    const char *subscname = "BirdsEye";
-    const char *mapname   = "Unknown";
+    const char* copyright = "Unknown";
+    const char* subscname = "BirdsEye";
+    const char* mapname = "Unknown";
 
-    char *copyright_buf = NULL;
-    char *subscname_buf = NULL;
-    char *mapname_buf   = NULL;
+    char* copyright_buf = NULL;
+    char* subscname_buf = NULL;
+    char* mapname_buf = NULL;
 
     std::vector<int> forced_scale_values;
 
@@ -670,14 +670,14 @@ int main(int argc, char ** argv)
 
         double dist;
 
-        GDALDataset * dataset = (GDALDataset*)GDALOpen(argv[i], GA_ReadOnly);
+        GDALDataset* dataset = (GDALDataset*)GDALOpen(argv[i], GA_ReadOnly);
         if(dataset == 0)
         {
             fprintf(stderr, "\nFailed to open %s\n", argv[i]);
             exit(-1);
         }
 
-        const char * wkt = projstr;
+        const char* wkt = projstr;
 
         if(dataset->GetProjectionRef())
         {
@@ -685,7 +685,7 @@ int main(int argc, char ** argv)
         }
         oSRS.importFromWkt(&wkt);
 
-        char *proj4 = nullptr;
+        char* proj4 = nullptr;
         oSRS.exportToProj4(&proj4);
 
 
@@ -695,18 +695,18 @@ int main(int argc, char ** argv)
         std::list<file_t>::iterator f = files.begin();
         std::advance(f, files_count - 1);
 
-        file_t& file    = *f;
-        file.filename   = argv[i];
-        file.dataset    = dataset;
+        file_t& file = *f;
+        file.filename = argv[i];
+        file.dataset = dataset;
         file.proj.init(proj4, "EPSG:4326");
-        file.width      = dataset->GetRasterXSize();
-        file.height     = dataset->GetRasterYSize();
-        file.xscale     = adfGeoTransform[1];
-        file.yscale     = adfGeoTransform[5];
-        file.xref1      = adfGeoTransform[0];
-        file.yref1      = adfGeoTransform[3];
-        file.xref2      = file.xref1 + file.width  * file.xscale;
-        file.yref2      = file.yref1 + file.height * file.yscale;
+        file.width = dataset->GetRasterXSize();
+        file.height = dataset->GetRasterYSize();
+        file.xscale = adfGeoTransform[1];
+        file.yscale = adfGeoTransform[5];
+        file.xref1 = adfGeoTransform[0];
+        file.yref1 = adfGeoTransform[3];
+        file.xref2 = file.xref1 + file.width * file.xscale;
+        file.yref2 = file.yref1 + file.height * file.yscale;
 
         if(!file.proj.isValid())
         {
@@ -741,19 +741,19 @@ int main(int argc, char ** argv)
         file.scale = dist / file.width;
 
         // fill color table if necessary
-        GDALRasterBand * pBand;
+        GDALRasterBand* pBand;
         pBand = dataset->GetRasterBand(1);
 
         if(pBand->GetColorInterpretation() == GCI_PaletteIndex)
         {
-            GDALColorTable * pct = pBand->GetColorTable();
+            GDALColorTable* pct = pBand->GetColorTable();
             for(int c = 0; c < pct->GetColorEntryCount(); ++c)
             {
                 const GDALColorEntry& e = *pct->GetColorEntry(c);
                 file.colortable[c] = e.c1 | (e.c2 << 8) | (e.c3 << 16) | (e.c4 << 24);
             }
         }
-        else if(pBand->GetColorInterpretation() ==  GCI_GrayIndex )
+        else if(pBand->GetColorInterpretation() == GCI_GrayIndex )
         {
             for(int c = 0; c < 256; ++c)
             {
@@ -771,10 +771,10 @@ int main(int argc, char ** argv)
     }
 
     // apply sorted files to levels and extract file header data
-    double right    = -180.0;
-    double top      =  -90.0;
-    double left     =  180.0;
-    double bottom   =   90.0;
+    double right = -180.0;
+    double top = -90.0;
+    double left = 180.0;
+    double bottom = 90.0;
 
     double scale = 0.0;
     files.sort();
@@ -786,11 +786,11 @@ int main(int argc, char ** argv)
 
         if(file.lon1 < left)
         {
-            left   = file.lon1;
+            left = file.lon1;
         }
         if(file.lat1 > top)
         {
-            top    = file.lat1;
+            top = file.lat1;
         }
         if(file.lat2 < bottom)
         {
@@ -798,7 +798,7 @@ int main(int argc, char ** argv)
         }
         if(file.lon2 > right)
         {
-            right  = file.lon2;
+            right = file.lon2;
         }
 
         if(scale != 0.0 && ((fabs(scale - file.xscale)) / scale) > 0.02)
@@ -816,17 +816,17 @@ int main(int argc, char ** argv)
     }
     nLevels++;
 
-    FILE * fid = fopen(argv[argc - 1], "wb");
+    FILE* fid = fopen(argv[argc - 1], "wb");
     if(fid == 0)
     {
         fprintf(stderr, "\nFailed to create file %s\n", argv[argc - 1]);
         exit(-1);
     }
 
-    jnx_hdr.left    = (int32_t)((left   * 0x7FFFFFFF) / 180);
-    jnx_hdr.top     = (int32_t)((top    * 0x7FFFFFFF) / 180);
-    jnx_hdr.right   = (int32_t)((right  * 0x7FFFFFFF) / 180);
-    jnx_hdr.bottom  = (int32_t)((bottom * 0x7FFFFFFF) / 180);
+    jnx_hdr.left = (int32_t)((left * 0x7FFFFFFF) / 180);
+    jnx_hdr.top = (int32_t)((top * 0x7FFFFFFF) / 180);
+    jnx_hdr.right = (int32_t)((right * 0x7FFFFFFF) / 180);
+    jnx_hdr.bottom = (int32_t)((bottom * 0x7FFFFFFF) / 180);
 
     jnx_hdr.details = nLevels;
 
@@ -848,23 +848,23 @@ int main(int argc, char ** argv)
     // get all information to write the table of detail levels and the dummy tile table
     for(int i = 0; i < nLevels; i++)
     {
-        uint32_t size   = 256;
-        level_t& level  = levels[i];
-        std::list<file_t *>::iterator f;
-        double scale    = 0.0;
+        uint32_t size = 256;
+        level_t& level = levels[i];
+        std::list<file_t*>::iterator f;
+        double scale = 0.0;
 
         while(size <= JNX_MAX_TILE_SIZE)
         {
-            level.nTiles    = 0;
-            level.tileSize  = size;
+            level.nTiles = 0;
+            level.tileSize = size;
             for(f = level.files.begin(); f != level.files.end(); f++)
             {
-                file_t& file  = *(*f);
-                double xTiles = file.width  / double(size);
+                file_t& file = *(*f);
+                double xTiles = file.width / double(size);
                 double yTiles = file.height / double(size);
                 level.nTiles += int(ceil(xTiles)) * int(ceil(yTiles));
 
-                scale         = file.scale;
+                scale = file.scale;
             }
 
             if(level.nTiles < JNX_MAX_TILES)
@@ -875,16 +875,16 @@ int main(int argc, char ** argv)
         }
 
 
-        level.offset    = tilesTotal * sizeof(jnx_tile_t) + HEADER_BLOCK_SIZE; // still has to be offset by complete header
-        if (forced_scale_values.size() == 0 || (unsigned)i >= forced_scale_values.size() ||  forced_scale_values[i] == 0)
+        level.offset = tilesTotal * sizeof(jnx_tile_t) + HEADER_BLOCK_SIZE;    // still has to be offset by complete header
+        if (forced_scale_values.size() == 0 || (unsigned)i >= forced_scale_values.size() || forced_scale_values[i] == 0)
         {
-            level.scale     = scale2jnx(scale);
+            level.scale = scale2jnx(scale);
         }
         else
         {
-            level.scale     = forced_scale_values[i];
+            level.scale = forced_scale_values[i];
         }
-        tilesTotal     += level.nTiles;
+        tilesTotal += level.nTiles;
 
         fwrite(&level.nTiles, sizeof(level.nTiles), 1, fid);
         fwrite(&level.offset, sizeof(level.offset), 1, fid);
@@ -934,10 +934,10 @@ int main(int argc, char ** argv)
     {
         level_t& level = levels[l];
 
-        std::list<file_t *>::iterator f;
+        std::list<file_t*>::iterator f;
         for(f = level.files.begin(); f != level.files.end(); f++)
         {
-            file_t& file  = *(*f);
+            file_t& file = *(*f);
 
             uint32_t xoff = 0;
             uint32_t yoff = 0;
@@ -953,7 +953,7 @@ int main(int argc, char ** argv)
                 }
 
                 xsize = level.tileSize;
-                xoff  = 0;
+                xoff = 0;
 
                 while(xoff < file.width)
                 {
@@ -978,9 +978,9 @@ int main(int argc, char ** argv)
                         double v2 = file.lat1 + (yoff + ysize) * file.yscale;
 
 
-                        tile.left   = (int32_t)(u1 * 0x7FFFFFFF / 180);
-                        tile.top    = (int32_t)(v1 * 0x7FFFFFFF / 180);
-                        tile.right  = (int32_t)(u2 * 0x7FFFFFFF / 180);
+                        tile.left = (int32_t)(u1 * 0x7FFFFFFF / 180);
+                        tile.top = (int32_t)(v1 * 0x7FFFFFFF / 180);
+                        tile.right = (int32_t)(u2 * 0x7FFFFFFF / 180);
                         tile.bottom = (int32_t)(v2 * 0x7FFFFFFF / 180);
                     }
                     else
@@ -993,16 +993,16 @@ int main(int argc, char ** argv)
                         file.proj.transform(u1, v1, PJ_FWD);
                         file.proj.transform(u2, v2, PJ_FWD);
 
-                        tile.left    = (int32_t)((u1 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
-                        tile.top     = (int32_t)((v1 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
-                        tile.right   = (int32_t)((u2 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
-                        tile.bottom  = (int32_t)((v2 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
+                        tile.left = (int32_t)((u1 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
+                        tile.top = (int32_t)((v1 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
+                        tile.right = (int32_t)((u2 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
+                        tile.bottom = (int32_t)((v2 * RAD_TO_DEG) * 0x7FFFFFFF / 180);
                     }
 
-                    tile.width  = xsize;
+                    tile.width = xsize;
                     tile.height = ysize;
                     tile.offset = (uint32_t)(ftello(fid) & 0x0FFFFFFFF);
-                    tile.size   = writeTile(xsize, ysize, tileBuf32Bit, fid, quality, subsampling);
+                    tile.size = writeTile(xsize, ysize, tileBuf32Bit, fid, quality, subsampling);
 
                     printProgress(tileCnt, tilesTotal);
                     // //

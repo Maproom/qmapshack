@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CToolOverviewGroupBox::CToolOverviewGroupBox(QWidget *parent)
+CToolOverviewGroupBox::CToolOverviewGroupBox(QWidget* parent)
     : QGroupBox(parent)
 {
     setupUi(this);

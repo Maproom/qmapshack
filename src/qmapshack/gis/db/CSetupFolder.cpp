@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString &name, bool groupAllowed, QWidget *parent)
+CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString& name, bool groupAllowed, QWidget* parent)
     : QDialog(parent)
     , type(type)
     , name(name)
@@ -63,7 +63,7 @@ CSetupFolder::~CSetupFolder()
 
 void CSetupFolder::accept()
 {
-    name    = lineName->text();
+    name = lineName->text();
     if(radioGroup->isChecked())
     {
         type = IDBFolder::eTypeGroup;

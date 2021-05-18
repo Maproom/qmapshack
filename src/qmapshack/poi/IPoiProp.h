@@ -28,15 +28,15 @@ class IPoiProp : public QWidget
 {
     Q_OBJECT
 public:
-    IPoiProp(IPoi *poifile, CPoiDraw *poi);
+    IPoiProp(IPoi* poifile, CPoiDraw* poi);
     virtual ~IPoiProp() = default;
 
 protected slots:
     virtual void slotPropertiesChanged() = 0;
 
 protected:
-    IPoi * poifile;
-    CPoiDraw * poi;
+    IPoi* poifile;
+    CPoiDraw* poi;
 };
 
 #endif //IPOIPROP_H

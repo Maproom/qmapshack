@@ -29,7 +29,7 @@
 
 const QString CRtOpenSky::strIcon("://icons/48x48/OpenSky.png");
 
-CRtOpenSky::CRtOpenSky(QTreeWidget *parent)
+CRtOpenSky::CRtOpenSky(QTreeWidget* parent)
     : IRtSource(eTypeOpenSky, true, parent)
 {
     setIcon(eColumnIcon, QIcon(strIcon));
@@ -52,10 +52,10 @@ CRtOpenSky::CRtOpenSky(QTreeWidget *parent)
 
 void CRtOpenSky::registerWithTreeWidget()
 {
-    QTreeWidget * tree = treeWidget();
+    QTreeWidget* tree = treeWidget();
     if(tree != nullptr)
     {
-        QTreeWidgetItem * itemInfo = new QTreeWidgetItem(this);
+        QTreeWidgetItem* itemInfo = new QTreeWidgetItem(this);
         itemInfo->setFlags(Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
         info = new CRtOpenSkyInfo(*this, tree);
         tree->setItemWidget(itemInfo, eColumnWidget, info);
@@ -129,7 +129,7 @@ CRtOpenSky::aircraft_t CRtOpenSky::getAircraftByKey(const QString& key, bool& ok
     return aircraft_t();
 }
 
-void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt)
 {
     if(checkState(eColumnCheckBox) != Qt::Checked)
     {
@@ -186,7 +186,7 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
     }
 }
 
-void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
+void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt)
 {
     if(!keyFocus.isEmpty() && aircrafts.contains(keyFocus))
     {
@@ -199,21 +199,21 @@ void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
 
         QString text;
         text += "<table>";
-        text += "<tr><td>" + tr("key:")             + "</td><td>" + aircraft.key + "</td></tr>";
-        text += "<tr><td>" + tr("callsign:")        + "</td><td>" + aircraft.callsign + "</td></tr>";
-        text += "<tr><td>" + tr("origin country:")  + "</td><td>" + aircraft.originCountry + "</td></tr>";
-        text += "<tr><td>" + tr("time position:")   + "</td><td>" + QDateTime::fromTime_t(aircraft.timePosition).toString() + "</td></tr>";
-        text += "<tr><td>" + tr("last contact:")    + "</td><td>" + QDateTime::fromTime_t(aircraft.lastContact).toString() + "</td></tr>";
-        text += "<tr><td>" + tr("longitude:")       + "</td><td>" + QString::number(aircraft.longitude) + "°</td></tr>";
-        text += "<tr><td>" + tr("latitude:")        + "</td><td>" + QString::number(aircraft.latitude) + "°</td></tr>";
-        text += "<tr><td>" + tr("geo. alt.:")       + "</td><td>" + QString::number(aircraft.geoAltitude) + "m</td></tr>";
-        text += "<tr><td>" + tr("on ground:")       + "</td><td>" + QString::number(aircraft.onGround) + "</td></tr>";
-        text += "<tr><td>" + tr("velocity:")        + "</td><td>" + QString::number(aircraft.velocity * 3.6) + "km/h</td></tr>";
-        text += "<tr><td>" + tr("heading:")         + "</td><td>" + QString::number(aircraft.heading) + "°</td></tr>";
-        text += "<tr><td>" + tr("vert. rate:")      + "</td><td>" + QString::number(aircraft.verticalRate) + "m/s</td></tr>";
-        text += "<tr><td>" + tr("baro. alt.:")      + "</td><td>" + QString::number(aircraft.baroAltitude) + "m</td></tr>";
-        text += "<tr><td>" + tr("squawk:")          + "</td><td>" + aircraft.squawk + "</td></tr>";
-        text += "<tr><td>" + tr("spi:")             + "</td><td>" + QString::number(aircraft.spi) + "</td></tr>";
+        text += "<tr><td>" + tr("key:") + "</td><td>" + aircraft.key + "</td></tr>";
+        text += "<tr><td>" + tr("callsign:") + "</td><td>" + aircraft.callsign + "</td></tr>";
+        text += "<tr><td>" + tr("origin country:") + "</td><td>" + aircraft.originCountry + "</td></tr>";
+        text += "<tr><td>" + tr("time position:") + "</td><td>" + QDateTime::fromTime_t(aircraft.timePosition).toString() + "</td></tr>";
+        text += "<tr><td>" + tr("last contact:") + "</td><td>" + QDateTime::fromTime_t(aircraft.lastContact).toString() + "</td></tr>";
+        text += "<tr><td>" + tr("longitude:") + "</td><td>" + QString::number(aircraft.longitude) + "°</td></tr>";
+        text += "<tr><td>" + tr("latitude:") + "</td><td>" + QString::number(aircraft.latitude) + "°</td></tr>";
+        text += "<tr><td>" + tr("geo. alt.:") + "</td><td>" + QString::number(aircraft.geoAltitude) + "m</td></tr>";
+        text += "<tr><td>" + tr("on ground:") + "</td><td>" + QString::number(aircraft.onGround) + "</td></tr>";
+        text += "<tr><td>" + tr("velocity:") + "</td><td>" + QString::number(aircraft.velocity * 3.6) + "km/h</td></tr>";
+        text += "<tr><td>" + tr("heading:") + "</td><td>" + QString::number(aircraft.heading) + "°</td></tr>";
+        text += "<tr><td>" + tr("vert. rate:") + "</td><td>" + QString::number(aircraft.verticalRate) + "m/s</td></tr>";
+        text += "<tr><td>" + tr("baro. alt.:") + "</td><td>" + QString::number(aircraft.baroAltitude) + "m</td></tr>";
+        text += "<tr><td>" + tr("squawk:") + "</td><td>" + aircraft.squawk + "</td></tr>";
+        text += "<tr><td>" + tr("spi:") + "</td><td>" + QString::number(aircraft.spi) + "</td></tr>";
         text += "<tr><td>" + tr("position source:") + "</td><td>" + QString::number(aircraft.positionSource) + "</td></tr>";
         text += "</table>";
 
@@ -316,26 +316,26 @@ void CRtOpenSky::slotRequestFinished(QNetworkReply* reply)
         {
             aircraft_t aircraft;
             const QJsonArray& jsonStateArray = jsonState.toArray();
-            QString key         = jsonStateArray[0].toString();
+            QString key = jsonStateArray[0].toString();
 
-            aircraft.key            = key;
-            aircraft.callsign       = jsonStateArray[1].toString();
-            aircraft.originCountry  = jsonStateArray[2].toString();
-            aircraft.timePosition   = jsonStateArray[3].toInt();
-            aircraft.lastContact    = jsonStateArray[4].toInt();
-            aircraft.longitude      = jsonStateArray[5].toDouble();
-            aircraft.latitude       = jsonStateArray[6].toDouble();
-            aircraft.geoAltitude    = jsonStateArray[7].toDouble();
-            aircraft.onGround       = jsonStateArray[8].toBool();
-            aircraft.velocity       = jsonStateArray[9].toDouble();
-            aircraft.heading        = jsonStateArray[10].toDouble();
-            aircraft.verticalRate   = jsonStateArray[11].toDouble();
-            aircraft.baroAltitude   = jsonStateArray[13].toDouble();
-            aircraft.squawk         = jsonStateArray[14].toString();
-            aircraft.spi            = jsonStateArray[15].toBool();
+            aircraft.key = key;
+            aircraft.callsign = jsonStateArray[1].toString();
+            aircraft.originCountry = jsonStateArray[2].toString();
+            aircraft.timePosition = jsonStateArray[3].toInt();
+            aircraft.lastContact = jsonStateArray[4].toInt();
+            aircraft.longitude = jsonStateArray[5].toDouble();
+            aircraft.latitude = jsonStateArray[6].toDouble();
+            aircraft.geoAltitude = jsonStateArray[7].toDouble();
+            aircraft.onGround = jsonStateArray[8].toBool();
+            aircraft.velocity = jsonStateArray[9].toDouble();
+            aircraft.heading = jsonStateArray[10].toDouble();
+            aircraft.verticalRate = jsonStateArray[11].toDouble();
+            aircraft.baroAltitude = jsonStateArray[13].toDouble();
+            aircraft.squawk = jsonStateArray[14].toString();
+            aircraft.spi = jsonStateArray[15].toBool();
             aircraft.positionSource = jsonStateArray[16].toInt();
 
-            aircraft.pos            = QPointF(aircraft.longitude, aircraft.latitude);
+            aircraft.pos = QPointF(aircraft.longitude, aircraft.latitude);
             aircrafts[key] = aircraft;
         }
     }

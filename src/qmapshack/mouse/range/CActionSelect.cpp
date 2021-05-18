@@ -18,7 +18,7 @@
 
 #include "mouse/range/CActionSelect.h"
 
-CActionSelect::CActionSelect(QWidget *parent)
+CActionSelect::CActionSelect(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
@@ -36,7 +36,7 @@ void CActionSelect::setAction(CScrOptRangeTool::eAction action)
 
 CScrOptRangeTool::eAction CActionSelect::getAction() const
 {
-    for(QRadioButton * button : buttons)
+    for(QRadioButton* button : buttons)
     {
         if(button->isChecked())
         {

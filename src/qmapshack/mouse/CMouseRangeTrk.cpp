@@ -29,13 +29,13 @@
 #include <QtWidgets>
 
 
-CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk& trk, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse)
     , owner("CMouseRangeTrk")
 {
     setObjectName(owner);
-    cursor      = QCursor(QPixmap("://cursors/cursorSelectRange.png"), 0, 0);
-    key         = trk.getKey();
+    cursor = QCursor(QPixmap("://cursors/cursorSelectRange.png"), 0, 0);
+    key = trk.getKey();
 
     // switch to full mode to show deleted (hidden) track points, too
     trk.setMode(CGisItemTrk::eModeRange, owner);
@@ -62,7 +62,7 @@ CMouseRangeTrk::~CMouseRangeTrk()
 {
     canvas->reportStatus(key.item, "");
 
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk)
     {
         trk->setMode(CGisItemTrk::eModeNormal, owner);
@@ -72,7 +72,7 @@ CMouseRangeTrk::~CMouseRangeTrk()
     delete scrOptRangeTool;
 }
 
-void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
+void CMouseRangeTrk::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
 {
     if(!scrOptRangeTool.isNull())
     {
@@ -89,7 +89,7 @@ void CMouseRangeTrk::leftButtonDown(const QPoint& pos)
 
 void CMouseRangeTrk::mouseMoved(const QPoint& pos)
 {
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk == nullptr)
     {
         return;
@@ -110,7 +110,7 @@ void CMouseRangeTrk::mouseMoved(const QPoint& pos)
 
 void CMouseRangeTrk::leftClicked(const QPoint& point)
 {
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk == nullptr)
     {
         return;

@@ -405,7 +405,7 @@ Es gibt außerdem die Option, die Referenzpunkte im Automode zu justieren. In di
 &apos;%1&apos;
 is not a valid coordinate system definition:
 %2</source>
-        <translation type="unfinished">Die Eingabe
+        <translation>Die Eingabe
 &apos;%1&apos;
 ist keine gültige Koordinatensystemdefinition:
 %2</translation>
@@ -413,7 +413,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../../common/gis/proj_x.cpp" line="196"/>
         <source>Lat/Lon projection is not allowed in this case.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lat/Lon Projektion ist in diesem Fall nicht möglich.</translation>
     </message>
 </context>
 <context>
@@ -421,7 +421,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../overlay/refmap/CProjWizard.cpp" line="55"/>
         <source> (Spheroid: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/CProjWizard.cpp" line="70"/>
@@ -1121,7 +1121,7 @@ oder
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="316"/>
         <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;EPSG:...&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie einen gültigen Projektionstext ein. Gültige Formen sind &quot;+proj...&quot; oder &quot;EPSG:...&quot;.</translation>
     </message>
     <message>
         <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;+init=epsg:...&quot;.</source>
@@ -1438,7 +1438,7 @@ oder
     <message>
         <location filename="../tool/IToolCutMap.ui" line="155"/>
         <source>GDAL Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>GDAL Parameter</translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="183"/>
@@ -1606,37 +1606,37 @@ oder
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="14"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="17"/>
         <source>GDAL Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>GDAL Parameter</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="50"/>
         <source>Resampling</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="84"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompression</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="118"/>
         <source>Tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Kacheln</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="144"/>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="188"/>
         <source>Other:</source>
-        <translation type="unfinished"></translation>
+        <translation>Weitere:</translation>
     </message>
 </context>
 <context>
@@ -1761,7 +1761,7 @@ oder
     <message>
         <location filename="../tool/IToolPalettize.ui" line="149"/>
         <source>GDAL Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>GDAL Parameter</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="177"/>
@@ -1829,7 +1829,7 @@ oder
     <message>
         <location filename="../tool/IToolRefMap.ui" line="158"/>
         <source>GDAL Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>GDAL Parameter</translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="186"/>

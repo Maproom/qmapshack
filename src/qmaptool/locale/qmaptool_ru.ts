@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>CCanvas</name>
     <message>
@@ -405,7 +405,7 @@ The is also the option to fine tune the reference points in auto-mode. In this m
 &apos;%1&apos;
 is not a valid coordinate system definition:
 %2</source>
-        <translation type="unfinished">Значение
+        <translation>Значение
 &quot;%1&quot;
 не является допустимым определением системы координат:
 %2</translation>
@@ -413,7 +413,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../../common/gis/proj_x.cpp" line="196"/>
         <source>Lat/Lon projection is not allowed in this case.</source>
-        <translation type="unfinished"></translation>
+        <translation>В этом случае широта/долгота проекция не допускается.</translation>
     </message>
 </context>
 <context>
@@ -421,7 +421,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../overlay/refmap/CProjWizard.cpp" line="55"/>
         <source> (Spheroid: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Сфероид: %1)</translation>
     </message>
     <message>
         <location filename="../overlay/refmap/CProjWizard.cpp" line="70"/>
@@ -1128,7 +1128,7 @@ or
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="316"/>
         <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;EPSG:...&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите допустимую строку проекции. Допустимыми строками являются &quot;+proj...&quot; или &quot;EPSG:...&quot;.</translation>
     </message>
     <message>
         <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;+init=epsg:...&quot;.</source>
@@ -1445,7 +1445,7 @@ or
     <message>
         <location filename="../tool/IToolCutMap.ui" line="155"/>
         <source>GDAL Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры GDAL</translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="183"/>
@@ -1612,37 +1612,37 @@ or
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="14"/>
         <source>GroupBox</source>
-        <translation type="unfinished">Окно группы</translation>
+        <translation>Окно группы</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="17"/>
         <source>GDAL Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры GDAL</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="50"/>
         <source>Resampling</source>
-        <translation type="unfinished"></translation>
+        <translation>Ресамплинг</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="84"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Компрессия</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="118"/>
         <source>Tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Мозаичный</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="144"/>
         <source>x</source>
-        <translation type="unfinished">x</translation>
+        <translation>х</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="188"/>
         <source>Other:</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочие</translation>
     </message>
 </context>
 <context>
@@ -1767,7 +1767,7 @@ or
     <message>
         <location filename="../tool/IToolPalettize.ui" line="149"/>
         <source>GDAL Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры GDAL</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="177"/>
@@ -1835,7 +1835,7 @@ or
     <message>
         <location filename="../tool/IToolRefMap.ui" line="158"/>
         <source>GDAL Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры GDAL</translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="186"/>

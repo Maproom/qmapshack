@@ -575,6 +575,7 @@ set( HDRS
     helpers/CSelectCopyAction.h
     helpers/CSelectProjectDialog.h
     helpers/CSettings.h
+    helpers/CTryMutexLocker.h
     helpers/CToolBarConfig.h
     helpers/CToolBarSetupDialog.h
     helpers/CValue.h
@@ -851,7 +852,7 @@ set( UIS
     poi/IPoiPathSetup.ui
     poi/IPoiPropSetup.ui
     print/IPrintDialog.ui
-    print/IScreenshotDialog.ui    
+    print/IScreenshotDialog.ui
     realtime/IRtSelectSource.ui
     realtime/IRtWorkspace.ui
     realtime/gpstether/IRtGpsTetherInfo.ui

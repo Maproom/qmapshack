@@ -33,6 +33,7 @@ V1.XX.X
 [QMS-380] Toggle fullscreen does not work
 [QMS-382] QMapTool: Allow customized GDAL parameters
 [QMS-384] Add Garmin Fit power data to support powermeter pedals
+[QMS-391] Adapt Windows build scripts to PROJ.8/Quazip 1.x
 
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release

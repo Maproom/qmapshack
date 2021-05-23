@@ -19,6 +19,7 @@
 
 #include "gis/Poi.h"
 #include "helpers/CDraw.h"
+#include "helpers/CTryMutexLocker.h"
 #include "poi/CPoiCategory.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiIconCategory.h"
@@ -121,7 +122,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     }
 
     // draw POI
-    mutex.lock(); //Does this have to be so broad?
+    QMutexLocker lock(&mutex);
     displayedPois.clear();
     QRectF freeSpaceRect (QPointF(), IPoi::iconSize() * 2);
     //Find POIs in view
@@ -140,13 +141,10 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                    !loadedPoisByArea[categoryID].contains(minLonM10) ||
                    !loadedPoisByArea[categoryID][minLonM10].contains(minLatM10))
                 {
-                    mutex.unlock();
                     loadPOIsFromFile(categoryID, minLonM10, minLatM10);
-                    mutex.lock();
                 }
                 if(poi->needsRedraw())
                 {
-                    mutex.unlock();
                     return;
                 }
                 for(quint64 poiToDrawID : qAsConst(loadedPoisByArea)[categoryID][minLonM10][minLatM10])
@@ -245,11 +243,16 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
         }
         p.restore();
     }
-    mutex.unlock();
 }
 
 bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
+    CTryMutexLocker lock(mutex);
+    if(!lock.try_lock())
+    {
+        return false;
+    }
+
     poiGroup_t poiGroup;
     if(getPoiGroupCloseBy(px, poiGroup))
     {
@@ -265,6 +268,12 @@ bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPoi
 
 void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF>& posPoiHighlight)
 {
+    CTryMutexLocker lock(mutex);
+    if(!lock.try_lock())
+    {
+        return;
+    }
+
     //Treat highlighting and POIs seperately, as highlighting only applies to items in the current view
 
     //Find POIs
@@ -316,6 +325,12 @@ void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF
 
 bool CPoiPOI::getToolTip(const QPoint& px, QString& str) const
 {
+    CTryMutexLocker lock(mutex);
+    if(!lock.try_lock())
+    {
+        return false;
+    }
+
     poiGroup_t poiGroup;
     bool success = getPoiGroupCloseBy(px, poiGroup);
     if(success)
@@ -368,6 +383,8 @@ bool CPoiPOI::getToolTip(const QPoint& px, QString& str) const
 
 void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
 {
+    QMutexLocker lock(&mutex);
+
     // Open database here so it belongs to the right thread
     if(!QSqlDatabase::contains(filename + "_widget"))
     {
@@ -410,6 +427,8 @@ void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
 
 void CPoiPOI::slotCheckedStateChanged(QTreeWidgetItem* item)
 {
+    QMutexLocker lock(&mutex);
+
     CPoiCategory* categoryItem = static_cast<CPoiCategory*>(item);
     if(categoryItem == nullptr)
     {
@@ -478,6 +497,8 @@ bool CPoiPOI::getPoiGroupCloseBy(const QPoint& px, CPoiPOI::poiGroup_t& poiItem)
 
 void CPoiPOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
 {
+    QMutexLocker lock(&mutex);
+
     // check if query is within bounds
     if(!bbox.intersects({minLonM10 / 10.0, minLatM10 / 10.0, 0.1, 0.1}))
     {
@@ -535,14 +556,12 @@ void CPoiPOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
                 break;
             }
         }
-        mutex.lock();
         loadedPoisByArea[categoryID][minLonM10][minLatM10].append(key);
         // TODO: this overwrites a POI if it already was loaded. The difference between those will be the category. Some better handling should be done
         loadedPois[key] = CRawPoi(data,
                                   QPointF((query.value(eSqlColumnPoiMaxLon).toDouble() + query.value(eSqlColumnPoiMinLon).toDouble()) / 2 * DEG_TO_RAD,
                                           (query.value(eSqlColumnPoiMaxLat).toDouble() + query.value(eSqlColumnPoiMinLat).toDouble()) / 2 * DEG_TO_RAD),
                                   key, categoryNames[categoryID], garminIcon);
-        mutex.unlock();
     }
     // Close database, as this method is called from mutiple threads.
     QSqlDatabase::removeDatabase(filename);

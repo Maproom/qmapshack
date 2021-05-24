@@ -1,4 +1,4 @@
-V1.XX.X
+V1.16.0
 [QMS-220] "Select items from map" misses items
 [QMS-275] Routino: Add Spanish and Czech as selectable languages for turn instructions
 [QMS-279] Track metrics not updated when using UNDO / REDO in Edit mode

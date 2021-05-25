@@ -379,7 +379,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
     <message>
         <source>Conflict with database...</source>
-        <translation type="vanished">Confilt avec la base de données...</translation>
+        <translation type="vanished">Conflit avec la base de données...</translation>
     </message>
     <message>
         <source>Clone &amp;&amp; Save</source>
@@ -1191,7 +1191,7 @@ Il est possible de personnaliser ces deux paramètres. Il est conseillé de choi
     <message>
         <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="132"/>
         <source>FIT decoding error: unexpected end of file %1.</source>
-        <translation>erreur de décodage FIT : fin de fichier inatendue %1.</translation>
+        <translation>erreur de décodage FIT : fin de fichier inattendue %1.</translation>
     </message>
 </context>
 <context>
@@ -2567,12 +2567,12 @@ Il est possible de personnaliser ces deux paramètres. Il est conseillé de choi
     <message>
         <location filename="../gis/CGisListDB.cpp" line="462"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
-        <translation>Voulez-vous vraiment supprimere &apos;%1&apos; de la liste ?</translation>
+        <translation>Voulez-vous vraiment supprimer &apos;%1&apos; de la liste ?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="526"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
-        <translation>Etes-vous sûr de vouloir supprimer les dossiers selectionnés ainsi que leur sous-dossiers de la base de données ?</translation>
+        <translation>Etes-vous sûr de vouloir supprimer les dossiers sélectionnés ainsi que leur sous-dossiers de la base de données ?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="692"/>
@@ -3174,7 +3174,7 @@ ligne %2, colonne %3:
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="163"/>
         <source>History removal</source>
-        <translation>Supression de l&apos;historique</translation>
+        <translation>Suppression de l&apos;historique</translation>
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="164"/>
@@ -3451,7 +3451,7 @@ ligne %2, colonne %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="183"/>
         <source>Terr. Slope</source>
         <comment>extShortName</comment>
-        <translation>Pent. Terr.</translation>
+        <translation>Pente Terr.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="183"/>
@@ -3669,7 +3669,7 @@ ligne %2, colonne %3:
     </message>
     <message>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
-        <translation type="vanished">QMapShack a détecter une bibliothèque Proj4 mal installée. Les tables de translation pour les projections ESPG lstockées en généra dans /usr/share/proj sont manquantes. Contactez votre gestionnaire de distribution pour réparer cela.</translation>
+        <translation type="vanished">QMapShack a détecter une bibliothèque Proj4 mal installée. Les tables de translation pour les projections ESPG stockées en général dans /usr/share/proj sont manquantes. Contactez votre gestionnaire de distribution pour réparer cela.</translation>
     </message>
 </context>
 <context>
@@ -4372,7 +4372,7 @@ Fall back to internal types.</source>
     <message>
         <location filename="../map/CMapPropSetup.cpp" line="140"/>
         <source>Select type file...</source>
-        <translation>Sélctionnez un type de fichier...</translation>
+        <translation>Sélectionnez un type de fichier...</translation>
     </message>
 </context>
 <context>
@@ -4558,7 +4558,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="38"/>
         <source>&lt;b&gt;Edit Area&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Éditer la surface&lt;/b&gt;&lt;br/&gt;Choisissez und fonction et un mode de calcul d&apos;itinéraire à l&apos;aide des boutons d&apos;outils. Ensuite, sélectionnez un point de la ligne. Seulement les points marqués d&apos;un carré large peuvet être modifiés. Les points noirs sont des sous-points introduits par le calcul d&apos;itinéraire.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Éditer la surface&lt;/b&gt;&lt;br/&gt;Choisissez und fonction et un mode de calcul d&apos;itinéraire à l&apos;aide des boutons d&apos;outils. Ensuite, sélectionnez un point de la ligne. Seulement les points marqués d&apos;un carré large peuvent être modifiés. Les points noirs sont des sous-points introduits par le calcul d&apos;itinéraire.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="89"/>
@@ -4658,7 +4658,7 @@ Structure inconnue.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="464"/>
         <source>Select Items On Map</source>
-        <translation>Selectionner des objets sur la carte</translation>
+        <translation>Sélectionner des objets sur la carte</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="467"/>
@@ -4692,7 +4692,7 @@ Structure inconnue.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRangeTrk.cpp" line="47"/>
-        <source>Select a first track point with left mouse button and then a second one. Leave the range selection with a click of the right mouse button.</source>
+        <source>Select a first track point with left mouse button and then a second one. Leave the range sélection with a click of the right mouse button.</source>
         <translation>Sélectionner le 1er point par un clic gauche. Puis un second point. Clic droit pour quitter le mode &quot;sélection de plage&quot;.</translation>
     </message>
     <message>
@@ -5046,7 +5046,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="139"/>
         <source>The file contains overlays that can not be converted. This is because QMapShack does not support all overlay types of QLandkarte.</source>
-        <translation>Le fichier contient des superpositions qui ne peuvent être converties. QMapShack ne supporte pas tous les types de superpostion de QLandKarte.</translation>
+        <translation>Le fichier contient des superpositions qui ne peuvent être converties. QMapShack ne supporte pas tous les types de superposition de QLandKarte.</translation>
     </message>
 </context>
 <context>
@@ -5543,7 +5543,7 @@ addr:country</source>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="501"/>
         <source>selected %1 for download and installation</source>
-        <translation>%1 selectionné pour téléchargement et installation</translation>
+        <translation>%1 sélectionné pour téléchargement et installation</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="512"/>
@@ -5655,7 +5655,7 @@ addr:country</source>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="104"/>
         <source>available routing-data is being determined.</source>
-        <translation>Calcul des données de routages diponibles.</translation>
+        <translation>Calcul des données de routages disponibles.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="114"/>
@@ -5690,7 +5690,7 @@ addr:country</source>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="398"/>
         <source>cannot parse: %1 is not a valid size</source>
-        <translation>Ereur de syntaxe: %1 n&apos;est pas une taille</translation>
+        <translation>Erreur de syntaxe: %1 n&apos;est pas une taille</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="733"/>
@@ -6364,7 +6364,7 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <name>CRtSelectSource</name>
     <message>
         <source>Select a real time source from the list. Some sources can be added multiple times. For others only a single instance can be added.</source>
-        <translation type="vanished">Choississez une source temps réel dans la liste. Certaines sources peuvent être ajoutée plusieurs fois. Les autres ne peuvent l&apos;être qu&apos;une seule fois.</translation>
+        <translation type="vanished">Choisissez une source temps réel dans la liste. Certaines sources peuvent être ajoutée plusieurs fois. Les autres ne peuvent l&apos;être qu&apos;une seule fois.</translation>
     </message>
     <message>
         <location filename="../realtime/CRtSelectSource.cpp" line="63"/>
@@ -6399,7 +6399,7 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <message>
         <location filename="../mouse/range/CScrOptRangeTrk.cpp" line="38"/>
         <source>No range selected</source>
-        <translation>Aucune plage selectionnée</translation>
+        <translation>Aucune plage sélectionnée</translation>
     </message>
 </context>
 <context>
@@ -6407,32 +6407,32 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="88"/>
         <source>&lt;b&gt;Exact Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be completely inside the selected area.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Mode exact&lt;/b&gt;&lt;br/&gt;Tous les objets selectionnés doivent être totalement inclus dans la zone sélectionnée.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Mode exact&lt;/b&gt;&lt;br/&gt;Tous les objets sélectionnés doivent être totalement inclus dans la zone sélectionnée.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="92"/>
         <source>&lt;b&gt;Intersecting Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be inside or at least intersect the selected area.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Mode intersection&lt;/b&gt;&lt;br/&gt;Tous les objets selectionnés doivent avoir au moins une partie incluse dans la zone sélectionnée.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Mode intersection&lt;/b&gt;&lt;br/&gt;Tous les objets sélectionnés doivent avoir au moins une partie incluse dans la zone sélectionnée.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="96"/>
         <source>&lt;b&gt;Add Tracks&lt;/b&gt;&lt;br/&gt;Add tracks to list of selected items&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Ajouter des traces&lt;/b&gt;&lt;br/&gt;Ajouter des traces à la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Ajouter des traces&lt;/b&gt;&lt;br/&gt;Ajouter des traces à la liste d&apos;objets sélectionnés&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="100"/>
         <source>&lt;b&gt;Add Waypoints&lt;/b&gt;&lt;br/&gt;Add waypoints to list of selected items&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Ajouter des points isolés&lt;/b&gt;&lt;br/&gt;Ajouter des points isolés à la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Ajouter des points isolés&lt;/b&gt;&lt;br/&gt;Ajouter des points isolés à la liste d&apos;objets sélectionnés&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="104"/>
         <source>&lt;b&gt;Add Routes&lt;/b&gt;&lt;br/&gt;Add routes to list of selected items&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Ajouter des itinéraires&lt;/b&gt;&lt;br/&gt;Ajouter des itinéraires à la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Ajouter des itinéraires&lt;/b&gt;&lt;br/&gt;Ajouter des itinéraires à la liste d&apos;objets sélectionnés&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="108"/>
         <source>&lt;b&gt;Add Areas&lt;/b&gt;&lt;br/&gt;Add areas to list of selected items&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Ajouter des surfaces&lt;/b&gt;&lt;br/&gt;Ajouter des surfaces à la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Ajouter des surfaces&lt;/b&gt;&lt;br/&gt;Ajouter des surfaces à la liste d&apos;objets sélectionnés&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="112"/>
@@ -6442,22 +6442,22 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="123"/>
         <source>&lt;b&gt;Ignore Tracks&lt;/b&gt;&lt;br/&gt;Ignore tracks in list of selected items&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Ignorer les traces&lt;/b&gt;&lt;br/&gt;Ignore les traces dans la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Ignorer les traces&lt;/b&gt;&lt;br/&gt;Ignore les traces dans la liste d&apos;objets sélectionnés&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="127"/>
         <source>&lt;b&gt;Ignore Waypoints&lt;/b&gt;&lt;br/&gt;Ignore waypoints in list of selected items&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Ignorer les points isolés&lt;/b&gt;&lt;br/&gt;Ignorer les points isolés dans la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Ignorer les points isolés&lt;/b&gt;&lt;br/&gt;Ignorer les points isolés dans la liste d&apos;objets sélectionnés&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="131"/>
         <source>&lt;b&gt;Ignore Routes&lt;/b&gt;&lt;br/&gt;Ignore routes in list of selected items&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Ignorer les itinéraires&lt;/b&gt;&lt;br/&gt;Ignore les itinéraires dans la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Ignorer les itinéraires&lt;/b&gt;&lt;br/&gt;Ignore les itinéraires dans la liste d&apos;objets sélectionnés&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="135"/>
         <source>&lt;b&gt;Ignore Areas&lt;/b&gt;&lt;br/&gt;Ignore areas in list of selected items&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Ignorer les surfaces&lt;/b&gt;&lt;br/&gt;Ignore les surfaces dans la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Ignorer les surfaces&lt;/b&gt;&lt;br/&gt;Ignore les surfaces dans la liste d&apos;objets sélectionnés&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="139"/>
@@ -7487,7 +7487,7 @@ ligne %2, colonne %3:
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="139"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
-        <translation>Energie : %1 kCal&lt;br/&gt;</translation>
+        <translation>Énergie : %1 kCal&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="160"/>
@@ -7645,7 +7645,7 @@ ligne %2, colonne %3:
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="354"/>
         <source>The track &lt;b&gt;%1&lt;/b&gt; you have selected contains trackpoints with invalid timestamps. Device might not accept the generated TCX course file if left as is. &lt;b&gt;Do you want to apply a filter with constant speed (10 m/s) and continue?&lt;/b&gt;</source>
-        <translation>La trace &lt;b&gt;%1&lt;/b&gt; que vous avez selectionnée contient des points à l&apos;horodatage invalide. L&apos;appareil risque de ne pas accepter le fichier TCX généré si la trace est laissée telle quelle. &lt;b&gt;Voulez-vous appliquer un filtre vitesse arbitraire (10 m/s) et continuer ?&lt;/b&gt;</translation>
+        <translation>La trace &lt;b&gt;%1&lt;/b&gt; que vous avez sélectionnée contient des points à l&apos;horodatage invalide. L&apos;appareil risque de ne pas accepter le fichier TCX généré si la trace est laissée telle quelle. &lt;b&gt;Voulez-vous appliquer un filtre vitesse arbitraire (10 m/s) et continuer ?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="378"/>
@@ -8575,7 +8575,7 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</translation>
     <message>
         <location filename="../IAbout.ui" line="356"/>
         <source>This software is licensed under GPL3 or any later version</source>
-        <translation>Ce logiciel est distribué sous les termes de la licence GPL3 ou toute version utérieure</translation>
+        <translation>Ce logiciel est distribué sous les termes de la licence GPL3 ou toute version ultérieure</translation>
     </message>
 </context>
 <context>
@@ -8694,7 +8694,7 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</translation>
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="14"/>
         <source>Create Route from Waypoints</source>
-        <translation>Créer un itinéaire à partir de points isolés</translation>
+        <translation>Créer un itinéraire à partir de points isolés</translation>
     </message>
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="30"/>
@@ -8883,7 +8883,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;échelle courante comme échelle minimale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utiliser l&apos;échelle courante comme échelle minimale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="54"/>
@@ -8897,7 +8897,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;échelle courante comme échelle maximale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utiliser l&apos;échelle courante comme échelle maximale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="50"/>
@@ -9438,7 +9438,7 @@ zoom-out for use of the DEM data.</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="309"/>
         <source>This Track is a NoGo-Line</source>
-        <translation>Rendre cettre trace infranchissable</translation>
+        <translation>Rendre cette trace infranchissable</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="639"/>
@@ -9494,7 +9494,7 @@ zoom-out for use of the DEM data.</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1585"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
-        <translation>Pour différencier les statistiques de la trace, selectionnez une activité dans la liste pour la trace complète. Ou bien sélectionnez une partie de la trace pour lui assigner une activité.</translation>
+        <translation>Pour différencier les statistiques de la trace, sélectionnez une activité dans la liste pour la trace complète. Ou bien sélectionnez une partie de la trace pour lui assigner une activité.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1612"/>
@@ -9667,7 +9667,7 @@ zoom-out for use of the DEM data.</source>
 &lt;li&gt;1,500 meter: 1.056kg/m3&lt;/li&gt;
 &lt;li&gt;3,000 meter: 0.905kg/m3&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;La densité de l&apos;air dépend de la pression athmosphérique, de la température et de l&apos;altitude.&lt;/p&gt;
+        <translation>&lt;p&gt;La densité de l&apos;air dépend de la pression atmosphérique, de la température et de l&apos;altitude.&lt;/p&gt;
 &lt;p&gt;Exemples:
 &lt;ul&gt;
 &lt;li&gt;Niveau de la mer: 1.226kg/m3&lt;/li&gt;
@@ -9761,7 +9761,7 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="707"/>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="731"/>
         <source>Energy Use:</source>
-        <translation>Dépense energétique :</translation>
+        <translation>Dépense énergétique :</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="150"/>
@@ -11151,7 +11151,7 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../grid/IGridSetup.ui" line="89"/>
         <source>projection wizzard</source>
-        <translation>Assitant de projection</translation>
+        <translation>Assistant de projection</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="130"/>
@@ -11674,7 +11674,7 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="1035"/>
         <source>Mark the highlighted track with a red border.</source>
-        <translation>Mettre la trace selectionnée en évidence avec une bordure rouge.</translation>
+        <translation>Mettre la trace sélectionnée en évidence avec une bordure rouge.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1059"/>
@@ -11769,7 +11769,7 @@ Nom de fichier: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="818"/>
         <source>Setup Waypoint Icons</source>
-        <translation>Modifer les icônes des points isolés</translation>
+        <translation>Modifier les icônes des points isolés</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="821"/>
@@ -11974,7 +11974,7 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as minimum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;échelle courante comme échelle minimale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utiliser l&apos;échelle courante comme échelle minimale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="54"/>
@@ -11990,7 +11990,7 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click to use current scale as maximum scale to display the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utilser l&apos;échelle courante comme échelle maximale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour utiliser l&apos;échelle courante comme échelle maximale d&apos;affichage de la carte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="145"/>
@@ -12478,7 +12478,7 @@ or
     <message>
         <location filename="../print/IPrintDialog.ui" line="37"/>
         <source>When saving online maps make sure that the map has been loaded into the cache for the extent to be saved.</source>
-        <translation>Poursauvegarder des cartes en lignes assurez-vous que l&apos;ensemble de la zone à sauvegarder est bien déjà stockée dans le cache.</translation>
+        <translation>Pour sauvegarder des cartes en lignes assurez-vous que l&apos;ensemble de la zone à sauvegarder est bien déjà stockée dans le cache.</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="89"/>
@@ -12648,7 +12648,7 @@ or
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="384"/>
         <source>Reset selection. User has to start a new one.</source>
-        <translation>Réinitialiser la sélection. L&apos;utilisateur doit en recommancer une nouvelle.</translation>
+        <translation>Réinitialiser la sélection. L&apos;utilisateur doit en recommencer une nouvelle.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="419"/>
@@ -12724,7 +12724,7 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="79"/>
         <source>display selected routing profile</source>
-        <translation>Afficher du profil de routage selectionné</translation>
+        <translation>Afficher du profil de routage sélectionné</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="82"/>
@@ -13354,7 +13354,7 @@ or
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="80"/>
         <source>Enter a valid key.</source>
-        <translation>Entrez un indentifiant valide.</translation>
+        <translation>Entrez un identifiant valide.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="87"/>
@@ -13364,7 +13364,7 @@ or
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="102"/>
         <source>Start recording.</source>
-        <translation>Commencer l&apos;entregistrement.</translation>
+        <translation>Commencer l&apos;enregistrement.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="105"/>
@@ -13500,7 +13500,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="138"/>
         <source>Select a range of points. (Ctrl+R)</source>
-        <translation>Selectionner une plage de points (CTRL + R)</translation>
+        <translation>Sélectionner une plage de points (CTRL + R)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="148"/>
@@ -13530,7 +13530,7 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     </message>
     <message>
         <source>No auto-routing or line snapping (Ctrl+O)</source>
-        <translation type="vanished">Pas d&apos;autoroutge ou de suivi le ligne automatique (CTRL + O)</translation>
+        <translation type="vanished">Pas d&apos;autoroute ou de suivi le ligne automatique (CTRL + O)</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
@@ -13759,7 +13759,7 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="80"/>
         <source>Show selected track points.</source>
-        <translation>Montrer les points séléctionnés.</translation>
+        <translation>Montrer les points sélectionnés.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="94"/>
@@ -13923,7 +13923,7 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
         <source>Reset route calculation.</source>
-        <translation>Réinitialisationdu calcul d&apos;itinéraire.</translation>
+        <translation>Réinitialisation du calcul d&apos;itinéraire.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="148"/>
@@ -14011,7 +14011,7 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="198"/>
         <source>Change the distance in a fixed step.</source>
-        <translation>Longueur minimale d&apos;alongement des segments.</translation>
+        <translation>Longueur minimale d&apos;allongement des segments.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="205"/>
@@ -14228,7 +14228,7 @@ this is the right tool. Simply select the section of bad points
 
 Notez que cet outil est le bon moyen de se débarrasser
 des points aberrants d&apos;un enregistrement GPS.
-Séléctionnez le ou les points défectueux et masquez les.</translation>
+Sélectionnez le ou les points défectueux et masquez les.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="142"/>
@@ -14264,7 +14264,7 @@ les points aberrants d&apos;une véritable trace GPS.</translation>
 * use the track parts to plan a new tour
 * cut a long track into stages
 </source>
-        <translation>Couper la trace au point selectionné. Vous pouvez faire ceci pour:
+        <translation>Couper la trace au point sélectionné. Vous pouvez faire ceci pour:
 
 * Supprimer des points erronnés au début ou à la fin de la trace
 * Utiliser les segments de trace obtenus pour préparer une nouvelle trace
@@ -14613,12 +14613,12 @@ Si vous entrez &apos;mot&apos; alors &apos;mot&apos; uniquement sera recherché.
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="102"/>
         <source>Move selected items up</source>
-        <translation>Déplacer les objets sémectionnés vers le haut</translation>
+        <translation>Déplacer les objets sélectionnés vers le haut</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="116"/>
         <source>Move selected items down</source>
-        <translation>Déplacer les objets sémectionnés vers le bas</translation>
+        <translation>Déplacer les objets sélectionnés vers le bas</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="49"/>
@@ -14878,7 +14878,7 @@ Si vous entrez &apos;mot&apos; alors &apos;mot&apos; uniquement sera recherché.
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="56"/>
         <source>listen for database changes from other instances of QMapShack. On port</source>
-        <translation>Détecter des modiications de la base de données par d&apos;autres instances de QMapShack. Sur le port</translation>
+        <translation>Détecter des modifications de la base de données par d&apos;autres instances de QMapShack. Sur le port</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="63"/>
@@ -14893,7 +14893,7 @@ Si vous entrez &apos;mot&apos; alors &apos;mot&apos; uniquement sera recherché.
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="131"/>
         <source>Show tags in workspace tree. Not recommended for small screens.</source>
-        <translation>Montrer les mots clefs dans l&apos;abre de l&apos;espace de travail. Non recommandé pour les petits écrans.</translation>
+        <translation>Montrer les mots clefs dans l&apos;arbre de l&apos;espace de travail. Non recommandé pour les petits écrans.</translation>
     </message>
 </context>
 <context>
@@ -14911,7 +14911,7 @@ Si vous entrez &apos;mot&apos; alors &apos;mot&apos; uniquement sera recherché.
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="42"/>
         <source>Select a path with your own templates.</source>
-        <translation>Séléctionner le chemin vers vos propres modèles.</translation>
+        <translation>Sélectionner le chemin vers vos propres modèles.</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="45"/>

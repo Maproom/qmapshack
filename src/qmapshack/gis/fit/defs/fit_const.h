@@ -33,6 +33,7 @@
 static const quint8 fitLocalMesgNrInvalid = 255;
 static const quint16 fitGlobalMesgNrInvalid = 0xffff;
 static const quint8 fitFieldDefNrInvalid = 255;
+static const quint8 fitDevDataIndexInvalid = 255;
 
 typedef enum
 {

@@ -19,7 +19,7 @@
 #include "CMainWindow.h"
 #include "tool/CToolStack.h"
 
-CToolStack::CToolStack(QWidget * parent)
+CToolStack::CToolStack(QWidget* parent)
     : QStackedWidget(parent)
 {
     connect(this, &CToolStack::currentChanged, this, &CToolStack::slotToolChanged);
@@ -30,7 +30,7 @@ void CToolStack::setupChanged()
     const int N = count();
     for(int n = 0; n < N; n++)
     {
-        ITool * tool = dynamic_cast<ITool*>(widget(n));
+        ITool* tool = dynamic_cast<ITool*>(widget(n));
         if(nullptr != tool)
         {
             tool->setupChanged();

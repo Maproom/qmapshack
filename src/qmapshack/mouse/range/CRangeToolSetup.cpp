@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CRangeToolSetup::CRangeToolSetup(CScrOptRangeTool &parent)
+CRangeToolSetup::CRangeToolSetup(CScrOptRangeTool& parent)
     : QDialog(&parent)
     , tool(parent)
 {

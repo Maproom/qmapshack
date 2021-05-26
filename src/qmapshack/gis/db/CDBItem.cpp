@@ -24,7 +24,7 @@
 
 #include <QtSql>
 
-CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
+CDBItem::CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent)
     : QTreeWidgetItem(parent)
     , db(db)
     , id(id)
@@ -37,7 +37,7 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
     {
         QPixmap pixmap;
         type = query.value(0).toInt();
-        key  = query.value(1).toString();
+        key = query.value(1).toString();
         pixmap.loadFromData(query.value(2).toByteArray(), "PNG");
         setIcon(CGisListDB::eColumnCheckbox, pixmap);
         setText(CGisListDB::eColumnName, query.value(3).toString());
@@ -109,7 +109,7 @@ void CDBItem::updateAge()
 
 void CDBItem::toggle()
 {
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(parent());
     if(nullptr == folder)
     {
         return;
@@ -118,18 +118,18 @@ void CDBItem::toggle()
     if(checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
     {
         // make sure the project is shown on the workspace
-        CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(folder->getId(), folder->getDBName());
+        CEvtD2WShowFolder* evt1 = new CEvtD2WShowFolder(folder->getId(), folder->getDBName());
         CGisWorkspace::self().postEventForWks(evt1);
 
         // tell the project to load the item from the database
-        CEvtD2WShowItems * evt2 = new CEvtD2WShowItems(folder->getId(), folder->getDBName());
+        CEvtD2WShowItems* evt2 = new CEvtD2WShowItems(folder->getId(), folder->getDBName());
         evt2->items << evt_item_t(id, type);
         CGisWorkspace::self().postEventForWks(evt2);
     }
     else
     {
         // tell the project to remove the item
-        CEvtD2WHideItems * evt2 = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
+        CEvtD2WHideItems* evt2 = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
         evt2->keys << key;
         CGisWorkspace::self().postEventForWks(evt2);
     }
@@ -137,7 +137,7 @@ void CDBItem::toggle()
 
 void CDBItem::remove()
 {
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(parent());
     if(nullptr == folder)
     {
         return;
@@ -145,7 +145,7 @@ void CDBItem::remove()
 
     if(checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
     {
-        CEvtD2WHideItems * evt = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
+        CEvtD2WHideItems* evt = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
         evt->keys << key;
         CGisWorkspace::self().postEventForWks(evt);
     }

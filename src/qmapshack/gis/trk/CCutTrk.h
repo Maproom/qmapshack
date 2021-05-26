@@ -26,7 +26,7 @@ class CCutTrk : public QDialog, private Ui::ICutTrk
 {
     Q_OBJECT
 public:
-    CCutTrk(QWidget * parent);
+    CCutTrk(QWidget* parent);
     virtual ~CCutTrk() = default;
 
     enum mode_e

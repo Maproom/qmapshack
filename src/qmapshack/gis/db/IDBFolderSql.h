@@ -29,12 +29,12 @@ class QUdpSocket;
 class IDBFolderSql : public IDBFolder, public QObject
 {
 public:
-    IDBFolderSql(QSqlDatabase& db, QTreeWidget * parent);
+    IDBFolderSql(QSqlDatabase& db, QTreeWidget* parent);
     virtual ~IDBFolderSql() = default;
 
     void expanding() override;
     void updateLostFound();
-    void update(CEvtW2DAckInfo * info) override
+    void update(CEvtW2DAckInfo* info) override
     {
         IDBFolder::update(info);
     }
@@ -45,9 +45,9 @@ public:
     virtual void copyFolder(quint64 child, quint64 parent) = 0;
 
 protected:
-    CDBFolderLostFound * folderLostFound = nullptr;
+    CDBFolderLostFound* folderLostFound = nullptr;
 
-    QUdpSocket * socket;
+    QUdpSocket* socket;
 };
 
 #endif //IDBFOLDERSQL_H

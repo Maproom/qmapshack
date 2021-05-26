@@ -28,7 +28,7 @@ class QStringList;
 class IGarminStrTbl : public QObject
 {
 public:
-    IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject * parent);
+    IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject* parent);
     virtual ~IGarminStrTbl();
 
     enum type_e {norm, poi, net};
@@ -53,10 +53,10 @@ public:
 
     virtual void get(CFileExt& file, quint32 offset, type_e t, QStringList& info) = 0;
 protected:
-    void readFile(CFileExt &file, quint32 offset, quint32 size, QByteArray& data);
+    void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data);
     quint32 calcOffset(CFileExt& file, const quint32 offset, type_e t);
 
-    QString processLabel(const char * buffer, unsigned lastSeperator);
+    QString processLabel(const char* buffer, unsigned lastSeperator);
 
     quint32 offsetLBL1 = 0;
     quint32 sizeLBL1 = 0;
@@ -70,7 +70,7 @@ protected:
 
     // conversion of strings
     quint16 codepage;
-    QTextCodec * codec = nullptr;
+    QTextCodec* codec = nullptr;
     const quint8 mask;
     quint32 mask32;
     quint64 mask64;

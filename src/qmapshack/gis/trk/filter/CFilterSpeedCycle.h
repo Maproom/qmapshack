@@ -39,11 +39,11 @@ public:
         qreal slopeAtMaxSpeed;
     };
 
-    CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk);
+    CFilterSpeedCycle(QWidget* parent, CGisItemTrk& trk);
     virtual ~CFilterSpeedCycle() = default;
 
-    void loadSettings(QSettings &cfg);
-    void saveSettings(QSettings &cfg);
+    void loadSettings(QSettings& cfg);
+    void saveSettings(QSettings& cfg);
     void apply(CGisItemTrk& trk);
 
 private slots:
@@ -56,7 +56,7 @@ private slots:
     void slotSetMinMaxSlopes(bool);
 
 private:
-    const CGisItemTrk &trk; // Needed for filterGetSlopeLimits
+    const CGisItemTrk& trk; // Needed for filterGetSlopeLimits
     const qint32 noOfFixTypes;
     const qint32 noOfCustomTypes;
     const QList<cycling_type_t> cyclingTypeDefaults;

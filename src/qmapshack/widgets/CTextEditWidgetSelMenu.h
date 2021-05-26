@@ -27,9 +27,9 @@ class CTextEditWidgetSelMenu : public QWidget, private Ui::ITextEditWidgetSelMen
 {
     Q_OBJECT
 public:
-    CTextEditWidgetSelMenu(QWidget *parent,
-                           QAction *actionTextBold, QAction *actionTextItalic, QAction *actionTextUnderline,
-                           QAction *actionCut,      QAction *actionCopy,       QAction *actionPaste
+    CTextEditWidgetSelMenu(QWidget* parent,
+                           QAction* actionTextBold, QAction* actionTextItalic, QAction* actionTextUnderline,
+                           QAction* actionCut, QAction* actionCopy, QAction* actionPaste
                            );
     virtual ~CTextEditWidgetSelMenu() {}
 };

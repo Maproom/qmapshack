@@ -24,7 +24,7 @@
 class CQlgtWpt : public QObject, public IItem
 {
 public:
-    CQlgtWpt(quint64 id, QObject * parent);
+    CQlgtWpt(quint64 id, QObject* parent);
     virtual ~CQlgtWpt();
 
     void setIcon(const QString& str);

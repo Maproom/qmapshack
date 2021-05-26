@@ -25,7 +25,7 @@ class CSetupIconAndName : public QDialog, private Ui::ISetupIconAndName
 {
     Q_OBJECT
 public:
-    CSetupIconAndName(QString& icon, QString& name, QWidget * parent);
+    CSetupIconAndName(QString& icon, QString& name, QWidget* parent);
     virtual ~CSetupIconAndName() = default;
 
 public slots:
@@ -38,8 +38,8 @@ private slots:
 
 private:
     void checkInput();
-    QString &icon;
-    QString &name;
+    QString& icon;
+    QString& name;
 };
 
 #endif //CSETUPICONANDNAME_H

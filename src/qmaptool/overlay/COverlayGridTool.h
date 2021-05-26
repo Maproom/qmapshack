@@ -29,16 +29,16 @@ class COverlayGridTool : public QWidget, private Ui::IOverlayGridTool
 {
     Q_OBJECT
 public:
-    COverlayGridTool(QWidget * parent);
+    COverlayGridTool(QWidget* parent);
     virtual ~COverlayGridTool() = default;
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent *e);
-    void mouseReleaseEventFx(QMouseEvent *e);
-    void leaveEventFx(QEvent *e);
+    void mouseMoveEventFx(QMouseEvent* e);
+    void mouseReleaseEventFx(QMouseEvent* e);
+    void leaveEventFx(QEvent* e);
     QCursor getCursorFx();
 
-    void registerItem(CItemRefMap * item);
+    void registerItem(CItemRefMap* item);
 
     QList<COverlayRefMapPoint*>& getRefPoints()
     {
@@ -58,8 +58,8 @@ private slots:
 
 private:
 
-    CItemRefMap * item = nullptr;
-    const IDrawContext * context = nullptr;
+    CItemRefMap* item = nullptr;
+    const IDrawContext* context = nullptr;
 
     QList<COverlayRefMapPoint*> refPoints;
 };

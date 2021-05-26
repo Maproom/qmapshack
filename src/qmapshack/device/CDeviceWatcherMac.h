@@ -50,7 +50,7 @@ class CDeviceWatcherMac : public IDeviceWatcher
 {
     Q_OBJECT
 public:
-    CDeviceWatcherMac(CGisListWks *parent);
+    CDeviceWatcherMac(CGisListWks* parent);
 
 private slots:
     void slotUpdate() override;

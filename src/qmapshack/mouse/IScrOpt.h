@@ -33,7 +33,7 @@ class IMouse;
 class IScrOpt : public QWidget
 {
 public:
-    IScrOpt(IMouse *mouse);
+    IScrOpt(IMouse* mouse);
     virtual ~IScrOpt();
 
     void setOrigin(const QPoint& pos)
@@ -58,15 +58,15 @@ protected slots:
     void slotLinkActivated(const QString& link);
 
 protected:
-    void enterEvent(QEvent *e) override;
-    void leaveEvent(QEvent *e) override;
+    void enterEvent(QEvent* e) override;
+    void leaveEvent(QEvent* e) override;
     // block mouse actions to hit the canvas
-    void mousePressEvent(QMouseEvent * e) override
+    void mousePressEvent(QMouseEvent* e) override
     {
         e->accept();
     }
     // block mouse actions to hit the canvas
-    void mouseMoveEvent(QMouseEvent *e) override
+    void mouseMoveEvent(QMouseEvent* e) override
     {
         e->accept();
     }

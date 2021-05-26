@@ -31,7 +31,7 @@ class CRouterBRouterLocal : public QObject
 {
     Q_OBJECT
 public:
-    CRouterBRouterLocal(CRouterBRouter &parent);
+    CRouterBRouterLocal(CRouterBRouter& parent);
     virtual ~CRouterBRouterLocal() {}
 
     void startBRouter();
@@ -44,21 +44,21 @@ public:
 
 private slots:
     void slotBRouterStateChanged(const QProcess::ProcessState newState);
-    void slotBRouterError(const QProcess::ProcessError error, const QString &errorString);
+    void slotBRouterError(const QProcess::ProcessError error, const QString& errorString);
     void slotBRouterSocketError(const QAbstractSocket::SocketError error);
     void slotBRouterSocketConnected();
 
 private:
     bool usesLocalBindaddress() const;
 
-    CRouterBRouter & brouter;
+    CRouterBRouter& brouter;
 
-    CRouterBRouterToolShell * brouterShell {nullptr};
+    CRouterBRouterToolShell* brouterShell {nullptr};
     QProcess::ProcessState brouterState { QProcess::NotRunning };
     QProcess::ProcessError brouterError { QProcess::UnknownError };
 
     enum connect_state_e { eNone=0, eConnected=1, eError=2 };
-    QEventLoop * eventLoop { nullptr };
+    QEventLoop* eventLoop { nullptr };
     QAbstractSocket::SocketError socketError { QAbstractSocket::ConnectionRefusedError };
 };
 

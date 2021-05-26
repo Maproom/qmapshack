@@ -28,7 +28,7 @@ class CScrOptRuler : public IScrOpt, public Ui::IScrOptRuler
 {
     Q_OBJECT
 public:
-    CScrOptRuler(IMouse *mouse, CCanvas * canvas);
+    CScrOptRuler(IMouse* mouse, CCanvas* canvas);
     virtual ~CScrOptRuler();
 
     void draw(QPainter& p) override

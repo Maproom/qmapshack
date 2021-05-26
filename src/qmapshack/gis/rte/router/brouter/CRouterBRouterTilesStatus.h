@@ -27,7 +27,7 @@ class CRouterBRouterTilesStatus : public QObject
 {
     Q_OBJECT
 public:
-    CRouterBRouterTilesStatus(QObject *parent) : QObject(parent) {}
+    CRouterBRouterTilesStatus(QObject* parent) : QObject(parent) {}
     virtual ~CRouterBRouterTilesStatus() {}
 
 public slots:
@@ -48,7 +48,7 @@ private:
     bool isRemote {false};
     bool isSelected {false};
     bool isOutdated {false};
-    QFile * file {nullptr};
+    QFile* file {nullptr};
 
     friend class CRouterBRouterTilesSelect;
 };

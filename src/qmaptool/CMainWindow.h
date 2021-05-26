@@ -46,7 +46,7 @@ public:
 
     static QString getUser();
 
-    CCanvas * getCanvas() const
+    CCanvas* getCanvas() const
     {
         return canvas;
     }
@@ -61,14 +61,14 @@ public:
         return actionFlipMouseWheel->isChecked();
     }
 
-    QAction * showToolHelp() const
+    QAction* showToolHelp() const
     {
         return actionShowToolHelp;
     }
 
     void makeShellVisible();
 
-    void startGridTool(CItemRefMap * item);
+    void startGridTool(CItemRefMap* item);
     void showToolBox();
 
 private slots:
@@ -80,22 +80,22 @@ private slots:
     void slotHelp();
 
 private:
-    friend int main(int argc, char ** argv);
+    friend int main(int argc, char** argv);
     CMainWindow();
-    static CMainWindow * pSelf;
+    static CMainWindow* pSelf;
 
     void prepareMenuForMac();
 
     QFont mapFont;
 
-    CToolBox  * toolBox;
-    CToolGrid * toolGrid;
+    CToolBox* toolBox;
+    CToolGrid* toolGrid;
 
-    CToolAddOverview * toolAddOverview;
-    CToolCutMap * toolCutMap;
-    CToolRefMap * toolRefMap;
-    CToolPalettize * toolPalettize;
-    CToolExport * toolExport;
+    CToolAddOverview* toolAddOverview;
+    CToolCutMap* toolCutMap;
+    CToolRefMap* toolRefMap;
+    CToolPalettize* toolPalettize;
+    CToolExport* toolExport;
 
     QPointer<CHelp> help;
 };

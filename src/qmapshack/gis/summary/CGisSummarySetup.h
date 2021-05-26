@@ -36,14 +36,14 @@ public slots:
     void accept() override;
 
 private slots:
-    void slotAdd(QListWidget *listWidget);
-    void slotDel(QListWidget *listWidget);
-    void slotItemSelectionChanged(QListWidget *listWidget, QToolButton *toolDel);
+    void slotAdd(QListWidget* listWidget);
+    void slotDel(QListWidget* listWidget);
+    void slotItemSelectionChanged(QListWidget* listWidget, QToolButton* toolDel);
 
 private:
-    void setupSignals(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget, QToolButton * toolAdd, QToolButton * toolDel);
-    void addFolder(quint64 id, const QString& db, QListWidget *listWidget);
-    void writeResults(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget) const;
+    void setupSignals(CGisSummary::dropzone_e number, QLineEdit* lineName, QListWidget* listWidget, QToolButton* toolAdd, QToolButton* toolDel);
+    void addFolder(quint64 id, const QString& db, QListWidget* listWidget);
+    void writeResults(CGisSummary::dropzone_e number, QLineEdit* lineName, QListWidget* listWidget) const;
 
     enum data_e
     {

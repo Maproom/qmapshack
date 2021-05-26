@@ -29,7 +29,7 @@ void CAppSetupLinux::initQMapTool()
     prepareGdal("", "");
 
     // setup translators
-    QString resourceDir     = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+    QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
     QString translationPath = QCoreApplication::applicationDirPath();
     translationPath.replace(QRegExp("bin$"), "share/qmaptool/translations");
     prepareTranslator(resourceDir, "qt_");

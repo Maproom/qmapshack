@@ -144,6 +144,13 @@
        </widget>
       </item>
       <item>
+       <widget class="CToolGDALGroupBox" name="groupGDALParameters">
+        <property name="title">
+         <string>GDAL Parameter</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -170,7 +177,7 @@
            <string>Start</string>
           </property>
           <property name="icon">
-           <iconset resource="../../qmapshack/resources.qrc">
+           <iconset resource="../resources.qrc">
             <normaloff>:/icons/32x32/Apply.png</normaloff>:/icons/32x32/Apply.png</iconset>
           </property>
          </widget>
@@ -184,7 +191,7 @@
            <string>Cancel</string>
           </property>
           <property name="icon">
-           <iconset resource="../../qmapshack/resources.qrc">
+           <iconset resource="../resources.qrc">
             <normaloff>:/icons/32x32/Cancel.png</normaloff>:/icons/32x32/Cancel.png</iconset>
           </property>
          </widget>
@@ -240,7 +247,7 @@
   </layout>
   <action name="actionFilename">
    <property name="icon">
-    <iconset resource="../../qmapshack/resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
    </property>
    <property name="text">
@@ -261,9 +268,15 @@
    <header>tool/CToolOverviewGroupBox.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>CToolGDALGroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>tool/CToolGDALGroupBox.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../qmapshack/resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

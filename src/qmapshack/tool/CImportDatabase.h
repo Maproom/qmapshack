@@ -29,7 +29,7 @@ class CImportDatabase : public QWidget, private Ui::IImportDatabase
 {
     Q_OBJECT
 public:
-    CImportDatabase(QWidget * parent);
+    CImportDatabase(QWidget* parent);
     virtual ~CImportDatabase();
 
     void stdOut(const QString& str);

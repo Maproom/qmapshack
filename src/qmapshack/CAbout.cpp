@@ -18,14 +18,14 @@
 
 #include "contributors.h"
 #include "CAbout.h"
+#include "gis/proj_x.h"
 #include "version.h"
 
 #include <gdal.h>
-#include <proj_api.h>
 #include <QtWidgets>
 #include <routino.h>
 
-CAbout::CAbout(QWidget *parent)
+CAbout::CAbout(QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -38,7 +38,7 @@ CAbout::CAbout(QWidget *parent)
 
     labelQtVersion->setText(qVersion());
     labelGDALVersion->setText(GDALVersionInfo("--version"));
-    labelProj4Version->setText(QString::number(PJ_VERSION));
+    labelProj4Version->setText(proj_info().release);
     if(Routino_CheckAPIVersion() != ROUTINO_ERROR_NONE)
     {
         labelRoutinoVersion->setText(tr("%1 (API V%2, expected V%3)").arg(Routino_Version).arg(ROUTINO_API_VERSION).arg(Routino_APIVersion));

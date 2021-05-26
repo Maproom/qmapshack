@@ -27,8 +27,8 @@
 
 #include "units/IUnit.h"
 
-using fGetLimit    = std::function<qreal(const QString&)>;
-using fGetUnit     = std::function<QString(const QString&)>;
+using fGetLimit = std::function<qreal(const QString&)>;
+using fGetUnit = std::function<QString(const QString&)>;
 using fMarkChanged = std::function<void(void)>;
 
 class CLimit : public QObject

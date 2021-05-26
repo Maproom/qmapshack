@@ -25,7 +25,7 @@ class CQlbProject : public IGisProject
 {
     Q_DECLARE_TR_FUNCTIONS(CQlbProject)
 public:
-    CQlbProject(const QString& filename, CGisListWks * parent);
+    CQlbProject(const QString& filename, CGisListWks* parent);
     virtual ~CQlbProject() = default;
 
     const QString getFileDialogFilter() const override
@@ -40,10 +40,10 @@ public:
 
 private:
     void load(const QString& filename);
-    void loadWpts(QByteArray &array);
-    void loadTrks(QByteArray &array);
-    void loadRtes(QByteArray &array);
-    void loadOvls(QByteArray &array);
+    void loadWpts(QByteArray& array);
+    void loadTrks(QByteArray& array);
+    void loadRtes(QByteArray& array);
+    void loadOvls(QByteArray& array);
 };
 
 #endif //CQLBPROJECT_H

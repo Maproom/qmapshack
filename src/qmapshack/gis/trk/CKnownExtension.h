@@ -31,16 +31,16 @@ public:
        @brief Initialize using the default list of known namespaces
        @param units  The unit class currently used
      */
-    static void init(const IUnit &units);
+    static void init(const IUnit& units);
 
     /**
        @brief Register the Garmin TPX v1 for namespace ns
        @param units  The unit class currently used
        @param ns     The namespace to be used for Garmin TPX v1
      */
-    static void initGarminTPXv1(const IUnit &units, const QString &ns);
+    static void initGarminTPXv1(const IUnit& units, const QString& ns);
 
-    static void initClueTrustTPXv1(const IUnit &units, const QString &ns);
+    static void initClueTrustTPXv1(const IUnit& units, const QString& ns);
 
     static const QString internalSlope;    //< name of internally derived slope
     static const QString internalSpeedDist;    //< name of internally derived speed over distance
@@ -61,8 +61,8 @@ public:
 
        @return a valid extension descriptor (for both known and unknown extensions)
      */
-    static const CKnownExtension get(const QString &key);
-    static bool isKnown(const QString &key);
+    static const CKnownExtension get(const QString& key);
+    static bool isKnown(const QString& key);
 
     QString nameShortText;     //< short text name to display in GUI (ex. "Heart R." in y-axis)
     QString nameLongText;      //< long text name to display in GUI (ex. Heart Rate" in ComboBox)
@@ -99,23 +99,23 @@ public:
 
 private:
 
-    static bool registerNS(const QString &ns);
+    static bool registerNS(const QString& ns);
 
     static QHash<QString, CKnownExtension> knownExtensions;
     static QSet<QString> registeredNS;
 
     CKnownExtension(QString nameShortText, QString nameLongText, int order,
-                    qreal minimum,     qreal maximum,
-                    qreal factor,      QString unit,
-                    QString icon,      bool known,
-                    bool derivedQMS,   fTrkPtGetVal valueFunc
+                    qreal minimum, qreal maximum,
+                    qreal factor, QString unit,
+                    QString icon, bool known,
+                    bool derivedQMS, fTrkPtGetVal valueFunc
                     )
         : nameShortText(nameShortText), nameLongText(nameLongText), order(order), minimum(minimum), maximum(maximum), factor(factor),
         unit(unit), icon(icon), known(known), derivedQMS(derivedQMS), valueFunc(valueFunc)
     {
     }
 
-    static void initMioTPX(const IUnit &units);
+    static void initMioTPX(const IUnit& units);
 };
 
 #endif // CKNOWNEXTENSION_H

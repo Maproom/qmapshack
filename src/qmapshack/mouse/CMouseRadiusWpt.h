@@ -31,13 +31,13 @@ class CMouseRadiusWpt : public IMouse
 {
     Q_OBJECT
 public:
-    CMouseRadiusWpt(CGisItemWpt& wpt, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
+    CMouseRadiusWpt(CGisItemWpt& wpt, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
     virtual ~CMouseRadiusWpt();
 
-    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
     void leftClicked(const QPoint& point) override;
-    void mouseMoved(const QPoint &pos) override;
+    void mouseMoved(const QPoint& pos) override;
     void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
     void rightButtonDown(const QPoint& point) override;
     void scaleChanged() override;

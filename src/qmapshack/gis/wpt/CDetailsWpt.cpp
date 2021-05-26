@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "gis/proj_x.h"
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CElevationDialog.h"
@@ -26,10 +27,9 @@
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
-CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
+CDetailsWpt::CDetailsWpt(CGisItemWpt& wpt, QWidget* parent)
     : QDialog(parent)
     , wpt(wpt)
 {
@@ -40,21 +40,21 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
 
     toolLock->setDisabled(wpt.isOnDevice());
 
-    connect(labelPosition,  &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
-    connect(labelElevation, &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
-    connect(labelProximity, &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
-    connect(textCmtDesc,    &QTextBrowser::anchorClicked,    this,       static_cast<void (CDetailsWpt::*)(const QUrl&)   >(&CDetailsWpt::slotLinkActivated));
+    connect(labelPosition, &QLabel::linkActivated, this, static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(labelElevation, &QLabel::linkActivated, this, static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(labelProximity, &QLabel::linkActivated, this, static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(textCmtDesc, &QTextBrowser::anchorClicked, this, static_cast<void (CDetailsWpt::*)(const QUrl&)   >(&CDetailsWpt::slotLinkActivated));
 
-    connect(lineName,       &CLineEdit::textEdited,          this,       &CDetailsWpt::slotNameChanged);
-    connect(lineName,       &CLineEdit::editingFinished,     this,       &CDetailsWpt::slotNameChangeFinished);
-    connect(toolIcon,       &QToolButton::clicked,           this,       &CDetailsWpt::slotChangeIcon);
-    connect(toolLock,       &QToolButton::toggled,           this,       &CDetailsWpt::slotChangeReadOnlyMode);
+    connect(lineName, &CLineEdit::textEdited, this, &CDetailsWpt::slotNameChanged);
+    connect(lineName, &CLineEdit::editingFinished, this, &CDetailsWpt::slotNameChangeFinished);
+    connect(toolIcon, &QToolButton::clicked, this, &CDetailsWpt::slotChangeIcon);
+    connect(toolLock, &QToolButton::toggled, this, &CDetailsWpt::slotChangeReadOnlyMode);
 
-    connect(listHistory,    &CHistoryListWidget::sigChanged, this,       &CDetailsWpt::setupGui);
+    connect(listHistory, &CHistoryListWidget::sigChanged, this, &CDetailsWpt::setupGui);
 
-    connect(toolAddImage,   &QToolButton::clicked,           photoAlbum, &CPhotoAlbum::slotAddImage);
-    connect(toolDelImage,   &QToolButton::clicked,           photoAlbum, &CPhotoAlbum::slotDelImage);
-    connect(photoAlbum,     &CPhotoAlbum::sigChanged,        this,       &CDetailsWpt::slotChangedImages);
+    connect(toolAddImage, &QToolButton::clicked, photoAlbum, &CPhotoAlbum::slotAddImage);
+    connect(toolDelImage, &QToolButton::clicked, photoAlbum, &CPhotoAlbum::slotDelImage);
+    connect(photoAlbum, &CPhotoAlbum::sigChanged, this, &CDetailsWpt::slotChangedImages);
 }
 
 CDetailsWpt::~CDetailsWpt()
@@ -91,7 +91,7 @@ void CDetailsWpt::setupGui()
     if(wpt.getElevation() != NOINT)
     {
         IUnit::self().meter2elevation(wpt.getElevation(), val, unit);
-        elevationStr = QString("%1 %2").arg(val).arg(unit);
+        elevationStr = QString("%1 %2").arg(val, unit);
     }
     labelElevation->setText(IGisItem::toLink(isReadOnly, "elevation", elevationStr, ""));
 
@@ -100,7 +100,7 @@ void CDetailsWpt::setupGui()
     if(wpt.getProximity() != NOFLOAT)
     {
         IUnit::self().meter2elevation(wpt.getProximity(), val, unit);
-        proxStr = QString("%1 %2").arg(val).arg(unit);
+        proxStr = QString("%1 %2").arg(val, unit);
     }
     labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", proxStr, ""));
 
@@ -129,7 +129,7 @@ void CDetailsWpt::setupGui()
     originator = false;
 }
 
-void CDetailsWpt::slotNameChanged(const QString &name)
+void CDetailsWpt::slotNameChanged(const QString& name)
 {
     setWindowTitle(name);
 }

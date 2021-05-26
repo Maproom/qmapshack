@@ -41,11 +41,11 @@ public:
 
     bool isFieldValueValid(const quint8 fieldDefNum) const;
     const QVariant getFieldValue(const quint8 fieldDefNum) const;
-    void addField(CFitField & field);
+    void addField(CFitField& field);
 
     const CFitProfile& profile() const { return *messageProfile; }
     QStringList messageInfo() const;
-    const QList<CFitField> getFields() const { return fields.values(); }
+    QList<CFitField> getFields() const { return fields.values(); }
     void updateFieldProfile(quint8 fieldDefNr, const CFitFieldProfile* fieldProfile);
 
 private:

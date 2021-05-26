@@ -28,7 +28,7 @@ class CToolPalettize : public IToolGui, public ITool, private Ui::IToolPalettize
 {
     Q_OBJECT
 public:
-    CToolPalettize(QWidget * parent);
+    CToolPalettize(QWidget* parent);
     virtual ~CToolPalettize();
 
     void setupChanged() override;
@@ -36,7 +36,7 @@ public:
     FORWARD_LIST_ALL(itemList)
 
 private slots:
-    void slotAddItem(const QString& filename, QListWidget * list);
+    void slotAddItem(const QString& filename, QListWidget* list);
     void slotMapSelectionChanged();
     void slotSomethingChanged();
     void slotStart();
@@ -45,12 +45,12 @@ private slots:
     void slotSelectFilename();
 
 private:
-    void buildCmd(QList<CShellCmd>& cmds, const IItem * iitem) override;
+    void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
     void buildCmdFinal(QList<CShellCmd>& cmds) override;
 
     //QStringList inputFiles;
-    QTemporaryFile * inputFileList1;
-    QTemporaryFile * inputFileList2;
+    QTemporaryFile* inputFileList1;
+    QTemporaryFile* inputFileList2;
 };
 
 #endif //CTOOLPALETTIZE_H

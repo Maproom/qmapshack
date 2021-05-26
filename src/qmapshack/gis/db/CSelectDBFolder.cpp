@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CSelectDBFolder::CSelectDBFolder(QList<quint64> &ids, QString &db, QString &host, QWidget *parent)
+CSelectDBFolder::CSelectDBFolder(QList<quint64>& ids, QString& db, QString& host, QWidget* parent)
     : QDialog(parent)
     , ids(ids)
     , db(db)
@@ -39,9 +39,9 @@ CSelectDBFolder::CSelectDBFolder(QList<quint64> &ids, QString &db, QString &host
 
     SETTINGS;
     cfg.beginGroup("Database");
-    QStringList names = cfg.value("names").toStringList();
+    const QStringList& names = cfg.value("names").toStringList();
     cfg.beginGroup("Entries");
-    for(const QString &name : names)
+    for(const QString& name : names)
     {
         if(!db.isEmpty() && (db != name))
         {
@@ -49,27 +49,27 @@ CSelectDBFolder::CSelectDBFolder(QList<quint64> &ids, QString &db, QString &host
         }
 
         cfg.beginGroup(name);
-        QString type = cfg.value("type", "SQLite").toString();
+        const QString& type = cfg.value("type", "SQLite").toString();
         if(type == "SQLite")
         {
-            QString filename = cfg.value("filename", "").toString();
+            const QString& filename = cfg.value("filename", "").toString();
             new CDBFolderSqlite(filename, name, treeWidget);
         }
 
         if(type == "MySQL")
         {
-            QString server  = cfg.value("server", "").toString();
-            QString port    = cfg.value("port", "").toString();
-            QString user    = cfg.value("user", "").toString();
-            QString passwd  = cfg.value("passwd", "").toString();
-            bool noPasswd   = cfg.value("noPasswd", false).toBool();
+            const QString& server = cfg.value("server", "").toString();
+            const QString& port = cfg.value("port", "").toString();
+            const QString& user = cfg.value("user", "").toString();
+            const QString& passwd = cfg.value("passwd", "").toString();
+            bool noPasswd = cfg.value("noPasswd", false).toBool();
             new CDBFolderMysql(server, port, user, passwd, noPasswd, name, treeWidget);
         }
         cfg.endGroup(); // name
     }
     cfg.endGroup(); // Database
 
-    connect(treeWidget, &QTreeWidget::itemExpanded,         this, &CSelectDBFolder::slotItemExpanded);
+    connect(treeWidget, &QTreeWidget::itemExpanded, this, &CSelectDBFolder::slotItemExpanded);
     connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CSelectDBFolder::slotItemSelectionChanged);
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectDBFolder");
@@ -80,9 +80,9 @@ CSelectDBFolder::~CSelectDBFolder()
     CCanvas::restoreOverrideCursor("~CSelectDBFolder");
 }
 
-void CSelectDBFolder::slotItemExpanded(QTreeWidgetItem * item)
+void CSelectDBFolder::slotItemExpanded(QTreeWidgetItem* item)
 {
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(item);
     if(nullptr != folder)
     {
         folder->expanding();
@@ -91,7 +91,7 @@ void CSelectDBFolder::slotItemExpanded(QTreeWidgetItem * item)
 
 void CSelectDBFolder::slotItemSelectionChanged()
 {
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(treeWidget->currentItem());
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(treeWidget->currentItem());
     if(folder)
     {
         if(projectsOnly && (folder->type() != IDBFolder::eTypeProject) && (folder->type() != IDBFolder::eTypeOther))
@@ -104,10 +104,10 @@ void CSelectDBFolder::slotItemSelectionChanged()
 
         ids.clear();
         ids << folder->getId();
-        db      = folder->getDBName();
-        host    = folder->getDBHost();
+        db = folder->getDBName();
+        host = folder->getDBHost();
 
-        IDBFolder * folder1 = dynamic_cast<IDBFolder*>(folder->parent());
+        IDBFolder* folder1 = dynamic_cast<IDBFolder*>(folder->parent());
         while(folder1 != nullptr)
         {
             ids << folder1->getId();

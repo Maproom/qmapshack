@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-IRtInfo::IRtInfo(IRtSource *source, QWidget *parent)
+IRtInfo::IRtInfo(IRtSource* source, QWidget* parent)
     : QWidget(parent)
     , source(source)
 {
@@ -74,7 +74,7 @@ void IRtInfo::slotToTrack()
         return;
     }
 
-    IGisProject * prj = CGisWorkspace::self().selectProject(false);
+    IGisProject* prj = CGisWorkspace::self().selectProject(false);
     if(prj == nullptr)
     {
         return;
@@ -87,7 +87,7 @@ void IRtInfo::slotToTrack()
 }
 
 
-void IRtInfo::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+void IRtInfo::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt)
 {
     if(record != nullptr)
     {

@@ -32,7 +32,7 @@ class CPlotData : public QObject
 public:
     enum axistype_e {eAxisLinear, eAxisTime};
 
-    CPlotData(axistype_e type, QObject * parent);
+    CPlotData(axistype_e type, QObject* parent);
     virtual ~CPlotData();
 
     ///get a reference to the x axis
@@ -92,8 +92,8 @@ public:
     qreal ymax = 0;
 
 protected:
-    CPlotAxis * xaxis = nullptr;
-    CPlotAxis * yaxis = nullptr;
+    CPlotAxis* xaxis = nullptr;
+    CPlotAxis* yaxis = nullptr;
 };
 
 #endif //CPLOTDATA_H

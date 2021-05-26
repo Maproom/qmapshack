@@ -25,7 +25,7 @@
 #include <QMessageBox>
 #include <QtNetwork>
 
-IMapOnline::IMapOnline(CMapDraw * parent)
+IMapOnline::IMapOnline(CMapDraw* parent)
     : IMap(eFeatVisibility | eFeatTileCache, parent)
 {
     accessManager = new QNetworkAccessManager(parent->thread());
@@ -34,9 +34,9 @@ IMapOnline::IMapOnline(CMapDraw * parent)
     connect(this, &IMapOnline::sigQueueChanged, this, &IMapOnline::slotQueueChanged);
 }
 
-bool IMapOnline::httpsCheck(const QString &url)
+bool IMapOnline::httpsCheck(const QString& url)
 {
-    if(url.toLower().startsWith("https") && !QSslSocket::supportsSsl())
+    if(url.startsWith("https", Qt::CaseInsensitive) && !QSslSocket::supportsSsl())
     {
         QString msg = tr(
             "This map requires OpenSSL support. However due to legal restrictions in some countries "
@@ -65,7 +65,7 @@ void IMapOnline::slotQueueChanged()
 
             QNetworkRequest request;
             request.setUrl(url);
-            for(const rawHeaderItem_t &item : rawHeaderItems)
+            for(const rawHeaderItem_t& item : qAsConst(rawHeaderItems))
             {
                 request.setRawHeader(item.name.toLatin1(), item.value.toLatin1());
             }

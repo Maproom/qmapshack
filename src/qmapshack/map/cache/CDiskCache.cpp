@@ -22,7 +22,7 @@
 
 #include <QtWidgets>
 
-CDiskCache::CDiskCache(const QString &path, qint32 maxSizeMB, qint32 expirationDays, QObject * parent)
+CDiskCache::CDiskCache(const QString& path, qint32 maxSizeMB, qint32 expirationDays, QObject* parent)
     : QObject(parent)
     , dir(path)
     , maxSizeMB(maxSizeMB)
@@ -41,11 +41,11 @@ CDiskCache::CDiskCache(const QString &path, qint32 maxSizeMB, qint32 expirationD
         }
     }
 
-    QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
-    for(const QFileInfo &fileinfo : files)
+    const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
+    for(const QFileInfo& fileinfo : files)
     {
         QString hash = fileinfo.baseName();
-        table[hash]  = fileinfo.fileName();
+        table[hash] = fileinfo.fileName();
     }
 
     timer = new QTimer(this);
@@ -61,7 +61,7 @@ void CDiskCache::store(const QString& key, QImage& img)
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(key.toLatin1());
 
-    QString hash     = md5.result().toHex();
+    QString hash = md5.result().toHex();
     QString filename = QString("%1.png").arg(hash);
 
     if(!img.isNull())
@@ -114,7 +114,7 @@ bool CDiskCache::contains(const QString& key) const
     return table.contains(hash) || cache.contains(hash);
 }
 
-void CDiskCache::removeCacheFile(const QFileInfo &fileinfo)
+void CDiskCache::removeCacheFile(const QFileInfo& fileinfo)
 {
     QString hash = fileinfo.baseName();
     table.remove(hash);
@@ -126,12 +126,12 @@ void CDiskCache::slotCleanup()
 {
     QMutexLocker lock(&mutex);
 
-    QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
-    QDateTime now       = QDateTime::currentDateTime();
+    const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
+    QDateTime now = QDateTime::currentDateTime();
     qint32 maxSizeBytes = maxSizeMB * 1024 * 1024;
-    qint32 tmpSize      = 0;
+    qint32 tmpSize = 0;
     // expire old files and calculate cache size
-    for(const QFileInfo &fileinfo : files)
+    for(const QFileInfo& fileinfo : files)
     {
         if(fileinfo.lastModified().daysTo(now) > expirationDays)
         {
@@ -146,9 +146,9 @@ void CDiskCache::slotCleanup()
 
     if(tmpSize > maxSizeBytes)
     {
-        files = dir.entryInfoList(QStringList("*.png"), QDir::Files, QDir::Time | QDir::Reversed);
+        const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files, QDir::Time | QDir::Reversed);
         // if cache is still too large remove oldest files
-        for(const QFileInfo &fileinfo : files)
+        for(const QFileInfo& fileinfo : files)
         {
             removeCacheFile(fileinfo);
             qDebug() << "remove tile" << fileinfo.lastModified() << fileinfo.absoluteFilePath() << "(reason: cache size limit)";
@@ -164,7 +164,7 @@ void CDiskCache::slotCleanup()
 }
 
 
-void CDiskCache::cleanupRemovedMaps(const QSet<QString> &maps)
+void CDiskCache::cleanupRemovedMaps(const QSet<QString>& maps)
 {
     QString cacheRoot = CMapDraw::getCacheRoot();
 
@@ -174,11 +174,10 @@ void CDiskCache::cleanupRemovedMaps(const QSet<QString> &maps)
         return;
     }
 
-    const QStringList &dirs = QDir(cacheRoot).entryList(QStringList("*"), QDir::Dirs | QDir::NoDotAndDotDot);
+    const QStringList& dirs = QDir(cacheRoot).entryList(QStringList("*"), QDir::Dirs | QDir::NoDotAndDotDot);
 
-    for(const QString &dir : dirs)
+    for(const QString& dir : dirs)
     {
-        QDir qdir(cacheRoot + "/" + dir);
         if(!maps.contains(dir))
         {
             QDir qdir(cacheRoot + "/" + dir);
@@ -186,7 +185,8 @@ void CDiskCache::cleanupRemovedMaps(const QSet<QString> &maps)
             if(QFile(qdir.absoluteFilePath("QMS_cache")).exists())
             {
                 qDebug() << "remove cache directory" << dir << "(reason: map no longer exists)";
-                for(const QString &file : qdir.entryList(QDir::Files))
+                const QStringList& files = qdir.entryList(QDir::Files);
+                for(const QString& file : files)
                 {
                     qdir.remove(file);
                 }

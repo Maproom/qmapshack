@@ -29,7 +29,7 @@
 
 class CRtGpsTether;
 
-CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
+CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether& source, QWidget* parent)
     : IRtInfo(&source, parent)
 {
     setupUi(this);
@@ -45,7 +45,7 @@ CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether &source, QWidget *parent)
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::connected, this, &CRtGpsTetherInfo::slotConnected);
     connect(socket, &QTcpSocket::disconnected, this, &CRtGpsTetherInfo::slotDisconnected);
-    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(slotError(QAbstractSocket::SocketError)));
+    connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this, &CRtGpsTetherInfo::slotError);
     connect(socket, &QTcpSocket::readyRead, this, &CRtGpsTetherInfo::slotReadyRead);
 
     timer = new QTimer(this);
@@ -200,7 +200,7 @@ void CRtGpsTetherInfo::slotDisconnected()
     autoConnect(5000);
 }
 
-void CRtGpsTetherInfo::slotError(QAbstractSocket::SocketError socketError)
+void CRtGpsTetherInfo::slotError(QAbstractSocket::SocketError /*socketError*/)
 {
     slotDisconnected();
     labelStatus->setText("<b style='color: red;'>" + socket->errorString() + "</b>");
@@ -258,15 +258,15 @@ void CRtGpsTetherInfo::slotUpdate()
     IUnit::degToStr(lon, lat, val);
     labelPosition->setText(val);
     IUnit::self().meter2elevation(ele, val, unit);
-    labelElevation->setText(QString("%1%2").arg(val).arg(unit));
+    labelElevation->setText(QString("%1%2").arg(val, unit));
     IUnit::self().meter2speed(speed, val, unit);
-    labelSpeed->setText(QString("%1%2").arg(val).arg(unit));
+    labelSpeed->setText(QString("%1%2").arg(val, unit));
     labelHeading->setText(heading != NOFLOAT ? QString("%1°").arg(heading, 0, 'f', 0) : "-");
     labelTime->setText(timestamp.isValid() ? timestamp.toLocalTime().toString() : "-");
 
     if(lastTimestamp != timestamp)
     {
-        CRtGpsTetherRecord * _record = dynamic_cast<CRtGpsTetherRecord*>(record.data());
+        CRtGpsTetherRecord* _record = dynamic_cast<CRtGpsTetherRecord*>(record.data());
         if(toolRecord->isChecked() && _record != nullptr && lon != NOFLOAT && lat != NOFLOAT)
         {
             _record->writeEntry(lon, lat, ele, speed, timestamp);
@@ -274,7 +274,7 @@ void CRtGpsTetherInfo::slotUpdate()
 
         if(checkCenterPosition->isChecked())
         {
-            CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+            CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
             if(canvas != nullptr)
             {
                 const QPointF& pos = getPosition();
@@ -300,10 +300,10 @@ bool CRtGpsTetherInfo::verifyLine(const QString& line)
         cs ^= data[i];
     }
 
-    return line.right(2).toInt(0, 16) == cs;
+    return line.rightRef(2).toInt(0, 16) == cs;
 }
 
-void CRtGpsTetherInfo::nmeaGSV(const QStringList& tokens)
+void CRtGpsTetherInfo::nmeaGSV(const QStringList& /*tokens*/)
 {
 }
 

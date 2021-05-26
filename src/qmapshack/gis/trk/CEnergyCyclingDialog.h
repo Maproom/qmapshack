@@ -30,7 +30,7 @@ class CEnergyCyclingDialog : public QDialog, private Ui::IEnergyCyclingDialog
     Q_OBJECT
 
 public:
-    explicit CEnergyCyclingDialog(CEnergyCycling &energyCycling, QWidget *parent);
+    explicit CEnergyCyclingDialog(CEnergyCycling& energyCycling, QWidget* parent);
     ~CEnergyCyclingDialog();
 
 private slots:
@@ -60,16 +60,16 @@ private:
     };
     const QList <wind_speed_t> windSpeeds =
     {
-        {tr("User defined"),        NOFLOAT},        // name, windSpeed km/h ==> m/s
-        {"-4 " + tr("Tailwind"),    -24.0 / 3.6},
-        {"-3 " + tr("Tailwind"),    -15.5 / 3.6},
-        {"-2 " + tr("Tailwind"),     -8.5 / 3.6},
-        {"-1 " + tr("Tailwind"),     -3.0 / 3.6},
-        {"0 "  + tr("No Wind"),      0         },
-        {"+1 " + tr("Headwind"),     +3.0 / 3.6},
-        {"+2 " + tr("Headwind"),     +8.5 / 3.6},
-        {"+3 " + tr("Headwind"),    +15.5 / 3.6},
-        {"+4 " + tr("Headwind"),    +24.0 / 3.6}
+        {tr("User defined"), NOFLOAT},               // name, windSpeed km/h ==> m/s
+        {"-4 " + tr("Tailwind"), -24.0 / 3.6},
+        {"-3 " + tr("Tailwind"), -15.5 / 3.6},
+        {"-2 " + tr("Tailwind"), -8.5 / 3.6},
+        {"-1 " + tr("Tailwind"), -3.0 / 3.6},
+        {"0 " + tr("No Wind"), 0         },
+        {"+1 " + tr("Headwind"), +3.0 / 3.6},
+        {"+2 " + tr("Headwind"), +8.5 / 3.6},
+        {"+3 " + tr("Headwind"), +15.5 / 3.6},
+        {"+4 " + tr("Headwind"), +24.0 / 3.6}
     };
 
     struct wind_position_t
@@ -80,13 +80,13 @@ private:
     };
     const QList <wind_position_t> windPositions =
     {
-        {tr("User defined"),        NOFLOAT, NOFLOAT}, // name, frontalArea, windDragCoeff
-        {tr("City"),                0.70, 1.10},
-        {tr("Trekking"),            0.65, 1.00},
-        {tr("Trekking w. Bags"),    0.80, 1.10},
-        {tr("Sportive"),            0.48, 0.50},
-        {tr("Race"),                0.32, 0.30},
-        {tr("Mountain"),            0.60, 0.90}
+        {tr("User defined"), NOFLOAT, NOFLOAT},        // name, frontalArea, windDragCoeff
+        {tr("City"), 0.70, 1.10},
+        {tr("Trekking"), 0.65, 1.00},
+        {tr("Trekking w. Bags"), 0.80, 1.10},
+        {tr("Sportive"), 0.48, 0.50},
+        {tr("Race"), 0.32, 0.30},
+        {tr("Mountain"), 0.60, 0.90}
     };
 
     struct ground_condition_t
@@ -96,18 +96,18 @@ private:
     };
     const QList <ground_condition_t> grounds =
     {
-        {tr("User defined"),            NOFLOAT}, // name, rollingCoeff
-        {tr("Cycling race track"),      0.002},
-        {tr("Asphalt, small tyres"),    0.004},
-        {tr("Asphalt, normal tyres"),   0.005},
-        {tr("Mix Asphalt+Forest"),      0.007},
-        {tr("Mountain Bike Trail"),     0.015},
-        {tr("Hard Forest Path"),        0.010},
-        {tr("Soft Forest Path"),        0.050},
-        {tr("Sand"),                    0.300}
+        {tr("User defined"), NOFLOAT},            // name, rollingCoeff
+        {tr("Cycling race track"), 0.002},
+        {tr("Asphalt, small tyres"), 0.004},
+        {tr("Asphalt, normal tyres"), 0.005},
+        {tr("Mix Asphalt+Forest"), 0.007},
+        {tr("Mountain Bike Trail"), 0.015},
+        {tr("Hard Forest Path"), 0.010},
+        {tr("Soft Forest Path"), 0.050},
+        {tr("Sand"), 0.300}
     };
 
-    CEnergyCycling &energyCycling;   //!< Reference to tracks CEnergyCycling object
+    CEnergyCycling& energyCycling;   //!< Reference to tracks CEnergyCycling object
     CEnergyCycling::energy_set_t energyTmpSet;  //!< Ttemporarily parameter set to be used in the dialog
 
     void updateUi();

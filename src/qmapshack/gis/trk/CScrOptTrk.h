@@ -30,7 +30,7 @@ class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
 {
     Q_OBJECT
 public:
-    CScrOptTrk(CGisItemTrk * trk, const QPoint &point, IMouse *parent);
+    CScrOptTrk(CGisItemTrk* trk, const QPoint& point, IMouse* parent);
     virtual ~CScrOptTrk();
 
     void draw(QPainter& p) override;

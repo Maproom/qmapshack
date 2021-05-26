@@ -21,8 +21,8 @@
 QDataStream & operator>>(QDataStream& s, uintX& v)
 {
     quint8 tmp;
-    int shift   = 0;
-    v.val       = 0;
+    int shift = 0;
+    v.val = 0;
 
     s >> tmp;
     while(tmp & 0x80)
@@ -40,8 +40,8 @@ QDataStream & operator>>(QDataStream& s, uintX& v)
 QDataStream& operator>>(QDataStream& s, intX& v)
 {
     quint8 tmp;
-    int shift   = 0;
-    v.val       = 0;
+    int shift = 0;
+    v.val = 0;
 
     s >> tmp;
     while(tmp & 0x80)

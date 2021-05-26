@@ -17,13 +17,13 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/proj_x.h"
 #include "helpers/CElevationDialog.h"
 #include "units/IUnit.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
-CElevationDialog::CElevationDialog(QWidget * parent, QVariant &val, const QVariant &reset, const QPointF &pos)
+CElevationDialog::CElevationDialog(QWidget* parent, QVariant& val, const QVariant& reset, const QPointF& pos)
     : QDialog(parent)
     , val(val)
     , reset(reset)
@@ -31,8 +31,8 @@ CElevationDialog::CElevationDialog(QWidget * parent, QVariant &val, const QVaria
 {
     setupUi(this);
 
-    QPushButton * pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
-    connect(pushReset,  &QPushButton::clicked, this, &CElevationDialog::slotReset);
+    QPushButton* pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
+    connect(pushReset, &QPushButton::clicked, this, &CElevationDialog::slotReset);
     connect(toolGetEle, &QToolButton::clicked, this, &CElevationDialog::slotGetEle);
 
     labelUnit->setText(IUnit::self().elevationUnit);

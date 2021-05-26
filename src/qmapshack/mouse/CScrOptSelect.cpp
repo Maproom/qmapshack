@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CScrOptSelect::CScrOptSelect(IMouse *mouse)
+CScrOptSelect::CScrOptSelect(IMouse* mouse)
     : IScrOpt(mouse)
 {
     setupUi(this);
@@ -38,6 +38,7 @@ CScrOptSelect::CScrOptSelect(IMouse *mouse)
     toolItemWpt->setChecked(cfg.value("itemWpt", toolItemWpt->isChecked()).toBool());
     toolItemRte->setChecked(cfg.value("itemRte", toolItemRte->isChecked()).toBool());
     toolItemOvl->setChecked(cfg.value("itemOvl", toolItemOvl->isChecked()).toBool());
+    toolItemPoi->setChecked(cfg.value("itemPoi", toolItemPoi->isChecked()).toBool());
     cfg.endGroup(); //Selection
 
     modeSelection |= toolModeExact->isChecked() ? IGisItem::eSelectionExact : 0;
@@ -46,13 +47,15 @@ CScrOptSelect::CScrOptSelect(IMouse *mouse)
     modeSelection |= toolItemWpt->isChecked() ? IGisItem::eSelectionWpt : 0;
     modeSelection |= toolItemRte->isChecked() ? IGisItem::eSelectionRte : 0;
     modeSelection |= toolItemOvl->isChecked() ? IGisItem::eSelectionOvl : 0;
+    modeSelection |= toolItemPoi->isChecked() ? IGisItem::eSelectionPoi : 0;
 
-    connect(toolModeExact,     &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionExact, checked);});
+    connect(toolModeExact, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionExact, checked);});
     connect(toolModeIntersect, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionIntersect, checked);});
-    connect(toolItemTrk,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionTrk, checked);});
-    connect(toolItemWpt,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionWpt, checked);});
-    connect(toolItemRte,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionRte, checked);});
-    connect(toolItemOvl,       &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionOvl, checked);});
+    connect(toolItemTrk, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionTrk, checked);});
+    connect(toolItemWpt, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionWpt, checked);});
+    connect(toolItemRte, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionRte, checked);});
+    connect(toolItemOvl, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionOvl, checked);});
+    connect(toolItemPoi, &QToolButton::toggled, this, [this](bool checked){slotModeSwitch(IGisItem::eSelectionPoi, checked);});
 }
 
 CScrOptSelect::~CScrOptSelect()
@@ -65,6 +68,7 @@ CScrOptSelect::~CScrOptSelect()
     cfg.setValue("itemWpt", toolItemWpt->isChecked());
     cfg.setValue("itemRte", toolItemRte->isChecked());
     cfg.setValue("itemOvl", toolItemOvl->isChecked());
+    cfg.setValue("itemPoi", toolItemPoi->isChecked());
     cfg.endGroup(); //Selection
 
     mouse->getCanvas()->reportStatus("CScrOptSelect", "");
@@ -72,7 +76,7 @@ CScrOptSelect::~CScrOptSelect()
 
 void CScrOptSelect::slotModeSwitch(IGisItem::selection_e mode, bool checked)
 {
-    CCanvas * canvas = mouse->getCanvas();
+    CCanvas* canvas = mouse->getCanvas();
 
     if(checked)
     {
@@ -103,6 +107,10 @@ void CScrOptSelect::slotModeSwitch(IGisItem::selection_e mode, bool checked)
         case IGisItem::eSelectionOvl:
             canvas->reportStatus("CScrOptSelect", tr("<b>Add Areas</b><br/>Add areas to list of selected items<br/>"));
             break;
+
+        case IGisItem::eSelectionPoi:
+            canvas->reportStatus("CScrOptSelect", tr("<b>Add POIs</b><br/>Add POIs to list of selected items<br/>"));
+            break;
         }
     }
     else
@@ -125,6 +133,10 @@ void CScrOptSelect::slotModeSwitch(IGisItem::selection_e mode, bool checked)
 
         case IGisItem::eSelectionOvl:
             canvas->reportStatus("CScrOptSelect", tr("<b>Ignore Areas</b><br/>Ignore areas in list of selected items<br/>"));
+            break;
+
+        case IGisItem::eSelectionPoi:
+            canvas->reportStatus("CScrOptSelect", tr("<b>Ignore POIs</b><br/>Ignore POIs in list of selected items<br/>"));
             break;
         }
     }

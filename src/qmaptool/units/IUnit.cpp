@@ -17,14 +17,14 @@
 
 **********************************************************************************************/
 #include "CMainWindow.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
+#include "gis/proj_x.h"
 #include "units/CUnitImperial.h"
 #include "units/CUnitMetric.h"
 #include "units/CUnitNautic.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
-const IUnit * IUnit::m_self = nullptr;
+const IUnit* IUnit::m_self = nullptr;
 
 const QPointF NOPOINTF(NOFLOAT, NOFLOAT);
 const QPoint NOPOINT (NOINT, NOINT);
@@ -34,7 +34,7 @@ IUnit::coord_format_e IUnit::coordFormat = IUnit::eCoordFormat1;
 QByteArray IUnit::timeZone = "UTC";
 bool IUnit::useShortFormat = false;
 
-const char * IUnit::tblTimezone[] =
+const char* IUnit::tblTimezone[] =
 {
     "Africa/Abidjan",
     "Africa/Accra",
@@ -419,7 +419,7 @@ const char * IUnit::tblTimezone[] =
     0
 };
 
-const int N_TIMEZONES = sizeof(IUnit::tblTimezone)/sizeof(const char*);
+const int N_TIMEZONES = sizeof(IUnit::tblTimezone) / sizeof(const char*);
 
 const QRegExp IUnit::reCoord1("^\\s*([N|S]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s+([E|W|O]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s*$");
 
@@ -431,7 +431,7 @@ const QRegExp IUnit::reCoord4("^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]
 
 const QRegExp IUnit::reCoord5("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$");
 
-IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent)
+IUnit::IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject* parent)
     : QObject(parent)
     , type(type)
     , baseunit(baseunit)
@@ -448,7 +448,7 @@ IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor
 }
 
 
-void IUnit::setUnitType(type_e t, QObject * parent)
+void IUnit::setUnitType(type_e t, QObject* parent)
 {
     switch(t)
     {
@@ -466,19 +466,19 @@ void IUnit::setUnitType(type_e t, QObject * parent)
     }
 
     QSettings cfg;
-    cfg.setValue("Units/type",t);
+    cfg.setValue("Units/type", t);
 }
 
 void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
 {
-    val.sprintf("%2.2f",meter * speedfactor);
+    val.sprintf("%2.2f", meter * speedfactor);
     unit = speedunit;
 }
 
 void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit) const
 {
-    QTime time(0,0,0);
-    quint32 days  = ttime / 86400;
+    QTime time(0, 0, 0);
+    quint32 days = ttime / 86400;
 
     time = time.addSecs(ttime);
 
@@ -494,7 +494,7 @@ void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit) const
     }
 }
 
-bool IUnit::parseTimestamp(const QString &time, QDateTime &datetime)
+bool IUnit::parseTimestamp(const QString& time, QDateTime& datetime)
 {
     int tzoffset;
     datetime = parseTimestamp(time, tzoffset);
@@ -503,7 +503,7 @@ bool IUnit::parseTimestamp(const QString &time, QDateTime &datetime)
 }
 
 
-QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
+QDateTime IUnit::parseTimestamp(const QString& timetext, int& tzoffset)
 {
     const QRegExp tzRE("[-+]\\d\\d:\\d\\d$");
     int i;
@@ -515,7 +515,7 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     i = timetext.indexOf(".");
     if (i != NOIDX)
     {
-        if(timetext[i+1] == '0')
+        if(timetext[i + 1] == '0')
         {
             format += ".zzz";
         }
@@ -540,12 +540,12 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
         // add the literal string to the format so fromString()
         // will succeed
         format += "'";
-        format += timetext.right(6);
+        format += timetext.rightRef(6);
         format += "'";
 
         // calculate the offset
-        int offsetHours(timetext.mid(i + 1, 2).toUInt());
-        int offsetMinutes(timetext.mid(i + 4, 2).toUInt());
+        int offsetHours(timetext.midRef(i + 1, 2).toUInt());
+        int offsetMinutes(timetext.midRef(i + 4, 2).toUInt());
         if (timetext[i] == '-')
         {
             tzoffset = -(60 * offsetHours + offsetMinutes);
@@ -589,7 +589,7 @@ QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPoi
     }
 
     QDateTime tmp = time.toTimeZone(tz);
-    return tmp.toString((shortDate|useShortFormat) ? Qt::ISODate : Qt::SystemLocaleLongDate);
+    return tmp.toString((shortDate | useShortFormat) ? Qt::ISODate : Qt::SystemLocaleLongDate);
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos)
@@ -597,9 +597,9 @@ QByteArray IUnit::pos2timezone(const QPointF& pos)
     static QImage imgTimezone = QPixmap(":/pics/timezones.png").toImage();
 
     int x = qRound(2048.0 / 360.0 * (180.0 + pos.x() * RAD_TO_DEG));
-    int y = qRound(1024.0 / 180.0 * (90.0  - pos.y() * RAD_TO_DEG));
+    int y = qRound(1024.0 / 180.0 * (90.0 - pos.y() * RAD_TO_DEG));
 
-    QRgb rgb = imgTimezone.pixel(x,y);
+    QRgb rgb = imgTimezone.pixel(x, y);
 
     if(qRed(rgb) == 0 && qGreen(rgb) == 0)
     {
@@ -631,30 +631,30 @@ bool IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
     {
     case eCoordFormat1:
     {
-        qint32 degN,degE;
-        qreal minN,minE;
+        qint32 degN, degE;
+        qreal minN, minE;
 
         bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
         bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
 
-        const QString &lat = signLat ? "S" : "N";
-        const QString &lng = signLon ? "W" : "E";
-        str.sprintf("%s%02d° %06.3f %s%03d° %06.3f",lat.toUtf8().data(),qAbs(degN),minN,lng.toUtf8().data(),qAbs(degE),minE);
+        const QString& lat = signLat ? "S" : "N";
+        const QString& lng = signLon ? "W" : "E";
+        str.sprintf("%s%02d° %06.3f %s%03d° %06.3f", lat.toUtf8().data(), qAbs(degN), minN, lng.toUtf8().data(), qAbs(degE), minE);
         break;
     }
 
     case eCoordFormat2:
     {
-        const QString &lat = (y < 0) ? "S" : "N";
-        const QString &lng = (x < 0) ? "W" : "E";
-        str.sprintf("%s%02.6f° %s%03.6f°",lat.toUtf8().data(),qAbs(y),lng.toUtf8().data(),qAbs(x));
+        const QString& lat = (y < 0) ? "S" : "N";
+        const QString& lng = (x < 0) ? "W" : "E";
+        str.sprintf("%s%02.6f° %s%03.6f°", lat.toUtf8().data(), qAbs(y), lng.toUtf8().data(), qAbs(x));
         break;
     }
 
     case eCoordFormat3:
     {
-        qint32 degN,degE;
-        qreal minN,minE;
+        qint32 degN, degE;
+        qreal minN, minE;
 
         bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
         bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
@@ -662,9 +662,9 @@ bool IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
         qreal secN = (minN - qFloor(minN)) * 60;
         qreal secE = (minE - qFloor(minE)) * 60;
 
-        const QString &lat = signLat ? "S" : "N";
-        const QString &lng = signLon ? "W" : "E";
-        str.sprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''",lat.toUtf8().data(),qAbs(degN),qFloor(minN),secN,lng.toUtf8().data(),qAbs(degE),qFloor(minE),secE);
+        const QString& lat = signLat ? "S" : "N";
+        const QString& lng = signLon ? "W" : "E";
+        str.sprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''", lat.toUtf8().data(), qAbs(degN), qFloor(minN), secN, lng.toUtf8().data(), qAbs(degE), qFloor(minE), secE);
         break;
     }
     }
@@ -676,55 +676,55 @@ bool IUnit::strToDeg(const QString& str, qreal& lon, qreal& lat)
 {
     if(reCoord2.exactMatch(str))
     {
-        bool signLat    = reCoord2.cap(1) == "S";
-        qreal absLat    = reCoord2.cap(2).toDouble();
+        bool signLat = reCoord2.cap(1) == "S";
+        qreal absLat = reCoord2.cap(2).toDouble();
         lat = signLat ? -absLat : absLat;
 
-        bool signLon    = reCoord2.cap(3) == "W";
-        qreal absLon    = reCoord2.cap(4).toDouble();
+        bool signLon = reCoord2.cap(3) == "W";
+        qreal absLon = reCoord2.cap(4).toDouble();
         lon = signLon ? -absLon : absLon;
     }
     else if(reCoord1.exactMatch(str))
     {
-        bool signLat    = reCoord1.cap(1) == "S";
-        int degLat      = reCoord1.cap(2).toInt();
-        qreal minLat    = reCoord1.cap(3).toDouble();
+        bool signLat = reCoord1.cap(1) == "S";
+        int degLat = reCoord1.cap(2).toInt();
+        qreal minLat = reCoord1.cap(3).toDouble();
 
         GPS_Math_DegMin_To_Deg(signLat, degLat, minLat, lat);
 
-        bool signLon    = reCoord1.cap(4) == "W";
-        int degLon      = reCoord1.cap(5).toInt();
-        qreal minLon    = reCoord1.cap(6).toDouble();
+        bool signLon = reCoord1.cap(4) == "W";
+        int degLon = reCoord1.cap(5).toInt();
+        qreal minLon = reCoord1.cap(6).toDouble();
 
         GPS_Math_DegMin_To_Deg(signLon, degLon, minLon, lon);
     }
     else if(reCoord3.exactMatch(str))
     {
-        lat             = reCoord3.cap(1).toDouble();
-        lon             = reCoord3.cap(2).toDouble();
+        lat = reCoord3.cap(1).toDouble();
+        lon = reCoord3.cap(2).toDouble();
     }
     else if(reCoord4.exactMatch(str))
     {
-        bool signLat    = reCoord4.cap(1) == "S";
-        int degLat      = reCoord4.cap(2).toInt();
-        int minLat      = reCoord4.cap(3).toInt();
-        qreal secLat    = reCoord4.cap(4).toFloat();
+        bool signLat = reCoord4.cap(1) == "S";
+        int degLat = reCoord4.cap(2).toInt();
+        int minLat = reCoord4.cap(3).toInt();
+        qreal secLat = reCoord4.cap(4).toFloat();
 
         GPS_Math_DegMinSec_To_Deg(signLat, degLat, minLat, secLat, lat);
 
-        bool signLon    = reCoord4.cap(5) == "W";
-        int degLon      = reCoord4.cap(6).toInt();
-        int minLon      = reCoord4.cap(7).toInt();
-        qreal secLon    = reCoord4.cap(8).toFloat();
+        bool signLon = reCoord4.cap(5) == "W";
+        int degLon = reCoord4.cap(6).toInt();
+        int minLon = reCoord4.cap(7).toInt();
+        qreal secLon = reCoord4.cap(8).toFloat();
 
         GPS_Math_DegMinSec_To_Deg(signLon, degLon, minLon, secLon, lon);
     }
     else if(reCoord5.exactMatch(str))
     {
-        bool signLon    = reCoord4.cap(4) == "W";
-        bool signLat    = reCoord4.cap(2) == "S";
-        lat             = reCoord5.cap(1).toDouble();
-        lon             = reCoord5.cap(3).toDouble();
+        bool signLon = reCoord4.cap(4) == "W";
+        bool signLat = reCoord4.cap(2) == "S";
+        lat = reCoord5.cap(1).toDouble();
+        lon = reCoord5.cap(3).toDouble();
 
         if(signLon)
         {
@@ -737,13 +737,13 @@ bool IUnit::strToDeg(const QString& str, qreal& lon, qreal& lat)
     }
     else
     {
-        QMessageBox::warning(&CMainWindow::self(),tr("Error"),tr("Bad position format. Must be: \"[N|S] ddd mm.sss [W|E] ddd mm.sss\" or \"[N|S] ddd.ddd [W|E] ddd.ddd\""),QMessageBox::Ok,QMessageBox::NoButton);
+        QMessageBox::warning(&CMainWindow::self(), tr("Error"), tr("Bad position format. Must be: \"[N|S] ddd mm.sss [W|E] ddd mm.sss\" or \"[N|S] ddd.ddd [W|E] ddd.ddd\""), QMessageBox::Ok, QMessageBox::NoButton);
         return false;
     }
 
     if(fabs(lon) > 180.0 || fabs(lat) > 90.0)
     {
-        QMessageBox::warning(&CMainWindow::self(),tr("Error"),tr("Position values out of bounds. "),QMessageBox::Ok,QMessageBox::NoButton);
+        QMessageBox::warning(&CMainWindow::self(), tr("Error"), tr("Position values out of bounds. "), QMessageBox::Ok, QMessageBox::NoButton);
         return false;
     }
 

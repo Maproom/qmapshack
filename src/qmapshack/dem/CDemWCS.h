@@ -24,7 +24,7 @@
 class CDemWCS : public CDemVRT
 {
 public:
-    CDemWCS(const QString& filename, CDemDraw *parent);
+    CDemWCS(const QString& filename, CDemDraw* parent);
     virtual ~CDemWCS() = default;
 };
 

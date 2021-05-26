@@ -37,7 +37,7 @@ class ILineOp : public QObject
 {
     Q_OBJECT
 public:
-    ILineOp(SGisLine &points, CGisDraw * gis, CCanvas * canvas, IMouseEditLine * parent);
+    ILineOp(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
     virtual ~ILineOp();
 
     virtual void leftClick(const QPoint& pos) = 0;
@@ -69,7 +69,7 @@ public:
     }
 
     void updateStatus();
-    void showRoutingErrorMessage(const QString &msg) const;
+    void showRoutingErrorMessage(const QString& msg) const;
 
 protected slots:
     void slotTimeoutRouting();
@@ -82,16 +82,16 @@ protected:
     qint32 isCloseToLine(const QPoint& pos) const;
 
     void drawSinglePointSmall(const QPointF& pt, QPainter& p);
-    void drawSinglePointLarge(const QPointF &pt, QPainter& p);
+    void drawSinglePointLarge(const QPointF& pt, QPainter& p);
     void drawLeadLine(const QPolygonF& line, QPainter& p) const;
     void updateLeadLines(qint32 idx);
 
-    void startMouseMove(const QPointF &point);
+    void startMouseMove(const QPointF& point);
 
-    IMouseEditLine * parentHandler;
+    IMouseEditLine* parentHandler;
     SGisLine& points;
-    CCanvas * canvas;
-    CGisDraw * gis;
+    CCanvas* canvas;
+    CGisDraw* gis;
 
     QCursor cursor;
 
@@ -119,7 +119,7 @@ protected:
 private:
     void tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const;
 
-    QTimer * timerRouting;
+    QTimer* timerRouting;
     QTime buttonPressTime;
 
     bool ignoreClick = false;

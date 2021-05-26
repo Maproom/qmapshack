@@ -31,18 +31,18 @@ class CWptIconDialog : public QDialog, private Ui::IWptIconDialog
 {
     Q_OBJECT
 public:
-    CWptIconDialog(CMainWindow * parent);
+    CWptIconDialog(CMainWindow* parent);
     virtual ~CWptIconDialog();
 
 private slots:
     void slotSetupPath();
 
 private:
-    void setupList(QObject *obj);
+    void setupList(QObject* obj);
     void setupSignals();
 
-    QToolButton * button = nullptr;
-    QAction     * action = nullptr;
+    QToolButton* button = nullptr;
+    QAction* action = nullptr;
 };
 
 #endif //CWPTICONDIALOG_H

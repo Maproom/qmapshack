@@ -6,10 +6,10 @@ rem Section 1.) Define path to Qt, MSVC, .... installations
 set QMSI_QT_PATH="C:\Qt\5.12.10\msvc2017_64"
 rem get the VC redistributable installer from https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 set QMSI_VCREDIST_PATH="M:\deploy_2017"
-set QMSI_GDAL_PATH="M:\lib2017\gdal"
-set QMSI_PROJ_PATH="M:\lib2017\PROJ6"
+set QMSI_GDAL_PATH="M:\lib2017\gdal_330"
+set QMSI_PROJ_PATH="M:\lib2017\PROJ8"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
-set QMSI_QUAZIP_PATH="M:\lib2017\quazip"
+set QMSI_QUAZIP_PATH="M:\lib2017\QUAZIP_1"
 set QMSI_ZLIB_PATH="M:\lib2017\zlib"
 set QMSI_CURL_PATH="M:\lib2017\cURL"
 set QMSI_SQLI_PATH="M:\lib2017\sqlite"
@@ -92,15 +92,15 @@ rem rem Qt5WebEngine resources
 mkdir resources
 copy %QMSI_QT_PATH%\resources\*.* resources
 
-rem section 2.2) Copy GDAL and PROJ.4 Files 
+rem section 2.2) Copy GDAL and PROJ Files 
 rem   put them in the same directory as the .exe for better testing
 rem section 2.2.1) GDAL
 xcopy %QMSI_GDAL_PATH%\data data /s /i
 copy %QMSI_GDAL_PATH%\bin\*.dll
 copy %QMSI_GDAL_PATH%\bin\*.exe
-rem section 2.2.4) PROJ.4
+rem section 2.2.4) PROJ
 xcopy %QMSI_PROJ_PATH%\share share /s /i
-copy %QMSI_PROJ_PATH%\bin\proj_6_3.dll
+copy %QMSI_PROJ_PATH%\bin\proj_8_0.dll
 copy %QMSI_PROJ_PATH%\bin\proj.exe
 copy %QMSI_PROJ_PATH%\bin\projinfo.exe
 copy %QMSI_PROJ_PATH%\bin\cct.exe
@@ -116,7 +116,7 @@ xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
 rem section 2.2.6) MySql/MariaDB
 copy %QMSI_MSQL_PATH%\libmysql.dll
 rem section 2.2.7) QuaZip
-copy %QMSI_QUAZIP_PATH%\lib\quazip5.dll
+copy %QMSI_QUAZIP_PATH%\bin\quazip1-qt5.dll
 rem section 2.2.8) zlib
 copy %QMSI_ZLIB_PATH%\bin\zlibwapi.dll
 rem section 2.2.9) cURL

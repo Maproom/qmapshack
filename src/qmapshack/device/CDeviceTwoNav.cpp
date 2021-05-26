@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QString& model, QTreeWidget *parent)
+CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QString& model, QTreeWidget* parent)
     : IDevice(path, eTypeTwoNav, key, parent)
 {
     setText(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
@@ -48,27 +48,27 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
     }
 
     {
-        IGisProject * project =  new CTwoNavProject(dirData.absolutePath(), this);
+        IGisProject* project = new CTwoNavProject(dirData.absolutePath(), this);
         if(!project->isValid())
         {
             delete project;
         }
     }
 
-    QStringList entries = dirData.entryList(QStringList("*.gpx"));
-    for(const QString &entry : entries)
+    const QStringList& entriesGpx = dirData.entryList(QStringList("*.gpx"));
+    for(const QString& entry : entriesGpx)
     {
-        IGisProject * project =  new CGpxProject(dirData.absoluteFilePath(entry), this);
+        IGisProject* project = new CGpxProject(dirData.absoluteFilePath(entry), this);
         if(!project->isValid())
         {
             delete project;
         }
     }
 
-    entries = dirData.entryList(QDir::NoDotAndDotDot | QDir::Dirs);
-    for(const QString &entry : entries)
+    const QStringList& entriesDir = dirData.entryList(QDir::NoDotAndDotDot | QDir::Dirs);
+    for(const QString& entry : entriesDir)
     {
-        IGisProject * project =  new CTwoNavProject(dirData.absoluteFilePath(entry), this);
+        IGisProject* project = new CTwoNavProject(dirData.absoluteFilePath(entry), this);
         if(!project->isValid())
         {
             delete project;
@@ -77,10 +77,10 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
 
     // special case: read the gpx files in the track log directory.
     dirData = dir.absoluteFilePath(pathData + "Tracklog");
-    entries = dirData.entryList(QStringList("*.gpx"));
-    for(const QString &entry : entries)
+    const QStringList& entriesLog = dirData.entryList(QStringList("*.gpx"));
+    for(const QString& entry : entriesLog)
     {
-        IGisProject * project =  new CGpxProject(dirData.absoluteFilePath(entry), this);
+        IGisProject* project = new CGpxProject(dirData.absoluteFilePath(entry), this);
         if(!project->isValid())
         {
             delete project;
@@ -121,11 +121,11 @@ void CDeviceTwoNav::readReginfo(const QString& filename)
 
     if(!product.isEmpty() && !unittype.isEmpty())
     {
-        setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(product).arg(unittype));
+        setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(product, unittype));
     }
 }
 
-void CDeviceTwoNav::insertCopyOfProject(IGisProject * project)
+void CDeviceTwoNav::insertCopyOfProject(IGisProject* project)
 {
     QString name = project->getName();
     name = name.remove(QRegExp("[^A-Za-z0-9_]"));
@@ -139,7 +139,7 @@ void CDeviceTwoNav::insertCopyOfProject(IGisProject * project)
     }
 
 
-    CTwoNavProject * proj = new CTwoNavProject(filename, project, this);
+    CTwoNavProject* proj = new CTwoNavProject(filename, project, this);
     if(!proj->isValid())
     {
         delete proj;

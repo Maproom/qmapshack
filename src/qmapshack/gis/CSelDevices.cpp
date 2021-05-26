@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CSelDevices::CSelDevices(IGisProject * project, QTreeWidget *wks)
+CSelDevices::CSelDevices(IGisProject* project, QTreeWidget* wks)
     : QDialog(wks)
 
 {
@@ -33,18 +33,18 @@ CSelDevices::CSelDevices(IGisProject * project, QTreeWidget *wks)
     const int N = wks->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        IDevice *device = dynamic_cast<IDevice*>(wks->topLevelItem(n));
+        IDevice* device = dynamic_cast<IDevice*>(wks->topLevelItem(n));
         if(nullptr == device)
         {
             continue;
         }
 
-        QListWidgetItem * item = new QListWidgetItem(listWidget);
+        QListWidgetItem* item = new QListWidgetItem(listWidget);
         item->setText(device->getName());
         item->setData(Qt::UserRole, device->getKey());
         item->setIcon(device->icon(CGisListWks::eColumnIcon));
 
-        IGisProject *proj = device->getProjectByKey(project->getKey());
+        IGisProject* proj = device->getProjectByKey(project->getKey());
         item->setCheckState(nullptr == proj ? Qt::Unchecked : Qt::Checked);
     }
 
@@ -64,7 +64,7 @@ void CSelDevices::getSlectedDevices(QSet<QString>& keys)
     const int N = listWidget->count();
     for(int n = 0; n < N; n++)
     {
-        QListWidgetItem * item = listWidget->item(n);
+        QListWidgetItem* item = listWidget->item(n);
         if(item->checkState() == Qt::Checked)
         {
             keys << item->data(Qt::UserRole).toString();

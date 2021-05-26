@@ -29,7 +29,7 @@
 #include <QtSql>
 #include <QtWidgets>
 
-CSearchDatabase::CSearchDatabase(IDBFolder &dbFolder, CGisListDB *parent)
+CSearchDatabase::CSearchDatabase(IDBFolder& dbFolder, CGisListDB* parent)
     : QDialog(parent)
     , dbFolder(dbFolder)
 {
@@ -42,14 +42,14 @@ CSearchDatabase::CSearchDatabase(IDBFolder &dbFolder, CGisListDB *parent)
     connect(treeResult, &QTreeWidget::itemChanged, this, &CSearchDatabase::slotItemChanged);
 }
 
-void CSearchDatabase::slotItemChanged(QTreeWidgetItem * item, int column)
+void CSearchDatabase::slotItemChanged(QTreeWidgetItem* item, int column)
 {
     if((column != CGisListDB::eColumnCheckbox) || internalEdit)
     {
         return;
     }
 
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
+    IDBFolder* folder = dynamic_cast<IDBFolder*>(item);
     if(folder != nullptr)
     {
         Qt::CheckState checkState = item->checkState(column);
@@ -57,13 +57,13 @@ void CSearchDatabase::slotItemChanged(QTreeWidgetItem * item, int column)
         const int N = folder->childCount();
         for(int i = 0; i < N; i++)
         {
-            IDBFolder * childFolder = dynamic_cast<IDBFolder*>(folder->child(i));
+            IDBFolder* childFolder = dynamic_cast<IDBFolder*>(folder->child(i));
             if(childFolder != nullptr)
             {
                 childFolder->setCheckState(CGisListDB::eColumnCheckbox, checkState);
             }
 
-            CDBItem * childItem = dynamic_cast<CDBItem*>(folder->child(i));
+            CDBItem* childItem = dynamic_cast<CDBItem*>(folder->child(i));
             if(childItem != nullptr)
             {
                 childItem->setCheckState(CGisListDB::eColumnCheckbox, checkState);
@@ -107,7 +107,7 @@ void CSearchDatabase::slotSearch()
             quint64 folderId = query2.value(0).toULongLong();
             quint32 type = query2.value(1).toUInt();
 
-            IDBFolder * folder = nullptr;
+            IDBFolder* folder = nullptr;
 
             if(!folders.contains(folderId))
             {
@@ -134,7 +134,7 @@ void CSearchDatabase::slotSearch()
                 folder = folders[folderId];
             }
 
-            CDBItem * item = new CDBItem(db, itemId, folder);
+            CDBItem* item = new CDBItem(db, itemId, folder);
             item->setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
         }
     }
@@ -145,7 +145,7 @@ void CSearchDatabase::slotSearch()
     internalEdit = false;
 }
 
-void CSearchDatabase::addWithParentFolders(QTreeWidget * result, IDBFolder * child, QMap<quint64, IDBFolder*>& folders, QSqlDatabase& db)
+void CSearchDatabase::addWithParentFolders(QTreeWidget* result, IDBFolder* child, QMap<quint64, IDBFolder*>& folders, QSqlDatabase& db)
 {
     QSqlQuery query(db);
 
@@ -160,7 +160,7 @@ void CSearchDatabase::addWithParentFolders(QTreeWidget * result, IDBFolder * chi
 
         if(!folders.contains(folderId))
         {
-            IDBFolder * folder = nullptr;
+            IDBFolder* folder = nullptr;
 
             switch(type)
             {
@@ -198,13 +198,13 @@ void CSearchDatabase::addWithParentFolders(QTreeWidget * result, IDBFolder * chi
     }
 }
 
-bool CSearchDatabase::event(QEvent * e)
+bool CSearchDatabase::event(QEvent* e)
 {
     switch(e->type())
     {
     case eEvtW2DAckInfo:
     {
-        CEvtW2DAckInfo * evt    = (CEvtW2DAckInfo*)e;
+        CEvtW2DAckInfo* evt = (CEvtW2DAckInfo*)e;
 
         // check for matching database
         if(evt->db == dbFolder.getDBName())
@@ -222,7 +222,7 @@ bool CSearchDatabase::event(QEvent * e)
         const int N = treeResult->topLevelItemCount();
         for(int i = 0; i < N; i++)
         {
-            IDBFolder * folder = dynamic_cast<IDBFolder*>(treeResult->topLevelItem(i));
+            IDBFolder* folder = dynamic_cast<IDBFolder*>(treeResult->topLevelItem(i));
             if(folder)
             {
                 updateFolder(folder, evt);
@@ -237,12 +237,12 @@ bool CSearchDatabase::event(QEvent * e)
     return QDialog::event(e);
 }
 
-void CSearchDatabase::updateFolder(IDBFolder * folder, CEvtW2DAckInfo * evt)
+void CSearchDatabase::updateFolder(IDBFolder* folder, CEvtW2DAckInfo* evt)
 {
-    const int N     = folder->childCount();
+    const int N = folder->childCount();
     for(int i = 0; i < N; i++)
     {
-        IDBFolder * folder1 = dynamic_cast<IDBFolder*>(folder->child(i));
+        IDBFolder* folder1 = dynamic_cast<IDBFolder*>(folder->child(i));
         if(folder1 != nullptr)
         {
             updateFolder(folder1, evt);
@@ -255,11 +255,11 @@ void CSearchDatabase::updateFolder(IDBFolder * folder, CEvtW2DAckInfo * evt)
         return;
     }
 
-    int nItems      = 0;
-    int nChecked    = 0;
+    int nItems = 0;
+    int nChecked = 0;
     for(int i = 0; i < N; i++)
     {
-        CDBItem * item = dynamic_cast<CDBItem*>(folder->child(i));
+        CDBItem* item = dynamic_cast<CDBItem*>(folder->child(i));
         if(item != nullptr)
         {
             nItems++;

@@ -24,7 +24,7 @@
 #include <QtWidgets>
 #include <QtXml>
 
-CDeviceWatcherLinux::CDeviceWatcherLinux(CGisListWks *parent)
+CDeviceWatcherLinux::CDeviceWatcherLinux(CGisListWks* parent)
     : IDeviceWatcher(parent)
 {
     QDBusConnection::systemBus().connect("org.freedesktop.UDisks2",
@@ -56,14 +56,14 @@ void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVa
     }
 
     // create path of to drive the block device belongs to
-    QDBusInterface * blockIface = new QDBusInterface("org.freedesktop.UDisks2", path.path(), "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
+    QDBusInterface* blockIface = new QDBusInterface("org.freedesktop.UDisks2", path.path(), "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
     QDBusObjectPath drive_object = blockIface->property("Drive").value<QDBusObjectPath>();
     QString idLabel = blockIface->property("IdLabel").toString().toUpper();
 
     // read vendor string attached to drive
-    QDBusInterface * driveIface = new QDBusInterface("org.freedesktop.UDisks2", drive_object.path(), "org.freedesktop.UDisks2.Drive", QDBusConnection::systemBus(), this);
+    QDBusInterface* driveIface = new QDBusInterface("org.freedesktop.UDisks2", drive_object.path(), "org.freedesktop.UDisks2.Drive", QDBusConnection::systemBus(), this);
     QString vendor = driveIface->property("Vendor").toString();
-    QString model  = driveIface->property("Model").toString();
+    QString model = driveIface->property("Model").toString();
     bool removable = driveIface->property("Removable").toBool();
 
     delete blockIface;
@@ -136,7 +136,7 @@ void CDeviceWatcherLinux::slotUpdate()
     }
 
 
-    for(const QDBusObjectPath &path : paths)
+    for(const QDBusObjectPath& path : qAsConst(paths))
     {
         QDBusMessage call = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path.path(), "org.freedesktop.DBus.Introspectable", "Introspect");
         QDBusPendingReply<QString> reply = QDBusConnection::systemBus().call(call);
@@ -172,14 +172,16 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path)
     QStringList points;
     QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path, "org.freedesktop.DBus.Properties", "Get");
 
-    QList<QVariant> args;
-    args << "org.freedesktop.UDisks2.Filesystem" << "MountPoints";
-    message.setArguments(args);
+    {
+        QList<QVariant> args;
+        args << "org.freedesktop.UDisks2.Filesystem" << "MountPoints";
+        message.setArguments(args);
+    }
 
     QDBusMessage reply = QDBusConnection::systemBus().call(message);
 
 #if defined(Q_OS_FREEBSD)
-    for(const QVariant &arg : reply.arguments())
+    for(const QVariant& arg : reply.arguments())
     {
         if(!arg.value<QDBusVariant>().variant().value<QStringList>().isEmpty())
         {
@@ -188,12 +190,15 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path)
     }
 #else
     QList<QByteArray> list;
-    for(const QVariant &arg : reply.arguments())
     {
-        arg.value<QDBusVariant>().variant().value<QDBusArgument>() >> list;
+        const QList<QVariant>& args = reply.arguments();
+        for(const QVariant& arg : args)
+        {
+            arg.value<QDBusVariant>().variant().value<QDBusArgument>() >> list;
+        }
     }
 
-    for(const QByteArray &point : list)
+    for(const QByteArray& point : qAsConst(list))
     {
         points.append(point);
     }

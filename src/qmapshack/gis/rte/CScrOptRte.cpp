@@ -25,7 +25,7 @@
 #include "mouse/CScrOptSemaphoreLocker.h"
 #include "mouse/IMouse.h"
 
-CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
+CScrOptRte::CScrOptRte(CGisItemRte* rte, const QPoint& point, IMouse* parent)
     : IScrOpt(parent)
     , key(rte->getKey())
 {
@@ -51,16 +51,16 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     show();
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptRte::slotEditDetails);
-    connect(toolTags,        &QToolButton::clicked, this, &CScrOptRte::slotTags);
-    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptRte::slotDelete);
-    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptRte::slotCopy);
-    connect(toolCalc,        &QToolButton::clicked, this, &CScrOptRte::slotCalc);
-    connect(toolReset,       &QToolButton::clicked, this, &CScrOptRte::slotReset);
-    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptRte::slotEdit);
-    connect(toolReverse,     &QToolButton::clicked, this, &CScrOptRte::slotReverse);
+    connect(toolTags, &QToolButton::clicked, this, &CScrOptRte::slotTags);
+    connect(toolDelete, &QToolButton::clicked, this, &CScrOptRte::slotDelete);
+    connect(toolCopy, &QToolButton::clicked, this, &CScrOptRte::slotCopy);
+    connect(toolCalc, &QToolButton::clicked, this, &CScrOptRte::slotCalc);
+    connect(toolReset, &QToolButton::clicked, this, &CScrOptRte::slotReset);
+    connect(toolEdit, &QToolButton::clicked, this, &CScrOptRte::slotEdit);
+    connect(toolReverse, &QToolButton::clicked, this, &CScrOptRte::slotReverse);
     connect(toolInstruction, &QToolButton::toggled, this, &CScrOptRte::slotInstruction);
-    connect(toolToTrack,     &QToolButton::clicked, this, &CScrOptRte::slotToTrack);
-    connect(toolNogo,        &QToolButton::clicked, this, &CScrOptRte::slotNogo);
+    connect(toolToTrack, &QToolButton::clicked, this, &CScrOptRte::slotToTrack);
+    connect(toolNogo, &QToolButton::clicked, this, &CScrOptRte::slotNogo);
 
     connect(label, &QLabel::linkActivated, this, &CScrOptRte::slotLinkActivated);
 }
@@ -148,7 +148,7 @@ void CScrOptRte::slotTags()
 
 void CScrOptRte::draw(QPainter& p)
 {
-    IGisItem *item = CGisWorkspace::self().getItemByKey(key);
+    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         close();

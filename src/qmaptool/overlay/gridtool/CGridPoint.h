@@ -31,12 +31,12 @@ public:
     CGridPoint();
     virtual ~CGridPoint() = default;
 
-    void registerItem(CItemRefMap * item);
+    void registerItem(CItemRefMap* item);
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent *e);
-    void mouseReleaseEventFx(QMouseEvent *e);
-    void leaveEventFx(QEvent *e);
+    void mouseMoveEventFx(QMouseEvent* e);
+    void mouseReleaseEventFx(QMouseEvent* e);
+    void leaveEventFx(QEvent* e);
     QCursor getCursorFx();
 
     const QPointF& getPoint() const
@@ -47,23 +47,23 @@ public:
     void setPoint(const QPointF& pt)
     {
         ptPoint = pt;
-        state   = pt == NOPOINTF ? eStateNotSet : eStateSet;
+        state = pt == NOPOINTF ? eStateNotSet : eStateSet;
     }
 
 private:
     enum state_e
     {
         eStateNotSet
-        ,eStateSet
-        ,eStateHighlight
-        ,eStateMove
+        , eStateSet
+        , eStateHighlight
+        , eStateMove
     };
 
-    state_e state                   = eStateNotSet;
-    CItemRefMap * item              = nullptr;
-    const IDrawContext * context    = nullptr;
-    QPointF ptPoint                 = NOPOINTF;
-    QPointF ptFocus1                = NOPOINTF;
+    state_e state = eStateNotSet;
+    CItemRefMap* item = nullptr;
+    const IDrawContext* context = nullptr;
+    QPointF ptPoint = NOPOINTF;
+    QPointF ptFocus1 = NOPOINTF;
 };
 
 #endif //CGRIDPOINT_H

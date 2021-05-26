@@ -34,15 +34,15 @@ class CScrOptRangeTool : public IScrOpt, public INotifyTrk, private Ui::IScrOptR
 {
     Q_OBJECT
 public:
-    CScrOptRangeTool(CGisItemTrk &trk, CMouseRangeTrk *mouse, CCanvas * canvas);
+    CScrOptRangeTool(CGisItemTrk& trk, CMouseRangeTrk* mouse, CCanvas* canvas);
     virtual ~CScrOptRangeTool();
 
     void draw(QPainter& p) override;
 
     void updateData() override;
-    void setMouseFocus(const CTrackData::trkpt_t * pt) override;
-    void setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2) override;
-    void setMouseClickFocus(const CTrackData::trkpt_t * pt) override;
+    void setMouseFocus(const CTrackData::trkpt_t* pt) override;
+    void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override;
+    void setMouseClickFocus(const CTrackData::trkpt_t* pt) override;
 
     enum class eAction : int
     {
@@ -66,15 +66,15 @@ private slots:
     {
         updateCanvas = false;
     }
-    void slotCanvasResize(const QSize &sizeCanvas);
+    void slotCanvasResize(const QSize& sizeCanvas);
 
 private:
     friend class CRangeToolSetup;
     const QString owner;
     CGisItemTrk& trk;
-    CCanvas * canvas;
-    CPlot * plot = nullptr;
-    CMouseRangeTrk * myMouse;
+    CCanvas* canvas;
+    CPlot* plot = nullptr;
+    CMouseRangeTrk* myMouse;
 
     enum class eSelState
     {

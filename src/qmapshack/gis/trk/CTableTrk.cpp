@@ -16,16 +16,15 @@
 
 **********************************************************************************************/
 
+#include "gis/proj_x.h"
 #include "gis/trk/CTableTrk.h"
 #include "helpers/CElevationDialog.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
-
-#include <proj_api.h>
 #include <QtWidgets>
 
-CTableTrk::CTableTrk(QWidget *parent)
+CTableTrk::CTableTrk(QWidget* parent)
     : QTreeWidget(parent)
     , INotifyTrk(CGisItemTrk::eVisualTrkTable)
 {
@@ -60,7 +59,7 @@ void CTableTrk::showTopItem()
 void CTableTrk::showNextInvalid()
 {
     qint32 index = 0;
-    QTreeWidgetItem * item = currentItem();
+    QTreeWidgetItem* item = currentItem();
     if(item != nullptr)
     {
         index = indexOfTopLevelItem(item) + 1;
@@ -69,7 +68,7 @@ void CTableTrk::showNextInvalid()
     const qint32 N = topLevelItemCount();
     for(; index < N; index++)
     {
-        QTreeWidgetItem * item = topLevelItem(index);
+        QTreeWidgetItem* item = topLevelItem(index);
         if(item->data(eColNum, Qt::UserRole).toUInt() != 0)
         {
             scrollTo(indexFromItem(item, QAbstractItemView::PositionAtCenter));
@@ -81,7 +80,7 @@ void CTableTrk::showNextInvalid()
 void CTableTrk::showPrevInvalid()
 {
     qint32 index = 0;
-    QTreeWidgetItem * item = currentItem();
+    QTreeWidgetItem* item = currentItem();
     if(item != nullptr)
     {
         index = indexOfTopLevelItem(item) - 1;
@@ -89,7 +88,7 @@ void CTableTrk::showPrevInvalid()
 
     for(; index >= 0; index--)
     {
-        QTreeWidgetItem * item = topLevelItem(index);
+        QTreeWidgetItem* item = topLevelItem(index);
         if(item->data(eColNum, Qt::UserRole).toUInt() != 0)
         {
             scrollTo(indexFromItem(item, QAbstractItemView::PositionAtCenter));
@@ -99,7 +98,7 @@ void CTableTrk::showPrevInvalid()
 }
 
 
-void CTableTrk::setTrack(CGisItemTrk * track)
+void CTableTrk::setTrack(CGisItemTrk* track)
 {
     setColumnCount(eColMax);
 
@@ -150,14 +149,14 @@ void CTableTrk::updateData()
     {
         QString val, unit;
 
-        QTreeWidgetItem * item = new QTreeWidgetItem();
-        item->setTextAlignment(eColNum,     Qt::AlignLeft);
-        item->setTextAlignment(eColEle,     Qt::AlignRight);
-        item->setTextAlignment(eColDelta,   Qt::AlignRight);
-        item->setTextAlignment(eColDist,    Qt::AlignRight);
-        item->setTextAlignment(eColAscent,  Qt::AlignRight);
+        QTreeWidgetItem* item = new QTreeWidgetItem();
+        item->setTextAlignment(eColNum, Qt::AlignLeft);
+        item->setTextAlignment(eColEle, Qt::AlignRight);
+        item->setTextAlignment(eColDelta, Qt::AlignRight);
+        item->setTextAlignment(eColDist, Qt::AlignRight);
+        item->setTextAlignment(eColAscent, Qt::AlignRight);
         item->setTextAlignment(eColDescent, Qt::AlignRight);
-        item->setTextAlignment(eColSpeed,   Qt::AlignRight);
+        item->setTextAlignment(eColSpeed, Qt::AlignRight);
 
         if(!trk->isReadOnly())
         {
@@ -188,7 +187,7 @@ void CTableTrk::updateData()
         if(trkpt.ele != NOINT)
         {
             IUnit::self().meter2elevation(trkpt.ele, val, unit);
-            item->setText(eColEle, tr("%1%2").arg(val).arg(unit));
+            item->setText(eColEle, tr("%1%2").arg(val, unit));
         }
         else
         {
@@ -196,15 +195,15 @@ void CTableTrk::updateData()
         }
 
         IUnit::self().meter2distance(trkpt.deltaDistance, val, unit);
-        item->setText(eColDelta, tr("%1%2").arg(val).arg(unit));
+        item->setText(eColDelta, tr("%1%2").arg(val, unit));
 
         IUnit::self().meter2distance(trkpt.distance, val, unit);
-        item->setText(eColDist, tr("%1%2").arg(val).arg(unit));
+        item->setText(eColDist, tr("%1%2").arg(val, unit));
 
         if(trkpt.speed != NOFLOAT)
         {
             IUnit::self().meter2speed(trkpt.speed, val, unit);
-            item->setText(eColSpeed, tr("%1%2").arg(val).arg(unit));
+            item->setText(eColSpeed, tr("%1%2").arg(val, unit));
         }
         else
         {
@@ -213,14 +212,14 @@ void CTableTrk::updateData()
 
         IUnit::self().slope2string(trkpt.slope1, val, unit);
         item->setText(eColSlope, (trkpt.slope1 != NOFLOAT)
-                      ? QString("%1%2").arg(val).arg(unit)
+                      ? QString("%1%2").arg(val, unit)
                       : "-"
                       );
 
         IUnit::self().meter2elevation(trkpt.ascent, val, unit);
-        item->setText(eColAscent, tr("%1%2").arg(val).arg(unit));
+        item->setText(eColAscent, tr("%1%2").arg(val, unit));
         IUnit::self().meter2elevation(trkpt.descent, val, unit);
-        item->setText(eColDescent, tr("%1%2").arg(val).arg(unit));
+        item->setText(eColDescent, tr("%1%2").arg(val, unit));
 
         // position
         QString str;
@@ -238,7 +237,7 @@ void CTableTrk::updateData()
 
 void CTableTrk::slotItemSelectionChanged()
 {
-    QTreeWidgetItem * item = currentItem();
+    QTreeWidgetItem* item = currentItem();
     if(nullptr != item)
     {
         quint32 idx = item->text(eColNum).toUInt();
@@ -246,7 +245,7 @@ void CTableTrk::slotItemSelectionChanged()
     }
 }
 
-void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
+void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem* item, int column)
 {
     if(trk->isReadOnly())
     {
@@ -261,7 +260,7 @@ void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
     if((column == eColEle) && (lon != NOFLOAT) && (lat != NOFLOAT))
     {
         QVariant var(ele);
-        CElevationDialog dlg(this, var, QVariant(ele), QPointF(lon, lat));
+        CElevationDialog dlg(this, var, ele, {lon, lat});
 
         if(dlg.exec() == QDialog::Accepted)
         {

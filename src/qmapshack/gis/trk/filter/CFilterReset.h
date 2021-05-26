@@ -28,7 +28,7 @@ class CFilterReset : public QWidget, private Ui::IFilterReset
 {
     Q_OBJECT
 public:
-    CFilterReset(CGisItemTrk& trk, QWidget * parent);
+    CFilterReset(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterReset() = default;
 
 private slots:

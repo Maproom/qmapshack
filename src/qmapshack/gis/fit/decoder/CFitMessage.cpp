@@ -60,11 +60,11 @@ QStringList CFitMessage::messageInfo() const
         .arg(getGlobalMesgNr())
         .arg(getLocalMesgNr());
 
-    for(const CFitField &field : fields)
+    for(const CFitField& field : fields)
     {
         list << field.fieldInfo();
     }
-    for(const CFitField &field : devFields)
+    for(const CFitField& field : devFields)
     {
         list << field.fieldInfo();
     }
@@ -76,7 +76,7 @@ bool CFitMessage::hasField(const quint8 fieldDefNum) const
     return fields.contains(fieldDefNum);
 }
 
-void CFitMessage::addField(CFitField &  field)
+void CFitMessage::addField(CFitField& field)
 {
     if (field.profile().getFieldType() == eFieldTypeFit)
     {

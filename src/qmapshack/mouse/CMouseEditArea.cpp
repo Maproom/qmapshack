@@ -25,14 +25,14 @@
 
 #include <QtWidgets>
 
-CMouseEditArea::CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
+CMouseEditArea::CMouseEditArea(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouseEditLine(IGisItem::key_t(), point, false, tr("Area"), gis, canvas, mouse)
 {
     startNewLine(point);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-CMouseEditArea::CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
+CMouseEditArea::CMouseEditArea(CGisItemOvlArea& area, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouseEditLine(area.getKey(), area, false, tr("Area"), gis, canvas, mouse)
 {
     canvas->reportStatus(key.item, tr("<b>Edit Area</b><br/>Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.<br/>") + docPanning);
@@ -44,14 +44,14 @@ CMouseEditArea::~CMouseEditArea()
     canvas->reportStatus(key.item, "");
 }
 
-void CMouseEditArea::drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p)
+void CMouseEditArea::drawLine(const QPolygonF& l, const QColor color, int width, QPainter& p)
 {
     p.setPen(QPen(color, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.setBrush(QBrush(Qt::magenta, Qt::BDiagPattern));
     p.drawPolygon(l);
 }
 
-IGisLine * CMouseEditArea::getGisLine() const
+IGisLine* CMouseEditArea::getGisLine() const
 {
     return dynamic_cast<CGisItemOvlArea*>(CGisWorkspace::self().getItemByKey(key));
 }
@@ -77,10 +77,10 @@ void CMouseEditArea::slotCopyToNew()
         return;
     }
 
-    IGisProject * project = nullptr;
+    IGisProject* project = nullptr;
 
     QString name;
-    CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemOvlArea* area = dynamic_cast<CGisItemOvlArea*>(CGisWorkspace::self().getItemByKey(key));
     if(area != nullptr)
     {
         name = area->getName();

@@ -41,7 +41,7 @@ SGisLine::SGisLine(const QPolygonF& line)
     CMainWindow::self().getElevationAt(*this);
 }
 
-void SGisLine::updateElevation(CDemDraw * dem)
+void SGisLine::updateElevation(CDemDraw* dem)
 {
     for(int i = 0; i < size(); i++)
     {
@@ -59,7 +59,7 @@ void SGisLine::updateElevation(CDemDraw * dem)
 }
 
 
-void SGisLine::updatePixel(CGisDraw * gis)
+void SGisLine::updatePixel(CGisDraw* gis)
 {
     for(int i = 0; i < size(); i++)
     {

@@ -44,13 +44,13 @@ public:
     const QIcon getCurrentIcon() const;
 
 signals:
-    void sigConfigChanged() const;
+    void sigConfigChanged();
 
 private:
     CGeoSearchConfig(QObject* parent);
-    void emitChanged() const;
+    void emitChanged();
 
-    static CGeoSearchConfig * pSelf;
+    static CGeoSearchConfig* pSelf;
 
     service_e currentService;
     QString googleApiKey;

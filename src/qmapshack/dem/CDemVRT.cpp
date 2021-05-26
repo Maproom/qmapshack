@@ -20,7 +20,7 @@
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemVRT.h"
-#include "GeoMath.h"
+#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
@@ -32,7 +32,7 @@
 #define TILESIZEX 64
 #define TILESIZEY 64
 
-CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
+CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent)
     : IDem(parent)
     , filename(filename)
 {
@@ -54,7 +54,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
         return;
     }
 
-    GDALRasterBand *pBand = dataset->GetRasterBand(1);
+    GDALRasterBand* pBand = dataset->GetRasterBand(1);
     if(nullptr == pBand)
     {
         GDALClose(dataset);
@@ -76,15 +76,15 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
         strncpy(str, dataset->GetProjectionRef(), sizeof(str) - 1);
     }
     OGRSpatialReference oSRS;
-    const char *wkt = str;
+    const char* wkt = str;
     oSRS.importFromWkt(&wkt);
 
-    char *proj4 = nullptr;
+    char* proj4 = nullptr;
     oSRS.exportToProj4(&proj4);
-    pjsrc = pj_init_plus(proj4);
+    proj.init(proj4, "EPSG:4326");
     free(proj4);
 
-    if(pjsrc == 0)
+    if(!proj.isValid())
     {
         GDALClose(dataset);
         dataset = nullptr;
@@ -98,8 +98,8 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     qreal adfGeoTransform[6];
     dataset->GetGeoTransform( adfGeoTransform );
 
-    xscale  = adfGeoTransform[1];
-    yscale  = adfGeoTransform[5];
+    xscale = adfGeoTransform[1];
+    yscale = adfGeoTransform[5];
 
     trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
     trFwd.scale(adfGeoTransform[1], adfGeoTransform[5]);
@@ -109,7 +109,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
         trFwd.rotate(qAtan(adfGeoTransform[2] / adfGeoTransform[4]));
     }
 
-    if(pj_is_latlong(pjsrc))
+    if(proj.isSrcLatLong())
     {
         xscale *= 111120;
         yscale *= 111120;
@@ -140,7 +140,7 @@ CDemVRT::~CDemVRT()
 
 qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
 {
-    if(pjsrc == 0 || (checkScale && outOfScale))
+    if(!proj.isValid() || (checkScale && outOfScale))
     {
         return NOFLOAT;
     }
@@ -148,7 +148,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
     qint16 e[4];
     QPointF pt = pos;
 
-    pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
+    proj.transform(pt, PJ_INV);
 
     if(!boundingBox.contains(pt))
     {
@@ -157,8 +157,8 @@ qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
 
     pt = trInv.map(pt);
 
-    qreal x    = pt.x() - qFloor(pt.x());
-    qreal y    = pt.y() - qFloor(pt.y());
+    qreal x = pt.x() - qFloor(pt.x());
+    qreal y = pt.y() - qFloor(pt.y());
 
     mutex.lock();
     CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()), qFloor(pt.y()), 2, 2, &e, 2, 2, GDT_Int16, 1, 0, 0, 0, 0);
@@ -185,14 +185,14 @@ qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
 
 qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale)
 {
-    if(pjsrc == 0 || (checkScale && outOfScale))
+    if(!proj.isValid() || (checkScale && outOfScale))
     {
         return NOFLOAT;
     }
 
     QPointF pt = pos;
 
-    pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
+    proj.transform(pt, PJ_INV);
 
     if(!boundingBox.contains(pt))
     {
@@ -201,8 +201,8 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale)
 
     pt = trInv.map(pt);
 
-    qreal x    = pt.x() - qFloor(pt.x());
-    qreal y    = pt.y() - qFloor(pt.y());
+    qreal x = pt.x() - qFloor(pt.x());
+    qreal y = pt.y() - qFloor(pt.y());
 
     qint16 win[eWinsize4x4];
     mutex.lock();
@@ -251,21 +251,21 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     QPointF pt3 = buf.ref3;
     QPointF pt4 = buf.ref4;
 
-    pj_transform(pjtar, pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt3.rx(), &pt3.ry(), 0);
-    pj_transform(pjtar, pjsrc, 1, 0, &pt4.rx(), &pt4.ry(), 0);
+    proj.transform(pt1, PJ_INV);
+    proj.transform(pt2, PJ_INV);
+    proj.transform(pt3, PJ_INV);
+    proj.transform(pt4, PJ_INV);
 
     pt1 = trInv.map(pt1);
     pt2 = trInv.map(pt2);
     pt3 = trInv.map(pt3);
     pt4 = trInv.map(pt4);
 
-    qreal left, right, top, bottom;
-    left     = qRound(pt1.x() < pt4.x() ? pt1.x() : pt4.x());
-    right    = qRound(pt2.x() > pt3.x() ? pt2.x() : pt3.x());
-    top      = qRound(pt1.y() < pt2.y() ? pt1.y() : pt2.y());
-    bottom   = qRound(pt4.y() > pt3.y() ? pt4.y() : pt3.y());
+    qint32 left, right, top, bottom;
+    left = qRound(pt1.x() < pt4.x() ? pt1.x() : pt4.x());
+    right = qRound(pt2.x() > pt3.x() ? pt2.x() : pt3.x());
+    top = qRound(pt1.y() < pt2.y() ? pt1.y() : pt2.y());
+    bottom = qRound(pt4.y() > pt3.y() ? pt4.y() : pt3.y());
 
     if(left <= 0)
     {
@@ -278,7 +278,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
     if(top <= 0)
     {
-        top  = 1;
+        top = 1;
     }
     if(top >= ysize_px)
     {
@@ -303,10 +303,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
         bottom = 1;
     }
 
-    qreal imgw = TILESIZEX;
-    qreal imgh = TILESIZEY;
-    qreal w =  imgw;
-    qreal h =  imgh;
+    qint32 w = TILESIZEX;
+    qint32 h = TILESIZEY;
 
     /*
         As the 3x3 window will create a border of one pixel
@@ -327,14 +325,14 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     qreal nTiles = ((right - left) * (bottom - top) / (w * h));
     if(nTiles < TILELIMIT)
     {
-        for(qreal y = top - 1; y < bottom; y += h)
+        for(qint32 y = top - 1; y < bottom; y += h)
         {
             if(dem->needsRedraw())
             {
                 break;
             }
 
-            for(qreal x = left - 1; x < right; x += w)
+            for(qint32 x = left - 1; x < right; x += w)
             {
                 if(dem->needsRedraw())
                 {
@@ -345,13 +343,13 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                 qreal wp2_used = wp2;
                 qreal hp2_used = hp2;
-                qreal w_used   = w;
-                qreal h_used   = h;
+                qreal w_used = w;
+                qreal h_used = h;
 
                 if((x + wp2) > xsize_px)
                 {
                     wp2_used = xsize_px - x;
-                    w_used   = wp2_used - 2;
+                    w_used = wp2_used - 2;
                     if(w_used < 2)
                     {
                         continue;
@@ -361,14 +359,14 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                 if((y + hp2) > ysize_px)
                 {
                     hp2_used = ysize_px - y;
-                    h_used   = hp2_used - 2;
+                    h_used = hp2_used - 2;
                     if(h_used < 2)
                     {
                         continue;
                     }
                 }
 
-                QVector<qint16> data(wp2_used * hp2_used);
+                QVector<qint16> data(wp2_used* hp2_used);
                 mutex.lock();
                 err = dataset->RasterIO(GF_Read, x, y, wp2_used, hp2_used, data.data(), wp2_used, hp2_used, GDT_Int16, 1, 0, 0, 0, 0);
                 mutex.unlock();
@@ -385,10 +383,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                 l[2] = QPointF(x + 1 + w_used, y + 1 + h_used);
                 l[3] = QPointF(x + 1, y + 1 + h_used);
                 l = trFwd.map(l);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
-                pj_transform(pjsrc, pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+
+                proj.transform(l, PJ_FWD);
 
                 if(doHillshading())
                 {

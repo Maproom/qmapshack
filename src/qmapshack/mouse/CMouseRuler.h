@@ -28,14 +28,14 @@ class CMouseRuler : public IMouse
 {
     Q_OBJECT
 public:
-    CMouseRuler(CGisDraw * gis, CCanvas *canvas, CMouseAdapter *mouse);
+    CMouseRuler(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
     virtual ~CMouseRuler();
 
 
     void rightButtonDown(const QPoint& pos) override;
     void leftClicked(const QPoint& pos) override;
     void mouseMoved(const QPoint& pos) override;
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
 private slots:
     void slotUndo();
@@ -48,8 +48,8 @@ private slots:
     void slotToArea();
 
 private:
-    void storeToHistory(const QPolygonF &line);
-    void updateStatus(const QPolygonF &line);
+    void storeToHistory(const QPolygonF& line);
+    void updateStatus(const QPolygonF& line);
     void meter2whatever(qreal meter, QString& val, QString& unit);
 
     enum mode_e
@@ -64,7 +64,7 @@ private:
     qint32 idxHistory = NOIDX;
     QList<QPolygonF> history;
 
-    CScrOptRuler * scrOptRuler;
+    CScrOptRuler* scrOptRuler;
 };
 
 #endif //CMOUSERULER_H

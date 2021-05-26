@@ -19,19 +19,20 @@
 #ifndef IQLGTOVERLAY_H
 #define IQLGTOVERLAY_H
 
+#include "gis/proj_x.h"
 #include "qlgt/IItem.h"
-#include <proj_api.h>
+
 #include <QObject>
 
 class IQlgtOverlay : public QObject, public IItem
 {
 public:
-    IQlgtOverlay(quint64 id, QObject * parent);
+    IQlgtOverlay(quint64 id, QObject* parent);
     virtual ~IQlgtOverlay();
 
     enum type_e {eEnd, eBase};
 
-    struct pt_t : public projXY
+    struct pt_t : public PJ_UV
     {
         int idx;
     };

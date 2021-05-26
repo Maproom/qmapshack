@@ -18,7 +18,7 @@
 
 #include "dem/CDemWCS.h"
 
-CDemWCS::CDemWCS(const QString &filename, CDemDraw *parent)
+CDemWCS::CDemWCS(const QString& filename, CDemDraw* parent)
     : CDemVRT(filename, parent)
 {
 }

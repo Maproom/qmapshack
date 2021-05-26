@@ -30,7 +30,7 @@ class CMapMAP : public IMap
 {
     Q_DECLARE_TR_FUNCTIONS(CMapMAP)
 public:
-    CMapMAP(const QString& filename, CMapDraw *parent);
+    CMapMAP(const QString& filename, CMapDraw* parent);
     virtual ~CMapMAP();
 
     void draw(IDrawContext::buffer_t& buf) override;
@@ -72,9 +72,9 @@ private:
         }
         char signature[20];
         quint32 sizeHeader = 0;
-        quint32 version    = 0;
-        quint64 sizeFile   = 0;
-        quint64 timestamp  = 0;
+        quint32 version = 0;
+        quint64 sizeFile = 0;
+        quint64 timestamp = 0;
         qint32 minLat = 0;
         qint32 minLon = 0;
         qint32 maxLat = 0;

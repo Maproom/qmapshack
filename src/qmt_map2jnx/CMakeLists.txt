@@ -5,15 +5,16 @@ set(APPLICATION_NAME qmt_map2jnx)
 
 #if you don't want the full compiler output, remove the following line
 SET(CMAKE_VERBOSE_MAKEFILE ON)
-SET(SRCS main.cpp argv.cpp)
-SET(HDRS argv.h)
+SET(SRCS main.cpp argv.cpp ../common/gis/proj_x.cpp)
+SET(HDRS argv.h ../common/gis/proj_x.h)
 
 
 include_directories(
+  ../common
   ${CMAKE_BINARY_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
   ${GDAL_INCLUDE_DIRS}
-  ${PROJ4_INCLUDE_DIRS}
+  ${PROJ_INCLUDE_DIRS}
   ${JPEG_INCLUDE_DIRS}
 )
 
@@ -48,7 +49,12 @@ IF(WIN32)
   ADD_DEFINITIONS(-D_CRT_SECURE_NO_DEPRECATE)
 ENDIF(WIN32)
 
-TARGET_LINK_LIBRARIES(${APPLICATION_NAME} ${GDAL_LIBRARIES} ${PROJ4_LIBRARIES} ${JPEG_LIBRARIES})
+TARGET_LINK_LIBRARIES(${APPLICATION_NAME}
+    Qt5::Core
+    Qt5::Gui
+    ${GDAL_LIBRARIES}
+    ${PROJ_LIBRARIES}
+    ${JPEG_LIBRARIES})
 
 install(
     TARGETS ${APPLICATION_NAME} DESTINATION ${BIN_INSTALL_DIR}

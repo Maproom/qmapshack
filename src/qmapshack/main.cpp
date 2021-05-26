@@ -26,7 +26,7 @@
 #include <QtWidgets>
 
 
-int main(int argc, char ** argv)
+int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
@@ -41,7 +41,7 @@ int main(int argc, char ** argv)
 
     // setup random number generator. currently used for an
     // unique instance ID.
-    uint seed = QDateTime::currentDateTime().toTime_t();
+    uint seed = QDateTime::currentDateTimeUtc().toTime_t();
     qsrand(seed);
 
     // setup default proxy
@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
     // make sure this is the one and only instance on the system
     CSingleInstanceProxy s(qlOpts->arguments);
 
-    QSplashScreen *splash = nullptr;
+    QSplashScreen* splash = nullptr;
     if (!qlOpts->nosplash)
     {
         QPixmap pic(":/pics/splash.png");

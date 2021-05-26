@@ -20,19 +20,19 @@
 
 #include <QtWidgets>
 
-CLinksDialog::CLinksDialog(QList<IGisItem::link_t> &links, QWidget *parent)
+CLinksDialog::CLinksDialog(QList<IGisItem::link_t>& links, QWidget* parent)
     : QDialog(parent)
     , links(links)
 {
     setupUi(this);
 
-    connect(toolAdd,    &QToolButton::clicked,              this, &CLinksDialog::slotAddLink);
-    connect(toolDelete, &QToolButton::clicked,              this, &CLinksDialog::slotDelLink);
+    connect(toolAdd, &QToolButton::clicked, this, &CLinksDialog::slotAddLink);
+    connect(toolDelete, &QToolButton::clicked, this, &CLinksDialog::slotDelLink);
     connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CLinksDialog::slotItemSelectionChanged);
 
     for(const IGisItem::link_t& link : links)
     {
-        QTreeWidgetItem * item = new QTreeWidgetItem(treeWidget);
+        QTreeWidgetItem* item = new QTreeWidgetItem(treeWidget);
         item->setText(0, link.type);
         item->setText(1, link.text);
         item->setText(2, link.uri.toString());
@@ -52,7 +52,7 @@ void CLinksDialog::slotItemSelectionChanged()
 
 void CLinksDialog::slotAddLink()
 {
-    QTreeWidgetItem * item = new QTreeWidgetItem(treeWidget);
+    QTreeWidgetItem* item = new QTreeWidgetItem(treeWidget);
     item->setText(0, "");
     item->setText(1, "enter a text");
     item->setText(2, "enter a link");
@@ -61,7 +61,7 @@ void CLinksDialog::slotAddLink()
 
 void CLinksDialog::slotDelLink()
 {
-    QList<QTreeWidgetItem *> items = treeWidget->selectedItems();
+    QList<QTreeWidgetItem*> items = treeWidget->selectedItems();
     qDeleteAll(items);
 }
 
@@ -71,12 +71,12 @@ void CLinksDialog::accept()
 
     for(int i = 0; i < treeWidget->topLevelItemCount(); i++)
     {
-        QTreeWidgetItem * item = treeWidget->topLevelItem(i);
+        QTreeWidgetItem* item = treeWidget->topLevelItem(i);
 
         IGisItem::link_t link;
         link.type = item->text(0);
         link.text = item->text(1);
-        link.uri  = item->text(2);
+        link.uri = item->text(2);
 
         links << link;
     }

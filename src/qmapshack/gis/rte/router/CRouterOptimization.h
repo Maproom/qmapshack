@@ -28,7 +28,7 @@ class CRouterOptimization
     Q_DECLARE_TR_FUNCTIONS(CRouterOptimization)
 public:
     CRouterOptimization();
-    int optimize(SGisLine & line);
+    int optimize(SGisLine& line);
 
 private:
 
@@ -40,11 +40,11 @@ private:
 
     /// returns value by which the costs were changed
     qreal createNextBestOrder(const SGisLine& oldOrder, SGisLine& newOrder);
-    qreal twoOptStep(const SGisLine &oldOrder, SGisLine &newOrder);
+    qreal twoOptStep(const SGisLine& oldOrder, SGisLine& newOrder);
 
     qreal getRealRouteCosts(const SGisLine& line, qreal costCutoff = -1);
-    qreal bestKnownDistance(const IGisLine::point_t &start, const IGisLine::point_t &end);
-    const routing_cache_item_t *getRoute(const QPointF& from, const QPointF& to);
+    qreal bestKnownDistance(const IGisLine::point_t& start, const IGisLine::point_t& end);
+    const routing_cache_item_t* getRoute(const QPointF& from, const QPointF& to);
     int fillSubPts(SGisLine& line);
     /// checks if router settings were changed and if yes, discards the routingCache
     void checkRouter();

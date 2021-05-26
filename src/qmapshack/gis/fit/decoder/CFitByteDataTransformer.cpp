@@ -47,7 +47,7 @@ quint64 CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType, quin
     }
 }
 
-qint64 CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, quint8 *rawData)
+qint64 CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, quint8* rawData)
 {
     switch(baseType.nr())
     {

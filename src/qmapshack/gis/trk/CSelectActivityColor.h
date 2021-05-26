@@ -32,20 +32,20 @@ class CSelectActivityColor : public QWidget, public INotifyTrk, private Ui::ISel
 {
     Q_OBJECT
 public:
-    CSelectActivityColor(QWidget * parent);
+    CSelectActivityColor(QWidget* parent);
     virtual ~CSelectActivityColor();
 
-    void setTrack(CGisItemTrk * p);
+    void setTrack(CGisItemTrk* p);
     void updateData() override;
-    void setMouseFocus(const CTrackData::trkpt_t * pt) override {}
-    void setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2) override {}
-    void setMouseClickFocus(const CTrackData::trkpt_t * pt) override {}
+    void setMouseFocus(const CTrackData::trkpt_t* pt) override {}
+    void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override {}
+    void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
 
 private slots:
-    void slotSetColor(QToolButton * button, trkact_t act);
+    void slotSetColor(QToolButton* button, trkact_t act);
 
 private:
-    CGisItemTrk * trk = nullptr;
+    CGisItemTrk* trk = nullptr;
     QList<QLabel*> allActLabels;
     QList<QToolButton*> allActColors;
 };

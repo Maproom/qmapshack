@@ -64,7 +64,7 @@ void printDefinitions(const QList<CFitDefinitionMessage>& defs)
 {
     for(int i = 0; i < defs.size(); i++)
     {
-        for(QString& s: defs[i].messageInfo())
+        for(QString& s : defs[i].messageInfo())
         {
             qDebug() << s;
         }
@@ -75,7 +75,7 @@ void printMessages(const QList<CFitMessage>& messages)
 {
     for(int i = 0; i < messages.size(); i++)
     {
-        for(QString& s: messages[i].messageInfo())
+        for(QString& s : messages[i].messageInfo())
         {
             qDebug() << s;
         }
@@ -99,7 +99,7 @@ void printByte(QFile& file, decode_state_e state, quint8 dataByte)
              .arg(decoderStateNames.at(state)));
 }
 
-void CFitDecoder::decode(QFile &file)
+void CFitDecoder::decode(QFile& file)
 {
     resetSharedData();
 
@@ -109,7 +109,7 @@ void CFitDecoder::decode(QFile &file)
     decode_state_e state = eDecoderStateFileHeader;
     while (!file.atEnd())
     {
-        file.getChar((char *) &dataByte);
+        file.getChar((char*) &dataByte);
         try
         {
             printByte(file, state, dataByte);

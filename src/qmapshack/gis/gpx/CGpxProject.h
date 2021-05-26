@@ -28,9 +28,9 @@ class CGpxProject : public IGisProject
 {
     Q_DECLARE_TR_FUNCTIONS(CGpxProject)
 public:
-    CGpxProject(const QString &filename, CGisListWks * parent);
-    CGpxProject(const QString &filename, IDevice * parent);
-    CGpxProject(const QString &filename, const IGisProject * project, IDevice * parent);
+    CGpxProject(const QString& filename, CGisListWks* parent);
+    CGpxProject(const QString& filename, IDevice* parent);
+    CGpxProject(const QString& filename, const IGisProject* project, IDevice* parent);
     virtual ~CGpxProject();
 
     const QString getFileDialogFilter() const override
@@ -50,7 +50,7 @@ public:
 
     static bool saveAs(const QString& fn, IGisProject& project, bool strictGpx11);
 
-    static void loadGpx(const QString &filename, CGpxProject *project);
+    static void loadGpx(const QString& filename, CGpxProject* project);
 
 private:
     void loadGpx(const QString& filename);

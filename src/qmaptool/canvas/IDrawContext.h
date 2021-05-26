@@ -31,7 +31,7 @@ class IDrawContext : public QThread
 {
     Q_OBJECT
 public:
-    IDrawContext(CCanvas *canvas, QObject *parent);
+    IDrawContext(CCanvas* canvas, QObject* parent);
     virtual ~IDrawContext() = default;
 
     virtual QString getInfo() const = 0;
@@ -42,7 +42,7 @@ public:
 
     virtual bool getNoData() const = 0;
 
-    virtual const QString& getProjection() const = 0;
+    virtual QString getProjection() const = 0;
 
     virtual const QTransform& getTrFwd() const = 0;
 
@@ -64,10 +64,10 @@ public:
 
     bool needsRedraw() const;
 
-    void convertScreen2Map(QPointF &pt) const;
+    void convertScreen2Map(QPointF& pt) const;
     void convertMap2Screen(QPointF& pt) const;
     void convertMap2Screen(QPolygonF& line) const;
-    void convertMap2Screen(QRectF &rect) const;
+    void convertMap2Screen(QRectF& rect) const;
 
     /**
        @brief Convert point in map to coordinates
@@ -75,28 +75,28 @@ public:
         Depending on the type and the reference information
         of the map the result can be:
 
-        * CGdalFile::eTypePixel: Pixel coordinates
-        * CGdalFile::eTypeProj: Geo coordinates, if the file
+     * CGdalFile::eTypePixel: Pixel coordinates
+     * CGdalFile::eTypeProj: Geo coordinates, if the file
           is referenced else pixel coordinates
      */
-    virtual void convertMap2Coord(QPointF &pt) const = 0;
-    virtual void convertCoord2Map(QPointF &pt) const = 0;
+    virtual void convertMap2Coord(QPointF& pt) const = 0;
+    virtual void convertCoord2Map(QPointF& pt) const = 0;
 
     /** Convert point in map to coordinates
 
-      Depending on the reference information of the map
-      the result can be:
+       Depending on the reference information of the map
+       the result can be:
 
-      * Referenced map: Geo coordinates
-      * Un-referenced map: Pixel coordinates
+     * Referenced map: Geo coordinates
+     * Un-referenced map: Pixel coordinates
 
-    */
-    virtual void convertMap2Proj(QPointF &pt) const
+     */
+    virtual void convertMap2Proj(QPointF& pt) const
     {
         convertMap2Coord(pt);
     }
 
-    virtual void convertProj2Map(QPointF &pt) const
+    virtual void convertProj2Map(QPointF& pt) const
     {
         convertCoord2Map(pt);
     }
@@ -113,7 +113,7 @@ public:
         canvas->slotTriggerCompleteUpdate(flags);
     }
 
-    const CCanvas * getCanvas() const
+    const CCanvas* getCanvas() const
     {
         return canvas;
     }
@@ -125,7 +125,7 @@ protected slots:
     void slotResize(const QSize& size);
 
 protected:
-    CCanvas *canvas;
+    CCanvas* canvas;
 
     struct buffer_t
     {
@@ -159,9 +159,9 @@ protected:
     /// the main threads currently used map canvas buffer
     bool bufIndex = false;
 
-    qreal bufWidth   = 100; //< buffer width [px]
-    qreal bufHeight  = 100; //< buffer height [px]
-    qreal viewWidth  = 100; //< the viewports width [px]
+    qreal bufWidth = 100;   //< buffer width [px]
+    qreal bufHeight = 100;  //< buffer height [px]
+    qreal viewWidth = 100;  //< the viewports width [px]
     qreal viewHeight = 100; //< the viewports height [px]
 
     QPointF focus {0, 0};

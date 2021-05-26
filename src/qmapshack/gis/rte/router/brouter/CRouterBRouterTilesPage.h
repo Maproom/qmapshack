@@ -34,7 +34,7 @@ public:
 
     bool isComplete() const override;
 
-    void setSetup(CRouterBRouterSetup * setup) const;
+    void setSetup(CRouterBRouterSetup* setup) const;
     void beginPage() const;
     bool raiseWarning() const;
 
@@ -42,8 +42,8 @@ private slots:
     void slotTileDownloadStatusChanged();
 
 private:
-    QVBoxLayout * layout;
-    CRouterBRouterTilesSelect * widgetLocalTilesSelect;
+    QVBoxLayout* layout;
+    CRouterBRouterTilesSelect* widgetLocalTilesSelect;
 };
 
 #endif //CROUTERBROUTERTILESPAGE_H

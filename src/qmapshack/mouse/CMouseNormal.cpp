@@ -28,12 +28,13 @@
 #include "mouse/CMouseAdapter.h"
 #include "mouse/CMouseNormal.h"
 #include "mouse/CScrOptUnclutter.h"
+#include "poi/IPoi.h"
 #include "realtime/CRtWorkspace.h"
 #include "widgets/CFadingIcon.h"
 
 #include <QtWidgets>
 
-CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+CMouseNormal::CMouseNormal(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"), 0, 0);
@@ -49,7 +50,7 @@ void CMouseNormal::stopTracking() const
     const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();
     if(!key.item.isEmpty())
     {
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
+        CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
         if(trk != nullptr)
         {
             trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
@@ -103,7 +104,7 @@ void CMouseNormal::mouseMoved(const QPoint& point)
         const IGisItem::key_t& keyTrk = CGisItemTrk::getKeyUserFocus();
         if(!keyTrk.item.isEmpty())
         {
-            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrk));
+            CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrk));
             if(trk != nullptr)
             {
                 trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
@@ -113,7 +114,7 @@ void CMouseNormal::mouseMoved(const QPoint& point)
         const IGisItem::key_t& keyRte = CGisItemRte::getKeyUserFocus();
         if(!keyRte.item.isEmpty())
         {
-            CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(keyRte));
+            CGisItemRte* rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(keyRte));
             if(rte != nullptr)
             {
                 rte->setMouseFocusByPoint(point, CGisItemRte::eFocusMouseMove, "CMouseNormal");
@@ -126,13 +127,15 @@ void CMouseNormal::mouseMoved(const QPoint& point)
         ;
     }
 
-    curPOI = canvas->findPOICloseBy(point);
+    posPoiHighlight.clear();
+    curPois.clear();
+    canvas->findPoiCloseBy(point, curPois, posPoiHighlight);
 
     canvas->displayInfo(point);
     canvas->update();
 }
 
-void CMouseNormal::mouseDragged(const QPoint& start, const QPoint& last, const QPoint &end)
+void CMouseNormal::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end)
 {
     // start to block map moving when a previous click
     // has triggered a selection of any kind
@@ -160,7 +163,7 @@ void CMouseNormal::leftClicked(const QPoint& point)
     {
         stateItemSel = eStateIdle;
 
-        IGisItem * item = CGisWorkspace::self().getItemByKey(screenUnclutter->getItemKey());
+        IGisItem* item = CGisWorkspace::self().getItemByKey(screenUnclutter->getItemKey());
         if(nullptr != item)
         {
             scrollToItem(item);
@@ -183,10 +186,10 @@ void CMouseNormal::leftClicked(const QPoint& point)
 
     case eStateUnclutterMultiple:
     {
-        const CScrOptUnclutter::item_t * scrOpt = screenUnclutter->selectItem(point);
+        const CScrOptUnclutter::item_t* scrOpt = screenUnclutter->selectItem(point);
         if(scrOpt != nullptr)
         {
-            IGisItem * item = CGisWorkspace::self().getItemByKey(scrOpt->key);
+            IGisItem* item = CGisWorkspace::self().getItemByKey(scrOpt->key);
             screenUnclutter->clear(); // CAUTION!! this will delete the object scrOpt is pointing to.
             scrOpt = nullptr;
             if(item)
@@ -215,7 +218,7 @@ void CMouseNormal::leftClicked(const QPoint& point)
     canvas->update();
 }
 
-void CMouseNormal::doubleClicked(const QPoint & point)
+void CMouseNormal::doubleClicked(const QPoint& point)
 {
     if(stateItemSel == eStateIdle)
     {
@@ -243,9 +246,9 @@ void CMouseNormal::resetState()
     canvas->update();
 }
 
-void CMouseNormal::scrollToItem(IGisItem * item)
+void CMouseNormal::scrollToItem(IGisItem* item)
 {
-    QTreeWidget * treeWidget = item->treeWidget();
+    QTreeWidget* treeWidget = item->treeWidget();
     // block signals as this is an internal
     // change and no user interaction with
     // the tree widget
@@ -256,9 +259,9 @@ void CMouseNormal::scrollToItem(IGisItem * item)
     treeWidget->blockSignals(false);
 }
 
-bool CMouseNormal::setScreenOption(const QPoint& pt, IGisItem * item)
+bool CMouseNormal::setScreenOption(const QPoint& pt, IGisItem* item)
 {
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+    CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(item);
     if(trk && trk->setMouseFocusByPoint(pt, CGisItemTrk::eFocusMouseClick, "CMouseNormal") == NOPOINTF)
     {
         new CFadingIcon(pt, "://icons/48x48/NotPossible.png", canvas);
@@ -271,7 +274,7 @@ bool CMouseNormal::setScreenOption(const QPoint& pt, IGisItem * item)
     return !screenItemOption.isNull();
 }
 
-void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
+void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect)
 {
     // no mouse interaction while gis thread is running
     if(gis->isRunning())
@@ -285,12 +288,12 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     case eStateHooverSingle:
     case eStateHooverMultiple:
     {
-        if(curPOI.pos != NOPOINTF)
+        for(QPointF pos : posPoiHighlight)
         {
-            const QSize s = curPOI.symbolSize;
-            const qint32 x = (qMax(qMax(s.width(), s.height()), 7) << 1) & 0xFFFFFFFE;
-
-            p.drawImage(curPOI.pos - QPointF(x, x), QImage("://cursors/wptHighlightBlue.png").scaled(x << 1, x << 1, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            gis->convertRad2Px(pos);
+            QRectF r = IPoi::iconHighlight().rect();
+            r.moveCenter(pos);
+            p.drawImage(r, IPoi::iconHighlight());
         }
 
         /*
@@ -318,7 +321,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
             break;
         }
 
-        for(IGisItem * item : items)
+        for(IGisItem* item : qAsConst(items))
         {
             item->drawHighlight(p);
             screenUnclutter->addItem(item);
@@ -355,13 +358,9 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     }
 }
 
-void CMouseNormal::slotAddPoi() const
+void CMouseNormal::slotAddPoi(const poi_t& poi) const
 {
-    QPointF pt = curPOI.pos;
-    gis->convertPx2Rad(pt);
-    pt *= RAD_TO_DEG;
-
-    CGisWorkspace::self().addWptByPos(pt, curPOI.name, curPOI.desc);
+    CGisWorkspace::self().addPoiAsWpt(poi);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
@@ -416,7 +415,7 @@ void CMouseNormal::slotCopyPosition() const
     QString position;
     IUnit::degToStr(pt.x() * RAD_TO_DEG, pt.y() * RAD_TO_DEG, position);
 
-    QClipboard *clipboard = QApplication::clipboard();
+    QClipboard* clipboard = QApplication::clipboard();
     clipboard->setText(position);
 }
 
@@ -428,7 +427,7 @@ void CMouseNormal::slotCopyPositionGrid() const
 
     canvas->convertGridPos2Str(pt * RAD_TO_DEG, position, true);
 
-    QClipboard *clipboard = QApplication::clipboard();
+    QClipboard* clipboard = QApplication::clipboard();
     clipboard->setText(position);
 }
 
@@ -438,28 +437,35 @@ void CMouseNormal::slotSelectArea() const
 }
 
 
-void CMouseNormal::showContextMenu(const QPoint &point)
+void CMouseNormal::showContextMenu(const QPoint& point)
 {
     QMenu menu(canvas);
-    if(curPOI.pos != NOPOINTF)
+    if(curPois.count() > 0 && curPois.count() <= 5)
     {
-        menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI as Waypoint"), this, SLOT(slotAddPoi()));
+        for(poi_t poi : curPois)
+        {
+            menu.addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add POI %1 as Waypoint").arg(poi.name), this, [this, poi] {slotAddPoi(poi);});
+        }
+    }
+    else if (curPois.count() > 5 )
+    {
+        menu.addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Zoom in to add POIs as Waypoints"));
     }
     QPointF pt = mouse->getPoint();
     gis->convertPx2Rad(pt);
 
-    menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add Waypoint"), this, SLOT(slotAddWpt()));
-    menu.addAction(QIcon("://icons/32x32/AddTrk.png"),  tr("Add Track"),    this, SLOT(slotAddTrk()));
-    menu.addAction(QIcon("://icons/32x32/AddRte.png"),  tr("Add Route"),    this, SLOT(slotAddRte()));
-    menu.addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"),     this, SLOT(slotAddArea()));
+    menu.addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add Waypoint"), this, &CMouseNormal::slotAddWpt);
+    menu.addAction(QIcon("://icons/32x32/AddTrk.png"), tr("Add Track"), this, &CMouseNormal::slotAddTrk);
+    menu.addAction(QIcon("://icons/32x32/AddRte.png"), tr("Add Route"), this, &CMouseNormal::slotAddRte);
+    menu.addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"), this, &CMouseNormal::slotAddArea);
     menu.addSeparator();
-    menu.addAction(QIcon("://icons/32x32/CSrcDistance.png"), tr("Ruler"),   this, SLOT(slotRuler()));
+    menu.addAction(QIcon("://icons/32x32/CSrcDistance.png"), tr("Ruler"), this, &CMouseNormal::slotRuler);
     menu.addSeparator();
-    menu.addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, SLOT(slotSelectArea()));
+    menu.addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, &CMouseNormal::slotSelectArea);
     menu.addSeparator();
     menu.addMenu(CGeoSearchWeb::self().getMenu(pt * RAD_TO_DEG, &menu));
-    menu.addAction(QIcon("://icons/32x32/CopyPosition.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
-    menu.addAction(QIcon("://icons/32x32/CopyGrid.png"), tr("Copy position (Grid)"), this, SLOT(slotCopyPositionGrid()));
+    menu.addAction(QIcon("://icons/32x32/CopyPosition.png"), tr("Copy position"), this, &CMouseNormal::slotCopyPosition);
+    menu.addAction(QIcon("://icons/32x32/CopyGrid.png"), tr("Copy position (Grid)"), this, &CMouseNormal::slotCopyPositionGrid);
 
     QPoint p = canvas->mapToGlobal(point);
     menu.exec(p);

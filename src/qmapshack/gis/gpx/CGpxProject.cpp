@@ -33,7 +33,7 @@
 
 #include <QtWidgets>
 
-CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
+CGpxProject::CGpxProject(const QString& filename, CGisListWks* parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/GpxProject.png"));
@@ -42,7 +42,7 @@ CGpxProject::CGpxProject(const QString &filename, CGisListWks *parent)
     blockUpdateItems(false);
 }
 
-CGpxProject::CGpxProject(const QString &filename, IDevice * parent)
+CGpxProject::CGpxProject(const QString& filename, IDevice* parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/GpxProject.png"));
@@ -51,7 +51,7 @@ CGpxProject::CGpxProject(const QString &filename, IDevice * parent)
     blockUpdateItems(false);
 }
 
-CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, IDevice * parent)
+CGpxProject::CGpxProject(const QString& filename, const IGisProject* project, IDevice* parent)
     : IGisProject(eTypeGpx, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/GpxProject.png"));
@@ -62,7 +62,7 @@ CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, I
     const int N = project->childCount();
     for(int n = 0; n < N; n++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(project->child(n));
+        IGisItem* item = dynamic_cast<IGisItem*>(project->child(n));
         if(item)
         {
             insertCopyOfItem(item, NOIDX, res);
@@ -85,7 +85,7 @@ void CGpxProject::loadGpx(const QString& filename)
     {
         loadGpx(filename, this);
     }
-    catch(QString &errormsg)
+    catch(QString& errormsg)
     {
         QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
                               tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
@@ -93,7 +93,7 @@ void CGpxProject::loadGpx(const QString& filename)
     }
 }
 
-void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
+void CGpxProject::loadGpx(const QString& filename, CGpxProject* project)
 {
     // create file instance
     QFile file(filename);
@@ -213,14 +213,14 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& xmlWpt = xmlWpts.item(n);
-        CGisItemWpt * wpt = new CGisItemWpt(xmlWpt, project);
+        CGisItemWpt* wpt = new CGisItemWpt(xmlWpt, project);
 
         /*
             Special care for waypoints stored on Garmin devices. Images attached
             to the waypoint are stored in the file system of the device and written
             as links to the waypoint. Let the device object take care of this.
          */
-        IDevice * device = dynamic_cast<IDevice*>(project->parent());
+        IDevice* device = dynamic_cast<IDevice*>(project->parent());
         if(device)
         {
             device->loadImages(*wpt);
@@ -293,7 +293,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
     QDomDocument doc;
     QDomNode gpx = project.writeMetadata(doc, strictGpx11);
 
-    IDevice * device = dynamic_cast<IDevice*>(project.parent());
+    IDevice* device = dynamic_cast<IDevice*>(project.parent());
     if(device)
     {
         device->startSavingProject(&project);
@@ -301,7 +301,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
 
     for(int i = 0; i < project.childCount(); i++)
     {
-        CGisItemWpt *item = dynamic_cast<CGisItemWpt*>(project.child(i));
+        CGisItemWpt* item = dynamic_cast<CGisItemWpt*>(project.child(i));
         if(nullptr == item)
         {
             continue;
@@ -321,7 +321,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
     }
     for(int i = 0; i < project.childCount(); i++)
     {
-        CGisItemRte *item = dynamic_cast<CGisItemRte*>(project.child(i));
+        CGisItemRte* item = dynamic_cast<CGisItemRte*>(project.child(i));
         if(nullptr == item)
         {
             continue;
@@ -330,7 +330,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
     }
     for(int i = 0; i < project.childCount(); i++)
     {
-        CGisItemTrk *item = dynamic_cast<CGisItemTrk*>(project.child(i));
+        CGisItemTrk* item = dynamic_cast<CGisItemTrk*>(project.child(i));
         if(nullptr == item)
         {
             continue;
@@ -344,7 +344,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
         gpx.appendChild(xmlExt);
         for(int i = 0; i < project.childCount(); i++)
         {
-            CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(project.child(i));
+            CGisItemOvlArea* item = dynamic_cast<CGisItemOvlArea*>(project.child(i));
             if(nullptr == item)
             {
                 continue;

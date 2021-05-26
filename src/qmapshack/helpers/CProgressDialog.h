@@ -38,10 +38,10 @@ class CProgressDialog : public QDialog, private Ui::IProgressDialog
 {
     Q_OBJECT
 public:
-    CProgressDialog(const QString text, int min, int max, QWidget * parent);
+    CProgressDialog(const QString text, int min, int max, QWidget* parent);
     virtual ~CProgressDialog();
 
-    static CProgressDialog * self();
+    static CProgressDialog* self();
 
     static void setAllVisible(bool yes);
 
@@ -55,7 +55,7 @@ public slots:
     void reject() override;
 
 protected:
-    void showEvent(QShowEvent *) override;
+    void showEvent(QShowEvent*) override;
 
 private:
     void pause();
@@ -63,7 +63,7 @@ private:
 
     static QStack<CProgressDialog*> stackSelf;
     QTime time;
-    QTimer * timer;
+    QTimer* timer;
     qint32 timeElapsed = 0;
 };
 

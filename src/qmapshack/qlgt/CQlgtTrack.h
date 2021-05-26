@@ -69,7 +69,7 @@ public:
         flags &= f;
         return flags;
     }
-    quint32 operator >>(quint32 & f)
+    quint32 operator >>(quint32& f)
     {
         if ( flags != f )
         {
@@ -101,7 +101,7 @@ class CQlgtTrack : public QObject, public IItem
 {
     Q_DECLARE_TR_FUNCTIONS(CQlgtTrack)
 public:
-    CQlgtTrack(quint64 id, QObject * parent);
+    CQlgtTrack(quint64 id, QObject* parent);
     virtual ~CQlgtTrack();
 
 
@@ -221,7 +221,7 @@ public:
         wpt_t() : wpt(0), d(1e25f), x(0), y(0)
         {
         }
-        CQlgtWpt * wpt;
+        CQlgtWpt* wpt;
         double d;
         double x;
         double y;

@@ -25,7 +25,6 @@ set( SRCS
     canvas/IDrawContext.cpp
     CMainWindow.cpp
     CSingleInstanceProxy.cpp
-    GeoMath.cpp
     helpers/CDraw.cpp
     helpers/CGdalFile.cpp
     helpers/mitab.cpp
@@ -62,7 +61,8 @@ set( SRCS
     tool/CToolAddOverview.cpp
     tool/CToolBox.cpp
     tool/CToolCutMap.cpp
-    tool/CToolExport.cpp    
+    tool/CToolExport.cpp
+    tool/CToolGDALGroupBox.cpp
     tool/CToolGrid.cpp
     tool/CToolOverviewGroupBox.cpp
     tool/CToolPalettize.cpp
@@ -81,6 +81,8 @@ set( SRCS
     ../common/help/CHelpBrowser.cpp
     ../common/help/CHelpIndex.cpp
     ../common/help/CHelpSearch.cpp
+    ../common/gis/GeoMath.cpp
+    ../common/gis/proj_x.cpp
 )
 
 set( HDRS
@@ -91,7 +93,6 @@ set( HDRS
     canvas/IDrawContext.h
     CMainWindow.h
     CSingleInstanceProxy.h
-    GeoMath.h
     helpers/CDraw.h
     helpers/CGdalFile.h
     helpers/CSettings.h
@@ -130,7 +131,8 @@ set( HDRS
     tool/CToolAddOverview.h
     tool/CToolBox.h
     tool/CToolCutMap.h
-    tool/CToolExport.h    
+    tool/CToolExport.h
+    tool/CToolGDALGroupBox.h
     tool/CToolGrid.h
     tool/CToolOverviewGroupBox.h
     tool/CToolPalettize.h
@@ -150,6 +152,8 @@ set( HDRS
     ../common/help/CHelpBrowser.h
     ../common/help/CHelpIndex.h
     ../common/help/CHelpSearch.h
+    ../common/gis/GeoMath.h
+    ../common/gis/proj_x.h
 )
 
 set( UIS
@@ -169,7 +173,8 @@ set( UIS
     tool/export/IToolExportJnx.ui
     tool/IToolAddOverview.ui
     tool/IToolCutMap.ui
-    tool/IToolExport.ui    
+    tool/IToolExport.ui
+    tool/IToolGDALGroupBox.ui
     tool/IToolGrid.ui
     tool/IToolOverviewGroupBox.ui
     tool/IToolPalettize.ui
@@ -227,7 +232,7 @@ include_directories(
     SYSTEM # this prevents warnings from non-QMS headers
     ${CMAKE_BINARY_DIR}
     ${GDAL_INCLUDE_DIRS}
-    ${PROJ4_INCLUDE_DIRS}
+    ${PROJ_INCLUDE_DIRS}
 )
 
 if(APPLE)
@@ -254,7 +259,7 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Network
     Qt5::Help
     ${GDAL_LIBRARIES}
-    ${PROJ4_LIBRARIES}
+    ${PROJ_LIBRARIES}
 )
 
 if(APPLE)

@@ -19,7 +19,7 @@
 #include "helpers/CDraw.h"
 #include "mouse/line/CScrOptRangeLine.h"
 
-CScrOptRangeLine::CScrOptRangeLine(const QPointF &point, IMouse *mouse, QWidget * parent)
+CScrOptRangeLine::CScrOptRangeLine(const QPointF& point, IMouse* mouse, QWidget* parent)
     : IScrOpt(mouse)
 {
     if(parent != nullptr)

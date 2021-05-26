@@ -29,7 +29,7 @@ class CToolRefMap : public IToolGui, public ITool, private Ui::IToolRefMap
 {
     Q_OBJECT
 public:
-    CToolRefMap(QWidget * parent);
+    CToolRefMap(QWidget* parent);
     virtual ~CToolRefMap();
 
     void setupChanged() override;
@@ -38,14 +38,14 @@ public:
 
 
 private slots:
-    void slotAddItem(const QString& filename, QListWidget * list);
+    void slotAddItem(const QString& filename, QListWidget* list);
     void slotMapSelectionChanged();
     void slotSomethingChanged();
     void slotStart();
     void slotFinished(qint32 id);
 
 private:
-    void buildCmd(QList<CShellCmd>& cmds, const IItem * iitem) override;
+    void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
 };
 
 #endif //CTOOLREFMAP_H

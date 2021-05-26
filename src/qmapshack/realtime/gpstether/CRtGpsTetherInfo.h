@@ -35,7 +35,7 @@ class CRtGpsTetherInfo : public IRtInfo, private Ui::IRtGpsTetherInfo
 {
     Q_OBJECT
 public:
-    CRtGpsTetherInfo(CRtGpsTether& source, QWidget *parent);
+    CRtGpsTetherInfo(CRtGpsTether& source, QWidget* parent);
     virtual ~CRtGpsTetherInfo();
 
     void loadSettings(QSettings& cfg);
@@ -74,8 +74,8 @@ private:
     void startRecord(const QString& filename) override;
     void fillTrackData(CTrackData& data) override;
 
-    QTcpSocket * socket;
-    QTimer * timer;
+    QTcpSocket* socket;
+    QTimer* timer;
 
     QHash<QString, fNemaLine> dict;
 

@@ -21,7 +21,7 @@
 #include "plot/CPlotData.h"
 #include "units/IUnit.h"
 
-CPlotData::CPlotData(axistype_e type, QObject * parent)
+CPlotData::CPlotData(axistype_e type, QObject* parent)
     : QObject(parent)
     , axisType(type)
 {
@@ -58,34 +58,27 @@ void CPlotData::setLimits()
         return;
     }
 
-    QList<line_t>::const_iterator line  = lines.begin();
-    if(line == lines.end())
     {
-        return;
+        const QPointF& p = lines.first().points.first();
+        xmin = p.x();
+        xmax = p.x();
+        ymin = p.y();
+        ymax = p.y();
     }
 
-    QPolygonF::const_iterator p = line->points.begin();
-    xmin = p->x();
-    xmax = p->x();
-    ymin = p->y();
-    ymax = p->y();
-
-    while(line != lines.end())
+    for(const line_t& line : qAsConst(lines))
     {
-        QPolygonF::const_iterator p = line->points.begin();
-        while(p != line->points.end())
+        const QPolygonF& points = line.points;
+        for(const QPointF& p : points)
         {
-            if(p->y() != NOFLOAT)
+            if(p.y() != NOFLOAT)
             {
-                xmin = qMin(xmin, p->x());
-                xmax = qMax(xmax, p->x());
-                ymin = qMin(ymin, p->y());
-                ymax = qMax(ymax, p->y());
+                xmin = qMin(xmin, p.x());
+                xmax = qMax(xmax, p.x());
+                ymin = qMin(ymin, p.y());
+                ymax = qMax(ymax, p.y());
             }
-            ++p;
         }
-
-        ++line;
     }
 
     if(xmin == xmax)

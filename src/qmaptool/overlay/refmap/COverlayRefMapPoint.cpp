@@ -19,7 +19,7 @@
 #include "overlay/refmap/COverlayRefMapPoint.h"
 #include "units/IUnit.h"
 
-COverlayRefMapPoint::COverlayRefMapPoint(qint32 cnt, const QPointF &ptRef, const QPointF &ptPtx, QTreeWidget *parent)
+COverlayRefMapPoint::COverlayRefMapPoint(qint32 cnt, const QPointF& ptRef, const QPointF& ptPtx, QTreeWidget* parent)
     : QTreeWidgetItem(parent)
 {
     setText(eColumnCnt, QString::number(cnt));

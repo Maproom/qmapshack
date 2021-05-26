@@ -28,7 +28,7 @@ class CFilterDouglasPeuker : public QWidget, private Ui::IFilterDouglasPeuker
 {
     Q_OBJECT
 public:
-    CFilterDouglasPeuker(CGisItemTrk& trk, QWidget *parent);
+    CFilterDouglasPeuker(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterDouglasPeuker();
 
 private slots:

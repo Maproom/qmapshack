@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/proj_x.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
@@ -26,22 +27,22 @@
 #include "units/IUnit.h"
 
 #include <interpolation.h>
-#include <proj_api.h>
 
-CPlotProfile::CPlotProfile(QWidget * parent)
+
+CPlotProfile::CPlotProfile(QWidget* parent)
     : IPlot(nullptr, CPlotData::eAxisLinear, eModeNormal, parent)
 {
     init();
 }
 
-CPlotProfile::CPlotProfile(CGisItemTrk *trk, CLimit& lim, mode_e mode, QWidget *parent)
+CPlotProfile::CPlotProfile(CGisItemTrk* trk, CLimit& lim, mode_e mode, QWidget* parent)
     : IPlot(trk, CPlotData::eAxisLinear, mode, parent)
     , limit(&lim)
 {
     init();
     connect(limit, &CLimit::sigChanged, this, &CPlotProfile::setLimits);
     setWindowTitle(trk->getNameEx());
-    updateData();
+    CPlotProfile::updateData();
 }
 
 CPlotProfile::~CPlotProfile()
@@ -58,7 +59,7 @@ void CPlotProfile::init()
         cfg.endGroup();
 
         menu->addSeparator();
-        QAction * action = new QAction(tr("Show Labels"), this);
+        QAction* action = new QAction(tr("Show Labels"), this);
         action->setCheckable(true);
         action->setChecked(showWptLabels);
         menu->addAction(action);
@@ -66,7 +67,7 @@ void CPlotProfile::init()
     }
 }
 
-void CPlotProfile::setTrack(CGisItemTrk * track, CLimit &lim)
+void CPlotProfile::setTrack(CGisItemTrk* track, CLimit& lim)
 {
     trk = track;
     trk->registerVisual(this);
@@ -106,7 +107,7 @@ void CPlotProfile::updateData()
     QPolygonF lineDem;
     QPolygonF coords;
 
-    IGisProject * project = dynamic_cast<IGisProject*>(trk->parent());
+    IGisProject* project = dynamic_cast<IGisProject*>(trk->parent());
 
     qreal elevationFactor = IUnit::self().elevationFactor;
     const CTrackData& t = trk->getTrackData();
@@ -131,12 +132,12 @@ void CPlotProfile::updateData()
             continue;
         }
 
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
+        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
         if(wpt)
         {
             CPlotData::point_t tag;
             tag.point = lineEle.last();
-            tag.icon  = wpt->getIcon();
+            tag.icon = wpt->getIcon();
             tag.label = wpt->getName();
             data->tags << tag;
         }
@@ -154,7 +155,7 @@ void CPlotProfile::updateData()
 
             CPlotData::point_t tag;
             tag.point = QPointF(trkpt.distance, trkpt.ele * elevationFactor);
-            tag.icon  = CDraw::number(cnt++, Qt::black);
+            tag.icon = CDraw::number(cnt++, Qt::black);
             tag.label = trkpt.desc.size() < 20 ? trkpt.desc : trkpt.desc.left(17) + "...";
             data->tags << tag;
         }
@@ -175,7 +176,7 @@ void CPlotProfile::updateData()
     if(trk->isInterpolationEnabled())
     {
         QPolygonF spline;
-        for(const QPointF& pt : lineEle)
+        for(const QPointF& pt : qAsConst(lineEle))
         {
             spline << QPointF(pt.x(), trk->getElevationInterpolated(pt.x()) * elevationFactor);
         }
@@ -187,7 +188,7 @@ void CPlotProfile::updateData()
     resetZoom();
 }
 
-void CPlotProfile::setMouseFocus(const CTrackData::trkpt_t * ptMouseMove)
+void CPlotProfile::setMouseFocus(const CTrackData::trkpt_t* ptMouseMove)
 {
     if(nullptr == ptMouseMove)
     {
@@ -205,7 +206,7 @@ void CPlotProfile::setMouseFocus(const CTrackData::trkpt_t * ptMouseMove)
         }
 
         posMouse1.rx() = left + data->x().val2pt(ptMouseMove->distance);
-        posMouse1.ry() = top  + data->y().val2pt(ptMouseMove->ele);
+        posMouse1.ry() = top + data->y().val2pt(ptMouseMove->ele);
     }
     update();
 }

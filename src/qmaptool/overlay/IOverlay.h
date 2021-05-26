@@ -27,7 +27,7 @@ class IOverlay : public QWidget
 {
     Q_OBJECT
 public:
-    IOverlay(QStackedWidget * parent);
+    IOverlay(QStackedWidget* parent);
     virtual ~IOverlay() = default;
 
     void toFront();
@@ -36,7 +36,7 @@ signals:
     void sigChanged();
 
 protected:
-    QStackedWidget * stackedWidget;
+    QStackedWidget* stackedWidget;
 };
 
 #endif //IOVERLAY_H

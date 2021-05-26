@@ -30,11 +30,11 @@ class CExportDatabase : public QDialog, private Ui::IExportDatabase
 {
     Q_OBJECT
 public:
-    CExportDatabase(quint64 id, QSqlDatabase& db, QWidget * parent);
+    CExportDatabase(quint64 id, QSqlDatabase& db, QWidget* parent);
     virtual ~CExportDatabase();
 
 protected:
-    void closeEvent(QCloseEvent * e) override;
+    void closeEvent(QCloseEvent* e) override;
 
 private slots:
     void slotStdout(const QString& str);
@@ -45,7 +45,7 @@ private slots:
     void slotFinished();
 
 private:
-    CExportDatabaseThread * thread;
+    CExportDatabaseThread* thread;
 };
 
 #endif //CEXPORTDATABASE_H

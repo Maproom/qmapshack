@@ -27,7 +27,7 @@ CGridPoint::CGridPoint()
 {
 }
 
-void CGridPoint::registerItem(CItemRefMap * item)
+void CGridPoint::registerItem(CItemRefMap* item)
 {
     this->item = item;
 
@@ -59,18 +59,18 @@ bool CGridPoint::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
         QPointF pt = ptPoint;
         context->convertMap2Screen(pt);
 
-        QRectF dot1(0,0,7,7);
+        QRectF dot1(0, 0, 7, 7);
         dot1.moveCenter(pt);
 
         if(state == eStateHighlight)
         {
-            p.setPen(QPen(QColor("#ffaa00"), 2));
-            p.setBrush(QColor("#ffaa00"));
+            p.setPen(QPen(QColor(0xffffaa00), 2));
+            p.setBrush(QColor(0xffffaa00));
         }
         else
         {
             p.setPen(QPen(Qt::white, 1));
-            p.setBrush(QColor("#ffaa00"));
+            p.setBrush(QColor(0xffffaa00));
         }
 
         p.drawRect(dot1);
@@ -79,7 +79,7 @@ bool CGridPoint::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
     return true;
 }
 
-void CGridPoint::mouseMoveEventFx(QMouseEvent *e)
+void CGridPoint::mouseMoveEventFx(QMouseEvent* e)
 {
     QPointF pt = e->pos();
 
@@ -118,15 +118,15 @@ void CGridPoint::mouseMoveEventFx(QMouseEvent *e)
     context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
 }
 
-void CGridPoint::mouseReleaseEventFx(QMouseEvent *e)
+void CGridPoint::mouseReleaseEventFx(QMouseEvent* e)
 {
     switch(state)
     {
     case eStateMove:
     case eStateNotSet:
-        ptPoint     = ptFocus1;
-        ptFocus1    = NOPOINTF;
-        state       = eStateSet;
+        ptPoint = ptFocus1;
+        ptFocus1 = NOPOINTF;
+        state = eStateSet;
         CCanvas::restoreOverrideCursor("CGridPoint::mouseReleaseEventFx");
         break;
 
@@ -134,9 +134,9 @@ void CGridPoint::mouseReleaseEventFx(QMouseEvent *e)
         break;
 
     case eStateHighlight:
-        ptFocus1    = ptPoint;
-        ptPoint     = NOPOINTF;
-        state       = eStateMove;
+        ptFocus1 = ptPoint;
+        ptPoint = NOPOINTF;
+        state = eStateMove;
         CCanvas::setOverrideCursor(Qt::BlankCursor, "CGridPoint::mouseReleaseEventFx");
         break;
     }
@@ -144,7 +144,7 @@ void CGridPoint::mouseReleaseEventFx(QMouseEvent *e)
     context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
 }
 
-void CGridPoint::leaveEventFx(QEvent *e)
+void CGridPoint::leaveEventFx(QEvent* e)
 {
     ptFocus1 = NOPOINTF;
 

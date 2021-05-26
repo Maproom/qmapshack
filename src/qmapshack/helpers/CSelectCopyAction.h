@@ -29,8 +29,8 @@ class CSelectCopyAction : public QDialog, private Ui::ISelectCopyAction
 {
     Q_OBJECT
 public:
-    CSelectCopyAction(const IGisItem * src, const IGisItem * tar, QWidget * parent);
-    CSelectCopyAction(const IGisProject * src, const IGisProject * tar, QWidget * parent);
+    CSelectCopyAction(const IGisItem* src, const IGisItem* tar, QWidget* parent);
+    CSelectCopyAction(const IGisProject* src, const IGisProject* tar, QWidget* parent);
     virtual ~CSelectCopyAction();
 
     enum result_e
@@ -48,7 +48,7 @@ public:
     bool allOthersToo();
 
 private slots:
-    void slotSelectResult();
+    void slotSelectResult(CSelectCopyAction::result_e r);
 
 private:
     result_e result = eResultNone;

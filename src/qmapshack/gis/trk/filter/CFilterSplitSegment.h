@@ -29,7 +29,7 @@ class CFilterSplitSegment : public QWidget, private Ui::IFilterSplitSegment
 {
     Q_OBJECT
 public:
-    CFilterSplitSegment(CGisItemTrk& trk, QWidget * parent);
+    CFilterSplitSegment(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterSplitSegment() = default;
 
 private slots:

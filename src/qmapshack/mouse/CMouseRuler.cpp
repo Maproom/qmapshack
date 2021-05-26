@@ -19,13 +19,13 @@
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/GeoMath.h"
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "mouse/CMouseRuler.h"
 #include "mouse/CScrOptRuler.h"
@@ -33,7 +33,7 @@
 #include <functional>
 #include <QtWidgets>
 
-CMouseRuler::CMouseRuler(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+CMouseRuler::CMouseRuler(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorRuler.png"), 0, 0);
@@ -161,7 +161,7 @@ void CMouseRuler::slotToWpt()
         return;
     }
 
-    IGisProject * project = CGisWorkspace::self().selectProject(false);
+    IGisProject* project = CGisWorkspace::self().selectProject(false);
     if(nullptr == project)
     {
         return;
@@ -169,7 +169,7 @@ void CMouseRuler::slotToWpt()
 
     bool first = true;
     QMutexLocker lock(&IGisItem::mutexItems);
-    for(const QPointF& pt : ruler)
+    for(const QPointF& pt : qAsConst(ruler))
     {
         if(!first)
         {
@@ -181,7 +181,7 @@ void CMouseRuler::slotToWpt()
             first = false;
         }
         qreal ele = canvas->getElevationAt(pt);
-        CGisItemWpt * wpt = new CGisItemWpt(pt * RAD_TO_DEG, ele, QDateTime::currentDateTimeUtc(), name, icon, project);
+        CGisItemWpt* wpt = new CGisItemWpt(pt * RAD_TO_DEG, ele, QDateTime::currentDateTimeUtc(), name, icon, project);
         wpt->updateDecoration(CGisItemWpt::eMarkChanged, CGisItemWpt::eMarkNone);
     }
 }
@@ -189,7 +189,7 @@ void CMouseRuler::slotToWpt()
 void CMouseRuler::slotToTrk()
 {
     QString name;
-    IGisProject * project = nullptr;
+    IGisProject* project = nullptr;
 
     if(!IGisItem::getNameAndProject(name, project, tr("track")))
     {
@@ -203,7 +203,7 @@ void CMouseRuler::slotToTrk()
 void CMouseRuler::slotToRte()
 {
     QString name;
-    IGisProject * project = nullptr;
+    IGisProject* project = nullptr;
 
     if(!IGisItem::getNameAndProject(name, project, tr("route")))
     {
@@ -216,7 +216,7 @@ void CMouseRuler::slotToRte()
 void CMouseRuler::slotToArea()
 {
     QString name;
-    IGisProject * project = nullptr;
+    IGisProject* project = nullptr;
 
     if(!IGisItem::getNameAndProject(name, project, tr("area")))
     {
@@ -296,7 +296,7 @@ void CMouseRuler::mouseMoved(const QPoint& pos)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CMouseRuler::updateStatus(const QPolygonF &line)
+void CMouseRuler::updateStatus(const QPolygonF& line)
 {
     const int N = line.size();
     if((N < 2) || !scrOptRuler->toolShowTable->isChecked())
@@ -358,16 +358,16 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
             if(delta >= 0)
             {
                 totalAscent += delta;
-                msg += QString("<td align=right>%1%2</td><td align=right></td>").arg(val).arg(unit);
+                msg += QString("<td align=right>%1%2</td><td align=right></td>").arg(val, unit);
             }
             else
             {
                 totalDescent -= delta;
-                msg += QString("<td align=right></td><td align=right>%1%2</td>").arg(val).arg(unit);
+                msg += QString("<td align=right></td><td align=right>%1%2</td>").arg(val, unit);
             }
             qreal slope = IUnit::slopeConvert(IUnit::eSlopePercent, delta / d * 100.0);
             IUnit::self().slope2string(slope, val, unit);
-            msg += QString("<td align=right>%1%2</td>").arg(val).arg(unit);
+            msg += QString("<td align=right>%1%2</td>").arg(val, unit);
         }
         else
         {
@@ -396,7 +396,7 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
     canvas->reportStatus("CMouseRuler", msg);
 }
 
-void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
+void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect)
 {
     const int N = ruler.size();
 
@@ -438,7 +438,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
                 QLineF seg2(line[n - 1], line[n]);
 
                 qreal angleStart = seg2.angle();
-                qreal angleSpan  = (seg2.angleTo(seg1) - 180);
+                qreal angleSpan = (seg2.angleTo(seg1) - 180);
 
                 p.setPen(Qt::black);
                 p.drawArc(r, angleStart * 16, angleSpan * 16);
@@ -461,7 +461,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
                 int delta = qRound(ele2 - ele1);
 
                 IUnit::self().meter2elevation(qAbs(delta), val, unit);
-                str += QString(", %1 %2%3").arg(delta > 0 ? QChar(0x2197) : QChar(0x2198)).arg(val).arg(unit);
+                str += QString(", %1 %2%3").arg(delta > 0 ? QChar(0x2197) : QChar(0x2198)).arg(val, unit);
             }
 
 

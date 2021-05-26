@@ -20,7 +20,7 @@
 
 #include <QtWidgets>
 
-CDoubleSpinBox::CDoubleSpinBox(QWidget * parent)
+CDoubleSpinBox::CDoubleSpinBox(QWidget* parent)
     : QDoubleSpinBox(parent)
 {
 }
@@ -31,11 +31,11 @@ void CDoubleSpinBox::stepBy(int steps)
     emit valueChangedByStep(value());
 }
 
-void CDoubleSpinBox::focusInEvent(QFocusEvent *event)
+void CDoubleSpinBox::focusInEvent(QFocusEvent* event)
 {
     if(!isReadOnly())
     {
-        QTimer::singleShot(0, this, SLOT(slotSelectAll()));
+        QTimer::singleShot(0, this, &CDoubleSpinBox::slotSelectAll);
     }
 
     QDoubleSpinBox::focusInEvent(event);

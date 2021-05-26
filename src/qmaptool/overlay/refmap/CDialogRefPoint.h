@@ -28,7 +28,7 @@ class CDialogRefPoint : public QDialog, private Ui::IDialogRefPoint
 {
     Q_OBJECT
 public:
-    CDialogRefPoint(QPointF& ptPtx, QPointF& ptRef, QWidget * parent);
+    CDialogRefPoint(QPointF& ptPtx, QPointF& ptRef, QWidget* parent);
     virtual ~CDialogRefPoint() = default;
 
 public slots:

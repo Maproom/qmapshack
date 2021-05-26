@@ -29,23 +29,23 @@
 
 const QString CRtGpsTether::strIcon("://icons/48x48/Gps.png");
 
-CRtGpsTether::CRtGpsTether(QTreeWidget *parent)
+CRtGpsTether::CRtGpsTether(QTreeWidget* parent)
     : IRtSource(eTypeGpsTether, false, parent)
 {
     setIcon(eColumnIcon, QIcon(strIcon));
     setText(eColumnName, "GPS TCP/IP");
     setCheckState(eColumnCheckBox, Qt::Checked);
 
-    registerWithTreeWidget();
+    CRtGpsTether::registerWithTreeWidget();
 }
 
 
 void CRtGpsTether::registerWithTreeWidget()
 {
-    QTreeWidget * tree = treeWidget();
+    QTreeWidget* tree = treeWidget();
     if(tree != nullptr)
     {
-        QTreeWidgetItem * itemInfo = new QTreeWidgetItem(this);
+        QTreeWidgetItem* itemInfo = new QTreeWidgetItem(this);
         itemInfo->setFlags(Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
         info = new CRtGpsTetherInfo(*this, tree);
         connect(info, &CRtGpsTetherInfo::sigChanged, this, &CRtGpsTether::sigChanged);
@@ -89,7 +89,7 @@ QString CRtGpsTether::getDescription() const
               );
 }
 
-void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt)
 {
     if(info.isNull())
     {
@@ -133,6 +133,6 @@ void CRtGpsTether::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF
     p.restore();
 }
 
-void CRtGpsTether::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
+void CRtGpsTether::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt)
 {
 }

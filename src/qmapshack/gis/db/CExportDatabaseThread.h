@@ -27,7 +27,7 @@ class CExportDatabaseThread : public QThread
 {
     Q_OBJECT
 public:
-    CExportDatabaseThread(quint64 id, QSqlDatabase& db, QObject * parent);
+    CExportDatabaseThread(quint64 id, QSqlDatabase& db, QObject* parent);
     virtual ~CExportDatabaseThread() = default;
 
     void start(const QString& path, bool saveAsGpx11);
@@ -42,10 +42,10 @@ signals:
 protected:
     void run() override;
     bool getKeepGoing() const;
-    void dumpFolder(quint64 id, const QString &parentName, const QString& path, QSqlDatabase& db);
+    void dumpFolder(quint64 id, const QString& parentName, const QString& path, QSqlDatabase& db);
 
 private:
-    QString simplifyString(const QString &str) const;
+    QString simplifyString(const QString& str) const;
 
     mutable QMutex mutex;
     bool keepGoing = false;

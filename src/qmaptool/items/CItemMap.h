@@ -44,7 +44,7 @@ public:
 
     void reload() override;
 
-    void drawBoundingBox(QPainter& p, IDrawContext *dc);
+    void drawBoundingBox(QPainter& p, IDrawContext* dc);
 
 private:
     QString hash;

@@ -25,7 +25,7 @@ class CMapGEMF : public IMap
 {
     Q_OBJECT
 public:
-    CMapGEMF(const QString& filename, CMapDraw *parent);
+    CMapGEMF(const QString& filename, CMapDraw* parent);
     void draw(IDrawContext::buffer_t& buf) override;
 
 private:
@@ -33,7 +33,7 @@ private:
     const quint32 MIN_ZOOM_LEVEL = 0;
 
     QImage getTile(const quint32 col, const quint32 row, const quint32 z);
-    quint64 getFilenameFromAddress(const quint64 offset, QString &filename );
+    quint64 getFilenameFromAddress(const quint64 offset, QString& filename );
 
     struct source_t
     {

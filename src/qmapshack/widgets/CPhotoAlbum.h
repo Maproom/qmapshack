@@ -28,7 +28,7 @@ class CPhotoAlbum : public QWidget, private Ui::IPhotoAlbum
 {
     Q_OBJECT
 public:
-    CPhotoAlbum(QWidget * parent);
+    CPhotoAlbum(QWidget* parent);
     virtual ~CPhotoAlbum();
 
     void reload(const QList<CGisItemWpt::image_t>& imgs);
@@ -41,8 +41,8 @@ public slots:
     void slotDelImage();
 
 protected:
-    void resizeEvent(QResizeEvent *e) override;
-    void mouseReleaseEvent(QMouseEvent  *e) override;
+    void resizeEvent(QResizeEvent* e) override;
+    void mouseReleaseEvent(QMouseEvent* e) override;
 
 private slots:
     void slotRight();

@@ -71,7 +71,7 @@ CSingleInstanceProxy::~CSingleInstanceProxy()
 
 void CSingleInstanceProxy::slotNewConnection()
 {
-    QLocalSocket * socket = server->nextPendingConnection();
+    QLocalSocket* socket = server->nextPendingConnection();
     if(socket == nullptr)
     {
         return;

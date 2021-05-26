@@ -20,7 +20,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
 
-CResolveDatabaseConflict::CResolveDatabaseConflict(QString msg, IGisItem* item, CDBProject::action_e& actionForAll, QWidget *parent)
+CResolveDatabaseConflict::CResolveDatabaseConflict(QString msg, IGisItem* item, CDBProject::action_e& actionForAll, QWidget* parent)
     : QDialog (parent),
     actionForAll (actionForAll)
 {

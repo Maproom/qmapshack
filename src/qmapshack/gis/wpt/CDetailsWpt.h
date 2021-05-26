@@ -28,7 +28,7 @@ class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
 {
     Q_OBJECT
 public:
-    CDetailsWpt(CGisItemWpt& wpt, QWidget * parent);
+    CDetailsWpt(CGisItemWpt& wpt, QWidget* parent);
     virtual ~CDetailsWpt();
 
     void disableHistory()
@@ -37,7 +37,7 @@ public:
     }
 
 private slots:
-    void slotNameChanged(const QString &name);
+    void slotNameChanged(const QString& name);
     void slotNameChangeFinished();
     void slotLinkActivated(const QString& link);
     void slotLinkActivated(const QUrl& url);

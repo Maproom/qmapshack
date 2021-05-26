@@ -25,7 +25,7 @@
 class CLineOpDeletePoint : public ILineOp
 {
 public:
-    CLineOpDeletePoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
+    CLineOpDeletePoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
     virtual ~CLineOpDeletePoint();
 
     void leftClick(const QPoint& pos) override;

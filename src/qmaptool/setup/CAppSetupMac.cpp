@@ -18,13 +18,12 @@
 
 #include "setup/CAppSetupMac.h"
 
-static QString relTranslationDir = "Resources/translations"; // app
-static QString relGdalDir        = "Resources/gdal"; // app
-static QString relProjDir        = "Resources/proj"; // app
-static QString relHelpDir        = "Resources/help"; // app
-static QString relBinDir         = "Tools"; // app
-
-static QString relLogDir         = "Library/Logs"; // home
+const QString CAppSetupMac::relTranslationDir = "Resources/translations"; // app
+const QString CAppSetupMac::relGdalDir = "Resources/gdal";        // app
+const QString CAppSetupMac::relProjDir = "Resources/proj";        // app
+const QString CAppSetupMac::relHelpDir = "Resources/help";        // app
+const QString CAppSetupMac::relBinDir = "Tools";         // app
+const QString CAppSetupMac::relLogDir = "Library/Logs";         // home
 
 
 void CAppSetupMac::extendPath()
@@ -32,7 +31,7 @@ void CAppSetupMac::extendPath()
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     QStringList envlist = env.toStringList();
     QString value = "";
-    for(int i=0; i < envlist.size(); i++)
+    for(int i = 0; i < envlist.size(); i++)
     {
         QString entry = envlist[i];
         if(entry.startsWith("PATH="))
@@ -41,7 +40,7 @@ void CAppSetupMac::extendPath()
 
             if(index != -1)
             {
-                value = entry.right(entry.length() - (index+1)) + ":";
+                value = entry.right(entry.length() - (index + 1)) + ":";
             }
             break;
         }
@@ -78,7 +77,7 @@ void CAppSetupMac::initQMapTool()
 
 QString CAppSetupMac::defaultCachePath()
 {
-    QString cachePath =  QStandardPaths::standardLocations(QStandardPaths::CacheLocation).first();
+    const QString& cachePath = QStandardPaths::standardLocations(QStandardPaths::CacheLocation).at(0);
     return IAppSetup::path(cachePath, 0, false, 0);
 }
 
@@ -86,9 +85,9 @@ QString CAppSetupMac::defaultCachePath()
 QString CAppSetupMac::userDataPath(QString subdir)
 {
 #if QT_VERSION >= 0x050400
-    QString dataDir = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation).first();
+    const QString& dataDir = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation).at(0);
 #else
-    QString dataDir = QStandardPaths::standardLocations(QStandardPaths::DataLocation).first();
+    const QString& dataDir = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
 #endif
     return IAppSetup::path(dataDir, subdir, false, 0);
 }
@@ -97,7 +96,7 @@ QString CAppSetupMac::userDataPath(QString subdir)
 QString CAppSetupMac::logDir()
 {
     // home location returns / (root) instead of user home...
-    QString home = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).first();
+    const QString& home = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).at(0);
     QDir dir = QDir(home);
     dir.cdUp();
     return IAppSetup::path(dir.absolutePath(), relLogDir, false, 0);
@@ -131,7 +130,7 @@ void CAppSetupMac::migrateDirContent(QString dest)
         wdir.mkdir(newdir);
         qDebug() << "directory created" << newdir;
 
-        qDebug() << "migrate data from "<<dirSource.absolutePath() << "to" << dirDest.absolutePath();
+        qDebug() << "migrate data from " << dirSource.absolutePath() << "to" << dirDest.absolutePath();
         QDir mvDir;
         if(!mvDir.rename(dirSource.absolutePath(), dirDest.absolutePath()))
         {

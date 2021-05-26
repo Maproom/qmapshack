@@ -28,7 +28,7 @@ class CScreenshotDialog : public QDialog, private Ui::IScreenshotDialog
 {
     Q_OBJECT
 public:
-    CScreenshotDialog(CCanvas& canvas, QWidget * parent);
+    CScreenshotDialog(CCanvas& canvas, QWidget* parent);
     virtual ~CScreenshotDialog() = default;
 
 private slots:
@@ -36,8 +36,8 @@ private slots:
     void slotPrint();
 
 private:
-    QPixmap getScreenshot(CGisItemTrk *trk);
-    CGisItemTrk * getTrackForProfile();
+    QPixmap getScreenshot(CGisItemTrk* trk);
+    CGisItemTrk* getTrackForProfile();
 
     CCanvas& canvas;
 

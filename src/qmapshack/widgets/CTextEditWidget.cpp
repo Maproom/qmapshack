@@ -27,7 +27,7 @@
 
 #include <QtWidgets>
 
-CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
+CTextEditWidget::CTextEditWidget(const QString& html, QWidget* parent)
     : QDialog(parent)
 {
     SETTINGS;
@@ -38,21 +38,21 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
 
     selectionWindow = new CTextEditWidgetSelMenu(this,
                                                  /* font style actions */ actionTextBold, actionTextItalic, actionTextUnderline,
-                                                 /* copy/paste actions */ actionCut,      actionCopy,       actionPaste
+                                                 /* copy/paste actions */ actionCut, actionCopy, actionPaste
                                                  );
 
-    QScrollBar *vbar = textEdit->verticalScrollBar();
+    QScrollBar* vbar = textEdit->verticalScrollBar();
     connect(vbar, &QAbstractSlider::valueChanged, this, &CTextEditWidget::textEditScrolled);
 
     toolBold->setDefaultAction  (actionTextBold);
     toolItalic->setDefaultAction(actionTextItalic);
     toolUnder->setDefaultAction (actionTextUnderline);
 
-    connect(actionTextBold,      &QAction::triggered, this, &CTextEditWidget::textBold);
-    connect(actionTextItalic,    &QAction::triggered, this, &CTextEditWidget::textItalic);
+    connect(actionTextBold, &QAction::triggered, this, &CTextEditWidget::textBold);
+    connect(actionTextItalic, &QAction::triggered, this, &CTextEditWidget::textItalic);
     connect(actionTextUnderline, &QAction::triggered, this, &CTextEditWidget::textUnderline);
 
-    QActionGroup *grp = new QActionGroup(this);
+    QActionGroup* grp = new QActionGroup(this);
     grp->addAction(actionAlignLeft);
     grp->addAction(actionAlignRight);
     grp->addAction(actionAlignCenter);
@@ -78,9 +78,9 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     connect(spinFontSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), textEdit, &QTextEdit::setFontPointSize);
 
     connect(textEdit, &QTextEdit::currentCharFormatChanged, this, &CTextEditWidget::currentCharFormatChanged);
-    connect(textEdit, &QTextEdit::cursorPositionChanged,    this, &CTextEditWidget::cursorPositionChanged);
-    connect(textEdit, &QTextEdit::textChanged,              this, &CTextEditWidget::cursorPositionChanged);
-    connect(textEdit, &QTextEdit::selectionChanged,         this, &CTextEditWidget::selectionChanged);
+    connect(textEdit, &QTextEdit::cursorPositionChanged, this, &CTextEditWidget::cursorPositionChanged);
+    connect(textEdit, &QTextEdit::textChanged, this, &CTextEditWidget::cursorPositionChanged);
+    connect(textEdit, &QTextEdit::selectionChanged, this, &CTextEditWidget::selectionChanged);
 
     textEdit->setHtml(html);
     textEdit->setFocus();
@@ -96,7 +96,7 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     toolCopy->setDefaultAction(actionCopy);
     toolPaste->setDefaultAction(actionPaste);
 
-    QMenu *menu = new QMenu(this);
+    QMenu* menu = new QMenu(this);
     menu->addAction(actionPastePlain);
     menu->addAction(actionPasteNormal);
     toolPaste->setMenu(menu);
@@ -121,7 +121,7 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
         removeFormat->addAction(actionResetLayout);
     }
 
-    connect(actionResetFont,   &QAction::triggered, this, &CTextEditWidget::resetFont);
+    connect(actionResetFont, &QAction::triggered, this, &CTextEditWidget::resetFont);
     connect(actionResetLayout, &QAction::triggered, this, &CTextEditWidget::resetLayout);
 
     menuTextEdit->addAction(actionSelectAll);
@@ -141,7 +141,7 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     actionCut->setEnabled(false);
     actionCopy->setEnabled(false);
 
-    QActionGroup *pasteGroup = new QActionGroup(this);
+    QActionGroup* pasteGroup = new QActionGroup(this);
     actionPastePlain->setChecked(pastePlain);
     actionPasteNormal->setChecked(!pastePlain);
     pasteGroup->addAction(actionPastePlain);
@@ -150,14 +150,14 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
 
     pasteMode(pastePlain ? actionPastePlain : actionPasteNormal);
 
-    connect(actionCut,        &QAction::triggered,                    textEdit,   &QTextEdit::cut);
-    connect(actionCopy,       &QAction::triggered,                    textEdit,   &QTextEdit::copy);
-    connect(actionSelectAll,  &QAction::triggered,                    textEdit,   &QTextEdit::selectAll);
-    connect(actionPaste,      &QAction::triggered,                    textEdit,   &CTextEdit::paste);
-    connect(actionDelete,     &QAction::triggered,                    this,       &CTextEditWidget::deleteSelected);
-    connect(textEdit,         &QTextEdit::customContextMenuRequested, this,       &CTextEditWidget::customContextMenuRequested);
-    connect(textEdit,         &QTextEdit::copyAvailable,              actionCut,  &QAction::setEnabled);
-    connect(textEdit,         &QTextEdit::copyAvailable,              actionCopy, &QAction::setEnabled);
+    connect(actionCut, &QAction::triggered, textEdit, &QTextEdit::cut);
+    connect(actionCopy, &QAction::triggered, textEdit, &QTextEdit::copy);
+    connect(actionSelectAll, &QAction::triggered, textEdit, &QTextEdit::selectAll);
+    connect(actionPaste, &QAction::triggered, textEdit, &CTextEdit::paste);
+    connect(actionDelete, &QAction::triggered, this, &CTextEditWidget::deleteSelected);
+    connect(textEdit, &QTextEdit::customContextMenuRequested, this, &CTextEditWidget::customContextMenuRequested);
+    connect(textEdit, &QTextEdit::copyAvailable, actionCut, &QAction::setEnabled);
+    connect(textEdit, &QTextEdit::copyAvailable, actionCopy, &QAction::setEnabled);
 
     connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &CTextEditWidget::clipboardDataChanged);
 }
@@ -209,7 +209,7 @@ void CTextEditWidget::textItalic()
 }
 
 
-void CTextEditWidget::textAlign(QAction *a)
+void CTextEditWidget::textAlign(QAction* a)
 {
     if (a == actionAlignLeft)
     {
@@ -325,7 +325,7 @@ void CTextEditWidget::textColor()
 }
 
 
-void CTextEditWidget::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
+void CTextEditWidget::mergeFormatOnWordOrSelection(const QTextCharFormat& format)
 {
     QTextCursor cursor = textEdit->textCursor();
     if (!cursor.hasSelection())
@@ -337,7 +337,7 @@ void CTextEditWidget::mergeFormatOnWordOrSelection(const QTextCharFormat &format
 }
 
 
-void CTextEditWidget::fontChanged(const QFont &f)
+void CTextEditWidget::fontChanged(const QFont& f)
 {
     actionTextBold->setChecked(f.bold());
     actionTextItalic->setChecked(f.italic());
@@ -345,7 +345,7 @@ void CTextEditWidget::fontChanged(const QFont &f)
 }
 
 
-void CTextEditWidget::colorChanged(const QColor &c)
+void CTextEditWidget::colorChanged(const QColor& c)
 {
     QPixmap pix(16, 16);
     pix.fill(c);
@@ -374,7 +374,7 @@ void CTextEditWidget::alignmentChanged(Qt::Alignment a)
 }
 
 
-void CTextEditWidget::currentCharFormatChanged(const QTextCharFormat &format)
+void CTextEditWidget::currentCharFormatChanged(const QTextCharFormat& format)
 {
     fontChanged(format.font());
     colorChanged(format.foreground().color());
@@ -384,10 +384,10 @@ void CTextEditWidget::currentCharFormatChanged(const QTextCharFormat &format)
 void CTextEditWidget::cursorPositionChanged()
 {
     static QHash<QTextListFormat::Style, int> styleToIndex({
-        std::make_pair(QTextListFormat::ListDisc,       1),
-        std::make_pair(QTextListFormat::ListCircle,     2),
-        std::make_pair(QTextListFormat::ListSquare,     3),
-        std::make_pair(QTextListFormat::ListDecimal,    4),
+        std::make_pair(QTextListFormat::ListDisc, 1),
+        std::make_pair(QTextListFormat::ListCircle, 2),
+        std::make_pair(QTextListFormat::ListSquare, 3),
+        std::make_pair(QTextListFormat::ListDecimal, 4),
         std::make_pair(QTextListFormat::ListLowerAlpha, 5),
         std::make_pair(QTextListFormat::ListUpperAlpha, 6),
         std::make_pair(QTextListFormat::ListLowerRoman, 7),
@@ -412,7 +412,7 @@ void CTextEditWidget::cursorPositionChanged()
     X______________BlockAllSignals______________X(this);
     comboStyle->setCurrentIndex(listStyleIndex);
 
-    const QFont &font = cursor.charFormat().font();
+    const QFont& font = cursor.charFormat().font();
     comboFont->setCurrentFont(font);
 
     int pointSize = font.pointSize();
@@ -464,19 +464,19 @@ void CTextEditWidget::textEditScrolled()
     updateSelectionWindow();
 }
 
-void CTextEditWidget::moveEvent(QMoveEvent *event)
+void CTextEditWidget::moveEvent(QMoveEvent* event)
 {
     updateSelectionWindow();
 }
 
-void CTextEditWidget::pasteMode(QAction *action)
+void CTextEditWidget::pasteMode(QAction* action)
 {
     textEdit->setPastePlain( action == actionPastePlain );
 
     actionPaste->setIcon(action->icon());
 }
 
-bool CTextEditWidget::event(QEvent *event)
+bool CTextEditWidget::event(QEvent* event)
 {
     if(event->type() == QEvent::WindowActivate)
     {
@@ -491,8 +491,8 @@ bool CTextEditWidget::event(QEvent *event)
 
 void CTextEditWidget::updateSelectionWindow()
 {
-    const QTextCursor &cursor = textEdit->textCursor();
-    const QRect       &rect   = textEdit->cursorRect();
+    const QTextCursor& cursor = textEdit->textCursor();
+    const QRect& rect = textEdit->cursorRect();
 
     // don't show the selctionWindow, if there is no selection or
     // the cursor is not visible

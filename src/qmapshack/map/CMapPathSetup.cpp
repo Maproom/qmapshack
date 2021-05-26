@@ -23,21 +23,21 @@
 
 #include <QtWidgets>
 
-CMapPathSetup::CMapPathSetup(QStringList &paths, QString& pathCache)
+CMapPathSetup::CMapPathSetup(QStringList& paths, QString& pathCache)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , paths(paths)
     , pathCache(pathCache)
 {
     setupUi(this);
 
-    connect(toolAdd,     &QToolButton::clicked,              this, &CMapPathSetup::slotAddPath);
-    connect(toolDelete,  &QToolButton::clicked,              this, &CMapPathSetup::slotDelPath);
-    connect(listWidget,  &QListWidget::itemSelectionChanged, this, &CMapPathSetup::slotItemSelectionChanged);
-    connect(pushMapHonk, &QPushButton::clicked,              this, &CMapPathSetup::slotMapHonk);
+    connect(toolAdd, &QToolButton::clicked, this, &CMapPathSetup::slotAddPath);
+    connect(toolDelete, &QToolButton::clicked, this, &CMapPathSetup::slotDelPath);
+    connect(listWidget, &QListWidget::itemSelectionChanged, this, &CMapPathSetup::slotItemSelectionChanged);
+    connect(pushMapHonk, &QPushButton::clicked, this, &CMapPathSetup::slotMapHonk);
 
-    for(const QString &path : paths)
+    for(const QString& path : paths)
     {
-        QListWidgetItem * item = new QListWidgetItem(listWidget);
+        QListWidgetItem* item = new QListWidgetItem(listWidget);
         item->setText(path);
     }
 
@@ -64,7 +64,7 @@ void CMapPathSetup::slotAddPath()
     {
         if(!paths.contains(path))
         {
-            QListWidgetItem * item = new QListWidgetItem(listWidget);
+            QListWidgetItem* item = new QListWidgetItem(listWidget);
             item->setText(path);
         }
     }
@@ -72,7 +72,7 @@ void CMapPathSetup::slotAddPath()
 
 void CMapPathSetup::slotDelPath()
 {
-    QList<QListWidgetItem *> items = listWidget->selectedItems();
+    QList<QListWidgetItem*> items = listWidget->selectedItems();
     qDeleteAll(items);
 }
 
@@ -98,7 +98,7 @@ void CMapPathSetup::accept()
     paths.clear();
     for(int i = 0; i < listWidget->count(); i++)
     {
-        QListWidgetItem *item = listWidget->item(i);
+        QListWidgetItem* item = listWidget->item(i);
         paths << item->text();
     }
 

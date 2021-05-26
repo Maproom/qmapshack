@@ -200,24 +200,24 @@ SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
 	File Files\testepsg.exe
   SetOutPath "$INSTDIR\data\"
     File /r Files\data\*.*
-  ;END GDAL and PROJ.4 Files        
+  ;END GDAL and PROJ.4 Files
 
-  ;BEGIN PROJ.4 Files    
+  ;BEGIN PROJ.4 Files
   SetOutPath $INSTDIR
-    File Files\proj_6_3.dll
+    File Files\proj_8_0.dll
     File Files\proj.exe
     File Files\projinfo.exe
     File Files\cct.exe
     File Files\cs2cs.exe
     File Files\geod.exe
-    File Files\gie.exe    
+    File Files\gie.exe
   SetOutPath "$INSTDIR\share\"
     File /r Files\share\*.*
   ;END PROJ.4 Files
 
   ;BEGIN QuaZip Files
   SetOutPath $INSTDIR
-    File Files\quazip5.dll
+    File Files\quazip1-qt5.dll
   ;END QuaZip Files
 
   ;BEGIN zLib Files

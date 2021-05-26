@@ -39,7 +39,7 @@ public:
         , eTypeGpsTether
     };
 
-    IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget * parent);
+    IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget* parent);
     virtual ~IRtSource() = default;
 
     /**
@@ -50,7 +50,7 @@ public:
 
        @return The pointer to the item or nullptr if type is unknown
      */
-    static IRtSource* create(int type, QTreeWidget * parent);
+    static IRtSource* create(int type, QTreeWidget* parent);
 
     /**
        @brief Do everything necessary to setup item after it has been reparented to tree widget
@@ -79,9 +79,9 @@ public:
      */
     virtual QString getDescription() const = 0;
 
-    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) = 0;
+    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) = 0;
 
-    virtual void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) = 0;
+    virtual void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) = 0;
 
     virtual void mouseMove(const QPointF& pos)
     {
@@ -92,7 +92,7 @@ public:
 
        @param menu  the context menu
      */
-    virtual void contextMenu(QMenu * menu) const
+    virtual void contextMenu(QMenu* menu) const
     {
     }
 
@@ -102,7 +102,7 @@ public:
        @param child     the child
        @param menu      the context menu
      */
-    virtual void contextMenuChild(QTreeWidgetItem * child, QMenu * menu) const
+    virtual void contextMenuChild(QTreeWidgetItem* child, QMenu* menu) const
     {
     }
 
@@ -122,7 +122,7 @@ public:
        @param child     the child item
        @param column    the item's column that was clicked
      */
-    virtual void itemClicked(QTreeWidgetItem * child, int column) const
+    virtual void itemClicked(QTreeWidgetItem* child, int column) const
     {
     }
 

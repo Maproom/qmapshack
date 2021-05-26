@@ -22,17 +22,19 @@
 #include <QObject>
 #include <QRegExp>
 
-inline void X______________BlockAllSignals______________X(QObject * parent)
+inline void X______________BlockAllSignals______________X(QObject* parent)
 {
-    for(QObject * obj : parent->findChildren<QObject*>(QRegExp(".*")))
+    const QList<QObject*>& children = parent->findChildren<QObject*>(QRegExp(".*"));
+    for(QObject* obj : children)
     {
         obj->blockSignals(true);
     }
 }
 
-inline void X_____________UnBlockAllSignals_____________X(QObject * parent)
+inline void X_____________UnBlockAllSignals_____________X(QObject* parent)
 {
-    for(QObject * obj : parent->findChildren<QObject*>(QRegExp(".*")))
+    const QList<QObject*>& children = parent->findChildren<QObject*>(QRegExp(".*"));
+    for(QObject* obj : children)
     {
         obj->blockSignals(false);
     }

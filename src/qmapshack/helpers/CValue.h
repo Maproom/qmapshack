@@ -23,7 +23,7 @@
 #include <QSet>
 #include <QVariant>
 
-using fMarkChanged   = std::function<void(void)>;
+using fMarkChanged = std::function<void(void)>;
 using fValueOnChange = std::function<void(const QVariant&)>;
 
 class CValue
@@ -52,7 +52,7 @@ private:
     friend QDataStream& operator<<(QDataStream& stream, const CValue& v);
     friend QDataStream& operator>>(QDataStream& stream, CValue& v);
 
-    void updateSys(const QString &tag, const QVariant& val);
+    void updateSys(const QString& tag, const QVariant& val);
 
     mode_e mode = eModeSys;
     QString cfgTag;

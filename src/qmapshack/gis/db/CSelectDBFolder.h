@@ -37,7 +37,7 @@ public:
        @param host      The host of the selected folder
        @param parent    The parent widget
      */
-    CSelectDBFolder(QList<quint64>& ids, QString& db, QString& host, QWidget * parent);
+    CSelectDBFolder(QList<quint64>& ids, QString& db, QString& host, QWidget* parent);
     virtual ~CSelectDBFolder();
 
     void setProjectsOnly(bool yes)
@@ -46,7 +46,7 @@ public:
     }
 
 private slots:
-    void slotItemExpanded(QTreeWidgetItem * item);
+    void slotItemExpanded(QTreeWidgetItem* item);
     void slotItemSelectionChanged();
 
 private:

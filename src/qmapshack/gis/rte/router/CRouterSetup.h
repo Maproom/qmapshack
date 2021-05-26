@@ -33,8 +33,8 @@ public:
     }
     virtual ~CRouterSetup();
 
-    void calcRoute(const IGisItem::key_t &key);
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal *costs = nullptr);
+    void calcRoute(const IGisItem::key_t& key);
+    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr);
     QString getOptions();
 
     bool hasFastRouting();
@@ -48,9 +48,9 @@ private slots:
 
 private:
     friend class Ui_IMainWindow;
-    CRouterSetup(QWidget * parent);
+    CRouterSetup(QWidget* parent);
 
-    static CRouterSetup * pSelf;
+    static CRouterSetup* pSelf;
 };
 
 #endif //CROUTERSETUP_H

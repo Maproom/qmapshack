@@ -45,7 +45,7 @@ public:
        @param viewport  the viewport in units of rad
        @param rt       the draw context to be used
      */
-    void draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt) const;
+    void draw(QPainter& p, const QPolygonF& viewport, CRtDraw* rt) const;
 
     /**
        @brief Draw all data that is time variant and can't wait for a full update
@@ -56,7 +56,7 @@ public:
        @param viewport  the viewport in units of rad
        @param rt       the draw context to be used
      */
-    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) const;
+    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) const;
 
     /**
        @brief Check if a source of a given type is already loaded
@@ -71,7 +71,7 @@ public:
 
        @param source    pointer to the source, the treewidget will take over pointer as parent
      */
-    void addSource(IRtSource * source);
+    void addSource(IRtSource* source);
 
     /**
        @brief Distribute mouse move event over all availabal sources.
@@ -84,8 +84,8 @@ signals:
     void sigChanged();
 
 private slots:
-    void slotItemChanged(QTreeWidgetItem * item, int column);
-    void slotItemClicked(QTreeWidgetItem * item, int column);
+    void slotItemChanged(QTreeWidgetItem* item, int column);
+    void slotItemClicked(QTreeWidgetItem* item, int column);
     void slotContextMenu(const QPoint& point);
     void slotAddSource();
     void slotDeleteSource();
@@ -93,11 +93,11 @@ private slots:
 
 private:
     friend class CMainWindow;
-    CRtWorkspace(QWidget * parent);
+    CRtWorkspace(QWidget* parent);
 
-    static CRtWorkspace * pSelf;
+    static CRtWorkspace* pSelf;
 
-    QMenu * menu;
+    QMenu* menu;
 };
 
 #endif //CRTWORKSPACE_H

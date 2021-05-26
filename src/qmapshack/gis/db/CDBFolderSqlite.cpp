@@ -23,7 +23,7 @@
 #include <QtSql>
 #include <QtWidgets>
 
-CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget *parent)
+CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget* parent)
     : IDBFolderSql(IDB::db, parent)
     , filename(filename)
 {

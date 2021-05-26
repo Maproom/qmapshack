@@ -26,7 +26,7 @@ class CCanvasSelect : public QDialog, private Ui::ICanvasSelect
 {
     Q_OBJECT
 public:
-    CCanvasSelect(CCanvas* & canvas, QWidget * parent);
+    CCanvasSelect(CCanvas*& canvas, QWidget* parent);
     virtual ~CCanvasSelect() = default;
 
 public slots:
@@ -34,7 +34,7 @@ public slots:
     void accept() override;
 
 private:
-    CCanvas* & canvas;
+    CCanvas*& canvas;
 };
 
 #endif //CCANVASSELECT_H

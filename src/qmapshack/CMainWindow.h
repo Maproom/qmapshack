@@ -27,6 +27,7 @@
 
 class CMapList;
 class CDemList;
+class CPoiList;
 class QLabel;
 class CGisWorkspace;
 class CGisDatabase;
@@ -48,7 +49,7 @@ public:
         return *pSelf;
     }
 
-    static QWidget * getBestWidgetForParent();
+    static QWidget* getBestWidgetForParent();
 
     QString getHomePath()
     {
@@ -84,14 +85,15 @@ public:
 
     virtual ~CMainWindow();
 
-    void addMapList(CMapList *list, const QString& name);
-    void addDemList(CDemList *list, const QString& name);
-    void addWidgetToTab(QWidget * w);
+    void addMapList(CMapList* list, const QString& name);
+    void addDemList(CDemList* list, const QString& name);
+    void addPoiList(CPoiList* list, const QString& name);
+    void addWidgetToTab(QWidget* w);
 
     bool isScaleVisible()  const;
     bool isGridVisible()   const;
     bool isNight()         const;
-    bool isPOIText()       const;
+    bool isPoiText()       const;
     bool isMapToolTip()    const;
     bool isShowMinMaxTrackLabels() const;
 
@@ -116,12 +118,12 @@ public:
        @param pos   a position in units of [rad]
        @return If no elevation value can be found for the position NOFLOAT is returned.
      */
-    qreal getElevationAt(const QPointF &pos) const;
-    void  getElevationAt(const QPolygonF& pos, QPolygonF &ele) const;
-    void  getElevationAt(SGisLine &line) const;
+    qreal getElevationAt(const QPointF& pos) const;
+    void  getElevationAt(const QPolygonF& pos, QPolygonF& ele) const;
+    void  getElevationAt(SGisLine& line) const;
 
-    qreal getSlopeAt(const QPointF &pos) const;
-    void getSlopeAt(const QPolygonF &pos, QPolygonF& slope) const;
+    qreal getSlopeAt(const QPointF& pos) const;
+    void getSlopeAt(const QPolygonF& pos, QPolygonF& slope) const;
     /**
        @brief Get pointer to the currently visible canvas object.
        @return If the currently visible tab does not contain a CCanvas object 0 is returned.
@@ -129,14 +131,19 @@ public:
     CCanvas* getVisibleCanvas() const;
     QList<CCanvas*> getCanvas() const;
 
-    QAction * getMapSetupAction()
+    QAction* getMapSetupAction()
     {
         return actionSetupMapPaths;
     }
 
-    QAction * getDemSetupAction()
+    QAction* getDemSetupAction()
     {
         return actionSetupDEMPaths;
+    }
+
+    QAction* getPoiSetupAction()
+    {
+        return actionSetupPOIPaths;
     }
 
     void loadGISData(const QStringList& filenames);
@@ -149,14 +156,16 @@ signals:
 public slots:
     void slotLinkActivated(const QString& link);
     void slotLinkActivated(const QUrl& url);
+    void slotSetupMapView();
+    void slotSetupGrid();
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) override;
-#ifdef WIN32
-    bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);
-#endif // WIN32
-    void dragEnterEvent(QDragEnterEvent *event) override;
-    void dropEvent(QDropEvent *event) override;
+    bool eventFilter(QObject* obj, QEvent* event) override;
+#ifdef Q_OS_WIN64
+    bool CMainWindow::nativeEvent(const QByteArray& eventType, void* message, long* result);
+#endif // Q_OS_WIN64
+    void dragEnterEvent(QDragEnterEvent* event) override;
+    void dropEvent(QDropEvent* event) override;
 
 
 private slots:
@@ -173,10 +182,9 @@ private slots:
     void slotUpdateTabWidgets();
     void slotSetupMapFont();
     void slotSetupMapBackground();
-    void slotSetupGrid();
     void slotSetupMapPath();
+    void slotSetupPoiPath();
     void slotSetupDemPath();
-    void slotSetupMapView();
     void slotSetupTimeZone();
     void slotSetupUnits();
     void slotSetupWorkspace();
@@ -202,9 +210,11 @@ private slots:
     void slotDockFloating(bool floating);
     void slotRenameView();
     void slotHelp();
+    void slotMapMoveAndZoom(int idx, const QPointF& focus);
+    void slotLinkMapViews(bool on);
 
 private:
-    friend int main(int argc, char ** argv);
+    friend int main(int argc, char** argv);
     CMainWindow();
     void prepareMenuForMac();
     void testForNoView();
@@ -213,12 +223,13 @@ private:
     void hideDocks();
     void displayRegular();
     void displayFullscreen();
-    CCanvas * addView(const QString &name);
+    CCanvas* addView(const QString& name);
     void setupHomePath();
 
-    static CMainWindow * pSelf;
+    static CMainWindow* pSelf;
     static QDir homeDir;
     static const QString mapsPath;
+    static const QString poisPath;
     static const QString demPath;
     static const QString routinoPath;
     static const QString brouterPath;
@@ -228,26 +239,25 @@ private:
 
 
     /// status bar label
-    QLabel * lblPosWGS84;
-    QLabel * lblElevation;
-    QLabel * lblSlope;
-    QLabel * lblPosGrid;
+    QLabel* lblPosWGS84;
+    QLabel* lblElevation;
+    QLabel* lblSlope;
+    QLabel* lblPosGrid;
 
     QFont mapFont;
 
-    CGisWorkspace * widgetGisWorkspace;
-    CGisDatabase * widgetGisDatabase;
-    CRtWorkspace * widgetRtWorkspace;
+    CGisWorkspace* widgetGisWorkspace;
+    CGisDatabase* widgetGisDatabase;
+    CRtWorkspace* widgetRtWorkspace;
 
-    CToolBarConfig * toolBarConfig;
-    CGeoSearchConfig * geoSearchConfig;
+    CToolBarConfig* toolBarConfig;
+    CGeoSearchConfig* geoSearchConfig;
 
-    CGeoSearchWeb * geoSearchWeb;
-    CWptIconManager * wptIconManager;
+    CGeoSearchWeb* geoSearchWeb;
+    CWptIconManager* wptIconManager;
 
-    QList<QDockWidget *> docks;
-    QList<QDockWidget *> activeDocks;
-    Qt::WindowStates displayMode = Qt::WindowMaximized;
+    QList<QDockWidget*> docks;
+    QList<QDockWidget*> activeDocks;
     QByteArray dockStates;
     bool menuVisible = false;
 

@@ -28,7 +28,7 @@ class CGisItemRate : public QDialog, private Ui::IGisItemRate
     Q_OBJECT
 
 public:
-    CGisItemRate(QWidget *parent = nullptr, const QSet<QString>& commonKeywords = QSet<QString>(), qreal rating = 0);
+    CGisItemRate(QWidget* parent = nullptr, const QSet<QString>& commonKeywords = QSet<QString>(), qreal rating = 0);
     ~CGisItemRate();
 
     qreal getRating();

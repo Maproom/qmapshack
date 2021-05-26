@@ -28,14 +28,14 @@ class CItemListWidget : public QWidget, private Ui::IItemListWidget
 {
     Q_OBJECT
 public:
-    CItemListWidget(QWidget * parent);
+    CItemListWidget(QWidget* parent);
     virtual ~CItemListWidget() = default;
 
     void saveSettings(QSettings& cfg);
     void loadSettings(QSettings& cfg);
 
-    IItem * currentItem();
-    IItem * item(int n);
+    IItem* currentItem();
+    IItem* item(int n);
 
     qint32 count() const
     {
@@ -55,7 +55,7 @@ public:
 
         qSort(items.begin(), items.end(), lessThan);
 
-        for(QListWidgetItem* item : items)
+        for(QListWidgetItem* item : qAsConst(items))
         {
             listFiles->addItem(item);
         }
@@ -65,7 +65,7 @@ public:
 
 
 signals:
-    void sigAddItem(const QString& filename, QListWidget * list);
+    void sigAddItem(const QString& filename, QListWidget* list);
     void sigSelectionChanged();
     void sigChanged();
 

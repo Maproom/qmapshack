@@ -31,7 +31,7 @@ struct ovl_head_entry_t
 
 QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl)
 {
-    QIODevice * dev = s.device();
+    QIODevice* dev = s.device();
     qint64 pos = dev->pos();
 
     char magic[9];
@@ -185,7 +185,7 @@ QDataStream& operator <<(QDataStream& s, IQlgtOverlay& ovl)
 }
 
 
-IQlgtOverlay::IQlgtOverlay(quint64 id, QObject *parent)
+IQlgtOverlay::IQlgtOverlay(quint64 id, QObject* parent)
     : IItem(id)
 {
 }

@@ -23,7 +23,7 @@
 
 #include <QtSql>
 
-CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase &db)
+CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase& db)
     : type(0)
     , locked(false)
     , diary(nullptr)

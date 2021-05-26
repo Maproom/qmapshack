@@ -26,7 +26,7 @@ class IRouter : public QWidget
 {
     Q_OBJECT
 public:
-    IRouter(bool fastRouting, QWidget * parent);
+    IRouter(bool fastRouting, QWidget* parent);
     virtual ~IRouter();
 
     virtual void calcRoute(const IGisItem::key_t& key) = 0;

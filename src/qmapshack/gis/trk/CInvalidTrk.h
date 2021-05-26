@@ -27,7 +27,7 @@ class CInvalidTrk : public QDialog, private Ui::IInvalidTrk
 {
     Q_OBJECT
 public:
-    CInvalidTrk(CGisItemTrk& trk, QWidget * parent);
+    CInvalidTrk(CGisItemTrk& trk, QWidget* parent);
     virtual ~CInvalidTrk();
 
 public slots:

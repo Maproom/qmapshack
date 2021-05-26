@@ -28,15 +28,15 @@
 #include <QtWidgets>
 
 
-CLostFoundProject::CLostFoundProject(const QString &dbName, CGisListWks * parent)
+CLostFoundProject::CLostFoundProject(const QString& dbName, CGisListWks* parent)
     : CDBProject(parent)
 {
-    type    = eTypeLostFound;
-    db      = QSqlDatabase::database(dbName);
+    type = eTypeLostFound;
+    db = QSqlDatabase::database(dbName);
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/DeleteMultiple.png"));
 
-    filename        = dbName;
-    metadata.name   = tr("Lost & Found");
+    filename = dbName;
+    metadata.name = tr("Lost & Found");
 
     setupName(dbName);
 
@@ -56,7 +56,7 @@ void CLostFoundProject::updateFromDb()
 
     while(query.next())
     {
-        quint64 id   = query.value(0).toULongLong();
+        quint64 id = query.value(0).toULongLong();
         quint32 type = query.value(1).toUInt();
 
         IGisItem::newGisItem(type, id, db, this);

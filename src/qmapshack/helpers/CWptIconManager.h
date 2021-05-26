@@ -19,8 +19,12 @@
 #ifndef CWPTICONMANAGER_H
 #define CWPTICONMANAGER_H
 
+#include "misc.h"
+
+#include <QAction>
 #include <QFont>
 #include <QMap>
+#include <QMenu>
 #include <QObject>
 #include <QPoint>
 #include <QString>
@@ -48,9 +52,11 @@ public:
 
 
     void init();
-    QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src = nullptr);
-    QString selectWptIcon(QWidget * parent);
-    QMenu * getWptIconMenu(const QString& title, QObject * obj, const char * slot, QWidget * parent);
+    QPixmap getWptIconByName(const QString& name, QPointF& focus, QString* src = nullptr);
+    QString selectWptIcon(QWidget* parent);
+
+    QMenu* getWptIconMenu(const QString& title, QObject* obj, const char* slot, QWidget* parent);
+
     QPixmap loadIcon(const QString& path);
 
     const QMap<QString, icon_t>& getWptIcons()
@@ -62,14 +68,14 @@ public:
 
 private:
     friend class CMainWindow;
-    CWptIconManager(QObject * parent);
+    CWptIconManager(QObject* parent);
 
     void setWptIconByName(const QString& name, const QString& filename);
     void setWptIconByName(const QString& name, const QPixmap& icon);
     void removeNumberedBullets();
 
-    static CWptIconManager * pSelf;
-    static const char * wptDefault;
+    static CWptIconManager* pSelf;
+    static const char* wptDefault;
 
     QFont lastFont;
 

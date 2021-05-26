@@ -32,13 +32,21 @@ public:
     QString defaultCachePath() override;
     QString userDataPath(QString subdir = 0) override;
     QString logDir() override;
-    QString findExecutable(const QString &name) override { return QStandardPaths::findExecutable(name); }
+    QString findExecutable(const QString& name) override { return QStandardPaths::findExecutable(name); }
     QString helpFile() override;
 
 private:
     QDir getApplicationDir(QString subdir);
     void migrateDirContent(QString dest);
     void extendPath();
+
+    static QString relTranslationDir;
+    static QString relRoutinoDir;
+    static QString relGdalDir;
+    static QString relProjDir;
+    static QString relHelpDir;
+    static QString relBinDir;
+    static QString relLogDir;
 };
 
 #endif // CAPPSETUPMAC_H

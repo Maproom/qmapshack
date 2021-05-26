@@ -7,7 +7,8 @@ ALL BUILD : Clean, puis Build
 - Suppression de l'affichage des ellipses noires des points intermédiaires lors du routage auto
 - Creator = Edge305
 - Enlever les points bleus superposés d'Openmtbmap
-- Accepter les fichiers Suunto sans données de position (mesures temp pression) 
+- Accepter les fichiers Suunto sans données de position (mesures temp pression)
+- Ajouter activité "Measurements"
 - \msvc_64\copyfiles.bat à remplacer ou modifier
 - \msvc_64\QMapShack_Installer.nsi à remplacer ou modifier
 
@@ -85,7 +86,7 @@ ligne 234 :
     samplesList.last()["Longitude"] = (duration / (1000.0 * 3600.0)) * 0.008983;
 
 
-//////// Ajout activité "Measurements" ////////////////////////////////////////////////////////////////
+//////// Ajouter activité "Measurements" ////////////////////////////////////////////////////////////////
 Ajout des icônes dans \src\icons:
 	ActMeasurements.svg
 	16x16/ActMeasurements.png

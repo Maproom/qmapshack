@@ -140,6 +140,39 @@ void CTrackData::getPolyline(SGisLine& l) const
     }
 }
 
+void CTrackData::getPolylineRange(SGisLine& l, qint32 rangeStart, qint32 rangeEnd, bool getSubPixel) const
+{
+    l.clear();
+    for (const trkseg_t &curSeg : segs)
+    {
+        for (const trkpt_t &pt : curSeg.pts)
+        {
+            if((pt.idxTotal < rangeStart) && (rangeStart != NOIDX))
+            {
+                continue;
+            }
+            if((pt.idxTotal > rangeEnd) && (rangeEnd != NOIDX))
+            {
+                break;
+            }
+            if(pt.isHidden())
+            {
+                continue;
+            }
+            if(pt.hasFlag(trkpt_t::eFlagSubpt))
+            {
+                if(getSubPixel)
+                {
+                    l << IGisLine::point_t(pt.radPoint());
+                }
+            } else
+            {
+                l << IGisLine::point_t(pt.radPoint());
+            }
+        }
+    }
+}
+
 void CTrackData::getPolyline(QPolygonF& l) const
 {
     l.clear();

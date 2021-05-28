@@ -309,6 +309,7 @@ public:
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
 
     void getNogoAreas(QList<IGisItem*>& nogos);
+
     /**
        @brief Delete all items with matching key from workspace
 
@@ -379,6 +380,7 @@ public:
 
     void convertRouteToTrack(const IGisItem::key_t& key);
 
+    void convertTrackToRoute(const IGisItem::key_t& key);
 
     void cutTrkByKey(const IGisItem::key_t& key);
 

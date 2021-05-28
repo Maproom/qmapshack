@@ -90,6 +90,7 @@ CScrOptRangeTool::CScrOptRangeTool(CGisItemTrk& trk, CMouseRangeTrk* mouse, CCan
     connect(toolSetActivity, &QToolButton::clicked, this, &CScrOptRangeTool::slotActivity);
     connect(toolDelete, &QToolButton::clicked, this, &CScrOptRangeTool::slotDelete);
     connect(toolCopy, &QToolButton::clicked, this, &CScrOptRangeTool::slotCopy);
+    connect(toolToRoute, &QToolButton::clicked, this, &CScrOptRangeTool::slotToRoute);
 
     connect(toolSetup, &QToolButton::clicked, this, &CScrOptRangeTool::slotSetup);
 }
@@ -230,6 +231,13 @@ void CScrOptRangeTool::slotCopy()
     trk.copySelectedPoints();
     actions[int(actionCopy)]();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+}
+
+void CScrOptRangeTool::slotToRoute()
+{
+  QMutexLocker lock(&IGisItem::mutexItems);
+  trk.toRoute();
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CScrOptRangeTool::slotDelete()

@@ -30,6 +30,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
@@ -391,6 +392,12 @@ void CGisItemTrk::getPolylineFromData(SGisLine& l) const
 {
     QMutexLocker lock(&mutexItems);
     trk.getPolyline(l);
+}
+
+void CGisItemTrk::getPolylineRangeFromData(SGisLine& l, qint32 rangeStart, qint32 rangeEnd, bool getSubPixel) const
+{
+    QMutexLocker lock(&mutexItems);
+    trk.getPolylineRange(l, rangeStart, rangeEnd, getSubPixel);
 }
 
 void CGisItemTrk::getPolylineDegFromData(QPolygonF& l) const
@@ -3401,4 +3408,32 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
     });
 
     return map;
+}
+
+void CGisItemTrk::toRoute()
+{
+    qint32 idx1, idx2;
+    QString name;
+
+    getMouseRange(idx1, idx2, true);
+
+    if(NOIDX == idx1)
+    {
+        name = getName();
+    }
+    else
+    {
+        name = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
+    }
+
+    IGisProject* project = nullptr;
+    if(!getNameAndProject(name, project, tr("route")))
+    {
+       return;
+    }
+
+    SGisLine points;
+    getPolylineRangeFromData(points, idx1, idx2);
+
+    new CGisItemRte(points, name, project, NOIDX);
 }

@@ -52,7 +52,7 @@ private slots:
     void slotAddElevation();
     void slotAddInfo();
     void slotTags();
-
+    void slotToRoute();
 
 private:
     IGisItem::key_t key;

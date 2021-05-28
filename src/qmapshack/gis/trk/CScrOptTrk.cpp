@@ -77,6 +77,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk* trk, const QPoint& point, IMouse* parent)
     connect(toolNogo, &QToolButton::clicked, this, &CScrOptTrk::slotNogo);
     connect(toolAddElevation, &QToolButton::clicked, this, &CScrOptTrk::slotAddElevation);
     connect(toolAddInfo, &QToolButton::clicked, this, &CScrOptTrk::slotAddInfo);
+    connect(toolToRoute, &QToolButton::clicked, this, &CScrOptTrk::slotToRoute);
 
     connect(label, &QLabel::linkActivated, this, &CScrOptTrk::slotLinkActivated);
 
@@ -195,6 +196,14 @@ void CScrOptTrk::slotAddInfo()
 
     CScrOptSemaphoreLocker lock(*this);
     CGisWorkspace::self().addTrkInfoByKey(key);
+}
+
+void CScrOptTrk::slotToRoute()
+{
+    close();
+
+    CScrOptSemaphoreLocker lock(*this);
+    CGisWorkspace::self().convertTrackToRoute(key);
 }
 
 void CScrOptTrk::slotTags()

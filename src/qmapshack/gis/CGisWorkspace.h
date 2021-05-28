@@ -379,6 +379,7 @@ public:
 
     void convertRouteToTrack(const IGisItem::key_t& key);
 
+    void convertTrackToRoute(const IGisItem::key_t& key);
 
     void cutTrkByKey(const IGisItem::key_t& key);
 

@@ -14978,7 +14978,7 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="131"/>
         <source>Show tags in workspace tree. Not recommended for small screens.</source>
-        <translation>Tags im Arbeitsplatz anzeigen. Nicht zu empfehlen für keine Bildschirme.</translation>
+        <translation>Tags im Arbeitsplatz anzeigen. Nicht zu empfehlen für kleine Bildschirme.</translation>
     </message>
 </context>
 <context>

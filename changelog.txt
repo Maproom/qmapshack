@@ -1,5 +1,6 @@
 V1.XX.X
 [QMS-400] Set focus in text field
+[QMS-401] Crash when using "select items on map" with a large amount of items
 
 V1.16.0
 [QMS-220] "Select items from map" misses items

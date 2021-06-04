@@ -21,12 +21,14 @@
 #include "gis/CGisWorkspace.h"
 #include "gis/Poi.h"
 #include "gis/trk/CActivityTrk.h"
+#include "helpers/CTryMutexLocker.h"
 #include "helpers/CWptIconManager.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CScrOptSelect.h"
+
 #include <QtWidgets>
 
-QMutex CMouseSelect::mutexPoisFound(QMutex::NonRecursive);
+QMutex CMouseSelect::mutex(QMutex::NonRecursive);
 
 CMouseSelect::CMouseSelect(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouseSelect(gis, canvas, mouse)
@@ -63,6 +65,12 @@ CMouseSelect::~CMouseSelect()
 
 void CMouseSelect::findItems(QList<IGisItem*>& items)
 {
+    CTryMutexLocker lock(mutex);
+    if(!lock.try_lock())
+    {
+        return;
+    }
+
     CScrOptSelect* scrOptSelect = dynamic_cast<CScrOptSelect*>((IScrOpt*)scrOpt);
     IGisItem::selflags_t modeSelection = scrOptSelect->getModeSelection();
 
@@ -169,10 +177,6 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect&
         return;
     }
 
-    if(!mutexPoisFound.tryLock())
-    {
-        return;
-    }
     QList<IGisItem*> items;
     findItems(items);
 
@@ -193,7 +197,6 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect&
     }
 
     IMouseSelect::draw(p, needsRedraw, rect);
-    mutexPoisFound.unlock();
 }
 
 void CMouseSelect::slotUpdate()
@@ -204,11 +207,12 @@ void CMouseSelect::slotUpdate()
 
 void CMouseSelect::slotCopy() const
 {
+    QMutexLocker lock(&mutex);
+
     //Project is a nullptr if the user cancels the Dialog
     IGisProject* project = CGisWorkspace::self().copyItemsByKey(itemKeys);
     if(project != nullptr)
     {
-        QMutexLocker lock(&mutexPoisFound);
         CGisWorkspace::self().addPoisAsWpt(poisFound, project);
     }
     canvas->resetMouse();
@@ -216,42 +220,49 @@ void CMouseSelect::slotCopy() const
 
 void CMouseSelect::slotDelete() const
 {
+    QMutexLocker lock(&mutex);
     CGisWorkspace::self().delItemsByKey(itemKeys);
     canvas->resetMouse();
 }
 
 void CMouseSelect::slotRoute() const
 {
+    QMutexLocker lock(&mutex);
     CGisWorkspace::self().makeRteFromWpt(itemKeys);
     canvas->resetMouse();
 }
 
 void CMouseSelect::slotEditPrxWpt() const
 {
+    QMutexLocker lock(&mutex);
     CGisWorkspace::self().editPrxWpt(itemKeys);
     canvas->resetMouse();
 }
 
 void CMouseSelect::slotCombineTrk() const
 {
+    QMutexLocker lock(&mutex);
     CGisWorkspace::self().combineTrkByKey(itemKeys, itemKeys);
     canvas->resetMouse();
 }
 
 void CMouseSelect::slotActivityTrk() const
 {
+    QMutexLocker lock(&mutex);
     CActivityTrk::getMenu(itemKeys, CMainWindow::self().getBestWidgetForParent(), true);
     canvas->resetMouse();
 }
 
 void CMouseSelect::slotColorTrk() const
 {
+    QMutexLocker lock(&mutex);
     CGisWorkspace::self().colorTrkByKey(itemKeys);
     canvas->resetMouse();
 }
 
 void CMouseSelect::slotSymWpt() const
 {
+    QMutexLocker lock(&mutex);
     QString iconName = CWptIconManager::self().selectWptIcon(CMainWindow::self().getBestWidgetForParent());
     if(iconName.isEmpty())
     {
@@ -264,6 +275,7 @@ void CMouseSelect::slotSymWpt() const
 
 void CMouseSelect::slotEleWptTrk() const
 {
+    QMutexLocker lock(&mutex);
     CGisWorkspace::self().addEleToWptTrkByKey(itemKeys);
     canvas->resetMouse();
 }

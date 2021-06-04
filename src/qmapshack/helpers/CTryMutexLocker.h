@@ -25,10 +25,21 @@ class CTryMutexLocker
 {
 public:
     CTryMutexLocker(QMutex& mutex) : m_mutex(mutex){}
-    ~CTryMutexLocker() {m_mutex.unlock();}
-    bool try_lock(){return m_mutex.tryLock();}
+    ~CTryMutexLocker()
+    {
+        if(needsUnlock)
+        {
+            m_mutex.unlock();
+        }
+    }
+    bool try_lock()
+    {
+        needsUnlock = m_mutex.tryLock();
+        return needsUnlock;
+    }
 private:
     QMutex& m_mutex;
+    bool needsUnlock {false};
 };
 
 #endif //CTRYMUTEXLOCKER_H

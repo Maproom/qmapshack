@@ -309,6 +309,16 @@ public:
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
 
     void getNogoAreas(QList<IGisItem*>& nogos);
+
+    /**
+           @brief Get access to the workspace list
+
+           @return the workspace list
+    */
+    CGisListWks *getWks(void)
+    {
+        return treeWks;
+    }
     /**
        @brief Delete all items with matching key from workspace
 

@@ -30,6 +30,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
+#include "gis/trk/CToRouteNameProjectDialog.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
@@ -3413,27 +3414,31 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
 void CGisItemTrk::toRoute()
 {
     qint32 idx1, idx2;
-    QString name;
+    QString routeName;
+    IGisProject::type_e type = IGisProject::eTypeQms;
+    QString projectName = getParentProject()->getName();
+
 
     getMouseRange(idx1, idx2, true);
 
     if(NOIDX == idx1)
     {
-        name = getName();
+        routeName = getName();
     }
     else
     {
-        name = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
+        routeName = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
     }
 
-    IGisProject* project = nullptr;
-    if(!getNameAndProject(name, project, tr("route")))
+    CToRouteNameProjectDialog dlg(projectName, routeName, type);
+    if(dlg.exec() == QDialog::Rejected)
     {
-       return;
+        return;
     }
+    IGisProject* project = dlg.getProject();
 
     SGisLine points;
-    getPolylineRangeFromData(points, idx1, idx2);
+    getPolylineRangeFromData(points, idx1, idx2, dlg.getSaveSubPoints());
 
-    new CGisItemRte(points, name, project, NOIDX);
+    new CGisItemRte(points, routeName, project, NOIDX);
 }

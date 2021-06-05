@@ -30,7 +30,6 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
-#include "gis/trk/CToRouteNameProjectDialog.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
@@ -40,6 +39,7 @@
 
 #include <QtWidgets>
 #include <QtXml>
+#include "gis/trk/CTrkToRteDialog.h"
 
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
@@ -3430,7 +3430,7 @@ void CGisItemTrk::toRoute()
         routeName = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
     }
 
-    CToRouteNameProjectDialog dlg(projectName, routeName, type);
+    CTrkToRteDialog dlg(projectName, routeName, type);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;

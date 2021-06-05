@@ -16,12 +16,12 @@
 
 **********************************************************************************************/
 
-#ifndef CTOROUTENAMEPROJECTDIALOG_H
-#define CTOROUTENAMEPROJECTDIALOG_H
+#ifndef CTRKTORTEDIALOG_H
+#define CTRKTORTEDIALOG_H
 
 #include "gis/prj/IGisProject.h"
 #include "gis/CGisWorkspace.h"
-#include "ui_IToRouteNameProjectDialog.h"
+#include "ui_ITrkToRteDialog.h"
 #include <QDialog>
 
 class QTreeWidget;
@@ -29,15 +29,15 @@ class QTreeWidget;
 /*
  * Dialog Class for the track to route conversion.
  */
-class CToRouteNameProjectDialog : public QDialog, private Ui::IToRouteNameProjectDialog
+class CTrkToRteDialog : public QDialog, private Ui::ITrkToRteDialog
 {
     Q_OBJECT
 public:
     /**
        @brief Shows the Dialog and preselects the project and route name
      */
-    CToRouteNameProjectDialog(QString& projectName, QString& routeName, IGisProject::type_e& type);
-    virtual ~CToRouteNameProjectDialog();
+    CTrkToRteDialog(QString& projectName, QString& routeName, IGisProject::type_e& type);
+    virtual ~CTrkToRteDialog();
 
     /**
        @brief Returns the selected or new project

@@ -26,11 +26,11 @@
 #include "gis/gpx/CGpxProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "helpers/CSettings.h"
-#include "CToRouteNameProjectDialog.h"
+#include "gis/trk/CTrkToRteDialog.h"
 
 #include <QtWidgets>
 
-CToRouteNameProjectDialog::CToRouteNameProjectDialog(QString& projectName, QString& routeName,
+CTrkToRteDialog::CTrkToRteDialog(QString& projectName, QString& routeName,
                                                      IGisProject::type_e& type)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , routeName(routeName)
@@ -39,7 +39,7 @@ CToRouteNameProjectDialog::CToRouteNameProjectDialog(QString& projectName, QStri
 {
     setupUi(this);
     SETTINGS;
-    cfg.beginGroup("RouteToTrack");
+    cfg.beginGroup("TrkToRt");
     saveSubPoints = cfg.value("saveSubPoints", false).toBool();
     cfg.endGroup();
 
@@ -94,28 +94,28 @@ CToRouteNameProjectDialog::CToRouteNameProjectDialog(QString& projectName, QStri
     buttonBoxEnabled();
     setType(type);
 
-    connect(listWidgetProjects, &QListWidget::itemClicked, this, &CToRouteNameProjectDialog::slotItemClicked);
-    connect(listWidgetProjects, &QListWidget::itemDoubleClicked, this, &CToRouteNameProjectDialog::slotItemDoubleClicked);
-    connect(lineEditNewProject, &QLineEdit::textChanged, this, &CToRouteNameProjectDialog::slotProjectChanged);
-    connect(lineEditNewProject, &QLineEdit::textEdited, this, &CToRouteNameProjectDialog::slotProjectEdited);
-    connect(radioQms, &QRadioButton::clicked, this, &CToRouteNameProjectDialog::slotTypeChanged);
-    connect(radioGpx, &QRadioButton::clicked, this, &CToRouteNameProjectDialog::slotTypeChanged);
-    connect(radioDatabase, &QRadioButton::toggled, this, &CToRouteNameProjectDialog::slotTypeChanged);
-    connect(lineEditRouteName, &QLineEdit::textChanged, this, &CToRouteNameProjectDialog::slotRouteChanged);
-    connect(lineEditRouteName, &QLineEdit::textEdited, this, &CToRouteNameProjectDialog::slotRouteChanged);
+    connect(listWidgetProjects, &QListWidget::itemClicked, this, &CTrkToRteDialog::slotItemClicked);
+    connect(listWidgetProjects, &QListWidget::itemDoubleClicked, this, &CTrkToRteDialog::slotItemDoubleClicked);
+    connect(lineEditNewProject, &QLineEdit::textChanged, this, &CTrkToRteDialog::slotProjectChanged);
+    connect(lineEditNewProject, &QLineEdit::textEdited, this, &CTrkToRteDialog::slotProjectEdited);
+    connect(radioQms, &QRadioButton::clicked, this, &CTrkToRteDialog::slotTypeChanged);
+    connect(radioGpx, &QRadioButton::clicked, this, &CTrkToRteDialog::slotTypeChanged);
+    connect(radioDatabase, &QRadioButton::toggled, this, &CTrkToRteDialog::slotTypeChanged);
+    connect(lineEditRouteName, &QLineEdit::textChanged, this, &CTrkToRteDialog::slotRouteChanged);
+    connect(lineEditRouteName, &QLineEdit::textEdited, this, &CTrkToRteDialog::slotRouteChanged);
 
     lineEditNewProject->setFocus();
     adjustSize();
 
-    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CToRouteNameProjectDialog");
+    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CTrkToRteDialog");
 }
 
-CToRouteNameProjectDialog::~CToRouteNameProjectDialog()
+CTrkToRteDialog::~CTrkToRteDialog()
 {
-    CCanvas::restoreOverrideCursor("~CToRouteNameProjectDialog");
+    CCanvas::restoreOverrideCursor("~CTrkToRteDialog");
 }
 
-void CToRouteNameProjectDialog::reject()
+void CTrkToRteDialog::reject()
 {
     key.clear();
     routeName.clear();
@@ -124,18 +124,18 @@ void CToRouteNameProjectDialog::reject()
     QDialog::reject();
 }
 
-void CToRouteNameProjectDialog::accept()
+void CTrkToRteDialog::accept()
 {
     saveSubPoints = checkBoxSubPoints->isChecked();
     SETTINGS;
-    cfg.beginGroup("RouteToTrack");
+    cfg.beginGroup("TrkToRt");
     cfg.setValue("saveSubPoints", saveSubPoints);
     cfg.endGroup();
     QDialog::accept();
-    CCanvas::restoreOverrideCursor("~CToRouteNameProjectDialog");
+    CCanvas::restoreOverrideCursor("~CTrkToRteDialog");
 }
 
-void CToRouteNameProjectDialog::slotItemClicked(QListWidgetItem* item)
+void CTrkToRteDialog::slotItemClicked(QListWidgetItem* item)
 {
     lineEditNewProject->setText(item->data(Qt::UserRole + 2).toString());
     key = item->data(Qt::UserRole).toString();
@@ -145,7 +145,7 @@ void CToRouteNameProjectDialog::slotItemClicked(QListWidgetItem* item)
     frameType->setEnabled(false);
 }
 
-void CToRouteNameProjectDialog::slotItemDoubleClicked(QListWidgetItem* item)
+void CTrkToRteDialog::slotItemDoubleClicked(QListWidgetItem* item)
 {
     lineEditNewProject->setText(item->data(Qt::UserRole + 2).toString());
     key = item->data(Qt::UserRole).toString();
@@ -154,19 +154,19 @@ void CToRouteNameProjectDialog::slotItemDoubleClicked(QListWidgetItem* item)
     QDialog::accept();
 }
 
-void CToRouteNameProjectDialog::buttonBoxEnabled()
+void CTrkToRteDialog::buttonBoxEnabled()
 {
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(
             !(projectName.isEmpty() || routeName.isEmpty()));
 }
 
-void CToRouteNameProjectDialog::slotProjectChanged(const QString& text)
+void CTrkToRteDialog::slotProjectChanged(const QString& text)
 {
     projectName = text;
     buttonBoxEnabled();
 }
 
-void CToRouteNameProjectDialog::slotProjectEdited(const QString& text)
+void CTrkToRteDialog::slotProjectEdited(const QString& text)
 {
     key.clear();
     projectName = text;
@@ -174,14 +174,14 @@ void CToRouteNameProjectDialog::slotProjectEdited(const QString& text)
     frameType->setEnabled(true);
 }
 
-void CToRouteNameProjectDialog::slotRouteChanged(const QString& text)
+void CTrkToRteDialog::slotRouteChanged(const QString& text)
 {
     routeName = text;
     buttonBoxEnabled();
 }
 
 
-void CToRouteNameProjectDialog::slotTypeChanged()
+void CTrkToRteDialog::slotTypeChanged()
 {
     if(radioQms->isChecked())
     {
@@ -197,7 +197,7 @@ void CToRouteNameProjectDialog::slotTypeChanged()
     }
 }
 
-void CToRouteNameProjectDialog::setType(IGisProject::type_e& t)
+void CTrkToRteDialog::setType(IGisProject::type_e& t)
 {
     switch(type)
     {
@@ -216,7 +216,7 @@ void CToRouteNameProjectDialog::setType(IGisProject::type_e& t)
     }
 }
 
-IGisProject* CToRouteNameProjectDialog::getProject()
+IGisProject* CTrkToRteDialog::getProject()
 {
     IGisProject *project = nullptr;
     CGisListWks* treeWks = CGisWorkspace::self().getWks();

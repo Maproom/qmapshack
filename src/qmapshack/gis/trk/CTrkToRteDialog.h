@@ -36,18 +36,21 @@ public:
     /**
        @brief Shows the Dialog and preselects the project and route name
      */
-    CTrkToRteDialog(QString& projectName, QString& routeName, IGisProject::type_e& type);
+    CTrkToRteDialog(IGisProject* project, QString& routeName);
     virtual ~CTrkToRteDialog();
 
     /**
        @brief Returns the selected or new project
 
-       This will either return the selected project or a newly created project for the selected
-       route.
+       This will either return the current project or an other project if changed via the
+       project button.
 
        @return  A project.
-     */
-    IGisProject* getProject();
+    */
+    IGisProject* getProject()
+    {
+        return (project);
+    }
 
     /**
       @brief Returns whether the sub-points shall be saved during route conversion
@@ -60,15 +63,10 @@ public:
     }
 
 public slots:
-    void reject() override;
     void accept() override;
 
 private slots:
-    void slotItemClicked(QListWidgetItem* item);
-    void slotItemDoubleClicked(QListWidgetItem* item);
-    void slotProjectChanged(const QString& text);
-    void slotProjectEdited(const QString& text);
-    void slotTypeChanged();
+    void slotProject();
     void slotRouteChanged(const QString& text);
 
 private:
@@ -78,8 +76,7 @@ private:
     QString key;
     bool saveSubPoints;
     QString& routeName;
-    QString& projectName;
-    IGisProject::type_e& type;
+    IGisProject* project;
 };
 
 #endif //CSELECTPROJECTDIALOG_H

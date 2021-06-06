@@ -3415,9 +3415,6 @@ void CGisItemTrk::toRoute()
 {
     qint32 idx1, idx2;
     QString routeName;
-    IGisProject::type_e type = IGisProject::eTypeQms;
-    QString projectName = getParentProject()->getName();
-
 
     getMouseRange(idx1, idx2, true);
 
@@ -3430,7 +3427,7 @@ void CGisItemTrk::toRoute()
         routeName = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
     }
 
-    CTrkToRteDialog dlg(projectName, routeName, type);
+    CTrkToRteDialog dlg(getParentProject(), routeName);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;

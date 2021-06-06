@@ -311,15 +311,6 @@ public:
     void getNogoAreas(QList<IGisItem*>& nogos);
 
     /**
-           @brief Get access to the workspace list
-
-           @return the workspace list
-    */
-    CGisListWks *getWks(void)
-    {
-        return treeWks;
-    }
-    /**
        @brief Delete all items with matching key from workspace
 
        @param key       the item's key as it is returned from IGisItem::getKey()

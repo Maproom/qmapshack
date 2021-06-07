@@ -22,7 +22,6 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/CGisWorkspace.h"
 #include "ui_ITrkToRteDialog.h"
-#include <QDialog>
 
 class QTreeWidget;
 
@@ -36,31 +35,8 @@ public:
     /**
        @brief Shows the Dialog and preselects the project and route name
      */
-    CTrkToRteDialog(IGisProject* project, QString& routeName);
+    CTrkToRteDialog(IGisProject** project, QString& routeName, bool& saveSubPoints);
     virtual ~CTrkToRteDialog();
-
-    /**
-       @brief Returns the selected or new project
-
-       This will either return the current project or an other project if changed via the
-       project button.
-
-       @return  A project.
-    */
-    IGisProject* getProject()
-    {
-        return (project);
-    }
-
-    /**
-      @brief Returns whether the sub-points shall be saved during route conversion
-
-      @return True if sub-points shall be saved
-    */
-    bool getSaveSubPoints()
-    {
-        return saveSubPoints;
-    }
 
 public slots:
     void accept() override;
@@ -73,11 +49,10 @@ private:
     void setType(IGisProject::type_e& t);
     void buttonBoxEnabled();
 
-    QString key;
-    bool saveSubPoints;
+    IGisProject** project;
     QString& routeName;
-    IGisProject* project;
+    bool& saveSubPoints;
 };
 
-#endif //CSELECTPROJECTDIALOG_H
+#endif //CTRKTORTEDIALOG_H
 

@@ -3415,7 +3415,14 @@ void CGisItemTrk::toRoute()
 {
     qint32 idx1, idx2;
     QString routeName;
+    bool saveSubPts;
+    IGisProject *project = getParentProject();
 
+    if (nullptr==project)
+    {
+        qCritical("CGisItemTrk::toRoute no project");
+        return;
+    }
     getMouseRange(idx1, idx2, true);
 
     if(NOIDX == idx1)
@@ -3427,15 +3434,14 @@ void CGisItemTrk::toRoute()
         routeName = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
     }
 
-    CTrkToRteDialog dlg(getParentProject(), routeName);
+    CTrkToRteDialog dlg(&project, routeName, saveSubPts);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;
     }
-    IGisProject* project = dlg.getProject();
 
     SGisLine points;
-    getPolylineRangeFromData(points, idx1, idx2, dlg.getSaveSubPoints());
+    getPolylineRangeFromData(points, idx1, idx2, saveSubPts);
 
     new CGisItemRte(points, routeName, project, NOIDX);
 }

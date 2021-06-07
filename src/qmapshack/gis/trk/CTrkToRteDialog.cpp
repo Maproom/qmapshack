@@ -18,22 +18,14 @@
 
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
-#include "gis/CGisDatabase.h"
-#include "gis/CGisListWks.h"
-#include "gis/db/CDBProject.h"
-#include "gis/db/CSelectDBFolder.h"
-#include "gis/db/CSetupFolder.h"
-#include "gis/gpx/CGpxProject.h"
-#include "gis/qms/CQmsProject.h"
 #include "helpers/CSettings.h"
 #include "gis/trk/CTrkToRteDialog.h"
 
-#include <QtWidgets>
-
-CTrkToRteDialog::CTrkToRteDialog(IGisProject *project, QString& routeName)
+CTrkToRteDialog::CTrkToRteDialog(IGisProject** project, QString& routeName, bool& saveSubPoints)
     : QDialog(CMainWindow::getBestWidgetForParent())
-    , routeName(routeName)
     , project(project)
+    , routeName(routeName)
+    , saveSubPoints(saveSubPoints)
 {
     setupUi(this);
     SETTINGS;
@@ -42,10 +34,8 @@ CTrkToRteDialog::CTrkToRteDialog(IGisProject *project, QString& routeName)
     cfg.endGroup();
 
     checkBoxSubPoints->setChecked(saveSubPoints);
-    key = IGisProject::getUserFocus();
-
     lineEditRouteName->setText(routeName);
-    labelProjectName->setText(project->getName());
+    labelProjectName->setText((*project)->getName());
     buttonBoxEnabled();
 
     connect(pushButtonProject, &QPushButton::clicked, this, &CTrkToRteDialog::slotProject);
@@ -70,7 +60,6 @@ void CTrkToRteDialog::accept()
     cfg.setValue("saveSubPoints", saveSubPoints);
     cfg.endGroup();
     QDialog::accept();
-    CCanvas::restoreOverrideCursor("~CTrkToRteDialog");
 }
 
 void CTrkToRteDialog::slotProject()
@@ -80,8 +69,8 @@ void CTrkToRteDialog::slotProject()
     {
         return;
     }
-    project = pr;
-    labelProjectName->setText(project->getName());
+    *project = pr;
+    labelProjectName->setText(pr->getName());
 }
 
 void CTrkToRteDialog::buttonBoxEnabled()

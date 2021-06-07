@@ -35,7 +35,7 @@ public:
     /**
        @brief Shows the Dialog and preselects the project and route name
      */
-    CTrkToRteDialog(IGisProject** project, QString& routeName, bool& saveSubPoints);
+    CTrkToRteDialog(IGisProject*& project, QString& routeName, bool& saveSubPoints);
     virtual ~CTrkToRteDialog();
 
 public slots:
@@ -49,7 +49,7 @@ private:
     void setType(IGisProject::type_e& t);
     void buttonBoxEnabled();
 
-    IGisProject** project;
+    IGisProject*& project;
     QString& routeName;
     bool& saveSubPoints;
 };

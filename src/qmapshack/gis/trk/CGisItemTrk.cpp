@@ -3434,7 +3434,7 @@ void CGisItemTrk::toRoute()
         routeName = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
     }
 
-    CTrkToRteDialog dlg(&project, routeName, saveSubPts);
+    CTrkToRteDialog dlg(project, routeName, saveSubPts);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;

@@ -21,7 +21,7 @@
 #include "helpers/CSettings.h"
 #include "gis/trk/CTrkToRteDialog.h"
 
-CTrkToRteDialog::CTrkToRteDialog(IGisProject** project, QString& routeName, bool& saveSubPoints)
+CTrkToRteDialog::CTrkToRteDialog(IGisProject*& project, QString& routeName, bool& saveSubPoints)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , project(project)
     , routeName(routeName)
@@ -35,7 +35,7 @@ CTrkToRteDialog::CTrkToRteDialog(IGisProject** project, QString& routeName, bool
 
     checkBoxSubPoints->setChecked(saveSubPoints);
     lineEditRouteName->setText(routeName);
-    labelProjectName->setText((*project)->getName());
+    labelProjectName->setText(project->getName());
     buttonBoxEnabled();
 
     connect(pushButtonProject, &QPushButton::clicked, this, &CTrkToRteDialog::slotProject);
@@ -69,7 +69,7 @@ void CTrkToRteDialog::slotProject()
     {
         return;
     }
-    *project = pr;
+    project = pr;
     labelProjectName->setText(pr->getName());
 }
 

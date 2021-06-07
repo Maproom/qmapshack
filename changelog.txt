@@ -1,6 +1,7 @@
 V1.XX.X
 [QMS-400] Set focus in text field
 [QMS-401] Crash when using "select items on map" with a large amount of items
+[QMS-414] Last point information not fully displayed in the range tool window
 
 V1.16.0
 [QMS-220] "Select items from map" misses items

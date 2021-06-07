@@ -165,10 +165,6 @@
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Directori d&apos;inici actual:&lt;br/&gt;%1&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;h2&gt;Guarda-ho tot de forma ordenada&lt;/h2&gt;&lt;p&gt;QMapShack necessita una carpeta del disc dur on guardar totes les dades. Naturalment, creixerà molt. Recomanem crear una carpeta amb diverses sub-carpetes:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - on s&apos;emmagatzemaran tots els mapes&lt;/li&gt;&lt;li&gt;DEM - on s&apos;emmagatzemaran totes les dades d&apos;alçades&lt;/li&gt;&lt;li&gt;Routino - on s&apos;emmagatzemaran tots els itineraris fora de línia de Routino&lt;/li&gt;&lt;li&gt;BRouter - on s&apos;emmagatzemaran tots els itineraris fora de línia de BRouter&lt;/li&gt;&lt;li&gt;Databases - on es crearan les bases de dades per a organitzar les dades GIS&lt;/li&gt;&lt;li&gt;GPX - on es guardaran els fitxers GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Voleu crear ara aquestes carpetes? Diguem un &lt;a  href=&apos;SetupHome&apos;&gt;camí&lt;/a&gt; i QMapShack crearà totes les sub-carpetes i modificarà totes les dades de configuració.&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="../canvas/CCanvas.cpp" line="307"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Bases de dades&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Bases de dades i Projectes&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
@@ -196,7 +192,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="258"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;POI - where all POI collections are stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Guarda-ho tot de forma ordenada&lt;/h2&gt;&lt;p&gt;QMapShack necessita una carpeta del disc dur on guardar totes les dades. Naturalment, creixerà molt. Recomanem crear una carpeta amb diverses sub-carpetes:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - on s&apos;emmagatzemaran tots els mapes&lt;/li&gt;&lt;li&gt;DEM - on s&apos;emmagatzemaran totes les dades d&apos;alçades&lt;/li&gt;&lt;li&gt;POI - on s&apos;emmagatzemaran totes les col·leccions de Punts d&apos;Interès&lt;/li&gt;&lt;li&gt;Routino - on s&apos;emmagatzemaran tots els itineraris fora de línia de Routino&lt;/li&gt;&lt;li&gt;BRouter - on s&apos;emmagatzemaran tots els itineraris fora de línia de BRouter&lt;/li&gt;&lt;li&gt;Databases - on es crearan les bases de dades per a organitzar les dades GIS&lt;/li&gt;&lt;li&gt;GPX - on es guardaran els fitxers GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Voleu crear ara aquestes carpetes? Diguem un &lt;a  href=&apos;SetupHome&apos;&gt;camí&lt;/a&gt; i QMapShack crearà totes les sub-carpetes i modificarà totes les dades de configuració.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="276"/>
@@ -458,7 +454,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="45"/>
         <source>Failed to load file: %1</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="53"/>
@@ -513,7 +509,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="322"/>
         <source>No images found</source>
-        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
+        <translation>  No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -1119,7 +1115,7 @@ L&apos;únic paràmetre d&apos;entrada és la longitud del bucle mínim: així s
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="59"/>
         <source>Hide knots in the track:
 
-During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That&apos;s why you might want to remove them.
+During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That's why you might want to remove them.
 
 Typically a knot fulfills two conditions:
 - A series of points very close to each other.
@@ -1200,7 +1196,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
@@ -2962,15 +2958,18 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="966"/>
         <source>Undefined Waypoint Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Símbol de Fita no definit</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="967"/>
-        <source>QMapShack couldn&apos;t automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.
+        <source>QMapShack couldn't automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.
 
 Do you want to choose an icon for each new waypoint for which no icon could be found?
 If you choose &apos;No&apos; the respective last used waypoint icon is applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>QMapShack no pot assignar de forma automàtica una icona de fita a un dels Punts d&apos;Interès que es vol convertir a fita.
+
+S&apos;ha d&apos;escollir una icona per a cada nova fita que no tingui una icona assignada?
+Si escolliu &apos;No&apos; s&apos;assignarà la darrera icona de fita utilitzada.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="1029"/>
@@ -3260,13 +3259,13 @@ línia %2, columna %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="88"/>
         <source>Power</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Potència</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="88"/>
         <source>Power</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Potència</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
@@ -4254,7 +4253,7 @@ Retorn als tipus interns..</translation>
         <location filename="../map/CMapIMG.cpp" line="2392"/>
         <location filename="../map/CMapIMG.cpp" line="2396"/>
         <source>Point of Interest</source>
-        <translation>Punt d&apos;interès</translation>
+        <translation>Punt d&apos;Interès</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2493"/>
@@ -4576,18 +4575,14 @@ Estructura desconeguda.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <source>Add POI as Waypoint</source>
-        <translation type="vanished">Afegir Punt d&apos;Interès com una Fita</translation>
-    </message>
-    <message>
         <location filename="../mouse/CMouseNormal.cpp" line="447"/>
         <source>Add POI %1 as Waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Afegir Punt d&apos;Interès %1 com una Fita</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="452"/>
         <source>Zoom in to add POIs as Waypoints</source>
-        <translation type="unfinished"></translation>
+        <translation>Amplia per a afegir Punt d&apos;Interès com una Fita</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="457"/>
@@ -4740,7 +4735,7 @@ Estructura desconeguda.</translation>
     <message>
         <location filename="../mouse/CMouseSelect.cpp" line="146"/>
         <source>%1 POIs&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Punt d&apos;Interès&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseSelect.cpp" line="126"/>
@@ -4802,12 +4797,12 @@ Estructura desconeguda.</translation>
     <message>
         <location filename="../poi/CPoiList.cpp" line="132"/>
         <source>Deactivate</source>
-        <translation type="unfinished">Desactivar</translation>
+        <translation>Desactivar</translation>
     </message>
     <message>
         <location filename="../poi/CPoiList.cpp" line="132"/>
         <source>Activate</source>
-        <translation type="unfinished">Activar</translation>
+        <translation>Activar</translation>
     </message>
 </context>
 <context>
@@ -4815,22 +4810,22 @@ Estructura desconeguda.</translation>
     <message>
         <location filename="../poi/CPoiPOI.cpp" line="331"/>
         <source>Category: </source>
-        <translation type="unfinished"></translation>
+        <translation>Categoria:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiPOI.cpp" line="337"/>
         <source>Links: </source>
-        <translation type="unfinished"></translation>
+        <translation>Enllaços:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiPOI.cpp" line="355"/>
         <source>Zoom in to see more details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Amplia per a veure amb més detall.</translation>
     </message>
     <message>
         <location filename="../poi/CPoiPOI.cpp" line="358"/>
         <source>POIs at this point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt d&apos;Interès en aquest punt:</translation>
     </message>
 </context>
 <context>
@@ -4838,12 +4833,13 @@ Estructura desconeguda.</translation>
     <message>
         <location filename="../poi/CPoiPathSetup.cpp" line="42"/>
         <source>Add or remove paths containing POI data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation type="unfinished"></translation>
+        <translation> 
+Afegir o suprimir camins a dades dels Punts d&apos;Interès. Pot haver-hi diverses fitxers en un camí, però els camins secundaris no s&apos;analitzaran. Els formats compatibles són: %1</translation>
     </message>
     <message>
         <location filename="../poi/CPoiPathSetup.cpp" line="65"/>
         <source>Select POI file path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona el camí als fitxers de Punts d&apos;Interès...</translation>
     </message>
 </context>
 <context>
@@ -4917,7 +4913,7 @@ y: %4 m/px</translation>
     <message>
         <location filename="../../common/gis/proj_x.cpp" line="184"/>
         <source>The value
-&apos;%1&apos;
+'%1'
 is not a valid coordinate system definition:
 %2</source>
         <translation>El valor
@@ -5180,66 +5176,68 @@ no és una definició de coordenada vàlida en el sistema:
         <source>addr:housenumber addr:street&lt;br&gt;
 addr:city addr:postcode&lt;br&gt;
 addr:country</source>
-        <translation type="unfinished"></translation>
+        <translation>adr:número adr:carrer&lt;br&gt;
+adr:ciutat adr:codipostal&lt;br&gt;
+adr:país</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="158"/>
         <source>Alternative names: </source>
-        <translation type="unfinished"></translation>
+        <translation>Noms alternatius:</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="184"/>
         <location filename="../poi/CRawPoi.cpp" line="192"/>
         <source>Phone number: </source>
-        <translation type="unfinished"></translation>
+        <translation>Número de telèfon:</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="200"/>
         <source>Mobile phone number: </source>
-        <translation type="unfinished"></translation>
+        <translation>Número de telèfon mòbil:</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="208"/>
         <source>Fax: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fax:</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="251"/>
         <location filename="../poi/CRawPoi.cpp" line="255"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Correu electrònic</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="259"/>
         <location filename="../poi/CRawPoi.cpp" line="263"/>
         <location filename="../poi/CRawPoi.cpp" line="267"/>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Lloc Web</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="288"/>
         <source>OpenStreetMap</source>
-        <translation type="unfinished"></translation>
+        <translation>OpenStreetMap</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="297"/>
         <source>wikimedia</source>
-        <translation type="unfinished"></translation>
+        <translation>wikimedia</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="301"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imatge</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="321"/>
         <source>Wikipedia</source>
-        <translation type="unfinished"></translation>
+        <translation>Wikipedia</translation>
     </message>
     <message>
         <location filename="../poi/CRawPoi.cpp" line="349"/>
         <source>Wikidata</source>
-        <translation type="unfinished"></translation>
+        <translation>Wikidata</translation>
     </message>
 </context>
 <context>
@@ -6091,7 +6089,7 @@ addr:country</source>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="308"/>
         <source>%1
-Error in &apos;%2&apos;
+Error in '%2'
 This needs to be fixed
 The associated database &apos;%3&apos; is ignored</source>
         <translation>%1
@@ -6373,12 +6371,12 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="108"/>
         <source>&lt;b&gt;Add Areas&lt;/b&gt;&lt;br/&gt;Add areas to list of selected items&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Afegir Àrees&lt;/b&gt;&lt;br/&gt;Afegir les àrees en la lista d&apos;elements seleccionats&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Afegir Àrees&lt;/b&gt;&lt;br/&gt;Afegir les àrees a la llista d&apos;elements seleccionats&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="112"/>
         <source>&lt;b&gt;Add POIs&lt;/b&gt;&lt;br/&gt;Add POIs to list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Afegir Punts d&apos;Interès&lt;/b&gt;&lt;br/&gt;Afegir Punts d&apos;Interès a la llista d&apos;elements seleccionats&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="123"/>
@@ -6403,7 +6401,7 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="139"/>
         <source>&lt;b&gt;Ignore POIs&lt;/b&gt;&lt;br/&gt;Ignore POIs in list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ignorar Punts d&apos;Interès&lt;/b&gt;&lt;br/&gt;Ignorar Punts d&apos;Interès en la llista d&apos;elements seleccionats&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -8793,7 +8791,7 @@ No vull llegir tota la documentació!</translation>
         <source>Click to use the current zoom as maximum 
 zoom-in for use of the DEM data.</source>
         <translation>Feu clic per a utilitzar el valor actual del zoom com a 
-apropament màxim en utilitzar dades DEM.</translation>
+amplia al màxim per a utilitzar dades DEM.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="75"/>
@@ -8803,7 +8801,7 @@ the actual zoom as either maximum zoom-in or zoom-out.
 </source>
         <translation>Controla l&apos;interval de zoom que es pot aplicar a les dades
 DEM. Utilitza els botons esquerra i dreta per a definir el zoom
-actual com a valors màxims d&apos;apropament o d&apos;allunyament.
+actual com a valors màxims d&apos;ampliació o d&apos;allunyament.
 </translation>
     </message>
     <message>
@@ -10528,7 +10526,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="150"/>
-        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
+        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable 'Free Webservices' in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;per a utilitzar geonames creeu, si us plau, un &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;nom d&apos;usuari&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;un cop fet activeu &apos;Free Webservices&apos; en el vostre &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Compte&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;introduir aquí el vostre nom d&apos;usuari Geonames:&lt;/p&gt;
 </translation>
@@ -11309,7 +11307,7 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="437"/>
         <source>POI Text</source>
-        <translation>Text del PI</translation>
+        <translation>Text del POI</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="452"/>
@@ -11340,7 +11338,7 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="292"/>
         <source>POI Collections</source>
-        <translation type="unfinished"></translation>
+        <translation>Col·leccions de Punts d&apos;Interès</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="506"/>
@@ -11575,12 +11573,12 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="1071"/>
         <source>Setup POI Paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar els Camins a Punts d&apos;Interès</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1074"/>
         <source>Setup paths to POI collections</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar els Camins a les col·leccions de Punts d&apos;Interès</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="719"/>
@@ -11862,7 +11860,7 @@ No vull llegir la documentació!</translation>
         <source>Click to use the current zoom as maximum 
 zoom-in to display the map.</source>
         <translation>Feu clic per a utilitzar el valor actual del zoom com a 
-apropament màxim per a mostrar el mapa.</translation>
+ampliació màxima per a mostrar el mapa.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="75"/>
@@ -11873,7 +11871,7 @@ zoom-in or zoom-out.
 </source>
         <translation>Controla l&apos;interval de zoom que es pot aplicar en la visualització
 del mapa. Utilitza els botons esquerra i dreta per a definir el zoom
-actual com a valors màxims d&apos;apropament o d&apos;allunyament.
+actual com a valors màxims d&apos;ampliació o d&apos;allunyament.
 </translation>
     </message>
     <message>
@@ -11881,7 +11879,7 @@ actual com a valors màxims d&apos;apropament o d&apos;allunyament.
         <source>Click to use the current zoom as maximum 
 zoom-out to display the map.</source>
         <translation>Feu clic per a utilitzar el valor actual del zoom com a 
-allunyament màxim per a mostrar el mapa.</translation>
+ampliació màxima per a mostrar el mapa.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="145"/>
@@ -12237,28 +12235,28 @@ Mantenir premuda la tecla ALT només per zoom horitzontal.</translation>
     <message>
         <location filename="../poi/IPoiList.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation>Formulari</translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="97"/>
         <source>To add POI collections use &lt;a href=&apos;PoiFolders&apos;&gt;File-&gt;Setup POI Paths&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per a afegir Punts d&apos;Interès a les col·leccions, fes &lt;a href=&apos;PoiFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a Punts d&apos;Interès&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="110"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. </source>
-        <translation type="unfinished"></translation>
+        <translation>Utilitza el menú contextual (clic al botó dret del ratolí o entrada) per escollir un fitxer.</translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="135"/>
         <source>Activate</source>
-        <translation type="unfinished">Activar</translation>
+        <translation>Activar</translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="144"/>
         <location filename="../poi/IPoiList.ui" line="147"/>
         <source>Reload POI</source>
-        <translation type="unfinished"></translation>
+        <translation>Tornar a carregar Punt d&apos;Interès</translation>
     </message>
 </context>
 <context>
@@ -12266,18 +12264,18 @@ Mantenir premuda la tecla ALT només per zoom horitzontal.</translation>
     <message>
         <location filename="../poi/IPoiPathSetup.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Diàleg</translation>
     </message>
     <message>
         <location filename="../poi/IPoiPathSetup.ui" line="31"/>
         <location filename="../poi/IPoiPathSetup.ui" line="51"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../poi/IPoiPathSetup.ui" line="112"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
 </context>
 <context>
@@ -12285,17 +12283,17 @@ Mantenir premuda la tecla ALT només per zoom horitzontal.</translation>
     <message>
         <location filename="../poi/IPoiPropSetup.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation>Formulari</translation>
     </message>
     <message>
         <location filename="../poi/IPoiPropSetup.ui" line="35"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Canvia l&apos;opacitat del mapa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Canviar la opacitat del mapa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../poi/IPoiPropSetup.ui" line="60"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
 </context>
 <context>
@@ -13037,7 +13035,7 @@ o
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="133"/>
-        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it&apos;s recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can&apos;t route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
+        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href='http://download.geofabrik.de/'&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it's recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can't route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Select one or multiple source *.pbf files.&lt;/li&gt;
@@ -13964,7 +13962,7 @@ Això és coneix com la solució al Problema del Viatjant de Comerç, però aqu�
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="301"/>
         <source>Add POIs to selection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Afegeix Punt d&apos;Interès a la selecció.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="373"/>
@@ -15158,7 +15156,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>

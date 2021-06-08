@@ -244,6 +244,20 @@ public:
     void getPolyline(SGisLine& l) const;
     void getPolyline(QPolygonF& l) const;
     void getPolylineDeg(QPolygonF& l) const;
+    /**
+           @brief Convert a track to a line.
+           Convert a track between rangeStart and rangeEnd to a line. If getSubPixel is true all sub-pixels
+           are converted to a point. Otherwise the sub-pixels are ignored.
+
+           @param l Converted Polyline.
+           @param rangeStart Start index of the conversion. If set to NOIDX, conversion starts at
+                  the beginning of the track.
+           @param rangeEnd End index of the conversion. If set to NOIDX, conversion end at
+                  the last point of the track.
+           @param getSubPixel If getSubPixel is true all sub-pixels are converted to a point.
+                  If set to false the sub-pixels are ignored.
+    */
+    void getPolylineRange(SGisLine& l, qint32 rangeStart, qint32 rangeEnd, bool getSubPixel = false) const;
 
     bool isEmpty() const
     {

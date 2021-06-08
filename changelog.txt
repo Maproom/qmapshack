@@ -1,6 +1,8 @@
 V1.XX.X
+[QMS-396] Save route sub-points as ordinary route points in case of track routing
 [QMS-400] Set focus in text field
 [QMS-401] Crash when using "select items on map" with a large amount of items
+[QMS-412] Track: Endless loop for user defined limits min 0.
 [QMS-414] Last point information not fully displayed in the range tool window
 
 V1.16.0

@@ -30,6 +30,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
@@ -38,6 +39,7 @@
 
 #include <QtWidgets>
 #include <QtXml>
+#include "gis/trk/CTrkToRteDialog.h"
 
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
@@ -391,6 +393,12 @@ void CGisItemTrk::getPolylineFromData(SGisLine& l) const
 {
     QMutexLocker lock(&mutexItems);
     trk.getPolyline(l);
+}
+
+void CGisItemTrk::getPolylineRangeFromData(SGisLine& l, qint32 rangeStart, qint32 rangeEnd, bool getSubPixel) const
+{
+    QMutexLocker lock(&mutexItems);
+    trk.getPolylineRange(l, rangeStart, rangeEnd, getSubPixel);
 }
 
 void CGisItemTrk::getPolylineDegFromData(QPolygonF& l) const
@@ -3401,4 +3409,39 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
     });
 
     return map;
+}
+
+void CGisItemTrk::toRoute()
+{
+    qint32 idx1, idx2;
+    QString routeName;
+    bool saveSubPts;
+    IGisProject *project = getParentProject();
+
+    if (nullptr==project)
+    {
+        qCritical("CGisItemTrk::toRoute no project");
+        return;
+    }
+    getMouseRange(idx1, idx2, true);
+
+    if(NOIDX == idx1)
+    {
+        routeName = getName();
+    }
+    else
+    {
+        routeName = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
+    }
+
+    CTrkToRteDialog dlg(project, routeName, saveSubPts);
+    if(dlg.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    SGisLine points;
+    getPolylineRangeFromData(points, idx1, idx2, saveSubPts);
+
+    new CGisItemRte(points, routeName, project, NOIDX);
 }

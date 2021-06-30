@@ -1753,6 +1753,7 @@ void CMainWindow::slotRenameView()
     tabWidget->setTabText(idx, name);
     tabMaps->setTabText(idx, name);
     tabDem->setTabText(idx, name);
+    tabPoi->setTabText(idx, name);
 }
 
 void CMainWindow::displayRegular()

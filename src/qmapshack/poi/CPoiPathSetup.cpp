@@ -62,7 +62,7 @@ void CPoiPathSetup::accept()
 
 void CPoiPathSetup::slotAddPath()
 {
-    QString path = QFileDialog::getExistingDirectory(this, tr("Select POI file path..."), QDir::homePath(), 0);
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select POI file path..."), QDir::homePath());
     if(!path.isEmpty())
     {
         if(!paths.contains(path))

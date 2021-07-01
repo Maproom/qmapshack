@@ -55,7 +55,7 @@ void CDemPathSetup::slotItemSelectionChanged()
 
 void CDemPathSetup::slotAddPath()
 {
-    QString path = QFileDialog::getExistingDirectory(this, tr("Select DEM file path..."), QDir::homePath(), 0);
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select DEM file path..."), QDir::homePath());
     if(!path.isEmpty())
     {
         if(!paths.contains(path))

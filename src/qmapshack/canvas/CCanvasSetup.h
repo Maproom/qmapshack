@@ -28,7 +28,7 @@ class CCanvasSetup : public QDialog, private Ui::ICanvasSetup
 {
     Q_OBJECT
 public:
-    CCanvasSetup(CCanvas *canvas);
+    CCanvasSetup(CCanvas* canvas);
     virtual ~CCanvasSetup();
 
 public slots:
@@ -39,7 +39,7 @@ protected slots:
     void slotProjWizard();
 
 protected:
-    CCanvas * canvas;
+    CCanvas* canvas;
 };
 
 #endif //CCANVASSETUP_H

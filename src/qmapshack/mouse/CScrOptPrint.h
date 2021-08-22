@@ -25,7 +25,7 @@
 class CScrOptPrint : public IScrOpt, public Ui::IScrOptPrint
 {
 public:
-    CScrOptPrint(IMouse *mouse);
+    CScrOptPrint(IMouse* mouse);
     virtual ~CScrOptPrint() = default;
 
     void draw(QPainter& p) override

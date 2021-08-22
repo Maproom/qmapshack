@@ -29,7 +29,7 @@ class CToolAddOverview : public IToolGui, public ITool, private Ui::IToolAddOver
 {
     Q_OBJECT
 public:
-    CToolAddOverview(QWidget * parent);
+    CToolAddOverview(QWidget* parent);
     virtual ~CToolAddOverview();
 
     void setupChanged() override;
@@ -37,14 +37,14 @@ public:
     FORWARD_LIST_ALL(itemList)
 
 private slots:
-    void slotAddItem(const QString& filename, QListWidget * list);
+    void slotAddItem(const QString& filename, QListWidget* list);
     void slotMapSelectionChanged();
     void slotSelectionChanged();
     void slotStart();
     void slotFinished(qint32 id);
 
 protected:
-    void buildCmd(QList<CShellCmd>& cmds, const IItem * iitem) override;
+    void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
 };
 
 #endif //CTOOLADDOVERVIEW_H

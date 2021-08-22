@@ -27,6 +27,7 @@
 #include <QCoreApplication>
 #include <QPointer>
 
+struct poi_t;
 class IGisProject;
 class QDomNode;
 class CScrOptWpt;
@@ -99,7 +100,7 @@ public:
         QString fileName;
     };
 
-    CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, const QString &name, const QString &icon, IGisProject *project);
+    CGisItemWpt(const QPointF& pos, qreal ele, const QDateTime& time, const QString& name, const QString& icon, IGisProject* project);
 
     /**
        @brief Create a completely new waypoint
@@ -108,34 +109,34 @@ public:
        @param icon      the waypoint's icon
        @param project   the project the waypoint is added to
      */
-    CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, IGisProject * project);
+    CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, IGisProject* project);
     /**
        @brief Create a copy of an existing waypoint with a new position
        @param pos       the waypoint's new position [°]
        @param parentWpt the waypoint to copy
        @param project   the project the waypoint is added to
      */
-    CGisItemWpt(const QPointF& pos, const CGisItemWpt &parentWpt, IGisProject *project);
+    CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisProject* project);
     /**
        @brief Create a 1:1 copy of an existing waypoint (with new key)
        @param parentWpt the waypoint to copy
        @param project   the project the waypoint is added to
        @param idx       the index to insert the item. If -1 the item will be appended to it's group
      */
-    CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx, bool clone);
+    CGisItemWpt(const CGisItemWpt& parentWpt, IGisProject* project, int idx, bool clone);
     /**
        @brief Create item from GPX.
        @param xml       the GPX section containing the item
        @param project   the project to append with item
      */
-    CGisItemWpt(const QDomNode& xml, IGisProject * project);
+    CGisItemWpt(const QDomNode& xml, IGisProject* project);
 
     /**
        @brief Create item from list of changes
        @param hist      the change history
        @param project   the project to append with item
      */
-    CGisItemWpt(const history_t& hist, const QString& dbHash, IGisProject * project);
+    CGisItemWpt(const history_t& hist, const QString& dbHash, IGisProject* project);
 
     /**
        @brief Read item from database by it's database ID
@@ -143,22 +144,22 @@ public:
        @param db        the database itself
        @param project   the project to append with item
      */
-    CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project);
+    CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject* project);
 
     /**
        @brief Read item from text stream with TwoNav encoding
        @param tnvWpt
        @param project
      */
-    CGisItemWpt(const CTwoNavProject::wpt_t& tnvWpt, IGisProject * project);
+    CGisItemWpt(const CTwoNavProject::wpt_t& tnvWpt, IGisProject* project);
 
-    CGisItemWpt(const CQlgtWpt& wpt1, IGisProject *project = nullptr);
+    CGisItemWpt(const CQlgtWpt& wpt1, IGisProject* project = nullptr);
 
-    CGisItemWpt(CFitStream& stream, IGisProject * project);
+    CGisItemWpt(CFitStream& stream, IGisProject* project);
 
     virtual ~CGisItemWpt();
 
-    IGisItem * createClone() override;
+    IGisItem* createClone() override;
 
     /**
        @brief Save waypoint to GPX tree
@@ -169,7 +170,7 @@ public:
        @brief Save waypoint to TwoNav waypoint file
        @param out   the text stream to write to
      */
-    void saveTwoNav(QTextStream &out, const QDir &dir);
+    void saveTwoNav(QTextStream& out, const QDir& dir);
     /**
        @brief Save waypoint to TCX file
        @param  courseNode  The course node to append by the waypoint
@@ -288,16 +289,16 @@ public:
     }
 
 
-    IScrOpt* getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+    IScrOpt* getScreenOptions(const QPoint& origin, IMouse* mouse) override;
 
     QPointF getPointCloseBy(const QPoint& point) override;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
-    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
-    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis) override;
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis) override;
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis) override;
     void drawHighlight(QPainter& p) override;
     bool isCloseTo(const QPointF& pos) override;
-    bool isWithin(const QRectF &area, selflags_t flags) override;
+    bool isWithin(const QRectF& area, selflags_t flags) override;
     void mouseMove(const QPointF& pos) override;
     void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& pos);
     void dragFinished(const QPoint& pos);
@@ -347,12 +348,13 @@ public:
     void genKey() const override;
     const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
 
-    static QString getLastName(const QString &name);
-    static void newWpt(QPointF& pt, const QString& name, const QString& desc, IGisProject *project);
+    static QString getLastName(const QString& name);
+    static void newWpt(const QPointF& pt, const QString& name, const QString& desc, IGisProject* project);
+    static void newWpt(const poi_t& poi, IGisProject* project, bool openEditWIndow = true);
     static bool getIconAndName(QString& icon, QString& name);
 
-    static void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool &avoid, const bool &selected);
-    static qreal calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis);
+    static void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& avoid, const bool& selected);
+    static qreal calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw* gis);
 
     static void init()
     {
@@ -364,13 +366,13 @@ private:
     void setIcon();
     void setSymbol() override;
     void readGpx(const QDomNode& xml);
-    void readTwoNav(const CTwoNavProject::wpt_t &tnvWpt);
-    void readWptFromFit(CFitStream &stream);
+    void readTwoNav(const CTwoNavProject::wpt_t& tnvWpt);
+    void readWptFromFit(CFitStream& stream);
     void readGcExt(const QDomNode& xmlCache);
     void writeGcExt(QDomNode& xmlCache);
     void drawBubble(QPainter& p);
     QPolygonF makePolyline(const QPointF& anchor, const QRectF& r);
-    void processMouseOverBubble(const QPoint &pos);
+    void processMouseOverBubble(const QPoint& pos);
     void detBoundingRect();
 
     static key_t keyUserFocus;
@@ -394,9 +396,9 @@ private:
     QPointer<CScrOptWpt> scrOptWpt;
     QPointer<CScrOptWptRadius> scrOptRadius;
 
-    bool doSpecialCursor   = false;
-    bool doBubbleMove      = false;
-    bool doBubbleSize      = false;
+    bool doSpecialCursor = false;
+    bool doBubbleMove = false;
+    bool doBubbleSize = false;
     bool mouseIsOverBubble = false;
     QRect rectBubble;
     QRect rectBubbleMove {0, 0, 16, 16};

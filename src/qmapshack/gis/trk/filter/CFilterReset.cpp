@@ -20,7 +20,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterReset.h"
 
-CFilterReset::CFilterReset(CGisItemTrk &trk, QWidget *parent)
+CFilterReset::CFilterReset(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 

@@ -26,15 +26,15 @@ class CTableTrk : public QTreeWidget, public INotifyTrk
 {
     Q_OBJECT
 public:
-    CTableTrk(QWidget * parent);
+    CTableTrk(QWidget* parent);
     virtual ~CTableTrk();
 
-    void setTrack(CGisItemTrk * track);
+    void setTrack(CGisItemTrk* track);
 
     void updateData() override;
-    void setMouseFocus(const CTrackData::trkpt_t * pt) override {}
-    void setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2) override {}
-    void setMouseClickFocus(const CTrackData::trkpt_t * pt) override {}
+    void setMouseFocus(const CTrackData::trkpt_t* pt) override {}
+    void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override {}
+    void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
 
 
     enum columns_t
@@ -58,10 +58,10 @@ public:
 
 private slots:
     void slotItemSelectionChanged();
-    void slotItemDoubleClicked(QTreeWidgetItem * item, int column);
+    void slotItemDoubleClicked(QTreeWidgetItem* item, int column);
 
 private:
-    CGisItemTrk * trk = nullptr;
+    CGisItemTrk* trk = nullptr;
 };
 
 #endif //CTABLETRK_H

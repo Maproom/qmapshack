@@ -19,14 +19,15 @@
 #ifndef CQLGTROUTE_H
 #define CQLGTROUTE_H
 
+#include "gis/proj_x.h"
 #include "qlgt/IItem.h"
-#include <proj_api.h>
+
 #include <QObject>
 
 class CQlgtRoute : public QObject, public IItem
 {
 public:
-    CQlgtRoute(quint64 id, QObject * parent);
+    CQlgtRoute(quint64 id, QObject* parent);
     virtual ~CQlgtRoute();
 
     enum type_e {eEnd, eBase, eRtePts, eRteSec};
@@ -37,9 +38,9 @@ public:
 
         QString action;
 
-        operator const projXY ()
+        operator const PJ_UV ()
         {
-            projXY p;
+            PJ_UV p;
             p.u = lon;
             p.v = lat;
             return p;

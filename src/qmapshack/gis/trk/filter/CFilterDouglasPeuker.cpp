@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk &trk, QWidget * parent)
+CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {

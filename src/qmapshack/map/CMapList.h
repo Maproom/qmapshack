@@ -29,7 +29,7 @@ class CMapTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 public:
-    CMapTreeWidget(QWidget * parent) : QTreeWidget(parent)
+    CMapTreeWidget(QWidget* parent) : QTreeWidget(parent)
     {
     }
 
@@ -37,9 +37,9 @@ signals:
     void sigChanged();
 
 protected:
-    void dragEnterEvent(QDragEnterEvent *e) override;
-    void dragMoveEvent(QDragMoveEvent  *e) override;
-    void dropEvent(QDropEvent      *e) override;
+    void dragEnterEvent(QDragEnterEvent* e) override;
+    void dragMoveEvent(QDragMoveEvent* e) override;
+    void dropEvent(QDropEvent* e) override;
 };
 
 #include "ui_IMapList.h"
@@ -48,13 +48,13 @@ class CMapList : public QWidget, private Ui::IMapList
 {
     Q_OBJECT
 public:
-    CMapList(QWidget * parent);
+    CMapList(QWidget* parent);
     virtual ~CMapList();
 
     void clear();
     void sort();
     int count();
-    CMapItem * item(int i);
+    CMapItem* item(int i);
     operator QTreeWidget*()
     {
         return treeWidget;
@@ -73,11 +73,11 @@ private slots:
     void slotMoveUp();
     void slotMoveDown();
     void slotReloadMaps();
-    void slotContextMenu(const QPoint &point);
-    void slotFilter(const QString &str);
+    void slotContextMenu(const QPoint& point);
+    void slotFilter(const QString& str);
 
 private:
-    QMenu * menu;
+    QMenu* menu;
 };
 
 #endif //CMAPLIST_H

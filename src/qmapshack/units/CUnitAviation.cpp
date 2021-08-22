@@ -20,7 +20,7 @@
 
 #include "units/CUnitAviation.h"
 
-CUnitAviation::CUnitAviation(QObject * parent)
+CUnitAviation::CUnitAviation(QObject* parent)
     : IUnit(eTypeAviation, "ft", footPerMeter, "kn", meterPerSecToKnots, "ft", footPerMeter, parent)
 {
 }
@@ -30,7 +30,7 @@ void CUnitAviation::meter2distance(qreal meter, QString& val, QString& unit) con
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit.clear();
     }
     else if(meter < 1852)
@@ -49,7 +49,7 @@ void CUnitAviation::meter2distance(qreal meter, qreal& val, QString& unit) const
 {
     if(meter == NOFLOAT)
     {
-        val  = NOFLOAT;
+        val = NOFLOAT;
         unit.clear();
     }
     else
@@ -63,7 +63,7 @@ void CUnitAviation::meter2area(qreal meter, QString& val, QString& unit) const /
 {
     if(meter == NOFLOAT)
     {
-        val  = "-";
+        val = "-";
         unit.clear();
     }
     else
@@ -77,7 +77,7 @@ void CUnitAviation::meter2area(qreal meter, qreal& val, QString& unit) const /* 
 {
     if(meter == NOFLOAT)
     {
-        val  = NOFLOAT;
+        val = NOFLOAT;
         unit.clear();
     }
     else
@@ -92,9 +92,9 @@ qreal CUnitAviation::elevation2meter(const QString& val) const /* override */
     return val.toDouble() / footPerMeter;
 }
 
-void CUnitAviation::meter2unit(qreal meter, qreal& scale, QString&  unit) const
+void CUnitAviation::meter2unit(qreal meter, qreal& scale, QString& unit) const
 {
     scale = nauticalMilePerMeter;
-    unit  = "nm";
+    unit = "nm";
 }
 

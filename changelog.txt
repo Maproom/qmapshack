@@ -1,3 +1,41 @@
+V1.16.0
+[QMS-220] "Select items from map" misses items
+[QMS-275] Routino: Add Spanish and Czech as selectable languages for turn instructions
+[QMS-279] Track metrics not updated when using UNDO / REDO in Edit mode
+[QMS-282] Tags icons/rating disappear from workspace after saving and closing a project
+[QMS-285] WMTS-based maps aren't restored correctly
+[QMS-297] Add GUI framework for POI databases
+[QMS-299] CEnergyCycling is storing it's configuration in the `General` section instead of it's own.
+[QMS-301] Load POI file
+[QMS-303] Add POI icons
+[QMS-307] Optimization of POI query
+[QMS-311] Automatically save projects to device
+[QMS-313] UX improvements for POIs
+[QMS-314] Fix/Add POI categories
+[QMS-315] Make POI Icons User-Selectable
+[QMS-317] Enable user to add POI to project via right-click
+[QMS-318] Change poi_t to use radians
+[QMS-321] Improve name selection for POI
+[QMS-322] Make POIs show up in 'Select Items On Map'
+[QMS-337] Upgrade to Proj 8 API
+[QMS-343] .fit files from Suunto app have many trackpoints with elevation = 0
+[QMS-344] Better integration of new PROJ lib into cmake build system
+[QMS-349] Upgrade to Quazip Qt5 V1.x
+[QMS-353] "Select Items on Map" does not update when items are removed
+[QMS-354] Refactor the code to get rid of clazy warnings
+[QMS-360] Fix compile flags for Windows 64bit
+[QMS-362] Fit files containing more than one developer data ID cannot be opened. e.g. from a Garmin FR 935 and a connected Stryd footpod
+[QMS-363] GIS items missing in projects loaded from file or database
+[QMS-371] Crash while loading geocache from TwoNav device
+[QMS-373] Refine templates to hide comments
+[QMS-375] On-screen profile window has no close button
+[QMS-378] Add option to link map views
+[QMS-380] Toggle fullscreen does not work
+[QMS-382] QMapTool: Allow customized GDAL parameters
+[QMS-384] Add Garmin Fit power data to support powermeter pedals
+[QMS-389] Crash when loading/drawing POIs
+[QMS-391] Adapt Windows build scripts to PROJ.8/Quazip 1.x
+
 V1.15.2
 [QMS-264] Windows: adapt build scripts for 1.15.1 release
 [QMS-265] Configuring BRouter offline on MacOS crashes

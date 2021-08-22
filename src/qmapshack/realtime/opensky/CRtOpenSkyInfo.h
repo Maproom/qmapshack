@@ -32,7 +32,7 @@ class CRtOpenSkyInfo : public IRtInfo, private Ui::IRtOpenSkyInfo
 {
     Q_OBJECT
 public:
-    CRtOpenSkyInfo(CRtOpenSky& source, QWidget * parent);
+    CRtOpenSkyInfo(CRtOpenSky& source, QWidget* parent);
     virtual ~CRtOpenSkyInfo() = default;
 
     void loadSettings(QSettings& cfg);

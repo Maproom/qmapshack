@@ -26,7 +26,7 @@ class CLostFoundProject : public CDBProject
 {
     Q_DECLARE_TR_FUNCTIONS(CLostFoundProject)
 public:
-    CLostFoundProject(const QString &dbName, CGisListWks * parent);
+    CLostFoundProject(const QString& dbName, CGisListWks* parent);
 
     virtual ~CLostFoundProject();
 

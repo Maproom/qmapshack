@@ -25,14 +25,14 @@
 
 #include <QtWidgets>
 
-CMouseEditTrk::CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
+CMouseEditTrk::CMouseEditTrk(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouseEditLine(IGisItem::key_t(), point, true, tr("Track"), gis, canvas, mouse)
 {
     startNewLine(point);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-CMouseEditTrk::CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
+CMouseEditTrk::CMouseEditTrk(CGisItemTrk& trk, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouseEditLine(trk.getKey(), trk, true, tr("Track"), gis, canvas, mouse)
     , isNewLine(false)
 {
@@ -55,7 +55,7 @@ CMouseEditTrk::~CMouseEditTrk()
 //    canvas->reportStatus(key,"");
 }
 
-IGisLine * CMouseEditTrk::getGisLine() const
+IGisLine* CMouseEditTrk::getGisLine() const
 {
     return dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
 }
@@ -93,10 +93,10 @@ void CMouseEditTrk::slotCopyToNew()
     }
 
 
-    IGisProject * project = nullptr;
+    IGisProject* project = nullptr;
 
     QString name;
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
+    CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk != nullptr)
     {
         name = trk->getName();

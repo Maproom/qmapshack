@@ -21,18 +21,18 @@
 
 #include <QtWidgets>
 
-CShell * CShell::pSelf = nullptr;
+CShell* CShell::pSelf = nullptr;
 
-CShell::CShell(QWidget *parent)
+CShell::CShell(QWidget* parent)
     : QTextBrowser(parent)
 {
     pSelf = this;
 
-    connect(&cmd, &QProcess::readyReadStandardError,  this, &CShell::slotStderr);
+    connect(&cmd, &QProcess::readyReadStandardError, this, &CShell::slotStderr);
     connect(&cmd, &QProcess::readyReadStandardOutput, this, &CShell::slotStdout);
 
     connect(&cmd, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &CShell::slotFinished);
-    connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)   >(&QProcess::error),    this, &CShell::slotError);
+    connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)   >(&QProcess::error), this, &CShell::slotError);
 }
 
 void CShell::slotError(QProcess::ProcessError error)
@@ -64,13 +64,13 @@ void CShell::slotStderr()
 
     if(str[0] == '\r')
     {
-#ifdef WIN32
+#ifdef Q_OS_WIN64
         if(str.contains("\n"))
         {
             insertPlainText("\n");
         }
         else
-#endif // WIN32
+#endif // Q_OS_WIN64
         {
             moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
             moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
@@ -79,7 +79,7 @@ void CShell::slotStderr()
         }
 
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
         str = str.split("\r").last().remove("\r").remove("\n");
 #else
         str = str.split("\r").last();
@@ -98,13 +98,13 @@ void CShell::slotStdout()
 
     if(str[0] == '\r')
     {
-#ifdef WIN32
+#ifdef Q_OS_WIN64
         if(str.contains("\n"))
         {
             insertPlainText("\n");
         }
         else
-#endif // WIN32
+#endif // Q_OS_WIN64
         {
             moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
             moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
@@ -112,7 +112,7 @@ void CShell::slotStdout()
             textCursor().removeSelectedText();
         }
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
         str = str.split("\r").last().remove("\r").remove("\n");
 #else
         str = str.split("\r").last();
@@ -174,8 +174,8 @@ int CShell::execute(QList<CShellCmd> cmds)
 
     clear();
 
-    idxCommand  = 0;
-    commands    = cmds;
+    idxCommand = 0;
+    commands = cmds;
 
     nextCommand();
     return ++jobId;

@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CDialogRefPoint::CDialogRefPoint(QPointF& ptPtx, QPointF& ptRef, QWidget *parent)
+CDialogRefPoint::CDialogRefPoint(QPointF& ptPtx, QPointF& ptRef, QWidget* parent)
     : QDialog(parent)
     , ptPtx(ptPtx)
     , ptRef(ptRef)

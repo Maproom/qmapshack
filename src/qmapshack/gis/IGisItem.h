@@ -158,6 +158,7 @@ public:
         , eSelectionWpt         = 0x40000000
         , eSelectionRte         = 0x20000000
         , eSelectionOvl         = 0x10000000
+        , eSelectionPoi         = 0x08000000
     };
 
     using selflags_t = quint32;
@@ -204,15 +205,15 @@ public:
         QString device;
     };
 
-    IGisItem(IGisProject *parent, type_e typ, int idx);
+    IGisItem(IGisProject* parent, type_e typ, int idx);
     virtual ~IGisItem();
 
     /// this mutex has to be locked when ever the item list is accessed.
     static QMutex mutexItems;
 
     static void init();
-    static QMenu * getColorMenu(const QString &title, QObject *obj, const char *slot, QWidget * parent);
-    static qint32 selectColor(QWidget * parent);
+    static QMenu* getColorMenu(const QString& title, QObject* obj, const char* slot, QWidget* parent);
+    static qint32 selectColor(QWidget* parent);
 
     /**
        @brief If the item is part of a database project it will update itself with the database content
@@ -266,7 +267,7 @@ public:
        @brief Get the icon attached to object
        @return
      */
-    void setIcon(const QPixmap & icon);
+    void setIcon(const QPixmap& icon);
 
     const QPixmap& getIcon() const
     {
@@ -348,7 +349,7 @@ public:
        @param mouse     a pointer to the mouse object initiating the action
        @return A null pointer is returned if no screen option are available
      */
-    virtual IScrOpt* getScreenOptions(const QPoint& origin, IMouse * mouse)
+    virtual IScrOpt* getScreenOptions(const QPoint& origin, IMouse* mouse)
     {
         return nullptr;
     }
@@ -421,11 +422,11 @@ public:
      */
     virtual bool setReadOnlyMode(bool readOnly);
 
-    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) = 0;
-    virtual void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis) = 0;
+    virtual void drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis)
     {
     }
-    virtual void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) = 0;
+    virtual void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis) = 0;
     virtual void drawHighlight(QPainter& p) = 0;
 
     virtual void gainUserFocus(bool yes) = 0;
@@ -500,7 +501,7 @@ public:
 
        @return The pointer of the cloned item
      */
-    virtual IGisItem * createClone() = 0;
+    virtual IGisItem* createClone() = 0;
 
     void setNogo(bool yes);
     bool isNogo() const
@@ -510,14 +511,14 @@ public:
 
     static const QBrush& getNogoTextureBrush();
 
-    IGisProject * getParentProject() const;
+    IGisProject* getParentProject() const;
 
     /**
        @brief Remove all HTML tags from a string
        @param str the string
        @return A string without HTML tags
      */
-    static QString removeHtml(const QString &str);
+    static QString removeHtml(const QString& str);
     /**
        @brief Create a HTML formatted text with comment, description and link section.
 
@@ -566,10 +567,10 @@ public:
 
        @return Returns true on success. Otherwise false.
      */
-    static bool getNameAndProject(QString &name, IGisProject *&project, const QString &itemtype);
+    static bool getNameAndProject(QString& name, IGisProject*& project, const QString& itemtype);
 
 
-    static IGisItem * newGisItem(quint32 type, quint64 id, QSqlDatabase& db, IGisProject * project);
+    static IGisItem* newGisItem(quint32 type, quint64 id, QSqlDatabase& db, IGisProject* project);
 
 
     /// a no key value that can be used to nullify references.
@@ -579,7 +580,7 @@ public:
 
     struct color_t
     {
-        const char   *  name;
+        const char* name;
         const QString label;
         const QColor color;
         const QString bullet;
@@ -597,17 +598,17 @@ public:
     void setRating(qreal rating);
     const QSet<QString>& getKeywords() const;
     QList<QString> getKeywordsSorted() const;
-    void addKeywords(const QSet<QString> &otherKeywords);
-    void removeKeywords(const QSet<QString> &otherKeywords);
+    void addKeywords(const QSet<QString>& otherKeywords);
+    void removeKeywords(const QSet<QString>& otherKeywords);
     const QString getRatingKeywordInfo() const;
 
 protected:
     /// set icon of QTreeWidgetItem
     virtual void setSymbol() = 0;
     /// read waypoint data from an XML snippet
-    void readWpt(const QDomNode& xml, wpt_t &wpt);
+    void readWpt(const QDomNode& xml, wpt_t& wpt);
     /// write waypoint data to an XML snippet
-    void writeWpt(QDomElement &xml, const wpt_t &wpt, bool strictGpx11);
+    void writeWpt(QDomElement& xml, const wpt_t& wpt, bool strictGpx11);
     /// generate a unique key from item's data
     virtual void genKey() const;
     /// setup the history structure right after the creation of the item
@@ -617,15 +618,15 @@ protected:
     /// convert a color string from GPX to a QT color
     QColor str2color(const QString& name);
     /// convert a QT color to a string to be used in a GPX file
-    QString color2str(const QColor &color);
+    QString color2str(const QColor& color);
     /// to optimize drawing of large polylines split the line into sections that are visible
     void splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines);
     /// call when ever you make a change to the item's data
     virtual void changed(const QString& what, const QString& icon);
 
     void loadFromDb(quint64 id, QSqlDatabase& db);
-    bool isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw * gis);
-    bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis);
+    bool isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw* gis);
+    bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw* gis);
     bool isWithin(const QRectF& area, selflags_t flags, const QPolygonF& points);
     void setNogoFlag(bool yes);
 

@@ -27,29 +27,29 @@ class COverlayRefMapPoint;
 class CItemRefMap : public CItemFile
 {
 public:
-    CItemRefMap(const QString& filename, QStackedWidget * stackedWidget, QListWidget *parent);
+    CItemRefMap(const QString& filename, QStackedWidget* stackedWidget, QListWidget* parent);
     virtual ~CItemRefMap();
 
     void saveSettings(QSettings& cfg) override;
     void loadSettings(QSettings& cfg) override;
 
-    void addRefPoints(QList<COverlayRefMapPoint *> &points);
+    void addRefPoints(QList<COverlayRefMapPoint*>& points);
     QString getMapProjection() const;
     const QList<COverlayRefMapPoint*> getRefPoints() const;
 
     void toFront() override;
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
-    void mouseMoveEventFx(QMouseEvent *e) override;
-    void mouseReleaseEventFx(QMouseEvent *e) override;
-    void leaveEventFx(QEvent *e) override;
-    bool keyPressEventFx(QKeyEvent *e) override;
+    void mouseMoveEventFx(QMouseEvent* e) override;
+    void mouseReleaseEventFx(QMouseEvent* e) override;
+    void leaveEventFx(QEvent* e) override;
+    bool keyPressEventFx(QKeyEvent* e) override;
     QCursor getCursorFx() override;
 
     bool isOk() const override;
 
 private:
-    COverlayRefMap * overlay;
+    COverlayRefMap* overlay;
 };
 
 #endif //CITEMREFMAP_H

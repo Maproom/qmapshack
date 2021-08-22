@@ -57,7 +57,7 @@ void CRouterBRouterTilesPage::beginPage() const
     widgetLocalTilesSelect->initialize();
 }
 
-void CRouterBRouterTilesPage::setSetup(CRouterBRouterSetup * setup) const
+void CRouterBRouterTilesPage::setSetup(CRouterBRouterSetup* setup) const
 {
     widgetLocalTilesSelect->setSetup(setup);
 }
@@ -80,7 +80,7 @@ bool CRouterBRouterTilesPage::raiseWarning() const
     }
     msgBox.setInformativeText("Do you want to cancel or continue with setup");
     msgBox.setStandardButtons(QMessageBox::Cancel);
-    QPushButton *continueButton = msgBox.addButton(tr("Continue with Setup"), QMessageBox::NoRole);
+    QPushButton* continueButton = msgBox.addButton(tr("Continue with Setup"), QMessageBox::NoRole);
     msgBox.exec();
     if (msgBox.clickedButton() == continueButton)
     {

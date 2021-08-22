@@ -21,28 +21,27 @@
 #include "gis/CGisWorkspace.h"
 #include "gis/IGisLine.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/proj_x.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/wpt/CGisItemWpt.h"
 
-
-#include <proj_api.h>
 #include <QtWidgets>
 
-CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWidget *parent)
+CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t>& keys, QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);
 
     for(const IGisItem::key_t& key : keys)
     {
-        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
         if(nullptr == wpt)
         {
             continue;
         }
 
-        QListWidgetItem * item = new QListWidgetItem(listWidget);
+        QListWidgetItem* item = new QListWidgetItem(listWidget);
         item->setText(wpt->getName());
         item->setIcon(wpt->getIcon());
         item->setToolTip(wpt->getInfo(IGisItem::eFeatureShowName));
@@ -50,8 +49,8 @@ CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWi
     }
 
     connect(listWidget, &QListWidget::itemSelectionChanged, this, &CCreateRouteFromWpt::slotSelectionChanged);
-    connect(toolUp,     &QToolButton::clicked,              this, &CCreateRouteFromWpt::slotUp);
-    connect(toolDown,   &QToolButton::clicked,              this, &CCreateRouteFromWpt::slotDown);
+    connect(toolUp, &QToolButton::clicked, this, &CCreateRouteFromWpt::slotUp);
+    connect(toolDown, &QToolButton::clicked, this, &CCreateRouteFromWpt::slotDown);
 }
 
 CCreateRouteFromWpt::~CCreateRouteFromWpt()
@@ -63,7 +62,7 @@ void CCreateRouteFromWpt::accept()
     QDialog::accept();
 
     QString name;
-    IGisProject *project = nullptr;
+    IGisProject* project = nullptr;
 
     if(!IGisItem::getNameAndProject(name, project, tr("route")))
     {
@@ -73,7 +72,7 @@ void CCreateRouteFromWpt::accept()
     SGisLine points;
     for(int i = 0; i < listWidget->count(); i++)
     {
-        QListWidgetItem * item = listWidget->item(i);
+        QListWidgetItem* item = listWidget->item(i);
         points << IGisLine::point_t(item->data(Qt::UserRole + 0).toPointF(), item->text());
     }
 
@@ -83,7 +82,7 @@ void CCreateRouteFromWpt::accept()
 
 void CCreateRouteFromWpt::slotSelectionChanged()
 {
-    QListWidgetItem * item = listWidget->currentItem();
+    QListWidgetItem* item = listWidget->currentItem();
     if(item != nullptr)
     {
         int row = listWidget->row(item);
@@ -99,7 +98,7 @@ void CCreateRouteFromWpt::slotSelectionChanged()
 
 void CCreateRouteFromWpt::slotUp()
 {
-    QListWidgetItem * item = listWidget->currentItem();
+    QListWidgetItem* item = listWidget->currentItem();
     if(item)
     {
         int row = listWidget->row(item);
@@ -116,7 +115,7 @@ void CCreateRouteFromWpt::slotUp()
 
 void CCreateRouteFromWpt::slotDown()
 {
-    QListWidgetItem * item = listWidget->currentItem();
+    QListWidgetItem* item = listWidget->currentItem();
     if(item)
     {
         int row = listWidget->row(item);

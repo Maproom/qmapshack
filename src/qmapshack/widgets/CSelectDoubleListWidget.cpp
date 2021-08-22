@@ -20,16 +20,16 @@
 #include "CSelectDoubleListWidget.h"
 #include <QListWidgetItem>
 
-CSelectDoubleListWidget::CSelectDoubleListWidget(QWidget * parent, IItemFilter *filter) : QWidget(parent), filter(filter)
+CSelectDoubleListWidget::CSelectDoubleListWidget(QWidget* parent, IItemFilter* filter) : QWidget(parent), filter(filter)
 {
     setupUi(this);
 
-    connect(listSelected,  &QListView::clicked,   this, &CSelectDoubleListWidget::slotSelectedClicked);
-    connect(listAvailable, &QListView::clicked,   this, &CSelectDoubleListWidget::slotAvailableClicked);
-    connect(toolAdd,       &QToolButton::clicked, this, &CSelectDoubleListWidget::slotAdd);
-    connect(toolRemove,    &QToolButton::clicked, this, &CSelectDoubleListWidget::slotRemove);
-    connect(toolUp,        &QToolButton::clicked, this, &CSelectDoubleListWidget::slotUp);
-    connect(toolDown,      &QToolButton::clicked, this, &CSelectDoubleListWidget::slotDown);
+    connect(listSelected, &QListView::clicked, this, &CSelectDoubleListWidget::slotSelectedClicked);
+    connect(listAvailable, &QListView::clicked, this, &CSelectDoubleListWidget::slotAvailableClicked);
+    connect(toolAdd, &QToolButton::clicked, this, &CSelectDoubleListWidget::slotAdd);
+    connect(toolRemove, &QToolButton::clicked, this, &CSelectDoubleListWidget::slotRemove);
+    connect(toolUp, &QToolButton::clicked, this, &CSelectDoubleListWidget::slotUp);
+    connect(toolDown, &QToolButton::clicked, this, &CSelectDoubleListWidget::slotDown);
 }
 
 CSelectDoubleListWidget::~CSelectDoubleListWidget()
@@ -41,12 +41,12 @@ void CSelectDoubleListWidget::sortAvailable()
     listAvailable->sortItems();
 }
 
-void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem *> & available)
+void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem*>& available)
 {
     this->available.clear();
     this->available << available;
     listAvailable->clear();
-    for (QListWidgetItem * const & item : available)
+    for (QListWidgetItem* const& item : available)
     {
         int index = listSelected->row(item);
         if (index < 0)
@@ -63,10 +63,10 @@ void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem *> & avai
     updateButtons();
 }
 
-void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem *> & selected) const
+void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem*>& selected) const
 {
     listSelected->clear();
-    for (QListWidgetItem * const & item : selected)
+    for (QListWidgetItem* const& item : selected)
     {
         int index = listAvailable->row(item);
         if (index < 0)
@@ -89,24 +89,24 @@ void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem *> & selec
     updateButtons();
 }
 
-void CSelectDoubleListWidget::setFilter(IItemFilter * const & filter)
+void CSelectDoubleListWidget::setFilter(IItemFilter* const& filter)
 {
     this->filter = filter;
 }
 
-void CSelectDoubleListWidget::setLabelAvailable(const QString & label) const
+void CSelectDoubleListWidget::setLabelAvailable(const QString& label) const
 {
     labelAvailable->setText(label);
 }
 
-void CSelectDoubleListWidget::setLabelSelected(const QString & label) const
+void CSelectDoubleListWidget::setLabelSelected(const QString& label) const
 {
     labelSelected->setText(label);
 }
 
-const QList<QListWidgetItem *> CSelectDoubleListWidget::selected() const
+const QList<QListWidgetItem*> CSelectDoubleListWidget::selected() const
 {
-    QList<QListWidgetItem *> selected;
+    QList<QListWidgetItem*> selected;
     for (int i = 0; i < listSelected->count(); i++)
     {
         selected << listSelected->item(i);
@@ -121,13 +121,13 @@ void CSelectDoubleListWidget::clear()
     listSelected->clear();
 }
 
-void CSelectDoubleListWidget::slotSelectedClicked(const QModelIndex & index) const
+void CSelectDoubleListWidget::slotSelectedClicked(const QModelIndex& index) const
 {
     listAvailable->clearSelection();
     updateButtons();
 }
 
-void CSelectDoubleListWidget::slotAvailableClicked(const QModelIndex & index) const
+void CSelectDoubleListWidget::slotAvailableClicked(const QModelIndex& index) const
 {
     listSelected->clearSelection();
     updateButtons();
@@ -135,7 +135,8 @@ void CSelectDoubleListWidget::slotAvailableClicked(const QModelIndex & index) co
 
 void CSelectDoubleListWidget::slotAdd() const
 {
-    for (QListWidgetItem * const & item : listAvailable->selectedItems())
+    const QList<QListWidgetItem*>& items = listAvailable->selectedItems();
+    for (QListWidgetItem* const& item : items)
     {
         if (filter == nullptr || filter->shouldBeMoved(item))
         {
@@ -152,7 +153,8 @@ void CSelectDoubleListWidget::slotAdd() const
 
 void CSelectDoubleListWidget::slotRemove() const
 {
-    for (QListWidgetItem * const & item : listSelected->selectedItems())
+    const QList<QListWidgetItem*>& items = listSelected->selectedItems();
+    for (QListWidgetItem* const& item : items)
     {
         if (filter == nullptr || filter->shouldBeMoved(item))
         {
@@ -180,14 +182,15 @@ void CSelectDoubleListWidget::slotRemove() const
 void CSelectDoubleListWidget::slotUp() const
 {
     QList<int> indices;
-    for (const QModelIndex & modelIndex : listSelected->selectionModel()->selectedIndexes())
+    const QModelIndexList& indexes = listSelected->selectionModel()->selectedIndexes();
+    for (const QModelIndex& modelIndex : indexes)
     {
         indices << modelIndex.row();
     }
     std::sort(indices.begin(), indices.end());
 
     int i = 0;
-    for (int index : indices)
+    for (int index : qAsConst(indices))
     {
         if (index > i)
         {
@@ -202,14 +205,15 @@ void CSelectDoubleListWidget::slotUp() const
 void CSelectDoubleListWidget::slotDown() const
 {
     QList<int> indices;
-    for (const QModelIndex & modelIndex : listSelected->selectionModel()->selectedIndexes())
+    const QModelIndexList& indexes = listSelected->selectionModel()->selectedIndexes();
+    for (const QModelIndex& modelIndex : indexes)
     {
         indices << modelIndex.row();
     }
     std::sort(indices.begin(), indices.end(), [] (int a, int b) { return a > b; });
 
     int i = listSelected->count() - 1;
-    for (int index : indices)
+    for (int index : qAsConst(indices))
     {
         if (index < i)
         {
@@ -225,7 +229,7 @@ void CSelectDoubleListWidget::updateButtons() const
 {
     toolAdd->setEnabled(listAvailable->selectionModel()->hasSelection());
 
-    const QItemSelectionModel * const & selectedSelectionModel = listSelected->selectionModel();
+    const QItemSelectionModel* const& selectedSelectionModel = listSelected->selectionModel();
     if (selectedSelectionModel->hasSelection())
     {
         toolRemove->setEnabled(true);

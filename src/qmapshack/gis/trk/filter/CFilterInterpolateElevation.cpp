@@ -21,7 +21,7 @@
 #include "gis/trk/filter/CFilterInterpolateElevation.h"
 #include "helpers/CSettings.h"
 
-CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk &trk, QWidget *parent)
+CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {

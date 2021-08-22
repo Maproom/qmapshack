@@ -32,7 +32,7 @@ struct wpt_head_entry_t
 
 QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
 {
-    QIODevice * dev = s.device();
+    QIODevice* dev = s.device();
     qint64 pos = dev->pos();
 
     char magic[9];
@@ -70,7 +70,6 @@ QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
         case CQlgtWpt::eBase:
         {
             QString icon;
-            QString key;
 
             QDataStream s1(&entry->data, QIODevice::ReadOnly);
             s1.setVersion(QDataStream::Qt_4_5);
@@ -299,7 +298,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
 
         s3 << cache.logs.count();
 
-        for(const CQlgtWpt::geocachelog_t& log : cache.logs)
+        for(const CQlgtWpt::geocachelog_t& log : qAsConst(cache.logs))
         {
             s3 << log.id;
             s3 << log.date;
@@ -359,7 +358,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
 }
 
 
-CQlgtWpt::CQlgtWpt(quint64 id, QObject *parent)
+CQlgtWpt::CQlgtWpt(quint64 id, QObject* parent)
     : QObject(parent)
     , IItem(id)
 {

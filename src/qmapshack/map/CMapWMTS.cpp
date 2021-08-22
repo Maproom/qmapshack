@@ -30,7 +30,7 @@
 #include <ogr_spatialref.h>
 
 
-CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
+CMapWMTS::CMapWMTS(const QString& filename, CMapDraw* parent)
     : IMapOnline(parent)
 {
     qDebug() << "------------------------------";
@@ -64,12 +64,12 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         return;
     }
     const QDomNode& xmlServiceIdentification = xmlCapabilities.namedItem("ServiceIdentification");
-    QString ServiceType         = xmlServiceIdentification.firstChildElement("ServiceType").text();
-    QString ServiceTypeVersion  = xmlServiceIdentification.firstChildElement("ServiceTypeVersion").text();
+    QString ServiceType = xmlServiceIdentification.firstChildElement("ServiceType").text();
+    QString ServiceTypeVersion = xmlServiceIdentification.firstChildElement("ServiceTypeVersion").text();
 
     if(!ServiceType.contains("WMTS", Qt::CaseInsensitive) || ServiceTypeVersion != "1.0.0")
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unexpected service. '* WMTS 1.0.0' is expected. '%1 %2' is read.").arg(ServiceType).arg(ServiceTypeVersion), QMessageBox::Abort, QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Unexpected service. '* WMTS 1.0.0' is expected. '%1 %2' is read.").arg(ServiceType, ServiceTypeVersion), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
 
@@ -123,9 +123,9 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
             for(int l = 0; l < L; l++)
             {
                 const QDomNode& xmlTileMatrixLimit = xmlTileMatrixLimits.at(l);
-                QString Identifier          = xmlTileMatrixLimit.namedItem("TileMatrix").toElement().text();
-                layer.limits[Identifier]    = limit_t();
-                limit_t& limit              = layer.limits[Identifier];
+                QString Identifier = xmlTileMatrixLimit.namedItem("TileMatrix").toElement().text();
+                layer.limits[Identifier] = limit_t();
+                limit_t& limit = layer.limits[Identifier];
 
                 limit.minTileRow = xmlTileMatrixLimit.namedItem("MinTileRow").toElement().text().toInt();
                 limit.maxTileRow = xmlTileMatrixLimit.namedItem("MaxTileRow").toElement().text().toInt();
@@ -150,9 +150,9 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
             const QDomNode& xmlDimension = xmlDimensions.at(d);
 
             QString Identifier = xmlDimension.namedItem("Identifier").toElement().text();
-            QString Default    = xmlDimension.namedItem("Default").toElement().text();
+            QString Default = xmlDimension.namedItem("Default").toElement().text();
 
-            layer.resourceURL  = layer.resourceURL.replace("{" + Identifier + "}", Default, Qt::CaseInsensitive);
+            layer.resourceURL = layer.resourceURL.replace("{" + Identifier + "}", Default, Qt::CaseInsensitive);
         }
 
         if(!httpsCheck(layer.resourceURL))
@@ -167,7 +167,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
     // Add custom headers
     const QDomElement& xmlRawHeader = xmlContents.firstChildElement("RawHeader");
-    const QDomNodeList& xmlValues   = xmlRawHeader.elementsByTagName("Value");
+    const QDomNodeList& xmlValues = xmlRawHeader.elementsByTagName("Value");
     const int H = xmlValues.count();
     for(qint32 n = 0; n < H; ++n)
     {
@@ -196,15 +196,15 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         }
 
 
-        QString Identifier      = xmlTileMatrixSet.namedItem("Identifier").toElement().text();
-        tilesets[Identifier]    = tileset_t();
-        tileset_t& tileset      = tilesets[Identifier];
+        QString Identifier = xmlTileMatrixSet.namedItem("Identifier").toElement().text();
+        tilesets[Identifier] = tileset_t();
+        tileset_t& tileset = tilesets[Identifier];
 
         // read projection string
         QString str = xmlTileMatrixSet.namedItem("SupportedCRS").toElement().text();
 
-        char * ptr1 = (char*)malloc(str.toLatin1().size() + 1);
-        char * ptr2 = nullptr;
+        char* ptr1 = (char*)malloc(str.toLatin1().size() + 1);
+        char* ptr2 = nullptr;
 
         strncpy(ptr1, str.toLatin1().data(), str.toLatin1().size() + 1);
         OGRSpatialReference oSRS;
@@ -221,12 +221,13 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         oSRS.exportToProj4(&ptr2);
 
         qDebug() << ptr1 << ptr2;
-        tileset.pjsrc = pj_init_plus(ptr2);
+
+        tileset.proj.init(ptr2, "EPSG:4326");
 
         free(ptr1);
         free(ptr2);
 
-        if(tileset.pjsrc == nullptr)
+        if(!tileset.proj.isValid())
         {
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("No georeference information found."));
             return;
@@ -240,17 +241,17 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
             QString str;
             QStringList values;
             const QDomNode& xmlTileMatrix = xmlTileMatrixN.at(n);
-            QString Identifier =  xmlTileMatrix.namedItem("Identifier").toElement().text();
+            QString Identifier = xmlTileMatrix.namedItem("Identifier").toElement().text();
             tileset.tilematrix[Identifier] = tilematrix_t();
             tilematrix_t& matrix = tileset.tilematrix[Identifier];
 
             str = xmlTileMatrix.namedItem("TopLeftCorner").toElement().text();
             values = str.split(" ");
-            matrix.topLeft      = QPointF(values[0].toDouble(), values[1].toDouble());
-            matrix.scale        = xmlTileMatrix.namedItem("ScaleDenominator").toElement().text().toDouble();
-            matrix.tileWidth    = xmlTileMatrix.namedItem("TileWidth").toElement().text().toInt();
-            matrix.tileHeight   = xmlTileMatrix.namedItem("TileHeight").toElement().text().toInt();
-            matrix.matrixWidth  = xmlTileMatrix.namedItem("MatrixWidth").toElement().text().toInt();
+            matrix.topLeft = QPointF(values[0].toDouble(), values[1].toDouble());
+            matrix.scale = xmlTileMatrix.namedItem("ScaleDenominator").toElement().text().toDouble();
+            matrix.tileWidth = xmlTileMatrix.namedItem("TileWidth").toElement().text().toInt();
+            matrix.tileHeight = xmlTileMatrix.namedItem("TileHeight").toElement().text().toInt();
+            matrix.matrixWidth = xmlTileMatrix.namedItem("MatrixWidth").toElement().text().toInt();
             matrix.matrixHeight = xmlTileMatrix.namedItem("MatrixHeight").toElement().text().toInt();
         }
     }
@@ -276,9 +277,9 @@ void CMapWMTS::getLayers(QListWidget& list)
     }
 
     int i = 0;
-    for(const layer_t &layer : layers)
+    for(const layer_t& layer : qAsConst(layers))
     {
-        QListWidgetItem * item = new QListWidgetItem(layer.title, &list);
+        QListWidgetItem* item = new QListWidgetItem(layer.title, &list);
         item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
         item->setData(Qt::UserRole, i++);
     }
@@ -329,7 +330,7 @@ void CMapWMTS::loadConfig(QSettings& cfg) /* override */
 
     // enable layers stored in configuration
     enabled = cfg.value("enabledLayers", enabled).toStringList();
-    for(const QString &str : enabled)
+    for(const QString& str : qAsConst(enabled))
     {
         int idx = str.toInt();
         if(idx < layers.size())
@@ -340,7 +341,7 @@ void CMapWMTS::loadConfig(QSettings& cfg) /* override */
 }
 
 
-void CMapWMTS::slotLayersChanged(QListWidgetItem * item)
+void CMapWMTS::slotLayersChanged(QListWidgetItem* item)
 {
     QMutexLocker lock(&mutex);
 
@@ -348,7 +349,7 @@ void CMapWMTS::slotLayersChanged(QListWidgetItem * item)
     int idx = item->data(Qt::UserRole).toInt();
     if(idx < 0)
     {
-        QListWidget * list = item->listWidget();
+        QListWidget* list = item->listWidget();
         list->blockSignals(true);
 
         for(int i = 0; i < layers.size(); i++)
@@ -408,33 +409,33 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
     {
         x1 = -180 * DEG_TO_RAD;
     }
-    if(x2 >  180.0 * DEG_TO_RAD)
+    if(x2 > 180.0 * DEG_TO_RAD)
     {
-        x2 =  180 * DEG_TO_RAD;
+        x2 = 180 * DEG_TO_RAD;
     }
 
 
     QRectF viewport(QPointF(x1, y1) * RAD_TO_DEG, QPointF(x2, y2) * RAD_TO_DEG);
 
     // draw layers
-    for(const layer_t &layer : layers)
+    for(const layer_t& layer : qAsConst(layers))
     {
         if(!layer.boundingBox.intersects(viewport) || !layer.enabled)
         {
             continue;
         }
 
-        const tileset_t& tileset            = tilesets[layer.tileMatrixSet];
+        const tileset_t& tileset = tilesets[layer.tileMatrixSet];
         const QMap<QString, limit_t>& limits = layer.limits;
 
         // convert viewport to layer's coordinate system
         QPointF pt1(x1, y1);
         QPointF pt2(x2, y2);
 
-        pj_transform(pjtar, tileset.pjsrc, 1, 0, &pt1.rx(), &pt1.ry(), 0);
-        pj_transform(pjtar, tileset.pjsrc, 1, 0, &pt2.rx(), &pt2.ry(), 0);
+        tileset.proj.transform(pt1, PJ_INV);
+        tileset.proj.transform(pt2, PJ_INV);
 
-        if(pj_is_latlong(tileset.pjsrc))
+        if(tileset.proj.isSrcLatLong())
         {
             pt1 *= RAD_TO_DEG;
             pt2 *= RAD_TO_DEG;
@@ -444,7 +445,8 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
         QString tileMatrixId;
         QPointF s1 = (pt2 - pt1) / QPointF(buf.image.width(), buf.image.height());
         qreal d = NOFLOAT;
-        for(const QString &key : tileset.tilematrix.keys())
+        const QStringList& keys = tileset.tilematrix.keys();
+        for(const QString& key : keys)
         {
             const tilematrix_t& tilematrix = tileset.tilematrix[key];
             qreal s2 = tilematrix.scale * 0.28e-3;
@@ -487,7 +489,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
 
 
         // derive range of col/row to request tiles
-        qreal xscale =  tilematrix.scale * 0.28e-3;
+        qreal xscale = tilematrix.scale * 0.28e-3;
         qreal yscale = -tilematrix.scale * 0.28e-3;
 
         qint32 col1 = qFloor((pt1.x() - tilematrix.topLeft.x()) / ( xscale * tilematrix.tileWidth));
@@ -548,16 +550,14 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
 
                     QPolygonF l;
 
-                    qreal xx1 =  col      * (xscale * tilematrix.tileWidth)  + tilematrix.topLeft.x();
-                    qreal yy1 =  row      * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
-                    qreal xx2 = (col + 1) * (xscale * tilematrix.tileWidth)  + tilematrix.topLeft.x();
+                    qreal xx1 = col * (xscale * tilematrix.tileWidth) + tilematrix.topLeft.x();
+                    qreal yy1 = row * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
+                    qreal xx2 = (col + 1) * (xscale * tilematrix.tileWidth) + tilematrix.topLeft.x();
                     qreal yy2 = (row + 1) * (yscale * tilematrix.tileHeight) + tilematrix.topLeft.y();
 
                     l << QPointF(xx1, yy1) << QPointF(xx2, yy1) << QPointF(xx2, yy2) << QPointF(xx1, yy2);
-                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[0].rx(), &l[0].ry(), 0);
-                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[1].rx(), &l[1].ry(), 0);
-                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[2].rx(), &l[2].ry(), 0);
-                    pj_transform(tileset.pjsrc, pjtar, 1, 0, &l[3].rx(), &l[3].ry(), 0);
+
+                    tileset.proj.transform(l, PJ_FWD);
 
                     drawTile(img, l, p);
                 }

@@ -23,6 +23,7 @@
 #include "dem/CDemDraw.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/GeoMath.h"
 #include "gis/IGisLine.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/Poi.h"
@@ -30,7 +31,6 @@
 #include "gis/trk/CTableTrkInfo.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
-#include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"
@@ -48,6 +48,7 @@
 #include "mouse/CMouseSelect.h"
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
+#include "poi/CPoiDraw.h"
 #include "realtime/CRtDraw.h"
 #include "units/IUnit.h"
 #include "widgets/CColorLegend.h"
@@ -55,7 +56,7 @@
 
 #include <QtWidgets>
 
-qreal CCanvas::gisLayerOpacity          = 1.0;
+qreal CCanvas::gisLayerOpacity = 1.0;
 
 
 #define X_OFF_STATUS          20
@@ -72,7 +73,7 @@ inline QSize getTrackProfileSize(int height)
            : QSize(WIDTH_PROFILE_SMALL, HEIGHT_PROFILE_SMALL);
 }
 
-CCanvas::CCanvas(QWidget *parent, const QString &name)
+CCanvas::CCanvas(QWidget* parent, const QString& name)
     : QWidget(parent)
 {
     setFocusPolicy(Qt::WheelFocus);
@@ -98,22 +99,24 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
     grabGesture(Qt::PinchGesture);
 
-    map     = new CMapDraw(this);
-    grid    = new CGrid(map);
-    dem     = new CDemDraw(this);
-    gis     = new CGisDraw(this);
-    rt      = new CRtDraw(this);
+    map = new CMapDraw(this);
+    poi = new CPoiDraw(this);
+    grid = new CGrid(map);
+    dem = new CDemDraw(this);
+    gis = new CGisDraw(this);
+    rt = new CRtDraw(this);
 
     // map has to be first!
-    allDrawContext << map << dem << gis << rt;
+    allDrawContext << map << poi << dem << gis << rt;
 
     mouse = new CMouseAdapter(this);
     mouse->setDelegate(new CMouseNormal(gis, this, mouse));
 
     connect(map, &CMapDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
+    connect(poi, &CPoiDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
     connect(dem, &CDemDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
     connect(gis, &CGisDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
-    connect(rt,  &CRtDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
+    connect(rt, &CRtDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
 
     timerToolTip = new QTimer(this);
     timerToolTip->setSingleShot(true);
@@ -131,6 +134,12 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     loadIndicator2->start();
     demLoadIndicator->show();
 
+    loadIndicator3 = new QMovie("://animation/loader3.gif", QByteArray(), this);
+    poiLoadIndicator = new QLabel(this);
+    poiLoadIndicator->setMovie(loadIndicator3);
+    loadIndicator3->start();
+    poiLoadIndicator->show();
+
     textStatusMessages = new QTextBrowser(this);
     textStatusMessages->setFrameStyle(QFrame::NoFrame);
     textStatusMessages->setMinimumWidth(300);
@@ -145,10 +154,13 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     labelTrackInfo->hide();
 
     connect(map, &CMapDraw::sigStartThread, mapLoadIndicator, &QLabel::show);
-    connect(map, &CMapDraw::sigStopThread,  mapLoadIndicator, &QLabel::hide);
+    connect(map, &CMapDraw::sigStopThread, mapLoadIndicator, &QLabel::hide);
+
+    connect(poi, &CPoiDraw::sigStartThread, poiLoadIndicator, &QLabel::show);
+    connect(poi, &CPoiDraw::sigStopThread, poiLoadIndicator, &QLabel::hide);
 
     connect(dem, &CDemDraw::sigStartThread, demLoadIndicator, &QLabel::show);
-    connect(dem, &CDemDraw::sigStopThread,  demLoadIndicator, &QLabel::hide);
+    connect(dem, &CDemDraw::sigStopThread, demLoadIndicator, &QLabel::hide);
 
     timerTrackOnFocus = new QTimer(this);
     timerTrackOnFocus->setSingleShot(false);
@@ -169,11 +181,11 @@ CCanvas::~CCanvas()
     saveSizeTrackProfile();
 
     /* stop running drawing-threads and don't destroy unless they have finished*/
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext* context : qAsConst(allDrawContext))
     {
         context->quit();
     }
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext* context : qAsConst(allDrawContext))
     {
         context->wait();
     }
@@ -188,12 +200,12 @@ CCanvas::~CCanvas()
 
 void addHtmlRow(QString& text, const QString& col1, const QString& col2, const QString& td1, const QString& td2)
 {
-    text += QString("<tr><td %3>%1</td><td %4>%2<div/></td></tr>").arg(col1).arg(col2).arg(td1).arg(td2);
+    text += QString("<tr><td %3>%1</td><td %4>%2<div/></td></tr>").arg(col1, col2, td1, td2);
 }
 
 void addHtmlRow(QString& text, const QString& col1, const QString& td1)
 {
-    text += QString("<tr><td %2>%1<div/></td></tr>").arg(col1).arg(td1);
+    text += QString("<tr><td %2>%1<div/></td></tr>").arg(col1, td1);
 }
 
 void CCanvas::buildHelpText()
@@ -249,6 +261,7 @@ void CCanvas::buildHelpText()
                                     "<ul>"
                                     "<li>Maps - where all maps are stored</li>"
                                     "<li>DEM - where all elevation data is stored</li>"
+                                    "<li>POI - where all POI collections are stored</li>"
                                     "<li>Routino - where routing data for the Routino offline router is stored</li>"
                                     "<li>BRouter - where routing data for the BRouter offline router is stored</li>"
                                     "<li>Databases - where you create databases to organize your GIS data</li>"
@@ -351,19 +364,19 @@ void CCanvas::buildHelpText()
     labelHelp->ensureCursorVisible();
 }
 
-void CCanvas::setOverrideCursor(const QCursor &cursor, const QString& src)
+void CCanvas::setOverrideCursor(const QCursor& cursor, const QString& /*src*/)
 {
 //    qDebug() << "setOverrideCursor" << src;
     QApplication::setOverrideCursor(cursor);
 }
 
-void CCanvas::restoreOverrideCursor(const QString& src)
+void CCanvas::restoreOverrideCursor(const QString& /*src*/)
 {
 //    qDebug() << "restoreOverrideCursor" << src;
     QApplication::restoreOverrideCursor();
 }
 
-void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString &src)
+void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString& /*src*/)
 {
 //    qDebug() << "changeOverrideCursor" << src;
     QApplication::changeOverrideCursor(cursor);
@@ -371,7 +384,7 @@ void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString &src)
 
 void CCanvas::triggerCompleteUpdate(CCanvas::redraw_e flags)
 {
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
     {
         canvas->slotTriggerCompleteUpdate(flags);
@@ -381,11 +394,12 @@ void CCanvas::triggerCompleteUpdate(CCanvas::redraw_e flags)
 void CCanvas::saveConfig(QSettings& cfg)
 {
     map->saveConfig(cfg);
+    poi->saveConfig(cfg);
     dem->saveConfig(cfg);
     grid->saveConfig(cfg);
-    cfg.setValue("posFocus",  posFocus);
-    cfg.setValue("proj",      map->getProjection());
-    cfg.setValue("scales",    map->getScalesType());
+    cfg.setValue("posFocus", posFocus);
+    cfg.setValue("proj", map->getProjection());
+    cfg.setValue("scales", map->getScalesType());
     cfg.setValue("backColor", backColor.name());
 }
 
@@ -393,16 +407,18 @@ void CCanvas::loadConfig(QSettings& cfg)
 {
     posFocus = cfg.value("posFocus", posFocus).toPointF();
     setProjection(cfg.value("proj", map->getProjection()).toString());
-    setScales((CCanvas::scales_type_e)cfg.value("scales",  map->getScalesType()).toInt());
+    setScales((CCanvas::scales_type_e)cfg.value("scales", map->getScalesType()).toInt());
 
-    const QString &backColorStr = cfg.value("backColor", "#FFFFBF").toString();
+    const QString& backColorStr = cfg.value("backColor", "#FFFFBF").toString();
     backColor = QColor(backColorStr);
 
     map->loadConfig(cfg);
+    poi->loadConfig(cfg);
     dem->loadConfig(cfg);
     grid->loadConfig(cfg);
 
-    for(IDrawContext * context : allDrawContext.mid(1))
+    const QList<IDrawContext*>& allContext = allDrawContext.mid(1);
+    for(IDrawContext* context : allContext)
     {
         context->zoom(map->zoom());
     }
@@ -446,12 +462,12 @@ void CCanvas::setMouseRadiusWpt(CGisItemWpt& wpt)
     mouse->setDelegate(new CMouseRadiusWpt(wpt, gis, this, mouse));
 }
 
-void CCanvas::setMouseEditTrk(const QPointF &pt)
+void CCanvas::setMouseEditTrk(const QPointF& pt)
 {
     mouse->setDelegate(new CMouseEditTrk(pt, gis, this, mouse));
 }
 
-void CCanvas::setMouseEditRte(const QPointF &pt)
+void CCanvas::setMouseEditRte(const QPointF& pt)
 {
     mouse->setDelegate(new CMouseEditRte(pt, gis, this, mouse));
 }
@@ -515,7 +531,7 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
     QString report;
     QStringList keys = statusMessages.keys();
     keys.sort();
-    for(const QString &key : keys)
+    for(const QString& key : qAsConst(keys))
     {
         report += statusMessages[key] + "\n";
     }
@@ -539,7 +555,7 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
     update();
 }
 
-void CCanvas::resizeEvent(QResizeEvent * e)
+void CCanvas::resizeEvent(QResizeEvent* e)
 {
     if(!setDrawContextSize(e->size()))
     {
@@ -560,6 +576,9 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 
     QPoint p2(demLoadIndicator->width() >> 1, demLoadIndicator->height() >> 1);
     demLoadIndicator->move(r.center() - p2);
+
+    QPoint p3(poiLoadIndicator->width() >> 1, poiLoadIndicator->height() >> 1);
+    poiLoadIndicator->move(r.center() - p3);
 
     textStatusMessages->move(X_OFF_STATUS, Y_OFF_STATUS);
 
@@ -593,6 +612,7 @@ void CCanvas::paintEvent(QPaintEvent*)
     p.translate(width() >> 1, height() >> 1);
 
     map->draw(p, needsRedraw, posFocus);
+    poi->draw(p, needsRedraw, posFocus);
     dem->draw(p, needsRedraw, posFocus);
     p.setOpacity(gisLayerOpacity);
     gis->draw(p, needsRedraw, posFocus);
@@ -626,7 +646,7 @@ void CCanvas::paintEvent(QPaintEvent*)
     needsRedraw = eRedrawNone;
 }
 
-void CCanvas::mousePressEvent(QMouseEvent * e)
+void CCanvas::mousePressEvent(QMouseEvent* e)
 {
     if(labelHelp->isVisible())
     {
@@ -645,33 +665,33 @@ void CCanvas::mousePressEvent(QMouseEvent * e)
     mousePressMutex.unlock();
 }
 
-void CCanvas::mouseMoveEvent(QMouseEvent * e)
+void CCanvas::mouseMoveEvent(QMouseEvent* e)
 {
     QPointF pos = e->pos();
     map->convertPx2Rad(pos);
     qreal ele = dem->getElevationAt(pos, true);
     qreal slope = dem->getSlopeAt(pos, true);
-    emit sigMousePosition(pos * RAD_TO_DEG, ele, slope);
+    emit sigMousePosition(pos* RAD_TO_DEG, ele, slope);
 
     mouse->mouseMoveEvent(e);
     QWidget::mouseMoveEvent(e);
     e->accept();
 }
 
-void CCanvas::mouseReleaseEvent(QMouseEvent *e)
+void CCanvas::mouseReleaseEvent(QMouseEvent* e)
 {
     mouse->mouseReleaseEvent(e);
     QWidget::mouseReleaseEvent(e);
     e->accept();
 }
 
-void CCanvas::mouseDoubleClickEvent(QMouseEvent * e)
+void CCanvas::mouseDoubleClickEvent(QMouseEvent* e)
 {
     mouse->mouseDoubleClickEvent(e);
     QWidget::mouseDoubleClickEvent(e);
 }
 
-void CCanvas::wheelEvent(QWheelEvent * e)
+void CCanvas::wheelEvent(QWheelEvent* e)
 {
     if(labelHelp->isVisible())
     {
@@ -699,15 +719,13 @@ void CCanvas::wheelEvent(QWheelEvent * e)
     setZoom(CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0), needsRedraw);
     map->convertRad2Px(pt1);
 
-    map->convertRad2Px(posFocus);
-    posFocus -= (pos - pt1);
-    map->convertPx2Rad(posFocus);
+    moveMap(pos - pt1);
 
     update();
 }
 
 
-void CCanvas::enterEvent(QEvent * e)
+void CCanvas::enterEvent(QEvent* e)
 {
     if(labelHelp->isVisible())
     {
@@ -720,7 +738,7 @@ void CCanvas::enterEvent(QEvent * e)
 }
 
 
-void CCanvas::leaveEvent(QEvent *)
+void CCanvas::leaveEvent(QEvent*)
 {
     // bad hack to stop bad number of override cursors.
     while(QApplication::overrideCursor())
@@ -731,7 +749,7 @@ void CCanvas::leaveEvent(QEvent *)
     setMouseTracking(false);
 }
 
-void CCanvas::keyPressEvent(QKeyEvent * e)
+void CCanvas::keyPressEvent(QKeyEvent* e)
 {
     qDebug() << hex << e->key();
     bool doUpdate = true;
@@ -748,7 +766,7 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
 
     /* move the map with keys up, down, left and right */
     case Qt::Key_Up:
-        moveMap(QPointF(0,  height() / 4));
+        moveMap(QPointF(0, height() / 4));
         break;
 
     case Qt::Key_Down:
@@ -878,7 +896,7 @@ void CCanvas::drawScale(QPainter& p, QRectF drawRect)
 
     QString val, unit;
     IUnit::self().meter2distance(d, val, unit);
-    CDraw::text(QString("%1 %2").arg(val).arg(unit), p, pt3, Qt::black);
+    CDraw::text(QString("%1 %2").arg(val, unit), p, pt3, Qt::black);
 }
 
 void CCanvas::slotTriggerCompleteUpdate(CCanvas::redraw_e flags)
@@ -891,10 +909,13 @@ void CCanvas::slotTriggerCompleteUpdate(CCanvas::redraw_e flags)
 void CCanvas::slotToolTip()
 {
     QString str;
-    map->getToolTip(posToolTip, str);
-    if(str.isEmpty())
+    if(!poi->getToolTip(posToolTip, str))
     {
-        return;
+        map->getToolTip(posToolTip, str);
+        if(str.isEmpty())
+        {
+            return;
+        }
     }
     QPoint p = mapToGlobal(posToolTip + QPoint(32, 0));
     QToolTip::showText(p, str);
@@ -918,7 +939,7 @@ void CCanvas::slotCheckTrackOnFocus()
 
 
         // get access to next track object
-        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
+        CGisItemTrk* trk2 = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
         if(nullptr == trk2)
         {
             update();
@@ -943,7 +964,7 @@ void CCanvas::slotCheckTrackOnFocus()
 
 void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
 {
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrackOnFocus));
+    CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrackOnFocus));
 
     if(trk == nullptr)
     {
@@ -989,7 +1010,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
         QString text;
 
         text += "<table>";
-        for(const CTrackData::trkpt_t& trkpt: trk->getTrackData())
+        for(const CTrackData::trkpt_t& trkpt : trk->getTrackData())
         {
             if(trkpt.isHidden() || trkpt.desc.isEmpty())
             {
@@ -1003,7 +1024,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
         labelTrackInfo->adjustSize();
 
         const int x = rect().width() - labelTrackInfo->width() - 20;
-        const int y =  rect().height()
+        const int y = rect().height()
                       - (trackStatisticIsVisible ? labelTrackStatistic->height() + 20 : 0)
                       - labelTrackInfo->height() - 60;
 
@@ -1029,6 +1050,17 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals)
     update();
 }
 
+void CCanvas::moveTo(const QPointF& newFocus)
+{
+    if(posFocus == newFocus)
+    {
+        return;
+    }
+
+    posFocus = newFocus;
+    slotTriggerCompleteUpdate(eRedrawAll);
+}
+
 void CCanvas::moveMap(const QPointF& delta)
 {
     map->convertRad2Px(posFocus);
@@ -1036,6 +1068,7 @@ void CCanvas::moveMap(const QPointF& delta)
     map->convertPx2Rad(posFocus);
 
     emit sigMove();
+    emit sigMoveAndZoom(map->zoom(), posFocus);
 
     slotTriggerCompleteUpdate(eRedrawAll);
 }
@@ -1044,11 +1077,13 @@ void CCanvas::zoomTo(const QRectF& rect)
 {
     posFocus = rect.center();
     map->zoom(rect);
-    for(IDrawContext * context : allDrawContext.mid(1))
+    const QList<IDrawContext*>& allContext = allDrawContext.mid(1);
+    for(IDrawContext* context : allContext)
     {
         context->zoom(map->zoom());
     }
-
+    emit sigZoom();
+    emit sigMoveAndZoom(map->zoom(), posFocus);
     slotTriggerCompleteUpdate(eRedrawAll);
 }
 
@@ -1061,8 +1096,8 @@ void CCanvas::setupGrid()
 
 void CCanvas::setupBackgroundColor()
 {
-    QColorDialog::setCustomColor(0, "#FFFFBF");
-    const QColor &selected = QColorDialog::getColor(backColor, this, tr("Setup Map Background"));
+    QColorDialog::setCustomColor(0, 0x00FFFFBF);
+    const QColor& selected = QColorDialog::getColor(backColor, this, tr("Setup Map Background"));
 
     if(selected.isValid())
     {
@@ -1098,11 +1133,22 @@ void CCanvas::displayInfo(const QPoint& px)
     QToolTip::hideText();
 }
 
-poi_t CCanvas::findPOICloseBy(const QPoint& px) const
+void CCanvas::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight)  const
 {
-    return map->findPOICloseBy(px);
+    poi->findPoiCloseBy(px, poiItems, posPoiHighlight);
+
+    poi_t mapPoi = map->findPOICloseBy(px);
+    if(mapPoi.pos != NOPOINTF)
+    {
+        poiItems.insert(mapPoi);
+        posPoiHighlight.append(mapPoi.pos);
+    }
 }
 
+void CCanvas::findPoisIn(const QRectF& degRect, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
+{
+    return poi->findPoisIn(degRect, poiItems, posPoiHighlight);
+}
 void CCanvas::setup()
 {
     CCanvasSetup dlg(this);
@@ -1116,15 +1162,26 @@ QString CCanvas::getProjection()
 
 void CCanvas::setProjection(const QString& proj)
 {
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext* context : qAsConst(allDrawContext))
     {
-        context->setProjection(proj);
+        if(!context->setProjection(proj))
+        {
+            QMessageBox::warning(
+                this,
+                tr("Map Projection..."),
+                tr("Failed to setup map projection. Please configure a valid projection."),
+                QMessageBox::Ok
+                );
+
+            QTimer::singleShot(1000, &CMainWindow::self(), &CMainWindow::slotSetupMapView);
+            return;
+        }
     }
 }
 
 void CCanvas::setScales(const scales_type_e type)
 {
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext* context : qAsConst(allDrawContext))
     {
         context->setScales(type);
     }
@@ -1164,13 +1221,30 @@ void CCanvas::getElevationAt(SGisLine& line) const
 void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
 {
     map->zoom(in, needsRedraw);
-
-    for(IDrawContext * context : allDrawContext.mid(1))
+    const QList<IDrawContext*>& allContext = allDrawContext.mid(1);
+    for(IDrawContext* context : allContext)
     {
         context->zoom(map->zoom());
     }
 
     emit sigZoom();
+    emit sigMoveAndZoom(map->zoom(), posFocus);
+}
+
+void CCanvas::zoom(int index)
+{
+    if(map->zoom() == index)
+    {
+        return;
+    }
+
+    map->zoom(index);
+    const QList<IDrawContext*>& allContext = allDrawContext.mid(1);
+    for(IDrawContext* context : allContext)
+    {
+        context->zoom(map->zoom());
+    }
+    slotTriggerCompleteUpdate(eRedrawAll);
 }
 
 bool CCanvas::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)
@@ -1235,7 +1309,7 @@ void CCanvas::setSizeTrackProfile()
     }
 }
 
-void CCanvas::showProfileAsWindow(bool yes)
+void CCanvas::showProfileAsWindow()
 {
     if(plotTrackProfile)
     {
@@ -1259,7 +1333,7 @@ void CCanvas::showProfile(bool yes)
 bool CCanvas::setDrawContextSize(const QSize& s)
 {
     bool done = true;
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext* context : qAsConst(allDrawContext))
     {
         done &= context->resize(s);
     }
@@ -1279,17 +1353,17 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool 
 
     redraw_e redraw = eRedrawAll;
 
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext* context : qAsConst(allDrawContext))
     {
         context->draw(p, redraw, focus);
     }
 
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext* context : qAsConst(allDrawContext))
     {
         context->wait();
     }
 
-    for(IDrawContext * context : allDrawContext)
+    for(IDrawContext* context : qAsConst(allDrawContext))
     {
         context->draw(p, redraw, focus);
     }
@@ -1311,7 +1385,7 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool 
     setDrawContextSize(oldSize);
 }
 
-bool CCanvas::event(QEvent *event)
+bool CCanvas::event(QEvent* event)
 {
     if (event->type() == QEvent::Gesture)
     {
@@ -1319,7 +1393,7 @@ bool CCanvas::event(QEvent *event)
     }
     else if (mouseLost)
     {
-        QMouseEvent * me = dynamic_cast<QMouseEvent*>(event);
+        QMouseEvent* me = dynamic_cast<QMouseEvent*>(event);
         if (me != nullptr)
         {
             // notify IMouse that the upcomming QMouseEvent needs special treatment
@@ -1333,11 +1407,11 @@ bool CCanvas::event(QEvent *event)
 
 bool CCanvas::gestureEvent(QGestureEvent* e)
 {
-    if (QPinchGesture *pinch = dynamic_cast<QPinchGesture *>(e->gesture(Qt::PinchGesture)))
+    if (QPinchGesture* pinch = dynamic_cast<QPinchGesture*>(e->gesture(Qt::PinchGesture)))
     {
         if (pinch->changeFlags() & QPinchGesture::CenterPointChanged)
         {
-            const QPointF & move = pinch->centerPoint() - pinch->lastCenterPoint();
+            const QPointF& move = pinch->centerPoint() - pinch->lastCenterPoint();
             if (!move.isNull())
             {
                 moveMap(move);
@@ -1348,18 +1422,20 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
             qreal pscale = pinch->totalScaleFactor();
             if (pscale < 0.8f || pscale > 1.25f)
             {
-                const QPointF & center = pinch->centerPoint();
-                const QPointF & pos = mapFromGlobal(QPoint(center.x(), center.y()));
+                const QPointF& center = pinch->centerPoint();
+                const QPointF& pos = mapFromGlobal(QPoint(center.x(), center.y()));
                 QPointF pt1 = pos;
                 map->convertPx2Rad(pt1);
                 setZoom(pscale > 1.0f, needsRedraw);
                 map->convertRad2Px(pt1);
-                const QPointF & move = pos - pt1;
+                const QPointF& move = pos - pt1;
                 if (!move.isNull())
                 {
                     moveMap(move);
                 }
                 pinch->setTotalScaleFactor(1.0f);
+                emit sigZoom();
+                emit sigMoveAndZoom(map->zoom(), posFocus);
                 slotTriggerCompleteUpdate(needsRedraw);
             }
         }
@@ -1410,4 +1486,9 @@ bool CCanvas::isShowTrackProfile() const
 bool CCanvas::isShowTrackHighlight() const
 {
     return CMainWindow::self().isShowTrackHighlight() && showTrackOverlays;
+}
+
+void CCanvas::linkMapViewEnabled()
+{
+    emit sigMoveAndZoom(map->zoom(), posFocus);
 }

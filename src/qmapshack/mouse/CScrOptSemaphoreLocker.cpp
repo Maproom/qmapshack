@@ -21,7 +21,7 @@
 
 #include <QDebug>
 
-CScrOptSemaphoreLocker::CScrOptSemaphoreLocker(IScrOpt &scropt)
+CScrOptSemaphoreLocker::CScrOptSemaphoreLocker(IScrOpt& scropt)
     : scropt(scropt)
 {
     Q_ASSERT_X(scropt.semaphore.available(), "semaphore", "You try to acquire the on-screen option semaphore that is already acquired.");

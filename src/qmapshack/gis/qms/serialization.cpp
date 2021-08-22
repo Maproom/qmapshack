@@ -521,7 +521,7 @@ QDataStream& operator>>(QDataStream& stream, CLimit& l)
     return stream;
 }
 
-QDataStream& operator<<(QDataStream& stream, const CEnergyCycling::energy_set_t &e)
+QDataStream& operator<<(QDataStream& stream, const CEnergyCycling::energy_set_t& e)
 {
     stream << VER_ENERGYCYCLE << e.driverWeight << e.bikeWeight << e.airDensity
            << e.windSpeedIndex << e.windSpeed << e.windPositionIndex
@@ -530,7 +530,7 @@ QDataStream& operator<<(QDataStream& stream, const CEnergyCycling::energy_set_t 
     return stream;
 }
 
-QDataStream& operator>>(QDataStream& stream, CEnergyCycling::energy_set_t &e)
+QDataStream& operator>>(QDataStream& stream, CEnergyCycling::energy_set_t& e)
 {
     quint8 version;
     stream >> version >> e.driverWeight >> e.bikeWeight >> e.airDensity
@@ -584,7 +584,7 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
 {
     quint8 version;
     QByteArray buffer;
-    QIODevice * dev = stream.device();
+    QIODevice* dev = stream.device();
     qint64 pos = dev->pos();
 
     char magic[10];
@@ -632,10 +632,10 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
         in >> limitLow;
         in >> limitHigh;
 
-        colorSourceLimit.source     = colorSource;
-        colorSourceLimit.mode       = CLimit::eModeAuto;
-        colorSourceLimit.minUser    = limitLow;
-        colorSourceLimit.maxUser    = limitHigh;
+        colorSourceLimit.source = colorSource;
+        colorSourceLimit.mode = CLimit::eModeAuto;
+        colorSourceLimit.minUser = limitLow;
+        colorSourceLimit.maxUser = limitHigh;
     }
     else if(version > 4)
     {
@@ -687,7 +687,7 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
 {
     quint8 version;
     QByteArray buffer;
-    QIODevice * dev = stream.device();
+    QIODevice* dev = stream.device();
     qint64 pos = dev->pos();
 
     char magic[10];
@@ -768,7 +768,7 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream)
 {
     quint8 version;
     QByteArray buffer;
-    QIODevice * dev = stream.device();
+    QIODevice* dev = stream.device();
     qint64 pos = dev->pos();
 
     char magic[10];
@@ -862,7 +862,7 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
 {
     quint8 version, tmp8;
     QByteArray buffer;
-    QIODevice * dev = stream.device();
+    QIODevice* dev = stream.device();
     qint64 pos = dev->pos();
 
     char magic[10];
@@ -946,7 +946,7 @@ QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream) const
 QDataStream& IGisProject::operator<<(QDataStream& stream)
 {
     quint8 version;
-    QIODevice * dev = stream.device();
+    QIODevice* dev = stream.device();
     qint64 pos = dev->pos();
 
     char magic[10];
@@ -992,9 +992,11 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     {
         qint8 tmp;
         stream >> tmp;
-        noCorrelation   = (tmp & eFlagNoCorrelation) != 0;
-        autoSave        = (tmp & eFlagAutoSave) != 0;
-        invalidDataOk   = (tmp & eFlagInvalidDataOk) != 0;
+        noCorrelation = (tmp & eFlagNoCorrelation) != 0;
+        autoSave = (tmp & eFlagAutoSave) != 0;
+        invalidDataOk = (tmp & eFlagInvalidDataOk) != 0;
+        autoSyncToDev = (tmp & eFlagAutoSyncToDev) != 0;
+        updateDecoration();
     }
 
     if(version > 4)
@@ -1024,7 +1026,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         }
 
 
-        IGisItem *item = nullptr;
+        IGisItem* item = nullptr;
         switch(type)
         {
         case IGisItem::eTypeWpt:
@@ -1047,9 +1049,17 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
             ;
         }
 
-        if(item && changed)
+        //Update decoration always, to set possible rating and tag markers
+        if(item)
         {
-            item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+            if(changed)
+            {
+                item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+            }
+            else
+            {
+                item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkNone);
+            }
         }
     }
 
@@ -1075,12 +1085,16 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
     stream << metadata.bounds;
     stream << key;
     stream << qint32(sortingRoadbook);
-    stream << qint8((noCorrelation ? eFlagNoCorrelation : 0) | (autoSave ? eFlagAutoSave : 0) | (invalidDataOk ? eFlagInvalidDataOk : 0)); // collect trivial flags in one field.
+    stream << qint8(
+        (noCorrelation ? eFlagNoCorrelation : 0) |
+        (autoSave ? eFlagAutoSave : 0) |
+        (invalidDataOk ? eFlagInvalidDataOk : 0) |
+        (autoSyncToDev ? eFlagAutoSyncToDev : 0));       // collect trivial flags in one field.
     stream << qint32(sortingFolder);
 
     for(int i = 0; i < childCount(); i++)
     {
-        CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(child(i));
+        CGisItemTrk* item = dynamic_cast<CGisItemTrk*>(child(i));
         if(nullptr == item)
         {
             continue;
@@ -1093,7 +1107,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
     }
     for(int i = 0; i < childCount(); i++)
     {
-        CGisItemRte * item = dynamic_cast<CGisItemRte*>(child(i));
+        CGisItemRte* item = dynamic_cast<CGisItemRte*>(child(i));
         if(nullptr == item)
         {
             continue;
@@ -1106,7 +1120,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
     }
     for(int i = 0; i < childCount(); i++)
     {
-        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
+        CGisItemWpt* item = dynamic_cast<CGisItemWpt*>(child(i));
         if(nullptr == item)
         {
             continue;
@@ -1119,7 +1133,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
     }
     for(int i = 0; i < childCount(); i++)
     {
-        CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(child(i));
+        CGisItemOvlArea* item = dynamic_cast<CGisItemOvlArea*>(child(i));
         if(nullptr == item)
         {
             continue;
@@ -1137,7 +1151,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
 QDataStream& CDBProject::operator<<(QDataStream& stream)
 {
     quint8 version;
-    QIODevice * dev = stream.device();
+    QIODevice* dev = stream.device();
     qint64 pos = dev->pos();
 
     char magic[10];
@@ -1173,10 +1187,13 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
     {
         qint8 tmp;
         stream >> tmp;
-        noCorrelation   = (tmp & eFlagNoCorrelation) != 0;
-        autoSave        = (tmp & eFlagAutoSave) != 0;
-        invalidDataOk   = (tmp & eFlagInvalidDataOk) != 0;
+        noCorrelation = (tmp & eFlagNoCorrelation) != 0;
+        autoSave = (tmp & eFlagAutoSave) != 0;
+        invalidDataOk = (tmp & eFlagInvalidDataOk) != 0;
+        autoSyncToDev = (tmp & eFlagAutoSyncToDev) != 0;
+        updateDecoration();
     }
+
     if(version > 4)
     {
         qint32 tmp;
@@ -1203,7 +1220,11 @@ QDataStream& CDBProject::operator>>(QDataStream& stream) const
     stream << metadata.bounds;
     stream << key;
     stream << qint32(sortingRoadbook);
-    stream << qint8((noCorrelation ? eFlagNoCorrelation : 0) | (autoSave ? eFlagAutoSave : 0) | (invalidDataOk ? eFlagInvalidDataOk : 0)); // collect trivial flags in one field.
+    stream << qint8(
+        (noCorrelation ? eFlagNoCorrelation : 0) |
+        (autoSave ? eFlagAutoSave : 0) |
+        (invalidDataOk ? eFlagInvalidDataOk : 0) |
+        (autoSyncToDev ? eFlagAutoSyncToDev : 0)); // collect trivial flags in one field.
     stream << qint32(sortingFolder);
 
     return stream;

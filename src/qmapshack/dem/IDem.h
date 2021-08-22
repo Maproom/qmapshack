@@ -22,7 +22,7 @@
 
 #include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
-#include <proj_api.h>
+#include "gis/proj_x.h"
 #include <QObject>
 #include <QPointer>
 
@@ -34,7 +34,7 @@ class QSettings;
 
 struct SlopePresets
 {
-    const char  *name;
+    const char* name;
     const qreal steps[5];
 };
 
@@ -42,7 +42,7 @@ class IDem : public IDrawObject
 {
     Q_OBJECT
 public:
-    IDem(CDemDraw * parent);
+    IDem(CDemDraw* parent);
     virtual ~IDem();
 
     void saveConfig(QSettings& cfg) override;
@@ -67,7 +67,7 @@ public:
 
        @return A pointer to the widget. Use a smart pointer to store as the widget can be destroyed at any time
      */
-    virtual IDemProp * getSetup();
+    virtual IDemProp* getSetup();
 
     bool doHillshading()
     {
@@ -132,11 +132,11 @@ public slots:
 
 protected:
 
-    void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage &img);
+    void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img);
 
-    void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img);
+    void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage& img);
 
-    void elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage &img);
+    void elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage& img);
 
     /**
        @brief Slope in degrees based on a window. Origin is at point (1,1), counting from zero.
@@ -156,24 +156,18 @@ protected:
      */
     void drawTile(QImage& img, QPolygonF& l, QPainter& p);
 
-    CDemDraw * dem;
+    CDemDraw* dem;
 
-    /// source projection of the current map file
     /**
-        Has to be set by subclass. Destruction has to be
-        handled by subclass.
+        target should always be "EPSG:4326"
+        source will be the map's projection
      */
-    projPJ pjsrc = nullptr;
-    /// target projection
-    /**
-        Is set by IMap() to WGS84. Will be freed by ~IMap()
-     */
-    projPJ pjtar = nullptr;
+    CProj proj;
 
     /// width in number of px
-    quint32 xsize_px = 0;
+    qint32 xsize_px = 0;
     /// height in number of px
-    quint32 ysize_px = 0;
+    qint32 ysize_px = 0;
 
     /// scale [px/m]
     qreal xscale = 1.0;

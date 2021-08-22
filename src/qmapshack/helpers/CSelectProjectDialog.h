@@ -29,7 +29,7 @@ class CSelectProjectDialog : public QDialog, private Ui::ISelectProjectDialog
 {
     Q_OBJECT
 public:
-    CSelectProjectDialog(QString& key, QString& name, IGisProject::type_e& type, QTreeWidget *parent);
+    CSelectProjectDialog(QString& key, QString& name, IGisProject::type_e& type, QTreeWidget* parent);
     virtual ~CSelectProjectDialog();
 
 public slots:
@@ -37,8 +37,8 @@ public slots:
     void reject() override;
 
 private slots:
-    void slotItemClicked(QListWidgetItem * item);
-    void slotItemDoubleClicked(QListWidgetItem * item);
+    void slotItemClicked(QListWidgetItem* item);
+    void slotItemDoubleClicked(QListWidgetItem* item);
     void slotProjectChanged(const QString& text);
     void slotProjectEdited(const QString& text);
     void slotTypeChanged();

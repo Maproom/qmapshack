@@ -29,11 +29,12 @@
 
 void CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(CFitMessage& mesg)
 {
-    for (const CFitField & field : mesg.getFields())
+    const QList<CFitField>& fields = mesg.getFields();
+    for (const CFitField& field : fields)
     {
         CFitFieldBuilder::evaluateFieldProfile(mesg, field);
     }
-    for (const CFitField & field : mesg.getFields())
+    for (const CFitField& field : fields)
     {
         CFitFieldBuilder::expandComponents(mesg, field);
     }
@@ -45,7 +46,7 @@ CFitField CFitFieldBuilder::buildField(const CFitFieldDefinition& def, quint8* f
     return buildField(*fieldProfile, def, fieldData, message);
 }
 
-CFitField CFitFieldBuilder::buildField(const CFitFieldProfile &fieldProfile, const CFitFieldDefinition &def, quint8 *fieldData, const CFitMessage& message)
+CFitField CFitFieldBuilder::buildField(const CFitFieldProfile& fieldProfile, const CFitFieldDefinition& def, quint8* fieldData, const CFitMessage& /*message*/)
 {
     CFitByteDataTransformer::swapFieldData(def, fieldData);
     const CFitBaseType& baseType = def.getBaseType();
@@ -81,10 +82,10 @@ CFitField CFitFieldBuilder::buildField(const CFitFieldProfile &fieldProfile, con
 }
 
 
-bool CFitFieldBuilder::isValueValid(const CFitFieldDefinition &def, quint8 *fieldData)
+bool CFitFieldBuilder::isValueValid(const CFitFieldDefinition& def, quint8* fieldData)
 {
-    const CFitBaseType &baseType = def.getBaseType();
-    const quint8 *invalidBytes = baseType.invalidValueBytes();
+    const CFitBaseType& baseType = def.getBaseType();
+    const quint8* invalidBytes = baseType.invalidValueBytes();
     quint8 invalidCount = 0;
 
     if(!baseType.isSizeUndefined() && def.getSize() != baseType.size())
@@ -102,7 +103,7 @@ bool CFitFieldBuilder::isValueValid(const CFitFieldDefinition &def, quint8 *fiel
     return invalidCount < def.getSize();
 }
 
-void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg,  const CFitField & field)
+void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg, const CFitField& field)
 {
     const CFitFieldProfile& fieldProfile = field.profile();
     // case subfield
@@ -111,7 +112,8 @@ void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg,  const CFitField 
         for (const CFitSubfieldProfile* subfieldProfile : fieldProfile.getSubfields())
         {
             // the referenced field is for all subfields the same
-            for (const CFitField & referencedField : mesg.getFields())
+            const QList<CFitField>& fields = mesg.getFields();
+            for (const CFitField& referencedField : fields)
             {
                 if (referencedField.getFieldDefNr() == subfieldProfile->getReferencedFieldDefNr() &&
                     referencedField.getValue().toUInt() == subfieldProfile->getReferencedFieldValue())
@@ -124,7 +126,7 @@ void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg,  const CFitField 
     }
 }
 
-void CFitFieldBuilder::expandComponents(CFitMessage& mesg, const CFitField & field)
+void CFitFieldBuilder::expandComponents(CFitMessage& mesg, const CFitField& field)
 {
     // TODO accumulated fields are not implemented (no need so far)
     const CFitFieldProfile& fieldProfile = field.profile();
@@ -132,7 +134,8 @@ void CFitFieldBuilder::expandComponents(CFitMessage& mesg, const CFitField & fie
     if (fieldProfile.hasComponents())
     {
         int offset = 0;
-        for (const CFitComponentfieldProfile* compProfile : fieldProfile.getComponents())
+        const QList<CFitComponentfieldProfile*>& components = fieldProfile.getComponents();
+        for (const CFitComponentfieldProfile* compProfile : components)
         {
             if (field.getBaseType().isSignedInt())
             {

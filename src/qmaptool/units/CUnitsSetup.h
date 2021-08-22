@@ -24,7 +24,7 @@
 class CUnitsSetup : public QDialog, private Ui::IUnitsSetup
 {
 public:
-    CUnitsSetup(QWidget * parent);
+    CUnitsSetup(QWidget* parent);
     virtual ~CUnitsSetup() = default;
 
 public slots:

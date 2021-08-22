@@ -20,7 +20,7 @@
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
 
-CUnitsSetup::CUnitsSetup(QWidget *parent)
+CUnitsSetup::CUnitsSetup(QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);

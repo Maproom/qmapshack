@@ -55,7 +55,7 @@ public:
         {
         }
 
-        polyline_property(quint16 type, const QPen& penLineDay,  const QPen& penLineNight,  const QPen& penBorderDay,  const QPen& penBorderNight)
+        polyline_property(quint16 type, const QPen& penLineDay, const QPen& penLineNight, const QPen& penBorderDay, const QPen& penBorderNight)
             : type(type)
             , penLineDay(penLineDay)
             , penLineNight(penLineNight)
@@ -208,10 +208,10 @@ protected:
     virtual bool parsePolyline(QDataStream& in, QMap<quint32, polyline_property>& polylines);
     virtual bool parsePoint(QDataStream& in, QMap<quint32, point_property>& points);
 
-    QTextCodec * getCodec(quint16 codepage);
-    void decodeBitmap(QDataStream &in, QImage &img, int w, int h, int bpp);
+    QTextCodec* getCodec(quint16 codepage);
+    void decodeBitmap(QDataStream& in, QImage& img, int w, int h, int bpp);
     bool decodeBppAndBytes(int ncolors, int w, int flags, int& bpp, int& bytes);
-    bool decodeColorTable(QDataStream& in, QImage& img, int ncolors,  int maxcolor, bool hasAlpha);
+    bool decodeColorTable(QDataStream& in, QImage& img, int ncolors, int maxcolor, bool hasAlpha);
 
 
     struct typ_section_t

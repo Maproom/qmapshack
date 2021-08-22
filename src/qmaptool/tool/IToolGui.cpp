@@ -24,14 +24,14 @@
 #include "shell/CShell.h"
 #include "tool/IToolGui.h"
 
-IToolGui::IToolGui(QWidget * parent)
+IToolGui::IToolGui(QWidget* parent)
     : QWidget(parent)
 {
 }
 
 QString IToolGui::createTempFile(const QString& ext)
 {
-    QTemporaryFile * tmpFile = new QTemporaryFile(QDir::temp().absoluteFilePath("QMapTool_XXXXXX." + ext));
+    QTemporaryFile* tmpFile = new QTemporaryFile(QDir::temp().absoluteFilePath("QMapTool_XXXXXX." + ext));
     tmpFile->open();
     tmpFile->close();
     tmpFiles << tmpFile;
@@ -52,13 +52,13 @@ bool IToolGui::finished(qint32 id)
 }
 
 
-void IToolGui::start(CItemTreeWidget * itemTree)
+void IToolGui::start(CItemTreeWidget* itemTree)
 {
     QList<CShellCmd> cmds;
     const int N = itemTree->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        const CItemMapLayer * layer = dynamic_cast<CItemMapLayer*>(itemTree->topLevelItem(n));
+        const CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(itemTree->topLevelItem(n));
         if(layer == nullptr)
         {
             continue;
@@ -66,7 +66,7 @@ void IToolGui::start(CItemTreeWidget * itemTree)
         const int M = layer->childCount();
         for(int m = 0; m < M; m++)
         {
-            IItem * item = dynamic_cast<IItem*>(layer->child(m));
+            IItem* item = dynamic_cast<IItem*>(layer->child(m));
             if(nullptr != item)
             {
                 buildCmd(cmds, item);
@@ -79,7 +79,7 @@ void IToolGui::start(CItemTreeWidget * itemTree)
     jobId = CShell::self().execute(cmds);
 }
 
-void IToolGui::start(CItemListWidget * itemList, bool allFiles)
+void IToolGui::start(CItemListWidget* itemList, bool allFiles)
 {
     QList<CShellCmd> cmds;
 
@@ -88,7 +88,7 @@ void IToolGui::start(CItemListWidget * itemList, bool allFiles)
         const int N = itemList->count();
         for(int n = 0; n < N; n++)
         {
-            const IItem * item = dynamic_cast<const IItem*>(itemList->item(n));
+            const IItem* item = dynamic_cast<const IItem*>(itemList->item(n));
             if(nullptr != item)
             {
                 buildCmd(cmds, item);
@@ -97,7 +97,7 @@ void IToolGui::start(CItemListWidget * itemList, bool allFiles)
     }
     else
     {
-        const IItem * item = dynamic_cast<const IItem*>(itemList->currentItem());
+        const IItem* item = dynamic_cast<const IItem*>(itemList->currentItem());
         if(nullptr != item)
         {
             buildCmd(cmds, item);

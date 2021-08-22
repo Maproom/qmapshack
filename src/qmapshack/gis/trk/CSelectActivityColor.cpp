@@ -19,7 +19,7 @@
 #include "gis/trk/CSelectActivityColor.h"
 #include <QtWidgets>
 
-CSelectActivityColor::CSelectActivityColor(QWidget *parent)
+CSelectActivityColor::CSelectActivityColor(QWidget* parent)
     : QWidget(parent)
     , INotifyTrk(CGisItemTrk::eVisualColorAct)
 {
@@ -34,7 +34,7 @@ CSelectActivityColor::~CSelectActivityColor()
     }
 }
 
-void CSelectActivityColor::setTrack(CGisItemTrk * p)
+void CSelectActivityColor::setTrack(CGisItemTrk* p)
 {
     if(trk != nullptr)
     {
@@ -72,7 +72,7 @@ void CSelectActivityColor::updateData()
         }
         const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(trkact_t(i));
 
-        QLabel * label = new QLabel(this);
+        QLabel* label = new QLabel(this);
         label->setMinimumSize(16, 16);
         label->setMaximumSize(16, 16);
         label->setPixmap(desc.iconSmall);
@@ -84,7 +84,7 @@ void CSelectActivityColor::updateData()
         QPixmap pixmap(16, 16);
         pixmap.fill(desc.color);
 
-        QToolButton * button = new QToolButton(this);
+        QToolButton* button = new QToolButton(this);
         button->setToolButtonStyle(Qt::ToolButtonIconOnly);
         button->setAutoRaise(true);
         button->setIcon(QIcon(pixmap));
@@ -97,11 +97,11 @@ void CSelectActivityColor::updateData()
         allActColors << button;
     }
 
-    QSpacerItem * spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum);
+    QSpacerItem* spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum);
     horizontalLayout->addItem(spacer);
 }
 
-void CSelectActivityColor::slotSetColor(QToolButton * button, trkact_t act)
+void CSelectActivityColor::slotSetColor(QToolButton* button, trkact_t act)
 {
     qint32 colorIdx = IGisItem::selectColor(this);
     if(colorIdx == NOIDX)

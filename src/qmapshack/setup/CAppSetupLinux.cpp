@@ -30,7 +30,7 @@ void CAppSetupLinux::initQMapShack()
     prepareGdal("", "");
 
     // setup translators
-    QString resourceDir     = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+    QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
     QString translationPath = QCoreApplication::applicationDirPath();
     translationPath.replace(QRegExp("bin$"), "share/qmapshack/translations");
     prepareTranslator(resourceDir, "qt_");

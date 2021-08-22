@@ -24,24 +24,24 @@
 
 #include <QtWidgets>
 
-CLineOpDeletePoint::CLineOpDeletePoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
+CLineOpDeletePoint::CLineOpDeletePoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent)
     : ILineOp(points, gis, canvas, parent)
 {
-    cursor  = QCursor(QPixmap(":/cursors/cursorPointDel.png"), 0, 0);
+    cursor = QCursor(QPixmap(":/cursors/cursorPointDel.png"), 0, 0);
 }
 
 CLineOpDeletePoint::~CLineOpDeletePoint()
 {
 }
 
-void CLineOpDeletePoint::mouseMove(const QPoint &pos)
+void CLineOpDeletePoint::mouseMove(const QPoint& pos)
 {
     ILineOp::mouseMove(pos);
     idxFocus = isCloseTo(pos);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpDeletePoint::leftClick(const QPoint &pos)
+void CLineOpDeletePoint::leftClick(const QPoint& pos)
 {
     if(idxFocus != NOIDX)
     {

@@ -24,17 +24,22 @@
 
 #include <QtWidgets>
 
-CMousePrint::CMousePrint(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+CMousePrint::CMousePrint(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouseSelect(gis, canvas, mouse)
 {
     cursor = QCursor(QPixmap("://cursors/cursorSave.png"), 0, 0);
 
-    canvas->reportStatus("IMouseSelect", tr("<b>Save(Print) Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners."));
+    canvas->reportStatus("IMouseSelect",
+                         tr(
+                             "<b>Save(Print) Map</b><br/>Select a rectangular area on the map. "
+                             "Use the left mouse button and move the mouse. Abort with a right "
+                             "click. Adjust the selection by point-click-move on the corners.")
+                         );
 
-    CScrOptPrint * scrOptPrint;
+    CScrOptPrint* scrOptPrint;
     scrOpt = scrOptPrint = new CScrOptPrint(this);
 
-    connect(scrOptPrint->toolSave,  &QToolButton::clicked, this, &CMousePrint::slotSave);
+    connect(scrOptPrint->toolSave, &QToolButton::clicked, this, &CMousePrint::slotSave);
     connect(scrOptPrint->toolPrint, &QToolButton::clicked, this, &CMousePrint::slotPrint);
 }
 

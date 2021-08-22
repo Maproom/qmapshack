@@ -21,9 +21,9 @@
 #include "helpers/CWptIconManager.h"
 #include <QIcon>
 
-CGeoSearchConfig * CGeoSearchConfig::pSelf = nullptr;
+CGeoSearchConfig* CGeoSearchConfig::pSelf = nullptr;
 
-CGeoSearchConfig::CGeoSearchConfig(QObject *parent) : QObject(parent)
+CGeoSearchConfig::CGeoSearchConfig(QObject* parent) : QObject(parent)
 {
     pSelf = this;
 }
@@ -98,7 +98,7 @@ const QIcon CGeoSearchConfig::getCurrentIcon() const
     }
 }
 
-void CGeoSearchConfig::emitChanged() const
+void CGeoSearchConfig::emitChanged()
 {
     emit sigConfigChanged();
 }

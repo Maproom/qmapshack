@@ -27,7 +27,7 @@ class CDBFolderMysql : public IDBFolderSql, public IDBMysql
 {
     Q_OBJECT
 public:
-    CDBFolderMysql(const QString &server, const QString &port, const QString &user, const QString &passwd, bool noPasswd, const QString &name, QTreeWidget *parent);
+    CDBFolderMysql(const QString& server, const QString& port, const QString& user, const QString& passwd, bool noPasswd, const QString& name, QTreeWidget* parent);
     virtual ~CDBFolderMysql() = default;
 
     const QString& getServer() const {return server; }

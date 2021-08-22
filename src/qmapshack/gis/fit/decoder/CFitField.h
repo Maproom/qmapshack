@@ -30,7 +30,7 @@ class CFitField final
 public:
     CFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, QVariant value, bool valid);
     CFitField(quint16 globalMesgNr, quint8 fieldDefNr, const CFitFieldProfile* profile, QVariant value, bool valid);
-    CFitField(const CFitField & copy);
+    CFitField(const CFitField& copy);
     CFitField();
     virtual ~CFitField() { /* nothing to do here, profile and base type are global and not to delete */ }
 

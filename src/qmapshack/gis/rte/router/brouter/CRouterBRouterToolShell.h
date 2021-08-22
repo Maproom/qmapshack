@@ -29,19 +29,19 @@ class CRouterBRouterToolShell : public IToolShell
 {
     Q_OBJECT
 public:
-    CRouterBRouterToolShell(QTextBrowser *textBrowser, QWidget * parent);
+    CRouterBRouterToolShell(QTextBrowser* textBrowser, QWidget* parent);
     virtual ~CRouterBRouterToolShell();
 
-    void start(const QString &dir, const QString &command, const QStringList &args);
+    void start(const QString& dir, const QString& command, const QStringList& args);
     void stop();
 
 signals:
-    void sigProcessStateChanged(const QProcess::ProcessState newState) const;
-    void sigProcessError(const QProcess::ProcessError error, const QString &errorString) const;
+    void sigProcessStateChanged(const QProcess::ProcessState newState);
+    void sigProcessError(const QProcess::ProcessError error, const QString& errorString);
 
 private slots:
-    void slotStateChanged(const QProcess::ProcessState newState) const;
-    void slotError(const QProcess::ProcessError error) const;
+    void slotStateChanged(const QProcess::ProcessState newState);
+    void slotError(const QProcess::ProcessError error);
     void slotStartupTimer();
 
 private:
@@ -49,7 +49,7 @@ private:
 
     bool isBeingKilled { false };
     bool isStarting { false };
-    QTimer * startupTimer { nullptr };
+    QTimer* startupTimer { nullptr };
 };
 
 #endif //CROUTERBROUTERTOOLSHELL_H

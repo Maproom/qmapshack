@@ -22,7 +22,7 @@
 #include <gdal_priv.h>
 #include <iostream>
 
-const GDALColorEntry CApp::noColor = {255,255,255,0};
+const GDALColorEntry CApp::noColor = {255, 255, 255, 0};
 
 void printStdoutQString(const QString& str)
 {
@@ -40,7 +40,7 @@ void printStderrQString(const QString& str)
 
 
 
-CApp::CApp(qint32 ncolors, const QString& pctFilename, const QString &sctFilename, const QString &srcFilename, const QString &tarFilename)
+CApp::CApp(qint32 ncolors, const QString& pctFilename, const QString& sctFilename, const QString& srcFilename, const QString& tarFilename)
     : ncolors(ncolors)
     , pctFilename(pctFilename)
     , sctFilename(sctFilename)
@@ -53,11 +53,11 @@ CApp::CApp(qint32 ncolors, const QString& pctFilename, const QString &sctFilenam
 qint32 CApp::exec()
 {
     qint32 res = 0;
-    GDALColorTable * ct = nullptr;
-    GDALDataset * dsSrc = nullptr;
+    GDALColorTable* ct = nullptr;
+    GDALDataset* dsSrc = nullptr;
     try
     {
-        dsSrc = (GDALDataset*)GDALOpenShared(srcFilename.toUtf8(),GA_ReadOnly);
+        dsSrc = (GDALDataset*)GDALOpenShared(srcFilename.toUtf8(), GA_ReadOnly);
         if(dsSrc == nullptr)
         {
             throw tr("Failed to open source file.");
@@ -89,9 +89,9 @@ qint32 CApp::exec()
     return res;
 }
 
-GDALColorTable * CApp::createColorTable(qint32 ncolors, const QString& pctFilename, GDALDataset * dataset)
+GDALColorTable* CApp::createColorTable(qint32 ncolors, const QString& pctFilename, GDALDataset* dataset)
 {
-    GDALColorTable * ct = nullptr;
+    GDALColorTable* ct = nullptr;
     try
     {
         if(pctFilename.isEmpty())
@@ -117,13 +117,13 @@ GDALColorTable * CApp::createColorTable(qint32 ncolors, const QString& pctFilena
         }
         else
         {
-            GDALDataset * dsPct = (GDALDataset*)GDALOpenShared(pctFilename.toUtf8(),GA_ReadOnly);
+            GDALDataset* dsPct = (GDALDataset*)GDALOpenShared(pctFilename.toUtf8(), GA_ReadOnly);
             if(dsPct == nullptr)
             {
                 throw tr("Failed to open file with palette.");
             }
 
-            GDALRasterBand * band = (GDALRasterBand*)dsPct->GetRasterBand(1);
+            GDALRasterBand* band = (GDALRasterBand*)dsPct->GetRasterBand(1);
 
             if((dsPct->GetRasterCount() != 1) || (band->GetColorInterpretation() != GCI_PaletteIndex))
             {
@@ -151,7 +151,7 @@ GDALColorTable * CApp::createColorTable(qint32 ncolors, const QString& pctFilena
     return ct;
 }
 
-void CApp::saveColorTable(GDALColorTable * ct, QString& sctFilename)
+void CApp::saveColorTable(GDALColorTable* ct, QString& sctFilename)
 {
     if(sctFilename.isEmpty())
     {
@@ -166,9 +166,9 @@ void CApp::saveColorTable(GDALColorTable * ct, QString& sctFilename)
     QByteArray buf = sctFilename.toUtf8();
     printStdoutQString(tr("Save color table to: %1").arg(buf.data()));
 
-    GDALDriverManager * drvman  = GetGDALDriverManager();
-    GDALDriver * driver         = drvman->GetDriverByName("VRT");
-    GDALDataset * dataset       = driver->Create(sctFilename.toUtf8(), 1, 1, 1, GDT_Byte, {});
+    GDALDriverManager* drvman = GetGDALDriverManager();
+    GDALDriver* driver = drvman->GetDriverByName("VRT");
+    GDALDataset* dataset = driver->Create(sctFilename.toUtf8(), 1, 1, 1, GDT_Byte, {});
 
     dataset->GetRasterBand(1)->SetColorInterpretation(GCI_PaletteIndex);
     dataset->GetRasterBand(1)->SetColorTable(ct);
@@ -177,7 +177,7 @@ void CApp::saveColorTable(GDALColorTable * ct, QString& sctFilename)
     GDALClose(dataset);
 }
 
-void CApp::ditherMap(GDALDataset * dsSrc, const QString& tarFilename, GDALColorTable *ct)
+void CApp::ditherMap(GDALDataset* dsSrc, const QString& tarFilename, GDALColorTable* ct)
 {
     if(tarFilename.isEmpty())
     {
@@ -187,15 +187,15 @@ void CApp::ditherMap(GDALDataset * dsSrc, const QString& tarFilename, GDALColorT
     qint32 xsize = dsSrc->GetRasterBand(1)->GetXSize();
     qint32 ysize = dsSrc->GetRasterBand(1)->GetYSize();
 
-    GDALDriverManager * drvman  = nullptr;
-    GDALDriver * driver         = nullptr;
-    GDALDataset * dataset       = nullptr;
+    GDALDriverManager* drvman = nullptr;
+    GDALDriver* driver = nullptr;
+    GDALDataset* dataset = nullptr;
 
     try
     {
-        const char * cargs[] = {"TILED=YES","COMPRESS=LZW", 0};
-        drvman  = GetGDALDriverManager();
-        driver  = drvman->GetDriverByName("GTiff");
+        const char* cargs[] = {"TILED=YES", "COMPRESS=LZW", 0};
+        drvman = GetGDALDriverManager();
+        driver = drvman->GetDriverByName("GTiff");
         dataset = driver->Create(tarFilename.toUtf8(), xsize, ysize, 1, GDT_Byte, (char**)cargs);
 
         if(dataset == nullptr)
@@ -230,8 +230,8 @@ void CApp::ditherMap(GDALDataset * dsSrc, const QString& tarFilename, GDALColorT
             return;
         }
 
-        GDALRasterBand * alpha = dsSrc->GetRasterBand(4);
-        GDALRasterBand * band  = dataset->GetRasterBand(1);
+        GDALRasterBand* alpha = dsSrc->GetRasterBand(4);
+        GDALRasterBand* band = dataset->GetRasterBand(1);
 
         QByteArray buffer1(xsize, 0);
         QByteArray buffer2(xsize, 0);
@@ -240,7 +240,7 @@ void CApp::ditherMap(GDALDataset * dsSrc, const QString& tarFilename, GDALColorT
         printStdoutQString(tr("Apply alpha channel as no data value to target file"));
         for(int y = 0; y < ysize; y++)
         {
-            GDALTermProgress(double(xsize * y)/(xsize*ysize),0,0);
+            GDALTermProgress(double(xsize * y) / (xsize * ysize), 0, 0);
             res = alpha->RasterIO(GF_Read, 0, y, xsize, 1, buffer1.data(), xsize, 1, GDT_Byte, 0, 0);
             if(res != CE_None)
             {
@@ -267,7 +267,7 @@ void CApp::ditherMap(GDALDataset * dsSrc, const QString& tarFilename, GDALColorT
                 throw tr("Failed to write to target file.");
             }
         }
-        GDALTermProgress(1.0,0,0);
+        GDALTermProgress(1.0, 0, 0);
     }
     catch(const QString& msg)
     {

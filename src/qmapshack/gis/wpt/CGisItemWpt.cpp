@@ -22,14 +22,15 @@
 #include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
+#include "gis/GeoMath.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/Poi.h"
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CScrOptWptRadius.h"
 #include "gis/wpt/CSetupIconAndName.h"
-#include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"
@@ -45,15 +46,15 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::keywordLambdaMap;
 QList<QString> CGisItemWpt::geocache_t::attributeMeaningsTranslated;
 
 
-CGisItemWpt::CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, const QString &name, const QString &icon, IGisProject *project)
+CGisItemWpt::CGisItemWpt(const QPointF& pos, qreal ele, const QDateTime& time, const QString& name, const QString& icon, IGisProject* project)
     : IGisItem(project, eTypeWpt, NOIDX)
 {
-    wpt.name    = name;
-    wpt.sym     = icon;
-    wpt.lon     = pos.x();
-    wpt.lat     = pos.y();
-    wpt.ele     = (ele == NOFLOAT) ? NOINT : qRound(ele);
-    wpt.time    = time;
+    wpt.name = name;
+    wpt.sym = icon;
+    wpt.lon = pos.x();
+    wpt.lat = pos.y();
+    wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
+    wpt.time = time;
 
     detBoundingRect();
 
@@ -62,7 +63,7 @@ CGisItemWpt::CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, c
 }
 
 /// used to add a new waypoint
-CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, IGisProject *project)
+CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, IGisProject* project)
     : CGisItemWpt(pos, NOFLOAT, QDateTime::currentDateTimeUtc(), name, icon, project)
 {
     flags = eFlagCreatedInQms | eFlagWriteAllowed;
@@ -76,13 +77,13 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
 }
 
 /// used to move a copy of waypoint
-CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisProject *project)
+CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisProject* project)
     : IGisItem(project, eTypeWpt, NOIDX)
 {
     *this = parentWpt;
-    wpt.lon     = pos.x();
-    wpt.lat     = pos.y();
-    wpt.time    = QDateTime::currentDateTimeUtc();
+    wpt.lon = pos.x();
+    wpt.lat = pos.y();
+    wpt.time = QDateTime::currentDateTimeUtc();
 
     key.clear();
     history.events.clear();
@@ -100,7 +101,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
 }
 
 /// used to create a copy of waypoint with new parent
-CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int idx, bool clone)
+CGisItemWpt::CGisItemWpt(const CGisItemWpt& parentWpt, IGisProject* project, int idx, bool clone)
     : IGisItem(project, eTypeWpt, idx)
 {
     history = parentWpt.history;
@@ -130,18 +131,18 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
 }
 
 /// used to create waypoint from GPX file
-CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
+CGisItemWpt::CGisItemWpt(const QDomNode& xml, IGisProject* project)
     : IGisItem(project, eTypeWpt, project->childCount())
 {
     readGpx(xml);
     detBoundingRect();
 
-    genKey();
+    CGisItemWpt::genKey();
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemWpt::CGisItemWpt(const history_t& hist, const QString &dbHash, IGisProject * project)
+CGisItemWpt::CGisItemWpt(const history_t& hist, const QString& dbHash, IGisProject* project)
     : IGisItem(project, eTypeWpt, project->childCount())
 {
     history = hist;
@@ -153,25 +154,25 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, const QString &dbHash, IGisProje
     }
 }
 
-CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
+CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject* project)
     : IGisItem(project, eTypeWpt, NOIDX)
 {
     loadFromDb(id, db);
     detBoundingRect();
 }
 
-CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * project)
+CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t& tnvWpt, IGisProject* project)
     : IGisItem(project, eTypeWpt, NOIDX)
 {
     readTwoNav(tnvWpt);
     detBoundingRect();
 
-    genKey();
+    CGisItemWpt::genKey();
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemWpt::CGisItemWpt(CFitStream& stream, IGisProject * project)
+CGisItemWpt::CGisItemWpt(CFitStream& stream, IGisProject* project)
     : IGisItem(project, eTypeWpt, NOIDX)
     , proximity(NOFLOAT)
     , posScreen(NOPOINTF)
@@ -179,7 +180,7 @@ CGisItemWpt::CGisItemWpt(CFitStream& stream, IGisProject * project)
     readWptFromFit(stream);
     detBoundingRect();
 
-    genKey();
+    CGisItemWpt::genKey();
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 }
@@ -188,10 +189,10 @@ CGisItemWpt::~CGisItemWpt()
 {
 }
 
-IGisItem * CGisItemWpt::createClone()
+IGisItem* CGisItemWpt::createClone()
 {
     int idx = -1;
-    IGisProject * project = getParentProject();
+    IGisProject* project = getParentProject();
     if(project)
     {
         idx = project->indexOfChild(this);
@@ -242,7 +243,7 @@ QString CGisItemWpt::getLastName(const QString& name)
         }
         else if(idx < s)
         {
-            lastName = lastName.left(idx) + QString::number(lastName.mid(idx).toInt() + 1);
+            lastName = lastName.left(idx) + QString::number(lastName.midRef(idx).toInt() + 1);
         }
     }
 
@@ -273,25 +274,48 @@ bool CGisItemWpt::getIconAndName(QString& icon, QString& name)
     return true;
 }
 
-void CGisItemWpt::newWpt(QPointF& pt, const QString &name, const QString &desc, IGisProject * project)
+void CGisItemWpt::newWpt(const QPointF& pt, const QString& name, const QString& desc, IGisProject* project)
 {
     SETTINGS;
-    QString icon = cfg.value("Waypoint/lastIcon", "Waypoint").toString();
+    const QString& _icon = cfg.value("Waypoint/lastIcon", "Waypoint").toString();
+    const QString& _name = name.isEmpty() ? getLastName("") : name;
 
-    QString _name = name;
-
-    if(_name.isEmpty())
-    {
-        _name = getLastName("");
-    }
-
-    CGisItemWpt * wpt = new CGisItemWpt(pt, _name, icon, project);
+    CGisItemWpt* wpt = new CGisItemWpt(pt, _name, _icon, project);
     if(!desc.isEmpty())
     {
         wpt->setDescription(desc);
     }
     wpt->editInitial();
 
+    cfg.setValue("Waypoint/lastName", wpt->getName());
+    cfg.setValue("Waypoint/lastIcon", wpt->getIconName());
+}
+
+void CGisItemWpt::newWpt(const poi_t& poi, IGisProject* project, bool openEditWIndow)
+{
+    SETTINGS;
+    const QString& _icon = poi.icon.isEmpty() ? cfg.value("Waypoint/lastIcon", "Waypoint").toString() : poi.icon;
+    const QString& _name = poi.name.isEmpty() ? getLastName("") : poi.name;
+
+    CGisItemWpt* wpt = new CGisItemWpt(poi.pos * RAD_TO_DEG, _name, _icon, project);
+    if(!poi.desc.isEmpty())
+    {
+        wpt->setDescription(poi.desc);
+    }
+    if(!poi.links.isEmpty())
+    {
+        wpt->setLinks(poi.links);
+    }
+    if(poi.ele != NOINT)
+    {
+        wpt->setElevation(poi.ele);
+    }
+    if(openEditWIndow)
+    {
+        wpt->editInitial();
+    }
+
+    wpt->setReadOnlyMode(true);
     cfg.setValue("Waypoint/lastName", wpt->getName());
     cfg.setValue("Waypoint/lastIcon", wpt->getIconName());
 }
@@ -314,7 +338,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
         }
         QString val, unit;
         IUnit::self().meter2elevation(wpt.ele, val, unit);
-        str += tr("Elevation: %1%2").arg(val).arg(unit);
+        str += tr("Elevation: %1%2").arg(val, unit);
     }
 
     if(proximity != NOFLOAT)
@@ -325,7 +349,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
         }
         QString val, unit;
         IUnit::self().meter2distance(proximity, val, unit);
-        str += tr("Proximity: %1%2").arg(val).arg(unit);
+        str += tr("Proximity: %1%2").arg(val, unit);
     }
 
     QString desc = removeHtml(wpt.desc).simplified();
@@ -349,7 +373,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
                    .arg(IUnit::datetime2string(lastFound, false, wpt));
         }
 
-        const IGisProject * project = getParentProject();
+        const IGisProject* project = getParentProject();
         if(project != nullptr)
         {
             const QDateTime& projectDate = getParentProject()->getTime();
@@ -416,7 +440,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
             if(link.type.isEmpty() || (link.type == "text/html"))
             {
                 str += "<br/>\n";
-                str += QString("<a href='%1'>%2</a>").arg(link.uri.toString()).arg(link.text);
+                str += QString("<a href='%1'>%2</a>").arg(link.uri.toString(), link.text);
             }
         }
         //Add logging link separately, since the link to the geocache site is extracted from the gpx file.
@@ -432,7 +456,7 @@ QString CGisItemWpt::getInfo(quint32 feature) const
     return str + "</div>";
 }
 
-IScrOpt * CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse * mouse)
+IScrOpt* CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse* mouse)
 {
     if (closeToRadius)
     {
@@ -535,7 +559,7 @@ void CGisItemWpt::setIcon(const QString& name)
     SETTINGS;
     cfg.setValue("Waypoint/lastIcon", name);
 
-    wpt.sym  = name;
+    wpt.sym = name;
 
     QPointF focus;
     QString path;
@@ -600,7 +624,7 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
 
 bool CGisItemWpt::isWithin(const QRectF& area, selflags_t flags)
 {
-    return (flags & eSelectionWpt) ? area.contains(posScreen) : false;
+    return (flags & eSelectionWpt) ? area.contains(QPointF(wpt.lon, wpt.lat)) : false;
 }
 
 
@@ -631,14 +655,14 @@ void CGisItemWpt::editInitial()
     squashHistory();
 }
 
-void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
+void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis)
 {
     posScreen = QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
 
     if (proximity == NOFLOAT || proximity == 0. ? !isVisible(posScreen, viewport, gis) : !isVisible(boundingRect, viewport, gis))
     {
-        rectBubble  = QRect();
-        posScreen   = NOPOINTF;
+        rectBubble = QRect();
+        posScreen = NOPOINTF;
         return;
     }
 
@@ -663,7 +687,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     blockedAreas << QRectF(posScreen - focus, icon.size());
 }
 
-void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
+void CGisItemWpt::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw* gis)
 {
     if(mouseIsOverBubble && !doBubbleMove && !doBubbleSize && rectBubble.isValid() && !isReadOnly())
     {
@@ -694,7 +718,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 }
 
 
-void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
+void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF& /*viewport*/, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw*/*gis*/)
 {
     if(flags & eFlagWptBubble)
     {
@@ -825,7 +849,7 @@ void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, co
     p.restore();
 }
 
-qreal CGisItemWpt::calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis)
+qreal CGisItemWpt::calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw* gis)
 {
     QPointF pt1 = posRad;
     pt1 = GPS_Math_Wpt_Projection(pt1, radiusRad, 90 * DEG_TO_RAD);
@@ -908,7 +932,7 @@ void CGisItemWpt::mouseMove(const QPointF& pos)
     {
         return;
     }
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(!canvas)
     {
         return;
@@ -935,9 +959,9 @@ void CGisItemWpt::mouseMove(const QPointF& pos)
     }
 }
 
-void CGisItemWpt::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& pos)
+void CGisItemWpt::mouseDragged(const QPoint& /*start*/, const QPoint& /*last*/, const QPoint& pos)
 {
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(!canvas)
     {
         return;
@@ -961,13 +985,13 @@ void CGisItemWpt::mouseDragged(const QPoint& start, const QPoint& last, const QP
     }
     if(doBubbleMove)
     {
-        offsetBubble  = pos - posScreen.toPoint();
+        offsetBubble = pos - posScreen.toPoint();
         offsetBubble -= offsetMouse;
     }
     else if(doBubbleSize)
     {
         qDebug() << offsetMouse;
-        int width  = pos.x() - rectBubble.left() - offsetMouse.x();
+        int width = pos.x() - rectBubble.left() - offsetMouse.x();
         if(width > 50)
         {
             widthBubble = width;
@@ -976,7 +1000,7 @@ void CGisItemWpt::mouseDragged(const QPoint& start, const QPoint& last, const QP
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CGisItemWpt::dragFinished(const QPoint& pos)
+void CGisItemWpt::dragFinished(const QPoint& /*pos*/)
 {
     updateHistory();
     doBubbleMove = doBubbleSize = false;
@@ -986,7 +1010,7 @@ void CGisItemWpt::leftClicked(const QPoint& pos)
 {
     if(rectBubbleEdit.contains(pos))
     {
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas)
         {
             doBubbleMove = doBubbleSize = false;
@@ -1019,7 +1043,7 @@ const searchValue_t CGisItemWpt::getValueByKeyword(searchProperty_e keyword)
     return searchValue_t();
 }
 
-void CGisItemWpt::processMouseOverBubble(const QPoint &pos)
+void CGisItemWpt::processMouseOverBubble(const QPoint& pos)
 {
     if(rectBubbleMove.contains(pos) || rectBubbleEdit.contains(pos) || rectBubbleSize.contains(pos))
     {
@@ -1048,7 +1072,7 @@ void CGisItemWpt::detBoundingRect()
     else
     {
         qreal diag = proximity * 1.414213562;
-        QPointF cent(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
+        QPointF cent(wpt.lon* DEG_TO_RAD, wpt.lat* DEG_TO_RAD);
 
         QPointF pt1 = GPS_Math_Wpt_Projection(cent, diag, 225 * DEG_TO_RAD);
         QPointF pt2 = GPS_Math_Wpt_Projection(cent, diag, 45 * DEG_TO_RAD);
@@ -1130,7 +1154,7 @@ const QList<QString> CGisItemWpt::geocache_t::attributeMeanings = {
 
 QList<QString> CGisItemWpt::geocache_t::initAttributeMeaningsTranslated()
 {
-    QList<QString> translated  = {
+    QList<QString> translated = {
         tr("QMS Attribute Flag"),         //Not to be serialized in GPX files
         tr("Dogs"),
         tr("Access or parking fee"),
@@ -1289,7 +1313,7 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
         searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
         return searchValue;
     });
-    map.insert(eSearchPropertyGeneralType, [](CGisItemWpt* item){
+    map.insert(eSearchPropertyGeneralType, [](CGisItemWpt* /*item*/){
         searchValue_t searchValue;
         searchValue.str1 = tr("waypoint");
         return searchValue;
@@ -1307,7 +1331,8 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeocachePositiveAttributes, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        for(quint8 attr : item->geocache.attributes.keys())
+        const QList<quint8>& keys = item->geocache.attributes.keys();
+        for(quint8 attr : keys)
         {
             if(attr >= item->geocache.attributeMeaningsTranslated.length())
             {
@@ -1323,7 +1348,8 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeocacheNegatedAttributes, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        for(quint8 attr : item->geocache.attributes.keys())
+        const QList<quint8>& keys = item->geocache.attributes.keys();
+        for(quint8 attr : keys)
         {
             if(attr >= item->geocache.attributeMeaningsTranslated.length())
             {
@@ -1381,7 +1407,7 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeocacheLoggedBy, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        for(geocachelog_t log : item->geocache.logs)
+        for(const geocachelog_t& log : qAsConst(item->geocache.logs))
         {
             searchValue.str1 += log.finder + ", ";
         }

@@ -24,7 +24,7 @@
 class CUnitNautic : public IUnit
 {
 public:
-    CUnitNautic(QObject * parent);
+    CUnitNautic(QObject* parent);
     virtual ~CUnitNautic() = default;
 
     void meter2distance(qreal meter, QString& val, QString& unit) const override;
@@ -34,6 +34,6 @@ public:
     void meter2area(qreal meter, QString& val, QString& unit) const override;
     void meter2area(qreal meter, qreal& val, QString& unit) const override;
     qreal elevation2meter(const QString& val) const override;
-    void meter2unit(qreal meter, qreal& scale, QString&  unit) const override;
+    void meter2unit(qreal meter, qreal& scale, QString& unit) const override;
 };
 #endif //CUNITNAUTIC_H

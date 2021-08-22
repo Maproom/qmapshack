@@ -34,13 +34,13 @@ public:
         eColumnName
     };
 
-    CItemTreeWidget(QWidget * parent);
+    CItemTreeWidget(QWidget* parent);
     virtual ~CItemTreeWidget() = default;
 
     void saveSettings(QSettings& cfg);
     void loadSettings(QSettings& cfg);
 
-    ITool *currentItem();
+    ITool* currentItem();
 
     template< typename LessThan>
     void sort(LessThan lessThan)
@@ -55,7 +55,7 @@ public:
 
         qSort(items.begin(), items.end(), lessThan);
 
-        for(QTreeWidgetItem* item : items)
+        for(QTreeWidgetItem* item : qAsConst(items))
         {
             treeFiles->addTopLevelItem(item);
         }
@@ -68,7 +68,7 @@ public:
         return treeFiles->topLevelItemCount();
     }
 
-    QTreeWidgetItem * topLevelItem(int n)
+    QTreeWidgetItem* topLevelItem(int n)
     {
         return treeFiles->topLevelItem(n);
     }
@@ -87,7 +87,7 @@ protected slots:
 
 protected:
     void addFiles(const QStringList& files);
-    CItemMap *findMapByHash(const QString& hash);
+    CItemMap* findMapByHash(const QString& hash);
 };
 
 #endif //CITEMTREEWIDGET_H

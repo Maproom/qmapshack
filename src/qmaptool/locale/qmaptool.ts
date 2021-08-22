@@ -64,7 +64,7 @@
 <context>
     <name>CDrawContextPixel</name>
     <message>
-        <location filename="../canvas/CDrawContextPixel.cpp" line="74"/>
+        <location filename="../canvas/CDrawContextPixel.cpp" line="84"/>
         <source>Failed to load</source>
         <translation type="unfinished"></translation>
     </message>
@@ -72,7 +72,7 @@
 <context>
     <name>CDrawContextProj</name>
     <message>
-        <location filename="../canvas/CDrawContextProj.cpp" line="72"/>
+        <location filename="../canvas/CDrawContextProj.cpp" line="73"/>
         <source>Failed to load</source>
         <translation type="unfinished"></translation>
     </message>
@@ -80,40 +80,40 @@
 <context>
     <name>CGdalFile</name>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="53"/>
-        <location filename="../helpers/CGdalFile.cpp" line="81"/>
-        <location filename="../helpers/CGdalFile.cpp" line="111"/>
+        <location filename="../helpers/CGdalFile.cpp" line="54"/>
+        <location filename="../helpers/CGdalFile.cpp" line="82"/>
+        <location filename="../helpers/CGdalFile.cpp" line="112"/>
         <source>Error...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="53"/>
-        <location filename="../helpers/CGdalFile.cpp" line="81"/>
+        <location filename="../helpers/CGdalFile.cpp" line="54"/>
+        <location filename="../helpers/CGdalFile.cpp" line="82"/>
         <source>Failed to load file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="111"/>
+        <location filename="../helpers/CGdalFile.cpp" line="112"/>
         <source>File must be 8 bit palette or gray indexed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="196"/>
+        <location filename="../helpers/CGdalFile.cpp" line="222"/>
         <source>(color table)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="200"/>
+        <location filename="../helpers/CGdalFile.cpp" line="226"/>
         <source>(RGB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="204"/>
+        <location filename="../helpers/CGdalFile.cpp" line="230"/>
         <source>(RGBA)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="208"/>
+        <location filename="../helpers/CGdalFile.cpp" line="234"/>
         <source>(unknown)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -343,22 +343,22 @@ The is also the option to fine tune the reference points in auto-mode. In this m
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="694"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="692"/>
         <source>Delete all reference points...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="694"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="692"/>
         <source>Are you sure to delete all reference points in the list?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="729"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="727"/>
         <source>Delete...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="729"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="727"/>
         <source>Delete all selected reference points?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -372,28 +372,41 @@ The is also the option to fine tune the reference points in auto-mode. In this m
     </message>
 </context>
 <context>
-    <name>CProjWizard</name>
+    <name>CProj</name>
     <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="62"/>
-        <source>north</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="63"/>
-        <source>south</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="227"/>
-        <source>Error...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="227"/>
+        <location filename="../../common/gis/proj_x.cpp" line="184"/>
         <source>The value
 &apos;%1&apos;
 is not a valid coordinate system definition:
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/gis/proj_x.cpp" line="196"/>
+        <source>Lat/Lon projection is not allowed in this case.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CProjWizard</name>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="55"/>
+        <source> (Spheroid: %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="70"/>
+        <source>north</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="71"/>
+        <source>south</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="215"/>
+        <source>Error...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -531,17 +544,17 @@ Canceled by user&apos;s request.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/CToolPalettize.cpp" line="34"/>
+        <location filename="../tool/CToolPalettize.cpp" line="36"/>
         <source>Usually you use RGBA color while referencing a map because the large color space allows you to scale and rotate the map without any loss of quality. But it results into rather large files. The file size can be optimized by using a color palette instead of the RGBA color space. The impact on quality is low as long as you do not want to scale or rotate the map. If you want to combine files with a color palette all files need to have the same palette.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/CToolPalettize.cpp" line="46"/>
+        <location filename="../tool/CToolPalettize.cpp" line="48"/>
         <source>Note: This tool will use all files in the list as a combined input to derive an optimal palette. This will only work if all files have the same projection and scale.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/CToolPalettize.cpp" line="109"/>
+        <location filename="../tool/CToolPalettize.cpp" line="116"/>
         <source>Select filename...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -549,12 +562,12 @@ Canceled by user&apos;s request.
 <context>
     <name>CToolRefMap</name>
     <message>
-        <location filename="../tool/CToolRefMap.cpp" line="34"/>
+        <location filename="../tool/CToolRefMap.cpp" line="33"/>
         <source>Reference Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/CToolRefMap.cpp" line="36"/>
+        <location filename="../tool/CToolRefMap.cpp" line="35"/>
         <source>A scan of a paper map can be converted to a referenced raster map if you place at least three reference points on the map. The more points the better the result. If your map has a grid you can place points on that grid with the grid tool.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1064,7 +1077,7 @@ or
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="316"/>
-        <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;+init=epsg:...&quot;.</source>
+        <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;EPSG:...&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1372,27 +1385,32 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="176"/>
+        <location filename="../tool/IToolCutMap.ui" line="155"/>
+        <source>GDAL Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolCutMap.ui" line="183"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="190"/>
+        <location filename="../tool/IToolCutMap.ui" line="197"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="201"/>
+        <location filename="../tool/IToolCutMap.ui" line="208"/>
         <source>For all files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="226"/>
+        <location filename="../tool/IToolCutMap.ui" line="233"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="236"/>
+        <location filename="../tool/IToolCutMap.ui" line="243"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1532,6 +1550,44 @@ or
     </message>
 </context>
 <context>
+    <name>IToolGDALGroupBox</name>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="14"/>
+        <source>GroupBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="17"/>
+        <source>GDAL Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="50"/>
+        <source>Resampling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="84"/>
+        <source>Compression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="118"/>
+        <source>Tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="144"/>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="188"/>
+        <source>Other:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IToolGrid</name>
     <message>
         <location filename="../tool/IToolGrid.ui" line="14"/>
@@ -1651,32 +1707,37 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="170"/>
+        <location filename="../tool/IToolPalettize.ui" line="149"/>
+        <source>GDAL Parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolPalettize.ui" line="177"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="184"/>
+        <location filename="../tool/IToolPalettize.ui" line="191"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="213"/>
+        <location filename="../tool/IToolPalettize.ui" line="220"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="223"/>
+        <location filename="../tool/IToolPalettize.ui" line="230"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="233"/>
+        <location filename="../tool/IToolPalettize.ui" line="240"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_rgb2pct&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="247"/>
+        <location filename="../tool/IToolPalettize.ui" line="254"/>
         <source>Select filename</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1714,32 +1775,37 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="179"/>
+        <location filename="../tool/IToolRefMap.ui" line="158"/>
+        <source>GDAL Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolRefMap.ui" line="186"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="193"/>
+        <location filename="../tool/IToolRefMap.ui" line="200"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="204"/>
+        <location filename="../tool/IToolRefMap.ui" line="211"/>
         <source>For all files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="229"/>
+        <location filename="../tool/IToolRefMap.ui" line="236"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="239"/>
+        <location filename="../tool/IToolRefMap.ui" line="246"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="249"/>
+        <location filename="../tool/IToolRefMap.ui" line="256"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>

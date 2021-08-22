@@ -23,12 +23,12 @@
 #include <QtWidgets>
 
 
-CDeviceWatcherMac::CDeviceWatcherMac(CGisListWks *parent)
+CDeviceWatcherMac::CDeviceWatcherMac(CGisListWks* parent)
     : IDeviceWatcher(parent), worker()
 {
-    connect(&worker, &CDeviceWorker::sigDeviceAdded,   this, &CDeviceWatcherMac::slotDeviceAdded);
+    connect(&worker, &CDeviceWorker::sigDeviceAdded, this, &CDeviceWatcherMac::slotDeviceAdded);
     connect(&worker, &CDeviceWorker::sigDeviceRemoved, this, &CDeviceWatcherMac::slotDeviceRemoved);
-    connect(qApp,    &QApplication::aboutToQuit,       this, &CDeviceWatcherMac::slotEndListing);
+    connect(qApp, &QApplication::aboutToQuit, this, &CDeviceWatcherMac::slotEndListing);
 }
 
 
@@ -61,7 +61,7 @@ void CDeviceWatcherMac::slotEndListing()
 void CDeviceWatcherMac::slotUpdate()
 {
     qDebug() << "slotUpdate";
-    for(const QStorageInfo &storage : QStorageInfo::mountedVolumes())
+    for(const QStorageInfo& storage : QStorageInfo::mountedVolumes())
     {
         addDevice(storage);
     }
@@ -72,7 +72,7 @@ void CDeviceWatcherMac::slotDeviceAdded(QString dev)
 {
     // get mount point
     QStorageInfo storageInfo;
-    for(const QStorageInfo &storage : QStorageInfo::mountedVolumes())
+    for(const QStorageInfo& storage : QStorageInfo::mountedVolumes())
     {
         QString diskName = QString(storage.device()).section('/', -1);
         if(dev == diskName)
@@ -99,7 +99,7 @@ void CDeviceWatcherMac::slotDeviceRemoved(QString dev)
 
 static void onDiskAppear(DADiskRef disk, CFArrayRef keys, void* context)
 {
-    CDeviceWorker *p = static_cast<CDeviceWorker*>(context);
+    CDeviceWorker* p = static_cast<CDeviceWorker*>(context);
     QString diskName = DADiskGetBSDName(disk);
     qDebug() << "onDiskAppear" << diskName;
 
@@ -107,9 +107,9 @@ static void onDiskAppear(DADiskRef disk, CFArrayRef keys, void* context)
 }
 
 
-static void onDiskDisappear(DADiskRef disk, void *context)
+static void onDiskDisappear(DADiskRef disk, void* context)
 {
-    CDeviceWorker *p = static_cast<CDeviceWorker*>(context);
+    CDeviceWorker* p = static_cast<CDeviceWorker*>(context);
     QString diskName = DADiskGetBSDName(disk);
     qDebug() << "onDiskDisappear" << diskName;
 

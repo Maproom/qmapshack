@@ -25,7 +25,7 @@
 
 #include <QtWidgets>
 
-CLineOpAddPoint::CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
+CLineOpAddPoint::CLineOpAddPoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent)
     : ILineOp(points, gis, canvas, parent)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorPointAdd.png"), 0, 0);
@@ -43,7 +43,7 @@ void CLineOpAddPoint::append()
     idxFocus = points.size();
     points.insert(idxFocus, IGisLine::point_t(points.last()));
     addPoint = true;
-    isPoint  = true;
+    isPoint = true;
     // make sure that when starting the line-edit on-the-fly-routing will
     // not trigger before the mouse has been moved a bit away from last point of line
     startMouseMove(points.last().pixel);
@@ -161,7 +161,7 @@ void CLineOpAddPoint::mouseMove(const QPoint& pos)
     }
     else
     {
-        isPoint  = false;
+        isPoint = false;
         // find line segment close to cursor
         idxFocus = isCloseToLine(pos);
         // if none is found try to find point
@@ -180,7 +180,7 @@ void CLineOpAddPoint::mouseMove(const QPoint& pos)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpAddPoint::rightButtonDown(const QPoint &pos)
+void CLineOpAddPoint::rightButtonDown(const QPoint& pos)
 {
     abortStep();
     idxFocus = NOIDX;

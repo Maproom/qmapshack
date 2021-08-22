@@ -20,7 +20,8 @@
 #define CGDALFILE_H
 
 
-#include <proj_api.h>
+#include "gis/proj_x.h"
+
 #include <QCoreApplication>
 #include <QPointF>
 #include <QRgb>
@@ -56,7 +57,7 @@ protected:
 
     type_e type;
 
-    GDALDataset * dataset = nullptr;
+    GDALDataset* dataset = nullptr;
 
     /// number of color bands used by the *vrt
     int rasterBandCount = 0;
@@ -65,7 +66,7 @@ protected:
 
     // true if the map file has overviews
     qint32 hasOverviews = -1;
-    qint32 hasNoData    = -1;
+    qint32 hasNoData = -1;
 
 
     /// true if the map file could be loaded
@@ -95,9 +96,7 @@ protected:
     QTransform trFwdProj;
     QTransform trInvProj;
 
-    QString proj4str;
-
-    projPJ pjsrc = nullptr;
+    CProj proj;
 };
 
 #endif //CGDALFILE_H

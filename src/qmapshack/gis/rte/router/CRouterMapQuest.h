@@ -31,7 +31,7 @@ class CRouterMapQuest : public IRouter, private Ui::IRouterMapQuest
 {
     Q_OBJECT
 public:
-    CRouterMapQuest(QWidget * parent);
+    CRouterMapQuest(QWidget* parent);
     virtual ~CRouterMapQuest();
 
     void calcRoute(const IGisItem::key_t& key) override;
@@ -51,9 +51,9 @@ private:
 
     static const QByteArray keyMapQuest;
 
-    QNetworkAccessManager * networkAccessManager;
+    QNetworkAccessManager* networkAccessManager;
 
-    QTimer * timerCloseStatusMsg;
+    QTimer* timerCloseStatusMsg;
 };
 
 #endif //CROUTERMAPQUEST_H

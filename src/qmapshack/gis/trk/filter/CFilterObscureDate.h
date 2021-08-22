@@ -28,7 +28,7 @@ class CFilterObscureDate : public QWidget, private Ui::IFilterObscureDate
 {
     Q_OBJECT
 public:
-    CFilterObscureDate(CGisItemTrk& trk, QWidget * parent);
+    CFilterObscureDate(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterObscureDate();
 
 private slots:

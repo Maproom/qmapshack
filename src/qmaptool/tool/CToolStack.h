@@ -26,7 +26,7 @@
 class CToolStack : public ITool, public QStackedWidget
 {
 public:
-    CToolStack(QWidget * parent);
+    CToolStack(QWidget* parent);
     virtual ~CToolStack() = default;
 
     void setupChanged() override;

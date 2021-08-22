@@ -130,82 +130,92 @@
 <context>
     <name>CCanvas</name>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="84"/>
+        <location filename="../canvas/CCanvas.cpp" line="85"/>
         <source>View %1</source>
         <translation>Venster %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="203"/>
+        <location filename="../canvas/CCanvas.cpp" line="216"/>
         <source>None selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="208"/>
+        <location filename="../canvas/CCanvas.cpp" line="221"/>
         <source>&lt;p align=&apos;right&apos;&gt;This help will be closed the moment you activate a map.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="211"/>
+        <location filename="../canvas/CCanvas.cpp" line="224"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="220"/>
+        <location filename="../canvas/CCanvas.cpp" line="233"/>
         <source>&lt;h2&gt;Let&apos;s Start&lt;/h2&gt;&lt;p&gt;As a first step make yourself comfortable by arranging the dock widgets around this area to your personal liking. You can do this by grabbing the dock widget&apos;s title bars with your mouse (keep left button pressed on title bar) and move them where you want them. You can attach the dock widgets at the left, right, top or bottom. And you can stack them by placing them right above another dock widget. If you do not want to use the functionality of a dock widget you can close it and make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it anywhere you like.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="232"/>
+        <location filename="../canvas/CCanvas.cpp" line="245"/>
         <source>&lt;h2&gt;The Wiki&lt;/h2&gt;&lt;p&gt;QMapShack has an extensive &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; with a lot of information about how to use it. There is a &lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide&lt;/a&gt; translated into several languages. Read it and you will discover the full variety of features QMapShack offers you.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="240"/>
+        <location filename="../canvas/CCanvas.cpp" line="253"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Current home:&lt;br/&gt;%1&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="245"/>
-        <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../canvas/CCanvas.cpp" line="293"/>
+        <location filename="../canvas/CCanvas.cpp" line="307"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="308"/>
+        <location filename="../canvas/CCanvas.cpp" line="322"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="277"/>
+        <location filename="../canvas/CCanvas.cpp" line="1171"/>
+        <source>Map Projection...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="1172"/>
+        <source>Failed to setup map projection. Please configure a valid projection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="291"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="262"/>
+        <location filename="../canvas/CCanvas.cpp" line="258"/>
+        <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;POI - where all POI collections are stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="276"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="300"/>
+        <location filename="../canvas/CCanvas.cpp" line="314"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="319"/>
+        <location filename="../canvas/CCanvas.cpp" line="333"/>
         <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;&lt;p&gt;To start with some online DEMs you can click on the link for &lt;a href=&apos;GetDems&apos;&gt;impatient users&lt;/a&gt;. But keep in mind that using online DEMs slows down QMapShack significantly.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="334"/>
+        <location filename="../canvas/CCanvas.cpp" line="348"/>
         <source>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack supports online routing services. But if you really want to make use of the routing possibilities you need the routing database stored locally. There are two offline routing engines available.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;For Routino you have to create routing data from the Open Street Map database files. QMapShack has a built-in Routino Database Creator (&lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;A second option is to use a local BRouter installation with a local routing database. Use the &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter setup&lt;/a&gt; to download and install all necessary data.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1065"/>
+        <location filename="../canvas/CCanvas.cpp" line="1100"/>
         <source>Setup Map Background</source>
         <translation type="unfinished"></translation>
     </message>
@@ -246,7 +256,7 @@
 <context>
     <name>CCreateRouteFromWpt</name>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="68"/>
+        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="67"/>
         <source>route</source>
         <translation type="unfinished"></translation>
     </message>
@@ -503,17 +513,17 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="84"/>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="188"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="189"/>
         <source>???</source>
         <translation>???</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="215"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="216"/>
         <source>Searching for images...</source>
         <translation>Zoeken naar afbeeldingen...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="321"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="322"/>
         <source>No images found</source>
         <translation>Geen afbeeldingen gevonden</translation>
     </message>
@@ -532,7 +542,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="273"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1010"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1012"/>
         <source>none</source>
         <translation>geen</translation>
     </message>
@@ -557,124 +567,124 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="497"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="499"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Waypoints&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="504"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="530"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="820"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="887"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="945"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="975"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="506"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="532"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="822"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="889"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="947"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="977"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="505"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="531"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="822"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="946"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="976"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="507"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="533"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="824"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="948"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="978"/>
         <source>Comment</source>
         <translation>Notitie</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="523"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="525"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Tracks&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="667"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="669"/>
         <source>Elevation: %1%2</source>
         <translation type="unfinished">Hoogte: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="672"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="674"/>
         <source>Created: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="715"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="717"/>
         <source>Arrival: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="729"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="731"/>
         <source>From Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="729"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="731"/>
         <source>To Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="729"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="731"/>
         <source>To End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="732"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="734"/>
         <source>Distance: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="744"/>
         <source>Time: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="752"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="754"/>
         <source>Ascent: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="762"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="764"/>
         <source>Descent: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="821"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="888"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="823"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="890"/>
         <source>Statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="938"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="940"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Gebieden&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="968"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="970"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Routes&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="996"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1023"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="998"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1025"/>
         <source>Edit name...</source>
         <translation>Bewerk naam...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="996"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1023"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="998"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1025"/>
         <source>Enter new project name.</source>
         <translation>Geef  project een nieuwe naam.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1005"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1007"/>
         <source>Edit keywords...</source>
         <translation>Bewerkt sleutelwoorden...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1005"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1007"/>
         <source>Enter keywords.</source>
         <translation>Geef sleutelwoorden.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1151"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1153"/>
         <source>Print Diary</source>
         <translation>Dagboek afdrukken</translation>
     </message>
@@ -707,22 +717,22 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="442"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="441"/>
         <source>Color</source>
         <translation>Kleur</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="443"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="442"/>
         <source>Activity</source>
         <translation>Activiteit</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="522"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="523"/>
         <source>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="530"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="531"/>
         <source> - Computation needs valid time, elevation and slope data.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -748,7 +758,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Afbeelding%1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1139"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1147"/>
         <source>Unknown</source>
         <translation>Onbekend</translation>
     </message>
@@ -974,7 +984,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CFilterDeleteExtension</name>
     <message>
-        <location filename="../gis/trk/filter/CFilterDeleteExtension.cpp" line="57"/>
+        <location filename="../gis/trk/filter/CFilterDeleteExtension.cpp" line="58"/>
         <source>No extension available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1146,7 +1156,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CFitFieldBuilder</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitFieldBuilder.cpp" line="77"/>
+        <location filename="../gis/fit/decoder/CFitFieldBuilder.cpp" line="78"/>
         <source>FIT decoding error: unknown base type %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1159,7 +1169,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="226"/>
+        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="242"/>
         <source>FIT decoding error: invalid field def nr %1 while creating dev field profile.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1384,57 +1394,57 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>_Kloon</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="392"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="394"/>
         <source>Area: %1%2</source>
         <translation>Gebied: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="477"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="479"/>
         <source>Changed area shape.</source>
         <translation>Vorm gebied aangepast.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="485"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="487"/>
         <source>Changed name.</source>
         <translation>Naam aangepast.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="491"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="493"/>
         <source>Changed border width.</source>
         <translation>Lijndikte aangepast.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="497"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="499"/>
         <source>Changed fill pattern.</source>
         <translation>Opvulling aangepast.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="503"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="505"/>
         <source>Changed opacity.</source>
         <translation>Transparantie aangepast.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="509"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="511"/>
         <source>Changed comment.</source>
         <translation>Notitie aangepast.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="515"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="517"/>
         <source>Changed description.</source>
         <translation>Beschrijving aangepast.</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="521"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="523"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="532"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="534"/>
         <source>Changed color</source>
         <translation>Kleur aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="607"/>
+        <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="609"/>
         <source>area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1448,7 +1458,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="298"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="1360"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="1362"/>
         <source>route</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1484,12 +1494,12 @@ You can modify both parameters to customize the behavior of the filter. For the 
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="413"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="678"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="680"/>
         <source>Time: %1%2</source>
         <translation type="unfinished">Tijd: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="680"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="682"/>
         <source>Distance: %1%2</source>
         <translation type="unfinished">Afstand: %1%2</translation>
     </message>
@@ -1519,7 +1529,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>met %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="799"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="801"/>
         <source>Changed route points.</source>
         <translation>Routepunten aangepast.</translation>
     </message>
@@ -1527,7 +1537,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="285"/>
+        <location filename="../gis/fit/serialization.cpp" line="294"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1563,315 +1573,315 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>_Kloon</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="376"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="381"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation>Trackpunten aangepast, vorige gegevens overschreven.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="513"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="518"/>
         <source>Time: %1%2, Speed: %3%4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="525"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="530"/>
         <source>Moving: %1%2, Speed: %3%4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="538"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="543"/>
         <source>Start: %1</source>
         <translation>Start: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="542"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="547"/>
         <source>Start: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="548"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="553"/>
         <source>End: %1</source>
         <translation>Einde: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="552"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="557"/>
         <source>End: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="556"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="561"/>
         <source>Points: %1 (%2)</source>
         <translation>Punten: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="561"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="566"/>
         <source>Energy Use Cycling: %L1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="566"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="571"/>
         <source>Invalid elevations!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="571"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="576"/>
         <source>Invalid timestamps!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="576"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="581"/>
         <source>Invalid positions!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="590"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="595"/>
         <source>Activities: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="715"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="720"/>
         <source>Index: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="719"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="724"/>
         <source>Index: visible %1, total %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="734"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="739"/>
         <source>, Slope: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="767"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="772"/>
         <source>... and %1 tags not displayed</source>
         <translation>... en %1 tags niet getoont</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="779"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="784"/>
         <source>Distance: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="780"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="785"/>
         <source>Moving: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1509"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1522"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1621"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1665"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1858"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="3325"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1517"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1530"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1629"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1673"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1866"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="3335"/>
         <source>track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1764"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1772"/>
         <source>Hide point %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1768"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1776"/>
         <source>Hide points %1..%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="837"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="849"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="842"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="854"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="428"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2068"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="433"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2077"/>
         <source>min.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="428"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2068"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="433"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2077"/>
         <source>max.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="494"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="499"/>
         <source>Length: %1%2</source>
         <translation type="unfinished">Lengte: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="501"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="506"/>
         <source>, %1%2%3, %4%5%6</source>
         <translation type="unfinished">, %1%2 %3, %4%5%6 {1%2%3,?}</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="505"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="510"/>
         <source>, %1-, %2-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="517"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="522"/>
         <source>Time: -, Speed: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="529"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="534"/>
         <source>Moving: -, Speed: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="581"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="586"/>
         <source>Invalid slopes!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="730"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="735"/>
         <source>Ele.: %1%2</source>
         <translation type="unfinished">Hoogte.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="739"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="744"/>
         <source>, Speed: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="777"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="782"/>
         <source>Ascent: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="778"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="783"/>
         <source>Descent: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="785"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="790"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="791"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="796"/>
         <source>, Descent: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="797"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="802"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="803"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="808"/>
         <source>, Moving: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="826"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="831"/>
         <source>Ascent: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="827"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="832"/>
         <source>Descent: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="832"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="837"/>
         <source>Ascent: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="844"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="849"/>
         <source>, Descent: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="854"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="859"/>
         <source>Distance: %1%2</source>
         <translation type="unfinished">Afstand: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="859"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="864"/>
         <source>, Time: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1568"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1576"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Permanent verwijderde punten %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1581"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1589"/>
         <source>Track Point Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1582"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1590"/>
         <source>Enter some text to be attached to this track point:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1591"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1599"/>
         <source>Add track point desc.: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1601"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1609"/>
         <source>Changed track point desc.: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1611"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1619"/>
         <source>Removed track point desc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1811"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1819"/>
         <source>Delete point %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1815"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1823"/>
         <source>Delete points %1..%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1843"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1851"/>
         <source>Show points.</source>
         <translation>Toon punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2568"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2578"/>
         <source>Changed name</source>
         <translation>Naam aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2574"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2584"/>
         <source>Changed comment</source>
         <translation>Notitie aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2580"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2590"/>
         <source>Changed description</source>
         <translation>Beschrijving aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2586"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2596"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2596"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2606"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2619"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2629"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor gehele track.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2650"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2660"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor bereik(%2..%3).</translation>
     </message>
@@ -1990,442 +2000,442 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="111"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="112"/>
         <source>_Clone</source>
         <translation>_Kloon</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="317"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="341"/>
         <source>Elevation: %1%2</source>
         <translation type="unfinished">Hoogte: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="328"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="352"/>
         <source>Proximity: %1%2</source>
         <translation type="unfinished">Nabijheid: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="348"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="372"/>
         <source>Last found: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="358"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="382"/>
         <source>Project created: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="408"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="432"/>
         <source>Created: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="495"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="519"/>
         <source>Changed name</source>
         <translation>Naam aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="505"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="529"/>
         <source>Changed position</source>
         <translation>Positie aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="511"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="535"/>
         <source>Changed elevation</source>
         <translation>Hoogte aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="520"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="544"/>
         <source>Removed proximity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="525"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="549"/>
         <source>Changed proximity</source>
         <translation>Nabijheid aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="544"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="568"/>
         <source>Changed icon</source>
         <translation>Pictogram aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="550"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="574"/>
         <source>Changed comment</source>
         <translation>Notitie aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="556"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="580"/>
         <source>Changed description</source>
         <translation>Beschrijving aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="562"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="586"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="568"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="592"/>
         <source>Changed images</source>
         <translation>Afbeelding aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="574"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="598"/>
         <source>Add image</source>
         <translation>Afbeelding toevoegen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1134"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1158"/>
         <source>QMS Attribute Flag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1135"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1159"/>
         <source>Dogs</source>
         <translation>Honden</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1136"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1160"/>
         <source>Access or parking fee</source>
         <translation>Toegangs- of parkeerkosten</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1137"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1161"/>
         <source>Climbing gear</source>
         <translation>Klimuitrusting vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1138"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1162"/>
         <source>Boat</source>
         <translation>Boot vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1139"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1163"/>
         <source>Scuba gear</source>
         <translation>Duikuitrusting vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1140"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1164"/>
         <source>Recommended for kids</source>
         <translation>Aanbevolen voor kinderen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1141"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1165"/>
         <source>Takes less than an hour</source>
         <translation>Duurt minder dan 1 uur</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1142"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1166"/>
         <source>Scenic view</source>
         <translation>Mooi uitzicht</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1143"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1167"/>
         <source>Significant hike</source>
         <translation>Flinke wandeling</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1144"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1168"/>
         <source>Difficult climbing</source>
         <translation>Moeilijke klim</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1145"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1169"/>
         <source>May require wading</source>
         <translation>Waden kan nodig zijn</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1146"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1170"/>
         <source>May require swimming</source>
         <translation>Zwemmen kan nodig zijn</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1147"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1171"/>
         <source>Available at all times</source>
         <translation>Altijd mogelijk</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1148"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1172"/>
         <source>Recommended at night</source>
         <translation>Aanbevolen voor de nacht</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1149"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1173"/>
         <source>Available during winter</source>
         <translation>Mogelijk in de winter</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1151"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1175"/>
         <source>Poison plants</source>
         <translation>Giftige planten</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1152"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1176"/>
         <source>Dangerous Animals</source>
         <translation>Gevaarlijke dieren</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1153"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1177"/>
         <source>Ticks</source>
         <translation>Teken</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1154"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1178"/>
         <source>Abandoned mines</source>
         <translation>Verlaten mijnen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1155"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1179"/>
         <source>Cliff / falling rocks</source>
         <translation>Afgrond / vallende stenen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1156"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1180"/>
         <source>Hunting</source>
         <translation>Jagen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1157"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1181"/>
         <source>Dangerous area</source>
         <translation>Gevaarlijk gebied</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1158"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1182"/>
         <source>Wheelchair accessible</source>
         <translation>Rolstoeltoegankelijk</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1159"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1183"/>
         <source>Parking available</source>
         <translation>Parkeerplaats aanwezig</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1160"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1184"/>
         <source>Public transportation</source>
         <translation>Openbaar vervoer</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1161"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1185"/>
         <source>Drinking water nearby</source>
         <translation>Drinkwater in de buurt</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1162"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1186"/>
         <source>Public restrooms nearby</source>
         <translation>Openbaar toilet in de buurt</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1163"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1187"/>
         <source>Telephone nearby</source>
         <translation>Telefoon in de buurt</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1164"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1188"/>
         <source>Picnic tables nearby</source>
         <translation>Picknicktafel in de buurt</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1165"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1189"/>
         <source>Camping available</source>
         <translation>Camping aanwezig</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1166"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1190"/>
         <source>Bicycles</source>
         <translation>Fietsen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1167"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1191"/>
         <source>Motorcycles</source>
         <translation>Motorfietsen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1168"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1192"/>
         <source>Quads</source>
         <translation>Quads</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1169"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1193"/>
         <source>Off-road vehicles</source>
         <translation>Terreinvoertuigen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1170"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1194"/>
         <source>Snowmobiles</source>
         <translation>Sneeuwscooters</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1171"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1195"/>
         <source>Horses</source>
         <translation>Paarden</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1172"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1196"/>
         <source>Campfires</source>
         <translation>Kampvuur</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1173"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1197"/>
         <source>Thorns</source>
         <translation>Doorns</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1174"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1198"/>
         <source>Stealth required</source>
         <translation>Heimelijkheid geboden</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1175"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1199"/>
         <source>Stroller accessible</source>
         <translation>Toegankelijk voor wandelwagens</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1176"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1200"/>
         <source>Needs maintenance</source>
         <translation>Onderhoud nodig</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1177"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1201"/>
         <source>Watch for livestock</source>
         <translation>Oppassen voor vee</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1178"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1202"/>
         <source>Flashlight required</source>
         <translation>Zaklamp nodig</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1180"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1204"/>
         <source>Truck Driver/RV</source>
         <translation>Vrachtwagen / camper</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1181"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1205"/>
         <source>Field Puzzle</source>
         <translation>Veldpuzzel</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1182"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1206"/>
         <source>UV Light Required</source>
         <translation>UV-lamp noodzakelijk</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1183"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1207"/>
         <source>Snowshoes</source>
         <translation>Sneeuwschoenen vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1184"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1208"/>
         <source>Cross Country Skis</source>
         <translation>Langlaufski&apos;s vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1185"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1209"/>
         <source>Special Tool Required</source>
         <translation>Speciaal gereedschap nodig</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1186"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1210"/>
         <source>Night Cache</source>
         <translation>Nachtcache</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1187"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1211"/>
         <source>Park and Grab</source>
         <translation>Parkeer en pak</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1188"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1212"/>
         <source>Abandoned Structure</source>
         <translation>Verlaten gebouw</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1189"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1213"/>
         <source>Short hike (less than 1km)</source>
         <translation>Korte wandeling (minder dan 1 km)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1190"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1214"/>
         <source>Medium hike (1km-10km)</source>
         <translation>Gemiddelde wandeling (1 - 10 km)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1191"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1215"/>
         <source>Long Hike (+10km)</source>
         <translation>Lange wandeling (meer dan 10 kilometer)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1192"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1216"/>
         <source>Fuel Nearby</source>
         <translation>Brandstof in de buurt</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1193"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1217"/>
         <source>Food Nearby</source>
         <translation>Eten vlakbij</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1194"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1218"/>
         <source>Wireless Beacon</source>
         <translation>Draadloos baken</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1195"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1219"/>
         <source>Partnership cache</source>
         <translation>Samenwerkingscache</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1196"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1220"/>
         <source>Seasonal Access</source>
         <translation>Seizoenstoegang</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1197"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1221"/>
         <source>Tourist Friendly</source>
         <translation>Toeristvriendelijk</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1198"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1222"/>
         <source>Tree Climbing</source>
         <translation>Boomklimmen vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1199"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1223"/>
         <source>Front Yard (Private Residence)</source>
         <translation>Voortuin (priveterrein)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1200"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1224"/>
         <source>Teamwork Required</source>
         <translation>Samenwerking vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1201"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1225"/>
         <source>GeoTour</source>
         <translation>GeoTour</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1229"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1253"/>
         <source> by </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1294"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1318"/>
         <source>waypoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1364"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1390"/>
         <source>archived</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1368"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1394"/>
         <source>available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1372"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1398"/>
         <source>not available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2608,49 +2618,49 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="123"/>
+        <location filename="../gis/CGisListWks.cpp" line="126"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="125"/>
+        <location filename="../gis/CGisListWks.cpp" line="128"/>
         <source>Save as GPX 1.1 w/o ext...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="126"/>
+        <location filename="../gis/CGisListWks.cpp" line="129"/>
         <source>Send to Devices</source>
         <translation>Verzend naar GPS</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="127"/>
+        <location filename="../gis/CGisListWks.cpp" line="130"/>
         <source>Sync. with Database</source>
         <translation>Syngroniseren met database</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="128"/>
+        <location filename="../gis/CGisListWks.cpp" line="131"/>
         <source>Close</source>
         <translation>Sluiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="131"/>
+        <location filename="../gis/CGisListWks.cpp" line="134"/>
         <source>Update Project on Device</source>
         <translation>Update project op GPS</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="132"/>
-        <location filename="../gis/CGisListWks.cpp" line="138"/>
+        <location filename="../gis/CGisListWks.cpp" line="135"/>
+        <location filename="../gis/CGisListWks.cpp" line="141"/>
         <source>Delete</source>
         <translation>Verwijder</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="135"/>
+        <location filename="../gis/CGisListWks.cpp" line="138"/>
         <source>Edit...</source>
         <translation>Bewerken...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="109"/>
-        <location filename="../gis/CGisListWks.cpp" line="137"/>
+        <location filename="../gis/CGisListWks.cpp" line="140"/>
         <source>Copy to...</source>
         <translation>Kopieer naar...</translation>
     </message>
@@ -2675,155 +2685,160 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="124"/>
+        <location filename="../gis/CGisListWks.cpp" line="123"/>
+        <source>Autom. Sync. w. Device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="127"/>
         <source>Save as...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="136"/>
+        <location filename="../gis/CGisListWks.cpp" line="139"/>
         <source>Set Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="143"/>
+        <location filename="../gis/CGisListWks.cpp" line="146"/>
         <source>Select Range</source>
         <translation>Selecteer afstand</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="144"/>
+        <location filename="../gis/CGisListWks.cpp" line="147"/>
         <source>Edit Track Points</source>
         <translation>Trackpunten bewerken</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="145"/>
+        <location filename="../gis/CGisListWks.cpp" line="148"/>
         <source>Reverse Track</source>
         <translation>Track omdraaien</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="146"/>
+        <location filename="../gis/CGisListWks.cpp" line="149"/>
         <source>Combine Tracks</source>
         <translation>Combineer tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="147"/>
+        <location filename="../gis/CGisListWks.cpp" line="150"/>
         <source>Replace Elevation by DEM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="148"/>
+        <location filename="../gis/CGisListWks.cpp" line="151"/>
         <source>Copy Track with Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="149"/>
-        <location filename="../gis/CGisListWks.cpp" line="171"/>
+        <location filename="../gis/CGisListWks.cpp" line="152"/>
+        <location filename="../gis/CGisListWks.cpp" line="174"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="153"/>
+        <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Show Bubble</source>
         <translation>Toon ballon</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="155"/>
+        <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Move Waypoint</source>
         <translation>Verplaats waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="156"/>
+        <location filename="../gis/CGisListWks.cpp" line="159"/>
         <source>Proj. Waypoint...</source>
         <translation>Projecteer waypoint...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="157"/>
+        <location filename="../gis/CGisListWks.cpp" line="160"/>
         <source>Change Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="159"/>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
+        <location filename="../gis/CGisListWks.cpp" line="179"/>
         <source>Toggle Nogo-Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="161"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Copy position</source>
         <translation type="unfinished">Kopieer positie</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="180"/>
+        <location filename="../gis/CGisListWks.cpp" line="183"/>
         <source>Create Route...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="181"/>
+        <location filename="../gis/CGisListWks.cpp" line="184"/>
         <source>Change Proximity...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1136"/>
+        <location filename="../gis/CGisListWks.cpp" line="1137"/>
         <source>Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1141"/>
+        <location filename="../gis/CGisListWks.cpp" line="1142"/>
         <source>Wayp. &amp; Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1143"/>
+        <location filename="../gis/CGisListWks.cpp" line="1144"/>
         <source>Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="158"/>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
         <source>Delete Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="141"/>
+        <location filename="../gis/CGisListWks.cpp" line="144"/>
         <source>Track Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="164"/>
+        <location filename="../gis/CGisListWks.cpp" line="167"/>
         <source>Route Instructions</source>
         <translation>Route instructies</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
+        <location filename="../gis/CGisListWks.cpp" line="169"/>
         <source>Calculate Route</source>
         <translation>Route berekenen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="167"/>
+        <location filename="../gis/CGisListWks.cpp" line="170"/>
         <source>Reset Route</source>
         <translation>Route omkeren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="168"/>
+        <location filename="../gis/CGisListWks.cpp" line="171"/>
         <source>Edit Route</source>
         <translation>Bewerk route</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="169"/>
+        <location filename="../gis/CGisListWks.cpp" line="172"/>
         <source>Reverse Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="170"/>
+        <location filename="../gis/CGisListWks.cpp" line="173"/>
         <source>Convert to Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="175"/>
+        <location filename="../gis/CGisListWks.cpp" line="178"/>
         <source>Edit Area Points</source>
         <translation>Bewerk gebied punten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1057"/>
-        <location filename="../gis/CGisListWks.cpp" line="1147"/>
+        <location filename="../gis/CGisListWks.cpp" line="1058"/>
+        <location filename="../gis/CGisListWks.cpp" line="1148"/>
         <source>Set Track Color</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2833,14 +2848,14 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Elementen wissen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1139"/>
+        <location filename="../gis/CGisListWks.cpp" line="1140"/>
         <source>Change Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="668"/>
-        <location filename="../gis/CGisListWks.cpp" line="2026"/>
-        <location filename="../gis/CGisListWks.cpp" line="2064"/>
+        <location filename="../gis/CGisListWks.cpp" line="2086"/>
+        <location filename="../gis/CGisListWks.cpp" line="2162"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Updaten GPS&lt;/b&gt;&lt;p&gt;Updaten %1&lt;br/&gt;Moment geduld...&lt;/p&gt;</translation>
     </message>
@@ -2855,22 +2870,22 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Laden werkruimte. Moment geduld.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1439"/>
+        <location filename="../gis/CGisListWks.cpp" line="1468"/>
         <source>Close all projects...</source>
         <translation>Sluit alle projecten...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1439"/>
+        <location filename="../gis/CGisListWks.cpp" line="1468"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dit zal alle projecten uit de werkruimte verwijderen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1466"/>
+        <location filename="../gis/CGisListWks.cpp" line="1495"/>
         <source>Delete project...</source>
         <translation>Project verwijderen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1466"/>
+        <location filename="../gis/CGisListWks.cpp" line="1495"/>
         <source>Do you really want to delete %1?</source>
         <translation>Moet %1 werkelijk verwijderd worden?</translation>
     </message>
@@ -2912,47 +2927,60 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGisWorkspace</name>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="139"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="140"/>
         <source>Load project...</source>
         <translation type="unfinished">Project laden...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="139"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="140"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation type="unfinished">Het project &quot;%1&quot; is al geopend.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="235"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="237"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="697"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="700"/>
         <source>Copy items...</source>
         <translation type="unfinished">Kopieer elementen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="727"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="731"/>
         <source>Change waypoint symbols.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="969"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="966"/>
+        <source>Undefined Waypoint Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWorkspace.cpp" line="967"/>
+        <source>QMapShack couldn&apos;t automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.
+
+Do you want to choose an icon for each new waypoint for which no icon could be found?
+If you choose &apos;No&apos; the respective last used waypoint icon is applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWorkspace.cpp" line="1029"/>
         <source>Cut Track...</source>
         <translation type="unfinished">Track knippen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="969"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1029"/>
         <source>Do you want to delete the original track?</source>
         <translation type="unfinished">Moet de orginele track verwijderd worden?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1238"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1298"/>
         <source>Enter new proximity range.</source>
         <translation type="unfinished">Geef nieuwe afstand in voor nabijheid.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1239"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1299"/>
         <source>Is no-go area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3012,24 +3040,34 @@ lijn %2, kolom %3:
 <context>
     <name>CGrid</name>
     <message>
-        <location filename="../grid/CGrid.cpp" line="61"/>
+        <location filename="../grid/CGrid.cpp" line="60"/>
         <source>%1 %2 </source>
         <translation>%1 %2 </translation>
     </message>
     <message>
-        <location filename="../grid/CGrid.cpp" line="65"/>
+        <location filename="../grid/CGrid.cpp" line="64"/>
         <source>%1%2%5 %3%4%5 </source>
         <translation>%1%2%5 %3%4%5 </translation>
     </message>
     <message>
-        <location filename="../grid/CGrid.cpp" line="72"/>
+        <location filename="../grid/CGrid.cpp" line="71"/>
         <source>%1m, %2m </source>
         <translation>%1m, %2m </translation>
     </message>
     <message>
-        <location filename="../grid/CGrid.cpp" line="76"/>
+        <location filename="../grid/CGrid.cpp" line="75"/>
         <source>N %1m, E %2m </source>
         <translation>N %1m, O %2m </translation>
+    </message>
+    <message>
+        <location filename="../grid/CGrid.cpp" line="101"/>
+        <source>Grid Projection...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../grid/CGrid.cpp" line="102"/>
+        <source>Failed to setup grid projection. Please configure a valid projection.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3074,27 +3112,27 @@ lijn %2, kolom %3:
 <context>
     <name>CHistoryListWidget</name>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="65"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="73"/>
         <source> by %1</source>
         <translation> per %1</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="37"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="39"/>
         <source>Cut history before</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="38"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="44"/>
         <source>Cut history after</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="155"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="163"/>
         <source>History removal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="156"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="164"/>
         <source>The removal is permanent and cannot be undone. &lt;b&gt;Do you really want to delete history before this step?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3138,16 +3176,16 @@ lijn %2, kolom %3:
 <context>
     <name>CKnownExtension</name>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="140"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
         <source>Speed</source>
         <comment>extLongName</comment>
         <translation type="unfinished">Snelheid</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="96"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
         <source>Cadence</source>
         <comment>extShortName</comment>
         <translation type="unfinished">Cadans</translation>
@@ -3190,182 +3228,194 @@ lijn %2, kolom %3:
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="96"/>
         <source>Heart R.</source>
         <comment>extShortName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="96"/>
         <source>Heart Rate</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="96"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
         <source>Cadence</source>
         <comment>extLongName</comment>
         <translation type="unfinished">Cadans</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="140"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="159"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="164"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="88"/>
+        <source>Power</source>
+        <comment>extShortName</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="88"/>
+        <source>Power</source>
+        <comment>extLongName</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="163"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
         <source>Speed</source>
         <comment>extShortName</comment>
         <translation type="unfinished">Snelheid</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
         <source>Accel.</source>
         <comment>extShortName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
         <source>Acceleration</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="112"/>
         <source>Course</source>
         <comment>extShortName</comment>
         <translation type="unfinished">Richting</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="112"/>
         <source>Course</source>
         <comment>extLongName</comment>
         <translation type="unfinished">Richting</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="123"/>
         <source>Temp.</source>
         <comment>extShortName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="123"/>
         <source>Temperature</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="123"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
         <source>Dist.</source>
         <comment>extShortName</comment>
         <translation type="unfinished">Afstand.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="123"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
         <source>Distance</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="169"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
         <source>Ele.</source>
         <comment>extShortName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
         <source>Elevation</source>
         <comment>extLongName</comment>
         <translation type="unfinished">Hoogte</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="135"/>
         <source>Energy</source>
         <comment>extShortName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="135"/>
         <source>Energy</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="140"/>
         <source>Sea Lev. Pres.</source>
         <comment>extShortName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="140"/>
         <source>Sea Level Pressure</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="148"/>
         <source>v. Speed</source>
         <comment>extShortName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="148"/>
         <source>Vertical Speed</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="153"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="157"/>
         <source>Slope</source>
         <comment>extShortName</comment>
         <translation type="unfinished">Helling</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="159"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="163"/>
         <source>Speed over Distance*</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="164"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
         <source>Speed over Time*</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="169"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
         <source>Elevation*</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="174"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="178"/>
         <source>Progress</source>
         <comment>extShortName</comment>
         <translation type="unfinished">Voortgang</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="174"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="178"/>
         <source>Progress*</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="179"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="183"/>
         <source>Terr. Slope</source>
         <comment>extShortName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="179"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="183"/>
         <source>Terrain Slope*</source>
         <comment>extLongName</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="153"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="157"/>
         <source>Slope*</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3496,70 +3546,80 @@ lijn %2, kolom %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="624"/>
+        <location filename="../CMainWindow.cpp" line="637"/>
         <source>Select folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1047"/>
+        <location filename="../CMainWindow.cpp" line="1067"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1176"/>
+        <location filename="../CMainWindow.cpp" line="1205"/>
         <source>Ele.: %1%2</source>
         <translation type="unfinished">Hoogte.: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1189"/>
+        <location filename="../CMainWindow.cpp" line="1218"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1205"/>
+        <location filename="../CMainWindow.cpp" line="1234"/>
         <source>[Grid: %1]</source>
         <translation>[Raster: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1353"/>
+        <location filename="../CMainWindow.cpp" line="1393"/>
         <source>Load GIS Data...</source>
         <translation>GIS gegevens laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1387"/>
+        <location filename="../CMainWindow.cpp" line="1427"/>
         <source>Select output file</source>
         <translation>Selecteer bestand</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1387"/>
-        <location filename="../CMainWindow.cpp" line="1413"/>
+        <location filename="../CMainWindow.cpp" line="1427"/>
+        <location filename="../CMainWindow.cpp" line="1453"/>
         <source>QMapShack View (*.view)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1413"/>
+        <location filename="../CMainWindow.cpp" line="1453"/>
         <source>Select file to load</source>
         <translation>Selecteer bestand</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1705"/>
+        <location filename="../CMainWindow.cpp" line="1747"/>
         <source>Rename View...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1705"/>
+        <location filename="../CMainWindow.cpp" line="1747"/>
         <source>Enter new name for view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1855"/>
+        <location filename="../CMainWindow.cpp" line="1921"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1856"/>
-        <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
+        <location filename="../CMainWindow.cpp" line="1922"/>
+        <source>QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="2007"/>
+        <source>To link map views all map views must have the same projection and scale type. The function &apos;Link Map Views&apos; will be switched off, now.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="2012"/>
+        <source>Link Map Views...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4185,21 +4245,21 @@ Fall back to internal types.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2390"/>
+        <location filename="../map/CMapIMG.cpp" line="2386"/>
+        <location filename="../map/CMapIMG.cpp" line="2392"/>
         <location filename="../map/CMapIMG.cpp" line="2396"/>
-        <location filename="../map/CMapIMG.cpp" line="2400"/>
         <source>Point of Interest</source>
         <translation>Interessant punt</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2497"/>
+        <location filename="../map/CMapIMG.cpp" line="2493"/>
         <source>Unknown</source>
         <translation>Onbekend</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2539"/>
-        <location filename="../map/CMapIMG.cpp" line="2547"/>
-        <location filename="../map/CMapIMG.cpp" line="2554"/>
+        <location filename="../map/CMapIMG.cpp" line="2535"/>
+        <location filename="../map/CMapIMG.cpp" line="2543"/>
+        <location filename="../map/CMapIMG.cpp" line="2550"/>
         <source>Area</source>
         <translation>Gebied</translation>
     </message>
@@ -4312,18 +4372,18 @@ Fall back to internal types.</source>
 <context>
     <name>CMapTMS</name>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="69"/>
-        <location filename="../map/CMapTMS.cpp" line="79"/>
+        <location filename="../map/CMapTMS.cpp" line="71"/>
+        <location filename="../map/CMapTMS.cpp" line="81"/>
         <source>Error...</source>
         <translation>Fout...</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="69"/>
+        <location filename="../map/CMapTMS.cpp" line="71"/>
         <source>Failed to open %1</source>
         <translation>Openen mislukt-%1</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="79"/>
+        <location filename="../map/CMapTMS.cpp" line="81"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -4332,7 +4392,7 @@ lijn %2, kolom %3:
  %4</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="117"/>
+        <location filename="../map/CMapTMS.cpp" line="119"/>
         <source>Layer %1</source>
         <translation>Laag-%1</translation>
     </message>
@@ -4343,7 +4403,7 @@ lijn %2, kolom %3:
         <location filename="../map/CMapVRT.cpp" line="45"/>
         <location filename="../map/CMapVRT.cpp" line="59"/>
         <location filename="../map/CMapVRT.cpp" line="83"/>
-        <location filename="../map/CMapVRT.cpp" line="140"/>
+        <location filename="../map/CMapVRT.cpp" line="141"/>
         <source>Error...</source>
         <translation>Fout...</translation>
     </message>
@@ -4359,12 +4419,12 @@ lijn %2, kolom %3:
         <translation>Bestand moet 8 bit kleur of grijs geindexeerd zijn.</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="140"/>
+        <location filename="../map/CMapVRT.cpp" line="141"/>
         <source>No georeference information found.</source>
         <translation>Geen geografische gegevens gevonden.</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="204"/>
+        <location filename="../map/CMapVRT.cpp" line="205"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -4391,7 +4451,7 @@ lijn %2, kolom %3:
         <translation>Selecteer doel bestand...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="224"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="225"/>
         <source>!!! done !!!
 </source>
         <translation>!!! klaar !!!
@@ -4405,7 +4465,7 @@ lijn %2, kolom %3:
         <location filename="../map/CMapWMTS.cpp" line="53"/>
         <location filename="../map/CMapWMTS.cpp" line="63"/>
         <location filename="../map/CMapWMTS.cpp" line="72"/>
-        <location filename="../map/CMapWMTS.cpp" line="231"/>
+        <location filename="../map/CMapWMTS.cpp" line="232"/>
         <source>Error...</source>
         <translation>Fout...</translation>
     </message>
@@ -4436,7 +4496,7 @@ Onbekende structuur.</translation>
         <translation>Onverwachte service. &apos;*WMTS 1.0.0&apos; is verwacht. &apos;%1 %2&apos; is gelezen.</translation>
     </message>
     <message>
-        <location filename="../map/CMapWMTS.cpp" line="231"/>
+        <location filename="../map/CMapWMTS.cpp" line="232"/>
         <source>No georeference information found.</source>
         <translation>Geen geografische gegevens gevonden.</translation>
     </message>
@@ -4511,47 +4571,52 @@ Onbekende structuur.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="446"/>
-        <source>Add POI as Waypoint</source>
+        <location filename="../mouse/CMouseNormal.cpp" line="447"/>
+        <source>Add POI %1 as Waypoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="451"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="452"/>
+        <source>Zoom in to add POIs as Waypoints</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseNormal.cpp" line="457"/>
         <source>Add Waypoint</source>
         <translation>Maak waypoint</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="452"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="458"/>
         <source>Add Track</source>
         <translation>Maak track</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="453"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="459"/>
         <source>Add Route</source>
         <translation>Maak route</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="454"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="460"/>
         <source>Add Area</source>
         <translation>Maak gebied</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="456"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="462"/>
         <source>Ruler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="458"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="464"/>
         <source>Select Items On Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="461"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="467"/>
         <source>Copy position</source>
         <translation>Kopieer positie</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="462"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="468"/>
         <source>Copy position (Grid)</source>
         <translation>Kopieer positie (Raster)</translation>
     </message>
@@ -4559,7 +4624,7 @@ Onbekende structuur.</translation>
 <context>
     <name>CMousePrint</name>
     <message>
-        <location filename="../mouse/CMousePrint.cpp" line="32"/>
+        <location filename="../mouse/CMousePrint.cpp" line="33"/>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4577,12 +4642,12 @@ Onbekende structuur.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRangeTrk.cpp" line="52"/>
+        <location filename="../mouse/CMouseRangeTrk.cpp" line="50"/>
         <source>As an alternative you can use the buttons of the range tool to move the start and end point of a range. If you keep the buttons pressed the action will be repeated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRangeTrk.cpp" line="58"/>
+        <location filename="../mouse/CMouseRangeTrk.cpp" line="54"/>
         <source>When you are done with the selection you can apply one of the operations of the range tool. </source>
         <translation type="unfinished"></translation>
     </message>
@@ -4649,32 +4714,37 @@ Onbekende structuur.</translation>
 <context>
     <name>CMouseSelect</name>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="33"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="37"/>
         <source>&lt;b&gt;Select Items On Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="103"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="123"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="111"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="131"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="106"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="146"/>
+        <source>%1 POIs&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseSelect.cpp" line="126"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="116"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="136"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="121"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="141"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4703,18 +4773,67 @@ Onbekende structuur.</translation>
 <context>
     <name>CPlotProfile</name>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="61"/>
+        <location filename="../plot/CPlotProfile.cpp" line="62"/>
         <source>Show Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="101"/>
+        <location filename="../plot/CPlotProfile.cpp" line="102"/>
         <source>Distance [%1]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="102"/>
+        <location filename="../plot/CPlotProfile.cpp" line="103"/>
         <source>Ele. [%1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CPoiList</name>
+    <message>
+        <location filename="../poi/CPoiList.cpp" line="132"/>
+        <source>Deactivate</source>
+        <translation type="unfinished">Deactiveer</translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiList.cpp" line="132"/>
+        <source>Activate</source>
+        <translation type="unfinished">Activeer</translation>
+    </message>
+</context>
+<context>
+    <name>CPoiPOI</name>
+    <message>
+        <location filename="../poi/CPoiPOI.cpp" line="331"/>
+        <source>Category: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiPOI.cpp" line="337"/>
+        <source>Links: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiPOI.cpp" line="355"/>
+        <source>Zoom in to see more details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiPOI.cpp" line="358"/>
+        <source>POIs at this point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CPoiPathSetup</name>
+    <message>
+        <location filename="../poi/CPoiPathSetup.cpp" line="42"/>
+        <source>Add or remove paths containing POI data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiPathSetup.cpp" line="65"/>
+        <source>Select POI file path...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4784,38 +4903,55 @@ y: %4 m/px</translation>
     </message>
 </context>
 <context>
-    <name>CProjWizard</name>
+    <name>CProj</name>
     <message>
-        <location filename="../grid/CProjWizard.cpp" line="62"/>
-        <source>north</source>
-        <translation>noord</translation>
-    </message>
-    <message>
-        <location filename="../grid/CProjWizard.cpp" line="63"/>
-        <source>south</source>
-        <translation>zuid</translation>
-    </message>
-    <message>
-        <location filename="../grid/CProjWizard.cpp" line="222"/>
-        <location filename="../grid/CProjWizard.cpp" line="230"/>
-        <source>Error...</source>
-        <translation>Fout...</translation>
-    </message>
-    <message>
-        <location filename="../grid/CProjWizard.cpp" line="222"/>
+        <location filename="../../common/gis/proj_x.cpp" line="184"/>
         <source>The value
 &apos;%1&apos;
 is not a valid coordinate system definition:
 %2</source>
-        <translation>De waarde
+        <translation type="unfinished">De waarde
 &apos;%1&apos;
 is geen geldig coordinaat definitie:
 %2</translation>
     </message>
     <message>
-        <location filename="../grid/CProjWizard.cpp" line="230"/>
+        <location filename="../../common/gis/proj_x.cpp" line="196"/>
         <source>Lat/Lon projection is not allowed in this case.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CProjWizard</name>
+    <message>
+        <location filename="../grid/CProjWizard.cpp" line="55"/>
+        <source> (Spheroid: %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../grid/CProjWizard.cpp" line="70"/>
+        <source>north</source>
+        <translation>noord</translation>
+    </message>
+    <message>
+        <location filename="../grid/CProjWizard.cpp" line="71"/>
+        <source>south</source>
+        <translation>zuid</translation>
+    </message>
+    <message>
+        <location filename="../grid/CProjWizard.cpp" line="215"/>
+        <source>Error...</source>
+        <translation>Fout...</translation>
+    </message>
+    <message>
+        <source>The value
+&apos;%1&apos;
+is not a valid coordinate system definition:
+%2</source>
+        <translation type="vanished">De waarde
+&apos;%1&apos;
+is geen geldig coordinaat definitie:
+%2</translation>
     </message>
 </context>
 <context>
@@ -4975,26 +5111,26 @@ is geen geldig coordinaat definitie:
 <context>
     <name>CQlgtTrack</name>
     <message>
-        <location filename="../qlgt/CQlgtTrack.cpp" line="164"/>
-        <location filename="../qlgt/CQlgtTrack.cpp" line="218"/>
-        <location filename="../qlgt/CQlgtTrack.cpp" line="265"/>
-        <location filename="../qlgt/CQlgtTrack.cpp" line="291"/>
+        <location filename="../qlgt/CQlgtTrack.cpp" line="162"/>
+        <location filename="../qlgt/CQlgtTrack.cpp" line="216"/>
+        <location filename="../qlgt/CQlgtTrack.cpp" line="263"/>
+        <location filename="../qlgt/CQlgtTrack.cpp" line="289"/>
         <source>Corrupt track ...</source>
         <translation>Slechte track...</translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtTrack.cpp" line="164"/>
+        <location filename="../qlgt/CQlgtTrack.cpp" line="162"/>
         <source>Number of trackpoints is not equal the number of training data trackpoints.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtTrack.cpp" line="218"/>
+        <location filename="../qlgt/CQlgtTrack.cpp" line="216"/>
         <source>Number of trackpoints is not equal the number of extended data trackpoints.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qlgt/CQlgtTrack.cpp" line="265"/>
-        <location filename="../qlgt/CQlgtTrack.cpp" line="291"/>
+        <location filename="../qlgt/CQlgtTrack.cpp" line="263"/>
+        <location filename="../qlgt/CQlgtTrack.cpp" line="289"/>
         <source>Number of trackpoints is not equal the number of shadow data trackpoints.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5038,6 +5174,75 @@ is geen geldig coordinaat definitie:
     </message>
 </context>
 <context>
+    <name>CRawPoi</name>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="127"/>
+        <source>addr:housenumber addr:street&lt;br&gt;
+addr:city addr:postcode&lt;br&gt;
+addr:country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="158"/>
+        <source>Alternative names: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="184"/>
+        <location filename="../poi/CRawPoi.cpp" line="192"/>
+        <source>Phone number: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="200"/>
+        <source>Mobile phone number: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="208"/>
+        <source>Fax: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="251"/>
+        <location filename="../poi/CRawPoi.cpp" line="255"/>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="259"/>
+        <location filename="../poi/CRawPoi.cpp" line="263"/>
+        <location filename="../poi/CRawPoi.cpp" line="267"/>
+        <source>Website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="288"/>
+        <source>OpenStreetMap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="297"/>
+        <source>wikimedia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="301"/>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="321"/>
+        <source>Wikipedia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/CRawPoi.cpp" line="349"/>
+        <source>Wikidata</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CRouterBRouter</name>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="53"/>
@@ -5070,55 +5275,55 @@ is geen geldig coordinaat definitie:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="207"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="208"/>
         <source>profile: %1, alternative: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="386"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="532"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="387"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="533"/>
         <source>response is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="447"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="448"/>
         <source>Bad response from server: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="498"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="499"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="363"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="501"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="364"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="502"/>
         <source>Calculate route with %1</source>
         <translation type="unfinished">Bereken route met %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="374"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="520"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="375"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="521"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="566"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="567"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="556"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="557"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation type="unfinished">&lt;br/&gt;Berekenen tijd: %1s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="615"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="616"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="674"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="675"/>
         <source>online</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5179,22 +5384,22 @@ is geen geldig coordinaat definitie:
 <context>
     <name>CRouterBRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="595"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="596"/>
         <source>%1 not accessible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="623"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="624"/>
         <source>%1 invalid result</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="656"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="657"/>
         <source>Error parsing online-config:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="661"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="662"/>
         <source>Network error:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5202,178 +5407,178 @@ is geen geldig coordinaat definitie:
 <context>
     <name>CRouterBRouterSetupWizard</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="39"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="40"/>
         <source>Restore Default Values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="347"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="348"/>
         <source>Open Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="354"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="355"/>
         <source>select Java Executable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="396"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="398"/>
         <source>please select BRouter installation directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="401"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="403"/>
         <source>selected directory does not exist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="402"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="404"/>
         <source>create directory and install BRouter there</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="409"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="411"/>
         <source>existing BRouter installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="410"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="412"/>
         <source>update existing BRouter installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="415"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="417"/>
         <source>empty directory, create new BRouter installation here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="416"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="418"/>
         <source>create new BRouter installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="424"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="426"/>
         <source>seems to be a valid Java-executable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="428"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="430"/>
         <source>doesn&apos;t seem to be a valid Java-executable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="433"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="435"/>
         <source>Java Executable not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="477"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="479"/>
         <source>Error loading installation-page at %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="491"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="493"/>
         <source>no brouter-version to install selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="499"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="501"/>
         <source>selected %1 for download and installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="510"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="512"/>
         <source>Warning...</source>
         <translation type="unfinished">Waarschuwing...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="515"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="517"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="527"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="529"/>
         <source>I understand the risk and wish to proceed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="539"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="541"/>
         <source>download %1 started</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="551"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="553"/>
         <source>Network Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="572"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="574"/>
         <source>download %1 finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="574"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="576"/>
         <source>unzipping:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="579"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="581"/>
         <source>ready.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="599"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="601"/>
         <source>download of brouter failed: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="613"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="615"/>
         <source>retrieving available profiles from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="618"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="620"/>
         <source>retrieving online config from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="642"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="705"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="644"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="711"/>
         <source>content of profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="698"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="704"/>
         <source>Error:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="779"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="785"/>
         <source>BRouter-Version: not accessible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="783"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="789"/>
         <source>BRouter-Version: %1.%2.%3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="448"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="450"/>
         <source>Error creating directory %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="557"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="559"/>
         <source>Error directory %1 does not exist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="564"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="566"/>
         <source>Error creating file %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="568"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="570"/>
         <source>Error writing to file %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5381,7 +5586,7 @@ is geen geldig coordinaat definitie:
 <context>
     <name>CRouterBRouterTilesPage</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="82"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="83"/>
         <source>Continue with Setup</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5389,42 +5594,42 @@ is geen geldig coordinaat definitie:
 <context>
     <name>CRouterBRouterTilesSelect</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="102"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="104"/>
         <source>available routing-data is being determined.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="112"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="114"/>
         <source>Select outdated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="113"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="115"/>
         <source>Clear Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="114"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="116"/>
         <source>Delete selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="115"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="117"/>
         <source>Download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="285"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="286"/>
         <source>Error creating segments directory %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="382"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="383"/>
         <source>cannot parse: %1 is not a date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="397"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="398"/>
         <source>cannot parse: %1 is not a valid size</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5434,30 +5639,30 @@ is geen geldig coordinaat definitie:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="496"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="497"/>
         <source>segments directory does not exist: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="510"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="511"/>
         <source>error creating file %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="551"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="591"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="552"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="592"/>
         <source>no valid request for filename %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="556"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="599"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="557"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="600"/>
         <source>no open file assigned to request for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="566"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="609"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="567"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="610"/>
         <source>error writing to file %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5487,17 +5692,17 @@ is geen geldig coordinaat definitie:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="194"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="196"/>
         <source>Error removing %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="322"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="323"/>
         <source>Network Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="356"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="357"/>
         <source>invalid result, no files found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5532,123 +5737,123 @@ is geen geldig coordinaat definitie:
 <context>
     <name>CRouterMapQuest</name>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="37"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="36"/>
         <source>Fastest</source>
         <translation>Snelst</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="38"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="37"/>
         <source>Shortest</source>
         <translation>Kortst</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="39"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="38"/>
         <source>Bicycle</source>
         <translation>Fiets</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="40"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="39"/>
         <source>Pedestrian</source>
         <translation>Wandelen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="42"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="41"/>
         <source>US English</source>
         <translation>VS Engels</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="43"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="42"/>
         <source>British English</source>
         <translation>Brits Engels</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="44"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="43"/>
         <source>Danish</source>
         <translation>Deens</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="45"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="44"/>
         <source>Dutch</source>
         <translation>Nederlands</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="46"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="45"/>
         <source>French</source>
         <translation>Frans</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="47"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="46"/>
         <source>German</source>
         <translation>Duits</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="48"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="47"/>
         <source>Italian</source>
         <translation>Italiaans</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="49"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="48"/>
         <source>Norwegian</source>
         <translation>Noors</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="50"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="49"/>
         <source>Spanish</source>
         <translation>Spaans</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="51"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="50"/>
         <source>Swedish</source>
         <translation>Zweeds</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="110"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="109"/>
         <source>mode &quot;%1&quot;</source>
         <translation>Modus &apos;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="114"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="113"/>
         <source>no highways</source>
         <translation>geen snelwegen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="125"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="124"/>
         <source>no toll roads</source>
         <translation>geen tolwegen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="136"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="135"/>
         <source>no seasonal</source>
         <translation>geen seizoenswegen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="147"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="146"/>
         <source>no unpaved</source>
         <translation>onverhard</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="158"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="157"/>
         <source>no ferry</source>
         <translation>geen veer</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="169"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="168"/>
         <source>no crossing of country borders</source>
         <translation>geen grensovergangen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="301"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="300"/>
         <source>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Route aanvraag naar server gezonden. Moment geduld...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="312"/>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="346"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="311"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="345"/>
         <source>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Geen reactie van server:&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="363"/>
+        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="362"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Berekenen tijd: %1s</translation>
     </message>
@@ -5664,217 +5869,227 @@ is geen geldig coordinaat definitie:
 <context>
     <name>CRouterRoutino</name>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="58"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="59"/>
         <source>Warning...</source>
         <translation>Waarschuwing...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="58"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="59"/>
         <source>Found Routino with a wrong version. Expected %1 found %2</source>
         <translation>Routini gevonden met verkeerde versie. Verwachtte %1 gevonden %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="62"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="63"/>
         <source>Shortest</source>
         <translation>Kortst</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="63"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="64"/>
         <source>Quickest</source>
         <translation>Snelst</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="75"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="76"/>
         <source>Foot</source>
         <translation>Wandelen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="76"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="77"/>
         <source>Horse</source>
         <translation>Paard</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="77"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="78"/>
         <source>Wheelchair</source>
         <translation>Rolstoel</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="78"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="79"/>
         <source>Bicycle</source>
         <translation>Fiets</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="79"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="80"/>
         <source>Moped</source>
         <translation>Brommer</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="80"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="81"/>
         <source>Motorcycle</source>
         <translation>Motorfiets</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="81"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="82"/>
         <source>Motorcar</source>
         <translation>Auto</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="82"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="83"/>
         <source>Goods</source>
         <translation>Goederen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="84"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="85"/>
         <source>English</source>
         <translation>Engels</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="85"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="86"/>
         <source>German</source>
         <translation>Duits</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="86"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="87"/>
         <source>French</source>
         <translation>Frans</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="87"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="88"/>
         <source>Hungarian</source>
         <translation>Hongaars</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="88"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="89"/>
         <source>Dutch</source>
         <translation>Nederlands</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="89"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
         <source>Russian</source>
         <translation>Russisch</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="91"/>
         <source>Polish</source>
         <translation>Pools</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="125"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="92"/>
+        <source>Czech</source>
+        <translation type="unfinished">Tsjechisch</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="93"/>
+        <source>Spanish</source>
+        <translation type="unfinished">Spaans</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="128"/>
         <source>A function was called without the database variable set.</source>
         <translation>Een functie werd aangeroepen zonder database variabelen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="128"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="131"/>
         <source>A function was called without the profile variable set.</source>
         <translation>Een functie werd aangeroepen zonder profiel variabelen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="131"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="134"/>
         <source>A function was called without the translation variable set.</source>
         <translation>Een functie werd aangeroepen zonder vertaling variabelen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="134"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="137"/>
         <source>The specified database to load did not exist.</source>
         <translation>De opgegeven database bestaat niet.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="137"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="140"/>
         <source>The specified database could not be loaded.</source>
         <translation>De opgegeven database kan niet geladen worden.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="140"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="143"/>
         <source>The specified profiles XML file did not exist.</source>
         <translation>Het opgegeven XML profiel bestaat niet.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="143"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="146"/>
         <source>The specified profiles XML file could not be loaded.</source>
         <translation>Het opgegeven XML profiel kan niet geladen worden.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="146"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="149"/>
         <source>The specified translations XML file did not exist.</source>
         <translation>De opgegeven XML vertaling bestaat niet.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="149"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="152"/>
         <source>The specified translations XML file could not be loaded.</source>
         <translation>De opgegeven XML vertaling kan niet geladen worden.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="152"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="155"/>
         <source>The requested profile name does not exist in the loaded XML file.</source>
         <translation>De opgevraagde profielnaam bestaat niet in geladen XML bestand.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="155"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="158"/>
         <source>The requested translation language does not exist in the loaded XML file.</source>
         <translation>De opgevraagde vertaling bestaat niet in geladen XML bestand.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="158"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="161"/>
         <source>In the routing database there is no highway near the coordinates to place a waypoint.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="161"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="164"/>
         <source>The profile and database do not work together.</source>
         <translation>Profiel en database kunnen niet samenwerken.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="164"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="167"/>
         <source>The profile being used has not been validated.</source>
         <translation>Het gebruikte profiel is niet gevalideerd.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="167"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="170"/>
         <source>The user specified profile contained invalid data.</source>
         <translation>Door gebruiker opgegeven profiel bevat ongeldige gegevens.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="170"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="173"/>
         <source>The routing options specified are not consistent with each other.</source>
         <translation>De opgegeven routing opties komen niet overeen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="173"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="176"/>
         <source>There is a mismatch between the library and caller API version.</source>
         <translation>Er is een verschil is tussen de bibliotheek en de gebruiker API-versie.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="176"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="179"/>
         <source>Route calculation was aborted by user.</source>
         <translation>Berekening route was geanuleerd door gebruiker.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="182"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="185"/>
         <source>A route could not be found to waypoint %1.</source>
         <translation>Er kon geen route gevonden worden naar waypoint %1.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="185"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="188"/>
         <source>Unknown error: %1</source>
         <translation>Onbekende fout: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="197"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="200"/>
         <source>profile &quot;%1&quot;</source>
         <translation>Profiel &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="198"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="201"/>
         <source>, mode &quot;%1&quot;</source>
         <translation>, modus &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="286"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="290"/>
         <source>Could not find a profiles XML file in expected folders. Routino Routing will not function</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="304"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="308"/>
         <source>%1
 Error in &apos;%2&apos;
 This needs to be fixed
@@ -5882,19 +6097,19 @@ The associated database &apos;%3&apos; is ignored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="383"/>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="475"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="387"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="479"/>
         <source>Required profile &apos;%1&apos; is not in the current profiles file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="418"/>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="509"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="422"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="513"/>
         <source>Calculate route with %1</source>
         <translation>Bereken route met %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="426"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="430"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Berekenen tijd: %1s</translation>
     </message>
@@ -5948,7 +6163,7 @@ The associated database &apos;%3&apos; is ignored</source>
         <translation>Selecteer doel map...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="163"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="164"/>
         <source>!!! done !!!
 </source>
         <translation>!!! klaar !!!
@@ -5958,7 +6173,7 @@ The associated database &apos;%3&apos; is ignored</source>
 <context>
     <name>CRtGpsTether</name>
     <message>
-        <location filename="../realtime/gpstether/CRtGpsTether.cpp" line="88"/>
+        <location filename="../realtime/gpstether/CRtGpsTether.cpp" line="87"/>
         <source>&lt;b&gt;GPS Tether&lt;/b&gt;&lt;br/&gt;Get position via NMEA over TCP/IP.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5991,87 +6206,87 @@ For configuration you need to know your Android device&apos;s IP address or it&a
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="170"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="171"/>
         <source>unkn.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="201"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="202"/>
         <source>key:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="202"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="203"/>
         <source>callsign:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="203"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="204"/>
         <source>origin country:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="204"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="205"/>
         <source>time position:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="205"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="206"/>
         <source>last contact:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="206"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="207"/>
         <source>longitude:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="207"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="208"/>
         <source>latitude:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="208"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="209"/>
         <source>geo. alt.:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="209"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="210"/>
         <source>on ground:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="210"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="211"/>
         <source>velocity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="211"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="212"/>
         <source>heading:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="212"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="213"/>
         <source>vert. rate:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="213"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="214"/>
         <source>baro. alt.:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="214"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="215"/>
         <source>squawk:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="215"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="216"/>
         <source>spi:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="216"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="217"/>
         <source>position source:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6126,53 +6341,63 @@ For configuration you need to know your Android device&apos;s IP address or it&a
 <context>
     <name>CScrOptSelect</name>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="84"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="88"/>
         <source>&lt;b&gt;Exact Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be completely inside the selected area.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="88"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="92"/>
         <source>&lt;b&gt;Intersecting Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be inside or at least intersect the selected area.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="92"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="96"/>
         <source>&lt;b&gt;Add Tracks&lt;/b&gt;&lt;br/&gt;Add tracks to list of selected items&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="96"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="100"/>
         <source>&lt;b&gt;Add Waypoints&lt;/b&gt;&lt;br/&gt;Add waypoints to list of selected items&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="100"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="104"/>
         <source>&lt;b&gt;Add Routes&lt;/b&gt;&lt;br/&gt;Add routes to list of selected items&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="104"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="108"/>
         <source>&lt;b&gt;Add Areas&lt;/b&gt;&lt;br/&gt;Add areas to list of selected items&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="115"/>
-        <source>&lt;b&gt;Ignore Tracks&lt;/b&gt;&lt;br/&gt;Ignore tracks in list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="119"/>
-        <source>&lt;b&gt;Ignore Waypoints&lt;/b&gt;&lt;br/&gt;Ignore waypoints in list of selected items&lt;br/&gt;</source>
+        <location filename="../mouse/CScrOptSelect.cpp" line="112"/>
+        <source>&lt;b&gt;Add POIs&lt;/b&gt;&lt;br/&gt;Add POIs to list of selected items&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="123"/>
-        <source>&lt;b&gt;Ignore Routes&lt;/b&gt;&lt;br/&gt;Ignore routes in list of selected items&lt;br/&gt;</source>
+        <source>&lt;b&gt;Ignore Tracks&lt;/b&gt;&lt;br/&gt;Ignore tracks in list of selected items&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="127"/>
+        <source>&lt;b&gt;Ignore Waypoints&lt;/b&gt;&lt;br/&gt;Ignore waypoints in list of selected items&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/CScrOptSelect.cpp" line="131"/>
+        <source>&lt;b&gt;Ignore Routes&lt;/b&gt;&lt;br/&gt;Ignore routes in list of selected items&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/CScrOptSelect.cpp" line="135"/>
         <source>&lt;b&gt;Ignore Areas&lt;/b&gt;&lt;br/&gt;Ignore areas in list of selected items&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/CScrOptSelect.cpp" line="139"/>
+        <source>&lt;b&gt;Ignore POIs&lt;/b&gt;&lt;br/&gt;Ignore POIs in list of selected items&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6203,683 +6428,683 @@ For configuration you need to know your Android device&apos;s IP address or it&a
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="89"/>
-        <location filename="../gis/search/CSearch.cpp" line="90"/>
-        <location filename="../gis/search/CSearch.cpp" line="194"/>
+        <location filename="../gis/search/CSearch.cpp" line="91"/>
+        <location filename="../gis/search/CSearch.cpp" line="92"/>
+        <location filename="../gis/search/CSearch.cpp" line="196"/>
         <source>and</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/search/CSearch.cpp" line="386"/>
-        <location filename="../gis/search/CSearch.cpp" line="419"/>
-        <source>with</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/search/CSearch.cpp" line="387"/>
-        <location filename="../gis/search/CSearch.cpp" line="420"/>
-        <source>contains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="388"/>
         <location filename="../gis/search/CSearch.cpp" line="421"/>
-        <source>contain</source>
+        <source>with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="389"/>
         <location filename="../gis/search/CSearch.cpp" line="422"/>
-        <source>containing</source>
+        <source>contains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="390"/>
         <location filename="../gis/search/CSearch.cpp" line="423"/>
-        <source>without</source>
+        <source>contain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="391"/>
         <location filename="../gis/search/CSearch.cpp" line="424"/>
-        <source>shorter than</source>
+        <source>containing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="392"/>
         <location filename="../gis/search/CSearch.cpp" line="425"/>
-        <source>smaller than</source>
+        <source>without</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="393"/>
         <location filename="../gis/search/CSearch.cpp" line="426"/>
-        <source>under</source>
+        <source>shorter than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="394"/>
         <location filename="../gis/search/CSearch.cpp" line="427"/>
-        <source>lower than</source>
+        <source>smaller than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="395"/>
         <location filename="../gis/search/CSearch.cpp" line="428"/>
-        <source>earlier than</source>
+        <source>under</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="396"/>
         <location filename="../gis/search/CSearch.cpp" line="429"/>
-        <source>before</source>
+        <source>lower than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="397"/>
         <location filename="../gis/search/CSearch.cpp" line="430"/>
-        <source>less than</source>
+        <source>earlier than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="398"/>
+        <location filename="../gis/search/CSearch.cpp" line="431"/>
+        <source>before</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="399"/>
         <location filename="../gis/search/CSearch.cpp" line="432"/>
-        <source>longer than</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/search/CSearch.cpp" line="400"/>
-        <location filename="../gis/search/CSearch.cpp" line="433"/>
-        <source>higher than</source>
+        <source>less than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="401"/>
         <location filename="../gis/search/CSearch.cpp" line="434"/>
-        <source>bigger than</source>
+        <source>longer than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="402"/>
         <location filename="../gis/search/CSearch.cpp" line="435"/>
-        <source>greater than</source>
+        <source>higher than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="403"/>
         <location filename="../gis/search/CSearch.cpp" line="436"/>
-        <source>above</source>
+        <source>bigger than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="404"/>
         <location filename="../gis/search/CSearch.cpp" line="437"/>
-        <source>over</source>
+        <source>greater than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="405"/>
         <location filename="../gis/search/CSearch.cpp" line="438"/>
-        <source>after</source>
+        <source>above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="406"/>
         <location filename="../gis/search/CSearch.cpp" line="439"/>
-        <source>later than</source>
+        <source>over</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="407"/>
+        <location filename="../gis/search/CSearch.cpp" line="440"/>
+        <source>after</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="408"/>
         <location filename="../gis/search/CSearch.cpp" line="441"/>
-        <source>regex</source>
+        <source>later than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="410"/>
         <location filename="../gis/search/CSearch.cpp" line="443"/>
-        <source>equals</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/search/CSearch.cpp" line="411"/>
-        <location filename="../gis/search/CSearch.cpp" line="444"/>
-        <source>is</source>
+        <source>regex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="412"/>
         <location filename="../gis/search/CSearch.cpp" line="445"/>
+        <source>equals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="413"/>
+        <location filename="../gis/search/CSearch.cpp" line="446"/>
+        <source>is</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CSearch.cpp" line="414"/>
+        <location filename="../gis/search/CSearch.cpp" line="447"/>
         <source>between</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="419"/>
+        <location filename="../gis/search/CSearch.cpp" line="421"/>
         <source>example: attributes with dog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="420"/>
+        <location filename="../gis/search/CSearch.cpp" line="422"/>
         <source>example: name contains bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="421"/>
+        <location filename="../gis/search/CSearch.cpp" line="423"/>
         <source>example: keywords contain bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="422"/>
+        <location filename="../gis/search/CSearch.cpp" line="424"/>
         <source>example: name containing bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="423"/>
+        <location filename="../gis/search/CSearch.cpp" line="425"/>
         <source>example: name without water</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="424"/>
+        <location filename="../gis/search/CSearch.cpp" line="426"/>
         <source>example: shorter than 5km</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="425"/>
+        <location filename="../gis/search/CSearch.cpp" line="427"/>
         <source>example: area smaller than 5m²</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="426"/>
+        <location filename="../gis/search/CSearch.cpp" line="428"/>
         <source>example: elevation under 1000ft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="427"/>
+        <location filename="../gis/search/CSearch.cpp" line="429"/>
         <source>example: lower than 500m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="428"/>
+        <location filename="../gis/search/CSearch.cpp" line="430"/>
         <source>example: date earlier than 2015</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="429"/>
+        <location filename="../gis/search/CSearch.cpp" line="431"/>
         <source>example: date before 10.05.2017</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="430"/>
+        <location filename="../gis/search/CSearch.cpp" line="432"/>
         <source>example: ascent less than 500m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="431"/>
+        <location filename="../gis/search/CSearch.cpp" line="433"/>
         <source>example: D &lt; 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="432"/>
+        <location filename="../gis/search/CSearch.cpp" line="434"/>
         <source>example: distance longer than 20mi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="433"/>
+        <location filename="../gis/search/CSearch.cpp" line="435"/>
         <source>example: terrain higher than 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="434"/>
+        <location filename="../gis/search/CSearch.cpp" line="436"/>
         <source>example: area bigger than 50m²</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="435"/>
+        <location filename="../gis/search/CSearch.cpp" line="437"/>
         <source>example: descent greater than 3000ft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="436"/>
+        <location filename="../gis/search/CSearch.cpp" line="438"/>
         <source>example: above 50m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="437"/>
+        <location filename="../gis/search/CSearch.cpp" line="439"/>
         <source>example: elevation over 400m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="438"/>
+        <location filename="../gis/search/CSearch.cpp" line="440"/>
         <source>example: date after 2013</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="439"/>
+        <location filename="../gis/search/CSearch.cpp" line="441"/>
         <source>example: date later than 2015</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="440"/>
+        <location filename="../gis/search/CSearch.cpp" line="442"/>
         <source>example: T &gt; 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="441"/>
+        <location filename="../gis/search/CSearch.cpp" line="443"/>
         <source>example: size regex (regular|large)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="442"/>
+        <location filename="../gis/search/CSearch.cpp" line="444"/>
         <source>example: size = micro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="443"/>
+        <location filename="../gis/search/CSearch.cpp" line="445"/>
         <source>example: activity equals bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="444"/>
+        <location filename="../gis/search/CSearch.cpp" line="446"/>
         <source>example: status is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="445"/>
+        <location filename="../gis/search/CSearch.cpp" line="447"/>
         <source>example: length between 20km and 20mi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="453"/>
+        <location filename="../gis/search/CSearch.cpp" line="455"/>
         <source>name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="454"/>
+        <location filename="../gis/search/CSearch.cpp" line="456"/>
         <source>full text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="455"/>
+        <location filename="../gis/search/CSearch.cpp" line="457"/>
         <source>elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="456"/>
+        <location filename="../gis/search/CSearch.cpp" line="458"/>
         <source>date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="457"/>
+        <location filename="../gis/search/CSearch.cpp" line="459"/>
         <source>comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="458"/>
+        <location filename="../gis/search/CSearch.cpp" line="460"/>
         <source>description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="459"/>
+        <location filename="../gis/search/CSearch.cpp" line="461"/>
         <source>rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="460"/>
+        <location filename="../gis/search/CSearch.cpp" line="462"/>
         <source>keywords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="461"/>
+        <location filename="../gis/search/CSearch.cpp" line="463"/>
         <source>type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="464"/>
+        <location filename="../gis/search/CSearch.cpp" line="466"/>
         <source>area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="467"/>
+        <location filename="../gis/search/CSearch.cpp" line="469"/>
         <source>difficulty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="469"/>
+        <location filename="../gis/search/CSearch.cpp" line="471"/>
         <source>terrain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="470"/>
+        <location filename="../gis/search/CSearch.cpp" line="472"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="471"/>
+        <location filename="../gis/search/CSearch.cpp" line="473"/>
         <source>positive attributes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="472"/>
+        <location filename="../gis/search/CSearch.cpp" line="474"/>
         <source>non-negated attributes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="473"/>
+        <location filename="../gis/search/CSearch.cpp" line="475"/>
         <source>negated attributes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="474"/>
+        <location filename="../gis/search/CSearch.cpp" line="476"/>
         <source>size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="475"/>
+        <location filename="../gis/search/CSearch.cpp" line="477"/>
         <source>GCCode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="476"/>
+        <location filename="../gis/search/CSearch.cpp" line="478"/>
         <source>GCName</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="477"/>
+        <location filename="../gis/search/CSearch.cpp" line="479"/>
         <source>status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="478"/>
+        <location filename="../gis/search/CSearch.cpp" line="480"/>
         <source>GCType</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="479"/>
+        <location filename="../gis/search/CSearch.cpp" line="481"/>
         <source>logged by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="480"/>
+        <location filename="../gis/search/CSearch.cpp" line="482"/>
         <source>latest log date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="481"/>
+        <location filename="../gis/search/CSearch.cpp" line="483"/>
         <source>latest log type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="482"/>
+        <location filename="../gis/search/CSearch.cpp" line="484"/>
         <source>latest log by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="483"/>
+        <location filename="../gis/search/CSearch.cpp" line="485"/>
         <source>GCOwner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="488"/>
+        <location filename="../gis/search/CSearch.cpp" line="490"/>
         <source>distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="489"/>
+        <location filename="../gis/search/CSearch.cpp" line="491"/>
         <source>length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="490"/>
+        <location filename="../gis/search/CSearch.cpp" line="492"/>
         <source>ascent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="491"/>
+        <location filename="../gis/search/CSearch.cpp" line="493"/>
         <source>elevation gain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="492"/>
+        <location filename="../gis/search/CSearch.cpp" line="494"/>
         <source>descent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="493"/>
+        <location filename="../gis/search/CSearch.cpp" line="495"/>
         <source>min elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="494"/>
+        <location filename="../gis/search/CSearch.cpp" line="496"/>
         <source>minimal elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="495"/>
+        <location filename="../gis/search/CSearch.cpp" line="497"/>
         <source>max elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="496"/>
+        <location filename="../gis/search/CSearch.cpp" line="498"/>
         <source>maximal elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="497"/>
+        <location filename="../gis/search/CSearch.cpp" line="499"/>
         <source>max speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="498"/>
+        <location filename="../gis/search/CSearch.cpp" line="500"/>
         <source>maximal speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="499"/>
+        <location filename="../gis/search/CSearch.cpp" line="501"/>
         <source>min speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="500"/>
+        <location filename="../gis/search/CSearch.cpp" line="502"/>
         <source>minimal speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="501"/>
+        <location filename="../gis/search/CSearch.cpp" line="503"/>
         <source>average speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="502"/>
+        <location filename="../gis/search/CSearch.cpp" line="504"/>
         <source>activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="503"/>
+        <location filename="../gis/search/CSearch.cpp" line="505"/>
         <source>total time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="504"/>
+        <location filename="../gis/search/CSearch.cpp" line="506"/>
         <source>duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="505"/>
+        <location filename="../gis/search/CSearch.cpp" line="507"/>
         <source>time moving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="514"/>
+        <location filename="../gis/search/CSearch.cpp" line="516"/>
         <source>searches the name of the item. For Geocaches this is &quot;Name - GCCode&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="515"/>
+        <location filename="../gis/search/CSearch.cpp" line="517"/>
         <source>searches the full text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="516"/>
+        <location filename="../gis/search/CSearch.cpp" line="518"/>
         <source>searches the elevation. For items consisting of multiple points the minimum and the maximum is used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="517"/>
+        <location filename="../gis/search/CSearch.cpp" line="519"/>
         <source>searches the Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="518"/>
+        <location filename="../gis/search/CSearch.cpp" line="520"/>
         <source>searches the Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="519"/>
+        <location filename="../gis/search/CSearch.cpp" line="521"/>
         <source>searches the Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="520"/>
+        <location filename="../gis/search/CSearch.cpp" line="522"/>
         <source>searches the Keywords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="521"/>
+        <location filename="../gis/search/CSearch.cpp" line="523"/>
         <source>compares the Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="522"/>
+        <location filename="../gis/search/CSearch.cpp" line="524"/>
         <source>searches the type of the GisItem (Waypoint, Track, Route, Area)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="525"/>
+        <location filename="../gis/search/CSearch.cpp" line="527"/>
         <source>searches the area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="528"/>
+        <location filename="../gis/search/CSearch.cpp" line="530"/>
         <source>searches the difficulty rating of a geocache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="529"/>
+        <location filename="../gis/search/CSearch.cpp" line="531"/>
         <source>searches the terrain rating of a geocache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="530"/>
+        <location filename="../gis/search/CSearch.cpp" line="532"/>
         <source>searches the translated meanings of the non-negated attributes (Those not crossed out)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="531"/>
+        <location filename="../gis/search/CSearch.cpp" line="533"/>
         <source>searches the translated meanings of the negated attributes (Those crossed out)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="532"/>
+        <location filename="../gis/search/CSearch.cpp" line="534"/>
         <source>searches the size of a geocache. (micro, small, regular, large)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="533"/>
+        <location filename="../gis/search/CSearch.cpp" line="535"/>
         <source>searches the GCCode of a geocache.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="534"/>
+        <location filename="../gis/search/CSearch.cpp" line="536"/>
         <source>searches the Name of a geocache.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="535"/>
+        <location filename="../gis/search/CSearch.cpp" line="537"/>
         <source>searches the status of a geocache. (available, not available, archived)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="536"/>
+        <location filename="../gis/search/CSearch.cpp" line="538"/>
         <source>searches the type of a geocache. (traditional, unknown, virtual...)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="537"/>
+        <location filename="../gis/search/CSearch.cpp" line="539"/>
         <source>searches the available logs for a username</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="538"/>
+        <location filename="../gis/search/CSearch.cpp" line="540"/>
         <source>searches the date of the latest log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="539"/>
+        <location filename="../gis/search/CSearch.cpp" line="541"/>
         <source>searches the type of the latest log (Found It, Didn&apos;t find it, Owner Maintenance, Write Note...)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="540"/>
+        <location filename="../gis/search/CSearch.cpp" line="542"/>
         <source>searches the username of the latest log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="541"/>
+        <location filename="../gis/search/CSearch.cpp" line="543"/>
         <source>searches the username of the geocache owner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="546"/>
+        <location filename="../gis/search/CSearch.cpp" line="548"/>
         <source>searches the distance covered by a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="547"/>
+        <location filename="../gis/search/CSearch.cpp" line="549"/>
         <source>searches the total ascent in a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="548"/>
+        <location filename="../gis/search/CSearch.cpp" line="550"/>
         <source>searches the total descent in a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="549"/>
+        <location filename="../gis/search/CSearch.cpp" line="551"/>
         <source>searches the minimal elevation in a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="550"/>
+        <location filename="../gis/search/CSearch.cpp" line="552"/>
         <source>searches the maximal elevation in a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="551"/>
+        <location filename="../gis/search/CSearch.cpp" line="553"/>
         <source>searches the maximal speed in a track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="552"/>
+        <location filename="../gis/search/CSearch.cpp" line="554"/>
         <source>searches the minimal speed in a track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="553"/>
+        <location filename="../gis/search/CSearch.cpp" line="555"/>
         <source>searches the average speed in a track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="554"/>
+        <location filename="../gis/search/CSearch.cpp" line="556"/>
         <source>searches the activity of a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="555"/>
+        <location filename="../gis/search/CSearch.cpp" line="557"/>
         <source>searches the total time spent on a route or track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearch.cpp" line="556"/>
+        <location filename="../gis/search/CSearch.cpp" line="558"/>
         <source>searches the time spent moving on a track</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7229,62 +7454,62 @@ lijn %2, kolom %3:
 <context>
     <name>CTableTrk</name>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="108"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="107"/>
         <source>Time</source>
         <translation type="unfinished">Tijd</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="109"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="108"/>
         <source>Ele.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="110"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="109"/>
         <source>Delta</source>
         <translation type="unfinished">Delta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="111"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="110"/>
         <source>Dist.</source>
         <translation type="unfinished">Afstand.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="112"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="111"/>
         <source>Speed</source>
         <translation type="unfinished">Snelheid</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="113"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="112"/>
         <source>Slope</source>
         <translation type="unfinished">Helling</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="114"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="113"/>
         <source>Ascent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="114"/>
         <source>Descent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="116"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
         <source>Position</source>
         <translation type="unfinished">Positie</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="164"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="163"/>
         <source>Double click to edit elevation value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="191"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="199"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="202"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="207"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="221"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="223"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="190"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="198"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="201"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="206"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="220"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="222"/>
         <source>%1%2</source>
         <translation type="unfinished">%1%2</translation>
     </message>
@@ -8513,17 +8738,17 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
 <context>
     <name>IDBMysql</name>
     <message>
-        <location filename="../gis/db/IDBMysql.cpp" line="61"/>
+        <location filename="../gis/db/IDBMysql.cpp" line="62"/>
         <source>Password...</source>
         <translation>Wachtwoord...</translation>
     </message>
     <message>
-        <location filename="../gis/db/IDBMysql.cpp" line="61"/>
+        <location filename="../gis/db/IDBMysql.cpp" line="62"/>
         <source>Password for database &apos;%1&apos;:</source>
         <translation>Wachtwoord voor database &apos;%1&apos;:</translation>
     </message>
     <message>
-        <location filename="../gis/db/IDBMysql.cpp" line="227"/>
+        <location filename="../gis/db/IDBMysql.cpp" line="228"/>
         <source>Update to database version 5. Migrate all GIS items.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10545,22 +10770,22 @@ It is either a new item or it has been deleted in the database by someone else.<
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="829"/>
-        <location filename="../gis/IGisItem.cpp" line="870"/>
+        <location filename="../gis/IGisItem.cpp" line="873"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Beschrijving:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="873"/>
+        <location filename="../gis/IGisItem.cpp" line="876"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- geen beschrijving ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="1103"/>
+        <location filename="../gis/IGisItem.cpp" line="1108"/>
         <source>Rating: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="1108"/>
+        <location filename="../gis/IGisItem.cpp" line="1113"/>
         <source>Keywords: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -10571,22 +10796,22 @@ It is either a new item or it has been deleted in the database by someone else.<
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="849"/>
-        <location filename="../gis/IGisItem.cpp" line="884"/>
+        <location filename="../gis/IGisItem.cpp" line="887"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Links:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="887"/>
+        <location filename="../gis/IGisItem.cpp" line="890"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- geen links ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="1022"/>
+        <location filename="../gis/IGisItem.cpp" line="1027"/>
         <source>Edit name...</source>
         <translation type="unfinished">Bewerk naam...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="1022"/>
+        <location filename="../gis/IGisItem.cpp" line="1027"/>
         <source>Enter new %1 name.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10622,60 +10847,60 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Het project is veranderd. Voor het sluiten opslaan?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="381"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="391"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation>%1: Correlatie van tracks en waypointen.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="391"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="401"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Duurde dit te lang? Moet de correlatie van tracks en waypointen in dit project in de toekomst overgeslagen worden?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="392"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="402"/>
         <source>Canceled correlation...</source>
         <translation>Correlatie geanuleerd...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="437"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="494"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="447"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="504"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Opslaan &quot;%1&quot; als...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="579"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="589"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Bestandsnaam: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="584"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="594"/>
         <source>Waypoints: %1</source>
         <translation>Waypoints: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="588"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="598"/>
         <source>Tracks: %1</source>
         <translation>Tracks: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="592"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="602"/>
         <source>Routes: %1</source>
         <translation>Routes: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="596"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="606"/>
         <source>Areas: %1</source>
         <translation>Gebieden: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="734"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="744"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Moet &apos;%1&apos; werkelijk verwijderd worden uit project &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="735"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="745"/>
         <source>Delete...</source>
         <translation>Verwijderen...</translation>
     </message>
@@ -10914,7 +11139,7 @@ Bestandsnaam: %1</translation>
 <context>
     <name>ILineOp</name>
     <message>
-        <location filename="../mouse/line/ILineOp.cpp" line="200"/>
+        <location filename="../mouse/line/ILineOp.cpp" line="379"/>
         <source>Routing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10975,105 +11200,105 @@ Bestandsnaam: %1</translation>
         <translation>Bestand</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="81"/>
+        <location filename="../IMainWindow.ui" line="82"/>
         <source>View</source>
         <translation>Instellingen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="105"/>
+        <location filename="../IMainWindow.ui" line="107"/>
         <source>Window</source>
         <translation>Venster</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="115"/>
+        <location filename="../IMainWindow.ui" line="117"/>
         <source>?</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="135"/>
+        <location filename="../IMainWindow.ui" line="137"/>
         <source>Tool</source>
         <translation>Extra</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="155"/>
+        <location filename="../IMainWindow.ui" line="157"/>
         <source>Maps</source>
         <translation>Kaarten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="192"/>
+        <location filename="../IMainWindow.ui" line="194"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Dig. Elev. Model (DEM)</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="124"/>
-        <location filename="../IMainWindow.ui" line="225"/>
+        <location filename="../IMainWindow.ui" line="126"/>
+        <location filename="../IMainWindow.ui" line="227"/>
         <source>Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="234"/>
+        <location filename="../IMainWindow.ui" line="236"/>
         <source>Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="291"/>
-        <location filename="../IMainWindow.ui" line="294"/>
+        <location filename="../IMainWindow.ui" line="326"/>
+        <location filename="../IMainWindow.ui" line="329"/>
         <source>Add Map View</source>
         <translation>Nieuw venster</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="297"/>
+        <location filename="../IMainWindow.ui" line="332"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="312"/>
+        <location filename="../IMainWindow.ui" line="347"/>
         <source>Show Scale</source>
         <translation>Toon schaal</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="324"/>
+        <location filename="../IMainWindow.ui" line="359"/>
         <source>Setup Map Font</source>
         <translation>Lettertype kaart instellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="339"/>
+        <location filename="../IMainWindow.ui" line="374"/>
         <source>Show Grid</source>
         <translation>Toon raster</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="342"/>
+        <location filename="../IMainWindow.ui" line="377"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="354"/>
+        <location filename="../IMainWindow.ui" line="389"/>
         <source>Setup Grid</source>
         <translation>Raster instellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="357"/>
+        <location filename="../IMainWindow.ui" line="392"/>
         <source>Ctrl+Alt+G</source>
         <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="372"/>
+        <location filename="../IMainWindow.ui" line="407"/>
         <source>Flip Mouse Wheel</source>
         <translation>Draai muiswiel om</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="384"/>
-        <location filename="../IMainWindow.ui" line="387"/>
+        <location filename="../IMainWindow.ui" line="419"/>
+        <location filename="../IMainWindow.ui" line="422"/>
         <source>Setup Map Paths</source>
         <translation>Map met kaarten instellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="402"/>
+        <location filename="../IMainWindow.ui" line="437"/>
         <source>POI Text</source>
         <translation>POI tekst</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="417"/>
+        <location filename="../IMainWindow.ui" line="452"/>
         <source>Night / Day</source>
         <translation>Dag/Nacht</translation>
     </message>
@@ -11082,63 +11307,63 @@ Bestandsnaam: %1</translation>
         <translation type="vanished">Map Tool Tip</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="435"/>
+        <location filename="../IMainWindow.ui" line="470"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="447"/>
+        <location filename="../IMainWindow.ui" line="482"/>
         <source>Setup DEM Paths</source>
         <translation>Map DEM instellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="459"/>
+        <location filename="../IMainWindow.ui" line="494"/>
         <source>About</source>
         <translation>Over</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1009"/>
+        <location filename="../IMainWindow.ui" line="1044"/>
         <source>Help</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1012"/>
+        <location filename="../IMainWindow.ui" line="1047"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="483"/>
-        <location filename="../IMainWindow.ui" line="486"/>
+        <location filename="../IMainWindow.ui" line="518"/>
+        <location filename="../IMainWindow.ui" line="521"/>
         <source>Setup Map View</source>
         <translation>Kaartinstellingen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="498"/>
+        <location filename="../IMainWindow.ui" line="533"/>
         <source>Load GIS Data</source>
         <translation>GIS gegevens laden</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="501"/>
+        <location filename="../IMainWindow.ui" line="536"/>
         <source>Load projects from file</source>
         <translation>Project laden uit bestand</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="504"/>
+        <location filename="../IMainWindow.ui" line="539"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="516"/>
+        <location filename="../IMainWindow.ui" line="551"/>
         <source>Save All GIS Data</source>
         <translation>GIS gegevens opslaan</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="519"/>
+        <location filename="../IMainWindow.ui" line="554"/>
         <source>Save all projects in the workspace</source>
         <translation>Sla alle projecten op in werkruimte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="522"/>
+        <location filename="../IMainWindow.ui" line="557"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
@@ -11147,342 +11372,367 @@ Bestandsnaam: %1</translation>
         <translation type="vanished">Tijdzone instellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="546"/>
+        <location filename="../IMainWindow.ui" line="581"/>
         <source>Add empty project</source>
         <translation>Nieuw leeg project</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="678"/>
+        <location filename="../IMainWindow.ui" line="713"/>
         <source>Track Profile as Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="681"/>
+        <location filename="../IMainWindow.ui" line="716"/>
         <source>Show the track profile in it&apos;s own window instead within the map view.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="738"/>
+        <location filename="../IMainWindow.ui" line="773"/>
         <source>Save(Print) Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="843"/>
+        <location filename="../IMainWindow.ui" line="878"/>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="858"/>
+        <location filename="../IMainWindow.ui" line="893"/>
         <source>Min./Max. Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="891"/>
+        <location filename="../IMainWindow.ui" line="926"/>
         <source>Track Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="894"/>
+        <location filename="../IMainWindow.ui" line="929"/>
         <source>Select what information is shown for a highlighted track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="906"/>
+        <location filename="../IMainWindow.ui" line="941"/>
         <source>Track Point Info Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="909"/>
+        <location filename="../IMainWindow.ui" line="944"/>
         <source>Show a legend for all track point info bullets along the track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="921"/>
+        <location filename="../IMainWindow.ui" line="956"/>
         <source>Track Summary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="924"/>
+        <location filename="../IMainWindow.ui" line="959"/>
         <source>Show the track summary.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="936"/>
+        <location filename="../IMainWindow.ui" line="971"/>
         <source>Min./Max Summary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="939"/>
+        <location filename="../IMainWindow.ui" line="974"/>
         <source>Show the minimum and the maximum values of the track properties in a table.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="951"/>
+        <location filename="../IMainWindow.ui" line="986"/>
         <source>Track Profile</source>
         <translation type="unfinished">Track profiel</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="954"/>
+        <location filename="../IMainWindow.ui" line="989"/>
         <source>Show the track profile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="963"/>
+        <location filename="../IMainWindow.ui" line="998"/>
         <source>Take Screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="966"/>
+        <location filename="../IMainWindow.ui" line="1001"/>
         <source>Take a screenshot from the current active map view.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="969"/>
+        <location filename="../IMainWindow.ui" line="1004"/>
         <source>Ctrl+Alt+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="981"/>
+        <location filename="../IMainWindow.ui" line="1016"/>
         <source>Track Point Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="984"/>
+        <location filename="../IMainWindow.ui" line="1019"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="997"/>
+        <location filename="../IMainWindow.ui" line="1032"/>
         <source>Track Highlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1000"/>
+        <location filename="../IMainWindow.ui" line="1035"/>
         <source>Mark the highlighted track with a red border.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="260"/>
+        <location filename="../IMainWindow.ui" line="262"/>
         <source>Routing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="278"/>
+        <location filename="../IMainWindow.ui" line="280"/>
         <source>Realtime</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="432"/>
+        <location filename="../IMainWindow.ui" line="292"/>
+        <source>POI Collections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="467"/>
         <source>Map Tooltip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="471"/>
+        <location filename="../IMainWindow.ui" line="506"/>
         <source>Online Wiki</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="534"/>
+        <location filename="../IMainWindow.ui" line="569"/>
         <source>Setup Timezone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="561"/>
+        <location filename="../IMainWindow.ui" line="596"/>
         <source>Geosearch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="573"/>
+        <location filename="../IMainWindow.ui" line="608"/>
         <source>Close all projects</source>
         <translation>Sluit alle projecten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="576"/>
+        <location filename="../IMainWindow.ui" line="611"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="588"/>
+        <location filename="../IMainWindow.ui" line="623"/>
         <source>Setup Units</source>
         <translation>Eenheden instellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="600"/>
+        <location filename="../IMainWindow.ui" line="635"/>
         <source>Setup Workspace</source>
         <translation>Werkruimte instellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="603"/>
+        <location filename="../IMainWindow.ui" line="638"/>
         <source>Setup save on exit.</source>
         <translation>Oplaan bij afsluiten instellen.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="615"/>
+        <location filename="../IMainWindow.ui" line="650"/>
         <source>Import Database from QLandkarte</source>
         <translation>Database van QLandkarte importeren</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="618"/>
+        <location filename="../IMainWindow.ui" line="653"/>
         <source>Import QLandkarte GT database</source>
         <translation>QLandkarte database importeren</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="630"/>
+        <location filename="../IMainWindow.ui" line="665"/>
         <source>VRT Builder</source>
         <translation>VRT maken</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="633"/>
+        <location filename="../IMainWindow.ui" line="668"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>GUI front end naar gdalbuildvrt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="645"/>
+        <location filename="../IMainWindow.ui" line="680"/>
         <source>Store Map View</source>
         <translation>Kaart opslaan</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="648"/>
+        <location filename="../IMainWindow.ui" line="683"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Schrijf huidige actieve kaart en DEM lijst inclusief de eigenschappen naar een bestand</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="660"/>
+        <location filename="../IMainWindow.ui" line="695"/>
         <source>Load Map View</source>
         <translation>Kaart laden</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="663"/>
+        <location filename="../IMainWindow.ui" line="698"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Herstel huidige actieve kaart en DEM lijst inclusief de eigenschappen naar een bestand</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="684"/>
+        <location filename="../IMainWindow.ui" line="719"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="696"/>
+        <location filename="../IMainWindow.ui" line="731"/>
         <source>Close</source>
         <translation>Sluiten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="699"/>
+        <location filename="../IMainWindow.ui" line="734"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="711"/>
+        <location filename="../IMainWindow.ui" line="746"/>
         <source>Clone Map View</source>
         <translation>Kloon venster</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="714"/>
+        <location filename="../IMainWindow.ui" line="749"/>
         <source>Ctrl+Shift+T</source>
         <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="726"/>
+        <location filename="../IMainWindow.ui" line="761"/>
         <source>Create Routino Database</source>
         <translation>Maak Routino database</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="741"/>
+        <location filename="../IMainWindow.ui" line="776"/>
         <source>Print a selected area of the map</source>
         <translation>Geselecteerde deel van kaart afdrukken</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="744"/>
+        <location filename="../IMainWindow.ui" line="779"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="756"/>
+        <location filename="../IMainWindow.ui" line="791"/>
         <source>Setup Coord. Format</source>
         <translation>Coördinaat formaat instellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="759"/>
+        <location filename="../IMainWindow.ui" line="794"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Getoonde coördinaat formaat aanpassen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="771"/>
+        <location filename="../IMainWindow.ui" line="806"/>
         <source>Setup Map Background</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="783"/>
+        <location filename="../IMainWindow.ui" line="818"/>
         <source>Setup Waypoint Icons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="786"/>
+        <location filename="../IMainWindow.ui" line="821"/>
         <source>Setup path to custom icons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="795"/>
+        <location filename="../IMainWindow.ui" line="830"/>
         <source>Close Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="798"/>
+        <location filename="../IMainWindow.ui" line="833"/>
         <source>Ctrl+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="807"/>
+        <location filename="../IMainWindow.ui" line="842"/>
         <source>Quickstart Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="816"/>
+        <location filename="../IMainWindow.ui" line="851"/>
         <source>Setup Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="828"/>
+        <location filename="../IMainWindow.ui" line="863"/>
         <source>Toggle Docks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="831"/>
+        <location filename="../IMainWindow.ui" line="866"/>
         <source>Toggle visibility of dockable windows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="834"/>
+        <location filename="../IMainWindow.ui" line="869"/>
         <source>Ctrl+D</source>
         <translation type="unfinished">Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="846"/>
+        <location filename="../IMainWindow.ui" line="881"/>
         <source>F11</source>
         <translation type="unfinished">F11</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="861"/>
+        <location filename="../IMainWindow.ui" line="896"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="864"/>
+        <location filename="../IMainWindow.ui" line="899"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="873"/>
+        <location filename="../IMainWindow.ui" line="908"/>
         <source>Start QMapTool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="882"/>
+        <location filename="../IMainWindow.ui" line="917"/>
         <source>Change Map View Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="248"/>
+        <location filename="../IMainWindow.ui" line="1059"/>
+        <source>Link Map Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="1062"/>
+        <source>All map views move and zoom to the same point.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="1071"/>
+        <source>Setup POI Paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="1074"/>
+        <source>Setup paths to POI collections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="250"/>
         <source>Database</source>
         <translation type="unfinished">Database</translation>
     </message>
@@ -11903,22 +12153,22 @@ Tip:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="558"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="560"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1 gegevens&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="561"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="563"/>
         <source>Distance:</source>
         <translation>Afstand:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="563"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="565"/>
         <source>Ascent:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="565"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="567"/>
         <source>Descent:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11979,20 +12229,86 @@ Tip:
         <translation type="unfinished">Track knippen...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="607"/>
+        <location filename="../plot/IPlot.cpp" line="608"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="785"/>
+        <location filename="../plot/IPlot.cpp" line="786"/>
         <source>No or bad data.</source>
         <translation>Geen of ontbrekende gegevens.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1486"/>
+        <location filename="../plot/IPlot.cpp" line="1479"/>
         <source>Select output file</source>
         <translation>Selecteer bestand</translation>
+    </message>
+</context>
+<context>
+    <name>IPoiList</name>
+    <message>
+        <location filename="../poi/IPoiList.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulier</translation>
+    </message>
+    <message>
+        <location filename="../poi/IPoiList.ui" line="97"/>
+        <source>To add POI collections use &lt;a href=&apos;PoiFolders&apos;&gt;File-&gt;Setup POI Paths&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/IPoiList.ui" line="110"/>
+        <source>Use the context menu (right mouse button click on entry) to activate a file. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../poi/IPoiList.ui" line="135"/>
+        <source>Activate</source>
+        <translation type="unfinished">Activeer</translation>
+    </message>
+    <message>
+        <location filename="../poi/IPoiList.ui" line="144"/>
+        <location filename="../poi/IPoiList.ui" line="147"/>
+        <source>Reload POI</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IPoiPathSetup</name>
+    <message>
+        <location filename="../poi/IPoiPathSetup.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialoog</translation>
+    </message>
+    <message>
+        <location filename="../poi/IPoiPathSetup.ui" line="31"/>
+        <location filename="../poi/IPoiPathSetup.ui" line="51"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../poi/IPoiPathSetup.ui" line="112"/>
+        <source>-</source>
+        <translation type="unfinished">-</translation>
+    </message>
+</context>
+<context>
+    <name>IPoiPropSetup</name>
+    <message>
+        <location filename="../poi/IPoiPropSetup.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulier</translation>
+    </message>
+    <message>
+        <location filename="../poi/IPoiPropSetup.ui" line="35"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Verander transparantie van kaart&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../poi/IPoiPropSetup.ui" line="60"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13610,96 +13926,102 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="59"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="47"/>
         <source>Copy all selected items to a project.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="62"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="76"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="90"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="104"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="118"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="132"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="146"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="160"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="174"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="222"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="245"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="299"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="320"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="341"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="362"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="50"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="64"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="78"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="92"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="106"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="120"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="134"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="148"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="162"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="220"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="241"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="262"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="283"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="304"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="376"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="399"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="73"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="61"/>
         <source>Create a route from selected waypoints.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="87"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="75"/>
         <source>Set proximity and no-go area option.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="101"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="89"/>
         <source>Change the icon of all selected waypoints.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="115"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="103"/>
         <source>Replace the elevation in all selected waypoints and tracks by values from the view&apos;s DEM data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="129"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="117"/>
         <source>Combine all selected tracks to a new one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="143"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="131"/>
         <source>Set an activity for all selected tracks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="157"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="145"/>
         <source>Change the color of all selected tracks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="171"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="159"/>
         <source>Delete all selected items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="219"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="301"/>
+        <source>Add POIs to selection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptSelect.ui" line="373"/>
         <source>Select all items that intersect the selected area.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="242"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="396"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="217"/>
         <source>Add tracks to selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="317"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="238"/>
         <source>Add waypoints to selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="338"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="259"/>
         <source>Add routes to selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="359"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="280"/>
         <source>Add areas to selection.</source>
         <translation type="unfinished"></translation>
     </message>

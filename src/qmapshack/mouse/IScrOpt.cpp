@@ -24,7 +24,7 @@
 #include <QtWidgets>
 
 
-IScrOpt::IScrOpt(IMouse *mouse)
+IScrOpt::IScrOpt(IMouse* mouse)
     : QWidget(mouse == nullptr ? nullptr : mouse->getCanvas())
     , mouse(mouse)
 {
@@ -44,7 +44,7 @@ IScrOpt::~IScrOpt()
 
 void IScrOpt::moveTo(const QPoint& anchor)
 {
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas == nullptr)
     {
         move(anchor + QPoint(-width() / 2, SCR_OPT_OFFSET));
@@ -68,13 +68,13 @@ void IScrOpt::mouseMove(const QPoint& pos)
     mousePos = pos;
 }
 
-void IScrOpt::enterEvent(QEvent * e)
+void IScrOpt::enterEvent(QEvent* e)
 {
     QWidget::enterEvent(e);
     CCanvas::restoreOverrideCursor("IScrOpt::enterEvent");
 }
 
-void IScrOpt::leaveEvent(QEvent * e)
+void IScrOpt::leaveEvent(QEvent* e)
 {
     QWidget::leaveEvent(e);
     if(!mouse.isNull())

@@ -22,7 +22,7 @@
 
 #include <QtSql>
 
-CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const QString &user, const QString & passwd, bool noPasswd, const QString &name, QTreeWidget *parent)
+CDBFolderMysql::CDBFolderMysql(const QString& server, const QString& port, const QString& user, const QString& passwd, bool noPasswd, const QString& name, QTreeWidget* parent)
     : IDBFolderSql(IDB::db, parent)
     , server(server)
     , port(port)
@@ -32,7 +32,7 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const
     , name(name)
 {
     setText(CGisListDB::eColumnName, name);
-    QTimer::singleShot(200, this, SLOT(slotDelayedSetup()));
+    QTimer::singleShot(200, this, &CDBFolderMysql::slotDelayedSetup);
 }
 
 void CDBFolderMysql::slotDelayedSetup()
@@ -59,7 +59,7 @@ QString CDBFolderMysql::getDBInfo() const
     str += tr("MySQL Database") + "<br />";
     if(!port.isEmpty())
     {
-        str += tr("Server: ") + QString("<i>%1:%2</i>").arg(server).arg(port);
+        str += tr("Server: ") + QString("<i>%1:%2</i>").arg(server, port);
     }
     else
     {
@@ -73,8 +73,8 @@ QString CDBFolderMysql::getDBInfo() const
 
     if(!isUsable())
     {
-        const QString &dbError = IDB::db.lastError().databaseText();
-        const QString &drError = IDB::db.lastError().driverText();
+        const QString& dbError = IDB::db.lastError().databaseText();
+        const QString& drError = IDB::db.lastError().driverText();
 
         str += "<br />" + tr("Error: ") + QString("<span style=\"color:#f00; font-weight:bold;\">%1</span>").arg(dbError.isEmpty() ? drError : dbError);
     }
@@ -82,7 +82,7 @@ QString CDBFolderMysql::getDBInfo() const
     return str;
 }
 
-bool CDBFolderMysql::search(const QString& str, QSqlQuery &query)
+bool CDBFolderMysql::search(const QString& str, QSqlQuery& query)
 {
     query.prepare("SELECT id FROM items WHERE MATCH(comment) AGAINST (:str IN BOOLEAN MODE)");
     query.bindValue(":str", str);

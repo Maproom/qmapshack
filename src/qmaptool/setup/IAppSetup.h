@@ -29,7 +29,7 @@ class IAppSetup : public QObject
     Q_OBJECT
 public:
     static IAppSetup& self();
-    static IAppSetup &createInstance(QObject * parent);
+    static IAppSetup& createInstance(QObject* parent);
 
     virtual ~IAppSetup();
 
@@ -40,7 +40,7 @@ public:
     virtual QString defaultCachePath() = 0;
     virtual QString userDataPath(QString subdir = 0) = 0;
     virtual QString logDir() = 0;
-    virtual QString findExecutable(const QString &name) = 0;
+    virtual QString findExecutable(const QString& name) = 0;
 
     QString getGdaladdo() const
     {
@@ -182,7 +182,7 @@ signals:
 protected:
     static IAppSetup* pSelf;
 
-    IAppSetup(QObject * parent)
+    IAppSetup(QObject* parent)
         : QObject(parent)
     {
         pSelf = this;

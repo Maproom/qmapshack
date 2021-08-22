@@ -24,14 +24,14 @@
 #include "gis/trk/filter/CFilterSpeedHike.h"
 #include "helpers/CSettings.h"
 
-CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
+CFilterSpeed::CFilterSpeed(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent), trk(trk)
 {
     setupUi(this);
 
     filterConst = new CFilterSpeedConst(this);
     filterCycle = new CFilterSpeedCycle(this, trk);
-    filterHike  = new CFilterSpeedHike(this);
+    filterHike = new CFilterSpeedHike(this);
 
     stackedWidget->addWidget(filterConst);
     stackedWidget->addWidget(filterCycle);
@@ -44,7 +44,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     comboActivityType->setCurrentIndex(cfg.value("activityType", 0).toInt());
     slotSetActivityType(comboActivityType->currentIndex());
 
-    connect(comboActivityType, SIGNAL(activated(int)), this, SLOT(slotSetActivityType(int)));
+    connect(comboActivityType, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &CFilterSpeed::slotSetActivityType);
     connect(toolApply, &QToolButton::clicked, this, &CFilterSpeed::slotApply);
 
     cfg.beginGroup("Const");

@@ -24,24 +24,24 @@
 
 #include <QtWidgets>
 
-CGridSetup::CGridSetup(CGrid *grid, CMapDraw * map)
+CGridSetup::CGridSetup(CGrid* grid, CMapDraw* map)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , grid(grid)
     , map(map)
 {
     setupUi(this);
 
-    lineProjection->setText(grid->projstr);
+    lineProjection->setText(grid->getGridProjString());
     lineProjection->setCursorPosition(0);
 
     QPalette palette = labelGridColor->palette();
-    palette.setColor(labelGridColor->foregroundRole(), grid->color);
+    palette.setColor(labelGridColor->foregroundRole(), grid->getColor());
     labelGridColor->setPalette(palette);
 
     connect(toolRestoreDefault, &QToolButton::clicked, this, &CGridSetup::slotRestoreDefault);
-    connect(toolFromMap,        &QToolButton::clicked, this, &CGridSetup::slotProjFromMap);
-    connect(toolProjWizard,    &QToolButton::clicked, this, &CGridSetup::slotProjWizard);
-    connect(toolGridColor,      &QToolButton::clicked, this, &CGridSetup::slotSelectGridColor);
+    connect(toolFromMap, &QToolButton::clicked, this, &CGridSetup::slotProjFromMap);
+    connect(toolProjWizard, &QToolButton::clicked, this, &CGridSetup::slotProjWizard);
+    connect(toolGridColor, &QToolButton::clicked, this, &CGridSetup::slotSelectGridColor);
 }
 
 CGridSetup::~CGridSetup()

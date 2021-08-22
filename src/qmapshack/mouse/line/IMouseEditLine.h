@@ -50,17 +50,17 @@ public:
        @param gis       the draw context to use
        @param parent    the canvas to use
      */
-    IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
+    IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus, const QString& type, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
     /**
        @brief Edit an existing track
        @param trk       the track to edit
        @param gis       the draw context to use
        @param parent    the canvas to use
      */
-    IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
+    IMouseEditLine(const IGisItem::key_t& key, IGisLine& src, bool enableStatus, const QString& type, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
     virtual ~IMouseEditLine();
 
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
     void leftClicked(const QPoint& pos) override;
     void mouseMoved(const QPoint& pos) override;
@@ -119,9 +119,9 @@ protected:
        @brief Get access to the IGisLine object a subclass of IMouseEditLine is handling.
        @return A valid pointer or 0.
      */
-    virtual IGisLine * getGisLine() const = 0;
+    virtual IGisLine* getGisLine() const = 0;
 
-    virtual void startNewLine(const QPointF &point);
+    virtual void startNewLine(const QPointF& point);
 
     /// shadow cursor needed to restore cursor after some actions providing their own cursor.
     QCursor cursor1;
@@ -134,7 +134,7 @@ protected:
     qint32 idxHistory = NOIDX;
 
     /// the on screen buttons
-    CScrOptEditLine * scrOptEditLine;
+    CScrOptEditLine* scrOptEditLine;
 
     /// the key of the GIS item to edit
     IGisItem::key_t key;
@@ -150,7 +150,7 @@ private:
     QPolygonF pixelSubs;
 
     /// the current active line operation (move, add, delete...)
-    ILineOp * lineOp = nullptr;
+    ILineOp* lineOp = nullptr;
 
     bool enableStatus;
 

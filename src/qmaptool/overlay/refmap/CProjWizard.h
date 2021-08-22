@@ -26,7 +26,7 @@ class CProjWizard : public QDialog, private Ui::IProjWizard
 {
     Q_OBJECT
 public:
-    CProjWizard(QLineEdit& line, QWidget *parent);
+    CProjWizard(QLineEdit& line, QWidget* parent);
     virtual ~CProjWizard();
     static bool validProjStr(const QString projStr);
 

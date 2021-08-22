@@ -23,20 +23,20 @@
 
 #include <QtWidgets>
 
-CDemPathSetup::CDemPathSetup(QStringList &paths)
+CDemPathSetup::CDemPathSetup(QStringList& paths)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , paths(paths)
 {
     setupUi(this);
 
-    connect(toolAdd,    &QToolButton::clicked,              this, &CDemPathSetup::slotAddPath);
-    connect(toolDelete, &QToolButton::clicked,              this, &CDemPathSetup::slotDelPath);
+    connect(toolAdd, &QToolButton::clicked, this, &CDemPathSetup::slotAddPath);
+    connect(toolDelete, &QToolButton::clicked, this, &CDemPathSetup::slotDelPath);
     connect(listWidget, &QListWidget::itemSelectionChanged, this, &CDemPathSetup::slotItemSelectionChanged);
-    connect(pushDemHonk, &QPushButton::clicked,             this, &CDemPathSetup::slotDemHonk);
+    connect(pushDemHonk, &QPushButton::clicked, this, &CDemPathSetup::slotDemHonk);
 
-    for(const QString &path : paths)
+    for(const QString& path : paths)
     {
-        QListWidgetItem * item = new QListWidgetItem(listWidget);
+        QListWidgetItem* item = new QListWidgetItem(listWidget);
         item->setText(path);
     }
 
@@ -60,7 +60,7 @@ void CDemPathSetup::slotAddPath()
     {
         if(!paths.contains(path))
         {
-            QListWidgetItem * item = new QListWidgetItem(listWidget);
+            QListWidgetItem* item = new QListWidgetItem(listWidget);
             item->setText(path);
         }
     }
@@ -68,7 +68,7 @@ void CDemPathSetup::slotAddPath()
 
 void CDemPathSetup::slotDelPath()
 {
-    QList<QListWidgetItem *> items = listWidget->selectedItems();
+    QList<QListWidgetItem*> items = listWidget->selectedItems();
     qDeleteAll(items);
 }
 
@@ -84,7 +84,7 @@ void CDemPathSetup::accept()
     paths.clear();
     for(int i = 0; i < listWidget->count(); i++)
     {
-        QListWidgetItem *item = listWidget->item(i);
+        QListWidgetItem* item = listWidget->item(i);
         paths << item->text();
     }
 

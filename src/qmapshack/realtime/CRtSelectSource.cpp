@@ -31,17 +31,17 @@ enum datatypes_e
 };
 
 template<typename T>
-void addSource(CRtWorkspace& wks, QListWidget * list)
+void addSource(CRtWorkspace& wks, QListWidget* list)
 {
-    T * t = new T(0);
+    T* t = new T(0);
 
-    QListWidgetItem * item = new QListWidgetItem(list);
+    QListWidgetItem* item = new QListWidgetItem(list);
     item->setIcon(QIcon(t->strIcon));
     item->setSizeHint(QSize(0, 100));
     item->setData(eDataPointer, QVariant::fromValue<IRtSource*>(t));
     item->setData(eDataUsed, false);
 
-    QLabel *label = new QLabel(t->getDescription());
+    QLabel* label = new QLabel(t->getDescription());
     label->setWordWrap(true);
     list->setItemWidget(item, label);
 
@@ -52,7 +52,7 @@ void addSource(CRtWorkspace& wks, QListWidget * list)
 }
 
 
-CRtSelectSource::CRtSelectSource(CRtWorkspace &wks)
+CRtSelectSource::CRtSelectSource(CRtWorkspace& wks)
     : QDialog(&wks)
     , wks(wks)
 {
@@ -84,10 +84,10 @@ CRtSelectSource::~CRtSelectSource()
     const int N = listWidget->count();
     for(int n = 0; n < N; n++)
     {
-        QListWidgetItem * item = listWidget->item(n);
+        QListWidgetItem* item = listWidget->item(n);
         if(item->data(eDataUsed).toBool() != true)
         {
-            IRtSource * source = item->data(eDataPointer).value<IRtSource*>();
+            IRtSource* source = item->data(eDataPointer).value<IRtSource*>();
             delete source;
         }
     }
@@ -95,15 +95,15 @@ CRtSelectSource::~CRtSelectSource()
 
 void CRtSelectSource::slotSelectionChanged()
 {
-    QListWidgetItem * item = listWidget->currentItem();
+    QListWidgetItem* item = listWidget->currentItem();
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled((item != nullptr) && (item->flags() & Qt::ItemIsEnabled));
 }
 
 void CRtSelectSource::accept()
 {
-    QListWidgetItem * item = listWidget->currentItem();
+    QListWidgetItem* item = listWidget->currentItem();
 
-    IRtSource * source = item->data(eDataPointer).value<IRtSource*>();
+    IRtSource* source = item->data(eDataPointer).value<IRtSource*>();
     if(source != nullptr)
     {
         // as we use the IRtSource instance in the workspace we have to

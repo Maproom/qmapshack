@@ -30,7 +30,7 @@ class CMapTMS : public IMapOnline
 {
     Q_OBJECT
 public:
-    CMapTMS(const QString& filename, CMapDraw *parent);
+    CMapTMS(const QString& filename, CMapDraw* parent);
     virtual ~CMapTMS() {}
 
     void draw(IDrawContext::buffer_t& buf) override;
@@ -41,7 +41,7 @@ public:
     void loadConfig(QSettings& cfg) override;
 
 private slots:
-    void slotLayersChanged(QListWidgetItem * item);
+    void slotLayersChanged(QListWidgetItem* item);
 
 private:
     struct layer_t;

@@ -34,10 +34,10 @@ class CMouseRangeTrk : public IMouse
 {
     Q_OBJECT
 public:
-    CMouseRangeTrk(CGisItemTrk& trk, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
+    CMouseRangeTrk(CGisItemTrk& trk, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
     virtual ~CMouseRangeTrk();
 
-    void draw(QPainter& p, CCanvas::redraw_e, const QRect &) override;
+    void draw(QPainter& p, CCanvas::redraw_e, const QRect&) override;
 
     void leftClicked(const QPoint& point) override;
     void mouseMoved(const QPoint& pos) override;
@@ -54,8 +54,8 @@ private:
         , eStateRangeSelected
     };
 
-    state_e state   = eStateIdle;
-    QPointF anchor  = NOPOINTF;
+    state_e state = eStateIdle;
+    QPointF anchor = NOPOINTF;
 
     QPointer<CScrOptRangeTool>  scrOptRangeTool;
 };

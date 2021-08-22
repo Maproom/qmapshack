@@ -5,23 +5,22 @@ rem Please adapt environment variables in section 1) to your system
 rem Section 1.) Define path to Qt, MSVC, .... installations
 set QMSI_QT_PATH="C:\Qt\5.12.10\msvc2017_64"
 rem get the VC redistributable installer from https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
-set QMSI_VCREDIST_PATH="M:\deploy_2017"
-set QMSI_GDAL_PATH="M:\lib2017\gdal"
-set QMSI_PROJ_PATH="M:\lib2017\PROJ6"
-set QMSI_ROUT_PATH="M:\src\routino_pkg"
-set QMSI_QUAZIP_PATH="M:\lib2017\quazip"
-set QMSI_ZLIB_PATH="M:\lib2017\zlib"
-set QMSI_CURL_PATH="M:\lib2017\cURL"
-set QMSI_SQLI_PATH="M:\lib2017\sqlite"
+set QMSI_VCREDIST_PATH="C:\Users\Christouf\Applications\buildQMS\downloads"
+set QMSI_GDAL_PATH="C:\Users\Christouf\Applications\buildQMS\GDAL\gdal-3.3.0Built"
+set QMSI_PROJ_PATH="C:\Users\Christouf\Applications\buildQMS\PROJv8\projv8Built"
+set QMSI_ROUT_PATH="C:\Users\Christouf\Applications\buildQMS\ROUTINO\Routino Rev 1897\routino_pkg"
+set QMSI_QUAZIP_PATH="C:\Users\Christouf\Applications\buildQMS\quazip-1.1\quazipBuilt"
+set QMSI_ZLIB_PATH="C:\Users\Christouf\Applications\buildQMS\curl\curl_deps"
+set QMSI_CURL_PATH="C:\Users\Christouf\Applications\buildQMS\curl\curl-7.61.1Built"
+set QMSI_SQLI_PATH="C:\Users\Christouf\Applications\buildQMS\sqlite3"
 rem runtime libraries from mingw/msys - in my installation originally at C:\msys\opt\windows_64\bin
-set QMSI_MGW6_PATH="M:\lib2017\mingw64"
+set QMSI_MGW6_PATH="C:\Users\Christouf\Applications\buildQMS\MSYS\msys\opt\windows_64\bin"
 rem runtime libraries from mysql/mariadb - see 3rdparty.txt from where to get - could this be optional?
-set QMSI_MSQL_PATH="M:\lib2017\mysql"
+set QMSI_MSQL_PATH="C:\Users\Christouf\Applications\buildQMS\mariadb-10.1.11-winx64\lib"
 rem uncomment the following line if you want OpenSSL
-set QMSI_OSSL_PATH="M:\deploy_2017"
+set QMSI_OSSL_PATH="C:\Users\Christouf\Applications\buildQMS\openSSL"
 rem And finally of course the path to your build directory!
-set QMSI_BUILD_PATH="..\..\build\"
-
+set QMSI_BUILD_PATH="..\..\..\..\GitHubMyQMapShackBuilt\"
 rem Section 2.) Copy Files
 del /s/q Files
 mkdir Files
@@ -29,6 +28,7 @@ cd Files
 
 rem Section 2.1) Copy Qt files
 rem Note: Qt5WebEngine deployment is super crazy - see https://doc.qt.io/qt-5.12/qtwebengine-deploying.html
+copy %QMSI_QT_PATH%\bin\Qt5DBus.dll
 copy %QMSI_QT_PATH%\bin\assistant.exe
 copy %QMSI_QT_PATH%\bin\Qt5Core.dll
 copy %QMSI_QT_PATH%\bin\Qt5Gui.dll
@@ -100,7 +100,7 @@ copy %QMSI_GDAL_PATH%\bin\*.dll
 copy %QMSI_GDAL_PATH%\bin\*.exe
 rem section 2.2.4) PROJ.4
 xcopy %QMSI_PROJ_PATH%\share share /s /i
-copy %QMSI_PROJ_PATH%\bin\proj_6_3.dll
+copy %QMSI_PROJ_PATH%\bin\proj_8_0.dll
 copy %QMSI_PROJ_PATH%\bin\proj.exe
 copy %QMSI_PROJ_PATH%\bin\projinfo.exe
 copy %QMSI_PROJ_PATH%\bin\cct.exe
@@ -116,7 +116,7 @@ xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
 rem section 2.2.6) MySql/MariaDB
 copy %QMSI_MSQL_PATH%\libmysql.dll
 rem section 2.2.7) QuaZip
-copy %QMSI_QUAZIP_PATH%\lib\quazip5.dll
+copy %QMSI_QUAZIP_PATH%\bin\quazip1-qt5.dll
 rem section 2.2.8) zlib
 copy %QMSI_ZLIB_PATH%\bin\zlibwapi.dll
 rem section 2.2.9) cURL
@@ -128,13 +128,15 @@ copy %QMSI_SQLI_PATH%\sqldiff.exe
 copy %QMSI_SQLI_PATH%\sqlite3.exe
 copy %QMSI_SQLI_PATH%\sqlite3_analyzer.exe
 rem uncomment the following line if you want OpenSSL
-copy %QMSI_OSSL_PATH%\libcrypto-1_1-x64.dll
-copy %QMSI_OSSL_PATH%\libssl-1_1-x64.dll
-copy %QMSI_OSSL_PATH%\openssl.exe
+rem copy %QMSI_OSSL_PATH%\libcrypto-1_1-x64.dll
+rem copy %QMSI_OSSL_PATH%\libssl-1_1-x64.dll
+rem copy %QMSI_OSSL_PATH%\openssl.exe
+copy %QMSI_OSSL_PATH%\libeay32.dll
+copy %QMSI_OSSL_PATH%\ssleay32.dll
 
 
 rem section 2.3) Copy MSVC Redist Files
-copy %QMSI_VCREDIST_PATH%\VC_redist.x64.exe
+copy %QMSI_VCREDIST_PATH%\vcredist_x64.exe
 
 rem section 2.4) Copy QMapShack Files
 copy %QMSI_BUILD_PATH%\bin\Release\qmapshack.exe

@@ -20,7 +20,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterTerrainSlope.h"
 
-CFilterTerrainSlope::CFilterTerrainSlope(CGisItemTrk &trk, QWidget *parent)
+CFilterTerrainSlope::CFilterTerrainSlope(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {

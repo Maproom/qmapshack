@@ -27,7 +27,7 @@ class CMapRMAP : public IMap
 {
     Q_OBJECT
 public:
-    CMapRMAP(const QString& filename, CMapDraw *parent);
+    CMapRMAP(const QString& filename, CMapDraw* parent);
 
     void draw(IDrawContext::buffer_t& buf) override;
 
@@ -55,7 +55,7 @@ private:
     };
 
     bool setProjection(const QString& projection, const QString& datum);
-    level_t& findBestLevel(const QPointF &s);
+    level_t& findBestLevel(const QPointF& s);
 
     QString filename;
 

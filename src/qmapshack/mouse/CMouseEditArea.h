@@ -29,8 +29,8 @@ class CMouseEditArea : public IMouseEditLine
 {
     Q_OBJECT
 public:
-    CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
-    CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
+    CMouseEditArea(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+    CMouseEditArea(CGisItemOvlArea& area, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
     virtual ~CMouseEditArea();
 
 protected slots:
@@ -39,9 +39,9 @@ protected slots:
     void slotCopyToOrig() override;
 
 protected:
-    void drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p) override;
+    void drawLine(const QPolygonF& l, const QColor color, int width, QPainter& p) override;
 
-    IGisLine * getGisLine() const override;
+    IGisLine* getGisLine() const override;
 };
 
 #endif //CMOUSEEDITAREA_H

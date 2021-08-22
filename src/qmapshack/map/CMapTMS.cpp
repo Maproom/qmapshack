@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "gis/proj_x.h"
 #include "helpers/CDraw.h"
 #include "map/cache/CDiskCache.h"
 #include "map/CMapDraw.h"
@@ -30,7 +31,7 @@
 #include <QtXml>
 
 #include <ogr_spatialref.h>
-#include <proj_api.h>
+
 
 inline int lon2tile(double lon, int z)
 {
@@ -53,14 +54,15 @@ inline double tile2lat(int y, int z)
     return 180.0 / M_PI * qAtan(0.5 * (exp(n) - exp(-n)));
 }
 
-CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
+CMapTMS::CMapTMS(const QString& filename, CMapDraw* parent)
     : IMapOnline(parent)
 {
     qDebug() << "------------------------------";
     qDebug() << "TMS: try to open" << filename;
 
-    pjsrc = pj_init_plus("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs");
-    qDebug() << "tms:" << "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs";
+    proj.init("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs", "EPSG:4326");
+
+    qDebug() << "tms:" << proj.getProjSrc();
 
 
     QFile file(filename);
@@ -81,9 +83,9 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     }
     file.close();
 
-    const QDomElement& xmlTms =  dom.firstChildElement("TMS");
-    name        = xmlTms.firstChildElement("Title").text();
-    copyright   = xmlTms.firstChildElement("Copyright").text();
+    const QDomElement& xmlTms = dom.firstChildElement("TMS");
+    name = xmlTms.firstChildElement("Title").text();
+    copyright = xmlTms.firstChildElement("Copyright").text();
 
     if(xmlTms.firstChildElement("MaxZoomLevel").isElement())
     {
@@ -103,8 +105,8 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     {
         const QDomNode& xmlLayer = xmlLayers.item(n);
         int idx = xmlLayer.attributes().namedItem("idx").nodeValue().toInt();
-        layers[idx].strUrl       = xmlLayer.namedItem("ServerUrl").toElement().text();
-        layers[idx].script       = xmlLayer.namedItem("Script").toElement().text();
+        layers[idx].strUrl = xmlLayer.namedItem("ServerUrl").toElement().text();
+        layers[idx].script = xmlLayer.namedItem("Script").toElement().text();
         layers[idx].minZoomLevel = minZoomLevel;
         layers[idx].maxZoomLevel = maxZoomLevel;
 
@@ -134,7 +136,7 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     }
 
     const QDomElement& xmlRawHeader = xmlTms.firstChildElement("RawHeader");
-    const QDomNodeList& xmlValues   = xmlRawHeader.elementsByTagName("Value");
+    const QDomNodeList& xmlValues = xmlRawHeader.elementsByTagName("Value");
     N = xmlValues.count();
     for(qint32 n = 0; n < N; ++n)
     {
@@ -172,9 +174,9 @@ void CMapTMS::getLayers(QListWidget& list) /* override */
     }
 
     int i = 0;
-    for(const layer_t &layer : layers)
+    for(const layer_t& layer : qAsConst(layers))
     {
-        QListWidgetItem * item = new QListWidgetItem(layer.title, &list);
+        QListWidgetItem* item = new QListWidgetItem(layer.title, &list);
         item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
         item->setData(Qt::UserRole, i++);
     }
@@ -225,7 +227,7 @@ void CMapTMS::loadConfig(QSettings& cfg)
 
     // enable layers stored in configuration
     enabled = cfg.value("enabledLayers", enabled).toStringList();
-    for(const QString &str : enabled)
+    for(const QString& str : qAsConst(enabled))
     {
         int idx = str.toInt();
         if(idx < layers.size())
@@ -236,7 +238,7 @@ void CMapTMS::loadConfig(QSettings& cfg)
 }
 
 
-void CMapTMS::slotLayersChanged(QListWidgetItem * item)
+void CMapTMS::slotLayersChanged(QListWidgetItem* item)
 {
     QMutexLocker lock(&mutex);
 
@@ -244,7 +246,7 @@ void CMapTMS::slotLayersChanged(QListWidgetItem * item)
     int idx = item->data(Qt::UserRole).toInt();
     if(idx < 0)
     {
-        QListWidget * list = item->listWidget();
+        QListWidget* list = item->listWidget();
         list->blockSignals(true);
 
         for(int i = 0; i < layers.size(); i++)
@@ -350,22 +352,22 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
     {
         x1 = -180 * DEG_TO_RAD;
     }
-    if(x2 >  180.0 * DEG_TO_RAD)
+    if(x2 > 180.0 * DEG_TO_RAD)
     {
-        x2 =  180 * DEG_TO_RAD;
+        x2 = 180 * DEG_TO_RAD;
     }
 
     // draw layers
-    for(const layer_t &layer : layers)
+    for(const layer_t& layer : qAsConst(layers))
     {
         if(!layer.enabled)
         {
             continue;
         }
 
-        qint32 z    = 20;
-        QPointF s1  = buf.scale * buf.zoomFactor;
-        qreal d     = NOFLOAT;
+        qint32 z = 20;
+        QPointF s1 = buf.scale * buf.zoomFactor;
+        qreal d = NOFLOAT;
 
         for(qint32 i = layer.minZoomLevel; i < 21; i++)
         {

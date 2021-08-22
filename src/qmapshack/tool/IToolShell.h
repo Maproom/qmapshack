@@ -29,10 +29,10 @@ class IToolShell : public QWidget
 {
     Q_OBJECT
 public:
-    IToolShell(QWidget *parent);
+    IToolShell(QWidget* parent);
     virtual ~IToolShell();
 
-    void setTextBrowser(QTextBrowser * textbrowser)
+    void setTextBrowser(QTextBrowser* textbrowser)
     {
         text = textbrowser;
     }

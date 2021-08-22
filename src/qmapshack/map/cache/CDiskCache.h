@@ -30,20 +30,20 @@ class CDiskCache : public QObject
 {
     Q_OBJECT
 public:
-    CDiskCache(const QString& path, qint32 size, qint32 days, QObject *parent);
+    CDiskCache(const QString& path, qint32 size, qint32 days, QObject* parent);
     virtual ~CDiskCache() = default;
 
     void store(const QString& key, QImage& img);
     void restore(const QString& key, QImage& img);
     bool contains(const QString& key) const;
 
-    static void cleanupRemovedMaps(const QSet<QString> &maps);
+    static void cleanupRemovedMaps(const QSet<QString>& maps);
 
 private slots:
     void slotCleanup();
 
 private:
-    void removeCacheFile(const QFileInfo &fileinfo);
+    void removeCacheFile(const QFileInfo& fileinfo);
 
     QDir dir;
 
@@ -55,7 +55,7 @@ private:
     /// hash table to cache loaded images in memory
     QHash<QString, QImage>  cache;
 
-    QTimer * timer;
+    QTimer* timer;
 
     QImage dummy {256, 256, QImage::Format_ARGB32};
 

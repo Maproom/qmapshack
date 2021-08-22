@@ -98,9 +98,9 @@ Var StartMenuFolder
 Section "MSVC++ 2017 Runtime" MSVC
 
   SetOutPath $INSTDIR
-  File Files\VC_redist.x64.exe
-  ExecWait '"$INSTDIR\VC_redist.x64.exe"'
-  Delete "$INSTDIR\VC_redist.x64.exe"
+  File Files\vcredist_x64.exe
+  ExecWait '"$INSTDIR\vcredist_x64.exe"'
+  Delete "$INSTDIR\vcredist_x64.exe"
   
 SectionEnd
 LangString DESC_MSVC ${LANG_ENGLISH} "Microsoft Visual C++ 2017 SP1 Runtime Libraries. Typically already installed on your PC. You only need to install them if it doesn't work without ;-)."
@@ -129,14 +129,15 @@ Section "QMapShack" QMapShack
     File Files\doc\HTML\QMTHelp.qhc
 SetOutPath "$INSTDIR\doc\HTML\.QMSHelp"
     File Files\doc\HTML\.QMSHelp\fts
-SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
-    File Files\doc\HTML\.QMTHelp\fts
+SetOutPath "$INSTDIR\doc\HTML\.QMSHelp"
+    File Files\doc\HTML\.QMSHelp\fts
   ;END QMapShack Files
 
   ;BEGIN Qt Files
   SetOutPath $INSTDIR
     File Files\assistant.exe
     File Files\Qt5Core.dll
+	File Files\Qt5DBus.dll
     File Files\Qt5Gui.dll
     File Files\Qt5Help.dll
     File Files\Qt5Multimedia.dll
@@ -200,24 +201,24 @@ SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
 	File Files\testepsg.exe
   SetOutPath "$INSTDIR\data\"
     File /r Files\data\*.*
-  ;END GDAL and PROJ.4 Files        
+  ;END GDAL and PROJ.4 Files
 
-  ;BEGIN PROJ.4 Files    
+  ;BEGIN PROJ.4 Files
   SetOutPath $INSTDIR
-    File Files\proj_6_3.dll
+    File Files\proj_8_0.dll
     File Files\proj.exe
     File Files\projinfo.exe
     File Files\cct.exe
     File Files\cs2cs.exe
     File Files\geod.exe
-    File Files\gie.exe    
+    File Files\gie.exe
   SetOutPath "$INSTDIR\share\"
     File /r Files\share\*.*
   ;END PROJ.4 Files
 
   ;BEGIN QuaZip Files
   SetOutPath $INSTDIR
-    File Files\quazip5.dll
+    File Files\quazip1-qt5.dll
   ;END QuaZip Files
 
   ;BEGIN zLib Files
@@ -258,9 +259,8 @@ SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
   ;END additional Files
 
   ;BEGIN OpenSSL Files
-    File Files\libcrypto-1_1-x64.dll
-    File Files\libssl-1_1-x64.dll
-    File Files\openssl.exe
+    File Files\ssleay32.dll
+    File Files\libeay32.dll
   ;END OpenSSL Files
 
 

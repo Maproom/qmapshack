@@ -26,7 +26,7 @@ class CMapDraw;
 class CMapJNX : public IMap
 {
 public:
-    CMapJNX(const QString& filename, CMapDraw *parent);
+    CMapJNX(const QString& filename, CMapDraw* parent);
 
     void draw(IDrawContext::buffer_t& buf) override;
 
@@ -52,7 +52,7 @@ private:
         qint32 zorder;       // byte 00000030..00000033
     };
 
-#ifdef WIN32
+#ifdef Q_OS_WIN64
 #pragma pack()
 #else
 #pragma pack(0)

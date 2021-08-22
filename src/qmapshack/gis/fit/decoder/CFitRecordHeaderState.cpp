@@ -32,7 +32,7 @@
  * 1:     local message type
  * 0:     local message type
  */
-static const quint8 fitRecordHeaderDefBit =  ((quint8) 0x40); // bit 6: 0100 0000
+static const quint8 fitRecordHeaderDefBit = ((quint8) 0x40);  // bit 6: 0100 0000
 static const quint8 fitRecordHeaderDevBit = ((quint8) 0x20); // bit 5: 0010 0000
 static const quint8 fitRecordHeaderMesgMask = ((quint8) 0x0F); // bit 0-3: 0000 1111
 
@@ -48,12 +48,12 @@ static const quint8 fitRecordHeaderMesgMask = ((quint8) 0x0F); // bit 0-3: 0000 
  * 1:     time offset
  * 0:     time offset
  */
-static const quint8 fitRecordHeaderTypeBit =  ((quint8) 0x80); // bit 7: 1000 0000
-static const quint8 fitRecordHeaderTimeMesgMask =  ((quint8) 0x60); // bit 5-6: 0110 0000
+static const quint8 fitRecordHeaderTypeBit = ((quint8) 0x80);  // bit 7: 1000 0000
+static const quint8 fitRecordHeaderTimeMesgMask = ((quint8) 0x60);  // bit 5-6: 0110 0000
 static const quint8 fitRecordHeaderTimeMesgShift = 5;
 
 
-decode_state_e CFitRecordHeaderState::process(quint8 &dataByte)
+decode_state_e CFitRecordHeaderState::process(quint8& dataByte)
 {
     if ((dataByte & fitRecordHeaderTypeBit) != 0)
     {

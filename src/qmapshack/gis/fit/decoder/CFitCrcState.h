@@ -25,11 +25,11 @@ class CFitCrcState final : public IFitDecoderState
 {
     Q_DECLARE_TR_FUNCTIONS(CFitCrcState)
 public:
-    CFitCrcState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
+    CFitCrcState(shared_state_data_t& data) : IFitDecoderState(data) { reset(); }
     virtual ~CFitCrcState() {}
 
     void reset() override;
-    decode_state_e process(quint8 &dataByte) override;
+    decode_state_e process(quint8& dataByte) override;
 };
 
 #endif //CFITCRCSTATE_H

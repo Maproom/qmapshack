@@ -30,7 +30,7 @@ class CDemVRT : public IDem
 {
     Q_OBJECT
 public:
-    CDemVRT(const QString& filename, CDemDraw *parent);
+    CDemVRT(const QString& filename, CDemDraw* parent);
     virtual ~CDemVRT();
 
     void draw(IDrawContext::buffer_t& buf) override;
@@ -43,7 +43,7 @@ private:
 
     QString filename;
     /// instance of GDAL dataset
-    GDALDataset * dataset;
+    GDALDataset* dataset;
 
 
     QPointF ref1;

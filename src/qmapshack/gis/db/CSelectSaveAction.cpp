@@ -21,7 +21,7 @@
 #include "gis/IGisItem.h"
 #include "helpers/CProgressDialog.h"
 
-CSelectSaveAction::CSelectSaveAction(const IGisItem *src, const IGisItem *tar, QWidget *parent)
+CSelectSaveAction::CSelectSaveAction(const IGisItem* src, const IGisItem* tar, QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -33,8 +33,8 @@ CSelectSaveAction::CSelectSaveAction(const IGisItem *src, const IGisItem *tar, Q
 
     adjustSize();
 
-    connect(pushSave,  &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
-    connect(pushSkip,  &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
+    connect(pushSave, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
+    connect(pushSkip, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
     connect(pushClone, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectSaveAction");

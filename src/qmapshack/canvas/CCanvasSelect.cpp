@@ -20,14 +20,14 @@
 #include "canvas/CCanvasSelect.h"
 #include "CMainWindow.h"
 
-CCanvasSelect::CCanvasSelect(CCanvas *&canvas, QWidget *parent)
+CCanvasSelect::CCanvasSelect(CCanvas*& canvas, QWidget* parent)
     : QDialog(parent)
     , canvas(canvas)
 {
     setupUi(this);
 
     const QList<CCanvas*>& allCanvas = CMainWindow::self().getCanvas();
-    for(CCanvas * c : allCanvas)
+    for(CCanvas* c : allCanvas)
     {
         comboCanvas->addItem(c->objectName(), QVariant::fromValue<CCanvas*>(c));
     }

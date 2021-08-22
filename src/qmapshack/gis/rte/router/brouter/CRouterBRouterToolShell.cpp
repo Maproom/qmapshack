@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser *textBrowser, QWidget * parent)
+CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser* textBrowser, QWidget* parent)
     : IToolShell(parent)
 {
     setTextBrowser(textBrowser);
@@ -36,7 +36,7 @@ CRouterBRouterToolShell::~CRouterBRouterToolShell()
 {
 }
 
-void CRouterBRouterToolShell::start(const QString &dir, const QString &command, const QStringList &args)
+void CRouterBRouterToolShell::start(const QString& dir, const QString& command, const QStringList& args)
 {
     isBeingKilled = false;
     isStarting = true;
@@ -62,7 +62,7 @@ void CRouterBRouterToolShell::stop()
     }
 }
 
-void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState) const
+void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState)
 {
     if (newState == QProcess::NotRunning && isStarting)
     {
@@ -72,7 +72,7 @@ void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newS
     emit sigProcessStateChanged(newState);
 }
 
-void CRouterBRouterToolShell::slotError(const QProcess::ProcessError error) const
+void CRouterBRouterToolShell::slotError(const QProcess::ProcessError error)
 {
     if (isBeingKilled)
     {

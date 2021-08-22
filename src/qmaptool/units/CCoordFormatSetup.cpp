@@ -19,7 +19,7 @@
 #include "units/CCoordFormatSetup.h"
 #include "units/IUnit.h"
 
-CCoordFormatSetup::CCoordFormatSetup(QWidget * parent)
+CCoordFormatSetup::CCoordFormatSetup(QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);

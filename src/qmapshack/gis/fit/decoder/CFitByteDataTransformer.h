@@ -29,7 +29,7 @@ class CFitByteDataTransformer
 public:
     CFitByteDataTransformer() = delete;
     static quint64 getUIntValue(const CFitBaseType& baseType, quint8* rawData);
-    static qint64 getSIntValue(const CFitBaseType &baseType, quint8 *rawData);
+    static qint64 getSIntValue(const CFitBaseType& baseType, quint8* rawData);
     static qreal getFloatValue(const CFitBaseType& baseType, quint8* rawData);
     /*
      * param rawData: the fit utf-8 string, 0 terminated.

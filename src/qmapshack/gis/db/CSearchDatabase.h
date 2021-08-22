@@ -30,21 +30,21 @@ class CSearchDatabase : public QDialog, private Ui::ISearchDatabase
 {
     Q_OBJECT
 public:
-    CSearchDatabase(IDBFolder& db, CGisListDB * parent);
+    CSearchDatabase(IDBFolder& db, CGisListDB* parent);
     virtual ~CSearchDatabase() = default;
 
-    bool event(QEvent * e) override;
+    bool event(QEvent* e) override;
 
 signals:
-    void sigItemChanged(QTreeWidgetItem * item, int column);
+    void sigItemChanged(QTreeWidgetItem* item, int column);
 
 private slots:
     void slotSearch();
-    void slotItemChanged(QTreeWidgetItem * item, int column);
+    void slotItemChanged(QTreeWidgetItem* item, int column);
 
 private:
-    void addWithParentFolders(QTreeWidget * result, IDBFolder * folder, QMap<quint64, IDBFolder *> &folders, QSqlDatabase &sqlDB);
-    void updateFolder(IDBFolder * folder, CEvtW2DAckInfo * evt);
+    void addWithParentFolders(QTreeWidget* result, IDBFolder* folder, QMap<quint64, IDBFolder*>& folders, QSqlDatabase& sqlDB);
+    void updateFolder(IDBFolder* folder, CEvtW2DAckInfo* evt);
     IDBFolder& dbFolder;
 
     bool internalEdit = false;

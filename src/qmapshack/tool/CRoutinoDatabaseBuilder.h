@@ -28,7 +28,7 @@ class CRoutinoDatabaseBuilder : public IToolShell, private Ui::IRoutinoDatabaseB
 {
     Q_OBJECT
 public:
-    CRoutinoDatabaseBuilder(QWidget * parent);
+    CRoutinoDatabaseBuilder(QWidget* parent);
     virtual ~CRoutinoDatabaseBuilder();
 
 private slots:

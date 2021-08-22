@@ -31,7 +31,7 @@ class CSetupExtTools : public QDialog, private Ui::ISetupExtTools
 {
     Q_OBJECT
 public:
-    CSetupExtTools(QWidget * parent);
+    CSetupExtTools(QWidget* parent);
     virtual ~CSetupExtTools() = default;
 
 private slots:

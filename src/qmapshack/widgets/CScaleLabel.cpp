@@ -26,7 +26,7 @@
 #define HOR_MARGIN 3
 
 
-CScaleLabel::CScaleLabel(QWidget *parent)
+CScaleLabel::CScaleLabel(QWidget* parent)
     : QLabel(parent)
 {
     setScaledContents(true);
@@ -41,7 +41,7 @@ void CScaleLabel::setValue(qreal min, qreal scale, qreal max)
     update();
 }
 
-void CScaleLabel::paintEvent(QPaintEvent *e)
+void CScaleLabel::paintEvent(QPaintEvent* e)
 {
     int w = width();
     int h = height();
@@ -65,7 +65,7 @@ void CScaleLabel::paintEvent(QPaintEvent *e)
     {
         int x1Range = minScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(minScale)) / 5) : bar.left();
         int x2Range = maxScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(maxScale)) / 5) : bar.right();
-        int yRange  = yBar;
+        int yRange = yBar;
 
         QRect range(x1Range, yRange, x2Range - x1Range, BAR_HEIGHT);
         p.setPen(Qt::NoPen);
@@ -74,8 +74,8 @@ void CScaleLabel::paintEvent(QPaintEvent *e)
     }
 
     // draw scale indicator
-    int xInd  = HOR_MARGIN + qRound(bar.width() * (1 + log10(currentScale)) / 5) - 3;
-    int yInd  = yBar - 1;
+    int xInd = HOR_MARGIN + qRound(bar.width() * (1 + log10(currentScale)) / 5) - 3;
+    int yInd = yBar - 1;
 
     QRect ind(xInd, yInd, 5, BAR_HEIGHT + 2);
     p.setPen(Qt::darkBlue);

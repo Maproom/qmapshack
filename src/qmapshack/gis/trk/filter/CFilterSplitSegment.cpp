@@ -21,7 +21,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
 
-CFilterSplitSegment::CFilterSplitSegment(CGisItemTrk &trk, QWidget *parent)
+CFilterSplitSegment::CFilterSplitSegment(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {

@@ -28,7 +28,7 @@ class CFilterTerrainSlope : public QWidget, private Ui::IFilterTerrainSlope
 {
     Q_OBJECT
 public:
-    CFilterTerrainSlope(CGisItemTrk& trk, QWidget * parent);
+    CFilterTerrainSlope(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterTerrainSlope() = default;
 
 private slots:

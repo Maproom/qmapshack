@@ -21,7 +21,8 @@
 
 #include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
-#include <proj_api.h>
+#include "gis/proj_x.h"
+
 #include <QImage>
 #include <QMutex>
 #include <QPointer>
@@ -34,7 +35,7 @@ class IMap : public IDrawObject
 {
     Q_OBJECT
 public:
-    IMap(quint32 features, CMapDraw * parent);
+    IMap(quint32 features, CMapDraw* parent);
     virtual ~IMap();
 
     void saveConfig(QSettings& cfg) override;
@@ -69,7 +70,7 @@ public:
 
        @return A pointer to the widget. Use a smart pointer to store as the widget can be destroyed at any time
      */
-    virtual IMapProp *getSetup();
+    virtual IMapProp* getSetup();
 
     virtual void getInfo(const QPoint&, QString&) {}
 
@@ -203,8 +204,8 @@ public slots:
     }
 
 protected:
-    void convertRad2M(QPointF &p) const;
-    void convertM2Rad(QPointF &p) const;
+    void convertRad2M(QPointF& p) const;
+    void convertM2Rad(QPointF& p) const;
 
     /**
        @brief Detect what reprojection is needed and select the correct handler
@@ -212,7 +213,7 @@ protected:
        This has to be called prior to the loop that calls drawTile();
 
      */
-    void detectTileDrawMode(const IDrawContext::buffer_t &buf);
+    void detectTileDrawMode(const IDrawContext::buffer_t& buf);
 
     /**
        @brief Reproject (translate, rotate, scale) tile before drawing it.
@@ -225,20 +226,13 @@ protected:
 
 protected:
     /// the drawcontext this map belongs to
-    CMapDraw * map;
+    CMapDraw* map;
 
     /**
-        Source projection of the current map file
-        Has to be set by subclass. Destruction has to be
-        handled by subclass.
+        target should always be "EPSG:4326"
+        source will be the map's projection
      */
-    projPJ pjsrc = nullptr;
-
-    /**
-        target projection
-        Is set by IMap() to WGS84. Will be freed by ~IMap()
-     */
-    projPJ pjtar = nullptr;
+    CProj proj;
 
     /**
        @brief True if map was loaded successfully
@@ -251,14 +245,14 @@ protected:
     /// flag field for features defined in features_e
     quint32 flagsFeature;
 
-    bool showPolygons  = true; //< vector maps only: hide/show polygons
+    bool showPolygons = true;  //< vector maps only: hide/show polygons
     bool showPolylines = true; //< vector maps only: hide/show polylines
-    bool showPOIs      = true; //< vector maps only: hide/show point of interest
+    bool showPOIs = true;      //< vector maps only: hide/show point of interest
     qint32 adjustDetailLevel = 0; //< vector maps only: alter threshold to show details.
 
     QString cachePath;            //< streaming map only: path to cached tiles
-    qint32 cacheSizeMB     = 100; //< streaming map only: maximum size of all tiles in cache [MByte]
-    qint32 cacheExpiration =   8; //< streaming map only: maximum age of tiles in cache [days]
+    qint32 cacheSizeMB = 100;     //< streaming map only: maximum size of all tiles in cache [MByte]
+    qint32 cacheExpiration = 8;   //< streaming map only: maximum age of tiles in cache [days]
 
     QString copyright; //< a copyright string to be displayed as tool tip
 

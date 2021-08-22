@@ -38,7 +38,7 @@ class CRouterBRouter : public IRouter, private Ui::IRouterBRouter
 {
     Q_OBJECT
 public:
-    CRouterBRouter(QWidget * parent);
+    CRouterBRouter(QWidget* parent);
     virtual ~CRouterBRouter();
 
     static CRouterBRouter& self()
@@ -62,8 +62,8 @@ private slots:
     void slotRequestFinished(QNetworkReply* reply);
     void slotCloseStatusMsg() const;
     void slotToolProfileInfoClicked() const;
-    void slotDisplayError(const QString &error, const QString &details) const;
-    void slotDisplayProfileInfo(const QString &profile, const QString &content);
+    void slotDisplayError(const QString& error, const QString& details) const;
+    void slotDisplayProfileInfo(const QString& profile, const QString& content);
     void slotToggleBRouter() const;
     void slotToggleConsole() const;
     void slotClearError();
@@ -74,23 +74,23 @@ private:
     void getBRouterVersion();
     bool isMinimumVersion(int major, int minor, int patch) const;
     void updateBRouterStatus() const;
-    int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem *> &nogos, QPolygonF &coords, qreal *costs);
-    QNetworkRequest getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem *> &nogos) const;
+    int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem*>& nogos, QPolygonF& coords, qreal* costs);
+    QNetworkRequest getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem*>& nogos) const;
     QUrl getServiceUrl() const;
 
-    CRouterBRouterLocal * localBRouter;
+    CRouterBRouterLocal* localBRouter;
 
-    QNetworkAccessManager * networkAccessManager;
-    QTimer * timerCloseStatusMsg;
+    QNetworkAccessManager* networkAccessManager;
+    QTimer* timerCloseStatusMsg;
     bool synchronous = false;
     QMutex mutex {QMutex::NonRecursive};
-    CRouterBRouterSetup * setup;
-    CRouterSetup * routerSetup;
-    CRouterBRouterInfo * info;
-    CProgressDialog * progress { nullptr };
+    CRouterBRouterSetup* setup;
+    CRouterSetup* routerSetup;
+    CRouterBRouterInfo* info;
+    CProgressDialog* progress { nullptr };
     bool isShutdown { false };
 
-    static CRouterBRouter * pSelf;
+    static CRouterBRouter* pSelf;
     friend class CRouterBRouterLocal;
 };
 

@@ -28,7 +28,7 @@ class CFilterSubPt2Pt : public QWidget, private Ui::IFilterSubPt2Pt
 {
     Q_OBJECT
 public:
-    CFilterSubPt2Pt(CGisItemTrk& trk, QWidget * parent);
+    CFilterSubPt2Pt(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterSubPt2Pt() = default;
 
 private slots:

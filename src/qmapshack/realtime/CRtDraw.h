@@ -27,7 +27,7 @@ class CCanvas;
 class CRtDraw : public IDrawContext
 {
 public:
-    CRtDraw(CCanvas *parent);
+    CRtDraw(CCanvas* parent);
     virtual ~CRtDraw() = default;
 
     using IDrawContext::draw;

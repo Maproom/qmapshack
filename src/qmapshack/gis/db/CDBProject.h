@@ -42,9 +42,9 @@ public:
         , eActionReload = 0x10
     };
 
-    CDBProject(CGisListWks * parent);
-    CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);
-    CDBProject(const QString &filename, IDBFolder *parentFolder, CGisListWks *parent);
+    CDBProject(CGisListWks* parent);
+    CDBProject(const QString& dbName, quint64 id, CGisListWks* parent);
+    CDBProject(const QString& filename, IDBFolder* parentFolder, CGisListWks* parent);
     CDBProject(CQlgtFolder& folder);
     virtual ~CDBProject();
 
@@ -107,7 +107,7 @@ public:
 
        @param evt   the event sent by the database view
      */
-    void showItems(CEvtD2WShowItems * evt, action_e action2ForAll = eActionNone);
+    void showItems(CEvtD2WShowItems* evt, action_e action2ForAll = eActionNone);
     /**
        @brief Remove items from the project
 
@@ -116,7 +116,7 @@ public:
 
        @param evt   the event sent by the database view
      */
-    void hideItems(CEvtD2WHideItems * evt);
+    void hideItems(CEvtD2WHideItems* evt);
 
     void update();
 
@@ -126,7 +126,7 @@ protected:
 
        @param defaultName
      */
-    void setupName(const QString &defaultName) override;
+    void setupName(const QString& defaultName) override;
 
     /**
      * @brief Save item's data into an existing database entry
@@ -134,18 +134,18 @@ protected:
      * @param item      the item itself
      * @param idItem    the 64bit database key
      */
-    void updateItem(IGisItem *&item, quint64 idItem, action_e& action2ForAll, QSqlQuery& query);
+    void updateItem(IGisItem*& item, quint64 idItem, action_e& action2ForAll, QSqlQuery& query);
 
 
-    action_e checkForAction1(IGisItem * item, quint64 &itemId, CSelectSaveAction::result_e &action1ForAll, QSqlQuery& query);
-    action_e checkForAction2(IGisItem * item, quint64 &itemId, QString &hashItem, action_e &action2ForAll, QSqlQuery& query);
+    action_e checkForAction1(IGisItem* item, quint64& itemId, CSelectSaveAction::result_e& action1ForAll, QSqlQuery& query);
+    action_e checkForAction2(IGisItem* item, quint64& itemId, QString& hashItem, action_e& action2ForAll, QSqlQuery& query);
 
     /**
      * @brief Add item to database
      * @param item      the item itself
      * @return The new 64bit database key
      */
-    quint64 insertItem(IGisItem * item, QSqlQuery& query);
+    quint64 insertItem(IGisItem* item, QSqlQuery& query);
 
     QSqlDatabase db;
     quint64 id = 0;

@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CFilterZeroSpeedDriftCleaner::CFilterZeroSpeedDriftCleaner(CGisItemTrk &trk, QWidget * parent)
+CFilterZeroSpeedDriftCleaner::CFilterZeroSpeedDriftCleaner(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {

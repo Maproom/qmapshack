@@ -25,7 +25,7 @@
 
 #include <QtWidgets>
 
-CLineOpMovePoint::CLineOpMovePoint(SGisLine &points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine *parent)
+CLineOpMovePoint::CLineOpMovePoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent)
     : ILineOp(points, gis, canvas, parent)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorPointMove.png"), 0, 0);
@@ -35,7 +35,7 @@ CLineOpMovePoint::~CLineOpMovePoint()
 {
 }
 
-void CLineOpMovePoint::leftClick(const QPoint &pos)
+void CLineOpMovePoint::leftClick(const QPoint& pos)
 {
     if(movePoint)
     {
@@ -70,7 +70,7 @@ void CLineOpMovePoint::leftClick(const QPoint &pos)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpMovePoint::rightButtonDown(const QPoint &pos)
+void CLineOpMovePoint::rightButtonDown(const QPoint& pos)
 {
     abortStep();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
@@ -86,7 +86,7 @@ bool CLineOpMovePoint::abortStep()
         parentHandler->restoreFromHistory(points);
 
         movePoint = false;
-        idxFocus  = NOIDX;
+        idxFocus = NOIDX;
 
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 
@@ -95,7 +95,7 @@ bool CLineOpMovePoint::abortStep()
     return false;
 }
 
-void CLineOpMovePoint::mouseMove(const QPoint &pos)
+void CLineOpMovePoint::mouseMove(const QPoint& pos)
 {
     ILineOp::mouseMove(pos);
 

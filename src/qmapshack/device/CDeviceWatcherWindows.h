@@ -46,20 +46,20 @@ class CDeviceWatcherWindows : public IDeviceWatcher
 public:
     virtual ~CDeviceWatcherWindows();
 
-    static CDeviceWatcherWindows * self()
+    static CDeviceWatcherWindows* self()
     {
         return pSelf;
     }
 
-    bool event(QEvent * e);
+    bool event(QEvent* e);
 
 private slots:
     void slotUpdate();
 
 private:
     friend class CGisListWks;
-    CDeviceWatcherWindows(CGisListWks *parent);
-    static CDeviceWatcherWindows * pSelf;
+    CDeviceWatcherWindows(CGisListWks* parent);
+    static CDeviceWatcherWindows* pSelf;
 };
 
 #endif //CDEVICEWATCHERWINDOWS_H

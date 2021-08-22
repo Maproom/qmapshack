@@ -67,8 +67,8 @@ protected:
 
 private:
     friend class Ui_IMainWindow;
-    CShell(QWidget * parent);
-    static CShell * pSelf;
+    CShell(QWidget* parent);
+    static CShell* pSelf;
 };
 
 #endif //CSHELL_H

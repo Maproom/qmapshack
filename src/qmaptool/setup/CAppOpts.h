@@ -43,5 +43,5 @@ public:
     }
 };
 
-extern CAppOpts *qlOpts;
+extern CAppOpts* qlOpts;
 #endif                           //CAPPOPTS_H

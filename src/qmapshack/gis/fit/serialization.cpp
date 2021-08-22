@@ -24,7 +24,7 @@
 
 static const qreal degrees = 180.0;
 static const qreal twoPow31 = qPow(2, 31);
-static const uint sec1970to1990 = QDateTime(QDate(1989, 12, 31), QTime(0, 0, 0), Qt::UTC).toTime_t();
+static const uint sec1970to1990 = 631065600;
 
 /**
  * converts the semicircle to the WGS-84 geoids (Degrees Decimal Minutes (DDD MM.MMM)).
@@ -55,7 +55,7 @@ static QString dateTimeAsString(quint32 timestamp)
 }
 
 template<typename T>
-static void readKnownExtensions(T &exts, const CFitMessage &mesg)
+static void readKnownExtensions(T& exts, const CFitMessage& mesg)
 {
     // see gis/trk/CKnownExtension for the keys of the extensions
     if(mesg.isFieldValueValid(eRecordHeartRate))
@@ -70,21 +70,27 @@ static void readKnownExtensions(T &exts, const CFitMessage &mesg)
     {
         exts["gpxtpx:TrackPointExtension|gpxtpx:cad"] = mesg.getFieldValue(eRecordCadence);
     }
+    if(mesg.isFieldValueValid(eRecordPower))
+    {
+        exts["gpxtpx:TrackPointExtension|gpxtpx:power"] = mesg.getFieldValue(eRecordPower);
+    }
     if(mesg.isFieldValueValid(eRecordSpeed))
     {
-        const QVariant &speed = mesg.getFieldValue(eRecordSpeed);
+        const QVariant& speed = mesg.getFieldValue(eRecordSpeed);
         exts["speed"] = speed.toDouble() / 1000.;
     }
 }
 
-static bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
+static bool readFitRecord(const CFitMessage& mesg, IGisItem::wpt_t& pt)
 {
     if(mesg.isFieldValueValid(eRecordPositionLong) && mesg.isFieldValueValid(eRecordPositionLat))
     {
         pt.lon = toDegree(mesg.getFieldValue(eRecordPositionLong).toInt());
         pt.lat = toDegree(mesg.getFieldValue(eRecordPositionLat).toInt());
-        // QVariant.toInt() does not convert double to int but return 0.
-        pt.ele = (int) mesg.getFieldValue(eRecordEnhancedAltitude).toDouble();
+        if(mesg.isFieldValueValid(eRecordEnhancedAltitude))
+        {
+            pt.ele = mesg.getFieldValue(eRecordEnhancedAltitude).toInt();
+        }
         pt.time = toDateTime(mesg.getFieldValue(eRecordTimestamp).toUInt());
 
         readKnownExtensions(pt.extensions, mesg);
@@ -94,9 +100,9 @@ static bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
     return false;
 }
 
-static bool readFitRecord(const CFitMessage &mesg, CTrackData::trkpt_t &pt)
+static bool readFitRecord(const CFitMessage& mesg, CTrackData::trkpt_t& pt)
 {
-    if(readFitRecord(mesg, (IGisItem::wpt_t &)pt))
+    if(readFitRecord(mesg, (IGisItem::wpt_t&)pt))
     {
         pt.speed = mesg.getFieldValue(eRecordSpeed).toDouble();
 
@@ -108,11 +114,11 @@ static bool readFitRecord(const CFitMessage &mesg, CTrackData::trkpt_t &pt)
     return false;
 }
 
-static void readFitLocation(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
+static void readFitLocation(const CFitMessage& mesg, IGisItem::wpt_t& wpt)
 {
     if(mesg.isFieldValueValid(eLocationName))
     {
-        wpt.name =  mesg.getFieldValue(eLocationName).toString();
+        wpt.name = mesg.getFieldValue(eLocationName).toString();
     }
     if(mesg.isFieldValueValid(eLocationTimestamp))
     {
@@ -142,11 +148,11 @@ QString wptIconNames[26] { "Default", "Summit", "Valley", "Water", "Food", "Dang
                            "SlightRight", "SharpRight", "UTurn", "Start", "End" };
 
 
-static void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
+static void readFitCoursePoint(const CFitMessage& mesg, IGisItem::wpt_t& wpt)
 {
     if(mesg.isFieldValueValid(eCoursePointName))
     {
-        wpt.name =  mesg.getFieldValue(eCoursePointName).toString();
+        wpt.name = mesg.getFieldValue(eCoursePointName).toString();
     }
     if(mesg.isFieldValueValid(eCoursePointTimestamp))
     {
@@ -166,13 +172,16 @@ static void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
 }
 
 
-static bool readFitSegmentPoint(const CFitMessage &mesg, CTrackData::trkpt_t &pt, quint32 timeCreated)
+static bool readFitSegmentPoint(const CFitMessage& mesg, CTrackData::trkpt_t& pt, quint32 timeCreated)
 {
     if(mesg.isFieldValueValid(eSegmentPointPositionLong) && mesg.isFieldValueValid(eSegmentPointPositionLat))
     {
         pt.lon = toDegree(mesg.getFieldValue(eSegmentPointPositionLong).toInt());
         pt.lat = toDegree(mesg.getFieldValue(eSegmentPointPositionLat).toInt());
-        pt.ele = (int) mesg.getFieldValue(eSegmentPointAltitude).toDouble();
+        if(mesg.isFieldValueValid(eSegmentPointAltitude))
+        {
+            pt.ele = mesg.getFieldValue(eSegmentPointAltitude).toInt();
+        }
         // sum with file_id time_created
         pt.time = toDateTime(timeCreated + mesg.getFieldValue(eSegmentPointLeaderTime).toUInt());
         return true;
@@ -181,7 +190,7 @@ static bool readFitSegmentPoint(const CFitMessage &mesg, CTrackData::trkpt_t &pt
 }
 
 
-static QString evaluateTrkName(CFitStream &stream)
+static QString evaluateTrkName(CFitStream& stream)
 {
     const CFitMessage& segmentIdMesg = stream.firstMesgOf(eMesgNumSegmentId);
     if(segmentIdMesg.isFieldValueValid(eSegmentIdName))
@@ -217,7 +226,7 @@ static QString evaluateTrkName(CFitStream &stream)
 }
 
 
-void CGisItemTrk::readTrkFromFit(CFitStream &stream)
+void CGisItemTrk::readTrkFromFit(CFitStream& stream)
 {
     trk.name = evaluateTrkName(stream);
 
@@ -246,7 +255,7 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
                 seg.pts.append(std::move(pt));
             }
         }
-        else if(mesg.getGlobalMesgNr() ==  eMesgNumEvent)
+        else if(mesg.getGlobalMesgNr() == eMesgNumEvent)
         {
             if(mesg.getFieldValue(eEventEvent).toUInt() == eEventTimer)
             {
@@ -287,7 +296,7 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
 }
 
 
-void CGisItemWpt::readWptFromFit(CFitStream &stream)
+void CGisItemWpt::readWptFromFit(CFitStream& stream)
 {
     const CFitMessage& mesg = stream.lastMesg();
     if (mesg.getGlobalMesgNr() == eMesgNumLocation)
@@ -301,10 +310,10 @@ void CGisItemWpt::readWptFromFit(CFitStream &stream)
 }
 
 
-void CGisItemRte::readRteFromFit(CFitStream &stream)
+void CGisItemRte::readRteFromFit(CFitStream& stream)
 {
     // a course file could be considered as a route...
-    rte.name =  evaluateTrkName(stream);
+    rte.name = evaluateTrkName(stream);
     stream.reset();
     do
     {

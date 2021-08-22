@@ -22,9 +22,9 @@
 #include "CMainWindow.h"
 #include <QtCore>
 
-CDeviceWatcherWindows * CDeviceWatcherWindows::pSelf = nullptr;
+CDeviceWatcherWindows* CDeviceWatcherWindows::pSelf = nullptr;
 
-CDeviceWatcherWindows::CDeviceWatcherWindows(CGisListWks *parent)
+CDeviceWatcherWindows::CDeviceWatcherWindows(CGisListWks* parent)
     : IDeviceWatcher(parent)
 {
     pSelf = this;
@@ -37,7 +37,7 @@ CDeviceWatcherWindows::~CDeviceWatcherWindows()
 void CDeviceWatcherWindows::slotUpdate()
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    for(const QStorageInfo &storage : QStorageInfo::mountedVolumes())
+    for(const QStorageInfo& storage : QStorageInfo::mountedVolumes())
     {
         if (storage.isValid() && storage.isReady())
         {
@@ -47,11 +47,11 @@ void CDeviceWatcherWindows::slotUpdate()
     QApplication::restoreOverrideCursor();
 }
 
-bool CDeviceWatcherWindows::event(QEvent * e)
+bool CDeviceWatcherWindows::event(QEvent* e)
 {
     if (e->type() == CEventDevice::eEvtDeviceWindows)
     {
-        CEventDevice * evt = (CEventDevice*)e;
+        CEventDevice* evt = (CEventDevice*)e;
         qDebug() << "CDeviceWatcherWindows::event()" << evt->path << evt->add;
 
         if (evt->add)

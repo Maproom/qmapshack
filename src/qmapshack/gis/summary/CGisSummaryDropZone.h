@@ -27,14 +27,14 @@ class CGisSummaryDropZone : public QLabel
 {
     Q_OBJECT
 public:
-    CGisSummaryDropZone(const CGisSummary::dropzone_t& dropZone, QWidget * parent);
+    CGisSummaryDropZone(const CGisSummary::dropzone_t& dropZone, QWidget* parent);
     virtual ~CGisSummaryDropZone() = default;
 
 protected:
-    void dragEnterEvent(QDragEnterEvent *e) override;
-    void dragMoveEvent(QDragMoveEvent *e) override;
-    void dragLeaveEvent(QDragLeaveEvent *e) override;
-    void dropEvent(QDropEvent *e) override;
+    void dragEnterEvent(QDragEnterEvent* e) override;
+    void dragMoveEvent(QDragMoveEvent* e) override;
+    void dragLeaveEvent(QDragLeaveEvent* e) override;
+    void dropEvent(QDropEvent* e) override;
 
 private:
     void setHighlighted(bool yes);

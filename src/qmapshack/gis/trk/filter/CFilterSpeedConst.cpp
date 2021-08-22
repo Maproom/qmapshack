@@ -21,7 +21,7 @@
 
 #include <QtWidgets>
 
-CFilterSpeedConst::CFilterSpeedConst(QWidget *parent)
+CFilterSpeedConst::CFilterSpeedConst(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);

@@ -30,8 +30,8 @@ class CTwoNavProject : public IGisProject
 {
     Q_DECLARE_TR_FUNCTIONS(CTwoNavProject)
 public:
-    CTwoNavProject(const QString &filename, const IGisProject * project, IDevice * parent);
-    CTwoNavProject(const QString &filename, IDevice * parent);
+    CTwoNavProject(const QString& filename, const IGisProject* project, IDevice* parent);
+    CTwoNavProject(const QString& filename, IDevice* parent);
     virtual ~CTwoNavProject();
 
     struct img_t
@@ -72,7 +72,7 @@ public:
 private:
     bool load(const QString& filename);
     bool loadWpts(const QString& filename, const QDir& dir);
-    bool saveWpts(QList<CGisItemWpt *> &wpts, const QString &filename, const QDir& dir);
+    bool saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename, const QDir& dir);
 };
 
 #endif //CTWONAVPROJECT_H

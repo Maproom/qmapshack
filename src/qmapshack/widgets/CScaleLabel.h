@@ -25,13 +25,13 @@ class CScaleLabel : public QLabel
 {
     Q_OBJECT
 public:
-    CScaleLabel(QWidget * parent);
+    CScaleLabel(QWidget* parent);
     virtual ~CScaleLabel() = default;
 
     void setValue(qreal min, qreal scale, qreal max);
 
 protected:
-    void paintEvent(QPaintEvent *e) override;
+    void paintEvent(QPaintEvent* e) override;
 
 private:
     void updatePixmap();

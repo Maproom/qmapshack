@@ -17,14 +17,14 @@
 **********************************************************************************************/
 
 #include "CAbout.h"
+#include "gis/proj_x.h"
 #include "version.h"
 
 #include <gdal.h>
-#include <proj_api.h>
 #include <QtWidgets>
 
 
-CAbout::CAbout(QWidget *parent)
+CAbout::CAbout(QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -40,7 +40,7 @@ CAbout::CAbout(QWidget *parent)
 
     labelQtVersion->setText(qVersion());
     labelGDALVersion->setText(GDALVersionInfo("--version"));
-    labelProj4Version->setText(QString::number(PJ_VERSION));
+    labelProj4Version->setText(proj_info().release);
 }
 
 

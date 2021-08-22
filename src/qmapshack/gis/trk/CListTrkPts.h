@@ -28,21 +28,21 @@ class CListTrkPts : public QWidget, public INotifyTrk, private Ui::IListTrkPts
 {
     Q_OBJECT
 public:
-    CListTrkPts(QWidget * parent);
+    CListTrkPts(QWidget* parent);
     virtual ~CListTrkPts();
 
-    void setTrack(CGisItemTrk * track);
+    void setTrack(CGisItemTrk* track);
 
     void updateData() override;
-    void setMouseFocus(const CTrackData::trkpt_t * pt) override;
-    void setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2) override;
-    void setMouseClickFocus(const CTrackData::trkpt_t * pt) override {}
+    void setMouseFocus(const CTrackData::trkpt_t* pt) override;
+    void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override;
+    void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
 
 private:
     void setMouseFocus(qint32 idx);
-    void addTableRow(bool focus, const CTrackData::trkpt_t& trkpt, bool isInRange, QTextStream &stream);
+    void addTableRow(bool focus, const CTrackData::trkpt_t& trkpt, bool isInRange, QTextStream& stream);
     QString getTh(const QString& str, const QFontMetrics& fm);
-    CGisItemTrk * trk = nullptr;
+    CGisItemTrk* trk = nullptr;
     static constexpr auto maxLines = 5;
     qint32 idxFocus = NOIDX;
 };

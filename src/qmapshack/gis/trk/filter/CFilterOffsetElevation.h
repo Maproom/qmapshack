@@ -28,7 +28,7 @@ class CFilterOffsetElevation : public QWidget, private Ui::IFilterOffsetElevatio
 {
     Q_OBJECT
 public:
-    CFilterOffsetElevation(CGisItemTrk& trk, QWidget * parent);
+    CFilterOffsetElevation(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterOffsetElevation();
 
 private slots:

@@ -25,7 +25,7 @@
 
 #include <QtWidgets>
 
-CDeviceGarminArchive::CDeviceGarminArchive(const QString &path, CDeviceGarmin *parent)
+CDeviceGarminArchive::CDeviceGarminArchive(const QString& path, CDeviceGarmin* parent)
     : IDevice(path, eTypeGarmin, parent->getKey(), parent)
 {
     setText(CGisListWks::eColumnName, tr("Archive - expand to load"));
@@ -35,7 +35,7 @@ CDeviceGarminArchive::CDeviceGarminArchive(const QString &path, CDeviceGarmin *p
 }
 
 
-void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem * item)
+void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem* item)
 {
     if((item != this) || (childCount() != 0))
     {
@@ -48,11 +48,11 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem * item)
     CDeviceMountLock mountLock(*this);
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     qDebug() << "reading files from device: " << dir.path();
-    QStringList entries = dir.entryList(QStringList("*.gpx"));
-    for(const QString &entry : entries)
+    const QStringList& entries = dir.entryList(QStringList("*.gpx"));
+    for(const QString& entry : entries)
     {
         const QString filename = dir.absoluteFilePath(entry);
-        IGisProject * project = new CGpxProject(filename, this);
+        IGisProject* project = new CGpxProject(filename, this);
         if(!project->isValid())
         {
             delete project;
@@ -60,7 +60,7 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem * item)
     }
 }
 
-void CDeviceGarminArchive::slotCollapsed(QTreeWidgetItem * item)
+void CDeviceGarminArchive::slotCollapsed(QTreeWidgetItem* item)
 {
     if((item != this) || (childCount() == 0))
     {

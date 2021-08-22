@@ -25,11 +25,11 @@
 #include <QApplication>
 #include <QtCore>
 
-IDeviceWatcher::IDeviceWatcher(CGisListWks *parent)
+IDeviceWatcher::IDeviceWatcher(CGisListWks* parent)
     : QObject(parent)
     , listWks(parent)
 {
-    QTimer::singleShot(1000, this, SLOT(slotUpdate()));
+    QTimer::singleShot(1000, this, &IDeviceWatcher::slotUpdate);
 }
 
 IDeviceWatcher::~IDeviceWatcher()

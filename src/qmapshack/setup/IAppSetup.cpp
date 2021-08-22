@@ -97,8 +97,8 @@ void IAppSetup::prepareTranslator(QString translationPath, QString translationPr
     }
     qDebug() << "locale" << locale;
 
-    QApplication* app =  (QApplication*) QCoreApplication::instance();
-    QTranslator *qtTranslator = new QTranslator(app);
+    QApplication* app = (QApplication*) QCoreApplication::instance();
+    QTranslator* qtTranslator = new QTranslator(app);
     if (qtTranslator->load(translationPrefix + locale, translationPath))
     {
         app->installTranslator(qtTranslator);
@@ -116,7 +116,7 @@ void IAppSetup::initLogHandler()
     CLogHandler::initLogHandler(logDir(), qlOpts->logfile, qlOpts->debug);
 }
 
-CAppOpts *qlOpts = nullptr;
+CAppOpts* qlOpts = nullptr;
 
 void IAppSetup::processArguments()
 {

@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CExportDatabase::CExportDatabase(quint64 id, QSqlDatabase &db, QWidget *parent)
+CExportDatabase::CExportDatabase(quint64 id, QSqlDatabase& db, QWidget* parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -57,7 +57,7 @@ CExportDatabase::~CExportDatabase()
     cfg.endGroup();
 }
 
-void CExportDatabase::closeEvent(QCloseEvent * e)
+void CExportDatabase::closeEvent(QCloseEvent* e)
 {
     if(thread->isRunning())
     {

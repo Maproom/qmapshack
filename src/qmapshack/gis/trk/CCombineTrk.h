@@ -28,7 +28,7 @@ class CCombineTrk : public QDialog, private Ui::ICombineTrk
 {
     Q_OBJECT
 public:
-    CCombineTrk(const QList<IGisItem::key_t> &keys, const QList<IGisItem::key_t> &keysPreSel, QWidget * parent);
+    CCombineTrk(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t>& keysPreSel, QWidget* parent);
     virtual ~CCombineTrk();
 
 public slots:

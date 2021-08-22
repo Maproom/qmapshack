@@ -29,7 +29,7 @@ class CFilterLoopsCut : public QWidget, private Ui::IFilterLoopsCut
 {
     Q_OBJECT
 public:
-    CFilterLoopsCut(CGisItemTrk& trk, QWidget *parent);
+    CFilterLoopsCut(CGisItemTrk& trk, QWidget* parent);
     virtual ~CFilterLoopsCut();
 
 private slots:

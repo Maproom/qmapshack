@@ -37,15 +37,15 @@ class CGisItemOvlArea : public IGisItem, public IGisLine
 {
     Q_DECLARE_TR_FUNCTIONS(CGisItemOvlArea)
 public:
-    CGisItemOvlArea(const SGisLine& line, const QString &name, IGisProject * project, int idx);
-    CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx, bool clone);
-    CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
-    CGisItemOvlArea(const history_t& hist, const QString& dbHash, IGisProject * project);
-    CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project);
-    CGisItemOvlArea(const IQlgtOverlay& ovl, IGisProject *project = nullptr);
+    CGisItemOvlArea(const SGisLine& line, const QString& name, IGisProject* project, int idx);
+    CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject* project, int idx, bool clone);
+    CGisItemOvlArea(const QDomNode& xml, IGisProject* project);
+    CGisItemOvlArea(const history_t& hist, const QString& dbHash, IGisProject* project);
+    CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject* project);
+    CGisItemOvlArea(const IQlgtOverlay& ovl, IGisProject* project = nullptr);
     virtual ~CGisItemOvlArea();
 
-    IGisItem * createClone() override;
+    IGisItem* createClone() override;
 
     QDataStream& operator<<(QDataStream& stream) override;
     QDataStream& operator>>(QDataStream& stream) const override;
@@ -61,7 +61,7 @@ public:
     }
     QString getInfo(quint32 feature) const override;
     void getPolylineFromData(SGisLine& l) const override;
-    void getPolylineDegFromData(QPolygonF &polygon) const override;
+    void getPolylineDegFromData(QPolygonF& polygon) const override;
 
     const QString& getComment() const override
     {
@@ -107,11 +107,11 @@ public:
     void edit() override;
 
     using IGisItem::drawItem;
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
-    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis) override;
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis) override;
     void drawHighlight(QPainter& p) override;
 
-    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+    IScrOpt* getScreenOptions(const QPoint& origin, IMouse* mouse) override;
     QPointF getPointCloseBy(const QPoint& screenPos) override;
     bool isCloseTo(const QPointF& pos) override;
     bool isWithin(const QRectF& area, selflags_t flags) override;
@@ -128,9 +128,9 @@ public:
 
     const width_t lineWidths[OVL_N_WIDTHS] =
     {
-        {3,  tr("thin")}
-        , {5,  tr("normal")}
-        , {9,  tr("wide")}
+        {3, tr("thin")}
+        , {5, tr("normal")}
+        , {9, tr("wide")}
         , {13, tr("strong")}
     };
 
@@ -185,7 +185,7 @@ private:
     void readArea(const QDomNode& xml, area_t& area);
     void setColor(const QColor& c);
     void setIcon(const QString& c);
-    void readAreaDataFromGisLine(const SGisLine &line);
+    void readAreaDataFromGisLine(const SGisLine& line);
     void deriveSecondaryData();
     QPointF getPolygonCentroid(const QPolygonF& polygon);
 
@@ -194,7 +194,7 @@ private:
 
     static key_t keyUserFocus;
 
-    QPen penForeground {Qt::blue,  3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
     QPen penBackground {Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
 
     /// the track line color

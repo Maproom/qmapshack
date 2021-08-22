@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>CCanvas</name>
     <message>
@@ -84,7 +84,7 @@
         <translation type="vanished">(unbekannt)</translation>
     </message>
     <message>
-        <location filename="../canvas/CDrawContextPixel.cpp" line="74"/>
+        <location filename="../canvas/CDrawContextPixel.cpp" line="84"/>
         <source>Failed to load</source>
         <translation>Не удалось загрузить</translation>
     </message>
@@ -92,7 +92,7 @@
 <context>
     <name>CDrawContextProj</name>
     <message>
-        <location filename="../canvas/CDrawContextProj.cpp" line="72"/>
+        <location filename="../canvas/CDrawContextProj.cpp" line="73"/>
         <source>Failed to load</source>
         <translation>Не удалось загрузить</translation>
     </message>
@@ -100,40 +100,40 @@
 <context>
     <name>CGdalFile</name>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="53"/>
-        <location filename="../helpers/CGdalFile.cpp" line="81"/>
-        <location filename="../helpers/CGdalFile.cpp" line="111"/>
+        <location filename="../helpers/CGdalFile.cpp" line="54"/>
+        <location filename="../helpers/CGdalFile.cpp" line="82"/>
+        <location filename="../helpers/CGdalFile.cpp" line="112"/>
         <source>Error...</source>
         <translation>Ошибка ...</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="53"/>
-        <location filename="../helpers/CGdalFile.cpp" line="81"/>
+        <location filename="../helpers/CGdalFile.cpp" line="54"/>
+        <location filename="../helpers/CGdalFile.cpp" line="82"/>
         <source>Failed to load file: %1</source>
         <translation>Не удалось загрузить файл: %1</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="111"/>
+        <location filename="../helpers/CGdalFile.cpp" line="112"/>
         <source>File must be 8 bit palette or gray indexed.</source>
         <translation>Файл должен иметь 8-битную цветовую палитру или индекс градации серого.</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="196"/>
+        <location filename="../helpers/CGdalFile.cpp" line="222"/>
         <source>(color table)</source>
         <translation>(Farbtabelle)(таблица цветов)</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="200"/>
+        <location filename="../helpers/CGdalFile.cpp" line="226"/>
         <source>(RGB)</source>
         <translation>(RGB)</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="204"/>
+        <location filename="../helpers/CGdalFile.cpp" line="230"/>
         <source>(RGBA)</source>
         <translation>(RGBA)</translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="208"/>
+        <location filename="../helpers/CGdalFile.cpp" line="234"/>
         <source>(unknown)</source>
         <translation>(неизвестно)</translation>
     </message>
@@ -369,22 +369,22 @@ The is also the option to fine tune the reference points in auto-mode. In this m
         <translation>Загрузить опорные точки...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="694"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="692"/>
         <source>Delete all reference points...</source>
         <translation>Удалить все опорные точки...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="694"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="692"/>
         <source>Are you sure to delete all reference points in the list?</source>
         <translation>Вы уверены, что хотите удалить все опорные точки из списка?</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="729"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="727"/>
         <source>Delete...</source>
         <translation>Удалить...</translation>
     </message>
     <message>
-        <location filename="../overlay/COverlayRefMap.cpp" line="729"/>
+        <location filename="../overlay/COverlayRefMap.cpp" line="727"/>
         <source>Delete all selected reference points?</source>
         <translation>Удалить все выделенные опорные точки?</translation>
     </message>
@@ -398,29 +398,52 @@ The is also the option to fine tune the reference points in auto-mode. In this m
     </message>
 </context>
 <context>
-    <name>CProjWizard</name>
+    <name>CProj</name>
     <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="62"/>
-        <source>north</source>
-        <translation>север</translation>
-    </message>
-    <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="63"/>
-        <source>south</source>
-        <translation>юг</translation>
-    </message>
-    <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="227"/>
-        <source>Error...</source>
-        <translation>Ошибка...</translation>
-    </message>
-    <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="227"/>
+        <location filename="../../common/gis/proj_x.cpp" line="184"/>
         <source>The value
 &apos;%1&apos;
 is not a valid coordinate system definition:
 %2</source>
         <translation>Значение
+&quot;%1&quot;
+не является допустимым определением системы координат:
+%2</translation>
+    </message>
+    <message>
+        <location filename="../../common/gis/proj_x.cpp" line="196"/>
+        <source>Lat/Lon projection is not allowed in this case.</source>
+        <translation>В этом случае широта/долгота проекция не допускается.</translation>
+    </message>
+</context>
+<context>
+    <name>CProjWizard</name>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="55"/>
+        <source> (Spheroid: %1)</source>
+        <translation> (Сфероид: %1)</translation>
+    </message>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="70"/>
+        <source>north</source>
+        <translation>север</translation>
+    </message>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="71"/>
+        <source>south</source>
+        <translation>юг</translation>
+    </message>
+    <message>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="215"/>
+        <source>Error...</source>
+        <translation>Ошибка...</translation>
+    </message>
+    <message>
+        <source>The value
+&apos;%1&apos;
+is not a valid coordinate system definition:
+%2</source>
+        <translation type="vanished">Значение
 &quot;%1&quot;
 не является допустимым определением системы координат:
 %2</translation>
@@ -568,17 +591,17 @@ Canceled by user&apos;s request.
         <translation>Добавить цветовую палитру</translation>
     </message>
     <message>
-        <location filename="../tool/CToolPalettize.cpp" line="34"/>
+        <location filename="../tool/CToolPalettize.cpp" line="36"/>
         <source>Usually you use RGBA color while referencing a map because the large color space allows you to scale and rotate the map without any loss of quality. But it results into rather large files. The file size can be optimized by using a color palette instead of the RGBA color space. The impact on quality is low as long as you do not want to scale or rotate the map. If you want to combine files with a color palette all files need to have the same palette.</source>
         <translation>Обычно вы используете цветы RGBA при обращении к карте, поскольку большое цветовое пространство позволяет масштабировать и поворачивать карту без потери качества. Но это приводит к довольно большим файлам. Размер файла можно оптимизировать, используя цветовую палитру вместо цветового пространства RGBA. Влияние на качество будет низким, если вы не хотите масштабировать или поворачивать карту. Если вы хотите объединить файлы с цветовой палитрой, все файлы должны иметь одинаковую палитру.</translation>
     </message>
     <message>
-        <location filename="../tool/CToolPalettize.cpp" line="46"/>
+        <location filename="../tool/CToolPalettize.cpp" line="48"/>
         <source>Note: This tool will use all files in the list as a combined input to derive an optimal palette. This will only work if all files have the same projection and scale.</source>
         <translation>Примечание: Этот инструмент будет использовать все файлы в списке в качестве комбинированного ввода для получения оптимальной палитры. Это будет работать только, если все файлы имеют одинаковую проекцию и масштаб.</translation>
     </message>
     <message>
-        <location filename="../tool/CToolPalettize.cpp" line="109"/>
+        <location filename="../tool/CToolPalettize.cpp" line="116"/>
         <source>Select filename...</source>
         <translation>Выберите имя файла...</translation>
     </message>
@@ -586,12 +609,12 @@ Canceled by user&apos;s request.
 <context>
     <name>CToolRefMap</name>
     <message>
-        <location filename="../tool/CToolRefMap.cpp" line="34"/>
+        <location filename="../tool/CToolRefMap.cpp" line="33"/>
         <source>Reference Map</source>
         <translation>Реферировать карты</translation>
     </message>
     <message>
-        <location filename="../tool/CToolRefMap.cpp" line="36"/>
+        <location filename="../tool/CToolRefMap.cpp" line="35"/>
         <source>A scan of a paper map can be converted to a referenced raster map if you place at least three reference points on the map. The more points the better the result. If your map has a grid you can place points on that grid with the grid tool.</source>
         <translation>Отсканированную бумажную карту можно преобразовать в эталонную растровую карту, указав на ней не менее 3 опорных точек. Чем больше точек вы поставите, тем лучше. Если ваша карта имеет сетку, вы можете использовать инструмент сетки, чтобы разместить точки на сетке.</translation>
     </message>
@@ -1104,8 +1127,12 @@ or
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="316"/>
+        <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;EPSG:...&quot;.</source>
+        <translation>Введите допустимую строку проекции. Допустимыми строками являются &quot;+proj...&quot; или &quot;EPSG:...&quot;.</translation>
+    </message>
+    <message>
         <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;+init=epsg:...&quot;.</source>
-        <translation>Введите правильную проекцию. Допустимые формы &quot;+proj=...&quot; или &quot;+init=...&quot;.</translation>
+        <translation type="vanished">Введите правильную проекцию. Допустимые формы &quot;+proj=...&quot; или &quot;+init=...&quot;.</translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="323"/>
@@ -1416,27 +1443,32 @@ or
         <translation>Создать обзоры для результата.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="176"/>
+        <location filename="../tool/IToolCutMap.ui" line="155"/>
+        <source>GDAL Parameters</source>
+        <translation>Параметры GDAL</translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolCutMap.ui" line="183"/>
         <source>Start</source>
         <translation>Запуск</translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="190"/>
+        <location filename="../tool/IToolCutMap.ui" line="197"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="201"/>
+        <location filename="../tool/IToolCutMap.ui" line="208"/>
         <source>For all files</source>
         <translation>все файлы</translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="226"/>
+        <location filename="../tool/IToolCutMap.ui" line="233"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../tool/IToolCutMap.ui" line="236"/>
+        <location filename="../tool/IToolCutMap.ui" line="243"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
@@ -1576,6 +1608,44 @@ or
     </message>
 </context>
 <context>
+    <name>IToolGDALGroupBox</name>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="14"/>
+        <source>GroupBox</source>
+        <translation>Окно группы</translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="17"/>
+        <source>GDAL Parameters</source>
+        <translation>Параметры GDAL</translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="50"/>
+        <source>Resampling</source>
+        <translation>Ресамплинг</translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="84"/>
+        <source>Compression</source>
+        <translation>Компрессия</translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="118"/>
+        <source>Tiled</source>
+        <translation>Мозаичный</translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="144"/>
+        <source>x</source>
+        <translation>х</translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolGDALGroupBox.ui" line="188"/>
+        <source>Other:</source>
+        <translation>Прочие</translation>
+    </message>
+</context>
+<context>
     <name>IToolGrid</name>
     <message>
         <location filename="../tool/IToolGrid.ui" line="14"/>
@@ -1695,32 +1765,37 @@ or
         <translation>Создать обзоры для результата.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="170"/>
+        <location filename="../tool/IToolPalettize.ui" line="149"/>
+        <source>GDAL Parameter</source>
+        <translation>Параметры GDAL</translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolPalettize.ui" line="177"/>
         <source>Start</source>
         <translation>Запуск</translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="184"/>
+        <location filename="../tool/IToolPalettize.ui" line="191"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="213"/>
+        <location filename="../tool/IToolPalettize.ui" line="220"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="223"/>
+        <location filename="../tool/IToolPalettize.ui" line="230"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="233"/>
+        <location filename="../tool/IToolPalettize.ui" line="240"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_rgb2pct&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_rgb2pct&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../tool/IToolPalettize.ui" line="247"/>
+        <location filename="../tool/IToolPalettize.ui" line="254"/>
         <source>Select filename</source>
         <translation>Выбрать имя файла</translation>
     </message>
@@ -1758,32 +1833,37 @@ or
         <translation>Создать обзоры для результата.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="179"/>
+        <location filename="../tool/IToolRefMap.ui" line="158"/>
+        <source>GDAL Parameters</source>
+        <translation>Параметры GDAL</translation>
+    </message>
+    <message>
+        <location filename="../tool/IToolRefMap.ui" line="186"/>
         <source>Start</source>
         <translation>Запуск</translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="193"/>
+        <location filename="../tool/IToolRefMap.ui" line="200"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="204"/>
+        <location filename="../tool/IToolRefMap.ui" line="211"/>
         <source>For all files</source>
         <translation>все файлы</translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="229"/>
+        <location filename="../tool/IToolRefMap.ui" line="236"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="239"/>
+        <location filename="../tool/IToolRefMap.ui" line="246"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../tool/IToolRefMap.ui" line="249"/>
+        <location filename="../tool/IToolRefMap.ui" line="256"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>

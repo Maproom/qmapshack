@@ -20,12 +20,12 @@
 
 #include <QtWidgets>
 
-CTextEdit::CTextEdit(QWidget *parent)
+CTextEdit::CTextEdit(QWidget* parent)
     : QTextEdit(parent)
 {
 }
 
-void CTextEdit::keyPressEvent(QKeyEvent *event)
+void CTextEdit::keyPressEvent(QKeyEvent* event)
 {
     if(event->matches(QKeySequence::Paste))
     {
@@ -42,7 +42,7 @@ void CTextEdit::paste()
 {
     if(pastePlain)
     {
-        QClipboard *clip = QApplication::clipboard();
+        QClipboard* clip = QApplication::clipboard();
         insertPlainText( clip->text() );
     }
     else

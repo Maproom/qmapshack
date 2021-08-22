@@ -29,7 +29,7 @@ class CMapVRT : public IMap
 {
     Q_OBJECT
 public:
-    CMapVRT(const QString& filename, CMapDraw *parent);
+    CMapVRT(const QString& filename, CMapDraw* parent);
     virtual ~CMapVRT();
 
     void draw(IDrawContext::buffer_t& buf) override;
@@ -43,16 +43,16 @@ private:
     bool testForOverviews(const QString& filename);
     QString filename;
     /// instance of GDAL dataset
-    GDALDataset * dataset;
+    GDALDataset* dataset;
     /// number of color bands used by the *vrt
     int rasterBandCount = 0;
     /// QT representation of the vrt's color table
     QVector<QRgb> colortable;
 
     /// width in number of px
-    quint32 xsize_px = 0;
+    qint32 xsize_px = 0;
     /// height in number of px
-    quint32 ysize_px = 0;
+    qint32 ysize_px = 0;
 
     /// scale [px/m]
     qreal xscale = 0;

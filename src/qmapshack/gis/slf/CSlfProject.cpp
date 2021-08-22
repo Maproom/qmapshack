@@ -23,7 +23,7 @@
 
 #include <QtWidgets>
 
-CSlfProject::CSlfProject(const QString &filename, bool readFile)
+CSlfProject::CSlfProject(const QString& filename, bool readFile)
     : IGisProject(eTypeSlf, filename, (CGisListWks*)nullptr)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/SlfProject.png"));
@@ -36,7 +36,7 @@ CSlfProject::CSlfProject(const QString &filename, bool readFile)
         {
             CSlfReader::readFile(filename, this);
         }
-        catch(QString &errormsg)
+        catch(QString& errormsg)
         {
             QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
                                   tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);

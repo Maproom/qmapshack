@@ -33,7 +33,7 @@ class CMapWMTS : public IMapOnline
 {
     Q_OBJECT
 public:
-    CMapWMTS(const QString& filename, CMapDraw *parent);
+    CMapWMTS(const QString& filename, CMapDraw* parent);
     virtual ~CMapWMTS() {}
 
     void draw(IDrawContext::buffer_t& buf) override;
@@ -44,7 +44,7 @@ public:
     void loadConfig(QSettings& cfg) override;
 
 private slots:
-    void slotLayersChanged(QListWidgetItem * item);
+    void slotLayersChanged(QListWidgetItem* item);
 
 private:
     struct limit_t
@@ -80,18 +80,7 @@ private:
 
     struct tileset_t
     {
-        tileset_t() : pjsrc(0)
-        {
-        }
-        ~tileset_t()
-        {
-            if(pjsrc)
-            {
-                pj_free(pjsrc);
-            }
-        }
-
-        projPJ pjsrc;
+        CProj proj;
         QMap<QString, tilematrix_t> tilematrix;
     };
 

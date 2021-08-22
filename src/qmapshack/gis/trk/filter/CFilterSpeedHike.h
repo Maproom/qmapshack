@@ -46,7 +46,7 @@ public:
         }
     };
 
-    CFilterSpeedHike(QWidget * parent);
+    CFilterSpeedHike(QWidget* parent);
     virtual ~CFilterSpeedHike() = default;
 
     void loadSettings(QSettings& cfg);

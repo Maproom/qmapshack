@@ -27,7 +27,7 @@ class CDeviceWatcherLinux : public IDeviceWatcher
 {
     Q_OBJECT
 public:
-    CDeviceWatcherLinux(CGisListWks *parent);
+    CDeviceWatcherLinux(CGisListWks* parent);
     virtual ~CDeviceWatcherLinux();
 
 private slots:
@@ -37,7 +37,7 @@ private slots:
 
 
 private:
-    QString readMountPoint(const QString &path);
+    QString readMountPoint(const QString& path);
 };
 
 #endif //CDEVICEWATCHERLINUX_H

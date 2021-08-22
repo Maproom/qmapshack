@@ -29,8 +29,8 @@ class CFitProject final : public IGisProject
 {
     Q_DECLARE_TR_FUNCTIONS(CFitProject)
 public:
-    CFitProject(const QString& filename, CGisListWks * parent);
-    CFitProject(const QString& filename, IDevice * parent);
+    CFitProject(const QString& filename, CGisListWks* parent);
+    CFitProject(const QString& filename, IDevice* parent);
     virtual ~CFitProject();
 
 
@@ -51,8 +51,8 @@ public:
 
 
 private:
-    void loadFitFromFile(const QString &filename, bool showErrorMsg);
-    void tryOpeningFitFile(const QString &filename);
+    void loadFitFromFile(const QString& filename, bool showErrorMsg);
+    void tryOpeningFitFile(const QString& filename);
     void createGisItems(QFile& file);
 };
 

@@ -26,7 +26,7 @@ class COverlayRefMapPoint : public QTreeWidgetItem
 {
     Q_DECLARE_TR_FUNCTIONS(COverlayRefMapPoint)
 public:
-    COverlayRefMapPoint(qint32 cnt, const QPointF& ptRef, const QPointF& ptPtx, QTreeWidget * parent);
+    COverlayRefMapPoint(qint32 cnt, const QPointF& ptRef, const QPointF& ptPtx, QTreeWidget* parent);
     virtual ~COverlayRefMapPoint() = default;
 
     enum column_e

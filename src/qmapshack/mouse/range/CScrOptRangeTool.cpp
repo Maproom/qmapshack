@@ -27,7 +27,7 @@
 
 #include <QtWidgets>
 
-CScrOptRangeTool::CScrOptRangeTool(CGisItemTrk& trk, CMouseRangeTrk *mouse, CCanvas *canvas)
+CScrOptRangeTool::CScrOptRangeTool(CGisItemTrk& trk, CMouseRangeTrk* mouse, CCanvas* canvas)
     : IScrOpt(mouse)
     , INotifyTrk(CGisItemTrk::eVisualRangeTool)
     , owner(mouse->objectName())
@@ -57,7 +57,7 @@ CScrOptRangeTool::CScrOptRangeTool(CGisItemTrk& trk, CMouseRangeTrk *mouse, CCan
     plot->setup(trk.getPropertyHandler()->propBySource("ql:ele"));
     plot->updateData();
 
-    QBoxLayout * l = dynamic_cast<QBoxLayout*>(layout());
+    QBoxLayout* l = dynamic_cast<QBoxLayout*>(layout());
     l->insertWidget(0, plot);
 
     canvas->allowShowTrackOverlays(false);
@@ -129,7 +129,7 @@ void CScrOptRangeTool::updateData()
 {
 }
 
-void CScrOptRangeTool::setMouseFocus(const CTrackData::trkpt_t * pt)
+void CScrOptRangeTool::setMouseFocus(const CTrackData::trkpt_t* pt)
 {
     if(pt == nullptr)
     {
@@ -142,7 +142,7 @@ void CScrOptRangeTool::setMouseFocus(const CTrackData::trkpt_t * pt)
     }
 }
 
-void CScrOptRangeTool::setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2)
+void CScrOptRangeTool::setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2)
 {
     canvas->triggerCompleteUpdate(CCanvas::eRedrawMouse);
 
@@ -170,7 +170,7 @@ void CScrOptRangeTool::setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const
     selState = state;
 }
 
-void CScrOptRangeTool::setMouseClickFocus(const CTrackData::trkpt_t * pt)
+void CScrOptRangeTool::setMouseClickFocus(const CTrackData::trkpt_t* pt)
 {
 }
 

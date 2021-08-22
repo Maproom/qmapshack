@@ -30,7 +30,7 @@
 
 #include <QtWidgets>
 
-CScrOptWptRadius::CScrOptWptRadius(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
+CScrOptWptRadius::CScrOptWptRadius(CGisItemWpt* wpt, const QPoint& point, IMouse* parent)
     : IScrOpt(parent)
     , key(wpt->getKey())
 {
@@ -46,7 +46,7 @@ CScrOptWptRadius::CScrOptWptRadius(CGisItemWpt *wpt, const QPoint& point, IMouse
 
     QString val, unit;
     IUnit::self().meter2distance(proximity, val, unit);
-    label->setText(QString("%1%2").arg(val).arg(unit));
+    label->setText(QString("%1%2").arg(val, unit));
 
     adjustSize();
 
@@ -56,8 +56,8 @@ CScrOptWptRadius::CScrOptWptRadius(CGisItemWpt *wpt, const QPoint& point, IMouse
     moveTo(anchor.toPoint());
     show();
 
-    connect(toolDelete,   &QToolButton::clicked, this, &CScrOptWptRadius::slotDelete);
-    connect(toolEdit,     &QToolButton::clicked, this, &CScrOptWptRadius::slotEdit);
+    connect(toolDelete, &QToolButton::clicked, this, &CScrOptWptRadius::slotDelete);
+    connect(toolEdit, &QToolButton::clicked, this, &CScrOptWptRadius::slotEdit);
     connect(toolNogoArea, &QToolButton::clicked, this, &CScrOptWptRadius::slotNogoArea);
 
     adjustSize();
@@ -90,7 +90,7 @@ void CScrOptWptRadius::slotEdit()
 
 void CScrOptWptRadius::draw(QPainter& p)
 {
-    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
+    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         close();

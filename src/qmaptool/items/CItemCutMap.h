@@ -26,7 +26,7 @@ class COverlayCutMap;
 class CItemCutMap : public CItemFile
 {
 public:
-    CItemCutMap(const QString& filename, QStackedWidget * stackedWidget, QListWidget *parent);
+    CItemCutMap(const QString& filename, QStackedWidget* stackedWidget, QListWidget* parent);
     virtual ~CItemCutMap();
 
     void saveSettings(QSettings& cfg) override;
@@ -35,9 +35,9 @@ public:
     void toFront() override;
 
     bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
-    void mouseMoveEventFx(QMouseEvent *e) override;
-    void mouseReleaseEventFx(QMouseEvent *e) override;
-    void leaveEventFx(QEvent *e) override;
+    void mouseMoveEventFx(QMouseEvent* e) override;
+    void mouseReleaseEventFx(QMouseEvent* e) override;
+    void leaveEventFx(QEvent* e) override;
     QCursor getCursorFx() override;
 
     void saveShape(const QString& filename) const;
@@ -45,7 +45,7 @@ public:
     bool isOk() const override;
 
 private:
-    COverlayCutMap * overlay;
+    COverlayCutMap* overlay;
 };
 
 #endif //CITEMCUTMAP_H

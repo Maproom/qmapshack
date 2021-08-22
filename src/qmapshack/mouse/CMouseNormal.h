@@ -26,6 +26,7 @@
 #include <QPixmap>
 #include <QPointer>
 #include <QRect>
+#include <QSet>
 #include <QStringList>
 
 class CCanvas;
@@ -37,10 +38,10 @@ class CMouseNormal : public IMouse
 {
     Q_OBJECT
 public:
-    CMouseNormal(CGisDraw * gis, CCanvas *canvas, CMouseAdapter *mouse);
+    CMouseNormal(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
     virtual ~CMouseNormal();
 
-    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
     void unfocus() override;
     void leftClicked(const QPoint& point) override;
@@ -48,11 +49,11 @@ public:
     void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
     void rightButtonDown(const QPoint& point) override;
     void longPress(const QPoint& point) override;
-    void doubleClicked(const QPoint & point) override;
+    void doubleClicked(const QPoint& point) override;
     void scaleChanged() override;
 
 private slots:
-    void slotAddPoi()           const;
+    void slotAddPoi(const poi_t& poi)           const;
     void slotAddWpt()           const;
     void slotAddTrk()           const;
     void slotAddRte()           const;
@@ -63,9 +64,9 @@ private slots:
     void slotCopyPositionGrid() const;
 
 private:
-    bool setScreenOption(const QPoint& pt, IGisItem * item);
-    void scrollToItem(IGisItem * item);
-    void showContextMenu(const QPoint &point);
+    bool setScreenOption(const QPoint& pt, IGisItem* item);
+    void scrollToItem(IGisItem* item);
+    void showContextMenu(const QPoint& point);
 
 protected:
     void stopTracking() const;
@@ -83,10 +84,13 @@ protected:
 
     item_selection_states_e stateItemSel = eStateIdle;
 
-    CScrOptUnclutter * screenUnclutter;
+    CScrOptUnclutter* screenUnclutter;
     QPointer<IScrOpt>  screenItemOption;
 
-    poi_t curPOI;
+    QSet<poi_t> curPois;
+    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+    /// Thus the location where to draw the highlight is separately given
+    QList<QPointF> posPoiHighlight;
 };
 
 #endif //CMOUSENORMAL_H

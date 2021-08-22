@@ -30,14 +30,14 @@ class CSetupWorkspace : public QDialog, private Ui::ISetupWorkspace
 {
     Q_OBJECT
 public:
-    CSetupWorkspace(CGisWorkspace *workspace, QWidget * parent);
+    CSetupWorkspace(CGisWorkspace* workspace, QWidget* parent);
     virtual ~CSetupWorkspace();
 
 public slots:
     void accept() override;
 
 private:
-    CGisWorkspace * workspace;
+    CGisWorkspace* workspace;
 };
 
 #endif //CSETUPWORKSPACE_H

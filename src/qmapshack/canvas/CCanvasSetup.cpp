@@ -20,7 +20,7 @@
 #include "canvas/CCanvasSetup.h"
 #include "grid/CProjWizard.h"
 
-CCanvasSetup::CCanvasSetup(CCanvas * canvas)
+CCanvasSetup::CCanvasSetup(CCanvas* canvas)
     : QDialog(canvas)
     , canvas(canvas)
 {

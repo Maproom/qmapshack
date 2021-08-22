@@ -27,7 +27,7 @@ class CAbout : public QDialog, private Ui::IAbout
 {
     Q_OBJECT
 public:
-    CAbout(QWidget * parent);
+    CAbout(QWidget* parent);
     virtual ~CAbout() = default;
 };
 

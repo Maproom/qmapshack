@@ -25,7 +25,7 @@
 
 #include <QtWidgets>
 
-CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky &source, QWidget *parent)
+CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky& source, QWidget* parent)
     : IRtInfo(&source, parent)
 {
     setupUi(this);
@@ -54,8 +54,8 @@ void CRtOpenSkyInfo::saveSettings(QSettings& cfg) const
 
 void CRtOpenSkyInfo::slotUpdate()
 {
-    CRtOpenSky * _source = dynamic_cast<CRtOpenSky*>(source.data());
-    CRtOpenSkyRecord * _record = dynamic_cast<CRtOpenSkyRecord*>(record.data());
+    CRtOpenSky* _source = dynamic_cast<CRtOpenSky*>(source.data());
+    CRtOpenSkyRecord* _record = dynamic_cast<CRtOpenSkyRecord*>(record.data());
 
     checkShowNames->setChecked(_source->getShowNames());
     labelTimestamp->setText(_source->getTimestamp().toString());

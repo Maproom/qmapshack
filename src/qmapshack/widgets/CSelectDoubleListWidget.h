@@ -29,25 +29,25 @@ public:
     class IItemFilter
     {
 public:
-        virtual bool shouldBeMoved(QListWidgetItem * item) = 0;
+        virtual bool shouldBeMoved(QListWidgetItem* item) = 0;
     };
 
-    CSelectDoubleListWidget(QWidget *parent, IItemFilter *filter = nullptr);
+    CSelectDoubleListWidget(QWidget* parent, IItemFilter* filter = nullptr);
     virtual ~CSelectDoubleListWidget();
 
-    void setAvailable(const QList<QListWidgetItem *> &available);
-    void setSelected(const QList<QListWidgetItem *> &selected) const;
-    void setLabelAvailable(const QString & label) const;
-    void setLabelSelected(const QString & label) const;
-    void setFilter(IItemFilter * const &filter);
-    const QList<QListWidgetItem *> selected() const;
+    void setAvailable(const QList<QListWidgetItem*>& available);
+    void setSelected(const QList<QListWidgetItem*>& selected) const;
+    void setLabelAvailable(const QString& label) const;
+    void setLabelSelected(const QString& label) const;
+    void setFilter(IItemFilter* const& filter);
+    const QList<QListWidgetItem*> selected() const;
     void clear();
 
     void sortAvailable();
 
 private slots:
-    void slotSelectedClicked(const QModelIndex & index) const;
-    void slotAvailableClicked(const QModelIndex & index) const;
+    void slotSelectedClicked(const QModelIndex& index) const;
+    void slotAvailableClicked(const QModelIndex& index) const;
     void slotAdd() const;
     void slotRemove() const;
     void slotUp() const;
@@ -56,7 +56,7 @@ private slots:
 private:
     void updateButtons() const;
 
-    QList<QListWidgetItem *> available;
-    IItemFilter * filter;
+    QList<QListWidgetItem*> available;
+    IItemFilter* filter;
 };
 #endif //CSELECTDOUBLELISTWIDGET_H

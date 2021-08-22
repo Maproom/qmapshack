@@ -26,7 +26,7 @@ class CElevationDialog : public QDialog, private Ui::IElevationDialog
 {
     Q_OBJECT
 public:
-    CElevationDialog(QWidget * parent, QVariant &val, const QVariant &reset, const QPointF& pos);
+    CElevationDialog(QWidget* parent, QVariant& val, const QVariant& reset, const QPointF& pos);
     virtual ~CElevationDialog();
 
 public slots:

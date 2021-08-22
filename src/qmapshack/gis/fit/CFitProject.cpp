@@ -29,13 +29,13 @@
 
 #include <QtWidgets>
 
-CFitProject::CFitProject(const QString &filename, CGisListWks *parent)
+CFitProject::CFitProject(const QString& filename, CGisListWks* parent)
     : IGisProject(eTypeFit, filename, parent)
 {
     loadFitFromFile(filename, true);
 }
 
-CFitProject::CFitProject(const QString &filename, IDevice *parent)
+CFitProject::CFitProject(const QString& filename, IDevice* parent)
     : IGisProject(eTypeFit, filename, parent)
 {
     // this constructor is used when opening files from the garmin device.
@@ -45,7 +45,7 @@ CFitProject::CFitProject(const QString &filename, IDevice *parent)
 }
 
 
-void CFitProject::loadFitFromFile(const QString &filename, bool showErrorMsg)
+void CFitProject::loadFitFromFile(const QString& filename, bool showErrorMsg)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/FitProject.png"));
     blockUpdateItems(true);
@@ -53,7 +53,7 @@ void CFitProject::loadFitFromFile(const QString &filename, bool showErrorMsg)
     {
         tryOpeningFitFile(filename);
     }
-    catch(QString &errormsg)
+    catch(QString& errormsg)
     {
         if(showErrorMsg)
         {
@@ -72,7 +72,7 @@ void CFitProject::loadFitFromFile(const QString &filename, bool showErrorMsg)
 }
 
 
-void CFitProject::tryOpeningFitFile(const QString &filename)
+void CFitProject::tryOpeningFitFile(const QString& filename)
 {
     // create file instance
     QFile file(filename);
@@ -131,7 +131,7 @@ void CFitProject::createGisItems(QFile& file)
     // new CGisItemRte(in, this);
 
     // Locations file containing waypoints
-    if (mesg.getFieldValue(eFileIdType).toUInt() ==  eFileLocation)
+    if (mesg.getFieldValue(eFileIdType).toUInt() == eFileLocation)
     {
         while(in.nextMesgOf(eMesgNumLocation).isValid())
         {

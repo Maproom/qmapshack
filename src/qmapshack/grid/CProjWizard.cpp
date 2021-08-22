@@ -18,9 +18,9 @@
 
 #include "CMainWindow.h"
 #include "CProjWizard.h"
+#include "gis/proj_x.h"
 #include "grid/mitab.h"
 
-#include <proj_api.h>
 #include <QtWidgets>
 
 struct mitab_entry_t
@@ -29,32 +29,40 @@ struct mitab_entry_t
     int idx;
 };
 
-static bool mitabLessThan(const mitab_entry_t &s1, const mitab_entry_t &s2)
+static bool mitabLessThan(const mitab_entry_t& s1, const mitab_entry_t& s2)
 {
     return s1.name < s2.name;
 }
 
-CProjWizard::CProjWizard(QLineEdit &line)
+CProjWizard::CProjWizard(QLineEdit& line)
     : QDialog(CMainWindow::getBestWidgetForParent())
     , line(line)
 {
     setupUi(this);
     QList<mitab_entry_t> list;
     int idx = 0;
-    const MapInfoDatumInfo * di = asDatumInfoListQL;
 
-    while(di->nMapInfoDatumID != -1)
+    for(const MapInfoDatumInfo& di : asDatumInfoList)
     {
         mitab_entry_t entry;
-        entry.name  = di->pszOGCDatumName;
-        entry.idx   = idx;
+        entry.name = di.pszOGCDatumName;
+        if(!entry.name.isEmpty())
+        {
+            for(const MapInfoSpheroidInfo& si : asSpheroidInfoList)
+            {
+                if(si.nMapInfoId == di.nEllipsoid)
+                {
+                    entry.name += tr(" (Spheroid: %1)").arg(si.pszMapinfoName);
+                }
+            }
+        }
+        entry.idx = idx;
         list << entry;
-        ++di;
         ++idx;
     }
     qSort(list.begin(), list.end(), mitabLessThan);
 
-    for(const mitab_entry_t &entry : list)
+    for(const mitab_entry_t& entry : qAsConst(list))
     {
         comboDatum->addItem(entry.name, entry.idx);
     }
@@ -62,17 +70,17 @@ CProjWizard::CProjWizard(QLineEdit &line)
     comboHemisphere->addItem(tr("north"), "");
     comboHemisphere->addItem(tr("south"), "+south");
 
-    connect(radioMercator,      &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(radioWorldMercator, &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(radioUPSNorth,      &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(radioUPSSouth,      &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(radioUTM,           &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(radioUserDef,       &QRadioButton::clicked,  this, &CProjWizard::slotChange);
-    connect(lineUserDef,        &QLineEdit::textChanged, this, &CProjWizard::slotChange);
+    connect(radioMercator, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(radioWorldMercator, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(radioUPSNorth, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(radioUPSSouth, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(radioUTM, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(radioUserDef, &QRadioButton::clicked, this, &CProjWizard::slotChange);
+    connect(lineUserDef, &QLineEdit::textChanged, this, &CProjWizard::slotChange);
 
-    connect(spinUTMZone,        static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged),         this, &CProjWizard::slotChange);
-    connect(comboDatum,         static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CProjWizard::slotChange);
-    connect(comboHemisphere,    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CProjWizard::slotChange);
+    connect(spinUTMZone, static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), this, &CProjWizard::slotChange);
+    connect(comboDatum, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CProjWizard::slotChange);
+    connect(comboHemisphere, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CProjWizard::slotChange);
 
     QString projstr = line.text();
     QRegExp re2("\\s*\\+proj=merc \\+a=6378137 \\+b=6378137 \\+lat_ts=0.001 \\+lon_0=0.0 \\+x_0=0.0 \\+y_0=0 \\+k=1.0 \\+units=m \\+nadgrids=@null \\+no_defs");
@@ -114,37 +122,28 @@ CProjWizard::~CProjWizard()
 void CProjWizard::findDatum(const QString& str)
 {
     QString cmp;
-    int idx = 0;
-    const MapInfoDatumInfo * di   = asDatumInfoListQL;
-
-    while(di->nMapInfoDatumID != -1)
+    for(const MapInfoDatumInfo& di : asDatumInfoList)
     {
         cmp.clear();
-        if(di->pszOGCDatumName != QString())
+        if(di.pszOGCDatumName != QString())
         {
-            const MapInfoSpheroidInfo * si = asSpheroidInfoList;
-            while(si->nMapInfoId != -1)
+            for(const MapInfoSpheroidInfo& si : asSpheroidInfoList)
             {
-                if(si->nMapInfoId == di->nEllipsoid)
+                if(si.nMapInfoId == di.nEllipsoid)
                 {
+                    cmp += QString("+a=%1 +b=%2 ").arg(si.dfA, 0, 'f', 4).arg(si.dfA * (1.0 - (1.0 / si.dfInvFlattening)), 0, 'f', 4);
+                    cmp += QString("+towgs84=%1,%2,%3,%4,%5,%6,%7 ").arg(di.dfShiftX).arg(di.dfShiftY).arg(di.dfShiftZ).arg(di.dfDatumParm0).arg(di.dfDatumParm1).arg(di.dfDatumParm2).arg(di.dfDatumParm3);
+                    cmp += "+units=m  +no_defs";
                     break;
                 }
-                ++si;
             }
-
-            cmp += QString("+a=%1 +b=%2 ").arg(si->dfA, 0, 'f', 4).arg(si->dfA * (1.0 - (1.0 / si->dfInvFlattening)), 0, 'f', 4);
-            cmp += QString("+towgs84=%1,%2,%3,%4,%5,%6,%7,%8 ").arg(di->dfShiftX).arg(di->dfShiftY).arg(di->dfShiftZ).arg(di->dfDatumParm0).arg(di->dfDatumParm1).arg(di->dfDatumParm2).arg(di->dfDatumParm3).arg(di->dfDatumParm4);
-            cmp += "+units=m  +no_defs";
         }
 
         if(cmp == str)
         {
-            comboDatum->setCurrentIndex(comboDatum->findText(di->pszOGCDatumName));
+            comboDatum->setCurrentIndex(comboDatum->findText(di.pszOGCDatumName));
             break;
         }
-
-        ++di;
-        ++idx;
     }
 }
 
@@ -164,11 +163,11 @@ void CProjWizard::slotChange()
     }
     else if(radioUPSNorth->isChecked())
     {
-        str += "+init=epsg:32661";
+        str += "EPSG:32661";
     }
     else if(radioUPSSouth->isChecked())
     {
-        str += "+init=epsg:32761";
+        str += "EPSG:32761";
     }
     else if(radioUTM->isChecked())
     {
@@ -180,22 +179,19 @@ void CProjWizard::slotChange()
     }
 
     int idx = comboDatum->itemData(comboDatum->currentIndex()).toInt();
-    const MapInfoDatumInfo di = asDatumInfoListQL[idx];
+    const MapInfoDatumInfo& di = asDatumInfoList[idx];
     if(di.pszOGCDatumName != QString())
     {
-        const MapInfoSpheroidInfo * si = asSpheroidInfoList;
-        while(si->nMapInfoId != -1)
+        for(const MapInfoSpheroidInfo& si : asSpheroidInfoList)
         {
-            if(si->nMapInfoId == di.nEllipsoid)
+            if(si.nMapInfoId == di.nEllipsoid)
             {
+                str += QString("+a=%1 +b=%2 ").arg(si.dfA, 0, 'f', 4).arg(si.dfA * (1.0 - (1.0 / si.dfInvFlattening)), 0, 'f', 4);
+                str += QString("+towgs84=%1,%2,%3,%4,%5,%6,%7 ").arg(di.dfShiftX).arg(di.dfShiftY).arg(di.dfShiftZ).arg(di.dfDatumParm0).arg(di.dfDatumParm1).arg(di.dfDatumParm2).arg(di.dfDatumParm3);
+                str += "+units=m  +no_defs";
                 break;
             }
-            ++si;
         }
-
-        str += QString("+a=%1 +b=%2 ").arg(si->dfA, 0, 'f', 4).arg(si->dfA * (1.0 - (1.0 / si->dfInvFlattening)), 0, 'f', 4);
-        str += QString("+towgs84=%1,%2,%3,%4,%5,%6,%7,%8 ").arg(di.dfShiftX).arg(di.dfShiftY).arg(di.dfShiftZ).arg(di.dfDatumParm0).arg(di.dfDatumParm1).arg(di.dfDatumParm2).arg(di.dfDatumParm3).arg(di.dfDatumParm4);
-        str += "+units=m  +no_defs";
     }
 
     labelResult->setText(str);
@@ -215,25 +211,9 @@ void CProjWizard::accept()
 
 bool CProjWizard::validProjStr(const QString projStr, bool allowLonLatToo)
 {
-    projPJ projCheck = pj_init_plus(projStr.toUtf8().data());
-
-    if (!projCheck)
-    {   /* For some reason pj_errno does not work as expected in some versions of Visual Studio, so using pj_get_errno_ref instead */
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("The value\n'%1'\nis not a valid coordinate system definition:\n%2").arg(projStr).arg(pj_strerrno(*pj_get_errno_ref())), QMessageBox::Abort, QMessageBox::Abort);
-        return false;
-    }
-    else
-    {
-        bool res = true;
-        if(!allowLonLatToo && pj_is_latlong(projCheck))
-        {
-            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Lat/Lon projection is not allowed in this case."), QMessageBox::Abort, QMessageBox::Abort);
-            res = false;
-        }
-
-        pj_free(projCheck);
-        return res;
-    }
+    return CProj::validProjStr(projStr, allowLonLatToo, [](const QString& msg){
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), msg, QMessageBox::Abort, QMessageBox::Abort);
+    });
 }
 
 

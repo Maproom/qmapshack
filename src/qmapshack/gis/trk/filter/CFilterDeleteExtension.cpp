@@ -23,7 +23,7 @@
 
 
 
-CFilterDeleteExtension::CFilterDeleteExtension(CGisItemTrk &trk, QWidget *parent)
+CFilterDeleteExtension::CFilterDeleteExtension(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent)
     , trk(trk)
 {
@@ -38,9 +38,10 @@ void CFilterDeleteExtension::updateUi()
 {
     comboExtensions->clear();
 
-    for(const QString &key : trk.getExistingDataSources())
+    const QStringList& keys = trk.getExistingDataSources();
+    for(const QString& key : keys)
     {
-        const CKnownExtension &ext = CKnownExtension::get(key);
+        const CKnownExtension& ext = CKnownExtension::get(key);
         if(!ext.derivedQMS)
         {
             QIcon icon(ext.icon);

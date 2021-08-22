@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-CDetailsRte::CDetailsRte(CGisItemRte& rte, QWidget *parent)
+CDetailsRte::CDetailsRte(CGisItemRte& rte, QWidget* parent)
     : QDialog(parent)
     , rte(rte)
 {
@@ -37,10 +37,10 @@ CDetailsRte::CDetailsRte(CGisItemRte& rte, QWidget *parent)
         toolLock->setDisabled(true);
     }
 
-    connect(lineName,    &CLineEdit::textEdited,          this, &CDetailsRte::slotNameChanged);
-    connect(lineName,    &CLineEdit::editingFinished,     this, &CDetailsRte::slotNameChangeFinished);
-    connect(toolLock,    &QToolButton::toggled,           this, &CDetailsRte::slotChangeReadOnlyMode);
-    connect(textCmtDesc, &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsRte::*)(const QUrl&)>(&CDetailsRte::slotLinkActivated));
+    connect(lineName, &CLineEdit::textEdited, this, &CDetailsRte::slotNameChanged);
+    connect(lineName, &CLineEdit::editingFinished, this, &CDetailsRte::slotNameChangeFinished);
+    connect(toolLock, &QToolButton::toggled, this, &CDetailsRte::slotChangeReadOnlyMode);
+    connect(textCmtDesc, &QTextBrowser::anchorClicked, this, static_cast<void (CDetailsRte::*)(const QUrl&)>(&CDetailsRte::slotLinkActivated));
     connect(listHistory, &CHistoryListWidget::sigChanged, this, &CDetailsRte::setupGui);
 }
 
@@ -89,7 +89,7 @@ void CDetailsRte::setupGui()
 //            QTreeWidgetItem * item = new QTreeWidgetItem(treeWidget);
 
 //            IUnit::self().meter2distance(subpt.distance, val, unit);
-//            QString str = QString("Time: %1 Dist.: %2 %3").arg(subpt.time.toString()).arg(val).arg(unit);
+//            QString str = QString("Time: %1 Dist.: %2 %3").arg(subpt.time.toString()).arg(val, unit);
 //            str += "\n" + subpt.instruction;
 
 //            item->setText(0,str);
@@ -108,7 +108,7 @@ void CDetailsRte::slotChangeReadOnlyMode(bool on)
     setupGui();
 }
 
-void CDetailsRte::slotNameChanged(const QString &name)
+void CDetailsRte::slotNameChanged(const QString& name)
 {
     setWindowTitle(name);
 }

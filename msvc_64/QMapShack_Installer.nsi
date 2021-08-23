@@ -129,8 +129,8 @@ Section "QMapShack" QMapShack
     File Files\doc\HTML\QMTHelp.qhc
 SetOutPath "$INSTDIR\doc\HTML\.QMSHelp"
     File Files\doc\HTML\.QMSHelp\fts
-SetOutPath "$INSTDIR\doc\HTML\.QMSHelp"
-    File Files\doc\HTML\.QMSHelp\fts
+SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
+    File Files\doc\HTML\.QMTHelp\fts
   ;END QMapShack Files
 
   ;BEGIN Qt Files
@@ -259,8 +259,8 @@ SetOutPath "$INSTDIR\doc\HTML\.QMSHelp"
   ;END additional Files
 
   ;BEGIN OpenSSL Files
-    File Files\ssleay32.dll
-    File Files\libeay32.dll
+    File Files\libcrypto-1_1-x64.dll
+    File Files\libssl-1_1-x64.dll
   ;END OpenSSL Files
 
 

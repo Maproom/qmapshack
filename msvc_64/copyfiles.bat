@@ -128,11 +128,10 @@ copy %QMSI_SQLI_PATH%\sqldiff.exe
 copy %QMSI_SQLI_PATH%\sqlite3.exe
 copy %QMSI_SQLI_PATH%\sqlite3_analyzer.exe
 rem uncomment the following line if you want OpenSSL
-rem copy %QMSI_OSSL_PATH%\libcrypto-1_1-x64.dll
-rem copy %QMSI_OSSL_PATH%\libssl-1_1-x64.dll
+copy %QMSI_OSSL_PATH%\libcrypto-1_1-x64.dll
+copy %QMSI_OSSL_PATH%\libssl-1_1-x64.dll
 rem copy %QMSI_OSSL_PATH%\openssl.exe
-copy %QMSI_OSSL_PATH%\libeay32.dll
-copy %QMSI_OSSL_PATH%\ssleay32.dll
+
 
 
 rem section 2.3) Copy MSVC Redist Files

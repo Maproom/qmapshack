@@ -6,6 +6,7 @@ V1.XX.X
 [QMS-414] Last point information not fully displayed in the range tool window
 [QMS-421] Change of map view name is not taken into account in POI tab
 [QMS-427] Adding new map paths is broken
+[QMS-436] Store/restore name of map view  
 
 
 V1.16.0

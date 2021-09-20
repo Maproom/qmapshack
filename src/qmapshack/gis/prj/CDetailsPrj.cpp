@@ -522,7 +522,8 @@ void CDetailsPrj::drawByGroup(QTextCursor& cursor,
 
     if(!trks.isEmpty())
     {
-        cursor.insertHtml(tr("<h2>Tracks</h2>"));
+        QString htmlStr = QString("<h2>%1 ").arg(trks.count()) + tr("Tracks</h2>");
+        cursor.insertHtml(htmlStr);
         QTextTable* table = cursor.insertTable(trks.count() + 1, eMax1, fmtTableStandard);
 
         table->cellAt(0, eSym1).setFormat(fmtCharHeader);

@@ -496,7 +496,7 @@ void CDetailsPrj::drawByGroup(QTextCursor& cursor,
 
     if(!wpts.isEmpty())
     {
-        QString htmlStr = QString("<h2>%1 ").arg(wpts.count()) + tr("Waypoints</h2>");
+        const QString& htmlStr = QString("<h2>%1 %2</h2>").arg(wpts.count()).arg(tr("Waypoints"));
         cursor.insertHtml(htmlStr);
         QTextTable* table = cursor.insertTable(wpts.count() + 1, eMax1, fmtTableStandard);
 
@@ -523,7 +523,7 @@ void CDetailsPrj::drawByGroup(QTextCursor& cursor,
 
     if(!trks.isEmpty())
     {
-        QString htmlStr = QString("<h2>%1 ").arg(trks.count()) + tr("Tracks</h2>");
+        const QString& htmlStr = QString("<h2>%1 %2</h2>").arg(trks.count()).arg(tr("Tracks"));
         cursor.insertHtml(htmlStr);
         QTextTable* table = cursor.insertTable(trks.count() + 1, eMax1, fmtTableStandard);
 
@@ -939,7 +939,7 @@ void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea*>& areas, 
     {
         return;
     }
-    QString htmlStr = QString("<h2>%1 ").arg(areas.count()) + tr("Areas</h2>");
+    const QString& htmlStr = QString("<h2>%1 %2</h2>").arg(areas.count()).arg(tr("Areas"));
     cursor.insertHtml(htmlStr);
     QTextTable* table = cursor.insertTable(areas.count() + 1, eMax1, fmtTableStandard);
 
@@ -970,7 +970,7 @@ void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte*>& rtes, CPro
     {
         return;
     }
-    QString htmlStr = QString("<h2>%1 ").arg(rtes.count()) + tr("Routes</h2>");
+    const QString& htmlStr = QString("<h2>%1 %2</h2>").arg(rtes.count()).arg(tr("Routes"));
     cursor.insertHtml(htmlStr);
     QTextTable* table = cursor.insertTable(rtes.count() + 1, eMax1, fmtTableStandard);
 

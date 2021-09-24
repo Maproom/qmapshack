@@ -1895,23 +1895,24 @@ void CMainWindow::slotSanityTest()
     try
     {
         CProj proj;
-        proj.init("EPSG:4326", "EPSG:32661");
+//        proj.init("EPSG:4326", "EPSG:32661");
+        proj.init("EPSG:4326", "EPSG:31287");
 
         if(!proj.isValid())
         {
             throw QException();
         }
 
-        QPointF pt(11 * DEG_TO_RAD, 80 * DEG_TO_RAD);
+        QPointF pt(14 * DEG_TO_RAD, 47 * DEG_TO_RAD);
 
         proj.transform(pt, PJ_FWD);
-        if((qFloor(pt.x()) != 2212361) | (qFloor(pt.y()) != 907496))
+        if((qFloor(pt.x()) != 450741) | (qFloor(pt.y()) != 344703))
         {
             throw QException();
         }
 
         proj.transform(pt, PJ_INV);
-        if((qRound(pt.x() * RAD_TO_DEG) != 11) | (qRound(pt.y() * RAD_TO_DEG) != 80))
+        if((qRound(pt.x() * RAD_TO_DEG) != 14) | (qRound(pt.y() * RAD_TO_DEG) != 47))
         {
             throw QException();
         }

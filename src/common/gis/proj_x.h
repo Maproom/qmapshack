@@ -55,6 +55,9 @@ private:
     void _transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
     bool _isLatLong(const QString& crs) const;
 
+    bool _proj_degree_input(PJ_DIRECTION dir) const;
+    bool _proj_degree_output(PJ_DIRECTION dir) const;
+
     PJ_CONTEXT * _ctx = nullptr;
     PJ * _pj = nullptr;
     bool _isSrcLatLong = false;

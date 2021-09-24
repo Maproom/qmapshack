@@ -111,8 +111,8 @@ void CProj::transform(QPolygonF& line, PJ_DIRECTION dir) const
         return;
     }
 
-    qreal factorPre = proj_degree_input(_pj, dir) ? RAD_TO_DEG : 1.0;
-    qreal factorPost = proj_degree_output(_pj, dir) ? DEG_TO_RAD : 1.0;
+    qreal factorPre = _proj_degree_input(dir) ? RAD_TO_DEG : 1.0;
+    qreal factorPost = _proj_degree_output(dir) ? DEG_TO_RAD : 1.0;
 
     for(QPointF& pt : line)
     {
@@ -129,18 +129,29 @@ void CProj::transform(QPointF& pt, PJ_DIRECTION dir) const
         return;
     }
 
-    if(proj_degree_input(_pj, dir))
+    if(_proj_degree_input(dir))
     {
         pt *= RAD_TO_DEG;
     }
 
     _transform(pt.rx(), pt.ry(), dir);
 
-    if(proj_degree_output(_pj, dir))
+    if(_proj_degree_output(dir))
     {
         pt *= DEG_TO_RAD;
     }
 }
+
+bool CProj::_proj_degree_input(PJ_DIRECTION dir) const
+{
+    return (dir == PJ_FWD) ? _isSrcLatLong : _isTarLatLong;
+}
+
+bool CProj::_proj_degree_output(PJ_DIRECTION dir) const
+{
+    return (dir == PJ_FWD) ? _isTarLatLong : _isSrcLatLong;
+}
+
 
 void CProj::transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const
 {
@@ -149,7 +160,7 @@ void CProj::transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const
         return;
     }
 
-    if(proj_degree_input(_pj, dir))
+    if(_proj_degree_input(dir))
     {
         lon *= RAD_TO_DEG;
         lat *= RAD_TO_DEG;
@@ -157,7 +168,7 @@ void CProj::transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const
 
     _transform(lon, lat, dir);
 
-    if(proj_degree_output(_pj, dir))
+    if(_proj_degree_output(dir))
     {
         lon *= DEG_TO_RAD;
         lat *= DEG_TO_RAD;

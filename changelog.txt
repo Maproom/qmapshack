@@ -7,6 +7,8 @@ V1.XX.X
 [QMS-421] Change of map view name is not taken into account in POI tab
 [QMS-427] Adding new map paths is broken
 [QMS-436] Store/restore name of map view  
+[QMS-439] Add number of tracks in a project in headline in detail project track
+
 
 
 V1.16.0

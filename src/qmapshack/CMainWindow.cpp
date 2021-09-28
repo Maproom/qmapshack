@@ -184,7 +184,7 @@ CMainWindow::CMainWindow()
     connect(actionWiki, &QAction::triggered, this, &CMainWindow::slotWiki);
     connect(actionHelp, &QAction::triggered, this, &CMainWindow::slotHelp);
     connect(actionQuickstart, &QAction::triggered, this, &CMainWindow::slotQuickstart);
-    connect(actionAddMapView, &QAction::triggered, this, &CMainWindow::slotAddCanvas);
+    connect(actionAddMapView, &QAction::triggered, this, [this](){slotAddCanvas("");});
     connect(actionCloneMapView, &QAction::triggered, this, &CMainWindow::slotCloneCanvas);
     connect(actionShowGrid, &QAction::changed, this, [this](){this->update();});
     connect(actionShowScale, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
@@ -1008,9 +1008,9 @@ void CMainWindow::slotQuickstart()
 }
 
 
-void CMainWindow::slotAddCanvas()
+void CMainWindow::slotAddCanvas(const QString& name)
 {
-    CCanvas* view = addView(QString());
+    CCanvas* view = addView(name);
     tabWidget->setCurrentWidget(view);
 
     testForNoView();
@@ -1034,7 +1034,7 @@ void CMainWindow::slotCloneCanvas()
 
     source->saveConfig(view);
 
-    slotAddCanvas();
+    slotAddCanvas(source->objectName() + tr(" (Cloned)"));
 
     CCanvas* target = getVisibleCanvas();
     if(nullptr == target)
@@ -1441,6 +1441,7 @@ void CMainWindow::slotStoreView()
     view.clear();
 
     canvas->saveConfig(view);
+    view.setValue("name", canvas->objectName());
 
     path = fi.absolutePath();
     cfg.setValue("Paths/lastViewPath", path);
@@ -1456,8 +1457,10 @@ void CMainWindow::slotLoadView()
     {
         return;
     }
+    QSettings view(filename, QSettings::IniFormat);
 
-    slotAddCanvas();
+    const QString& name = view.value("name", QString()).toString();
+    slotAddCanvas(name);
 
     CCanvas* canvas = getVisibleCanvas();
     if(nullptr == canvas)
@@ -1465,7 +1468,6 @@ void CMainWindow::slotLoadView()
         return;
     }
 
-    QSettings view(filename, QSettings::IniFormat);
     canvas->loadConfig(view);
 
     cfg.beginGroup("Canvas");

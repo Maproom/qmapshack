@@ -12506,7 +12506,7 @@ Pulse tecla ALT para hacer zoom sólo verticalmente</translation>
     <message>
         <location filename="../poi/IPoiList.ui" line="97"/>
         <source>To add POI collections use &lt;a href=&apos;PoiFolders&apos;&gt;File-&gt;Setup POI Paths&lt;/a&gt;.</source>
-        <translation>Para agregar archivos con POIs hacer clic en &lt;a href=&apos;DemFolders&apos;&gt;Archivo-&gt;Configurar rutas a los POi&lt;/a&gt;.</translation>
+        <translation type="unfinished">Para agregar archivos con POIs hacer clic en &lt;a href=&apos;PoiFolders&apos;&gt;Archivo-&gt;Configurar rutas a los POi&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="110"/>

@@ -6,6 +6,7 @@ V1.XX.X
 [QMS-414] Last point information not fully displayed in the range tool window
 [QMS-421] Change of map view name is not taken into account in POI tab
 [QMS-427] Adding new map paths is broken
+[QMS-430] Replace 'exportToProj' by 'exportToWkt' in CMapWMTS.cpp. This preserves the "towgs84" datum shift needed by some SRSs
 [QMS-436] Store/restore name of map view
 [QMS-439] Add number of tracks in a project in headline in detail project track
 [QMS-444] Fix wrong link to POI path setup in Spanish translation file

@@ -546,7 +546,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <name>CDetailsPrj</name>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="273"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1012"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1016"/>
         <source>none</source>
         <translation>keine</translation>
     </message>
@@ -571,79 +571,76 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation> x Geocache, bestehend aus: &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="499"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
-        <translation>&lt;h2&gt;Wegpunkte&lt;/h2&gt;</translation>
+        <translation type="vanished">&lt;h2&gt;Wegpunkte&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="506"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="532"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="822"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="889"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="947"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="977"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="507"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="534"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="824"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="891"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="950"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="981"/>
         <source>Info</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="507"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="533"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="824"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="948"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="978"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="508"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="535"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="826"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="951"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="982"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="525"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
-        <translation>&lt;h2&gt;Tracks&lt;/h2&gt;</translation>
+        <translation type="vanished">&lt;h2&gt;Tracks&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="669"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="671"/>
         <source>Elevation: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="674"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="676"/>
         <source>Created: %1</source>
         <translation>Erstellt: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="717"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="719"/>
         <source>Arrival: </source>
         <translation>Ankunft: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="731"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="733"/>
         <source>From Start</source>
         <translation>Vom Anfang</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="731"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="733"/>
         <source>To Next</source>
         <translation>Zum Nächsten</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="731"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="733"/>
         <source>To End</source>
         <translation>Zum Ende</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="744"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="746"/>
         <source>Time: </source>
         <translation>Zeit: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="823"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="890"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="825"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
         <source>Statistics</source>
         <translation>Statistik</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="940"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
-        <translation>&lt;h2&gt;Gebiete&lt;/h2&gt;</translation>
+        <translation type="vanished">&lt;h2&gt;Gebiete&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="132"/>
@@ -656,49 +653,68 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Verknüpfungen...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="734"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="499"/>
+        <source>Waypoints</source>
+        <translation>Wegpunkte</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="526"/>
+        <source>Tracks</source>
+        <translation>Tracks</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="736"/>
         <source>Distance: </source>
         <translation>Entfernung: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="754"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="756"/>
         <source>Ascent: </source>
         <translation>Anstieg: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="764"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="766"/>
         <source>Descent: </source>
         <translation>Abstieg: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="970"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
-        <translation>&lt;h2&gt;Routen&lt;/h2&gt;</translation>
+        <translation type="vanished">&lt;h2&gt;Routen&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="998"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1025"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1002"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1029"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="998"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1025"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1002"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1029"/>
         <source>Enter new project name.</source>
         <translation>Geben Sie einen neuen Namen für das Projekt ein.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1153"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1157"/>
         <source>Print Diary</source>
         <translation>Tagebuch drucken</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1007"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1011"/>
         <source>Edit keywords...</source>
         <translation>Stichwörter bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1007"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="942"/>
+        <source>Areas</source>
+        <translation>Gebiete</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="973"/>
+        <source>Routes</source>
+        <translation>Routen</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1011"/>
         <source>Enter keywords.</source>
         <translation>Stichwörter eingeben.</translation>
     </message>
@@ -1956,103 +1972,107 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Punkte ausblenden mit dem Douglas-Peuker Algorithmus (%1%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="124"/>
         <source>Hide points with invalid data.</source>
-        <translation>Punkte mit ungültigen Daten ausblenden.</translation>
+        <translation type="vanished">Punkte mit ungültigen Daten ausblenden.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="134"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="143"/>
         <source>Reset all hidden track points to visible</source>
         <translation>Alle verborgenen Trackpunkte zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="164"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="173"/>
         <source>Permanently removed all hidden track points</source>
         <translation>Alle verborgenen Trackpunkte wurden dauerhaft entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="201"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="210"/>
         <source>Smoothed profile with a Median filter of size %1</source>
         <translation>Mit einem Median-Filter der Größe %1 geglättetes Profil</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="223"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="232"/>
         <source>Added terrain slope from DEM file.</source>
         <translation>Hangneigung aus dem Höhenmodell hinzufügen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="252"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="261"/>
         <source>Replaced elevation data with data from DEM files.</source>
         <translation>Höhendaten durch Daten von DEM Dateien ersetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="270"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="279"/>
         <source>Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)</source>
         <translation>Höhenwerte durch interpolierte Werte ersetzt. (M=%1, RMSErr=%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="286"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="295"/>
         <source>Offset elevation data by %1%2.</source>
         <translation>Versatz der Höhendaten um %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="299"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="308"/>
         <source>Changed start of track to %1.</source>
         <translation>Trackanfang auf %1 verschoben.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="312"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="321"/>
         <source>Remove timestamps.</source>
         <translation>Zeitstempel entfernt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="329"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="338"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Künstliche Zeitstempel mit einem Abstand von %1 Sek. gesetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="417"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="426"/>
         <source>Changed average moving cycling speed with profile &apos;%3&apos; to %1%2.</source>
         <translation>Durchschnittliche Fahrradgeschwindigkeit mit dem Profil &apos;%3&apos; auf %1%2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="632"/>
-        <location filename="../gis/trk/filter/filter.cpp" line="646"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="641"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="655"/>
         <source>%1 (Part %2)</source>
         <translation>%1 (Teil %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="773"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="782"/>
         <source>Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)</source>
         <translation>Pausenknödel ausgeblendet mit Abstandskriterium %1%2 und Verhältnis %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="355"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="364"/>
         <source>Changed speed to %1%2.</source>
         <translation>Geschwindigkeit auf %1%2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="480"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="133"/>
+        <source>Permanently removed points with invalid data.</source>
+        <translation>Punkte mit ungültigen Daten dauerhaft entfernt.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="489"/>
         <source>Changed average moving hiking speed with profile &apos;%3&apos; to %1%2.</source>
         <translation>Durchschnittliche Wandergeschwindigkeit mit dem Profil &apos;%3&apos; auf %1%2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="506"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="515"/>
         <source>%1 (Segment %2)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="524"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="533"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>Erweiterung %1 wurde von allen Trackpunkten entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="535"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="544"/>
         <source>Converted subpoints from routing to track points</source>
         <translation>Punkte vom autom. Routing in Trackpunkte umgewandelt </translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="582"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="591"/>
         <source>Start Point moved to: </source>
         <translation>Startpunkt verschoben zu: </translation>
     </message>
@@ -3255,9 +3275,13 @@ Zeile %2, Spalte %3:
 <context>
     <name>CInvalidTrk</name>
     <message>
-        <location filename="../gis/trk/CInvalidTrk.cpp" line="44"/>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation>Der Track &apos;%1&apos; hat %2 ungültige Punkte von insgesamt %3 sichtbaren Punkten. Wollen Sie die ungültigen Punkte herausnehmen?</translation>
+        <translation type="vanished">Der Track &apos;%1&apos; hat %2 ungültige Punkte von insgesamt %3 sichtbaren Punkten. Wollen Sie die ungültigen Punkte herausnehmen?</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="44"/>
+        <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to remove invalid points now?</source>
+        <translation>Der Track &apos;%1&apos; hat %2 ungültige Punkte von insgesamt %3 sichtbaren Punkten. Wollen Sie die ungültigen Punkte löschen?</translation>
     </message>
     <message>
         <location filename="../gis/trk/CInvalidTrk.cpp" line="68"/>
@@ -3648,6 +3672,11 @@ Zeile %2, Spalte %3:
         <translation>Ordner auswählen...</translation>
     </message>
     <message>
+        <location filename="../CMainWindow.cpp" line="1037"/>
+        <source> (Cloned)</source>
+        <translation> (Klon)</translation>
+    </message>
+    <message>
         <location filename="../CMainWindow.cpp" line="1067"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;NewView&apos;&gt;hier&lt;/a&gt;.</translation>
@@ -3680,42 +3709,42 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1427"/>
-        <location filename="../CMainWindow.cpp" line="1453"/>
+        <location filename="../CMainWindow.cpp" line="1454"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1453"/>
+        <location filename="../CMainWindow.cpp" line="1454"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1747"/>
+        <location filename="../CMainWindow.cpp" line="1749"/>
         <source>Rename View...</source>
         <translation>Kartenansicht umbenennen...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1747"/>
+        <location filename="../CMainWindow.cpp" line="1749"/>
         <source>Enter new name for view</source>
         <translation>Einen neuen Namen für die Kartenansicht eingeben</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1921"/>
+        <location filename="../CMainWindow.cpp" line="1924"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1922"/>
+        <location filename="../CMainWindow.cpp" line="1925"/>
         <source>QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack hat eine schlecht installierte PROJ Bibliothek detectiert. Bitte wenden sie sich an ihre Distribution um den Fehler zu beheben.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="2007"/>
+        <location filename="../CMainWindow.cpp" line="2010"/>
         <source>To link map views all map views must have the same projection and scale type. The function &apos;Link Map Views&apos; will be switched off, now.</source>
         <translation>Um die Kartenansichten miteinander zu verbinden, müssen alle die selbe Projektion und Skalierung haben. Die Funktion &apos;Kartenansichten verbinden&apos; wird deshalb jetzt abgeschaltet.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="2012"/>
+        <location filename="../CMainWindow.cpp" line="2015"/>
         <source>Link Map Views...</source>
         <translation>Kartenansichten verbinden...</translation>
     </message>
@@ -15491,7 +15520,7 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="86"/>
         <source>Enabling this feature leads to routes with many points. Not recommendet for devices which have only limited space for saving route points.</source>
-        <translation type="unfinished">Wenn dieses Feature benutzt wird, führt das zu Routen mit vielen Punkten. Das ist nicht für Geräte empfohlen, die nur einen begrenzten Speicherplatz für Routenpunkte haben.</translation>
+        <translation>Wenn dieses Feature benutzt wird, führt das zu Routen mit vielen Punkten. Das ist nicht für Geräte empfohlen, die nur einen begrenzten Speicherplatz für Routenpunkte haben.</translation>
     </message>
 </context>
 <context>

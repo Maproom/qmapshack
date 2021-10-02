@@ -42,7 +42,7 @@ CInvalidTrk::CInvalidTrk(CGisItemTrk& trk, QWidget* parent)
     }
 
     labelMsg->setText(tr("The track '%1' has %2 invalid points out of %3 visible points. "
-                         "Do you want to hide invalid points now?")
+                         "Do you want to remove invalid points now?")
                       .arg(trk.getName())
                       .arg(trk.getNumberOfInvalidPoints())
                       .arg(trk.getNumberOfVisiblePoints()));

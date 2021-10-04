@@ -30,8 +30,6 @@
 #include <QtWidgets>
 #include <QtXml>
 
-#include <ogr_spatialref.h>
-
 
 inline int lon2tile(double lon, int z)
 {

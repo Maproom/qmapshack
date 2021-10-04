@@ -7,6 +7,7 @@ V1.XX.X
 [QMS-421] Change of map view name is not taken into account in POI tab
 [QMS-427] Adding new map paths is broken
 [QMS-436] Store/restore name of map view
+[QMS-438] Replace 'exportToProj4' by 'exportToWkt' to preserve "towgs84" datum shift when needed.
 [QMS-439] Add number of tracks in a project in headline in detail project track
 [QMS-441] "Hide invalid points" does not hide anything when 1st trackpoint has no elevation data
 [QMS-444] Fix wrong link to POI path setup in Spanish translation file

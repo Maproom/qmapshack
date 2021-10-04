@@ -37,7 +37,6 @@
 #include <vector>
 
 #include <gdal_priv.h>
-#include <ogr_spatialref.h>
 
 extern "C"
 {
@@ -519,7 +518,6 @@ int main(int argc, char** argv)
     uint32_t tileTableStart = 0;
     uint32_t tileCnt = 0;
     uint32_t tilesTotal = 0;
-    char projstr[1024];
     OGRSpatialReference oSRS;
     int quality = -1;
     int subsampling = -1;
@@ -677,18 +675,6 @@ int main(int argc, char** argv)
             exit(-1);
         }
 
-        const char* wkt = projstr;
-
-        if(dataset->GetProjectionRef())
-        {
-            strncpy(projstr, dataset->GetProjectionRef(), sizeof(projstr));
-        }
-        oSRS.importFromWkt(&wkt);
-
-        char* proj4 = nullptr;
-        oSRS.exportToProj4(&proj4);
-
-
         double adfGeoTransform[6];
         dataset->GetGeoTransform( adfGeoTransform );
 
@@ -698,7 +684,7 @@ int main(int argc, char** argv)
         file_t& file = *f;
         file.filename = argv[i];
         file.dataset = dataset;
-        file.proj.init(proj4, "EPSG:4326");
+        file.proj.init(dataset->GetProjectionRef(), "EPSG:4326");
         file.width = dataset->GetRasterXSize();
         file.height = dataset->GetRasterYSize();
         file.xscale = adfGeoTransform[1];

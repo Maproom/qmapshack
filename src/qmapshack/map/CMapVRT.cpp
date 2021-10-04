@@ -23,7 +23,6 @@
 #include "units/IUnit.h"
 
 #include <gdal_priv.h>
-#include <ogr_spatialref.h>
 #include <QtWidgets>
 
 #define TILELIMIT 2500
@@ -118,21 +117,7 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent)
 
 
     // ------- setup projection ---------------
-    char str[1025] = {0};
-    if(dataset->GetProjectionRef())
-    {
-        strncpy(str, dataset->GetProjectionRef(), sizeof(str) - 1);
-    }
-
-    OGRSpatialReference oSRS;
-    const char* wkt = str;
-    oSRS.importFromWkt(&wkt);
-
-    char* proj4 = nullptr;
-    oSRS.exportToProj4(&proj4);
-
-    proj.init(proj4, "EPSG:4326");
-    free(proj4);
+    proj.init(dataset->GetProjectionRef(), "EPSG:4326");
 
     if(!proj.isValid())
     {

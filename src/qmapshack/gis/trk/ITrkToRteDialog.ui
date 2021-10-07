@@ -83,7 +83,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Enabling this feature leads to routes with many points. Not recommendet for devices which have only limited space for saving route points.</string>
+        <string>Enabling this feature leads to routes with many points. Not recommended for devices which have only limited space for saving route points.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -121,7 +121,6 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../resources.qrc"/>
   <include location="../../resources.qrc"/>
  </resources>
  <connections>

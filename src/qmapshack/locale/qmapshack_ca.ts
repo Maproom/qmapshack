@@ -21,7 +21,7 @@
     <message>
         <location filename="../CAbout.cpp" line="59"/>
         <source>If you think your name is missing you probably have forgotten to add your copyright in the source files.</source>
-        <translation>Si creieu que el vostre nom ha desaparegut, segurament és perquè heu oblidat d&apos;afegir el copyright en el fitxer origen.</translation>
+        <translation>Si creieu que el vostre nom ha desaparegut, segurament és perquè heu oblidat d&apos;afegir el copyright en el fitxer d&apos;origen.</translation>
     </message>
 </context>
 <context>
@@ -454,7 +454,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="45"/>
         <source>Failed to load file: %1</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="53"/>
@@ -509,7 +509,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="322"/>
         <source>No images found</source>
-        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
+        <translation>  No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -551,10 +551,6 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation> x Geocerca, consisteix en: &lt;br/&gt;</translation>
     </message>
     <message>
-        <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
-        <translation type="vanished">&lt;h2&gt;Fites&lt;/h2&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="507"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="534"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="824"/>
@@ -574,18 +570,14 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>Comentari</translation>
     </message>
     <message>
-        <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
-        <translation type="vanished">&lt;h2&gt;Pistes&lt;/h2&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="499"/>
         <source>Waypoints</source>
-        <translation type="unfinished">Fites</translation>
+        <translation>Fites</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="526"/>
         <source>Tracks</source>
-        <translation type="unfinished">Tracks</translation>
+        <translation>Tracks</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="671"/>
@@ -646,20 +638,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="942"/>
         <source>Areas</source>
-        <translation type="unfinished">Àrees</translation>
+        <translation>Àrees</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="973"/>
         <source>Routes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
-        <translation type="vanished">&lt;h2&gt;Àrees&lt;/h2&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
-        <translation type="vanished">&lt;h2&gt;Rutes&lt;/h2&gt;</translation>
+        <translation>Itineraris</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="1002"/>
@@ -906,10 +890,6 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>Suprimeix del track el valor d&apos;&quot;Energia Utilitzada En Ciclisme&quot;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;&lt;b&gt;Set Energy Use for Cycling&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Within this dialog your personal energy use (consumption) for a cycling tour can be computed.&lt;/p&gt;&lt;p&gt;The computed value of &quot;Energy Use Cycling&quot; can be see as an indicator for the exertion of a cycling tour.&lt;/p&gt;&lt;p&gt;The tour length, speed and slope values will be taken into account.&lt;/p&gt;&lt;p&gt;To individualize your personal energy use the following input data are more needed:&lt;ul&gt;&lt;li&gt;Driver and bicyle weight&lt;/li&gt;&lt;li&gt;Air density, wind speed and position to the wind to consider the wind drag resistance&lt;/li&gt;&lt;li&gt;Ground situation (tyre and ground) to consider the rolling resistance&lt;/li&gt;&lt;li&gt;Average pedal cadence for the computation of pedal force&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;The individualize data will be defined in this dialog and more computed values will be shown here.&lt;/p&gt;&lt;p&gt;When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set.&lt;p&gt;The energy use in unit &quot;kcal&quot; will be stored in the track (qms format only) and can be remove later on when no longer needed.&lt;/p&gt;&lt;p&gt;For more information see tooltips on input and output values.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;&lt;b&gt;Estableix Energia Utilitzada En Ciclisme&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Amb aquesta funcionalitat podràs calcular l&apos;energia personal (consumida) en una sortida en bicicleta.&lt;/p&gt;&lt;p&gt;El valor calculat de Energia Utilitzada En Ciclisme es pot visualitzar com un indicador de l&apos;esforç fet en una sortida en bicicleta.&lt;/p&gt;&lt;p&gt;Per al càlcul s&apos;utilitzaran els valors de longitud de la sortida, velocitat i pendent.&lt;/p&gt;&lt;p&gt;Per a personalitzar l&apos;energia utilitzada s&apos;han d&apos;introduir les següents dades:&lt;ul&gt;&lt;li&gt;Pes del ciclista i de la bicicleta&lt;/li&gt;&lt;li&gt;Densitat de l&apos;aire, velocitat del vent i la direcció del vent per tal de tenir en compte la resistència al vent&lt;/li&gt;&lt;li&gt;Tipus de terreny (cobertes i pis) per a tenir en compte la resistència al rodament&lt;/li&gt;&lt;li&gt;La mitjana de la cadència per a tenir en compte la força de la pedalada&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;Un cop introduïdes les dades, a la mateixa finestra es mostraran més dades calculades.&lt;/p&gt;&lt;p&gt;En carregar antics tracks o commutar entre tracks amb diferents paràmetres, el paràmetre que es mostra a la finestra serà el darrer que s&apos;hagi guardat.&lt;p&gt;L&apos;energia utilitzada representada en &quot;kcal&quot; es pot guardar al track i es pot esborrar en qualsevol moment quant ja no sigui necessari.&lt;/p&gt;&lt;p&gt;Per a més informació podeu mirar els consells referents a valors d&apos;entrada i sortida.&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="48"/>
         <source>Load previous Set</source>
         <translation>Carrega l&apos;anterior Configuració</translation>
@@ -922,7 +902,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="322"/>
         <source>&lt;p&gt;&lt;b&gt;Set Energy Use for Cycling&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Within this dialog your personal energy use (consumption) for a cycling tour can be computed.&lt;/p&gt;&lt;p&gt;The computed value of &quot;Energy Use Cycling&quot; can be see as an indicator for the exertion of a cycling tour.&lt;/p&gt;&lt;p&gt;The tour length, speed and slope values will be taken into account.&lt;/p&gt;&lt;p&gt;To individualize your personal energy use the following input data are more needed:&lt;ul&gt;&lt;li&gt;Driver and bicycle weight&lt;/li&gt;&lt;li&gt;Air density, wind speed and position to the wind to consider the wind drag resistance&lt;/li&gt;&lt;li&gt;Ground situation (tyre and ground) to consider the rolling resistance&lt;/li&gt;&lt;li&gt;Average pedal cadence for the computation of pedal force&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;The individualize data will be defined in this dialog and more computed values will be shown here.&lt;/p&gt;&lt;p&gt;When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set.&lt;p&gt;The energy use in unit &quot;kcal&quot; will be stored in the track (qms format only) and can be remove later on when no longer needed.&lt;/p&gt;&lt;p&gt;For more information see tooltips on input and output values.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Estableix Energia Utilitzada En Ciclisme&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Amb aquesta funcionalitat podràs calcular l&apos;energia personal (consumida) en una sortida en bicicleta.&lt;/p&gt;&lt;p&gt;El valor calculat de Energia Utilitzada En Ciclisme es pot visualitzar com un indicador de l&apos;esforç fet en una sortida en bicicleta.&lt;/p&gt;&lt;p&gt;Per al càlcul s&apos;utilitzaran els valors de longitud de la sortida, velocitat i pendent.&lt;/p&gt;&lt;p&gt;Per a personalitzar l&apos;energia utilitzada s&apos;han d&apos;introduir les següents dades:&lt;ul&gt;&lt;li&gt;Pes del ciclista i de la bicicleta&lt;/li&gt;&lt;li&gt;Densitat de l&apos;aire, velocitat del vent i la direcció del vent per tal de tenir en compte la resistència al vent&lt;/li&gt;&lt;li&gt;Tipus de terreny (cobertes i pis) per a tenir en compte la resistència al rodament&lt;/li&gt;&lt;li&gt;La mitjana de la cadència per a tenir en compte la força de la pedalada&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;Un cop introduïdes les dades, a la mateixa finestra es mostraran més dades calculades.&lt;/p&gt;&lt;p&gt;En carregar antics tracks o commutar entre tracks històrics amb diferents paràmetres, els paràmetres que es mostren a la finestra es podran canviar pels darrers que s&apos;hagis guardat.&lt;p&gt;L&apos;energia utilitzada representada en &quot;kcal&quot; es pot guardar al track (solament en format qms) i es pot esborrar en qualsevol moment si ja no és necessari.&lt;/p&gt;&lt;p&gt;Per a més informació podeu mirar els consells referents a valors d&apos;entrada i sortida.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="339"/>
@@ -1135,7 +1115,7 @@ L&apos;únic paràmetre d&apos;entrada és la longitud del bucle mínim: així s
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="59"/>
         <source>Hide knots in the track:
 
-During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That&apos;s why you might want to remove them.
+During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That's why you might want to remove them.
 
 Typically a knot fulfills two conditions:
 - A series of points very close to each other.
@@ -1216,7 +1196,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
@@ -1915,13 +1895,9 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <translation>Utilitzar l&apos;algoritme de Douglas Peuker per amagar punts (%1%2)</translation>
     </message>
     <message>
-        <source>Hide points with invalid data.</source>
-        <translation type="vanished">Amagar punts amb dades invàlides.</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/filter.cpp" line="133"/>
         <source>Permanently removed points with invalid data.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;han suprimit de forma definitiva els punts amb dades invàlides.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="143"/>
@@ -2554,7 +2530,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/CGisListDB.cpp" line="462"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
-        <translation>Esteu segur que voleu suprimir &apos;%1&apos; de la llista?</translation>
+        <translation>Esteu segurs que voleu suprimir &apos;%1&apos; de la llista?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="526"/>
@@ -2760,7 +2736,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/CGisListWks.cpp" line="152"/>
         <source>Convert to Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir a Itinerari</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="153"/>
@@ -2991,7 +2967,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="967"/>
-        <source>QMapShack couldn&apos;t automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.
+        <source>QMapShack couldn't automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.
 
 Do you want to choose an icon for each new waypoint for which no icon could be found?
 If you choose &apos;No&apos; the respective last used waypoint icon is applied.</source>
@@ -3194,13 +3170,9 @@ línia %2, columna %3:
 <context>
     <name>CInvalidTrk</name>
     <message>
-        <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation type="vanished">El track &apos;%1&apos; té %2 punts invàlids dels %3 punts visibles. Voleu amagar ara els punts invàlids?</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CInvalidTrk.cpp" line="44"/>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to remove invalid points now?</source>
-        <translation type="unfinished"></translation>
+        <translation>El track &apos;%1&apos; té %2 punts invàlids dels %3 punts visibles. Voleu suprimir els punts invàlids ara?</translation>
     </message>
     <message>
         <location filename="../gis/trk/CInvalidTrk.cpp" line="68"/>
@@ -3593,7 +3565,7 @@ línia %2, columna %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1037"/>
         <source> (Cloned)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Clonad)</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1067"/>
@@ -4871,7 +4843,7 @@ Estructura desconeguda.</translation>
     <message>
         <location filename="../poi/CPoiPathSetup.cpp" line="42"/>
         <source>Add or remove paths containing POI data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>&#xa0;
+        <translation> 
 Afegir o suprimir camins a dades dels Punts d&apos;Interès. Pot haver-hi diverses fitxers en un camí, però els camins secundaris no s&apos;analitzaran. Els formats compatibles són: %1</translation>
     </message>
     <message>
@@ -4951,7 +4923,7 @@ y: %4 m/px</translation>
     <message>
         <location filename="../../common/gis/proj_x.cpp" line="184"/>
         <source>The value
-&apos;%1&apos;
+'%1'
 is not a valid coordinate system definition:
 %2</source>
         <translation>El valor
@@ -5129,7 +5101,7 @@ no és una definició de coordenada vàlida en el sistema:
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="685"/>
         <source>Imported %1 tracks, %2 waypoints, %3 routes, %4 areas</source>
-        <translation>S&apos;han importat %1 tracks, %2 fites, %3 rutes, %4 àrees</translation>
+        <translation>S&apos;han importat %1 tracks, %2 fites, %3 itineraris, %4 àrees</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtDb.cpp" line="686"/>
@@ -6127,7 +6099,7 @@ adr:país</translation>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="308"/>
         <source>%1
-Error in &apos;%2&apos;
+Error in '%2'
 This needs to be fixed
 The associated database &apos;%3&apos; is ignored</source>
         <translation>%1
@@ -6368,7 +6340,7 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="262"/>
         <source>Do you really want to remove the realtime source?</source>
-        <translation>Estàs segur de suprimir el temps real original? </translation>
+        <translation>Esteu segurs de suprimir el temps real original? </translation>
     </message>
 </context>
 <context>
@@ -6672,7 +6644,7 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
     <message>
         <location filename="../gis/search/CSearch.cpp" line="431"/>
         <source>example: date before 10.05.2017</source>
-        <translation>exemple: data abans de 10-05-2017</translation>
+        <translation>exemple: data abans de 10.05.2017</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="432"/>
@@ -10564,7 +10536,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="150"/>
-        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
+        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable 'Free Webservices' in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;per a utilitzar geonames creeu, si us plau, un &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;nom d&apos;usuari&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;un cop fet activeu &apos;Free Webservices&apos; en el vostre &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Compte&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;introduir aquí el vostre nom d&apos;usuari Geonames:&lt;/p&gt;
 </translation>
@@ -10853,13 +10825,9 @@ Es tracta d&apos;un element nou o bé algú l&apos;ha esborrat de la base de dad
 <context>
     <name>IGisItemRate</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Diàleg</translation>
-    </message>
-    <message>
         <location filename="../gis/IGisItemRate.ui" line="14"/>
         <source>Rating and tags...</source>
-        <translation type="unfinished"></translation>
+        <translation>Valoració i etiquetes...</translation>
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="22"/>
@@ -13077,7 +13045,7 @@ o
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="133"/>
-        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it&apos;s recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can&apos;t route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
+        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href='http://download.geofabrik.de/'&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it's recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can't route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Select one or multiple source *.pbf files.&lt;/li&gt;
@@ -13656,7 +13624,7 @@ Això és coneix com la solució al Problema del Viatjant de Comerç, però aqu�
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="110"/>
         <source>Convert selected track points to route.</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir els punts seleccionats d&apos;un track en un Itinerari.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="124"/>
@@ -13825,7 +13793,7 @@ Això és coneix com la solució al Problema del Viatjant de Comerç, però aqu�
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="176"/>
         <source>Convert route to track</source>
-        <translation>Converteix la ruta a track</translation>
+        <translation>Convertir l&apos;itinerari a track</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="190"/>
@@ -13863,7 +13831,7 @@ Això és coneix com la solució al Problema del Viatjant de Comerç, però aqu�
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="62"/>
         <source>Convert into a route.</source>
-        <translation>Convertir en ruta.</translation>
+        <translation>Convertir-ho en un Itinerari.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="76"/>
@@ -14191,7 +14159,7 @@ totes les descripcions.</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="269"/>
         <source>Convert track to route.</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir el track a itinerari</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="286"/>
@@ -15210,7 +15178,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>
@@ -15240,32 +15208,32 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="14"/>
         <source>Convert to Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir a Itinerari</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="22"/>
         <source>Project</source>
-        <translation type="unfinished">Projecte</translation>
+        <translation>Projecte</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="36"/>
         <source>Change Project</source>
-        <translation type="unfinished"></translation>
+        <translation>Canvi de Projecte</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="50"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="73"/>
         <source>Include sub-points of tracks in converted route.</source>
-        <translation type="unfinished"></translation>
+        <translation>Incloure els sub-punts d&apos;un track en el nou Itinerari.</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="86"/>
         <source>Enabling this feature leads to routes with many points. Not recommendet for devices which have only limited space for saving route points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activant aquesta opció et recomanarà itineraris amb molts punts. No es recomanable per a dispositius que tinguin un espai limitat per als punts d&apos;un itinerari.</translation>
     </message>
 </context>
 <context>

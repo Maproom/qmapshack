@@ -103,6 +103,16 @@ CMapTMS::CMapTMS(const QString& filename, CMapDraw* parent)
     {
         const QDomNode& xmlLayer = xmlLayers.item(n);
         int idx = xmlLayer.attributes().namedItem("idx").nodeValue().toInt();
+
+        if(idx >= layers.count())
+        {
+            QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr(
+                                      "Malformed TMS file. The layer numbers do not index "
+                                      "the available layers. Layer numbers start from index 0."
+                                      ), QMessageBox::Abort);
+            return;
+        }
+
         layers[idx].strUrl = xmlLayer.namedItem("ServerUrl").toElement().text();
         layers[idx].script = xmlLayer.namedItem("Script").toElement().text();
         layers[idx].minZoomLevel = minZoomLevel;

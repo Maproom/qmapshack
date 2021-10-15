@@ -12,7 +12,7 @@ V1.XX.X
 [QMS-441] "Hide invalid points" does not hide anything when 1st trackpoint has no elevation data
 [QMS-444] Fix wrong link to POI path setup in Spanish translation file
 [QMS-449] Early call to abort() in CLogHandler.cpp (Windows version)
-
+[QMS-453] QMS crashes when first layer in TMS is <Layer idx="1">
 
 V1.16.0
 [QMS-220] "Select items from map" misses items

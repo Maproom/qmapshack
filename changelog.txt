@@ -11,6 +11,7 @@ V1.XX.X
 [QMS-439] Add number of tracks in a project in headline in detail project track
 [QMS-441] "Hide invalid points" does not hide anything when 1st trackpoint has no elevation data
 [QMS-444] Fix wrong link to POI path setup in Spanish translation file
+[QMS-449] Early call to abort() in CLogHandler.cpp (Windows version)
 
 
 V1.16.0

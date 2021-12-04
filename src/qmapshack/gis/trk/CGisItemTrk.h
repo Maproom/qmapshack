@@ -258,6 +258,8 @@ public:
     void getPolylineFromData(QPolygonF& l) const;
     /// get the track as polyline with elevation, pixel and GIS coordinates.
     void getPolylineFromData(SGisLine& l) const override;
+    /// get a range of the track as polyline with elevation, pixel and GIS coordinates.
+    void getPolylineRangeFromData(SGisLine& l, qint32 rangeStart, qint32 rangeEnd, bool getSubPixel = false) const;
     void getPolylineDegFromData(QPolygonF& l) const override;
 
     /**
@@ -271,6 +273,11 @@ public:
     void getMouseRange(const CTrackData::trkpt_t*& mr1, const CTrackData::trkpt_t*& mr2) const;
 
     const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
+
+    /**
+      @brief Convert the track to a route
+    */
+    void toRoute();
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 

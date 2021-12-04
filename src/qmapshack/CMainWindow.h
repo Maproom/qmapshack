@@ -172,7 +172,7 @@ private slots:
     void slotAbout();
     void slotWiki();
     void slotQuickstart();
-    void slotAddCanvas();
+    void slotAddCanvas(const QString& name);
     void slotCloneCanvas();
     void slotTabCloseRequest(int i);
     void slotCurrentTabCanvas(int i);

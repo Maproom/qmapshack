@@ -325,7 +325,7 @@ void CEnergyCyclingDialog::slotShowHelp()
                      "<p>The tour length, speed and slope values will be taken into account.</p>"
                      "<p>To individualize your personal energy use the following input data are more needed:"
                      "<ul>"
-                     "<li>Driver and bicyle weight</li>"
+                     "<li>Driver and bicycle weight</li>"
                      "<li>Air density, wind speed and position to the wind to consider the wind drag resistance</li>"
                      "<li>Ground situation (tyre and ground) to consider the rolling resistance</li>"
                      "<li>Average pedal cadence for the computation of pedal force</li>"

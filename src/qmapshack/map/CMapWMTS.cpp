@@ -218,7 +218,7 @@ CMapWMTS::CMapWMTS(const QString& filename, CMapDraw* parent)
         {
             oSRS.importFromURN(ptr1);
         }
-        oSRS.exportToProj4(&ptr2);
+        oSRS.exportToWkt(&ptr2);
 
         qDebug() << ptr1 << ptr2;
 

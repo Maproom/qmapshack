@@ -39,8 +39,8 @@ void CLogHandler::log(QtMsgType type, const QMessageLogContext& context, const Q
 #else
     QString txt = msg;
 #endif
-    printToConsole(type, txt);
     appendToFile(type, txt);
+    printToConsole(type, txt);
 }
 
 void CLogHandler::printLoggerInfo()

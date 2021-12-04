@@ -21,7 +21,6 @@
 #include "helpers/CGdalFile.h"
 
 #include <gdal_priv.h>
-#include <ogr_spatialref.h>
 
 #include <QtWidgets>
 
@@ -55,23 +54,7 @@ void CGdalFile::load(const QString& filename)
         return;
     }
 
-    char str[1025] = {0};
-    if(dataset->GetProjectionRef())
-    {
-        strncpy(str, dataset->GetProjectionRef(), sizeof(str) - 1);
-    }
-
-    {
-        OGRSpatialReference oSRS;
-        const char* wkt = str;
-        oSRS.importFromWkt(&wkt);
-
-        char* proj4 = nullptr;
-        oSRS.exportToProj4(&proj4);
-
-        proj.init(proj4, "EPSG:4326");
-        free(proj4);
-    }
+    proj.init(dataset->GetProjectionRef(), "EPSG:4326");
 
     GDALRasterBand* pBand = dataset->GetRasterBand(1);
 

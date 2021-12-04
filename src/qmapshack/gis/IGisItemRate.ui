@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Rating and tags...</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -155,6 +155,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>keywordPlainTextEdit</tabstop>
+  <tabstop>pushButtonR1</tabstop>
+  <tabstop>pushButtonR2</tabstop>
+  <tabstop>pushButtonR3</tabstop>
+  <tabstop>pushButtonR4</tabstop>
+  <tabstop>pushButtonR5</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

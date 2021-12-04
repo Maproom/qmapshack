@@ -106,14 +106,23 @@ void CGisItemTrk::filterRemoveInvalidPoints()
     // invalid flags for properties with valid points count
     quint32 invalidMask = (getAllValidFlags() & CTrackData::trkpt_t::eValidMask) << 16;
 
-    for(CTrackData::trkpt_t& pt : trk)
+    for(CTrackData::trkseg_t& seg : trk.segs)
     {
-        if(pt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask)))
+        QVector<CTrackData::trkpt_t> pts;
+        for(const CTrackData::trkpt_t& pt : qAsConst(seg.pts))
         {
-            pt.setFlag(CTrackData::trkpt_t::eFlagHidden);
-            nothingDone = false;
+            if(pt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask)))
+            {
+                nothingDone = false;
+                continue;
+            }
+
+            pts << pt;
         }
+
+        seg.pts = pts;
     }
+
 
     if(nothingDone)
     {
@@ -121,7 +130,7 @@ void CGisItemTrk::filterRemoveInvalidPoints()
     }
 
     deriveSecondaryData();
-    changed(tr("Hide points with invalid data."), "://icons/48x48/PointHide.png");
+    changed(tr("Permanently removed points with invalid data."), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::filterReset()

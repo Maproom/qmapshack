@@ -132,6 +132,7 @@ private slots:
     void slotAddProjectFilter();
     void slotNewDevice();
     void slotSyncPrjToDevices();
+    void slotToRoute();
 
 private:
     void configDB();
@@ -230,6 +231,7 @@ private:
     QAction* actionNogoArea;
     QAction* actionRteFromWpt;
     QAction* actionEditPrxWpt;
+    QAction* actionToRoute;
 
     QAction* actionEleWptTrk;
 

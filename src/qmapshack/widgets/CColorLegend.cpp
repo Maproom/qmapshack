@@ -140,6 +140,11 @@ void CColorLegend::resizeEvent(QResizeEvent* event)
 
 static qreal legendRound(qreal value, int powOffset)
 {
+    if(value == 0)
+    {
+        return 0;
+    }
+
     int l10 = (int) (value > 0) ? log10(value) : log10(-value);
 
     qreal div = pow(10, l10 + powOffset);

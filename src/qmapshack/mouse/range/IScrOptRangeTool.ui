@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>711</width>
+    <width>718</width>
     <height>90</height>
    </rect>
   </property>
@@ -48,18 +48,6 @@
         <enum>QFrame::Raised</enum>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
         <item>
          <widget class="QToolButton" name="toolHidePoints">
           <property name="toolTip">
@@ -113,6 +101,20 @@
           <property name="icon">
            <iconset resource="../../resources.qrc">
             <normaloff>:/icons/32x32/Copy.png</normaloff>:/icons/32x32/Copy.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolToRoute">
+          <property name="toolTip">
+           <string>Convert selected track points to route.</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../resources.qrc">
+            <normaloff>:/icons/32x32/Route.png</normaloff>:/icons/32x32/Route.png</iconset>
           </property>
          </widget>
         </item>
@@ -337,12 +339,6 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>100</height>
-      </size>
      </property>
     </widget>
    </item>

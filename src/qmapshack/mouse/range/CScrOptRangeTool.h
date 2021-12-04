@@ -62,6 +62,7 @@ private slots:
     void slotActivity();
     void slotDelete();
     void slotCopy();
+    void slotToRoute();
     void slotResetUpdateCanvas()
     {
         updateCanvas = false;

@@ -20,7 +20,6 @@
 #include "helpers/CDraw.h"
 
 #include <gdal_priv.h>
-#include <ogr_spatialref.h>
 #include <QtWidgets>
 
 CDrawContextPixel::CDrawContextPixel(CCanvas* canvas, QObject* parent)

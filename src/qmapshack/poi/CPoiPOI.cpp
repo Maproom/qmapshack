@@ -71,7 +71,7 @@ CPoiPOI::CPoiPOI(const QString& filename, CPoiDraw* parent)
     }
     else
     {
-        qDebug() << "failed to retreive bounding box of " << filename;
+        qDebug() << "failed to retrieve bounding box of " << filename;
         isActivated = false;
     }
     //Database is no longer needed

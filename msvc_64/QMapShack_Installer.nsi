@@ -204,7 +204,7 @@ SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
 
   ;BEGIN PROJ.4 Files
   SetOutPath $INSTDIR
-    File Files\proj_8_0.dll
+    File Files\proj_8_?.dll
     File Files\proj.exe
     File Files\projinfo.exe
     File Files\cct.exe

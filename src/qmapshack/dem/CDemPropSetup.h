@@ -43,7 +43,9 @@ private slots:
     void slotGradeIndex(int idx);
     void slotSlopeValiddateAfterEdit();
     void slotSlopeChanged(int val);
-    void slotElevationAfterEdit();
+    void slotElevationValueChanged();
+    void slotElevationShadeLowValueChanged();
+    void slotElevationShadeHiValueChanged();
 
 private:
     CTinySpinBox* slopeSpins[SLOPE_LEVELS];

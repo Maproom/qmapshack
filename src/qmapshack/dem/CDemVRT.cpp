@@ -222,7 +222,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     QPointF bufferScale = buf.scale * buf.zoomFactor;
     outOfScale = isOutOfScale(bufferScale);
 
-    if(outOfScale || (!doHillshading() && !doSlopeColor() && !doElevationLimit()))
+    if(outOfScale || (!doHillshading() && !doSlopeColor() && !doElevationLimit() && !doElevationShading()))
     {
         QThread::msleep(100);
         return;
@@ -412,8 +412,60 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                     drawTile(img, r, p);
                     p.setOpacity(o1);
                 }
+
+                if(doElevationShading())
+                {
+                    QPolygonF r = l;
+
+                    QImage img(w_used, h_used, QImage::Format_Indexed8);
+                    img.setColorTable(elevationShadeTable);
+
+                    elevationShading(data, w_used, h_used, img);
+
+                    drawTile(img, r, p);
+                }
+
             }
         }
+
+        drawElevationShadeScale(p);
+    }
+}
+
+void CDemVRT::drawElevationShadeScale(QPainter& p) const
+{
+    if(doElevationShading() && doShowElevationShadeScale())
+    {
+        p.save();
+
+        // heading and limits
+        p.setOpacity(1.0);
+        QRect visibleCanvasArea = CMainWindow::self().getVisibleCanvas()->rect();
+        qreal limitLow = std::min(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+        qreal limitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+        CDraw::text(tr("Ele."), p, QPointF(visibleCanvasArea.width() - 70,30), Qt::black);
+
+        // labels
+        int nmbOfLabels = 7;
+        int yOffset = 30;
+        for(int i = 0; i < nmbOfLabels; i++)
+        {
+            qreal meter = i / (double) (nmbOfLabels-1) * (limitHi - limitLow) + limitLow;
+            QString val, unit;
+            IUnit::self().meter2elevation(meter, val, unit);
+            CDraw::text(QString("%1 %2").arg(val, unit), p, QPointF(visibleCanvasArea.width() - 70, 50 + (nmbOfLabels - 1 - i) * yOffset), Qt::black);
+        }
+
+        // color bar
+        for(int i = yOffset + 10; i <= nmbOfLabels * yOffset; i++)
+        {
+            qreal hue = 240 * (1 - (double) (i - yOffset - 10.) /(nmbOfLabels * yOffset - yOffset - 10));
+            const QColor& color = QColor::fromHsv(hue, 255, 255);
+            p.setPen(color);
+            p.drawLine(QPointF(visibleCanvasArea.width() - 30, yOffset + 10 + (nmbOfLabels * yOffset) - i), QPointF(visibleCanvasArea.width() - 15, yOffset + 10 + (nmbOfLabels * yOffset) - i));
+        }
+
+        p.restore();
     }
 }
 

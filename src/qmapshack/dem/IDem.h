@@ -54,7 +54,7 @@ public:
     virtual qreal getElevationAt(const QPointF& pos, bool checkScale) = 0;
     virtual qreal getSlopeAt(const QPointF& pos, bool checkScale) = 0;
 
-    bool activated()
+    bool activated() const
     {
         return isActivated;
     }
@@ -69,39 +69,59 @@ public:
      */
     virtual IDemProp* getSetup();
 
-    bool doHillshading()
+    bool doHillshading() const
     {
         return bHillshading;
     }
 
-    int getFactorHillshading();
+    int getFactorHillshading() const;
 
-    bool doSlopeColor()
+    bool doSlopeColor() const
     {
         return bSlopeColor;
     }
 
-    bool doElevationLimit()
+    bool doElevationLimit() const
     {
         return bElevationLimit;
     }
 
-    int getElevationLimit()
+    int getElevationLimit() const
     {
         return elevationValue;
     }
 
-    const QVector<QRgb> getSlopeColorTable()
+    bool doElevationShading() const
+    {
+        return bElevationShading;
+    }
+
+    int getElevationShadeLimitLow() const
+    {
+        return elevationShadeLimitLow;
+    }
+
+    int getElevationShadeLimitHi() const
+    {
+        return elevationShadeLimitHi;
+    }
+
+    const QVector<QRgb> getSlopeColorTable() const
     {
         return slopetable;
+    }
+
+    bool doShowElevationShadeScale() const
+    {
+        return bShowElevationShadeScale;
     }
 
     static const struct SlopePresets slopePresets[7];
     static const size_t slopePresetCount = sizeof(IDem::slopePresets) / sizeof(IDem::slopePresets[0]);
 
-    const qreal* getCurrentSlopeStepTable();
+    const qreal* getCurrentSlopeStepTable() const;
 
-    int getSlopeStepTableIndex()
+    int getSlopeStepTableIndex() const
     {
         return gradeSlopeColor;
     }
@@ -109,6 +129,10 @@ public:
     void setSlopeStepTable(int idx);
     void setSlopeStepTableCustomValue(int idx, int val);
     void setElevationLimit(int val);
+
+    void initElevationShadeTable();
+    void setElevationShadeLow(int val);
+    void setElevationShadeHi(int val);
 
     enum winsize_e {eWinsize3x3 = 9, eWinsize4x4 = 16};
 
@@ -130,13 +154,22 @@ public slots:
         bElevationLimit = yes;
     }
 
+    void slotSetElevationShading(bool yes)
+    {
+        bElevationShading = yes;
+    }
+
+    void slotShowElevationShadeScale(bool yes);
+
 protected:
 
-    void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img);
+    void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
 
-    void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage& img);
+    void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
 
-    void elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage& img);
+    void elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
+
+    void elevationShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
 
     /**
        @brief Slope in degrees based on a window. Origin is at point (1,1), counting from zero.
@@ -146,7 +179,7 @@ protected:
        @param y     Fractional value (0..1) for interpolation in y (4x4 window only)
        @return      Slope in degrees
      */
-    qreal slopeOfWindowInterp(qint16* win2, winsize_e size, qreal x, qreal y);
+    qreal slopeOfWindowInterp(qint16* win2, winsize_e size, qreal x, qreal y) const;
 
     /**
        @brief Reproject (translate, rotate, scale) tile before drawing it.
@@ -185,6 +218,8 @@ protected:
 
     QVector<QRgb> graytable;
 
+    QVector<QRgb> elevationShadeTable;
+
     QVector<QRgb> slopetable;
 
     QVector<QRgb> elevationtable;
@@ -196,12 +231,15 @@ protected:
 private:
     bool bHillshading = false;
     qreal factorHillshading = 0.1666666716337204;
-
     bool bSlopeColor = false;
     bool bElevationLimit = false;
     int gradeSlopeColor = 0;
     qreal slopeCustomStepTable[5];
     int elevationValue;
+    bool bElevationShading = false;
+    int elevationShadeLimitLow;
+    int elevationShadeLimitHi;
+    bool bShowElevationShadeScale = false;
 };
 
 #endif //IDEM_H

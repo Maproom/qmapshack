@@ -57,7 +57,14 @@ CDemPropSetup::CDemPropSetup(IDem* demfile, CDemDraw* dem)
     //
     connect(checkElevationLimit, &QCheckBox::toggled, demfile, &IDem::slotSetElevationLimit);
     connect(checkElevationLimit, &QCheckBox::clicked, dem, &CDemDraw::emitSigCanvasUpdate);
-    connect(spinBoxElevationLimit, QOverload<int>::of(&QSpinBox::valueChanged), this, &CDemPropSetup::slotElevationAfterEdit);
+    connect(spinBoxElevationLimit, QOverload<int>::of(&QSpinBox::valueChanged), this, &CDemPropSetup::slotElevationValueChanged);
+
+    connect(checkElevationShading, &QCheckBox::toggled, demfile, &IDem::slotSetElevationShading);
+    connect(checkElevationShading, &QCheckBox::clicked, dem, &CDemDraw::emitSigCanvasUpdate);
+    connect(spinBoxElevationShadeLimitLow, QOverload<int>::of(&QSpinBox::valueChanged), this, &CDemPropSetup::slotElevationShadeLowValueChanged);
+    connect(spinBoxElevationShadeLimitHi, QOverload<int>::of(&QSpinBox::valueChanged), this, &CDemPropSetup::slotElevationShadeHiValueChanged);
+    connect(showElevationShadeScale, &QPushButton::toggled, demfile, &IDem::slotShowElevationShadeScale);
+    connect(showElevationShadeScale, &QPushButton::toggled, dem, &CDemDraw::emitSigCanvasUpdate);
 
     for(size_t i = 0; i < SLOPE_LEVELS; i++)
     {
@@ -66,13 +73,13 @@ CDemPropSetup::CDemPropSetup(IDem* demfile, CDemDraw* dem)
         connect(slopeSpins[i], &CTinySpinBox::valueChangedByStep, this, &CDemPropSetup::slotSlopeValiddateAfterEdit);
     }
 
-
     for(size_t i = 0; i < IDem::slopePresetCount; i++)
     {
         comboGrades->addItem(IDem::slopePresets[i].name);
     }
     comboGrades->addItem("custom");
     connect(comboGrades, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDemPropSetup::slotGradeIndex);
+
 
 
     const QVector<QRgb>& colortable = demfile->getSlopeColorTable();
@@ -107,6 +114,7 @@ void CDemPropSetup::slotPropertiesChanged()
 
     checkHillshading->setChecked(demfile->doHillshading());
     sliderHillshading->setValue(demfile->getFactorHillshading());
+
     checkSlopeColor->setChecked(demfile->doSlopeColor());
 
     bool spinsReadonly = true;
@@ -130,6 +138,13 @@ void CDemPropSetup::slotPropertiesChanged()
     checkElevationLimit->setChecked(demfile->doElevationLimit());
     spinBoxElevationLimit->setValue(demfile->getElevationLimit());
     spinBoxElevationLimit->setSuffix(IUnit::self().elevationUnit);
+
+    checkElevationShading->setChecked(demfile->doElevationShading());
+    spinBoxElevationShadeLimitLow->setValue(demfile->getElevationShadeLimitLow());
+    spinBoxElevationShadeLimitLow->setSuffix(IUnit::self().elevationUnit);
+    spinBoxElevationShadeLimitHi->setValue(demfile->getElevationShadeLimitHi());
+    spinBoxElevationShadeLimitHi->setSuffix(IUnit::self().elevationUnit);
+    showElevationShadeScale->setChecked(demfile->doShowElevationShadeScale());
 
     dem->emitSigCanvasUpdate();
 
@@ -200,10 +215,21 @@ void CDemPropSetup::slotGradeIndex(int idx)
     slotPropertiesChanged();
 }
 
-void CDemPropSetup::slotElevationAfterEdit()
+void CDemPropSetup::slotElevationValueChanged()
 {
     demfile->setElevationLimit(spinBoxElevationLimit->value());
 
     dem->emitSigCanvasUpdate();
 }
 
+void CDemPropSetup::slotElevationShadeLowValueChanged()
+{
+    demfile->setElevationShadeLow(spinBoxElevationShadeLimitLow->value());
+    dem->emitSigCanvasUpdate();
+}
+
+void CDemPropSetup::slotElevationShadeHiValueChanged()
+{
+    demfile->setElevationShadeHi(spinBoxElevationShadeLimitHi->value());
+    dem->emitSigCanvasUpdate();
+}

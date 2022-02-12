@@ -50,6 +50,11 @@ CDemPropSetup::CDemPropSetup(IDem* demfile, CDemDraw* dem)
     connect(sliderHillshading, &QSlider::valueChanged, demfile, &IDem::slotSetFactorHillshade);
     connect(sliderHillshading, &QSlider::valueChanged, dem, &CDemDraw::emitSigCanvasUpdate);
 
+    connect(checkSlopeShading, &QCheckBox::toggled, demfile, &IDem::slotSetSlopeShading);
+    connect(checkSlopeShading, &QCheckBox::clicked, dem, &CDemDraw::emitSigCanvasUpdate);
+    connect(sliderSlopeShading, &QSlider::valueChanged, demfile, &IDem::slotSetFactorSlopeShade);
+    connect(sliderSlopeShading, &QSlider::valueChanged, dem, &CDemDraw::emitSigCanvasUpdate);
+
     connect(checkSlopeColor, &QCheckBox::toggled, demfile, &IDem::slotSetSlopeColor);
     connect(checkSlopeColor, &QCheckBox::clicked, dem, &CDemDraw::emitSigCanvasUpdate);
 
@@ -114,6 +119,8 @@ void CDemPropSetup::slotPropertiesChanged()
 
     checkHillshading->setChecked(demfile->doHillshading());
     sliderHillshading->setValue(demfile->getFactorHillshading());
+    checkSlopeShading->setChecked(demfile->doSlopeShading());
+    sliderSlopeShading->setValue(demfile->getFactorSlopeShading());
 
     checkSlopeColor->setChecked(demfile->doSlopeColor());
 

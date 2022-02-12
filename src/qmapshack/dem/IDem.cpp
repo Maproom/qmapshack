@@ -115,6 +115,8 @@ void IDem::saveConfig(QSettings& cfg)
 
     cfg.setValue("doHillshading", bHillshading);
     cfg.setValue("factorHillshading", factorHillshading);
+    cfg.setValue("doSlopeShading", bSlopeShading);
+    cfg.setValue("factorSlopeShading", factorSlopeShading);
     cfg.setValue("doSlopeColor", bSlopeColor);
 
     cfg.setValue("gradeSlopeColor", gradeSlopeColor);
@@ -140,6 +142,8 @@ void IDem::loadConfig(QSettings& cfg)
 
     bHillshading = cfg.value("doHillshading", bHillshading     ).toBool();
     factorHillshading = cfg.value("factorHillshading", factorHillshading).toFloat();
+    bSlopeShading = cfg.value("doSlopeShading", bSlopeShading     ).toBool();
+    factorSlopeShading = cfg.value("factorSlopeShading", factorSlopeShading).toFloat();
     bSlopeColor = cfg.value("doSlopeColor", bSlopeColor      ).toBool();
     gradeSlopeColor = cfg.value("gradeSlopeColor", gradeSlopeColor  ).toInt();
 
@@ -182,6 +186,11 @@ void IDem::slotSetFactorHillshade(int f)
     {
         factorHillshading = f;
     }
+}
+
+void IDem::slotSetFactorSlopeShade(int f)
+{
+    factorSlopeShading = f / 100.;
 }
 
 void IDem::setSlopeStepTableCustomValue(int idx, int val)
@@ -290,6 +299,39 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img) con
             }
 
             scan[n - 1] = cang;
+        }
+    }
+}
+
+int IDem::getFactorSlopeShading() const
+{
+    return (factorSlopeShading * 100.);
+}
+
+void IDem::slopeShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const
+{
+    int wp2 = w + 2;
+
+    for(unsigned int m = 1; m <= h; m++)
+    {
+        unsigned char* scan = img.scanLine(m - 1);
+        for(unsigned int n = 1; n <= w; n++)
+        {
+            qint16 win[eWinsize3x3];
+            fillWindow(data, n, m, wp2, win);
+
+            if(hasNoData && win[4] == noData)
+            {
+                scan[n - 1] = 0;
+                continue;
+            }
+
+            qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
+            int alphaValue = slope * 255./90. // map slope angle to alpha [0 .. 255]
+                           * factorSlopeShading; // apply slider value [0.25 .. 3.0]
+            if (alphaValue > 255) alphaValue = 255;
+
+            scan[n - 1] = alphaValue;
         }
     }
 }

@@ -124,6 +124,13 @@ zoom-out for use of the DEM data.</string>
      <property name="spacing">
       <number>3</number>
      </property>
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="checkHillshading">
+       <property name="text">
+        <string>Hillshading</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="1">
       <widget class="QSlider" name="sliderHillshading">
        <property name="minimum">
@@ -143,10 +150,32 @@ zoom-out for use of the DEM data.</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QCheckBox" name="checkHillshading">
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="checkSlopeShading">
        <property name="text">
-        <string>Hillshading</string>
+        <string>Slope Shading</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QSlider" name="sliderSlopeShading">
+       <property name="minimum">
+        <number>25</number>
+       </property>
+       <property name="maximum">
+        <number>300</number>
+       </property>
+       <property name="singleStep">
+        <number>25</number>
+       </property>
+       <property name="pageStep">
+        <number>25</number>
+       </property>
+       <property name="value">
+        <number>100</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -161,6 +190,13 @@ zoom-out for use of the DEM data.</string>
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_5">
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="checkSlopeColor">
+       <property name="text">
+        <string>Slope </string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="1">
       <widget class="QComboBox" name="comboGrades">
        <property name="insertPolicy">
@@ -168,13 +204,6 @@ zoom-out for use of the DEM data.</string>
        </property>
        <property name="sizeAdjustPolicy">
         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="checkSlopeColor">
-       <property name="text">
-        <string>Slope </string>
        </property>
       </widget>
      </item>

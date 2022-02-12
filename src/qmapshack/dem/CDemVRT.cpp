@@ -222,7 +222,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     QPointF bufferScale = buf.scale * buf.zoomFactor;
     outOfScale = isOutOfScale(bufferScale);
 
-    if(outOfScale || (!doHillshading() && !doSlopeColor() && !doElevationLimit() && !doElevationShading()))
+    if(outOfScale || (!doHillshading() && !doSlopeShading() && !doSlopeColor() && !doElevationLimit() && !doElevationShading()))
     {
         QThread::msleep(100);
         return;
@@ -381,6 +381,17 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                     img.setColorTable(graytable);
 
                     hillshading(data, w_used, h_used, img);
+
+                    drawTile(img, r, p);
+                }
+
+                if(doSlopeShading())
+                {
+                    QPolygonF r = l;
+
+                    QImage img(w_used, h_used, QImage::Format_Alpha8);
+
+                    slopeShading(data, w_used, h_used, img);
 
                     drawTile(img, r, p);
                 }

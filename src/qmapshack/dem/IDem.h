@@ -76,6 +76,13 @@ public:
 
     int getFactorHillshading() const;
 
+    bool doSlopeShading() const
+    {
+        return bSlopeShading;
+    }
+
+    int getFactorSlopeShading() const;
+
     bool doSlopeColor() const
     {
         return bSlopeColor;
@@ -144,6 +151,14 @@ public slots:
 
     void slotSetFactorHillshade(int f);
 
+
+    void slotSetSlopeShading(bool yes)
+    {
+        bSlopeShading = yes;
+    }
+
+    void slotSetFactorSlopeShade(int f);
+
     void slotSetSlopeColor(bool yes)
     {
         bSlopeColor = yes;
@@ -164,6 +179,8 @@ public slots:
 protected:
 
     void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
+
+    void slopeShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
 
     void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
 
@@ -231,6 +248,8 @@ protected:
 private:
     bool bHillshading = false;
     qreal factorHillshading = 0.1666666716337204;
+    bool bSlopeShading = false;
+    qreal factorSlopeShading = 1.0;
     bool bSlopeColor = false;
     bool bElevationLimit = false;
     int gradeSlopeColor = 0;

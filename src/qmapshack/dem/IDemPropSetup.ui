@@ -32,7 +32,7 @@
    <item>
     <widget class="QSlider" name="sliderOpacity">
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of layer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -126,6 +126,10 @@ zoom-out for use of the DEM data.</string>
      </property>
      <item row="1" column="0">
       <widget class="QCheckBox" name="checkHillshading">
+       <property name="toolTip">
+        <string>Enable relief shading based on aspect and slope,
+ and illuminated from NW.</string>
+       </property>
        <property name="text">
         <string>Hillshading</string>
        </property>
@@ -133,6 +137,10 @@ zoom-out for use of the DEM data.</string>
      </item>
      <item row="1" column="1">
       <widget class="QSlider" name="sliderHillshading">
+       <property name="toolTip">
+        <string>Move to the right to raise the angle of the light.
+ Light comes from NW</string>
+       </property>
        <property name="minimum">
         <number>-8</number>
        </property>
@@ -152,6 +160,10 @@ zoom-out for use of the DEM data.</string>
      </item>
      <item row="2" column="0">
       <widget class="QCheckBox" name="checkSlopeShading">
+       <property name="toolTip">
+        <string>Enable relief shading based on slope.
+ The steeper, the darker.</string>
+       </property>
        <property name="text">
         <string>Slope Shading</string>
        </property>
@@ -159,6 +171,10 @@ zoom-out for use of the DEM data.</string>
      </item>
      <item row="2" column="1">
       <widget class="QSlider" name="sliderSlopeShading">
+       <property name="toolTip">
+        <string>Move to the right to increase the scale factor.
+ Higher values are better for flatter areas.</string>
+       </property>
        <property name="minimum">
         <number>25</number>
        </property>
@@ -192,6 +208,10 @@ zoom-out for use of the DEM data.</string>
     <layout class="QGridLayout" name="gridLayout_5">
      <item row="0" column="0">
       <widget class="QCheckBox" name="checkSlopeColor">
+       <property name="toolTip">
+        <string>Enable color shading
+ based on slope ranges.</string>
+       </property>
        <property name="text">
         <string>Slope </string>
        </property>
@@ -199,6 +219,9 @@ zoom-out for use of the DEM data.</string>
      </item>
      <item row="0" column="1">
       <widget class="QComboBox" name="comboGrades">
+       <property name="toolTip">
+        <string>Select color scheme.</string>
+       </property>
        <property name="insertPolicy">
         <enum>QComboBox::NoInsert</enum>
        </property>
@@ -690,6 +713,9 @@ zoom-out for use of the DEM data.</string>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Tint areas above the given elevation.</string>
+       </property>
        <property name="text">
         <string>Elevation Limit</string>
        </property>
@@ -714,6 +740,9 @@ zoom-out for use of the DEM data.</string>
          <height>30</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Lower elevation to be colored.</string>
+       </property>
        <property name="minimum">
         <number>-12000</number>
        </property>
@@ -733,6 +762,9 @@ zoom-out for use of the DEM data.</string>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Lower elevation to be colored.</string>
+       </property>
        <property name="text">
         <string>Elevation Low</string>
        </property>
@@ -745,6 +777,9 @@ zoom-out for use of the DEM data.</string>
          <width>30</width>
          <height>30</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Higher elevation to be colored.</string>
        </property>
        <property name="minimum">
         <number>-12000</number>
@@ -759,6 +794,10 @@ zoom-out for use of the DEM data.</string>
      </item>
      <item row="0" column="0">
       <widget class="QCheckBox" name="checkElevationShading">
+       <property name="toolTip">
+        <string>Enable color shading
+ based on elevation.</string>
+       </property>
        <property name="text">
         <string>Elevation Shading</string>
        </property>
@@ -772,6 +811,9 @@ zoom-out for use of the DEM data.</string>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Higher elevation to be colored.</string>
+       </property>
        <property name="text">
         <string>Elevation High</string>
        </property>
@@ -779,6 +821,9 @@ zoom-out for use of the DEM data.</string>
      </item>
      <item row="0" column="1">
       <widget class="QPushButton" name="showElevationShadeScale">
+       <property name="toolTip">
+        <string>Enable / Disable elevation legend.</string>
+       </property>
        <property name="text">
         <string>Legend</string>
        </property>

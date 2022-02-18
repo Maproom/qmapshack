@@ -1,6 +1,8 @@
 [QMS-470] Windows build scripts: adapt for release v1.16.1
 |QMS-476] Color the map by elevation
 [QMS-483] Add alpha transparency based hillshading
+[QMS-487] Add tooltips for DEM controls
+
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing
 [QMS-400] Set focus in text field

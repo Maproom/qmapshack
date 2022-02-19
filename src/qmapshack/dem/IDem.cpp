@@ -327,11 +327,17 @@ void IDem::slopeShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) co
             }
 
             qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
-            int alphaValue = slope * 255./90. // map slope angle to alpha [0 .. 255]
-                           * factorSlopeShading; // apply slider value [0.25 .. 3.0]
-            if (alphaValue > 255) alphaValue = 255;
-
-            scan[n - 1] = alphaValue;
+            if(slope == NOFLOAT)
+            {
+                scan[n - 1] = 0;
+            }
+            else
+            {
+                int alphaValue = slope * 255./90. // map slope angle to alpha [0 .. 255]
+                               * factorSlopeShading; // apply slider value [0.25 .. 3.0]
+                if (alphaValue > 255) alphaValue = 255;
+                scan[n - 1] = alphaValue;
+            }
         }
     }
 }

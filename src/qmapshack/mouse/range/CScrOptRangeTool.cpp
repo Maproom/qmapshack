@@ -68,10 +68,10 @@ CScrOptRangeTool::CScrOptRangeTool(CGisItemTrk& trk, CMouseRangeTrk* mouse, CCan
     slotCanvasResize(canvas->size());
     show();
 
-    connect(toolBegDn, &QToolButton::pressed, this, [this](){updateCanvas = true; this->trk.incMouseRangeBegin(-1, owner);});
-    connect(toolBegUp, &QToolButton::pressed, this, [this](){updateCanvas = true; this->trk.incMouseRangeBegin(+1, owner);});
-    connect(toolEndDn, &QToolButton::pressed, this, [this](){updateCanvas = true; this->trk.incMouseRangeEnd(-1, owner);});
-    connect(toolEndUp, &QToolButton::pressed, this, [this](){updateCanvas = true; this->trk.incMouseRangeEnd(+1, owner);});
+    connect(toolBegDn, &QToolButton::pressed, this, [this](){updateCanvas = true; this->trk.decMouseRangeBegin(1, owner);});
+    connect(toolBegUp, &QToolButton::pressed, this, [this](){updateCanvas = true; this->trk.incMouseRangeBegin(1, owner);});
+    connect(toolEndDn, &QToolButton::pressed, this, [this](){updateCanvas = true; this->trk.decMouseRangeEnd(1, owner);});
+    connect(toolEndUp, &QToolButton::pressed, this, [this](){updateCanvas = true; this->trk.incMouseRangeEnd(1, owner);});
 
     connect(toolBegDn, &QToolButton::released, this, &CScrOptRangeTool::slotResetUpdateCanvas);
     connect(toolBegUp, &QToolButton::released, this, &CScrOptRangeTool::slotResetUpdateCanvas);
@@ -235,9 +235,9 @@ void CScrOptRangeTool::slotCopy()
 
 void CScrOptRangeTool::slotToRoute()
 {
-  QMutexLocker lock(&IGisItem::mutexItems);
-  trk.toRoute();
-  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    QMutexLocker lock(&IGisItem::mutexItems);
+    trk.toRoute();
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CScrOptRangeTool::slotDelete()

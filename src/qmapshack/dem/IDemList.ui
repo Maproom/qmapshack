@@ -44,6 +44,9 @@
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
      <property name="dragDropMode">
       <enum>QAbstractItemView::InternalMove</enum>
      </property>
@@ -52,6 +55,9 @@
        <width>32</width>
        <height>32</height>
       </size>
+     </property>
+     <property name="verticalScrollMode">
+      <enum>QAbstractItemView::ScrollPerPixel</enum>
      </property>
      <attribute name="headerVisible">
       <bool>false</bool>

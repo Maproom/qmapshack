@@ -71,13 +71,15 @@ void CAppSetupMac::initQMapTool()
     migrateDirContent(userDataPath());
 
     // create directories
+    IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
     IAppSetup::path(logDir(), 0, false, "LOG");
 }
 
 
 QString CAppSetupMac::defaultCachePath()
 {
-    const QString& cachePath = QStandardPaths::standardLocations(QStandardPaths::CacheLocation).at(0);
+    const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::CacheLocation);
+    const QString& cachePath = standardLocations.first();
     return IAppSetup::path(cachePath, 0, false, 0);
 }
 
@@ -85,9 +87,11 @@ QString CAppSetupMac::defaultCachePath()
 QString CAppSetupMac::userDataPath(QString subdir)
 {
 #if QT_VERSION >= 0x050400
-    const QString& dataDir = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation).at(0);
+    const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
+    const QString& dataDir = standardLocations.first();
 #else
-    const QString& dataDir = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
+    const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::DataLocation);
+    const QString& dataDir = standardLocations.first();
 #endif
     return IAppSetup::path(dataDir, subdir, false, 0);
 }
@@ -96,7 +100,8 @@ QString CAppSetupMac::userDataPath(QString subdir)
 QString CAppSetupMac::logDir()
 {
     // home location returns / (root) instead of user home...
-    const QString& home = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).at(0);
+    const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation);
+    const QString& home = standardLocations.first();
     QDir dir = QDir(home);
     dir.cdUp();
     return IAppSetup::path(dir.absolutePath(), relLogDir, false, 0);

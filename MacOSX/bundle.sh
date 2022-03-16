@@ -146,13 +146,22 @@ function adjustLinking {
         adjustLinkQt $F "libq"
         adjustLinkQt $F "/usr/local/"
     done
+    
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5/Helpers/QtWebEngineProcess.app/Contents/MacOS -type f -maxdepth 1`
+    do
+        #
+        #   new 21.12.20 for WebEngineProcess   drj
+        #   
+        adjustLinkQt_WebEngine $F "Qt"
+        adjustLinkQt $F "/usr/local/"
+    done
 
     for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
     do
         #
-        #  2.12.20 switched off after using Qt5 from https://www.qt.io/offline-installers
+        #   switch off first call if use original Qt5
         #
-        #adjustLinkQt $F "Qt"
+        adjustLinkQt $F "Qt"
         adjustLinkQt $F "/usr/local/"
     done
 
@@ -185,7 +194,13 @@ function adjustLinkQt {
         LIB=${LIB%%:}
         PREL="@executable_path/../Frameworks/$LIB"
 
-        if [[ "$P" == *".framework"* ]]; then
+        if [[ ("$P" == *".framework"*) && ("$P" == *$L*) && ("$FREL" != "QMapShack") && ("$FREL" != "QMapTool") && ("$FREL" == *$L*) ]]; then
+            LIB_VERSION=Versions/5
+            LIB=$LIB.framework/$LIB_VERSION/$LIB
+            PREL="@rpath/$LIB"
+        elif [[ ("$P" == *"Frameworks"*) && ("$P" != *$L*) && ("$FREL" != "QMapShack") && ("$FREL" != "QMapTool") && ("$FREL" != "$LIB") && ("$LIB" == *".dylib") && ("$L" == "Qt") ]]; then
+            PREL="@rpath/$LIB"
+        elif [[ "$P" == *".framework"* ]]; then
             LIB_VERSION=Versions/5
             LIB=$LIB.framework/$LIB_VERSION/$LIB
             PREL="@executable_path/../Frameworks/$LIB"
@@ -205,8 +220,64 @@ echo "PREL = $PREL"
 
         if [[ "$P" == "$FREL" ]]; then
             echo "no update - is a relativ id"
+        elif [[ ("$P" == *"Frameworks"*) && ("$P" != *$L*) && ("$FREL" != "QMapShack") && ("$FREL" != "QMapTool") && ("$FREL" != "$LIB") && ("$LIB" == *".dylib") && ("$L" == "Qt") && ("$F" == *".framework"*) ]]; then
+            sudo install_name_tool -change $P $PREL $F
+        elif [[ ("$P" == *"Frameworks"*) && ("$P" != *$L*) && ("$FREL" != "QMapShack") && ("$FREL" != "QMapTool") && ("$FREL" != "$LIB") && ("$LIB" == *".dylib") && ("$L" == "Qt") ]]; then
+            ALL_LOADER=`otool -l $F | grep @loader_path/`
+            if [ -z "$ALL_LOADER" ]; then
+                sudo install_name_tool -add_rpath @loader_path/  $F
+            fi
+            sudo install_name_tool -change $P $PREL $F
 		elif [[ "$LIB" == *"$FREL" ]]; then
             echo "name_tool: $FREL >> $PREL ($P)"
+            sudo install_name_tool -id $PREL $F
+        elif [[ "$P" == *$L* ]]; then
+            echo "name_tool: $FREL > $PREL ($P)"
+            sudo install_name_tool -change $P $PREL $F
+        fi
+    done
+}
+
+function adjustLinkQt_WebEngine {
+    F=$1 # file
+    L=$2 # search condition
+    FREL=${F##*/}
+
+    for P in `otool -L $F | awk '{print $1}'`
+    do
+        #  replace double slashes
+        if [[ "$P" == *//* ]]; then 
+            PSLASH=$(echo $P | sed 's,//,/,g')
+            sudo install_name_tool -change $P $PSLASH $F
+        fi
+
+        LIB=${P##*/}
+        LIB=${LIB%%:}
+        PREL="@rpath/../Frameworks/$LIB"
+
+        if [[ "$P" == *".framework"* ]]; then
+            LIB_VERSION=Versions/5
+            LIB=$LIB.framework/$LIB_VERSION/$LIB
+            PREL="@rpath/$LIB"
+        elif [[ "$P" == *"PlugIns"* ]]; then
+            # subdirectory for PlugIns
+            LIB=${P##*PlugIns/} # remove prepart
+            PREL="@executable_path/../PlugIns/$LIB"
+        fi
+
+echo "-----"
+echo "F    = $F"
+echo "FREL = $FREL"
+echo "L    = $L"
+echo "P    = $P"
+echo "LIB  = $LIB"
+echo "PREL = $PREL"
+
+        if [[ "$P" == "$FREL" ]]; then
+            echo "no update - is a relativ id"
+		elif [[ "$LIB" == *"$FREL" ]]; then
+            echo "name_tool: $FREL >> $PREL ($P)"
+            sudo install_name_tool -add_rpath @loader_path/../../../../../../../  $F
             sudo install_name_tool -id $PREL $F
         elif [[ "$P" == *$L* ]]; then
             echo "name_tool: $FREL > $PREL ($P)"

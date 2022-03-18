@@ -1310,6 +1310,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                     actionUserFocusPrj->setChecked(hasUserFocus);
                     const QIcon& icon = hasUserFocus ? QIcon("://icons/32x32/Focus.png") : QIcon("://icons/32x32/UnFocus.png");
                     actionUserFocusPrj->setIcon(icon);
+                    actionCloseProj->setEnabled(!autoSyncToDev);
                     showMenuProjectWks(p);
                 }
             }
@@ -2472,7 +2473,7 @@ void CGisListWks::slotToRoute()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
-    CGisItemTrk *gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
+    CGisItemTrk* gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != nullptr)
     {
         CGisWorkspace::self().convertTrackToRoute(gisItem->getKey());

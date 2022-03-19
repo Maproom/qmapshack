@@ -25,22 +25,36 @@
 CRawPoi::CRawPoi(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon)
     : category(category), coordinates(coordinates), rawData(data), garminIcon(garminIcon), key(key)
 {
+    QString lastValidKey = "";
     for(const QString& line : data)
     {
         const QStringList& keyValue = line.split("=");
-        if(keyValue[0].contains("wikipedia", Qt::CaseInsensitive))
+        if (keyValue.length() == 1)
         {
-            wikipediaRelatedKeys += keyValue[0];
+            this->data[lastValidKey] += line;
         }
-        if(keyValue[0].contains("wikidata", Qt::CaseInsensitive))
+        else if(keyValue.length() > 2)
         {
-            wikidataRelatedKeys += keyValue[0];
+            // facilitate debuging in case the line separateion changes in future and all lines are interpreted as one
+            qWarning() << "Encountered line with multiple key-value assignments: " + line;
         }
-        if(keyValue[0] == "name" || keyValue[0].contains("name:\\w\\w", Qt::CaseInsensitive) || keyValue[0].contains(QRegularExpression("[A-z]+_name")))
+        else
         {
-            nameRelatedKeys += keyValue[0];
+            if(keyValue[0].contains("wikipedia", Qt::CaseInsensitive))
+            {
+                wikipediaRelatedKeys += keyValue[0];
+            }
+            if(keyValue[0].contains("wikidata", Qt::CaseInsensitive))
+            {
+                wikidataRelatedKeys += keyValue[0];
+            }
+            if(keyValue[0] == "name" || keyValue[0].contains("name:\\w\\w", Qt::CaseInsensitive) || keyValue[0].contains(QRegularExpression("[A-z]+_name")))
+            {
+                nameRelatedKeys += keyValue[0];
+            }
+            this->data[keyValue[0]] = keyValue[1];
+            lastValidKey = keyValue[0];
         }
-        this->data[keyValue[0]] = keyValue[1];
     }
 
     //find name

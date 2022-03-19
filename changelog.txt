@@ -1,4 +1,5 @@
 V1.XX.X
+[QMS-429] Bad OSM Tag formatting crashes QMS
 [QMS-470] Windows build scripts: adapt for release v1.16.1
 |QMS-476] Color the map by elevation
 [QMS-483] Add alpha transparency based hillshading

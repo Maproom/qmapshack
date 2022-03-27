@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#ifndef CRAWPOI_H
-#define CRAWPOI_H
+#ifndef CPOIITEMPOI_H
+#define CPOIITEMPOI_H
 
 #include "gis/IGisItem.h"
 
@@ -28,15 +28,15 @@
 #include <QString>
 #include <QStringList>
 
-struct poi_t;
+struct IPoiItem;
 
-class CRawPoi
+class CPoiItemPOI
 {
-    Q_DECLARE_TR_FUNCTIONS(CRawPoi)
+    Q_DECLARE_TR_FUNCTIONS(CPoiItemPOI)
 public:
     //Dummy constructor for the usage of QMap
-    CRawPoi(){}
-    CRawPoi(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon);
+    CPoiItemPOI(){}
+    CPoiItemPOI(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon);
     const QString& getCategory() const;
     const QString& getName(bool replaceEmptyByCategory = true) const;
     const QPointF& getCoordinates() const;
@@ -46,7 +46,7 @@ public:
     QString getDesc() const;
     QList<IGisItem::link_t> getLinks() const;
     quint32 getEle() const;
-    poi_t toPoi() const;
+    IPoiItem toPoi() const;
 
 
 private:
@@ -63,4 +63,4 @@ private:
     QString name;
 };
 
-#endif // CRAWPOI_H
+#endif // CPOIITEMPOI_H

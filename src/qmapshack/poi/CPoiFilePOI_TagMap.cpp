@@ -17,10 +17,10 @@
 **********************************************************************************************/
 
 #include "poi/CPoiIconCategory.h"
-#include "poi/CPoiPOI.h"
+#include "poi/CPoiFilePOI.h"
 
-QMap<QString, CPoiIconCategory> CPoiPOI::tagMap;
-QMap<QString, CPoiIconCategory> CPoiPOI::initTagMap()
+QMap<QString, CPoiIconCategory> CPoiFilePOI::tagMap;
+QMap<QString, CPoiIconCategory> CPoiFilePOI::initTagMap()
 {
     QMap<QString, CPoiIconCategory> map;
     /*

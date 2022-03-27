@@ -20,8 +20,8 @@
 #ifndef CMOUSENORMAL_H
 #define CMOUSENORMAL_H
 
-#include "gis/Poi.h"
 #include "mouse/IMouse.h"
+#include "poi/IPoiItem.h"
 
 #include <QPixmap>
 #include <QPointer>
@@ -53,7 +53,7 @@ public:
     void scaleChanged() override;
 
 private slots:
-    void slotAddPoi(const poi_t& poi)           const;
+    void slotAddPoi(const IPoiItem& poi)           const;
     void slotAddWpt()           const;
     void slotAddTrk()           const;
     void slotAddRte()           const;
@@ -87,7 +87,7 @@ protected:
     CScrOptUnclutter* screenUnclutter;
     QPointer<IScrOpt>  screenItemOption;
 
-    QSet<poi_t> curPois;
+    QSet<IPoiItem> curPois;
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
     QList<QPointF> posPoiHighlight;

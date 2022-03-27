@@ -22,7 +22,7 @@
 #include "canvas/IDrawContext.h"
 
 class CPoiList;
-class CPoiItem;
+class CPoiFileItem;
 
 class CPoiDraw : public IDrawContext
 {
@@ -33,7 +33,7 @@ public:
     void saveConfig(QSettings& cfg);
     void loadConfig(QSettings& cfg);
 
-    void loadConfigForPoiItem(CPoiItem* item);
+    void loadConfigForPoiItem(CPoiFileItem* item);
 
     bool setProjection(const QString& proj) override;
 
@@ -52,8 +52,8 @@ public:
         return supportedFormats;
     }
 
-    void findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const;
-    void findPoisIn(const QRectF& degRect, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const;
+    void findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const;
+    void findPoisIn(const QRectF& degRect, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const;
     bool getToolTip(const QPoint& px, QString& str);
 protected:
     void drawt(buffer_t& currentBuffer) override;

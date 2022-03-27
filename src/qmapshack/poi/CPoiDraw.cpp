@@ -17,10 +17,10 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/Poi.h"
+#include "poi/CPoiItem.h"
 #include "helpers/CSettings.h"
 #include "poi/CPoiDraw.h"
-#include "poi/CPoiItem.h"
+#include "poi/CPoiFileItem.h"
 #include "poi/CPoiList.h"
 #include "poi/CPoiPathSetup.h"
 
@@ -140,13 +140,13 @@ void CPoiDraw::loadPoiPath(QSettings& cfg)
     poiPaths = cfg.value("poiPaths", poiPaths).toStringList();
 }
 
-void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
+void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
-    if(poiList && CPoiItem::mutexActivePois.tryLock())
+    if(poiList && CPoiFileItem::mutexActivePois.tryLock())
     {
         for(int i = 0; i < poiList->count(); i++)
         {
-            CPoiItem* item = poiList->item(i);
+            CPoiFileItem* item = poiList->item(i);
 
             if(!item || item->getPoifile().isNull())
             {
@@ -158,17 +158,17 @@ void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPo
 
             item->findPoiCloseBy(px, poiItems, posPoiHighlight);
         }
-        CPoiItem::mutexActivePois.unlock();
+        CPoiFileItem::mutexActivePois.unlock();
     }
 }
 
-void CPoiDraw::findPoisIn(const QRectF& degRect, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
+void CPoiDraw::findPoisIn(const QRectF& degRect, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
-    if(poiList && CPoiItem::mutexActivePois.tryLock())
+    if(poiList && CPoiFileItem::mutexActivePois.tryLock())
     {
         for(int i = 0; i < poiList->count(); i++)
         {
-            CPoiItem* item = poiList->item(i);
+            CPoiFileItem* item = poiList->item(i);
 
             if(!item || item->getPoifile().isNull())
             {
@@ -180,17 +180,17 @@ void CPoiDraw::findPoisIn(const QRectF& degRect, QSet<poi_t>& poiItems, QList<QP
 
             item->findPoisIn(degRect, poiItems, posPoiHighlight);
         }
-        CPoiItem::mutexActivePois.unlock();
+        CPoiFileItem::mutexActivePois.unlock();
     }
 }
 
 bool CPoiDraw::getToolTip(const QPoint& px, QString& str)
 {
-    if(poiList && CPoiItem::mutexActivePois.tryLock())
+    if(poiList && CPoiFileItem::mutexActivePois.tryLock())
     {
         for(int i = 0; i < poiList->count(); i++)
         {
-            CPoiItem* item = poiList->item(i);
+            CPoiFileItem* item = poiList->item(i);
 
             if(!item || item->getPoifile().isNull())
             {
@@ -202,11 +202,11 @@ bool CPoiDraw::getToolTip(const QPoint& px, QString& str)
 
             if(item->getToolTip(px, str))
             {
-                CPoiItem::mutexActivePois.unlock();
+                CPoiFileItem::mutexActivePois.unlock();
                 return true;
             }
         }
-        CPoiItem::mutexActivePois.unlock();
+        CPoiFileItem::mutexActivePois.unlock();
     }
     return false;
 }
@@ -215,7 +215,7 @@ void CPoiDraw::buildPoiList()
 {
     QCryptographicHash md5(QCryptographicHash::Md5);
 
-    QMutexLocker lock(&CPoiItem::mutexActivePois);
+    QMutexLocker lock(&CPoiFileItem::mutexActivePois);
     poiList->clear();
 
     for(const QString& path : qAsConst(poiPaths))
@@ -227,7 +227,7 @@ void CPoiDraw::buildPoiList()
         {
             QFileInfo fi(filename);
 
-            CPoiItem* item = new CPoiItem(*poiList, this);
+            CPoiFileItem* item = new CPoiFileItem(*poiList, this);
 
             item->setText(0, fi.completeBaseName().replace("_", " "));
             item->filename = dir.absoluteFilePath(filename);
@@ -249,11 +249,11 @@ void CPoiDraw::buildPoiList()
 
 void CPoiDraw::saveActivePoisList(QStringList& keys, QSettings& cfg)
 {
-    QMutexLocker lock(&CPoiItem::mutexActivePois);
+    QMutexLocker lock(&CPoiFileItem::mutexActivePois);
 
     for(int i = 0; i < poiList->count(); i++)
     {
-        CPoiItem* item = poiList->item(i);
+        CPoiFileItem* item = poiList->item(i);
         if(item && !item->poifile.isNull())
         {
             item->saveConfig(cfg);
@@ -273,7 +273,7 @@ void CPoiDraw::saveActivePoisList(QStringList& keys)
     cfg.endGroup();
 }
 
-void CPoiDraw::loadConfigForPoiItem(CPoiItem* item)
+void CPoiDraw::loadConfigForPoiItem(CPoiFileItem* item)
 {
     if(cfgGroup.isEmpty())
     {
@@ -290,13 +290,13 @@ void CPoiDraw::loadConfigForPoiItem(CPoiItem* item)
 
 void CPoiDraw::restoreActivePoisList(const QStringList& keys)
 {
-    QMutexLocker lock(&CPoiItem::mutexActivePois);
+    QMutexLocker lock(&CPoiFileItem::mutexActivePois);
 
     for(const QString& key : keys)
     {
         for(int i = 0; i < poiList->count(); i++)
         {
-            CPoiItem* item = poiList->item(i);
+            CPoiFileItem* item = poiList->item(i);
 
             if(item && item->key == key)
             {
@@ -315,13 +315,13 @@ void CPoiDraw::restoreActivePoisList(const QStringList& keys)
 
 void CPoiDraw::restoreActivePoisList(const QStringList& keys, QSettings& cfg)
 {
-    QMutexLocker lock(&CPoiItem::mutexActivePois);
+    QMutexLocker lock(&CPoiFileItem::mutexActivePois);
 
     for(const QString& key : keys)
     {
         for(int i = 0; i < poiList->count(); i++)
         {
-            CPoiItem* item = poiList->item(i);
+            CPoiFileItem* item = poiList->item(i);
 
             if(item && item->key == key)
             {
@@ -341,12 +341,12 @@ void CPoiDraw::restoreActivePoisList(const QStringList& keys, QSettings& cfg)
 void CPoiDraw::drawt(buffer_t& currentBuffer)
 {
     // iterate over all active maps and call the draw method
-    CPoiItem::mutexActivePois.lock();
+    CPoiFileItem::mutexActivePois.lock();
     if(poiList)
     {
         for(int i = 0; i < poiList->count(); i++)
         {
-            CPoiItem* item = poiList->item(i);
+            CPoiFileItem* item = poiList->item(i);
 
             if(!item || item->poifile.isNull())
             {
@@ -359,5 +359,5 @@ void CPoiDraw::drawt(buffer_t& currentBuffer)
             item->poifile->draw(currentBuffer);
         }
     }
-    CPoiItem::mutexActivePois.unlock();
+    CPoiFileItem::mutexActivePois.unlock();
 }

@@ -18,7 +18,7 @@
 
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
-#include "gis/Poi.h"
+#include "poi/CPoiItem.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "map/cache/CDiskCache.h"
@@ -184,9 +184,9 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
     CMapItem::mutexActiveMaps.unlock();
 }
 
-poi_t CMapDraw::findPOICloseBy(const QPoint& px) const
+CPoiItem CMapDraw::findPOICloseBy(const QPoint& px) const
 {
-    poi_t poi;
+    CPoiItem poi;
 
     if(isRunning())
     {

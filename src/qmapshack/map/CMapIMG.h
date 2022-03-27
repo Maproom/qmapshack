@@ -127,7 +127,7 @@ public:
 
     void getToolTip(const QPoint& px, QString& infotext) const override;
 
-    void findPOICloseBy(const QPoint&, poi_t& poi) const override;
+    void findPOICloseBy(const QPoint&, CPoiItem& poi) const override;
 
     /**
        @brief Find a matching street polyline

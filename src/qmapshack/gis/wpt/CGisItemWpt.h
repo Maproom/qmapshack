@@ -27,7 +27,7 @@
 #include <QCoreApplication>
 #include <QPointer>
 
-struct poi_t;
+struct CPoiItem;
 class IGisProject;
 class QDomNode;
 class CScrOptWpt;
@@ -350,7 +350,7 @@ public:
 
     static QString getLastName(const QString& name);
     static void newWpt(const QPointF& pt, const QString& name, const QString& desc, IGisProject* project);
-    static void newWpt(const poi_t& poi, IGisProject* project, bool openEditWIndow = true);
+    static void newWpt(const CPoiItem& poi, IGisProject* project, bool openEditWIndow = true);
     static bool getIconAndName(QString& icon, QString& name);
 
     static void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& avoid, const bool& selected);

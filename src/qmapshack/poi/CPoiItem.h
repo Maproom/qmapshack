@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2020 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2017 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,105 +16,37 @@
 
 **********************************************************************************************/
 
-#ifndef CPOIITEM_H
-#define CPOIITEM_H
+#ifndef POI_H
+#define POI_H
 
-#include "poi/IPoi.h"
+#include "gis/IGisItem.h"
+#include "units/IUnit.h"
+#include <QPointF>
+#include <QSize>
 
-#include <QMutex>
-#include <QPointer>
-#include <QTreeWidgetItem>
-
-class CPoiDraw;
-class QSettings;
-
-class CPoiItem : public QTreeWidgetItem
+struct CPoiItem
 {
-public:
-    CPoiItem(QTreeWidget* parent, CPoiDraw* poi);
-    virtual ~CPoiItem() = default;
-
-    void saveConfig(QSettings& cfg);
-    void loadConfig(QSettings& cfg);
-
-    /**
-       @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronized.
-     */
-    static QMutex mutexActivePois;
-
-    /**
-       @brief Query if poi objects are loaded
-       @return True if the internal list of poi objects is not empty.
-     */
-    bool isActivated();
-    /**
-       @brief Either loads or destroys internal map objects
-       @return True if the internal list of maps is not empty after the operation.
-     */
-    bool toggleActivate();
-    /**
-     * @brief Load all internal map objects
-     * @return Return true on success.
-     */
-    bool activate();
-    /**
-       @brief Delete all internal map objects
-     */
-    void deactivate();
-    /**
-       @brief Move item to top of list widget
-     */
-    void moveToTop();
-    void moveToBottom();
-
-    void updateIcon();
-
-    /**
-       @brief Show or hide child treewidget items
-       @param yes set true to add children, false will remove all children and delete the attached widgets
-     */
-    void showChildren(bool yes);
-
-
-    QString getName() const
-    {
-        return text(0);
-    }
-
-    QPointer<IPoi>& getPoifile(){return poifile;}
-
-    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
-    /// Thus the location where to draw the highlight is separately given
-    bool findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
-    {
-        return poifile->findPoiCloseBy(px, poiItems, posPoiHighlight);
-    }
-    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
-    /// Thus the location where to draw the highlight is separately given
-    void findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF>& posPoiHighlight)
-    {
-        getPoifile()->findPoisIn(degRect, pois, posPoiHighlight);
-    }
-    bool getToolTip(const QPoint& px, QString& str)
-    {
-        return getPoifile()->getToolTip(px, str);
-    }
-private:
-    friend class CPoiDraw;
-    CPoiDraw* poi;
-    /**
-       @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
-     */
-    QString key;
-    /**
-       @brief List of map files forming that particular map
-     */
-    QString filename;
-    /**
-       @brief the actual poi file object
-     */
-    QPointer<IPoi> poifile;
+    CPoiItem() : pos(NOPOINTF){}
+    QString name;
+    QString desc;
+    /// in radians
+    QPointF pos;
+    QString icon;
+    QList<IGisItem::link_t> links;
+    quint32 ele = NOINT;
 };
 
-#endif //CPOIITEM_H
+inline bool operator==(const CPoiItem& poi1, const CPoiItem& poi2)
+{
+    return poi1.name == poi2.name
+           && poi1.desc == poi2.desc
+           && poi1.pos == poi2.pos;
+}
+
+inline uint qHash(const CPoiItem& poi, uint seed)
+{
+    return qHash(poi.name, seed) ^ qHash(poi.desc, seed) ^ qHash(poi.pos.x(), seed) ^ qHash(poi.pos.y(), seed);
+}
+
+#endif //POI_H
 

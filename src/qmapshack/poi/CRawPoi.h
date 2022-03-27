@@ -28,7 +28,7 @@
 #include <QString>
 #include <QStringList>
 
-struct poi_t;
+struct CPoiItem;
 
 class CRawPoi
 {
@@ -46,7 +46,7 @@ public:
     QString getDesc() const;
     QList<IGisItem::link_t> getLinks() const;
     quint32 getEle() const;
-    poi_t toPoi() const;
+    CPoiItem toPoi() const;
 
 
 private:

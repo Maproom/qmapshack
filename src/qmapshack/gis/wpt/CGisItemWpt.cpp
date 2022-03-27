@@ -24,7 +24,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/GeoMath.h"
 #include "gis/prj/IGisProject.h"
-#include "gis/Poi.h"
+#include "poi/CPoiItem.h"
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -291,7 +291,7 @@ void CGisItemWpt::newWpt(const QPointF& pt, const QString& name, const QString& 
     cfg.setValue("Waypoint/lastIcon", wpt->getIconName());
 }
 
-void CGisItemWpt::newWpt(const poi_t& poi, IGisProject* project, bool openEditWIndow)
+void CGisItemWpt::newWpt(const CPoiItem& poi, IGisProject* project, bool openEditWIndow)
 {
     SETTINGS;
     const QString& _icon = poi.icon.isEmpty() ? cfg.value("Waypoint/lastIcon", "Waypoint").toString() : poi.icon;

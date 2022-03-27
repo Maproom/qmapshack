@@ -113,7 +113,7 @@ CMainWindow::CMainWindow()
 
     CSearch::init();
 
-    IPoi::init();
+    IPoiFile::init();
     CPoiPOI::init();
 
     IGisItem::init();

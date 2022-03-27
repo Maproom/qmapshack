@@ -29,7 +29,7 @@
 
 class CMapDraw;
 class IMapProp;
-struct poi_t;
+struct CPoiItem;
 
 class IMap : public IDrawObject
 {
@@ -76,7 +76,7 @@ public:
 
     virtual void getToolTip(const QPoint&, QString&) const {}
 
-    virtual void findPOICloseBy(const QPoint&, poi_t&) const {}
+    virtual void findPOICloseBy(const QPoint&, CPoiItem&) const {}
 
     /**
        @brief Return copyright notice if any

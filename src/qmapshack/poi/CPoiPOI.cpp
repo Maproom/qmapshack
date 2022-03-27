@@ -17,14 +17,14 @@
 
 **********************************************************************************************/
 
-#include "gis/Poi.h"
+#include "poi/CPoiItem.h"
 #include "helpers/CDraw.h"
 #include "helpers/CTryMutexLocker.h"
 #include "poi/CPoiCategory.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiIconCategory.h"
 #include "poi/CPoiPOI.h"
-#include "poi/IPoi.h"
+#include "poi/IPoiFile.h"
 
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -32,7 +32,7 @@
 #include <QtWidgets>
 
 CPoiPOI::CPoiPOI(const QString& filename, CPoiDraw* parent)
-    : IPoi(parent)
+    : IPoiFile(parent)
     , filename(filename)
     , loadTimer(new QTimer(this))
 {
@@ -124,7 +124,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     // draw POI
     QMutexLocker lock(&mutex);
     displayedPois.clear();
-    QRectF freeSpaceRect (QPointF(), IPoi::iconSize() * 2);
+    QRectF freeSpaceRect (QPointF(), IPoiFile::iconSize() * 2);
     //Find POIs in view
     const QList<quint64>& keys = categoryActivated.keys();
     for(quint64 categoryID : keys)
@@ -169,7 +169,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                     if(!foundIntersection)
                     {
                         poiGroup_t poiGroup;
-                        QRectF iconRect (QPointF(), IPoi::iconSize());
+                        QRectF iconRect (QPointF(), IPoiFile::iconSize());
                         iconRect.moveCenter(pt);
                         poiGroup.iconLocation = iconRect;
                         poiGroup.iconCenter = poiToDraw.getCoordinates();
@@ -188,7 +188,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
 
         QPixmap icon;
         getPoiIcon(icon, poiGroup);
-        icon = icon.scaled(IPoi::iconSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        icon = icon.scaled(IPoiFile::iconSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
         const QRectF& iconLocation = poiGroup.iconLocation;
 
@@ -245,7 +245,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     }
 }
 
-bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
+bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     CTryMutexLocker lock(mutex);
     if(!lock.try_lock())
@@ -266,7 +266,7 @@ bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPoi
     return false;
 }
 
-void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF>& posPoiHighlight)
+void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<CPoiItem>& pois, QList<QPointF>& posPoiHighlight)
 {
     CTryMutexLocker lock(mutex);
     if(!lock.try_lock())

@@ -286,15 +286,15 @@ set( SRCS
     plot/ITrack.cpp
     poi/CPoiCategory.cpp
     poi/CPoiDraw.cpp
+    poi/CPoiFileItem.cpp
     poi/CPoiIconCategory.cpp
-    poi/CPoiItem.cpp
     poi/CPoiList.cpp
     poi/CPoiPathSetup.cpp
     poi/CPoiPropSetup.cpp
     poi/CPoiPOI.cpp
     poi/CPoiPOI_TagMap.cpp
     poi/CRawPoi.cpp
-    poi/IPoi.cpp
+    poi/IPoiFile.cpp
     poi/IPoiProp.cpp
     print/CPrintDialog.cpp
     print/CScreenshotDialog.cpp
@@ -417,7 +417,6 @@ set( HDRS
     gis/CSelDevices.h
     gis/IGisItem.h
     gis/IGisLine.h
-    gis/Poi.h
     gis/db/CDBFolderGroup.h
     gis/db/CDBFolderLostFound.h
     gis/db/CDBFolderMysql.h
@@ -657,6 +656,7 @@ set( HDRS
     plot/ITrack.h
     poi/CPoiCategory.h
     poi/CPoiDraw.h
+    poi/CPoiFileItem.h
     poi/CPoiIconCategory.h
     poi/CPoiItem.h
     poi/CPoiList.h
@@ -664,7 +664,7 @@ set( HDRS
     poi/CPoiPropSetup.h
     poi/CPoiPOI.h
     poi/CRawPoi.h
-    poi/IPoi.h
+    poi/IPoiFile.h
     poi/IPoiProp.h
     print/CPrintDialog.h
     print/CScreenshotDialog.h

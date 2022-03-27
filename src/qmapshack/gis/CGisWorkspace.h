@@ -35,7 +35,7 @@
 class CGisDraw;
 class IGisProject;
 class CSearchExplanationDialog;
-struct poi_t;
+struct CPoiItem;
 
 enum event_types_e
 {
@@ -355,9 +355,9 @@ public:
      */
     void addWptByPos(const QPointF& pt, const QString& name = QString::Null(), const QString& desc = QString::Null()) const;
 
-    void addPoisAsWpt(const QSet<poi_t>& pois, IGisProject* project = nullptr) const;
-    void addPoiAsWpt(const poi_t& poi, IGisProject* project = nullptr) const;
-    void addPoiAsWpt(const poi_t& poi, tristate_e& openEditWindow, IGisProject* project = nullptr) const;
+    void addPoisAsWpt(const QSet<CPoiItem>& pois, IGisProject* project = nullptr) const;
+    void addPoiAsWpt(const CPoiItem& poi, IGisProject* project = nullptr) const;
+    void addPoiAsWpt(const CPoiItem& poi, tristate_e& openEditWindow, IGisProject* project = nullptr) const;
 
     void toggleWptBubble(const IGisItem::key_t& key);
 

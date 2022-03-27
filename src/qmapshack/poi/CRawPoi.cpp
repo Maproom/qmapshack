@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/Poi.h"
+#include "poi/CPoiItem.h"
 #include "poi/CRawPoi.h"
 
 #include <QDebug>
@@ -381,9 +381,9 @@ quint32 CRawPoi::getEle() const
 
 
 
-poi_t CRawPoi::toPoi() const
+CPoiItem CRawPoi::toPoi() const
 {
-    poi_t poi;
+    CPoiItem poi;
     poi.pos = coordinates;
     poi.name = getName();
     poi.icon = garminIcon;

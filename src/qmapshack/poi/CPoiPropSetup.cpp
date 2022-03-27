@@ -20,15 +20,15 @@
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiPOI.h"
 #include "poi/CPoiPropSetup.h"
-#include "poi/IPoi.h"
+#include "poi/IPoiFile.h"
 
-CPoiPropSetup::CPoiPropSetup(IPoi* poifile, CPoiDraw* poi)
+CPoiPropSetup::CPoiPropSetup(IPoiFile* poifile, CPoiDraw* poi)
     : IPoiProp(poifile, poi)
 {
     setupUi(this);
     CPoiPropSetup::slotPropertiesChanged();
 
-    connect(sliderOpacity, &QSlider::valueChanged, poifile, &IPoi::slotSetOpacity);
+    connect(sliderOpacity, &QSlider::valueChanged, poifile, &IPoiFile::slotSetOpacity);
     connect(sliderOpacity, &QSlider::valueChanged, poi, &CPoiDraw::emitSigCanvasUpdate);
 
     poifile->addTreeWidgetItems(treeWidgetCategories);

@@ -50,7 +50,7 @@ class QLabel;
 class QTextBrowser;
 class IPlot;
 struct SGisLine;
-struct poi_t;
+struct CPoiItem;
 class CTableTrkInfo;
 
 class CCanvas : public QWidget
@@ -102,10 +102,10 @@ public:
     void displayInfo(const QPoint& px);
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    void findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const;
+    void findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const;
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    void findPoisIn(const QRectF& degRect, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const;
+    void findPoisIn(const QRectF& degRect, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const;
 
     enum redraw_e
     {

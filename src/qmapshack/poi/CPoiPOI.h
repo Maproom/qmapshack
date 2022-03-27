@@ -22,13 +22,13 @@
 
 #include "poi/CPoiIconCategory.h"
 #include "poi/CRawPoi.h"
-#include "poi/IPoi.h"
+#include "poi/IPoiFile.h"
 
 #include <QCoreApplication>
 #include <QMutex>
 #include <QTimer>
 
-class CPoiPOI : public IPoi
+class CPoiPOI : public IPoiFile
 {
     Q_DECLARE_TR_FUNCTIONS(CPoiPOI)
 public:
@@ -43,10 +43,10 @@ public:
 
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    bool findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const override;
+    bool findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const override;
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    void findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF>& posPoiHighlight) override;
+    void findPoisIn(const QRectF& degRect, QSet<CPoiItem>& pois, QList<QPointF>& posPoiHighlight) override;
     bool getToolTip(const QPoint& px, QString& str) const override;
 
     static void init()

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2017 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2020 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,37 +16,37 @@
 
 **********************************************************************************************/
 
-#ifndef POI_H
-#define POI_H
+#include "poi/CPoiDraw.h"
+#include "poi/CPoiPropSetup.h"
+#include "poi/IPoiFile.h"
 
-#include "IGisItem.h"
-#include "units/IUnit.h"
-#include <QPointF>
-#include <QSize>
+constexpr int iconsize = 22;
 
-struct poi_t
+QSize IPoiFile::_iconSize = {iconsize, iconsize};
+QImage IPoiFile::_iconHighlight;
+
+void IPoiFile::init()
 {
-    poi_t() : pos(NOPOINTF){}
-    QString name;
-    QString desc;
-    /// in radians
-    QPointF pos;
-    QString icon;
-    QList<IGisItem::link_t> links;
-    quint32 ele = NOINT;
-};
-
-inline bool operator==(const poi_t& poi1, const poi_t& poi2)
-{
-    return poi1.name == poi2.name
-           && poi1.desc == poi2.desc
-           && poi1.pos == poi2.pos;
+    // default sizes are for iconsize 22.
+    qreal sx = qreal(_iconSize.width()) * 42.0 / 22.0;
+    qreal sy = qreal(_iconSize.height()) * 42.0 / 22.0;
+    _iconHighlight = QImage("://cursors/poiHighlightRed.png").scaled(sx, sy, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
-inline uint qHash(const poi_t& poi, uint seed)
+IPoiFile::IPoiFile(CPoiDraw* parent)
+    : IDrawObject(parent)
+    , poi(parent)
+
 {
-    return qHash(poi.name, seed) ^ qHash(poi.desc, seed) ^ qHash(poi.pos.x(), seed) ^ qHash(poi.pos.y(), seed);
 }
 
-#endif //POI_H
+IPoiProp* IPoiFile::getSetup()
+{
+    if(setup.isNull())
+    {
+        setup = new CPoiPropSetup(this, poi);
+    }
+
+    return setup;
+}
 

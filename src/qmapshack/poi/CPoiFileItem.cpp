@@ -17,14 +17,14 @@
 **********************************************************************************************/
 
 #include "poi/CPoiDraw.h"
-#include "poi/CPoiItem.h"
-#include "poi/CPoiPOI.h"
+#include "poi/CPoiFileItem.h"
+#include "poi/CPoiFilePOI.h"
 
 #include <QtWidgets>
 
-QMutex CPoiItem::mutexActivePois(QMutex::Recursive);
+QMutex CPoiFileItem::mutexActivePois(QMutex::Recursive);
 
-CPoiItem::CPoiItem(QTreeWidget* parent, CPoiDraw* poi)
+CPoiFileItem::CPoiFileItem(QTreeWidget* parent, CPoiDraw* poi)
     : QTreeWidgetItem(parent)
     , poi(poi)
 {
@@ -32,7 +32,7 @@ CPoiItem::CPoiItem(QTreeWidget* parent, CPoiDraw* poi)
 }
 
 
-void CPoiItem::saveConfig(QSettings& cfg)
+void CPoiFileItem::saveConfig(QSettings& cfg)
 {
     if(poifile.isNull())
     {
@@ -44,7 +44,7 @@ void CPoiItem::saveConfig(QSettings& cfg)
     cfg.endGroup();
 }
 
-void CPoiItem::loadConfig(QSettings& cfg)
+void CPoiFileItem::loadConfig(QSettings& cfg)
 {
     if(poifile.isNull())
     {
@@ -56,7 +56,7 @@ void CPoiItem::loadConfig(QSettings& cfg)
     cfg.endGroup();
 }
 
-void CPoiItem::showChildren(bool yes)
+void CPoiFileItem::showChildren(bool yes)
 {
     if(yes && !poifile.isNull())
     {
@@ -75,7 +75,7 @@ void CPoiItem::showChildren(bool yes)
 }
 
 
-void CPoiItem::updateIcon()
+void CPoiFileItem::updateIcon()
 {
     if(filename.isEmpty())
     {
@@ -92,13 +92,13 @@ void CPoiItem::updateIcon()
     setIcon(0, QIcon(img));
 }
 
-bool CPoiItem::isActivated()
+bool CPoiFileItem::isActivated()
 {
     QMutexLocker lock(&mutexActivePois);
     return !poifile.isNull();
 }
 
-bool CPoiItem::toggleActivate()
+bool CPoiFileItem::toggleActivate()
 {
     QMutexLocker lock(&mutexActivePois);
     if(poifile.isNull())
@@ -112,7 +112,7 @@ bool CPoiItem::toggleActivate()
     }
 }
 
-void CPoiItem::deactivate()
+void CPoiFileItem::deactivate()
 {
     QMutexLocker lock(&mutexActivePois);
     // remove poifile setup dialog as child of this item
@@ -131,7 +131,7 @@ void CPoiItem::deactivate()
 }
 
 
-bool CPoiItem::activate()
+bool CPoiFileItem::activate()
 {
     QMutexLocker lock(&mutexActivePois);
 
@@ -142,7 +142,7 @@ bool CPoiItem::activate()
     QFileInfo fi(filename);
     if(fi.suffix().toLower() == "poi")
     {
-        poifile = new CPoiPOI(filename, poi);
+        poifile = new CPoiFilePOI(filename, poi);
     }
 
     updateIcon();
@@ -178,7 +178,7 @@ bool CPoiItem::activate()
     return true;
 }
 
-void CPoiItem::moveToTop()
+void CPoiFileItem::moveToTop()
 {
     QTreeWidget* w = treeWidget();
     QMutexLocker lock(&mutexActivePois);
@@ -190,7 +190,7 @@ void CPoiItem::moveToTop()
 }
 
 
-void CPoiItem::moveToBottom()
+void CPoiFileItem::moveToBottom()
 {
     int row;
     QTreeWidget* w = treeWidget();
@@ -199,7 +199,7 @@ void CPoiItem::moveToBottom()
     w->takeTopLevelItem(w->indexOfTopLevelItem(this));
     for(row = 0; row < w->topLevelItemCount(); row++)
     {
-        CPoiItem* item = dynamic_cast<CPoiItem*>(w->topLevelItem(row));
+        CPoiFileItem* item = dynamic_cast<CPoiFileItem*>(w->topLevelItem(row));
         if(item && item->poifile.isNull())
         {
             break;

@@ -26,7 +26,7 @@
 #include "gis/GeoMath.h"
 #include "gis/IGisLine.h"
 #include "gis/ovl/CGisItemOvlArea.h"
-#include "gis/Poi.h"
+#include "poi/IPoiItem.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CTableTrkInfo.h"
 #include "grid/CGrid.h"
@@ -1133,11 +1133,11 @@ void CCanvas::displayInfo(const QPoint& px)
     QToolTip::hideText();
 }
 
-void CCanvas::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight)  const
+void CCanvas::findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight)  const
 {
     poi->findPoiCloseBy(px, poiItems, posPoiHighlight);
 
-    poi_t mapPoi = map->findPOICloseBy(px);
+    IPoiItem mapPoi = map->findPOICloseBy(px);
     if(mapPoi.pos != NOPOINTF)
     {
         poiItems.insert(mapPoi);
@@ -1145,7 +1145,7 @@ void CCanvas::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPoi
     }
 }
 
-void CCanvas::findPoisIn(const QRectF& degRect, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
+void CCanvas::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     return poi->findPoisIn(degRect, poiItems, posPoiHighlight);
 }

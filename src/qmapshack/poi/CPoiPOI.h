@@ -21,7 +21,7 @@
 #define CPOIPOI_H
 
 #include "poi/CPoiIconCategory.h"
-#include "poi/CRawPoi.h"
+#include "poi/CPoiItemPOI.h"
 #include "poi/IPoiFile.h"
 
 #include <QCoreApplication>
@@ -33,7 +33,7 @@ class CPoiPOI : public IPoiFile
     Q_DECLARE_TR_FUNCTIONS(CPoiPOI)
 public:
     CPoiPOI(const QString& filename, CPoiDraw* parent);
-    virtual ~CPoiPOI() = default;
+    virtual ~CPoiPOI();
 
     void addTreeWidgetItems(QTreeWidget* widget) override;
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
@@ -43,10 +43,10 @@ public:
 
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    bool findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const override;
+    bool findPoiCloseBy(const QPoint& px, QSet<const CPoiItem*>& poiItems, QList<QPointF>& posPoiHighlight) const override;
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    void findPoisIn(const QRectF& degRect, QSet<CPoiItem>& pois, QList<QPointF>& posPoiHighlight) override;
+    void findPoisIn(const QRectF& degRect, QSet<const CPoiItem*>& pois, QList<QPointF>& posPoiHighlight) override;
     bool getToolTip(const QPoint& px, QString& str) const override;
 
     static void init()
@@ -84,7 +84,7 @@ private:
     };
 
     void getPoiIcon(QPixmap& icon, const poiGroup_t& poiGroup);
-    void getPoiIcon(QPixmap& icon, const CRawPoi& poi, const QString& definingTag = "");
+    void getPoiIcon(QPixmap& icon, const CPoiItemPOI* poi, const QString& definingTag = "");
     bool overlapsWithIcon(const QRectF& rect) const;
     bool getPoiGroupCloseBy(const QPoint& px, poiGroup_t& poiItem) const;
 
@@ -96,8 +96,8 @@ private:
     QMap<quint64, Qt::CheckState> categoryActivated;
     QMap<quint64, QString> categoryNames;
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
-    QMap<quint64, QMap<int, QMap<int, QList<quint64>>>> loadedPoisByArea;
-    QMap<quint64, CRawPoi> loadedPois;
+    QMap<quint64, QMap<int, QMap<int, QList<quint64> > > > loadedPoisByArea;
+    QMap<quint64, const CPoiItemPOI*> loadedPois;
     QList<poiGroup_t> displayedPois;
     QRectF bbox;
 

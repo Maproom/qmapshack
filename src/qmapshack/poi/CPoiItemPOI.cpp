@@ -17,14 +17,18 @@
 **********************************************************************************************/
 
 #include "poi/CPoiItem.h"
-#include "poi/CRawPoi.h"
+#include "poi/CPoiItemPOI.h"
 
 #include <QDebug>
 #include <QRegularExpression>
 
-CRawPoi::CRawPoi(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon)
-    : category(category), coordinates(coordinates), rawData(data), garminIcon(garminIcon), key(key)
+CPoiItemPOI::CPoiItemPOI(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon)
+    : category(category), rawData(data), key(key)
 {
+    //inherited members
+    pos = coordinates;
+    icon = garminIcon;
+
     QString lastValidKey = "";
     for(const QString& line : data)
     {
@@ -81,12 +85,12 @@ CRawPoi::CRawPoi(const QStringList& data, const QPointF& coordinates, const quin
     }
 }
 
-const QString& CRawPoi::getCategory() const
+const QString& CPoiItemPOI::getCategory() const
 {
     return category;
 }
 
-const QString& CRawPoi::getName(bool replaceEmptyByCategory) const
+const QString& CPoiItemPOI::getNameOpt(bool replaceEmptyByCategory) const
 {
     if(replaceEmptyByCategory && name.isEmpty())
     {
@@ -95,27 +99,23 @@ const QString& CRawPoi::getName(bool replaceEmptyByCategory) const
     return name;
 }
 
-const QPointF& CRawPoi::getCoordinates() const
-{
-    return coordinates;
-}
 
-const quint64& CRawPoi::getKey() const
+const quint64& CPoiItemPOI::getKey() const
 {
     return key;
 }
 
-const QMap<QString, QString>& CRawPoi::getData() const
+const QMap<QString, QString>& CPoiItemPOI::getData() const
 {
     return data;
 }
 
-const QStringList& CRawPoi::getRawData() const
+const QStringList& CPoiItemPOI::getRawData() const
 {
     return rawData;
 }
 
-QString CRawPoi::getDesc() const
+QString CPoiItemPOI::getDesc() const
 {
     //No need to add the wiki* keys, as they are already covered through their lists
     static const QList<QString> skipKeys = {
@@ -257,7 +257,7 @@ QString CRawPoi::getDesc() const
     return desc;
 }
 
-QList<IGisItem::link_t> CRawPoi::getLinks() const
+QList<IGisItem::link_t> CPoiItemPOI::getLinks() const
 {
     QList<IGisItem::link_t> links;
     if(data.contains("contact:email"))
@@ -372,25 +372,12 @@ QList<IGisItem::link_t> CRawPoi::getLinks() const
     return links;
 }
 
-quint32 CRawPoi::getEle() const
+quint32 CPoiItemPOI::getEle() const
 {
     bool ok = true;
     quint32 ele = data["ele"].toInt(&ok);
     return ok ? ele : NOINT;
 }
 
-
-
-CPoiItem CRawPoi::toPoi() const
-{
-    CPoiItem poi;
-    poi.pos = coordinates;
-    poi.name = getName();
-    poi.icon = garminIcon;
-    poi.desc = getDesc();
-    poi.links = getLinks();
-    poi.ele = getEle();
-    return poi;
-}
 
 

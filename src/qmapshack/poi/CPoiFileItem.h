@@ -85,13 +85,13 @@ public:
 
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    bool findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
+    bool findPoiCloseBy(const QPoint& px, QSet<const CPoiItem*>& poiItems, QList<QPointF>& posPoiHighlight) const
     {
         return poifile->findPoiCloseBy(px, poiItems, posPoiHighlight);
     }
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    void findPoisIn(const QRectF& degRect, QSet<CPoiItem>& pois, QList<QPointF>& posPoiHighlight)
+    void findPoisIn(const QRectF& degRect, QSet<const CPoiItem*>& pois, QList<QPointF>& posPoiHighlight)
     {
         getPoifile()->findPoisIn(degRect, pois, posPoiHighlight);
     }

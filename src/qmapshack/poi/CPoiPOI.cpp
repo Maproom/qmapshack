@@ -17,12 +17,12 @@
 
 **********************************************************************************************/
 
-#include "poi/CPoiItem.h"
 #include "helpers/CDraw.h"
 #include "helpers/CTryMutexLocker.h"
 #include "poi/CPoiCategory.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiIconCategory.h"
+#include "poi/CPoiItem.h"
 #include "poi/CPoiPOI.h"
 #include "poi/IPoiFile.h"
 
@@ -76,6 +76,14 @@ CPoiPOI::CPoiPOI(const QString& filename, CPoiDraw* parent)
     }
     //Database is no longer needed
     QSqlDatabase::removeDatabase(filename + "_bbox");
+}
+
+CPoiPOI::~CPoiPOI()
+{
+    for(const CPoiItemPOI* poi : loadedPois)
+    {
+        delete poi;
+    }
 }
 
 
@@ -149,8 +157,8 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                 }
                 for(quint64 poiToDrawID : qAsConst(loadedPoisByArea)[categoryID][minLonM10][minLatM10])
                 {
-                    const CRawPoi& poiToDraw = loadedPois[poiToDrawID];
-                    QPointF pt = poiToDraw.getCoordinates();
+                    const CPoiItemPOI* poiToDraw = loadedPois[poiToDrawID];
+                    QPointF pt = poiToDraw->getPos();
                     poi->convertRad2Px(pt);
 
                     freeSpaceRect.moveCenter(pt);
@@ -172,7 +180,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                         QRectF iconRect (QPointF(), IPoiFile::iconSize());
                         iconRect.moveCenter(pt);
                         poiGroup.iconLocation = iconRect;
-                        poiGroup.iconCenter = poiToDraw.getCoordinates();
+                        poiGroup.iconCenter = poiToDraw->getPos();
                         poiGroup.pois.insert(poiToDrawID);
                         displayedPois.append(poiGroup);
                     }
@@ -207,7 +215,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
         else if(CMainWindow::self().isPoiText())
         {
             //Draw Name
-            const QString& name = loadedPois[*poiGroup.pois.begin()].getName();
+            const QString& name = loadedPois[*poiGroup.pois.begin()]->getName();
             QRectF rect = fm.boundingRect(name);
             rect.adjust(-2, -2, 2, 2);
 
@@ -245,7 +253,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     }
 }
 
-bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
+bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<const CPoiItem*>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     CTryMutexLocker lock(mutex);
     if(!lock.try_lock())
@@ -258,7 +266,7 @@ bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<Q
     {
         for(quint64 key : qAsConst(poiGroup.pois))
         {
-            poiItems.insert(loadedPois[key].toPoi());
+            poiItems.insert(loadedPois[key]);
         }
         posPoiHighlight.append(poiGroup.iconCenter);
         return true;
@@ -266,7 +274,7 @@ bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<Q
     return false;
 }
 
-void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<CPoiItem>& pois, QList<QPointF>& posPoiHighlight)
+void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<const CPoiItem*>& pois, QList<QPointF>& posPoiHighlight)
 {
     CTryMutexLocker lock(mutex);
     if(!lock.try_lock())
@@ -298,14 +306,14 @@ void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<CPoiItem>& pois, QList<QPoi
                 }
                 for(quint64 poiFoundID : qAsConst(loadedPoisByArea)[categoryID][minLonM10][minLatM10])
                 {
-                    const CRawPoi& poiItemFound = loadedPois[poiFoundID];
-                    if(!copiedItems.contains(poiItemFound.getKey()))
+                    const CPoiItemPOI* poiItemFound = loadedPois[poiFoundID];
+                    if(!copiedItems.contains(poiItemFound->getKey()))
                     {
                         //Maybe look through the whole code of selecting items from a map to avoid this conversion
-                        if(degRect.contains(poiItemFound.getCoordinates() * RAD_TO_DEG))
+                        if(degRect.contains(poiItemFound->getPos() * RAD_TO_DEG))
                         {
-                            pois.insert(poiItemFound.toPoi());
-                            copiedItems.insert(poiItemFound.getKey());
+                            pois.insert(poiItemFound);
+                            copiedItems.insert(poiItemFound->getKey());
                         }
                     }
                 }
@@ -337,16 +345,16 @@ bool CPoiPOI::getToolTip(const QPoint& px, QString& str) const
     {
         if(poiGroup.pois.count() == 1)
         {
-            const CRawPoi& poiFound = loadedPois[*poiGroup.pois.begin()];
-            const QString& name = poiFound.getName(false);
+            const CPoiItemPOI* poiFound = loadedPois[*poiGroup.pois.begin()];
+            const QString& name = poiFound->getNameOpt(false);
             if(!name.isEmpty())
             {
                 str += "<b>" + name + "</b><br>\n";
             }
-            str += tr("Category: ") + "<b>" + poiFound.getCategory() + "</b><br>\n";
-            str += poiFound.getDesc();
+            str += tr("Category: ") + "<b>" + poiFound->getCategory() + "</b><br>\n";
+            str += poiFound->getDesc();
             str += "<br>\n";
-            const QList<IGisItem::link_t>& links = poiFound.getLinks();
+            const QList<IGisItem::link_t>& links = poiFound->getLinks();
             if(!links.isEmpty())
             {
                 str += tr("Links: ");
@@ -373,7 +381,7 @@ bool CPoiPOI::getToolTip(const QPoint& px, QString& str) const
                 str += "<br>\n" + tr("POIs at this point:");
                 for(quint64 poiID : qAsConst(poiGroup.pois))
                 {
-                    str += "<br>\n<b>" + loadedPois[poiID].getName() + "</b>";
+                    str += "<br>\n<b>" + loadedPois[poiID]->getName() + "</b>";
                 }
             }
         }
@@ -452,18 +460,18 @@ void CPoiPOI::getPoiIcon(QPixmap& icon, const CPoiPOI::poiGroup_t& poiGroup)
     }
 }
 
-void CPoiPOI::getPoiIcon(QPixmap& icon, const CRawPoi& poi, const QString& definingTag)
+void CPoiPOI::getPoiIcon(QPixmap& icon, const CPoiItemPOI* poi, const QString& definingTag)
 {
     if(!definingTag.isEmpty() && tagMap.contains(definingTag))
     {
-        icon = tagMap[definingTag].getIcon(poi.getRawData());
+        icon = tagMap[definingTag].getIcon(poi->getRawData());
         return;
     }
-    for(const QString& tag : poi.getRawData())
+    for(const QString& tag : poi->getRawData())
     {
         if(tagMap.contains(tag))
         {
-            icon = tagMap[tag].getIcon(poi.getRawData());
+            icon = tagMap[tag].getIcon(poi->getRawData());
             return;
         }
     }
@@ -558,10 +566,10 @@ void CPoiPOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
         }
         loadedPoisByArea[categoryID][minLonM10][minLatM10].append(key);
         // TODO: this overwrites a POI if it already was loaded. The difference between those will be the category. Some better handling should be done
-        loadedPois[key] = CRawPoi(data,
-                                  QPointF((query.value(eSqlColumnPoiMaxLon).toDouble() + query.value(eSqlColumnPoiMinLon).toDouble()) / 2 * DEG_TO_RAD,
-                                          (query.value(eSqlColumnPoiMaxLat).toDouble() + query.value(eSqlColumnPoiMinLat).toDouble()) / 2 * DEG_TO_RAD),
-                                  key, categoryNames[categoryID], garminIcon);
+        loadedPois[key] = new CPoiItemPOI(data,
+                                          QPointF((query.value(eSqlColumnPoiMaxLon).toDouble() + query.value(eSqlColumnPoiMinLon).toDouble()) / 2 * DEG_TO_RAD,
+                                                  (query.value(eSqlColumnPoiMaxLat).toDouble() + query.value(eSqlColumnPoiMinLat).toDouble()) / 2 * DEG_TO_RAD),
+                                          key, categoryNames[categoryID], garminIcon);
     }
     // Close database, as this method is called from mutiple threads.
     QSqlDatabase::removeDatabase(filename);

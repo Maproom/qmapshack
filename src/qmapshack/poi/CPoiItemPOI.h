@@ -16,9 +16,10 @@
 
 **********************************************************************************************/
 
-#ifndef CRAWPOI_H
-#define CRAWPOI_H
+#ifndef CPOIITEMPOI_H
+#define CPOIITEMPOI_H
 
+#include "CPoiItem.h"
 #include "gis/IGisItem.h"
 
 #include <QCoreApplication>
@@ -28,39 +29,39 @@
 #include <QString>
 #include <QStringList>
 
-struct CPoiItem;
 
-class CRawPoi
+class CPoiItemPOI : public CPoiItem
 {
     Q_DECLARE_TR_FUNCTIONS(CRawPoi)
 public:
     //Dummy constructor for the usage of QMap
-    CRawPoi(){}
-    CRawPoi(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon);
+    CPoiItemPOI(){}
+    CPoiItemPOI(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon);
+
+    // Overridden members
+    virtual bool getGpxMode() const override {return false;}
+    virtual QDomNode getGpx() const override {return QDomNode();}
+    virtual QString getName() const override {return getNameOpt();}
+    virtual QString getDesc() const override;
+    virtual QList<IGisItem::link_t> getLinks() const override;
+    virtual quint32 getEle() const override;
+
+    const QString& getNameOpt(bool replaceEmptyByCategory = true) const;
     const QString& getCategory() const;
-    const QString& getName(bool replaceEmptyByCategory = true) const;
-    const QPointF& getCoordinates() const;
     const quint64& getKey() const;
     const QMap<QString, QString>& getData() const;
     const QStringList& getRawData() const;
-    QString getDesc() const;
-    QList<IGisItem::link_t> getLinks() const;
-    quint32 getEle() const;
-    CPoiItem toPoi() const;
 
 
 private:
     QString category;
-    QPointF coordinates; // in radians
     /// <key, value>
     QMap<QString, QString> data;
     QStringList rawData;
     QStringList wikipediaRelatedKeys;
     QStringList wikidataRelatedKeys;
     QStringList nameRelatedKeys;
-    QString garminIcon;
     quint64 key;
-    QString name;
 };
 
-#endif // CRAWPOI_H
+#endif // CPOIITEMPOI_H

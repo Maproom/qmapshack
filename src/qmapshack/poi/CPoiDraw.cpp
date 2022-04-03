@@ -17,10 +17,10 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "poi/CPoiItem.h"
 #include "helpers/CSettings.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiFileItem.h"
+#include "poi/CPoiItem.h"
 #include "poi/CPoiList.h"
 #include "poi/CPoiPathSetup.h"
 
@@ -140,7 +140,7 @@ void CPoiDraw::loadPoiPath(QSettings& cfg)
     poiPaths = cfg.value("poiPaths", poiPaths).toStringList();
 }
 
-void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
+void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<const CPoiItem*>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     if(poiList && CPoiFileItem::mutexActivePois.tryLock())
     {
@@ -162,7 +162,7 @@ void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<CPoiItem>& poiItems, QList<
     }
 }
 
-void CPoiDraw::findPoisIn(const QRectF& degRect, QSet<CPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
+void CPoiDraw::findPoisIn(const QRectF& degRect, QSet<const CPoiItem*>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     if(poiList && CPoiFileItem::mutexActivePois.tryLock())
     {

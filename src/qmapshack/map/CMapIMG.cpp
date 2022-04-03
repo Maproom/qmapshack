@@ -19,7 +19,6 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "gis/GeoMath.h"
-#include "poi/CPoiItem.h"
 #include "helpers/CDraw.h"
 #include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"
@@ -30,6 +29,7 @@
 #include "map/garmin/CGarminStrTbl8.h"
 #include "map/garmin/CGarminStrTblUtf8.h"
 #include "map/garmin/CGarminTyp.h"
+#include "poi/CPoiItem.h"
 #include "units/IUnit.h"
 
 #include <QPainterPath>
@@ -1526,11 +1526,11 @@ void CMapIMG::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStr
         const quint8* pEnd = pRawData + (oidx ? oidx : opline ? opline : opgon ? opgon : subdiv.rgn_end);
         while(pData < pEnd)
         {
-            CGarminPoint p;
+            CGarminPoint p(&pointProperties, &selectedLanguage);
             pData += p.decode(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, pData);
 
             // skip points outside our current viewport
-            if(!viewport.contains(p.pos))
+            if(!viewport.contains(p.getPos()))
             {
                 continue;
             }
@@ -1552,11 +1552,11 @@ void CMapIMG::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStr
         const quint8* pEnd = pRawData + (opline ? opline : opgon ? opgon : subdiv.rgn_end);
         while(pData < pEnd)
         {
-            CGarminPoint p;
+            CGarminPoint p(&pointProperties, &selectedLanguage);
             pData += p.decode(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, pData);
 
             // skip points outside our current viewport
-            if(!viewport.contains(p.pos))
+            if(!viewport.contains(p.getPos()))
             {
                 continue;
             }
@@ -1695,12 +1695,12 @@ void CMapIMG::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStr
         const quint8* pEnd = pData + subdiv.lengthPoints2;
         while(pData < pEnd)
         {
-            CGarminPoint p;
+            CGarminPoint p(&pointProperties, &selectedLanguage);
             //             qDebug() << "rgn offset:" << hex << (rgnoff + (pData - pRawData));
             pData += p.decode2(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, pData, pEnd);
 
             // skip points outside our current viewport
-            if(!viewport.contains(p.pos))
+            if(!viewport.contains(p.getPos()))
             {
                 continue;
             }
@@ -2031,7 +2031,7 @@ void CMapIMG::addLabel(const CGarminPoint& pt, const QRect& rect, CGarminTyp::la
 
     labels.push_back(strlbl_t());
     strlbl_t& strlbl = labels.last();
-    strlbl.pt = pt.pos.toPoint();
+    strlbl.pt = pt.getPxPos(map).toPoint();
     strlbl.str = str;
     strlbl.rect = rect;
     strlbl.type = type;
@@ -2048,20 +2048,20 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
 //            continue;
 //        };
 
-        map->convertRad2Px(pt->pos);
+        QPointF pos = pt->getPxPos(map);
 
         const QImage& icon = CMainWindow::self().isNight() ? pointProperties[pt->type].imgNight : pointProperties[pt->type].imgDay;
         const QSizeF& size = icon.size();
 
-        if(isCluttered(rectPois, QRectF(pt->pos, size)))
+        if(isCluttered(rectPois, QRectF(pos, size)))
         {
             if(size.width() <= 8 && size.height() <= 8)
             {
-                p.drawImage(pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
+                p.drawImage(pos.x() - (size.width() / 2), pos.y() - (size.height() / 2), icon);
             }
             else
             {
-                p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
+                p.drawPixmap(pos.x() - 4, pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
             }
             ++pt;
             continue;
@@ -2071,12 +2071,12 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
 
         if(pointProperties.contains(pt->type))
         {
-            p.drawImage(pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
+            p.drawImage(pos.x() - (size.width() / 2), pos.y() - (size.height() / 2), icon);
             showLabel = pointProperties[pt->type].labelType != CGarminTyp::eNone;
         }
         else
         {
-            p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
+            p.drawPixmap(pos.x() - 4, pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
         }
 
         if(CMainWindow::self().isPoiText() && showLabel)
@@ -2084,7 +2084,7 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
             // calculate bounding rectangle with a border of 2 px
             QRect rect = fm.boundingRect(pt->labels.join(" "));
             rect.adjust(0, 0, 4, 4);
-            rect.moveCenter(pt->pos.toPoint());
+            rect.moveCenter(pos.toPoint());
 
             // if no intersection was found, add label to list
             if(!intersectsWithExistingLabel(rect))
@@ -2103,20 +2103,20 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPois)
 
     for(CGarminPoint& pt : pts)
     {
-        map->convertRad2Px(pt.pos);
+        QPointF pos = pt.getPxPos(map);
 
         const QImage& icon = CMainWindow::self().isNight() ? pointProperties[pt.type].imgNight : pointProperties[pt.type].imgDay;
         const QSizeF& size = icon.size();
 
-        if(isCluttered(rectPois, QRectF(pt.pos, size)))
+        if(isCluttered(rectPois, QRectF(pos, size)))
         {
             if(size.width() <= 8 && size.height() <= 8)
             {
-                p.drawImage(pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
+                p.drawImage(pos.x() - (size.width() / 2), pos.y() - (size.height() / 2), icon);
             }
             else
             {
-                p.drawPixmap(pt.pos.x() - 4, pt.pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
+                p.drawPixmap(pos.x() - 4, pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
             }
             continue;
         }
@@ -2124,12 +2124,12 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPois)
         labelType = CGarminTyp::eStandard;
         if(pointProperties.contains(pt.type))
         {
-            p.drawImage(pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
+            p.drawImage(pos.x() - (size.width() / 2), pos.y() - (size.height() / 2), icon);
             labelType = pointProperties[pt.type].labelType;
         }
         else
         {
-            p.drawPixmap(pt.pos.x() - 4, pt.pos.y() - 4, QPixmap(":/icons/8x8/bullet_red.png"));
+            p.drawPixmap(pos.x() - 4, pos.y() - 4, QPixmap(":/icons/8x8/bullet_red.png"));
         }
 
         if(CMainWindow::self().isPoiText())
@@ -2137,7 +2137,7 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPois)
             // calculate bounding rectangle with a border of 2 px
             QRect rect = fm.boundingRect(pt.labels.join(" "));
             rect.adjust(0, 0, 4, 4);
-            rect.moveCenter(pt.pos.toPoint());
+            rect.moveCenter(pos.toPoint());
 
             // if no intersection was found, add label to list
             if(!intersectsWithExistingLabel(rect))
@@ -2340,45 +2340,30 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) const /* override 
     }
 }
 
-void CMapIMG::findPOICloseBy(const QPoint& pt, CPoiItem& poi) const /*override;*/
+const CPoiItem* CMapIMG::findPOICloseBy(const QPoint& pt) const /*override;*/
 {
-    for(auto& list : {points, pois})
+    //This complicated as we do not want to return pointers to copies that may go out of scope
+    for(const CGarminPoint* point = points.begin(); point != pois.end(); point++)
     {
-        for(const CGarminPoint& point : list)
+        if(point == points.end())
         {
-            QPoint x = pt - QPoint(point.pos.x(), point.pos.y());
-            if(x.manhattanLength() < 10)
-            {
-                QPointF radPos = point.pos;
-                map->convertPx2Rad(radPos);
-                poi.pos = radPos;
-                if(!point.labels.isEmpty())
-                {
-                    poi.name = point.labels.first();
-                    poi.desc = point.getLabelText();
-                }
-                else
-                {
-                    if(pointProperties.contains(point.type))
-                    {
-                        poi.name = pointProperties[point.type].strings[selectedLanguage != NOIDX ? selectedLanguage : 0];
-                    }
-                    else
-                    {
-                        poi.name = QString(" (%1)").arg(point.type, 2, 16, QChar('0'));
-                    }
-                }
-                return;
-            }
+            point = pois.begin();
+        }
+        QPoint x = pt - point->getPxPos(map).toPoint();
+        if(x.manhattanLength() < 10)
+        {
+            return point;
         }
     }
+
+    return nullptr;
 }
 
 void CMapIMG::getInfoPoints(const pointtype_t& points, const QPoint& pt, QMultiMap<QString, QString>& dict) const
 {
     for(const CGarminPoint& point : points)
     {
-        QPoint x = pt - QPoint(point.pos.x(), point.pos.y());
+        QPoint x = pt - point.getPxPos(map).toPoint();
         if(x.manhattanLength() < 10)
         {
             if(point.hasLabel())

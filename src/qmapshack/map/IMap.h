@@ -22,6 +22,7 @@
 #include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
 #include "gis/proj_x.h"
+#include "poi/CPoiItem.h"
 
 #include <QImage>
 #include <QMutex>
@@ -29,7 +30,7 @@
 
 class CMapDraw;
 class IMapProp;
-struct CPoiItem;
+class CPoiItem;
 
 class IMap : public IDrawObject
 {
@@ -76,7 +77,7 @@ public:
 
     virtual void getToolTip(const QPoint&, QString&) const {}
 
-    virtual void findPOICloseBy(const QPoint&, CPoiItem&) const {}
+    virtual const CPoiItem* findPOICloseBy(const QPoint&) const {return nullptr;}
 
     /**
        @brief Return copyright notice if any

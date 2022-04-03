@@ -32,7 +32,6 @@
 #include "gis/IGisItem.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
-#include "poi/CPoiItem.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
@@ -49,6 +48,7 @@
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
+#include "poi/CPoiItem.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -925,7 +925,7 @@ void CGisWorkspace::addWptByPos(const QPointF& pt, const QString& name, const QS
     CGisItemWpt::newWpt(pt, name, desc, project);
 }
 
-void CGisWorkspace::addPoisAsWpt(const QSet<CPoiItem>& pois, IGisProject* project) const
+void CGisWorkspace::addPoisAsWpt(const QSet<const CPoiItem*>& pois, IGisProject* project) const
 {
     if(nullptr == project)
     {
@@ -936,19 +936,19 @@ void CGisWorkspace::addPoisAsWpt(const QSet<CPoiItem>& pois, IGisProject* projec
         return;
     }
     tristate_e openEditWindow = eTristateUndefined;
-    for(const CPoiItem& poi : pois)
+    for(const CPoiItem* poi : pois)
     {
         addPoiAsWpt(poi, openEditWindow, project);
     }
 }
 
-void CGisWorkspace::addPoiAsWpt(const CPoiItem& poi, IGisProject* project) const
+void CGisWorkspace::addPoiAsWpt(const CPoiItem* poi, IGisProject* project) const
 {
     tristate_e tmp = eTristateUndefined;
     addPoiAsWpt(poi, tmp, project);
 }
 
-void CGisWorkspace::addPoiAsWpt(const CPoiItem& poi, tristate_e& openEditWindow, IGisProject* project) const
+void CGisWorkspace::addPoiAsWpt(const CPoiItem* poi, tristate_e& openEditWindow, IGisProject* project) const
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -960,7 +960,7 @@ void CGisWorkspace::addPoiAsWpt(const CPoiItem& poi, tristate_e& openEditWindow,
     {
         return;
     }
-    if(openEditWindow == eTristateUndefined && poi.icon.isEmpty())
+    if(openEditWindow == eTristateUndefined && poi->getIcon().isEmpty())
     {
         int answer = QMessageBox(QMessageBox::Icon::Question,
                                  tr("Undefined Waypoint Symbol"),
@@ -978,7 +978,7 @@ void CGisWorkspace::addPoiAsWpt(const CPoiItem& poi, tristate_e& openEditWindow,
             openEditWindow = eTristateFalse;
         }
     }
-    CGisItemWpt::newWpt(poi, project, openEditWindow == eTristateTrue && poi.icon.isEmpty());
+    CGisItemWpt::newWpt(poi, project, openEditWindow == eTristateTrue && poi->getIcon().isEmpty());
 }
 
 void CGisWorkspace::focusTrkByKey(bool yes, const IGisItem::key_t& key)

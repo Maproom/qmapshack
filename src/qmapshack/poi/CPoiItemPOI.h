@@ -48,7 +48,7 @@ public:
 
     const QString& getNameOpt(bool replaceEmptyByCategory = true) const;
     const QString& getCategory() const;
-    const quint64& getKey() const;
+    uint getKey() const override;
     const QMap<QString, QString>& getData() const;
     const QStringList& getRawData() const;
 

@@ -288,6 +288,7 @@ set( SRCS
     poi/CPoiDraw.cpp
     poi/CPoiFileItem.cpp
     poi/CPoiIconCategory.cpp
+    poi/CPoiItem.cpp
     poi/CPoiItemPOI.cpp
     poi/CPoiList.cpp
     poi/CPoiPathSetup.cpp

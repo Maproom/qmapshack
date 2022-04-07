@@ -46,6 +46,8 @@ public:
     virtual QList<IGisItem::link_t> getLinks() const {return links;}
     virtual quint32 getEle() const {return ele;}
 
+    virtual uint getKey() const;
+
 protected:
     bool gpxMode = false;
     QDomNode gpx;

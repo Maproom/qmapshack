@@ -33,20 +33,11 @@ class CPoiPOI : public IPoiFile
     Q_DECLARE_TR_FUNCTIONS(CPoiPOI)
 public:
     CPoiPOI(const QString& filename, CPoiDraw* parent);
-    virtual ~CPoiPOI();
 
     void addTreeWidgetItems(QTreeWidget* widget) override;
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
-    void loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10);
+    virtual void loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10) override;
 
-    void draw(IDrawContext::buffer_t& buf) override;
-
-    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
-    /// Thus the location where to draw the highlight is separately given
-    bool findPoiCloseBy(const QPoint& px, QSet<const CPoiItem*>& poiItems, QList<QPointF>& posPoiHighlight) const override;
-    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
-    /// Thus the location where to draw the highlight is separately given
-    void findPoisIn(const QRectF& degRect, QSet<const CPoiItem*>& pois, QList<QPointF>& posPoiHighlight) override;
     bool getToolTip(const QPoint& px, QString& str) const override;
 
     static void init()
@@ -54,19 +45,8 @@ public:
         tagMap = initTagMap();
     }
 
-public slots:
-    void slotCheckedStateChanged(QTreeWidgetItem* item) override;
 
 private:
-    struct poiGroup_t
-    {
-        ///Area covered by the icon in pixels
-        QRectF iconLocation;
-        ///Location of the center of the icon in rad
-        QPointF iconCenter;
-        QSet<quint64> pois;
-    };
-
     enum SqlColumnPoi_e
     {
         eSqlColumnPoiMaxLat,
@@ -83,24 +63,10 @@ private:
         eSqlColumnCategoryParent
     };
 
-    void getPoiIcon(QPixmap& icon, const poiGroup_t& poiGroup);
-    void getPoiIcon(QPixmap& icon, const CPoiItemPOI* poi, const QString& definingTag = "");
-    bool overlapsWithIcon(const QRectF& rect) const;
-    bool getPoiGroupCloseBy(const QPoint& px, poiGroup_t& poiItem) const;
+    void getPoiIcon(QPixmap& icon, const poiGroup_t& poiGroup) override;
+    void getPoiIcon(QPixmap& icon, const CPoiItem* poi, const QString& definingTag = "") override;
 
-    mutable QMutex mutex {QMutex::Recursive};
     QString filename;
-    QTimer* loadTimer;
-
-
-    QMap<quint64, Qt::CheckState> categoryActivated;
-    QMap<quint64, QString> categoryNames;
-    // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
-    QMap<quint64, QMap<int, QMap<int, QList<quint64> > > > loadedPoisByArea;
-    QMap<quint64, const CPoiItemPOI*> loadedPois;
-    QList<poiGroup_t> displayedPois;
-    QRectF bbox;
-
 
     static QMap<QString, CPoiIconCategory> tagMap;
     static QMap<QString, CPoiIconCategory> initTagMap();

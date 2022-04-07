@@ -100,7 +100,7 @@ const QString& CPoiItemPOI::getNameOpt(bool replaceEmptyByCategory) const
 }
 
 
-const quint64& CPoiItemPOI::getKey() const
+uint CPoiItemPOI::getKey() const
 {
     return key;
 }

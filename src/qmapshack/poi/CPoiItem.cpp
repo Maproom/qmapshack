@@ -17,7 +17,62 @@
 
 **********************************************************************************************/
 
+#include "../common/gis/proj_x.h"
+#include "gis/gpx/serialization.h"
 #include "poi/CPoiItem.h"
+
+CPoiItem::CPoiItem(const QDomNode& gpx) : gpxMode(true), gpx(gpx)
+{
+    const QDomNamedNodeMap& attr = gpx.attributes();
+    pos = QPointF(attr.namedItem("lon").nodeValue().toDouble(), attr.namedItem("lat").nodeValue().toDouble()) * DEG_TO_RAD;
+    readXml(gpx, "name", name);
+    readXml(gpx, "desc", desc);
+    readXml(gpx, "sym", icon);
+    readXml(gpx, "type", category);
+    if(category.isEmpty())
+    {
+        category = icon;
+    }
+    if(icon == "Geocache")
+    {
+        // special treatment for geocaches, as we want to show the icon
+        icon = category.split("|").last();
+    }
+}
+
+QString CPoiItem::getName() const
+{
+    bool fallback = true;
+    return getName(fallback);
+}
+
+QString CPoiItem::getName(bool& fallback) const
+{
+    if(name.isEmpty() && fallback)
+    {
+        fallback = true;
+        return getCategory();
+    }
+    fallback = false;
+    return name;
+}
+
+QString CPoiItem::getCategory() const
+{
+    bool fallback = true;
+    return getCategory(fallback);
+}
+
+QString CPoiItem::getCategory(bool& fallback) const
+{
+    if(category.isEmpty() && fallback)
+    {
+        fallback = true;
+        return getIcon();
+    }
+    fallback = false;
+    return category;
+}
 
 uint CPoiItem::getKey() const
 {

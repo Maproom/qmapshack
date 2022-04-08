@@ -287,6 +287,7 @@ set( SRCS
     poi/CPoiCategory.cpp
     poi/CPoiDraw.cpp
     poi/CPoiFileItem.cpp
+    poi/CPoiGPX.cpp
     poi/CPoiIconCategory.cpp
     poi/CPoiItem.cpp
     poi/CPoiItemPOI.cpp
@@ -468,6 +469,7 @@ set( HDRS
     gis/fit/defs/fit_enums.h
     gis/fit/defs/fit_fields.h
     gis/gpx/CGpxProject.h
+    gis/gpx/serialization.h
     gis/ovl/CDetailsOvlArea.h
     gis/ovl/CGisItemOvlArea.h
     gis/ovl/CScrOptOvlArea.h
@@ -658,6 +660,7 @@ set( HDRS
     poi/CPoiCategory.h
     poi/CPoiDraw.h
     poi/CPoiFileItem.h
+    poi/CPoiGPX.h
     poi/CPoiIconCategory.h
     poi/CPoiItem.h
     poi/CPoiItemPOI.h

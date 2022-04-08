@@ -2348,6 +2348,10 @@ const CPoiItem* CMapIMG::findPOICloseBy(const QPoint& pt) const /*override;*/
         if(point == points.end())
         {
             point = pois.begin();
+            if(point == pois.end())
+            {
+                break;
+            }
         }
         QPoint x = pt - point->getPxPos(map).toPoint();
         if(x.manhattanLength() < 10)

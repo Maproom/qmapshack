@@ -43,7 +43,7 @@ public:
     CGarminPoint(const QMap<quint32, CGarminTyp::point_property>* pointProperties, const qint8* selectedLanguage);
     virtual ~CGarminPoint() = default;
 
-    QString getName() const override;
+    QString getName(bool& fallback) const override;
     QString getDesc() const override {return getLabelText();}
 
     quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData);

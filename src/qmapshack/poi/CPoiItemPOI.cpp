@@ -23,11 +23,13 @@
 #include <QRegularExpression>
 
 CPoiItemPOI::CPoiItemPOI(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon)
-    : category(category), rawData(data), key(key)
+    : rawData(data), key(key)
 {
     //inherited members
     pos = coordinates;
     icon = garminIcon;
+    this->category = category;
+    gpxMode = false;
 
     QString lastValidKey = "";
     for(const QString& line : data)
@@ -84,21 +86,6 @@ CPoiItemPOI::CPoiItemPOI(const QStringList& data, const QPointF& coordinates, co
         name = this->data["brand"];
     }
 }
-
-const QString& CPoiItemPOI::getCategory() const
-{
-    return category;
-}
-
-const QString& CPoiItemPOI::getNameOpt(bool replaceEmptyByCategory) const
-{
-    if(replaceEmptyByCategory && name.isEmpty())
-    {
-        return category;
-    }
-    return name;
-}
-
 
 uint CPoiItemPOI::getKey() const
 {

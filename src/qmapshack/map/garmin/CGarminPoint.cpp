@@ -39,12 +39,14 @@ CGarminPoint::CGarminPoint(const QMap<quint32, CGarminTyp::point_property>* poin
     gpxMode = false;
 }
 
-QString CGarminPoint::getName() const
+QString CGarminPoint::getName(bool& fallback) const
 {
-    if(!labels.isEmpty())
+    if(!labels.isEmpty() || !fallback)
     {
+        fallback = false;
         return labels.first();
     }
+    fallback = true;
     if(pointProperties->contains(type))
     {
         return (*pointProperties)[type].strings[*selectedLanguage != NOIDX ? *selectedLanguage : 0];

@@ -30,21 +30,28 @@ class CPoiItem
 {
 public:
     CPoiItem() : pos(NOPOINTF){}
-    CPoiItem(QDomNode gpx) : gpxMode(true), gpx(gpx), pos(NOPOINTF){}
-    CPoiItem(const QString& name, const QString& desc, const QPointF& pos, const QString& icon = "", const QList<IGisItem::link_t>& links = QList<IGisItem::link_t>(), quint32 ele = NOINT)
-        : gpxMode(false), name(name), desc(desc), pos(pos), icon(icon), links(links), ele(ele){}
+    CPoiItem(const QDomNode& gpx);
+    CPoiItem(const QString& name, const QString& desc, const QPointF& pos, const QString& icon = "", const QList<IGisItem::link_t>& links = QList<IGisItem::link_t>(), quint32 ele = NOINT, const QString& category = "")
+        : gpxMode(false), category(category), name(name), desc(desc), pos(pos), icon(icon), links(links), ele(ele){}
     virtual ~CPoiItem(){}
 
     // no const refs for getters, as methods in derived classes may create return values on the fly
     virtual bool getGpxMode() const {return gpxMode;}
     virtual QDomNode getGpx() const {return gpx;}
-    virtual QString getName() const {return name;}
+    /// bool fallback=true; return getName(fallback);
+    QString getName() const;
+    /// if fallback is true, the usage of a fallback is allowed. After the method returned, fallback indicates whether a fallback value was used or not
+    virtual QString getName(bool& fallback) const;
     virtual QString getDesc() const {return desc;}
-    /// Get position in radians
+    /// Get position in radians (lon,lat)
     virtual QPointF getPos() const {return pos;}
     virtual QString getIcon() const {return icon;}
     virtual QList<IGisItem::link_t> getLinks() const {return links;}
     virtual quint32 getEle() const {return ele;}
+    /// bool fallback=true; return getCategory(fallback);
+    QString getCategory() const;
+    /// if fallback is true, the usage of a fallback is allowed. After the method returned, fallback indicates whether a fallback value was used or not
+    virtual QString getCategory(bool& fallback) const;
 
     virtual uint getKey() const;
 
@@ -52,6 +59,7 @@ protected:
     bool gpxMode = false;
     QDomNode gpx;
 
+    QString category;
     QString name;
     QString desc;
     /// in radians

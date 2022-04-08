@@ -28,7 +28,7 @@
 
 QList<CPoiDraw*> CPoiDraw::pois;
 QStringList CPoiDraw::poiPaths;
-QStringList CPoiDraw::supportedFormats = QString("*.poi").split('|');
+QStringList CPoiDraw::supportedFormats = QString("*.poi|*.gpx").split('|');
 
 
 CPoiDraw::CPoiDraw(CCanvas* canvas)

@@ -18,6 +18,7 @@
 
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiFileItem.h"
+#include "poi/CPoiGPX.h"
 #include "poi/CPoiPOI.h"
 
 #include <QtWidgets>
@@ -143,6 +144,10 @@ bool CPoiFileItem::activate()
     if(fi.suffix().toLower() == "poi")
     {
         poifile = new CPoiPOI(filename, poi);
+    }
+    else if (fi.suffix().toLower() == "gpx")
+    {
+        poifile = new CPoiGPX(filename, poi);
     }
 
     updateIcon();

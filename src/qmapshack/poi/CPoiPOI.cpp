@@ -39,7 +39,6 @@ CPoiPOI::CPoiPOI(const QString& filename, CPoiDraw* parent)
     // If not set true the system will take care to destroy this object
     isActivated = true;
 
-
     // Open database here so it belongs to the right thread
     if(!QSqlDatabase::contains(filename + "_bbox"))
     {
@@ -71,66 +70,6 @@ CPoiPOI::CPoiPOI(const QString& filename, CPoiDraw* parent)
     }
     //Database is no longer needed
     QSqlDatabase::removeDatabase(filename + "_bbox");
-}
-
-
-
-bool CPoiPOI::getToolTip(const QPoint& px, QString& str) const
-{
-    CTryMutexLocker lock(mutex);
-    if(!lock.try_lock())
-    {
-        return false;
-    }
-
-    poiGroup_t poiGroup;
-    bool success = getPoiGroupCloseBy(px, poiGroup);
-    if(success)
-    {
-        if(poiGroup.pois.count() == 1)
-        {
-            const CPoiItemPOI* poiFound = (const CPoiItemPOI*)loadedPois[*poiGroup.pois.begin()];
-            const QString& name = poiFound->getNameOpt(false);
-            if(!name.isEmpty())
-            {
-                str += "<b>" + name + "</b><br>\n";
-            }
-            str += tr("Category: ") + "<b>" + poiFound->getCategory() + "</b><br>\n";
-            str += poiFound->getDesc();
-            str += "<br>\n";
-            const QList<IGisItem::link_t>& links = poiFound->getLinks();
-            if(!links.isEmpty())
-            {
-                str += tr("Links: ");
-                bool isFirstLink = true;
-                for(const IGisItem::link_t& link : links)
-                {
-                    if(isFirstLink)
-                    {
-                        isFirstLink = false;
-                    }
-                    else
-                    {
-                        str += ", ";
-                    }
-                    str += link.text;
-                }
-            }
-        }
-        else
-        {
-            str += "<i>" + tr("Zoom in to see more details.") + "</i>";
-            if(poiGroup.pois.count() <= 10)
-            {
-                str += "<br>\n" + tr("POIs at this point:");
-                for(quint64 poiID : qAsConst(poiGroup.pois))
-                {
-                    str += "<br>\n<b>" + loadedPois[poiID]->getName() + "</b>";
-                }
-            }
-        }
-    }
-    return success;
 }
 
 void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
@@ -189,14 +128,9 @@ void CPoiPOI::getPoiIcon(QPixmap& icon, const CPoiPOI::poiGroup_t& poiGroup)
     }
 }
 
-void CPoiPOI::getPoiIcon(QPixmap& icon, const CPoiItem* poi, const QString& definingTag)
+void CPoiPOI::getPoiIcon(QPixmap& icon, const CPoiItem* poi)
 {
     const CPoiItemPOI* poiPOI = (const CPoiItemPOI*)poi;
-    if(!definingTag.isEmpty() && tagMap.contains(definingTag))
-    {
-        icon = tagMap[definingTag].getIcon(poiPOI->getRawData());
-        return;
-    }
     for(const QString& tag : poiPOI->getRawData())
     {
         if(tagMap.contains(tag))

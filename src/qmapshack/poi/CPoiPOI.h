@@ -38,8 +38,6 @@ public:
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
     virtual void loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10) override;
 
-    bool getToolTip(const QPoint& px, QString& str) const override;
-
     static void init()
     {
         tagMap = initTagMap();
@@ -64,7 +62,7 @@ private:
     };
 
     void getPoiIcon(QPixmap& icon, const poiGroup_t& poiGroup) override;
-    void getPoiIcon(QPixmap& icon, const CPoiItem* poi, const QString& definingTag = "") override;
+    void getPoiIcon(QPixmap& icon, const CPoiItem* poi) override;
 
     QString filename;
 

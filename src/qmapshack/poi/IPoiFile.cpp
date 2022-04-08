@@ -133,9 +133,9 @@ void IPoiFile::draw(IDrawContext::buffer_t& buf)
         {
             continue;
         }
-        for(int minLonM10 = qFloor(xMin * RAD_TO_DEG * 10); minLonM10 < qCeil(xMax * RAD_TO_DEG * 10); minLonM10++)
+        for(int minLonM10 = radToIndex(xMin); minLonM10 <= radToIndex(xMax); minLonM10++)
         {
-            for(int minLatM10 = qFloor(yMin * RAD_TO_DEG * 10); minLatM10 < qCeil(yMax * RAD_TO_DEG * 10); minLatM10++)
+            for(int minLatM10 = radToIndex(yMin); minLatM10 < radToIndex(yMax); minLatM10++)
             {
                 if(!loadedPoisByArea.contains(categoryID) ||
                    !loadedPoisByArea[categoryID].contains(minLonM10) ||
@@ -320,6 +320,65 @@ void IPoiFile::findPoisIn(const QRectF& degRect, QSet<const CPoiItem*>& pois, QL
             posPoiHighlight.append(poiGroup.iconCenter);
         }
     }
+}
+
+bool IPoiFile::getToolTip(const QPoint& px, QString& str) const
+{
+    CTryMutexLocker lock(mutex);
+    if(!lock.try_lock())
+    {
+        return false;
+    }
+
+    poiGroup_t poiGroup;
+    bool success = getPoiGroupCloseBy(px, poiGroup);
+    if(success)
+    {
+        if(poiGroup.pois.count() == 1)
+        {
+            const CPoiItem* poiFound = loadedPois[*poiGroup.pois.begin()];
+            bool fallback = false;
+            const QString& name = poiFound->getName(fallback);
+            if(!name.isEmpty())
+            {
+                str += "<b>" + name + "</b><br>\n";
+            }
+            str += tr("Category: ") + "<b>" + poiFound->getCategory() + "</b><br>\n";
+            str += poiFound->getDesc();
+            str += "<br>\n";
+            const QList<IGisItem::link_t>& links = poiFound->getLinks();
+            if(!links.isEmpty())
+            {
+                str += tr("Links: ");
+                bool isFirstLink = true;
+                for(const IGisItem::link_t& link : links)
+                {
+                    if(isFirstLink)
+                    {
+                        isFirstLink = false;
+                    }
+                    else
+                    {
+                        str += ", ";
+                    }
+                    str += link.text;
+                }
+            }
+        }
+        else
+        {
+            str += "<i>" + tr("Zoom in to see more details.") + "</i>";
+            if(poiGroup.pois.count() <= 10)
+            {
+                str += "<br>\n" + tr("POIs at this point:");
+                for(quint64 poiID : qAsConst(poiGroup.pois))
+                {
+                    str += "<br>\n<b>" + loadedPois[poiID]->getName() + "</b>";
+                }
+            }
+        }
+    }
+    return success;
 }
 
 bool IPoiFile::overlapsWithIcon(const QRectF& rect) const

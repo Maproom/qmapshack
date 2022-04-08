@@ -26,6 +26,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CWptIconManager.h"
+#include "serialization.h"
 #include "version.h"
 
 #include <QtXml>
@@ -78,7 +79,7 @@ static void readXml(const QDomNode& xml, const QString& tag, trkact_t& value)
 
 
 template<typename T>
-static void readXml(const QDomNode& xml, const QString& tag, T& value)
+void readXml(const QDomNode& xml, const QString& tag, T& value)
 {
     if(xml.namedItem(tag).isElement())
     {
@@ -109,7 +110,7 @@ static void readXml(const QDomNode& xml, const QString& tag, T& value)
     }
 }
 
-static void readXml(const QDomNode& xml, const QString& tag, QString& value)
+void readXml(const QDomNode& xml, const QString& tag, QString& value)
 {
     if(xml.namedItem(tag).isElement())
     {
@@ -117,7 +118,7 @@ static void readXml(const QDomNode& xml, const QString& tag, QString& value)
     }
 }
 
-static void readXml(const QDomNode& xml, const QString& tag, QString& value, bool& isHtml)
+void readXml(const QDomNode& xml, const QString& tag, QString& value, bool& isHtml)
 {
     if(xml.namedItem(tag).isElement())
     {

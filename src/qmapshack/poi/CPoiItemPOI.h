@@ -39,22 +39,18 @@ public:
     CPoiItemPOI(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon);
 
     // Overridden members
-    virtual bool getGpxMode() const override {return false;}
     virtual QDomNode getGpx() const override {return QDomNode();}
-    virtual QString getName() const override {return getNameOpt();}
     virtual QString getDesc() const override;
     virtual QList<IGisItem::link_t> getLinks() const override;
     virtual quint32 getEle() const override;
 
     const QString& getNameOpt(bool replaceEmptyByCategory = true) const;
-    const QString& getCategory() const;
     uint getKey() const override;
     const QMap<QString, QString>& getData() const;
     const QStringList& getRawData() const;
 
 
 private:
-    QString category;
     /// <key, value>
     QMap<QString, QString> data;
     QStringList rawData;

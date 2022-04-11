@@ -295,6 +295,7 @@ set( SRCS
     poi/CPoiPathSetup.cpp
     poi/CPoiPropSetup.cpp
     poi/IPoiFile.cpp
+    poi/IPoiItem.cpp
     poi/IPoiProp.cpp
     print/CPrintDialog.cpp
     print/CScreenshotDialog.cpp

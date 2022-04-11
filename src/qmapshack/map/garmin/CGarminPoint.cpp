@@ -25,10 +25,32 @@
 #include "CGarminPoint.h"
 #include "Garmin.h"
 #include "helpers/Platform.h"
+#include "map/CMapDraw.h"
+#include "poi/IPoiItem.h"
 #include "units/IUnit.h"
 
 #include <QtCore>
 
+
+CGarminPoint::CGarminPoint(const QMap<quint32, CGarminTyp::point_property>* pointProperties, const qint8* selectedLanguage)
+    : pointProperties(pointProperties), selectedLanguage(selectedLanguage)
+{
+}
+
+QString CGarminPoint::getName(bool& fallback) const
+{
+    if(!labels.isEmpty() || !fallback)
+    {
+        fallback = false;
+        return labels.first();
+    }
+    fallback = true;
+    if(pointProperties->contains(type))
+    {
+        return (*pointProperties)[type].strings[*selectedLanguage != NOIDX ? *selectedLanguage : 0];
+    }
+    return QString(" (%1)").arg(type, 2, 16, QChar('0'));
+}
 
 quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData)
 {
@@ -139,4 +161,11 @@ QString CGarminPoint::getLabelText() const
         }
     }
     return str;
+}
+
+QPointF CGarminPoint::getPxPos(CMapDraw* map) const
+{
+    QPointF pos = this->pos;
+    map->convertRad2Px(pos);
+    return pos;
 }

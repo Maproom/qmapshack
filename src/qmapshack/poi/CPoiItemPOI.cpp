@@ -16,14 +16,14 @@
 
 **********************************************************************************************/
 
-#include "poi/IPoiItem.h"
 #include "poi/CPoiItemPOI.h"
+#include "poi/IPoiItem.h"
 
 #include <QDebug>
 #include <QRegularExpression>
 
 CPoiItemPOI::CPoiItemPOI(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon)
-    : category(category), coordinates(coordinates), rawData(data), garminIcon(garminIcon), key(key)
+    : pos(coordinates), icon(garminIcon), category(category), rawData(data), key(key)
 {
     QString lastValidKey = "";
     for(const QString& line : data)
@@ -81,26 +81,18 @@ CPoiItemPOI::CPoiItemPOI(const QStringList& data, const QPointF& coordinates, co
     }
 }
 
-const QString& CPoiItemPOI::getCategory() const
+QString CPoiItemPOI::getName(bool& fallback) const
 {
-    return category;
-}
-
-const QString& CPoiItemPOI::getName(bool replaceEmptyByCategory) const
-{
-    if(replaceEmptyByCategory && name.isEmpty())
+    if(name.isEmpty() && fallback)
     {
-        return category;
+        fallback = true;
+        return getCategory();
     }
+    fallback = false;
     return name;
 }
 
-const QPointF& CPoiItemPOI::getCoordinates() const
-{
-    return coordinates;
-}
-
-const quint64& CPoiItemPOI::getKey() const
+uint CPoiItemPOI::getKey() const
 {
     return key;
 }
@@ -379,18 +371,5 @@ quint32 CPoiItemPOI::getEle() const
     return ok ? ele : NOINT;
 }
 
-
-
-IPoiItem CPoiItemPOI::toPoi() const
-{
-    IPoiItem poi;
-    poi.pos = coordinates;
-    poi.name = getName();
-    poi.icon = garminIcon;
-    poi.desc = getDesc();
-    poi.links = getLinks();
-    poi.ele = getEle();
-    return poi;
-}
 
 

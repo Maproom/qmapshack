@@ -18,7 +18,6 @@
 
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
-#include "poi/IPoiItem.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "map/cache/CDiskCache.h"
@@ -27,6 +26,7 @@
 #include "map/CMapList.h"
 #include "map/CMapPathSetup.h"
 #include "map/IMap.h"
+#include "poi/IPoiItem.h"
 #include "setup/IAppSetup.h"
 
 #include <QtGui>
@@ -184,14 +184,13 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
     CMapItem::mutexActiveMaps.unlock();
 }
 
-IPoiItem CMapDraw::findPOICloseBy(const QPoint& px) const
+const IPoiItem* CMapDraw::findPOICloseBy(const QPoint& px) const
 {
-    IPoiItem poi;
-
     if(isRunning())
     {
-        return poi;
+        return nullptr;
     }
+    const IPoiItem* poi = nullptr;
     CMapItem::mutexActiveMaps.lock();
     if(mapList)
     {
@@ -207,8 +206,8 @@ IPoiItem CMapDraw::findPOICloseBy(const QPoint& px) const
                 break;
             }
 
-            item->getMapfile()->findPOICloseBy(px, poi);
-            if(poi.pos != NOPOINTF)
+            poi = item->getMapfile()->findPOICloseBy(px);
+            if(poi != nullptr)
             {
                 // stop at the 1st one found
                 break;

@@ -19,12 +19,12 @@
 #include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
-#include "poi/IPoiItem.h"
 #include "gis/trk/CActivityTrk.h"
 #include "helpers/CTryMutexLocker.h"
 #include "helpers/CWptIconManager.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CScrOptSelect.h"
+#include "poi/IPoiItem.h"
 
 #include <QtWidgets>
 
@@ -117,6 +117,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
         }
 
         posPoiHighlight.clear();
+        // no need to delete pointers as that is taken care of in map/poi file
         poisFound.clear();
         if(modeSelection & IGisItem::eSelectionPoi)
         {

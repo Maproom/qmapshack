@@ -26,7 +26,6 @@
 #include "gis/GeoMath.h"
 #include "gis/IGisLine.h"
 #include "gis/ovl/CGisItemOvlArea.h"
-#include "poi/IPoiItem.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CTableTrkInfo.h"
 #include "grid/CGrid.h"
@@ -49,6 +48,7 @@
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
 #include "poi/CPoiDraw.h"
+#include "poi/IPoiItem.h"
 #include "realtime/CRtDraw.h"
 #include "units/IUnit.h"
 #include "widgets/CColorLegend.h"
@@ -671,7 +671,7 @@ void CCanvas::mouseMoveEvent(QMouseEvent* e)
     map->convertPx2Rad(pos);
     qreal ele = dem->getElevationAt(pos, true);
     qreal slope = dem->getSlopeAt(pos, true);
-    emit sigMousePosition(pos* RAD_TO_DEG, ele, slope);
+    emit sigMousePosition(pos * RAD_TO_DEG, ele, slope);
 
     mouse->mouseMoveEvent(e);
     QWidget::mouseMoveEvent(e);
@@ -1133,19 +1133,19 @@ void CCanvas::displayInfo(const QPoint& px)
     QToolTip::hideText();
 }
 
-void CCanvas::findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight)  const
+void CCanvas::findPoiCloseBy(const QPoint& px, QSet<const IPoiItem*>& poiItems, QList<QPointF>& posPoiHighlight)  const
 {
     poi->findPoiCloseBy(px, poiItems, posPoiHighlight);
 
-    IPoiItem mapPoi = map->findPOICloseBy(px);
-    if(mapPoi.pos != NOPOINTF)
+    const IPoiItem* mapPoi = map->findPOICloseBy(px);
+    if(mapPoi != nullptr)
     {
         poiItems.insert(mapPoi);
-        posPoiHighlight.append(mapPoi.pos);
+        posPoiHighlight.append(mapPoi->getPos());
     }
 }
 
-void CCanvas::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
+void CCanvas::findPoisIn(const QRectF& degRect, QSet<const IPoiItem*>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     return poi->findPoisIn(degRect, poiItems, posPoiHighlight);
 }

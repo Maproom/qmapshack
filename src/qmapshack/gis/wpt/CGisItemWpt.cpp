@@ -24,7 +24,6 @@
 #include "gis/CGisListWks.h"
 #include "gis/GeoMath.h"
 #include "gis/prj/IGisProject.h"
-#include "poi/IPoiItem.h"
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -35,6 +34,7 @@
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"
 #include "mouse/IMouse.h"
+#include "poi/IPoiItem.h"
 #include "units/IUnit.h"
 
 #include <QPainterPath>
@@ -291,24 +291,24 @@ void CGisItemWpt::newWpt(const QPointF& pt, const QString& name, const QString& 
     cfg.setValue("Waypoint/lastIcon", wpt->getIconName());
 }
 
-void CGisItemWpt::newWpt(const IPoiItem& poi, IGisProject* project, bool openEditWIndow)
+void CGisItemWpt::newWpt(const IPoiItem* poi, IGisProject* project, bool openEditWIndow)
 {
     SETTINGS;
-    const QString& _icon = poi.icon.isEmpty() ? cfg.value("Waypoint/lastIcon", "Waypoint").toString() : poi.icon;
-    const QString& _name = poi.name.isEmpty() ? getLastName("") : poi.name;
+    const QString& _icon = poi->getIcon().isEmpty() ? cfg.value("Waypoint/lastIcon", "Waypoint").toString() : poi->getIcon();
+    const QString& _name = poi->getName().isEmpty() ? getLastName("") : poi->getName();
 
-    CGisItemWpt* wpt = new CGisItemWpt(poi.pos * RAD_TO_DEG, _name, _icon, project);
-    if(!poi.desc.isEmpty())
+    CGisItemWpt* wpt = new CGisItemWpt(poi->getPos() * RAD_TO_DEG, _name, _icon, project);
+    if(!poi->getDesc().isEmpty())
     {
-        wpt->setDescription(poi.desc);
+        wpt->setDescription(poi->getDesc());
     }
-    if(!poi.links.isEmpty())
+    if(!poi->getLinks().isEmpty())
     {
-        wpt->setLinks(poi.links);
+        wpt->setLinks(poi->getLinks());
     }
-    if(poi.ele != NOINT)
+    if(poi->getEle() != NOINT)
     {
-        wpt->setElevation(poi.ele);
+        wpt->setElevation(poi->getEle());
     }
     if(openEditWIndow)
     {
@@ -1072,7 +1072,7 @@ void CGisItemWpt::detBoundingRect()
     else
     {
         qreal diag = proximity * 1.414213562;
-        QPointF cent(wpt.lon* DEG_TO_RAD, wpt.lat* DEG_TO_RAD);
+        QPointF cent(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
 
         QPointF pt1 = GPS_Math_Wpt_Projection(cent, diag, 225 * DEG_TO_RAD);
         QPointF pt2 = GPS_Math_Wpt_Projection(cent, diag, 45 * DEG_TO_RAD);

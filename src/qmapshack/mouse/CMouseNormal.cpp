@@ -128,6 +128,7 @@ void CMouseNormal::mouseMoved(const QPoint& point)
     }
 
     posPoiHighlight.clear();
+    //No need to delete items, as deletion is taken care of in the map/poi file
     curPois.clear();
     canvas->findPoiCloseBy(point, curPois, posPoiHighlight);
 
@@ -358,7 +359,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect&
     }
 }
 
-void CMouseNormal::slotAddPoi(const IPoiItem& poi) const
+void CMouseNormal::slotAddPoi(const IPoiItem* poi) const
 {
     CGisWorkspace::self().addPoiAsWpt(poi);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -442,9 +443,9 @@ void CMouseNormal::showContextMenu(const QPoint& point)
     QMenu menu(canvas);
     if(curPois.count() > 0 && curPois.count() <= 5)
     {
-        for(IPoiItem poi : curPois)
+        for(const IPoiItem* poi : curPois)
         {
-            menu.addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add POI %1 as Waypoint").arg(poi.name), this, [this, poi] {slotAddPoi(poi);});
+            menu.addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add POI %1 as Waypoint").arg(poi->getName()), this, [this, poi] {slotAddPoi(poi);});
         }
     }
     else if (curPois.count() > 5 )

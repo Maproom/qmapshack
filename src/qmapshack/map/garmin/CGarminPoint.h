@@ -25,17 +25,27 @@
 #ifndef CGARMINPOINT_H
 #define CGARMINPOINT_H
 
+#include "CGarminTyp.h"
+#include "poi/IPoiItem.h"
+
 #include <QPointF>
 #include <QStringList>
 #include <QtGlobal>
 
 class CGarminTile;
+class CMapDraw;
 
-class CGarminPoint
+class CGarminPoint : public IPoiItem
 {
 public:
-    CGarminPoint() = default;
+    [[deprecated("Only to enable use of CGarminPoint in QVector and similar until we upgrade to Qt >= 5.13. DO NOT USE!")]]
+    CGarminPoint(){}
+    CGarminPoint(const QMap<quint32, CGarminTyp::point_property>* pointProperties, const qint8* selectedLanguage);
     virtual ~CGarminPoint() = default;
+
+    QString getName(bool& fallback) const override;
+    QString getDesc() const override {return getLabelText();}
+    QPointF getPos() const override {return pos;}
 
     quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData);
     quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData, const quint8* pEnd);
@@ -51,10 +61,14 @@ public:
     bool isLbl6 = false;
     bool hasSubType = false;
 
-    QPointF pos;
+    QPointF getPxPos(CMapDraw* map) const;
 
     QStringList labels;
 
     quint32 lbl_ptr = 0xFFFFFFFF;
+private:
+    const QMap<quint32, CGarminTyp::point_property>* pointProperties;
+    const qint8* selectedLanguage;
+    QPointF pos;
 };
 #endif                           //CGARMINPOINT_H

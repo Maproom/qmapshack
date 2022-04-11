@@ -52,10 +52,10 @@ public:
 
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    virtual bool findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const = 0;
+    virtual bool findPoiCloseBy(const QPoint& px, QSet<const IPoiItem*>& poiItems, QList<QPointF>& posPoiHighlight) const = 0;
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    virtual void findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<QPointF>& posPoiHighlight) = 0;
+    virtual void findPoisIn(const QRectF& degRect, QSet<const IPoiItem*>& pois, QList<QPointF>& posPoiHighlight) = 0;
     virtual bool getToolTip(const QPoint& px, QString& str) const = 0;
 
     static void init();

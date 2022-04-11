@@ -20,6 +20,7 @@
 #define CPOIITEMPOI_H
 
 #include "gis/IGisItem.h"
+#include "IPoiItem.h"
 
 #include <QCoreApplication>
 #include <QList>
@@ -28,39 +29,42 @@
 #include <QString>
 #include <QStringList>
 
-struct IPoiItem;
 
-class CPoiItemPOI
+class CPoiItemPOI : public IPoiItem
 {
-    Q_DECLARE_TR_FUNCTIONS(CPoiItemPOI)
+    Q_DECLARE_TR_FUNCTIONS(CRawPoi)
 public:
-    //Dummy constructor for the usage of QMap
+    [[deprecated("Only to enable use of CPoiItemPOI in QVector and similar until we upgrade to Qt >= 5.13. DO NOT USE!")]]
     CPoiItemPOI(){}
     CPoiItemPOI(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon);
-    const QString& getCategory() const;
-    const QString& getName(bool replaceEmptyByCategory = true) const;
-    const QPointF& getCoordinates() const;
-    const quint64& getKey() const;
+
+    // Overridden members
+    using IPoiItem::getName;
+    QString getName(bool& fallback) const override;
+    QString getDesc() const override;
+    QPointF getPos() const override {return pos;}
+    QList<IGisItem::link_t> getLinks() const override;
+    quint32 getEle() const override;
+    using IPoiItem::getCategory;
+    QString getCategory(bool& fallback) const override {fallback = false; return category;}
+
+    uint getKey() const override;
     const QMap<QString, QString>& getData() const;
     const QStringList& getRawData() const;
-    QString getDesc() const;
-    QList<IGisItem::link_t> getLinks() const;
-    quint32 getEle() const;
-    IPoiItem toPoi() const;
 
 
 private:
+    QString name;
+    QPointF pos;
+    QString icon;
     QString category;
-    QPointF coordinates; // in radians
     /// <key, value>
     QMap<QString, QString> data;
     QStringList rawData;
     QStringList wikipediaRelatedKeys;
     QStringList wikidataRelatedKeys;
     QStringList nameRelatedKeys;
-    QString garminIcon;
     quint64 key;
-    QString name;
 };
 
 #endif // CPOIITEMPOI_H

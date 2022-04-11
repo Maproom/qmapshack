@@ -61,7 +61,7 @@ private:
 
     QList<IGisItem::key_t> itemKeys;
     static QMutex mutex;
-    QSet<IPoiItem> poisFound;
+    QSet<const IPoiItem*> poisFound;
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
     QList<QPointF> posPoiHighlight;

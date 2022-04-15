@@ -48,6 +48,7 @@ void CRouterBRouterSetup::load()
     onlineServiceUrl = cfg.value("onlineServiceUrl", defaultOnlineServiceUrl).toString();
     onlineProfilesUrl = cfg.value("onlineProfilesUrl", defaultOnlineProfilesUrl).toString();
     localDir = cfg.value("localDir", defaultLocalDir).toString();
+    localBRouterJar = cfg.value("localBRouterJar", defaultLocalBRouterJar).toString();
     localJavaExecutable = cfg.value("localJava", findJava()).toString();
     localProfileDir = cfg.value("localProfileDir", defaultLocalProfileDir).toString();
     localCustomProfileDir = cfg.value("localCustomProfileDir", defaultLocalCustomProfileDir).toString();
@@ -105,6 +106,7 @@ void CRouterBRouterSetup::save()
     cfg.setValue("onlineServiceUrl", onlineServiceUrl);
     cfg.setValue("onlineProfilesUrl", onlineProfilesUrl);
     cfg.setValue("localDir", localDir);
+    cfg.setValue("localBRouterJar", localBRouterJar);
     cfg.setValue("localJava", localJavaExecutable);
     cfg.setValue("localProfileDir", localProfileDir);
     cfg.setValue("localCustomProfileDir", localCustomProfileDir);
@@ -140,6 +142,7 @@ void CRouterBRouterSetup::resetAll()
     resetOnlineConfigUrl();
     resetOnlineServiceUrl();
     resetOnlineProfilesUrl();
+    resetLocalBRouterJar();
     resetLocalProfileDir();
     resetLocalCustomProfileDir();
     resetLocalSegmentsDir();
@@ -314,19 +317,109 @@ void CRouterBRouterSetup::readLocalProfiles()
 
 QDir CRouterBRouterSetup::getProfileDir(const mode_e mode) const
 {
+    QDir profileDir;
     if (mode == eModeLocal)
     {
-        return QDir(QDir(localDir).absoluteFilePath(localProfileDir));
+        profileDir.setPath(QDir(localDir).absoluteFilePath(localProfileDir));
     }
     else
     {
         Q_ASSERT(mode == eModeOnline);
-        QDir brouterDir(QDir(IAppSetup::getPlatformInstance()->defaultCachePath()).absoluteFilePath(onlineCacheDir));
-        if (!brouterDir.exists())
+        profileDir.setPath(QDir(IAppSetup::getPlatformInstance()->defaultCachePath()).absoluteFilePath(onlineProfileCacheDir));
+    }
+    if (!profileDir.exists())
+    {
+        profileDir.mkpath(profileDir.absolutePath());
+    }
+    return profileDir;
+}
+
+QDir CRouterBRouterSetup::getDownloadDir() const
+{
+    QDir downloadDir(QDir(IAppSetup::getPlatformInstance()->defaultCachePath()).absoluteFilePath(downloadCacheDir));
+    if (!downloadDir.exists())
+    {
+        downloadDir.mkpath(downloadDir.absolutePath());
+    }
+    return downloadDir;
+}
+
+void CRouterBRouterSetup::installLocalBRouter(QStringList& messageList)
+{
+    const QDir targetDir = QDir(localDir);
+    const QDir targetProfileDir = getProfileDir(eModeLocal);
+    const QString srcPath = getDownloadDir().absolutePath();
+    QDirIterator srcIterator(srcPath, {"*.jar","*.brf","lookups.dat"}, QDir::Files, QDirIterator::Subdirectories);
+    QStringList jarFiles;
+    while(srcIterator.hasNext())
+    {
+        QFile srcFile(srcIterator.next());
+        QFileInfo srcFileInfo(srcFile);
+        QString srcFileName = srcFileInfo.fileName();
+        if (srcFileName.endsWith(".jar"))
         {
-            brouterDir.mkpath(brouterDir.absolutePath());
+            jarFiles.append(srcFileName);
+            installLocalBRouterFile(srcFileInfo, targetDir, messageList);
+            continue;
         }
-        return brouterDir;
+        if (srcFileName.endsWith(".brf") || srcFileName.endsWith(".dat"))
+        {
+            installLocalBRouterFile(srcFileInfo, targetProfileDir, messageList);
+            continue;
+        }
+    }
+    if (jarFiles.isEmpty())
+    {
+        throw tr("no brouter-jar found");
+    }
+    else
+    {
+        bool isFirst = true;
+        for (QString jarFile : jarFiles)
+        {
+            if (isFirst)
+            {
+                localBRouterJar = jarFile;
+                messageList.append(tr("brouter jar-file: %1").arg(jarFile));
+                isFirst = false;
+            }
+            else
+            {
+                messageList.append(tr("conflicting alternative jar-file %1, go back to previous page to select!").arg(jarFile));
+            }
+        }
+    }
+}
+
+void CRouterBRouterSetup::installLocalBRouterFile(const QFileInfo& srcFileInfo, const QDir& targetDir, QStringList& messageList) const
+{
+    QString srcAbsoluteFilePath = srcFileInfo.absoluteFilePath();
+    QString targetAbsoluteFilePath(targetDir.absoluteFilePath(srcFileInfo.fileName()));
+    if (QFile::exists(targetAbsoluteFilePath))
+    {
+        for (int i=1;;i++)
+        {
+            QString newFilename = targetAbsoluteFilePath+"("+QString::number(i)+")";
+            if (QFile::exists(newFilename))
+                continue;
+            if (QFile::rename(targetAbsoluteFilePath, newFilename))
+            {
+                messageList.append(tr("backup: %1 to %2").arg(targetAbsoluteFilePath).arg(newFilename));
+            }
+            else
+            {
+                throw tr("error renaming file %1 to %2").arg(targetAbsoluteFilePath).arg(newFilename);
+            }
+            break;
+        }
+    }
+    if (QFile::copy(srcAbsoluteFilePath,targetAbsoluteFilePath))
+    {
+        messageList.append(tr("installed: %1 to %2").arg(srcAbsoluteFilePath).arg(targetAbsoluteFilePath));
+    }
+    else
+    {
+        throw tr("error copying %1 to %2").arg(srcFileInfo.absoluteFilePath()).arg(targetAbsoluteFilePath);
     }
 }
 
@@ -729,7 +822,19 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply* reply)
 bool CRouterBRouterSetup::isLocalBRouterInstalled() const
 {
     const QDir dir(localDir);
-    return QFile(dir.absoluteFilePath("brouter.jar")).exists() && QDir(dir.absoluteFilePath(localProfileDir)).exists();
+    const QFile jarFile(dir.absoluteFilePath(localBRouterJar));
+    const QDir profileDir(dir.absoluteFilePath(localProfileDir));
+    const QFile lookupFile(profileDir.absoluteFilePath("lookups.dat"));
+    return jarFile.exists() && profileDir.exists() && lookupFile.exists();
+}
+
+bool CRouterBRouterSetup::isLocalBRouterCandidate() const
+{
+    const QDir dir(localDir);
+    const QStringList jarFiles = dir.entryList({"*.jar"}, QDir::Files, QDir::NoSort);
+    const QDir profileDir(dir.absoluteFilePath(localProfileDir));
+    const QFile lookupFile(profileDir.absoluteFilePath("lookups.dat"));
+    return !jarFiles.isEmpty() && profileDir.exists() && lookupFile.exists();
 }
 
 bool CRouterBRouterSetup::isLocalBRouterDefaultDir() const

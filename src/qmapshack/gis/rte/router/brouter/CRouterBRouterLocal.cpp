@@ -68,7 +68,7 @@ void CRouterBRouterLocal::startBRouter()
             args << brouter.setup->localJavaOpts.split(QRegExp("\\s+"));
             args << QString("-DmaxRunningTime=%1").arg(brouter.setup->localMaxRunningTime);
             args << "-cp";
-            args << "brouter.jar";
+            args << brouter.setup->localBRouterJar;
             args << "btools.server.RouteServer";
             args << brouter.setup->localSegmentsDir;
             args << brouter.setup->localProfileDir;

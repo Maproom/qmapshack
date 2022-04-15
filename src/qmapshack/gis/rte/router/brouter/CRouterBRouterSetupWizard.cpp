@@ -49,9 +49,11 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(lineLocalSegmentsUrl, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotSegmentsUrlEdited);
 
     connect(toolLocalDir, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectDirectory);
+    connect(toolLocalBRouterJar, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectBRouterJar);
     connect(toolJavaExecutable, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectJava);
     connect(pushLocalFindJava, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalPushFindJava);
     connect(lineLocalDir, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotLocalDirectoryEdited);
+    connect(lineLocalBRouterJar, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotLocalBRouterJarEdited);
     connect(lineJavaExecutable, &QLineEdit::textEdited, this, &CRouterBRouterSetupWizard::slotLocalJavaExecutableEdited);
 
     connect(pushCreateOrUpdateLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked);
@@ -349,6 +351,21 @@ void CRouterBRouterSetupWizard::slotLocalToolSelectDirectory()
     updateLocalDirectory();
 }
 
+void CRouterBRouterSetupWizard::slotLocalToolSelectBRouterJar()
+{
+    QFileDialog dialog(this,
+                       tr("select BRouter jar file"),
+                       setup->localDir,
+                       "Jar File (*.jar)");
+    dialog.setFileMode(QFileDialog::ExistingFile);
+    if (dialog.exec())
+    {
+        const QStringList& files = dialog.selectedFiles();
+        setup->localBRouterJar = files.isEmpty() ? "" : QFileInfo(files.first()).fileName();
+        updateLocalDirectory();
+    }
+}
+
 void CRouterBRouterSetupWizard::slotLocalToolSelectJava()
 {
     QFileDialog dialog(this,
@@ -376,6 +393,12 @@ void CRouterBRouterSetupWizard::slotLocalDirectoryEdited() const
     updateLocalDirectory();
 }
 
+void CRouterBRouterSetupWizard::slotLocalBRouterJarEdited() const
+{
+    setup->localBRouterJar = lineLocalBRouterJar->text();
+    updateLocalDirectory();
+}
+
 void CRouterBRouterSetupWizard::slotLocalJavaExecutableEdited() const
 {
     setup->localJavaExecutable = lineJavaExecutable->text();
@@ -388,6 +411,20 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
     if (lineLocalDir->text() != setup->localDir)
     {
         lineLocalDir->setText(setup->localDir);
+    }
+    if (setup->isLocalBRouterCandidate() && (setup->expertMode || !setup->isLocalBRouterInstalled()))
+    {
+        lineLocalBRouterJar->setVisible(true);
+        toolLocalBRouterJar->setVisible(true);
+        if (lineLocalBRouterJar->text() != setup->localBRouterJar)
+        {
+            lineLocalBRouterJar->setText(setup->localBRouterJar);
+        }
+    }
+    else
+    {
+        lineLocalBRouterJar->setVisible(false);
+        toolLocalBRouterJar->setVisible(false);
     }
     if (lineJavaExecutable->text() != setup->localJavaExecutable)
     {
@@ -411,6 +448,10 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
             labelLocalDirResult->setText(tr("existing BRouter installation"));
             pushCreateOrUpdateLocalInstall->setText(tr("update existing BRouter installation"));
             pushCreateOrUpdateLocalInstall->setVisible(true);
+        }
+        else if (setup->isLocalBRouterCandidate())
+        {
+            labelLocalDirResult->setText(tr("it seems this is an existing BRouter installation, choose jar file!"));
         }
         else
         {
@@ -558,7 +599,9 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply* r
         {
             throw tr("Error directory %1 does not exist").arg(outDir.absolutePath());
         }
-        QFile outfile(outDir.absoluteFilePath(fileName));
+        QDir downloadDir = setup->getDownloadDir();
+        QFile outfile(downloadDir.absoluteFilePath(fileName));
+        QStringList messageList;
         try
         {
             if (!outfile.open(QIODevice::WriteOnly))
@@ -572,18 +615,30 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply* r
             outfile.close();
             textLocalInstall->setTextColor(Qt::darkGreen);
             textLocalInstall->append(tr("download %1 finished").arg(outfile.fileName()));
-            const QStringList& unzippedNames = JlCompress::extractDir(outfile.fileName(), setup->localDir);
+            const QStringList& unzippedNames = JlCompress::extractDir(outfile.fileName(), downloadDir.path());
             textLocalInstall->append(tr("unzipping:"));
             for (const QString& unzipped : unzippedNames)
             {
                 textLocalInstall->append(unzipped);
             }
-            textLocalInstall->append(tr("ready."));
+            textLocalInstall->append(tr("installing into %1").arg(setup->localDir));
+            setup->installLocalBRouter(messageList);
+            for(const QString& message : messageList)
+            {
+               textLocalInstall->append(message);
+            }
+            messageList.clear();
+            downloadDir.removeRecursively();
+            textLocalInstall->append(tr("installation successful"));
             pageLocalInstallation->emitCompleteChanged();
             setup->readLocalProfiles();
         }
         catch (const QString& msg)
         {
+            for(const QString& message : messageList)
+            {
+               textLocalInstall->append(message);
+            }
             if (outfile.isOpen())
             {
                 outfile.close();
@@ -592,13 +647,17 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply* r
             {
                 outfile.remove();
             }
+            if (downloadDir.exists() && !downloadDir.isEmpty())
+            {
+                downloadDir.removeRecursively();
+            }
             throw msg;
         }
     }
     catch (const QString& msg)
     {
         textLocalInstall->setTextColor(Qt::red);
-        textLocalInstall->append(tr("download of brouter failed: %1").arg(msg));
+        textLocalInstall->append(tr("installation of brouter failed: %1").arg(msg));
     }
 }
 
@@ -932,6 +991,7 @@ void CRouterBRouterSetupWizard::resetLocalDetails() const
     setup->resetLocalHost();
     setup->resetLocalPort();
     setup->resetLocalBindLocalonly();
+    setup->resetLocalBRouterJar();
     setup->resetLocalProfileDir();
     setup->resetLocalSegmentsDir();
     setup->resetLocalCustomProfileDir();

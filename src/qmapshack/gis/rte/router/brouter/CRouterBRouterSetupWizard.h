@@ -51,10 +51,12 @@ private slots:
     void slotRadioOnlineClicked() const;
     void slotCheckExpertClicked() const;
     void slotLocalToolSelectDirectory();
+    void slotLocalToolSelectBRouterJar();
     void slotLocalToolSelectJava();
     void slotLocalPushFindJava() const;
     void slotCreateOrUpdateLocalInstallClicked();
     void slotLocalDirectoryEdited() const;
+    void slotLocalBRouterJarEdited() const;
     void slotLocalJavaExecutableEdited() const;
     void slotProfilesUrlEdited();
     void slotOnlineServiceUrlEdited();

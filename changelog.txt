@@ -7,6 +7,7 @@ V1.XX.X
 [QMS-489] Track selection 0-index bug
 [QMS-490] Potentially incorrect slope shading opacity for slope value NOFLOAT
 [QMS-499] Disable close action for projects with autom. sync. to device
+[QMS-503] BRouter Version 1.6.3 local setup fails
 [QMS-507] QMapTool: Early projection validity check 
 
 V1.16.1

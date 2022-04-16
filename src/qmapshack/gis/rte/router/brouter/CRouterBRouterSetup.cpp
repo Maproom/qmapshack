@@ -346,16 +346,15 @@ QDir CRouterBRouterSetup::getDownloadDir() const
 
 void CRouterBRouterSetup::installLocalBRouter(QStringList& messageList)
 {
-    const QDir targetDir = QDir(localDir);
-    const QDir targetProfileDir = getProfileDir(eModeLocal);
-    const QString srcPath = getDownloadDir().absolutePath();
+    const QDir targetDir(localDir);
+    const QDir& targetProfileDir = getProfileDir(eModeLocal);
+    const QString& srcPath = getDownloadDir().absolutePath();
     QDirIterator srcIterator(srcPath, {"*.jar","*.brf","lookups.dat"}, QDir::Files, QDirIterator::Subdirectories);
     QStringList jarFiles;
     while(srcIterator.hasNext())
     {
-        QFile srcFile(srcIterator.next());
-        QFileInfo srcFileInfo(srcFile);
-        QString srcFileName = srcFileInfo.fileName();
+        QFileInfo srcFileInfo(srcIterator.next());
+        const QString& srcFileName = srcFileInfo.fileName();
         if (srcFileName.endsWith(".jar"))
         {
             jarFiles.append(srcFileName);
@@ -375,7 +374,7 @@ void CRouterBRouterSetup::installLocalBRouter(QStringList& messageList)
     else
     {
         bool isFirst = true;
-        for (QString jarFile : jarFiles)
+        for (const QString& jarFile : jarFiles)
         {
             if (isFirst)
             {
@@ -393,13 +392,13 @@ void CRouterBRouterSetup::installLocalBRouter(QStringList& messageList)
 
 void CRouterBRouterSetup::installLocalBRouterFile(const QFileInfo& srcFileInfo, const QDir& targetDir, QStringList& messageList) const
 {
-    QString srcAbsoluteFilePath = srcFileInfo.absoluteFilePath();
-    QString targetAbsoluteFilePath(targetDir.absoluteFilePath(srcFileInfo.fileName()));
+    const QString& srcAbsoluteFilePath = srcFileInfo.absoluteFilePath();
+    const QString& targetAbsoluteFilePath = targetDir.absoluteFilePath(srcFileInfo.fileName());
     if (QFile::exists(targetAbsoluteFilePath))
     {
         for (int i=1;;i++)
         {
-            QString newFilename = targetAbsoluteFilePath+"("+QString::number(i)+")";
+            const QString& newFilename = targetAbsoluteFilePath+"."+QString::number(i);
             if (QFile::exists(newFilename))
                 continue;
             if (QFile::rename(targetAbsoluteFilePath, newFilename))
@@ -804,8 +803,8 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply* reply)
     const QByteArray& content = reply->readAll();
     if (mode == eProfileInstall)
     {
-        const QDir dir = getProfileDir(eModeLocal);
-        const QString filename = dir.absoluteFilePath(profile + ".brf");
+        const QDir& dir = getProfileDir(eModeLocal);
+        const QString& filename = dir.absoluteFilePath(profile + ".brf");
         QFile file(filename);
         file.open(QIODevice::WriteOnly);
         file.write(content);
@@ -831,7 +830,7 @@ bool CRouterBRouterSetup::isLocalBRouterInstalled() const
 bool CRouterBRouterSetup::isLocalBRouterCandidate() const
 {
     const QDir dir(localDir);
-    const QStringList jarFiles = dir.entryList({"*.jar"}, QDir::Files, QDir::NoSort);
+    const QStringList& jarFiles = dir.entryList({"*.jar"}, QDir::Files, QDir::NoSort);
     const QDir profileDir(dir.absoluteFilePath(localProfileDir));
     const QFile lookupFile(profileDir.absoluteFilePath("lookups.dat"));
     return !jarFiles.isEmpty() && profileDir.exists() && lookupFile.exists();

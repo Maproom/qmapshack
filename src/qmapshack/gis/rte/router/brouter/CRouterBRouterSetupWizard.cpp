@@ -594,7 +594,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply* r
             throw tr("Network Error: %1").arg(reply->errorString());
         }
         const QString& fileName = reply->property("fileName").toString();
-        QDir outDir(setup->localDir);
+        const QDir outDir(setup->localDir);
         if (!outDir.exists())
         {
             throw tr("Error directory %1 does not exist").arg(outDir.absolutePath());
@@ -753,7 +753,7 @@ void CRouterBRouterSetupWizard::updateProfiles() const
     }
 
     QList<int> selected = updateProfileView(listProfiles, profiles);
-    qSort(selected.begin(), selected.end());
+    std::sort(selected.begin(), selected.end());
     toolDeleteProfile->setEnabled(!selected.isEmpty());
     toolProfileUp->setEnabled(!selected.isEmpty() && selected.first() > 0);
     toolProfileDown->setEnabled(!selected.isEmpty() && selected.last() < profiles.size() - 1);

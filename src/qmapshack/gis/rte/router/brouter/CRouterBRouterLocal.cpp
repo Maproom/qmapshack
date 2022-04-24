@@ -153,13 +153,11 @@ void CRouterBRouterLocal::getBRouterVersion() const
     {
         QProcess cmd;
 
-        QStringList args;
-        args << "-cp";
-        args << "brouter.jar";
-        args << "btools.server.RouteServer";
-
         cmd.setWorkingDirectory(brouter.setup->localDir);
-        cmd.start(brouter.setup->localJavaExecutable, args);
+        cmd.start(brouter.setup->localJavaExecutable,
+                  { "-cp",
+                    brouter.setup->localBRouterJar,
+                    "btools.server.RouteServer" } );
 
         cmd.waitForStarted();
         if (!cmd.waitForFinished(3000))

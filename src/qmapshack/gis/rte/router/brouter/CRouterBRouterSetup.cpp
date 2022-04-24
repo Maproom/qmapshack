@@ -24,6 +24,7 @@
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QWebEnginePage>
+#include <JlCompress.h>
 
 CRouterBRouterSetup::CRouterBRouterSetup(QObject* parent)
     : QObject(parent)
@@ -48,8 +49,8 @@ void CRouterBRouterSetup::load()
     onlineServiceUrl = cfg.value("onlineServiceUrl", defaultOnlineServiceUrl).toString();
     onlineProfilesUrl = cfg.value("onlineProfilesUrl", defaultOnlineProfilesUrl).toString();
     localDir = cfg.value("localDir", defaultLocalDir).toString();
-    localBRouterJar = cfg.value("localBRouterJar", defaultLocalBRouterJar).toString();
-    localJavaExecutable = cfg.value("localJava", findJava()).toString();
+    setLocalBRouterJar(cfg.value("localBRouterJar", defaultLocalBRouterJar).toString());
+    setJava(cfg.value("localJava", findJava()).toString());
     localProfileDir = cfg.value("localProfileDir", defaultLocalProfileDir).toString();
     localCustomProfileDir = cfg.value("localCustomProfileDir", defaultLocalCustomProfileDir).toString();
     localSegmentsDir = cfg.value("localSegmentsDir", defaultLocalSegmentsDir).toString();
@@ -378,7 +379,7 @@ void CRouterBRouterSetup::installLocalBRouter(QStringList& messageList)
         {
             if (isFirst)
             {
-                localBRouterJar = jarFile;
+                setLocalBRouterJar(jarFile);
                 messageList.append(tr("brouter jar-file: %1").arg(jarFile));
                 isFirst = false;
             }
@@ -818,8 +819,48 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply* reply)
     }
 }
 
+void CRouterBRouterSetup::setLocalBRouterJar(const QString &path)
+{
+    localBRouterJar = path;
+    const QString& jarFileName = QDir(localDir).absoluteFilePath(localBRouterJar);
+    const QStringList& classFiles = JlCompress::getFileList(jarFileName).filter(QRegularExpression(".*BRouter\\.class"));
+    if (!classFiles.isEmpty())
+    {
+        const QString& tmpFileName = JlCompress::extractFile(jarFileName,classFiles.first(),getDownloadDir().absoluteFilePath("BRouter.class"));
+        if (tmpFileName.endsWith("BRouter.class"))
+        {
+            QFile tmpFile(tmpFileName);
+            char file_data[8];
+            tmpFile.open(QIODevice::ReadOnly);
+            int i=0;
+            while(!tmpFile.atEnd() && i<8)
+            {
+              tmpFile.read(file_data+i,sizeof(char));
+              i++;
+            }
+            tmpFile.close();
+            if (i==8)
+            {
+                unsigned char magic[4] = { 0xca, 0xfe, 0xba, 0xbe };
+                if (memcmp(&file_data,magic,4) == 0)
+                {
+                    classMajorVersion = file_data[7]-0x2c;
+                    QFile::remove(tmpFileName);
+                    return;
+                }
+            }
+            QFile::remove(tmpFileName);
+        }
+    }
+    classMajorVersion = NOINT;
+}
+
 bool CRouterBRouterSetup::isLocalBRouterInstalled() const
 {
+    if (classMajorVersion == NOINT)
+    {
+        return false;
+    }
     const QDir dir(localDir);
     const QFile jarFile(dir.absoluteFilePath(localBRouterJar));
     const QDir profileDir(dir.absoluteFilePath(localProfileDir));
@@ -841,6 +882,36 @@ bool CRouterBRouterSetup::isLocalBRouterDefaultDir() const
     return localDir == defaultLocalDir;
 }
 
+void CRouterBRouterSetup::setJava(const QString& path)
+{
+    localJavaExecutable = path;
+
+    QProcess cmd;
+
+    cmd.setWorkingDirectory(localDir);
+    cmd.start(localJavaExecutable, { "--version" });
+
+    cmd.waitForStarted();
+    if (!cmd.waitForFinished(3000))
+    {
+        cmd.kill();
+    }
+
+    const QString javaOutput(cmd.readAll());
+
+    // version string is something like "openjdk 11.0.14.1 2022-02-08"
+    QRegExp reVersion("[\\S]+ (\\d+)\\.\\d+.*");
+    if (reVersion.indexIn(javaOutput) > -1)
+    {
+        bool ok;
+        javaMajorVersion = reVersion.cap(1).toInt(&ok);
+        if (ok)
+        {
+            return;
+        }
+    }
+    javaMajorVersion = NOINT;
+}
 
 QString CRouterBRouterSetup::findJava() const
 {

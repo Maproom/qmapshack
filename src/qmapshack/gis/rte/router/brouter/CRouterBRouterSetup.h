@@ -45,7 +45,7 @@ public:
     void resetOnlineConfigUrl() { expertConfigUrl = defaultConfigUrl; }
     void resetOnlineServiceUrl() { onlineServiceUrl = defaultOnlineServiceUrl; }
     void resetOnlineProfilesUrl() { onlineProfilesUrl = defaultOnlineProfilesUrl; }
-    void resetLocalBRouterJar() { localBRouterJar = defaultLocalBRouterJar; }
+    void resetLocalBRouterJar() { setLocalBRouterJar(defaultLocalBRouterJar); }
     void resetLocalProfileDir() { localProfileDir = defaultLocalProfileDir; }
     void resetLocalCustomProfileDir() { localCustomProfileDir = defaultLocalCustomProfileDir; }
     void resetLocalSegmentsDir() { localSegmentsDir = defaultLocalSegmentsDir; }
@@ -75,7 +75,9 @@ public:
     void displayProfileAsync(const QString& profile);
     void displayOnlineProfileAsync(const QString& profile) const;
 
+    void setJava(const QString& path);
     QString findJava() const;
+    void setLocalBRouterJar(const QString& path);
     bool isLocalBRouterInstalled() const;
     bool isLocalBRouterCandidate() const;
     bool isLocalBRouterDefaultDir() const;
@@ -86,6 +88,7 @@ public:
     QString getConfigUrl() const;
 
     void parseBRouterVersion(const QString& text);
+    void parseJavaVersion(const QString& text);
 
     void onInvalidSetup();
 
@@ -151,6 +154,9 @@ private:
     int versionMajor { NOINT };
     int versionMinor { NOINT };
     int versionPatch { NOINT };
+
+    int javaMajorVersion  { NOINT };
+    int classMajorVersion { NOINT };
 
     const bool defaultExpertMode = false;
     const mode_e defaultInstallMode = eModeOnline;

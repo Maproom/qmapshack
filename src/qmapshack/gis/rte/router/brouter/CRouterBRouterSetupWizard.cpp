@@ -361,7 +361,7 @@ void CRouterBRouterSetupWizard::slotLocalToolSelectBRouterJar()
     if (dialog.exec())
     {
         const QStringList& files = dialog.selectedFiles();
-        setup->localBRouterJar = files.isEmpty() ? "" : QFileInfo(files.first()).fileName();
+        setup->setLocalBRouterJar(files.isEmpty() ? "" : QFileInfo(files.first()).fileName());
         updateLocalDirectory();
     }
 }
@@ -376,14 +376,14 @@ void CRouterBRouterSetupWizard::slotLocalToolSelectJava()
     if (dialog.exec())
     {
         const QStringList& files = dialog.selectedFiles();
-        setup->localJavaExecutable = files.isEmpty() ? "" : files.first();
+        setup->setJava(files.isEmpty() ? "" : files.first());
         updateLocalDirectory();
     }
 }
 
 void CRouterBRouterSetupWizard::slotLocalPushFindJava() const
 {
-    setup->localJavaExecutable = setup->findJava();
+    setup->setJava(setup->findJava());
     updateLocalDirectory();
 }
 
@@ -395,13 +395,13 @@ void CRouterBRouterSetupWizard::slotLocalDirectoryEdited() const
 
 void CRouterBRouterSetupWizard::slotLocalBRouterJarEdited() const
 {
-    setup->localBRouterJar = lineLocalBRouterJar->text();
+    setup->setLocalBRouterJar(lineLocalBRouterJar->text());
     updateLocalDirectory();
 }
 
 void CRouterBRouterSetupWizard::slotLocalJavaExecutableEdited() const
 {
-    setup->localJavaExecutable = lineJavaExecutable->text();
+    setup->setJava(lineJavaExecutable->text());
     updateLocalDirectory();
 }
 
@@ -420,11 +420,21 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
         {
             lineLocalBRouterJar->setText(setup->localBRouterJar);
         }
+        if (setup->classMajorVersion == NOINT)
+        {
+            labelLocalBRouterResult->setVisible(true);
+            labelLocalBRouterResult->setText(tr("is not a valid BRouter jarfile"));
+        }
+        else
+        {
+            labelLocalBRouterResult->setVisible(false);
+        }
     }
     else
     {
         lineLocalBRouterJar->setVisible(false);
         toolLocalBRouterJar->setVisible(false);
+        labelLocalBRouterResult->setVisible(false);
     }
     if (lineJavaExecutable->text() != setup->localJavaExecutable)
     {
@@ -445,7 +455,9 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
     {
         if (setup->isLocalBRouterInstalled())
         {
-            labelLocalDirResult->setText(tr("existing BRouter installation"));
+            labelLocalDirResult->setText(
+                        tr("existing BRouter installation (requires minimum Java version: %1)")
+                        .arg(QString::number(setup->classMajorVersion)));
             pushCreateOrUpdateLocalInstall->setText(tr("update existing BRouter installation"));
             pushCreateOrUpdateLocalInstall->setVisible(true);
         }
@@ -464,7 +476,10 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
     {
         if (QFileInfo(setup->localJavaExecutable).baseName().startsWith("java"))
         {
-            labelLocalJavaResult->setText(tr("seems to be a valid Java-executable"));
+            labelLocalJavaResult->setText(
+                        tr("seems to be a valid Java-executable. (Java version: %1)")
+                        .arg(setup->javaMajorVersion == NOINT
+                             ? "unknown" : QString::number(setup->javaMajorVersion)));
         }
         else
         {

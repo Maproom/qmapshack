@@ -142,6 +142,13 @@
      </layout>
     </item>
     <item>
+     <widget class="QLabel" name="labelLocalBRouterResult">
+      <property name="text">
+       <string>labelLocalBRouterResult</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
        <widget class="QPushButton" name="pushCreateOrUpdateLocalInstall">

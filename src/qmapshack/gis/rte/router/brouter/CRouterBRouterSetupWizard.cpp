@@ -455,9 +455,7 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
     {
         if (setup->isLocalBRouterInstalled())
         {
-            labelLocalDirResult->setText(
-                        tr("existing BRouter installation (requires minimum Java version: %1)")
-                        .arg(QString::number(setup->classMajorVersion)));
+            labelLocalDirResult->setText(tr("existing BRouter installation"));
             pushCreateOrUpdateLocalInstall->setText(tr("update existing BRouter installation"));
             pushCreateOrUpdateLocalInstall->setVisible(true);
         }
@@ -476,10 +474,18 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
     {
         if (QFileInfo(setup->localJavaExecutable).baseName().startsWith("java"))
         {
-            labelLocalJavaResult->setText(
-                        tr("seems to be a valid Java-executable. (Java version: %1)")
-                        .arg(setup->javaMajorVersion == NOINT
-                             ? "unknown" : QString::number(setup->javaMajorVersion)));
+            labelLocalJavaResult->setText(tr("seems to be a valid Java-executable"));
+            if (setup->isLocalBRouterInstalled() && (setup->javaMajorVersion == NOINT || setup->javaMajorVersion < setup->classMajorVersion))
+            {
+                textLocalDirectory->setVisible(true);
+                textLocalDirectory->setTextColor(Qt::red);
+                textLocalDirectory->setText(
+                        tr( "Your Java version %1 seems to be older than the required version %2.\n"
+                            "BRouter will probably not work as expected.\n"
+                            "Please check the logs if Brouter fails to start." )
+                        .arg(setup->javaMajorVersion == NOINT ? tr("unknown") : QString::number(setup->javaMajorVersion))
+                        .arg(setup->classMajorVersion));
+            }
         }
         else
         {

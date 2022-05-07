@@ -886,10 +886,19 @@ void CRouterBRouterSetup::setJava(const QString& path)
 {
     localJavaExecutable = path;
 
+    if (tryJavaVersion({ "-version" }, "[\\S]+ version \"(\\d+)\\.\\d+.*")) return;
+    if (tryJavaVersion({ "--version" }, "[\\S]+ (\\d+)\\.\\d+.*")) return;
+
+    javaMajorVersion = NOINT;
+}
+
+bool CRouterBRouterSetup::tryJavaVersion(const QStringList& arguments,const QString& pattern)
+{
     QProcess cmd;
+    QRegularExpression re(pattern);
 
     cmd.setWorkingDirectory(localDir);
-    cmd.start(localJavaExecutable, { "--version" });
+    cmd.start(localJavaExecutable, arguments);
 
     cmd.waitForStarted();
     if (!cmd.waitForFinished(3000))
@@ -897,20 +906,20 @@ void CRouterBRouterSetup::setJava(const QString& path)
         cmd.kill();
     }
 
-    const QString javaOutput(cmd.readAll());
+    if (parseJavaVersion(QString(cmd.readAllStandardError()),re)) return true;
+    if (parseJavaVersion(QString(cmd.readAllStandardOutput()),re)) return true;
+    return false;
+}
 
-    // version string is something like "openjdk 11.0.14.1 2022-02-08"
-    QRegExp reVersion("[\\S]+ (\\d+)\\.\\d+.*");
-    if (reVersion.indexIn(javaOutput) > -1)
+bool CRouterBRouterSetup::parseJavaVersion(const QString& javaOutput, QRegularExpression& re)
+{
+    const QRegularExpressionMatch& match = re.match(javaOutput);
+    bool ok = false;
+    if (match.hasMatch())
     {
-        bool ok;
-        javaMajorVersion = reVersion.cap(1).toInt(&ok);
-        if (ok)
-        {
-            return;
-        }
+        javaMajorVersion = match.captured(1).toInt(&ok);
     }
-    javaMajorVersion = NOINT;
+    return ok;
 }
 
 QString CRouterBRouterSetup::findJava() const

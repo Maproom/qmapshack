@@ -113,6 +113,8 @@ private:
     QDir getDownloadDir() const;
     void installLocalBRouter(QStringList& messageList);
     void installLocalBRouterFile(const QFileInfo& srcFileInfo, const QDir& targetDir, QStringList& messageList) const;
+    bool tryJavaVersion(const QStringList& arguments,const QString& pattern);
+    bool parseJavaVersion(const QString& javaOutput, QRegularExpression& re);
     void loadOnlineProfileAsync(const QString& profile, const profileRequest_e mode) const;
     void loadOnlineConfigFinished(QNetworkReply* reply);
     void loadOnlineVersionFinished(QNetworkReply* reply);

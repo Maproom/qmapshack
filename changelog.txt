@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-499] Disable close action for projects with autom. sync. to device
 [QMS-503] BRouter Version 1.6.3 local setup fails
 [QMS-507] QMapTool: Early projection validity check 
+[QMS-517] GPX-tracks are not displayed if lon or lat are invariant over the entire track
 
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing

@@ -1,98 +1,122 @@
-#!/bin/bash
+#!/bin/sh
 
-if [[ "$ROUTINO_LIB_DIR" == "" ]]; then
-	echo "ROUTINO_LIB_DIR not set"
+# Color echo output (only to emphasize the stages in the build process)
+export GREEN=$(tput setaf 2)
+export RED=$(tput setaf 1)
+export NC=$(tput sgr0)
+
+if [[ "$QMSDEVDIR" == "" ]]; then
+    echo "${RED}Please set QMSDEVDIR var to builddir (absolute path needed)${NC}"
+    echo "${RED}... OR run 1st_QMS_start.sh${NC}"
+    return
 fi
-if [[ "$ROUTINO_SRC_DIR" == "" ]]; then
-	echo "ROUTINO_SRC_DIR not set"
-fi
 
+# source $SRC_OSX_DIR/env-path.sh
+cd $QMSDEVDIR
 
-ROUTINO_LIB_LIB_DIR=$ROUTINO_LIB_DIR/lib
-ROUTINO_LIB_H_DIR=$ROUTINO_LIB_DIR/include
-ROUTINO_LIB_XML_DIR=$ROUTINO_LIB_DIR/xml
+######################################################################## 
+# build Routino
+echo "${GREEN}Building Routino ...${NC}"
+echo "${GREEN}At the end you will be prompted for admin password for adjusting routino libs${NC}"
 
-REPO_URL_B=http://routino.org/svn/branches/libroutino/
-REPO_URL_T=http://routino.org/svn/trunk/
+# Prerequisite
+# QMapShack installed from git in QMapShack
+# Local environment created
 
+SRC_OSX_DIR=$QMSDEVDIR/QMapShack/MacOSX
+LOCAL_ENV=$QMSDEVDIR/local
 
+ROUTINO_PKG=routino-3.3.3
+ROUTINO_ORG=$QMSDEVDIR/routino
+ROUTINO_SRC_DIR=$ROUTINO_ORG/$ROUTINO_PKG
+ROUTINO_PATCH_DIR=$ROUTINO_ORG/routino-patch
+ROUTINO_LIB_DIR=$LOCAL_ENV/lib
+ROUTINO_INCLUDE_DIR=$LOCAL_ENV/include
+ROUTINO_XML_DIR=$LOCAL_ENV/xml
+
+    
+mkdir $ROUTINO_ORG
+   
 function checkoutRoutino {
-	if ! [ -d "$ROUTINO_SRC_DIR" ]; then
-		mkdir $ROUTINO_SRC_DIR
-		svn checkout $REPO_URL_T
-	fi
+    echo "${GREEN}Fetching Routino from Subversion ...${NC}"
+    cd $QMSDEVDIR/routino
+    curl http://routino.org/download/$ROUTINO_PKG.tgz  | tar xzf -
+    patchRoutino
 }
-
-function updateRoutino {
-    svn revert $ROUTINO_SRC_DIR
-    svn update $ROUTINO_SRC_DIR
+ 
+function patchRoutino {
+    echo "${GREEN}Patching Routino ...${NC}"
+    cp -r $SRC_OSX_DIR/routino-patch $ROUTINO_ORG
+    # cp $ROUTINO_SRC_DIR/Makefile $ROUTINO_SRC_DIR/Makefile.org
+    # patch $ROUTINO_SRC_DIR/Makefile $ROUTINO_PATCH_DIR/Makefile.diff
+    cp $ROUTINO_SRC_DIR/Makefile.conf $ROUTINO_SRC_DIR/Makefile.conf.org
+    patch $ROUTINO_SRC_DIR/Makefile.conf $ROUTINO_PATCH_DIR//Makefile.conf.diff
+    cp $ROUTINO_SRC_DIR/src/Makefile $ROUTINO_SRC_DIR/src/Makefile.org
+    patch $ROUTINO_SRC_DIR/src/Makefile $ROUTINO_PATCH_DIR//src-Makefile.diff
 }
 
 function buildRoutino {
+    echo "${GREEN}Building Routino ...${NC}"
     cd $ROUTINO_SRC_DIR
-    rm $ROUTINO_SRC_DIR/src/*.o
-    rm $ROUTINO_SRC_DIR/src/filedumper
-    rm $ROUTINO_SRC_DIR/src/filedumper-slim
-    rm $ROUTINO_SRC_DIR/src/filedumperx
-    rm $ROUTINO_SRC_DIR/src/libroutino.so
-    rm $ROUTINO_SRC_DIR/src/planetsplitter
-    rm $ROUTINO_SRC_DIR/src/planetsplitter-slim
-    rm $ROUTINO_SRC_DIR/src/router
-    rm $ROUTINO_SRC_DIR/src/router-slim
     
-    pimpMakefileConf
-    
+    make clean
     make
 }
 
 function adjustLinking {
-     sudo install_name_tool -id $ROUTINO_LIB_LIB_DIR/libroutino.so $ROUTINO_LIB_LIB_DIR/libroutino.so
-     sudo install_name_tool -id $ROUTINO_LIB_LIB_DIR/routino.so $ROUTINO_LIB_LIB_DIR/routino.so
-     sudo install_name_tool -id $ROUTINO_LIB_LIB_DIR/routino.a $ROUTINO_LIB_LIB_DIR/routino.a
-     sudo install_name_tool -id $ROUTINO_LIB_LIB_DIR/libroutino.a $ROUTINO_LIB_LIB_DIR/libroutino.a
+    echo "${GREEN}Adjust Routino linking libs ...${NC}"
+
+    install_name_tool -id $ROUTINO_LIB_DIR/libroutino.dylib $ROUTINO_LIB_DIR/libroutino.dylib    
+    install_name_tool -id $ROUTINO_LIB_DIR/routino.dylib    $ROUTINO_LIB_DIR/routino.dylib    
+    install_name_tool -id $ROUTINO_LIB_DIR/routino.a        $ROUTINO_LIB_DIR/routino.a
+    install_name_tool -id $ROUTINO_LIB_DIR/libroutino.a     $ROUTINO_LIB_DIR/libroutino.a
 }
 
-function pimpMakefileConf {
-    sed 's/LDFLAGS_SONAME.*/LDFLAGS_SONAME=-dynamiclib -Wl,-headerpad_max_install_names,-undefined,dynamic_lookup,-compatibility_version,$(SOVERSION),-current_version,$(SOVERSION),-install_name,"libroutino.so" -o "libroutino.so"/' $ROUTINO_SRC_DIR/Makefile.conf> ./makefile.tmp
-    sed 's/LDFLAGS_SLIM_SONAME.*/LDFLAGS_SLIM_SONAME=-dynamiclib -Wl,-headerpad_max_install_names,-undefined,dynamic_lookup,-compatibility_version,$(SOVERSION),-current_version,$(SOVERSION),-install_name,"libroutino-slim.so" -o "libroutino-slim.so"/' ./makefile.tmp > ./makefile2.tmp
-    sed 's/LDFLAGS_LDSO.*/LDFLAGS_LDSO=-Wl/' ./makefile2.tmp > $ROUTINO_SRC_DIR/Makefile.conf
+function copyRoutinoToInstallDir {
+    echo "${GREEN}Copy Routino build files to install directory ...${NC}"
     
-    rm ./makefile.tmp
-    rm ./makefile2.tmp
+    cp -f $ROUTINO_SRC_DIR/src/libroutino.dylib          $ROUTINO_LIB_DIR
+    cp -f $ROUTINO_SRC_DIR/src/routino.h                 $ROUTINO_INCLUDE_DIR
+    cp -f $ROUTINO_SRC_DIR/xml/routino-profiles.xml      $ROUTINO_XML_DIR
+    cp -f $ROUTINO_SRC_DIR/xml/routino-tagging.xml       $ROUTINO_XML_DIR
+    cp -f $ROUTINO_SRC_DIR/xml/routino-translations.xml  $ROUTINO_XML_DIR
+    cp -f $ROUTINO_SRC_DIR/src/planetsplitter            $ROUTINO_LIB_DIR
+    
+    cp -f $ROUTINO_LIB_DIR/libroutino.dylib          $ROUTINO_LIB_DIR/routino
+    cp -f $ROUTINO_LIB_DIR/libroutino.dylib          $ROUTINO_LIB_DIR/routino.dylib   
+    cp -f $ROUTINO_LIB_DIR/libroutino.dylib          $ROUTINO_LIB_DIR/routino.a
+    cp -f $ROUTINO_LIB_DIR/libroutino.dylib          $ROUTINO_LIB_DIR/libroutino.a
 
-    # Makefile.conf
-    # LDFLAGS_SONAME=-dynamiclib -Wl,-headerpad_max_install_names,-undefined,dynamic_lookup,-compatibility_version,$(SOVERSION),-current_version,$(SOVERSION),-install_name,"libroutino.so" -o "libroutino.so"
-    # LDFLAGS_SLIM_SONAME=-dynamiclib -Wl,-headerpad_max_install_names,-undefined,dynamic_lookup,-compatibility_version,$(SOVERSION),-current_version,$(SOVERSION),-install_name,"libroutino-slim.so" -o "libroutino-slim.so"
-    # LDFLAGS_LDSO=-Wl
+    cp -f $ROUTINO_XML_DIR/routino-profiles.xml      $ROUTINO_XML_DIR/profiles.xml
+    cp -f $ROUTINO_XML_DIR/routino-tagging.xml       $ROUTINO_XML_DIR/tagging.xml
+    cp -f $ROUTINO_XML_DIR/routino-translations.xml  $ROUTINO_XML_DIR/translations.xml
 }
 
-function releaseRoutino {
-    rm -R $ROUTINO_LIB_DIR/*
-    mkdir $ROUTINO_LIB_LIB_DIR
-    mkdir $ROUTINO_LIB_H_DIR
-    mkdir $ROUTINO_LIB_XML_DIR
-    
-    cp $ROUTINO_SRC_DIR/src/libroutino.so             $ROUTINO_LIB_LIB_DIR
-    cp $ROUTINO_SRC_DIR/src/routino.h                 $ROUTINO_LIB_H_DIR
-    cp $ROUTINO_SRC_DIR/xml/routino-profiles.xml      $ROUTINO_LIB_XML_DIR
-    cp $ROUTINO_SRC_DIR/xml/routino-tagging.xml       $ROUTINO_LIB_XML_DIR
-    cp $ROUTINO_SRC_DIR/xml/routino-translations.xml  $ROUTINO_LIB_XML_DIR
-    cp $ROUTINO_SRC_DIR/src/planetsplitter            $ROUTINO_LIB_LIB_DIR
-    
-    cp $ROUTINO_LIB_LIB_DIR/libroutino.so             $ROUTINO_LIB_LIB_DIR/routino
-    cp $ROUTINO_LIB_LIB_DIR/libroutino.so             $ROUTINO_LIB_LIB_DIR/routino.so
-    cp $ROUTINO_LIB_LIB_DIR/libroutino.so             $ROUTINO_LIB_LIB_DIR/routino.a
-    cp $ROUTINO_LIB_LIB_DIR/libroutino.so             $ROUTINO_LIB_LIB_DIR/libroutino.a
-
-    cp $ROUTINO_LIB_XML_DIR/routino-profiles.xml      $ROUTINO_LIB_XML_DIR/profiles.xml
-    cp $ROUTINO_LIB_XML_DIR/routino-tagging.xml       $ROUTINO_LIB_XML_DIR/tagging.xml
-    cp $ROUTINO_LIB_XML_DIR/routino-translations.xml  $ROUTINO_LIB_XML_DIR/translations.xml
-}
-
-if [[ "$1" == "routino-build" ]]; then
+if [[ "$1" == "" ]]; then
 	checkoutRoutino
-    updateRoutino
     buildRoutino
-    releaseRoutino
+    copyRoutinoToInstallDir
     adjustLinking
 fi
+
+if [[ "$1" == "checkoutRoutino" ]]; then
+	checkoutRoutino
+fi
+
+
+if [[ "$1" == "buildRoutino" ]]; then
+	buildRoutino
+fi
+
+
+if [[ "$1" == "copyRoutino" ]]; then
+	copyRoutinoToInstallDir
+fi
+
+
+if [[ "$1" == "adjustLinking" ]]; then
+	adjustLinking
+fi
+
+
+cd $QMSDEVDIR

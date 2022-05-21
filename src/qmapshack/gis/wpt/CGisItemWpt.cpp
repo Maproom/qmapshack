@@ -598,6 +598,11 @@ void CGisItemWpt::addImage(const image_t& img)
     changed(tr("Add image"), "://icons/48x48/Image.png");
 }
 
+void CGisItemWpt::setTimestamp(const QDateTime& datetime)
+{
+    wpt.time = datetime;
+    changed(tr("Changed timestamp"), "://icons/48x48/Time.png");
+}
 
 bool CGisItemWpt::isCloseTo(const QPointF& pos)
 {

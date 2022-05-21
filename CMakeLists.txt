@@ -22,7 +22,7 @@ endif()
 # Define project name and version tags
 ###############################################################################################
 # this is not only the QMS version it will be the package version, too.
-project(QMapShack VERSION 1.16.1)
+project(QMapShack VERSION 1.16.1 LANGUAGES CXX C)
 
 # FOR A RELEASE:
 # remove "development" for a release

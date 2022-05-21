@@ -23,6 +23,7 @@
 #include "helpers/CInputDialog.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CPositionDialog.h"
+#include "helpers/CTimeDialog.h"
 #include "helpers/CWptIconManager.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
@@ -43,6 +44,7 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt& wpt, QWidget* parent)
     connect(labelPosition, &QLabel::linkActivated, this, static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
     connect(labelElevation, &QLabel::linkActivated, this, static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
     connect(labelProximity, &QLabel::linkActivated, this, static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(labelTime, &QLabel::linkActivated, this, static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
     connect(textCmtDesc, &QTextBrowser::anchorClicked, this, static_cast<void (CDetailsWpt::*)(const QUrl&)   >(&CDetailsWpt::slotLinkActivated));
 
     connect(lineName, &CLineEdit::textEdited, this, &CDetailsWpt::slotNameChanged);
@@ -105,9 +107,14 @@ void CDetailsWpt::setupGui()
     labelProximity->setText(IGisItem::toLink(isReadOnly, "proximity", proxStr, ""));
 
 
-    if(wpt.getTime().isValid())
+    if(wpt.getTimestamp().isValid())
     {
-        labelTime->setText(IUnit::datetime2string(wpt.getTime(), false, QPointF(pos.x() * DEG_TO_RAD, pos.y() * DEG_TO_RAD)));
+        const QString& strTime = IUnit::datetime2string(wpt.getTimestamp(), false, QPointF(pos.x() * DEG_TO_RAD, pos.y() * DEG_TO_RAD));
+        labelTime->setText(IGisItem::toLink(isReadOnly, "time", strTime, ""));
+    }
+    else
+    {
+        labelTime->setText(IGisItem::toLink(isReadOnly, "time", "-", ""));
     }
 
     textCmtDesc->document()->clear();
@@ -179,7 +186,14 @@ void CDetailsWpt::slotLinkActivated(const QString& link)
             wpt.setPosition(pos);
         }
     }
-
+    else if(link == "time")
+    {
+        CTimeDialog dlg(this, wpt.getTimestamp());
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            wpt.setTimestamp(dlg.getTimestamp());
+        }
+    }
     setupGui();
 }
 

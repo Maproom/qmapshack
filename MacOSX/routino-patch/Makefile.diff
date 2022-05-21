@@ -1,0 +1,12 @@
+--- ../routino/trunk/Makefile	2022-07-12 13:25:08.000000000 +0200
++++ ../Routino-Howto/MyDiffs/Makefile	2022-07-12 11:35:16.000000000 +0200
+@@ -24,7 +24,8 @@
+ 
+ # Sub-directories and sub-makefiles
+ 
+-SUBDIRS=src xml doc web extras python
++# SUBDIRS=src xml doc web extras python
++SUBDIRS=src xml doc extras
+ 
+ ########
+ 

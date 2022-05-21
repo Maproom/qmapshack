@@ -82,10 +82,30 @@ endif(KEEP_OLD_TRANSLATIONS)
 # All OS and compiler specific tweaks
 ###############################################################################################
 if (APPLE)
+    # Var LOCAL_DEV needs to be defined from outside (caller) 
+    message(STATUS "LOCAL_DEV = ${LOCAL_DEV}")
+    if(NOT DEFINED LOCAL_DEV)
+        message(FATAL_ERROR "LOCAL_DEV not set!!!")
+    endif(NOT DEFINED LOCAL_DEV)
+
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_INIT} -Wall -std=c++11 -stdlib=libc++")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -framework Foundation -framework DiskArbitration")
     SET(LINK_FLAGS "${LINK_FLAGS} -framework Foundation -framework DiskArbitration")
+    
+    set(HOMEBREW_PREFIX "/opt/homebrew" CACHE PATH "Path to Homebrew installation")
+    set(QT_DEV_PATH "${HOMEBREW_PREFIX}/opt/qt5" CACHE PATH "Path to Qt installation")
+    if(NOT DEFINED ROUTINO_DEV_PATH)
+        set(ROUTINO_DEV_PATH "${LOCAL_DEV}" CACHE PATH "Path to directory containing routino include and lib, e.g. lib/routino")
+    endif(NOT DEFINED ROUTINO_DEV_PATH)
+    if(NOT DEFINED QuaZip-Qt5_DIR)
+        set(QuaZip-Qt5_DIR "${LOCAL_DEV}/lib/cmake/QuaZip-Qt5-1.3" CACHE PATH "Path to directory containing quazip cmake config files, e.g. lib/cmake/QuaZip-Qt5-1.3")
+    endif(NOT DEFINED QuaZip-Qt5_DIR)
+    if(NOT DEFINED PROJ_DEV_PATH)
+        set(PROJ_DEV_PATH "${LOCAL_DEV}/lib/cmake/proj" CACHE PATH "Path to directory containing PROJ include and lib, e.g. lib/cmake/proj")
+    endif(NOT DEFINED PROJ_DEV_PATH)
+
+    set(CMAKE_PREFIX_PATH "${HOMEBREW_PREFIX}" "${QT_DEV_PATH}")
 endif(APPLE)
 
 if(WIN32)

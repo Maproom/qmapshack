@@ -1,51 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-        
-        <key>CFBundleIconFile</key>
+	<key>CFBundleIconFile</key>
 	<string>QMapShack</string>
-        
-        <key>CFBundleIdentifier</key>
+	<key>CFBundleIdentifier</key>
 	<string>org.qlandkarte.QMapShack</string>
-        
 	<key>CFBundleExecutable</key>
 	<string>QMapShack</string>
-        
-        <key>CFBundleName</key>
+	<key>CFBundleName</key>
 	<string>QMapShack</string>
-        
-        <key>CFBundleInfoDictionaryVersion</key>
+	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-        
-        <key>CFBundlePackageType</key>
+	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-
 	<key>CFBundleShortVersionString</key>
 	<string>APP_VERSION</string>
-        
-        <key>CFBundleVersion</key>
+	<key>CFBundleVersion</key>
 	<string>BUNDLE_VERSION</string>
-        
-        <key>BuildTime</key>
+	<key>BuildTime</key>
 	<string>BUNDLE_VERSION</string>
-        
-        <key>BuildHashKey</key>
+	<key>BuildHashKey</key>
 	<string>BUNDLE_VERSION</string>
-        
-        <key>NSPrincipalClass</key>
+	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-        
-        <key>CSResourcesFileMapped</key>
+	<key>CSResourcesFileMapped</key>
 	<true/>
-        
-        <key>LSRequiresCarbon</key>
+	<key>LSRequiresCarbon</key>
 	<true/>
-        <!--
-	<key>CFBundleSignature</key>
-	<string>????</string>
-        -->
+	<key>NSRequiresAquaSystemAppearance</key>
+	<string>true</string>
 </dict>
 </plist>

@@ -1,29 +1,18 @@
-#!/bin/sh
-
-# Color echo output (only to emphasize the stages in the build process)
-export GREEN=$(tput setaf 2)
-export RED=$(tput setaf 1)
-export NC=$(tput sgr0)
+#!/bin/bash
 
 if [[ "$QMSDEVDIR" == "" ]]; then
-    echo "${RED}Please set QMSDEVDIR var to builddir (absolute path needed)${NC}"
-    echo "${RED}... OR run 1st_QMS_start.sh${NC}"
+    echo "${RED}Please run 1st_QMS_start.sh${NC}"
     return
 fi
-
-if [[ "$BUILD_RELEASE_DIR" == "" ]]; then
-    BUILD_RELEASE_DIR=$QMSDEVDIR/release
-fi
-
-SRC_OSX_DIR=$QMSDEVDIR/QMapShack/MacOSX
+source $SRC_OSX_DIR/env-path.sh
 
 # Bundling QMapShack and QMapTool
 echo "${GREEN}Bundle QMapShack ...${NC}"
 mkdir $BUILD_RELEASE_DIR
-cd $SRC_OSX_DIR
-source ./bundle-qmapshack.sh
-cd $SRC_OSX_DIR
-source ./bundle-qmaptool.sh
+cd $QMSDEVDIR/QMapShack/MacOSX
+source ./bundle-qmapshack.sh bundle
+cd $QMSDEVDIR/QMapShack/MacOSX
+source ./bundle-qmaptool.sh bundle
 echo "${GREEN}Find QMapShack.app and QMapTool.app in $BUILD_RELEASE_DIR${NC}"
 
 # Codesign the apps (on arm64 mandatory):

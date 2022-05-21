@@ -1,10 +1,30 @@
-#!/bin/bash
+#!/bin/sh
+
+# Color echo output (only to emphasize the stages in the build process)
+export GREEN=$(tput setaf 2)
+export RED=$(tput setaf 1)
+export NC=$(tput sgr0)
+
+if [[ "$QMSDEVDIR" == "" ]]; then
+    echo "${RED}Please set QMSDEVDIR var to builddir (absolute path needed)${NC}"
+    echo "${RED}... OR run 1st_QMS_start.sh${NC}"
+    return
+fi
+
+if [[ "$BUILD_RELEASE_DIR" == "" ]]; then
+    BUILD_RELEASE_DIR=$QMSDEVDIR/release
+fi
+
+
+QMS_SRC_DIR=$QMSDEVDIR/qmapshack
+SRC_RESOURCES_DIR=$QMS_SRC_DIR/MacOSX/resources
+QT_DIR=$HOMEBREW_PREFIX/opt/qt5
+
 
 APP_VERSION=0
 BUILD_TIME=$(date +"%y-%m-%dT%H:%M:%S")
 BUILD_HASH_KEY=0
 COMMIT_STATUS=0
-
 
 function buildIcon {
     rm -rf $BUILD_BIN_DIR/$APP_NAME.iconset
@@ -37,6 +57,7 @@ function buildAppStructure {
     #         <libs>
     #      PlugIns
     #         <libs>
+    #      libs/
 
     rm -rf $BUILD_BUNDLE_DIR
     mkdir $BUILD_BUNDLE_DIR
@@ -46,6 +67,7 @@ function buildAppStructure {
     mkdir $BUILD_BUNDLE_RES_QM_DIR
     mkdir $BUILD_BUNDLE_FRW_DIR
     mkdir $BUILD_BUNDLE_PLUGIN_DIR
+    mkdir $BUILD_BUNDLE_EXTLIB_DIR
 
     # TODO not all copied from predefined data is needed in every case (eg icon)
     # predefined data
@@ -144,7 +166,7 @@ function adjustLinking {
     for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
     do
         adjustLinkQt $F "libq"
-        adjustLinkQt $F "/usr/local/"
+        adjustLinkQt $F "$HOMEBREW_PREFIX/"
     done
 
     for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
@@ -153,14 +175,14 @@ function adjustLinking {
         #  2.12.20 switched off after using Qt5 from https://www.qt.io/offline-installers
         #
         #adjustLinkQt $F "Qt"
-        adjustLinkQt $F "/usr/local/"
+        adjustLinkQt $F "$HOMEBREW_PREFIX/"
     done
 
     for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
     do
         adjustLinkQt $F "Qt"
         adjustLinkQt $F "libroutino"
-        adjustLinkQt $F "/usr/local/"
+        adjustLinkQt $F "$HOMEBREW_PREFIX/"
     done
 
     adjustLinkQt $BUILD_BUNDLE_APP_FILE "Qt"
@@ -305,5 +327,5 @@ fi
 if [[ "$1" == "info-before" ]]; then
     printLinking $BUILD_RELEASE_DIR/$APP_NAME
     # TODO
-    printLinking $LIB_ROUTINO_LIB_DIR/libroutino.so
+    # printLinking $LOCAL_ENV/lib/libroutino.so
 fi

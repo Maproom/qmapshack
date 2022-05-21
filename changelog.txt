@@ -2,6 +2,7 @@ V1.XX.X
 [QMS-429] Bad OSM Tag formatting crashes QMS
 [QMS-470] Windows build scripts: adapt for release v1.16.1
 |QMS-476] Color the map by elevation
+[QMS-480] QMapShack for macOS build scripts
 [QMS-483] Add alpha transparency based hillshading
 [QMS-487] Add tooltips for DEM controls
 [QMS-489] Track selection 0-index bug

@@ -1,0 +1,167 @@
+--- Makefile.conf.org	2022-10-21 13:13:43.000000000 +0200
++++ Makefile.conf	2022-10-21 14:43:57.000000000 +0200
+@@ -3,6 +3,7 @@
+ # Part of the Routino routing software.
+ #
+ # This file Copyright 2013-2015, 2017, 2018, 2020 Andrew M. Bishop
++# Adpated for MacOS only 2022 Manfred Kern
+ #
+ # This program is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU Affero General Public License as published by
+@@ -18,47 +19,18 @@
+ # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ #
+ 
+-# Automatic operating system detection
+-
+-UNAME=$(shell uname)
+-
+-HOST=UNIX
+-
+-ifneq ($(findstring CYGWIN,$(UNAME)),)
+-  HOST=CYGWIN
+-endif
+-
+-ifneq ($(findstring MINGW,$(UNAME)),)
+-  HOST=MINGW
+-endif
+-
+-
+ # Simplify handling of executable targets ending in .exe
+ 
+-ifeq ($(HOST),MINGW)
+-  .EXE=.exe
+-else
+-  .EXE=
+-endif
+-
++.EXE=
+ 
+ # Installation locations (edit if required)
+ 
+-ifneq ($(HOST),MINGW)
+-  prefix=/usr/local
+-  bindir=$(prefix)/bin
+-  incdir=$(prefix)/include
+-  libdir=$(prefix)/lib
+-  docdir=$(prefix)/doc/routino
+-  datadir=$(prefix)/share/routino
+-else
+-  prefix="c:/Program Files/Routino"
+-  bindir=$(prefix)/bin
+-  incdir=$(prefix)/include
+-  libdir=$(prefix)/lib
+-  docdir=$(prefix)/doc
+-  datadir=$(prefix)/xml
+-endif
++prefix=$(ROUTINO_LIB_DIR)
++bindir=$(prefix)/bin
++incdir=$(prefix)/include
++libdir=$(prefix)/lib
++docdir=$(prefix)/share/doc/routino
++datadir=$(prefix)/share/routino
+ 
+ 
+ # Library version for ABI compatibility
+@@ -69,9 +41,11 @@
+ 
+ 
+ # Compilation programs
+-CC=gcc
+-CXX=g++
+-LD=gcc
++#CC=gcc
++#CXX=g++
++#LD=gcc
++
++CLANG=1
+ 
+ ifdef CLANG
+   ifeq ($(CLANG),1)
+@@ -84,9 +58,6 @@
+ # Maths library
+ LDFLAGS=-lm
+ 
+-# Language dialect selection
+-CFLAGS=-std=c99
+-
+ # Warning options
+ CFLAGS+=-Wall -Wmissing-prototypes -Wextra -Wno-unused-parameter -pedantic
+ 
+@@ -107,40 +78,38 @@
+   endif
+ endif
+ 
+-# Optimisation option (only works if compilation and execution use exactly the same CPU architecture).
+-#CFLAGS+=-march=native
+-
+-# Compile with debugging symbols
+-CFLAGS+=-g
+-
+ # Option for compiling with sanitizer for debugging memory addresses and undefined behaviour
+-ifdef SANITIZE
+-  ifeq ($(SANITIZE),1)
+-    CFLAGS+=-fsanitize=address -fsanitize=leak -fsanitize=undefined
+-    LDFLAGS+=-fsanitize=address -fsanitize=leak -fsanitize=undefined
+-  endif
+-endif
++# ifdef SANITIZE
++#   ifeq ($(SANITIZE),1)
++#     CFLAGS+=-fsanitize=address -fsanitize=leak -fsanitize=undefined
++#     LDFLAGS+=-fsanitize=address -fsanitize=leak -fsanitize=undefined
++#   endif
++# endif
+ 
+ # Option for compiling with profiling for checking execution times
+-ifdef PROFILE
+-  ifeq ($(PROFILE),1)
+-    CFLAGS+=-pg
+-    LDFLAGS+=-pg
+-  endif
+-endif
++# ifdef PROFILE
++#   ifeq ($(PROFILE),1)
++#     CFLAGS+=-pg
++#     LDFLAGS+=-pg
++#   endif
++# endif
+ 
+ # Option for compiling with coverage for checking execution times and unused code
+-ifdef COVERAGE
+-  ifeq ($(COVERAGE),1)
+-    CFLAGS+=--coverage
+-    LDFLAGS+=--coverage
+-  endif
+-endif
++# ifdef COVERAGE
++#   ifeq ($(COVERAGE),1)
++#     CFLAGS+=--coverage
++#     LDFLAGS+=--coverage
++#   endif
++# endif
+ 
+ 
+ # Extra flags for compiling libroutino shared library (visibility of symbols, shared)
+ CFLAGS_LIB=-fvisibility=hidden
+-LDFLAGS_LIB=-shared
++LDFLAGS_LIB=-dynamiclib -install_name $(prefix)/lib/$@
++
++# Extra flags for compiling libroutino shared library (position independent code)
++CFLAGS_LIB+=-fPIC
++LDFLAGS_LIB+=-fPIC
+ 
+ # Extra flags for compiling libroutino shared library (position independent code)
+ ifeq ($(HOST),UNIX)
+@@ -179,12 +148,3 @@
+ #CFLAGS+=-DUSE_XZ
+ #LDFLAGS+=-llzma
+ 
+-
+-# Required to use stdio with files > 2GiB on 32-bit system.
+-CFLAGS+=-D_FILE_OFFSET_BITS=64
+-
+-
+-# Required to compile on Linux without a warning about pread() and pwrite() functions.
+-ifneq ($(HOST),MINGW)
+-  CFLAGS+=-D_POSIX_C_SOURCE=200809L
+-endif

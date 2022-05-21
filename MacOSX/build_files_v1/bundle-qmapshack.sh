@@ -1,23 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-# Color echo output (only to emphasize the stages in the build process)
-export GREEN=$(tput setaf 2)
-export RED=$(tput setaf 1)
-export NC=$(tput sgr0)
-
-echo "${GREEN}Bundling QMapShack.app${NC}"
 if [[ "$QMSDEVDIR" == "" ]]; then
-    echo "${RED}Please set QMSDEVDIR var to builddir (absolute path needed)${NC}"
-    echo "${RED}... OR run 1st_QMS_start.sh${NC}"
+    echo "${RED}Please run 1st_QMS_start.sh${NC}"
     return
 fi
-
-
-if [[ "$BUILD_RELEASE_DIR" == "" ]]; then
-    BUILD_RELEASE_DIR=$QMSDEVDIR/release
-fi
-
-LOCAL_ENV=$QMSDEVDIR/local
+source $SRC_OSX_DIR/env-path.sh
 
 set -a
 APP_NAME=QMapShack
@@ -25,7 +12,7 @@ set +a
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $DIR/bundle-env-path.sh
-source $DIR/bundle-common-func.sh
+source $DIR/bundle.sh
 
 
 function extendAppStructure {
@@ -39,15 +26,15 @@ function extendAppStructure {
 
 
 function copyAdditionalLibraries {
-    cp -v    $LOCAL_ENV/lib/libroutino* $BUILD_BUNDLE_FRW_DIR
-    cp -v    $LOCAL_ENV/lib/libquazip*.dylib $BUILD_BUNDLE_FRW_DIR
-    # cp -v    $HOMEBREW_PREFIX/lib/libgeos*.dylib $BUILD_BUNDLE_FRW_DIR
-    cp -v    $HOMEBREW_PREFIX/lib/libgeos*.dylib $BUILD_BUNDLE_EXTLIB_DIR
+    cp -v    $ROUTINO_LIB_LIB_DIR/libroutino* $BUILD_BUNDLE_FRW_DIR
+    cp -v    $QUAZIP_LIB_LIB_DIR/libquazip*.dylib $BUILD_BUNDLE_FRW_DIR
+    # cp -v    $GEOS_LIB_DIR/libgeos*.dylib $BUILD_BUNDLE_FRW_DIR
+    cp -v    $GEOS_LIB_DIR/libgeos*.dylib $BUILD_BUNDLE_EXTLIB_DIR
     cp -v    $GDAL_DIR/* $BUILD_BUNDLE_FRW_DIR
 
-    cp -v    $HOMEBREW_PREFIX/lib/libproj*.dylib $BUILD_BUNDLE_FRW_DIR
+    cp -v    $PROJ_DIR/libproj*.dylib $BUILD_BUNDLE_FRW_DIR
 
-    cp -v    $HOMEBREW_PREFIX/lib/libdbus*.dylib $BUILD_BUNDLE_FRW_DIR
+    cp -v    $DBUS_DIR/libdbus*.dylib $BUILD_BUNDLE_FRW_DIR
 
     cp -v -R $QT_DIR/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
     cp -v -R $QT_DIR/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
@@ -67,13 +54,13 @@ function copyAdditionalLibraries {
 
 function copyExternalFiles {
     cp -v $GDAL_DIR/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
-    cp -v $HOMEBREW_PREFIX/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
+    cp -v $PROJ_DIR/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
     rm $BUILD_BUNDLE_RES_PROJ_DIR/*.tif
     rm $BUILD_BUNDLE_RES_PROJ_DIR/*.txt
 
-    cp -v $LOCAL_ENV/xml/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-    cp -v $LOCAL_ENV/xml/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-    cp -v $LOCAL_ENV/xml/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp -v $ROUTINO_LIB_XML_DIR/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp -v $ROUTINO_LIB_XML_DIR/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp -v $ROUTINO_LIB_XML_DIR/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
 }
 
 function copyExternalHelpFiles_QMS {
@@ -94,9 +81,8 @@ function copyExtTools {
         # at least gdalbuildvrt is used
         cp -v $GDAL_DIR/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
     fi
-    cp -v $HOMEBREW_PREFIX/bin/proj             $BUILD_BUNDLE_RES_BIN_DIR
-    cp -v $LOCAL_ENV/lib/planetsplitter         $BUILD_BUNDLE_RES_BIN_DIR
-
+    cp -v $PROJ_DIR/bin/proj                    $BUILD_BUNDLE_RES_BIN_DIR
+    cp -v $ROUTINO_LIB_LIB_DIR/planetsplitter   $BUILD_BUNDLE_RES_BIN_DIR
 
     # currently only used by QMapTool.
     cp -v $BUILD_BIN_DIR/qmt_rgb2pct            $BUILD_BUNDLE_RES_BIN_DIR
@@ -107,7 +93,7 @@ function copyExtTools {
 function adjustLinkingExtTools {
     for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
     do
-        adjustLinkQt $F "$HOMEBREW_PREFIX/"
+        adjustLinkQt $F "$PKGMANAGER/"
     done
 }
 
@@ -132,7 +118,7 @@ function archiveBundle {
 }
 
 
-if [[ "$1" == "" ]]; then
+if [[ "$1" == "bundle" ]]; then
     echo "---extract version -----------------"
     extractVersion
     readRevisionHash

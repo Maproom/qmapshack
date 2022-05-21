@@ -340,6 +340,7 @@ set( SRCS
     units/CUnitsSetup.cpp
     units/IUnit.cpp
     widgets/CColorLegend.cpp
+    widgets/CDateTimeEditor.cpp
     widgets/CDoubleSpinBox.cpp
     widgets/CFadingIcon.cpp
     widgets/CHistoryListWidget.cpp
@@ -711,6 +712,7 @@ set( HDRS
     units/IUnit.h
     version.h
     widgets/CColorLegend.h
+    widgets/CDateTimeEditor.h
     widgets/CDoubleSpinBox.h
     widgets/CFadingIcon.h
     widgets/CHistoryListWidget.h

@@ -65,7 +65,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt& wpt, QWidget* parent)
     labelOwner->setText(geocache.owner);
     labelSize->setText(geocache.container);
     const QString &format = QLocale().dateTimeFormat(QLocale::ShortFormat);
-    labelHiddenDate->setText(wpt.getTime().date().toString(format));
+    labelHiddenDate->setText(wpt.getTimestamp().date().toString(format));
     //Last found is set below to only loop logs once
 
     qreal d = geocache.difficulty;

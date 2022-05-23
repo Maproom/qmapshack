@@ -8,7 +8,7 @@
 <ows:Operation name="GetCapabilities">
 <ows:DCP>
 <ows:HTTP>
-<ows:Get xlink:href="http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/1.0.0/WMTSCapabilities.xml">
+<ows:Get xlink:href="https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/1.0.0/WMTSCapabilities.xml">
 <ows:Constraint name="GetEncoding">
 <ows:AllowedValues>
 <ows:Value>RESTful</ows:Value>
@@ -16,7 +16,7 @@
 </ows:Constraint>
 </ows:Get>
 <!-- add KVP binding in 10.1 -->
-<ows:Get xlink:href="http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS?">
+<ows:Get xlink:href="https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS?">
 <ows:Constraint name="GetEncoding">
 <ows:AllowedValues>
 <ows:Value>KVP</ows:Value>
@@ -29,14 +29,14 @@
 <ows:Operation name="GetTile">
 <ows:DCP>
 <ows:HTTP>
-<ows:Get xlink:href="http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/">
+<ows:Get xlink:href="https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/">
 <ows:Constraint name="GetEncoding">
 <ows:AllowedValues>
 <ows:Value>RESTful</ows:Value>
 </ows:AllowedValues>
 </ows:Constraint>
 </ows:Get>
-<ows:Get xlink:href="http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS?">
+<ows:Get xlink:href="https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS?">
 <ows:Constraint name="GetEncoding">
 <ows:AllowedValues>
 <ows:Value>KVP</ows:Value>
@@ -68,7 +68,7 @@
 <!--Only show this TileMatrixSet if the tiling scheme is compliant to Google Maps (and that happens with tile width = 256 px)-->
 <TileMatrixSet>GoogleMapsCompatible</TileMatrixSet>
 </TileMatrixSetLink>
-<ResourceURL format="image/jpg" resourceType="tile" template="http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/World_Imagery/{Style}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.jpg"/>
+<ResourceURL format="image/jpg" resourceType="tile" template="https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/World_Imagery/{Style}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.jpg"/>
 </Layer> <!--TileMatrixSet-->
 <TileMatrixSet>
 <ows:Title>TileMatrix using 0.28mm</ows:Title>
@@ -374,4 +374,4 @@
 </TileMatrix>
 </TileMatrixSet>
 </Contents>
-<ServiceMetadataURL xlink:href="http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/1.0.0/WMTSCapabilities.xml"/> </Capabilities>
+<ServiceMetadataURL xlink:href="https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/1.0.0/WMTSCapabilities.xml"/> </Capabilities>

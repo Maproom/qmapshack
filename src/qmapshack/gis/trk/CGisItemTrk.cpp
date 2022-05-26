@@ -23,6 +23,7 @@
 #include "gis/GeoMath.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/proj_x.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CCutTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -30,16 +31,15 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
-#include "gis/rte/CGisItemRte.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "misc.h"
 
+#include "gis/trk/CTrkToRteDialog.h"
 #include <QtWidgets>
 #include <QtXml>
-#include "gis/trk/CTrkToRteDialog.h"
 
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
@@ -1176,7 +1176,10 @@ void CGisItemTrk::deriveSecondaryData()
         lastTrkpt = &trkpt;
     }
 
-    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD, south * DEG_TO_RAD));
+    constexpr qreal kMargin = 0.0001 * DEG_TO_RAD; // ~5m
+    boundingRect = QRectF(
+        QPointF(west * DEG_TO_RAD - kMargin, north * DEG_TO_RAD + kMargin),
+        QPointF(east * DEG_TO_RAD + kMargin, south * DEG_TO_RAD - kMargin));
 
     for(int p = 0; p < lintrk.size(); p++)
     {
@@ -3416,9 +3419,9 @@ void CGisItemTrk::toRoute()
     qint32 idx1, idx2;
     QString routeName;
     bool saveSubPts;
-    IGisProject *project = getParentProject();
+    IGisProject* project = getParentProject();
 
-    if (nullptr==project)
+    if (nullptr == project)
     {
         qCritical("CGisItemTrk::toRoute no project");
         return;

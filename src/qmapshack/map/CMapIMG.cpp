@@ -19,7 +19,7 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "gis/GeoMath.h"
-#include "gis/Poi.h"
+#include "poi/IPoiItem.h"
 #include "helpers/CDraw.h"
 #include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"
@@ -2340,7 +2340,7 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) const /* override 
     }
 }
 
-void CMapIMG::findPOICloseBy(const QPoint& pt, poi_t& poi) const /*override;*/
+void CMapIMG::findPOICloseBy(const QPoint& pt, IPoiItem& poi) const /*override;*/
 {
     for(auto& list : {points, pois})
     {

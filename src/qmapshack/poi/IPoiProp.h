@@ -22,20 +22,20 @@
 #include <QWidget>
 
 class CPoiDraw;
-class IPoi;
+class IPoiFile;
 
 class IPoiProp : public QWidget
 {
     Q_OBJECT
 public:
-    IPoiProp(IPoi* poifile, CPoiDraw* poi);
+    IPoiProp(IPoiFile* poifile, CPoiDraw* poi);
     virtual ~IPoiProp() = default;
 
 protected slots:
     virtual void slotPropertiesChanged() = 0;
 
 protected:
-    IPoi* poifile;
+    IPoiFile* poifile;
     CPoiDraw* poi;
 };
 

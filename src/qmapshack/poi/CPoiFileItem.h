@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#ifndef CPOIITEM_H
-#define CPOIITEM_H
+#ifndef CPOIFILEITEM_H
+#define CPOIFILEITEM_H
 
-#include "poi/IPoi.h"
+#include "poi/IPoiFile.h"
 
 #include <QMutex>
 #include <QPointer>
@@ -28,11 +28,11 @@
 class CPoiDraw;
 class QSettings;
 
-class CPoiItem : public QTreeWidgetItem
+class CPoiFileItem : public QTreeWidgetItem
 {
 public:
-    CPoiItem(QTreeWidget* parent, CPoiDraw* poi);
-    virtual ~CPoiItem() = default;
+    CPoiFileItem(QTreeWidget* parent, CPoiDraw* poi);
+    virtual ~CPoiFileItem() = default;
 
     void saveConfig(QSettings& cfg);
     void loadConfig(QSettings& cfg);
@@ -81,17 +81,17 @@ public:
         return text(0);
     }
 
-    QPointer<IPoi>& getPoifile(){return poifile;}
+    QPointer<IPoiFile>& getPoifile(){return poifile;}
 
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    bool findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
+    bool findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
     {
         return poifile->findPoiCloseBy(px, poiItems, posPoiHighlight);
     }
     ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
     /// Thus the location where to draw the highlight is separately given
-    void findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF>& posPoiHighlight)
+    void findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<QPointF>& posPoiHighlight)
     {
         getPoifile()->findPoisIn(degRect, pois, posPoiHighlight);
     }
@@ -113,8 +113,8 @@ private:
     /**
        @brief the actual poi file object
      */
-    QPointer<IPoi> poifile;
+    QPointer<IPoiFile> poifile;
 };
 
-#endif //CPOIITEM_H
+#endif //CPOIFILEITEM_H
 

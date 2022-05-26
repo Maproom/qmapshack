@@ -28,7 +28,7 @@
 #include "mouse/CMouseAdapter.h"
 #include "mouse/CMouseNormal.h"
 #include "mouse/CScrOptUnclutter.h"
-#include "poi/IPoi.h"
+#include "poi/IPoiFile.h"
 #include "realtime/CRtWorkspace.h"
 #include "widgets/CFadingIcon.h"
 
@@ -291,9 +291,9 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect&
         for(QPointF pos : posPoiHighlight)
         {
             gis->convertRad2Px(pos);
-            QRectF r = IPoi::iconHighlight().rect();
+            QRectF r = IPoiFile::iconHighlight().rect();
             r.moveCenter(pos);
-            p.drawImage(r, IPoi::iconHighlight());
+            p.drawImage(r, IPoiFile::iconHighlight());
         }
 
         /*
@@ -358,7 +358,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect&
     }
 }
 
-void CMouseNormal::slotAddPoi(const poi_t& poi) const
+void CMouseNormal::slotAddPoi(const IPoiItem& poi) const
 {
     CGisWorkspace::self().addPoiAsWpt(poi);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -442,7 +442,7 @@ void CMouseNormal::showContextMenu(const QPoint& point)
     QMenu menu(canvas);
     if(curPois.count() > 0 && curPois.count() <= 5)
     {
-        for(poi_t poi : curPois)
+        for(IPoiItem poi : curPois)
         {
             menu.addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add POI %1 as Waypoint").arg(poi.name), this, [this, poi] {slotAddPoi(poi);});
         }

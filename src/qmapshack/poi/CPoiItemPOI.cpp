@@ -16,31 +16,45 @@
 
 **********************************************************************************************/
 
-#include "gis/Poi.h"
-#include "poi/CRawPoi.h"
+#include "poi/IPoiItem.h"
+#include "poi/CPoiItemPOI.h"
 
 #include <QDebug>
 #include <QRegularExpression>
 
-CRawPoi::CRawPoi(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon)
+CPoiItemPOI::CPoiItemPOI(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon)
     : category(category), coordinates(coordinates), rawData(data), garminIcon(garminIcon), key(key)
 {
+    QString lastValidKey = "";
     for(const QString& line : data)
     {
         const QStringList& keyValue = line.split("=");
-        if(keyValue[0].contains("wikipedia", Qt::CaseInsensitive))
+        if (keyValue.length() == 1)
         {
-            wikipediaRelatedKeys += keyValue[0];
+            this->data[lastValidKey] += line;
         }
-        if(keyValue[0].contains("wikidata", Qt::CaseInsensitive))
+        else if(keyValue.length() > 2)
         {
-            wikidataRelatedKeys += keyValue[0];
+            // facilitate debuging in case the line separateion changes in future and all lines are interpreted as one
+            qWarning() << "Encountered line with multiple key-value assignments: " + line;
         }
-        if(keyValue[0] == "name" || keyValue[0].contains("name:\\w\\w", Qt::CaseInsensitive) || keyValue[0].contains(QRegularExpression("[A-z]+_name")))
+        else
         {
-            nameRelatedKeys += keyValue[0];
+            if(keyValue[0].contains("wikipedia", Qt::CaseInsensitive))
+            {
+                wikipediaRelatedKeys += keyValue[0];
+            }
+            if(keyValue[0].contains("wikidata", Qt::CaseInsensitive))
+            {
+                wikidataRelatedKeys += keyValue[0];
+            }
+            if(keyValue[0] == "name" || keyValue[0].contains("name:\\w\\w", Qt::CaseInsensitive) || keyValue[0].contains(QRegularExpression("[A-z]+_name")))
+            {
+                nameRelatedKeys += keyValue[0];
+            }
+            this->data[keyValue[0]] = keyValue[1];
+            lastValidKey = keyValue[0];
         }
-        this->data[keyValue[0]] = keyValue[1];
     }
 
     //find name
@@ -67,12 +81,12 @@ CRawPoi::CRawPoi(const QStringList& data, const QPointF& coordinates, const quin
     }
 }
 
-const QString& CRawPoi::getCategory() const
+const QString& CPoiItemPOI::getCategory() const
 {
     return category;
 }
 
-const QString& CRawPoi::getName(bool replaceEmptyByCategory) const
+const QString& CPoiItemPOI::getName(bool replaceEmptyByCategory) const
 {
     if(replaceEmptyByCategory && name.isEmpty())
     {
@@ -81,27 +95,27 @@ const QString& CRawPoi::getName(bool replaceEmptyByCategory) const
     return name;
 }
 
-const QPointF& CRawPoi::getCoordinates() const
+const QPointF& CPoiItemPOI::getCoordinates() const
 {
     return coordinates;
 }
 
-const quint64& CRawPoi::getKey() const
+const quint64& CPoiItemPOI::getKey() const
 {
     return key;
 }
 
-const QMap<QString, QString>& CRawPoi::getData() const
+const QMap<QString, QString>& CPoiItemPOI::getData() const
 {
     return data;
 }
 
-const QStringList& CRawPoi::getRawData() const
+const QStringList& CPoiItemPOI::getRawData() const
 {
     return rawData;
 }
 
-QString CRawPoi::getDesc() const
+QString CPoiItemPOI::getDesc() const
 {
     //No need to add the wiki* keys, as they are already covered through their lists
     static const QList<QString> skipKeys = {
@@ -243,7 +257,7 @@ QString CRawPoi::getDesc() const
     return desc;
 }
 
-QList<IGisItem::link_t> CRawPoi::getLinks() const
+QList<IGisItem::link_t> CPoiItemPOI::getLinks() const
 {
     QList<IGisItem::link_t> links;
     if(data.contains("contact:email"))
@@ -358,7 +372,7 @@ QList<IGisItem::link_t> CRawPoi::getLinks() const
     return links;
 }
 
-quint32 CRawPoi::getEle() const
+quint32 CPoiItemPOI::getEle() const
 {
     bool ok = true;
     quint32 ele = data["ele"].toInt(&ok);
@@ -367,9 +381,9 @@ quint32 CRawPoi::getEle() const
 
 
 
-poi_t CRawPoi::toPoi() const
+IPoiItem CPoiItemPOI::toPoi() const
 {
-    poi_t poi;
+    IPoiItem poi;
     poi.pos = coordinates;
     poi.name = getName();
     poi.icon = garminIcon;

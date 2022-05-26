@@ -211,6 +211,11 @@ void CProjWizard::accept()
 
 bool CProjWizard::validProjStr(const QString projStr)
 {
+    if(projStr.isEmpty())
+    {
+        return false;
+    }
+
     return CProj::validProjStr(projStr, true, [](const QString& msg){
         QMessageBox::warning(&CMainWindow::self(), tr("Error..."), msg, QMessageBox::Abort, QMessageBox::Abort);
     });

@@ -19,7 +19,7 @@
 #include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
-#include "gis/Poi.h"
+#include "poi/IPoiItem.h"
 #include "gis/trk/CActivityTrk.h"
 #include "helpers/CTryMutexLocker.h"
 #include "helpers/CWptIconManager.h"

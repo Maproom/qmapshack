@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2020 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2017 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,37 +16,37 @@
 
 **********************************************************************************************/
 
-#include "poi/CPoiDraw.h"
-#include "poi/CPoiPropSetup.h"
-#include "poi/IPoi.h"
+#ifndef IPOIITEM_H
+#define IPOIITEM_H
 
-constexpr int iconsize = 22;
+#include "gis/IGisItem.h"
+#include "units/IUnit.h"
+#include <QPointF>
+#include <QSize>
 
-QSize IPoi::_iconSize = {iconsize, iconsize};
-QImage IPoi::_iconHighlight;
-
-void IPoi::init()
+struct IPoiItem
 {
-    // default sizes are for iconsize 22.
-    qreal sx = qreal(_iconSize.width()) * 42.0 / 22.0;
-    qreal sy = qreal(_iconSize.height()) * 42.0 / 22.0;
-    _iconHighlight = QImage("://cursors/poiHighlightRed.png").scaled(sx, sy, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    IPoiItem() : pos(NOPOINTF){}
+    QString name;
+    QString desc;
+    /// in radians
+    QPointF pos;
+    QString icon;
+    QList<IGisItem::link_t> links;
+    quint32 ele = NOINT;
+};
+
+inline bool operator==(const IPoiItem& poi1, const IPoiItem& poi2)
+{
+    return poi1.name == poi2.name
+           && poi1.desc == poi2.desc
+           && poi1.pos == poi2.pos;
 }
 
-IPoi::IPoi(CPoiDraw* parent)
-    : IDrawObject(parent)
-    , poi(parent)
-
+inline uint qHash(const IPoiItem& poi, uint seed)
 {
+    return qHash(poi.name, seed) ^ qHash(poi.desc, seed) ^ qHash(poi.pos.x(), seed) ^ qHash(poi.pos.y(), seed);
 }
 
-IPoiProp* IPoi::getSetup()
-{
-    if(setup.isNull())
-    {
-        setup = new CPoiPropSetup(this, poi);
-    }
-
-    return setup;
-}
+#endif //IPOIITEM_H
 

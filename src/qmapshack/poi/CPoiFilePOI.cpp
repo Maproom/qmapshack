@@ -17,22 +17,22 @@
 
 **********************************************************************************************/
 
-#include "gis/Poi.h"
+#include "poi/IPoiItem.h"
 #include "helpers/CDraw.h"
 #include "helpers/CTryMutexLocker.h"
 #include "poi/CPoiCategory.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiIconCategory.h"
-#include "poi/CPoiPOI.h"
-#include "poi/IPoi.h"
+#include "poi/CPoiFilePOI.h"
+#include "poi/IPoiFile.h"
 
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QtWidgets>
 
-CPoiPOI::CPoiPOI(const QString& filename, CPoiDraw* parent)
-    : IPoi(parent)
+CPoiFilePOI::CPoiFilePOI(const QString& filename, CPoiDraw* parent)
+    : IPoiFile(parent)
     , filename(filename)
     , loadTimer(new QTimer(this))
 {
@@ -79,11 +79,11 @@ CPoiPOI::CPoiPOI(const QString& filename, CPoiDraw* parent)
 }
 
 
-void CPoiPOI::draw(IDrawContext::buffer_t& buf)
+void CPoiFilePOI::draw(IDrawContext::buffer_t& buf)
 {
     // !!!! NOTE !!!!
     // This is running in it's own thread, not the main thread.
-    // Use CPoiPOI::mutex whenever you access data shared between
+    // Use CPoiFilePOI::mutex whenever you access data shared between
     // the main thread and this thread. Do not block it more than
     // neccessary.
 
@@ -124,7 +124,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     // draw POI
     QMutexLocker lock(&mutex);
     displayedPois.clear();
-    QRectF freeSpaceRect (QPointF(), IPoi::iconSize() * 2);
+    QRectF freeSpaceRect (QPointF(), IPoiFile::iconSize() * 2);
     //Find POIs in view
     const QList<quint64>& keys = categoryActivated.keys();
     for(quint64 categoryID : keys)
@@ -149,7 +149,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                 }
                 for(quint64 poiToDrawID : qAsConst(loadedPoisByArea)[categoryID][minLonM10][minLatM10])
                 {
-                    const CRawPoi& poiToDraw = loadedPois[poiToDrawID];
+                    const CPoiItemPOI& poiToDraw = loadedPois[poiToDrawID];
                     QPointF pt = poiToDraw.getCoordinates();
                     poi->convertRad2Px(pt);
 
@@ -169,7 +169,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
                     if(!foundIntersection)
                     {
                         poiGroup_t poiGroup;
-                        QRectF iconRect (QPointF(), IPoi::iconSize());
+                        QRectF iconRect (QPointF(), IPoiFile::iconSize());
                         iconRect.moveCenter(pt);
                         poiGroup.iconLocation = iconRect;
                         poiGroup.iconCenter = poiToDraw.getCoordinates();
@@ -188,7 +188,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
 
         QPixmap icon;
         getPoiIcon(icon, poiGroup);
-        icon = icon.scaled(IPoi::iconSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        icon = icon.scaled(IPoiFile::iconSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
         const QRectF& iconLocation = poiGroup.iconLocation;
 
@@ -245,7 +245,7 @@ void CPoiPOI::draw(IDrawContext::buffer_t& buf)
     }
 }
 
-bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPointF>& posPoiHighlight) const
+bool CPoiFilePOI::findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
     CTryMutexLocker lock(mutex);
     if(!lock.try_lock())
@@ -266,7 +266,7 @@ bool CPoiPOI::findPoiCloseBy(const QPoint& px, QSet<poi_t>& poiItems, QList<QPoi
     return false;
 }
 
-void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF>& posPoiHighlight)
+void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<QPointF>& posPoiHighlight)
 {
     CTryMutexLocker lock(mutex);
     if(!lock.try_lock())
@@ -298,7 +298,7 @@ void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF
                 }
                 for(quint64 poiFoundID : qAsConst(loadedPoisByArea)[categoryID][minLonM10][minLatM10])
                 {
-                    const CRawPoi& poiItemFound = loadedPois[poiFoundID];
+                    const CPoiItemPOI& poiItemFound = loadedPois[poiFoundID];
                     if(!copiedItems.contains(poiItemFound.getKey()))
                     {
                         //Maybe look through the whole code of selecting items from a map to avoid this conversion
@@ -323,7 +323,7 @@ void CPoiPOI::findPoisIn(const QRectF& degRect, QSet<poi_t>& pois, QList<QPointF
     }
 }
 
-bool CPoiPOI::getToolTip(const QPoint& px, QString& str) const
+bool CPoiFilePOI::getToolTip(const QPoint& px, QString& str) const
 {
     CTryMutexLocker lock(mutex);
     if(!lock.try_lock())
@@ -337,7 +337,7 @@ bool CPoiPOI::getToolTip(const QPoint& px, QString& str) const
     {
         if(poiGroup.pois.count() == 1)
         {
-            const CRawPoi& poiFound = loadedPois[*poiGroup.pois.begin()];
+            const CPoiItemPOI& poiFound = loadedPois[*poiGroup.pois.begin()];
             const QString& name = poiFound.getName(false);
             if(!name.isEmpty())
             {
@@ -381,7 +381,7 @@ bool CPoiPOI::getToolTip(const QPoint& px, QString& str) const
     return success;
 }
 
-void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
+void CPoiFilePOI::addTreeWidgetItems(QTreeWidget* widget)
 {
     QMutexLocker lock(&mutex);
 
@@ -425,7 +425,7 @@ void CPoiPOI::addTreeWidgetItems(QTreeWidget* widget)
     }
 }
 
-void CPoiPOI::slotCheckedStateChanged(QTreeWidgetItem* item)
+void CPoiFilePOI::slotCheckedStateChanged(QTreeWidgetItem* item)
 {
     QMutexLocker lock(&mutex);
 
@@ -440,7 +440,7 @@ void CPoiPOI::slotCheckedStateChanged(QTreeWidgetItem* item)
     loadTimer->start();
 }
 
-void CPoiPOI::getPoiIcon(QPixmap& icon, const CPoiPOI::poiGroup_t& poiGroup)
+void CPoiFilePOI::getPoiIcon(QPixmap& icon, const CPoiFilePOI::poiGroup_t& poiGroup)
 {
     if(poiGroup.pois.count() > 1)
     {
@@ -452,7 +452,7 @@ void CPoiPOI::getPoiIcon(QPixmap& icon, const CPoiPOI::poiGroup_t& poiGroup)
     }
 }
 
-void CPoiPOI::getPoiIcon(QPixmap& icon, const CRawPoi& poi, const QString& definingTag)
+void CPoiFilePOI::getPoiIcon(QPixmap& icon, const CPoiItemPOI& poi, const QString& definingTag)
 {
     if(!definingTag.isEmpty() && tagMap.contains(definingTag))
     {
@@ -470,7 +470,7 @@ void CPoiPOI::getPoiIcon(QPixmap& icon, const CRawPoi& poi, const QString& defin
     icon = QPixmap("://icons/poi/SJJB/png/poi_point_of_interest.n.32.png");
 }
 
-bool CPoiPOI::overlapsWithIcon(const QRectF& rect) const
+bool CPoiFilePOI::overlapsWithIcon(const QRectF& rect) const
 {
     for(const poiGroup_t& poiGroup : displayedPois)
     {
@@ -482,7 +482,7 @@ bool CPoiPOI::overlapsWithIcon(const QRectF& rect) const
     return false;
 }
 
-bool CPoiPOI::getPoiGroupCloseBy(const QPoint& px, CPoiPOI::poiGroup_t& poiItem) const
+bool CPoiFilePOI::getPoiGroupCloseBy(const QPoint& px, CPoiFilePOI::poiGroup_t& poiItem) const
 {
     for(const poiGroup_t& poiGroup : displayedPois)
     {
@@ -495,7 +495,7 @@ bool CPoiPOI::getPoiGroupCloseBy(const QPoint& px, CPoiPOI::poiGroup_t& poiItem)
     return false;
 }
 
-void CPoiPOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
+void CPoiFilePOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
 {
     QMutexLocker lock(&mutex);
 
@@ -558,7 +558,7 @@ void CPoiPOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10)
         }
         loadedPoisByArea[categoryID][minLonM10][minLatM10].append(key);
         // TODO: this overwrites a POI if it already was loaded. The difference between those will be the category. Some better handling should be done
-        loadedPois[key] = CRawPoi(data,
+        loadedPois[key] = CPoiItemPOI(data,
                                   QPointF((query.value(eSqlColumnPoiMaxLon).toDouble() + query.value(eSqlColumnPoiMinLon).toDouble()) / 2 * DEG_TO_RAD,
                                           (query.value(eSqlColumnPoiMaxLat).toDouble() + query.value(eSqlColumnPoiMinLat).toDouble()) / 2 * DEG_TO_RAD),
                                   key, categoryNames[categoryID], garminIcon);

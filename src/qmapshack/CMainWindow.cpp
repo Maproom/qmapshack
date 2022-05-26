@@ -50,8 +50,8 @@
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
 #include "poi/CPoiDraw.h"
+#include "poi/CPoiFilePOI.h"
 #include "poi/CPoiList.h"
-#include "poi/CPoiPOI.h"
 #include "print/CScreenshotDialog.h"
 #include "realtime/CRtWorkspace.h"
 #include "setup/IAppSetup.h"
@@ -113,8 +113,8 @@ CMainWindow::CMainWindow()
 
     CSearch::init();
 
-    IPoi::init();
-    CPoiPOI::init();
+    IPoiFile::init();
+    CPoiFilePOI::init();
 
     IGisItem::init();
     CGisItemWpt::init();

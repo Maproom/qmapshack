@@ -21,7 +21,7 @@
 
 #include <QTreeWidget>
 
-class CPoiItem;
+class CPoiFileItem;
 
 class CPoiTreeWidget : public QTreeWidget
 {
@@ -46,7 +46,7 @@ public:
 
     void clear();
     int count();
-    CPoiItem* item(int i);
+    CPoiFileItem* item(int i);
     operator QTreeWidget*(){return treeWidget;}
 
     void updateHelpText();

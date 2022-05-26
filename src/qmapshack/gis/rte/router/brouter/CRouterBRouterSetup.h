@@ -45,6 +45,7 @@ public:
     void resetOnlineConfigUrl() { expertConfigUrl = defaultConfigUrl; }
     void resetOnlineServiceUrl() { onlineServiceUrl = defaultOnlineServiceUrl; }
     void resetOnlineProfilesUrl() { onlineProfilesUrl = defaultOnlineProfilesUrl; }
+    void resetLocalBRouterJar() { setLocalBRouterJar(defaultLocalBRouterJar); }
     void resetLocalProfileDir() { localProfileDir = defaultLocalProfileDir; }
     void resetLocalCustomProfileDir() { localCustomProfileDir = defaultLocalCustomProfileDir; }
     void resetLocalSegmentsDir() { localSegmentsDir = defaultLocalSegmentsDir; }
@@ -74,8 +75,11 @@ public:
     void displayProfileAsync(const QString& profile);
     void displayOnlineProfileAsync(const QString& profile) const;
 
+    void setJava(const QString& path);
     QString findJava() const;
+    void setLocalBRouterJar(const QString& path);
     bool isLocalBRouterInstalled() const;
+    bool isLocalBRouterCandidate() const;
     bool isLocalBRouterDefaultDir() const;
 
     QUrl getServiceUrl() const;
@@ -84,6 +88,7 @@ public:
     QString getConfigUrl() const;
 
     void parseBRouterVersion(const QString& text);
+    void parseJavaVersion(const QString& text);
 
     void onInvalidSetup();
 
@@ -105,6 +110,11 @@ private:
     enum profileRequest_e { eProfileInstall, eProfileDisplay };
 
     QDir getProfileDir(const mode_e mode) const;
+    QDir getDownloadDir() const;
+    void installLocalBRouter(QStringList& messageList);
+    void installLocalBRouterFile(const QFileInfo& srcFileInfo, const QDir& targetDir, QStringList& messageList) const;
+    bool tryJavaVersion(const QStringList& arguments,const QString& pattern);
+    bool parseJavaVersion(const QString& javaOutput, QRegularExpression& re);
     void loadOnlineProfileAsync(const QString& profile, const profileRequest_e mode) const;
     void loadOnlineConfigFinished(QNetworkReply* reply);
     void loadOnlineVersionFinished(QNetworkReply* reply);
@@ -130,6 +140,7 @@ private:
     QStringList onlineProfilesAvailable;
     QString localDir;
     QString localJavaExecutable;
+    QString localBRouterJar;
     QString localProfileDir;
     QString localCustomProfileDir;
     QString localSegmentsDir;
@@ -146,25 +157,30 @@ private:
     int versionMinor { NOINT };
     int versionPatch { NOINT };
 
+    int javaMajorVersion  { NOINT };
+    int classMajorVersion { NOINT };
+
     const bool defaultExpertMode = false;
     const mode_e defaultInstallMode = eModeOnline;
-    const QString defaultConfigUrl = "https://brouter.de/brouter-web/config.js";
-    const QString defaultOnlineServiceUrl = "https://brouter.de";
-    const QString defaultOnlineProfilesUrl = "https://brouter.de/brouter/profiles2/";
-    const QString defaultLocalDir = ".";
-    const QString defaultLocalProfileDir = "profiles2";
-    const QString defaultLocalCustomProfileDir = "customprofiles";
-    const QString defaultLocalSegmentsDir = "segments4";
-    const QString defaultLocalHost = "127.0.0.1";
-    const QString defaultLocalPort = "17777";
+    static constexpr const char * defaultConfigUrl = "https://brouter.de/brouter-web/config.js";
+    static constexpr const char * defaultOnlineServiceUrl = "https://brouter.de";
+    static constexpr const char * defaultOnlineProfilesUrl = "https://brouter.de/brouter/profiles2/";
+    static constexpr const char * defaultLocalDir = ".";
+    static constexpr const char * defaultLocalBRouterJar = "brouter.jar";
+    static constexpr const char * defaultLocalProfileDir = "profiles2";
+    static constexpr const char * defaultLocalCustomProfileDir = "customprofiles";
+    static constexpr const char * defaultLocalSegmentsDir = "segments4";
+    static constexpr const char * defaultLocalHost = "127.0.0.1";
+    static constexpr const char * defaultLocalPort = "17777";
     const bool defaultLocalBindLocalonly = true;
-    const QString defaultLocalNumberThreads = "1";
-    const QString defaultLocalMaxRunningTime = "300";
-    const QString defaultLocalJavaOpts = "-Xmx128M -Xms128M -Xmn8M";
-    const QString defaultBinariesUrl = "https://brouter.de/brouter_bin/";
-    const QString defaultSegmentsUrl = "https://brouter.de/brouter/segments4/";
+    static constexpr const char * defaultLocalNumberThreads = "1";
+    static constexpr const char * defaultLocalMaxRunningTime = "300";
+    static constexpr const char * defaultLocalJavaOpts = "-Xmx128M -Xms128M -Xmn8M";
+    static constexpr const char * defaultBinariesUrl = "https://brouter.de/brouter_bin/";
+    static constexpr const char * defaultSegmentsUrl = "https://brouter.de/brouter/segments4/";
 
-    const QString onlineCacheDir = "BRouter";
+    static constexpr const char * onlineProfileCacheDir = "BRouterProfiles";
+    static constexpr const char * downloadCacheDir = "BRouterDownload";
 
     friend class CRouterBRouter;
     friend class CRouterBRouterLocal;

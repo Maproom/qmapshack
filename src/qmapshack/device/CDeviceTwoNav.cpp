@@ -76,7 +76,7 @@ CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QStr
     }
 
     // special case: read the gpx files in the track log directory.
-    dirData = dir.absoluteFilePath(pathData + "Tracklog");
+    dirData.setPath( dir.absoluteFilePath(pathData + "Tracklog"));
     const QStringList& entriesLog = dirData.entryList(QStringList("*.gpx"));
     for(const QString& entry : entriesLog)
     {

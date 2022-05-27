@@ -691,11 +691,11 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw* gi
         rectText.moveBottomLeft(anchor.toPoint() + QPoint(-50, -50));
 
         p.setFont(f);
-        CDraw::bubble(p, rectText, anchor.toPoint(), w.palette().color(QPalette::Background), 18 /* px */, 21 /* px */);
+        CDraw::bubble(p, rectText, anchor.toPoint(), w.palette().color(QPalette::Window), 18 /* px */, 21 /* px */);
 
         p.save();
         p.translate(5, 5);
-        p.setPen(w.palette().color(QPalette::Foreground));
+        p.setPen(w.palette().color(QPalette::WindowText));
         p.drawText(rectText, str);
         p.restore();
     }
@@ -1354,7 +1354,7 @@ QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeneralKeywords, [](CGisItemRte* item){
         searchValue_t searchValue;
-        searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
+        searchValue.str1 = QStringList(item->getKeywords().values()).join(", ");
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralType, [](CGisItemRte* item){

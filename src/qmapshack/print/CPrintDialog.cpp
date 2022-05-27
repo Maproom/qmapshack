@@ -90,7 +90,7 @@ void CPrintDialog::resizeEvent(QResizeEvent* e)
 
 void CPrintDialog::slotGetPrinter()
 {
-    printer.setOrientation(QPrinter::Landscape);
+    printer.setPageOrientation(QPageLayout::Landscape);
 
     QPrintDialog dlg(&printer, this);
     dlg.setWindowTitle(tr("Printer Properties..."));

@@ -32,19 +32,19 @@ pointDP::pointDP() : used(true), idx(NOIDX)
 {
 }
 
-pointDP::pointDP(const qreal &x, const qreal &y, const qreal &z)
+pointDP::pointDP(const qreal& x, const qreal& y, const qreal& z)
     : point3D(x, y, z), used(true), idx(NOIDX)
 {
 }
 
-static inline qreal distance(const QPointF &pa, const QPointF &pb)
+static inline qreal distance(const QPointF& pa, const QPointF& pb)
 {
-    const qreal &dx = pa.x() - pb.x();
-    const qreal &dy = pa.y() - pb.y();
+    const qreal& dx = pa.x() - pb.x();
+    const qreal& dy = pa.y() - pb.y();
     return qSqrt(dx * dx + dy * dy);
 }
 
-void GPS_Math_DegMinSec_To_Deg(bool sign, const qint32 d, const qint32 m, const qreal s, qreal &deg)
+void GPS_Math_DegMinSec_To_Deg(bool sign, const qint32 d, const qint32 m, const qreal s, qreal& deg)
 {
     deg = qAbs(d) + qreal(m) / 60.0 + s / 3600;
     if(sign)
@@ -54,7 +54,7 @@ void GPS_Math_DegMinSec_To_Deg(bool sign, const qint32 d, const qint32 m, const 
 }
 
 
-bool GPS_Math_Deg_To_DegMin(qreal v, qint32 *deg, qreal *min)
+bool GPS_Math_Deg_To_DegMin(qreal v, qint32* deg, qreal* min)
 {
     *deg = qAbs(v);
     *min = (qAbs(v) - *deg) * 60.0;
@@ -76,16 +76,16 @@ void GPS_Math_DegMin_To_Deg(bool sign, const qint32 d, const qreal m, qreal& deg
 // from http://www.movable-type.co.uk/scripts/LatLongVincenty.html
 qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2, qreal& a1, qreal& a2)
 {
-    qreal cosSigma   = 0.0;
-    qreal sigma      = 0.0;
-    qreal sinAlpha   = 0.0;
+    qreal cosSigma = 0.0;
+    qreal sigma = 0.0;
+    qreal sinAlpha = 0.0;
     qreal cosSqAlpha = 0.0;
     qreal cos2SigmaM = 0.0;
-    qreal sinSigma   = 0.0;
-    qreal sinLambda  = 0.0;
-    qreal cosLambda  = 0.0;
+    qreal sinSigma = 0.0;
+    qreal sinLambda = 0.0;
+    qreal cosLambda = 0.0;
 
-    qreal a = 6378137.0, b = 6356752.3142,  f = 1.0 / 298.257223563;  // WGS-84 ellipsiod
+    qreal a = 6378137.0, b = 6356752.3142, f = 1.0 / 298.257223563;   // WGS-84 ellipsiod
     qreal L = u2 - u1;
 
     qreal U1 = qAtan((1 - f) * qTan(v1));
@@ -138,16 +138,16 @@ qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qr
 
 qreal GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2)
 {
-    qreal cosSigma   = 0.0;
-    qreal sigma      = 0.0;
-    qreal sinAlpha   = 0.0;
+    qreal cosSigma = 0.0;
+    qreal sigma = 0.0;
+    qreal sinAlpha = 0.0;
     qreal cosSqAlpha = 0.0;
     qreal cos2SigmaM = 0.0;
-    qreal sinSigma   = 0.0;
-    qreal sinLambda  = 0.0;
-    qreal cosLambda  = 0.0;
+    qreal sinSigma = 0.0;
+    qreal sinLambda = 0.0;
+    qreal cosLambda = 0.0;
 
-    qreal a = 6378137.0, b = 6356752.3142,  f = 1.0 / 298.257223563;  // WGS-84 ellipsiod
+    qreal a = 6378137.0, b = 6356752.3142, f = 1.0 / 298.257223563;   // WGS-84 ellipsiod
     qreal L = u2 - u1;
 
     qreal U1 = qAtan((1 - f) * qTan(v1));
@@ -207,7 +207,7 @@ qreal GPS_Math_DistanceQuick(const qreal u1, const qreal v1, const qreal u2, con
 }
 
 
-static qreal GPS_Math_distPointLine3D(const point3D &x1, const point3D &x2, const point3D &x0)
+static qreal GPS_Math_distPointLine3D(const point3D& x1, const point3D& x2, const point3D& x0)
 {
     point3D v1, v2, v3, v1x2;
 
@@ -227,14 +227,14 @@ static qreal GPS_Math_distPointLine3D(const point3D &x1, const point3D &x2, cons
     v3.z = x2.z - x1.z;
 
     // (x0 - x1)x(x0 - x2)
-    v1x2.x  = v1.y * v2.z - v1.z * v2.y;
-    v1x2.y  = v1.z * v2.x - v1.x * v2.z;
-    v1x2.z  = v1.x * v2.y - v1.y * v2.x;
+    v1x2.x = v1.y * v2.z - v1.z * v2.y;
+    v1x2.y = v1.z * v2.x - v1.x * v2.z;
+    v1x2.z = v1.x * v2.y - v1.y * v2.x;
 
     // |(x0 - x1)x(x0 - x2)|
-    qreal a1x2    = v1x2.x * v1x2.x + v1x2.y * v1x2.y + v1x2.z * v1x2.z;
+    qreal a1x2 = v1x2.x * v1x2.x + v1x2.y * v1x2.y + v1x2.z * v1x2.z;
     // |(x2 - x1)|
-    qreal a3      = v3.x * v3.x + v3.y * v3.y + v3.z * v3.z;
+    qreal a3 = v3.x * v3.x + v3.y * v3.y + v3.z * v3.z;
 
     return qSqrt(a1x2 / a3);
 }
@@ -243,13 +243,13 @@ static inline qreal sqr(qreal a)
 {
     return a * a;
 }
-static inline qreal sqrlen(const QPointF &a)
+static inline qreal sqrlen(const QPointF& a)
 {
     return sqr(a.x()) + sqr(a.y());
 }
 
 
-qreal GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q)
+qreal GPS_Math_DistPointPolyline(const QPolygonF& points, const QPointF& q)
 {
     const qint32 count = points.size();
 
@@ -258,9 +258,9 @@ qreal GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q)
         return NOFLOAT;
     }
 
-    QPointF b   = points[0];
+    QPointF b = points[0];
     QPointF dbq = b - q;
-    qreal dist  = sqrlen(dbq);
+    qreal dist = sqrlen(dbq);
 
     for (qint32 i = 1; i < count; ++i)
     {
@@ -302,8 +302,8 @@ qreal GPS_Math_DistPointPolyline(const QPolygonF& line, const QPointF& pt, qreal
     // see http://local.wasp.uwa.edu.au/~pbourke/geometry/pointline/
     for(int i = 1; i < len; ++i)
     {
-        const QPointF &p1 = line[i - 1];
-        const QPointF &p2 = line[i];
+        const QPointF& p1 = line[i - 1];
+        const QPointF& p2 = line[i];
 
         qreal dx = p2.x() - p1.x();
         qreal dy = p2.y() - p1.y();
@@ -346,7 +346,7 @@ struct segment
     qint32 idx2;
 };
 
-void GPS_Math_DouglasPeucker(QVector<pointDP> &line, qreal d)
+void GPS_Math_DouglasPeucker(QVector<pointDP>& line, qreal d)
 {
     if(line.count() < 3)
     {
@@ -370,7 +370,7 @@ void GPS_Math_DouglasPeucker(QVector<pointDP> &line, qreal d)
             qreal distance = GPS_Math_distPointLine3D(x1, x2, line[i]);
             if(distance > dmax)
             {
-                idx  = i;
+                idx = i;
                 dmax = distance;
             }
         }
@@ -391,7 +391,7 @@ void GPS_Math_DouglasPeucker(QVector<pointDP> &line, qreal d)
 }
 
 
-bool GPS_Math_LineCrossesRect(const QPointF &p1, const QPointF &p2, const QRectF &rect)
+bool GPS_Math_LineCrossesRect(const QPointF& p1, const QPointF& p2, const QRectF& rect)
 {
     // the trivial case
     if(rect.contains(p1) || rect.contains(p2))
@@ -399,10 +399,10 @@ bool GPS_Math_LineCrossesRect(const QPointF &p1, const QPointF &p2, const QRectF
         return true;
     }
 
-    qreal slope    = qreal(p2.y() - p1.y()) / (p2.x() - p1.x());
-    qreal offset   = p1.y() - slope * p1.x();
-    qreal y1       = offset + slope * rect.left();
-    qreal y2       = offset + slope * rect.right();
+    qreal slope = qreal(p2.y() - p1.y()) / (p2.x() - p1.x());
+    qreal offset = p1.y() - slope * p1.x();
+    qreal y1 = offset + slope * rect.left();
+    qreal y2 = offset + slope * rect.right();
 
     if((y1 < rect.top()) && (y2 < rect.top()))
     {

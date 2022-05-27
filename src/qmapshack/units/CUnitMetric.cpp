@@ -33,27 +33,27 @@ void CUnitMetric::meter2distance(qreal meter, QString& val, QString& unit) const
     }
     else if(meter < 10)
     {
-        val.sprintf("%1.1f", meter);
+        val = QString::asprintf("%1.1f", meter);
         unit = "m";
     }
     else if(meter < 1000)
     {
-        val.sprintf("%1.0f", meter);
+        val = QString::asprintf("%1.0f", meter);
         unit = "m";
     }
     else if(meter < 10000)
     {
-        val.sprintf("%1.2f", meter / 1000);
+        val = QString::asprintf("%1.2f", meter / 1000);
         unit = "km";
     }
     else if(meter < 20000)
     {
-        val.sprintf("%1.1f", meter / 1000);
+        val = QString::asprintf("%1.1f", meter / 1000);
         unit = "km";
     }
     else
     {
-        val.sprintf("%1.0f", meter / 1000);
+        val = QString::asprintf("%1.0f", meter / 1000);
         unit = "km";
     }
 }
@@ -86,17 +86,17 @@ void CUnitMetric::meter2speed(qreal meter, QString& val, QString& unit) const /*
     }
     else if (meter < 0.27)
     {
-        val.sprintf("%1.0f", meter * speedFactor * 1000);
+        val = QString::asprintf("%1.0f", meter * speedFactor * 1000);
         unit = "m/h";
     }
     else if (meter < 10.0)
     {
-        val.sprintf("%1.1f", meter * speedFactor);
+        val = QString::asprintf("%1.1f", meter * speedFactor);
         unit = speedUnit;
     }
     else
     {
-        val.sprintf("%1.0f", meter * speedFactor);
+        val = QString::asprintf("%1.0f", meter * speedFactor);
         unit = speedUnit;
     }
 }
@@ -129,12 +129,12 @@ void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit) const /* 
     }
     else if(meter < 100000)
     {
-        val.sprintf("%1.0f", meter);
+        val = QString::asprintf("%1.0f", meter);
         unit = "m²";
     }
     else
     {
-        val.sprintf("%1.2f", meter / 1000000);
+        val = QString::asprintf("%1.2f", meter / 1000000);
         unit = "km²";
     }
 }

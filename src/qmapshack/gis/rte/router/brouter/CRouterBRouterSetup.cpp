@@ -20,11 +20,11 @@
 
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
+#include <JlCompress.h>
 #include <QJSEngine>
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QWebEnginePage>
-#include <JlCompress.h>
 
 CRouterBRouterSetup::CRouterBRouterSetup(QObject* parent)
     : QObject(parent)
@@ -350,7 +350,7 @@ void CRouterBRouterSetup::installLocalBRouter(QStringList& messageList)
     const QDir targetDir(localDir);
     const QDir& targetProfileDir = getProfileDir(eModeLocal);
     const QString& srcPath = getDownloadDir().absolutePath();
-    QDirIterator srcIterator(srcPath, {"*.jar","*.brf","lookups.dat"}, QDir::Files, QDirIterator::Subdirectories);
+    QDirIterator srcIterator(srcPath, {"*.jar", "*.brf", "lookups.dat"}, QDir::Files, QDirIterator::Subdirectories);
     QStringList jarFiles;
     while(srcIterator.hasNext())
     {
@@ -397,11 +397,13 @@ void CRouterBRouterSetup::installLocalBRouterFile(const QFileInfo& srcFileInfo, 
     const QString& targetAbsoluteFilePath = targetDir.absoluteFilePath(srcFileInfo.fileName());
     if (QFile::exists(targetAbsoluteFilePath))
     {
-        for (int i=1;;i++)
+        for (int i = 1;; i++)
         {
-            const QString& newFilename = targetAbsoluteFilePath+"."+QString::number(i);
+            const QString& newFilename = targetAbsoluteFilePath + "." + QString::number(i);
             if (QFile::exists(newFilename))
+            {
                 continue;
+            }
             if (QFile::rename(targetAbsoluteFilePath, newFilename))
             {
                 messageList.append(tr("backup: %1 to %2").arg(targetAbsoluteFilePath).arg(newFilename));
@@ -413,7 +415,7 @@ void CRouterBRouterSetup::installLocalBRouterFile(const QFileInfo& srcFileInfo, 
             break;
         }
     }
-    if (QFile::copy(srcAbsoluteFilePath,targetAbsoluteFilePath))
+    if (QFile::copy(srcAbsoluteFilePath, targetAbsoluteFilePath))
     {
         messageList.append(tr("installed: %1 to %2").arg(srcAbsoluteFilePath).arg(targetAbsoluteFilePath));
     }
@@ -819,32 +821,32 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply* reply)
     }
 }
 
-void CRouterBRouterSetup::setLocalBRouterJar(const QString &path)
+void CRouterBRouterSetup::setLocalBRouterJar(const QString& path)
 {
     localBRouterJar = path;
     const QString& jarFileName = QDir(localDir).absoluteFilePath(localBRouterJar);
     const QStringList& classFiles = JlCompress::getFileList(jarFileName).filter(QRegularExpression(".*BRouter\\.class"));
     if (!classFiles.isEmpty())
     {
-        const QString& tmpFileName = JlCompress::extractFile(jarFileName,classFiles.first(),getDownloadDir().absoluteFilePath("BRouter.class"));
+        const QString& tmpFileName = JlCompress::extractFile(jarFileName, classFiles.first(), getDownloadDir().absoluteFilePath("BRouter.class"));
         if (tmpFileName.endsWith("BRouter.class"))
         {
             QFile tmpFile(tmpFileName);
             char file_data[8];
             tmpFile.open(QIODevice::ReadOnly);
-            int i=0;
-            while(!tmpFile.atEnd() && i<8)
+            int i = 0;
+            while(!tmpFile.atEnd() && i < 8)
             {
-              tmpFile.read(file_data+i,sizeof(char));
-              i++;
+                tmpFile.read(file_data + i, sizeof(char));
+                i++;
             }
             tmpFile.close();
-            if (i==8)
+            if (i == 8)
             {
                 unsigned char magic[4] = { 0xca, 0xfe, 0xba, 0xbe };
-                if (memcmp(&file_data,magic,4) == 0)
+                if (memcmp(&file_data, magic, 4) == 0)
                 {
-                    classMajorVersion = file_data[7]-0x2c;
+                    classMajorVersion = file_data[7] - 0x2c;
                     QFile::remove(tmpFileName);
                     return;
                 }
@@ -886,13 +888,19 @@ void CRouterBRouterSetup::setJava(const QString& path)
 {
     localJavaExecutable = path;
 
-    if (tryJavaVersion({ "-version" }, "[\\S]+ version \"(\\d+)\\.\\d+.*")) return;
-    if (tryJavaVersion({ "--version" }, "[\\S]+ (\\d+)\\.\\d+.*")) return;
+    if (tryJavaVersion({ "-version" }, "[\\S]+ version \"(\\d+)\\.\\d+.*"))
+    {
+        return;
+    }
+    if (tryJavaVersion({ "--version" }, "[\\S]+ (\\d+)\\.\\d+.*"))
+    {
+        return;
+    }
 
     javaMajorVersion = NOINT;
 }
 
-bool CRouterBRouterSetup::tryJavaVersion(const QStringList& arguments,const QString& pattern)
+bool CRouterBRouterSetup::tryJavaVersion(const QStringList& arguments, const QString& pattern)
 {
     QProcess cmd;
     QRegularExpression re(pattern);
@@ -906,8 +914,14 @@ bool CRouterBRouterSetup::tryJavaVersion(const QStringList& arguments,const QStr
         cmd.kill();
     }
 
-    if (parseJavaVersion(QString(cmd.readAllStandardError()),re)) return true;
-    if (parseJavaVersion(QString(cmd.readAllStandardOutput()),re)) return true;
+    if (parseJavaVersion(QString(cmd.readAllStandardError()), re))
+    {
+        return true;
+    }
+    if (parseJavaVersion(QString(cmd.readAllStandardOutput()), re))
+    {
+        return true;
+    }
     return false;
 }
 

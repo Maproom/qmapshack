@@ -298,7 +298,7 @@ void CRouterBRouterTilesSelect::initialize()
                     CRouterBRouterTilesStatus* status = getTileStatus(tile);
 
                     const QFileInfo& info = QFileInfo(dir, segment);
-                    status->localDate = info.created();
+                    status->localDate = info.birthTime();
                     status->localSize = info.size();
                     status->isLocal = true;
                 }
@@ -626,7 +626,7 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
                     status->isOutdated = false;
                     status->file->close();
                     QFileInfo info(*status->file);
-                    status->localDate = info.created();
+                    status->localDate = info.birthTime();
                     status->localSize = info.size();
                     clearError();
                 }
@@ -805,6 +805,7 @@ void CRouterBRouterTilesSelect::updateTiles() const
 
 void CRouterBRouterTilesSelect::slotTileToolTipChanged(const QPoint& tile) const
 {
+    const QString &format = QLocale().dateTimeFormat(QLocale::ShortFormat);
     const CRouterBRouterTilesStatus* status = getTileStatus(tile);
 
     if (status->file != nullptr)
@@ -817,21 +818,21 @@ void CRouterBRouterTilesSelect::slotTileToolTipChanged(const QPoint& tile) const
     {
         selectArea->setTileToolTip(QString(tr("local data outdated (%1, %2 - remote %3, %4)"))
                                    .arg(formatSize(status->localSize),
-                                        status->localDate.toString(Qt::DefaultLocaleShortDate),
+                                        status->localDate.toString(format),
                                         formatSize(status->remoteSize),
-                                        status->remoteDate.toString(Qt::DefaultLocaleShortDate)));
+                                        status->remoteDate.toString(format)));
     }
     else if (status->isLocal)
     {
         selectArea->setTileToolTip(QString(tr("local data up to date (%1, %2)"))
                                    .arg(formatSize(status->localSize),
-                                        status->localDate.toString(Qt::DefaultLocaleShortDate)));
+                                        status->localDate.toString(format)));
     }
     else if (status->isRemote)
     {
         selectArea->setTileToolTip(QString(tr("no local data, online available: %1 (%2)"))
                                    .arg(formatSize(status->remoteSize),
-                                        status->remoteDate.toString(Qt::DefaultLocaleShortDate)));
+                                        status->remoteDate.toString(format)));
     }
     else
     {

@@ -173,7 +173,7 @@ void CToolPalettize::buildCmd(QList<CShellCmd>& cmds, const IItem* iitem)
 {
     inputFileList1->open();
     QTextStream stream(inputFileList1);
-    stream << iitem->getFilename() << endl;
+    stream << iitem->getFilename() << Qt::endl;
     inputFileList1->close();
 }
 
@@ -212,7 +212,7 @@ void CToolPalettize::buildCmdFinal(QList<CShellCmd>& cmds)
             QString inFilename = item->getFilename();
             QString outFilename = createTempFile("tif");
 
-            stream << outFilename << endl;
+            stream << outFilename << Qt::endl;
 
             args.clear();
             args << "--pct" << pctFilename;

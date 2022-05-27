@@ -183,18 +183,18 @@ QString CGdalFile::getInfo() const
 
     if(!proj.isValid())
     {
-        out << "no projection" << endl;
+        out << "no projection" << Qt::endl;
     }
     else
     {
-        out << getProjection() << endl;
+        out << getProjection() << Qt::endl;
         if(proj.isSrcLatLong())
         {
-            out << "xscale: " << xscale << "px/rad\tyscale: " << yscale << "px/rad" << endl;
+            out << "xscale: " << xscale << "px/rad\tyscale: " << yscale << "px/rad" << Qt::endl;
         }
         else
         {
-            out << "xscale: " << xscale << "px/m\tyscale: " << yscale << "px/m" << endl;
+            out << "xscale: " << xscale << "px/m\tyscale: " << yscale << "px/m" << Qt::endl;
         }
     }
 
@@ -217,13 +217,13 @@ QString CGdalFile::getInfo() const
         out << tr("(unknown)");
     }
 
-    out << endl;
+    out << Qt::endl;
 
-    out << "has overviews:\t" << hasOverviews << endl;
+    out << "has overviews:\t" << hasOverviews << Qt::endl;
 
     if((rasterBandCount != 4) && (hasNoData != -1))
     {
-        out << "has no data:\t" << hasNoData << endl;
+        out << "has no data:\t" << hasNoData << Qt::endl;
     }
 
     return str;

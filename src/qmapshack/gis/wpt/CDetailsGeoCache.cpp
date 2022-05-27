@@ -64,7 +64,8 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt& wpt, QWidget* parent)
     labelPositon->setText(strPos);
     labelOwner->setText(geocache.owner);
     labelSize->setText(geocache.container);
-    labelHiddenDate->setText(wpt.getTime().date().toString(Qt::SystemLocaleShortDate));
+    const QString &format = QLocale().dateTimeFormat(QLocale::ShortFormat);
+    labelHiddenDate->setText(wpt.getTime().date().toString(format));
     //Last found is set below to only loop logs once
 
     qreal d = geocache.difficulty;
@@ -132,7 +133,7 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt& wpt, QWidget* parent)
     webDesc->setHtml(desc);
 
     const QDateTime& lastFound = geocache.getLastFound();
-    labelLastFound->setText(lastFound.date().toString(Qt::SystemLocaleShortDate));
+    labelLastFound->setText(lastFound.date().toString(format));
 
     CWebPage* webLogPage = new CWebPage(webLogs);
     webLogs->setPage(webLogPage);

@@ -256,7 +256,7 @@ public:
                   the last point of the track.
            @param getSubPixel If getSubPixel is true all sub-pixels are converted to a point.
                   If set to false the sub-pixels are ignored.
-    */
+     */
     void getPolylineRange(SGisLine& l, qint32 rangeStart, qint32 rangeEnd, bool getSubPixel = false) const;
 
     bool isEmpty() const

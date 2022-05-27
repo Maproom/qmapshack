@@ -366,13 +366,13 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
     QDomDocument doc = ext.ownerDocument();
 
     QStringList keys = extensions.keys();
-    qSort(keys.begin(), keys.end(), [] (const QString& k1, const QString& k2) {
+    std::sort(keys.begin(), keys.end(), [] (const QString& k1, const QString& k2) {
         return CKnownExtension::get(k1).order < CKnownExtension::get(k2).order;
     });
 
     for(const QString& key : qAsConst(keys))
     {
-        QStringList tags = key.split('|', QString::SkipEmptyParts);
+        QStringList tags = key.split('|', Qt::SkipEmptyParts);
 
         if(tags.size() == 1)
         {
@@ -745,21 +745,21 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
 
     if(geocache.difficulty == int(geocache.difficulty))
     {
-        str.sprintf("%1.0f", geocache.difficulty);
+        str = QString::asprintf("%1.0f", geocache.difficulty);
     }
     else
     {
-        str.sprintf("%1.1f", geocache.difficulty);
+        str = QString::asprintf("%1.1f", geocache.difficulty);
     }
     writeXml(xmlCache, "groundspeak:difficulty", str);
 
     if(geocache.terrain == int(geocache.terrain))
     {
-        str.sprintf("%1.0f", geocache.terrain);
+        str = QString::asprintf("%1.0f", geocache.terrain);
     }
     else
     {
-        str.sprintf("%1.1f", geocache.terrain);
+        str = QString::asprintf("%1.1f", geocache.terrain);
     }
     writeXml(xmlCache, "groundspeak:terrain", str);
     writeXml(xmlCache, "groundspeak:short_description", geocache.shortDesc, geocache.shortDescIsHtml);
@@ -1068,9 +1068,9 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt, bool strictGpx11)
 {
     QString str;
 
-    str.sprintf("%1.8f", wpt.lat);
+    str = QString::asprintf("%1.8f", wpt.lat);
     xml.setAttribute("lat", str);
-    str.sprintf("%1.8f", wpt.lon);
+    str = QString::asprintf("%1.8f", wpt.lon);
     xml.setAttribute("lon", str);
 
     writeXml(xml, "ele", wpt.ele);
@@ -1190,7 +1190,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject* project, const QStri
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
     out.setCodec("UTF-8");
-    out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << Qt::endl;
     out << doc.toString();
     file.close();
 }

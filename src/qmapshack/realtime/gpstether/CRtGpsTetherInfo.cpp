@@ -45,7 +45,7 @@ CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether& source, QWidget* parent)
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::connected, this, &CRtGpsTetherInfo::slotConnected);
     connect(socket, &QTcpSocket::disconnected, this, &CRtGpsTetherInfo::slotDisconnected);
-    connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this, &CRtGpsTetherInfo::slotError);
+    connect(socket, &QTcpSocket::errorOccurred, this, &CRtGpsTetherInfo::slotError);
     connect(socket, &QTcpSocket::readyRead, this, &CRtGpsTetherInfo::slotReadyRead);
 
     timer = new QTimer(this);

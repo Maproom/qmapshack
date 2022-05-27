@@ -274,8 +274,8 @@ public:
     const searchValue_t getValueByKeyword(searchProperty_e keyword) override;
 
     /**
-      @brief Convert the track to a route
-    */
+       @brief Convert the track to a route
+     */
     void toRoute();
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources

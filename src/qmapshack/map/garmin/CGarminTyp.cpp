@@ -41,7 +41,7 @@ bool CGarminTyp::decode(const QByteArray& array, QMap<quint32, polygon_property>
     quint16 descriptor;
     in >> descriptor;
 
-    qDebug() << "descriptor" << hex << descriptor;
+    qDebug() << "descriptor" << Qt::hex << descriptor;
 
     if(!parseHeader(in))
     {
@@ -123,11 +123,11 @@ bool CGarminTyp::parseHeader(QDataStream& in)
 
 #ifdef DBG
     qDebug() << "Version:" << version << "Codepage:" << codepage;
-    qDebug() << "PID" << hex << pid << "FID" << hex << fid;
-    qDebug() << "Points     doff/dlen/aoff/amod/asize:" << hex << "\t" << sectPoints.dataOffset << "\t" << sectPoints.dataLength << "\t" << sectPoints.arrayOffset << "\t" << sectPoints.arrayModulo << "\t" << sectPoints.arrayOffset;
-    qDebug() << "Polylines  doff/dlen/aoff/amod/asize:" << hex << "\t" << sectPolylines.dataOffset << "\t" << sectPolylines.dataLength << "\t" << sectPolylines.arrayOffset << "\t" << sectPolylines.arrayModulo << "\t" << sectPolylines.arrayOffset;
-    qDebug() << "Polygons   doff/dlen/aoff/amod/asize:" << hex << "\t" << sectPolygons.dataOffset << "\t" << sectPolygons.dataLength << "\t" << sectPolygons.arrayOffset << "\t" << sectPolygons.arrayModulo << "\t" << sectPolygons.arrayOffset;
-    qDebug() << "Order      doff/dlen/aoff/amod/asize:" << hex << "\t" << sectOrder.dataOffset << "\t" << sectOrder.dataLength << "\t" << sectOrder.arrayOffset << "\t" << sectOrder.arrayModulo << "\t" << sectOrder.arrayOffset;
+    qDebug() << "PID" << Qt::hex << pid << "FID" << Qt::hex << fid;
+    qDebug() << "Points     doff/dlen/aoff/amod/asize:" << Qt::hex << "\t" << sectPoints.dataOffset << "\t" << sectPoints.dataLength << "\t" << sectPoints.arrayOffset << "\t" << sectPoints.arrayModulo << "\t" << sectPoints.arrayOffset;
+    qDebug() << "Polylines  doff/dlen/aoff/amod/asize:" << Qt::hex << "\t" << sectPolylines.dataOffset << "\t" << sectPolylines.dataLength << "\t" << sectPolylines.arrayOffset << "\t" << sectPolylines.arrayModulo << "\t" << sectPolylines.arrayOffset;
+    qDebug() << "Polygons   doff/dlen/aoff/amod/asize:" << Qt::hex << "\t" << sectPolygons.dataOffset << "\t" << sectPolygons.dataLength << "\t" << sectPolygons.arrayOffset << "\t" << sectPolygons.arrayModulo << "\t" << sectPolygons.arrayOffset;
+    qDebug() << "Order      doff/dlen/aoff/amod/asize:" << Qt::hex << "\t" << sectOrder.dataOffset << "\t" << sectOrder.dataLength << "\t" << sectOrder.arrayOffset << "\t" << sectOrder.arrayModulo << "\t" << sectOrder.arrayOffset;
 #endif
 
     return true;
@@ -164,7 +164,7 @@ bool CGarminTyp::parseDrawOrder(QDataStream& in, QList<quint32>& drawOrder)
     for (i = 0; i < N; i++)
     {
         in >> typ >> subtyp;
-        //         qDebug() << hex << typ << subtyp;
+        //         qDebug() << Qt::hex << typ << subtyp;
         if (typ == 0)
         {
             count++;
@@ -282,7 +282,7 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
         ctyp = t8 & 0x0F;
 
 #ifdef DBG
-        qDebug() << "Polygon typ:" << hex << typ << "ctype:" << ctyp << "offset:" << (sectPolygons.dataOffset + offset) << "orig data:" << t16_1;
+        qDebug() << "Polygon typ:" << Qt::hex << typ << "ctype:" << ctyp << "offset:" << (sectPolygons.dataOffset + offset) << "orig data:" << t16_1;
 #endif
 
         polygon_property& property = polygons[typ];
@@ -467,7 +467,7 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
                 QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Warning..."), tr("This is a typ file with unknown polygon encoding. Please report!"), QMessageBox::Abort, QMessageBox::Abort);
                 tainted = true;
             }
-            qDebug() << "Failed polygon:" << typ << subtyp << hex << typ << subtyp << ctyp;
+            qDebug() << "Failed polygon:" << typ << subtyp << Qt::hex << typ << subtyp << ctyp;
         }
 
         if(hasLocalization)
@@ -606,12 +606,12 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
         hasTextColor = t8_2 & 0x04;
 
 #ifdef DBG
-        qDebug() << "Polyline typ:" << hex << typ << "ctyp:" << ctyp << "offset:" << (sectPolylines.dataOffset + offset) << "orig data:" << t16_1;
+        qDebug() << "Polyline typ:" << Qt::hex << typ << "ctyp:" << ctyp << "offset:" << (sectPolylines.dataOffset + offset) << "orig data:" << t16_1;
 #endif
 
         polyline_property& property = polylines[typ];
 #ifdef DBG
-        qDebug() << "rows" << rows << "t8_2" << hex << t8_2;
+        qDebug() << "rows" << rows << "t8_2" << Qt::hex << t8_2;
 #endif
 
         switch(ctyp)
@@ -857,7 +857,7 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
                 tainted = true;
             }
 
-            qDebug() << "Failed polyline" << hex << ":" << typ << ctyp << rows;
+            qDebug() << "Failed polyline" << Qt::hex << ":" << typ << ctyp << rows;
             continue;
         }
 
@@ -1199,7 +1199,7 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
         hasTextColor = t8_1 & 0x08;
         t8_1 = t8_1 & 0x03;
 #ifdef DBG
-        qDebug() << "Point typ:" << hex << typ << "ctyp:" << ctyp << "offset:" << (sectPoints.dataOffset + offset) << "orig data:" << t16_1;
+        qDebug() << "Point typ:" << Qt::hex << typ << "ctyp:" << ctyp << "offset:" << (sectPoints.dataOffset + offset) << "orig data:" << t16_1;
 #endif
 
         if(!decodeBppAndBytes(ncolors, w, ctyp, bpp, wbytes))

@@ -39,7 +39,7 @@ CProj::~CProj()
 }
 
 
-void CProj::init(const char *crsSrc, const char *crsTar)
+void CProj::init(const char* crsSrc, const char* crsTar)
 {
     _strProjSrc = crsSrc;
     _strProjTar = crsTar;
@@ -95,9 +95,9 @@ void CProj::init(const char *crsSrc, const char *crsTar)
     qDebug() << "Create projection:" << _strProjSrc << "->" << _strProjTar;
 }
 
-bool CProj::_isLatLong(const QString &crs) const
+bool CProj::_isLatLong(const QString& crs) const
 {
-    PJ * p = proj_create(_ctx, crs.toLatin1());
+    PJ* p = proj_create(_ctx, crs.toLatin1());
     PJ_TYPE type = proj_get_type(p);
     proj_destroy(p);
 
@@ -176,7 +176,7 @@ bool CProj::validProjStr(const QString projStr, bool allowLonLatToo, fErrMessage
 {
     bool res = false;
 
-    PJ * projCheck = proj_create(PJ_DEFAULT_CTX, projStr.toLatin1());
+    PJ* projCheck = proj_create(PJ_DEFAULT_CTX, projStr.toLatin1());
     if (!projCheck)
     {
         if(errMessage)

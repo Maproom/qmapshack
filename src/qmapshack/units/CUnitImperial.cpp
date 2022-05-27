@@ -34,27 +34,27 @@ void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit) con
     }
     else if(meter < 10)
     {
-        val.sprintf("%1.1f", meter * footPerMeter);
+        val = QString::asprintf("%1.1f", meter * footPerMeter);
         unit = "ft";
     }
     else if(meter < 1600)
     {
-        val.sprintf("%1.0f", meter * footPerMeter);
+        val = QString::asprintf("%1.0f", meter * footPerMeter);
         unit = "ft";
     }
     else if(meter < 16000)
     {
-        val.sprintf("%1.2f", meter * milePerMeter);
+        val = QString::asprintf("%1.2f", meter * milePerMeter);
         unit = "mi";
     }
     else if(meter < 32000)
     {
-        val.sprintf("%1.1f", meter * milePerMeter);
+        val = QString::asprintf("%1.1f", meter * milePerMeter);
         unit = "mi";
     }
     else
     {
-        val.sprintf("%1.0f", meter * milePerMeter);
+        val = QString::asprintf("%1.0f", meter * milePerMeter);
         unit = "mi";
     }
 }
@@ -87,7 +87,7 @@ void CUnitImperial::meter2area(qreal meter, QString& val, QString& unit) const /
     }
     else
     {
-        val.sprintf("%1.2f", meter / (1 / milePerMeter * 1 / milePerMeter));
+        val = QString::asprintf("%1.2f", meter / (1 / milePerMeter * 1 / milePerMeter));
         unit = "mi²";
     }
 }

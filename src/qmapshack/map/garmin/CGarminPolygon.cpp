@@ -105,7 +105,7 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
 
     pData += 3;
 
-    //     qDebug() << hex << lbl_in_NET << extra_bit << lbl_info;
+    //     qDebug() << Qt::hex << lbl_in_NET << extra_bit << lbl_info;
 
     // delta longitude and latitude
     dLng = gar_ptr_load(uint16_t, pData);
@@ -144,14 +144,14 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
     //if(extra_bit) qWarning("extrabit");
 
 #ifdef DEBUG_SHOW_POLY_DATA
-    qDebug() << "type:      " << type << hex << tmpType;
+    qDebug() << "type:      " << type << Qt::hex << tmpType;
     qDebug() << "two byte:  " << two_byte_len;
     qDebug() << "extra bit: " << extra_bit;
     qDebug() << "dLng:      " << dLng;
     qDebug() << "dLat:      " << dLat;
     qDebug() << "len:       " << bs_len;
-    qDebug() << "info:      " << hex << bs_info;
-    qDebug() << "1st byte:  " << hex << *pData;
+    qDebug() << "info:      " << Qt::hex << bs_info;
+    qDebug() << "1st byte:  " << Qt::hex << *pData;
     qDebug() << "bytes total" << bytes_total;
 #endif                       // DEBUG_SHOW_POLY_DATA
 
@@ -254,12 +254,12 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     bytes_total += bs_len + 1;
 
 #ifdef DEBUG_SHOW_POLY2_DATA
-    qDebug() << "type:      " << type << hex << type;
+    qDebug() << "type:      " << type << Qt::hex << type;
     qDebug() << "dLng:      " << dLng;
     qDebug() << "dLat:      " << dLat;
     qDebug() << "len:       " << bs_len;
-    qDebug() << "info:      " << hex << bs_info;
-    qDebug() << "1st byte:  " << hex << *pData;
+    qDebug() << "info:      " << Qt::hex << bs_info;
+    qDebug() << "1st byte:  " << Qt::hex << *pData;
     qDebug() << "bytes total" << bytes_total;
 #endif                       // DEBUG_SHOW_POLY_DATA
 

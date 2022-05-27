@@ -110,7 +110,7 @@ void CScrOptRangeTool::slotCanvasResize(const QSize& sizeCanvas)
 
     QFontMetrics fm(CMainWindow::self().getMapFont());
 
-    qint32 w = qMin(fm.width("X") * 125, sizeCanvas.width() - 60);
+    qint32 w = qMin(fm.horizontalAdvance("X") * 125, sizeCanvas.width() - 60);
     qint32 h = height();
 
     setMinimumWidth(w);

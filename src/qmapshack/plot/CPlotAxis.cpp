@@ -125,7 +125,7 @@ const QString CPlotAxis::fmtsgl( qreal val )
 
 
 /**
-   Generates a sprintf style format string for a given value.
+   Generates a asprintf style format string for a given value.
    <pre>
    0.001   -> "%1.4f"
    0.01    -> "%1.3f"
@@ -181,16 +181,16 @@ int CPlotAxis::getScaleWidth( const QFontMetrics& m )
 
     if ( scaleWidth > 0 )
     {
-        return scaleWidth * m.width( "X" );
+        return scaleWidth * m.horizontalAdvance("X");
     }
 
-    int width = 6 * m.width( "X" );
+    int width = 6 * m.horizontalAdvance( "X" );
     QString format_single_prec = ((interval * ticScale) < 1) ? fmtdbl(interval) : fmtsgl(interval);
 
     const tic_t* t = ticmark();
     while (nullptr != t)
     {
-        int tmp = m.width( QString().sprintf( format_single_prec.toLatin1().data(), t->val * ticScale) );
+        int tmp = m.horizontalAdvance( QString::asprintf( format_single_prec.toLatin1().data(), t->val * ticScale) );
         width = qMax(width, tmp);
 
         t = ticmark(t);
@@ -283,7 +283,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t* t )
         break;
     }
 
-    tic.lbl.sprintf( format_single_prec.toLatin1(), tic.val * ticScale );
+    tic.lbl = QString::asprintf( format_single_prec.toLatin1(), tic.val * ticScale );
 
     return &tic;
 }

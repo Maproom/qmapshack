@@ -17,12 +17,12 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "poi/IPoiItem.h"
 #include "helpers/CSettings.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiFileItem.h"
 #include "poi/CPoiList.h"
 #include "poi/CPoiPathSetup.h"
+#include "poi/IPoiItem.h"
 
 #include <QtWidgets>
 

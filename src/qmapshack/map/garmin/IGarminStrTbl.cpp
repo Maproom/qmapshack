@@ -50,7 +50,7 @@ IGarminStrTbl::IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject*
         }
         else
         {
-            qDebug() << "unknown codepage:" << codepage << "0x" << hex << codepage;
+            qDebug() << "unknown codepage:" << codepage << "0x" << Qt::hex << codepage;
             codec = QTextCodec::codecForName("Latin1");
         }
     }
@@ -143,7 +143,7 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
     }
 
     newOffset <<= addrshift1;
-    //     qDebug() << hex << newOffset;
+    //     qDebug() << Qt::hex << newOffset;
     return newOffset;
 }
 

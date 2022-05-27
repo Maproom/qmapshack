@@ -370,7 +370,7 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     {
         QFontMetrics fm(CMainWindow::self().getMapFont());
         int yoff = fm.height() + fm.ascent();
-        int xoff = fm.width("XX.XXXX") >> 1;
+        int xoff = fm.horizontalAdvance("XX.XXXX") >> 1;
 
         for(const val_t& val : qAsConst(horzTopTicks))
         {
@@ -396,7 +396,7 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     {
         QFontMetrics fm(CMainWindow::self().getMapFont());
         int yoff = fm.height() + fm.ascent();
-        int xoff = fm.width("XXXX") >> 1;
+        int xoff = fm.horizontalAdvance("XXXX") >> 1;
 
         for(const val_t& val : qAsConst(horzTopTicks))
         {

@@ -96,7 +96,7 @@ private:
     QMap<quint64, Qt::CheckState> categoryActivated;
     QMap<quint64, QString> categoryNames;
     // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine enough to not hang the system)
-    QMap<quint64, QMap<int, QMap<int, QList<quint64>>>> loadedPoisByArea;
+    QMap<quint64, QMap<int, QMap<int, QList<quint64> > > > loadedPoisByArea;
     QMap<quint64, CPoiItemPOI> loadedPois;
     QList<poiGroup_t> displayedPois;
     QRectF bbox;

@@ -53,7 +53,7 @@ public:
             items << treeFiles->takeTopLevelItem(0);
         }
 
-        qSort(items.begin(), items.end(), lessThan);
+        std::sort(items.begin(), items.end(), lessThan);
 
         for(QTreeWidgetItem* item : qAsConst(items))
         {

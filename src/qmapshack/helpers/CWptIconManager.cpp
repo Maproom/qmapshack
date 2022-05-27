@@ -332,7 +332,7 @@ QMenu* CWptIconManager::getWptIconMenu(const QString& title, QObject* obj, const
     const QMap<QString, icon_t>& wptIcons = getWptIcons();
     QStringList keys = wptIcons.keys();
 
-    qSort(keys.begin(), keys.end(), sortByString);
+    std::sort(keys.begin(), keys.end(), sortByString);
 
     for(const QString& key : qAsConst(keys))
     {

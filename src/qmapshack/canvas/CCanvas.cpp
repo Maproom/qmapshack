@@ -26,7 +26,6 @@
 #include "gis/GeoMath.h"
 #include "gis/IGisLine.h"
 #include "gis/ovl/CGisItemOvlArea.h"
-#include "poi/IPoiItem.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CTableTrkInfo.h"
 #include "grid/CGrid.h"
@@ -49,6 +48,7 @@
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
 #include "poi/CPoiDraw.h"
+#include "poi/IPoiItem.h"
 #include "realtime/CRtDraw.h"
 #include "units/IUnit.h"
 #include "widgets/CColorLegend.h"
@@ -712,11 +712,11 @@ void CCanvas::wheelEvent(QWheelEvent* e)
 
     zoomAngleDelta = 0;
 
-    QPointF pos = e->posF();
+    QPointF pos = e->position();
     QPointF pt1 = pos;
 
     map->convertPx2Rad(pt1);
-    setZoom(CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0), needsRedraw);
+    setZoom(CMainWindow::self().flipMouseWheel() ? (e->angleDelta().y() < 0) : (e->angleDelta().y() > 0), needsRedraw);
     map->convertRad2Px(pt1);
 
     moveMap(pos - pt1);
@@ -751,7 +751,7 @@ void CCanvas::leaveEvent(QEvent*)
 
 void CCanvas::keyPressEvent(QKeyEvent* e)
 {
-    qDebug() << hex << e->key();
+    qDebug() << Qt::hex << e->key();
     bool doUpdate = true;
 
     switch(e->key())

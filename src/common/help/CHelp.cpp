@@ -17,18 +17,18 @@
 **********************************************************************************************/
 
 #include "CHelp.h"
-#include "help/CHelpIndex.h"
-#include "helpers/CSettings.h"
 #include "help/CHelpBrowser.h"
+#include "help/CHelpIndex.h"
 #include "help/CHelpSearch.h"
+#include "helpers/CSettings.h"
 
 
 #include <QtGui>
 #include <QtHelp>
 
 
-CHelp::CHelp(const QString& helpfile, const QString& homepage, QWidget *parent)
-    : QDockWidget(tr("Help"),parent)
+CHelp::CHelp(const QString& helpfile, const QString& homepage, QWidget* parent)
+    : QDockWidget(tr("Help"), parent)
 {
     setWindowFlag(Qt::Tool, true);
     setAttribute(Qt::WA_DeleteOnClose, true);
@@ -49,7 +49,7 @@ CHelp::CHelp(const QString& helpfile, const QString& homepage, QWidget *parent)
 
     splitter->insertWidget(0, tabWidget);
 
-    CHelpBrowser *browser = new CHelpBrowser(engine, this);
+    CHelpBrowser* browser = new CHelpBrowser(engine, this);
     browser->setSource(QUrl(homepage));
     splitter->insertWidget(1, browser);
 

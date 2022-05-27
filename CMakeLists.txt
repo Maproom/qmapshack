@@ -162,12 +162,12 @@ find_package(QuaZip-Qt5             REQUIRED)
 find_package(ALGLIB                         ) # optional as we can use our local version
 
 
-if(${Qt5Widgets_VERSION} VERSION_LESS 5.8.0)
-    message( SEND_ERROR "You need at least Qt5.8 or newer.")
+if(${Qt5Widgets_VERSION} VERSION_LESS 5.15.2)
+    message( SEND_ERROR "You need at least Qt5.15.2 or newer.")
 endif()
 
-if(${PROJ_VERSION} VERSION_LESS 7.2.1)
-    message( SEND_ERROR "You need at least PROJ 7.2.1 or newer.")
+if(${PROJ_VERSION} VERSION_LESS 8.0.0)
+    message( SEND_ERROR "You need at least PROJ 8.0.0 or newer.")
 endif()
 
 if(USE_QT5DBus)

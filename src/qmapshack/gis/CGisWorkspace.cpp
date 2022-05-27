@@ -32,7 +32,6 @@
 #include "gis/IGisItem.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
-#include "poi/IPoiItem.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
@@ -49,6 +48,7 @@
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
+#include "poi/IPoiItem.h"
 
 #include <QtWidgets>
 #include <QtXml>

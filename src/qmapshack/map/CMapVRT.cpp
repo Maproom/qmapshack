@@ -188,8 +188,8 @@ bool CMapVRT::testForOverviews(const QString& filename)
     {
         file.close();
         throw tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
-        qDebug() << "Failed to read:" << filename << endl
-                 << "line" << line << ", column" << column << endl
+        qDebug() << "Failed to read:" << filename << Qt::endl
+                 << "line" << line << ", column" << column << Qt::endl
                  << msg;
         return false;
     }

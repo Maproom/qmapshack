@@ -35,12 +35,12 @@ void CUnitAviation::meter2distance(qreal meter, QString& val, QString& unit) con
     }
     else if(meter < 1852)
     {
-        val.sprintf("%g", meter * nauticalMilePerMeter);
+        val = QString::asprintf("%g", meter * nauticalMilePerMeter);
         unit = "nm";
     }
     else
     {
-        val.sprintf("%1.1f", meter * nauticalMilePerMeter);
+        val = QString::asprintf("%1.1f", meter * nauticalMilePerMeter);
         unit = "nm";
     }
 }
@@ -68,7 +68,7 @@ void CUnitAviation::meter2area(qreal meter, QString& val, QString& unit) const /
     }
     else
     {
-        val.sprintf("%1.2f", meter / (1 / nauticalMilePerMeter * 1 / nauticalMilePerMeter));
+        val = QString::asprintf("%1.2f", meter / (1 / nauticalMilePerMeter * 1 / nauticalMilePerMeter));
         unit = "nm²";
     }
 }

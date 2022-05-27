@@ -103,8 +103,8 @@ void CScreenshotDialog::slotPrint()
     const QSize& sizePixmap = pixmap.size();
 
     QPrinter printer;
-    printer.setOrientation(sizePixmap.width() > sizePixmap.height() ? QPrinter::Landscape : QPrinter::Portrait);
-    printer.setPaperSize(QPrinter::A4);
+    printer.setPageOrientation(sizePixmap.width() > sizePixmap.height() ? QPageLayout::Landscape : QPageLayout::Portrait);
+    printer.setPageSize(QPageSize(QPageSize::A4));
     printer.setColorMode(QPrinter::Color);
     printer.setResolution(1200);
 

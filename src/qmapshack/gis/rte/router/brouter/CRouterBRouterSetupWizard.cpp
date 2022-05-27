@@ -480,11 +480,11 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
                 textLocalDirectory->setVisible(true);
                 textLocalDirectory->setTextColor(Qt::red);
                 textLocalDirectory->setText(
-                        tr( "Your Java version %1 seems to be older than the required version %2.\n"
-                            "BRouter will probably not work as expected.\n"
-                            "Please check the logs if Brouter fails to start." )
-                        .arg(setup->javaMajorVersion == NOINT ? tr("unknown") : QString::number(setup->javaMajorVersion))
-                        .arg(setup->classMajorVersion));
+                    tr( "Your Java version %1 seems to be older than the required version %2.\n"
+                        "BRouter will probably not work as expected.\n"
+                        "Please check the logs if Brouter fails to start." )
+                    .arg(setup->javaMajorVersion == NOINT ? tr("unknown") : QString::number(setup->javaMajorVersion))
+                    .arg(setup->classMajorVersion));
             }
         }
         else
@@ -646,7 +646,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply* r
             setup->installLocalBRouter(messageList);
             for(const QString& message : messageList)
             {
-               textLocalInstall->append(message);
+                textLocalInstall->append(message);
             }
             messageList.clear();
             downloadDir.removeRecursively();
@@ -658,7 +658,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply* r
         {
             for(const QString& message : messageList)
             {
-               textLocalInstall->append(message);
+                textLocalInstall->append(message);
             }
             if (outfile.isOpen())
             {

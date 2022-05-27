@@ -30,13 +30,13 @@ public:
     CHelpBrowser(QHelpEngine* helpEngine, QWidget* parent);
     virtual ~CHelpBrowser() = default;
 
-    QVariant loadResource (int type, const QUrl& name) override;
+    QVariant loadResource(int type, const QUrl& name) override;
 
 public slots:
     void setSource(const QUrl& url) override;
 
 private:
-    QHelpEngine * engine;
+    QHelpEngine* engine;
 };
 
 #endif //CHELPBROWSER_H

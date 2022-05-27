@@ -19,7 +19,6 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "gis/GeoMath.h"
-#include "poi/IPoiItem.h"
 #include "helpers/CDraw.h"
 #include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"
@@ -30,6 +29,7 @@
 #include "map/garmin/CGarminStrTbl8.h"
 #include "map/garmin/CGarminStrTblUtf8.h"
 #include "map/garmin/CGarminTyp.h"
+#include "poi/IPoiItem.h"
 #include "units/IUnit.h"
 
 #include <QPainterPath>
@@ -657,7 +657,7 @@ void CMapIMG::readBasics()
             QMap<QString, subfile_part_t>::const_iterator part = subfile->parts.begin();
             while(part != subfile->parts.end())
             {
-                qDebug() << part.key() << hex << part->offset << part->size;
+                qDebug() << part.key() << Qt::hex << part->offset << part->size;
                 ++part;
             }
             ++subfile;
@@ -717,9 +717,9 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file)
 #ifdef DEBUG_SHOW_TRE_DATA
     qDebug() << "+++" << subfile.name << "+++";
     qDebug() << "TRE header length  :" << gar_load(uint16_t, pTreHdr->length);
-    qDebug() << "TRE1 offset        :" << hex << gar_load(quint32, pTreHdr->tre1_offset);
+    qDebug() << "TRE1 offset        :" << Qt::hex << gar_load(quint32, pTreHdr->tre1_offset);
     qDebug() << "TRE1 size          :" << dec << gar_load(quint32, pTreHdr->tre1_size);
-    qDebug() << "TRE2 offset        :" << hex << gar_load(quint32, pTreHdr->tre2_offset);
+    qDebug() << "TRE2 offset        :" << Qt::hex << gar_load(quint32, pTreHdr->tre2_offset);
     qDebug() << "TRE2 size          :" << dec << gar_load(quint32, pTreHdr->tre2_size);
 #endif                       // DEBUG_SHOW_TRE_DATA
 
@@ -828,10 +828,10 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file)
     quint32 rgnLenPolyl2 = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->length_polyl2);
     quint32 rgnLenPoint2 = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->length_point2);
 
-    //     qDebug() << "***" << hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset + subfile.parts["RGN"].size);
-    //     qDebug() << "+++" << hex << rgnOffPolyg2 << (rgnOffPolyg2 + rgnLenPolyg2);
-    //     qDebug() << "+++" << hex << rgnOffPolyl2 << (rgnOffPolyl2 + rgnLenPolyl2);
-    //     qDebug() << "+++" << hex << rgnOffPoint2 << (rgnOffPoint2 + rgnLenPoint2);
+    //     qDebug() << "***" << Qt::hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset + subfile.parts["RGN"].size);
+    //     qDebug() << "+++" << Qt::hex << rgnOffPolyg2 << (rgnOffPolyg2 + rgnLenPolyg2);
+    //     qDebug() << "+++" << Qt::hex << rgnOffPolyl2 << (rgnOffPolyl2 + rgnLenPolyl2);
+    //     qDebug() << "+++" << Qt::hex << rgnOffPoint2 << (rgnOffPoint2 + rgnLenPoint2);
 
     // parse all 16 byte subdivision entries
     quint32 i;
@@ -1001,8 +1001,8 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file)
         while(subdiv != subfile.subdivs.end())
         {
             qDebug() << "--- subdiv" << subdiv->n << "---";
-            qDebug() << "RGN start          " << hex << subdiv->rgn_start;
-            qDebug() << "RGN end            " << hex << subdiv->rgn_end;
+            qDebug() << "RGN start          " << Qt::hex << subdiv->rgn_start;
+            qDebug() << "RGN end            " << Qt::hex << subdiv->rgn_end;
             qDebug() << "center lng         " << GARMIN_DEG(subdiv->iCenterLng);
             qDebug() << "center lat         " << GARMIN_DEG(subdiv->iCenterLat);
             qDebug() << "has points         " << subdiv->hasPoints;
@@ -1013,21 +1013,21 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file)
             qDebug() << "map level          " << subdiv->level;
             qDebug() << "left shifts        " << subdiv->shift;
 
-            qDebug() << "polyg off.         " << hex << subdiv->offsetPolygons2;
-            qDebug() << "polyg len.         " << hex << subdiv->lengthPolygons2;
-            qDebug() << "polyl off.         " << hex << subdiv->offsetPolylines2;
-            qDebug() << "polyl len.         " << hex << subdiv->lengthPolylines2;
-            qDebug() << "point off.         " << hex << subdiv->offsetPoints2;
-            qDebug() << "point len.         " << hex << subdiv->lengthPoints2;
+            qDebug() << "polyg off.         " << Qt::hex << subdiv->offsetPolygons2;
+            qDebug() << "polyg len.         " << Qt::hex << subdiv->lengthPolygons2;
+            qDebug() << "polyl off.         " << Qt::hex << subdiv->offsetPolylines2;
+            qDebug() << "polyl len.         " << Qt::hex << subdiv->lengthPolylines2;
+            qDebug() << "point off.         " << Qt::hex << subdiv->offsetPoints2;
+            qDebug() << "point len.         " << Qt::hex << subdiv->lengthPoints2;
             ++subdiv;
         }
     }
 #endif                       // DEBUG_SHOW_SUBDIV_DATA
 
-    //     qDebug() << "***" << hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset + subfile.parts["RGN"].size);
-    //     qDebug() << "+++" << hex << rgnOffPolyg2 << (rgnOffPolyg2 + pRgnHdr->length_polyg2);
-    //     qDebug() << "+++" << hex << rgnOffPolyl2 << (rgnOffPolyl2 + pRgnHdr->length_polyl2);
-    //     qDebug() << "+++" << hex << rgnOffPoint2 << (rgnOffPoint2 + pRgnHdr->length_point2);
+    //     qDebug() << "***" << Qt::hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset + subfile.parts["RGN"].size);
+    //     qDebug() << "+++" << Qt::hex << rgnOffPolyg2 << (rgnOffPolyg2 + pRgnHdr->length_polyg2);
+    //     qDebug() << "+++" << Qt::hex << rgnOffPolyl2 << (rgnOffPolyl2 + pRgnHdr->length_polyl2);
+    //     qDebug() << "+++" << Qt::hex << rgnOffPoint2 << (rgnOffPoint2 + pRgnHdr->length_point2);
 
     if(subfile.parts.contains("LBL"))
     {
@@ -1054,7 +1054,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file)
             codepage = gar_load(uint16_t, pLblHdr->codepage);
         }
 
-        //         qDebug() << file.fileName() << hex << offsetLbl1 << offsetLbl6 << offsetNet1;
+        //         qDebug() << file.fileName() << Qt::hex << offsetLbl1 << offsetLbl6 << offsetNet1;
 
         switch(pLblHdr->coding)
         {
@@ -1071,7 +1071,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file)
             break;
 
         default:
-            qWarning() << "Unknown label coding" << hex << pLblHdr->coding;
+            qWarning() << "Unknown label coding" << Qt::hex << pLblHdr->coding;
         }
 
         if(nullptr != subfile.strtbl)
@@ -1108,7 +1108,7 @@ void CMapIMG::processPrimaryMapData()
     }
 
     /* Sort all entries, note that stable sort should insure that basemap is preferred when available. */
-    qStableSort(maplevels.begin(), maplevels.end(), map_level_t::GreaterThan);
+    std::stable_sort(maplevels.begin(), maplevels.end(), map_level_t::GreaterThan);
     /* Delete any duplicates for obvious performance reasons. */
     auto where = std::unique(maplevels.begin(), maplevels.end());
     maplevels.erase(where, maplevels.end());
@@ -1292,7 +1292,7 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
     {
         loadVisibleData(false, polygons, polylines, points, pois, maplevel->level, viewport, p);
     }
-    catch(std::bad_alloc)
+    catch(const std::bad_alloc &)
     {
         qWarning() << "GarminIMG: Allocation error. Abort map rendering.";
         p.restore();
@@ -1382,7 +1382,7 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
         QByteArray rgndata;
         readFile(file, subfile.parts["RGN"].offset, subfile.parts["RGN"].size, rgndata);
 
-        // qDebug() << "rgn range" << hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset + subfile.parts["RGN"].size);
+        // qDebug() << "rgn range" << Qt::hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset + subfile.parts["RGN"].size);
 
         const QVector<subdiv_desc_t>& subdivs = subfile.subdivs;
         // collect polylines
@@ -1510,11 +1510,11 @@ void CMapIMG::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStr
 
 #ifdef DEBUG_SHOW_POLY_DATA
     qDebug() << "--- Subdivision" << subdiv.n << "---";
-    qDebug() << "address:" << hex << subdiv.rgn_start << "- " << subdiv.rgn_end;
-    qDebug() << "points:            " << hex << opnt;
-    qDebug() << "indexed points:    " << hex << oidx;
-    qDebug() << "polylines:         " << hex << opline;
-    qDebug() << "polygons:          " << hex << opgon;
+    qDebug() << "address:" << Qt::hex << subdiv.rgn_start << "- " << subdiv.rgn_end;
+    qDebug() << "points:            " << Qt::hex << opnt;
+    qDebug() << "indexed points:    " << Qt::hex << oidx;
+    qDebug() << "polylines:         " << Qt::hex << opline;
+    qDebug() << "polygons:          " << Qt::hex << opgon;
 #endif                       // DEBUG_SHOW_POLY_DATA
 
     CGarminPolygon p;
@@ -1630,16 +1630,16 @@ void CMapIMG::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStr
     }
 
     //         qDebug() << "--- Subdivision" << subdiv.n << "---";
-    //         qDebug() << "adress:" << hex << subdiv.rgn_start << "- " << subdiv.rgn_end;
-    //         qDebug() << "polyg off: " << hex << subdiv.offsetPolygons2;
-    //         qDebug() << "polyg len: " << hex << subdiv.lengthPolygons2 << dec << subdiv.lengthPolygons2;
-    //         qDebug() << "polyg end: " << hex << subdiv.lengthPolygons2 + subdiv.offsetPolygons2;
-    //         qDebug() << "polyl off: " << hex << subdiv.offsetPolylines2;
-    //         qDebug() << "polyl len: " << hex << subdiv.lengthPolylines2 << dec << subdiv.lengthPolylines2;
-    //         qDebug() << "polyl end: " << hex << subdiv.lengthPolylines2 + subdiv.offsetPolylines2;
-    //         qDebug() << "point off: " << hex << subdiv.offsetPoints2;
-    //         qDebug() << "point len: " << hex << subdiv.lengthPoints2 << dec << subdiv.lengthPoints2;
-    //         qDebug() << "point end: " << hex << subdiv.lengthPoints2 + subdiv.offsetPoints2;
+    //         qDebug() << "adress:" << Qt::hex << subdiv.rgn_start << "- " << subdiv.rgn_end;
+    //         qDebug() << "polyg off: " << Qt::hex << subdiv.offsetPolygons2;
+    //         qDebug() << "polyg len: " << Qt::hex << subdiv.lengthPolygons2 << dec << subdiv.lengthPolygons2;
+    //         qDebug() << "polyg end: " << Qt::hex << subdiv.lengthPolygons2 + subdiv.offsetPolygons2;
+    //         qDebug() << "polyl off: " << Qt::hex << subdiv.offsetPolylines2;
+    //         qDebug() << "polyl len: " << Qt::hex << subdiv.lengthPolylines2 << dec << subdiv.lengthPolylines2;
+    //         qDebug() << "polyl end: " << Qt::hex << subdiv.lengthPolylines2 + subdiv.offsetPolylines2;
+    //         qDebug() << "point off: " << Qt::hex << subdiv.offsetPoints2;
+    //         qDebug() << "point len: " << Qt::hex << subdiv.lengthPoints2 << dec << subdiv.lengthPoints2;
+    //         qDebug() << "point end: " << Qt::hex << subdiv.lengthPoints2 + subdiv.offsetPoints2;
 
     if(subdiv.lengthPolygons2 && getShowPolygons())
     {
@@ -1647,7 +1647,7 @@ void CMapIMG::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStr
         const quint8* pEnd = pData + subdiv.lengthPolygons2;
         while(pData < pEnd)
         {
-            //             qDebug() << "rgn offset:" << hex << (rgnoff + (pData - pRawData));
+            //             qDebug() << "rgn offset:" << Qt::hex << (rgnoff + (pData - pRawData));
             pData += p.decode2(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, false, pData, pEnd);
 
             // skip points outside our current viewport
@@ -1671,7 +1671,7 @@ void CMapIMG::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStr
         const quint8* pEnd = pData + subdiv.lengthPolylines2;
         while(pData < pEnd)
         {
-            //             qDebug() << "rgn offset:" << hex << (rgnoff + (pData - pRawData));
+            //             qDebug() << "rgn offset:" << Qt::hex << (rgnoff + (pData - pRawData));
             pData += p.decode2(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, true, pData, pEnd);
 
             // skip points outside our current viewport
@@ -1696,7 +1696,7 @@ void CMapIMG::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStr
         while(pData < pEnd)
         {
             CGarminPoint p;
-            //             qDebug() << "rgn offset:" << hex << (rgnoff + (pData - pRawData));
+            //             qDebug() << "rgn offset:" << Qt::hex << (rgnoff + (pData - pRawData));
             pData += p.decode2(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, pData, pEnd);
 
             // skip points outside our current viewport
@@ -1742,7 +1742,7 @@ void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines)
 
             if(!polygonProperties[type].known)
             {
-                qDebug() << "unknown polygon" << hex << type;
+                qDebug() << "unknown polygon" << Qt::hex << type;
             }
         }
     }

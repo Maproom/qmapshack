@@ -26,7 +26,7 @@ CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser* textBrowser, QWid
 {
     setTextBrowser(textBrowser);
     connect(&cmd, &QProcess::stateChanged, this, &CRouterBRouterToolShell::slotStateChanged);
-    connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), this, &CRouterBRouterToolShell::slotError);
+    connect(&cmd, &QProcess::errorOccurred, this, &CRouterBRouterToolShell::slotError);
     startupTimer = new QTimer(this);
     startupTimer->setSingleShot(true);
     connect(startupTimer, &QTimer::timeout, this, &CRouterBRouterToolShell::slotStartupTimer);

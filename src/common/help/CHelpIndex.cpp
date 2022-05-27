@@ -22,15 +22,14 @@
 #include <QtHelp>
 #include <QtWidgets>
 
-CHelpIndex::CHelpIndex(QHelpEngine *engine, QWidget *parent)
+CHelpIndex::CHelpIndex(QHelpEngine* engine, QWidget* parent)
     : QWidget(parent)
 {
-
     labelSearch = new QLabel(tr("Search:"), this);
     lineSearch = new QLineEdit(this);
     index = engine->indexWidget();
 
-    QVBoxLayout * l = new QVBoxLayout(this);
+    QVBoxLayout* l = new QVBoxLayout(this);
     l->addWidget(labelSearch);
     l->addWidget(lineSearch);
     l->addWidget(index);

@@ -261,7 +261,7 @@ void COverlayCutMap::saveShape(const QString& filename)
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
 
-    out << "id,WKT" << endl;
+    out << "id,WKT" << Qt::endl;
     out << "1,\"POLYGON((";
 
     bool first = true;
@@ -278,7 +278,7 @@ void COverlayCutMap::saveShape(const QString& filename)
 
         out << qRound(pt1.x()) << " " << qRound(pt1.y());
     }
-    out << "))\"" << endl;
+    out << "))\"" << Qt::endl;
 }
 
 void COverlayCutMap::slotLoadShape()

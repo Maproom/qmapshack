@@ -92,11 +92,11 @@ const QSet<QString> CMainWindow::paths = {mapsPath, poisPath, demPath, routinoPa
 QMutex CMainWindow::mutex(QMutex::NonRecursive);
 
 CMainWindow::CMainWindow()
-    : id(qrand())
+    : id(QRandomGenerator::global()->generate())
 {
     qDebug() << "Application ID:" << id;
     SETTINGS;
-    homeDir = cfg.value("Paths/homePath", "").toString();
+    homeDir.setPath(cfg.value("Paths/homePath", "").toString());
 
     pSelf = this;
     setupUi(this);
@@ -633,14 +633,14 @@ CMainWindow::~CMainWindow()
 void CMainWindow::setupHomePath()
 {
     SETTINGS;
-    homeDir = cfg.value("Paths/homePath", QDir::homePath()).toString();
+    homeDir.setPath(cfg.value("Paths/homePath", QDir::homePath()).toString());
     const QString& homePath = QFileDialog::getExistingDirectory(this, tr("Select folder..."), homeDir.absolutePath());
     if(homePath.isEmpty())
     {
         return;
     }
 
-    homeDir = homePath;
+    homeDir.setPath(homePath);
     for(const QString& path : paths)
     {
         if(!homeDir.exists(path))
@@ -1734,7 +1734,7 @@ void CMainWindow::slotFullScreen()
 
 void CMainWindow::slotStartQMapTool()
 {
-    QProcess::startDetached("qmaptool");
+    QProcess::startDetached("qmaptool", {});
 }
 
 void CMainWindow::slotGeoSearchConfigChanged()
@@ -1919,7 +1919,7 @@ void CMainWindow::slotSanityTest()
         }
         qDebug() << "Sanity test passed.";
     }
-    catch(const QException& e)
+    catch(const QException& /*e*/)
     {
         QMessageBox::critical(this, tr("Fatal...")
                               , tr("QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.")

@@ -27,7 +27,7 @@
 #include "CMainWindow.h"
 inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
 {
-    p.setRenderHints(QPainter::TextAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing, useAntiAliasing);
+    p.setRenderHints(QPainter::TextAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform, useAntiAliasing);
 }
 
 #define RECT_RADIUS 3

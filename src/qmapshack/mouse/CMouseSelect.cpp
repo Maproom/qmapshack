@@ -19,12 +19,12 @@
 #include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
-#include "poi/IPoiItem.h"
 #include "gis/trk/CActivityTrk.h"
 #include "helpers/CTryMutexLocker.h"
 #include "helpers/CWptIconManager.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CScrOptSelect.h"
+#include "poi/IPoiItem.h"
 
 #include <QtWidgets>
 

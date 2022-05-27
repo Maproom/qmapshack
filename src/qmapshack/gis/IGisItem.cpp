@@ -1082,7 +1082,7 @@ const QSet<QString>& IGisItem::getKeywords() const
 
 QList<QString> IGisItem::getKeywordsSorted() const
 {
-    QList<QString> sortedKeywords = keywords.toList();
+    QList<QString> sortedKeywords = keywords.values();
     std::sort(sortedKeywords.begin(), sortedKeywords.end(), sortByString);
     return sortedKeywords;
 }

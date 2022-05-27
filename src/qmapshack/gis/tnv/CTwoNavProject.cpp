@@ -224,11 +224,11 @@ bool CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename
         }
     }
 
-    out << bom;
-    out << "B  UTF-8" << endl;
-    out << "G  WGS 84" << endl;
-    out << "U  1" << endl;
-    out << "z " << west << ", " << south << ", " << east << ", " << north << endl;
+    out << Qt::bom;
+    out << "B  UTF-8" << Qt::endl;
+    out << "G  WGS 84" << Qt::endl;
+    out << "U  1" << Qt::endl;
+    out << "z " << west << ", " << south << ", " << east << ", " << north << Qt::endl;
 
     for(CGisItemWpt* wpt : wpts)
     {

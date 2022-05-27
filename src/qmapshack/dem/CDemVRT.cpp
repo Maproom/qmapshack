@@ -435,7 +435,6 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
 
                     drawTile(img, r, p);
                 }
-
             }
         }
 
@@ -454,14 +453,14 @@ void CDemVRT::drawElevationShadeScale(QPainter& p) const
         QRect visibleCanvasArea = CMainWindow::self().getVisibleCanvas()->rect();
         qreal limitLow = std::min(getElevationShadeLimitLow(), getElevationShadeLimitHi());
         qreal limitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
-        CDraw::text(tr("Ele."), p, QPointF(visibleCanvasArea.width() - 70,30), Qt::black);
+        CDraw::text(tr("Ele."), p, QPointF(visibleCanvasArea.width() - 70, 30), Qt::black);
 
         // labels
         int nmbOfLabels = 7;
         int yOffset = 30;
         for(int i = 0; i < nmbOfLabels; i++)
         {
-            qreal meter = i / (double) (nmbOfLabels-1) * (limitHi - limitLow) + limitLow;
+            qreal meter = i / (double) (nmbOfLabels - 1) * (limitHi - limitLow) + limitLow;
             QString val, unit;
             IUnit::self().meter2elevation(meter, val, unit);
             CDraw::text(QString("%1 %2").arg(val, unit), p, QPointF(visibleCanvasArea.width() - 70, 50 + (nmbOfLabels - 1 - i) * yOffset), Qt::black);
@@ -470,7 +469,7 @@ void CDemVRT::drawElevationShadeScale(QPainter& p) const
         // color bar
         for(int i = yOffset + 10; i <= nmbOfLabels * yOffset; i++)
         {
-            qreal hue = 240 * (1 - (double) (i - yOffset - 10.) /(nmbOfLabels * yOffset - yOffset - 10));
+            qreal hue = 240 * (1 - (double) (i - yOffset - 10.) / (nmbOfLabels * yOffset - yOffset - 10));
             const QColor& color = QColor::fromHsv(hue, 255, 255);
             p.setPen(color);
             p.drawLine(QPointF(visibleCanvasArea.width() - 30, yOffset + 10 + (nmbOfLabels * yOffset) - i), QPointF(visibleCanvasArea.width() - 15, yOffset + 10 + (nmbOfLabels * yOffset) - i));

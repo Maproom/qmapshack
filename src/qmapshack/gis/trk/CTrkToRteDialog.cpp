@@ -18,8 +18,8 @@
 
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
-#include "helpers/CSettings.h"
 #include "gis/trk/CTrkToRteDialog.h"
+#include "helpers/CSettings.h"
 
 CTrkToRteDialog::CTrkToRteDialog(IGisProject*& project, QString& routeName, bool& saveSubPoints)
     : QDialog(CMainWindow::getBestWidgetForParent())

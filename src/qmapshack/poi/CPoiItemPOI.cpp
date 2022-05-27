@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "poi/IPoiItem.h"
 #include "poi/CPoiItemPOI.h"
+#include "poi/IPoiItem.h"
 
 #include <QDebug>
 #include <QRegularExpression>

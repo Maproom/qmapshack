@@ -358,7 +358,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
     try
     {
-        QTime time;
+        QElapsedTimer time;
         time.start();
 
         CGisItemRte* rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));

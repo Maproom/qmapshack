@@ -133,7 +133,6 @@ void IDem::saveConfig(QSettings& cfg)
     cfg.setValue("elevationShadeLimitLow", elevationShadeLimitLow);
     cfg.setValue("elevationShadeLimitHi", elevationShadeLimitHi);
     cfg.setValue("showElevationShadeScale", bShowElevationShadeScale);
-
 }
 
 void IDem::loadConfig(QSettings& cfg)
@@ -227,7 +226,7 @@ void IDem::initElevationShadeTable()
     for(int i = 0; i < 254; i++)
     {
         const QColor& color = QColor::fromHsv(240. * (253 - i) / 253, 255, 255);
-        elevationShadeTable[i+1] = color.rgb();
+        elevationShadeTable[i + 1] = color.rgb();
     }
     elevationShadeTable[255] = qRgba(180, 180, 180, 255);
 }
@@ -305,7 +304,7 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img) con
 
 int IDem::getFactorSlopeShading() const
 {
-    return (factorSlopeShading * 100.);
+    return factorSlopeShading * 100.;
 }
 
 void IDem::slopeShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const
@@ -333,9 +332,12 @@ void IDem::slopeShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) co
             }
             else
             {
-                int alphaValue = slope * 255./90. // map slope angle to alpha [0 .. 255]
-                               * factorSlopeShading; // apply slider value [0.25 .. 3.0]
-                if (alphaValue > 255) alphaValue = 255;
+                int alphaValue = slope * 255. / 90. // map slope angle to alpha [0 .. 255]
+                                 * factorSlopeShading; // apply slider value [0.25 .. 3.0]
+                if (alphaValue > 255)
+                {
+                    alphaValue = 255;
+                }
                 scan[n - 1] = alphaValue;
             }
         }

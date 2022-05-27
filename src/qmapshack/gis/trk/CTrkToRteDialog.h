@@ -19,8 +19,8 @@
 #ifndef CTRKTORTEDIALOG_H
 #define CTRKTORTEDIALOG_H
 
-#include "gis/prj/IGisProject.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/prj/IGisProject.h"
 #include "ui_ITrkToRteDialog.h"
 
 class QTreeWidget;

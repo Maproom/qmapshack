@@ -22,7 +22,7 @@
 
 #include <QtWidgets>
 
-QMutex IRtSource::mutex(QMutex::Recursive);
+QRecursiveMutex IRtSource::mutex;
 
 IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget* parent)
     : QObject(parent)

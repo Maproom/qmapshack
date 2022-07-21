@@ -45,7 +45,7 @@ signals:
 
 protected:
     /// Mutex to control access to url queue
-    QMutex mutex {QMutex::Recursive};
+    QRecursiveMutex mutex;
     /// a queue with all tile urls to request
     QQueue<QString> urlQueue;
     /// the tile cache

@@ -21,10 +21,11 @@
 
 #include <QMutex>
 
+template <typename T>
 class CTryMutexLocker
 {
 public:
-    CTryMutexLocker(QMutex& mutex) : m_mutex(mutex){}
+    CTryMutexLocker(T& mutex) : m_mutex(mutex){}
     ~CTryMutexLocker()
     {
         if(needsUnlock)
@@ -38,7 +39,7 @@ public:
         return needsUnlock;
     }
 private:
-    QMutex& m_mutex;
+    T& m_mutex;
     bool needsUnlock {false};
 };
 

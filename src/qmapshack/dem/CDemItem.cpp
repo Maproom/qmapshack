@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 
-QMutex CDemItem::mutexActiveDems(QMutex::Recursive);
+QRecursiveMutex CDemItem::mutexActiveDems;
 
 CDemItem::CDemItem(QTreeWidget* parent, CDemDraw* dem)
     : QTreeWidgetItem(parent)

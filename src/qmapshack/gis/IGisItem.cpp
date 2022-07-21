@@ -40,7 +40,7 @@
 #include <QtWidgets>
 #include <QtXml>
 
-QMutex IGisItem::mutexItems(QMutex::Recursive);
+QRecursiveMutex IGisItem::mutexItems;
 
 const QString IGisItem::noKey;
 

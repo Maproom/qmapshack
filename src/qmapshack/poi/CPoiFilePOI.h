@@ -88,7 +88,7 @@ private:
     bool overlapsWithIcon(const QRectF& rect) const;
     bool getPoiGroupCloseBy(const QPoint& px, poiGroup_t& poiItem) const;
 
-    mutable QMutex mutex {QMutex::Recursive};
+    mutable QRecursiveMutex mutex;
     QString filename;
     QTimer* loadTimer;
 

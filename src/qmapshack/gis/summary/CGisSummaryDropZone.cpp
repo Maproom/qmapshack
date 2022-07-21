@@ -56,9 +56,8 @@ void CGisSummaryDropZone::dragEnterEvent(QDragEnterEvent* e)
         return QLabel::dragEnterEvent(e);
     }
 
-    setHighlighted(true);
-    e->setDropAction(Qt::CopyAction);
-    if(e->proposedAction() == Qt::CopyAction)
+    setHighlighted(true);   
+    if(e->proposedAction() == Qt::MoveAction)
     {
         e->acceptProposedAction();
     }
@@ -74,7 +73,7 @@ void CGisSummaryDropZone::dragMoveEvent(QDragMoveEvent* e)
 
 
     e->setDropAction(Qt::CopyAction);
-    if(e->proposedAction() == Qt::CopyAction)
+    if(e->proposedAction() == Qt::MoveAction)
     {
         e->acceptProposedAction();
     }
@@ -89,7 +88,7 @@ void CGisSummaryDropZone::dragLeaveEvent(QDragLeaveEvent* e)
 void CGisSummaryDropZone::dropEvent(QDropEvent* e)
 {
     e->setDropAction(Qt::CopyAction);
-    if(e->proposedAction() == Qt::CopyAction)
+    if(e->proposedAction() == Qt::MoveAction)
     {
         setHighlighted(false);
         e->acceptProposedAction();

@@ -74,7 +74,7 @@
 class CGisListWksEditLock
 {
 public:
-    CGisListWksEditLock(bool waitCursor, QMutex& mutex) : mutex(mutex), waitCursor(waitCursor)
+    CGisListWksEditLock(bool waitCursor, QRecursiveMutex& mutex) : mutex(mutex), waitCursor(waitCursor)
     {
         if(waitCursor)
         {
@@ -91,7 +91,7 @@ public:
         mutex.unlock();
     }
 private:
-    QMutex& mutex;
+    QRecursiveMutex& mutex;
     bool waitCursor;
 };
 

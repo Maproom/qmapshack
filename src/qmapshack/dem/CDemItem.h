@@ -40,7 +40,7 @@ public:
     /**
        @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronized.
      */
-    static QMutex mutexActiveDems;
+    static QRecursiveMutex mutexActiveDems;
 
     /**
        @brief Query if dem objects are loaded

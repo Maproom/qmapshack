@@ -147,7 +147,7 @@ protected:
 
     void zoom(int idx);
 
-    static QMutex mutex;
+    static QRecursiveMutex mutex;
 
     /// internal needs redraw flag
     bool intNeedsRedraw = true;

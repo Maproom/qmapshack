@@ -247,7 +247,7 @@ void CPoiFilePOI::draw(IDrawContext::buffer_t& buf)
 
 bool CPoiFilePOI::findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
-    CTryMutexLocker lock(mutex);
+    CTryMutexLocker<QRecursiveMutex> lock(mutex);
     if(!lock.try_lock())
     {
         return false;
@@ -268,7 +268,7 @@ bool CPoiFilePOI::findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QLi
 
 void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<QPointF>& posPoiHighlight)
 {
-    CTryMutexLocker lock(mutex);
+    CTryMutexLocker<QRecursiveMutex> lock(mutex);
     if(!lock.try_lock())
     {
         return;
@@ -325,7 +325,7 @@ void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<
 
 bool CPoiFilePOI::getToolTip(const QPoint& px, QString& str) const
 {
-    CTryMutexLocker lock(mutex);
+    CTryMutexLocker<QRecursiveMutex> lock(mutex);
     if(!lock.try_lock())
     {
         return false;

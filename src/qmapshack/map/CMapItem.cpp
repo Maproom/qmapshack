@@ -29,7 +29,7 @@
 #include "map/IMapProp.h"
 #include <QtGui>
 
-QMutex CMapItem::mutexActiveMaps(QMutex::Recursive);
+QRecursiveMutex CMapItem::mutexActiveMaps;
 
 CMapItem::CMapItem(QTreeWidget* parent, CMapDraw* map)
     : QTreeWidgetItem(parent)

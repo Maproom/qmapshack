@@ -89,7 +89,7 @@ const QString CMainWindow::databasePath = "Databases";
 const QString CMainWindow::gpxPath = "GPX";
 const QSet<QString> CMainWindow::paths = {mapsPath, poisPath, demPath, routinoPath, brouterPath, databasePath, gpxPath};
 
-QMutex CMainWindow::mutex(QMutex::NonRecursive);
+QMutex CMainWindow::mutex;
 
 CMainWindow::CMainWindow()
     : id(QRandomGenerator::global()->generate())

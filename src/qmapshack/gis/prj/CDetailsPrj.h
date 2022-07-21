@@ -110,7 +110,7 @@ private:
 
     QTimer* timerUpdateTime;
 
-    QMutex mutex {QMutex::NonRecursive};
+    QMutex mutex;
 };
 
 #endif //CDETAILSPRJ_H

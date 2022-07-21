@@ -28,7 +28,7 @@
 
 #include <QtWidgets>
 
-QMutex CMouseSelect::mutex(QMutex::NonRecursive);
+QMutex CMouseSelect::mutex;
 
 CMouseSelect::CMouseSelect(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouseSelect(gis, canvas, mouse)
@@ -65,7 +65,7 @@ CMouseSelect::~CMouseSelect()
 
 void CMouseSelect::findItems(QList<IGisItem*>& items)
 {
-    CTryMutexLocker lock(mutex);
+    CTryMutexLocker<QMutex> lock(mutex);
     if(!lock.try_lock())
     {
         return;

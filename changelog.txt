@@ -12,6 +12,7 @@ V1.XX.X
 [QMS-517] GPX-tracks are not displayed if lon or lat are invariant over the entire track
 [QMS-522] Change URLs of built-in maps from http to https
 [QMS-526] Fix deprecation warnings
+[QMS-537] Moving items to drop zone removes them from workspace
 
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing

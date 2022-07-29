@@ -21,6 +21,7 @@ function extendAppStructure {
 function copyAdditionalLibraries {
     cp -v    $ROUTINO_LIB_LIB_DIR/libroutino.so $BUILD_BUNDLE_FRW_DIR
     cp -v    $QUAZIP_LIB_LIB_DIR/libquazip.1.dylib $BUILD_BUNDLE_FRW_DIR
+    cp -v    $GEOS_LIB_DIR/libgeos*.dylib $BUILD_BUNDLE_FRW_DIR
 
     cp -v    $DBUS_DIR/libdbus-1.3.dylib $BUILD_BUNDLE_FRW_DIR
 
@@ -53,8 +54,17 @@ function copyExternalHelpFiles_QMS {
 
 
 function copyExtTools {
-    # at least gdalbuildvrt is used
-    cp -v $GDAL_DIR/bin/*                       $BUILD_BUNDLE_RES_BIN_DIR
+    #cp -v $GDAL_DIR/bin/*                       $BUILD_BUNDLE_RES_BIN_DIR
+    # check for homebrew
+    if command -v brew > /dev/null 2>&1; then
+        # 1. 'brew list gdal': find all gdal files installed by homebrew
+        # 2. 'grep bin": select only files in the bin folder
+        # 3. copy those files to BUILD_BUNDLE_RES_BIN_DIR
+        brew list gdal | grep bin | xargs -J % cp -v % $BUILD_BUNDLE_RES_BIN_DIR
+    else
+        # at least gdalbuildvrt is used
+        cp -v $GDAL_DIR/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
+    fi
     cp -v $PROJ_DIR/bin/proj                    $BUILD_BUNDLE_RES_BIN_DIR
     cp -v $ROUTINO_LIB_LIB_DIR/planetsplitter   $BUILD_BUNDLE_RES_BIN_DIR
 

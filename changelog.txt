@@ -14,6 +14,7 @@ V1.XX.X
 [QMS-522] Change URLs of built-in maps from http to https
 [QMS-526] Fix deprecation warnings
 [QMS-537] Moving items to drop zone removes them from workspace
+[QMS-540] MacOS: Updating bundle with GEOS and proper GDAS binaries
 
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing

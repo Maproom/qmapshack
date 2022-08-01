@@ -41,15 +41,6 @@ CDateTimeEditor::CDateTimeEditor(QWidget* parent) : QWidget(parent)
     addGroup(MINUTE, 0, 59, 'M');
     addGroup(SECOND, 0, 59, 'S');
 
-    addCharacter(HOUR, "012");
-    addCharacter(HOUR, "0123456789");
-    addFixedCharacter(':');
-    addCharacter(MINUTE, "012345");
-    addCharacter(MINUTE, "0123456789");
-    addFixedCharacter(':');
-    addCharacter(SECOND, "012345");
-    addCharacter(SECOND, "0123456789");
-    addFixedCharacter(' ');
     addCharacter(YEAR, "0123456789");
     addCharacter(YEAR, "0123456789");
     addCharacter(YEAR, "0123456789");
@@ -60,6 +51,16 @@ CDateTimeEditor::CDateTimeEditor(QWidget* parent) : QWidget(parent)
     addFixedCharacter('-');
     addCharacter(DAY, "0123");
     addCharacter(DAY, "0123456789");
+    addFixedCharacter(' ');
+    addCharacter(HOUR, "012");
+    addCharacter(HOUR, "0123456789");
+    addFixedCharacter(':');
+    addCharacter(MINUTE, "012345");
+    addCharacter(MINUTE, "0123456789");
+    addFixedCharacter(':');
+    addCharacter(SECOND, "012345");
+    addCharacter(SECOND, "0123456789");
+
 
     m_selectedPosition = -1;
     m_selectedGroup = NONE;

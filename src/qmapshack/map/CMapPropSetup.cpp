@@ -101,6 +101,10 @@ void CMapPropSetup::slotPropertiesChanged() /* override */
     labelCachePath->setToolTip(lbl);
     spinCacheSize->setValue(mapfile->getCacheSize());
     spinCacheExpiration->setValue(mapfile->getCacheExpiration());
+    if(mapfile->hasFeatureLayers())
+    {
+        mapfile->getLayers(*listLayers);
+    }
 
     // type file
     QFileInfo fi(mapfile->getTypeFile());

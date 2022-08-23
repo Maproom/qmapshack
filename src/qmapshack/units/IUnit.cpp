@@ -777,7 +777,7 @@ QDateTime IUnit::parseTimestamp(const QString& timetext, int& tzoffset)
     return datetime;
 }
 
-QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPointF& pos)
+QString IUnit::datetime2string(const QDateTime& time, time_format_e format, const QPointF& pos)
 {
     QTimeZone tz;
 
@@ -803,8 +803,18 @@ QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPoi
     }
 
     QDateTime tmp = time.toTimeZone(tz);
-    const QString& format = QLocale().dateTimeFormat((shortDate | useShortFormat) ? QLocale::ShortFormat : QLocale::LongFormat);
-    return tmp.toString(format);
+
+    switch(format)
+    {
+    case eTimeFormatLong:
+        return tmp.toString(QLocale().dateTimeFormat(useShortFormat ? QLocale::ShortFormat: QLocale::LongFormat));
+    case eTimeFormatShort:
+        return tmp.toString(QLocale().dateTimeFormat(QLocale::ShortFormat));
+    case eTimeFormatIso:
+        return tmp.toString(Qt::ISODate);
+    }
+
+    return tmp.toString(QLocale().dateTimeFormat(QLocale::LongFormat));
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos)

@@ -265,7 +265,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
     setWindowTitle(prj.getName());
 
-    labelTime->setText(IUnit::datetime2string(prj.getTime(), false));
+    labelTime->setText(IUnit::datetime2string(prj.getTime(), IUnit::eTimeFormatLong));
 
     QString keywords = prj.getKeywords();
     if(keywords.isEmpty())
@@ -673,7 +673,7 @@ QList<wpt_info_t> CDetailsPrj::getWptInfo(const CGisItemTrk& trk) const
 
             if(!hasValidTime && trkpt.time.isValid())
             {
-                info.info += "<br/>" + tr("Created: %1").arg(IUnit::datetime2string(trkpt.time, false, QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD)));
+                info.info += "<br/>" + tr("Created: %1").arg(IUnit::datetime2string(trkpt.time, IUnit::eTimeFormatLong, QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD)));
             }
 
             CWptIconManager& wptMgr = CWptIconManager::self();
@@ -716,7 +716,7 @@ QString CDetailsPrj::getNameAndTime(const wpt_info_t& info, const CGisItemTrk& t
     if (arrivalTime.isValid())
     {
         str += info.info + "<br/>\n" +
-               tr("Arrival: ") + QString("%1").arg(IUnit::datetime2string(arrivalTime.addSecs(info.elapsedSeconds1), false));
+               tr("Arrival: ") + QString("%1").arg(IUnit::datetime2string(arrivalTime.addSecs(info.elapsedSeconds1), IUnit::eTimeFormatLong));
     }
     else
     {

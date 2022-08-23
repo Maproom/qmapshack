@@ -51,7 +51,7 @@ static QDateTime toDateTime(quint32 timestamp)
 static QString dateTimeAsString(quint32 timestamp)
 {
     QDateTime dateTime = toDateTime(timestamp);
-    return IUnit::datetime2string(dateTime, true);
+    return IUnit::datetime2string(dateTime, IUnit::eTimeFormatIso, NOPOINTF);
 }
 
 template<typename T>

@@ -109,7 +109,7 @@ void CDetailsWpt::setupGui()
 
     if(wpt.getTimestamp().isValid())
     {
-        const QString& strTime = IUnit::datetime2string(wpt.getTimestamp(), false, QPointF(pos.x() * DEG_TO_RAD, pos.y() * DEG_TO_RAD));
+        const QString& strTime = IUnit::datetime2string(wpt.getTimestamp(), IUnit::eTimeFormatLong, QPointF(pos.x() * DEG_TO_RAD, pos.y() * DEG_TO_RAD));
         labelTime->setText(IGisItem::toLink(isReadOnly, "time", strTime, ""));
     }
     else

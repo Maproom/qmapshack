@@ -548,7 +548,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 
     if(timeIsValid && timeStart.isValid())
     {
-        str += tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center()));
+        str += tr("Start: %1").arg(IUnit::datetime2string(timeStart, IUnit::eTimeFormatLong, boundingRect.center()));
     }
     else
     {
@@ -558,7 +558,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 
     if(timeIsValid && timeEnd.isValid())
     {
-        str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center()));
+        str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, IUnit::eTimeFormatLong, boundingRect.center()));
     }
     else
     {
@@ -735,7 +735,7 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
 
     if(totalElapsedSeconds != 0)
     {
-        str += IUnit::datetime2string(pt.time, false, QPointF(pt.lon, pt.lat) * DEG_TO_RAD);
+        str += IUnit::datetime2string(pt.time, IUnit::eTimeFormatLong, QPointF(pt.lon, pt.lat) * DEG_TO_RAD);
         str += "\n";
     }
 

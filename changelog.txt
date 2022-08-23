@@ -17,6 +17,7 @@ V1.XX.X
 [QMS-537] Moving items to drop zone removes them from workspace
 [QMS-540] MacOS: Updating bundle with GEOS and proper GDAS binaries
 [QMS-542] Changed drag`n drop in workspace
+[QMS-551] Set QDateTime short format back to Qt::ISODate
 
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing

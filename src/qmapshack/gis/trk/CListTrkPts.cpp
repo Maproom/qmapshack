@@ -173,7 +173,7 @@ void CListTrkPts::addTableRow(bool focus, const CTrackData::trkpt_t& trkpt, bool
     stream << "<td style='background: " << bgInRange << ";'>" << QString::number(trkpt.idxTotal) << "</td>";
 
     stream << "<td>" << (trkpt.time.isValid()
-                         ? IUnit::self().datetime2string(trkpt.time, true, QPointF(trkpt.lon, trkpt.lat) * DEG_TO_RAD)
+                         ? IUnit::self().datetime2string(trkpt.time, IUnit::eTimeFormatShort, QPointF(trkpt.lon, trkpt.lat) * DEG_TO_RAD)
                          : "-") << "</td>";
 
     QString val, unit;

@@ -20,11 +20,11 @@
 #define SIGNALS_H
 
 #include <QObject>
-#include <QRegExp>
+#include <QRegularExpression>
 
 inline void X______________BlockAllSignals______________X(QObject* parent)
 {
-    const QList<QObject*>& children = parent->findChildren<QObject*>(QRegExp(".*"));
+    const QList<QObject*>& children = parent->findChildren<QObject*>(QRegularExpression(".*"));
     for(QObject* obj : children)
     {
         obj->blockSignals(true);
@@ -33,7 +33,7 @@ inline void X______________BlockAllSignals______________X(QObject* parent)
 
 inline void X_____________UnBlockAllSignals_____________X(QObject* parent)
 {
-    const QList<QObject*>& children = parent->findChildren<QObject*>(QRegExp(".*"));
+    const QList<QObject*>& children = parent->findChildren<QObject*>(QRegularExpression(".*"));
     for(QObject* obj : children)
     {
         obj->blockSignals(false);

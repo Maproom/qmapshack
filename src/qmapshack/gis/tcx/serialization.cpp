@@ -43,11 +43,11 @@ void CGisItemWpt::saveTCX(QDomNode& courseNode, const QDateTime crsPtDateTimeToB
     xmlCrsPt.appendChild(doc.createElement("Position"));
 
     xmlCrsPt.lastChild().appendChild(doc.createElement("LatitudeDegrees"));
-    str.sprintf("%1.8f", wpt.lat);
+    str = QString::asprintf("%1.8f", wpt.lat);
     xmlCrsPt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
     xmlCrsPt.lastChild().appendChild(doc.createElement("LongitudeDegrees"));
-    str.sprintf("%1.8f", wpt.lon);
+    str = QString::asprintf("%1.8f", wpt.lon);
     xmlCrsPt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
     if (wpt.ele != NOINT)
@@ -120,11 +120,11 @@ void CGisItemTrk::saveTCXcourse(QDomNode& coursesNode)
 
         xmlTrkpt.lastChild().appendChild(doc.createElement("LatitudeDegrees"));
         QString str;
-        str.sprintf("%1.8f", trkpt.lat);
+        str = QString::asprintf("%1.8f", trkpt.lat);
         xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
         xmlTrkpt.lastChild().appendChild(doc.createElement("LongitudeDegrees"));
-        str.sprintf("%1.8f", trkpt.lon);
+        str = QString::asprintf("%1.8f", trkpt.lon);
         xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
         qint32 eleToBeWritten = NOINT;
@@ -231,11 +231,11 @@ void CGisItemTrk::saveTCXactivity(QDomNode& activitiesNode)
 
             xmlTrkpt.lastChild().appendChild(doc.createElement("LatitudeDegrees"));
             QString str;
-            str.sprintf("%1.8f", trkpt.lat);
+            str = QString::asprintf("%1.8f", trkpt.lat);
             xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
             xmlTrkpt.lastChild().appendChild(doc.createElement("LongitudeDegrees"));
-            str.sprintf("%1.8f", trkpt.lon);
+            str = QString::asprintf("%1.8f", trkpt.lon);
             xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
 

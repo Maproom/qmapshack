@@ -24,7 +24,6 @@
 #include "gis/CGisListWks.h"
 #include "gis/GeoMath.h"
 #include "gis/prj/IGisProject.h"
-#include "poi/IPoiItem.h"
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -35,6 +34,7 @@
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"
 #include "mouse/IMouse.h"
+#include "poi/IPoiItem.h"
 #include "units/IUnit.h"
 
 #include <QPainterPath>
@@ -598,6 +598,11 @@ void CGisItemWpt::addImage(const image_t& img)
     changed(tr("Add image"), "://icons/48x48/Image.png");
 }
 
+void CGisItemWpt::setTimestamp(const QDateTime& datetime)
+{
+    wpt.time = datetime;
+    changed(tr("Changed timestamp"), "://icons/48x48/Time.png");
+}
 
 bool CGisItemWpt::isCloseTo(const QPointF& pos)
 {
@@ -1242,12 +1247,13 @@ QDateTime CGisItemWpt::geocache_t::getLastFound() const
 
 QString CGisItemWpt::geocache_t::getLogs() const
 {
+    const QString &format = QLocale().dateTimeFormat(QLocale::ShortFormat);
     QString strLogs;
     for(const geocachelog_t& log : logs)
     {
         QString thislog = log.text;
         strLogs += "<p><b>"
-                   + log.date.date().toString(Qt::SystemLocaleShortDate)
+                   + log.date.date().toString(format)
                    + ": "
                    + log.type
                    + tr(" by ")
@@ -1310,7 +1316,7 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeneralKeywords, [](CGisItemWpt* item){
         searchValue_t searchValue;
-        searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
+        searchValue.str1 = QStringList(item->getKeywords().values()).join(", ");
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralType, [](CGisItemWpt* /*item*/){

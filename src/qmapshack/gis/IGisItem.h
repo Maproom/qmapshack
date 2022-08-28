@@ -209,7 +209,7 @@ public:
     virtual ~IGisItem();
 
     /// this mutex has to be locked when ever the item list is accessed.
-    static QMutex mutexItems;
+    static QRecursiveMutex mutexItems;
 
     static void init();
     static QMenu* getColorMenu(const QString& title, QObject* obj, const char* slot, QWidget* parent);

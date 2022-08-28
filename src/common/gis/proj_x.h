@@ -35,12 +35,12 @@ public:
     CProj(const QString& crsSrc, const QString& crsTar);
     virtual ~CProj();
 
-    void init(const char *crsSrc, const char *crsTar);
+    void init(const char* crsSrc, const char* crsTar);
 
     void transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
     void transform(QPointF& pt, PJ_DIRECTION dir) const;
     void transform(QPolygonF& line, PJ_DIRECTION dir) const;
-    bool isValid()const {return nullptr != _pj;}
+    bool isValid() const {return nullptr != _pj;}
     bool isSrcLatLong() const {return _isSrcLatLong;}
     bool isTarLatLong() const {return _isTarLatLong;}
 
@@ -55,8 +55,8 @@ private:
     void _transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
     bool _isLatLong(const QString& crs) const;
 
-    PJ_CONTEXT * _ctx = nullptr;
-    PJ * _pj = nullptr;
+    PJ_CONTEXT* _ctx = nullptr;
+    PJ* _pj = nullptr;
     bool _isSrcLatLong = false;
     bool _isTarLatLong = false;
 

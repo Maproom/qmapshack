@@ -641,11 +641,11 @@ void IDBFolder::sortItems(QList<CDBItem*>& items) const
     switch(sortMode)
     {
     case IGisProject::eSortFolderTime:
-        qSort(items.begin(), items.end(), &sortByTime);
+        std::sort(items.begin(), items.end(), &sortByTime);
         break;
 
     case IGisProject::eSortFolderName:
-        qSort(items.begin(), items.end(), &sortByName<CDBItem>);
+        std::sort(items.begin(), items.end(), &sortByName<CDBItem>);
         break;
     }
 }

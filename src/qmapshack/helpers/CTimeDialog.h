@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2018 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2022 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,31 +16,28 @@
 
 **********************************************************************************************/
 
-#include "help/CHelpIndex.h"
+#ifndef CTIMEDIALOG_H
+#define CTIMEDIALOG_H
 
-#include <QtGui>
-#include <QtHelp>
-#include <QtWidgets>
+#include "ui_ITimeDialog.h"
 
-CHelpIndex::CHelpIndex(QHelpEngine* engine, QWidget* parent)
-    : QWidget(parent)
+#include <QDateTime>
+
+class CTimeDialog : public QDialog, public Ui::ITimeDialog
 {
-    labelSearch = new QLabel(tr("Search:"), this);
-    lineSearch = new QLineEdit(this);
-    index = engine->indexWidget();
+    Q_OBJECT
+public:
+    CTimeDialog(QWidget* parent, const QDateTime& timestamp);
+    virtual ~CTimeDialog() = default;
 
-    QVBoxLayout* l = new QVBoxLayout(this);
-    l->addWidget(labelSearch);
-    l->addWidget(lineSearch);
-    l->addWidget(index);
+    const QDateTime& getTimestamp() const {return timestamp;}
 
-    setLayout(l);
+    void accept() override;
 
-    connect(lineSearch, &QLineEdit::textChanged, this, &CHelpIndex::slotSearch);
-}
+private:
+    QDateTime timestamp;
+    QDateTime timestamp_utc0;
+};
 
-void CHelpIndex::slotSearch(const QString& text)
-{
-    index->filterIndices(text);
-}
+#endif //CTIMEDIALOG_H
 

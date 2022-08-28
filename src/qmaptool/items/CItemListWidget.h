@@ -53,7 +53,7 @@ public:
             items << listFiles->takeItem(0);
         }
 
-        qSort(items.begin(), items.end(), lessThan);
+        std::sort(items.begin(), items.end(), lessThan);
 
         for(QListWidgetItem* item : qAsConst(items))
         {

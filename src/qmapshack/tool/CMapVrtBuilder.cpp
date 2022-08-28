@@ -160,7 +160,7 @@ void CMapVrtBuilder::slotStart()
 
         if(!lineUserOptions->text().isEmpty())
         {
-            args << lineUserOptions->text().split(" ", QString::SkipEmptyParts);
+            args << lineUserOptions->text().split(" ", Qt::SkipEmptyParts);
         }
     }
 
@@ -176,7 +176,7 @@ void CMapVrtBuilder::slotStart()
     const int N = listWidget->count();
     for(int n = 0; n < N; n++)
     {
-        stream << listWidget->item(n)->text() << endl;
+        stream << listWidget->item(n)->text() << Qt::endl;
     }
     tempFile->close();
     args << "-input_file_list" << tempFile->fileName();

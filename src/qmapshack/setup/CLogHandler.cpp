@@ -67,7 +67,7 @@ void CLogHandler::appendToFile(QtMsgType type, QString formatedMsg)
     Q_UNUSED(type);
     if (writeToFile)
     {
-        fileStream << formatedMsg << endl;
+        fileStream << formatedMsg << Qt::endl;
     }
 }
 

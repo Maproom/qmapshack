@@ -199,6 +199,7 @@ public:
     void setDescription(const QString& str)         override;
     void setLinks(const QList<link_t>& links) override;
     void setImages(const QList<image_t>& imgs);
+    void setTimestamp(const QDateTime& datetime);
 
     /**
        @brief Silently append list of links
@@ -254,10 +255,6 @@ public:
     {
         return proximity;
     }
-    const QDateTime& getTime() const
-    {
-        return wpt.time;
-    }
     const QString& getIconName() const
     {
         return wpt.sym;
@@ -287,7 +284,6 @@ public:
     {
         return wpt.time;
     }
-
 
     IScrOpt* getScreenOptions(const QPoint& origin, IMouse* mouse) override;
 

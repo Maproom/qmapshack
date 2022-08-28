@@ -30,7 +30,7 @@ CGisItemRate::CGisItemRate(QWidget* parent, const QSet<QString>& commonKeywords,
 {
     setupUi(this);
 
-    QStringList stringList = QStringList(commonKeywords.toList());
+    QStringList stringList = QStringList(commonKeywords.values());
     std::sort(stringList.begin(), stringList.end(), sortByString);
     keywordPlainTextEdit->setPlainText(stringList.join(", "));
 
@@ -65,7 +65,8 @@ bool CGisItemRate::getRatingChanged()
 
 QSet<QString> CGisItemRate::getKeywords() const
 {
-    return keywordPlainTextEdit->toPlainText().split(QRegExp("\\s*,\\s*"), QString::SkipEmptyParts).toSet();
+    const QList<QString>& keywords = keywordPlainTextEdit->toPlainText().split(QRegExp("\\s*,\\s*"), Qt::SkipEmptyParts);
+    return {keywords.begin(), keywords.end()};
 }
 
 QSet<QString> CGisItemRate::getAddedKeywords() const

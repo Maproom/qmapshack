@@ -134,7 +134,7 @@ void IDBFolderSql::announceChange() const
     stream.setByteOrder(QDataStream::LittleEndian);
     stream.setVersion(QDataStream::Qt_5_2);
 
-    quint32 tan = qrand();
+    quint32 tan = QRandomGenerator::global()->generate();
 
     stream << quint32(0);
     stream << tan;

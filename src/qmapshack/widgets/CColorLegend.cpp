@@ -112,7 +112,7 @@ int CColorLegend::paintLabel(QPainter& p, qreal value)
 
     int posX = xOffset + colorWidth + 3;
 
-    p.setPen( QPen(QBrush(palette().color(QPalette::Foreground)), 2.) );
+    p.setPen( QPen(QBrush(palette().color(QPalette::WindowText)), 2.) );
     p.drawLine(posX, posY - fontHeight / 2 + 1, posX + 2, posY - fontHeight / 2 + 1);
 
     if(value == minimum || value == maximum
@@ -123,7 +123,7 @@ int CColorLegend::paintLabel(QPainter& p, qreal value)
         const QString& labelText = QString("%1%2").arg(value, 0, 'f', precision).arg(unit);
 
         p.drawText(posX, posY, labelText);
-        posX += QFontMetrics(p.font()).width(labelText);
+        posX += QFontMetrics(p.font()).horizontalAdvance(labelText);
     }
 
     return posX;
@@ -176,7 +176,7 @@ void CColorLegend::paintEvent(QPaintEvent*/*event*/)
         QRect borderRect(colorRect);
         borderRect += QMargins(1, 1, 1, 1);
         p.setPen( QPen(
-                      QBrush(palette().color(QPalette::Foreground)),
+                      QBrush(palette().color(QPalette::WindowText)),
                       2.,
                       Qt::SolidLine,
                       Qt::SquareCap,

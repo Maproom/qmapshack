@@ -19,16 +19,16 @@
 #include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
-#include "poi/IPoiItem.h"
 #include "gis/trk/CActivityTrk.h"
 #include "helpers/CTryMutexLocker.h"
 #include "helpers/CWptIconManager.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CScrOptSelect.h"
+#include "poi/IPoiItem.h"
 
 #include <QtWidgets>
 
-QMutex CMouseSelect::mutex(QMutex::NonRecursive);
+QMutex CMouseSelect::mutex;
 
 CMouseSelect::CMouseSelect(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouseSelect(gis, canvas, mouse)
@@ -65,7 +65,7 @@ CMouseSelect::~CMouseSelect()
 
 void CMouseSelect::findItems(QList<IGisItem*>& items)
 {
-    CTryMutexLocker lock(mutex);
+    CTryMutexLocker<QMutex> lock(mutex);
     if(!lock.try_lock())
     {
         return;

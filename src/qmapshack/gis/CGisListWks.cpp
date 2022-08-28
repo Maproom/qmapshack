@@ -74,7 +74,7 @@
 class CGisListWksEditLock
 {
 public:
-    CGisListWksEditLock(bool waitCursor, QMutex& mutex) : mutex(mutex), waitCursor(waitCursor)
+    CGisListWksEditLock(bool waitCursor, QRecursiveMutex& mutex) : mutex(mutex), waitCursor(waitCursor)
     {
         if(waitCursor)
         {
@@ -91,7 +91,7 @@ public:
         mutex.unlock();
     }
 private:
-    QMutex& mutex;
+    QRecursiveMutex& mutex;
     bool waitCursor;
 };
 
@@ -384,6 +384,8 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent* e )
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
+    setDragDropMode(QAbstractItemView::DragDrop);
+
     QTreeWidgetItem* item1 = currentItem();
     QTreeWidgetItem* item2 = itemAt(e->pos());
 
@@ -466,10 +468,11 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent* e )
         IGisProject* proj1 = dynamic_cast<IGisProject*>(item1);
         if(proj1)
         {
+            setDragDropMode(QAbstractItemView::InternalMove);
             e->setDropAction(proj2->isOnDevice() ? Qt::IgnoreAction : Qt::MoveAction);
             QTreeWidget::dragMoveEvent(e);
             return;
-        }
+        }        
 
         IGisItem* gisItem1 = dynamic_cast<IGisItem*>(item1);
         if(gisItem1)

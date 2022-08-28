@@ -91,7 +91,7 @@ IPlot::IPlot(CGisItemTrk* trk, CPlotData::axistype_e type, mode_e mode, QWidget*
         setWindowFlags(Qt::Tool);
         setAttribute(Qt::WA_DeleteOnClose, true);
         QPalette pal = palette();
-        pal.setColor(QPalette::Background, Qt::white);
+        pal.setColor(QPalette::Window, Qt::white);
         setPalette(pal);
     }
 
@@ -568,12 +568,14 @@ bool IPlot::mouseReleaseEventNormal(QMouseEvent* e)
 
 void IPlot::wheelEvent(QWheelEvent* e)
 {
-    bool in = CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0);
+    const auto& modifiers = QApplication::keyboardModifiers();
+    const int delta = modifiers == Qt::AltModifier ? e->angleDelta().x() : e->angleDelta().y();
+    bool in = CMainWindow::self().flipMouseWheel() ? (delta < 0) : (delta > 0);
 
     bool doHorizontalZoom = false;
     bool doVerticalZoom = false;
 
-    switch(QApplication::keyboardModifiers())
+    switch(modifiers)
     {
     case Qt::AltModifier:
         doHorizontalZoom = true;
@@ -591,20 +593,20 @@ void IPlot::wheelEvent(QWheelEvent* e)
 
     if(doHorizontalZoom)
     {
-        data->x().zoom(in, e->pos().x() - left);
+        data->x().zoom(in, e->position().x() - left);
         setSizes();
         data->x().setScale(rectGraphArea.width());
     }
 
     if(doVerticalZoom)
     {
-        data->y().zoom(in, bottom - e->pos().y());
+        data->y().zoom(in, bottom - e->position().y());
         setSizes();
         data->y().setScale(rectGraphArea.height());
     }
 
 
-    QPoint p = mapToGlobal(e->pos() + QPoint(32, 0));
+    QPoint p = mapToGlobal(e->position().toPoint() + QPoint(32, 0));
     QToolTip::showText(p, tr("Hold CTRL key for vertical zoom, only.\nHold ALT key for horizontal zoom, only."), this, QRect(), 500);
     needsRedraw = true;
     update();
@@ -933,10 +935,10 @@ void IPlot::drawLabels( QPainter& p )
     }
 
     p.save();
-    QMatrix m = p.matrix();
-    m.translate( 0, size().height() );
-    m.rotate( -90 );
-    p.setMatrix( m );
+    QTransform t = p.transform();
+    t.translate( 0, size().height());
+    t.rotate(-90);
+    p.setTransform(t);
 
     if ( rectY1Label.isValid() )
     {
@@ -1021,7 +1023,7 @@ void IPlot::drawYScale( QPainter& p )
     {
         iy = bottom - data->y().val2pt( data->ymin ) - fontHeight / 2;
         recText.moveTopLeft( QPoint( ix, iy ) );
-        p.drawText( recText, Qt::AlignRight, QString().sprintf( format_single_prec.toLatin1().data(), data->ymin  ));
+        p.drawText( recText, Qt::AlignRight, QString::asprintf( format_single_prec.toLatin1().data(), data->ymin  ));
         recTextMin = recText;
     }
     format_single_prec = data->y().fmtsgl(data->ymax);
@@ -1029,7 +1031,7 @@ void IPlot::drawYScale( QPainter& p )
     {
         iy = bottom - data->y().val2pt( data->ymax ) - fontHeight / 2;
         recText.moveTopLeft( QPoint( ix, iy ) );
-        p.drawText( recText, Qt::AlignRight, QString().sprintf( format_single_prec.toLatin1().data(), data->ymax  ));
+        p.drawText( recText, Qt::AlignRight, QString::asprintf( format_single_prec.toLatin1().data(), data->ymax  ));
         recTextMax = recText;
     }
 
@@ -1184,6 +1186,7 @@ void IPlot::drawLegend(QPainter& p)
 
 void IPlot::drawDecoration( QPainter& p )
 {
+    p.save();
     if(posMouse1 != NOPOINT)
     {
         // draw the vertical `you are here` line
@@ -1261,6 +1264,8 @@ void IPlot::drawDecoration( QPainter& p )
     {
         scrOptRange->draw(p);
     }
+
+    p.restore();
 }
 
 void IPlot::drawTags(QPainter& p)
@@ -1269,6 +1274,8 @@ void IPlot::drawTags(QPainter& p)
     {
         return;
     }
+
+    p.save();
 
     QFont f = CMainWindow::self().getMapFont();
     f.setBold(true);
@@ -1305,6 +1312,8 @@ void IPlot::drawTags(QPainter& p)
         p.setPen(QPen(Qt::black, 1));
         p.drawLine(ptx, top, ptx, pty);
     }
+
+    p.restore();
 }
 
 void IPlot::drawTagLabels(QPainter& p)
@@ -1320,6 +1329,7 @@ void IPlot::drawTagLabels(QPainter& p)
     }
 
 
+    p.save();
     QFont f = CMainWindow::self().getMapFont();
     f.setBold(true);
     QFontMetrics fm(f);
@@ -1343,6 +1353,7 @@ void IPlot::drawTagLabels(QPainter& p)
         CDraw::text(tag.label, p, fm.boundingRect(tag.label), Qt::black);
         p.restore();
     }
+    p.restore();
 }
 
 void IPlot::drawActivities(QPainter& p)
@@ -1353,7 +1364,7 @@ void IPlot::drawActivities(QPainter& p)
     }
 
     if((trk->getActivities().getAllActivities().count() == 1)
-       && (trk->getActivities().getAllActivities().toList().first() == CTrackData::trkpt_t::eAct20None))
+       && (trk->getActivities().getAllActivities().values().first() == CTrackData::trkpt_t::eAct20None))
     {
         return;
     }

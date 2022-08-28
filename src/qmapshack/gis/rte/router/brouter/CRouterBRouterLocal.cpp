@@ -89,7 +89,7 @@ void CRouterBRouterLocal::startBRouter()
 
         connect(&progress, &CProgressDialog::rejected, eventLoop, &QEventLoop::quit);
         connect(&socket, &QAbstractSocket::connected, this, &CRouterBRouterLocal::slotBRouterSocketConnected);
-        connect(&socket, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::error), this, &CRouterBRouterLocal::slotBRouterSocketError);
+        connect(&socket, &QAbstractSocket::errorOccurred, this, &CRouterBRouterLocal::slotBRouterSocketError);
         connect(&timer, &QTimer::timeout, eventLoop, &QEventLoop::quit);
 
         timer.setSingleShot(true);

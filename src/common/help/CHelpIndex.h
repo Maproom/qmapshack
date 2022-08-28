@@ -30,15 +30,15 @@ class CHelpIndex : public QWidget
 {
     Q_OBJECT
 public:
-    CHelpIndex(QHelpEngine * engine, QWidget * parent);
+    CHelpIndex(QHelpEngine* engine, QWidget* parent);
     virtual ~CHelpIndex() = default;
 
 private slots:
     void slotSearch(const QString& text);
 private:
-    QLabel * labelSearch;
-    QLineEdit * lineSearch;
-    QHelpIndexWidget * index;
+    QLabel* labelSearch;
+    QLineEdit* lineSearch;
+    QHelpIndexWidget* index;
 };
 
 #endif //CHELPINDEX_H

@@ -83,7 +83,7 @@ private:
     QNetworkAccessManager* networkAccessManager;
     QTimer* timerCloseStatusMsg;
     bool synchronous = false;
-    QMutex mutex {QMutex::NonRecursive};
+    QMutex mutex;
     CRouterBRouterSetup* setup;
     CRouterSetup* routerSetup;
     CRouterBRouterInfo* info;

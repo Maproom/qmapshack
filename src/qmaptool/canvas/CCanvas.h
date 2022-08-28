@@ -75,7 +75,7 @@ protected:
     void keyPressEvent(QKeyEvent* e) override;
 
 private:
-    mutable QMutex mutex {QMutex::Recursive};
+    mutable QRecursiveMutex mutex;
 
     QColor backColor = 0xFFFFFFBF;       //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content

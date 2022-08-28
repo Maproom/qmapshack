@@ -135,7 +135,7 @@ void IItem::wheelEventFx(QWheelEvent* e)
 
     zoomAngleDelta = 0;
 
-    drawContext->zoom(CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0), e->posF());
+    drawContext->zoom(CMainWindow::self().flipMouseWheel() ? (e->angleDelta().y() < 0) : (e->angleDelta().y() > 0), e->position());
     drawContext->triggerCompleteUpdate(CCanvas::eRedrawAll);
 }
 

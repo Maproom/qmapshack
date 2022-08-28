@@ -42,7 +42,7 @@ void CGarminStrTblUtf8::get(CFileExt& file, quint32 offset, type_e t, QStringLis
 
     if(offset > (quint32)sizeLBL1)
     {
-        //qWarning() << "Index into string table to large" << hex << offset << dataLBL.size() << hdrLbl->addr_shift << hdrNet->net1_addr_shift;
+        //qWarning() << "Index into string table to large" << Qt::hex << offset << dataLBL.size() << hdrLbl->addr_shift << hdrNet->net1_addr_shift;
         return;
     }
 

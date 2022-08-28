@@ -20,9 +20,9 @@
 #ifndef IMAPONLINE_H
 #define IMAPONLINE_H
 #include "map/IMap.h"
+#include <QElapsedTimer>
 #include <QMutex>
 #include <QQueue>
-#include <QTime>
 
 class CDiskCache;
 class QNetworkAccessManager;
@@ -45,7 +45,7 @@ signals:
 
 protected:
     /// Mutex to control access to url queue
-    QMutex mutex {QMutex::Recursive};
+    QRecursiveMutex mutex;
     /// a queue with all tile urls to request
     QQueue<QString> urlQueue;
     /// the tile cache
@@ -56,7 +56,7 @@ protected:
 
 
     bool lastRequest = false;
-    QTime timeLastUpdate;
+    QElapsedTimer timeLastUpdate;
     QString name;
 
     static bool httpsCheck(const QString& url);

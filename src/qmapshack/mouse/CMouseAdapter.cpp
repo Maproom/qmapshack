@@ -130,7 +130,7 @@ void CMouseAdapter::mouseDoubleClickEvent(QMouseEvent* e)
 void CMouseAdapter::wheelEvent(QWheelEvent* e)
 {
     // suppress little mouse-movements that are likely to happen when scrolling the mousewheel.
-    startMouseMove(e->pos());
+    startMouseMove(e->position().toPoint());
     if (e->buttons() & Qt::LeftButton)
     {
         // no shortclick by releasing button right after scrolling the wheel

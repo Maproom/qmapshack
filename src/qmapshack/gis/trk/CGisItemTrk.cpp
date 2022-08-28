@@ -441,7 +441,7 @@ QString CGisItemTrk::getInfoLimits() const
     str += "<tr><th align='left'></th><th align='right'>" + tr("min.") + "</th><th align='right'>" + tr("max.") + "</th></tr>";
 
     QStringList keys = extrema.keys();
-    qSort(keys.begin(), keys.end(), sortByString);
+    std::sort(keys.begin(), keys.end(), sortByString);
 
     for(const QString& key : qAsConst(keys))
     {
@@ -482,7 +482,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     QString str = "<div>";
 
     qint32 actCnt = activities.getActivityCount();
-    const QList<trkact_t>& acts = activities.getAllActivities().toList();
+    const QList<trkact_t>& acts = activities.getAllActivities().values();
 
     if(feature & eFeatureShowName)
     {
@@ -954,7 +954,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
         }
 
         const QStringList& keys = pt.extensions.keys();
-        existingExtensions.unite(keys.toSet());
+        existingExtensions.unite({keys.begin(), keys.end()});
 
         const QPointF& pos = {pt.lon, pt.lat};
         for(const QString& key : keys)
@@ -1287,7 +1287,7 @@ void CGisItemTrk::deriveSecondaryData()
     updateVisuals(eVisualAll, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";
-//    qDebug() << "allValidFlags" << hex << allValidFlags;
+//    qDebug() << "allValidFlags" << Qt::hex << allValidFlags;
 //    qDebug() << "totalDistance" << totalDistance;
 //    qDebug() << "totalAscent" << totalAscent;
 //    qDebug() << "totalDescent" << totalDescent;
@@ -2273,8 +2273,8 @@ QStringList CGisItemTrk::getExistingDataSources() const
                           return s1.toLower() < s2.toLower();
                       };
 
-    qSort(known.begin(), known.end(), stringSort);
-    qSort(unknown.begin(), unknown.end(), stringSort);
+    std::sort(known.begin(), known.end(), stringSort);
+    std::sort(unknown.begin(), unknown.end(), stringSort);
 
     return known + unknown;
 }
@@ -2368,8 +2368,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis)
         // draw the bubble
         QWidget widget;
         const QPalette& pal = widget.palette();
-        const QColor& colorBg = pal.color(QPalette::Background);
-        const QColor& colorFg = pal.color(QPalette::Foreground);
+        const QColor& colorBg = pal.color(QPalette::Window);
+        const QColor& colorFg = pal.color(QPalette::WindowText);
 
         QRect box(0, 0, w, h);
         box.moveBottomLeft(anchor.toPoint() + QPoint(-50, -50));
@@ -3338,7 +3338,7 @@ QMap<searchProperty_e, CGisItemTrk::fSearch> CGisItemTrk::initKeywordLambdaMap()
     });
     map.insert(eSearchPropertyGeneralKeywords, [](CGisItemTrk* item){
         searchValue_t searchValue;
-        searchValue.str1 = QStringList(item->getKeywords().toList()).join(", ");
+        searchValue.str1 = QStringList(item->getKeywords().values()).join(", ");
         return searchValue;
     });
     map.insert(eSearchPropertyGeneralType, [](CGisItemTrk* item){

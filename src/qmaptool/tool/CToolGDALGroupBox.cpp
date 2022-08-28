@@ -145,6 +145,6 @@ QStringList CToolGDALGroupBox::getArgs()
     args.append(getArgsResampling({}));
     args.append(getArgsCompression({}));
     args.append(getArgsTiled({}));
-    args.append(lineCommands->text().split(' ', QString::SkipEmptyParts));
+    args.append(lineCommands->text().split(' ', Qt::SkipEmptyParts));
     return args;
 }

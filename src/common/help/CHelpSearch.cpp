@@ -19,10 +19,10 @@
 #include "help/CHelpSearch.h"
 
 #include <QtGui>
-#include <QtWidgets>
 #include <QtHelp>
+#include <QtWidgets>
 
-CHelpSearch::CHelpSearch(QHelpEngine *engine, QWidget *parent)
+CHelpSearch::CHelpSearch(QHelpEngine* engine, QWidget* parent)
     : QWidget(parent)
     , searchEngine(engine->searchEngine())
     , query(searchEngine->queryWidget())
@@ -30,7 +30,7 @@ CHelpSearch::CHelpSearch(QHelpEngine *engine, QWidget *parent)
 {
     labelSearch = new QLabel(tr("Search:"), this);
 
-    QVBoxLayout * l = new QVBoxLayout(this);
+    QVBoxLayout* l = new QVBoxLayout(this);
     l->addWidget(labelSearch);
     l->addWidget(query);
     l->addWidget(result);
@@ -44,7 +44,6 @@ CHelpSearch::CHelpSearch(QHelpEngine *engine, QWidget *parent)
     searchEngine->reindexDocumentation();
 
     connect(query, &QHelpSearchQueryWidget::search, this, &CHelpSearch::slotSearch);
-
 }
 
 void CHelpSearch::slotSearch()

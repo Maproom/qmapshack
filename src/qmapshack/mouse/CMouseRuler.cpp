@@ -374,7 +374,7 @@ void CMouseRuler::updateStatus(const QPolygonF& line)
             msg += "<td></td><td></td>";
         }
 
-        val.sprintf("%1.1f", (a1 < 0) ? (a1 + 360) : a1);
+        val = QString::asprintf("%1.1f", (a1 < 0) ? (a1 + 360) : a1);
         msg += QString("<td align=right>%1°</td>").arg(val);
 
         msg += "</tr>";
@@ -467,7 +467,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& 
 
             if(scrOptRuler->toolShowCourse->isChecked())
             {
-                val.sprintf("%1.1f", (a1 < 0) ? (a1 + 360) : a1);
+                val = QString::asprintf("%1.1f", (a1 < 0) ? (a1 + 360) : a1);
                 str += QString(", %1°").arg(val);
             }
 

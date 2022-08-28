@@ -20,6 +20,7 @@
 #include "widgets/CTemplateWidget.h"
 
 #include <QtGui>
+#include <QtGui>
 #include <QtUiTools>
 #include <QtWidgets>
 
@@ -73,8 +74,8 @@ QString CTemplateWidget::text()
     }
     QString str;
 
-    QList<QGroupBox*> groups = widget->findChildren<QGroupBox*>(QRegExp("group.*"), Qt::FindDirectChildrenOnly);
-    qSort(groups.begin(), groups.end(), [](const QGroupBox* g1, const QGroupBox* g2){return g1->objectName() < g2->objectName(); });
+    QList<QGroupBox*> groups = widget->findChildren<QGroupBox*>(QRegularExpression("group.*"), Qt::FindDirectChildrenOnly);
+    std::sort(groups.begin(), groups.end(), [](const QGroupBox* g1, const QGroupBox* g2){return g1->objectName() < g2->objectName(); });
 
     for(const QGroupBox* group : qAsConst(groups))
     {
@@ -89,8 +90,8 @@ QString CTemplateWidget::text()
 QString CTemplateWidget::resolveGroup(const QGroupBox* group)
 {
     QString str;
-    QList<QWidget*> widgets = group->findChildren<QWidget*>(QRegExp(".*"), Qt::FindDirectChildrenOnly);
-    qSort(widgets.begin(), widgets.end(), [](const QWidget* w1, const QWidget* w2){return w1->property("order") < w2->property("order"); });
+    QList<QWidget*> widgets = group->findChildren<QWidget*>(QRegularExpression(".*"), Qt::FindDirectChildrenOnly);
+    std::sort(widgets.begin(), widgets.end(), [](const QWidget* w1, const QWidget* w2){return w1->property("order").toInt() < w2->property("order").toInt(); });
 
     for(const QWidget* w : qAsConst(widgets))
     {
@@ -252,7 +253,9 @@ void CTemplateWidget::slotPreview()
     preview->setWindowTitle(tr("Preview..."));
 
     preview->setMinimumWidth(600);
-    preview->move(QApplication::desktop()->screen()->rect().center() - preview->rect().center());
+    const QList<QScreen*>& screens = QGuiApplication::screens();
+    preview->move(screens.first()->availableGeometry().center() - -preview->rect().center());
+
     preview->show();
     preview->raise();
 

@@ -21,8 +21,8 @@
 
 #include "ui_IProgressDialog.h"
 #include <QDialog>
+#include <QElapsedTimer>
 #include <QStack>
-#include <QTime>
 
 class QTimer;
 
@@ -62,7 +62,7 @@ private:
     void goOn();
 
     static QStack<CProgressDialog*> stackSelf;
-    QTime time;
+    QElapsedTimer time;
     QTimer* timer;
     qint32 timeElapsed = 0;
 };

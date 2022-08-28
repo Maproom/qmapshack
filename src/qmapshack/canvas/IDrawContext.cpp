@@ -454,7 +454,7 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
 void IDrawContext::run()
 {
     mutex.lock();
-    QTime t;
+    QElapsedTimer t;
     t.start();
 //    qDebug() << "start thread" << objectName();
 

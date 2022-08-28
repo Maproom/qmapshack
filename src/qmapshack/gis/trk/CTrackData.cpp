@@ -143,9 +143,9 @@ void CTrackData::getPolyline(SGisLine& l) const
 void CTrackData::getPolylineRange(SGisLine& l, qint32 rangeStart, qint32 rangeEnd, bool getSubPixel) const
 {
     l.clear();
-    for (const trkseg_t &curSeg : segs)
+    for (const trkseg_t& curSeg : segs)
     {
-        for (const trkpt_t &pt : curSeg.pts)
+        for (const trkpt_t& pt : curSeg.pts)
         {
             if((pt.idxTotal < rangeStart) && (rangeStart != NOIDX))
             {
@@ -165,7 +165,8 @@ void CTrackData::getPolylineRange(SGisLine& l, qint32 rangeStart, qint32 rangeEn
                 {
                     l << IGisLine::point_t(pt.radPoint());
                 }
-            } else
+            }
+            else
             {
                 l << IGisLine::point_t(pt.radPoint());
             }

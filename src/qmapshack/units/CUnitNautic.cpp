@@ -33,7 +33,7 @@ void CUnitNautic::meter2distance(qreal meter, QString& val, QString& unit) const
     }
     else
     {
-        val.sprintf("%1.2f", meter * baseFactor);
+        val = QString::asprintf("%1.2f", meter * baseFactor);
         unit = baseUnit;
     }
 }
@@ -61,7 +61,7 @@ void CUnitNautic::meter2speed(qreal meter, QString& val, QString& unit) const /*
     }
     else
     {
-        val.sprintf("%1.2f", meter * speedFactor);
+        val = QString::asprintf("%1.2f", meter * speedFactor);
         unit = speedUnit;
     }
 }
@@ -89,7 +89,7 @@ void CUnitNautic::meter2area(qreal meter, QString& val, QString& unit) const /* 
     }
     else
     {
-        val.sprintf("%1.2f", meter / (1852 * 1852));
+        val = QString::asprintf("%1.2f", meter / (1852 * 1852));
         unit = "nm²";
     }
 }

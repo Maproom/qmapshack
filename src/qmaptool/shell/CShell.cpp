@@ -32,7 +32,7 @@ CShell::CShell(QWidget* parent)
     connect(&cmd, &QProcess::readyReadStandardOutput, this, &CShell::slotStdout);
 
     connect(&cmd, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &CShell::slotFinished);
-    connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)   >(&QProcess::error), this, &CShell::slotError);
+    connect(&cmd, &QProcess::errorOccurred, this, &CShell::slotError);
 }
 
 void CShell::slotError(QProcess::ProcessError error)

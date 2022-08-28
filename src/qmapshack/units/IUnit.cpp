@@ -458,7 +458,7 @@ void IUnit::meter2elevation(qreal meter, QString& val, QString& unit) const
     }
     else
     {
-        val.sprintf("%1.0f", meter * elevationFactor);
+        val = QString::asprintf("%1.0f", meter * elevationFactor);
         unit = elevationUnit;
     }
 }
@@ -481,7 +481,7 @@ void IUnit::meter2elevation(qreal meter, qreal& val, QString& unit) const
 void IUnit::meter2base(qreal meter, QString& val, QString& unit) const
 {
     unit = baseUnit;
-    val.sprintf("%1.0f", meter * baseFactor);
+    val = QString::asprintf("%1.0f", meter * baseFactor);
 }
 
 bool IUnit::convert(qreal& value, QString& unit, const QString& targetUnit)
@@ -577,12 +577,12 @@ void IUnit::slope2string(qreal slope, QString& val, QString& unit)
     switch(slopeMode)
     {
     case eSlopeDegrees:
-        val.sprintf("%.1f", slope);
+        val = QString::asprintf("%.1f", slope);
         unit = "°";
         break;
 
     case eSlopePercent:
-        val.sprintf("%.0f", qTan(qDegreesToRadians(slope)) * 100.0);
+        val = QString::asprintf("%.0f", qTan(qDegreesToRadians(slope)) * 100.0);
         unit = "%";
         break;
     }
@@ -652,7 +652,7 @@ void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
         return;
     }
 
-    val.sprintf("%2.2f", meter * speedFactor);
+    val = QString::asprintf("%2.2f", meter * speedFactor);
     unit = speedUnit;
 }
 
@@ -803,7 +803,8 @@ QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPoi
     }
 
     QDateTime tmp = time.toTimeZone(tz);
-    return tmp.toString((shortDate | useShortFormat) ? Qt::ISODate : Qt::SystemLocaleLongDate);
+    const QString& format = QLocale().dateTimeFormat((shortDate | useShortFormat) ? QLocale::ShortFormat : QLocale::LongFormat);
+    return tmp.toString(format);
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos)
@@ -849,7 +850,7 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
 
         const QString& lat = signLat ? "S" : "N";
         const QString& lng = signLon ? "W" : "E";
-        str.sprintf("%s%02d° %06.3f %s%03d° %06.3f", lat.toUtf8().data(), qAbs(degN), minN, lng.toUtf8().data(), qAbs(degE), minE);
+        str = QString::asprintf("%s%02d° %06.3f %s%03d° %06.3f", lat.toUtf8().data(), qAbs(degN), minN, lng.toUtf8().data(), qAbs(degE), minE);
         break;
     }
 
@@ -857,7 +858,7 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
     {
         const QString& lat = (y < 0) ? "S" : "N";
         const QString& lng = (x < 0) ? "W" : "E";
-        str.sprintf("%s%02.6f° %s%03.6f°", lat.toUtf8().data(), qAbs(y), lng.toUtf8().data(), qAbs(x));
+        str = QString::asprintf("%s%02.6f° %s%03.6f°", lat.toUtf8().data(), qAbs(y), lng.toUtf8().data(), qAbs(x));
         break;
     }
 
@@ -874,7 +875,7 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
 
         const QString& lat = signLat ? "S" : "N";
         const QString& lng = signLon ? "W" : "E";
-        str.sprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''", lat.toUtf8().data(), qAbs(degN), qFloor(minN), secN, lng.toUtf8().data(), qAbs(degE), qFloor(minE), secE);
+        str = QString::asprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''", lat.toUtf8().data(), qAbs(degN), qFloor(minN), secN, lng.toUtf8().data(), qAbs(degE), qFloor(minE), secE);
         break;
     }
     }

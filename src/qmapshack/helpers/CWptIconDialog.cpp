@@ -49,7 +49,7 @@ void CWptIconDialog::setupList(QObject* obj)
     const QMap<QString, CWptIconManager::icon_t>& wptIcons = CWptIconManager::self().getWptIcons();
     QStringList keys = wptIcons.keys();
 
-    qSort(keys.begin(), keys.end(), sortByString);
+    std::sort(keys.begin(), keys.end(), sortByString);
 
     for(const QString& key : qAsConst(keys))
     {

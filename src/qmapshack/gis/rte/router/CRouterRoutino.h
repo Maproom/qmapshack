@@ -65,7 +65,7 @@ private:
     QStringList dbPaths;
     QString currentProfilesPath;
 
-    QMutex mutex {QMutex::NonRecursive};
+    QMutex mutex;
 };
 
 #endif //CROUTERROUTINO_H

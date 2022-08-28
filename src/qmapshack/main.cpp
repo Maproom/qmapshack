@@ -39,11 +39,6 @@ int main(int argc, char** argv)
     env->initLogHandler();
     env->initQMapShack();
 
-    // setup random number generator. currently used for an
-    // unique instance ID.
-    uint seed = QDateTime::currentDateTimeUtc().toTime_t();
-    qsrand(seed);
-
     // setup default proxy
     QNetworkProxyFactory::setUseSystemConfiguration(true);
 

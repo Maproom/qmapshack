@@ -88,7 +88,7 @@ void CPoiList::sort()
         }
     }
 
-    qSort(items1.begin(), items1.end(), &sortByName<CPoiFileItem>);
+    std::sort(items1.begin(), items1.end(), &sortByName<CPoiFileItem>);
 
     QList<QTreeWidgetItem*> items2;
     for(CPoiFileItem* item : qAsConst(items1))

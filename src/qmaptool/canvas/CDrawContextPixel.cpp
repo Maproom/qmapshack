@@ -129,8 +129,12 @@ void CDrawContextPixel::drawt(buffer_t& buf)
         img.setColorTable(colortable);
 
         mutex.lock();
-        pBand->RasterIO(GF_Read, mapOff.x(), mapOff.y(), mapWidth, mapHeight, img.bits(), screenWidth, screenHeight, GDT_Byte, 0, 0);
+        int res = pBand->RasterIO(GF_Read, mapOff.x(), mapOff.y(), mapWidth, mapHeight, img.bits(), screenWidth, screenHeight, GDT_Byte, 0, 0);
         mutex.unlock();
+        if(res != CE_None)
+        {
+            qWarning() << "RasterIO failed.";
+        }
     }
     else
     {

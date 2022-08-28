@@ -20,10 +20,10 @@
 #ifndef CMOUSEADAPTER_H
 #define CMOUSEADAPTER_H
 
+#include <QElapsedTimer>
 #include <QObject>
 #include <QPoint>
 #include <QPointer>
-#include <QTime>
 
 class CCanvas;
 class QMouseEvent;
@@ -73,7 +73,7 @@ private:
     CCanvas* canvas { nullptr };
     IMouse* delegate { nullptr };
 
-    QTime buttonPressTime;
+    QElapsedTimer buttonPressTime;
     QTimer* longPressTimer;
 
     QPoint lastPos;

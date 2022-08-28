@@ -127,7 +127,7 @@ public:
     }
 
     /// the global mutex. Has to be used for all operations on a IRtItem
-    static QMutex mutex;
+    static QRecursiveMutex mutex;
     /// the item's type id
     const type_e type;
     /// set true if only one instance at a time can exist

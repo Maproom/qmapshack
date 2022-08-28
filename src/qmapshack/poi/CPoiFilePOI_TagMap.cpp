@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "poi/CPoiIconCategory.h"
 #include "poi/CPoiFilePOI.h"
+#include "poi/CPoiIconCategory.h"
 
 QMap<QString, CPoiIconCategory> CPoiFilePOI::tagMap;
 QMap<QString, CPoiIconCategory> CPoiFilePOI::initTagMap()

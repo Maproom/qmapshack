@@ -22,7 +22,7 @@
 
 #include <QtWidgets>
 
-QMutex CPoiFileItem::mutexActivePois(QMutex::Recursive);
+QRecursiveMutex CPoiFileItem::mutexActivePois;
 
 CPoiFileItem::CPoiFileItem(QTreeWidget* parent, CPoiDraw* poi)
     : QTreeWidgetItem(parent)

@@ -30,15 +30,15 @@ class CHelp :  public QDockWidget
 {
     Q_OBJECT
 public:
-    CHelp(const QString &helpfile, const QString &homepage, QWidget * parent);
+    CHelp(const QString& helpfile, const QString& homepage, QWidget* parent);
     virtual ~CHelp();
 
 private:
-    QHelpEngine * engine;
-    QTabWidget * tabWidget;
-    QSplitter * splitter;
-    CHelpIndex * index;
-    CHelpSearch * search;
+    QHelpEngine* engine;
+    QTabWidget* tabWidget;
+    QSplitter* splitter;
+    CHelpIndex* index;
+    CHelpSearch* search;
 };
 
 #endif //CHELP_H

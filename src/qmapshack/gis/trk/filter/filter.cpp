@@ -197,7 +197,7 @@ void CGisItemTrk::filterSmoothProfile(int points)
             window[m] = ele1[n];
         }
 
-        qSort(window);
+        std::sort(window.begin(), window.end());
         ele2[i] = window[d];
     }
 
@@ -634,7 +634,7 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
                 const QLineF scannedLine = QLineF(scannedPt.lon, scannedPt.lat, prevScannedPt.lon, prevScannedPt.lat);
                 QPointF intersectionPoint;
 
-                if ( ( headLine.intersect(scannedLine, &intersectionPoint) == QLineF::BoundedIntersection)
+                if ( ( headLine.intersects(scannedLine, &intersectionPoint) == QLineF::BoundedIntersection)
                      &&
                      (pts[pts.size() - 2].distance - scannedPt.distance) > minLoopLength) // loop is long enough to cut the track)
                 {

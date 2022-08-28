@@ -471,7 +471,7 @@ void IUnit::setUnitType(type_e t, QObject* parent)
 
 void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
 {
-    val.sprintf("%2.2f", meter * speedfactor);
+    val = QString::asprintf("%2.2f", meter * speedfactor);
     unit = speedunit;
 }
 
@@ -589,7 +589,9 @@ QString IUnit::datetime2string(const QDateTime& time, bool shortDate, const QPoi
     }
 
     QDateTime tmp = time.toTimeZone(tz);
-    return tmp.toString((shortDate | useShortFormat) ? Qt::ISODate : Qt::SystemLocaleLongDate);
+    const QString& format = QLocale().dateTimeFormat((shortDate | useShortFormat) ? QLocale::ShortFormat : QLocale::LongFormat);
+    return tmp.toString(format);
+
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos)
@@ -639,7 +641,7 @@ bool IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
 
         const QString& lat = signLat ? "S" : "N";
         const QString& lng = signLon ? "W" : "E";
-        str.sprintf("%s%02d° %06.3f %s%03d° %06.3f", lat.toUtf8().data(), qAbs(degN), minN, lng.toUtf8().data(), qAbs(degE), minE);
+        str = QString::asprintf("%s%02d° %06.3f %s%03d° %06.3f", lat.toUtf8().data(), qAbs(degN), minN, lng.toUtf8().data(), qAbs(degE), minE);
         break;
     }
 
@@ -647,7 +649,7 @@ bool IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
     {
         const QString& lat = (y < 0) ? "S" : "N";
         const QString& lng = (x < 0) ? "W" : "E";
-        str.sprintf("%s%02.6f° %s%03.6f°", lat.toUtf8().data(), qAbs(y), lng.toUtf8().data(), qAbs(x));
+        str = QString::asprintf("%s%02.6f° %s%03.6f°", lat.toUtf8().data(), qAbs(y), lng.toUtf8().data(), qAbs(x));
         break;
     }
 
@@ -664,7 +666,7 @@ bool IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
 
         const QString& lat = signLat ? "S" : "N";
         const QString& lng = signLon ? "W" : "E";
-        str.sprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''", lat.toUtf8().data(), qAbs(degN), qFloor(minN), secN, lng.toUtf8().data(), qAbs(degE), qFloor(minE), secE);
+        str = QString::asprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''", lat.toUtf8().data(), qAbs(degN), qFloor(minN), secN, lng.toUtf8().data(), qAbs(degE), qFloor(minE), secE);
         break;
     }
     }

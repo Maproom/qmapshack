@@ -40,7 +40,7 @@ QPointF operator/(const QPointF& p1, const QPointF& p2)
     return QPointF(p1.x() / p2.x(), p1.y() / p2.y());
 }
 
-QMutex IDrawContext::mutex(QMutex::Recursive);
+QRecursiveMutex IDrawContext::mutex;
 
 
 IDrawContext::IDrawContext(CCanvas* canvas, QObject* parent)
@@ -265,7 +265,7 @@ void IDrawContext::run()
 {
     mutex.lock();
 
-    QTime t;
+    QElapsedTimer t;
     t.start();
     qDebug() << "start thread" << objectName();
 

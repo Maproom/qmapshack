@@ -346,7 +346,7 @@ void CSearch::improveQuery()
             //Try to catch if user only entered a year. Not done in regular detecting as it could be a speed or so.
             if(search.searchValue.str1.isEmpty())
             {
-                search.searchValue.value1 = QDateTime(QDate(search.searchValue.value1, 1, 1)).toSecsSinceEpoch();
+                search.searchValue.value1 = QDate(search.searchValue.value1, 1, 1).startOfDay().toSecsSinceEpoch();
                 search.searchValue.str1 = "SsE";
             }
             //Assume you want 2012 and not 1912 (qt defaults to 19xx)
@@ -361,7 +361,7 @@ void CSearch::improveQuery()
             //Try to catch if user only entered a year. Not done in regular detecting as it could be a speed or so.
             if(search.searchValue.str2.isEmpty())
             {
-                search.searchValue.value2 = QDateTime(QDate(search.searchValue.value2, 1, 1)).toSecsSinceEpoch();
+                search.searchValue.value2 = QDate(search.searchValue.value2, 1, 1).startOfDay().toSecsSinceEpoch();
                 search.searchValue.str2 = "SsE";
             }
             //Assume you want 2012 and not 1912 (qt defaults to 19xx)

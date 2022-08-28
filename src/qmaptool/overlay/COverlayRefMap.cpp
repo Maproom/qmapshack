@@ -625,8 +625,8 @@ void COverlayRefMap::slotSaveGcp()
     QTextStream out(&file);
     out.setRealNumberPrecision(10);
 
-    out << "#V1.0" << endl;
-    out << "#gcpproj: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs" << endl;
+    out << "#V1.0" << Qt::endl;
+    out << "#gcpproj: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs" << Qt::endl;
 
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
@@ -639,7 +639,7 @@ void COverlayRefMap::slotSaveGcp()
         const QPointF& ptx = pt->getPtPtx();
         const QPointF& ref = pt->getPtRef();
 
-        out << "-gcp " << ptx.x() << " " << ptx.y() << " " << ref.y() << " " << ref.x() << endl;
+        out << "-gcp " << ptx.x() << " " << ptx.y() << " " << ref.y() << " " << ref.x() << Qt::endl;
     }
 
     file.close();

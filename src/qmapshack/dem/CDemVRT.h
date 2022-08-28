@@ -39,7 +39,7 @@ public:
     qreal getSlopeAt(const QPointF& pos, bool checkScale) override;
 
 private:
-    void drawElevationShadeScale(QPainter &p) const;
+    void drawElevationShadeScale(QPainter& p) const;
 
     QMutex mutex;
 

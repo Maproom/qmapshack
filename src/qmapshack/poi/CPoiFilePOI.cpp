@@ -17,14 +17,14 @@
 
 **********************************************************************************************/
 
-#include "poi/IPoiItem.h"
 #include "helpers/CDraw.h"
 #include "helpers/CTryMutexLocker.h"
 #include "poi/CPoiCategory.h"
 #include "poi/CPoiDraw.h"
-#include "poi/CPoiIconCategory.h"
 #include "poi/CPoiFilePOI.h"
+#include "poi/CPoiIconCategory.h"
 #include "poi/IPoiFile.h"
+#include "poi/IPoiItem.h"
 
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -247,7 +247,7 @@ void CPoiFilePOI::draw(IDrawContext::buffer_t& buf)
 
 bool CPoiFilePOI::findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
 {
-    CTryMutexLocker lock(mutex);
+    CTryMutexLocker<QRecursiveMutex> lock(mutex);
     if(!lock.try_lock())
     {
         return false;
@@ -268,7 +268,7 @@ bool CPoiFilePOI::findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QLi
 
 void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<QPointF>& posPoiHighlight)
 {
-    CTryMutexLocker lock(mutex);
+    CTryMutexLocker<QRecursiveMutex> lock(mutex);
     if(!lock.try_lock())
     {
         return;
@@ -325,7 +325,7 @@ void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<
 
 bool CPoiFilePOI::getToolTip(const QPoint& px, QString& str) const
 {
-    CTryMutexLocker lock(mutex);
+    CTryMutexLocker<QRecursiveMutex> lock(mutex);
     if(!lock.try_lock())
     {
         return false;
@@ -559,9 +559,9 @@ void CPoiFilePOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLat
         loadedPoisByArea[categoryID][minLonM10][minLatM10].append(key);
         // TODO: this overwrites a POI if it already was loaded. The difference between those will be the category. Some better handling should be done
         loadedPois[key] = CPoiItemPOI(data,
-                                  QPointF((query.value(eSqlColumnPoiMaxLon).toDouble() + query.value(eSqlColumnPoiMinLon).toDouble()) / 2 * DEG_TO_RAD,
-                                          (query.value(eSqlColumnPoiMaxLat).toDouble() + query.value(eSqlColumnPoiMinLat).toDouble()) / 2 * DEG_TO_RAD),
-                                  key, categoryNames[categoryID], garminIcon);
+                                      QPointF((query.value(eSqlColumnPoiMaxLon).toDouble() + query.value(eSqlColumnPoiMinLon).toDouble()) / 2 * DEG_TO_RAD,
+                                              (query.value(eSqlColumnPoiMaxLat).toDouble() + query.value(eSqlColumnPoiMinLat).toDouble()) / 2 * DEG_TO_RAD),
+                                      key, categoryNames[categoryID], garminIcon);
     }
     // Close database, as this method is called from mutiple threads.
     QSqlDatabase::removeDatabase(filename);

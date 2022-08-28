@@ -147,11 +147,11 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
     mapFile.bbox = QRectF(QPointF(mapFile.lon1, mapFile.lat1), QPointF(mapFile.lon2, mapFile.lat2));
 
 
-    qDebug() << hex << "Version:" << hdr.version << "DevId" << hdr.devid;
+    qDebug() << Qt::hex << "Version:" << hdr.version << "DevId" << hdr.devid;
     qDebug() << mapFile.lon1 << mapFile.lat1 << mapFile.lon2 << mapFile.lat2;
-    qDebug() << hex << hdr.lon1 << hdr.lat1 << hdr.lon2 << hdr.lat2;
-    qDebug() << hex << "Details:" << hdr.details << "Expire:" << hdr.expire << "CRC:" << hdr.crc;
-    qDebug() << hex << "Signature:" << hdr.signature << "Offset:" << hdr.signature_offset;
+    qDebug() << Qt::hex << hdr.lon1 << hdr.lat1 << hdr.lon2 << hdr.lat2;
+    qDebug() << Qt::hex << "Details:" << hdr.details << "Expire:" << hdr.expire << "CRC:" << hdr.crc;
+    qDebug() << Qt::hex << "Signature:" << hdr.signature << "Offset:" << hdr.signature_offset;
 
     QString strTopLeft, strBottomRight;
     IUnit::degToStr(mapFile.lon1, mapFile.lat1, strTopLeft);
@@ -175,7 +175,7 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
             level.copyright1 = codec->toUnicode(ba);
             copyright += level.copyright1 + "\n";
         }
-        qDebug() << i << hex << level.nTiles << level.offset << level.scale;
+        qDebug() << i << Qt::hex << level.nTiles << level.offset << level.scale;
     }
 
     quint32 infoBlockVersion;

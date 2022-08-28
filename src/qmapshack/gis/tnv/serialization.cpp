@@ -217,10 +217,10 @@ bool CGisItemTrk::saveTwoNav(const QString& filename)
 
     QTextStream out(&file);
     out.setCodec(QTextCodec::codecForName("UTF-8"));
-    out << bom;
-    out << "B  UTF-8" << endl;
-    out << "G  WGS 84" << endl;
-    out << "U  1" << endl;
+    out << Qt::bom;
+    out << "B  UTF-8" << Qt::endl;
+    out << "G  WGS 84" << Qt::endl;
+    out << "U  1" << Qt::endl;
 
     QString name = getName();
     name = name.replace(" ", "_");
@@ -234,10 +234,10 @@ bool CGisItemTrk::saveTwoNav(const QString& filename)
     list << QString::number(color.blue());
     list << "5";                 // ???
     list << "1";                 // ???
-    out << list.join(" ") << endl;
+    out << list.join(" ") << Qt::endl;
 
-    out << "s " << name << endl;
-    out << "y " << getKey().item << endl;
+    out << "s " << name << Qt::endl;
+    out << "y " << getKey().item << Qt::endl;
 
 
     for(const CTrackData::trkseg_t& seg : qAsConst(trk.segs))
@@ -266,7 +266,7 @@ bool CGisItemTrk::saveTwoNav(const QString& filename)
             list << "-1";
             list << "-1.000000";
 
-            out << list.join(" ") << endl;
+            out << list.join(" ") << Qt::endl;
 
             if(!trkpt.keyWpt.item.isEmpty() && project)
             {
@@ -287,7 +287,7 @@ bool CGisItemTrk::saveTwoNav(const QString& filename)
                     list << "3";
                     list << "0";
                     list << wpt->getName();
-                    out << "a " << list.join(",") << endl;
+                    out << "a " << list.join(",") << Qt::endl;
 
                     for(const CGisItemWpt::image_t& img : wpt->getImages())
                     {
@@ -312,7 +312,7 @@ bool CGisItemTrk::saveTwoNav(const QString& filename)
                         list << "1";
                         list << "8";
                         list << "0";
-                        out << "a " << list.join(",") << endl;
+                        out << "a " << list.join(",") << Qt::endl;
                     }
 
                     QString comment = wpt->getComment();
@@ -323,11 +323,11 @@ bool CGisItemTrk::saveTwoNav(const QString& filename)
                         fileCmt.open(QIODevice::WriteOnly);
 
                         QTextStream stream(&fileCmt);
-                        stream << bom << comment;
+                        stream << Qt::bom << comment;
 
                         fileCmt.close();
 
-                        out << "a .\\" << filenameCmt << ",0" << endl;
+                        out << "a .\\" << filenameCmt << ",0" << Qt::endl;
                     }
                 }
             }
@@ -392,7 +392,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
 
         case 'C':
         {
-            QStringList values = line.split(' ', QString::SkipEmptyParts);
+            QStringList values = line.split(' ', Qt::SkipEmptyParts);
             if(values.size() > 2)
             {
                 QColor c(values[1].toInt(), values[2].toInt(), values[3].toInt());
@@ -400,7 +400,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             }
             else
             {
-                values = values[1].split(',', QString::SkipEmptyParts);
+                values = values[1].split(',', Qt::SkipEmptyParts);
                 if(values.size() >= 3)
                 {
                     QColor c(values[0].toInt(), values[1].toInt(), values[2].toInt());
@@ -413,7 +413,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
         case 'T':
         {
             CTrackData::trkpt_t pt;
-            QStringList values = line.split(' ', QString::SkipEmptyParts);
+            QStringList values = line.split(' ', Qt::SkipEmptyParts);
 
             const int N = values.size();
             if(N < 8)
@@ -517,7 +517,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     list << QString("%1").arg(wpt.ele == NOINT ? 0 : wpt.ele);
 
     out << list.join(" ") << " ";
-    out << description << endl;
+    out << description << Qt::endl;
 
     list.clear();
     list << iconQlGt2TwoNav(getIconName());
@@ -533,7 +533,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
 
     out << "w ";
     out << list.join(",");
-    out << endl;
+    out << Qt::endl;
 
 
 
@@ -545,11 +545,11 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
         fileCmt.open(QIODevice::WriteOnly);
 
         QTextStream stream(&fileCmt);
-        stream << bom << comment;
+        stream << Qt::bom << comment;
 
         fileCmt.close();
 
-        out << "a .\\" << filenameCmt << ",0" << endl;
+        out << "a .\\" << filenameCmt << ",0" << Qt::endl;
     }
 
 
@@ -570,7 +570,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
 
         fn = makeUniqueName(fn, dir);
         img.pixmap.save(dir.absoluteFilePath(fn));
-        out << "a .\\" << fn << endl;
+        out << "a .\\" << fn << Qt::endl;
     }
 
     if(isGeocache())
@@ -581,9 +581,9 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
         writeGcExt(gpxCache);
         doc.appendChild(gpxCache);
 
-        out << "e" << endl;
+        out << "e" << Qt::endl;
         out << doc.toString();
-        out << "ee" << endl;
+        out << "ee" << Qt::endl;
     }
 }
 
@@ -647,7 +647,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             }
 
             wpt = wpt_t();
-            QStringList values = line.split(' ', QString::SkipEmptyParts);
+            QStringList values = line.split(' ', Qt::SkipEmptyParts);
 
             if(values.size() < 8)
             {
@@ -675,7 +675,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
         case 'w':
         {
-            QStringList values = line.mid(1).simplified().split(',', QString::KeepEmptyParts);
+            QStringList values = line.mid(1).simplified().split(',', Qt::KeepEmptyParts);
 
             if(values.size() < 10)
             {
@@ -750,7 +750,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
         case 'a':
         {
             img_t img;
-            QStringList values = line.mid(1).simplified().split(',', QString::KeepEmptyParts);
+            QStringList values = line.mid(1).simplified().split(',', Qt::KeepEmptyParts);
             if(values.size() < 1)
             {
                 QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to read data."), QMessageBox::Abort, QMessageBox::Abort);

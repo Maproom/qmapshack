@@ -1192,15 +1192,15 @@ void IGisProject::sortItems(QList<IGisItem*>& items) const
     switch(sortingFolder)
     {
     case IGisProject::eSortFolderName:
-        qSort(items.begin(), items.end(), &sortByName<IGisItem>);
+        std::sort(items.begin(), items.end(), &sortByName<IGisItem>);
         break;
 
     case IGisProject::eSortFolderTime:
-        qSort(items.begin(), items.end(), &sortByTime);
+        std::sort(items.begin(), items.end(), &sortByTime);
         break;
 
     case IGisProject::eSortFolderRating:
-        qSort(items.begin(), items.end(), [](IGisItem* a, IGisItem* b){return a->getRating() > b->getRating();});
+        std::sort(items.begin(), items.end(), [](IGisItem* a, IGisItem* b){return a->getRating() > b->getRating();});
         break;
     }
 }

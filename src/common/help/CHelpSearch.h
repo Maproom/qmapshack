@@ -31,17 +31,17 @@ class CHelpSearch : public QWidget
 {
     Q_OBJECT
 public:
-    CHelpSearch(QHelpEngine * engine, QWidget * parent);
+    CHelpSearch(QHelpEngine* engine, QWidget* parent);
     virtual ~CHelpSearch() = default;
 
 private slots:
     void slotSearch();
 
 private:
-    QLabel * labelSearch;
-    QHelpSearchEngine * searchEngine;
-    QHelpSearchQueryWidget * query;
-    QHelpSearchResultWidget * result;
+    QLabel* labelSearch;
+    QHelpSearchEngine* searchEngine;
+    QHelpSearchQueryWidget* query;
+    QHelpSearchResultWidget* result;
 };
 
 #endif //CHELPSEARCH_H

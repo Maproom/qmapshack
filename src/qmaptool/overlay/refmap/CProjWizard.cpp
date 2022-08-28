@@ -60,7 +60,7 @@ CProjWizard::CProjWizard(QLineEdit& line, QWidget* parent)
         list << entry;
         ++idx;
     }
-    qSort(list.begin(), list.end(), mitabLessThan);
+    std::sort(list.begin(), list.end(), mitabLessThan);
 
     for(const mitab_entry_t& entry : qAsConst(list))
     {

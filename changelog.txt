@@ -18,6 +18,7 @@ V1.XX.X
 [QMS-540] MacOS: Updating bundle with GEOS and proper GDAS binaries
 [QMS-542] Changed drag`n drop in workspace
 [QMS-551] Set QDateTime short format back to Qt::ISODate
+[QMS-555] Rearrange widgets in IFilterSpeedCycle.ui for small screen resolution
 [QMS-557] Add FilterSplitTrack
 
 V1.16.1

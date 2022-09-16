@@ -655,6 +655,39 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
     new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts.last().idxTotal, trk, project);
 }
 
+void CGisItemTrk::filterSplitTrack(qint8 nTracks)
+{
+    IGisProject* project = CGisWorkspace::self().selectProject(false);
+    if(nullptr == project)
+    {
+        return;
+    }
+    qint32 overlapNodes = 1;
+
+    qint32 segNodes = cntTotalPoints/nTracks+1;
+    qint32 segStartIdx = 0;
+    qint32 segEndIdx = segNodes-1;
+    qint32 remaining = cntTotalPoints;
+
+    qint8 part=0;
+    while(remaining>0)
+    {
+        new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), segStartIdx, segEndIdx, trk, project);
+        // update remaining
+        segNodes = segEndIdx-segStartIdx+1;
+        remaining = remaining - segNodes;
+        if(remaining>0)
+        {
+            remaining+=overlapNodes;
+        }
+        // for next segment
+        segStartIdx = segEndIdx + (1-overlapNodes); // if this was last, never used again
+        segEndIdx = segStartIdx + qMin(remaining, segNodes)-1; // if this was last, never used again
+        
+        ++part;        
+    }
+}
+
 void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
 {
     qint32 knotPtsCount = 0;

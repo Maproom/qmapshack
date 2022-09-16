@@ -626,6 +626,7 @@ public:
     void filterReset();
     void filterDelete();
     void filterSplitSegment();
+    void filterSplitTrack(qint8 nTracks);
     void filterDeleteExtension(const QString& ext);
     void filterSubPt2Pt();
     void filterChangeStartPoint(qint32 idxNewStartPoint, const QString& wptName);

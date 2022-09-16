@@ -123,6 +123,7 @@
         <file>../icons/32x32/Filter.png</file>
         <file>../icons/32x32/FilterLoopsCut.png</file>
         <file>../icons/32x32/FilterModifyExtension.png</file>
+        <file>../icons/32x32/FilterSplitTrack.png</file>
         <file>../icons/32x32/FilterSubPt2Pt.png</file>
         <file>../icons/32x32/FitProject.png</file>
         <file>../icons/32x32/Focus.png</file>
@@ -408,6 +409,7 @@
         <file>../icons/48x48/FilterChangeStartPoint.png</file>
         <file>../icons/48x48/FilterLoopsCut.png</file>
         <file>../icons/48x48/FilterModifyExtension.png</file>
+        <file>../icons/48x48/FilterSplitTrack.png</file>
         <file>../icons/48x48/FilterSubPt2Pt.png</file>
         <file>../icons/48x48/FitProject.png</file>
         <file>../icons/48x48/Focus.png</file>

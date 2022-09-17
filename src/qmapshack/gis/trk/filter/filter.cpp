@@ -662,28 +662,25 @@ void CGisItemTrk::filterSplitTrack(qint8 nTracks)
     {
         return;
     }
-    qint32 overlapNodes = 1;
+    const qint32 segNodes = cntTotalPoints/nTracks + (cntTotalPoints % nTracks != 0); //take ceil
 
-    qint32 segNodes = cntTotalPoints/nTracks+1;
     qint32 segStartIdx = 0;
     qint32 segEndIdx = segNodes-1;
     qint32 remaining = cntTotalPoints;
 
     qint8 part=0;
-    while(remaining>0)
+    while(part<nTracks)
     {
         new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), segStartIdx, segEndIdx, trk, project);
+
         // update remaining
-        segNodes = segEndIdx-segStartIdx+1;
-        remaining = remaining - segNodes;
-        if(remaining>0)
-        {
-            remaining+=overlapNodes;
-        }
-        // for next segment
-        segStartIdx = segEndIdx + (1-overlapNodes); // if this was last, never used again
-        segEndIdx = segStartIdx + qMin(remaining, segNodes)-1; // if this was last, never used again
-        
+        remaining -= segNodes;
+        remaining += 1; //The last node is used as starting node
+
+        // for next segment. If this was last, never used again
+        segStartIdx = segEndIdx;
+        segEndIdx = segStartIdx + qMin(remaining, segNodes)-1;
+
         ++part;        
     }
 }

@@ -30,8 +30,6 @@ CFilterSplitTrack::CFilterSplitTrack(CGisItemTrk& trk, QWidget* parent)
 {
     setupUi(this);
 
-    spinBox->setSuffix(IUnit::self().baseUnit);
-
     SETTINGS;
     spinBox->setValue(cfg.value("TrackDetails/Filter/SplitTrack/nTracks").toInt());
 

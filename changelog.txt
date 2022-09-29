@@ -19,6 +19,7 @@ V1.XX.X
 [QMS-542] Changed drag`n drop in workspace
 [QMS-551] Set QDateTime short format back to Qt::ISODate
 [QMS-557] Add FilterSplitTrack
+[QMS-560] Fix FilterSplitTrack to include all track points
 
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing

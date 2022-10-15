@@ -147,6 +147,7 @@ SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
     File Files\Qt5Positioning.dll
     File Files\Qt5PrintSupport.dll
     File Files\Qt5Qml.dll
+	File Files\Qt5QmlModels.dll
     File Files\Qt5Quick.dll
     File Files\Qt5QuickWidgets.dll
     File Files\Qt5Sensors.dll

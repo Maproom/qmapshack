@@ -3,7 +3,7 @@ rem Please adapt environment variables in section 1) to your system
 
 
 rem Section 1.) Define path to Qt, MSVC, .... installations
-set QMSI_QT_PATH="C:\Qt\5.12.11\msvc2017_64"
+set QMSI_QT_PATH="C:\Qt\5.15.2\msvc2019_64"
 rem get the VC redistributable installer from https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 set QMSI_VCREDIST_PATH="C:\Users\Christouf\Applications\buildQMS\downloads"
 set QMSI_GDAL_PATH="C:\Users\Christouf\Applications\buildQMS\GDAL\gdal-3.3.0Built"

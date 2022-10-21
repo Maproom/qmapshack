@@ -657,11 +657,13 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
 
 void CGisItemTrk::filterSplitTrack(qint8 nTracks)
 {
-    IGisProject* project = CGisWorkspace::self().selectProject(false);
     if(cntTotalPoints <= nTracks)// Can't split into tracks with length 1 or smaller
     {
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("The filter can not be applied"), tr("The number of points in the track must be higher"
+        " than the number of tracks to split into."), QMessageBox::Abort, QMessageBox::Abort);
         return;
     }
+    IGisProject* project = CGisWorkspace::self().selectProject(false);
     if(nullptr == project)
     {
         return;

@@ -655,6 +655,39 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength)
     new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), pts.first().idxTotal, pts.last().idxTotal, trk, project);
 }
 
+void CGisItemTrk::filterSplitTrack(qint8 nTracks)
+{
+    if(cntTotalPoints <= nTracks)// Can't split into tracks with length 1 or smaller
+    {
+        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("The filter can not be applied"), tr("The number of points in the track must be higher"
+        " than the number of tracks to split into."), QMessageBox::Abort, QMessageBox::Abort);
+        return;
+    }
+    IGisProject* project = CGisWorkspace::self().selectProject(false);
+    if(nullptr == project)
+    {
+        return;
+    }
+    const qint32 cntTotalPointsNew = cntTotalPoints + nTracks - 1;
+    const qint32 segNodes = cntTotalPointsNew/nTracks;
+    qint32 nOver = cntTotalPointsNew % nTracks; // Reaminder of nodes to distribute over splitted tracks
+
+    qint32 segStartIdx = 0;
+    qint32 segEndIdx = segNodes - 1 + (nOver > 0);
+
+    qint8 part = 0;
+    while(part < nTracks)
+    {
+        new CGisItemTrk(tr("%1 (Part %2)").arg(trk.name).arg(part), segStartIdx, segEndIdx, trk, project);
+        // for next segment. If this was last, never used again
+        nOver--;
+        segStartIdx = segEndIdx;
+        segEndIdx = segStartIdx + segNodes - 1 + (nOver > 0);
+
+        ++part;        
+    }
+}
+
 void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio)
 {
     qint32 knotPtsCount = 0;

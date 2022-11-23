@@ -180,7 +180,7 @@ void CTableTrk::updateData()
         item->setText(eColNum, QString::number(trkpt.idxTotal));
 
         item->setText(eColTime, trkpt.time.isValid()
-                      ? IUnit::self().datetime2string(trkpt.time, true, QPointF(trkpt.lon, trkpt.lat) * DEG_TO_RAD)
+                      ? IUnit::self().datetime2string(trkpt.time, IUnit::eTimeFormatShort, QPointF(trkpt.lon, trkpt.lat) * DEG_TO_RAD)
                       : "-"
                       );
 

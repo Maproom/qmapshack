@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>697</width>
-    <height>165</height>
+    <width>1189</width>
+    <height>275</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -41,35 +41,18 @@
    <property name="spacing">
     <number>3</number>
    </property>
-   <item row="0" column="0">
+   <item row="1" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <property name="spacing">
       <number>6</number>
      </property>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_8">
-       <property name="spacing">
-        <number>3</number>
-       </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string> Type</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboCyclingType"/>
-         </item>
-        </layout>
+        <widget class="QComboBox" name="comboCyclingType"/>
        </item>
        <item>
-        <spacer name="verticalSpacer_4">
+        <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -85,12 +68,6 @@
      </item>
      <item>
       <widget class="QFrame" name="frameCycling">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>86</height>
-        </size>
-       </property>
        <property name="frameShape">
         <enum>QFrame::NoFrame</enum>
        </property>
@@ -116,27 +93,7 @@
         <property name="spacing">
          <number>3</number>
         </property>
-        <item row="5" column="1">
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>Max Speed</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>Speed at zero Slope</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="2">
+        <item row="6" column="3">
          <widget class="QDoubleSpinBox" name="spinSlopeAtMaxSpeed">
           <property name="suffix">
            <string/>
@@ -155,27 +112,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>Uphill:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>at positive Slope</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
+        <item row="4" column="3">
          <widget class="QDoubleSpinBox" name="spinSlopeAtMinSpeed">
           <property name="suffix">
            <string/>
@@ -191,7 +128,17 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="2">
+        <item row="5" column="1">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Downhill:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="3">
          <widget class="QDoubleSpinBox" name="spinMaxSpeed">
           <property name="suffix">
            <string/>
@@ -213,7 +160,30 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="4" column="2">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>at positive Slope</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="4">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="1">
          <widget class="QLabel" name="label_11">
           <property name="text">
            <string>Plain Level:</string>
@@ -223,49 +193,7 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Downhill:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QDoubleSpinBox" name="spinMinSpeed">
-          <property name="suffix">
-           <string/>
-          </property>
-          <property name="decimals">
-           <number>1</number>
-          </property>
-          <property name="minimum">
-           <double>0.100000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>100.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.100000000000000</double>
-          </property>
-          <property name="value">
-           <double>0.100000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Min Speed</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
+        <item row="1" column="3">
          <widget class="QDoubleSpinBox" name="spinPlainSpeed">
           <property name="suffix">
            <string/>
@@ -287,17 +215,7 @@
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>at negative Slope</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
+        <item row="2" column="2" colspan="2">
          <widget class="QPushButton" name="pushSetMinMaxSlope">
           <property name="toolTip">
            <string>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</string>
@@ -307,6 +225,91 @@
           </property>
          </widget>
         </item>
+        <item row="6" column="2">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>at negative Slope</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="2">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Max Speed</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QDoubleSpinBox" name="spinMinSpeed">
+          <property name="suffix">
+           <string/>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="minimum">
+           <double>0.100000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.100000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Min Speed</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Uphill:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Speed at zero Slope</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="3">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </widget>
      </item>
@@ -315,7 +318,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>comboCyclingType</tabstop>
   <tabstop>spinPlainSpeed</tabstop>
   <tabstop>pushSetMinMaxSlope</tabstop>
   <tabstop>spinMinSpeed</tabstop>

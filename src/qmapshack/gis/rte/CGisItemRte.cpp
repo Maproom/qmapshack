@@ -430,7 +430,7 @@ QString CGisItemRte::getInfo(quint32 feature) const
     if(!rte.lastRoutedWith.isEmpty())
     {
         str += "<br/>\n";
-        str += tr("Last time routed:<br/>%1").arg(IUnit::datetime2string(rte.lastRoutedTime, false, boundingRect.center()));
+        str += tr("Last time routed:<br/>%1").arg(IUnit::datetime2string(rte.lastRoutedTime, IUnit::eTimeFormatLong, boundingRect.center()));
         str += "<br/>\n";
         str += tr("with %1").arg(rte.lastRoutedWith);
     }

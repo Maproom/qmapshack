@@ -565,7 +565,7 @@ QString IGisProject::getInfo() const
     if(metadata.time.isValid())
     {
         str += "<br/>\n";
-        str += IUnit::datetime2string(metadata.time, false);
+        str += IUnit::datetime2string(metadata.time, IUnit::eTimeFormatLong);
     }
 
 

@@ -105,16 +105,18 @@ public:
     /// parse a string for a timestamp
     static bool parseTimestamp(const QString& time, QDateTime& datetime);
 
+
+    enum time_format_e {eTimeFormatLong, eTimeFormatShort, eTimeFormatIso};
     /**
        @brief Convert date time object to string using the current timezone configuration
 
 
        @param time          the date/time object
-       @param shortDate     set true to get a short ISO time string
+       @param format        one of time_format_e
        @param pos           optional a position attached to the date/time object [rad]
        @return              A time string.
      */
-    static QString datetime2string(const QDateTime& time, bool shortDate, const QPointF& pos = NOPOINTF);
+    static QString datetime2string(const QDateTime& time, time_format_e format, const QPointF& pos = NOPOINTF);
 
     /// find the timezone setup by position
     static QByteArray pos2timezone(const QPointF& pos);

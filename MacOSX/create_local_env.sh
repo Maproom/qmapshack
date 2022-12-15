@@ -1,14 +1,8 @@
 #!/bin/sh
 
 # Create a local environment for all includes, libs, ... needed
-
-if [[ "$QMSDEVDIR" == "" ]]; then
-    echo "${RED}Please set QMSDEVDIR var to builddir (absolute path needed)${NC}"
-    echo "${RED}... OR run 1st_QMS_start.sh${NC}"
-    return
-fi
-
-LOCAL_ENV=$QMSDEVDIR/local
+DIR_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  # absolute path to the dir of this script
+source $DIR_SCRIPT/config.sh   # check for important paramters
 
 mkdir $LOCAL_ENV
 mkdir $LOCAL_ENV/bin

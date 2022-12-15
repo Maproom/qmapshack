@@ -1,25 +1,9 @@
 #!/bin/sh
 
-# Color echo output (only to emphasize the stages in the build process)
-export GREEN=$(tput setaf 2)
-export RED=$(tput setaf 1)
-export NC=$(tput sgr0)
+# DIR_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  # absolute path to the dir of this script
+# source $DIR_SCRIPT/config.sh   # check for important paramters
 
-if [[ "$QMSDEVDIR" == "" ]]; then
-    echo "${RED}Please set QMSDEVDIR var to builddir (absolute path needed)${NC}"
-    echo "${RED}... OR run 1st_QMS_start.sh${NC}"
-    return
-fi
-
-if [[ "$BUILD_RELEASE_DIR" == "" ]]; then
-    BUILD_RELEASE_DIR=$QMSDEVDIR/release
-fi
-
-
-QMS_SRC_DIR=$QMSDEVDIR/qmapshack
 SRC_RESOURCES_DIR=$QMS_SRC_DIR/MacOSX/resources
-QT_DIR=$HOMEBREW_PREFIX/opt/qt5
-
 
 APP_VERSION=0
 BUILD_TIME=$(date +"%y-%m-%dT%H:%M:%S")
@@ -67,7 +51,9 @@ function buildAppStructure {
     mkdir $BUILD_BUNDLE_RES_QM_DIR
     mkdir $BUILD_BUNDLE_FRW_DIR
     mkdir $BUILD_BUNDLE_PLUGIN_DIR
-    mkdir $BUILD_BUNDLE_EXTLIB_DIR
+    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
+        mkdir $BUILD_BUNDLE_EXTLIB_DIR
+    fi
 
     # TODO not all copied from predefined data is needed in every case (eg icon)
     # predefined data
@@ -171,10 +157,6 @@ function adjustLinking {
 
     for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
     do
-        #
-        #  2.12.20 switched off after using Qt5 from https://www.qt.io/offline-installers
-        #
-        #adjustLinkQt $F "Qt"
         adjustLinkQt $F "$HOMEBREW_PREFIX/"
     done
 
@@ -187,6 +169,17 @@ function adjustLinking {
 
     adjustLinkQt $BUILD_BUNDLE_APP_FILE "Qt"
     adjustLinkQt $BUILD_BUNDLE_APP_FILE "libroutino"
+
+    # Special treatment for QtWebEngineCore
+    # QtWebEngineProcess.app is an app within QtWebEngineCore.framework, which references other Qt frameworks
+    PATH_TO_QTWEBENGINEPROCESS="QtWebEngineCore.framework/Helpers/QtWebEngineProcess.app"
+    F=$BUILD_BUNDLE_FRW_DIR/$PATH_TO_QTWEBENGINEPROCESS/Contents/MacOS/QtWebEngineProcess
+    adjustLinkQt $F "$HOMEBREW_PREFIX/"
+    if [ -d "$BUILD_BUNDLE_FRW_DIR/$PATH_TO_QTWEBENGINEPROCESS/Contents" ]; then
+        pushd $BUILD_BUNDLE_FRW_DIR/$PATH_TO_QTWEBENGINEPROCESS/Contents
+        ln -s ../../../../../../../Frameworks .
+        popd
+    fi
 }
 
 
@@ -217,13 +210,13 @@ function adjustLinkQt {
             PREL="@executable_path/../PlugIns/$LIB"
         fi
 
-echo "-----"
-echo "F    = $F"
-echo "FREL = $FREL"
-echo "L    = $L"
-echo "P    = $P"
-echo "LIB  = $LIB"
-echo "PREL = $PREL"
+        echo "-----"
+        echo "F    = $F"
+        echo "FREL = $FREL"
+        echo "L    = $L"
+        echo "P    = $P"
+        echo "LIB  = $LIB"
+        echo "PREL = $PREL"
 
         if [[ "$P" == "$FREL" ]]; then
             echo "no update - is a relativ id"
@@ -236,6 +229,27 @@ echo "PREL = $PREL"
         fi
     done
 }
+
+
+function adjustLinkingExtTools {
+    echo "--------------------------------------------"
+    echo "Add rpath @executable_path/../Frameworks to "
+    for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
+    do
+        echo "F    = $F"
+        install_name_tool -add_rpath @executable_path/../Frameworks $F
+    done
+    echo "--------------------------------------------"
+}
+
+
+function printLinkingExtTools {
+    for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
+    do
+        printLinking $F
+    done
+}
+
 
 function checkLibraries {
 	F=$1 # file
@@ -295,13 +309,13 @@ function extractVersion {
 }
 
 function readRevisionHash {
-cd $QMS_SRC_DIR
-BUILD_HASH_KEY=$(git rev-parse HEAD)
-COMMIT_STATUS=$(git status -s -uno)
+    cd $QMS_SRC_DIR
+    BUILD_HASH_KEY=$(git rev-parse HEAD)
+    COMMIT_STATUS=$(git status -s -uno)
 
-if [[ "$COMMIT_STATUS" != "" ]]; then
-read -p "BEWARE - There are uncommited changes..."
-fi
+    if [[ "$COMMIT_STATUS" != "" ]]; then
+    read -p "BEWARE - There are uncommited changes..."
+    fi
 }
 
 function updateInfoPlist {

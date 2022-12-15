@@ -24,16 +24,24 @@ The homebrew package manager is the packagemanger of choice.
 
 Important script vars:
 
-QMSDEVDIR               (mandatory: the build environment)
-BUILD_RELEASE_DIR       (optional: location where the bundles are put)
-XCODE_PROJECT           (optional: if set to 1, create an XCode project instead of building QMS)
-BUILD_GDAL              (optional: if set to 1, build GDAL instead of using the homebrew package)
+- QMSDEVDIR               (mandatory: the build environment)
+- BUILD_RELEASE_DIR       (optional: location where the bundles are put)
+
+Parameters to configure build:
+- XCODE_PROJECT           (optional: if set, create an XCode project instead of building QMS)
+                          can be set with -x on commandline
+- BUILD_GDAL              (optional: if set, build GDAL instead of using the homebrew package)
+                          can be set with -g on commandline
+- BREW_PACKAGE_BUILD      if set creates QMS as an app relying on brew packages on runtime
+                          homebrew packages are listed in install-brew-packages.sh
+                          can be set with -b on commandline
 
 
 To run the complete build process:
 1. Create a dir cd into this directory. This dir will be referenced as $QMSDEVDIR
-2. Download https://github.com/d029940/qmapshack/blob/dev/MacOSX/QMS_build_files/1st_QMS_start.sh and put it into this dir
-4. run "sh 1st_QMS_start.sh | tee log.txt"
+2. clone git repo https://github.com/Maproom/qmapshack.git
+3. Check build paramters in ./qmapshack/MacOSX/config.sh
+4. run "sh ./qmapshack/MacOSX/build-all.sh | tee log.txt"
 5. ATTENTION: manual intervention is needed for:
         - applying admin password while changing dylibs (Apple requirement)
 6. check log.txt if an error occured
@@ -48,11 +56,9 @@ Contents of this folder MACOSX
 Folders:
 - archive: Outdated scripts to be deleted soon
 - resources: Resources like icons, info.plist specifically needed for MacOS 
-- routino-patch: contains files for patching Routino
 
 Scripts for the overall build process:
 
-- 1st_QMS_start.sh: This file should be downloaded into the QMS build dir and ran. (This kicks off the whole build process)
 - build-all.sh: automatically builds QMapShack. (calls sub build scripts, more modular)
         The only manual intervention is to pass the admin password for changing paths in dylibs
 
@@ -62,7 +68,6 @@ Scripts for building partial steps in the build process
 - build-quazip.sh: builds Quazip
 - build-routino.sh: builds Routino
 - build-gdal.sh: builds GDAL (currently not used since brew packages is used instead)
-- patch-QMS.sh: Patches QMapShack (ideally empty, currently non-existent)
 - build-QMS.sh: compiles QMapShack
 - bundle-all.sh: The complete bundling process (calls (in)directly the other bundle scripts).
   Should be called, when everything is built but not bundled (build-all.sh includes this script). 
@@ -70,15 +75,15 @@ Scripts for building partial steps in the build process
 - bundle-qmapshack.sh: bundles the app QMapShack
 - bundle-qmaptool.sh: bundles the app QMapTool
 - bundle.sh: bundles and signs QMapShack
-
+- config.sh: checks for valid a build dir and contains the vars driving the build process
 - clean.sh: cleans all build artifacts, except for brew*diff.txt (which lists brew packages installed for the build process)
 - create_local_env: create a local environment where all external libs/packages can be saved
     (Idea: the libs can be downloaded via package managers and copied 
     or directly from the internet. 
     Subsequent build process will be from then on independent libs spread across the file system
     Build processes, like bundling have still to be adapted (WiP)).
+- install-brew-packages.sh: installs homebrew packages for the build process
 
-- file "HowtoBuildOSX-d029940.txt" describes how to build QMapShack w/o using "build-QMS.sh" Needs deep understanding of the build process of QMS on Mac
 
 
 

@@ -1,31 +1,18 @@
 #!/bin/sh
 
-# Color echo output (only to emphasize the stages in the build process)
-export GREEN=$(tput setaf 2)
-export RED=$(tput setaf 1)
-export NC=$(tput sgr0)
-
-echo "${GREEN}Bundling QMapShack.app${NC}"
-if [[ "$QMSDEVDIR" == "" ]]; then
-    echo "${RED}Please set QMSDEVDIR var to builddir (absolute path needed)${NC}"
-    echo "${RED}... OR run 1st_QMS_start.sh${NC}"
-    return
-fi
+DIR_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  # absolute path to the dir of this script
+source $DIR_SCRIPT/config.sh   # check for important paramters
 
 
-if [[ "$BUILD_RELEASE_DIR" == "" ]]; then
-    BUILD_RELEASE_DIR=$QMSDEVDIR/release
-fi
+echo "${INFO}Bundling QMapShack.app${NC}"
 
-LOCAL_ENV=$QMSDEVDIR/local
 
 set -a
 APP_NAME=QMapShack
 set +a
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $DIR/bundle-env-path.sh
-source $DIR/bundle-common-func.sh
+source $DIR_SCRIPT/bundle-env-path.sh
+source $DIR_SCRIPT/bundle-common-func.sh
 
 
 function extendAppStructure {
@@ -41,17 +28,25 @@ function extendAppStructure {
 function copyAdditionalLibraries {
     cp -v    $LOCAL_ENV/lib/libroutino* $BUILD_BUNDLE_FRW_DIR
     cp -v    $LOCAL_ENV/lib/libquazip*.dylib $BUILD_BUNDLE_FRW_DIR
-    # cp -v    $HOMEBREW_PREFIX/lib/libgeos*.dylib $BUILD_BUNDLE_FRW_DIR
-    cp -v    $HOMEBREW_PREFIX/lib/libgeos*.dylib $BUILD_BUNDLE_EXTLIB_DIR
-    cp -v    $GDAL_DIR/* $BUILD_BUNDLE_FRW_DIR
+    
+    if [[ "$BUILD_GDAL" != "" ]] ; then
+        # GDAL should not be copied to bundle anyway
+        cp -v    $GDAL_DIR/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
+    fi
 
-    cp -v    $HOMEBREW_PREFIX/lib/libproj*.dylib $BUILD_BUNDLE_FRW_DIR
+    if [[ "$BREW_PACKAGE_BUILD" == "" ]]; then
+        # QMS not as a brew pkg
+        cp -v    $GDAL_DIR/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
+        cp -v    $HOMEBREW_PREFIX/lib/libgeos*.dylib $BUILD_BUNDLE_EXTLIB_DIR
 
-    cp -v    $HOMEBREW_PREFIX/lib/libdbus*.dylib $BUILD_BUNDLE_FRW_DIR
+        cp -v    $HOMEBREW_PREFIX/lib/libproj*.dylib $BUILD_BUNDLE_FRW_DIR
 
-    cp -v -R $QT_DIR/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
+        cp -v    $HOMEBREW_PREFIX/lib/libdbus*.dylib $BUILD_BUNDLE_FRW_DIR
+
+        cp -v -R $QT_DIR/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
+        cp -v -R $QT_DIR/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
+        cp -v -R $QT_DIR/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
+    fi
 
     # remove debug libraries
     for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/* -type f -name '*_debug*'`
@@ -83,40 +78,19 @@ function copyExternalHelpFiles_QMS {
 
 
 function copyExtTools {
-    # check for homebrew
-    if command -v brew > /dev/null 2>&1; then
-        # 1. 'brew list gdal': find all gdal files installed by homebrew
-        # 2. 'grep bin": select only files in the bin folder
-        # 3. copy those files to BUILD_BUNDLE_RES_BIN_DIR
-        brew list gdal | grep bin | xargs -J % cp -v % $BUILD_BUNDLE_RES_BIN_DIR
-    else
+if [[ "$BUILD_GDAL" != "" ]]; then
+    # use GDAL built from source
         #cp -v $GDAL_DIR/bin/*                       $BUILD_BUNDLE_RES_BIN_DIR
-        # at least gdalbuildvrt is used
         cp -v $GDAL_DIR/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
+    else
+        cp -v `brew --prefix gdal`/bin/gdalbuildvrt $BUILD_BUNDLE_RES_BIN_DIR
     fi
     cp -v $HOMEBREW_PREFIX/bin/proj             $BUILD_BUNDLE_RES_BIN_DIR
     cp -v $LOCAL_ENV/lib/planetsplitter         $BUILD_BUNDLE_RES_BIN_DIR
 
-
     # currently only used by QMapTool.
     cp -v $BUILD_BIN_DIR/qmt_rgb2pct            $BUILD_BUNDLE_RES_BIN_DIR
     cp -v $BUILD_BIN_DIR/qmt_map2jnx            $BUILD_BUNDLE_RES_BIN_DIR
-}
-
-
-function adjustLinkingExtTools {
-    for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
-    do
-        adjustLinkQt $F "$HOMEBREW_PREFIX/"
-    done
-}
-
-
-function printLinkingExtTools {
-    for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
-    do
-        printLinking $F
-    done
 }
 
 
@@ -141,22 +115,36 @@ if [[ "$1" == "" ]]; then
     extendAppStructure
     echo "---replace version string ----------"
     updateInfoPlist
-    echo "---qt deploy tool ------------------"
-    qtDeploy
+    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
+        echo "---qt deploy tool ------------------"
+        qtDeploy
+    fi
     echo "---copy libraries ------------------"
     copyAdditionalLibraries
     echo "---copy external files -------------"
     copyQtTrqnslations
     copyExternalFiles
     copyExternalHelpFiles_QMS
-    echo "---adjust linking ------------------"
-    adjustLinking
+    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
+        echo "---adjust linking ------------------"
+        adjustLinking
+    fi
     echo "---external tools ------------------"
     copyExtTools
-    adjustLinkingExtTools
+    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
+        adjustLinkingExtTools
+    fi
     printLinkingExtTools
     echo "------------------------------------"
     # chmod a+x $BUILD_BUNDLE_DIR/Contents/Frameworks/*
+    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
+        # Codesign the apps (on arm64 mandatory):
+        echo "${INFO}Signing app bundles${NC}"
+        codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
+        # Special hack for gdalbuildvrt
+        # install_name_tool -add_rpath @executable_path/../Frameworks $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+        codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+    fi
 fi
 
 if [[ "$1" == "archive" ]]; then

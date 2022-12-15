@@ -14,13 +14,15 @@
 # 2a. QMapShack has been downloaded from git (git clone ...)
 ######################################################################## 
 
-if [[ "$QMSDEVDIR" == "" ]]; then
-    echo "${RED}Please run 1st_QMS_start.sh${NC}"
-    return
-fi
+export DIR_SCRIPT=$(cd `dirname $0` && pwd -P) # absolute path to the dir of this script
+source $DIR_SCRIPT/config.sh   # check for important paramters
 
-cd $QMSDEVDIR
-SRC_OSX_DIR=$QMSDEVDIR/QMapShack/MacOSX
+echo "${INFO}Are these parameters correct?${NC}"
+echo "${INFO}Is your build dir outside of the qmapshack source dir (cloned from GitHub)?${NC}"
+echo "${INFO}Are you in the correct git branch? Check with \"git status\" $PWD${NC}"
+echo "${INFO}Please read $SRC_OSX_DIR/README.md${NC}"
+echo "${INFO}Press key to start building process${NC}"
+read -n 1 -s
 
 
 ######################################################################## 
@@ -48,8 +50,8 @@ source $SRC_OSX_DIR/build-quazip.sh
 cd $QMSDEVDIR
 
 ######################################################################## 
-# build GDAL (experimental: now using cmake)
-if [[ $BUILD_GDAL -eq 1 ]]; then
+# build GDAL
+if [[ "$BUILD_GDAL" != "" ]]; then
     cd $QMSDEVDIR
     source $SRC_OSX_DIR/build-gdal.sh
     cd $QMSDEVDIR
@@ -66,11 +68,6 @@ cd $QMSDEVDIR
 sh $SRC_OSX_DIR/build-QMS.sh
 cd $QMSDEVDIR
 
-if [[ $XCODE_PROJECT -eq 1 ]]; then
-    echo "${GREEN}Xcode project written in $QMSDEVDIR/build_QMapShack${NC}"
-    exit
-fi
-
 # Bundling QMapShack and QMapTool
 # source $QMS_BUILD_FILES/bundle.sh
 source $SRC_OSX_DIR/bundle-all.sh
@@ -82,12 +79,12 @@ cd $QMSDEVDIR
 # If the system is running in dark mode, then buttons which appear on top of a map are not visible (e.g. while adjusting a track)
 # These buttons are not dark-mode enabled.
 # Solution:
-# echo "${RED}Remark: QMapShack cannot show buttons on the map in dark mode.${NC}"
+# echo "${CLR_BAD}Remark: QMapShack cannot show buttons on the map in dark mode.${NC}"
 # Add the following key to the "info.plist" file, i.e. completely opting out from dark mode
 # <key>NSRequiresAquaSystemAppearance</key> <string>true</string>
 # The "info.plist" file can be found in the bundle of the app under the "Contents" folder
-# echo "${GREEN}QMapShack can ignore dark mode by adding the following key to the \"info.plist\" file.${NC}"
-# echo "${GREEN}<key>NSRequiresAquaSystemAppearance</key> <string>true</string>${NC}"
-# echo "${GREEN}The \"info.plist\" file can be found in the bundle of the app under the \"Contents\" folder,${NC}"
+# echo "${INFO}QMapShack can ignore dark mode by adding the following key to the \"info.plist\" file.${NC}"
+# echo "${INFO}<key>NSRequiresAquaSystemAppearance</key> <string>true</string>${NC}"
+# echo "${INFO}The \"info.plist\" file can be found in the bundle of the app under the \"Contents\" folder,${NC}"
 
 

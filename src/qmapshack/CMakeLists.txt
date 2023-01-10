@@ -949,7 +949,11 @@ endif(APPLE)
 ###############################################################################################
 # Build the executable and define necessary libraries.
 ###############################################################################################
-add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
+# if(APPLE)
+    # add_executable(${APPLICATION_NAME} MACOSX_BUNDLE ${MAININP})
+# else(APPLE)
+    add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
+# endif(APPLE)
 
 target_compile_definitions(${APPLICATION_NAME} PUBLIC
     -DVER_MAJOR=${PROJECT_VERSION_MAJOR}

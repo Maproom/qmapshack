@@ -1,0 +1,288 @@
+Howto Building QMapShack on OS-X ( 15/3/2022, adapted d029940 7/72022  ) 
+********************************
+
+This Howto is based on the resp. Howto from Koizen. 
+The main difference is that this howto relies on the homebrew package manager 
+and not using MacPorts at all. (There is nothing wrong with MacPorts, I just prefer homebrew)
+
+This document describes how to build QMapShack on OS-X.
+
+1. Create a directory where all builds should happen and set a shell QMSDEVDIR to this folder
+2. Unzip "QMS_build_files.zip" into folder $QMSDEVDIR
+3. Run  "sh QMS_build_files/build-QMS.sh | tee log.txt"
+   (You will be prompted several times for admin password for the library tool)
+4. The built apps can be found in $QMSDEVDIR/release
+5. If you want to delete all build artifacts "sh QMS_build_files/clean.sh"
+
+
+Here some detailed information:
+
+
+All commands listed in this how-to are executed in a terminal.
+
+Additional Software & Installation
+**********************************
+To be able to build QMapShack there are several software packages and libraries required:
+- proj library (version >= 8.0.x)
+- gdal library (version >= 3.4.x)
+- geos
+- qt5 framework (version >= 5.15.x)
+- routino library (version >=3.3.x)
+- quazip library (version >= 1.2)
+- qmapshack
+- cmake (version 3.22 and above)
+- svn command line tool (for routino)
+- git (git) command line tool
+- Xcode and Xcode Command Line Tools
+
+---
+
+DOWNLOAD homebrew PACKAGES:
+
+The best way is to install most required packages by using Homebrew.
+For howto install homebrew ref to https://brew.sh 
+
+Download the brew package manager if you not already have:
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+Install the packages:
+
+    brew install cmake
+    brew install qt@5
+    
+also install PROJ and GDAL (if you don't want to compile them yourself
+
+    brew install proj
+    brew install geos
+    brew install gdal    
+
+
+----
+
+
+Setting shell variables for the build process:
+**********************************************
+
+During the build process a lot of shell variables are needed to facilitate the process and thereby still offering flexibility for changes
+
+Create a directory where all builds should happen and set a shell QMSDEVDIR to this folder
+Create a file "env_build_vars" with several shell variables and put it into dir $QMSDEVDIR
+
+--------- beginning of file ------------------
+
+# source this file, like source env_build_vars
+
+# set to a folder (create it, if not existent), where the complete build of QMapShack and all parts should happen is created.
+# cd to this folder
+export QMSDEVDIR=$PWD
+
+# Check location of Homebrew
+export QT_DIR=$HOMEBREW_PREFIX/opt/qt5
+export Qt5_DIR=$QT_DIR/lib/cmake
+
+export ROUTINO_LIB_DIR=$QMSDEVDIR/routino/build
+# export GDAL_DIR=$QMSDEVDIR/usr
+# export PROJ_DIR=$QMSDEVDIR/usr
+export GDAL_DIR=$HOMEBREW_PREFIX
+export GEOS_LIB_DIR=$HOMEBREW_PREFIX/lib
+export PROJ_DIR=$HOMEBREW_PREFIX
+export QUAZIP_LIB_DIR=$QMSDEVDIR/usr
+export QUAZIP_Version=Qt5-1.3
+export ROUTINO_DIR=$QMSDEVDIR/routino
+export BUILD_DIR=$QMSDEVDIR/build_QMapShack
+export QMS_SRC_DIR=$QMSDEVDIR/QMapShack
+export BUILD_BIN_DIR=$QMSDEVDIR/build_QMapShack/bin
+export BUILD_RELEASE_DIR=$QMSDEVDIR/release
+
+--------- end of file ------------------
+
+For an explanation of the shell variables refer 
+to the section "Some explanations about shell variables"
+
+**********************************************
+
+
+PROJ (for building PROJ yourself refer to the section "Compiling PROJ, GDAL")
+
+brew install proj
+
+---
+
+GDAL(for building GDAL yourself refer to the section "Compiling PROJ, GDAL")
+
+brew install geos
+brew install gdal
+
+---
+
+QUAZIP:
+
+Remark: quazip can also be installed from homebrew, but you will tie in qt6 and all dependencies. 
+Unless you want to install qt6 anyway, compiling quazip yourself is recommended
+
+
+git clone https://github.com/stachenov/quazip.git
+--> folder $QMSVERDIR/quazip/ created
+
+cd $QMSDEVDIR/quazip
+mkdir build
+cd ./build
+cmake .. -DCMAKE_INSTALL_PREFIX=$QMSDEVDIR/usr
+cmake --build . -j4
+cmake --build . --target install
+
+---
+
+ROUTINO:
+
+Create directory $ROUTINO_DIR/routino-patch and
+copy Makefile.conf.diff, Makefile.diff and src-Makefile.diff  into it
+
+Install required packages: 
+brew install svn
+
+run shell script "mybuild-routino.sh" in $QMSDEVDIR
+At the end the admin password is asked in order to adjust the (rpath of) the Routino libs
+
+
+Building QMapShack and QMapTool
+*******************************
+
+cd $QMSDEVDIR
+
+
+To get the source of QMapShack:
+git clone https://github.com/Maproom/qmapshack.git QMapShack
+Scripts for bundling QMapShack needs to be patched, because
+- currently libgeos*.dylib are not copied into the app bundle
+- all files in the bin directory of a package manager (Home-brew, MacPorts) are copied into the app bundle
+- The patch files "env-path.diff" and "bundle-qmapshack.diff" and can be found in $QMSDEVDIR/QMS_build_files/qmapshack-bundle-patch
+
+In the directory $QMSDEVDIR/QMapShack/MacOSX you can find the script "bundle-all.sh".
+The script does all steps for packaging the application but not building the binary.
+So you need to build the binary first with the commands:
+
+cmake ../QMapShack -DCMAKE_PREFIX_PATH=$QT_DIR -DCMAKE_MACOSX_RPATH=ON -DCMAKE_OSX_DEPLOYMENT_TARGET=$OSX_DEPLOYMENT_TARGET -DROUTINO_DEV_PATH=$ROUTINO_LIB_DIR -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON  -DGDAL_CONFIG=$GDAL_DIR/bin/gdal-config -DGDAL_INCLUDE_DIR=$GDAL_DIR/include -DGDAL_LIBRARY=$GDAL_DIR/lib/libgdal.dylib  -DPROJ_DIR=$PROJ_DIR/lib/cmake/proj -DQuaZip-Qt5_DIR=$QUAZIP_LIB_DIR/lib/cmake/QuaZip-$QUAZIP_Version
+cd build_QMapShack
+make
+
+
+"QMapShack" is the relative path to where you have checked out QMapShack.
+
+The passed parameter are more or less self describing and set by a file as described in section "Setting shell variables for the build process" and explained in the section
+"Some explanations about shell variables"
+
+
+
+Bundling QMapShack and QMapTool
+*******************************
+
+If the build was successful, you can run the packaging with several environment 
+variables set in bundle-all.sh (refer to section "Setting shell variables for the build process")
+
+mkdir $BUILD_RELEASE_DIR
+cd $QMSDEVDIR/qmapshack/MacOSX
+sh ./bundle-all.sh bundle
+
+If everything is ok, you will get the package "QMapShack.app" and QMapTool.app in the directory "BUILD_RELEASE_DIR".
+
+Codesign the apps (on arm64 mandatory):
+codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app 
+
+Double-click on the package and have fun with QMapShack.
+
+---
+
+
+Some explanations about shell variables
+***************************************
+
+CMAKE_PREFIX_PATH path to used libraries by QMapShack, QT5 needs to be set by default.
+CMAKE_MACOSX_RPATH set to ON, essential for bundling
+CMAKE_OSX_DEPLOYMENT_TARGET the target system of the build (10.9 is the Mojave OS-X, see https://en.wikipedia.org/wiki/OS_X#Versions for a full list, best results when set to the OS X of build machine)
+CMAKE_VERBOSE_MAKEFILE enable verbose output from makefile builds
+CMAKE_BUILD_TYPE "Debug" or "Release" depending what you want
+QuaZip-Qt5_DIR path to used cmake file for quazip, e.g. $QUAZ_LIB_DIR/lib/cmake/QuaZip-Qt5-1.2
+GDAL_INCLUDE_DIR path to used include directory for gdal, e.g. $HOMEBREW_PREFIX or $GDAL/include
+
+QT_DIR=...            (absolute path to the qt5 library base package, i.e. $HOMEBREW_PREFIX/opt/qt5)
+Qt5_DIR=... $QT_DIR/lib/cmake	needed for quazip to find cmake file
+GDAL_DIR=...          (absolute path to the gdal library base package, e.g. $HOMEBREW_PREFIX or $GDAL_DIR/lib/libgdal.dylib.3.4.1)
+PROJ_DIR=...          (absolute path to the proj library base package, e.g. $HOMEBREW_PREFIX or $PROJ_DIR/lib/cmake/proj)
+ROUTINO_LIB_DIR=...   (absolute path to the routino library base package)
+ROUTINO_SRC_DIR=...   (absolute path to the routino sources checked out from svn)
+QUAZIP_LIB_DIR=..     (absolute path to the Quazip library base package e.g. /Users/XYZ/Desktop/QMSDEVDIR/usr )
+BUILD_DIR=..          (absolute path to the QMapShack build directory, the created directory "build_QMapShack" for the cmake build)
+QMS_SRC_DIR=...       (absolute path to the QMapShack source, the directory "QMapShack" used by cmake)
+BUILD_BIN_DIR=...     (absolute path to the directory with the qmapshack binary, typically build_QMapShack/bin for cmake build; depends on IDE)
+BUILD_RELEASE_DIR=... (absolute path to the directory where the application bundle should be placed)
+
+
+Debugging QMapShack
+*******************
+The best way to debug QMapShack is using your IDE. To open QMapShack do for:
+
+* Create Xcode project from source:
+
+mkdir build_xcode
+cmake ../QMapShack -G Xcode -D....
+
+The same command as described in the build with cmake, except of the additional 
+option "-G Xcode".
+
+* JetBrains CLion:
+Nothing to be done, just open the Project folder in CLion.
+You need to set "CMake options" under "Preferences > Build, Execution, Development > CMake".
+
+-DCMAKE_PREFIX_PATH==/opt/local/libexec/qt5 -DCMAKE_OSX_DEPLOYMENT_TARGET=10.14 -DROUTINO_DEV_PATH=... 
+The list is the same as described for the cmake build above.
+
+
+A note about directory structure in QMapShack
+********************************************
+QMapShack relies on the directory structure of a OS-X application bundle. This 
+means that you can not run QMapShack correctly if you just make a build (binary)
+and run this. You need many different files placed with the correct relative path
+to the binary. If you don't have this, you will get already at the startup of 
+QMapShack an error message (which you can click away at your own risk).
+The easiest way to have a fully working version from within your IDE of QMapShack:
+- Create a bundle as described above in "Building and Bundling QMapShack"
+- Open the bundle QMapShack.app and copy the subdirectory Contents/Resources
+- Paste the copied directory Resources relative one directory up to the binary
+qmapshack directory (../Resources)
+
+When starting qmapshack now, there shouldn't be an error message anymore.
+
+
+
+Compiling PROJ, GDAL
+********************
+
+Attention: Change 
+DAL_DIR=...   (absolute path to the gdal library base package, e.g. $QMSDEVDIR/usr )
+PROJ_DIR=...  (absolute path to the proj library base package, e.g. $QMSDEVDIR/usr )
+
+PROJ (only if not installed from howebrew):
+
+download tar from https://proj.org/download.html: proj-8.0.0.tar.gz (or newer)
+extract proj8 folder and put it into folder $QMSDEVDIR
+cd /QMSDEVDIR/proj-8.0.0
+mkdir build
+cd ./build
+cmake .. -DCMAKE_INSTALL_PREFIX=$QMSDEVDIR/usr
+cmake --build . -j4
+cmake --build . --target install
+
+---
+
+GDAL (only if not installed from howebrew):
+
+git clone https://github.com/stachenov/quazip.git GDAL
+cd $QMSDEVDIR/GDAL
+    mkdir build
+    cd ./build
+    cmake .. -DCMAKE_INSTALL_PREFIX=$GDAL_DIR
+    cmake --build . -j4
+    cmake --build . --target install
+
+

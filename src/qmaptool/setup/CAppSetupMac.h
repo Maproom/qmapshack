@@ -23,14 +23,10 @@
 
 #include <QtCore>
 
-
 class CAppSetupMac : public IAppSetup
 {
 public:
-    CAppSetupMac(QObject* parent)
-        : IAppSetup(parent)
-    {
-    }
+    CAppSetupMac(QObject *parent) : IAppSetup(parent) { }
 
     ~CAppSetupMac() = default;
     void initQMapTool() override;
@@ -38,7 +34,7 @@ public:
     QString defaultCachePath() override;
     QString userDataPath(QString subdir = 0) override;
     QString logDir() override;
-    QString findExecutable(const QString& name) override { return QStandardPaths::findExecutable(name); }
+    QString findExecutable(const QString &name) override;
     QString helpFile() override;
 
 private:

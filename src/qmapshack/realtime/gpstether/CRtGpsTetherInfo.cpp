@@ -344,7 +344,7 @@ void CRtGpsTetherInfo::nmeaRMC(const QStringList& tokens)
         return;
     }
     rmc.isValid = true;
-    rmc.datetime = QDateTime::fromString(tokens[1] + tokens[9], "hhmmss.00ddMMyy").addYears(100);
+    rmc.datetime = QDateTime::fromString(tokens[9] + tokens[1], "ddMMyyhhmmss.z").addYears(100);
     rmc.datetime.setTimeSpec(Qt::UTC);
 
     {
@@ -383,7 +383,7 @@ void CRtGpsTetherInfo::nmeaGGA(const QStringList& tokens)
     }
 
     gga.isValid = true;
-    gga.datetime.setTime(QTime::fromString(tokens[1], "hhmmss.00"));
+    gga.datetime.setTime(QTime::fromString(tokens[1], "hhmmss.z"));
     gga.datetime.setDate(QDate::currentDate());
     gga.datetime.setTimeSpec(Qt::UTC);
 

@@ -57,6 +57,8 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt& wpt, QWidget* parent)
     connect(toolAddImage, &QToolButton::clicked, photoAlbum, &CPhotoAlbum::slotAddImage);
     connect(toolDelImage, &QToolButton::clicked, photoAlbum, &CPhotoAlbum::slotDelImage);
     connect(photoAlbum, &CPhotoAlbum::sigChanged, this, &CDetailsWpt::slotChangedImages);
+
+    connect(toolOk, &QToolButton::clicked, this, &CDetailsWpt::done);
 }
 
 CDetailsWpt::~CDetailsWpt()

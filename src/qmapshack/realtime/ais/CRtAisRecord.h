@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2018 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2023 Gunnar Skjold <gunnar.skjold@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

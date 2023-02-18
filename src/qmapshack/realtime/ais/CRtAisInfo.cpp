@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2018 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2023 Gunnar Skjold <gunnar.skjold@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,7 +56,15 @@ CRtAisInfo::CRtAisInfo(CRtAis& source, QWidget* parent)
     labelStatus->setText("-");
 
     nmeaDict["VDM"] = [&](const QStringList& t){nmeaVDM(t);};
-    aisDict[0] = [&](const QByteArray& t){ais01(t);};
+
+    aisDict[positionReportClassA] = [&](const QByteArray& t){aisClassAcommon(t);};
+    aisDict[positionReportClassAassignedScheduled] = [&](const QByteArray& t){aisClassAcommon(t);};
+    aisDict[positionReportClassAresponseToInterrogation] = [&](const QByteArray& t){aisClassAcommon(t);};
+    aisDict[staticAndVoyageRelatedData] = [&](const QByteArray& t){aisStaticAndVoyage(t);};
+    aisDict[standardClassBpositionReport] = [&](const QByteArray& t){aisClassBcommon(t);};
+    aisDict[extendedClassBequipmentPositionReport] = [&](const QByteArray& t){aisClassBcommon(t);};
+    aisDict[aidToNavigationReport] = [&](const QByteArray& t){aisAidToNavigation(t);};
+    aisDict[staticDataReport] = [&](const QByteArray& t){aisStatic(t);};
 }
 
 void CRtAisInfo::loadSettings(QSettings& cfg)
@@ -157,6 +165,10 @@ void CRtAisInfo::slotReadyRead()
         line.chop(3);
 
         int start = line.indexOf("!");
+        if(start < 0)
+        {
+            continue;
+        }
         const QStringList& tokens = line.mid(start+1).split(',');
         nmeaDict.value(tokens[0].mid(2), nmeaDefault)(tokens);
     }
@@ -173,11 +185,10 @@ void CRtAisInfo::slotUpdate()
 
     if(!record.isNull() && toolRecord->isChecked())
     {
-        bool ok = false;
-        const CRtAis::ship_t* ship = _source->getShipByKey(lineKey->text(), ok);
-        if(ok)
+        if(_source->hasShip(lineKey->text()))
         {
-            if(!_record->writeEntry(*ship))
+            const CRtAis::ship_t& ship = _source->getShipByMmsi(lineKey->text());
+            if(!_record->writeEntry(ship))
             {
                 QMessageBox::critical(this, tr("Error..."), record->getError(), QMessageBox::Ok);
                 toolPause->setChecked(true);
@@ -228,17 +239,24 @@ void CRtAisInfo::nmeaVDM(const QStringList& tokens)
     const int fragments = tokens[1].toInt();
     const int fragmentNumber = tokens[2].toInt();
     const int fragmentId = tokens[3].toInt();
-    const QString& channel = tokens[4];
     const QByteArray& payload = tokens[5].toLatin1();
 
+    // AIS data is based on 6bit blocks and is encoded to ASCII characters 48 through 119 in the payload field in VDM sentence.
+    // Note that characters 88 through 95 are not used.
+    // Looping through all bytes from the payload, subtracting 48 to recover the 6bit blocks. For any characters over 40 we
+    // have to subtract another 8 since 88 through 95 are not used.
+    // Keep in mind that the bytes (8bit) in the byte array after this are representing a 6bit block
     QByteArray data(payload.size(), 0);
     for(int i = 0; i< payload.size(); i++)
     {
-        uint8_t c = payload[i] - 48;
-        if(c > 40) c -= 8;
+        quint8 c = payload[i] - asciiTo6bitLower;
+        if(c > asciiTo6BitGapMarker) c -= asciiTo6bitUpper;
         data[i] = c;
     }
 
+    // VDM sentence is limited by NMEA max sentece length of 82 charaters, which effectively also limits AIS payload. Some AIS
+    // messages are longer than the limit, so then the data is split into multiple VDM sentences. Using fields from VDM to
+    // detect and assemble the data.
     if(fragments > fragmentNumber)
     {
         // qWarning() << "Received fragment";
@@ -266,59 +284,33 @@ void CRtAisInfo::nmeaVDM(const QStringList& tokens)
 
     assembler.append(data);
 
-    const uint8_t type = assembler[0];
-    switch(type)
-    {
-    case 1:
-    case 2:
-    case 3:
-        ais01(assembler);
-        break;
-    case 5:
-        ais05(assembler);
-        break;
-    case 18:
-    case 19:
-        ais18(assembler);
-        break;
-    case 21:
-        ais21(assembler);
-        break;
-    case 24:
-        ais24(assembler);
-        break;
-    //default:
-        //qWarning() << "Unknown type " << type;
-    }
-
-    // This doesnt work?
-    //aisDict.value(type, aisDefault)(data);
+    const int type = assembler[0];
+    aisDict.value(type, aisDefault)(assembler);
 }
 
-void CRtAisInfo::ais01(const QByteArray& data)
+void CRtAisInfo::aisClassAcommon(const QByteArray& data)
 {
     CRtAis* _source = dynamic_cast<CRtAis*>(source.data());
 
     ais_position_report_t ais;
     ais.type = data[0];
-    ais.repeat = getInt(data, 6, 2);
-    ais.mmsi = getInt(data, 8, 30);
-    ais.speed = getInt(data, 50, 10);
-    ais.accuracy = getSignedInt(data, 60, 1);
-    ais.lon = getSignedInt(data, 61, 28);
-    ais.lat = getSignedInt(data, 89, 27);
-    ais.course = getInt(data, 116, 12);
-    ais.heading = getInt(data, 128, 9);
-    ais.second = getInt(data, 137, 6);
+    ais.repeat = get6bitInt(data, 6, 2);
+    ais.mmsi = get6bitInt(data, 8, 30);
+    ais.speed = get6bitInt(data, 50, 10);
+    ais.accuracy = get6bitSignedInt(data, 60, 1);
+    ais.lon = get6bitSignedInt(data, 61, 28);
+    ais.lat = get6bitSignedInt(data, 89, 27);
+    ais.course = get6bitInt(data, 116, 12);
+    ais.heading = get6bitInt(data, 128, 9);
+    ais.second = get6bitInt(data, 137, 6);
 
-    bool ok = true;
-    CRtAis::ship_t* ship = _source->getShipByKey(QString::number(ais.mmsi) , ok);
-    ship->longitude = ais.lon / 600000.0;
-    ship->latitude = ais.lat / 600000.0;
-    ship->heading = ais.heading > 360 ? ais.course > 360 ? -1 : ais.course : ais.heading;
-    ship->velocity = ais.speed / 10.0;
-    ship->pos = QPointF(ship->longitude, ship->latitude);
-    ship->timePosition = QDateTime::currentSecsSinceEpoch();
+    CRtAis::ship_t& ship = _source->getShipByMmsi(QString::number(ais.mmsi));
+    ship.longitude = ais.lon / 600000.0;
+    ship.latitude = ais.lat / 600000.0;
+    ship.heading = ais.heading > 360 ? ais.course > 3600 ? -1 : ais.course/10.0 : ais.heading;
+    ship.velocity = ais.speed / 10.0;
+    ship.pos = QPointF(ship.longitude, ship.latitude);
+    ship.timePosition = QDateTime::currentSecsSinceEpoch();
     lastTimestamp = QDateTime::currentDateTime();
 
     emit sigChanged();
@@ -326,39 +318,39 @@ void CRtAisInfo::ais01(const QByteArray& data)
     //qWarning() << "A, MMSI:" << ship->mmsi << ", Lat: " << ship->latitude << ", Lon: " << ship->longitude;
 }
 
-void CRtAisInfo::ais05(const QByteArray& data)
+void CRtAisInfo::aisStaticAndVoyage(const QByteArray& data)
 {
     CRtAis* _source = dynamic_cast<CRtAis*>(source.data());
 
     ais_static_and_voyage_t ais;
     ais.type = data[0];
-    ais.repeat = getInt(data, 6, 2);
-    ais.mmsi = getInt(data, 8, 30);
-    ais.version = getInt(data, 38, 2);
-    ais.imo = getInt(data, 40, 30);
+    ais.repeat = get6bitInt(data, 6, 2);
+    ais.mmsi = get6bitInt(data, 8, 30);
+    ais.version = get6bitInt(data, 38, 2);
+    ais.imo = get6bitInt(data, 40, 30);
     getString(data, ais.callsign, 70, 42);
     getString(data, ais.shipName, 112, 120);
-    ais.shipType = getInt(data, 232, 8);
-    ais.dimToBow = getInt(data, 240, 9);
-    ais.dimToStern = getInt(data, 249, 9);
-    ais.dimToPort = getInt(data, 258, 6);
-    ais.dimToStarboard = getInt(data, 264, 6);
-    ais.positionFix = getInt(data, 270, 4);
-    ais.etaMonth = getInt(data, 274, 4);
-    ais.etaDay = getInt(data, 278, 5);
-    ais.etaHour = getInt(data, 283, 5);
-    ais.etaMinute = getInt(data, 288, 6);
-    ais.draught = getInt(data, 294, 8);
+    ais.shipType = get6bitInt(data, 232, 8);
+    ais.dimToBow = get6bitInt(data, 240, 9);
+    ais.dimToStern = get6bitInt(data, 249, 9);
+    ais.dimToPort = get6bitInt(data, 258, 6);
+    ais.dimToStarboard = get6bitInt(data, 264, 6);
+    ais.positionFix = get6bitInt(data, 270, 4);
+    ais.etaMonth = get6bitInt(data, 274, 4);
+    ais.etaDay = get6bitInt(data, 278, 5);
+    ais.etaHour = get6bitInt(data, 283, 5);
+    ais.etaMinute = get6bitInt(data, 288, 6);
+    ais.draught = get6bitInt(data, 294, 8);
     getString(data, ais.destination, 302, 120);
-    ais.dte = getInt(data, 422, 1);
+    ais.dte = get6bitInt(data, 422, 1);
 
-    bool ok = false;
-    CRtAis::ship_t* ship = _source->getShipByKey(QString::number(ais.mmsi) , ok);
-    if(ok)
+    QString mmsi = QString::number(ais.mmsi);
+    if(_source->hasShip(mmsi))
     {
-        ship->imo = QString::number(ais.imo);
-        ship->callsign = ais.callsign;
-        ship->name = ais.shipName;
+        CRtAis::ship_t& ship = _source->getShipByMmsi(mmsi);
+        ship.imo = QString::number(ais.imo);
+        ship.callsign = ais.callsign;
+        ship.name = ais.shipName;
 
         lastTimestamp = QDateTime::currentDateTime();
 
@@ -368,30 +360,29 @@ void CRtAisInfo::ais05(const QByteArray& data)
     }
 }
 
-void CRtAisInfo::ais18(const QByteArray& data)
+void CRtAisInfo::aisClassBcommon(const QByteArray& data)
 {
     CRtAis* _source = dynamic_cast<CRtAis*>(source.data());
 
     ais_position_report_t ais;
     ais.type = data[0];
-    ais.repeat = getInt(data, 6, 2);
-    ais.mmsi = getInt(data, 8, 30);
-    ais.speed = getInt(data, 46, 10);
-    ais.accuracy = getSignedInt(data, 56, 1);
-    ais.lon = getSignedInt(data, 57, 28);
-    ais.lat = getSignedInt(data, 85, 27);
-    ais.course = getInt(data, 112, 12);
-    ais.heading = getInt(data, 124, 9);
-    ais.second = getInt(data, 133, 6);
+    ais.repeat = get6bitInt(data, 6, 2);
+    ais.mmsi = get6bitInt(data, 8, 30);
+    ais.speed = get6bitInt(data, 46, 10);
+    ais.accuracy = get6bitSignedInt(data, 56, 1);
+    ais.lon = get6bitSignedInt(data, 57, 28);
+    ais.lat = get6bitSignedInt(data, 85, 27);
+    ais.course = get6bitInt(data, 112, 12);
+    ais.heading = get6bitInt(data, 124, 9);
+    ais.second = get6bitInt(data, 133, 6);
 
-    bool ok = true;
-    CRtAis::ship_t* ship = _source->getShipByKey(QString::number(ais.mmsi) , ok);
-    ship->longitude = ais.lon / 600000.0;
-    ship->latitude = ais.lat / 600000.0;
-    ship->heading = ais.heading > 360 ? ais.course > 360 ? -1 : ais.course : ais.heading;
-    ship->velocity = ais.speed / 10.0;
-    ship->pos = QPointF(ship->longitude, ship->latitude);
-    ship->timePosition = QDateTime::currentSecsSinceEpoch();
+    CRtAis::ship_t& ship = _source->getShipByMmsi(QString::number(ais.mmsi));
+    ship.longitude = ais.lon / 600000.0;
+    ship.latitude = ais.lat / 600000.0;
+    ship.heading = ais.heading > 360 ? ais.course > 3600 ? -1 : ais.course / 10.0 : ais.heading;
+    ship.velocity = ais.speed / 10.0;
+    ship.pos = QPointF(ship.longitude, ship.latitude);
+    ship.timePosition = QDateTime::currentSecsSinceEpoch();
 
     lastTimestamp = QDateTime::currentDateTime();
 
@@ -400,60 +391,59 @@ void CRtAisInfo::ais18(const QByteArray& data)
     //qWarning() << "B, MMSI:" << ship->mmsi << ", Lat: " << ship->latitude << ", Lon: " << ship->longitude;
 }
 
-void CRtAisInfo::ais21(const QByteArray& data)
+void CRtAisInfo::aisAidToNavigation(const QByteArray& data)
 {
     CRtAis* _source = dynamic_cast<CRtAis*>(source.data());
 
     ais_aid_to_navigation_t ais;
     ais.type = data[0];
-    ais.repeat = getInt(data, 6, 2);
-    ais.mmsi = getInt(data, 8, 30);
-    ais.aidType = getInt(data, 38, 5);
+    ais.repeat = get6bitInt(data, 6, 2);
+    ais.mmsi = get6bitInt(data, 8, 30);
+    ais.aidType = get6bitInt(data, 38, 5);
     getString(data, ais.name, 43, 120);
-    ais.accuracy = getSignedInt(data, 163, 1);
-    ais.lon = getSignedInt(data, 164, 28);
-    ais.lat = getSignedInt(data, 192, 27);
-    ais.dimToBow = getInt(data, 219, 9);
-    ais.dimToStern = getInt(data, 228, 9);
-    ais.dimToPort = getInt(data, 237, 6);
-    ais.dimToStarboard = getInt(data, 243, 6);
+    ais.accuracy = get6bitSignedInt(data, 163, 1);
+    ais.lon = get6bitSignedInt(data, 164, 28);
+    ais.lat = get6bitSignedInt(data, 192, 27);
+    ais.dimToBow = get6bitInt(data, 219, 9);
+    ais.dimToStern = get6bitInt(data, 228, 9);
+    ais.dimToPort = get6bitInt(data, 237, 6);
+    ais.dimToStarboard = get6bitInt(data, 243, 6);
 
-    bool ok = true;
-    CRtAis::ship_t* ship = _source->getShipByKey(QString::number(ais.mmsi) , ok);
-    ship->longitude = ais.lon / 600000.0;
-    ship->latitude = ais.lat / 600000.0;
-    ship->pos = QPointF(ship->longitude, ship->latitude);
-    ship->timePosition = QDateTime::currentSecsSinceEpoch();
-    ship->name = ais.name;
-    ship->aid = true;
-    ship->heading = -1;
-    ship->velocity = -1;
+    CRtAis::ship_t& ship = _source->getShipByMmsi(QString::number(ais.mmsi));
+    ship.longitude = ais.lon / 600000.0;
+    ship.latitude = ais.lat / 600000.0;
+    ship.pos = QPointF(ship.longitude, ship.latitude);
+    ship.timePosition = QDateTime::currentSecsSinceEpoch();
+    ship.name = ais.name;
+    ship.aid = true;
+    ship.heading = -1;
+    ship.velocity = -1;
 
     lastTimestamp = QDateTime::currentDateTime();
 
     emit sigChanged();
 }
 
-void CRtAisInfo::ais24(const QByteArray& data)
+void CRtAisInfo::aisStatic(const QByteArray& data)
 {
     CRtAis* _source = dynamic_cast<CRtAis*>(source.data());
 
 
     ais_static_and_voyage_t ais;
     ais.type = data[0];
-    ais.repeat = getInt(data, 6, 2);
-    ais.mmsi = getInt(data, 8, 30);
+    ais.repeat = get6bitInt(data, 6, 2);
+    ais.mmsi = get6bitInt(data, 8, 30);
 
-    uint8_t part = getInt(data, 38, 2);
+    int part = get6bitInt(data, 38, 2);
     if(part == 0)
     {
         getString(data, ais.shipName, 40, 120);
 
-        bool ok = false;
-        CRtAis::ship_t* ship = _source->getShipByKey(QString::number(ais.mmsi) , ok);
-        if(ok)
+        QString mmsi = QString::number(ais.mmsi);
+        if(_source->hasShip(mmsi))
         {
-            ship->name = ais.shipName;
+            CRtAis::ship_t& ship = _source->getShipByMmsi(mmsi);
+            ship.name = ais.shipName;
 
             lastTimestamp = QDateTime::currentDateTime();
 
@@ -464,18 +454,18 @@ void CRtAisInfo::ais24(const QByteArray& data)
     }
     else if(part == 1)
     {
-        ais.shipType = getInt(data, 40, 8);
+        ais.shipType = get6bitInt(data, 40, 8);
         getString(data, ais.callsign, 90, 42);
-        ais.dimToBow = getInt(data, 132, 9);
-        ais.dimToStern = getInt(data, 141, 9);
-        ais.dimToPort = getInt(data, 150, 6);
-        ais.dimToStarboard = getInt(data, 156, 6);
+        ais.dimToBow = get6bitInt(data, 132, 9);
+        ais.dimToStern = get6bitInt(data, 141, 9);
+        ais.dimToPort = get6bitInt(data, 150, 6);
+        ais.dimToStarboard = get6bitInt(data, 156, 6);
 
-        bool ok = false;
-        CRtAis::ship_t* ship = _source->getShipByKey(QString::number(ais.mmsi) , ok);
-        if(ok)
+        QString mmsi = QString::number(ais.mmsi);
+        if(_source->hasShip(mmsi))
         {
-            ship->callsign = ais.callsign;
+            CRtAis::ship_t& ship = _source->getShipByMmsi(mmsi);
+            ship.callsign = ais.callsign;
 
             lastTimestamp = QDateTime::currentDateTime();
 
@@ -486,7 +476,7 @@ void CRtAisInfo::ais24(const QByteArray& data)
     }
 }
 
-uint32_t CRtAisInfo::getInt(const QByteArray& data, int start, int count)
+quint32 CRtAisInfo::get6bitInt(const QByteArray& data, int start, int count)
 {
     int mask = 0x3f;
 
@@ -495,39 +485,39 @@ uint32_t CRtAisInfo::getInt(const QByteArray& data, int start, int count)
     int from = start / 6;
     int to = end / 6;
 
-    int from_mask_ignore_bits = start % 6;
-    int from_mask = (1 << (6 - from_mask_ignore_bits)) - 1;
+    int fromMaskIgnoreBits = start % 6;
+    int fromMask = (1 << (6 - fromMaskIgnoreBits)) - 1;
 
-    int to_mask_include_bits = end % 6;
-    int to_mask = mask & ~((1 << (6 - to_mask_include_bits)) - 1);
+    int toMaskIncludeBits = end % 6;
+    int toMask = mask & ~((1 << (6 - toMaskIncludeBits)) - 1);
 
     if (from == to)
     {
-        return (data[from] & (from_mask & to_mask)) >> (6 - to_mask_include_bits);
+        return (data[from] & (fromMask & toMask)) >> (6 - toMaskIncludeBits);
     }
     else
     {
-        int ret = from_mask & data[from++];
+        int ret = fromMask & data[from++];
         for (int i = from; i < to; i++)
         {
             ret <<= 6;
             ret |= data[i] & mask;
         }
-        if (to_mask_include_bits > 0)
+        if (toMaskIncludeBits > 0)
         {
-            ret <<= to_mask_include_bits;
-            ret |= (data[to] & to_mask) >> (6 - to_mask_include_bits);
+            ret <<= toMaskIncludeBits;
+            ret |= (data[to] & toMask) >> (6 - toMaskIncludeBits);
         }
 
         return ret;
     }
 }
 
-int64_t CRtAisInfo::getSignedInt(const QByteArray& data, int start, int count)
+qint64 CRtAisInfo::get6bitSignedInt(const QByteArray& data, int start, int count)
 {
-    int ret = getInt(data, start, count);
-    int check_mask = 1 << (count - 1);
-    if ((check_mask & ret) == check_mask)
+    int ret = get6bitInt(data, start, count);
+    int checkMask = 1 << (count - 1);
+    if ((checkMask & ret) == checkMask)
     {
         ret = ~ret;
         int mask = (1 << (count)) - 1;
@@ -544,7 +534,7 @@ void CRtAisInfo::getString(const QByteArray& data, QString& string, int start, i
     int ci = 0;
     for (int i = start; i < end && end - i >= 6; i += 6)
     {
-        uint8_t c = getInt(data, i, 6) & 0x3F;
+        int c = get6bitInt(data, i, 6) & 0x3F;
         if (c < 32)
         {
             string.insert(ci++, c+64);

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2018 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2023 Gunnar Skjold <gunnar.skjold@gmail.com>
 
     This proAisgram is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -79,7 +79,8 @@ public:
      */
     bool getShowNames() const;
 
-    ship_t* getShipByKey(const QString& key, bool& ok);
+    ship_t& getShipByMmsi(const QString& key);
+    bool hasShip(const QString& key);
 
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) override;
     void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt)  override;

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2018 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2023 Gunnar Skjold <gunnar.skjold@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -100,21 +100,21 @@ bool CRtAis::getShowNames() const
     return showNames;
 }
 
-CRtAis::ship_t* CRtAis::getShipByKey(const QString& key, bool& ok)
+CRtAis::ship_t& CRtAis::getShipByMmsi(const QString& mmsi)
 {
     QMutexLocker lock(&IRtSource::mutex);
-    if(!ships.contains(key))
+    if(!ships.contains(mmsi))
     {
-        if(!ok) return nullptr;
         ship_t ship;
-        ship.mmsi = key;
-        ships[key] = ship;
-        ok = false;
-    } else {
-        ok = true;
+        ship.mmsi = mmsi;
+        ships[mmsi] = ship;
     }
 
-    return &ships[key];
+    return ships[mmsi];
+}
+
+bool CRtAis::hasShip(const QString& key) {
+    return ships.contains(key);
 }
 
 void CRtAis::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt)

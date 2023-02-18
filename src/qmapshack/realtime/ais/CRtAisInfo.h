@@ -62,84 +62,101 @@ private:
     fNmeaHandler nmeaDefault = [&](const QStringList& t){qDebug() << t[0] << "unknown";};
 
     using fAisHandler = std::function<void(const QByteArray&)>;
-    fAisHandler aisDefault = [&](const QByteArray& t){qDebug() << t[0] << "unknown";};
+    fAisHandler aisDefault = [&](const QByteArray& t){qDebug() << QString::number(t[0]) << "unknown";};
 
     struct ais_position_report_t
     {
-        uint8_t type;
-        uint8_t repeat;
-        uint32_t mmsi;
-        uint16_t speed;
-        int8_t accuracy;
-        int32_t lon;
-        int32_t lat;
-        uint16_t course;
-        uint16_t heading;
-        uint8_t second;
+        quint8 type;
+        quint8 repeat;
+        quint32 mmsi;
+        quint16 speed;
+        qint8 accuracy;
+        qint32 lon;
+        qint32 lat;
+        quint16 course;
+        quint16 heading;
+        quint8 second;
     };
 
     struct ais_static_and_voyage_t
     {
-        uint8_t type;
-        uint8_t repeat;
-        uint32_t mmsi;
-        uint8_t version;
-        uint32_t imo;
+        quint8 type;
+        quint8 repeat;
+        quint32 mmsi;
+        quint8 version;
+        quint32 imo;
         QString callsign;
         QString shipName;
-        uint8_t shipType;
-        uint16_t dimToBow;
-        uint16_t dimToStern;
-        uint8_t dimToPort;
-        uint8_t dimToStarboard;
-        uint8_t positionFix;
-        uint8_t etaMonth;
-        uint8_t etaDay;
-        uint8_t etaHour;
-        uint8_t etaMinute;
-        uint8_t draught;
+        quint8 shipType;
+        quint16 dimToBow;
+        quint16 dimToStern;
+        quint8 dimToPort;
+        quint8 dimToStarboard;
+        quint8 positionFix;
+        quint8 etaMonth;
+        quint8 etaDay;
+        quint8 etaHour;
+        quint8 etaMinute;
+        quint8 draught;
         QString destination;
-        uint8_t dte;
+        quint8 dte;
     };
 
     struct ais_aid_to_navigation_t
     {
-        uint8_t type;
-        uint8_t repeat;
-        uint32_t mmsi;
-        uint8_t aidType;
+        quint8 type;
+        quint8 repeat;
+        quint32 mmsi;
+        quint8 aidType;
         QString name;
-        int8_t accuracy;
-        int32_t lon;
-        int32_t lat;
-        uint16_t dimToBow;
-        uint16_t dimToStern;
-        uint8_t dimToPort;
-        uint8_t dimToStarboard;
+        qint8 accuracy;
+        qint32 lon;
+        qint32 lat;
+        quint16 dimToBow;
+        quint16 dimToStern;
+        quint8 dimToPort;
+        quint8 dimToStarboard;
     };
 
-    uint32_t getInt(const QByteArray& data, int start, int count);
-    int64_t getSignedInt(const QByteArray& data, int start, int count);
+    quint32 get6bitInt(const QByteArray& data, int start, int count);
+    qint64 get6bitSignedInt(const QByteArray& data, int start, int count);
     void getString(const QByteArray& data, QString& string, int start, int count);
 
+    enum aisType
+    {
+        positionReportClassA = 1,
+        positionReportClassAassignedScheduled = 2,
+        positionReportClassAresponseToInterrogation = 3,
+        staticAndVoyageRelatedData = 5,
+        standardClassBpositionReport = 18,
+        extendedClassBequipmentPositionReport = 19,
+        aidToNavigationReport = 21,
+        staticDataReport = 24,
+    };
+
+    static constexpr quint8 asciiTo6bitLower = 48;
+    static constexpr quint8 asciiTo6BitGapMarker = 40;
+    static constexpr quint8 asciiTo6bitUpper = 8;
+
     void nmeaVDM(const QStringList& tokens);
-    void ais01(const QByteArray& data);
-    void ais05(const QByteArray& data);
-    void ais18(const QByteArray& data);
-    void ais21(const QByteArray& data);
-    void ais24(const QByteArray& data);
+
+    void aisClassAcommon(const QByteArray& data);
+    void aisStaticAndVoyage(const QByteArray& data);
+    void aisClassBcommon(const QByteArray& data);
+    void aisAidToNavigation(const QByteArray& data);
+    void aisStatic(const QByteArray& data);
 
     QTcpSocket* socket;
     QTimer* timer;
 
     QHash<QString, fNmeaHandler> nmeaDict;
-    QHash<uint8_t, fAisHandler> aisDict;
+    QHash<quint8, fAisHandler> aisDict;
 
     QDateTime lastTimestamp;
 
     QByteArray assembler;
-    uint8_t lastFragment = 0;
-    uint8_t lastFragmentId = 0;
+    quint8 lastFragment = 0;
+    quint8 lastFragmentId = 0;
 };
 
 #endif //CRTAISINFO_H

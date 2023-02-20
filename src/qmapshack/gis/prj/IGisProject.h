@@ -601,6 +601,7 @@ protected:
     static const QString gpx_ns;
     static const QString xsi_ns;
     static const QString gpxdata_ns;
+    static const QString osmand_ns;
 
     static QString keyUserFocus;
 

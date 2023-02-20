@@ -40,6 +40,7 @@ const QString IGisProject::ql_ns = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString IGisProject::gs_ns = "http://www.groundspeak.com/cache/1/0";
 const QString IGisProject::tp1_ns = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
 const QString IGisProject::gpxdata_ns = "http://www.cluetrust.com/XML/GPXDATA/1/0";
+const QString IGisProject::osmand_ns = "https://osmand.net";
 
 
 static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
@@ -480,6 +481,7 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
         gpx.setAttribute("xmlns:ql", ql_ns);
         gpx.setAttribute("xmlns:tp1", tp1_ns);
         gpx.setAttribute("xmlns:gpxdata", gpxdata_ns);
+        gpx.setAttribute("xmlns:osmand", osmand_ns);
 
 
 

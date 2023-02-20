@@ -24,6 +24,7 @@ V1.XX.X
 [QMS-560] Fix FilterSplitTrack to include all track points
 [QMS-571] MacOS build scripts and CMakeLists.txt changed (ARM/Intel, QMapTool.app fixed)
 [QMS-572] Added support for more decimals in GPS timestamps
+[QMS-585] GPX no more compatible with Osmand
 
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing

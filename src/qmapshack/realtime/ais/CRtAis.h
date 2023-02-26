@@ -52,6 +52,10 @@ public:
         qreal velocity = NOFLOAT;
         qreal heading = NOFLOAT;
         QString destination;
+        qreal draught = 0;
+        qint16 length = 0;
+        qint16 width = 0;
+        QString type;
         bool aid = false;
     };
 

@@ -55,6 +55,9 @@ CRtAisInfo::CRtAisInfo(CRtAis& source, QWidget* parent)
 
     labelStatus->setText("-");
 
+    shipTypeMap = initShipTypeMap();
+    aidTypeMap = initAidTypeMap();
+
     nmeaDict["VDM"] = [&](const QStringList& t){nmeaVDM(t);};
 
     aisDict[positionReportClassA] = [&](const QByteArray& t){aisClassAcommon(t);};
@@ -351,6 +354,10 @@ void CRtAisInfo::aisStaticAndVoyage(const QByteArray& data)
         ship.imo = QString::number(ais.imo);
         ship.callsign = ais.callsign;
         ship.name = ais.shipName;
+        ship.width = ais.dimToPort+ais.dimToStarboard;
+        ship.length = ais.dimToBow+ais.dimToStern;
+        ship.draught = ais.draught / 10.0;
+        ship.type = shipTypeMap.value(ais.shipType, tr("Unknown"));
 
         lastTimestamp = QDateTime::currentDateTime();
 
@@ -383,6 +390,23 @@ void CRtAisInfo::aisClassBcommon(const QByteArray& data)
     ship.velocity = ais.speed / 10.0;
     ship.pos = QPointF(ship.longitude, ship.latitude);
     ship.timePosition = QDateTime::currentSecsSinceEpoch();
+
+    // Type 19 have extended data
+    if(ais.type == extendedClassBequipmentPositionReport)
+    {
+        ais_static_and_voyage_t stat;
+        getString(data, stat.shipName, 143, 120);
+        stat.shipType = get6bitInt(data, 263, 8);
+        stat.dimToBow = get6bitInt(data, 271, 9);
+        stat.dimToStern = get6bitInt(data, 280, 9);
+        stat.dimToPort = get6bitInt(data, 289, 6);
+        stat.dimToStarboard = get6bitInt(data, 295, 6);
+
+        ship.name = stat.shipName;
+        ship.type = shipTypeMap.value(stat.shipType, tr("Unknown"));
+        ship.width = stat.dimToPort+stat.dimToStarboard;
+        ship.length = stat.dimToBow+stat.dimToStern;
+    }
 
     lastTimestamp = QDateTime::currentDateTime();
 
@@ -418,6 +442,9 @@ void CRtAisInfo::aisAidToNavigation(const QByteArray& data)
     ship.aid = true;
     ship.heading = -1;
     ship.velocity = -1;
+    ship.width = ais.dimToPort+ais.dimToStarboard;
+    ship.length = ais.dimToBow+ais.dimToStern;
+    ship.type = aidTypeMap.value(ais.aidType, tr("Unknown"));
 
     lastTimestamp = QDateTime::currentDateTime();
 
@@ -466,6 +493,9 @@ void CRtAisInfo::aisStatic(const QByteArray& data)
         {
             CRtAis::ship_t& ship = _source->getShipByMmsi(mmsi);
             ship.callsign = ais.callsign;
+            ship.width = ais.dimToPort+ais.dimToStarboard;
+            ship.length = ais.dimToBow+ais.dimToStern;
+            ship.type = shipTypeMap.value(ais.shipType, tr("Unknown"));
 
             lastTimestamp = QDateTime::currentDateTime();
 
@@ -474,6 +504,138 @@ void CRtAisInfo::aisStatic(const QByteArray& data)
             //qWarning() << "BB, MMSI: " << ais.mmsi << ", callsign: " << ais.shipName;
         }
     }
+}
+
+QMap<quint8, QString> CRtAisInfo::initShipTypeMap()
+{
+    QMap<quint8, QString> shipTypeMap;
+    shipTypeMap[0] = ""; // Not available
+    shipTypeMap[20] = tr("Wing in ground");
+    shipTypeMap[21] = tr("Wing in ground") + ", " + tr("Hazardous category A");
+    shipTypeMap[22] = tr("Wing in ground") + ", " + tr("Hazardous category B");
+    shipTypeMap[23] = tr("Wing in ground") + ", " + tr("Hazardous category C");
+    shipTypeMap[24] = tr("Wing in ground") + ", " + tr("Hazardous category D");
+    shipTypeMap[25] = tr("Wing in ground") + " (25)";
+    shipTypeMap[26] = tr("Wing in ground") + " (26)";
+    shipTypeMap[27] = tr("Wing in ground") + " (27)";
+    shipTypeMap[28] = tr("Wing in ground") + " (28)";
+    shipTypeMap[29] = tr("Wing in ground") + " (29)";
+
+    shipTypeMap[30] = tr("Fishing");
+    shipTypeMap[31] = tr("Towing");
+    shipTypeMap[32] = tr("Towing, large");
+    shipTypeMap[33] = tr("Dredger");
+    shipTypeMap[34] = tr("Dive Vessel");
+    shipTypeMap[35] = tr("Military ops");
+    shipTypeMap[36] = tr("Sailing Vessel");
+    shipTypeMap[37] = tr("Pleasure Craft");
+    shipTypeMap[38] = tr("Reserved");
+    shipTypeMap[39] = tr("Reserved");
+
+    shipTypeMap[40] = tr("High speed craft");
+    shipTypeMap[41] = tr("High speed craft") + ", " + tr("Hazardous category A");
+    shipTypeMap[42] = tr("High speed craft") + ", " + tr("Hazardous category B");
+    shipTypeMap[43] = tr("High speed craft") + ", " + tr("Hazardous category C");
+    shipTypeMap[44] = tr("High speed craft") + ", " + tr("Hazardous category D");
+    shipTypeMap[45] = tr("High speed craft") + " (45)";
+    shipTypeMap[46] = tr("High speed craft") + " (46)";
+    shipTypeMap[47] = tr("High speed craft") + " (47)";
+    shipTypeMap[48] = tr("High speed craft") + " (48)";
+    shipTypeMap[49] = tr("High speed craft") + " (49)";
+
+    shipTypeMap[50] = tr("Pilot Vessel");
+    shipTypeMap[51] = tr("Search and Rescue");
+    shipTypeMap[52] = tr("Tug");
+    shipTypeMap[53] = tr("Port Tender");
+    shipTypeMap[54] = tr("Anti-pollution equipment");
+    shipTypeMap[55] = tr("Law Enforcement");
+    shipTypeMap[56] = tr("Local Vessel");
+    shipTypeMap[57] = tr("Local Vessel");
+    shipTypeMap[58] = tr("Medical Transport");
+    shipTypeMap[59] = tr("Special Craft");
+
+    shipTypeMap[60] = tr("Passenger");
+    shipTypeMap[61] = tr("Passenger") + ", " + tr("Hazardous category A");
+    shipTypeMap[62] = tr("Passenger") + ", " + tr("Hazardous category B");
+    shipTypeMap[63] = tr("Passenger") + ", " + tr("Hazardous category C");
+    shipTypeMap[64] = tr("Passenger") + ", " + tr("Hazardous category D");
+    shipTypeMap[65] = tr("Passenger") + " (65)";
+    shipTypeMap[66] = tr("Passenger") + " (66)";
+    shipTypeMap[67] = tr("Passenger") + " (67)";
+    shipTypeMap[68] = tr("Passenger") + " (68)";
+    shipTypeMap[69] = tr("Passenger") + " (69)";
+
+    shipTypeMap[70] = tr("Cargo");
+    shipTypeMap[71] = tr("Cargo") + ", " + tr("Hazardous category A");
+    shipTypeMap[72] = tr("Cargo") + ", " + tr("Hazardous category B");
+    shipTypeMap[73] = tr("Cargo") + ", " + tr("Hazardous category C");
+    shipTypeMap[74] = tr("Cargo") + ", " + tr("Hazardous category D");
+    shipTypeMap[75] = tr("Cargo") + " (75)";
+    shipTypeMap[76] = tr("Cargo") + " (76)";
+    shipTypeMap[77] = tr("Cargo") + " (77)";
+    shipTypeMap[78] = tr("Cargo") + " (78)";
+    shipTypeMap[79] = tr("Cargo") + " (79)";
+
+    shipTypeMap[80] = tr("Tanker");
+    shipTypeMap[81] = tr("Tanker") + ", " + tr("Hazardous category A");
+    shipTypeMap[82] = tr("Tanker") + ", " + tr("Hazardous category B");
+    shipTypeMap[83] = tr("Tanker") + ", " + tr("Hazardous category C");
+    shipTypeMap[84] = tr("Tanker") + ", " + tr("Hazardous category D");
+    shipTypeMap[85] = tr("Tanker") + " (85)";
+    shipTypeMap[86] = tr("Tanker") + " (86)";
+    shipTypeMap[87] = tr("Tanker") + " (87)";
+    shipTypeMap[88] = tr("Tanker") + " (88)";
+    shipTypeMap[89] = tr("Tanker") + " (89)";
+
+    shipTypeMap[90] = tr("Other");
+    shipTypeMap[91] = tr("Other") + ", " + tr("Hazardous category A");
+    shipTypeMap[92] = tr("Other") + ", " + tr("Hazardous category B");
+    shipTypeMap[93] = tr("Other") + ", " + tr("Hazardous category C");
+    shipTypeMap[94] = tr("Other") + ", " + tr("Hazardous category D");
+    shipTypeMap[95] = tr("Other") + " (95)";
+    shipTypeMap[96] = tr("Other") + " (96)";
+    shipTypeMap[97] = tr("Other") + " (97)";
+    shipTypeMap[98] = tr("Other") + " (98)";
+    shipTypeMap[99] = tr("Other") + " (99)";
+
+    return shipTypeMap;
+}
+
+QMap<quint8, QString> CRtAisInfo::initAidTypeMap()
+{
+    QMap<quint8, QString> aidTypeMap;
+    aidTypeMap[0] = ""; // Not available
+    aidTypeMap[1] = tr("Reference point");
+    aidTypeMap[2] = tr("RACON");
+    aidTypeMap[3] = tr("Fixed structure");
+    aidTypeMap[5] = tr("Light, without sectors");
+    aidTypeMap[6] = tr("Light, with sectors");
+    aidTypeMap[7] = tr("Leading Light Front");
+    aidTypeMap[8] = tr("Leading Light Rear");
+    aidTypeMap[9] = tr("Beacon, Cardinal N");
+    aidTypeMap[10] = tr("Beacon, Cardinal E");
+    aidTypeMap[11] = tr("Beacon, Cardinal S");
+    aidTypeMap[12] = tr("Beacon, Cardinal W");
+    aidTypeMap[13] = tr("Beacon, Port hand");
+    aidTypeMap[14] = tr("Beacon, Starboard hand");
+    aidTypeMap[15] = tr("Beacon, Preferred Channel port hand");
+    aidTypeMap[16] = tr("Beacon, Preferred Channel starboard hand");
+    aidTypeMap[17] = tr("Beacon, Isolated danger");
+    aidTypeMap[18] = tr("Beacon, Safe water");
+    aidTypeMap[19] = tr("Beacon, Special mark");
+    aidTypeMap[20] = tr("Cardinal Mark N");
+    aidTypeMap[21] = tr("Cardinal Mark E");
+    aidTypeMap[22] = tr("Cardinal Mark S");
+    aidTypeMap[23] = tr("Cardinal Mark W");
+    aidTypeMap[24] = tr("Port hand Mark");
+    aidTypeMap[25] = tr("Starboard hand Mark");
+    aidTypeMap[26] = tr("Preferred Channel Port hand");
+    aidTypeMap[27] = tr("Preferred Channel Starboard hand");
+    aidTypeMap[28] = tr("Isolated danger");
+    aidTypeMap[29] = tr("Safe Water");
+    aidTypeMap[30] = tr("Special Mark");
+    aidTypeMap[31] = tr("Light Vessel / LANBY / Rigs");
+    return aidTypeMap;
 }
 
 quint32 CRtAisInfo::get6bitInt(const QByteArray& data, int start, int count)

@@ -38,6 +38,7 @@ public:
 
     void loadSettings(QSettings& cfg);
     void saveSettings(QSettings& cfg) const;
+
 signals:
     void sigChanged();
 
@@ -121,6 +122,12 @@ private:
     quint32 get6bitInt(const QByteArray& data, int start, int count);
     qint64 get6bitSignedInt(const QByteArray& data, int start, int count);
     void getString(const QByteArray& data, QString& string, int start, int count);
+
+    QMap<quint8, QString> shipTypeMap;
+    QMap<quint8, QString> aidTypeMap;
+    QMap<quint8, QString> initShipTypeMap();
+    QMap<quint8, QString> initAidTypeMap();
+
 
     enum aisType
     {

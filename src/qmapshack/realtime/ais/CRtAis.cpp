@@ -204,6 +204,8 @@ void CRtAis::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt)
         text += "<table>";
         if(!ship.name.isEmpty())
             text += "<tr><td>" + tr("name:") + "</td><td>" + ship.name + "</td></tr>";
+        if(!ship.type.isEmpty())
+            text += "<tr><td>" + tr("type:") + "</td><td>" + ship.type + "</td></tr>";
         if(!ship.callsign.isEmpty())
             text += "<tr><td>" + tr("callsign:") + "</td><td>" + ship.callsign + "</td></tr>";
         if(!ship.imo.isEmpty())
@@ -219,6 +221,12 @@ void CRtAis::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt)
             text += "<tr><td>" + tr("heading:") + "</td><td>" + QString::number(ship.heading) + "°</td></tr>";
         if(!ship.destination.isEmpty())
             text += "<tr><td>" + tr("destination:") + "</td><td>" + ship.destination + "</td></tr>";
+        if(ship.length > 0)
+            text += "<tr><td>" + tr("length:") + "</td><td>" + QString::number(ship.length) + "m</td></tr>";
+        if(ship.width > 0)
+            text += "<tr><td>" + tr("width:") + "</td><td>" + QString::number(ship.width) + "m</td></tr>";
+        if(ship.draught > 0)
+            text += "<tr><td>" + tr("draught:") + "</td><td>" + QString::number(ship.draught) + "m</td></tr>";
         text += "</table>";
 
         QTextDocument doc;

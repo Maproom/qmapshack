@@ -34,7 +34,7 @@ class CRtAisInfo : public IRtInfo, private Ui::IRtAisInfo
     Q_OBJECT
 public:
     CRtAisInfo(CRtAis& source, QWidget* parent);
-    virtual ~CRtAisInfo() = default;
+    ~CRtAisInfo();
 
     void loadSettings(QSettings& cfg);
     void saveSettings(QSettings& cfg) const;
@@ -123,9 +123,130 @@ private:
     qint64 get6bitSignedInt(const QByteArray& data, int start, int count);
     void getString(const QByteArray& data, QString& string, int start, int count);
 
-    QMap<quint8, QString> shipTypeMap;
-    QMap<quint8, QString> aidTypeMap;
-    QMap<quint8, QString> initShipTypeMap();
+    QMap<quint8, QString> shipTypeMap = {
+        { 0, ""}, // Not available
+        { 20, tr("Wing in ground")},
+        { 21, tr("Wing in ground") + ", " + tr("Hazardous category A")},
+        { 22, tr("Wing in ground") + ", " + tr("Hazardous category B")},
+        { 23, tr("Wing in ground") + ", " + tr("Hazardous category C")},
+        { 24, tr("Wing in ground") + ", " + tr("Hazardous category D")},
+        { 25, tr("Wing in ground") + " (25)"},
+        { 26, tr("Wing in ground") + " (26)"},
+        { 27, tr("Wing in ground") + " (27)"},
+        { 28, tr("Wing in ground") + " (28)"},
+        { 29, tr("Wing in ground") + " (29)"},
+
+        { 30, tr("Fishing")},
+        { 31, tr("Towing")},
+        { 32, tr("Towing, large")},
+        { 33, tr("Dredger")},
+        { 34, tr("Dive Vessel")},
+        { 35, tr("Military ops")},
+        { 36, tr("Sailing Vessel")},
+        { 37, tr("Pleasure Craft")},
+        { 38, tr("Reserved")},
+        { 39, tr("Reserved")},
+
+        { 40, tr("High speed craft")},
+        { 41, tr("High speed craft") + ", " + tr("Hazardous category A")},
+        { 42, tr("High speed craft") + ", " + tr("Hazardous category B")},
+        { 43, tr("High speed craft") + ", " + tr("Hazardous category C")},
+        { 44, tr("High speed craft") + ", " + tr("Hazardous category D")},
+        { 45, tr("High speed craft") + " (45)"},
+        { 46, tr("High speed craft") + " (46)"},
+        { 47, tr("High speed craft") + " (47)"},
+        { 48, tr("High speed craft") + " (48)"},
+        { 49, tr("High speed craft") + " (49)"},
+
+        { 50, tr("Pilot Vessel")},
+        { 51, tr("Search and Rescue")},
+        { 52, tr("Tug")},
+        { 53, tr("Port Tender")},
+        { 54, tr("Anti-pollution equipment")},
+        { 55, tr("Law Enforcement")},
+        { 56, tr("Local Vessel")},
+        { 57, tr("Local Vessel")},
+        { 58, tr("Medical Transport")},
+        { 59, tr("Special Craft")},
+
+        { 60, tr("Passenger")},
+        { 61, tr("Passenger") + ", " + tr("Hazardous category A")},
+        { 62, tr("Passenger") + ", " + tr("Hazardous category B")},
+        { 63, tr("Passenger") + ", " + tr("Hazardous category C")},
+        { 64, tr("Passenger") + ", " + tr("Hazardous category D")},
+        { 65, tr("Passenger") + " (65)"},
+        { 66, tr("Passenger") + " (66)"},
+        { 67, tr("Passenger") + " (67)"},
+        { 68, tr("Passenger") + " (68)"},
+        { 69, tr("Passenger") + " (69)"},
+
+        { 70, tr("Cargo")},
+        { 71, tr("Cargo") + ", " + tr("Hazardous category A")},
+        { 72, tr("Cargo") + ", " + tr("Hazardous category B")},
+        { 73, tr("Cargo") + ", " + tr("Hazardous category C")},
+        { 74, tr("Cargo") + ", " + tr("Hazardous category D")},
+        { 75, tr("Cargo") + " (75)"},
+        { 76, tr("Cargo") + " (76)"},
+        { 77, tr("Cargo") + " (77)"},
+        { 78, tr("Cargo") + " (78)"},
+        { 79, tr("Cargo") + " (79)"},
+
+        { 80, tr("Tanker")},
+        { 81, tr("Tanker") + ", " + tr("Hazardous category A")},
+        { 82, tr("Tanker") + ", " + tr("Hazardous category B")},
+        { 83, tr("Tanker") + ", " + tr("Hazardous category C")},
+        { 84, tr("Tanker") + ", " + tr("Hazardous category D")},
+        { 85, tr("Tanker") + " (85)"},
+        { 86, tr("Tanker") + " (86)"},
+        { 87, tr("Tanker") + " (87)"},
+        { 88, tr("Tanker") + " (88)"},
+        { 89, tr("Tanker") + " (89)"},
+
+        { 90, tr("Other")},
+        { 91, tr("Other") + ", " + tr("Hazardous category A")},
+        { 92, tr("Other") + ", " + tr("Hazardous category B")},
+        { 93, tr("Other") + ", " + tr("Hazardous category C")},
+        { 94, tr("Other") + ", " + tr("Hazardous category D")},
+        { 95, tr("Other") + " (95)"},
+        { 96, tr("Other") + " (96)"},
+        { 97, tr("Other") + " (97)"},
+        { 98, tr("Other") + " (98)"},
+        { 99, tr("Other") + " (99)"}
+    };
+
+    QMap<quint8, QString> aidTypeMap = {
+        { 0, ""}, // Not available
+        { 1, tr("Reference point")},
+        { 2, tr("RACON")},
+        { 3, tr("Fixed structure")},
+        { 5, tr("Light, without sectors")},
+        { 6, tr("Light, with sectors")},
+        { 7, tr("Leading Light Front")},
+        { 8, tr("Leading Light Rear")},
+        { 9, tr("Beacon, Cardinal N")},
+        { 10, tr("Beacon, Cardinal E")},
+        { 11, tr("Beacon, Cardinal S")},
+        { 12, tr("Beacon, Cardinal W")},
+        { 13, tr("Beacon, Port hand")},
+        { 14, tr("Beacon, Starboard hand")},
+        { 15, tr("Beacon, Preferred Channel port hand")},
+        { 16, tr("Beacon, Preferred Channel starboard hand")},
+        { 17, tr("Beacon, Isolated danger")},
+        { 18, tr("Beacon, Safe water")},
+        { 19, tr("Beacon, Special mark")},
+        { 20, tr("Cardinal Mark N")},
+        { 21, tr("Cardinal Mark E")},
+        { 22, tr("Cardinal Mark S")},
+        { 23, tr("Cardinal Mark W")},
+        { 24, tr("Port hand Mark")},
+        { 25, tr("Starboard hand Mark")},
+        { 26, tr("Preferred Channel Port hand")},
+        { 27, tr("Preferred Channel Starboard hand")},
+        { 28, tr("Isolated danger")},
+        { 29, tr("Safe Water")},
+        { 30, tr("Special Mark")},
+        { 31, tr("Light Vessel / LANBY / Rigs")}
+    };
     QMap<quint8, QString> initAidTypeMap();
 
 

@@ -62,13 +62,14 @@ function copyAdditionalLibraries {
 
 function copyExternalFiles {
     cp -v $GDAL_DIR/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
+
     cp -v $HOMEBREW_PREFIX/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
     rm $BUILD_BUNDLE_RES_PROJ_DIR/*.tif
     rm $BUILD_BUNDLE_RES_PROJ_DIR/*.txt
 
     cp -v $LOCAL_ENV/xml/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
     cp -v $LOCAL_ENV/xml/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-    cp -v $LOCAL_ENV/xml/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp -v $LOCAL_ENV/xml/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR    
 }
 
 function copyExternalHelpFiles_QMS {
@@ -78,19 +79,21 @@ function copyExternalHelpFiles_QMS {
 
 
 function copyExtTools {
-if [[ "$BUILD_GDAL" != "" ]]; then
-    # use GDAL built from source
-        #cp -v $GDAL_DIR/bin/*                       $BUILD_BUNDLE_RES_BIN_DIR
-        cp -v $GDAL_DIR/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
-    else
-        cp -v `brew --prefix gdal`/bin/gdalbuildvrt $BUILD_BUNDLE_RES_BIN_DIR
-    fi
-    cp -v $HOMEBREW_PREFIX/bin/proj             $BUILD_BUNDLE_RES_BIN_DIR
-    cp -v $LOCAL_ENV/lib/planetsplitter         $BUILD_BUNDLE_RES_BIN_DIR
 
-    # currently only used by QMapTool.
-    cp -v $BUILD_BIN_DIR/qmt_rgb2pct            $BUILD_BUNDLE_RES_BIN_DIR
-    cp -v $BUILD_BIN_DIR/qmt_map2jnx            $BUILD_BUNDLE_RES_BIN_DIR
+    if [[ "$BREW_PACKAGE_BUILD" == "" ]]; then
+        cp -v `brew --prefix gdal`/bin/gdalbuildvrt $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $HOMEBREW_PREFIX/bin/proj             $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $LOCAL_ENV/lib/planetsplitter         $BUILD_BUNDLE_RES_BIN_DIR
+
+        # currently only used by QMapTool.
+        cp -v $BUILD_BIN_DIR/qmt_rgb2pct            $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $BUILD_BIN_DIR/qmt_map2jnx            $BUILD_BUNDLE_RES_BIN_DIR
+    fi
+
+    if [[ "$BUILD_GDAL" != "" ]]; then
+       # use GDAL built from source. copy it to bundle, regardless if brew package is created
+        cp -v $GDAL_DIR/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
+    fi
 }
 
 
@@ -136,15 +139,23 @@ if [[ "$1" == "" ]]; then
     fi
     printLinkingExtTools
     echo "------------------------------------"
-    # chmod a+x $BUILD_BUNDLE_DIR/Contents/Frameworks/*
-    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
-        # Codesign the apps (on arm64 mandatory):
-        echo "${INFO}Signing app bundles${NC}"
-        codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
-        # Special hack for gdalbuildvrt
-        # install_name_tool -add_rpath @executable_path/../Frameworks $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
-        codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+
+    # Codesign the apps (on arm64 mandatory):
+    echo "${INFO}Signing app bundles${NC}"
+
+    # 1. remove all empty directories, otherwiese verification of signing will fail
+    find $BUILD_BUNDLE_CONTENTS_DIR -type d -empty -delete
+
+    # 2. sign gdalbuild (special hack), since it is an executable copied from outside into the bundle
+    if [[ "$BREW_PACKAGE_BUILD" == "" ]]; then
+    # install_name_tool -add_rpath @executable_path/../Frameworks $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+        # codesign -s manfred.kern@gmail.com --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+        codesign  --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
     fi
+
+    # 3. sign the complete app bundle
+    # codesign -s manfred.kern@gmail.com --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
+    codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
 fi
 
 if [[ "$1" == "archive" ]]; then

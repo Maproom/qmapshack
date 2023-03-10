@@ -112,7 +112,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout">
+    <layout class="QGridLayout" name="gridLayout_1">
      <property name="leftMargin">
       <number>0</number>
      </property>
@@ -129,7 +129,7 @@
       <number>3</number>
      </property>
      <item row="1" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_1">
        <property name="text">
         <string>Ships seen:</string>
        </property>
@@ -157,7 +157,7 @@
       </widget>
      </item>
      <item row="4" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout_1">
        <property name="spacing">
         <number>3</number>
        </property>
@@ -272,7 +272,7 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label_3">
        <property name="text">
         <string>Last update</string>
        </property>

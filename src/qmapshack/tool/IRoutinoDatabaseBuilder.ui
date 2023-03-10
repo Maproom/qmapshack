@@ -180,7 +180,6 @@
   <zorder>textBrowser</zorder>
   <zorder>pushStart</zorder>
   <zorder>listWidget</zorder>
-  <zorder>verticalLayoutWidget</zorder>
  </widget>
  <resources>
   <include location="../resources.qrc"/>

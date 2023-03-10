@@ -64,7 +64,7 @@
 <context>
     <name>CDrawContextPixel</name>
     <message>
-        <location filename="../canvas/CDrawContextPixel.cpp" line="84"/>
+        <location filename="../canvas/CDrawContextPixel.cpp" line="83"/>
         <source>Failed to load</source>
         <translation type="unfinished"></translation>
     </message>
@@ -80,40 +80,40 @@
 <context>
     <name>CGdalFile</name>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="54"/>
-        <location filename="../helpers/CGdalFile.cpp" line="82"/>
-        <location filename="../helpers/CGdalFile.cpp" line="112"/>
+        <location filename="../helpers/CGdalFile.cpp" line="53"/>
+        <location filename="../helpers/CGdalFile.cpp" line="65"/>
+        <location filename="../helpers/CGdalFile.cpp" line="95"/>
         <source>Error...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="54"/>
-        <location filename="../helpers/CGdalFile.cpp" line="82"/>
+        <location filename="../helpers/CGdalFile.cpp" line="53"/>
+        <location filename="../helpers/CGdalFile.cpp" line="65"/>
         <source>Failed to load file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="112"/>
+        <location filename="../helpers/CGdalFile.cpp" line="95"/>
         <source>File must be 8 bit palette or gray indexed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="222"/>
+        <location filename="../helpers/CGdalFile.cpp" line="205"/>
         <source>(color table)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="226"/>
+        <location filename="../helpers/CGdalFile.cpp" line="209"/>
         <source>(RGB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="230"/>
+        <location filename="../helpers/CGdalFile.cpp" line="213"/>
         <source>(RGBA)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CGdalFile.cpp" line="234"/>
+        <location filename="../helpers/CGdalFile.cpp" line="217"/>
         <source>(unknown)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -232,7 +232,7 @@
 <context>
     <name>CHelpIndex</name>
     <message>
-        <location filename="../../common/help/CHelpIndex.cpp" line="29"/>
+        <location filename="../../common/help/CHelpIndex.cpp" line="28"/>
         <source>Search:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -405,7 +405,7 @@ is not a valid coordinate system definition:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/refmap/CProjWizard.cpp" line="215"/>
+        <location filename="../overlay/refmap/CProjWizard.cpp" line="220"/>
         <source>Error...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1813,18 +1813,18 @@ or
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="740"/>
-        <location filename="../units/IUnit.cpp" line="746"/>
+        <location filename="../units/IUnit.cpp" line="742"/>
+        <location filename="../units/IUnit.cpp" line="748"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="740"/>
+        <location filename="../units/IUnit.cpp" line="742"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="746"/>
+        <location filename="../units/IUnit.cpp" line="748"/>
         <source>Position values out of bounds. </source>
         <translation type="unfinished"></translation>
     </message>

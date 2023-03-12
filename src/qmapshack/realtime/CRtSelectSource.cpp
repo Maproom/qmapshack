@@ -20,6 +20,7 @@
 #include "realtime/CRtWorkspace.h"
 #include "realtime/gpstether/CRtGpsTether.h"
 #include "realtime/opensky/CRtOpenSky.h"
+#include "realtime/ais/CRtAis.h"
 
 
 #include <QtWidgets>
@@ -68,6 +69,7 @@ CRtSelectSource::CRtSelectSource(CRtWorkspace& wks)
     // append the list by adding other sources
     addSource<CRtOpenSky>(wks, listWidget);
     addSource<CRtGpsTether>(wks, listWidget);
+    addSource<CRtAis>(wks, listWidget);
 
     // update GUI state
     slotSelectionChanged();

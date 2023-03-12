@@ -39,7 +39,7 @@ Parameters to configure build:
 
 To run the complete build process:
 1. Create a dir cd into this directory. This dir will be referenced as $QMSDEVDIR
-2. clone git repo https://github.com/Maproom/qmapshack.git
+2. clone git repo https://github.com/d029940/qmapshack.git
 3. Check build paramters in ./qmapshack/MacOSX/config.sh
 4. run "sh ./qmapshack/MacOSX/build-all.sh | tee log.txt"
 5. ATTENTION: manual intervention is needed for:
@@ -47,7 +47,6 @@ To run the complete build process:
 6. check log.txt if an error occured
 7. After building successfuly, the bundles are located in the release folder
 8. check brew*.diff for packages installed by homebrew during build process and uninstall them if not needed elsewhere.
-9. Remove 1st_QMS_start.sh script from build directory if built was successful
 
 
 --------------------------------------------------

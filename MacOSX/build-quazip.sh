@@ -16,4 +16,6 @@ cmake .. -DCMAKE_INSTALL_PREFIX=$LOCAL_ENV
 cmake --build . -j4
 cmake --build . --target install
 cd $QMSDEVDIR
-
+pushd $LOCAL_ENV/lib/cmake
+mv QuaZip-Qt5-1.4 QuaZip-Qt5
+popd

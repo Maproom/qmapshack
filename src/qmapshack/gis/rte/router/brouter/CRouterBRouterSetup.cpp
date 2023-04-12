@@ -888,11 +888,11 @@ void CRouterBRouterSetup::setJava(const QString& path)
 {
     localJavaExecutable = path;
 
-    if (tryJavaVersion({ "-version" }, "[\\S]+ version \"(\\d+)\\.\\d+.*"))
+    if (tryJavaVersion({ "-version" }, "[\\S]+ version \"(\\d+)(\\.\\d+)*\" .*"))
     {
         return;
     }
-    if (tryJavaVersion({ "--version" }, "[\\S]+ (\\d+)\\.\\d+.*"))
+    if (tryJavaVersion({ "--version" }, "[\\S]+ (\\d+)(\\.\\d+)* .*"))
     {
         return;
     }

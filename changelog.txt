@@ -1,5 +1,4 @@
 V1.XX.X
-[QMS-594] Java version check fails in BRouter setup
 [QMS-429] Bad OSM Tag formatting crashes QMS
 [QMS-470] Windows build scripts: adapt for release v1.16.1
 |QMS-476] Color the map by elevation
@@ -27,6 +26,7 @@ V1.XX.X
 [QMS-572] Added support for more decimals in GPS timestamps
 [QMS-586] Added support for AIS realtime source
 [QMS-591] MacOS build adapted for new Quazip version / preperation for brew package
+[QMS-594] Java version check fails in BRouter setup
 
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing

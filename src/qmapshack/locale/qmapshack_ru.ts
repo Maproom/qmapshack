@@ -495,7 +495,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../dem/CDemVRT.cpp" line="456"/>
         <source>Ele.</source>
-        <translation type="unfinished">Высота</translation>
+        <translation>Высота</translation>
     </message>
 </context>
 <context>
@@ -1176,14 +1176,16 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     <message>
         <location filename="../gis/trk/filter/CFilterSplitTrack.cpp" line="54"/>
         <source>Help</source>
-        <translation type="unfinished">Справки</translation>
+        <translation>Справки</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSplitTrack.cpp" line="55"/>
         <source>Sometimes tracks have too many points to be transfered to a gps device.
 
 This filter splits the track into multiple smaller tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation>Иногда треки содержат слишком много точек, чтобы их можно было передать на gps-устройство.
+
+Этот фильтр разбивает трек на несколько небольших треков.</translation>
     </message>
 </context>
 <context>
@@ -2051,12 +2053,14 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="662"/>
         <source>The filter can not be applied</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно применить фильтр</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="662"/>
         <source>The number of points in the track must be higher than the number of tracks to split into.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Количество точек в треке должно быть больше, чем количество треков, на которые нужно разделить.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="815"/>
@@ -2194,7 +2198,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="604"/>
         <source>Changed timestamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменена метка времени ...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1163"/>
@@ -4553,7 +4557,7 @@ line %2, column %3:
     <message>
         <location filename="../map/CMapTMS.cpp" line="109"/>
         <source>Malformed TMS file. The layer numbers do not index the available layers. Layer numbers start from index 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Некорректно сформированный файл TMS. Номера слоев не индексируют доступные слои. Номера слоев начинаются с индекса 0.</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="127"/>
@@ -4964,22 +4968,22 @@ Unknown structure.</source>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="346"/>
         <source>Category: </source>
-        <translation type="unfinished">Категория:</translation>
+        <translation>Категория:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="352"/>
         <source>Links: </source>
-        <translation type="unfinished">Ссылки: </translation>
+        <translation>Ссылки: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="370"/>
         <source>Zoom in to see more details.</source>
-        <translation type="unfinished">Увеличить масштаб, чтобы увидеть более подробную информацию.</translation>
+        <translation>Увеличить масштаб, чтобы увидеть более подробную информацию.</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="373"/>
         <source>POIs at this point:</source>
-        <translation type="unfinished">Точки интереса на этом месте:</translation>
+        <translation>Точки интереса на этом месте:</translation>
     </message>
 </context>
 <context>
@@ -4989,68 +4993,68 @@ Unknown structure.</source>
         <source>addr:housenumber addr:street&lt;br&gt;
 addr:city addr:postcode&lt;br&gt;
 addr:country</source>
-        <translation type="unfinished">addr:housenumber addr:street&lt;br&gt;
+        <translation>addr:housenumber addr:street&lt;br&gt;
 addr:city addr:postcode&lt;br&gt;
 addr:country</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="172"/>
         <source>Alternative names: </source>
-        <translation type="unfinished">Альтернативные названия: </translation>
+        <translation>Альтернативные названия: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="198"/>
         <location filename="../poi/CPoiItemPOI.cpp" line="206"/>
         <source>Phone number: </source>
-        <translation type="unfinished">Номер телефона: </translation>
+        <translation>Номер телефона: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="214"/>
         <source>Mobile phone number: </source>
-        <translation type="unfinished">Номер мобильного телефона:</translation>
+        <translation>Номер мобильного телефона:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="222"/>
         <source>Fax: </source>
-        <translation type="unfinished">Факс: </translation>
+        <translation>Факс: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="265"/>
         <location filename="../poi/CPoiItemPOI.cpp" line="269"/>
         <source>Email</source>
-        <translation type="unfinished">Электронная почта: </translation>
+        <translation>Электронная почта: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="273"/>
         <location filename="../poi/CPoiItemPOI.cpp" line="277"/>
         <location filename="../poi/CPoiItemPOI.cpp" line="281"/>
         <source>Website</source>
-        <translation type="unfinished">Вебсайт: </translation>
+        <translation>Вебсайт: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="302"/>
         <source>OpenStreetMap</source>
-        <translation type="unfinished">OpenStreetMap</translation>
+        <translation>OpenStreetMap</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="311"/>
         <source>wikimedia</source>
-        <translation type="unfinished">wikimedia</translation>
+        <translation>wikimedia</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="315"/>
         <source>Image</source>
-        <translation type="unfinished">Изображение: </translation>
+        <translation>Изображение: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="335"/>
         <source>Wikipedia</source>
-        <translation type="unfinished">Википедия:</translation>
+        <translation>Википедия:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="363"/>
         <source>Wikidata</source>
-        <translation type="unfinished">Wikidata: </translation>
+        <translation>Wikidata: </translation>
     </message>
 </context>
 <context>
@@ -5638,37 +5642,37 @@ addr:country</translation>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="373"/>
         <source>no brouter-jar found</source>
-        <translation type="unfinished"></translation>
+        <translation>brouter-jar не найдено</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="383"/>
         <source>brouter jar-file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>brouter-jar файл: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="388"/>
         <source>conflicting alternative jar-file %1, go back to previous page to select!</source>
-        <translation type="unfinished"></translation>
+        <translation>конфликтующие альтернативный jar-файл %1, вернитесь на предыдущую страницу для выбора!</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="409"/>
         <source>backup: %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>резервное копирование: %1 в %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="413"/>
         <source>error renaming file %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка переименования файла %1 до %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="420"/>
         <source>installed: %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>установлено: %1 до %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="424"/>
         <source>error copying %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>ошибка копировании %1 в %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="691"/>
@@ -5706,7 +5710,7 @@ addr:country</translation>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="357"/>
         <source>select BRouter jar file</source>
-        <translation type="unfinished"></translation>
+        <translation>выберите BRouter jar-файл</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="372"/>
@@ -5716,7 +5720,7 @@ addr:country</translation>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="426"/>
         <source>is not a valid BRouter jarfile</source>
-        <translation type="unfinished"></translation>
+        <translation>не является подходящим BRouter jar-файлом</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="445"/>
@@ -5746,7 +5750,7 @@ addr:country</translation>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="464"/>
         <source>it seems this is an existing BRouter installation, choose jar file!</source>
-        <translation type="unfinished"></translation>
+        <translation>Кажется, это существующая установка BRouter, выберите jar-файл!</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="468"/>
@@ -5768,12 +5772,14 @@ addr:country</translation>
         <source>Your Java version %1 seems to be older than the required version %2.
 BRouter will probably not work as expected.
 Please check the logs if Brouter fails to start.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваша версия Java %1, видимо, старше требуемой версии %2.
+Вероятно, BRouter будет работать не так, как ожидается.
+Пожалуйста, проверьте журналы, если Brouter не удается запустить.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="486"/>
         <source>unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>неизвестно</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="492"/>
@@ -5838,17 +5844,17 @@ Please check the logs if Brouter fails to start.</source>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="645"/>
         <source>installing into %1</source>
-        <translation type="unfinished"></translation>
+        <translation>установка в %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="653"/>
         <source>installation successful</source>
-        <translation type="unfinished"></translation>
+        <translation>установка успешна</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="681"/>
         <source>installation of brouter failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter установка не удалась: %1</translation>
     </message>
     <message>
         <source>ready.</source>
@@ -6502,82 +6508,82 @@ The associated database &apos;%3&apos; is ignored</source>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="86"/>
         <source>&lt;b&gt;AIS&lt;/b&gt;&lt;br/&gt;Get vessel positions via AIS over TCP/IP</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;AIS&lt;/b&gt;&lt;br/&gt;Получить позицию судна через AIS по TCP/IP</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="174"/>
         <source>unkn.</source>
-        <translation type="unfinished">не известно</translation>
+        <translation>не известно</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="206"/>
         <source>name:</source>
-        <translation type="unfinished"></translation>
+        <translation>имя:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="208"/>
         <source>type:</source>
-        <translation type="unfinished"></translation>
+        <translation>тип:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="210"/>
         <source>callsign:</source>
-        <translation type="unfinished">позывной:</translation>
+        <translation>позывной:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="212"/>
         <source>imo:</source>
-        <translation type="unfinished"></translation>
+        <translation>imo:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="214"/>
         <source>mmsi:</source>
-        <translation type="unfinished"></translation>
+        <translation>mmsi:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="215"/>
         <source>last contact:</source>
-        <translation type="unfinished">последний контакт:</translation>
+        <translation>последний контакт:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="216"/>
         <source>longitude:</source>
-        <translation type="unfinished">долгота:</translation>
+        <translation>долгота:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="217"/>
         <source>latitude:</source>
-        <translation type="unfinished">ширина:</translation>
+        <translation>ширина:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="219"/>
         <source>velocity:</source>
-        <translation type="unfinished">скорость:</translation>
+        <translation>скорость:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="221"/>
         <source>heading:</source>
-        <translation type="unfinished">курс:</translation>
+        <translation>курс:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="223"/>
         <source>destination:</source>
-        <translation type="unfinished"></translation>
+        <translation>назначение:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="225"/>
         <source>length:</source>
-        <translation type="unfinished"></translation>
+        <translation>длина:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="227"/>
         <source>width:</source>
-        <translation type="unfinished"></translation>
+        <translation>ширина:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="229"/>
         <source>draught:</source>
-        <translation type="unfinished"></translation>
+        <translation>драфт:</translation>
     </message>
 </context>
 <context>
@@ -6594,7 +6600,7 @@ The associated database &apos;%3&apos; is ignored</source>
         <location filename="../realtime/ais/CRtAisInfo.h" line="136"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="137"/>
         <source>Wing in ground</source>
-        <translation type="unfinished"></translation>
+        <translation>Wing in ground</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="129"/>
@@ -6604,7 +6610,7 @@ The associated database &apos;%3&apos; is ignored</source>
         <location filename="../realtime/ais/CRtAisInfo.h" line="195"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="206"/>
         <source>Hazardous category A</source>
-        <translation type="unfinished"></translation>
+        <translation>Hazardous category A</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="130"/>
@@ -6614,7 +6620,7 @@ The associated database &apos;%3&apos; is ignored</source>
         <location filename="../realtime/ais/CRtAisInfo.h" line="196"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="207"/>
         <source>Hazardous category B</source>
-        <translation type="unfinished"></translation>
+        <translation>Hazardous category B</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="131"/>
@@ -6624,7 +6630,7 @@ The associated database &apos;%3&apos; is ignored</source>
         <location filename="../realtime/ais/CRtAisInfo.h" line="197"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="208"/>
         <source>Hazardous category C</source>
-        <translation type="unfinished"></translation>
+        <translation>Hazardous category C</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="132"/>
@@ -6634,53 +6640,53 @@ The associated database &apos;%3&apos; is ignored</source>
         <location filename="../realtime/ais/CRtAisInfo.h" line="198"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="209"/>
         <source>Hazardous category D</source>
-        <translation type="unfinished"></translation>
+        <translation>Hazardous category D</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="139"/>
         <source>Fishing</source>
-        <translation type="unfinished"></translation>
+        <translation>Fishing</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="140"/>
         <source>Towing</source>
-        <translation type="unfinished"></translation>
+        <translation>Towing</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="141"/>
         <source>Towing, large</source>
-        <translation type="unfinished"></translation>
+        <translation>Towing, large</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="142"/>
         <source>Dredger</source>
-        <translation type="unfinished"></translation>
+        <translation>Dredger</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="143"/>
         <source>Dive Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation>Dive Vessel</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="144"/>
         <source>Military ops</source>
-        <translation type="unfinished"></translation>
+        <translation>Military ops</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="145"/>
         <source>Sailing Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation>Sailing Vessel</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="146"/>
         <source>Pleasure Craft</source>
-        <translation type="unfinished"></translation>
+        <translation>Pleasure Craft</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="147"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="148"/>
         <source>Reserved</source>
-        <translation type="unfinished"></translation>
+        <translation>Reserved</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="150"/>
@@ -6694,53 +6700,53 @@ The associated database &apos;%3&apos; is ignored</source>
         <location filename="../realtime/ais/CRtAisInfo.h" line="158"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="159"/>
         <source>High speed craft</source>
-        <translation type="unfinished"></translation>
+        <translation>High speed craft</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="161"/>
         <source>Pilot Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilot Vessel</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="162"/>
         <source>Search and Rescue</source>
-        <translation type="unfinished"></translation>
+        <translation>Search and Rescue</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="163"/>
         <source>Tug</source>
-        <translation type="unfinished"></translation>
+        <translation>Tug</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="164"/>
         <source>Port Tender</source>
-        <translation type="unfinished"></translation>
+        <translation>Port Tender</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="165"/>
         <source>Anti-pollution equipment</source>
-        <translation type="unfinished"></translation>
+        <translation>Anti-pollution equipment</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="166"/>
         <source>Law Enforcement</source>
-        <translation type="unfinished"></translation>
+        <translation>Law Enforcement</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="167"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="168"/>
         <source>Local Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation>Local Vessel</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="169"/>
         <source>Medical Transport</source>
-        <translation type="unfinished"></translation>
+        <translation>Medical Transport</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="170"/>
         <source>Special Craft</source>
-        <translation type="unfinished"></translation>
+        <translation>Special Craft</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="172"/>
@@ -6754,7 +6760,7 @@ The associated database &apos;%3&apos; is ignored</source>
         <location filename="../realtime/ais/CRtAisInfo.h" line="180"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="181"/>
         <source>Passenger</source>
-        <translation type="unfinished"></translation>
+        <translation>Passenger</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="183"/>
@@ -6768,7 +6774,7 @@ The associated database &apos;%3&apos; is ignored</source>
         <location filename="../realtime/ais/CRtAisInfo.h" line="191"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="192"/>
         <source>Cargo</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargo</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="194"/>
@@ -6782,7 +6788,7 @@ The associated database &apos;%3&apos; is ignored</source>
         <location filename="../realtime/ais/CRtAisInfo.h" line="202"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="203"/>
         <source>Tanker</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanker</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="205"/>
@@ -6796,162 +6802,162 @@ The associated database &apos;%3&apos; is ignored</source>
         <location filename="../realtime/ais/CRtAisInfo.h" line="213"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="214"/>
         <source>Other</source>
-        <translation type="unfinished">Остальное</translation>
+        <translation>Остальное</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="219"/>
         <source>Reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Reference point</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="220"/>
         <source>RACON</source>
-        <translation type="unfinished"></translation>
+        <translation>RACON</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="221"/>
         <source>Fixed structure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixed structure</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="222"/>
         <source>Light, without sectors</source>
-        <translation type="unfinished"></translation>
+        <translation>Light, without sectors</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="223"/>
         <source>Light, with sectors</source>
-        <translation type="unfinished"></translation>
+        <translation>Light, with sectors</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="224"/>
         <source>Leading Light Front</source>
-        <translation type="unfinished"></translation>
+        <translation>Leading Light Front</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="225"/>
         <source>Leading Light Rear</source>
-        <translation type="unfinished"></translation>
+        <translation>Leading Light Rear</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="226"/>
         <source>Beacon, Cardinal N</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Cardinal N</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="227"/>
         <source>Beacon, Cardinal E</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Cardinal E</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="228"/>
         <source>Beacon, Cardinal S</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Cardinal S</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="229"/>
         <source>Beacon, Cardinal W</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Cardinal W</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="230"/>
         <source>Beacon, Port hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Port hand</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="231"/>
         <source>Beacon, Starboard hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Starboard hand</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="232"/>
         <source>Beacon, Preferred Channel port hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Preferred Channel port hand</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="233"/>
         <source>Beacon, Preferred Channel starboard hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Preferred Channel starboard hand</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="234"/>
         <source>Beacon, Isolated danger</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Isolated danger</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="235"/>
         <source>Beacon, Safe water</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Safe water</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="236"/>
         <source>Beacon, Special mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Beacon, Special mark</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="237"/>
         <source>Cardinal Mark N</source>
-        <translation type="unfinished"></translation>
+        <translation>Cardinal Mark N</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="238"/>
         <source>Cardinal Mark E</source>
-        <translation type="unfinished"></translation>
+        <translation>Cardinal Mark E</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="239"/>
         <source>Cardinal Mark S</source>
-        <translation type="unfinished"></translation>
+        <translation>Cardinal Mark S</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="240"/>
         <source>Cardinal Mark W</source>
-        <translation type="unfinished"></translation>
+        <translation>Cardinal Mark W</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="241"/>
         <source>Port hand Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Port hand Mark</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="242"/>
         <source>Starboard hand Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Starboard hand Mark</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="243"/>
         <source>Preferred Channel Port hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferred Channel Port hand</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="244"/>
         <source>Preferred Channel Starboard hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferred Channel Starboard hand</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="245"/>
         <source>Isolated danger</source>
-        <translation type="unfinished"></translation>
+        <translation>Isolated danger</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="246"/>
         <source>Safe Water</source>
-        <translation type="unfinished"></translation>
+        <translation>Safe Water</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="247"/>
         <source>Special Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Special Mark</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="248"/>
         <source>Light Vessel / LANBY / Rigs</source>
-        <translation type="unfinished"></translation>
+        <translation>Light Vessel / LANBY / Rigs</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="102"/>
         <source>Help</source>
-        <translation type="unfinished">Справки</translation>
+        <translation>Справки</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="103"/>
@@ -6961,12 +6967,17 @@ Use this to receive AIS NMEA data from a network source. This could be a publicl
 Example sharing from Linux:
 ncat -v -k -l 5631 &lt; /dev/ttyUSB0
 Replace /dev/ttyUSB0 with the tty device of your AIS receiver</source>
-        <translation type="unfinished"></translation>
+        <translation>AIS
+Использовать для получения AIS NMEA данных от источника в сети. Это может быть публичный источник, посылающий данные AIS открытым текстом через TCP порт или серийный Linux порт с помощью ncat.
+
+Пример использования порта Linux:
+ncat -v -k -l 5631 &lt; /dev/ttyUSB0
+Замените /dev/ttyUSB0 на tty устройство вашего AIS приемника.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="198"/>
         <source>Error...</source>
-        <translation type="unfinished">Ошибка...</translation>
+        <translation>Ошибка...</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="362"/>
@@ -6974,12 +6985,12 @@ Replace /dev/ttyUSB0 with the tty device of your AIS receiver</source>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="449"/>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="500"/>
         <source>Unknown</source>
-        <translation type="unfinished">Неизвестно</translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="600"/>
         <source>Failed...</source>
-        <translation type="unfinished">Не удалось...</translation>
+        <translation>Не удалось...</translation>
     </message>
 </context>
 <context>
@@ -9693,7 +9704,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="35"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of layer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Изменить прозрачность карты&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="50"/>
@@ -9723,7 +9734,7 @@ zoom-out for use of the DEM data.</source>
         <location filename="../dem/IDemPropSetup.ui" line="130"/>
         <source>Enable relief shading based on aspect and slope,
  and illuminated from NW.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить рельефное затенение в зависимости от аспекта и наклона, и освещение с северо-запада.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="134"/>
@@ -9734,30 +9745,33 @@ zoom-out for use of the DEM data.</source>
         <location filename="../dem/IDemPropSetup.ui" line="141"/>
         <source>Move to the right to raise the angle of the light.
  Light comes from NW</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить вправо, чтобы увеличить угол освещения. Освещение с северо-запада</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="164"/>
         <source>Enable relief shading based on slope.
  The steeper, the darker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить затенение рельефа в зависимости от уклона.
+ Чем круче, тем темнее.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="168"/>
         <source>Slope Shading</source>
-        <translation type="unfinished"></translation>
+        <translation>Затенение склона</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="175"/>
         <source>Move to the right to increase the scale factor.
  Higher values are better for flatter areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить вправо, чтобы увеличить масштабный коэффициент.
+ Более высокие значения лучше подходят для более плоских участков.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="212"/>
         <source>Enable color shading
  based on slope ranges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить цветовое затенение
+на основе диапазонов уклона.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="216"/>
@@ -9767,7 +9781,7 @@ zoom-out for use of the DEM data.</source>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="223"/>
         <source>Select color scheme.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать цветовую схему.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="304"/>
@@ -9799,7 +9813,7 @@ zoom-out for use of the DEM data.</source>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="717"/>
         <source>Tint areas above the given elevation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрасить области выше заданной высоты.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="720"/>
@@ -9810,44 +9824,45 @@ zoom-out for use of the DEM data.</source>
         <location filename="../dem/IDemPropSetup.ui" line="744"/>
         <location filename="../dem/IDemPropSetup.ui" line="766"/>
         <source>Lower elevation to be colored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Более низкие высоты будут окрашены.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="769"/>
         <source>Elevation Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота мин.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="782"/>
         <location filename="../dem/IDemPropSetup.ui" line="815"/>
         <source>Higher elevation to be colored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Более высокие высоты будут окрашены.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="798"/>
         <source>Enable color shading
  based on elevation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить цветовое затенение
+ в зависимости от высоты.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="802"/>
         <source>Elevation Shading</source>
-        <translation type="unfinished"></translation>
+        <translation>Затенение высоты</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="818"/>
         <source>Elevation High</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота Макс.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="825"/>
         <source>Enable / Disable elevation legend.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить/выключить легенду высоты.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="828"/>
         <source>Legend</source>
-        <translation type="unfinished"></translation>
+        <translation>Легенда</translation>
     </message>
 </context>
 <context>
@@ -11549,27 +11564,27 @@ zoom-out for use of the DEM data.</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="35"/>
         <source>Number of tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество треков</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="99"/>
         <source>Apply filter now.</source>
-        <translation type="unfinished">Применить фильтр.</translation>
+        <translation>Применить фильтр.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="102"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="132"/>
         <source>Split track into multiple shorter tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделить трек на несколько более коротких треков</translation>
     </message>
 </context>
 <context>
@@ -13977,7 +13992,7 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="147"/>
         <source>labelLocalBRouterResult</source>
-        <translation type="unfinished"></translation>
+        <translation>labelLocalBRouterResult</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="156"/>
@@ -14331,7 +14346,7 @@ or
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="25"/>
@@ -14342,84 +14357,84 @@ or
         <location filename="../realtime/ais/IRtAisInfo.ui" line="230"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="244"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="46"/>
         <source>Port</source>
-        <translation type="unfinished">Порт</translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="89"/>
         <source>Host</source>
-        <translation type="unfinished">Сервер</translation>
+        <translation>Сервер</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="96"/>
         <source>Automatically connect to the host.</source>
-        <translation type="unfinished">Подключить автоматически к серверу.</translation>
+        <translation>Подключить автоматически к серверу.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="99"/>
         <source>auto. conn.</source>
-        <translation type="unfinished">подключить автоматически</translation>
+        <translation>подключить автоматически</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="134"/>
         <source>Ships seen:</source>
-        <translation type="unfinished"></translation>
+        <translation>Судна обнаружены:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="141"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="270"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="293"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="148"/>
         <source>Record by mmsi</source>
-        <translation type="unfinished"></translation>
+        <translation>Запись по mmsi</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="155"/>
         <source>Show names</source>
-        <translation type="unfinished">Показать имена</translation>
+        <translation>Показать имена</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="170"/>
         <source>Start recording.</source>
-        <translation type="unfinished">Начать запись.</translation>
+        <translation>Начать запись.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="190"/>
         <source>Pause recording.</source>
-        <translation type="unfinished">Приостановить запись.</translation>
+        <translation>Приостановить запись.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="213"/>
         <source>Convert record to track.</source>
-        <translation type="unfinished">Преобразовать запись в трек.</translation>
+        <translation>Преобразовать запись в трек.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="227"/>
         <source>Reset record.</source>
-        <translation type="unfinished">Сбросить запись.</translation>
+        <translation>Сбросить запись.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="241"/>
         <source>Select record file.</source>
-        <translation type="unfinished">Выбрать файл записи.</translation>
+        <translation>Выбрать файл записи.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="277"/>
         <source>Last update</source>
-        <translation type="unfinished">Последнее обновление</translation>
+        <translation>Последнее обновление</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="284"/>
         <source>Enter a valid key.</source>
-        <translation type="unfinished">Ввести действительный ключ.</translation>
+        <translation>Ввести действительный ключ.</translation>
     </message>
 </context>
 <context>
@@ -16489,14 +16504,14 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../helpers/ITimeDialog.ui" line="14"/>
         <source>Edit timestamp...</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить метки времени ...</translation>
     </message>
     <message>
         <location filename="../helpers/ITimeDialog.ui" line="22"/>
         <source>You can use the up, down, left and right key of 
 your keyboard to change the time/date. Or you 
 simply type the new time/date.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы можете использовать клавиши вверх, вниз, влево и вправо на клавиатуры для изменения времени/даты. Или вы можете просто ввести новое время/дату.</translation>
     </message>
 </context>
 <context>
@@ -16629,7 +16644,7 @@ simply type the new time/date.</source>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="86"/>
         <source>Enabling this feature leads to routes with many points. Not recommended for devices which have only limited space for saving route points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включение этой функции приводит к созданию маршрутов с большим количеством точек. Не рекомендуется для устройств, у которых ограниченное пространство для сохранения точек маршрута.</translation>
     </message>
     <message>
         <source>Enabling this feature leads to routes with many points. Not recommendet for devices which have only limited space for saving route points.</source>

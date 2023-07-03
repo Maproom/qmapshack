@@ -17,7 +17,6 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemPropSetup.h"
 #include "dem/IDem.h"
@@ -25,12 +24,14 @@
 
 #include <QtWidgets>
 
-inline qint16 getValue(QVector<qint16>& data, int x, int y, int dx)
+template <typename T>
+inline T getValue(QVector<T>& data, int x, int y, int dx)
 {
     return data[x + y * dx];
 }
 
-inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16* w)
+template <typename T>
+inline void fillWindow(QVector<T>& data, int x, int y, int dx, T* w)
 {
     w[0] = getValue(data, x - 1, y - 1, dx);
     w[1] = getValue(data, x, y - 1, dx);
@@ -43,7 +44,8 @@ inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16* w)
     w[8] = getValue(data, x + 1, y + 1, dx);
 }
 
-inline void fillWindow4x4(QVector<qint16>& data, qreal x, qreal y, int dx, qint16* w)
+template <typename T>
+inline void fillWindow4x4(QVector<T>& data, qreal x, qreal y, int dx, T* w)
 {
     x = qFloor(x);
     y = qFloor(y);
@@ -259,7 +261,7 @@ int IDem::getFactorHillshading() const
     }
 }
 
-void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const
+void IDem::hillshading(QVector<float>& data, qreal w, qreal h, QImage& img) const
 {
     int wp2 = w + 2;
 
@@ -273,7 +275,7 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img) con
         unsigned char* scan = img.scanLine(m - 1);
         for(unsigned int n = 1; n <= w; n++)
         {
-            qint16 win[eWinsize3x3];
+            float win[eWinsize3x3];
             fillWindow(data, n, m, wp2, win);
 
             if(hasNoData && win[4] == noData)
@@ -307,7 +309,7 @@ int IDem::getFactorSlopeShading() const
     return factorSlopeShading * 100.;
 }
 
-void IDem::slopeShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const
+void IDem::slopeShading(QVector<float>& data, qreal w, qreal h, QImage& img) const
 {
     int wp2 = w + 2;
 
@@ -316,7 +318,7 @@ void IDem::slopeShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) co
         unsigned char* scan = img.scanLine(m - 1);
         for(unsigned int n = 1; n <= w; n++)
         {
-            qint16 win[eWinsize3x3];
+            float win[eWinsize3x3];
             fillWindow(data, n, m, wp2, win);
 
             if(hasNoData && win[4] == noData)
@@ -344,7 +346,7 @@ void IDem::slopeShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) co
     }
 }
 
-qreal IDem::slopeOfWindowInterp(qint16* win2, winsize_e size, qreal x, qreal y) const
+qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) const
 {
     for(int i = 0; i < size; i++)
     {
@@ -390,7 +392,7 @@ qreal IDem::slopeOfWindowInterp(qint16* win2, winsize_e size, qreal x, qreal y) 
     return slope;
 }
 
-void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage& img) const
+void IDem::slopecolor(QVector<float>& data, qreal w, qreal h, QImage& img) const
 {
     int wp2 = w + 2;
 
@@ -399,7 +401,7 @@ void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage& img) cons
         unsigned char* scan = img.scanLine(m - 1);
         for(unsigned int n = 1; n <= w; n++)
         {
-            qint16 win[eWinsize3x3];
+            float win[eWinsize3x3];
             fillWindow(data, n, m, wp2, win);
             qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
 
@@ -433,7 +435,7 @@ void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage& img) cons
     }
 }
 
-void IDem::elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage& img) const
+void IDem::elevationLimit(QVector<float>& data, qreal w, qreal h, QImage& img) const
 {
     int wp2 = w + 2;
 
@@ -442,7 +444,7 @@ void IDem::elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage& img) 
         unsigned char* scan = img.scanLine(m - 1);
         for(unsigned int n = 1; n <= w; n++)
         {
-            qint16 win[eWinsize3x3];
+            float win[eWinsize3x3];
             fillWindow(data, n, m, wp2, win);
 
             // get maximum of window (_not_ mean)
@@ -471,7 +473,7 @@ void IDem::elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage& img) 
     }
 }
 
-void IDem::elevationShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const
+void IDem::elevationShading(QVector<float>& data, qreal w, qreal h, QImage& img) const
 {
     int wp2 = w + 2;
 
@@ -480,7 +482,7 @@ void IDem::elevationShading(QVector<qint16>& data, qreal w, qreal h, QImage& img
         unsigned char* scan = img.scanLine(m - 1);
         for(unsigned int n = 1; n <= w; n++)
         {
-            qint16 win[eWinsize3x3];
+            float win[eWinsize3x3];
             fillWindow(data, n, m, wp2, win);
 
             // get maximum of window (_not_ mean)

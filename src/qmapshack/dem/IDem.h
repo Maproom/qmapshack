@@ -178,15 +178,15 @@ public slots:
 
 protected:
 
-    void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
+    void hillshading(QVector<float>& data, qreal w, qreal h, QImage& img) const;
 
-    void slopeShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
+    void slopeShading(QVector<float> &data, qreal w, qreal h, QImage& img) const;
 
-    void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
+    void slopecolor(QVector<float> &data, qreal w, qreal h, QImage& img) const;
 
-    void elevationLimit(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
+    void elevationLimit(QVector<float> &data, qreal w, qreal h, QImage& img) const;
 
-    void elevationShading(QVector<qint16>& data, qreal w, qreal h, QImage& img) const;
+    void elevationShading(QVector<float> &data, qreal w, qreal h, QImage& img) const;
 
     /**
        @brief Slope in degrees based on a window. Origin is at point (1,1), counting from zero.
@@ -196,7 +196,7 @@ protected:
        @param y     Fractional value (0..1) for interpolation in y (4x4 window only)
        @return      Slope in degrees
      */
-    qreal slopeOfWindowInterp(qint16* win2, winsize_e size, qreal x, qreal y) const;
+    qreal slopeOfWindowInterp(float *win2, winsize_e size, qreal x, qreal y) const;
 
     /**
        @brief Reproject (translate, rotate, scale) tile before drawing it.

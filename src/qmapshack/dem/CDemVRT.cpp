@@ -20,7 +20,6 @@
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemVRT.h"
-#include "gis/GeoMath.h"
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
@@ -132,7 +131,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
         return NOFLOAT;
     }
 
-    qint16 e[4];
+    float e[4];
     QPointF pt = pos;
 
     proj.transform(pt, PJ_INV);
@@ -148,7 +147,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale)
     qreal y = pt.y() - qFloor(pt.y());
 
     mutex.lock();
-    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()), qFloor(pt.y()), 2, 2, &e, 2, 2, GDT_Int16, 1, 0, 0, 0, 0);
+    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()), qFloor(pt.y()), 2, 2, &e, 2, 2, GDT_Float32, 1, 0, 0, 0, 0);
     mutex.unlock();
     if(err == CE_Failure)
     {
@@ -191,9 +190,9 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale)
     qreal x = pt.x() - qFloor(pt.x());
     qreal y = pt.y() - qFloor(pt.y());
 
-    qint16 win[eWinsize4x4];
+    float win[eWinsize4x4];
     mutex.lock();
-    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()) - 1, qFloor(pt.y()) - 1, 4, 4, &win, 4, 4, GDT_Int16, 1, 0, 0, 0, 0);
+    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()) - 1, qFloor(pt.y()) - 1, 4, 4, &win, 4, 4, GDT_Float32, 1, 0, 0, 0, 0);
     mutex.unlock();
     if(err == CE_Failure)
     {
@@ -353,9 +352,9 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
                     }
                 }
 
-                QVector<qint16> data(wp2_used* hp2_used);
+                QVector<float> data(wp2_used* hp2_used);
                 mutex.lock();
-                err = dataset->RasterIO(GF_Read, x, y, wp2_used, hp2_used, data.data(), wp2_used, hp2_used, GDT_Int16, 1, 0, 0, 0, 0);
+                err = dataset->RasterIO(GF_Read, x, y, wp2_used, hp2_used, data.data(), wp2_used, hp2_used, GDT_Float32, 1, 0, 0, 0, 0);
                 mutex.unlock();
 
                 if(err)

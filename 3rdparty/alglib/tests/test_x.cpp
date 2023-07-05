@@ -15,6 +15,12 @@
 #include "integration.h"
 #include "interpolation.h"
 
+#if AE_OS==AE_WINDOWS
+#include <windows.h>
+#elif AE_OS==AE_POSIX
+#include <pthread.h>
+#endif
+
 using namespace alglib;
 
 const char *fmt_str     = "%-29s %s\n";
@@ -30,6 +36,7 @@ bool issue591_passed = true;
 bool issue594_passed = true;
 bool issue764_passed = true;
 bool issue813_passed = true;
+bool issue824_passed = true;
 
 //
 // Service datatypes
@@ -59,7 +66,7 @@ void _innerrec_init(void* _p, alglib_impl::ae_state *_state, ae_bool make_automa
 }
 
 
-void _innerrec_init_copy(void* _dst, void* _src, alglib_impl::ae_state *_state, ae_bool make_automatic)
+void _innerrec_init_copy(void* _dst, const void* _src, alglib_impl::ae_state *_state, ae_bool make_automatic)
 {
     innerrec *dst = (innerrec*)_dst;
     innerrec *src = (innerrec*)_src;
@@ -96,7 +103,7 @@ void _seedrec_init(void* _p, alglib_impl::ae_state *_state, ae_bool make_automat
 }
 
 
-void _seedrec_init_copy(void* _dst, void* _src, alglib_impl::ae_state *_state, ae_bool make_automatic)
+void _seedrec_init_copy(void* _dst, const void* _src, alglib_impl::ae_state *_state, ae_bool make_automatic)
 {
     seedrec *dst = (seedrec*)_dst;
     seedrec *src = (seedrec*)_src;
@@ -257,6 +264,16 @@ void issue813_callback(const alglib::real_1d_array&, alglib::real_1d_array&, voi
     throw 0;
 }
 
+void issue824_callback_i(const alglib::real_1d_array&, double&, void*)
+{
+    throw (int*)(NULL);
+}
+
+void issue824_callback_d(const alglib::real_1d_array&, double&, void*)
+{
+    throw (double*)(NULL);
+}
+
 void file_put_contents(const char *filename, const char *contents)
 {
     FILE *f = fopen(filename, "wb");
@@ -266,6 +283,36 @@ void file_put_contents(const char *filename, const char *contents)
         throw alglib::ap_error("file_put_contents: failed writing to file");
     fclose(f);
 }
+
+#if AE_OS==AE_WINDOWS
+struct async_rbf_record
+{
+    alglib::rbfmodel  *p_model;
+    alglib::rbfreport *p_report;
+    bool thread_finished;
+};
+DWORD WINAPI async_build_rbf_model(LPVOID T)
+{
+    async_rbf_record *p = (async_rbf_record*)T;
+    alglib::rbfbuildmodel(*(p->p_model), *(p->p_report));
+    p->thread_finished = true;
+    return 0;
+}
+#elif AE_OS==AE_POSIX
+struct async_rbf_record
+{
+    alglib::rbfmodel  *p_model;
+    alglib::rbfreport *p_report;
+    bool thread_finished;
+};
+void* async_build_rbf_model(void *T)
+{
+    async_rbf_record *p = (async_rbf_record*)T;
+    alglib::rbfbuildmodel(*(p->p_model), *(p->p_report));
+    p->thread_finished = true;
+    return NULL;
+}
+#endif
 
 int main()
 {
@@ -294,7 +341,7 @@ int main()
         alglib::real_1d_array x;
         x.setlength(1);
         if( alglib_impl::_alloc_counter==0 )
-            printf(":::: WARNING: ALLOC_COUNTER IS INACTIVE!!! :::::\n");
+            printf(":::: WARNING: ALLOC_COUNTER IS INACTIVE!!! ::::: \n");
     }
     if( alglib_impl::_alloc_counter!=0 )
     {
@@ -1757,6 +1804,83 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
             return 1;
     }
     {
+        bool passed = true;
+#if (AE_OS==AE_WINDOWS) || AE_OS==AE_POSIX
+        alglib::hqrndstate rs;
+        alglib::rbfmodel  rbf;
+        alglib::rbfreport rep;
+        alglib::real_2d_array xy;
+        int n = 1000, nx = 2, ny = 1;
+        double rbase = 1.0;
+        async_rbf_record async_rec;
+        alglib::hqrndseed(464, 764, rs);
+        xy.setlength(n, nx+ny);
+        for(int i=0; i<n; i++)
+            for(int j=0; j<=nx+ny; j++)
+                xy[i][j] = alglib::hqrndnormal(rs);
+        alglib::rbfcreate(nx, ny, rbf);
+        alglib::rbfsetalgohierarchical(rbf, rbase, 1, 0.0);
+        alglib::rbfsetpoints(rbf, xy);
+        alglib::rbfsetv2its(rbf, 100000);
+        passed = passed && (alglib::rbfpeekprogress(rbf)==0);
+        async_rec.p_model = &rbf;
+        async_rec.p_report= &rep;
+        async_rec.thread_finished = false;
+#if AE_OS==AE_WINDOWS
+        if( CreateThread(NULL, 0, async_build_rbf_model, &async_rec, 0, NULL)==NULL )
+        {
+            printf(fmt_str, "* Progress/termination (RBF)", "FAILED");
+            printf(">>> unable to create background thread\n");
+            fflush(stdout);
+            return 1;
+        }
+#elif AE_OS==AE_POSIX
+        pthread_t  thread;
+        if( pthread_create(&thread, NULL, async_build_rbf_model, &async_rec)!=0 )
+        {
+            printf(fmt_str, "* Progress/termination (RBF)", "FAILED");
+            printf(">>> unable to create background thread\n");
+            fflush(stdout);
+            return 1;
+        }
+#else
+#error Unable to determine OS, unexpected here
+#endif
+        double last_progress = 0;
+        for(;;)
+        {
+            double new_progress = alglib::rbfpeekprogress(rbf);
+            passed = passed && (new_progress>=last_progress);
+            passed = passed && (new_progress<=0.1); // we expect to terminate well before reaching 10%
+            last_progress = new_progress;
+            if( new_progress>=0.001 )
+            {
+                alglib::rbfrequesttermination(rbf);
+                break;
+            }
+        }
+        for(;;)
+        {
+            double new_progress = alglib::rbfpeekprogress(rbf);
+            passed = passed && ((new_progress<=0.1) || (new_progress==1.0)); // we expect to terminate well before reaching 10%
+            if( async_rec.thread_finished )
+                break;
+        }
+        passed = passed && (alglib::rbfpeekprogress(rbf)==1);
+        passed = passed && (rep.terminationtype==8);
+        passed = passed && (alglib::rbfcalc2(rbf,alglib::hqrndnormal(rs),alglib::hqrndnormal(rs))==0.0);
+        printf(fmt_str, "* Progress/termination (RBF)", passed ? "OK" : "FAILED");
+        fflush(stdout);
+        if( !passed )
+            return 1;
+#else
+        printf(fmt_str, "* Progress/termination (RBF)", "??");
+        fflush(stdout);
+        if( !passed )
+            return 1;
+#endif
+    }
+    {
         //
         // Test malloc() exceptions in constructors
         //
@@ -1924,7 +2048,7 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                 while(time_default<mintime)
                 {
                     // default threading
-                    t0 = alglib_impl::_tickcount();
+                    t0 = alglib_impl::ae_tickcount();
                     alglib::rmatrixgemm(
                         n, n, n,
                         1.0,
@@ -1932,11 +2056,11 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         b, 0, 0, 0,
                         0.0,
                         c, 0, 0);
-                    time_default += alglib_impl::_tickcount()-t0;
+                    time_default += alglib_impl::ae_tickcount()-t0;
                     alglib::_ae_set_global_threading(default_global_threading); // restore
                     
                     // global serial
-                    t0 = alglib_impl::_tickcount();
+                    t0 = alglib_impl::ae_tickcount();
                     alglib::setglobalthreading(alglib::serial);
                     alglib::rmatrixgemm(
                         n, n, n,
@@ -1945,11 +2069,11 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         b, 0, 0, 0,
                         0.0,
                         c, 0, 0);
-                    time_glob_ser += alglib_impl::_tickcount()-t0;
+                    time_glob_ser += alglib_impl::ae_tickcount()-t0;
                     alglib::_ae_set_global_threading(default_global_threading); // restore
                     
                     // global parallel
-                    t0 = alglib_impl::_tickcount();
+                    t0 = alglib_impl::ae_tickcount();
                     alglib::setglobalthreading(alglib::parallel);
                     alglib::rmatrixgemm(
                         n, n, n,
@@ -1958,11 +2082,11 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         b, 0, 0, 0,
                         0.0,
                         c, 0, 0);
-                    time_glob_smp += alglib_impl::_tickcount()-t0;
+                    time_glob_smp += alglib_impl::ae_tickcount()-t0;
                     alglib::_ae_set_global_threading(default_global_threading); // restore
                     
                     // global serial, local serial
-                    t0 = alglib_impl::_tickcount();
+                    t0 = alglib_impl::ae_tickcount();
                     alglib::setglobalthreading(alglib::serial);
                     alglib::rmatrixgemm(
                         n, n, n,
@@ -1972,11 +2096,11 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         0.0,
                         c, 0, 0,
                         alglib::serial);
-                    time_glob_ser_loc_ser += alglib_impl::_tickcount()-t0;
+                    time_glob_ser_loc_ser += alglib_impl::ae_tickcount()-t0;
                     alglib::_ae_set_global_threading(default_global_threading); // restore
                     
                     // global serial, local parallel
-                    t0 = alglib_impl::_tickcount();
+                    t0 = alglib_impl::ae_tickcount();
                     alglib::setglobalthreading(alglib::serial);
                     alglib::rmatrixgemm(
                         n, n, n,
@@ -1986,11 +2110,11 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         0.0,
                         c, 0, 0,
                         alglib::parallel);
-                    time_glob_ser_loc_smp += alglib_impl::_tickcount()-t0;
+                    time_glob_ser_loc_smp += alglib_impl::ae_tickcount()-t0;
                     alglib::_ae_set_global_threading(default_global_threading); // restore
                     
                     // global parallel, local serial
-                    t0 = alglib_impl::_tickcount();
+                    t0 = alglib_impl::ae_tickcount();
                     alglib::setglobalthreading(alglib::parallel);
                     alglib::rmatrixgemm(
                         n, n, n,
@@ -2000,11 +2124,11 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         0.0,
                         c, 0, 0,
                         alglib::serial);
-                    time_glob_smp_loc_ser += alglib_impl::_tickcount()-t0;
+                    time_glob_smp_loc_ser += alglib_impl::ae_tickcount()-t0;
                     alglib::_ae_set_global_threading(default_global_threading); // restore
                     
                     // global parallel, local parallel
-                    t0 = alglib_impl::_tickcount();
+                    t0 = alglib_impl::ae_tickcount();
                     alglib::setglobalthreading(alglib::parallel);
                     alglib::rmatrixgemm(
                         n, n, n,
@@ -2014,11 +2138,11 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         0.0,
                         c, 0, 0,
                         alglib::parallel);
-                    time_glob_smp_loc_smp += alglib_impl::_tickcount()-t0;
+                    time_glob_smp_loc_smp += alglib_impl::ae_tickcount()-t0;
                     alglib::_ae_set_global_threading(default_global_threading); // restore
                     
                     // global parallel, nworkers=1
-                    t0 = alglib_impl::_tickcount();
+                    t0 = alglib_impl::ae_tickcount();
                     alglib::setglobalthreading(alglib::parallel);
                     alglib::setnworkers(1);
                     alglib::rmatrixgemm(
@@ -2028,7 +2152,7 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         b, 0, 0, 0,
                         0.0,
                         c, 0, 0);
-                    time_glob_smp_nw1 += alglib_impl::_tickcount()-t0;
+                    time_glob_smp_nw1 += alglib_impl::ae_tickcount()-t0;
                     alglib::_ae_set_global_threading(default_global_threading); // restore
                     alglib::setnworkers(default_nworkers);
                 }
@@ -2388,6 +2512,7 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
             alglib::minlmstate state;
             alglib::real_1d_array x;
             x.setlength(1);
+            x[0] = 0;
             alglib::minlmcreatev(1, x, 1e-5, state);
             issue813_passed = false;
             try
@@ -2401,6 +2526,58 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
             printf(fmt_str, "* issue 813", issue813_passed ? "OK" : "FAILED");
             fflush(stdout);
             if( !issue813_passed )
+                return 1;
+        }
+
+        //
+        // Issue 824: pre-3.16 versions of ALGLIB hide exceptions generated in user callbacks
+        //
+        {
+            alglib::mincgstate state;
+            alglib::real_1d_array x;
+            x.setlength(1);
+            x[0] = 0;
+            alglib::mincgcreatef(1, x, 1e-5, state);
+            issue824_passed = true;
+            
+            // throw int*
+            try
+            {
+                alglib::mincgoptimize(state, &issue824_callback_i);
+            }
+            catch(int*)
+            {
+            }
+            catch(double *)
+            {
+                issue824_passed = false;
+            }
+            catch(...)
+            {
+                issue824_passed = false;
+            }
+            
+            // throw double*
+            try
+            {
+                alglib::mincgoptimize(state, &issue824_callback_d);
+            }
+            catch(int*)
+            {
+                issue824_passed = false;
+            }
+            catch(double *)
+            {
+            }
+            catch(...)
+            {
+                issue824_passed = false;
+            }
+            
+            // done
+            printf(fmt_str, "* issue 824", issue824_passed ? "OK" : "FAILED");
+            fflush(stdout);
+            if( !issue824_passed )
                 return 1;
         }
     }
@@ -2441,7 +2618,7 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         c[i][j] = 0.0;
                     }
                 
-                t = alglib_impl::_tickcount();
+                t = alglib_impl::ae_tickcount();
                 for(k=0; k<nrepeat; k++)
                     alglib::rmatrixgemm(
                         n, n, n,
@@ -2450,12 +2627,12 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         b, 0, 0, (k/2)%2,
                         0.0,
                         c, 0, 0);
-                t = alglib_impl::_tickcount()-t;
+                t = alglib_impl::ae_tickcount()-t;
                 perf0 = 1.0E-6*pow((double)n,3)*2.0*nrepeat/(0.001*t);
                 printf("* RGEMM-SEQ-%-4ld (MFLOPS)  %5.0lf\n", (long)n, (double)perf0);
                 
                 alglib::setnworkers(0);
-                t = alglib_impl::_tickcount();
+                t = alglib_impl::ae_tickcount();
                 for(k=0; k<nrepeat; k++)
                     alglib::rmatrixgemm(
                         n, n, n,
@@ -2464,7 +2641,7 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
                         b, 0, 0, (k/2)%2,
                         0.0,
                         c, 0, 0, alglib::parallel);
-                t = alglib_impl::_tickcount()-t;
+                t = alglib_impl::ae_tickcount()-t;
                 perf2 = 1.0E-6*pow((double)n,3)*2.0*nrepeat/(0.001*t);
                 printf("* RGEMM-MTN-%-4ld           %4.1lfx\n", (long)n, (double)(perf2/perf0));
                 alglib::setnworkers(1);
@@ -2480,6 +2657,7 @@ AECfwTIX814 00000000q04 Big__6hwt04 nSPzmAQrh_B 2H3o-KftH14 \
     printf("Allocation counter checked... ");
 #ifdef _ALGLIB_HAS_WORKSTEALING
     alglib_impl::ae_free_disposed_items();
+    alglib_impl::ae_complete_finalization_before_exit();
 #endif
     if( alglib_impl::_alloc_counter!=0 )
     {

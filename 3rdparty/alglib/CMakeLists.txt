@@ -12,6 +12,9 @@ set(alg_SRCS
     src/fasttransforms.cpp
     src/integration.cpp
     src/interpolation.cpp
+    src/kernels_avx2.cpp
+    src/kernels_fma.cpp
+    src/kernels_sse2.cpp
     src/linalg.cpp
     src/optimization.cpp
     src/solvers.cpp
@@ -30,6 +33,9 @@ set(alg_HDRS
     src/fasttransforms.h
     src/integration.h
     src/interpolation.h
+    src/kernels_sse2.h
+    src/kernels_fma.h
+    src/kernels_avx2.h
     src/linalg.h
     src/optimization.h
     src/solvers.h

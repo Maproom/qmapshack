@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.15.0 (source code generated 2019-02-20)
+ALGLIB 4.00.0 (source code generated 2023-05-21)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -34,19 +34,19 @@ namespace alglib_impl
 {
 #if defined(AE_COMPILE_BASESTAT) || !defined(AE_PARTIAL_BUILD)
 #endif
-#if defined(AE_COMPILE_WSR) || !defined(AE_PARTIAL_BUILD)
-#endif
-#if defined(AE_COMPILE_STEST) || !defined(AE_PARTIAL_BUILD)
-#endif
 #if defined(AE_COMPILE_CORRELATIONTESTS) || !defined(AE_PARTIAL_BUILD)
-#endif
-#if defined(AE_COMPILE_STUDENTTTESTS) || !defined(AE_PARTIAL_BUILD)
-#endif
-#if defined(AE_COMPILE_MANNWHITNEYU) || !defined(AE_PARTIAL_BUILD)
 #endif
 #if defined(AE_COMPILE_JARQUEBERA) || !defined(AE_PARTIAL_BUILD)
 #endif
 #if defined(AE_COMPILE_VARIANCETESTS) || !defined(AE_PARTIAL_BUILD)
+#endif
+#if defined(AE_COMPILE_WSR) || !defined(AE_PARTIAL_BUILD)
+#endif
+#if defined(AE_COMPILE_MANNWHITNEYU) || !defined(AE_PARTIAL_BUILD)
+#endif
+#if defined(AE_COMPILE_STEST) || !defined(AE_PARTIAL_BUILD)
+#endif
+#if defined(AE_COMPILE_STUDENTTTESTS) || !defined(AE_PARTIAL_BUILD)
 #endif
 
 }
@@ -63,23 +63,7 @@ namespace alglib
 
 #endif
 
-#if defined(AE_COMPILE_WSR) || !defined(AE_PARTIAL_BUILD)
-
-#endif
-
-#if defined(AE_COMPILE_STEST) || !defined(AE_PARTIAL_BUILD)
-
-#endif
-
 #if defined(AE_COMPILE_CORRELATIONTESTS) || !defined(AE_PARTIAL_BUILD)
-
-#endif
-
-#if defined(AE_COMPILE_STUDENTTTESTS) || !defined(AE_PARTIAL_BUILD)
-
-#endif
-
-#if defined(AE_COMPILE_MANNWHITNEYU) || !defined(AE_PARTIAL_BUILD)
 
 #endif
 
@@ -88,6 +72,22 @@ namespace alglib
 #endif
 
 #if defined(AE_COMPILE_VARIANCETESTS) || !defined(AE_PARTIAL_BUILD)
+
+#endif
+
+#if defined(AE_COMPILE_WSR) || !defined(AE_PARTIAL_BUILD)
+
+#endif
+
+#if defined(AE_COMPILE_MANNWHITNEYU) || !defined(AE_PARTIAL_BUILD)
+
+#endif
+
+#if defined(AE_COMPILE_STEST) || !defined(AE_PARTIAL_BUILD)
+
+#endif
+
+#if defined(AE_COMPILE_STUDENTTTESTS) || !defined(AE_PARTIAL_BUILD)
 
 #endif
 
@@ -595,7 +595,7 @@ OUTPUT PARAMETERS:
   -- ALGLIB --
      Copyright 18.04.2013 by Bochkanov Sergey
 *************************************************************************/
-void rankdata(const real_2d_array &xy, const ae_int_t npoints, const ae_int_t nfeatures, const xparams _xparams = alglib::xdefault);
+void rankdata(real_2d_array &xy, const ae_int_t npoints, const ae_int_t nfeatures, const xparams _xparams = alglib::xdefault);
 void rankdata(real_2d_array &xy, const xparams _xparams = alglib::xdefault);
 
 
@@ -632,7 +632,7 @@ OUTPUT PARAMETERS:
   -- ALGLIB --
      Copyright 18.04.2013 by Bochkanov Sergey
 *************************************************************************/
-void rankdatacentered(const real_2d_array &xy, const ae_int_t npoints, const ae_int_t nfeatures, const xparams _xparams = alglib::xdefault);
+void rankdatacentered(real_2d_array &xy, const ae_int_t npoints, const ae_int_t nfeatures, const xparams _xparams = alglib::xdefault);
 void rankdatacentered(real_2d_array &xy, const xparams _xparams = alglib::xdefault);
 
 
@@ -652,103 +652,6 @@ Obsolete function, we recommend to use SpearmanCorr2().
     Copyright 09.04.2007 by Bochkanov Sergey
 *************************************************************************/
 double spearmanrankcorrelation(const real_1d_array &x, const real_1d_array &y, const ae_int_t n, const xparams _xparams = alglib::xdefault);
-#endif
-
-#if defined(AE_COMPILE_WSR) || !defined(AE_PARTIAL_BUILD)
-/*************************************************************************
-Wilcoxon signed-rank test
-
-This test checks three hypotheses about the median  of  the  given sample.
-The following tests are performed:
-    * two-tailed test (null hypothesis - the median is equal to the  given
-      value)
-    * left-tailed test (null hypothesis - the median is  greater  than  or
-      equal to the given value)
-    * right-tailed test (null hypothesis  -  the  median  is  less than or
-      equal to the given value)
-
-Requirements:
-    * the scale of measurement should be ordinal, interval or  ratio (i.e.
-      the test could not be applied to nominal variables).
-    * the distribution should be continuous and symmetric relative to  its
-      median.
-    * number of distinct values in the X array should be greater than 4
-
-The test is non-parametric and doesn't require distribution X to be normal
-
-Input parameters:
-    X       -   sample. Array whose index goes from 0 to N-1.
-    N       -   size of the sample.
-    Median  -   assumed median value.
-
-Output parameters:
-    BothTails   -   p-value for two-tailed test.
-                    If BothTails is less than the given significance level
-                    the null hypothesis is rejected.
-    LeftTail    -   p-value for left-tailed test.
-                    If LeftTail is less than the given significance level,
-                    the null hypothesis is rejected.
-    RightTail   -   p-value for right-tailed test.
-                    If RightTail is less than the given significance level
-                    the null hypothesis is rejected.
-
-To calculate p-values, special approximation is used. This method lets  us
-calculate p-values with two decimal places in interval [0.0001, 1].
-
-"Two decimal places" does not sound very impressive, but in  practice  the
-relative error of less than 1% is enough to make a decision.
-
-There is no approximation outside the [0.0001, 1] interval. Therefore,  if
-the significance level outlies this interval, the test returns 0.0001.
-
-  -- ALGLIB --
-     Copyright 08.09.2006 by Bochkanov Sergey
-*************************************************************************/
-void wilcoxonsignedranktest(const real_1d_array &x, const ae_int_t n, const double e, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
-#endif
-
-#if defined(AE_COMPILE_STEST) || !defined(AE_PARTIAL_BUILD)
-/*************************************************************************
-Sign test
-
-This test checks three hypotheses about the median of  the  given  sample.
-The following tests are performed:
-    * two-tailed test (null hypothesis - the median is equal to the  given
-      value)
-    * left-tailed test (null hypothesis - the median is  greater  than  or
-      equal to the given value)
-    * right-tailed test (null hypothesis - the  median  is  less  than  or
-      equal to the given value)
-
-Requirements:
-    * the scale of measurement should be ordinal, interval or ratio  (i.e.
-      the test could not be applied to nominal variables).
-
-The test is non-parametric and doesn't require distribution X to be normal
-
-Input parameters:
-    X       -   sample. Array whose index goes from 0 to N-1.
-    N       -   size of the sample.
-    Median  -   assumed median value.
-
-Output parameters:
-    BothTails   -   p-value for two-tailed test.
-                    If BothTails is less than the given significance level
-                    the null hypothesis is rejected.
-    LeftTail    -   p-value for left-tailed test.
-                    If LeftTail is less than the given significance level,
-                    the null hypothesis is rejected.
-    RightTail   -   p-value for right-tailed test.
-                    If RightTail is less than the given significance level
-                    the null hypothesis is rejected.
-
-While   calculating   p-values   high-precision   binomial    distribution
-approximation is used, so significance levels have about 15 exact digits.
-
-  -- ALGLIB --
-     Copyright 08.09.2006 by Bochkanov Sergey
-*************************************************************************/
-void onesamplesigntest(const real_1d_array &x, const ae_int_t n, const double median, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
 #endif
 
 #if defined(AE_COMPILE_CORRELATIONTESTS) || !defined(AE_PARTIAL_BUILD)
@@ -830,6 +733,286 @@ Output parameters:
      Copyright 09.04.2007 by Bochkanov Sergey
 *************************************************************************/
 void spearmanrankcorrelationsignificance(const double r, const ae_int_t n, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
+#endif
+
+#if defined(AE_COMPILE_JARQUEBERA) || !defined(AE_PARTIAL_BUILD)
+/*************************************************************************
+Jarque-Bera test
+
+This test checks hypotheses about the fact that a  given  sample  X  is  a
+sample of normal random variable.
+
+Requirements:
+    * the number of elements in the sample is not less than 5.
+
+Input parameters:
+    X   -   sample. Array whose index goes from 0 to N-1.
+    N   -   size of the sample. N>=5
+
+Output parameters:
+    P           -   p-value for the test
+
+Accuracy of the approximation used (5<=N<=1951):
+
+p-value  	    relative error (5<=N<=1951)
+[1, 0.1]            < 1%
+[0.1, 0.01]         < 2%
+[0.01, 0.001]       < 6%
+[0.001, 0]          wasn't measured
+
+For N>1951 accuracy wasn't measured but it shouldn't be sharply  different
+from table values.
+
+  -- ALGLIB --
+     Copyright 09.04.2007 by Bochkanov Sergey
+*************************************************************************/
+void jarqueberatest(const real_1d_array &x, const ae_int_t n, double &p, const xparams _xparams = alglib::xdefault);
+#endif
+
+#if defined(AE_COMPILE_VARIANCETESTS) || !defined(AE_PARTIAL_BUILD)
+/*************************************************************************
+Two-sample F-test
+
+This test checks three hypotheses about dispersions of the given  samples.
+The following tests are performed:
+    * two-tailed test (null hypothesis - the dispersions are equal)
+    * left-tailed test (null hypothesis  -  the  dispersion  of  the first
+      sample is greater than or equal to  the  dispersion  of  the  second
+      sample).
+    * right-tailed test (null hypothesis - the  dispersion  of  the  first
+      sample is less than or equal to the dispersion of the second sample)
+
+The test is based on the following assumptions:
+    * the given samples have normal distributions
+    * the samples are independent.
+
+Input parameters:
+    X   -   sample 1. Array whose index goes from 0 to N-1.
+    N   -   sample size.
+    Y   -   sample 2. Array whose index goes from 0 to M-1.
+    M   -   sample size.
+
+Output parameters:
+    BothTails   -   p-value for two-tailed test.
+                    If BothTails is less than the given significance level
+                    the null hypothesis is rejected.
+    LeftTail    -   p-value for left-tailed test.
+                    If LeftTail is less than the given significance level,
+                    the null hypothesis is rejected.
+    RightTail   -   p-value for right-tailed test.
+                    If RightTail is less than the given significance level
+                    the null hypothesis is rejected.
+
+  -- ALGLIB --
+     Copyright 19.09.2006 by Bochkanov Sergey
+*************************************************************************/
+void ftest(const real_1d_array &x, const ae_int_t n, const real_1d_array &y, const ae_int_t m, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
+
+
+/*************************************************************************
+One-sample chi-square test
+
+This test checks three hypotheses about the dispersion of the given sample
+The following tests are performed:
+    * two-tailed test (null hypothesis - the dispersion equals  the  given
+      number)
+    * left-tailed test (null hypothesis - the dispersion is  greater  than
+      or equal to the given number)
+    * right-tailed test (null hypothesis  -  dispersion is  less  than  or
+      equal to the given number).
+
+Test is based on the following assumptions:
+    * the given sample has a normal distribution.
+
+Input parameters:
+    X           -   sample 1. Array whose index goes from 0 to N-1.
+    N           -   size of the sample.
+    Variance    -   dispersion value to compare with.
+
+Output parameters:
+    BothTails   -   p-value for two-tailed test.
+                    If BothTails is less than the given significance level
+                    the null hypothesis is rejected.
+    LeftTail    -   p-value for left-tailed test.
+                    If LeftTail is less than the given significance level,
+                    the null hypothesis is rejected.
+    RightTail   -   p-value for right-tailed test.
+                    If RightTail is less than the given significance level
+                    the null hypothesis is rejected.
+
+  -- ALGLIB --
+     Copyright 19.09.2006 by Bochkanov Sergey
+*************************************************************************/
+void onesamplevariancetest(const real_1d_array &x, const ae_int_t n, const double variance, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
+#endif
+
+#if defined(AE_COMPILE_WSR) || !defined(AE_PARTIAL_BUILD)
+/*************************************************************************
+Wilcoxon signed-rank test
+
+This test checks three hypotheses about the median  of  the  given sample.
+The following tests are performed:
+    * two-tailed test (null hypothesis - the median is equal to the  given
+      value)
+    * left-tailed test (null hypothesis - the median is  greater  than  or
+      equal to the given value)
+    * right-tailed test (null hypothesis  -  the  median  is  less than or
+      equal to the given value)
+
+Requirements:
+    * the scale of measurement should be ordinal, interval or  ratio (i.e.
+      the test could not be applied to nominal variables).
+    * the distribution should be continuous and symmetric relative to  its
+      median.
+    * number of distinct values in the X array should be greater than 4
+
+The test is non-parametric and doesn't require distribution X to be normal
+
+Input parameters:
+    X       -   sample. Array whose index goes from 0 to N-1.
+    N       -   size of the sample.
+    Median  -   assumed median value.
+
+Output parameters:
+    BothTails   -   p-value for two-tailed test.
+                    If BothTails is less than the given significance level
+                    the null hypothesis is rejected.
+    LeftTail    -   p-value for left-tailed test.
+                    If LeftTail is less than the given significance level,
+                    the null hypothesis is rejected.
+    RightTail   -   p-value for right-tailed test.
+                    If RightTail is less than the given significance level
+                    the null hypothesis is rejected.
+
+To calculate p-values, special approximation is used. This method lets  us
+calculate p-values with two decimal places in interval [0.0001, 1].
+
+"Two decimal places" does not sound very impressive, but in  practice  the
+relative error of less than 1% is enough to make a decision.
+
+There is no approximation outside the [0.0001, 1] interval. Therefore,  if
+the significance level outlies this interval, the test returns 0.0001.
+
+  -- ALGLIB --
+     Copyright 08.09.2006 by Bochkanov Sergey
+*************************************************************************/
+void wilcoxonsignedranktest(const real_1d_array &x, const ae_int_t n, const double e, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
+#endif
+
+#if defined(AE_COMPILE_MANNWHITNEYU) || !defined(AE_PARTIAL_BUILD)
+/*************************************************************************
+Mann-Whitney U-test
+
+This test checks hypotheses about whether X  and  Y  are  samples  of  two
+continuous distributions of the same shape  and  same  median  or  whether
+their medians are different.
+
+The following tests are performed:
+    * two-tailed test (null hypothesis - the medians are equal)
+    * left-tailed test (null hypothesis - the median of the  first  sample
+      is greater than or equal to the median of the second sample)
+    * right-tailed test (null hypothesis - the median of the first  sample
+      is less than or equal to the median of the second sample).
+
+Requirements:
+    * the samples are independent
+    * X and Y are continuous distributions (or discrete distributions well-
+      approximating continuous distributions)
+    * distributions of X and Y have the  same  shape.  The  only  possible
+      difference is their position (i.e. the value of the median)
+    * the number of elements in each sample is not less than 5
+    * the scale of measurement should be ordinal, interval or ratio  (i.e.
+      the test could not be applied to nominal variables).
+
+The test is non-parametric and doesn't require distributions to be normal.
+
+Input parameters:
+    X   -   sample 1. Array whose index goes from 0 to N-1.
+    N   -   size of the sample. N>=5
+    Y   -   sample 2. Array whose index goes from 0 to M-1.
+    M   -   size of the sample. M>=5
+
+Output parameters:
+    BothTails   -   p-value for two-tailed test.
+                    If BothTails is less than the given significance level
+                    the null hypothesis is rejected.
+    LeftTail    -   p-value for left-tailed test.
+                    If LeftTail is less than the given significance level,
+                    the null hypothesis is rejected.
+    RightTail   -   p-value for right-tailed test.
+                    If RightTail is less than the given significance level
+                    the null hypothesis is rejected.
+
+To calculate p-values, special approximation is used. This method lets  us
+calculate p-values with satisfactory  accuracy  in  interval  [0.0001, 1].
+There is no approximation outside the [0.0001, 1] interval. Therefore,  if
+the significance level outlies this interval, the test returns 0.0001.
+
+Relative precision of approximation of p-value:
+
+N          M          Max.err.   Rms.err.
+5..10      N..10      1.4e-02    6.0e-04
+5..10      N..100     2.2e-02    5.3e-06
+10..15     N..15      1.0e-02    3.2e-04
+10..15     N..100     1.0e-02    2.2e-05
+15..100    N..100     6.1e-03    2.7e-06
+
+For N,M>100 accuracy checks weren't put into  practice,  but  taking  into
+account characteristics of asymptotic approximation used, precision should
+not be sharply different from the values for interval [5, 100].
+
+NOTE: P-value approximation was  optimized  for  0.0001<=p<=0.2500.  Thus,
+      P's outside of this interval are enforced to these bounds. Say,  you
+      may quite often get P equal to exactly 0.25 or 0.0001.
+
+  -- ALGLIB --
+     Copyright 09.04.2007 by Bochkanov Sergey
+*************************************************************************/
+void mannwhitneyutest(const real_1d_array &x, const ae_int_t n, const real_1d_array &y, const ae_int_t m, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
+#endif
+
+#if defined(AE_COMPILE_STEST) || !defined(AE_PARTIAL_BUILD)
+/*************************************************************************
+Sign test
+
+This test checks three hypotheses about the median of  the  given  sample.
+The following tests are performed:
+    * two-tailed test (null hypothesis - the median is equal to the  given
+      value)
+    * left-tailed test (null hypothesis - the median is  greater  than  or
+      equal to the given value)
+    * right-tailed test (null hypothesis - the  median  is  less  than  or
+      equal to the given value)
+
+Requirements:
+    * the scale of measurement should be ordinal, interval or ratio  (i.e.
+      the test could not be applied to nominal variables).
+
+The test is non-parametric and doesn't require distribution X to be normal
+
+Input parameters:
+    X       -   sample. Array whose index goes from 0 to N-1.
+    N       -   size of the sample.
+    Median  -   assumed median value.
+
+Output parameters:
+    BothTails   -   p-value for two-tailed test.
+                    If BothTails is less than the given significance level
+                    the null hypothesis is rejected.
+    LeftTail    -   p-value for left-tailed test.
+                    If LeftTail is less than the given significance level,
+                    the null hypothesis is rejected.
+    RightTail   -   p-value for right-tailed test.
+                    If RightTail is less than the given significance level
+                    the null hypothesis is rejected.
+
+While   calculating   p-values   high-precision   binomial    distribution
+approximation is used, so significance levels have about 15 exact digits.
+
+  -- ALGLIB --
+     Copyright 08.09.2006 by Bochkanov Sergey
+*************************************************************************/
+void onesamplesigntest(const real_1d_array &x, const ae_int_t n, const double median, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
 #endif
 
 #if defined(AE_COMPILE_STUDENTTTESTS) || !defined(AE_PARTIAL_BUILD)
@@ -967,189 +1150,6 @@ NOTE: this function correctly handles degenerate cases:
 *************************************************************************/
 void unequalvariancettest(const real_1d_array &x, const ae_int_t n, const real_1d_array &y, const ae_int_t m, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
 #endif
-
-#if defined(AE_COMPILE_MANNWHITNEYU) || !defined(AE_PARTIAL_BUILD)
-/*************************************************************************
-Mann-Whitney U-test
-
-This test checks hypotheses about whether X  and  Y  are  samples  of  two
-continuous distributions of the same shape  and  same  median  or  whether
-their medians are different.
-
-The following tests are performed:
-    * two-tailed test (null hypothesis - the medians are equal)
-    * left-tailed test (null hypothesis - the median of the  first  sample
-      is greater than or equal to the median of the second sample)
-    * right-tailed test (null hypothesis - the median of the first  sample
-      is less than or equal to the median of the second sample).
-
-Requirements:
-    * the samples are independent
-    * X and Y are continuous distributions (or discrete distributions well-
-      approximating continuous distributions)
-    * distributions of X and Y have the  same  shape.  The  only  possible
-      difference is their position (i.e. the value of the median)
-    * the number of elements in each sample is not less than 5
-    * the scale of measurement should be ordinal, interval or ratio  (i.e.
-      the test could not be applied to nominal variables).
-
-The test is non-parametric and doesn't require distributions to be normal.
-
-Input parameters:
-    X   -   sample 1. Array whose index goes from 0 to N-1.
-    N   -   size of the sample. N>=5
-    Y   -   sample 2. Array whose index goes from 0 to M-1.
-    M   -   size of the sample. M>=5
-
-Output parameters:
-    BothTails   -   p-value for two-tailed test.
-                    If BothTails is less than the given significance level
-                    the null hypothesis is rejected.
-    LeftTail    -   p-value for left-tailed test.
-                    If LeftTail is less than the given significance level,
-                    the null hypothesis is rejected.
-    RightTail   -   p-value for right-tailed test.
-                    If RightTail is less than the given significance level
-                    the null hypothesis is rejected.
-
-To calculate p-values, special approximation is used. This method lets  us
-calculate p-values with satisfactory  accuracy  in  interval  [0.0001, 1].
-There is no approximation outside the [0.0001, 1] interval. Therefore,  if
-the significance level outlies this interval, the test returns 0.0001.
-
-Relative precision of approximation of p-value:
-
-N          M          Max.err.   Rms.err.
-5..10      N..10      1.4e-02    6.0e-04
-5..10      N..100     2.2e-02    5.3e-06
-10..15     N..15      1.0e-02    3.2e-04
-10..15     N..100     1.0e-02    2.2e-05
-15..100    N..100     6.1e-03    2.7e-06
-
-For N,M>100 accuracy checks weren't put into  practice,  but  taking  into
-account characteristics of asymptotic approximation used, precision should
-not be sharply different from the values for interval [5, 100].
-
-NOTE: P-value approximation was  optimized  for  0.0001<=p<=0.2500.  Thus,
-      P's outside of this interval are enforced to these bounds. Say,  you
-      may quite often get P equal to exactly 0.25 or 0.0001.
-
-  -- ALGLIB --
-     Copyright 09.04.2007 by Bochkanov Sergey
-*************************************************************************/
-void mannwhitneyutest(const real_1d_array &x, const ae_int_t n, const real_1d_array &y, const ae_int_t m, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
-#endif
-
-#if defined(AE_COMPILE_JARQUEBERA) || !defined(AE_PARTIAL_BUILD)
-/*************************************************************************
-Jarque-Bera test
-
-This test checks hypotheses about the fact that a  given  sample  X  is  a
-sample of normal random variable.
-
-Requirements:
-    * the number of elements in the sample is not less than 5.
-
-Input parameters:
-    X   -   sample. Array whose index goes from 0 to N-1.
-    N   -   size of the sample. N>=5
-
-Output parameters:
-    P           -   p-value for the test
-
-Accuracy of the approximation used (5<=N<=1951):
-
-p-value  	    relative error (5<=N<=1951)
-[1, 0.1]            < 1%
-[0.1, 0.01]         < 2%
-[0.01, 0.001]       < 6%
-[0.001, 0]          wasn't measured
-
-For N>1951 accuracy wasn't measured but it shouldn't be sharply  different
-from table values.
-
-  -- ALGLIB --
-     Copyright 09.04.2007 by Bochkanov Sergey
-*************************************************************************/
-void jarqueberatest(const real_1d_array &x, const ae_int_t n, double &p, const xparams _xparams = alglib::xdefault);
-#endif
-
-#if defined(AE_COMPILE_VARIANCETESTS) || !defined(AE_PARTIAL_BUILD)
-/*************************************************************************
-Two-sample F-test
-
-This test checks three hypotheses about dispersions of the given  samples.
-The following tests are performed:
-    * two-tailed test (null hypothesis - the dispersions are equal)
-    * left-tailed test (null hypothesis  -  the  dispersion  of  the first
-      sample is greater than or equal to  the  dispersion  of  the  second
-      sample).
-    * right-tailed test (null hypothesis - the  dispersion  of  the  first
-      sample is less than or equal to the dispersion of the second sample)
-
-The test is based on the following assumptions:
-    * the given samples have normal distributions
-    * the samples are independent.
-
-Input parameters:
-    X   -   sample 1. Array whose index goes from 0 to N-1.
-    N   -   sample size.
-    Y   -   sample 2. Array whose index goes from 0 to M-1.
-    M   -   sample size.
-
-Output parameters:
-    BothTails   -   p-value for two-tailed test.
-                    If BothTails is less than the given significance level
-                    the null hypothesis is rejected.
-    LeftTail    -   p-value for left-tailed test.
-                    If LeftTail is less than the given significance level,
-                    the null hypothesis is rejected.
-    RightTail   -   p-value for right-tailed test.
-                    If RightTail is less than the given significance level
-                    the null hypothesis is rejected.
-
-  -- ALGLIB --
-     Copyright 19.09.2006 by Bochkanov Sergey
-*************************************************************************/
-void ftest(const real_1d_array &x, const ae_int_t n, const real_1d_array &y, const ae_int_t m, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
-
-
-/*************************************************************************
-One-sample chi-square test
-
-This test checks three hypotheses about the dispersion of the given sample
-The following tests are performed:
-    * two-tailed test (null hypothesis - the dispersion equals  the  given
-      number)
-    * left-tailed test (null hypothesis - the dispersion is  greater  than
-      or equal to the given number)
-    * right-tailed test (null hypothesis  -  dispersion is  less  than  or
-      equal to the given number).
-
-Test is based on the following assumptions:
-    * the given sample has a normal distribution.
-
-Input parameters:
-    X           -   sample 1. Array whose index goes from 0 to N-1.
-    N           -   size of the sample.
-    Variance    -   dispersion value to compare with.
-
-Output parameters:
-    BothTails   -   p-value for two-tailed test.
-                    If BothTails is less than the given significance level
-                    the null hypothesis is rejected.
-    LeftTail    -   p-value for left-tailed test.
-                    If LeftTail is less than the given significance level,
-                    the null hypothesis is rejected.
-    RightTail   -   p-value for right-tailed test.
-                    If RightTail is less than the given significance level
-                    the null hypothesis is rejected.
-
-  -- ALGLIB --
-     Copyright 19.09.2006 by Bochkanov Sergey
-*************************************************************************/
-void onesamplevariancetest(const real_1d_array &x, const ae_int_t n, const double variance, double &bothtails, double &lefttail, double &righttail, const xparams _xparams = alglib::xdefault);
-#endif
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -1160,81 +1160,81 @@ void onesamplevariancetest(const real_1d_array &x, const ae_int_t n, const doubl
 namespace alglib_impl
 {
 #if defined(AE_COMPILE_BASESTAT) || !defined(AE_PARTIAL_BUILD)
-void samplemoments(/* Real    */ ae_vector* x,
+void samplemoments(/* Real    */ const ae_vector* x,
      ae_int_t n,
      double* mean,
      double* variance,
      double* skewness,
      double* kurtosis,
      ae_state *_state);
-double samplemean(/* Real    */ ae_vector* x,
+double samplemean(/* Real    */ const ae_vector* x,
      ae_int_t n,
      ae_state *_state);
-double samplevariance(/* Real    */ ae_vector* x,
+double samplevariance(/* Real    */ const ae_vector* x,
      ae_int_t n,
      ae_state *_state);
-double sampleskewness(/* Real    */ ae_vector* x,
+double sampleskewness(/* Real    */ const ae_vector* x,
      ae_int_t n,
      ae_state *_state);
-double samplekurtosis(/* Real    */ ae_vector* x,
+double samplekurtosis(/* Real    */ const ae_vector* x,
      ae_int_t n,
      ae_state *_state);
-void sampleadev(/* Real    */ ae_vector* x,
+void sampleadev(/* Real    */ const ae_vector* x,
      ae_int_t n,
      double* adev,
      ae_state *_state);
-void samplemedian(/* Real    */ ae_vector* x,
+void samplemedian(/* Real    */ const ae_vector* _x,
      ae_int_t n,
      double* median,
      ae_state *_state);
-void samplepercentile(/* Real    */ ae_vector* x,
+void samplepercentile(/* Real    */ const ae_vector* _x,
      ae_int_t n,
      double p,
      double* v,
      ae_state *_state);
-double cov2(/* Real    */ ae_vector* x,
-     /* Real    */ ae_vector* y,
+double cov2(/* Real    */ const ae_vector* x,
+     /* Real    */ const ae_vector* y,
      ae_int_t n,
      ae_state *_state);
-double pearsoncorr2(/* Real    */ ae_vector* x,
-     /* Real    */ ae_vector* y,
+double pearsoncorr2(/* Real    */ const ae_vector* x,
+     /* Real    */ const ae_vector* y,
      ae_int_t n,
      ae_state *_state);
-double spearmancorr2(/* Real    */ ae_vector* x,
-     /* Real    */ ae_vector* y,
+double spearmancorr2(/* Real    */ const ae_vector* _x,
+     /* Real    */ const ae_vector* _y,
      ae_int_t n,
      ae_state *_state);
-void covm(/* Real    */ ae_matrix* x,
-     ae_int_t n,
-     ae_int_t m,
-     /* Real    */ ae_matrix* c,
-     ae_state *_state);
-void pearsoncorrm(/* Real    */ ae_matrix* x,
+void covm(/* Real    */ const ae_matrix* _x,
      ae_int_t n,
      ae_int_t m,
      /* Real    */ ae_matrix* c,
      ae_state *_state);
-void spearmancorrm(/* Real    */ ae_matrix* x,
+void pearsoncorrm(/* Real    */ const ae_matrix* x,
      ae_int_t n,
      ae_int_t m,
      /* Real    */ ae_matrix* c,
      ae_state *_state);
-void covm2(/* Real    */ ae_matrix* x,
-     /* Real    */ ae_matrix* y,
+void spearmancorrm(/* Real    */ const ae_matrix* x,
+     ae_int_t n,
+     ae_int_t m,
+     /* Real    */ ae_matrix* c,
+     ae_state *_state);
+void covm2(/* Real    */ const ae_matrix* _x,
+     /* Real    */ const ae_matrix* _y,
      ae_int_t n,
      ae_int_t m1,
      ae_int_t m2,
      /* Real    */ ae_matrix* c,
      ae_state *_state);
-void pearsoncorrm2(/* Real    */ ae_matrix* x,
-     /* Real    */ ae_matrix* y,
+void pearsoncorrm2(/* Real    */ const ae_matrix* _x,
+     /* Real    */ const ae_matrix* _y,
      ae_int_t n,
      ae_int_t m1,
      ae_int_t m2,
      /* Real    */ ae_matrix* c,
      ae_state *_state);
-void spearmancorrm2(/* Real    */ ae_matrix* x,
-     /* Real    */ ae_matrix* y,
+void spearmancorrm2(/* Real    */ const ae_matrix* x,
+     /* Real    */ const ae_matrix* y,
      ae_int_t n,
      ae_int_t m1,
      ae_int_t m2,
@@ -1254,31 +1254,13 @@ void rankdatacentered(/* Real    */ ae_matrix* xy,
 ae_bool _trypexec_rankdatacentered(/* Real    */ ae_matrix* xy,
     ae_int_t npoints,
     ae_int_t nfeatures, ae_state *_state);
-double pearsoncorrelation(/* Real    */ ae_vector* x,
-     /* Real    */ ae_vector* y,
+double pearsoncorrelation(/* Real    */ const ae_vector* x,
+     /* Real    */ const ae_vector* y,
      ae_int_t n,
      ae_state *_state);
-double spearmanrankcorrelation(/* Real    */ ae_vector* x,
-     /* Real    */ ae_vector* y,
+double spearmanrankcorrelation(/* Real    */ const ae_vector* x,
+     /* Real    */ const ae_vector* y,
      ae_int_t n,
-     ae_state *_state);
-#endif
-#if defined(AE_COMPILE_WSR) || !defined(AE_PARTIAL_BUILD)
-void wilcoxonsignedranktest(/* Real    */ ae_vector* x,
-     ae_int_t n,
-     double e,
-     double* bothtails,
-     double* lefttail,
-     double* righttail,
-     ae_state *_state);
-#endif
-#if defined(AE_COMPILE_STEST) || !defined(AE_PARTIAL_BUILD)
-void onesamplesigntest(/* Real    */ ae_vector* x,
-     ae_int_t n,
-     double median,
-     double* bothtails,
-     double* lefttail,
-     double* righttail,
      ae_state *_state);
 #endif
 #if defined(AE_COMPILE_CORRELATIONTESTS) || !defined(AE_PARTIAL_BUILD)
@@ -1295,59 +1277,77 @@ void spearmanrankcorrelationsignificance(double r,
      double* righttail,
      ae_state *_state);
 #endif
-#if defined(AE_COMPILE_STUDENTTTESTS) || !defined(AE_PARTIAL_BUILD)
-void studentttest1(/* Real    */ ae_vector* x,
+#if defined(AE_COMPILE_JARQUEBERA) || !defined(AE_PARTIAL_BUILD)
+void jarqueberatest(/* Real    */ const ae_vector* x,
      ae_int_t n,
-     double mean,
-     double* bothtails,
-     double* lefttail,
-     double* righttail,
+     double* p,
      ae_state *_state);
-void studentttest2(/* Real    */ ae_vector* x,
+#endif
+#if defined(AE_COMPILE_VARIANCETESTS) || !defined(AE_PARTIAL_BUILD)
+void ftest(/* Real    */ const ae_vector* x,
      ae_int_t n,
-     /* Real    */ ae_vector* y,
+     /* Real    */ const ae_vector* y,
      ae_int_t m,
      double* bothtails,
      double* lefttail,
      double* righttail,
      ae_state *_state);
-void unequalvariancettest(/* Real    */ ae_vector* x,
+void onesamplevariancetest(/* Real    */ const ae_vector* x,
      ae_int_t n,
-     /* Real    */ ae_vector* y,
-     ae_int_t m,
+     double variance,
+     double* bothtails,
+     double* lefttail,
+     double* righttail,
+     ae_state *_state);
+#endif
+#if defined(AE_COMPILE_WSR) || !defined(AE_PARTIAL_BUILD)
+void wilcoxonsignedranktest(/* Real    */ const ae_vector* _x,
+     ae_int_t n,
+     double e,
      double* bothtails,
      double* lefttail,
      double* righttail,
      ae_state *_state);
 #endif
 #if defined(AE_COMPILE_MANNWHITNEYU) || !defined(AE_PARTIAL_BUILD)
-void mannwhitneyutest(/* Real    */ ae_vector* x,
+void mannwhitneyutest(/* Real    */ const ae_vector* x,
      ae_int_t n,
-     /* Real    */ ae_vector* y,
+     /* Real    */ const ae_vector* y,
      ae_int_t m,
      double* bothtails,
      double* lefttail,
      double* righttail,
      ae_state *_state);
 #endif
-#if defined(AE_COMPILE_JARQUEBERA) || !defined(AE_PARTIAL_BUILD)
-void jarqueberatest(/* Real    */ ae_vector* x,
+#if defined(AE_COMPILE_STEST) || !defined(AE_PARTIAL_BUILD)
+void onesamplesigntest(/* Real    */ const ae_vector* x,
      ae_int_t n,
-     double* p,
+     double median,
+     double* bothtails,
+     double* lefttail,
+     double* righttail,
      ae_state *_state);
 #endif
-#if defined(AE_COMPILE_VARIANCETESTS) || !defined(AE_PARTIAL_BUILD)
-void ftest(/* Real    */ ae_vector* x,
+#if defined(AE_COMPILE_STUDENTTTESTS) || !defined(AE_PARTIAL_BUILD)
+void studentttest1(/* Real    */ const ae_vector* x,
      ae_int_t n,
-     /* Real    */ ae_vector* y,
+     double mean,
+     double* bothtails,
+     double* lefttail,
+     double* righttail,
+     ae_state *_state);
+void studentttest2(/* Real    */ const ae_vector* x,
+     ae_int_t n,
+     /* Real    */ const ae_vector* y,
      ae_int_t m,
      double* bothtails,
      double* lefttail,
      double* righttail,
      ae_state *_state);
-void onesamplevariancetest(/* Real    */ ae_vector* x,
+void unequalvariancettest(/* Real    */ const ae_vector* x,
      ae_int_t n,
-     double variance,
+     /* Real    */ const ae_vector* y,
+     ae_int_t m,
      double* bothtails,
      double* lefttail,
      double* righttail,

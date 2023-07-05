@@ -19,26 +19,24 @@
 #ifndef CFILTERSPLIT_H
 #define CFILTERSPLIT_H
 
-#include "CMainWindow.h"
-#include "ui_IFilterSplitTrack.h"
 #include <QWidget>
+
+#include "ui_IFilterSplitTrack.h"
 
 class CGisItemTrk;
 
-class CFilterSplitTrack : public QWidget, private Ui::IFilterSplitTrack
-{
-    Q_OBJECT
-public:
-    CFilterSplitTrack(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterSplitTrack();
+class CFilterSplitTrack : public QWidget, private Ui::IFilterSplitTrack {
+  Q_OBJECT
+ public:
+  CFilterSplitTrack(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterSplitTrack();
 
-private slots:
-    void slotApply();
-    void showHelp();
+ private slots:
+  void slotApply();
+  void showHelp();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CFILTERSPLITTRACK_H
-
+#endif  // CFILTERSPLITTRACK_H

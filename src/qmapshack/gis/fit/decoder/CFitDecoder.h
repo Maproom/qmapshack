@@ -19,33 +19,30 @@
 #ifndef CFITDECODER_H
 #define CFITDECODER_H
 
-#include "gis/fit/decoder/IFitDecoderState.h"
-
 #include <QtCore>
+
+#include "gis/fit/decoder/IFitDecoderState.h"
 
 class CFitMessage;
 
-class CFitDecoder final
-{
-    Q_DECLARE_TR_FUNCTIONS(CFitDecoder)
-public:
-    CFitDecoder();
-    ~CFitDecoder();
+class CFitDecoder final {
+  Q_DECLARE_TR_FUNCTIONS(CFitDecoder)
+ public:
+  CFitDecoder();
+  ~CFitDecoder();
 
-    void decode(QFile& file);
-    const QList<CFitMessage>& getMessages() const;
+  void decode(QFile& file);
+  const QList<CFitMessage>& getMessages() const;
 
-private:
-    void resetSharedData();
-    void printDebugInfo();
+ private:
+  void resetSharedData();
+  void printDebugInfo();
 
-    // map containing all states for the decoder. Needs to be pointer because decoder state is abstract class
-    QMap<decode_state_e, IFitDecoderState*> stateMap;
+  // map containing all states for the decoder. Needs to be pointer because decoder state is abstract class
+  QMap<decode_state_e, IFitDecoderState*> stateMap;
 
-    // shared data passed along the decoder state instances.
-    IFitDecoderState::shared_state_data_t data;
+  // shared data passed along the decoder state instances.
+  IFitDecoderState::shared_state_data_t data;
 };
 
-
-
-#endif // CFITDECODER_H
+#endif  // CFITDECODER_H

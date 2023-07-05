@@ -20,38 +20,24 @@
 
 #include <QtWidgets>
 
-CTextEdit::CTextEdit(QWidget* parent)
-    : QTextEdit(parent)
-{
+CTextEdit::CTextEdit(QWidget* parent) : QTextEdit(parent) {}
+
+void CTextEdit::keyPressEvent(QKeyEvent* event) {
+  if (event->matches(QKeySequence::Paste)) {
+    event->ignore();
+    paste();
+  } else {
+    QTextEdit::keyPressEvent(event);
+  }
 }
 
-void CTextEdit::keyPressEvent(QKeyEvent* event)
-{
-    if(event->matches(QKeySequence::Paste))
-    {
-        event->ignore();
-        paste();
-    }
-    else
-    {
-        QTextEdit::keyPressEvent(event);
-    }
+void CTextEdit::paste() {
+  if (pastePlain) {
+    QClipboard* clip = QApplication::clipboard();
+    insertPlainText(clip->text());
+  } else {
+    QTextEdit::paste();
+  }
 }
 
-void CTextEdit::paste()
-{
-    if(pastePlain)
-    {
-        QClipboard* clip = QApplication::clipboard();
-        insertPlainText( clip->text() );
-    }
-    else
-    {
-        QTextEdit::paste();
-    }
-}
-
-void CTextEdit::setPastePlain(bool plain)
-{
-    pastePlain = plain;
-}
+void CTextEdit::setPastePlain(bool plain) { pastePlain = plain; }

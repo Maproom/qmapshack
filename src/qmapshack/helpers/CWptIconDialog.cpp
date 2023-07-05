@@ -16,82 +16,69 @@
 
 **********************************************************************************************/
 
+#include "helpers/CWptIconDialog.h"
+
+#include <QtWidgets>
+
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
-#include "helpers/CWptIconDialog.h"
 #include "helpers/CWptIconManager.h"
 #include "misc.h"
 #include "setup/IAppSetup.h"
 
-#include <QtWidgets>
-
-
-CWptIconDialog::CWptIconDialog(CMainWindow* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
-    setupList(nullptr);
-    setupSignals();
+CWptIconDialog::CWptIconDialog(CMainWindow* parent) : QDialog(parent) {
+  setupUi(this);
+  setupList(nullptr);
+  setupSignals();
 }
 
-void CWptIconDialog::setupSignals()
-{
-    connect(toolPath, &QToolButton::clicked, this, &CWptIconDialog::slotSetupPath);
-}
+void CWptIconDialog::setupSignals() { connect(toolPath, &QToolButton::clicked, this, &CWptIconDialog::slotSetupPath); }
 
-void CWptIconDialog::setupList(QObject* obj)
-{
-    listWidget->clear();
+void CWptIconDialog::setupList(QObject* obj) {
+  listWidget->clear();
 
-    QString currentIcon = obj == nullptr ? QString() : obj->objectName();
-    QListWidgetItem* currentItem = nullptr;
+  QString currentIcon = obj == nullptr ? QString() : obj->objectName();
+  QListWidgetItem* currentItem = nullptr;
 
-    const QMap<QString, CWptIconManager::icon_t>& wptIcons = CWptIconManager::self().getWptIcons();
-    QStringList keys = wptIcons.keys();
+  const QMap<QString, CWptIconManager::icon_t>& wptIcons = CWptIconManager::self().getWptIcons();
+  QStringList keys = wptIcons.keys();
 
-    std::sort(keys.begin(), keys.end(), sortByString);
+  std::sort(keys.begin(), keys.end(), sortByString);
 
-    for(const QString& key : qAsConst(keys))
-    {
-        const QString& icon = wptIcons[key].path;
-        QPixmap pixmap = CWptIconManager::self().loadIcon(icon);
+  for (const QString& key : qAsConst(keys)) {
+    const QString& icon = wptIcons[key].path;
+    QPixmap pixmap = CWptIconManager::self().loadIcon(icon);
 
-        QListWidgetItem* item = new QListWidgetItem(pixmap, key, listWidget);
-        if(currentIcon == key)
-        {
-            currentItem = item;
-        }
+    QListWidgetItem* item = new QListWidgetItem(pixmap, key, listWidget);
+    if (currentIcon == key) {
+      currentItem = item;
     }
+  }
 
-    if(currentItem)
-    {
-        listWidget->setCurrentItem(currentItem);
-        listWidget->scrollToItem(currentItem);
-    }
+  if (currentItem) {
+    listWidget->setCurrentItem(currentItem);
+    listWidget->scrollToItem(currentItem);
+  }
 
-    SETTINGS;
-    QString path = cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString();
-    labelIconPath->setProperty("path", path);
-    labelIconPath->setText(path);
-    labelIconPath->setToolTip(path);
+  SETTINGS;
+  QString path =
+      cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString();
+  labelIconPath->setProperty("path", path);
+  labelIconPath->setText(path);
+  labelIconPath->setToolTip(path);
 }
 
-CWptIconDialog::~CWptIconDialog()
-{
-}
+CWptIconDialog::~CWptIconDialog() {}
 
+void CWptIconDialog::slotSetupPath() {
+  QString path = labelIconPath->property("path").toString();
+  path = QFileDialog::getExistingDirectory(this, tr("Path to user icons..."), path);
+  if (path.isEmpty()) {
+    return;
+  }
 
-void CWptIconDialog::slotSetupPath()
-{
-    QString path = labelIconPath->property("path").toString();
-    path = QFileDialog::getExistingDirectory(this, tr("Path to user icons..."), path);
-    if(path.isEmpty())
-    {
-        return;
-    }
-
-    SETTINGS;
-    cfg.setValue("Paths/externalWptIcons", path);
-    CWptIconManager::self().init();
-    setupList(button == nullptr ? dynamic_cast<QObject*>(action) : dynamic_cast<QObject*>(button));
+  SETTINGS;
+  cfg.setValue("Paths/externalWptIcons", path);
+  CWptIconManager::self().init();
+  setupList(button == nullptr ? dynamic_cast<QObject*>(action) : dynamic_cast<QObject*>(button));
 }

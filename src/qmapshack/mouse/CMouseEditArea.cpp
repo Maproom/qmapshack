@@ -17,85 +17,75 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "CMainWindow.h"
-#include "gis/CGisWorkspace.h"
-#include "gis/ovl/CGisItemOvlArea.h"
 #include "mouse/CMouseEditArea.h"
 
 #include <QtWidgets>
 
+#include "canvas/CCanvas.h"
+#include "gis/CGisWorkspace.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+
 CMouseEditArea::CMouseEditArea(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseEditLine(IGisItem::key_t(), point, false, tr("Area"), gis, canvas, mouse)
-{
-    startNewLine(point);
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+    : IMouseEditLine(IGisItem::key_t(), point, false, tr("Area"), gis, canvas, mouse) {
+  startNewLine(point);
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 CMouseEditArea::CMouseEditArea(CGisItemOvlArea& area, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseEditLine(area.getKey(), area, false, tr("Area"), gis, canvas, mouse)
-{
-    canvas->reportStatus(key.item, tr("<b>Edit Area</b><br/>Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.<br/>") + docPanning);
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+    : IMouseEditLine(area.getKey(), area, false, tr("Area"), gis, canvas, mouse) {
+  canvas->reportStatus(key.item, tr("<b>Edit Area</b><br/>Select a function and a routing mode via the tool buttons. "
+                                    "Next select a point of the line. Only points marked with a large square can be "
+                                    "changed. The ones with a black dot are subpoints introduced by routing.<br/>") +
+                                     docPanning);
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-CMouseEditArea::~CMouseEditArea()
-{
-    canvas->reportStatus(key.item, "");
+CMouseEditArea::~CMouseEditArea() { canvas->reportStatus(key.item, ""); }
+
+void CMouseEditArea::drawLine(const QPolygonF& l, const QColor color, int width, QPainter& p) {
+  p.setPen(QPen(color, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+  p.setBrush(QBrush(Qt::magenta, Qt::BDiagPattern));
+  p.drawPolygon(l);
 }
 
-void CMouseEditArea::drawLine(const QPolygonF& l, const QColor color, int width, QPainter& p)
-{
-    p.setPen(QPen(color, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    p.setBrush(QBrush(Qt::magenta, Qt::BDiagPattern));
-    p.drawPolygon(l);
+IGisLine* CMouseEditArea::getGisLine() const {
+  return dynamic_cast<CGisItemOvlArea*>(CGisWorkspace::self().getItemByKey(key));
 }
 
-IGisLine* CMouseEditArea::getGisLine() const
-{
-    return dynamic_cast<CGisItemOvlArea*>(CGisWorkspace::self().getItemByKey(key));
+void CMouseEditArea::slotAbort() {
+  canvas->reportStatus(key.item, "");
+  IMouseEditLine::slotAbortEx(false);
 }
 
-void CMouseEditArea::slotAbort()
-{
-    canvas->reportStatus(key.item, "");
-    IMouseEditLine::slotAbortEx(false);
+void CMouseEditArea::slotCopyToOrig() {
+  canvas->reportStatus(key.item, "");
+  IMouseEditLine::slotCopyToOrig();
 }
 
-void CMouseEditArea::slotCopyToOrig()
-{
-    canvas->reportStatus(key.item, "");
-    IMouseEditLine::slotCopyToOrig();
-}
+void CMouseEditArea::slotCopyToNew() {
+  canvas->reportStatus(key.item, "");
 
-void CMouseEditArea::slotCopyToNew()
-{
-    canvas->reportStatus(key.item, "");
+  if (points.size() < 3) {
+    return;
+  }
 
-    if(points.size() < 3)
-    {
-        return;
-    }
+  IGisProject* project = nullptr;
 
-    IGisProject* project = nullptr;
+  QString name;
+  CGisItemOvlArea* area = dynamic_cast<CGisItemOvlArea*>(CGisWorkspace::self().getItemByKey(key));
+  if (area != nullptr) {
+    name = area->getName();
+  }
 
-    QString name;
-    CGisItemOvlArea* area = dynamic_cast<CGisItemOvlArea*>(CGisWorkspace::self().getItemByKey(key));
-    if(area != nullptr)
-    {
-        name = area->getName();
-    }
+  if (!IGisItem::getNameAndProject(name, project, tr("area"))) {
+    return;
+  }
 
-    if(!IGisItem::getNameAndProject(name, project, tr("area")))
-    {
-        return;
-    }
+  {
+    QMutexLocker lock(&IGisItem::mutexItems);
+    new CGisItemOvlArea(points, name, project, NOIDX);
+  }
 
-    {
-        QMutexLocker lock(&IGisItem::mutexItems);
-        new CGisItemOvlArea(points, name, project, NOIDX);
-    }
-
-    canvas->resetMouse();
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+  canvas->resetMouse();
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }

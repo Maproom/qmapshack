@@ -17,36 +17,29 @@
 **********************************************************************************************/
 
 #include "overlay/refmap/COverlayRefMapPoint.h"
+
 #include "units/IUnit.h"
 
 COverlayRefMapPoint::COverlayRefMapPoint(qint32 cnt, const QPointF& ptRef, const QPointF& ptPtx, QTreeWidget* parent)
-    : QTreeWidgetItem(parent)
-{
-    setText(eColumnCnt, QString::number(cnt));
-    setPtPtx(ptPtx);
-    setPtRef(ptRef);
+    : QTreeWidgetItem(parent) {
+  setText(eColumnCnt, QString::number(cnt));
+  setPtPtx(ptPtx);
+  setPtRef(ptRef);
 }
 
-void COverlayRefMapPoint::setPtPtx(const QPointF& pt)
-{
-    ptPtx.rx() = qRound(pt.x());
-    ptPtx.ry() = qRound(pt.y());
-    setText(eColumnXY, QString("%1, %2").arg(ptPtx.x()).arg(ptPtx.y()));
+void COverlayRefMapPoint::setPtPtx(const QPointF& pt) {
+  ptPtx.rx() = qRound(pt.x());
+  ptPtx.ry() = qRound(pt.y());
+  setText(eColumnXY, QString("%1, %2").arg(ptPtx.x()).arg(ptPtx.y()));
 }
 
-void COverlayRefMapPoint::setPtRef(const QPointF& pt)
-{
-    ptRef = pt;
-    QString str;
-    if(!IUnit::self().degToStr(ptRef.x(), ptRef.y(), str))
-    {
-        str = tr("bad coordinate");
-    }
-    setText(eColumnLonLat, str);
+void COverlayRefMapPoint::setPtRef(const QPointF& pt) {
+  ptRef = pt;
+  QString str;
+  if (!IUnit::self().degToStr(ptRef.x(), ptRef.y(), str)) {
+    str = tr("bad coordinate");
+  }
+  setText(eColumnLonLat, str);
 }
 
-void COverlayRefMapPoint::setIndex(int n)
-{
-    setText(eColumnCnt, QString::number(n));
-}
-
+void COverlayRefMapPoint::setIndex(int n) { setText(eColumnCnt, QString::number(n)); }

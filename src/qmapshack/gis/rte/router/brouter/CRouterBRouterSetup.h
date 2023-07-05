@@ -19,174 +19,178 @@
 #ifndef CROUTERBROUTERSETUP_H
 #define CROUTERBROUTERSETUP_H
 
-#include "units/IUnit.h"
 #include <QtCore>
+
+#include "units/IUnit.h"
 
 class QJSValue;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QWebEnginePage;
 
-class CRouterBRouterSetup : public QObject
-{
-    Q_OBJECT
-public:
-    CRouterBRouterSetup(QObject* parent);
-    ~CRouterBRouterSetup();
+class CRouterBRouterSetup : public QObject {
+  Q_OBJECT
+ public:
+  CRouterBRouterSetup(QObject* parent);
+  ~CRouterBRouterSetup();
 
-    enum mode_e { eModeLocal, eModeOnline, eModeIllegal };
-    struct tile_t { QPoint tile; QDateTime date; qreal size; };
+  enum mode_e { eModeLocal, eModeOnline, eModeIllegal };
+  struct tile_t {
+    QPoint tile;
+    QDateTime date;
+    qreal size;
+  };
 
-    void load();
-    void save();
+  void load();
+  void save();
 
-    void resetAll();
-    void resetInstallMode() { installMode = defaultInstallMode; }
-    void resetOnlineConfigUrl() { expertConfigUrl = defaultConfigUrl; }
-    void resetOnlineServiceUrl() { onlineServiceUrl = defaultOnlineServiceUrl; }
-    void resetOnlineProfilesUrl() { onlineProfilesUrl = defaultOnlineProfilesUrl; }
-    void resetLocalBRouterJar() { setLocalBRouterJar(defaultLocalBRouterJar); }
-    void resetLocalProfileDir() { localProfileDir = defaultLocalProfileDir; }
-    void resetLocalCustomProfileDir() { localCustomProfileDir = defaultLocalCustomProfileDir; }
-    void resetLocalSegmentsDir() { localSegmentsDir = defaultLocalSegmentsDir; }
-    void resetLocalHost() { localHost = defaultLocalHost; }
-    void resetLocalPort() { localPort = defaultLocalPort; }
-    void resetLocalBindLocalonly() { localBindLocalonly = defaultLocalBindLocalonly; }
-    void resetLocalNumberThreads() { localNumberThreads = defaultLocalNumberThreads; }
-    void resetLocalMaxRunningTime() { localMaxRunningTime = defaultLocalMaxRunningTime; }
-    void resetLocalJavaOpts() { localJavaOpts = defaultLocalJavaOpts; }
-    void resetBinariesUrl() { expertBinariesUrl = defaultBinariesUrl; }
-    void resetSegmentsUrl() { expertSegmentsUrl = defaultSegmentsUrl; }
+  void resetAll();
+  void resetInstallMode() { installMode = defaultInstallMode; }
+  void resetOnlineConfigUrl() { expertConfigUrl = defaultConfigUrl; }
+  void resetOnlineServiceUrl() { onlineServiceUrl = defaultOnlineServiceUrl; }
+  void resetOnlineProfilesUrl() { onlineProfilesUrl = defaultOnlineProfilesUrl; }
+  void resetLocalBRouterJar() { setLocalBRouterJar(defaultLocalBRouterJar); }
+  void resetLocalProfileDir() { localProfileDir = defaultLocalProfileDir; }
+  void resetLocalCustomProfileDir() { localCustomProfileDir = defaultLocalCustomProfileDir; }
+  void resetLocalSegmentsDir() { localSegmentsDir = defaultLocalSegmentsDir; }
+  void resetLocalHost() { localHost = defaultLocalHost; }
+  void resetLocalPort() { localPort = defaultLocalPort; }
+  void resetLocalBindLocalonly() { localBindLocalonly = defaultLocalBindLocalonly; }
+  void resetLocalNumberThreads() { localNumberThreads = defaultLocalNumberThreads; }
+  void resetLocalMaxRunningTime() { localMaxRunningTime = defaultLocalMaxRunningTime; }
+  void resetLocalJavaOpts() { localJavaOpts = defaultLocalJavaOpts; }
+  void resetBinariesUrl() { expertBinariesUrl = defaultBinariesUrl; }
+  void resetSegmentsUrl() { expertSegmentsUrl = defaultSegmentsUrl; }
 
-    QStringList getProfiles() const;
+  QStringList getProfiles() const;
 
-    void addProfile(const QString& profile);
-    void deleteProfile(const QString& profile);
-    void profileUp(const QString& profile);
-    void profileDown(const QString& profile);
+  void addProfile(const QString& profile);
+  void deleteProfile(const QString& profile);
+  void profileUp(const QString& profile);
+  void profileDown(const QString& profile);
 
-    void readLocalProfiles();
+  void readLocalProfiles();
 
-    void loadOnlineConfig(bool update) const;
-    void loadOnlineVersion() const;
-    void loadExpertBinariesPage() const;
-    void loadExpertSegmentsPage() const;
-    void loadLocalOnlineProfiles(bool update) const;
-    void displayProfileAsync(const QString& profile);
-    void displayOnlineProfileAsync(const QString& profile) const;
+  void loadOnlineConfig(bool update) const;
+  void loadOnlineVersion() const;
+  void loadExpertBinariesPage() const;
+  void loadExpertSegmentsPage() const;
+  void loadLocalOnlineProfiles(bool update) const;
+  void displayProfileAsync(const QString& profile);
+  void displayOnlineProfileAsync(const QString& profile) const;
 
-    void setJava(const QString& path);
-    QString findJava() const;
-    void setLocalBRouterJar(const QString& path);
-    bool isLocalBRouterInstalled() const;
-    bool isLocalBRouterCandidate() const;
-    bool isLocalBRouterDefaultDir() const;
+  void setJava(const QString& path);
+  QString findJava() const;
+  void setLocalBRouterJar(const QString& path);
+  bool isLocalBRouterInstalled() const;
+  bool isLocalBRouterCandidate() const;
+  bool isLocalBRouterDefaultDir() const;
 
-    QUrl getServiceUrl() const;
-    QString getSegmentsUrl() const;
-    QString getBinariesUrl() const;
-    QString getConfigUrl() const;
+  QUrl getServiceUrl() const;
+  QString getSegmentsUrl() const;
+  QString getBinariesUrl() const;
+  QString getConfigUrl() const;
 
-    void parseBRouterVersion(const QString& text);
-    void parseJavaVersion(const QString& text);
+  void parseBRouterVersion(const QString& text);
+  void parseJavaVersion(const QString& text);
 
-    void onInvalidSetup();
+  void onInvalidSetup();
 
-signals:
-    void sigOnlineConfigLoaded();
-    void sigVersionChanged();
-    void sigBinariesPageLoaded();
-    void sigSegmentsPageLoaded();
-    void sigProfilesChanged();
-    void sigDisplayOnlineProfileFinished(const QString profile, const QString content);
-    void sigError(const QString error, const QString details);
+ signals:
+  void sigOnlineConfigLoaded();
+  void sigVersionChanged();
+  void sigBinariesPageLoaded();
+  void sigSegmentsPageLoaded();
+  void sigProfilesChanged();
+  void sigDisplayOnlineProfileFinished(const QString profile, const QString content);
+  void sigError(const QString error, const QString details);
 
-private slots:
-    void slotOnlineRequestFinished(QNetworkReply* reply);
-    void slotLoadOnlineProfilesRequestFinished(bool ok);
+ private slots:
+  void slotOnlineRequestFinished(QNetworkReply* reply);
+  void slotLoadOnlineProfilesRequestFinished(bool ok);
 
-private:
-    enum request_e { eTypeConfig, eTypeProfile, eTypeBinariesPage, eTypeSegmentsPage, eTypeVersion };
-    enum profileRequest_e { eProfileInstall, eProfileDisplay };
+ private:
+  enum request_e { eTypeConfig, eTypeProfile, eTypeBinariesPage, eTypeSegmentsPage, eTypeVersion };
+  enum profileRequest_e { eProfileInstall, eProfileDisplay };
 
-    QDir getProfileDir(const mode_e mode) const;
-    QDir getDownloadDir() const;
-    void installLocalBRouter(QStringList& messageList);
-    void installLocalBRouterFile(const QFileInfo& srcFileInfo, const QDir& targetDir, QStringList& messageList) const;
-    bool tryJavaVersion(const QStringList& arguments, const QString& pattern);
-    bool parseJavaVersion(const QString& javaOutput, QRegularExpression& re);
-    void loadOnlineProfileAsync(const QString& profile, const profileRequest_e mode) const;
-    void loadOnlineConfigFinished(QNetworkReply* reply);
-    void loadOnlineVersionFinished(QNetworkReply* reply);
-    void loadOnlineProfileFinished(QNetworkReply* reply);
-    void afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant& v);
-    void mergeOnlineProfiles(const QStringList& profilesLoaded);
-    void emitOnlineConfigScriptError(const QJSValue& error);
-    void emitNetworkError(QString error);
-    mode_e modeFromString(const QString& mode) const;
-    QString stringFromMode(const mode_e mode) const;
+  QDir getProfileDir(const mode_e mode) const;
+  QDir getDownloadDir() const;
+  void installLocalBRouter(QStringList& messageList);
+  void installLocalBRouterFile(const QFileInfo& srcFileInfo, const QDir& targetDir, QStringList& messageList) const;
+  bool tryJavaVersion(const QStringList& arguments, const QString& pattern);
+  bool parseJavaVersion(const QString& javaOutput, QRegularExpression& re);
+  void loadOnlineProfileAsync(const QString& profile, const profileRequest_e mode) const;
+  void loadOnlineConfigFinished(QNetworkReply* reply);
+  void loadOnlineVersionFinished(QNetworkReply* reply);
+  void loadOnlineProfileFinished(QNetworkReply* reply);
+  void afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant& v);
+  void mergeOnlineProfiles(const QStringList& profilesLoaded);
+  void emitOnlineConfigScriptError(const QJSValue& error);
+  void emitNetworkError(QString error);
+  mode_e modeFromString(const QString& mode) const;
+  QString stringFromMode(const mode_e mode) const;
 
-    QStringList onlineProfiles;
-    QStringList localProfiles;
+  QStringList onlineProfiles;
+  QStringList localProfiles;
 
-    QNetworkAccessManager* networkAccessManager;
-    QWebEnginePage* profilesWebPage;
+  QNetworkAccessManager* networkAccessManager;
+  QWebEnginePage* profilesWebPage;
 
-    bool expertMode;
-    mode_e installMode;
-    QString expertConfigUrl;
-    QString onlineServiceUrl;
-    QString onlineProfilesUrl;
-    QStringList onlineProfilesAvailable;
-    QString localDir;
-    QString localJavaExecutable;
-    QString localBRouterJar;
-    QString localProfileDir;
-    QString localCustomProfileDir;
-    QString localSegmentsDir;
-    QString localHost;
-    QString localPort;
-    bool localBindLocalonly;
-    QString localNumberThreads;
-    QString localMaxRunningTime;
-    QString localJavaOpts;
-    QString expertBinariesUrl;
-    QString expertSegmentsUrl;
+  bool expertMode;
+  mode_e installMode;
+  QString expertConfigUrl;
+  QString onlineServiceUrl;
+  QString onlineProfilesUrl;
+  QStringList onlineProfilesAvailable;
+  QString localDir;
+  QString localJavaExecutable;
+  QString localBRouterJar;
+  QString localProfileDir;
+  QString localCustomProfileDir;
+  QString localSegmentsDir;
+  QString localHost;
+  QString localPort;
+  bool localBindLocalonly;
+  QString localNumberThreads;
+  QString localMaxRunningTime;
+  QString localJavaOpts;
+  QString expertBinariesUrl;
+  QString expertSegmentsUrl;
 
-    int versionMajor { NOINT };
-    int versionMinor { NOINT };
-    int versionPatch { NOINT };
+  int versionMajor{NOINT};
+  int versionMinor{NOINT};
+  int versionPatch{NOINT};
 
-    int javaMajorVersion  { NOINT };
-    int classMajorVersion { NOINT };
+  int javaMajorVersion{NOINT};
+  int classMajorVersion{NOINT};
 
-    const bool defaultExpertMode = false;
-    const mode_e defaultInstallMode = eModeOnline;
-    static constexpr const char* defaultConfigUrl = "https://brouter.de/brouter-web/config.js";
-    static constexpr const char* defaultOnlineServiceUrl = "https://brouter.de";
-    static constexpr const char* defaultOnlineProfilesUrl = "https://brouter.de/brouter/profiles2/";
-    static constexpr const char* defaultLocalDir = ".";
-    static constexpr const char* defaultLocalBRouterJar = "brouter.jar";
-    static constexpr const char* defaultLocalProfileDir = "profiles2";
-    static constexpr const char* defaultLocalCustomProfileDir = "customprofiles";
-    static constexpr const char* defaultLocalSegmentsDir = "segments4";
-    static constexpr const char* defaultLocalHost = "127.0.0.1";
-    static constexpr const char* defaultLocalPort = "17777";
-    const bool defaultLocalBindLocalonly = true;
-    static constexpr const char* defaultLocalNumberThreads = "1";
-    static constexpr const char* defaultLocalMaxRunningTime = "300";
-    static constexpr const char* defaultLocalJavaOpts = "-Xmx128M -Xms128M -Xmn8M";
-    static constexpr const char* defaultBinariesUrl = "https://brouter.de/brouter_bin/";
-    static constexpr const char* defaultSegmentsUrl = "https://brouter.de/brouter/segments4/";
+  const bool defaultExpertMode = false;
+  const mode_e defaultInstallMode = eModeOnline;
+  static constexpr const char* defaultConfigUrl = "https://brouter.de/brouter-web/config.js";
+  static constexpr const char* defaultOnlineServiceUrl = "https://brouter.de";
+  static constexpr const char* defaultOnlineProfilesUrl = "https://brouter.de/brouter/profiles2/";
+  static constexpr const char* defaultLocalDir = ".";
+  static constexpr const char* defaultLocalBRouterJar = "brouter.jar";
+  static constexpr const char* defaultLocalProfileDir = "profiles2";
+  static constexpr const char* defaultLocalCustomProfileDir = "customprofiles";
+  static constexpr const char* defaultLocalSegmentsDir = "segments4";
+  static constexpr const char* defaultLocalHost = "127.0.0.1";
+  static constexpr const char* defaultLocalPort = "17777";
+  const bool defaultLocalBindLocalonly = true;
+  static constexpr const char* defaultLocalNumberThreads = "1";
+  static constexpr const char* defaultLocalMaxRunningTime = "300";
+  static constexpr const char* defaultLocalJavaOpts = "-Xmx128M -Xms128M -Xmn8M";
+  static constexpr const char* defaultBinariesUrl = "https://brouter.de/brouter_bin/";
+  static constexpr const char* defaultSegmentsUrl = "https://brouter.de/brouter/segments4/";
 
-    static constexpr const char* onlineProfileCacheDir = "BRouterProfiles";
-    static constexpr const char* downloadCacheDir = "BRouterDownload";
+  static constexpr const char* onlineProfileCacheDir = "BRouterProfiles";
+  static constexpr const char* downloadCacheDir = "BRouterDownload";
 
-    friend class CRouterBRouter;
-    friend class CRouterBRouterLocal;
-    friend class CRouterBRouterSetupPage;
-    friend class CRouterBRouterSetupWizard;
-    friend class CRouterBRouterTilesSelect;
+  friend class CRouterBRouter;
+  friend class CRouterBRouterLocal;
+  friend class CRouterBRouterSetupPage;
+  friend class CRouterBRouterSetupWizard;
+  friend class CRouterBRouterTilesSelect;
 };
 
 #endif

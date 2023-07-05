@@ -18,115 +18,81 @@
 **********************************************************************************************/
 #include "units/CUnitMetric.h"
 
-CUnitMetric::CUnitMetric(QObject* parent)
-    : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, parent)
-{
-}
-
+CUnitMetric::CUnitMetric(QObject* parent) : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, parent) {}
 
 void CUnitMetric::meter2elevation(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT || meter == NOINT)
-    {
-        val = "-";
-        unit = "";
-    }
-    else
-    {
-        val = QString::asprintf("%1.0f", meter);
-        unit = "m";
-    }
+  if (meter == NOFLOAT || meter == NOINT) {
+    val = "-";
+    unit = "";
+  } else {
+    val = QString::asprintf("%1.0f", meter);
+    unit = "m";
+  }
 }
-
 
 void CUnitMetric::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit = "";
-    }
-    else if(meter < 10)
-    {
-        val = QString::asprintf("%1.1f", meter);
-        unit = "m";
-    }
-    else if(meter < 1000)
-    {
-        val = QString::asprintf("%1.0f", meter);
-        unit = "m";
-    }
-    else if(meter < 10000)
-    {
-        val = QString::asprintf("%1.2f", meter / 1000);
-        unit = "km";
-    }
-    else if(meter < 20000)
-    {
-        val = QString::asprintf("%1.1f", meter / 1000);
-        unit = "km";
-    }
-    else
-    {
-        val = QString::asprintf("%1.0f", meter / 1000);
-        unit = "km";
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit = "";
+  } else if (meter < 10) {
+    val = QString::asprintf("%1.1f", meter);
+    unit = "m";
+  } else if (meter < 1000) {
+    val = QString::asprintf("%1.0f", meter);
+    unit = "m";
+  } else if (meter < 10000) {
+    val = QString::asprintf("%1.2f", meter / 1000);
+    unit = "km";
+  } else if (meter < 20000) {
+    val = QString::asprintf("%1.1f", meter / 1000);
+    unit = "km";
+  } else {
+    val = QString::asprintf("%1.0f", meter / 1000);
+    unit = "km";
+  }
 }
-
 
 void CUnitMetric::meter2speed(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit = "";
-    }
-    else if (meter < 0.27)
-    {
-        val = QString::asprintf("%1.0f", meter * speedfactor * 1000);
-        unit = "m/h";
-    }
-    else if (meter < 10.0)
-    {
-        val = QString::asprintf("%1.1f", meter * speedfactor);
-        unit = speedunit;
-    }
-    else
-    {
-        val = QString::asprintf("%1.0f", meter * speedfactor);
-        unit = speedunit;
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit = "";
+  } else if (meter < 0.27) {
+    val = QString::asprintf("%1.0f", meter * speedfactor * 1000);
+    unit = "m/h";
+  } else if (meter < 10.0) {
+    val = QString::asprintf("%1.1f", meter * speedfactor);
+    unit = speedunit;
+  } else {
+    val = QString::asprintf("%1.0f", meter * speedfactor);
+    unit = speedunit;
+  }
 }
 
 void CUnitMetric::meter2area(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit = "";
-    }
-    else
-    {
-        val = QString::asprintf("%1.2f", meter / 1000000);
-        unit = "km²";
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit = "";
+  } else {
+    val = QString::asprintf("%1.2f", meter / 1000000);
+    unit = "km²";
+  }
 }
 
 qreal CUnitMetric::elevation2meter(const QString& val) const /* override */
 {
-    return val.toDouble();
+  return val.toDouble();
 }
 
-void CUnitMetric::meter2unit(qreal meter, qreal& scale, QString& unit) const
-{
-    if(meter > 1000)
-    {
-        scale = 0.001;
-        unit = "km";
-    }
-    else
-    {
-        scale = 1.0;
-        unit = "m";
-    }
+void CUnitMetric::meter2unit(qreal meter, qreal& scale, QString& unit) const {
+  if (meter > 1000) {
+    scale = 0.001;
+    unit = "km";
+  } else {
+    scale = 1.0;
+    unit = "m";
+  }
 }

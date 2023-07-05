@@ -24,48 +24,42 @@
 class CGisItemTrk;
 class QSettings;
 
-class CFilterSpeedHike : public QWidget, private Ui::IFilterSpeedHike
-{
-    Q_OBJECT
-public:
+class CFilterSpeedHike : public QWidget, private Ui::IFilterSpeedHike {
+  Q_OBJECT
+ public:
+  struct hiking_type_t {
+    QString name;
+    qreal plainSpeed;
+    qreal ascending;
+    qreal descending;
 
-    struct hiking_type_t
-    {
-        QString name;
-        qreal plainSpeed;
-        qreal ascending;
-        qreal descending;
+    inline bool isValid() const {
+      if (!plainSpeed || !ascending || !descending) {
+        return false;
+      }
+      return true;
+    }
+  };
 
-        inline bool isValid() const
-        {
-            if (!plainSpeed || !ascending || !descending)
-            {
-                return false;
-            }
-            return true;
-        }
-    };
+  CFilterSpeedHike(QWidget* parent);
+  virtual ~CFilterSpeedHike() = default;
 
-    CFilterSpeedHike(QWidget* parent);
-    virtual ~CFilterSpeedHike() = default;
+  void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings& cfg);
 
-    void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg);
+  void apply(CGisItemTrk& trk);
 
-    void apply(CGisItemTrk& trk);
+ private slots:
+  void slotSetHikingType(int type);
+  void slotSetPlainSpeed(double speed);
+  void slotSetAscending(double ascending);
+  void slotSetDescending(double descending);
 
-private slots:
-    void slotSetHikingType(int type);
-    void slotSetPlainSpeed(double speed);
-    void slotSetAscending(double ascending);
-    void slotSetDescending(double descending);
-
-private:
-    const qint32 noOfFixTypes;
-    const qint32 noOfCustomTypes;
-    const QList<hiking_type_t> hikingTypeDefaults;
-    QList <hiking_type_t> hikingTypes;
+ private:
+  const qint32 noOfFixTypes;
+  const qint32 noOfCustomTypes;
+  const QList<hiking_type_t> hikingTypeDefaults;
+  QList<hiking_type_t> hikingTypes;
 };
 
-#endif //CFILTERSPEEDHIKE_H
-
+#endif  // CFILTERSPEEDHIKE_H

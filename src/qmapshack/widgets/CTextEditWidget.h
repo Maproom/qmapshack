@@ -21,59 +21,59 @@
 #ifndef CTEXTEDITWIDGET_H
 #define CTEXTEDITWIDGET_H
 
-#include "ui_ITextEditWidget.h"
 #include <QDialog>
 #include <QDir>
 #include <QTextCharFormat>
 
+#include "ui_ITextEditWidget.h"
 
-class CTextEditWidget : public QDialog, private Ui::ITextEditWidget
-{
-    Q_OBJECT
-public:
-    CTextEditWidget(const QString& html, QWidget* parent);
-    virtual ~CTextEditWidget();
+class CTextEditWidget : public QDialog, private Ui::ITextEditWidget {
+  Q_OBJECT
+ public:
+  CTextEditWidget(const QString& html, QWidget* parent);
+  virtual ~CTextEditWidget();
 
-    QString getHtml();
+  QString getHtml();
 
-protected:
-    void moveEvent(QMoveEvent* event) override;
-    bool event(QEvent* event) override;
+ protected:
+  void moveEvent(QMoveEvent* event) override;
+  bool event(QEvent* event) override;
 
-private slots:
-    void textBold();
-    void textUnderline();
-    void textItalic();
-    void textStyle(int styleIndex);
-    void textColor();
-    void textAlign(QAction* a);
-    void resetFont();
-    void resetLayout();
+ private slots:
+  void textBold();
+  void textUnderline();
+  void textItalic();
+  void textStyle(int styleIndex);
+  void textColor();
+  void textAlign(QAction* a);
+  void resetFont();
+  void resetLayout();
 
-    void currentCharFormatChanged(const QTextCharFormat& format);
-    void cursorPositionChanged();
-    void selectionChanged();
-    void clipboardDataChanged();
+  void currentCharFormatChanged(const QTextCharFormat& format);
+  void cursorPositionChanged();
+  void selectionChanged();
+  void clipboardDataChanged();
 
-    void customContextMenuRequested();
-    void pasteMode(QAction* action);
-    void deleteSelected();
+  void customContextMenuRequested();
+  void pasteMode(QAction* action);
+  void deleteSelected();
 
-    void textEditScrolled();
+  void textEditScrolled();
 
-    void insertFromTemplate();
-private:
-    void mergeFormatOnWordOrSelection(const QTextCharFormat& format);
-    void fontChanged(const QFont& f);
-    void colorChanged(const QColor& c);
-    void alignmentChanged(Qt::Alignment a);
-    void updateSelectionWindow();
+  void insertFromTemplate();
 
-    QAction* actionTextColor;
-    QMenu* menuTextEdit;
-    QWidget* selectionWindow;
-    QMenu* removeFormat;
+ private:
+  void mergeFormatOnWordOrSelection(const QTextCharFormat& format);
+  void fontChanged(const QFont& f);
+  void colorChanged(const QColor& c);
+  void alignmentChanged(Qt::Alignment a);
+  void updateSelectionWindow();
 
-    QFont defaultFont;
+  QAction* actionTextColor;
+  QMenu* menuTextEdit;
+  QWidget* selectionWindow;
+  QMenu* removeFormat;
+
+  QFont defaultFont;
 };
-#endif // CTEXTEDITWIDGET_H
+#endif  // CTEXTEDITWIDGET_H

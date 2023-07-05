@@ -19,30 +19,29 @@
 #ifndef CMAPPATHSETUP_H
 #define CMAPPATHSETUP_H
 
-#include "ui_IMapPathSetup.h"
 #include <QDialog>
 
-class CMapPathSetup : public QDialog, private Ui::IMapPathSetup
-{
-    Q_OBJECT
-public:
-    CMapPathSetup(QStringList& paths, QString& pathCache);
-    virtual ~CMapPathSetup();
+#include "ui_IMapPathSetup.h"
 
-public slots:
-    void accept() override;
+class CMapPathSetup : public QDialog, private Ui::IMapPathSetup {
+  Q_OBJECT
+ public:
+  CMapPathSetup(QStringList& paths, QString& pathCache);
+  virtual ~CMapPathSetup();
 
-private slots:
-    void slotAddPath();
-    void slotDelPath();
-    void slotItemSelectionChanged();
-    void slotChangeCachePath();
-    void slotMapHonk();
+ public slots:
+  void accept() override;
 
-private:
-    QStringList& paths;
-    QString& pathCache;
+ private slots:
+  void slotAddPath();
+  void slotDelPath();
+  void slotItemSelectionChanged();
+  void slotChangeCachePath();
+  void slotMapHonk();
+
+ private:
+  QStringList& paths;
+  QString& pathCache;
 };
 
-#endif //CMAPPATHSETUP_H
-
+#endif  // CMAPPATHSETUP_H

@@ -20,77 +20,62 @@
 
 #include <QtWidgets>
 
-void CTinySpinBox::initialize()
-{
-    initialized = true;
+void CTinySpinBox::initialize() {
+  initialized = true;
 
-    paletteEdit = QPalette(palette());
-    paletteRO = QPalette(palette());
-    paletteRW = QPalette(palette());
-    paletteRW.setColor(QPalette::Text, QColor(0, 0, 255));
+  paletteEdit = QPalette(palette());
+  paletteRO = QPalette(palette());
+  paletteRW = QPalette(palette());
+  paletteRW.setColor(QPalette::Text, QColor(0, 0, 255));
 
-    fontNoUnderline = QFont(font());
-    fontUnderline = QFont(font());
-    fontUnderline.setUnderline(true);
+  fontNoUnderline = QFont(font());
+  fontUnderline = QFont(font());
+  fontUnderline.setUnderline(true);
 }
 
-void CTinySpinBox::updateStyle()
-{
-    if(!initialized)
-    {
-        initialize();
-    }
+void CTinySpinBox::updateStyle() {
+  if (!initialized) {
+    initialize();
+  }
 
-    if(isReadOnly())
-    {
-        setPalette(paletteRO);
-        setFont(fontNoUnderline);
-    }
-    else if(hasFocus())
-    {
-        setPalette(paletteEdit);
-        setFont(fontNoUnderline);
-    }
-    else
-    {
-        setPalette(paletteRW);
-        setFont(fontUnderline);
-    }
+  if (isReadOnly()) {
+    setPalette(paletteRO);
+    setFont(fontNoUnderline);
+  } else if (hasFocus()) {
+    setPalette(paletteEdit);
+    setFont(fontNoUnderline);
+  } else {
+    setPalette(paletteRW);
+    setFont(fontUnderline);
+  }
 }
 
-CTinySpinBox::CTinySpinBox(QWidget* parent)
-    : QSpinBox(parent)
-{
-    // initialization has to be done deferred,
-    // as the correct palette is set after construction
-    initialized = false;
+CTinySpinBox::CTinySpinBox(QWidget* parent) : QSpinBox(parent) {
+  // initialization has to be done deferred,
+  // as the correct palette is set after construction
+  initialized = false;
 }
 
-void CTinySpinBox::stepBy(int steps)
-{
-    QSpinBox::stepBy(steps);
-    emit valueChangedByStep(value());
+void CTinySpinBox::stepBy(int steps) {
+  QSpinBox::stepBy(steps);
+  emit valueChangedByStep(value());
 }
 
-void CTinySpinBox::setReadOnly(bool r)
-{
-    QSpinBox::setReadOnly(r);
-    updateStyle();
+void CTinySpinBox::setReadOnly(bool r) {
+  QSpinBox::setReadOnly(r);
+  updateStyle();
 }
 
-void CTinySpinBox::focusInEvent(QFocusEvent* event)
-{
-    updateStyle();
-    if(!isReadOnly())
-    {
-        QTimer::singleShot(0, this, &CTinySpinBox::slotSelectAll);
-    }
+void CTinySpinBox::focusInEvent(QFocusEvent* event) {
+  updateStyle();
+  if (!isReadOnly()) {
+    QTimer::singleShot(0, this, &CTinySpinBox::slotSelectAll);
+  }
 
-    QSpinBox::focusInEvent(event);
+  QSpinBox::focusInEvent(event);
 }
 
-void CTinySpinBox::focusOutEvent(QFocusEvent* event)
-{
-    updateStyle();
-    QSpinBox::focusOutEvent(event);
+void CTinySpinBox::focusOutEvent(QFocusEvent* event) {
+  updateStyle();
+  QSpinBox::focusOutEvent(event);
 }

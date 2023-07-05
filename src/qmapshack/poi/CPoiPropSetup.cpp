@@ -16,32 +16,29 @@
 
 **********************************************************************************************/
 
+#include "poi/CPoiPropSetup.h"
+
 #include "helpers/Signals.h"
 #include "poi/CPoiDraw.h"
-#include "poi/CPoiFilePOI.h"
-#include "poi/CPoiPropSetup.h"
 #include "poi/IPoiFile.h"
 
-CPoiPropSetup::CPoiPropSetup(IPoiFile* poifile, CPoiDraw* poi)
-    : IPoiProp(poifile, poi)
-{
-    setupUi(this);
-    CPoiPropSetup::slotPropertiesChanged();
+CPoiPropSetup::CPoiPropSetup(IPoiFile* poifile, CPoiDraw* poi) : IPoiProp(poifile, poi) {
+  setupUi(this);
+  CPoiPropSetup::slotPropertiesChanged();
 
-    connect(sliderOpacity, &QSlider::valueChanged, poifile, &IPoiFile::slotSetOpacity);
-    connect(sliderOpacity, &QSlider::valueChanged, poi, &CPoiDraw::emitSigCanvasUpdate);
+  connect(sliderOpacity, &QSlider::valueChanged, poifile, &IPoiFile::slotSetOpacity);
+  connect(sliderOpacity, &QSlider::valueChanged, poi, &CPoiDraw::emitSigCanvasUpdate);
 
-    poifile->addTreeWidgetItems(treeWidgetCategories);
-    treeWidgetCategories->sortItems(eTreeColumnDisplayName, Qt::SortOrder::AscendingOrder);
-    connect(treeWidgetCategories, SIGNAL(itemChanged(QTreeWidgetItem*,int)), poifile, SLOT(slotCheckedStateChanged(QTreeWidgetItem*)));
+  poifile->addTreeWidgetItems(treeWidgetCategories);
+  treeWidgetCategories->sortItems(eTreeColumnDisplayName, Qt::SortOrder::AscendingOrder);
+  connect(treeWidgetCategories, SIGNAL(itemChanged(QTreeWidgetItem*, int)), poifile,
+          SLOT(slotCheckedStateChanged(QTreeWidgetItem*)));
 }
 
+void CPoiPropSetup::slotPropertiesChanged() {
+  X______________BlockAllSignals______________X(this);
+  sliderOpacity->setValue(poifile->getOpacity());
 
-void CPoiPropSetup::slotPropertiesChanged()
-{
-    X______________BlockAllSignals______________X(this);
-    sliderOpacity->setValue(poifile->getOpacity());
-
-    poi->emitSigCanvasUpdate();
-    X_____________UnBlockAllSignals_____________X(this);
+  poi->emitSigCanvasUpdate();
+  X_____________UnBlockAllSignals_____________X(this);
 }

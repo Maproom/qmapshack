@@ -25,6 +25,8 @@
 #include <QPoint>
 #include <QPointer>
 
+#include "canvas/CCanvas.h"
+
 class CCanvas;
 class QMouseEvent;
 class QWheelEvent;
@@ -32,55 +34,54 @@ class QPinchGesture;
 class QKeyEvent;
 class QTimer;
 class IMouse;
+class QPainter;
 
-class CMouseAdapter : public QObject
-{
-    Q_OBJECT
-public:
-    explicit CMouseAdapter(CCanvas* canvas);
-    virtual ~CMouseAdapter();
+class CMouseAdapter : public QObject {
+  Q_OBJECT
+ public:
+  explicit CMouseAdapter(CCanvas* canvas);
+  virtual ~CMouseAdapter();
 
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect);
+  void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect);
 
-    void unfocus();
+  void unfocus();
 
-    void mousePressEvent(QMouseEvent* e);
-    void mouseMoveEvent(QMouseEvent* e);
-    void mouseReleaseEvent(QMouseEvent* e);
-    void mouseDoubleClickEvent(QMouseEvent* e);
-    void wheelEvent(QWheelEvent* e);
-    void keyPressEvent(QKeyEvent* e);
-    void pinchGestureEvent(QPinchGesture* e);
-    void afterMouseLostEvent(QMouseEvent* e);
+  void mousePressEvent(QMouseEvent* e);
+  void mouseMoveEvent(QMouseEvent* e);
+  void mouseReleaseEvent(QMouseEvent* e);
+  void mouseDoubleClickEvent(QMouseEvent* e);
+  void wheelEvent(QWheelEvent* e);
+  void keyPressEvent(QKeyEvent* e);
+  void pinchGestureEvent(QPinchGesture* e);
+  void afterMouseLostEvent(QMouseEvent* e);
 
-    void startMouseMove(const QPoint& pos);
+  void startMouseMove(const QPoint& pos);
 
-    void setDelegate(IMouse* delegate);
+  void setDelegate(IMouse* delegate);
 
-    QPoint getPoint() { return lastPos; }
+  QPoint getPoint() { return lastPos; }
 
-    operator const QCursor&() const;
+  operator const QCursor&() const;
 
-    const static int clickTimeout = 400;
-    const static int longButtonPressTimeout = 800;
-    const static int minimalMouseMovingDistance = 4;
+  const static int clickTimeout = 400;
+  const static int longButtonPressTimeout = 800;
+  const static int minimalMouseMovingDistance = 4;
 
-private slots:
-    void slotLongPressTimeout();
+ private slots:
+  void slotLongPressTimeout();
 
-private:
+ private:
+  CCanvas* canvas{nullptr};
+  IMouse* delegate{nullptr};
 
-    CCanvas* canvas { nullptr };
-    IMouse* delegate { nullptr };
+  QElapsedTimer buttonPressTime;
+  QTimer* longPressTimer;
 
-    QElapsedTimer buttonPressTime;
-    QTimer* longPressTimer;
+  QPoint lastPos;
+  QPoint firstPos;
 
-    QPoint lastPos;
-    QPoint firstPos;
-
-    bool ignoreClick = false;
-    bool mouseDidMove = false;
+  bool ignoreClick = false;
+  bool mouseDidMove = false;
 };
 
-#endif // CMOUSEADAPTER_H
+#endif  // CMOUSEADAPTER_H

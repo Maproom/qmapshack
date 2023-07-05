@@ -16,58 +16,50 @@
 
 **********************************************************************************************/
 
+#include "gis/CSelDevices.h"
+
+#include <QtWidgets>
+
 #include "canvas/CCanvas.h"
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
-#include "gis/CSelDevices.h"
 #include "gis/prj/IGisProject.h"
-
-#include <QtWidgets>
 
 CSelDevices::CSelDevices(IGisProject* project, QTreeWidget* wks)
     : QDialog(wks)
 
 {
-    setupUi(this);
+  setupUi(this);
 
-    const int N = wks->topLevelItemCount();
-    for(int n = 0; n < N; n++)
-    {
-        IDevice* device = dynamic_cast<IDevice*>(wks->topLevelItem(n));
-        if(nullptr == device)
-        {
-            continue;
-        }
-
-        QListWidgetItem* item = new QListWidgetItem(listWidget);
-        item->setText(device->getName());
-        item->setData(Qt::UserRole, device->getKey());
-        item->setIcon(device->icon(CGisListWks::eColumnIcon));
-
-        IGisProject* proj = device->getProjectByKey(project->getKey());
-        item->setCheckState(nullptr == proj ? Qt::Unchecked : Qt::Checked);
+  const int N = wks->topLevelItemCount();
+  for (int n = 0; n < N; n++) {
+    IDevice* device = dynamic_cast<IDevice*>(wks->topLevelItem(n));
+    if (nullptr == device) {
+      continue;
     }
 
-    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelDevices");
+    QListWidgetItem* item = new QListWidgetItem(listWidget);
+    item->setText(device->getName());
+    item->setData(Qt::UserRole, device->getKey());
+    item->setIcon(device->icon(CGisListWks::eColumnIcon));
+
+    IGisProject* proj = device->getProjectByKey(project->getKey());
+    item->setCheckState(nullptr == proj ? Qt::Unchecked : Qt::Checked);
+  }
+
+  CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelDevices");
 }
 
-CSelDevices::~CSelDevices()
-{
-    CCanvas::restoreOverrideCursor("~CSelDevices");
-}
+CSelDevices::~CSelDevices() { CCanvas::restoreOverrideCursor("~CSelDevices"); }
 
+void CSelDevices::getSlectedDevices(QSet<QString>& keys) {
+  keys.clear();
 
-void CSelDevices::getSlectedDevices(QSet<QString>& keys)
-{
-    keys.clear();
-
-    const int N = listWidget->count();
-    for(int n = 0; n < N; n++)
-    {
-        QListWidgetItem* item = listWidget->item(n);
-        if(item->checkState() == Qt::Checked)
-        {
-            keys << item->data(Qt::UserRole).toString();
-        }
+  const int N = listWidget->count();
+  for (int n = 0; n < N; n++) {
+    QListWidgetItem* item = listWidget->item(n);
+    if (item->checkState() == Qt::Checked) {
+      keys << item->data(Qt::UserRole).toString();
     }
+  }
 }

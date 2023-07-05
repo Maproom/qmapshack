@@ -19,66 +19,61 @@
 
 #ifndef IMAPONLINE_H
 #define IMAPONLINE_H
-#include "map/IMap.h"
 #include <QElapsedTimer>
 #include <QMutex>
 #include <QQueue>
+
+#include "map/IMap.h"
 
 class CDiskCache;
 class QNetworkAccessManager;
 class QNetworkReply;
 
-class IMapOnline : public IMap
-{
-    Q_OBJECT
+class IMapOnline : public IMap {
+  Q_OBJECT
 
-    struct rawHeaderItem_t
-    {
-        QString name;
-        QString value;
-    };
-
-    QList<rawHeaderItem_t> rawHeaderItems;
-
-signals:
-    void sigQueueChanged();
-
-protected:
-    /// Mutex to control access to url queue
-    QRecursiveMutex mutex;
-    /// a queue with all tile urls to request
-    QQueue<QString> urlQueue;
-    /// the tile cache
-    CDiskCache* diskCache = nullptr;
-    /// access manager to request tiles
-    QNetworkAccessManager* accessManager = nullptr;
-    QList<QString> urlPending;
-
-
-    bool lastRequest = false;
-    QElapsedTimer timeLastUpdate;
+  struct rawHeaderItem_t {
     QString name;
+    QString value;
+  };
 
-    static bool httpsCheck(const QString& url);
+  QList<rawHeaderItem_t> rawHeaderItems;
 
-    void registerHeaderItem(const QString& name, const QString& value)
-    {
-        struct rawHeaderItem_t item;
-        item.name = name;
-        item.value = value;
-        rawHeaderItems << item;
-    }
+ signals:
+  void sigQueueChanged();
 
-    void configureCache() override;
+ protected:
+  /// Mutex to control access to url queue
+  QRecursiveMutex mutex;
+  /// a queue with all tile urls to request
+  QQueue<QString> urlQueue;
+  /// the tile cache
+  CDiskCache* diskCache = nullptr;
+  /// access manager to request tiles
+  QNetworkAccessManager* accessManager = nullptr;
+  QList<QString> urlPending;
 
-public:
-    void slotQueueChanged();
-    void slotRequestFinished(QNetworkReply* reply);
+  bool lastRequest = false;
+  QElapsedTimer timeLastUpdate;
+  QString name;
 
+  static bool httpsCheck(const QString& url);
 
-    IMapOnline(CMapDraw* parent);
-    virtual ~IMapOnline() {}
+  void registerHeaderItem(const QString& name, const QString& value) {
+    struct rawHeaderItem_t item;
+    item.name = name;
+    item.value = value;
+    rawHeaderItems << item;
+  }
+
+  void configureCache() override;
+
+ public:
+  void slotQueueChanged();
+  void slotRequestFinished(QNetworkReply* reply);
+
+  IMapOnline(CMapDraw* parent);
+  virtual ~IMapOnline() {}
 };
 
-#endif //IMAPONLINE_H
-
+#endif  // IMAPONLINE_H

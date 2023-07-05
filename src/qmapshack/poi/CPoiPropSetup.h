@@ -22,24 +22,21 @@
 #include "poi/IPoiProp.h"
 #include "ui_IPoiPropSetup.h"
 
-class CPoiPropSetup : public IPoiProp, private Ui::IPoiPropSetup
-{
-    Q_OBJECT
-public:
-    enum treeColumn_e
-    {
-        eTreeColumnCheckbox,
-        eTreeColumnDisplayName,
-    };
+class CPoiPropSetup : public IPoiProp, private Ui::IPoiPropSetup {
+  Q_OBJECT
+ public:
+  enum treeColumn_e {
+    eTreeColumnCheckbox,
+    eTreeColumnDisplayName,
+  };
 
-    CPoiPropSetup(IPoiFile* poifile, CPoiDraw* poi);
-    virtual ~CPoiPropSetup() = default;
+  CPoiPropSetup(IPoiFile* poifile, CPoiDraw* poi);
+  virtual ~CPoiPropSetup() = default;
 
-protected slots:
-    void slotPropertiesChanged() override;
+ protected slots:
+  void slotPropertiesChanged() override;
 
-private:
+ private:
 };
 
-#endif //CPOIPROPSETUP_H
-
+#endif  // CPOIPROPSETUP_H

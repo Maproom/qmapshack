@@ -19,102 +19,93 @@
 #ifndef IRTRECORD_H
 #define IRTRECORD_H
 
-#include "gis/trk/CTrackData.h"
-
 #include <QDataStream>
 #include <QFile>
 #include <QObject>
 
+#include "gis/trk/CTrackData.h"
+
 class CRtDraw;
 class QPainter;
 
-class IRtRecord : public QObject
-{
-    Q_OBJECT
-public:
-    IRtRecord(QObject* parent);
-    virtual ~IRtRecord() = default;
+class IRtRecord : public QObject {
+  Q_OBJECT
+ public:
+  IRtRecord(QObject* parent);
+  virtual ~IRtRecord() = default;
 
-    /**
-       @brief Set record file size to 0.
-     */
-    virtual void reset();
-    /**
-       @brief Set file name to record into
+  /**
+     @brief Set record file size to 0.
+   */
+  virtual void reset();
+  /**
+     @brief Set file name to record into
 
-       If the file exists this will read the file and append new data.
+     If the file exists this will read the file and append new data.
 
-       @param fn  the filename as string
+     @param fn  the filename as string
 
-       @return Return true on success.
-     */
-    virtual bool setFile(const QString& fn);
+     @return Return true on success.
+   */
+  virtual bool setFile(const QString& fn);
 
-    virtual const QString& getError() const
-    {
-        return error;
-    }
+  virtual const QString& getError() const { return error; }
 
-    /**
-       @brief Draw the record data into the draw context
+  /**
+     @brief Draw the record data into the draw context
 
-       This does nothing and you have to override it.
+     This does nothing and you have to override it.
 
-       @param p             the paint device
-       @param viewport      the visible viewport
-       @param blockedAreas  a list of blocked areas
-       @param rt            the draw context
-     */
-    virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt);
+     @param p             the paint device
+     @param viewport      the visible viewport
+     @param blockedAreas  a list of blocked areas
+     @param rt            the draw context
+   */
+  virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt);
 
-    virtual const QVector<CTrackData::trkpt_t>& getTrack() const
-    {
-        return track;
-    }
+  virtual const QVector<CTrackData::trkpt_t>& getTrack() const { return track; }
 
-protected:
-    /**
-       @brief Write block of data to file
+ protected:
+  /**
+     @brief Write block of data to file
 
-       A crc16 is calculated and stored together with the byte array into the file.
+     A crc16 is calculated and stored together with the byte array into the file.
 
-       @param data  the byte array to store
+     @param data  the byte array to store
 
-       @return Return true on success.
-     */
-    virtual bool writeEntry(const QByteArray& data);
+     @return Return true on success.
+   */
+  virtual bool writeEntry(const QByteArray& data);
 
-    /**
-       @brief A block data has been read and needs further processing
+  /**
+     @brief A block data has been read and needs further processing
 
-       If a filename is set and the file exists, the data entries in the file are read
-       one by one and passed to this API. If the method returns with false the file will
-       be truncated to the last valid entry.
+     If a filename is set and the file exists, the data entries in the file are read
+     one by one and passed to this API. If the method returns with false the file will
+     be truncated to the last valid entry.
 
-       @param data  the byte array with the data entry.
+     @param data  the byte array with the data entry.
 
-       @return Return true on success.
-     */
-    virtual bool readEntry(QByteArray& data);
+     @return Return true on success.
+   */
+  virtual bool readEntry(QByteArray& data);
 
-protected:
-    QVector<CTrackData::trkpt_t> track;
+ protected:
+  QVector<CTrackData::trkpt_t> track;
 
-private:
+ private:
+  /**
+     @brief Reads file content entry by entry and tests for the checksum
 
-    /**
-       @brief Reads file content entry by entry and tests for the checksum
+     @param filename  the file name to open and read.
 
-       @param filename  the file name to open and read.
+     @return Return true on success.
+   */
+  virtual bool readFile(const QString& filename);
 
-       @return Return true on success.
-     */
-    virtual bool readFile(const QString& filename);
+  QString filename;
 
-    QString filename;
-
-    QString error;
+  QString error;
 };
 
-#endif //IRTRECORD_H
-
+#endif  // IRTRECORD_H

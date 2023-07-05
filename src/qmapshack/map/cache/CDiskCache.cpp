@@ -17,186 +17,151 @@
 **********************************************************************************************/
 
 #include "CDiskCache.h"
-#include "map/CMapDraw.h"
-#include "version.h"
 
 #include <QtWidgets>
 
+#include "map/CMapDraw.h"
+#include "version.h"
+
 CDiskCache::CDiskCache(const QString& path, qint32 maxSizeMB, qint32 expirationDays, QObject* parent)
-    : QObject(parent)
-    , dir(path)
-    , maxSizeMB(maxSizeMB)
-    , expirationDays(expirationDays)
-{
-    dummy.fill(Qt::transparent);
+    : QObject(parent), dir(path), maxSizeMB(maxSizeMB), expirationDays(expirationDays) {
+  dummy.fill(Qt::transparent);
 
-    dir.mkpath(dir.path());
+  dir.mkpath(dir.path());
 
-    QFile IDfile(dir.absoluteFilePath("QMS_cache"));
-    if(!IDfile.exists())
-    {
-        if(IDfile.open(QIODevice::ReadWrite))
-        {
-            QTextStream(&IDfile) << "QMapShack " << VER_STR;
-        }
+  QFile IDfile(dir.absoluteFilePath("QMS_cache"));
+  if (!IDfile.exists()) {
+    if (IDfile.open(QIODevice::ReadWrite)) {
+      QTextStream(&IDfile) << "QMapShack " << VER_STR;
     }
+  }
 
-    const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
-    for(const QFileInfo& fileinfo : files)
-    {
-        QString hash = fileinfo.baseName();
-        table[hash] = fileinfo.fileName();
-    }
-
-    timer = new QTimer(this);
-    timer->setSingleShot(false);
-    timer->start(20000);
-    connect(timer, &QTimer::timeout, this, &CDiskCache::slotCleanup);
-}
-
-void CDiskCache::store(const QString& key, QImage& img)
-{
-    QMutexLocker lock(&mutex);
-
-    QCryptographicHash md5(QCryptographicHash::Md5);
-    md5.addData(key.toLatin1());
-
-    QString hash = md5.result().toHex();
-    QString filename = QString("%1.png").arg(hash);
-
-    if(!img.isNull())
-    {
-        img.save(dir.absoluteFilePath(filename));
-        table[hash] = filename;
-        cache[hash] = img;
-    }
-    else
-    {
-        cache[hash] = dummy;
-    }
-}
-
-void CDiskCache::restore(const QString& key, QImage& img)
-{
-    QMutexLocker lock(&mutex);
-
-    QCryptographicHash md5(QCryptographicHash::Md5);
-    md5.addData(key.toLatin1());
-
-    QString hash = md5.result().toHex();
-
-    if(cache.contains(hash))
-    {
-        img = cache[hash];
-    }
-    else if(table.contains(hash))
-    {
-        img.load(dir.absoluteFilePath(table[hash]));
-        if(!cache.contains(hash))
-        {
-            cache[hash] = img;
-        }
-    }
-    else
-    {
-        img = QImage();
-    }
-}
-
-bool CDiskCache::contains(const QString& key) const
-{
-    QMutexLocker lock(&mutex);
-
-    QCryptographicHash md5(QCryptographicHash::Md5);
-    md5.addData(key.toLatin1());
-
-    QString hash = md5.result().toHex();
-    return table.contains(hash) || cache.contains(hash);
-}
-
-void CDiskCache::removeCacheFile(const QFileInfo& fileinfo)
-{
+  const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
+  for (const QFileInfo& fileinfo : files) {
     QString hash = fileinfo.baseName();
-    table.remove(hash);
-    cache.remove(hash);
-    QFile::remove(fileinfo.absoluteFilePath());
+    table[hash] = fileinfo.fileName();
+  }
+
+  timer = new QTimer(this);
+  timer->setSingleShot(false);
+  timer->start(20000);
+  connect(timer, &QTimer::timeout, this, &CDiskCache::slotCleanup);
 }
 
-void CDiskCache::slotCleanup()
-{
-    QMutexLocker lock(&mutex);
+void CDiskCache::store(const QString& key, QImage& img) {
+  QMutexLocker lock(&mutex);
 
-    const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
-    QDateTime now = QDateTime::currentDateTime();
-    qint32 maxSizeBytes = maxSizeMB * 1024 * 1024;
-    qint32 tmpSize = 0;
-    // expire old files and calculate cache size
-    for(const QFileInfo& fileinfo : files)
-    {
-        if(fileinfo.lastModified().daysTo(now) > expirationDays)
-        {
-            removeCacheFile(fileinfo);
-            qDebug() << "remove tile" << fileinfo.lastModified() << fileinfo.absoluteFilePath() << "(reason: expired)";
-        }
-        else
-        {
-            tmpSize += fileinfo.size();
-        }
-    }
+  QCryptographicHash md5(QCryptographicHash::Md5);
+  md5.addData(key.toLatin1());
 
-    if(tmpSize > maxSizeBytes)
-    {
-        const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files, QDir::Time | QDir::Reversed);
-        // if cache is still too large remove oldest files
-        for(const QFileInfo& fileinfo : files)
-        {
-            removeCacheFile(fileinfo);
-            qDebug() << "remove tile" << fileinfo.lastModified() << fileinfo.absoluteFilePath() << "(reason: cache size limit)";
+  QString hash = md5.result().toHex();
+  QString filename = QString("%1.png").arg(hash);
 
-            tmpSize -= fileinfo.size();
-
-            if(tmpSize < maxSizeBytes)
-            {
-                break;
-            }
-        }
-    }
+  if (!img.isNull()) {
+    img.save(dir.absoluteFilePath(filename));
+    table[hash] = filename;
+    cache[hash] = img;
+  } else {
+    cache[hash] = dummy;
+  }
 }
 
+void CDiskCache::restore(const QString& key, QImage& img) {
+  QMutexLocker lock(&mutex);
 
-void CDiskCache::cleanupRemovedMaps(const QSet<QString>& maps)
-{
-    QString cacheRoot = CMapDraw::getCacheRoot();
+  QCryptographicHash md5(QCryptographicHash::Md5);
+  md5.addData(key.toLatin1());
 
-    if(cacheRoot.isEmpty())
-    {
-        qWarning() << "cacheRoot is empty, that should not happen at all";
-        return;
+  QString hash = md5.result().toHex();
+
+  if (cache.contains(hash)) {
+    img = cache[hash];
+  } else if (table.contains(hash)) {
+    img.load(dir.absoluteFilePath(table[hash]));
+    if (!cache.contains(hash)) {
+      cache[hash] = img;
     }
+  } else {
+    img = QImage();
+  }
+}
 
-    const QStringList& dirs = QDir(cacheRoot).entryList(QStringList("*"), QDir::Dirs | QDir::NoDotAndDotDot);
+bool CDiskCache::contains(const QString& key) const {
+  QMutexLocker lock(&mutex);
 
-    for(const QString& dir : dirs)
-    {
-        if(!maps.contains(dir))
-        {
-            QDir qdir(cacheRoot + "/" + dir);
+  QCryptographicHash md5(QCryptographicHash::Md5);
+  md5.addData(key.toLatin1());
 
-            if(QFile(qdir.absoluteFilePath("QMS_cache")).exists())
-            {
-                qDebug() << "remove cache directory" << dir << "(reason: map no longer exists)";
-                const QStringList& files = qdir.entryList(QDir::Files);
-                for(const QString& file : files)
-                {
-                    qdir.remove(file);
-                }
-                qdir.cdUp();
-                qdir.rmdir(dir);
-            }
-            else
-            {
-                qDebug() << "ignoring " << dir << " (reason: no QMS cache)";
-            }
+  QString hash = md5.result().toHex();
+  return table.contains(hash) || cache.contains(hash);
+}
+
+void CDiskCache::removeCacheFile(const QFileInfo& fileinfo) {
+  QString hash = fileinfo.baseName();
+  table.remove(hash);
+  cache.remove(hash);
+  QFile::remove(fileinfo.absoluteFilePath());
+}
+
+void CDiskCache::slotCleanup() {
+  QMutexLocker lock(&mutex);
+
+  const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
+  QDateTime now = QDateTime::currentDateTime();
+  qint32 maxSizeBytes = maxSizeMB * 1024 * 1024;
+  qint32 tmpSize = 0;
+  // expire old files and calculate cache size
+  for (const QFileInfo& fileinfo : files) {
+    if (fileinfo.lastModified().daysTo(now) > expirationDays) {
+      removeCacheFile(fileinfo);
+      qDebug() << "remove tile" << fileinfo.lastModified() << fileinfo.absoluteFilePath() << "(reason: expired)";
+    } else {
+      tmpSize += fileinfo.size();
+    }
+  }
+
+  if (tmpSize > maxSizeBytes) {
+    const QFileInfoList& files = dir.entryInfoList(QStringList("*.png"), QDir::Files, QDir::Time | QDir::Reversed);
+    // if cache is still too large remove oldest files
+    for (const QFileInfo& fileinfo : files) {
+      removeCacheFile(fileinfo);
+      qDebug() << "remove tile" << fileinfo.lastModified() << fileinfo.absoluteFilePath()
+               << "(reason: cache size limit)";
+
+      tmpSize -= fileinfo.size();
+
+      if (tmpSize < maxSizeBytes) {
+        break;
+      }
+    }
+  }
+}
+
+void CDiskCache::cleanupRemovedMaps(const QSet<QString>& maps) {
+  QString cacheRoot = CMapDraw::getCacheRoot();
+
+  if (cacheRoot.isEmpty()) {
+    qWarning() << "cacheRoot is empty, that should not happen at all";
+    return;
+  }
+
+  const QStringList& dirs = QDir(cacheRoot).entryList(QStringList("*"), QDir::Dirs | QDir::NoDotAndDotDot);
+
+  for (const QString& dir : dirs) {
+    if (!maps.contains(dir)) {
+      QDir qdir(cacheRoot + "/" + dir);
+
+      if (QFile(qdir.absoluteFilePath("QMS_cache")).exists()) {
+        qDebug() << "remove cache directory" << dir << "(reason: map no longer exists)";
+        const QStringList& files = qdir.entryList(QDir::Files);
+        for (const QString& file : files) {
+          qdir.remove(file);
         }
+        qdir.cdUp();
+        qdir.rmdir(dir);
+      } else {
+        qDebug() << "ignoring " << dir << " (reason: no QMS cache)";
+      }
     }
+  }
 }

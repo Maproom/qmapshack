@@ -16,54 +16,48 @@
 
 **********************************************************************************************/
 
-#include "contributors.h"
 #include "CAbout.h"
-#include "gis/proj_x.h"
-#include "version.h"
 
 #include <gdal.h>
-#include <QtWidgets>
+#include <proj.h>
 #include <routino.h>
 
-CAbout::CAbout(QWidget* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
+#include <QtWidgets>
+
+#include "contributors.h"
+#include "version.h"
+
+CAbout::CAbout(QWidget* parent) : QDialog(parent) {
+  setupUi(this);
 
 #ifdef DEVELOPMENT
-    labelVersion->setText(VER_STR ".develop");
+  labelVersion->setText(VER_STR ".develop");
 #else
-    labelVersion->setText(VER_STR);
+  labelVersion->setText(VER_STR);
 #endif
 
-    labelQtVersion->setText(qVersion());
-    labelGDALVersion->setText(GDALVersionInfo("--version"));
-    labelProj4Version->setText(proj_info().release);
-    if(Routino_CheckAPIVersion() != ROUTINO_ERROR_NONE)
-    {
-        labelRoutinoVersion->setText(tr("%1 (API V%2, expected V%3)").arg(Routino_Version).arg(ROUTINO_API_VERSION).arg(Routino_APIVersion));
-    }
-    else
-    {
-        labelRoutinoVersion->setText(tr("%1 (API V%2)").arg(Routino_Version).arg(Routino_APIVersion));
-    }
+  labelQtVersion->setText(qVersion());
+  labelGDALVersion->setText(GDALVersionInfo("--version"));
+  labelProj4Version->setText(proj_info().release);
+  if (Routino_CheckAPIVersion() != ROUTINO_ERROR_NONE) {
+    labelRoutinoVersion->setText(
+        tr("%1 (API V%2, expected V%3)").arg(Routino_Version).arg(ROUTINO_API_VERSION).arg(Routino_APIVersion));
+  } else {
+    labelRoutinoVersion->setText(tr("%1 (API V%2)").arg(Routino_Version).arg(Routino_APIVersion));
+  }
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-    #if defined (HAVE_DBUS)
-    labelNoDBus->setText("");
-    #else
-    labelNoDBus->setText(tr("(no DBUS: device detection and handling disabled)"));
-    #endif
+#if defined(HAVE_DBUS)
+  labelNoDBus->setText("");
+#else
+  labelNoDBus->setText(tr("(no DBUS: device detection and handling disabled)"));
+#endif
 #endif
 
-    const QString& missing = tr(
-        "If you think your name is missing you probably have forgotten "
-        "to add your copyright in the source files."
-        );
-    labelContributors->setText(QString(contributors) + "\n\n" + missing);
+  const QString& missing =
+      tr("If you think your name is missing you probably have forgotten "
+         "to add your copyright in the source files.");
+  labelContributors->setText(QString(contributors) + "\n\n" + missing);
 }
 
-CAbout::~CAbout()
-{
-}
-
+CAbout::~CAbout() {}

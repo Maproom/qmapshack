@@ -23,46 +23,41 @@
 
 class CPoiFileItem;
 
-class CPoiTreeWidget : public QTreeWidget
-{
-    Q_OBJECT
-public:
-    CPoiTreeWidget(QWidget* parent) : QTreeWidget(parent)
-    {
-    }
+class CPoiTreeWidget : public QTreeWidget {
+  Q_OBJECT
+ public:
+  CPoiTreeWidget(QWidget* parent) : QTreeWidget(parent) {}
 
-signals:
-    void sigChanged();
+ signals:
+  void sigChanged();
 };
 
 #include "ui_IPoiList.h"
 
-class CPoiList : public QWidget, private Ui::IPoiList
-{
-    Q_OBJECT
-public:
-    CPoiList(QWidget* parent);
-    virtual ~CPoiList() = default;
+class CPoiList : public QWidget, private Ui::IPoiList {
+  Q_OBJECT
+ public:
+  CPoiList(QWidget* parent);
+  virtual ~CPoiList() = default;
 
-    void clear();
-    int count();
-    CPoiFileItem* item(int i);
-    operator QTreeWidget*(){return treeWidget;}
+  void clear();
+  int count();
+  CPoiFileItem* item(int i);
+  operator QTreeWidget*() { return treeWidget; }
 
-    void updateHelpText();
-    void sort();
+  void updateHelpText();
+  void sort();
 
-signals:
-    void sigChanged();
+ signals:
+  void sigChanged();
 
-private slots:
-    void slotActivate();
-    void slotReloadPoi();
-    void slotContextMenu(const QPoint& point);
+ private slots:
+  void slotActivate();
+  void slotReloadPoi();
+  void slotContextMenu(const QPoint& point);
 
-private:
-    QMenu* menu;
+ private:
+  QMenu* menu;
 };
 
-#endif //CPOILIST_H
-
+#endif  // CPOILIST_H

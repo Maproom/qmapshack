@@ -20,36 +20,36 @@
 #define CAPP_H
 
 #include <gdal.h>
+
 #include <QtCore>
 
 class GDALColorTable;
 class GDALDataset;
 
-class CApp
-{
-    Q_DECLARE_TR_FUNCTIONS(CApp)
-public:
-    CApp(qint32 ncolors, const QString& pctFilename, const QString& sctFilename, const QString& srcFilename, const QString& tarFilename);
-    virtual ~CApp() = default;
+class CApp {
+  Q_DECLARE_TR_FUNCTIONS(CApp)
+ public:
+  CApp(qint32 ncolors, const QString& pctFilename, const QString& sctFilename, const QString& srcFilename,
+       const QString& tarFilename);
+  virtual ~CApp() = default;
 
-    qint32 exec();
+  qint32 exec();
 
-private:
-    static GDALColorTable* createColorTable(qint32 ncolors, const QString& pctFilename, GDALDataset* dataset);
-    static void saveColorTable(GDALColorTable* ct, QString& sctFilename);
-    static void ditherMap(GDALDataset* dsSrc, const QString& tarFilename, GDALColorTable* ct);
+ private:
+  static GDALColorTable* createColorTable(qint32 ncolors, const QString& pctFilename, GDALDataset* dataset);
+  static void saveColorTable(GDALColorTable* ct, QString& sctFilename);
+  static void ditherMap(GDALDataset* dsSrc, const QString& tarFilename, GDALColorTable* ct);
 
-    qint32 ncolors = 0;
-    QString pctFilename;
-    QString sctFilename;
-    QString srcFilename;
-    QString tarFilename;
+  qint32 ncolors = 0;
+  QString pctFilename;
+  QString sctFilename;
+  QString srcFilename;
+  QString tarFilename;
 
-    static const GDALColorEntry noColor;
+  static const GDALColorEntry noColor;
 };
 
 void printStdoutQString(const QString& str);
 void printStderrQString(const QString& str);
 
-#endif //CAPP_H
-
+#endif  // CAPP_H

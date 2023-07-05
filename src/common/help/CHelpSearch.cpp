@@ -23,30 +23,26 @@
 #include <QtWidgets>
 
 CHelpSearch::CHelpSearch(QHelpEngine* engine, QWidget* parent)
-    : QWidget(parent)
-    , searchEngine(engine->searchEngine())
-    , query(searchEngine->queryWidget())
-    , result(searchEngine->resultWidget())
-{
-    labelSearch = new QLabel(tr("Search:"), this);
+    : QWidget(parent),
+      searchEngine(engine->searchEngine()),
+      query(searchEngine->queryWidget()),
+      result(searchEngine->resultWidget()) {
+  labelSearch = new QLabel(tr("Search:"), this);
 
-    QVBoxLayout* l = new QVBoxLayout(this);
-    l->addWidget(labelSearch);
-    l->addWidget(query);
-    l->addWidget(result);
+  QVBoxLayout* l = new QVBoxLayout(this);
+  l->addWidget(labelSearch);
+  l->addWidget(query);
+  l->addWidget(result);
 
-    connect(searchEngine, &QHelpSearchEngine::indexingStarted, this, [](){qDebug() << "indexing started...";});
-    connect(searchEngine, &QHelpSearchEngine::indexingFinished, this, [](){qDebug() << "indexing finished...";});
+  connect(searchEngine, &QHelpSearchEngine::indexingStarted, this, []() { qDebug() << "indexing started..."; });
+  connect(searchEngine, &QHelpSearchEngine::indexingFinished, this, []() { qDebug() << "indexing finished..."; });
 
-    connect(searchEngine, &QHelpSearchEngine::searchingStarted, this, [](){qDebug() << "searching started...";});
-    connect(searchEngine, &QHelpSearchEngine::searchingFinished, this, [](){qDebug() << "searching finished...";});
+  connect(searchEngine, &QHelpSearchEngine::searchingStarted, this, []() { qDebug() << "searching started..."; });
+  connect(searchEngine, &QHelpSearchEngine::searchingFinished, this, []() { qDebug() << "searching finished..."; });
 
-    searchEngine->reindexDocumentation();
+  searchEngine->reindexDocumentation();
 
-    connect(query, &QHelpSearchQueryWidget::search, this, &CHelpSearch::slotSearch);
+  connect(query, &QHelpSearchQueryWidget::search, this, &CHelpSearch::slotSearch);
 }
 
-void CHelpSearch::slotSearch()
-{
-    searchEngine->search(query->searchInput());
-}
+void CHelpSearch::slotSearch() { searchEngine->search(query->searchInput()); }

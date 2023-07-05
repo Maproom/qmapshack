@@ -19,21 +19,19 @@
 #ifndef CAPPSETUPLINUX_H
 #define CAPPSETUPLINUX_H
 
-#include "setup/IAppSetup.h"
-
 #include <QtCore>
 
-class CAppSetupLinux : public IAppSetup
-{
-public:
-    void initQMapShack() override;
-    QString routinoPath(QString xmlFile) override;
-    QString defaultCachePath() override;
-    QString userDataPath(QString subdir = 0) override;
-    QString logDir() override;
-    QString findExecutable(const QString& name) override { return QStandardPaths::findExecutable(name); }
-    QString helpFile() override;
+#include "setup/IAppSetup.h"
+
+class CAppSetupLinux : public IAppSetup {
+ public:
+  void initQMapShack() override;
+  QString routinoPath(QString xmlFile) override;
+  QString defaultCachePath() override;
+  QString userDataPath(QString subdir = 0) override;
+  QString logDir() override;
+  QString findExecutable(const QString& name) override { return QStandardPaths::findExecutable(name); }
+  QString helpFile() override;
 };
 
-
-#endif // CAPPSETUPLINUX_H
+#endif  // CAPPSETUPLINUX_H

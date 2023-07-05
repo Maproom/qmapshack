@@ -16,140 +16,111 @@
 
 **********************************************************************************************/
 
+#include "gis/fit/decoder/CFitFieldBuilder.h"
+
 #include "gis/fit/decoder/CFitByteDataTransformer.h"
 #include "gis/fit/decoder/CFitField.h"
-#include "gis/fit/decoder/CFitFieldBuilder.h"
 #include "gis/fit/decoder/CFitFieldDefinition.h"
 #include "gis/fit/decoder/CFitMessage.h"
 #include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitFieldProfile.h"
-#include "gis/fit/defs/CFitProfile.h"
 #include "gis/fit/defs/CFitProfileLookup.h"
 
-
-void CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(CFitMessage& mesg)
-{
-    const QList<CFitField>& fields = mesg.getFields();
-    for (const CFitField& field : fields)
-    {
-        CFitFieldBuilder::evaluateFieldProfile(mesg, field);
-    }
-    for (const CFitField& field : fields)
-    {
-        CFitFieldBuilder::expandComponents(mesg, field);
-    }
+void CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(CFitMessage& mesg) {
+  const QList<CFitField>& fields = mesg.getFields();
+  for (const CFitField& field : fields) {
+    CFitFieldBuilder::evaluateFieldProfile(mesg, field);
+  }
+  for (const CFitField& field : fields) {
+    CFitFieldBuilder::expandComponents(mesg, field);
+  }
 }
 
-CFitField CFitFieldBuilder::buildField(const CFitFieldDefinition& def, quint8* fieldData, const CFitMessage& message)
-{
-    const CFitFieldProfile* fieldProfile = CFitProfileLookup::getFieldForProfile(message.getGlobalMesgNr(), def.getDefNr());
-    return buildField(*fieldProfile, def, fieldData, message);
+CFitField CFitFieldBuilder::buildField(const CFitFieldDefinition& def, quint8* fieldData, const CFitMessage& message) {
+  const CFitFieldProfile* fieldProfile =
+      CFitProfileLookup::getFieldForProfile(message.getGlobalMesgNr(), def.getDefNr());
+  return buildField(*fieldProfile, def, fieldData, message);
 }
 
-CFitField CFitFieldBuilder::buildField(const CFitFieldProfile& fieldProfile, const CFitFieldDefinition& def, quint8* fieldData, const CFitMessage& /*message*/)
-{
-    CFitByteDataTransformer::swapFieldData(def, fieldData);
-    const CFitBaseType& baseType = def.getBaseType();
+CFitField CFitFieldBuilder::buildField(const CFitFieldProfile& fieldProfile, const CFitFieldDefinition& def,
+                                       quint8* fieldData, const CFitMessage& /*message*/) {
+  CFitByteDataTransformer::swapFieldData(def, fieldData);
+  const CFitBaseType& baseType = def.getBaseType();
 
-    QVariant value;
-    if (baseType.isSignedInt())
-    {
-        value = QVariant(CFitByteDataTransformer::getSIntValue(baseType, fieldData));
-    }
-    else if (baseType.isUnsignedInt())
-    {
-        value = QVariant(CFitByteDataTransformer::getUIntValue(baseType, fieldData));
-    }
-    else if (baseType.isFloat())
-    {
-        value = QVariant(CFitByteDataTransformer::getFloatValue(baseType, fieldData));
-    }
-    else if (baseType.isString())
-    {
-        value = QVariant(CFitByteDataTransformer::getString(fieldData, def.getSize()));
-    }
-    else if (baseType.isByte())
-    {
-        value = QVariant(CFitByteDataTransformer::getBytes(fieldData, def.getSize()));
-    }
-    else
-    {
-        // should not be possible
-        throw tr("FIT decoding error: unknown base type %1.").arg(baseType.nr());
-    }
-    bool valid = isValueValid(def, fieldData);
-    return CFitField(def, &fieldProfile, value, valid);
+  QVariant value;
+  if (baseType.isSignedInt()) {
+    value = QVariant(CFitByteDataTransformer::getSIntValue(baseType, fieldData));
+  } else if (baseType.isUnsignedInt()) {
+    value = QVariant(CFitByteDataTransformer::getUIntValue(baseType, fieldData));
+  } else if (baseType.isFloat()) {
+    value = QVariant(CFitByteDataTransformer::getFloatValue(baseType, fieldData));
+  } else if (baseType.isString()) {
+    value = QVariant(CFitByteDataTransformer::getString(fieldData, def.getSize()));
+  } else if (baseType.isByte()) {
+    value = QVariant(CFitByteDataTransformer::getBytes(fieldData, def.getSize()));
+  } else {
+    // should not be possible
+    throw tr("FIT decoding error: unknown base type %1.").arg(baseType.nr());
+  }
+  bool valid = isValueValid(def, fieldData);
+  return CFitField(def, &fieldProfile, value, valid);
 }
 
+bool CFitFieldBuilder::isValueValid(const CFitFieldDefinition& def, quint8* fieldData) {
+  const CFitBaseType& baseType = def.getBaseType();
+  const quint8* invalidBytes = baseType.invalidValueBytes();
+  quint8 invalidCount = 0;
 
-bool CFitFieldBuilder::isValueValid(const CFitFieldDefinition& def, quint8* fieldData)
-{
-    const CFitBaseType& baseType = def.getBaseType();
-    const quint8* invalidBytes = baseType.invalidValueBytes();
-    quint8 invalidCount = 0;
-
-    if(!baseType.isSizeUndefined() && def.getSize() != baseType.size())
-    {
-        return false;
+  if (!baseType.isSizeUndefined() && def.getSize() != baseType.size()) {
+    return false;
+  }
+  for (quint8 i = 0; i < def.getSize(); i++) {
+    quint8 b = baseType.isSizeUndefined() ? invalidBytes[0] : invalidBytes[i];
+    if (fieldData[i] == b) {
+      invalidCount++;
     }
-    for (quint8 i = 0; i < def.getSize(); i++)
-    {
-        quint8 b = baseType.isSizeUndefined() ? invalidBytes[0] : invalidBytes[i];
-        if (fieldData[i] == b)
-        {
-            invalidCount++;
+  }
+  return invalidCount < def.getSize();
+}
+
+void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg, const CFitField& field) {
+  const CFitFieldProfile& fieldProfile = field.profile();
+  // case subfield
+  if (fieldProfile.hasSubfields()) {
+    for (const CFitSubfieldProfile* subfieldProfile : fieldProfile.getSubfields()) {
+      // the referenced field is for all subfields the same
+      const QList<CFitField>& fields = mesg.getFields();
+      for (const CFitField& referencedField : fields) {
+        if (referencedField.getFieldDefNr() == subfieldProfile->getReferencedFieldDefNr() &&
+            referencedField.getValue().toUInt() == subfieldProfile->getReferencedFieldValue()) {
+          // the value of the referenced field matches with the field profile reference-value
+          mesg.updateFieldProfile(field.getFieldDefNr(), subfieldProfile);
         }
+      }
     }
-    return invalidCount < def.getSize();
+  }
 }
 
-void CFitFieldBuilder::evaluateFieldProfile(CFitMessage& mesg, const CFitField& field)
-{
-    const CFitFieldProfile& fieldProfile = field.profile();
-    // case subfield
-    if (fieldProfile.hasSubfields())
-    {
-        for (const CFitSubfieldProfile* subfieldProfile : fieldProfile.getSubfields())
-        {
-            // the referenced field is for all subfields the same
-            const QList<CFitField>& fields = mesg.getFields();
-            for (const CFitField& referencedField : fields)
-            {
-                if (referencedField.getFieldDefNr() == subfieldProfile->getReferencedFieldDefNr() &&
-                    referencedField.getValue().toUInt() == subfieldProfile->getReferencedFieldValue())
-                {
-                    // the value of the referenced field matches with the field profile reference-value
-                    mesg.updateFieldProfile(field.getFieldDefNr(), subfieldProfile);
-                }
-            }
-        }
+void CFitFieldBuilder::expandComponents(CFitMessage& mesg, const CFitField& field) {
+  // TODO accumulated fields are not implemented (no need so far)
+  const CFitFieldProfile& fieldProfile = field.profile();
+  // case component
+  if (fieldProfile.hasComponents()) {
+    int offset = 0;
+    const QList<CFitComponentfieldProfile*>& components = fieldProfile.getComponents();
+    for (const CFitComponentfieldProfile* compProfile : components) {
+      if (field.getBaseType().isSignedInt()) {
+        qint32 value = (field.getValue().toInt() >> offset) & compProfile->getBitmask();
+        CFitField compField =
+            CFitField(field.getGlobalMesgNr(), compProfile->getFieldDefNum(), compProfile, QVariant(value), true);
+        mesg.addField(compField);
+      } else {
+        quint32 value = (field.getValue().toUInt() >> offset) & compProfile->getBitmask();
+        CFitField compField =
+            CFitField(field.getGlobalMesgNr(), compProfile->getFieldDefNum(), compProfile, QVariant(value), true);
+        mesg.addField(compField);
+      }
+      offset += compProfile->getBits();
     }
-}
-
-void CFitFieldBuilder::expandComponents(CFitMessage& mesg, const CFitField& field)
-{
-    // TODO accumulated fields are not implemented (no need so far)
-    const CFitFieldProfile& fieldProfile = field.profile();
-    // case component
-    if (fieldProfile.hasComponents())
-    {
-        int offset = 0;
-        const QList<CFitComponentfieldProfile*>& components = fieldProfile.getComponents();
-        for (const CFitComponentfieldProfile* compProfile : components)
-        {
-            if (field.getBaseType().isSignedInt())
-            {
-                qint32 value = (field.getValue().toInt() >> offset) & compProfile->getBitmask();
-                CFitField compField = CFitField(field.getGlobalMesgNr(), compProfile->getFieldDefNum(), compProfile, QVariant(value), true);
-                mesg.addField(compField);
-            }
-            else
-            {
-                quint32 value = (field.getValue().toUInt() >> offset) & compProfile->getBitmask();
-                CFitField compField = CFitField(field.getGlobalMesgNr(), compProfile->getFieldDefNum(), compProfile, QVariant(value), true);
-                mesg.addField(compField);
-            }
-            offset += compProfile->getBits();
-        }
-    }
+  }
 }

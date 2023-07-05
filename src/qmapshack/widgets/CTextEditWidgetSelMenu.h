@@ -16,21 +16,18 @@
 
 **********************************************************************************************/
 
-
 #ifndef CTEXTEDITWIDGETCONTEXTMENU_H
 #define CTEXTEDITWIDGETCONTEXTMENU_H
 
-#include "ui_ITextEditWidgetSelMenu.h"
 #include <QWindow>
 
-class CTextEditWidgetSelMenu : public QWidget, private Ui::ITextEditWidgetSelMenu
-{
-    Q_OBJECT
-public:
-    CTextEditWidgetSelMenu(QWidget* parent,
-                           QAction* actionTextBold, QAction* actionTextItalic, QAction* actionTextUnderline,
-                           QAction* actionCut, QAction* actionCopy, QAction* actionPaste
-                           );
-    virtual ~CTextEditWidgetSelMenu() {}
+#include "ui_ITextEditWidgetSelMenu.h"
+
+class CTextEditWidgetSelMenu : public QWidget, private Ui::ITextEditWidgetSelMenu {
+  Q_OBJECT
+ public:
+  CTextEditWidgetSelMenu(QWidget* parent, QAction* actionTextBold, QAction* actionTextItalic,
+                         QAction* actionTextUnderline, QAction* actionCut, QAction* actionCopy, QAction* actionPaste);
+  virtual ~CTextEditWidgetSelMenu() {}
 };
-#endif // CTEXTEDITWIDGETCONTEXTMENU_H
+#endif  // CTEXTEDITWIDGETCONTEXTMENU_H

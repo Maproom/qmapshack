@@ -16,30 +16,25 @@
 
 **********************************************************************************************/
 
-
 #include "CTextEditWidgetSelMenu.h"
-#include "helpers/Signals.h"
 
 #include <QtWidgets>
 
-CTextEditWidgetSelMenu::CTextEditWidgetSelMenu(QWidget* parent,
-                                               QAction* actionTextBold, QAction* actionTextItalic, QAction* actionTextUnderline,
-                                               QAction* actionCut, QAction* actionCopy, QAction* actionPaste
-                                               )
-    : QWidget(parent, Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint)
-{
-    setupUi(this);
+CTextEditWidgetSelMenu::CTextEditWidgetSelMenu(QWidget* parent, QAction* actionTextBold, QAction* actionTextItalic,
+                                               QAction* actionTextUnderline, QAction* actionCut, QAction* actionCopy,
+                                               QAction* actionPaste)
+    : QWidget(parent, Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint) {
+  setupUi(this);
 
-    toolBold->setDefaultAction(actionTextBold);
-    toolItalic->setDefaultAction(actionTextItalic);
-    toolUnder->setDefaultAction(actionTextUnderline);
+  toolBold->setDefaultAction(actionTextBold);
+  toolItalic->setDefaultAction(actionTextItalic);
+  toolUnder->setDefaultAction(actionTextUnderline);
 
-    toolCut->setDefaultAction(actionCut);
-    toolCopy->setDefaultAction(actionCopy);
-    toolPaste->setDefaultAction(actionPaste);
+  toolCut->setDefaultAction(actionCut);
+  toolCopy->setDefaultAction(actionCopy);
+  toolPaste->setDefaultAction(actionPaste);
 
-    QRect geo = childrenRect();
-    geo.adjust(0, 0, 0, 1);
-    setGeometry(geo);
+  QRect geo = childrenRect();
+  geo.adjust(0, 0, 0, 1);
+  setGeometry(geo);
 }
-

@@ -16,51 +16,44 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisListWks.h"
 #include "gis/db/CLostFoundProject.h"
-#include "gis/db/macros.h"
-#include "gis/ovl/CGisItemOvlArea.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/wpt/CGisItemWpt.h"
 
 #include <QtSql>
 #include <QtWidgets>
 
+#include "gis/CGisListWks.h"
+#include "gis/db/macros.h"
 
-CLostFoundProject::CLostFoundProject(const QString& dbName, CGisListWks* parent)
-    : CDBProject(parent)
-{
-    type = eTypeLostFound;
-    db = QSqlDatabase::database(dbName);
-    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/DeleteMultiple.png"));
+CLostFoundProject::CLostFoundProject(const QString& dbName, CGisListWks* parent) : CDBProject(parent) {
+  type = eTypeLostFound;
+  db = QSqlDatabase::database(dbName);
+  setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/DeleteMultiple.png"));
 
-    filename = dbName;
-    metadata.name = tr("Lost & Found");
+  filename = dbName;
+  metadata.name = tr("Lost & Found");
 
-    setupName(dbName);
+  setupName(dbName);
 
-    valid = true;
+  valid = true;
 }
 
-CLostFoundProject::~CLostFoundProject()
-{
-}
+CLostFoundProject::~CLostFoundProject() {}
 
-void CLostFoundProject::updateFromDb()
-{
-    qDeleteAll(takeChildren());
+void CLostFoundProject::updateFromDb() {
+  qDeleteAll(takeChildren());
 
-    QSqlQuery query(db);
-    QUERY_RUN("SELECT id, type FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name", return )
+  QSqlQuery query(db);
+  QUERY_RUN(
+      "SELECT id, type FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY "
+      "t1.type, t1.name",
+      return )
 
-    while(query.next())
-    {
-        quint64 id = query.value(0).toULongLong();
-        quint32 type = query.value(1).toUInt();
+  while (query.next()) {
+    quint64 id = query.value(0).toULongLong();
+    quint32 type = query.value(1).toUInt();
 
-        IGisItem::newGisItem(type, id, db, this);
-    }
+    IGisItem::newGisItem(type, id, db, this);
+  }
 
-    setText(CGisListWks::eColumnDecoration, "");
+  setText(CGisListWks::eColumnDecoration, "");
 }

@@ -16,22 +16,22 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterReset.h"
 
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
+
 CFilterReset::CFilterReset(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
+    : QWidget(parent),
+      trk(trk)
 
 {
-    setupUi(this);
+  setupUi(this);
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterReset::slotApply);
+  connect(toolApply, &QToolButton::clicked, this, &CFilterReset::slotApply);
 }
 
-void CFilterReset::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterReset();
+void CFilterReset::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterReset();
 }

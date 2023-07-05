@@ -24,61 +24,52 @@
 
 class CDemItem;
 
-class CDemTreeWidget : public QTreeWidget
-{
-    Q_OBJECT
-public:
-    CDemTreeWidget(QWidget* parent) : QTreeWidget(parent)
-    {
-    }
+class CDemTreeWidget : public QTreeWidget {
+  Q_OBJECT
+ public:
+  CDemTreeWidget(QWidget* parent) : QTreeWidget(parent) {}
 
-signals:
-    void sigChanged();
+ signals:
+  void sigChanged();
 
-protected:
-    void dragMoveEvent(QDragMoveEvent* event) override;
-    void dropEvent(QDropEvent* event) override;
+ protected:
+  void dragMoveEvent(QDragMoveEvent* event) override;
+  void dropEvent(QDropEvent* event) override;
 };
-
 
 #include "ui_IDemList.h"
 
-class CDemList : public QWidget, private Ui::IDemsList
-{
-    Q_OBJECT
-public:
-    CDemList(QWidget* parent);
-    virtual ~CDemList();
+class CDemList : public QWidget, private Ui::IDemsList {
+  Q_OBJECT
+ public:
+  CDemList(QWidget* parent);
+  virtual ~CDemList();
 
-    void clear();
-    int count();
-    CDemItem* item(int i);
-    operator QTreeWidget*()
-    {
-        return treeWidget;
-    }
+  void clear();
+  int count();
+  CDemItem* item(int i);
+  operator QTreeWidget*() { return treeWidget; }
 
-    void updateHelpText();
+  void updateHelpText();
 
-    void sort();
+  void sort();
 
-signals:
-    void sigChanged();
+ signals:
+  void sigChanged();
 
-public slots:
-    static void slotDemHonk();
+ public slots:
+  static void slotDemHonk();
 
-private slots:
-    void slotActivate();
-    void slotMoveUp();
-    void slotMoveDown();
-    void slotReloadDem();
-    void slotContextMenu(const QPoint& point);
-    void slotFilter(const QString& str);
+ private slots:
+  void slotActivate();
+  void slotMoveUp();
+  void slotMoveDown();
+  void slotReloadDem();
+  void slotContextMenu(const QPoint& point);
+  void slotFilter(const QString& str);
 
-private:
-    QMenu* menu;
+ private:
+  QMenu* menu;
 };
 
-#endif //CDEMLIST_H
-
+#endif  // CDEMLIST_H

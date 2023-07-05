@@ -27,23 +27,21 @@ class CGisItemWpt;
 class CGisDraw;
 class CCanvas;
 
-class CMouseWptBubble : public IMouse
-{
-    Q_OBJECT
-public:
-    CMouseWptBubble(const IGisItem::key_t& key, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    virtual ~CMouseWptBubble();
+class CMouseWptBubble : public IMouse {
+  Q_OBJECT
+ public:
+  CMouseWptBubble(const IGisItem::key_t& key, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  virtual ~CMouseWptBubble();
 
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
+  void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
-    void leftClicked(const QPoint& pos) override;
-    void mouseMoved(const QPoint& pos) override;
-    void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
-    void dragFinished(const QPoint& pos) override;
+  void leftClicked(const QPoint& pos) override;
+  void mouseMoved(const QPoint& pos) override;
+  void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
+  void dragFinished(const QPoint& pos) override;
 
-private:
-    const IGisItem::key_t& key;
+ private:
+  const IGisItem::key_t& key;
 };
 
-#endif //CMOUSEWPTBUBBLE_H
-
+#endif  // CMOUSEWPTBUBBLE_H

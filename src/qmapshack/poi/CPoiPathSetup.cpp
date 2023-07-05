@@ -16,66 +16,60 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "poi/CPoiDraw.h"
 #include "poi/CPoiPathSetup.h"
 
 #include <QtWidgets>
 
+#include "CMainWindow.h"
+#include "poi/CPoiDraw.h"
+
 CPoiPathSetup::CPoiPathSetup(QStringList& paths)
-    : QDialog(CMainWindow::getBestWidgetForParent())
-    , paths(paths)
+    : QDialog(CMainWindow::getBestWidgetForParent()),
+      paths(paths)
 
 {
-    setupUi(this);
+  setupUi(this);
 
-    connect(toolAdd, &QToolButton::clicked, this, &CPoiPathSetup::slotAddPath);
-    connect(toolDelete, &QToolButton::clicked, this, &CPoiPathSetup::slotDelPath);
-    connect(listWidget, &QListWidget::itemSelectionChanged, this, &CPoiPathSetup::slotItemSelectionChanged);
+  connect(toolAdd, &QToolButton::clicked, this, &CPoiPathSetup::slotAddPath);
+  connect(toolDelete, &QToolButton::clicked, this, &CPoiPathSetup::slotDelPath);
+  connect(listWidget, &QListWidget::itemSelectionChanged, this, &CPoiPathSetup::slotItemSelectionChanged);
 
-    for(const QString& path : paths)
-    {
-        QListWidgetItem* item = new QListWidgetItem(listWidget);
-        item->setText(path);
+  for (const QString& path : paths) {
+    QListWidgetItem* item = new QListWidgetItem(listWidget);
+    item->setText(path);
+  }
+
+  labelHelp->setText(tr("Add or remove paths containing POI data. There can be multiple files in a path but no "
+                        "sub-path is parsed. Supported formats are: %1")
+                         .arg(CPoiDraw::getSupportedFormats().join(", ")));
+}
+
+void CPoiPathSetup::slotItemSelectionChanged() {
+  QList<QListWidgetItem*> items = listWidget->selectedItems();
+  toolDelete->setEnabled(!items.isEmpty());
+}
+
+void CPoiPathSetup::accept() {
+  paths.clear();
+  for (int i = 0; i < listWidget->count(); i++) {
+    QListWidgetItem* item = listWidget->item(i);
+    paths << item->text();
+  }
+
+  QDialog::accept();
+}
+
+void CPoiPathSetup::slotAddPath() {
+  QString path = QFileDialog::getExistingDirectory(this, tr("Select POI file path..."), QDir::homePath());
+  if (!path.isEmpty()) {
+    if (!paths.contains(path)) {
+      QListWidgetItem* item = new QListWidgetItem(listWidget);
+      item->setText(path);
     }
-
-    labelHelp->setText(tr("Add or remove paths containing POI data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1").arg(CPoiDraw::getSupportedFormats().join(", ")));
+  }
 }
 
-void CPoiPathSetup::slotItemSelectionChanged()
-{
-    QList<QListWidgetItem*> items = listWidget->selectedItems();
-    toolDelete->setEnabled(!items.isEmpty());
+void CPoiPathSetup::slotDelPath() {
+  QList<QListWidgetItem*> items = listWidget->selectedItems();
+  qDeleteAll(items);
 }
-
-void CPoiPathSetup::accept()
-{
-    paths.clear();
-    for(int i = 0; i < listWidget->count(); i++)
-    {
-        QListWidgetItem* item = listWidget->item(i);
-        paths << item->text();
-    }
-
-    QDialog::accept();
-}
-
-void CPoiPathSetup::slotAddPath()
-{
-    QString path = QFileDialog::getExistingDirectory(this, tr("Select POI file path..."), QDir::homePath());
-    if(!path.isEmpty())
-    {
-        if(!paths.contains(path))
-        {
-            QListWidgetItem* item = new QListWidgetItem(listWidget);
-            item->setText(path);
-        }
-    }
-}
-
-void CPoiPathSetup::slotDelPath()
-{
-    QList<QListWidgetItem*> items = listWidget->selectedItems();
-    qDeleteAll(items);
-}
-

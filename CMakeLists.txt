@@ -144,7 +144,7 @@ if(MSVC)
 endif(MSVC)
 
 if(UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lstdc++ -lm")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -lm")
     add_definitions(-Wall -Wpedantic -Wno-switch -Wno-strict-aliasing)
 
     # Use ASAN for development versions

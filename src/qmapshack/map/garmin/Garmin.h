@@ -19,13 +19,14 @@
 #ifndef GARMIN_H
 #define GARMIN_H
 
-#include "gis/proj_x.h"
+#include <QtGlobal>
 
 #ifdef __MINGW32__
 #undef LP
 #endif
 
-#define GARMIN_DEG(x) ((x) < 0x800000 ? (qreal)(x) * 360.0 / 16777216.0 : (qreal)((x) - 0x1000000) * 360.0 / 16777216.0)
-#define GARMIN_RAD(x) ((x) < 0x800000 ? (qreal)(x) * (2 * M_PI) / 16777216.0 : (qreal)((x) - 0x1000000) * (2 * M_PI) / 16777216.0)
+#define GARMIN_DEG(x) ((x) < 0x800000 ? (qreal)(x)*360.0 / 16777216.0 : (qreal)((x)-0x1000000) * 360.0 / 16777216.0)
+#define GARMIN_RAD(x) \
+  ((x) < 0x800000 ? (qreal)(x) * (2 * M_PI) / 16777216.0 : (qreal)((x)-0x1000000) * (2 * M_PI) / 16777216.0)
 typedef quint8 quint24[3];
-#endif                           //GARMIN_H
+#endif  // GARMIN_H

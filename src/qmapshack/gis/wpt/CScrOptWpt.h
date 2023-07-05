@@ -20,43 +20,41 @@
 #ifndef CSCROPTWPT_H
 #define CSCROPTWPT_H
 
+#include <QWidget>
+
 #include "gis/IGisItem.h"
 #include "mouse/IScrOpt.h"
-
 #include "ui_IScrOptWpt.h"
-#include <QWidget>
 
 class CGisItemWpt;
 class IMouse;
 
-class CScrOptWpt : public IScrOpt, private Ui::IScrOptWpt
-{
-    Q_OBJECT
-public:
-    CScrOptWpt(CGisItemWpt* wpt, const QPoint& point, IMouse* parent);
-    virtual ~CScrOptWpt();
+class CScrOptWpt : public IScrOpt, private Ui::IScrOptWpt {
+  Q_OBJECT
+ public:
+  CScrOptWpt(CGisItemWpt* wpt, const QPoint& point, IMouse* parent);
+  virtual ~CScrOptWpt();
 
-    void draw(QPainter& p) override;
+  void draw(QPainter& p) override;
 
-private slots:
-    void slotDelete();
-    void slotEdit();
-    void slotCopy();
-    void slotCoordToClipboard();
-    void slotMove();
-    void slotProj();
-    void slotBubble();
-    void slotDeleteRadius();
-    void slotNogoArea();
-    void slotEditRadius();
-    void slotAddElevation();
-    void slotSearchWeb();
-    void slotTags();
+ private slots:
+  void slotDelete();
+  void slotEdit();
+  void slotCopy();
+  void slotCoordToClipboard();
+  void slotMove();
+  void slotProj();
+  void slotBubble();
+  void slotDeleteRadius();
+  void slotNogoArea();
+  void slotEditRadius();
+  void slotAddElevation();
+  void slotSearchWeb();
+  void slotTags();
 
-private:
-    IGisItem::key_t key;
-    QPointF anchor;
+ private:
+  IGisItem::key_t key;
+  QPointF anchor;
 };
 
-#endif //CSCROPTWPT_H
-
+#endif  // CSCROPTWPT_H

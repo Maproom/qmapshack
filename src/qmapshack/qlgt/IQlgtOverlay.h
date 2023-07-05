@@ -19,37 +19,32 @@
 #ifndef IQLGTOVERLAY_H
 #define IQLGTOVERLAY_H
 
+#include <QObject>
+
 #include "gis/proj_x.h"
 #include "qlgt/IItem.h"
 
-#include <QObject>
+class IQlgtOverlay : public QObject, public IItem {
+ public:
+  IQlgtOverlay(quint64 id, QObject* parent);
+  virtual ~IQlgtOverlay();
 
-class IQlgtOverlay : public QObject, public IItem
-{
-public:
-    IQlgtOverlay(quint64 id, QObject* parent);
-    virtual ~IQlgtOverlay();
+  enum type_e { eEnd, eBase };
 
-    enum type_e {eEnd, eBase};
+  struct pt_t : public PJ_UV {
+    int idx;
+  };
 
-    struct pt_t : public PJ_UV
-    {
-        int idx;
-    };
-
-
-    QString type;
-    QColor color;
-    QList<pt_t> points;
-    qint32 style = 0;
-    quint32 width = 0;
-    quint8 opacity = 0;
-    float speed = 0;
+  QString type;
+  QColor color;
+  QList<pt_t> points;
+  qint32 style = 0;
+  quint32 width = 0;
+  quint8 opacity = 0;
+  float speed = 0;
 };
 
-QDataStream& operator >>(QDataStream& s, IQlgtOverlay& ovl);
-QDataStream& operator <<(QDataStream& s, IQlgtOverlay& ovl);
+QDataStream& operator>>(QDataStream& s, IQlgtOverlay& ovl);
+QDataStream& operator<<(QDataStream& s, IQlgtOverlay& ovl);
 
-
-#endif //IQLGTOVERLAY_H
-
+#endif  // IQLGTOVERLAY_H

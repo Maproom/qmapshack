@@ -22,17 +22,13 @@
 #include "mouse/IScrOpt.h"
 #include "ui_IScrOptEditLine.h"
 
-class CScrOptEditLine : public IScrOpt, public Ui::IScrOptEditLine
-{
-    Q_OBJECT
-public:
-    CScrOptEditLine(IMouse* mouse);
-    virtual ~CScrOptEditLine();
+class CScrOptEditLine : public IScrOpt, public Ui::IScrOptEditLine {
+  Q_OBJECT
+ public:
+  CScrOptEditLine(IMouse* mouse);
+  virtual ~CScrOptEditLine();
 
-    void draw(QPainter& p) override
-    {
-    }
+  void draw(QPainter& p) override {}
 };
 
-#endif //CSCROPTEDITLINE_H
-
+#endif  // CSCROPTEDITLINE_H

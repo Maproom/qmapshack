@@ -19,102 +19,93 @@
 #ifndef CPOIFILEITEM_H
 #define CPOIFILEITEM_H
 
-#include "poi/IPoiFile.h"
-
 #include <QMutex>
 #include <QPointer>
 #include <QTreeWidgetItem>
 
+#include "poi/IPoiFile.h"
+
 class CPoiDraw;
 class QSettings;
 
-class CPoiFileItem : public QTreeWidgetItem
-{
-public:
-    CPoiFileItem(QTreeWidget* parent, CPoiDraw* poi);
-    virtual ~CPoiFileItem() = default;
+class CPoiFileItem : public QTreeWidgetItem {
+ public:
+  CPoiFileItem(QTreeWidget* parent, CPoiDraw* poi);
+  virtual ~CPoiFileItem() = default;
 
-    void saveConfig(QSettings& cfg);
-    void loadConfig(QSettings& cfg);
+  void saveConfig(QSettings& cfg);
+  void loadConfig(QSettings& cfg);
 
-    /**
-       @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronized.
-     */
-    static QRecursiveMutex mutexActivePois;
+  /**
+     @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be
+     synchronized.
+   */
+  static QRecursiveMutex mutexActivePois;
 
-    /**
-       @brief Query if poi objects are loaded
-       @return True if the internal list of poi objects is not empty.
-     */
-    bool isActivated();
-    /**
-       @brief Either loads or destroys internal map objects
-       @return True if the internal list of maps is not empty after the operation.
-     */
-    bool toggleActivate();
-    /**
-     * @brief Load all internal map objects
-     * @return Return true on success.
-     */
-    bool activate();
-    /**
-       @brief Delete all internal map objects
-     */
-    void deactivate();
-    /**
-       @brief Move item to top of list widget
-     */
-    void moveToTop();
-    void moveToBottom();
+  /**
+     @brief Query if poi objects are loaded
+     @return True if the internal list of poi objects is not empty.
+   */
+  bool isActivated();
+  /**
+     @brief Either loads or destroys internal map objects
+     @return True if the internal list of maps is not empty after the operation.
+   */
+  bool toggleActivate();
+  /**
+   * @brief Load all internal map objects
+   * @return Return true on success.
+   */
+  bool activate();
+  /**
+     @brief Delete all internal map objects
+   */
+  void deactivate();
+  /**
+     @brief Move item to top of list widget
+   */
+  void moveToTop();
+  void moveToBottom();
 
-    void updateIcon();
+  void updateIcon();
 
-    /**
-       @brief Show or hide child treewidget items
-       @param yes set true to add children, false will remove all children and delete the attached widgets
-     */
-    void showChildren(bool yes);
+  /**
+     @brief Show or hide child treewidget items
+     @param yes set true to add children, false will remove all children and delete the attached widgets
+   */
+  void showChildren(bool yes);
 
+  QString getName() const { return text(0); }
 
-    QString getName() const
-    {
-        return text(0);
-    }
+  QPointer<IPoiFile>& getPoifile() { return poifile; }
 
-    QPointer<IPoiFile>& getPoifile(){return poifile;}
+  /// The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+  ///  Thus the location where to draw the highlight is separately given
+  bool findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const {
+    return poifile->findPoiCloseBy(px, poiItems, posPoiHighlight);
+  }
+  /// The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+  ///  Thus the location where to draw the highlight is separately given
+  void findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<QPointF>& posPoiHighlight) {
+    getPoifile()->findPoisIn(degRect, pois, posPoiHighlight);
+  }
+  bool getToolTip(const QPoint& px, QString& str) { return getPoifile()->getToolTip(px, str); }
 
-    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
-    /// Thus the location where to draw the highlight is separately given
-    bool findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const
-    {
-        return poifile->findPoiCloseBy(px, poiItems, posPoiHighlight);
-    }
-    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
-    /// Thus the location where to draw the highlight is separately given
-    void findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<QPointF>& posPoiHighlight)
-    {
-        getPoifile()->findPoisIn(degRect, pois, posPoiHighlight);
-    }
-    bool getToolTip(const QPoint& px, QString& str)
-    {
-        return getPoifile()->getToolTip(px, str);
-    }
-private:
-    friend class CPoiDraw;
-    CPoiDraw* poi;
-    /**
-       @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
-     */
-    QString key;
-    /**
-       @brief List of map files forming that particular map
-     */
-    QString filename;
-    /**
-       @brief the actual poi file object
-     */
-    QPointer<IPoiFile> poifile;
+ private:
+  friend class CPoiDraw;
+  CPoiDraw* poi;
+  /**
+     @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
+   */
+  QString key;
+  /**
+     @brief List of map files forming that particular map
+   */
+  QString filename;
+  /**
+     @brief the actual poi file object
+   */
+  QPointer<IPoiFile> poifile;
 };
 
-#endif //CPOIFILEITEM_H
-
+#endif  // CPOIFILEITEM_H

@@ -16,196 +16,165 @@
 
 **********************************************************************************************/
 
-#include "poi/CPoiDraw.h"
 #include "poi/CPoiFileItem.h"
-#include "poi/CPoiFilePOI.h"
 
 #include <QtWidgets>
 
+#include "poi/CPoiDraw.h"
+#include "poi/CPoiFilePOI.h"
+
 QRecursiveMutex CPoiFileItem::mutexActivePois;
 
-CPoiFileItem::CPoiFileItem(QTreeWidget* parent, CPoiDraw* poi)
-    : QTreeWidgetItem(parent)
-    , poi(poi)
-{
-    setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+CPoiFileItem::CPoiFileItem(QTreeWidget* parent, CPoiDraw* poi) : QTreeWidgetItem(parent), poi(poi) {
+  setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 }
 
+void CPoiFileItem::saveConfig(QSettings& cfg) {
+  if (poifile.isNull()) {
+    return;
+  }
 
-void CPoiFileItem::saveConfig(QSettings& cfg)
-{
-    if(poifile.isNull())
-    {
-        return;
-    }
-
-    cfg.beginGroup(key);
-    poifile->saveConfig(cfg);
-    cfg.endGroup();
+  cfg.beginGroup(key);
+  poifile->saveConfig(cfg);
+  cfg.endGroup();
 }
 
-void CPoiFileItem::loadConfig(QSettings& cfg)
-{
-    if(poifile.isNull())
-    {
-        return;
-    }
+void CPoiFileItem::loadConfig(QSettings& cfg) {
+  if (poifile.isNull()) {
+    return;
+  }
 
-    cfg.beginGroup(key);
-    poifile->loadConfig(cfg);
-    cfg.endGroup();
+  cfg.beginGroup(key);
+  poifile->loadConfig(cfg);
+  cfg.endGroup();
 }
 
-void CPoiFileItem::showChildren(bool yes)
-{
-    if(yes && !poifile.isNull())
-    {
-        QTreeWidget* tw = treeWidget();
+void CPoiFileItem::showChildren(bool yes) {
+  if (yes && !poifile.isNull()) {
+    QTreeWidget* tw = treeWidget();
 
-        QTreeWidgetItem* item = new QTreeWidgetItem(this);
-        item->setFlags(Qt::ItemIsEnabled);
-        tw->setItemWidget(item, 0, poifile->getSetup());
-    }
-    else
-    {
-        QList<QTreeWidgetItem*> items = takeChildren();
-        qDeleteAll(items);
-        delete poifile->getSetup();
-    }
+    QTreeWidgetItem* item = new QTreeWidgetItem(this);
+    item->setFlags(Qt::ItemIsEnabled);
+    tw->setItemWidget(item, 0, poifile->getSetup());
+  } else {
+    QList<QTreeWidgetItem*> items = takeChildren();
+    qDeleteAll(items);
+    delete poifile->getSetup();
+  }
 }
 
+void CPoiFileItem::updateIcon() {
+  if (filename.isEmpty()) {
+    return;
+  }
 
-void CPoiFileItem::updateIcon()
-{
-    if(filename.isEmpty())
-    {
-        return;
-    }
+  QPixmap img("://icons/32x32/Poi.png");
+  QFileInfo fi(filename);
+  if (fi.suffix().toLower() == "poi") {
+    img = QPixmap("://icons/32x32/MimePoiPOI.png");
+  }
 
-    QPixmap img("://icons/32x32/Poi.png");
-    QFileInfo fi(filename);
-    if(fi.suffix().toLower() == "poi")
-    {
-        img = QPixmap("://icons/32x32/MimePoiPOI.png");
-    }
-
-    setIcon(0, QIcon(img));
+  setIcon(0, QIcon(img));
 }
 
-bool CPoiFileItem::isActivated()
-{
-    QMutexLocker lock(&mutexActivePois);
-    return !poifile.isNull();
+bool CPoiFileItem::isActivated() {
+  QMutexLocker lock(&mutexActivePois);
+  return !poifile.isNull();
 }
 
-bool CPoiFileItem::toggleActivate()
-{
-    QMutexLocker lock(&mutexActivePois);
-    if(poifile.isNull())
-    {
-        return activate();
-    }
-    else
-    {
-        deactivate();
-        return false;
-    }
+bool CPoiFileItem::toggleActivate() {
+  QMutexLocker lock(&mutexActivePois);
+  if (poifile.isNull()) {
+    return activate();
+  } else {
+    deactivate();
+    return false;
+  }
 }
 
-void CPoiFileItem::deactivate()
-{
-    QMutexLocker lock(&mutexActivePois);
-    // remove poifile setup dialog as child of this item
-    showChildren(false);
+void CPoiFileItem::deactivate() {
+  QMutexLocker lock(&mutexActivePois);
+  // remove poifile setup dialog as child of this item
+  showChildren(false);
 
-    // remove poifile object
+  // remove poifile object
+  delete poifile;
+
+  // maybe used to reflect changes in the icon
+  updateIcon();
+  // move to bottom of the active poi list
+  moveToBottom();
+
+  // deny drag-n-drop again
+  setFlags(flags() & ~Qt::ItemIsDragEnabled);
+}
+
+bool CPoiFileItem::activate() {
+  QMutexLocker lock(&mutexActivePois);
+
+  // remove poifile object
+  delete poifile;
+
+  // load map by suffix
+  QFileInfo fi(filename);
+  if (fi.suffix().toLower() == "poi") {
+    poifile = new CPoiFilePOI(filename, poi);
+  }
+
+  updateIcon();
+
+  // no mapfiles loaded? Bad.
+  if (poifile.isNull()) {
+    return false;
+  }
+
+  // if map is activated successfully add to the list of map files
+  // else delete all previous loaded maps and abort
+  if (!poifile->activated()) {
     delete poifile;
+    return false;
+  }
 
-    // maybe used to reflect changes in the icon
-    updateIcon();
-    // move to bottom of the active poi list
-    moveToBottom();
+  moveToBottom();
 
-    // deny drag-n-drop again
-    setFlags(flags() & ~Qt::ItemIsDragEnabled);
+  setFlags(flags() | Qt::ItemIsDragEnabled);
+  /*
+     As the map file setup is stored in the context of the CMapDraw object
+     the configuration has to be loaded via the CMapDraw object to select
+     the correct group context in the QSetting object.
+     This call will result into a call of loadConfig() of this CMapItem
+     object.
+   */
+  poi->loadConfigForPoiItem(this);
+
+  // Add the poifile setup dialog as child of this item
+  showChildren(true);
+  return true;
 }
 
+void CPoiFileItem::moveToTop() {
+  QTreeWidget* w = treeWidget();
+  QMutexLocker lock(&mutexActivePois);
 
-bool CPoiFileItem::activate()
-{
-    QMutexLocker lock(&mutexActivePois);
+  w->takeTopLevelItem(w->indexOfTopLevelItem(this));
+  w->insertTopLevelItem(0, this);
 
-    // remove poifile object
-    delete poifile;
-
-    // load map by suffix
-    QFileInfo fi(filename);
-    if(fi.suffix().toLower() == "poi")
-    {
-        poifile = new CPoiFilePOI(filename, poi);
-    }
-
-    updateIcon();
-
-    // no mapfiles loaded? Bad.
-    if(poifile.isNull())
-    {
-        return false;
-    }
-
-    // if map is activated successfully add to the list of map files
-    // else delete all previous loaded maps and abort
-    if(!poifile->activated())
-    {
-        delete poifile;
-        return false;
-    }
-
-    moveToBottom();
-
-    setFlags(flags() | Qt::ItemIsDragEnabled);
-    /*
-       As the map file setup is stored in the context of the CMapDraw object
-       the configuration has to be loaded via the CMapDraw object to select
-       the correct group context in the QSetting object.
-       This call will result into a call of loadConfig() of this CMapItem
-       object.
-     */
-    poi->loadConfigForPoiItem(this);
-
-    // Add the poifile setup dialog as child of this item
-    showChildren(true);
-    return true;
+  poi->emitSigCanvasUpdate();
 }
 
-void CPoiFileItem::moveToTop()
-{
-    QTreeWidget* w = treeWidget();
-    QMutexLocker lock(&mutexActivePois);
+void CPoiFileItem::moveToBottom() {
+  int row;
+  QTreeWidget* w = treeWidget();
+  QMutexLocker lock(&mutexActivePois);
 
-    w->takeTopLevelItem(w->indexOfTopLevelItem(this));
-    w->insertTopLevelItem(0, this);
-
-    poi->emitSigCanvasUpdate();
-}
-
-
-void CPoiFileItem::moveToBottom()
-{
-    int row;
-    QTreeWidget* w = treeWidget();
-    QMutexLocker lock(&mutexActivePois);
-
-    w->takeTopLevelItem(w->indexOfTopLevelItem(this));
-    for(row = 0; row < w->topLevelItemCount(); row++)
-    {
-        CPoiFileItem* item = dynamic_cast<CPoiFileItem*>(w->topLevelItem(row));
-        if(item && item->poifile.isNull())
-        {
-            break;
-        }
+  w->takeTopLevelItem(w->indexOfTopLevelItem(this));
+  for (row = 0; row < w->topLevelItemCount(); row++) {
+    CPoiFileItem* item = dynamic_cast<CPoiFileItem*>(w->topLevelItem(row));
+    if (item && item->poifile.isNull()) {
+      break;
     }
-    w->insertTopLevelItem(row, this);
+  }
+  w->insertTopLevelItem(row, this);
 
-    poi->emitSigCanvasUpdate();
+  poi->emitSigCanvasUpdate();
 }

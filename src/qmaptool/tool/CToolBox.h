@@ -19,22 +19,21 @@
 #ifndef CTOOLBOX_H
 #define CTOOLBOX_H
 
-#include "tool/ITool.h"
 #include <QToolBox>
 
-class CToolBox : public ITool, public QToolBox
-{
-public:
-    CToolBox(QWidget* parent);
-    virtual ~CToolBox() = default;
+#include "tool/ITool.h"
 
-    void setupChanged() override;
+class CToolBox : public ITool, public QToolBox {
+ public:
+  CToolBox(QWidget* parent);
+  virtual ~CToolBox() = default;
 
-    FORWARD_WIDGET_ALL()
+  void setupChanged() override;
 
-private slots:
-    void slotToolChanged(int idx);
+  FORWARD_WIDGET_ALL()
+
+ private slots:
+  void slotToolChanged(int idx);
 };
 
-#endif //CTOOLBOX_H
-
+#endif  // CTOOLBOX_H

@@ -20,24 +20,17 @@
 
 #include <QtWidgets>
 
-CDoubleSpinBox::CDoubleSpinBox(QWidget* parent)
-    : QDoubleSpinBox(parent)
-{
+CDoubleSpinBox::CDoubleSpinBox(QWidget* parent) : QDoubleSpinBox(parent) {}
+
+void CDoubleSpinBox::stepBy(int steps) {
+  QDoubleSpinBox::stepBy(steps);
+  emit valueChangedByStep(value());
 }
 
-void CDoubleSpinBox::stepBy(int steps)
-{
-    QDoubleSpinBox::stepBy(steps);
-    emit valueChangedByStep(value());
+void CDoubleSpinBox::focusInEvent(QFocusEvent* event) {
+  if (!isReadOnly()) {
+    QTimer::singleShot(0, this, &CDoubleSpinBox::slotSelectAll);
+  }
+
+  QDoubleSpinBox::focusInEvent(event);
 }
-
-void CDoubleSpinBox::focusInEvent(QFocusEvent* event)
-{
-    if(!isReadOnly())
-    {
-        QTimer::singleShot(0, this, &CDoubleSpinBox::slotSelectAll);
-    }
-
-    QDoubleSpinBox::focusInEvent(event);
-}
-

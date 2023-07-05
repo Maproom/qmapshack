@@ -16,126 +16,103 @@
 
 **********************************************************************************************/
 
-#include "canvas/IDrawContext.h"
-#include "CMainWindow.h"
 #include "items/IItem.h"
 
 #include <QtWidgets>
 
-IItem::IItem(const QString& filename)
-    : filename(filename)
-{
+#include "CMainWindow.h"
+#include "canvas/IDrawContext.h"
+
+IItem::IItem(const QString& filename) : filename(filename) {}
+
+void IItem::saveSettings(QSettings& cfg) {
+  if (nullptr != drawContext) {
+    drawContext->saveSettings(cfg);
+  }
 }
 
-void IItem::saveSettings(QSettings& cfg)
-{
-    if(nullptr != drawContext)
-    {
-        drawContext->saveSettings(cfg);
-    }
+void IItem::loadSettings(QSettings& cfg) {
+  if (nullptr != drawContext) {
+    drawContext->loadSettings(cfg);
+  }
 }
 
-void IItem::loadSettings(QSettings& cfg)
-{
-    if(nullptr != drawContext)
-    {
-        drawContext->loadSettings(cfg);
-    }
+void IItem::reload() {
+  if (nullptr == drawContext) {
+    return;
+  }
+  drawContext->setSourceFile(filename, false);
 }
 
-void IItem::reload()
-{
-    if(nullptr == drawContext)
-    {
-        return;
-    }
-    drawContext->setSourceFile(filename, false);
+bool IItem::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) {
+  if (nullptr == drawContext) {
+    return false;
+  }
+
+  drawContext->draw(p, needsRedraw);
+  return true;
 }
 
-bool IItem::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
-{
-    if(nullptr == drawContext)
-    {
-        return false;
-    }
+void IItem::mousePressEventFx(QMouseEvent* e) {
+  if (nullptr == drawContext) {
+    return;
+  }
 
-    drawContext->draw(p, needsRedraw);
-    return true;
+  if (e->button() == Qt::LeftButton) {
+    lastPos = e->pos();
+    firstPos = lastPos;
+    mapIsMoving = true;
+    mapDidMove = false;
+  }
 }
 
-void IItem::mousePressEventFx(QMouseEvent* e)
-{
-    if(nullptr == drawContext)
-    {
-        return;
-    }
+void IItem::mouseMoveEventFx(QMouseEvent* e) {
+  if (nullptr == drawContext) {
+    return;
+  }
 
-    if(e->button() == Qt::LeftButton)
-    {
-        lastPos = e->pos();
-        firstPos = lastPos;
-        mapIsMoving = true;
-        mapDidMove = false;
+  const QPoint& point = e->pos();
+  if (mapIsMoving) {
+    if ((point - firstPos).manhattanLength() >= 4) {
+      drawContext->move(point - lastPos);
+
+      lastPos = point;
+      mapDidMove = true;
+
+      drawContext->triggerCompleteUpdate(CCanvas::eRedrawMap);
     }
+  }
 }
 
-void IItem::mouseMoveEventFx(QMouseEvent* e)
-{
-    if(nullptr == drawContext)
-    {
-        return;
-    }
+void IItem::mouseReleaseEventFx(QMouseEvent* e) {
+  if (nullptr == drawContext) {
+    return;
+  }
 
-    const QPoint& point = e->pos();
-    if(mapIsMoving)
-    {
-        if((point - firstPos).manhattanLength() >= 4)
-        {
-            drawContext->move(point - lastPos);
-
-            lastPos = point;
-            mapDidMove = true;
-
-            drawContext->triggerCompleteUpdate(CCanvas::eRedrawMap);
-        }
-    }
+  if (e->button() == Qt::LeftButton) {
+    lastPos = e->pos();
+    mapIsMoving = false;
+    mapDidMove = false;
+  }
 }
 
-void IItem::mouseReleaseEventFx(QMouseEvent* e)
-{
-    if(nullptr == drawContext)
-    {
-        return;
-    }
+void IItem::wheelEventFx(QWheelEvent* e) {
+  if (nullptr == drawContext) {
+    return;
+  }
 
-    if(e->button() == Qt::LeftButton)
-    {
-        lastPos = e->pos();
-        mapIsMoving = false;
-        mapDidMove = false;
-    }
+  // angleDelta() returns the eighths of a degree
+  // of the mousewheel
+  // -> zoom in/out every 15 degress = every 120 eights
+  const int EIGHTS_ZOOM = 15 * 8;
+  zoomAngleDelta += e->angleDelta().y();
+  if (abs(zoomAngleDelta) < EIGHTS_ZOOM) {
+    return;
+  }
+
+  zoomAngleDelta = 0;
+
+  drawContext->zoom(CMainWindow::self().flipMouseWheel() ? (e->angleDelta().y() < 0) : (e->angleDelta().y() > 0),
+                    e->position());
+  drawContext->triggerCompleteUpdate(CCanvas::eRedrawAll);
 }
-
-void IItem::wheelEventFx(QWheelEvent* e)
-{
-    if(nullptr == drawContext)
-    {
-        return;
-    }
-
-    // angleDelta() returns the eighths of a degree
-    // of the mousewheel
-    // -> zoom in/out every 15 degress = every 120 eights
-    const int EIGHTS_ZOOM = 15 * 8;
-    zoomAngleDelta += e->angleDelta().y();
-    if(abs(zoomAngleDelta) < EIGHTS_ZOOM)
-    {
-        return;
-    }
-
-    zoomAngleDelta = 0;
-
-    drawContext->zoom(CMainWindow::self().flipMouseWheel() ? (e->angleDelta().y() < 0) : (e->angleDelta().y() > 0), e->position());
-    drawContext->triggerCompleteUpdate(CCanvas::eRedrawAll);
-}
-

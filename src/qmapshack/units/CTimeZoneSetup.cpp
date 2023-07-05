@@ -17,89 +17,72 @@
 **********************************************************************************************/
 
 #include "units/CTimeZoneSetup.h"
+
 #include "units/IUnit.h"
 
-CTimeZoneSetup::CTimeZoneSetup(QWidget* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
+CTimeZoneSetup::CTimeZoneSetup(QWidget* parent) : QDialog(parent) {
+  setupUi(this);
 
-    QByteArray zone;
-    IUnit::tz_mode_e mode;
-    bool useShortFormat;
+  QByteArray zone;
+  IUnit::tz_mode_e mode;
+  bool useShortFormat;
 
-    IUnit::getTimeZoneSetup(mode, zone, useShortFormat);
+  IUnit::getTimeZoneSetup(mode, zone, useShortFormat);
 
-    switch(mode)
-    {
+  switch (mode) {
     case IUnit::eTZUtc:
-        radioUtc->setChecked(true);
-        break;
+      radioUtc->setChecked(true);
+      break;
 
     case IUnit::eTZLocal:
-        radioLocal->setChecked(true);
-        break;
+      radioLocal->setChecked(true);
+      break;
 
     case IUnit::eTZAuto:
-        radioAutomatic->setChecked(true);
-        break;
+      radioAutomatic->setChecked(true);
+      break;
 
     case IUnit::eTZSelected:
-        radioSelected->setChecked(true);
-        break;
-    }
+      radioSelected->setChecked(true);
+      break;
+  }
 
-    const char** tz = IUnit::tblTimezone;
-    while(*tz)
-    {
-        comboTimeZone->addItem(*tz);
-        tz++;
-    }
+  const char** tz = IUnit::tblTimezone;
+  while (*tz) {
+    comboTimeZone->addItem(*tz);
+    tz++;
+  }
 
-    if(useShortFormat)
-    {
-        radioShortFormat->setChecked(true);
-    }
-    else
-    {
-        radioLongFormat->setChecked(true);
-    }
+  if (useShortFormat) {
+    radioShortFormat->setChecked(true);
+  } else {
+    radioLongFormat->setChecked(true);
+  }
 
-    comboTimeZone->setCurrentIndex(comboTimeZone->findText(QString(zone)));
+  comboTimeZone->setCurrentIndex(comboTimeZone->findText(QString(zone)));
 }
 
-CTimeZoneSetup::~CTimeZoneSetup()
-{
-}
+CTimeZoneSetup::~CTimeZoneSetup() {}
 
-void CTimeZoneSetup::accept()
-{
-    QByteArray zone = comboTimeZone->currentText().toLatin1();
-    IUnit::tz_mode_e mode = IUnit::eTZUtc;
-    bool useShortFormat = false;
+void CTimeZoneSetup::accept() {
+  QByteArray zone = comboTimeZone->currentText().toLatin1();
+  IUnit::tz_mode_e mode = IUnit::eTZUtc;
+  bool useShortFormat = false;
 
-    if(radioUtc->isChecked())
-    {
-        mode = IUnit::eTZUtc;
-    }
-    else if(radioLocal->isChecked())
-    {
-        mode = IUnit::eTZLocal;
-    }
-    else if(radioAutomatic->isChecked())
-    {
-        mode = IUnit::eTZAuto;
-    }
-    else if(radioSelected->isChecked())
-    {
-        mode = IUnit::eTZSelected;
-    }
+  if (radioUtc->isChecked()) {
+    mode = IUnit::eTZUtc;
+  } else if (radioLocal->isChecked()) {
+    mode = IUnit::eTZLocal;
+  } else if (radioAutomatic->isChecked()) {
+    mode = IUnit::eTZAuto;
+  } else if (radioSelected->isChecked()) {
+    mode = IUnit::eTZSelected;
+  }
 
-    if(radioShortFormat->isChecked())
-    {
-        useShortFormat = true;
-    }
+  if (radioShortFormat->isChecked()) {
+    useShortFormat = true;
+  }
 
-    IUnit::setTimeZoneSetup(mode, zone, useShortFormat);
-    QDialog::accept();
+  IUnit::setTimeZoneSetup(mode, zone, useShortFormat);
+  QDialog::accept();
 }

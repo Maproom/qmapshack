@@ -22,20 +22,18 @@
 #include <QObject>
 class QLocalServer;
 
-class CSingleInstanceProxy : public QObject
-{
-public:
-    CSingleInstanceProxy(const QStringList filenames);
-    virtual ~CSingleInstanceProxy();
+class CSingleInstanceProxy : public QObject {
+ public:
+  CSingleInstanceProxy(const QStringList filenames);
+  virtual ~CSingleInstanceProxy();
 
-private slots:
-    void slotNewConnection();
+ private slots:
+  void slotNewConnection();
 
-private:
-    QLocalServer* server = nullptr;
+ private:
+  QLocalServer* server = nullptr;
 
-    QString serverName;
+  QString serverName;
 };
 
-#endif //CSINGLEINSTANCEPROXY_H
-
+#endif  // CSINGLEINSTANCEPROXY_H

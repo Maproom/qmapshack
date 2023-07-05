@@ -25,38 +25,33 @@
 
 class QTextBrowser;
 
-class IToolShell : public QWidget
-{
-    Q_OBJECT
-public:
-    IToolShell(QWidget* parent);
-    virtual ~IToolShell();
+class IToolShell : public QWidget {
+  Q_OBJECT
+ public:
+  IToolShell(QWidget* parent);
+  virtual ~IToolShell();
 
-    void setTextBrowser(QTextBrowser* textbrowser)
-    {
-        text = textbrowser;
-    }
+  void setTextBrowser(QTextBrowser* textbrowser) { text = textbrowser; }
 
-protected slots:
-    /// read the stderr from the process and paste it into the text browser
-    void slotStderr();
-    /// read the stdout from the process and paste it into the text browser
-    void slotStdout();
-    void slotError(QProcess::ProcessError error);
-    virtual void slotFinished(int exitCode, QProcess::ExitStatus status);
+ protected slots:
+  /// read the stderr from the process and paste it into the text browser
+  void slotStderr();
+  /// read the stdout from the process and paste it into the text browser
+  void slotStdout();
+  void slotError(QProcess::ProcessError error);
+  virtual void slotFinished(int exitCode, QProcess::ExitStatus status);
 
-protected:
-    virtual void finished(int exitCode, QProcess::ExitStatus status) = 0;
+ protected:
+  virtual void finished(int exitCode, QProcess::ExitStatus status) = 0;
 
-    /// write text to stdout color channel of the text browser
-    void stdOut(const QString& str);
-    /// write text to stderr color channel of the text browser
-    void stdErr(const QString& str);
+  /// write text to stdout color channel of the text browser
+  void stdOut(const QString& str);
+  /// write text to stderr color channel of the text browser
+  void stdErr(const QString& str);
 
-    QProcess cmd;
+  QProcess cmd;
 
-    QPointer<QTextBrowser> text;
+  QPointer<QTextBrowser> text;
 };
 
-#endif //ITOOLSHELL_H
-
+#endif  // ITOOLSHELL_H

@@ -19,28 +19,26 @@
 #ifndef CSETUPEXTTOOLS_H
 #define CSETUPEXTTOOLS_H
 
-#include <functional>
 #include <QDialog>
+#include <functional>
 
 #include "ui_ISetupExtTools.h"
 
 using fResetPath = std::function<void()>;
 using fSetPath = std::function<void(const QString&)>;
 
-class CSetupExtTools : public QDialog, private Ui::ISetupExtTools
-{
-    Q_OBJECT
-public:
-    CSetupExtTools(QWidget* parent);
-    virtual ~CSetupExtTools() = default;
+class CSetupExtTools : public QDialog, private Ui::ISetupExtTools {
+  Q_OBJECT
+ public:
+  CSetupExtTools(QWidget* parent);
+  virtual ~CSetupExtTools() = default;
 
-private slots:
-    void slotSetPathXOverride(const QString& name, fSetPath setPath);
-    void slotResetPathXOverride(fResetPath resetPath);
+ private slots:
+  void slotSetPathXOverride(const QString& name, fSetPath setPath);
+  void slotResetPathXOverride(fResetPath resetPath);
 
-private:
-    void setupGui();
+ private:
+  void setupGui();
 };
 
-#endif //CSETUPEXTTOOLS_H
-
+#endif  // CSETUPEXTTOOLS_H

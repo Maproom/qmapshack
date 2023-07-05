@@ -20,50 +20,46 @@
 #define CDEVICEWATCHERMAC_H
 
 #include <DiskArbitration/DiskArbitration.h>
+
 #include <QStorageInfo>
-#include <QtCore/QStringList>
 #include <QThread>
+#include <QtCore/QStringList>
 
 #include "device/IDeviceWatcher.h"
 
+class CDeviceWorker : public QThread {
+  Q_OBJECT
+ public:
+  CDeviceWorker();
 
-class CDeviceWorker : public QThread
-{
-    Q_OBJECT
-public:
-    CDeviceWorker();
+  void run() override;
+  void stop();
 
-    void run() override;
-    void stop();
+ signals:
+  void sigDeviceAdded(QString dev);
+  void sigDeviceRemoved(QString dev);
 
-signals:
-    void sigDeviceAdded(QString dev);
-    void sigDeviceRemoved(QString dev);
-
-private:
-    volatile bool mStop;
-    DASessionRef mSession;
+ private:
+  volatile bool mStop;
+  DASessionRef mSession;
 };
 
+class CDeviceWatcherMac : public IDeviceWatcher {
+  Q_OBJECT
+ public:
+  CDeviceWatcherMac(CGisListWks* parent);
 
-class CDeviceWatcherMac : public IDeviceWatcher
-{
-    Q_OBJECT
-public:
-    CDeviceWatcherMac(CGisListWks* parent);
+ private slots:
+  void slotUpdate() override;
+  void slotDeviceAdded(QString dev);
+  void slotDeviceRemoved(QString dev);
+  void slotEndListing();
 
-private slots:
-    void slotUpdate() override;
-    void slotDeviceAdded(QString dev);
-    void slotDeviceRemoved(QString dev);
-    void slotEndListing();
+ private:
+  void addDevice(const QStorageInfo& storage);
 
-private:
-    void addDevice(const QStorageInfo& storage);
-
-    CDeviceWorker worker;
-    QStringList deviceList;
+  CDeviceWorker worker;
+  QStringList deviceList;
 };
 
-#endif //CDEVICEWATCHERMAC_H
-
+#endif  // CDEVICEWATCHERMAC_H

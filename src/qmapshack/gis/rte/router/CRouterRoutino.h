@@ -19,54 +19,48 @@
 #ifndef CROUTERROUTINO_H
 #define CROUTERROUTINO_H
 
-#include "gis/rte/router/IRouter.h"
-#include "ui_IRouterRoutino.h"
 #include <routino.h>
 
 #include <QPoint>
 
+#include "gis/rte/router/IRouter.h"
+#include "ui_IRouterRoutino.h"
+
 class CProgressDialog;
 
-class CRouterRoutino : public IRouter, private Ui::IRouterRoutino
-{
-    Q_OBJECT
-public:
-    CRouterRoutino(QWidget* parent);
-    static CRouterRoutino& self()
-    {
-        return *pSelf;
-    }
+class CRouterRoutino : public IRouter, private Ui::IRouterRoutino {
+  Q_OBJECT
+ public:
+  CRouterRoutino(QWidget* parent);
+  static CRouterRoutino& self() { return *pSelf; }
 
+  void calcRoute(const IGisItem::key_t& key) override;
+  int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs) override;
 
-    void calcRoute(const IGisItem::key_t& key) override;
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs) override;
+  bool hasFastRouting() override;
 
-    bool hasFastRouting() override;
+  QString getOptions() override;
 
-    QString getOptions() override;
+  static QPointer<CProgressDialog> progress;
 
-    static QPointer<CProgressDialog> progress;
+  void setupPath(const QString& path);
 
-    void setupPath(const QString& path);
+ private slots:
+  void slotSetupPaths();
 
-private slots:
-    void slotSetupPaths();
+ private:
+  virtual ~CRouterRoutino();
+  void buildDatabaseList();
+  void freeDatabaseList();
+  int loadProfiles(const QString& profilesPath);
+  void updateHelpText();
+  QString xlateRoutinoError(int err);
+  static CRouterRoutino* pSelf;
 
+  QStringList dbPaths;
+  QString currentProfilesPath;
 
-private:
-    virtual ~CRouterRoutino();
-    void buildDatabaseList();
-    void freeDatabaseList();
-    int loadProfiles(const QString& profilesPath);
-    void updateHelpText();
-    QString xlateRoutinoError(int err);
-    static CRouterRoutino* pSelf;
-
-    QStringList dbPaths;
-    QString currentProfilesPath;
-
-    QMutex mutex;
+  QMutex mutex;
 };
 
-#endif //CROUTERROUTINO_H
-
+#endif  // CROUTERROUTINO_H

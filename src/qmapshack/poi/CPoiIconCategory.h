@@ -21,25 +21,23 @@
 #include <QMap>
 #include <QPixmap>
 
-class CPoiIconCategory
-{
-public:
-    //Only to avoid compiler errors due to maps assignment
-    CPoiIconCategory(){}
-    CPoiIconCategory(const QPixmap& baseIcon, const QString& garminSym = "", const QMap<QString, QPixmap>& subCategories = QMap<QString, QPixmap>())
-        : baseIcon(baseIcon), garminSym(garminSym), subCategories(subCategories){}
-    //Convenience constructor to be able to omit garminSym when specifying child categories
-    CPoiIconCategory(const QPixmap& baseIcon, const QMap<QString, QPixmap>& subCategories)
-        : baseIcon(baseIcon), garminSym(""), subCategories(subCategories){}
-    QPixmap getIcon(const QStringList& additionalTags) const;
-    const QString& getGarminSym() const
-    {
-        return garminSym;
-    }
-private:
-    QPixmap baseIcon;
-    QString garminSym;
-    QMap<QString, QPixmap> subCategories;
+class CPoiIconCategory {
+ public:
+  // Only to avoid compiler errors due to maps assignment
+  CPoiIconCategory() {}
+  CPoiIconCategory(const QPixmap& baseIcon, const QString& garminSym = "",
+                   const QMap<QString, QPixmap>& subCategories = QMap<QString, QPixmap>())
+      : baseIcon(baseIcon), garminSym(garminSym), subCategories(subCategories) {}
+  // Convenience constructor to be able to omit garminSym when specifying child categories
+  CPoiIconCategory(const QPixmap& baseIcon, const QMap<QString, QPixmap>& subCategories)
+      : baseIcon(baseIcon), garminSym(""), subCategories(subCategories) {}
+  QPixmap getIcon(const QStringList& additionalTags) const;
+  const QString& getGarminSym() const { return garminSym; }
+
+ private:
+  QPixmap baseIcon;
+  QString garminSym;
+  QMap<QString, QPixmap> subCategories;
 };
 
-#endif // CPOIICONCATEGORY_H
+#endif  // CPOIICONCATEGORY_H

@@ -16,54 +16,44 @@
 
 **********************************************************************************************/
 
+#include "gis/trk/filter/CFilterDeleteExtension.h"
+
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
-#include "gis/trk/filter/CFilterDeleteExtension.h"
 
+CFilterDeleteExtension::CFilterDeleteExtension(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
 
+  updateUi();
 
-CFilterDeleteExtension::CFilterDeleteExtension(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
-
-    updateUi();
-
-    connect(toolApply, &QToolButton::clicked, this, &CFilterDeleteExtension::slotApply);
+  connect(toolApply, &QToolButton::clicked, this, &CFilterDeleteExtension::slotApply);
 }
 
-void CFilterDeleteExtension::updateUi()
-{
-    comboExtensions->clear();
+void CFilterDeleteExtension::updateUi() {
+  comboExtensions->clear();
 
-    const QStringList& keys = trk.getExistingDataSources();
-    for(const QString& key : keys)
-    {
-        const CKnownExtension& ext = CKnownExtension::get(key);
-        if(!ext.derivedQMS)
-        {
-            QIcon icon(ext.icon);
-            comboExtensions->addItem(icon, ext.known ? ext.nameLongText : key, key);
-        }
+  const QStringList& keys = trk.getExistingDataSources();
+  for (const QString& key : keys) {
+    const CKnownExtension& ext = CKnownExtension::get(key);
+    if (!ext.derivedQMS) {
+      QIcon icon(ext.icon);
+      comboExtensions->addItem(icon, ext.known ? ext.nameLongText : key, key);
     }
+  }
 
-    bool enabled = (0 != comboExtensions->count());
-    toolApply->setEnabled(enabled);
-    comboExtensions->setEnabled(enabled);
+  bool enabled = (0 != comboExtensions->count());
+  toolApply->setEnabled(enabled);
+  comboExtensions->setEnabled(enabled);
 
-    if(!enabled)
-    {
-        comboExtensions->addItem(tr("No extension available"), "");
-    }
+  if (!enabled) {
+    comboExtensions->addItem(tr("No extension available"), "");
+  }
 }
 
-void CFilterDeleteExtension::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+void CFilterDeleteExtension::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
 
-    int idx = comboExtensions->currentIndex();
-    trk.filterDeleteExtension(comboExtensions->itemData(idx).toString());
+  int idx = comboExtensions->currentIndex();
+  trk.filterDeleteExtension(comboExtensions->itemData(idx).toString());
 }
-

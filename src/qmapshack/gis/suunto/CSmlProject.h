@@ -22,28 +22,20 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/suunto/ISuuntoProject.h"
 
-class CSmlProject : public ISuuntoProject
-{
-    Q_DECLARE_TR_FUNCTIONS(CSmlProject)
-public:
-    CSmlProject(const QString& filename, CGisListWks* parent);
-    virtual ~CSmlProject() = default;
+class CSmlProject : public ISuuntoProject {
+  Q_DECLARE_TR_FUNCTIONS(CSmlProject)
+ public:
+  CSmlProject(const QString& filename, CGisListWks* parent);
+  virtual ~CSmlProject() = default;
 
-    const QString getFileDialogFilter() const override
-    {
-        return IGisProject::filedialogFilterSML;
-    }
+  const QString getFileDialogFilter() const override { return IGisProject::filedialogFilterSML; }
 
-    const QString getFileExtension() const override
-    {
-        return "sml";
-    }
+  const QString getFileExtension() const override { return "sml"; }
 
-    static void loadSml(const QString& filename, CSmlProject* project);
+  static void loadSml(const QString& filename, CSmlProject* project);
 
-private:
-    void loadSml(const QString& filename);
-    static const QList<extension_t> extensions;
+ private:
+  void loadSml(const QString& filename);
+  static const QList<extension_t> extensions;
 };
-#endif //CSMLPROJECT_H
-
+#endif  // CSMLPROJECT_H

@@ -31,36 +31,32 @@
 #include <QLineEdit>
 #include <QPalette>
 
-class CLineEdit : public QLineEdit
-{
-    Q_OBJECT
+class CLineEdit : public QLineEdit {
+  Q_OBJECT
 
-private:
-    bool initialized;
+ private:
+  bool initialized;
 
-    QPalette paletteEdit;
-    QPalette paletteRO;
-    QPalette paletteRW;
+  QPalette paletteEdit;
+  QPalette paletteRO;
+  QPalette paletteRW;
 
-    QFont fontNoUnderline;
-    QFont fontUnderline;
+  QFont fontNoUnderline;
+  QFont fontUnderline;
 
-    void initialize();
-    void updateStyle();
+  void initialize();
+  void updateStyle();
 
-public slots:
-    void slotSelectAll()
-    {
-        selectAll();
-    }
+ public slots:
+  void slotSelectAll() { selectAll(); }
 
-public:
-    CLineEdit(QWidget* parent = nullptr);
+ public:
+  CLineEdit(QWidget* parent = nullptr);
 
-    void setReadOnly(bool r);
+  void setReadOnly(bool r);
 
-protected:
-    void focusInEvent(QFocusEvent* event) override;
-    void focusOutEvent(QFocusEvent* event) override;
+ protected:
+  void focusInEvent(QFocusEvent* event) override;
+  void focusOutEvent(QFocusEvent* event) override;
 };
-#endif // CLINEEDIT_H
+#endif  // CLINEEDIT_H

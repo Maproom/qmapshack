@@ -22,19 +22,17 @@
 #include "mouse/range/CScrOptRangeTool.h"
 #include "ui_IActionSelect.h"
 
-class CActionSelect : public QWidget, private Ui::IActionSelect
-{
-    Q_OBJECT
-public:
-    CActionSelect(QWidget* parent);
-    virtual ~CActionSelect() = default;
+class CActionSelect : public QWidget, private Ui::IActionSelect {
+  Q_OBJECT
+ public:
+  CActionSelect(QWidget* parent);
+  virtual ~CActionSelect() = default;
 
-    void setAction(CScrOptRangeTool::eAction action);
-    CScrOptRangeTool::eAction getAction() const;
+  void setAction(CScrOptRangeTool::eAction action);
+  CScrOptRangeTool::eAction getAction() const;
 
-private:
-    QVector<QRadioButton*> buttons;
+ private:
+  QVector<QRadioButton*> buttons;
 };
 
-#endif //CACTIONSELECT_H
-
+#endif  // CACTIONSELECT_H

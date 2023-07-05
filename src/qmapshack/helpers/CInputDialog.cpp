@@ -20,53 +20,40 @@
 
 #include <QtWidgets>
 
-CInputDialog::CInputDialog(QWidget* parent, const QString& text, QVariant& val, const QVariant& reset, const QString& suffix)
-    : QDialog(parent)
-    , val(val)
-    , reset(reset)
-{
-    setupUi(this);
-    QPushButton* pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
-    connect(pushReset, &QPushButton::clicked, this, &CInputDialog::slotReset);
+CInputDialog::CInputDialog(QWidget* parent, const QString& text, QVariant& val, const QVariant& reset,
+                           const QString& suffix)
+    : QDialog(parent), val(val), reset(reset) {
+  setupUi(this);
+  QPushButton* pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
+  connect(pushReset, &QPushButton::clicked, this, &CInputDialog::slotReset);
 
-    labelSuffix->setText(suffix);
-    label->setText(text);
-    if(val != reset)
-    {
-        lineEdit->setText(val.toString());
-    }
+  labelSuffix->setText(suffix);
+  label->setText(text);
+  if (val != reset) {
+    lineEdit->setText(val.toString());
+  }
 
-    checkBox->hide();
+  checkBox->hide();
 }
 
-CInputDialog::~CInputDialog()
-{
+CInputDialog::~CInputDialog() {}
+
+void CInputDialog::setOption(const QString& text, bool checked) {
+  checkBox->setChecked(checked);
+  checkBox->setText(text);
+  checkBox->show();
+
+  adjustSize();
 }
 
-void CInputDialog::setOption(const QString& text, bool checked)
-{
-    checkBox->setChecked(checked);
-    checkBox->setText(text);
-    checkBox->show();
+void CInputDialog::accept() {
+  if (lineEdit->text().isEmpty()) {
+    val = reset;
+  } else {
+    val.setValue(lineEdit->text());
+  }
 
-    adjustSize();
+  QDialog::accept();
 }
 
-void CInputDialog::accept()
-{
-    if(lineEdit->text().isEmpty())
-    {
-        val = reset;
-    }
-    else
-    {
-        val.setValue(lineEdit->text());
-    }
-
-    QDialog::accept();
-}
-
-void CInputDialog::slotReset()
-{
-    lineEdit->clear();
-}
+void CInputDialog::slotReset() { lineEdit->clear(); }

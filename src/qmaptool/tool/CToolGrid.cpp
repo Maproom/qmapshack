@@ -16,109 +16,93 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "items/CItemRefMap.h"
-#include "overlay/COverlayRefMap.h"
 #include "tool/CToolGrid.h"
 
 #include <QtWidgets>
 
-#define TESTITEM(cmd) \
-    if(nullptr == item) \
-    { \
-        return cmd; \
-    } \
+#include "CMainWindow.h"
+#include "items/CItemRefMap.h"
+#include "overlay/COverlayRefMap.h"
 
+#define TESTITEM(cmd)    \
+  if (nullptr == item) { \
+    return cmd;          \
+  }
 
-CToolGrid::CToolGrid(QWidget* parent)
-    : QWidget(parent)
-{
-    setupUi(this);
-    labelHelp->setText(tr("By placing 4 reference points at the corners of a grid "
-                          "square and referencing them by their top left corner, "
-                          "the width and height, all the other grid points can be "
-                          "estimated."));
+CToolGrid::CToolGrid(QWidget* parent) : QWidget(parent) {
+  setupUi(this);
+  labelHelp->setText(
+      tr("By placing 4 reference points at the corners of a grid "
+         "square and referencing them by their top left corner, "
+         "the width and height, all the other grid points can be "
+         "estimated."));
 
-    labelHelp->setVisible(CMainWindow::self().showToolHelp()->isChecked());
-    connect(CMainWindow::self().showToolHelp(), &QAction::toggled, labelHelp, &QLabel::setVisible);
+  labelHelp->setVisible(CMainWindow::self().showToolHelp()->isChecked());
+  connect(CMainWindow::self().showToolHelp(), &QAction::toggled, labelHelp, &QLabel::setVisible);
 
-    connect(pushOk, &QPushButton::clicked, this, &CToolGrid::slotOk);
-    connect(pushCancel, &QPushButton::clicked, this, &CToolGrid::slotCancel);
-    connect(overlay, &COverlayGridTool::sigChanged, pushOk, &QPushButton::setEnabled);
-    connect(pushReset, &QPushButton::clicked, overlay, &COverlayGridTool::slotReset);
+  connect(pushOk, &QPushButton::clicked, this, &CToolGrid::slotOk);
+  connect(pushCancel, &QPushButton::clicked, this, &CToolGrid::slotCancel);
+  connect(overlay, &COverlayGridTool::sigChanged, pushOk, &QPushButton::setEnabled);
+  connect(pushReset, &QPushButton::clicked, overlay, &COverlayGridTool::slotReset);
 }
 
-void CToolGrid::registerItem(CItemRefMap* item)
-{
-    this->item = item;
-    overlay->registerItem(item);
+void CToolGrid::registerItem(CItemRefMap* item) {
+  this->item = item;
+  overlay->registerItem(item);
 }
 
-bool CToolGrid::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
-{
-    TESTITEM(false)
-    item->drawFx(p, needsRedraw);
-    overlay->drawFx(p, needsRedraw);
+bool CToolGrid::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) {
+  TESTITEM(false)
+  item->drawFx(p, needsRedraw);
+  overlay->drawFx(p, needsRedraw);
 
-    return true;
+  return true;
 }
 
-void CToolGrid::mousePressEventFx(QMouseEvent* e)
-{
-    TESTITEM()
-    item->CItemFile::mousePressEventFx(e);
+void CToolGrid::mousePressEventFx(QMouseEvent* e) {
+  TESTITEM()
+  item->CItemFile::mousePressEventFx(e);
 }
 
-void CToolGrid::mouseMoveEventFx(QMouseEvent* e)
-{
-    TESTITEM()
-    item->CItemFile::mouseMoveEventFx(e);
-    if(!item->getMapIsMoving())
-    {
-        overlay->mouseMoveEventFx(e);
-    }
+void CToolGrid::mouseMoveEventFx(QMouseEvent* e) {
+  TESTITEM()
+  item->CItemFile::mouseMoveEventFx(e);
+  if (!item->getMapIsMoving()) {
+    overlay->mouseMoveEventFx(e);
+  }
 }
 
-void CToolGrid::mouseReleaseEventFx(QMouseEvent* e)
-{
-    TESTITEM()
-    if(!item->getMapDidMove())
-    {
-        overlay->mouseReleaseEventFx(e);
-    }
-    item->CItemFile::mouseReleaseEventFx(e);
+void CToolGrid::mouseReleaseEventFx(QMouseEvent* e) {
+  TESTITEM()
+  if (!item->getMapDidMove()) {
+    overlay->mouseReleaseEventFx(e);
+  }
+  item->CItemFile::mouseReleaseEventFx(e);
 }
 
-void CToolGrid::wheelEventFx(QWheelEvent* e)
-{
-    TESTITEM()
-    item->CItemFile::wheelEventFx(e);
+void CToolGrid::wheelEventFx(QWheelEvent* e) {
+  TESTITEM()
+  item->CItemFile::wheelEventFx(e);
 }
 
-void CToolGrid::leaveEventFx(QEvent* e)
-{
-    TESTITEM()
-    item->CItemFile::leaveEventFx(e);
-    overlay->leaveEventFx(e);
+void CToolGrid::leaveEventFx(QEvent* e) {
+  TESTITEM()
+  item->CItemFile::leaveEventFx(e);
+  overlay->leaveEventFx(e);
 }
 
-QCursor CToolGrid::getCursorFx()
-{
-    TESTITEM(Qt::ArrowCursor)
-    return overlay->getCursorFx();
+QCursor CToolGrid::getCursorFx() {
+  TESTITEM(Qt::ArrowCursor)
+  return overlay->getCursorFx();
 }
 
-
-void CToolGrid::slotOk()
-{
-    TESTITEM()
-    item->addRefPoints(overlay->getRefPoints());
-    slotCancel();
+void CToolGrid::slotOk() {
+  TESTITEM()
+  item->addRefPoints(overlay->getRefPoints());
+  slotCancel();
 }
 
-
-void CToolGrid::slotCancel()
-{
-    CMainWindow::self().showToolBox();
-    registerItem(nullptr);
+void CToolGrid::slotCancel() {
+  CMainWindow::self().showToolBox();
+  registerItem(nullptr);
 }

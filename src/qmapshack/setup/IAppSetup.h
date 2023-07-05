@@ -19,33 +19,32 @@
 #ifndef IAPPSETUP_H
 #define IAPPSETUP_H
 
-#include "CAppOpts.h"
 #include <QApplication>
 #include <QtCore>
 
+#include "CAppOpts.h"
 
-class IAppSetup
-{
-public:
-    static IAppSetup* getPlatformInstance();
-    virtual void initQMapShack() = 0;
-    void initLogHandler();
-    void processArguments();
+class IAppSetup {
+ public:
+  static IAppSetup* getPlatformInstance();
+  virtual void initQMapShack() = 0;
+  void initLogHandler();
+  void processArguments();
 
-    virtual QString routinoPath(QString xmlFile) = 0;
-    virtual QString defaultCachePath() = 0;
-    virtual QString userDataPath(QString subdir = 0) = 0;
-    virtual QString logDir() = 0;
-    virtual QString findExecutable(const QString& name) = 0;
-    virtual QString helpFile() = 0;
+  virtual QString routinoPath(QString xmlFile) = 0;
+  virtual QString defaultCachePath() = 0;
+  virtual QString userDataPath(QString subdir = 0) = 0;
+  virtual QString logDir() = 0;
+  virtual QString findExecutable(const QString& name) = 0;
+  virtual QString helpFile() = 0;
 
-protected:
-    void prepareGdal(QString gdalDir, QString projDir);
-    void prepareTranslator(QString translationPath, QString translationPrefix);
+ protected:
+  void prepareGdal(QString gdalDir, QString projDir);
+  void prepareTranslator(QString translationPath, QString translationPrefix);
 
-    static IAppSetup* instance;
+  static IAppSetup* instance;
 
-    QString path(QString path, QString subdir, bool mkdir, QString debugName);
+  QString path(QString path, QString subdir, bool mkdir, QString debugName);
 };
 
-#endif // IAPPSETUP_H
+#endif  // IAPPSETUP_H

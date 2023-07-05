@@ -16,99 +16,79 @@
 
 **********************************************************************************************/
 
-#include "helpers/CSettings.h"
 #include "helpers/CValue.h"
+
+#include "helpers/CSettings.h"
 
 QSet<CValue*> CValue::allValues;
 
 CValue::CValue(const QString& cfgTag, const QVariant& initDefault, fMarkChanged markChanged, fValueOnChange onChange)
-    : cfgTag(cfgTag)
-    , initDefault(initDefault)
-    , valUser(initDefault)
-    , funcOnChange(onChange)
-    , funcMarkChanged(markChanged)
-{
-    if(onChange != nullptr)
-    {
-        onChange(val());
-    }
+    : cfgTag(cfgTag),
+      initDefault(initDefault),
+      valUser(initDefault),
+      funcOnChange(onChange),
+      funcMarkChanged(markChanged) {
+  if (onChange != nullptr) {
+    onChange(val());
+  }
 
-    allValues << this;
+  allValues << this;
 }
 
-CValue::~CValue()
-{
-    allValues.remove(this);
+CValue::~CValue() { allValues.remove(this); }
+
+void CValue::setMode(mode_e m) {
+  bool markAsChanged = mode != m;
+
+  mode = m;
+
+  if (funcOnChange != nullptr) {
+    funcOnChange(val());
+  }
+
+  if (markAsChanged) {
+    funcMarkChanged();
+  }
 }
 
-void CValue::setMode(mode_e m)
-{
-    bool markAsChanged = mode != m;
+QVariant CValue::val() const {
+  if (mode == eModeUser) {
+    return valUser;
+  }
 
-    mode = m;
-
-    if(funcOnChange != nullptr)
-    {
-        funcOnChange(val());
-    }
-
-    if(markAsChanged)
-    {
-        funcMarkChanged();
-    }
+  SETTINGS;
+  return cfg.value(cfgTag, initDefault);
 }
 
-QVariant CValue::val() const
-{
-    if(mode == eModeUser)
-    {
-        return valUser;
-    }
+const QVariant& CValue::operator=(const QVariant& v) {
+  bool markAsChanged = false;
 
+  if (mode == eModeUser) {
+    markAsChanged = valUser != v;
+    valUser = v;
+  } else {
     SETTINGS;
-    return cfg.value(cfgTag, initDefault);
+    cfg.setValue(cfgTag, v);
+
+    for (CValue* value : qAsConst(allValues)) {
+      if (value != this) {
+        value->updateSys(cfgTag, v);
+      }
+    }
+  }
+
+  if (funcOnChange != nullptr) {
+    funcOnChange(v);
+  }
+
+  if (markAsChanged) {
+    funcMarkChanged();
+  }
+  return v;
 }
 
-const QVariant& CValue::operator=(const QVariant& v)
-{
-    bool markAsChanged = false;
-
-    if(mode == eModeUser)
-    {
-        markAsChanged = valUser != v;
-        valUser = v;
-    }
-    else
-    {
-        SETTINGS;
-        cfg.setValue(cfgTag, v);
-
-        for(CValue* value : qAsConst(allValues))
-        {
-            if(value != this)
-            {
-                value->updateSys(cfgTag, v);
-            }
-        }
-    }
-
-    if(funcOnChange != nullptr)
-    {
-        funcOnChange(v);
-    }
-
-    if(markAsChanged)
-    {
-        funcMarkChanged();
-    }
-    return v;
-}
-
-
-void CValue::updateSys(const QString& tag, const QVariant& val)
-{
-    if((mode == eModeSys) && (tag == cfgTag) && (funcOnChange != nullptr))
-    {
-        funcOnChange(val);
-    }
+void CValue::updateSys(const QString& tag, const QVariant& val) {
+  if ((mode == eModeSys) && (tag == cfgTag) && (funcOnChange != nullptr)) {
+    funcOnChange(val);
+  }
 }

@@ -24,61 +24,52 @@
 class QSettings;
 class IItem;
 
-class CItemListWidget : public QWidget, private Ui::IItemListWidget
-{
-    Q_OBJECT
-public:
-    CItemListWidget(QWidget* parent);
-    virtual ~CItemListWidget() = default;
+class CItemListWidget : public QWidget, private Ui::IItemListWidget {
+  Q_OBJECT
+ public:
+  CItemListWidget(QWidget* parent);
+  virtual ~CItemListWidget() = default;
 
-    void saveSettings(QSettings& cfg);
-    void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings& cfg);
+  void loadSettings(QSettings& cfg);
 
-    IItem* currentItem();
-    IItem* item(int n);
+  IItem* currentItem();
+  IItem* item(int n);
 
-    qint32 count() const
-    {
-        return listFiles->count();
+  qint32 count() const { return listFiles->count(); }
+
+  template <typename LessThan>
+  void sort(LessThan lessThan) {
+    listFiles->blockSignals(true);
+
+    QList<QListWidgetItem*> items;
+    while (listFiles->count() != 0) {
+      items << listFiles->takeItem(0);
     }
 
-    template< typename LessThan>
-    void sort(LessThan lessThan)
-    {
-        listFiles->blockSignals(true);
+    std::sort(items.begin(), items.end(), lessThan);
 
-        QList<QListWidgetItem*> items;
-        while(listFiles->count() != 0)
-        {
-            items << listFiles->takeItem(0);
-        }
-
-        std::sort(items.begin(), items.end(), lessThan);
-
-        for(QListWidgetItem* item : qAsConst(items))
-        {
-            listFiles->addItem(item);
-        }
-
-        listFiles->blockSignals(false);
+    for (QListWidgetItem* item : qAsConst(items)) {
+      listFiles->addItem(item);
     }
 
+    listFiles->blockSignals(false);
+  }
 
-signals:
-    void sigAddItem(const QString& filename, QListWidget* list);
-    void sigSelectionChanged();
-    void sigChanged();
+ signals:
+  void sigAddItem(const QString& filename, QListWidget* list);
+  void sigSelectionChanged();
+  void sigChanged();
 
-protected slots:
-    void slotFiles();
-    void slotLoadCurrentMap();
-    void slotDeleteFiles();
-    void slotDeleteFile();
-    void slotSelectionChanged();
+ protected slots:
+  void slotFiles();
+  void slotLoadCurrentMap();
+  void slotDeleteFiles();
+  void slotDeleteFile();
+  void slotSelectionChanged();
 
-protected:
-    void addFiles(const QStringList& files);
+ protected:
+  void addFiles(const QStringList& files);
 };
 
-#endif //CITEMLISTWIDGET_H
-
+#endif  // CITEMLISTWIDGET_H

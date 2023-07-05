@@ -16,123 +16,106 @@
 
 **********************************************************************************************/
 
-#include "realtime/CRtDraw.h"
 #include "realtime/IRtRecord.h"
 
 #include <QtCore>
 
-IRtRecord::IRtRecord(QObject* parent)
-    : QObject(parent)
-{
+#include "realtime/CRtDraw.h"
+
+IRtRecord::IRtRecord(QObject* parent) : QObject(parent) {}
+
+bool IRtRecord::setFile(const QString& fn) {
+  track.clear();
+  filename = fn;
+
+  if (QFile::exists(filename)) {
+    return readFile(filename);
+  }
+  return true;
 }
 
-bool IRtRecord::setFile(const QString& fn)
-{
-    track.clear();
-    filename = fn;
+bool IRtRecord::readFile(const QString& filename) {
+  QFile file(filename);
+  if (!file.open(QIODevice::ReadOnly)) {
+    error = tr("Failed to open record for reading.");
+    return false;
+  }
 
-    if(QFile::exists(filename))
-    {
-        return readFile(filename);
+  QDataStream stream(&file);
+  stream.setVersion(QDataStream::Qt_5_2);
+  stream.setByteOrder(QDataStream::LittleEndian);
+
+  while (!stream.atEnd()) {
+    quint64 size = stream.device()->pos();
+
+    quint16 crc;
+    QByteArray data;
+    stream >> crc >> data;
+
+    if ((qChecksum(data.data(), data.size()) != crc) || (stream.status() != QDataStream::Ok)) {
+      error = tr("Failed to read entry. Truncate record to last valid entry.");
+      file.close();
+      QFile::resize(filename, size);
+      return false;
     }
-    return true;
+
+    readEntry(data);
+  }
+
+  file.close();
+  return true;
 }
 
-bool IRtRecord::readFile(const QString& filename)
-{
-    QFile file(filename);
-    if(!file.open(QIODevice::ReadOnly))
-    {
-        error = tr("Failed to open record for reading.");
-        return false;
-    }
+bool IRtRecord::writeEntry(const QByteArray& data) {
+  QFile file(filename);
+  if (!file.open(QIODevice::Append)) {
+    error = tr("Failed to open record for writing.");
+    return false;
+  }
 
-    QDataStream stream(&file);
-    stream.setVersion(QDataStream::Qt_5_2);
-    stream.setByteOrder(QDataStream::LittleEndian);
+  QDataStream stream(&file);
+  stream.setVersion(QDataStream::Qt_5_2);
+  stream.setByteOrder(QDataStream::LittleEndian);
 
-    while(!stream.atEnd())
-    {
-        quint64 size = stream.device()->pos();
+  quint16 crc = qChecksum(data.data(), data.size());
+  stream << crc << data;
 
-        quint16 crc;
-        QByteArray data;
-        stream >> crc >> data;
-
-        if((qChecksum(data.data(), data.size()) != crc) || (stream.status() != QDataStream::Ok))
-        {
-            error = tr("Failed to read entry. Truncate record to last valid entry.");
-            file.close();
-            QFile::resize(filename, size);
-            return false;
-        }
-
-        readEntry(data);
-    }
-
+  if (stream.status() != QDataStream::Ok) {
+    error = tr("Failed to write entry.");
     file.close();
-    return true;
+    return false;
+  }
+
+  file.close();
+  return true;
 }
 
-bool IRtRecord::writeEntry(const QByteArray& data)
-{
-    QFile file(filename);
-    if(!file.open(QIODevice::Append))
-    {
-        error = tr("Failed to open record for writing.");
-        return false;
-    }
+bool IRtRecord::readEntry(QByteArray& data) {
+  QDataStream stream(&data, QIODevice::ReadOnly);
+  stream.setVersion(QDataStream::Qt_5_2);
+  stream.setByteOrder(QDataStream::LittleEndian);
 
-    QDataStream stream(&file);
-    stream.setVersion(QDataStream::Qt_5_2);
-    stream.setByteOrder(QDataStream::LittleEndian);
+  quint8 version;
+  stream >> version;
 
-    quint16 crc = qChecksum(data.data(), data.size());
-    stream << crc << data;
-
-    if(stream.status() != QDataStream::Ok)
-    {
-        error = tr("Failed to write entry.");
-        file.close();
-        return false;
-    }
-
-    file.close();
-    return true;
+  CTrackData::trkpt_t trkpt;
+  stream >> trkpt;
+  track << trkpt;
+  return true;
 }
 
-bool IRtRecord::readEntry(QByteArray& data)
-{
-    QDataStream stream(&data, QIODevice::ReadOnly);
-    stream.setVersion(QDataStream::Qt_5_2);
-    stream.setByteOrder(QDataStream::LittleEndian);
-
-    quint8 version;
-    stream >> version;
-
-    CTrackData::trkpt_t trkpt;
-    stream >> trkpt;
-    track << trkpt;
-    return true;
+void IRtRecord::reset() {
+  track.clear();
+  QFile::resize(filename, 0);
 }
 
-void IRtRecord::reset()
-{
-    track.clear();
-    QFile::resize(filename, 0);
+void IRtRecord::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) {
+  QPolygonF tmp;
+  for (const CTrackData::trkpt_t& trkpt : qAsConst(track)) {
+    tmp << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+  }
+
+  rt->convertRad2Px(tmp);
+  p.setPen(QPen(Qt::black, 3));
+  p.drawPolyline(tmp);
 }
-
-void IRtRecord::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt)
-{
-    QPolygonF tmp;
-    for(const CTrackData::trkpt_t& trkpt : qAsConst(track))
-    {
-        tmp << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
-    }
-
-    rt->convertRad2Px(tmp);
-    p.setPen(QPen(Qt::black, 3));
-    p.drawPolyline(tmp);
-}
-
-

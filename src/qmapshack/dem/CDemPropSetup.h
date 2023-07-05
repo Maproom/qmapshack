@@ -25,33 +25,31 @@
 #include "dem/IDemProp.h"
 #include "ui_IDemPropSetup.h"
 
-class CDemPropSetup : public IDemProp, private Ui::IDemPropSetup
-{
-    Q_OBJECT
-public:
-    CDemPropSetup(IDem* demfile, CDemDraw* dem);
-    virtual ~CDemPropSetup();
+class CDemPropSetup : public IDemProp, private Ui::IDemPropSetup {
+  Q_OBJECT
+ public:
+  CDemPropSetup(IDem* demfile, CDemDraw* dem);
+  virtual ~CDemPropSetup();
 
-protected slots:
-    void slotPropertiesChanged() override;
+ protected slots:
+  void slotPropertiesChanged() override;
 
-private slots:
-    void slotScaleChanged(const QPointF& s);
-    void slotSetMinScale(bool checked);
-    void slotSetMaxScale(bool checked);
+ private slots:
+  void slotScaleChanged(const QPointF& s);
+  void slotSetMinScale(bool checked);
+  void slotSetMaxScale(bool checked);
 
-    void slotGradeIndex(int idx);
-    void slotSlopeValiddateAfterEdit();
-    void slotSlopeChanged(int val);
-    void slotElevationValueChanged();
-    void slotElevationShadeLowValueChanged();
-    void slotElevationShadeHiValueChanged();
+  void slotGradeIndex(int idx);
+  void slotSlopeValiddateAfterEdit();
+  void slotSlopeChanged(int val);
+  void slotElevationValueChanged();
+  void slotElevationShadeLowValueChanged();
+  void slotElevationShadeHiValueChanged();
 
-private:
-    CTinySpinBox* slopeSpins[SLOPE_LEVELS];
+ private:
+  CTinySpinBox* slopeSpins[SLOPE_LEVELS];
 
-    static QPointF scale;
+  static QPointF scale;
 };
 
-#endif //CDEMPROPSETUP_H
-
+#endif  // CDEMPROPSETUP_H

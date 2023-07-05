@@ -21,24 +21,23 @@
 #ifndef CSETUPWORKSPACE_H
 #define CSETUPWORKSPACE_H
 
-#include "ui_ISetupWorkspace.h"
 #include <QDialog>
+
+#include "ui_ISetupWorkspace.h"
 
 class CGisWorkspace;
 
-class CSetupWorkspace : public QDialog, private Ui::ISetupWorkspace
-{
-    Q_OBJECT
-public:
-    CSetupWorkspace(CGisWorkspace* workspace, QWidget* parent);
-    virtual ~CSetupWorkspace();
+class CSetupWorkspace : public QDialog, private Ui::ISetupWorkspace {
+  Q_OBJECT
+ public:
+  CSetupWorkspace(CGisWorkspace* workspace, QWidget* parent);
+  virtual ~CSetupWorkspace();
 
-public slots:
-    void accept() override;
+ public slots:
+  void accept() override;
 
-private:
-    CGisWorkspace* workspace;
+ private:
+  CGisWorkspace* workspace;
 };
 
-#endif //CSETUPWORKSPACE_H
-
+#endif  // CSETUPWORKSPACE_H

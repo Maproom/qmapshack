@@ -16,29 +16,24 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "tool/CToolBox.h"
 
-CToolBox::CToolBox(QWidget* parent)
-    : QToolBox(parent)
-{
-    connect(this, &CToolBox::currentChanged, this, &CToolBox::slotToolChanged);
+#include "CMainWindow.h"
+
+CToolBox::CToolBox(QWidget* parent) : QToolBox(parent) {
+  connect(this, &CToolBox::currentChanged, this, &CToolBox::slotToolChanged);
 }
 
-void CToolBox::setupChanged()
-{
-    const int N = count();
-    for(int n = 0; n < N; n++)
-    {
-        ITool* tool = dynamic_cast<ITool*>(widget(n));
-        if(nullptr != tool)
-        {
-            tool->setupChanged();
-        }
+void CToolBox::setupChanged() {
+  const int N = count();
+  for (int n = 0; n < N; n++) {
+    ITool* tool = dynamic_cast<ITool*>(widget(n));
+    if (nullptr != tool) {
+      tool->setupChanged();
     }
+  }
 }
 
-void CToolBox::slotToolChanged(int idx)
-{
-    CMainWindow::self().getCanvas()->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
+void CToolBox::slotToolChanged(int idx) {
+  CMainWindow::self().getCanvas()->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
 }

@@ -16,42 +16,37 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSplitTrack.h"
-#include "helpers/CSettings.h"
-#include "units/IUnit.h"
 
 #include <QtWidgets>
 
-CFilterSplitTrack::CFilterSplitTrack(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "helpers/CSettings.h"
 
-    SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/SplitTrack/nTracks").toInt());
+CFilterSplitTrack::CFilterSplitTrack(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterSplitTrack::slotApply);
-    connect(help, &QToolButton::clicked, this, &CFilterSplitTrack::showHelp);
+  SETTINGS;
+  spinBox->setValue(cfg.value("TrackDetails/Filter/SplitTrack/nTracks").toInt());
+
+  connect(toolApply, &QToolButton::clicked, this, &CFilterSplitTrack::slotApply);
+  connect(help, &QToolButton::clicked, this, &CFilterSplitTrack::showHelp);
 }
 
-CFilterSplitTrack::~CFilterSplitTrack()
-{
-    SETTINGS;
-    cfg.setValue("TrackDetails/Filter/SplitTrack/nTracks", spinBox->value());
+CFilterSplitTrack::~CFilterSplitTrack() {
+  SETTINGS;
+  cfg.setValue("TrackDetails/Filter/SplitTrack/nTracks", spinBox->value());
 }
 
-void CFilterSplitTrack::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterSplitTrack(spinBox->value());
+void CFilterSplitTrack::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterSplitTrack(spinBox->value());
 }
 
-void CFilterSplitTrack::showHelp()
-{
-    QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help")
-                             , tr("Sometimes tracks have too many points to be transfered to a gps device.\n\n"
-                                  "This filter splits the track into multiple smaller tracks.")  );
+void CFilterSplitTrack::showHelp() {
+  QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"),
+                           tr("Sometimes tracks have too many points to be transfered to a gps device.\n\n"
+                              "This filter splits the track into multiple smaller tracks."));
 }

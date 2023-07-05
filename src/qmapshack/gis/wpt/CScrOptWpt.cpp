@@ -17,165 +17,143 @@
 
 **********************************************************************************************/
 
+#include "gis/wpt/CScrOptWpt.h"
+
+#include <QtWidgets>
+
 #include "CMainWindow.h"
 #include "gis/CGisWorkspace.h"
-#include "gis/search/CGeoSearchWeb.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/wpt/CProjWpt.h"
-#include "gis/wpt/CScrOptWpt.h"
 #include "helpers/CDraw.h"
 #include "mouse/CScrOptSemaphoreLocker.h"
 #include "mouse/IMouse.h"
 
-#include <QtWidgets>
+CScrOptWpt::CScrOptWpt(CGisItemWpt* wpt, const QPoint& point, IMouse* parent) : IScrOpt(parent), key(wpt->getKey()) {
+  setupUi(this);
+  setOrigin(point);
+  label->setFont(CMainWindow::self().getMapFont());
+  label->setText(wpt->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowLinks));
+  adjustSize();
 
-CScrOptWpt::CScrOptWpt(CGisItemWpt* wpt, const QPoint& point, IMouse* parent)
-    : IScrOpt(parent)
-    , key(wpt->getKey())
-{
-    setupUi(this);
-    setOrigin(point);
-    label->setFont(CMainWindow::self().getMapFont());
-    label->setText(wpt->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowLinks));
-    adjustSize();
+  toolProj->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
+  toolMove->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
+  photoAlbum->reload(wpt->getImages());
+  toolBubble->setChecked(wpt->hasBubble());
+  bool radius = wpt->hasRadius();
+  toolNogoArea->setEnabled(radius);
+  toolNogoArea->setChecked(radius && wpt->isNogo());
+  toolDelRadius->setEnabled(radius);
 
-    toolProj->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
-    toolMove->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
-    photoAlbum->reload(wpt->getImages());
-    toolBubble->setChecked(wpt->hasBubble());
-    bool radius = wpt->hasRadius();
-    toolNogoArea->setEnabled(radius);
-    toolNogoArea->setChecked(radius && wpt->isNogo());
-    toolDelRadius->setEnabled(radius);
+  anchor = wpt->getPointCloseBy(point);
+  moveTo(anchor.toPoint());
+  show();
 
-    anchor = wpt->getPointCloseBy(point);
-    moveTo(anchor.toPoint());
-    show();
+  connect(toolDelete, &QToolButton::clicked, this, &CScrOptWpt::slotDelete);
+  connect(toolTags, &QToolButton::clicked, this, &CScrOptWpt::slotTags);
+  connect(toolEdit, &QToolButton::clicked, this, &CScrOptWpt::slotEdit);
+  connect(toolCopy, &QToolButton::clicked, this, &CScrOptWpt::slotCopy);
+  connect(toolCoordToClipboard, &QToolButton::clicked, this, &CScrOptWpt::slotCoordToClipboard);
+  connect(toolMove, &QToolButton::clicked, this, &CScrOptWpt::slotMove);
+  connect(toolProj, &QToolButton::clicked, this, &CScrOptWpt::slotProj);
+  connect(toolAddElevation, &QToolButton::clicked, this, &CScrOptWpt::slotAddElevation);
+  connect(toolBubble, &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
+  connect(toolDelRadius, &QToolButton::clicked, this, &CScrOptWpt::slotDeleteRadius);
+  connect(toolNogoArea, &QToolButton::clicked, this, &CScrOptWpt::slotNogoArea);
+  connect(toolEditRadius, &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
+  connect(toolSearchWeb, &QToolButton::clicked, this, &CScrOptWpt::slotSearchWeb);
 
-    connect(toolDelete, &QToolButton::clicked, this, &CScrOptWpt::slotDelete);
-    connect(toolTags, &QToolButton::clicked, this, &CScrOptWpt::slotTags);
-    connect(toolEdit, &QToolButton::clicked, this, &CScrOptWpt::slotEdit);
-    connect(toolCopy, &QToolButton::clicked, this, &CScrOptWpt::slotCopy);
-    connect(toolCoordToClipboard, &QToolButton::clicked, this, &CScrOptWpt::slotCoordToClipboard);
-    connect(toolMove, &QToolButton::clicked, this, &CScrOptWpt::slotMove);
-    connect(toolProj, &QToolButton::clicked, this, &CScrOptWpt::slotProj);
-    connect(toolAddElevation, &QToolButton::clicked, this, &CScrOptWpt::slotAddElevation);
-    connect(toolBubble, &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
-    connect(toolDelRadius, &QToolButton::clicked, this, &CScrOptWpt::slotDeleteRadius);
-    connect(toolNogoArea, &QToolButton::clicked, this, &CScrOptWpt::slotNogoArea);
-    connect(toolEditRadius, &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
-    connect(toolSearchWeb, &QToolButton::clicked, this, &CScrOptWpt::slotSearchWeb);
+  connect(label, &QLabel::linkActivated, this, &CScrOptWpt::slotLinkActivated);
 
-    connect(label, &QLabel::linkActivated, this, &CScrOptWpt::slotLinkActivated);
-
-    adjustSize();
+  adjustSize();
 }
 
-CScrOptWpt::~CScrOptWpt()
-{
+CScrOptWpt::~CScrOptWpt() {}
+
+void CScrOptWpt::slotDelete() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().delItemByKey(key);
+  close();
 }
 
-void CScrOptWpt::slotDelete()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().delItemByKey(key);
+void CScrOptWpt::slotEdit() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().editItemByKey(key);
+  close();
+}
+
+void CScrOptWpt::slotCopy() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().copyItemByKey(key);
+  close();
+}
+
+void CScrOptWpt::slotCoordToClipboard() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().copyWptCoordByKey(key);
+  close();
+}
+
+void CScrOptWpt::slotMove() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().moveWptByKey(key);
+  close();
+}
+
+void CScrOptWpt::slotProj() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().projWptByKey(key);
+  close();
+}
+
+void CScrOptWpt::slotBubble() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().toggleWptBubble(key);
+  close();
+}
+
+void CScrOptWpt::slotDeleteRadius() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().deleteWptRadius(key);
+  close();
+}
+
+void CScrOptWpt::slotNogoArea() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().toggleNogoItem(key);
+  close();
+}
+
+void CScrOptWpt::slotEditRadius() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().editWptRadius(key);
+  close();
+}
+
+void CScrOptWpt::slotAddElevation() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().addEleToWptTrkByKey({key});
+  close();
+}
+
+void CScrOptWpt::slotSearchWeb() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().searchWebByKey(key);
+  close();
+}
+
+void CScrOptWpt::slotTags() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().tagItemsByKey({key});
+  close();
+}
+
+void CScrOptWpt::draw(QPainter& p) {
+  IGisItem* item = CGisWorkspace::self().getItemByKey(key);
+  if (nullptr == item) {
     close();
+    return;
+  }
+  item->drawHighlight(p);
+
+  CDraw::bubble(p, geometry(), anchor.toPoint(), backgroundColor);
 }
-
-void CScrOptWpt::slotEdit()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().editItemByKey(key);
-    close();
-}
-
-void CScrOptWpt::slotCopy()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().copyItemByKey(key);
-    close();
-}
-
-void CScrOptWpt::slotCoordToClipboard()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().copyWptCoordByKey(key);
-    close();
-}
-
-void CScrOptWpt::slotMove()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().moveWptByKey(key);
-    close();
-}
-
-void CScrOptWpt::slotProj()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().projWptByKey(key);
-    close();
-}
-
-void CScrOptWpt::slotBubble()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().toggleWptBubble(key);
-    close();
-}
-
-void CScrOptWpt::slotDeleteRadius()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().deleteWptRadius(key);
-    close();
-}
-
-void CScrOptWpt::slotNogoArea()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().toggleNogoItem(key);
-    close();
-}
-
-void CScrOptWpt::slotEditRadius()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().editWptRadius(key);
-    close();
-}
-
-void CScrOptWpt::slotAddElevation()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().addEleToWptTrkByKey({key});
-    close();
-}
-
-void CScrOptWpt::slotSearchWeb()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().searchWebByKey(key);
-    close();
-}
-
-void CScrOptWpt::slotTags()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().tagItemsByKey({key});
-    close();
-}
-
-void CScrOptWpt::draw(QPainter& p)
-{
-    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
-    if(nullptr == item)
-    {
-        close();
-        return;
-    }
-    item->drawHighlight(p);
-
-    CDraw::bubble(p, geometry(), anchor.toPoint(), backgroundColor);
-}
-

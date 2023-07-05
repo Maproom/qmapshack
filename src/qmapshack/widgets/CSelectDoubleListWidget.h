@@ -22,41 +22,39 @@
 
 #include "ui_ISelectDoubleListWidget.h"
 
-class CSelectDoubleListWidget : public QWidget, private Ui::ISelectDoubleListWidget
-{
-    Q_OBJECT
-public:
-    class IItemFilter
-    {
-public:
-        virtual bool shouldBeMoved(QListWidgetItem* item) = 0;
-    };
+class CSelectDoubleListWidget : public QWidget, private Ui::ISelectDoubleListWidget {
+  Q_OBJECT
+ public:
+  class IItemFilter {
+   public:
+    virtual bool shouldBeMoved(QListWidgetItem* item) = 0;
+  };
 
-    CSelectDoubleListWidget(QWidget* parent, IItemFilter* filter = nullptr);
-    virtual ~CSelectDoubleListWidget();
+  CSelectDoubleListWidget(QWidget* parent, IItemFilter* filter = nullptr);
+  virtual ~CSelectDoubleListWidget();
 
-    void setAvailable(const QList<QListWidgetItem*>& available);
-    void setSelected(const QList<QListWidgetItem*>& selected) const;
-    void setLabelAvailable(const QString& label) const;
-    void setLabelSelected(const QString& label) const;
-    void setFilter(IItemFilter* const& filter);
-    const QList<QListWidgetItem*> selected() const;
-    void clear();
+  void setAvailable(const QList<QListWidgetItem*>& available);
+  void setSelected(const QList<QListWidgetItem*>& selected) const;
+  void setLabelAvailable(const QString& label) const;
+  void setLabelSelected(const QString& label) const;
+  void setFilter(IItemFilter* const& filter);
+  const QList<QListWidgetItem*> selected() const;
+  void clear();
 
-    void sortAvailable();
+  void sortAvailable();
 
-private slots:
-    void slotSelectedClicked(const QModelIndex& index) const;
-    void slotAvailableClicked(const QModelIndex& index) const;
-    void slotAdd() const;
-    void slotRemove() const;
-    void slotUp() const;
-    void slotDown() const;
+ private slots:
+  void slotSelectedClicked(const QModelIndex& index) const;
+  void slotAvailableClicked(const QModelIndex& index) const;
+  void slotAdd() const;
+  void slotRemove() const;
+  void slotUp() const;
+  void slotDown() const;
 
-private:
-    void updateButtons() const;
+ private:
+  void updateButtons() const;
 
-    QList<QListWidgetItem*> available;
-    IItemFilter* filter;
+  QList<QListWidgetItem*> available;
+  IItemFilter* filter;
 };
-#endif //CSELECTDOUBLELISTWIDGET_H
+#endif  // CSELECTDOUBLELISTWIDGET_H

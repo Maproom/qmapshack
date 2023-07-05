@@ -17,139 +17,114 @@
 **********************************************************************************************/
 
 #include "device/CDeviceTwoNav.h"
+
+#include <QtWidgets>
+
 #include "gis/CGisListWks.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/tnv/CTwoNavProject.h"
 
-#include <QtWidgets>
-
 CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QString& model, QTreeWidget* parent)
-    : IDevice(path, eTypeTwoNav, key, parent)
-{
-    setText(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
-    setToolTip(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
+    : IDevice(path, eTypeTwoNav, key, parent) {
+  setText(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
+  setToolTip(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
 
-    if(QFile::exists(dir.absoluteFilePath("RegInfo.ini")))
-    {
-        readReginfo(dir.absoluteFilePath("RegInfo.ini"));
-    }
-    else if(QFile::exists(dir.absoluteFilePath("AppData/RegInfo.ini")))
-    {
-        readReginfo(dir.absoluteFilePath("AppData/RegInfo.ini"));
-    }
+  if (QFile::exists(dir.absoluteFilePath("RegInfo.ini"))) {
+    readReginfo(dir.absoluteFilePath("RegInfo.ini"));
+  } else if (QFile::exists(dir.absoluteFilePath("AppData/RegInfo.ini"))) {
+    readReginfo(dir.absoluteFilePath("AppData/RegInfo.ini"));
+  }
 
-    pathData = "Data/";
-    QDir dirData(dir.absoluteFilePath(pathData));
+  pathData = "Data/";
+  QDir dirData(dir.absoluteFilePath(pathData));
 
-    if(!dirData.exists())
-    {
-        pathData = "TwoNavData/Data/";
-        dirData.setPath(dir.absoluteFilePath(pathData));
-    }
+  if (!dirData.exists()) {
+    pathData = "TwoNavData/Data/";
+    dirData.setPath(dir.absoluteFilePath(pathData));
+  }
 
-    {
-        IGisProject* project = new CTwoNavProject(dirData.absolutePath(), this);
-        if(!project->isValid())
-        {
-            delete project;
-        }
+  {
+    IGisProject* project = new CTwoNavProject(dirData.absolutePath(), this);
+    if (!project->isValid()) {
+      delete project;
     }
+  }
 
-    const QStringList& entriesGpx = dirData.entryList(QStringList("*.gpx"));
-    for(const QString& entry : entriesGpx)
-    {
-        IGisProject* project = new CGpxProject(dirData.absoluteFilePath(entry), this);
-        if(!project->isValid())
-        {
-            delete project;
-        }
+  const QStringList& entriesGpx = dirData.entryList(QStringList("*.gpx"));
+  for (const QString& entry : entriesGpx) {
+    IGisProject* project = new CGpxProject(dirData.absoluteFilePath(entry), this);
+    if (!project->isValid()) {
+      delete project;
     }
+  }
 
-    const QStringList& entriesDir = dirData.entryList(QDir::NoDotAndDotDot | QDir::Dirs);
-    for(const QString& entry : entriesDir)
-    {
-        IGisProject* project = new CTwoNavProject(dirData.absoluteFilePath(entry), this);
-        if(!project->isValid())
-        {
-            delete project;
-        }
+  const QStringList& entriesDir = dirData.entryList(QDir::NoDotAndDotDot | QDir::Dirs);
+  for (const QString& entry : entriesDir) {
+    IGisProject* project = new CTwoNavProject(dirData.absoluteFilePath(entry), this);
+    if (!project->isValid()) {
+      delete project;
     }
+  }
 
-    // special case: read the gpx files in the track log directory.
-    dirData.setPath( dir.absoluteFilePath(pathData + "Tracklog"));
-    const QStringList& entriesLog = dirData.entryList(QStringList("*.gpx"));
-    for(const QString& entry : entriesLog)
-    {
-        IGisProject* project = new CGpxProject(dirData.absoluteFilePath(entry), this);
-        if(!project->isValid())
-        {
-            delete project;
-        }
+  // special case: read the gpx files in the track log directory.
+  dirData.setPath(dir.absoluteFilePath(pathData + "Tracklog"));
+  const QStringList& entriesLog = dirData.entryList(QStringList("*.gpx"));
+  for (const QString& entry : entriesLog) {
+    IGisProject* project = new CGpxProject(dirData.absoluteFilePath(entry), this);
+    if (!project->isValid()) {
+      delete project;
     }
+  }
 }
 
-CDeviceTwoNav::~CDeviceTwoNav()
-{
+CDeviceTwoNav::~CDeviceTwoNav() {}
+
+void CDeviceTwoNav::readReginfo(const QString& filename) {
+  QString product, unittype;
+  QRegExp re("(.*)=(.*)");
+  QFile file(filename);
+  file.open(QIODevice::ReadOnly);
+
+  while (!file.atEnd()) {
+    QString line = file.readLine().simplified();
+
+    if (re.exactMatch(line)) {
+      QString tok = re.cap(1);
+      QString val = re.cap(2);
+
+      if (tok == "product") {
+        product = val;
+      } else if (tok == "unittype") {
+        unittype = val;
+      }
+    }
+  }
+
+  if (!product.isEmpty() && !unittype.isEmpty()) {
+    setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(product, unittype));
+  }
 }
 
-void CDeviceTwoNav::readReginfo(const QString& filename)
-{
-    QString product, unittype;
-    QRegExp re("(.*)=(.*)");
-    QFile file(filename);
-    file.open(QIODevice::ReadOnly);
+void CDeviceTwoNav::insertCopyOfProject(IGisProject* project) {
+  QString name = project->getName();
+  name = name.remove(QRegExp("[^A-Za-z0-9_]"));
 
-    while(!file.atEnd())
-    {
-        QString line = file.readLine().simplified();
+  QDir dirData = dir.absoluteFilePath(pathData);
+  QString filename = dirData.absoluteFilePath(name);
 
-        if(re.exactMatch(line))
-        {
-            QString tok = re.cap(1);
-            QString val = re.cap(2);
+  if (testForExternalProject(filename)) {
+    return;
+  }
 
-            if(tok == "product")
-            {
-                product = val;
-            }
-            else if(tok == "unittype")
-            {
-                unittype = val;
-            }
-        }
-    }
+  CTwoNavProject* proj = new CTwoNavProject(filename, project, this);
+  if (!proj->isValid()) {
+    delete proj;
+    return;
+  }
 
-    if(!product.isEmpty() && !unittype.isEmpty())
-    {
-        setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(product, unittype));
-    }
-}
-
-void CDeviceTwoNav::insertCopyOfProject(IGisProject* project)
-{
-    QString name = project->getName();
-    name = name.remove(QRegExp("[^A-Za-z0-9_]"));
-
-    QDir dirData = dir.absoluteFilePath(pathData);
-    QString filename = dirData.absoluteFilePath(name);
-
-    if(testForExternalProject(filename))
-    {
-        return;
-    }
-
-
-    CTwoNavProject* proj = new CTwoNavProject(filename, project, this);
-    if(!proj->isValid())
-    {
-        delete proj;
-        return;
-    }
-
-    if(!proj->save())
-    {
-        proj->remove();
-        delete proj;
-        return;
-    }
+  if (!proj->save()) {
+    proj->remove();
+    delete proj;
+    return;
+  }
 }

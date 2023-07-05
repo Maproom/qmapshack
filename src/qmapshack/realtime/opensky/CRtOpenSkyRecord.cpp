@@ -16,33 +16,27 @@
 
 **********************************************************************************************/
 
-
 #include "realtime/opensky/CRtOpenSkyRecord.h"
 
-CRtOpenSkyRecord::CRtOpenSkyRecord(QObject* parent)
-    : IRtRecord(parent)
-{
+CRtOpenSkyRecord::CRtOpenSkyRecord(QObject* parent) : IRtRecord(parent) {}
+
+bool CRtOpenSkyRecord::writeEntry(const CRtOpenSky::aircraft_t& aircraft) {
+  QByteArray data;
+  QDataStream stream(&data, QIODevice::WriteOnly);
+  stream.setVersion(QDataStream::Qt_5_2);
+  stream.setByteOrder(QDataStream::LittleEndian);
+
+  // it's always a good idea to start with a version tag for future changes.
+  stream << quint8(1);
+
+  CTrackData::trkpt_t trkpt;
+  trkpt.lon = aircraft.longitude;
+  trkpt.lat = aircraft.latitude;
+  trkpt.ele = aircraft.geoAltitude;
+  trkpt.time = QDateTime::fromTime_t(aircraft.timePosition);
+
+  stream << trkpt;
+  track << trkpt;
+
+  return writeEntry(data);
 }
-
-bool CRtOpenSkyRecord::writeEntry(const CRtOpenSky::aircraft_t& aircraft)
-{
-    QByteArray data;
-    QDataStream stream(&data, QIODevice::WriteOnly);
-    stream.setVersion(QDataStream::Qt_5_2);
-    stream.setByteOrder(QDataStream::LittleEndian);
-
-    // it's always a good idea to start with a version tag for future changes.
-    stream << quint8(1);
-
-    CTrackData::trkpt_t trkpt;
-    trkpt.lon = aircraft.longitude;
-    trkpt.lat = aircraft.latitude;
-    trkpt.ele = aircraft.geoAltitude;
-    trkpt.time = QDateTime::fromTime_t(aircraft.timePosition);
-
-    stream << trkpt;
-    track << trkpt;
-
-    return writeEntry(data);
-}
-

@@ -22,55 +22,40 @@
 #include <QFile>
 #include <QtCore>
 
-class CFileExt : public QFile
-{
-public:
-    CFileExt(const QString& filename)
-        : QFile(filename)
-        , mapped(nullptr)
-    {
-        cnt++;
-    }
+class CFileExt : public QFile {
+ public:
+  CFileExt(const QString& filename) : QFile(filename), mapped(nullptr) { cnt++; }
 
-    ~CFileExt()
-    {
-        cnt--;
-    }
+  ~CFileExt() { cnt--; }
 
 #ifndef Q_OS_WIN32
-    // data access function
-    const char* data(qint64 offset, qint64 s)
-    {
-        mapped = map(offset, s);
-        mappedSections << mapped;
-        return (const char*)mapped;
-    }
+  // data access function
+  const char* data(qint64 offset, qint64 s) {
+    mapped = map(offset, s);
+    mappedSections << mapped;
+    return (const char*)mapped;
+  }
 
-    void free()
-    {
-        for(uchar* p : qAsConst(mappedSections))
-        {
-            unmap(p);
-        }
-        mappedSections.clear();
+  void free() {
+    for (uchar* p : qAsConst(mappedSections)) {
+      unmap(p);
     }
+    mappedSections.clear();
+  }
 
 #else
-    // data access function
-    const char* data(qint64 offset, qint64 s)
-    {
-        uchar* p = map(offset, s);
-        return (const char*)p;
-    }
+  // data access function
+  const char* data(qint64 offset, qint64 s) {
+    uchar* p = map(offset, s);
+    return (const char*)p;
+  }
 #endif
 
-private:
-    static int cnt;
+ private:
+  static int cnt;
 
-    uchar* mapped;
-    QSet<uchar*> mappedSections;
+  uchar* mapped;
+  QSet<uchar*> mappedSections;
 };
 
-
-#endif //CFILEEXT_H
-
+#endif  // CFILEEXT_H

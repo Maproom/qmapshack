@@ -19,17 +19,15 @@
 #ifndef CABOUT_H
 #define CABOUT_H
 
-#include "ui_IAbout.h"
 #include <QDialog>
 
+#include "ui_IAbout.h"
 
-class CAbout : public QDialog, private Ui::IAbout
-{
-    Q_OBJECT
-public:
-    CAbout(QWidget* parent);
-    virtual ~CAbout() = default;
+class CAbout : public QDialog, private Ui::IAbout {
+  Q_OBJECT
+ public:
+  CAbout(QWidget* parent);
+  virtual ~CAbout() = default;
 };
 
-#endif //CABOUT_H
-
+#endif  // CABOUT_H

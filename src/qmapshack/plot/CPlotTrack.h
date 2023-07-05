@@ -19,28 +19,26 @@
 #ifndef CPLOTTRACK_H
 #define CPLOTTRACK_H
 
-#include "plot/ITrack.h"
 #include <QWidget>
+
+#include "plot/ITrack.h"
 
 class CGisItemTrk;
 
-class CPlotTrack : public QWidget, public ITrack
-{
-public:
-    CPlotTrack(QWidget* parent);
-    CPlotTrack(CGisItemTrk* trk, QWidget* parent);
-    virtual ~CPlotTrack();
+class CPlotTrack : public QWidget, public ITrack {
+ public:
+  CPlotTrack(QWidget* parent);
+  CPlotTrack(CGisItemTrk* trk, QWidget* parent);
+  virtual ~CPlotTrack();
 
-    void setMouseFocus(qreal lon, qreal lat);
+  void setMouseFocus(qreal lon, qreal lat);
 
-protected:
-    void resizeEvent(QResizeEvent* e) override;
-    void paintEvent(QPaintEvent* e) override;
+ protected:
+  void resizeEvent(QResizeEvent* e) override;
+  void paintEvent(QPaintEvent* e) override;
 
-private:
-
-    QPointF pos = NOPOINTF;
+ private:
+  QPointF pos = NOPOINTF;
 };
 
-#endif //CPLOTTRACK_H
-
+#endif  // CPLOTTRACK_H

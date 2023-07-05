@@ -21,29 +21,22 @@
 
 #include <QWebEnginePage>
 
-class CWebPage : public QWebEnginePage
-{
-    Q_OBJECT
-public:
-    CWebPage(QObject* parent)
-        : QWebEnginePage(parent)
-    {
+class CWebPage : public QWebEnginePage {
+  Q_OBJECT
+ public:
+  CWebPage(QObject* parent) : QWebEnginePage(parent) {}
+
+  virtual ~CWebPage() = default;
+
+  bool acceptNavigationRequest(const QUrl& url, QWebEnginePage::NavigationType type, bool) override {
+    if (type == QWebEnginePage::NavigationTypeLinkClicked) {
+      emit linkClicked(url);
+      return false;
     }
+    return true;
+  }
 
-    virtual ~CWebPage() = default;
-
-    bool acceptNavigationRequest(const QUrl& url, QWebEnginePage::NavigationType type, bool) override
-    {
-        if (type == QWebEnginePage::NavigationTypeLinkClicked)
-        {
-            emit linkClicked(url);
-            return false;
-        }
-        return true;
-    }
-
-signals:
-    void linkClicked(const QUrl&);
+ signals:
+  void linkClicked(const QUrl&);
 };
-#endif //CWEBPAGE_H
-
+#endif  // CWEBPAGE_H

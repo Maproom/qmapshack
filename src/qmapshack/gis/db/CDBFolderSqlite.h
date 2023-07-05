@@ -22,27 +22,22 @@
 #include "gis/db/IDBFolderSql.h"
 #include "gis/db/IDBSqlite.h"
 
+class CDBFolderSqlite : public IDBFolderSql, public IDBSqlite {
+  Q_OBJECT
+ public:
+  CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget* parent);
+  virtual ~CDBFolderSqlite() {}
 
-class CDBFolderSqlite : public IDBFolderSql, public IDBSqlite
-{
-    Q_OBJECT
-public:
-    CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget* parent);
-    virtual ~CDBFolderSqlite() {}
+  const QString& getFilename() { return filename; }
 
-    const QString& getFilename()
-    {
-        return filename;
-    }
+  QString getDBInfo() const;
 
-    QString getDBInfo() const;
+  bool search(const QString& str, QSqlQuery& query) override;
 
-    bool search(const QString& str, QSqlQuery& query) override;
+  void copyFolder(quint64 child, quint64 parent) override;
 
-    void copyFolder(quint64 child, quint64 parent) override;
-private:
-    QString filename;
-    QString error;
+ private:
+  QString filename;
+  QString error;
 };
-#endif //CDBFOLDERSQLITE_H
-
+#endif  // CDBFOLDERSQLITE_H

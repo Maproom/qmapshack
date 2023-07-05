@@ -23,18 +23,16 @@
 
 class CCanvas;
 
-class CGisDraw : public IDrawContext
-{
-public:
-    CGisDraw(CCanvas* parent);
-    virtual ~CGisDraw() = default;
+class CGisDraw : public IDrawContext {
+ public:
+  CGisDraw(CCanvas* parent);
+  virtual ~CGisDraw() = default;
 
-    using IDrawContext::draw;
-    void draw(QPainter& p, const QRect& rect);
+  using IDrawContext::draw;
+  void draw(QPainter& p, const QRect& rect);
 
-protected:
-    void drawt(buffer_t& currentBuffer) override;
+ protected:
+  void drawt(buffer_t& currentBuffer) override;
 };
 
-#endif //CGISDRAW_H
-
+#endif  // CGISDRAW_H

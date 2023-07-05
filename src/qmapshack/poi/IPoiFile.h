@@ -19,67 +19,65 @@
 #ifndef IPOI_H
 #define IPOI_H
 
+#include <QPointer>
+
 #include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
 #include "poi/IPoiProp.h"
 
-#include <QPointer>
-
 class CPoiDraw;
 
-class IPoiFile : public IDrawObject
-{
-    Q_OBJECT
-public:
-    IPoiFile(CPoiDraw* parent);
-    virtual ~IPoiFile() = default;
+class IPoiFile : public IDrawObject {
+  Q_OBJECT
+ public:
+  IPoiFile(CPoiDraw* parent);
+  virtual ~IPoiFile() = default;
 
-    virtual void draw(IDrawContext::buffer_t& buf) = 0;
+  virtual void draw(IDrawContext::buffer_t& buf) = 0;
 
-    /**
-       @brief Get the POI collection's setup widget.
+  /**
+     @brief Get the POI collection's setup widget.
 
-       As default an instance of CPoiPropSetup is used. For other setups you have
-       to override this method.
+     As default an instance of CPoiPropSetup is used. For other setups you have
+     to override this method.
 
-       @return A pointer to the widget. Use a smart pointer to store as the widget can be destroyed at any time
-     */
-    virtual IPoiProp* getSetup();
+     @return A pointer to the widget. Use a smart pointer to store as the widget can be destroyed at any time
+   */
+  virtual IPoiProp* getSetup();
 
-    bool activated() const {return isActivated;}
+  bool activated() const { return isActivated; }
 
-    virtual void addTreeWidgetItems(QTreeWidget* widget) = 0;
+  virtual void addTreeWidgetItems(QTreeWidget* widget) = 0;
 
-    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
-    /// Thus the location where to draw the highlight is separately given
-    virtual bool findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const = 0;
-    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
-    /// Thus the location where to draw the highlight is separately given
-    virtual void findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<QPointF>& posPoiHighlight) = 0;
-    virtual bool getToolTip(const QPoint& px, QString& str) const = 0;
+  /// The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+  ///  Thus the location where to draw the highlight is separately given
+  virtual bool findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const = 0;
+  /// The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+  ///  Thus the location where to draw the highlight is separately given
+  virtual void findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<QPointF>& posPoiHighlight) = 0;
+  virtual bool getToolTip(const QPoint& px, QString& str) const = 0;
 
-    static void init();
-    static const QSize& iconSize(){return _iconSize;}
-    static const QImage& iconHighlight(){return _iconHighlight;}
+  static void init();
+  static const QSize& iconSize() { return _iconSize; }
+  static const QImage& iconHighlight() { return _iconHighlight; }
 
-public slots:
-    virtual void slotCheckedStateChanged(QTreeWidgetItem* item) = 0;
+ public slots:
+  virtual void slotCheckedStateChanged(QTreeWidgetItem* item) = 0;
 
-protected:
-    CPoiDraw* poi;
+ protected:
+  CPoiDraw* poi;
 
-    /**
-       @brief True if POI collection was loaded successfully
-     */
-    bool isActivated = false;
+  /**
+     @brief True if POI collection was loaded successfully
+   */
+  bool isActivated = false;
 
-    /// the setup dialog. Use getSetup() for access
-    QPointer<IPoiProp> setup;
+  /// the setup dialog. Use getSetup() for access
+  QPointer<IPoiProp> setup;
 
-private:
-    static QSize _iconSize;
-    static QImage _iconHighlight;
+ private:
+  static QSize _iconSize;
+  static QImage _iconHighlight;
 };
 
-#endif //IPOI_H
-
+#endif  // IPOI_H

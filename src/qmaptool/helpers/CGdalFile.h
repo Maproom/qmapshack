@@ -19,85 +19,74 @@
 #ifndef CGDALFILE_H
 #define CGDALFILE_H
 
-
-#include "gis/proj_x.h"
-
 #include <QCoreApplication>
 #include <QPointF>
 #include <QRgb>
 #include <QTransform>
 #include <QVector>
 
+#include "gis/proj_x.h"
+
 class GDALDataset;
 
-class CGdalFile
-{
-    Q_DECLARE_TR_FUNCTIONS(CGdalFile)
-public:
-    enum type_e
-    {
-        eTypePixel,
-        eTypeProj
-    };
+class CGdalFile {
+  Q_DECLARE_TR_FUNCTIONS(CGdalFile)
+ public:
+  enum type_e { eTypePixel, eTypeProj };
 
-    CGdalFile(type_e type);
-    virtual ~CGdalFile() = default;
+  CGdalFile(type_e type);
+  virtual ~CGdalFile() = default;
 
-    bool getIsValid() const
-    {
-        return isValid;
-    }
+  bool getIsValid() const { return isValid; }
 
-    QString getProjection() const;
+  QString getProjection() const;
 
-protected:
-    virtual QString getInfo() const;
-    virtual void load(const QString& filename);
-    virtual void unload();
+ protected:
+  virtual QString getInfo() const;
+  virtual void load(const QString& filename);
+  virtual void unload();
 
-    type_e type;
+  type_e type;
 
-    GDALDataset* dataset = nullptr;
+  GDALDataset* dataset = nullptr;
 
-    /// number of color bands used by the *vrt
-    int rasterBandCount = 0;
-    /// QT representation of the vrt's color table
-    QVector<QRgb> colortable;
+  /// number of color bands used by the *vrt
+  int rasterBandCount = 0;
+  /// QT representation of the vrt's color table
+  QVector<QRgb> colortable;
 
-    // true if the map file has overviews
-    qint32 hasOverviews = -1;
-    qint32 hasNoData = -1;
+  // true if the map file has overviews
+  qint32 hasOverviews = -1;
+  qint32 hasNoData = -1;
 
+  /// true if the map file could be loaded
+  bool isValid = false;
 
-    /// true if the map file could be loaded
-    bool isValid = false;
+  /// width in number of px
+  qreal xsize_px = 0;
+  /// height in number of px
+  qreal ysize_px = 0;
 
-    /// width in number of px
-    qreal xsize_px = 0;
-    /// height in number of px
-    qreal ysize_px = 0;
+  /// scale [px/m]
+  qreal xscale = 0;
+  /// scale [px/m]
+  qreal yscale = 0;
 
-    /// scale [px/m]
-    qreal xscale = 0;
-    /// scale [px/m]
-    qreal yscale = 0;
+  qreal xrot = 0;
+  qreal yrot = 0;
 
-    qreal xrot = 0;
-    qreal yrot = 0;
+  QPointF ref1;
+  QPointF ref2;
+  QPointF ref3;
+  QPointF ref4;
 
-    QPointF ref1;
-    QPointF ref2;
-    QPointF ref3;
-    QPointF ref4;
+  QTransform trFwd;
+  QTransform trInv;
 
-    QTransform trFwd;
-    QTransform trInv;
+  QTransform trFwdProj;
+  QTransform trInvProj;
 
-    QTransform trFwdProj;
-    QTransform trInvProj;
-
-    CProj proj;
+  CProj proj;
 };
 
-#endif //CGDALFILE_H
-
+#endif  // CGDALFILE_H

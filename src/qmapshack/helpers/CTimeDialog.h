@@ -19,25 +19,23 @@
 #ifndef CTIMEDIALOG_H
 #define CTIMEDIALOG_H
 
-#include "ui_ITimeDialog.h"
-
 #include <QDateTime>
 
-class CTimeDialog : public QDialog, public Ui::ITimeDialog
-{
-    Q_OBJECT
-public:
-    CTimeDialog(QWidget* parent, const QDateTime& timestamp);
-    virtual ~CTimeDialog() = default;
+#include "ui_ITimeDialog.h"
 
-    const QDateTime& getTimestamp() const {return timestamp;}
+class CTimeDialog : public QDialog, public Ui::ITimeDialog {
+  Q_OBJECT
+ public:
+  CTimeDialog(QWidget* parent, const QDateTime& timestamp);
+  virtual ~CTimeDialog() = default;
 
-    void accept() override;
+  const QDateTime& getTimestamp() const { return timestamp; }
 
-private:
-    QDateTime timestamp;
-    QDateTime timestamp_utc0;
+  void accept() override;
+
+ private:
+  QDateTime timestamp;
+  QDateTime timestamp_utc0;
 };
 
-#endif //CTIMEDIALOG_H
-
+#endif  // CTIMEDIALOG_H

@@ -16,32 +16,27 @@
 
 **********************************************************************************************/
 
+#include "gis/trk/filter/CFilterMedian.h"
+
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/filter/CFilterMedian.h"
 #include "helpers/CSettings.h"
-#include "units/IUnit.h"
 
-CFilterMedian::CFilterMedian(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
+CFilterMedian::CFilterMedian(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
 
-    SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/Median/points", 5).toInt());
+  SETTINGS;
+  spinBox->setValue(cfg.value("TrackDetails/Filter/Median/points", 5).toInt());
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterMedian::slotApply);
+  connect(toolApply, &QToolButton::clicked, this, &CFilterMedian::slotApply);
 }
 
-CFilterMedian::~CFilterMedian()
-{
-    SETTINGS;
-    cfg.setValue("TrackDetails/Filter/Median/points", spinBox->value());
+CFilterMedian::~CFilterMedian() {
+  SETTINGS;
+  cfg.setValue("TrackDetails/Filter/Median/points", spinBox->value());
 }
 
-void CFilterMedian::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterSmoothProfile(spinBox->value());
+void CFilterMedian::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterSmoothProfile(spinBox->value());
 }

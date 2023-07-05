@@ -23,39 +23,36 @@
 #include "CSettings.h"
 
 CTimeDialog::CTimeDialog(QWidget* parent, const QDateTime& datetime)
-    : QDialog(parent), timestamp(datetime), timestamp_utc0(datetime.toTimeZone(QTimeZone("UTC+00:00")))
-{
-    setupUi(this);
+    : QDialog(parent), timestamp(datetime), timestamp_utc0(datetime.toTimeZone(QTimeZone("UTC+00:00"))) {
+  setupUi(this);
 
+  SETTINGS;
+  cfg.beginGroup("TimeDialog");
+  const QByteArray& zone = cfg.value("timezone", QTimeZone::systemTimeZone().id()).toByteArray();
+  cfg.endGroup();
+
+  const QList<QByteArray>& ids = QTimeZone::availableTimeZoneIds();
+  foreach (const QByteArray& id, ids) {
+    comboTimezone->addItem(id);
+  }
+
+  comboTimezone->setCurrentText(zone);
+
+  const QDateTime& newTime = timestamp_utc0.toTimeZone(QTimeZone(zone));
+  dateTimeEdit->setDateTime(newTime);
+
+  connect(comboTimezone, &QComboBox::currentTextChanged, this, [this](const QString& id) {
     SETTINGS;
     cfg.beginGroup("TimeDialog");
-    const QByteArray& zone = cfg.value("timezone", QTimeZone::systemTimeZone().id()).toByteArray();
+    cfg.setValue("timezone", id);
     cfg.endGroup();
-
-    const QList<QByteArray>& ids = QTimeZone::availableTimeZoneIds();
-    foreach (const QByteArray &id, ids)
-    {
-        comboTimezone->addItem(id);
-    }
-
-    comboTimezone->setCurrentText(zone);
-
-    const QDateTime& newTime = timestamp_utc0.toTimeZone(QTimeZone(zone));
+    const QDateTime& newTime = timestamp_utc0.toTimeZone(QTimeZone(id.toUtf8()));
     dateTimeEdit->setDateTime(newTime);
-
-    connect(comboTimezone, &QComboBox::currentTextChanged, this, [this](const QString& id){
-        SETTINGS;
-        cfg.beginGroup("TimeDialog");
-        cfg.setValue("timezone", id);
-        cfg.endGroup();
-        const QDateTime& newTime = timestamp_utc0.toTimeZone(QTimeZone(id.toUtf8()));
-        dateTimeEdit->setDateTime(newTime);
-    });
+  });
 }
 
-void CTimeDialog::accept()
-{
-    const QDateTime& newTime = dateTimeEdit->getDateTime();
-    timestamp = newTime.toTimeZone(timestamp.timeZone());
-    QDialog::accept();
+void CTimeDialog::accept() {
+  const QDateTime& newTime = dateTimeEdit->getDateTime();
+  timestamp = newTime.toTimeZone(timestamp.timeZone());
+  QDialog::accept();
 }

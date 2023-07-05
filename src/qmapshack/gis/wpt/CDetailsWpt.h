@@ -19,38 +19,33 @@
 #ifndef CDETAILSWPT_H
 #define CDETAILSWPT_H
 
-#include "ui_IDetailsWpt.h"
 #include <QDialog>
 
 #include "gis/wpt/CGisItemWpt.h"
+#include "ui_IDetailsWpt.h"
 
-class CDetailsWpt : public QDialog, private Ui::IDetailsWpt
-{
-    Q_OBJECT
-public:
-    CDetailsWpt(CGisItemWpt& wpt, QWidget* parent);
-    virtual ~CDetailsWpt();
+class CDetailsWpt : public QDialog, private Ui::IDetailsWpt {
+  Q_OBJECT
+ public:
+  CDetailsWpt(CGisItemWpt& wpt, QWidget* parent);
+  virtual ~CDetailsWpt();
 
-    void disableHistory()
-    {
-        tabWidget->setTabEnabled(1, false);
-    }
+  void disableHistory() { tabWidget->setTabEnabled(1, false); }
 
-private slots:
-    void slotNameChanged(const QString& name);
-    void slotNameChangeFinished();
-    void slotLinkActivated(const QString& link);
-    void slotLinkActivated(const QUrl& url);
-    void slotChangeIcon();
-    void slotChangeReadOnlyMode(bool on);
-    void slotChangedImages(const QList<CGisItemWpt::image_t>& images);
-    void setupGui();
+ private slots:
+  void slotNameChanged(const QString& name);
+  void slotNameChangeFinished();
+  void slotLinkActivated(const QString& link);
+  void slotLinkActivated(const QUrl& url);
+  void slotChangeIcon();
+  void slotChangeReadOnlyMode(bool on);
+  void slotChangedImages(const QList<CGisItemWpt::image_t>& images);
+  void setupGui();
 
-private:
-    CGisItemWpt& wpt;
+ private:
+  CGisItemWpt& wpt;
 
-    bool originator = false;
+  bool originator = false;
 };
 
-#endif //CDETAILSWPT_H
-
+#endif  // CDETAILSWPT_H

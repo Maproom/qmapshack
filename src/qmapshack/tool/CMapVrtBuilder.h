@@ -19,32 +19,31 @@
 #ifndef CMAPVRTBUILDER_H
 #define CMAPVRTBUILDER_H
 
+#include <QWidget>
+
 #include "tool/IToolShell.h"
 #include "ui_IMapVrtBuilder.h"
-#include <QWidget>
 
 class QTemporaryFile;
 
-class CMapVrtBuilder : public IToolShell, private Ui::IMapVrtBuilder
-{
-    Q_OBJECT
-public:
-    CMapVrtBuilder(QWidget* parent);
-    virtual ~CMapVrtBuilder();
+class CMapVrtBuilder : public IToolShell, private Ui::IMapVrtBuilder {
+  Q_OBJECT
+ public:
+  CMapVrtBuilder(QWidget* parent);
+  virtual ~CMapVrtBuilder();
 
-private slots:
-    void slotSelectSourceFiles();
-    void slotSelectTargetFile();
-    void slotStart();
-    void slotLinkActivated(const QUrl& url);
+ private slots:
+  void slotSelectSourceFiles();
+  void slotSelectTargetFile();
+  void slotStart();
+  void slotLinkActivated(const QUrl& url);
 
-private:
-    void finished(int exitCode, QProcess::ExitStatus status) override;
-    void enableStartButton();
+ private:
+  void finished(int exitCode, QProcess::ExitStatus status) override;
+  void enableStartButton();
 
-    bool last = false;
-    QTemporaryFile* tempFile;
+  bool last = false;
+  QTemporaryFile* tempFile;
 };
 
-#endif //CMAPVRTBUILDER_H
-
+#endif  // CMAPVRTBUILDER_H

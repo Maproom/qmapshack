@@ -19,8 +19,6 @@
 #ifndef CWPTICONMANAGER_H
 #define CWPTICONMANAGER_H
 
-#include "misc.h"
-
 #include <QAction>
 #include <QFont>
 #include <QMap>
@@ -32,59 +30,48 @@
 
 class QMenu;
 
-class CWptIconManager : public QObject
-{
-public:
-    virtual ~CWptIconManager();
-    static CWptIconManager& self(){return *pSelf;}
+class CWptIconManager : public QObject {
+ public:
+  virtual ~CWptIconManager();
+  static CWptIconManager& self() { return *pSelf; }
 
-    struct icon_t
-    {
-        icon_t() : focus(16, 16)
-        {
-        }
-        icon_t(const QString& path, int x, int y) : path(path), focus(x, y)
-        {
-        }
-        QString path;
-        QPoint focus;
-    };
+  struct icon_t {
+    icon_t() : focus(16, 16) {}
+    icon_t(const QString& path, int x, int y) : path(path), focus(x, y) {}
+    QString path;
+    QPoint focus;
+  };
 
+  void init();
+  QPixmap getWptIconByName(const QString& name, QPointF& focus, QString* src = nullptr);
+  QString selectWptIcon(QWidget* parent);
 
-    void init();
-    QPixmap getWptIconByName(const QString& name, QPointF& focus, QString* src = nullptr);
-    QString selectWptIcon(QWidget* parent);
+  QMenu* getWptIconMenu(const QString& title, QObject* obj, const char* slot, QWidget* parent);
 
-    QMenu* getWptIconMenu(const QString& title, QObject* obj, const char* slot, QWidget* parent);
+  QPixmap loadIcon(const QString& path);
 
-    QPixmap loadIcon(const QString& path);
+  const QMap<QString, icon_t>& getWptIcons() { return wptIcons; }
 
-    const QMap<QString, icon_t>& getWptIcons()
-    {
-        return wptIcons;
-    }
+  QString getNumberedBullet(qint32 n);
 
-    QString getNumberedBullet(qint32 n);
+ private:
+  friend class CMainWindow;
+  CWptIconManager(QObject* parent);
 
-private:
-    friend class CMainWindow;
-    CWptIconManager(QObject* parent);
+  void setWptIconByName(const QString& name, const QString& filename);
+  void setWptIconByName(const QString& name, const QPixmap& icon);
+  void removeNumberedBullets();
 
-    void setWptIconByName(const QString& name, const QString& filename);
-    void setWptIconByName(const QString& name, const QPixmap& icon);
-    void removeNumberedBullets();
+  static CWptIconManager* pSelf;
+  static const char* wptDefault;
 
-    static CWptIconManager* pSelf;
-    static const char* wptDefault;
+  QFont lastFont;
 
-    QFont lastFont;
+  QMap<QString, icon_t> wptIcons;
 
-    QMap<QString, icon_t> wptIcons;
+  QMap<qint32, QString> mapNumberedBullets;
 
-    QMap<qint32, QString> mapNumberedBullets;
-
-    QPixmap createGrayscale(QString path);
+  QPixmap createGrayscale(QString path);
 };
 
-#endif //CWPTICONMANAGER_H
-
+#endif  // CWPTICONMANAGER_H

@@ -19,23 +19,21 @@
 #ifndef CTOOLSTACK_H
 #define CTOOLSTACK_H
 
-
-#include "tool/ITool.h"
 #include <QStackedWidget>
 
-class CToolStack : public ITool, public QStackedWidget
-{
-public:
-    CToolStack(QWidget* parent);
-    virtual ~CToolStack() = default;
+#include "tool/ITool.h"
 
-    void setupChanged() override;
+class CToolStack : public ITool, public QStackedWidget {
+ public:
+  CToolStack(QWidget* parent);
+  virtual ~CToolStack() = default;
 
-    FORWARD_WIDGET_ALL()
+  void setupChanged() override;
 
-private slots:
-    void slotToolChanged(int idx);
+  FORWARD_WIDGET_ALL()
+
+ private slots:
+  void slotToolChanged(int idx);
 };
 
-#endif //CTOOLSTACK_H
-
+#endif  // CTOOLSTACK_H

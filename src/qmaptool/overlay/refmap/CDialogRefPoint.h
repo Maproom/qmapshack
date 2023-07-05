@@ -19,28 +19,27 @@
 #ifndef CDIALOGREFPOINT_H
 #define CDIALOGREFPOINT_H
 
-#include "ui_IDialogRefPoint.h"
 #include <QDialog>
+
+#include "ui_IDialogRefPoint.h"
 
 class QPointF;
 
-class CDialogRefPoint : public QDialog, private Ui::IDialogRefPoint
-{
-    Q_OBJECT
-public:
-    CDialogRefPoint(QPointF& ptPtx, QPointF& ptRef, QWidget* parent);
-    virtual ~CDialogRefPoint() = default;
+class CDialogRefPoint : public QDialog, private Ui::IDialogRefPoint {
+  Q_OBJECT
+ public:
+  CDialogRefPoint(QPointF& ptPtx, QPointF& ptRef, QWidget* parent);
+  virtual ~CDialogRefPoint() = default;
 
-public slots:
-    void accept() override;
+ public slots:
+  void accept() override;
 
-private slots:
-    void slotEditPosition(const QString& str);
+ private slots:
+  void slotEditPosition(const QString& str);
 
-private:
-    QPointF& ptPtx;
-    QPointF& ptRef;
+ private:
+  QPointF& ptPtx;
+  QPointF& ptRef;
 };
 
-#endif //CDIALOGREFPOINT_H
-
+#endif  // CDIALOGREFPOINT_H

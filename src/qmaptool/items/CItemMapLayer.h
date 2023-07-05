@@ -19,39 +19,37 @@
 #ifndef CITEMMAPLAYER_H
 #define CITEMMAPLAYER_H
 
-#include "items/IItem.h"
-
 #include <QCoreApplication>
 #include <QTemporaryFile>
 #include <QTreeWidgetItem>
 
+#include "items/IItem.h"
+
 class CItemMap;
 class CDrawContextProj;
 
-class CItemMapLayer : public IItem, public QTreeWidgetItem
-{
-    Q_OBJECT
-public:
-    CItemMapLayer(QTreeWidget* parent);
-    virtual ~CItemMapLayer() = default;
+class CItemMapLayer : public IItem, public QTreeWidgetItem {
+  Q_OBJECT
+ public:
+  CItemMapLayer(QTreeWidget* parent);
+  virtual ~CItemMapLayer() = default;
 
-    bool addMap(CItemMap* map);
+  bool addMap(CItemMap* map);
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
+  bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
 
-    void drawBoundingBoxes(QPainter& p, IDrawContext* dc);
+  void drawBoundingBoxes(QPainter& p, IDrawContext* dc);
 
-    void setupChanged() override {}
+  void setupChanged() override {}
 
-    QString getProjection() const;
+  QString getProjection() const;
 
-protected:
-    friend bool sortByScale(QTreeWidgetItem* item1, QTreeWidgetItem* item2);
+ protected:
+  friend bool sortByScale(QTreeWidgetItem* item1, QTreeWidgetItem* item2);
 
-    void updateLayer();
+  void updateLayer();
 
-    QTemporaryFile vrt;
+  QTemporaryFile vrt;
 };
 
-#endif //CITEMMAPLAYER_H
-
+#endif  // CITEMMAPLAYER_H

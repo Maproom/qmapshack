@@ -18,26 +18,23 @@
 #ifndef CPROJECTFILTERITEM_H
 #define CPROJECTFILTERITEM_H
 
-#include "CSearchLineEdit.h"
 #include <QPointer>
 #include <QTreeWidgetItem>
+
+#include "CSearchLineEdit.h"
 class IGisProject;
 class CSearch;
 
-class CProjectFilterItem : public QTreeWidgetItem
-{
-public:
-    CProjectFilterItem(IGisProject* parent);
-    virtual ~CProjectFilterItem();
-    void showLineEdit(CSearch* search = nullptr);
-    const CSearchLineEdit* getLineEdit()
-    {
-        return lineEdit;
-    }
+class CProjectFilterItem : public QTreeWidgetItem {
+ public:
+  CProjectFilterItem(IGisProject* parent);
+  virtual ~CProjectFilterItem();
+  void showLineEdit(CSearch* search = nullptr);
+  const CSearchLineEdit* getLineEdit() { return lineEdit; }
 
-private:
-    QPointer<CSearchLineEdit> lineEdit;
-    IGisProject* parent;
+ private:
+  QPointer<CSearchLineEdit> lineEdit;
+  IGisProject* parent;
 };
 
-#endif // CPROJECTFILTERITEM_H
+#endif  // CPROJECTFILTERITEM_H

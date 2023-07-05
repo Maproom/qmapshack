@@ -22,42 +22,35 @@
 #include "gis/IGisItem.h"
 #include "mouse/IScrOpt.h"
 
+class CScrOptUnclutter : public IScrOpt {
+ public:
+  CScrOptUnclutter(IMouse* mouse);
+  virtual ~CScrOptUnclutter();
 
-class CScrOptUnclutter : public IScrOpt
-{
-public:
-    CScrOptUnclutter(IMouse* mouse);
-    virtual ~CScrOptUnclutter();
+  struct item_t {
+    bool hasUserFocus;
+    QString name;
+    IGisItem::key_t key;
+    QPixmap icon;
+    QRect area;
+    QRect text;
+    QRect active;
+  };
 
-    struct item_t
-    {
-        bool hasUserFocus;
-        QString name;
-        IGisItem::key_t key;
-        QPixmap icon;
-        QRect area;
-        QRect text;
-        QRect active;
-    };
+  virtual void clear();
+  virtual int size() { return items.size(); }
 
-    virtual void clear();
-    virtual int  size()
-    {
-        return items.size();
-    }
+  void addItem(IGisItem* gisItem);
+  IGisItem::key_t getItemKey(int index = 0);
+  const item_t* selectItem(const QPoint& point);
 
-    void addItem(IGisItem* gisItem);
-    IGisItem::key_t getItemKey(int index = 0);
-    const item_t* selectItem(const QPoint& point);
+  void draw(QPainter& p) override;
+  void mouseMove(const QPoint& pos) override;
 
-    void draw(QPainter& p) override;
-    void mouseMove(const QPoint& pos) override;
-
-private:
-    static const QPoint positions[9][8];
-    QList<item_t> items;
-    bool doSpecialCursor = false;
+ private:
+  static const QPoint positions[9][8];
+  QList<item_t> items;
+  bool doSpecialCursor = false;
 };
 
-#endif //CSCROPTUNCLUTTER_H
-
+#endif  // CSCROPTUNCLUTTER_H

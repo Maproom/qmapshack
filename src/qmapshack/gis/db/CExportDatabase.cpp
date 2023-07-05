@@ -16,104 +16,89 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "gis/db/CExportDatabase.h"
-#include "gis/db/CExportDatabaseThread.h"
-#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
-CExportDatabase::CExportDatabase(quint64 id, QSqlDatabase& db, QWidget* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
+#include "CMainWindow.h"
+#include "gis/db/CExportDatabaseThread.h"
+#include "helpers/CSettings.h"
 
-    SETTINGS;
-    cfg.beginGroup("ExportDB");
-    labelPath->setText(cfg.value("path", "-").toString());
-    checkGpx11->setChecked(cfg.value("asGpx11", false).toBool());
-    cfg.endGroup();
+CExportDatabase::CExportDatabase(quint64 id, QSqlDatabase& db, QWidget* parent) : QDialog(parent) {
+  setupUi(this);
 
-    QDir dir(labelPath->text());
-    pushStart->setEnabled(dir.exists());
+  SETTINGS;
+  cfg.beginGroup("ExportDB");
+  labelPath->setText(cfg.value("path", "-").toString());
+  checkGpx11->setChecked(cfg.value("asGpx11", false).toBool());
+  cfg.endGroup();
 
-    connect(toolPath, &QToolButton::clicked, this, &CExportDatabase::slotSetPath);
-    connect(pushStart, &QPushButton::clicked, this, &CExportDatabase::slotStart);
+  QDir dir(labelPath->text());
+  pushStart->setEnabled(dir.exists());
 
-    thread = new CExportDatabaseThread(id, db, this);
-    connect(pushAbort, &QPushButton::clicked, thread, &CExportDatabaseThread::slotAbort);
-    connect(thread, &CExportDatabaseThread::started, this, &CExportDatabase::slotStarted);
-    connect(thread, &CExportDatabaseThread::finished, this, &CExportDatabase::slotFinished);
-    connect(thread, &CExportDatabaseThread::sigOut, this, &CExportDatabase::slotStdout);
-    connect(thread, &CExportDatabaseThread::sigErr, this, &CExportDatabase::slotStderr);
+  connect(toolPath, &QToolButton::clicked, this, &CExportDatabase::slotSetPath);
+  connect(pushStart, &QPushButton::clicked, this, &CExportDatabase::slotStart);
+
+  thread = new CExportDatabaseThread(id, db, this);
+  connect(pushAbort, &QPushButton::clicked, thread, &CExportDatabaseThread::slotAbort);
+  connect(thread, &CExportDatabaseThread::started, this, &CExportDatabase::slotStarted);
+  connect(thread, &CExportDatabaseThread::finished, this, &CExportDatabase::slotFinished);
+  connect(thread, &CExportDatabaseThread::sigOut, this, &CExportDatabase::slotStdout);
+  connect(thread, &CExportDatabaseThread::sigErr, this, &CExportDatabase::slotStderr);
 }
 
-CExportDatabase::~CExportDatabase()
-{
-    SETTINGS;
-    cfg.beginGroup("ExportDB");
-    cfg.setValue("path", labelPath->text());
-    cfg.setValue("asGpx11", checkGpx11->isChecked());
-    cfg.endGroup();
+CExportDatabase::~CExportDatabase() {
+  SETTINGS;
+  cfg.beginGroup("ExportDB");
+  cfg.setValue("path", labelPath->text());
+  cfg.setValue("asGpx11", checkGpx11->isChecked());
+  cfg.endGroup();
 }
 
-void CExportDatabase::closeEvent(QCloseEvent* e)
-{
-    if(thread->isRunning())
-    {
-        e->ignore();
-    }
-    else
-    {
-        e->accept();
-    }
+void CExportDatabase::closeEvent(QCloseEvent* e) {
+  if (thread->isRunning()) {
+    e->ignore();
+  } else {
+    e->accept();
+  }
 }
 
-void CExportDatabase::slotStdout(const QString& str)
-{
-    textBrowser->setTextColor(Qt::black);
-    textBrowser->append(str);
+void CExportDatabase::slotStdout(const QString& str) {
+  textBrowser->setTextColor(Qt::black);
+  textBrowser->append(str);
 }
 
-
-void CExportDatabase::slotStderr(const QString& str)
-{
-    textBrowser->setTextColor(Qt::red);
-    textBrowser->append(str);
+void CExportDatabase::slotStderr(const QString& str) {
+  textBrowser->setTextColor(Qt::red);
+  textBrowser->append(str);
 }
 
+void CExportDatabase::slotSetPath() {
+  QString path = labelPath->text();
 
-void CExportDatabase::slotSetPath()
-{
-    QString path = labelPath->text();
+  path = QFileDialog::getExistingDirectory(CMainWindow::self().getBestWidgetForParent(), tr("Select export path..."),
+                                           path);
+  if (!path.isEmpty()) {
+    labelPath->setText(path);
+  }
 
-    path = QFileDialog::getExistingDirectory(CMainWindow::self().getBestWidgetForParent(), tr("Select export path..."), path);
-    if(!path.isEmpty())
-    {
-        labelPath->setText(path);
-    }
-
-    QDir dir(labelPath->text());
-    pushStart->setEnabled(dir.exists());
+  QDir dir(labelPath->text());
+  pushStart->setEnabled(dir.exists());
 }
 
-void CExportDatabase::slotStart()
-{
-    textBrowser->clear();
-    thread->start(labelPath->text(), checkGpx11->isChecked());
+void CExportDatabase::slotStart() {
+  textBrowser->clear();
+  thread->start(labelPath->text(), checkGpx11->isChecked());
 }
 
-void CExportDatabase::slotStarted()
-{
-    pushStart->setEnabled(false);
-    pushAbort->setEnabled(true);
-    pushClose->setEnabled(false);
+void CExportDatabase::slotStarted() {
+  pushStart->setEnabled(false);
+  pushAbort->setEnabled(true);
+  pushClose->setEnabled(false);
 }
 
-void CExportDatabase::slotFinished()
-{
-    pushStart->setEnabled(true);
-    pushAbort->setEnabled(false);
-    pushClose->setEnabled(true);
+void CExportDatabase::slotFinished() {
+  pushStart->setEnabled(true);
+  pushAbort->setEnabled(false);
+  pushClose->setEnabled(true);
 }
-

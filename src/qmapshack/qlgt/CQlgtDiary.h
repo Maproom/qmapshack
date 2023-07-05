@@ -19,22 +19,21 @@
 #ifndef CQLGTDIARY_H
 #define CQLGTDIARY_H
 
-#include "qlgt/IItem.h"
 #include <QObject>
 
-class CQlgtDiary : public QObject, public IItem
-{
-public:
-    CQlgtDiary(quint64 id, QObject* parent);
-    virtual ~CQlgtDiary();
+#include "qlgt/IItem.h"
 
-    enum type_e {eEnd, eBase, eWpt, eTrk, eRte};
+class CQlgtDiary : public QObject, public IItem {
+ public:
+  CQlgtDiary(quint64 id, QObject* parent);
+  virtual ~CQlgtDiary();
 
-    quint64 keyProjectGeoDB = 0;
+  enum type_e { eEnd, eBase, eWpt, eTrk, eRte };
+
+  quint64 keyProjectGeoDB = 0;
 };
 
-QDataStream& operator >>(QDataStream& s, CQlgtDiary& diary);
-QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary);
+QDataStream& operator>>(QDataStream& s, CQlgtDiary& diary);
+QDataStream& operator<<(QDataStream& s, CQlgtDiary& diary);
 
-#endif //CQLGTDIARY_H
-
+#endif  // CQLGTDIARY_H

@@ -20,24 +20,23 @@
 #ifndef CFILTERSPLITSEGMENT_H
 #define CFILTERSPLITSEGMENT_H
 
-#include "ui_IFilterSplitSegment.h"
 #include <QWidget>
+
+#include "ui_IFilterSplitSegment.h"
 
 class CGisItemTrk;
 
-class CFilterSplitSegment : public QWidget, private Ui::IFilterSplitSegment
-{
-    Q_OBJECT
-public:
-    CFilterSplitSegment(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterSplitSegment() = default;
+class CFilterSplitSegment : public QWidget, private Ui::IFilterSplitSegment {
+  Q_OBJECT
+ public:
+  CFilterSplitSegment(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterSplitSegment() = default;
 
-private slots:
-    void slotApply();
+ private slots:
+  void slotApply();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif // CFILTERSPLITSEGMENT_H
-
+#endif  // CFILTERSPLITSEGMENT_H

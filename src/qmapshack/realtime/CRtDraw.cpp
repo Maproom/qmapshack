@@ -16,41 +16,32 @@
 
 **********************************************************************************************/
 
-#include "helpers/CDraw.h"
 #include "realtime/CRtDraw.h"
+
+#include "helpers/CDraw.h"
 #include "realtime/CRtWorkspace.h"
 
-CRtDraw::CRtDraw(CCanvas* parent)
-    : IDrawContext("rt", CCanvas::eRedrawRt, parent)
-{
-    connect(&CRtWorkspace::self(), &CRtWorkspace::sigChanged, this, &CRtDraw::emitSigCanvasUpdate);
+CRtDraw::CRtDraw(CCanvas* parent) : IDrawContext("rt", CCanvas::eRedrawRt, parent) {
+  connect(&CRtWorkspace::self(), &CRtWorkspace::sigChanged, this, &CRtDraw::emitSigCanvasUpdate);
 }
 
+void CRtDraw::draw(QPainter& p, const QRect& rect) { CRtWorkspace::self().fastDraw(p, rect, this); }
 
-void CRtDraw::draw(QPainter& p, const QRect& rect)
-{
-    CRtWorkspace::self().fastDraw(p, rect, this);
+void CRtDraw::drawt(buffer_t& currentBuffer) {
+  QPointF pt1 = currentBuffer.ref1;
+  QPointF pt2 = currentBuffer.ref2;
+  QPointF pt3 = currentBuffer.ref3;
+  QPointF pt4 = currentBuffer.ref4;
+
+  QPointF pp = currentBuffer.ref1;
+  convertRad2Px(pp);
+
+  QPolygonF viewport;
+  viewport << pt1 << pt2 << pt3 << pt4;
+
+  QPainter p(&currentBuffer.image);
+  USE_ANTI_ALIASING(p, true);
+  p.translate(-pp);
+
+  CRtWorkspace::self().draw(p, viewport, this);
 }
-
-void CRtDraw::drawt(buffer_t& currentBuffer)
-{
-    QPointF pt1 = currentBuffer.ref1;
-    QPointF pt2 = currentBuffer.ref2;
-    QPointF pt3 = currentBuffer.ref3;
-    QPointF pt4 = currentBuffer.ref4;
-
-    QPointF pp = currentBuffer.ref1;
-    convertRad2Px(pp);
-
-    QPolygonF viewport;
-    viewport << pt1 << pt2 << pt3 << pt4;
-
-    QPainter p(&currentBuffer.image);
-    USE_ANTI_ALIASING(p, true);
-    p.translate(-pp);
-
-    CRtWorkspace::self().draw(p, viewport, this);
-}
-
-
-

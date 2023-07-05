@@ -17,81 +17,58 @@
 **********************************************************************************************/
 
 #include "items/CItemCutMap.h"
-#include "overlay/COverlayCutMap.h"
 
 #include <QtWidgets>
 
+#include "overlay/COverlayCutMap.h"
+
 CItemCutMap::CItemCutMap(const QString& filename, QStackedWidget* stackedWidget, QListWidget* parent)
-    : CItemFile(filename, parent)
-{
-    overlay = new COverlayCutMap(this, stackedWidget);
-    connect(overlay, &COverlayCutMap::sigChanged, this, &CItemCutMap::sigChanged);
+    : CItemFile(filename, parent) {
+  overlay = new COverlayCutMap(this, stackedWidget);
+  connect(overlay, &COverlayCutMap::sigChanged, this, &CItemCutMap::sigChanged);
 }
 
-CItemCutMap::~CItemCutMap()
-{
-    overlay->deleteLater();
+CItemCutMap::~CItemCutMap() { overlay->deleteLater(); }
+
+void CItemCutMap::saveSettings(QSettings& cfg) {
+  CItemFile::saveSettings(cfg);
+  overlay->saveSettings(cfg);
 }
 
-void CItemCutMap::saveSettings(QSettings& cfg)
-{
-    CItemFile::saveSettings(cfg);
-    overlay->saveSettings(cfg);
+void CItemCutMap::loadSettings(QSettings& cfg) {
+  CItemFile::loadSettings(cfg);
+  overlay->loadSettings(cfg);
 }
 
-void CItemCutMap::loadSettings(QSettings& cfg)
-{
-    CItemFile::loadSettings(cfg);
-    overlay->loadSettings(cfg);
+void CItemCutMap::toFront() { overlay->toFront(); }
+
+bool CItemCutMap::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) {
+  CItemFile::drawFx(p, needsRedraw);
+  overlay->drawFx(p, needsRedraw);
+  return true;
 }
 
-void CItemCutMap::toFront()
-{
-    overlay->toFront();
+void CItemCutMap::mouseMoveEventFx(QMouseEvent* e) {
+  CItemFile::mouseMoveEventFx(e);
+  if (!mapIsMoving) {
+    overlay->mouseMoveEventFx(e);
+  }
 }
 
-bool CItemCutMap::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
-{
-    CItemFile::drawFx(p, needsRedraw);
-    overlay->drawFx(p, needsRedraw);
-    return true;
+void CItemCutMap::mouseReleaseEventFx(QMouseEvent* e) {
+  if (!mapDidMove) {
+    overlay->mouseReleaseEventFx(e);
+  }
+  CItemFile::mouseReleaseEventFx(e);
 }
 
-void CItemCutMap::mouseMoveEventFx(QMouseEvent* e)
-{
-    CItemFile::mouseMoveEventFx(e);
-    if(!mapIsMoving)
-    {
-        overlay->mouseMoveEventFx(e);
-    }
+void CItemCutMap::leaveEventFx(QEvent* e) {
+  CItemFile::leaveEventFx(e);
+  overlay->abortStep();
 }
 
-void CItemCutMap::mouseReleaseEventFx(QMouseEvent* e)
-{
-    if(!mapDidMove)
-    {
-        overlay->mouseReleaseEventFx(e);
-    }
-    CItemFile::mouseReleaseEventFx(e);
-}
+QCursor CItemCutMap::getCursorFx() { return overlay->getCursorFx(); }
 
-void CItemCutMap::leaveEventFx(QEvent* e)
-{
-    CItemFile::leaveEventFx(e);
-    overlay->abortStep();
-}
+void CItemCutMap::saveShape(const QString& filename) const { overlay->saveShape(filename); }
 
-QCursor CItemCutMap::getCursorFx()
-{
-    return overlay->getCursorFx();
-}
-
-void CItemCutMap::saveShape(const QString& filename) const
-{
-    overlay->saveShape(filename);
-}
-
-bool CItemCutMap::isOk() const
-{
-    return overlay->isOk();
-}
+bool CItemCutMap::isOk() const { return overlay->isOk(); }

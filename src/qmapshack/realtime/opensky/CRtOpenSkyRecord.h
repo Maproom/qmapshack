@@ -22,18 +22,16 @@
 #include "realtime/IRtRecord.h"
 #include "realtime/opensky/CRtOpenSky.h"
 
-class CRtOpenSkyRecord : public IRtRecord
-{
-    Q_OBJECT
-public:
-    CRtOpenSkyRecord(QObject* parent);
-    virtual ~CRtOpenSkyRecord() = default;
+class CRtOpenSkyRecord : public IRtRecord {
+  Q_OBJECT
+ public:
+  CRtOpenSkyRecord(QObject* parent);
+  virtual ~CRtOpenSkyRecord() = default;
 
-    bool writeEntry(const CRtOpenSky::aircraft_t& aircraft);
+  bool writeEntry(const CRtOpenSky::aircraft_t& aircraft);
 
-protected:
-    using IRtRecord::writeEntry;
+ protected:
+  using IRtRecord::writeEntry;
 };
 
-#endif //CRTOPENSKYRECORD_H
-
+#endif  // CRTOPENSKYRECORD_H

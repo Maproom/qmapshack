@@ -21,25 +21,21 @@
 
 #include <QSpinBox>
 
-class CDoubleSpinBox : public QDoubleSpinBox
-{
-    Q_OBJECT
+class CDoubleSpinBox : public QDoubleSpinBox {
+  Q_OBJECT
 
-public slots:
-    void slotSelectAll()
-    {
-        selectAll();
-    }
+ public slots:
+  void slotSelectAll() { selectAll(); }
 
-signals:
-    void valueChangedByStep(double val);
+ signals:
+  void valueChangedByStep(double val);
 
-public:
-    CDoubleSpinBox(QWidget* parent = nullptr);
+ public:
+  CDoubleSpinBox(QWidget* parent = nullptr);
 
-    void stepBy(int steps) override;
+  void stepBy(int steps) override;
 
-protected:
-    void focusInEvent(QFocusEvent* event) override;
+ protected:
+  void focusInEvent(QFocusEvent* event) override;
 };
-#endif // CDOUBLESPINBOX_H
+#endif  // CDOUBLESPINBOX_H

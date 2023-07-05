@@ -26,54 +26,47 @@ class CGisItemTrk;
 class CGisItemWpt;
 class QDir;
 
-class CTwoNavProject : public IGisProject
-{
-    Q_DECLARE_TR_FUNCTIONS(CTwoNavProject)
-public:
-    CTwoNavProject(const QString& filename, const IGisProject* project, IDevice* parent);
-    CTwoNavProject(const QString& filename, IDevice* parent);
-    virtual ~CTwoNavProject();
+class CTwoNavProject : public IGisProject {
+  Q_DECLARE_TR_FUNCTIONS(CTwoNavProject)
+ public:
+  CTwoNavProject(const QString& filename, const IGisProject* project, IDevice* parent);
+  CTwoNavProject(const QString& filename, IDevice* parent);
+  virtual ~CTwoNavProject();
 
-    struct img_t
-    {
-        QString filename;
-        QString info;
-        QImage image;
-    };
+  struct img_t {
+    QString filename;
+    QString info;
+    QImage image;
+  };
 
-    struct wpt_t
-    {
-        wpt_t() : valid(false), lon(0), lat(0), ele(0), prox(0)
-        {
-        }
-        bool valid;
-        QDateTime time;
-        QString name;
-        QString comment;
-        QString description;
-        QString symbol;
-        QString key;
-        QString url;
+  struct wpt_t {
+    wpt_t() : valid(false), lon(0), lat(0), ele(0), prox(0) {}
+    bool valid;
+    QDateTime time;
+    QString name;
+    QString comment;
+    QString description;
+    QString symbol;
+    QString key;
+    QString url;
 
-        qreal lon;
-        qreal lat;
-        qreal ele;
-        qreal prox;
+    qreal lon;
+    qreal lat;
+    qreal ele;
+    qreal prox;
 
-        QDomDocument gpx;
+    QDomDocument gpx;
 
-        QList<img_t> images;
-    };
+    QList<img_t> images;
+  };
 
+  bool save() override;
+  bool saveAs();
 
-    bool save()   override;
-    bool saveAs();
-
-private:
-    bool load(const QString& filename);
-    bool loadWpts(const QString& filename, const QDir& dir);
-    bool saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename, const QDir& dir);
+ private:
+  bool load(const QString& filename);
+  bool loadWpts(const QString& filename, const QDir& dir);
+  bool saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename, const QDir& dir);
 };
 
-#endif //CTWONAVPROJECT_H
-
+#endif  // CTWONAVPROJECT_H

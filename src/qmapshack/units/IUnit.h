@@ -21,204 +21,158 @@
 #include <QObject>
 #include <QTimeZone>
 
-
 #define NOFLOAT 1000000000000.0
-#define NOINT   0x7FFFFFFF
-#define NOTIME  0xFFFFFFFF
-#define NOIDX   (-1)
+#define NOINT 0x7FFFFFFF
+#define NOTIME 0xFFFFFFFF
+#define NOIDX (-1)
 
 extern const QPointF NOPOINTF;
 extern const QPoint NOPOINT;
 
-class IUnit : public QObject
-{
-    Q_OBJECT
-public:
+class IUnit : public QObject {
+  Q_OBJECT
+ public:
+  static constexpr qreal footPerMeter = 3.28084;
+  static constexpr qreal nauticalMilePerMeter = 1. / 1852;
+  static constexpr qreal meterPerSecToKnots = 1.94361780;
+  static constexpr qreal milePerMeter = 0.6213699E-3;
+  static constexpr qreal meterPerSecToMilePerHour = 2.23693164;
 
-    static constexpr qreal footPerMeter = 3.28084;
-    static constexpr qreal nauticalMilePerMeter = 1. / 1852;
-    static constexpr qreal meterPerSecToKnots = 1.94361780;
-    static constexpr qreal milePerMeter = 0.6213699E-3;
-    static constexpr qreal meterPerSecToMilePerHour = 2.23693164;
+  virtual ~IUnit() = default;
 
-    virtual ~IUnit() = default;
+  static const IUnit& self() { return *m_self; }
 
-    static const IUnit& self()
-    {
-        return *m_self;
-    }
+  /// convert meter of elevation into a value and unit string
+  virtual void meter2elevation(qreal meter, QString& val, QString& unit) const;
+  virtual void meter2elevation(qreal meter, qreal& val, QString& unit) const;
+  virtual void feet2elevation(qreal feet, QString& val, QString& unit) const {
+    meter2elevation(feet / 3.28084, val, unit);
+  }
 
-    /// convert meter of elevation into a value and unit string
-    virtual void meter2elevation(qreal meter, QString& val, QString& unit) const;
-    virtual void meter2elevation(qreal meter, qreal& val, QString& unit) const;
-    virtual void feet2elevation(qreal feet, QString& val, QString& unit) const
-    {
-        meter2elevation(feet / 3.28084, val, unit);
-    }
+  /// convert meter of distance into a value and unit string
+  virtual void meter2distance(qreal meter, QString& val, QString& unit) const = 0;
+  virtual void meter2distance(qreal meter, qreal& val, QString& unit) const = 0;
+  /// convert meter per second to a speed value string and unit label
+  virtual void meter2speed(qreal meter, QString& val, QString& unit) const;
+  virtual void meter2speed(qreal meter, qreal& val, QString& unit) const;
+  /// convert square meter to string and unit label
+  virtual void meter2area(qreal meter, QString& val, QString& unit) const = 0;
+  virtual void meter2area(qreal meter, qreal& val, QString& unit) const = 0;
+  /// convert seconds to a timespan of days, hours, minutes and seconds
+  virtual void seconds2time(quint32 ttime, QString& val, QString& unit) const;
+  /// convert an elevation string to a float
+  virtual qreal elevation2meter(const QString& val) const = 0;
+  /// convert a range in meter into a scale and a matching unit
+  virtual void meter2unit(qreal meter, qreal& scale, QString& unit) const = 0;
+  /// convert meter into the base unit (ft, m)
+  virtual void meter2base(qreal meter, QString& val, QString& unit) const;
 
-    /// convert meter of distance into a value and unit string
-    virtual void meter2distance(qreal meter, QString& val, QString& unit) const = 0;
-    virtual void meter2distance(qreal meter, qreal& val, QString& unit) const = 0;
-    /// convert meter per second to a speed value string and unit label
-    virtual void meter2speed(qreal meter, QString& val, QString& unit) const;
-    virtual void meter2speed(qreal meter, qreal& val, QString& unit) const;
-    /// convert square meter to string and unit label
-    virtual void meter2area(qreal meter, QString& val, QString& unit) const = 0;
-    virtual void meter2area(qreal meter, qreal& val, QString& unit) const = 0;
-    /// convert seconds to a timespan of days, hours, minutes and seconds
-    virtual void seconds2time(quint32 ttime, QString& val, QString& unit) const;
-    /// convert an elevation string to a float
-    virtual qreal elevation2meter(const QString& val) const = 0;
-    /// convert a range in meter into a scale and a matching unit
-    virtual void meter2unit(qreal meter, qreal& scale, QString& unit) const = 0;
-    /// convert meter into the base unit (ft, m)
-    virtual void meter2base(qreal meter, QString& val, QString& unit) const;
+  static bool convert(qreal& value, QString& unit, const QString& targetUnit);
+  static QStringList getUnits() {
+    QStringList list;
+    list.append(timeToMKSMap.keys());
+    list.append(distanceToMKSMap.keys());
+    list.append(speedToMKSMap.keys());
+    list.append(areaToMKSMap.keys());
+    return list;
+  }
 
-    static bool convert(qreal& value, QString& unit, const QString& targetUnit);
-    static QStringList getUnits()
-    {
-        QStringList list;
-        list.append(timeToMKSMap.keys());
-        list.append(distanceToMKSMap.keys());
-        list.append(speedToMKSMap.keys());
-        list.append(areaToMKSMap.keys());
-        return list;
-    }
+  enum type_e { eTypeMetric, eTypeImperial, eTypeNautic, eTypeAviation };
+  /// instantiate the correct unit object
+  static void setUnitType(type_e t, QObject* parent);
 
-    enum type_e {eTypeMetric, eTypeImperial, eTypeNautic, eTypeAviation};
-    /// instantiate the correct unit object
-    static void setUnitType(type_e t, QObject* parent);
+  enum slope_mode_e { eSlopePercent, eSlopeDegrees };
+  static void setSlopeMode(slope_mode_e mode) { slopeMode = mode; }
+  static enum slope_mode_e getSlopeMode() { return slopeMode; }
+  static void slope2string(qreal slope, QString& val, QString& unit);
+  static void slope2unit(qreal slope, qreal& val, QString& unit);
+  static qreal slopeConvert(slope_mode_e fromMode, qreal fromSlope);
 
-    enum slope_mode_e {eSlopePercent, eSlopeDegrees};
-    static void setSlopeMode(slope_mode_e mode)
-    {
-        slopeMode = mode;
-    }
-    static enum slope_mode_e getSlopeMode()
-    {
-        return slopeMode;
-    }
-    static void slope2string(qreal slope, QString& val, QString& unit);
-    static void slope2unit(qreal slope, qreal& val, QString& unit);
-    static qreal slopeConvert(slope_mode_e fromMode, qreal fromSlope);
+  /// parse a string for a timestamp
+  static bool parseTimestamp(const QString& time, QDateTime& datetime);
 
-    /// parse a string for a timestamp
-    static bool parseTimestamp(const QString& time, QDateTime& datetime);
+  enum time_format_e { eTimeFormatLong, eTimeFormatShort, eTimeFormatIso };
+  /**
+     @brief Convert date time object to string using the current timezone configuration
 
 
-    enum time_format_e {eTimeFormatLong, eTimeFormatShort, eTimeFormatIso};
-    /**
-       @brief Convert date time object to string using the current timezone configuration
+     @param time          the date/time object
+     @param format        one of time_format_e
+     @param pos           optional a position attached to the date/time object [rad]
+     @return              A time string.
+   */
+  static QString datetime2string(const QDateTime& time, time_format_e format, const QPointF& pos = NOPOINTF);
 
+  /// find the timezone setup by position
+  static QByteArray pos2timezone(const QPointF& pos);
 
-       @param time          the date/time object
-       @param format        one of time_format_e
-       @param pos           optional a position attached to the date/time object [rad]
-       @return              A time string.
-     */
-    static QString datetime2string(const QDateTime& time, time_format_e format, const QPointF& pos = NOPOINTF);
+  const type_e type;
+  const QString baseUnit;
+  const qreal baseFactor;
+  const QString speedUnit;
+  const qreal speedFactor;
+  const QString elevationUnit;
+  const qreal elevationFactor;
+  static const char* tblTimezone[];
 
-    /// find the timezone setup by position
-    static QByteArray pos2timezone(const QPointF& pos);
+  enum tz_mode_e { eTZUtc, eTZLocal, eTZAuto, eTZSelected };
 
-    const type_e type;
-    const QString baseUnit;
-    const qreal baseFactor;
-    const QString speedUnit;
-    const qreal speedFactor;
-    const QString elevationUnit;
-    const qreal elevationFactor;
-    static const char* tblTimezone[];
+  static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone, bool& format) {
+    mode = timeZoneMode;
+    zone = timeZone;
+    format = useShortFormat;
+  }
 
-    enum tz_mode_e
-    {
-        eTZUtc
-        , eTZLocal
-        , eTZAuto
-        , eTZSelected
-    };
+  static void setTimeZoneSetup(tz_mode_e mode, const QByteArray& zone, bool format) {
+    timeZoneMode = mode;
+    timeZone = zone;
+    useShortFormat = format;
+  }
 
-    static void getTimeZoneSetup(tz_mode_e& mode, QByteArray& zone, bool& format)
-    {
-        mode = timeZoneMode;
-        zone = timeZone;
-        format = useShortFormat;
-    }
+  enum coord_format_e { eCoordFormat1, eCoordFormat2, eCoordFormat3 };
 
-    static void setTimeZoneSetup(tz_mode_e mode, const QByteArray& zone, bool format)
-    {
-        timeZoneMode = mode;
-        timeZone = zone;
-        useShortFormat = format;
-    }
+  static enum coord_format_e getCoordFormat() { return coordFormat; }
 
-    enum coord_format_e
-    {
-        eCoordFormat1
-        , eCoordFormat2
-        , eCoordFormat3
-    };
+  static void setCoordFormat(const coord_format_e format) { coordFormat = format; }
 
-    static enum coord_format_e getCoordFormat()
-    {
-        return coordFormat;
-    }
+  static void degToStr(const qreal& x, const qreal& y, QString& str);
 
-    static void setCoordFormat(const coord_format_e format)
-    {
-        coordFormat = format;
-    }
+  static bool strToDeg(const QString& str, qreal& lon, qreal& lat);
 
-    static void degToStr(const qreal& x, const qreal& y, QString& str);
+  static bool isValidCoordString(const QString& str);
 
-    static bool strToDeg(const QString& str, qreal& lon, qreal& lat);
+ protected:
+  IUnit(const type_e& type, const QString& baseUnit, const qreal baseFactor, const QString& speedUnit,
+        const qreal speedFactor, const QString& elevationUnit, const qreal elevationFactor, QObject* parent);
 
-    static bool isValidCoordString(const QString& str);
+  static slope_mode_e slopeMode;
 
-protected:
-    IUnit(const type_e& type,
-          const QString& baseUnit,
-          const qreal baseFactor,
-          const QString& speedUnit,
-          const qreal speedFactor,
-          const QString& elevationUnit,
-          const qreal elevationFactor,
-          QObject* parent);
+  static QDateTime parseTimestamp(const QString& timetext, int& tzoffset);
 
-    static slope_mode_e slopeMode;
+  static tz_mode_e timeZoneMode;
+  static QByteArray timeZone;
+  static bool useShortFormat;
 
-    static QDateTime parseTimestamp(const QString& timetext, int& tzoffset);
+  static coord_format_e coordFormat;
 
-    static tz_mode_e timeZoneMode;
-    static QByteArray timeZone;
-    static bool useShortFormat;
+ private:
+  static const IUnit* m_self;
 
-    static coord_format_e coordFormat;
+  static const QRegExp reCoord1;
+  static const QRegExp reCoord2;
+  static const QRegExp reCoord3;
+  static const QRegExp reCoord4;
+  static const QRegExp reCoord5;
 
-private:
-    static const IUnit* m_self;
+  enum unit_type_e { eUnitTypeTime, eUnitTypeDistance, eUnitTypeSpeed, eUnitTypeArea };
 
-    static const QRegExp reCoord1;
-    static const QRegExp reCoord2;
-    static const QRegExp reCoord3;
-    static const QRegExp reCoord4;
-    static const QRegExp reCoord5;
-
-    enum unit_type_e
-    {
-        eUnitTypeTime,
-        eUnitTypeDistance,
-        eUnitTypeSpeed,
-        eUnitTypeArea
-    };
-
-    static QMap<QString, qreal> timeToMKSMap;
-    static QMap<QString, qreal> initTimeToMKSMap();
-    static QMap<QString, qreal> distanceToMKSMap;
-    static QMap<QString, qreal> initDistanceToMKSMap();
-    static QMap<QString, qreal> speedToMKSMap;
-    static QMap<QString, qreal> initSpeedToMKSMap();
-    static QMap<QString, qreal> areaToMKSMap;
-    static QMap<QString, qreal> initAreaToMKSMap();
+  static QMap<QString, qreal> timeToMKSMap;
+  static QMap<QString, qreal> initTimeToMKSMap();
+  static QMap<QString, qreal> distanceToMKSMap;
+  static QMap<QString, qreal> initDistanceToMKSMap();
+  static QMap<QString, qreal> speedToMKSMap;
+  static QMap<QString, qreal> initSpeedToMKSMap();
+  static QMap<QString, qreal> areaToMKSMap;
+  static QMap<QString, qreal> initAreaToMKSMap();
 };
-#endif //IUNIT_H
+#endif  // IUNIT_H

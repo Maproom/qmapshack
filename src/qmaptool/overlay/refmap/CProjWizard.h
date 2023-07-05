@@ -19,26 +19,25 @@
 #ifndef CPROJWIZARD_H
 #define CPROJWIZARD_H
 
-#include "ui_IProjWizard.h"
 #include <QDialog>
 
-class CProjWizard : public QDialog, private Ui::IProjWizard
-{
-    Q_OBJECT
-public:
-    CProjWizard(QLineEdit& line, QWidget* parent);
-    virtual ~CProjWizard();
-    static bool validProjStr(const QString projStr);
+#include "ui_IProjWizard.h"
 
-public slots:
-    void accept() override;
-    void slotChange();
+class CProjWizard : public QDialog, private Ui::IProjWizard {
+  Q_OBJECT
+ public:
+  CProjWizard(QLineEdit& line, QWidget* parent);
+  virtual ~CProjWizard();
+  static bool validProjStr(const QString projStr);
 
-private:
-    void findDatum(const QString& str);
+ public slots:
+  void accept() override;
+  void slotChange();
 
-    QLineEdit& line;
+ private:
+  void findDatum(const QString& str);
+
+  QLineEdit& line;
 };
 
-#endif //CPROJWIZARD_H
-
+#endif  // CPROJWIZARD_H

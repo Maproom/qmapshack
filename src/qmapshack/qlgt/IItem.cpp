@@ -18,12 +18,6 @@
 
 #include "IItem.h"
 
-IItem::IItem(quint64 id)
-    : id(id)
-{
-}
+IItem::IItem(quint64 id) : id(id) {}
 
-IItem::~IItem()
-{
-}
-
+IItem::~IItem() {}

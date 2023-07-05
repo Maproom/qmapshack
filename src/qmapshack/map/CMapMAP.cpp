@@ -16,137 +16,116 @@
 
 **********************************************************************************************/
 
+#include "map/CMapMAP.h"
+
+#include <QtWidgets>
+
 #include "CMainWindow.h"
 #include "gis/proj_x.h"
 #include "helpers/CFileExt.h"
 #include "map/CMapDraw.h"
-#include "map/CMapMAP.h"
-
-#include <QtWidgets>
 
 #define INT_TO_DEG(x) (qreal(x) / 1e6)
 
 #define INT_TO_RAD(x) (qreal(x) / (1e6 * RAD_TO_DEG))
 
-
-
 CMapMAP::CMapMAP(const QString& filename, CMapDraw* parent)
-    : IMap(eFeatVisibility | eFeatVectorItems, parent)
-    , filename(filename)
-{
-    qDebug() << "------------------------------";
-    qDebug() << "MAP: try to open" << filename;
+    : IMap(eFeatVisibility | eFeatVectorItems, parent), filename(filename) {
+  qDebug() << "------------------------------";
+  qDebug() << "MAP: try to open" << filename;
 
-    try
-    {
-        readBasics();
-    }
-    catch(const exce_t& e)
-    {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed ..."), e.msg, QMessageBox::Abort);
-        return;
-    }
+  try {
+    readBasics();
+  } catch (const exce_t& e) {
+    QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed ..."), e.msg, QMessageBox::Abort);
+    return;
+  }
 
-
-    isActivated = true;
+  isActivated = true;
 }
 
-CMapMAP::~CMapMAP()
-{
-}
+CMapMAP::~CMapMAP() {}
 
-void CMapMAP::readBasics()
-{
-    CFileExt file(filename);
-    if(!file.open(QIODevice::ReadOnly))
-    {
-        throw exce_t(eErrOpen, tr("Failed to open: ") + filename);
-    }
+void CMapMAP::readBasics() {
+  CFileExt file(filename);
+  if (!file.open(QIODevice::ReadOnly)) {
+    throw exce_t(eErrOpen, tr("Failed to open: ") + filename);
+  }
 
-    QDataStream stream(&file);
-    stream.setByteOrder(QDataStream::BigEndian);
+  QDataStream stream(&file);
+  stream.setByteOrder(QDataStream::BigEndian);
 
-    // ---------- start file header ----------------------
-    stream.readRawData(header.signature, sizeof(header.signature));
-    if(strncmp(header.signature, "mapsforge binary OSM", sizeof(header.signature)) != 0)
-    {
-        throw exce_t(errFormat, tr("Bad file format: ") + filename);
-    }
+  // ---------- start file header ----------------------
+  stream.readRawData(header.signature, sizeof(header.signature));
+  if (strncmp(header.signature, "mapsforge binary OSM", sizeof(header.signature)) != 0) {
+    throw exce_t(errFormat, tr("Bad file format: ") + filename);
+  }
 
-    stream >> header.sizeHeader;
-    stream >> header.version;
-    stream >> header.sizeFile;
-    stream >> header.timestamp;
-    stream >> header.minLat;
-    stream >> header.minLon;
-    stream >> header.maxLat;
-    stream >> header.maxLon;
+  stream >> header.sizeHeader;
+  stream >> header.version;
+  stream >> header.sizeFile;
+  stream >> header.timestamp;
+  stream >> header.minLat;
+  stream >> header.minLon;
+  stream >> header.maxLat;
+  stream >> header.maxLon;
 
-    qDebug() << INT_TO_DEG(header.minLat) << INT_TO_DEG(header.minLon) << INT_TO_DEG(header.maxLat) << INT_TO_DEG(header.maxLon);
-    ref1 = QPointF(INT_TO_RAD(header.minLon), INT_TO_RAD(header.maxLat));
-    ref2 = QPointF(INT_TO_RAD(header.maxLon), INT_TO_RAD(header.minLat));
+  qDebug() << INT_TO_DEG(header.minLat) << INT_TO_DEG(header.minLon) << INT_TO_DEG(header.maxLat)
+           << INT_TO_DEG(header.maxLon);
+  ref1 = QPointF(INT_TO_RAD(header.minLon), INT_TO_RAD(header.maxLat));
+  ref2 = QPointF(INT_TO_RAD(header.maxLon), INT_TO_RAD(header.minLat));
 
-    stream >> header.sizeTile;
-    stream >> header.projection;
-    stream >> header.flags;
+  stream >> header.sizeTile;
+  stream >> header.projection;
+  stream >> header.flags;
 
-    if(header.flags & eHeaderFlagStartPosition)
-    {
-        stream >> header.latStart >> header.lonStart;
-    }
+  if (header.flags & eHeaderFlagStartPosition) {
+    stream >> header.latStart >> header.lonStart;
+  }
 
-    if(header.flags & eHeaderFlagStartZoomLevel)
-    {
-        stream >> header.zoomStart;
-    }
+  if (header.flags & eHeaderFlagStartZoomLevel) {
+    stream >> header.zoomStart;
+  }
 
-    if(header.flags & eHeaderFlagLanguage)
-    {
-        stream >> header.language;
-    }
+  if (header.flags & eHeaderFlagLanguage) {
+    stream >> header.language;
+  }
 
-    if(header.flags & eHeaderFlagComment)
-    {
-        stream >> header.comment;
-    }
+  if (header.flags & eHeaderFlagComment) {
+    stream >> header.comment;
+  }
 
-    if(header.flags & eHeaderFlagCreator)
-    {
-        stream >> header.creator;
-    }
+  if (header.flags & eHeaderFlagCreator) {
+    stream >> header.creator;
+  }
 
-    quint16 size;
-    utf8 tag;
-    stream >> size;
-    for(int i = 0; i < size; i++)
-    {
-        stream >> tag;
-        header.tagsPOIs << tag;
-    }
-    stream >> size;
-    for(int i = 0; i < size; i++)
-    {
-        stream >> tag;
-        header.tagsWays << tag;
-    }
+  quint16 size;
+  utf8 tag;
+  stream >> size;
+  for (int i = 0; i < size; i++) {
+    stream >> tag;
+    header.tagsPOIs << tag;
+  }
+  stream >> size;
+  for (int i = 0; i < size; i++) {
+    stream >> tag;
+    header.tagsWays << tag;
+  }
 
+  quint8 N;
+  stream >> N;
+  for (int i = 0; i < N; i++) {
+    layer_t layer;
+    stream >> layer.baseZoom;
+    stream >> layer.minZoom;
+    stream >> layer.maxZoom;
+    stream >> layer.offsetSubFile;
+    stream >> layer.sizeSubFile;
 
-    quint8 N;
-    stream >> N;
-    for(int i = 0; i < N; i++)
-    {
-        layer_t layer;
-        stream >> layer.baseZoom;
-        stream >> layer.minZoom;
-        stream >> layer.maxZoom;
-        stream >> layer.offsetSubFile;
-        stream >> layer.sizeSubFile;
-
-        layers << layer;
-    }
-    // ---------- end file header ----------------------
+    layers << layer;
+  }
+  // ---------- end file header ----------------------
 }
 
 void CMapMAP::draw(IDrawContext::buffer_t& buf) /* override */
-{
-}
+{}

@@ -16,98 +16,86 @@
 
 **********************************************************************************************/
 
+#include "gis/ovl/CScrOptOvlArea.h"
+
 #include "CMainWindow.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/ovl/CGisItemOvlArea.h"
-#include "gis/ovl/CScrOptOvlArea.h"
 #include "helpers/CDraw.h"
 #include "mouse/CScrOptSemaphoreLocker.h"
 #include "mouse/IMouse.h"
 
 CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea* area, const QPoint& point, IMouse* parent)
-    : IScrOpt(parent)
-    , key(area->getKey())
-{
-    setupUi(this);
-    setOrigin(point);
-    label->setFont(CMainWindow::self().getMapFont());
-    label->setText(area->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowLinks));
-    adjustSize();
+    : IScrOpt(parent), key(area->getKey()) {
+  setupUi(this);
+  setOrigin(point);
+  label->setFont(CMainWindow::self().getMapFont());
+  label->setText(area->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowLinks));
+  adjustSize();
 
-    anchor = area->getPointCloseBy(point);
-    if((anchor - point).manhattanLength() > 50)
-    {
-        anchor = point;
-    }
-    moveTo(anchor.toPoint());
-    toolNogo->setChecked(area->isNogo());
-    show();
+  anchor = area->getPointCloseBy(point);
+  if ((anchor - point).manhattanLength() > 50) {
+    anchor = point;
+  }
+  moveTo(anchor.toPoint());
+  toolNogo->setChecked(area->isNogo());
+  show();
 
-    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptOvlArea::slotEditDetails);
-    connect(toolTags, &QToolButton::clicked, this, &CScrOptOvlArea::slotTags);
-    connect(toolDelete, &QToolButton::clicked, this, &CScrOptOvlArea::slotDelete);
-    connect(toolCopy, &QToolButton::clicked, this, &CScrOptOvlArea::slotCopy);
-    connect(toolEdit, &QToolButton::clicked, this, &CScrOptOvlArea::slotEdit);
-    connect(toolNogo, &QToolButton::clicked, this, &CScrOptOvlArea::slotNogo);
+  connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptOvlArea::slotEditDetails);
+  connect(toolTags, &QToolButton::clicked, this, &CScrOptOvlArea::slotTags);
+  connect(toolDelete, &QToolButton::clicked, this, &CScrOptOvlArea::slotDelete);
+  connect(toolCopy, &QToolButton::clicked, this, &CScrOptOvlArea::slotCopy);
+  connect(toolEdit, &QToolButton::clicked, this, &CScrOptOvlArea::slotEdit);
+  connect(toolNogo, &QToolButton::clicked, this, &CScrOptOvlArea::slotNogo);
 
-    connect(label, &QLabel::linkActivated, this, &CScrOptOvlArea::slotLinkActivated);
+  connect(label, &QLabel::linkActivated, this, &CScrOptOvlArea::slotLinkActivated);
 }
 
-CScrOptOvlArea::~CScrOptOvlArea()
-{
+CScrOptOvlArea::~CScrOptOvlArea() {}
+
+void CScrOptOvlArea::slotEditDetails() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().editItemByKey(key);
+  close();
 }
 
-void CScrOptOvlArea::slotEditDetails()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().editItemByKey(key);
-    close();
+void CScrOptOvlArea::slotCopy() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().copyItemByKey(key);
+  close();
 }
 
-void CScrOptOvlArea::slotCopy()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().copyItemByKey(key);
-    close();
+void CScrOptOvlArea::slotDelete() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().delItemByKey(key);
+  close();
 }
 
-void CScrOptOvlArea::slotDelete()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().delItemByKey(key);
-    close();
+void CScrOptOvlArea::slotEdit() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().editAreaByKey(key);
+  close();
 }
 
-void CScrOptOvlArea::slotEdit()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().editAreaByKey(key);
-    close();
+void CScrOptOvlArea::slotNogo() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().toggleNogoItem(key);
+  close();
 }
 
-void CScrOptOvlArea::slotNogo()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().toggleNogoItem(key);
-    close();
+void CScrOptOvlArea::slotTags() {
+  CScrOptSemaphoreLocker lock(*this);
+  CGisWorkspace::self().tagItemsByKey({key});
+  close();
 }
 
-void CScrOptOvlArea::slotTags()
-{
-    CScrOptSemaphoreLocker lock(*this);
-    CGisWorkspace::self().tagItemsByKey({key});
-    close();
-}
+void CScrOptOvlArea::draw(QPainter& p) {
+  IGisItem* item = CGisWorkspace::self().getItemByKey(key);
+  if (nullptr == item) {
+    deleteLater();
+    return;
+  }
+  item->drawHighlight(p);
 
-void CScrOptOvlArea::draw(QPainter& p)
-{
-    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
-    if(nullptr == item)
-    {
-        deleteLater();
-        return;
-    }
-    item->drawHighlight(p);
-
-    CDraw::bubble(p, geometry(), anchor.toPoint(), backgroundColor);
+  CDraw::bubble(p, geometry(), anchor.toPoint(), backgroundColor);
 }

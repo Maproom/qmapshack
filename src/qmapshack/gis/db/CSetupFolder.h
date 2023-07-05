@@ -19,27 +19,26 @@
 #ifndef CSETUPFOLDER_H
 #define CSETUPFOLDER_H
 
-#include "gis/db/IDBFolder.h"
-#include "ui_ISetupFolder.h"
 #include <QDialog>
 
-class CSetupFolder : public QDialog, private Ui::ISetupFolder
-{
-    Q_OBJECT
-public:
-    CSetupFolder(IDBFolder::type_e& type, QString& name, bool groupAllowed, QWidget* parent);
-    virtual ~CSetupFolder();
+#include "gis/db/IDBFolder.h"
+#include "ui_ISetupFolder.h"
 
-public slots:
-    void accept() override;
+class CSetupFolder : public QDialog, private Ui::ISetupFolder {
+  Q_OBJECT
+ public:
+  CSetupFolder(IDBFolder::type_e& type, QString& name, bool groupAllowed, QWidget* parent);
+  virtual ~CSetupFolder();
 
-private slots:
-    void slotNameChanged(const QString& text);
+ public slots:
+  void accept() override;
 
-private:
-    IDBFolder::type_e& type;
-    QString& name;
+ private slots:
+  void slotNameChanged(const QString& text);
+
+ private:
+  IDBFolder::type_e& type;
+  QString& name;
 };
 
-#endif //CSETUPFOLDER_H
-
+#endif  // CSETUPFOLDER_H

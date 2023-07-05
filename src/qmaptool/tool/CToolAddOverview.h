@@ -24,28 +24,25 @@
 #include "tool/IToolGui.h"
 #include "ui_IToolAddOverview.h"
 
+class CToolAddOverview : public IToolGui, public ITool, private Ui::IToolAddOverview {
+  Q_OBJECT
+ public:
+  CToolAddOverview(QWidget* parent);
+  virtual ~CToolAddOverview();
 
-class CToolAddOverview : public IToolGui, public ITool, private Ui::IToolAddOverview
-{
-    Q_OBJECT
-public:
-    CToolAddOverview(QWidget* parent);
-    virtual ~CToolAddOverview();
+  void setupChanged() override;
 
-    void setupChanged() override;
+  FORWARD_LIST_ALL(itemList)
 
-    FORWARD_LIST_ALL(itemList)
+ private slots:
+  void slotAddItem(const QString& filename, QListWidget* list);
+  void slotMapSelectionChanged();
+  void slotSelectionChanged();
+  void slotStart();
+  void slotFinished(qint32 id);
 
-private slots:
-    void slotAddItem(const QString& filename, QListWidget* list);
-    void slotMapSelectionChanged();
-    void slotSelectionChanged();
-    void slotStart();
-    void slotFinished(qint32 id);
-
-protected:
-    void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
+ protected:
+  void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
 };
 
-#endif //CTOOLADDOVERVIEW_H
-
+#endif  // CTOOLADDOVERVIEW_H

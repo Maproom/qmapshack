@@ -19,22 +19,19 @@
 #ifndef CSCROPTRANGETRK_H
 #define CSCROPTRANGETRK_H
 
-#include "gis/trk/CTrackData.h"
 #include "mouse/IScrOpt.h"
 #include "ui_IScrOptRangeTrk.h"
 
 class CGisItemTrk;
 
-class CScrOptRangeTrk : public IScrOpt, public Ui::IScrOptRangeTrk
-{
-    Q_OBJECT
+class CScrOptRangeTrk : public IScrOpt, public Ui::IScrOptRangeTrk {
+  Q_OBJECT
 
-public:
-    CScrOptRangeTrk(const QPointF& point, CGisItemTrk* trk, IMouse* mouse, QWidget* parent = nullptr);
-    virtual ~CScrOptRangeTrk();
+ public:
+  CScrOptRangeTrk(const QPointF& point, CGisItemTrk* trk, IMouse* mouse, QWidget* parent = nullptr);
+  virtual ~CScrOptRangeTrk();
 
-    void draw(QPainter& p) override;
+  void draw(QPainter& p) override;
 };
 
-#endif //CSCROPTRANGETRK_H
-
+#endif  // CSCROPTRANGETRK_H

@@ -18,30 +18,22 @@
 
 #include "mouse/range/CActionSelect.h"
 
-CActionSelect::CActionSelect(QWidget* parent)
-    : QWidget(parent)
-{
-    setupUi(this);
-    buttons = {radioButton1, radioButton2, radioButton3, radioButton4};
-    radioButton1->setProperty("action", int(CScrOptRangeTool::eAction::Nothing));
-    radioButton2->setProperty("action", int(CScrOptRangeTool::eAction::Reset));
-    radioButton3->setProperty("action", int(CScrOptRangeTool::eAction::ToEnd));
-    radioButton4->setProperty("action", int(CScrOptRangeTool::eAction::ToStart));
+CActionSelect::CActionSelect(QWidget* parent) : QWidget(parent) {
+  setupUi(this);
+  buttons = {radioButton1, radioButton2, radioButton3, radioButton4};
+  radioButton1->setProperty("action", int(CScrOptRangeTool::eAction::Nothing));
+  radioButton2->setProperty("action", int(CScrOptRangeTool::eAction::Reset));
+  radioButton3->setProperty("action", int(CScrOptRangeTool::eAction::ToEnd));
+  radioButton4->setProperty("action", int(CScrOptRangeTool::eAction::ToStart));
 }
 
-void CActionSelect::setAction(CScrOptRangeTool::eAction action)
-{
-    buttons[int(action)]->setChecked(true);
-}
+void CActionSelect::setAction(CScrOptRangeTool::eAction action) { buttons[int(action)]->setChecked(true); }
 
-CScrOptRangeTool::eAction CActionSelect::getAction() const
-{
-    for(QRadioButton* button : buttons)
-    {
-        if(button->isChecked())
-        {
-            return CScrOptRangeTool::eAction(button->property("action").toInt());
-        }
+CScrOptRangeTool::eAction CActionSelect::getAction() const {
+  for (QRadioButton* button : buttons) {
+    if (button->isChecked()) {
+      return CScrOptRangeTool::eAction(button->property("action").toInt());
     }
-    return CScrOptRangeTool::eAction::Default;
+  }
+  return CScrOptRangeTool::eAction::Default;
 }

@@ -24,21 +24,18 @@
 class IMap;
 class CMapDraw;
 
-class IMapPropSetup : public QWidget
-{
-    Q_OBJECT
-public:
-    IMapPropSetup(IMap* mapfile, CMapDraw* map);
-    virtual ~IMapPropSetup() = default;
+class IMapPropSetup : public QWidget {
+  Q_OBJECT
+ public:
+  IMapPropSetup(IMap* mapfile, CMapDraw* map);
+  virtual ~IMapPropSetup() = default;
 
+ protected slots:
+  virtual void slotPropertiesChanged() = 0;
 
-protected slots:
-    virtual void slotPropertiesChanged() = 0;
-
-protected:
-    IMap* mapfile;
-    CMapDraw* map;
+ protected:
+  IMap* mapfile;
+  CMapDraw* map;
 };
 
-#endif //IMAPPROPSETUP_H
-
+#endif  // IMAPPROPSETUP_H

@@ -16,151 +16,120 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "gis/CGisListWks.h"
 #include "gis/fit/CFitProject.h"
-#include "gis/fit/CFitStream.h"
-#include "gis/fit/defs/fit_enums.h"
-#include "gis/fit/defs/fit_fields.h"
-#include "gis/gpx/CGpxProject.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/wpt/CGisItemWpt.h"
 
 #include <QtWidgets>
 
-CFitProject::CFitProject(const QString& filename, CGisListWks* parent)
-    : IGisProject(eTypeFit, filename, parent)
-{
-    loadFitFromFile(filename, true);
+#include "CMainWindow.h"
+#include "gis/CGisListWks.h"
+#include "gis/fit/CFitStream.h"
+#include "gis/fit/defs/fit_enums.h"
+#include "gis/fit/defs/fit_fields.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
+
+CFitProject::CFitProject(const QString& filename, CGisListWks* parent) : IGisProject(eTypeFit, filename, parent) {
+  loadFitFromFile(filename, true);
 }
 
-CFitProject::CFitProject(const QString& filename, IDevice* parent)
-    : IGisProject(eTypeFit, filename, parent)
-{
-    // this constructor is used when opening files from the garmin device.
-    // this means several files are opened at the same time. For that case we do not show an error message if a file
-    // can not be opened.
-    loadFitFromFile(filename, false);
+CFitProject::CFitProject(const QString& filename, IDevice* parent) : IGisProject(eTypeFit, filename, parent) {
+  // this constructor is used when opening files from the garmin device.
+  // this means several files are opened at the same time. For that case we do not show an error message if a file
+  // can not be opened.
+  loadFitFromFile(filename, false);
 }
 
-
-void CFitProject::loadFitFromFile(const QString& filename, bool showErrorMsg)
-{
-    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/FitProject.png"));
-    blockUpdateItems(true);
-    try
-    {
-        tryOpeningFitFile(filename);
+void CFitProject::loadFitFromFile(const QString& filename, bool showErrorMsg) {
+  setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/FitProject.png"));
+  blockUpdateItems(true);
+  try {
+    tryOpeningFitFile(filename);
+  } catch (QString& errormsg) {
+    if (showErrorMsg) {
+      QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed to load file %1...").arg(filename),
+                            errormsg, QMessageBox::Abort);
+    } else {
+      qWarning() << "Failed to load FIT file:" << errormsg;
     }
-    catch(QString& errormsg)
-    {
-        if(showErrorMsg)
-        {
-            QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
-                                  tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
-        }
-        else
-        {
-            qWarning() << "Failed to load FIT file:" << errormsg;
-        }
-        valid = false;
-    }
+    valid = false;
+  }
 
-    sortItems();
-    blockUpdateItems(false);
+  sortItems();
+  blockUpdateItems(false);
 }
 
+void CFitProject::tryOpeningFitFile(const QString& filename) {
+  // create file instance
+  QFile file(filename);
+  qDebug() << "reading FIT file" << filename;
 
-void CFitProject::tryOpeningFitFile(const QString& filename)
-{
-    // create file instance
-    QFile file(filename);
-    qDebug() << "reading FIT file" << filename;
-
-    // if the file does not exist, the filename is assumed to be a name for a new project
-    if(!file.exists())
-    {
-        IGisProject::filename.clear();
-        setupName(filename);
-        setToolTip(CGisListWks::eColumnName, getInfo());
-        valid = true;
-        return;
-    }
-
-    if(!file.open(QIODevice::ReadOnly))
-    {
-        throw tr("Failed to open FIT file %1.").arg(filename);
-    }
-
-    try
-    {
-        createGisItems(file);
-    }
-    catch(QString& errormsg)
-    {
-        file.close();
-        throw errormsg;
-    }
-    file.close();
-
-    markAsSaved();
-
+  // if the file does not exist, the filename is assumed to be a name for a new project
+  if (!file.exists()) {
+    IGisProject::filename.clear();
+    setupName(filename);
     setToolTip(CGisListWks::eColumnName, getInfo());
     valid = true;
+    return;
+  }
+
+  if (!file.open(QIODevice::ReadOnly)) {
+    throw tr("Failed to open FIT file %1.").arg(filename);
+  }
+
+  try {
+    createGisItems(file);
+  } catch (QString& errormsg) {
+    file.close();
+    throw errormsg;
+  }
+  file.close();
+
+  markAsSaved();
+
+  setToolTip(CGisListWks::eColumnName, getInfo());
+  valid = true;
 }
 
+void CFitProject::createGisItems(QFile& file) {
+  CFitStream in(file);
+  in.decodeFile();
 
+  QString name = "";
 
-void CFitProject::createGisItems(QFile& file)
-{
-    CFitStream in(file);
-    in.decodeFile();
+  // remark: we consider activity and course files types. trk is for both types. There is one trk per fit file
+  const CFitMessage& mesg = in.firstMesgOf(eMesgNumFileId);
+  if (mesg.getFieldValue(eFileIdType).toUInt() == eFileActivity ||
+      mesg.getFieldValue(eFileIdType).toUInt() == eFileCourse ||
+      mesg.getFieldValue(eFileIdType).toUInt() == eFileSegment) {
+    CGisItemTrk* trk = new CGisItemTrk(in, this);
+    name = trk->getName();
+  }
+  // fit does not have routes
+  // new CGisItemRte(in, this);
 
-    QString name = "";
-
-    // remark: we consider activity and course files types. trk is for both types. There is one trk per fit file
-    const CFitMessage& mesg = in.firstMesgOf(eMesgNumFileId);
-    if(mesg.getFieldValue(eFileIdType).toUInt() == eFileActivity || mesg.getFieldValue(eFileIdType).toUInt() == eFileCourse
-       || mesg.getFieldValue(eFileIdType).toUInt() == eFileSegment)
-    {
-        CGisItemTrk* trk = new CGisItemTrk(in, this);
-        name = trk->getName();
+  // Locations file containing waypoints
+  if (mesg.getFieldValue(eFileIdType).toUInt() == eFileLocation) {
+    while (in.nextMesgOf(eMesgNumLocation).isValid()) {
+      new CGisItemWpt(in, this);
     }
-    // fit does not have routes
-    // new CGisItemRte(in, this);
+  }
 
-    // Locations file containing waypoints
-    if (mesg.getFieldValue(eFileIdType).toUInt() == eFileLocation)
-    {
-        while(in.nextMesgOf(eMesgNumLocation).isValid())
-        {
-            new CGisItemWpt(in, this);
-        }
+  in.reset();
+  // course point is a message of a course file. Thus, wpt is only for a course file. There might be n wpt per fit file
+  while (in.nextMesgOf(eMesgNumCoursePoint).isValid()) {
+    CGisItemWpt* wpt = new CGisItemWpt(in, this);
+    if (name.length() == 0) {
+      name = wpt->getName();
     }
+  }
+  // ql:area is not directly available in FIT (could be calculated)
 
-    in.reset();
-    // course point is a message of a course file. Thus, wpt is only for a course file. There might be n wpt per fit file
-    while(in.nextMesgOf(eMesgNumCoursePoint).isValid())
-    {
-        CGisItemWpt* wpt = new CGisItemWpt(in, this);
-        if (name.length() == 0)
-        {
-            name = wpt->getName();
-        }
-    }
-    // ql:area is not directly available in FIT (could be calculated)
+  QString tmp = QFileInfo(filename).completeBaseName().replace("_", " ");
+  if (!name.isEmpty()) {
+    tmp += QString("(%1)").arg(name);
+  }
 
-    QString tmp = QFileInfo(filename).completeBaseName().replace("_", " ");
-    if(!name.isEmpty())
-    {
-        tmp += QString("(%1)").arg(name);
-    }
-
-    setupName(tmp);
+  setupName(tmp);
 }
 
-CFitProject::~CFitProject()
-{
-}
-
+CFitProject::~CFitProject() {}

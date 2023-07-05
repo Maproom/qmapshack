@@ -16,167 +16,137 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWorkspace.h"
-#include "gis/prj/IGisProject.h"
 #include "widgets/CHistoryListWidget.h"
-
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 
-CHistoryListWidget::CHistoryListWidget(QWidget* parent)
-    : QListWidget(parent)
-{
-    setIconSize(QSize(32, 32));
-    setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(this, &CHistoryListWidget::itemSelectionChanged, this, &CHistoryListWidget::slotSelectionChanged);
-    connect(this, &CHistoryListWidget::customContextMenuRequested, this, &CHistoryListWidget::slotContextMenu);
+#include "CMainWindow.h"
+#include "gis/CGisWorkspace.h"
+#include "gis/prj/IGisProject.h"
 
-    menu = new QMenu(this);
+CHistoryListWidget::CHistoryListWidget(QWidget* parent) : QListWidget(parent) {
+  setIconSize(QSize(32, 32));
+  setContextMenuPolicy(Qt::CustomContextMenu);
+  connect(this, &CHistoryListWidget::itemSelectionChanged, this, &CHistoryListWidget::slotSelectionChanged);
+  connect(this, &CHistoryListWidget::customContextMenuRequested, this, &CHistoryListWidget::slotContextMenu);
 
-    actionCutHistoryBefore = menu->addAction(
-        QIcon("://icons/32x32/CutHistoryBefore.png"),
-        tr("Cut history before"),
-        this,
-        &CHistoryListWidget::slotCutHistoryBefore);
-    actionCutHistoryAfter = menu->addAction(
-        QIcon("://icons/32x32/CutHistoryAfter.png"),
-        tr("Cut history after"),
-        this,
-        &CHistoryListWidget::slotCutHistoryAfter);
+  menu = new QMenu(this);
+
+  actionCutHistoryBefore = menu->addAction(QIcon("://icons/32x32/CutHistoryBefore.png"), tr("Cut history before"), this,
+                                           &CHistoryListWidget::slotCutHistoryBefore);
+  actionCutHistoryAfter = menu->addAction(QIcon("://icons/32x32/CutHistoryAfter.png"), tr("Cut history after"), this,
+                                          &CHistoryListWidget::slotCutHistoryAfter);
 }
 
-CHistoryListWidget::~CHistoryListWidget()
-{
+CHistoryListWidget::~CHistoryListWidget() {}
+
+void CHistoryListWidget::setupHistory(IGisItem& gisItem) {
+  blockSignals(true);
+  clear();
+
+  key = gisItem.getKey();
+
+  const IGisItem::history_t& history = gisItem.getHistory();
+
+  // for(const IGisItem::history_event_t& event : history.events)
+  for (int i = 0; i < history.events.size(); i++) {
+    const IGisItem::history_event_t& event = history.events[i];
+
+    QString str;
+    QListWidgetItem* item = new QListWidgetItem(this);
+
+    str = event.time.toString();
+    if (!event.who.isEmpty()) {
+      str += tr(" by %1").arg(event.who);
+    }
+
+    str += "\n";
+    str += event.comment;
+
+    item->setText(str);
+    item->setIcon(QIcon(event.icon));
+    if (event.data.isEmpty()) {
+      item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
+    }
+  }
+
+  if (history.histIdxCurrent < count()) {
+    setCurrentItem(item(history.histIdxCurrent));
+  }
+  blockSignals(false);
 }
 
-void CHistoryListWidget::setupHistory(IGisItem& gisItem)
-{
-    blockSignals(true);
-    clear();
+void CHistoryListWidget::slotSelectionChanged() {
+  IGisItem* item = CGisWorkspace::self().getItemByKey(key);
+  if (nullptr == item) {
+    return;
+  }
 
-    key = gisItem.getKey();
+  item->loadHistory(currentRow());
+  item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
 
-    const IGisItem::history_t& history = gisItem.getHistory();
-
-    //for(const IGisItem::history_event_t& event : history.events)
-    for(int i = 0; i < history.events.size(); i++)
-    {
-        const IGisItem::history_event_t& event = history.events[i];
-
-        QString str;
-        QListWidgetItem* item = new QListWidgetItem(this);
-
-        str = event.time.toString();
-        if(!event.who.isEmpty())
-        {
-            str += tr(" by %1").arg(event.who);
-        }
-
-        str += "\n";
-        str += event.comment;
-
-        item->setText(str);
-        item->setIcon(QIcon(event.icon));
-        if(event.data.isEmpty())
-        {
-            item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
-        }
-    }
-
-    if(history.histIdxCurrent < count())
-    {
-        setCurrentItem(item(history.histIdxCurrent));
-    }
-    blockSignals(false);
+  emit sigChanged();
 }
 
-void CHistoryListWidget::slotSelectionChanged()
-{
-    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
-    if(nullptr == item)
-    {
-        return;
-    }
+void CHistoryListWidget::slotContextMenu(const QPoint& point) {
+  if ((count() == 0) || (count() == 1))  // nothing can be done if there is 0 (should not happen) or 1 event in history
+  {
+    return;
+  }
 
-    item->loadHistory(currentRow());
-    item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+  actionCutHistoryBefore->setEnabled(currentRow() > 0);
+  actionCutHistoryAfter->setEnabled(currentRow() < count() - 1);
 
-    emit sigChanged();
+  QPoint p = mapToGlobal(point);
+  menu->exec(p);
 }
 
-void CHistoryListWidget::slotContextMenu(const QPoint& point)
-{
-    if ((count() == 0) || (count() == 1)) // nothing can be done if there is 0 (should not happen) or 1 event in history
-    {
-        return;
-    }
+void CHistoryListWidget::slotCutHistoryAfter() {
+  if (currentRow() == (count() - 1)) {
+    return;
+  }
 
-    actionCutHistoryBefore->setEnabled(currentRow() > 0);
-    actionCutHistoryAfter->setEnabled(currentRow() < count() - 1);
+  IGisItem* item = CGisWorkspace::self().getItemByKey(key);
+  if (nullptr == item) {
+    return;
+  }
 
-    QPoint p = mapToGlobal(point);
-    menu->exec(p);
+  item->cutHistoryAfter();
+  item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+
+  IGisProject* project = dynamic_cast<IGisProject*>(item->parent());
+  if (project) {
+    project->setChanged();
+  }
+
+  emit sigChanged();
 }
 
+void CHistoryListWidget::slotCutHistoryBefore() {
+  if (currentRow() == 0) {
+    return;
+  }
 
-void CHistoryListWidget::slotCutHistoryAfter()
-{
-    if(currentRow() == (count() - 1))
-    {
-        return;
-    }
+  IGisItem* item = CGisWorkspace::self().getItemByKey(key);
+  if (nullptr == item) {
+    return;
+  }
 
-    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
-    if(nullptr == item)
-    {
-        return;
-    }
+  int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("History removal"),
+                                 tr("The removal is permanent and cannot be undone. "
+                                    "<b>Do you really want to delete history before this step?</b>"),
+                                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+  if (res == QMessageBox::No) {
+    return;
+  }
 
-    item->cutHistoryAfter();
-    item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+  item->cutHistoryBefore();
+  item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
 
-    IGisProject* project = dynamic_cast<IGisProject*>(item->parent());
-    if(project)
-    {
-        project->setChanged();
-    }
+  IGisProject* project = dynamic_cast<IGisProject*>(item->parent());
+  if (project) {
+    project->setChanged();
+  }
 
-    emit sigChanged();
-}
-
-
-
-void CHistoryListWidget::slotCutHistoryBefore()
-{
-    if (currentRow() == 0)
-    {
-        return;
-    }
-
-    IGisItem* item = CGisWorkspace::self().getItemByKey(key);
-    if (nullptr == item)
-    {
-        return;
-    }
-
-    int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("History removal")
-                                   , tr("The removal is permanent and cannot be undone. "
-                                        "<b>Do you really want to delete history before this step?</b>")
-                                   , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-    if (res == QMessageBox::No)
-    {
-        return;
-    }
-
-    item->cutHistoryBefore();
-    item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
-
-    IGisProject* project = dynamic_cast<IGisProject*>(item->parent());
-    if (project)
-    {
-        project->setChanged();
-    }
-
-    emit sigChanged();
+  emit sigChanged();
 }

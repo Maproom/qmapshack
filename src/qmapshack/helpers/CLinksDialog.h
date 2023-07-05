@@ -19,28 +19,27 @@
 #ifndef CLINKSDIALOG_H
 #define CLINKSDIALOG_H
 
-#include "gis/IGisItem.h"
-#include "ui_ILinksDialog.h"
 #include <QDialog>
 
-class CLinksDialog : public QDialog, private Ui::ILinksDialog
-{
-    Q_OBJECT
-public:
-    CLinksDialog(QList<IGisItem::link_t>& links, QWidget* parent);
-    virtual ~CLinksDialog();
+#include "gis/IGisItem.h"
+#include "ui_ILinksDialog.h"
 
-public slots:
-    void accept() override;
+class CLinksDialog : public QDialog, private Ui::ILinksDialog {
+  Q_OBJECT
+ public:
+  CLinksDialog(QList<IGisItem::link_t>& links, QWidget* parent);
+  virtual ~CLinksDialog();
 
-private slots:
-    void slotAddLink();
-    void slotDelLink();
-    void slotItemSelectionChanged();
+ public slots:
+  void accept() override;
 
-private:
-    QList<IGisItem::link_t>& links;
+ private slots:
+  void slotAddLink();
+  void slotDelLink();
+  void slotItemSelectionChanged();
+
+ private:
+  QList<IGisItem::link_t>& links;
 };
 
-#endif //CLINKSDIALOG_H
-
+#endif  // CLINKSDIALOG_H

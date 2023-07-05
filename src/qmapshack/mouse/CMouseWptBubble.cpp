@@ -17,84 +17,63 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/CGisWorkspace.h"
-#include "gis/wpt/CGisItemWpt.h"
 #include "mouse/CMouseWptBubble.h"
 
 #include <QtWidgets>
 
+#include "canvas/CCanvas.h"
+#include "gis/CGisWorkspace.h"
+#include "gis/wpt/CGisItemWpt.h"
+
 CMouseWptBubble::CMouseWptBubble(const IGisItem::key_t& key, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouse(gis, canvas, mouse)
-    , key(key)
-{
-    cursor = QCursor(QPixmap("://cursors/cursorArrow.png"), 0, 0);
+    : IMouse(gis, canvas, mouse), key(key) {
+  cursor = QCursor(QPixmap("://cursors/cursorArrow.png"), 0, 0);
 }
 
-CMouseWptBubble::~CMouseWptBubble()
-{
+CMouseWptBubble::~CMouseWptBubble() {}
+
+void CMouseWptBubble::draw(QPainter&, CCanvas::redraw_e, const QRect&) {}
+
+void CMouseWptBubble::leftClicked(const QPoint& pos) {
+  QMutexLocker lock(&IGisItem::mutexItems);
+
+  CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+  if (wpt) {
+    wpt->leftClicked(pos);
+  } else {
+    canvas->resetMouse();
+  }
 }
 
-void CMouseWptBubble::draw(QPainter&, CCanvas::redraw_e, const QRect&)
-{
+void CMouseWptBubble::mouseMoved(const QPoint& pos) {
+  QMutexLocker lock(&IGisItem::mutexItems);
+
+  CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+  if (wpt) {
+    wpt->mouseMove(pos);
+  } else {
+    canvas->resetMouse();
+  }
 }
 
-void CMouseWptBubble::leftClicked(const QPoint& pos)
-{
-    QMutexLocker lock(&IGisItem::mutexItems);
+void CMouseWptBubble::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) {
+  QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
-    if(wpt)
-    {
-        wpt->leftClicked(pos);
-    }
-    else
-    {
-        canvas->resetMouse();
-    }
+  CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+  if (wpt) {
+    wpt->mouseDragged(start, last, end);
+  } else {
+    canvas->resetMouse();
+  }
 }
 
-void CMouseWptBubble::mouseMoved(const QPoint& pos)
-{
-    QMutexLocker lock(&IGisItem::mutexItems);
+void CMouseWptBubble::dragFinished(const QPoint& pos) {
+  QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
-    if(wpt)
-    {
-        wpt->mouseMove(pos);
-    }
-    else
-    {
-        canvas->resetMouse();
-    }
-}
-
-void CMouseWptBubble::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end)
-{
-    QMutexLocker lock(&IGisItem::mutexItems);
-
-    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
-    if(wpt)
-    {
-        wpt->mouseDragged(start, last, end);
-    }
-    else
-    {
-        canvas->resetMouse();
-    }
-}
-
-void CMouseWptBubble::dragFinished(const QPoint& pos)
-{
-    QMutexLocker lock(&IGisItem::mutexItems);
-
-    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
-    if(wpt)
-    {
-        wpt->dragFinished(pos);
-    }
-    else
-    {
-        canvas->resetMouse();
-    }
+  CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+  if (wpt) {
+    wpt->dragFinished(pos);
+  } else {
+    canvas->resetMouse();
+  }
 }

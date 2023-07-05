@@ -16,55 +16,53 @@
 
 **********************************************************************************************/
 
+#include "gis/trk/filter/CFilterInterpolateElevation.h"
+
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/filter/CFilterInterpolateElevation.h"
 #include "helpers/CSettings.h"
 
 CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
+    : QWidget(parent), trk(trk) {
+  setupUi(this);
 
-    comboQuality->addItem(tr("coarse"), CGisItemTrk::eQualityCoarse);
-    comboQuality->addItem(tr("medium"), CGisItemTrk::eQualityMedium);
-    comboQuality->addItem(tr("fine"), CGisItemTrk::eQualityFine);
+  comboQuality->addItem(tr("coarse"), CGisItemTrk::eQualityCoarse);
+  comboQuality->addItem(tr("medium"), CGisItemTrk::eQualityMedium);
+  comboQuality->addItem(tr("fine"), CGisItemTrk::eQualityFine);
 
-    bool enabled = trk.isInterpolationEnabled();
-    checkPreview->setChecked(enabled);
-    toolApply->setEnabled(enabled);
+  bool enabled = trk.isInterpolationEnabled();
+  checkPreview->setChecked(enabled);
+  toolApply->setEnabled(enabled);
 
-    SETTINGS;
-    comboQuality->setCurrentIndex(comboQuality->findData(cfg.value("TrackDetails/Filter/Interp/quality", CGisItemTrk::eQualityCoarse)));
+  SETTINGS;
+  comboQuality->setCurrentIndex(
+      comboQuality->findData(cfg.value("TrackDetails/Filter/Interp/quality", CGisItemTrk::eQualityCoarse)));
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterInterpolateElevation::slotApply);
-    connect(checkPreview, &QCheckBox::toggled, this, &CFilterInterpolateElevation::slotPreview);
-    connect(comboQuality, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CFilterInterpolateElevation::slotPreview);
+  connect(toolApply, &QToolButton::clicked, this, &CFilterInterpolateElevation::slotApply);
+  connect(checkPreview, &QCheckBox::toggled, this, &CFilterInterpolateElevation::slotPreview);
+  connect(comboQuality, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+          &CFilterInterpolateElevation::slotPreview);
 }
 
-CFilterInterpolateElevation::~CFilterInterpolateElevation()
-{
-    SETTINGS;
-    cfg.setValue("TrackDetails/Filter/Interp/quality", comboQuality->currentData());
-    trk.setupInterpolation(false, CGisItemTrk::eQualityCoarse);
+CFilterInterpolateElevation::~CFilterInterpolateElevation() {
+  SETTINGS;
+  cfg.setValue("TrackDetails/Filter/Interp/quality", comboQuality->currentData());
+  trk.setupInterpolation(false, CGisItemTrk::eQualityCoarse);
 }
 
-void CFilterInterpolateElevation::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterInterpolateElevation();
-    checkPreview->setChecked(trk.isInterpolationEnabled());
+void CFilterInterpolateElevation::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterInterpolateElevation();
+  checkPreview->setChecked(trk.isInterpolationEnabled());
 }
 
-void CFilterInterpolateElevation::slotPreview()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    bool yes = checkPreview->isChecked();
-    qint32 Q = comboQuality->currentData().toInt();
-    trk.setupInterpolation(yes, Q);
+void CFilterInterpolateElevation::slotPreview() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  bool yes = checkPreview->isChecked();
+  qint32 Q = comboQuality->currentData().toInt();
+  trk.setupInterpolation(yes, Q);
 
-    yes = trk.isInterpolationEnabled();
-    checkPreview->setChecked(yes);
-    toolApply->setEnabled(yes);
+  yes = trk.isInterpolationEnabled();
+  checkPreview->setChecked(yes);
+  toolApply->setEnabled(yes);
 }

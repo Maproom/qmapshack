@@ -19,19 +19,18 @@
 #ifndef CCOORDFORMATSETUP_H
 #define CCOORDFORMATSETUP_H
 
-#include "ui_ICoordFormatSetup.h"
 #include <QDialog>
 
-class CCoordFormatSetup : public QDialog, private Ui::ICoordFormatSetup
-{
-    Q_OBJECT
-public:
-    CCoordFormatSetup(QWidget* parent);
-    virtual ~CCoordFormatSetup();
+#include "ui_ICoordFormatSetup.h"
 
-public slots:
-    void accept() override;
+class CCoordFormatSetup : public QDialog, private Ui::ICoordFormatSetup {
+  Q_OBJECT
+ public:
+  CCoordFormatSetup(QWidget* parent);
+  virtual ~CCoordFormatSetup();
+
+ public slots:
+  void accept() override;
 };
 
-#endif //CCOORDFORMATSETUP_H
-
+#endif  // CCOORDFORMATSETUP_H

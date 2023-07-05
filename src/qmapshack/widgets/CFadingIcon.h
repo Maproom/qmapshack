@@ -22,20 +22,18 @@
 #include <QLabel>
 #include <QPixmap>
 
-class CFadingIcon : public QLabel
-{
-    Q_OBJECT
-public:
-    CFadingIcon(const QPoint& pt, const QString& resource, QWidget* parent);
-    virtual ~CFadingIcon();
+class CFadingIcon : public QLabel {
+  Q_OBJECT
+ public:
+  CFadingIcon(const QPoint& pt, const QString& resource, QWidget* parent);
+  virtual ~CFadingIcon();
 
-private slots:
-    void slotTimeout();
+ private slots:
+  void slotTimeout();
 
-private:
-    qreal o = 1.0;
-    QPixmap icon;
+ private:
+  qreal o = 1.0;
+  QPixmap icon;
 };
 
-#endif //CFADINGICON_H
-
+#endif  // CFADINGICON_H

@@ -21,52 +21,48 @@
 
 #include "IMap.h"
 
-class CMapGEMF : public IMap
-{
-    Q_OBJECT
-public:
-    CMapGEMF(const QString& filename, CMapDraw* parent);
-    void draw(IDrawContext::buffer_t& buf) override;
+class CMapGEMF : public IMap {
+  Q_OBJECT
+ public:
+  CMapGEMF(const QString& filename, CMapDraw* parent);
+  void draw(IDrawContext::buffer_t& buf) override;
 
-private:
-    const quint32 MAX_ZOOM_LEVEL = 21;
-    const quint32 MIN_ZOOM_LEVEL = 0;
+ private:
+  const quint32 MAX_ZOOM_LEVEL = 21;
+  const quint32 MIN_ZOOM_LEVEL = 0;
 
-    QImage getTile(const quint32 col, const quint32 row, const quint32 z);
-    quint64 getFilenameFromAddress(const quint64 offset, QString& filename );
+  QImage getTile(const quint32 col, const quint32 row, const quint32 z);
+  quint64 getFilenameFromAddress(const quint64 offset, QString& filename);
 
-    struct source_t
-    {
-        quint32 index;
-        QString name;
-    };
+  struct source_t {
+    quint32 index;
+    QString name;
+  };
 
-    struct gemffile_t
-    {
-        QString filename;
-        quint64 size;
-    };
-    struct range_t
-    {
-        quint32 zoomlevel;
-        quint32 minX;
-        quint32 maxX;
-        quint32 minY;
-        quint32 maxY;
-        quint32 sourceIdx;
-        quint64 offset;
-    };
-
+  struct gemffile_t {
     QString filename;
-    quint32 version;
-    quint32 tileSize;
-    quint32 sourceNr;
-    quint32 rangeNum;
-    quint32 minZoom;
-    quint32 maxZoom;
-    QList< source_t> sources;
-    QList<gemffile_t> files;
-    QHash<quint32, QList<range_t> > rangesByZoom;
+    quint64 size;
+  };
+  struct range_t {
+    quint32 zoomlevel;
+    quint32 minX;
+    quint32 maxX;
+    quint32 minY;
+    quint32 maxY;
+    quint32 sourceIdx;
+    quint64 offset;
+  };
+
+  QString filename;
+  quint32 version;
+  quint32 tileSize;
+  quint32 sourceNr;
+  quint32 rangeNum;
+  quint32 minZoom;
+  quint32 maxZoom;
+  QList<source_t> sources;
+  QList<gemffile_t> files;
+  QHash<quint32, QList<range_t> > rangesByZoom;
 };
 
-#endif // CMAPGEMF_H
+#endif  // CMAPGEMF_H

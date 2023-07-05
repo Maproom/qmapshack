@@ -18,6 +18,10 @@
 #ifndef CENERGYCYCLING_H
 #define CENERGYCYCLING_H
 
+#include <QtGlobal>
+
+#include "units/IUnit.h"
+
 class CGisItemTrk;
 class CTrackData;
 
@@ -35,74 +39,74 @@ class CTrackData;
     - Ground situation (tyre and ground) to consider the rolling resistance
     - Average pedal cadence for the computation of pedal force
 
-   The individualize data will be defined in its own dialog (see CEnergyCyclingDialog) and more computed values will be shown here.
+   The individualize data will be defined in its own dialog (see CEnergyCyclingDialog) and more computed values will be
+   shown here.
 
-   When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set."
+   When loading older tracks or switching in history to tracks with a different parameter set compared to the previous
+   saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set."
 
    The energy use in unit "kcal" will be stored in the track and can be remove later on when no longer needed.
 
     For more information see tooltips on input and output values in the dialog.
  */
-class CEnergyCycling
-{
-public:
-/** @brief The parameter set structure (input and output values) to compute "Energy Use Cycling" value
- */
-    struct energy_set_t
-    {
-        qreal driverWeight = 75;
-        qreal bikeWeight = 15;
-        qreal airDensity = 1.2;
-        qint32 windSpeedIndex = 5;
-        qreal windSpeed = 0;
-        qint32 windPositionIndex = 2;
-        qreal frontalArea = 0.65;
-        qreal windDragCoeff = 1.0;
-        qint32 groundIndex = 3;
-        qreal rollingCoeff = 0.005;
-        qreal pedalCadence = 75;
-        qreal airResistForce = NOFLOAT;
-        qreal gravitySlopeForce = NOFLOAT;
-        qreal rollResistForce = NOFLOAT;
-        qreal sumForce = NOFLOAT;
-        qreal powerMovingTime = NOFLOAT;
-        qreal power = NOFLOAT;
-        qreal positivePower = NOFLOAT;
-        qreal powerMovingTimeRatio = NOFLOAT;
-        qreal energyKJoule = NOFLOAT;
-        qreal energyKcal = NOFLOAT;
-        qreal positivePedalForce = NOFLOAT;
-    };
+class CEnergyCycling {
+ public:
+  /** @brief The parameter set structure (input and output values) to compute "Energy Use Cycling" value
+   */
+  struct energy_set_t {
+    qreal driverWeight = 75;
+    qreal bikeWeight = 15;
+    qreal airDensity = 1.2;
+    qint32 windSpeedIndex = 5;
+    qreal windSpeed = 0;
+    qint32 windPositionIndex = 2;
+    qreal frontalArea = 0.65;
+    qreal windDragCoeff = 1.0;
+    qint32 groundIndex = 3;
+    qreal rollingCoeff = 0.005;
+    qreal pedalCadence = 75;
+    qreal airResistForce = NOFLOAT;
+    qreal gravitySlopeForce = NOFLOAT;
+    qreal rollResistForce = NOFLOAT;
+    qreal sumForce = NOFLOAT;
+    qreal powerMovingTime = NOFLOAT;
+    qreal power = NOFLOAT;
+    qreal positivePower = NOFLOAT;
+    qreal powerMovingTimeRatio = NOFLOAT;
+    qreal energyKJoule = NOFLOAT;
+    qreal energyKcal = NOFLOAT;
+    qreal positivePedalForce = NOFLOAT;
+  };
 
-    CEnergyCycling(CGisItemTrk& trk);
-    virtual ~CEnergyCycling() = default;
+  CEnergyCycling(CGisItemTrk& trk);
+  virtual ~CEnergyCycling() = default;
 
-    /** @brief Get the track's parameter set
+  /** @brief Get the track's parameter set
 
-       @return The track's parameter set
-     */
-    const energy_set_t& getEnergyTrkSet() const { return energyTrkSet; }
+     @return The track's parameter set
+   */
+  const energy_set_t& getEnergyTrkSet() const { return energyTrkSet; }
 
-    void setEnergyTrkSet(const energy_set_t& energyTrkSet, bool updateHistory);
+  void setEnergyTrkSet(const energy_set_t& energyTrkSet, bool updateHistory);
 
-    /** @brief Get the "Energy Use Cycling" value from the track's parameter set
+  /** @brief Get the "Energy Use Cycling" value from the track's parameter set
 
-       @return The "Energy Use Cycling" value
-     */
-    qreal getEnergyUseCycling() const { return energyTrkSet.energyKcal; }
+     @return The "Energy Use Cycling" value
+   */
+  qreal getEnergyUseCycling() const { return energyTrkSet.energyKcal; }
 
-    void compute();
-    void compute(energy_set_t& energySet);
-    void remove();
+  void compute();
+  void compute(energy_set_t& energySet);
+  void remove();
 
-    bool isValid() const;
+  bool isValid() const;
 
-    void loadSettings(energy_set_t& energySet);
-    void saveSettings();
+  void loadSettings(energy_set_t& energySet);
+  void saveSettings();
 
-private:
-    energy_set_t energyTrkSet;      //!< The track's parameter set
-    CGisItemTrk& trk;               //!< reference to the track, non-const, due to update of parameter set energyTrkSet
+ private:
+  energy_set_t energyTrkSet;  //!< The track's parameter set
+  CGisItemTrk& trk;           //!< reference to the track, non-const, due to update of parameter set energyTrkSet
 };
 
-#endif // CENERGYCYCLING_H
+#endif  // CENERGYCYCLING_H

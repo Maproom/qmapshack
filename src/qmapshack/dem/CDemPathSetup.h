@@ -19,29 +19,27 @@
 #ifndef CDEMPATHSETUP_H
 #define CDEMPATHSETUP_H
 
-#include "ui_IDemPathSetup.h"
 #include <QDialog>
 
-class CDemPathSetup : public QDialog, private Ui::IDemPathSetup
-{
-    Q_OBJECT
-public:
-    CDemPathSetup(QStringList& paths);
-    virtual ~CDemPathSetup();
+#include "ui_IDemPathSetup.h"
 
-public slots:
-    void accept() override;
+class CDemPathSetup : public QDialog, private Ui::IDemPathSetup {
+  Q_OBJECT
+ public:
+  CDemPathSetup(QStringList& paths);
+  virtual ~CDemPathSetup();
 
-private slots:
-    void slotAddPath();
-    void slotDelPath();
-    void slotItemSelectionChanged();
-    void slotDemHonk();
+ public slots:
+  void accept() override;
 
+ private slots:
+  void slotAddPath();
+  void slotDelPath();
+  void slotItemSelectionChanged();
+  void slotDemHonk();
 
-private:
-    QStringList& paths;
+ private:
+  QStringList& paths;
 };
 
-#endif //CDEMPATHSETUP_H
-
+#endif  // CDEMPATHSETUP_H

@@ -19,47 +19,45 @@
 #ifndef ITRACK_H
 #define ITRACK_H
 
-#include "gis/proj_x.h"
-#include "gis/trk/CTrackData.h"
-
 #include <QImage>
 #include <QPolygonF>
+
+#include "gis/proj_x.h"
+#include "gis/trk/CTrackData.h"
 
 class QRectF;
 class QPainter;
 class CGisItemTrk;
 
-class ITrack
-{
-public:
-    ITrack() = default;
-    virtual ~ITrack() = default;
+class ITrack {
+ public:
+  ITrack() = default;
+  virtual ~ITrack() = default;
 
-    void setSize(int w, int h);
-    void setTrack(CGisItemTrk* track);
-    void setTrack(const QPolygonF& track);
+  void setSize(int w, int h);
+  void setTrack(CGisItemTrk* track);
+  void setTrack(const QPolygonF& track);
 
-    void save(QImage& image, const CTrackData::trkpt_t* pTrkpt);
+  void save(QImage& image, const CTrackData::trkpt_t* pTrkpt);
 
-protected:
-    void setupProjection(const QRectF& boundingBox);
-    void updateData();
-    void draw(QPainter& p);
-    void draw();
+ protected:
+  void setupProjection(const QRectF& boundingBox);
+  void updateData();
+  void draw(QPainter& p);
+  void draw();
 
-    CProj proj;
+  CProj proj;
 
-    bool needsRedraw = true;
-    CGisItemTrk* trk = nullptr;
-    QPolygonF coords;
-    QPolygonF line;
+  bool needsRedraw = true;
+  CGisItemTrk* trk = nullptr;
+  QPolygonF coords;
+  QPolygonF line;
 
-    QImage buffer;
+  QImage buffer;
 
-    QPointF scale;
-    qint32 xoff = 0;
-    qint32 yoff = 0;
+  QPointF scale;
+  qint32 xoff = 0;
+  qint32 yoff = 0;
 };
 
-#endif //ITRACK_H
-
+#endif  // ITRACK_H

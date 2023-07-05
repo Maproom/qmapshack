@@ -16,81 +16,66 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWorkspace.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "helpers/CSettings.h"
 #include "realtime/IRtInfo.h"
 
 #include <QtWidgets>
 
-IRtInfo::IRtInfo(IRtSource* source, QWidget* parent)
-    : QWidget(parent)
-    , source(source)
-{
+#include "gis/CGisWorkspace.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "helpers/CSettings.h"
+
+IRtInfo::IRtInfo(IRtSource* source, QWidget* parent) : QWidget(parent), source(source) {}
+
+void IRtInfo::slotSetFilename() {
+  SETTINGS;
+  QString path = cfg.value("Paths/realtimeData", QDir::homePath()).toString();
+  QString filename = QFileDialog::getSaveFileName(this, tr("Select record file"), path, "QMapShack Record (*.rec)");
+
+  if (filename.isEmpty()) {
+    return;
+  }
+  QFileInfo fi(filename);
+  if (fi.suffix().toLower() != "rec") {
+    filename += ".rec";
+  }
+
+  startRecord(filename);
+
+  path = fi.absolutePath();
+  cfg.setValue("Paths/realtimeData", path);
 }
 
+void IRtInfo::slotResetRecord() {
+  if (record == nullptr) {
+    return;
+  }
 
-void IRtInfo::slotSetFilename()
-{
-    SETTINGS;
-    QString path = cfg.value("Paths/realtimeData", QDir::homePath()).toString();
-    QString filename = QFileDialog::getSaveFileName( this, tr("Select record file"), path, "QMapShack Record (*.rec)");
-
-    if(filename.isEmpty())
-    {
-        return;
-    }
-    QFileInfo fi(filename);
-    if(fi.suffix().toLower() != "rec")
-    {
-        filename += ".rec";
-    }
-
-    startRecord(filename);
-
-    path = fi.absolutePath();
-    cfg.setValue("Paths/realtimeData", path);
+  int res = QMessageBox::question(this, tr("Reset record..."), tr("Do you really want to reset the current record?"),
+                                  QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+  if (res == QMessageBox::Yes) {
+    record->reset();
+    emit source->sigChanged();
+  }
 }
 
-void IRtInfo::slotResetRecord()
-{
-    if(record == nullptr)
-    {
-        return;
-    }
+void IRtInfo::slotToTrack() {
+  if (record == nullptr) {
+    return;
+  }
 
-    int res = QMessageBox::question(this, tr("Reset record..."), tr("Do you really want to reset the current record?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-    if(res == QMessageBox::Yes)
-    {
-        record->reset();
-        emit source->sigChanged();
-    }
+  IGisProject* prj = CGisWorkspace::self().selectProject(false);
+  if (prj == nullptr) {
+    return;
+  }
+
+  CTrackData data;
+  fillTrackData(data);
+
+  new CGisItemTrk(data, prj);
 }
 
-void IRtInfo::slotToTrack()
-{
-    if(record == nullptr)
-    {
-        return;
-    }
-
-    IGisProject* prj = CGisWorkspace::self().selectProject(false);
-    if(prj == nullptr)
-    {
-        return;
-    }
-
-    CTrackData data;
-    fillTrackData(data);
-
-    new CGisItemTrk(data, prj);
-}
-
-
-void IRtInfo::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt)
-{
-    if(record != nullptr)
-    {
-        record->draw(p, viewport, blockedAreas, rt);
-    }
+void IRtInfo::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) {
+  if (record != nullptr) {
+    record->draw(p, viewport, blockedAreas, rt);
+  }
 }

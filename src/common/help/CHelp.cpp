@@ -17,61 +17,54 @@
 **********************************************************************************************/
 
 #include "CHelp.h"
+
+#include <QtGui>
+#include <QtHelp>
+
 #include "help/CHelpBrowser.h"
 #include "help/CHelpIndex.h"
 #include "help/CHelpSearch.h"
 #include "helpers/CSettings.h"
 
+CHelp::CHelp(const QString& helpfile, const QString& homepage, QWidget* parent) : QDockWidget(tr("Help"), parent) {
+  setWindowFlag(Qt::Tool, true);
+  setAttribute(Qt::WA_DeleteOnClose, true);
 
-#include <QtGui>
-#include <QtHelp>
+  splitter = new QSplitter(Qt::Horizontal, this);
 
+  qDebug() << "search help at:" << helpfile;
+  engine = new QHelpEngine(helpfile, this);
+  engine->setupData();
 
-CHelp::CHelp(const QString& helpfile, const QString& homepage, QWidget* parent)
-    : QDockWidget(tr("Help"), parent)
-{
-    setWindowFlag(Qt::Tool, true);
-    setAttribute(Qt::WA_DeleteOnClose, true);
+  index = new CHelpIndex(engine, this);
+  search = new CHelpSearch(engine, this);
 
-    splitter = new QSplitter(Qt::Horizontal, this);
+  tabWidget = new QTabWidget(this);
+  tabWidget->addTab(engine->contentWidget(), tr("Content"));
+  tabWidget->addTab(index, tr("Index"));
+  tabWidget->addTab(search, tr("Search"));
 
-    qDebug() << "search help at:" << helpfile;
-    engine = new QHelpEngine(helpfile, this);
-    engine->setupData();
+  splitter->insertWidget(0, tabWidget);
 
-    index = new CHelpIndex(engine, this);
-    search = new CHelpSearch(engine, this);
+  CHelpBrowser* browser = new CHelpBrowser(engine, this);
+  browser->setSource(QUrl(homepage));
+  splitter->insertWidget(1, browser);
 
-    tabWidget = new QTabWidget(this);
-    tabWidget->addTab(engine->contentWidget(), tr("Content"));
-    tabWidget->addTab(index, tr("Index"));
-    tabWidget->addTab(search, tr("Search"));
+  setWidget(splitter);
 
-    splitter->insertWidget(0, tabWidget);
-
-    CHelpBrowser* browser = new CHelpBrowser(engine, this);
-    browser->setSource(QUrl(homepage));
-    splitter->insertWidget(1, browser);
-
-    setWidget(splitter);
-
-    SETTINGS;
-    cfg.beginGroup("Help");
-    if ( cfg.contains("geometry"))
-    {
-        restoreGeometry(cfg.value("geometry").toByteArray());
-        splitter->restoreState(cfg.value("splitter").toByteArray());
-    }
-    cfg.endGroup();
+  SETTINGS;
+  cfg.beginGroup("Help");
+  if (cfg.contains("geometry")) {
+    restoreGeometry(cfg.value("geometry").toByteArray());
+    splitter->restoreState(cfg.value("splitter").toByteArray());
+  }
+  cfg.endGroup();
 }
 
-
-CHelp::~CHelp()
-{
-    SETTINGS;
-    cfg.beginGroup("Help");
-    cfg.setValue("geometry", saveGeometry());
-    cfg.setValue("splitter", splitter->saveState());
-    cfg.endGroup();
+CHelp::~CHelp() {
+  SETTINGS;
+  cfg.beginGroup("Help");
+  cfg.setValue("geometry", saveGeometry());
+  cfg.setValue("splitter", splitter->saveState());
+  cfg.endGroup();
 }
-

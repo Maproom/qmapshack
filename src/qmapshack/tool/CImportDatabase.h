@@ -19,30 +19,29 @@
 #ifndef CIMPORTDATABASE_H
 #define CIMPORTDATABASE_H
 
-#include "ui_IImportDatabase.h"
 #include <QPointer>
 #include <QWidget>
 
+#include "ui_IImportDatabase.h"
+
 class CQlgtDb;
 
-class CImportDatabase : public QWidget, private Ui::IImportDatabase
-{
-    Q_OBJECT
-public:
-    CImportDatabase(QWidget* parent);
-    virtual ~CImportDatabase();
+class CImportDatabase : public QWidget, private Ui::IImportDatabase {
+  Q_OBJECT
+ public:
+  CImportDatabase(QWidget* parent);
+  virtual ~CImportDatabase();
 
-    void stdOut(const QString& str);
-    void stdErr(const QString& str);
+  void stdOut(const QString& str);
+  void stdErr(const QString& str);
 
-private slots:
-    void slotSelectSource();
-    void slotSelectTarget();
-    void slotStart();
+ private slots:
+  void slotSelectSource();
+  void slotSelectTarget();
+  void slotStart();
 
-private:
-    QPointer<CQlgtDb> dbQlgt;
+ private:
+  QPointer<CQlgtDb> dbQlgt;
 };
 
-#endif //CIMPORTDATABASE_H
-
+#endif  // CIMPORTDATABASE_H

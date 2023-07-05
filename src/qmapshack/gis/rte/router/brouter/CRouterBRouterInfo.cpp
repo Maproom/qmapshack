@@ -18,22 +18,10 @@
 
 #include "gis/rte/router/brouter/CRouterBRouterInfo.h"
 
-CRouterBRouterInfo::CRouterBRouterInfo() : QDialog()
-{
-    setupUi(this);
-}
+CRouterBRouterInfo::CRouterBRouterInfo() : QDialog() { setupUi(this); }
 
-CRouterBRouterInfo::~CRouterBRouterInfo()
-{
-}
+CRouterBRouterInfo::~CRouterBRouterInfo() {}
 
-void CRouterBRouterInfo::setLabel(const QString& infoLabel) const
-{
-    label->setText(infoLabel);
-}
+void CRouterBRouterInfo::setLabel(const QString& infoLabel) const { label->setText(infoLabel); }
 
-void CRouterBRouterInfo::setInfo(const QString& infoText) const
-{
-    textBrowser->setText(infoText);
-}
-
+void CRouterBRouterInfo::setInfo(const QString& infoText) const { textBrowser->setText(infoText); }

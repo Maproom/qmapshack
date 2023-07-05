@@ -23,33 +23,23 @@
 
 class QSettings;
 
-class CToolGDALGroupBox : public QGroupBox, private Ui::IToolGDALGroupBox
-{
-    Q_OBJECT
-public:
-    CToolGDALGroupBox(QWidget* parent);
-    virtual ~CToolGDALGroupBox() = default;
+class CToolGDALGroupBox : public QGroupBox, private Ui::IToolGDALGroupBox {
+  Q_OBJECT
+ public:
+  CToolGDALGroupBox(QWidget* parent);
+  virtual ~CToolGDALGroupBox() = default;
 
-    void saveSettings(QSettings& cfg);
-    void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings& cfg);
+  void loadSettings(QSettings& cfg);
 
-    enum part_e
-    {
-        ePartResampling = 0x01
-        , ePartCompress = 0x02
-        , ePartTiled = 0x04
-        , ePartLine = 0x08
-    };
+  enum part_e { ePartResampling = 0x01, ePartCompress = 0x02, ePartTiled = 0x04, ePartLine = 0x08 };
 
-    void enableParts(quint32 flags);
+  void enableParts(quint32 flags);
 
-    QStringList getArgs();
-    QStringList getArgsResampling(const QStringList& defaultArgs);
-    QStringList getArgsCompression(const QStringList& defaultArgs);
-    QStringList getArgsTiled(const QStringList& defaultArgs);
+  QStringList getArgs();
+  QStringList getArgsResampling(const QStringList& defaultArgs);
+  QStringList getArgsCompression(const QStringList& defaultArgs);
+  QStringList getArgsTiled(const QStringList& defaultArgs);
 };
 
-
-
-#endif //CTOOLGDALGROUPBOX_H
-
+#endif  // CTOOLGDALGROUPBOX_H

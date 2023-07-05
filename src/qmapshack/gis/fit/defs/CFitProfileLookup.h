@@ -16,7 +16,6 @@
 
 **********************************************************************************************/
 
-
 #ifndef CFITPROFILELOOKUP_H
 #define CFITPROFILELOOKUP_H
 
@@ -25,18 +24,18 @@
 class CFitProfile;
 class CFitFieldProfile;
 
-class CFitProfileLookup : public QObject
-{
-    Q_OBJECT
-public:
-    static const CFitProfile* getProfile(quint16 globalMesgNr);
-    static const CFitFieldProfile* getFieldForProfile(quint16 globalMesgNr, quint8 fieldDefNr);
-private:
-    CFitProfileLookup();
-    ~CFitProfileLookup();
-    QMap<quint16, CFitProfile*> allProfiles;
-private slots:
-    void slotCleanup();
+class CFitProfileLookup : public QObject {
+  Q_OBJECT
+ public:
+  static const CFitProfile* getProfile(quint16 globalMesgNr);
+  static const CFitFieldProfile* getFieldForProfile(quint16 globalMesgNr, quint8 fieldDefNr);
+
+ private:
+  CFitProfileLookup();
+  ~CFitProfileLookup();
+  QMap<quint16, CFitProfile*> allProfiles;
+ private slots:
+  void slotCleanup();
 };
 
-#endif // CFITPROFILELOOKUP_H
+#endif  // CFITPROFILELOOKUP_H

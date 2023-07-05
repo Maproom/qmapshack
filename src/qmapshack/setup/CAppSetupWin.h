@@ -19,22 +19,21 @@
 #ifndef CAPPSETUPWIN_H
 #define CAPPSETUPWIN_H
 
-#include "setup/IAppSetup.h"
-
 #include <QtCore>
 
-class CAppSetupWin : public IAppSetup
-{
-public:
-    void initQMapShack() override;
-    QString routinoPath(QString xmlFile) override;
-    QString defaultCachePath() override;
-    QString userDataPath(QString subdir = 0) override;
-    QString logDir() override;
-    QString findExecutable(const QString& name) override;
-    QString helpFile() override;
+#include "setup/IAppSetup.h"
 
-    QByteArray path;
+class CAppSetupWin : public IAppSetup {
+ public:
+  void initQMapShack() override;
+  QString routinoPath(QString xmlFile) override;
+  QString defaultCachePath() override;
+  QString userDataPath(QString subdir = 0) override;
+  QString logDir() override;
+  QString findExecutable(const QString& name) override;
+  QString helpFile() override;
+
+  QByteArray path;
 };
 
-#endif // CAPPSETUPWIN_H
+#endif  // CAPPSETUPWIN_H

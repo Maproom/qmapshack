@@ -21,21 +21,20 @@
 
 #include "gis/db/IDB.h"
 
-class IDBMysql : public IDB
-{
-    Q_DECLARE_TR_FUNCTIONS(IDBMysql)
-public:
-    IDBMysql();
-    virtual ~IDBMysql() = default;
+class IDBMysql : public IDB {
+  Q_DECLARE_TR_FUNCTIONS(IDBMysql)
+ public:
+  IDBMysql();
+  virtual ~IDBMysql() = default;
 
-protected:
-    using IDB::setupDB;
-    bool setupDB(const QString& server, const QString& port, const QString& user, const QString& passwd, bool noPasswd, const QString& name, const QString& connectionName);
-    bool initDB() override;
-    bool migrateDB(int version) override;
-    bool migrateDB4to5();
-    bool migrateDB5to6();
+ protected:
+  using IDB::setupDB;
+  bool setupDB(const QString& server, const QString& port, const QString& user, const QString& passwd, bool noPasswd,
+               const QString& name, const QString& connectionName);
+  bool initDB() override;
+  bool migrateDB(int version) override;
+  bool migrateDB4to5();
+  bool migrateDB5to6();
 };
 
-#endif //IDBMYSQL_H
-
+#endif  // IDBMYSQL_H

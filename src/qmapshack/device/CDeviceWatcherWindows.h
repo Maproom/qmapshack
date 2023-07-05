@@ -19,48 +19,36 @@
 #ifndef CDEVICEWATCHERWINDOWS_H
 #define CDEVICEWATCHERWINDOWS_H
 
-#include "device/IDeviceWatcher.h"
-
 #include <QEvent>
 
-class CEventDevice : public QEvent
-{
-public:
+#include "device/IDeviceWatcher.h"
 
-    enum event_types_e
-    {
-        eEvtDeviceWindows = QEvent::User + 200
-    };
+class CEventDevice : public QEvent {
+ public:
+  enum event_types_e { eEvtDeviceWindows = QEvent::User + 200 };
 
-    CEventDevice(const QString& path, bool add) : QEvent(QEvent::Type(eEvtDeviceWindows)), add(add), path(path)
-    {
-    }
+  CEventDevice(const QString& path, bool add) : QEvent(QEvent::Type(eEvtDeviceWindows)), add(add), path(path) {}
 
-    bool add;
-    QString path;
+  bool add;
+  QString path;
 };
 
-class CDeviceWatcherWindows : public IDeviceWatcher
-{
-    Q_OBJECT
-public:
-    virtual ~CDeviceWatcherWindows();
+class CDeviceWatcherWindows : public IDeviceWatcher {
+  Q_OBJECT
+ public:
+  virtual ~CDeviceWatcherWindows();
 
-    static CDeviceWatcherWindows* self()
-    {
-        return pSelf;
-    }
+  static CDeviceWatcherWindows* self() { return pSelf; }
 
-    bool event(QEvent* e);
+  bool event(QEvent* e);
 
-private slots:
-    void slotUpdate();
+ private slots:
+  void slotUpdate();
 
-private:
-    friend class CGisListWks;
-    CDeviceWatcherWindows(CGisListWks* parent);
-    static CDeviceWatcherWindows* pSelf;
+ private:
+  friend class CGisListWks;
+  CDeviceWatcherWindows(CGisListWks* parent);
+  static CDeviceWatcherWindows* pSelf;
 };
 
-#endif //CDEVICEWATCHERWINDOWS_H
-
+#endif  // CDEVICEWATCHERWINDOWS_H

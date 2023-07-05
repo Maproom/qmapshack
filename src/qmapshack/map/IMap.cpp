@@ -16,91 +16,63 @@
 
 **********************************************************************************************/
 
-#include "map/CMapDraw.h"
-#include "map/CMapPropSetup.h"
 #include "map/IMap.h"
-#include "units/IUnit.h"
 
 #include <QtWidgets>
 
-IMap::IMap(quint32 features, CMapDraw* parent)
-    : IDrawObject(parent)
-    , map(parent)
-    , flagsFeature(features)
-{
-}
+#include "map/CMapDraw.h"
+#include "map/CMapPropSetup.h"
 
-IMap::~IMap()
-{
-    delete setup;
-}
+IMap::IMap(quint32 features, CMapDraw* parent) : IDrawObject(parent), map(parent), flagsFeature(features) {}
+
+IMap::~IMap() { delete setup; }
 
 void IMap::saveConfig(QSettings& cfg) /* override */
 {
-    IDrawObject::saveConfig(cfg);
+  IDrawObject::saveConfig(cfg);
 
-    if(hasFeatureVectorItems())
-    {
-        cfg.setValue("showPolygons", getShowPolygons());
-        cfg.setValue("showPolylines", getShowPolylines());
-        cfg.setValue("showPOIs", getShowPOIs());
-        cfg.setValue("adjustDetailLevel", getAdjustDetailLevel());
-    }
+  if (hasFeatureVectorItems()) {
+    cfg.setValue("showPolygons", getShowPolygons());
+    cfg.setValue("showPolylines", getShowPolylines());
+    cfg.setValue("showPOIs", getShowPOIs());
+    cfg.setValue("adjustDetailLevel", getAdjustDetailLevel());
+  }
 
-    if(hasFeatureTileCache())
-    {
-        cfg.setValue("cacheSizeMB", cacheSizeMB);
-        cfg.setValue("cacheExpiration", cacheExpiration);
-    }
+  if (hasFeatureTileCache()) {
+    cfg.setValue("cacheSizeMB", cacheSizeMB);
+    cfg.setValue("cacheExpiration", cacheExpiration);
+  }
 
-    if(hasFeatureTypFile())
-    {
-        cfg.setValue("typeFile", typeFile);
-    }
+  if (hasFeatureTypFile()) {
+    cfg.setValue("typeFile", typeFile);
+  }
 }
 
 void IMap::loadConfig(QSettings& cfg) /* override */
 {
-    IDrawObject::loadConfig(cfg);
+  IDrawObject::loadConfig(cfg);
 
-    slotSetShowPolygons(cfg.value("showPolygons", getShowPolygons()).toBool());
-    slotSetShowPolylines(cfg.value("showPolylines", getShowPolylines()).toBool());
-    slotSetShowPOIs(cfg.value("showPOIs", getShowPOIs()).toBool());
-    slotSetAdjustDetailLevel(cfg.value("adjustDetailLevel", getAdjustDetailLevel()).toInt());
-    slotSetCacheSize(cfg.value("cacheSizeMB", getCacheSize()).toInt());
-    slotSetCacheExpiration(cfg.value("cacheExpiration", getCacheExpiration()).toInt());
-    slotSetTypeFile(cfg.value("typeFile", getTypeFile()).toString());
+  slotSetShowPolygons(cfg.value("showPolygons", getShowPolygons()).toBool());
+  slotSetShowPolylines(cfg.value("showPolylines", getShowPolylines()).toBool());
+  slotSetShowPOIs(cfg.value("showPOIs", getShowPOIs()).toBool());
+  slotSetAdjustDetailLevel(cfg.value("adjustDetailLevel", getAdjustDetailLevel()).toInt());
+  slotSetCacheSize(cfg.value("cacheSizeMB", getCacheSize()).toInt());
+  slotSetCacheExpiration(cfg.value("cacheExpiration", getCacheExpiration()).toInt());
+  slotSetTypeFile(cfg.value("typeFile", getTypeFile()).toString());
 }
 
-IMapProp* IMap::getSetup()
-{
-    if(setup.isNull())
-    {
-        setup = new CMapPropSetup(this, map);
-    }
+IMapProp* IMap::getSetup() {
+  if (setup.isNull()) {
+    setup = new CMapPropSetup(this, map);
+  }
 
-    return setup;
+  return setup;
 }
 
+void IMap::convertRad2M(QPointF& p) const { proj.transform(p, PJ_INV); }
 
-void IMap::convertRad2M(QPointF& p) const
-{
-    proj.transform(p, PJ_INV);
-}
+void IMap::convertM2Rad(QPointF& p) const { proj.transform(p, PJ_FWD); }
 
-void IMap::convertM2Rad(QPointF& p) const
-{
-    proj.transform(p, PJ_FWD);
-}
+bool IMap::findPolylineCloseBy(const QPointF&, const QPointF&, qint32, QPolygonF&) { return false; }
 
-
-bool IMap::findPolylineCloseBy(const QPointF&, const QPointF&, qint32, QPolygonF&)
-{
-    return false;
-}
-
-void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
-{
-    drawTileLQ(img, l, p, *map, proj);
-}
-
+void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p) { drawTileLQ(img, l, p, *map, proj); }

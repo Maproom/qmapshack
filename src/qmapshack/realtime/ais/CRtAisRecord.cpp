@@ -16,33 +16,27 @@
 
 **********************************************************************************************/
 
-
 #include "realtime/ais/CRtAisRecord.h"
 
-CRtAisRecord::CRtAisRecord(QObject* parent)
-    : IRtRecord(parent)
-{
+CRtAisRecord::CRtAisRecord(QObject* parent) : IRtRecord(parent) {}
+
+bool CRtAisRecord::writeEntry(const CRtAis::ship_t& ship) {
+  QByteArray data;
+  QDataStream stream(&data, QIODevice::WriteOnly);
+  stream.setVersion(QDataStream::Qt_5_2);
+  stream.setByteOrder(QDataStream::LittleEndian);
+
+  // it's always a good idea to start with a version tag for future changes.
+  stream << quint8(1);
+
+  CTrackData::trkpt_t trkpt;
+  trkpt.lon = ship.longitude;
+  trkpt.lat = ship.latitude;
+  trkpt.ele = 0;
+  trkpt.time = QDateTime::fromTime_t(ship.timePosition);
+
+  stream << trkpt;
+  track << trkpt;
+
+  return writeEntry(data);
 }
-
-bool CRtAisRecord::writeEntry(const CRtAis::ship_t& ship)
-{
-    QByteArray data;
-    QDataStream stream(&data, QIODevice::WriteOnly);
-    stream.setVersion(QDataStream::Qt_5_2);
-    stream.setByteOrder(QDataStream::LittleEndian);
-
-    // it's always a good idea to start with a version tag for future changes.
-    stream << quint8(1);
-
-    CTrackData::trkpt_t trkpt;
-    trkpt.lon = ship.longitude;
-    trkpt.lat = ship.latitude;
-    trkpt.ele = 0;
-    trkpt.time = QDateTime::fromTime_t(ship.timePosition);
-
-    stream << trkpt;
-    track << trkpt;
-
-    return writeEntry(data);
-}
-

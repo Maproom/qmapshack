@@ -16,169 +16,144 @@
 
 **********************************************************************************************/
 
-#include "canvas/IDrawContext.h"
-#include "helpers/CDraw.h"
-#include "items/CItemRefMap.h"
 #include "overlay/gridtool/CGridPoint.h"
 
 #include <QtWidgets>
 
-CGridPoint::CGridPoint()
-{
+#include "canvas/IDrawContext.h"
+#include "helpers/CDraw.h"
+#include "items/CItemRefMap.h"
+
+CGridPoint::CGridPoint() {}
+
+void CGridPoint::registerItem(CItemRefMap* item) {
+  this->item = item;
+
+  if (item != nullptr) {
+    context = item->getDrawContext();
+    if (context == nullptr) {
+      this->item = nullptr;
+    }
+  } else {
+    context = nullptr;
+  }
 }
 
-void CGridPoint::registerItem(CItemRefMap* item)
-{
-    this->item = item;
+bool CGridPoint::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) {
+  if (ptFocus1 != NOPOINTF) {
+    QPointF pt = ptFocus1;
+    context->convertMap2Screen(pt);
+    CDraw::drawCrossHairDot(p, pt);
+  }
 
-    if(item != nullptr)
-    {
-        context = item->getDrawContext();
-        if(context == nullptr)
-        {
-            this->item = nullptr;
-        }
+  if (ptPoint != NOPOINTF) {
+    QPointF pt = ptPoint;
+    context->convertMap2Screen(pt);
+
+    QRectF dot1(0, 0, 7, 7);
+    dot1.moveCenter(pt);
+
+    if (state == eStateHighlight) {
+      p.setPen(QPen(QColor(0xffffaa00), 2));
+      p.setBrush(QColor(0xffffaa00));
+    } else {
+      p.setPen(QPen(Qt::white, 1));
+      p.setBrush(QColor(0xffffaa00));
     }
-    else
-    {
-        context = nullptr;
-    }
+
+    p.drawRect(dot1);
+  }
+
+  return true;
 }
 
-bool CGridPoint::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
-{
-    if(ptFocus1 != NOPOINTF)
-    {
-        QPointF pt = ptFocus1;
-        context->convertMap2Screen(pt);
-        CDraw::drawCrossHairDot(p, pt);
-    }
+void CGridPoint::mouseMoveEventFx(QMouseEvent* e) {
+  QPointF pt = e->pos();
 
-    if(ptPoint != NOPOINTF)
-    {
-        QPointF pt = ptPoint;
-        context->convertMap2Screen(pt);
-
-        QRectF dot1(0, 0, 7, 7);
-        dot1.moveCenter(pt);
-
-        if(state == eStateHighlight)
-        {
-            p.setPen(QPen(QColor(0xffffaa00), 2));
-            p.setBrush(QColor(0xffffaa00));
-        }
-        else
-        {
-            p.setPen(QPen(Qt::white, 1));
-            p.setBrush(QColor(0xffffaa00));
-        }
-
-        p.drawRect(dot1);
-    }
-
-    return true;
-}
-
-void CGridPoint::mouseMoveEventFx(QMouseEvent* e)
-{
-    QPointF pt = e->pos();
-
-
-    switch(state)
-    {
+  switch (state) {
     case eStateMove:
     case eStateNotSet:
-        context->convertScreen2Map(pt);
-        ptFocus1 = pt;
-        break;
+      context->convertScreen2Map(pt);
+      ptFocus1 = pt;
+      break;
 
-    case eStateSet:
-    {
-        QPointF point = ptPoint;
-        context->convertMap2Screen(point);
-        if((point - pt).manhattanLength() < 30)
-        {
-            state = eStateHighlight;
-        }
-        break;
+    case eStateSet: {
+      QPointF point = ptPoint;
+      context->convertMap2Screen(point);
+      if ((point - pt).manhattanLength() < 30) {
+        state = eStateHighlight;
+      }
+      break;
     }
 
-    case eStateHighlight:
-    {
-        QPointF point = ptPoint;
-        context->convertMap2Screen(point);
-        if((point - pt).manhattanLength() >= 30)
-        {
-            state = eStateSet;
-        }
-        break;
-    }
-    }
-
-    context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
-}
-
-void CGridPoint::mouseReleaseEventFx(QMouseEvent* e)
-{
-    switch(state)
-    {
-    case eStateMove:
-    case eStateNotSet:
-        ptPoint = ptFocus1;
-        ptFocus1 = NOPOINTF;
+    case eStateHighlight: {
+      QPointF point = ptPoint;
+      context->convertMap2Screen(point);
+      if ((point - pt).manhattanLength() >= 30) {
         state = eStateSet;
-        CCanvas::restoreOverrideCursor("CGridPoint::mouseReleaseEventFx");
-        break;
-
-    case eStateSet:
-        break;
-
-    case eStateHighlight:
-        ptFocus1 = ptPoint;
-        ptPoint = NOPOINTF;
-        state = eStateMove;
-        CCanvas::setOverrideCursor(Qt::BlankCursor, "CGridPoint::mouseReleaseEventFx");
-        break;
+      }
+      break;
     }
+  }
 
-    context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
+  context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
 }
 
-void CGridPoint::leaveEventFx(QEvent* e)
-{
-    ptFocus1 = NOPOINTF;
+void CGridPoint::mouseReleaseEventFx(QMouseEvent* e) {
+  switch (state) {
+    case eStateMove:
+    case eStateNotSet:
+      ptPoint = ptFocus1;
+      ptFocus1 = NOPOINTF;
+      state = eStateSet;
+      CCanvas::restoreOverrideCursor("CGridPoint::mouseReleaseEventFx");
+      break;
 
-    switch(state)
-    {
+    case eStateSet:
+      break;
+
+    case eStateHighlight:
+      ptFocus1 = ptPoint;
+      ptPoint = NOPOINTF;
+      state = eStateMove;
+      CCanvas::setOverrideCursor(Qt::BlankCursor, "CGridPoint::mouseReleaseEventFx");
+      break;
+  }
+
+  context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
+}
+
+void CGridPoint::leaveEventFx(QEvent* e) {
+  ptFocus1 = NOPOINTF;
+
+  switch (state) {
     case eStateNotSet:
     case eStateSet:
-        break;
+      break;
 
     case eStateHighlight:
     case eStateMove:
-        state = eStateSet;
-        break;
-    }
+      state = eStateSet;
+      break;
+  }
 
-    context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
+  context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
 }
 
-QCursor CGridPoint::getCursorFx()
-{
-    switch(state)
-    {
+QCursor CGridPoint::getCursorFx() {
+  switch (state) {
     case eStateNotSet:
-        return Qt::BlankCursor;
+      return Qt::BlankCursor;
 
     case eStateSet:
-        return Qt::ArrowCursor;
+      return Qt::ArrowCursor;
 
     case eStateHighlight:
-        return Qt::ArrowCursor;
+      return Qt::ArrowCursor;
 
     case eStateMove:
-        return Qt::BlankCursor;
-    }
+      return Qt::BlankCursor;
+  }
 
-    return Qt::ArrowCursor;
+  return Qt::ArrowCursor;
 }

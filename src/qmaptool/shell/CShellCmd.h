@@ -22,26 +22,18 @@
 #include <QString>
 #include <QStringList>
 
-class CShellCmd
-{
-public:
-    CShellCmd(const QString& cmd, const QStringList& args);
-    virtual ~CShellCmd() = default;
+class CShellCmd {
+ public:
+  CShellCmd(const QString& cmd, const QStringList& args);
+  virtual ~CShellCmd() = default;
 
-    const QString& getCmd() const
-    {
-        return cmd;
-    }
+  const QString& getCmd() const { return cmd; }
 
-    const QStringList& getArgs() const
-    {
-        return args;
-    }
+  const QStringList& getArgs() const { return args; }
 
-private:
-    QString cmd;
-    QStringList args;
+ private:
+  QString cmd;
+  QStringList args;
 };
 
-#endif //CSHELLCMD_H
-
+#endif  // CSHELLCMD_H

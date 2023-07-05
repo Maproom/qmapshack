@@ -19,26 +19,25 @@
 #ifndef CFILTERZEROSPEEDDRIFTCLEANER_H
 #define CFILTERZEROSPEEDDRIFTCLEANER_H
 
+#include <QWidget>
+
 #include "CMainWindow.h"
 #include "ui_IFilterZeroSpeedDriftCleaner.h"
-#include <QWidget>
 
 class CGisItemTrk;
 
-class CFilterZeroSpeedDriftCleaner : public QWidget, private Ui::IFilterZeroSpeedDriftCleaner
-{
-    Q_OBJECT
-public:
-    CFilterZeroSpeedDriftCleaner(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterZeroSpeedDriftCleaner();
+class CFilterZeroSpeedDriftCleaner : public QWidget, private Ui::IFilterZeroSpeedDriftCleaner {
+  Q_OBJECT
+ public:
+  CFilterZeroSpeedDriftCleaner(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterZeroSpeedDriftCleaner();
 
-private slots:
-    void slotApply();
-    void showHelp();
+ private slots:
+  void slotApply();
+  void showHelp();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CFILTERZEROSPEEDDRIFTCLEANER_H
-
+#endif  // CFILTERZEROSPEEDDRIFTCLEANER_H

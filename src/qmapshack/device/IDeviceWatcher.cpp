@@ -16,62 +16,46 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "device/CDeviceGarmin.h"
-#include "device/CDeviceTwoNav.h"
 #include "device/IDeviceWatcher.h"
-#include "gis/CGisListWks.h"
 
 #include <QApplication>
 #include <QtCore>
 
-IDeviceWatcher::IDeviceWatcher(CGisListWks* parent)
-    : QObject(parent)
-    , listWks(parent)
-{
-    QTimer::singleShot(1000, this, &IDeviceWatcher::slotUpdate);
+#include "canvas/CCanvas.h"
+#include "device/CDeviceGarmin.h"
+#include "device/CDeviceTwoNav.h"
+#include "gis/CGisListWks.h"
+
+IDeviceWatcher::IDeviceWatcher(CGisListWks* parent) : QObject(parent), listWks(parent) {
+  QTimer::singleShot(1000, this, &IDeviceWatcher::slotUpdate);
 }
 
-IDeviceWatcher::~IDeviceWatcher()
-{
-}
+IDeviceWatcher::~IDeviceWatcher() {}
 
-void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& path, const QString& label)
-{
-    QDir dir(mountPoint);
-    if(!dir.exists())
-    {
-        return;
-    }
+void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& path, const QString& label) {
+  QDir dir(mountPoint);
+  if (!dir.exists()) {
+    return;
+  }
 
-    qDebug() << "Probe device at" << mountPoint << path << label;
-    QStringList entries = dir.entryList();
+  qDebug() << "Probe device at" << mountPoint << path << label;
+  QStringList entries = dir.entryList();
 
-
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    if(entries.contains("Garmin"))
-    {
-        if(dir.exists("Garmin/GarminDevice.xml"))
-        {
-            new CDeviceGarmin(mountPoint, path, label, "Garmin/GarminDevice.xml", listWks);
-            emit sigChanged();
-        }
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  if (entries.contains("Garmin")) {
+    if (dir.exists("Garmin/GarminDevice.xml")) {
+      new CDeviceGarmin(mountPoint, path, label, "Garmin/GarminDevice.xml", listWks);
+      emit sigChanged();
     }
-    else if(entries.contains("GARMIN"))
-    {
-        if(dir.exists("GARMIN/GarminDevice.xml"))
-        {
-            new CDeviceGarmin(mountPoint, path, label, "GARMIN/GarminDevice.xml", listWks);
-            emit sigChanged();
-        }
+  } else if (entries.contains("GARMIN")) {
+    if (dir.exists("GARMIN/GarminDevice.xml")) {
+      new CDeviceGarmin(mountPoint, path, label, "GARMIN/GarminDevice.xml", listWks);
+      emit sigChanged();
     }
-    else if(entries.contains("TwoNavData") || dir.exists("AppData/RegInfo.ini"))
-    {
-        new CDeviceTwoNav(mountPoint, path, label, listWks);
-        emit sigChanged();
-    }
-    else
-    {
-        qDebug() << "Don't know it :(";
-    }
+  } else if (entries.contains("TwoNavData") || dir.exists("AppData/RegInfo.ini")) {
+    new CDeviceTwoNav(mountPoint, path, label, listWks);
+    emit sigChanged();
+  } else {
+    qDebug() << "Don't know it :(";
+  }
 }

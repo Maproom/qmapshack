@@ -19,54 +19,52 @@
 #ifndef CPROGRESSDIALOG_H
 #define CPROGRESSDIALOG_H
 
-#include "ui_IProgressDialog.h"
 #include <QDialog>
 #include <QElapsedTimer>
 #include <QStack>
 
+#include "ui_IProgressDialog.h"
+
 class QTimer;
 
-#define PROGRESS_SETUP(lbl, min, max, parent) \
-    CProgressDialog progress(lbl, min, max, parent);
+#define PROGRESS_SETUP(lbl, min, max, parent) CProgressDialog progress(lbl, min, max, parent);
 
+#define PROGRESS(x, cmd)        \
+  progress.setValue(x);         \
+  if (progress.wasCanceled()) { \
+    cmd;                        \
+  }
 
-#define PROGRESS(x, cmd) \
-    progress.setValue(x); \
-    if (progress.wasCanceled()) { cmd; } \
+class CProgressDialog : public QDialog, private Ui::IProgressDialog {
+  Q_OBJECT
+ public:
+  CProgressDialog(const QString text, int min, int max, QWidget* parent);
+  virtual ~CProgressDialog();
 
-class CProgressDialog : public QDialog, private Ui::IProgressDialog
-{
-    Q_OBJECT
-public:
-    CProgressDialog(const QString text, int min, int max, QWidget* parent);
-    virtual ~CProgressDialog();
+  static CProgressDialog* self();
 
-    static CProgressDialog* self();
+  static void setAllVisible(bool yes);
 
-    static void setAllVisible(bool yes);
+  void setValue(int val);
 
-    void setValue(int val);
+  bool wasCanceled();
 
-    bool wasCanceled();
+  void enableCancel(bool yes);
 
-    void enableCancel(bool yes);
+ public slots:
+  void reject() override;
 
-public slots:
-    void reject() override;
+ protected:
+  void showEvent(QShowEvent*) override;
 
-protected:
-    void showEvent(QShowEvent*) override;
+ private:
+  void pause();
+  void goOn();
 
-private:
-    void pause();
-    void goOn();
-
-    static QStack<CProgressDialog*> stackSelf;
-    QElapsedTimer time;
-    QTimer* timer;
-    qint32 timeElapsed = 0;
+  static QStack<CProgressDialog*> stackSelf;
+  QElapsedTimer time;
+  QTimer* timer;
+  qint32 timeElapsed = 0;
 };
 
-
-#endif //CPROGRESSDIALOG_H
-
+#endif  // CPROGRESSDIALOG_H

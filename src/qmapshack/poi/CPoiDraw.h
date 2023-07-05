@@ -24,70 +24,63 @@
 class CPoiList;
 class CPoiFileItem;
 
-class CPoiDraw : public IDrawContext
-{
-public:
-    CPoiDraw(CCanvas* canvas);
-    virtual ~CPoiDraw();
+class CPoiDraw : public IDrawContext {
+ public:
+  CPoiDraw(CCanvas* canvas);
+  virtual ~CPoiDraw();
 
-    void saveConfig(QSettings& cfg);
-    void loadConfig(QSettings& cfg);
+  void saveConfig(QSettings& cfg);
+  void loadConfig(QSettings& cfg);
 
-    void loadConfigForPoiItem(CPoiFileItem* item);
+  void loadConfigForPoiItem(CPoiFileItem* item);
 
-    bool setProjection(const QString& proj) override;
+  bool setProjection(const QString& proj) override;
 
-    static const QStringList& getPoiPaths()
-    {
-        return poiPaths;
-    }
+  static const QStringList& getPoiPaths() { return poiPaths; }
 
-    static void setupPoiPath();
-    static void setupPoiPath(const QString& path);
-    static void setupPoiPath(const QStringList& paths);
-    static void savePoiPath(QSettings& cfg);
-    static void loadPoiPath(QSettings& cfg);
-    static const QStringList& getSupportedFormats()
-    {
-        return supportedFormats;
-    }
+  static void setupPoiPath();
+  static void setupPoiPath(const QString& path);
+  static void setupPoiPath(const QStringList& paths);
+  static void savePoiPath(QSettings& cfg);
+  static void loadPoiPath(QSettings& cfg);
+  static const QStringList& getSupportedFormats() { return supportedFormats; }
 
-    void findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const;
-    void findPoisIn(const QRectF& degRect, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const;
-    bool getToolTip(const QPoint& px, QString& str);
-protected:
-    void drawt(buffer_t& currentBuffer) override;
+  void findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const;
+  void findPoisIn(const QRectF& degRect, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const;
+  bool getToolTip(const QPoint& px, QString& str);
 
-private:
-    /**
-       @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
+ protected:
+  void drawt(buffer_t& currentBuffer) override;
 
-     */
-    void buildPoiList();
+ private:
+  /**
+     @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
 
-    /**
-       @brief Save list of active maps to configuration file
-     */
-    void saveActivePoisList(QStringList& keys, QSettings& cfg);
-    void saveActivePoisList(QStringList& keys);
-    /**
-       @brief Restore list of active maps from configuration file
-     */
-    void restoreActivePoisList(const QStringList& keys);
-    void restoreActivePoisList(const QStringList& keys, QSettings& cfg);
+   */
+  void buildPoiList();
 
-    CPoiList* poiList;
+  /**
+     @brief Save list of active maps to configuration file
+   */
+  void saveActivePoisList(QStringList& keys, QSettings& cfg);
+  void saveActivePoisList(QStringList& keys);
+  /**
+     @brief Restore list of active maps from configuration file
+   */
+  void restoreActivePoisList(const QStringList& keys);
+  void restoreActivePoisList(const QStringList& keys, QSettings& cfg);
 
-    /// the group label used in QSettings
-    QString cfgGroup;
+  CPoiList* poiList;
 
-    static QStringList poiPaths;
+  /// the group label used in QSettings
+  QString cfgGroup;
 
-    static QList<CPoiDraw*> pois;
+  static QStringList poiPaths;
 
-    /// a list of supported map formats
-    static QStringList supportedFormats;
+  static QList<CPoiDraw*> pois;
+
+  /// a list of supported map formats
+  static QStringList supportedFormats;
 };
 
-#endif //CPOIDRAW_H
-
+#endif  // CPOIDRAW_H

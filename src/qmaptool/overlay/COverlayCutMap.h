@@ -24,82 +24,70 @@
 #include "ui_IOverlayCutMap.h"
 #include "units/IUnit.h"
 
-
 class QStackedWidget;
 class IDrawContext;
 class QSettings;
 class CItemCutMap;
 
-class COverlayCutMap : public IOverlay, private Ui::IOverlayCutMap
-{
-    Q_OBJECT
-public:
-    COverlayCutMap(CItemCutMap* item, QStackedWidget* stackedWidget);
-    virtual ~COverlayCutMap() = default;
+class COverlayCutMap : public IOverlay, private Ui::IOverlayCutMap {
+  Q_OBJECT
+ public:
+  COverlayCutMap(CItemCutMap* item, QStackedWidget* stackedWidget);
+  virtual ~COverlayCutMap() = default;
 
-    void saveSettings(QSettings& cfg);
-    void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings& cfg);
+  void loadSettings(QSettings& cfg);
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent* e);
-    void mouseReleaseEventFx(QMouseEvent* e);
-    QCursor getCursorFx();
+  bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
+  void mouseMoveEventFx(QMouseEvent* e);
+  void mouseReleaseEventFx(QMouseEvent* e);
+  QCursor getCursorFx();
 
-    void abortStep();
+  void abortStep();
 
-    enum mode_e
-    {
-        eModeNone
-        , eModePointMove
-        , eModePointAdd
-        , eModePointDel
-    };
+  enum mode_e { eModeNone, eModePointMove, eModePointAdd, eModePointDel };
 
-    void saveShape(const QString& filename);
+  void saveShape(const QString& filename);
 
-    bool isOk() const
-    {
-        return !region.isEmpty();
-    }
+  bool isOk() const { return !region.isEmpty(); }
 
-private slots:
-    void slotSetMode(COverlayCutMap::mode_e m, bool on);
-    void slotResetMask();
-    void slotSaveShape();
-    void slotLoadShape();
+ private slots:
+  void slotSetMode(COverlayCutMap::mode_e m, bool on);
+  void slotResetMask();
+  void slotSaveShape();
+  void slotLoadShape();
 
-private:
-    void restoreFromHistory(QPolygonF& line);
-    void storeToHistory(const QPolygonF& line);
-    void isCloseTo(QPointF pt, QPolygonF line, qint32& idx) const;
-    void isCloseToLine(QPointF pt, QPolygonF line, qint32& idx1, qint32& idx2) const;
-    void mouseReset();
+ private:
+  void restoreFromHistory(QPolygonF& line);
+  void storeToHistory(const QPolygonF& line);
+  void isCloseTo(QPointF pt, QPolygonF line, qint32& idx) const;
+  void isCloseToLine(QPointF pt, QPolygonF line, qint32& idx1, qint32& idx2) const;
+  void mouseReset();
 
-    void mouseMovePointAdd(const QPointF& pt);
-    void mouseMovePointDel(const QPointF& pt);
-    void mouseMovePointMove(const QPointF& pt);
+  void mouseMovePointAdd(const QPointF& pt);
+  void mouseMovePointDel(const QPointF& pt);
+  void mouseMovePointMove(const QPointF& pt);
 
-    void mouseReleasePointAdd(const QPointF& pt, Qt::MouseButton button);
-    void mouseReleasePointDel(const QPointF& pt, Qt::MouseButton button);
-    void mouseReleasePointMove(const QPointF& pt, Qt::MouseButton button);
+  void mouseReleasePointAdd(const QPointF& pt, Qt::MouseButton button);
+  void mouseReleasePointDel(const QPointF& pt, Qt::MouseButton button);
+  void mouseReleasePointMove(const QPointF& pt, Qt::MouseButton button);
 
-    void updateGui();
+  void updateGui();
 
-    IDrawContext* context;
+  IDrawContext* context;
 
-    mode_e mode = eModeNone;
-    QPolygonF region;
+  mode_e mode = eModeNone;
+  QPolygonF region;
 
-    qint32 idxFocus1 = NOIDX;
-    qint32 idxFocus2 = NOIDX;
-    bool addPoint = false;
-    bool movePoint = false;
+  qint32 idxFocus1 = NOIDX;
+  qint32 idxFocus2 = NOIDX;
+  bool addPoint = false;
+  bool movePoint = false;
 
-    QList<QPolygonF> history;
-    qint32 idxHistory = NOIDX;
+  QList<QPolygonF> history;
+  qint32 idxHistory = NOIDX;
 
-    QString shapeFilename;
+  QString shapeFilename;
 };
 
-#endif //COVERLAYCUTMAP_H
-
+#endif  // COVERLAYCUTMAP_H

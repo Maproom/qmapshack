@@ -16,71 +16,61 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "CMainWindow.h"
 #include "gis/trk/CTrkToRteDialog.h"
+
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/CGisWorkspace.h"
 #include "helpers/CSettings.h"
 
 CTrkToRteDialog::CTrkToRteDialog(IGisProject*& project, QString& routeName, bool& saveSubPoints)
-    : QDialog(CMainWindow::getBestWidgetForParent())
-    , project(project)
-    , routeName(routeName)
-    , saveSubPoints(saveSubPoints)
-{
-    setupUi(this);
-    SETTINGS;
-    cfg.beginGroup("TrkToRt");
-    saveSubPoints = cfg.value("saveSubPoints", false).toBool();
-    cfg.endGroup();
+    : QDialog(CMainWindow::getBestWidgetForParent()),
+      project(project),
+      routeName(routeName),
+      saveSubPoints(saveSubPoints) {
+  setupUi(this);
+  SETTINGS;
+  cfg.beginGroup("TrkToRt");
+  saveSubPoints = cfg.value("saveSubPoints", false).toBool();
+  cfg.endGroup();
 
-    checkBoxSubPoints->setChecked(saveSubPoints);
-    lineEditRouteName->setText(routeName);
-    labelProjectName->setText(project->getName());
-    buttonBoxEnabled();
+  checkBoxSubPoints->setChecked(saveSubPoints);
+  lineEditRouteName->setText(routeName);
+  labelProjectName->setText(project->getName());
+  buttonBoxEnabled();
 
-    connect(pushButtonProject, &QPushButton::clicked, this, &CTrkToRteDialog::slotProject);
-    connect(lineEditRouteName, &QLineEdit::textChanged, this, &CTrkToRteDialog::slotRouteChanged);
-    connect(lineEditRouteName, &QLineEdit::textEdited, this, &CTrkToRteDialog::slotRouteChanged);
+  connect(pushButtonProject, &QPushButton::clicked, this, &CTrkToRteDialog::slotProject);
+  connect(lineEditRouteName, &QLineEdit::textChanged, this, &CTrkToRteDialog::slotRouteChanged);
+  connect(lineEditRouteName, &QLineEdit::textEdited, this, &CTrkToRteDialog::slotRouteChanged);
 
-    adjustSize();
+  adjustSize();
 
-    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CTrkToRteDialog");
+  CCanvas::setOverrideCursor(Qt::ArrowCursor, "CTrkToRteDialog");
 }
 
-CTrkToRteDialog::~CTrkToRteDialog()
-{
-    CCanvas::restoreOverrideCursor("~CTrkToRteDialog");
+CTrkToRteDialog::~CTrkToRteDialog() { CCanvas::restoreOverrideCursor("~CTrkToRteDialog"); }
+
+void CTrkToRteDialog::accept() {
+  saveSubPoints = checkBoxSubPoints->isChecked();
+  SETTINGS;
+  cfg.beginGroup("TrkToRt");
+  cfg.setValue("saveSubPoints", saveSubPoints);
+  cfg.endGroup();
+  QDialog::accept();
 }
 
-void CTrkToRteDialog::accept()
-{
-    saveSubPoints = checkBoxSubPoints->isChecked();
-    SETTINGS;
-    cfg.beginGroup("TrkToRt");
-    cfg.setValue("saveSubPoints", saveSubPoints);
-    cfg.endGroup();
-    QDialog::accept();
+void CTrkToRteDialog::slotProject() {
+  IGisProject* pr = CGisWorkspace::self().selectProject(true);
+  if (nullptr == pr) {
+    return;
+  }
+  project = pr;
+  labelProjectName->setText(pr->getName());
 }
 
-void CTrkToRteDialog::slotProject()
-{
-    IGisProject* pr = CGisWorkspace::self().selectProject(true);
-    if(nullptr == pr)
-    {
-        return;
-    }
-    project = pr;
-    labelProjectName->setText(pr->getName());
-}
+void CTrkToRteDialog::buttonBoxEnabled() { buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!routeName.isEmpty()); }
 
-void CTrkToRteDialog::buttonBoxEnabled()
-{
-    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!routeName.isEmpty());
+void CTrkToRteDialog::slotRouteChanged(const QString& text) {
+  routeName = text;
+  buttonBoxEnabled();
 }
-
-void CTrkToRteDialog::slotRouteChanged(const QString& text)
-{
-    routeName = text;
-    buttonBoxEnabled();
-}
-

@@ -17,34 +17,31 @@
 **********************************************************************************************/
 
 #include "mouse/range/CRangeToolSetup.h"
-#include "mouse/range/CScrOptRangeTool.h"
 
 #include <QtWidgets>
 
-CRangeToolSetup::CRangeToolSetup(CScrOptRangeTool& parent)
-    : QDialog(&parent)
-    , tool(parent)
-{
-    setupUi(this);
+#include "mouse/range/CScrOptRangeTool.h"
 
-    actionsHidePoints->setAction(tool.actionHidePoints);
-    actionsShowPoints->setAction(tool.actionShowPoints);
-    actionsActivity->setAction(tool.actionActivity);
-    actionsCopy->setAction(tool.actionCopy);
-    actionsDelete->setAction(tool.actionDelete);
+CRangeToolSetup::CRangeToolSetup(CScrOptRangeTool& parent) : QDialog(&parent), tool(parent) {
+  setupUi(this);
 
-    checkMoveMap->setChecked(tool.enableUpdateCavas);
+  actionsHidePoints->setAction(tool.actionHidePoints);
+  actionsShowPoints->setAction(tool.actionShowPoints);
+  actionsActivity->setAction(tool.actionActivity);
+  actionsCopy->setAction(tool.actionCopy);
+  actionsDelete->setAction(tool.actionDelete);
+
+  checkMoveMap->setChecked(tool.enableUpdateCavas);
 }
 
-void CRangeToolSetup::accept()
-{
-    tool.actionHidePoints = actionsHidePoints->getAction();
-    tool.actionShowPoints = actionsShowPoints->getAction();
-    tool.actionActivity = actionsActivity->getAction();
-    tool.actionCopy = actionsCopy->getAction();
-    tool.actionDelete = actionsDelete->getAction();
+void CRangeToolSetup::accept() {
+  tool.actionHidePoints = actionsHidePoints->getAction();
+  tool.actionShowPoints = actionsShowPoints->getAction();
+  tool.actionActivity = actionsActivity->getAction();
+  tool.actionCopy = actionsCopy->getAction();
+  tool.actionDelete = actionsDelete->getAction();
 
-    tool.enableUpdateCavas = checkMoveMap->isChecked();
+  tool.enableUpdateCavas = checkMoveMap->isChecked();
 
-    QDialog::accept();
+  QDialog::accept();
 }

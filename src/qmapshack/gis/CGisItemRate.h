@@ -19,33 +19,33 @@
 #ifndef CGISITEMRATE_H
 #define CGISITEMRATE_H
 
-#include "ui_IGisItemRate.h"
 #include <QDialog>
 
+#include "ui_IGisItemRate.h"
+
 class IGisItem;
-class CGisItemRate : public QDialog, private Ui::IGisItemRate
-{
-    Q_OBJECT
+class CGisItemRate : public QDialog, private Ui::IGisItemRate {
+  Q_OBJECT
 
-public:
-    CGisItemRate(QWidget* parent = nullptr, const QSet<QString>& commonKeywords = QSet<QString>(), qreal rating = 0);
-    ~CGisItemRate();
+ public:
+  CGisItemRate(QWidget* parent = nullptr, const QSet<QString>& commonKeywords = QSet<QString>(), qreal rating = 0);
+  ~CGisItemRate();
 
-    qreal getRating();
-    bool getRatingChanged();
-    //Don't return a reference since this ends in a null reference when handed further
-    QSet<QString> getKeywords() const;
-    QSet<QString> getAddedKeywords() const;
-    QSet<QString> getRemovedKeywords() const;
+  qreal getRating();
+  bool getRatingChanged();
+  // Don't return a reference since this ends in a null reference when handed further
+  QSet<QString> getKeywords() const;
+  QSet<QString> getAddedKeywords() const;
+  QSet<QString> getRemovedKeywords() const;
 
-private:
-    void ratingLabelClicked(int labelNumber);
-    void updateStars();
+ private:
+  void ratingLabelClicked(int labelNumber);
+  void updateStars();
 
-    const QSet<QString>& commonKeywords;
-    bool ratingChanged = false;
-    //keeping the rating in qreal if the wish for half stars emerges
-    qreal rating = 0;
+  const QSet<QString>& commonKeywords;
+  bool ratingChanged = false;
+  // keeping the rating in qreal if the wish for half stars emerges
+  qreal rating = 0;
 };
 
-#endif // CGISITEMRATE_H
+#endif  // CGISITEMRATE_H

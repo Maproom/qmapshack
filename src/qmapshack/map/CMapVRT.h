@@ -21,57 +21,54 @@
 
 #include "map/IMap.h"
 
-
 class CMapDraw;
 class GDALDataset;
 
-class CMapVRT : public IMap
-{
-    Q_OBJECT
-public:
-    CMapVRT(const QString& filename, CMapDraw* parent);
-    virtual ~CMapVRT();
+class CMapVRT : public IMap {
+  Q_OBJECT
+ public:
+  CMapVRT(const QString& filename, CMapDraw* parent);
+  virtual ~CMapVRT();
 
-    void draw(IDrawContext::buffer_t& buf) override;
+  void draw(IDrawContext::buffer_t& buf) override;
 
-private:
-    /**
-       @brief Test subfiles of VRT for overviews
-       @param filename The VRT filename to inspect
-       @return Return true if all subfiles have overviews.
-     */
-    bool testForOverviews(const QString& filename);
-    QString filename;
-    /// instance of GDAL dataset
-    GDALDataset* dataset;
-    /// number of color bands used by the *vrt
-    int rasterBandCount = 0;
-    /// QT representation of the vrt's color table
-    QVector<QRgb> colortable;
+ private:
+  /**
+     @brief Test subfiles of VRT for overviews
+     @param filename The VRT filename to inspect
+     @return Return true if all subfiles have overviews.
+   */
+  bool testForOverviews(const QString& filename);
+  QString filename;
+  /// instance of GDAL dataset
+  GDALDataset* dataset;
+  /// number of color bands used by the *vrt
+  int rasterBandCount = 0;
+  /// QT representation of the vrt's color table
+  QVector<QRgb> colortable;
 
-    /// width in number of px
-    qint32 xsize_px = 0;
-    /// height in number of px
-    qint32 ysize_px = 0;
+  /// width in number of px
+  qint32 xsize_px = 0;
+  /// height in number of px
+  qint32 ysize_px = 0;
 
-    /// scale [px/m]
-    qreal xscale = 0;
-    /// scale [px/m]
-    qreal yscale = 0;
+  /// scale [px/m]
+  qreal xscale = 0;
+  /// scale [px/m]
+  qreal yscale = 0;
 
-    qreal xrot = 0;
-    qreal yrot = 0;
+  qreal xrot = 0;
+  qreal yrot = 0;
 
-    QPointF ref1;
-    QPointF ref2;
-    QPointF ref3;
-    QPointF ref4;
+  QPointF ref1;
+  QPointF ref2;
+  QPointF ref3;
+  QPointF ref4;
 
-    QTransform trFwd;
-    QTransform trInv;
+  QTransform trFwd;
+  QTransform trInv;
 
-    bool hasOverviews = false;
+  bool hasOverviews = false;
 };
 
-#endif //CMAPVRT_H
-
+#endif  // CMAPVRT_H

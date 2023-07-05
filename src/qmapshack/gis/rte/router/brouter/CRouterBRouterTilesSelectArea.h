@@ -26,69 +26,67 @@
 class CCanvas;
 class CRouterBRouterTilesSelect;
 
-class CRouterBRouterTilesSelectArea : public QWidget
-{
-    Q_OBJECT
-public:
-    CRouterBRouterTilesSelectArea(QWidget* parent, CCanvas* canvas);
-    virtual ~CRouterBRouterTilesSelectArea();
+class CRouterBRouterTilesSelectArea : public QWidget {
+  Q_OBJECT
+ public:
+  CRouterBRouterTilesSelectArea(QWidget* parent, CCanvas* canvas);
+  virtual ~CRouterBRouterTilesSelectArea();
 
-    void paintEvent(QPaintEvent* event) override;
+  void paintEvent(QPaintEvent* event) override;
 
-    void setGridTiles(const QVector<QPoint>& tiles) { gridTiles = tiles; }
-    void setInvalidTiles(const QVector<QPoint>& tiles) { invalidTiles = tiles; }
-    void setOutdatedTiles(const QVector<QPoint>& tiles) { outdatedTiles = tiles; }
-    void setCurrentTiles(const QVector<QPoint>& tiles) { currentTiles = tiles; }
-    void setOutstandingTiles(const QVector<QPoint>& tiles) { outstandingTiles = tiles; }
-    void setSelectedTiles(const QVector<QPoint>& tiles) { selectedTiles = tiles; }
+  void setGridTiles(const QVector<QPoint>& tiles) { gridTiles = tiles; }
+  void setInvalidTiles(const QVector<QPoint>& tiles) { invalidTiles = tiles; }
+  void setOutdatedTiles(const QVector<QPoint>& tiles) { outdatedTiles = tiles; }
+  void setCurrentTiles(const QVector<QPoint>& tiles) { currentTiles = tiles; }
+  void setOutstandingTiles(const QVector<QPoint>& tiles) { outstandingTiles = tiles; }
+  void setSelectedTiles(const QVector<QPoint>& tiles) { selectedTiles = tiles; }
 
-    void setTileToolTip(const QString& toolTip) { tileToolTip = toolTip; }
+  void setTileToolTip(const QString& toolTip) { tileToolTip = toolTip; }
 
-    static const QPen gridPen;
-    static const QPen currentTilesPen;
-    static const QPen outdatedTilesPen;
-    static const QPen selectedTilesPen;
-    static const QPen outstandingTilesPen;
-    static const QPen invalidTilesPen;
-    static const QBrush currentTilesBrush;
-    static const QBrush outdatedTilesBrush;
-    static const QBrush selectedTilesBrush;
-    static const QBrush outstandingTilesBrush;
-    static const QBrush invalidTilesBrush;
+  static const QPen gridPen;
+  static const QPen currentTilesPen;
+  static const QPen outdatedTilesPen;
+  static const QPen selectedTilesPen;
+  static const QPen outstandingTilesPen;
+  static const QPen invalidTilesPen;
+  static const QBrush currentTilesBrush;
+  static const QBrush outdatedTilesBrush;
+  static const QBrush selectedTilesBrush;
+  static const QBrush outstandingTilesBrush;
+  static const QBrush invalidTilesBrush;
 
-signals:
-    void sigTileClicked(const QPoint& tile);
-    void sigTileToolTipChanged(const QPoint& tile);
+ signals:
+  void sigTileClicked(const QPoint& tile);
+  void sigTileToolTipChanged(const QPoint& tile);
 
-protected:
-    void mouseMoveEvent(QMouseEvent* event) override;
-    void mousePressEvent(QMouseEvent* event) override;
-    void mouseReleaseEvent(QMouseEvent* event) override;
-    bool event(QEvent* event) override;
+ protected:
+  void mouseMoveEvent(QMouseEvent* event) override;
+  void mousePressEvent(QMouseEvent* event) override;
+  void mouseReleaseEvent(QMouseEvent* event) override;
+  bool event(QEvent* event) override;
 
-private slots:
+ private slots:
 
-private:
-    void drawGrid();
-    void drawTiles(const QPen& pen, const QBrush& brush, const QVector<QPoint>& tiles);
-    QPoint tileUnderMouse(const QPointF& mousePos) const;
-    QPolygonF gridPolygon(const QPoint& tile) const;
-    QPolygonF tilePolygon(const QPoint& tile) const;
+ private:
+  void drawGrid();
+  void drawTiles(const QPen& pen, const QBrush& brush, const QVector<QPoint>& tiles);
+  QPoint tileUnderMouse(const QPointF& mousePos) const;
+  QPolygonF gridPolygon(const QPoint& tile) const;
+  QPolygonF tilePolygon(const QPoint& tile) const;
 
-    CCanvas* canvas;
-    QPoint mousePos;
-    QPoint startPos;
-    Qt::MouseButtons button;
-    QPoint currentTile;
-    QString tileToolTip;
+  CCanvas* canvas;
+  QPoint mousePos;
+  QPoint startPos;
+  Qt::MouseButtons button;
+  QPoint currentTile;
+  QString tileToolTip;
 
-    QVector<QPoint> gridTiles;
-    QVector<QPoint> invalidTiles;
-    QVector<QPoint> outdatedTiles;
-    QVector<QPoint> currentTiles;
-    QVector<QPoint> outstandingTiles;
-    QVector<QPoint> selectedTiles;
+  QVector<QPoint> gridTiles;
+  QVector<QPoint> invalidTiles;
+  QVector<QPoint> outdatedTiles;
+  QVector<QPoint> currentTiles;
+  QVector<QPoint> outstandingTiles;
+  QVector<QPoint> selectedTiles;
 };
 
-#endif //CROUTERBROUTERTILESSELECTAREA_H
-
+#endif  // CROUTERBROUTERTILESSELECTAREA_H

@@ -19,14 +19,12 @@
 #ifndef CSEARCHEXPLANATIONDIALOG_H
 #define CSEARCHEXPLANATIONDIALOG_H
 
-#include "gis/search/CSearch.h"
 #include "ui_ISearchExplanationDialog.h"
 
-class CSearchExplanationDialog : public QDialog, private Ui::ISearchExplanationDialog
-{
-    Q_OBJECT
-public:
-    CSearchExplanationDialog(QWidget* parent);
+class CSearchExplanationDialog : public QDialog, private Ui::ISearchExplanationDialog {
+  Q_OBJECT
+ public:
+  CSearchExplanationDialog(QWidget* parent);
 };
 
-#endif // CSEARCHEXPLANATIONDIALOG_H
+#endif  // CSEARCHEXPLANATIONDIALOG_H

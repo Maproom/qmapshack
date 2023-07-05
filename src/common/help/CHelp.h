@@ -26,20 +26,18 @@ class QTabWidget;
 class CHelpIndex;
 class CHelpSearch;
 
-class CHelp :  public QDockWidget
-{
-    Q_OBJECT
-public:
-    CHelp(const QString& helpfile, const QString& homepage, QWidget* parent);
-    virtual ~CHelp();
+class CHelp : public QDockWidget {
+  Q_OBJECT
+ public:
+  CHelp(const QString& helpfile, const QString& homepage, QWidget* parent);
+  virtual ~CHelp();
 
-private:
-    QHelpEngine* engine;
-    QTabWidget* tabWidget;
-    QSplitter* splitter;
-    CHelpIndex* index;
-    CHelpSearch* search;
+ private:
+  QHelpEngine* engine;
+  QTabWidget* tabWidget;
+  QSplitter* splitter;
+  CHelpIndex* index;
+  CHelpSearch* search;
 };
 
-#endif //CHELP_H
-
+#endif  // CHELP_H

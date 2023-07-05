@@ -19,15 +19,14 @@
 #ifndef CCOMMANDPROCESSOR_H
 #define CCOMMANDPROCESSOR_H
 
-#include "setup/CAppOpts.h"
 #include <QCoreApplication>
 
-class CCommandProcessor
-{
-    Q_DECLARE_TR_FUNCTIONS(CCommandProcessor)
-public:
-    CAppOpts* processOptions(const QStringList& arguments);
+#include "setup/CAppOpts.h"
+
+class CCommandProcessor {
+  Q_DECLARE_TR_FUNCTIONS(CCommandProcessor)
+ public:
+  CAppOpts* processOptions(const QStringList& arguments);
 };
 
-
-#endif // CCOMMANDPROCESSOR_H
+#endif  // CCOMMANDPROCESSOR_H

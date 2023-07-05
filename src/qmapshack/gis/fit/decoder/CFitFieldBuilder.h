@@ -26,19 +26,19 @@ class CFitMessage;
 class CFitFieldDefinition;
 class CFitFieldProfile;
 
-class CFitFieldBuilder
-{
-    Q_DECLARE_TR_FUNCTIONS(CFitFieldBuilder)
-public:
-    CFitFieldBuilder() = delete;
-    static void evaluateSubfieldsAndExpandComponents(CFitMessage& mesg);
-    static CFitField buildField(const CFitFieldDefinition& def, quint8* fieldData, const CFitMessage& message);
-    static CFitField buildField(const CFitFieldProfile& fieldProfile, const CFitFieldDefinition& def, quint8* fieldData, const CFitMessage& message);
+class CFitFieldBuilder {
+  Q_DECLARE_TR_FUNCTIONS(CFitFieldBuilder)
+ public:
+  CFitFieldBuilder() = delete;
+  static void evaluateSubfieldsAndExpandComponents(CFitMessage& mesg);
+  static CFitField buildField(const CFitFieldDefinition& def, quint8* fieldData, const CFitMessage& message);
+  static CFitField buildField(const CFitFieldProfile& fieldProfile, const CFitFieldDefinition& def, quint8* fieldData,
+                              const CFitMessage& message);
 
-private:
-    static bool isValueValid(const CFitFieldDefinition& def, quint8* fieldData);
-    static void evaluateFieldProfile(CFitMessage& mesg, const CFitField& field);
-    static void expandComponents(CFitMessage& mesg, const CFitField& field);
+ private:
+  static bool isValueValid(const CFitFieldDefinition& def, quint8* fieldData);
+  static void evaluateFieldProfile(CFitMessage& mesg, const CFitField& field);
+  static void expandComponents(CFitMessage& mesg, const CFitField& field);
 };
 
-#endif //CFITFIELDBUILDER_H
+#endif  // CFITFIELDBUILDER_H

@@ -21,15 +21,13 @@
 
 class IScrOpt;
 
-class CScrOptSemaphoreLocker
-{
-public:
-    CScrOptSemaphoreLocker(IScrOpt& scropt);
-    virtual ~CScrOptSemaphoreLocker();
+class CScrOptSemaphoreLocker {
+ public:
+  CScrOptSemaphoreLocker(IScrOpt& scropt);
+  virtual ~CScrOptSemaphoreLocker();
 
-private:
-    IScrOpt& scropt;
+ private:
+  IScrOpt& scropt;
 };
 
-#endif //CSCROPTSEMAPHORELOCKER_H
-
+#endif  // CSCROPTSEMAPHORELOCKER_H

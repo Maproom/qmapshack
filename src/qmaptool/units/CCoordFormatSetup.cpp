@@ -17,51 +17,41 @@
 **********************************************************************************************/
 
 #include "units/CCoordFormatSetup.h"
+
 #include "units/IUnit.h"
 
-CCoordFormatSetup::CCoordFormatSetup(QWidget* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
+CCoordFormatSetup::CCoordFormatSetup(QWidget* parent) : QDialog(parent) {
+  setupUi(this);
 
-    IUnit::coord_format_e coordFormat = IUnit::getCoordFormat();
-    switch(coordFormat)
-    {
+  IUnit::coord_format_e coordFormat = IUnit::getCoordFormat();
+  switch (coordFormat) {
     case IUnit::eCoordFormat1:
-        radioFormat1->setChecked(true);
-        break;
+      radioFormat1->setChecked(true);
+      break;
 
     case IUnit::eCoordFormat2:
-        radioFormat2->setChecked(true);
-        break;
+      radioFormat2->setChecked(true);
+      break;
 
     case IUnit::eCoordFormat3:
-        radioFormat3->setChecked(true);
-        break;
-    }
+      radioFormat3->setChecked(true);
+      break;
+  }
 }
 
-CCoordFormatSetup::~CCoordFormatSetup()
-{
-}
+CCoordFormatSetup::~CCoordFormatSetup() {}
 
-void CCoordFormatSetup::accept()
-{
-    IUnit::coord_format_e coordFormat = IUnit::eCoordFormat1;
+void CCoordFormatSetup::accept() {
+  IUnit::coord_format_e coordFormat = IUnit::eCoordFormat1;
 
-    if(radioFormat1->isChecked())
-    {
-        coordFormat = IUnit::eCoordFormat1;
-    }
-    else if(radioFormat2->isChecked())
-    {
-        coordFormat = IUnit::eCoordFormat2;
-    }
-    else if(radioFormat3->isChecked())
-    {
-        coordFormat = IUnit::eCoordFormat3;
-    }
+  if (radioFormat1->isChecked()) {
+    coordFormat = IUnit::eCoordFormat1;
+  } else if (radioFormat2->isChecked()) {
+    coordFormat = IUnit::eCoordFormat2;
+  } else if (radioFormat3->isChecked()) {
+    coordFormat = IUnit::eCoordFormat3;
+  }
 
-    IUnit::setCoordFormat(coordFormat);
-    QDialog::accept();
+  IUnit::setCoordFormat(coordFormat);
+  QDialog::accept();
 }

@@ -27,28 +27,30 @@
  * multiple widgets so they appear as a single unit. Standard Layout-classes
  * arrange the items in non-overlapping manner.
  */
-class CRouterBRouterTilesSelectLayout : public QLayout
-{
-public:
-    CRouterBRouterTilesSelectLayout(QWidget* parent) : QLayout(parent) {}
+class CRouterBRouterTilesSelectLayout : public QLayout {
+ public:
+  CRouterBRouterTilesSelectLayout(QWidget* parent) : QLayout(parent) {}
 
-    virtual ~CRouterBRouterTilesSelectLayout() {}
+  virtual ~CRouterBRouterTilesSelectLayout() {}
 
-    void addItem(QLayoutItem* item) override { items.append(item); }
+  void addItem(QLayoutItem* item) override { items.append(item); }
 
-    QSize sizeHint() const override { return QSize(200, 200); }
+  QSize sizeHint() const override { return QSize(200, 200); }
 
-    void setGeometry(const QRect& r) override { for (QLayoutItem* item : qAsConst(items)) { item->setGeometry(r); }}
+  void setGeometry(const QRect& r) override {
+    for (QLayoutItem* item : qAsConst(items)) {
+      item->setGeometry(r);
+    }
+  }
 
-    QLayoutItem* itemAt(int index) const override { return index < items.size() ? items.at(index) : nullptr; }
+  QLayoutItem* itemAt(int index) const override { return index < items.size() ? items.at(index) : nullptr; }
 
-    QLayoutItem* takeAt(int index) override { return index < items.size() ? items.takeAt(index) : nullptr; }
+  QLayoutItem* takeAt(int index) override { return index < items.size() ? items.takeAt(index) : nullptr; }
 
-    int count() const override { return items.size(); }
+  int count() const override { return items.size(); }
 
-private:
-    QList<QLayoutItem*> items;
+ private:
+  QList<QLayoutItem*> items;
 };
 
-#endif //CROUTERBROUTERTILESSELECTLAYOUT_H
-
+#endif  // CROUTERBROUTERTILESSELECTLAYOUT_H

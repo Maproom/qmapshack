@@ -21,25 +21,23 @@
 
 #include <QLabel>
 
-class CScaleLabel : public QLabel
-{
-    Q_OBJECT
-public:
-    CScaleLabel(QWidget* parent);
-    virtual ~CScaleLabel() = default;
+class CScaleLabel : public QLabel {
+  Q_OBJECT
+ public:
+  CScaleLabel(QWidget* parent);
+  virtual ~CScaleLabel() = default;
 
-    void setValue(qreal min, qreal scale, qreal max);
+  void setValue(qreal min, qreal scale, qreal max);
 
-protected:
-    void paintEvent(QPaintEvent* e) override;
+ protected:
+  void paintEvent(QPaintEvent* e) override;
 
-private:
-    void updatePixmap();
+ private:
+  void updatePixmap();
 
-    qreal minScale = 0;
-    qreal maxScale = 0;
-    qreal currentScale = 0;
+  qreal minScale = 0;
+  qreal maxScale = 0;
+  qreal currentScale = 0;
 };
 
-#endif //CSCALELABEL_H
-
+#endif  // CSCALELABEL_H

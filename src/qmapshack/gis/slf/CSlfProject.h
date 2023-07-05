@@ -21,28 +21,20 @@
 
 #include "gis/prj/IGisProject.h"
 
-class CSlfProject : public IGisProject
-{
-    Q_DECLARE_TR_FUNCTIONS(CSlfProject)
-public:
-    CSlfProject(const QString& filename, bool readFile = true);
-    virtual ~CSlfProject() = default;
+class CSlfProject : public IGisProject {
+  Q_DECLARE_TR_FUNCTIONS(CSlfProject)
+ public:
+  CSlfProject(const QString& filename, bool readFile = true);
+  virtual ~CSlfProject() = default;
 
-    const QString getFileDialogFilter() const override
-    {
-        return IGisProject::filedialogFilterSLF;
-    }
+  const QString getFileDialogFilter() const override { return IGisProject::filedialogFilterSLF; }
 
-    const QString getFileExtension() const override
-    {
-        return "slf";
-    }
+  const QString getFileExtension() const override { return "slf"; }
 
-private:
-    void loadSlf(const QString& filename);
+ private:
+  void loadSlf(const QString& filename);
 
-    friend class CSlfReader;
+  friend class CSlfReader;
 };
 
-#endif // CSLFPROJECT_H
-
+#endif  // CSLFPROJECT_H

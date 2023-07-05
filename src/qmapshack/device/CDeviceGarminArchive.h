@@ -19,28 +19,26 @@
 #ifndef CDEVICEGARMINARCHIVE_H
 #define CDEVICEGARMINARCHIVE_H
 
-#include "device/IDevice.h"
-
 #include <QCoreApplication>
 #include <QDir>
 #include <QObject>
 
+#include "device/IDevice.h"
+
 class CDeviceGarmin;
 
-class CDeviceGarminArchive : public QObject, public IDevice
-{
-    Q_OBJECT
-public:
-    CDeviceGarminArchive(const QString& path, CDeviceGarmin* parent);
-    virtual ~CDeviceGarminArchive() = default;
+class CDeviceGarminArchive : public QObject, public IDevice {
+  Q_OBJECT
+ public:
+  CDeviceGarminArchive(const QString& path, CDeviceGarmin* parent);
+  virtual ~CDeviceGarminArchive() = default;
 
-protected:
-    void insertCopyOfProject(IGisProject* project) override {}
+ protected:
+  void insertCopyOfProject(IGisProject* project) override {}
 
-private slots:
-    void slotExpanded(QTreeWidgetItem* item);
-    void slotCollapsed(QTreeWidgetItem* item);
+ private slots:
+  void slotExpanded(QTreeWidgetItem* item);
+  void slotCollapsed(QTreeWidgetItem* item);
 };
 
-#endif //CDEVICEGARMINARCHIVE_H
-
+#endif  // CDEVICEGARMINARCHIVE_H

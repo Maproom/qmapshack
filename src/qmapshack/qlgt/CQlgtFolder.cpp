@@ -16,58 +16,47 @@
 
 **********************************************************************************************/
 
-#include "gis/db/macros.h"
-#include "qlgt/CQlgtDb.h"
-#include "qlgt/CQlgtDiary.h"
 #include "qlgt/CQlgtFolder.h"
 
 #include <QtSql>
 
-CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase& db)
-    : type(0)
-    , locked(false)
-    , diary(nullptr)
-    , id(id)
-{
-    QSqlQuery query(db);
+#include "gis/db/macros.h"
+#include "qlgt/CQlgtDiary.h"
 
-    query.prepare("SELECT type, name, comment, locked FROM folders WHERE id=:id");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return );
+CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase& db) : type(0), locked(false), diary(nullptr), id(id) {
+  QSqlQuery query(db);
 
-    if(query.next())
-    {
-        type = query.value(0).toInt();
-        name = query.value(1).toString();
-        comment = query.value(2).toString();
-        locked = query.value(3).toBool();
-    }
+  query.prepare("SELECT type, name, comment, locked FROM folders WHERE id=:id");
+  query.bindValue(":id", id);
+  QUERY_EXEC(return );
 
-    query.prepare("SELECT id, data FROM diarys WHERE parent=:id");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return );
+  if (query.next()) {
+    type = query.value(0).toInt();
+    name = query.value(1).toString();
+    comment = query.value(2).toString();
+    locked = query.value(3).toBool();
+  }
 
-    if(query.next())
-    {
-        quint64 idDiary = query.value(0).toULongLong();
-        QByteArray data = query.value(1).toByteArray();
-        QDataStream stream(&data, QIODevice::ReadOnly);
-        stream.setVersion(QDataStream::Qt_4_5);
+  query.prepare("SELECT id, data FROM diarys WHERE parent=:id");
+  query.bindValue(":id", id);
+  QUERY_EXEC(return );
 
-        diary = new CQlgtDiary(idDiary, this);
-        stream >> *diary;
-    }
+  if (query.next()) {
+    quint64 idDiary = query.value(0).toULongLong();
+    QByteArray data = query.value(1).toByteArray();
+    QDataStream stream(&data, QIODevice::ReadOnly);
+    stream.setVersion(QDataStream::Qt_4_5);
 
-    query.prepare("SELECT child FROM folder2item WHERE parent=:folder");
-    query.bindValue(":folder", id);
-    QUERY_EXEC(return );
-    while(query.next())
-    {
-        items << query.value(0).toULongLong();
-    }
+    diary = new CQlgtDiary(idDiary, this);
+    stream >> *diary;
+  }
+
+  query.prepare("SELECT child FROM folder2item WHERE parent=:folder");
+  query.bindValue(":folder", id);
+  QUERY_EXEC(return );
+  while (query.next()) {
+    items << query.value(0).toULongLong();
+  }
 }
 
-CQlgtFolder::~CQlgtFolder()
-{
-}
-
+CQlgtFolder::~CQlgtFolder() {}

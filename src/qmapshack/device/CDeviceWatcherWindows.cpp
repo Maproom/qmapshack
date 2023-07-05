@@ -17,58 +17,44 @@
 **********************************************************************************************/
 
 #include "device/CDeviceWatcherWindows.h"
-#include "gis/CGisListWks.h"
+
+#include <QtCore>
 
 #include "CMainWindow.h"
-#include <QtCore>
+#include "gis/CGisListWks.h"
 
 CDeviceWatcherWindows* CDeviceWatcherWindows::pSelf = nullptr;
 
-CDeviceWatcherWindows::CDeviceWatcherWindows(CGisListWks* parent)
-    : IDeviceWatcher(parent)
-{
-    pSelf = this;
-}
+CDeviceWatcherWindows::CDeviceWatcherWindows(CGisListWks* parent) : IDeviceWatcher(parent) { pSelf = this; }
 
-CDeviceWatcherWindows::~CDeviceWatcherWindows()
-{
-}
+CDeviceWatcherWindows::~CDeviceWatcherWindows() {}
 
-void CDeviceWatcherWindows::slotUpdate()
-{
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    for(const QStorageInfo& storage : QStorageInfo::mountedVolumes())
-    {
-        if (storage.isValid() && storage.isReady())
-        {
-            probeForDevice(storage.rootPath(), storage.rootPath(), storage.name());
-        }
+void CDeviceWatcherWindows::slotUpdate() {
+  QApplication::setOverrideCursor(Qt::WaitCursor);
+  for (const QStorageInfo& storage : QStorageInfo::mountedVolumes()) {
+    if (storage.isValid() && storage.isReady()) {
+      probeForDevice(storage.rootPath(), storage.rootPath(), storage.name());
     }
-    QApplication::restoreOverrideCursor();
+  }
+  QApplication::restoreOverrideCursor();
 }
 
-bool CDeviceWatcherWindows::event(QEvent* e)
-{
-    if (e->type() == CEventDevice::eEvtDeviceWindows)
-    {
-        CEventDevice* evt = (CEventDevice*)e;
-        qDebug() << "CDeviceWatcherWindows::event()" << evt->path << evt->add;
+bool CDeviceWatcherWindows::event(QEvent* e) {
+  if (e->type() == CEventDevice::eEvtDeviceWindows) {
+    CEventDevice* evt = (CEventDevice*)e;
+    qDebug() << "CDeviceWatcherWindows::event()" << evt->path << evt->add;
 
-        if (evt->add)
-        {
-            QStorageInfo storage(evt->path);
-            if (storage.isValid() && storage.isReady())
-            {
-                QApplication::setOverrideCursor(Qt::WaitCursor);
-                probeForDevice(evt->path, evt->path, storage.name());
-                QApplication::restoreOverrideCursor();
-            }
-        }
-        else
-        {
-            listWks->removeDevice(evt->path);
-        }
+    if (evt->add) {
+      QStorageInfo storage(evt->path);
+      if (storage.isValid() && storage.isReady()) {
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        probeForDevice(evt->path, evt->path, storage.name());
+        QApplication::restoreOverrideCursor();
+      }
+    } else {
+      listWks->removeDevice(evt->path);
     }
+  }
 
-    return QObject::event(e);
+  return QObject::event(e);
 }

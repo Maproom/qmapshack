@@ -16,45 +16,39 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "helpers/CDraw.h"
 #include "mouse/range/CScrOptRangeTrk.h"
 
 #include <QtWidgets>
 
+#include "CMainWindow.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "helpers/CDraw.h"
+
 CScrOptRangeTrk::CScrOptRangeTrk(const QPointF& point, CGisItemTrk* trk, IMouse* mouse, QWidget* parent)
-    : IScrOpt(mouse)
-{
-    if(parent != nullptr)
-    {
-        setParent(parent);
-    }
-    setupUi(this);
+    : IScrOpt(mouse) {
+  if (parent != nullptr) {
+    setParent(parent);
+  }
+  setupUi(this);
 
-    bool noRange = !trk->isRangeSelected();
+  bool noRange = !trk->isRangeSelected();
 
-    label->setFont(CMainWindow::self().getMapFont());
-    label->setText(noRange ?  tr("No range selected") : trk->getInfoRange());
-    adjustSize();
+  label->setFont(CMainWindow::self().getMapFont());
+  label->setText(noRange ? tr("No range selected") : trk->getInfoRange());
+  adjustSize();
 
-    setOrigin(point.toPoint());
-    moveTo(point.toPoint());
-    show();
+  setOrigin(point.toPoint());
+  moveTo(point.toPoint());
+  show();
 
-    toolCopy->setDisabled(noRange);
-    toolActivity->setDisabled(noRange);
+  toolCopy->setDisabled(noRange);
+  toolActivity->setDisabled(noRange);
 }
 
-CScrOptRangeTrk::~CScrOptRangeTrk()
-{
-}
+CScrOptRangeTrk::~CScrOptRangeTrk() {}
 
-void CScrOptRangeTrk::draw(QPainter& p)
-{
-    if(isVisible())
-    {
-        CDraw::bubble(p, geometry(), origin, backgroundColor);
-    }
+void CScrOptRangeTrk::draw(QPainter& p) {
+  if (isVisible()) {
+    CDraw::bubble(p, geometry(), origin, backgroundColor);
+  }
 }
-

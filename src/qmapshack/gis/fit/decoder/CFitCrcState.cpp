@@ -18,22 +18,16 @@
 
 #include "gis/fit/decoder/CFitCrcState.h"
 
-void CFitCrcState::reset()
-{
-}
+void CFitCrcState::reset() {}
 
-decode_state_e CFitCrcState::process(quint8& dataByte)
-{
-    if (bytesLeftToRead() == 0)
-    {
-        // last CRC byte.
-        if (getCrc() != 0)
-        {
-            throw tr("FIT decoding error : invalid CRC.");
-        }
-        return eDecoderStateEnd;
+decode_state_e CFitCrcState::process(quint8& dataByte) {
+  if (bytesLeftToRead() == 0) {
+    // last CRC byte.
+    if (getCrc() != 0) {
+      throw tr("FIT decoding error : invalid CRC.");
     }
-    // 2nd crc byte left
-    return eDecoderStateFileCrc;
+    return eDecoderStateEnd;
+  }
+  // 2nd crc byte left
+  return eDecoderStateFileCrc;
 }
-

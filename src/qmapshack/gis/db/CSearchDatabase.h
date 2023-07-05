@@ -19,36 +19,37 @@
 #ifndef CSEARCHDATABASE_H
 #define CSEARCHDATABASE_H
 
-#include "ui_ISearchDatabase.h"
 #include <QDialog>
+
+#include "ui_ISearchDatabase.h"
 
 class CGisListDB;
 class IDBFolder;
 class QSqlDatabase;
+class CEvtW2DAckInfo;
 
-class CSearchDatabase : public QDialog, private Ui::ISearchDatabase
-{
-    Q_OBJECT
-public:
-    CSearchDatabase(IDBFolder& db, CGisListDB* parent);
-    virtual ~CSearchDatabase() = default;
+class CSearchDatabase : public QDialog, private Ui::ISearchDatabase {
+  Q_OBJECT
+ public:
+  CSearchDatabase(IDBFolder& db, CGisListDB* parent);
+  virtual ~CSearchDatabase() = default;
 
-    bool event(QEvent* e) override;
+  bool event(QEvent* e) override;
 
-signals:
-    void sigItemChanged(QTreeWidgetItem* item, int column);
+ signals:
+  void sigItemChanged(QTreeWidgetItem* item, int column);
 
-private slots:
-    void slotSearch();
-    void slotItemChanged(QTreeWidgetItem* item, int column);
+ private slots:
+  void slotSearch();
+  void slotItemChanged(QTreeWidgetItem* item, int column);
 
-private:
-    void addWithParentFolders(QTreeWidget* result, IDBFolder* folder, QMap<quint64, IDBFolder*>& folders, QSqlDatabase& sqlDB);
-    void updateFolder(IDBFolder* folder, CEvtW2DAckInfo* evt);
-    IDBFolder& dbFolder;
+ private:
+  void addWithParentFolders(QTreeWidget* result, IDBFolder* folder, QMap<quint64, IDBFolder*>& folders,
+                            QSqlDatabase& sqlDB);
+  void updateFolder(IDBFolder* folder, CEvtW2DAckInfo* evt);
+  IDBFolder& dbFolder;
 
-    bool internalEdit = false;
+  bool internalEdit = false;
 };
 
-#endif //CSEARCHDATABASE_H
-
+#endif  // CSEARCHDATABASE_H

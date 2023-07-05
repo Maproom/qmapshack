@@ -16,61 +16,43 @@
 
 **********************************************************************************************/
 
-#include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetupPage.h"
+
+#include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
 
-CRouterBRouterSetupPage::CRouterBRouterSetupPage()
-    : QWizardPage()
-{
+CRouterBRouterSetupPage::CRouterBRouterSetupPage() : QWizardPage() {}
+
+CRouterBRouterSetupPage::~CRouterBRouterSetupPage() {}
+
+bool CRouterBRouterSetupPage::isComplete() const {
+  switch (wizard()->currentId()) {
+    case CRouterBRouterSetupWizard::ePageLocalDirectory: {
+      return setup != nullptr && setup->isLocalBRouterInstalled() && QFile(setup->localJavaExecutable).exists() &&
+             QFileInfo(setup->localJavaExecutable).baseName().startsWith("java");
+    }
+
+    case CRouterBRouterSetupWizard::ePageLocalInstallation: {
+      return setup != nullptr && setup->isLocalBRouterInstalled();
+    }
+
+    case CRouterBRouterSetupWizard::ePageProfiles: {
+      const QListView* profilesListView = findChild<QListView*>("listProfiles");
+      Q_ASSERT(profilesListView != nullptr);
+      return profilesListView->model()->rowCount() > 0;
+    }
+
+    default: {
+      return false;
+    }
+  }
 }
 
-CRouterBRouterSetupPage::~CRouterBRouterSetupPage()
-{
-}
-
-bool CRouterBRouterSetupPage::isComplete() const
-{
-    switch(wizard()->currentId())
-    {
-    case CRouterBRouterSetupWizard::ePageLocalDirectory:
-    {
-        return setup != nullptr
-               && setup->isLocalBRouterInstalled()
-               && QFile(setup->localJavaExecutable).exists()
-               && QFileInfo(setup->localJavaExecutable).baseName().startsWith("java");
-    }
-
-    case CRouterBRouterSetupWizard::ePageLocalInstallation:
-    {
-        return setup != nullptr
-               && setup->isLocalBRouterInstalled();
-    }
-
-    case CRouterBRouterSetupWizard::ePageProfiles:
-    {
-        const QListView* profilesListView = findChild<QListView*>("listProfiles");
-        Q_ASSERT(profilesListView != nullptr);
-        return profilesListView->model()->rowCount() > 0;
-    }
-
-    default:
-    {
-        return false;
-    }
-    }
-}
-
-void CRouterBRouterSetupPage::setComplete(bool newComplete)
-{
-    if (newComplete != complete)
-    {
-        complete = newComplete;
-        emit completeChanged();
-    }
-}
-
-void CRouterBRouterSetupPage::emitCompleteChanged()
-{
+void CRouterBRouterSetupPage::setComplete(bool newComplete) {
+  if (newComplete != complete) {
+    complete = newComplete;
     emit completeChanged();
+  }
 }
+
+void CRouterBRouterSetupPage::emitCompleteChanged() { emit completeChanged(); }

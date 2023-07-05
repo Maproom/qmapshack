@@ -19,32 +19,30 @@
 #ifndef CRTOPENSKYINFO_H
 #define CRTOPENSKYINFO_H
 
+#include <QPointer>
+
 #include "realtime/IRtInfo.h"
 #include "ui_IRtOpenSkyInfo.h"
-
-#include <QPointer>
 
 class CRtOpenSkyRecord;
 class CRtOpenSky;
 class CRtDraw;
 
-class CRtOpenSkyInfo : public IRtInfo, private Ui::IRtOpenSkyInfo
-{
-    Q_OBJECT
-public:
-    CRtOpenSkyInfo(CRtOpenSky& source, QWidget* parent);
-    virtual ~CRtOpenSkyInfo() = default;
+class CRtOpenSkyInfo : public IRtInfo, private Ui::IRtOpenSkyInfo {
+  Q_OBJECT
+ public:
+  CRtOpenSkyInfo(CRtOpenSky& source, QWidget* parent);
+  virtual ~CRtOpenSkyInfo() = default;
 
-    void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg) const;
+  void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings& cfg) const;
 
-public slots:
-    void slotUpdate();
+ public slots:
+  void slotUpdate();
 
-private:
-    void startRecord(const QString& filename) override;
-    void fillTrackData(CTrackData& data) override;
+ private:
+  void startRecord(const QString& filename) override;
+  void fillTrackData(CTrackData& data) override;
 };
 
-#endif //CRTOPENSKYINFO_H
-
+#endif  // CRTOPENSKYINFO_H

@@ -21,17 +21,16 @@
 
 #include "IUnit.h"
 
-class CUnitImperial : public IUnit
-{
-public:
-    CUnitImperial(QObject* parent);
-    virtual ~CUnitImperial() = default;
+class CUnitImperial : public IUnit {
+ public:
+  CUnitImperial(QObject* parent);
+  virtual ~CUnitImperial() = default;
 
-    void meter2distance(qreal meter, QString& val, QString& unit) const override;
-    void meter2distance(qreal meter, qreal& val, QString& unit) const override;
-    void meter2area(qreal meter, QString& val, QString& unit) const override;
-    void meter2area(qreal meter, qreal& val, QString& unit) const override;
-    qreal elevation2meter(const QString& val) const override;
-    void meter2unit(qreal meter, qreal& scale, QString& unit) const override;
+  void meter2distance(qreal meter, QString& val, QString& unit) const override;
+  void meter2distance(qreal meter, qreal& val, QString& unit) const override;
+  void meter2area(qreal meter, QString& val, QString& unit) const override;
+  void meter2area(qreal meter, qreal& val, QString& unit) const override;
+  qreal elevation2meter(const QString& val) const override;
+  void meter2unit(qreal meter, qreal& scale, QString& unit) const override;
 };
-#endif //CUNITIMPERIAL_H
+#endif  // CUNITIMPERIAL_H

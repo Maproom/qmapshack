@@ -19,26 +19,24 @@
 #ifndef CFILTERINTERPOLATEELEVATION_H
 #define CFILTERINTERPOLATEELEVATION_H
 
-#include "ui_IFilterInterpolateElevation.h"
 #include <QWidget>
+
+#include "ui_IFilterInterpolateElevation.h"
 
 class CGisItemTrk;
 
-class CFilterInterpolateElevation : public QWidget, private Ui::IFilterInterpolateElevation
-{
-    Q_OBJECT
-public:
-    CFilterInterpolateElevation(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterInterpolateElevation();
+class CFilterInterpolateElevation : public QWidget, private Ui::IFilterInterpolateElevation {
+  Q_OBJECT
+ public:
+  CFilterInterpolateElevation(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterInterpolateElevation();
 
-private slots:
-    void slotApply();
-    void slotPreview();
+ private slots:
+  void slotApply();
+  void slotPreview();
 
-private:
-
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CFILTERINTERPOLATEELEVATION_H
-
+#endif  // CFILTERINTERPOLATEELEVATION_H

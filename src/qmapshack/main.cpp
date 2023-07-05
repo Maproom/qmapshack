@@ -16,64 +16,60 @@
 
 **********************************************************************************************/
 
+#include <QNetworkProxyFactory>
+#include <QtWidgets>
+#include <iostream>
+
 #include "CMainWindow.h"
 #include "CSingleInstanceProxy.h"
 #include "setup/IAppSetup.h"
 #include "version.h"
 
-#include <iostream>
-#include <QNetworkProxyFactory>
-#include <QtWidgets>
+int main(int argc, char** argv) {
+  QApplication app(argc, argv);
 
+  QCoreApplication::setApplicationName("QMapShack");
+  QCoreApplication::setOrganizationName("QLandkarte");
+  QCoreApplication::setOrganizationDomain("qlandkarte.org");
 
-int main(int argc, char** argv)
-{
-    QApplication app(argc, argv);
+  IAppSetup* env = IAppSetup::getPlatformInstance();
+  env->processArguments();
+  env->initLogHandler();
+  env->initQMapShack();
 
-    QCoreApplication::setApplicationName("QMapShack");
-    QCoreApplication::setOrganizationName("QLandkarte");
-    QCoreApplication::setOrganizationDomain("qlandkarte.org");
+  // setup default proxy
+  QNetworkProxyFactory::setUseSystemConfiguration(true);
 
-    IAppSetup* env = IAppSetup::getPlatformInstance();
-    env->processArguments();
-    env->initLogHandler();
-    env->initQMapShack();
+  // make sure this is the one and only instance on the system
+  CSingleInstanceProxy s(qlOpts->arguments);
 
-    // setup default proxy
-    QNetworkProxyFactory::setUseSystemConfiguration(true);
+  QSplashScreen* splash = nullptr;
+  if (!qlOpts->nosplash) {
+    QPixmap pic(":/pics/splash.png");
+    QPainter p(&pic);
+    QFont f = p.font();
+    f.setBold(true);
 
-    // make sure this is the one and only instance on the system
-    CSingleInstanceProxy s(qlOpts->arguments);
+    p.setPen(Qt::black);
+    p.setFont(f);
+    p.drawText(400, 395, "V " VER_STR);
 
-    QSplashScreen* splash = nullptr;
-    if (!qlOpts->nosplash)
-    {
-        QPixmap pic(":/pics/splash.png");
-        QPainter p(&pic);
-        QFont f = p.font();
-        f.setBold(true);
-
-        p.setPen(Qt::black);
-        p.setFont(f);
-        p.drawText(400, 395, "V " VER_STR);
-
-        splash = new QSplashScreen(pic);
+    splash = new QSplashScreen(pic);
 #ifdef Q_OS_MAC
-        // remove the splash screen flag on OS-X as workaround for the reported bug
-        // https://bugreports.qt.io/browse/QTBUG-49576
-        splash->setWindowFlags(splash->windowFlags() & (~Qt::SplashScreen));
+    // remove the splash screen flag on OS-X as workaround for the reported bug
+    // https://bugreports.qt.io/browse/QTBUG-49576
+    splash->setWindowFlags(splash->windowFlags() & (~Qt::SplashScreen));
 #endif
-        splash->show();
-    }
+    splash->show();
+  }
 
-    CMainWindow w;
-    w.show();
+  CMainWindow w;
+  w.show();
 
-    if(nullptr != splash)
-    {
-        splash->finish(&w);
-        delete splash;
-    }
+  if (nullptr != splash) {
+    splash->finish(&w);
+    delete splash;
+  }
 
-    return app.exec();
+  return app.exec();
 }

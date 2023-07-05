@@ -19,21 +19,20 @@
 #ifndef CSELDEVICES_H
 #define CSELDEVICES_H
 
-#include "ui_ISelDevices.h"
 #include <QDialog>
+
+#include "ui_ISelDevices.h"
 
 class QTreeWidget;
 class IGisProject;
 
-class CSelDevices : public QDialog, private Ui::ISelDevices
-{
-    Q_OBJECT
-public:
-    CSelDevices(IGisProject* project, QTreeWidget* wks);
-    virtual ~CSelDevices();
+class CSelDevices : public QDialog, private Ui::ISelDevices {
+  Q_OBJECT
+ public:
+  CSelDevices(IGisProject* project, QTreeWidget* wks);
+  virtual ~CSelDevices();
 
-    void getSlectedDevices(QSet<QString>& keys);
+  void getSlectedDevices(QSet<QString>& keys);
 };
 
-#endif //CSELDEVICES_H
-
+#endif  // CSELDEVICES_H

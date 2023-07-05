@@ -19,9 +19,9 @@
 #ifndef CFITSTREAM_H
 #define CFITSTREAM_H
 
-#include "gis/fit/decoder/CFitDecoder.h"
-
 #include <QtCore>
+
+#include "gis/fit/decoder/CFitDecoder.h"
 
 class CFitMessage;
 
@@ -29,58 +29,55 @@ class CFitMessage;
    Encapsulates the access to the FIT messages. Looping over the read FIT messages can be done using the
    methods nextMesg() and hasMoreMesg() (Iterator pattern).
  */
-class CFitStream final
-{
-public:
-    CFitStream(QFile& dev) : file(dev) { }
+class CFitStream final {
+ public:
+  CFitStream(QFile& dev) : file(dev) {}
 
-    /**
-       decodes fit file provided in constructor
-       throws: QString in case of a decoding failure
-     */
-    void decodeFile();
+  /**
+     decodes fit file provided in constructor
+     throws: QString in case of a decoding failure
+   */
+  void decodeFile();
 
-    /**
-       sets the stream at the beginning (first position).
-     */
-    void reset();
-    /**
-       Get the next FIT message
-       throws: fit::RuntimeException
-     */
-    const CFitMessage& nextMesg();
+  /**
+     sets the stream at the beginning (first position).
+   */
+  void reset();
+  /**
+     Get the next FIT message
+     throws: fit::RuntimeException
+   */
+  const CFitMessage& nextMesg();
 
-    /**
-       return: the last read message again
-     */
-    const CFitMessage& lastMesg() const;
+  /**
+     return: the last read message again
+   */
+  const CFitMessage& lastMesg() const;
 
-    /**
-       return: true if there a further FIT message is available
-     */
-    bool hasMoreMesg() const;
+  /**
+     return: true if there a further FIT message is available
+   */
+  bool hasMoreMesg() const;
 
-    /**
-       return: the next message of the given message type (xx_MESG_NUM) beginning reading at the current position
-     */
-    const CFitMessage& nextMesgOf(quint16 mesgNum);
+  /**
+     return: the next message of the given message type (xx_MESG_NUM) beginning reading at the current position
+   */
+  const CFitMessage& nextMesgOf(quint16 mesgNum);
 
-    /**
-       return: gets the first message of the given type (xx_MESG_NUM) beginning reading at start of stream.
-       Sets the stream to the beginning again.
-     */
-    const CFitMessage& firstMesgOf(quint16 mesgNum);
+  /**
+     return: gets the first message of the given type (xx_MESG_NUM) beginning reading at start of stream.
+     Sets the stream to the beginning again.
+   */
+  const CFitMessage& firstMesgOf(quint16 mesgNum);
 
-    int countMesgOf(quint16 mesgNr);
+  int countMesgOf(quint16 mesgNr);
 
+  QString getFileName() const { return file.fileName(); }
 
-    QString getFileName() const { return file.fileName(); }
-
-private:
-    QFile& file;
-    CFitDecoder decode;
-    int readPos = 0;
+ private:
+  QFile& file;
+  CFitDecoder decode;
+  int readPos = 0;
 };
 
-#endif //CFITSTREAM_H
-
+#endif  // CFITSTREAM_H

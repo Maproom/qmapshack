@@ -16,64 +16,56 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "gis/rte/router/routino/CRouterRoutinoPathSetup.h"
 
 #include <QtWidgets>
 
+#include "CMainWindow.h"
+
 CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList& paths)
-    : QDialog(CMainWindow::getBestWidgetForParent())
-    , paths(paths)
-{
-    setupUi(this);
+    : QDialog(CMainWindow::getBestWidgetForParent()), paths(paths) {
+  setupUi(this);
 
-    connect(toolAdd, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotAddPath);
-    connect(toolDelete, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotDelPath);
-    connect(listWidget, &QListWidget::itemSelectionChanged, this, &CRouterRoutinoPathSetup::slotItemSelectionChanged);
+  connect(toolAdd, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotAddPath);
+  connect(toolDelete, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotDelPath);
+  connect(listWidget, &QListWidget::itemSelectionChanged, this, &CRouterRoutinoPathSetup::slotItemSelectionChanged);
 
-    for(const QString& path : paths)
-    {
-        QListWidgetItem* item = new QListWidgetItem(listWidget);
-        item->setText(path);
-    }
+  for (const QString& path : paths) {
+    QListWidgetItem* item = new QListWidgetItem(listWidget);
+    item->setText(path);
+  }
 
-    labelHelp->setText(tr("Add or remove paths containing Routino data. There can be multiple databases in a path but no sub-path is parsed."));
+  labelHelp->setText(
+      tr("Add or remove paths containing Routino data. There can be multiple databases in a path but no sub-path is "
+         "parsed."));
 }
 
-CRouterRoutinoPathSetup::~CRouterRoutinoPathSetup()
-{
+CRouterRoutinoPathSetup::~CRouterRoutinoPathSetup() {}
+
+void CRouterRoutinoPathSetup::slotItemSelectionChanged() {
+  QList<QListWidgetItem*> items = listWidget->selectedItems();
+  toolDelete->setEnabled(!items.isEmpty());
 }
 
-void CRouterRoutinoPathSetup::slotItemSelectionChanged()
-{
-    QList<QListWidgetItem*> items = listWidget->selectedItems();
-    toolDelete->setEnabled(!items.isEmpty());
+void CRouterRoutinoPathSetup::slotAddPath() {
+  QString path = QFileDialog::getExistingDirectory(this, tr("Select routing data file path..."), QDir::homePath());
+  if (!path.isEmpty()) {
+    QListWidgetItem* item = new QListWidgetItem(listWidget);
+    item->setText(path);
+  }
 }
 
-void CRouterRoutinoPathSetup::slotAddPath()
-{
-    QString path = QFileDialog::getExistingDirectory(this, tr("Select routing data file path..."), QDir::homePath());
-    if(!path.isEmpty())
-    {
-        QListWidgetItem* item = new QListWidgetItem(listWidget);
-        item->setText(path);
-    }
+void CRouterRoutinoPathSetup::slotDelPath() {
+  QList<QListWidgetItem*> items = listWidget->selectedItems();
+  qDeleteAll(items);
 }
 
-void CRouterRoutinoPathSetup::slotDelPath()
-{
-    QList<QListWidgetItem*> items = listWidget->selectedItems();
-    qDeleteAll(items);
-}
+void CRouterRoutinoPathSetup::accept() {
+  paths.clear();
+  for (int i = 0; i < listWidget->count(); i++) {
+    QListWidgetItem* item = listWidget->item(i);
+    paths << item->text();
+  }
 
-void CRouterRoutinoPathSetup::accept()
-{
-    paths.clear();
-    for(int i = 0; i < listWidget->count(); i++)
-    {
-        QListWidgetItem* item = listWidget->item(i);
-        paths << item->text();
-    }
-
-    QDialog::accept();
+  QDialog::accept();
 }

@@ -25,38 +25,37 @@ class CFitDefinitionMessage;
 class CFitBaseType;
 class CFitFieldProfile;
 
+class CFitFieldDefinition final {
+ public:
+  CFitFieldDefinition(CFitDefinitionMessage* parent, CFitFieldProfile* fieldProfile, quint8 defNr, quint8 devDataIdx,
+                      quint8 size, quint8 type);
+  CFitFieldDefinition(CFitDefinitionMessage* parent, quint8 defNr, quint8 size, quint8 type);
+  CFitFieldDefinition();
 
-class CFitFieldDefinition final
-{
-public:
-    CFitFieldDefinition(CFitDefinitionMessage* parent, CFitFieldProfile* fieldProfile, quint8 defNr, quint8 devDataIdx, quint8 size, quint8 type);
-    CFitFieldDefinition(CFitDefinitionMessage* parent, quint8 defNr, quint8 size, quint8 type);
-    CFitFieldDefinition();
+  QString fieldInfo() const;
 
-    QString fieldInfo() const;
+  quint8 getDefNr() const;
+  quint8 getDevDataIdx() const;
+  /// First element in the pair is the devDataIdx, second is the DefNr
+  QPair<quint8, quint8> getDevProfileId() const;
+  quint8 getSize() const;
+  quint8 getType() const;
+  const CFitBaseType& getBaseType() const;
+  bool getEndianAbilityFlag() const;
 
-    quint8 getDefNr() const;
-    quint8 getDevDataIdx() const;
-    /// First element in the pair is the devDataIdx, second is the DefNr
-    QPair<quint8, quint8> getDevProfileId() const;
-    quint8 getSize() const;
-    quint8 getType() const;
-    const CFitBaseType& getBaseType() const;
-    bool getEndianAbilityFlag() const;
+  const CFitDefinitionMessage& parent() const { return *parentDefintion; }
+  const CFitFieldProfile& profile() const { return *fieldProfile; }
 
-    const CFitDefinitionMessage& parent() const { return *parentDefintion; }
-    const CFitFieldProfile& profile() const { return *fieldProfile; }
+  void setParent(CFitDefinitionMessage* parent) { parentDefintion = parent; }
 
-    void setParent(CFitDefinitionMessage* parent) { parentDefintion = parent; }
-
-private:
-    quint8 defNr;
-    quint8 devDataIdx;
-    quint8 size;
-    quint8 type;
-    CFitBaseType* baseType;
-    const CFitDefinitionMessage* parentDefintion;
-    const CFitFieldProfile* fieldProfile;
+ private:
+  quint8 defNr;
+  quint8 devDataIdx;
+  quint8 size;
+  quint8 type;
+  CFitBaseType* baseType;
+  const CFitDefinitionMessage* parentDefintion;
+  const CFitFieldProfile* fieldProfile;
 };
 
-#endif // CFITFIELDDEFINITION_H
+#endif  // CFITFIELDDEFINITION_H

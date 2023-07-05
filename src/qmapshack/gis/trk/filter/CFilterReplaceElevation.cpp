@@ -16,51 +16,44 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "CMainWindow.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 
-CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
-    updateUi();
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterReplaceElevation::slotApply);
-    connect(comboView, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CFilterReplaceElevation::updateUi);
+CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
+  updateUi();
+
+  connect(toolApply, &QToolButton::clicked, this, &CFilterReplaceElevation::slotApply);
+  connect(comboView, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+          &CFilterReplaceElevation::updateUi);
 }
 
-void CFilterReplaceElevation::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+void CFilterReplaceElevation::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
 
-    CCanvas* canvas = comboView->currentData().value<CCanvas*>();
-    if(canvas != nullptr)
-    {
-        trk.filterReplaceElevation(canvas);
-    }
+  CCanvas* canvas = comboView->currentData().value<CCanvas*>();
+  if (canvas != nullptr) {
+    trk.filterReplaceElevation(canvas);
+  }
 }
 
+void CFilterReplaceElevation::updateUi() {
+  comboView->blockSignals(true);
+  QString current = comboView->currentText();
+  comboView->clear();
 
-void CFilterReplaceElevation::updateUi()
-{
-    comboView->blockSignals(true);
-    QString current = comboView->currentText();
-    comboView->clear();
+  const QList<CCanvas*>& list = CMainWindow::self().getCanvas();
+  for (CCanvas* canvas : list) {
+    comboView->addItem(canvas->objectName(), QVariant::fromValue<CCanvas*>(canvas));
+  }
 
-    const QList<CCanvas*>& list = CMainWindow::self().getCanvas();
-    for(CCanvas* canvas : list)
-    {
-        comboView->addItem(canvas->objectName(), QVariant::fromValue<CCanvas*>(canvas));
-    }
+  if (!current.isEmpty()) {
+    comboView->setCurrentIndex(comboView->findText(current));
+  }
 
-    if(!current.isEmpty())
-    {
-        comboView->setCurrentIndex(comboView->findText(current));
-    }
-
-    toolApply->setEnabled(comboView->currentIndex() != NOIDX);
-    comboView->blockSignals(false);
+  toolApply->setEnabled(comboView->currentIndex() != NOIDX);
+  comboView->blockSignals(false);
 }

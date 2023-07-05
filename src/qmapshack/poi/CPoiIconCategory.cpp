@@ -17,14 +17,11 @@
 **********************************************************************************************/
 #include "poi/CPoiIconCategory.h"
 
-QPixmap CPoiIconCategory::getIcon(const QStringList& additionalTags) const
-{
-    for(const QString& tag : additionalTags)
-    {
-        if(subCategories.contains(tag))
-        {
-            return subCategories[tag];
-        }
+QPixmap CPoiIconCategory::getIcon(const QStringList& additionalTags) const {
+  for (const QString& tag : additionalTags) {
+    if (subCategories.contains(tag)) {
+      return subCategories[tag];
     }
-    return baseIcon;
+  }
+  return baseIcon;
 }

@@ -19,8 +19,6 @@
 #ifndef CPOIITEMPOI_H
 #define CPOIITEMPOI_H
 
-#include "gis/IGisItem.h"
-
 #include <QCoreApplication>
 #include <QList>
 #include <QMap>
@@ -28,39 +26,40 @@
 #include <QString>
 #include <QStringList>
 
+#include "gis/IGisItem.h"
+
 struct IPoiItem;
 
-class CPoiItemPOI
-{
-    Q_DECLARE_TR_FUNCTIONS(CPoiItemPOI)
-public:
-    //Dummy constructor for the usage of QMap
-    CPoiItemPOI(){}
-    CPoiItemPOI(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category, const QString& garminIcon);
-    const QString& getCategory() const;
-    const QString& getName(bool replaceEmptyByCategory = true) const;
-    const QPointF& getCoordinates() const;
-    const quint64& getKey() const;
-    const QMap<QString, QString>& getData() const;
-    const QStringList& getRawData() const;
-    QString getDesc() const;
-    QList<IGisItem::link_t> getLinks() const;
-    quint32 getEle() const;
-    IPoiItem toPoi() const;
+class CPoiItemPOI {
+  Q_DECLARE_TR_FUNCTIONS(CPoiItemPOI)
+ public:
+  // Dummy constructor for the usage of QMap
+  CPoiItemPOI() {}
+  CPoiItemPOI(const QStringList& data, const QPointF& coordinates, const quint64& key, const QString& category,
+              const QString& garminIcon);
+  const QString& getCategory() const;
+  const QString& getName(bool replaceEmptyByCategory = true) const;
+  const QPointF& getCoordinates() const;
+  const quint64& getKey() const;
+  const QMap<QString, QString>& getData() const;
+  const QStringList& getRawData() const;
+  QString getDesc() const;
+  QList<IGisItem::link_t> getLinks() const;
+  quint32 getEle() const;
+  IPoiItem toPoi() const;
 
-
-private:
-    QString category;
-    QPointF coordinates; // in radians
-    /// <key, value>
-    QMap<QString, QString> data;
-    QStringList rawData;
-    QStringList wikipediaRelatedKeys;
-    QStringList wikidataRelatedKeys;
-    QStringList nameRelatedKeys;
-    QString garminIcon;
-    quint64 key;
-    QString name;
+ private:
+  QString category;
+  QPointF coordinates;  // in radians
+  /// <key, value>
+  QMap<QString, QString> data;
+  QStringList rawData;
+  QStringList wikipediaRelatedKeys;
+  QStringList wikidataRelatedKeys;
+  QStringList nameRelatedKeys;
+  QString garminIcon;
+  quint64 key;
+  QString name;
 };
 
-#endif // CPOIITEMPOI_H
+#endif  // CPOIITEMPOI_H

@@ -23,19 +23,16 @@
 
 class CCanvas;
 
+class CRtDraw : public IDrawContext {
+ public:
+  CRtDraw(CCanvas* parent);
+  virtual ~CRtDraw() = default;
 
-class CRtDraw : public IDrawContext
-{
-public:
-    CRtDraw(CCanvas* parent);
-    virtual ~CRtDraw() = default;
+  using IDrawContext::draw;
+  void draw(QPainter& p, const QRect& rect);
 
-    using IDrawContext::draw;
-    void draw(QPainter& p, const QRect& rect);
-
-protected:
-    void drawt(buffer_t& currentBuffer) override;
+ protected:
+  void drawt(buffer_t& currentBuffer) override;
 };
 
-#endif //CRTDRAW_H
-
+#endif  // CRTDRAW_H

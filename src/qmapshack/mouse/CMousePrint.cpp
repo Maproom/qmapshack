@@ -16,54 +16,45 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisDraw.h"
-#include "mouse/CMouseAdapter.h"
 #include "mouse/CMousePrint.h"
-#include "mouse/CScrOptPrint.h"
-#include "print/CPrintDialog.h"
 
 #include <QtWidgets>
 
-CMousePrint::CMousePrint(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseSelect(gis, canvas, mouse)
-{
-    cursor = QCursor(QPixmap("://cursors/cursorSave.png"), 0, 0);
+#include "gis/CGisDraw.h"
+#include "mouse/CMouseAdapter.h"
+#include "mouse/CScrOptPrint.h"
+#include "print/CPrintDialog.h"
 
-    canvas->reportStatus("IMouseSelect",
-                         tr(
-                             "<b>Save(Print) Map</b><br/>Select a rectangular area on the map. "
-                             "Use the left mouse button and move the mouse. Abort with a right "
-                             "click. Adjust the selection by point-click-move on the corners.")
-                         );
+CMousePrint::CMousePrint(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse) : IMouseSelect(gis, canvas, mouse) {
+  cursor = QCursor(QPixmap("://cursors/cursorSave.png"), 0, 0);
 
-    CScrOptPrint* scrOptPrint;
-    scrOpt = scrOptPrint = new CScrOptPrint(this);
+  canvas->reportStatus("IMouseSelect", tr("<b>Save(Print) Map</b><br/>Select a rectangular area on the map. "
+                                          "Use the left mouse button and move the mouse. Abort with a right "
+                                          "click. Adjust the selection by point-click-move on the corners."));
 
-    connect(scrOptPrint->toolSave, &QToolButton::clicked, this, &CMousePrint::slotSave);
-    connect(scrOptPrint->toolPrint, &QToolButton::clicked, this, &CMousePrint::slotPrint);
+  CScrOptPrint* scrOptPrint;
+  scrOpt = scrOptPrint = new CScrOptPrint(this);
+
+  connect(scrOptPrint->toolSave, &QToolButton::clicked, this, &CMousePrint::slotSave);
+  connect(scrOptPrint->toolPrint, &QToolButton::clicked, this, &CMousePrint::slotPrint);
 }
 
-CMousePrint::~CMousePrint()
-{
+CMousePrint::~CMousePrint() {}
+
+void CMousePrint::slotSave() {
+  CPrintDialog dlg(CPrintDialog::eTypeImage, rectSelection, canvas);
+  dlg.exec();
+  canvas->resetMouse();
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
+
+  canvas->resetMouse();
 }
 
-void CMousePrint::slotSave()
-{
-    CPrintDialog dlg(CPrintDialog::eTypeImage, rectSelection, canvas);
-    dlg.exec();
-    canvas->resetMouse();
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
+void CMousePrint::slotPrint() {
+  CPrintDialog dlg(CPrintDialog::eTypePrint, rectSelection, canvas);
+  dlg.exec();
+  canvas->resetMouse();
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
 
-    canvas->resetMouse();
+  canvas->resetMouse();
 }
-
-void CMousePrint::slotPrint()
-{
-    CPrintDialog dlg(CPrintDialog::eTypePrint, rectSelection, canvas);
-    dlg.exec();
-    canvas->resetMouse();
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
-
-    canvas->resetMouse();
-}
-

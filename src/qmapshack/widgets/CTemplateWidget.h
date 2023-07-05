@@ -26,27 +26,24 @@
 
 class QGroupBox;
 
-class CTemplateWidget : public QDialog, private Ui::ITemplateWidget
-{
-    Q_OBJECT
-public:
-    CTemplateWidget(QWidget* parent);
-    virtual ~CTemplateWidget() = default;
+class CTemplateWidget : public QDialog, private Ui::ITemplateWidget {
+  Q_OBJECT
+ public:
+  CTemplateWidget(QWidget* parent);
+  virtual ~CTemplateWidget() = default;
 
-    QString text();
+  QString text();
 
-private slots:
-    void slotTemplateActivated(int idx);
-    void slotPreview();
-    void slotSetPath();
+ private slots:
+  void slotTemplateActivated(int idx);
+  void slotPreview();
+  void slotSetPath();
 
-private:
-    void listTemplates();
-    QString resolveGroup(const QGroupBox* group);
+ private:
+  void listTemplates();
+  QString resolveGroup(const QGroupBox* group);
 
-
-    QPointer<QWidget> widget;
+  QPointer<QWidget> widget;
 };
 
-#endif //CTEMPLATEWIDGET_H
-
+#endif  // CTEMPLATEWIDGET_H

@@ -24,34 +24,32 @@
 
 class CItemRefMap;
 
-class CToolGrid : public QWidget, public ITool, private Ui::IToolGrid
-{
-    Q_OBJECT
-public:
-    virtual ~CToolGrid() = default;
+class CToolGrid : public QWidget, public ITool, private Ui::IToolGrid {
+  Q_OBJECT
+ public:
+  virtual ~CToolGrid() = default;
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
-    void mousePressEventFx(QMouseEvent* e) override;
-    void mouseMoveEventFx(QMouseEvent* e) override;
-    void mouseReleaseEventFx(QMouseEvent* e) override;
-    void wheelEventFx(QWheelEvent* e) override;
-    void leaveEventFx(QEvent* e) override;
-    QCursor getCursorFx() override;
+  bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
+  void mousePressEventFx(QMouseEvent* e) override;
+  void mouseMoveEventFx(QMouseEvent* e) override;
+  void mouseReleaseEventFx(QMouseEvent* e) override;
+  void wheelEventFx(QWheelEvent* e) override;
+  void leaveEventFx(QEvent* e) override;
+  QCursor getCursorFx() override;
 
-    void setupChanged() override {}
+  void setupChanged() override {}
 
-    void registerItem(CItemRefMap* item);
+  void registerItem(CItemRefMap* item);
 
-private slots:
-    void slotOk();
-    void slotCancel();
+ private slots:
+  void slotOk();
+  void slotCancel();
 
-private:
-    friend class CMainWindow;
-    CToolGrid(QWidget* parent);
+ private:
+  friend class CMainWindow;
+  CToolGrid(QWidget* parent);
 
-    CItemRefMap* item = nullptr;
+  CItemRefMap* item = nullptr;
 };
 
-#endif //CTOOLGRID_H
-
+#endif  // CTOOLGRID_H

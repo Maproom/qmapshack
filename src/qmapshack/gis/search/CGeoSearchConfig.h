@@ -23,46 +23,38 @@
 
 class QPixmap;
 
-class CGeoSearchConfig : public QObject
-{
-    Q_OBJECT
-public:
-    enum service_e
-    {
-        eServiceNone,
-        eServiceGoogle,
-        eServiceGeonamesSearch,
-        eServiceGeonamesAddress,
-        eServiceNominatim
-    };
-    static CGeoSearchConfig& self(){return *pSelf; }
-    virtual ~CGeoSearchConfig() = default;
+class CGeoSearchConfig : public QObject {
+  Q_OBJECT
+ public:
+  enum service_e { eServiceNone, eServiceGoogle, eServiceGeonamesSearch, eServiceGeonamesAddress, eServiceNominatim };
+  static CGeoSearchConfig& self() { return *pSelf; }
+  virtual ~CGeoSearchConfig() = default;
 
-    void load();
-    void save() const;
+  void load();
+  void save() const;
 
-    const QIcon getCurrentIcon() const;
+  const QIcon getCurrentIcon() const;
 
-signals:
-    void sigConfigChanged();
+ signals:
+  void sigConfigChanged();
 
-private:
-    CGeoSearchConfig(QObject* parent);
-    void emitChanged();
+ private:
+  CGeoSearchConfig(QObject* parent);
+  void emitChanged();
 
-    static CGeoSearchConfig* pSelf;
+  static CGeoSearchConfig* pSelf;
 
-    service_e currentService;
-    QString googleApiKey;
-    QString geonamesUsername;
-    QString nominatimEmail;
-    QString symbolName;
-    int nominatimLimit = 10;
-    bool accumulativeResults = false;
+  service_e currentService;
+  QString googleApiKey;
+  QString geonamesUsername;
+  QString nominatimEmail;
+  QString symbolName;
+  int nominatimLimit = 10;
+  bool accumulativeResults = false;
 
-    friend class CGeoSearchConfigDialog;
-    friend class CGeoSearch;
-    friend class CMainWindow;
+  friend class CGeoSearchConfigDialog;
+  friend class CGeoSearch;
+  friend class CMainWindow;
 };
 
 #endif

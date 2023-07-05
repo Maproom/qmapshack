@@ -19,36 +19,34 @@
 #ifndef CRTGPSTETHER_H
 #define CRTGPSTETHER_H
 
-#include "realtime/IRtSource.h"
-
 #include <QPointer>
+
+#include "realtime/IRtSource.h"
 
 class CRtGpsTetherInfo;
 class QGeoPositionInfoSource;
 class QGeoPositionInfo;
 
-class CRtGpsTether : public IRtSource
-{
-    Q_OBJECT
-public:
-    CRtGpsTether(QTreeWidget* parent);
-    virtual ~CRtGpsTether() = default;
+class CRtGpsTether : public IRtSource {
+  Q_OBJECT
+ public:
+  CRtGpsTether(QTreeWidget* parent);
+  virtual ~CRtGpsTether() = default;
 
-    void registerWithTreeWidget() override;
+  void registerWithTreeWidget() override;
 
-    QString getDescription() const override;
-    void loadSettings(QSettings& cfg) override;
-    void saveSettings(QSettings& cfg) const override;
+  QString getDescription() const override;
+  void loadSettings(QSettings& cfg) override;
+  void saveSettings(QSettings& cfg) const override;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) override;
+  void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) override;
 
-    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) override;
+  void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) override;
 
-    static const QString strIcon;
+  static const QString strIcon;
 
-private:
-    QPointer<CRtGpsTetherInfo> info;
+ private:
+  QPointer<CRtGpsTetherInfo> info;
 };
 
-#endif //CRTGPSTETHER_H
-
+#endif  // CRTGPSTETHER_H

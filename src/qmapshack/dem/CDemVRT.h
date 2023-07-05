@@ -19,49 +19,46 @@
 #ifndef CDEMVRT_H
 #define CDEMVRT_H
 
-#include "dem/IDem.h"
-
 #include <QMutex>
+
+#include "dem/IDem.h"
 
 class CDemDraw;
 class GDALDataset;
 
-class CDemVRT : public IDem
-{
-    Q_OBJECT
-public:
-    CDemVRT(const QString& filename, CDemDraw* parent);
-    virtual ~CDemVRT();
+class CDemVRT : public IDem {
+  Q_OBJECT
+ public:
+  CDemVRT(const QString& filename, CDemDraw* parent);
+  virtual ~CDemVRT();
 
-    void draw(IDrawContext::buffer_t& buf) override;
+  void draw(IDrawContext::buffer_t& buf) override;
 
-    qreal getElevationAt(const QPointF& pos, bool checkScale) override;
-    qreal getSlopeAt(const QPointF& pos, bool checkScale) override;
+  qreal getElevationAt(const QPointF& pos, bool checkScale) override;
+  qreal getSlopeAt(const QPointF& pos, bool checkScale) override;
 
-private:
-    void drawElevationShadeScale(QPainter& p) const;
+ private:
+  void drawElevationShadeScale(QPainter& p) const;
 
-    QMutex mutex;
+  QMutex mutex;
 
-    QString filename;
-    /// instance of GDAL dataset
-    GDALDataset* dataset;
+  QString filename;
+  /// instance of GDAL dataset
+  GDALDataset* dataset;
 
+  QPointF ref1;
+  QPointF ref2;
+  QPointF ref3;
+  QPointF ref4;
 
-    QPointF ref1;
-    QPointF ref2;
-    QPointF ref3;
-    QPointF ref4;
+  QTransform trFwd;
+  QTransform trInv;
 
-    QTransform trFwd;
-    QTransform trInv;
+  bool hasOverviews = false;
 
-    bool hasOverviews = false;
+  QRectF boundingBox;
 
-    QRectF boundingBox;
-
-    bool outOfScale = false;
+  bool outOfScale = false;
 };
 
-#endif //CDEMVRT_H
-
+#endif  // CDEMVRT_H

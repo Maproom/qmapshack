@@ -17,87 +17,74 @@
 **********************************************************************************************/
 
 #include "gis/trk/CCutTrk.h"
-#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
-CCutTrk::CCutTrk(QWidget* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
+#include "helpers/CSettings.h"
 
-    connect(radioKeepFirst, &QRadioButton::toggled, this, &CCutTrk::slotClicked);
-    connect(radioKeepBoth, &QRadioButton::toggled, this, &CCutTrk::slotClicked);
-    connect(radioKeepSecond, &QRadioButton::toggled, this, &CCutTrk::slotClicked);
+CCutTrk::CCutTrk(QWidget* parent) : QDialog(parent) {
+  setupUi(this);
 
-    SETTINGS;
-    cfg.beginGroup("TrackCut");
-    checkCreateClone->setChecked(cfg.value("checkCreateClone", true).toBool());
-    switch(cfg.value("mode", eModeKeepBoth).toInt())
-    {
+  connect(radioKeepFirst, &QRadioButton::toggled, this, &CCutTrk::slotClicked);
+  connect(radioKeepBoth, &QRadioButton::toggled, this, &CCutTrk::slotClicked);
+  connect(radioKeepSecond, &QRadioButton::toggled, this, &CCutTrk::slotClicked);
+
+  SETTINGS;
+  cfg.beginGroup("TrackCut");
+  checkCreateClone->setChecked(cfg.value("checkCreateClone", true).toBool());
+  switch (cfg.value("mode", eModeKeepBoth).toInt()) {
     case eModeKeepFirst:
-        radioKeepFirst->setChecked(true);
-        break;
+      radioKeepFirst->setChecked(true);
+      break;
 
     case eModeKeepBoth:
-        radioKeepBoth->setChecked(true);
-        break;
+      radioKeepBoth->setChecked(true);
+      break;
 
     case eModeKeepSecond:
-        radioKeepSecond->setChecked(true);
-        break;
-    }
+      radioKeepSecond->setChecked(true);
+      break;
+  }
 
-    switch(cfg.value("cutMode", eCutMode2).toInt())
-    {
+  switch (cfg.value("cutMode", eCutMode2).toInt()) {
     case eCutMode1:
-        radioCutMode1->setChecked(true);
-        break;
+      radioCutMode1->setChecked(true);
+      break;
 
     case eCutMode2:
-        radioCutMode2->setChecked(true);
-        break;
-    }
+      radioCutMode2->setChecked(true);
+      break;
+  }
 
-    cfg.endGroup();
+  cfg.endGroup();
 }
 
+void CCutTrk::accept() {
+  SETTINGS;
+  cfg.beginGroup("TrackCut");
+  cfg.setValue("checkCreateClone", checkCreateClone->isChecked());
+  cfg.setValue("mode", radioKeepFirst->isChecked()    ? eModeKeepFirst
+                       : radioKeepBoth->isChecked()   ? eModeKeepBoth
+                       : radioKeepSecond->isChecked() ? eModeKeepSecond
+                                                      : eModeNone);
+  cfg.setValue("cutMode", radioCutMode1->isChecked() ? eCutMode1 : eCutMode2);
+  cfg.endGroup();
 
-void CCutTrk::accept()
-{
-    SETTINGS;
-    cfg.beginGroup("TrackCut");
-    cfg.setValue("checkCreateClone", checkCreateClone->isChecked());
-    cfg.setValue("mode", radioKeepFirst->isChecked() ? eModeKeepFirst : radioKeepBoth->isChecked() ? eModeKeepBoth : radioKeepSecond->isChecked() ? eModeKeepSecond : eModeNone);
-    cfg.setValue("cutMode", radioCutMode1->isChecked() ? eCutMode1 : eCutMode2);
-    cfg.endGroup();
+  if (radioKeepFirst->isChecked()) {
+    mode = eModeKeepFirst;
+  } else if (radioKeepBoth->isChecked()) {
+    mode = eModeKeepBoth;
+  } else if (radioKeepSecond->isChecked()) {
+    mode = eModeKeepSecond;
+  }
 
-    if(radioKeepFirst->isChecked())
-    {
-        mode = eModeKeepFirst;
-    }
-    else if(radioKeepBoth->isChecked())
-    {
-        mode = eModeKeepBoth;
-    }
-    else if(radioKeepSecond->isChecked())
-    {
-        mode = eModeKeepSecond;
-    }
+  if (radioCutMode1->isChecked()) {
+    cutMode = eCutMode1;
+  } else {
+    cutMode = eCutMode2;
+  }
 
-    if(radioCutMode1->isChecked())
-    {
-        cutMode = eCutMode1;
-    }
-    else
-    {
-        cutMode = eCutMode2;
-    }
-
-    QDialog::accept();
+  QDialog::accept();
 }
 
-void CCutTrk::slotClicked()
-{
-    checkCreateClone->setEnabled(!radioKeepBoth->isChecked());
-}
+void CCutTrk::slotClicked() { checkCreateClone->setEnabled(!radioKeepBoth->isChecked()); }

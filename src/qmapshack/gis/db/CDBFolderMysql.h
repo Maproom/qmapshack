@@ -22,40 +22,35 @@
 #include "gis/db/IDBFolderSql.h"
 #include "gis/db/IDBMysql.h"
 
+class CDBFolderMysql : public IDBFolderSql, public IDBMysql {
+  Q_OBJECT
+ public:
+  CDBFolderMysql(const QString& server, const QString& port, const QString& user, const QString& passwd, bool noPasswd,
+                 const QString& name, QTreeWidget* parent);
+  virtual ~CDBFolderMysql() = default;
 
-class CDBFolderMysql : public IDBFolderSql, public IDBMysql
-{
-    Q_OBJECT
-public:
-    CDBFolderMysql(const QString& server, const QString& port, const QString& user, const QString& passwd, bool noPasswd, const QString& name, QTreeWidget* parent);
-    virtual ~CDBFolderMysql() = default;
+  const QString& getServer() const { return server; }
+  const QString& getPort() const { return port; }
+  const QString& getUser() const { return user; }
+  const QString& getPasswd() const { return passwd; }
+  bool hasNoPasswd() const { return noPasswd; }
 
-    const QString& getServer() const {return server; }
-    const QString& getPort() const {return port; }
-    const QString& getUser() const {return user; }
-    const QString& getPasswd() const {return passwd; }
-    bool hasNoPasswd() const
-    {
-        return noPasswd;
-    }
+  QString getDBInfo() const;
 
-    QString getDBInfo() const;
+  bool search(const QString& str, QSqlQuery& query) override;
 
-    bool search(const QString& str, QSqlQuery& query) override;
+  void copyFolder(quint64 child, quint64 parent) override;
 
-    void copyFolder(quint64 child, quint64 parent) override;
+ private slots:
+  void slotDelayedSetup();
 
-private slots:
-    void slotDelayedSetup();
-
-private:
-    const QString server;
-    const QString port;
-    const QString user;
-    const QString passwd;
-    const bool noPasswd;
-    const QString name;
+ private:
+  const QString server;
+  const QString port;
+  const QString user;
+  const QString passwd;
+  const bool noPasswd;
+  const QString name;
 };
 
-#endif //CDBFOLDERMYSQL_H
-
+#endif  // CDBFOLDERMYSQL_H

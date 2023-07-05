@@ -20,66 +20,55 @@
 
 #include <QtWidgets>
 
-CLinksDialog::CLinksDialog(QList<IGisItem::link_t>& links, QWidget* parent)
-    : QDialog(parent)
-    , links(links)
-{
-    setupUi(this);
+CLinksDialog::CLinksDialog(QList<IGisItem::link_t>& links, QWidget* parent) : QDialog(parent), links(links) {
+  setupUi(this);
 
-    connect(toolAdd, &QToolButton::clicked, this, &CLinksDialog::slotAddLink);
-    connect(toolDelete, &QToolButton::clicked, this, &CLinksDialog::slotDelLink);
-    connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CLinksDialog::slotItemSelectionChanged);
+  connect(toolAdd, &QToolButton::clicked, this, &CLinksDialog::slotAddLink);
+  connect(toolDelete, &QToolButton::clicked, this, &CLinksDialog::slotDelLink);
+  connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CLinksDialog::slotItemSelectionChanged);
 
-    for(const IGisItem::link_t& link : links)
-    {
-        QTreeWidgetItem* item = new QTreeWidgetItem(treeWidget);
-        item->setText(0, link.type);
-        item->setText(1, link.text);
-        item->setText(2, link.uri.toString());
-        item->setFlags(item->flags() | Qt::ItemIsEditable);
-    }
-}
-
-CLinksDialog::~CLinksDialog()
-{
-}
-
-void CLinksDialog::slotItemSelectionChanged()
-{
-    QList<QTreeWidgetItem*> items = treeWidget->selectedItems();
-    toolDelete->setEnabled(!items.isEmpty());
-}
-
-void CLinksDialog::slotAddLink()
-{
+  for (const IGisItem::link_t& link : links) {
     QTreeWidgetItem* item = new QTreeWidgetItem(treeWidget);
-    item->setText(0, "");
-    item->setText(1, "enter a text");
-    item->setText(2, "enter a link");
+    item->setText(0, link.type);
+    item->setText(1, link.text);
+    item->setText(2, link.uri.toString());
     item->setFlags(item->flags() | Qt::ItemIsEditable);
+  }
 }
 
-void CLinksDialog::slotDelLink()
-{
-    QList<QTreeWidgetItem*> items = treeWidget->selectedItems();
-    qDeleteAll(items);
+CLinksDialog::~CLinksDialog() {}
+
+void CLinksDialog::slotItemSelectionChanged() {
+  QList<QTreeWidgetItem*> items = treeWidget->selectedItems();
+  toolDelete->setEnabled(!items.isEmpty());
 }
 
-void CLinksDialog::accept()
-{
-    links.clear();
+void CLinksDialog::slotAddLink() {
+  QTreeWidgetItem* item = new QTreeWidgetItem(treeWidget);
+  item->setText(0, "");
+  item->setText(1, "enter a text");
+  item->setText(2, "enter a link");
+  item->setFlags(item->flags() | Qt::ItemIsEditable);
+}
 
-    for(int i = 0; i < treeWidget->topLevelItemCount(); i++)
-    {
-        QTreeWidgetItem* item = treeWidget->topLevelItem(i);
+void CLinksDialog::slotDelLink() {
+  QList<QTreeWidgetItem*> items = treeWidget->selectedItems();
+  qDeleteAll(items);
+}
 
-        IGisItem::link_t link;
-        link.type = item->text(0);
-        link.text = item->text(1);
-        link.uri = item->text(2);
+void CLinksDialog::accept() {
+  links.clear();
 
-        links << link;
-    }
+  for (int i = 0; i < treeWidget->topLevelItemCount(); i++) {
+    QTreeWidgetItem* item = treeWidget->topLevelItem(i);
 
-    QDialog::accept();
+    IGisItem::link_t link;
+    link.type = item->text(0);
+    link.text = item->text(1);
+    link.uri = item->text(2);
+
+    links << link;
+  }
+
+  QDialog::accept();
 }

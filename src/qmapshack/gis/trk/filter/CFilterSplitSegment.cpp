@@ -17,21 +17,18 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
 
-CFilterSplitSegment::CFilterSplitSegment(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterSplitSegment::slotApply);
+CFilterSplitSegment::CFilterSplitSegment(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
+
+  connect(toolApply, &QToolButton::clicked, this, &CFilterSplitSegment::slotApply);
 }
 
-void CFilterSplitSegment::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterSplitSegment();
+void CFilterSplitSegment::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterSplitSegment();
 }

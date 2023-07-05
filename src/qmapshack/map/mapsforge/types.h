@@ -21,42 +21,25 @@
 
 #include <QtCore>
 
-struct uintX
-{
-    uintX() : val(0)
-    {
-    }
-    operator quint64()
-    {
-        return val;
-    }
-    quint64 val;
+struct uintX {
+  uintX() : val(0) {}
+  operator quint64() { return val; }
+  quint64 val;
 };
 
-struct intX
-{
-    intX() : val(0)
-    {
-    }
-    operator qint64()
-    {
-        return val;
-    }
-    qint64 val;
+struct intX {
+  intX() : val(0) {}
+  operator qint64() { return val; }
+  qint64 val;
 };
 
-struct utf8
-{
-    operator QString()
-    {
-        return val;
-    }
-    QString val;
+struct utf8 {
+  operator QString() { return val; }
+  QString val;
 };
 
 extern QDataStream& operator>>(QDataStream& s, uintX& v);
 extern QDataStream& operator>>(QDataStream& s, intX& v);
 extern QDataStream& operator>>(QDataStream& s, utf8& v);
 
-#endif //TYPES_H
-
+#endif  // TYPES_H

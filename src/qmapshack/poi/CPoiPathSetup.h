@@ -21,24 +21,22 @@
 
 #include "ui_IPoiPathSetup.h"
 
-class CPoiPathSetup : public QDialog, private Ui::IPoiPathSetup
-{
-    Q_OBJECT
-public:
-    CPoiPathSetup(QStringList& paths);
-    virtual ~CPoiPathSetup() = default;
+class CPoiPathSetup : public QDialog, private Ui::IPoiPathSetup {
+  Q_OBJECT
+ public:
+  CPoiPathSetup(QStringList& paths);
+  virtual ~CPoiPathSetup() = default;
 
-public slots:
-    void accept() override;
+ public slots:
+  void accept() override;
 
-private slots:
-    void slotAddPath();
-    void slotDelPath();
-    void slotItemSelectionChanged();
+ private slots:
+  void slotAddPath();
+  void slotDelPath();
+  void slotItemSelectionChanged();
 
-private:
-    QStringList& paths;
+ private:
+  QStringList& paths;
 };
 
-#endif //CPOIPATHSETUP_H
-
+#endif  // CPOIPATHSETUP_H

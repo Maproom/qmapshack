@@ -22,26 +22,24 @@
 
 #include "mouse/line/ILineOp.h"
 
-class CLineOpAddPoint : public ILineOp
-{
-public:
-    CLineOpAddPoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
-    virtual ~CLineOpAddPoint();
+class CLineOpAddPoint : public ILineOp {
+ public:
+  CLineOpAddPoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
+  virtual ~CLineOpAddPoint();
 
-    void leftClick(const QPoint& pos) override;
-    void mouseMove(const QPoint& pos) override;
-    void rightButtonDown(const QPoint& pos) override;
+  void leftClick(const QPoint& pos) override;
+  void mouseMove(const QPoint& pos) override;
+  void rightButtonDown(const QPoint& pos) override;
 
-    void drawFg(QPainter& p) override;
+  void drawFg(QPainter& p) override;
 
-    void append();
+  void append();
 
-    bool abortStep() override;
+  bool abortStep() override;
 
-private:
-    bool addPoint = false;
-    bool isPoint = false;
+ private:
+  bool addPoint = false;
+  bool isPoint = false;
 };
 
-#endif //CLINEOPADDPOINT_H
-
+#endif  // CLINEOPADDPOINT_H

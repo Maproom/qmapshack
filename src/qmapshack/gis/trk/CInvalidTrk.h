@@ -23,23 +23,21 @@
 
 class CGisItemTrk;
 
-class CInvalidTrk : public QDialog, private Ui::IInvalidTrk
-{
-    Q_OBJECT
-public:
-    CInvalidTrk(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CInvalidTrk();
+class CInvalidTrk : public QDialog, private Ui::IInvalidTrk {
+  Q_OBJECT
+ public:
+  CInvalidTrk(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CInvalidTrk();
 
-public slots:
-    void accept() override;
+ public slots:
+  void accept() override;
 
-private slots:
-    void slotShowDetails();
-    void slotDoNotAskAgain(bool checked);
+ private slots:
+  void slotShowDetails();
+  void slotDoNotAskAgain(bool checked);
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CINVALIDTRK_H
-
+#endif  // CINVALIDTRK_H

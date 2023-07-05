@@ -17,25 +17,24 @@
 **********************************************************************************************/
 
 #include "poi/CPoiCategory.h"
+
 #include "poi/CPoiPropSetup.h"
 
-CPoiCategory::CPoiCategory(const QString& categoryName, quint64 categoryID, Qt::CheckState checkedState, CPoiCategory* parent)
-    : QTreeWidgetItem(parent), categoryName(categoryName), categoryID(categoryID)
-{
-    setText(CPoiPropSetup::eTreeColumnDisplayName, categoryName);
-    setCheckState(CPoiPropSetup::eTreeColumnCheckbox, checkedState);
-    setFlags(flags() | Qt::ItemIsAutoTristate);
+CPoiCategory::CPoiCategory(const QString& categoryName, quint64 categoryID, Qt::CheckState checkedState,
+                           CPoiCategory* parent)
+    : QTreeWidgetItem(parent), categoryName(categoryName), categoryID(categoryID) {
+  setText(CPoiPropSetup::eTreeColumnDisplayName, categoryName);
+  setCheckState(CPoiPropSetup::eTreeColumnCheckbox, checkedState);
+  setFlags(flags() | Qt::ItemIsAutoTristate);
 }
 
 CPoiCategory::CPoiCategory(const QString& categoryName, quint64 categoryID, QTreeWidget* parent)
-    : QTreeWidgetItem(parent), categoryName(categoryName), categoryID(categoryID)
-{
-    setText(CPoiPropSetup::eTreeColumnDisplayName, categoryName);
-    setCheckState(CPoiPropSetup::eTreeColumnCheckbox, Qt::Unchecked);
-    setFlags(flags() | Qt::ItemIsAutoTristate);
+    : QTreeWidgetItem(parent), categoryName(categoryName), categoryID(categoryID) {
+  setText(CPoiPropSetup::eTreeColumnDisplayName, categoryName);
+  setCheckState(CPoiPropSetup::eTreeColumnCheckbox, Qt::Unchecked);
+  setFlags(flags() | Qt::ItemIsAutoTristate);
 }
 
-Qt::CheckState CPoiCategory::checkState() const
-{
-    return QTreeWidgetItem::checkState(CPoiPropSetup::eTreeColumnCheckbox);
+Qt::CheckState CPoiCategory::checkState() const {
+  return QTreeWidgetItem::checkState(CPoiPropSetup::eTreeColumnCheckbox);
 }

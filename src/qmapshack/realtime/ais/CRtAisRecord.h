@@ -22,18 +22,16 @@
 #include "realtime/IRtRecord.h"
 #include "realtime/ais/CRtAis.h"
 
-class CRtAisRecord : public IRtRecord
-{
-    Q_OBJECT
-public:
-    CRtAisRecord(QObject* parent);
-    virtual ~CRtAisRecord() = default;
+class CRtAisRecord : public IRtRecord {
+  Q_OBJECT
+ public:
+  CRtAisRecord(QObject* parent);
+  virtual ~CRtAisRecord() = default;
 
-    bool writeEntry(const CRtAis::ship_t& ship);
+  bool writeEntry(const CRtAis::ship_t& ship);
 
-protected:
-    using IRtRecord::writeEntry;
+ protected:
+  using IRtRecord::writeEntry;
 };
 
-#endif //CRTAISRECORD_H
-
+#endif  // CRTAISRECORD_H

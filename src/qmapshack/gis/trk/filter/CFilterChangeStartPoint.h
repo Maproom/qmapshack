@@ -18,26 +18,26 @@
 #ifndef CFILTERCHANGESTARTPOINT_H
 #define CFILTERCHANGESTARTPOINT_H
 
-#include "ui_IFilterChangeStartPoint.h"
 #include <QWidget>
+
+#include "ui_IFilterChangeStartPoint.h"
 
 class CGisItemTrk;
 
-class CFilterChangeStartPoint : public QWidget, private Ui::IFilterChangeStartPoint
-{
-    Q_OBJECT
+class CFilterChangeStartPoint : public QWidget, private Ui::IFilterChangeStartPoint {
+  Q_OBJECT
 
-public:
-    CFilterChangeStartPoint(CGisItemTrk& trk, QWidget* parent = 0);
-    virtual ~CFilterChangeStartPoint() = default;
+ public:
+  CFilterChangeStartPoint(CGisItemTrk& trk, QWidget* parent = 0);
+  virtual ~CFilterChangeStartPoint() = default;
 
-    void updateUi();
+  void updateUi();
 
-private slots:
-    void slotApply();
+ private slots:
+  void slotApply();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif // CFILTERCHANGESTARTPOINT_H
+#endif  // CFILTERCHANGESTARTPOINT_H

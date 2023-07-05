@@ -24,31 +24,26 @@
 
 #define WPT_NOFLOAT 1e25f
 
-class IItem
-{
-public:
-    IItem(quint64 id);
-    virtual ~IItem();
+class IItem {
+ public:
+  IItem(quint64 id);
+  virtual ~IItem();
 
-    QString getInfo()
-    {
-        return "no info";
-    }
+  QString getInfo() { return "no info"; }
 
-    quint32 timestamp = 0;
+  quint32 timestamp = 0;
 
-    QString name;
-    QString comment;
-    QString description;
-    QPixmap iconPixmap;
-    QString iconString;
+  QString name;
+  QString comment;
+  QString description;
+  QPixmap iconPixmap;
+  QString iconString;
 
-    QString parentWpt;
+  QString parentWpt;
 
-    QString key;
+  QString key;
 
-    quint64 id;
+  quint64 id;
 };
 
-#endif //IITEM_H
-
+#endif  // IITEM_H

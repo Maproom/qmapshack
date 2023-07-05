@@ -22,105 +22,77 @@
 
 void CPlotAxisTime::calc() /* override */
 {
-    int dSec = usedMax - usedMin;
+  int dSec = usedMax - usedMin;
+  ticStart = usedMin;
+
+  // abort if the xRange has a length of 0
+  if (0 == dSec) {
+    valid = false;
+    return;
+  }
+
+  if (dSec < 0) {
+    qDebug() << "ouch";
+    valid = false;
+    return;
+  } else if (dSec < 20) {
+    interval = 1;
     ticStart = usedMin;
+  } else if (dSec < 100) {
+    interval = 5;
+    ticStart = qCeil(usedMin / interval) * interval;
+  } else if (dSec < 200) {
+    interval = 10;
+    ticStart = qCeil(usedMin / interval) * interval;
+  } else if (dSec < 600) {
+    interval = 30;
+    ticStart = qCeil(usedMin / interval) * interval;
+  } else if (dSec < 1200) {
+    interval = 60;
+    ticStart = qCeil(usedMin / interval) * interval;
+  } else if (dSec < 6000) {
+    interval = 600;
+    ticStart = qCeil(usedMin / interval) * interval;
+  } else if (dSec < 12000) {
+    interval = 600;
+    ticStart = qCeil(usedMin / interval) * interval;
+  } else if (dSec < 36000) {
+    interval = 1800;
+    ticStart = qCeil(usedMin / interval) * interval;
+  } else if (dSec < 72000) {
+    interval = 3600;
+    ticStart = qCeil(usedMin / interval) * interval;
+  } else if (dSec < 216000) {
+    interval = 10800;
+    ticStart = qCeil(usedMin / interval) * interval;
+  } else {
+    qDebug() << "ouch";
+    valid = false;
+    return;
+  }
 
-    // abort if the xRange has a length of 0
-    if(0 == dSec)
-    {
-        valid = false;
-        return;
-    }
+  if (autoscale) {
+    usedMin = qFloor(usedMin / interval) * interval;
+    usedMax = qCeil(usedMax / interval) * interval;
+  }
 
-    if(dSec < 0)
-    {
-        qDebug() << "ouch";
-        valid = false;
-        return;
-    }
-    else if(dSec < 20)
-    {
-        interval = 1;
-        ticStart = usedMin;
-    }
-    else if(dSec < 100)
-    {
-        interval = 5;
-        ticStart = qCeil(usedMin / interval) * interval;
-    }
-    else if(dSec < 200)
-    {
-        interval = 10;
-        ticStart = qCeil(usedMin / interval) * interval;
-    }
-    else if(dSec < 600)
-    {
-        interval = 30;
-        ticStart = qCeil(usedMin / interval) * interval;
-    }
-    else if(dSec < 1200)
-    {
-        interval = 60;
-        ticStart = qCeil(usedMin / interval) * interval;
-    }
-    else if(dSec < 6000)
-    {
-        interval = 600;
-        ticStart = qCeil(usedMin / interval) * interval;
-    }
-    else if(dSec < 12000)
-    {
-        interval = 600;
-        ticStart = qCeil(usedMin / interval) * interval;
-    }
-    else if(dSec < 36000)
-    {
-        interval = 1800;
-        ticStart = qCeil(usedMin / interval) * interval;
-    }
-    else if(dSec < 72000)
-    {
-        interval = 3600;
-        ticStart = qCeil(usedMin / interval) * interval;
-    }
-    else if(dSec < 216000)
-    {
-        interval = 10800;
-        ticStart = qCeil(usedMin / interval) * interval;
-    }
-    else
-    {
-        qDebug() << "ouch";
-        valid = false;
-        return;
-    }
+  int t1 = (int)(usedMin / interval + 0.5);
+  ticStart = interval * t1;
+  if (ticStart < usedMin) {
+    ticStart += interval;
+  }
 
-    if ( autoscale )
-    {
-        usedMin = qFloor( usedMin / interval ) * interval;
-        usedMax = qCeil(  usedMax / interval ) * interval;
-    }
-
-    int t1 = ( int )( usedMin / interval + 0.5);
-    ticStart = interval * t1;
-    if ( ticStart < usedMin )
-    {
-        ticStart += interval;
-    }
-
-    valid = true;
+  valid = true;
 }
 
-
-const CPlotAxis::tic_t* CPlotAxisTime::ticmark( const tic_t* t )  /* override */
+const CPlotAxis::tic_t* CPlotAxisTime::ticmark(const tic_t* t) /* override */
 {
-    const tic_t* _tic_ = CPlotAxis::ticmark(t);
-    if(_tic_)
-    {
-        QDateTime time = QDateTime::fromTime_t(tic.val);
-        time.setTimeSpec(Qt::LocalTime);
-        tic.lbl = time.toString(strFormat);
-    }
+  const tic_t* _tic_ = CPlotAxis::ticmark(t);
+  if (_tic_) {
+    QDateTime time = QDateTime::fromTime_t(tic.val);
+    time.setTimeSpec(Qt::LocalTime);
+    tic.lbl = time.toString(strFormat);
+  }
 
-    return _tic_;
+  return _tic_;
 }

@@ -20,78 +20,80 @@
 #ifndef CMOUSENORMAL_H
 #define CMOUSENORMAL_H
 
-#include "mouse/IMouse.h"
-#include "poi/IPoiItem.h"
-
 #include <QPixmap>
 #include <QPointer>
 #include <QRect>
 #include <QSet>
 #include <QStringList>
 
+#include "mouse/IMouse.h"
+#include "poi/IPoiItem.h"
+
 class CCanvas;
 class IScrOpt;
 class CScrOptUnclutter;
 class QMenu;
 
-class CMouseNormal : public IMouse
-{
-    Q_OBJECT
-public:
-    CMouseNormal(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    virtual ~CMouseNormal();
+class CMouseNormal : public IMouse {
+  Q_OBJECT
+ public:
+  CMouseNormal(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  virtual ~CMouseNormal();
 
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
+  void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
-    void unfocus() override;
-    void leftClicked(const QPoint& point) override;
-    void mouseMoved(const QPoint& pos) override;
-    void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
-    void rightButtonDown(const QPoint& point) override;
-    void longPress(const QPoint& point) override;
-    void doubleClicked(const QPoint& point) override;
-    void scaleChanged() override;
+  void unfocus() override;
+  void leftClicked(const QPoint& point) override;
+  void mouseMoved(const QPoint& pos) override;
+  void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
+  void rightButtonDown(const QPoint& point) override;
+  void longPress(const QPoint& point) override;
+  void doubleClicked(const QPoint& point) override;
+  void scaleChanged() override;
 
-private slots:
-    void slotAddPoi(const IPoiItem& poi)           const;
-    void slotAddWpt()           const;
-    void slotAddTrk()           const;
-    void slotAddRte()           const;
-    void slotAddArea()          const;
-    void slotRuler()            const;
-    void slotSelectArea()       const;
-    void slotCopyPosition()     const;
-    void slotCopyPositionGrid() const;
+ private slots:
+  void slotAddPoi(const IPoiItem& poi) const;
+  void slotAddWpt() const;
+  void slotAddTrk() const;
+  void slotAddRte() const;
+  void slotAddArea() const;
+  void slotRuler() const;
+  void slotSelectArea() const;
+  void slotCopyPosition() const;
+  void slotCopyPositionGrid() const;
 
-private:
-    bool setScreenOption(const QPoint& pt, IGisItem* item);
-    void scrollToItem(IGisItem* item);
-    void showContextMenu(const QPoint& point);
+ private:
+  bool setScreenOption(const QPoint& pt, IGisItem* item);
+  void scrollToItem(IGisItem* item);
+  void showContextMenu(const QPoint& point);
 
-protected:
-    void stopTracking() const;
-    void resetState();
+ protected:
+  void stopTracking() const;
+  void resetState();
 
-    enum item_selection_states_e
-    {
-        eStateIdle = 0
-        , eStateHooverSingle      = 1 //< there is only a single item close to the cursor
-        , eStateHooverMultiple    = 2 //< there are multiple items close to the cursor
-        , eStateNoMapMovePossible = 3 //< not a real state, but at this value and above no map move is allowed to take place
-        , eStateUnclutterMultiple = 3 //< the user clicked on multiple cluttered items and gets now an uncluttered representation
-        , eStateShowItemOptions   = 4 //< the user has selected a single item, show options how to proceed
-    };
+  enum item_selection_states_e {
+    eStateIdle = 0,
+    eStateHooverSingle = 1  //< there is only a single item close to the cursor
+    ,
+    eStateHooverMultiple = 2  //< there are multiple items close to the cursor
+    ,
+    eStateNoMapMovePossible = 3  //< not a real state, but at this value and above no map move is allowed to take place
+    ,
+    eStateUnclutterMultiple =
+        3  //< the user clicked on multiple cluttered items and gets now an uncluttered representation
+    ,
+    eStateShowItemOptions = 4  //< the user has selected a single item, show options how to proceed
+  };
 
-    item_selection_states_e stateItemSel = eStateIdle;
+  item_selection_states_e stateItemSel = eStateIdle;
 
-    CScrOptUnclutter* screenUnclutter;
-    QPointer<IScrOpt>  screenItemOption;
+  CScrOptUnclutter* screenUnclutter;
+  QPointer<IScrOpt> screenItemOption;
 
-    QSet<IPoiItem> curPois;
-    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
-    /// Thus the location where to draw the highlight is separately given
-    QList<QPointF> posPoiHighlight;
+  QSet<IPoiItem> curPois;
+  /// The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+  ///  Thus the location where to draw the highlight is separately given
+  QList<QPointF> posPoiHighlight;
 };
 
-#endif //CMOUSENORMAL_H
-
+#endif  // CMOUSENORMAL_H

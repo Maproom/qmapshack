@@ -22,18 +22,16 @@
 #include "gis/trk/CTrackData.h"
 #include "realtime/IRtRecord.h"
 
-class CRtGpsTetherRecord : public IRtRecord
-{
-    Q_OBJECT
-public:
-    CRtGpsTetherRecord(QObject* parent);
-    virtual ~CRtGpsTetherRecord() = default;
+class CRtGpsTetherRecord : public IRtRecord {
+  Q_OBJECT
+ public:
+  CRtGpsTetherRecord(QObject* parent);
+  virtual ~CRtGpsTetherRecord() = default;
 
-    bool writeEntry(qreal lon, qreal lat, qreal ele, qreal speed, const QDateTime& timestamp);
+  bool writeEntry(qreal lon, qreal lat, qreal ele, qreal speed, const QDateTime& timestamp);
 
-protected:
-    using IRtRecord::writeEntry;
+ protected:
+  using IRtRecord::writeEntry;
 };
 
-#endif //CRTGPSTETHERRECORD_H
-
+#endif  // CRTGPSTETHERRECORD_H

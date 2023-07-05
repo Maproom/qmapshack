@@ -17,19 +17,15 @@
 **********************************************************************************************/
 
 #include "mouse/CScrOptSemaphoreLocker.h"
-#include "mouse/IScrOpt.h"
 
 #include <QDebug>
 
-CScrOptSemaphoreLocker::CScrOptSemaphoreLocker(IScrOpt& scropt)
-    : scropt(scropt)
-{
-    Q_ASSERT_X(scropt.semaphore.available(), "semaphore", "You try to acquire the on-screen option semaphore that is already acquired.");
-    scropt.semaphore.acquire(1);
+#include "mouse/IScrOpt.h"
+
+CScrOptSemaphoreLocker::CScrOptSemaphoreLocker(IScrOpt& scropt) : scropt(scropt) {
+  Q_ASSERT_X(scropt.semaphore.available(), "semaphore",
+             "You try to acquire the on-screen option semaphore that is already acquired.");
+  scropt.semaphore.acquire(1);
 }
 
-
-CScrOptSemaphoreLocker::~CScrOptSemaphoreLocker()
-{
-    scropt.semaphore.release(1);
-}
+CScrOptSemaphoreLocker::~CScrOptSemaphoreLocker() { scropt.semaphore.release(1); }

@@ -32,93 +32,91 @@ class CRouterBRouterTilesStatus;
 class CRouterBRouterSetup;
 class QWebEnginePage;
 
-class CRouterBRouterTilesSelect : public QWidget
-{
-    Q_OBJECT
-public:
-    CRouterBRouterTilesSelect(QWidget* parent);
-    virtual ~CRouterBRouterTilesSelect();
+class CRouterBRouterTilesSelect : public QWidget {
+  Q_OBJECT
+ public:
+  CRouterBRouterTilesSelect(QWidget* parent);
+  virtual ~CRouterBRouterTilesSelect();
 
-    void setSetup(CRouterBRouterSetup* setup);
-    void initialize();
-    void cancelDownload() const;
+  void setSetup(CRouterBRouterSetup* setup);
+  void initialize();
+  void cancelDownload() const;
 
-    static QString formatSize(const qint64 size);
-    static QPoint tileFromFileName(const QString& fileName);
-    static QString fileNameFromTile(const QPoint tile);
+  static QString formatSize(const qint64 size);
+  static QPoint tileFromFileName(const QString& fileName);
+  static QString fileNameFromTile(const QPoint tile);
 
-    bool isInitialized() const { return initialized; }
-    bool isDownloading() const { return downloading; }
-    bool isDownloadSelected() const { return downloadSelected; }
+  bool isInitialized() const { return initialized; }
+  bool isDownloading() const { return downloading; }
+  bool isDownloadSelected() const { return downloadSelected; }
 
-    static const QPoint noTile;
-    static const int minTileLat;
-    static const int maxTileLat;
-    static const int minTileLon;
-    static const int maxTileLon;
-    static const int tileSize;
-    static const QString patternTileName;
-    static const QString patternDate;
-    static const QString patternSize;
-    static const QRegExp regExpTileName;
-    static const QRegExp regExpDate;
-    static const QRegExp regExpSize;
-    static const QString formatDate;
-    static const QLocale localeDate;
+  static const QPoint noTile;
+  static const int minTileLat;
+  static const int maxTileLat;
+  static const int minTileLon;
+  static const int maxTileLon;
+  static const int tileSize;
+  static const QString patternTileName;
+  static const QString patternDate;
+  static const QString patternSize;
+  static const QRegExp regExpTileName;
+  static const QRegExp regExpDate;
+  static const QRegExp regExpSize;
+  static const QString formatDate;
+  static const QLocale localeDate;
 
-signals:
-    void sigCompleteChanged();
+ signals:
+  void sigCompleteChanged();
 
-private slots:
-    void slotTileClicked(const QPoint& tile);
-    void slotTileToolTipChanged(const QPoint& tile) const;
-    void slotClearSelection();
-    void slotDeleteSelected();
-    void slotSelectOutdated();
-    void slotDownload();
-    void slotLoadOnlineTilesRequestFinished(bool ok);
-    void slotDownloadFinished(QNetworkReply* reply);
-    void slotDownloadReadReady();
+ private slots:
+  void slotTileClicked(const QPoint& tile);
+  void slotTileToolTipChanged(const QPoint& tile) const;
+  void slotClearSelection();
+  void slotDeleteSelected();
+  void slotSelectOutdated();
+  void slotDownload();
+  void slotLoadOnlineTilesRequestFinished(bool ok);
+  void slotDownloadFinished(QNetworkReply* reply);
+  void slotDownloadReadReady();
 
-private:
-    QDir segmentsDir() const;
-    void update();
-    void updateStatus();
-    void updateButtons() const;
-    void updateTiles() const;
-    void afterSlotLoadOnlineTilesRequestFinishedRunJavascript(const QVariant& v);
-    void error(const QString& error) const;
-    void segmentsError(const QString& msg) const;
-    void clearError() const;
+ private:
+  QDir segmentsDir() const;
+  void update();
+  void updateStatus();
+  void updateButtons() const;
+  void updateTiles() const;
+  void afterSlotLoadOnlineTilesRequestFinishedRunJavascript(const QVariant& v);
+  void error(const QString& error) const;
+  void segmentsError(const QString& msg) const;
+  void clearError() const;
 
-    CRouterBRouterTilesStatus* getTileStatus(QPoint tile) const;
+  CRouterBRouterTilesStatus* getTileStatus(QPoint tile) const;
 
-    CRouterBRouterSetup* setup;
+  CRouterBRouterSetup* setup;
 
-    QVBoxLayout* outerLayout;
-    QWidget* widgetSelect;
-    QLabel* statusLabel;
-    QProgressBar* statusProgress;
-    QLabel* errorLabel;
+  QVBoxLayout* outerLayout;
+  QWidget* widgetSelect;
+  QLabel* statusLabel;
+  QProgressBar* statusProgress;
+  QLabel* errorLabel;
 
-    QPushButton* pushSelectOutdated;
-    QPushButton* pushClearSelection;
-    QPushButton* pushDeleteSelection;
-    QPushButton* pushDownload;
+  QPushButton* pushSelectOutdated;
+  QPushButton* pushClearSelection;
+  QPushButton* pushDeleteSelection;
+  QPushButton* pushDownload;
 
-    CRouterBRouterTilesSelectArea* selectArea;
+  CRouterBRouterTilesSelectArea* selectArea;
 
-    QWebEnginePage* tilesWebPage;
+  QWebEnginePage* tilesWebPage;
 
-    QNetworkAccessManager* tilesDownloadManager;
-    QVector<QNetworkReply*> tilesDownloadManagerReplies;
+  QNetworkAccessManager* tilesDownloadManager;
+  QVector<QNetworkReply*> tilesDownloadManagerReplies;
 
-    QHash<QString, CRouterBRouterTilesStatus*> tilesDownloadStatus;
+  QHash<QString, CRouterBRouterTilesStatus*> tilesDownloadStatus;
 
-    bool downloading { false };
-    bool downloadSelected { false };
-    bool initialized { false };
+  bool downloading{false};
+  bool downloadSelected{false};
+  bool initialized{false};
 };
 
-#endif //CROUTERBROUTERTILESSELECT_H
-
+#endif  // CROUTERBROUTERTILESSELECT_H

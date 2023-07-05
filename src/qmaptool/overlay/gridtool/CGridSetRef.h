@@ -23,64 +23,45 @@
 
 class QSettings;
 
-class CGridSetRef : public QWidget, private Ui::IGridSetRef
-{
-    Q_OBJECT
-public:
-    CGridSetRef(QWidget* parent);
-    virtual ~CGridSetRef() = default;
+class CGridSetRef : public QWidget, private Ui::IGridSetRef {
+  Q_OBJECT
+ public:
+  CGridSetRef(QWidget* parent);
+  virtual ~CGridSetRef() = default;
 
-    void saveSettings(QSettings& cfg);
-    void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings& cfg);
+  void loadSettings(QSettings& cfg);
 
-    bool isOk();
+  bool isOk();
 
-    QString getProjection() const
-    {
-        return lineGridProj->text();
+  QString getProjection() const { return lineGridProj->text(); }
+
+  qreal getEasting() const { return lineEasting->text().toDouble(); }
+
+  qreal getNorthing() const { return lineNorthing->text().toDouble(); }
+
+  qreal getHorizSpacing() const { return lineHorizSpacing->text().toDouble(); }
+
+  qreal getVertSpacing() const { return lineVertSpacing->text().toDouble(); }
+
+ signals:
+  void sigChanged();
+
+ public slots:
+  void slotReset();
+
+ private slots:
+  void slotSetupGridProj();
+
+ private:
+  template <typename T>
+  void markWidget(T* w, bool isOk) {
+    QPalette pal = T(this).palette();
+    if (!isOk) {
+      pal.setColor(QPalette::Base, 0xffffaa7f);
     }
-
-    qreal getEasting() const
-    {
-        return lineEasting->text().toDouble();
-    }
-
-    qreal getNorthing() const
-    {
-        return lineNorthing->text().toDouble();
-    }
-
-    qreal getHorizSpacing() const
-    {
-        return lineHorizSpacing->text().toDouble();
-    }
-
-    qreal getVertSpacing() const
-    {
-        return lineVertSpacing->text().toDouble();
-    }
-
-signals:
-    void sigChanged();
-
-public slots:
-    void slotReset();
-
-private slots:
-    void slotSetupGridProj();
-
-private:
-    template<typename T>
-    void markWidget(T* w, bool isOk)
-    {
-        QPalette pal = T(this).palette();
-        if(!isOk)
-        {
-            pal.setColor(QPalette::Base, 0xffffaa7f);
-        }
-        w->setPalette(pal);
-    }
+    w->setPalette(pal);
+  }
 };
 
-#endif //CGRIDSETREF_H
-
+#endif  // CGRIDSETREF_H

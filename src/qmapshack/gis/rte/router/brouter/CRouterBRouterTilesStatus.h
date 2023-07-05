@@ -23,35 +23,32 @@
 #include <QFile>
 #include <QObject>
 
-class CRouterBRouterTilesStatus : public QObject
-{
-    Q_OBJECT
-public:
-    CRouterBRouterTilesStatus(QObject* parent) : QObject(parent) {}
-    virtual ~CRouterBRouterTilesStatus() {}
+class CRouterBRouterTilesStatus : public QObject {
+  Q_OBJECT
+ public:
+  CRouterBRouterTilesStatus(QObject* parent) : QObject(parent) {}
+  virtual ~CRouterBRouterTilesStatus() {}
 
-public slots:
-    void slotUpdateProgress(qint64 received, qint64 total)
-    {
-        progressMax = total;
-        progressVal = received;
-    }
+ public slots:
+  void slotUpdateProgress(qint64 received, qint64 total) {
+    progressMax = total;
+    progressVal = received;
+  }
 
-private:
-    qint64 progressMax;
-    qint64 progressVal;
-    qint64 remoteSize;
-    qint64 localSize;
-    QDateTime remoteDate;
-    QDateTime localDate;
-    bool isLocal {false};
-    bool isRemote {false};
-    bool isSelected {false};
-    bool isOutdated {false};
-    QFile* file {nullptr};
+ private:
+  qint64 progressMax;
+  qint64 progressVal;
+  qint64 remoteSize;
+  qint64 localSize;
+  QDateTime remoteDate;
+  QDateTime localDate;
+  bool isLocal{false};
+  bool isRemote{false};
+  bool isSelected{false};
+  bool isOutdated{false};
+  QFile* file{nullptr};
 
-    friend class CRouterBRouterTilesSelect;
+  friend class CRouterBRouterTilesSelect;
 };
 
-#endif //CROUTERBROUTERTILESSTATUS_H
-
+#endif  // CROUTERBROUTERTILESSTATUS_H

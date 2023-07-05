@@ -19,24 +19,23 @@
 #ifndef CFILTERINVALID_H
 #define CFILTERINVALID_H
 
-#include "ui_IFilterInvalid.h"
 #include <QWidget>
+
+#include "ui_IFilterInvalid.h"
 
 class CGisItemTrk;
 
-class CFilterInvalid : public QWidget, private Ui::IFilterInvalid
-{
-    Q_OBJECT
-public:
-    CFilterInvalid(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterInvalid() = default;
+class CFilterInvalid : public QWidget, private Ui::IFilterInvalid {
+  Q_OBJECT
+ public:
+  CFilterInvalid(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterInvalid() = default;
 
-private slots:
-    void slotApply();
+ private slots:
+  void slotApply();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif // CFILTERINVALID_H
-
+#endif  // CFILTERINVALID_H

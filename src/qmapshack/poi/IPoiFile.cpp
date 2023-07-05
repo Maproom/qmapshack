@@ -16,37 +16,34 @@
 
 **********************************************************************************************/
 
+#include "poi/IPoiFile.h"
+
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiPropSetup.h"
-#include "poi/IPoiFile.h"
 
 constexpr int iconsize = 22;
 
 QSize IPoiFile::_iconSize = {iconsize, iconsize};
 QImage IPoiFile::_iconHighlight;
 
-void IPoiFile::init()
-{
-    // default sizes are for iconsize 22.
-    qreal sx = qreal(_iconSize.width()) * 42.0 / 22.0;
-    qreal sy = qreal(_iconSize.height()) * 42.0 / 22.0;
-    _iconHighlight = QImage("://cursors/poiHighlightRed.png").scaled(sx, sy, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+void IPoiFile::init() {
+  // default sizes are for iconsize 22.
+  qreal sx = qreal(_iconSize.width()) * 42.0 / 22.0;
+  qreal sy = qreal(_iconSize.height()) * 42.0 / 22.0;
+  _iconHighlight =
+      QImage("://cursors/poiHighlightRed.png").scaled(sx, sy, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
 IPoiFile::IPoiFile(CPoiDraw* parent)
-    : IDrawObject(parent)
-    , poi(parent)
+    : IDrawObject(parent),
+      poi(parent)
 
-{
+{}
+
+IPoiProp* IPoiFile::getSetup() {
+  if (setup.isNull()) {
+    setup = new CPoiPropSetup(this, poi);
+  }
+
+  return setup;
 }
-
-IPoiProp* IPoiFile::getSetup()
-{
-    if(setup.isNull())
-    {
-        setup = new CPoiPropSetup(this, poi);
-    }
-
-    return setup;
-}
-

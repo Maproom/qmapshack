@@ -20,25 +20,24 @@
 
 #include "IGarminStrTbl.h"
 
-class CGarminStrTbl6 : public IGarminStrTbl
-{
-public:
-    CGarminStrTbl6(const quint16 codepage, const quint8 mask, QObject* parent);
-    virtual ~CGarminStrTbl6();
+class CGarminStrTbl6 : public IGarminStrTbl {
+ public:
+  CGarminStrTbl6(const quint16 codepage, const quint8 mask, QObject* parent);
+  virtual ~CGarminStrTbl6();
 
-    void get(CFileExt& file, quint32 offset, type_e t, QStringList& info) override;
+  void get(CFileExt& file, quint32 offset, type_e t, QStringList& info) override;
 
-private:
-    static const char str6tbl1[];
-    static const char str6tbl2[];
-    static const char str6tbl3[];
+ private:
+  static const char str6tbl1[];
+  static const char str6tbl2[];
+  static const char str6tbl3[];
 
-    void fill();
-    /// temp shift reg buffer
-    quint32 reg = 0;
-    /// bits in buffer
-    quint32 bits = 0;
-    /// pointer to current data;
-    const quint8* p = nullptr;
+  void fill();
+  /// temp shift reg buffer
+  quint32 reg = 0;
+  /// bits in buffer
+  quint32 bits = 0;
+  /// pointer to current data;
+  const quint8* p = nullptr;
 };
-#endif                           //CGARMINSTRTBL6_H
+#endif  // CGARMINSTRTBL6_H

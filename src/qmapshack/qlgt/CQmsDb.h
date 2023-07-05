@@ -19,9 +19,10 @@
 #ifndef CQMSDB_H
 #define CQMSDB_H
 
-#include "gis/db/IDBSqlite.h"
 #include <QMap>
 #include <QObject>
+
+#include "gis/db/IDBSqlite.h"
 
 class CImportDatabase;
 class IGisItem;
@@ -31,39 +32,35 @@ class CQlgtTrack;
 class CQlgtRoute;
 class IQlgtOverlay;
 
-class CQmsDb : public QObject, private IDBSqlite
-{
-    Q_DECLARE_TR_FUNCTIONS(CQmsDb)
-public:
-    CQmsDb(const QString& filename, CImportDatabase* parent);
-    virtual ~CQmsDb();
+class CQmsDb : public QObject, private IDBSqlite {
+  Q_DECLARE_TR_FUNCTIONS(CQmsDb)
+ public:
+  CQmsDb(const QString& filename, CImportDatabase* parent);
+  virtual ~CQmsDb();
 
-    void addFolder2FolderRelation(quint64 parent, quint64 child);
-    void addFolder2ItemRelation(quint64 parent, quint64 child);
+  void addFolder2FolderRelation(quint64 parent, quint64 child);
+  void addFolder2ItemRelation(quint64 parent, quint64 child);
 
-    void addFolder(CQlgtFolder& folder);
-    void addWpt(CQlgtWpt& wpt1);
-    void addTrk(CQlgtTrack& trk1);
-    void addTrk(IQlgtOverlay& trk1);
-    void addRte(CQlgtRoute& rte1);
-    void addArea(IQlgtOverlay& ovl1);
+  void addFolder(CQlgtFolder& folder);
+  void addWpt(CQlgtWpt& wpt1);
+  void addTrk(CQlgtTrack& trk1);
+  void addTrk(IQlgtOverlay& trk1);
+  void addRte(CQlgtRoute& rte1);
+  void addArea(IQlgtOverlay& ovl1);
 
-    bool isValid()
-    {
-        return valid;
-    }
-private:
-    bool valid;
+  bool isValid() { return valid; }
 
-    quint64 store(IGisItem& item);
+ private:
+  bool valid;
 
-    CImportDatabase* gui;
+  quint64 store(IGisItem& item);
 
-    QMap<int, int> mapFolderTypes;
+  CImportDatabase* gui;
 
-    QMap<quint64, quint64> mapFolderIDs;
-    QMap<quint64, quint64> mapItemIDs;
+  QMap<int, int> mapFolderTypes;
+
+  QMap<quint64, quint64> mapFolderIDs;
+  QMap<quint64, quint64> mapItemIDs;
 };
 
-#endif //CQMSDB_H
-
+#endif  // CQMSDB_H

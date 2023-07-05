@@ -19,34 +19,33 @@
 #ifndef CEXPORTDATABASE_H
 #define CEXPORTDATABASE_H
 
-#include <QDialog>
-#include <QThread>
 #include <ui_IExportDatabase.h>
 
+#include <QDialog>
+#include <QThread>
 
 class CExportDatabaseThread;
+class QSqlDatabase;
 
-class CExportDatabase : public QDialog, private Ui::IExportDatabase
-{
-    Q_OBJECT
-public:
-    CExportDatabase(quint64 id, QSqlDatabase& db, QWidget* parent);
-    virtual ~CExportDatabase();
+class CExportDatabase : public QDialog, private Ui::IExportDatabase {
+  Q_OBJECT
+ public:
+  CExportDatabase(quint64 id, QSqlDatabase& db, QWidget* parent);
+  virtual ~CExportDatabase();
 
-protected:
-    void closeEvent(QCloseEvent* e) override;
+ protected:
+  void closeEvent(QCloseEvent* e) override;
 
-private slots:
-    void slotStdout(const QString& str);
-    void slotStderr(const QString& str);
-    void slotSetPath();
-    void slotStart();
-    void slotStarted();
-    void slotFinished();
+ private slots:
+  void slotStdout(const QString& str);
+  void slotStderr(const QString& str);
+  void slotSetPath();
+  void slotStart();
+  void slotStarted();
+  void slotFinished();
 
-private:
-    CExportDatabaseThread* thread;
+ private:
+  CExportDatabaseThread* thread;
 };
 
-#endif //CEXPORTDATABASE_H
-
+#endif  // CEXPORTDATABASE_H

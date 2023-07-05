@@ -19,10 +19,10 @@
 #ifndef IDBFOLDER_H
 #define IDBFOLDER_H
 
-#include "gis/prj/IGisProject.h"
-
 #include <QSqlDatabase>
 #include <QTreeWidgetItem>
+
+#include "gis/prj/IGisProject.h"
 
 class QSqlDatabase;
 class CEvtW2DAckInfo;
@@ -32,201 +32,186 @@ class CDBItem;
 /**
  * @brief Baseclass for all folders in the database view
  */
-class IDBFolder : public QTreeWidgetItem
-{
-public:
-    enum type_e
-    {
-        eTypeLostFound = 1
-        , eTypeDatabase = 2
-        , eTypeGroup    = 3
-        , eTypeProject  = 4
-        , eTypeOther    = 5
-    };
+class IDBFolder : public QTreeWidgetItem {
+ public:
+  enum type_e { eTypeLostFound = 1, eTypeDatabase = 2, eTypeGroup = 3, eTypeProject = 4, eTypeOther = 5 };
 
-    IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem* parent);
-    IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget* parent);
-    virtual ~IDBFolder();
+  IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem* parent);
+  IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget* parent);
+  virtual ~IDBFolder();
 
-    /**
-     * @brief Get the 64bit database key
-     * @return
-     */
-    quint64 getId() const
-    {
-        return id;
-    }
-    QString getDBName() const;
-    QString getDBHost() const;
+  /**
+   * @brief Get the 64bit database key
+   * @return
+   */
+  quint64 getId() const { return id; }
+  QString getDBName() const;
+  QString getDBHost() const;
 
-    QSqlDatabase& getDb(){return db; }
+  QSqlDatabase& getDb() { return db; }
 
-    QString getName() const;
-    void setName(const QString& name);
+  QString getName() const;
+  void setName(const QString& name);
 
-    /**
-     * @brief Get the database folder that folder is stored in
-     *
-     * @return On success a pointer to the item holding the database is returned.
-     */
-    IDBFolderSql* getDBFolder();
+  /**
+   * @brief Get the database folder that folder is stored in
+   *
+   * @return On success a pointer to the item holding the database is returned.
+   */
+  IDBFolderSql* getDBFolder();
 
-    /**
-     * @brief Search and get access to a subfolder
-     * @param idFolder  the database key of the folder
-     * @return On success a pointer to the item is returned. Else 0.
-     */
-    IDBFolder* getFolder(quint64 idFolder);
+  /**
+   * @brief Search and get access to a subfolder
+   * @param idFolder  the database key of the folder
+   * @return On success a pointer to the item is returned. Else 0.
+   */
+  IDBFolder* getFolder(quint64 idFolder);
 
-    /**
-     * @brief Add a new folder to the database and the treewidget.
-     *
-     * This will call addFolderToDb() and createFolderByType()
-     *
-     * @param type      the type of the new folder
-     * @param name      the name of the new folder
-     * @return The 64bit database key of the new folder. 0 on failure.
-     */
-    virtual quint64 addFolder(type_e type, const QString& name);
-    /**
-     * @brief Add children from database
-     */
-    virtual void expanding();
-    /**
-     * @brief Update item all child items from database
-     *
-     * The event has a list of active items. The item list is created from
-     * scratch and the check state is updated by that list
-     *
-     * @param info  The event object posted by the workspace
-     */
-    virtual void update(CEvtW2DAckInfo* info);
+  /**
+   * @brief Add a new folder to the database and the treewidget.
+   *
+   * This will call addFolderToDb() and createFolderByType()
+   *
+   * @param type      the type of the new folder
+   * @param name      the name of the new folder
+   * @return The 64bit database key of the new folder. 0 on failure.
+   */
+  virtual quint64 addFolder(type_e type, const QString& name);
+  /**
+   * @brief Add children from database
+   */
+  virtual void expanding();
+  /**
+   * @brief Update item all child items from database
+   *
+   * The event has a list of active items. The item list is created from
+   * scratch and the check state is updated by that list
+   *
+   * @param info  The event object posted by the workspace
+   */
+  virtual void update(CEvtW2DAckInfo* info);
 
-    /**
-     * @brief Update from database
-     *
-     * The database might have been changed by other users. Update list of folders
-     * and update each folder expanded. Rebuild list of items.
-     */
-    virtual bool update();
+  /**
+   * @brief Update from database
+   *
+   * The database might have been changed by other users. Update list of folders
+   * and update each folder expanded. Rebuild list of items.
+   */
+  virtual bool update();
 
-    /**
-     * @brief Toggle check state of project and post event to workspace.
-     */
-    virtual void toggle();
-    /**
-     * @brief Remove folder from database and post event to workspace
-     */
-    virtual void remove();
+  /**
+   * @brief Toggle check state of project and post event to workspace.
+   */
+  virtual void toggle();
+  /**
+   * @brief Remove folder from database and post event to workspace
+   */
+  virtual void remove();
 
-    /**
-     * @brief Create a new folder entry into the database table
-     *
-     * The folder will be attached to it's parent folder
-     *
-     * @param type          the type of the new folder
-     * @param name          the name of the new folder
-     * @param idParent      the 64bit database key of the parent
-     * @param db            the database to work on
-     * @return The 64bit database key of the new folder. 0 on failure.
-     */
-    static quint64 addFolderToDb(type_e type, const QString& name, quint64 idParent, QSqlDatabase& db);
+  /**
+   * @brief Create a new folder entry into the database table
+   *
+   * The folder will be attached to it's parent folder
+   *
+   * @param type          the type of the new folder
+   * @param name          the name of the new folder
+   * @param idParent      the 64bit database key of the parent
+   * @param db            the database to work on
+   * @return The 64bit database key of the new folder. 0 on failure.
+   */
+  static quint64 addFolderToDb(type_e type, const QString& name, quint64 idParent, QSqlDatabase& db);
 
-    /**
-     * @brief Create a new treeWidgetItem from a folder in the database
-     *
-     * @param db        the database the item belongs to
-     * @param type      the folder type to create
-     * @param id        the database key of the folder
-     * @param parent    the items parent item
-     * @return A pointer to the new treewidgetitem.
-     */
-    static IDBFolder* createFolderByType(QSqlDatabase& db, int type, quint64 id, QTreeWidgetItem* parent);
+  /**
+   * @brief Create a new treeWidgetItem from a folder in the database
+   *
+   * @param db        the database the item belongs to
+   * @param type      the folder type to create
+   * @param id        the database key of the folder
+   * @param parent    the items parent item
+   * @return A pointer to the new treewidgetitem.
+   */
+  static IDBFolder* createFolderByType(QSqlDatabase& db, int type, quint64 id, QTreeWidgetItem* parent);
 
-    /**
-       @brief Get name extended by parent folders and database name
+  /**
+     @brief Get name extended by parent folders and database name
 
-       @param dbName    the connection name of the database
-       @param id        the folder ID
-       @return          The name can be empty if the has been a failure
-     */
-    static QString getNameEx(const QString& dbName, quint64 id);
+     @param dbName    the connection name of the database
+     @param id        the folder ID
+     @return          The name can be empty if the has been a failure
+   */
+  static QString getNameEx(const QString& dbName, quint64 id);
 
-    bool operator<(const QTreeWidgetItem& other) const override;
+  bool operator<(const QTreeWidgetItem& other) const override;
 
-    void updateItemsOnWks();
+  void updateItemsOnWks();
 
-    /**
-       @brief Do a database search.
+  /**
+     @brief Do a database search.
 
-       This must be overridden by the database folder classes. As a result the query will
-       contain a list of item IDs.
+     This must be overridden by the database folder classes. As a result the query will
+     contain a list of item IDs.
 
-       @param str       The string to search for
-       @param query     The sql query item to use
-     */
-    virtual bool search(const QString& /*str*/, QSqlQuery& /*query*/)
-    {
-        return false;
-    }
+     @param str       The string to search for
+     @param query     The sql query item to use
+   */
+  virtual bool search(const QString& /*str*/, QSqlQuery& /*query*/) { return false; }
 
-    bool isSiblingFrom(IDBFolder* folder) const;
+  bool isSiblingFrom(IDBFolder* folder) const;
 
-    void exportToGpx();
+  void exportToGpx();
 
-protected:
-    /**
-       @brief Setup all item properties
+ protected:
+  /**
+     @brief Setup all item properties
 
-       This will read the database to setup the name, key and tooltip. Additionally it
-       will query for child elements (folders, gis items) and set the expand indicator
-       accordingly. If the folder is loadable the checkbox has to be displayed and the
-       workspace has to be queried for the folder.
+     This will read the database to setup the name, key and tooltip. Additionally it
+     will query for child elements (folders, gis items) and set the expand indicator
+     accordingly. If the folder is loadable the checkbox has to be displayed and the
+     workspace has to be queried for the folder.
 
-     */
-    virtual void setupFromDB();
+   */
+  virtual void setupFromDB();
 
-    /**
-       @brief Add child items like folders, tracks, routes, waypoints and overlays
+  /**
+     @brief Add child items like folders, tracks, routes, waypoints and overlays
 
-       The checkbox of active items will be set checked.
+     The checkbox of active items will be set checked.
 
-       @param activeChildren    a set of item keys that are active on the workspace
-       @param showFolders       true to add child folders to folder
-       @param showItems         true to add child items to folder
-     */
-    virtual void addChildren(const QSet<QString>& activeChildren, bool showFolders, bool showItems);
+     @param activeChildren    a set of item keys that are active on the workspace
+     @param showFolders       true to add child folders to folder
+     @param showItems         true to add child items to folder
+   */
+  virtual void addChildren(const QSet<QString>& activeChildren, bool showFolders, bool showItems);
 
-    /**
-       @brief Remove a folder to folder relation
+  /**
+     @brief Remove a folder to folder relation
 
-       If the folder has no other relation the folder's relation to it's children is removed, too.
+     If the folder has no other relation the folder's relation to it's children is removed, too.
 
-       @param idParent      the 64bit database key of the parent folder
-       @param idFolder      the 64bit database key of the child folder to be removed
-     */
-    virtual void remove(quint64 idParent, quint64 idFolder);
+     @param idParent      the 64bit database key of the parent folder
+     @param idFolder      the 64bit database key of the child folder to be removed
+   */
+  virtual void remove(quint64 idParent, quint64 idFolder);
 
-    void setChildIndicator();
+  void setChildIndicator();
 
-    void addItemsSorted(QList<CDBItem*>& items);
-    void sortItems(QList<CDBItem*>& items) const;
+  void addItemsSorted(QList<CDBItem*>& items);
+  void sortItems(QList<CDBItem*>& items) const;
 
-    bool showItems() const;
-    bool showCheckBoxes() const;
-    bool showLostFound() const;
+  bool showItems() const;
+  bool showCheckBoxes() const;
+  bool showLostFound() const;
 
-    bool getBoolProperty(const char* name, bool defaultValue) const;
+  bool getBoolProperty(const char* name, bool defaultValue) const;
 
-    static QString getNameEx(QSqlDatabase& db, quint64 id, const QString& name);
+  static QString getNameEx(QSqlDatabase& db, quint64 id, const QString& name);
 
-    QSqlDatabase& db;
+  QSqlDatabase& db;
 
-    quint64 id;
-    QString key;
-    quint32 sortMode = IGisProject::eSortFolderTime;
-    bool isLoadable;
+  quint64 id;
+  QString key;
+  quint32 sortMode = IGisProject::eSortFolderTime;
+  bool isLoadable;
 };
 
-#endif //IDBFOLDER_H
-
+#endif  // IDBFOLDER_H

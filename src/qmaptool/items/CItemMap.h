@@ -19,36 +19,31 @@
 #ifndef CITEMMAP_H
 #define CITEMMAP_H
 
+#include <QTreeWidgetItem>
+
 #include "helpers/CGdalFile.h"
 #include "items/IItem.h"
-
-#include <QTreeWidgetItem>
 
 class GDALDataset;
 class CItemMapLayer;
 
-class CItemMap : public CGdalFile, public IItem, public QTreeWidgetItem
-{
-public:
-    CItemMap(const QString& filename);
-    virtual ~CItemMap();
+class CItemMap : public CGdalFile, public IItem, public QTreeWidgetItem {
+ public:
+  CItemMap(const QString& filename);
+  virtual ~CItemMap();
 
-    void setupChanged() override {}
+  void setupChanged() override {}
 
-    QPointF getScale() const;
+  QPointF getScale() const;
 
-    const QString& getHash() const
-    {
-        return hash;
-    }
+  const QString& getHash() const { return hash; }
 
-    void reload() override;
+  void reload() override;
 
-    void drawBoundingBox(QPainter& p, IDrawContext* dc);
+  void drawBoundingBox(QPainter& p, IDrawContext* dc);
 
-private:
-    QString hash;
+ private:
+  QString hash;
 };
 
-#endif //CITEMMAP_H
-
+#endif  // CITEMMAP_H

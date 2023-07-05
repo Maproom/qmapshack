@@ -18,41 +18,46 @@
 
 #include "CCommandProcessor.h"
 
-#include <iostream>
 #include <QApplication>
 #include <QCommandLineParser>
+#include <iostream>
 
+CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
+  QCommandLineParser parser;
+  QCommandLineOption helpOption = parser.addHelpOption();  // h help
 
-CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments)
-{
-    QCommandLineParser parser;
-    QCommandLineOption helpOption = parser.addHelpOption(); // h help
+  QCommandLineOption debugOption(QStringList() << "d"
+                                               << "debug",
+                                 tr("Print debug output to console."));
+  parser.addOption(debugOption);
 
-    QCommandLineOption debugOption(QStringList() << "d" << "debug", tr("Print debug output to console."));
-    parser.addOption(debugOption);
+  QCommandLineOption logfileOption(QStringList() << "f"
+                                                 << "logfile",
+                                   tr("Print debug output to logfile (temp. path)."));
+  parser.addOption(logfileOption);
 
-    QCommandLineOption logfileOption(QStringList() << "f" << "logfile", tr("Print debug output to logfile (temp. path)."));
-    parser.addOption(logfileOption);
+  QCommandLineOption nosplashOption(QStringList() << "n"
+                                                  << "no-splash",
+                                    tr("Do not show splash screen."));
+  parser.addOption(nosplashOption);
 
-    QCommandLineOption nosplashOption(QStringList() << "n" << "no-splash", tr("Do not show splash screen."));
-    parser.addOption(nosplashOption);
+  QCommandLineOption configOption(QStringList() << "c"
+                                                << "config",
+                                  tr("File with QMapShack configuration."), tr("file"));
+  parser.addOption(configOption);
 
-    QCommandLineOption configOption(QStringList() << "c" << "config", tr("File with QMapShack configuration."), tr("file"));
-    parser.addOption(configOption);
+  parser.addPositionalArgument("files", tr("Files for future use."));
 
-    parser.addPositionalArgument("files", tr("Files for future use."));
+  if (!parser.parse(arguments)) {
+    std::cerr << parser.errorText().toUtf8().constData();
+    std::cerr << parser.helpText().toUtf8().constData();
+    exit(1);
+  }
+  if (parser.isSet(helpOption)) {
+    std::cout << parser.helpText().toUtf8().constData();
+    exit(0);
+  }
 
-    if (!parser.parse(arguments))
-    {
-        std::cerr << parser.errorText().toUtf8().constData();
-        std::cerr << parser.helpText().toUtf8().constData();
-        exit(1);
-    }
-    if (parser.isSet(helpOption))
-    {
-        std::cout << parser.helpText().toUtf8().constData();
-        exit(0);
-    }
-
-    return new CAppOpts(parser.isSet(debugOption), parser.isSet(logfileOption), parser.isSet(nosplashOption), parser.value(configOption), parser.positionalArguments());
+  return new CAppOpts(parser.isSet(debugOption), parser.isSet(logfileOption), parser.isSet(nosplashOption),
+                      parser.value(configOption), parser.positionalArguments());
 }

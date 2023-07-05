@@ -16,22 +16,22 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterInvalid.h"
 
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
+
 CFilterInvalid::CFilterInvalid(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
+    : QWidget(parent),
+      trk(trk)
 
 {
-    setupUi(this);
+  setupUi(this);
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterInvalid::slotApply);
+  connect(toolApply, &QToolButton::clicked, this, &CFilterInvalid::slotApply);
 }
 
-void CFilterInvalid::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterRemoveInvalidPoints();
+void CFilterInvalid::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterRemoveInvalidPoints();
 }

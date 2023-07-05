@@ -22,29 +22,16 @@
 
 #include "mouse/IMouse.h"
 
+class CMouseDummy : public IMouse {
+ public:
+  CMouseDummy();
+  virtual ~CMouseDummy();
 
-class CMouseDummy : public IMouse
-{
-public:
-    CMouseDummy();
-    virtual ~CMouseDummy();
-
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override
-    {
-    }
-    void leftClicked(const QPoint& point) override
-    {
-    }
-    void mouseMoved(const QPoint& pos) override
-    {
-    }
-    void leftButtonDown(const QPoint& pos) override
-    {
-    }
-    void scaleChanged() override
-    {
-    }
+  void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override {}
+  void leftClicked(const QPoint& point) override {}
+  void mouseMoved(const QPoint& pos) override {}
+  void leftButtonDown(const QPoint& pos) override {}
+  void scaleChanged() override {}
 };
 
-#endif //CMOUSEDUMMY_H
-
+#endif  // CMOUSEDUMMY_H

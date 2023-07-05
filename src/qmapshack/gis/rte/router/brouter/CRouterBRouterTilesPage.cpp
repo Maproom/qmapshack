@@ -16,79 +16,60 @@
 
 **********************************************************************************************/
 
-#include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterTilesPage.h"
-#include "gis/rte/router/brouter/CRouterBRouterTilesSelect.h"
+
 #include <QMessageBox>
 #include <QVBoxLayout>
 
-CRouterBRouterTilesPage::CRouterBRouterTilesPage()
-    : QWizardPage()
-{
-    layout = new QVBoxLayout(this);
-    setLayout(layout);
-    widgetLocalTilesSelect = new CRouterBRouterTilesSelect(this);
-    widgetLocalTilesSelect->setObjectName("widgetLocalTilesSelect");
-    QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-    sizePolicy.setHorizontalStretch(0);
-    sizePolicy.setVerticalStretch(0);
-    sizePolicy.setHeightForWidth(widgetLocalTilesSelect->sizePolicy().hasHeightForWidth());
-    widgetLocalTilesSelect->setSizePolicy(sizePolicy);
-    layout->addWidget(widgetLocalTilesSelect);
-    connect(widgetLocalTilesSelect, &CRouterBRouterTilesSelect::sigCompleteChanged, this, &CRouterBRouterTilesPage::slotTileDownloadStatusChanged);
+#include "gis/rte/router/brouter/CRouterBRouterSetup.h"
+#include "gis/rte/router/brouter/CRouterBRouterTilesSelect.h"
+
+CRouterBRouterTilesPage::CRouterBRouterTilesPage() : QWizardPage() {
+  layout = new QVBoxLayout(this);
+  setLayout(layout);
+  widgetLocalTilesSelect = new CRouterBRouterTilesSelect(this);
+  widgetLocalTilesSelect->setObjectName("widgetLocalTilesSelect");
+  QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+  sizePolicy.setHorizontalStretch(0);
+  sizePolicy.setVerticalStretch(0);
+  sizePolicy.setHeightForWidth(widgetLocalTilesSelect->sizePolicy().hasHeightForWidth());
+  widgetLocalTilesSelect->setSizePolicy(sizePolicy);
+  layout->addWidget(widgetLocalTilesSelect);
+  connect(widgetLocalTilesSelect, &CRouterBRouterTilesSelect::sigCompleteChanged, this,
+          &CRouterBRouterTilesPage::slotTileDownloadStatusChanged);
 }
 
-CRouterBRouterTilesPage::~CRouterBRouterTilesPage()
-{
+CRouterBRouterTilesPage::~CRouterBRouterTilesPage() {}
+
+bool CRouterBRouterTilesPage::isComplete() const {
+  return widgetLocalTilesSelect->isInitialized() &&
+         !(widgetLocalTilesSelect->isDownloading() || widgetLocalTilesSelect->isDownloadSelected());
 }
 
-bool CRouterBRouterTilesPage::isComplete() const
-{
-    return widgetLocalTilesSelect->isInitialized() && !(widgetLocalTilesSelect->isDownloading() || widgetLocalTilesSelect->isDownloadSelected());
-}
+void CRouterBRouterTilesPage::slotTileDownloadStatusChanged() { emit completeChanged(); }
 
-void CRouterBRouterTilesPage::slotTileDownloadStatusChanged()
-{
-    emit completeChanged();
-}
+void CRouterBRouterTilesPage::beginPage() const { widgetLocalTilesSelect->initialize(); }
 
-void CRouterBRouterTilesPage::beginPage() const
-{
-    widgetLocalTilesSelect->initialize();
-}
+void CRouterBRouterTilesPage::setSetup(CRouterBRouterSetup* setup) const { widgetLocalTilesSelect->setSetup(setup); }
 
-void CRouterBRouterTilesPage::setSetup(CRouterBRouterSetup* setup) const
-{
-    widgetLocalTilesSelect->setSetup(setup);
-}
-
-bool CRouterBRouterTilesPage::raiseWarning() const
-{
-    QMessageBox msgBox;
-    msgBox.setIcon(QMessageBox::Warning);
-    if (widgetLocalTilesSelect->isDownloading())
-    {
-        msgBox.setText("Download of routing data is in progress.");
-    }
-    else if (widgetLocalTilesSelect->isDownloadSelected())
-    {
-        msgBox.setText("You did not yet download the selected routing data.");
-    }
-    else
-    {
-        return false;
-    }
-    msgBox.setInformativeText("Do you want to cancel or continue with setup");
-    msgBox.setStandardButtons(QMessageBox::Cancel);
-    QPushButton* continueButton = msgBox.addButton(tr("Continue with Setup"), QMessageBox::NoRole);
-    msgBox.exec();
-    if (msgBox.clickedButton() == continueButton)
-    {
-        return true;
-    }
-    else
-    {
-        widgetLocalTilesSelect->cancelDownload();
-        return false;
-    }
+bool CRouterBRouterTilesPage::raiseWarning() const {
+  QMessageBox msgBox;
+  msgBox.setIcon(QMessageBox::Warning);
+  if (widgetLocalTilesSelect->isDownloading()) {
+    msgBox.setText("Download of routing data is in progress.");
+  } else if (widgetLocalTilesSelect->isDownloadSelected()) {
+    msgBox.setText("You did not yet download the selected routing data.");
+  } else {
+    return false;
+  }
+  msgBox.setInformativeText("Do you want to cancel or continue with setup");
+  msgBox.setStandardButtons(QMessageBox::Cancel);
+  QPushButton* continueButton = msgBox.addButton(tr("Continue with Setup"), QMessageBox::NoRole);
+  msgBox.exec();
+  if (msgBox.clickedButton() == continueButton) {
+    return true;
+  } else {
+    widgetLocalTilesSelect->cancelDownload();
+    return false;
+  }
 }

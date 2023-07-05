@@ -20,159 +20,133 @@
 
 #include <QtWidgets>
 
-IToolShell::IToolShell(QWidget* parent)
-    : QWidget(parent)
-{
-    connect(&cmd, &QProcess::readyReadStandardError, this, &IToolShell::slotStderr);
-    connect(&cmd, &QProcess::readyReadStandardOutput, this, &IToolShell::slotStdout);
+IToolShell::IToolShell(QWidget* parent) : QWidget(parent) {
+  connect(&cmd, &QProcess::readyReadStandardError, this, &IToolShell::slotStderr);
+  connect(&cmd, &QProcess::readyReadStandardOutput, this, &IToolShell::slotStdout);
 
-    connect(&cmd, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &IToolShell::slotFinished);
-    connect(&cmd, &QProcess::errorOccurred, this, &IToolShell::slotError);
+  connect(&cmd, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this,
+          &IToolShell::slotFinished);
+  connect(&cmd, &QProcess::errorOccurred, this, &IToolShell::slotError);
 }
 
-IToolShell::~IToolShell()
-{
-    text = nullptr;
-}
+IToolShell::~IToolShell() { text = nullptr; }
 
-
-void IToolShell::slotError(QProcess::ProcessError error)
-{
-    if (text.isNull())
-    {
-        return;
-    }
-    text->setTextColor(Qt::red);
-    text->insertPlainText(QString(tr("Execution of external program `%1` failed: ")).arg(cmd.program()));
-    switch(error)
-    {
+void IToolShell::slotError(QProcess::ProcessError error) {
+  if (text.isNull()) {
+    return;
+  }
+  text->setTextColor(Qt::red);
+  text->insertPlainText(QString(tr("Execution of external program `%1` failed: ")).arg(cmd.program()));
+  switch (error) {
     case QProcess::FailedToStart:
-        text->insertPlainText(QString(tr("Process cannot be started.\n")));
-        text->insertPlainText(QString(tr("Make sure the required packages are installed, `%1` exists and is executable.\n")).arg(cmd.program()));
-        break;
+      text->insertPlainText(QString(tr("Process cannot be started.\n")));
+      text->insertPlainText(
+          QString(tr("Make sure the required packages are installed, `%1` exists and is executable.\n"))
+              .arg(cmd.program()));
+      break;
 
     case QProcess::Crashed:
-        text->insertPlainText(QString(tr("External process crashed.\n")));
-        break;
+      text->insertPlainText(QString(tr("External process crashed.\n")));
+      break;
 
     default:
-        text->insertPlainText(QString(tr("An unknown error occurred.\n")));
-        break;
-    }
+      text->insertPlainText(QString(tr("An unknown error occurred.\n")));
+      break;
+  }
 }
 
-void IToolShell::slotStderr()
-{
-    if (text.isNull())
+void IToolShell::slotStderr() {
+  if (text.isNull()) {
+    return;
+  }
+
+  QString str;
+  text->setTextColor(Qt::red);
+  str = cmd.readAllStandardError();
+
+  if (str[0] == '\r') {
+#ifdef Q_OS_WIN64
+    if (str.contains("\n")) {
+      text->insertPlainText("\n");
+    } else
+#endif  // Q_OS_WIN64
     {
-        return;
+      text->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
+      text->moveCursor(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
+      text->moveCursor(QTextCursor::End, QTextCursor::KeepAnchor);
+      text->textCursor().removeSelectedText();
     }
 
-    QString str;
-    text->setTextColor(Qt::red);
-    str = cmd.readAllStandardError();
-
-    if(str[0] == '\r')
-    {
 #ifdef Q_OS_WIN64
-        if(str.contains("\n"))
-        {
-            text->insertPlainText("\n");
-        }
-        else
-#endif // Q_OS_WIN64
-        {
-            text->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
-            text->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
-            text->moveCursor( QTextCursor::End, QTextCursor::KeepAnchor );
-            text->textCursor().removeSelectedText();
-        }
-
-
-#ifdef Q_OS_WIN64
-        str = str.split("\r").last().remove("\r").remove("\n");
+    str = str.split("\r").last().remove("\r").remove("\n");
 #else
-        str = str.split("\r").last();
+    str = str.split("\r").last();
 #endif
-    }
+  }
 
-    text->insertPlainText(str);
-    text->verticalScrollBar()->setValue(text->verticalScrollBar()->maximum());
+  text->insertPlainText(str);
+  text->verticalScrollBar()->setValue(text->verticalScrollBar()->maximum());
 }
 
-void IToolShell::slotStdout()
-{
-    if (text.isNull())
+void IToolShell::slotStdout() {
+  if (text.isNull()) {
+    return;
+  }
+
+  QString str;
+  text->setTextColor(Qt::blue);
+  str = cmd.readAllStandardOutput();
+
+  if (str[0] == '\r') {
+#ifdef Q_OS_WIN64
+    if (str.contains("\n")) {
+      text->insertPlainText("\n");
+    } else
+#endif  // Q_OS_WIN64
     {
-        return;
+      text->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
+      text->moveCursor(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
+      text->moveCursor(QTextCursor::End, QTextCursor::KeepAnchor);
+      text->textCursor().removeSelectedText();
     }
 
-    QString str;
-    text->setTextColor(Qt::blue);
-    str = cmd.readAllStandardOutput();
-
-    if(str[0] == '\r')
-    {
 #ifdef Q_OS_WIN64
-        if(str.contains("\n"))
-        {
-            text->insertPlainText("\n");
-        }
-        else
-#endif // Q_OS_WIN64
-        {
-            text->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
-            text->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
-            text->moveCursor( QTextCursor::End, QTextCursor::KeepAnchor );
-            text->textCursor().removeSelectedText();
-        }
-
-#ifdef Q_OS_WIN64
-        str = str.split("\r").last().remove("\r").remove("\n");
+    str = str.split("\r").last().remove("\r").remove("\n");
 #else
-        str = str.split("\r").last();
+    str = str.split("\r").last();
 #endif
-    }
+  }
 
-    text->insertPlainText(str);
-    text->verticalScrollBar()->setValue(text->verticalScrollBar()->maximum());
+  text->insertPlainText(str);
+  text->verticalScrollBar()->setValue(text->verticalScrollBar()->maximum());
 }
 
-void IToolShell::stdOut(const QString& str)
-{
-    if (text.isNull())
-    {
-        return;
-    }
+void IToolShell::stdOut(const QString& str) {
+  if (text.isNull()) {
+    return;
+  }
 
-    text->setTextColor(Qt::black);
-    text->append(str);
+  text->setTextColor(Qt::black);
+  text->append(str);
 }
 
+void IToolShell::stdErr(const QString& str) {
+  if (text.isNull()) {
+    return;
+  }
 
-void IToolShell::stdErr(const QString& str)
-{
-    if (text.isNull())
-    {
-        return;
-    }
-
-    text->setTextColor(Qt::red);
-    text->append(str);
+  text->setTextColor(Qt::red);
+  text->append(str);
 }
 
-
-void IToolShell::slotFinished(int exitCode, QProcess::ExitStatus status)
-{
-    if(exitCode || status)
-    {
-        if (!text.isNull())
-        {
-            text->setTextColor(Qt::red);
-            text->append(tr("!!! failed !!!\n"));
-        }
-        return;
+void IToolShell::slotFinished(int exitCode, QProcess::ExitStatus status) {
+  if (exitCode || status) {
+    if (!text.isNull()) {
+      text->setTextColor(Qt::red);
+      text->append(tr("!!! failed !!!\n"));
     }
+    return;
+  }
 
-    finished(exitCode, status);
+  finished(exitCode, status);
 }

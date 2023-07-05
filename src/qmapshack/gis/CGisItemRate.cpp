@@ -17,94 +17,74 @@
 **********************************************************************************************/
 
 #include "gis/CGisItemRate.h"
-#include "gis/IGisItem.h"
-#include "misc.h"
 
 #include <QtGui>
 
+#include "misc.h"
 
-CGisItemRate::CGisItemRate(QWidget* parent, const QSet<QString>& commonKeywords, qreal rating) :
-    QDialog(parent),
-    commonKeywords(commonKeywords),
-    rating(rating)
-{
-    setupUi(this);
+CGisItemRate::CGisItemRate(QWidget* parent, const QSet<QString>& commonKeywords, qreal rating)
+    : QDialog(parent), commonKeywords(commonKeywords), rating(rating) {
+  setupUi(this);
 
-    QStringList stringList = QStringList(commonKeywords.values());
-    std::sort(stringList.begin(), stringList.end(), sortByString);
-    keywordPlainTextEdit->setPlainText(stringList.join(", "));
+  QStringList stringList = QStringList(commonKeywords.values());
+  std::sort(stringList.begin(), stringList.end(), sortByString);
+  keywordPlainTextEdit->setPlainText(stringList.join(", "));
 
-    pushButtonR1->setFixedSize(32, 32);
-    pushButtonR2->setFixedSize(32, 32);
-    pushButtonR3->setFixedSize(32, 32);
-    pushButtonR4->setFixedSize(32, 32);
-    pushButtonR5->setFixedSize(32, 32);
+  pushButtonR1->setFixedSize(32, 32);
+  pushButtonR2->setFixedSize(32, 32);
+  pushButtonR3->setFixedSize(32, 32);
+  pushButtonR4->setFixedSize(32, 32);
+  pushButtonR5->setFixedSize(32, 32);
 
-    connect(pushButtonR1, &QPushButton::clicked, this, [this] { ratingLabelClicked(1); });
-    connect(pushButtonR2, &QPushButton::clicked, this, [this] { ratingLabelClicked(2); });
-    connect(pushButtonR3, &QPushButton::clicked, this, [this] { ratingLabelClicked(3); });
-    connect(pushButtonR4, &QPushButton::clicked, this, [this] { ratingLabelClicked(4); });
-    connect(pushButtonR5, &QPushButton::clicked, this, [this] { ratingLabelClicked(5); });
+  connect(pushButtonR1, &QPushButton::clicked, this, [this] { ratingLabelClicked(1); });
+  connect(pushButtonR2, &QPushButton::clicked, this, [this] { ratingLabelClicked(2); });
+  connect(pushButtonR3, &QPushButton::clicked, this, [this] { ratingLabelClicked(3); });
+  connect(pushButtonR4, &QPushButton::clicked, this, [this] { ratingLabelClicked(4); });
+  connect(pushButtonR5, &QPushButton::clicked, this, [this] { ratingLabelClicked(5); });
 
-    updateStars();
+  updateStars();
 }
 
-CGisItemRate::~CGisItemRate()
-{
+CGisItemRate::~CGisItemRate() {}
+
+qreal CGisItemRate::getRating() { return rating; }
+
+bool CGisItemRate::getRatingChanged() { return ratingChanged; }
+
+QSet<QString> CGisItemRate::getKeywords() const {
+  const QList<QString>& keywords = keywordPlainTextEdit->toPlainText().split(QRegExp("\\s*,\\s*"), Qt::SkipEmptyParts);
+  return {keywords.begin(), keywords.end()};
 }
 
-qreal CGisItemRate::getRating()
-{
-    return rating;
+QSet<QString> CGisItemRate::getAddedKeywords() const {
+  QSet<QString> keywords = getKeywords();
+  return keywords.subtract(commonKeywords);
 }
 
-bool CGisItemRate::getRatingChanged()
-{
-    return ratingChanged;
+QSet<QString> CGisItemRate::getRemovedKeywords() const {
+  QSet<QString> keywords = getKeywords();
+  // Copy-construct the common keywords to keep things clean
+  QSet<QString> removedKeywords = QSet<QString>(commonKeywords).subtract(keywords);
+  return removedKeywords;
 }
 
-QSet<QString> CGisItemRate::getKeywords() const
-{
-    const QList<QString>& keywords = keywordPlainTextEdit->toPlainText().split(QRegExp("\\s*,\\s*"), Qt::SkipEmptyParts);
-    return {keywords.begin(), keywords.end()};
+void CGisItemRate::ratingLabelClicked(int labelNumber) {
+  ratingChanged = true;
+
+  // Comparing like this since one is a floating point and one an integer
+  if (rating > labelNumber || rating < labelNumber) {
+    rating = labelNumber;
+  } else {
+    // The icon is already a star, if you click it again, the star goes away
+    rating = labelNumber - 1;
+  }
+  updateStars();
 }
 
-QSet<QString> CGisItemRate::getAddedKeywords() const
-{
-    QSet<QString> keywords = getKeywords();
-    return keywords.subtract(commonKeywords);
-}
-
-QSet<QString> CGisItemRate::getRemovedKeywords() const
-{
-    QSet<QString> keywords = getKeywords();
-    //Copy-construct the common keywords to keep things clean
-    QSet<QString> removedKeywords = QSet<QString>(commonKeywords).subtract(keywords);
-    return removedKeywords;
-}
-
-void CGisItemRate::ratingLabelClicked(int labelNumber)
-{
-    ratingChanged = true;
-
-    //Comparing like this since one is a floating point and one an integer
-    if(rating > labelNumber || rating < labelNumber)
-    {
-        rating = labelNumber;
-    }
-    else
-    {
-        //The icon is already a star, if you click it again, the star goes away
-        rating = labelNumber - 1;
-    }
-    updateStars();
-}
-
-void CGisItemRate::updateStars()
-{
-    pushButtonR1->setIcon(QPixmap(rating < 1 ? "://icons/cache/32x32/star_empty.png" :  "://icons/cache/32x32/star.png"));
-    pushButtonR2->setIcon(QPixmap(rating < 2 ? "://icons/cache/32x32/star_empty.png" :  "://icons/cache/32x32/star.png"));
-    pushButtonR3->setIcon(QPixmap(rating < 3 ? "://icons/cache/32x32/star_empty.png" :  "://icons/cache/32x32/star.png"));
-    pushButtonR4->setIcon(QPixmap(rating < 4 ? "://icons/cache/32x32/star_empty.png" :  "://icons/cache/32x32/star.png"));
-    pushButtonR5->setIcon(QPixmap(rating < 5 ? "://icons/cache/32x32/star_empty.png" :  "://icons/cache/32x32/star.png"));
+void CGisItemRate::updateStars() {
+  pushButtonR1->setIcon(QPixmap(rating < 1 ? "://icons/cache/32x32/star_empty.png" : "://icons/cache/32x32/star.png"));
+  pushButtonR2->setIcon(QPixmap(rating < 2 ? "://icons/cache/32x32/star_empty.png" : "://icons/cache/32x32/star.png"));
+  pushButtonR3->setIcon(QPixmap(rating < 3 ? "://icons/cache/32x32/star_empty.png" : "://icons/cache/32x32/star.png"));
+  pushButtonR4->setIcon(QPixmap(rating < 4 ? "://icons/cache/32x32/star_empty.png" : "://icons/cache/32x32/star.png"));
+  pushButtonR5->setIcon(QPixmap(rating < 5 ? "://icons/cache/32x32/star_empty.png" : "://icons/cache/32x32/star.png"));
 }

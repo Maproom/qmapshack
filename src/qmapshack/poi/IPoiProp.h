@@ -24,20 +24,18 @@
 class CPoiDraw;
 class IPoiFile;
 
-class IPoiProp : public QWidget
-{
-    Q_OBJECT
-public:
-    IPoiProp(IPoiFile* poifile, CPoiDraw* poi);
-    virtual ~IPoiProp() = default;
+class IPoiProp : public QWidget {
+  Q_OBJECT
+ public:
+  IPoiProp(IPoiFile* poifile, CPoiDraw* poi);
+  virtual ~IPoiProp() = default;
 
-protected slots:
-    virtual void slotPropertiesChanged() = 0;
+ protected slots:
+  virtual void slotPropertiesChanged() = 0;
 
-protected:
-    IPoiFile* poifile;
-    CPoiDraw* poi;
+ protected:
+  IPoiFile* poifile;
+  CPoiDraw* poi;
 };
 
-#endif //IPOIPROP_H
-
+#endif  // IPOIPROP_H

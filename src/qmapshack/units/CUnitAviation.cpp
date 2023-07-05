@@ -21,80 +21,61 @@
 #include "units/CUnitAviation.h"
 
 CUnitAviation::CUnitAviation(QObject* parent)
-    : IUnit(eTypeAviation, "ft", footPerMeter, "kn", meterPerSecToKnots, "ft", footPerMeter, parent)
-{
-}
-
+    : IUnit(eTypeAviation, "ft", footPerMeter, "kn", meterPerSecToKnots, "ft", footPerMeter, parent) {}
 
 void CUnitAviation::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit.clear();
-    }
-    else if(meter < 1852)
-    {
-        val = QString::asprintf("%g", meter * nauticalMilePerMeter);
-        unit = "nm";
-    }
-    else
-    {
-        val = QString::asprintf("%1.1f", meter * nauticalMilePerMeter);
-        unit = "nm";
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit.clear();
+  } else if (meter < 1852) {
+    val = QString::asprintf("%g", meter * nauticalMilePerMeter);
+    unit = "nm";
+  } else {
+    val = QString::asprintf("%1.1f", meter * nauticalMilePerMeter);
+    unit = "nm";
+  }
 }
 
 void CUnitAviation::meter2distance(qreal meter, qreal& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = NOFLOAT;
-        unit.clear();
-    }
-    else
-    {
-        val = meter * nauticalMilePerMeter;
-        unit = "nm";
-    }
+  if (meter == NOFLOAT) {
+    val = NOFLOAT;
+    unit.clear();
+  } else {
+    val = meter * nauticalMilePerMeter;
+    unit = "nm";
+  }
 }
 
 void CUnitAviation::meter2area(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit.clear();
-    }
-    else
-    {
-        val = QString::asprintf("%1.2f", meter / (1 / nauticalMilePerMeter * 1 / nauticalMilePerMeter));
-        unit = "nm²";
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit.clear();
+  } else {
+    val = QString::asprintf("%1.2f", meter / (1 / nauticalMilePerMeter * 1 / nauticalMilePerMeter));
+    unit = "nm²";
+  }
 }
 
 void CUnitAviation::meter2area(qreal meter, qreal& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = NOFLOAT;
-        unit.clear();
-    }
-    else
-    {
-        val = meter / (1 / nauticalMilePerMeter * 1 / nauticalMilePerMeter);
-        unit = "nm²";
-    }
+  if (meter == NOFLOAT) {
+    val = NOFLOAT;
+    unit.clear();
+  } else {
+    val = meter / (1 / nauticalMilePerMeter * 1 / nauticalMilePerMeter);
+    unit = "nm²";
+  }
 }
 
 qreal CUnitAviation::elevation2meter(const QString& val) const /* override */
 {
-    return val.toDouble() / footPerMeter;
+  return val.toDouble() / footPerMeter;
 }
 
-void CUnitAviation::meter2unit(qreal meter, qreal& scale, QString& unit) const
-{
-    scale = nauticalMilePerMeter;
-    unit = "nm";
+void CUnitAviation::meter2unit(qreal meter, qreal& scale, QString& unit) const {
+  scale = nauticalMilePerMeter;
+  unit = "nm";
 }
-

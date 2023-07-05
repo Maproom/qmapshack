@@ -19,33 +19,32 @@
 #ifndef CHISTORYLISTWIDGET_H
 #define CHISTORYLISTWIDGET_H
 
-#include "gis/IGisItem.h"
 #include <QListWidget>
 
-class CHistoryListWidget : public QListWidget
-{
-    Q_OBJECT
-public:
-    CHistoryListWidget(QWidget* parent);
-    virtual ~CHistoryListWidget();
+#include "gis/IGisItem.h"
 
-    void setupHistory(IGisItem& gisItem);
+class CHistoryListWidget : public QListWidget {
+  Q_OBJECT
+ public:
+  CHistoryListWidget(QWidget* parent);
+  virtual ~CHistoryListWidget();
 
-signals:
-    void sigChanged();
+  void setupHistory(IGisItem& gisItem);
 
-private slots:
-    void slotSelectionChanged();
-    void slotContextMenu(const QPoint& point);
-    void slotCutHistoryAfter();
-    void slotCutHistoryBefore();
+ signals:
+  void sigChanged();
 
-private:
-    IGisItem::key_t key;
-    QMenu* menu;
-    QAction* actionCutHistoryAfter;
-    QAction* actionCutHistoryBefore;
+ private slots:
+  void slotSelectionChanged();
+  void slotContextMenu(const QPoint& point);
+  void slotCutHistoryAfter();
+  void slotCutHistoryBefore();
+
+ private:
+  IGisItem::key_t key;
+  QMenu* menu;
+  QAction* actionCutHistoryAfter;
+  QAction* actionCutHistoryBefore;
 };
 
-#endif //CHISTORYLISTWIDGET_H
-
+#endif  // CHISTORYLISTWIDGET_H

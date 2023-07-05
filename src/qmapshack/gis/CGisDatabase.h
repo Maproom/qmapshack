@@ -23,31 +23,26 @@
 
 class IDBFolder;
 
-class CGisDatabase : public QWidget, private Ui::IGisDatabase
-{
-    Q_OBJECT
-public:
-    static CGisDatabase& self()
-    {
-        return *pSelf;
-    }
+class CGisDatabase : public QWidget, private Ui::IGisDatabase {
+  Q_OBJECT
+ public:
+  static CGisDatabase& self() { return *pSelf; }
 
-    virtual ~CGisDatabase();
+  virtual ~CGisDatabase();
 
-    void postEventForDb(QEvent* event);
-    void sendEventForDb(QEvent* event);
+  void postEventForDb(QEvent* event);
+  void sendEventForDb(QEvent* event);
 
-    void createDatabase();
+  void createDatabase();
 
-private slots:
-    void slotHelpText();
+ private slots:
+  void slotHelpText();
 
-private:
-    friend class CMainWindow;
-    CGisDatabase(QWidget* parent);
+ private:
+  friend class CMainWindow;
+  CGisDatabase(QWidget* parent);
 
-    static CGisDatabase* pSelf;
+  static CGisDatabase* pSelf;
 };
 
-#endif //CGISDATABASE_H
-
+#endif  // CGISDATABASE_H

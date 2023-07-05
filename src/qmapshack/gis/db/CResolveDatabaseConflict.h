@@ -19,23 +19,23 @@
 #ifndef CDATABASECONFLICT_H
 #define CDATABASECONFLICT_H
 
-#include "gis/db/CDBProject.h"
-#include "ui_IResolveDatabaseConflict.h"
 #include <QDialog>
 
-class CResolveDatabaseConflict : public QDialog, private Ui::IResolveDatabaseConflict
-{
-public:
-    CResolveDatabaseConflict(QString msg, IGisItem* item, CDBProject::action_e& actionForAll, QWidget* parent = nullptr);
+#include "gis/db/CDBProject.h"
+#include "ui_IResolveDatabaseConflict.h"
 
-    CDBProject::action_e getAction();
+class CResolveDatabaseConflict : public QDialog, private Ui::IResolveDatabaseConflict {
+ public:
+  CResolveDatabaseConflict(QString msg, IGisItem* item, CDBProject::action_e& actionForAll, QWidget* parent = nullptr);
 
-private slots:
-    void slotButttonClicked(CDBProject::action_e actionConnected);
+  CDBProject::action_e getAction();
 
-private:
-    CDBProject::action_e actionSelected = CDBProject::eActionNone;
-    CDBProject::action_e& actionForAll;
+ private slots:
+  void slotButttonClicked(CDBProject::action_e actionConnected);
+
+ private:
+  CDBProject::action_e actionSelected = CDBProject::eActionNone;
+  CDBProject::action_e& actionForAll;
 };
 
-#endif // CDATABASECONFLICT_H
+#endif  // CDATABASECONFLICT_H

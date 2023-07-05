@@ -16,95 +16,80 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWorkspace.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "helpers/CSettings.h"
-#include "realtime/opensky/CRtOpenSky.h"
 #include "realtime/opensky/CRtOpenSkyInfo.h"
-#include "realtime/opensky/CRtOpenSkyRecord.h"
 
 #include <QtWidgets>
 
-CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky& source, QWidget* parent)
-    : IRtInfo(&source, parent)
-{
-    setupUi(this);
-    connect(&source, &CRtOpenSky::sigChanged, this, &CRtOpenSkyInfo::slotUpdate);
-    connect(checkShowNames, &QCheckBox::toggled, &source, &CRtOpenSky::slotSetShowNames);
-    connect(toolPause, &QToolButton::toggled, toolReset, &QToolButton::setEnabled);
-    connect(toolPause, &QToolButton::toggled, toolFile, &QToolButton::setEnabled);
-    connect(toolPause, &QToolButton::toggled, toolToTrack, &QToolButton::setEnabled);
-    connect(toolPause, &QToolButton::toggled, lineKey, &QLineEdit::setEnabled);
-    connect(toolFile, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotSetFilename);
-    connect(toolReset, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotResetRecord);
-    connect(toolToTrack, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotToTrack);
+#include "realtime/opensky/CRtOpenSky.h"
+#include "realtime/opensky/CRtOpenSkyRecord.h"
+
+CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky& source, QWidget* parent) : IRtInfo(&source, parent) {
+  setupUi(this);
+  connect(&source, &CRtOpenSky::sigChanged, this, &CRtOpenSkyInfo::slotUpdate);
+  connect(checkShowNames, &QCheckBox::toggled, &source, &CRtOpenSky::slotSetShowNames);
+  connect(toolPause, &QToolButton::toggled, toolReset, &QToolButton::setEnabled);
+  connect(toolPause, &QToolButton::toggled, toolFile, &QToolButton::setEnabled);
+  connect(toolPause, &QToolButton::toggled, toolToTrack, &QToolButton::setEnabled);
+  connect(toolPause, &QToolButton::toggled, lineKey, &QLineEdit::setEnabled);
+  connect(toolFile, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotSetFilename);
+  connect(toolReset, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotResetRecord);
+  connect(toolToTrack, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotToTrack);
 }
 
-void CRtOpenSkyInfo::loadSettings(QSettings& cfg)
-{
-    lineKey->setText(cfg.value("callsign", "").toString());
-    startRecord(cfg.value("filename", "").toString());
+void CRtOpenSkyInfo::loadSettings(QSettings& cfg) {
+  lineKey->setText(cfg.value("callsign", "").toString());
+  startRecord(cfg.value("filename", "").toString());
 }
 
-void CRtOpenSkyInfo::saveSettings(QSettings& cfg) const
-{
-    cfg.setValue("callsign", lineKey->text());
-    cfg.setValue("filename", toolFile->toolTip());
+void CRtOpenSkyInfo::saveSettings(QSettings& cfg) const {
+  cfg.setValue("callsign", lineKey->text());
+  cfg.setValue("filename", toolFile->toolTip());
 }
 
-void CRtOpenSkyInfo::slotUpdate()
-{
-    CRtOpenSky* _source = dynamic_cast<CRtOpenSky*>(source.data());
-    CRtOpenSkyRecord* _record = dynamic_cast<CRtOpenSkyRecord*>(record.data());
+void CRtOpenSkyInfo::slotUpdate() {
+  CRtOpenSky* _source = dynamic_cast<CRtOpenSky*>(source.data());
+  CRtOpenSkyRecord* _record = dynamic_cast<CRtOpenSkyRecord*>(record.data());
 
-    checkShowNames->setChecked(_source->getShowNames());
-    labelTimestamp->setText(_source->getTimestamp().toString());
-    labelNumberOfAircrafts->setText(QString::number(_source->getNumberOfAircrafts()));
+  checkShowNames->setChecked(_source->getShowNames());
+  labelTimestamp->setText(_source->getTimestamp().toString());
+  labelNumberOfAircrafts->setText(QString::number(_source->getNumberOfAircrafts()));
 
-    if(!record.isNull() && toolRecord->isChecked())
-    {
-        bool ok = false;
-        const CRtOpenSky::aircraft_t& aircraft = _source->getAircraftByKey(lineKey->text(), ok);
-        if(ok)
-        {
-            if(!_record->writeEntry(aircraft))
-            {
-                QMessageBox::critical(this, tr("Error..."), record->getError(), QMessageBox::Ok);
-                toolPause->setChecked(true);
-            }
-        }
+  if (!record.isNull() && toolRecord->isChecked()) {
+    bool ok = false;
+    const CRtOpenSky::aircraft_t& aircraft = _source->getAircraftByKey(lineKey->text(), ok);
+    if (ok) {
+      if (!_record->writeEntry(aircraft)) {
+        QMessageBox::critical(this, tr("Error..."), record->getError(), QMessageBox::Ok);
+        toolPause->setChecked(true);
+      }
     }
+  }
 }
 
+void CRtOpenSkyInfo::startRecord(const QString& filename) {
+  delete record;
 
-void CRtOpenSkyInfo::startRecord(const QString& filename)
-{
+  toolFile->setToolTip(filename);
+  toolRecord->setEnabled(false);
+
+  if (filename.trimmed().isEmpty()) {
+    return;
+  }
+
+  record = new CRtOpenSkyRecord(this);
+
+  if (!record->setFile(filename)) {
     delete record;
+    QMessageBox::critical(this, tr("Failed..."), record->getError(), QMessageBox::Ok);
+    return;
+  }
 
-    toolFile->setToolTip(filename);
-    toolRecord->setEnabled(false);
-
-    if(filename.trimmed().isEmpty())
-    {
-        return;
-    }
-
-    record = new CRtOpenSkyRecord(this);
-
-    if(!record->setFile(filename))
-    {
-        delete record;
-        QMessageBox::critical(this, tr("Failed..."), record->getError(), QMessageBox::Ok);
-        return;
-    }
-
-    toolRecord->setEnabled(true);
+  toolRecord->setEnabled(true);
 }
 
-void CRtOpenSkyInfo::fillTrackData(CTrackData& data)
-{
-    CTrackData::trkseg_t seg;
-    seg.pts = record->getTrack();
-    data.segs << seg;
-    data.name = lineKey->text();
+void CRtOpenSkyInfo::fillTrackData(CTrackData& data) {
+  CTrackData::trkseg_t seg;
+  seg.pts = record->getTrack();
+  data.segs << seg;
+  data.name = lineKey->text();
 }

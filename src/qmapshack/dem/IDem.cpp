@@ -17,516 +17,418 @@
 
 **********************************************************************************************/
 
-#include "dem/CDemDraw.h"
-#include "dem/CDemPropSetup.h"
 #include "dem/IDem.h"
-
 
 #include <QtWidgets>
 
-template <typename T>
-inline T getValue(QVector<T>& data, int x, int y, int dx)
-{
-    return data[x + y * dx];
-}
+#include "dem/CDemDraw.h"
+#include "dem/CDemPropSetup.h"
 
 template <typename T>
-inline void fillWindow(QVector<T>& data, int x, int y, int dx, T* w)
-{
-    w[0] = getValue(data, x - 1, y - 1, dx);
-    w[1] = getValue(data, x, y - 1, dx);
-    w[2] = getValue(data, x + 1, y - 1, dx);
-    w[3] = getValue(data, x - 1, y, dx);
-    w[4] = getValue(data, x, y, dx);
-    w[5] = getValue(data, x + 1, y, dx);
-    w[6] = getValue(data, x - 1, y + 1, dx);
-    w[7] = getValue(data, x, y + 1, dx);
-    w[8] = getValue(data, x + 1, y + 1, dx);
+inline T getValue(QVector<T>& data, int x, int y, int dx) {
+  return data[x + y * dx];
 }
 
 template <typename T>
-inline void fillWindow4x4(QVector<T>& data, qreal x, qreal y, int dx, T* w)
-{
-    x = qFloor(x);
-    y = qFloor(y);
-
-    w[0] = getValue(data, x - 1, y - 1, dx);
-    w[1] = getValue(data, x, y - 1, dx);
-    w[2] = getValue(data, x + 1, y - 1, dx);
-    w[3] = getValue(data, x + 2, y - 1, dx);
-    w[4] = getValue(data, x - 1, y, dx);
-    w[5] = getValue(data, x, y, dx);
-    w[6] = getValue(data, x + 1, y, dx);
-    w[7] = getValue(data, x + 2, y, dx);
-    w[8] = getValue(data, x - 1, y + 1, dx);
-    w[9] = getValue(data, x, y + 1, dx);
-    w[10] = getValue(data, x + 1, y + 1, dx);
-    w[11] = getValue(data, x + 2, y + 1, dx);
-    w[12] = getValue(data, x - 1, y + 2, dx);
-    w[13] = getValue(data, x, y + 2, dx);
-    w[14] = getValue(data, x + 1, y + 2, dx);
-    w[15] = getValue(data, x + 2, y + 2, dx);
+inline void fillWindow(QVector<T>& data, int x, int y, int dx, T* w) {
+  w[0] = getValue(data, x - 1, y - 1, dx);
+  w[1] = getValue(data, x, y - 1, dx);
+  w[2] = getValue(data, x + 1, y - 1, dx);
+  w[3] = getValue(data, x - 1, y, dx);
+  w[4] = getValue(data, x, y, dx);
+  w[5] = getValue(data, x + 1, y, dx);
+  w[6] = getValue(data, x - 1, y + 1, dx);
+  w[7] = getValue(data, x, y + 1, dx);
+  w[8] = getValue(data, x + 1, y + 1, dx);
 }
 
-const struct SlopePresets IDem::slopePresets[7]
-{
-    /* http://www.alpenverein.de/bergsport/sicherheit/skitouren-schneeschuh-sicher-im-schnee/dav-snowcard_aid_10619.html */
-    { "Grade 1 (DAV Snowcard)", {27.0, 31.0, 34.0, 39.0, 50.0}},
-    { "Grade 2 (DAV Snowcard)", {27.0, 30.0, 32.0, 35.0, 39.0}},
-    { "Grade 3 (DAV Snowcard)", {27.0, 29.0, 30.0, 31.0, 34.0}},
-    { "Grade 4 (DAV Snowcard)", {23.0, 25.0, 27.0, 28.0, 30.0}},
+template <typename T>
+inline void fillWindow4x4(QVector<T>& data, qreal x, qreal y, int dx, T* w) {
+  x = qFloor(x);
+  y = qFloor(y);
 
-    { "level country", { 3.0, 6.0, 8.0, 12.0, 15.0}},
-    { "secondary mountain", { 4.0, 7.0, 10.0, 15.0, 20.0}},
-    { "lofty mountain", {10.0, 15.0, 20.0, 30.0, 50.0}}
-};
+  w[0] = getValue(data, x - 1, y - 1, dx);
+  w[1] = getValue(data, x, y - 1, dx);
+  w[2] = getValue(data, x + 1, y - 1, dx);
+  w[3] = getValue(data, x + 2, y - 1, dx);
+  w[4] = getValue(data, x - 1, y, dx);
+  w[5] = getValue(data, x, y, dx);
+  w[6] = getValue(data, x + 1, y, dx);
+  w[7] = getValue(data, x + 2, y, dx);
+  w[8] = getValue(data, x - 1, y + 1, dx);
+  w[9] = getValue(data, x, y + 1, dx);
+  w[10] = getValue(data, x + 1, y + 1, dx);
+  w[11] = getValue(data, x + 2, y + 1, dx);
+  w[12] = getValue(data, x - 1, y + 2, dx);
+  w[13] = getValue(data, x, y + 2, dx);
+  w[14] = getValue(data, x + 1, y + 2, dx);
+  w[15] = getValue(data, x + 2, y + 2, dx);
+}
 
-IDem::IDem(CDemDraw* parent)
-    : IDrawObject(parent)
-    , dem(parent)
-{
-    slotSetOpacity(17);
+const struct SlopePresets IDem::slopePresets[7]{/* http://www.alpenverein.de/bergsport/sicherheit/skitouren-schneeschuh-sicher-im-schnee/dav-snowcard_aid_10619.html
+                                                 */
+                                                {"Grade 1 (DAV Snowcard)", {27.0, 31.0, 34.0, 39.0, 50.0}},
+                                                {"Grade 2 (DAV Snowcard)", {27.0, 30.0, 32.0, 35.0, 39.0}},
+                                                {"Grade 3 (DAV Snowcard)", {27.0, 29.0, 30.0, 31.0, 34.0}},
+                                                {"Grade 4 (DAV Snowcard)", {23.0, 25.0, 27.0, 28.0, 30.0}},
 
-    graytable.resize(256);
-    for(int i = 0; i < 255; i++)
-    {
-        graytable[i] = qRgba(i, i, i, 255);
+                                                {"level country", {3.0, 6.0, 8.0, 12.0, 15.0}},
+                                                {"secondary mountain", {4.0, 7.0, 10.0, 15.0, 20.0}},
+                                                {"lofty mountain", {10.0, 15.0, 20.0, 30.0, 50.0}}};
+
+IDem::IDem(CDemDraw* parent) : IDrawObject(parent), dem(parent) {
+  slotSetOpacity(17);
+
+  graytable.resize(256);
+  for (int i = 0; i < 255; i++) {
+    graytable[i] = qRgba(i, i, i, 255);
+  }
+  graytable[255] = qRgba(0, 0, 0, 0);
+
+  initElevationShadeTable();
+
+  slopetable << qRgba(0, 0, 0, 0);
+  slopetable << qRgba(0, 128, 0, 100);
+  slopetable << qRgba(0, 255, 0, 100);
+  slopetable << qRgba(255, 255, 0, 100);
+  slopetable << qRgba(255, 128, 0, 100);
+  slopetable << qRgba(255, 0, 0, 100);
+
+  elevationtable << qRgba(0, 0, 0, 0);        // transparent
+  elevationtable << qRgba(255, 0, 255, 128);  // magenta
+}
+
+IDem::~IDem() {}
+
+void IDem::saveConfig(QSettings& cfg) {
+  IDrawObject::saveConfig(cfg);
+
+  cfg.setValue("doHillshading", bHillshading);
+  cfg.setValue("factorHillshading", factorHillshading);
+  cfg.setValue("doSlopeShading", bSlopeShading);
+  cfg.setValue("factorSlopeShading", factorSlopeShading);
+  cfg.setValue("doSlopeColor", bSlopeColor);
+
+  cfg.setValue("gradeSlopeColor", gradeSlopeColor);
+  cfg.setValue("slopeCustomValue0", slopeCustomStepTable[0]);
+  cfg.setValue("slopeCustomValue1", slopeCustomStepTable[1]);
+  cfg.setValue("slopeCustomValue2", slopeCustomStepTable[2]);
+  cfg.setValue("slopeCustomValue3", slopeCustomStepTable[3]);
+  cfg.setValue("slopeCustomValue4", slopeCustomStepTable[4]);
+
+  cfg.setValue("doElevationLimit", bElevationLimit);
+  cfg.setValue("elevationValue", elevationValue);
+
+  cfg.setValue("doElevationShading", bElevationShading);
+  cfg.setValue("elevationShadeLimitLow", elevationShadeLimitLow);
+  cfg.setValue("elevationShadeLimitHi", elevationShadeLimitHi);
+  cfg.setValue("showElevationShadeScale", bShowElevationShadeScale);
+}
+
+void IDem::loadConfig(QSettings& cfg) {
+  IDrawObject::loadConfig(cfg);
+
+  bHillshading = cfg.value("doHillshading", bHillshading).toBool();
+  factorHillshading = cfg.value("factorHillshading", factorHillshading).toFloat();
+  bSlopeShading = cfg.value("doSlopeShading", bSlopeShading).toBool();
+  factorSlopeShading = cfg.value("factorSlopeShading", factorSlopeShading).toFloat();
+  bSlopeColor = cfg.value("doSlopeColor", bSlopeColor).toBool();
+  gradeSlopeColor = cfg.value("gradeSlopeColor", gradeSlopeColor).toInt();
+
+  slopeCustomStepTable[0] = cfg.value("slopeCustomValue0", 5.).toFloat();
+  slopeCustomStepTable[1] = cfg.value("slopeCustomValue1", 10.).toFloat();
+  slopeCustomStepTable[2] = cfg.value("slopeCustomValue2", 15.).toFloat();
+  slopeCustomStepTable[3] = cfg.value("slopeCustomValue3", 20.).toFloat();
+  slopeCustomStepTable[4] = cfg.value("slopeCustomValue4", 25.).toFloat();
+
+  bElevationLimit = cfg.value("doElevationLimit", bElevationLimit).toBool();
+  elevationValue = cfg.value("elevationValue", 0).toInt();
+
+  bElevationShading = cfg.value("doElevationShading", bElevationShading).toBool();
+  elevationShadeLimitLow = cfg.value("elevationShadeLimitLow", 0).toInt();
+  elevationShadeLimitHi = cfg.value("elevationShadeLimitHi", 0).toInt();
+  bShowElevationShadeScale = cfg.value("showElevationShadeScale", bShowElevationShadeScale).toBool();
+}
+
+IDemProp* IDem::getSetup() {
+  if (setup.isNull()) {
+    setup = new CDemPropSetup(this, dem);
+  }
+
+  return setup;
+}
+
+void IDem::slotSetFactorHillshade(int f) {
+  if (f == 0) {
+    factorHillshading = 1.0;
+  } else if (f < 0) {
+    factorHillshading = -1.0 / f;
+  } else {
+    factorHillshading = f;
+  }
+}
+
+void IDem::slotSetFactorSlopeShade(int f) { factorSlopeShading = f / 100.; }
+
+void IDem::setSlopeStepTableCustomValue(int idx, int val) { slopeCustomStepTable[idx] = (qreal)val; }
+
+void IDem::setElevationLimit(int val) { elevationValue = val; }
+
+void IDem::setElevationShadeLow(int val) { elevationShadeLimitLow = val; }
+
+void IDem::setElevationShadeHi(int val) { elevationShadeLimitHi = val; }
+
+void IDem::setSlopeStepTable(int idx) {
+  gradeSlopeColor = idx;
+  dem->emitSigCanvasUpdate();
+}
+
+void IDem::initElevationShadeTable() {
+  elevationShadeTable.resize(256);
+
+  elevationShadeTable[0] = qRgba(75, 75, 75, 255);
+  for (int i = 0; i < 254; i++) {
+    const QColor& color = QColor::fromHsv(240. * (253 - i) / 253, 255, 255);
+    elevationShadeTable[i + 1] = color.rgb();
+  }
+  elevationShadeTable[255] = qRgba(180, 180, 180, 255);
+}
+
+const qreal* IDem::getCurrentSlopeStepTable() const {
+  if (CUSTOM_SLOPE_COLORTABLE == gradeSlopeColor) {
+    return slopeCustomStepTable;
+  } else {
+    return slopePresets[gradeSlopeColor].steps;
+  }
+}
+
+int IDem::getFactorHillshading() const {
+  if (factorHillshading == 1.0) {
+    return 0;
+  } else if (factorHillshading < 1) {
+    return -1.0 / factorHillshading;
+  } else {
+    return factorHillshading;
+  }
+}
+
+void IDem::hillshading(QVector<float>& data, qreal w, qreal h, QImage& img) const {
+  int wp2 = w + 2;
+
+#define ZFACT 0.125
+#define ZFACT_BY_ZFACT (ZFACT * ZFACT)
+#define SIN_ALT (qSin(45 * DEG_TO_RAD))
+#define ZFACT_COS_ALT (ZFACT * qCos(45 * DEG_TO_RAD))
+#define AZ (315 * DEG_TO_RAD)
+  for (unsigned int m = 1; m <= h; m++) {
+    unsigned char* scan = img.scanLine(m - 1);
+    for (unsigned int n = 1; n <= w; n++) {
+      float win[eWinsize3x3];
+      fillWindow(data, n, m, wp2, win);
+
+      if (hasNoData && win[4] == noData) {
+        scan[n - 1] = 255;
+        continue;
+      }
+
+      qreal dx =
+          ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale * factorHillshading);
+      qreal dy =
+          ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale * factorHillshading);
+      qreal aspect = qAtan2(dy, dx);
+      qreal xx_plus_yy = dx * dx + dy * dy;
+      qreal cang =
+          (SIN_ALT - ZFACT_COS_ALT * qSqrt(xx_plus_yy) * qSin(aspect - AZ)) / qSqrt(1 + ZFACT_BY_ZFACT * xx_plus_yy);
+
+      if (cang <= 0.0) {
+        cang = 1.0;
+      } else {
+        cang = 1.0 + (254.0 * cang);
+      }
+
+      scan[n - 1] = cang;
     }
-    graytable[255] = qRgba(0, 0, 0, 0);
-
-    initElevationShadeTable();
-
-    slopetable << qRgba(0, 0, 0, 0);
-    slopetable << qRgba(0, 128, 0, 100);
-    slopetable << qRgba(0, 255, 0, 100);
-    slopetable << qRgba(255, 255, 0, 100);
-    slopetable << qRgba(255, 128, 0, 100);
-    slopetable << qRgba(255, 0, 0, 100);
-
-    elevationtable << qRgba(0, 0, 0, 0); // transparent
-    elevationtable << qRgba(255, 0, 255, 128); // magenta
+  }
 }
 
-IDem::~IDem()
-{
-}
+int IDem::getFactorSlopeShading() const { return factorSlopeShading * 100.; }
 
-void IDem::saveConfig(QSettings& cfg)
-{
-    IDrawObject::saveConfig(cfg);
+void IDem::slopeShading(QVector<float>& data, qreal w, qreal h, QImage& img) const {
+  int wp2 = w + 2;
 
-    cfg.setValue("doHillshading", bHillshading);
-    cfg.setValue("factorHillshading", factorHillshading);
-    cfg.setValue("doSlopeShading", bSlopeShading);
-    cfg.setValue("factorSlopeShading", factorSlopeShading);
-    cfg.setValue("doSlopeColor", bSlopeColor);
+  for (unsigned int m = 1; m <= h; m++) {
+    unsigned char* scan = img.scanLine(m - 1);
+    for (unsigned int n = 1; n <= w; n++) {
+      float win[eWinsize3x3];
+      fillWindow(data, n, m, wp2, win);
 
-    cfg.setValue("gradeSlopeColor", gradeSlopeColor);
-    cfg.setValue("slopeCustomValue0", slopeCustomStepTable[0]);
-    cfg.setValue("slopeCustomValue1", slopeCustomStepTable[1]);
-    cfg.setValue("slopeCustomValue2", slopeCustomStepTable[2]);
-    cfg.setValue("slopeCustomValue3", slopeCustomStepTable[3]);
-    cfg.setValue("slopeCustomValue4", slopeCustomStepTable[4]);
+      if (hasNoData && win[4] == noData) {
+        scan[n - 1] = 0;
+        continue;
+      }
 
-    cfg.setValue("doElevationLimit", bElevationLimit);
-    cfg.setValue("elevationValue", elevationValue);
-
-    cfg.setValue("doElevationShading", bElevationShading);
-    cfg.setValue("elevationShadeLimitLow", elevationShadeLimitLow);
-    cfg.setValue("elevationShadeLimitHi", elevationShadeLimitHi);
-    cfg.setValue("showElevationShadeScale", bShowElevationShadeScale);
-}
-
-void IDem::loadConfig(QSettings& cfg)
-{
-    IDrawObject::loadConfig(cfg);
-
-    bHillshading = cfg.value("doHillshading", bHillshading     ).toBool();
-    factorHillshading = cfg.value("factorHillshading", factorHillshading).toFloat();
-    bSlopeShading = cfg.value("doSlopeShading", bSlopeShading     ).toBool();
-    factorSlopeShading = cfg.value("factorSlopeShading", factorSlopeShading).toFloat();
-    bSlopeColor = cfg.value("doSlopeColor", bSlopeColor      ).toBool();
-    gradeSlopeColor = cfg.value("gradeSlopeColor", gradeSlopeColor  ).toInt();
-
-    slopeCustomStepTable[0] = cfg.value("slopeCustomValue0", 5.).toFloat();
-    slopeCustomStepTable[1] = cfg.value("slopeCustomValue1", 10.).toFloat();
-    slopeCustomStepTable[2] = cfg.value("slopeCustomValue2", 15.).toFloat();
-    slopeCustomStepTable[3] = cfg.value("slopeCustomValue3", 20.).toFloat();
-    slopeCustomStepTable[4] = cfg.value("slopeCustomValue4", 25.).toFloat();
-
-    bElevationLimit = cfg.value("doElevationLimit", bElevationLimit  ).toBool();
-    elevationValue = cfg.value("elevationValue", 0).toInt();
-
-    bElevationShading = cfg.value("doElevationShading", bElevationShading ).toBool();
-    elevationShadeLimitLow = cfg.value("elevationShadeLimitLow", 0).toInt();
-    elevationShadeLimitHi = cfg.value("elevationShadeLimitHi", 0).toInt();
-    bShowElevationShadeScale = cfg.value("showElevationShadeScale", bShowElevationShadeScale).toBool();
-}
-
-IDemProp* IDem::getSetup()
-{
-    if(setup.isNull())
-    {
-        setup = new CDemPropSetup(this, dem);
-    }
-
-    return setup;
-}
-
-void IDem::slotSetFactorHillshade(int f)
-{
-    if(f == 0)
-    {
-        factorHillshading = 1.0;
-    }
-    else if(f < 0)
-    {
-        factorHillshading = -1.0 / f;
-    }
-    else
-    {
-        factorHillshading = f;
-    }
-}
-
-void IDem::slotSetFactorSlopeShade(int f)
-{
-    factorSlopeShading = f / 100.;
-}
-
-void IDem::setSlopeStepTableCustomValue(int idx, int val)
-{
-    slopeCustomStepTable[idx] = (qreal) val;
-}
-
-void IDem::setElevationLimit(int val)
-{
-    elevationValue = val;
-}
-
-void IDem::setElevationShadeLow(int val)
-{
-    elevationShadeLimitLow = val;
-}
-
-void IDem::setElevationShadeHi(int val)
-{
-    elevationShadeLimitHi = val;
-}
-
-void IDem::setSlopeStepTable(int idx)
-{
-    gradeSlopeColor = idx;
-    dem->emitSigCanvasUpdate();
-}
-
-void IDem::initElevationShadeTable()
-{
-    elevationShadeTable.resize(256);
-
-    elevationShadeTable[0] = qRgba(75, 75, 75, 255);
-    for(int i = 0; i < 254; i++)
-    {
-        const QColor& color = QColor::fromHsv(240. * (253 - i) / 253, 255, 255);
-        elevationShadeTable[i + 1] = color.rgb();
-    }
-    elevationShadeTable[255] = qRgba(180, 180, 180, 255);
-}
-
-const qreal* IDem::getCurrentSlopeStepTable() const
-{
-    if(CUSTOM_SLOPE_COLORTABLE == gradeSlopeColor)
-    {
-        return slopeCustomStepTable;
-    }
-    else
-    {
-        return slopePresets[gradeSlopeColor].steps;
-    }
-}
-
-int IDem::getFactorHillshading() const
-{
-    if(factorHillshading == 1.0)
-    {
-        return 0;
-    }
-    else if(factorHillshading < 1)
-    {
-        return -1.0 / factorHillshading;
-    }
-    else
-    {
-        return factorHillshading;
-    }
-}
-
-void IDem::hillshading(QVector<float>& data, qreal w, qreal h, QImage& img) const
-{
-    int wp2 = w + 2;
-
-#define ZFACT           0.125
-#define ZFACT_BY_ZFACT  (ZFACT * ZFACT)
-#define SIN_ALT         (qSin(45 * DEG_TO_RAD))
-#define ZFACT_COS_ALT   (ZFACT * qCos(45 * DEG_TO_RAD))
-#define AZ              (315 * DEG_TO_RAD)
-    for(unsigned int m = 1; m <= h; m++)
-    {
-        unsigned char* scan = img.scanLine(m - 1);
-        for(unsigned int n = 1; n <= w; n++)
-        {
-            float win[eWinsize3x3];
-            fillWindow(data, n, m, wp2, win);
-
-            if(hasNoData && win[4] == noData)
-            {
-                scan[n - 1] = 255;
-                continue;
-            }
-
-            qreal dx = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale * factorHillshading);
-            qreal dy = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale * factorHillshading);
-            qreal aspect = qAtan2(dy, dx);
-            qreal xx_plus_yy = dx * dx + dy * dy;
-            qreal cang = (SIN_ALT - ZFACT_COS_ALT * qSqrt(xx_plus_yy) * qSin(aspect - AZ)) / qSqrt(1 + ZFACT_BY_ZFACT * xx_plus_yy);
-
-            if (cang <= 0.0)
-            {
-                cang = 1.0;
-            }
-            else
-            {
-                cang = 1.0 + (254.0 * cang);
-            }
-
-            scan[n - 1] = cang;
+      qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
+      if (slope == NOFLOAT) {
+        scan[n - 1] = 0;
+      } else {
+        int alphaValue = slope * 255. / 90.     // map slope angle to alpha [0 .. 255]
+                         * factorSlopeShading;  // apply slider value [0.25 .. 3.0]
+        if (alphaValue > 255) {
+          alphaValue = 255;
         }
+        scan[n - 1] = alphaValue;
+      }
     }
+  }
 }
 
-int IDem::getFactorSlopeShading() const
-{
-    return factorSlopeShading * 100.;
-}
-
-void IDem::slopeShading(QVector<float>& data, qreal w, qreal h, QImage& img) const
-{
-    int wp2 = w + 2;
-
-    for(unsigned int m = 1; m <= h; m++)
-    {
-        unsigned char* scan = img.scanLine(m - 1);
-        for(unsigned int n = 1; n <= w; n++)
-        {
-            float win[eWinsize3x3];
-            fillWindow(data, n, m, wp2, win);
-
-            if(hasNoData && win[4] == noData)
-            {
-                scan[n - 1] = 0;
-                continue;
-            }
-
-            qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
-            if(slope == NOFLOAT)
-            {
-                scan[n - 1] = 0;
-            }
-            else
-            {
-                int alphaValue = slope * 255. / 90. // map slope angle to alpha [0 .. 255]
-                                 * factorSlopeShading; // apply slider value [0.25 .. 3.0]
-                if (alphaValue > 255)
-                {
-                    alphaValue = 255;
-                }
-                scan[n - 1] = alphaValue;
-            }
-        }
+qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) const {
+  for (int i = 0; i < size; i++) {
+    if (hasNoData && win2[i] == noData) {
+      return NOFLOAT;
     }
-}
+  }
 
-qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) const
-{
-    for(int i = 0; i < size; i++)
-    {
-        if(hasNoData && win2[i] == noData)
-        {
-            return NOFLOAT;
-        }
-    }
-
-    qreal win[eWinsize3x3];
-    switch(size)
-    {
+  qreal win[eWinsize3x3];
+  switch (size) {
     case eWinsize3x3:
-        for(int i = 0; i < 9; i++)
-        {
-            win[i] = win2[i];
-        }
-        break;
+      for (int i = 0; i < 9; i++) {
+        win[i] = win2[i];
+      }
+      break;
 
     case eWinsize4x4:
-        win[0] = win2[0] + x * (win2[1] - win2[0]) + y * (win2[4] - win2[0]) + x * y * (win2[0] - win2[1] - win2[4] + win2[5]);
-        win[1] = win2[1] + x * (win2[2] - win2[1]) + y * (win2[5] - win2[1]) + x * y * (win2[1] - win2[2] - win2[5] + win2[6]);
-        win[2] = win2[2] + x * (win2[3] - win2[2]) + y * (win2[6] - win2[2]) + x * y * (win2[2] - win2[3] - win2[6] + win2[7]);
+      win[0] =
+          win2[0] + x * (win2[1] - win2[0]) + y * (win2[4] - win2[0]) + x * y * (win2[0] - win2[1] - win2[4] + win2[5]);
+      win[1] =
+          win2[1] + x * (win2[2] - win2[1]) + y * (win2[5] - win2[1]) + x * y * (win2[1] - win2[2] - win2[5] + win2[6]);
+      win[2] =
+          win2[2] + x * (win2[3] - win2[2]) + y * (win2[6] - win2[2]) + x * y * (win2[2] - win2[3] - win2[6] + win2[7]);
 
-        win[3] = win2[4] + x * (win2[5] - win2[4]) + y * (win2[8] - win2[4]) + x * y * (win2[4] - win2[5] - win2[8] + win2[9]);
-        win[4] = win2[5] + x * (win2[6] - win2[5]) + y * (win2[9] - win2[5]) + x * y * (win2[5] - win2[6] - win2[9] + win2[10]);
-        win[5] = win2[6] + x * (win2[7] - win2[6]) + y * (win2[10] - win2[6]) + x * y * (win2[6] - win2[7] - win2[10] + win2[11]);
+      win[3] =
+          win2[4] + x * (win2[5] - win2[4]) + y * (win2[8] - win2[4]) + x * y * (win2[4] - win2[5] - win2[8] + win2[9]);
+      win[4] = win2[5] + x * (win2[6] - win2[5]) + y * (win2[9] - win2[5]) +
+               x * y * (win2[5] - win2[6] - win2[9] + win2[10]);
+      win[5] = win2[6] + x * (win2[7] - win2[6]) + y * (win2[10] - win2[6]) +
+               x * y * (win2[6] - win2[7] - win2[10] + win2[11]);
 
-        win[6] = win2[8] + x * (win2[9] - win2[8]) + y * (win2[12] - win2[8]) + x * y * (win2[8] - win2[9] - win2[12] + win2[13]);
-        win[7] = win2[9] + x * (win2[10] - win2[9]) + y * (win2[13] - win2[9]) + x * y * (win2[9] - win2[10] - win2[13] + win2[14]);
-        win[8] = win2[10] + x * (win2[11] - win2[10]) + y * (win2[14] - win2[10]) + x * y * (win2[10] - win2[11] - win2[14] + win2[15]);
-        break;
+      win[6] = win2[8] + x * (win2[9] - win2[8]) + y * (win2[12] - win2[8]) +
+               x * y * (win2[8] - win2[9] - win2[12] + win2[13]);
+      win[7] = win2[9] + x * (win2[10] - win2[9]) + y * (win2[13] - win2[9]) +
+               x * y * (win2[9] - win2[10] - win2[13] + win2[14]);
+      win[8] = win2[10] + x * (win2[11] - win2[10]) + y * (win2[14] - win2[10]) +
+               x * y * (win2[10] - win2[11] - win2[14] + win2[15]);
+      break;
 
     default:
-        return NOFLOAT;
-    }
+      return NOFLOAT;
+  }
 
-    qreal dx = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
-    qreal dy = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
-    qreal k = dx * dx + dy * dy;
-    qreal slope = qAtan(qSqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
+  qreal dx = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
+  qreal dy = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
+  qreal k = dx * dx + dy * dy;
+  qreal slope = qAtan(qSqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
 
-    return slope;
+  return slope;
 }
 
-void IDem::slopecolor(QVector<float>& data, qreal w, qreal h, QImage& img) const
-{
-    int wp2 = w + 2;
+void IDem::slopecolor(QVector<float>& data, qreal w, qreal h, QImage& img) const {
+  int wp2 = w + 2;
 
-    for(unsigned int m = 1; m <= h; m++)
-    {
-        unsigned char* scan = img.scanLine(m - 1);
-        for(unsigned int n = 1; n <= w; n++)
-        {
-            float win[eWinsize3x3];
-            fillWindow(data, n, m, wp2, win);
-            qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
+  for (unsigned int m = 1; m <= h; m++) {
+    unsigned char* scan = img.scanLine(m - 1);
+    for (unsigned int n = 1; n <= w; n++) {
+      float win[eWinsize3x3];
+      fillWindow(data, n, m, wp2, win);
+      qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
 
-            const qreal* currentSlopeStepTable = getCurrentSlopeStepTable();
+      const qreal* currentSlopeStepTable = getCurrentSlopeStepTable();
 
-            if(slope > currentSlopeStepTable[4])
-            {
-                scan[n - 1] = 5;
-            }
-            else if(slope > currentSlopeStepTable[3])
-            {
-                scan[n - 1] = 4;
-            }
-            else if(slope > currentSlopeStepTable[2])
-            {
-                scan[n - 1] = 3;
-            }
-            else if(slope > currentSlopeStepTable[1])
-            {
-                scan[n - 1] = 2;
-            }
-            else if(slope > currentSlopeStepTable[0])
-            {
-                scan[n - 1] = 1;
-            }
-            else
-            {
-                scan[n - 1] = 0;
-            }
+      if (slope > currentSlopeStepTable[4]) {
+        scan[n - 1] = 5;
+      } else if (slope > currentSlopeStepTable[3]) {
+        scan[n - 1] = 4;
+      } else if (slope > currentSlopeStepTable[2]) {
+        scan[n - 1] = 3;
+      } else if (slope > currentSlopeStepTable[1]) {
+        scan[n - 1] = 2;
+      } else if (slope > currentSlopeStepTable[0]) {
+        scan[n - 1] = 1;
+      } else {
+        scan[n - 1] = 0;
+      }
+    }
+  }
+}
+
+void IDem::elevationLimit(QVector<float>& data, qreal w, qreal h, QImage& img) const {
+  int wp2 = w + 2;
+
+  for (unsigned int m = 1; m <= h; m++) {
+    unsigned char* scan = img.scanLine(m - 1);
+    for (unsigned int n = 1; n <= w; n++) {
+      float win[eWinsize3x3];
+      fillWindow(data, n, m, wp2, win);
+
+      // get maximum of window (_not_ mean)
+      //
+      qreal meters = -2.0;
+      for (unsigned int i = 0; i < eWinsize3x3; i++) {
+        if (win[i] != noData && win[i] > meters) {
+          meters = win[i];
         }
+      }
+
+      qreal elevation;  // elevation in the units set by the user
+      QString unit;     // result not used
+      IUnit::self().meter2elevation(meters, elevation, unit);
+      if (elevation >= getElevationLimit()) {
+        scan[n - 1] = 1;
+      } else {
+        scan[n - 1] = 0;
+      }
     }
+  }
 }
 
-void IDem::elevationLimit(QVector<float>& data, qreal w, qreal h, QImage& img) const
-{
-    int wp2 = w + 2;
+void IDem::elevationShading(QVector<float>& data, qreal w, qreal h, QImage& img) const {
+  int wp2 = w + 2;
 
-    for(unsigned int m = 1; m <= h; m++)
-    {
-        unsigned char* scan = img.scanLine(m - 1);
-        for(unsigned int n = 1; n <= w; n++)
-        {
-            float win[eWinsize3x3];
-            fillWindow(data, n, m, wp2, win);
+  for (unsigned int m = 1; m <= h; m++) {
+    unsigned char* scan = img.scanLine(m - 1);
+    for (unsigned int n = 1; n <= w; n++) {
+      float win[eWinsize3x3];
+      fillWindow(data, n, m, wp2, win);
 
-            // get maximum of window (_not_ mean)
-            //
-            qreal meters = -2.0;
-            for(unsigned int i = 0; i < eWinsize3x3; i++)
-            {
-                if(win[i] != noData && win[i] > meters)
-                {
-                    meters = win[i];
-                }
-            }
-
-            qreal elevation; // elevation in the units set by the user
-            QString unit; // result not used
-            IUnit::self().meter2elevation(meters, elevation, unit);
-            if(elevation >= getElevationLimit())
-            {
-                scan[n - 1] = 1;
-            }
-            else
-            {
-                scan[n - 1] = 0;
-            }
+      // get maximum of window (_not_ mean)
+      //
+      qreal meters = -2.0;
+      for (unsigned int i = 0; i < eWinsize3x3; i++) {
+        if (win[i] != noData && win[i] > meters) {
+          meters = win[i];
         }
+      }
+
+      qreal elevation;  // elevation in the units set by the user
+      QString unit;     // result not used
+      IUnit::self().meter2elevation(meters, elevation, unit);
+
+      // calc shade of elevation based and  clip set min and max values
+      int limitLow = std::min(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+      int limitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+
+      if (elevation < limitLow) {
+        scan[n - 1] = 0;
+      } else if (elevation < limitHi) {
+        qreal relLimit = (elevation - limitLow) / (limitHi - limitLow);
+        scan[n - 1] = 1 + relLimit * 253;
+      } else {
+        scan[n - 1] = 255;
+      }
     }
+  }
 }
 
-void IDem::elevationShading(QVector<float>& data, qreal w, qreal h, QImage& img) const
-{
-    int wp2 = w + 2;
+void IDem::slotShowElevationShadeScale(bool yes) { bShowElevationShadeScale = yes; }
 
-    for(unsigned int m = 1; m <= h; m++)
-    {
-        unsigned char* scan = img.scanLine(m - 1);
-        for(unsigned int n = 1; n <= w; n++)
-        {
-            float win[eWinsize3x3];
-            fillWindow(data, n, m, wp2, win);
-
-            // get maximum of window (_not_ mean)
-            //
-            qreal meters = -2.0;
-            for(unsigned int i = 0; i < eWinsize3x3; i++)
-            {
-                if(win[i] != noData && win[i] > meters)
-                {
-                    meters = win[i];
-                }
-            }
-
-            qreal elevation; // elevation in the units set by the user
-            QString unit; // result not used
-            IUnit::self().meter2elevation(meters, elevation, unit);
-
-            // calc shade of elevation based and  clip set min and max values
-            int limitLow = std::min(getElevationShadeLimitLow(), getElevationShadeLimitHi());
-            int limitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
-
-            if(elevation < limitLow)
-            {
-                scan[n - 1] = 0;
-            }
-            else if(elevation < limitHi)
-            {
-                qreal relLimit = (elevation - limitLow) / (limitHi - limitLow);
-                scan[n - 1] = 1 + relLimit * 253;
-            }
-            else
-            {
-                scan[n - 1] = 255;
-            }
-        }
-    }
-}
-
-void IDem::slotShowElevationShadeScale(bool yes)
-{
-    bShowElevationShadeScale = yes;
-}
-
-void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p)
-{
-    drawTileLQ(img, l, p, *dem, proj);
-}
+void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p) { drawTileLQ(img, l, p, *dem, proj); }

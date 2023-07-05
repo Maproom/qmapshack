@@ -23,31 +23,26 @@
 #include <QMap>
 #include <QSqlDatabase>
 
-class IDB
-{
-    Q_DECLARE_TR_FUNCTIONS(IDB)
+class IDB {
+  Q_DECLARE_TR_FUNCTIONS(IDB)
 
-public:
-    IDB();
-    virtual ~IDB();
+ public:
+  IDB();
+  virtual ~IDB();
 
-    QSqlDatabase& getDb() { return db; }
+  QSqlDatabase& getDb() { return db; }
 
-    static quint64 getLastInsertID(QSqlDatabase& db, const QString& table);
+  static quint64 getLastInsertID(QSqlDatabase& db, const QString& table);
 
-    bool isUsable() const
-    {
-        return db.isOpen();
-    }
+  bool isUsable() const { return db.isOpen(); }
 
-protected:
-    static QMap<QString, int> references;
-    QSqlDatabase db;
-    void setup(const QString& connectionName);
-    bool setupDB(QString& error);
-    virtual bool initDB() = 0;
-    virtual bool migrateDB(int version) = 0;
+ protected:
+  static QMap<QString, int> references;
+  QSqlDatabase db;
+  void setup(const QString& connectionName);
+  bool setupDB(QString& error);
+  virtual bool initDB() = 0;
+  virtual bool migrateDB(int version) = 0;
 };
 
-#endif //IDB_H
-
+#endif  // IDB_H

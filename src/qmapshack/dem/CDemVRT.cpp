@@ -28,10 +28,6 @@
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
-#define TILELIMIT 30000
-#define TILESIZEX 64
-#define TILESIZEY 64
-
 CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), filename(filename) {
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
@@ -112,10 +108,14 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   qDebug() << "FF" << trFwd;
   qDebug() << "RR" << trInv;
 
+  connect(dem, &CDemDraw::sigNeedsRedraw, this, &CDemVRT::slotNeedsRedraw);
+
   isActivated = true;
 }
 
 CDemVRT::~CDemVRT() { GDALClose(dataset); }
+
+void CDemVRT::slotNeedsRedraw() { threadPool.clear(); }
 
 qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale) {
   if (!proj.isValid() || (checkScale && outOfScale)) {
@@ -176,13 +176,16 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale) {
   qreal y = pt.y() - qFloor(pt.y());
 
   float win[eWinsize4x4];
-  mutex.lock();
-  CPLErr err =
-      dataset->RasterIO(GF_Read, qFloor(pt.x()) - 1, qFloor(pt.y()) - 1, 4, 4, &win, 4, 4, GDT_Float32, 1, 0, 0, 0, 0);
-  mutex.unlock();
-  if (err == CE_Failure) {
-    return NOFLOAT;
+  {
+    QMutexLocker lock(&mutex);
+
+    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()) - 1, qFloor(pt.y()) - 1, 4, 4, &win, 4, 4, GDT_Float32, 1, 0,
+                                   0, 0, 0);
+    if (err != CE_None) {
+      return NOFLOAT;
+    }
   }
+
   for (int i = 0; i < eWinsize4x4; i++) {
     if (hasNoData && win[i] == noData) {
       return NOFLOAT;
@@ -261,15 +264,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
     bottom = 1;
   }
 
-  qint32 w = TILESIZEX;
-  qint32 h = TILESIZEY;
-
-  /*
-      As the 3x3 window will create a border of one pixel
-      more data is read than displayed to compensate.
-   */
-  int wp2 = w + 2;
-  int hp2 = h + 2;
+  const qint32 w = 2048 / xscale;
+  const qint32 h = 2048 / xscale;
 
   // start to draw the map
   QPainter p(&buf.image);
@@ -280,121 +276,133 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   qreal o2 = ((o1 + 0.4) >= 1.0) ? o1 : (o1 + 0.4);
   p.setOpacity(o1);
 
-  qreal nTiles = ((right - left) * (bottom - top) / (w * h));
-  if (nTiles < TILELIMIT) {
-    for (qint32 y = top - 1; y < bottom; y += h) {
+  for (qint32 y = top - 1; y < bottom; y += h) {
+    if (dem->needsRedraw()) {
+      break;
+    }
+
+    for (qint32 x = left - 1; x < right; x += w) {
       if (dem->needsRedraw()) {
         break;
       }
-
-      for (qint32 x = left - 1; x < right; x += w) {
-        if (dem->needsRedraw()) {
-          break;
-        }
-
-        CPLErr err = CE_Failure;
-
-        qreal wp2_used = wp2;
-        qreal hp2_used = hp2;
-        qreal w_used = w;
-        qreal h_used = h;
-
-        if ((x + wp2) > xsize_px) {
-          wp2_used = xsize_px - x;
-          w_used = wp2_used - 2;
-          if (w_used < 2) {
-            continue;
-          }
-        }
-
-        if ((y + hp2) > ysize_px) {
-          hp2_used = ysize_px - y;
-          h_used = hp2_used - 2;
-          if (h_used < 2) {
-            continue;
-          }
-        }
-
-        QVector<float> data(wp2_used * hp2_used);
-        mutex.lock();
-        err = dataset->RasterIO(GF_Read, x, y, wp2_used, hp2_used, data.data(), wp2_used, hp2_used, GDT_Float32, 1, 0,
-                                0, 0, 0);
-        mutex.unlock();
-
-        if (err) {
-          continue;
-        }
-
-        QPolygonF l(4);
-        l[0] = QPointF(x + 1, y + 1);
-        l[1] = QPointF(x + 1 + w_used, y + 1);
-        l[2] = QPointF(x + 1 + w_used, y + 1 + h_used);
-        l[3] = QPointF(x + 1, y + 1 + h_used);
-        l = trFwd.map(l);
-
-        proj.transform(l, PJ_FWD);
-
-        if (doHillshading()) {
-          QPolygonF r = l;
-
-          QImage img(w_used, h_used, QImage::Format_Indexed8);
-          img.setColorTable(graytable);
-
-          hillshading(data, w_used, h_used, img);
-
-          drawTile(img, r, p);
-        }
-
-        if (doSlopeShading()) {
-          QPolygonF r = l;
-
-          QImage img(w_used, h_used, QImage::Format_Alpha8);
-
-          slopeShading(data, w_used, h_used, img);
-
-          drawTile(img, r, p);
-        }
-
-        if (doSlopeColor()) {
-          QPolygonF r = l;
-
-          QImage img(w_used, h_used, QImage::Format_Indexed8);
-          img.setColorTable(slopetable);
-
-          slopecolor(data, w_used, h_used, img);
-
-          p.setOpacity(o2);
-          drawTile(img, r, p);
-          p.setOpacity(o1);
-        }
-
-        if (doElevationLimit()) {
-          QPolygonF r = l;
-
-          QImage img(w_used, h_used, QImage::Format_Indexed8);
-          img.setColorTable(elevationtable);
-
-          elevationLimit(data, w_used, h_used, img);
-
-          p.setOpacity(o2);
-          drawTile(img, r, p);
-          p.setOpacity(o1);
-        }
-
-        if (doElevationShading()) {
-          QPolygonF r = l;
-
-          QImage img(w_used, h_used, QImage::Format_Indexed8);
-          img.setColorTable(elevationShadeTable);
-
-          elevationShading(data, w_used, h_used, img);
-
-          drawTile(img, r, p);
-        }
-      }
+      // queue task to render tile
+      threadPool.start([this, x, y, w, h, &p, o1, o2]() { drawTile(x, y, w, h, o1, o2, p); });
     }
+  }
+  threadPool.waitForDone();
+  drawElevationShadeScale(p);
+}
 
-    drawElevationShadeScale(p);
+void CDemVRT::drawTile(const qint32 x, const qint32 y, const qint32 w, const qint32 h, const qreal o1, const qreal o2,
+                       QPainter& p) const {
+  /*
+      As the 3x3 window will create a border of one pixel
+      more data is read than displayed to compensate.
+   */
+  const qint32 wp2 = w + 2;
+  const qint32 hp2 = h + 2;
+  qreal wp2_used = wp2;
+  qreal hp2_used = hp2;
+  qreal w_used = w;
+  qreal h_used = h;
+
+  if ((x + wp2) > xsize_px) {
+    wp2_used = xsize_px - x;
+    w_used = wp2_used - 2;
+    if (w_used < 2) {
+      return;
+    }
+  }
+
+  if ((y + hp2) > ysize_px) {
+    hp2_used = ysize_px - y;
+    h_used = hp2_used - 2;
+    if (h_used < 2) {
+      return;
+    }
+  }
+
+  QVector<float> data(wp2_used * hp2_used);
+  {
+    QMutexLocker lock(&mutex);
+    CPLErr err = dataset->RasterIO(GF_Read, x, y, wp2_used, hp2_used, data.data(), wp2_used, hp2_used, GDT_Float32, 1,
+                                   0, 0, 0, 0);
+    if (err != CE_None) {
+      return;
+    }
+  }
+
+  QPolygonF l(4);
+  l[0] = QPointF(x + 1, y + 1);
+  l[1] = QPointF(x + 1 + w_used, y + 1);
+  l[2] = QPointF(x + 1 + w_used, y + 1 + h_used);
+  l[3] = QPointF(x + 1, y + 1 + h_used);
+  l = trFwd.map(l);
+
+  proj.transform(l, PJ_FWD);
+
+  if (doHillshading()) {
+    QPolygonF r = l;
+    QImage img(w_used, h_used, QImage::Format_Indexed8);
+    img.setColorTable(graytable);
+
+    hillshading(data, w_used, h_used, img);
+
+    {
+      QMutexLocker lock(&mutex);
+      drawTile(img, r, p);
+    }
+  }
+
+  if (doSlopeShading()) {
+    QPolygonF r = l;
+    QImage img(w_used, h_used, QImage::Format_Alpha8);
+    slopeShading(data, w_used, h_used, img);
+
+    {
+      QMutexLocker lock(&mutex);
+      drawTile(img, r, p);
+    }
+  }
+
+  if (doSlopeColor()) {
+    QPolygonF r = l;
+    QImage img(w_used, h_used, QImage::Format_Indexed8);
+    img.setColorTable(slopetable);
+    slopecolor(data, w_used, h_used, img);
+
+    {
+      QMutexLocker lock(&mutex);
+      p.setOpacity(o2);
+      drawTile(img, r, p);
+      p.setOpacity(o1);
+    }
+  }
+
+  if (doElevationLimit()) {
+    QPolygonF r = l;
+    QImage img(w_used, h_used, QImage::Format_Indexed8);
+    img.setColorTable(elevationtable);
+    elevationLimit(data, w_used, h_used, img);
+
+    {
+      QMutexLocker lock(&mutex);
+      p.setOpacity(o2);
+      drawTile(img, r, p);
+      p.setOpacity(o1);
+    }
+  }
+
+  if (doElevationShading()) {
+    QPolygonF r = l;
+    QImage img(w_used, h_used, QImage::Format_Indexed8);
+    img.setColorTable(elevationShadeTable);
+    elevationShading(data, w_used, h_used, img);
+
+    {
+      QMutexLocker lock(&mutex);
+      drawTile(img, r, p);
+    }
   }
 }
 

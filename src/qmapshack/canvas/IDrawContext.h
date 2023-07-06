@@ -135,6 +135,7 @@ class IDrawContext : public QThread {
   void sigStartThread();
   void sigStopThread();
   void sigScaleChanged(const QPointF& scale);
+  void sigNeedsRedraw();
 
  public slots:
   void emitSigCanvasUpdate();

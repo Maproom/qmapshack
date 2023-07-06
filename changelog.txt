@@ -30,6 +30,7 @@ V1.XX.X
 [QMS-606] Better hillshading with high resolution Lidar data
 [QMS-608] Update local copy of alglib 
 [QMS-610] Replace uncrustify by clang-format
+[QMS-612] Optimize DEM rendering by using a thread pool
 
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing

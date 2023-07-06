@@ -20,6 +20,7 @@
 #define CDEMVRT_H
 
 #include <QMutex>
+#include <QThreadPool>
 
 #include "dem/IDem.h"
 
@@ -37,10 +38,16 @@ class CDemVRT : public IDem {
   qreal getElevationAt(const QPointF& pos, bool checkScale) override;
   qreal getSlopeAt(const QPointF& pos, bool checkScale) override;
 
- private:
-  void drawElevationShadeScale(QPainter& p) const;
+ private slots:
+  void slotNeedsRedraw();
 
-  QMutex mutex;
+ private:
+  using IDem::drawTile;
+  void drawElevationShadeScale(QPainter& p) const;
+  void drawTile(const qint32 x, const qint32 y, const qint32 w, const qint32 h,
+                const qreal o1, const qreal o2, QPainter& p) const;
+
+  mutable QMutex mutex;
 
   QString filename;
   /// instance of GDAL dataset
@@ -55,10 +62,11 @@ class CDemVRT : public IDem {
   QTransform trInv;
 
   bool hasOverviews = false;
+  bool outOfScale = false;
 
   QRectF boundingBox;
 
-  bool outOfScale = false;
+  QThreadPool threadPool;
 };
 
 #endif  // CDEMVRT_H

@@ -65,16 +65,17 @@ inline void fillWindow4x4(QVector<T>& data, qreal x, qreal y, int dx, T* w) {
   w[15] = getValue(data, x + 2, y + 2, dx);
 }
 
-const struct SlopePresets IDem::slopePresets[7]{/* http://www.alpenverein.de/bergsport/sicherheit/skitouren-schneeschuh-sicher-im-schnee/dav-snowcard_aid_10619.html
-                                                 */
-                                                {"Grade 1 (DAV Snowcard)", {27.0, 31.0, 34.0, 39.0, 50.0}},
-                                                {"Grade 2 (DAV Snowcard)", {27.0, 30.0, 32.0, 35.0, 39.0}},
-                                                {"Grade 3 (DAV Snowcard)", {27.0, 29.0, 30.0, 31.0, 34.0}},
-                                                {"Grade 4 (DAV Snowcard)", {23.0, 25.0, 27.0, 28.0, 30.0}},
+const struct SlopePresets IDem::slopePresets[7]{
+    /* http://www.alpenverein.de/bergsport/sicherheit/skitouren-schneeschuh-sicher-im-schnee/dav-snowcard_aid_10619.html
+     */
+    {"Grade 1 (DAV Snowcard)", {27.0, 31.0, 34.0, 39.0, 50.0}},
+    {"Grade 2 (DAV Snowcard)", {27.0, 30.0, 32.0, 35.0, 39.0}},
+    {"Grade 3 (DAV Snowcard)", {27.0, 29.0, 30.0, 31.0, 34.0}},
+    {"Grade 4 (DAV Snowcard)", {23.0, 25.0, 27.0, 28.0, 30.0}},
 
-                                                {"level country", {3.0, 6.0, 8.0, 12.0, 15.0}},
-                                                {"secondary mountain", {4.0, 7.0, 10.0, 15.0, 20.0}},
-                                                {"lofty mountain", {10.0, 15.0, 20.0, 30.0, 50.0}}};
+    {"level country", {3.0, 6.0, 8.0, 12.0, 15.0}},
+    {"secondary mountain", {4.0, 7.0, 10.0, 15.0, 20.0}},
+    {"lofty mountain", {10.0, 15.0, 20.0, 30.0, 50.0}}};
 
 IDem::IDem(CDemDraw* parent) : IDrawObject(parent), dem(parent) {
   slotSetOpacity(17);
@@ -431,4 +432,4 @@ void IDem::elevationShading(QVector<float>& data, qreal w, qreal h, QImage& img)
 
 void IDem::slotShowElevationShadeScale(bool yes) { bShowElevationShadeScale = yes; }
 
-void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p) { drawTileLQ(img, l, p, *dem, proj); }
+void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p) const { drawTileLQ(img, l, p, *dem, proj); }

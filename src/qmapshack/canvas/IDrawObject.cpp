@@ -72,7 +72,8 @@ void IDrawObject::setMaxScale(qreal s) {
   maxScale = s;
 }
 
-void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, const CProj& proj) {
+void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context,
+                             const CProj& proj) const {
   QPolygonF tmp = l;
   context.convertRad2Px(l);
 
@@ -104,7 +105,8 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
   p.restore();
 }
 
-void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, const CProj& proj) {
+void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context,
+                             const CProj& proj) const {
   // the sub-tiles need a sensible size
   // if they get too small there will be too much
   // rounding effects.

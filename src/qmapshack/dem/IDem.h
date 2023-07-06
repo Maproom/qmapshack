@@ -150,7 +150,7 @@ class IDem : public IDrawObject {
      @param l     a 4 point polygon to fit the tile in
      @param p     the QPainter used to paint the tile
    */
-  void drawTile(QImage& img, QPolygonF& l, QPainter& p);
+  void drawTile(QImage& img, QPolygonF& l, QPainter& p) const;
 
   CDemDraw* dem;
 

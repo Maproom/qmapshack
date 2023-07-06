@@ -164,7 +164,7 @@ void IDrawContext::zoom(int idx) {
     zoomFactor.rx() = scales[idx];
     zoomFactor.ry() = scales[idx];
     intNeedsRedraw = true;
-
+    emit sigNeedsRedraw();
     emit sigScaleChanged(scale * zoomFactor);
   }
   mutex.unlock();  // --------- stop serialize with thread
@@ -370,6 +370,7 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
   // intNeedsRedraw is reset by the thread
   if (needsRedraw & maskRedraw) {
     intNeedsRedraw = true;
+    emit sigNeedsRedraw();
   }
   mutex.unlock();  // --------- stop serialize with thread
 

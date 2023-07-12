@@ -5749,8 +5749,8 @@ ist keine gültige Koordinatensystemdefinition:
         <source>Your Java version %1 seems to be older than the required version %2.
 BRouter will probably not work as expected.
 Please check the logs if Brouter fails to start.</source>
-        <translation>Ihre Java Version %1 scheint älter zu sein als die benötigte Version %2
-BRoute wird whrscheinlich nicht wie erwartet funktionieren.
+        <translation type="unfinished">Ihre Java Version %1 scheint älter zu sein als die benötigte Version %2
+BRouter wird wahrscheinlich nicht wie erwartet funktionieren.
 Bitte schauen Sie in den Logs nach, wenn BRouter nicht startet.</translation>
     </message>
     <message>

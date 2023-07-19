@@ -22,7 +22,6 @@
 #include <QApplication>
 #include <QtCore>
 
-#include "CAppOpts.h"
 
 class IAppSetup {
  public:

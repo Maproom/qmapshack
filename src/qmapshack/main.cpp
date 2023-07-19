@@ -22,6 +22,7 @@
 
 #include "CMainWindow.h"
 #include "CSingleInstanceProxy.h"
+#include "setup/CAppOpts.h"
 #include "setup/IAppSetup.h"
 #include "version.h"
 

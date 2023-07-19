@@ -31,6 +31,7 @@ V1.XX.X
 [QMS-608] Update local copy of alglib 
 [QMS-610] Replace uncrustify by clang-format
 [QMS-612] Optimize DEM rendering by using a thread pool
+[QMS-615] Syntax error when compiling QMS for Windows
 
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing

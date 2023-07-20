@@ -19,28 +19,24 @@
 #ifndef CAPPSETUPWIN_H
 #define CAPPSETUPWIN_H
 
-#include "setup/IAppSetup.h"
-
 #include <QtCore>
 
-class CAppSetupWin : public IAppSetup
-{
-public:
-    CAppSetupWin(QObject* parent)
-        : IAppSetup(parent)
-    {
-    }
+#include "setup/IAppSetup.h"
 
-    ~CAppSetupWin() = default;
-    void initQMapTool() override;
+class CAppSetupWin : public IAppSetup {
+ public:
+  CAppSetupWin(QObject* parent) : IAppSetup(parent) {}
 
-    QString defaultCachePath() override;
-    QString userDataPath(QString subdir = 0) override;
-    QString logDir() override;
-    QString findExecutable(const QString& name) override;
-    QString helpFile() override;
+  ~CAppSetupWin() = default;
+  void initQMapTool() override;
 
-    QByteArray path;
+  QString defaultCachePath() override;
+  QString userDataPath(QString subdir = 0) override;
+  QString logDir() override;
+  QString findExecutable(const QString& name) override;
+  QString helpFile() override;
+
+  QByteArray path;
 };
 
-#endif // CAPPSETUPWIN_H
+#endif  // CAPPSETUPWIN_H

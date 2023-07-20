@@ -21,36 +21,34 @@
 
 #include "tool/IToolShell.h"
 
-#if defined (Q_OS_WIN32)
+#if defined(Q_OS_WIN32)
 #define USE_KILL_FOR_SHUTDOWN
 #endif
 
-class CRouterBRouterToolShell : public IToolShell
-{
-    Q_OBJECT
-public:
-    CRouterBRouterToolShell(QTextBrowser* textBrowser, QWidget* parent);
-    virtual ~CRouterBRouterToolShell();
+class CRouterBRouterToolShell : public IToolShell {
+  Q_OBJECT
+ public:
+  CRouterBRouterToolShell(QTextBrowser* textBrowser, QWidget* parent);
+  virtual ~CRouterBRouterToolShell();
 
-    void start(const QString& dir, const QString& command, const QStringList& args);
-    void stop();
+  void start(const QString& dir, const QString& command, const QStringList& args);
+  void stop();
 
-signals:
-    void sigProcessStateChanged(const QProcess::ProcessState newState);
-    void sigProcessError(const QProcess::ProcessError error, const QString& errorString);
+ signals:
+  void sigProcessStateChanged(const QProcess::ProcessState newState);
+  void sigProcessError(const QProcess::ProcessError error, const QString& errorString);
 
-private slots:
-    void slotStateChanged(const QProcess::ProcessState newState);
-    void slotError(const QProcess::ProcessError error);
-    void slotStartupTimer();
+ private slots:
+  void slotStateChanged(const QProcess::ProcessState newState);
+  void slotError(const QProcess::ProcessError error);
+  void slotStartupTimer();
 
-private:
-    void finished(int exitCode, QProcess::ExitStatus status) override;
+ private:
+  void finished(int exitCode, QProcess::ExitStatus status) override;
 
-    bool isBeingKilled { false };
-    bool isStarting { false };
-    QTimer* startupTimer { nullptr };
+  bool isBeingKilled{false};
+  bool isStarting{false};
+  QTimer* startupTimer{nullptr};
 };
 
-#endif //CROUTERBROUTERTOOLSHELL_H
-
+#endif  // CROUTERBROUTERTOOLSHELL_H

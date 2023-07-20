@@ -19,39 +19,37 @@
 #ifndef CROUTINODATABASEBUILDER_H
 #define CROUTINODATABASEBUILDER_H
 
-#include "tool/IToolShell.h"
-#include "ui_IRoutinoDatabaseBuilder.h"
 #include <QTemporaryFile>
 
+#include "tool/IToolShell.h"
+#include "ui_IRoutinoDatabaseBuilder.h"
 
-class CRoutinoDatabaseBuilder : public IToolShell, private Ui::IRoutinoDatabaseBuilder
-{
-    Q_OBJECT
-public:
-    CRoutinoDatabaseBuilder(QWidget* parent);
-    virtual ~CRoutinoDatabaseBuilder();
+class CRoutinoDatabaseBuilder : public IToolShell, private Ui::IRoutinoDatabaseBuilder {
+  Q_OBJECT
+ public:
+  CRoutinoDatabaseBuilder(QWidget* parent);
+  virtual ~CRoutinoDatabaseBuilder();
 
-private slots:
-    void slotSelectSourceFiles();
-    void slotSelectTargetPath();
-    void slotStart();
+ private slots:
+  void slotSelectSourceFiles();
+  void slotSelectTargetPath();
+  void slotStart();
 
-    void enabelStartButton();
-    void slotLinkActivated(const QUrl& url);
+  void enabelStartButton();
+  void slotLinkActivated(const QUrl& url);
 
-private:
-    void finished(int exitCode, QProcess::ExitStatus status) override;
+ private:
+  void finished(int exitCode, QProcess::ExitStatus status) override;
 
-    bool first = false;
-    bool tainted = false;
-    bool last = false;
+  bool first = false;
+  bool tainted = false;
+  bool last = false;
 
-    QStringList sourceFiles;
-    QString targetPrefix;
-    QString targetPath;
+  QStringList sourceFiles;
+  QString targetPrefix;
+  QString targetPath;
 
-    QString planetsplitter;
+  QString planetsplitter;
 };
 
-#endif //CROUTINODATABASEBUILDER_H
-
+#endif  // CROUTINODATABASEBUILDER_H

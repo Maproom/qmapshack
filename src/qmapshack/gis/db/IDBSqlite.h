@@ -21,24 +21,22 @@
 
 #include "gis/db/IDB.h"
 
-class IDBSqlite : public IDB
-{
-    Q_DECLARE_TR_FUNCTIONS(IDBSqlite)
-public:
-    IDBSqlite();
-    virtual ~IDBSqlite() = default;
+class IDBSqlite : public IDB {
+  Q_DECLARE_TR_FUNCTIONS(IDBSqlite)
+ public:
+  IDBSqlite();
+  virtual ~IDBSqlite() = default;
 
-protected:
-    using IDB::setupDB;
-    bool setupDB(const QString& filename, const QString& connectionName, QString& error);
-    bool initDB() override;
-    bool migrateDB(int version) override;
-    bool migrateDB1to2();
-    bool migrateDB2to3();
-    bool migrateDB3to4();
-    bool migrateDB4to5();
-    bool migrateDB5to6();
+ protected:
+  using IDB::setupDB;
+  bool setupDB(const QString& filename, const QString& connectionName, QString& error);
+  bool initDB() override;
+  bool migrateDB(int version) override;
+  bool migrateDB1to2();
+  bool migrateDB2to3();
+  bool migrateDB3to4();
+  bool migrateDB4to5();
+  bool migrateDB5to6();
 };
 
-#endif //IDBSQLITE_H
-
+#endif  // IDBSQLITE_H

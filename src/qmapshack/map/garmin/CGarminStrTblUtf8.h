@@ -20,12 +20,11 @@
 
 #include "IGarminStrTbl.h"
 
-class CGarminStrTblUtf8 : public IGarminStrTbl
-{
-public:
-    CGarminStrTblUtf8(const quint16 codepage, const quint8 mask, QObject* parent);
-    virtual ~CGarminStrTblUtf8();
+class CGarminStrTblUtf8 : public IGarminStrTbl {
+ public:
+  CGarminStrTblUtf8(const quint16 codepage, const quint8 mask, QObject* parent);
+  virtual ~CGarminStrTblUtf8();
 
-    void get(CFileExt& file, quint32 offset, type_e t, QStringList& info) override;
+  void get(CFileExt& file, quint32 offset, type_e t, QStringList& info) override;
 };
-#endif //CGARMINSTRTBLUTF8_H
+#endif  // CGARMINSTRTBLUTF8_H

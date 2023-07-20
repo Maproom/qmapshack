@@ -32,40 +32,36 @@
 #include <QPalette>
 #include <QSpinBox>
 
-class CTinySpinBox : public QSpinBox
-{
-    Q_OBJECT
+class CTinySpinBox : public QSpinBox {
+  Q_OBJECT
 
-private:
-    bool initialized;
+ private:
+  bool initialized;
 
-    QPalette paletteEdit;
-    QPalette paletteRO;
-    QPalette paletteRW;
+  QPalette paletteEdit;
+  QPalette paletteRO;
+  QPalette paletteRW;
 
-    QFont fontNoUnderline;
-    QFont fontUnderline;
+  QFont fontNoUnderline;
+  QFont fontUnderline;
 
-    void initialize();
-    void updateStyle();
+  void initialize();
+  void updateStyle();
 
-public slots:
-    void slotSelectAll()
-    {
-        selectAll();
-    }
+ public slots:
+  void slotSelectAll() { selectAll(); }
 
-signals:
-    void valueChangedByStep(int val);
+ signals:
+  void valueChangedByStep(int val);
 
-public:
-    CTinySpinBox(QWidget* parent = nullptr);
+ public:
+  CTinySpinBox(QWidget* parent = nullptr);
 
-    void setReadOnly(bool r);
-    void stepBy(int steps) override;
+  void setReadOnly(bool r);
+  void stepBy(int steps) override;
 
-protected:
-    void focusInEvent(QFocusEvent* event) override;
-    void focusOutEvent(QFocusEvent* event) override;
+ protected:
+  void focusInEvent(QFocusEvent* event) override;
+  void focusOutEvent(QFocusEvent* event) override;
 };
-#endif // CTINYSPINBOX_H
+#endif  // CTINYSPINBOX_H

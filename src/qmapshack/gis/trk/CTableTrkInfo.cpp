@@ -17,158 +17,134 @@
 **********************************************************************************************/
 
 #include "gis/trk/CTableTrkInfo.h"
-#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 
-CTableTrkInfo::CTableTrkInfo(QWidget* parent)
-    : QTreeWidget(parent)
-    , INotifyTrk(CGisItemTrk::eVisualTrkTable)
-{
-    actionEdit = new QAction(QIcon("://icons/32x32/EditText.png"), tr("Edit..."), this);
-    actionDelete = new QAction(QIcon("://icons/32x32/DeleteMultiple.png"), tr("Delete"), this);
+#include "helpers/CDraw.h"
 
-    menu = new QMenu(this);
-    menu->addAction(actionEdit);
-    menu->addAction(actionDelete);
+CTableTrkInfo::CTableTrkInfo(QWidget* parent) : QTreeWidget(parent), INotifyTrk(CGisItemTrk::eVisualTrkTable) {
+  actionEdit = new QAction(QIcon("://icons/32x32/EditText.png"), tr("Edit..."), this);
+  actionDelete = new QAction(QIcon("://icons/32x32/DeleteMultiple.png"), tr("Delete"), this);
 
-    connect(actionEdit, &QAction::triggered, this, &CTableTrkInfo::slotEdit);
-    connect(actionDelete, &QAction::triggered, this, &CTableTrkInfo::slotDelete);
+  menu = new QMenu(this);
+  menu->addAction(actionEdit);
+  menu->addAction(actionDelete);
 
-    connect(this, &CTableTrkInfo::customContextMenuRequested, this, &CTableTrkInfo::slotContextMenu);
-    connect(this, &CTableTrkInfo::itemChanged, this, &CTableTrkInfo::slotItemChanged);
-    connect(this, &CTableTrkInfo::itemSelectionChanged, this, &CTableTrkInfo::slotItemSelectionChanged);
+  connect(actionEdit, &QAction::triggered, this, &CTableTrkInfo::slotEdit);
+  connect(actionDelete, &QAction::triggered, this, &CTableTrkInfo::slotDelete);
+
+  connect(this, &CTableTrkInfo::customContextMenuRequested, this, &CTableTrkInfo::slotContextMenu);
+  connect(this, &CTableTrkInfo::itemChanged, this, &CTableTrkInfo::slotItemChanged);
+  connect(this, &CTableTrkInfo::itemSelectionChanged, this, &CTableTrkInfo::slotItemSelectionChanged);
 }
 
-CTableTrkInfo::~CTableTrkInfo()
-{
-    if(trk != nullptr)
-    {
-        trk->unregisterVisual(this);
-    }
+CTableTrkInfo::~CTableTrkInfo() {
+  if (trk != nullptr) {
+    trk->unregisterVisual(this);
+  }
 }
 
-void CTableTrkInfo::setTrack(CGisItemTrk* track)
-{
-    setColumnCount(eColMax);
+void CTableTrkInfo::setTrack(CGisItemTrk* track) {
+  setColumnCount(eColMax);
 
-    QStringList labels;
-    labels << "#";
-    labels << tr("Description");
-    setHeaderLabels(labels);
+  QStringList labels;
+  labels << "#";
+  labels << tr("Description");
+  setHeaderLabels(labels);
 
-    if(trk != nullptr)
-    {
-        trk->unregisterVisual(this);
-    }
+  if (trk != nullptr) {
+    trk->unregisterVisual(this);
+  }
 
-    clear();
-    trk = track;
+  clear();
+  trk = track;
 
-    if(trk != nullptr)
-    {
-        trk->registerVisual(this);
-        updateData();
-    }
+  if (trk != nullptr) {
+    trk->registerVisual(this);
+    updateData();
+  }
 
-    adjustSize();
+  adjustSize();
 }
 
-void CTableTrkInfo::updateData()
-{
-    if(trk == nullptr)
-    {
-        return;
+void CTableTrkInfo::updateData() {
+  if (trk == nullptr) {
+    return;
+  }
+
+  qint32 cnt = 1;
+  QList<QTreeWidgetItem*> items;
+  for (const CTrackData::trkpt_t& trkpt : trk->getTrackData()) {
+    if (trkpt.desc.isEmpty()) {
+      continue;
     }
 
-    qint32 cnt = 1;
-    QList<QTreeWidgetItem*> items;
-    for(const CTrackData::trkpt_t& trkpt : trk->getTrackData())
-    {
-        if(trkpt.desc.isEmpty())
-        {
-            continue;
-        }
+    QTreeWidgetItem* item = new QTreeWidgetItem();
+    item->setIcon(eColNum, CDraw::number(cnt++, Qt::black));
+    item->setText(eColDesc, trkpt.desc);
+    item->setFlags(item->flags() | Qt::ItemIsEditable);
+    item->setData(eColDesc, Qt::UserRole, trkpt.idxTotal);
+    items << item;
+  }
 
-        QTreeWidgetItem* item = new QTreeWidgetItem();
-        item->setIcon(eColNum, CDraw::number(cnt++, Qt::black));
-        item->setText(eColDesc, trkpt.desc);
-        item->setFlags(item->flags() | Qt::ItemIsEditable);
-        item->setData(eColDesc, Qt::UserRole, trkpt.idxTotal);
-        items << item;
-    }
+  clear();
+  addTopLevelItems(items);
+  header()->resizeSections(QHeaderView::ResizeToContents);
 
-    clear();
-    addTopLevelItems(items);
-    header()->resizeSections(QHeaderView::ResizeToContents);
-
-    emit sigHasTrkPtInfo(cnt > 1);
+  emit sigHasTrkPtInfo(cnt > 1);
 }
 
-void CTableTrkInfo::slotContextMenu(const QPoint& point)
-{
-    if(trk == nullptr)
-    {
-        return;
-    }
+void CTableTrkInfo::slotContextMenu(const QPoint& point) {
+  if (trk == nullptr) {
+    return;
+  }
 
-    const QList<QTreeWidgetItem*>& items = selectedItems();
-    actionEdit->setEnabled(items.count() == 1);
+  const QList<QTreeWidgetItem*>& items = selectedItems();
+  actionEdit->setEnabled(items.count() == 1);
 
-    const QPoint& p = mapToGlobal(point);
-    menu->exec(p);
+  const QPoint& p = mapToGlobal(point);
+  menu->exec(p);
 }
 
-void CTableTrkInfo::slotEdit()
-{
-    if(trk == nullptr)
-    {
-        return;
-    }
+void CTableTrkInfo::slotEdit() {
+  if (trk == nullptr) {
+    return;
+  }
 
-    QTreeWidgetItem* item = currentItem();
-    editItem(item, eColDesc);
+  QTreeWidgetItem* item = currentItem();
+  editItem(item, eColDesc);
 }
 
-void CTableTrkInfo::slotDelete()
-{
-    if(trk == nullptr)
-    {
-        return;
-    }
+void CTableTrkInfo::slotDelete() {
+  if (trk == nullptr) {
+    return;
+  }
 
-    QList<int> indices;
-    const QList<QTreeWidgetItem*>& items = selectedItems();
-    for(QTreeWidgetItem* item : items)
-    {
-        indices << item->data(eColDesc, Qt::UserRole).toInt();
-    }
+  QList<int> indices;
+  const QList<QTreeWidgetItem*>& items = selectedItems();
+  for (QTreeWidgetItem* item : items) {
+    indices << item->data(eColDesc, Qt::UserRole).toInt();
+  }
 
-    trk->delTrkPtDesc(indices);
+  trk->delTrkPtDesc(indices);
 }
 
+void CTableTrkInfo::slotItemChanged(QTreeWidgetItem* item, int column) {
+  if ((trk == nullptr) || (column != eColDesc)) {
+    return;
+  }
 
-void CTableTrkInfo::slotItemChanged(QTreeWidgetItem* item, int column)
-{
-    if((trk == nullptr) || (column != eColDesc))
-    {
-        return;
-    }
-
-    trk->setTrkPtDesc(item->data(eColDesc, Qt::UserRole).toInt(), item->text(eColDesc));
+  trk->setTrkPtDesc(item->data(eColDesc, Qt::UserRole).toInt(), item->text(eColDesc));
 }
 
-void CTableTrkInfo::slotItemSelectionChanged()
-{
-    if(trk == nullptr)
-    {
-        return;
-    }
+void CTableTrkInfo::slotItemSelectionChanged() {
+  if (trk == nullptr) {
+    return;
+  }
 
-    QTreeWidgetItem* item = currentItem();
-    if(nullptr != item)
-    {
-        trk->setMouseFocusByTotalIndex(item->data(eColDesc, Qt::UserRole).toInt(), CGisItemTrk::eFocusMouseMove, "CTableTrk");
-    }
+  QTreeWidgetItem* item = currentItem();
+  if (nullptr != item) {
+    trk->setMouseFocusByTotalIndex(item->data(eColDesc, Qt::UserRole).toInt(), CGisItemTrk::eFocusMouseMove,
+                                   "CTableTrk");
+  }
 }
-

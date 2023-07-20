@@ -16,18 +16,13 @@
 
 **********************************************************************************************/
 
-#include "CMapDraw.h"
-#include "IMap.h"
 #include "IMapProp.h"
 
-IMapProp::IMapProp(IMap* mapfile, CMapDraw* map)
-    : mapfile(mapfile)
-    , map(map)
-{
-    connect(mapfile, &IMap::sigPropertiesChanged, this, &IMapProp::slotPropertiesChanged);
+#include "CMapDraw.h"
+#include "IMap.h"
+
+IMapProp::IMapProp(IMap* mapfile, CMapDraw* map) : mapfile(mapfile), map(map) {
+  connect(mapfile, &IMap::sigPropertiesChanged, this, &IMapProp::slotPropertiesChanged);
 }
 
-IMapProp::~IMapProp()
-{
-}
-
+IMapProp::~IMapProp() {}

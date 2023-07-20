@@ -20,101 +20,80 @@
 #include "units/CUnitNautic.h"
 
 CUnitNautic::CUnitNautic(QObject* parent)
-    : IUnit(eTypeNautic, "nm", 0.00053989, "nm/h", 1.94361780, "m", 1.0, parent)
-{
-}
+    : IUnit(eTypeNautic, "nm", 0.00053989, "nm/h", 1.94361780, "m", 1.0, parent) {}
 
 void CUnitNautic::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit.clear();
-    }
-    else
-    {
-        val = QString::asprintf("%1.2f", meter * baseFactor);
-        unit = baseUnit;
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit.clear();
+  } else {
+    val = QString::asprintf("%1.2f", meter * baseFactor);
+    unit = baseUnit;
+  }
 }
 
 void CUnitNautic::meter2distance(qreal meter, qreal& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = NOFLOAT;
-        unit.clear();
-    }
-    else
-    {
-        val = meter * baseFactor;
-        unit = baseUnit;
-    }
+  if (meter == NOFLOAT) {
+    val = NOFLOAT;
+    unit.clear();
+  } else {
+    val = meter * baseFactor;
+    unit = baseUnit;
+  }
 }
 
 void CUnitNautic::meter2speed(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit.clear();
-    }
-    else
-    {
-        val = QString::asprintf("%1.2f", meter * speedFactor);
-        unit = speedUnit;
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit.clear();
+  } else {
+    val = QString::asprintf("%1.2f", meter * speedFactor);
+    unit = speedUnit;
+  }
 }
 
 void CUnitNautic::meter2speed(qreal meter, qreal& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = NOFLOAT;
-        unit.clear();
-    }
-    else
-    {
-        val = meter * speedFactor;
-        unit = speedUnit;
-    }
+  if (meter == NOFLOAT) {
+    val = NOFLOAT;
+    unit.clear();
+  } else {
+    val = meter * speedFactor;
+    unit = speedUnit;
+  }
 }
 
 void CUnitNautic::meter2area(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit.clear();
-    }
-    else
-    {
-        val = QString::asprintf("%1.2f", meter / (1852 * 1852));
-        unit = "nm²";
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit.clear();
+  } else {
+    val = QString::asprintf("%1.2f", meter / (1852 * 1852));
+    unit = "nm²";
+  }
 }
 
 void CUnitNautic::meter2area(qreal meter, qreal& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = NOFLOAT;
-        unit.clear();
-    }
-    else
-    {
-        val = meter / (1852 * 1852);
-        unit = "nm²";
-    }
+  if (meter == NOFLOAT) {
+    val = NOFLOAT;
+    unit.clear();
+  } else {
+    val = meter / (1852 * 1852);
+    unit = "nm²";
+  }
 }
 
 qreal CUnitNautic::elevation2meter(const QString& val) const /* override */
 {
-    return val.toDouble();
+  return val.toDouble();
 }
 
-void CUnitNautic::meter2unit(qreal meter, qreal& scale, QString& unit) const
-{
-    scale = baseFactor;
-    unit = "nm";
+void CUnitNautic::meter2unit(qreal meter, qreal& scale, QString& unit) const {
+  scale = baseFactor;
+  unit = "nm";
 }

@@ -22,17 +22,15 @@
 
 #include "mouse/line/ILineOp.h"
 
-class CLineOpDeletePoint : public ILineOp
-{
-public:
-    CLineOpDeletePoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
-    virtual ~CLineOpDeletePoint();
+class CLineOpDeletePoint : public ILineOp {
+ public:
+  CLineOpDeletePoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
+  virtual ~CLineOpDeletePoint();
 
-    void leftClick(const QPoint& pos) override;
-    void mouseMove(const QPoint& pos) override;
+  void leftClick(const QPoint& pos) override;
+  void mouseMove(const QPoint& pos) override;
 
-    void drawFg(QPainter& p) override;
+  void drawFg(QPainter& p) override;
 };
 
-#endif //CLINEOPDELETEPOINT_H
-
+#endif  // CLINEOPDELETEPOINT_H

@@ -16,65 +16,53 @@
 
 **********************************************************************************************/
 
+#include "gis/IGisLine.h"
+
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "gis/CGisDraw.h"
-#include "gis/IGisLine.h"
 
-
-void IGisLine::point_t::resetElevation()
-{
-    ele = NOINT;
-    for(int i = 0; i < subpts.size(); i++)
-    {
-        subpts[i].ele = NOINT;
-    }
+void IGisLine::point_t::resetElevation() {
+  ele = NOINT;
+  for (int i = 0; i < subpts.size(); i++) {
+    subpts[i].ele = NOINT;
+  }
 }
 
-SGisLine::SGisLine(const QPolygonF& line)
-{
-    for(const QPointF& pt : line)
-    {
-        append(IGisLine::point_t(pt));
-    }
+SGisLine::SGisLine(const QPolygonF& line) {
+  for (const QPointF& pt : line) {
+    append(IGisLine::point_t(pt));
+  }
 
-    CMainWindow::self().getElevationAt(*this);
+  CMainWindow::self().getElevationAt(*this);
 }
 
-void SGisLine::updateElevation(CDemDraw* dem)
-{
-    for(int i = 0; i < size(); i++)
-    {
-        IGisLine::point_t& pt = (*this)[i];
-        qreal ele = dem->getElevationAt(pt.coord);
-        pt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
+void SGisLine::updateElevation(CDemDraw* dem) {
+  for (int i = 0; i < size(); i++) {
+    IGisLine::point_t& pt = (*this)[i];
+    qreal ele = dem->getElevationAt(pt.coord);
+    pt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
-        for(int n = 0; n < pt.subpts.size(); n++)
-        {
-            IGisLine::subpt_t& sub = pt.subpts[n];
-            qreal ele = dem->getElevationAt(sub.coord);
-            sub.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
-        }
+    for (int n = 0; n < pt.subpts.size(); n++) {
+      IGisLine::subpt_t& sub = pt.subpts[n];
+      qreal ele = dem->getElevationAt(sub.coord);
+      sub.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
     }
+  }
 }
 
+void SGisLine::updatePixel(CGisDraw* gis) {
+  for (int i = 0; i < size(); i++) {
+    IGisLine::point_t& pt = (*this)[i];
 
-void SGisLine::updatePixel(CGisDraw* gis)
-{
-    for(int i = 0; i < size(); i++)
-    {
-        IGisLine::point_t& pt = (*this)[i];
+    pt.pixel = pt.coord;
+    gis->convertRad2Px(pt.pixel);
 
-        pt.pixel = pt.coord;
-        gis->convertRad2Px(pt.pixel);
+    for (int n = 0; n < pt.subpts.size(); n++) {
+      IGisLine::subpt_t& sub = pt.subpts[n];
 
-        for(int n = 0; n < pt.subpts.size(); n++)
-        {
-            IGisLine::subpt_t& sub = pt.subpts[n];
-
-            sub.pixel = sub.coord;
-            gis->convertRad2Px(sub.pixel);
-        }
+      sub.pixel = sub.coord;
+      gis->convertRad2Px(sub.pixel);
     }
+  }
 }
-

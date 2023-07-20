@@ -17,34 +17,21 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "mouse/CMouseAdapter.h"
 #include "mouse/IMouse.h"
 
+#include "canvas/CCanvas.h"
+#include "mouse/CMouseAdapter.h"
+
 IMouse::IMouse(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : QObject(mouse),
-    canvas(canvas),
-    gis(gis),
-    mouse(mouse)
-{
+    : QObject(mouse), canvas(canvas), gis(gis), mouse(mouse) {}
+
+IMouse::~IMouse() {}
+
+void IMouse::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) { canvas->moveMap(end - last); }
+
+void IMouse::rightButtonDown(const QPoint& pos) {
+  canvas->resetMouse();
+  canvas->update();
 }
 
-IMouse::~IMouse()
-{
-}
-
-void IMouse::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end)
-{
-    canvas->moveMap(end - last);
-}
-
-void IMouse::rightButtonDown(const QPoint& pos)
-{
-    canvas->resetMouse();
-    canvas->update();
-}
-
-void IMouse::startMouseMove(const QPoint& pos)
-{
-    mouse->startMouseMove(pos);
-}
+void IMouse::startMouseMove(const QPoint& pos) { mouse->startMouseMove(pos); }

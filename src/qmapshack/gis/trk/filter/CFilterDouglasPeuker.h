@@ -19,24 +19,23 @@
 #ifndef CFILTERDOUGLASPEUKER_H
 #define CFILTERDOUGLASPEUKER_H
 
-#include "ui_IFilterDouglasPeuker.h"
 #include <QWidget>
+
+#include "ui_IFilterDouglasPeuker.h"
 
 class CGisItemTrk;
 
-class CFilterDouglasPeuker : public QWidget, private Ui::IFilterDouglasPeuker
-{
-    Q_OBJECT
-public:
-    CFilterDouglasPeuker(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterDouglasPeuker();
+class CFilterDouglasPeuker : public QWidget, private Ui::IFilterDouglasPeuker {
+  Q_OBJECT
+ public:
+  CFilterDouglasPeuker(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterDouglasPeuker();
 
-private slots:
-    void slotApply();
+ private slots:
+  void slotApply();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CFILTERDOUGLASPEUKER_H
-
+#endif  // CFILTERDOUGLASPEUKER_H

@@ -19,54 +19,48 @@
 #ifndef CPRINTDIALOG_H
 #define CPRINTDIALOG_H
 
-#include "ui_IPrintDialog.h"
 #include <QDialog>
 #include <QPrinter>
 
+#include "ui_IPrintDialog.h"
+
 class CCanvas;
 
-class CPrintDialog : public QDialog, private Ui::IPrintDialog
-{
-    Q_OBJECT
-public:
-    enum type_e
-    {
-        eTypePrint
-        , eTypeImage
-    };
+class CPrintDialog : public QDialog, private Ui::IPrintDialog {
+  Q_OBJECT
+ public:
+  enum type_e { eTypePrint, eTypeImage };
 
-    CPrintDialog(type_e type, const QRectF& area, CCanvas* source);
-    virtual ~CPrintDialog();
+  CPrintDialog(type_e type, const QRectF& area, CCanvas* source);
+  virtual ~CPrintDialog();
 
+ protected:
+  void resizeEvent(QResizeEvent* e) override;
 
-protected:
-    void resizeEvent(QResizeEvent* e) override;
+ private slots:
+  void slotGetPrinter();
+  void slotUpdateMetrics();
+  void slotPrint();
+  void slotSave();
+  void slotScaleOnAllChanged(bool checked);
 
-private slots:
-    void slotGetPrinter();
-    void slotUpdateMetrics();
-    void slotPrint();
-    void slotSave();
-    void slotScaleOnAllChanged(bool checked);
+ private:
+  void updateMetrics();
 
-private:
-    void updateMetrics();
+  type_e type;
 
-    type_e type;
+  CCanvas* canvas;
 
-    CCanvas* canvas;
+  QRectF rectSelArea;       //< the selected area in coordinated of lon/lat
+  QRectF rectSelAreaPixel;  //< the selected area in coordinated of pixel
+  QRectF rectPrinterPage;   //< the page rectangle in pixel
 
-    QRectF rectSelArea;      //< the selected area in coordinated of lon/lat
-    QRectF rectSelAreaPixel; //< the selected area in coordinated of pixel
-    QRectF rectPrinterPage;  //< the page rectangle in pixel
+  QPrinter printer;
 
-    QPrinter printer;
+  qreal xPages = 0.0;  //< number of pages in x dimension
+  qreal yPages = 0.0;  //< number of pages in y dimension
 
-    qreal xPages = 0.0; //< number of pages in x dimension
-    qreal yPages = 0.0; //< number of pages in y dimension
-
-    bool printScaleOnAllPages = false;
+  bool printScaleOnAllPages = false;
 };
 
-#endif //CPRINTDIALOG_H
-
+#endif  // CPRINTDIALOG_H

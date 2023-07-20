@@ -19,8 +19,9 @@
 #ifndef CMAPDRAW_H
 #define CMAPDRAW_H
 
-#include "canvas/IDrawContext.h"
 #include <QStringList>
+
+#include "canvas/IDrawContext.h"
 
 class QPainter;
 class CCanvas;
@@ -29,173 +30,161 @@ class QSettings;
 class CMapItem;
 struct IPoiItem;
 
-class CMapDraw : public IDrawContext
-{
-    Q_OBJECT
-public:
-    CMapDraw(CCanvas* parent);
-    virtual ~CMapDraw();
+class CMapDraw : public IDrawContext {
+  Q_OBJECT
+ public:
+  CMapDraw(CCanvas* parent);
+  virtual ~CMapDraw();
 
-    void saveConfig(QSettings& cfg);
-    void loadConfig(QSettings& cfg);
-    /**
-       @brief This is called most likely from the item itself to call it's loadConfig() method.
+  void saveConfig(QSettings& cfg);
+  void loadConfig(QSettings& cfg);
+  /**
+     @brief This is called most likely from the item itself to call it's loadConfig() method.
 
-       As the setup of a map is stored in the context of the view the correct groups have
-       to be set prior to call the item's loadConfig() method. However the item does not know
-       all that stuff. That is why it has to ask it's CMapDraw object to prepare the QSettings object
-       and to call loadConfig();
+     As the setup of a map is stored in the context of the view the correct groups have
+     to be set prior to call the item's loadConfig() method. However the item does not know
+     all that stuff. That is why it has to ask it's CMapDraw object to prepare the QSettings object
+     and to call loadConfig();
 
-       @param item the item to call it's loadConfig() method
-     */
-    void loadConfigForMapItem(CMapItem* item);
+     @param item the item to call it's loadConfig() method
+   */
+  void loadConfigForMapItem(CMapItem* item);
 
-    /**
-       @brief Get a full detailed info text about objects close to the given point
+  /**
+     @brief Get a full detailed info text about objects close to the given point
 
-       This method will call getInfo() of all items in mapList.
+     This method will call getInfo() of all items in mapList.
 
-       @param px    the point on the screen in pixel
-       @param str   a string object to receive all information
-     */
-    void getInfo(const QPoint& px, QString& str);
-    /**
-       @brief Get an info text fit for a tool tip
+     @param px    the point on the screen in pixel
+     @param str   a string object to receive all information
+   */
+  void getInfo(const QPoint& px, QString& str);
+  /**
+     @brief Get an info text fit for a tool tip
 
-       This method will call getToolTip() of all items in mapList.
+     This method will call getToolTip() of all items in mapList.
 
-       @param px    the point on the screen in pixel
-       @param str   a string object to receive all information
-     */
-    void getToolTip(const QPoint& px, QString& str);
+     @param px    the point on the screen in pixel
+     @param str   a string object to receive all information
+   */
+  void getToolTip(const QPoint& px, QString& str);
 
-    IPoiItem findPOICloseBy(const QPoint& px) const;
+  IPoiItem findPOICloseBy(const QPoint& px) const;
 
-    /**
-       @brief Set projection of this draw context
-       @param proj      a proj4 string
-     */
-    bool setProjection(const QString& proj) override;
+  /**
+     @brief Set projection of this draw context
+     @param proj      a proj4 string
+   */
+  bool setProjection(const QString& proj) override;
 
-    static const QStringList& getMapPaths()
-    {
-        return mapPaths;
-    }
+  static const QStringList& getMapPaths() { return mapPaths; }
 
-    static void setupMapPath();
-    static void setupMapPath(const QString& path);
-    static void setupMapPath(const QStringList& paths);
-    static void saveMapPath(QSettings& cfg);
-    static void loadMapPath(QSettings& cfg);
-    static const QStringList& getSupportedFormats()
-    {
-        return supportedFormats;
-    }
-    static const QString& getCacheRoot()
-    {
-        return cachePath;
-    }
+  static void setupMapPath();
+  static void setupMapPath(const QString& path);
+  static void setupMapPath(const QStringList& paths);
+  static void saveMapPath(QSettings& cfg);
+  static void loadMapPath(QSettings& cfg);
+  static const QStringList& getSupportedFormats() { return supportedFormats; }
+  static const QString& getCacheRoot() { return cachePath; }
 
-    /**
-       @brief Forward messages to CCanvas::reportStatus()
+  /**
+     @brief Forward messages to CCanvas::reportStatus()
 
-       Messages from various sources will be collected in a list and displayed in the top left corner
-       of the widget.
+     Messages from various sources will be collected in a list and displayed in the top left corner
+     of the widget.
 
-       @note The object reporting has to take care to remove the message by reporting an empty string.
+     @note The object reporting has to take care to remove the message by reporting an empty string.
 
-       @param key   the key to identify the reporting object
-       @param msg   the message to report
-     */
-    void reportStatusToCanvas(const QString& key, const QString& msg);
+     @param key   the key to identify the reporting object
+     @param msg   the message to report
+   */
+  void reportStatusToCanvas(const QString& key, const QString& msg);
 
-    /**
-       @brief Find a matching street polyline
+  /**
+     @brief Find a matching street polyline
 
-       The polyline must be close enough in terms of pixel to point 1 and 2. "Close enough" is defined by
-       the threshold. The returned polyline uses lon/lat as coordinates.
+     The polyline must be close enough in terms of pixel to point 1 and 2. "Close enough" is defined by
+     the threshold. The returned polyline uses lon/lat as coordinates.
 
-       @param pt1           first point in [rad]
-       @param pt2           second point in [rad]
-       @param threshold     the "close enough" threshold in [pixel]
-       @param polyline      the resulting polyline, if any, in [rad]
-       @return              Return true if a line has been found.
-     */
-    bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
+     @param pt1           first point in [rad]
+     @param pt2           second point in [rad]
+     @param threshold     the "close enough" threshold in [pixel]
+     @param polyline      the resulting polyline, if any, in [rad]
+     @return              Return true if a line has been found.
+   */
+  bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
-    /**
-       @brief Build a usable map list from a single map file
+  /**
+     @brief Build a usable map list from a single map file
 
-       This will clear the map list and add the gven map as the only one. The map will be activated, too.
+     This will clear the map list and add the gven map as the only one. The map will be activated, too.
 
-       @param filename  the map's filename, can be a resource, too
-     */
-    void buildMapList(const QString& filename);
+     @param filename  the map's filename, can be a resource, too
+   */
+  void buildMapList(const QString& filename);
 
-signals:
-    void sigActiveMapsChanged(bool noActiveMap);
+ signals:
+  void sigActiveMapsChanged(bool noActiveMap);
 
-protected:
-    void drawt(buffer_t& currentBuffer) override;
+ protected:
+  void drawt(buffer_t& currentBuffer) override;
 
+ private:
+  /**
+     @brief Create a CMapItem from a filename
 
-private:
-    /**
-       @brief Create a CMapItem from a filename
+     @param filename the map's filename, can be a resuource, too
+     @param maps  a set to collect the paths of all collected maps.
 
-       @param filename the map's filename, can be a resuource, too
-       @param maps  a set to collect the paths of all collected maps.
+     @return The created map item.
+   */
+  CMapItem* createMapItem(const QString& filename, QSet<QString>& maps);
+  /**
+     @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
 
-       @return The created map item.
-     */
-    CMapItem* createMapItem(const QString& filename, QSet<QString>& maps);
-    /**
-       @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
+   */
+  void buildMapList();
+  /**
+     @brief Save list of active maps to configuration file
 
-     */
-    void buildMapList();
-    /**
-       @brief Save list of active maps to configuration file
+     The group context will be appended by the map's key
 
-       The group context will be appended by the map's key
+     @param keys the stored map's MD5 keys will be written to keys
+     @param cfg  configuration file with correct group context set.
+   */
+  void saveActiveMapsList(QStringList& keys, QSettings& cfg);
 
-       @param keys the stored map's MD5 keys will be written to keys
-       @param cfg  configuration file with correct group context set.
-     */
-    void saveActiveMapsList(QStringList& keys, QSettings& cfg);
+  /**
+     @brief Open configuration before saving list
+     @param keys the stored map's MD5 keys will be written to keys
+   */
+  void saveActiveMapsList(QStringList& keys);
+  /**
+     @brief Restore list of active maps from configuration file
+     @param keys MD5 hash keys to identify the maps
+   */
+  void restoreActiveMapsList(const QStringList& keys);
 
-    /**
-       @brief Open configuration before saving list
-       @param keys the stored map's MD5 keys will be written to keys
-     */
-    void saveActiveMapsList(QStringList& keys);
-    /**
-       @brief Restore list of active maps from configuration file
-       @param keys MD5 hash keys to identify the maps
-     */
-    void restoreActiveMapsList(const QStringList& keys);
+  void restoreActiveMapsList(const QStringList& keys, QSettings& cfg);
 
-    void restoreActiveMapsList(const QStringList& keys, QSettings& cfg);
+  /// the treewidget holding all active and inactive map items
+  CMapList* mapList;
 
-    /// the treewidget holding all active and inactive map items
-    CMapList* mapList;
+  /// the group label used in QSettings
+  QString cfgGroup;
 
-    /// the group label used in QSettings
-    QString cfgGroup;
+  /// the list of paths to search maps
+  static QStringList mapPaths;
 
-    /// the list of paths to search maps
-    static QStringList mapPaths;
+  static QString cachePath;
 
-    static QString cachePath;
+  /// all existing CMapDraw instances
+  static QList<CMapDraw*> maps;
 
-    /// all existing CMapDraw instances
-    static QList<CMapDraw*> maps;
+  /// a list of supported map formats
+  static QStringList supportedFormats;
 
-    /// a list of supported map formats
-    static QStringList supportedFormats;
-
-    bool hasActiveMap = false;
+  bool hasActiveMap = false;
 };
 
-#endif //CMAPDRAW_H
-
+#endif  // CMAPDRAW_H

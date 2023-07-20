@@ -23,31 +23,29 @@
 
 #include "gis/wpt/CGisItemWpt.h"
 
-class CPhotoViewer : public QDialog
-{
-    Q_OBJECT
-public:
-    CPhotoViewer(QList<CGisItemWpt::image_t>& images, int idx, QWidget* parent);
-    virtual ~CPhotoViewer();
+class CPhotoViewer : public QDialog {
+  Q_OBJECT
+ public:
+  CPhotoViewer(QList<CGisItemWpt::image_t>& images, int idx, QWidget* parent);
+  virtual ~CPhotoViewer();
 
-protected:
-    void paintEvent(QPaintEvent* e) override;
-    void resizeEvent(QResizeEvent* e) override;
-    void mousePressEvent(QMouseEvent* e) override;
-    void keyPressEvent(QKeyEvent* e) override;
+ protected:
+  void paintEvent(QPaintEvent* e) override;
+  void resizeEvent(QResizeEvent* e) override;
+  void mousePressEvent(QMouseEvent* e) override;
+  void keyPressEvent(QKeyEvent* e) override;
 
-private:
-    void tryIdxStep(int delta);
+ private:
+  void tryIdxStep(int delta);
 
-    void setImageAtIdx(int i);
+  void setImageAtIdx(int i);
 
-    QList<CGisItemWpt::image_t> images;
-    int idx;
-    QRect rectImage {0, 0, 100, 100};
-    QRect rectClose {0, 0, 32, 32};
-    QRect rectPrev {0, 0, 32, 32};
-    QRect rectNext {0, 0, 32, 32};
+  QList<CGisItemWpt::image_t> images;
+  int idx;
+  QRect rectImage{0, 0, 100, 100};
+  QRect rectClose{0, 0, 32, 32};
+  QRect rectPrev{0, 0, 32, 32};
+  QRect rectNext{0, 0, 32, 32};
 };
 
-#endif //CPHOTOVIEWER_H
-
+#endif  // CPHOTOVIEWER_H

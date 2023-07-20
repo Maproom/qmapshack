@@ -17,75 +17,50 @@
 **********************************************************************************************/
 
 #include "gis/fit/CFitStream.h"
+
 #include "gis/fit/defs/fit_const.h"
 
-void CFitStream::decodeFile()
-{
-    decode.decode(file);
+void CFitStream::decodeFile() { decode.decode(file); }
+
+void CFitStream::reset() { readPos = 0; }
+
+const CFitMessage& CFitStream::nextMesg() { return decode.getMessages().at(readPos++); }
+
+const CFitMessage& CFitStream::lastMesg() const {
+  int pos = readPos - 1;
+  if (pos < 0) {
+    pos = 0;
+  }
+  return decode.getMessages().at(pos);
 }
 
-void CFitStream::reset()
-{
-    readPos = 0;
-}
+bool CFitStream::hasMoreMesg() const { return readPos < decode.getMessages().size(); }
 
-
-const CFitMessage& CFitStream::nextMesg()
-{
-    return decode.getMessages().at(readPos++);
-}
-
-
-const CFitMessage& CFitStream::lastMesg() const
-{
-    int pos = readPos - 1;
-    if(pos < 0)
-    {
-        pos = 0;
+const CFitMessage& CFitStream::nextMesgOf(quint16 mesgNum) {
+  while (hasMoreMesg()) {
+    const CFitMessage& mesg = nextMesg();
+    if (mesg.getGlobalMesgNr() == mesgNum) {
+      return mesg;
     }
-    return decode.getMessages().at(pos);
+  }
+
+  static const CFitMessage dummyMessage;
+  return dummyMessage;
 }
 
-
-bool CFitStream::hasMoreMesg() const
-{
-    return readPos < decode.getMessages().size();
+const CFitMessage& CFitStream::firstMesgOf(quint16 mesgNum) {
+  reset();
+  const CFitMessage& mesg = nextMesgOf(mesgNum);
+  reset();
+  return mesg;
 }
 
-const CFitMessage& CFitStream::nextMesgOf(quint16 mesgNum)
-{
-    while(hasMoreMesg())
-    {
-        const CFitMessage& mesg = nextMesg();
-        if (mesg.getGlobalMesgNr() == mesgNum)
-        {
-            return mesg;
-        }
-    }
-
-    static const CFitMessage dummyMessage;
-    return dummyMessage;
+int CFitStream::countMesgOf(quint16 mesgNr) {
+  reset();
+  int c = 0;
+  while (nextMesgOf(mesgNr).getGlobalMesgNr() != fitGlobalMesgNrInvalid) {
+    c++;
+  }
+  reset();
+  return c;
 }
-
-
-const CFitMessage& CFitStream::firstMesgOf(quint16 mesgNum)
-{
-    reset();
-    const CFitMessage& mesg = nextMesgOf(mesgNum);
-    reset();
-    return mesg;
-}
-
-int CFitStream::countMesgOf(quint16 mesgNr)
-{
-    reset();
-    int c = 0;
-    while(nextMesgOf(mesgNr).getGlobalMesgNr() != fitGlobalMesgNrInvalid)
-    {
-        c++;
-    }
-    reset();
-    return c;
-}
-
-

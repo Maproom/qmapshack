@@ -18,57 +18,49 @@
 
 #include "types.h"
 
-QDataStream & operator>>(QDataStream& s, uintX& v)
-{
-    quint8 tmp;
-    int shift = 0;
-    v.val = 0;
+QDataStream& operator>>(QDataStream& s, uintX& v) {
+  quint8 tmp;
+  int shift = 0;
+  v.val = 0;
 
+  s >> tmp;
+  while (tmp & 0x80) {
+    v.val |= (tmp & 0x7F) << shift;
+    shift += 7;
     s >> tmp;
-    while(tmp & 0x80)
-    {
-        v.val |= (tmp & 0x7F) << shift;
-        shift += 7;
-        s >> tmp;
-    }
+  }
 
+  v.val |= quint64(tmp) << shift;
+
+  return s;
+}
+
+QDataStream& operator>>(QDataStream& s, intX& v) {
+  quint8 tmp;
+  int shift = 0;
+  v.val = 0;
+
+  s >> tmp;
+  while (tmp & 0x80) {
+    v.val |= (tmp & 0x7F) << shift;
+    shift += 7;
+    s >> tmp;
+  }
+
+  if (tmp & 0x40) {
+    v.val = -(v.val | ((tmp & 0x3f) << shift));
+  } else {
     v.val |= quint64(tmp) << shift;
+  }
 
-    return s;
+  return s;
 }
 
-QDataStream& operator>>(QDataStream& s, intX& v)
-{
-    quint8 tmp;
-    int shift = 0;
-    v.val = 0;
+QDataStream& operator>>(QDataStream& s, utf8& v) {
+  uintX l;
+  s >> l;
 
-    s >> tmp;
-    while(tmp & 0x80)
-    {
-        v.val |= (tmp & 0x7F) << shift;
-        shift += 7;
-        s >> tmp;
-    }
+  v.val = QString::fromUtf8(s.device()->read(l));
 
-    if(tmp & 0x40)
-    {
-        v.val = -(v.val | ((tmp & 0x3f) << shift));
-    }
-    else
-    {
-        v.val |= quint64(tmp) << shift;
-    }
-
-    return s;
-}
-
-QDataStream& operator>>(QDataStream& s, utf8& v)
-{
-    uintX l;
-    s >> l;
-
-    v.val = QString::fromUtf8(s.device()->read(l));
-
-    return s;
+  return s;
 }

@@ -19,37 +19,37 @@
 #ifndef CPLOT_H
 #define CPLOT_H
 
+#include <functional>
+
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "plot/IPlot.h"
-#include <functional>
 
 class CLimit;
 
-class CPlot : public IPlot
-{
-    Q_OBJECT
-public:
-    CPlot(CGisItemTrk* trk, CLimit& limit, CPlotData::axistype_e type, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget* parent);
-    CPlot(CGisItemTrk* trk, CLimit& limit, mode_e mode, QWidget* parent);
-    virtual ~CPlot() = default;
+class CPlot : public IPlot {
+  Q_OBJECT
+ public:
+  CPlot(CGisItemTrk* trk, CLimit& limit, CPlotData::axistype_e type, const QString& xLabel, const QString& yLabel,
+        qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget* parent);
+  CPlot(CGisItemTrk* trk, CLimit& limit, mode_e mode, QWidget* parent);
+  virtual ~CPlot() = default;
 
-    void setup(const CPropertyTrk::property_t& p);
+  void setup(const CPropertyTrk::property_t& p);
 
-    void updateData() override;
+  void updateData() override;
 
-    void setMouseFocus(const CTrackData::trkpt_t* ptMouseMove) override;
+  void setMouseFocus(const CTrackData::trkpt_t* ptMouseMove) override;
 
-public slots:
-    void setLimits();
+ public slots:
+  void setLimits();
 
-private:
-    CLimit& limit;
+ private:
+  CLimit& limit;
 
-    qreal factor = 1.0;
-    fTrkPtGetVal getX = nullptr;
-    fTrkPtGetVal getY = nullptr;
+  qreal factor = 1.0;
+  fTrkPtGetVal getX = nullptr;
+  fTrkPtGetVal getY = nullptr;
 };
 
-#endif //CPLOT_H
-
+#endif  // CPLOT_H

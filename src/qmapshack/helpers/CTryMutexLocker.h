@@ -22,26 +22,22 @@
 #include <QMutex>
 
 template <typename T>
-class CTryMutexLocker
-{
-public:
-    CTryMutexLocker(T& mutex) : m_mutex(mutex){}
-    ~CTryMutexLocker()
-    {
-        if(needsUnlock)
-        {
-            m_mutex.unlock();
-        }
+class CTryMutexLocker {
+ public:
+  CTryMutexLocker(T& mutex) : m_mutex(mutex) {}
+  ~CTryMutexLocker() {
+    if (needsUnlock) {
+      m_mutex.unlock();
     }
-    bool try_lock()
-    {
-        needsUnlock = m_mutex.tryLock();
-        return needsUnlock;
-    }
-private:
-    T& m_mutex;
-    bool needsUnlock {false};
+  }
+  bool try_lock() {
+    needsUnlock = m_mutex.tryLock();
+    return needsUnlock;
+  }
+
+ private:
+  T& m_mutex;
+  bool needsUnlock{false};
 };
 
-#endif //CTRYMUTEXLOCKER_H
-
+#endif  // CTRYMUTEXLOCKER_H

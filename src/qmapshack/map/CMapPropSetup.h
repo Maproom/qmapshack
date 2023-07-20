@@ -19,30 +19,27 @@
 #ifndef CMAPPROPSETUP_H
 #define CMAPPROPSETUP_H
 
-
 #include "IMapProp.h"
 #include "ui_IMapPropSetup.h"
 
-class CMapPropSetup : public IMapProp, private Ui::IMapPropSetup
-{
-    Q_OBJECT
-public:
-    CMapPropSetup(IMap* mapfile, CMapDraw* map);
-    virtual ~CMapPropSetup();
+class CMapPropSetup : public IMapProp, private Ui::IMapPropSetup {
+  Q_OBJECT
+ public:
+  CMapPropSetup(IMap* mapfile, CMapDraw* map);
+  virtual ~CMapPropSetup();
 
-protected slots:
-    void slotPropertiesChanged() override;
+ protected slots:
+  void slotPropertiesChanged() override;
 
-private slots:
-    void slotScaleChanged(const QPointF& s);
-    void slotSetMinScale(bool checked);
-    void slotSetMaxScale(bool checked);
-    void slotLoadTypeFile();
-    void slotClearTypeFile();
+ private slots:
+  void slotScaleChanged(const QPointF& s);
+  void slotSetMinScale(bool checked);
+  void slotSetMaxScale(bool checked);
+  void slotLoadTypeFile();
+  void slotClearTypeFile();
 
-private:
-    static QPointF scale;
+ private:
+  static QPointF scale;
 };
 
-#endif //CMAPPROPSETUP_H
-
+#endif  // CMAPPROPSETUP_H

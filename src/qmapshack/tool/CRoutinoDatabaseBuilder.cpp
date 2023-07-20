@@ -16,197 +16,165 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "helpers/CSettings.h"
-#include "setup/IAppSetup.h"
 #include "tool/CRoutinoDatabaseBuilder.h"
 
 #include <QtWidgets>
 
+#include "CMainWindow.h"
+#include "helpers/CSettings.h"
+#include "setup/IAppSetup.h"
 
-CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget* parent)
-    : IToolShell(parent)
-{
-    setupUi(this);
-    setTextBrowser(textBrowser);
+CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget* parent) : IToolShell(parent) {
+  setupUi(this);
+  setTextBrowser(textBrowser);
 
-    setObjectName(tr("Create Routino Database"));
+  setObjectName(tr("Create Routino Database"));
 
-    connect(toolSourceFiles, &QToolButton::clicked, this, &CRoutinoDatabaseBuilder::slotSelectSourceFiles);
-    connect(toolTargetPath, &QToolButton::clicked, this, &CRoutinoDatabaseBuilder::slotSelectTargetPath);
-    connect(pushStart, &QPushButton::clicked, this, &CRoutinoDatabaseBuilder::slotStart);
-    connect(lineTargetPrefix, &QLineEdit::textChanged, this, &CRoutinoDatabaseBuilder::enabelStartButton);
-    connect(labelHelp, &QLabel::linkActivated, this, &CRoutinoDatabaseBuilder::slotLinkActivated);
+  connect(toolSourceFiles, &QToolButton::clicked, this, &CRoutinoDatabaseBuilder::slotSelectSourceFiles);
+  connect(toolTargetPath, &QToolButton::clicked, this, &CRoutinoDatabaseBuilder::slotSelectTargetPath);
+  connect(pushStart, &QPushButton::clicked, this, &CRoutinoDatabaseBuilder::slotStart);
+  connect(lineTargetPrefix, &QLineEdit::textChanged, this, &CRoutinoDatabaseBuilder::enabelStartButton);
+  connect(labelHelp, &QLabel::linkActivated, this, &CRoutinoDatabaseBuilder::slotLinkActivated);
 
-    pushStart->setDisabled(true);
+  pushStart->setDisabled(true);
 
-    SETTINGS;
-    QString path = CMainWindow::self().getRoutinoPath();
-    if(path.isEmpty())
-    {
-        path = QDir::homePath();
-    }
-    path = cfg.value("RoutinoDatabaseBuilder/targetPath", path).toString();
+  SETTINGS;
+  QString path = CMainWindow::self().getRoutinoPath();
+  if (path.isEmpty()) {
+    path = QDir::homePath();
+  }
+  path = cfg.value("RoutinoDatabaseBuilder/targetPath", path).toString();
 
-    labelTargetPath->setText(path);
+  labelTargetPath->setText(path);
 
-    enabelStartButton();
+  enabelStartButton();
 }
 
-CRoutinoDatabaseBuilder::~CRoutinoDatabaseBuilder()
-{
+CRoutinoDatabaseBuilder::~CRoutinoDatabaseBuilder() {}
+
+void CRoutinoDatabaseBuilder::slotSelectSourceFiles() {
+  SETTINGS;
+  QString path = cfg.value("RoutinoDatabaseBuilder/sourcePath", QDir::homePath()).toString();
+
+  const QStringList& files = QFileDialog::getOpenFileNames(this, tr("Select files..."), path, "OSM Database (*.pbf)");
+  if (files.isEmpty()) {
+    return;
+  }
+
+  QFileInfo fi(files.first());
+  path = fi.absolutePath();
+  cfg.setValue("RoutinoDatabaseBuilder/sourcePath", path);
+
+  listWidget->clear();
+  for (const QString& file : files) {
+    new QListWidgetItem(QIcon("://icons/32x32/Map.png"), file, listWidget);
+  }
+
+  enabelStartButton();
 }
 
-void CRoutinoDatabaseBuilder::slotSelectSourceFiles()
-{
-    SETTINGS;
-    QString path = cfg.value("RoutinoDatabaseBuilder/sourcePath", QDir::homePath()).toString();
+void CRoutinoDatabaseBuilder::slotSelectTargetPath() {
+  SETTINGS;
+  QString path = cfg.value("RoutinoDatabaseBuilder/targetPath", QDir::homePath()).toString();
 
-    const QStringList& files = QFileDialog::getOpenFileNames(this, tr("Select files..."), path, "OSM Database (*.pbf)");
-    if(files.isEmpty())
-    {
-        return;
-    }
+  path = QFileDialog::getExistingDirectory(this, tr("Select target path..."), path);
+  if (path.isEmpty()) {
+    return;
+  }
 
-    QFileInfo fi(files.first());
-    path = fi.absolutePath();
-    cfg.setValue("RoutinoDatabaseBuilder/sourcePath", path);
+  cfg.setValue("RoutinoDatabaseBuilder/targetPath", path);
 
-    listWidget->clear();
-    for(const QString& file : files)
-    {
-        new QListWidgetItem(QIcon("://icons/32x32/Map.png"), file, listWidget);
-    }
+  labelTargetPath->setText(path);
 
-    enabelStartButton();
+  enabelStartButton();
 }
 
-void CRoutinoDatabaseBuilder::slotSelectTargetPath()
-{
-    SETTINGS;
-    QString path = cfg.value("RoutinoDatabaseBuilder/targetPath", QDir::homePath()).toString();
+void CRoutinoDatabaseBuilder::enabelStartButton() {
+  pushStart->setDisabled(true);
 
-    path = QFileDialog::getExistingDirectory(this, tr("Select target path..."), path);
-    if(path.isEmpty())
-    {
-        return;
-    }
+  planetsplitter = QStandardPaths::findExecutable("planetsplitter");
+  if (planetsplitter.isEmpty()) {
+    planetsplitter = QStandardPaths::findExecutable("routino-planetsplitter");
+  }
+  labelError->setVisible(planetsplitter.isEmpty());
 
-    cfg.setValue("RoutinoDatabaseBuilder/targetPath", path);
+  if (planetsplitter.isEmpty()) {
+    return;
+  }
 
+  if (listWidget->count() == 0) {
+    return;
+  }
+  if (labelTargetPath->text() == "-") {
+    return;
+  }
 
-    labelTargetPath->setText(path);
+  if (lineTargetPrefix->text().isEmpty()) {
+    return;
+  }
 
-    enabelStartButton();
+  pushStart->setEnabled(true);
 }
 
+void CRoutinoDatabaseBuilder::slotStart() {
+  pushStart->setDisabled(true);
 
-void CRoutinoDatabaseBuilder::enabelStartButton()
-{
-    pushStart->setDisabled(true);
+  sourceFiles.clear();
+  const int N = listWidget->count();
+  for (int n = 0; n < N; n++) {
+    sourceFiles << listWidget->item(n)->text();
+  }
 
-    planetsplitter = QStandardPaths::findExecutable("planetsplitter");
-    if(planetsplitter.isEmpty())
-    {
-        planetsplitter = QStandardPaths::findExecutable("routino-planetsplitter");
-    }
-    labelError->setVisible(planetsplitter.isEmpty());
+  targetPrefix = lineTargetPrefix->text();
+  targetPath = labelTargetPath->text();
+  first = true;
+  last = false;
 
-    if(planetsplitter.isEmpty())
-    {
-        return;
-    }
+  textBrowser->clear();
 
-    if(listWidget->count() == 0)
-    {
-        return;
-    }
-    if(labelTargetPath->text() == "-")
-    {
-        return;
-    }
+  slotFinished(0, QProcess::NormalExit);
+}
 
-    if(lineTargetPrefix->text().isEmpty())
-    {
-        return;
-    }
-
+void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status) {
+  if (last) {
+    textBrowser->setTextColor(Qt::darkGreen);
+    textBrowser->append(tr("!!! done !!!\n"));
     pushStart->setEnabled(true);
-}
+    return;
+  }
 
+  IAppSetup* instance = IAppSetup::getPlatformInstance();
+  if (sourceFiles.isEmpty()) {
+    QStringList args;
+    args << QString("--dir=%1").arg(targetPath);
+    args << QString("--prefix=%1").arg(targetPrefix);
+    args << QString("--tagging=%1").arg(instance->routinoPath("tagging.xml"));
+    args << "--process-only";
 
-void CRoutinoDatabaseBuilder::slotStart()
-{
-    pushStart->setDisabled(true);
+    stdOut(planetsplitter + " " + args.join(" ") + "\n");
+    cmd.start(planetsplitter, args);
 
-    sourceFiles.clear();
-    const int N = listWidget->count();
-    for(int n = 0; n < N; n++)
-    {
-        sourceFiles << listWidget->item(n)->text();
+    last = true;
+  } else {
+    QStringList args;
+    args << QString("--dir=%1").arg(targetPath);
+    args << QString("--prefix=%1").arg(targetPrefix);
+    args << QString("--tagging=%1").arg(instance->routinoPath("tagging.xml"));
+
+    if (first) {
+      first = false;
+      args << "--parse-only";
+    } else {
+      args << "--parse-only"
+           << "--append";
     }
 
-    targetPrefix = lineTargetPrefix->text();
-    targetPath = labelTargetPath->text();
-    first = true;
-    last = false;
+    args << sourceFiles.first();
+    sourceFiles.pop_front();
 
-    textBrowser->clear();
-
-    slotFinished(0, QProcess::NormalExit);
+    stdOut(planetsplitter + " " + args.join(" ") + "\n");
+    cmd.start(planetsplitter, args);
+  }
 }
 
-void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status)
-{
-    if(last)
-    {
-        textBrowser->setTextColor(Qt::darkGreen);
-        textBrowser->append(tr("!!! done !!!\n"));
-        pushStart->setEnabled(true);
-        return;
-    }
-
-    IAppSetup* instance = IAppSetup::getPlatformInstance();
-    if(sourceFiles.isEmpty())
-    {
-        QStringList args;
-        args << QString("--dir=%1").arg(targetPath);
-        args << QString("--prefix=%1").arg(targetPrefix);
-        args << QString("--tagging=%1").arg(instance->routinoPath("tagging.xml"));
-        args << "--process-only";
-
-        stdOut(planetsplitter + " " + args.join(" ") + "\n");
-        cmd.start(planetsplitter, args);
-
-        last = true;
-    }
-    else
-    {
-        QStringList args;
-        args << QString("--dir=%1").arg(targetPath);
-        args << QString("--prefix=%1").arg(targetPrefix);
-        args << QString("--tagging=%1").arg(instance->routinoPath("tagging.xml"));
-
-        if(first)
-        {
-            first = false;
-            args << "--parse-only";
-        }
-        else
-        {
-            args << "--parse-only" << "--append";
-        }
-
-        args << sourceFiles.first();
-        sourceFiles.pop_front();
-
-
-        stdOut(planetsplitter + " " + args.join(" ") + "\n");
-        cmd.start(planetsplitter, args);
-    }
-}
-
-void CRoutinoDatabaseBuilder::slotLinkActivated(const QUrl& url)
-{
-    QDesktopServices::openUrl(url);
-}
+void CRoutinoDatabaseBuilder::slotLinkActivated(const QUrl& url) { QDesktopServices::openUrl(url); }

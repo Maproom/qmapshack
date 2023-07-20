@@ -16,78 +16,60 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "gis/proj_x.h"
 #include "helpers/CElevationDialog.h"
-#include "units/IUnit.h"
 
 #include <QtWidgets>
 
+#include "CMainWindow.h"
+#include "gis/proj_x.h"
+#include "units/IUnit.h"
+
 CElevationDialog::CElevationDialog(QWidget* parent, QVariant& val, const QVariant& reset, const QPointF& pos)
-    : QDialog(parent)
-    , val(val)
-    , reset(reset)
-    , pos(pos)
-{
-    setupUi(this);
+    : QDialog(parent), val(val), reset(reset), pos(pos) {
+  setupUi(this);
 
-    QPushButton* pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
-    connect(pushReset, &QPushButton::clicked, this, &CElevationDialog::slotReset);
-    connect(toolGetEle, &QToolButton::clicked, this, &CElevationDialog::slotGetEle);
+  QPushButton* pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
+  connect(pushReset, &QPushButton::clicked, this, &CElevationDialog::slotReset);
+  connect(toolGetEle, &QToolButton::clicked, this, &CElevationDialog::slotGetEle);
 
-    labelUnit->setText(IUnit::self().elevationUnit);
-    if(val != NOINT)
-    {
-        QString unit;
-        QString value;
-        IUnit::self().meter2elevation(val.toDouble(), value, unit);
-        lineValue->setText(value);
-    }
+  labelUnit->setText(IUnit::self().elevationUnit);
+  if (val != NOINT) {
+    QString unit;
+    QString value;
+    IUnit::self().meter2elevation(val.toDouble(), value, unit);
+    lineValue->setText(value);
+  }
 }
 
-CElevationDialog::~CElevationDialog()
-{
+CElevationDialog::~CElevationDialog() {}
+
+void CElevationDialog::accept() {
+  if (lineValue->text().isEmpty()) {
+    val = reset;
+  } else {
+    val.setValue(lineValue->text().toDouble() / IUnit::self().elevationFactor);
+  }
+
+  QDialog::accept();
 }
 
-void CElevationDialog::accept()
-{
-    if(lineValue->text().isEmpty())
-    {
-        val = reset;
-    }
-    else
-    {
-        val.setValue(lineValue->text().toDouble() / IUnit::self().elevationFactor);
-    }
-
-    QDialog::accept();
+void CElevationDialog::slotReset() {
+  if (reset == NOINT) {
+    lineValue->clear();
+  } else {
+    QString str, unit;
+    IUnit::self().meter2elevation(val.toDouble(), str, unit);
+    lineValue->setText(str);
+  }
 }
 
-void CElevationDialog::slotReset()
-{
-    if(reset == NOINT)
-    {
-        lineValue->clear();
-    }
-    else
-    {
-        QString str, unit;
-        IUnit::self().meter2elevation(val.toDouble(), str, unit);
-        lineValue->setText(str);
-    }
-}
-
-void CElevationDialog::slotGetEle()
-{
-    QVariant ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
-    if(ele != NOFLOAT)
-    {
-        QString str, unit;
-        IUnit::self().meter2elevation(ele.toDouble(), str, unit);
-        lineValue->setText(str);
-    }
-    else
-    {
-        labelMessage->setText(tr("No DEM data found for that point."));
-    }
+void CElevationDialog::slotGetEle() {
+  QVariant ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
+  if (ele != NOFLOAT) {
+    QString str, unit;
+    IUnit::self().meter2elevation(ele.toDouble(), str, unit);
+    lineValue->setText(str);
+  } else {
+    labelMessage->setText(tr("No DEM data found for that point."));
+  }
 }

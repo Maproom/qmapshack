@@ -19,36 +19,35 @@
 #ifndef CSELECTACTIVITYCOLOR_H
 #define CSELECTACTIVITYCOLOR_H
 
-#include "gis/trk/CGisItemTrk.h"
+#include <ui_ISelectActivityColor.h>
 
 #include <QList>
 #include <QWidget>
-#include <ui_ISelectActivityColor.h>
+
+#include "gis/trk/CGisItemTrk.h"
 
 class QLabel;
 class QToolButton;
 
-class CSelectActivityColor : public QWidget, public INotifyTrk, private Ui::ISelectActivityColor
-{
-    Q_OBJECT
-public:
-    CSelectActivityColor(QWidget* parent);
-    virtual ~CSelectActivityColor();
+class CSelectActivityColor : public QWidget, public INotifyTrk, private Ui::ISelectActivityColor {
+  Q_OBJECT
+ public:
+  CSelectActivityColor(QWidget* parent);
+  virtual ~CSelectActivityColor();
 
-    void setTrack(CGisItemTrk* p);
-    void updateData() override;
-    void setMouseFocus(const CTrackData::trkpt_t* pt) override {}
-    void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override {}
-    void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
+  void setTrack(CGisItemTrk* p);
+  void updateData() override;
+  void setMouseFocus(const CTrackData::trkpt_t* pt) override {}
+  void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override {}
+  void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
 
-private slots:
-    void slotSetColor(QToolButton* button, trkact_t act);
+ private slots:
+  void slotSetColor(QToolButton* button, trkact_t act);
 
-private:
-    CGisItemTrk* trk = nullptr;
-    QList<QLabel*> allActLabels;
-    QList<QToolButton*> allActColors;
+ private:
+  CGisItemTrk* trk = nullptr;
+  QList<QLabel*> allActLabels;
+  QList<QToolButton*> allActColors;
 };
 
-#endif //CSELECTACTIVITYCOLOR_H
-
+#endif  // CSELECTACTIVITYCOLOR_H

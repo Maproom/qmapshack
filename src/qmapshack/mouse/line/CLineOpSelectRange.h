@@ -20,47 +20,40 @@
 #ifndef CLINEOPSELECTRANGE_H
 #define CLINEOPSELECTRANGE_H
 
-#include "mouse/line/ILineOp.h"
-
 #include <QPointer>
+
+#include "mouse/line/ILineOp.h"
 
 class CScrOptRangeLine;
 
-class CLineOpSelectRange : public ILineOp
-{
-    Q_OBJECT
-public:
-    CLineOpSelectRange(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
-    virtual ~CLineOpSelectRange();
+class CLineOpSelectRange : public ILineOp {
+  Q_OBJECT
+ public:
+  CLineOpSelectRange(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
+  virtual ~CLineOpSelectRange();
 
-    void leftClick(const QPoint& pos) override;
-    void mouseMove(const QPoint& pos) override;
-    void rightButtonDown(const QPoint& pos) override;
-    void scaleChanged() override;
+  void leftClick(const QPoint& pos) override;
+  void mouseMove(const QPoint& pos) override;
+  void rightButtonDown(const QPoint& pos) override;
+  void scaleChanged() override;
 
-    void drawFg(QPainter& p) override;
+  void drawFg(QPainter& p) override;
 
-    bool abortStep() override;
+  bool abortStep() override;
 
-private slots:
-    void slotDelete();
-    void slotCalc();
+ private slots:
+  void slotDelete();
+  void slotCalc();
 
-private:
-    void resetState();
-    enum state_e
-    {
-        eStateIdle
-        , eState1st
-        , eState2nd
-    };
+ private:
+  void resetState();
+  enum state_e { eStateIdle, eState1st, eState2nd };
 
-    state_e state = eStateIdle;
+  state_e state = eStateIdle;
 
-    qint32 idx2nd = NOIDX;
+  qint32 idx2nd = NOIDX;
 
-    QPointer<CScrOptRangeLine>  scrOptRangeLine;
+  QPointer<CScrOptRangeLine> scrOptRangeLine;
 };
 
-#endif //CLINEOPSELECTRANGE_H
-
+#endif  // CLINEOPSELECTRANGE_H

@@ -23,21 +23,19 @@
 
 class QStackedWidget;
 
-class IOverlay : public QWidget
-{
-    Q_OBJECT
-public:
-    IOverlay(QStackedWidget* parent);
-    virtual ~IOverlay() = default;
+class IOverlay : public QWidget {
+  Q_OBJECT
+ public:
+  IOverlay(QStackedWidget* parent);
+  virtual ~IOverlay() = default;
 
-    void toFront();
+  void toFront();
 
-signals:
-    void sigChanged();
+ signals:
+  void sigChanged();
 
-protected:
-    QStackedWidget* stackedWidget;
+ protected:
+  QStackedWidget* stackedWidget;
 };
 
-#endif //IOVERLAY_H
-
+#endif  // IOVERLAY_H

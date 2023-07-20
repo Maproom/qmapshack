@@ -19,34 +19,33 @@
 #ifndef CDETAILSGEOCACHE_H
 #define CDETAILSGEOCACHE_H
 
-#include "ui_IDetailsGeoCache.h"
 #include <QDialog>
+
+#include "ui_IDetailsGeoCache.h"
 
 class CGisItemWpt;
 class QNetworkAccessManager;
 class QTimer;
 
-class CDetailsGeoCache : public QDialog, private Ui::IDetailsGeoCache
-{
-    Q_OBJECT
-public:
-    CDetailsGeoCache(CGisItemWpt& wpt, QWidget* parent);
-    virtual ~CDetailsGeoCache();
+class CDetailsGeoCache : public QDialog, private Ui::IDetailsGeoCache {
+  Q_OBJECT
+ public:
+  CDetailsGeoCache(CGisItemWpt& wpt, QWidget* parent);
+  virtual ~CDetailsGeoCache();
 
-private slots:
-    void slotVisitWebsite();
-    void slotHintChanged(bool on);
-    void slotLinkClicked(const QUrl& url);
-    void slotCollectSpoiler();
-    void slotRequestFinished(QNetworkReply* reply);
-    void slotDownloadDone();
+ private slots:
+  void slotVisitWebsite();
+  void slotHintChanged(bool on);
+  void slotLinkClicked(const QUrl& url);
+  void slotCollectSpoiler();
+  void slotRequestFinished(QNetworkReply* reply);
+  void slotDownloadDone();
 
-private:
-    CGisItemWpt& wpt;
-    QNetworkAccessManager* networkManager;
-    int cntSpoiler = 0;
-    QTimer* timerDownload;
+ private:
+  CGisItemWpt& wpt;
+  QNetworkAccessManager* networkManager;
+  int cntSpoiler = 0;
+  QTimer* timerDownload;
 };
 
-#endif //CDETAILSGEOCACHE_H
-
+#endif  // CDETAILSGEOCACHE_H

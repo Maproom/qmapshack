@@ -23,49 +23,38 @@
 
 class QMenu;
 
-class CGeoSearchWeb : public QObject
-{
-    Q_OBJECT
-public:
-    struct service_t
-    {
-        service_t(const QString& name, const QString& url, const QString& icon = defaultIcon)
-            : name(name)
-            , url(url)
-            , icon(icon)
-        {
-        }
+class CGeoSearchWeb : public QObject {
+  Q_OBJECT
+ public:
+  struct service_t {
+    service_t(const QString& name, const QString& url, const QString& icon = defaultIcon)
+        : name(name), url(url), icon(icon) {}
 
-        QString name;
-        QString url;
-        QString icon;
-    };
+    QString name;
+    QString url;
+    QString icon;
+  };
 
+  static CGeoSearchWeb& self() { return *pSelf; }
+  virtual ~CGeoSearchWeb();
 
-    static CGeoSearchWeb& self()
-    {
-        return *pSelf;
-    }
-    virtual ~CGeoSearchWeb();
+  static const QString defaultIcon;
+  QList<service_t> defaultServices();
 
-    static const QString defaultIcon;
-    QList<service_t> defaultServices();
+  QMenu* getMenu(const QPointF& pt, QWidget* parent, bool execute = false) const;
+  void search(const QPointF& pt);
 
-    QMenu* getMenu(const QPointF& pt, QWidget* parent, bool execute = false) const;
-    void search(const QPointF& pt);
+ private slots:
+  void slotConfigureServices();
+  void slotSearchWeb(int serviceId, const QPointF pt) const;
 
-private slots:
-    void slotConfigureServices();
-    void slotSearchWeb(int serviceId, const QPointF pt) const;
+ private:
+  CGeoSearchWeb(QObject* parent);
+  friend class CMainWindow;
 
-private:
-    CGeoSearchWeb(QObject* parent);
-    friend class CMainWindow;
+  static CGeoSearchWeb* pSelf;
 
-    static CGeoSearchWeb* pSelf;
-
-    QList<service_t> services;
+  QList<service_t> services;
 };
 
-#endif //CGEOSEARCHWEB_H
-
+#endif  // CGEOSEARCHWEB_H

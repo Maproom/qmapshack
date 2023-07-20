@@ -20,9 +20,4 @@
 
 #include <QtWidgets>
 
-CToolExportJnx::CToolExportJnx()
-{
-    setupUi(this);
-}
-
-
+CToolExportJnx::CToolExportJnx() { setupUi(this); }

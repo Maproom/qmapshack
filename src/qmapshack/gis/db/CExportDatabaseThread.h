@@ -23,39 +23,37 @@
 #include <QSqlDatabase>
 #include <QThread>
 
-class CExportDatabaseThread : public QThread
-{
-    Q_OBJECT
-public:
-    CExportDatabaseThread(quint64 id, QSqlDatabase& db, QObject* parent);
-    virtual ~CExportDatabaseThread() = default;
+class CExportDatabaseThread : public QThread {
+  Q_OBJECT
+ public:
+  CExportDatabaseThread(quint64 id, QSqlDatabase& db, QObject* parent);
+  virtual ~CExportDatabaseThread() = default;
 
-    void start(const QString& path, bool saveAsGpx11);
+  void start(const QString& path, bool saveAsGpx11);
 
-public slots:
-    void slotAbort();
+ public slots:
+  void slotAbort();
 
-signals:
-    void sigOut(const QString& msg);
-    void sigErr(const QString& msg);
+ signals:
+  void sigOut(const QString& msg);
+  void sigErr(const QString& msg);
 
-protected:
-    void run() override;
-    bool getKeepGoing() const;
-    void dumpFolder(quint64 id, const QString& parentName, const QString& path, QSqlDatabase& db);
+ protected:
+  void run() override;
+  bool getKeepGoing() const;
+  void dumpFolder(quint64 id, const QString& parentName, const QString& path, QSqlDatabase& db);
 
-private:
-    QString simplifyString(const QString& str) const;
+ private:
+  QString simplifyString(const QString& str) const;
 
-    mutable QMutex mutex;
-    bool keepGoing = false;
+  mutable QMutex mutex;
+  bool keepGoing = false;
 
-    quint64 parentFolderId;
-    /// database connection from the main thread
-    QSqlDatabase& dbParent;
-    QString exportPath;
-    bool asGpx11 = false;
+  quint64 parentFolderId;
+  /// database connection from the main thread
+  QSqlDatabase& dbParent;
+  QString exportPath;
+  bool asGpx11 = false;
 };
 
-#endif //CEXPORTDATABASETHREAD_H
-
+#endif  // CEXPORTDATABASETHREAD_H

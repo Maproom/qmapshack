@@ -16,40 +16,33 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "gis/CGisListWks.h"
 #include "gis/slf/CSlfProject.h"
-#include "gis/slf/CSlfReader.h"
 
 #include <QtWidgets>
 
+#include "CMainWindow.h"
+#include "gis/CGisListWks.h"
+#include "gis/slf/CSlfReader.h"
+
 CSlfProject::CSlfProject(const QString& filename, bool readFile)
-    : IGisProject(eTypeSlf, filename, (CGisListWks*)nullptr)
-{
-    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/SlfProject.png"));
-    blockUpdateItems(true);
+    : IGisProject(eTypeSlf, filename, (CGisListWks*)nullptr) {
+  setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/SlfProject.png"));
+  blockUpdateItems(true);
 
-    valid = true;
-    if(readFile)
-    {
-        try
-        {
-            CSlfReader::readFile(filename, this);
-        }
-        catch(QString& errormsg)
-        {
-            QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
-                                  tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
-            valid = false;
-        }
+  valid = true;
+  if (readFile) {
+    try {
+      CSlfReader::readFile(filename, this);
+    } catch (QString& errormsg) {
+      QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed to load file %1...").arg(filename),
+                            errormsg, QMessageBox::Abort);
+      valid = false;
     }
-    else
-    {
-        IGisProject::filename.clear();
-    }
+  } else {
+    IGisProject::filename.clear();
+  }
 
-    sortItems();
-    blockUpdateItems(false);
-    setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
+  sortItems();
+  blockUpdateItems(false);
+  setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
 }
-

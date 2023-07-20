@@ -19,57 +19,52 @@
 #ifndef CSHELL_H
 #define CSHELL_H
 
-#include "shell/CShellCmd.h"
-
 #include <QList>
 #include <QProcess>
 #include <QTextBrowser>
 
-class CShell : public QTextBrowser
-{
-    Q_OBJECT
-public:
-    static CShell& self()
-    {
-        return *pSelf;
-    }
+#include "shell/CShellCmd.h"
 
-    virtual ~CShell() = default;
+class CShell : public QTextBrowser {
+  Q_OBJECT
+ public:
+  static CShell& self() { return *pSelf; }
 
-    int execute(QList<CShellCmd> cmds);
-signals:
-    void sigFinishedJob(qint32 jobId);
+  virtual ~CShell() = default;
 
-public slots:
-    void slotCancel();
+  int execute(QList<CShellCmd> cmds);
+ signals:
+  void sigFinishedJob(qint32 jobId);
 
-protected slots:
-    /// read the stderr from the process and paste it into the text browser
-    void slotStderr();
-    /// read the stdout from the process and paste it into the text browser
-    void slotStdout();
-    void slotError(QProcess::ProcessError error);
-    virtual void slotFinished(int exitCode, QProcess::ExitStatus status);
+ public slots:
+  void slotCancel();
 
-protected:
-    void nextCommand();
+ protected slots:
+  /// read the stderr from the process and paste it into the text browser
+  void slotStderr();
+  /// read the stdout from the process and paste it into the text browser
+  void slotStdout();
+  void slotError(QProcess::ProcessError error);
+  virtual void slotFinished(int exitCode, QProcess::ExitStatus status);
 
-    /// write text to stdout color channel of the text browser
-    void stdOut(const QString& str);
-    /// write text to stderr color channel of the text browser
-    void stdErr(const QString& str);
+ protected:
+  void nextCommand();
 
-    QProcess cmd;
+  /// write text to stdout color channel of the text browser
+  void stdOut(const QString& str);
+  /// write text to stderr color channel of the text browser
+  void stdErr(const QString& str);
 
-    QList<CShellCmd> commands;
-    qint32 idxCommand = 0;
-    qint32 jobId = 0;
+  QProcess cmd;
 
-private:
-    friend class Ui_IMainWindow;
-    CShell(QWidget* parent);
-    static CShell* pSelf;
+  QList<CShellCmd> commands;
+  qint32 idxCommand = 0;
+  qint32 jobId = 0;
+
+ private:
+  friend class Ui_IMainWindow;
+  CShell(QWidget* parent);
+  static CShell* pSelf;
 };
 
-#endif //CSHELL_H
-
+#endif  // CSHELL_H

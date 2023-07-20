@@ -21,74 +21,61 @@
 
 #include "ui_IItemTreeWidget.h"
 
+#include "canvas/CCanvas.h"
+
 class QSettings;
 class ITool;
 class CItemMap;
 
-class CItemTreeWidget : public QWidget, private Ui::IItemTreeWidget
-{
-    Q_OBJECT
+class CItemTreeWidget : public QWidget, private Ui::IItemTreeWidget {
+  Q_OBJECT
 public:
-    enum column_e
-    {
-        eColumnName
-    };
+  enum column_e { eColumnName };
 
-    CItemTreeWidget(QWidget* parent);
-    virtual ~CItemTreeWidget() = default;
+  CItemTreeWidget(QWidget *parent);
+  virtual ~CItemTreeWidget() = default;
 
-    void saveSettings(QSettings& cfg);
-    void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings &cfg);
+  void loadSettings(QSettings &cfg);
 
-    ITool* currentItem();
+  ITool *currentItem();
 
-    template< typename LessThan>
-    void sort(LessThan lessThan)
-    {
-        treeFiles->blockSignals(true);
+  template <typename LessThan> void sort(LessThan lessThan) {
+    treeFiles->blockSignals(true);
 
-        QList<QTreeWidgetItem*> items;
-        while(treeFiles->topLevelItemCount() != 0)
-        {
-            items << treeFiles->takeTopLevelItem(0);
-        }
-
-        std::sort(items.begin(), items.end(), lessThan);
-
-        for(QTreeWidgetItem* item : qAsConst(items))
-        {
-            treeFiles->addTopLevelItem(item);
-        }
-
-        treeFiles->blockSignals(false);
+    QList<QTreeWidgetItem *> items;
+    while (treeFiles->topLevelItemCount() != 0) {
+      items << treeFiles->takeTopLevelItem(0);
     }
 
-    qint32 topLevelItemCount() const
-    {
-        return treeFiles->topLevelItemCount();
+    std::sort(items.begin(), items.end(), lessThan);
+
+    for (QTreeWidgetItem *item : qAsConst(items)) {
+      treeFiles->addTopLevelItem(item);
     }
 
-    QTreeWidgetItem* topLevelItem(int n)
-    {
-        return treeFiles->topLevelItem(n);
-    }
+    treeFiles->blockSignals(false);
+  }
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
+  qint32 topLevelItemCount() const { return treeFiles->topLevelItemCount(); }
+
+  QTreeWidgetItem *topLevelItem(int n) { return treeFiles->topLevelItem(n); }
+
+  bool drawFx(QPainter &p, CCanvas::redraw_e needsRedraw);
 
 signals:
-    void sigSelectionChanged();
-    void sigChanged();
+  void sigSelectionChanged();
+  void sigChanged();
 
 protected slots:
-    void slotFiles();
-    void slotDeleteFiles();
-    void slotDeleteFile();
-    void slotSelectionChanged();
+  void slotFiles();
+  void slotDeleteFiles();
+  void slotDeleteFile();
+  void slotSelectionChanged();
 
 protected:
-    void addFiles(const QStringList& files);
-    CItemMap* findMapByHash(const QString& hash);
+  void addFiles(const QStringList &files);
+  CItemMap *findMapByHash(const QString &hash);
 };
 
-#endif //CITEMTREEWIDGET_H
-
+#endif // CITEMTREEWIDGET_H

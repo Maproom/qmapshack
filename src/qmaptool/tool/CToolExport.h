@@ -24,40 +24,34 @@
 #include "tool/IToolGui.h"
 #include "ui_IToolExport.h"
 
-class CToolExport : public IToolGui, public ITool, private Ui::IToolExport
-{
-    Q_OBJECT
-public:
-    CToolExport(QWidget* parent);
-    virtual ~CToolExport();
+class CToolExport : public IToolGui, public ITool, private Ui::IToolExport {
+  Q_OBJECT
+ public:
+  CToolExport(QWidget* parent);
+  virtual ~CToolExport();
 
-    void setupChanged() override;
+  void setupChanged() override;
 
-    FORWARD_TREE_ALL(itemTree)
+  FORWARD_TREE_ALL(itemTree)
 
-private slots:
-    void slotMapSelectionChanged();
-    void slotSomethingChanged();
-    void slotStart();
-    void slotFinished(qint32 id);
+ private slots:
+  void slotMapSelectionChanged();
+  void slotSomethingChanged();
+  void slotStart();
+  void slotFinished(qint32 id);
 
-    void slotSelectFilename();
+  void slotSelectFilename();
 
-private:
-    void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
-    void buildCmdFinal(QList<CShellCmd>& cmds) override;
+ private:
+  void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
+  void buildCmdFinal(QList<CShellCmd>& cmds) override;
 
-    void buildCmdFinalJnx(QList<CShellCmd>& cmds);
-    void buildCmdFinalRmap(QList<CShellCmd>& cmds);
+  void buildCmdFinalJnx(QList<CShellCmd>& cmds);
+  void buildCmdFinalRmap(QList<CShellCmd>& cmds);
 
-    enum type_e
-    {
-        eTypeJnx = 0
-        , eTypeRmap = 1
-    };
+  enum type_e { eTypeJnx = 0, eTypeRmap = 1 };
 
-    QStringList inputFiles;
+  QStringList inputFiles;
 };
 
-#endif //CTOOLEXPORT_H
-
+#endif  // CTOOLEXPORT_H

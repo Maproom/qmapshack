@@ -17,30 +17,24 @@
 **********************************************************************************************/
 
 #include "CAbout.h"
+
+#include <gdal.h>
+
+#include <QtWidgets>
+
 #include "gis/proj_x.h"
 #include "version.h"
 
-#include <gdal.h>
-#include <QtWidgets>
+CAbout::CAbout(QWidget* parent) : QDialog(parent) {
+  setupUi(this);
 
+  if (QString(VER_SUFFIX).isEmpty()) {
+    labelVersion->setText(VER_STR);
+  } else {
+    labelVersion->setText(VER_STR "." VER_SUFFIX);
+  }
 
-CAbout::CAbout(QWidget* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
-
-    if(QString(VER_SUFFIX).isEmpty())
-    {
-        labelVersion->setText(VER_STR);
-    }
-    else
-    {
-        labelVersion->setText(VER_STR "." VER_SUFFIX);
-    }
-
-    labelQtVersion->setText(qVersion());
-    labelGDALVersion->setText(GDALVersionInfo("--version"));
-    labelProj4Version->setText(proj_info().release);
+  labelQtVersion->setText(qVersion());
+  labelGDALVersion->setText(GDALVersionInfo("--version"));
+  labelProj4Version->setText(proj_info().release);
 }
-
-

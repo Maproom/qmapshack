@@ -20,17 +20,6 @@
 
 #include <QtWidgets>
 
-IOverlay::IOverlay(QStackedWidget* parent)
-    : QWidget(parent)
-    , stackedWidget(parent)
-{
-    stackedWidget->addWidget(this);
-}
+IOverlay::IOverlay(QStackedWidget* parent) : QWidget(parent), stackedWidget(parent) { stackedWidget->addWidget(this); }
 
-
-void IOverlay::toFront()
-{
-    stackedWidget->setCurrentWidget(this);
-}
-
-
+void IOverlay::toFront() { stackedWidget->setCurrentWidget(this); }

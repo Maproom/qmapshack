@@ -19,30 +19,29 @@
 #ifndef CDETAILSRTE_H
 #define CDETAILSRTE_H
 
-#include "ui_IDetailsRte.h"
 #include <QDialog>
+
+#include "ui_IDetailsRte.h"
 
 class CGisItemRte;
 
-class CDetailsRte : public QDialog, private Ui::IDetailsRte
-{
-    Q_OBJECT
-public:
-    CDetailsRte(CGisItemRte& rte, QWidget* parent);
-    virtual ~CDetailsRte();
+class CDetailsRte : public QDialog, private Ui::IDetailsRte {
+  Q_OBJECT
+ public:
+  CDetailsRte(CGisItemRte& rte, QWidget* parent);
+  virtual ~CDetailsRte();
 
-private slots:
-    void slotNameChanged(const QString& name);
-    void slotNameChangeFinished();
-    void slotChangeReadOnlyMode(bool on);
-    void slotLinkActivated(const QUrl& url);
-    void setupGui();
+ private slots:
+  void slotNameChanged(const QString& name);
+  void slotNameChangeFinished();
+  void slotChangeReadOnlyMode(bool on);
+  void slotLinkActivated(const QUrl& url);
+  void setupGui();
 
-private:
-    CGisItemRte& rte;
+ private:
+  CGisItemRte& rte;
 
-    bool originator = false;
+  bool originator = false;
 };
 
-#endif //CDETAILSRTE_H
-
+#endif  // CDETAILSRTE_H

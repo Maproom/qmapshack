@@ -19,7 +19,6 @@
 #ifndef CPLOTDATA_H
 #define CPLOTDATA_H
 
-
 #include <QColor>
 #include <QObject>
 #include <QPixmap>
@@ -27,74 +26,64 @@
 
 class CPlotAxis;
 
-class CPlotData : public QObject
-{
-public:
-    enum axistype_e {eAxisLinear, eAxisTime};
+class CPlotData : public QObject {
+ public:
+  enum axistype_e { eAxisLinear, eAxisTime };
 
-    CPlotData(axistype_e type, QObject* parent);
-    virtual ~CPlotData();
+  CPlotData(axistype_e type, QObject* parent);
+  virtual ~CPlotData();
 
-    ///get a reference to the x axis
-    CPlotAxis& x() const
-    {
-        return *xaxis;
-    }
-    ///get a reference to the y axis
-    CPlotAxis& y() const
-    {
-        return *yaxis;
-    }
+  /// get a reference to the x axis
+  CPlotAxis& x() const { return *xaxis; }
+  /// get a reference to the y axis
+  CPlotAxis& y() const { return *yaxis; }
 
-    /// create a new x axis
-    void setXAxisType(axistype_e type);
+  /// create a new x axis
+  void setXAxisType(axistype_e type);
 
-    /// setup all internal data to fit the dynamic range of all data points
-    void setLimits();
+  /// setup all internal data to fit the dynamic range of all data points
+  void setLimits();
 
-    struct line_t
-    {
-        QString label;
-        QColor color;
-        QPolygonF points;
-    };
+  struct line_t {
+    QString label;
+    QColor color;
+    QPolygonF points;
+  };
 
-    /// text shown below the x axis
-    QString xlabel;
-    /// text shown left of the y axis
-    QString ylabel;
-    /// set true for grid
-    bool grid = true;
+  /// text shown below the x axis
+  QString xlabel;
+  /// text shown left of the y axis
+  QString ylabel;
+  /// set true for grid
+  bool grid = true;
 
-    /// list of plot lines
-    QList<line_t> lines;
+  /// list of plot lines
+  QList<line_t> lines;
 
-    struct point_t
-    {
-        QColor color;
-        QPointF point;
-        QPixmap icon;
-        QString label;
-    };
+  struct point_t {
+    QColor color;
+    QPointF point;
+    QPixmap icon;
+    QString label;
+  };
 
-    QList<QPointF> focus;
+  QList<QPointF> focus;
 
-    /// vector of plot tags such as waypoints
-    QVector<point_t> tags;
+  /// vector of plot tags such as waypoints
+  QVector<point_t> tags;
 
-    bool badData = true;
+  bool badData = true;
 
-    axistype_e axisType = eAxisLinear;
+  axistype_e axisType = eAxisLinear;
 
-    qreal xmin = 0;
-    qreal xmax = 0;
-    qreal ymin = 0;
-    qreal ymax = 0;
+  qreal xmin = 0;
+  qreal xmax = 0;
+  qreal ymin = 0;
+  qreal ymax = 0;
 
-protected:
-    CPlotAxis* xaxis = nullptr;
-    CPlotAxis* yaxis = nullptr;
+ protected:
+  CPlotAxis* xaxis = nullptr;
+  CPlotAxis* yaxis = nullptr;
 };
 
-#endif //CPLOTDATA_H
-
+#endif  // CPLOTDATA_H

@@ -25,46 +25,34 @@
 class CItemRefMap;
 class IDrawContext;
 
-class CGridPoint
-{
-public:
-    CGridPoint();
-    virtual ~CGridPoint() = default;
+class CGridPoint {
+ public:
+  CGridPoint();
+  virtual ~CGridPoint() = default;
 
-    void registerItem(CItemRefMap* item);
+  void registerItem(CItemRefMap* item);
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent* e);
-    void mouseReleaseEventFx(QMouseEvent* e);
-    void leaveEventFx(QEvent* e);
-    QCursor getCursorFx();
+  bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
+  void mouseMoveEventFx(QMouseEvent* e);
+  void mouseReleaseEventFx(QMouseEvent* e);
+  void leaveEventFx(QEvent* e);
+  QCursor getCursorFx();
 
-    const QPointF& getPoint() const
-    {
-        return ptPoint;
-    }
+  const QPointF& getPoint() const { return ptPoint; }
 
-    void setPoint(const QPointF& pt)
-    {
-        ptPoint = pt;
-        state = pt == NOPOINTF ? eStateNotSet : eStateSet;
-    }
+  void setPoint(const QPointF& pt) {
+    ptPoint = pt;
+    state = pt == NOPOINTF ? eStateNotSet : eStateSet;
+  }
 
-private:
-    enum state_e
-    {
-        eStateNotSet
-        , eStateSet
-        , eStateHighlight
-        , eStateMove
-    };
+ private:
+  enum state_e { eStateNotSet, eStateSet, eStateHighlight, eStateMove };
 
-    state_e state = eStateNotSet;
-    CItemRefMap* item = nullptr;
-    const IDrawContext* context = nullptr;
-    QPointF ptPoint = NOPOINTF;
-    QPointF ptFocus1 = NOPOINTF;
+  state_e state = eStateNotSet;
+  CItemRefMap* item = nullptr;
+  const IDrawContext* context = nullptr;
+  QPointF ptPoint = NOPOINTF;
+  QPointF ptFocus1 = NOPOINTF;
 };
 
-#endif //CGRIDPOINT_H
-
+#endif  // CGRIDPOINT_H

@@ -19,28 +19,26 @@
 #ifndef CGISSUMMARYDROPZONE_H
 #define CGISSUMMARYDROPZONE_H
 
-#include "gis/summary/CGisSummary.h"
-
 #include <QLabel>
 
-class CGisSummaryDropZone : public QLabel
-{
-    Q_OBJECT
-public:
-    CGisSummaryDropZone(const CGisSummary::dropzone_t& dropZone, QWidget* parent);
-    virtual ~CGisSummaryDropZone() = default;
+#include "gis/summary/CGisSummary.h"
 
-protected:
-    void dragEnterEvent(QDragEnterEvent* e) override;
-    void dragMoveEvent(QDragMoveEvent* e) override;
-    void dragLeaveEvent(QDragLeaveEvent* e) override;
-    void dropEvent(QDropEvent* e) override;
+class CGisSummaryDropZone : public QLabel {
+  Q_OBJECT
+ public:
+  CGisSummaryDropZone(const CGisSummary::dropzone_t& dropZone, QWidget* parent);
+  virtual ~CGisSummaryDropZone() = default;
 
-private:
-    void setHighlighted(bool yes);
+ protected:
+  void dragEnterEvent(QDragEnterEvent* e) override;
+  void dragMoveEvent(QDragMoveEvent* e) override;
+  void dragLeaveEvent(QDragLeaveEvent* e) override;
+  void dropEvent(QDropEvent* e) override;
 
-    const QList<CGisSummary::folder_t>& folders;
+ private:
+  void setHighlighted(bool yes);
+
+  const QList<CGisSummary::folder_t>& folders;
 };
 
-#endif //CGISSUMMARYDROPZONE_H
-
+#endif  // CGISSUMMARYDROPZONE_H

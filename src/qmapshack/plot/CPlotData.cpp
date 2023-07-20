@@ -16,78 +16,61 @@
 
 **********************************************************************************************/
 
+#include "plot/CPlotData.h"
+
 #include "plot/CPlotAxis.h"
 #include "plot/CPlotAxisTime.h"
-#include "plot/CPlotData.h"
 #include "units/IUnit.h"
 
-CPlotData::CPlotData(axistype_e type, QObject* parent)
-    : QObject(parent)
-    , axisType(type)
-{
-    setXAxisType(type);
-    yaxis = new CPlotAxis(this);
+CPlotData::CPlotData(axistype_e type, QObject* parent) : QObject(parent), axisType(type) {
+  setXAxisType(type);
+  yaxis = new CPlotAxis(this);
 }
 
+CPlotData::~CPlotData() {}
 
-CPlotData::~CPlotData()
-{
+void CPlotData::setXAxisType(axistype_e type) {
+  delete xaxis;
+
+  if (type == eAxisLinear) {
+    xaxis = new CPlotAxis(this);
+  } else {
+    xaxis = new CPlotAxisTime(this);
+  }
+  xaxis->setAutoscale(false);
+
+  axisType = type;
 }
 
-void CPlotData::setXAxisType(axistype_e type)
-{
-    delete xaxis;
+void CPlotData::setLimits() {
+  if (lines.size() == 0 || badData) {
+    return;
+  }
 
-    if(type == eAxisLinear)
-    {
-        xaxis = new CPlotAxis(this);
-    }
-    else
-    {
-        xaxis = new CPlotAxisTime(this);
-    }
-    xaxis->setAutoscale(false);
+  {
+    const QPointF& p = lines.first().points.first();
+    xmin = p.x();
+    xmax = p.x();
+    ymin = p.y();
+    ymax = p.y();
+  }
 
-    axisType = type;
-}
+  for (const line_t& line : qAsConst(lines)) {
+    const QPolygonF& points = line.points;
+    for (const QPointF& p : points) {
+      if (p.y() != NOFLOAT) {
+        xmin = qMin(xmin, p.x());
+        xmax = qMax(xmax, p.x());
+        ymin = qMin(ymin, p.y());
+        ymax = qMax(ymax, p.y());
+      }
+    }
+  }
 
-void CPlotData::setLimits()
-{
-    if(lines.size() == 0 || badData)
-    {
-        return;
-    }
-
-    {
-        const QPointF& p = lines.first().points.first();
-        xmin = p.x();
-        xmax = p.x();
-        ymin = p.y();
-        ymax = p.y();
-    }
-
-    for(const line_t& line : qAsConst(lines))
-    {
-        const QPolygonF& points = line.points;
-        for(const QPointF& p : points)
-        {
-            if(p.y() != NOFLOAT)
-            {
-                xmin = qMin(xmin, p.x());
-                xmax = qMax(xmax, p.x());
-                ymin = qMin(ymin, p.y());
-                ymax = qMax(ymax, p.y());
-            }
-        }
-    }
-
-    if(xmin == xmax)
-    {
-        badData = true;
-    }
-    else
-    {
-        xaxis->setLimits(xmin, xmax);
-        yaxis->setLimits(ymin, ymax);
-    }
+  if (xmin == xmax) {
+    badData = true;
+  } else {
+    xaxis->setLimits(xmin, xmax);
+    yaxis->setLimits(ymin, ymax);
+  }
 }

@@ -16,41 +16,34 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
 #include "canvas/CCanvasSelect.h"
+
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
 
-CCanvasSelect::CCanvasSelect(CCanvas*& canvas, QWidget* parent)
-    : QDialog(parent)
-    , canvas(canvas)
-{
-    setupUi(this);
+CCanvasSelect::CCanvasSelect(CCanvas*& canvas, QWidget* parent) : QDialog(parent), canvas(canvas) {
+  setupUi(this);
 
-    const QList<CCanvas*>& allCanvas = CMainWindow::self().getCanvas();
-    for(CCanvas* c : allCanvas)
-    {
-        comboCanvas->addItem(c->objectName(), QVariant::fromValue<CCanvas*>(c));
-    }
+  const QList<CCanvas*>& allCanvas = CMainWindow::self().getCanvas();
+  for (CCanvas* c : allCanvas) {
+    comboCanvas->addItem(c->objectName(), QVariant::fromValue<CCanvas*>(c));
+  }
 }
 
-int CCanvasSelect::exec()
-{
-    if(comboCanvas->count() == 0)
-    {
-        return QDialog::Rejected;
-    }
+int CCanvasSelect::exec() {
+  if (comboCanvas->count() == 0) {
+    return QDialog::Rejected;
+  }
 
-    if(comboCanvas->count() == 1)
-    {
-        canvas = comboCanvas->currentData().value<CCanvas*>();
-        return QDialog::Accepted;
-    }
-
-    return QDialog::exec();
-}
-
-void CCanvasSelect::accept()
-{
+  if (comboCanvas->count() == 1) {
     canvas = comboCanvas->currentData().value<CCanvas*>();
-    QDialog::accept();
+    return QDialog::Accepted;
+  }
+
+  return QDialog::exec();
+}
+
+void CCanvasSelect::accept() {
+  canvas = comboCanvas->currentData().value<CCanvas*>();
+  QDialog::accept();
 }

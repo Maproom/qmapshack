@@ -25,22 +25,20 @@
 class QSqlDatabase;
 class CQlgtDiary;
 
-class CQlgtFolder : public QObject
-{
-public:
-    CQlgtFolder(quint64 id, QSqlDatabase& db);
-    virtual ~CQlgtFolder();
+class CQlgtFolder : public QObject {
+ public:
+  CQlgtFolder(quint64 id, QSqlDatabase& db);
+  virtual ~CQlgtFolder();
 
-    qint32 type;
-    QString name;
-    QString comment;
-    bool locked;
+  qint32 type;
+  QString name;
+  QString comment;
+  bool locked;
 
-    CQlgtDiary* diary;
+  CQlgtDiary* diary;
 
-    quint64 id;
-    QSet<quint64> items;
+  quint64 id;
+  QSet<quint64> items;
 };
 
-#endif //CQLGTFOLDER_H
-
+#endif  // CQLGTFOLDER_H

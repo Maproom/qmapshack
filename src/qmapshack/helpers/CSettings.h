@@ -18,37 +18,28 @@
 #ifndef CSETTINGS_H
 #define CSETTINGS_H
 
-#include "setup/CAppOpts.h"
 #include <QtCore>
 
-class CSettings : public QObject
-{
-public:
-    CSettings()
-    {
-        if(!qlOpts->configfile.isEmpty())
-        {
-            cfg = new QSettings(qlOpts->configfile, QSettings::IniFormat, this);
-        }
-        else
-        {
-            cfg = new QSettings(this);
-        }
-    }
-    ~CSettings()
-    {
-    }
+#include "setup/CAppOpts.h"
 
-    QSettings& get()
-    {
-        return *cfg;
+class CSettings : public QObject {
+ public:
+  CSettings() {
+    if (!qlOpts->configfile.isEmpty()) {
+      cfg = new QSettings(qlOpts->configfile, QSettings::IniFormat, this);
+    } else {
+      cfg = new QSettings(this);
     }
+  }
+  ~CSettings() {}
 
-private:
-    QSettings* cfg;
+  QSettings& get() { return *cfg; }
+
+ private:
+  QSettings* cfg;
 };
 
-#define SETTINGS \
-    CSettings ccfg; \
-    QSettings& cfg = ccfg.get()
-#endif                           //CSETTINGS_H
+#define SETTINGS  \
+  CSettings ccfg; \
+  QSettings& cfg = ccfg.get()
+#endif  // CSETTINGS_H

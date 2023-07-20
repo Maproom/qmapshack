@@ -26,29 +26,24 @@ class QUdpSocket;
 
 #define UDP_PORT 34123
 
-class IDBFolderSql : public IDBFolder, public QObject
-{
-public:
-    IDBFolderSql(QSqlDatabase& db, QTreeWidget* parent);
-    virtual ~IDBFolderSql() = default;
+class IDBFolderSql : public IDBFolder, public QObject {
+ public:
+  IDBFolderSql(QSqlDatabase& db, QTreeWidget* parent);
+  virtual ~IDBFolderSql() = default;
 
-    void expanding() override;
-    void updateLostFound();
-    void update(CEvtW2DAckInfo* info) override
-    {
-        IDBFolder::update(info);
-    }
-    bool update() override;
+  void expanding() override;
+  void updateLostFound();
+  void update(CEvtW2DAckInfo* info) override { IDBFolder::update(info); }
+  bool update() override;
 
-    void announceChange() const;
+  void announceChange() const;
 
-    virtual void copyFolder(quint64 child, quint64 parent) = 0;
+  virtual void copyFolder(quint64 child, quint64 parent) = 0;
 
-protected:
-    CDBFolderLostFound* folderLostFound = nullptr;
+ protected:
+  CDBFolderLostFound* folderLostFound = nullptr;
 
-    QUdpSocket* socket;
+  QUdpSocket* socket;
 };
 
-#endif //IDBFOLDERSQL_H
-
+#endif  // IDBFOLDERSQL_H

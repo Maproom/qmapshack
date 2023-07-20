@@ -16,74 +16,60 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "units/CUnitsSetup.h"
+
+#include "CMainWindow.h"
 #include "units/IUnit.h"
 
-CUnitsSetup::CUnitsSetup(QWidget* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
+CUnitsSetup::CUnitsSetup(QWidget* parent) : QDialog(parent) {
+  setupUi(this);
 
-    switch(IUnit::self().type)
-    {
+  switch (IUnit::self().type) {
     case IUnit::eTypeMetric:
-        radioMetric->setChecked(true);
-        break;
+      radioMetric->setChecked(true);
+      break;
 
     case IUnit::eTypeImperial:
-        radioImperial->setChecked(true);
-        break;
+      radioImperial->setChecked(true);
+      break;
 
     case IUnit::eTypeNautic:
-        radioNautic->setChecked(true);
-        break;
+      radioNautic->setChecked(true);
+      break;
 
     case IUnit::eTypeAviation:
-        radioAviation->setChecked(true);
-        break;
-    }
+      radioAviation->setChecked(true);
+      break;
+  }
 
-    switch(IUnit::getSlopeMode())
-    {
+  switch (IUnit::getSlopeMode()) {
     case IUnit::eSlopeDegrees:
-        radioDegrees->setChecked(true);
-        break;
+      radioDegrees->setChecked(true);
+      break;
 
     case IUnit::eSlopePercent:
-        radioPercent->setChecked(true);
-        break;
-    }
+      radioPercent->setChecked(true);
+      break;
+  }
 
-    adjustSize();
+  adjustSize();
 }
 
-void CUnitsSetup::accept()
-{
-    if(radioMetric->isChecked())
-    {
-        IUnit::setUnitType(IUnit::eTypeMetric, &CMainWindow::self());
-    }
-    else if(radioImperial->isChecked())
-    {
-        IUnit::setUnitType(IUnit::eTypeImperial, &CMainWindow::self());
-    }
-    else if(radioNautic->isChecked())
-    {
-        IUnit::setUnitType(IUnit::eTypeNautic, &CMainWindow::self());
-    }
-    else if(radioAviation->isChecked())
-    {
-        IUnit::setUnitType(IUnit::eTypeAviation, &CMainWindow::self());
-    }
+void CUnitsSetup::accept() {
+  if (radioMetric->isChecked()) {
+    IUnit::setUnitType(IUnit::eTypeMetric, &CMainWindow::self());
+  } else if (radioImperial->isChecked()) {
+    IUnit::setUnitType(IUnit::eTypeImperial, &CMainWindow::self());
+  } else if (radioNautic->isChecked()) {
+    IUnit::setUnitType(IUnit::eTypeNautic, &CMainWindow::self());
+  } else if (radioAviation->isChecked()) {
+    IUnit::setUnitType(IUnit::eTypeAviation, &CMainWindow::self());
+  }
 
-    if(radioDegrees->isChecked())
-    {
-        IUnit::setSlopeMode(IUnit::eSlopeDegrees);
-    }
-    else if(radioPercent->isChecked())
-    {
-        IUnit::setSlopeMode(IUnit::eSlopePercent);
-    }
-    QDialog::accept();
+  if (radioDegrees->isChecked()) {
+    IUnit::setSlopeMode(IUnit::eSlopeDegrees);
+  } else if (radioPercent->isChecked()) {
+    IUnit::setSlopeMode(IUnit::eSlopePercent);
+  }
+  QDialog::accept();
 }

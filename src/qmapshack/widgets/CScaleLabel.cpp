@@ -16,71 +16,64 @@
 
 **********************************************************************************************/
 
-#include "helpers/CDraw.h"
-#include "units/IUnit.h"
 #include "widgets/CScaleLabel.h"
 
 #include <QtWidgets>
 
+#include "helpers/CDraw.h"
+#include "units/IUnit.h"
+
 #define BAR_HEIGHT 6
 #define HOR_MARGIN 3
 
+CScaleLabel::CScaleLabel(QWidget* parent) : QLabel(parent) { setScaledContents(true); }
 
-CScaleLabel::CScaleLabel(QWidget* parent)
-    : QLabel(parent)
-{
-    setScaledContents(true);
+void CScaleLabel::setValue(qreal min, qreal scale, qreal max) {
+  minScale = min;
+  maxScale = max;
+  currentScale = scale;
+
+  update();
 }
 
-void CScaleLabel::setValue(qreal min, qreal scale, qreal max)
-{
-    minScale = min;
-    maxScale = max;
-    currentScale = scale;
+void CScaleLabel::paintEvent(QPaintEvent* e) {
+  int w = width();
+  int h = height();
 
-    update();
-}
+  QPainter p;
+  p.begin(this);
+  USE_ANTI_ALIASING(p, true);
 
-void CScaleLabel::paintEvent(QPaintEvent* e)
-{
-    int w = width();
-    int h = height();
+  p.fillRect(rect(), Qt::transparent);
+  // draw bar background
+  int xBar = HOR_MARGIN;
+  int yBar = (h - BAR_HEIGHT) / 2;
 
-    QPainter p;
-    p.begin(this);
-    USE_ANTI_ALIASING(p, true);
+  QRect bar(xBar, yBar, w - 2 * HOR_MARGIN, BAR_HEIGHT);
+  p.setPen(Qt::darkBlue);
+  p.setBrush(Qt::white);
+  p.drawRect(bar);
 
-    p.fillRect(rect(), Qt::transparent);
-    // draw bar background
-    int xBar = HOR_MARGIN;
-    int yBar = (h - BAR_HEIGHT) / 2;
+  // draw current scale range
+  if ((minScale != NOFLOAT) || (maxScale != NOFLOAT)) {
+    int x1Range = minScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(minScale)) / 5) : bar.left();
+    int x2Range = maxScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(maxScale)) / 5) : bar.right();
+    int yRange = yBar;
 
-    QRect bar(xBar, yBar, w - 2 * HOR_MARGIN, BAR_HEIGHT);
-    p.setPen(Qt::darkBlue);
-    p.setBrush(Qt::white);
-    p.drawRect(bar);
+    QRect range(x1Range, yRange, x2Range - x1Range, BAR_HEIGHT);
+    p.setPen(Qt::NoPen);
+    p.setBrush(Qt::darkGreen);
+    p.drawRect(range);
+  }
 
-    // draw current scale range
-    if((minScale != NOFLOAT) || (maxScale != NOFLOAT))
-    {
-        int x1Range = minScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(minScale)) / 5) : bar.left();
-        int x2Range = maxScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(maxScale)) / 5) : bar.right();
-        int yRange = yBar;
+  // draw scale indicator
+  int xInd = HOR_MARGIN + qRound(bar.width() * (1 + log10(currentScale)) / 5) - 3;
+  int yInd = yBar - 1;
 
-        QRect range(x1Range, yRange, x2Range - x1Range, BAR_HEIGHT);
-        p.setPen(Qt::NoPen);
-        p.setBrush(Qt::darkGreen);
-        p.drawRect(range);
-    }
+  QRect ind(xInd, yInd, 5, BAR_HEIGHT + 2);
+  p.setPen(Qt::darkBlue);
+  p.setBrush(Qt::NoBrush);
+  p.drawRect(ind);
 
-    // draw scale indicator
-    int xInd = HOR_MARGIN + qRound(bar.width() * (1 + log10(currentScale)) / 5) - 3;
-    int yInd = yBar - 1;
-
-    QRect ind(xInd, yInd, 5, BAR_HEIGHT + 2);
-    p.setPen(Qt::darkBlue);
-    p.setBrush(Qt::NoBrush);
-    p.drawRect(ind);
-
-    p.end();
+  p.end();
 }

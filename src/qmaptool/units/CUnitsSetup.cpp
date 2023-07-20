@@ -16,44 +16,36 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "units/CUnitsSetup.h"
+
+#include "CMainWindow.h"
 #include "units/IUnit.h"
 
-CUnitsSetup::CUnitsSetup(QWidget* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
+CUnitsSetup::CUnitsSetup(QWidget* parent) : QDialog(parent) {
+  setupUi(this);
 
-    switch(IUnit::self().type)
-    {
+  switch (IUnit::self().type) {
     case IUnit::eTypeMetric:
-        radioMetric->setChecked(true);
-        break;
+      radioMetric->setChecked(true);
+      break;
 
     case IUnit::eTypeImperial:
-        radioImperial->setChecked(true);
-        break;
+      radioImperial->setChecked(true);
+      break;
 
     case IUnit::eTypeNautic:
-        radioNautic->setChecked(true);
-        break;
-    }
+      radioNautic->setChecked(true);
+      break;
+  }
 }
 
-void CUnitsSetup::accept()
-{
-    if(radioMetric->isChecked())
-    {
-        IUnit::setUnitType(IUnit::eTypeMetric, &CMainWindow::self());
-    }
-    else if(radioImperial->isChecked())
-    {
-        IUnit::setUnitType(IUnit::eTypeImperial, &CMainWindow::self());
-    }
-    else if(radioNautic->isChecked())
-    {
-        IUnit::setUnitType(IUnit::eTypeNautic, &CMainWindow::self());
-    }
-    QDialog::accept();
+void CUnitsSetup::accept() {
+  if (radioMetric->isChecked()) {
+    IUnit::setUnitType(IUnit::eTypeMetric, &CMainWindow::self());
+  } else if (radioImperial->isChecked()) {
+    IUnit::setUnitType(IUnit::eTypeImperial, &CMainWindow::self());
+  } else if (radioNautic->isChecked()) {
+    IUnit::setUnitType(IUnit::eTypeNautic, &CMainWindow::self());
+  }
+  QDialog::accept();
 }

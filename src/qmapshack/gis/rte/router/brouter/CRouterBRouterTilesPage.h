@@ -25,26 +25,24 @@
 class CRouterBRouterTilesSelect;
 class CRouterBRouterSetup;
 
-class CRouterBRouterTilesPage : public QWizardPage
-{
-    Q_OBJECT
-public:
-    CRouterBRouterTilesPage();
-    virtual ~CRouterBRouterTilesPage();
+class CRouterBRouterTilesPage : public QWizardPage {
+  Q_OBJECT
+ public:
+  CRouterBRouterTilesPage();
+  virtual ~CRouterBRouterTilesPage();
 
-    bool isComplete() const override;
+  bool isComplete() const override;
 
-    void setSetup(CRouterBRouterSetup* setup) const;
-    void beginPage() const;
-    bool raiseWarning() const;
+  void setSetup(CRouterBRouterSetup* setup) const;
+  void beginPage() const;
+  bool raiseWarning() const;
 
-private slots:
-    void slotTileDownloadStatusChanged();
+ private slots:
+  void slotTileDownloadStatusChanged();
 
-private:
-    QVBoxLayout* layout;
-    CRouterBRouterTilesSelect* widgetLocalTilesSelect;
+ private:
+  QVBoxLayout* layout;
+  CRouterBRouterTilesSelect* widgetLocalTilesSelect;
 };
 
-#endif //CROUTERBROUTERTILESPAGE_H
-
+#endif  // CROUTERBROUTERTILESPAGE_H

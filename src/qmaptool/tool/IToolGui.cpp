@@ -16,96 +16,77 @@
 
 **********************************************************************************************/
 
+#include "tool/IToolGui.h"
+
 #include "canvas/IDrawContext.h"
 #include "items/CItemListWidget.h"
 #include "items/CItemMapLayer.h"
 #include "items/CItemTreeWidget.h"
 #include "items/IItem.h"
 #include "shell/CShell.h"
-#include "tool/IToolGui.h"
 
-IToolGui::IToolGui(QWidget* parent)
-    : QWidget(parent)
-{
+IToolGui::IToolGui(QWidget* parent) : QWidget(parent) {}
+
+QString IToolGui::createTempFile(const QString& ext) {
+  QTemporaryFile* tmpFile = new QTemporaryFile(QDir::temp().absoluteFilePath("QMapTool_XXXXXX." + ext));
+  tmpFile->open();
+  tmpFile->close();
+  tmpFiles << tmpFile;
+
+  return tmpFile->fileName();
 }
 
-QString IToolGui::createTempFile(const QString& ext)
-{
-    QTemporaryFile* tmpFile = new QTemporaryFile(QDir::temp().absoluteFilePath("QMapTool_XXXXXX." + ext));
-    tmpFile->open();
-    tmpFile->close();
-    tmpFiles << tmpFile;
-
-    return tmpFile->fileName();
+bool IToolGui::finished(qint32 id) {
+  if (id == jobId) {
+    jobId = 0;
+    qDeleteAll(tmpFiles);
+    tmpFiles.clear();
+    return true;
+  }
+  return false;
 }
 
-bool IToolGui::finished(qint32 id)
-{
-    if(id == jobId)
-    {
-        jobId = 0;
-        qDeleteAll(tmpFiles);
-        tmpFiles.clear();
-        return true;
+void IToolGui::start(CItemTreeWidget* itemTree) {
+  QList<CShellCmd> cmds;
+  const int N = itemTree->topLevelItemCount();
+  for (int n = 0; n < N; n++) {
+    const CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(itemTree->topLevelItem(n));
+    if (layer == nullptr) {
+      continue;
     }
-    return false;
+    const int M = layer->childCount();
+    for (int m = 0; m < M; m++) {
+      IItem* item = dynamic_cast<IItem*>(layer->child(m));
+      if (nullptr != item) {
+        buildCmd(cmds, item);
+      }
+    }
+  }
+
+  buildCmdFinal(cmds);
+
+  jobId = CShell::self().execute(cmds);
 }
 
+void IToolGui::start(CItemListWidget* itemList, bool allFiles) {
+  QList<CShellCmd> cmds;
 
-void IToolGui::start(CItemTreeWidget* itemTree)
-{
-    QList<CShellCmd> cmds;
-    const int N = itemTree->topLevelItemCount();
-    for(int n = 0; n < N; n++)
-    {
-        const CItemMapLayer* layer = dynamic_cast<CItemMapLayer*>(itemTree->topLevelItem(n));
-        if(layer == nullptr)
-        {
-            continue;
-        }
-        const int M = layer->childCount();
-        for(int m = 0; m < M; m++)
-        {
-            IItem* item = dynamic_cast<IItem*>(layer->child(m));
-            if(nullptr != item)
-            {
-                buildCmd(cmds, item);
-            }
-        }
+  if (allFiles) {
+    const int N = itemList->count();
+    for (int n = 0; n < N; n++) {
+      const IItem* item = dynamic_cast<const IItem*>(itemList->item(n));
+      if (nullptr != item) {
+        buildCmd(cmds, item);
+      }
     }
+  } else {
+    const IItem* item = dynamic_cast<const IItem*>(itemList->currentItem());
+    if (nullptr != item) {
+      buildCmd(cmds, item);
+    }
+  }
 
-    buildCmdFinal(cmds);
+  buildCmdFinal(cmds);
 
-    jobId = CShell::self().execute(cmds);
+  jobId = CShell::self().execute(cmds);
 }
-
-void IToolGui::start(CItemListWidget* itemList, bool allFiles)
-{
-    QList<CShellCmd> cmds;
-
-    if(allFiles)
-    {
-        const int N = itemList->count();
-        for(int n = 0; n < N; n++)
-        {
-            const IItem* item = dynamic_cast<const IItem*>(itemList->item(n));
-            if(nullptr != item)
-            {
-                buildCmd(cmds, item);
-            }
-        }
-    }
-    else
-    {
-        const IItem* item = dynamic_cast<const IItem*>(itemList->currentItem());
-        if(nullptr != item)
-        {
-            buildCmd(cmds, item);
-        }
-    }
-
-    buildCmdFinal(cmds);
-
-    jobId = CShell::self().execute(cmds);
-}
-

@@ -21,26 +21,24 @@
 
 #include "ui_ISetupIconAndName.h"
 
-class CSetupIconAndName : public QDialog, private Ui::ISetupIconAndName
-{
-    Q_OBJECT
-public:
-    CSetupIconAndName(QString& icon, QString& name, QWidget* parent);
-    virtual ~CSetupIconAndName() = default;
+class CSetupIconAndName : public QDialog, private Ui::ISetupIconAndName {
+  Q_OBJECT
+ public:
+  CSetupIconAndName(QString& icon, QString& name, QWidget* parent);
+  virtual ~CSetupIconAndName() = default;
 
-public slots:
-    void accept() override;
-    void reject() override;
+ public slots:
+  void accept() override;
+  void reject() override;
 
-private slots:
-    void slotEditName(const QString& str);
-    void slotChangeIcon();
+ private slots:
+  void slotEditName(const QString& str);
+  void slotChangeIcon();
 
-private:
-    void checkInput();
-    QString& icon;
-    QString& name;
+ private:
+  void checkInput();
+  QString& icon;
+  QString& name;
 };
 
-#endif //CSETUPICONANDNAME_H
-
+#endif  // CSETUPICONANDNAME_H

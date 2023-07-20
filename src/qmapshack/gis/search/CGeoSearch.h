@@ -20,62 +20,56 @@
 #ifndef CGEOSEARCH_H
 #define CGEOSEARCH_H
 
+#include <QNetworkAccessManager>
+#include <QObject>
+
 #include "config.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/search/CGeoSearchConfig.h"
 
-#include <QNetworkAccessManager>
-#include <QObject>
-
 class CGisListWks;
 class QLineEdit;
 
+class CGeoSearch : public QObject, public IGisProject {
+  Q_OBJECT
+ public:
+  CGeoSearch(CGisListWks* parent);
+  virtual ~CGeoSearch();
 
-class CGeoSearch : public QObject, public IGisProject
-{
-    Q_OBJECT
-public:
-    CGeoSearch(CGisListWks* parent);
-    virtual ~CGeoSearch();
+  bool skipSave() const override { return true; }
 
-    bool skipSave() const override
-    {
-        return true;
-    }
+ private slots:
+  void slotChangeSymbol();
+  void slotSelectService();
+  void slotServiceSelected(CGeoSearchConfig::service_e service, bool checked);
+  void slotSetupGeoSearch();
+  void slotStartSearch();
+  void slotRequestFinished(QNetworkReply* reply);
+  void slotConfigChanged();
+  void slotAccuResults(bool yes);
+  void slotResetResults();
 
-private slots:
-    void slotChangeSymbol();
-    void slotSelectService();
-    void slotServiceSelected(CGeoSearchConfig::service_e service, bool checked);
-    void slotSetupGeoSearch();
-    void slotStartSearch();
-    void slotRequestFinished(QNetworkReply* reply);
-    void slotConfigChanged();
-    void slotAccuResults(bool yes);
-    void slotResetResults();
+ private:
+  QAction* addService(CGeoSearchConfig::service_e service, const QString& name, QMenu* menu);
+  void requestNominatim(QString& addr) const;
+  void requestGeonamesSearch(QString& addr) const;
+  void requestGeonamesAddress(QString& addr) const;
+  void requestGoogle(QString& addr) const;
 
-private:
-    QAction* addService(CGeoSearchConfig::service_e service, const QString& name, QMenu* menu);
-    void requestNominatim(QString& addr) const;
-    void requestGeonamesSearch(QString& addr) const;
-    void requestGeonamesAddress(QString& addr) const;
-    void requestGoogle(QString& addr) const;
+  void parseNominatim(const QByteArray& data);
+  void parseGeonamesSearch(const QByteArray& data);
+  void parseGeonamesAddress(const QByteArray& data);
+  void parseGoogle(const QByteArray& data);
 
-    void parseNominatim(const QByteArray& data);
-    void parseGeonamesSearch(const QByteArray& data);
-    void parseGeonamesAddress(const QByteArray& data);
-    void parseGoogle(const QByteArray& data);
+  void createErrorItem(const QString& status);
 
-    void createErrorItem(const QString& status);
+  void setIcon();
 
-    void setIcon();
-
-    QLineEdit* edit;
-    QAction* actSymbol;
-    QNetworkAccessManager* networkAccessManager;
-    CGeoSearchConfig* searchConfig;
-    QTreeWidgetItem* itemStatus = nullptr;
+  QLineEdit* edit;
+  QAction* actSymbol;
+  QNetworkAccessManager* networkAccessManager;
+  CGeoSearchConfig* searchConfig;
+  QTreeWidgetItem* itemStatus = nullptr;
 };
 
-#endif //CSEARCHGOOGLE_H
-
+#endif  // CSEARCHGOOGLE_H

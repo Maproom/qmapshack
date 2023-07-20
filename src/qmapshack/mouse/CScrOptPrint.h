@@ -22,16 +22,12 @@
 #include "mouse/IScrOpt.h"
 #include "ui_IScrOptPrint.h"
 
-class CScrOptPrint : public IScrOpt, public Ui::IScrOptPrint
-{
-public:
-    CScrOptPrint(IMouse* mouse);
-    virtual ~CScrOptPrint() = default;
+class CScrOptPrint : public IScrOpt, public Ui::IScrOptPrint {
+ public:
+  CScrOptPrint(IMouse* mouse);
+  virtual ~CScrOptPrint() = default;
 
-    void draw(QPainter& p) override
-    {
-    }
+  void draw(QPainter& p) override {}
 };
 
-#endif //CSCROPTPRINT_H
-
+#endif  // CSCROPTPRINT_H

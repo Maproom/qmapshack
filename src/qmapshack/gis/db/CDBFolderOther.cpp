@@ -16,17 +16,14 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderOther.h"
 
+#include "gis/CGisListDB.h"
+
 CDBFolderOther::CDBFolderOther(QSqlDatabase& db, quint64 key, QTreeWidgetItem* parent)
-    : IDBFolder(true, db, eTypeOther, key, parent)
-{
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/PathOrange.png"));
-    setupFromDB();
+    : IDBFolder(true, db, eTypeOther, key, parent) {
+  setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/PathOrange.png"));
+  setupFromDB();
 }
 
-CDBFolderOther::~CDBFolderOther()
-{
-}
-
+CDBFolderOther::~CDBFolderOther() {}

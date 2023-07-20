@@ -29,91 +29,83 @@ class IDBFolderSql;
 class QUdpSocket;
 class CSearchDatabase;
 
-class CGisListDB : public QTreeWidget
-{
-    Q_OBJECT
-public:
-    CGisListDB(QWidget* parent);
-    virtual ~CGisListDB();
+class CGisListDB : public QTreeWidget {
+  Q_OBJECT
+ public:
+  CGisListDB(QWidget* parent);
+  virtual ~CGisListDB();
 
-    enum column_e
-    {
-        eColumnCheckbox = 0
-        , eColumnName = 1
-        , eColumnTime = 2
-    };
+  enum column_e { eColumnCheckbox = 0, eColumnName = 1, eColumnTime = 2 };
 
-    bool hasDatabase(const QString& name);
-    bool event(QEvent* e) override;
+  bool hasDatabase(const QString& name);
+  bool event(QEvent* e) override;
 
-    void addGlobalActions(const QList<QAction*> actions);
+  void addGlobalActions(const QList<QAction*> actions);
 
-public slots:
-    void slotAddDatabase();
+ public slots:
+  void slotAddDatabase();
 
-signals:
-    void sigChanged();
+ signals:
+  void sigChanged();
 
-private slots:
-    void slotContextMenu(const QPoint& point);
-    void slotAddFolder();
-    void slotDelFolder();
-    void slotDelLostFound();
-    void slotDelLostFoundItem();
-    void slotItemExpanded(QTreeWidgetItem* item);
-    void slotItemChanged(QTreeWidgetItem* item, int column);
-    void slotDelDatabase();
-    void slotDelItem();
-    void slotUpdateDatabase();
-    void slotSearchDatabase();
-    void slotRenameFolder();
-    void slotCopyFolder();
-    void slotMoveFolder();
-    void slotReadyRead();
-    void slotExportToGpx();
-    void slotImport();
+ private slots:
+  void slotContextMenu(const QPoint& point);
+  void slotAddFolder();
+  void slotDelFolder();
+  void slotDelLostFound();
+  void slotDelLostFoundItem();
+  void slotItemExpanded(QTreeWidgetItem* item);
+  void slotItemChanged(QTreeWidgetItem* item, int column);
+  void slotDelDatabase();
+  void slotDelItem();
+  void slotUpdateDatabase();
+  void slotSearchDatabase();
+  void slotRenameFolder();
+  void slotCopyFolder();
+  void slotMoveFolder();
+  void slotReadyRead();
+  void slotExportToGpx();
+  void slotImport();
 
-private:
-    friend class CGisListDBEditLock;
+ private:
+  friend class CGisListDBEditLock;
 
-    IDBFolderSql* getDataBase(const QString& name, const QString& host);
-    void saveDatabaseConfiguration();
+  IDBFolderSql* getDataBase(const QString& name, const QString& host);
+  void saveDatabaseConfiguration();
 
-    int isInternalEdit = 0;
+  int isInternalEdit = 0;
 
-    QMenu* menuNone;
-    QAction* actionAddDatabase;
+  QMenu* menuNone;
+  QAction* actionAddDatabase;
 
-    QMenu* menuFolder;
-    QAction* actionAddFolder;
-    QAction* actionRenameFolder;
-    QAction* actionCopyFolder;
-    QAction* actionMoveFolder;
-    QAction* actionDelFolder;
-    QAction* actionExportToGpx;
-    QAction* actionImport;
+  QMenu* menuFolder;
+  QAction* actionAddFolder;
+  QAction* actionRenameFolder;
+  QAction* actionCopyFolder;
+  QAction* actionMoveFolder;
+  QAction* actionDelFolder;
+  QAction* actionExportToGpx;
+  QAction* actionImport;
 
-    QMenu* menuDatabase;
-    QAction* actionDelDatabase;
-    QAction* actionUpdate;
-    QAction* actionSearch;
+  QMenu* menuDatabase;
+  QAction* actionDelDatabase;
+  QAction* actionUpdate;
+  QAction* actionSearch;
 
+  QMenu* menuItem;
+  QAction* actionDelItem;
 
-    QMenu* menuItem;
-    QAction* actionDelItem;
+  QMenu* menuLostFound;
+  QAction* actionDelLostFound;
 
-    QMenu* menuLostFound;
-    QAction* actionDelLostFound;
+  QMenu* menuLostFoundItem;
+  QAction* actionDelLostFoundItem;
 
-    QMenu* menuLostFoundItem;
-    QAction* actionDelLostFoundItem;
+  QUdpSocket* socket;
 
-    QUdpSocket* socket;
+  quint32 lastTan;
 
-    quint32 lastTan;
-
-    QPointer<CSearchDatabase> dlgSearch;
+  QPointer<CSearchDatabase> dlgSearch;
 };
 
-#endif //CGISLISTDB_H
-
+#endif  // CGISLISTDB_H

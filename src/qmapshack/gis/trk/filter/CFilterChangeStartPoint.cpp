@@ -15,68 +15,59 @@
 
 **********************************************************************************************/
 
+#include "gis/trk/filter/CFilterChangeStartPoint.h"
+
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/filter/CFilterChangeStartPoint.h"
 #include "gis/wpt/CGisItemWpt.h"
 
-CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk& trk, QWidget* parent) :
-    QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
-    updateUi();
+CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
+  updateUi();
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterChangeStartPoint::slotApply);
+  connect(toolApply, &QToolButton::clicked, this, &CFilterChangeStartPoint::slotApply);
 }
 
-void CFilterChangeStartPoint::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+void CFilterChangeStartPoint::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
 
-    trk.filterChangeStartPoint(comboBox->currentData().toInt(), comboBox->currentText());
-    updateUi();
+  trk.filterChangeStartPoint(comboBox->currentData().toInt(), comboBox->currentText());
+  updateUi();
 }
 
-void CFilterChangeStartPoint::updateUi()
-{
-    IGisProject* project = trk.getParentProject();
-    if(nullptr == project)
-    {
-        return;
+void CFilterChangeStartPoint::updateUi() {
+  IGisProject* project = trk.getParentProject();
+  if (nullptr == project) {
+    return;
+  }
+
+  CTrackData trkData = trk.getTrackData();
+  qint32 noOfItems = 0;
+
+  comboBox->clear();
+
+  for (CTrackData::trkpt_t& pt : trkData) {
+    if (pt.isHidden()) {
+      continue;
+    }
+    CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(pt.keyWpt));
+    if (nullptr == wpt) {
+      continue;
     }
 
-    CTrackData trkData = trk.getTrackData();
-    qint32 noOfItems = 0;
-
-    comboBox->clear();
-
-    for(CTrackData::trkpt_t& pt : trkData)
+    //        qDebug() << "wptName=" << wpt->getName() << "pntIdx=" << pt.idxVisible << "maxIdx=" <<
+    //        trk.getNumberOfVisiblePoints();
+    if (pt.idxVisible > 0 &&
+        pt.idxVisible < trk.getNumberOfVisiblePoints() - 1)  // to exclude original start and end point
     {
-        if(pt.isHidden())
-        {
-            continue;
-        }
-        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(pt.keyWpt));
-        if(nullptr == wpt)
-        {
-            continue;
-        }
+      comboBox->insertItem(noOfItems, wpt->getName(), pt.idxVisible);
+      ++noOfItems;
+    }
+  }
 
-//        qDebug() << "wptName=" << wpt->getName() << "pntIdx=" << pt.idxVisible << "maxIdx=" << trk.getNumberOfVisiblePoints();
-        if (pt.idxVisible > 0 && pt.idxVisible < trk.getNumberOfVisiblePoints() - 1) // to exclude original start and end point
-        {
-            comboBox->insertItem(noOfItems, wpt->getName(), pt.idxVisible);
-            ++noOfItems;
-        }
-    }
-
-    if (noOfItems == 0)
-    {
-        toolApply->setEnabled(false);
-    }
-    else
-    {
-        toolApply->setEnabled(true);
-    }
+  if (noOfItems == 0) {
+    toolApply->setEnabled(false);
+  } else {
+    toolApply->setEnabled(true);
+  }
 }

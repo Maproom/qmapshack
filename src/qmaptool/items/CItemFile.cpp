@@ -16,22 +16,18 @@
 
 **********************************************************************************************/
 
-#include "canvas/CDrawContextPixel.h"
-#include "CMainWindow.h"
 #include "items/CItemFile.h"
 
-CItemFile::CItemFile(const QString& filename, QListWidget* parent)
-    : IItem(filename)
-    , QListWidgetItem(parent)
-{
-    setText(QFileInfo(filename).completeBaseName());
-    drawContext = new CDrawContextPixel(CMainWindow::self().getCanvas(), this);
-    CItemFile::reload();
+#include "CMainWindow.h"
+#include "canvas/CDrawContextPixel.h"
+
+CItemFile::CItemFile(const QString& filename, QListWidget* parent) : IItem(filename), QListWidgetItem(parent) {
+  setText(QFileInfo(filename).completeBaseName());
+  drawContext = new CDrawContextPixel(CMainWindow::self().getCanvas(), this);
+  CItemFile::reload();
 }
 
-
-void CItemFile::reload()
-{
-    IItem::reload();
-    setToolTip(filename + "\n" + drawContext->getInfo());
+void CItemFile::reload() {
+  IItem::reload();
+  setToolTip(filename + "\n" + drawContext->getInfo());
 }

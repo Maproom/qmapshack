@@ -19,190 +19,178 @@
 #ifndef IPLOT_H
 #define IPLOT_H
 
-#include "gis/trk/CGisItemTrk.h"
-#include "mouse/CMouseDummy.h"
-#include "plot/CPlotData.h"
 #include <QWidget>
+
+#include "gis/trk/CGisItemTrk.h"
+#include "plot/CPlotData.h"
 
 class QMenu;
 class CScrOptRangeTrk;
 
-class IPlot : public QWidget, public INotifyTrk
-{
-    Q_OBJECT
-public:
-    enum mode_e {eModeNormal, eModeIcon, eModeWindow, eModeSimple};
-    enum mouse_click_state_e
-    {
-        eMouseClickIdle
-        , eMouseClick1st
-        , eMouseClick2nd
-    };
+class IPlot : public QWidget, public INotifyTrk {
+  Q_OBJECT
+ public:
+  enum mode_e { eModeNormal, eModeIcon, eModeWindow, eModeSimple };
+  enum mouse_click_state_e { eMouseClickIdle, eMouseClick1st, eMouseClick2nd };
 
-    IPlot(CGisItemTrk* trk, CPlotData::axistype_e type, mode_e mode, QWidget* parent);
-    virtual ~IPlot();
+  IPlot(CGisItemTrk* trk, CPlotData::axistype_e type, mode_e mode, QWidget* parent);
+  virtual ~IPlot();
 
-    void setMouseRangeFocus(const CTrackData::trkpt_t* ptRange1, const CTrackData::trkpt_t* ptRange2) override;
-    void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
+  void setMouseRangeFocus(const CTrackData::trkpt_t* ptRange1, const CTrackData::trkpt_t* ptRange2) override;
+  void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
 
-    void save(QImage& image, const CTrackData::trkpt_t* pTrkpt);
-    void setSolid(bool yes)
-    {
-        solid = yes;
-    }
+  void save(QImage& image, const CTrackData::trkpt_t* pTrkpt);
+  void setSolid(bool yes) { solid = yes; }
 
-    bool isZoomed() const;
+  bool isZoomed() const;
 
-    void clear();
+  void clear();
 
-    using INotifyTrk::setMouseFocus;
+  using INotifyTrk::setMouseFocus;
 
-signals:
-    void sigMouseClickState(int);
+ signals:
+  void sigMouseClickState(int);
 
-private slots:
-    void slotContextMenu(const QPoint& point);
-    void slotSave();
-    void slotHidePoints();
-    void slotShowPoints();
-    void slotActivity();
-    void slotCopy();
-    void slotStopRange();
-    void slotResetZoom();
-    void slotAddWpt();
-    void slotCutTrk();
-    void slotAddTrkPtInfo();
+ private slots:
+  void slotContextMenu(const QPoint& point);
+  void slotSave();
+  void slotHidePoints();
+  void slotShowPoints();
+  void slotActivity();
+  void slotCopy();
+  void slotStopRange();
+  void slotResetZoom();
+  void slotAddWpt();
+  void slotCutTrk();
+  void slotAddTrkPtInfo();
 
+ protected:
+  void setXTicScale(qreal scale);
+  void setYLabel(const QString& str);
+  void setXLabel(const QString& str);
+  void newLine(const QPolygonF& line, const QString& label);
+  void addLine(const QPolygonF& line, const QString& label);
+  void setLimits();
+  void resetZoom();
 
-protected:
-    void setXTicScale(qreal scale);
-    void setYLabel(const QString& str);
-    void setXLabel(const QString& str);
-    void newLine(const QPolygonF& line, const QString& label);
-    void addLine(const QPolygonF& line, const QString& label);
-    void setLimits();
-    void resetZoom();
+  void paintEvent(QPaintEvent* e) override;
+  void resizeEvent(QResizeEvent* e) override;
+  void leaveEvent(QEvent* e) override;
+  void enterEvent(QEvent* e) override;
+  void keyPressEvent(QKeyEvent* e) override;
+  void mouseMoveEvent(QMouseEvent* e) override;
+  void mousePressEvent(QMouseEvent* e) override;
+  void mouseReleaseEvent(QMouseEvent* e) override;
+  void wheelEvent(QWheelEvent* e) override;
 
-    void paintEvent(QPaintEvent* e) override;
-    void resizeEvent(QResizeEvent* e) override;
-    void leaveEvent(QEvent* e) override;
-    void enterEvent(QEvent* e) override;
-    void keyPressEvent(QKeyEvent* e) override;
-    void mouseMoveEvent(QMouseEvent* e) override;
-    void mousePressEvent(QMouseEvent* e) override;
-    void mouseReleaseEvent(QMouseEvent* e) override;
-    void wheelEvent(QWheelEvent* e) override;
+  bool mouseReleaseEventSimple(QMouseEvent* e);
+  bool mouseReleaseEventNormal(QMouseEvent* e);
 
+  void setSizes();
+  void setLRTB();
+  void setSizeIconArea();
+  void setSizeXLabel();
+  void setSizeYLabel();
+  void setSizeTrackInfo();
+  void setSizeDrawArea();
 
-    bool mouseReleaseEventSimple(QMouseEvent* e);
-    bool mouseReleaseEventNormal(QMouseEvent* e);
+  QPointF getBasePoint(int ptx) const;
 
-    void setSizes();
-    void setLRTB();
-    void setSizeIconArea();
-    void setSizeXLabel();
-    void setSizeYLabel();
-    void setSizeTrackInfo();
-    void setSizeDrawArea();
+  void draw(QPainter& p);
+  void draw();
+  void drawData(QPainter& p);
+  void drawLabels(QPainter& p);
+  void drawXScale(QPainter& p);
+  void drawYScale(QPainter& p);
+  void drawGridX(QPainter& p);
+  void drawGridY(QPainter& p);
+  void drawXTic(QPainter& p);
+  void drawYTic(QPainter& p);
+  void drawLegend(QPainter& p);
+  void drawDecoration(QPainter& p);
+  void drawTags(QPainter& p);
+  void drawTagLabels(QPainter& p);
+  void drawActivities(QPainter& p);
 
-    QPointF getBasePoint(int ptx) const;
+  bool graphAreaContainsMousePos(QPoint& pos);
 
-    void draw(QPainter& p);
-    void draw();
-    void drawData(QPainter& p);
-    void drawLabels(QPainter& p);
-    void drawXScale(QPainter& p);
-    void drawYScale(QPainter& p);
-    void drawGridX(QPainter& p);
-    void drawGridY(QPainter& p);
-    void drawXTic(QPainter& p);
-    void drawYTic(QPainter& p);
-    void drawLegend(QPainter& p);
-    void drawDecoration(QPainter& p);
-    void drawTags(QPainter& p);
-    void drawTagLabels(QPainter& p);
-    void drawActivities(QPainter& p);
+  static int cnt;
 
-    bool graphAreaContainsMousePos(QPoint& pos);
+  // different draw modes
+  mode_e mode;
+  // buffer needs update
+  bool needsRedraw = true;
 
-    static int cnt;
+  bool showWptLabels = false;
+  bool showScale = true;
+  bool thinLine = false;
+  bool solid = false;
 
-    // different draw modes
-    mode_e mode;
-    // buffer needs update
-    bool needsRedraw = true;
+  bool mouseDidMove = false;
 
-    bool showWptLabels = false;
-    bool showScale = true;
-    bool thinLine = false;
-    bool solid = false;
+  QImage buffer;
+  QPoint posMouse1 = NOPOINT;  ///< pixel coordinate of mouse in graph area while in focus
+  QPoint posMouse2 = NOPOINT;  ///< pixel coordinate of mouse in graph area while in context menu function
 
-    bool mouseDidMove = false;
+  QPoint posLast = NOPOINT;
 
-    QImage buffer;
-    QPoint posMouse1 = NOPOINT; ///< pixel coordinate of mouse in graph area while in focus
-    QPoint posMouse2 = NOPOINT; ///< pixel coordinate of mouse in graph area while in context menu function
+  /**
+     @brief The track this plot is attached to
 
-    QPoint posLast = NOPOINT;
+     @note It is save to store the pointer to the track item because
+           the plot objects registers/unregisters with the track during
+           construction and destruction.
 
-    /**
-       @brief The track this plot is attached to
+           See CGisItem::registeredPlots for details.
+   */
+  CGisItemTrk* trk;
+  CPlotData* data;
 
-       @note It is save to store the pointer to the track item because
-             the plot objects registers/unregisters with the track during
-             construction and destruction.
+  QFontMetrics fm;
 
-             See CGisItem::registeredPlots for details.
-     */
-    CGisItemTrk* trk;
-    CPlotData* data;
+  int left = 0;
+  int right = 0;
+  int top = 0;
+  int bottom = 0;
 
-    QFontMetrics fm;
+  int deadAreaX = 0;
+  int deadAreaY = 0;
 
-    int left = 0;
-    int right = 0;
-    int top = 0;
-    int bottom = 0;
+  int fontWidth = 0;
+  int fontHeight = 0;
+  int scaleWidthX1 = 0;
+  int scaleWidthY1 = 0;
 
-    int deadAreaX = 0;
-    int deadAreaY = 0;
+  int iconBarHeight = 0;
 
-    int fontWidth = 0;
-    int fontHeight = 0;
-    int scaleWidthX1 = 0;
-    int scaleWidthY1 = 0;
+  QRect rectX1Label;
+  QRect rectY1Label;
+  QRect rectGraphArea;
+  QRect rectIconArea;
+  QRect rectTrackInfo;
 
-    int iconBarHeight = 0;
+  static const QPen pens[];
+  static const QPen pensThin[];
+  static const QColor colors[];
 
-    QRect rectX1Label;
-    QRect rectY1Label;
-    QRect rectGraphArea;
-    QRect rectIconArea;
-    QRect rectTrackInfo;
+  QMenu* menu;
+  QAction* actionResetZoom;
+  QAction* actionPrint;
+  QAction* actionStopRange;
+  QAction* actionAddWpt;
+  QAction* actionCutTrk;
+  QAction* actionAddTrkPtInfo;
 
-    static const QPen pens[];
-    static const QPen pensThin[];
-    static const QColor colors[];
+  qint32 idxSel1 = NOIDX;
+  qint32 idxSel2 = NOIDX;
 
-    QMenu* menu;
-    QAction* actionResetZoom;
-    QAction* actionPrint;
-    QAction* actionStopRange;
-    QAction* actionAddWpt;
-    QAction* actionCutTrk;
-    QAction* actionAddTrkPtInfo;
+  mouse_click_state_e mouseClickState = eMouseClickIdle;
 
-    qint32 idxSel1 = NOIDX;
-    qint32 idxSel2 = NOIDX;
+  QPointer<CScrOptRangeTrk> scrOptRange;
 
-    mouse_click_state_e mouseClickState = eMouseClickIdle;
-
-    QPointer<CScrOptRangeTrk> scrOptRange;
-
-private:
-    bool setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm);
-    QPolygonF getVisiblePolygon(const QPolygonF& polyline, QPolygonF& line) const;
+ private:
+  bool setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm);
+  QPolygonF getVisiblePolygon(const QPolygonF& polyline, QPolygonF& line) const;
 };
 
-#endif //IPLOT_H
-
+#endif  // IPLOT_H

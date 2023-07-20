@@ -22,7 +22,7 @@ endif()
 # Define project name and version tags
 ###############################################################################################
 # this is not only the QMS version it will be the package version, too.
-project(QMapShack VERSION 1.16.1 LANGUAGES CXX C)
+project(QMapShack VERSION 1.17.0 LANGUAGES CXX C)
 
 # FOR A RELEASE:
 # remove "development" for a release
@@ -144,7 +144,7 @@ if(MSVC)
 endif(MSVC)
 
 if(UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lstdc++ -lm")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -lm")
     add_definitions(-Wall -Wpedantic -Wno-switch -Wno-strict-aliasing)
 
     # Use ASAN for development versions

@@ -21,28 +21,29 @@
 
 #include <QWidget>
 
+#include "shell/CShellCmd.h"
+
 class CItemListWidget;
 class CItemTreeWidget;
+class IItem;
+class QTemporaryFile;
 
-class IToolGui : public QWidget
-{
-    Q_OBJECT
-public:
-    IToolGui(QWidget* parent);
-    virtual ~IToolGui() = default;
+class IToolGui : public QWidget {
+  Q_OBJECT
+ public:
+  IToolGui(QWidget* parent);
+  virtual ~IToolGui() = default;
 
+ protected:
+  virtual void start(CItemListWidget* itemList, bool allFiles);
+  virtual void start(CItemTreeWidget* itemTree);
+  virtual bool finished(qint32 id);
+  virtual void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) = 0;
+  virtual void buildCmdFinal(QList<CShellCmd>& cmds) {}
 
-protected:
-    virtual void start(CItemListWidget* itemList, bool allFiles);
-    virtual void start(CItemTreeWidget* itemTree);
-    virtual bool finished(qint32 id);
-    virtual void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) = 0;
-    virtual void buildCmdFinal(QList<CShellCmd>& cmds){}
-
-    QString createTempFile(const QString& ext);
-    qint32 jobId = 0;
-    QList<QTemporaryFile*> tmpFiles;
+  QString createTempFile(const QString& ext);
+  qint32 jobId = 0;
+  QList<QTemporaryFile*> tmpFiles;
 };
 
-#endif //ITOOLGUI_H
-
+#endif  // ITOOLGUI_H

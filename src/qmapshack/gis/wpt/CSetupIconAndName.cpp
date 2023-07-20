@@ -17,64 +17,55 @@
 **********************************************************************************************/
 
 #include "gis/wpt/CSetupIconAndName.h"
-#include "helpers/CWptIconManager.h"
 
 #include <QtWidgets>
 
+#include "helpers/CWptIconManager.h"
+
 CSetupIconAndName::CSetupIconAndName(QString& icon, QString& name, QWidget* parent)
-    : QDialog(parent)
-    , icon(icon)
-    , name(name)
+    : QDialog(parent),
+      icon(icon),
+      name(name)
 
 {
-    setupUi(this);
-    toolIcon->setObjectName(icon);
+  setupUi(this);
+  toolIcon->setObjectName(icon);
+  QPointF focus;
+  toolIcon->setIcon(CWptIconManager::self().getWptIconByName(icon, focus));
+  lineName->setText(name);
+
+  connect(lineName, &QLineEdit::textEdited, this, &CSetupIconAndName::slotEditName);
+  connect(toolIcon, &QToolButton::clicked, this, &CSetupIconAndName::slotChangeIcon);
+
+  checkInput();
+}
+
+void CSetupIconAndName::slotEditName(const QString& str) { checkInput(); }
+
+void CSetupIconAndName::slotChangeIcon() {
+  QString iconName = CWptIconManager::self().selectWptIcon(this);
+  if (!iconName.isEmpty()) {
     QPointF focus;
-    toolIcon->setIcon(CWptIconManager::self().getWptIconByName(icon, focus));
-    lineName->setText(name);
-
-    connect(lineName, &QLineEdit::textEdited, this, &CSetupIconAndName::slotEditName);
-    connect(toolIcon, &QToolButton::clicked, this, &CSetupIconAndName::slotChangeIcon);
-
-    checkInput();
+    toolIcon->setObjectName(iconName);
+    toolIcon->setIcon(CWptIconManager::self().getWptIconByName(iconName, focus));
+  }
 }
 
-void CSetupIconAndName::slotEditName(const QString& str)
-{
-    checkInput();
+void CSetupIconAndName::checkInput() {
+  bool isEnabled = !lineName->text().isEmpty();
+  buttonBox->button(QDialogButtonBox::Ok)->setEnabled(isEnabled);
 }
 
-void CSetupIconAndName::slotChangeIcon()
-{
-    QString iconName = CWptIconManager::self().selectWptIcon(this);
-    if(!iconName.isEmpty())
-    {
-        QPointF focus;
-        toolIcon->setObjectName(iconName);
-        toolIcon->setIcon(CWptIconManager::self().getWptIconByName(iconName, focus));
-    }
+void CSetupIconAndName::accept() {
+  icon = toolIcon->objectName();
+  name = lineName->text();
+
+  QDialog::accept();
 }
 
-void CSetupIconAndName::checkInput()
-{
-    bool isEnabled = !lineName->text().isEmpty();
-    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(isEnabled);
+void CSetupIconAndName::reject() {
+  name.clear();
+  icon.clear();
+
+  QDialog::reject();
 }
-
-void CSetupIconAndName::accept()
-{
-    icon = toolIcon->objectName();
-    name = lineName->text();
-
-    QDialog::accept();
-}
-
-void CSetupIconAndName::reject()
-{
-    name.clear();
-    icon.clear();
-
-    QDialog::reject();
-}
-
-

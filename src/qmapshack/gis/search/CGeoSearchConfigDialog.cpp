@@ -16,37 +16,36 @@
 
 **********************************************************************************************/
 
-#include "gis/search/CGeoSearchConfig.h"
 #include "gis/search/CGeoSearchConfigDialog.h"
 
-CGeoSearchConfigDialog::CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig* searchConfig) : QDialog(parent)
-{
-    setupUi(this);
+#include "gis/search/CGeoSearchConfig.h"
 
-    connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
-    connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+CGeoSearchConfigDialog::CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig* searchConfig) : QDialog(parent) {
+  setupUi(this);
 
-    this->searchConfig = searchConfig;
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    lineGoogleKey->setText(searchConfig->googleApiKey);
-    lineGeonamesLogin->setText(searchConfig->geonamesUsername);
-    lineNominatimEmail->setText(searchConfig->nominatimEmail);
+  this->searchConfig = searchConfig;
 
-    QString limit;
-    limit.setNum(searchConfig->nominatimLimit);
-    lineNominatimLimit->setText(limit);
+  lineGoogleKey->setText(searchConfig->googleApiKey);
+  lineGeonamesLogin->setText(searchConfig->geonamesUsername);
+  lineNominatimEmail->setText(searchConfig->nominatimEmail);
+
+  QString limit;
+  limit.setNum(searchConfig->nominatimLimit);
+  lineNominatimLimit->setText(limit);
 }
 
-void CGeoSearchConfigDialog::slotAccepted()
-{
-    searchConfig->googleApiKey = lineGoogleKey->text();
-    searchConfig->geonamesUsername = lineGeonamesLogin->text();
-    searchConfig->nominatimEmail = lineNominatimEmail->text();
+void CGeoSearchConfigDialog::slotAccepted() {
+  searchConfig->googleApiKey = lineGoogleKey->text();
+  searchConfig->geonamesUsername = lineGeonamesLogin->text();
+  searchConfig->nominatimEmail = lineNominatimEmail->text();
 
-    bool conversionOk;
-    int limit = lineNominatimLimit->text().toInt(&conversionOk);
-    searchConfig->nominatimLimit = (conversionOk && limit > 0) ? limit : 10;
+  bool conversionOk;
+  int limit = lineNominatimLimit->text().toInt(&conversionOk);
+  searchConfig->nominatimLimit = (conversionOk && limit > 0) ? limit : 10;
 
-    searchConfig->emitChanged();
-    accept();
+  searchConfig->emitChanged();
+  accept();
 }

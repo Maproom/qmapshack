@@ -20,10 +20,7 @@
 
 #include <QtWidgets>
 
-CScrOptPrint::CScrOptPrint(IMouse* mouse)
-    : IScrOpt(mouse)
-{
-    setupUi(this);
-    adjustSize();
+CScrOptPrint::CScrOptPrint(IMouse* mouse) : IScrOpt(mouse) {
+  setupUi(this);
+  adjustSize();
 }
-

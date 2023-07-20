@@ -19,32 +19,30 @@
 #ifndef CINPUTDIALOG_H
 #define CINPUTDIALOG_H
 
-#include "ui_IInputDialog.h"
 #include <QDialog>
 
-class CInputDialog : public QDialog, private Ui::IInputDialog
-{
-    Q_OBJECT
-public:
-    CInputDialog(QWidget* parent, const QString& text, QVariant& val, const QVariant& reset, const QString& suffix = QString());
-    virtual ~CInputDialog();
+#include "ui_IInputDialog.h"
 
-    void setOption(const QString& text, bool checked);
+class CInputDialog : public QDialog, private Ui::IInputDialog {
+  Q_OBJECT
+ public:
+  CInputDialog(QWidget* parent, const QString& text, QVariant& val, const QVariant& reset,
+               const QString& suffix = QString());
+  virtual ~CInputDialog();
 
-    bool optionIsChecked() const
-    {
-        return checkBox->isChecked();
-    }
+  void setOption(const QString& text, bool checked);
 
-public slots:
-    void accept() override;
+  bool optionIsChecked() const { return checkBox->isChecked(); }
 
-private slots:
-    void slotReset();
-private:
-    QVariant& val;
-    QVariant reset;
+ public slots:
+  void accept() override;
+
+ private slots:
+  void slotReset();
+
+ private:
+  QVariant& val;
+  QVariant reset;
 };
 
-#endif //CINPUTDIALOG_H
-
+#endif  // CINPUTDIALOG_H

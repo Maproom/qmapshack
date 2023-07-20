@@ -19,41 +19,39 @@
 #ifndef CSETUPDATABASE_H
 #define CSETUPDATABASE_H
 
-#include "ui_ISetupDatabase.h"
 #include <QDialog>
+
+#include "ui_ISetupDatabase.h"
 
 class CGisListDB;
 
-class CSetupDatabase : public QDialog, private Ui::ISetupDatabase
-{
-    Q_OBJECT
-public:
-    CSetupDatabase(CGisListDB& parent);
-    virtual ~CSetupDatabase();
+class CSetupDatabase : public QDialog, private Ui::ISetupDatabase {
+  Q_OBJECT
+ public:
+  CSetupDatabase(CGisListDB& parent);
+  virtual ~CSetupDatabase();
 
-    bool isSqlite() const {return radioSqlite->isChecked(); }
-    bool isMysql() const {return radioMysql->isChecked(); }
-    bool noPasswd() const;
+  bool isSqlite() const { return radioSqlite->isChecked(); }
+  bool isMysql() const { return radioMysql->isChecked(); }
+  bool noPasswd() const;
 
-    QString getName() const {return lineName->text(); }
-    QString getFilename() const {return labelFilename->text(); }
-    QString getServer() const {return lineServer->text(); }
-    QString getPort() const {return linePort->text(); }
-    QString getUser() const {return lineUser->text(); }
-    QString getPasswd() const {return linePasswd->text(); }
+  QString getName() const { return lineName->text(); }
+  QString getFilename() const { return labelFilename->text(); }
+  QString getServer() const { return lineServer->text(); }
+  QString getPort() const { return linePort->text(); }
+  QString getUser() const { return lineUser->text(); }
+  QString getPasswd() const { return linePasswd->text(); }
 
+ public slots:
+  void accept() override;
 
-public slots:
-    void accept() override;
+ private slots:
+  void slotNewDB();
+  void slotOpenDB();
+  void slotUpdateButtonBox();
 
-private slots:
-    void slotNewDB();
-    void slotOpenDB();
-    void slotUpdateButtonBox();
-
-private:
-    CGisListDB& list;
+ private:
+  CGisListDB& list;
 };
 
-#endif //CSETUPDATABASE_H
-
+#endif  // CSETUPDATABASE_H

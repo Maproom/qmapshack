@@ -24,18 +24,16 @@
 class CGisItemTrk;
 class QSettings;
 
-class CFilterSpeedConst : public QWidget, private Ui::IFilterSpeedConst
-{
-    Q_OBJECT
-public:
-    CFilterSpeedConst(QWidget* parent);
-    virtual ~CFilterSpeedConst() = default;
+class CFilterSpeedConst : public QWidget, private Ui::IFilterSpeedConst {
+  Q_OBJECT
+ public:
+  CFilterSpeedConst(QWidget* parent);
+  virtual ~CFilterSpeedConst() = default;
 
-    void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg);
+  void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings& cfg);
 
-    void apply(CGisItemTrk& trk);
+  void apply(CGisItemTrk& trk);
 };
 
-#endif //CFILTERSPEEDCONST_H
-
+#endif  // CFILTERSPEEDCONST_H

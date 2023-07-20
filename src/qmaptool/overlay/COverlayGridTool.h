@@ -25,44 +25,38 @@
 class CItemRefMap;
 class COverlayRefMapPoint;
 
-class COverlayGridTool : public QWidget, private Ui::IOverlayGridTool
-{
-    Q_OBJECT
-public:
-    COverlayGridTool(QWidget* parent);
-    virtual ~COverlayGridTool() = default;
+class COverlayGridTool : public QWidget, private Ui::IOverlayGridTool {
+  Q_OBJECT
+ public:
+  COverlayGridTool(QWidget* parent);
+  virtual ~COverlayGridTool() = default;
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent* e);
-    void mouseReleaseEventFx(QMouseEvent* e);
-    void leaveEventFx(QEvent* e);
-    QCursor getCursorFx();
+  bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
+  void mouseMoveEventFx(QMouseEvent* e);
+  void mouseReleaseEventFx(QMouseEvent* e);
+  void leaveEventFx(QEvent* e);
+  QCursor getCursorFx();
 
-    void registerItem(CItemRefMap* item);
+  void registerItem(CItemRefMap* item);
 
-    QList<COverlayRefMapPoint*>& getRefPoints()
-    {
-        return refPoints;
-    }
+  QList<COverlayRefMapPoint*>& getRefPoints() { return refPoints; }
 
-signals:
-    void sigChanged(bool ok);
+ signals:
+  void sigChanged(bool ok);
 
-public slots:
-    void slotReset();
+ public slots:
+  void slotReset();
 
-private slots:
-    void slotCheckInput();
-    void slotSetArea(const QRectF& rect);
-    void slotCalculate();
+ private slots:
+  void slotCheckInput();
+  void slotSetArea(const QRectF& rect);
+  void slotCalculate();
 
-private:
+ private:
+  CItemRefMap* item = nullptr;
+  const IDrawContext* context = nullptr;
 
-    CItemRefMap* item = nullptr;
-    const IDrawContext* context = nullptr;
-
-    QList<COverlayRefMapPoint*> refPoints;
+  QList<COverlayRefMapPoint*> refPoints;
 };
 
-#endif //COVERLAYGRIDTOOL_H
-
+#endif  // COVERLAYGRIDTOOL_H

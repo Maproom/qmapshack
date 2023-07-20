@@ -23,21 +23,18 @@
 
 #define NO_CMD ((void)0)
 
-#define QUERY_EXEC(cmd) \
-    if(!query.exec()) \
-    { \
-        qWarning() << "Execution of SQL-Statement `" << query.lastQuery() << "` failed:"; \
-        qWarning() << query.lastError(); \
-        cmd; \
-    }
+#define QUERY_EXEC(cmd)                                                               \
+  if (!query.exec()) {                                                                \
+    qWarning() << "Execution of SQL-Statement `" << query.lastQuery() << "` failed:"; \
+    qWarning() << query.lastError();                                                  \
+    cmd;                                                                              \
+  }
 
-#define QUERY_RUN(stmt, cmd) \
-    if(!query.exec(stmt)) \
-    { \
-        qWarning() << "Execution of SQL-Statement `" << query.lastQuery() << "` failed:"; \
-        qWarning() << query.lastError(); \
-        cmd; \
-    }
+#define QUERY_RUN(stmt, cmd)                                                          \
+  if (!query.exec(stmt)) {                                                            \
+    qWarning() << "Execution of SQL-Statement `" << query.lastQuery() << "` failed:"; \
+    qWarning() << query.lastError();                                                  \
+    cmd;                                                                              \
+  }
 
-#endif //MACROS_H
-
+#endif  // MACROS_H

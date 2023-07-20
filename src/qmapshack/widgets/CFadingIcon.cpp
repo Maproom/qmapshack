@@ -17,44 +17,36 @@
 **********************************************************************************************/
 
 #include "CFadingIcon.h"
+
 #include <QtWidgets>
 
-CFadingIcon::CFadingIcon(const QPoint& pt, const QString& resource, QWidget* parent)
-    : QLabel(parent)
-    , icon(resource)
-{
-    setPixmap(icon);
+CFadingIcon::CFadingIcon(const QPoint& pt, const QString& resource, QWidget* parent) : QLabel(parent), icon(resource) {
+  setPixmap(icon);
 
-    QTimer* timer = new QTimer(this);
-    timer->setSingleShot(false);
-    timer->setInterval(100);
-    timer->start();
+  QTimer* timer = new QTimer(this);
+  timer->setSingleShot(false);
+  timer->setInterval(100);
+  timer->start();
 
-    connect(timer, &QTimer::timeout, this, &CFadingIcon::slotTimeout);
+  connect(timer, &QTimer::timeout, this, &CFadingIcon::slotTimeout);
 
-    move(pt.x() - icon.width() / 2, pt.y() - icon.height() / 2);
-    show();
+  move(pt.x() - icon.width() / 2, pt.y() - icon.height() / 2);
+  show();
 }
 
-CFadingIcon::~CFadingIcon()
-{
-}
+CFadingIcon::~CFadingIcon() {}
 
-void CFadingIcon::slotTimeout()
-{
-    o -= 0.1;
-    if(o <= 0)
-    {
-        deleteLater();
-    }
-    else
-    {
-        QPixmap tmp(icon.size());
-        tmp.fill(Qt::transparent);
+void CFadingIcon::slotTimeout() {
+  o -= 0.1;
+  if (o <= 0) {
+    deleteLater();
+  } else {
+    QPixmap tmp(icon.size());
+    tmp.fill(Qt::transparent);
 
-        QPainter p(&tmp);
-        p.setOpacity(o);
-        p.drawPixmap(0, 0, icon);
-        setPixmap(tmp);
-    }
+    QPainter p(&tmp);
+    p.setOpacity(o);
+    p.drawPixmap(0, 0, icon);
+    setPixmap(tmp);
+  }
 }

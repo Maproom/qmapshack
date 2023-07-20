@@ -26,72 +26,60 @@ class CItemRefMap;
 class QSettings;
 class IDrawContext;
 
+class CGridSelArea : public QWidget, private Ui::IGridSelArea {
+  Q_OBJECT
+ public:
+  CGridSelArea(QWidget* parent);
+  virtual ~CGridSelArea() = default;
 
-class CGridSelArea : public QWidget, private Ui::IGridSelArea
-{
-    Q_OBJECT
-public:
-    CGridSelArea(QWidget* parent);
-    virtual ~CGridSelArea() = default;
+  void registerItem(CItemRefMap* item);
 
-    void registerItem(CItemRefMap* item);
+  void saveSettings(QSettings& cfg);
+  void loadSettings(QSettings& cfg);
 
-    void saveSettings(QSettings& cfg);
-    void loadSettings(QSettings& cfg);
+  bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
+  void mouseMoveEventFx(QMouseEvent* e);
+  void mouseReleaseEventFx(QMouseEvent* e);
+  void leaveEventFx(QEvent* e);
+  QCursor getCursorFx();
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent* e);
-    void mouseReleaseEventFx(QMouseEvent* e);
-    void leaveEventFx(QEvent* e);
-    QCursor getCursorFx();
+  const QRectF& getArea() const { return area; }
 
-    const QRectF& getArea() const
-    {
-        return area;
-    }
+ public slots:
+  void slotSetArea(const QRectF& rect);
+  void slotReset();
 
-public slots:
-    void slotSetArea(const QRectF& rect);
-    void slotReset();
+ signals:
+  void sigChanged();
 
+ private:
+  CItemRefMap* item = nullptr;
+  const IDrawContext* context = nullptr;
 
-signals:
-    void sigChanged();
+  QRectF area;
+  QRectF areaSave;
+  QPointF offset;
 
-private:
-    CItemRefMap* item = nullptr;
-    const IDrawContext* context = nullptr;
+  QRectF rectTopLeft{0, 0, 20, 20};
+  QRectF rectTopRight{0, 0, 20, 20};
+  QRectF rectBottomLeft{0, 0, 20, 20};
+  QRectF rectBottomRight{0, 0, 20, 20};
 
-    QRectF area;
-    QRectF areaSave;
-    QPointF offset;
+  enum state_e { eStateIdle, eStateMove };
 
-    QRectF rectTopLeft     {0, 0, 20, 20};
-    QRectF rectTopRight    {0, 0, 20, 20};
-    QRectF rectBottomLeft  {0, 0, 20, 20};
-    QRectF rectBottomRight {0, 0, 20, 20};
+  state_e state = eStateIdle;
 
-    enum state_e
-    {
-        eStateIdle
-        , eStateMove
-    };
+  enum corner_e {
+    eCornerNone,
+    eCornerTopLeft,
+    eCornerTopRight,
+    eCornerBottomLeft,
+    eCornerBottomRight,
+    eCornerPrint,
+    eCornerImage
+  };
 
-    state_e state = eStateIdle;
-
-    enum corner_e
-    {
-        eCornerNone
-        , eCornerTopLeft
-        , eCornerTopRight
-        , eCornerBottomLeft
-        , eCornerBottomRight
-        , eCornerPrint
-        , eCornerImage
-    };
-
-    corner_e corner = eCornerNone;
+  corner_e corner = eCornerNone;
 };
 
-#endif //CGRIDSELAREA_H
-
+#endif  // CGRIDSELAREA_H

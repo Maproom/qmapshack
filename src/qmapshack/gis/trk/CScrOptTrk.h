@@ -26,38 +26,36 @@
 class CGisItemTrk;
 class IMouse;
 
-class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk
-{
-    Q_OBJECT
-public:
-    CScrOptTrk(CGisItemTrk* trk, const QPoint& point, IMouse* parent);
-    virtual ~CScrOptTrk();
+class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk {
+  Q_OBJECT
+ public:
+  CScrOptTrk(CGisItemTrk* trk, const QPoint& point, IMouse* parent);
+  virtual ~CScrOptTrk();
 
-    void draw(QPainter& p) override;
+  void draw(QPainter& p) override;
 
-private slots:
-    void slotDelete();
-    void slotCopy();
-    void slotEditDetails();
-    void slotProfile(bool on);
-    void slotCut();
-    void slotEdit();
-    void slotReverse();
-    void slotCombine();
-    void slotRange();
-    void slotActivity();
-    void slotColor();
-    void slotCopyWithWpt();
-    void slotNogo();
-    void slotAddElevation();
-    void slotAddInfo();
-    void slotTags();
-    void slotToRoute();
+ private slots:
+  void slotDelete();
+  void slotCopy();
+  void slotEditDetails();
+  void slotProfile(bool on);
+  void slotCut();
+  void slotEdit();
+  void slotReverse();
+  void slotCombine();
+  void slotRange();
+  void slotActivity();
+  void slotColor();
+  void slotCopyWithWpt();
+  void slotNogo();
+  void slotAddElevation();
+  void slotAddInfo();
+  void slotTags();
+  void slotToRoute();
 
-private:
-    IGisItem::key_t key;
-    QPointF anchor;
+ private:
+  IGisItem::key_t key;
+  QPointF anchor;
 };
 
-#endif //CSCROPTTRK_H
-
+#endif  // CSCROPTTRK_H

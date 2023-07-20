@@ -17,88 +17,75 @@
 **********************************************************************************************/
 
 #include "gis/search/CGeoSearchConfig.h"
-#include "helpers/CSettings.h"
-#include "helpers/CWptIconManager.h"
+
 #include <QIcon>
+
+#include "helpers/CSettings.h"
 
 CGeoSearchConfig* CGeoSearchConfig::pSelf = nullptr;
 
-CGeoSearchConfig::CGeoSearchConfig(QObject* parent) : QObject(parent)
-{
-    pSelf = this;
+CGeoSearchConfig::CGeoSearchConfig(QObject* parent) : QObject(parent) { pSelf = this; }
+
+void CGeoSearchConfig::load() {
+  SETTINGS;
+  cfg.beginGroup("Search");
+  accumulativeResults = cfg.value("accumulativeResults", accumulativeResults).toBool();
+  symbolName = cfg.value("symbol", "Default").toString();
+  currentService = service_e(cfg.value("current", eServiceNominatim).toInt());
+  cfg.beginGroup("google");
+  googleApiKey = cfg.value("key", "").toString();
+  cfg.endGroup();
+  cfg.beginGroup("geonames");
+  geonamesUsername = cfg.value("username", "").toString();
+  cfg.endGroup();
+  cfg.beginGroup("nominatim");
+  nominatimEmail = cfg.value("email", "").toString();
+  nominatimLimit = cfg.value("limit", nominatimLimit).toInt();
+  cfg.endGroup();
+  cfg.endGroup();
+  emit sigConfigChanged();
 }
 
-
-void CGeoSearchConfig::load()
-{
-    SETTINGS;
-    cfg.beginGroup("Search");
-    accumulativeResults = cfg.value("accumulativeResults", accumulativeResults).toBool();
-    symbolName = cfg.value("symbol", "Default").toString();
-    currentService = service_e(cfg.value("current", eServiceNominatim).toInt());
-    cfg.beginGroup("google");
-    googleApiKey = cfg.value("key", "").toString();
-    cfg.endGroup();
-    cfg.beginGroup("geonames");
-    geonamesUsername = cfg.value("username", "").toString();
-    cfg.endGroup();
-    cfg.beginGroup("nominatim");
-    nominatimEmail = cfg.value("email", "").toString();
-    nominatimLimit = cfg.value("limit", nominatimLimit).toInt();
-    cfg.endGroup();
-    cfg.endGroup();
-    emit sigConfigChanged();
+void CGeoSearchConfig::save() const {
+  SETTINGS;
+  cfg.beginGroup("Search");
+  cfg.setValue("accumulativeResults", accumulativeResults);
+  cfg.setValue("symbol", symbolName);
+  cfg.setValue("current", currentService);
+  cfg.beginGroup("google");
+  cfg.setValue("key", googleApiKey);
+  cfg.endGroup();
+  cfg.beginGroup("geonames");
+  cfg.setValue("username", geonamesUsername);
+  cfg.endGroup();
+  cfg.beginGroup("nominatim");
+  cfg.setValue("email", nominatimEmail);
+  cfg.setValue("limit", nominatimLimit);
+  cfg.endGroup();
+  cfg.endGroup();
 }
 
-void CGeoSearchConfig::save() const
-{
-    SETTINGS;
-    cfg.beginGroup("Search");
-    cfg.setValue("accumulativeResults", accumulativeResults);
-    cfg.setValue("symbol", symbolName);
-    cfg.setValue("current", currentService);
-    cfg.beginGroup("google");
-    cfg.setValue("key", googleApiKey);
-    cfg.endGroup();
-    cfg.beginGroup("geonames");
-    cfg.setValue("username", geonamesUsername);
-    cfg.endGroup();
-    cfg.beginGroup("nominatim");
-    cfg.setValue("email", nominatimEmail);
-    cfg.setValue("limit", nominatimLimit);
-    cfg.endGroup();
-    cfg.endGroup();
-}
-
-const QIcon CGeoSearchConfig::getCurrentIcon() const
-{
-    switch(currentService)
-    {
-    case CGeoSearchConfig::eServiceNominatim:
-    {
-        return QIcon("://icons/32x32/SearchNominatim.png");
-        break;
+const QIcon CGeoSearchConfig::getCurrentIcon() const {
+  switch (currentService) {
+    case CGeoSearchConfig::eServiceNominatim: {
+      return QIcon("://icons/32x32/SearchNominatim.png");
+      break;
     }
 
     case CGeoSearchConfig::eServiceGeonamesSearch:
-    case CGeoSearchConfig::eServiceGeonamesAddress:
-    {
-        return QIcon("://icons/32x32/SearchGeonames.png");
-        break;
+    case CGeoSearchConfig::eServiceGeonamesAddress: {
+      return QIcon("://icons/32x32/SearchGeonames.png");
+      break;
     }
 
-    case CGeoSearchConfig::eServiceGoogle:
-    {
-        return QIcon("://icons/32x32/SearchGoogle.png");
-        break;
+    case CGeoSearchConfig::eServiceGoogle: {
+      return QIcon("://icons/32x32/SearchGoogle.png");
+      break;
     }
 
     default:
-        return QIcon("://icons/32x32/Zoom.png");
-    }
+      return QIcon("://icons/32x32/Zoom.png");
+  }
 }
 
-void CGeoSearchConfig::emitChanged()
-{
-    emit sigConfigChanged();
-}
+void CGeoSearchConfig::emitChanged() { emit sigConfigChanged(); }

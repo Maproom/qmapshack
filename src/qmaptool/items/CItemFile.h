@@ -19,20 +19,18 @@
 #ifndef CITEMFILE_H
 #define CITEMFILE_H
 
-#include "items/IItem.h"
-
 #include <QListWidgetItem>
 
-class CItemFile : public IItem, public QListWidgetItem
-{
-public:
-    CItemFile(const QString& filename, QListWidget* parent);
-    virtual ~CItemFile() = default;
+#include "items/IItem.h"
 
-    void setupChanged() override {}
+class CItemFile : public IItem, public QListWidgetItem {
+ public:
+  CItemFile(const QString& filename, QListWidget* parent);
+  virtual ~CItemFile() = default;
 
-    void reload() override;
+  void setupChanged() override {}
+
+  void reload() override;
 };
 
-#endif //CITEMFILE_H
-
+#endif  // CITEMFILE_H

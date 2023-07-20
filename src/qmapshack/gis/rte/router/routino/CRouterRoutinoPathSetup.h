@@ -19,28 +19,26 @@
 #ifndef CROUTERROUTINOPATHSETUP_H
 #define CROUTERROUTINOPATHSETUP_H
 
-#include "ui_IRouterRoutinoPathSetup.h"
 #include <QDialog>
 
-class CRouterRoutinoPathSetup : public QDialog, private Ui::IRouterRoutinoPathSetup
-{
-    Q_OBJECT
-public:
-    CRouterRoutinoPathSetup(QStringList& paths);
-    virtual ~CRouterRoutinoPathSetup();
+#include "ui_IRouterRoutinoPathSetup.h"
 
-public slots:
-    void accept() override;
+class CRouterRoutinoPathSetup : public QDialog, private Ui::IRouterRoutinoPathSetup {
+  Q_OBJECT
+ public:
+  CRouterRoutinoPathSetup(QStringList& paths);
+  virtual ~CRouterRoutinoPathSetup();
 
-private slots:
-    void slotAddPath();
-    void slotDelPath();
-    void slotItemSelectionChanged();
+ public slots:
+  void accept() override;
 
+ private slots:
+  void slotAddPath();
+  void slotDelPath();
+  void slotItemSelectionChanged();
 
-private:
-    QStringList& paths;
+ private:
+  QStringList& paths;
 };
 
-#endif //CROUTERROUTINOPATHSETUP_H
-
+#endif  // CROUTERROUTINOPATHSETUP_H

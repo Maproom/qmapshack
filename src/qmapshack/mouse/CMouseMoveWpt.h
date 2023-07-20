@@ -20,38 +20,36 @@
 #ifndef CMOUSEMOVEWPT_H
 #define CMOUSEMOVEWPT_H
 
+#include <QPixmap>
+
 #include "gis/IGisItem.h"
 #include "mouse/IMouse.h"
-
-#include <QPixmap>
 
 class CCanvas;
 class CGisItemWpt;
 class CGisDraw;
 
-class CMouseMoveWpt : public IMouse
-{
-public:
-    CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    virtual ~CMouseMoveWpt();
+class CMouseMoveWpt : public IMouse {
+ public:
+  CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  virtual ~CMouseMoveWpt();
 
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
+  void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
-    void leftClicked(const QPoint& point) override;
-    void mouseMoved(const QPoint& pos) override;
-    void rightButtonDown(const QPoint& point) override;
-    void scaleChanged() override;
+  void leftClicked(const QPoint& point) override;
+  void mouseMoved(const QPoint& pos) override;
+  void rightButtonDown(const QPoint& point) override;
+  void scaleChanged() override;
 
-private:
-    const IGisItem::key_t key;
-    const QPointF origPos;
-    const qreal radius;
-    const bool avoid;
+ private:
+  const IGisItem::key_t key;
+  const QPointF origPos;
+  const qreal radius;
+  const bool avoid;
 
-    QPointF newPos;
-    QPointF focus;
-    QPixmap icon;
+  QPointF newPos;
+  QPointF focus;
+  QPixmap icon;
 };
 
-#endif //CMOUSEMOVEWPT_H
-
+#endif  // CMOUSEMOVEWPT_H

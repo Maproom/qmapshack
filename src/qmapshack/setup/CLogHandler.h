@@ -21,27 +21,25 @@
 
 #include <QtCore>
 
-class CLogHandler
-{
-public:
-    static void initLogHandler(QString logDirectory, bool writeToFile, bool debugOutput);
+class CLogHandler {
+ public:
+  static void initLogHandler(QString logDirectory, bool writeToFile, bool debugOutput);
 
-    void log(QtMsgType type, const QMessageLogContext& context, const QString& msg);
+  void log(QtMsgType type, const QMessageLogContext& context, const QString& msg);
 
-private:
-    CLogHandler(QString logDirectory, bool writeToFile, bool debugOutput);
-    void printLoggerInfo();
+ private:
+  CLogHandler(QString logDirectory, bool writeToFile, bool debugOutput);
+  void printLoggerInfo();
 
-    void appendToFile(QtMsgType type, QString formatedMsg);
-    void printToConsole(QtMsgType type, QString formatedMsg);
+  void appendToFile(QtMsgType type, QString formatedMsg);
+  void printToConsole(QtMsgType type, QString formatedMsg);
 
-    QString logfileName();
+  QString logfileName();
 
-    bool writeToFile;
-    bool debugOutput;
-    QFile logFile;
-    QTextStream fileStream;
+  bool writeToFile;
+  bool debugOutput;
+  QFile logFile;
+  QTextStream fileStream;
 };
 
-#endif // CLOGHANDLER_H
-
+#endif  // CLOGHANDLER_H

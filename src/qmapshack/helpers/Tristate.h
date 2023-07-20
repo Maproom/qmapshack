@@ -19,11 +19,6 @@
 #ifndef TRISTATE_H
 #define TRISTATE_H
 
-enum tristate_e
-{
-    eTristateTrue,
-    eTristateFalse,
-    eTristateUndefined
-};
+enum tristate_e { eTristateTrue, eTristateFalse, eTristateUndefined };
 
-#endif // TRISTATE_H
+#endif  // TRISTATE_H

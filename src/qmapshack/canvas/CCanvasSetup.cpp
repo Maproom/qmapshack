@@ -16,59 +16,47 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
 #include "canvas/CCanvasSetup.h"
+
+#include "canvas/CCanvas.h"
 #include "grid/CProjWizard.h"
 
-CCanvasSetup::CCanvasSetup(CCanvas* canvas)
-    : QDialog(canvas)
-    , canvas(canvas)
-{
-    setupUi(this);
+CCanvasSetup::CCanvasSetup(CCanvas* canvas) : QDialog(canvas), canvas(canvas) {
+  setupUi(this);
 
-    lineProjection->setText(canvas->getProjection());
-    lineProjection->setCursorPosition(0);
+  lineProjection->setText(canvas->getProjection());
+  lineProjection->setCursorPosition(0);
 
-    switch(canvas->getScalesType())
-    {
+  switch (canvas->getScalesType()) {
     case CCanvas::eScalesDefault:
-        radioScalesDefault->setChecked(true);
-        break;
+      radioScalesDefault->setChecked(true);
+      break;
 
     case CCanvas::eScalesSquare:
-        radioScalesSquare->setChecked(true);
-        break;
-    }
+      radioScalesSquare->setChecked(true);
+      break;
+  }
 
-    connect(toolWizard, &QToolButton::clicked, this, &CCanvasSetup::slotProjWizard);
+  connect(toolWizard, &QToolButton::clicked, this, &CCanvasSetup::slotProjWizard);
 }
 
-CCanvasSetup::~CCanvasSetup()
-{
+CCanvasSetup::~CCanvasSetup() {}
+
+void CCanvasSetup::slotProjWizard() {
+  CProjWizard dlg(*lineProjection);
+  dlg.exec();
 }
 
-void CCanvasSetup::slotProjWizard()
-{
-    CProjWizard dlg(*lineProjection);
-    dlg.exec();
-}
-
-
-void CCanvasSetup::accept()
-{
-    if(!CProjWizard::validProjStr(lineProjection->text(), false))
-    {
-        return;
-    }
-    canvas->setProjection(lineProjection->text());
-    if(radioScalesDefault->isChecked())
-    {
-        canvas->setScales(CCanvas::eScalesDefault);
-    }
-    else if(radioScalesSquare->isChecked())
-    {
-        canvas->setScales(CCanvas::eScalesSquare);
-    }
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
-    QDialog::accept();
+void CCanvasSetup::accept() {
+  if (!CProjWizard::validProjStr(lineProjection->text(), false)) {
+    return;
+  }
+  canvas->setProjection(lineProjection->text());
+  if (radioScalesDefault->isChecked()) {
+    canvas->setScales(CCanvas::eScalesDefault);
+  } else if (radioScalesSquare->isChecked()) {
+    canvas->setScales(CCanvas::eScalesSquare);
+  }
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
+  QDialog::accept();
 }

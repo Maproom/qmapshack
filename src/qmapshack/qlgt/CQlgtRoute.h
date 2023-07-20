@@ -19,45 +19,40 @@
 #ifndef CQLGTROUTE_H
 #define CQLGTROUTE_H
 
-#include "gis/proj_x.h"
+#include <QObject>
+#include <proj.h>
+
 #include "qlgt/IItem.h"
 
-#include <QObject>
+class CQlgtRoute : public QObject, public IItem {
+ public:
+  CQlgtRoute(quint64 id, QObject* parent);
+  virtual ~CQlgtRoute();
 
-class CQlgtRoute : public QObject, public IItem
-{
-public:
-    CQlgtRoute(quint64 id, QObject* parent);
-    virtual ~CQlgtRoute();
+  enum type_e { eEnd, eBase, eRtePts, eRteSec };
+  struct pt_t {
+    float lon;
+    float lat;
 
-    enum type_e {eEnd, eBase, eRtePts, eRteSec};
-    struct pt_t
-    {
-        float lon;
-        float lat;
+    QString action;
 
-        QString action;
+    operator const PJ_UV() {
+      PJ_UV p;
+      p.u = lon;
+      p.v = lat;
+      return p;
+    }
+  };
 
-        operator const PJ_UV ()
-        {
-            PJ_UV p;
-            p.u = lon;
-            p.v = lat;
-            return p;
-        }
-    };
+  /// primary route, just the basic points like A to B via C
+  QVector<pt_t> priRoute;
 
-    /// primary route, just the basic points like A to B via C
-    QVector<pt_t> priRoute;
+  quint32 ttime = 0;
 
-    quint32 ttime = 0;
-
-    QString iconString;
+  QString iconString;
 };
 
+QDataStream& operator>>(QDataStream& s, CQlgtRoute& rte);
+QDataStream& operator<<(QDataStream& s, CQlgtRoute& rte);
 
-QDataStream& operator >>(QDataStream& s, CQlgtRoute& rte);
-QDataStream& operator <<(QDataStream& s, CQlgtRoute& rte);
-
-#endif //CQLGTROUTE_H
-
+#endif  // CQLGTROUTE_H

@@ -19,36 +19,29 @@
 #ifndef MISC_H
 #define MISC_H
 
+#include <QCollator>
 #include <algorithm>
 #include <initializer_list>
-#include <QCollator>
 
 #define QMS_DELETE(p) \
-    delete p; \
-    p = nullptr
+  delete p;           \
+  p = nullptr
 
-
-
-inline bool sortByString(const QString& str1, const QString& str2)
-{
-    static QCollator collator;
-    // this will set collator to natural sorting mode (instead of lexical)
-    collator.setNumericMode(true);
-    return collator.compare(str1, str2) < 0;
-}
-
-template<typename T>
-bool sortByName(T* item1, T* item2)
-{
-    return sortByString(item1->getName(), item2->getName());
+inline bool sortByString(const QString& str1, const QString& str2) {
+  static QCollator collator;
+  // this will set collator to natural sorting mode (instead of lexical)
+  collator.setNumericMode(true);
+  return collator.compare(str1, str2) < 0;
 }
 
 template <typename T>
-bool is_in(const T& v, std::initializer_list<T> lst)
-{
-    return std::find(std::begin(lst), std::end(lst), v) != std::end(lst);
+bool sortByName(T* item1, T* item2) {
+  return sortByString(item1->getName(), item2->getName());
 }
 
+template <typename T>
+bool is_in(const T& v, std::initializer_list<T> lst) {
+  return std::find(std::begin(lst), std::end(lst), v) != std::end(lst);
+}
 
-#endif //MISC_H
-
+#endif  // MISC_H

@@ -23,26 +23,24 @@
 
 static const int fitMaxFieldSize = 255;
 
-class CFitFieldDataState final : public IFitDecoderState
-{
-    Q_DECLARE_TR_FUNCTIONS(CFitFieldDataState)
-public:
-    CFitFieldDataState(shared_state_data_t& data) : IFitDecoderState(data) { reset(); }
-    virtual ~CFitFieldDataState() {}
-    void reset() override;
-    decode_state_e process(quint8& dataByte) override;
+class CFitFieldDataState final : public IFitDecoderState {
+  Q_DECLARE_TR_FUNCTIONS(CFitFieldDataState)
+ public:
+  CFitFieldDataState(shared_state_data_t& data) : IFitDecoderState(data) { reset(); }
+  virtual ~CFitFieldDataState() {}
+  void reset() override;
+  decode_state_e process(quint8& dataByte) override;
 
-private:
-    bool handleFitField();
-    bool handleDevField();
-    void devProfile(CFitMessage& mesg);
-    CFitFieldProfile buildDevFieldProfile(CFitMessage& mesg);
+ private:
+  bool handleFitField();
+  bool handleDevField();
+  void devProfile(CFitMessage& mesg);
+  CFitFieldProfile buildDevFieldProfile(CFitMessage& mesg);
 
-    quint8 fieldIndex;
-    quint8 devFieldIndex;
-    quint8 fieldDataIndex;
-    quint8 fieldData[fitMaxFieldSize];
+  quint8 fieldIndex;
+  quint8 devFieldIndex;
+  quint8 fieldDataIndex;
+  quint8 fieldData[fitMaxFieldSize];
 };
 
-
-#endif // CFITFIELDDATASTATE_H
+#endif  // CFITFIELDDATASTATE_H

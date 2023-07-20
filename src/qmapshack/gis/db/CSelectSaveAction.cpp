@@ -16,56 +16,45 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
 #include "gis/db/CSelectSaveAction.h"
+
+#include "canvas/CCanvas.h"
 #include "gis/IGisItem.h"
 #include "helpers/CProgressDialog.h"
 
-CSelectSaveAction::CSelectSaveAction(const IGisItem* src, const IGisItem* tar, QWidget* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
+CSelectSaveAction::CSelectSaveAction(const IGisItem* src, const IGisItem* tar, QWidget* parent) : QDialog(parent) {
+  setupUi(this);
 
-    labelIcon1->setPixmap(src->getDisplayIcon());
-    labelInfo1->setText(src->getInfo(IGisItem::eFeatureShowName));
-    labelIcon2->setPixmap(tar->getDisplayIcon());
-    labelInfo2->setText(tar->getInfo(IGisItem::eFeatureShowName));
+  labelIcon1->setPixmap(src->getDisplayIcon());
+  labelInfo1->setText(src->getInfo(IGisItem::eFeatureShowName));
+  labelIcon2->setPixmap(tar->getDisplayIcon());
+  labelInfo2->setText(tar->getInfo(IGisItem::eFeatureShowName));
 
-    adjustSize();
+  adjustSize();
 
-    connect(pushSave, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
-    connect(pushSkip, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
-    connect(pushClone, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
+  connect(pushSave, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
+  connect(pushSkip, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
+  connect(pushClone, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
 
-    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectSaveAction");
-    CProgressDialog::setAllVisible(false);
+  CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectSaveAction");
+  CProgressDialog::setAllVisible(false);
 }
 
-CSelectSaveAction::~CSelectSaveAction()
-{
-    CCanvas::restoreOverrideCursor("~CSelectSaveAction");
-    CProgressDialog::setAllVisible(true);
+CSelectSaveAction::~CSelectSaveAction() {
+  CCanvas::restoreOverrideCursor("~CSelectSaveAction");
+  CProgressDialog::setAllVisible(true);
 }
 
-bool CSelectSaveAction::allOthersToo()
-{
-    return checkAllOtherToo->isChecked();
-}
+bool CSelectSaveAction::allOthersToo() { return checkAllOtherToo->isChecked(); }
 
-void CSelectSaveAction::slotSelectResult()
-{
-    if(sender() == pushSave)
-    {
-        result = eResultSave;
-    }
-    else if(sender() == pushSkip)
-    {
-        result = eResultSkip;
-    }
-    else if(sender() == pushClone)
-    {
-        result = eResultClone;
-    }
+void CSelectSaveAction::slotSelectResult() {
+  if (sender() == pushSave) {
+    result = eResultSave;
+  } else if (sender() == pushSkip) {
+    result = eResultSkip;
+  } else if (sender() == pushClone) {
+    result = eResultClone;
+  }
 
-    accept();
+  accept();
 }

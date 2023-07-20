@@ -16,86 +16,67 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "CRouterBRouterToolShell.h"
 
 #include <QtWidgets>
 
-CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser* textBrowser, QWidget* parent)
-    : IToolShell(parent)
-{
-    setTextBrowser(textBrowser);
-    connect(&cmd, &QProcess::stateChanged, this, &CRouterBRouterToolShell::slotStateChanged);
-    connect(&cmd, &QProcess::errorOccurred, this, &CRouterBRouterToolShell::slotError);
-    startupTimer = new QTimer(this);
-    startupTimer->setSingleShot(true);
-    connect(startupTimer, &QTimer::timeout, this, &CRouterBRouterToolShell::slotStartupTimer);
+CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser* textBrowser, QWidget* parent) : IToolShell(parent) {
+  setTextBrowser(textBrowser);
+  connect(&cmd, &QProcess::stateChanged, this, &CRouterBRouterToolShell::slotStateChanged);
+  connect(&cmd, &QProcess::errorOccurred, this, &CRouterBRouterToolShell::slotError);
+  startupTimer = new QTimer(this);
+  startupTimer->setSingleShot(true);
+  connect(startupTimer, &QTimer::timeout, this, &CRouterBRouterToolShell::slotStartupTimer);
 }
 
-CRouterBRouterToolShell::~CRouterBRouterToolShell()
-{
+CRouterBRouterToolShell::~CRouterBRouterToolShell() {}
+
+void CRouterBRouterToolShell::start(const QString& dir, const QString& command, const QStringList& args) {
+  isBeingKilled = false;
+  isStarting = true;
+  stdOut("cd " + dir);
+  stdOut(command + " " + args.join(" ") + "\n");
+  cmd.setWorkingDirectory(dir);
+  startupTimer->start(200);
+  cmd.start(command, args);
+  cmd.waitForStarted();
 }
 
-void CRouterBRouterToolShell::start(const QString& dir, const QString& command, const QStringList& args)
-{
-    isBeingKilled = false;
-    isStarting = true;
-    stdOut("cd " + dir);
-    stdOut(command + " " + args.join(" ") + "\n");
-    cmd.setWorkingDirectory(dir);
-    startupTimer->start(200);
-    cmd.start(command, args);
-    cmd.waitForStarted();
-}
-
-void CRouterBRouterToolShell::stop()
-{
-    if (cmd.state() != QProcess::NotRunning)
-    {
+void CRouterBRouterToolShell::stop() {
+  if (cmd.state() != QProcess::NotRunning) {
 #ifdef USE_KILL_FOR_SHUTDOWN
-        isBeingKilled = true;
-        cmd.kill();
+    isBeingKilled = true;
+    cmd.kill();
 #else
-        cmd.terminate();
+    cmd.terminate();
 #endif
-        cmd.waitForFinished();
-    }
+    cmd.waitForFinished();
+  }
 }
 
-void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState)
-{
-    if (newState == QProcess::NotRunning && isStarting)
-    {
-        emit sigProcessError(QProcess::FailedToStart, text->toPlainText());
-    }
+void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState) {
+  if (newState == QProcess::NotRunning && isStarting) {
+    emit sigProcessError(QProcess::FailedToStart, text->toPlainText());
+  }
 
-    emit sigProcessStateChanged(newState);
+  emit sigProcessStateChanged(newState);
 }
 
-void CRouterBRouterToolShell::slotError(const QProcess::ProcessError error)
-{
-    if (isBeingKilled)
-    {
-        return;
-    }
-    emit sigProcessError(error, cmd.errorString());
+void CRouterBRouterToolShell::slotError(const QProcess::ProcessError error) {
+  if (isBeingKilled) {
+    return;
+  }
+  emit sigProcessError(error, cmd.errorString());
 }
 
-void CRouterBRouterToolShell::slotStartupTimer()
-{
-    isStarting = false;
-}
+void CRouterBRouterToolShell::slotStartupTimer() { isStarting = false; }
 
-void CRouterBRouterToolShell::finished(const int exitCode, const QProcess::ExitStatus status)
-{
-    if (status == QProcess::ExitStatus::NormalExit)
-    {
-        text->setTextColor(Qt::darkGreen);
-        text->append(tr("!!! done !!!\n"));
-    }
-    else
-    {
-        text->setTextColor(Qt::darkRed);
-        text->append(tr("!!! failed !!!\n"));
-    }
+void CRouterBRouterToolShell::finished(const int exitCode, const QProcess::ExitStatus status) {
+  if (status == QProcess::ExitStatus::NormalExit) {
+    text->setTextColor(Qt::darkGreen);
+    text->append(tr("!!! done !!!\n"));
+  } else {
+    text->setTextColor(Qt::darkRed);
+    text->append(tr("!!! failed !!!\n"));
+  }
 }

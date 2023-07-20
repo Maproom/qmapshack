@@ -28,126 +28,106 @@
 class CRtDraw;
 class QSettings;
 
-class IRtSource : public QObject, public QTreeWidgetItem
-{
-    Q_OBJECT
-public:
-    enum type_e
-    {
-        eTypeNone
-        , eTypeOpenSky
-        , eTypeGpsTether
-        , eTypeAis
-    };
+class IRtSource : public QObject, public QTreeWidgetItem {
+  Q_OBJECT
+ public:
+  enum type_e { eTypeNone, eTypeOpenSky, eTypeGpsTether, eTypeAis };
 
-    IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget* parent);
-    virtual ~IRtSource() = default;
+  IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget* parent);
+  virtual ~IRtSource() = default;
 
-    /**
-       @brief Create new IRtSource items by type id
+  /**
+     @brief Create new IRtSource items by type id
 
-       @param type      the type id of the new item
-       @param parent    the tree widget the item belongs to (can be nullptr, too)
+     @param type      the type id of the new item
+     @param parent    the tree widget the item belongs to (can be nullptr, too)
 
-       @return The pointer to the item or nullptr if type is unknown
-     */
-    static IRtSource* create(int type, QTreeWidget* parent);
+     @return The pointer to the item or nullptr if type is unknown
+   */
+  static IRtSource* create(int type, QTreeWidget* parent);
 
-    /**
-       @brief Do everything necessary to setup item after it has been reparented to tree widget
+  /**
+     @brief Do everything necessary to setup item after it has been reparented to tree widget
 
-       This will give you the chance to register widgets with sub-items and to setup singnal/slot
-       connections.
+     This will give you the chance to register widgets with sub-items and to setup singnal/slot
+     connections.
 
-     */
-    virtual void registerWithTreeWidget() = 0;
-    /**
-       @brief Load item configuration from QSettings
+   */
+  virtual void registerWithTreeWidget() = 0;
+  /**
+     @brief Load item configuration from QSettings
 
-       @param cfg   the QSettings object with proper group focus
-     */
-    virtual void loadSettings(QSettings& cfg);
-    /**
-       @brief Save item configuration to QSettings
+     @param cfg   the QSettings object with proper group focus
+   */
+  virtual void loadSettings(QSettings& cfg);
+  /**
+     @brief Save item configuration to QSettings
 
-       @param cfg   the QSettings object with proper group focus
-     */
-    virtual void saveSettings(QSettings& cfg) const;
-    /**
-       @brief Get string with description
+     @param cfg   the QSettings object with proper group focus
+   */
+  virtual void saveSettings(QSettings& cfg) const;
+  /**
+     @brief Get string with description
 
-       @return A descriptive text.
-     */
-    virtual QString getDescription() const = 0;
+     @return A descriptive text.
+   */
+  virtual QString getDescription() const = 0;
 
-    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) = 0;
+  virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) = 0;
 
-    virtual void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) = 0;
+  virtual void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) = 0;
 
-    virtual void mouseMove(const QPointF& pos)
-    {
-    }
+  virtual void mouseMove(const QPointF& pos) {}
 
-    /**
-       @brief Add actions to the context menu for this source
+  /**
+     @brief Add actions to the context menu for this source
 
-       @param menu  the context menu
-     */
-    virtual void contextMenu(QMenu* menu) const
-    {
-    }
+     @param menu  the context menu
+   */
+  virtual void contextMenu(QMenu* menu) const {}
 
-    /**
-       @brief Add actions to the context menu for a child of this source
+  /**
+     @brief Add actions to the context menu for a child of this source
 
-       @param child     the child
-       @param menu      the context menu
-     */
-    virtual void contextMenuChild(QTreeWidgetItem* child, QMenu* menu) const
-    {
-    }
+     @param child     the child
+     @param menu      the context menu
+   */
+  virtual void contextMenuChild(QTreeWidgetItem* child, QMenu* menu) const {}
 
+  /**
+     @brief This source item has been clicked
 
-    /**
-       @brief This source item has been clicked
+     @param column    the item's column that was clicked
+   */
+  virtual void itemClicked(int column) const {}
 
-       @param column    the item's column that was clicked
-     */
-    virtual void itemClicked(int column) const
-    {
-    }
+  /**
+     @brief A child item of the source has been clicked
 
-    /**
-       @brief A child item of the source has been clicked
+     @param child     the child item
+     @param column    the item's column that was clicked
+   */
+  virtual void itemClicked(QTreeWidgetItem* child, int column) const {}
 
-       @param child     the child item
-       @param column    the item's column that was clicked
-     */
-    virtual void itemClicked(QTreeWidgetItem* child, int column) const
-    {
-    }
+  /// the global mutex. Has to be used for all operations on a IRtItem
+  static QRecursiveMutex mutex;
+  /// the item's type id
+  const type_e type;
+  /// set true if only one instance at a time can exist
+  const bool singleInstanceOnly;
 
-    /// the global mutex. Has to be used for all operations on a IRtItem
-    static QRecursiveMutex mutex;
-    /// the item's type id
-    const type_e type;
-    /// set true if only one instance at a time can exist
-    const bool singleInstanceOnly;
+  /// used to identify tre widget columns
+  enum column_e {
+    eColumnIcon = 0,
+    eColumnCheckBox = eColumnIcon,
+    eColumnDecoration = eColumnIcon,
+    eColumnName = 1,
+    eColumnWidget = eColumnName
+  };
 
-    /// used to identify tre widget columns
-    enum column_e
-    {
-        eColumnIcon = 0
-        , eColumnCheckBox = eColumnIcon
-        , eColumnDecoration = eColumnIcon
-        , eColumnName = 1
-        , eColumnWidget = eColumnName
-    };
-
-signals:
-    void sigChanged();
+ signals:
+  void sigChanged();
 };
 
 Q_DECLARE_METATYPE(IRtSource*)
-#endif //IRTSOURCE_H
-
+#endif  // IRTSOURCE_H

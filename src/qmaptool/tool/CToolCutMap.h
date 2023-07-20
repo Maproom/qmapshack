@@ -24,28 +24,25 @@
 #include "tool/IToolGui.h"
 #include "ui_IToolCutMap.h"
 
-class CToolCutMap : public IToolGui, public ITool, private Ui::IToolCutMap
-{
-    Q_OBJECT
-public:
-    CToolCutMap(QWidget* parent);
-    virtual ~CToolCutMap();
+class CToolCutMap : public IToolGui, public ITool, private Ui::IToolCutMap {
+  Q_OBJECT
+ public:
+  CToolCutMap(QWidget* parent);
+  virtual ~CToolCutMap();
 
-    void setupChanged() override;
+  void setupChanged() override;
 
-    FORWARD_LIST_ALL(itemList)
+  FORWARD_LIST_ALL(itemList)
 
+ private slots:
+  void slotAddItem(const QString& filename, QListWidget* list);
+  void slotMapSelectionChanged();
+  void slotSomethingChanged();
+  void slotStart();
+  void slotFinished(qint32 id);
 
-private slots:
-    void slotAddItem(const QString& filename, QListWidget* list);
-    void slotMapSelectionChanged();
-    void slotSomethingChanged();
-    void slotStart();
-    void slotFinished(qint32 id);
-
-private:
-    void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
+ private:
+  void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
 };
 
-#endif //CTOOLCUTMAP_H
-
+#endif  // CTOOLCUTMAP_H

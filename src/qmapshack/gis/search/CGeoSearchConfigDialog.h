@@ -23,16 +23,15 @@
 
 class CGeoSearchConfig;
 
-class CGeoSearchConfigDialog : public QDialog, Ui_IGeoSearchConfigDialog
-{
-public:
-    CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig* searchConfig);
+class CGeoSearchConfigDialog : public QDialog, Ui_IGeoSearchConfigDialog {
+ public:
+  CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig* searchConfig);
 
-private slots:
-    void slotAccepted();
+ private slots:
+  void slotAccepted();
 
-private:
-    CGeoSearchConfig* searchConfig;
+ private:
+  CGeoSearchConfig* searchConfig;
 };
 
 #endif

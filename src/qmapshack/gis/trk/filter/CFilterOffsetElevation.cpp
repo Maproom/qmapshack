@@ -16,34 +16,30 @@
 
 **********************************************************************************************/
 
+#include "gis/trk/filter/CFilterOffsetElevation.h"
+
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
-CFilterOffsetElevation::CFilterOffsetElevation(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
+CFilterOffsetElevation::CFilterOffsetElevation(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
 
-    spinBox->setSuffix(IUnit::self().elevationUnit);
+  spinBox->setSuffix(IUnit::self().elevationUnit);
 
-    SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/OffsetElevation/offset", 0).toInt());
+  SETTINGS;
+  spinBox->setValue(cfg.value("TrackDetails/Filter/OffsetElevation/offset", 0).toInt());
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterOffsetElevation::slotApply);
+  connect(toolApply, &QToolButton::clicked, this, &CFilterOffsetElevation::slotApply);
 }
 
-CFilterOffsetElevation::~CFilterOffsetElevation()
-{
-    SETTINGS;
-    cfg.setValue("TrackDetails/Filter/OffsetElevation/offset", spinBox->value());
+CFilterOffsetElevation::~CFilterOffsetElevation() {
+  SETTINGS;
+  cfg.setValue("TrackDetails/Filter/OffsetElevation/offset", spinBox->value());
 }
 
-void CFilterOffsetElevation::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterOffsetElevation(spinBox->value() / IUnit::self().elevationFactor);
+void CFilterOffsetElevation::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterOffsetElevation(spinBox->value() / IUnit::self().elevationFactor);
 }

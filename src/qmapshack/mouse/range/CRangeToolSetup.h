@@ -19,24 +19,21 @@
 #ifndef CRANGETOOLSETUP_H
 #define CRANGETOOLSETUP_H
 
-
 #include "ui_IRangeToolSetup.h"
 
 class CScrOptRangeTool;
 
-class CRangeToolSetup : public QDialog, private Ui::IRangeToolSetup
-{
-    Q_OBJECT
-public:
-    CRangeToolSetup(CScrOptRangeTool& parent);
-    virtual ~CRangeToolSetup() = default;
+class CRangeToolSetup : public QDialog, private Ui::IRangeToolSetup {
+  Q_OBJECT
+ public:
+  CRangeToolSetup(CScrOptRangeTool& parent);
+  virtual ~CRangeToolSetup() = default;
 
-public slots:
-    void accept() override;
+ public slots:
+  void accept() override;
 
-private:
-    CScrOptRangeTool& tool;
+ private:
+  CScrOptRangeTool& tool;
 };
 
-#endif //CRANGETOOLSETUP_H
-
+#endif  // CRANGETOOLSETUP_H

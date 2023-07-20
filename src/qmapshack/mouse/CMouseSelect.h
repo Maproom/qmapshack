@@ -27,53 +27,50 @@ class CGisDraw;
 class CCanvas;
 class CScrOptSelect;
 
-class CMouseSelect : public IMouseSelect
-{
-    Q_OBJECT
-public:
-    CMouseSelect(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    virtual ~CMouseSelect();
+class CMouseSelect : public IMouseSelect {
+  Q_OBJECT
+ public:
+  CMouseSelect(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  virtual ~CMouseSelect();
 
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
+  void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
-private slots:
-    void slotUpdate();
-    void slotCopy() const;
-    void slotRoute() const;
-    void slotEditPrxWpt() const;
-    void slotSymWpt() const;
-    void slotEleWptTrk() const;
-    void slotCombineTrk() const;
-    void slotActivityTrk() const;
-    void slotColorTrk() const;
-    void slotDelete() const;
+ private slots:
+  void slotUpdate();
+  void slotCopy() const;
+  void slotRoute() const;
+  void slotEditPrxWpt() const;
+  void slotSymWpt() const;
+  void slotEleWptTrk() const;
+  void slotCombineTrk() const;
+  void slotActivityTrk() const;
+  void slotColorTrk() const;
+  void slotDelete() const;
 
-private:
-    /**
-       @brief Get a temporary list of all items
+ private:
+  /**
+     @brief Get a temporary list of all items
 
-       @Note: The list of items is only temporary and must not be used outside the calling method.
+     @Note: The list of items is only temporary and must not be used outside the calling method.
 
-       @param items a temporary list to collect all item pointers
-     */
-    void findItems(QList<IGisItem*>& items);
+     @param items a temporary list to collect all item pointers
+   */
+  void findItems(QList<IGisItem*>& items);
 
+  QList<IGisItem::key_t> itemKeys;
+  static QMutex mutex;
+  QSet<IPoiItem> poisFound;
+  /// The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
+  ///  Thus the location where to draw the highlight is separately given
+  QList<QPointF> posPoiHighlight;
+  IGisItem::selflags_t modeLastSel = IGisItem::eSelectionNone;
+  QRectF rectLastSel;
 
-    QList<IGisItem::key_t> itemKeys;
-    static QMutex mutex;
-    QSet<IPoiItem> poisFound;
-    ///The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
-    /// Thus the location where to draw the highlight is separately given
-    QList<QPointF> posPoiHighlight;
-    IGisItem::selflags_t modeLastSel = IGisItem::eSelectionNone;
-    QRectF rectLastSel;
-
-    quint32 cntWpt = 0;
-    quint32 cntTrk = 0;
-    quint32 cntRte = 0;
-    quint32 cntOvl = 0;
-    quint32 cntPoi = 0;
+  quint32 cntWpt = 0;
+  quint32 cntTrk = 0;
+  quint32 cntRte = 0;
+  quint32 cntOvl = 0;
+  quint32 cntPoi = 0;
 };
 
-#endif //CMOUSESELECT_H
-
+#endif  // CMOUSESELECT_H

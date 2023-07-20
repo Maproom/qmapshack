@@ -19,45 +19,39 @@
 #ifndef CSELECTDBFOLDER_H
 #define CSELECTDBFOLDER_H
 
-#include "ui_ISelectDBFolder.h"
 #include <QDialog>
 
-class CSelectDBFolder : public QDialog, private Ui::ISelectDBFolder
-{
-    Q_OBJECT
-public:
-    /**
-       @brief Create a dialog to select a folder
+#include "ui_ISelectDBFolder.h"
 
-       On success the list with IDs will be filled. The first entry will be the ID of the selected folder.
-       All other entries will be the IDs of the parents up to the database.
+class CSelectDBFolder : public QDialog, private Ui::ISelectDBFolder {
+  Q_OBJECT
+ public:
+  /**
+     @brief Create a dialog to select a folder
 
-       @param ids       This is a list of IDs the first one is the ID of the selected folder.
-       @param db        The database of the selected folder
-       @param host      The host of the selected folder
-       @param parent    The parent widget
-     */
-    CSelectDBFolder(QList<quint64>& ids, QString& db, QString& host, QWidget* parent);
-    virtual ~CSelectDBFolder();
+     On success the list with IDs will be filled. The first entry will be the ID of the selected folder.
+     All other entries will be the IDs of the parents up to the database.
 
-    void setProjectsOnly(bool yes)
-    {
-        projectsOnly = yes;
-    }
+     @param ids       This is a list of IDs the first one is the ID of the selected folder.
+     @param db        The database of the selected folder
+     @param host      The host of the selected folder
+     @param parent    The parent widget
+   */
+  CSelectDBFolder(QList<quint64>& ids, QString& db, QString& host, QWidget* parent);
+  virtual ~CSelectDBFolder();
 
-private slots:
-    void slotItemExpanded(QTreeWidgetItem* item);
-    void slotItemSelectionChanged();
+  void setProjectsOnly(bool yes) { projectsOnly = yes; }
 
-private:
-    QList<quint64>& ids;
-    QString& db;
-    QString& host;
+ private slots:
+  void slotItemExpanded(QTreeWidgetItem* item);
+  void slotItemSelectionChanged();
 
+ private:
+  QList<quint64>& ids;
+  QString& db;
+  QString& host;
 
-    bool projectsOnly = false;
+  bool projectsOnly = false;
 };
 
-#endif //CSELECTDBFOLDER_H
-
-
+#endif  // CSELECTDBFOLDER_H

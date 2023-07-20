@@ -21,12 +21,10 @@
 
 #include "gis/db/IDBFolder.h"
 
-class CDBFolderOther : public IDBFolder
-{
-public:
-    CDBFolderOther(QSqlDatabase& db, quint64 key, QTreeWidgetItem* parent);
-    virtual ~CDBFolderOther();
+class CDBFolderOther : public IDBFolder {
+ public:
+  CDBFolderOther(QSqlDatabase& db, quint64 key, QTreeWidgetItem* parent);
+  virtual ~CDBFolderOther();
 };
 
-#endif //CDBFOLDEROTHER_H
-
+#endif  // CDBFOLDEROTHER_H

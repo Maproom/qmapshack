@@ -18,10 +18,4 @@
 
 #include "shell/CShellCmd.h"
 
-CShellCmd::CShellCmd(const QString& cmd, const QStringList& args)
-    : cmd(cmd)
-    , args(args)
-{
-}
-
-
+CShellCmd::CShellCmd(const QString& cmd, const QStringList& args) : cmd(cmd), args(args) {}

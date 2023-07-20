@@ -21,30 +21,22 @@
 
 #include "gis/prj/IGisProject.h"
 
-class CQlbProject : public IGisProject
-{
-    Q_DECLARE_TR_FUNCTIONS(CQlbProject)
-public:
-    CQlbProject(const QString& filename, CGisListWks* parent);
-    virtual ~CQlbProject() = default;
+class CQlbProject : public IGisProject {
+  Q_DECLARE_TR_FUNCTIONS(CQlbProject)
+ public:
+  CQlbProject(const QString& filename, CGisListWks* parent);
+  virtual ~CQlbProject() = default;
 
-    const QString getFileDialogFilter() const override
-    {
-        return IGisProject::filedialogFilterQLB;
-    }
+  const QString getFileDialogFilter() const override { return IGisProject::filedialogFilterQLB; }
 
-    const QString getFileExtension() const override
-    {
-        return "qlb";
-    }
+  const QString getFileExtension() const override { return "qlb"; }
 
-private:
-    void load(const QString& filename);
-    void loadWpts(QByteArray& array);
-    void loadTrks(QByteArray& array);
-    void loadRtes(QByteArray& array);
-    void loadOvls(QByteArray& array);
+ private:
+  void load(const QString& filename);
+  void loadWpts(QByteArray& array);
+  void loadTrks(QByteArray& array);
+  void loadRtes(QByteArray& array);
+  void loadOvls(QByteArray& array);
 };
 
-#endif //CQLBPROJECT_H
-
+#endif  // CQLBPROJECT_H

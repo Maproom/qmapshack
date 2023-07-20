@@ -19,24 +19,20 @@
 #ifndef CLOSTFOUNDPROJECT_H
 #define CLOSTFOUNDPROJECT_H
 
-#include "gis/db/CDBProject.h"
 #include <QSqlDatabase>
 
-class CLostFoundProject : public CDBProject
-{
-    Q_DECLARE_TR_FUNCTIONS(CLostFoundProject)
-public:
-    CLostFoundProject(const QString& dbName, CGisListWks* parent);
+#include "gis/db/CDBProject.h"
 
-    virtual ~CLostFoundProject();
+class CLostFoundProject : public CDBProject {
+  Q_DECLARE_TR_FUNCTIONS(CLostFoundProject)
+ public:
+  CLostFoundProject(const QString& dbName, CGisListWks* parent);
 
-    bool save() override
-    {
-        return false;
-    }
+  virtual ~CLostFoundProject();
 
-    void updateFromDb();
+  bool save() override { return false; }
+
+  void updateFromDb();
 };
 
-#endif //CLOSTFOUNDPROJECT_H
-
+#endif  // CLOSTFOUNDPROJECT_H

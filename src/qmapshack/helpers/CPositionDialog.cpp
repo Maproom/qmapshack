@@ -17,58 +17,46 @@
 **********************************************************************************************/
 
 #include "helpers/CPositionDialog.h"
-#include "units/IUnit.h"
 
 #include <QtWidgets>
 
+#include "units/IUnit.h"
 
-CPositionDialog::CPositionDialog(QWidget* parent, QPointF& pos)
-    : QDialog(parent)
-    , pos(pos)
-{
-    setupUi(this);
-    QString str;
-    IUnit::degToStr(pos.x(), pos.y(), str);
-    lineEdit->setText(str);
+CPositionDialog::CPositionDialog(QWidget* parent, QPointF& pos) : QDialog(parent), pos(pos) {
+  setupUi(this);
+  QString str;
+  IUnit::degToStr(pos.x(), pos.y(), str);
+  lineEdit->setText(str);
 
-    labelWarning->hide();
+  labelWarning->hide();
 
-    connect(lineEdit, &QLineEdit::textEdited, this, &CPositionDialog::slotEdit);
+  connect(lineEdit, &QLineEdit::textEdited, this, &CPositionDialog::slotEdit);
 }
 
-CPositionDialog::~CPositionDialog()
-{
+CPositionDialog::~CPositionDialog() {}
+
+void CPositionDialog::accept() {
+  if (getPosition(pos, lineEdit->text())) {
+    QDialog::accept();
+  }
 }
 
-void CPositionDialog::accept()
-{
-    if(getPosition(pos, lineEdit->text()))
-    {
-        QDialog::accept();
-    }
+bool CPositionDialog::getPosition(QPointF& pt, const QString& str) {
+  qreal lon, lat;
+
+  bool res = IUnit::strToDeg(str, lon, lat);
+
+  if (res) {
+    pt.rx() = lon;
+    pt.ry() = lat;
+  }
+
+  return res;
 }
 
-bool CPositionDialog::getPosition(QPointF& pt, const QString& str)
-{
-    qreal lon, lat;
+void CPositionDialog::slotEdit(const QString& str) {
+  bool isValid = IUnit::isValidCoordString(str);
 
-    bool res = IUnit::strToDeg(str, lon, lat);
-
-    if(res)
-    {
-        pt.rx() = lon;
-        pt.ry() = lat;
-    }
-
-    return res;
-}
-
-
-
-void CPositionDialog::slotEdit(const QString& str)
-{
-    bool isValid = IUnit::isValidCoordString(str);
-
-    labelWarning->setVisible(!isValid);
-    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(isValid);
+  labelWarning->setVisible(!isValid);
+  buttonBox->button(QDialogButtonBox::Ok)->setEnabled(isValid);
 }

@@ -24,37 +24,26 @@
 class CGisListWks;
 class CGisDraw;
 
-class CGpxProject : public IGisProject
-{
-    Q_DECLARE_TR_FUNCTIONS(CGpxProject)
-public:
-    CGpxProject(const QString& filename, CGisListWks* parent);
-    CGpxProject(const QString& filename, IDevice* parent);
-    CGpxProject(const QString& filename, const IGisProject* project, IDevice* parent);
-    virtual ~CGpxProject();
+class CGpxProject : public IGisProject {
+  Q_DECLARE_TR_FUNCTIONS(CGpxProject)
+ public:
+  CGpxProject(const QString& filename, CGisListWks* parent);
+  CGpxProject(const QString& filename, IDevice* parent);
+  CGpxProject(const QString& filename, const IGisProject* project, IDevice* parent);
+  virtual ~CGpxProject();
 
-    const QString getFileDialogFilter() const override
-    {
-        return IGisProject::filedialogFilterGPX;
-    }
+  const QString getFileDialogFilter() const override { return IGisProject::filedialogFilterGPX; }
 
-    const QString getFileExtension() const override
-    {
-        return "gpx";
-    }
+  const QString getFileExtension() const override { return "gpx"; }
 
-    bool canSave() const override
-    {
-        return true;
-    }
+  bool canSave() const override { return true; }
 
-    static bool saveAs(const QString& fn, IGisProject& project, bool strictGpx11);
+  static bool saveAs(const QString& fn, IGisProject& project, bool strictGpx11);
 
-    static void loadGpx(const QString& filename, CGpxProject* project);
+  static void loadGpx(const QString& filename, CGpxProject* project);
 
-private:
-    void loadGpx(const QString& filename);
+ private:
+  void loadGpx(const QString& filename);
 };
 
-#endif //CGPXPROJECT_H
-
+#endif  // CGPXPROJECT_H

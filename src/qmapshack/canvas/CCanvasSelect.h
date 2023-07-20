@@ -22,20 +22,18 @@
 #include "ui_ICanvasSelect.h"
 class CCanvas;
 
-class CCanvasSelect : public QDialog, private Ui::ICanvasSelect
-{
-    Q_OBJECT
-public:
-    CCanvasSelect(CCanvas*& canvas, QWidget* parent);
-    virtual ~CCanvasSelect() = default;
+class CCanvasSelect : public QDialog, private Ui::ICanvasSelect {
+  Q_OBJECT
+ public:
+  CCanvasSelect(CCanvas*& canvas, QWidget* parent);
+  virtual ~CCanvasSelect() = default;
 
-public slots:
-    int exec() override;
-    void accept() override;
+ public slots:
+  int exec() override;
+  void accept() override;
 
-private:
-    CCanvas*& canvas;
+ private:
+  CCanvas*& canvas;
 };
 
-#endif //CCANVASSELECT_H
-
+#endif  // CCANVASSELECT_H

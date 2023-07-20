@@ -16,33 +16,26 @@
 
 **********************************************************************************************/
 
-#include "helpers/CDraw.h"
 #include "mouse/line/CScrOptRangeLine.h"
 
-CScrOptRangeLine::CScrOptRangeLine(const QPointF& point, IMouse* mouse, QWidget* parent)
-    : IScrOpt(mouse)
-{
-    if(parent != nullptr)
-    {
-        setParent(parent);
-    }
+#include "helpers/CDraw.h"
 
-    setupUi(this);
-//    label->setFont(CMainWindow::self().getMapFont());
-//    label->setText(trk->getInfoRange());
-    adjustSize();
+CScrOptRangeLine::CScrOptRangeLine(const QPointF& point, IMouse* mouse, QWidget* parent) : IScrOpt(mouse) {
+  if (parent != nullptr) {
+    setParent(parent);
+  }
 
-    setOrigin(point.toPoint());
+  setupUi(this);
+  //    label->setFont(CMainWindow::self().getMapFont());
+  //    label->setText(trk->getInfoRange());
+  adjustSize();
 
-    moveTo(point.toPoint());
-    show();
+  setOrigin(point.toPoint());
+
+  moveTo(point.toPoint());
+  show();
 }
 
-CScrOptRangeLine::~CScrOptRangeLine()
-{
-}
+CScrOptRangeLine::~CScrOptRangeLine() {}
 
-void CScrOptRangeLine::draw(QPainter& p)
-{
-    CDraw::bubble(p, geometry(), origin, backgroundColor);
-}
+void CScrOptRangeLine::draw(QPainter& p) { CDraw::bubble(p, geometry(), origin, backgroundColor); }

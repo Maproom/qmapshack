@@ -16,53 +16,43 @@
 
 **********************************************************************************************/
 
-#include "config.h"
 #include "setup/CAppSetupLinux.h"
 
+#include "config.h"
+
 #ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
+#define _MKSTR_1(x) #x
+#define _MKSTR(x) _MKSTR_1(x)
 #endif
 
-void CAppSetupLinux::initQMapTool()
-{
-    prepareGdal("", "");
+void CAppSetupLinux::initQMapTool() {
+  prepareGdal("", "");
 
-    // setup translators
-    QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-    QString translationPath = QCoreApplication::applicationDirPath();
-    translationPath.replace(QRegExp("bin$"), "share/qmaptool/translations");
-    prepareTranslator(resourceDir, "qt_");
-    prepareTranslator(translationPath, "qmaptool_");
+  // setup translators
+  QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+  QString translationPath = QCoreApplication::applicationDirPath();
+  translationPath.replace(QRegExp("bin$"), "share/qmaptool/translations");
+  prepareTranslator(resourceDir, "qt_");
+  prepareTranslator(translationPath, "qmaptool_");
 
-    // create directories
-    IAppSetup::path(logDir(), 0, true, "LOG");
+  // create directories
+  IAppSetup::path(logDir(), 0, true, "LOG");
 
-    prepareToolPaths();
+  prepareToolPaths();
 }
 
-
-
-QString CAppSetupLinux::defaultCachePath()
-{
-    return IAppSetup::path(QDir::home().absolutePath(), ".QMapTool/", false, 0);
+QString CAppSetupLinux::defaultCachePath() {
+  return IAppSetup::path(QDir::home().absolutePath(), ".QMapTool/", false, 0);
 }
 
-
-QString CAppSetupLinux::userDataPath(QString subdir)
-{
-    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
-    return IAppSetup::path(path, subdir, false, 0);
+QString CAppSetupLinux::userDataPath(QString subdir) {
+  QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+  return IAppSetup::path(path, subdir, false, 0);
 }
 
+QString CAppSetupLinux::logDir() { return QDir::temp().absolutePath(); }
 
-QString CAppSetupLinux::logDir()
-{
-    return QDir::temp().absolutePath();
-}
-
-QString CAppSetupLinux::helpFile()
-{
-    QDir dir(_MKSTR(HELPPATH));
-    return dir.absoluteFilePath("QMTHelp.qhc");
+QString CAppSetupLinux::helpFile() {
+  QDir dir(_MKSTR(HELPPATH));
+  return dir.absoluteFilePath("QMTHelp.qhc");
 }

@@ -19,8 +19,9 @@
 #ifndef CMAINWINDOW_H
 #define CMAINWINDOW_H
 
-#include "ui_IMainWindow.h"
 #include <QMainWindow>
+
+#include "ui_IMainWindow.h"
 
 class CToolBox;
 class CToolAddOverview;
@@ -33,72 +34,55 @@ class CItemRefMap;
 class CToolExport;
 class CHelp;
 
-class CMainWindow : public QMainWindow, private Ui::IMainWindow
-{
-    Q_OBJECT
-public:
-    static CMainWindow& self()
-    {
-        return *pSelf;
-    }
+class CMainWindow : public QMainWindow, private Ui::IMainWindow {
+  Q_OBJECT
+ public:
+  static CMainWindow& self() { return *pSelf; }
 
-    virtual ~CMainWindow();
+  virtual ~CMainWindow();
 
-    static QString getUser();
+  static QString getUser();
 
-    CCanvas* getCanvas() const
-    {
-        return canvas;
-    }
+  CCanvas* getCanvas() const { return canvas; }
 
-    const QFont& getMapFont() const
-    {
-        return mapFont;
-    }
+  const QFont& getMapFont() const { return mapFont; }
 
-    bool flipMouseWheel() const
-    {
-        return actionFlipMouseWheel->isChecked();
-    }
+  bool flipMouseWheel() const { return actionFlipMouseWheel->isChecked(); }
 
-    QAction* showToolHelp() const
-    {
-        return actionShowToolHelp;
-    }
+  QAction* showToolHelp() const { return actionShowToolHelp; }
 
-    void makeShellVisible();
+  void makeShellVisible();
 
-    void startGridTool(CItemRefMap* item);
-    void showToolBox();
+  void startGridTool(CItemRefMap* item);
+  void showToolBox();
 
-private slots:
-    void slotAbout();
-    void slotSetupExtTools();
-    void slotSetupUnits();
-    void slotSetupCoordFormat();
-    void slotSetupChanged();
-    void slotHelp();
+ private slots:
+  void slotAbout();
+  void slotSetupExtTools();
+  void slotSetupUnits();
+  void slotSetupCoordFormat();
+  void slotSetupChanged();
+  void slotHelp();
 
-private:
-    friend int main(int argc, char** argv);
-    CMainWindow();
-    static CMainWindow* pSelf;
+ private:
+  friend int main(int argc, char** argv);
+  CMainWindow();
+  static CMainWindow* pSelf;
 
-    void prepareMenuForMac();
+  void prepareMenuForMac();
 
-    QFont mapFont;
+  QFont mapFont;
 
-    CToolBox* toolBox;
-    CToolGrid* toolGrid;
+  CToolBox* toolBox;
+  CToolGrid* toolGrid;
 
-    CToolAddOverview* toolAddOverview;
-    CToolCutMap* toolCutMap;
-    CToolRefMap* toolRefMap;
-    CToolPalettize* toolPalettize;
-    CToolExport* toolExport;
+  CToolAddOverview* toolAddOverview;
+  CToolCutMap* toolCutMap;
+  CToolRefMap* toolRefMap;
+  CToolPalettize* toolPalettize;
+  CToolExport* toolExport;
 
-    QPointer<CHelp> help;
+  QPointer<CHelp> help;
 };
 
-#endif //CMAINWINDOW_H
-
+#endif  // CMAINWINDOW_H

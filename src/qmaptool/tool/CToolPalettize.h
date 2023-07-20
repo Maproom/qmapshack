@@ -24,34 +24,32 @@
 #include "tool/IToolGui.h"
 #include "ui_IToolPalettize.h"
 
-class CToolPalettize : public IToolGui, public ITool, private Ui::IToolPalettize
-{
-    Q_OBJECT
-public:
-    CToolPalettize(QWidget* parent);
-    virtual ~CToolPalettize();
+class CToolPalettize : public IToolGui, public ITool, private Ui::IToolPalettize {
+  Q_OBJECT
+ public:
+  CToolPalettize(QWidget* parent);
+  virtual ~CToolPalettize();
 
-    void setupChanged() override;
+  void setupChanged() override;
 
-    FORWARD_LIST_ALL(itemList)
+  FORWARD_LIST_ALL(itemList)
 
-private slots:
-    void slotAddItem(const QString& filename, QListWidget* list);
-    void slotMapSelectionChanged();
-    void slotSomethingChanged();
-    void slotStart();
-    void slotFinished(qint32 id);
+ private slots:
+  void slotAddItem(const QString& filename, QListWidget* list);
+  void slotMapSelectionChanged();
+  void slotSomethingChanged();
+  void slotStart();
+  void slotFinished(qint32 id);
 
-    void slotSelectFilename();
+  void slotSelectFilename();
 
-private:
-    void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
-    void buildCmdFinal(QList<CShellCmd>& cmds) override;
+ private:
+  void buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) override;
+  void buildCmdFinal(QList<CShellCmd>& cmds) override;
 
-    //QStringList inputFiles;
-    QTemporaryFile* inputFileList1;
-    QTemporaryFile* inputFileList2;
+  // QStringList inputFiles;
+  QTemporaryFile* inputFileList1;
+  QTemporaryFile* inputFileList2;
 };
 
-#endif //CTOOLPALETTIZE_H
-
+#endif  // CTOOLPALETTIZE_H

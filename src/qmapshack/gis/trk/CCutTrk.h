@@ -19,55 +19,35 @@
 #ifndef CCUTTRK_H
 #define CCUTTRK_H
 
-#include "ui_ICutTrk.h"
 #include <QDialog>
 
-class CCutTrk : public QDialog, private Ui::ICutTrk
-{
-    Q_OBJECT
-public:
-    CCutTrk(QWidget* parent);
-    virtual ~CCutTrk() = default;
+#include "ui_ICutTrk.h"
 
-    enum mode_e
-    {
-        eModeNone         = 0
-        , eModeKeepFirst  = 1
-        , eModeKeepBoth   = 2
-        , eModeKeepSecond = 4
-    };
+class CCutTrk : public QDialog, private Ui::ICutTrk {
+  Q_OBJECT
+ public:
+  CCutTrk(QWidget* parent);
+  virtual ~CCutTrk() = default;
 
-    enum cutmode_e
-    {
-        eCutMode1
-        , eCutMode2
-    };
+  enum mode_e { eModeNone = 0, eModeKeepFirst = 1, eModeKeepBoth = 2, eModeKeepSecond = 4 };
 
-    mode_e getMode() const
-    {
-        return mode;
-    }
+  enum cutmode_e { eCutMode1, eCutMode2 };
 
-    cutmode_e getCutMode() const
-    {
-        return cutMode;
-    }
+  mode_e getMode() const { return mode; }
 
-    bool createClone()
-    {
-        return checkCreateClone->isChecked();
-    }
+  cutmode_e getCutMode() const { return cutMode; }
 
-public slots:
-    void accept() override;
+  bool createClone() { return checkCreateClone->isChecked(); }
 
-private slots:
-    void slotClicked();
+ public slots:
+  void accept() override;
 
-private:
-    mode_e mode = eModeNone;
-    cutmode_e cutMode = eCutMode2;
+ private slots:
+  void slotClicked();
+
+ private:
+  mode_e mode = eModeNone;
+  cutmode_e cutMode = eCutMode2;
 };
 
-#endif //CCUTTRK_H
-
+#endif  // CCUTTRK_H

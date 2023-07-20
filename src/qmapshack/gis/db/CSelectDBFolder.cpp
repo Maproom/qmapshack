@@ -16,110 +16,92 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/db/CDBFolderMysql.h"
-#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CSelectDBFolder.h"
-#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
+#include "canvas/CCanvas.h"
+#include "gis/db/CDBFolderMysql.h"
+#include "gis/db/CDBFolderSqlite.h"
+#include "helpers/CSettings.h"
+
 CSelectDBFolder::CSelectDBFolder(QList<quint64>& ids, QString& db, QString& host, QWidget* parent)
-    : QDialog(parent)
-    , ids(ids)
-    , db(db)
-    , host(host)
-{
-    setupUi(this);
-    treeWidget->setProperty("showItems", false);
-    treeWidget->setProperty("showCheckBoxes", false);
-    setProperty("showLostFound", false);
+    : QDialog(parent), ids(ids), db(db), host(host) {
+  setupUi(this);
+  treeWidget->setProperty("showItems", false);
+  treeWidget->setProperty("showCheckBoxes", false);
+  setProperty("showLostFound", false);
 
+  buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+
+  SETTINGS;
+  cfg.beginGroup("Database");
+  const QStringList& names = cfg.value("names").toStringList();
+  cfg.beginGroup("Entries");
+  for (const QString& name : names) {
+    if (!db.isEmpty() && (db != name)) {
+      continue;
+    }
+
+    cfg.beginGroup(name);
+    const QString& type = cfg.value("type", "SQLite").toString();
+    if (type == "SQLite") {
+      const QString& filename = cfg.value("filename", "").toString();
+      new CDBFolderSqlite(filename, name, treeWidget);
+    }
+
+    if (type == "MySQL") {
+      const QString& server = cfg.value("server", "").toString();
+      const QString& port = cfg.value("port", "").toString();
+      const QString& user = cfg.value("user", "").toString();
+      const QString& passwd = cfg.value("passwd", "").toString();
+      bool noPasswd = cfg.value("noPasswd", false).toBool();
+      new CDBFolderMysql(server, port, user, passwd, noPasswd, name, treeWidget);
+    }
+    cfg.endGroup();  // name
+  }
+  cfg.endGroup();  // Database
+
+  connect(treeWidget, &QTreeWidget::itemExpanded, this, &CSelectDBFolder::slotItemExpanded);
+  connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CSelectDBFolder::slotItemSelectionChanged);
+
+  CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectDBFolder");
+}
+
+CSelectDBFolder::~CSelectDBFolder() { CCanvas::restoreOverrideCursor("~CSelectDBFolder"); }
+
+void CSelectDBFolder::slotItemExpanded(QTreeWidgetItem* item) {
+  IDBFolder* folder = dynamic_cast<IDBFolder*>(item);
+  if (nullptr != folder) {
+    folder->expanding();
+  }
+}
+
+void CSelectDBFolder::slotItemSelectionChanged() {
+  IDBFolder* folder = dynamic_cast<IDBFolder*>(treeWidget->currentItem());
+  if (folder) {
+    if (projectsOnly && (folder->type() != IDBFolder::eTypeProject) && (folder->type() != IDBFolder::eTypeOther)) {
+      ids.clear();
+      db.clear();
+      buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+      return;
+    }
+
+    ids.clear();
+    ids << folder->getId();
+    db = folder->getDBName();
+    host = folder->getDBHost();
+
+    IDBFolder* folder1 = dynamic_cast<IDBFolder*>(folder->parent());
+    while (folder1 != nullptr) {
+      ids << folder1->getId();
+      folder1 = dynamic_cast<IDBFolder*>(folder1->parent());
+    }
+
+    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
+  } else {
+    ids.clear();
+    db.clear();
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-
-    SETTINGS;
-    cfg.beginGroup("Database");
-    const QStringList& names = cfg.value("names").toStringList();
-    cfg.beginGroup("Entries");
-    for(const QString& name : names)
-    {
-        if(!db.isEmpty() && (db != name))
-        {
-            continue;
-        }
-
-        cfg.beginGroup(name);
-        const QString& type = cfg.value("type", "SQLite").toString();
-        if(type == "SQLite")
-        {
-            const QString& filename = cfg.value("filename", "").toString();
-            new CDBFolderSqlite(filename, name, treeWidget);
-        }
-
-        if(type == "MySQL")
-        {
-            const QString& server = cfg.value("server", "").toString();
-            const QString& port = cfg.value("port", "").toString();
-            const QString& user = cfg.value("user", "").toString();
-            const QString& passwd = cfg.value("passwd", "").toString();
-            bool noPasswd = cfg.value("noPasswd", false).toBool();
-            new CDBFolderMysql(server, port, user, passwd, noPasswd, name, treeWidget);
-        }
-        cfg.endGroup(); // name
-    }
-    cfg.endGroup(); // Database
-
-    connect(treeWidget, &QTreeWidget::itemExpanded, this, &CSelectDBFolder::slotItemExpanded);
-    connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CSelectDBFolder::slotItemSelectionChanged);
-
-    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectDBFolder");
-}
-
-CSelectDBFolder::~CSelectDBFolder()
-{
-    CCanvas::restoreOverrideCursor("~CSelectDBFolder");
-}
-
-void CSelectDBFolder::slotItemExpanded(QTreeWidgetItem* item)
-{
-    IDBFolder* folder = dynamic_cast<IDBFolder*>(item);
-    if(nullptr != folder)
-    {
-        folder->expanding();
-    }
-}
-
-void CSelectDBFolder::slotItemSelectionChanged()
-{
-    IDBFolder* folder = dynamic_cast<IDBFolder*>(treeWidget->currentItem());
-    if(folder)
-    {
-        if(projectsOnly && (folder->type() != IDBFolder::eTypeProject) && (folder->type() != IDBFolder::eTypeOther))
-        {
-            ids.clear();
-            db.clear();
-            buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-            return;
-        }
-
-        ids.clear();
-        ids << folder->getId();
-        db = folder->getDBName();
-        host = folder->getDBHost();
-
-        IDBFolder* folder1 = dynamic_cast<IDBFolder*>(folder->parent());
-        while(folder1 != nullptr)
-        {
-            ids << folder1->getId();
-            folder1 = dynamic_cast<IDBFolder*>(folder1->parent());
-        }
-
-        buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
-    }
-    else
-    {
-        ids.clear();
-        db.clear();
-        buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-    }
+  }
 }

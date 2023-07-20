@@ -19,26 +19,24 @@
 #ifndef CFILTERLOOPSCUT_H
 #define CFILTERLOOPSCUT_H
 
-#include "CMainWindow.h"
-#include "ui_IFilterLoopsCut.h"
 #include <QWidget>
+
+#include "ui_IFilterLoopsCut.h"
 
 class CGisItemTrk;
 
-class CFilterLoopsCut : public QWidget, private Ui::IFilterLoopsCut
-{
-    Q_OBJECT
-public:
-    CFilterLoopsCut(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterLoopsCut();
+class CFilterLoopsCut : public QWidget, private Ui::IFilterLoopsCut {
+  Q_OBJECT
+ public:
+  CFilterLoopsCut(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterLoopsCut();
 
-private slots:
-    void slotApply();
-    void showHelp();
+ private slots:
+  void slotApply();
+  void showHelp();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CFILTERLOOPSCUT_H
-
+#endif  // CFILTERLOOPSCUT_H

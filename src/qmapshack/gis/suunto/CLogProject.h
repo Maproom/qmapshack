@@ -22,29 +22,21 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/suunto/ISuuntoProject.h"
 
-class CLogProject : public ISuuntoProject
-{
-    Q_DECLARE_TR_FUNCTIONS(CLogProject)
-public:
-    CLogProject(const QString& filename, CGisListWks* parent);
-    virtual ~CLogProject() = default;
+class CLogProject : public ISuuntoProject {
+  Q_DECLARE_TR_FUNCTIONS(CLogProject)
+ public:
+  CLogProject(const QString& filename, CGisListWks* parent);
+  virtual ~CLogProject() = default;
 
-    const QString getFileDialogFilter() const override
-    {
-        return IGisProject::filedialogFilterLOG;
-    }
+  const QString getFileDialogFilter() const override { return IGisProject::filedialogFilterLOG; }
 
-    const QString getFileExtension() const override
-    {
-        return "log";
-    }
+  const QString getFileExtension() const override { return "log"; }
 
-    static void loadLog(const QString& filename, CLogProject* project);
+  static void loadLog(const QString& filename, CLogProject* project);
 
-private:
-    void loadLog(const QString& filename);
+ private:
+  void loadLog(const QString& filename);
 
-    static const QList<extension_t> extensions;
+  static const QList<extension_t> extensions;
 };
-#endif //CLOGPROJECT_H
-
+#endif  // CLOGPROJECT_H

@@ -26,103 +26,108 @@ class CRouterBRouterSetup;
 class CRouterBRouterTilesSelect;
 class CWebPage;
 
-class CRouterBRouterSetupWizard : public QWizard, private Ui::IRouterBRouterSetupWizard
-{
-    Q_OBJECT
-public:
-    CRouterBRouterSetupWizard();
-    virtual ~CRouterBRouterSetupWizard();
+class CRouterBRouterSetupWizard : public QWizard, private Ui::IRouterBRouterSetupWizard {
+  Q_OBJECT
+ public:
+  CRouterBRouterSetupWizard();
+  virtual ~CRouterBRouterSetupWizard();
 
-    int nextId() const override;
-    void initializePage(int id) override;
-    bool validateCurrentPage() override;
+  int nextId() const override;
+  void initializePage(int id) override;
+  bool validateCurrentPage() override;
 
-    enum { ePageChooseMode, ePageLocalDirectory, ePageLocalInstallation, ePageProfiles,
-           ePageLocalTiles, ePageOnlineDetails, ePageLocalDetails };
+  enum {
+    ePageChooseMode,
+    ePageLocalDirectory,
+    ePageLocalInstallation,
+    ePageProfiles,
+    ePageLocalTiles,
+    ePageOnlineDetails,
+    ePageLocalDetails
+  };
 
-public slots:
-    void accept() override;
-    void reject() override;
+ public slots:
+  void accept() override;
+  void reject() override;
 
-private slots:
-    void slotCurrentIdChanged(const int id);
-    void slotCustomButtonClicked(int id);
-    void slotRadioLocalClicked() const;
-    void slotRadioOnlineClicked() const;
-    void slotCheckExpertClicked() const;
-    void slotLocalToolSelectDirectory();
-    void slotLocalToolSelectBRouterJar();
-    void slotLocalToolSelectJava();
-    void slotLocalPushFindJava() const;
-    void slotCreateOrUpdateLocalInstallClicked();
-    void slotLocalDirectoryEdited() const;
-    void slotLocalBRouterJarEdited() const;
-    void slotLocalJavaExecutableEdited() const;
-    void slotProfilesUrlEdited();
-    void slotOnlineServiceUrlEdited();
-    void slotOnlineConfigUrlEdited();
-    void slotOnlineConfigButtonClicked() const;
-    void slotBinariesUrlCursorEdited();
-    void slotSegmentsUrlEdited();
-    void slotWebLocalBRouterVersionsLoadFinished(bool ok);
-    void slotLocalDownloadLinkClicked(const QUrl& url);
-    void slotLocalDownloadButtonClicked();
-    void slotLocalDownloadButtonFinished(QNetworkReply* reply);
-    void slotProfileClicked(const QModelIndex& index) const;
-    void slotAvailableProfileClicked(const QModelIndex& index) const;
-    void slotDisplayProfile(const QString& profile, const QString content);
-    void slotAddProfileClicked() const;
-    void slotDelProfileClicked() const;
-    void slotProfileUpClicked() const;
-    void slotProfileDownClicked() const;
-    void slotSetupError(const QString& error, const QString& details);
-    void slotUpdateCurrentPage();
+ private slots:
+  void slotCurrentIdChanged(const int id);
+  void slotCustomButtonClicked(int id);
+  void slotRadioLocalClicked() const;
+  void slotRadioOnlineClicked() const;
+  void slotCheckExpertClicked() const;
+  void slotLocalToolSelectDirectory();
+  void slotLocalToolSelectBRouterJar();
+  void slotLocalToolSelectJava();
+  void slotLocalPushFindJava() const;
+  void slotCreateOrUpdateLocalInstallClicked();
+  void slotLocalDirectoryEdited() const;
+  void slotLocalBRouterJarEdited() const;
+  void slotLocalJavaExecutableEdited() const;
+  void slotProfilesUrlEdited();
+  void slotOnlineServiceUrlEdited();
+  void slotOnlineConfigUrlEdited();
+  void slotOnlineConfigButtonClicked() const;
+  void slotBinariesUrlCursorEdited();
+  void slotSegmentsUrlEdited();
+  void slotWebLocalBRouterVersionsLoadFinished(bool ok);
+  void slotLocalDownloadLinkClicked(const QUrl& url);
+  void slotLocalDownloadButtonClicked();
+  void slotLocalDownloadButtonFinished(QNetworkReply* reply);
+  void slotProfileClicked(const QModelIndex& index) const;
+  void slotAvailableProfileClicked(const QModelIndex& index) const;
+  void slotDisplayProfile(const QString& profile, const QString content);
+  void slotAddProfileClicked() const;
+  void slotDelProfileClicked() const;
+  void slotProfileUpClicked() const;
+  void slotProfileDownClicked() const;
+  void slotSetupError(const QString& error, const QString& details);
+  void slotUpdateCurrentPage();
 
-private:
-    void beginChooseMode();
+ private:
+  void beginChooseMode();
 
-    void initLocalDirectory();
-    void beginLocalDirectory();
-    void updateLocalDirectory() const;
+  void initLocalDirectory();
+  void beginLocalDirectory();
+  void updateLocalDirectory() const;
 
-    void initLocalInstall();
-    void beginLocalInstall();
+  void initLocalInstall();
+  void beginLocalInstall();
 
-    void beginProfiles();
-    void updateProfiles() const;
-    QStringList selectedProfiles(const QListView* listView) const;
-    QList<int> updateProfileView(QListView* listView, const QStringList& values) const;
+  void beginProfiles();
+  void updateProfiles() const;
+  QStringList selectedProfiles(const QListView* listView) const;
+  QList<int> updateProfileView(QListView* listView, const QStringList& values) const;
 
-    void initLocalTiles() const;
-    void beginLocalTiles();
+  void initLocalTiles() const;
+  void beginLocalTiles();
 
-    void beginLocalDetails();
-    void updateLocalDetails() const;
-    bool validateLocalDetails() const;
-    void resetLocalDetails() const;
+  void beginLocalDetails();
+  void updateLocalDetails() const;
+  bool validateLocalDetails() const;
+  void resetLocalDetails() const;
 
-    void beginOnlineDetails();
-    void updateOnlineDetails() const;
-    bool validateOnlineDetails() const;
-    void resetOnlineDetails() const;
+  void beginOnlineDetails();
+  void updateOnlineDetails() const;
+  bool validateOnlineDetails() const;
+  void resetOnlineDetails() const;
 
-    void beginOnlineUrl();
-    void updateOnlineUrl();
-    void resetOnlineUrl();
+  void beginOnlineUrl();
+  void updateOnlineUrl();
+  void resetOnlineUrl();
 
-    CRouterBRouterSetup* setup;
+  CRouterBRouterSetup* setup;
 
-    bool doLocalInstall;
-    bool localInstallLoaded;
-    QUrl downloadUrl;
+  bool doLocalInstall;
+  bool localInstallLoaded;
+  QUrl downloadUrl;
 
-    CWebPage* localVersionsPage;
-    QNetworkAccessManager* networkAccessManager;
+  CWebPage* localVersionsPage;
+  QNetworkAccessManager* networkAccessManager;
 
-    bool isError { false };
-    QString error;
-    QString errorDetails;
+  bool isError{false};
+  QString error;
+  QString errorDetails;
 };
 
-#endif //CROUTERBROUTERSETUPWIZARD_H
-
+#endif  // CROUTERBROUTERSETUPWIZARD_H

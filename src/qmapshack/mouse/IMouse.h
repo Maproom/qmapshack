@@ -20,61 +20,55 @@
 #ifndef IMOUSE_H
 #define IMOUSE_H
 
-#include "canvas/CCanvas.h"
 #include <QObject>
 #include <QPoint>
+
+#include "canvas/CCanvas.h"
 
 class CGisDraw;
 class QPainter;
 class CMouseAdapter;
 
-class IMouse : public QObject
-{
-    Q_OBJECT
-public:
-    explicit IMouse(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    virtual ~IMouse();
+class IMouse : public QObject {
+  Q_OBJECT
+ public:
+  explicit IMouse(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  virtual ~IMouse();
 
-    virtual void leftClicked(const QPoint& pos) {}
-    virtual void longPress(const QPoint& pos) {}
-    virtual void mouseMoved(const QPoint& pos) {}
-    virtual void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end);
-    virtual void leftButtonDown(const QPoint& pos) {}
-    virtual void rightButtonDown(const QPoint& pos);
-    virtual void doubleClicked(const QPoint& pos) {}
-    virtual void dragFinished(const QPoint& pos) {}
-    virtual void scaleChanged() {}
-    virtual void abortStep() {}
-    virtual void unfocus(){}
+  virtual void leftClicked(const QPoint& pos) {}
+  virtual void longPress(const QPoint& pos) {}
+  virtual void mouseMoved(const QPoint& pos) {}
+  virtual void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end);
+  virtual void leftButtonDown(const QPoint& pos) {}
+  virtual void rightButtonDown(const QPoint& pos);
+  virtual void doubleClicked(const QPoint& pos) {}
+  virtual void dragFinished(const QPoint& pos) {}
+  virtual void scaleChanged() {}
+  virtual void abortStep() {}
+  virtual void unfocus() {}
 
-    virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) = 0;
+  virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) = 0;
 
-protected:
-    CCanvas* canvas;
-    CGisDraw* gis;
-    CMouseAdapter* mouse;
+ protected:
+  CCanvas* canvas;
+  CGisDraw* gis;
+  CMouseAdapter* mouse;
 
-public:
-    /// the current mouse cursor
-    /**
-        Each mouse function is represented by a special cursor. The main
-        widget uses this method to query the current cursor.
-     */
-    operator const QCursor&() const
-    {
-        return cursor;
-    }
+ public:
+  /// the current mouse cursor
+  /**
+      Each mouse function is represented by a special cursor. The main
+      widget uses this method to query the current cursor.
+   */
+  operator const QCursor&() const { return cursor; }
 
-    CCanvas* getCanvas() const
-    {
-        return canvas;
-    }
+  CCanvas* getCanvas() const { return canvas; }
 
-    void startMouseMove(const QPoint& pos);
+  void startMouseMove(const QPoint& pos);
 
-protected:
-    /// the functions mouse icon
-    QCursor cursor;
+ protected:
+  /// the functions mouse icon
+  QCursor cursor;
 };
 
-#endif // IMOUSE_H
+#endif  // IMOUSE_H

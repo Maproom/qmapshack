@@ -27,27 +27,25 @@
 
 class CTrackData;
 
-class IRtInfo : public QWidget
-{
-    Q_OBJECT
-public:
-    IRtInfo(IRtSource* source, QWidget* parent);
-    virtual ~IRtInfo() = default;
+class IRtInfo : public QWidget {
+  Q_OBJECT
+ public:
+  IRtInfo(IRtSource* source, QWidget* parent);
+  virtual ~IRtInfo() = default;
 
-    virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt);
+  virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt);
 
-protected slots:
-    void slotSetFilename();
-    void slotResetRecord();
-    void slotToTrack();
+ protected slots:
+  void slotSetFilename();
+  void slotResetRecord();
+  void slotToTrack();
 
-protected:
-    virtual void startRecord(const QString& filename) = 0;
-    virtual void fillTrackData(CTrackData& data) = 0;
+ protected:
+  virtual void startRecord(const QString& filename) = 0;
+  virtual void fillTrackData(CTrackData& data) = 0;
 
-    QPointer<IRtSource> source;
-    QPointer<IRtRecord> record;
+  QPointer<IRtSource> source;
+  QPointer<IRtRecord> record;
 };
 
-#endif //IRTINFO_H
-
+#endif  // IRTINFO_H

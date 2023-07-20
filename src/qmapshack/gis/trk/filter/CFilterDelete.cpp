@@ -16,21 +16,18 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterDelete.h"
 
-CFilterDelete::CFilterDelete(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterDelete::slotApply);
+CFilterDelete::CFilterDelete(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
+
+  connect(toolApply, &QToolButton::clicked, this, &CFilterDelete::slotApply);
 }
 
-void CFilterDelete::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterDelete();
+void CFilterDelete::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterDelete();
 }

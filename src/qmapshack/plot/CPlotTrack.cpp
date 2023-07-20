@@ -16,55 +16,42 @@
 
 **********************************************************************************************/
 
-#include "helpers/CDraw.h"
 #include "plot/CPlotTrack.h"
 
 #include <QtWidgets>
 
-CPlotTrack::CPlotTrack(QWidget* parent)
-    : QWidget(parent)
-{
+#include "helpers/CDraw.h"
+
+CPlotTrack::CPlotTrack(QWidget* parent) : QWidget(parent) {}
+
+CPlotTrack::CPlotTrack(CGisItemTrk* trk, QWidget* parent) : QWidget(parent), pos(NOPOINTF) { setTrack(trk); }
+
+CPlotTrack::~CPlotTrack() {}
+
+void CPlotTrack::setMouseFocus(qreal lon, qreal lat) {
+  pos.rx() = lon * DEG_TO_RAD;
+  pos.ry() = lat * DEG_TO_RAD;
+
+  proj.transform(pos, PJ_INV);
+
+  update();
 }
 
-CPlotTrack::CPlotTrack(CGisItemTrk* trk, QWidget* parent)
-    : QWidget(parent)
-    , pos(NOPOINTF)
-{
-    setTrack(trk);
+void CPlotTrack::resizeEvent(QResizeEvent* e) {
+  QSize s = e->size();
+  setMinimumWidth(s.height());
+  setSize(s.height(), s.height());
 }
 
-CPlotTrack::~CPlotTrack()
-{
+void CPlotTrack::paintEvent(QPaintEvent* e) {
+  QPainter p(this);
+  USE_ANTI_ALIASING(p, true);
+
+  draw(p);
+
+  p.setPen(Qt::red);
+  p.setBrush(Qt::red);
+  p.scale(scale.x(), scale.y());
+  p.translate(-xoff, -yoff);
+  p.drawEllipse(pos, 5 / scale.x(), 5 / scale.x());
 }
-
-void CPlotTrack::setMouseFocus(qreal lon, qreal lat)
-{
-    pos.rx() = lon * DEG_TO_RAD;
-    pos.ry() = lat * DEG_TO_RAD;
-
-    proj.transform(pos, PJ_INV);
-
-    update();
-}
-
-void CPlotTrack::resizeEvent(QResizeEvent* e)
-{
-    QSize s = e->size();
-    setMinimumWidth(s.height());
-    setSize(s.height(), s.height());
-}
-
-void CPlotTrack::paintEvent(QPaintEvent* e)
-{
-    QPainter p(this);
-    USE_ANTI_ALIASING(p, true);
-
-    draw(p);
-
-    p.setPen(Qt::red);
-    p.setBrush(Qt::red);
-    p.scale(scale.x(), scale.y());
-    p.translate(-xoff, -yoff);
-    p.drawEllipse(pos, 5 / scale.x(), 5 / scale.x());
-}
-

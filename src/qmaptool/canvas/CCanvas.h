@@ -29,64 +29,53 @@ class ITool;
 class CMainWindow;
 class QStackedWidget;
 
-class CCanvas : public QWidget
-{
-    Q_OBJECT
-public:
-    CCanvas(QWidget* parent);
-    virtual ~CCanvas() = default;
+class CCanvas : public QWidget {
+  Q_OBJECT
+ public:
+  CCanvas(QWidget* parent);
+  virtual ~CCanvas() = default;
 
-    static void setOverrideCursor(const QCursor& cursor, const QString&);
-    static void restoreOverrideCursor(const QString& src);
-    static void changeOverrideCursor(const QCursor& cursor, const QString& src);
+  static void setOverrideCursor(const QCursor& cursor, const QString&);
+  static void restoreOverrideCursor(const QString& src);
+  static void changeOverrideCursor(const QCursor& cursor, const QString& src);
 
-    enum redraw_e
-    {
-        eRedrawNone = 0
-        , eRedrawMap = 0x01
-        , eRedrawOverlay = 0x08
-        , eRedrawAll = 0xFFFFFFFF
-    };
+  enum redraw_e { eRedrawNone = 0, eRedrawMap = 0x01, eRedrawOverlay = 0x08, eRedrawAll = 0xFFFFFFFF };
 
-    void setToolInterface(ITool* t)
-    {
-        tool = t;
-    }
+  void setToolInterface(ITool* t) { tool = t; }
 
-signals:
-    void sigChangedSize(const QSize& size);
+ signals:
+  void sigChangedSize(const QSize& size);
 
-public slots:
-    void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
+ public slots:
+  void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
 
-    void slotShowLoadIndicator();
-    void slotHideLoadIndicator();
+  void slotShowLoadIndicator();
+  void slotHideLoadIndicator();
 
-protected:
-    void resizeEvent(QResizeEvent* e) override;
-    void paintEvent(QPaintEvent* e) override;
-    void mousePressEvent(QMouseEvent* e) override;
-    void mouseMoveEvent(QMouseEvent* e) override;
-    void mouseReleaseEvent(QMouseEvent* e) override;
-    void mouseDoubleClickEvent(QMouseEvent* e) override;
-    void wheelEvent(QWheelEvent* e) override;
-    void enterEvent(QEvent* e) override;
-    void leaveEvent(QEvent* e) override;
-    void keyPressEvent(QKeyEvent* e) override;
+ protected:
+  void resizeEvent(QResizeEvent* e) override;
+  void paintEvent(QPaintEvent* e) override;
+  void mousePressEvent(QMouseEvent* e) override;
+  void mouseMoveEvent(QMouseEvent* e) override;
+  void mouseReleaseEvent(QMouseEvent* e) override;
+  void mouseDoubleClickEvent(QMouseEvent* e) override;
+  void wheelEvent(QWheelEvent* e) override;
+  void enterEvent(QEvent* e) override;
+  void leaveEvent(QEvent* e) override;
+  void keyPressEvent(QKeyEvent* e) override;
 
-private:
-    mutable QRecursiveMutex mutex;
+ private:
+  mutable QRecursiveMutex mutex;
 
-    QColor backColor = 0xFFFFFFBF;       //< the background color used in case of missing map tiles
-    redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
+  QColor backColor = 0xFFFFFFBF;      //< the background color used in case of missing map tiles
+  redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
 
-    /// load indicator for maps
-    QMovie* loadIndicator1;
-    QLabel* mapLoadIndicator;
-    qint32 mapLoadIndicatorCount = 0;
+  /// load indicator for maps
+  QMovie* loadIndicator1;
+  QLabel* mapLoadIndicator;
+  qint32 mapLoadIndicatorCount = 0;
 
-    ITool* tool = nullptr;
+  ITool* tool = nullptr;
 };
 
-#endif //CCANVAS_H
-
+#endif  // CCANVAS_H

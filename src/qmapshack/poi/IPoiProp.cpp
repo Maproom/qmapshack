@@ -16,15 +16,11 @@
 
 **********************************************************************************************/
 
-#include "poi/CPoiDraw.h"
-#include "poi/IPoiFile.h"
 #include "poi/IPoiProp.h"
 
-IPoiProp::IPoiProp(IPoiFile* poifile, CPoiDraw* poi)
-    : poifile(poifile)
-    , poi(poi)
-{
-    connect(poifile, &IPoiFile::sigPropertiesChanged, this, &IPoiProp::slotPropertiesChanged);
+#include "poi/CPoiDraw.h"
+#include "poi/IPoiFile.h"
+
+IPoiProp::IPoiProp(IPoiFile* poifile, CPoiDraw* poi) : poifile(poifile), poi(poi) {
+  connect(poifile, &IPoiFile::sigPropertiesChanged, this, &IPoiProp::slotPropertiesChanged);
 }
-
-

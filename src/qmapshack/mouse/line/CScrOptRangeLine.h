@@ -22,15 +22,13 @@
 #include "mouse/IScrOpt.h"
 #include "ui_IScrOptRangeLine.h"
 
-class CScrOptRangeLine : public IScrOpt, public Ui::IScrOptRangeLine
-{
-    Q_OBJECT
-public:
-    CScrOptRangeLine(const QPointF& point, IMouse* mouse, QWidget* parent);
-    virtual ~CScrOptRangeLine();
+class CScrOptRangeLine : public IScrOpt, public Ui::IScrOptRangeLine {
+  Q_OBJECT
+ public:
+  CScrOptRangeLine(const QPointF& point, IMouse* mouse, QWidget* parent);
+  virtual ~CScrOptRangeLine();
 
-    void draw(QPainter& p) override;
+  void draw(QPainter& p) override;
 };
 
-#endif //CSCROPTRANGELINE_H
-
+#endif  // CSCROPTRANGELINE_H

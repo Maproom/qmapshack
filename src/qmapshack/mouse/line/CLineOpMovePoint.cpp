@@ -17,133 +17,109 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/CGisDraw.h"
 #include "mouse/line/CLineOpMovePoint.h"
-#include "mouse/line/IMouseEditLine.h"
-#include "units/IUnit.h"
 
 #include <QtWidgets>
 
+#include "canvas/CCanvas.h"
+#include "gis/CGisDraw.h"
+#include "mouse/line/IMouseEditLine.h"
+#include "units/IUnit.h"
+
 CLineOpMovePoint::CLineOpMovePoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent)
-    : ILineOp(points, gis, canvas, parent)
-{
-    cursor = QCursor(QPixmap(":/cursors/cursorPointMove.png"), 0, 0);
+    : ILineOp(points, gis, canvas, parent) {
+  cursor = QCursor(QPixmap(":/cursors/cursorPointMove.png"), 0, 0);
 }
 
-CLineOpMovePoint::~CLineOpMovePoint()
-{
+CLineOpMovePoint::~CLineOpMovePoint() {}
+
+void CLineOpMovePoint::leftClick(const QPoint& pos) {
+  if (movePoint) {
+    // update subpoints by triggering the routing, if any.
+    slotTimeoutRouting();
+    // terminate moving the point
+    movePoint = false;
+    // store new state of line to undo/redo history
+    parentHandler->storeToHistory(points);
+  } else if (idxFocus != NOIDX) {
+    QPointF coord = pos;
+    gis->convertPx2Rad(coord);
+
+    // start moving the point
+    IGisLine::point_t& pt = points[idxFocus];
+    pt.coord = coord;
+    // clear the subpoints from this point to the next
+    pt.subpts.clear();
+
+    // clear the subpoints from the previous point to this point
+    if (idxFocus != 0) {
+      points[idxFocus - 1].subpts.clear();
+    }
+
+    movePoint = true;
+  }
+
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpMovePoint::leftClick(const QPoint& pos)
-{
-    if(movePoint)
-    {
-        // update subpoints by triggering the routing, if any.
-        slotTimeoutRouting();
-        // terminate moving the point
-        movePoint = false;
-        // store new state of line to undo/redo history
-        parentHandler->storeToHistory(points);
-    }
-    else if(idxFocus != NOIDX)
-    {
-        QPointF coord = pos;
-        gis->convertPx2Rad(coord);
+void CLineOpMovePoint::rightButtonDown(const QPoint& pos) {
+  abortStep();
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
 
-        // start moving the point
-        IGisLine::point_t& pt = points[idxFocus];
-        pt.coord = coord;
-        // clear the subpoints from this point to the next
-        pt.subpts.clear();
+bool CLineOpMovePoint::abortStep() {
+  if (movePoint) {
+    // cancel action and restore last state of line
+    cancelDelayedRouting();
+    parentHandler->restoreFromHistory(points);
 
-
-        // clear the subpoints from the previous point to this point
-        if(idxFocus != 0)
-        {
-            points[idxFocus - 1].subpts.clear();
-        }
-
-        movePoint = true;
-    }
+    movePoint = false;
+    idxFocus = NOIDX;
 
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+
+    return true;
+  }
+  return false;
 }
 
-void CLineOpMovePoint::rightButtonDown(const QPoint& pos)
-{
-    abortStep();
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+void CLineOpMovePoint::mouseMove(const QPoint& pos) {
+  ILineOp::mouseMove(pos);
+
+  if (movePoint) {
+    QPointF coord = pos;
+    gis->convertPx2Rad(coord);
+
+    IGisLine::point_t& pt = points[idxFocus];
+
+    // update position of point
+    pt.coord = coord;
+
+    // clear subpoints, as they have to be recalculated
+    // by the routing, if any
+    pt.subpts.clear();
+    if (idxFocus > 0) {
+      points[idxFocus - 1].subpts.clear();
+    }
+
+    // retrigger delayed routing
+    startDelayedRouting();
+  } else {
+    // no point selected yet, find point to highlight
+    idxFocus = isCloseTo(pos);
+  }
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
+void CLineOpMovePoint::drawFg(QPainter& p) {
+  if (idxFocus == NOIDX) {
+    return;
+  }
 
-bool CLineOpMovePoint::abortStep()
-{
-    if(movePoint)
-    {
-        // cancel action and restore last state of line
-        cancelDelayedRouting();
-        parentHandler->restoreFromHistory(points);
-
-        movePoint = false;
-        idxFocus = NOIDX;
-
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
-
-        return true;
-    }
-    return false;
+  const IGisLine::point_t& pt = points[idxFocus];
+  if (movePoint) {
+    drawSinglePointSmall(pt.pixel, p);
+  } else {
+    drawSinglePointLarge(pt.pixel, p);
+  }
 }
-
-void CLineOpMovePoint::mouseMove(const QPoint& pos)
-{
-    ILineOp::mouseMove(pos);
-
-    if(movePoint)
-    {
-        QPointF coord = pos;
-        gis->convertPx2Rad(coord);
-
-        IGisLine::point_t& pt = points[idxFocus];
-
-        // update position of point
-        pt.coord = coord;
-
-        // clear subpoints, as they have to be recalculated
-        // by the routing, if any
-        pt.subpts.clear();
-        if(idxFocus > 0)
-        {
-            points[idxFocus - 1].subpts.clear();
-        }
-
-        // retrigger delayed routing
-        startDelayedRouting();
-    }
-    else
-    {
-        // no point selected yet, find point to highlight
-        idxFocus = isCloseTo(pos);
-    }
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
-}
-
-
-void CLineOpMovePoint::drawFg(QPainter& p)
-{
-    if(idxFocus == NOIDX)
-    {
-        return;
-    }
-
-    const IGisLine::point_t& pt = points[idxFocus];
-    if(movePoint)
-    {
-        drawSinglePointSmall(pt.pixel, p);
-    }
-    else
-    {
-        drawSinglePointLarge(pt.pixel, p);
-    }
-}
-

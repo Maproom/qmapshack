@@ -18,7 +18,6 @@
 
 #include "gis/fit/decoder/CFitHeaderState.h"
 
-
 /**
  * byte
  * 0: the header size without crc (12 for the current version)
@@ -41,89 +40,82 @@ static const quint8 fitProtocolVersionMajor = 2;
 static const quint8 fitProtocolMajorVersionShift = 4;
 static const quint8 fitProtocolMajorVersionMask = 0x0F << fitProtocolMajorVersionShift;
 
-void CFitHeaderState::reset()
-{
-    setFileLength(3); // Header byte + CRC.
-    offset = 0;
+void CFitHeaderState::reset() {
+  setFileLength(3);  // Header byte + CRC.
+  offset = 0;
 
-    setTimestamp(0);
-    resetFileBytesRead();
+  setTimestamp(0);
+  resetFileBytesRead();
 }
 
-decode_state_e CFitHeaderState::process(quint8& dataByte)
-{
-    bool invalid = false;
-    switch (offset++)
-    {
+decode_state_e CFitHeaderState::process(quint8& dataByte) {
+  bool invalid = false;
+  switch (offset++) {
     case 0:
-        // header length
-        headerLength = dataByte;
-        setFileLength(headerLength + 2);
-        break;
+      // header length
+      headerLength = dataByte;
+      setFileLength(headerLength + 2);
+      break;
 
     case 1:
-        // protocol version
-        if ((dataByte & fitProtocolMajorVersionMask) >
-            (fitProtocolVersionMajor << fitProtocolMajorVersionShift))
-        {
-            throw tr("FIT decoding error: protocol %1 version not supported.").arg(dataByte & fitProtocolMajorVersionMask);
-        }
-        break;
+      // protocol version
+      if ((dataByte & fitProtocolMajorVersionMask) > (fitProtocolVersionMajor << fitProtocolMajorVersionShift)) {
+        throw tr("FIT decoding error: protocol %1 version not supported.").arg(dataByte & fitProtocolMajorVersionMask);
+      }
+      break;
 
     case 4:
-        // data size
-        dataSize = (quint32) (dataByte & 0xFF);
-        break;
+      // data size
+      dataSize = (quint32)(dataByte & 0xFF);
+      break;
 
     case 5:
-        // data size
-        dataSize |= (quint32) (dataByte & 0xFF) << 8;
-        break;
+      // data size
+      dataSize |= (quint32)(dataByte & 0xFF) << 8;
+      break;
 
     case 6:
-        // data size
-        dataSize |= (quint32) (dataByte & 0xFF) << 16;
-        break;
+      // data size
+      dataSize |= (quint32)(dataByte & 0xFF) << 16;
+      break;
 
     case 7:
-        // data size
-        dataSize |= (quint32) (dataByte & 0xFF) << 24;
-        setFileLength(dataSize + headerLength + 2);     // include crc
-        break;
+      // data size
+      dataSize |= (quint32)(dataByte & 0xFF) << 24;
+      setFileLength(dataSize + headerLength + 2);  // include crc
+      break;
 
     case 8:
-        // "."
-        invalid = (dataByte != '.');
-        break;
+      // "."
+      invalid = (dataByte != '.');
+      break;
 
     case 9:
-        // "F"
-        invalid = (dataByte != 'F');
-        break;
+      // "F"
+      invalid = (dataByte != 'F');
+      break;
 
     case 10:
-        // "I"
-        invalid = (dataByte != 'I');
-        break;
+      // "I"
+      invalid = (dataByte != 'I');
+      break;
 
     case 11:
-        // "T"
-        invalid = (dataByte != 'T');
-        break;
+      // "T"
+      invalid = (dataByte != 'T');
+      break;
 
     default:
-        break;
-    }
+      break;
+  }
 
-    if (invalid)
-    {
-        throw tr("FIT decoding error: file header signature mismatch. File is not FIT.");
-    }
+  if (invalid) {
+    throw tr("FIT decoding error: file header signature mismatch. File is not FIT.");
+  }
 
-    if (offset == headerLength)
-    {
-        // end of header
-        return eDecoderStateRecord;
-    }
-    return eDecoderStateFileHeader;
+  if (offset == headerLength) {
+    // end of header
+    return eDecoderStateRecord;
+  }
+  return eDecoderStateFileHeader;
 }

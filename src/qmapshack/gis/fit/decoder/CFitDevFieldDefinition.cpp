@@ -18,38 +18,16 @@
 
 #include "gis/fit/decoder/CFitDevFieldDefinition.h"
 
-#include "gis/fit/decoder/CFitDefinitionMessage.h"
-#include "gis/fit/defs/CFitBaseType.h"
-#include "gis/fit/defs/CFitFieldProfile.h"
-#include "gis/fit/defs/CFitProfileLookup.h"
-#include "gis/fit/defs/fit_const.h"
-
-
 CFitDevFieldDefinition::CFitDevFieldDefinition(quint8 fieldNr, quint8 size, quint8 devDataIndex)
-    : fieldNr(fieldNr), size(size), devDataIndex(devDataIndex)
-{
+    : fieldNr(fieldNr), size(size), devDataIndex(devDataIndex) {}
+
+QString CFitDevFieldDefinition::fieldInfo() const {
+  QString fstr = QString("DEV FIELD %1: type %3, size %3").arg(getFieldNr()).arg(getSize()).arg(getDevDataIndex());
+  return fstr;
 }
 
-QString CFitDevFieldDefinition::fieldInfo() const
-{
-    QString fstr = QString("DEV FIELD %1: type %3, size %3")
-                   .arg(getFieldNr())
-                   .arg(getSize())
-                   .arg(getDevDataIndex());
-    return fstr;
-}
+quint8 CFitDevFieldDefinition::getFieldNr() const { return fieldNr; }
 
-quint8 CFitDevFieldDefinition::getFieldNr() const
-{
-    return fieldNr;
-}
+quint8 CFitDevFieldDefinition::getSize() const { return size; }
 
-quint8 CFitDevFieldDefinition::getSize() const
-{
-    return size;
-}
-
-quint8 CFitDevFieldDefinition::getDevDataIndex() const
-{
-    return devDataIndex;
-}
+quint8 CFitDevFieldDefinition::getDevDataIndex() const { return devDataIndex; }

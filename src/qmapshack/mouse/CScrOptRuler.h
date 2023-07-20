@@ -24,20 +24,16 @@
 
 class CCanvas;
 
-class CScrOptRuler : public IScrOpt, public Ui::IScrOptRuler
-{
-    Q_OBJECT
-public:
-    CScrOptRuler(IMouse* mouse, CCanvas* canvas);
-    virtual ~CScrOptRuler();
+class CScrOptRuler : public IScrOpt, public Ui::IScrOptRuler {
+  Q_OBJECT
+ public:
+  CScrOptRuler(IMouse* mouse, CCanvas* canvas);
+  virtual ~CScrOptRuler();
 
-    void draw(QPainter& p) override
-    {
-    }
+  void draw(QPainter& p) override {}
 
-private slots:
-    void slotClose();
+ private slots:
+  void slotClose();
 };
 
-#endif //CSCROPTRULER_H
-
+#endif  // CSCROPTRULER_H

@@ -22,25 +22,19 @@
 #include <QtHelp>
 #include <QtWidgets>
 
-CHelpIndex::CHelpIndex(QHelpEngine* engine, QWidget* parent)
-    : QWidget(parent)
-{
-    labelSearch = new QLabel(tr("Search:"), this);
-    lineSearch = new QLineEdit(this);
-    index = engine->indexWidget();
+CHelpIndex::CHelpIndex(QHelpEngine* engine, QWidget* parent) : QWidget(parent) {
+  labelSearch = new QLabel(tr("Search:"), this);
+  lineSearch = new QLineEdit(this);
+  index = engine->indexWidget();
 
-    QVBoxLayout* l = new QVBoxLayout(this);
-    l->addWidget(labelSearch);
-    l->addWidget(lineSearch);
-    l->addWidget(index);
+  QVBoxLayout* l = new QVBoxLayout(this);
+  l->addWidget(labelSearch);
+  l->addWidget(lineSearch);
+  l->addWidget(index);
 
-    setLayout(l);
+  setLayout(l);
 
-    connect(lineSearch, &QLineEdit::textChanged, this, &CHelpIndex::slotSearch);
+  connect(lineSearch, &QLineEdit::textChanged, this, &CHelpIndex::slotSearch);
 }
 
-void CHelpIndex::slotSearch(const QString& text)
-{
-    index->filterIndices(text);
-}
-
+void CHelpIndex::slotSearch(const QString& text) { index->filterIndices(text); }

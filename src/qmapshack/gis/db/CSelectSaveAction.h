@@ -19,38 +19,33 @@
 #ifndef CSELECTSAVEACTION_H
 #define CSELECTSAVEACTION_H
 
-#include "ui_ISelectSaveAction.h"
 #include <QDialog>
+
+#include "ui_ISelectSaveAction.h"
 
 class IGisItem;
 
-class CSelectSaveAction : public QDialog, private Ui::ISelectSaveAction
-{
-    Q_OBJECT
-public:
-    CSelectSaveAction(const IGisItem* src, const IGisItem* tar, QWidget* parent);
-    virtual ~CSelectSaveAction();
+class CSelectSaveAction : public QDialog, private Ui::ISelectSaveAction {
+  Q_OBJECT
+ public:
+  CSelectSaveAction(const IGisItem* src, const IGisItem* tar, QWidget* parent);
+  virtual ~CSelectSaveAction();
 
-    enum result_e
-    {
-        eResultNone,
-        eResultSave,
-        eResultSkip,
-        eResultClone,
-    };
+  enum result_e {
+    eResultNone,
+    eResultSave,
+    eResultSkip,
+    eResultClone,
+  };
 
-    result_e getResult()
-    {
-        return result;
-    }
-    bool allOthersToo();
+  result_e getResult() { return result; }
+  bool allOthersToo();
 
-private slots:
-    void slotSelectResult();
+ private slots:
+  void slotSelectResult();
 
-private:
-    result_e result = eResultNone;
+ private:
+  result_e result = eResultNone;
 };
 
-#endif //CSELECTSAVEACTION_H
-
+#endif  // CSELECTSAVEACTION_H

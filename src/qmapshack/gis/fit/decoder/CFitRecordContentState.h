@@ -21,22 +21,21 @@
 
 #include "gis/fit/decoder/IFitDecoderState.h"
 
-class CFitRecordContentState final : public IFitDecoderState
-{
-    Q_DECLARE_TR_FUNCTIONS(CFitRecordContentState)
-public:
-    CFitRecordContentState(shared_state_data_t& data) : IFitDecoderState(data) { reset(); }
-    virtual ~CFitRecordContentState() {}
+class CFitRecordContentState final : public IFitDecoderState {
+  Q_DECLARE_TR_FUNCTIONS(CFitRecordContentState)
+ public:
+  CFitRecordContentState(shared_state_data_t& data) : IFitDecoderState(data) { reset(); }
+  virtual ~CFitRecordContentState() {}
 
-    void reset() override;
-    decode_state_e process(quint8& dataByte) override;
+  void reset() override;
+  decode_state_e process(quint8& dataByte) override;
 
-private:
-    quint8 offset;
+ private:
+  quint8 offset;
 
-    quint8 architecture;
-    quint32 globalMesgNr;
-    quint8 nrOfFields;
+  quint8 architecture;
+  quint32 globalMesgNr;
+  quint8 nrOfFields;
 };
 
-#endif //CFITRECORDCONTENTSTATE_H
+#endif  // CFITRECORDCONTENTSTATE_H

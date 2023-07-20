@@ -27,28 +27,28 @@ class QList<T>;
 class QAction;
 class QToolBar;
 
-class CToolBarConfig : public QObject
-{
-    Q_OBJECT
-public:
-    CToolBarConfig(QObject* const& parent, QToolBar* const& toolBar, const QList<QAction*>& availableActions, const QList<QAction*>& defaultActions);
-    virtual ~CToolBarConfig();
+class CToolBarConfig : public QObject {
+  Q_OBJECT
+ public:
+  CToolBarConfig(QObject* const& parent, QToolBar* const& toolBar, const QList<QAction*>& availableActions,
+                 const QList<QAction*>& defaultActions);
+  virtual ~CToolBarConfig();
 
-    void loadSettings();
-    void saveSettings() const;
-    const QList<QAction*>& availableActions() const;
-    const QList<QAction*>& configuredActions() const;
-    void setConfiguredActionsByName(const QStringList& actions);
-    void setConfiguredActions(const QList<QAction*>& actions);
-    void setDefaultConfiguredActions();
-    void setVisibleInFullscreen(bool visible) { fullscreen = visible; }
-    bool visibleInFullscreen() { return fullscreen; }
+  void loadSettings();
+  void saveSettings() const;
+  const QList<QAction*>& availableActions() const;
+  const QList<QAction*>& configuredActions() const;
+  void setConfiguredActionsByName(const QStringList& actions);
+  void setConfiguredActions(const QList<QAction*>& actions);
+  void setDefaultConfiguredActions();
+  void setVisibleInFullscreen(bool visible) { fullscreen = visible; }
+  bool visibleInFullscreen() { return fullscreen; }
 
-private:
-    QToolBar* const toolBar;
-    const QList<QAction*> available;
-    const QList<QAction*> defaultActions;
-    QList<QAction*> configured;
-    bool fullscreen = false;
+ private:
+  QToolBar* const toolBar;
+  const QList<QAction*> available;
+  const QList<QAction*> defaultActions;
+  QList<QAction*> configured;
+  bool fullscreen = false;
 };
-#endif //CTOOLBARCONFIG_H
+#endif  // CTOOLBARCONFIG_H

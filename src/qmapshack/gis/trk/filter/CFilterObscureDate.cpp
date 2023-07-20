@@ -16,32 +16,27 @@
 
 **********************************************************************************************/
 
+#include "gis/trk/filter/CFilterObscureDate.h"
+
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/filter/CFilterObscureDate.h"
 #include "helpers/CSettings.h"
 
-CFilterObscureDate::CFilterObscureDate(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
+CFilterObscureDate::CFilterObscureDate(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
 
-    SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/ObscureTimestamp/delta", 0).toInt());
+  SETTINGS;
+  spinBox->setValue(cfg.value("TrackDetails/Filter/ObscureTimestamp/delta", 0).toInt());
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterObscureDate::slotApply);
+  connect(toolApply, &QToolButton::clicked, this, &CFilterObscureDate::slotApply);
 }
 
-CFilterObscureDate::~CFilterObscureDate()
-{
-    SETTINGS;
-    cfg.setValue("TrackDetails/Filter/ObscureTimestamp/delta", spinBox->value());
+CFilterObscureDate::~CFilterObscureDate() {
+  SETTINGS;
+  cfg.setValue("TrackDetails/Filter/ObscureTimestamp/delta", spinBox->value());
 }
 
-void CFilterObscureDate::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterObscureDate(spinBox->value());
+void CFilterObscureDate::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterObscureDate(spinBox->value());
 }
-

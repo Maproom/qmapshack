@@ -91,14 +91,16 @@
 #ifndef __PLATFORM_H__
 #define __PLATFORM_H__
 
+#include <QtGlobal>
+
 // include platform setup (HAVE_BIGENDIAN, CAN_UNALIGNED)
 #include "config.h"
 
 // need integer type definitions with fixed width
 #ifdef HAVE_INTTYPES_H
-#  include <inttypes.h>
+#include <inttypes.h>
 #elif HAVE_STDINT_H
-#  include <stdint.h>
+#include <stdint.h>
 #elif Q_OS_WIN64
 #include <windows.h>
 
@@ -114,7 +116,7 @@ typedef unsigned __int64 uint64_t;
 #define qIsNaN(x) _isnan(x)
 
 #else
-#  error neither inttypes.h nor stdint.h are available
+#error neither inttypes.h nor stdint.h are available
 #endif
 #include <string.h>
 
@@ -124,356 +126,256 @@ typedef unsigned __int64 uint64_t;
 #if !defined(HAVE_BIGENDIAN)
 
 // little endian platform: just return the argument
-#define gar_endian(t, x)            (t)(x)
+#define gar_endian(t, x) (t)(x)
 
 #else
 
 // big endian platform
-#define gar_endian(t, x)            (__gar_endian_ ## t(x))
+#define gar_endian(t, x) (__gar_endian_##t(x))
 
 // define swapping
-static inline uint16_t
-__gar_endian_uint16_t(uint16_t x)
-{
-    return ((x >> 8) & 0xffu) | ((x & 0xffu) << 8);
+static inline uint16_t __gar_endian_uint16_t(uint16_t x) { return ((x >> 8) & 0xffu) | ((x & 0xffu) << 8); }
+
+static inline quint32 __gar_endian_quint32(quint32 x) {
+  return ((x & 0xff000000u) >> 24) | ((x & 0x00ff0000u) >> 8) | ((x & 0x0000ff00u) << 8) | ((x & 0x000000ffu) << 24);
 }
 
-
-static inline quint32
-__gar_endian_quint32(quint32 x)
-{
-    return ((x & 0xff000000u) >> 24) |
-           ((x & 0x00ff0000u) >> 8) |
-           ((x & 0x0000ff00u) << 8) |
-           ((x & 0x000000ffu) << 24);
+static inline uint64_t __gar_endian_uint64_t(uint64_t x) {
+  return ((x & 0xff00000000000000ull) >> 56) | ((x & 0x00ff000000000000ull) >> 40) |
+         ((x & 0x0000ff0000000000ull) >> 24) | ((x & 0x000000ff00000000ull) >> 8) | ((x & 0x00000000ff000000ull) << 8) |
+         ((x & 0x0000000000ff0000ull) << 24) | ((x & 0x000000000000ff00ull) << 40) |
+         ((x & 0x00000000000000ffull) << 56);
 }
 
+static inline int16_t __gar_endian_int16_t(int16_t x) { return ((x >> 8) & 0xffu) | ((x & 0xffu) << 8); }
 
-static inline uint64_t
-__gar_endian_uint64_t(uint64_t x)
-{
-    return ((x & 0xff00000000000000ull) >> 56) |
-           ((x & 0x00ff000000000000ull) >> 40) |
-           ((x & 0x0000ff0000000000ull) >> 24) |
-           ((x & 0x000000ff00000000ull) >> 8) |
-           ((x & 0x00000000ff000000ull) << 8) |
-           ((x & 0x0000000000ff0000ull) << 24) |
-           ((x & 0x000000000000ff00ull) << 40) |
-           ((x & 0x00000000000000ffull) << 56);
+static inline int32_t __gar_endian_int32_t(int32_t x) {
+  return ((x & 0xff000000u) >> 24) | ((x & 0x00ff0000u) >> 8) | ((x & 0x0000ff00u) << 8) | ((x & 0x000000ffu) << 24);
 }
 
-
-static inline int16_t
-__gar_endian_int16_t(int16_t x)
-{
-    return ((x >> 8) & 0xffu) | ((x & 0xffu) << 8);
+static inline int64_t __gar_endian_int64_t(int64_t x) {
+  return ((x & 0xff00000000000000ull) >> 56) | ((x & 0x00ff000000000000ull) >> 40) |
+         ((x & 0x0000ff0000000000ull) >> 24) | ((x & 0x000000ff00000000ull) >> 8) | ((x & 0x00000000ff000000ull) << 8) |
+         ((x & 0x0000000000ff0000ull) << 24) | ((x & 0x000000000000ff00ull) << 40) |
+         ((x & 0x00000000000000ffull) << 56);
 }
 
+static inline float __gar_endian_float(float x) {
+  union {
+    quint32 _u;
+    float _f;
+  } _v;
 
-static inline int32_t
-__gar_endian_int32_t(int32_t x)
-{
-    return ((x & 0xff000000u) >> 24) |
-           ((x & 0x00ff0000u) >> 8) |
-           ((x & 0x0000ff00u) << 8) |
-           ((x & 0x000000ffu) << 24);
+  _v._f = x;
+  _v._u = gar_endian(quint32, _v._u);
+  return _v._f;
 }
 
+static inline double __gar_endian_double(double x) {
+  union {
+    uint64_t _u;
+    double _d;
+  } _v;
 
-static inline int64_t
-__gar_endian_int64_t(int64_t x)
-{
-    return ((x & 0xff00000000000000ull) >> 56) |
-           ((x & 0x00ff000000000000ull) >> 40) |
-           ((x & 0x0000ff0000000000ull) >> 24) |
-           ((x & 0x000000ff00000000ull) >> 8) |
-           ((x & 0x00000000ff000000ull) << 8) |
-           ((x & 0x0000000000ff0000ull) << 24) |
-           ((x & 0x000000000000ff00ull) << 40) |
-           ((x & 0x00000000000000ffull) << 56);
+  _v._d = x;
+  _v._u = gar_endian(uint64_t, _v._u);
+  return _v._d;
 }
-
-
-static inline float
-__gar_endian_float(float x)
-{
-    union
-    {
-        quint32 _u;
-        float _f;
-    } _v;
-
-    _v._f = x;
-    _v._u = gar_endian(quint32, _v._u);
-    return _v._f;
-}
-
-
-static inline double
-__gar_endian_double(double x)
-{
-    union
-    {
-        uint64_t _u;
-        double _d;
-    } _v;
-
-    _v._d = x;
-    _v._u = gar_endian(uint64_t, _v._u);
-    return _v._d;
-}
-#endif                           // HAVE_BIGENDIAN
+#endif  // HAVE_BIGENDIAN
 
 // --------------------------------------------------------------------------------------------
 // macros to deal with pointers or unaligned arguments
 
 // load argument of type t from pointer p
-#define gar_ptr_load(t, p)          __gar_ptr_load_ ## t((const uint8_t*)(p))
+#define gar_ptr_load(t, p) __gar_ptr_load_##t((const uint8_t*)(p))
 
 // store argument src of type t in in the location to which the pointer p points
-#define gar_ptr_store(t, p, src)    __gar_ptr_store_ ## t((uint8_t*)(p), (src))
+#define gar_ptr_store(t, p, src) __gar_ptr_store_##t((uint8_t*)(p), (src))
 
 #if defined(CAN_UNALIGNED) && !defined(HAVE_BIGENDIAN)
 
 // load argument x of type t - noop with proper cast
-#define gar_load(t, x)              (t)(x)
+#define gar_load(t, x) (t)(x)
 
 // store argument src of type t in the variable dst of type t - just assign
-#define gar_store(t, dst, src)      (dst) = (src)
+#define gar_store(t, dst, src) (dst) = (src)
 
 // load from pointer - simply map memory
-#define __gar_ptr_load_int16_t(p)   (*((int16_t*)(p)))
-#define __gar_ptr_load_int32_t(p)   (*((int32_t*)(p)))
-#define __gar_ptr_load_int64_t(p)   (*((int64_t*)(p)))
-#define __gar_ptr_load_uint16_t(p)  (*((uint16_t*)(p)))
-#define __gar_ptr_load_quint32(p)  (*((quint32*)(p)))
-#define __gar_ptr_load_uint64_t(p)  (*((uint64_t*)(p)))
-#define __gar_ptr_load_float(p)     (*((float*)(p)))
-#define __gar_ptr_load_double(p)    (*((double*)(p)))
+#define __gar_ptr_load_int16_t(p) (*((int16_t*)(p)))
+#define __gar_ptr_load_int32_t(p) (*((int32_t*)(p)))
+#define __gar_ptr_load_int64_t(p) (*((int64_t*)(p)))
+#define __gar_ptr_load_uint16_t(p) (*((uint16_t*)(p)))
+#define __gar_ptr_load_quint32(p) (*((quint32*)(p)))
+#define __gar_ptr_load_uint64_t(p) (*((uint64_t*)(p)))
+#define __gar_ptr_load_float(p) (*((float*)(p)))
+#define __gar_ptr_load_double(p) (*((double*)(p)))
 // special Garmin types - map memory and clear extra bits
-#define __gar_ptr_load_uint24_t(p)  (__gar_ptr_load_quint32(p) & 0x00FFFFFFu)
-#define __gar_ptr_load_int24_t(p)   (__gar_ptr_load_int32_t(p) & 0x00FFFFFFu)
+#define __gar_ptr_load_uint24_t(p) (__gar_ptr_load_quint32(p) & 0x00FFFFFFu)
+#define __gar_ptr_load_int24_t(p) (__gar_ptr_load_int32_t(p) & 0x00FFFFFFu)
 
 // store data to pointer - just assign after a proper cast
-#define __gar_ptr_store_int16_t(p, src)     (*((int16_t*)(p))) = (src)
-#define __gar_ptr_store_int32_t(p, src)     (*((int32_t*)(p))) = (src)
-#define __gar_ptr_store_int64_t(p, src)     (*((int64_t*)(p))) = (src)
-#define __gar_ptr_store_uint16_t(p, src)    (*((uint16_t*)(p))) = (src)
-#define __gar_ptr_store_quint32(p, src)    (*((quint32*)(p))) = (src)
-#define __gar_ptr_store_uint64_t(p, src)    (*((uint64_t*)(p))) = (src)
-#define __gar_ptr_store_float(p, src)       (*((float*)(p))) = (src)
-#define __gar_ptr_store_double(p, src)      (*((double*)(p))) = (src)
+#define __gar_ptr_store_int16_t(p, src) (*((int16_t*)(p))) = (src)
+#define __gar_ptr_store_int32_t(p, src) (*((int32_t*)(p))) = (src)
+#define __gar_ptr_store_int64_t(p, src) (*((int64_t*)(p))) = (src)
+#define __gar_ptr_store_uint16_t(p, src) (*((uint16_t*)(p))) = (src)
+#define __gar_ptr_store_quint32(p, src) (*((quint32*)(p))) = (src)
+#define __gar_ptr_store_uint64_t(p, src) (*((uint64_t*)(p))) = (src)
+#define __gar_ptr_store_float(p, src) (*((float*)(p))) = (src)
+#define __gar_ptr_store_double(p, src) (*((double*)(p))) = (src)
 // special Garmin types - use memcpy
-static inline void
-__gar_ptr_store_int24_t(uint8_t* p, int32_t src)
-{
-    __gar_ptr_store_uint16_t(p, src & 0xffffu);
-    p[2] = src >> 16;
+static inline void __gar_ptr_store_int24_t(uint8_t* p, int32_t src) {
+  __gar_ptr_store_uint16_t(p, src & 0xffffu);
+  p[2] = src >> 16;
 }
 
-
-static inline void
-__gar_ptr_store_uint24_t(uint8_t* p, quint32 src)
-{
-    __gar_ptr_store_uint16_t(p, src & 0xffffu);
-    p[2] = src >> 16;
+static inline void __gar_ptr_store_uint24_t(uint8_t* p, quint32 src) {
+  __gar_ptr_store_uint16_t(p, src & 0xffffu);
+  p[2] = src >> 16;
 }
 
-
-#else                            // machine is either Big Endian or does not support unaligned accesses
+#else  // machine is either Big Endian or does not support unaligned accesses
 
 // load argument x of type t - call pointer load macro
-#define gar_load(t, x)              gar_ptr_load(t, (uint8_t*)&(x))
+#define gar_load(t, x) gar_ptr_load(t, (uint8_t*)&(x))
 
 // store argument src of type t in the variable dst of type t - call pointer store macro
-#define gar_store(t, dst, src)      gar_ptr_store(t, (uint8_t*)&(dst), src)
+#define gar_store(t, dst, src) gar_ptr_store(t, (uint8_t*)&(dst), src)
 
 // load from pointer - read'n'shift bytes
 // use Byte-Reverse operations for PowerPC
-static inline uint16_t
-__gar_ptr_load_uint16_t(const uint8_t* p)
-{
+static inline uint16_t __gar_ptr_load_uint16_t(const uint8_t* p) {
 #ifdef __powerpc__
-    register uint16_t temp;
+  register uint16_t temp;
 
-    asm __volatile__ ("lhbrx %0,0,%1" : "=r" (temp) : "b" (p), "m" (*p));
-    return temp;
+  asm __volatile__("lhbrx %0,0,%1" : "=r"(temp) : "b"(p), "m"(*p));
+  return temp;
 #else
-    return (uint16_t)(p[0] | (p[1] << 8));
+  return (uint16_t)(p[0] | (p[1] << 8));
 #endif
 }
 
-
-static inline quint32
-__gar_ptr_load_uint24_t(const uint8_t* p)
-{
+static inline quint32 __gar_ptr_load_uint24_t(const uint8_t* p) {
 #ifdef __powerpc__
-    register quint32 temp;
+  register quint32 temp;
 
-    asm __volatile__ ("lwbrx %0,0,%1"       : "=r" (temp) : "b" (p), "m" (*p));
-    asm __volatile__ ("rlwinm %0,%1,0,8,31" : "=r" (temp) : "r" (temp));
-    return temp;
+  asm __volatile__("lwbrx %0,0,%1" : "=r"(temp) : "b"(p), "m"(*p));
+  asm __volatile__("rlwinm %0,%1,0,8,31" : "=r"(temp) : "r"(temp));
+  return temp;
 #else
-    return (quint32)(p[0] | (p[1] << 8) | (p[2] << 16));
+  return (quint32)(p[0] | (p[1] << 8) | (p[2] << 16));
 #endif
 }
 
-
-static inline quint32
-__gar_ptr_load_quint32(const uint8_t* p)
-{
+static inline quint32 __gar_ptr_load_quint32(const uint8_t* p) {
 #ifdef __powerpc__
-    register quint32 temp;
+  register quint32 temp;
 
-    asm __volatile__ ("lwbrx %0,0,%1" : "=r" (temp) : "b" (p), "m" (*p));
-    return temp;
+  asm __volatile__("lwbrx %0,0,%1" : "=r"(temp) : "b"(p), "m"(*p));
+  return temp;
 #else
-    return (quint32)(p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24));
+  return (quint32)(p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24));
 #endif
 }
 
-
-static inline uint64_t
-__gar_ptr_load_uint64_t(const uint8_t* p)
-{
-    return (uint64_t)__gar_ptr_load_quint32(p) |
-           ((uint64_t)__gar_ptr_load_quint32(p + 4) << 32);
+static inline uint64_t __gar_ptr_load_uint64_t(const uint8_t* p) {
+  return (uint64_t)__gar_ptr_load_quint32(p) | ((uint64_t)__gar_ptr_load_quint32(p + 4) << 32);
 }
 
-
-static inline int16_t
-__gar_ptr_load_int16_t(const uint8_t* p)
-{
+static inline int16_t __gar_ptr_load_int16_t(const uint8_t* p) {
 #ifdef __powerpc__
-    register int16_t temp;
+  register int16_t temp;
 
-    asm __volatile__ ("lhbrx %0,0,%1" : "=r" (temp) : "b" (p), "m" (*p));
-    return temp;
+  asm __volatile__("lhbrx %0,0,%1" : "=r"(temp) : "b"(p), "m"(*p));
+  return temp;
 #else
-    return (int16_t)(p[0] | (p[1] << 8));
+  return (int16_t)(p[0] | (p[1] << 8));
 #endif
 }
 
-
-static inline int32_t
-__gar_ptr_load_int24_t(const uint8_t* p)
-{
+static inline int32_t __gar_ptr_load_int24_t(const uint8_t* p) {
 #ifdef __powerpc__
-    register int32_t temp;
+  register int32_t temp;
 
-    asm __volatile__ ("lwbrx %0,0,%1"       : "=r" (temp) : "b" (p), "m" (*p));
-    asm __volatile__ ("rlwinm %0,%1,0,8,31" : "=r" (temp) : "r" (temp));
-    return temp;
+  asm __volatile__("lwbrx %0,0,%1" : "=r"(temp) : "b"(p), "m"(*p));
+  asm __volatile__("rlwinm %0,%1,0,8,31" : "=r"(temp) : "r"(temp));
+  return temp;
 #else
-    return p[0] | (p[1] << 8) | (p[2] << 16);
+  return p[0] | (p[1] << 8) | (p[2] << 16);
 #endif
 }
 
-
-static inline int32_t
-__gar_ptr_load_int32_t(const uint8_t* p)
-{
+static inline int32_t __gar_ptr_load_int32_t(const uint8_t* p) {
 #ifdef __powerpc__
-    register int32_t temp;
+  register int32_t temp;
 
-    asm __volatile__ ("lwbrx %0,0,%1" : "=r" (temp) : "b" (p), "m" (*p));
-    return temp;
+  asm __volatile__("lwbrx %0,0,%1" : "=r"(temp) : "b"(p), "m"(*p));
+  return temp;
 #else
-    return (int32_t)(p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24));
+  return (int32_t)(p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24));
 #endif
 }
 
-
-static inline int64_t
-__gar_ptr_load_int64_t(const uint8_t* p)
-{
-    return (int64_t)__gar_ptr_load_quint32(p) |
-           ((int64_t)__gar_ptr_load_int32_t(p + 4) << 32);
+static inline int64_t __gar_ptr_load_int64_t(const uint8_t* p) {
+  return (int64_t)__gar_ptr_load_quint32(p) | ((int64_t)__gar_ptr_load_int32_t(p + 4) << 32);
 }
 
+static inline float __gar_ptr_load_float(const uint8_t* p) {
+  union {
+    quint32 _u;
+    float _f;
+  } _v;
 
-static inline float
-__gar_ptr_load_float(const uint8_t* p)
-{
-    union
-    {
-        quint32 _u;
-        float _f;
-    } _v;
-
-    _v._u = gar_ptr_load(quint32, p);
-    return _v._f;
+  _v._u = gar_ptr_load(quint32, p);
+  return _v._f;
 }
 
+static inline double __gar_ptr_load_double(const uint8_t* p) {
+  union {
+    uint64_t _u;
+    double _d;
+  } _v;
 
-static inline double
-__gar_ptr_load_double(const uint8_t* p)
-{
-    union
-    {
-        uint64_t _u;
-        double _d;
-    } _v;
-
-    _v._u = gar_ptr_load(uint64_t, p);
-    return _v._d;
+  _v._u = gar_ptr_load(uint64_t, p);
+  return _v._d;
 }
-
 
 // macros to store data - use memcpy to store data to pointer
-static inline void
-__gar_ptr_store_uint16_t(uint8_t* p, uint16_t src)
-{
-    p[0] = src & 0xffu;
-    p[1] = (src >> 8) & 0xffu;
+static inline void __gar_ptr_store_uint16_t(uint8_t* p, uint16_t src) {
+  p[0] = src & 0xffu;
+  p[1] = (src >> 8) & 0xffu;
 }
 
-
-static inline void
-__gar_ptr_store_uint24_t(uint8_t* p, quint32 src)
-{
-    p[0] = src & 0xffu;
-    p[1] = (src >> 8) & 0xffu;
-    p[2] = (src >> 16) & 0xffu;
+static inline void __gar_ptr_store_uint24_t(uint8_t* p, quint32 src) {
+  p[0] = src & 0xffu;
+  p[1] = (src >> 8) & 0xffu;
+  p[2] = (src >> 16) & 0xffu;
 }
 
-
-static inline void
-__gar_ptr_store_quint32(uint8_t* p, quint32 src)
-{
-    p[0] = src & 0xffu;
-    p[1] = (src >> 8) & 0xffu;
-    p[2] = (src >> 16) & 0xffu;
-    p[3] = (src >> 24) & 0xffu;
+static inline void __gar_ptr_store_quint32(uint8_t* p, quint32 src) {
+  p[0] = src & 0xffu;
+  p[1] = (src >> 8) & 0xffu;
+  p[2] = (src >> 16) & 0xffu;
+  p[3] = (src >> 24) & 0xffu;
 }
 
-
-static inline void
-__gar_ptr_store_uint64_t(uint8_t* p, uint64_t src)
-{
-    __gar_ptr_store_quint32(p, src & 0xffffffffu);
-    __gar_ptr_store_quint32(p + 4, src >> 32);
+static inline void __gar_ptr_store_uint64_t(uint8_t* p, uint64_t src) {
+  __gar_ptr_store_quint32(p, src & 0xffffffffu);
+  __gar_ptr_store_quint32(p + 4, src >> 32);
 }
-
 
 #define __gar_ptr_store_int16_t(p, src) __gar_ptr_store_uint16_t(p, (uint16_t)src)
 #define __gar_ptr_store_int24_t(p, src) __gar_ptr_store_uint24_t(p, (quint32)src)
 #define __gar_ptr_store_int32_t(p, src) __gar_ptr_store_quint32(p, (quint32)src)
 #define __gar_ptr_store_int64_t(p, src) __gar_ptr_store_uint64_t(p, (uint64_t)src)
 
-static inline void
-__gar_ptr_store_float(uint8_t* p, float src)
-{
-    float __fv = gar_endian(float, src);
-    memcpy(p, &__fv, 4);
+static inline void __gar_ptr_store_float(uint8_t* p, float src) {
+  float __fv = gar_endian(float, src);
+  memcpy(p, &__fv, 4);
 }
 
-
-static inline void
-__gar_ptr_store_double(uint8_t* p, double src)
-{
-    double __dv = gar_endian(double, src);
-    memcpy(p, &__dv, 8);
+static inline void __gar_ptr_store_double(uint8_t* p, double src) {
+  double __dv = gar_endian(double, src);
+  memcpy(p, &__dv, 8);
 }
-#endif                           // cannot unaligned or big endian
-#endif                           // __PLATFORM_H__
+#endif  // cannot unaligned or big endian
+#endif  // __PLATFORM_H__

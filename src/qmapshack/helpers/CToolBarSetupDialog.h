@@ -24,40 +24,37 @@
 
 class CToolBarConfig;
 
-class CToolBarSetupDialog : public QDialog, private Ui::IToolBarSetupDialog
-{
-    Q_OBJECT
-public:
-    CToolBarSetupDialog(QWidget* const& parent, CToolBarConfig* const& config);
-    virtual ~CToolBarSetupDialog();
+class CToolBarSetupDialog : public QDialog, private Ui::IToolBarSetupDialog {
+  Q_OBJECT
+ public:
+  CToolBarSetupDialog(QWidget* const& parent, CToolBarConfig* const& config);
+  virtual ~CToolBarSetupDialog();
 
-public slots:
-    void accept() override;
-    void slotButtonClicked(QAbstractButton* button) const;
+ public slots:
+  void accept() override;
+  void slotButtonClicked(QAbstractButton* button) const;
 
-private:
-    class CDialogItem : public QListWidgetItem
-    {
-public:
-        CDialogItem(QIcon icon, QString text, QString name)
-            : QListWidgetItem(icon, text, nullptr, QListWidgetItem::UserType),
-            actionName(name) {}
-        ~CDialogItem() override {}
-        QListWidgetItem* clone() const override { return new CDialogItem(this->icon(), this->text(), this->actionName); }
-private:
-        const QString actionName;
-        friend class CToolBarSetupDialog;
-    };
+ private:
+  class CDialogItem : public QListWidgetItem {
+   public:
+    CDialogItem(QIcon icon, QString text, QString name)
+        : QListWidgetItem(icon, text, nullptr, QListWidgetItem::UserType), actionName(name) {}
+    ~CDialogItem() override {}
+    QListWidgetItem* clone() const override { return new CDialogItem(this->icon(), this->text(), this->actionName); }
 
-    class CItemFilter : public QObject, public CSelectDoubleListWidget::IItemFilter
-    {
-public:
-        CItemFilter(QObject* parent) : QObject(parent) {}
-        ~CItemFilter() override {}
-        bool shouldBeMoved(QListWidgetItem* item) override;
-    };
+   private:
+    const QString actionName;
+    friend class CToolBarSetupDialog;
+  };
 
-    void configure() const;
-    CToolBarConfig* config;
+  class CItemFilter : public QObject, public CSelectDoubleListWidget::IItemFilter {
+   public:
+    CItemFilter(QObject* parent) : QObject(parent) {}
+    ~CItemFilter() override {}
+    bool shouldBeMoved(QListWidgetItem* item) override;
+  };
+
+  void configure() const;
+  CToolBarConfig* config;
 };
-#endif //CTOOLBARSETUPDIALOG_H
+#endif  // CTOOLBARSETUPDIALOG_H

@@ -19,92 +19,89 @@
 #ifndef CRTAIS_H
 #define CRTAIS_H
 
-#include "realtime/IRtSource.h"
-#include "units/IUnit.h"
-
 #include <QDateTime>
 #include <QPointer>
+
+#include "realtime/IRtSource.h"
+#include "units/IUnit.h"
 
 class QTimer;
 class QNetworkAccessManager;
 class QNetworkReply;
 class CRtAisInfo;
 
-class CRtAis : public IRtSource
-{
-    Q_OBJECT
-public:
-    CRtAis(QTreeWidget* parent);
-    virtual ~CRtAis() = default;
+class CRtAis : public IRtSource {
+  Q_OBJECT
+ public:
+  CRtAis(QTreeWidget* parent);
+  virtual ~CRtAis() = default;
 
-    struct ship_t
-    {
-        QPointF pos = NOPOINTF;
-        QPointF point = NOPOINTF;
+  struct ship_t {
+    QPointF pos = NOPOINTF;
+    QPointF point = NOPOINTF;
 
-        QString name;
-        QString callsign;
-        QString imo;
-        QString mmsi;
-        qint32 timePosition = NOINT;
-        qreal longitude = NOFLOAT;
-        qreal latitude = NOFLOAT;
-        qreal velocity = NOFLOAT;
-        qreal heading = NOFLOAT;
-        QString destination;
-        qreal draught = 0;
-        qint16 length = 0;
-        qint16 width = 0;
-        QString type;
-        bool aid = false;
-    };
+    QString name;
+    QString callsign;
+    QString imo;
+    QString mmsi;
+    qint32 timePosition = NOINT;
+    qreal longitude = NOFLOAT;
+    qreal latitude = NOFLOAT;
+    qreal velocity = NOFLOAT;
+    qreal heading = NOFLOAT;
+    QString destination;
+    qreal draught = 0;
+    qint16 length = 0;
+    qint16 width = 0;
+    QString type;
+    bool aid = false;
+  };
 
-    /**
-       @brief Setup sub-item
+  /**
+     @brief Setup sub-item
 
-       The parent tree widget is used to setup a sub item with CRtAisInfo as widget.
-     */
-    void registerWithTreeWidget() override;
-    void loadSettings(QSettings& cfg) override;
-    void saveSettings(QSettings& cfg) const override;
+     The parent tree widget is used to setup a sub item with CRtAisInfo as widget.
+   */
+  void registerWithTreeWidget() override;
+  void loadSettings(QSettings& cfg) override;
+  void saveSettings(QSettings& cfg) const override;
 
-    QString getDescription() const override;
+  QString getDescription() const override;
 
-    /**
-       @brief Get the number of entries in the current record
+  /**
+     @brief Get the number of entries in the current record
 
-       @return The number as integer.
-     */
-    qint32 getNumberOfShips() const;
-    /**
-       @brief Get flag to control visibility of vessel names
+     @return The number as integer.
+   */
+  qint32 getNumberOfShips() const;
+  /**
+     @brief Get flag to control visibility of vessel names
 
-       @return True to show names.
-     */
-    bool getShowNames() const;
+     @return True to show names.
+   */
+  bool getShowNames() const;
 
-    ship_t& getShipByMmsi(const QString& key);
-    bool hasShip(const QString& key);
+  ship_t& getShipByMmsi(const QString& key);
+  bool hasShip(const QString& key);
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) override;
-    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt)  override;
-    void mouseMove(const QPointF& pos) override;
-    static const QString strIcon;
-public slots:
-    /**
-       @brief Set visibility of vessel names
+  void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) override;
+  void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) override;
+  void mouseMove(const QPointF& pos) override;
+  static const QString strIcon;
+ public slots:
+  /**
+     @brief Set visibility of vessel names
 
-       @param yes   set true to show names
-     */
-    void slotSetShowNames(bool yes);
+     @param yes   set true to show names
+   */
+  void slotSetShowNames(bool yes);
 
-private:
-    QPointer<CRtAisInfo> info;
-    QMap<QString, ship_t> ships;
-    bool showNames = true;
+ private:
+  QPointer<CRtAisInfo> info;
+  QMap<QString, ship_t> ships;
+  bool showNames = true;
 
-    QString keyFocus;
+  QString keyFocus;
 };
 
-#endif //CRTAIS_H
-
+#endif  // CRTAIS_H

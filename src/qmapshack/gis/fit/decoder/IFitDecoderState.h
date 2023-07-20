@@ -19,80 +19,75 @@
 #ifndef CFITSTATE_H
 #define CFITSTATE_H
 
+#include <QtCore>
+
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 #include "gis/fit/decoder/CFitMessage.h"
 #include "gis/fit/defs/CFitFieldProfile.h"
 
-#include <QtCore>
-
-
-typedef enum
-{
-    eDecoderStateFileHeader,
-    eDecoderStateRecord,
-    eDecoderStateRecordContent,
-    eDecoderStateFieldDef,
-    eDecoderStateDevFieldDef,
-    eDecoderStateFieldData,
-    eDecoderStateFileCrc,
-    eDecoderStateEnd
+typedef enum {
+  eDecoderStateFileHeader,
+  eDecoderStateRecord,
+  eDecoderStateRecordContent,
+  eDecoderStateFieldDef,
+  eDecoderStateDevFieldDef,
+  eDecoderStateFieldData,
+  eDecoderStateFileCrc,
+  eDecoderStateEnd
 } decode_state_e;
 
-class IFitDecoderState
-{
-    Q_DECLARE_TR_FUNCTIONS(IFitDecoderState)
-public:
-    struct shared_state_data_t
-    {
-        quint16 crc;
-        quint32 fileLength;
-        quint32 fileBytesRead;
-        quint8 lastTimeOffset;
-        quint32 timestamp;
-        CFitDefinitionMessage* lastDefinition;
-        CFitMessage* lastMessage;
-        QMap<quint8, CFitDefinitionMessage> definitions;
-        QList<CFitDefinitionMessage> definitionHistory;
-        QList<CFitMessage> messages;
-        QList<CFitFieldProfile> devFieldProfiles;
-    };
+class IFitDecoderState {
+  Q_DECLARE_TR_FUNCTIONS(IFitDecoderState)
+ public:
+  struct shared_state_data_t {
+    quint16 crc;
+    quint32 fileLength;
+    quint32 fileBytesRead;
+    quint8 lastTimeOffset;
+    quint32 timestamp;
+    CFitDefinitionMessage* lastDefinition;
+    CFitMessage* lastMessage;
+    QMap<quint8, CFitDefinitionMessage> definitions;
+    QList<CFitDefinitionMessage> definitionHistory;
+    QList<CFitMessage> messages;
+    QList<CFitFieldProfile> devFieldProfiles;
+  };
 
-    IFitDecoderState(shared_state_data_t& data) : data(data) { }
-    virtual ~IFitDecoderState() {}
+  IFitDecoderState(shared_state_data_t& data) : data(data) {}
+  virtual ~IFitDecoderState() {}
 
-    virtual void reset() = 0;
-    decode_state_e processByte(quint8& dataByte);
+  virtual void reset() = 0;
+  decode_state_e processByte(quint8& dataByte);
 
-protected:
-    virtual decode_state_e process(quint8& dataByte) = 0;
+ protected:
+  virtual decode_state_e process(quint8& dataByte) = 0;
 
-    CFitMessage* latestMessage() const { return data.lastMessage; }
-    void addMessage(const CFitDefinitionMessage& definition);
+  CFitMessage* latestMessage() const { return data.lastMessage; }
+  void addMessage(const CFitDefinitionMessage& definition);
 
-    void setFileLength(quint32 fileLength);
-    void resetFileBytesRead();
-    void incFileBytesRead();
-    quint32 bytesLeftToRead();
+  void setFileLength(quint32 fileLength);
+  void resetFileBytesRead();
+  void incFileBytesRead();
+  quint32 bytesLeftToRead();
 
-    CFitDefinitionMessage* latestDefinition() const { return data.lastDefinition; }
-    CFitDefinitionMessage* definition(quint32 localMessageType);
-    void addDefinition(const CFitDefinitionMessage& definition);
-    void endDefinition();
+  CFitDefinitionMessage* latestDefinition() const { return data.lastDefinition; }
+  CFitDefinitionMessage* definition(quint32 localMessageType);
+  void addDefinition(const CFitDefinitionMessage& definition);
+  void endDefinition();
 
-    void setTimestamp(quint32 fullTimestamp);
-    void setTimestampOffset(quint32 offsetTimestamp);
-    quint32 getTimestamp() const { return data.timestamp; }
-    quint16 getCrc() const { return data.crc; }
-    void addDevFieldProfile(const CFitFieldProfile& fieldProfile);
-    CFitFieldProfile* devFieldProfile(const QPair<quint8, quint8>& devProfileId);
-    /// Delete local developer profiles with the developer data index devDataIdx
-    void clearDevFieldProfiles(quint8 devDataIdx);
+  void setTimestamp(quint32 fullTimestamp);
+  void setTimestampOffset(quint32 offsetTimestamp);
+  quint32 getTimestamp() const { return data.timestamp; }
+  quint16 getCrc() const { return data.crc; }
+  void addDevFieldProfile(const CFitFieldProfile& fieldProfile);
+  CFitFieldProfile* devFieldProfile(const QPair<quint8, quint8>& devProfileId);
+  /// Delete local developer profiles with the developer data index devDataIdx
+  void clearDevFieldProfiles(quint8 devDataIdx);
 
+ private:
+  void buildCrc(quint8 byte);
 
-private:
-    void buildCrc(quint8 byte);
-
-    shared_state_data_t& data;
+  shared_state_data_t& data;
 };
 
-#endif // CFITSTATE_H
+#endif  // CFITSTATE_H

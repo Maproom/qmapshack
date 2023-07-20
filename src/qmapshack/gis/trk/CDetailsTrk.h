@@ -19,89 +19,82 @@
 #ifndef CDETAILSTRK_H
 #define CDETAILSTRK_H
 
+#include <QWidget>
+
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CLimit.h"
 #include "ui_IDetailsTrk.h"
-#include <QWidget>
 
 class CPlot;
 class CPlotProfile;
 
-class CDetailsTrk : public QWidget, public INotifyTrk, private Ui::IDetailsTrk
-{
-    Q_OBJECT
-public:
-    CDetailsTrk(CGisItemTrk& trk);
-    virtual ~CDetailsTrk();
+class CDetailsTrk : public QWidget, public INotifyTrk, private Ui::IDetailsTrk {
+  Q_OBJECT
+ public:
+  CDetailsTrk(CGisItemTrk& trk);
+  virtual ~CDetailsTrk();
 
-    void setMouseFocus(const CTrackData::trkpt_t* pt) override;
-    void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override;
-    void enableTabFilter();
-    void setMouseClickFocus(const CTrackData::trkpt_t* pt) override;
+  void setMouseFocus(const CTrackData::trkpt_t* pt) override;
+  void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override;
+  void enableTabFilter();
+  void setMouseClickFocus(const CTrackData::trkpt_t* pt) override;
 
-public slots:
-    void updateData() override;
+ public slots:
+  void updateData() override;
 
-private slots:
-    void slotNameChanged(const QString& name);
-    void slotNameChangeFinished();
-    void slotShowPlots();
-    void slotColorChanged(int idx);
-    void slotChangeReadOnlyMode(bool on);
-    void slotLinkActivated(const QUrl& url);
-    void slotMouseClickState(int);
-    void slotSetActivities();
-    void slotSetEnergyCycling();
+ private slots:
+  void slotNameChanged(const QString& name);
+  void slotNameChangeFinished();
+  void slotShowPlots();
+  void slotColorChanged(int idx);
+  void slotChangeReadOnlyMode(bool on);
+  void slotLinkActivated(const QUrl& url);
+  void slotMouseClickState(int);
+  void slotSetActivities();
+  void slotSetEnergyCycling();
 
-    void slotColorSourceChanged(int idx);
-    void slotColorLimitHighChanged();
-    void slotColorLimitLowChanged();
+  void slotColorSourceChanged(int idx);
+  void slotColorLimitHighChanged();
+  void slotColorLimitLowChanged();
 
-    void slotSetupGraph(int idx);
-    void slotSetLimitModeGraph(CLimit::mode_e mode, CLimit* limit, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax, bool on);
-    void slotSetLimitModeStyle(CLimit::mode_e mode, bool on);
+  void slotSetupGraph(int idx);
+  void slotSetLimitModeGraph(CLimit::mode_e mode, CLimit* limit, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax,
+                             bool on);
+  void slotSetLimitModeStyle(CLimit::mode_e mode, bool on);
 
-    void slotLineWidthMode(bool isUser);
-    void slotLineWidth(int f);
-    void slotWithArrowsMode(bool isUser);
-    void slotWithArrows(bool yes);
+  void slotLineWidthMode(bool isUser);
+  void slotLineWidth(int f);
+  void slotWithArrowsMode(bool isUser);
+  void slotWithArrows(bool yes);
 
-    void slotHasTrkPtInfo(bool yes);
+  void slotHasTrkPtInfo(bool yes);
 
-private:
-    void loadGraphSource(QComboBox* comboBox, qint32 n, const QString cfgDefault);
-    void saveGraphSource(QComboBox* comboBox, qint32 n);
-    void setupGraphLimits(CLimit& limit, QToolButton* toolLimitAutoGraph, QToolButton* toolLimitUsrGraph, QToolButton* toolLimitSysGraph, QDoubleSpinBox* spinMinGraph, QDoubleSpinBox* spinMaxGraph);
-    void setupStyleLimits(CLimit& limit, QToolButton* toolLimitAuto, QToolButton* toolLimitUsr, QToolButton* toolLimitSys, CDoubleSpinBox* spinMin, CDoubleSpinBox* spinMax);
-    void setupGraph(CPlot* plot, const CLimit& limit, const QString& source, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax);
-    void setupLimits(CLimit* limit, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax);
+ private:
+  void loadGraphSource(QComboBox* comboBox, qint32 n, const QString cfgDefault);
+  void saveGraphSource(QComboBox* comboBox, qint32 n);
+  void setupGraphLimits(CLimit& limit, QToolButton* toolLimitAutoGraph, QToolButton* toolLimitUsrGraph,
+                        QToolButton* toolLimitSysGraph, QDoubleSpinBox* spinMinGraph, QDoubleSpinBox* spinMaxGraph);
+  void setupStyleLimits(CLimit& limit, QToolButton* toolLimitAuto, QToolButton* toolLimitUsr, QToolButton* toolLimitSys,
+                        CDoubleSpinBox* spinMin, CDoubleSpinBox* spinMax);
+  void setupGraph(CPlot* plot, const CLimit& limit, const QString& source, QDoubleSpinBox* spinMin,
+                  QDoubleSpinBox* spinMax);
+  void setupLimits(CLimit* limit, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax);
 
+  enum tabs_t { eTabInfo, eTabStyle, eTabGraphs, eTabActivity, eTabPoints, eTabFilter, eTabHistory };
 
-    enum tabs_t
-    {
-        eTabInfo
-        , eTabStyle
-        , eTabGraphs
-        , eTabActivity
-        , eTabPoints
-        , eTabFilter
-        , eTabHistory
-    };
+  /**
+     @brief Pointer to track item
 
-    /**
-       @brief Pointer to track item
+     It is ok to store the pointer as this widget is created by the track item. The
+     track item will destroy this object on it's own destruction.
+   */
+  CGisItemTrk& trk;
 
-       It is ok to store the pointer as this widget is created by the track item. The
-       track item will destroy this object on it's own destruction.
-     */
-    CGisItemTrk& trk;
+  bool originator = false;
 
-    bool originator = false;
-
-    CPlotProfile* plot1;
-    CPlot* plot2;
-    CPlot* plot3;
+  CPlotProfile* plot1;
+  CPlot* plot2;
+  CPlot* plot3;
 };
 
-#endif //CDETAILSTRK_H
-
+#endif  // CDETAILSTRK_H

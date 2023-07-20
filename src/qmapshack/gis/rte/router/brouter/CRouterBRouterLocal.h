@@ -27,40 +27,38 @@ class CRouterBRouterSetup;
 class CRouterBRouterToolShell;
 class QEventLoop;
 
-class CRouterBRouterLocal : public QObject
-{
-    Q_OBJECT
-public:
-    CRouterBRouterLocal(CRouterBRouter& parent);
-    virtual ~CRouterBRouterLocal() {}
+class CRouterBRouterLocal : public QObject {
+  Q_OBJECT
+ public:
+  CRouterBRouterLocal(CRouterBRouter& parent);
+  virtual ~CRouterBRouterLocal() {}
 
-    void startBRouter();
-    void stopBRouter() const;
-    bool isBRouterNotRunning() const;
-    bool isBRouterError() const;
-    void clearBRouterError();
-    void getBRouterVersion() const;
-    void updateLocalBRouterStatus() const;
+  void startBRouter();
+  void stopBRouter() const;
+  bool isBRouterNotRunning() const;
+  bool isBRouterError() const;
+  void clearBRouterError();
+  void getBRouterVersion() const;
+  void updateLocalBRouterStatus() const;
 
-private slots:
-    void slotBRouterStateChanged(const QProcess::ProcessState newState);
-    void slotBRouterError(const QProcess::ProcessError error, const QString& errorString);
-    void slotBRouterSocketError(const QAbstractSocket::SocketError error);
-    void slotBRouterSocketConnected();
+ private slots:
+  void slotBRouterStateChanged(const QProcess::ProcessState newState);
+  void slotBRouterError(const QProcess::ProcessError error, const QString& errorString);
+  void slotBRouterSocketError(const QAbstractSocket::SocketError error);
+  void slotBRouterSocketConnected();
 
-private:
-    bool usesLocalBindaddress() const;
+ private:
+  bool usesLocalBindaddress() const;
 
-    CRouterBRouter& brouter;
+  CRouterBRouter& brouter;
 
-    CRouterBRouterToolShell* brouterShell {nullptr};
-    QProcess::ProcessState brouterState { QProcess::NotRunning };
-    QProcess::ProcessError brouterError { QProcess::UnknownError };
+  CRouterBRouterToolShell* brouterShell{nullptr};
+  QProcess::ProcessState brouterState{QProcess::NotRunning};
+  QProcess::ProcessError brouterError{QProcess::UnknownError};
 
-    enum connect_state_e { eNone=0, eConnected=1, eError=2 };
-    QEventLoop* eventLoop { nullptr };
-    QAbstractSocket::SocketError socketError { QAbstractSocket::ConnectionRefusedError };
+  enum connect_state_e { eNone = 0, eConnected = 1, eError = 2 };
+  QEventLoop* eventLoop{nullptr};
+  QAbstractSocket::SocketError socketError{QAbstractSocket::ConnectionRefusedError};
 };
 
-#endif //CROUTERBROUTERLOCAL_H
-
+#endif  // CROUTERBROUTERLOCAL_H

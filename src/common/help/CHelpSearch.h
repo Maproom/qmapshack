@@ -27,22 +27,20 @@ class QHelpSearchEngine;
 class QHelpSearchQueryWidget;
 class QHelpSearchResultWidget;
 
-class CHelpSearch : public QWidget
-{
-    Q_OBJECT
-public:
-    CHelpSearch(QHelpEngine* engine, QWidget* parent);
-    virtual ~CHelpSearch() = default;
+class CHelpSearch : public QWidget {
+  Q_OBJECT
+ public:
+  CHelpSearch(QHelpEngine* engine, QWidget* parent);
+  virtual ~CHelpSearch() = default;
 
-private slots:
-    void slotSearch();
+ private slots:
+  void slotSearch();
 
-private:
-    QLabel* labelSearch;
-    QHelpSearchEngine* searchEngine;
-    QHelpSearchQueryWidget* query;
-    QHelpSearchResultWidget* result;
+ private:
+  QLabel* labelSearch;
+  QHelpSearchEngine* searchEngine;
+  QHelpSearchQueryWidget* query;
+  QHelpSearchResultWidget* result;
 };
 
-#endif //CHELPSEARCH_H
-
+#endif  // CHELPSEARCH_H

@@ -20,24 +20,20 @@
 #define CTOOLOVERVIEWGROUPBOX_H
 
 #include "shell/CShellCmd.h"
-
 #include "ui_IToolOverviewGroupBox.h"
 
 class QSettings;
 
-class CToolOverviewGroupBox : public QGroupBox, private Ui::IToolOverviewGroupBox
-{
-    Q_OBJECT
-public:
-    CToolOverviewGroupBox(QWidget* parent);
-    virtual ~CToolOverviewGroupBox() = default;
+class CToolOverviewGroupBox : public QGroupBox, private Ui::IToolOverviewGroupBox {
+  Q_OBJECT
+ public:
+  CToolOverviewGroupBox(QWidget* parent);
+  virtual ~CToolOverviewGroupBox() = default;
 
-    void saveSettings(QSettings& cfg);
-    void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings& cfg);
+  void loadSettings(QSettings& cfg);
 
-
-    void buildCmd(QList<CShellCmd>& cmds, const QString& filename, const QString& resampling);
+  void buildCmd(QList<CShellCmd>& cmds, const QString& filename, const QString& resampling);
 };
 
-#endif //CTOOLOVERVIEWGROUPBOX_H
-
+#endif  // CTOOLOVERVIEWGROUPBOX_H

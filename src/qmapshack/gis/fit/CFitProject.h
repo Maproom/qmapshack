@@ -19,42 +19,29 @@
 #ifndef CFITPROJECT_H
 #define CFITPROJECT_H
 
-#include "gis/prj/IGisProject.h"
-
 #include <QtCore>
+
+#include "gis/prj/IGisProject.h"
 
 class CFitStream;
 
-class CFitProject final : public IGisProject
-{
-    Q_DECLARE_TR_FUNCTIONS(CFitProject)
-public:
-    CFitProject(const QString& filename, CGisListWks* parent);
-    CFitProject(const QString& filename, IDevice* parent);
-    virtual ~CFitProject();
+class CFitProject final : public IGisProject {
+  Q_DECLARE_TR_FUNCTIONS(CFitProject)
+ public:
+  CFitProject(const QString& filename, CGisListWks* parent);
+  CFitProject(const QString& filename, IDevice* parent);
+  virtual ~CFitProject();
 
+  const QString getFileDialogFilter() const override { return IGisProject::filedialogFilterFIT; }
 
-    const QString getFileDialogFilter() const override
-    {
-        return IGisProject::filedialogFilterFIT;
-    }
+  const QString getFileExtension() const override { return "fit"; }
 
-    const QString getFileExtension() const override
-    {
-        return "fit";
-    }
+  bool canSave() const override { return false; }
 
-    bool canSave() const override
-    {
-        return false;
-    }
-
-
-private:
-    void loadFitFromFile(const QString& filename, bool showErrorMsg);
-    void tryOpeningFitFile(const QString& filename);
-    void createGisItems(QFile& file);
+ private:
+  void loadFitFromFile(const QString& filename, bool showErrorMsg);
+  void tryOpeningFitFile(const QString& filename);
+  void createGisItems(QFile& file);
 };
 
-#endif //CFITPROJECT_H
-
+#endif  // CFITPROJECT_H

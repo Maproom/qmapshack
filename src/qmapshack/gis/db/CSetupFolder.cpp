@@ -16,71 +16,57 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
 #include "gis/db/CSetupFolder.h"
 
 #include <QtWidgets>
 
+#include "canvas/CCanvas.h"
+
 CSetupFolder::CSetupFolder(IDBFolder::type_e& type, QString& name, bool groupAllowed, QWidget* parent)
-    : QDialog(parent)
-    , type(type)
-    , name(name)
-{
-    setupUi(this);
+    : QDialog(parent), type(type), name(name) {
+  setupUi(this);
 
-    connect(lineName, &QLineEdit::textChanged, this, &CSetupFolder::slotNameChanged);
+  connect(lineName, &QLineEdit::textChanged, this, &CSetupFolder::slotNameChanged);
 
-    lineName->setText(name);
-    switch(type)
-    {
+  lineName->setText(name);
+  switch (type) {
     case IDBFolder::eTypeGroup:
-        radioGroup->setChecked(true);
-        break;
+      radioGroup->setChecked(true);
+      break;
 
     case IDBFolder::eTypeProject:
-        radioProject->setChecked(true);
-        break;
+      radioProject->setChecked(true);
+      break;
 
     case IDBFolder::eTypeOther:
-        radioOther->setChecked(true);
-        break;
+      radioOther->setChecked(true);
+      break;
 
-    default:
-        ;
-    }
+    default:;
+  }
 
-    radioGroup->setEnabled(groupAllowed);
+  radioGroup->setEnabled(groupAllowed);
 
-    slotNameChanged(name);
+  slotNameChanged(name);
 
-    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSetupFolder");
+  CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSetupFolder");
 }
 
-CSetupFolder::~CSetupFolder()
-{
-    CCanvas::restoreOverrideCursor("~CSetupFolder");
+CSetupFolder::~CSetupFolder() { CCanvas::restoreOverrideCursor("~CSetupFolder"); }
+
+void CSetupFolder::accept() {
+  name = lineName->text();
+  if (radioGroup->isChecked()) {
+    type = IDBFolder::eTypeGroup;
+  } else if (radioProject->isChecked()) {
+    type = IDBFolder::eTypeProject;
+  } else if (radioOther->isChecked()) {
+    type = IDBFolder::eTypeOther;
+  }
+
+  QDialog::accept();
 }
 
-void CSetupFolder::accept()
-{
-    name = lineName->text();
-    if(radioGroup->isChecked())
-    {
-        type = IDBFolder::eTypeGroup;
-    }
-    else if(radioProject->isChecked())
-    {
-        type = IDBFolder::eTypeProject;
-    }
-    else if(radioOther->isChecked())
-    {
-        type = IDBFolder::eTypeOther;
-    }
-
-    QDialog::accept();
-}
-
-void CSetupFolder::slotNameChanged(const QString& text)
-{
-    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!text.isEmpty());
+void CSetupFolder::slotNameChanged(const QString& text) {
+  buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!text.isEmpty());
 }

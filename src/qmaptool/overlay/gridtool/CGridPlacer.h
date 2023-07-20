@@ -21,65 +21,57 @@
 
 #include "canvas/CCanvas.h"
 #include "overlay/gridtool/CGridPoint.h"
-
 #include "ui_IGridPlacer.h"
 
 class CItemRefMap;
 class QSettings;
 
-class CGridPlacer : public QWidget, private Ui::IGridPlacer
-{
-    Q_OBJECT
-public:
-    CGridPlacer(QWidget* parent);
-    virtual ~CGridPlacer() = default;
+class CGridPlacer : public QWidget, private Ui::IGridPlacer {
+  Q_OBJECT
+ public:
+  CGridPlacer(QWidget* parent);
+  virtual ~CGridPlacer() = default;
 
-    void registerItem(CItemRefMap* item);
+  void registerItem(CItemRefMap* item);
 
-    void saveSettings(QSettings& cfg);
-    void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings& cfg);
+  void loadSettings(QSettings& cfg);
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent* e);
-    void mouseReleaseEventFx(QMouseEvent* e);
-    void leaveEventFx(QEvent* e);
-    QCursor getCursorFx();
+  bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
+  void mouseMoveEventFx(QMouseEvent* e);
+  void mouseReleaseEventFx(QMouseEvent* e);
+  void leaveEventFx(QEvent* e);
+  QCursor getCursorFx();
 
-    bool isOk() const
-    {
-        return statusIsOk;
+  bool isOk() const { return statusIsOk; }
+
+  const QPointF& getPoint(int idx) const {
+    if (idx < points.count()) {
+      return points[idx].getPoint();
     }
+    return NOPOINTF;
+  }
 
-    const QPointF& getPoint(int idx) const
-    {
-        if(idx < points.count())
-        {
-            return points[idx].getPoint();
-        }
-        return NOPOINTF;
-    }
+ signals:
+  void sigChanged();
+  void sigSetArea(const QRectF& area);
 
-signals:
-    void sigChanged();
-    void sigSetArea(const QRectF& area);
+ public slots:
+  void slotReset();
 
-public slots:
-    void slotReset();
+ private slots:
+  void slotSetPoint(qint32 i, bool on);
+  void slotSetArea();
 
-private slots:
-    void slotSetPoint(qint32 i, bool on);
-    void slotSetArea();
+ private:
+  void updateStatus();
+  CItemRefMap* item = nullptr;
 
-private:
-    void updateStatus();
-    CItemRefMap* item = nullptr;
+  qint32 idx = 0;
 
-    qint32 idx = 0;
+  QVector<CGridPoint> points;
 
-    QVector<CGridPoint> points;
-
-    bool statusIsOk = false;
+  bool statusIsOk = false;
 };
 
-#endif //CGRIDPLACER_H
-
+#endif  // CGRIDPLACER_H

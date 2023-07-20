@@ -24,90 +24,64 @@ const qreal CUnitImperial::milePerMeter = 0.6213699E-3;
 const qreal CUnitImperial::meterPerSecToMilePerHour = 2.23693164;
 
 CUnitImperial::CUnitImperial(QObject* parent)
-    : IUnit(eTypeImperial, "ft", footPerMeter, "ml/h", meterPerSecToMilePerHour, parent)
-{
-}
-
+    : IUnit(eTypeImperial, "ft", footPerMeter, "ml/h", meterPerSecToMilePerHour, parent) {}
 
 void CUnitImperial::meter2elevation(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit = "";
-    }
-    else
-    {
-        val = QString::asprintf("%1.0f", meter * footPerMeter);
-        unit = "ft";
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit = "";
+  } else {
+    val = QString::asprintf("%1.0f", meter * footPerMeter);
+    unit = "ft";
+  }
 }
-
 
 void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit = "";
-    }
-    else if(meter < 10)
-    {
-        val = QString::asprintf("%1.1f", meter * footPerMeter);
-        unit = "ft";
-    }
-    else if(meter < 1600)
-    {
-        val = QString::asprintf("%1.0f", meter * footPerMeter);
-        unit = "ft";
-    }
-    else if(meter < 16000)
-    {
-        val = QString::asprintf("%1.2f", meter * milePerMeter);
-        unit = "ml";
-    }
-    else if(meter < 32000)
-    {
-        val = QString::asprintf("%1.1f", meter * milePerMeter);
-        unit = "ml";
-    }
-    else
-    {
-        val = QString::asprintf("%1.0f", meter * milePerMeter);
-        unit = "ml";
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit = "";
+  } else if (meter < 10) {
+    val = QString::asprintf("%1.1f", meter * footPerMeter);
+    unit = "ft";
+  } else if (meter < 1600) {
+    val = QString::asprintf("%1.0f", meter * footPerMeter);
+    unit = "ft";
+  } else if (meter < 16000) {
+    val = QString::asprintf("%1.2f", meter * milePerMeter);
+    unit = "ml";
+  } else if (meter < 32000) {
+    val = QString::asprintf("%1.1f", meter * milePerMeter);
+    unit = "ml";
+  } else {
+    val = QString::asprintf("%1.0f", meter * milePerMeter);
+    unit = "ml";
+  }
 }
 
 void CUnitImperial::meter2area(qreal meter, QString& val, QString& unit) const /* override */
 {
-    if(meter == NOFLOAT)
-    {
-        val = "-";
-        unit = "";
-    }
-    else
-    {
-        val = QString::asprintf("%1.2f", meter / (1 / milePerMeter * 1 / milePerMeter));
-        unit = "ml²";
-    }
+  if (meter == NOFLOAT) {
+    val = "-";
+    unit = "";
+  } else {
+    val = QString::asprintf("%1.2f", meter / (1 / milePerMeter * 1 / milePerMeter));
+    unit = "ml²";
+  }
 }
 
 qreal CUnitImperial::elevation2meter(const QString& val) const /* override */
 {
-    return val.toDouble() / footPerMeter;
+  return val.toDouble() / footPerMeter;
 }
 
-void CUnitImperial::meter2unit(qreal meter, qreal& scale, QString& unit) const
-{
-    if(meter > 1600)
-    {
-        scale = milePerMeter;
-        unit = "ml";
-    }
-    else
-    {
-        scale = footPerMeter;
-        unit = "ft";
-    }
+void CUnitImperial::meter2unit(qreal meter, qreal& scale, QString& unit) const {
+  if (meter > 1600) {
+    scale = milePerMeter;
+    unit = "ml";
+  } else {
+    scale = footPerMeter;
+    unit = "ft";
+  }
 }
-

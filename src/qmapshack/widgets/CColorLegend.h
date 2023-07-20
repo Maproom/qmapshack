@@ -19,48 +19,44 @@
 #ifndef CCOLORLEGEND_H
 #define CCOLORLEGEND_H
 
-
 #include <QWidget>
 
 #include "gis/trk/CGisItemTrk.h"
 
-class CColorLegend : public QWidget, public INotifyTrk
-{
-    Q_OBJECT
-public:
-    CColorLegend(QWidget* parent, CGisItemTrk* trk = nullptr);
-    ~CColorLegend();
+class CColorLegend : public QWidget, public INotifyTrk {
+  Q_OBJECT
+ public:
+  CColorLegend(QWidget* parent, CGisItemTrk* trk = nullptr);
+  ~CColorLegend();
 
-    void setMinimum(qreal min);
-    void setMaximum(qreal max);
+  void setMinimum(qreal min);
+  void setMaximum(qreal max);
 
-    void setUnit(const QString& unit);
+  void setUnit(const QString& unit);
 
-    void updateData() override;
-    void setMouseFocus(const CTrackData::trkpt_t* pt) override;
-    void setMouseRangeFocus(const CTrackData::trkpt_t*/*pt1*/, const CTrackData::trkpt_t*/*pt2*/) override {}
-    void setMouseClickFocus(const CTrackData::trkpt_t*/*pt*/) override {}
+  void updateData() override;
+  void setMouseFocus(const CTrackData::trkpt_t* pt) override;
+  void setMouseRangeFocus(const CTrackData::trkpt_t* /*pt1*/, const CTrackData::trkpt_t* /*pt2*/) override {}
+  void setMouseClickFocus(const CTrackData::trkpt_t* /*pt*/) override {}
 
+ protected:
+  void paintEvent(QPaintEvent* event) override;
+  void resizeEvent(QResizeEvent* event) override;
 
-protected:
-    void paintEvent(QPaintEvent* event) override;
-    void resizeEvent(QResizeEvent* event) override;
+ private:
+  int paintLabel(QPainter& p, qreal value);
 
-private:
-    int paintLabel(QPainter& p, qreal value);
+  const int colorWidth = 18;
+  const int colorHeight = 256;
 
-    const int colorWidth = 18;
-    const int colorHeight = 256;
-
-    QRect colorRect;
-    QString unit;
-    qreal minimum = 0;
-    qreal maximum = 0;
-    bool background = false;
-    int xOffset = 1;
-    CGisItemTrk* trk = nullptr;
-    qreal val = NOFLOAT;
+  QRect colorRect;
+  QString unit;
+  qreal minimum = 0;
+  qreal maximum = 0;
+  bool background = false;
+  int xOffset = 1;
+  CGisItemTrk* trk = nullptr;
+  qreal val = NOFLOAT;
 };
 
-#endif // CCOLORLEGEND_H
-
+#endif  // CCOLORLEGEND_H

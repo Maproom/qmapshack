@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/fit/decoder/CFitDevFieldDefinitionState.h"
+
 #include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/fit_const.h"
 
@@ -27,42 +28,37 @@
  * 2: developer data index (maps to developer data id message)
  */
 
-void CFitDevFieldDefinitionState::reset()
-{
-    offset = 0;
-}
+void CFitDevFieldDefinitionState::reset() { offset = 0; }
 
-decode_state_e CFitDevFieldDefinitionState::process(quint8& dataByte)
-{
-    switch (offset++)
-    {
+decode_state_e CFitDevFieldDefinitionState::process(quint8& dataByte) {
+  switch (offset++) {
     case 0:
-        // field number
-        fieldNr = dataByte;
-        break;
+      // field number
+      fieldNr = dataByte;
+      break;
 
     case 1:
-        // field data size
-        size = dataByte;
-        break;
+      // field data size
+      size = dataByte;
+      break;
 
     case 2:
-        // field developer data index
-        devDataIndex = dataByte;
-        // get the previously (in RecordHeaderState) added definition message
-        CFitDefinitionMessage* def = latestDefinition();
-        CFitFieldProfile* profile = devFieldProfile(qMakePair(devDataIndex, fieldNr));
+      // field developer data index
+      devDataIndex = dataByte;
+      // get the previously (in RecordHeaderState) added definition message
+      CFitDefinitionMessage* def = latestDefinition();
+      CFitFieldProfile* profile = devFieldProfile(qMakePair(devDataIndex, fieldNr));
 
-        // add the new field definition
-        def->addDevField(CFitFieldDefinition(def, profile, fieldNr, devDataIndex, size, profile->getBaseType().baseTypeField()));
-        reset();
-        if (def->getDevFields().size() >= def->getNrOfDevFields())
-        {
-            FITDEBUG(2, qDebug() << latestDefinition()->messageInfo())
-            endDefinition();
-            return eDecoderStateRecord;
-        }
-    }
+      // add the new field definition
+      def->addDevField(
+          CFitFieldDefinition(def, profile, fieldNr, devDataIndex, size, profile->getBaseType().baseTypeField()));
+      reset();
+      if (def->getDevFields().size() >= def->getNrOfDevFields()) {
+        FITDEBUG(2, qDebug() << latestDefinition()->messageInfo())
+        endDefinition();
+        return eDecoderStateRecord;
+      }
+  }
 
-    return eDecoderStateDevFieldDef;
+  return eDecoderStateDevFieldDef;
 }

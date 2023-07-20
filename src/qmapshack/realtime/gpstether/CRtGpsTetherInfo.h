@@ -19,118 +19,111 @@
 #ifndef CRTGPSINFO_H
 #define CRTGPSINFO_H
 
-#include "realtime/gpstether/CRtGpsTetherRecord.h"
-#include "realtime/IRtInfo.h"
-#include "ui_IRtGpsTetherInfo.h"
-
-#include <functional>
 #include <QTcpSocket>
 #include <QWidget>
+#include <functional>
 
+#include "realtime/IRtInfo.h"
+#include "realtime/gpstether/CRtGpsTetherRecord.h"
+#include "ui_IRtGpsTetherInfo.h"
 
 class CRtGpsTether;
 class QSettings;
 
-class CRtGpsTetherInfo : public IRtInfo, private Ui::IRtGpsTetherInfo
-{
-    Q_OBJECT
-public:
-    CRtGpsTetherInfo(CRtGpsTether& source, QWidget* parent);
-    virtual ~CRtGpsTetherInfo();
+class CRtGpsTetherInfo : public IRtInfo, private Ui::IRtGpsTetherInfo {
+  Q_OBJECT
+ public:
+  CRtGpsTetherInfo(CRtGpsTether& source, QWidget* parent);
+  virtual ~CRtGpsTetherInfo();
 
-    void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg) const;
+  void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings& cfg) const;
 
-    QPointF getPosition() const;
-    qreal getHeading() const;
-signals:
-    void sigChanged();
+  QPointF getPosition() const;
+  qreal getHeading() const;
+ signals:
+  void sigChanged();
 
-private slots:
-    void slotHelp() const;
-    void slotConnect(bool yes);
-    void slotConnected();
-    void slotDisconnected();
-    void slotError(QAbstractSocket::SocketError socketError);
-    void slotReadyRead();
-    void slotUpdate();
+ private slots:
+  void slotHelp() const;
+  void slotConnect(bool yes);
+  void slotConnected();
+  void slotDisconnected();
+  void slotError(QAbstractSocket::SocketError socketError);
+  void slotReadyRead();
+  void slotUpdate();
 
-private:
-    bool verifyLine(const QString& line);
-    void disconnectFromHost();
-    void autoConnect(int msec);
+ private:
+  bool verifyLine(const QString& line);
+  void disconnectFromHost();
+  void autoConnect(int msec);
 
-    using fNemaLine = std::function<void(const QStringList&)>;
-    fNemaLine nmeaDefault = [&](const QStringList& t){qDebug() << t[0] << "unknown";};
+  using fNemaLine = std::function<void(const QStringList&)>;
+  fNemaLine nmeaDefault = [&](const QStringList& t) { qDebug() << t[0] << "unknown"; };
 
-    void nmeaGSV(const QStringList& tokens);
-    void nmeaRMC(const QStringList& tokens);
-    void nmeaGGA(const QStringList& tokens);
-    void nmeaVTG(const QStringList& tokens);
-    void nmeaGSA(const QStringList& tokens);
+  void nmeaGSV(const QStringList& tokens);
+  void nmeaRMC(const QStringList& tokens);
+  void nmeaGGA(const QStringList& tokens);
+  void nmeaVTG(const QStringList& tokens);
+  void nmeaGSA(const QStringList& tokens);
 
+ private:
+  void startRecord(const QString& filename) override;
+  void fillTrackData(CTrackData& data) override;
 
-private:
-    void startRecord(const QString& filename) override;
-    void fillTrackData(CTrackData& data) override;
+  QTcpSocket* socket;
+  QTimer* timer;
 
-    QTcpSocket* socket;
-    QTimer* timer;
+  QHash<QString, fNemaLine> dict;
 
-    QHash<QString, fNemaLine> dict;
+  QDateTime lastTimestamp;
 
-    QDateTime lastTimestamp;
+  struct rmc_t {
+    bool isValid{false};
+    QDateTime datetime;
+    qreal lat{0.0};
+    qreal lon{0.0};
+    qreal groundSpeed{0.0};
+    qreal trackMadeGood{0.0};
+    qreal magneticVariation{0.0};
+  };
 
-    struct rmc_t
-    {
-        bool isValid {false};
-        QDateTime datetime;
-        qreal lat {0.0};
-        qreal lon {0.0};
-        qreal groundSpeed {0.0};
-        qreal trackMadeGood {0.0};
-        qreal magneticVariation {0.0};
-    };
+  rmc_t rmc;
 
-    rmc_t rmc;
+  struct gga_t {
+    bool isValid{false};
+    QDateTime datetime;
+    qreal lat{0.0};
+    qreal lon{0.0};
+    qint32 quality{-1};
+    qint32 numSatelites{0};
+    qreal horizDilution{0.0};
+    qreal altAboveSeaLevel{0.0};
+    qreal geodialSeparation{0.0};
+    qreal age{0};
+    qint32 diffRefStation{0};
+  };
 
-    struct gga_t
-    {
-        bool isValid {false};
-        QDateTime datetime;
-        qreal lat  {0.0};
-        qreal lon  {0.0};
-        qint32 quality {-1};
-        qint32 numSatelites {0};
-        qreal horizDilution {0.0};
-        qreal altAboveSeaLevel {0.0};
-        qreal geodialSeparation {0.0};
-        qreal age {0};
-        qint32 diffRefStation {0};
-    };
+  gga_t gga;
 
-    gga_t gga;
+  struct vtg_t {
+    bool isValid{false};
+    qreal trackDegreesTrue{0.0};
+    qreal trackDegreesMagnetic{0.0};
+    qreal speedKnots{0.0};
+    qreal speedMeters{0.0};
+  };
 
-    struct vtg_t
-    {
-        bool isValid {false};
-        qreal trackDegreesTrue {0.0};
-        qreal trackDegreesMagnetic {0.0};
-        qreal speedKnots {0.0};
-        qreal speedMeters {0.0};
-    };
+  vtg_t vtg;
 
-    vtg_t vtg;
+  struct gsa_t {
+    bool isValid{false};
+    int fix{0};
+    qreal hdop{0.0};
+    qreal vdop{0.0};
+  };
 
-    struct gsa_t
-    {
-        bool isValid {false};
-        int fix {0};
-        qreal hdop {0.0};
-        qreal vdop {0.0};
-    };
-
-    gsa_t gsa;
+  gsa_t gsa;
 };
 
-#endif //CRTGPSINFO_H
+#endif  // CRTGPSINFO_H

@@ -23,21 +23,19 @@
 
 class QHelpEngine;
 
-class CHelpBrowser : public QTextBrowser
-{
-    Q_OBJECT
-public:
-    CHelpBrowser(QHelpEngine* helpEngine, QWidget* parent);
-    virtual ~CHelpBrowser() = default;
+class CHelpBrowser : public QTextBrowser {
+  Q_OBJECT
+ public:
+  CHelpBrowser(QHelpEngine* helpEngine, QWidget* parent);
+  virtual ~CHelpBrowser() = default;
 
-    QVariant loadResource(int type, const QUrl& name) override;
+  QVariant loadResource(int type, const QUrl& name) override;
 
-public slots:
-    void setSource(const QUrl& url) override;
+ public slots:
+  void setSource(const QUrl& url) override;
 
-private:
-    QHelpEngine* engine;
+ private:
+  QHelpEngine* engine;
 };
 
-#endif //CHELPBROWSER_H
-
+#endif  // CHELPBROWSER_H

@@ -24,70 +24,39 @@
 
 class GDALDataset;
 
+class CDrawContextPixel : public IDrawContext, public CGdalFile {
+  Q_OBJECT
+ public:
+  CDrawContextPixel(CCanvas* canvas, QObject* parent);
+  virtual ~CDrawContextPixel();
 
-class CDrawContextPixel : public IDrawContext, public CGdalFile
-{
-    Q_OBJECT
-public:
-    CDrawContextPixel(CCanvas* canvas, QObject* parent);
-    virtual ~CDrawContextPixel();
+  void setSourceFile(const QString& filename, bool resetContext) override;
 
-    void setSourceFile(const QString& filename, bool resetContext) override;
+  void unload() override { CGdalFile::unload(); }
 
-    void unload() override
-    {
-        CGdalFile::unload();
-    }
+  bool getIsValid() const override { return isValid; }
 
-    bool getIsValid() const override
-    {
-        return isValid;
-    }
+  QString getProjection() const override { return proj.getProjSrc(); }
 
-    QString getProjection() const override
-    {
-        return proj.getProjSrc();
-    }
+  const QTransform& getTrFwd() const override { return trFwd; }
 
-    const QTransform& getTrFwd() const override
-    {
-        return trFwd;
-    }
+  bool getNoData() const override { return hasNoData != -1; }
 
-    bool getNoData() const override
-    {
-        return hasNoData != -1;
-    }
+  int getRasterBandCount() const override { return rasterBandCount; }
 
-    int getRasterBandCount() const override
-    {
-        return rasterBandCount;
-    }
+  QString getInfo() const override { return CGdalFile::getInfo(); }
 
-    QString getInfo() const override
-    {
-        return CGdalFile::getInfo();
-    }
+  bool is32BitRgb() const override { return rasterBandCount >= 3; }
 
-    bool is32BitRgb() const override
-    {
-        return rasterBandCount >= 3;
-    }
+  QRectF getMapArea() const override { return QRectF(0, 0, xsize_px, ysize_px); }
 
+  void convertMap2Coord(QPointF& pt) const override;
+  void convertCoord2Map(QPointF& pt) const override;
+  void convertMap2Proj(QPointF& pt) const override;
+  void convertProj2Map(QPointF& pt) const override;
 
-    QRectF getMapArea() const override
-    {
-        return QRectF(0, 0, xsize_px, ysize_px);
-    }
-
-    void convertMap2Coord(QPointF& pt) const override;
-    void convertCoord2Map(QPointF& pt) const override;
-    void convertMap2Proj(QPointF& pt) const override;
-    void convertProj2Map(QPointF& pt) const override;
-
-protected:
-    void drawt(buffer_t& buf) override;
+ protected:
+  void drawt(buffer_t& buf) override;
 };
 
-#endif //CDRAWCONTEXTPIXEL_H
-
+#endif  // CDRAWCONTEXTPIXEL_H

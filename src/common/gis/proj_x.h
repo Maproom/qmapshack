@@ -20,52 +20,47 @@
 #define PROJ_X_H
 
 #include <proj.h>
-#include <QtCore>
 
+#include <QtCore>
 #include <functional>
 
-#define RAD_TO_DEG    57.295779513082321
-#define DEG_TO_RAD   .017453292519943296
+#define RAD_TO_DEG 57.295779513082321
+#define DEG_TO_RAD .017453292519943296
 
-class CProj
-{
-    Q_DECLARE_TR_FUNCTIONS(CProj)
-public:
-    CProj() = default;
-    CProj(const QString& crsSrc, const QString& crsTar);
-    virtual ~CProj();
+class CProj {
+  Q_DECLARE_TR_FUNCTIONS(CProj)
+ public:
+  CProj() = default;
+  CProj(const QString& crsSrc, const QString& crsTar);
+  virtual ~CProj();
 
-    void init(const char* crsSrc, const char* crsTar);
+  void init(const char* crsSrc, const char* crsTar);
 
-    void transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
-    void transform(QPointF& pt, PJ_DIRECTION dir) const;
-    void transform(QPolygonF& line, PJ_DIRECTION dir) const;
-    bool isValid() const {return nullptr != _pj;}
-    bool isSrcLatLong() const {return _isSrcLatLong;}
-    bool isTarLatLong() const {return _isTarLatLong;}
+  void transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
+  void transform(QPointF& pt, PJ_DIRECTION dir) const;
+  void transform(QPolygonF& line, PJ_DIRECTION dir) const;
+  bool isValid() const { return nullptr != _pj; }
+  bool isSrcLatLong() const { return _isSrcLatLong; }
+  bool isTarLatLong() const { return _isTarLatLong; }
 
-    QString getProjTar() const {return isValid() ? _strProjTar : "";}
-    QString getProjSrc() const {return isValid() ? _strProjSrc : "";}
+  QString getProjTar() const { return isValid() ? _strProjTar : ""; }
+  QString getProjSrc() const { return isValid() ? _strProjSrc : ""; }
 
-    using fErrMessage = std::function<void (const QString&)>;
+  using fErrMessage = std::function<void(const QString&)>;
 
-    static bool validProjStr(const QString projStr, bool allowLonLatToo, fErrMessage errMessage);
+  static bool validProjStr(const QString projStr, bool allowLonLatToo, fErrMessage errMessage);
 
-private:
-    void _transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
-    bool _isLatLong(const QString& crs) const;
+ private:
+  void _transform(qreal& lon, qreal& lat, PJ_DIRECTION dir) const;
+  bool _isLatLong(const QString& crs) const;
 
-    PJ_CONTEXT* _ctx = nullptr;
-    PJ* _pj = nullptr;
-    bool _isSrcLatLong = false;
-    bool _isTarLatLong = false;
+  PJ_CONTEXT* _ctx = nullptr;
+  PJ* _pj = nullptr;
+  bool _isSrcLatLong = false;
+  bool _isTarLatLong = false;
 
-    QString _strProjSrc;
-    QString _strProjTar;
+  QString _strProjSrc;
+  QString _strProjTar;
 };
 
-
-
-
-#endif //PROJ_X_H
-
+#endif  // PROJ_X_H

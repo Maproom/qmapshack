@@ -21,22 +21,21 @@
 
 #include <QTextEdit>
 
-class CTextEdit : public QTextEdit
-{
-    Q_OBJECT
+class CTextEdit : public QTextEdit {
+  Q_OBJECT
 
-public slots:
-    void paste();
+ public slots:
+  void paste();
 
-public:
-    CTextEdit(QWidget* parent = nullptr);
+ public:
+  CTextEdit(QWidget* parent = nullptr);
 
-    void setPastePlain(bool plain);
+  void setPastePlain(bool plain);
 
-protected:
-    void keyPressEvent(QKeyEvent* event) override;
+ protected:
+  void keyPressEvent(QKeyEvent* event) override;
 
-private:
-    bool pastePlain;
+ private:
+  bool pastePlain;
 };
-#endif // CTEXTEDIT_H
+#endif  // CTEXTEDIT_H

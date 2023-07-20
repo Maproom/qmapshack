@@ -16,28 +16,23 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSpeedConst.h"
 
 #include <QtWidgets>
 
-CFilterSpeedConst::CFilterSpeedConst(QWidget* parent)
-    : QWidget(parent)
-{
-    setupUi(this);
+#include "gis/trk/CGisItemTrk.h"
+
+CFilterSpeedConst::CFilterSpeedConst(QWidget* parent) : QWidget(parent) { setupUi(this); }
+
+void CFilterSpeedConst::loadSettings(QSettings& cfg) {
+  spinConstantSpeed->setValue(cfg.value("speed", 18.0 * IUnit::self().speedFactor).toDouble() *
+                              IUnit::self().speedFactor);
 }
 
-void CFilterSpeedConst::loadSettings(QSettings& cfg)
-{
-    spinConstantSpeed->setValue(cfg.value("speed", 18.0 * IUnit::self().speedFactor).toDouble() * IUnit::self().speedFactor);
+void CFilterSpeedConst::saveSettings(QSettings& cfg) {
+  cfg.setValue("speed", spinConstantSpeed->value() / IUnit::self().speedFactor);
 }
 
-void CFilterSpeedConst::saveSettings(QSettings& cfg)
-{
-    cfg.setValue("speed", spinConstantSpeed->value() / IUnit::self().speedFactor);
-}
-
-void CFilterSpeedConst::apply(CGisItemTrk& trk)
-{
-    trk.filterSpeed(spinConstantSpeed->value() / IUnit::self().speedFactor);
+void CFilterSpeedConst::apply(CGisItemTrk& trk) {
+  trk.filterSpeed(spinConstantSpeed->value() / IUnit::self().speedFactor);
 }

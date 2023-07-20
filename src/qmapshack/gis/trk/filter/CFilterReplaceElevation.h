@@ -19,27 +19,26 @@
 #ifndef CFILTERREPLACEELEVATION_H
 #define CFILTERREPLACEELEVATION_H
 
-#include "ui_IFilterReplaceElevation.h"
 #include <QWidget>
+
+#include "ui_IFilterReplaceElevation.h"
 
 class CGisItemTrk;
 
-class CFilterReplaceElevation : public QWidget, private Ui::IFilterReplaceElevation
-{
-    Q_OBJECT
-public:
-    CFilterReplaceElevation(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterReplaceElevation() = default;
+class CFilterReplaceElevation : public QWidget, private Ui::IFilterReplaceElevation {
+  Q_OBJECT
+ public:
+  CFilterReplaceElevation(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterReplaceElevation() = default;
 
-public slots:
-    void updateUi();
+ public slots:
+  void updateUi();
 
-private slots:
-    void slotApply();
+ private slots:
+  void slotApply();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CFILTERREPLACEELEVATION_H
-
+#endif  // CFILTERREPLACEELEVATION_H

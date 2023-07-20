@@ -16,18 +16,13 @@
 
 **********************************************************************************************/
 
-#include "dem/CDemDraw.h"
-#include "dem/IDem.h"
 #include "dem/IDemProp.h"
 
-IDemProp::IDemProp(IDem* demfile, CDemDraw* dem)
-    : demfile(demfile)
-    , dem(dem)
-{
-    connect(demfile, &IDem::sigPropertiesChanged, this, &IDemProp::slotPropertiesChanged);
+#include "dem/CDemDraw.h"
+#include "dem/IDem.h"
+
+IDemProp::IDemProp(IDem* demfile, CDemDraw* dem) : demfile(demfile), dem(dem) {
+  connect(demfile, &IDem::sigPropertiesChanged, this, &IDemProp::slotPropertiesChanged);
 }
 
-IDemProp::~IDemProp()
-{
-}
-
+IDemProp::~IDemProp() {}

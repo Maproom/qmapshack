@@ -19,41 +19,39 @@
 #ifndef CSCROPTRTE_H
 #define CSCROPTRTE_H
 
+#include <QWidget>
+
 #include "gis/IGisItem.h"
 #include "mouse/IScrOpt.h"
-
 #include "ui_IScrOptRte.h"
-#include <QWidget>
 
 class CGisItemRte;
 class IMouse;
 
-class CScrOptRte : public IScrOpt, private Ui::IScrOptRte
-{
-    Q_OBJECT
-public:
-    CScrOptRte(CGisItemRte* rte, const QPoint& point, IMouse* parent);
-    virtual ~CScrOptRte();
+class CScrOptRte : public IScrOpt, private Ui::IScrOptRte {
+  Q_OBJECT
+ public:
+  CScrOptRte(CGisItemRte* rte, const QPoint& point, IMouse* parent);
+  virtual ~CScrOptRte();
 
-    void draw(QPainter& p) override;
+  void draw(QPainter& p) override;
 
-private slots:
-    void slotEditDetails();
-    void slotDelete();
-    void slotCopy();
-    void slotCalc();
-    void slotReset();
-    void slotEdit();
-    void slotReverse();
-    void slotInstruction(bool on);
-    void slotToTrack();
-    void slotNogo();
-    void slotTags();
+ private slots:
+  void slotEditDetails();
+  void slotDelete();
+  void slotCopy();
+  void slotCalc();
+  void slotReset();
+  void slotEdit();
+  void slotReverse();
+  void slotInstruction(bool on);
+  void slotToTrack();
+  void slotNogo();
+  void slotTags();
 
-private:
-    IGisItem::key_t key;
-    QPointF anchor;
+ private:
+  IGisItem::key_t key;
+  QPointF anchor;
 };
 
-#endif //CSCROPTRTE_H
-
+#endif  // CSCROPTRTE_H

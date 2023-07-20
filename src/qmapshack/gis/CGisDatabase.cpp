@@ -17,59 +17,46 @@
 **********************************************************************************************/
 
 #include "gis/CGisDatabase.h"
-#include "gis/db/IDBFolderSql.h"
-#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
+#include "helpers/CSettings.h"
+
 CGisDatabase* CGisDatabase::pSelf = nullptr;
 
-CGisDatabase::CGisDatabase(QWidget* parent)
-    : QWidget(parent)
-{
-    pSelf = this;
-    setupUi(this);
+CGisDatabase::CGisDatabase(QWidget* parent) : QWidget(parent) {
+  pSelf = this;
+  setupUi(this);
 
-    SETTINGS;
-    treeDB->header()->restoreState(cfg.value("Database/treeDB/state", treeDB->header()->saveState()).toByteArray());
+  SETTINGS;
+  treeDB->header()->restoreState(cfg.value("Database/treeDB/state", treeDB->header()->saveState()).toByteArray());
 
-    connect(treeDB, &CGisListDB::sigChanged, this, &CGisDatabase::slotHelpText);
-    connect(actionShowSummaryDropZones, &QAction::toggled, widgetSummary, &CGisSummary::setVisible);
+  connect(treeDB, &CGisListDB::sigChanged, this, &CGisDatabase::slotHelpText);
+  connect(actionShowSummaryDropZones, &QAction::toggled, widgetSummary, &CGisSummary::setVisible);
 
-    QList<QAction*> actions;
-    actions << actionShowSummaryDropZones;
-    treeDB->addGlobalActions(actions);
+  QList<QAction*> actions;
+  actions << actionShowSummaryDropZones;
+  treeDB->addGlobalActions(actions);
 
-    actionShowSummaryDropZones->setChecked(cfg.value("Database/isSummaryVisible", true).toBool());
+  actionShowSummaryDropZones->setChecked(cfg.value("Database/isSummaryVisible", true).toBool());
 
-    QTimer::singleShot(1, this, &CGisDatabase::slotHelpText);
+  QTimer::singleShot(1, this, &CGisDatabase::slotHelpText);
 }
 
-CGisDatabase::~CGisDatabase()
-{
-    SETTINGS;
-    cfg.setValue("Database/treeDB/state", treeDB->header()->saveState());
-    cfg.setValue("Database/isSummaryVisible", actionShowSummaryDropZones->isChecked());
+CGisDatabase::~CGisDatabase() {
+  SETTINGS;
+  cfg.setValue("Database/treeDB/state", treeDB->header()->saveState());
+  cfg.setValue("Database/isSummaryVisible", actionShowSummaryDropZones->isChecked());
 }
 
-void CGisDatabase::slotHelpText()
-{
-    bool databaseAvailable = treeDB->topLevelItemCount() != 0;
-    frameHelp->setVisible(!databaseAvailable);
-    widgetSummary->setVisible(actionShowSummaryDropZones->isChecked());
+void CGisDatabase::slotHelpText() {
+  bool databaseAvailable = treeDB->topLevelItemCount() != 0;
+  frameHelp->setVisible(!databaseAvailable);
+  widgetSummary->setVisible(actionShowSummaryDropZones->isChecked());
 }
 
-void CGisDatabase::postEventForDb(QEvent* event)
-{
-    QCoreApplication::postEvent(treeDB, event);
-}
+void CGisDatabase::postEventForDb(QEvent* event) { QCoreApplication::postEvent(treeDB, event); }
 
-void CGisDatabase::sendEventForDb(QEvent* event)
-{
-    QCoreApplication::sendEvent(treeDB, event);
-}
+void CGisDatabase::sendEventForDb(QEvent* event) { QCoreApplication::sendEvent(treeDB, event); }
 
-void CGisDatabase::createDatabase()
-{
-    treeDB->slotAddDatabase();
-}
+void CGisDatabase::createDatabase() { treeDB->slotAddDatabase(); }

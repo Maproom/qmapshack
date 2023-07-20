@@ -19,34 +19,29 @@
 #ifndef IPOIITEM_H
 #define IPOIITEM_H
 
-#include "gis/IGisItem.h"
-#include "units/IUnit.h"
 #include <QPointF>
 #include <QSize>
 
-struct IPoiItem
-{
-    IPoiItem() : pos(NOPOINTF){}
-    QString name;
-    QString desc;
-    /// in radians
-    QPointF pos;
-    QString icon;
-    QList<IGisItem::link_t> links;
-    quint32 ele = NOINT;
+#include "gis/IGisItem.h"
+#include "units/IUnit.h"
+
+struct IPoiItem {
+  IPoiItem() : pos(NOPOINTF) {}
+  QString name;
+  QString desc;
+  /// in radians
+  QPointF pos;
+  QString icon;
+  QList<IGisItem::link_t> links;
+  quint32 ele = NOINT;
 };
 
-inline bool operator==(const IPoiItem& poi1, const IPoiItem& poi2)
-{
-    return poi1.name == poi2.name
-           && poi1.desc == poi2.desc
-           && poi1.pos == poi2.pos;
+inline bool operator==(const IPoiItem& poi1, const IPoiItem& poi2) {
+  return poi1.name == poi2.name && poi1.desc == poi2.desc && poi1.pos == poi2.pos;
 }
 
-inline uint qHash(const IPoiItem& poi, uint seed)
-{
-    return qHash(poi.name, seed) ^ qHash(poi.desc, seed) ^ qHash(poi.pos.x(), seed) ^ qHash(poi.pos.y(), seed);
+inline uint qHash(const IPoiItem& poi, uint seed) {
+  return qHash(poi.name, seed) ^ qHash(poi.desc, seed) ^ qHash(poi.pos.x(), seed) ^ qHash(poi.pos.y(), seed);
 }
 
-#endif //IPOIITEM_H
-
+#endif  // IPOIITEM_H

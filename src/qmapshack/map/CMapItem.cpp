@@ -16,10 +16,13 @@
 
 **********************************************************************************************/
 
+#include "map/CMapItem.h"
+
+#include <QtGui>
+
 #include "map/CMapDraw.h"
 #include "map/CMapGEMF.h"
 #include "map/CMapIMG.h"
-#include "map/CMapItem.h"
 #include "map/CMapJNX.h"
 #include "map/CMapMAP.h"
 #include "map/CMapRMAP.h"
@@ -27,249 +30,196 @@
 #include "map/CMapVRT.h"
 #include "map/CMapWMTS.h"
 #include "map/IMapProp.h"
-#include <QtGui>
 
 QRecursiveMutex CMapItem::mutexActiveMaps;
 
-CMapItem::CMapItem(QTreeWidget* parent, CMapDraw* map)
-    : QTreeWidgetItem(parent)
-    , map(map)
-{
-    // it's everything but not drag-n-drop until it gets activated
-    setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+CMapItem::CMapItem(QTreeWidget* parent, CMapDraw* map) : QTreeWidgetItem(parent), map(map) {
+  // it's everything but not drag-n-drop until it gets activated
+  setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 }
 
-CMapItem::~CMapItem()
-{
+CMapItem::~CMapItem() {}
+
+void CMapItem::setFilename(const QString& name) {
+  filename = name;
+
+  QFile f(filename);
+  f.open(QIODevice::ReadOnly);
+  QCryptographicHash md5(QCryptographicHash::Md5);
+  md5.addData(f.read(qMin(0x1000LL, f.size())));
+  key = md5.result().toHex();
+  f.close();
 }
 
-void CMapItem::setFilename(const QString& name)
-{
-    filename = name;
+void CMapItem::saveConfig(QSettings& cfg) const {
+  if (mapfile.isNull()) {
+    return;
+  }
 
-    QFile f(filename);
-    f.open(QIODevice::ReadOnly);
-    QCryptographicHash md5(QCryptographicHash::Md5);
-    md5.addData(f.read(qMin(0x1000LL, f.size())));
-    key = md5.result().toHex();
-    f.close();
+  cfg.beginGroup(key);
+  mapfile->saveConfig(cfg);
+  cfg.endGroup();
 }
 
-void CMapItem::saveConfig(QSettings& cfg) const
-{
-    if(mapfile.isNull())
-    {
-        return;
-    }
+void CMapItem::loadConfig(QSettings& cfg) {
+  if (mapfile.isNull()) {
+    return;
+  }
 
-    cfg.beginGroup(key);
-    mapfile->saveConfig(cfg);
-    cfg.endGroup();
+  cfg.beginGroup(key);
+  mapfile->loadConfig(cfg);
+  cfg.endGroup();
 }
 
-void CMapItem::loadConfig(QSettings& cfg)
-{
-    if(mapfile.isNull())
-    {
-        return;
-    }
+void CMapItem::showChildren(bool yes) {
+  if (yes && !mapfile.isNull()) {
+    QTreeWidget* tw = treeWidget();
 
-    cfg.beginGroup(key);
-    mapfile->loadConfig(cfg);
-    cfg.endGroup();
+    QTreeWidgetItem* item = new QTreeWidgetItem(this);
+    item->setFlags(Qt::ItemIsEnabled);
+    tw->setItemWidget(item, 0, mapfile->getSetup());
+  } else {
+    QList<QTreeWidgetItem*> items = takeChildren();
+    qDeleteAll(items);
+    delete mapfile->getSetup();
+  }
 }
 
+void CMapItem::updateIcon() {
+  if (filename.isEmpty()) {
+    return;
+  }
 
-void CMapItem::showChildren(bool yes)
-{
-    if(yes && !mapfile.isNull())
-    {
-        QTreeWidget* tw = treeWidget();
+  static QHash<QString, QString> icons{
+      {"rmap", "://icons/32x32/MimeRMAP.png"}, {"jnx", "://icons/32x32/MimeJNX.png"},
+      {"vrt", "://icons/32x32/MimeVRT.png"},   {"img", "://icons/32x32/MimeIMG.png"},
+      {"map", "://icons/32x32/MimeMAP.png"},   {"wmts", "://icons/32x32/MimeWMTS.png"},
+      {"tms", "://icons/32x32/MimeTMS.png"},   {"gemf", "://icons/32x32/MimeGEMF.png"}};
 
-        QTreeWidgetItem* item = new QTreeWidgetItem(this);
-        item->setFlags(Qt::ItemIsEnabled);
-        tw->setItemWidget(item, 0, mapfile->getSetup());
-    }
-    else
-    {
-        QList<QTreeWidgetItem*> items = takeChildren();
-        qDeleteAll(items);
-        delete mapfile->getSetup();
-    }
+  const QString& suffix = QFileInfo(filename).suffix().toLower();
+  QPixmap img(icons.contains(suffix) ? icons[suffix] : "://icons/32x32/Map.png");
+
+  setIcon(/* col */ 0, QIcon(img));
 }
 
-void CMapItem::updateIcon()
-{
-    if(filename.isEmpty())
-    {
-        return;
-    }
-
-    static QHash<QString, QString> icons {
-        {"rmap", "://icons/32x32/MimeRMAP.png"}
-        , {"jnx", "://icons/32x32/MimeJNX.png"}
-        , {"vrt", "://icons/32x32/MimeVRT.png"}
-        , {"img", "://icons/32x32/MimeIMG.png"}
-        , {"map", "://icons/32x32/MimeMAP.png"}
-        , {"wmts", "://icons/32x32/MimeWMTS.png"}
-        , {"tms", "://icons/32x32/MimeTMS.png"}
-        , {"gemf", "://icons/32x32/MimeGEMF.png"}
-    };
-
-    const QString& suffix = QFileInfo(filename).suffix().toLower();
-    QPixmap img( icons.contains(suffix) ? icons[suffix] : "://icons/32x32/Map.png" );
-
-    setIcon(/* col */ 0, QIcon(img));
+bool CMapItem::isActivated() {
+  QMutexLocker lock(&mutexActiveMaps);
+  return !mapfile.isNull();
 }
 
-bool CMapItem::isActivated()
-{
-    QMutexLocker lock(&mutexActiveMaps);
-    return !mapfile.isNull();
+bool CMapItem::toggleActivate() {
+  QMutexLocker lock(&mutexActiveMaps);
+  if (mapfile.isNull()) {
+    return activate();
+  } else {
+    deactivate();
+    return false;
+  }
 }
 
-bool CMapItem::toggleActivate()
-{
-    QMutexLocker lock(&mutexActiveMaps);
-    if(mapfile.isNull())
-    {
-        return activate();
-    }
-    else
-    {
-        deactivate();
-        return false;
-    }
+void CMapItem::deactivate() {
+  QMutexLocker lock(&mutexActiveMaps);
+
+  // remove mapfile setup dialog as child of this item
+  showChildren(false);
+
+  // remove mapfile object
+  delete mapfile;
+
+  // maybe used to reflect changes in the icon
+  updateIcon();
+  // move to bottom of the active map list
+  moveToBottom();
+
+  // deny drag-n-drop again
+  setFlags(flags() & ~Qt::ItemIsDragEnabled);
+
+  map->reportStatusToCanvas(text(0), "");
 }
 
-void CMapItem::deactivate()
-{
-    QMutexLocker lock(&mutexActiveMaps);
+bool CMapItem::activate() {
+  QMutexLocker lock(&mutexActiveMaps);
 
-    // remove mapfile setup dialog as child of this item
-    showChildren(false);
+  delete mapfile;
 
-    // remove mapfile object
+  // load map by suffix
+  QFileInfo fi(filename);
+  if (fi.suffix().toLower() == "rmap") {
+    mapfile = new CMapRMAP(filename, map);
+  } else if (fi.suffix().toLower() == "jnx") {
+    mapfile = new CMapJNX(filename, map);
+  } else if (fi.suffix().toLower() == "img") {
+    mapfile = new CMapIMG(filename, map);
+  } else if (fi.suffix().toLower() == "vrt") {
+    mapfile = new CMapVRT(filename, map);
+  } else if (fi.suffix().toLower() == "map") {
+    mapfile = new CMapMAP(filename, map);
+  } else if (fi.suffix().toLower() == "wmts") {
+    mapfile = new CMapWMTS(filename, map);
+  } else if (fi.suffix().toLower() == "tms") {
+    mapfile = new CMapTMS(filename, map);
+  } else if (fi.suffix().toLower() == "gemf") {
+    mapfile = new CMapGEMF(filename, map);
+  }
+
+  updateIcon();
+  // no mapfiles loaded? Bad.
+  if (mapfile.isNull()) {
+    return false;
+  }
+
+  // if map is activated successfully add to the list of map files
+  // else delete all previous loaded maps and abort
+  if (!mapfile->activated()) {
     delete mapfile;
+    return false;
+  }
 
-    // maybe used to reflect changes in the icon
-    updateIcon();
-    // move to bottom of the active map list
-    moveToBottom();
+  setToolTip(0, mapfile->getCopyright());
 
-    // deny drag-n-drop again
-    setFlags(flags() & ~Qt::ItemIsDragEnabled);
+  // append list of active map files
+  moveToBottom();
 
-    map->reportStatusToCanvas(text(0), "");
+  // an active map is subject to drag-n-drop
+  setFlags(flags() | Qt::ItemIsDragEnabled);
+
+  /*
+      As the map file setup is stored in the context of the CMapDraw object
+      the configuration has to be loaded via the CMapDraw object to select
+      the correct group context in the QSetting object.
+      This call will result into a call of loadConfig() of this CMapItem
+      object.
+   */
+  map->loadConfigForMapItem(this);
+
+  // Add the mapfile setup dialog as child of this item
+  showChildren(true);
+  return true;
 }
 
+void CMapItem::moveToTop() {
+  QTreeWidget* w = treeWidget();
+  QMutexLocker lock(&mutexActiveMaps);
 
-bool CMapItem::activate()
-{
-    QMutexLocker lock(&mutexActiveMaps);
+  w->takeTopLevelItem(w->indexOfTopLevelItem(this));
+  w->insertTopLevelItem(0, this);
 
-    delete mapfile;
-
-    // load map by suffix
-    QFileInfo fi(filename);
-    if(fi.suffix().toLower() == "rmap")
-    {
-        mapfile = new CMapRMAP(filename, map);
-    }
-    else if(fi.suffix().toLower() == "jnx")
-    {
-        mapfile = new CMapJNX(filename, map);
-    }
-    else if(fi.suffix().toLower() == "img")
-    {
-        mapfile = new CMapIMG(filename, map);
-    }
-    else if(fi.suffix().toLower() == "vrt")
-    {
-        mapfile = new CMapVRT(filename, map);
-    }
-    else if(fi.suffix().toLower() == "map")
-    {
-        mapfile = new CMapMAP(filename, map);
-    }
-    else if(fi.suffix().toLower() == "wmts")
-    {
-        mapfile = new CMapWMTS(filename, map);
-    }
-    else if(fi.suffix().toLower() == "tms")
-    {
-        mapfile = new CMapTMS(filename, map);
-    }
-    else if(fi.suffix().toLower() == "gemf")
-    {
-        mapfile = new CMapGEMF(filename, map);
-    }
-
-    updateIcon();
-    // no mapfiles loaded? Bad.
-    if(mapfile.isNull())
-    {
-        return false;
-    }
-
-    // if map is activated successfully add to the list of map files
-    // else delete all previous loaded maps and abort
-    if(!mapfile->activated())
-    {
-        delete mapfile;
-        return false;
-    }
-
-    setToolTip(0, mapfile->getCopyright());
-
-    // append list of active map files
-    moveToBottom();
-
-    // an active map is subject to drag-n-drop
-    setFlags(flags() | Qt::ItemIsDragEnabled);
-
-    /*
-        As the map file setup is stored in the context of the CMapDraw object
-        the configuration has to be loaded via the CMapDraw object to select
-        the correct group context in the QSetting object.
-        This call will result into a call of loadConfig() of this CMapItem
-        object.
-     */
-    map->loadConfigForMapItem(this);
-
-    // Add the mapfile setup dialog as child of this item
-    showChildren(true);
-    return true;
+  map->emitSigCanvasUpdate();
 }
 
-void CMapItem::moveToTop()
-{
-    QTreeWidget* w = treeWidget();
-    QMutexLocker lock(&mutexActiveMaps);
+void CMapItem::moveToBottom() {
+  int row;
+  QTreeWidget* w = treeWidget();
+  QMutexLocker lock(&mutexActiveMaps);
 
-    w->takeTopLevelItem(w->indexOfTopLevelItem(this));
-    w->insertTopLevelItem(0, this);
-
-    map->emitSigCanvasUpdate();
-}
-
-
-void CMapItem::moveToBottom()
-{
-    int row;
-    QTreeWidget* w = treeWidget();
-    QMutexLocker lock(&mutexActiveMaps);
-
-    w->takeTopLevelItem(w->indexOfTopLevelItem(this));
-    for(row = 0; row < w->topLevelItemCount(); row++)
-    {
-        CMapItem* item = dynamic_cast<CMapItem*>(w->topLevelItem(row));
-        if(item && item->mapfile.isNull())
-        {
-            break;
-        }
+  w->takeTopLevelItem(w->indexOfTopLevelItem(this));
+  for (row = 0; row < w->topLevelItemCount(); row++) {
+    CMapItem* item = dynamic_cast<CMapItem*>(w->topLevelItem(row));
+    if (item && item->mapfile.isNull()) {
+      break;
     }
-    w->insertTopLevelItem(row, this);
+  }
+  w->insertTopLevelItem(row, this);
 
-    map->emitSigCanvasUpdate();
+  map->emitSigCanvasUpdate();
 }

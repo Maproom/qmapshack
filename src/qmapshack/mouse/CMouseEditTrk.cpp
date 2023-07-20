@@ -17,103 +17,96 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "CMainWindow.h"
-#include "gis/CGisWorkspace.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "mouse/CMouseEditTrk.h"
 
 #include <QtWidgets>
 
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/CGisWorkspace.h"
+#include "gis/trk/CGisItemTrk.h"
+
 CMouseEditTrk::CMouseEditTrk(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseEditLine(IGisItem::key_t(), point, true, tr("Track"), gis, canvas, mouse)
-{
-    startNewLine(point);
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+    : IMouseEditLine(IGisItem::key_t(), point, true, tr("Track"), gis, canvas, mouse) {
+  startNewLine(point);
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 CMouseEditTrk::CMouseEditTrk(CGisItemTrk& trk, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseEditLine(trk.getKey(), trk, true, tr("Track"), gis, canvas, mouse)
-    , isNewLine(false)
-{
-    canvas->reportStatus(key.item, tr("<b>Edit Track Points</b><br/>Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.<br/>") + docPanning);
+    : IMouseEditLine(trk.getKey(), trk, true, tr("Track"), gis, canvas, mouse), isNewLine(false) {
+  canvas->reportStatus(key.item,
+                       tr("<b>Edit Track Points</b><br/>Select a function and a routing mode via the tool buttons. "
+                          "Next select a point of the line. Only points marked with a large square can be changed. The "
+                          "ones with a black dot are subpoints introduced by routing.<br/>") +
+                           docPanning);
 
-    // reset any focus the track might have.
-    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseEditTrk");
-    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CMouseEditTrk");
-    trk.looseUserFocus();
+  // reset any focus the track might have.
+  trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseEditTrk");
+  trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CMouseEditTrk");
+  trk.looseUserFocus();
 
-    /*
-        trigger complete update of GIS components to make sure all changes to
-        the originating object are reflected on the canvas
-     */
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+  /*
+      trigger complete update of GIS components to make sure all changes to
+      the originating object are reflected on the canvas
+   */
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-CMouseEditTrk::~CMouseEditTrk()
-{
-//    canvas->reportStatus(key,"");
+CMouseEditTrk::~CMouseEditTrk() {
+  //    canvas->reportStatus(key,"");
 }
 
-IGisLine* CMouseEditTrk::getGisLine() const
-{
-    return dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
+IGisLine* CMouseEditTrk::getGisLine() const {
+  return dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
 }
 
-void CMouseEditTrk::slotAbort()
-{
-    canvas->reportStatus(key.item, "");
-    IMouseEditLine::slotAbortEx(false);
+void CMouseEditTrk::slotAbort() {
+  canvas->reportStatus(key.item, "");
+  IMouseEditLine::slotAbortEx(false);
 }
 
-void CMouseEditTrk::slotCopyToOrig()
-{
-    canvas->reportStatus(key.item, "");
+void CMouseEditTrk::slotCopyToOrig() {
+  canvas->reportStatus(key.item, "");
 
-    if(!isNewLine)
-    {
-        QMessageBox::StandardButton button = QMessageBox::warning(canvas, tr("Warning!"), tr("This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently."), QMessageBox::Ok | QMessageBox::Abort, QMessageBox::Ok);
+  if (!isNewLine) {
+    QMessageBox::StandardButton button =
+        QMessageBox::warning(canvas, tr("Warning!"),
+                             tr("This will replace all data of the original by a simple line of coordinates. All other "
+                                "data will be lost permanently."),
+                             QMessageBox::Ok | QMessageBox::Abort, QMessageBox::Ok);
 
-        if(button != QMessageBox::Ok)
-        {
-            return;
-        }
+    if (button != QMessageBox::Ok) {
+      return;
     }
-    IMouseEditLine::slotCopyToOrig();
+  }
+  IMouseEditLine::slotCopyToOrig();
 }
 
+void CMouseEditTrk::slotCopyToNew() {
+  canvas->reportStatus(key.item, "");
 
-void CMouseEditTrk::slotCopyToNew()
-{
-    canvas->reportStatus(key.item, "");
+  if (points.size() < 2) {
+    return;
+  }
 
-    if(points.size() < 2)
-    {
-        return;
-    }
+  IGisProject* project = nullptr;
 
+  QString name;
+  CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
+  if (trk != nullptr) {
+    name = trk->getName();
+  }
 
-    IGisProject* project = nullptr;
+  if (!IGisItem::getNameAndProject(name, project, tr("track"))) {
+    return;
+  }
 
-    QString name;
-    CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
-    if(trk != nullptr)
-    {
-        name = trk->getName();
-    }
+  CMainWindow::self().getElevationAt(points);
 
-    if(!IGisItem::getNameAndProject(name, project, tr("track")))
-    {
-        return;
-    }
-
-
-    CMainWindow::self().getElevationAt(points);
-
-    {
-        QMutexLocker lock(&IGisItem::mutexItems);
-        new CGisItemTrk(points, name, project, NOIDX);
-    }
-    canvas->resetMouse();
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+  {
+    QMutexLocker lock(&IGisItem::mutexItems);
+    new CGisItemTrk(points, name, project, NOIDX);
+  }
+  canvas->resetMouse();
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }

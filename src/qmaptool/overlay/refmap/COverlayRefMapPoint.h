@@ -22,46 +22,32 @@
 #include <QCoreApplication>
 #include <QTreeWidgetItem>
 
-class COverlayRefMapPoint : public QTreeWidgetItem
-{
-    Q_DECLARE_TR_FUNCTIONS(COverlayRefMapPoint)
-public:
-    COverlayRefMapPoint(qint32 cnt, const QPointF& ptRef, const QPointF& ptPtx, QTreeWidget* parent);
-    virtual ~COverlayRefMapPoint() = default;
+class COverlayRefMapPoint : public QTreeWidgetItem {
+  Q_DECLARE_TR_FUNCTIONS(COverlayRefMapPoint)
+ public:
+  COverlayRefMapPoint(qint32 cnt, const QPointF& ptRef, const QPointF& ptPtx, QTreeWidget* parent);
+  virtual ~COverlayRefMapPoint() = default;
 
-    enum column_e
-    {
-        eColumnCnt
-        , eColumnXY
-        , eColumnLonLat
-    };
+  enum column_e { eColumnCnt, eColumnXY, eColumnLonLat };
 
-    void setPtPtx(const QPointF& pt);
-    void setPtRef(const QPointF& pt);
-    void setIndex(int n);
+  void setPtPtx(const QPointF& pt);
+  void setPtRef(const QPointF& pt);
+  void setIndex(int n);
 
-    const QPointF& getPtPtx() const
-    {
-        return ptPtx;
-    }
+  const QPointF& getPtPtx() const { return ptPtx; }
 
-    const QPointF& getPtRef() const
-    {
-        return ptRef;
-    }
+  const QPointF& getPtRef() const { return ptRef; }
 
-    bool operator<(const QTreeWidgetItem& p) const override
-    {
-        const COverlayRefMapPoint& pt = dynamic_cast<const COverlayRefMapPoint&>(p);
-        qreal v1 = ptPtx.y() * 1000000000 + ptPtx.x();
-        qreal v2 = pt.ptPtx.y() * 1000000000 + pt.ptPtx.x();
-        return v1 < v2;
-    }
+  bool operator<(const QTreeWidgetItem& p) const override {
+    const COverlayRefMapPoint& pt = dynamic_cast<const COverlayRefMapPoint&>(p);
+    qreal v1 = ptPtx.y() * 1000000000 + ptPtx.x();
+    qreal v2 = pt.ptPtx.y() * 1000000000 + pt.ptPtx.x();
+    return v1 < v2;
+  }
 
-private:
-    QPointF ptRef;
-    QPointF ptPtx;
+ private:
+  QPointF ptRef;
+  QPointF ptPtx;
 };
 
-#endif //COVERLAYREFMAPPOINT_H
-
+#endif  // COVERLAYREFMAPPOINT_H

@@ -19,24 +19,23 @@
 #ifndef CFILTERTERRAINSLOPE_H
 #define CFILTERTERRAINSLOPE_H
 
-#include "ui_IFilterTerrainSlope.h"
 #include <QWidget>
+
+#include "ui_IFilterTerrainSlope.h"
 
 class CGisItemTrk;
 
-class CFilterTerrainSlope : public QWidget, private Ui::IFilterTerrainSlope
-{
-    Q_OBJECT
-public:
-    CFilterTerrainSlope(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterTerrainSlope() = default;
+class CFilterTerrainSlope : public QWidget, private Ui::IFilterTerrainSlope {
+  Q_OBJECT
+ public:
+  CFilterTerrainSlope(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterTerrainSlope() = default;
 
-private slots:
-    void slotApply();
+ private slots:
+  void slotApply();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CFILTERTERRAINSLOPE_H
-
+#endif  // CFILTERTERRAINSLOPE_H

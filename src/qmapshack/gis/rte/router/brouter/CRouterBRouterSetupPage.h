@@ -23,24 +23,22 @@
 
 class CRouterBRouterSetup;
 
-class CRouterBRouterSetupPage : public QWizardPage
-{
-    Q_OBJECT
-public:
-    CRouterBRouterSetupPage();
-    virtual ~CRouterBRouterSetupPage();
+class CRouterBRouterSetupPage : public QWizardPage {
+  Q_OBJECT
+ public:
+  CRouterBRouterSetupPage();
+  virtual ~CRouterBRouterSetupPage();
 
-    bool isComplete() const override;
+  bool isComplete() const override;
 
-    void setSetup(CRouterBRouterSetup* newSetup) { setup = newSetup; }
-    void setComplete(bool newComplete);
+  void setSetup(CRouterBRouterSetup* newSetup) { setup = newSetup; }
+  void setComplete(bool newComplete);
 
-    void emitCompleteChanged();
+  void emitCompleteChanged();
 
-private:
-    CRouterBRouterSetup* setup { nullptr };
-    bool complete { false };
+ private:
+  CRouterBRouterSetup* setup{nullptr};
+  bool complete{false};
 };
 
-#endif //CROUTERBROUTERTILESPAGE_H
-
+#endif  // CROUTERBROUTERTILESPAGE_H

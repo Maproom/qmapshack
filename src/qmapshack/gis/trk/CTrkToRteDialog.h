@@ -19,7 +19,6 @@
 #ifndef CTRKTORTEDIALOG_H
 #define CTRKTORTEDIALOG_H
 
-#include "gis/CGisWorkspace.h"
 #include "gis/prj/IGisProject.h"
 #include "ui_ITrkToRteDialog.h"
 
@@ -28,31 +27,29 @@ class QTreeWidget;
 /*
  * Dialog Class for the track to route conversion.
  */
-class CTrkToRteDialog : public QDialog, private Ui::ITrkToRteDialog
-{
-    Q_OBJECT
-public:
-    /**
-       @brief Shows the Dialog and preselects the project and route name
-     */
-    CTrkToRteDialog(IGisProject*& project, QString& routeName, bool& saveSubPoints);
-    virtual ~CTrkToRteDialog();
+class CTrkToRteDialog : public QDialog, private Ui::ITrkToRteDialog {
+  Q_OBJECT
+ public:
+  /**
+     @brief Shows the Dialog and preselects the project and route name
+   */
+  CTrkToRteDialog(IGisProject*& project, QString& routeName, bool& saveSubPoints);
+  virtual ~CTrkToRteDialog();
 
-public slots:
-    void accept() override;
+ public slots:
+  void accept() override;
 
-private slots:
-    void slotProject();
-    void slotRouteChanged(const QString& text);
+ private slots:
+  void slotProject();
+  void slotRouteChanged(const QString& text);
 
-private:
-    void setType(IGisProject::type_e& t);
-    void buttonBoxEnabled();
+ private:
+  void setType(IGisProject::type_e& t);
+  void buttonBoxEnabled();
 
-    IGisProject*& project;
-    QString& routeName;
-    bool& saveSubPoints;
+  IGisProject*& project;
+  QString& routeName;
+  bool& saveSubPoints;
 };
 
-#endif //CTRKTORTEDIALOG_H
-
+#endif  // CTRKTORTEDIALOG_H

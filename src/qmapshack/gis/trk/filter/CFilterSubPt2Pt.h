@@ -19,24 +19,23 @@
 #ifndef CFILTERSUBPT2PT
 #define CFILTERSUBPT2PT
 
-#include "ui_IFilterSubPt2Pt.h"
 #include <QWidget>
+
+#include "ui_IFilterSubPt2Pt.h"
 
 class CGisItemTrk;
 
-class CFilterSubPt2Pt : public QWidget, private Ui::IFilterSubPt2Pt
-{
-    Q_OBJECT
-public:
-    CFilterSubPt2Pt(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterSubPt2Pt() = default;
+class CFilterSubPt2Pt : public QWidget, private Ui::IFilterSubPt2Pt {
+  Q_OBJECT
+ public:
+  CFilterSubPt2Pt(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterSubPt2Pt() = default;
 
-private slots:
-    void slotApply();
+ private slots:
+  void slotApply();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CFILTERSUBPT2PT
-
+#endif  // CFILTERSUBPT2PT

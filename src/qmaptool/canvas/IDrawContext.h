@@ -19,175 +19,159 @@
 #ifndef IDRAWCONTEXT_H
 #define IDRAWCONTEXT_H
 
-#include "canvas/CCanvas.h"
-#include "units/IUnit.h"
-
 #include <QMutex>
 #include <QThread>
+
+#include "canvas/CCanvas.h"
+#include "units/IUnit.h"
 class QPainter;
 class QSettings;
 
-class IDrawContext : public QThread
-{
-    Q_OBJECT
-public:
-    IDrawContext(CCanvas* canvas, QObject* parent);
-    virtual ~IDrawContext() = default;
+class IDrawContext : public QThread {
+  Q_OBJECT
+ public:
+  IDrawContext(CCanvas* canvas, QObject* parent);
+  virtual ~IDrawContext() = default;
 
-    virtual QString getInfo() const = 0;
+  virtual QString getInfo() const = 0;
 
-    virtual bool is32BitRgb() const = 0;
+  virtual bool is32BitRgb() const = 0;
 
-    virtual int getRasterBandCount() const = 0;
+  virtual int getRasterBandCount() const = 0;
 
-    virtual bool getNoData() const = 0;
+  virtual bool getNoData() const = 0;
 
-    virtual QString getProjection() const = 0;
+  virtual QString getProjection() const = 0;
 
-    virtual const QTransform& getTrFwd() const = 0;
+  virtual const QTransform& getTrFwd() const = 0;
 
-    virtual QRectF getMapArea() const = 0;
+  virtual QRectF getMapArea() const = 0;
 
-    virtual void setSourceFile(const QString& filename, bool resetContext) = 0;
+  virtual void setSourceFile(const QString& filename, bool resetContext) = 0;
 
-    virtual void unload() = 0;
+  virtual void unload() = 0;
 
-    virtual bool getIsValid() const = 0;
+  virtual bool getIsValid() const = 0;
 
-    virtual void saveSettings(QSettings& cfg) const;
+  virtual void saveSettings(QSettings& cfg) const;
 
-    virtual void loadSettings(QSettings& cfg);
+  virtual void loadSettings(QSettings& cfg);
 
-    void move(const QPointF& delta);
+  void move(const QPointF& delta);
 
-    void zoom(bool in, const QPointF& pt);
+  void zoom(bool in, const QPointF& pt);
 
-    bool needsRedraw() const;
+  bool needsRedraw() const;
 
-    void convertScreen2Map(QPointF& pt) const;
-    void convertMap2Screen(QPointF& pt) const;
-    void convertMap2Screen(QPolygonF& line) const;
-    void convertMap2Screen(QRectF& rect) const;
+  void convertScreen2Map(QPointF& pt) const;
+  void convertMap2Screen(QPointF& pt) const;
+  void convertMap2Screen(QPolygonF& line) const;
+  void convertMap2Screen(QRectF& rect) const;
 
-    /**
-       @brief Convert point in map to coordinates
+  /**
+     @brief Convert point in map to coordinates
 
-        Depending on the type and the reference information
-        of the map the result can be:
+      Depending on the type and the reference information
+      of the map the result can be:
 
-     * CGdalFile::eTypePixel: Pixel coordinates
-     * CGdalFile::eTypeProj: Geo coordinates, if the file
-          is referenced else pixel coordinates
-     */
-    virtual void convertMap2Coord(QPointF& pt) const = 0;
-    virtual void convertCoord2Map(QPointF& pt) const = 0;
+   * CGdalFile::eTypePixel: Pixel coordinates
+   * CGdalFile::eTypeProj: Geo coordinates, if the file
+        is referenced else pixel coordinates
+   */
+  virtual void convertMap2Coord(QPointF& pt) const = 0;
+  virtual void convertCoord2Map(QPointF& pt) const = 0;
 
-    /** Convert point in map to coordinates
+  /** Convert point in map to coordinates
 
-       Depending on the reference information of the map
-       the result can be:
+     Depending on the reference information of the map
+     the result can be:
 
-     * Referenced map: Geo coordinates
-     * Un-referenced map: Pixel coordinates
+   * Referenced map: Geo coordinates
+   * Un-referenced map: Pixel coordinates
 
-     */
-    virtual void convertMap2Proj(QPointF& pt) const
-    {
-        convertMap2Coord(pt);
-    }
+   */
+  virtual void convertMap2Proj(QPointF& pt) const { convertMap2Coord(pt); }
 
-    virtual void convertProj2Map(QPointF& pt) const
-    {
-        convertCoord2Map(pt);
-    }
+  virtual void convertProj2Map(QPointF& pt) const { convertCoord2Map(pt); }
 
-    /**
-       @brief draw
-       @param p
-       @param needsRedraw
-     */
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw);
+  /**
+     @brief draw
+     @param p
+     @param needsRedraw
+   */
+  void draw(QPainter& p, CCanvas::redraw_e needsRedraw);
 
-    void triggerCompleteUpdate(CCanvas::redraw_e flags) const
-    {
-        canvas->slotTriggerCompleteUpdate(flags);
-    }
+  void triggerCompleteUpdate(CCanvas::redraw_e flags) const { canvas->slotTriggerCompleteUpdate(flags); }
 
-    const CCanvas* getCanvas() const
-    {
-        return canvas;
-    }
+  const CCanvas* getCanvas() const { return canvas; }
 
-signals:
-    void sigDraw(QPainter& p);
+ signals:
+  void sigDraw(QPainter& p);
 
-protected slots:
-    void slotResize(const QSize& size);
+ protected slots:
+  void slotResize(const QSize& size);
 
-protected:
-    CCanvas* canvas;
+ protected:
+  CCanvas* canvas;
 
-    struct buffer_t
-    {
-        QImage image;
+  struct buffer_t {
+    QImage image;
 
-        QPointF zoomFactor {1.0, 1.0}; //< the zoomfactor used to draw the canvas
-        QPointF scale {1.0, 1.0}; //< the scale of the global viewport
+    QPointF zoomFactor{1.0, 1.0};  //< the zoomfactor used to draw the canvas
+    QPointF scale{1.0, 1.0};       //< the scale of the global viewport
 
-        QPointF ref1;  //< top left corner
-        QPointF ref2;  //< top right corner
-        QPointF ref3;  //< bottom right corner
-        QPointF ref4;  //< bottom left corner
-        QPointF focus; //< point of focus
-    };
+    QPointF ref1;   //< top left corner
+    QPointF ref2;   //< top right corner
+    QPointF ref3;   //< bottom right corner
+    QPointF ref4;   //< bottom left corner
+    QPointF focus;  //< point of focus
+  };
 
-    void run() override;
+  void run() override;
 
-    virtual void drawt(buffer_t& currentBuffer) = 0;
+  virtual void drawt(buffer_t& currentBuffer) = 0;
 
-    void zoom(int idx);
+  void zoom(int idx);
 
-    static QRecursiveMutex mutex;
+  static QRecursiveMutex mutex;
 
-    /// internal needs redraw flag
-    bool intNeedsRedraw = true;
+  /// internal needs redraw flag
+  bool intNeedsRedraw = true;
 
-    const CCanvas::redraw_e maskRedraw = CCanvas::eRedrawMap;
+  const CCanvas::redraw_e maskRedraw = CCanvas::eRedrawMap;
 
-    /// map canvas twin buffer
-    buffer_t buffer[2];
-    /// the main threads currently used map canvas buffer
-    bool bufIndex = false;
+  /// map canvas twin buffer
+  buffer_t buffer[2];
+  /// the main threads currently used map canvas buffer
+  bool bufIndex = false;
 
-    qreal bufWidth = 100;   //< buffer width [px]
-    qreal bufHeight = 100;  //< buffer height [px]
-    qreal viewWidth = 100;  //< the viewports width [px]
-    qreal viewHeight = 100; //< the viewports height [px]
+  qreal bufWidth = 100;    //< buffer width [px]
+  qreal bufHeight = 100;   //< buffer height [px]
+  qreal viewWidth = 100;   //< the viewports width [px]
+  qreal viewHeight = 100;  //< the viewports height [px]
 
-    QPointF focus {0, 0};
+  QPointF focus{0, 0};
 
-    /// the basic scale of the map canvas
-    QPointF scale = QPoint(1.0, 1.0);
+  /// the basic scale of the map canvas
+  QPointF scale = QPoint(1.0, 1.0);
 
-private:
-    void init();
+ private:
+  void init();
 
-    static const qreal scales[];
-    qint32 zoomFactorIdx = 6;
+  static const qreal scales[];
+  qint32 zoomFactorIdx = 6;
 
-    /// the actual used scaleFactor
-    QPointF zoomFactor {scales[zoomFactorIdx], scales[zoomFactorIdx]};
+  /// the actual used scaleFactor
+  QPointF zoomFactor{scales[zoomFactorIdx], scales[zoomFactorIdx]};
 
-    QPointF ref1; //< top left corner of next buffer
-    QPointF ref2; //< top right corner of next buffer
-    QPointF ref3; //< bottom right corner of next buffer
-    QPointF ref4; //< bottom left corner of next buffer
+  QPointF ref1;  //< top left corner of next buffer
+  QPointF ref2;  //< top right corner of next buffer
+  QPointF ref3;  //< bottom right corner of next buffer
+  QPointF ref4;  //< bottom left corner of next buffer
 };
 
 extern QPointF operator*(const QPointF& p1, const QPointF& p2);
 
 extern QPointF operator/(const QPointF& p1, const QPointF& p2);
 
-
-#endif //IDRAWCONTEXT_H
-
+#endif  // IDRAWCONTEXT_H

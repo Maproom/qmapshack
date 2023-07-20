@@ -19,6 +19,7 @@
 #ifndef COVERLAYREFMAP_H
 #define COVERLAYREFMAP_H
 
+#include "canvas/CCanvas.h"
 #include "overlay/IOverlay.h"
 #include "ui_IOverlayRefMap.h"
 #include "units/IUnit.h"
@@ -29,75 +30,70 @@ class QSettings;
 class CItemRefMap;
 class COverlayRefMapPoint;
 
-class COverlayRefMap : public IOverlay, private Ui::IOverlayRefMap
-{
-    Q_OBJECT
+class COverlayRefMap : public IOverlay, private Ui::IOverlayRefMap {
+  Q_OBJECT
 public:
-    COverlayRefMap(CItemRefMap* item, QStackedWidget* stackedWidget);
-    virtual ~COverlayRefMap() = default;
+  COverlayRefMap(CItemRefMap *item, QStackedWidget *stackedWidget);
+  virtual ~COverlayRefMap() = default;
 
-    void saveSettings(QSettings& cfg);
-    void loadSettings(QSettings& cfg);
+  void saveSettings(QSettings &cfg);
+  void loadSettings(QSettings &cfg);
 
-    void addRefPoints(QList<COverlayRefMapPoint*>& points);
-    QString getMapProjection() const;
-    const QList<COverlayRefMapPoint*> getRefPoints() const;
+  void addRefPoints(QList<COverlayRefMapPoint *> &points);
+  QString getMapProjection() const;
+  const QList<COverlayRefMapPoint *> getRefPoints() const;
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw);
-    void mouseMoveEventFx(QMouseEvent* e);
-    void mouseReleaseEventFx(QMouseEvent* e);
-    bool keyPressEventFx(QKeyEvent* e);
-    QCursor getCursorFx();
+  bool drawFx(QPainter &p, CCanvas::redraw_e needsRedraw);
+  void mouseMoveEventFx(QMouseEvent *e);
+  void mouseReleaseEventFx(QMouseEvent *e);
+  bool keyPressEventFx(QKeyEvent *e);
+  QCursor getCursorFx();
 
-    void abortStep();
+  void abortStep();
 
-    enum mode_e
-    {
-        eModeNone
-        , eModePointMove
-        , eModePointAdd
-        , eModePointDel
-        , eModePointMoveAuto
-    };
+  enum mode_e {
+    eModeNone,
+    eModePointMove,
+    eModePointAdd,
+    eModePointDel,
+    eModePointMoveAuto
+  };
 
-    bool isOk() const;
+  bool isOk() const;
 
 private slots:
-    void slotSetMode(COverlayRefMap::mode_e m, bool on);
-    void slotSaveGcp();
-    void slotLoadGcp();
-    void slotResetRef();
-    void slotProjWizard();
-    void slotGridTool();
-    void slotSelectionChanged();
-    void slotDelRefPoints();
-    void slotSortRefPoints();
-
+  void slotSetMode(COverlayRefMap::mode_e m, bool on);
+  void slotSaveGcp();
+  void slotLoadGcp();
+  void slotResetRef();
+  void slotProjWizard();
+  void slotGridTool();
+  void slotSelectionChanged();
+  void slotDelRefPoints();
+  void slotSortRefPoints();
 
 private:
-    void updateGui();
-    QPointF isCloseTo(QPointF pt);
+  void updateGui();
+  QPointF isCloseTo(QPointF pt);
 
-    void mouseMovePointAdd(const QPointF& pt);
-    void mouseMovePointDel(const QPointF& pt);
-    void mouseMovePointMove(const QPointF& pt);
+  void mouseMovePointAdd(const QPointF &pt);
+  void mouseMovePointDel(const QPointF &pt);
+  void mouseMovePointMove(const QPointF &pt);
 
-    void mouseReleasePointAdd(const QPointF& pt, Qt::MouseButton button);
-    void mouseReleasePointDel(const QPointF& pt, Qt::MouseButton button);
-    void mouseReleasePointMove(const QPointF& pt, Qt::MouseButton button);
+  void mouseReleasePointAdd(const QPointF &pt, Qt::MouseButton button);
+  void mouseReleasePointDel(const QPointF &pt, Qt::MouseButton button);
+  void mouseReleasePointMove(const QPointF &pt, Qt::MouseButton button);
 
-    IDrawContext* context;
-    CItemRefMap* item;
+  IDrawContext *context;
+  CItemRefMap *item;
 
-    mode_e mode = eModeNone;
+  mode_e mode = eModeNone;
 
-    QPointF ptFocus1 = NOPOINTF;
-    QPointF ptFocus2 = NOPOINTF;
-    bool movePoint = false;
+  QPointF ptFocus1 = NOPOINTF;
+  QPointF ptFocus2 = NOPOINTF;
+  bool movePoint = false;
 
-    QString gcpFilename;
+  QString gcpFilename;
 };
 
-#endif //COVERLAYREFMAP_H
-
-
+#endif // COVERLAYREFMAP_H

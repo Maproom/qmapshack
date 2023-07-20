@@ -18,18 +18,17 @@
 #ifndef CUNITSSETUP_H
 #define CUNITSSETUP_H
 
-#include "ui_IUnitsSetup.h"
 #include <QDialog>
 
-class CUnitsSetup : public QDialog, private Ui::IUnitsSetup
-{
-public:
-    CUnitsSetup(QWidget* parent);
-    virtual ~CUnitsSetup() = default;
+#include "ui_IUnitsSetup.h"
 
-public slots:
-    void accept() override;
+class CUnitsSetup : public QDialog, private Ui::IUnitsSetup {
+ public:
+  CUnitsSetup(QWidget* parent);
+  virtual ~CUnitsSetup() = default;
+
+ public slots:
+  void accept() override;
 };
 
-#endif //CUNITSSETUP_H
-
+#endif  // CUNITSSETUP_H

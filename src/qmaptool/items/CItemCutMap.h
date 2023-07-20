@@ -23,30 +23,28 @@
 
 class COverlayCutMap;
 
-class CItemCutMap : public CItemFile
-{
-public:
-    CItemCutMap(const QString& filename, QStackedWidget* stackedWidget, QListWidget* parent);
-    virtual ~CItemCutMap();
+class CItemCutMap : public CItemFile {
+ public:
+  CItemCutMap(const QString& filename, QStackedWidget* stackedWidget, QListWidget* parent);
+  virtual ~CItemCutMap();
 
-    void saveSettings(QSettings& cfg) override;
-    void loadSettings(QSettings& cfg) override;
+  void saveSettings(QSettings& cfg) override;
+  void loadSettings(QSettings& cfg) override;
 
-    void toFront() override;
+  void toFront() override;
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
-    void mouseMoveEventFx(QMouseEvent* e) override;
-    void mouseReleaseEventFx(QMouseEvent* e) override;
-    void leaveEventFx(QEvent* e) override;
-    QCursor getCursorFx() override;
+  bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
+  void mouseMoveEventFx(QMouseEvent* e) override;
+  void mouseReleaseEventFx(QMouseEvent* e) override;
+  void leaveEventFx(QEvent* e) override;
+  QCursor getCursorFx() override;
 
-    void saveShape(const QString& filename) const;
+  void saveShape(const QString& filename) const;
 
-    bool isOk() const override;
+  bool isOk() const override;
 
-private:
-    COverlayCutMap* overlay;
+ private:
+  COverlayCutMap* overlay;
 };
 
-#endif //CITEMCUTMAP_H
-
+#endif  // CITEMCUTMAP_H

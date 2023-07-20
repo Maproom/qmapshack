@@ -16,36 +16,32 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
-#include "helpers/CSettings.h"
-#include "units/IUnit.h"
 
 #include <QtWidgets>
 
-CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "helpers/CSettings.h"
+#include "units/IUnit.h"
 
-    spinBox->setSuffix(IUnit::self().baseUnit);
+CFilterDouglasPeuker::CFilterDouglasPeuker(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
 
-    SETTINGS;
-    spinBox->setValue(cfg.value("TrackDetails/Filter/DouglasPeuker/distance", 5).toInt());
+  spinBox->setSuffix(IUnit::self().baseUnit);
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterDouglasPeuker::slotApply);
+  SETTINGS;
+  spinBox->setValue(cfg.value("TrackDetails/Filter/DouglasPeuker/distance", 5).toInt());
+
+  connect(toolApply, &QToolButton::clicked, this, &CFilterDouglasPeuker::slotApply);
 }
 
-CFilterDouglasPeuker::~CFilterDouglasPeuker()
-{
-    SETTINGS;
-    cfg.setValue("TrackDetails/Filter/DouglasPeuker/distance", spinBox->value());
+CFilterDouglasPeuker::~CFilterDouglasPeuker() {
+  SETTINGS;
+  cfg.setValue("TrackDetails/Filter/DouglasPeuker/distance", spinBox->value());
 }
 
-void CFilterDouglasPeuker::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterReducePoints(spinBox->value() / IUnit::self().baseFactor);
+void CFilterDouglasPeuker::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterReducePoints(spinBox->value() / IUnit::self().baseFactor);
 }

@@ -25,60 +25,50 @@
 
 class CGisDraw;
 
-class IMouseSelect : public IMouse
-{
-    Q_OBJECT
-public:
-    IMouseSelect(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    virtual ~IMouseSelect();
+class IMouseSelect : public IMouse {
+  Q_OBJECT
+ public:
+  IMouseSelect(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  virtual ~IMouseSelect();
 
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
+  void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
-    void mouseMoved(const QPoint& pos) override;
-    void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
-    void leftButtonDown(const QPoint& pos) override;
-    void dragFinished(const QPoint& pos) override;
+  void mouseMoved(const QPoint& pos) override;
+  void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
+  void leftButtonDown(const QPoint& pos) override;
+  void dragFinished(const QPoint& pos) override;
 
-protected:
-    void rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const;
-    void rectRad2Deg(const QRectF& rectSrc, QRectF& rectTar) const;
-    void placeScrOpt();
+ protected:
+  void rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const;
+  void rectRad2Deg(const QRectF& rectSrc, QRectF& rectTar) const;
+  void placeScrOpt();
 
-    QPointF offset;
-    QPointF posInitial;
+  QPointF offset;
+  QPointF posInitial;
 
-    QRectF rectSelection;
-    QRectF rectTopLeft     {0, 0, 20, 20};
-    QRectF rectTopRight    {0, 0, 20, 20};
-    QRectF rectBottomLeft  {0, 0, 20, 20};
-    QRectF rectBottomRight {0, 0, 20, 20};
+  QRectF rectSelection;
+  QRectF rectTopLeft{0, 0, 20, 20};
+  QRectF rectTopRight{0, 0, 20, 20};
+  QRectF rectBottomLeft{0, 0, 20, 20};
+  QRectF rectBottomRight{0, 0, 20, 20};
 
-    enum state_e
-    {
-        eStateIdle
-        , eStateInitial
-        , eStateMap
-        , eStateMapMoving
-        , eStateResize
-    };
+  enum state_e { eStateIdle, eStateInitial, eStateMap, eStateMapMoving, eStateResize };
 
-    state_e state = eStateIdle;
+  state_e state = eStateIdle;
 
-    enum corner_e
-    {
-        eCornerNone
-        , eCornerTopLeft
-        , eCornerTopRight
-        , eCornerBottomLeft
-        , eCornerBottomRight
-        , eCornerPrint
-        , eCornerImage
-    };
+  enum corner_e {
+    eCornerNone,
+    eCornerTopLeft,
+    eCornerTopRight,
+    eCornerBottomLeft,
+    eCornerBottomRight,
+    eCornerPrint,
+    eCornerImage
+  };
 
-    corner_e corner = eCornerNone;
+  corner_e corner = eCornerNone;
 
-    QPointer<IScrOpt> scrOpt;
+  QPointer<IScrOpt> scrOpt;
 };
 
-#endif //IMOUSESELECT_H
-
+#endif  // IMOUSESELECT_H

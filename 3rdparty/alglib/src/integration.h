@@ -1,5 +1,5 @@
 /*************************************************************************
-ALGLIB 3.15.0 (source code generated 2019-02-20)
+ALGLIB 4.00.0 (source code generated 2023-05-21)
 Copyright (c) Sergey Bochkanov (ALGLIB project).
 
 >>> SOURCE LICENSE >>>
@@ -126,7 +126,7 @@ public:
     _autogkreport_owner& operator=(const _autogkreport_owner &rhs);
     virtual ~_autogkreport_owner();
     alglib_impl::autogkreport* c_ptr();
-    alglib_impl::autogkreport* c_ptr() const;
+    const alglib_impl::autogkreport* c_ptr() const;
 protected:
     alglib_impl::autogkreport *p_struct;
 };
@@ -161,7 +161,7 @@ public:
     _autogkstate_owner& operator=(const _autogkstate_owner &rhs);
     virtual ~_autogkstate_owner();
     alglib_impl::autogkstate* c_ptr();
-    alglib_impl::autogkstate* c_ptr() const;
+    const alglib_impl::autogkstate* c_ptr() const;
 protected:
     alglib_impl::autogkstate *p_struct;
 };
@@ -688,7 +688,7 @@ This function provides reverse communication interface
 Reverse communication interface is not documented or recommended to use.
 See below for functions which provide better documented API
 *************************************************************************/
-bool autogkiteration(const autogkstate &state, const xparams _xparams = alglib::xdefault);
+bool autogkiteration(autogkstate &state, const xparams _xparams = alglib::xdefault);
 
 
 /*************************************************************************
@@ -735,16 +735,16 @@ void autogkresults(const autogkstate &state, double &v, autogkreport &rep, const
 namespace alglib_impl
 {
 #if defined(AE_COMPILE_GQ) || !defined(AE_PARTIAL_BUILD)
-void gqgeneraterec(/* Real    */ ae_vector* alpha,
-     /* Real    */ ae_vector* beta,
+void gqgeneraterec(/* Real    */ const ae_vector* alpha,
+     /* Real    */ const ae_vector* beta,
      double mu0,
      ae_int_t n,
      ae_int_t* info,
      /* Real    */ ae_vector* x,
      /* Real    */ ae_vector* w,
      ae_state *_state);
-void gqgenerategausslobattorec(/* Real    */ ae_vector* alpha,
-     /* Real    */ ae_vector* beta,
+void gqgenerategausslobattorec(/* Real    */ const ae_vector* _alpha,
+     /* Real    */ const ae_vector* _beta,
      double mu0,
      double a,
      double b,
@@ -753,8 +753,8 @@ void gqgenerategausslobattorec(/* Real    */ ae_vector* alpha,
      /* Real    */ ae_vector* x,
      /* Real    */ ae_vector* w,
      ae_state *_state);
-void gqgenerategaussradaurec(/* Real    */ ae_vector* alpha,
-     /* Real    */ ae_vector* beta,
+void gqgenerategaussradaurec(/* Real    */ const ae_vector* _alpha,
+     /* Real    */ const ae_vector* _beta,
      double mu0,
      double a,
      ae_int_t n,
@@ -787,8 +787,8 @@ void gqgenerategausshermite(ae_int_t n,
      ae_state *_state);
 #endif
 #if defined(AE_COMPILE_GKQ) || !defined(AE_PARTIAL_BUILD)
-void gkqgeneraterec(/* Real    */ ae_vector* alpha,
-     /* Real    */ ae_vector* beta,
+void gkqgeneraterec(/* Real    */ const ae_vector* _alpha,
+     /* Real    */ const ae_vector* _beta,
      double mu0,
      ae_int_t n,
      ae_int_t* info,
@@ -840,20 +840,20 @@ void autogksingular(double a,
      autogkstate* state,
      ae_state *_state);
 ae_bool autogkiteration(autogkstate* state, ae_state *_state);
-void autogkresults(autogkstate* state,
+void autogkresults(const autogkstate* state,
      double* v,
      autogkreport* rep,
      ae_state *_state);
 void _autogkreport_init(void* _p, ae_state *_state, ae_bool make_automatic);
-void _autogkreport_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic);
+void _autogkreport_init_copy(void* _dst, const void* _src, ae_state *_state, ae_bool make_automatic);
 void _autogkreport_clear(void* _p);
 void _autogkreport_destroy(void* _p);
 void _autogkinternalstate_init(void* _p, ae_state *_state, ae_bool make_automatic);
-void _autogkinternalstate_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic);
+void _autogkinternalstate_init_copy(void* _dst, const void* _src, ae_state *_state, ae_bool make_automatic);
 void _autogkinternalstate_clear(void* _p);
 void _autogkinternalstate_destroy(void* _p);
 void _autogkstate_init(void* _p, ae_state *_state, ae_bool make_automatic);
-void _autogkstate_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic);
+void _autogkstate_init_copy(void* _dst, const void* _src, ae_state *_state, ae_bool make_automatic);
 void _autogkstate_clear(void* _p);
 void _autogkstate_destroy(void* _p);
 #endif

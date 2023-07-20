@@ -16,225 +16,181 @@
 
 **********************************************************************************************/
 
-#include "canvas/IDrawContext.h"
-#include "helpers/CDraw.h"
-#include "items/CItemRefMap.h"
 #include "overlay/gridtool/CGridSelArea.h"
 
 #include <QtWidgets>
 
-CGridSelArea::CGridSelArea(QWidget* parent)
-    : QWidget(parent)
-{
-    setupUi(this);
-    labelHelp->setText(tr("Select the area to be covered by the calculated reference points. Simply grab "
-                          "the corners of the selection rectangle with a left click and place them where "
-                          "you want with a second click."));
+#include "canvas/IDrawContext.h"
+#include "helpers/CDraw.h"
+#include "items/CItemRefMap.h"
+
+CGridSelArea::CGridSelArea(QWidget* parent) : QWidget(parent) {
+  setupUi(this);
+  labelHelp->setText(
+      tr("Select the area to be covered by the calculated reference points. Simply grab "
+         "the corners of the selection rectangle with a left click and place them where "
+         "you want with a second click."));
 }
 
+void CGridSelArea::registerItem(CItemRefMap* item) {
+  this->item = item;
 
-void CGridSelArea::registerItem(CItemRefMap* item)
-{
-    this->item = item;
-
-    if(item != nullptr)
-    {
-        context = item->getDrawContext();
-        if(context == nullptr)
-        {
-            this->item = nullptr;
-        }
+  if (item != nullptr) {
+    context = item->getDrawContext();
+    if (context == nullptr) {
+      this->item = nullptr;
     }
-    else
-    {
-        context = nullptr;
-    }
+  } else {
+    context = nullptr;
+  }
 }
 
-void CGridSelArea::saveSettings(QSettings& cfg)
-{
-    cfg.setValue("area", area);
+void CGridSelArea::saveSettings(QSettings& cfg) { cfg.setValue("area", area); }
+
+void CGridSelArea::loadSettings(QSettings& cfg) {
+  area = cfg.value("area", QRectF()).toRectF();
+  emit sigChanged();
 }
 
-void CGridSelArea::loadSettings(QSettings& cfg)
-{
-    area = cfg.value("area", QRectF()).toRectF();
-    emit sigChanged();
-}
+bool CGridSelArea::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) {
+  if (area.isEmpty()) {
+    return false;
+  }
 
-bool CGridSelArea::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw)
-{
-    if(area.isEmpty())
-    {
-        return false;
-    }
+  QRectF rect = area;
+  context->convertMap2Screen(rect);
 
-    QRectF rect = area;
-    context->convertMap2Screen(rect);
+  rectTopLeft.moveTopLeft(rect.topLeft());
+  rectTopRight.moveTopRight(rect.topRight());
+  rectBottomLeft.moveBottomLeft(rect.bottomLeft());
+  rectBottomRight.moveBottomRight(rect.bottomRight());
 
-    rectTopLeft.moveTopLeft(rect.topLeft());
-    rectTopRight.moveTopRight(rect.topRight());
-    rectBottomLeft.moveBottomLeft(rect.bottomLeft());
-    rectBottomRight.moveBottomRight(rect.bottomRight());
+  CDraw::drawRectangle(p, rectTopLeft, Qt::black, Qt::lightGray);
+  CDraw::drawRectangle(p, rectTopRight, Qt::black, Qt::lightGray);
+  CDraw::drawRectangle(p, rectBottomLeft, Qt::black, Qt::lightGray);
+  CDraw::drawRectangle(p, rectBottomRight, Qt::black, Qt::lightGray);
 
-    CDraw::drawRectangle(p, rectTopLeft, Qt::black, Qt::lightGray);
-    CDraw::drawRectangle(p, rectTopRight, Qt::black, Qt::lightGray);
-    CDraw::drawRectangle(p, rectBottomLeft, Qt::black, Qt::lightGray);
-    CDraw::drawRectangle(p, rectBottomRight, Qt::black, Qt::lightGray);
-
-    p.setBrush(Qt::red);
-    switch(corner)
-    {
+  p.setBrush(Qt::red);
+  switch (corner) {
     case eCornerTopLeft:
-        CDraw::drawRectangle(p, rectTopLeft, Qt::black, Qt::red);
-        break;
+      CDraw::drawRectangle(p, rectTopLeft, Qt::black, Qt::red);
+      break;
 
     case eCornerTopRight:
-        CDraw::drawRectangle(p, rectTopRight, Qt::black, Qt::red);
-        break;
+      CDraw::drawRectangle(p, rectTopRight, Qt::black, Qt::red);
+      break;
 
     case eCornerBottomLeft:
-        CDraw::drawRectangle(p, rectBottomLeft, Qt::black, Qt::red);
-        break;
+      CDraw::drawRectangle(p, rectBottomLeft, Qt::black, Qt::red);
+      break;
 
     case eCornerBottomRight:
-        CDraw::drawRectangle(p, rectBottomRight, Qt::black, Qt::red);
-        break;
-    }
+      CDraw::drawRectangle(p, rectBottomRight, Qt::black, Qt::red);
+      break;
+  }
 
-    CDraw::drawRectangle(p, rect, QPen(Qt::black), Qt::NoBrush);
+  CDraw::drawRectangle(p, rect, QPen(Qt::black), Qt::NoBrush);
 
-    return true;
+  return true;
 }
 
-void CGridSelArea::mouseMoveEventFx(QMouseEvent* e)
-{
-    switch(state)
-    {
-    case eStateIdle:
-    {
-        corner_e _corner = corner;
-        QPoint pos = e->pos();
-        if(rectTopLeft.contains(pos))
-        {
-            offset = pos - rectTopLeft.topLeft();
-            corner = eCornerTopLeft;
-        }
-        else if(rectTopRight.contains(pos))
-        {
-            offset = pos - rectTopRight.topRight();
-            corner = eCornerTopRight;
-        }
-        else if(rectBottomLeft.contains(pos))
-        {
-            offset = pos - rectBottomLeft.bottomLeft();
-            corner = eCornerBottomLeft;
-        }
-        else if(rectBottomRight.contains(pos))
-        {
-            offset = pos - rectBottomRight.bottomRight();
-            corner = eCornerBottomRight;
-        }
-        else
-        {
-            corner = eCornerNone;
-        }
+void CGridSelArea::mouseMoveEventFx(QMouseEvent* e) {
+  switch (state) {
+    case eStateIdle: {
+      corner_e _corner = corner;
+      QPoint pos = e->pos();
+      if (rectTopLeft.contains(pos)) {
+        offset = pos - rectTopLeft.topLeft();
+        corner = eCornerTopLeft;
+      } else if (rectTopRight.contains(pos)) {
+        offset = pos - rectTopRight.topRight();
+        corner = eCornerTopRight;
+      } else if (rectBottomLeft.contains(pos)) {
+        offset = pos - rectBottomLeft.bottomLeft();
+        corner = eCornerBottomLeft;
+      } else if (rectBottomRight.contains(pos)) {
+        offset = pos - rectBottomRight.bottomRight();
+        corner = eCornerBottomRight;
+      } else {
+        corner = eCornerNone;
+      }
 
-        if(corner != _corner)
-        {
-            context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
-        }
+      if (corner != _corner) {
+        context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
+      }
 
-        break;
+      break;
     }
 
-    case eStateMove:
-    {
-        QPointF pos = e->pos() - offset;
-        context->convertScreen2Map(pos);
+    case eStateMove: {
+      QPointF pos = e->pos() - offset;
+      context->convertScreen2Map(pos);
 
-        switch(corner)
-        {
+      switch (corner) {
         case eCornerTopLeft:
-            area.setTopLeft(pos);
-            break;
+          area.setTopLeft(pos);
+          break;
 
         case eCornerTopRight:
-            area.setTopRight(pos);
-            break;
+          area.setTopRight(pos);
+          break;
 
         case eCornerBottomLeft:
-            area.setBottomLeft(pos);
-            break;
+          area.setBottomLeft(pos);
+          break;
 
         case eCornerBottomRight:
-            area.setBottomRight(pos);
-            break;
-        }
+          area.setBottomRight(pos);
+          break;
+      }
 
-        emit sigChanged();
-        context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
+      emit sigChanged();
+      context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
+      break;
+    }
+  }
+}
+
+void CGridSelArea::mouseReleaseEventFx(QMouseEvent* e) {
+  if (e->button() == Qt::LeftButton) {
+    switch (state) {
+      case eStateIdle: {
+        if (corner != eCornerNone) {
+          areaSave = area;
+          state = eStateMove;
+        }
         break;
-    }
-    }
-}
+      }
 
-void CGridSelArea::mouseReleaseEventFx(QMouseEvent* e)
-{
-    if(e->button() == Qt::LeftButton)
-    {
-        switch(state)
-        {
-        case eStateIdle:
-        {
-            if(corner != eCornerNone)
-            {
-                areaSave = area;
-                state = eStateMove;
-            }
-            break;
-        }
-
-        case eStateMove:
-        {
-            corner = eCornerNone;
-            state = eStateIdle;
-            break;
-        }
-        }
-    }
-    else
-    {
-        area = areaSave;
-        state = eStateIdle;
+      case eStateMove: {
         corner = eCornerNone;
+        state = eStateIdle;
+        break;
+      }
     }
-    context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
-    emit sigChanged();
-}
-
-void CGridSelArea::leaveEventFx(QEvent* e)
-{
-}
-
-QCursor CGridSelArea::getCursorFx()
-{
-    return Qt::ArrowCursor;
-}
-
-
-void CGridSelArea::slotSetArea(const QRectF& rect)
-{
-    area = rect;
-    context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
-    emit sigChanged();
-}
-
-void CGridSelArea::slotReset()
-{
-    area = QRectF();
+  } else {
+    area = areaSave;
     state = eStateIdle;
     corner = eCornerNone;
-    context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
-    emit sigChanged();
+  }
+  context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
+  emit sigChanged();
+}
+
+void CGridSelArea::leaveEventFx(QEvent* e) {}
+
+QCursor CGridSelArea::getCursorFx() { return Qt::ArrowCursor; }
+
+void CGridSelArea::slotSetArea(const QRectF& rect) {
+  area = rect;
+  context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
+  emit sigChanged();
+}
+
+void CGridSelArea::slotReset() {
+  area = QRectF();
+  state = eStateIdle;
+  corner = eCornerNone;
+  context->triggerCompleteUpdate(CCanvas::eRedrawOverlay);
+  emit sigChanged();
 }

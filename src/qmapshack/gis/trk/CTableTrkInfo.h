@@ -20,46 +20,40 @@
 #define CTABLETRKINFO_H
 
 #include <gis/trk/CGisItemTrk.h>
+
 #include <QTreeWidget>
 
-class CTableTrkInfo : public QTreeWidget, public INotifyTrk
-{
-    Q_OBJECT
-public:
-    CTableTrkInfo(QWidget* parent);
-    virtual ~CTableTrkInfo();
+class CTableTrkInfo : public QTreeWidget, public INotifyTrk {
+  Q_OBJECT
+ public:
+  CTableTrkInfo(QWidget* parent);
+  virtual ~CTableTrkInfo();
 
-    void setTrack(CGisItemTrk* track);
+  void setTrack(CGisItemTrk* track);
 
-    void updateData() override;
-    void setMouseFocus(const CTrackData::trkpt_t* pt) override {}
-    void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override {}
-    void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
+  void updateData() override;
+  void setMouseFocus(const CTrackData::trkpt_t* pt) override {}
+  void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override {}
+  void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
 
-    enum columns_t
-    {
-        eColNum
-        , eColDesc
-        , eColMax
-    };
+  enum columns_t { eColNum, eColDesc, eColMax };
 
-signals:
-    void sigHasTrkPtInfo(bool yes);
+ signals:
+  void sigHasTrkPtInfo(bool yes);
 
-private slots:
-    void slotContextMenu(const QPoint& point);
-    void slotEdit();
-    void slotDelete();
+ private slots:
+  void slotContextMenu(const QPoint& point);
+  void slotEdit();
+  void slotDelete();
 
-    void slotItemChanged(QTreeWidgetItem* item, int column);
-    void slotItemSelectionChanged();
+  void slotItemChanged(QTreeWidgetItem* item, int column);
+  void slotItemSelectionChanged();
 
-private:
-    CGisItemTrk* trk = nullptr;
-    QAction* actionDelete;
-    QAction* actionEdit;
-    QMenu* menu;
+ private:
+  CGisItemTrk* trk = nullptr;
+  QAction* actionDelete;
+  QAction* actionEdit;
+  QMenu* menu;
 };
 
-#endif //CTABLETRKINFO_H
-
+#endif  // CTABLETRKINFO_H

@@ -19,24 +19,23 @@
 #ifndef CFILTERMEDIAN_H
 #define CFILTERMEDIAN_H
 
-#include "ui_IFilterMedian.h"
 #include <QWidget>
+
+#include "ui_IFilterMedian.h"
 
 class CGisItemTrk;
 
-class CFilterMedian : public QWidget, private Ui::IFilterMedian
-{
-    Q_OBJECT
-public:
-    CFilterMedian(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterMedian();
+class CFilterMedian : public QWidget, private Ui::IFilterMedian {
+  Q_OBJECT
+ public:
+  CFilterMedian(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterMedian();
 
-private slots:
-    void slotApply();
+ private slots:
+  void slotApply();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CFILTERMEDIAN_H
-
+#endif  // CFILTERMEDIAN_H

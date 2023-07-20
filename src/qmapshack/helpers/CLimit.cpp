@@ -17,189 +17,159 @@
 **********************************************************************************************/
 
 #include "helpers/CLimit.h"
-#include "helpers/CSettings.h"
 
+#include "helpers/CSettings.h"
 
 QSet<CLimit*> CLimit::allLimits;
 
-CLimit::CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto, fGetUnit getUnit, fMarkChanged markChanged)
-    : cfgPath(cfgPath)
-    , funcGetMin(getMin)
-    , funcGetMax(getMax)
-    , funcGetMinAuto(getMinAuto)
-    , funcGetMaxAuto(getMaxAuto)
-    , funcGetUnit(getUnit)
-    , funcMarkChanged(markChanged)
-{
-    allLimits << this;
+CLimit::CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto,
+               fGetUnit getUnit, fMarkChanged markChanged)
+    : cfgPath(cfgPath),
+      funcGetMin(getMin),
+      funcGetMax(getMax),
+      funcGetMinAuto(getMinAuto),
+      funcGetMaxAuto(getMaxAuto),
+      funcGetUnit(getUnit),
+      funcMarkChanged(markChanged) {
+  allLimits << this;
 }
 
-CLimit::~CLimit()
-{
-    allLimits.remove(this);
+CLimit::~CLimit() { allLimits.remove(this); }
+
+void CLimit::setMode(mode_e m) {
+  bool markAsChanged = mode != m;
+
+  mode = m;
+
+  if (markAsChanged) {
+    funcMarkChanged();
+  }
+
+  emit sigChanged();
 }
 
-void CLimit::setMode(mode_e m)
-{
-    bool markAsChanged = mode != m;
+void CLimit::setSource(const QString& src) {
+  bool isInitial = source.isEmpty();
+  if (source != src) {
+    source = src;
+    minUser = funcGetMin(source);
+    maxUser = funcGetMax(source);
+    if (!isInitial) {
+      funcMarkChanged();
+    }
+  }
+}
 
-    mode = m;
+qreal CLimit::getMin() const {
+  SETTINGS;
+  qreal val = NOFLOAT;
 
-    if(markAsChanged)
-    {
+  switch (mode) {
+    case eModeUser:
+      val = minUser;
+      break;
+
+    case eModeAuto:
+      val = funcGetMinAuto(source);
+      break;
+
+    case eModeSys:
+      cfg.beginGroup(cfgPath);
+      val = cfg.value(source + "/min", funcGetMin(source)).toReal();
+      cfg.endGroup();
+      break;
+  }
+
+  return val;
+}
+
+qreal CLimit::getMax() const {
+  SETTINGS;
+  qreal val = NOFLOAT;
+
+  switch (mode) {
+    case eModeUser:
+      val = maxUser;
+      break;
+
+    case eModeAuto:
+      val = funcGetMaxAuto(source);
+      break;
+
+    case eModeSys:
+      cfg.beginGroup(cfgPath);
+      val = cfg.value(source + "/max", funcGetMax(source)).toReal();
+      cfg.endGroup();
+      break;
+  }
+
+  return val;
+}
+
+void CLimit::setMin(const qreal& val) {
+  SETTINGS;
+
+  switch (mode) {
+    case eModeUser: {
+      bool markAsChanged = (minUser != NOFLOAT) && (minUser != val);
+      minUser = val;
+      if (markAsChanged) {
         funcMarkChanged();
+      }
+      break;
     }
 
+    case eModeSys: {
+      cfg.beginGroup(cfgPath);
+      cfg.setValue(source + "/min", val);
+      cfg.endGroup();
+
+      updateSys();
+      break;
+    }
+  }
+
+  emit sigChanged();
+}
+
+void CLimit::setMax(const qreal& val) {
+  SETTINGS;
+
+  switch (mode) {
+    case eModeUser: {
+      bool markAsChanged = (maxUser == NOFLOAT) && (maxUser != val);
+      maxUser = val;
+      if (markAsChanged) {
+        funcMarkChanged();
+      }
+      break;
+    }
+
+    case eModeSys: {
+      cfg.beginGroup(cfgPath);
+      cfg.setValue(source + "/max", val);
+      cfg.endGroup();
+
+      updateSys();
+      break;
+    }
+  }
+
+  emit sigChanged();
+}
+
+QString CLimit::getUnit() const { return funcGetUnit(source); }
+
+void CLimit::updateSys() {
+  for (CLimit* limit : qAsConst(allLimits)) {
+    if (limit != this) {
+      limit->updateSys(source);
+    }
+  }
+}
+
+void CLimit::updateSys(const QString& src) {
+  if ((mode == eModeSys) && (source == src)) {
     emit sigChanged();
-}
-
-void CLimit::setSource(const QString& src)
-{
-    bool isInitial = source.isEmpty();
-    if(source != src)
-    {
-        source = src;
-        minUser = funcGetMin(source);
-        maxUser = funcGetMax(source);
-        if(!isInitial)
-        {
-            funcMarkChanged();
-        }
-    }
-}
-
-qreal CLimit::getMin() const
-{
-    SETTINGS;
-    qreal val = NOFLOAT;
-
-    switch(mode)
-    {
-    case eModeUser:
-        val = minUser;
-        break;
-
-    case eModeAuto:
-        val = funcGetMinAuto(source);
-        break;
-
-    case eModeSys:
-        cfg.beginGroup(cfgPath);
-        val = cfg.value(source + "/min", funcGetMin(source)).toReal();
-        cfg.endGroup();
-        break;
-    }
-
-    return val;
-}
-
-qreal CLimit::getMax() const
-{
-    SETTINGS;
-    qreal val = NOFLOAT;
-
-    switch(mode)
-    {
-    case eModeUser:
-        val = maxUser;
-        break;
-
-    case eModeAuto:
-        val = funcGetMaxAuto(source);
-        break;
-
-    case eModeSys:
-        cfg.beginGroup(cfgPath);
-        val = cfg.value(source + "/max", funcGetMax(source)).toReal();
-        cfg.endGroup();
-        break;
-    }
-
-    return val;
-}
-
-void CLimit::setMin(const qreal& val)
-{
-    SETTINGS;
-
-    switch(mode)
-    {
-    case eModeUser:
-    {
-        bool markAsChanged = (minUser != NOFLOAT) && (minUser != val);
-        minUser = val;
-        if(markAsChanged)
-        {
-            funcMarkChanged();
-        }
-        break;
-    }
-
-    case eModeSys:
-    {
-        cfg.beginGroup(cfgPath);
-        cfg.setValue(source + "/min", val);
-        cfg.endGroup();
-
-        updateSys();
-        break;
-    }
-    }
-
-    emit sigChanged();
-}
-
-void CLimit::setMax(const qreal& val)
-{
-    SETTINGS;
-
-    switch(mode)
-    {
-    case eModeUser:
-    {
-        bool markAsChanged = (maxUser == NOFLOAT) && (maxUser != val);
-        maxUser = val;
-        if(markAsChanged)
-        {
-            funcMarkChanged();
-        }
-        break;
-    }
-
-    case eModeSys:
-    {
-        cfg.beginGroup(cfgPath);
-        cfg.setValue(source + "/max", val);
-        cfg.endGroup();
-
-        updateSys();
-        break;
-    }
-    }
-
-    emit sigChanged();
-}
-
-QString CLimit::getUnit() const
-{
-    return funcGetUnit(source);
-}
-
-void CLimit::updateSys()
-{
-    for(CLimit* limit : qAsConst(allLimits))
-    {
-        if(limit != this)
-        {
-            limit->updateSys(source);
-        }
-    }
-}
-
-void CLimit::updateSys(const QString& src)
-{
-    if((mode == eModeSys) && (source == src))
-    {
-        emit sigChanged();
-    }
+  }
 }

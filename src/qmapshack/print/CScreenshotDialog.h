@@ -24,25 +24,23 @@
 class CCanvas;
 class CGisItemTrk;
 
-class CScreenshotDialog : public QDialog, private Ui::IScreenshotDialog
-{
-    Q_OBJECT
-public:
-    CScreenshotDialog(CCanvas& canvas, QWidget* parent);
-    virtual ~CScreenshotDialog() = default;
+class CScreenshotDialog : public QDialog, private Ui::IScreenshotDialog {
+  Q_OBJECT
+ public:
+  CScreenshotDialog(CCanvas& canvas, QWidget* parent);
+  virtual ~CScreenshotDialog() = default;
 
-private slots:
-    void slotSave();
-    void slotPrint();
+ private slots:
+  void slotSave();
+  void slotPrint();
 
-private:
-    QPixmap getScreenshot(CGisItemTrk* trk);
-    CGisItemTrk* getTrackForProfile();
+ private:
+  QPixmap getScreenshot(CGisItemTrk* trk);
+  CGisItemTrk* getTrackForProfile();
 
-    CCanvas& canvas;
+  CCanvas& canvas;
 
-    static constexpr int heightProfile = 400;
+  static constexpr int heightProfile = 400;
 };
 
-#endif //CSCREENSHOTDIALOG_H
-
+#endif  // CSCREENSHOTDIALOG_H

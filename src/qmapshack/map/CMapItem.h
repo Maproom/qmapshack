@@ -28,85 +28,81 @@ class CMapDraw;
 class CMapPropSetup;
 class QSettings;
 
-class CMapItem : public QTreeWidgetItem
-{
-public:
-    CMapItem(QTreeWidget* parent, CMapDraw* map);
-    virtual ~CMapItem();
+class CMapItem : public QTreeWidgetItem {
+ public:
+  CMapItem(QTreeWidget* parent, CMapDraw* map);
+  virtual ~CMapItem();
 
-    void setFilename(const QString& name);
+  void setFilename(const QString& name);
 
-    void saveConfig(QSettings& cfg) const;
-    void loadConfig(QSettings& cfg);
+  void saveConfig(QSettings& cfg) const;
+  void loadConfig(QSettings& cfg);
 
-    /**
-       @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be synchronized.
-     */
-    static QRecursiveMutex mutexActiveMaps;
+  /**
+     @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be
+     synchronized.
+   */
+  static QRecursiveMutex mutexActiveMaps;
 
-    /**
-       @brief Query if map objects are loaded
-       @return True if the internal list of map objects is not empty.
-     */
-    bool isActivated();
-    /**
-       @brief Either loads or destroys internal map objects
-       @return True if the internal list of maps is not empty after the operation.
-     */
-    bool toggleActivate();
-    /**
-     * @brief Load all internal map objects
-     * @return Return true on success.
-     */
-    bool activate();
-    /**
-       @brief Delete all internal map objects
-     */
-    void deactivate();
-    /**
-       @brief Move item to top of list widget
-     */
-    void moveToTop();
-    /**
-       @brief Move item to bottom of active maps list
-     */
-    void moveToBottom();
+  /**
+     @brief Query if map objects are loaded
+     @return True if the internal list of map objects is not empty.
+   */
+  bool isActivated();
+  /**
+     @brief Either loads or destroys internal map objects
+     @return True if the internal list of maps is not empty after the operation.
+   */
+  bool toggleActivate();
+  /**
+   * @brief Load all internal map objects
+   * @return Return true on success.
+   */
+  bool activate();
+  /**
+     @brief Delete all internal map objects
+   */
+  void deactivate();
+  /**
+     @brief Move item to top of list widget
+   */
+  void moveToTop();
+  /**
+     @brief Move item to bottom of active maps list
+   */
+  void moveToBottom();
 
-    /**
-       @brief Set item's icon according to map type and state
-     */
-    void updateIcon();
+  /**
+     @brief Set item's icon according to map type and state
+   */
+  void updateIcon();
 
-    /**
-       @brief Show or hide child treewidget items
-       @param yes set true to add children, false will remove all children and delete the attached widgets
-     */
-    void showChildren(bool yes);
+  /**
+     @brief Show or hide child treewidget items
+     @param yes set true to add children, false will remove all children and delete the attached widgets
+   */
+  void showChildren(bool yes);
 
-    QString getName() const
-    {
-        return text(0);
-    }
+  QString getName() const { return text(0); }
 
-    QPointer<IMap>& getMapfile(){return mapfile;}
+  QPointer<IMap>& getMapfile() { return mapfile; }
 
-    const QString& getKey(){return key;}
+  const QString& getKey() { return key; }
 
-private:
-    CMapDraw* map;
-    /**
-       @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
-     */
-    QString key;
-    /**
-       @brief List of map files forming that particular map
-     */
-    QString filename;
-    /**
-       @brief List of loaded map objects when map is activated.
-     */
-    QPointer<IMap> mapfile;
+ private:
+  CMapDraw* map;
+  /**
+     @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
+   */
+  QString key;
+  /**
+     @brief List of map files forming that particular map
+   */
+  QString filename;
+  /**
+     @brief List of loaded map objects when map is activated.
+   */
+  QPointer<IMap> mapfile;
 };
 
-#endif //CMAPITEM_H
-
+#endif  // CMAPITEM_H

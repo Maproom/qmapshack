@@ -19,26 +19,25 @@
 #ifndef CFILTERDELETEEXTENSION_H
 #define CFILTERDELETEEXTENSION_H
 
-#include "ui_IFilterDeleteExtension.h"
 #include <QWidget>
+
+#include "ui_IFilterDeleteExtension.h"
 
 class CGisItemTrk;
 
-class CFilterDeleteExtension : public QWidget, private Ui::IFilterDeleteExtension
-{
-    Q_OBJECT
-public:
-    CFilterDeleteExtension(CGisItemTrk& trk, QWidget* parent);
-    virtual ~CFilterDeleteExtension() = default;
+class CFilterDeleteExtension : public QWidget, private Ui::IFilterDeleteExtension {
+  Q_OBJECT
+ public:
+  CFilterDeleteExtension(CGisItemTrk& trk, QWidget* parent);
+  virtual ~CFilterDeleteExtension() = default;
 
-    void updateUi();
+  void updateUi();
 
-private slots:
-    void slotApply();
+ private slots:
+  void slotApply();
 
-private:
-    CGisItemTrk& trk;
+ private:
+  CGisItemTrk& trk;
 };
 
-#endif //CFILTERDELETEEXTENSION_H
-
+#endif  // CFILTERDELETEEXTENSION_H

@@ -17,106 +17,90 @@
 **********************************************************************************************/
 
 #include "setup/CLogHandler.h"
+
 #include <iostream>
 
-
-CLogHandler::CLogHandler(QString logDirectory, bool writeToFile, bool debugOutput) :
-    writeToFile(writeToFile), debugOutput(debugOutput), logFile(QDir(logDirectory).absoluteFilePath(logfileName())),
-    fileStream(&logFile)
-{
-    if (writeToFile)
-    {
-        fileStream.setCodec("UTF-8");
-        logFile.open(QIODevice::WriteOnly | QIODevice::Append);
-    }
-    qSetMessagePattern("%{time yyyy-MM-dd h:mm:ss.zzz} [%{type}] %{message}");
+CLogHandler::CLogHandler(QString logDirectory, bool writeToFile, bool debugOutput)
+    : writeToFile(writeToFile),
+      debugOutput(debugOutput),
+      logFile(QDir(logDirectory).absoluteFilePath(logfileName())),
+      fileStream(&logFile) {
+  if (writeToFile) {
+    fileStream.setCodec("UTF-8");
+    logFile.open(QIODevice::WriteOnly | QIODevice::Append);
+  }
+  qSetMessagePattern("%{time yyyy-MM-dd h:mm:ss.zzz} [%{type}] %{message}");
 }
 
-void CLogHandler::log(QtMsgType type, const QMessageLogContext& context, const QString& msg)
-{
+void CLogHandler::log(QtMsgType type, const QMessageLogContext& context, const QString& msg) {
 #if QT_VERSION >= 0x050400
-    QString txt = qFormatLogMessage(type, context, msg);
+  QString txt = qFormatLogMessage(type, context, msg);
 #else
-    QString txt = msg;
+  QString txt = msg;
 #endif
-    printToConsole(type, txt);
-    appendToFile(type, txt);
+  printToConsole(type, txt);
+  appendToFile(type, txt);
 }
 
-void CLogHandler::printLoggerInfo()
-{
-    qDebug() << "Log configuration:" << "logfile=" << logFile.fileName() << "write to file=" << writeToFile <<
-        "debug output=" << debugOutput;
+void CLogHandler::printLoggerInfo() {
+  qDebug() << "Log configuration:"
+           << "logfile=" << logFile.fileName() << "write to file=" << writeToFile << "debug output=" << debugOutput;
 }
 
-QString CLogHandler::logfileName()
-{
-    const QStringList& domainSplit = QCoreApplication::organizationDomain().split(".");
-    QString fileName;
-    for(const QString& part : domainSplit)
-    {
-        fileName = fileName.insert(0, part + ".");
-    }
-    fileName.append(QCoreApplication::applicationName() + ".log");
-    return fileName;
+QString CLogHandler::logfileName() {
+  const QStringList& domainSplit = QCoreApplication::organizationDomain().split(".");
+  QString fileName;
+  for (const QString& part : domainSplit) {
+    fileName = fileName.insert(0, part + ".");
+  }
+  fileName.append(QCoreApplication::applicationName() + ".log");
+  return fileName;
 }
 
-
-void CLogHandler::appendToFile(QtMsgType type, QString formatedMsg)
-{
-    Q_UNUSED(type);
-    if (writeToFile)
-    {
-        fileStream << formatedMsg << Qt::endl;
-    }
+void CLogHandler::appendToFile(QtMsgType type, QString formatedMsg) {
+  Q_UNUSED(type);
+  if (writeToFile) {
+    fileStream << formatedMsg << Qt::endl;
+  }
 }
 
-
-void CLogHandler::printToConsole(QtMsgType type, QString formatedMsg)
-{
-    switch (type)
-    {
+void CLogHandler::printToConsole(QtMsgType type, QString formatedMsg) {
+  switch (type) {
     case QtDebugMsg:
-        if (debugOutput)
-        {
-            std::cout << formatedMsg.toUtf8().constData() << std::endl;
-        }
-        break;
+      if (debugOutput) {
+        std::cout << formatedMsg.toUtf8().constData() << std::endl;
+      }
+      break;
 
 #if QT_VERSION >= 0x050500
     case QtInfoMsg:
-        std::cout << formatedMsg.toUtf8().constData() << std::endl;
-        break;
+      std::cout << formatedMsg.toUtf8().constData() << std::endl;
+      break;
 
 #endif
     case QtWarningMsg:
-        std::cerr << formatedMsg.toUtf8().constData() << std::endl;
-        break;
+      std::cerr << formatedMsg.toUtf8().constData() << std::endl;
+      break;
 
     case QtCriticalMsg:
-        std::cerr << formatedMsg.toUtf8().constData() << std::endl;
-        break;
+      std::cerr << formatedMsg.toUtf8().constData() << std::endl;
+      break;
 
     case QtFatalMsg:
-        std::cerr << formatedMsg.toUtf8().constData() << std::endl;
-        abort();
-        break;
-    }
+      std::cerr << formatedMsg.toUtf8().constData() << std::endl;
+      abort();
+      break;
+  }
 }
 
 static CLogHandler* logHandler = nullptr;
 
-static void logCallback(QtMsgType type, const QMessageLogContext& context, const QString& msg)
-{
-    logHandler->log(type, context, msg);
+static void logCallback(QtMsgType type, const QMessageLogContext& context, const QString& msg) {
+  logHandler->log(type, context, msg);
 }
 
-
-void CLogHandler::initLogHandler(QString logDirectory, bool writeToFile, bool debugOutput)
-{
-    logHandler = new CLogHandler(logDirectory, writeToFile, debugOutput);
-    qInstallMessageHandler(logCallback);
-    logHandler->printLoggerInfo();
+void CLogHandler::initLogHandler(QString logDirectory, bool writeToFile, bool debugOutput) {
+  logHandler = new CLogHandler(logDirectory, writeToFile, debugOutput);
+  qInstallMessageHandler(logCallback);
+  logHandler->printLoggerInfo();
 }
-
-

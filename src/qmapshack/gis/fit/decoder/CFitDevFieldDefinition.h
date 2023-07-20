@@ -22,22 +22,21 @@
 #include <QtCore>
 
 // content of the field description messages
-class CFitDevFieldDefinition final
-{
-public:
-    CFitDevFieldDefinition(quint8 fieldNr, quint8 size, quint8 devDataIndex);
-    CFitDevFieldDefinition() = default;
+class CFitDevFieldDefinition final {
+ public:
+  CFitDevFieldDefinition(quint8 fieldNr, quint8 size, quint8 devDataIndex);
+  CFitDevFieldDefinition() = default;
 
-    QString fieldInfo() const;
+  QString fieldInfo() const;
 
-    quint8 getFieldNr() const;
-    quint8 getSize() const;
-    quint8 getDevDataIndex() const;
+  quint8 getFieldNr() const;
+  quint8 getSize() const;
+  quint8 getDevDataIndex() const;
 
-private:
-    quint8 fieldNr = 0;
-    quint8 size = 0;
-    quint8 devDataIndex = 0;
+ private:
+  quint8 fieldNr = 0;
+  quint8 size = 0;
+  quint8 devDataIndex = 0;
 };
 
-#endif // CFITDEVFIELDDEFINITION_H
+#endif  // CFITDEVFIELDDEFINITION_H

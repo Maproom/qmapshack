@@ -23,22 +23,19 @@
 
 class QDBusObjectPath;
 
-class CDeviceWatcherLinux : public IDeviceWatcher
-{
-    Q_OBJECT
-public:
-    CDeviceWatcherLinux(CGisListWks* parent);
-    virtual ~CDeviceWatcherLinux();
+class CDeviceWatcherLinux : public IDeviceWatcher {
+  Q_OBJECT
+ public:
+  CDeviceWatcherLinux(CGisListWks* parent);
+  virtual ~CDeviceWatcherLinux();
 
-private slots:
-    void slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map);
-    void slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list);
-    void slotUpdate() override;
+ private slots:
+  void slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map);
+  void slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list);
+  void slotUpdate() override;
 
-
-private:
-    QString readMountPoint(const QString& path);
+ private:
+  QString readMountPoint(const QString& path);
 };
 
-#endif //CDEVICEWATCHERLINUX_H
-
+#endif  // CDEVICEWATCHERLINUX_H

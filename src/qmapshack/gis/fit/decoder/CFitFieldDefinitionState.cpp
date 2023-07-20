@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/fit/decoder/CFitFieldDefinitionState.h"
+
 #include "gis/fit/defs/fit_const.h"
 
 /**
@@ -26,45 +27,38 @@
  * 2: base type
  */
 
-void CFitFieldDefinitionState::reset()
-{
-    offset = 0;
-}
+void CFitFieldDefinitionState::reset() { offset = 0; }
 
-decode_state_e CFitFieldDefinitionState::process(quint8& dataByte)
-{
-    switch (offset++)
-    {
+decode_state_e CFitFieldDefinitionState::process(quint8& dataByte) {
+  switch (offset++) {
     case 0:
-        // field definition number
-        defNr = dataByte;
-        break;
+      // field definition number
+      defNr = dataByte;
+      break;
 
     case 1:
-        // field data size
-        size = dataByte;
-        break;
+      // field data size
+      size = dataByte;
+      break;
 
     case 2:
-        // field base type
-        type = dataByte;
-        // get the previously (in RecordHeaderState) added definition message
-        CFitDefinitionMessage* def = latestDefinition();
-        // add the new field definition
-        def->addField(CFitFieldDefinition(def, defNr, size, type));
-        reset();
-        if (def->getFields().size() >= def->getNrOfFields())
-        {
-            if(def->developerFlag())
-            {
-                return eDecoderStateRecordContent;
-            }
-            FITDEBUG(2, qDebug() << latestDefinition()->messageInfo())
-            endDefinition();
-
-            return eDecoderStateRecord;
+      // field base type
+      type = dataByte;
+      // get the previously (in RecordHeaderState) added definition message
+      CFitDefinitionMessage* def = latestDefinition();
+      // add the new field definition
+      def->addField(CFitFieldDefinition(def, defNr, size, type));
+      reset();
+      if (def->getFields().size() >= def->getNrOfFields()) {
+        if (def->developerFlag()) {
+          return eDecoderStateRecordContent;
         }
-    }
+        FITDEBUG(2, qDebug() << latestDefinition()->messageInfo())
+        endDefinition();
 
-    return eDecoderStateFieldDef;
+        return eDecoderStateRecord;
+      }
+  }
+
+  return eDecoderStateFieldDef;
 }

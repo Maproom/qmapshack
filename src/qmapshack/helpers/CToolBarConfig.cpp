@@ -17,96 +17,69 @@
 
 **********************************************************************************************/
 
-#include "CSettings.h"
 #include "helpers/CToolBarConfig.h"
+
 #include <QAction>
 #include <QToolBar>
 
-CToolBarConfig::CToolBarConfig(QObject* const& parent, QToolBar* const& toolBar, const QList<QAction*>& availableActions, const QList<QAction*>& defaultActions)
-    : QObject(parent),
-    toolBar(toolBar),
-    available(availableActions),
-    defaultActions(defaultActions)
-{
+#include "CSettings.h"
+
+CToolBarConfig::CToolBarConfig(QObject* const& parent, QToolBar* const& toolBar,
+                               const QList<QAction*>& availableActions, const QList<QAction*>& defaultActions)
+    : QObject(parent), toolBar(toolBar), available(availableActions), defaultActions(defaultActions) {}
+
+CToolBarConfig::~CToolBarConfig() {}
+
+void CToolBarConfig::loadSettings() {
+  SETTINGS;
+  QStringList actions = cfg.value("ToolBar/actions").toStringList();
+  if (actions.isEmpty()) {
+    setDefaultConfiguredActions();
+  } else {
+    setConfiguredActionsByName(actions);
+  }
+  fullscreen = cfg.value("ToolBar/fullscreen", false).toBool();
 }
 
-CToolBarConfig::~CToolBarConfig()
-{
+void CToolBarConfig::saveSettings() const {
+  SETTINGS;
+  QStringList configuredNames;
+  for (QAction* const& action : configuredActions()) {
+    configuredNames << action->objectName();
+  }
+  cfg.setValue("ToolBar/actions", configuredNames);
+  cfg.setValue("ToolBar/fullscreen", fullscreen);
 }
 
-void CToolBarConfig::loadSettings()
-{
-    SETTINGS;
-    QStringList actions = cfg.value("ToolBar/actions").toStringList();
-    if (actions.isEmpty())
-    {
-        setDefaultConfiguredActions();
-    }
-    else
-    {
-        setConfiguredActionsByName(actions);
-    }
-    fullscreen = cfg.value("ToolBar/fullscreen", false).toBool();
-}
+const QList<QAction*>& CToolBarConfig::availableActions() const { return available; }
 
-void CToolBarConfig::saveSettings() const
-{
-    SETTINGS;
-    QStringList configuredNames;
-    for (QAction* const& action : configuredActions())
-    {
-        configuredNames << action->objectName();
-    }
-    cfg.setValue("ToolBar/actions", configuredNames);
-    cfg.setValue("ToolBar/fullscreen", fullscreen);
-}
+const QList<QAction*>& CToolBarConfig::configuredActions() const { return configured; }
 
-const QList<QAction*>& CToolBarConfig::availableActions() const
-{
-    return available;
-}
-
-const QList<QAction*>& CToolBarConfig::configuredActions() const
-{
-    return configured;
-}
-
-void CToolBarConfig::setConfiguredActionsByName(const QStringList& names)
-{
-    QList<QAction*> actions;
-    for (const QString& name : names)
-    {
-        for (QAction* const& action : available)
-        {
-            if (action->objectName() == name)
-            {
-                if (action->isSeparator())
-                {
-                    QAction* separator = new QAction(this);
-                    separator->setObjectName("separator");
-                    separator->setSeparator(true);
-                    actions << separator;
-                }
-                else
-                {
-                    actions << action;
-                }
-                break;
-            }
+void CToolBarConfig::setConfiguredActionsByName(const QStringList& names) {
+  QList<QAction*> actions;
+  for (const QString& name : names) {
+    for (QAction* const& action : available) {
+      if (action->objectName() == name) {
+        if (action->isSeparator()) {
+          QAction* separator = new QAction(this);
+          separator->setObjectName("separator");
+          separator->setSeparator(true);
+          actions << separator;
+        } else {
+          actions << action;
         }
+        break;
+      }
     }
-    setConfiguredActions(actions);
+  }
+  setConfiguredActions(actions);
 }
 
-void CToolBarConfig::setDefaultConfiguredActions()
-{
-    setConfiguredActions(defaultActions);
-}
+void CToolBarConfig::setDefaultConfiguredActions() { setConfiguredActions(defaultActions); }
 
-void CToolBarConfig::setConfiguredActions(const QList<QAction*>& actions)
-{
-    configured.clear();
-    configured << actions;
-    toolBar->clear();
-    toolBar->addActions(actions);
+void CToolBarConfig::setConfiguredActions(const QList<QAction*>& actions) {
+  configured.clear();
+  configured << actions;
+  toolBar->clear();
+  toolBar->addActions(actions);
 }

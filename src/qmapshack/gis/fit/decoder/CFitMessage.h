@@ -19,41 +19,40 @@
 #ifndef CFITMESSAGE_H
 #define CFITMESSAGE_H
 
-#include "gis/fit/decoder/CFitField.h"
-
 #include <QtCore>
+
+#include "gis/fit/decoder/CFitField.h"
 
 class CFitDefinitionMessage;
 class CFitProfile;
 class CFitFieldProfile;
 
-class CFitMessage final
-{
-public:
-    CFitMessage(const CFitDefinitionMessage& def);
-    CFitMessage();
+class CFitMessage final {
+ public:
+  CFitMessage(const CFitDefinitionMessage& def);
+  CFitMessage();
 
-    bool isValid() const;
-    quint16 getGlobalMesgNr() const { return globalMesgNr; }
-    quint8 getLocalMesgNr()   const { return localMesgNr; }
+  bool isValid() const;
+  quint16 getGlobalMesgNr() const { return globalMesgNr; }
+  quint8 getLocalMesgNr() const { return localMesgNr; }
 
-    bool hasField(const quint8 fieldDefNum) const;
+  bool hasField(const quint8 fieldDefNum) const;
 
-    bool isFieldValueValid(const quint8 fieldDefNum) const;
-    const QVariant getFieldValue(const quint8 fieldDefNum) const;
-    void addField(CFitField& field);
+  bool isFieldValueValid(const quint8 fieldDefNum) const;
+  const QVariant getFieldValue(const quint8 fieldDefNum) const;
+  void addField(CFitField& field);
 
-    const CFitProfile& profile() const { return *messageProfile; }
-    QStringList messageInfo() const;
-    QList<CFitField> getFields() const { return fields.values(); }
-    void updateFieldProfile(quint8 fieldDefNr, const CFitFieldProfile* fieldProfile);
+  const CFitProfile& profile() const { return *messageProfile; }
+  QStringList messageInfo() const;
+  QList<CFitField> getFields() const { return fields.values(); }
+  void updateFieldProfile(quint8 fieldDefNr, const CFitFieldProfile* fieldProfile);
 
-private:
-    QMap<quint8, CFitField> fields;
-    QMap<quint8, CFitField> devFields;
-    quint16 globalMesgNr;
-    quint8 localMesgNr;
-    const CFitProfile* messageProfile;
+ private:
+  QMap<quint8, CFitField> fields;
+  QMap<quint8, CFitField> devFields;
+  quint16 globalMesgNr;
+  quint8 localMesgNr;
+  const CFitProfile* messageProfile;
 };
 
-#endif //CFITMESSAGE_H
+#endif  // CFITMESSAGE_H

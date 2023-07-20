@@ -19,35 +19,34 @@
 #ifndef CAPPSETUPMAC_H
 #define CAPPSETUPMAC_H
 
-#include "setup/IAppSetup.h"
-
 #include <QtCore>
 
-class CAppSetupMac : public IAppSetup
-{
-public:
-    CAppSetupMac(QObject *parent) : IAppSetup(parent) { }
+#include "setup/IAppSetup.h"
 
-    ~CAppSetupMac() = default;
-    void initQMapTool() override;
+class CAppSetupMac : public IAppSetup {
+ public:
+  CAppSetupMac(QObject *parent) : IAppSetup(parent) {}
 
-    QString defaultCachePath() override;
-    QString userDataPath(QString subdir = 0) override;
-    QString logDir() override;
-    QString findExecutable(const QString &name) override;
-    QString helpFile() override;
+  ~CAppSetupMac() = default;
+  void initQMapTool() override;
 
-private:
-    QDir getApplicationDir(QString subdir);
-    void migrateDirContent(QString dest);
-    void extendPath();
+  QString defaultCachePath() override;
+  QString userDataPath(QString subdir = 0) override;
+  QString logDir() override;
+  QString findExecutable(const QString &name) override;
+  QString helpFile() override;
 
-    static const QString relTranslationDir;
-    static const QString relGdalDir;
-    static const QString relProjDir;
-    static const QString relHelpDir;
-    static const QString relBinDir;
-    static const QString relLogDir;
+ private:
+  QDir getApplicationDir(QString subdir);
+  void migrateDirContent(QString dest);
+  void extendPath();
+
+  static const QString relTranslationDir;
+  static const QString relGdalDir;
+  static const QString relProjDir;
+  static const QString relHelpDir;
+  static const QString relBinDir;
+  static const QString relLogDir;
 };
 
-#endif // CAPPSETUPMAC_H
+#endif  // CAPPSETUPMAC_H

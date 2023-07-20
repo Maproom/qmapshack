@@ -16,77 +16,62 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWorkspace.h"
-#include "helpers/CDraw.h"
-#include "mouse/IMouse.h"
 #include "mouse/IScrOpt.h"
-#include "units/IUnit.h"
+
 #include <QtWidgets>
 
+#include "CMainWindow.h"
+#include "gis/CGisWorkspace.h"
+#include "mouse/IMouse.h"
 
-IScrOpt::IScrOpt(IMouse* mouse)
-    : QWidget(mouse == nullptr ? nullptr : mouse->getCanvas())
-    , mouse(mouse)
-{
-    backgroundColor = palette().color(QPalette::Window);
-    setAttribute(Qt::WA_DeleteOnClose);
-    setFocusPolicy(Qt::WheelFocus);
+IScrOpt::IScrOpt(IMouse* mouse) : QWidget(mouse == nullptr ? nullptr : mouse->getCanvas()), mouse(mouse) {
+  backgroundColor = palette().color(QPalette::Window);
+  setAttribute(Qt::WA_DeleteOnClose);
+  setFocusPolicy(Qt::WheelFocus);
 }
 
-IScrOpt::~IScrOpt()
-{
-    if(hasFocus() && !mouse.isNull())
-    {
-        CCanvas::setOverrideCursor(*mouse, "IScrOpt::~IScrOpt");
-    }
-    CGisWorkspace::self().slotWksItemSelectionReset();
+IScrOpt::~IScrOpt() {
+  if (hasFocus() && !mouse.isNull()) {
+    CCanvas::setOverrideCursor(*mouse, "IScrOpt::~IScrOpt");
+  }
+  CGisWorkspace::self().slotWksItemSelectionReset();
 }
 
-void IScrOpt::moveTo(const QPoint& anchor)
-{
-    CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas == nullptr)
-    {
-        move(anchor + QPoint(-width() / 2, SCR_OPT_OFFSET));
-        return;
-    }
+void IScrOpt::moveTo(const QPoint& anchor) {
+  CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
+  if (canvas == nullptr) {
+    move(anchor + QPoint(-width() / 2, SCR_OPT_OFFSET));
+    return;
+  }
 
-    qint32 xmin = 0;
-    qint32 xmax = canvas->width() - width();
-    qint32 ymax = canvas->height() - height() - SCR_OPT_OFFSET;
+  qint32 xmin = 0;
+  qint32 xmax = canvas->width() - width();
+  qint32 ymax = canvas->height() - height() - SCR_OPT_OFFSET;
 
-    QPoint pt = anchor + QPoint(-width() / 2, SCR_OPT_OFFSET);
-    pt.rx() = qMax(xmin, pt.x());
-    pt.rx() = qMin(xmax, pt.x());
-    pt.ry() = qMin(ymax, pt.y());
+  QPoint pt = anchor + QPoint(-width() / 2, SCR_OPT_OFFSET);
+  pt.rx() = qMax(xmin, pt.x());
+  pt.rx() = qMin(xmax, pt.x());
+  pt.ry() = qMin(ymax, pt.y());
 
-    move(pt);
+  move(pt);
 }
 
-void IScrOpt::mouseMove(const QPoint& pos)
-{
-    mousePos = pos;
+void IScrOpt::mouseMove(const QPoint& pos) { mousePos = pos; }
+
+void IScrOpt::enterEvent(QEvent* e) {
+  QWidget::enterEvent(e);
+  CCanvas::restoreOverrideCursor("IScrOpt::enterEvent");
 }
 
-void IScrOpt::enterEvent(QEvent* e)
-{
-    QWidget::enterEvent(e);
-    CCanvas::restoreOverrideCursor("IScrOpt::enterEvent");
+void IScrOpt::leaveEvent(QEvent* e) {
+  QWidget::leaveEvent(e);
+  if (!mouse.isNull()) {
+    CCanvas::setOverrideCursor(*mouse, "IScrOpt::leaveEvent");
+  }
 }
 
-void IScrOpt::leaveEvent(QEvent* e)
-{
-    QWidget::leaveEvent(e);
-    if(!mouse.isNull())
-    {
-        CCanvas::setOverrideCursor(*mouse, "IScrOpt::leaveEvent");
-    }
-}
-
-void IScrOpt::slotLinkActivated(const QString& link)
-{
-    if(link.startsWith("http"))
-    {
-        QDesktopServices::openUrl(QUrl(link));
-    }
+void IScrOpt::slotLinkActivated(const QString& link) {
+  if (link.startsWith("http")) {
+    QDesktopServices::openUrl(QUrl(link));
+  }
 }

@@ -28,17 +28,16 @@
  */
 #define FITDEBUGLVL 0
 
-#define FITDEBUG(level, cmd) if(FITDEBUGLVL >= level) { cmd; }
+#define FITDEBUG(level, cmd)  \
+  if (FITDEBUGLVL >= level) { \
+    cmd;                      \
+  }
 
 static const quint8 fitLocalMesgNrInvalid = 255;
 static const quint16 fitGlobalMesgNrInvalid = 0xffff;
 static const quint8 fitFieldDefNrInvalid = 255;
 static const quint8 fitDevDataIndexInvalid = 255;
 
-typedef enum
-{
-    eFitArchEndianLittle = 0,
-    eFitArchEndianBig = 1
-}fit_arch_e;
+typedef enum { eFitArchEndianLittle = 0, eFitArchEndianBig = 1 } fit_arch_e;
 
-#endif // FIT_CONST_H
+#endif  // FIT_CONST_H

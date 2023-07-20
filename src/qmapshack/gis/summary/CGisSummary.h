@@ -23,49 +23,35 @@
 
 class CGisSummaryDropZone;
 
-class CGisSummary : public QWidget, private Ui::IGisSummary
-{
-    Q_OBJECT
-public:
-    CGisSummary(QWidget* parent);
-    virtual ~CGisSummary();
+class CGisSummary : public QWidget, private Ui::IGisSummary {
+  Q_OBJECT
+ public:
+  CGisSummary(QWidget* parent);
+  virtual ~CGisSummary();
 
-    enum dropzone_e
-    {
-        eDropZone1 = 0
-        , eDropZone2 = 1
-        , eDropZone3 = 2
-        , eDropZone4 = 3
-        , eDropZoneMax = 4
-    };
+  enum dropzone_e { eDropZone1 = 0, eDropZone2 = 1, eDropZone3 = 2, eDropZone4 = 3, eDropZoneMax = 4 };
 
-    struct folder_t
-    {
-        QString name;
-        QString db;
-        quint64 id = 0;
-    };
+  struct folder_t {
+    QString name;
+    QString db;
+    quint64 id = 0;
+  };
 
-    struct dropzone_t
-    {
-        QString name;
-        QList<folder_t> folders;
-        CGisSummaryDropZone* zone = nullptr;
-    };
+  struct dropzone_t {
+    QString name;
+    QList<folder_t> folders;
+    CGisSummaryDropZone* zone = nullptr;
+  };
 
-    dropzone_t& getDropZone(dropzone_e dropzone)
-    {
-        return dropZones[dropzone];
-    }
+  dropzone_t& getDropZone(dropzone_e dropzone) { return dropZones[dropzone]; }
 
-private slots:
-    void slotStartup();
-    void slotSetup();
+ private slots:
+  void slotStartup();
+  void slotSetup();
 
-private:
-    void setupDropZones();
-    QVector<dropzone_t> dropZones;
+ private:
+  void setupDropZones();
+  QVector<dropzone_t> dropZones;
 };
 
-#endif //CGISSUMMARY_H
-
+#endif  // CGISSUMMARY_H

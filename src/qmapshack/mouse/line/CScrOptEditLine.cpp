@@ -20,17 +20,12 @@
 
 #include <QtWidgets>
 
-CScrOptEditLine::CScrOptEditLine(IMouse* mouse)
-    : IScrOpt(mouse)
-{
-    setupUi(this);
+CScrOptEditLine::CScrOptEditLine(IMouse* mouse) : IScrOpt(mouse) {
+  setupUi(this);
 
-    move(0, 0);
-    adjustSize();
-    show();
+  move(0, 0);
+  adjustSize();
+  show();
 }
 
-CScrOptEditLine::~CScrOptEditLine()
-{
-}
-
+CScrOptEditLine::~CScrOptEditLine() {}

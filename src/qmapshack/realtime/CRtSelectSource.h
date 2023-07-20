@@ -23,22 +23,20 @@
 
 class CRtWorkspace;
 
-class CRtSelectSource : public QDialog, private Ui::IRtSelectSource
-{
-    Q_OBJECT
-public:
-    CRtSelectSource(CRtWorkspace& wks);
-    virtual ~CRtSelectSource();
+class CRtSelectSource : public QDialog, private Ui::IRtSelectSource {
+  Q_OBJECT
+ public:
+  CRtSelectSource(CRtWorkspace& wks);
+  virtual ~CRtSelectSource();
 
-public slots:
-    void accept() override;
+ public slots:
+  void accept() override;
 
-private slots:
-    void slotSelectionChanged();
+ private slots:
+  void slotSelectionChanged();
 
-private:
-    CRtWorkspace& wks;
+ private:
+  CRtWorkspace& wks;
 };
 
-#endif //CRTSELECTSOURCE_H
-
+#endif  // CRTSELECTSOURCE_H

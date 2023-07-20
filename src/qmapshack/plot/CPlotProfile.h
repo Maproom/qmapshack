@@ -19,31 +19,28 @@
 #ifndef CPLOTPROFILE_H
 #define CPLOTPROFILE_H
 
-
 #include "plot/IPlot.h"
 
 class CLimit;
 
-class CPlotProfile : public IPlot
-{
-    Q_OBJECT
-public:
-    CPlotProfile(QWidget* parent);
-    CPlotProfile(CGisItemTrk* trk, CLimit& lim, mode_e mode, QWidget* parent);
-    virtual ~CPlotProfile();
+class CPlotProfile : public IPlot {
+  Q_OBJECT
+ public:
+  CPlotProfile(QWidget* parent);
+  CPlotProfile(CGisItemTrk* trk, CLimit& lim, mode_e mode, QWidget* parent);
+  virtual ~CPlotProfile();
 
-    void setTrack(CGisItemTrk* track, CLimit& lim);
-    void updateData() override;
-    void setMouseFocus(const CTrackData::trkpt_t* ptMouseMove) override;
+  void setTrack(CGisItemTrk* track, CLimit& lim);
+  void updateData() override;
+  void setMouseFocus(const CTrackData::trkpt_t* ptMouseMove) override;
 
-public slots:
-    void setLimits();
-    void slotToggleWptLabels(bool on);
+ public slots:
+  void setLimits();
+  void slotToggleWptLabels(bool on);
 
-private:
-    void init();
-    CLimit* limit = nullptr;
+ private:
+  void init();
+  CLimit* limit = nullptr;
 };
 
-#endif //CPLOTPROFILE_H
-
+#endif  // CPLOTPROFILE_H

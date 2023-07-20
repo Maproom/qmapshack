@@ -19,43 +19,41 @@
 #ifndef CPHOTOALBUM_H
 #define CPHOTOALBUM_H
 
-#include "ui_IPhotoAlbum.h"
 #include <QWidget>
 
 #include "gis/wpt/CGisItemWpt.h"
+#include "ui_IPhotoAlbum.h"
 
-class CPhotoAlbum : public QWidget, private Ui::IPhotoAlbum
-{
-    Q_OBJECT
-public:
-    CPhotoAlbum(QWidget* parent);
-    virtual ~CPhotoAlbum();
+class CPhotoAlbum : public QWidget, private Ui::IPhotoAlbum {
+  Q_OBJECT
+ public:
+  CPhotoAlbum(QWidget* parent);
+  virtual ~CPhotoAlbum();
 
-    void reload(const QList<CGisItemWpt::image_t>& imgs);
+  void reload(const QList<CGisItemWpt::image_t>& imgs);
 
-signals:
-    void sigChanged(const QList<CGisItemWpt::image_t>& imgs);
+ signals:
+  void sigChanged(const QList<CGisItemWpt::image_t>& imgs);
 
-public slots:
-    void slotAddImage();
-    void slotDelImage();
+ public slots:
+  void slotAddImage();
+  void slotDelImage();
 
-protected:
-    void resizeEvent(QResizeEvent* e) override;
-    void mouseReleaseEvent(QMouseEvent* e) override;
+ protected:
+  void resizeEvent(QResizeEvent* e) override;
+  void mouseReleaseEvent(QMouseEvent* e) override;
 
-private slots:
-    void slotRight();
-    void slotLeft();
+ private slots:
+  void slotRight();
+  void slotLeft();
 
-private:
-    void updateView();
-    QList<CGisItemWpt::image_t> images;
-    QList<QRect> rects;
+ private:
+  void updateView();
+  QList<CGisItemWpt::image_t> images;
+  QList<QRect> rects;
 
-    qint32 idx1stVisible = 0;
-    qint32 idxSelected = 0;
+  qint32 idx1stVisible = 0;
+  qint32 idxSelected = 0;
 };
 
-#endif //CPHOTOALBUM_H
-
+#endif  // CPHOTOALBUM_H

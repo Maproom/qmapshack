@@ -17,154 +17,126 @@
 **********************************************************************************************/
 
 #include "CQlb.h"
+
+#include <QtCore>
+
 #include "qlgt/CQlgtDiary.h"
 #include "qlgt/CQlgtRoute.h"
 #include "qlgt/CQlgtTrack.h"
 #include "qlgt/CQlgtWpt.h"
 #include "qlgt/IQlgtOverlay.h"
 
+CQlb::CQlb(QObject* parent) : QObject(parent) {}
 
-#include <QtCore>
+CQlb::~CQlb() {}
 
-CQlb::CQlb(QObject* parent)
-    : QObject(parent)
-{
+CQlb& CQlb::operator<<(CQlgtWpt& wpt) {
+  QDataStream stream(&wpts, QIODevice::Append);
+  stream.setVersion(QDataStream::Qt_4_5);
+  stream << wpt;
+
+  return *this;
 }
 
+CQlb& CQlb::operator<<(CQlgtTrack& trk) {
+  QDataStream stream(&trks, QIODevice::Append);
+  stream.setVersion(QDataStream::Qt_4_5);
+  stream << trk;
 
-CQlb::~CQlb()
-{
+  return *this;
 }
 
+CQlb& CQlb::operator<<(CQlgtRoute& rte) {
+  QDataStream stream(&rtes, QIODevice::Append);
+  stream.setVersion(QDataStream::Qt_4_5);
+  stream << rte;
 
-CQlb& CQlb::operator <<(CQlgtWpt& wpt)
-{
-    QDataStream stream(&wpts, QIODevice::Append);
-    stream.setVersion(QDataStream::Qt_4_5);
-    stream << wpt;
-
-    return *this;
+  return *this;
 }
 
+CQlb& CQlb::operator<<(CQlgtDiary& dry) {
+  QDataStream stream(&drys, QIODevice::Append);
+  stream.setVersion(QDataStream::Qt_4_5);
+  stream << dry;
 
-CQlb& CQlb::operator <<(CQlgtTrack& trk)
-{
-    QDataStream stream(&trks, QIODevice::Append);
-    stream.setVersion(QDataStream::Qt_4_5);
-    stream << trk;
-
-    return *this;
+  return *this;
 }
 
+CQlb& CQlb::operator<<(IQlgtOverlay& ovl) {
+  QDataStream stream(&ovls, QIODevice::Append);
+  stream.setVersion(QDataStream::Qt_4_5);
+  stream << ovl;
 
-CQlb& CQlb::operator <<(CQlgtRoute& rte)
-{
-    QDataStream stream(&rtes, QIODevice::Append);
-    stream.setVersion(QDataStream::Qt_4_5);
-    stream << rte;
-
-    return *this;
+  return *this;
 }
 
-
-CQlb& CQlb::operator <<(CQlgtDiary& dry)
-{
-    QDataStream stream(&drys, QIODevice::Append);
-    stream.setVersion(QDataStream::Qt_4_5);
-    stream << dry;
-
-    return *this;
+void CQlb::load(const QString& filename) {
+  QFile file(filename);
+  load(&file);
 }
 
+void CQlb::load(QIODevice* ioDevice) {
+  qint32 type;
 
-CQlb& CQlb::operator <<(IQlgtOverlay& ovl)
-{
-    QDataStream stream(&ovls, QIODevice::Append);
-    stream.setVersion(QDataStream::Qt_4_5);
-    stream << ovl;
+  ioDevice->open(QIODevice::ReadOnly);
+  QDataStream stream(ioDevice);
+  stream.setVersion(QDataStream::Qt_4_5);
 
-    return *this;
-}
+  stream >> type;
+  while (type != eEnd) {
+    switch (type) {
+      case eWpt:
+        stream >> wpts;
+        break;
 
+      case eTrack:
+        stream >> trks;
+        break;
 
+      case eDiary:
+        stream >> drys;
+        break;
 
+      case eOverlay:
+        stream >> ovls;
+        break;
 
-void CQlb::load(const QString& filename)
-{
-    QFile file(filename);
-    load(&file);
-}
+      case eRoute:
+        stream >> rtes;
+        break;
 
+      case eMapSel:
+        stream >> sels;
+        break;
 
-void CQlb::load(QIODevice* ioDevice)
-{
-    qint32 type;
-
-    ioDevice->open(QIODevice::ReadOnly);
-    QDataStream stream(ioDevice);
-    stream.setVersion(QDataStream::Qt_4_5);
-
-    stream >> type;
-    while(type != eEnd)
-    {
-        switch(type)
-        {
-        case eWpt:
-            stream >> wpts;
-            break;
-
-        case eTrack:
-            stream >> trks;
-            break;
-
-        case eDiary:
-            stream >> drys;
-            break;
-
-        case eOverlay:
-            stream >> ovls;
-            break;
-
-        case eRoute:
-            stream >> rtes;
-            break;
-
-        case eMapSel:
-            stream >> sels;
-            break;
-
-        default:
-            ioDevice->close();
-            return;
-        }
-
-        stream >> type;
+      default:
+        ioDevice->close();
+        return;
     }
 
-    ioDevice->close();
+    stream >> type;
+  }
+
+  ioDevice->close();
 }
 
-
-void CQlb::save(const QString& filename)
-{
-    QFile file(filename);
-    save(&file);
+void CQlb::save(const QString& filename) {
+  QFile file(filename);
+  save(&file);
 }
 
+void CQlb::save(QIODevice* ioDevice) {
+  ioDevice->open(QIODevice::WriteOnly);
+  QDataStream stream(ioDevice);
+  stream.setVersion(QDataStream::Qt_4_5);
 
-void CQlb::save(QIODevice* ioDevice)
-{
-    ioDevice->open(QIODevice::WriteOnly);
-    QDataStream stream(ioDevice);
-    stream.setVersion(QDataStream::Qt_4_5);
+  stream << (qint32)eWpt << wpts;
+  stream << (qint32)eTrack << trks;
+  stream << (qint32)eRoute << rtes;
+  stream << (qint32)eDiary << drys;
+  stream << (qint32)eOverlay << ovls;
+  stream << (qint32)eMapSel << sels;
+  stream << (qint32)eEnd;
 
-    stream << (qint32)eWpt << wpts;
-    stream << (qint32)eTrack << trks;
-    stream << (qint32)eRoute << rtes;
-    stream << (qint32)eDiary << drys;
-    stream << (qint32)eOverlay << ovls;
-    stream << (qint32)eMapSel << sels;
-    stream << (qint32)eEnd;
-
-    ioDevice->close();
+  ioDevice->close();
 }

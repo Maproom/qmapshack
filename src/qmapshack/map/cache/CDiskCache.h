@@ -26,41 +26,39 @@
 
 class QTimer;
 
-class CDiskCache : public QObject
-{
-    Q_OBJECT
-public:
-    CDiskCache(const QString& path, qint32 size, qint32 days, QObject* parent);
-    virtual ~CDiskCache() = default;
+class CDiskCache : public QObject {
+  Q_OBJECT
+ public:
+  CDiskCache(const QString& path, qint32 size, qint32 days, QObject* parent);
+  virtual ~CDiskCache() = default;
 
-    void store(const QString& key, QImage& img);
-    void restore(const QString& key, QImage& img);
-    bool contains(const QString& key) const;
+  void store(const QString& key, QImage& img);
+  void restore(const QString& key, QImage& img);
+  bool contains(const QString& key) const;
 
-    static void cleanupRemovedMaps(const QSet<QString>& maps);
+  static void cleanupRemovedMaps(const QSet<QString>& maps);
 
-private slots:
-    void slotCleanup();
+ private slots:
+  void slotCleanup();
 
-private:
-    void removeCacheFile(const QFileInfo& fileinfo);
+ private:
+  void removeCacheFile(const QFileInfo& fileinfo);
 
-    QDir dir;
+  QDir dir;
 
-    const qint32 maxSizeMB;      //< maximum cache size in MB
-    const qint32 expirationDays; //< expiration time in days
+  const qint32 maxSizeMB;       //< maximum cache size in MB
+  const qint32 expirationDays;  //< expiration time in days
 
-    /// hash table to cache images as files on disc
-    QHash<QString, QString> table;
-    /// hash table to cache loaded images in memory
-    QHash<QString, QImage>  cache;
+  /// hash table to cache images as files on disc
+  QHash<QString, QString> table;
+  /// hash table to cache loaded images in memory
+  QHash<QString, QImage> cache;
 
-    QTimer* timer;
+  QTimer* timer;
 
-    QImage dummy {256, 256, QImage::Format_ARGB32};
+  QImage dummy{256, 256, QImage::Format_ARGB32};
 
-    mutable QMutex mutex;
+  mutable QMutex mutex;
 };
 
-#endif //CDISKCACHE_H
-
+#endif  // CDISKCACHE_H

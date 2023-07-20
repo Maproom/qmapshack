@@ -17,58 +17,49 @@
 **********************************************************************************************/
 
 #include "overlay/refmap/CDialogRefPoint.h"
-#include "units/IUnit.h"
 
 #include <QtWidgets>
 
+#include "units/IUnit.h"
+
 CDialogRefPoint::CDialogRefPoint(QPointF& ptPtx, QPointF& ptRef, QWidget* parent)
-    : QDialog(parent)
-    , ptPtx(ptPtx)
-    , ptRef(ptRef)
-{
-    setupUi(this);
-    connect(lineCoord, &QLineEdit::textEdited, this, &CDialogRefPoint::slotEditPosition);
+    : QDialog(parent), ptPtx(ptPtx), ptRef(ptRef) {
+  setupUi(this);
+  connect(lineCoord, &QLineEdit::textEdited, this, &CDialogRefPoint::slotEditPosition);
 
-    lineX->setText(QString::number(qRound(ptPtx.x())));
-    lineY->setText(QString::number(qRound(ptPtx.y())));
-    if(ptRef != NOPOINTF)
-    {
-        QString str;
-        if(IUnit::degToStr(ptRef.x(), ptRef.y(), str))
-        {
-            str = tr("bad coordinate");
-        }
-        lineCoord->setText(str);
+  lineX->setText(QString::number(qRound(ptPtx.x())));
+  lineY->setText(QString::number(qRound(ptPtx.y())));
+  if (ptRef != NOPOINTF) {
+    QString str;
+    if (IUnit::degToStr(ptRef.x(), ptRef.y(), str)) {
+      str = tr("bad coordinate");
     }
+    lineCoord->setText(str);
+  }
 
-    labelWarning->hide();
+  labelWarning->hide();
 }
 
-void CDialogRefPoint::slotEditPosition(const QString& str)
-{
-    labelWarning->setVisible(!IUnit::isValidCoordString(str));
+void CDialogRefPoint::slotEditPosition(const QString& str) {
+  labelWarning->setVisible(!IUnit::isValidCoordString(str));
 }
 
-void CDialogRefPoint::accept()
-{
-    bool ok;
-    ptPtx.setX(lineX->text().toInt(&ok));
-    if(!ok)
-    {
-        QMessageBox::warning(this, tr("Error"), tr("Bad value for X pixel."), QMessageBox::Ok);
-        return;
-    }
-    ptPtx.setY(lineY->text().toInt(&ok));
-    if(!ok)
-    {
-        QMessageBox::warning(this, tr("Error"), tr("Bad value for Y pixel."), QMessageBox::Ok);
-        return;
-    }
+void CDialogRefPoint::accept() {
+  bool ok;
+  ptPtx.setX(lineX->text().toInt(&ok));
+  if (!ok) {
+    QMessageBox::warning(this, tr("Error"), tr("Bad value for X pixel."), QMessageBox::Ok);
+    return;
+  }
+  ptPtx.setY(lineY->text().toInt(&ok));
+  if (!ok) {
+    QMessageBox::warning(this, tr("Error"), tr("Bad value for Y pixel."), QMessageBox::Ok);
+    return;
+  }
 
-    if(!IUnit::strToDeg(lineCoord->text(), ptRef.rx(), ptRef.ry()))
-    {
-        return;
-    }
+  if (!IUnit::strToDeg(lineCoord->text(), ptRef.rx(), ptRef.ry())) {
+    return;
+  }
 
-    QDialog::accept();
+  QDialog::accept();
 }

@@ -21,65 +21,57 @@
 
 #include <QCoreApplication>
 #include <QTreeWidgetItem>
+#include <QDateTime>
 
 class IDBFolder;
 class QSqlDatabase;
 
-class CDBItem : public QTreeWidgetItem
-{
-    Q_DECLARE_TR_FUNCTIONS(CDBItem)
-public:
-    CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent);
-    virtual ~CDBItem() = default;
+class CDBItem : public QTreeWidgetItem {
+  Q_DECLARE_TR_FUNCTIONS(CDBItem)
+ public:
+  CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent);
+  virtual ~CDBItem() = default;
 
-    /**
-       @brief Get the database id
-       @return The ID value used by the database
-     */
-    quint64 getId() const
-    {
-        return id;
-    }
+  /**
+     @brief Get the database id
+     @return The ID value used by the database
+   */
+  quint64 getId() const { return id; }
 
-    /**
-       @brief Get the item key
+  /**
+     @brief Get the item key
 
-       This is not the full blown QMapShack item key with project and device key. It's just the item key.
+     This is not the full blown QMapShack item key with project and device key. It's just the item key.
 
-       @return The string with the item key
-     */
-    const QString& getKey() const
-    {
-        return key;
-    }
+     @return The string with the item key
+   */
+  const QString& getKey() const { return key; }
 
+  QString getName() const;
 
-    QString getName() const;
+  /**
+     @brief Send show/hide events to the workspace
+   */
+  void toggle();
 
-    /**
-       @brief Send show/hide events to the workspace
-     */
-    void toggle();
+  /**
+     @brief Delete the folder/item relation in the database
+   */
+  void remove();
 
-    /**
-       @brief Delete the folder/item relation in the database
-     */
-    void remove();
+  /**
+     @brief Update the time the item is in the lost & found folder
+   */
+  void updateAge();
 
-    /**
-       @brief Update the time the item is in the lost & found folder
-     */
-    void updateAge();
+ private:
+  friend bool sortByTime(CDBItem* item1, CDBItem* item2);
+  QSqlDatabase& db;
+  quint64 id;
 
-private:
-    friend bool sortByTime(CDBItem* item1, CDBItem* item2);
-    QSqlDatabase& db;
-    quint64 id;
-
-    int type = 0;
-    QString key;
-    QDateTime date;
+  int type = 0;
+  QString key;
+  QDateTime date;
 };
 
-#endif //CDBITEM_H
-
+#endif  // CDBITEM_H

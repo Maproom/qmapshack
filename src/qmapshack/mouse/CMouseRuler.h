@@ -24,48 +24,40 @@
 
 class CScrOptRuler;
 
-class CMouseRuler : public IMouse
-{
-    Q_OBJECT
-public:
-    CMouseRuler(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    virtual ~CMouseRuler();
+class CMouseRuler : public IMouse {
+  Q_OBJECT
+ public:
+  CMouseRuler(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  virtual ~CMouseRuler();
 
+  void rightButtonDown(const QPoint& pos) override;
+  void leftClicked(const QPoint& pos) override;
+  void mouseMoved(const QPoint& pos) override;
+  void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
 
-    void rightButtonDown(const QPoint& pos) override;
-    void leftClicked(const QPoint& pos) override;
-    void mouseMoved(const QPoint& pos) override;
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) override;
+ private slots:
+  void slotUndo();
+  void slotRedo();
+  void slotReset();
 
-private slots:
-    void slotUndo();
-    void slotRedo();
-    void slotReset();
+  void slotToWpt();
+  void slotToTrk();
+  void slotToRte();
+  void slotToArea();
 
-    void slotToWpt();
-    void slotToTrk();
-    void slotToRte();
-    void slotToArea();
+ private:
+  void storeToHistory(const QPolygonF& line);
+  void updateStatus(const QPolygonF& line);
+  void meter2whatever(qreal meter, QString& val, QString& unit);
 
-private:
-    void storeToHistory(const QPolygonF& line);
-    void updateStatus(const QPolygonF& line);
-    void meter2whatever(qreal meter, QString& val, QString& unit);
+  enum mode_e { eModeIdle, eModePaused, eModeEdit };
 
-    enum mode_e
-    {
-        eModeIdle
-        , eModePaused
-        , eModeEdit
-    };
+  mode_e mode = eModePaused;
+  QPolygonF ruler;
+  qint32 idxHistory = NOIDX;
+  QList<QPolygonF> history;
 
-    mode_e mode = eModePaused;
-    QPolygonF ruler;
-    qint32 idxHistory = NOIDX;
-    QList<QPolygonF> history;
-
-    CScrOptRuler* scrOptRuler;
+  CScrOptRuler* scrOptRuler;
 };
 
-#endif //CMOUSERULER_H
-
+#endif  // CMOUSERULER_H

@@ -21,48 +21,25 @@
 
 #include "ui_IToolExportJnx.h"
 
-class CToolExportJnx : public QWidget, private Ui::IToolExportJnx
-{
-    Q_OBJECT
-public:
-    CToolExportJnx();
-    virtual ~CToolExportJnx() = default;
+class CToolExportJnx : public QWidget, private Ui::IToolExportJnx {
+  Q_OBJECT
+ public:
+  CToolExportJnx();
+  virtual ~CToolExportJnx() = default;
 
-    QString getProductName() const
-    {
-        return lineProductName->text();
-    }
+  QString getProductName() const { return lineProductName->text(); }
 
-    QString getDescription() const
-    {
-        return lineDescription->text();
-    }
+  QString getDescription() const { return lineDescription->text(); }
 
-    QString getCopyright() const
-    {
-        return lineCopyrightNotice->text();
-    }
+  QString getCopyright() const { return lineCopyrightNotice->text(); }
 
-    QString getProductId() const
-    {
-        return QString::number(spinProductId->value());
-    }
+  QString getProductId() const { return QString::number(spinProductId->value()); }
 
-    QString getJpegQuality() const
-    {
-        return QString::number(spinJpegQuality->value());
-    }
+  QString getJpegQuality() const { return QString::number(spinJpegQuality->value()); }
 
-    QString getJpegSubsampling() const
-    {
-        return comboJpegSubSampling->currentText();
-    }
+  QString getJpegSubsampling() const { return comboJpegSubSampling->currentText(); }
 
-    QString getZOrder() const
-    {
-        return QString::number(spinZOrder->value());
-    }
+  QString getZOrder() const { return QString::number(spinZOrder->value()); }
 };
 
-#endif //CTOOLEXPORTJNX_H
-
+#endif  // CTOOLEXPORTJNX_H

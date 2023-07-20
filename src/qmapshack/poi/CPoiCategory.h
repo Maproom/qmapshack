@@ -22,27 +22,20 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 
-class CPoiCategory : public QTreeWidgetItem
-{
-public:
-    CPoiCategory(const QString& categoryName, quint64 categoryID, Qt::CheckState checkedState, CPoiCategory* parent);
-    CPoiCategory(const QString& categoryName, quint64 categoryID, QTreeWidget* parent);
+class CPoiCategory : public QTreeWidgetItem {
+ public:
+  CPoiCategory(const QString& categoryName, quint64 categoryID, Qt::CheckState checkedState, CPoiCategory* parent);
+  CPoiCategory(const QString& categoryName, quint64 categoryID, QTreeWidget* parent);
 
-    const QString& getCategory() const
-    {
-        return categoryName;
-    }
+  const QString& getCategory() const { return categoryName; }
 
-    quint64 getId() const
-    {
-        return categoryID;
-    }
+  quint64 getId() const { return categoryID; }
 
-    Qt::CheckState checkState() const;
+  Qt::CheckState checkState() const;
 
-private:
-    const QString categoryName;
-    const quint64 categoryID;
+ private:
+  const QString categoryName;
+  const quint64 categoryID;
 };
 
-#endif // CPOICATEGORY_H
+#endif  // CPOICATEGORY_H

@@ -25,38 +25,36 @@ class CFitFieldDefinition;
 class CFitFieldProfile;
 class CFitBaseType;
 
-class CFitField final
-{
-public:
-    CFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, QVariant value, bool valid);
-    CFitField(quint16 globalMesgNr, quint8 fieldDefNr, const CFitFieldProfile* profile, QVariant value, bool valid);
-    CFitField(const CFitField& copy);
-    CFitField();
-    virtual ~CFitField() { /* nothing to do here, profile and base type are global and not to delete */ }
+class CFitField final {
+ public:
+  CFitField(const CFitFieldDefinition& fieldDefinition, const CFitFieldProfile* profile, QVariant value, bool valid);
+  CFitField(quint16 globalMesgNr, quint8 fieldDefNr, const CFitFieldProfile* profile, QVariant value, bool valid);
+  CFitField(const CFitField& copy);
+  CFitField();
+  virtual ~CFitField() { /* nothing to do here, profile and base type are global and not to delete */
+  }
 
-    void setProfile(const CFitFieldProfile* profile);
-    QString fieldInfo() const;
+  void setProfile(const CFitFieldProfile* profile);
+  QString fieldInfo() const;
 
-    const CFitBaseType& getBaseType() const { return *baseType; }
-    quint16 getGlobalMesgNr() const { return globalMesgNr; }
-    quint8 getFieldDefNr() const { return fieldDefNr; }
-    const CFitFieldProfile& profile() const { return *fieldProfile; }
+  const CFitBaseType& getBaseType() const { return *baseType; }
+  quint16 getGlobalMesgNr() const { return globalMesgNr; }
+  quint8 getFieldDefNr() const { return fieldDefNr; }
+  const CFitFieldProfile& profile() const { return *fieldProfile; }
 
-    bool isValidValue() const { return valid; }
-    const QVariant& getValue() const {  return value; }
+  bool isValidValue() const { return valid; }
+  const QVariant& getValue() const { return value; }
 
+ private:
+  void applyScaleAndOffset();
 
-private:
-    void applyScaleAndOffset();
-
-    const CFitFieldProfile* fieldProfile;
-    quint16 globalMesgNr;
-    quint8 fieldDefNr;
-    const CFitBaseType* baseType;
-    bool valid;
-    QVariant value;
-    QVariant rawValue;
+  const CFitFieldProfile* fieldProfile;
+  quint16 globalMesgNr;
+  quint8 fieldDefNr;
+  const CFitBaseType* baseType;
+  bool valid;
+  QVariant value;
+  QVariant rawValue;
 };
 
-
-#endif // CFITFIELD_H
+#endif  // CFITFIELD_H

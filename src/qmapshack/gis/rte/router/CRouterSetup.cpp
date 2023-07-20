@@ -17,96 +17,82 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWorkspace.h"
-#include "gis/rte/CGisItemRte.h"
-#include "gis/rte/router/CRouterBRouter.h"
-#include "gis/rte/router/CRouterMapQuest.h"
-#include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterSetup.h"
-#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
+#include "gis/rte/router/CRouterBRouter.h"
+#include "gis/rte/router/CRouterMapQuest.h"
+#include "gis/rte/router/CRouterRoutino.h"
+#include "helpers/CSettings.h"
+
 CRouterSetup* CRouterSetup::pSelf = nullptr;
 
-CRouterSetup::CRouterSetup(QWidget* parent)
-    : QWidget(parent)
-{
-    setupUi(this);
-    pSelf = this;
+CRouterSetup::CRouterSetup(QWidget* parent) : QWidget(parent) {
+  setupUi(this);
+  pSelf = this;
 
-    comboRouter->addItem(tr("Routino (offline)"));
-    comboRouter->addItem(tr("MapQuest (online)"));
-    comboRouter->addItem(tr("BRouter (online)"));
+  comboRouter->addItem(tr("Routino (offline)"));
+  comboRouter->addItem(tr("MapQuest (online)"));
+  comboRouter->addItem(tr("BRouter (online)"));
 
-    stackedWidget->addWidget(new CRouterRoutino(this));
-    stackedWidget->addWidget(new CRouterMapQuest(this));
-    stackedWidget->addWidget(new CRouterBRouter(this));
+  stackedWidget->addWidget(new CRouterRoutino(this));
+  stackedWidget->addWidget(new CRouterMapQuest(this));
+  stackedWidget->addWidget(new CRouterBRouter(this));
 
-    connect(comboRouter, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CRouterSetup::slotSelectRouter);
+  connect(comboRouter, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+          &CRouterSetup::slotSelectRouter);
 
-    SETTINGS;
-    comboRouter->setCurrentIndex(cfg.value("Route/current", 0).toInt());
+  SETTINGS;
+  comboRouter->setCurrentIndex(cfg.value("Route/current", 0).toInt());
 }
 
-CRouterSetup::~CRouterSetup()
-{
-    SETTINGS;
-    cfg.setValue("Route/current", comboRouter->currentIndex());
+CRouterSetup::~CRouterSetup() {
+  SETTINGS;
+  cfg.setValue("Route/current", comboRouter->currentIndex());
 }
 
-bool CRouterSetup::hasFastRouting()
-{
-    IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
-    if(router)
-    {
-        return router->hasFastRouting();
-    }
-    return false;
+bool CRouterSetup::hasFastRouting() {
+  IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+  if (router) {
+    return router->hasFastRouting();
+  }
+  return false;
 }
 
-void CRouterSetup::slotSelectRouter(int i)
-{
-    stackedWidget->setCurrentIndex(i);
-    IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
-    if (router != nullptr)
-    {
-        router->routerSelected();
-    }
+void CRouterSetup::slotSelectRouter(int i) {
+  stackedWidget->setCurrentIndex(i);
+  IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+  if (router != nullptr) {
+    router->routerSelected();
+  }
 }
 
-void CRouterSetup::calcRoute(const IGisItem::key_t& key)
-{
-    IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
-    if(router)
-    {
-        router->calcRoute(key);
-    }
+void CRouterSetup::calcRoute(const IGisItem::key_t& key) {
+  IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+  if (router) {
+    router->calcRoute(key);
+  }
 }
 
-int CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs)
-{
-    IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
-    if(router)
-    {
-        return router->calcRoute(p1, p2, coords, costs);
-    }
+int CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs) {
+  IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+  if (router) {
+    return router->calcRoute(p1, p2, coords, costs);
+  }
 
-    return false;
+  return false;
 }
 
-QString CRouterSetup::getOptions()
-{
-    IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
-    if(router)
-    {
-        return router->getOptions();
-    }
+QString CRouterSetup::getOptions() {
+  IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
+  if (router) {
+    return router->getOptions();
+  }
 
-    return "";
+  return "";
 }
 
-void CRouterSetup::setRouterTitle(const router_e router, const QString title)
-{
-    comboRouter->setItemText(router, title);
+void CRouterSetup::setRouterTitle(const router_e router, const QString title) {
+  comboRouter->setItemText(router, title);
 }

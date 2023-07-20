@@ -18,50 +18,48 @@
 
 **********************************************************************************************/
 
-#include "config.h"
-#include "gis/CGisWorkspace.h"
 #include "gis/db/CSetupWorkspace.h"
-#include "helpers/CSettings.h"
+
 #include <QtWidgets>
 
-CSetupWorkspace::CSetupWorkspace(CGisWorkspace* workspace, QWidget* parent)
-    : QDialog(parent), workspace(workspace)
-{
-    setupUi(this);
+#include "config.h"
+#include "gis/CGisWorkspace.h"
+#include "helpers/CSettings.h"
 
-    SETTINGS;
-    cfg.beginGroup("Database");
-    checkSaveOnExit->setChecked(cfg.value("saveOnExit", true).toBool());
-    spinSaveEvery->setValue(cfg.value("saveEvery", 5).toInt());
-    checkDbUpdate->setChecked(cfg.value("listenUpdate", false).toBool());
-    linePort->setText(cfg.value("port", "34123").toString());
-    checkDeviceSupport->setChecked(cfg.value("device support", true).toBool());
-    cfg.endGroup();
+CSetupWorkspace::CSetupWorkspace(CGisWorkspace* workspace, QWidget* parent) : QDialog(parent), workspace(workspace) {
+  setupUi(this);
 
-    checkShowTags->setChecked(!workspace->areTagsHidden());
+  SETTINGS;
+  cfg.beginGroup("Database");
+  checkSaveOnExit->setChecked(cfg.value("saveOnExit", true).toBool());
+  spinSaveEvery->setValue(cfg.value("saveEvery", 5).toInt());
+  checkDbUpdate->setChecked(cfg.value("listenUpdate", false).toBool());
+  linePort->setText(cfg.value("port", "34123").toString());
+  checkDeviceSupport->setChecked(cfg.value("device support", true).toBool());
+  cfg.endGroup();
 
-    connect(checkSaveOnExit, &QCheckBox::toggled, spinSaveEvery, &QSpinBox::setEnabled);
+  checkShowTags->setChecked(!workspace->areTagsHidden());
+
+  connect(checkSaveOnExit, &QCheckBox::toggled, spinSaveEvery, &QSpinBox::setEnabled);
 }
 
-CSetupWorkspace::~CSetupWorkspace()
-{
+CSetupWorkspace::~CSetupWorkspace() {}
+
+void CSetupWorkspace::accept() {
+  SETTINGS;
+  cfg.beginGroup("Database");
+  cfg.setValue("saveOnExit", checkSaveOnExit->isChecked());
+  cfg.setValue("saveEvery", spinSaveEvery->value());
+  cfg.setValue("listenUpdate", checkDbUpdate->isChecked());
+  cfg.setValue("port", linePort->text());
+  cfg.setValue("device support", checkDeviceSupport->isChecked());
+  cfg.endGroup();
+
+  workspace->setTagsHidden(!checkShowTags->isChecked());
+
+  QMessageBox::information(this, tr("Setup database..."),
+                           tr("Changes to database settings will become active after an application's restart."),
+                           QMessageBox::Ok);
+
+  QDialog::accept();
 }
-
-void CSetupWorkspace::accept()
-{
-    SETTINGS;
-    cfg.beginGroup("Database");
-    cfg.setValue("saveOnExit", checkSaveOnExit->isChecked());
-    cfg.setValue("saveEvery", spinSaveEvery->value());
-    cfg.setValue("listenUpdate", checkDbUpdate->isChecked());
-    cfg.setValue("port", linePort->text());
-    cfg.setValue("device support", checkDeviceSupport->isChecked());
-    cfg.endGroup();
-
-    workspace->setTagsHidden(!checkShowTags->isChecked());
-
-    QMessageBox::information(this, tr("Setup database..."), tr("Changes to database settings will become active after an application's restart."), QMessageBox::Ok);
-
-    QDialog::accept();
-}
-

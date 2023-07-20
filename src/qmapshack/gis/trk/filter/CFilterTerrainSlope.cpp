@@ -16,21 +16,18 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterTerrainSlope.h"
 
-CFilterTerrainSlope::CFilterTerrainSlope(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterTerrainSlope::slotApply);
+CFilterTerrainSlope::CFilterTerrainSlope(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
+
+  connect(toolApply, &QToolButton::clicked, this, &CFilterTerrainSlope::slotApply);
 }
 
-void CFilterTerrainSlope::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterTerrainSlope();
+void CFilterTerrainSlope::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterTerrainSlope();
 }

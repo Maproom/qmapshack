@@ -24,24 +24,21 @@
 
 class CGisItemTrk;
 
-class CMouseEditTrk : public IMouseEditLine
-{
-    Q_OBJECT
-public:
-    CMouseEditTrk(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    CMouseEditTrk(CGisItemTrk& trk, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    virtual ~CMouseEditTrk();
+class CMouseEditTrk : public IMouseEditLine {
+  Q_OBJECT
+ public:
+  CMouseEditTrk(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  CMouseEditTrk(CGisItemTrk& trk, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  virtual ~CMouseEditTrk();
 
-protected slots:
-    void slotAbort()      override;
-    void slotCopyToNew()  override;
-    void slotCopyToOrig() override;
+ protected slots:
+  void slotAbort() override;
+  void slotCopyToNew() override;
+  void slotCopyToOrig() override;
 
-
-protected:
-    IGisLine* getGisLine() const override;
-    bool isNewLine = true;
+ protected:
+  IGisLine* getGisLine() const override;
+  bool isNewLine = true;
 };
 
-#endif //CMOUSEEDITTRK_H
-
+#endif  // CMOUSEEDITTRK_H

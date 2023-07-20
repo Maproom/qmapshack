@@ -24,17 +24,15 @@
 class CGisDraw;
 class CCanvas;
 
-class CMousePrint : public IMouseSelect
-{
-    Q_OBJECT
-public:
-    CMousePrint(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    virtual ~CMousePrint();
+class CMousePrint : public IMouseSelect {
+  Q_OBJECT
+ public:
+  CMousePrint(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  virtual ~CMousePrint();
 
-private slots:
-    void slotSave();
-    void slotPrint();
+ private slots:
+  void slotSave();
+  void slotPrint();
 };
 
-#endif //CMOUSEPRINT_H
-
+#endif  // CMOUSEPRINT_H

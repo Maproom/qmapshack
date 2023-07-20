@@ -21,14 +21,13 @@
 
 #include "ui_IRouterBRouterInfo.h"
 
-class CRouterBRouterInfo : public QDialog, private Ui::IRouterBRouterInfo
-{
-    Q_OBJECT
-public:
-    CRouterBRouterInfo();
-    virtual ~CRouterBRouterInfo();
+class CRouterBRouterInfo : public QDialog, private Ui::IRouterBRouterInfo {
+  Q_OBJECT
+ public:
+  CRouterBRouterInfo();
+  virtual ~CRouterBRouterInfo();
 
-    void setLabel(const QString& infoLabel) const;
-    void setInfo(const QString& infoText) const;
+  void setLabel(const QString& infoLabel) const;
+  void setInfo(const QString& infoText) const;
 };
 #endif

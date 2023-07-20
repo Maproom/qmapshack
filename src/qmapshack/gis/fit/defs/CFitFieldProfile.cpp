@@ -16,211 +16,145 @@
 
 **********************************************************************************************/
 
-#include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitFieldProfile.h"
+
+#include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitProfile.h"
 #include "gis/fit/defs/fit_const.h"
 
-CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, quint8 devDataIdx,
-                                   qreal scale, qint16 offset, QString units, field_type_e fieldType )
-    : name(name), fieldDefNr(fieldDefNr), devDataIdx(devDataIdx), scale(scale), offset(offset), units(units), fieldType(fieldType),
-    baseType(&baseType), profile(parent), subfields(), components()
-{
-}
+CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr,
+                                   quint8 devDataIdx, qreal scale, qint16 offset, QString units, field_type_e fieldType)
+    : name(name),
+      fieldDefNr(fieldDefNr),
+      devDataIdx(devDataIdx),
+      scale(scale),
+      offset(offset),
+      units(units),
+      fieldType(fieldType),
+      baseType(&baseType),
+      profile(parent),
+      subfields(),
+      components() {}
 
 CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr,
-                                   qreal scale, qint16 offset, QString units, field_type_e fieldType )
-    :  CFitFieldProfile(parent, name, baseType, fieldDefNr, fitDevDataIndexInvalid, scale, offset, units, fieldType)
-{
-}
+                                   qreal scale, qint16 offset, QString units, field_type_e fieldType)
+    : CFitFieldProfile(parent, name, baseType, fieldDefNr, fitDevDataIndexInvalid, scale, offset, units, fieldType) {}
 
-CFitFieldProfile::CFitFieldProfile() : CFitFieldProfile(nullptr, "unknown", fit::InvalidType, fitFieldDefNrInvalid, 0, 0, "")
-{
-}
+CFitFieldProfile::CFitFieldProfile()
+    : CFitFieldProfile(nullptr, "unknown", fit::InvalidType, fitFieldDefNrInvalid, 0, 0, "") {}
 
 CFitFieldProfile::CFitFieldProfile(const CFitFieldProfile& copy)
-    : name(copy.name), fieldDefNr(copy.fieldDefNr), devDataIdx(copy.devDataIdx), scale(copy.scale), offset(copy.offset),
-    units(copy.units), fieldType(copy.fieldType), baseType(copy.baseType), profile(copy.profile), subfields(copy.subfields),
-    components(copy.components)
-{
+    : name(copy.name),
+      fieldDefNr(copy.fieldDefNr),
+      devDataIdx(copy.devDataIdx),
+      scale(copy.scale),
+      offset(copy.offset),
+      units(copy.units),
+      fieldType(copy.fieldType),
+      baseType(copy.baseType),
+      profile(copy.profile),
+      subfields(copy.subfields),
+      components(copy.components) {}
+
+CFitFieldProfile::~CFitFieldProfile() {
+  qDeleteAll(subfields);
+  qDeleteAll(components);
 }
 
-CFitFieldProfile::~CFitFieldProfile()
-{
-    qDeleteAll(subfields);
-    qDeleteAll(components);
+void CFitFieldProfile::addSubfield(CFitSubfieldProfile* subfield) { subfields.append(subfield); }
+
+void CFitFieldProfile::addComponent(CFitComponentfieldProfile* component) { components.append(component); }
+
+void CFitFieldProfile::addComponent(int subfieldIndex, CFitComponentfieldProfile* field) {
+  subfields[subfieldIndex]->addComponent(field);
 }
 
-void CFitFieldProfile::addSubfield(CFitSubfieldProfile* subfield)
-{
-    subfields.append(subfield);
+bool CFitFieldProfile::hasSubfields() const { return subfields.size() > 0; }
+
+bool CFitFieldProfile::hasComponents() const { return components.size() > 0; }
+
+QString CFitFieldProfile::getName() const { return name; }
+
+quint8 CFitFieldProfile::getFieldDefNum() const { return fieldDefNr; }
+
+quint8 CFitFieldProfile::getDevDataIdx() const { return devDataIdx; }
+
+QPair<quint8, quint8> CFitFieldProfile::getDevProfileId() const { return qMakePair(devDataIdx, fieldDefNr); }
+
+qreal CFitFieldProfile::getScale() const {
+  if (scale == 0) {
+    return 1;
+  }
+  return scale;
 }
 
-void CFitFieldProfile::addComponent(CFitComponentfieldProfile* component)
-{
-    components.append(component);
+qint16 CFitFieldProfile::getOffset() const { return offset; }
+
+bool CFitFieldProfile::hasScaleAndOffset() const { return scale != 0 || offset != 0; }
+
+QString CFitFieldProfile::getUnits() const { return units; }
+
+const CFitBaseType& CFitFieldProfile::getBaseType() const { return *baseType; }
+
+const CFitProfile* CFitFieldProfile::getProfile() const { return profile; }
+
+const QList<CFitSubfieldProfile*> CFitFieldProfile::getSubfields() const { return subfields; }
+
+QList<CFitComponentfieldProfile*> CFitFieldProfile::getComponents() const { return components; }
+
+QString CFitFieldProfile::fieldProfileInfo() {
+  QString str = QString("%1 %2 (%3 %4): %5 %6")
+                    .arg(QString("field profile"), getName())
+                    .arg(getDevDataIdx())
+                    .arg(getFieldDefNum())
+                    .arg(getUnits(), getBaseType().name());
+
+  if (getBaseType().isNumber()) {
+    str += QString(" (%1-%2)").arg(getScale()).arg(getOffset());
+  }
+  return str;
 }
 
-void CFitFieldProfile::addComponent(int subfieldIndex, CFitComponentfieldProfile* field)
-{
-    subfields[subfieldIndex]->addComponent(field);
-}
-
-bool CFitFieldProfile::hasSubfields() const
-{
-    return subfields.size() > 0;
-}
-
-bool CFitFieldProfile::hasComponents() const
-{
-    return components.size() > 0;
-}
-
-QString CFitFieldProfile::getName() const
-{
-    return name;
-}
-
-quint8 CFitFieldProfile::getFieldDefNum() const
-{
-    return fieldDefNr;
-}
-
-quint8 CFitFieldProfile::getDevDataIdx() const
-{
-    return devDataIdx;
-}
-
-QPair<quint8, quint8> CFitFieldProfile::getDevProfileId() const
-{
-    return qMakePair(devDataIdx, fieldDefNr);
-}
-
-qreal CFitFieldProfile::getScale() const
-{
-    if (scale == 0)
-    {
-        return 1;
-    }
-    return scale;
-}
-
-qint16 CFitFieldProfile::getOffset() const
-{
-    return offset;
-}
-
-bool CFitFieldProfile::hasScaleAndOffset() const
-{
-    return scale != 0 || offset != 0;
-}
-
-QString CFitFieldProfile::getUnits() const
-{
-    return units;
-}
-
-const CFitBaseType& CFitFieldProfile::getBaseType() const
-{
-    return *baseType;
-}
-
-const CFitProfile* CFitFieldProfile::getProfile() const
-{
-    return profile;
-}
-
-const QList<CFitSubfieldProfile*> CFitFieldProfile::getSubfields() const
-{
-    return subfields;
-}
-
-QList<CFitComponentfieldProfile*> CFitFieldProfile::getComponents() const
-{
-    return components;
-}
-
-QString CFitFieldProfile::fieldProfileInfo()
-{
-    QString str = QString("%1 %2 (%3 %4): %5 %6")
-                  .arg(QString("field profile"),
-                       getName())
-                  .arg(getDevDataIdx())
-                  .arg(getFieldDefNum())
-                  .arg(getUnits(),
-                       getBaseType().name());
-
-    if(getBaseType().isNumber())
-    {
-        str += QString(" (%1-%2)")
-               .arg(getScale())
-               .arg(getOffset());
-    }
-    return str;
-}
-
-
-CFitSubfieldProfile::CFitSubfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16
-                                         offset, QString units, quint8 subRefFieldDefNr, quint8 subRefFieldValue)
+CFitSubfieldProfile::CFitSubfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType,
+                                         quint8 fieldDefNr, qreal scale, qint16 offset, QString units,
+                                         quint8 subRefFieldDefNr, quint8 subRefFieldValue)
     : CFitFieldProfile(parent, name, baseType, fieldDefNr, scale, offset, units),
-    refFieldDefNr(subRefFieldDefNr), refFieldValue(subRefFieldValue)
-{
-}
+      refFieldDefNr(subRefFieldDefNr),
+      refFieldValue(subRefFieldValue) {}
 
 CFitSubfieldProfile::CFitSubfieldProfile(const CFitSubfieldProfile& copy)
-    : CFitFieldProfile(copy), refFieldDefNr(copy.refFieldDefNr), refFieldValue(copy.refFieldValue)
-{
-}
+    : CFitFieldProfile(copy), refFieldDefNr(copy.refFieldDefNr), refFieldValue(copy.refFieldValue) {}
 
-quint8 CFitSubfieldProfile::getReferencedFieldDefNr() const
-{
-    return refFieldDefNr;
-}
+quint8 CFitSubfieldProfile::getReferencedFieldDefNr() const { return refFieldDefNr; }
 
-quint8 CFitSubfieldProfile::getReferencedFieldValue() const
-{
-    return refFieldValue;
-}
+quint8 CFitSubfieldProfile::getReferencedFieldValue() const { return refFieldValue; }
 
-
-CFitComponentfieldProfile::CFitComponentfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr,
-                                                     qreal scale, qint16 offset, QString units, quint8 componentFieldDefNr, quint32 bits)
-    : CFitFieldProfile(parent, name, baseType, fieldDefNr, scale, offset, units), nrOfBits(bits), componentFieldDefNr(componentFieldDefNr)
-{
-}
+CFitComponentfieldProfile::CFitComponentfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType,
+                                                     quint8 fieldDefNr, qreal scale, qint16 offset, QString units,
+                                                     quint8 componentFieldDefNr, quint32 bits)
+    : CFitFieldProfile(parent, name, baseType, fieldDefNr, scale, offset, units),
+      nrOfBits(bits),
+      componentFieldDefNr(componentFieldDefNr) {}
 
 CFitComponentfieldProfile::CFitComponentfieldProfile(const CFitComponentfieldProfile& copy)
-    : CFitFieldProfile(copy), nrOfBits(copy.nrOfBits), componentFieldDefNr(copy.componentFieldDefNr)
-{
+    : CFitFieldProfile(copy), nrOfBits(copy.nrOfBits), componentFieldDefNr(copy.componentFieldDefNr) {}
+
+QString CFitComponentfieldProfile::getName() const { return getProfile()->getField(componentFieldDefNr)->getName(); }
+
+quint8 CFitComponentfieldProfile::getFieldDefNum() const {
+  return getProfile()->getField(componentFieldDefNr)->getFieldDefNum();
 }
 
-
-QString CFitComponentfieldProfile::getName() const
-{
-    return getProfile()->getField(componentFieldDefNr)->getName();
+const CFitBaseType& CFitComponentfieldProfile::getBaseType() const {
+  return getProfile()->getField(componentFieldDefNr)->getBaseType();
 }
 
-quint8 CFitComponentfieldProfile::getFieldDefNum() const
-{
-    return getProfile()->getField(componentFieldDefNr)->getFieldDefNum();
-}
+quint32 CFitComponentfieldProfile::getBits() const { return nrOfBits; }
 
-const CFitBaseType& CFitComponentfieldProfile::getBaseType() const
-{
-    return getProfile()->getField(componentFieldDefNr)->getBaseType();
-}
-
-quint32 CFitComponentfieldProfile::getBits() const
-{
-    return nrOfBits;
-}
-
-quint32 CFitComponentfieldProfile::getBitmask() const
-{
-    quint32 bitmask = 0;
-    for (quint32 i = 0; i < nrOfBits; i++)
-    {
-        bitmask |= (1 << i);
-    }
-    return bitmask;
+quint32 CFitComponentfieldProfile::getBitmask() const {
+  quint32 bitmask = 0;
+  for (quint32 i = 0; i < nrOfBits; i++) {
+    bitmask |= (1 << i);
+  }
+  return bitmask;
 }

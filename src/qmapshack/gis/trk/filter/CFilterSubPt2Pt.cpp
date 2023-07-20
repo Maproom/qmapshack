@@ -16,22 +16,22 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSubPt2Pt.h"
 
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
+
 CFilterSubPt2Pt::CFilterSubPt2Pt(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
+    : QWidget(parent),
+      trk(trk)
 
 {
-    setupUi(this);
+  setupUi(this);
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterSubPt2Pt::slotApply);
+  connect(toolApply, &QToolButton::clicked, this, &CFilterSubPt2Pt::slotApply);
 }
 
-void CFilterSubPt2Pt::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterSubPt2Pt();
+void CFilterSubPt2Pt::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterSubPt2Pt();
 }

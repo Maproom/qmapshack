@@ -27,34 +27,29 @@ class CGisItemRte;
 class QNetworkReply;
 class QTimer;
 
-class CRouterMapQuest : public IRouter, private Ui::IRouterMapQuest
-{
-    Q_OBJECT
-public:
-    CRouterMapQuest(QWidget* parent);
-    virtual ~CRouterMapQuest();
+class CRouterMapQuest : public IRouter, private Ui::IRouterMapQuest {
+  Q_OBJECT
+ public:
+  CRouterMapQuest(QWidget* parent);
+  virtual ~CRouterMapQuest();
 
-    void calcRoute(const IGisItem::key_t& key) override;
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr) override
-    {
-        return -1;
-    }
+  void calcRoute(const IGisItem::key_t& key) override;
+  int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr) override { return -1; }
 
-    QString getOptions() override;
+  QString getOptions() override;
 
-private slots:
-    void slotRequestFinished(QNetworkReply* reply);
-    void slotCloseStatusMsg();
+ private slots:
+  void slotRequestFinished(QNetworkReply* reply);
+  void slotCloseStatusMsg();
 
-private:
-    void addMapQuestLocations(QDomDocument& xml, QDomElement& locations, CGisItemRte& rte);
+ private:
+  void addMapQuestLocations(QDomDocument& xml, QDomElement& locations, CGisItemRte& rte);
 
-    static const QByteArray keyMapQuest;
+  static const QByteArray keyMapQuest;
 
-    QNetworkAccessManager* networkAccessManager;
+  QNetworkAccessManager* networkAccessManager;
 
-    QTimer* timerCloseStatusMsg;
+  QTimer* timerCloseStatusMsg;
 };
 
-#endif //CROUTERMAPQUEST_H
-
+#endif  // CROUTERMAPQUEST_H

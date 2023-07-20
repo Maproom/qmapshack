@@ -17,57 +17,49 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
 #include "mouse/line/CLineOpDeletePoint.h"
-#include "mouse/line/IMouseEditLine.h"
-#include "units/IUnit.h"
 
 #include <QtWidgets>
 
+#include "canvas/CCanvas.h"
+#include "mouse/line/IMouseEditLine.h"
+#include "units/IUnit.h"
+
 CLineOpDeletePoint::CLineOpDeletePoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent)
-    : ILineOp(points, gis, canvas, parent)
-{
-    cursor = QCursor(QPixmap(":/cursors/cursorPointDel.png"), 0, 0);
+    : ILineOp(points, gis, canvas, parent) {
+  cursor = QCursor(QPixmap(":/cursors/cursorPointDel.png"), 0, 0);
 }
 
-CLineOpDeletePoint::~CLineOpDeletePoint()
-{
+CLineOpDeletePoint::~CLineOpDeletePoint() {}
+
+void CLineOpDeletePoint::mouseMove(const QPoint& pos) {
+  ILineOp::mouseMove(pos);
+  idxFocus = isCloseTo(pos);
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpDeletePoint::mouseMove(const QPoint& pos)
-{
-    ILineOp::mouseMove(pos);
-    idxFocus = isCloseTo(pos);
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
-}
-
-void CLineOpDeletePoint::leftClick(const QPoint& pos)
-{
-    if(idxFocus != NOIDX)
-    {
-        if(idxFocus > 0)
-        {
-            points[idxFocus - 1].subpts.clear();
-        }
-
-        points.remove(idxFocus--);
-        updateLeadLines(idxFocus);
-
-        slotTimeoutRouting();
-
-        // store to undo/redo history
-        parentHandler->storeToHistory(points);
-    }
-    idxFocus = NOIDX;
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
-}
-
-void CLineOpDeletePoint::drawFg(QPainter& p)
-{
-    if(idxFocus == NOIDX)
-    {
-        return;
+void CLineOpDeletePoint::leftClick(const QPoint& pos) {
+  if (idxFocus != NOIDX) {
+    if (idxFocus > 0) {
+      points[idxFocus - 1].subpts.clear();
     }
 
-    drawSinglePointLarge(points[idxFocus].pixel, p);
+    points.remove(idxFocus--);
+    updateLeadLines(idxFocus);
+
+    slotTimeoutRouting();
+
+    // store to undo/redo history
+    parentHandler->storeToHistory(points);
+  }
+  idxFocus = NOIDX;
+  canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+void CLineOpDeletePoint::drawFg(QPainter& p) {
+  if (idxFocus == NOIDX) {
+    return;
+  }
+
+  drawSinglePointLarge(points[idxFocus].pixel, p);
 }

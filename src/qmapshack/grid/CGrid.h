@@ -19,42 +19,41 @@
 #ifndef CGRID_H
 #define CGRID_H
 
-#include "gis/proj_x.h"
-
 #include <QColor>
 #include <QObject>
+
+#include "gis/proj_x.h"
 class QPainter;
 class QSettings;
 class CMapDraw;
 
-class CGrid : public QObject
-{
-    Q_OBJECT
-public:
-    CGrid(CMapDraw* map);
-    virtual ~CGrid();
+class CGrid : public QObject {
+  Q_OBJECT
+ public:
+  CGrid(CMapDraw* map);
+  virtual ~CGrid();
 
-    void saveConfig(QSettings& cfg);
-    void loadConfig(QSettings& cfg);
+  void saveConfig(QSettings& cfg);
+  void loadConfig(QSettings& cfg);
 
-    void draw(QPainter& p, const QRect& rect);
+  void draw(QPainter& p, const QRect& rect);
 
-    void setProjAndColor(const QString& projStr, const QColor& c);
+  void setProjAndColor(const QString& projStr, const QColor& c);
 
-    const QColor& getColor(){return color;}
-    const QString getGridProjString(){return proj.getProjTar();}
+  const QColor& getColor() { return color; }
+  const QString getGridProjString() { return proj.getProjTar(); }
 
-    void convertPos2Str(const QPointF& pos, QString& info, bool simple);
+  void convertPos2Str(const QPointF& pos, QString& info, bool simple);
 
-private:
-    void findGridSpace(qreal min, qreal max, qreal& xSpace, qreal& ySpace);
-    bool calcIntersection(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4, qreal& x, qreal& y);
+ private:
+  void findGridSpace(qreal min, qreal max, qreal& xSpace, qreal& ySpace);
+  bool calcIntersection(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4, qreal& x,
+                        qreal& y);
 
-    CMapDraw* map;
+  CMapDraw* map;
 
-    CProj proj {"EPSG:4326", "EPSG:4326"};
-    QColor color = Qt::magenta;
+  CProj proj{"EPSG:4326", "EPSG:4326"};
+  QColor color = Qt::magenta;
 };
 
-#endif //CGRID_H
-
+#endif  // CGRID_H

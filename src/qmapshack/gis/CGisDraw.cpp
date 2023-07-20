@@ -17,39 +17,33 @@
 **********************************************************************************************/
 
 #include "gis/CGisDraw.h"
-#include "gis/CGisWorkspace.h"
-#include "helpers/CDraw.h"
 
 #include <QtWidgets>
 
-CGisDraw::CGisDraw(CCanvas* parent)
-    : IDrawContext("gis", CCanvas::eRedrawGis, parent)
-{
-    connect(&CGisWorkspace::self(), &CGisWorkspace::sigChanged, this, &CGisDraw::emitSigCanvasUpdate);
+#include "gis/CGisWorkspace.h"
+#include "helpers/CDraw.h"
+
+CGisDraw::CGisDraw(CCanvas* parent) : IDrawContext("gis", CCanvas::eRedrawGis, parent) {
+  connect(&CGisWorkspace::self(), &CGisWorkspace::sigChanged, this, &CGisDraw::emitSigCanvasUpdate);
 }
 
+void CGisDraw::draw(QPainter& p, const QRect& rect) { CGisWorkspace::self().fastDraw(p, rect, this); }
 
-void CGisDraw::draw(QPainter& p, const QRect& rect)
-{
-    CGisWorkspace::self().fastDraw(p, rect, this);
-}
+void CGisDraw::drawt(buffer_t& currentBuffer) {
+  QPointF pt1 = currentBuffer.ref1;
+  QPointF pt2 = currentBuffer.ref2;
+  QPointF pt3 = currentBuffer.ref3;
+  QPointF pt4 = currentBuffer.ref4;
 
-void CGisDraw::drawt(buffer_t& currentBuffer)
-{
-    QPointF pt1 = currentBuffer.ref1;
-    QPointF pt2 = currentBuffer.ref2;
-    QPointF pt3 = currentBuffer.ref3;
-    QPointF pt4 = currentBuffer.ref4;
+  QPointF pp = currentBuffer.ref1;
+  convertRad2Px(pp);
 
-    QPointF pp = currentBuffer.ref1;
-    convertRad2Px(pp);
+  QPolygonF viewport;
+  viewport << pt1 << pt2 << pt3 << pt4;
 
-    QPolygonF viewport;
-    viewport << pt1 << pt2 << pt3 << pt4;
+  QPainter p(&currentBuffer.image);
+  USE_ANTI_ALIASING(p, true);
+  p.translate(-pp);
 
-    QPainter p(&currentBuffer.image);
-    USE_ANTI_ALIASING(p, true);
-    p.translate(-pp);
-
-    CGisWorkspace::self().draw(p, viewport, this);
+  CGisWorkspace::self().draw(p, viewport, this);
 }

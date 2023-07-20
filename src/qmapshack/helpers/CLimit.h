@@ -19,11 +19,11 @@
 #ifndef CLIMIT_H
 #define CLIMIT_H
 
-#include <functional>
 #include <QObject>
 #include <QSet>
 #include <QString>
 #include <QVariant>
+#include <functional>
 
 #include "units/IUnit.h"
 
@@ -31,68 +31,55 @@ using fGetLimit = std::function<qreal(const QString&)>;
 using fGetUnit = std::function<QString(const QString&)>;
 using fMarkChanged = std::function<void(void)>;
 
-class CLimit : public QObject
-{
-    Q_OBJECT
-public:
-    CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto, fGetUnit getUnit, fMarkChanged markChanged);
-    virtual ~CLimit();
+class CLimit : public QObject {
+  Q_OBJECT
+ public:
+  CLimit(const QString& cfgPath, fGetLimit getMin, fGetLimit getMax, fGetLimit getMinAuto, fGetLimit getMaxAuto,
+         fGetUnit getUnit, fMarkChanged markChanged);
+  virtual ~CLimit();
 
-    enum mode_e
-    {
-        eModeSys
-        , eModeUser
-        , eModeAuto
-    };
+  enum mode_e { eModeSys, eModeUser, eModeAuto };
 
-    void setMode(mode_e m);
-    void setSource(const QString& src);
+  void setMode(mode_e m);
+  void setSource(const QString& src);
 
-    const QString& getSource() const
-    {
-        return source;
-    }
+  const QString& getSource() const { return source; }
 
-    mode_e getMode() const
-    {
-        return mode;
-    }
+  mode_e getMode() const { return mode; }
 
-    qreal getMin() const;
-    qreal getMax() const;
-    QString getUnit() const;
+  qreal getMin() const;
+  qreal getMax() const;
+  QString getUnit() const;
 
+ public slots:
+  void setMin(const qreal& val);
+  void setMax(const qreal& val);
 
-public slots:
-    void setMin(const qreal& val);
-    void setMax(const qreal& val);
+ signals:
+  void sigChanged();
 
-signals:
-    void sigChanged();
+ private:
+  friend class CGisItemTrk;
+  friend QDataStream& operator<<(QDataStream& stream, const CLimit& l);
+  friend QDataStream& operator>>(QDataStream& stream, CLimit& l);
+  void updateSys();
+  void updateSys(const QString& src);
 
-private:
-    friend class CGisItemTrk;
-    friend QDataStream& operator<<(QDataStream& stream, const CLimit& l);
-    friend QDataStream& operator>>(QDataStream& stream, CLimit& l);
-    void updateSys();
-    void updateSys(const QString& src);
+  mode_e mode = eModeAuto;
+  QString cfgPath;
+  qreal minUser = NOFLOAT;
+  qreal maxUser = NOFLOAT;
 
-    mode_e mode = eModeAuto;
-    QString cfgPath;
-    qreal minUser = NOFLOAT;
-    qreal maxUser = NOFLOAT;
+  fGetLimit funcGetMin;
+  fGetLimit funcGetMax;
+  fGetLimit funcGetMinAuto;
+  fGetLimit funcGetMaxAuto;
+  fGetUnit funcGetUnit;
+  fMarkChanged funcMarkChanged;
 
-    fGetLimit funcGetMin;
-    fGetLimit funcGetMax;
-    fGetLimit funcGetMinAuto;
-    fGetLimit funcGetMaxAuto;
-    fGetUnit funcGetUnit;
-    fMarkChanged funcMarkChanged;
+  QString source;
 
-    QString source;
-
-    static QSet<CLimit*> allLimits;
+  static QSet<CLimit*> allLimits;
 };
 
-#endif //CLIMIT_H
-
+#endif  // CLIMIT_H

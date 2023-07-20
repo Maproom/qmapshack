@@ -25,41 +25,40 @@ class CSearch;
 class QTreeWidgetItem;
 class CSearchExplanationDialog;
 
-class CSearchLineEdit : public QLineEdit
-{
-    Q_OBJECT
-public:
-    CSearchLineEdit(QWidget* parent);
-    CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch* search = nullptr);
+class CSearchLineEdit : public QLineEdit {
+  Q_OBJECT
+ public:
+  CSearchLineEdit(QWidget* parent);
+  CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch* search = nullptr);
 
-signals:
-    void sigWorkspaceSearchChanged(CSearch newSearch);
-    void sigSearchCleared(IGisProject* project);
+ signals:
+  void sigWorkspaceSearchChanged(CSearch newSearch);
+  void sigSearchCleared(IGisProject* project);
 
-private slots:
-    void slotCaseSensitive(bool yes);
-    void slotSearchCompleteText(bool yes);
-    void slotSearchNameOnly(bool yes);
-    void slotCreateSearch(const QString& str);
-    void slotSetupSearch();
-    void slotSearchHelp();
-    void slotClearFilter();
+ private slots:
+  void slotCaseSensitive(bool yes);
+  void slotSearchCompleteText(bool yes);
+  void slotSearchNameOnly(bool yes);
+  void slotCreateSearch(const QString& str);
+  void slotSetupSearch();
+  void slotSearchHelp();
+  void slotClearFilter();
 
-private:
-    QAction* actionClearFilter;
-    QAction* actionHelp;
-    QAction* actionSetupFilter;
-    QAction* actionNameOnly;
-    QAction* actionCompleteText;
-    QAction* actionCaseSensitive;
-    QAction* actionError;
-    QAction* actionAutoProperty;
+ private:
+  QAction* actionClearFilter;
+  QAction* actionHelp;
+  QAction* actionSetupFilter;
+  QAction* actionNameOnly;
+  QAction* actionCompleteText;
+  QAction* actionCaseSensitive;
+  QAction* actionError;
+  QAction* actionAutoProperty;
 
-    IGisProject* connectedProject = nullptr;
-    QTreeWidgetItem* searchItem = nullptr;
+  IGisProject* connectedProject = nullptr;
+  QTreeWidgetItem* searchItem = nullptr;
 
-    QTimer* searchCreationTimer = nullptr;
-    static CSearchExplanationDialog* explanationDlg;
+  QTimer* searchCreationTimer = nullptr;
+  static CSearchExplanationDialog* explanationDlg;
 };
 
-#endif // CSEARCHLINEEDIT_H
+#endif  // CSEARCHLINEEDIT_H

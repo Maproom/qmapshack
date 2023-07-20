@@ -25,22 +25,20 @@
 
 class CGisItemRte;
 
-class CMouseEditRte : public IMouseEditLine
-{
-    Q_OBJECT
-public:
-    CMouseEditRte(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    CMouseEditRte(CGisItemRte& rte, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
-    virtual ~CMouseEditRte();
+class CMouseEditRte : public IMouseEditLine {
+  Q_OBJECT
+ public:
+  CMouseEditRte(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  CMouseEditRte(CGisItemRte& rte, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
+  virtual ~CMouseEditRte();
 
-protected slots:
-    void slotAbort()      override;
-    void slotCopyToNew()  override;
-    void slotCopyToOrig() override;
+ protected slots:
+  void slotAbort() override;
+  void slotCopyToNew() override;
+  void slotCopyToOrig() override;
 
-protected:
-    IGisLine* getGisLine() const override;
+ protected:
+  IGisLine* getGisLine() const override;
 };
 
-#endif //CMOUSEEDITRTE_H
-
+#endif  // CMOUSEEDITRTE_H

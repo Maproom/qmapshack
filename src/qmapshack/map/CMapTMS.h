@@ -26,45 +26,40 @@ class QListWidgetItem;
 class QNetworkAccessManager;
 class QNetworkReply;
 
-class CMapTMS : public IMapOnline
-{
-    Q_OBJECT
-public:
-    CMapTMS(const QString& filename, CMapDraw* parent);
-    virtual ~CMapTMS() {}
+class CMapTMS : public IMapOnline {
+  Q_OBJECT
+ public:
+  CMapTMS(const QString& filename, CMapDraw* parent);
+  virtual ~CMapTMS() {}
 
-    void draw(IDrawContext::buffer_t& buf) override;
+  void draw(IDrawContext::buffer_t& buf) override;
 
-    void getLayers(QListWidget& list) override;
+  void getLayers(QListWidget& list) override;
 
-    void saveConfig(QSettings& cfg) override;
-    void loadConfig(QSettings& cfg) override;
+  void saveConfig(QSettings& cfg) override;
+  void loadConfig(QSettings& cfg) override;
 
-private slots:
-    void slotLayersChanged(QListWidgetItem* item);
+ private slots:
+  void slotLayersChanged(QListWidgetItem* item);
 
-private:
-    struct layer_t;
-    QString createUrl(const layer_t& layer, int x, int y, int z);
+ private:
+  struct layer_t;
+  QString createUrl(const layer_t& layer, int x, int y, int z);
 
-    struct layer_t
-    {
-        layer_t() : enabled(true), minZoomLevel(0), maxZoomLevel(0)
-        {
-        }
-        bool enabled;
-        qint32 minZoomLevel;
-        qint32 maxZoomLevel;
-        QString title;
-        QString strUrl;
-        QString script;
-    };
+  struct layer_t {
+    layer_t() : enabled(true), minZoomLevel(0), maxZoomLevel(0) {}
+    bool enabled;
+    qint32 minZoomLevel;
+    qint32 maxZoomLevel;
+    QString title;
+    QString strUrl;
+    QString script;
+  };
 
-    QVector<layer_t> layers;
+  QVector<layer_t> layers;
 
-    qint32 minZoomLevel = 1;
-    qint32 maxZoomLevel = 21;
+  qint32 minZoomLevel = 1;
+  qint32 maxZoomLevel = 21;
 };
 
-#endif //CMAPTMS_H
-
+#endif  // CMAPTMS_H

@@ -19,79 +19,62 @@
 #ifndef IITEM_H
 #define IITEM_H
 
+#include <QObject>
 
 #include "tool/ITool.h"
-#include <QObject>
 
 class QSettings;
 class IDrawContext;
 
-class IItem : public QObject, public ITool
-{
-    Q_OBJECT
-public:
-    IItem(const QString& filename);
-    virtual ~IItem() = default;
+class IItem : public QObject, public ITool {
+  Q_OBJECT
+ public:
+  IItem(const QString& filename);
+  virtual ~IItem() = default;
 
-    virtual void saveSettings(QSettings& cfg);
-    virtual void loadSettings(QSettings& cfg);
+  virtual void saveSettings(QSettings& cfg);
+  virtual void loadSettings(QSettings& cfg);
 
-    const QString& getFilename() const
-    {
-        return filename;
-    }
+  const QString& getFilename() const { return filename; }
 
-    IDrawContext* getDrawContext() const
-    {
-        return drawContext;
-    }
+  IDrawContext* getDrawContext() const { return drawContext; }
 
-    bool getMapDidMove() const
-    {
-        return mapDidMove;
-    }
+  bool getMapDidMove() const { return mapDidMove; }
 
-    bool getMapIsMoving() const
-    {
-        return mapIsMoving;
-    }
+  bool getMapIsMoving() const { return mapIsMoving; }
 
-    /// reload file into draw context
-    virtual void reload();
-    /// item has been selected, bring everything to front (to be displayed)
-    virtual void toFront(){}
+  /// reload file into draw context
+  virtual void reload();
+  /// item has been selected, bring everything to front (to be displayed)
+  virtual void toFront() {}
 
-    bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
-    void mousePressEventFx(QMouseEvent* e) override;
-    void mouseMoveEventFx(QMouseEvent* e) override;
-    void mouseReleaseEventFx(QMouseEvent* e) override;
-    void wheelEventFx(QWheelEvent* e) override;
+  bool drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) override;
+  void mousePressEventFx(QMouseEvent* e) override;
+  void mouseMoveEventFx(QMouseEvent* e) override;
+  void mouseReleaseEventFx(QMouseEvent* e) override;
+  void wheelEventFx(QWheelEvent* e) override;
 
-    virtual bool isOk() const
-    {
-        return false;
-    }
+  virtual bool isOk() const { return false; }
 
-signals:
-    void sigChanged();
+ signals:
+  void sigChanged();
 
-protected:
-    QString filename;
-    IDrawContext* drawContext = nullptr;
+ protected:
+  QString filename;
+  IDrawContext* drawContext = nullptr;
 
-    /// true while left mouse button is pressed down
-    bool mapIsMoving = false;
-    /// true if map actually moved, if not it's a single click
-    bool mapDidMove = false;
+  /// true while left mouse button is pressed down
+  bool mapIsMoving = false;
+  /// true if map actually moved, if not it's a single click
+  bool mapDidMove = false;
 
-    /// last mouse position
-    QPoint lastPos;
-    /// mouse position when left button was pressed
-    QPoint firstPos;
+  /// last mouse position
+  QPoint lastPos;
+  /// mouse position when left button was pressed
+  QPoint firstPos;
 
-    /// current accumulated angleDelta, used/required for zooming on track pads
-    int zoomAngleDelta = 0;
+  /// current accumulated angleDelta, used/required for zooming on track pads
+  int zoomAngleDelta = 0;
 };
 
-#endif //IITEM_H
-
+#endif  // IITEM_H

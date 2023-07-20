@@ -16,67 +16,59 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/IGisItem.h"
-#include "gis/prj/IGisProject.h"
-#include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 
 #include <QtWidgets>
 
-CSelectCopyAction::CSelectCopyAction(const IGisItem* src, const IGisItem* tar, QWidget* parent)
-    : QDialog(parent)
-{
-    setupUi(this);
+#include "canvas/CCanvas.h"
+#include "gis/IGisItem.h"
+#include "gis/prj/IGisProject.h"
+#include "helpers/CProgressDialog.h"
 
-    labelIcon1->setPixmap(src->getDisplayIcon());
-    labelInfo1->setText(src->getInfo(IGisItem::eFeatureShowName));
-    labelIcon2->setPixmap(tar->getDisplayIcon());
-    labelInfo2->setText(tar->getInfo(IGisItem::eFeatureShowName));
+CSelectCopyAction::CSelectCopyAction(const IGisItem* src, const IGisItem* tar, QWidget* parent) : QDialog(parent) {
+  setupUi(this);
 
-    connect(pushCopy, &QPushButton::clicked, this, [this](){slotSelectResult(eResultCopy);});
-    connect(pushSkip, &QPushButton::clicked, this, [this](){slotSelectResult(eResultSkip);});
-    connect(pushClone, &QPushButton::clicked, this, [this](){slotSelectResult(eResultClone);});
+  labelIcon1->setPixmap(src->getDisplayIcon());
+  labelInfo1->setText(src->getInfo(IGisItem::eFeatureShowName));
+  labelIcon2->setPixmap(tar->getDisplayIcon());
+  labelInfo2->setText(tar->getInfo(IGisItem::eFeatureShowName));
 
-    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
-    CProgressDialog::setAllVisible(false);
+  connect(pushCopy, &QPushButton::clicked, this, [this]() { slotSelectResult(eResultCopy); });
+  connect(pushSkip, &QPushButton::clicked, this, [this]() { slotSelectResult(eResultSkip); });
+  connect(pushClone, &QPushButton::clicked, this, [this]() { slotSelectResult(eResultClone); });
+
+  CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
+  CProgressDialog::setAllVisible(false);
 }
 
 CSelectCopyAction::CSelectCopyAction(const IGisProject* src, const IGisProject* tar, QWidget* parent)
-    : QDialog(parent)
-    , result(eResultNone)
-{
-    setupUi(this);
+    : QDialog(parent), result(eResultNone) {
+  setupUi(this);
 
-    labelIcon1->setPixmap(src->getIcon());
-    labelInfo1->setText(src->getInfo());
-    labelIcon2->setPixmap(tar->getIcon());
-    labelInfo2->setText(tar->getInfo());
+  labelIcon1->setPixmap(src->getIcon());
+  labelInfo1->setText(src->getInfo());
+  labelIcon2->setPixmap(tar->getIcon());
+  labelInfo2->setText(tar->getInfo());
 
-    pushClone->setEnabled(false);
+  pushClone->setEnabled(false);
 
-    adjustSize();
+  adjustSize();
 
-    connect(pushCopy, &QPushButton::clicked, this, [this](){slotSelectResult(eResultCopy);});
-    connect(pushSkip, &QPushButton::clicked, this, [this](){slotSelectResult(eResultSkip);});
+  connect(pushCopy, &QPushButton::clicked, this, [this]() { slotSelectResult(eResultCopy); });
+  connect(pushSkip, &QPushButton::clicked, this, [this]() { slotSelectResult(eResultSkip); });
 
-    CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
-    CProgressDialog::setAllVisible(false);
+  CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
+  CProgressDialog::setAllVisible(false);
 }
 
-CSelectCopyAction::~CSelectCopyAction()
-{
-    CCanvas::restoreOverrideCursor("~CSelectCopyAction");
-    CProgressDialog::setAllVisible(true);
+CSelectCopyAction::~CSelectCopyAction() {
+  CCanvas::restoreOverrideCursor("~CSelectCopyAction");
+  CProgressDialog::setAllVisible(true);
 }
 
-bool CSelectCopyAction::allOthersToo()
-{
-    return checkAllOtherToo->isChecked();
-}
+bool CSelectCopyAction::allOthersToo() { return checkAllOtherToo->isChecked(); }
 
-void CSelectCopyAction::slotSelectResult(result_e r)
-{
-    result = r;
-    accept();
+void CSelectCopyAction::slotSelectResult(result_e r) {
+  result = r;
+  accept();
 }

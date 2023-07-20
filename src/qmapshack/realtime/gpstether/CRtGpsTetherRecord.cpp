@@ -18,36 +18,29 @@
 
 #include "CRtGpsTetherRecord.h"
 
-CRtGpsTetherRecord::CRtGpsTetherRecord(QObject* parent)
-    : IRtRecord(parent)
-{
+CRtGpsTetherRecord::CRtGpsTetherRecord(QObject* parent) : IRtRecord(parent) {}
+
+bool CRtGpsTetherRecord::writeEntry(qreal lon, qreal lat, qreal ele, qreal speed, const QDateTime& timestamp) {
+  QByteArray data;
+  QDataStream stream(&data, QIODevice::WriteOnly);
+  stream.setVersion(QDataStream::Qt_5_2);
+  stream.setByteOrder(QDataStream::LittleEndian);
+
+  // it's always a good idea to start with a version tag for future changes.
+  stream << quint8(1);
+
+  CTrackData::trkpt_t trkpt;
+  trkpt.lon = lon;
+  trkpt.lat = lat;
+  trkpt.ele = ele;
+  trkpt.time = timestamp;
+
+  if (speed != NOFLOAT) {
+    trkpt.extensions["speed"] = speed;
+  }
+
+  stream << trkpt;
+  track << trkpt;
+
+  return writeEntry(data);
 }
-
-bool CRtGpsTetherRecord::writeEntry(qreal lon, qreal lat, qreal ele, qreal speed, const QDateTime& timestamp)
-{
-    QByteArray data;
-    QDataStream stream(&data, QIODevice::WriteOnly);
-    stream.setVersion(QDataStream::Qt_5_2);
-    stream.setByteOrder(QDataStream::LittleEndian);
-
-    // it's always a good idea to start with a version tag for future changes.
-    stream << quint8(1);
-
-    CTrackData::trkpt_t trkpt;
-    trkpt.lon = lon;
-    trkpt.lat = lat;
-    trkpt.ele = ele;
-    trkpt.time = timestamp;
-
-    if(speed != NOFLOAT)
-    {
-        trkpt.extensions["speed"] = speed;
-    }
-
-    stream << trkpt;
-    track << trkpt;
-
-    return writeEntry(data);
-}
-
-

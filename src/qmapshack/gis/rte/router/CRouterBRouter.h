@@ -20,12 +20,12 @@
 #ifndef CROUTERBROUTER_H
 #define CROUTERBROUTER_H
 
-#include "gis/rte/router/IRouter.h"
-#include "ui_IRouterBRouter.h"
-
 #include <QNetworkAccessManager>
 #include <QProcess>
 #include <QTimer>
+
+#include "gis/rte/router/IRouter.h"
+#include "ui_IRouterBRouter.h"
 
 class CRouterBRouterLocal;
 class CRouterBRouterSetup;
@@ -34,65 +34,60 @@ class CRouterBRouterInfo;
 class CRouterSetup;
 class CProgressDialog;
 
-class CRouterBRouter : public IRouter, private Ui::IRouterBRouter
-{
-    Q_OBJECT
-public:
-    CRouterBRouter(QWidget* parent);
-    virtual ~CRouterBRouter();
+class CRouterBRouter : public IRouter, private Ui::IRouterBRouter {
+  Q_OBJECT
+ public:
+  CRouterBRouter(QWidget* parent);
+  virtual ~CRouterBRouter();
 
-    static CRouterBRouter& self()
-    {
-        return *pSelf;
-    }
+  static CRouterBRouter& self() { return *pSelf; }
 
-    void calcRoute(const IGisItem::key_t& key) override;
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr) override;
-    bool hasFastRouting() override;
-    QString getOptions() override;
-    void routerSelected() override;
+  void calcRoute(const IGisItem::key_t& key) override;
+  int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr) override;
+  bool hasFastRouting() override;
+  QString getOptions() override;
+  void routerSelected() override;
 
-    void setupLocalDir(QString localDir);
+  void setupLocalDir(QString localDir);
 
-public slots:
-    void slotToolSetupClicked();
+ public slots:
+  void slotToolSetupClicked();
 
-private slots:
-    void slotVersionChanged();
-    void slotRequestFinished(QNetworkReply* reply);
-    void slotCloseStatusMsg() const;
-    void slotToolProfileInfoClicked() const;
-    void slotDisplayError(const QString& error, const QString& details) const;
-    void slotDisplayProfileInfo(const QString& profile, const QString& content);
-    void slotToggleBRouter() const;
-    void slotToggleConsole() const;
-    void slotClearError();
+ private slots:
+  void slotVersionChanged();
+  void slotRequestFinished(QNetworkReply* reply);
+  void slotCloseStatusMsg() const;
+  void slotToolProfileInfoClicked() const;
+  void slotDisplayError(const QString& error, const QString& details) const;
+  void slotDisplayProfileInfo(const QString& profile, const QString& content);
+  void slotToggleBRouter() const;
+  void slotToggleConsole() const;
+  void slotClearError();
 
-private:
+ private:
+  void updateDialog() const;
+  void getBRouterVersion();
+  bool isMinimumVersion(int major, int minor, int patch) const;
+  void updateBRouterStatus() const;
+  int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem*>& nogos, QPolygonF& coords,
+                         qreal* costs);
+  QNetworkRequest getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem*>& nogos) const;
+  QUrl getServiceUrl() const;
 
-    void updateDialog() const;
-    void getBRouterVersion();
-    bool isMinimumVersion(int major, int minor, int patch) const;
-    void updateBRouterStatus() const;
-    int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem*>& nogos, QPolygonF& coords, qreal* costs);
-    QNetworkRequest getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem*>& nogos) const;
-    QUrl getServiceUrl() const;
+  CRouterBRouterLocal* localBRouter;
 
-    CRouterBRouterLocal* localBRouter;
+  QNetworkAccessManager* networkAccessManager;
+  QTimer* timerCloseStatusMsg;
+  bool synchronous = false;
+  QMutex mutex;
+  CRouterBRouterSetup* setup;
+  CRouterSetup* routerSetup;
+  CRouterBRouterInfo* info;
+  CProgressDialog* progress{nullptr};
+  bool isShutdown{false};
 
-    QNetworkAccessManager* networkAccessManager;
-    QTimer* timerCloseStatusMsg;
-    bool synchronous = false;
-    QMutex mutex;
-    CRouterBRouterSetup* setup;
-    CRouterSetup* routerSetup;
-    CRouterBRouterInfo* info;
-    CProgressDialog* progress { nullptr };
-    bool isShutdown { false };
-
-    static CRouterBRouter* pSelf;
-    friend class CRouterBRouterLocal;
+  static CRouterBRouter* pSelf;
+  friend class CRouterBRouterLocal;
 };
 
-#endif //CROUTERBROUTER_H
-
+#endif  // CROUTERBROUTER_H

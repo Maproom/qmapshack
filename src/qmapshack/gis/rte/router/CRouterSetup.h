@@ -19,39 +19,35 @@
 #ifndef CROUTERSETUP_H
 #define CROUTERSETUP_H
 
-#include "gis/IGisItem.h"
-#include "ui_IRouterSetup.h"
 #include <QWidget>
 
-class CRouterSetup : public QWidget, private Ui::IRouterSetup
-{
-    Q_OBJECT
-public:
-    static CRouterSetup& self()
-    {
-        return *pSelf;
-    }
-    virtual ~CRouterSetup();
+#include "gis/IGisItem.h"
+#include "ui_IRouterSetup.h"
 
-    void calcRoute(const IGisItem::key_t& key);
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr);
-    QString getOptions();
+class CRouterSetup : public QWidget, private Ui::IRouterSetup {
+  Q_OBJECT
+ public:
+  static CRouterSetup& self() { return *pSelf; }
+  virtual ~CRouterSetup();
 
-    bool hasFastRouting();
+  void calcRoute(const IGisItem::key_t& key);
+  int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr);
+  QString getOptions();
 
-    enum router_e {RouterRoutino, RouterMapquest, RouterBRouter};
+  bool hasFastRouting();
 
-    void setRouterTitle(router_e, QString title);
+  enum router_e { RouterRoutino, RouterMapquest, RouterBRouter };
 
-private slots:
-    void slotSelectRouter(int i);
+  void setRouterTitle(router_e, QString title);
 
-private:
-    friend class Ui_IMainWindow;
-    CRouterSetup(QWidget* parent);
+ private slots:
+  void slotSelectRouter(int i);
 
-    static CRouterSetup* pSelf;
+ private:
+  friend class Ui_IMainWindow;
+  CRouterSetup(QWidget* parent);
+
+  static CRouterSetup* pSelf;
 };
 
-#endif //CROUTERSETUP_H
-
+#endif  // CROUTERSETUP_H

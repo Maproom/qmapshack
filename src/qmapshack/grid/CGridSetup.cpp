@@ -16,78 +16,66 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
-#include "grid/CProjWizard.h"
-#include "map/CMapDraw.h"
 
 #include <QtWidgets>
 
+#include "CMainWindow.h"
+#include "grid/CGrid.h"
+#include "grid/CProjWizard.h"
+#include "map/CMapDraw.h"
+
 CGridSetup::CGridSetup(CGrid* grid, CMapDraw* map)
-    : QDialog(CMainWindow::getBestWidgetForParent())
-    , grid(grid)
-    , map(map)
-{
-    setupUi(this);
+    : QDialog(CMainWindow::getBestWidgetForParent()), grid(grid), map(map) {
+  setupUi(this);
 
-    lineProjection->setText(grid->getGridProjString());
-    lineProjection->setCursorPosition(0);
+  lineProjection->setText(grid->getGridProjString());
+  lineProjection->setCursorPosition(0);
 
+  QPalette palette = labelGridColor->palette();
+  palette.setColor(labelGridColor->foregroundRole(), grid->getColor());
+  labelGridColor->setPalette(palette);
+
+  connect(toolRestoreDefault, &QToolButton::clicked, this, &CGridSetup::slotRestoreDefault);
+  connect(toolFromMap, &QToolButton::clicked, this, &CGridSetup::slotProjFromMap);
+  connect(toolProjWizard, &QToolButton::clicked, this, &CGridSetup::slotProjWizard);
+  connect(toolGridColor, &QToolButton::clicked, this, &CGridSetup::slotSelectGridColor);
+}
+
+CGridSetup::~CGridSetup() {}
+
+void CGridSetup::accept() {
+  if (CProjWizard::validProjStr(lineProjection->text(), true)) {
     QPalette palette = labelGridColor->palette();
-    palette.setColor(labelGridColor->foregroundRole(), grid->getColor());
+    grid->setProjAndColor(lineProjection->text(), palette.color(labelGridColor->foregroundRole()));
+
+    QDialog::accept();
+  }
+}
+
+void CGridSetup::slotProjWizard() {
+  CProjWizard dlg(*lineProjection);
+  dlg.exec();
+}
+
+void CGridSetup::slotSelectGridColor() {
+  QPalette palette = labelGridColor->palette();
+  QColor color = palette.color(labelGridColor->foregroundRole());
+
+  color = QColorDialog::getColor(color, this);
+
+  if (color.isValid()) {
+    palette.setColor(labelGridColor->foregroundRole(), color);
     labelGridColor->setPalette(palette);
-
-    connect(toolRestoreDefault, &QToolButton::clicked, this, &CGridSetup::slotRestoreDefault);
-    connect(toolFromMap, &QToolButton::clicked, this, &CGridSetup::slotProjFromMap);
-    connect(toolProjWizard, &QToolButton::clicked, this, &CGridSetup::slotProjWizard);
-    connect(toolGridColor, &QToolButton::clicked, this, &CGridSetup::slotSelectGridColor);
+  }
 }
 
-CGridSetup::~CGridSetup()
-{
+void CGridSetup::slotRestoreDefault() {
+  lineProjection->setText("+proj=longlat +datum=WGS84 +no_defs");
+  lineProjection->setCursorPosition(0);
 }
 
-void CGridSetup::accept()
-{
-    if (CProjWizard::validProjStr(lineProjection->text(), true))
-    {
-        QPalette palette = labelGridColor->palette();
-        grid->setProjAndColor(lineProjection->text(), palette.color(labelGridColor->foregroundRole()));
-
-        QDialog::accept();
-    }
+void CGridSetup::slotProjFromMap() {
+  lineProjection->setText(map->getProjection());
+  lineProjection->setCursorPosition(0);
 }
-
-void CGridSetup::slotProjWizard()
-{
-    CProjWizard dlg(*lineProjection);
-    dlg.exec();
-}
-
-void CGridSetup::slotSelectGridColor()
-{
-    QPalette palette = labelGridColor->palette();
-    QColor color = palette.color(labelGridColor->foregroundRole());
-
-    color = QColorDialog::getColor(color, this);
-
-    if(color.isValid())
-    {
-        palette.setColor(labelGridColor->foregroundRole(), color);
-        labelGridColor->setPalette(palette);
-    }
-}
-
-void CGridSetup::slotRestoreDefault()
-{
-    lineProjection->setText("+proj=longlat +datum=WGS84 +no_defs");
-    lineProjection->setCursorPosition(0);
-}
-
-void CGridSetup::slotProjFromMap()
-{
-    lineProjection->setText(map->getProjection());
-    lineProjection->setCursorPosition(0);
-}
-

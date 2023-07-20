@@ -16,60 +16,51 @@
 
 **********************************************************************************************/
 
+#include "gis/trk/filter/CFilterNewDate.h"
+
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/filter/CFilterNewDate.h"
 #include "units/IUnit.h"
 
-CFilterNewDate::CFilterNewDate(CGisItemTrk& trk, QWidget* parent)
-    : QWidget(parent)
-    , trk(trk)
-{
-    setupUi(this);
+CFilterNewDate::CFilterNewDate(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
+  setupUi(this);
 
-    IUnit::tz_mode_e mode;
-    QByteArray zone;
-    bool format;
-    IUnit::self().getTimeZoneSetup(mode, zone, format);
+  IUnit::tz_mode_e mode;
+  QByteArray zone;
+  bool format;
+  IUnit::self().getTimeZoneSetup(mode, zone, format);
 
-    switch(mode)
-    {
-    case IUnit::eTZUtc:
-    {
-        labelTimeZone->setText(QTimeZone::utc().abbreviation(QDateTime::currentDateTimeUtc()));
-        dateTimeEdit->setDateTime(QDateTime::currentDateTimeUtc());
-        break;
+  switch (mode) {
+    case IUnit::eTZUtc: {
+      labelTimeZone->setText(QTimeZone::utc().abbreviation(QDateTime::currentDateTimeUtc()));
+      dateTimeEdit->setDateTime(QDateTime::currentDateTimeUtc());
+      break;
     }
 
-    case IUnit::eTZLocal:
-    {
-        labelTimeZone->setText(QDateTime::currentDateTime().timeZone().abbreviation(QDateTime::currentDateTime()));
-        dateTimeEdit->setDateTime(QDateTime::currentDateTime());
-        break;
+    case IUnit::eTZLocal: {
+      labelTimeZone->setText(QDateTime::currentDateTime().timeZone().abbreviation(QDateTime::currentDateTime()));
+      dateTimeEdit->setDateTime(QDateTime::currentDateTime());
+      break;
     }
 
-    case IUnit::eTZAuto:
-    {
-        CTrackData::trkpt_t trkpt = *trk.getTrackData().begin();
-        zone = IUnit::pos2timezone(trkpt * DEG_TO_RAD);
-        // break; // intended
+    case IUnit::eTZAuto: {
+      CTrackData::trkpt_t trkpt = *trk.getTrackData().begin();
+      zone = IUnit::pos2timezone(trkpt * DEG_TO_RAD);
+      // break; // intended
     }
 
-    case IUnit::eTZSelected:
-    {
-        const QDateTime& datetime = QDateTime::currentDateTimeUtc().toTimeZone(QTimeZone(zone));
-        labelTimeZone->setText(datetime.timeZone().abbreviation(datetime));
-        dateTimeEdit->setDateTime(datetime);
-        break;
+    case IUnit::eTZSelected: {
+      const QDateTime& datetime = QDateTime::currentDateTimeUtc().toTimeZone(QTimeZone(zone));
+      labelTimeZone->setText(datetime.timeZone().abbreviation(datetime));
+      dateTimeEdit->setDateTime(datetime);
+      break;
     }
-    }
+  }
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterNewDate::slotApply);
+  connect(toolApply, &QToolButton::clicked, this, &CFilterNewDate::slotApply);
 }
 
-void CFilterNewDate::slotApply()
-{
-    CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    trk.filterNewDate(dateTimeEdit->dateTime().toUTC());
+void CFilterNewDate::slotApply() {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  trk.filterNewDate(dateTimeEdit->dateTime().toUTC());
 }
-

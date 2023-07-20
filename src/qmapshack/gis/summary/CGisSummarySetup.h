@@ -19,40 +19,37 @@
 #ifndef CGISSUMMARYSETUP_H
 #define CGISSUMMARYSETUP_H
 
+#include <QListWidgetItem>
+
 #include "ui_IGisSummarySetup.h"
 
-#include <QListWidgetItem>
+#include "gis/summary/CGisSummary.h"
 
 class CGisSummary;
 
-class CGisSummarySetup : public QDialog, private Ui::IGisSummarySetup
-{
-    Q_OBJECT
-public:
-    CGisSummarySetup(CGisSummary& parent);
-    virtual ~CGisSummarySetup() = default;
+class CGisSummarySetup : public QDialog, private Ui::IGisSummarySetup {
+  Q_OBJECT
+ public:
+  CGisSummarySetup(CGisSummary& parent);
+  virtual ~CGisSummarySetup() = default;
 
-public slots:
-    void accept() override;
+ public slots:
+  void accept() override;
 
-private slots:
-    void slotAdd(QListWidget* listWidget);
-    void slotDel(QListWidget* listWidget);
-    void slotItemSelectionChanged(QListWidget* listWidget, QToolButton* toolDel);
+ private slots:
+  void slotAdd(QListWidget* listWidget);
+  void slotDel(QListWidget* listWidget);
+  void slotItemSelectionChanged(QListWidget* listWidget, QToolButton* toolDel);
 
-private:
-    void setupSignals(CGisSummary::dropzone_e number, QLineEdit* lineName, QListWidget* listWidget, QToolButton* toolAdd, QToolButton* toolDel);
-    void addFolder(quint64 id, const QString& db, QListWidget* listWidget);
-    void writeResults(CGisSummary::dropzone_e number, QLineEdit* lineName, QListWidget* listWidget) const;
+ private:
+  void setupSignals(CGisSummary::dropzone_e number, QLineEdit* lineName, QListWidget* listWidget, QToolButton* toolAdd,
+                    QToolButton* toolDel);
+  void addFolder(quint64 id, const QString& db, QListWidget* listWidget);
+  void writeResults(CGisSummary::dropzone_e number, QLineEdit* lineName, QListWidget* listWidget) const;
 
-    enum data_e
-    {
-        eDataId = Qt::UserRole
-        , eDataDb = Qt::UserRole + 1
-    };
+  enum data_e { eDataId = Qt::UserRole, eDataDb = Qt::UserRole + 1 };
 
-    CGisSummary& summary;
+  CGisSummary& summary;
 };
 
-#endif //CGISSUMMARYSETUP_H
-
+#endif  // CGISSUMMARYSETUP_H

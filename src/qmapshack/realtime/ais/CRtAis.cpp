@@ -16,264 +16,227 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "CMainWindow.h"
-#include "helpers/CDraw.h"
-#include "realtime/CRtDraw.h"
 #include "realtime/ais/CRtAis.h"
-#include "realtime/ais/CRtAisInfo.h"
 
 #include <QJsonDocument>
 #include <QtNetwork>
 #include <QtWidgets>
 
+#include "helpers/CDraw.h"
+#include "realtime/CRtDraw.h"
+#include "realtime/ais/CRtAisInfo.h"
+
 const QString CRtAis::strIcon("://icons/48x48/ActShip.png");
 
-CRtAis::CRtAis(QTreeWidget* parent)
-    : IRtSource(eTypeAis, true, parent)
-{
-    setIcon(eColumnIcon, QIcon(strIcon));
-    setText(eColumnName, "AIS");
-    setCheckState(eColumnCheckBox, Qt::Checked);
+CRtAis::CRtAis(QTreeWidget* parent) : IRtSource(eTypeAis, true, parent) {
+  setIcon(eColumnIcon, QIcon(strIcon));
+  setText(eColumnName, "AIS");
+  setCheckState(eColumnCheckBox, Qt::Checked);
 
-    CRtAis::registerWithTreeWidget();
+  CRtAis::registerWithTreeWidget();
 }
 
-void CRtAis::registerWithTreeWidget()
-{
-    QTreeWidget* tree = treeWidget();
-    if(tree != nullptr)
-    {
-        QTreeWidgetItem* itemInfo = new QTreeWidgetItem(this);
-        itemInfo->setFlags(Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
-        info = new CRtAisInfo(*this, tree);
-        connect(info, &CRtAisInfo::sigChanged, this, &CRtAis::sigChanged);
-        tree->setItemWidget(itemInfo, eColumnWidget, info);
-        emit sigChanged();
-    }
-}
-
-void CRtAis::loadSettings(QSettings& cfg)
-{
-    QMutexLocker lock(&IRtSource::mutex);
-
-    IRtSource::loadSettings(cfg);
-    showNames = cfg.value("showNames", showNames).toBool();
-
-    if(info != nullptr)
-    {
-        info->loadSettings(cfg);
-    }
-
+void CRtAis::registerWithTreeWidget() {
+  QTreeWidget* tree = treeWidget();
+  if (tree != nullptr) {
+    QTreeWidgetItem* itemInfo = new QTreeWidgetItem(this);
+    itemInfo->setFlags(Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
+    info = new CRtAisInfo(*this, tree);
+    connect(info, &CRtAisInfo::sigChanged, this, &CRtAis::sigChanged);
+    tree->setItemWidget(itemInfo, eColumnWidget, info);
     emit sigChanged();
+  }
 }
 
-void CRtAis::saveSettings(QSettings& cfg) const
-{
-    QMutexLocker lock(&IRtSource::mutex);
+void CRtAis::loadSettings(QSettings& cfg) {
+  QMutexLocker lock(&IRtSource::mutex);
 
-    IRtSource::saveSettings(cfg);
-    cfg.setValue("showNames", showNames);
+  IRtSource::loadSettings(cfg);
+  showNames = cfg.value("showNames", showNames).toBool();
 
-    if(info != nullptr)
-    {
-        info->saveSettings(cfg);
-    }
+  if (info != nullptr) {
+    info->loadSettings(cfg);
+  }
+
+  emit sigChanged();
 }
 
-QString CRtAis::getDescription() const
-{
-    return tr("<b>AIS</b><br/>"
-              "Get vessel positions via AIS over TCP/IP"
-              );
+void CRtAis::saveSettings(QSettings& cfg) const {
+  QMutexLocker lock(&IRtSource::mutex);
+
+  IRtSource::saveSettings(cfg);
+  cfg.setValue("showNames", showNames);
+
+  if (info != nullptr) {
+    info->saveSettings(cfg);
+  }
 }
 
-qint32 CRtAis::getNumberOfShips() const
-{
-    QMutexLocker lock(&IRtSource::mutex);
-    return ships.count();
+QString CRtAis::getDescription() const {
+  return tr(
+      "<b>AIS</b><br/>"
+      "Get vessel positions via AIS over TCP/IP");
 }
 
-bool CRtAis::getShowNames() const
-{
-    QMutexLocker lock(&IRtSource::mutex);
-    return showNames;
+qint32 CRtAis::getNumberOfShips() const {
+  QMutexLocker lock(&IRtSource::mutex);
+  return ships.count();
 }
 
-CRtAis::ship_t& CRtAis::getShipByMmsi(const QString& mmsi)
-{
-    QMutexLocker lock(&IRtSource::mutex);
-    if(!ships.contains(mmsi))
-    {
-        ship_t ship;
-        ship.mmsi = mmsi;
-        ships[mmsi] = ship;
-    }
-
-    return ships[mmsi];
+bool CRtAis::getShowNames() const {
+  QMutexLocker lock(&IRtSource::mutex);
+  return showNames;
 }
 
-bool CRtAis::hasShip(const QString& key) {
-    return ships.contains(key);
+CRtAis::ship_t& CRtAis::getShipByMmsi(const QString& mmsi) {
+  QMutexLocker lock(&IRtSource::mutex);
+  if (!ships.contains(mmsi)) {
+    ship_t ship;
+    ship.mmsi = mmsi;
+    ships[mmsi] = ship;
+  }
+
+  return ships[mmsi];
 }
 
-void CRtAis::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt)
-{
-    if(checkState(eColumnCheckBox) != Qt::Checked)
-    {
-        return;
-    }
+bool CRtAis::hasShip(const QString& key) { return ships.contains(key); }
 
-    QPolygonF tmp2 = viewport;
-    rt->convertRad2Px(tmp2);
+void CRtAis::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw* rt) {
+  if (checkState(eColumnCheckBox) != Qt::Checked) {
+    return;
+  }
 
-    QFontMetrics fm(p.font());
+  QPolygonF tmp2 = viewport;
+  rt->convertRad2Px(tmp2);
 
-    p.setPen(Qt::yellow);
-    p.setBrush(Qt::yellow);
-    QPixmap iconShip("://icons/16x16/Ship.png");
-    QPixmap iconAid("://icons/16x16/Aid.png");
-    QRect rectIconShip = iconShip.rect();
-    rectIconShip.moveCenter(QPoint(0, 0));
-    QRect rectIconAid = iconAid.rect();
-    rectIconAid.moveCenter(QPoint(0, 0));
+  QFontMetrics fm(p.font());
 
-    QDateTime now = QDateTime::currentDateTime();
+  p.setPen(Qt::yellow);
+  p.setBrush(Qt::yellow);
+  QPixmap iconShip("://icons/16x16/Ship.png");
+  QPixmap iconAid("://icons/16x16/Aid.png");
+  QRect rectIconShip = iconShip.rect();
+  rectIconShip.moveCenter(QPoint(0, 0));
+  QRect rectIconAid = iconAid.rect();
+  rectIconAid.moveCenter(QPoint(0, 0));
 
-    const QStringList& keys = ships.keys();
-    for(const QString& key : keys)
-    {
-        ship_t& ship = ships[key];
+  QDateTime now = QDateTime::currentDateTime();
 
-        if(!ship.aid)
-        {
-            QDateTime lim = QDateTime::fromTime_t(ship.timePosition).addSecs(900);
-            if(lim < now)
-            {
-                ships.remove(key);
-                continue;
-            }
-        }
+  const QStringList& keys = ships.keys();
+  for (const QString& key : keys) {
+    ship_t& ship = ships[key];
 
-        ship.point = ship.pos * DEG_TO_RAD;
-        rt->convertRad2Px(ship.point);
-
-        if(!tmp2.boundingRect().contains(ship.point))
-        {
-            continue;
-        }
-
-        p.save();
-        p.translate(ship.point);
-        p.rotate(ship.heading);
-        p.drawPixmap(ship.heading >= 0 ? rectIconShip : rectIconAid, ship.heading >= 0 ? iconShip : iconAid);
-        p.restore();
-
-        if(showNames)
-        {
-            QString name = ship.name.isEmpty() ? ship.mmsi.isEmpty() ? tr("unkn.") : ship.mmsi : ship.name;
-            QRect rectLabel = fm.boundingRect(name);
-            rectLabel.moveCenter(ship.point.toPoint() + QPoint(0, -8));
-            rectLabel.adjust(-1, -1, 1, 1);
-            if(!CDraw::doesOverlap(blockedAreas, rectLabel))
-            {
-                CDraw::text(name, p, rectLabel.center(), Qt::darkBlue);
-                blockedAreas << rectLabel;
-            }
-        }
+    if (!ship.aid) {
+      QDateTime lim = QDateTime::fromTime_t(ship.timePosition).addSecs(900);
+      if (lim < now) {
+        ships.remove(key);
+        continue;
+      }
     }
 
-    if(info != nullptr)
-    {
-        info->draw(p, viewport, blockedAreas, rt);
+    ship.point = ship.pos * DEG_TO_RAD;
+    rt->convertRad2Px(ship.point);
+
+    if (!tmp2.boundingRect().contains(ship.point)) {
+      continue;
     }
+
+    p.save();
+    p.translate(ship.point);
+    p.rotate(ship.heading);
+    p.drawPixmap(ship.heading >= 0 ? rectIconShip : rectIconAid, ship.heading >= 0 ? iconShip : iconAid);
+    p.restore();
+
+    if (showNames) {
+      QString name = ship.name.isEmpty() ? ship.mmsi.isEmpty() ? tr("unkn.") : ship.mmsi : ship.name;
+      QRect rectLabel = fm.boundingRect(name);
+      rectLabel.moveCenter(ship.point.toPoint() + QPoint(0, -8));
+      rectLabel.adjust(-1, -1, 1, 1);
+      if (!CDraw::doesOverlap(blockedAreas, rectLabel)) {
+        CDraw::text(name, p, rectLabel.center(), Qt::darkBlue);
+        blockedAreas << rectLabel;
+      }
+    }
+  }
+
+  if (info != nullptr) {
+    info->draw(p, viewport, blockedAreas, rt);
+  }
 }
 
-void CRtAis::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt)
-{
-    if(!keyFocus.isEmpty() && ships.contains(keyFocus))
-    {
-        p.save();
+void CRtAis::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) {
+  if (!keyFocus.isEmpty() && ships.contains(keyFocus)) {
+    p.save();
 
-        const ship_t& ship = ships[keyFocus];
-        p.setPen(Qt::red);
-        p.setBrush(Qt::NoBrush);
-        p.drawEllipse(ship.point, 10, 10);
+    const ship_t& ship = ships[keyFocus];
+    p.setPen(Qt::red);
+    p.setBrush(Qt::NoBrush);
+    p.drawEllipse(ship.point, 10, 10);
 
-        QString text;
-        text += "<table>";
-        if(!ship.name.isEmpty())
-            text += "<tr><td>" + tr("name:") + "</td><td>" + ship.name + "</td></tr>";
-        if(!ship.type.isEmpty())
-            text += "<tr><td>" + tr("type:") + "</td><td>" + ship.type + "</td></tr>";
-        if(!ship.callsign.isEmpty())
-            text += "<tr><td>" + tr("callsign:") + "</td><td>" + ship.callsign + "</td></tr>";
-        if(!ship.imo.isEmpty())
-            text += "<tr><td>" + tr("imo:") + "</td><td>" + ship.imo + "</td></tr>";
-        if(!ship.mmsi.isEmpty())
-            text += "<tr><td>" + tr("mmsi:") + "</td><td>" + ship.mmsi + "</td></tr>";
-        text += "<tr><td>" + tr("last contact:") + "</td><td>" + QDateTime::fromTime_t(ship.timePosition).toString() + "</td></tr>";
-        text += "<tr><td>" + tr("longitude:") + "</td><td>" + QString::number(ship.longitude) + "°</td></tr>";
-        text += "<tr><td>" + tr("latitude:") + "</td><td>" + QString::number(ship.latitude) + "°</td></tr>";
-        if(ship.velocity >= 0.1)
-            text += "<tr><td>" + tr("velocity:") + "</td><td>" + QString::number(ship.velocity) + "knots</td></tr>";
-        if(ship.heading >= 0 && ship.heading <= 360)
-            text += "<tr><td>" + tr("heading:") + "</td><td>" + QString::number(ship.heading) + "°</td></tr>";
-        if(!ship.destination.isEmpty())
-            text += "<tr><td>" + tr("destination:") + "</td><td>" + ship.destination + "</td></tr>";
-        if(ship.length > 0)
-            text += "<tr><td>" + tr("length:") + "</td><td>" + QString::number(ship.length) + "m</td></tr>";
-        if(ship.width > 0)
-            text += "<tr><td>" + tr("width:") + "</td><td>" + QString::number(ship.width) + "m</td></tr>";
-        if(ship.draught > 0)
-            text += "<tr><td>" + tr("draught:") + "</td><td>" + QString::number(ship.draught) + "m</td></tr>";
-        text += "</table>";
+    QString text;
+    text += "<table>";
+    if (!ship.name.isEmpty()) text += "<tr><td>" + tr("name:") + "</td><td>" + ship.name + "</td></tr>";
+    if (!ship.type.isEmpty()) text += "<tr><td>" + tr("type:") + "</td><td>" + ship.type + "</td></tr>";
+    if (!ship.callsign.isEmpty()) text += "<tr><td>" + tr("callsign:") + "</td><td>" + ship.callsign + "</td></tr>";
+    if (!ship.imo.isEmpty()) text += "<tr><td>" + tr("imo:") + "</td><td>" + ship.imo + "</td></tr>";
+    if (!ship.mmsi.isEmpty()) text += "<tr><td>" + tr("mmsi:") + "</td><td>" + ship.mmsi + "</td></tr>";
+    text += "<tr><td>" + tr("last contact:") + "</td><td>" + QDateTime::fromTime_t(ship.timePosition).toString() +
+            "</td></tr>";
+    text += "<tr><td>" + tr("longitude:") + "</td><td>" + QString::number(ship.longitude) + "°</td></tr>";
+    text += "<tr><td>" + tr("latitude:") + "</td><td>" + QString::number(ship.latitude) + "°</td></tr>";
+    if (ship.velocity >= 0.1)
+      text += "<tr><td>" + tr("velocity:") + "</td><td>" + QString::number(ship.velocity) + "knots</td></tr>";
+    if (ship.heading >= 0 && ship.heading <= 360)
+      text += "<tr><td>" + tr("heading:") + "</td><td>" + QString::number(ship.heading) + "°</td></tr>";
+    if (!ship.destination.isEmpty())
+      text += "<tr><td>" + tr("destination:") + "</td><td>" + ship.destination + "</td></tr>";
+    if (ship.length > 0)
+      text += "<tr><td>" + tr("length:") + "</td><td>" + QString::number(ship.length) + "m</td></tr>";
+    if (ship.width > 0) text += "<tr><td>" + tr("width:") + "</td><td>" + QString::number(ship.width) + "m</td></tr>";
+    if (ship.draught > 0)
+      text += "<tr><td>" + tr("draught:") + "</td><td>" + QString::number(ship.draught) + "m</td></tr>";
+    text += "</table>";
 
-        QTextDocument doc;
-        doc.setHtml(text);
-        doc.setTextWidth(300);
-        QRectF rectText(QPointF(0, 0), doc.size());
+    QTextDocument doc;
+    doc.setHtml(text);
+    doc.setTextWidth(300);
+    QRectF rectText(QPointF(0, 0), doc.size());
 
-        rectText.moveTopLeft(ship.point + QPointF(32, 0));
-        QRectF rectFrame = rectText.adjusted(-5, -5, 5, 5);
+    rectText.moveTopLeft(ship.point + QPointF(32, 0));
+    QRectF rectFrame = rectText.adjusted(-5, -5, 5, 5);
 
-        p.setPen(CDraw::penBorderGray);
-        p.setBrush(CDraw::brushBackWhite);
-        PAINT_ROUNDED_RECT(p, rectFrame);
+    p.setPen(CDraw::penBorderGray);
+    p.setBrush(CDraw::brushBackWhite);
+    PAINT_ROUNDED_RECT(p, rectFrame);
 
-        p.translate(rectText.topLeft());
-        p.setPen(Qt::black);
-        doc.drawContents(&p);
+    p.translate(rectText.topLeft());
+    p.setPen(Qt::black);
+    doc.drawContents(&p);
 
-        p.restore();
-    }
+    p.restore();
+  }
 }
 
-void CRtAis::mouseMove(const QPointF& pos)
-{
-    if(checkState(eColumnCheckBox) != Qt::Checked)
-    {
-        return;
-    }
+void CRtAis::mouseMove(const QPointF& pos) {
+  if (checkState(eColumnCheckBox) != Qt::Checked) {
+    return;
+  }
 
-    QMutexLocker lock(&IRtSource::mutex);
+  QMutexLocker lock(&IRtSource::mutex);
 
-    keyFocus.clear();
-    const QStringList& keys = ships.keys();
-    for(const QString& key : keys)
-    {
-        const ship_t& ship = ships[key];
-        if((ship.point - pos).manhattanLength() < 20)
-        {
-            keyFocus = key;
-            break;
-        }
+  keyFocus.clear();
+  const QStringList& keys = ships.keys();
+  for (const QString& key : keys) {
+    const ship_t& ship = ships[key];
+    if ((ship.point - pos).manhattanLength() < 20) {
+      keyFocus = key;
+      break;
     }
+  }
 }
 
-void CRtAis::slotSetShowNames(bool yes)
-{
-    QMutexLocker lock(&IRtSource::mutex);
-    showNames = yes;
-    emit sigChanged();
+void CRtAis::slotSetShowNames(bool yes) {
+  QMutexLocker lock(&IRtSource::mutex);
+  showNames = yes;
+  emit sigChanged();
 }

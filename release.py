@@ -75,7 +75,7 @@ if asw.upper() == "Y":
     # update wiki and create help files
     os.chdir(wiki_repo_path)
     run('git pull')
-    run('make VERBOSE=YES -f Makefile.make HELPGENERATOR=qcollectiongenerator-qt5 ASSISTANT=assistant-qt5 all')
+    run('make VERBOSE=YES -f Makefile.make HELPGENERATOR=qcollectiongenerator ASSISTANT=assistant all')
 
     # move help files to source repo
     os.chdir(source_repo_path)

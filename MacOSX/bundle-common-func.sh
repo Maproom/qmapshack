@@ -68,7 +68,9 @@ function buildAppStructure {
 
     cp -v $SRC_RESOURCES_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR
     cp -v $SRC_RESOURCES_DIR/*.qss $BUILD_BUNDLE_RES_DIR
-    cp -v $SRC_RESOURCES_DIR/Info.plist $BUILD_BUNDLE_CONTENTS_DIR
+    # inject PATH of HOMEBREW, so that external tools can be run from the app bundles
+    sed  "s|HOMEBREW|$HOMEBREW_PREFIX|" $SRC_RESOURCES_DIR/Info.plist > $QMSDEVDIR/Info.plist
+    mv $QMSDEVDIR/Info.plist $BUILD_BUNDLE_CONTENTS_DIR
 
     # new icon, if one has been created (otherwise the one from predefined data)
     if [ -f "$BUILD_BIN_DIR/$APP_NAME.icns" ]; then

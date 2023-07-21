@@ -127,7 +127,7 @@ export QT_DIR=$HOMEBREW_PREFIX/opt/qt5
 export Qt5_DIR=$QT_DIR/lib/cmake
 
 # GDAL
-if [[ "${BUILD_GDAL}" == "" ]]; then
+if [ -z "${BUILD_GDAL}" ]; then
     export GDAL_DIR=`brew --prefix gdal`
 else
     export GDAL_DIR=$LOCAL_ENV

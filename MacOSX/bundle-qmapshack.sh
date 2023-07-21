@@ -28,14 +28,9 @@ function extendAppStructure {
 function copyAdditionalLibraries {
     cp -v    $LOCAL_ENV/lib/libroutino* $BUILD_BUNDLE_FRW_DIR
     cp -v    $LOCAL_ENV/lib/libquazip*.dylib $BUILD_BUNDLE_FRW_DIR
-    
-    if [[ "$BUILD_GDAL" != "" ]] ; then
-        # GDAL should not be copied to bundle anyway
-        cp -v    $GDAL_DIR/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
-    fi
 
-    if [[ "$BREW_PACKAGE_BUILD" == "" ]]; then
-        # QMS not as a brew pkg
+    if [ -z "$BREW_PACKAGE_BUILD"]; then
+        # copy only if built as standalone package (QMS not as a brew pkg)
         cp -v    $GDAL_DIR/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
         cp -v    $HOMEBREW_PREFIX/lib/libgeos*.dylib $BUILD_BUNDLE_EXTLIB_DIR
 
@@ -79,21 +74,15 @@ function copyExternalHelpFiles_QMS {
 
 
 function copyExtTools {
-
-    if [[ "$BREW_PACKAGE_BUILD" == "" ]]; then
-        cp -v `brew --prefix gdal`/bin/gdalbuildvrt $BUILD_BUNDLE_RES_BIN_DIR
-        cp -v $HOMEBREW_PREFIX/bin/proj             $BUILD_BUNDLE_RES_BIN_DIR
-        cp -v $LOCAL_ENV/lib/planetsplitter         $BUILD_BUNDLE_RES_BIN_DIR
-
-        # currently only used by QMapTool.
-        cp -v $BUILD_BIN_DIR/qmt_rgb2pct            $BUILD_BUNDLE_RES_BIN_DIR
-        cp -v $BUILD_BIN_DIR/qmt_map2jnx            $BUILD_BUNDLE_RES_BIN_DIR
-    fi
-
-    if [[ "$BUILD_GDAL" != "" ]]; then
-       # use GDAL built from source. copy it to bundle, regardless if brew package is created
+    if [ -z "$BREW_PACKAGE_BUILD"]; then
+        # copy only if built as standalone package (QMS not as a brew pkg)
         cp -v $GDAL_DIR/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $HOMEBREW_PREFIX/bin/proj             $BUILD_BUNDLE_RES_BIN_DIR
     fi
+    cp -v $LOCAL_ENV/lib/planetsplitter         $BUILD_BUNDLE_RES_BIN_DIR
+    # currently only used by QMapTool.
+    cp -v $BUILD_BIN_DIR/qmt_rgb2pct            $BUILD_BUNDLE_RES_BIN_DIR
+    cp -v $BUILD_BIN_DIR/qmt_map2jnx            $BUILD_BUNDLE_RES_BIN_DIR
 }
 
 
@@ -128,13 +117,15 @@ if [[ "$1" == "" ]]; then
     copyQtTrqnslations
     copyExternalFiles
     copyExternalHelpFiles_QMS
-    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
+    if [ -z "$BREW_PACKAGE_BUILD"]; then
+        # copy only if built as standalone package (QMS not as a brew pkg)
         echo "---adjust linking ------------------"
         adjustLinking
     fi
     echo "---external tools ------------------"
     copyExtTools
-    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
+    if [ -z "$BREW_PACKAGE_BUILD" ]; then
+        # copy only if built as standalone package (QMS not as a brew pkg)
         adjustLinkingExtTools
     fi
     printLinkingExtTools
@@ -146,16 +137,19 @@ if [[ "$1" == "" ]]; then
     # 1. remove all empty directories, otherwiese verification of signing will fail
     find $BUILD_BUNDLE_CONTENTS_DIR -type d -empty -delete
 
+    if [ -z "$BREW_PACKAGE_BUILD" ]; then
+        # copy only if built as standalone package (QMS not as a brew pkg)
     # 2. sign gdalbuild (special hack), since it is an executable copied from outside into the bundle
-    if [[ "$BREW_PACKAGE_BUILD" == "" ]]; then
     # install_name_tool -add_rpath @executable_path/../Frameworks $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
-        # codesign -s manfred.kern@gmail.com --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
-        codesign  --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+    # codesign -s <Apple Dev Account> --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+    codesign -s manfred.kern@gmail.com --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+    # codesign  --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
     fi
 
     # 3. sign the complete app bundle
-    # codesign -s manfred.kern@gmail.com --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
-    codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
+    # codesign -s <Apple Dev Account> --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
+    codesign -s manfred.kern@gmail.com --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
+    # codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
 fi
 
 if [[ "$1" == "archive" ]]; then

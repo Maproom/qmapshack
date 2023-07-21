@@ -32,6 +32,7 @@ V1.17.0
 [QMS-610] Replace uncrustify by clang-format
 [QMS-612] Optimize DEM rendering by using a thread pool
 [QMS-615] Syntax error when compiling QMS for Windows
+[QMS-619] MacOS build scripts adapted to change in brew repo
 
 V1.16.1
 [QMS-396] Save route sub-points as ordinary route points in case of track routing

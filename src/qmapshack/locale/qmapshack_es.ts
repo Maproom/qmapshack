@@ -1166,7 +1166,7 @@ El único valor a introducir es la longitud mínima del bucle: Esto sirve para e
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSplitTrack.cpp" line="55"/>
-        <source>Sometimes tracks have too many points to be transfered to a gps device.
+        <source>Sometimes tracks have too many points to be transferred to a gps device.
 
 This filter splits the track into multiple smaller tracks.</source>
         <translation type="unfinished"></translation>
@@ -13713,7 +13713,7 @@ o
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="256"/>
-        <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, Licence GPLv3&lt;/a&gt;&lt;/p&gt;</source>
+        <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, License GPLv3&lt;/a&gt;&lt;/p&gt;</source>
         <translation></translation>
     </message>
     <message>

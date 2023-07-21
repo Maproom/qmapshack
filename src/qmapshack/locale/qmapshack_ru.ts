@@ -1180,7 +1180,7 @@ The only input parameter is minimum loop length: this is to prevent cutting trac
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSplitTrack.cpp" line="55"/>
-        <source>Sometimes tracks have too many points to be transfered to a gps device.
+        <source>Sometimes tracks have too many points to be transferred to a gps device.
 
 This filter splits the track into multiple smaller tracks.</source>
         <translation>Иногда треки содержат слишком много точек, чтобы их можно было передать на gps-устройство.
@@ -13909,7 +13909,7 @@ or
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="256"/>
-        <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, Licence GPLv3&lt;/a&gt;&lt;/p&gt;</source>
+        <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, License GPLv3&lt;/a&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, лицензия GPLv3&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>

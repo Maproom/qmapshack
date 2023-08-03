@@ -18,7 +18,7 @@
 
 #include "CRouterBRouterToolShell.h"
 
-#include <QtWidgets>
+#include <QTimer>
 
 CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser* textBrowser, QWidget* parent) : IToolShell(parent) {
   setTextBrowser(textBrowser);

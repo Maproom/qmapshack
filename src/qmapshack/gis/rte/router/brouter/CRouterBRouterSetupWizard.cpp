@@ -18,16 +18,11 @@
 
 #include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
 
-#include <JlCompress.h>
-
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QNetworkReply>
-#include <QNetworkRequest>
 
 #include "CMainWindow.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
-#include "helpers/CWebPage.h"
 
 CRouterBRouterSetupWizard::CRouterBRouterSetupWizard() : QWizard(CMainWindow::getBestWidgetForParent()) {
   setupUi(this);
@@ -57,12 +52,10 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard() : QWizard(CMainWindow::ge
   connect(pushCreateOrUpdateLocalInstall, &QPushButton::clicked, this,
           &CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked);
 
-  localVersionsPage = new CWebPage(this);
-  webLocalBRouterVersions->setPage(localVersionsPage);
-  connect(localVersionsPage, &CWebPage::linkClicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked);
-  connect(localVersionsPage, &QWebEnginePage::loadFinished, this,
-          &CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished);
-  connect(pushLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked);
+  connect(listLocalInstallVersions, &QListView::clicked, pageLocalInstallation,
+          &CRouterBRouterDownloadPage::slotListVersionsClicked);
+  connect(pushLocalInstall, &QPushButton::clicked, pageLocalInstallation,
+          &CRouterBRouterDownloadPage::slotLocalDownloadButtonClicked);
 
   connect(listProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotProfileClicked);
   connect(listAvailableProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotAvailableProfileClicked);
@@ -92,10 +85,6 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard() : QWizard(CMainWindow::ge
 
   QStringListModel* availableProfiles = new QStringListModel();
   listAvailableProfiles->setModel(availableProfiles);
-
-  networkAccessManager = new QNetworkAccessManager(this);
-  connect(networkAccessManager, &QNetworkAccessManager::finished, this,
-          &CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished);
 
   setup->load();
 }
@@ -341,19 +330,68 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const {
   if (lineLocalDir->text() != setup->localDir) {
     lineLocalDir->setText(setup->localDir);
   }
-  if (setup->isLocalBRouterCandidate() && (setup->expertMode || !setup->isLocalBRouterInstalled())) {
-    lineLocalBRouterJar->setVisible(true);
-    toolLocalBRouterJar->setVisible(true);
-    if (lineLocalBRouterJar->text() != setup->localBRouterJar) {
-      lineLocalBRouterJar->setText(setup->localBRouterJar);
-    }
-    if (setup->classMajorVersion == NOINT) {
-      labelLocalBRouterResult->setVisible(true);
-      labelLocalBRouterResult->setText(tr("is not a valid BRouter jarfile"));
+
+  const CRouterBRouterLocalSetupStatus& status = setup->checkLocalBRouterInstallation();
+
+  if (setup->localDir.isEmpty()) {
+    labelLocalDirResult->setText(tr("please select BRouter installation directory"));
+    pushCreateOrUpdateLocalInstall->setVisible(false);
+    lineLocalBRouterJar->setVisible(false);
+    toolLocalBRouterJar->setVisible(false);
+    labelLocalBRouterResult->setVisible(false);
+  } else if (!QDir(setup->localDir).exists()) {
+    labelLocalDirResult->setText(tr("selected directory does not exist"));
+    pushCreateOrUpdateLocalInstall->setText(tr("create directory and install BRouter there"));
+    pushCreateOrUpdateLocalInstall->setVisible(true);
+    lineLocalBRouterJar->setVisible(false);
+    toolLocalBRouterJar->setVisible(false);
+    labelLocalBRouterResult->setVisible(false);
+  } else if (status.isLocalBRouterJar) {
+    if (status.isValidBRouterVersion) {
+      labelLocalDirResult->setText(tr("is an existing BRouter version %1.%2.%3 installation")
+                                       .arg(setup->versionMajor)
+                                       .arg(setup->versionMinor)
+                                       .arg(setup->versionPatch));
     } else {
+      labelLocalDirResult->setText(tr("seems to be an existing BRouter installation"));
+    }
+    pushCreateOrUpdateLocalInstall->setText(tr("update existing BRouter installation"));
+    pushCreateOrUpdateLocalInstall->setVisible(true);
+    if (setup->expertMode) {
+      if (lineLocalBRouterJar->text() != setup->localBRouterJar) {
+        lineLocalBRouterJar->setText(setup->localBRouterJar);
+      }
+      lineLocalBRouterJar->setVisible(true);
+      toolLocalBRouterJar->setVisible(true);
+      labelLocalBRouterResult->setText(tr("is a valid BRouter jar-file (optionally select a different *jar file)"));
+      labelLocalBRouterResult->setVisible(true);
+    } else {
+      lineLocalBRouterJar->setVisible(false);
+      toolLocalBRouterJar->setVisible(false);
+      labelLocalBRouterResult->setVisible(false);
+    }
+  } else if (status.isLocalBRouterCandidate) {
+    labelLocalDirResult->setText(
+        tr("It seems there is an existing BRouter installation but the *.jar file is not valid or outdated."));
+    pushCreateOrUpdateLocalInstall->setText(tr("update existing BRouter installation"));
+    pushCreateOrUpdateLocalInstall->setVisible(true);
+    if (setup->expertMode) {
+      if (lineLocalBRouterJar->text() != setup->localBRouterJar) {
+        lineLocalBRouterJar->setText(setup->localBRouterJar);
+      }
+      lineLocalBRouterJar->setVisible(true);
+      toolLocalBRouterJar->setVisible(true);
+      labelLocalBRouterResult->setText(tr("Choose a different *.jar file or create/update the installation."));
+      labelLocalBRouterResult->setVisible(true);
+    } else {
+      lineLocalBRouterJar->setVisible(false);
+      toolLocalBRouterJar->setVisible(false);
       labelLocalBRouterResult->setVisible(false);
     }
   } else {
+    labelLocalDirResult->setText(tr("empty directory, create new BRouter installation here"));
+    pushCreateOrUpdateLocalInstall->setText(tr("create new BRouter installation"));
+    pushCreateOrUpdateLocalInstall->setVisible(true);
     lineLocalBRouterJar->setVisible(false);
     toolLocalBRouterJar->setVisible(false);
     labelLocalBRouterResult->setVisible(false);
@@ -361,31 +399,10 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const {
   if (lineJavaExecutable->text() != setup->localJavaExecutable) {
     lineJavaExecutable->setText(setup->localJavaExecutable);
   }
-  if (setup->localDir.isEmpty()) {
-    labelLocalDirResult->setText(tr("please select BRouter installation directory"));
-    pushCreateOrUpdateLocalInstall->setVisible(false);
-  } else if (!QDir(setup->localDir).exists()) {
-    labelLocalDirResult->setText(tr("selected directory does not exist"));
-    pushCreateOrUpdateLocalInstall->setText(tr("create directory and install BRouter there"));
-    pushCreateOrUpdateLocalInstall->setVisible(true);
-  } else {
-    if (setup->isLocalBRouterInstalled()) {
-      labelLocalDirResult->setText(tr("existing BRouter installation"));
-      pushCreateOrUpdateLocalInstall->setText(tr("update existing BRouter installation"));
-      pushCreateOrUpdateLocalInstall->setVisible(true);
-    } else if (setup->isLocalBRouterCandidate()) {
-      labelLocalDirResult->setText(tr("it seems this is an existing BRouter installation, choose jar file!"));
-    } else {
-      labelLocalDirResult->setText(tr("empty directory, create new BRouter installation here"));
-      pushCreateOrUpdateLocalInstall->setText(tr("create new BRouter installation"));
-      pushCreateOrUpdateLocalInstall->setVisible(true);
-    }
-  }
-  if (QFile(setup->localJavaExecutable).exists()) {
-    if (QFileInfo(setup->localJavaExecutable).baseName().startsWith("java")) {
+  if (status.isJavaExisting) {
+    if (status.isJavaValid) {
       labelLocalJavaResult->setText(tr("seems to be a valid Java-executable"));
-      if (setup->isLocalBRouterInstalled() &&
-          (setup->javaMajorVersion == NOINT || setup->javaMajorVersion < setup->classMajorVersion)) {
+      if (status.isJavaOutdated) {
         textLocalDirectory->setVisible(true);
         textLocalDirectory->setTextColor(Qt::red);
         textLocalDirectory->setText(
@@ -402,7 +419,8 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const {
     labelLocalJavaResult->setText(tr("Java Executable not found"));
     labelLocalJavaResult->setVisible(true);
   }
-  pageLocalDirectory->emitCompleteChanged();
+  pageLocalDirectory->setComplete(status.isLocalBRouterJar && status.isValidBRouterVersion && status.isJavaValid &&
+                                  !status.isJavaOutdated);
 }
 
 void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked() {
@@ -423,135 +441,11 @@ void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked() {
 }
 
 void CRouterBRouterSetupWizard::initLocalInstall() {
-  pageLocalInstallation->setSetup(setup);
-  localInstallLoaded = false;
-  localVersionsPage->load(QUrl(setup->getBinariesUrl()));
+  pageLocalInstallation->initialize(listLocalInstallVersions, textLocalInstallVersionDetails, labelLocalInstallLink,
+                                    pushLocalInstall, textLocalInstall, setup);
 }
 
-void CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished(bool ok) {
-  if (!localInstallLoaded) {
-    if (!ok) {
-      textLocalInstall->setVisible(true);
-      textLocalInstall->setTextColor(Qt::red);
-      textLocalInstall->append(tr("Error loading installation-page at %1").arg(setup->getBinariesUrl()));
-    } else {
-      localInstallLoaded = true;
-    }
-  }
-}
-
-void CRouterBRouterSetupWizard::beginLocalInstall() {
-  doLocalInstall = false;
-  textLocalInstall->setVisible(false);
-  textLocalInstall->clear();
-  labelLocalInstallLink->setText(tr("no brouter-version to install selected"));
-  pushLocalInstall->setEnabled(false);
-  setOption(QWizard::HaveCustomButton1, false);
-}
-
-void CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked(const QUrl& url) {
-  downloadUrl = url;
-  labelLocalInstallLink->setText(QString(tr("selected %1 for download and installation")).arg(url.fileName()));
-  pushLocalInstall->setEnabled(true);
-}
-
-void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked() {
-  const QString& strUrl = downloadUrl.toString();
-
-  if (!strUrl.startsWith("https")) {
-    QMessageBox mbox;
-    mbox.setWindowTitle(tr("Warning..."));
-    mbox.setIcon(QMessageBox::Warning);
-    mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Abort);
-    mbox.setDefaultButton(QMessageBox::Abort);
-
-    QString msg = tr("Download: %1<br/>"
-                     "<br/>"
-                     "This will download and install a zip file from a download location that is not secured "
-                     "by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is "
-                     "someone redirecting the request and sending you a replacement zip with malware. There "
-                     "is no way for QMapShack to detect this. <br/>"
-                     "If you do not understand this or if you are in doubt, do not proceed and abort. "
-                     "Use the Web version of BRouter instead.")
-                      .arg(strUrl);
-
-    mbox.setText(msg);
-
-    QCheckBox* checkAgree = new QCheckBox(tr("I understand the risk and wish to proceed."), &mbox);
-    mbox.setCheckBox(checkAgree);
-    connect(checkAgree, &QCheckBox::clicked, mbox.button(QMessageBox::Ok), &QPushButton::setEnabled);
-    mbox.button(QMessageBox::Ok)->setDisabled(true);
-
-    if (mbox.exec() != QMessageBox::Ok) {
-      return;
-    }
-  }
-  textLocalInstall->setVisible(true);
-  textLocalInstall->setTextColor(Qt::darkGreen);
-  textLocalInstall->append(tr("download %1 started").arg(downloadUrl.toString()));
-  QNetworkReply* reply = networkAccessManager->get(QNetworkRequest(downloadUrl));
-  reply->setProperty("fileName", downloadUrl.fileName());
-}
-
-void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply* reply) {
-  reply->deleteLater();
-  try {
-    if (reply->error() != QNetworkReply::NoError) {
-      throw tr("Network Error: %1").arg(reply->errorString());
-    }
-    const QString& fileName = reply->property("fileName").toString();
-    const QDir outDir(setup->localDir);
-    if (!outDir.exists()) {
-      throw tr("Error directory %1 does not exist").arg(outDir.absolutePath());
-    }
-    QDir downloadDir = setup->getDownloadDir();
-    QFile outfile(downloadDir.absoluteFilePath(fileName));
-    QStringList messageList;
-    try {
-      if (!outfile.open(QIODevice::WriteOnly)) {
-        throw tr("Error creating file %1").arg(outfile.fileName());
-      }
-      if (outfile.write(reply->readAll()) < 0) {
-        throw tr("Error writing to file %1").arg(outfile.fileName());
-      }
-      outfile.close();
-      textLocalInstall->setTextColor(Qt::darkGreen);
-      textLocalInstall->append(tr("download %1 finished").arg(outfile.fileName()));
-      const QStringList& unzippedNames = JlCompress::extractDir(outfile.fileName(), downloadDir.path());
-      textLocalInstall->append(tr("unzipping:"));
-      for (const QString& unzipped : unzippedNames) {
-        textLocalInstall->append(unzipped);
-      }
-      textLocalInstall->append(tr("installing into %1").arg(setup->localDir));
-      setup->installLocalBRouter(messageList);
-      for (const QString& message : messageList) {
-        textLocalInstall->append(message);
-      }
-      messageList.clear();
-      downloadDir.removeRecursively();
-      textLocalInstall->append(tr("installation successful"));
-      pageLocalInstallation->emitCompleteChanged();
-      setup->readLocalProfiles();
-    } catch (const QString& msg) {
-      for (const QString& message : messageList) {
-        textLocalInstall->append(message);
-      }
-      if (outfile.isOpen()) {
-        outfile.close();
-      }
-      if (outfile.exists()) {
-        outfile.remove();
-      }
-      if (downloadDir.exists() && !downloadDir.isEmpty()) {
-        downloadDir.removeRecursively();
-      }
-      throw msg;
-    }
-  } catch (const QString& msg) {
-    textLocalInstall->setTextColor(Qt::red);
-    textLocalInstall->append(tr("installation of brouter failed: %1").arg(msg));
-  }
-}
+void CRouterBRouterSetupWizard::beginLocalInstall() { pageLocalInstallation->begin(); }
 
 void CRouterBRouterSetupWizard::beginProfiles() {
   isError = false;

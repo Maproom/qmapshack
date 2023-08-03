@@ -28,12 +28,7 @@ CRouterBRouterSetupPage::~CRouterBRouterSetupPage() {}
 bool CRouterBRouterSetupPage::isComplete() const {
   switch (wizard()->currentId()) {
     case CRouterBRouterSetupWizard::ePageLocalDirectory: {
-      return setup != nullptr && setup->isLocalBRouterInstalled() && QFile(setup->localJavaExecutable).exists() &&
-             QFileInfo(setup->localJavaExecutable).baseName().startsWith("java");
-    }
-
-    case CRouterBRouterSetupWizard::ePageLocalInstallation: {
-      return setup != nullptr && setup->isLocalBRouterInstalled();
+      return setup->isLocalBRouterValid;
     }
 
     case CRouterBRouterSetupWizard::ePageProfiles: {

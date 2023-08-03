@@ -23,10 +23,35 @@
 
 #include "units/IUnit.h"
 
+class CRouterBRouterSetupWizard;
 class QJSValue;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QWebEnginePage;
+
+struct CRouterBRouterLocalSetupStatus {
+ public:
+  CRouterBRouterLocalSetupStatus(const bool& isJavaExisting, const bool& isJavaValid, const bool& isJavaOutdated,
+                                 const bool& isLocalBRouterJar, const bool& isLocalBRouterCandidate,
+                                 const bool& isValidBRouterVersion)
+      : isJavaExisting(isJavaExisting),
+        isJavaValid(isJavaValid),
+        isJavaOutdated(isJavaOutdated),
+        isLocalBRouterJar(isLocalBRouterJar),
+        isLocalBRouterCandidate(isLocalBRouterCandidate),
+        isValidBRouterVersion(isValidBRouterVersion) {}
+
+ private:
+  const bool isJavaExisting;
+  const bool isJavaValid;
+  const bool isJavaOutdated;
+  const bool isLocalBRouterJar;
+  const bool isLocalBRouterCandidate;
+  const bool isValidBRouterVersion;
+
+  friend class CRouterBRouterSetup;
+  friend class CRouterBRouterSetupWizard;
+};
 
 class CRouterBRouterSetup : public QObject {
   Q_OBJECT
@@ -82,8 +107,6 @@ class CRouterBRouterSetup : public QObject {
   void setJava(const QString& path);
   QString findJava() const;
   void setLocalBRouterJar(const QString& path);
-  bool isLocalBRouterInstalled() const;
-  bool isLocalBRouterCandidate() const;
   bool isLocalBRouterDefaultDir() const;
 
   QUrl getServiceUrl() const;
@@ -92,7 +115,7 @@ class CRouterBRouterSetup : public QObject {
   QString getConfigUrl() const;
 
   void parseBRouterVersion(const QString& text);
-  void parseJavaVersion(const QString& text);
+  CRouterBRouterLocalSetupStatus checkLocalBRouterInstallation();
 
   void onInvalidSetup();
 
@@ -164,6 +187,8 @@ class CRouterBRouterSetup : public QObject {
   int javaMajorVersion{NOINT};
   int classMajorVersion{NOINT};
 
+  bool isLocalBRouterValid;
+
   const bool defaultExpertMode = false;
   const mode_e defaultInstallMode = eModeOnline;
   static constexpr const char* defaultConfigUrl = "https://brouter.de/brouter-web/config.js";
@@ -180,7 +205,7 @@ class CRouterBRouterSetup : public QObject {
   static constexpr const char* defaultLocalNumberThreads = "1";
   static constexpr const char* defaultLocalMaxRunningTime = "300";
   static constexpr const char* defaultLocalJavaOpts = "-Xmx128M -Xms128M -Xmn8M";
-  static constexpr const char* defaultBinariesUrl = "https://brouter.de/brouter_bin/";
+  static constexpr const char* defaultBinariesUrl = "https://api.github.com/repos/abrensch/brouter/releases";
   static constexpr const char* defaultSegmentsUrl = "https://brouter.de/brouter/segments4/";
 
   static constexpr const char* onlineProfileCacheDir = "BRouterProfiles";
@@ -188,6 +213,7 @@ class CRouterBRouterSetup : public QObject {
 
   friend class CRouterBRouter;
   friend class CRouterBRouterLocal;
+  friend class CRouterBRouterDownloadPage;
   friend class CRouterBRouterSetupPage;
   friend class CRouterBRouterSetupWizard;
   friend class CRouterBRouterTilesSelect;

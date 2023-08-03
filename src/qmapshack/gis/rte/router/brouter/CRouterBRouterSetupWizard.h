@@ -70,10 +70,6 @@ class CRouterBRouterSetupWizard : public QWizard, private Ui::IRouterBRouterSetu
   void slotOnlineConfigButtonClicked() const;
   void slotBinariesUrlCursorEdited();
   void slotSegmentsUrlEdited();
-  void slotWebLocalBRouterVersionsLoadFinished(bool ok);
-  void slotLocalDownloadLinkClicked(const QUrl& url);
-  void slotLocalDownloadButtonClicked();
-  void slotLocalDownloadButtonFinished(QNetworkReply* reply);
   void slotProfileClicked(const QModelIndex& index) const;
   void slotAvailableProfileClicked(const QModelIndex& index) const;
   void slotDisplayProfile(const QString& profile, const QString content);
@@ -119,11 +115,6 @@ class CRouterBRouterSetupWizard : public QWizard, private Ui::IRouterBRouterSetu
   CRouterBRouterSetup* setup;
 
   bool doLocalInstall;
-  bool localInstallLoaded;
-  QUrl downloadUrl;
-
-  CWebPage* localVersionsPage;
-  QNetworkAccessManager* networkAccessManager;
 
   bool isError{false};
   QString error;

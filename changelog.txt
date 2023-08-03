@@ -1,3 +1,5 @@
+[QMS-622] Update BRouter setup (install from github)
+
 V1.17.0
 [QMS-429] Bad OSM Tag formatting crashes QMS
 [QMS-470] Windows build scripts: adapt for release v1.16.1

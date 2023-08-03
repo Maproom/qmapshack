@@ -195,7 +195,7 @@ QString CRouterBRouter::getOptions() {
 void CRouterBRouter::routerSelected() { getBRouterVersion(); }
 
 bool CRouterBRouter::hasFastRouting() {
-  return setup->installMode == CRouterBRouterSetup::eModeLocal && checkFastRecalc->isChecked();
+  return setup->installMode == CRouterBRouterSetup::eModeLocal && setup->isLocalBRouterValid && checkFastRecalc->isChecked();
 }
 
 QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem*>& nogos) const {

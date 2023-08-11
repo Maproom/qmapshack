@@ -64,6 +64,10 @@ CRouterBRouter::CRouterBRouter(QWidget* parent) : IRouter(false, parent) {
   timerCloseStatusMsg->setInterval(5000);
   connect(timerCloseStatusMsg, &QTimer::timeout, this, &CRouterBRouter::slotCloseStatusMsg);
 
+  timerSynchronousRequest = new QTimer(this);
+  timerSynchronousRequest->setSingleShot(true);
+  timerSynchronousRequest->setInterval(300);
+
   routerSetup = dynamic_cast<CRouterSetup*>(parent);
 
   connect(toolConsole, &QToolButton::clicked, this, &CRouterBRouter::slotToggleConsole);
@@ -298,32 +302,38 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
 int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem*>& nogos, QPolygonF& coords,
                                        qreal* costs = nullptr) noexcept(false) {
-  if (!mutex.tryLock()) {
-    // skip further on-the-fly-requests as long a previous request is still running
+  if (isCalculating) {
+    if (!timerSynchronousRequest->isActive()) {
+      emit sigCancelRouting();
+    }
     return -1;
   }
-
+  timerSynchronousRequest->start();
+  isCalculating = true;
+  
   if (setup->installMode == CRouterBRouterSetup::eModeLocal && localBRouter->isBRouterNotRunning()) {
     localBRouter->startBRouter();
   }
 
-  synchronous = true;
-
   QNetworkReply* reply = networkAccessManager->get(getRequest(points, nogos));
 
   try {
+    reply->setProperty("synchronous", true);
     reply->setProperty("options", getOptions());
     reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
 
     CProgressDialog progress(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, nullptr);
 
     QEventLoop eventLoop;
+    connect(this, &CRouterBRouter::sigCancelRouting, reply, &QNetworkReply::abort);
     connect(&progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
     connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
     eventLoop.exec(QEventLoop::AllEvents);
 
     const QNetworkReply::NetworkError& netErr = reply->error();
-    if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1, 4, 10)) {
+    if (netErr == QNetworkReply::OperationCanceledError) {
+      throw QString();
+    } else if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1, 4, 10)) {
       throw tr("this version of BRouter does not support more then 1 nogo-area");
     } else if (netErr != QNetworkReply::NoError) {
       throw reply->errorString();
@@ -381,8 +391,10 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
       }
     }
   } catch (const QString& msg) {
+    coords.clear();
     reply->deleteLater();
-    mutex.unlock();
+    timerSynchronousRequest->stop();
+    isCalculating = false;
     if (!msg.isEmpty()) {
       throw tr("Bad response from server: %1").arg(msg);
     }
@@ -391,18 +403,23 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
 
   reply->deleteLater();
   slotCloseStatusMsg();
-  mutex.unlock();
+  timerSynchronousRequest->stop();
+  isCalculating = false;
   return coords.size();
 }
 
 void CRouterBRouter::calcRoute(const IGisItem::key_t& key) {
-  mutex.lock();
+  if (isCalculating) {
+    return;
+  }
+  isCalculating = true;
+
   if (setup->installMode == CRouterBRouterSetup::eModeLocal && localBRouter->isBRouterNotRunning()) {
     localBRouter->startBRouter();
   }
+
   CGisItemRte* rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
   if (nullptr == rte) {
-    mutex.unlock();
     return;
   }
 
@@ -418,10 +435,9 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key) {
     points << QPointF(pt.lon, pt.lat);
   }
 
-  synchronous = false;
-
   QNetworkReply* reply = networkAccessManager->get(getRequest(points, nogos));
 
+  reply->setProperty("synchronous", false);
   reply->setProperty("key.item", key.item);
   reply->setProperty("key.project", key.project);
   reply->setProperty("key.device", key.device);
@@ -440,7 +456,7 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key) {
 }
 
 void CRouterBRouter::slotRequestFinished(QNetworkReply* reply) {
-  if (synchronous) {
+  if (reply->property("synchronous").toBool()) {
     return;
   }
 
@@ -492,13 +508,13 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply) {
       }
       timerCloseStatusMsg->start();
       reply->deleteLater();
-      mutex.unlock();
+      isCalculating = false;
       return;
     }
   }
 
   slotCloseStatusMsg();
-  mutex.unlock();
+  isCalculating = false;
 }
 
 void CRouterBRouter::slotToggleConsole() const {

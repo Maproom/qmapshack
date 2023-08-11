@@ -51,6 +51,9 @@ class CRouterBRouter : public IRouter, private Ui::IRouterBRouter {
 
   void setupLocalDir(QString localDir);
 
+ signals:
+  void sigCancelRouting();
+
  public slots:
   void slotToolSetupClicked();
 
@@ -79,8 +82,8 @@ class CRouterBRouter : public IRouter, private Ui::IRouterBRouter {
 
   QNetworkAccessManager* networkAccessManager;
   QTimer* timerCloseStatusMsg;
-  bool synchronous = false;
-  QMutex mutex;
+  bool isCalculating{false};
+  QTimer* timerSynchronousRequest;
   CRouterBRouterSetup* setup;
   CRouterSetup* routerSetup;
   CRouterBRouterInfo* info;

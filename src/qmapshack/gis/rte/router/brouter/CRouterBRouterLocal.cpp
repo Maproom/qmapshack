@@ -90,8 +90,7 @@ void CRouterBRouterLocal::startBRouter() {
 
   while (timer.remainingTime() > 0 && brouterState == QProcess::Running) {
     socket.connectToHost(brouter.setup->localHost, brouter.setup->localPort.toInt());
-    // Processing userinputevents in local eventloop would cause a SEGV when clicking 'abort' of calling LineOp
-    connectState = connect_state_e(eventLoop->exec(QEventLoop::ExcludeUserInputEvents));
+    connectState = connect_state_e(eventLoop->exec(QEventLoop::AllEvents));
 
     // retry after 100ms, but only in case socket is not yet connectable
     if (connectState == eError && socketError == QAbstractSocket::ConnectionRefusedError) {

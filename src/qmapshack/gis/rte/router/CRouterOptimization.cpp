@@ -18,6 +18,8 @@
 
 #include "CRouterOptimization.h"
 
+#include <QDebug>
+
 #include "gis/GeoMath.h"
 #include "gis/rte/router/CRouterSetup.h"
 #include "helpers/CProgressDialog.h"
@@ -237,10 +239,16 @@ const CRouterOptimization::routing_cache_item_t* CRouterOptimization::getRoute(c
 
   if (!routingCache[start_key].contains(end_key)) {
     routing_cache_item_t cacheItem;
-    int response = CRouterSetup::self().calcRoute(start, end, cacheItem.route, &cacheItem.costs);
-    if (response < 0) {
+    try {
+      int response = CRouterSetup::self().calcRoute(start, end, cacheItem.route, &cacheItem.costs);
+      if (response < 0) {
+        return nullptr;
+      }
+    } catch (const QString& msg) {
+      qWarning() << msg;
       return nullptr;
     }
+
     routingCache[start_key][end_key] = cacheItem;
 
     qreal airToCostFactor = cacheItem.costs / GPS_Math_DistanceQuick(start.x(), start.y(), end.x(), end.y());

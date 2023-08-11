@@ -381,12 +381,12 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
       }
     }
   } catch (const QString& msg) {
-    coords.clear();
+    reply->deleteLater();
+    mutex.unlock();
     if (!msg.isEmpty()) {
-      reply->deleteLater();
-      mutex.unlock();
       throw tr("Bad response from server: %1").arg(msg);
     }
+    return -1;
   }
 
   reply->deleteLater();

@@ -41,14 +41,12 @@ class CRouterBRouterToolShell : public IToolShell {
  private slots:
   void slotStateChanged(const QProcess::ProcessState newState);
   void slotError(const QProcess::ProcessError error);
-  void slotStartupTimer();
 
  private:
   void finished(int exitCode, QProcess::ExitStatus status) override;
 
   bool isBeingKilled{false};
-  bool isStarting{false};
-  QTimer* startupTimer{nullptr};
+  bool isBeingStopped{false};
 };
 
 #endif  // CROUTERBROUTERTOOLSHELL_H

@@ -1,4 +1,5 @@
 [QMS-622] Update BRouter setup (install from github)
+[QMS-623] remove use of QTimer in brouter startup error detection
 [QMS-630] BRouter on-the-fly routing cannot be canceled
 
 V1.17.0

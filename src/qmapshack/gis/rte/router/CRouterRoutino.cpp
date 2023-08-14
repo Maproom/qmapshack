@@ -402,7 +402,8 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key) {
   CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr) {
+int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords,
+                              qreal* costs = nullptr) noexcept(false) {
   if (!mutex.tryLock()) {
     return -1;
   }

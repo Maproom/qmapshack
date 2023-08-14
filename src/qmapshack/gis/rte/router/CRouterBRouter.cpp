@@ -195,7 +195,8 @@ QString CRouterBRouter::getOptions() {
 void CRouterBRouter::routerSelected() { getBRouterVersion(); }
 
 bool CRouterBRouter::hasFastRouting() {
-  return setup->installMode == CRouterBRouterSetup::eModeLocal && setup->isLocalBRouterValid && checkFastRecalc->isChecked();
+  return setup->installMode == CRouterBRouterSetup::eModeLocal && setup->isLocalBRouterValid &&
+         checkFastRecalc->isChecked();
 }
 
 QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem*>& nogos) const {
@@ -282,7 +283,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF>& routePoints, 
   return QNetworkRequest(url);
 }
 
-int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs) {
+int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs) noexcept(false) {
   if (!hasFastRouting()) {
     return -1;
   }
@@ -296,7 +297,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 }
 
 int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem*>& nogos, QPolygonF& coords,
-                                       qreal* costs = nullptr) {
+                                       qreal* costs = nullptr) noexcept(false) {
   if (!mutex.tryLock()) {
     // skip further on-the-fly-requests as long a previous request is still running
     return -1;
@@ -380,12 +381,12 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
       }
     }
   } catch (const QString& msg) {
-    coords.clear();
+    reply->deleteLater();
+    mutex.unlock();
     if (!msg.isEmpty()) {
-      reply->deleteLater();
-      mutex.unlock();
       throw tr("Bad response from server: %1").arg(msg);
     }
+    return -1;
   }
 
   reply->deleteLater();

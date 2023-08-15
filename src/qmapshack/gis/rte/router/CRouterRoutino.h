@@ -35,7 +35,7 @@ class CRouterRoutino : public IRouter, private Ui::IRouterRoutino {
   static CRouterRoutino& self() { return *pSelf; }
 
   void calcRoute(const IGisItem::key_t& key) override;
-  int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs) override;
+  int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs) noexcept(false) override;
 
   bool hasFastRouting() override;
 

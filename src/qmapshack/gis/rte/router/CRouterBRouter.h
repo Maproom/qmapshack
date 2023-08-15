@@ -43,12 +43,16 @@ class CRouterBRouter : public IRouter, private Ui::IRouterBRouter {
   static CRouterBRouter& self() { return *pSelf; }
 
   void calcRoute(const IGisItem::key_t& key) override;
-  int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords, qreal* costs = nullptr) override;
+  int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords,
+                qreal* costs = nullptr) noexcept(false) override;
   bool hasFastRouting() override;
   QString getOptions() override;
   void routerSelected() override;
 
   void setupLocalDir(QString localDir);
+
+ signals:
+  void sigCancelRouting();
 
  public slots:
   void slotToolSetupClicked();
@@ -70,7 +74,7 @@ class CRouterBRouter : public IRouter, private Ui::IRouterBRouter {
   bool isMinimumVersion(int major, int minor, int patch) const;
   void updateBRouterStatus() const;
   int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem*>& nogos, QPolygonF& coords,
-                         qreal* costs);
+                         qreal* costs) noexcept(false);
   QNetworkRequest getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem*>& nogos) const;
   QUrl getServiceUrl() const;
 
@@ -78,8 +82,8 @@ class CRouterBRouter : public IRouter, private Ui::IRouterBRouter {
 
   QNetworkAccessManager* networkAccessManager;
   QTimer* timerCloseStatusMsg;
-  bool synchronous = false;
-  QMutex mutex;
+  bool isCalculating{false};
+  QTimer* timerSynchronousRequest;
   CRouterBRouterSetup* setup;
   CRouterSetup* routerSetup;
   CRouterBRouterInfo* info;

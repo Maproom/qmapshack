@@ -185,7 +185,6 @@ void CRouterBRouter::slotCloseStatusMsg() const {
   timerCloseStatusMsg->stop();
   CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
   if (canvas) {
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     canvas->reportStatus("BRouter", "");
   }
 }
@@ -446,7 +445,6 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key) {
 
   CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
   if (canvas) {
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Routing request sent to server. Please wait..."));
   }
 

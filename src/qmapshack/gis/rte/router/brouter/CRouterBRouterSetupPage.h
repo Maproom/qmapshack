@@ -41,4 +41,4 @@ class CRouterBRouterSetupPage : public QWizardPage {
   bool complete{false};
 };
 
-#endif  // CROUTERBROUTERTILESPAGE_H
+#endif  // CROUTERBROUTERSETUPPAGE_H

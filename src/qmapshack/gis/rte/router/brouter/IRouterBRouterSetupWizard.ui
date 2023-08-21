@@ -109,7 +109,7 @@
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset resource="../../../../resources.qrc">
+         <iconset>
           <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
         </property>
        </widget>
@@ -134,7 +134,7 @@
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset resource="../../../../resources.qrc">
+         <iconset>
           <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
         </property>
        </widget>
@@ -190,7 +190,7 @@
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset resource="../../../../resources.qrc">
+         <iconset>
           <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
         </property>
        </widget>
@@ -246,7 +246,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="CRouterBRouterSetupPage" name="pageLocalInstallation">
+  <widget class="CRouterBRouterDownloadPage" name="pageLocalInstallation">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
@@ -266,24 +266,15 @@
     <item>
      <widget class="QLabel" name="labelLocalInstallTitle">
       <property name="text">
-       <string>Download and install BRouter Version</string>
+       <string>select BRouter Version:</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QWebEngineView" name="webLocalBRouterVersions">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="url">
-       <url>
-        <string>about:blank</string>
-       </url>
-      </property>
-     </widget>
+     <widget class="QListView" name="listLocalInstallVersions"/>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textLocalInstallVersionDetails"/>
     </item>
     <item>
      <widget class="QLabel" name="labelLocalInstallLink">
@@ -370,7 +361,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../../../resources.qrc">
+           <iconset>
             <normaloff>:/icons/32x32/Right.png</normaloff>:/icons/32x32/Right.png</iconset>
           </property>
          </widget>
@@ -384,7 +375,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../../../resources.qrc">
+           <iconset>
             <normaloff>:/icons/32x32/Left.png</normaloff>:/icons/32x32/Left.png</iconset>
           </property>
          </widget>
@@ -417,7 +408,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../../../resources.qrc">
+           <iconset>
             <normaloff>:/icons/32x32/Up.png</normaloff>:/icons/32x32/Up.png</iconset>
           </property>
          </widget>
@@ -428,7 +419,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../../../resources.qrc">
+           <iconset>
             <normaloff>:/icons/32x32/Down.png</normaloff>:/icons/32x32/Down.png</iconset>
           </property>
          </widget>
@@ -700,12 +691,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QWebEngineView</class>
-   <extends>QWidget</extends>
-   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>CRouterBRouterTilesPage</class>
    <extends>QWizardPage</extends>
    <header>gis/rte/router/brouter/CRouterBRouterTilesPage.h</header>
@@ -717,9 +702,13 @@
    <header>gis/rte/router/brouter/CRouterBRouterSetupPage.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>CRouterBRouterDownloadPage</class>
+   <extends>QWizardPage</extends>
+   <header>gis/rte/router/brouter/CRouterBRouterDownloadPage.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../../../resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

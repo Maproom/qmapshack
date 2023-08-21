@@ -195,7 +195,7 @@ QString CRouterBRouter::getOptions() {
 void CRouterBRouter::routerSelected() { getBRouterVersion(); }
 
 bool CRouterBRouter::hasFastRouting() {
-  return setup->installMode == CRouterBRouterSetup::eModeLocal && checkFastRecalc->isChecked();
+  return setup->installMode == CRouterBRouterSetup::eModeLocal && setup->isLocalBRouterValid && checkFastRecalc->isChecked();
 }
 
 QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem*>& nogos) const {
@@ -319,8 +319,7 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
     QEventLoop eventLoop;
     connect(&progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
     connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
-    // Processing userinputevents in local eventloop would cause a SEGV when clicking 'abort' of calling LineOp
-    eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+    eventLoop.exec(QEventLoop::AllEvents);
 
     const QNetworkReply::NetworkError& netErr = reply->error();
     if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1, 4, 10)) {

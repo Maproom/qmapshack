@@ -47,6 +47,6 @@ void CFilterSplitTrack::slotApply() {
 
 void CFilterSplitTrack::showHelp() {
   QMessageBox::information(CMainWindow::getBestWidgetForParent(), tr("Help"),
-                           tr("Sometimes tracks have too many points to be transfered to a gps device.\n\n"
+                           tr("Sometimes tracks have too many points to be transferred to a gps device.\n\n"
                               "This filter splits the track into multiple smaller tracks."));
 }

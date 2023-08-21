@@ -49,66 +49,64 @@ void CRouterBRouterLocal::slotBRouterSocketError(const QAbstractSocket::SocketEr
 }
 
 void CRouterBRouterLocal::startBRouter() {
-  if (brouter.setup->isLocalBRouterInstalled()) {
-    brouter.textBRouterOutput->clear();
-    //# BRouter standalone server
-    //# java -cp brouter.jar btools.brouter.RouteServer <segmentdir> <profile-map> <customprofiledir> <port>
-    //<maxthreads> # maxRunningTime is the request timeout in seconds, set to 0 to disable timeout//    JAVA_OPTS=
-    //    CLASSPATH=../brouter.jar
-    //    java $JAVA_OPTS -cp $CLASSPATH btools.server.RouteServer ../segments4 ../profiles2 ../customprofiles 17777 1
+  brouter.textBRouterOutput->clear();
+  // # BRouter standalone server
+  // # java -cp brouter.jar btools.brouter.RouteServer <segmentdir> <profile-map> <customprofiledir> <port>
+  //<maxthreads> # maxRunningTime is the request timeout in seconds, set to 0 to disable timeout//    JAVA_OPTS=
+  //     CLASSPATH=../brouter.jar
+  //     java $JAVA_OPTS -cp $CLASSPATH btools.server.RouteServer ../segments4 ../profiles2 ../customprofiles 17777 1
 
-    if (brouterState == QProcess::NotRunning) {
-      QStringList args;
-      args << brouter.setup->localJavaOpts.split(QRegExp("\\s+"));
-      args << QString("-DmaxRunningTime=%1").arg(brouter.setup->localMaxRunningTime);
-      args << "-cp";
-      args << brouter.setup->localBRouterJar;
-      args << "btools.server.RouteServer";
-      args << brouter.setup->localSegmentsDir;
-      args << brouter.setup->localProfileDir;
-      args << brouter.setup->localCustomProfileDir;
-      args << brouter.setup->localPort;
-      args << brouter.setup->localNumberThreads;
-      if (usesLocalBindaddress()) {
-        args << brouter.setup->localHost;
-      }
-      brouterShell->start(brouter.setup->localDir, brouter.setup->localJavaExecutable, args);
+  if (brouterState == QProcess::NotRunning) {
+    QStringList args;
+    args << brouter.setup->localJavaOpts.split(QRegExp("\\s+"));
+    args << QString("-DmaxRunningTime=%1").arg(brouter.setup->localMaxRunningTime);
+    args << "-cp";
+    args << brouter.setup->localBRouterJar;
+    args << "btools.server.RouteServer";
+    args << brouter.setup->localSegmentsDir;
+    args << brouter.setup->localProfileDir;
+    args << brouter.setup->localCustomProfileDir;
+    args << brouter.setup->localPort;
+    args << brouter.setup->localNumberThreads;
+    if (usesLocalBindaddress()) {
+      args << brouter.setup->localHost;
     }
-
-    eventLoop = new QEventLoop(this);
-    CProgressDialog progress(tr("Waiting for local BRouter to finish initialization"), 0, NOINT, nullptr);
-    QTcpSocket socket;
-    QTimer timer;
-
-    connect(&progress, &CProgressDialog::rejected, eventLoop, &QEventLoop::quit);
-    connect(&socket, &QAbstractSocket::connected, this, &CRouterBRouterLocal::slotBRouterSocketConnected);
-    connect(&socket, &QAbstractSocket::errorOccurred, this, &CRouterBRouterLocal::slotBRouterSocketError);
-    connect(&timer, &QTimer::timeout, eventLoop, &QEventLoop::quit);
-
-    timer.setSingleShot(true);
-    timer.start(30000);  // up to 30 sec.
-    connect_state_e connectState = eNone;
-
-    while (timer.remainingTime() > 0 && brouterState == QProcess::Running) {
-      socket.connectToHost(brouter.setup->localHost, brouter.setup->localPort.toInt());
-      // Processing userinputevents in local eventloop would cause a SEGV when clicking 'abort' of calling LineOp
-      connectState = connect_state_e(eventLoop->exec(QEventLoop::ExcludeUserInputEvents));
-
-      // retry after 100ms, but only in case socket is not yet connectable
-      if (connectState == eError && socketError == QAbstractSocket::ConnectionRefusedError) {
-        QThread::msleep(100);
-      } else {
-        // connection either succeeded, progress was canceled or timeout occured.
-        break;
-      }
-    }
-    timer.stop();
-    if (connectState == eConnected) {
-      socket.disconnectFromHost();
-    }
-    eventLoop->deleteLater();
-    eventLoop = nullptr;
+    brouterShell->start(brouter.setup->localDir, brouter.setup->localJavaExecutable, args);
   }
+
+  eventLoop = new QEventLoop(this);
+  CProgressDialog progress(tr("Waiting for local BRouter to finish initialization"), 0, NOINT, nullptr);
+  QTcpSocket socket;
+  QTimer timer;
+
+  connect(&progress, &CProgressDialog::rejected, eventLoop, &QEventLoop::quit);
+  connect(&socket, &QAbstractSocket::connected, this, &CRouterBRouterLocal::slotBRouterSocketConnected);
+  connect(&socket, &QAbstractSocket::errorOccurred, this, &CRouterBRouterLocal::slotBRouterSocketError);
+  connect(&timer, &QTimer::timeout, eventLoop, &QEventLoop::quit);
+
+  timer.setSingleShot(true);
+  timer.start(30000);  // up to 30 sec.
+  connect_state_e connectState = eNone;
+
+  while (timer.remainingTime() > 0 && brouterState == QProcess::Running) {
+    socket.connectToHost(brouter.setup->localHost, brouter.setup->localPort.toInt());
+    // Processing userinputevents in local eventloop would cause a SEGV when clicking 'abort' of calling LineOp
+    connectState = connect_state_e(eventLoop->exec(QEventLoop::ExcludeUserInputEvents));
+
+    // retry after 100ms, but only in case socket is not yet connectable
+    if (connectState == eError && socketError == QAbstractSocket::ConnectionRefusedError) {
+      QThread::msleep(100);
+    } else {
+      // connection either succeeded, progress was canceled or timeout occured.
+      break;
+    }
+  }
+  timer.stop();
+  if (connectState == eConnected) {
+    socket.disconnectFromHost();
+  }
+  eventLoop->deleteLater();
+  eventLoop = nullptr;
 }
 
 void CRouterBRouterLocal::stopBRouter() const {
@@ -124,23 +122,7 @@ bool CRouterBRouterLocal::isBRouterError() const { return brouterError != QProce
 
 void CRouterBRouterLocal::clearBRouterError() { brouterError = QProcess::UnknownError; }
 
-void CRouterBRouterLocal::getBRouterVersion() const {
-  if (brouter.setup->isLocalBRouterInstalled()) {
-    QProcess cmd;
-
-    cmd.setWorkingDirectory(brouter.setup->localDir);
-    cmd.start(brouter.setup->localJavaExecutable, {"-cp", brouter.setup->localBRouterJar, "btools.server.RouteServer"});
-
-    cmd.waitForStarted();
-    if (!cmd.waitForFinished(3000)) {
-      cmd.kill();
-    }
-
-    brouter.setup->parseBRouterVersion(QString(cmd.readAll()));
-  } else {
-    brouter.labelBRouter->setText(tr("BRouter: not found"));
-  }
-}
+void CRouterBRouterLocal::getBRouterVersion() const { brouter.setup->checkLocalBRouterInstallation(); }
 
 bool CRouterBRouterLocal::usesLocalBindaddress() const {
   return brouter.setup->localBindLocalonly && brouter.isMinimumVersion(1, 4, 10);
@@ -168,7 +150,7 @@ void CRouterBRouterLocal::updateLocalBRouterStatus() const {
          "local address by setting hostname to \"localhost\" and check \"Bind to hostname only\" in the setup "
          "using expert mode.");
 
-  if (brouter.setup->isLocalBRouterInstalled()) {
+  if (brouter.setup->isLocalBRouterValid) {
     switch (brouterState) {
       case QProcess::Starting: {
         SETTINGS;

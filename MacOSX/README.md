@@ -1,7 +1,7 @@
 QMapShack (QMS) build process for Mac
 
 The build process relies on a fixed local build environment.
-The root directory of the local build environment mut be empty and referenced as $QMSDEVDIR
+The root directory of the local build environment must be empty and referenced as $QMSDEVDIR
 
 This directory contains sub-directories while building:
 
@@ -38,7 +38,7 @@ Parameters to configure build:
 
 
 To run the complete build process:
-1. Create a dir cd into this directory. This dir will be referenced as $QMSDEVDIR
+1. Create a directory and cd into this directory. This dir will be referenced as $QMSDEVDIR
 2. clone git repo https://github.com/d029940/qmapshack.git
 3. Check build paramters in ./qmapshack/MacOSX/config.sh
 4. run "sh ./qmapshack/MacOSX/build-all.sh | tee log.txt"

@@ -120,6 +120,7 @@ set( SRCS
     gis/rte/router/CRouterRoutino.cpp
     gis/rte/router/CRouterSetup.cpp
     gis/rte/router/IRouter.cpp
+    gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp
     gis/rte/router/brouter/CRouterBRouterInfo.cpp
     gis/rte/router/brouter/CRouterBRouterLocal.cpp
     gis/rte/router/brouter/CRouterBRouterSetup.cpp
@@ -490,6 +491,7 @@ set( HDRS
     gis/rte/router/CRouterRoutino.h
     gis/rte/router/CRouterSetup.h
     gis/rte/router/IRouter.h
+    gis/rte/router/brouter/CRouterBRouterDownloadPage.h
     gis/rte/router/brouter/CRouterBRouterInfo.h
     gis/rte/router/brouter/CRouterBRouterLocal.h
     gis/rte/router/brouter/CRouterBRouterSetup.h

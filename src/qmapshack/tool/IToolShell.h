@@ -21,9 +21,8 @@
 
 #include <QPointer>
 #include <QProcess>
+#include <QTextBrowser>
 #include <QWidget>
-
-class QTextBrowser;
 
 class IToolShell : public QWidget {
   Q_OBJECT

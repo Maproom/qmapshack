@@ -30,6 +30,11 @@
 	<true/>
 	<key>LSRequiresCarbon</key>
 	<true/>
+	<key>LSEnvironment</key>
+	<dict>
+    	<key>PATH</key>
+    	<string>$PATH:HOMEBREW/bin</string>
+	</dict>
 	<key>NSRequiresAquaSystemAppearance</key>
 	<string>true</string>
 </dict>

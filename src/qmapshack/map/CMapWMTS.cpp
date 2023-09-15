@@ -251,21 +251,22 @@ CMapWMTS::CMapWMTS(const QString& filename, CMapDraw* parent) : IMapOnline(paren
 }
 
 void CMapWMTS::getLayers(QListWidget& list) {
-  QMutexLocker lock(&mutex);
-
-  list.clear();
-  if (layers.size() < 2) {
+  if (!mutex.tryLock(100)) {
     return;
   }
 
-  int i = 0;
-  for (const layer_t& layer : qAsConst(layers)) {
-    QListWidgetItem* item = new QListWidgetItem(layer.title, &list);
-    item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
-    item->setData(Qt::UserRole, i++);
-  }
+  list.clear();
+  if (layers.size() > 1) {
+    int i = 0;
+    for (const layer_t& layer : qAsConst(layers)) {
+      QListWidgetItem* item = new QListWidgetItem(layer.title, &list);
+      item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
+      item->setData(Qt::UserRole, i++);
+    }
 
-  connect(&list, &QListWidget::itemChanged, this, &CMapWMTS::slotLayersChanged);
+    connect(&list, &QListWidget::itemChanged, this, &CMapWMTS::slotLayersChanged);
+  }
+  mutex.unlock();
 }
 
 void CMapWMTS::saveConfig(QSettings& cfg) /* override */

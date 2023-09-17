@@ -1,5 +1,7 @@
+V1.XX.X
+[QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps
 [QMS-622] Update BRouter setup (install from github)
-[QMS-623] remove use of QTimer in brouter startup error detection
+[QMS-623] remove use of QTimer in BRouter startup error detection
 [QMS-630] BRouter on-the-fly routing cannot be canceled
 
 V1.17.0

@@ -31,7 +31,14 @@ class QNetworkReply;
 
 class IMapOnline : public IMap {
   Q_OBJECT
+ public:
+  IMapOnline(CMapDraw* parent);
+  virtual ~IMapOnline() {}
 
+ signals:
+  void sigQueueChanged();
+
+ protected:
   struct rawHeaderItem_t {
     QString name;
     QString value;
@@ -39,10 +46,6 @@ class IMapOnline : public IMap {
 
   QList<rawHeaderItem_t> rawHeaderItems;
 
- signals:
-  void sigQueueChanged();
-
- protected:
   /// Mutex to control access to url queue
   QRecursiveMutex mutex;
   /// a queue with all tile urls to request
@@ -68,12 +71,8 @@ class IMapOnline : public IMap {
 
   void configureCache() override;
 
- public:
   void slotQueueChanged();
   void slotRequestFinished(QNetworkReply* reply);
-
-  IMapOnline(CMapDraw* parent);
-  virtual ~IMapOnline() {}
 };
 
 #endif  // IMAPONLINE_H

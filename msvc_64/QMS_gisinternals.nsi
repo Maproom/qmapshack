@@ -29,9 +29,9 @@
   !define VERSION "1.17.0"
 
   ; Installer executable info
-  VIProductVersion "${VERSION}.0"
+  VIProductVersion "${VERSION}.1"
   VIAddVersionKey  "ProductVersion" ${VERSION}
-  VIAddVersionKey  "FileVersion" "${VERSION}.0"
+  VIAddVersionKey  "FileVersion" "${VERSION}.1"
   VIAddVersionKey  "ProductName" ${PACKAGE}
   VIAddVersionKey  "LegalCopyright" "Copyright (c) 2023, Oliver Eichler"
   VIAddVersionKey  "FileDescription" "${PACKAGE} installer (x64)"
@@ -94,28 +94,21 @@
 !define MUI_WELCOMEPAGE_TITLE_3LINES
 !define MUI_WELCOMEPAGE_TEXT $(DESC_MUI_WELCOMEPAGE_TEXT)
 
-
-;!define MUI_LICENSEPAGE_CHECKBOX
-
 !define MUI_DIRECTORYPAGE_TEXT_TOP $(DESC_MUI_DIRECTORYPAGE_TEXT_TOP)
 
 !define MUI_FINISHPAGE_LINK $(DESC_MUI_FINISHPAGE_LINK)
 !define MUI_FINISHPAGE_LINK_LOCATION "https://github.com/Maproom/qmapshack/wiki"
 
-!define MUI_FINISHPAGE_RUN "$INSTDIR\qmapshack.exe"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\QMS_Start.bat"
 !define MUI_FINISHPAGE_NOREBOOTSUPPORT
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
-
-#!define MUI_FINISHPAGE_SHOWREADME
-#!define MUI_FINISHPAGE_SHOWREADME_TEXT "Show release notes"
-#!define MUI_FINISHPAGE_SHOWREADME_FUNCTION ShowReleaseNotes
 
 
 ;--------------------------------
 ;Pages
 
-  !insertmacro MUI_PAGE_WELCOME
+  !insertmacro MUI_PAGE_WELCOME  
   !insertmacro MUI_PAGE_LICENSE "..\LICENSE"
   !insertmacro MUI_PAGE_LICENSE "LICENSE_Gisinternals.txt"
   !insertmacro MUI_PAGE_COMPONENTS
@@ -166,6 +159,12 @@ SectionEnd
 
 Section "QMapShack/QMapTool" QMapShack
 
+  ReadEnvStr $2 "USERPROFILE"
+  
+  IfFileExists $2\.config\QLandkarte\workspace.db 0 LBL1
+      CopyFiles $2\.config\QLandkarte\workspace.db $2\.config\QLandkarte\workspace.db.bak
+      
+  LBL1:    
   ;Install for all users
   ;SetShellVarContext all
   SetShellVarContext current
@@ -234,6 +233,19 @@ Section "QMapShack/QMapTool" QMapShack
     File /r Files\routino-xml\*.*
 
 
+  SetOutPath $INSTDIR
+
+  FileOpen  $9 QMS_Start.bat w 
+  FileWrite $9 "set GDAL_DRIVER_PATH=$INSTDIR\gdalplugins$\r$\n"
+  FileWrite $9 'start "QMS" /D $INSTDIR /I /B qmapshack.exe --style fusion$\r$\n'
+  FileClose $9 
+  
+  FileOpen  $9 QMT_Start.bat w 
+  FileWrite $9 "set GDAL_DRIVER_PATH=$INSTDIR\gdalplugins$\r$\n"
+  FileWrite $9 'start "QMT" /D $INSTDIR /I /B qmaptool.exe --style fusion$\r$\n'
+  FileClose $9 
+
+
 SectionEnd
 
 
@@ -249,8 +261,8 @@ Section "Start Menu" StartMenu
         
     CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\qmapshack.org.lnk" "https://github.com/Maproom/qmapshack/wiki" "" "$INSTDIR\kfm_home.ico"
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack.lnk"     "$INSTDIR\qmapshack.exe" "--style fusion" "$INSTDIR\QMapShack.ico" 0 "" "" "QMapShack description"
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapTool.lnk"      "$INSTDIR\qmaptool.exe"  "--style fusion" "$INSTDIR\QMapTool.ico"  0 "" "" "QMapTool description"
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack.lnk"     "$INSTDIR\QMS_Start.bat" "" "$INSTDIR\QMapShack.ico" 0 "SW_SHOWMINIMIZED" "" "Start QMapShack with correct environment"
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapTool.lnk"      "$INSTDIR\QMT_Start.bat"  "" "$INSTDIR\QMapTool.ico"  0 "SW_SHOWMINIMIZED" "" "Start QMapTool with correct environment"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack Help.lnk" "$INSTDIR\assistant.exe" "-collectionFile  $INSTDIR\doc\HTML\QMSHelp.qhc" 
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"     "$INSTDIR\Uninstall.exe" "" "$INSTDIR\QMapShack.ico" 0
        
@@ -283,8 +295,6 @@ SectionEnd
 ;Installer Functions
 
 Function .onInit
-
-  #!define PACKAGE "QMapShack"
   
   !insertmacro MUI_LANGDLL_DISPLAY
 

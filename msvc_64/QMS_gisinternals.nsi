@@ -27,21 +27,18 @@
   
   ; Program version
   !define VERSION "1.17.0"
-
+  !define SUBVERSION "${VERSION}.2"
+  
   ; Installer executable info
-  VIProductVersion "${VERSION}.1"
+  VIProductVersion "${SUBVERSION}"
   VIAddVersionKey  "ProductVersion" ${VERSION}
-  VIAddVersionKey  "FileVersion" "${VERSION}.1"
+  VIAddVersionKey  "FileVersion" "${SUBVERSION}"
   VIAddVersionKey  "ProductName" ${PACKAGE}
   VIAddVersionKey  "LegalCopyright" "Copyright (c) 2023, Oliver Eichler"
   VIAddVersionKey  "FileDescription" "${PACKAGE} installer (x64)"
 
-  ; Start menu page configuration
-  !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU"
-  !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\${PACKAGE}"
-  !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME ${PACKAGE}
 
-  OutFile "${PACKAGE}-${VERSION}_x64_setup.exe"
+  OutFile "${PACKAGE}-${SUBVERSION}_x64_setup.exe"
 
   ;Default installation folder
   InstallDir "$LOCALAPPDATA\${PACKAGE}"
@@ -50,7 +47,7 @@
   InstallDirRegKey HKCU "Software\${PACKAGE}" ""
 
   ;Request application privileges for Windows Vista
-  RequestExecutionLevel user
+  RequestExecutionLevel admin 
 
   ; Don't let the OS scale(blur) the installer GUI
   ManifestDPIAware true
@@ -114,15 +111,19 @@
   !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_DIRECTORY
   Var StartMenuFolder
-  !insertmacro MUI_PAGE_STARTMENU "Application" $StartMenuFolder
+  
+  ; Start menu page configuration  
+  !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU" 
+  !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\${PACKAGE}" 
+  !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "Start Menu Folder"
+
+  !insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
   !insertmacro MUI_PAGE_INSTFILES
   !insertmacro MUI_PAGE_FINISH
   
   !insertmacro MUI_UNPAGE_WELCOME
   !insertmacro MUI_UNPAGE_CONFIRM
-  #!insertmacro MUI_UNPAGE_LICENSE "..\LICENSE"
   !insertmacro MUI_UNPAGE_COMPONENTS
-  #!insertmacro MUI_UNPAGE_DIRECTORY
   !insertmacro MUI_UNPAGE_INSTFILES
   !insertmacro MUI_UNPAGE_FINISH
 
@@ -165,9 +166,9 @@ Section "QMapShack/QMapTool" QMapShack
       CopyFiles $2\.config\QLandkarte\workspace.db $2\.config\QLandkarte\workspace.db.bak
       
   LBL1:    
-  ;Install for all users
   ;SetShellVarContext all
   SetShellVarContext current
+  SetRegView 64
   
   ;BEGIN QMapShack Files    
   SetOutPath $INSTDIR
@@ -185,11 +186,11 @@ Section "QMapShack/QMapTool" QMapShack
     File Files\doc\HTML\QMTHelp.qch
     File Files\doc\HTML\QMTHelp.qhc
 
-  ;SetOutPath "$INSTDIR\doc\HTML\.QMSHelp"
-    ;File Files\doc\HTML\.QMSHelp\fts
+  SetOutPath "$INSTDIR\doc\HTML\.QMSHelp"
+    File Files\doc\HTML\.QMSHelp\fts
 
-  ;SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
-    ;File Files\doc\HTML\.QMTHelp\fts
+  SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
+    File Files\doc\HTML\.QMTHelp\fts
  
   SetOutPath "$INSTDIR\imageformats\"
     File Files\imageformats\qgif.dll
@@ -236,15 +237,18 @@ Section "QMapShack/QMapTool" QMapShack
   SetOutPath $INSTDIR
 
   FileOpen  $9 QMS_Start.bat w 
-  FileWrite $9 "set GDAL_DRIVER_PATH=$INSTDIR\gdalplugins$\r$\n"
-  FileWrite $9 'start "QMS" /D $INSTDIR /I /B qmapshack.exe --style fusion$\r$\n'
+  FileWrite $9 'set QMS_ROOT=%~dp0$\r$\n'
+  FileWrite $9 'set GDAL_DRIVER_PATH=%QMS_ROOT%gdalplugins$\r$\n'
+  FileWrite $9 'cd /d %~dp0$\r$\n'
+  FileWrite $9 'start "QMS" /B qmapshack.exe --style fusion %1$\r$\n'
   FileClose $9 
   
   FileOpen  $9 QMT_Start.bat w 
-  FileWrite $9 "set GDAL_DRIVER_PATH=$INSTDIR\gdalplugins$\r$\n"
-  FileWrite $9 'start "QMT" /D $INSTDIR /I /B qmaptool.exe --style fusion$\r$\n'
+  FileWrite $9 'set QMS_ROOT=%~dp0$\r$\n'
+  FileWrite $9 'set GDAL_DRIVER_PATH=%QMS_ROOT%gdalplugins$\r$\n'
+  FileWrite $9 'cd /d %~dp0$\r$\n'
+  FileWrite $9 'start "QMT" /B qmaptool.exe --style fusion$\r$\n'
   FileClose $9 
-
 
 SectionEnd
 
@@ -260,12 +264,15 @@ Section "Start Menu" StartMenu
     ClearErrors    
         
     CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\qmapshack.org.lnk" "https://github.com/Maproom/qmapshack/wiki" "" "$INSTDIR\kfm_home.ico"
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack.lnk"     "$INSTDIR\QMS_Start.bat" "" "$INSTDIR\QMapShack.ico" 0 "SW_SHOWMINIMIZED" "" "Start QMapShack with correct environment"
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapTool.lnk"      "$INSTDIR\QMT_Start.bat"  "" "$INSTDIR\QMapTool.ico"  0 "SW_SHOWMINIMIZED" "" "Start QMapTool with correct environment"
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack Help.lnk" "$INSTDIR\assistant.exe" "-collectionFile  $INSTDIR\doc\HTML\QMSHelp.qhc" 
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"     "$INSTDIR\Uninstall.exe" "" "$INSTDIR\QMapShack.ico" 0
-       
+
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack.lnk"     '"$INSTDIR\QMS_Start.bat"' "" "$INSTDIR\QMapShack.ico" 0 "SW_SHOWMINIMIZED" "" "Start QMapShack with correct environment"
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapTool.lnk"      '"$INSTDIR\QMT_Start.bat"'  "" "$INSTDIR\QMapTool.ico"  0 "SW_SHOWMINIMIZED" "" "Start QMapTool with correct environment"
+    
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack Help offline.lnk" '"$INSTDIR\assistant.exe"' '-collectionFile  "$INSTDIR\doc\HTML\QMSHelp.qhc" --style fusion' 
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack Help online Wiki.lnk" "https://github.com/Maproom/qmapshack/wiki" "" "$INSTDIR\kfm_home.ico"
+
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"     '"$INSTDIR\Uninstall.exe"'
+    
   !insertmacro MUI_STARTMENU_WRITE_END
 
 SectionEnd
@@ -303,9 +310,13 @@ FunctionEnd
 ;--------------------------------
 ;Descriptions
 
-LangString DESC_MUI_DIRECTORYPAGE_TEXT_TOP ${LANG_ENGLISH} "The user must have write permission for the selected folder!"
-LangString DESC_MUI_DIRECTORYPAGE_TEXT_TOP ${LANG_GERMAN}  "Der Nutzer muss Schreibberechtigung für das ausgewählte Verzeichnis haben!"
-LangString DESC_MUI_DIRECTORYPAGE_TEXT_TOP ${LANG_SPANISH} "El usuario debe tener permisos de escritura para la carpeta seleccionada!"
+LangString DESC_MUI_DIRECTORYPAGE_TEXT_TOP ${LANG_ENGLISH} "Hint: The offline help works best if selected folder has write permission!"
+LangString DESC_MUI_DIRECTORYPAGE_TEXT_TOP ${LANG_GERMAN} "Hinweis: Die Offline-Hilfe funktioniert am besten, wenn der ausgewählte Ordner Schreibrechte hat!"
+LangString DESC_MUI_DIRECTORYPAGE_TEXT_TOP ${LANG_SPANISH} "Sugerencia: la ayuda sin conexión funciona mejor si la carpeta seleccionada tiene permiso de escritura."
+
+; LangString DESC_MUI_DIRECTORYPAGE_TEXT_TOP ${LANG_ENGLISH} "The user must have write permission for the selected folder!"
+; LangString DESC_MUI_DIRECTORYPAGE_TEXT_TOP ${LANG_GERMAN}  "Der Nutzer muss Schreibberechtigung für das ausgewählte Verzeichnis haben!"
+; LangString DESC_MUI_DIRECTORYPAGE_TEXT_TOP ${LANG_SPANISH} "El usuario debe tener permisos de escritura para la carpeta seleccionada!"
 
 LangString DESC_MUI_FINISHPAGE_LINK ${LANG_ENGLISH} "Visit the QMapShack site for the latest news, FAQs and support"
 LangString DESC_MUI_FINISHPAGE_LINK ${LANG_GERMAN}  "Besuchen Sie die QMapShack im Internet für Neuigkeiten, FAQ und support"
@@ -354,20 +365,16 @@ Section "Uninstall" Uninstall
   SetShellVarContext current
 
   Delete "$INSTDIR\Uninstall.exe"
-
-  RMDir "$INSTDIR"
-
-  DeleteRegKey HKCU "Software\${PACKAGE}"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PACKAGE}"
-
-  RMDir /r $INSTDIR
+  RMDir /r "$INSTDIR"
 
   !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder
 
-  Delete "$SMPROGRAMS\$StartMenuFolder\*.*"
-  
-  RMDir "$SMPROGRAMS\$StartMenuFolder"
 
+  Delete "$SMPROGRAMS\$StartMenuFolder\*.*"
+  RMDir /r "$SMPROGRAMS\$StartMenuFolder"
+
+  DeleteRegKey HKCU "Software\${PACKAGE}"
+  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PACKAGE}"
 
 SectionEnd
 

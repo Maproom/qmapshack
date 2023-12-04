@@ -31,3 +31,8 @@ tiffxx
 vcruntime140
 vcruntime140_1
 vrf
+
+proj_
+
+gdal_GEOR
+ogr_OCI

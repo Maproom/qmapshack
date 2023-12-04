@@ -27,7 +27,7 @@
   
   ; Program version
   !define VERSION "1.17.0"
-  !define SUBVERSION "${VERSION}.2"
+  !define SUBVERSION "${VERSION}.3"
   
   ; Installer executable info
   VIProductVersion "${SUBVERSION}"

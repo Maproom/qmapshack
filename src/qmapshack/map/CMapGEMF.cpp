@@ -50,8 +50,7 @@ inline double tile2lat(int y, int z) {
 CMapGEMF::CMapGEMF(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibility, parent), filename(filename) {
   qDebug() << "CMapGEMF: try to open " << filename;
   proj.init(
-      "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext "
-      "+no_defs",
+      "EPSG:3857",
       "EPSG:4326");
   qDebug() << "CMapGEMF:" << proj.getProjSrc();
 

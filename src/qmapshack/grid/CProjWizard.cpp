@@ -139,9 +139,7 @@ void CProjWizard::slotChange() {
   if (radioMercator->isChecked()) {
     str += "+proj=merc ";
   } else if (radioWorldMercator->isChecked()) {
-    str +=
-        "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.001 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null "
-        "+no_defs";
+    str += "EPSG:3857";
     labelResult->setText(str);
     return;
   } else if (radioUPSNorth->isChecked()) {

@@ -1,7 +1,8 @@
 #!/bin/sh
 
-DIR_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  # absolute path to the dir of this script
-source $DIR_SCRIPT/config.sh   # check for important paramters
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+echo "${ATTN}Building QUAZIP ...${NC}"
+echo "${ATTN}-------------------${NC}"
 
 ######################################################################## 
 # build Quazip
@@ -12,10 +13,21 @@ git clone https://github.com/stachenov/quazip.git quazip
 cd $QMSDEVDIR/quazip
 mkdir build
 cd ./build
-cmake .. -DCMAKE_INSTALL_PREFIX=$LOCAL_ENV
-cmake --build . -j4
-cmake --build . --target install
+
+if [ ! -z `brew --prefix qt` ]; then
+  echo "unlinking qt and linking qt@5"
+  brew unlink qt
+  brew link qt@5
+fi
+
+$PACKAGES_PATH/bin/cmake .. -DCMAKE_INSTALL_PREFIX=$LOCAL_ENV -DQT_VERSION_MAJOR=5 -DQUAZIP_QT_MAJOR_VERSION=5
+$PACKAGES_PATH/bin/cmake --build . -j4
+$PACKAGES_PATH/bin/cmake --build . --target install
+
+if [ ! -z `brew --prefix qt` ]; then
+  echo "unlinking qt@5 and linking qt"
+  brew unlink qt@5
+  brew link qt
+fi
+
 cd $QMSDEVDIR
-pushd $LOCAL_ENV/lib/cmake
-mv QuaZip-Qt5-1.4 QuaZip-Qt5
-popd

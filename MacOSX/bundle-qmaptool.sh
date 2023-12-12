@@ -1,16 +1,14 @@
 #!/bin/sh
 
-DIR_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  # absolute path to the dir of this script
-source $DIR_SCRIPT/config.sh   # check for important paramters
-
-echo "${INFO}Bundling QMapTool.app${NC}"
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+echo "${ATTN}Building QMapTool.app ...${NC}"
+echo "${ATTN}-------------------------${NC}"
 
 set -a
 APP_NAME=QMapTool
 set +a
 
-source $DIR_SCRIPT/bundle-env-path.sh
-source $DIR_SCRIPT/bundle-common-func.sh
+source $SRC_OSX_DIR/bundle-common-func.sh
 
 function extendAppStructure {
     mkdir $BUILD_BUNDLE_RES_GDAL_DIR
@@ -33,17 +31,51 @@ function linkToQMapShack {
 
 
 function copyAdditionalLibraries {
-    if [ -z "$BREW_PACKAGE_BUILD"]; then
-        # copy only if built as standalone package (QMS not as a brew pkg)
+    if [ -z "$MACPORTS_BUILD" ]; then
+        echo "---building with homebrew---"
+
+        if [ -z "$BREW_PACKAGE_BUILD" ]; then
+
+            # copy only if built as standalone package (QMS not as a brew pkg)
+            echo "---copy additional libs into bundle ------------------"
+           
+            if [[ "$BUILD_GDAL" == "x" ]]; then
+                cp -vP `brew --prefix openjpeg`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                cp -vP `brew --prefix libkml`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                cp -vP `brew --prefix minizip`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                cp -vP `brew --prefix uriparser`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                cp -vP `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                cp -vP $LOCAL_ENV/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
+            else
+                cp -vP `brew --prefix gdal`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                cp -vP `brew --prefix openexr`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                cp -vP `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+
+            fi
+            $LOCAL_ENV/bin/otoolrecursive -u $GDAL/lib/libgdal.dylib | xargs -I{} cp -vf {} $BUILD_BUNDLE_FRW_DIR
+
+            cp -v -R $QT_DEV_PATH/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
+            cp -v -R $QT_DEV_PATH/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
+            cp -v -R $QT_DEV_PATH/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
+        else
+            echo "---build needs brew at runtime---"
+            if [[ "$BUILD_GDAL" == "x" ]]; then
+                cp -v $GDAL/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
+            fi
+        fi
+    else 
+        echo "---building with macports---"
         echo "---copy additional libs into bundle ------------------"
-        cp -v    $HOMEBREW_PREFIX/lib/libgeos*.dylib $BUILD_BUNDLE_EXTLIB_DIR
-        cp -v    $GDAL_DIR/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
-        cp -v -R $QT_DIR/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
-        cp -v -R $QT_DIR/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
-        cp -v -R $QT_DIR/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
+        # gdal
+        port contents gdal | grep $PACKAGES_PATH/lib/libgdal | xargs -I{} cp -vP {} $BUILD_BUNDLE_FRW_DIR
+
+        # Qt
+        cp -v -R $QT_DEV_PATH/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
+        cp -v -R $QT_DEV_PATH/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
+        cp -v -R $QT_DEV_PATH/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
     fi
 
-       # remove debug libraries
+    # remove debug libraries
     for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/* -type f -name '*_debug*'`
     do
         echo $F
@@ -53,18 +85,19 @@ function copyAdditionalLibraries {
 
 
 function copyExtTools {
-    if [ -z "$BREW_PACKAGE_BUILD"]; then
-        # copy only if built as standalone package (QMS not as a brew pkg)
-        echo "---copy additional tools into bundle ------------------"
-        cp -v $GDAL_DIR/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
-        cp -v $GDAL_DIR/bin/gdaladdo                $BUILD_BUNDLE_RES_BIN_DIR
-        cp -v $GDAL_DIR/bin/gdal_translate          $BUILD_BUNDLE_RES_BIN_DIR
-        cp -v $GDAL_DIR/bin/gdalwarp               $BUILD_BUNDLE_RES_BIN_DIR
-    fi
 
+    # copy only if built as standalone package (QMS does not need homebrew at runtime)
+    # if [ -z "$BREW_PACKAGE_BUILD" ]; then
+        echo "---copy additional tools into bundle ------------------"
+        cp -v $GDAL/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $GDAL/bin/gdaladdo                $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $GDAL/bin/gdal_translate          $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $GDAL/bin/gdalwarp                $BUILD_BUNDLE_RES_BIN_DIR
+    # fi
      # currently only used by QMapTool.
     cp -v $BUILD_BIN_DIR/qmt_rgb2pct            $BUILD_BUNDLE_RES_BIN_DIR
     cp -v $BUILD_BIN_DIR/qmt_map2jnx            $BUILD_BUNDLE_RES_BIN_DIR
+
 }
 
 function copyExternalHelpFiles_QMT {
@@ -80,6 +113,13 @@ function removeDuplicatedQtLibs {
 
 
 if [[ "$1" == "" ]]; then
+
+    if [ ! -z `brew --prefix qt` ]; then
+        echo "unlinking qt and linking qt@5"
+        brew unlink qt
+        brew link qt@5
+    fi
+
     echo "---extract version -----------------"
     extractVersion
     readRevisionHash
@@ -98,7 +138,7 @@ if [[ "$1" == "" ]]; then
     copyAdditionalLibraries
     echo "---copy external files -------------"
     copyQtTrqnslations
-    copyExternalFiles
+    # copyExternalFiles  (no external files for QMapTool)
     copyExternalHelpFiles_QMT
     if [ -z "$BREW_PACKAGE_BUILD" ]; then
         # copy only if built as standalone package (QMS not as a brew pkg)
@@ -124,4 +164,11 @@ if [[ "$1" == "" ]]; then
     # codesign -s <Apple Dev Account> --force --deep --sign - $BUILD_RELEASE_DIR/QMapTool.app
     codesign -s manfred.kern@gmail.com --force --deep --sign - $BUILD_RELEASE_DIR/QMapTool.app
     # codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapTool.app
+
+    if [ ! -z `brew --prefix qt` ]; then
+        echo "unlinking qt@5 and linking qt"
+        brew unlink qt@5
+        brew link qt
+    fi
+
 fi

@@ -17,11 +17,17 @@
 
 **********************************************************************************************/
 #include "units/CUnitMetric.h"
+#include "helpers/CSettings.h"
 
 CUnitMetric::CUnitMetric(QObject* parent) : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, "m", 1.0, parent) {}
 
 void CUnitMetric::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
+  qint32 roundLimit;
+  {
+  SETTINGS;
+  roundLimit = cfg.value("Units/roundLimit", 20).toInt();
+  }
   if (meter == NOFLOAT) {
     val = "-";
     unit.clear();
@@ -31,10 +37,10 @@ void CUnitMetric::meter2distance(qreal meter, QString& val, QString& unit) const
   } else if (meter < 1000) {
     val = QString::asprintf("%1.0f", meter);
     unit = "m";
-  } else if (meter < 10000) {
+  } else if (meter < (roundLimit * 1000 / 2)) {
     val = QString::asprintf("%1.2f", meter / 1000);
     unit = "km";
-  } else if (meter < 20000) {
+  } else if (meter < (roundLimit * 1000)) {
     val = QString::asprintf("%1.1f", meter / 1000);
     unit = "km";
   } else {

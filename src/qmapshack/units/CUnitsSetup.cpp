@@ -21,6 +21,8 @@
 #include "CMainWindow.h"
 #include "units/IUnit.h"
 
+#include "helpers/CSettings.h"
+
 CUnitsSetup::CUnitsSetup(QWidget* parent) : QDialog(parent) {
   setupUi(this);
 
@@ -51,6 +53,11 @@ CUnitsSetup::CUnitsSetup(QWidget* parent) : QDialog(parent) {
       radioPercent->setChecked(true);
       break;
   }
+  
+  SETTINGS;
+  cfg.beginGroup("Units");
+  spinRoundLimit->setValue(cfg.value("roundLimit", 20).toInt());
+  cfg.endGroup();
 
   adjustSize();
 }
@@ -71,5 +78,11 @@ void CUnitsSetup::accept() {
   } else if (radioPercent->isChecked()) {
     IUnit::setSlopeMode(IUnit::eSlopePercent);
   }
+
+  SETTINGS;
+  cfg.beginGroup("Units");
+  cfg.setValue("roundLimit", spinRoundLimit->value());
+  cfg.endGroup();
+
   QDialog::accept();
 }

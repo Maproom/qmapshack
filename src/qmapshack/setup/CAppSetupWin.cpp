@@ -28,7 +28,7 @@ void CAppSetupWin::initQMapShack() {
   QString gdalDir = QString("%1\\data").arg(apppath);
   QString projDir = QString("%1\\share\\proj").arg(apppath);
 
-  qunsetenv("GDAL_DRIVER_PATH");
+  // qunsetenv("GDAL_DRIVER_PATH");
   IAppSetup::prepareGdal(gdalDir, projDir);
 
   QString appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();

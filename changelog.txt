@@ -1,8 +1,9 @@
-V1.XX.X
+V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps
 [QMS-622] Update BRouter setup (install from github)
 [QMS-623] remove use of QTimer in BRouter startup error detection
 [QMS-630] BRouter on-the-fly routing cannot be canceled
+[QMS-649] Replace proj strings by EPSG code in CRS definitions
 
 V1.17.0
 [QMS-429] Bad OSM Tag formatting crashes QMS

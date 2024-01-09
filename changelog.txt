@@ -1,3 +1,6 @@
+V1.XX.X
+[QMS-656] TMS/WMTS: Fix loosing layer selection when reloading maps
+
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps
 [QMS-622] Update BRouter setup (install from github)

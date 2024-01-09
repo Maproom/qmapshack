@@ -260,8 +260,9 @@ void CMapWMTS::getLayers(QListWidget& list) {
     int i = 0;
     for (const layer_t& layer : qAsConst(layers)) {
       QListWidgetItem* item = new QListWidgetItem(layer.title, &list);
-      item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
+      bool enabled = layer.enabled;
       item->setData(Qt::UserRole, i++);
+      item->setCheckState(enabled ? Qt::Checked : Qt::Unchecked);
     }
 
     connect(&list, &QListWidget::itemChanged, this, &CMapWMTS::slotLayersChanged);

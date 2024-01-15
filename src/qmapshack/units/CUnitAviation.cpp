@@ -19,20 +19,32 @@
 **********************************************************************************************/
 
 #include "units/CUnitAviation.h"
+#include "helpers/CSettings.h"
 
 CUnitAviation::CUnitAviation(QObject* parent)
     : IUnit(eTypeAviation, "ft", footPerMeter, "kn", meterPerSecToKnots, "ft", footPerMeter, parent) {}
 
 void CUnitAviation::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
+  qint32 roundLimit;
+  {
+  SETTINGS;
+  roundLimit = cfg.value("Units/roundLimit", 20).toInt();
+  }
   if (meter == NOFLOAT) {
     val = "-";
     unit.clear();
   } else if (meter < 1852) {
     val = QString::asprintf("%g", meter * nauticalMilePerMeter);
     unit = "nm";
-  } else {
+  } else if (meter < (roundLimit * 1852 / 2)) {
+    val = QString::asprintf("%1.2f", meter * nauticalMilePerMeter);
+    unit = "nm";
+  } else if (meter < (roundLimit * 1852)) {
     val = QString::asprintf("%1.1f", meter * nauticalMilePerMeter);
+    unit = "nm";
+  } else {
+    val = QString::asprintf("%1.0f", meter * nauticalMilePerMeter);
     unit = "nm";
   }
 }

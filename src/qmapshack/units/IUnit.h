@@ -34,7 +34,7 @@ class IUnit : public QObject {
  public:
   static constexpr qreal footPerMeter = 3.28084;
   static constexpr qreal nauticalMilePerMeter = 1. / 1852;
-  static constexpr qreal meterPerSecToKnots = 1.94361780;
+  static constexpr qreal meterPerSecToKnots = 3600. / 1852;
   static constexpr qreal milePerMeter = 0.6213699E-3;
   static constexpr qreal meterPerSecToMilePerHour = 2.23693164;
 

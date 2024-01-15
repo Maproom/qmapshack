@@ -29,18 +29,22 @@ CUnitsSetup::CUnitsSetup(QWidget* parent) : QDialog(parent) {
   switch (IUnit::self().type) {
     case IUnit::eTypeMetric:
       radioMetric->setChecked(true);
+      spinRoundLimit->setSuffix(" Km");
       break;
 
     case IUnit::eTypeImperial:
       radioImperial->setChecked(true);
+      spinRoundLimit->setSuffix(" mi");
       break;
 
     case IUnit::eTypeNautic:
       radioNautic->setChecked(true);
+      spinRoundLimit->setSuffix(" nm");
       break;
 
     case IUnit::eTypeAviation:
       radioAviation->setChecked(true);
+      spinRoundLimit->setSuffix(" nm");
       break;
   }
 
@@ -53,13 +57,30 @@ CUnitsSetup::CUnitsSetup(QWidget* parent) : QDialog(parent) {
       radioPercent->setChecked(true);
       break;
   }
-  
+ 
+  connect(radioMetric, &QRadioButton::clicked, this, &CUnitsSetup::RoundUnitChange);
+  connect(radioImperial, &QRadioButton::clicked, this, &CUnitsSetup::RoundUnitChange);
+  connect(radioNautic, &QRadioButton::clicked, this, &CUnitsSetup::RoundUnitChange);
+  connect(radioAviation, &QRadioButton::clicked, this, &CUnitsSetup::RoundUnitChange);
+
   SETTINGS;
   cfg.beginGroup("Units");
   spinRoundLimit->setValue(cfg.value("roundLimit", 20).toInt());
   cfg.endGroup();
 
   adjustSize();
+}
+
+void CUnitsSetup::RoundUnitChange() {
+  if (radioMetric->isChecked()) {
+    spinRoundLimit->setSuffix(" km");
+  } else if (radioImperial->isChecked()) {
+    spinRoundLimit->setSuffix(" mi ");
+  } else if (radioNautic->isChecked()) {
+    spinRoundLimit->setSuffix(" nm");
+  } else if (radioAviation->isChecked()) {
+    spinRoundLimit->setSuffix(" nm");
+  }
 }
 
 void CUnitsSetup::accept() {
@@ -86,3 +107,4 @@ void CUnitsSetup::accept() {
 
   QDialog::accept();
 }
+

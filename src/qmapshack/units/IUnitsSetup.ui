@@ -70,17 +70,35 @@
          </item>
          <item>
           <widget class="QSpinBox" name="spinRoundLimit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
-             <width>60</width>
+             <width>16777215</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string/>
            </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="suffix">
+            <string> km</string>
            </property>
            <property name="minimum">
             <number>20</number>
@@ -90,13 +108,6 @@
            </property>
            <property name="singleStep">
             <number>10</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="RoundUnit">
-           <property name="text">
-            <string>Km | mi</string>
            </property>
           </widget>
          </item>
@@ -180,8 +191,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>258</x>
+     <y>329</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -196,8 +207,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>326</x>
+     <y>329</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

@@ -18,17 +18,32 @@
 **********************************************************************************************/
 
 #include "units/CUnitNautic.h"
+#include "helpers/CSettings.h"
 
 CUnitNautic::CUnitNautic(QObject* parent)
-    : IUnit(eTypeNautic, "nm", 0.00053989, "nm/h", 1.94361780, "m", 1.0, parent) {}
+    : IUnit(eTypeNautic, "nm", nauticalMilePerMeter, "kn", meterPerSecToKnots, "m", 1.0, parent) {}
 
 void CUnitNautic::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
+  qint32 roundLimit;
+  {
+  SETTINGS;
+  roundLimit = cfg.value("Units/roundLimit", 20).toInt();
+  }
   if (meter == NOFLOAT) {
     val = "-";
     unit.clear();
-  } else {
+  } else if (meter < 1852) {
     val = QString::asprintf("%1.2f", meter * baseFactor);
+    unit = baseUnit;    
+  } else if (meter < (roundLimit * 1852 / 2)) {
+    val = QString::asprintf("%1.2f", meter * baseFactor);
+    unit = baseUnit;
+  } else if (meter < (roundLimit * 1852)) {
+    val = QString::asprintf("%1.1f", meter * baseFactor);
+    unit = baseUnit;
+  } else {
+    val = QString::asprintf("%1.0f", meter * baseFactor);
     unit = baseUnit;
   }
 }

@@ -29,6 +29,10 @@ class CUnitsSetup : public QDialog, private Ui::IUnitsSetup {
 
  public slots:
   void accept() override;
+  
+ private slots:
+  void RoundUnitChange();
+  
 };
 
 #endif  // CUNITSSETUP_H

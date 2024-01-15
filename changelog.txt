@@ -7,6 +7,7 @@ V1.17.1
 [QMS-623] remove use of QTimer in BRouter startup error detection
 [QMS-630] BRouter on-the-fly routing cannot be canceled
 [QMS-649] Replace proj strings by EPSG code in CRS definitions
+[QMS-651] Add configuration option to handle distance rounding
 [QMS-654] MacOS build (changes to build scripts)
 
 V1.17.0

@@ -18,12 +18,18 @@
 **********************************************************************************************/
 
 #include "units/CUnitImperial.h"
+#include "helpers/CSettings.h"
 
 CUnitImperial::CUnitImperial(QObject* parent)
     : IUnit(eTypeImperial, "ft", footPerMeter, "mi/h", meterPerSecToMilePerHour, "ft", footPerMeter, parent) {}
 
 void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
+  qint32 roundLimit;
+  {
+  SETTINGS;
+  roundLimit = cfg.value("Units/roundLimit", 20).toInt();
+  }
   if (meter == NOFLOAT) {
     val = "-";
     unit.clear();
@@ -33,10 +39,10 @@ void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit) con
   } else if (meter < 1600) {
     val = QString::asprintf("%1.0f", meter * footPerMeter);
     unit = "ft";
-  } else if (meter < 16000) {
+  } else if (meter < (roundLimit * 1600 / 2)) {
     val = QString::asprintf("%1.2f", meter * milePerMeter);
     unit = "mi";
-  } else if (meter < 32000) {
+  } else if (meter < (roundLimit * 1600)) {
     val = QString::asprintf("%1.1f", meter * milePerMeter);
     unit = "mi";
   } else {
